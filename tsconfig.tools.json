@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "lib": ["ES2022", "DOM"],
+    "types": ["node"],
+    "noEmit": true
+  },
+  "include": ["tests/**/*.ts", "*.config.ts", "apps/game-client/vite.config.ts"]
+}

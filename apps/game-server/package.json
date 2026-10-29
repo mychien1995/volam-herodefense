@@ -1,0 +1,21 @@
+{
+  "name": "@volam/game-server",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --include \"../../packages/*/dist/**/*.js\" src/index.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@colyseus/ws-transport": "0.18.4",
+    "@volam/game-data": "workspace:*",
+    "@volam/game-protocol": "workspace:*",
+    "zod": "4.6.7",
+    "@colyseus/core": "0.18.23",
+    "express": "5.2.1"
+  },
+  "devDependencies": {
+    "tsx": "4.23.15"
+  }
+}

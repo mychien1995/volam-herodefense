@@ -1,0 +1,18 @@
+{
+  "_status": "ILLUSTRATIVE configuration shape, not an implemented runtime schema",
+  "id": "cam_long_cong",
+  "nameVi": "Cầm Long Công",
+  "schoolId": "cai_bang",
+  "style": "bong",
+  "kind": "active",
+  "maxRank": 4,
+  "targeting": "forwardArc",
+  "serverValidations": ["unlocked", "equipped", "correctZone", "hasMana", "cooldownReady"],
+  "effects": [
+    { "type": "pull", "distanceTiles": 2, "resistanceTag": "forcedMovement" },
+    { "type": "applyStatus", "status": "silence", "durationSeconds": 1, "resistanceTag": "hardControl" },
+    { "type": "applyStatus", "status": "disarm", "durationSeconds": 1, "resistanceTag": "hardControl" }
+  ],
+  "movementAllowedWhileAffected": true,
+  "_note": "Effect values are PROPOSED; importantly this ability does not stun or prevent movement."
+}

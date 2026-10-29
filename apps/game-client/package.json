@@ -1,0 +1,20 @@
+{
+  "name": "@volam/game-client",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "phaser": "4.2.1",
+    "@colyseus/sdk": "0.18.8",
+    "@volam/game-data": "workspace:*",
+    "@volam/game-protocol": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "8.3.5"
+  }
+}

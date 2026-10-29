@@ -1,0 +1,17 @@
+{
+  "name": "@volam/game-protocol",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "@colyseus/schema": "5.0.42",
+    "@volam/game-data": "workspace:*",
+    "zod": "4.6.7"
+  }
+}

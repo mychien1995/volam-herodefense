@@ -1,0 +1,26 @@
+{
+  "_status": "PROPOSED example configuration; not production-balanced or implemented",
+  "room": { "maxPlayers": 6, "persistentProgress": false },
+  "character": { "startLevel": 1, "maxLevel": 30, "skillPointsPerLevel": 1, "activeSkillSlots": 4, "equipSlots": 4 },
+  "input": { "movement": ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"], "normalAttack": "KeyA", "skills": ["KeyQ", "KeyW", "KeyE", "KeyR"] },
+  "defense": {
+    "laneIds": ["west", "east"],
+    "regularWaveCount": 20,
+    "regularWaveIntervalSeconds": 180,
+    "warningsBeforeWaveSeconds": [60, 15],
+    "bossRestAfterGateClearSeconds": 10,
+    "statueRepairAllowed": false,
+    "regularWavesMayOverlap": true,
+    "bossGates": [
+      { "wave": 5, "bossId": "dong_ta" },
+      { "wave": 10, "bossId": "tay_doc" },
+      { "wave": 15, "bossId": "nam_de" },
+      { "wave": 20, "bossId": "bac_cai" }
+    ],
+    "finalBossId": "vuong_trung_duong",
+    "invasionItemsDrop": false
+  },
+  "dungeons": { "privateMaxPlayers": 1, "sharedMaxPlayers": 6, "creepWaveRequiresClear": true, "pauseEmptyCreepDungeon": true, "resetEmptyAliveBossAfterSeconds": 30, "bossStrengthScalingAfterClear": false, "bossItemsPerKill": 1 },
+  "loot": { "dungeonBossRolledAmongEligible": true, "duplicateItemsAllowed": true },
+  "devMode": { "overrideRegularWaveIntervalSeconds": 15 }
+}
