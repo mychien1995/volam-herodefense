@@ -1,10 +1,12 @@
-# Võ Lâm Hero Defense — Codex Project Handoff v1.0
+# Võ Lâm Hero Defense — M1 Prototype · Art Direction v1.2
 
-**Status:** M0 scaffold implemented and verified; gameplay begins in M1. **Date:** 2026-10-29. **Language:** English documentation; Vietnamese names are canonical gameplay content.
+**Status:** M0 and M1 engineering verified; original prototype artwork awaits review. **Date:** 2026-10-29. **Language:** English documentation; Vietnamese names are canonical gameplay content.
 
 A browser-first 2D, top-down, pixel-art, multiplayer martial-arts hero-defense action RPG inspired by the *structure* of classic Warcraft III defense custom maps. Create original or appropriately licensed art, audio, map assets, and lore; no Warcraft/Pokémon assets or proprietary map code.
 
-## Start here
+## Design handoff
+
+The original bootstrap workflow below is retained for context; M1 is now implemented. Use the run instructions first.
 
 1. Extract this entire folder to an empty Git repository.
 2. Open **the repository root** in Codex / ChatGPT Desktop, not just one document.
@@ -12,38 +14,33 @@ A browser-first 2D, top-down, pixel-art, multiplayer martial-arts hero-defense a
 4. Ask Codex to execute **Milestone 0 only**. Do not request the entire game at once.
 5. Approve the plan and iterate through milestone acceptance tests.
 
-The design handoff remains authoritative. The runnable M0 is a lobby and connection proof, with a placeholder courtyard; no gameplay is implemented.
+The runnable M1 now includes original prototype sprites and combat. Final art is not approved. `assets/manifest.json` describes the actual files; `assets/manifest.example.json` remains a template, with example paths that are not real source artwork.
 
-## Run M0 on Windows (PowerShell)
+## Run M1 on Windows
 
-Use Node **24 LTS** or a supported Node **22.12+ / 26+** release and **pnpm 11.25.0**. Verified here with Windows, Node 26.0.0 and pnpm 11.25.0. If pnpm is missing, install it with `npm install --global pnpm@11.25.0`, then open a new terminal. Python 3 is needed only for the existing handoff integrity script.
+Prerequisites: Node **24 LTS** or supported Node **22.12+/26+**, and **pnpm 11.25.0**. Verified on Windows PowerShell with Node 26.0.0. Install pnpm if needed with `npm install --global pnpm@11.25.0`. Python/Pillow are optional authoring tools; the committed PNG/atlas exports run without them.
 
 ```powershell
 Set-Location D:\Projects\volam-hero-defense
-node --version
-pnpm --version
 pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open **http://127.0.0.1:5173/**. Server readiness: **http://localhost:2567/health** returns `{"status":"ok","milestone":"M0","protocolVersion":1}`. Keep the terminal open; Ctrl+C stops the dev processes. Ports 5173 and 2567 must be free. Shared packages compile before startup and are watched along with the apps.
+Open **http://127.0.0.1:5173/**. The health route at **http://localhost:2567/health** returns `{"status":"ok","milestone":"M1","protocolVersion":2}`. Keep the terminal open; Ctrl+C stops dev. Ports 2567/5173 are used by dev; integration tests use 2568. `pnpm dev` prepares assets, builds/watches shared packages and starts the authoritative server and Vite.
 
-The workspace settings keep caches under `.cache/`, pin pnpm, and explicitly install required peers. `esbuild` may run its install script; the optional `msgpackr-extract` native optimization is deliberately disabled, using its JavaScript fallback. No database, login, Redis or external service is required.
+### Two-player practice demo
 
-### Two-browser demo
+1. In A, enter a nickname and **Create room**. Copy **Current room**.
+2. In B, enter another nickname, paste **Room ID**, then **Join room**. Both see the same players and creep HP. At most six seats; no account/database/save.
+3. Focus the canvas and use **Arrow keys** to move, including diagonals. The camera follows without rotating. Walk left of the western tree, up behind its canopy, then back down in front. The trunk blocks movement; the canopy does not.
+4. **A** manually attacks. Choose **Cái Bang Bổng** (frontal melee with reduced cleave) or **Cái Bang Chưởng** (nearest-at-fire straight projectile) from the menu. Face the enemy before a melee strike. Holding A does not repeat.
+5. **Q — Hỏa Vân Chưởng:** three paced straight shots. **W — Cuồng Long Loạn Vũ:** exploding fireball and burn. Mana/cooldowns are server-owned. E/R are unassigned and rejected.
+6. Kill a creep and observe gold/XP/level. One fixed reward pool is split among recent damaging participants; inactive players get none. Practice creeps refresh after eight seconds. A fallen hero remains dead in this M1 slice; create a fresh practice room. The full arena respawn flow is M2.
+7. Leave in B or close its tab; A sees the seat removed. Reconnect grace, host/ready rules and in-progress admission remain provisional.
 
-1. Open the client in two tabs or two separate browser windows/profiles.
-2. In A, enter `Võ Lâm` and click **Create room**. Select/copy **Current room**.
-3. In B, enter `Thiếu Lâm`, paste that ID into **Room ID**, and click **Join room**.
-4. Both show **Connected**, **2 / 6**, and both nicknames in the roster and courtyard.
-5. Click **Check connection** in A. A receives the server acknowledgement; **both** rosters show `Checks: 1` for Võ Lâm.
-6. Click **Leave** in B (or close its tab). A returns to **1 / 6**. A separate **Create room** has an independent roster. A seventh seat is rejected; the integration suite verifies this.
+The orthogonal arena uses 32px square tiles, original elevated top-down sprites and foot-Y depth sorting. These perspective conventions are confirmed; tile size, palette, 48px frames, damage and economy numbers are provisional. The same presentation conventions apply to later maps when those milestones are requested.
 
-M0 only has a lobby: there is no match-start/ready control or gameplay clock. Arrow keys, A and QWER are preserved for M1 and do nothing in this preview. Nicknames are display labels, not identity. M0 provisionally removes a disconnected seat immediately; rejoin explicitly. The room is discarded when its last client leaves.
-
-### Checks and browser facilities
-
-Run in another PowerShell terminal at the repository root:
+### Automated checks
 
 ```powershell
 pnpm typecheck
@@ -53,33 +50,35 @@ pnpm format:check
 pnpm verify:handoff
 pnpm install:browsers
 pnpm test:e2e
+pnpm test:balance
 ```
 
-`pnpm install:browsers` downloads Chromium to `.cache/ms-playwright`. The test wrapper uses that cache automatically; `PLAYWRIGHT_BROWSERS_PATH` can override it. The Playwright smoke test builds the apps, starts a compiled server/static client preview through their Node APIs (or reuses running local services), opens two isolated contexts, checks synchronized state, explicit leave and abrupt tab close, rejects browser errors, and writes screenshots to `test-results/`. It uses Chromium only. Integration tests bind port **2568** separately from dev.
+The smoke runner builds first, owns/cleans up compiled server and static preview services through Node APIs (or reuses running dev), and opens isolated Chromium contexts. Screenshots/traces are in ignored `test-results/`; preserved evidence and exact results are in [M1 verification](docs/M1_VERIFICATION.md). The launcher is `tools/run-playwright.mjs`; it keeps Chromium under `.cache/ms-playwright` and respects `PLAYWRIGHT_BROWSERS_PATH`.
 
-`pnpm test:watch` watches unit/integration tests; `pnpm format` formats source/config/tests while preserving handoff Markdown and bundled skills. TypeScript is strict, with additional unchecked-index and exact-optional checks; test and tool files are typechecked too. No separate ESLint layer is needed yet.
+`pnpm test:watch` watches headless tests. `pnpm test:balance` writes deterministic M1-only JSON/CSV under ignored `artifacts/`; it does not claim four-school, dungeon, raid or PvP balance. `pnpm format` preserves handoff Markdown, skills and generated exports. To inspect all actual animation states/facings, open **http://127.0.0.1:5173/?artPreview=1**. This is a presentation-only gallery, not a gameplay command/debug cheat API.
 
-To run the compiled server after stopping dev:
+### Original art authoring
+
+Normal dev/build copies committed exports; no commercial art tool or Python install is needed to play. To regenerate/verify the tiny original set:
 
 ```powershell
-pnpm build
-pnpm --filter @volam/game-server start
+python -m pip install Pillow==11.3.0
+pnpm assets:generate
+pnpm verify:assets
+pnpm assets:prepare
 ```
 
-For a custom server port, set `$env:PORT = '2569'` before starting it and set `VITE_SERVER_URL=http://localhost:2569` in `apps/game-client/.env.local`, then restart Vite. The default needs no environment files. A production static client plus persistent WebSocket service is a later deployment task.
+`assets/source/m1_art.py` is the editable original source, with deterministic hand-authored pixel primitives. `maps/arena.tmj` is a real orthogonal Tiled-compatible source; preparation copies its JSON into shared data so the server and renderer use the same geometry. The actual manifest records provenance, pivots, frames and **prototype** status. Aseprite/Tiled GUI workflows were not run here; final art approval remains open.
 
-### Source layout
+### Boundaries and configuration
 
-| Path | Responsibility |
-|---|---|
-| `apps/game-client/src/` | Phaser placeholder scene, DOM lobby, SDK connection; server imports are type-only |
-| `apps/game-server/src/` | Colyseus 0.18 match room, admission, message validation, health route |
-| `packages/game-core/src/` | Dependency-free, headless seeded RNG starter; no DOM, engine, networking, time or I/O |
-| `packages/game-data/src/` | Validated M0 configuration and canonical input bindings; no combat tuning yet |
-| `packages/game-protocol/src/` | Versioned Zod messages/join options and Schema 5 synchronized lobby state |
-| `tests/` | Core/config/protocol/boundary tests, real SDK room integration, compile-time message checks, browser smoke |
+- `packages/game-core`: dependency-free deterministic simulation, geometry and seeded RNG; no Phaser/Colyseus/browser/clock/I/O.
+- `packages/game-data`: validated map/content/tuning. `m1.ts` owns temporary numbers and two canonical abilities.
+- `packages/game-protocol`: validated version-2 inputs, events and synchronized schemas. Clients send directions/actions, never positions/damage/rewards.
+- `apps/game-server`: owns fixed simulation steps, room lifecycle and RNG seed; publishes patches/events.
+- `apps/game-client`: rendering, interpolation, keyboard/menu input, fixed camera and animation registry. Animations never apply authoritative damage.
 
-Package exports resolve compiled JS/declarations; `pnpm build:shared` prepares them for tests/dev. `game-core` compiles with ES libraries only and no ambient platform types. Colyseus schemas stay in protocol, separate from future simulation entities. Dependencies and lockfile pin the verified stack; see [M0 verification and limitations](docs/M0_VERIFICATION.md).
+The dev loop watches shared JS. Restart dev after changing the map or regenerated art (or rerun `pnpm assets:prepare`); world geometry is validated at startup. After `pnpm build`, run the compiled server with `pnpm --filter @volam/game-server start`. For another port, set `$env:PORT = '2569'` and `VITE_SERVER_URL=http://localhost:2569` in `apps/game-client/.env.local`, then restart dev. M2+ systems and final art remain unimplemented.
 
 ## Document index
 
@@ -91,6 +90,7 @@ Package exports resolve compiled JS/declarations; `pnpm build:shared` prepares t
 | [`BALANCING.md`](BALANCING.md) | Balance philosophy, XP, enemy scaling, simulation and telemetry |
 | [`ITEMS_AND_CRAFTING.md`](ITEMS_AND_CRAFTING.md) | Item upgrades, 4 slots, boss loot rolls, crafting and inventory |
 | [`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md) | Engine/server decision, package boundaries, netcode and testing |
+| [`ART_ASSET_GUIDE.md`](ART_ASSET_GUIDE.md) | Sprite size proposals, art sourcing, Aseprite/Tiled exports, pixel-art rendering, animation and visual quality gates |
 | [`ROADMAP.md`](ROADMAP.md) | Milestones, acceptance criteria and incremental delivery sequence |
 | [`ACCEPTANCE_TESTS.md`](ACCEPTANCE_TESTS.md) | Given/when/then checks for confirmed mechanics |
 | [`DECISIONS.md`](DECISIONS.md) | Fixed choices vs proposed defaults; conflict-resolution policy |
@@ -103,6 +103,7 @@ Package exports resolve compiled JS/declarations; `pnpm build:shared` prepares t
 - `.agents/skills/game-playtest/SKILL.md`: browser-based movement, visual, and multiplayer smoke-testing workflow.
 - `.agents/skills/combat-balance-test/SKILL.md`: deterministic headless battle and farming balance checks.
 - `.agents/skills/create-game-ability/SKILL.md`: repeatable skill addition with combat rules and tests.
+- `.agents/skills/pixel-art-pipeline/SKILL.md`: sprite animation, atlas import/export, provenance and visual verification.
 
 These are **instruction-only** workflows, not executables. They become useful as the project gets implemented. For Colyseus version-specific APIs, also consider the official `colyseus/skill` package after reviewing its source and instructions.
 

@@ -8,7 +8,7 @@ This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D
 2. `GAME_DESIGN.md` — core loop, dungeons, waves, statue and PvP.
 3. `CONTENT_DATA.md` — exact Vietnamese names, 43 active skills, 8 normal attacks, 4 innate passives.
 4. `COMBAT_SYSTEM.md`, `BALANCING.md`, `ITEMS_AND_CRAFTING.md` — specifics.
-5. `TECHNICAL_ARCHITECTURE.md`, `ROADMAP.md`, `ACCEPTANCE_TESTS.md`, `OPEN_QUESTIONS.md`.
+5. `ART_ASSET_GUIDE.md` for sprite sourcing, export formats, animation and artwork verification; `TECHNICAL_ARCHITECTURE.md`, `ROADMAP.md`, `ACCEPTANCE_TESTS.md`, `OPEN_QUESTIONS.md`.
 6. `CODEX_START_HERE.md` — first task; do **M0 only** initially.
 
 ## Hard constraints
@@ -23,6 +23,9 @@ This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D
 - Dungeon boss exactly **one randomly drawn item per kill** and eligible-player roll; duplicates/sell/drop. 4 equipment slots; buy duplicate basic to level it, max basic + boss item + gold crafts stronger.
 - Keep exact Vietnamese skill names as documented. Stable ASCII IDs; separate localization display names.
 - Do not copy proprietary Warcraft III / Pokémon map art, sound, or code. Use placeholders or original/licensed content.
+- Art pipeline: follow `ART_ASSET_GUIDE.md`. No real sprite/animation can be called complete until its file exists, animation frames load correctly in Phaser, and visual checks are recorded. Document source/license; no animation-driven authoritative damage. M0 placeholders are acceptable; avoid bulk artwork generation before playtesting.
+
+- Confirmed v1.2 art direction: original elevated top-down / three-quarter **orthographic, square-tile 2D** pixel art; fixed non-rotating follow camera; eight-way movement with four-facing animations initially; ground-contact Y depth sorting and foreground occlusion; crisp nearest rendering. Keep this convention across future maps. Do not use isometric, side-scrolling or 3D third-person projection.
 
 ## Working method
 
@@ -31,6 +34,7 @@ This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D
 - Before using Phaser/Colyseus APIs, consult installed versions and current official docs; Colyseus 0.18 APIs differ from earlier versions.
 - Keep game data and tuning values separate from mechanics; validate at load/startup. Add tests for each new skill/status/XP/inventory/wave behavior.
 - After code changes: run typecheck, unit/integration tests, relevant browser smoke tests and report actually run commands/results; if tests couldn't run, say so.
+- After changing visual assets, verify actual PNG/JSON frame assets and rendered animations; report placeholder/prototype/approved status and screenshots only if really captured.
 - Update spec documents, `DECISIONS.md`, acceptance tests and architecture only when behavior truly changes. Never quietly overwrite user-approved game rules with a shortcut.
 - Keep source modular, use concise commits and clear PR summary when Git is available. Prefer straightforward TypeScript to unnecessary abstractions.
 
@@ -39,5 +43,6 @@ This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D
 - `.agents/skills/game-playtest/`: browser/visual and room smoke tests.
 - `.agents/skills/combat-balance-test/`: deterministic simulation and balance reports.
 - `.agents/skills/create-game-ability/`: data-first content addition and regression tests.
+- `.agents/skills/pixel-art-pipeline/`: original/licensed sprite and VFX asset workflow, atlas export, Phaser loading and browser visual checks.
 
 These instructions are executable **workflows** only after the relevant code/tooling exists. They are not a replacement for tests.

@@ -35,7 +35,7 @@
 
 - Release tech: Phaser 4.2.x + TypeScript browser client, Colyseus 0.18.x Node TypeScript authoritative server, shared TS game core, Vite, pnpm workspaces, Vitest, Playwright, Tiled; no DB initially.
 - Headless fixed tick at 20–30 Hz, render at display refresh; prediction/interpolation staged, avoid full rollback prematurely.
-- 32x32 pixel-art terrain tiles; 8-direction movement/facing; default NPC interaction by mouse.
+- 32x32 pixel-art terrain tile size is proposed. v1.2 confirms eight-way movement and initial four-facing artwork; NPC interaction remains by mouse.
 - Regular skill max rank 4; ultimate max 3; ult unlock at character levels 6/10/14; regular rank gating at 1/3/5/7.
 - Melee basic primary target 100%, cleave target 50% by default, school-specific overrides, independent crit rolls.
 - Invasion boss rest 10s after fifth wave fully clears; warnings at T-60 and T-15; raid clock never pauses.
@@ -47,3 +47,11 @@
 ## Open decisions
 
 See `OPEN_QUESTIONS.md`. Ask a targeted question only when implementing a feature that **cannot** proceed safely under a clearly labeled provisional default. Record decisions here when approved.
+
+## Art pipeline clarification (2026-10-29)
+
+**Proposed implementation standard, not user-approved visual art:** `ART_ASSET_GUIDE.md` supplies folder conventions, editable sources, sprite-sheet/atlas export, provenance and quality gates. It does **not** claim finished artwork exists or change any gameplay rule. M0 can use placeholders; M1 must test animation integration and explicitly flag missing final art.
+
+## Confirmed — v1.2 art direction (2026-10-29)
+
+User confirmed original 2D pixel art in a Pokémon-style elevated top-down / three-quarter viewpoint, with orthographic square tiles. A non-rotating camera follows the player; movement is eight-directional with four-direction animations initially. Characters/scenery sort by foot/ground-contact Y, with terrain below and foreground trees/buildings occluding actors behind them. Rendering must stay crisp. This is not isometric, side-scrolling or 3D third-person. Apply the same convention to future arena/dungeon/PvP assets; no proprietary art. Palette/detail/animation budgets remain proposals. This supersedes earlier statements that camera perspective and initial four-facing choice were entirely open. M1 is now explicitly authorized; M2+ remain outside this task.

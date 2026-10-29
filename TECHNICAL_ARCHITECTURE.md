@@ -101,10 +101,12 @@ Proposed high-level server APIs/events, not concrete Colyseus APIs:
 
 ## 7. Asset and UI approach
 
-- Original top-down pixel art; PROPOSED initial terrain tiles 32×32, simple placeholder hero/enemy shapes acceptable through vertical slice.
+- Original top-down pixel art; PROPOSED initial terrain tiles 32×32, simple placeholder hero/enemy shapes acceptable through vertical slice. `ART_ASSET_GUIDE.md` defines the asset pipeline, authoring sources, export/atlas metadata, asset provenance and M0/M1 visual proof checkpoints. No final game sprites are supplied by this handoff.
 - Tiled tile layer for ground/obstacles, object layers for statue/NPC/spawns/exit portals/collision; enforce stable object IDs.
 - Core HUD: hero HP/mana/level/XP, gold, four skills and cooldowns, A attack state, visible next-invasion countdown, statue HP, current zone, invasion alerts, item/skill and boss-roll dialogs, combo cue for Thiếu Lâm.
 - Explicitly show affected hitboxes and telegraphed boss attacks. Animations must be readable before being beautiful.
+- Keep original editable sources outside the deployable client bundle, and load exported PNG/atlas JSON via a data-driven animation registry; never tie authority for damage/hits to visual frames.
+- Verify Phaser 4 pixel-art renderer settings (`pixelArt`, filtering, pixel rounding) against the installed version and visually inspect at the intended browser zoom.
 
 ## 8. Security and operational guardrails
 
@@ -122,12 +124,12 @@ Proposed high-level server APIs/events, not concrete Colyseus APIs:
 - Headless bot simulator for balancing. `tools/balance-simulator` is a standalone CLI and must not depend on Phaser.
 - Performance tests: 6 players, concurrent NPC/projectiles, both lanes, overlapping waves, reconnect. No guessed production performance claim until measured.
 
-## 10. M0 implementation checkpoint (2026-10-29)
+## 10. Implemented M1 checkpoint and confirmed v1.2 view
 
-The recommended stack is now bootstrapped and locally verified. Exact versions, sources and observed checks are in [`docs/M0_VERIFICATION.md`](docs/M0_VERIFICATION.md); the design proposals above remain proposals.
+The current playable slice uses Phaser 4.2.1, Colyseus core 0.18.23 / Schema 5 / SDK 0.18.8 and protocol version 2. `Room.setFixedTimestep` advances `game-core` at the provisional 30 Hz; no client-submitted time step, location, damage or reward is accepted. A room-local server-generated seed feeds the pure core RNG. Core commands, shots, geometry and rewards are plain TypeScript; networking schemas remain in `game-protocol`. The server publishes actor/projectile patches and monotonic combat event IDs.
 
-- Use the modular `@colyseus/core` 0.18.23 + default WebSocket transport, Schema 5.0.42 and `@colyseus/sdk` 0.18.8. `defineServer` / `defineRoom`, the Schema builder, typed client messages, `validate` and close-code lifecycle semantics are used; no 0.17 compatibility code.
-- `game-protocol` owns synchronized **lobby** schemas and versioned Zod commands. The server validates nickname/options at admission and counts connection checks using the actual session ID. Replayed sequence numbers do not increment twice. The frontend validates acknowledgements and renders state patches. The client imports the room **type** only, erased from its browser bundle.
-- `game-core` has no dependencies, DOM/Node ambient types, Colyseus, Phaser, wall-clock or I/O. A seeded RNG and golden-sequence/replay tests establish the headless foundation. No movement/combat/tick simulation is implemented in M0.
-- pnpm workspaces link compiled package exports; TS project references compile shared packages, server and client. `dev` builds/watches shared JS and starts the server and Vite; strict checking also covers tests and tool configs. Vitest exercises a real HTTP/WebSocket room with SDK clients; Playwright uses two isolated Chromium contexts and captures screenshots.
-- M0 only has disposable lobby state. No DB/auth module, login, saved progress, zones, game clock or gameplay. Immediate disconnect cleanup and nickname policy are provisional in `OPEN_QUESTIONS.md`.
+The confirmed view is **orthographic elevated top-down / three-quarter 2D** with square tiles, a non-rotating local-player camera, eight-way movement and initial four-facing art. It is not an isometric or 3D projection. The client rounds interpolated presentation coordinates and sorts actors/labels/bars by rendered foot Y, against scenery ground-contact Y. Ground tiles sit below those layers; tree trunks have independent server footprints. A fixed 480×300 logical viewport scales by integer 1×/2× steps; no CSS fractional stretching or smooth filtering.
+
+`maps/arena.tmj` is the original Tiled-compatible map. Preparation copies that map to the client and `game-data` JSON, preventing separate client-only collision truth. Original source sprites come from `assets/source/m1_art.py`, exported PNG/JSON plus a provenance/animation manifest; only the committed exports are required at runtime. `art.ts` registers actual named frame tags. The optional gallery and `?debug=1` read-only evidence bridge do not accept authoritative state changes.
+
+M1 deliberately uses simple snapshot interpolation, not client prediction/rollback. The browser test harness owns compiled server/preview lifecycle through APIs to avoid Windows process-tree teardown hangs. All numeric tuning is in validated `game-data`; the headless M1 probe is isolated under `tools/` and does not import Phaser/Colyseus. See `docs/M1_VERIFICATION.md` for evidence and limitations. Later zone interest management, pathfinding, arena respawn and the invasion clock remain future work.

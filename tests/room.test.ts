@@ -34,8 +34,8 @@ describe('real Colyseus room + SDK clients', () => {
     const response = await server.http.get('/health');
     expect(response.data).toEqual({
       status: 'ok',
-      milestone: 'M0',
-      protocolVersion: 1,
+      milestone: 'M1',
+      protocolVersion: PROTOCOL_VERSION,
     });
   });
   it('joins two clients by ID and synchronizes a server-owned check', async () => {
@@ -45,9 +45,12 @@ describe('real Colyseus room + SDK clients', () => {
     await expect.poll(() => a.state.players?.size).toBe(2);
     await expect.poll(() => b.state.players?.size).toBe(2);
     const ack = a.waitForMessage('connection-ack');
-    a.send('connection-check', { protocolVersion: 1, sequence: 1 });
+    a.send('connection-check', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 1,
+    });
     expect(connectionAckSchema.parse(await ack)).toEqual({
-      protocolVersion: 1,
+      protocolVersion: PROTOCOL_VERSION,
       sequence: 1,
       checks: 1,
     });
@@ -55,7 +58,10 @@ describe('real Colyseus room + SDK clients', () => {
     expect(authoritative.state.players.get(a.sessionId)?.checks).toBe(1);
     expect(authoritative.state.players.get(b.sessionId)?.checks).toBe(0);
     const replay = a.waitForMessage('connection-ack');
-    a.send('connection-check', { protocolVersion: 1, sequence: 1 });
+    a.send('connection-check', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 1,
+    });
     expect(connectionAckSchema.parse(await replay).checks).toBe(1);
     await a.leave();
     await expect.poll(() => b.state.players.size).toBe(1);
@@ -83,7 +89,10 @@ describe('real Colyseus room + SDK clients', () => {
     const b = await client.create(MATCH_ROOM, options('Hero'));
     await b.waitForInitialState();
     const ack = a.waitForMessage('connection-ack');
-    a.send('connection-check', { protocolVersion: 1, sequence: 1 });
+    a.send('connection-check', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 1,
+    });
     await ack;
     expect(a.roomId).not.toBe(b.roomId);
     expect(b.state.players.has(a.sessionId)).toBe(false);
@@ -111,7 +120,12 @@ describe('real Colyseus room + SDK clients', () => {
     const left = new Promise<number>((resolve) => b.onLeave.once(resolve));
     Reflect.apply(b.send, b, [
       'connection-check',
-      { protocolVersion: 1, sequence: 1, checks: 999, sessionId: a.sessionId },
+      {
+        protocolVersion: PROTOCOL_VERSION,
+        sequence: 1,
+        checks: 999,
+        sessionId: a.sessionId,
+      },
     ]);
     expect(await left).toBe(CloseCode.WITH_ERROR);
     await expect.poll(() => a.state.players.size).toBe(1);
@@ -125,5 +139,138 @@ describe('real Colyseus room + SDK clients', () => {
     await expect(
       client.joinById<MatchRoom>(id, options('Late')),
     ).rejects.toThrow();
+  });
+});
+
+describe('M1 authoritative room gameplay', () => {
+  it('synchronizes normalized movement and input acknowledgements to two clients', async () => {
+    const a = await client.create(MATCH_ROOM, options('First'));
+    const b = await client.joinById<MatchRoom>(a.roomId, options('Observer'));
+    await expect.poll(() => b.state.players?.size).toBe(2);
+    const initial = a.state.players.get(a.sessionId)!.x;
+    a.send('input', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 1,
+      kind: 'move',
+      x: 1,
+      y: -1,
+    });
+    await expect
+      .poll(() => b.state.players.get(a.sessionId)?.x)
+      .toBeGreaterThan(initial + 10);
+    a.send('input', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 2,
+      kind: 'move',
+      x: 0,
+      y: 0,
+    });
+    await expect
+      .poll(() => b.state.players.get(a.sessionId)?.lastSequence)
+      .toBe(2);
+    await expect
+      .poll(() => a.state.players.get(a.sessionId)?.x)
+      .toBe(b.state.players.get(a.sessionId)?.x);
+    const authoritative = server
+      .getRoomById<MatchRoom>(a.roomId)
+      .world.heroes.get(a.sessionId)!;
+    expect(authoritative.x).toBeCloseTo(a.state.players.get(a.sessionId)!.x, 3);
+  });
+  it('broadcasts one accepted attack and agrees on shared enemy HP', async () => {
+    const a = await client.create(MATCH_ROOM, options('Fighter'));
+    const b = await client.joinById<MatchRoom>(a.roomId, options('Observer'));
+    const authoritative = server.getRoomById<MatchRoom>(a.roomId);
+    const hero = authoritative.world.heroes.get(a.sessionId)!;
+    const enemy = authoritative.world.creeps.get('creep_0')!;
+    enemy.x = hero.x + 36;
+    enemy.y = hero.y;
+    enemy.hp = 1000;
+    enemy.maxHp = 1000;
+    await expect.poll(() => b.state.creeps.get('creep_0')?.hp).toBe(1000);
+    const received = b.waitForMessage('combat-event');
+    a.send('input', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 1,
+      kind: 'basic',
+    });
+    await received;
+    await expect
+      .poll(() => b.state.creeps.get('creep_0')?.hp)
+      .toBeLessThan(1000);
+    a.send('input', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 2,
+      kind: 'basic',
+    });
+    a.send('input', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 3,
+      kind: 'basic',
+    });
+    const hp = enemy.hp;
+    await expect.poll(() => a.state.creeps.get('creep_0')?.hp).toBe(hp);
+    expect(b.state.creeps.get('creep_0')?.hp).toBe(hp);
+    expect(
+      authoritative.world.heroes.get(a.sessionId)?.lastSequence,
+    ).toBeGreaterThanOrEqual(1);
+  });
+  it('rejects empty slots and forged movement/damage messages without affecting another room', async () => {
+    const a = await client.create(MATCH_ROOM, options('First'));
+    const other = await client.create(MATCH_ROOM, options('Other room'));
+    await a.waitForInitialState();
+    await other.waitForInitialState();
+    const rejection = a.waitForMessage('command-rejected');
+    a.send('input', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 1,
+      kind: 'cast',
+      slot: 3,
+    });
+    expect((await rejection).reason).toContain('not equipped');
+    const initial = server
+      .getRoomById<MatchRoom>(other.roomId)
+      .world.heroes.get(other.sessionId)!.x;
+    a.send('input', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 2,
+      kind: 'cast',
+      slot: 0,
+    });
+    await expect
+      .poll(
+        () =>
+          server.getRoomById<MatchRoom>(a.roomId).world.creeps.get('creep_0')
+            ?.hp,
+      )
+      .toBeLessThan(120);
+    expect(
+      server.getRoomById<MatchRoom>(other.roomId).world.creeps.get('creep_0')
+        ?.hp,
+    ).toBe(120);
+    expect(
+      server
+        .getRoomById<MatchRoom>(other.roomId)
+        .world.heroes.get(other.sessionId)?.xp,
+    ).toBe(0);
+    const closed = new Promise<number>((resolve) => a.onLeave.once(resolve));
+    Reflect.apply(a.send, a, [
+      'input',
+      {
+        protocolVersion: PROTOCOL_VERSION,
+        sequence: 2,
+        kind: 'move',
+        x: 10000,
+        y: 0,
+        damage: 999,
+        sessionId: other.sessionId,
+      },
+    ]);
+    expect(await closed).toBe(CloseCode.WITH_ERROR);
+    expect(
+      server
+        .getRoomById<MatchRoom>(other.roomId)
+        .world.heroes.get(other.sessionId)?.x,
+    ).toBe(initial);
+    expect(other.state.players.size).toBe(1);
   });
 });

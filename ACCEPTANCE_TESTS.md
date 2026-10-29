@@ -73,10 +73,12 @@ These are behavioral requirements, not already implemented tests. Codex should c
 - Given more than six total room players, no side assignment may bypass match cap.
 - Given duel active, then no active-skill respec within PvP zone; after end they return to normal match state.
 
-## M0 implementation traceability (2026-10-29)
+## J. Confirmed v1.2 presentation and M1 traceability
 
-- `tests/room.test.ts`: nickname-only create/join by ID, six-seat rejection and freed-seat reuse, independent rooms, malformed join/version rejection, forged command rejection, replay-safe connection counts, leave and empty-room disposal. The isolation check uses lobby state; attack/reward isolation remains for the combat milestones.
-- `tests/e2e/lobby.spec.ts`: real Phaser boot, two isolated browser contexts, same room roster/count and server-owned connection check, explicit leave, rejoin and abrupt tab close; browser console/page errors fail the test.
-- `tests/core.test.ts`, `tests/boundaries.test.ts`: deterministic seeded starter and core boundary guards. `tests/protocol.test.ts` and `tests/protocol.types.ts`: runtime validation, independent schema instances, canonical control map and compile-time SDK message checks.
+- Given the orthogonal 32px prototype map, arrow keys move in eight normalized directions; artwork selects one of four facings without rotating the camera.
+- Given a local player moving through the arena, the camera follows with pixel rounding and integer presentation scale. Ground tiles stay below actors; the same character sorts in front of or behind a tree according to its rendered foot Y. Only the trunk footprint blocks movement.
+- Given original hero/creep PNGs and atlas JSON, all idle/walk/attack/cast/hurt/death tags and four directions load real frames. Animation frames never cause server damage. Final art approval is separate from integration verification.
+- `tests/combat.test.ts` covers movement, collision, melee/cleave/occlusion, straight projectile dodge, paced shots, explosion/burn, cooldown/mana, empty slots, XP/gold splitting, death eligibility and deterministic replay. `tests/room.test.ts` covers two-client positions/HP, forged state rejection, attack isolation and six-seat lifecycle.
+- `tests/assets.test.ts`, `scripts/verify-assets.py` and `tests/e2e/gameplay.spec.ts` check actual source/export/atlas/map data and rendered registry, camera, tree layering, melee/ranged/spells, progression and browser errors. The compile-time protocol test guards input/event types.
 
-Only lobby/scaffold checks are implemented. Sections B–I and combat-dependent parts of A above remain requirements for their corresponding roadmap milestones; their presence is not a claim of gameplay coverage.
+M1 uses one archetype and two rank-1 skills. Full skill ranks/passives/respec, dungeon/statue systems, crafting and PvP acceptance remain for later milestones. A fallen M1 hero keeps earned rewards but has no respawn flow until M2.

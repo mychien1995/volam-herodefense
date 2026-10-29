@@ -11,13 +11,16 @@ export const lobbyConfig = Object.freeze(
   lobbyConfigSchema.parse({
     maxPlayers: 6,
     nicknameMaxLength: 20,
-    maxMessagesPerSecond: 10,
+    maxMessagesPerSecond: 60,
   }),
 );
 
-/** Canonical future controls. M0 does not handle gameplay input yet. */
+/** Canonical gameplay controls. */
 export const inputBindings = Object.freeze({
   movement: ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'] as const,
   basicAttack: 'KeyA',
   activeSkills: ['KeyQ', 'KeyW', 'KeyE', 'KeyR'] as const,
 });
+
+export * from './arena.js';
+export * from './m1.js';

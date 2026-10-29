@@ -9,14 +9,16 @@ required = [
     "README.md", "AGENTS.md", "CODEX_START_HERE.md", "DECISIONS.md",
     "GAME_DESIGN.md", "CONTENT_DATA.md", "COMBAT_SYSTEM.md", "BALANCING.md",
     "ITEMS_AND_CRAFTING.md", "TECHNICAL_ARCHITECTURE.md", "ROADMAP.md",
-    "ACCEPTANCE_TESTS.md", "OPEN_QUESTIONS.md",
+    "ACCEPTANCE_TESTS.md", "OPEN_QUESTIONS.md", "ART_ASSET_GUIDE.md",
     ".agents/skills/game-playtest/SKILL.md",
     ".agents/skills/combat-balance-test/SKILL.md",
     ".agents/skills/create-game-ability/SKILL.md",
+    ".agents/skills/pixel-art-pipeline/SKILL.md",
+    "assets/README.md", "assets/manifest.example.json",
 ]
 missing = [path for path in required if not (root / path).is_file()]
 assert not missing, f"Missing handoff documents: {missing}"
-for rel in ("examples/match-config.example.json", "examples/ability.example.json", "examples/school.example.json"):
+for rel in ("examples/match-config.example.json", "examples/ability.example.json", "examples/school.example.json", "assets/manifest.example.json"):
     json.loads((root / rel).read_text(encoding="utf-8"))
 for rel in (x for x in required if x.endswith("SKILL.md")):
     raw = (root / rel).read_text(encoding="utf-8")
@@ -33,4 +35,4 @@ assert config["defense"]["regularWaveIntervalSeconds"] == 180
 assert config["defense"]["regularWaveCount"] == 20
 assert config["character"]["maxLevel"] == 30
 assert config["character"]["activeSkillSlots"] == 4
-print(f"PASS: {len(required)} required docs/skills, 43 unique active skills, example configs valid, key decisions consistent")
+print(f"PASS: {len(required)} required docs/skills/assets, 43 unique active skills, example configs valid, key decisions consistent")

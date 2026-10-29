@@ -51,12 +51,18 @@ Balance/testing implications:
 Acceptance tests updated:
 ```
 
-## M0 provisional technical policies (2026-10-29)
+## Artwork decisions (v1.1)
 
-These are implementation defaults for the connection preview, **not user-approved gameplay decisions**:
+- v1.2 confirms orthographic elevated top-down perspective, a fixed follow camera and initial four-facing art for eight-way movement. Final palette, 32px tile tuning, character frame size and later eight-facing artwork remain open.
+- Determine whether source artwork comes from artist-created Aseprite files, licensed packs, AI-assisted concept art refined into coherent sprites, or a mix; verify distribution licenses.
+- Set animation frame budgets and preview quality gates after M1 gameplay establishes movement and attack timing.
+- The art pipeline is a proposed production convention, **not a confirmation that final artwork exists**. See `ART_ASSET_GUIDE.md`.
 
-- **Host/start/late join:** M0 remains in `lobby` and has no ready/start control. Any free lobby seat may be joined by room ID. Choose host/ready and in-progress admission before adding a playable match lifecycle in M1/M2.
-- **Disconnect:** M0 removes a seat when the connection closes, disables SDK automatic reconnect, and auto-disposes an empty room. Reload/rejoin creates a new temporary session. Reconnect grace, late rejoin and ownership policy remain open before progression/inventory exists.
-- **Nicknames:** normalize to NFC, trim, allow 1–20 letters/combining marks/numbers/spaces/simple punctuation, and allow duplicate display names; use server session IDs for identity. Length and message rate (10/s) are technical config in `game-data`. Profanity policy and broader international-name punctuation remain undecided.
-- **M0 rendering:** original geometric lobby markers are laid out locally from the server roster; they are not authoritative world positions. World geometry, movement and camera tuning remain M1 work.
-- **Stack packaging:** use `@colyseus/core` 0.18.23 + `@colyseus/ws-transport` 0.18.4 rather than the umbrella package, whose unused uWebSockets peer caused an install failure under pnpm 11 policy. No major stack change. Reconsider optional native optimizations only after measurements.
+## M1 provisional tuning and slice boundaries
+
+- 30 Hz server simulation; 32px tiles, 48px prototype character frames; fixed 480×300 logical viewport displayed at integer 1×/2× scales. Final artwork remains unapproved.
+- Q = Hỏa Vân Chưởng (three straight shots); W = Cuồng Long Loạn Vũ (exploding shot with burn); E/R unassigned and server-rejected. Rank 1 only; full learning/respec/passives are M3.
+- No-target ranged attacks use last facing. Melee cleave 0.5; all damage, mana, crit, cooldown, XP/gold and simple single-archetype growth values are validated M1 config, not final school balance.
+- Damage-only assists within 10 seconds qualify for one fixed creep XP/gold pool, split with a stable ID-ordered integer remainder. Meaningful CC/heal assists remain M2/M3 decisions.
+- Three training creeps of one archetype patrol/chase/attack and refresh after an 8-second death display. This is a repeatable arena sandbox, not dungeon waves or the invasion clock. A hero at zero HP stays dead for this slice; the arena respawn flow belongs to M2. No stat loss is applied.
+- The M0 immediate disconnect policy continues. Joining creates a live arena sandbox without host/ready rules or a match/invasion clock; finalized host/start/late-join policy remains open.

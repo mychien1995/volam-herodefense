@@ -9,4 +9,4 @@ const port = z.coerce
   .parse(process.env['PORT'] ?? 2567);
 const server = createGameServer();
 await server.listen(port);
-console.info(`M0 server ready: http://localhost:${port}/health`);
+console.info(`M1 server ready: http://localhost:${port}/health`);

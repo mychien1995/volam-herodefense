@@ -4,32 +4,34 @@
 
 ## M0 — Repository and architecture scaffold (first Codex task)
 
-**Scope:** pnpm TypeScript monorepo, Phaser 4 client boot, Colyseus 0.18 server boot, shared packages, reusable validated config skeleton, deterministic core starter, unit-test setup, dev scripts, clean README. Display a placeholder room/scene and verify client connects to server. No schools/dungeons/bosses implemented yet.
+**Scope:** pnpm TypeScript monorepo, Phaser 4 client boot, Colyseus 0.18 server boot, shared packages, reusable validated config skeleton, deterministic core starter, unit-test setup, dev scripts, clean README. Display a placeholder room/scene and verify client connects to server. No schools/dungeons/bosses implemented yet. Configure crisp/pixel-art-aware Phaser rendering and establish asset-folder/manifest conventions from `ART_ASSET_GUIDE.md`; visually complete artwork is **not required** for M0.
 
 **Acceptance:** `pnpm install`, `pnpm dev` (or documented equivalent) successfully start client/server; one browser tab connects; unit test and typecheck run; separate packages compile; two browser tabs can connect to a named temporary room; no DB/account; no Phaser import in `game-core`; all changes checked into Git. Document exact commands and version constraints.
 
-### M0 verification checklist — 2026-10-29
-
-- [x] pnpm workspace with client, server and three shared packages; package compilation verified.
-- [x] Phaser 4.2.1 boots an original placeholder scene and connection HUD.
-- [x] Colyseus 0.18 authoritative nickname-only rooms; create/join by ID; six-seat cap.
-- [x] Typed/versioned validated messages, independent room state, leave/empty cleanup.
-- [x] Deterministic dependency-free core starter and validated technical config.
-- [x] Strict app/shared/test/tool typecheck; 26 Vitest unit/integration tests pass.
-- [x] `pnpm install`, frozen-lockfile install, `pnpm dev`, `pnpm build`, formatting and handoff integrity verified.
-- [x] Two isolated Chromium contexts share a room and server-owned check count; leave/rejoin/tab-close verified; screenshots inspected; cold runner exits normally.
-- [x] Windows setup/demo, exact stack versions/results, limitations and provisional policies documented in `README.md`, `OPEN_QUESTIONS.md` and [`docs/M0_VERIFICATION.md`](docs/M0_VERIFICATION.md).
-- [x] Local Git checkpoint on `main` (folder arrived without Git metadata; initial implementation commit `796dd6f`).
-
-**M0 status: complete, awaiting user review.** No M1 gameplay has been implemented. Complete verification evidence is linked above.
-
 **Codex must stop** after M0 and give user a demo and checklist. Do not proactively implement M1+.
+
+**M0 status:** Previously verified and committed (`796dd6f`, `fa3da57`); historical evidence in `docs/M0_VERIFICATION.md`.
 
 ## M1 — Playable 2-player combat vertical slice
 
-**Scope:** central arena placeholder (Tiled or simple tile geometry), one placeholder hero archetype (Cái Bang suggested) with normal melee/ranged choices, arrow movement, A manual basic attack, Q/W/E/R input pipeline with only **two working skills** initially, one enemy archetype with HP and death, gold/XP/level, simple HUD; full server-authoritative damage, hit event feedback. Two players see one shared enemy and consistent health.
+**Scope:** central arena placeholder (Tiled or simple tile geometry), one placeholder hero archetype (Cái Bang suggested) with normal melee/ranged choices, arrow movement, A manual basic attack, Q/W/E/R input pipeline with only **two working skills** initially, one enemy archetype with HP and death, gold/XP/level, simple HUD; add a **tiny reviewed art/animation proof** (one hero, one creep, idle/walk/attack/hurt/death and one effect) using original assets where available, otherwise clearly labeled prototype placeholders; full server-authoritative damage, hit event feedback. Two players see one shared enemy and consistent health.
 
-**Acceptance:** arrow movement works and is visible to a second client; manual attack cadence; nearest-at-fire ranged shots fly straight and can miss a moving target; melee cleave targets secondary at reduced damage; QWER cannot cast unavailable/unequipped skill; same enemy HP agrees for both clients; server rejects forged damage/position. All numeric behavior unit-tested without browser.
+**Acceptance:** arrow movement works and is visible to a second client; manual attack cadence; nearest-at-fire ranged shots fly straight and can miss a moving target; melee cleave targets secondary at reduced damage; QWER cannot cast unavailable/unequipped skill; same enemy HP agrees for both clients; server rejects forged damage/position. All numeric behavior unit-tested without browser. Verify the real loaded animation registry and direction/frame selections in-browser, with screenshots if actually captured; if no authentic art is available, keep art completion OPEN without blocking gameplay implementation.
+
+### M1 verification checkpoint — 2026-10-29
+
+**Status: engineering verified; final art review OPEN.** M2 has not started. User authorized M1 and confirmed v1.2 art direction in this chat.
+
+- [x] Orthographic tiled arena with server-owned collision and a fixed non-rotating follow camera.
+- [x] Eight-direction normalized movement, four-facing animations, crisp integer scaling, foot-depth sorting and actual walk-behind-tree proof.
+- [x] One Cái Bang training archetype; manual melee/ranged normal attacks, frontal reduced cleave and straight dodgeable projectiles.
+- [x] Q/W canonical abilities with mana/cooldowns; E/R remain empty and server-rejected.
+- [x] One creep archetype, HP/death/hit feedback, fixed-pool gold/XP/levels and earned point count; seeded core tests and server-owned RNG.
+- [x] Original prototype PNG/atlas sources and manifest: hero/creep idle/walk/attack/cast/hurt/death in four facings; terrain, occluding tree and fire effect. Real frames loaded and inspected in-browser.
+- [x] Strict typecheck, 62 unit/integration tests, five Chromium smoke tests, actual asset/handoff checks and reproducible 100-run M1-only probe.
+- [ ] Director approval of final artwork/palette/detail (current files intentionally remain `prototype`).
+
+See [`docs/M1_VERIFICATION.md`](docs/M1_VERIFICATION.md) for measured results, preserved screenshots, scope limitations and manual demo steps. No dungeon, statue clock, four-school progression, crafting, boss or PvP gameplay was added.
 
 ## M2 — Dungeon and statue core loop
 
@@ -57,7 +59,7 @@
 
 ## M6 — Optional PvP rooms and polish
 
-**Scope:** PvP NPC, side A / side B join, ready, start, fight, end/return to arena, no changing loadout inside PvP; then original pixel-art asset iteration, animation, particles, sound, VFX, performance and playtest fixes. No PvP-dependent progression.
+**Scope:** PvP NPC, side A / side B join, ready, start, fight, end/return to arena, no changing loadout inside PvP; then original pixel-art asset iteration and replacement of placeholders according to `ART_ASSET_GUIDE.md`, animation, particles, sound, VFX, performance and playtest fixes. No PvP-dependent progression.
 
 **Acceptance:** 1v1 and uneven teams totaling <=6 work; ready gate; duel outcome; no room spillover; server keeps authoritative hit validation; PvP never duplicates gold/items/XP; timings during invasion resolved in design before implement.
 

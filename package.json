@@ -10,16 +10,20 @@
   },
   "scripts": {
     "dev": "pnpm build:shared && concurrently --kill-others --names shared,server,client \"tsc -b packages/game-core packages/game-data packages/game-protocol --watch --preserveWatchOutput\" \"pnpm --filter @volam/game-server dev\" \"pnpm --filter @volam/game-client dev\"",
-    "build:shared": "tsc -b packages/game-core packages/game-data packages/game-protocol",
-    "build": "tsc -b && pnpm --filter @volam/game-client build",
-    "typecheck": "tsc -b && tsc -p tsconfig.tools.json --noEmit",
+    "build:shared": "pnpm assets:prepare && tsc -b packages/game-core packages/game-data packages/game-protocol",
+    "build": "pnpm assets:prepare && tsc -b && pnpm --filter @volam/game-client build",
+    "typecheck": "pnpm assets:prepare && tsc -b && tsc -p tsconfig.tools.json --noEmit",
     "test": "pnpm build:shared && vitest run",
     "test:watch": "pnpm build:shared && vitest",
-    "test:e2e": "pnpm build && node scripts/playwright.mjs test",
+    "test:e2e": "pnpm build && node tools/run-playwright.mjs test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "verify:handoff": "python scripts/verify_handoff.py",
-    "install:browsers": "node scripts/playwright.mjs install chromium"
+    "install:browsers": "node tools/run-playwright.mjs install chromium",
+    "assets:prepare": "node scripts/prepare-assets.mjs",
+    "assets:generate": "python assets/source/m1_art.py",
+    "test:balance": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/m1-balance.ts",
+    "verify:assets": "python scripts/verify-assets.py"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

@@ -15,7 +15,7 @@ export function createGameServer() {
     routes: createRouter({
       health: createEndpoint('/health', { method: 'GET' }, async () => ({
         status: 'ok',
-        milestone: 'M0',
+        milestone: 'M1',
         protocolVersion: PROTOCOL_VERSION,
       })),
     }),

@@ -1,6 +1,16 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": { "rootDir": "src", "outDir": "dist" },
-  "references": [{ "path": "../game-data" }],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "references": [
+    {
+      "path": "../game-data"
+    },
+    {
+      "path": "../game-core"
+    }
+  ],
   "include": ["src/**/*.ts"]
 }

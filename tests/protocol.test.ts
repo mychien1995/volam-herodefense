@@ -30,7 +30,7 @@ describe('validated M0 data and protocol', () => {
     expect(
       joinOptionsSchema.parse({
         nickname: `  ${nickname.normalize('NFD')}  `,
-        protocolVersion: 1,
+        protocolVersion: PROTOCOL_VERSION,
       }).nickname,
     ).toBe(nickname);
   });
@@ -38,40 +38,47 @@ describe('validated M0 data and protocol', () => {
     'rejects malformed nickname %s',
     (nickname) => {
       expect(
-        joinOptionsSchema.safeParse({ nickname, protocolVersion: 1 }).success,
+        joinOptionsSchema.safeParse({
+          nickname,
+          protocolVersion: PROTOCOL_VERSION,
+        }).success,
       ).toBe(false);
     },
   );
   it('rejects incompatible versions and client-submitted authority', () => {
     expect(
-      joinOptionsSchema.safeParse({ nickname: 'Hero', protocolVersion: 2 })
+      joinOptionsSchema.safeParse({ nickname: 'Hero', protocolVersion: 999 })
         .success,
     ).toBe(false);
     expect(
       joinOptionsSchema.safeParse({
         nickname: 'Hero',
-        protocolVersion: 1,
+        protocolVersion: PROTOCOL_VERSION,
         maxPlayers: 99,
       }).success,
     ).toBe(false);
     expect(
       connectionCheckSchema.safeParse({
-        protocolVersion: 1,
+        protocolVersion: PROTOCOL_VERSION,
         sequence: 1,
         checks: 999,
       }).success,
     ).toBe(false);
     expect(
-      connectionCheckSchema.safeParse({ protocolVersion: 1, sequence: NaN })
-        .success,
+      connectionCheckSchema.safeParse({
+        protocolVersion: PROTOCOL_VERSION,
+        sequence: NaN,
+      }).success,
     ).toBe(false);
     expect(
-      connectionCheckSchema.safeParse({ protocolVersion: 1, sequence: -1 })
-        .success,
+      connectionCheckSchema.safeParse({
+        protocolVersion: PROTOCOL_VERSION,
+        sequence: -1,
+      }).success,
     ).toBe(false);
     expect(
       connectionAckSchema.safeParse({
-        protocolVersion: 2,
+        protocolVersion: 999,
         sequence: 1,
         checks: 1,
       }).success,
