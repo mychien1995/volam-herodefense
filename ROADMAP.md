@@ -19,9 +19,9 @@
 - [x] `pnpm install`, frozen-lockfile install, `pnpm dev`, `pnpm build`, formatting and handoff integrity verified.
 - [x] Two isolated Chromium contexts share a room and server-owned check count; leave/rejoin/tab-close verified; screenshots inspected; cold runner exits normally.
 - [x] Windows setup/demo, exact stack versions/results, limitations and provisional policies documented in `README.md`, `OPEN_QUESTIONS.md` and [`docs/M0_VERIFICATION.md`](docs/M0_VERIFICATION.md).
-- [ ] Local Git checkpoint (folder arrived without Git metadata).
+- [x] Local Git checkpoint on `main` (folder arrived without Git metadata; initial implementation commit `796dd6f`).
 
-No M1 gameplay has been implemented. Complete verification evidence is linked above.
+**M0 status: complete, awaiting user review.** No M1 gameplay has been implemented. Complete verification evidence is linked above.
 
 **Codex must stop** after M0 and give user a demo and checklist. Do not proactively implement M1+.
 

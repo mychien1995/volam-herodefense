@@ -1,6 +1,6 @@
 # M0 verification — 2026-10-29
 
-M0 implementation is verified. Git checkpoint: local repository initialized; initial commit pending. M1 has not started.
+M0 implementation is verified. Git checkpoint: saved on local `main`, initial implementation commit `796dd6f`; verification completion recorded in a separate documentation commit. No remote push. M1 has not started.
 
 ## Handoff interpretation
 
@@ -62,7 +62,7 @@ Final checks on the saved implementation:
 | `pnpm test` | PASS; **4 files, 26 tests**, last unit/integration run 2.59s |
 | `pnpm build` | PASS; shared packages and server compile, client builds; 149 browser modules transformed |
 | `pnpm format:check` | PASS; `All matched files use Prettier code style!` |
-| `python scripts/verify_handoff.py` | PASS; 16 required docs/skills, 43 unique active skill names, example configs and key decisions consistent |
+| `python scripts/verify_handoff.py` / `pnpm verify:handoff` | PASS; 16 required docs/skills, 43 unique active skill names, example configs and key decisions consistent |
 | `pnpm install:browsers` | PASS; uses the local Chromium cache |
 | `pnpm test:e2e` | PASS, exit 0 from cold startup; **1 passed (4.3s)** including direct service startup/cleanup; full build/test command took about 8.7s |
 | `$env:PORT = '2570'; pnpm --filter @volam/game-server start` | PASS; compiled `node dist/index.js` booted |
