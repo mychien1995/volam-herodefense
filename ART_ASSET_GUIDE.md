@@ -1,25 +1,33 @@
-# Pixel Art and Animation Pipeline — v1.2
+# Pixel Art and Animation Pipeline — v1.3
+
+**PRIMARY ART REFERENCE:** `ART_DIRECTION_REFERENCE.md` and `assets/references/vo_dang_art_direction_reference.png` now define the required **detailed chibi wuxia pixel-art style**. The original image is a concept sheet, not a usable runtime spritesheet. The style and character silhouettes must be approved in a one-hero prototype before bulk asset creation.
+
+**CONFIRMED art direction:** classic Pokémon-style **2D pixel art with an orthographic, elevated/top-down three-quarter overworld camera**. The player views the character and surrounding map from above at a slightly angled perspective; the character's body/face and the fronts of structures remain visible. This is sometimes informally called "third-person from above"; it is **not** a 3D third-person chase camera, not a directly overhead bird's-eye view showing only heads, not an isometric diamond-grid game, and not a side-view platformer.
 
 This guide separates **creating art** from **integrating art**. Codex can implement the asset pipeline, animation loader and tests, and it can create simple original temporary sprites. It must **not** report that finished character artwork exists until actual files exist and have been visually reviewed.
 
-## Confirmed v1.2 perspective (user update, 2026-10-29)
-
-Original 2D pixel art uses a Pokémon-style **elevated top-down / three-quarter perspective**, referring only to viewpoint and readability. The world is an **orthographic square-tile 2D RPG**. No isometric projection, side-scrolling, rotating camera or 3D third-person view.
-
-The camera follows the local player without rotating. Movement supports eight directions; the initial character artwork has four facings, with diagonals mapped consistently to a nearby facing. Characters use a common foot pivot. Ground tiles render below actors; trees/buildings sort by their ground contact Y so players can walk behind foreground foliage/roofs. Collision footprints stay independent of sprite silhouettes. Use crisp nearest filtering, rounded presentation coordinates and integer display scales.
-
-The first playable proof includes a hero, a creep, terrain tiles and an occluding tree/building. Carry the same palette, scale, perspective and layering conventions into later arena, dungeon and PvP content. Those later features are not part of this visual update. Artwork remains prototype until reviewed; final palette and detailed designs remain open.
-
 ## Scope and staged delivery
 
-- **M0:** game boots with a procedurally generated shape/placeholder. Configure pixel-art-friendly rendering. No artist-quality sprites required.
-- **M1:** implement and verify a complete minimal animation loop for **one Cái Bang hero and one creep** using original sprites or clearly labeled prototype artwork: idle, move, basic attack, hurt, death; plus one skill effect. If sprites are unavailable, use programmatic placeholder frames and mark the art acceptance item OPEN. Do not block networking/combat on art generation.
+- **M0:** game boots with a procedurally generated shape/placeholder in a static orthographic overhead 2D scene, with a fixed, non-rotating top-down/three-quarter view. Configure pixel-art-friendly rendering. No artist-quality sprites required.
+- **M1:** first seek visual approval for the 4-direction Võ Đang sample described in `ART_DIRECTION_REFERENCE.md`; game-core may still use a Cái Bang prototype, but do not claim finished art without approval. Implement and verify a complete minimal animation loop for **one Cái Bang hero and one creep** using original sprites or clearly labeled prototype artwork: idle, move, basic attack, hurt, death; plus one skill effect. Demonstrate player-follow camera and correct Y-sorting/occlusion around at least one tree or building. If sprites are unavailable, use programmatic placeholder frames and mark the art acceptance item OPEN. Do not block networking/combat on art generation.
 - **M2–M5:** add required maps, enemy/boss telegraphs, effect timings and portrait/icon placeholders when their features arrive. Content logic must not depend on whether illustrations are complete.
 - **M6+:** review original art style, refine sprites, VFX and environment in coherent batches. Avoid bulk-generating unreviewed sprites for all 43 skills.
 
+## Locked view, camera and scene composition (CONFIRMED perspective)
+
+- Use **orthographic 2D tile-based top-down / three-quarter overworld presentation** like a classic Pokémon GBA overworld, reimagined with original wuxia-themed art, weapons, animations, and effects. Show a character's head and front/side body, not only a circular top of the head.
+- Gameplay camera follows the local player across a 2D map, with a consistent zoom; **no camera rotation, pseudo-3D tilt, 3D terrain, oblique perspective tricks, side-scrolling, or isometric diamond tiling**. Camera framing may keep the player centered or slightly offset for visibility, but keep projection consistent in arena, dungeons, and PvP.
+- Terrain uses square, axis-aligned tiles. Buildings, rocks, trees and scenery can show front/side faces using layered 2D sprite art while collision remains defined on the ground plane.
+- Render Y-depth by each character's **feet/ground contact point**, not sprite top-left. Arrange foreground layers so a player passes **behind a tree canopy/roof/wall front** and **in front of its base** where appropriate; the visual overlap must not change server collision.
+- Define an explicit sprite origin at bottom-center/feet, plus a smaller gameplay collision footprint. Keep vertical offset for tall bodies, hats, weapons and spell effects; do not use the full sprite rectangular extent as the collision body.
+- Movement is eight-directional with arrow keys (including diagonals). **Initial animation proposal:** up/down/left/right walk and idle, mapping diagonal motion to a consistent nearest or most recently pressed facing; later add eight-direction animation if valuable. Basic attacks and skill effects should match visual facing, never change server combat vectors.
+- Prefer nearest-neighbor sampling and **integer camera zoom** when possible (e.g. 2x or 3x), plus consistent pixel rounding to avoid shimmering; validate actual Phaser 4 settings with the installed version. Make the full arena readable at the chosen viewport, including enemies approaching from two sides and the statue health/timer UI.
+- Keep the camera perspective, tile projection and sprite scale **unchanged across character school, dungeon and PvP scenes**. Separate UI overlays from scrolling map layers.
+- Build an M1 visual proof with a ground tile grid, at least one visually layered tree or building, the player's 4-direction sprite, one creep, and camera following movement. Manually inspect walking above/below scenery, diagonals, sprite facing, animation crispness, NPC interaction, and visible combat range.
+
 ## Art direction and dimensions (initial proposals)
 
-- Perspective: top-down/three-quarter pixel art, readable at gameplay zoom, **original wuxia-inspired** aesthetic. Do not reuse Warcraft III, Pokémon or copyrighted custom-map assets.
+- Aesthetic: **original wuxia-inspired** Pokémon-like pixel-art presentation. Do not reuse Warcraft III, Pokémon or copyrighted custom-map assets.
 - Logical terrain tile: **32×32 px**. This is a proposal; changing it later requires changing maps and collision conventions coherently.
 - Character frame **48×48 or 64×64 px** as needed for weapons/robes; **not** identical to the collision footprint. Pick one standard per character family before finalizing a sheet.
 - Character movement is 8-directional. Initially draw **four facing directions** (up/down/left/right) and map diagonals to a nearby facing; revisit 8-way animations after playtesting.
@@ -87,10 +95,22 @@ For Tiled maps, keep editable map sources and export JSON plus tile images. Expl
 
 ## Open art decisions for the game director
 
-Final palette, character sprite footprint (48 vs 64 px), later eight-direction *artwork*, animation frame budget, final commissioned/AI-assisted art production workflow, and commercial asset licenses remain **open**. Codex may propose temporary defaults but must not mark them approved.
+The **2D top-down/three-quarter Pokémon-like overworld perspective is confirmed** and not an open decision. Fine palette details, exact sprite footprint (test 64 px before approval), concrete 32px tile assumption, four- versus eight-direction *artwork*, animation frame budget, exact zoom/resolution, final art production workflow, and commercial asset licenses remain **open/proposed**. Codex may propose temporary defaults but must not mark them approved.
 
 ## Useful official references
 
 - Phaser 4 pixel-art renderer guidance: https://github.com/phaserjs/phaser/blob/master/docs/Phaser%204%20Pixel%20Art%20Guide/Phaser%204%20Pixel%20Art%20Guide.md
 - Aseprite CLI: https://aseprite.com/docs/cli/
 - Tiled JSON export: https://docs.mapeditor.org/en/latest/manual/export-generic/
+
+## Art of the game interface — v1.4
+
+School art references: `assets/references/cai_bang_character_reference.png`, `thien_son_thieu_lam_character_reference.png`, `vo_dang_art_direction_reference.png`. World reference: `assets/references/in_game_world_reference.png`. **Bad layout example**: `assets/references/current_codex_dashboard_anti_reference.png` (map boxed into left and HTML dashboard to right). All images are style references, not validated sprite atlases.
+
+Create UI art suitable for a chibi wuxia pixel-art game: hero portraits, compact stat bars, icon hotbar, item icons/grids, readable framed NPC windows. Prefer original/licensed graphical borders and clear pixel-art icons. HUD must live above the world **within the game viewport**, with readable Vietnamese text and closeable in-game windows. No need for all UI to be authored as Phaser sprites; HTML/CSS modal views over the canvas are allowed as long as they stay within the viewport and match the game look. See `UI_UX_SPEC.md`.
+
+## v1.5 UI refactor asset status
+
+`assets/source/ui_world.py` authors eleven original UI/environment **prototype** sheets/images, refreshed terrain/tree textures and manifest metadata. It does not generate new school characters. The 16-frame 32px icon sheet and four 128×80 destination studies have explicit frame metadata; `verify-assets.py` verifies their nonempty cells. Runtime exports total sixteen PNGs including the existing M1 set. Normal builds only copy committed exports and never copy `assets/references/`.
+
+All supplied PNG references were inspected; filename/content mismatches are recorded in `assets/references/README.md`. No concept-sheet pixels were cropped, traced into an atlas or bundled as a world backdrop. These procedural pixel studies do not satisfy final detailed-art acceptance. See `docs/UI_V15_VERIFICATION.md` for real browser screenshots and remaining art work.

@@ -83,6 +83,18 @@ async function enter(
     )
     .toBeGreaterThan(0);
 }
+async function selectRanged(page: Page): Promise<void> {
+  await page.locator('[data-menu=skills]').first().click();
+  await page.getByLabel('Normal attack').selectOption('cai_bang_chuong');
+  await page.getByRole('button', { name: 'Close menu', exact: true }).click();
+  await expect
+    .poll(async () => {
+      const s = await snapshot(page);
+      return (s.state.players[s.sessionId] as Hero & { basicId: string })
+        .basicId;
+    })
+    .toBe('cai_bang_chuong');
+}
 async function moveTo(page: Page, x: number, y: number): Promise<void> {
   await page.locator('#game canvas').focus();
   const held = new Set<string>();
@@ -209,31 +221,32 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
     const id = (await snapshot(a)).roomId;
     await enter(b, 'Đồng đội', id);
     const aId = (await snapshot(a)).sessionId;
-    const enemy = (await snapshot(a)).state.creeps['creep_0']!;
-    await moveTo(a, enemy.x - 38, enemy.y);
-    const position = await hero(a);
-    const currentTarget = (await snapshot(a)).state.creeps['creep_0']!;
-    const dx = currentTarget.x - position.x;
-    const dy = currentTarget.y - position.y;
-    const faceKey =
-      Math.abs(dx) >= Math.abs(dy)
-        ? dx >= 0
-          ? 'ArrowRight'
-          : 'ArrowLeft'
-        : dy >= 0
-          ? 'ArrowDown'
-          : 'ArrowUp';
-    await a.keyboard.down(faceKey);
+    // Let the real AI approach. Do not walk toward an old target position:
+    // movement/patch latency can carry the hero past it before the attack.
+    const nearby = async () => {
+      const s = await snapshot(a),
+        h = s.state.players[aId]!;
+      return Object.values(s.state.creeps)
+        .filter((c) => c.hp > 0)
+        .sort(
+          (c, d) =>
+            Math.hypot(c.x - h.x, c.y - h.y) - Math.hypot(d.x - h.x, d.y - h.y),
+        )[0]!;
+    };
     await expect
-      .poll(
-        async () => {
-          const h = await hero(a);
-          return Math.abs(dx) >= Math.abs(dy) ? h.fx : h.fy;
-        },
-        { intervals: [10, 20] },
-      )
-      .toBe(Math.abs(dx) >= Math.abs(dy) ? Math.sign(dx) : Math.sign(dy));
-    await a.keyboard.up(faceKey);
+      .poll(async () => {
+        const h = await hero(a),
+          c = await nearby();
+        return Math.hypot(c.x - h.x, c.y - h.y);
+      })
+      .toBeLessThan(42);
+    // The spawn faces east and these M1 creeps approach from the east.
+    // Keep the hero still: no latency-sensitive facing tap is needed.
+    const position = await hero(a),
+      currentTarget = await nearby();
+    expect(position.fx).toBe(1);
+    expect(position.fy).toBe(0);
+    expect(currentTarget.x).toBeGreaterThan(position.x);
     const totalHp = async (page: Page): Promise<number> =>
       Object.values((await snapshot(page)).state.creeps).reduce(
         (sum, creep) => sum + creep.hp,
@@ -292,7 +305,7 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
     await a.keyboard.press('KeyE');
     await expect(a.locator('#feedback')).toContainText('not equipped');
     // Finish through real manual inputs; no assumption that all projectiles hit one specific creep.
-    await a.getByLabel('Normal attack').selectOption('cai_bang_chuong');
+    await selectRanged(a);
     const latestAttack = async (): Promise<number> =>
       (await snapshot(a)).events
         .filter((event) => event.kind === 'attack' && event.sourceId === aId)
@@ -313,7 +326,7 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
       fullPage: true,
     });
     await a
-      .locator('.courtyard')
+      .locator('#viewport')
       .screenshot({ path: info.outputPath('arena-panel.png') });
     await b.screenshot({
       path: info.outputPath('combat-b.png'),
@@ -330,7 +343,7 @@ test('ranged projectile uses a fixed trajectory and original effect frames', asy
 }, info) => {
   const errors = monitor(page);
   await enter(page, 'Hỏa Khách');
-  await page.getByLabel('Normal attack').selectOption('cai_bang_chuong');
+  await selectRanged(page);
   await expect
     .poll(
       async () =>

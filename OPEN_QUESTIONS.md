@@ -27,7 +27,7 @@
 | Low | Trade items directly between players? | No trading initially, only dropped-item pickup | M4 |
 | Low | Can basic attack be held down for repeated attacking? | Manual key-down with cooldown, no auto-repeat first | M1 |
 | Low | How much cleave, exact enemy detection radius, animation timing? | Data-driven weapon-specific values; test feel | M1/M2 |
-| Low | Graphics resolution, pixel tile scale and camera | 32px tiles placeholder, flexible camera zoom | M1 |
+| Low | Exact viewport resolution, pixel tile scale, camera zoom and camera smoothing | Confirmed 2D Pokémon-like elevated top-down/three-quarter projection; propose 32px square tiles, integer zoom, test jitter in M1 | M1 |
 | Low | Difficulty modes beyond production/test | Only standard and DEV_FAST now | M5/M7 |
 
 ## Proposed future discussion queue
@@ -53,16 +53,22 @@ Acceptance tests updated:
 
 ## Artwork decisions (v1.1)
 
-- v1.2 confirms orthographic elevated top-down perspective, a fixed follow camera and initial four-facing art for eight-way movement. Final palette, 32px tile tuning, character frame size and later eight-facing artwork remain open.
+- **Perspective confirmed:** Pokémon-style 2D elevated overhead/three-quarter orthographic view with a nonrotating camera, not isometric or 3D. Approve final pixel-art palette, exact 32px tile proposal, character frame dimensions (48px or 64px), viewport/zoom and 4-facing versus 8-facing sprite sets.
 - Determine whether source artwork comes from artist-created Aseprite files, licensed packs, AI-assisted concept art refined into coherent sprites, or a mix; verify distribution licenses.
 - Set animation frame budgets and preview quality gates after M1 gameplay establishes movement and attack timing.
 - The art pipeline is a proposed production convention, **not a confirmation that final artwork exists**. See `ART_ASSET_GUIDE.md`.
 
-## M1 provisional tuning and slice boundaries
+## UI presentation questions (v1.4) — NOT blockers to viewport refactor
 
-- 30 Hz server simulation; 32px tiles, 48px prototype character frames; fixed 480×300 logical viewport displayed at integer 1×/2× scales. Final artwork remains unapproved.
-- Q = Hỏa Vân Chưởng (three straight shots); W = Cuồng Long Loạn Vũ (exploding shot with burn); E/R unassigned and server-rejected. Rank 1 only; full learning/respec/passives are M3.
-- No-target ranged attacks use last facing. Melee cleave 0.5; all damage, mana, crit, cooldown, XP/gold and simple single-archetype growth values are validated M1 config, not final school balance.
-- Damage-only assists within 10 seconds qualify for one fixed creep XP/gold pool, split with a stable ID-ordered integer remainder. Meaningful CC/heal assists remain M2/M3 decisions.
-- Three training creeps of one archetype patrol/chase/attack and refresh after an 8-second death display. This is a repeatable arena sandbox, not dungeon waves or the invasion clock. A hero at zero HP stays dead for this slice; the arena respawn flow belongs to M2. No stat loss is applied.
-- The M0 immediate disconnect policy continues. Joining creates a live arena sandbox without host/ready rules or a match/invasion clock; finalized host/start/late-join policy remains open.
+- Exact HUD widget position/sizes, bitmap/pixel fonts with Vietnamese diacritics, minimap decision, health bar visibility per enemy, menu scrolling approach and optional hotkeys (e.g. `I`/`Esc`) are **proposals**, not confirmed requirements. See `UI_UX_SPEC.md`.
+- In-inventory/out-of-arena skill selection should remain read-only outside arena; menu display itself can be allowed while locked. Don't confuse opening a UI with changing game rules.
+- Existing `M1` dashboard UI is specifically rejected; do not reinterpret this as rejection of a standalone pre-game lobby, tool-enabled development debug overlay, or DOM overlay *inside* the game viewport.
+
+## v1.5 UI implementation review — 2026-10-29
+
+- **Reference packaging:** `current_codex_dashboard_anti_reference.png` actually shows Võ Đang art; `wuxia_town_world_reference.png` actually shows the dashboard; `thien_son_thieu_lam_character_reference.png` shows a town. The old `vo_dang_art_direction_reference.png` and `in_game_world_reference.png` aliases are absent. Files remain unchanged; see the reference inventory. Correct school-specific source sheets can be supplied during the art review, without blocking this UI task.
+- **Art approval remains OPEN:** existing Cái Bang/creep sprites and all new original UI/environment studies are prototypes. The mandatory detailed Võ Đang candidate has not been produced or approved here; no bulk character generation occurred.
+- **Proposed UI details:** integer 2x display scale on desktop ≥960×600 (1x below), viewport-dependent logical canvas, bronze/jade frames, four empty generic equipment slots and a 12-cell backpack *illustration*. These do not approve slot categories, backpack capacity, item catalogue, prices or travel behavior. Optional I/K shortcuts were not added; Escape closes menus without conflicting with Arrow/A/QWER.
+- **Reference ambition:** production environment richness, final portraits, ornate pixel frame art, and all four dungeon maps still need artist review. The forest study establishes composition/perspective only. Decorative NPC buildings/statue/lanterns do not add new authoritative collision; future solid scenery needs matching server geometry in its milestone.
+- **Later backend integration:** M1 has no statue HP/raid timer/warnings, inventory, shop, crafting, dungeon or PvP state. UI shows unavailable states instead of fake HP/countdowns/items. The notification layer sits above dialogs, but live raid-warning behavior cannot be exercised until M2 provides real events. The live hero remains vulnerable while viewing menus or the forest study.
+- **Placement decision superseded:** the v1.4 question about whether to show a minimap is superseded for this prototype by the v1.5 approved bottom-right layout pattern. Current markers show actual arena snapshots; future discovery/navigation behavior remains undecided.

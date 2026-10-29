@@ -4,34 +4,17 @@
 
 ## M0 — Repository and architecture scaffold (first Codex task)
 
-**Scope:** pnpm TypeScript monorepo, Phaser 4 client boot, Colyseus 0.18 server boot, shared packages, reusable validated config skeleton, deterministic core starter, unit-test setup, dev scripts, clean README. Display a placeholder room/scene and verify client connects to server. No schools/dungeons/bosses implemented yet. Configure crisp/pixel-art-aware Phaser rendering and establish asset-folder/manifest conventions from `ART_ASSET_GUIDE.md`; visually complete artwork is **not required** for M0.
+**Scope:** pnpm TypeScript monorepo, Phaser 4 client boot, Colyseus 0.18 server boot, shared packages, reusable validated config skeleton, deterministic core starter, unit-test setup, dev scripts, clean README. Display a placeholder room/scene and verify client connects to server. No schools/dungeons/bosses implemented yet. Configure crisp/pixel-art-aware Phaser rendering with a fixed orthographic Pokémon-like elevated overhead/three-quarter camera (not 3D or isometric), and establish asset-folder/manifest conventions from `ART_ASSET_GUIDE.md`; visually complete artwork is **not required** for M0.
 
 **Acceptance:** `pnpm install`, `pnpm dev` (or documented equivalent) successfully start client/server; one browser tab connects; unit test and typecheck run; separate packages compile; two browser tabs can connect to a named temporary room; no DB/account; no Phaser import in `game-core`; all changes checked into Git. Document exact commands and version constraints.
 
 **Codex must stop** after M0 and give user a demo and checklist. Do not proactively implement M1+.
 
-**M0 status:** Previously verified and committed (`796dd6f`, `fa3da57`); historical evidence in `docs/M0_VERIFICATION.md`.
-
 ## M1 — Playable 2-player combat vertical slice
 
-**Scope:** central arena placeholder (Tiled or simple tile geometry), one placeholder hero archetype (Cái Bang suggested) with normal melee/ranged choices, arrow movement, A manual basic attack, Q/W/E/R input pipeline with only **two working skills** initially, one enemy archetype with HP and death, gold/XP/level, simple HUD; add a **tiny reviewed art/animation proof** (one hero, one creep, idle/walk/attack/hurt/death and one effect) using original assets where available, otherwise clearly labeled prototype placeholders; full server-authoritative damage, hit event feedback. Two players see one shared enemy and consistent health.
+**Scope:** central arena placeholder (Tiled or simple tile geometry), one placeholder hero archetype (Cái Bang suggested) with normal melee/ranged choices, arrow movement, A manual basic attack, Q/W/E/R input pipeline with only **two working skills** initially, one enemy archetype with HP and death, gold/XP/level, simple HUD; add a **tiny reviewed art/animation proof** (one hero, one creep, idle/walk/attack/hurt/death and one effect; confirm player-follow non-rotating camera, feet-origin Y-sorting and occlusion by at least one tree/building) using original assets where available, otherwise clearly labeled prototype placeholders; full server-authoritative damage, hit event feedback. Two players see one shared enemy and consistent health.
 
 **Acceptance:** arrow movement works and is visible to a second client; manual attack cadence; nearest-at-fire ranged shots fly straight and can miss a moving target; melee cleave targets secondary at reduced damage; QWER cannot cast unavailable/unequipped skill; same enemy HP agrees for both clients; server rejects forged damage/position. All numeric behavior unit-tested without browser. Verify the real loaded animation registry and direction/frame selections in-browser, with screenshots if actually captured; if no authentic art is available, keep art completion OPEN without blocking gameplay implementation.
-
-### M1 verification checkpoint — 2026-10-29
-
-**Status: engineering verified; final art review OPEN.** M2 has not started. User authorized M1 and confirmed v1.2 art direction in this chat.
-
-- [x] Orthographic tiled arena with server-owned collision and a fixed non-rotating follow camera.
-- [x] Eight-direction normalized movement, four-facing animations, crisp integer scaling, foot-depth sorting and actual walk-behind-tree proof.
-- [x] One Cái Bang training archetype; manual melee/ranged normal attacks, frontal reduced cleave and straight dodgeable projectiles.
-- [x] Q/W canonical abilities with mana/cooldowns; E/R remain empty and server-rejected.
-- [x] One creep archetype, HP/death/hit feedback, fixed-pool gold/XP/levels and earned point count; seeded core tests and server-owned RNG.
-- [x] Original prototype PNG/atlas sources and manifest: hero/creep idle/walk/attack/cast/hurt/death in four facings; terrain, occluding tree and fire effect. Real frames loaded and inspected in-browser.
-- [x] Strict typecheck, 62 unit/integration tests, five Chromium smoke tests, actual asset/handoff checks and reproducible 100-run M1-only probe.
-- [ ] Director approval of final artwork/palette/detail (current files intentionally remain `prototype`).
-
-See [`docs/M1_VERIFICATION.md`](docs/M1_VERIFICATION.md) for measured results, preserved screenshots, scope limitations and manual demo steps. No dungeon, statue clock, four-school progression, crafting, boss or PvP gameplay was added.
 
 ## M2 — Dungeon and statue core loop
 
@@ -78,3 +61,18 @@ See [`docs/M1_VERIFICATION.md`](docs/M1_VERIFICATION.md) for measured results, p
 5. What is **not implemented yet** and precise next milestone.
 
 **One Git branch/PR or logically coherent commit series per milestone**, if environment permits. Do not silently alter confirmed game rules to simplify implementation.
+
+## v1.4 UI/HUD refactor checkpoint for existing M1 prototype
+
+The game director rejected a prototype with permanent exterior admin-style sidebar. **Before adding more character schools, dungeons or shops**, run a bounded UI-only refactor using `CODEX_UI_REFACTOR_TASK.md`. Create one large in-match game viewport, layered in-world HUD/hotbar and modal manager. Move existing character, room and creep information out of page sidebars; don't delete functional features. Verify inventory menu and dungeon NPC menu inside the viewport, even if not yet backed by finished item/dungeon mechanics (use explicit disabled preview states). Do not restart earlier completed milestones or rewrite multiplayer/combat. Screenshots and automated tests should verify the new layout with two clients. Subsequent M1/M2/M3 acceptance must use `UI_UX_SPEC.md`; a stand-alone lobby may remain outside play. UI must not block arrow/A/QWER controls when closed.
+
+## v1.5 focused UI checkpoint — implementation verified, review pending (2026-10-29)
+
+- [x] Refactor the existing M1 client into a full-viewport world with compact HUD; remove exterior dashboard/header/footer.
+- [x] In-viewport inventory, merchant/crafting, dungeon selection, loadout, party/connection and PvP preview windows. Keep unavailable transactions/travel disabled.
+- [x] Safe modal focus/input, NPC click isolation, canvas keyboard recovery and unpaused two-client state.
+- [x] Original small UI/environment studies, non-rotating camera/feet depth and explicit prototype provenance.
+- [x] Verify 62 unit/integration tests and 10 Chromium tests; desktop coverage 1280×720, 1920×1080 and 900×640. Preserve five requested screenshot states in `docs/evidence/ui-v15/`.
+- [ ] Game director UI/art review. Detailed Võ Đang character approval and finished environment art remain OPEN.
+
+See `docs/UI_V15_VERIFICATION.md`. M0/M1 implementation history and evidence remain in Git and `docs/M0_VERIFICATION.md` / `docs/M1_VERIFICATION.md`. This checkpoint implements no M2+ gameplay. **Stop here until UI review; do not begin another milestone automatically.**

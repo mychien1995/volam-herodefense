@@ -2,7 +2,7 @@
 
 ## 1. Pitch & pillars
 
-**Genre:** multiplayer cooperative action RPG + periodic hero defense; 2D top-down, colorful original pixel-art presentation; browser-first; 1–6 players in temporary match-based rooms. References to Warcraft III custom maps / Pokémon relate only to broad gameplay and visual perspective, not assets or proprietary designs.
+**Genre:** multiplayer cooperative action RPG + periodic hero defense; 2D orthographic top-down / three-quarter Pokémon-style overworld perspective (not isometric, platformer or 3D third-person), with colorful original wuxia-inspired pixel art; browser-first; 1–6 players in temporary match-based rooms. References to Warcraft III custom maps / Pokémon relate only to broad gameplay and visual perspective, not assets or proprietary designs.
 
 **Player fantasy:** select a martial-arts school, master a flexible personal combination of martial abilities, grow from level 1 to 30, farm dungeons for upgrades, and protect an irreplaceable statue until the final boss is defeated.
 
@@ -100,3 +100,7 @@ The first final boss eligibility after chapter four: only once Bắc Cái is def
 - The full 20-wave schedule is **60 minutes** from start, followed by gated bosses/final boss; actual win may be later. Hard enough to reward strategic preparation and team coordination, but make solo victory possible with exceptional play.
 - Statue damage is permanent. Regular waves overlap on a fixed clock. Avoid fake difficulty from unavoidable one-shots, unclear aggro or invisible telegraphs.
 - Strong builds are supposed to feel powerful. Tune early-game fairness, late-game urgency, support viability, and boss control resistance via simulation and playtests. Exact damage/stat/economy values remain adjustable, not fixed by this GDD.
+
+## In-game UI presentation (confirmed in v1.4)
+
+After joining a match, the central arena/dungeon/PvP world remains the dominant screen; hero HUD, statue HP, wave timer, skill bar, gold, inventory, merchant, crafting, dungeon and PvP windows all appear **inside or over the game viewport**. Do not implement the in-match game as a web dashboard with persistent room/hero/enemy panels outside the map. The lobby before joining may use a distinct menu screen. See `UI_UX_SPEC.md` for layout, interaction, input-focus and acceptance details. The sample screenshots in `assets/references/` are visual references, not ready-to-import gameplay animation sheets.

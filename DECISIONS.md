@@ -4,7 +4,7 @@
 
 ## Confirmed — fundamental
 
-- Browser-first, keyboard-oriented, top-down 2D pixel-art direction is **the recommended technology approach**, pending normal technical implementation checks; player-facing deployment should be via browser initially.
+- Browser-first, keyboard-oriented deployment is the **recommended technology approach** pending technical implementation checks. **CONFIRMED visual direction:** 2D pixel art, orthographic **top-down/three-quarter elevated Pokémon-style overworld perspective** ("third-person from above"), with character bodies visible. Not a top-of-head-only bird's-eye view, not isometric, side-scroll or 3D third-person. No proprietary Pokémon graphics/assets. See `ART_ASSET_GUIDE.md`.
 - **Max 6 players per independent match room**, player enters a nickname only; no accounts or persistent progression.
 - Four launch schools: **Cái Bang**, **Thiên Sơn**, **Võ Đang**, **Thiếu Lâm**. Expand later.
 - Arrow keys move, `A` manual normal attack, `Q/W/E/R` active skills. Mouse used for NPC, shop, menus, equip, skill UI; no mouse-targeted skills. Auto basic attack **OPEN** (manual first).
@@ -35,7 +35,7 @@
 
 - Release tech: Phaser 4.2.x + TypeScript browser client, Colyseus 0.18.x Node TypeScript authoritative server, shared TS game core, Vite, pnpm workspaces, Vitest, Playwright, Tiled; no DB initially.
 - Headless fixed tick at 20–30 Hz, render at display refresh; prediction/interpolation staged, avoid full rollback prematurely.
-- 32x32 pixel-art terrain tile size is proposed. v1.2 confirms eight-way movement and initial four-facing artwork; NPC interaction remains by mouse.
+- 32x32 square pixel-art terrain tiles, 48x48 or 64x64 sprite frames, 4-direction initial animations mapped from 8-direction movement, integer zoom, feet-origin Y-depth sorting; exact dimensions/zoom not user-approved. NPC interaction by mouse (confirmed).
 - Regular skill max rank 4; ultimate max 3; ult unlock at character levels 6/10/14; regular rank gating at 1/3/5/7.
 - Melee basic primary target 100%, cleave target 50% by default, school-specific overrides, independent crit rolls.
 - Invasion boss rest 10s after fifth wave fully clears; warnings at T-60 and T-15; raid clock never pauses.
@@ -50,8 +50,18 @@ See `OPEN_QUESTIONS.md`. Ask a targeted question only when implementing a featur
 
 ## Art pipeline clarification (2026-10-29)
 
-**Proposed implementation standard, not user-approved visual art:** `ART_ASSET_GUIDE.md` supplies folder conventions, editable sources, sprite-sheet/atlas export, provenance and quality gates. It does **not** claim finished artwork exists or change any gameplay rule. M0 can use placeholders; M1 must test animation integration and explicitly flag missing final art.
+**Approved camera/presentation:** orthographic 2D Pokémon-style elevated overhead/three-quarter pixel art. **Proposed production standards:** `ART_ASSET_GUIDE.md` supplies tile sizes, sprite dimensions, folder conventions, editable sources, sprite-sheet/atlas export, provenance and quality gates. It does **not** claim finished artwork exists or change any gameplay rule. M0 can use placeholders; M1 must test animation integration and explicitly flag missing final art.
 
-## Confirmed — v1.2 art direction (2026-10-29)
+## Visual quality lock (v1.3)
 
-User confirmed original 2D pixel art in a Pokémon-style elevated top-down / three-quarter viewpoint, with orthographic square tiles. A non-rotating camera follows the player; movement is eight-directional with four-direction animations initially. Characters/scenery sort by foot/ground-contact Y, with terrain below and foreground trees/buildings occluding actors behind them. Rendering must stay crisp. This is not isometric, side-scrolling or 3D third-person. Apply the same convention to future arena/dungeon/PvP assets; no proprietary art. Palette/detail/animation budgets remain proposals. This supersedes earlier statements that camera perspective and initial four-facing choice were entirely open. M1 is now explicitly authorized; M2+ remain outside this task.
+- **CONFIRMED:** detailed chibi wuxia 2D pixel-art visual style, using `assets/references/vo_dang_art_direction_reference.png` as PRIMARY aesthetic reference. See `ART_DIRECTION_REFERENCE.md`. Existing Pokemon-style overhead camera requirement remains unchanged.
+- **CONFIRMED:** image is concept/reference only, not sprite atlas; must build coherent original transparent in-game assets. Approve Võ Đang sample before artwork is expanded to four schools.
+- **PROPOSED / TO VALIDATE:** 64x64 sprite frame canvas, 32x32 tiles, 4 facing animations initially, actual zoom and in-game character footprint.
+
+## Confirmed in-game UI presentation — 2026-10-29 (v1.4)
+
+The user explicitly rejects the current Codex **split web-dashboard layout** (map on left, persistent stats/room/enemy cards on right). Once in a match, the *map/world should occupy the game view*, while hero HP/MP/level/EXP, statue/raid timing, hotbar, inventory, skill selection, shop, dungeon menu, crafting and optional PvP menus render **as HUD or overlays inside the game viewport**. Pre-match lobby can be separate. Refer to `UI_UX_SPEC.md`. Exact widget dimensions, minimap feature, additional keyboard menu shortcuts and specific UI art palette remain proposed/not user-approved. No effect on combat/gameplay authority.
+
+## Confirmed v1.5 reference/UI update — 2026-10-29
+
+The game director approved the expanded hub/battle, forest/desert/sea/hell and menu references as primary **direction**, not runtime artwork or authoritative numbers. Confirmed HUD patterns now include top-left hero, bottom-center A/QWER, bottom-right minimap, top-right system buttons and lower-left bag/gold. Exact dimensions/ornament remain subject to review. All menu windows stay within the game viewport. No gameplay rules or new dungeon/item implementations are approved by this UI task. Supplied-file naming discrepancies are recorded in `assets/references/README.md`; actual image contents guide interpretation. The one-Võ-Đang character art approval gate remains open.

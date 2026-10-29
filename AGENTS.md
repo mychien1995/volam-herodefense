@@ -1,3 +1,5 @@
+> **NEW mandatory v1.4 in-game UI rule:** Before any UI/UX work, read `UI_UX_SPEC.md` and visually inspect `assets/references/in_game_world_reference.png` (**positive**) and `assets/references/current_codex_dashboard_anti_reference.png` (**anti-reference**). After joining a match, render **one dominant game viewport** with all HUD, inventory, shop, skill tree/loadout, dungeon, crafting, PvP and loot-roll UI as in-viewport overlays. **Never** use persistent exterior right-side panels, page title, footer or dashboard status column. An HTML/React/DOM overlay absolutely positioned inside the game viewport is acceptable; game overlays do not have to be Phaser Graphics. Do not shrink the map to make room for UI. Keep a separate pre-match lobby if needed. Preserve server authority and keyboard/mouse controls. Details/acceptance: `UI_UX_SPEC.md` and `CODEX_UI_REFACTOR_TASK.md`.
+
 # Repository instructions for Codex and other coding agents
 
 This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D multiplayer martial-arts statue-defense RPG. **Do not start coding the full game until reading the design handoff.**
@@ -8,7 +10,7 @@ This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D
 2. `GAME_DESIGN.md` — core loop, dungeons, waves, statue and PvP.
 3. `CONTENT_DATA.md` — exact Vietnamese names, 43 active skills, 8 normal attacks, 4 innate passives.
 4. `COMBAT_SYSTEM.md`, `BALANCING.md`, `ITEMS_AND_CRAFTING.md` — specifics.
-5. `ART_ASSET_GUIDE.md` for sprite sourcing, export formats, animation and artwork verification; `TECHNICAL_ARCHITECTURE.md`, `ROADMAP.md`, `ACCEPTANCE_TESTS.md`, `OPEN_QUESTIONS.md`.
+5. **`ART_DIRECTION_REFERENCE.md` and `assets/references/vo_dang_art_direction_reference.png`** (read/show actual reference; mandatory visual standard); then `ART_ASSET_GUIDE.md` for sprite sourcing, export formats, animation and artwork verification; `TECHNICAL_ARCHITECTURE.md`, `ROADMAP.md`, `ACCEPTANCE_TESTS.md`, `OPEN_QUESTIONS.md`.
 6. `CODEX_START_HERE.md` — first task; do **M0 only** initially.
 
 ## Hard constraints
@@ -23,9 +25,9 @@ This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D
 - Dungeon boss exactly **one randomly drawn item per kill** and eligible-player roll; duplicates/sell/drop. 4 equipment slots; buy duplicate basic to level it, max basic + boss item + gold crafts stronger.
 - Keep exact Vietnamese skill names as documented. Stable ASCII IDs; separate localization display names.
 - Do not copy proprietary Warcraft III / Pokémon map art, sound, or code. Use placeholders or original/licensed content.
-- Art pipeline: follow `ART_ASSET_GUIDE.md`. No real sprite/animation can be called complete until its file exists, animation frames load correctly in Phaser, and visual checks are recorded. Document source/license; no animation-driven authoritative damage. M0 placeholders are acceptable; avoid bulk artwork generation before playtesting.
-
-- Confirmed v1.2 art direction: original elevated top-down / three-quarter **orthographic, square-tile 2D** pixel art; fixed non-rotating follow camera; eight-way movement with four-facing animations initially; ground-contact Y depth sorting and foreground occlusion; crisp nearest rendering. Keep this convention across future maps. Do not use isometric, side-scrolling or 3D third-person projection.
+- **Confirmed art quality:** Reference-driven **detailed chibi wuxia pixel art**, as in `assets/references/vo_dang_art_direction_reference.png`. Do not substitute geometric / SVG placeholders when the task is to deliver finished character art. First deliver a single Võ Đang 4-facing idle/walk + Quyền/ Kiếm attack prototype, inspect it in the actual Phaser game, then request user art approval before bulk generating. A reference sheet is not an animation atlas. Read `ART_DIRECTION_REFERENCE.md` before any art work.
+- **Confirmed presentation:** orthographic 2D pixel art with an elevated/top-down **Pokémon-like three-quarter overworld view**, never isometric/side-scroll/3D chase camera. Keep one consistent non-rotating camera perspective across arena, dungeons and PvP; order object occlusion by character feet/Y-depth, with foreground tree/roof layering. Follow `ART_ASSET_GUIDE.md`. No real sprite/animation can be called complete until its file exists, animation frames load correctly in Phaser, and visual checks are recorded.
+- **Confirmed reference set (v1.5):** inspect `assets/references/central_arena_hub_reference.png`, `arena_battle_reference.png`, `forest_dungeon_reference.png`, `desert_dungeon_reference.png`, `sea_dungeon_reference.png`, `hell_dungeon_reference.png`, `dungeon_selection_menu_reference.png`, `merchant_shop_menu_reference.png`, `inventory_menu_reference.png`, plus the school character references. Use them as the primary art/UI benchmark. The world must occupy the full match viewport; inventory/shop/dungeon menus must appear as in-world overlays inside the viewport. Document source/license; no animation-driven authoritative damage. M0 placeholders are acceptable; avoid bulk artwork generation before playtesting.
 
 ## Working method
 

@@ -3,6 +3,7 @@ import type { Command } from '@volam/game-core';
 export function bindGameplayInput(
   send: (command: Command) => void,
   connected: () => boolean,
+  blocked: () => boolean = () => false,
 ): () => void {
   const held = new Set<string>();
   const move = (): void =>
@@ -20,7 +21,7 @@ export function bindGameplayInput(
     (['INPUT', 'SELECT', 'TEXTAREA'].includes(target.tagName) ||
       target.isContentEditable);
   const keydown = (event: KeyboardEvent): void => {
-    if (!connected() || typing(event.target)) return;
+    if (!connected() || blocked() || typing(event.target)) return;
     if (inputBindings.movement.some((key) => key === event.code)) {
       event.preventDefault();
       if (!held.has(event.code)) {
@@ -57,16 +58,19 @@ export function bindGameplayInput(
   window.addEventListener('keydown', keydown);
   window.addEventListener('keyup', keyup);
   window.addEventListener('blur', stop);
+  window.addEventListener('volam:controls-blocked', stop);
   document.addEventListener('focusin', focus);
   document.addEventListener('visibilitychange', visibility);
   const heartbeat = window.setInterval(() => {
-    if (connected() && held.size) move();
+    if (blocked() && held.size) stop();
+    else if (connected() && held.size) move();
   }, 100);
   return () => {
     clearInterval(heartbeat);
     window.removeEventListener('keydown', keydown);
     window.removeEventListener('keyup', keyup);
     window.removeEventListener('blur', stop);
+    window.removeEventListener('volam:controls-blocked', stop);
     document.removeEventListener('focusin', focus);
     document.removeEventListener('visibilitychange', visibility);
   };

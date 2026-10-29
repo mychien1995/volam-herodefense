@@ -21,7 +21,7 @@
     "verify:handoff": "python scripts/verify_handoff.py",
     "install:browsers": "node tools/run-playwright.mjs install chromium",
     "assets:prepare": "node scripts/prepare-assets.mjs",
-    "assets:generate": "python assets/source/m1_art.py",
+    "assets:generate": "python assets/source/m1_art.py && python assets/source/ui_world.py",
     "test:balance": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/m1-balance.ts",
     "verify:assets": "python scripts/verify-assets.py"
   },

@@ -10,6 +10,7 @@ interface EntityView {
   bar: Phaser.GameObjects.Graphics;
 }
 export class ArenaScene extends Phaser.Scene {
+  onNpc: (menu: 'merchant' | 'dungeons' | 'pvp') => void = () => {};
   private snapshot: LobbyState | undefined;
   private sessionId = '';
   private actors = new Map<string, EntityView>();
@@ -30,6 +31,37 @@ export class ArenaScene extends Phaser.Scene {
     const tiles = map.addTilesetImage('terrain', 'terrain', 32, 32, 0, 0);
     if (!tiles) throw new Error('Missing terrain tileset.');
     map.createLayer('ground', tiles)?.setDepth(-10000);
+    this.add.image(800, 680, 'courtyard_seal').setDepth(-9000).setAlpha(0.45);
+    // Decorative presentation only: retain M1 server collision/spawn geometry.
+    this.add.image(800, 576, 'statue_study').setOrigin(0.5, 1).setDepth(576);
+    for (const [x, y] of [
+      [720, 600],
+      [882, 600],
+      [720, 798],
+      [882, 798],
+    ] as const)
+      this.add.image(x, y, 'lantern').setOrigin(0.5, 1).setDepth(y);
+    for (const [x, y] of [
+      [520, 560],
+      [535, 810],
+      [1090, 840],
+      [1170, 600],
+      [620, 470],
+      [1000, 440],
+    ] as const)
+      this.add.image(x, y, 'bamboo').setOrigin(0.5, 1).setDepth(y);
+    this.npc(560, 710, 'merchant_stall', 'Thương Gia', 'merchant');
+    this.npc(1040, 620, 'dungeon_gate', 'Phó Bản', 'dungeons');
+    this.add
+      .text(800, 585, 'Statue · inactive', {
+        fontFamily: 'Georgia',
+        fontSize: '9px',
+        color: '#ead8ad',
+        backgroundColor: '#293f31',
+        padding: { x: 4, y: 2 },
+      })
+      .setOrigin(0.5, 0)
+      .setDepth(586);
     for (const tree of arena.scenery)
       this.trees.push(
         this.add
@@ -66,6 +98,36 @@ export class ArenaScene extends Phaser.Scene {
     this.cameras.main.centerOn(arena.spawn.x, arena.spawn.y);
     this.ready = true;
     document.querySelector('#scene-status')?.setAttribute('data-ready', 'true');
+  }
+  private npc(
+    x: number,
+    y: number,
+    texture: string,
+    label: string,
+    menu: 'merchant' | 'dungeons',
+  ): void {
+    const open = (pointer: Phaser.Input.Pointer): void => {
+      // Phaser listens at the document level: DOM HUD clicks must not reach NPCs.
+      if (pointer.event.target instanceof HTMLCanvasElement) this.onNpc(menu);
+    };
+    this.add
+      .image(x, y, texture)
+      .setOrigin(0.5, 1)
+      .setDepth(y)
+      .setInteractive({ useHandCursor: true })
+      .on('pointerup', open);
+    this.add
+      .text(x, y + 3, label + ' · Preview', {
+        fontFamily: 'Georgia',
+        fontSize: '10px',
+        color: '#f3dc9d',
+        backgroundColor: '#20372b',
+        padding: { x: 5, y: 3 },
+      })
+      .setOrigin(0.5, 0)
+      .setDepth(y + 0.3)
+      .setInteractive({ useHandCursor: true })
+      .on('pointerup', open);
   }
   setSnapshot(snapshot: LobbyState | undefined, sessionId = ''): void {
     if (this.sessionId !== sessionId) this.lastEvent = 0;
@@ -145,7 +207,7 @@ export class ArenaScene extends Phaser.Scene {
           3,
         );
       if (id === this.sessionId && this.followed !== id) {
-        this.cameras.main.startFollow(view.sprite, true, 1, 1);
+        this.cameras.main.startFollow(view.sprite, true, 1, 1, 0, 48);
         this.followed = id;
       }
     };

@@ -67,18 +67,34 @@ These are behavioral requirements, not already implemented tests. Codex should c
 - Given 4 equipment slots full, then fifth equip action is denied or requires explicit swap; other backpack items remain available.
 - Given owner drops an item and another player picks it up, ownership and state update exactly once, never two copies.
 
-## I. PvP (future milestone)
+## I. Presentation / pixel art camera (M0–M1)
+
+- Given M0 boots, then the client uses a **fixed orthographic 2D top-down/three-quarter** view resembling a classic Pokémon overworld; no side-scrolling, 3D chase, rotating camera or isometric diamond tile projection.
+- Given square-grid tilemap and hero, then arrow-key movement includes diagonals while the client consistently selects supported facing sprites; the local camera follows on the same projected ground plane.
+- Given a hero walks to the north (behind) a tree/roof foreground layer, then foliage/roof appears in front of the hero, and moving south (in front) produces the opposite visual ordering where appropriate.
+- Given character graphics are taller than ground footprints, then their collision footprint and render Y-depth are tied to their feet/ground location, not to the sprite image bounds; visual occlusion does not alter server-authoritative collision.
+- Given pixel art displayed at normal game zoom, then textures retain crisp hard-edged pixels without filtering blur or obvious camera shimmer; inspect real client screenshots where possible.
+- Given a skill used in dungeon or PvP, then camera perspective and pixel scale remain consistent with the central arena.
+
+## J. PvP (future milestone)
 
 - Given two sides populated and both ready, then PvP starts; before ready, no damage in duel.
 - Given more than six total room players, no side assignment may bypass match cap.
 - Given duel active, then no active-skill respec within PvP zone; after end they return to normal match state.
 
-## J. Confirmed v1.2 presentation and M1 traceability
+## UI presentation regression suite — v1.4
 
-- Given the orthogonal 32px prototype map, arrow keys move in eight normalized directions; artwork selects one of four facings without rotating the camera.
-- Given a local player moving through the arena, the camera follows with pixel rounding and integer presentation scale. Ground tiles stay below actors; the same character sorts in front of or behind a tree according to its rendered foot Y. Only the trunk footprint blocks movement.
-- Given original hero/creep PNGs and atlas JSON, all idle/walk/attack/cast/hurt/death tags and four directions load real frames. Animation frames never cause server damage. Final art approval is separate from integration verification.
-- `tests/combat.test.ts` covers movement, collision, melee/cleave/occlusion, straight projectile dodge, paced shots, explosion/burn, cooldown/mana, empty slots, XP/gold splitting, death eligibility and deterministic replay. `tests/room.test.ts` covers two-client positions/HP, forged state rejection, attack isolation and six-seat lifecycle.
-- `tests/assets.test.ts`, `scripts/verify-assets.py` and `tests/e2e/gameplay.spec.ts` check actual source/export/atlas/map data and rendered registry, camera, tree layering, melee/ranged/spells, progression and browser errors. The compile-time protocol test guards input/event types.
+- **Viewport:** Given the player has joined a room, when gameplay starts, then the world consumes the available game viewport and there are **no persistent page-sidebars** for room/hero/creeps, no large page title/footer squeezing the map.
+- **In-world HUD:** Given the player is in arena or dungeon, then hero HP/MP/level/EXP, skill hotbar and next invasion/statue status remain visible as viewport overlays (when state exists), not external cards.
+- **Inventory:** Given the player opens inventory, then an overlay opens inside the game viewport, with four equipment slots, backpack representation, details/close action, and no page reflow.
+- **NPC interaction:** Given the player clicks a dungeon NPC within interaction range, then the dungeon menu opens within the viewport and is dismissible; server validates any requested travel.
+- **Input safety:** Given an in-game menu is open, pressing keys used by menus must not cast spells/attack/move accidentally; when closed, Arrow, A and QWER recover. Clicking buttons should not trigger a world click.
+- **Clock:** Given the player browses an item/dungeon menu, the server match clock, waves, and other players continue normally and urgent raid warnings remain visible above the menu.
+- **Responsive:** Given 1280×720 and 1920×1080 desktop viewports (suggested test sizes), then all required HUD/modal content is reachable and not clipped.
+- **Visual regression:** When the implementation is reviewed, take real screenshots of game + inventory open + NPC menu open; compare positively to `in_game_world_reference.png` and negatively to `current_codex_dashboard_anti_reference.png`. Report placeholder imagery, real test commands, and any unimplemented systems.
 
-M1 uses one archetype and two rank-1 skills. Full skill ranks/passives/respec, dungeon/statue systems, crafting and PvP acceptance remain for later milestones. A fallen M1 hero keeps earned rewards but has no respawn flow until M2.
+## v1.5 UI regression evidence — 2026-10-29
+
+`tests/e2e/ui.spec.ts` verifies full-viewport canvas/HUD, bounded scrollable menus at 1280×720, 1920×1080 and 900×640, four equipment slots/disabled transactions, crafting tabs, actual NPC clicks, focus containment, held-input release, post-close Arrow/A/Q/W recovery, continued server ticks and shared second-player movement. Forest study tests confirm no room/position change and successful return; it is not a dungeon acceptance test.
+
+All ten current browser tests passed along with the 62 headless/unit/server tests. Real evidence and honest placeholder status are in `docs/UI_V15_VERIFICATION.md`. Live raid warnings, real dungeon travel and item mutation remain untested/unimplemented until their gameplay milestones; the UI regression above does not mark those future requirements complete.

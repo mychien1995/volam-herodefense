@@ -1,6 +1,6 @@
-# Original Bootstrap Task — Historical M0 Prompt
+> **Already have an existing playable prototype?** Do **NOT** repeat M0 or recreate the repository. For the current rejected exterior dashboard layout, run the focused task in `CODEX_UI_REFACTOR_TASK.md` after reading `UI_UX_SPEC.md`. This v1.4 instruction supersedes any earlier language that suggested permanent page panels for in-match HUD.
 
-Current checkpoint: M0 and M1 engineering are implemented; see `README.md`, `ROADMAP.md` and `docs/M1_VERIFICATION.md`. The prompt below is retained as the original handoff, not an instruction to restart M0. Continue only the milestone explicitly requested by the user.
+# First Codex Task — COPY/PASTE
 
 ## How to use
 
@@ -20,7 +20,7 @@ You are the lead engineer implementing **Võ Lâm Hero Defense**, a browser-firs
 **Your immediate assignment is ONLY Milestone M0 from `ROADMAP.md`.** Do not implement the full combat system, four schools, dungeons, crafting, invasion bosses or PvP in this task.
 
 1. Validate the recommended 2026 stack against installed versions and current official docs: Phaser 4 + TypeScript browser client, Colyseus 0.18 + TypeScript authoritative server, pnpm workspaces, shared `game-core`, `game-data`, `game-protocol`, Vite, Vitest and basic browser smoke test facilities. Use current Colyseus APIs, not outdated 0.17 code. You may recommend a small version change if required; explain why.
-2. Create a small, maintainable monorepo skeleton with client, server, shared packages and scripts. `game-core` must not depend on browser, Phaser or Colyseus. Add a placeholder Phaser scene and an independent Colyseus match room with a 6-player cap and nickname-only join; permit two browser clients to connect to the same room. No database or login. Configure pixel-art-friendly rendering and preserve `assets/` manifest/example conventions; colored/procedural placeholders are sufficient in M0. Do not attempt to generate a complete art pack in this milestone.
+2. Create a small, maintainable monorepo skeleton with client, server, shared packages and scripts. `game-core` must not depend on browser, Phaser or Colyseus. Add a placeholder Phaser scene and an independent Colyseus match room with a 6-player cap and nickname-only join; permit two browser clients to connect to the same room. No database or login. Configure pixel-art-friendly rendering and a fixed orthographic 2D Pokémon-like elevated overhead/three-quarter camera (no isometric or 3D third-person) and preserve `assets/` manifest/example conventions; colored/procedural placeholders are sufficient in M0. Do not attempt to generate a complete art pack in this milestone.
 3. Create and validate minimal typed server/client messages. Server owns room state. Provide a simple connection/lobby HUD or status screen to prove connectivity.
 4. Set up strict TypeScript typechecking, formatting/lint if appropriate, Vitest starter tests, and useful `pnpm dev`, `pnpm test`, `pnpm typecheck` commands. Add starter Playwright smoke test only if feasible without slowing M0 substantially.
 5. Write exact Windows-friendly setup instructions, run the project and tests if this environment allows, and report *actual* outputs. Identify anything that could not run. Do not invent screenshots or green test results.
@@ -36,3 +36,7 @@ Architecture should prioritize extensible data-driven content, headless determin
 - For any sprite/animation import, use the repository-local `.agents/skills/pixel-art-pipeline/` skill and `ART_ASSET_GUIDE.md`. No extra global skill installation is required.
 - Current Colyseus docs recommend an official agent skill: `npx skills add colyseus/skill`. Review the skill source and project trust requirements before installing. The handoff's three `.agents/skills/` folders are already repository-local and ready for Codex to discover.
 - Reference docs are linked in `TECHNICAL_ARCHITECTURE.md`. Avoid copy-pasting tutorials for older APIs.
+
+
+## v1.5 visual reference note
+Later milestones must inspect the additional files under `assets/references/`, especially `central_arena_hub_reference.png`, `arena_battle_reference.png`, the dungeon environment references, and the inventory/shop/dungeon-menu references. These lock in the target in-game HUD/menu pattern and environment quality for UI/art work.

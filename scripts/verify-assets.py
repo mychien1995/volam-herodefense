@@ -10,6 +10,12 @@ for asset in manifest['assets']:
     assert asset['status']=='prototype' and 'Original' in asset['license']
     image=Image.open(root/'assets/exports'/asset['sheet']);image.load()
     assert image.mode=='RGBA' and image.getchannel('A').getbbox(), asset['id']
+    if asset.get('columns'):
+        w,h=asset['frameWidth'],asset['frameHeight']
+        assert image.size==(w*asset['columns'],h),asset['id']
+        assert len(asset['frames'])==asset['columns'],asset['id']
+        for i,key in enumerate(asset['frames']):
+            assert image.crop((i*w,0,(i+1)*w,h)).getchannel('A').getbbox(),(asset['id'],key)
     if 'atlas' not in asset: continue
     atlas=json.loads((root/'assets/exports'/asset['atlas']).read_text())
     assert image.size==(atlas['meta']['size']['w'],atlas['meta']['size']['h'])

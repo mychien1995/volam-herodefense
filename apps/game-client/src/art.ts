@@ -28,6 +28,18 @@ export function preloadArt(scene: Phaser.Scene): void {
       `/assets/${asset.folder}/${asset.id}.png`,
       `/assets/${asset.folder}/${asset.id}.json`,
     );
+  for (const id of [
+    'blossom',
+    'merchant_stall',
+    'dungeon_gate',
+    'statue_study',
+    'lantern',
+    'bamboo',
+    'courtyard_seal',
+    'water',
+    'bridge',
+  ])
+    scene.load.image(id, `/assets/presentation/${id}.png`);
   scene.load.json('art_manifest', '/assets/manifest.json');
   scene.load.tilemapTiledJSON('arena', '/assets/arena.tmj');
   scene.load.image('tree', '/assets/scenery/tree.png');
@@ -75,7 +87,20 @@ export function registerArt(scene: Phaser.Scene): void {
       });
     }
   }
-  for (const id of ['tree', 'terrain', 'fire'])
+  for (const id of [
+    'tree',
+    'terrain',
+    'fire',
+    'blossom',
+    'merchant_stall',
+    'dungeon_gate',
+    'statue_study',
+    'lantern',
+    'bamboo',
+    'courtyard_seal',
+    'water',
+    'bridge',
+  ])
     scene.textures.get(id).setFilter(Phaser.Textures.FilterMode.NEAREST);
   scene.anims.create({
     key: 'fire_orb',

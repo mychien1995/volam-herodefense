@@ -1,20 +1,14 @@
-# Võ Lâm Hero Defense — M1 Prototype · Art Direction v1.2
+# v1.5: Full-viewport UI review checkpoint
 
-**Status:** M0 and M1 engineering verified; original prototype artwork awaits review. **Date:** 2026-10-29. **Language:** English documentation; Vietnamese names are canonical gameplay content.
+**New confirmed presentation requirement:** The game must fill the play viewport. Status, HP/MP, hotbar, inventory, skill loadout, shop, dungeon NPC menu, crafting and PvP appear **inside the game**; no persistent external dashboard columns during matches. Read [`UI_UX_SPEC.md`](UI_UX_SPEC.md). Existing Codex prototype should follow [`CODEX_UI_REFACTOR_TASK.md`](CODEX_UI_REFACTOR_TASK.md) instead of restarting milestones. New visual references in `assets/references/` include the user-provided Cái Bang, Thiên Sơn/Thiếu Lâm and in-game scene, plus an explicitly labeled current-dashboard anti-example.
 
-A browser-first 2D, top-down, pixel-art, multiplayer martial-arts hero-defense action RPG inspired by the *structure* of classic Warcraft III defense custom maps. Create original or appropriately licensed art, audio, map assets, and lore; no Warcraft/Pokémon assets or proprietary map code.
+> **v1.3 art reference update:** Before generating artwork, read `ART_DIRECTION_REFERENCE.md` and inspect `assets/references/vo_dang_art_direction_reference.png`. Prototype and get approval on Võ Đang sprites before expanding the art catalogue.
 
-## Design handoff
+# Võ Lâm Hero Defense — Codex Project Handoff v1.5
 
-The original bootstrap workflow below is retained for context; M1 is now implemented. Use the run instructions first.
+**Status:** Existing M1 prototype with v1.5 UI refactor; visual approval pending. **Date:** 2026-10-29. **Language:** English documentation; Vietnamese names are canonical gameplay content.
 
-1. Extract this entire folder to an empty Git repository.
-2. Open **the repository root** in Codex / ChatGPT Desktop, not just one document.
-3. Read [`CODEX_START_HERE.md`](CODEX_START_HERE.md), then [`AGENTS.md`](AGENTS.md).
-4. Ask Codex to execute **Milestone 0 only**. Do not request the entire game at once.
-5. Approve the plan and iterate through milestone acceptance tests.
-
-The runnable M1 now includes original prototype sprites and combat. Final art is not approved. `assets/manifest.json` describes the actual files; `assets/manifest.example.json` remains a template, with example paths that are not real source artwork.
+A browser-first 2D, **Pokémon-style elevated top-down/three-quarter pixel-art** (orthographic, not isometric or 3D third-person), multiplayer martial-arts hero-defense action RPG inspired by the *structure* of classic Warcraft III defense custom maps. Create original or appropriately licensed art, audio, map assets, and lore; no Warcraft/Pokémon assets or proprietary map code.
 
 ## Run M1 on Windows
 
@@ -30,15 +24,23 @@ Open **http://127.0.0.1:5173/**. The health route at **http://localhost:2567/hea
 
 ### Two-player practice demo
 
-1. In A, enter a nickname and **Create room**. Copy **Current room**.
+1. In A, enter a nickname and **Create room**. Copy the room ID in the top-right chip (or open **Đồng đội**).
 2. In B, enter another nickname, paste **Room ID**, then **Join room**. Both see the same players and creep HP. At most six seats; no account/database/save.
 3. Focus the canvas and use **Arrow keys** to move, including diagonals. The camera follows without rotating. Walk left of the western tree, up behind its canopy, then back down in front. The trunk blocks movement; the canopy does not.
-4. **A** manually attacks. Choose **Cái Bang Bổng** (frontal melee with reduced cleave) or **Cái Bang Chưởng** (nearest-at-fire straight projectile) from the menu. Face the enemy before a melee strike. Holding A does not repeat.
+4. **A** manually attacks. Choose **Cái Bang Bổng** (frontal melee with reduced cleave) or **Cái Bang Chưởng** (nearest-at-fire straight projectile) from **Võ học** in the top-right HUD. Face the enemy before a melee strike. Holding A does not repeat.
 5. **Q — Hỏa Vân Chưởng:** three paced straight shots. **W — Cuồng Long Loạn Vũ:** exploding fireball and burn. Mana/cooldowns are server-owned. E/R are unassigned and rejected.
 6. Kill a creep and observe gold/XP/level. One fixed reward pool is split among recent damaging participants; inactive players get none. Practice creeps refresh after eight seconds. A fallen hero remains dead in this M1 slice; create a fresh practice room. The full arena respawn flow is M2.
-7. Leave in B or close its tab; A sees the seat removed. Reconnect grace, host/ready rules and in-progress admission remain provisional.
+7. Open **Đồng đội → Leave** in B or close its tab; A sees the seat removed. Reconnect grace, host/ready rules and in-progress admission remain provisional.
 
 The orthogonal arena uses 32px square tiles, original elevated top-down sprites and foot-Y depth sorting. These perspective conventions are confirmed; tile size, palette, 48px frames, damage and economy numbers are provisional. The same presentation conventions apply to later maps when those milestones are requested.
+
+### In-game UI review (v1.5)
+
+The canvas fills the window. **Túi đồ** opens inventory; **Thương gia** opens the merchant/crafting preview; **Phó bản** opens dungeon selection; **Võ học** contains the working normal-attack selector; **Đồng đội** contains players, connection checks and Leave. The merchant stall and gate can also be clicked in the world. Close with **×**, outside click or **Escape** to recover keyboard control. The server keeps running while a menu is open.
+
+Inventory, shop, crafting and PvP are disabled UI previews. **View forest art study** displays a presentation-only forest composition, with the same perspective/scale; it does not enter a dungeon or move the live hero. Use **Return to arena** or Escape. No real dungeon, statue HP or invasion countdown is implemented in M1.
+
+See [UI verification and five captured states](docs/UI_V15_VERIFICATION.md). Reference filenames/content discrepancies are recorded in [the reference inventory](assets/references/README.md). The detailed art direction remains an open approval gate; existing hero/creep art is unchanged.
 
 ### Automated checks
 
@@ -68,7 +70,7 @@ pnpm verify:assets
 pnpm assets:prepare
 ```
 
-`assets/source/m1_art.py` is the editable original source, with deterministic hand-authored pixel primitives. `maps/arena.tmj` is a real orthogonal Tiled-compatible source; preparation copies its JSON into shared data so the server and renderer use the same geometry. The actual manifest records provenance, pivots, frames and **prototype** status. Aseprite/Tiled GUI workflows were not run here; final art approval remains open.
+`assets/source/m1_art.py` and `assets/source/ui_world.py` are editable original sources, with deterministic hand-authored pixel primitives. `maps/arena.tmj` is a real orthogonal Tiled-compatible source; preparation copies its JSON into shared data so the server and renderer use the same geometry. The actual manifest records provenance, pivots, frames and **prototype** status. Aseprite/Tiled GUI workflows were not run here; final art approval remains open.
 
 ### Boundaries and configuration
 
@@ -90,7 +92,7 @@ The dev loop watches shared JS. Restart dev after changing the map or regenerate
 | [`BALANCING.md`](BALANCING.md) | Balance philosophy, XP, enemy scaling, simulation and telemetry |
 | [`ITEMS_AND_CRAFTING.md`](ITEMS_AND_CRAFTING.md) | Item upgrades, 4 slots, boss loot rolls, crafting and inventory |
 | [`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md) | Engine/server decision, package boundaries, netcode and testing |
-| [`ART_ASSET_GUIDE.md`](ART_ASSET_GUIDE.md) | Sprite size proposals, art sourcing, Aseprite/Tiled exports, pixel-art rendering, animation and visual quality gates |
+| [`ART_ASSET_GUIDE.md`](ART_ASSET_GUIDE.md) | **Confirmed camera/perspective**, sprite size proposals, layering/occlusion, art sourcing, exports and animation quality gates |
 | [`ROADMAP.md`](ROADMAP.md) | Milestones, acceptance criteria and incremental delivery sequence |
 | [`ACCEPTANCE_TESTS.md`](ACCEPTANCE_TESTS.md) | Given/when/then checks for confirmed mechanics |
 | [`DECISIONS.md`](DECISIONS.md) | Fixed choices vs proposed defaults; conflict-resolution policy |
@@ -118,3 +120,7 @@ These are **instruction-only** workflows, not executables. They become useful as
 ### Core fantasy
 
 Start level 1 with a school and a manually controlled hero. Farm private or shared dungeons, choose and reassign four active skills, find boss drops, upgrade and craft equipment, and manually return to defend an **unrepairable statue** against **20 invasions every 3 minutes**. Defeat Đông Tà, Tây Độc, Nam Đế, Bắc Cái, then final boss Vương Trùng Dương. Up to six players; a tough solo clear remains possible. Nothing persists after the match ends.
+
+
+## Additional v1.5 concept references
+This package now includes a larger approved reference set under `assets/references/`, covering the central arena/hub, arena combat, forest/desert/sea/hell dungeons, and in-game dungeon/shop/inventory overlays. These references should be read alongside the markdown documents before art/UI implementation or refactor work.

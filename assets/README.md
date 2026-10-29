@@ -18,3 +18,7 @@ Read `ART_ASSET_GUIDE.md` and use `.agents/skills/pixel-art-pipeline/SKILL.md` w
 `pnpm assets:generate` optionally regenerates exports using Pillow 11.3.0. `pnpm verify:assets` checks every nonempty frame, dimensions, bounds and provenance. Normal dev/build needs only committed exports and copies them to ignored client public assets. The map is `maps/arena.tmj`; `scripts/prepare-assets.mjs` feeds identical map JSON to the client and shared validated server data. Browser animation gallery: `/?artPreview=1`.
 
 v1.2 perspective is confirmed: orthographic square tiles, elevated top-down characters, non-rotating follow camera, eight-way movement/four-facing animation, foot-Y scenery depth and foreground canopy occlusion. Use this same convention for future arena/dungeon/PvP content. Palette/detail and final art approval remain open. See `docs/M1_VERIFICATION.md` for actual browser evidence.
+
+## v1.5 UI/environment prototypes
+
+The existing character sheets remain unchanged. `source/ui_world.py` adds original UI icons, destination thumbnails, merchant/gate/statue/lantern/bamboo/bridge/water/foliage studies and refreshed terrain/tree textures. All remain **prototype**, not approved final art. The approved direction PNGs live only in `references/` and are excluded from client assets. See `references/README.md` for actual image contents and packaging discrepancies. The forest composition is presentation-only, with no implemented dungeon gameplay.

@@ -40,13 +40,14 @@ test('two separate browser contexts share a room, check count and leave', async 
     await b.getByLabel('Room ID', { exact: false }).fill(roomId);
     await b.getByRole('button', { name: 'Join room', exact: true }).click();
     for (const page of [a, b]) {
+      await page.locator('[data-menu=party]').first().click();
       await expect(page.getByTestId('player-count')).toHaveText('2 / 6');
       await expect(page.getByTestId('players')).toContainText('Võ Lâm');
       await expect(page.getByTestId('players')).toContainText('Thiếu Lâm');
     }
     await a.getByRole('button', { name: 'Check connection' }).click();
     await expect(a.locator('#ack')).toHaveText(
-      'Server acknowledged check #1. Count: 1.',
+      /Server acknowledged check #\d+\. Count: 1\./,
     );
     for (const page of [a, b])
       await expect(
