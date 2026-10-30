@@ -33,13 +33,31 @@ export function createWorld(config: SimulationConfig, seed = 42): World {
     pending: [],
     shots: [],
   };
+  spawnCreeps(world, config);
+  return world;
+}
+export function spawnCreeps(
+  world: World,
+  config: SimulationConfig,
+  prefix = 'creep',
+): void {
+  world.creeps.clear();
   config.creepSpawns.forEach((spawn, index) =>
     world.creeps.set(
-      `creep_${index}`,
-      makeCreep(`creep_${index}`, spawn, config),
+      `${prefix}_${index}`,
+      makeCreep(`${prefix}_${index}`, spawn, config),
     ),
   );
-  return world;
+}
+export function addCreep(
+  world: World,
+  id: string,
+  spawn: Point,
+  config: SimulationConfig,
+): Creep {
+  const enemy = makeCreep(id, spawn, config);
+  world.creeps.set(id, enemy);
+  return enemy;
 }
 function makeCreep(id: string, spawn: Point, config: SimulationConfig): Creep {
   return {
@@ -69,6 +87,7 @@ export function addHero(
   config: SimulationConfig,
 ): Hero {
   const hero: Hero = {
+    schoolId: 'cai_bang',
     id,
     nickname,
     x: config.spawn.x,
@@ -148,7 +167,7 @@ function hurt(
     1,
     Math.round(
       raw *
-        (100 / (100 + (enemy ? config.creep.defense : 0))) *
+        (100 / (100 + (enemy ? (enemy.stats ?? config.creep).defense : 0))) *
         (critical ? config.critMultiplier : 1),
     ),
   );
@@ -184,20 +203,21 @@ function hurt(
   }
 }
 function reward(world: World, creep: Creep, config: SimulationConfig): void {
+  const stats = creep.stats ?? config.creep;
   const eligible = [...world.heroes.values()]
     .filter(
       (hero) =>
         creep.hits[hero.id] !== undefined &&
-        world.tick - (creep.hits[hero.id] ?? 0) <= config.creep.assistTicks,
+        world.tick - (creep.hits[hero.id] ?? 0) <= stats.assistTicks,
     )
     .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
   eligible.forEach((hero, i) => {
     hero.xp +=
-      Math.floor(config.creep.xp / eligible.length) +
-      (i < config.creep.xp % eligible.length ? 1 : 0);
+      Math.floor(stats.xp / eligible.length) +
+      (i < stats.xp % eligible.length ? 1 : 0);
     hero.gold +=
-      Math.floor(config.creep.gold / eligible.length) +
-      (i < config.creep.gold % eligible.length ? 1 : 0);
+      Math.floor(stats.gold / eligible.length) +
+      (i < stats.gold % eligible.length ? 1 : 0);
     const nextLevel = Math.min(
       config.maxLevel,
       Math.floor(hero.xp / config.xpPerLevel) + 1,
@@ -253,7 +273,8 @@ function perform(
           !config.collision.some(
             (wall) => segmentRect(hero, enemy, wall) !== undefined,
           ) &&
-          distance(hero, enemy) <= effect.range + config.creep.radius &&
+          distance(hero, enemy) <=
+            effect.range + (enemy.stats ?? config.creep).radius &&
           delta.x * hero.fx + delta.y * hero.fy >= Math.cos(effect.halfAngle)
         );
       })
@@ -353,7 +374,7 @@ function advanceProjectile(
         shot,
         end,
         enemy,
-        config.creep.radius + shot.effect.radius,
+        (enemy.stats ?? config.creep).radius + shot.effect.radius,
       ),
     }))
     .filter(
@@ -459,7 +480,15 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     advanceProjectile(world, shot, config);
   for (const [id, enemy] of world.creeps) {
     if (enemy.hp <= 0) {
-      if (world.tick >= enemy.respawnAt)
+      if (enemy.invasion && world.tick >= enemy.respawnAt) {
+        world.creeps.delete(id);
+        continue;
+      }
+      if (
+        !enemy.invasion &&
+        config.creepRespawn !== false &&
+        world.tick >= enemy.respawnAt
+      )
         world.creeps.set(id, makeCreep(id, enemy.spawn, config));
       continue;
     }
@@ -472,54 +501,84 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       enemy.burnNext += config.tickRate;
     }
     if (enemy.hp <= 0) continue;
-    const hero = [...world.heroes.values()]
+    const stats = enemy.stats ?? config.creep;
+    const nearest = [...world.heroes.values()]
       .filter(
         (player) =>
-          player.hp > 0 &&
-          distance(player, enemy) < config.creep.detectionRange,
+          player.hp > 0 && distance(player, enemy) < stats.detectionRange,
       )
       .sort(
         (a, b) =>
           distance(a, enemy) - distance(b, enemy) ||
           (a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
       )[0];
-    const target = hero ?? {
-      x: enemy.spawn.x,
-      y: enemy.spawn.y + (Math.floor(world.tick / 90) % 2 ? 32 : -32),
-    };
+    let hero = nearest;
+    if (enemy.invasion) {
+      const ai = enemy.invasion;
+      hero = world.heroes.get(ai.targetId);
+      if (
+        hero &&
+        (hero.hp <= 0 ||
+          distance(hero, enemy) > ai.chaseRange ||
+          distance(hero, ai.chaseOrigin) > ai.chaseRange)
+      )
+        hero = undefined;
+      if (ai.targetId && !hero) {
+        ai.targetId = '';
+        ai.reacquireAt = world.tick + ai.aggroRestTicks;
+      }
+      if (!hero && world.tick >= ai.reacquireAt && nearest) {
+        hero = nearest;
+        ai.targetId = hero.id;
+        ai.chaseOrigin = { x: enemy.x, y: enemy.y };
+      }
+    }
+    const objective = enemy.invasion ? world.statue : undefined;
+    const target = hero ??
+      objective ?? {
+        x: enemy.spawn.x,
+        y: enemy.spawn.y + (Math.floor(world.tick / 90) % 2 ? 32 : -32),
+      };
     const delta = direction(target.x - enemy.x, target.y - enemy.y);
     const moving =
-      distance(enemy, target) > (hero ? config.creep.attackRange : 2);
+      distance(enemy, target) >
+      (hero
+        ? stats.attackRange
+        : objective
+          ? stats.attackRange + objective.radius
+          : 2);
     if (moving) {
       enemy.fx = delta.x;
       enemy.fy = delta.y;
       moveCircle(
         enemy,
         {
-          x: (delta.x * config.creep.speed) / config.tickRate,
-          y: (delta.y * config.creep.speed) / config.tickRate,
+          x: (delta.x * stats.speed) / config.tickRate,
+          y: (delta.y * stats.speed) / config.tickRate,
         },
-        config.creep.radius,
+        stats.radius,
         config.width,
         config.height,
         config.collision,
       );
     }
-    if (hero && !moving && world.tick >= enemy.cooldown) {
-      enemy.cooldown = world.tick + config.creep.attackCooldownTicks;
+    const victim = hero ?? objective;
+    if (victim && !moving && world.tick >= enemy.cooldown) {
+      enemy.cooldown = world.tick + stats.attackCooldownTicks;
       enemy.actionUntil = world.tick + 12;
       enemy.pose = 'basic_attack';
       emit(world, {
         kind: 'attack',
         sourceId: enemy.id,
-        targetId: hero.id,
+        targetId: victim.id,
         abilityId: 'creep_strike',
         damage: 0,
         critical: false,
         x: enemy.x,
         y: enemy.y,
       });
-      hurt(world, hero, enemy.id, 'creep_strike', config.creep.damage, config);
+      hurt(world, victim, enemy.id, 'creep_strike', stats.damage, config);
+      if (world.statue?.hp === 0) break;
     }
     if (world.tick >= enemy.actionUntil) enemy.pose = moving ? 'walk' : 'idle';
   }

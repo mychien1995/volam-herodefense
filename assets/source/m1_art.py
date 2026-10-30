@@ -79,6 +79,10 @@ def actor(direction, state, frame, enemy=False):
 
 manifest=[]
 for key,enemy in [("hero_cai_bang",False),("creep_outlaw",True)]:
+    if key == 'hero_cai_bang' and (ROOT/'assets/source/characters/cai_bang_v1_6/hero_cai_bang.aseprite').is_file():
+        previous = json.loads((ROOT/'assets/manifest.json').read_text(encoding='utf-8'))
+        manifest.append(next(a for a in previous['assets'] if a['id'] == key))
+        continue  # Never overwrite the director-review Aseprite character with primitive art.
     sheet=Image.new("RGBA",(192,1152));frames={}; animations=[]
     for si,state in enumerate(STATES):
         for di,direction in enumerate(DIRECTIONS):
@@ -93,6 +97,10 @@ for key,enemy in [("hero_cai_bang",False),("creep_outlaw",True)]:
     target=OUT/folder;target.mkdir(parents=True,exist_ok=True);sheet.save(target/f"{key}.png")
     save_json(target/f"{key}.json",{"frames":frames,"meta":{"image":f"{key}.png","size":{"w":192,"h":1152},"scale":"1"}})
     manifest.append({"id":key,"category":"enemy" if enemy else "character","status":"prototype","source":"assets/source/m1_art.py","sheet":f"{folder}/{key}.png","atlas":f"{folder}/{key}.json","frameWidth":48,"frameHeight":48,"footPivot":[0.5,1],"directions":DIRECTIONS,"animations":animations,"license":"Original project artwork; no third-party content","attribution":"Hand-authored pixel primitives for Võ Lâm Hero Defense"})
+chuong_source=ROOT/'assets/source/characters/cai_bang_v1_6/hero_cai_bang_chuong.aseprite'
+if chuong_source.is_file():
+    previous=json.loads((ROOT/'assets/manifest.json').read_text(encoding='utf-8'))
+    manifest.extend(a for a in previous['assets'] if a['id']=='hero_cai_bang_chuong')
 # Four square terrain tiles, deterministic tiny clusters, no smoothing.
 rng=random.Random(19);tiles=Image.new("RGBA",(128,32))
 for tile,base in enumerate(["#66835a","#739362","#b4a083","#718f66"]):
@@ -149,4 +157,4 @@ objects("spawns",[obj(9,"hero_spawn",800,680),obj(10,"creep_0",920,660),obj(11,"
 objects("statue",[obj(15,"statue_future",800,576)]),objects("npc",[]),objects("portal",[])]}
 for layer_id, layer in enumerate(map_data["layers"], 1): layer["id"]=layer_id
 save_json(ROOT/"maps/arena.tmj",map_data)
-print("Exported original M1 prototype: 192 character frames, terrain, tree, effect, manifest and orthogonal map.")
+print("Exported legacy M1 placeholders, manifest and orthogonal map; retained Aseprite hero when present.")

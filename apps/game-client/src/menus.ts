@@ -1,5 +1,11 @@
 export type Menu =
-  'inventory' | 'dungeons' | 'merchant' | 'skills' | 'party' | 'pvp';
+  | 'inventory'
+  | 'dungeons'
+  | 'merchant'
+  | 'skills'
+  | 'party'
+  | 'pvp'
+  | 'settings';
 export const icon = (name: string, extra = ''): string =>
   `<span class="pixel-icon icon-${name} ${extra}" aria-hidden="true"></span>`;
 const unavailable =
@@ -11,9 +17,12 @@ export const menuTitles: Record<Menu, string> = {
   skills: 'Võ Học',
   party: 'Đồng Đội',
   pvp: 'Lôi Đài',
+  settings: 'Cài Đặt',
 };
-export function menuContents(menu: Menu): string {
+export function menuContents(menu: Menu, debug = false): string {
   switch (menu) {
+    case 'settings':
+      return `<div class="settings-controls"><p>↑ ↓ ← → · Di chuyển<br>A · Đánh thường<br>Q W E R · Kỹ năng<br>Escape · Đóng cửa sổ</p><button data-menu="skills">${icon('scroll')} Võ học / đổi đòn đánh</button><button data-menu="party">${icon('party')} Đồng đội / kết nối</button><button id="fullscreen">Toàn màn hình</button>${debug ? '<button id="forest-study">View forest art study</button>' : ''}</div>`;
     case 'inventory':
       return `${unavailable}
       <div class="inventory-layout"><section class="equipment-pane"><h3>Trang bị <small>4 slots</small></h3>
@@ -26,20 +35,21 @@ export function menuContents(menu: Menu): string {
         <div class="window-footer"><span>${icon('gold')} <b class="live-gold">0</b> gold</span><button disabled>Equip</button><button disabled>Drop / Sell</button></div>
       </section></div>`;
     case 'dungeons':
-      return `${unavailable}<p class="menu-intro">Beyond the courtyard, four paths await.</p>
+      return `<p class="dungeon-intro">Bốn vùng đất · Bốn thử thách</p>
       <div class="destinations">${[
-        ['forest', 'Rừng Trúc', 'Forest', 'Bamboo paths · jade streams'],
-        ['desert', 'Sa Mạc', 'Desert', 'Sunlit ruins · ochre dunes'],
-        ['sea', 'Biển', 'Sea', 'Harbor bridges · turquoise tides'],
-        ['hell', 'Địa Ngục', 'Hell', 'Basalt halls · ember light'],
+        ['forest', 'Rừng Trúc', 'Rừng trúc · Suối ngọc'],
+        ['desert', 'Sa Mạc', 'Cát vàng · Cổ tích'],
+        ['sea', 'Biển', 'Đảo xa · Sóng biếc'],
+        ['hell', 'Địa Ngục', 'Dung nham · Hỏa ngục'],
       ]
         .map(
-          ([id, name, en, desc]) =>
-            `<article class="destination ${id}"><div class="destination-art ${id}"></div><h3>${name}</h3><small>${en}</small><p>${desc}</p><span class="locked-tag">Not available in M1</span></article>`,
+          ([id, name, desc]) =>
+            `<button type="button" class="destination ${id}" data-destination="${id}" aria-label="${name}" aria-pressed="${id === 'forest'}" aria-disabled="${id !== 'forest'}"><img class="destination-illustration" src="/assets/dungeon_cards/${id}.png" alt="${desc}"/><span class="destination-copy"><strong>${name}</strong><span>${desc}</span></span>${id === 'forest' ? '<span class="destination-check" aria-hidden="true">✓</span>' : '<span class="destination-availability">Chưa mở</span>'}</button>`,
         )
         .join('')}</div>
-      <div class="dungeon-options"><label>Party <select disabled><option>Private / Shared · pending</option></select></label><label>Encounter <select disabled><option>Creep / Boss · pending</option></select></label></div>
-      <div class="window-footer"><button id="forest-study" class="accent">View forest art study</button><small>Presentation only · no dungeon entry</small><button disabled>Enter dungeon</button></div>`;
+      <div class="dungeon-options"><div class="dungeon-choice"><span>Tổ đội</span><div role="radiogroup" aria-label="Tổ đội"><button type="button" role="radio" data-access="private" aria-checked="true">Riêng</button><button type="button" role="radio" data-access="shared" aria-checked="false">Chung</button></div><input id="dungeon-access" type="hidden" value="private"/></div><div class="dungeon-choice"><span>Thử thách</span><div role="radiogroup" aria-label="Thử thách"><button type="button" role="radio" aria-checked="true">Quái thường</button><button type="button" role="radio" aria-checked="false" disabled title="Phó bản Boss hiện chưa mở">Boss · Chưa mở</button></div></div></div>
+      <p id="dungeon-entry-note" role="status"></p><p id="dungeon-availability" aria-live="polite" hidden></p>
+      <div class="window-footer"><button id="dungeon-close">Đóng</button><button id="enter-dungeon" class="accent" aria-label="Enter dungeon" disabled>Vào Phó Bản</button></div>`;
     case 'merchant':
       return `${unavailable}<div role="tablist" aria-label="Merchant sections" class="menu-tabs"><button role="tab" aria-selected="true" data-shop-tab="shop">Cửa hàng</button><button role="tab" aria-selected="false" data-shop-tab="craft">Chế tạo</button></div>
       <div id="shop-content"><div class="shop-layout"><div class="shop-grid">${[

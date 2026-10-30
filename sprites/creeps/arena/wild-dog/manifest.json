@@ -1,0 +1,1229 @@
+{
+  "id": "creep_wild_dog",
+  "nameVi": "Chó Hoang",
+  "category": "enemy",
+  "status": "prototype",
+  "reviewStatus": "STAGED_NOT_INTEGRATED",
+  "conceptApproval": "User identifies Phase 1A artwork as approved source of truth in current request",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+  "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6",
+  "source": "sprites/creeps/arena/wild-dog/source/creep_wild_dog.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 80,
+  "frameHeight": 80,
+  "footPivot": [
+    0.5,
+    0.8
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "unproducedStates": [],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/idle_down_0.png",
+      "bounds": [
+        31,
+        36,
+        50,
+        64
+      ],
+      "sha256": "750bf790239a586288fac9192072f66f52537676077f101bf08bc50d3b06b6f5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_down_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/idle_down_1.png",
+      "bounds": [
+        30,
+        37,
+        50,
+        64
+      ],
+      "sha256": "565fe7aad01df615919aaeca0013dec2a80699af8d8af15bc74f5819de1b4ee2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_down_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_down_0.png",
+      "bounds": [
+        31,
+        37,
+        50,
+        64
+      ],
+      "sha256": "a7998cbfb2f93a0bb897cf100d9a9dc4097cd4eb804079130dd8c0a1e4eee261",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_down_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_down_1.png",
+      "bounds": [
+        31,
+        37,
+        52,
+        64
+      ],
+      "sha256": "ecf87fc8d7bbad687cf5c526a54cc7321c75a955b32ea93f8eeee7bf5ba5283e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_down_2",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_down_2.png",
+      "bounds": [
+        33,
+        37,
+        51,
+        64
+      ],
+      "sha256": "bdd8a1baeae28e5d4f347b8eb5e571961d336b138a154be45a038ee09f3b23e9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_down_3",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_down_3.png",
+      "bounds": [
+        31,
+        36,
+        52,
+        64
+      ],
+      "sha256": "8d6ab39daa7a781666f96514c7e3dc01350847287d82cbe989d2131ff6130fa1",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_down_0.png",
+      "bounds": [
+        30,
+        37,
+        54,
+        64
+      ],
+      "sha256": "8bef74fb9f94c97c2509c7abb254a13356e392e1cc72f23d7fbc844cf98f1d6c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_down_1.png",
+      "bounds": [
+        30,
+        35,
+        54,
+        64
+      ],
+      "sha256": "e3a5fe74aa122830edeab2800f5e082a4e988f48193e028c2fb54905e6c533a8",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_down_2.png",
+      "bounds": [
+        28,
+        36,
+        53,
+        64
+      ],
+      "sha256": "fe716a2d6948f3a8b91207d7cb7a4cc70e8f0aab9f8303270fe5f5c9a2253e14",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_down_3.png",
+      "bounds": [
+        29,
+        37,
+        52,
+        64
+      ],
+      "sha256": "f877b93df84cbb54ce053cdae4eed2e524f259e2cd68c132a2a9ceb43cc8430d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_left_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/idle_left_0.png",
+      "bounds": [
+        22,
+        39,
+        55,
+        64
+      ],
+      "sha256": "b3438dc297b784db7b891dbc66cd065cff7bc789052f74e2a27dd21e4f51d706",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_left_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/idle_left_1.png",
+      "bounds": [
+        23,
+        39,
+        56,
+        64
+      ],
+      "sha256": "85fb7861d63d14dca390749ca7958f7c624d6b96e0460a99708d6bfe358af7e2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_left_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_left_0.png",
+      "bounds": [
+        23,
+        41,
+        55,
+        64
+      ],
+      "sha256": "6af48a53f4ea8dca1b528a543da5b2243ab0795f8580a9e5cf3bd6e72e628be2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_left_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_left_1.png",
+      "bounds": [
+        22,
+        40,
+        54,
+        64
+      ],
+      "sha256": "3f4cd55f2e5648cf1ad51b1f53c06b627340a81a31aaa71b2945f719ded585be",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_left_2",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_left_2.png",
+      "bounds": [
+        21,
+        40,
+        54,
+        64
+      ],
+      "sha256": "799c2e5bc2b76d746458e2857ff87ca8f428d4fd110214a355fcbb31afe26117",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_left_3",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_left_3.png",
+      "bounds": [
+        23,
+        40,
+        55,
+        64
+      ],
+      "sha256": "8717177a577ba6f4974515528e2ba99e6363b8b9178d530e6b10e68f1229ffd7",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_left_0.png",
+      "bounds": [
+        21,
+        44,
+        54,
+        64
+      ],
+      "sha256": "4382d81ecf9e2a52ddf765909bd983a9856ff48be02c2ca379d91dc7b284ff0f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_left_1.png",
+      "bounds": [
+        26,
+        43,
+        59,
+        64
+      ],
+      "sha256": "cd0f2ba4e693d4f86841aa59193612012d30890f4272d39244d54eadbe44323c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_left_2.png",
+      "bounds": [
+        21,
+        44,
+        56,
+        64
+      ],
+      "sha256": "39073fd5ce67261b72cca86f23b1a7ac831cb9a542e448b02c3ffc2edbfb8074",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_left_3.png",
+      "bounds": [
+        22,
+        40,
+        55,
+        64
+      ],
+      "sha256": "36dfbc36bdb1f0106fb01ec459453401e39105d636289d7bec91ca3e3ba9d7a8",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_right_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/idle_right_0.png",
+      "bounds": [
+        26,
+        39,
+        59,
+        64
+      ],
+      "sha256": "adebe34d9f8aeccbdf4676eb21808e8df741d06ca1385fca71f058dcce9f0de7",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_right_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/idle_right_1.png",
+      "bounds": [
+        27,
+        38,
+        60,
+        64
+      ],
+      "sha256": "494503a11b43a58bf18cb68d9335a80c8b2257ec3c01d338e61a57dcd2e9c5b6",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_right_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_right_0.png",
+      "bounds": [
+        26,
+        41,
+        59,
+        64
+      ],
+      "sha256": "3e07f85f52549ae9313f9e1420e3ae384f35fcfdaff1b52a4f20a200da1523a1",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_right_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_right_1.png",
+      "bounds": [
+        27,
+        39,
+        60,
+        64
+      ],
+      "sha256": "33636077e89c3d87ec01883dcb76fffc6b6f1069c23b28e9fb3ef2fae0695e6c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_right_2",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_right_2.png",
+      "bounds": [
+        26,
+        40,
+        59,
+        64
+      ],
+      "sha256": "ed0b334808300bf64d71b2ae8949e4c37606ab7531e2d04da14621e0ccb04c66",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_right_3",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_right_3.png",
+      "bounds": [
+        26,
+        40,
+        60,
+        64
+      ],
+      "sha256": "e0f0c38dce3d1ef43031a2a3b86af5d8ab9991f458e6cbffd874b76839b9f34e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_right_0.png",
+      "bounds": [
+        26,
+        43,
+        59,
+        64
+      ],
+      "sha256": "e3bde416cc8a1489ffb1ce44844782302d007d99079beaef9924737bc50b3534",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_right_1.png",
+      "bounds": [
+        22,
+        42,
+        54,
+        64
+      ],
+      "sha256": "8b985ff6596e0b510beb5a7e41d1be69f35eb71fc86778f3032e6721115bd0f0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_right_2.png",
+      "bounds": [
+        25,
+        44,
+        60,
+        64
+      ],
+      "sha256": "f3acb60a8af020c95ab2be5b2b19be6746b3521e917872555d6af36375c46ea5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_right_3.png",
+      "bounds": [
+        26,
+        39,
+        59,
+        64
+      ],
+      "sha256": "74f1769ebca44dcb6ff8fa5513a9623cd31db5650d1a95ae5aea688f48b254bc",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_up_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/idle_up_0.png",
+      "bounds": [
+        29,
+        34,
+        51,
+        64
+      ],
+      "sha256": "2b49b724b13f59cee7f20d495517fc020a480d9b872958dbb6683d2ec5a2fe0a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_up_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/idle_up_1.png",
+      "bounds": [
+        28,
+        34,
+        50,
+        64
+      ],
+      "sha256": "1635588a47fc11654c0078eb374a35d44aae95e37bcbef4d91c047fc0fd9b8ed",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_up_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_up_0.png",
+      "bounds": [
+        27,
+        34,
+        50,
+        64
+      ],
+      "sha256": "e388553499f08c4338f0456fcd244c96270ec2d92b208a0cc377ff23bfc8f6b9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_up_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_up_1.png",
+      "bounds": [
+        30,
+        35,
+        51,
+        64
+      ],
+      "sha256": "be4b240bfe70b970c0c3c7f2438454fca600254433c7a46e57b926ece8aa1f31",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_up_2",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_up_2.png",
+      "bounds": [
+        30,
+        35,
+        52,
+        64
+      ],
+      "sha256": "ff5fa80ed03f9fc5f305c9accdfb9ec3a2ac1039e065f346e00a8bdc52b6a131",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_up_3",
+      "file": "sprites/creeps/arena/wild-dog/frames/walk_up_3.png",
+      "bounds": [
+        30,
+        35,
+        51,
+        64
+      ],
+      "sha256": "80e0db07ef4970b6bcdcd31b4da3a3579237678f6836624738b9c4efca19e9d9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_up_0.png",
+      "bounds": [
+        24,
+        36,
+        50,
+        64
+      ],
+      "sha256": "a2f370e8c63da98200238ddcb74262bdbfed6ebc7c0a05bc81c99df0611e3733",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_up_1.png",
+      "bounds": [
+        32,
+        37,
+        60,
+        64
+      ],
+      "sha256": "7ec35ce9f60b1a8a0313722152b8ec296d9ba4e5980f8b1a81cb6b623d350e29",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_up_2.png",
+      "bounds": [
+        27,
+        38,
+        50,
+        64
+      ],
+      "sha256": "6082077347714d3ca73b80c913b005c91264bf219713d2e4812fe5597217e59e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "sprites/creeps/arena/wild-dog/frames/basic_attack_up_3.png",
+      "bounds": [
+        30,
+        36,
+        51,
+        64
+      ],
+      "sha256": "2cce79b761a9b97c7b56435f2f3e27c39f579247fbc1c160f3458c858a67ae3d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/hurt_down_0.png",
+      "bounds": [
+        26,
+        38,
+        54,
+        64
+      ],
+      "sha256": "b39ed7c0069e17f803c1fd2876a74d55dd7a8ff25bc43fd792ebdf2fe3964a22",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/hurt_down_1.png",
+      "bounds": [
+        27,
+        38,
+        54,
+        64
+      ],
+      "sha256": "227606ec9d51d8738da050339df0f6a95acc06a6a5b878d2e1af169193221152",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_down_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_down_0.png",
+      "bounds": [
+        32,
+        39,
+        57,
+        64
+      ],
+      "sha256": "92baf47766d3f0da815f8581adbe27916c4599b3727591d65b4c2c7bace5ff8e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_down_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_down_1.png",
+      "bounds": [
+        29,
+        42,
+        57,
+        64
+      ],
+      "sha256": "f6c79dc899cc9d1517971972e5df2f7915cf5bb9d89b46420460898662437284",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_down_2",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_down_2.png",
+      "bounds": [
+        28,
+        43,
+        59,
+        64
+      ],
+      "sha256": "79b0bc9dbb42c059e7e15dc616cb4e0b8f5b1d4ade9886d801c73ceb82b6e769",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_down_3",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_down_3.png",
+      "bounds": [
+        19,
+        48,
+        58,
+        64
+      ],
+      "sha256": "27eb25e00629673049c75479a5fe4eeb0394356cba9b9baa472b15c0ffca951b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/hurt_left_0.png",
+      "bounds": [
+        26,
+        38,
+        58,
+        64
+      ],
+      "sha256": "8d536935992cebdc28518a98d14d3dc99f157e29aa57b1c9fdf8ca49233a9a44",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/hurt_left_1.png",
+      "bounds": [
+        22,
+        38,
+        55,
+        64
+      ],
+      "sha256": "86f3202e1b89b4422da21c1bdd1f2c5bce527b3a695e9b15e745132295dda6ca",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_left_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_left_0.png",
+      "bounds": [
+        31,
+        41,
+        62,
+        64
+      ],
+      "sha256": "26394b15688c5746086873b187caf1bea19891b6f8e0081e206d4689d785b479",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_left_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_left_1.png",
+      "bounds": [
+        30,
+        45,
+        63,
+        64
+      ],
+      "sha256": "5681b57180fdee24efa116a6190aa5ec77873692b1317de9872cc1e319d3a9ea",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_left_2",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_left_2.png",
+      "bounds": [
+        21,
+        47,
+        60,
+        64
+      ],
+      "sha256": "adc9a80b37fcd528c7b879b0352e8dd0a3adf9c18bacee61af38524dd2b84a71",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_left_3",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_left_3.png",
+      "bounds": [
+        18,
+        49,
+        60,
+        64
+      ],
+      "sha256": "3b3d0df68416bb57b97c506d55f902198b8d3d2606ef2096a0153f8e9f4ef34e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/hurt_right_0.png",
+      "bounds": [
+        21,
+        38,
+        53,
+        64
+      ],
+      "sha256": "4c32e33d344e15818ca46b6c5f503ea40a50ca9283ffcda8e06219df2fdb7d92",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/hurt_right_1.png",
+      "bounds": [
+        29,
+        37,
+        61,
+        64
+      ],
+      "sha256": "05e090df81f006a99dbee043c259acbd03e193224120581d4c5edef3afb0507d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_right_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_right_0.png",
+      "bounds": [
+        27,
+        42,
+        56,
+        64
+      ],
+      "sha256": "331d47f01b3495e57d08503b268025739f5e596950c24f2380ac05fb2aa50895",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_right_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_right_1.png",
+      "bounds": [
+        15,
+        47,
+        49,
+        64
+      ],
+      "sha256": "f33f20b16bb43839ddaf6c818a7d628dcf648ec5906790a733127a73b0501816",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_right_2",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_right_2.png",
+      "bounds": [
+        21,
+        47,
+        60,
+        64
+      ],
+      "sha256": "60013357098b199cb4d622a9151e98b453452e3f6c070bb41e4e0c3ef33302ef",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_right_3",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_right_3.png",
+      "bounds": [
+        21,
+        47,
+        61,
+        64
+      ],
+      "sha256": "4f54cdde6bb3c814d4df6d134d17b8ef07540c65075059acd517a792d5846247",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/hurt_up_0.png",
+      "bounds": [
+        28,
+        34,
+        53,
+        64
+      ],
+      "sha256": "d8bd70037ecc6328f882e268afa5f6115b4481f305b4121c0206175e32de4f5b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/hurt_up_1.png",
+      "bounds": [
+        28,
+        32,
+        53,
+        64
+      ],
+      "sha256": "19eb202123d2e217e9887e0d210744bf54f466a233be4722616c35b2abfa7cbf",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_up_0",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_up_0.png",
+      "bounds": [
+        25,
+        37,
+        51,
+        64
+      ],
+      "sha256": "5a9b0054e3387acdda34102c6340a4b60f32eeaf00e37f9b693485f23aedf8a2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_up_1",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_up_1.png",
+      "bounds": [
+        19,
+        40,
+        49,
+        64
+      ],
+      "sha256": "a3fbb9ea91d0ffa2badd203f367de30c94018dac389ef72209e1fa7a99424802",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_up_2",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_up_2.png",
+      "bounds": [
+        27,
+        43,
+        62,
+        64
+      ],
+      "sha256": "6ab04f5e34a94a2467285418918b796d45da0113f62c501d3f4610e170627126",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_up_3",
+      "file": "sprites/creeps/arena/wild-dog/frames/death_up_3.png",
+      "bounds": [
+        21,
+        47,
+        59,
+        64
+      ],
+      "sha256": "cdc6d79fbdc1896c1d676eba3d7f595500c2787118c7d2028a50cb7e170de436",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    }
+  ],
+  "animationAudit": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": 4,
+      "distinctFrames": 4
+    }
+  ],
+  "provenance": "Original AI-assisted raster poses generated by OpenAI built-in image_gen using approved concept directly. Aseprite extracts masked generated pixels, removes alpha below 220, normalizes retained alpha to 255, applies fixed nearest-neighbour source scale and aligns feet. No concept pixels used as frames; no commercial sprite pack or separate third-party license claimed.",
+  "notes": "Approved dog silhouette retained. All original frontal attacks replaced to keep front-facing bite.",
+  "rejectedMainFrameIndices": [
+    6,
+    7,
+    8,
+    9
+  ],
+  "normalGameplayReview": "PASS: isolated Phaser 4.2.1, 1x logical / 2x display, all frames observed. No match integration or director runtime approval.",
+  "verificationEvidence": [
+    "sprites/creeps/arena/review/phaser_verification.json",
+    "sprites/creeps/arena/review/concept_comparison.png",
+    "sprites/creeps/arena/review/phaser_animation_preview.webm"
+  ]
+}

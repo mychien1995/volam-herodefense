@@ -1,0 +1,43 @@
+<!doctype html><meta charset="utf-8"><title>Staged arena creep sprite verification</title>
+<style>html,body{margin:0;background:#d8cfb3}canvas{display:block;image-rendering:pixelated}</style>
+<script src="/apps/game-client/node_modules/phaser/dist/phaser.js"></script>
+<script>
+const base='/sprites/creeps/arena/';
+const assets=[['wild-dog','creep_wild_dog','Chó Hoang'],['bandit-grunt','creep_bandit_grunt','Thổ Phỉ'],['bandit-swordsman','creep_bandit_swordsman','Sơn Tặc Đao'],['bandit-archer','creep_bandit_archer','Cung Thủ Sơn Tặc']];
+const pose=new URLSearchParams(location.search).get('pose')||'idle';
+const directions=['down','left','right','up'];
+const sprites=[];window.__SPRITE_REVIEW__={ready:false,errors:[]};
+new Phaser.Game({type:Phaser.AUTO,width:640,height:360,zoom:2,pixelArt:true,roundPixels:true,backgroundColor:'#d8cfb3',audio:{noAudio:true},scene:{
+preload(){
+ this.load.atlas('hero','/assets/exports/characters/hero_cai_bang.png','/assets/exports/characters/hero_cai_bang.json');
+ for(const [slug,id]of assets){this.load.atlas(id,base+slug+'/spritesheet.png',base+slug+'/atlas.json');this.load.json(id+'_manifest',base+slug+'/manifest.json');}
+ this.load.on('loaderror',file=>window.__SPRITE_REVIEW__.errors.push(file.url));
+},
+create(){
+ this.cameras.main.setZoom(1);this.textures.get('hero').setFilter(Phaser.Textures.FilterMode.NEAREST);
+ this.add.text(8,5,'STAGED SPRITES · '+pose+' · 1 logical pixel = 2 display pixels',{fontFamily:'Arial',fontSize:'10px',color:'#42372a'});
+ this.add.text(115,24,'Approved hero',{fontFamily:'Arial',fontSize:'9px',color:'#42372a'});
+ directions.forEach((d,i)=>this.add.text(225+i*110,24,d,{fontFamily:'Arial',fontSize:'10px',color:'#42372a'}));
+ assets.forEach(([slug,id,label],row)=>{
+  const y=92+row*80;const m=this.cache.json.get(id+'_manifest');
+  this.add.text(8,y-32,label,{fontFamily:'Arial',fontSize:'10px',color:'#42372a',wordWrap:{width:90}});
+  this.add.sprite(142,y,'hero','idle_down_0').setOrigin(.5,.8);
+  this.textures.get(id).setFilter(Phaser.Textures.FilterMode.NEAREST);
+  directions.forEach((d,col)=>{
+   const anim=m.animations.find(a=>a.state===pose&&a.direction===d);
+   if(!anim)throw Error('Missing '+id+':'+pose+':'+d);
+   for(const frame of anim.frames)if(!this.textures.get(id).has(frame))throw Error('Missing frame '+frame);
+   const key=id+':'+pose+':'+d;
+   this.anims.create({key,frames:anim.frames.map(frame=>({key:id,frame})),frameRate:anim.frameRate,repeat:-1,repeatDelay:pose==='basic_attack'?300:0});
+   const s=this.add.sprite(240+col*110,y,id,anim.frames[0]).setOrigin(...m.footPivot).play(key);
+   s.setData('reviewFrames',anim.frames);sprites.push(s);
+  });
+ });
+ window.__SPRITE_REVIEW__.ready=true;
+ window.__SPRITE_REVIEW__.showFrame=index=>sprites.forEach(s=>{s.anims.pause();const frames=s.getData('reviewFrames');s.setFrame(frames[Math.min(index,frames.length-1)]);});
+ window.__SPRITE_REVIEW__.snapshot=()=>({ready:true,pose,phaser:Phaser.VERSION,errors:window.__SPRITE_REVIEW__.errors,
+ sprites:sprites.map(s=>({animation:s.anims.currentAnim.key,frame:s.frame.name,total:s.anims.currentAnim.frames.length,width:s.frame.width,height:s.frame.height,origin:[s.originX,s.originY]}))});
+}
+}});
+</script>
+

@@ -16,6 +16,7 @@
     "test": "pnpm build:shared && vitest run",
     "test:watch": "pnpm build:shared && vitest",
     "test:e2e": "pnpm build && node tools/run-playwright.mjs test",
+    "test:e2e:invasion": "pnpm build && node tools/run-playwright.mjs test --config playwright.invasion.config.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "verify:handoff": "python scripts/verify_handoff.py",
@@ -23,7 +24,10 @@
     "assets:prepare": "node scripts/prepare-assets.mjs",
     "assets:generate": "python assets/source/m1_art.py && python assets/source/ui_world.py",
     "test:balance": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/m1-balance.ts",
-    "verify:assets": "python scripts/verify-assets.py"
+    "test:balance:m2b": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/m2b-balance.ts",
+    "verify:assets": "python scripts/verify-assets.py && python scripts/verify-arena-art01.py && python scripts/verify-arena-v2.py",
+    "assets:export:arena": "node scripts/export-arena-art01.mjs",
+    "assets:export:visual": "node scripts/export-arena-v2.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

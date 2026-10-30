@@ -1,3 +1,47 @@
+# Current gameplay milestone — M2B, 2026-10-30
+
+**Join correction verified:** non-full rooms remain joinable during school selection and active play. Late entrants select/confirm before spawning, without restarting the match or resetting progression/statue HP/timing. Six seats and defeat closure remain enforced. 98 unit/network tests, two late-join browser scenarios and three existing pre-game browser tests passed; see `docs/LATE_JOIN_FIX.md`. No M2C work.
+
+**M2B — Statue Invasion & Defense System: implemented and verified.** See `docs/M2B_IMPLEMENTATION.md` and `docs/evidence/m2b/` for commands, actual screenshots, prototype tuning and limitations. Reuses M2A simulation, combat, rewards, zone filtering, arena and compact HUD.
+
+- [x] Server match clock starts after all school confirmations. Waves at 3/6/9 minutes; warnings at 60/15 seconds. Validated development override and server-derived in-viewport countdown.
+- [x] Both west/east lanes, three configurable prototype recipes, spawn-time participant scaling, independent overlapping waves. Later waves repeat recipe three; no production 20-wave catalogue.
+- [x] Statue objective and sticky player aggro with configurable detect/chase/reacquire thresholds. Living old waves remain; dead invaders never respawn.
+- [x] Authoritative statue HP at its existing world position, aligned solid pedestal, permanent damage, one terminal defeat transition and no repair/regen.
+- [x] Shared combat/death/EXP/gold pipeline, fixed assist pool, no item drops, no-loss five-second arena respawn.
+- [x] Synchronized public defense state across arena/dungeons; zone-filtered enemies/events and independent match rooms. Warnings never recall dungeon players.
+- [x] Compact statue/wave HUD, hit feedback, warning and in-viewport defeat overlay. Existing character artwork, camera and controls retained.
+- [x] 96 unit/integration tests passed in 11 files; typecheck and production build passed. Production schedule tested with simulated time.
+- [x] Two real Chromium contexts verified shared enemy damage/death/rewards, warnings in a private dungeon, overlap, statue damage and synchronized defeat; responsive checks at 944×466 and 1920×1080. Accelerated test uses six-second intervals and HP300, not production balance.
+- [x] 11 existing browser regressions passed for M1 movement/combat/animations/UI and M2A shared/private dungeon farming/transitions. Existing approved character/atlas validation passed.
+
+**Stop after M2B. M2C has not started.** No chapter/final bosses, crafting, new schools or campaign expansion. Prototype enemy/VFX art and final balance remain outstanding; director visual approval of the arena/dungeon artwork remains pending.
+
+## Completed M2A foundation
+
+**Visual revision within M2A:** expanded arena court/roads, removed interior tree/collider, target-anchored damage and four original selector illustrations are produced, integrated and browser verified. See `docs/ARENA_VISUAL_V2_REVIEW.md`. The compact HUD and existing M2A gameplay are retained. Runtime director visual approval remains pending; this does not start M2B or authorize further environment/character expansion.
+
+**M2A — Creep Dungeon Foundation: implemented and verified in two Chromium clients.** See `docs/M2A_IMPLEMENTATION.md` and `docs/evidence/m2a/` for command results, screenshots, audit and limitations. This explicit gameplay request supersedes the earlier instruction to stop at the pre-game UI phase. Existing arena/HUD composition is retained. Dungeon art uses existing assets/placeholders; ART-01 visual approval is still pending.
+
+- [x] Menu-only dungeon entry through the in-viewport Phó Bản overlay; Dẫn Lộ removed per the latest user instruction.
+- [x] Server-owned private (one per player) and shared (up to six per room) creep instances, separate zone and authoritative collision.
+- [x] Existing A/Q/W combat pipeline awards EXP/gold; E/R remain unequipped. No item drops.
+- [x] Physical exit returns to the arena return point; server validates distance/phase; no recall.
+- [x] Full clear → short rest → scaled next wave. Empty instances preserve HP/position and pause all local timers; re-entry resumes.
+- [x] Automated membership/isolation/pause/resume/transition/reward/cleanup tests and real SDK interest-filtering checks.
+- [x] Two separate browser contexts verified shared synchronization and different private instances without enemy, event or reward leakage; screenshots at 1280×720 and 1920×1080.
+- [x] Minimum missing death dependency: configurable five-second arena recovery, no EXP/gold loss. Final balance defaults remain proposed.
+
+The explicit M2B request above supersedes the earlier M2A stop gate. Boss dungeons, crafting and additional school mechanics remain in their later milestones.
+
+# Earlier UI implementation phases — 2026-10-30
+
+- **Phase 1 (this request):** Landing (exactly one nickname input), real Room Browser, Waiting Lobby with host Start Game, then a dedicated interactive School Selection screen. All clients must confirm before server IN_GAME. No school controls in the waiting lobby. Verify two clients, selection changes, duplicates, disconnect barrier and clock gating.
+- **Phase 2 (requires review before starting):** Main Arena and in-viewport HUD refinement. Existing arena/HUD is preserved as the Phase 1 transition destination, not redesigned here.
+- **Phase 3 (requires later approval):** Inventory, Merchant, Dungeon, Skills, Crafting, PvP modals within viewport. No new backend mechanics inferred from mockup art.
+
+The gameplay milestones below remain unchanged; implementing this pre-game flow does not authorize M2/M3 combat/dungeon expansion.
+
 # Implementation Roadmap — Milestone-based, playable and testable
 
 **Principle:** Codex must deliver one functioning, tested milestone at a time, not an entire untested game. The docs already define the future game, but the first slice is intentionally small. Every milestone ends in runnable commands, observed output, test report and a clear next step.
@@ -66,13 +110,6 @@
 
 The game director rejected a prototype with permanent exterior admin-style sidebar. **Before adding more character schools, dungeons or shops**, run a bounded UI-only refactor using `CODEX_UI_REFACTOR_TASK.md`. Create one large in-match game viewport, layered in-world HUD/hotbar and modal manager. Move existing character, room and creep information out of page sidebars; don't delete functional features. Verify inventory menu and dungeon NPC menu inside the viewport, even if not yet backed by finished item/dungeon mechanics (use explicit disabled preview states). Do not restart earlier completed milestones or rewrite multiplayer/combat. Screenshots and automated tests should verify the new layout with two clients. Subsequent M1/M2/M3 acceptance must use `UI_UX_SPEC.md`; a stand-alone lobby may remain outside play. UI must not block arrow/A/QWER controls when closed.
 
-## v1.5 focused UI checkpoint — implementation verified, review pending (2026-10-29)
+## Mandatory visual checkpoint: ART-01 (v1.6)
 
-- [x] Refactor the existing M1 client into a full-viewport world with compact HUD; remove exterior dashboard/header/footer.
-- [x] In-viewport inventory, merchant/crafting, dungeon selection, loadout, party/connection and PvP preview windows. Keep unavailable transactions/travel disabled.
-- [x] Safe modal focus/input, NPC click isolation, canvas keyboard recovery and unpaused two-client state.
-- [x] Original small UI/environment studies, non-rotating camera/feet depth and explicit prototype provenance.
-- [x] Verify 62 unit/integration tests and 10 Chromium tests; desktop coverage 1280×720, 1920×1080 and 900×640. Preserve five requested screenshot states in `docs/evidence/ui-v15/`.
-- [ ] Game director UI/art review. Detailed Võ Đang character approval and finished environment art remain OPEN.
-
-See `docs/UI_V15_VERIFICATION.md`. M0/M1 implementation history and evidence remain in Git and `docs/M0_VERIFICATION.md` / `docs/M1_VERIFICATION.md`. This checkpoint implements no M2+ gameplay. **Stop here until UI review; do not begin another milestone automatically.**
+Before expanding the full environment or school art set, conduct `ART-01` — a one-screen genuine-art vertical slice as specified in `ART_PRODUCTION_STANDARD.md`. Stop producing entire new maps using procedural placeholders; do an art source audit, produce/import and integrate a complete small set of character, NPC, enemy, tree, building, ground, VFX and UI assets, then show **actual Phaser play screenshots and animation previews** to the game director. Gameplay/infra milestones may be separately verified with placeholders, but art milestones remain unapproved until director sign-off. Run `CODEX_ART_QUALITY_RESCUE_TASK.md` as a focused task in the existing repo.

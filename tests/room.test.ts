@@ -1,7 +1,7 @@
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
 import { boot, type ColyseusTestServer } from '@colyseus/testing';
 import { CloseCode } from '@colyseus/core';
-import { Client } from '@colyseus/sdk';
+import { Client, type Room } from '@colyseus/sdk';
 import {
   PROTOCOL_VERSION,
   MATCH_ROOM,
@@ -34,7 +34,7 @@ describe('real Colyseus room + SDK clients', () => {
     const response = await server.http.get('/health');
     expect(response.data).toEqual({
       status: 'ok',
-      milestone: 'M1',
+      milestone: 'M2B',
       protocolVersion: PROTOCOL_VERSION,
     });
   });
@@ -142,11 +142,23 @@ describe('real Colyseus room + SDK clients', () => {
   });
 });
 
+async function begin(a: Room<MatchRoom>, b?: Room<MatchRoom>) {
+  await expect.poll(() => a.state.players?.size).toBe(b ? 2 : 1);
+  a.send('lobby-action', { action: 'start' });
+  await expect.poll(() => a.state.phase).toBe('SCHOOL_SELECTION');
+  for (const c of b ? [a, b] : [a]) {
+    c.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    c.send('lobby-action', { action: 'confirm' });
+  }
+  await expect.poll(() => a.state.phase).toBe('IN_GAME');
+  if (b) await expect.poll(() => b.state.phase).toBe('IN_GAME');
+}
 describe('M1 authoritative room gameplay', () => {
   it('synchronizes normalized movement and input acknowledgements to two clients', async () => {
     const a = await client.create(MATCH_ROOM, options('First'));
     const b = await client.joinById<MatchRoom>(a.roomId, options('Observer'));
     await expect.poll(() => b.state.players?.size).toBe(2);
+    await begin(a, b);
     const initial = a.state.players.get(a.sessionId)!.x;
     a.send('input', {
       protocolVersion: PROTOCOL_VERSION,
@@ -179,6 +191,7 @@ describe('M1 authoritative room gameplay', () => {
   it('broadcasts one accepted attack and agrees on shared enemy HP', async () => {
     const a = await client.create(MATCH_ROOM, options('Fighter'));
     const b = await client.joinById<MatchRoom>(a.roomId, options('Observer'));
+    await begin(a, b);
     const authoritative = server.getRoomById<MatchRoom>(a.roomId);
     const hero = authoritative.world.heroes.get(a.sessionId)!;
     const enemy = authoritative.world.creeps.get('creep_0')!;
@@ -219,6 +232,8 @@ describe('M1 authoritative room gameplay', () => {
     const other = await client.create(MATCH_ROOM, options('Other room'));
     await a.waitForInitialState();
     await other.waitForInitialState();
+    await begin(a);
+    await begin(other);
     const rejection = a.waitForMessage('command-rejected');
     a.send('input', {
       protocolVersion: PROTOCOL_VERSION,
@@ -272,5 +287,144 @@ describe('M1 authoritative room gameplay', () => {
         .world.heroes.get(other.sessionId)?.x,
     ).toBe(initial);
     expect(other.state.players.size).toBe(1);
+  });
+});
+
+describe('authoritative pre-game phases', () => {
+  it('host gates start, rejects gameplay early, waits for all confirmations and permits duplicates', async () => {
+    const a = await client.create(MATCH_ROOM, options('Host')),
+      b = await client.joinById<MatchRoom>(a.roomId, options('Guest'));
+    const room = server.getRoomById<MatchRoom>(a.roomId);
+    const reject = b.waitForMessage('command-rejected');
+    b.send('lobby-action', { action: 'start' });
+    expect((await reject).reason).toContain('host');
+    expect(room.state.phase).toBe('WAITING_LOBBY');
+    expect(room.world.heroes.size).toBe(0);
+    expect(room.world.tick).toBe(0);
+    const early = a.waitForMessage('command-rejected');
+    a.send('input', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 1,
+      kind: 'basic',
+    });
+    expect((await early).reason).toContain('not begun');
+    a.send('lobby-action', { action: 'start' });
+    await expect.poll(() => room.state.phase).toBe('SCHOOL_SELECTION');
+    const empty = b.waitForMessage('command-rejected');
+    b.send('lobby-action', { action: 'confirm' });
+    expect((await empty).reason).toContain('Choose');
+    a.send('lobby-action', { action: 'select', schoolId: 'vo_dang' });
+    a.send('lobby-action', { action: 'select', schoolId: 'thieu_lam' });
+    a.send('lobby-action', { action: 'confirm' });
+    await expect
+      .poll(() => room.state.players.get(a.sessionId)?.confirmed)
+      .toBe(true);
+    expect(room.state.phase).toBe('SCHOOL_SELECTION');
+    expect(room.world.tick).toBe(0);
+    const locked = a.waitForMessage('command-rejected');
+    a.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    expect((await locked).reason).toContain('not editable');
+    const late = await client.joinById<MatchRoom>(a.roomId, options('Late'));
+    b.send('lobby-action', { action: 'select', schoolId: 'thieu_lam' });
+    b.send('lobby-action', { action: 'confirm' });
+    await expect
+      .poll(() => room.state.players.get(b.sessionId)?.confirmed)
+      .toBe(true);
+    expect(room.state.phase).toBe('SCHOOL_SELECTION');
+    expect(room.world.tick).toBe(0);
+    late.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    late.send('lobby-action', { action: 'confirm' });
+    await expect.poll(() => room.state.phase).toBe('IN_GAME');
+    expect(room.world.heroes.size).toBe(3);
+    expect(room.world.heroes.get(a.sessionId)?.schoolId).toBe('thieu_lam');
+    expect(room.world.heroes.get(b.sessionId)?.level).toBe(1);
+  });
+  it('lets a late player select and spawn without resetting the active match', async () => {
+    const a = await client.create(MATCH_ROOM, options('Host'));
+    await begin(a);
+    const room = server.getRoomById<MatchRoom>(a.roomId),
+      original = room.world.heroes.get(a.sessionId)!;
+    original.xp = 45;
+    original.gold = 19;
+    room.world.statue!.hp = 1750;
+    const tick = room.world.tick,
+      deadline = room.simulation.invasion!.nextWaveTick;
+    const b = await client.joinById(a.roomId, options('Late'));
+    await expect.poll(() => b.state.players?.size).toBe(2);
+    expect(b.state.phase).toBe('IN_GAME');
+    expect(b.state.players.get(b.sessionId).confirmed).toBe(false);
+    expect(room.simulation.hero(b.sessionId)).toBeUndefined();
+    const early = b.waitForMessage('command-rejected');
+    b.send('input', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 1,
+      kind: 'basic',
+    });
+    expect((await early).reason).toContain('confirm');
+    const dungeon = b.waitForMessage('command-rejected');
+    b.send('dungeon-action', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: 2,
+      action: 'enter',
+      access: 'private',
+    });
+    expect((await dungeon).reason).toContain('confirm');
+    b.send('lobby-action', { action: 'select', schoolId: 'vo_dang' });
+    b.send('lobby-action', { action: 'confirm' });
+    await expect
+      .poll(() => b.state.players.get(b.sessionId)?.confirmed)
+      .toBe(true);
+    await expect
+      .poll(() => a.state.players.get(b.sessionId)?.hp)
+      .toBe(room.simulation.base.maxHp);
+    expect(room.simulation.hero(b.sessionId)).toMatchObject({
+      schoolId: 'vo_dang',
+      level: 1,
+      xp: 0,
+      gold: 0,
+      skillPoints: 1,
+    });
+    expect(room.world.heroes.get(a.sessionId)).toBe(original);
+    expect(original).toMatchObject({ xp: 45, gold: 19 });
+    expect(room.world.statue!.hp).toBe(1750);
+    expect(room.world.tick).toBeGreaterThan(tick);
+    expect(room.simulation.invasion!.nextWaveTick).toBe(deadline);
+    const repeated = b.waitForMessage('command-rejected');
+    b.send('lobby-action', { action: 'confirm' });
+    expect((await repeated).reason).toContain('not editable');
+    expect(room.world.heroes.size).toBe(2);
+  });
+  it('keeps the six-seat limit and reopens an active seat after a pending entrant leaves', async () => {
+    const a = await client.create(MATCH_ROOM, options('Host'));
+    await begin(a);
+    const guests = [];
+    for (let n = 0; n < 5; n++)
+      guests.push(await client.joinById(a.roomId, options(`Late${n}`)));
+    await expect(
+      client.joinById(a.roomId, options('Seventh')),
+    ).rejects.toThrow();
+    await guests[0]!.leave();
+    const replacement = await client.joinById(a.roomId, options('Replacement'));
+    await expect.poll(() => replacement.state.players?.size).toBe(6);
+    expect(server.getRoomById<MatchRoom>(a.roomId).world.heroes.size).toBe(1);
+  });
+  it('holds selection safely after a disconnect without timeout or auto-selection', async () => {
+    const a = await client.create(MATCH_ROOM, options('Host')),
+      b = await client.joinById<MatchRoom>(a.roomId, options('Guest'));
+    const room = server.getRoomById<MatchRoom>(a.roomId);
+    a.send('lobby-action', { action: 'start' });
+    await expect.poll(() => room.state.phase).toBe('SCHOOL_SELECTION');
+    await b.leave();
+    await expect
+      .poll(() => room.state.players.get(b.sessionId)?.connected)
+      .toBe(false);
+    a.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    a.send('lobby-action', { action: 'confirm' });
+    await expect
+      .poll(() => room.state.players.get(a.sessionId)?.confirmed)
+      .toBe(true);
+    expect(room.state.phase).toBe('SCHOOL_SELECTION');
+    expect(room.world.tick).toBe(0);
+    expect(room.state.players.get(b.sessionId)?.schoolId).toBe('');
   });
 });

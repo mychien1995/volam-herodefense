@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "id": "arena_creeps_waves_01_04_concept_v1",
+  "createdOn": "2026-10-30",
+  "status": "concept_pending_director_approval",
+  "scope": "Four arena invasion enemy concepts only",
+  "assetType": "master_concept_sheet",
+  "image": "arena_creeps_01_04_master_v1.png",
+  "source": {
+    "method": "OpenAI built-in image_gen.imagegen",
+    "mode": "reference-guided generation followed by two correction passes",
+    "originalGeneratedFilename": "exec-3300742e-cff4-4a39-b00b-c5d82853a039.png",
+    "provenance": "Original AI-assisted concept artwork generated for this project using existing project references. No commercial sprite pack imported. No separate third-party asset license or exclusive copyright is asserted.",
+    "references": [
+      "assets/references/cai_bang_character_reference.png",
+      "assets/exports/characters/hero_cai_bang_idle.png"
+    ],
+    "referenceOwnership": "Existing project references; underlying reference ownership not independently verified."
+  },
+  "characters": [
+    {
+      "id": "cho_hoang",
+      "nameVi": "Chó Hoang",
+      "nameEn": "Wild Dog",
+      "design": "Small aggressive brown-gray feral dog, pointed ears, pale muzzle/chest and compact low quadruped silhouette.",
+      "suggestedBodyHeightLogicalPx": [
+        24,
+        27
+      ],
+      "palette": "Charcoal brown, gray-brown, warm brown and tan."
+    },
+    {
+      "id": "tho_phi",
+      "nameVi": "Thổ Phỉ",
+      "nameEn": "Bandit Grunt",
+      "design": "Ragged ochre tunic, messy hair, cloth headband, rope belt, cropped dark trousers and crude wooden club.",
+      "suggestedBodyHeightLogicalPx": [
+        40,
+        42
+      ],
+      "palette": "Ochre, weathered brown, cream and charcoal."
+    },
+    {
+      "id": "son_tac_dao",
+      "nameVi": "Sơn Tặc Đao",
+      "nameEn": "Bandit Swordsman",
+      "design": "Stockier slate-blue bandit, tied head wrap, leather shoulder guard and broad curved Chinese dao.",
+      "suggestedBodyHeightLogicalPx": [
+        44,
+        46
+      ],
+      "palette": "Slate blue, desaturated indigo, leather brown, brass and steel."
+    },
+    {
+      "id": "cung_thu_son_tac",
+      "nameVi": "Cung Thủ Sơn Tặc",
+      "nameEn": "Bandit Archer",
+      "design": "Olive headscarf and short robe, light leather armor, curved wooden bow and diagonal quiver with pale fletching.",
+      "suggestedBodyHeightLogicalPx": [
+        42,
+        44
+      ],
+      "palette": "Olive, sage, brown leather, ivory and charcoal."
+    }
+  ],
+  "views": [
+    "front",
+    "back",
+    "left",
+    "right"
+  ],
+  "viewOrderByRow": [
+    [
+      "front",
+      "back",
+      "right",
+      "left"
+    ],
+    [
+      "front",
+      "back",
+      "left",
+      "right"
+    ],
+    [
+      "front",
+      "back",
+      "left",
+      "right"
+    ],
+    [
+      "front",
+      "back",
+      "right",
+      "left"
+    ]
+  ],
+  "scale": {
+    "status": "approximate_concept_only",
+    "approvedHeroBodyHeightLogicalPx": 44,
+    "approvedHeroCanvasPx": [
+      80,
+      80
+    ],
+    "notes": "Generated comparison heroes are visual approximations of the existing Cái Bang hero, not untouched copies of runtime pixels. Proposed enemy logical dimensions are brief targets, not measured or validated sprite bounds."
+  },
+  "animationTags": [],
+  "pivot": null,
+  "runtimeIntegration": false,
+  "checks": {
+    "visuallyInspected": true,
+    "allFourRequestedEnemiesPresent": true,
+    "allFourFacingsPresent": true,
+    "paletteSwatchesPresent": true,
+    "heroComparisonPerEnemyPresent": true,
+    "gameplayZoomVerified": false
+  },
+  "concerns": [
+    "Archer bow handedness varies between front and rear/side views; settle carrying hand before production.",
+    "Scale comparisons are illustrative; grunt appears close to or slightly above hero height despite the slightly shorter brief target.",
+    "Dog retains a wolf-like scruffy silhouette; director should confirm it reads as Chó Hoang.",
+    "Pixel clustering and exact palette/foot pivots require separate production work after design approval."
+  ],
+  "files": [
+    "arena_creeps_01_04_master_v1.png",
+    "concept_manifest_v1.json",
+    "generation_prompts_v1.json",
+    "README.md"
+  ],
+  "stopCondition": "Stop at these four concepts; no sprites, animation atlases, integration, other enemies, dungeons, bosses, maps, skills or UI.",
+  "dimensionsPx": [
+    1536,
+    1024
+  ],
+  "sha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+}

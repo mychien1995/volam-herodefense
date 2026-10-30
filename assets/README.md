@@ -11,7 +11,13 @@
 
 Read `ART_ASSET_GUIDE.md` and use `.agents/skills/pixel-art-pipeline/SKILL.md` when importing/animating assets.
 
-## M1 actual original prototype set
+## v1.6 Cái Bang candidate (supersedes the hero details below)
+
+The hero now has separate editable Aseprite Bổng and Chưởng sources and original AI-generated raster poses: 44 Bổng frames (six-pose side sweeps) and 40 unarmed Chưởng frames, each with 12 authored tags, transparent 80×80 canvases and foot pivot (40,64). Both were **APPROVED as the initial visual quality baseline on 2026-10-30**. Their source/export bytes are protected by assets/approved_cai_bang.lock.json. Other artwork remains the procedural placeholders described below. Cast/hurt/death reuse poses and are not newly authored animation sets.
+
+See `ASSET_MANIFEST.md`, `ART_AUDIT_2026_10_29.md`, `source/characters/cai_bang_v1_6/README.md` and `reviews/cai_bang_v1_6/REVIEW.md` for provenance, prompts, source/export instructions and actual Phaser evidence. `node scripts/export-cai-bang.mjs` re-exports the editable source without replacing manual cels. The old primitive generator is guarded against overwriting this hero.
+
+## M1 actual original prototype set (historical)
 
 `manifest.json` describes **real** exports: `hero_cai_bang`, `creep_outlaw`, terrain, tree and fire effect. Each character has 96 PNG atlas frames (six states × four facings × four frames). Editable source is the original deterministic `source/m1_art.py` script; no borrowed assets, external sprite packs or proprietary game content are used. This is simple prototype artwork, not approved final art.
 

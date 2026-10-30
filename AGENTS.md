@@ -48,3 +48,7 @@ This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D
 - `.agents/skills/pixel-art-pipeline/`: original/licensed sprite and VFX asset workflow, atlas export, Phaser loading and browser visual checks.
 
 These instructions are executable **workflows** only after the relevant code/tooling exists. They are not a replacement for tests.
+
+## v1.6 Mandatory visual production gate
+
+Read `ART_PRODUCTION_STANDARD.md` and inspect `assets/references/current_game_2026_10_29_placeholder_anti_reference.png` before any more environment/character/UI art work. The current screenshot is **visually rejected** as placeholder-level art, despite improved HUD layout. **Never use procedural Phaser Graphics or crude programmatically pixelated rectangles/trees as final art.** Require real original/licensed spritesheet PNGs, tilesets, and UI art, actual-run screenshot comparisons, an asset provenance manifest and explicit director approval at normal gameplay zoom. Complete an `ART-01` one-screen hero + environment art quality vertical slice before expanding the world. Phaser 4 is retained; asset production is distinct from asset integration. See `CODEX_ART_QUALITY_RESCUE_TASK.md`.

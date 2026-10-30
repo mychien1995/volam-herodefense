@@ -1,0 +1,1229 @@
+{
+  "id": "creep_bandit_archer",
+  "nameVi": "Cung Thủ Sơn Tặc",
+  "category": "enemy",
+  "status": "prototype",
+  "reviewStatus": "STAGED_NOT_INTEGRATED",
+  "conceptApproval": "User identifies Phase 1A artwork as approved source of truth in current request",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+  "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6",
+  "source": "sprites/creeps/arena/bandit-archer/source/creep_bandit_archer.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 80,
+  "frameHeight": 80,
+  "footPivot": [
+    0.5,
+    0.8
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "unproducedStates": [],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/idle_down_0.png",
+      "bounds": [
+        23,
+        21,
+        56,
+        64
+      ],
+      "sha256": "0950fe4c9a19e0dcfcc680f63085b4dab27ceb7bd04fe21306f33951ea90d9e3",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_down_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/idle_down_1.png",
+      "bounds": [
+        23,
+        21,
+        57,
+        64
+      ],
+      "sha256": "713f3b6ccc63bb83d63a0d762fa8085c81aa4d0cc31211717a7de9dffeb81795",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_down_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_down_0.png",
+      "bounds": [
+        22,
+        21,
+        57,
+        64
+      ],
+      "sha256": "1e4620b72db729363bdc7434afdf8e12d3a9059496c9b2d407ab0e02c67799da",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_down_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_down_1.png",
+      "bounds": [
+        23,
+        21,
+        57,
+        64
+      ],
+      "sha256": "01b2eff459ffa52190701a591c98ecbd71d3d0963268c102426e8a9abe7caced",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_down_2",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_down_2.png",
+      "bounds": [
+        23,
+        21,
+        56,
+        64
+      ],
+      "sha256": "1ae085c2e0bb2f5afceb907ec33c51b508156bb128293a1d7382272e651e6f53",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_down_3",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_down_3.png",
+      "bounds": [
+        23,
+        21,
+        58,
+        64
+      ],
+      "sha256": "aedcb20a4f013e1c086721f3a68235b4e0fef4dfe577e0e628a1dd65647effcd",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_down_0.png",
+      "bounds": [
+        21,
+        21,
+        61,
+        64
+      ],
+      "sha256": "130cd39252dd3cb38b7eefb8432066674b01fc11ea603d10dcbb7a4399448eeb",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_down_1.png",
+      "bounds": [
+        23,
+        21,
+        61,
+        64
+      ],
+      "sha256": "b4c48ffd8f45bde37d5cd9714a0a7ae326c7e669b6626d0cb6f733cb4ae7026a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_down_2.png",
+      "bounds": [
+        24,
+        21,
+        63,
+        64
+      ],
+      "sha256": "132adf69351bfceab0bbb2ac8d4062fae08158b2f7d09dfaf76be9d572c2af3f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_down_3.png",
+      "bounds": [
+        24,
+        21,
+        59,
+        64
+      ],
+      "sha256": "bb28e3a0e817e95cfa740938b8db0f2457fc33d60c7685260fb0b19dfef74217",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_left_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/idle_left_0.png",
+      "bounds": [
+        24,
+        21,
+        57,
+        64
+      ],
+      "sha256": "cd71dabcdd1306907ebdcdcb3e9802dff9db85a2b1c190d32daef14564b1b021",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_left_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/idle_left_1.png",
+      "bounds": [
+        24,
+        22,
+        56,
+        64
+      ],
+      "sha256": "ddcd54aa38e2fe989bdb496d4da446c4b27e9f8234ac64b605d36b7e9d3c9077",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_left_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_left_0.png",
+      "bounds": [
+        24,
+        22,
+        55,
+        64
+      ],
+      "sha256": "6ff10dc33bdf2ddf2d67aabd971b295189baf3c93ebba281348aa7e63f71b449",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_left_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_left_1.png",
+      "bounds": [
+        23,
+        22,
+        55,
+        64
+      ],
+      "sha256": "0eea58b65593c6f478adf1afc6308782f4d5a04836e5d4925cf2cc32950b3fcf",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_left_2",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_left_2.png",
+      "bounds": [
+        23,
+        22,
+        55,
+        64
+      ],
+      "sha256": "4ef6618e8a3d9ade00336470e91bf225f701eb45767c243c7aecdc5cb24bc8bf",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_left_3",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_left_3.png",
+      "bounds": [
+        23,
+        22,
+        56,
+        64
+      ],
+      "sha256": "a7428ed1421183a623de60337c3bd932e83b97a3178aa8fd59a2b748ea3bf2f8",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_left_0.png",
+      "bounds": [
+        23,
+        21,
+        56,
+        64
+      ],
+      "sha256": "eefa595f6f353070ad3d9abbf675ae5b93ad3d8082f8ba4d661cffb2b86fc49b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_left_1.png",
+      "bounds": [
+        17,
+        20,
+        57,
+        64
+      ],
+      "sha256": "c3a8fda255af27816eed8fd4873223bf52ef6c096a9388341cdbeb1743085f9a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_left_2.png",
+      "bounds": [
+        18,
+        21,
+        57,
+        64
+      ],
+      "sha256": "73b89e00c7dd9419152e58f8638e9c917d6046ed687c3585252db12170ffe184",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_left_3.png",
+      "bounds": [
+        24,
+        21,
+        55,
+        64
+      ],
+      "sha256": "8fd6be21e648f8fae690f8bef6546d8049fb6fd1142d0eccbfa76a7462f37c65",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_right_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/idle_right_0.png",
+      "bounds": [
+        26,
+        21,
+        59,
+        64
+      ],
+      "sha256": "3933c173f85dc532d5690a343505c3747a64c174f18cb7e0e8d6ea763396318f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_right_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/idle_right_1.png",
+      "bounds": [
+        25,
+        21,
+        58,
+        64
+      ],
+      "sha256": "fa337cefbdf4622cb5ebcedef65d48298a3f3a06377d653d7aa25f67837000b8",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_right_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_right_0.png",
+      "bounds": [
+        24,
+        21,
+        59,
+        64
+      ],
+      "sha256": "c083f481cedd4f4a04f733422c7df026221fe1ee27e34e16ee0b1357e68d0491",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_right_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_right_1.png",
+      "bounds": [
+        24,
+        21,
+        58,
+        64
+      ],
+      "sha256": "9df54d5c6f6ef901a0ff45452119c70b550b9f35489fdcba2803fb7cd81cdca2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_right_2",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_right_2.png",
+      "bounds": [
+        24,
+        21,
+        59,
+        64
+      ],
+      "sha256": "366a4b4f592abbb83f0d2a973f3d08a75aa9ec9c22ae989ae68c54b31c9481c5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_right_3",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_right_3.png",
+      "bounds": [
+        24,
+        21,
+        59,
+        64
+      ],
+      "sha256": "488bc3d974e3917c62ae2cd2714db2adc7b7f4f1ac10050807e434b886d176ac",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_right_0.png",
+      "bounds": [
+        24,
+        21,
+        57,
+        64
+      ],
+      "sha256": "e4506fcb300e191bbdb1a78edc65afd610b6f793ee412da4422a3b624bd61581",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_right_1.png",
+      "bounds": [
+        24,
+        21,
+        66,
+        64
+      ],
+      "sha256": "12e0c0b68b3159a89200b96a8d23d7418b811364303a05078d4cd80207a6ab4f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_right_2.png",
+      "bounds": [
+        23,
+        21,
+        65,
+        64
+      ],
+      "sha256": "ffd2042db1592918f3094e89df86eb5ea7bb6704111ca0ad8c64b8cb108896a6",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_right_3.png",
+      "bounds": [
+        24,
+        21,
+        57,
+        64
+      ],
+      "sha256": "7a0651882fc732914d1c10e4de2c29fa2d34352d4594a2872a727a6fbdf0d790",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_up_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/idle_up_0.png",
+      "bounds": [
+        21,
+        21,
+        57,
+        64
+      ],
+      "sha256": "c16b27828949ed2dfc11fba63128535b3d325682719e28855d2322cee9c3f7da",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_up_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/idle_up_1.png",
+      "bounds": [
+        22,
+        21,
+        57,
+        64
+      ],
+      "sha256": "fb4664d48ff17c6cf9a7af188dcd1aa3a0bac4d22f5547d66c9fa897c084f822",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_up_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_up_0.png",
+      "bounds": [
+        23,
+        20,
+        59,
+        64
+      ],
+      "sha256": "87cabab12302966abfe1c4bcc7f39d374e3a79ab4dd2c83ea5680baecadc1f8b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_up_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_up_1.png",
+      "bounds": [
+        23,
+        21,
+        59,
+        64
+      ],
+      "sha256": "9c33328a47a16bac244bbc0b5e009fcc4786db3386759de269b5a8822efc6dbc",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_up_2",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_up_2.png",
+      "bounds": [
+        25,
+        20,
+        60,
+        64
+      ],
+      "sha256": "eb1ccce00ab47eb6ad8966bf0a86962f8aed8c6eb7679fe331bb350e3fd7fa46",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_up_3",
+      "file": "sprites/creeps/arena/bandit-archer/frames/walk_up_3.png",
+      "bounds": [
+        23,
+        21,
+        57,
+        64
+      ],
+      "sha256": "758f930239aed43bac5c0c1d43c870d36f479c36c84d0e4e9f58a17cf420f60c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_up_0.png",
+      "bounds": [
+        24,
+        21,
+        57,
+        64
+      ],
+      "sha256": "0e5bdbf0e619dea04efac7889bb0362e088b1762786a0de3be4d4bcf92faf060",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_up_1.png",
+      "bounds": [
+        23,
+        18,
+        55,
+        64
+      ],
+      "sha256": "a391d068d78a006e197aa04b8fb18863b5bd9bd07c1d673988c0205a75518fb8",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_up_2.png",
+      "bounds": [
+        23,
+        20,
+        57,
+        64
+      ],
+      "sha256": "b07b98fe2fb67c42573a6e335f490078f69612c69688daf688eee6fa57528670",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "sprites/creeps/arena/bandit-archer/frames/basic_attack_up_3.png",
+      "bounds": [
+        25,
+        21,
+        58,
+        64
+      ],
+      "sha256": "1bc8f5cad862f5b55e1b064b49d5950541fc6d77c08b721d58178ad975c3600e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/hurt_down_0.png",
+      "bounds": [
+        22,
+        21,
+        57,
+        64
+      ],
+      "sha256": "2d7d5c5a1ed6c3945871bec3950562a93db55123e97ab201f1a156e1a3f70cff",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/hurt_down_1.png",
+      "bounds": [
+        20,
+        21,
+        56,
+        64
+      ],
+      "sha256": "7c35ca2517c4dc9d7678f466dc3d85bb54ab77f9fa6f513c1ec820927cbbbef5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_down_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_down_0.png",
+      "bounds": [
+        18,
+        24,
+        54,
+        64
+      ],
+      "sha256": "c27ec0318434c313dc5c28c23681f6c1e2741a4ed01f033736771acf3f4d8086",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_down_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_down_1.png",
+      "bounds": [
+        16,
+        32,
+        55,
+        64
+      ],
+      "sha256": "97382e3797dd0483f6e1316dcb8fb5801761cc6f5d115f9c300747a6c86ae5cb",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_down_2",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_down_2.png",
+      "bounds": [
+        20,
+        40,
+        69,
+        64
+      ],
+      "sha256": "f12be17853428394bc10c8f40757c9edef09453d78a95a8cc9ad8f87500a6980",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_down_3",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_down_3.png",
+      "bounds": [
+        23,
+        41,
+        77,
+        64
+      ],
+      "sha256": "f7730a38c9edb8f859c2945a2d1a41112f4217a0a97680b7b99dc6a3a5481a6a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/hurt_left_0.png",
+      "bounds": [
+        20,
+        20,
+        55,
+        64
+      ],
+      "sha256": "24f5b3a013d61e95f4ef40bedc66aa2800464f3272483ce7f2ada8f35ae18dc9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/hurt_left_1.png",
+      "bounds": [
+        18,
+        20,
+        55,
+        64
+      ],
+      "sha256": "fcd0601a7c4f4ac83dd330b78b0218ab63d201dd488c712610d3f59c630d25a8",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_left_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_left_0.png",
+      "bounds": [
+        17,
+        26,
+        53,
+        64
+      ],
+      "sha256": "8c29e06f741e00561b198563a6db66e950a0e41cda18d42e37bd983bfbb7d972",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_left_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_left_1.png",
+      "bounds": [
+        15,
+        31,
+        57,
+        64
+      ],
+      "sha256": "4ee026d0451c504db517a03a86faa5937c9df11afb5725babc41d16ef67f02c6",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_left_2",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_left_2.png",
+      "bounds": [
+        15,
+        42,
+        67,
+        64
+      ],
+      "sha256": "dbf88eddf65c23823824677b15a571baa68ec81131f4966fb47ab091b9949c07",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_left_3",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_left_3.png",
+      "bounds": [
+        22,
+        42,
+        77,
+        64
+      ],
+      "sha256": "56a4d6ac04bf26e84e7d98c9d31b61d45b4819b3073417a9fb4f066c18a8ac8f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/hurt_right_0.png",
+      "bounds": [
+        24,
+        22,
+        63,
+        64
+      ],
+      "sha256": "abad6eecc74b0dd64f1d4e2220922302b0ed407097d449b77d8c317ddf2435e0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/hurt_right_1.png",
+      "bounds": [
+        24,
+        21,
+        60,
+        64
+      ],
+      "sha256": "dbc2571b324c883ba4c85e340fbcfba78849f1a5bd588889de96ed337b3e1439",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_right_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_right_0.png",
+      "bounds": [
+        27,
+        24,
+        63,
+        64
+      ],
+      "sha256": "277bc7f712b4929095bec3648804472c9505d614a531f6b4d597c6e4f5cf6db7",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_right_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_right_1.png",
+      "bounds": [
+        24,
+        29,
+        65,
+        64
+      ],
+      "sha256": "6ab5f090be8791fd8830cd40d0502b2d34270bb9dbe5af035d85217bb34044cc",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_right_2",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_right_2.png",
+      "bounds": [
+        17,
+        42,
+        72,
+        64
+      ],
+      "sha256": "9d54e52468c7b560f87af9a3ddb295941546a045977b18a63ad63a99175a81b7",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_right_3",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_right_3.png",
+      "bounds": [
+        12,
+        40,
+        65,
+        64
+      ],
+      "sha256": "2b77df2108a4844b774b5fd237f93a64ef144418f102e4af31672ebb029999a8",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/hurt_up_0.png",
+      "bounds": [
+        24,
+        23,
+        60,
+        64
+      ],
+      "sha256": "d7688daaa6813098870c74a7c1cc3124ff1d537db688437dfbadce38809fc3bf",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/hurt_up_1.png",
+      "bounds": [
+        24,
+        22,
+        58,
+        64
+      ],
+      "sha256": "d3a8ebc795244f32d20e9b649cd56e7396a2ead803d6f092930a7017539a0d52",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_up_0",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_up_0.png",
+      "bounds": [
+        28,
+        25,
+        64,
+        64
+      ],
+      "sha256": "e69accd86ab020cd28c8afb1318ee5ad378f50c02863d8480c0385fae4662ac9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_up_1",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_up_1.png",
+      "bounds": [
+        26,
+        33,
+        68,
+        64
+      ],
+      "sha256": "2d4624b894f8d1fe4f6fc36a179c71d11e5ade0ea1f58d75c7c7992f4cdc1f86",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_up_2",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_up_2.png",
+      "bounds": [
+        20,
+        40,
+        70,
+        64
+      ],
+      "sha256": "c3f064229ddd9aeccac44741d4380e84d66b5fa6c1228be54db94476bd73b11a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_up_3",
+      "file": "sprites/creeps/arena/bandit-archer/frames/death_up_3.png",
+      "bounds": [
+        16,
+        42,
+        72,
+        64
+      ],
+      "sha256": "8794a66aa7ecbaac352769faa41075620a23f9dfa308059c4ddb44f8603945a8",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    }
+  ],
+  "animationAudit": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": 4,
+      "distinctFrames": 4
+    }
+  ],
+  "provenance": "Original AI-assisted raster poses generated by OpenAI built-in image_gen using approved concept directly. Aseprite extracts masked generated pixels, removes alpha below 220, normalizes retained alpha to 255, applies fixed nearest-neighbour source scale and aligns feet. No concept pixels used as frames; no commercial sprite pack or separate third-party license claimed.",
+  "notes": "Original frontal shots aim sideways and are rejected. Corrected front shooting poses retain face and aim down; carries bow in concept hand and raises it into shooting hand. Hand transfer continuity remains a review point.",
+  "rejectedMainFrameIndices": [
+    6,
+    7,
+    8,
+    9
+  ],
+  "normalGameplayReview": "PASS: isolated Phaser 4.2.1, 1x logical / 2x display, all frames observed. No match integration or director runtime approval.",
+  "verificationEvidence": [
+    "sprites/creeps/arena/review/phaser_verification.json",
+    "sprites/creeps/arena/review/concept_comparison.png",
+    "sprites/creeps/arena/review/phaser_animation_preview.webm"
+  ]
+}

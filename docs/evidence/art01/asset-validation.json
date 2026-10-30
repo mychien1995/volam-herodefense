@@ -1,0 +1,909 @@
+{
+  "sources": [
+    {
+      "path": "assets/source/arena_art01/ambient.aseprite",
+      "frames": 12,
+      "width": 224,
+      "height": 224
+    },
+    {
+      "path": "assets/source/arena_art01/arena_ground.aseprite",
+      "frames": 1,
+      "width": 1600,
+      "height": 1152
+    },
+    {
+      "path": "assets/source/arena_art01/garden.aseprite",
+      "frames": 4,
+      "width": 224,
+      "height": 224
+    },
+    {
+      "path": "assets/source/arena_art01/hud.aseprite",
+      "frames": 16,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "assets/source/arena_art01/hud_frames.aseprite",
+      "frames": 6,
+      "width": 640,
+      "height": 192
+    },
+    {
+      "path": "assets/source/arena_art01/hud_states.aseprite",
+      "frames": 3,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "assets/source/arena_art01/icon_palm.aseprite",
+      "frames": 1,
+      "width": 64,
+      "height": 64
+    },
+    {
+      "path": "assets/source/arena_art01/wall.aseprite",
+      "frames": 1,
+      "width": 64,
+      "height": 24
+    },
+    {
+      "path": "assets/source/arena_art01/world.aseprite",
+      "frames": 6,
+      "width": 192,
+      "height": 192
+    }
+  ],
+  "atlases": [
+    {
+      "path": "assets/exports/arena_art01/ambient.json",
+      "frameCount": 12,
+      "tags": [
+        {
+          "name": "cascade_flow",
+          "from": 0,
+          "to": 3,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "stream_pool_flow",
+          "from": 4,
+          "to": 7,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "lantern_glow",
+          "from": 8,
+          "to": 11,
+          "direction": "forward",
+          "color": "#000000ff"
+        }
+      ],
+      "layers": [
+        {
+          "name": "Fixed rock banks and vegetation",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Water surface pixel flow - four phase loop",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ]
+    },
+    {
+      "path": "assets/exports/arena_art01/garden.json",
+      "frameCount": 4,
+      "tags": [
+        {
+          "name": "cascade",
+          "from": 0,
+          "to": 0,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "stream_pool",
+          "from": 1,
+          "to": 1,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "bridge",
+          "from": 2,
+          "to": 2,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "flower_rocks",
+          "from": 3,
+          "to": 3,
+          "direction": "forward",
+          "color": "#000000ff"
+        }
+      ],
+      "layers": [
+        {
+          "name": "Shallow water and walkable bridge deck",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Flowering banks, rocks and rear railing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate bridge foreground railing",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ]
+    },
+    {
+      "path": "assets/exports/arena_art01/hud.json",
+      "frameCount": 16,
+      "tags": [
+        {
+          "name": "icon_settings",
+          "from": 0,
+          "to": 0,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_quit",
+          "from": 1,
+          "to": 1,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_portal",
+          "from": 2,
+          "to": 2,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_shop",
+          "from": 3,
+          "to": 3,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_swords",
+          "from": 4,
+          "to": 4,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_bag",
+          "from": 5,
+          "to": 5,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_gold",
+          "from": 6,
+          "to": 6,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_potion_hp",
+          "from": 7,
+          "to": 7,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_potion_mp",
+          "from": 8,
+          "to": 8,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_staff",
+          "from": 9,
+          "to": 9,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_flame",
+          "from": 10,
+          "to": 10,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_dragon",
+          "from": 11,
+          "to": 11,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_scroll",
+          "from": 12,
+          "to": 12,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_jade",
+          "from": 13,
+          "to": 13,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_lock",
+          "from": 14,
+          "to": 14,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "icon_empty",
+          "from": 15,
+          "to": 15,
+          "direction": "forward",
+          "color": "#000000ff"
+        }
+      ],
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ]
+    },
+    {
+      "path": "assets/exports/arena_art01/hud_frames.json",
+      "frameCount": 6,
+      "tags": [
+        {
+          "name": "panel_frame",
+          "from": 0,
+          "to": 0,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "hotbar_frame",
+          "from": 1,
+          "to": 1,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "portrait_frame",
+          "from": 2,
+          "to": 2,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "bar_hp",
+          "from": 3,
+          "to": 3,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "bar_mp",
+          "from": 4,
+          "to": 4,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "bar_exp",
+          "from": 5,
+          "to": 5,
+          "direction": "forward",
+          "color": "#000000ff"
+        }
+      ],
+      "layers": [
+        {
+          "name": "Painted gold frame and bevel",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Empty charcoal panel / jewel meter surface",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ]
+    },
+    {
+      "path": "assets/exports/arena_art01/hud_states.json",
+      "frameCount": 3,
+      "tags": [
+        {
+          "name": "slot_normal",
+          "from": 0,
+          "to": 0,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "slot_selected",
+          "from": 1,
+          "to": 1,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "slot_disabled",
+          "from": 2,
+          "to": 2,
+          "direction": "forward",
+          "color": "#000000ff"
+        }
+      ],
+      "layers": [
+        {
+          "name": "Authored empty slot frame - state variants",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ]
+    },
+    {
+      "path": "assets/exports/arena_art01/world.json",
+      "frameCount": 6,
+      "tags": [
+        {
+          "name": "statue_male",
+          "from": 0,
+          "to": 0,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "tree_jade",
+          "from": 1,
+          "to": 1,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "tree_blossom",
+          "from": 2,
+          "to": 2,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "bamboo",
+          "from": 3,
+          "to": 3,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "lantern",
+          "from": 4,
+          "to": 4,
+          "direction": "forward",
+          "color": "#000000ff"
+        },
+        {
+          "name": "red_banner",
+          "from": 5,
+          "to": 5,
+          "direction": "forward",
+          "color": "#000000ff"
+        }
+      ],
+      "layers": [
+        {
+          "name": "Grounded bases, trunks, stone pedestal and poles",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Sculpture, tree canopies, bamboo and lantern housing",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ]
+    }
+  ],
+  "exports": [
+    {
+      "path": "assets/exports/arena_art01/ambient.png",
+      "dimensions": [
+        906,
+        680
+      ],
+      "sha256": "965c3a5679df5723b7c95f0752310cb22dd553570b260d61a72be1a3e9b33eb3"
+    },
+    {
+      "path": "assets/exports/arena_art01/arena_ground.png",
+      "dimensions": [
+        1600,
+        1152
+      ],
+      "sha256": "51b111d4b9d230a7156a0a7a04d1444dfacc97e3061023855e3f530f97f61d32"
+    },
+    {
+      "path": "assets/exports/arena_art01/bamboo.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "895f667a748a24144b33e64c595a41fe94e68f88b4f36ece71e4e4d189a70a16"
+    },
+    {
+      "path": "assets/exports/arena_art01/bamboo_base.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "e9efc4fa058df3d90543b12b9168646cc3b710025e0c155de56124095e9c19fe"
+    },
+    {
+      "path": "assets/exports/arena_art01/bamboo_top.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "17599730547e328d2edaed4b1cba49531c86f44768061ef851950f77f9a7f906"
+    },
+    {
+      "path": "assets/exports/arena_art01/bar_exp.png",
+      "dimensions": [
+        360,
+        32
+      ],
+      "sha256": "8fd3b2892cdcf8b54e494c1a6deb663b0c6e67d8c68bc9869bdd1f28fec81804"
+    },
+    {
+      "path": "assets/exports/arena_art01/bar_hp.png",
+      "dimensions": [
+        360,
+        32
+      ],
+      "sha256": "63dc63bb0dfcb29664119856b7b6f2098affebf98e909878c228c78bc90be206"
+    },
+    {
+      "path": "assets/exports/arena_art01/bar_mp.png",
+      "dimensions": [
+        360,
+        32
+      ],
+      "sha256": "f59b28a60f7f8fb68151fcc8e31aadb6abcd3b2d9f2a591af8caba8b1d331e4c"
+    },
+    {
+      "path": "assets/exports/arena_art01/bridge.png",
+      "dimensions": [
+        224,
+        224
+      ],
+      "sha256": "ac19fa5e15398c246b86d93c3615b579bfaed8127860964ac35688549dd24ad9"
+    },
+    {
+      "path": "assets/exports/arena_art01/bridge_deck.png",
+      "dimensions": [
+        224,
+        224
+      ],
+      "sha256": "82192414b7b6e7707931aff16739d7fb432f3f9baefe3439fafdfeec7a1c2350"
+    },
+    {
+      "path": "assets/exports/arena_art01/bridge_front.png",
+      "dimensions": [
+        224,
+        224
+      ],
+      "sha256": "ca6fb40033f6b00fd680236acb9709914a6078ada0ed247bbb34ed92aff97013"
+    },
+    {
+      "path": "assets/exports/arena_art01/cascade.png",
+      "dimensions": [
+        224,
+        224
+      ],
+      "sha256": "2ac614d11eabe29f982ecc16bd372eef0e8b4c1c902051f9d498bd0c9f35b26a"
+    },
+    {
+      "path": "assets/exports/arena_art01/flower_rocks.png",
+      "dimensions": [
+        224,
+        224
+      ],
+      "sha256": "ba0bec859221b7a8b61df29e1914d84cc8e9c05dce7497672bb6ebb611597464"
+    },
+    {
+      "path": "assets/exports/arena_art01/garden.png",
+      "dimensions": [
+        906,
+        228
+      ],
+      "sha256": "ae7dba586bf77bb5c88ddc3307cb4ab4b83a0e263ed4029130f3df4df99712b5"
+    },
+    {
+      "path": "assets/exports/arena_art01/hotbar_frame.png",
+      "dimensions": [
+        600,
+        124
+      ],
+      "sha256": "6ccb2ef6a134485af4a8b5dc60bb7ff9cbb28cb10d71e0c3ce1ad0f625705586"
+    },
+    {
+      "path": "assets/exports/arena_art01/hud.png",
+      "dimensions": [
+        266,
+        266
+      ],
+      "sha256": "b61c749f3c801b1a968d0471a990bcd6b38b0c4643f9e49054b14c0b4bfcb62b"
+    },
+    {
+      "path": "assets/exports/arena_art01/hud_frames.png",
+      "dimensions": [
+        2570,
+        390
+      ],
+      "sha256": "e9c01f8adb1b2c646765f94afb24a662460024de660a146ca158d9d30e2a2336"
+    },
+    {
+      "path": "assets/exports/arena_art01/hud_states.png",
+      "dimensions": [
+        200,
+        68
+      ],
+      "sha256": "fe850d08faf7805d7bd5e01b5d2256b4035cdb3b75733fb3f14fd185320be854"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_bag.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "a1b42c34b094e2af8f7ffd16ab9f33bf398bb480ab8f6e36dcda60f3b03e6c97"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_dragon.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "6cc1b1fb690d1e27d7ef2a6efb3706bdd1b03c0445e325ad04f8b9c2234eebda"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_empty.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "cce2235094e2abd49b87debef946e4989c8c2c56a249d5426737454329a196aa"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_flame.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "37dc78973749ae59b395e60aac378aa4a7de5b1c8658e0c53d92275ea7b71aa6"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_gold.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "748ce9627a876fe2142196601c93b1a1ae5aea6e101a3eb77f76b098ba7f6d0b"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_jade.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "fd95134a2f3ed8d650202ad82bb9abb379dd085c732f25560be993337b40a4fa"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_lock.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "4115569c693281de24b56ce0ec0befc1ca14e79420f3d7c965054725b971881b"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_palm.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "a28223d39cf6ce988e4146355aa25ab30bb3099bc7111817dbaad702dc239265"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_portal.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "2f8268305ace539888c39a6cb4db1ef2667614762baed4033cbadff4e9f5b138"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_potion_hp.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "4d6368673af4429ac04bc1bbdb7020cf8cdeb0dba0df36d0487d6a96403ca1e8"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_potion_mp.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "bf4f3c470bb715533981ed1bae60f21c1a1c48ddd65b6d0501c062fa82f0ddfb"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_quit.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "5248942fe363d5d3f4e19449f67132afd156121ad3b09d561e358de461172fe0"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_scroll.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "f7972264c8de33921ba6c3233b3f231ed7b8fd0559f0bcc472cd8880417ea9d1"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_settings.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "d4184c1e26868f9d4024726d7fe0aa1efcfab86f664b3724618bef9b2734d230"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_shop.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "f6de242063c69f49e766d4567601e0e06c840ba5f0c2b8a4e5b64b11b3df0e1c"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_staff.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "11224a3d98f88bd9d07060c0766a26ab40f65397c703b88b9e0184befdcb8a95"
+    },
+    {
+      "path": "assets/exports/arena_art01/icon_swords.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "db80da7b3e8b318a2c960fa953dbab2fb4c71e09ed141a449b1739cf57d0652f"
+    },
+    {
+      "path": "assets/exports/arena_art01/key_badge.png",
+      "dimensions": [
+        24,
+        20
+      ],
+      "sha256": "8ab283ba5f2152b9d3019e9f6587b547e098b363f45bf4e65ab11e28cd2c9cba"
+    },
+    {
+      "path": "assets/exports/arena_art01/lantern.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "aebedd5234a4f2e4faa899f76504fa893ce79b3e62dc0953a1aef4e4a2109e43"
+    },
+    {
+      "path": "assets/exports/arena_art01/lantern_base.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "f4c4f8a9582f6e8fafcbabed041490bd1a380d92a56ebaf675a270ef682c6c5a"
+    },
+    {
+      "path": "assets/exports/arena_art01/lantern_top.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "2216595143cfb5eca8bdafbba6061a2a11736add4a3e53944bb0260edcad8694"
+    },
+    {
+      "path": "assets/exports/arena_art01/panel_frame.png",
+      "dimensions": [
+        600,
+        164
+      ],
+      "sha256": "12ffef6efaa27a61848fb156d9993e881cd83a77e679d5772c537bad538825e6"
+    },
+    {
+      "path": "assets/exports/arena_art01/portrait_frame.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "sha256": "b78591d566280b20b395d1fa756c0b760033d6dc66c8ad4814e2d88a78991aa8"
+    },
+    {
+      "path": "assets/exports/arena_art01/red_banner.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "b572e1467f418220b14b517ac0d5adf623bac43481888d85d72a9e33368594fa"
+    },
+    {
+      "path": "assets/exports/arena_art01/red_banner_base.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "f5fd01f6fd9b6e307f2a34291d2733804208937886d4bf93cf90e27a3b25dd0e"
+    },
+    {
+      "path": "assets/exports/arena_art01/red_banner_top.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "4d356367037ed86fb5b06a9d5df5f4c888f4c84dfe977e498bf2382509bf69aa"
+    },
+    {
+      "path": "assets/exports/arena_art01/slot_disabled.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "da3884fd0101ca233a075e43be3a95b0a2cc8ad3ae9d6dabde5c6a05bb7b0704"
+    },
+    {
+      "path": "assets/exports/arena_art01/slot_normal.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "cce2235094e2abd49b87debef946e4989c8c2c56a249d5426737454329a196aa"
+    },
+    {
+      "path": "assets/exports/arena_art01/slot_selected.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "sha256": "c69081939d4a2e8fd3ad5766b6b6a0b6bd0b2efec200943e3a7b2a0fea22800c"
+    },
+    {
+      "path": "assets/exports/arena_art01/statue_male.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "6ef6343c12da64872b4b429ca7a130f3c5e8c3fea3097a7a39d117d39c03da2e"
+    },
+    {
+      "path": "assets/exports/arena_art01/statue_male_base.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "f31138bfac7e3e6e4616ad95f81ff4dece7897d8de9a68ce2882b29bbd5e1b3e"
+    },
+    {
+      "path": "assets/exports/arena_art01/statue_male_top.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "866758f7bb8c43d71f6d2763e5f64d7fec425936632f40b30e74e97fb84364da"
+    },
+    {
+      "path": "assets/exports/arena_art01/stream_pool.png",
+      "dimensions": [
+        224,
+        224
+      ],
+      "sha256": "d36650746b106b3941390abc34dd702c56fb6a44d59f2607c32d9f2d29b3d778"
+    },
+    {
+      "path": "assets/exports/arena_art01/tree_blossom.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "349f285a96bc0b359b7718f64d4eb91cfb52e23e8be052f5f4a9f00d6f57228f"
+    },
+    {
+      "path": "assets/exports/arena_art01/tree_blossom_base.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "01cd1f0be852d05efd5868a828af9e56867e4f8af30ce2eb5b3f62ea7e22df00"
+    },
+    {
+      "path": "assets/exports/arena_art01/tree_blossom_top.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "27bf8c9e4bfbe2a9218a7e612e05c9d7c8f972ef55154cb2d01be34e312d6924"
+    },
+    {
+      "path": "assets/exports/arena_art01/tree_jade.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "0eee10861d3c106e2cd58892ffa243f8db5cd25c4921067f0dff3c725d72f92e"
+    },
+    {
+      "path": "assets/exports/arena_art01/tree_jade_base.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "371f97c837f01d7172f552127b6e3ac8b192f114043b057e63cf5e0bb137dcef"
+    },
+    {
+      "path": "assets/exports/arena_art01/tree_jade_top.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "sha256": "9ac9587929bf9d4adbcdfe0b9181e0cef02fbecced708b6e6dcc4ff630e107f6"
+    },
+    {
+      "path": "assets/exports/arena_art01/wall.png",
+      "dimensions": [
+        64,
+        24
+      ],
+      "sha256": "a8a2ac1b592b095c9427dba2e1d6e27b936e9105124d22bb9091c749e29025ae"
+    },
+    {
+      "path": "assets/exports/arena_art01/world.png",
+      "dimensions": [
+        778,
+        390
+      ],
+      "sha256": "93d1bdc01940d6dd4920e2d769f8b920b2b5067596d57b518a0b772012b40a12"
+    }
+  ],
+  "approvedCharacterHashes": "PASS"
+}

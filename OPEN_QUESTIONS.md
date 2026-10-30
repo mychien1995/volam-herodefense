@@ -72,3 +72,11 @@ Acceptance tests updated:
 - **Reference ambition:** production environment richness, final portraits, ornate pixel frame art, and all four dungeon maps still need artist review. The forest study establishes composition/perspective only. Decorative NPC buildings/statue/lanterns do not add new authoritative collision; future solid scenery needs matching server geometry in its milestone.
 - **Later backend integration:** M1 has no statue HP/raid timer/warnings, inventory, shop, crafting, dungeon or PvP state. UI shows unavailable states instead of fake HP/countdowns/items. The notification layer sits above dialogs, but live raid-warning behavior cannot be exercised until M2 provides real events. The live hero remains vulnerable while viewing menus or the forest study.
 - **Placement decision superseded:** the v1.4 question about whether to show a minimap is superseded for this prototype by the v1.5 approved bottom-right layout pattern. Current markers show actual arena snapshots; future discovery/navigation behavior remains undecided.
+
+
+## Dedicated school selection — unresolved policies (2026-10-30)
+
+- Host migration if the host leaves the waiting lobby: no promotion rule confirmed. Current safe state disables Start Game; leave/recreate is available.
+- Selection reconnect/rejoin grace and identity recovery, removing disconnected participants, cancellation back to waiting, timeout and automatic choice: unresolved. Current selection holds with the absent participant unconfirmed; no implicit choice or timer.
+- Exact numeric level-1 school attributes and initial active-skill assignments for all four schools: not finalized. Current M1 combat sandbox remains unchanged; selection stores the canonical school identity. UI shows qualitative identities and explicitly undefined starting sets, rather than mockup numbers.
+- Non-Cái Bang gameplay animation assets remain outside UI Phase 1; concept portraits are not animation atlases.

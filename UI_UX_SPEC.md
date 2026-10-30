@@ -1,5 +1,9 @@
 # Võ Lâm Hero Defense — In-game UI / UX specification v1.4
 
+## ART-01 compact HUD amendment — 2026-10-30
+
+The current director request supersedes the older HUD arrangement for the arena: top-left live portrait/name/level/HP/MP/EXP, top-right exactly Settings/Quit/Phó Bản/Thương Gia/Lôi Đài, bottom-left inventory and live gold, bottom-center A/QWER. The arena has no persistent center title/status banner, room chip or minimap in this slice. Utility buttons open the existing in-viewport menus; Quit leaves the real room, Settings exposes controls, fullscreen, skill-loadout and party/connection access. M1 has no quick-item backend or skill-rank state, so decorative potion counts and ranks are not shown. Menu contents retain honest disabled preview states where later gameplay is absent. `arena-hud.css` uses PNG frame/icon artwork over live DOM values. Runtime art approval is separate and pending; see docs/ART01_RUNTIME_REVIEW.md.
+
 **Status:** CONFIRMED design direction, PROPOSED exact placements and dimensions. Effective 2026-10-29.
 
 ## 1. Intent — GAME FIRST, NOT A WEB DASHBOARD (CONFIRMED)
@@ -50,7 +54,7 @@ All menus and modals appear *within* the fixed game viewport or as full-viewport
 
 | Trigger | UI | Actions | Important restrictions |
 |---|---|---|---|
-| Click NPC Dungeon Guide | Dungeon selection window | Choose solo/shared, creep/boss, view details, enter | Server validates interaction and entry; modal stays inside viewport |
+| Click Phó Bản utility button | Dungeon selection window | Choose private/shared and supported encounter, enter | Server validates alive/arena membership and availability; no NPC/proximity requirement; modal stays inside viewport |
 | Click Merchant NPC | Shop window | Buy basic items, sell items | Show gold, prices, disabled unavailable purchases |
 | Click Crafting NPC or merchant crafting tab | Crafting window | Preview recipe, materials, gold cost, craft | Server validates ownership and crafting; no dupes |
 | Click inventory icon (or configurable key) | Inventory modal | 4 equipment slots, backpack, item details, equip/drop/sell | No duplicate rewards or client authority |
@@ -76,7 +80,8 @@ Suggested component tree:
 
 ```text
 GameApplication
-  PreMatchLobby (create/join, optional separate screen)
+  PreGameFlow
+    Landing | RoomBrowser | WaitingLobby | SchoolSelection
   GameViewport [position:relative; aspect-ratio policy; fills available screen]
     PhaserCanvas (world/camera; pixelArt/nearest-neighbor)
     InGameHudOverlay (fixed to viewport, does not scroll with world)
@@ -123,7 +128,7 @@ Engineering constraints:
 - [ ] HUD for hero HP/MP/level/EXP, wave countdown/statue health, gold and hotbar is layered over world.
 - [ ] Q/W/E/R and A keys still work during gameplay; icon and cooldown states are visible and synchronized.
 - [ ] Inventory opens inside the game viewport; shows four equipment slots and backpack area (placeholder slots okay until gameplay implementation).
-- [ ] Clicking dungeon NPC opens an **in-game** menu, not an outside panel, and closes cleanly.
+- [ ] Clicking Phó Bản opens an **in-game** menu and allows supported entry from anywhere in the arena while alive; closes cleanly and requires no NPC.
 - [ ] Clicking UI does not unintentionally move/attack/activate skills; modal keyboard focus is safe.
 - [ ] Server keeps simulating and waves/alerts remain visible while inventory/shop is open; no artificial multiplayer pause.
 - [ ] UI stays usable with different desktop sizes; no off-screen modal/window or disappearing HUD.
@@ -163,3 +168,14 @@ These references lock in the intended pattern:
 - top-right feature buttons are compact,
 - minimap sits inside the viewport,
 - inventory/shop/dungeon selection open as ornate in-game windows while the world remains visible behind them.
+
+
+## Confirmed dedicated pre-game school selection — 2026-10-30
+
+The current user correction supersedes school choices in the waiting lobby: **Landing (nickname only) → Room Browser (create/join) → Waiting Lobby (players/host/status) → host Start Game → dedicated School Selection → all confirmations → Main Arena**. School choices do not appear in the waiting lobby. Four canonical schools only: Cái Bang, Thiên Sơn, Võ Đang, Thiếu Lâm. Duplicate school choices are allowed. Players can change choices until confirmation, then their choice is locked. Confirmation progress is server state.
+
+The existing Colyseus room owns WAITING_LOBBY, SCHOOL_SELECTION and IN_GAME, host ID, school IDs and confirmations. Only the host can request Start Game in the waiting lobby. Simulation/input and matchElapsedMs remain stopped until every participant is connected and confirmed. Players then spawn at level 1 with one point near the central statue in the same room, retaining their chosen school in both network/player state and the core hero. No persistent accounts or progression. Invasions are still an unimplemented M2 feature; future scheduling must use the IN_GAME clock origin, never room creation.
+
+Disconnect safety: during selection retain a disconnected/unconfirmed participant and hold the barrier. Never auto-pick, expire, or silently start without that participant. Current clients can leave/recreate the room. Host migration, reconnect/rejoin grace, removal of absent participants and any timeout/auto-selection policy remain OPEN; no such policy is implemented. Waiting-lobby host loss disables starting; no silent host promotion.
+
+School descriptions, passives and basic styles come from CONTENT_DATA.md. School-specific numeric starting values and starting skill assignments beyond the Cái Bang M1 prototype are not finalized; show that explicitly instead of inventing mockup statistics. Phase 1 stores/validates selections but does not implement M3 school combat or bulk school gameplay art: the existing M1 combat tuning and approved Cái Bang runtime visual fallback remain in the arena. Distinct school card portraits are concept illustrations only.

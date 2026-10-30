@@ -1,0 +1,396 @@
+{
+  "version": 1,
+  "date": "2026-10-30",
+  "scope": "Approved arena expansion, target damage and destination-card presentation within M2A",
+  "license": "Original project artwork generated with built-in OpenAI image_gen and prepared/exported in Aseprite. Existing original ART-01 props and protected approved Cái Bang artwork reused. No external game art imported.",
+  "references": [
+    "assets/concept/arena-v2-approved.png",
+    "assets/concept/dungeon-selector-approved.png"
+  ],
+  "generationPrompts": "assets/source/arena_v2/GENERATION.json",
+  "asepriteVersion": "1.3.18.6-x64",
+  "productionScripts": [
+    "scripts/prepare-arena-v2.lua",
+    "scripts/export-arena-v2.lua",
+    "scripts/export-arena-v2.mjs"
+  ],
+  "reexport": "pnpm assets:export:visual (preserves artist-edited sources); --prepare explicitly reconstructs from generated PNG components",
+  "layout": {
+    "courtCenter": [
+      800,
+      616
+    ],
+    "courtSize": [
+      600,
+      540
+    ],
+    "previousApproxDiameter": 440,
+    "diameterIncrease": "36%",
+    "roadWidth": 160,
+    "previousRoadWidth": 100,
+    "roadIncrease": "60%",
+    "statue": [
+      800,
+      576
+    ],
+    "removed": [
+      "tree_west",
+      "trunk_west"
+    ],
+    "perimeterTrees": {
+      "tree_east": [
+        1220,
+        870
+      ],
+      "tree_north": [
+        480,
+        330
+      ]
+    },
+    "invasionMarkersUnchanged": true,
+    "dungeonEntry": "Phó Bản menu anywhere in the arena while alive; Guide removed"
+  },
+  "remainingPlaceholders": [
+    "creep_outlaw enemy",
+    "fire/arc effects",
+    "M2A forest environment"
+  ],
+  "approval": {
+    "concept": "Approved direction only",
+    "runtime": "PENDING director visual approval"
+  },
+  "assets": [
+    {
+      "id": "dungeon_card_forest",
+      "purpose": "Rừng Trúc destination illustration only",
+      "source": {
+        "path": "assets/source/dungeon_cards/forest.aseprite",
+        "sha256": "1706bc95bfec91977f5cdf9d301abbc2c3ec17e6aaed70789dc3f6f653740bc7"
+      },
+      "generationSource": {
+        "path": "assets/source/dungeon_cards/generated_forest.png",
+        "sha256": "4532385341b85b587f4c9e5d7525bb1b72cdd0aa1af9ffb628780b9284bda7b5",
+        "dimensions": [
+          1024,
+          1536
+        ]
+      },
+      "exports": [
+        {
+          "path": "assets/exports/dungeon_cards/forest.png",
+          "sha256": "94bc78113cc3cf48f4e55de3331ed8f47d2cf33da61b767c09ee34569d7d5e84",
+          "dimensions": [
+            512,
+            768
+          ]
+        },
+        {
+          "path": "assets/exports/dungeon_cards/forest_atlas.png",
+          "sha256": "8203afb6dc2490728d9040f0ec2fec9b0f4a5539612d15aaa6e913a81d5ea342",
+          "dimensions": [
+            516,
+            772
+          ]
+        },
+        {
+          "path": "assets/exports/dungeon_cards/forest.json",
+          "sha256": "b053f6fb2b3871dc1217e5ec00dc5ed98d2defa71c1e0585d268a6e7d2b15db8"
+        }
+      ],
+      "dimensions": [
+        512,
+        768
+      ],
+      "animated": false,
+      "transparency": "Opaque full-bleed illustration; border/text/selection are live UI",
+      "pivot": [
+        0,
+        0
+      ],
+      "collision": null,
+      "display": "Responsive card image; art-directed crop at short desktop height",
+      "layers": "Three explicitly separated editable spatial regions: distance, middle landmark, foreground. Not recovered original scene layers.",
+      "status": {
+        "produced": true,
+        "integrated": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      }
+    },
+    {
+      "id": "dungeon_card_desert",
+      "purpose": "Sa Mạc destination illustration only",
+      "source": {
+        "path": "assets/source/dungeon_cards/desert.aseprite",
+        "sha256": "fea986bc8d78f9e11234ed2e28b753a2aa78cbdaac4450a7346691cf21315128"
+      },
+      "generationSource": {
+        "path": "assets/source/dungeon_cards/generated_desert.png",
+        "sha256": "9cea0c15d2afa5f47c357ada971f52ce3f8cc01ae2364e1b7669867d96c7717a",
+        "dimensions": [
+          1024,
+          1536
+        ]
+      },
+      "exports": [
+        {
+          "path": "assets/exports/dungeon_cards/desert.png",
+          "sha256": "3273a3359bc8a2ccf02d6416d71af070f693e4e89d79a597d3caea9321cfc3fe",
+          "dimensions": [
+            512,
+            768
+          ]
+        },
+        {
+          "path": "assets/exports/dungeon_cards/desert_atlas.png",
+          "sha256": "e06c194053f0a84686741ed04b04fb58281cc36541e5107f402a11e088073fbd",
+          "dimensions": [
+            516,
+            772
+          ]
+        },
+        {
+          "path": "assets/exports/dungeon_cards/desert.json",
+          "sha256": "e21968a0696c41967ff8af6663ed7fb7c3e64d2286025de3a302bf9528663b15"
+        }
+      ],
+      "dimensions": [
+        512,
+        768
+      ],
+      "animated": false,
+      "transparency": "Opaque full-bleed illustration; border/text/selection are live UI",
+      "pivot": [
+        0,
+        0
+      ],
+      "collision": null,
+      "display": "Responsive card image; art-directed crop at short desktop height",
+      "layers": "Three explicitly separated editable spatial regions: distance, middle landmark, foreground. Not recovered original scene layers.",
+      "status": {
+        "produced": true,
+        "integrated": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      }
+    },
+    {
+      "id": "dungeon_card_sea",
+      "purpose": "Biển destination illustration only",
+      "source": {
+        "path": "assets/source/dungeon_cards/sea.aseprite",
+        "sha256": "d8b2b7b4571b94529b7d9cb84cac3fef678c44c96392b18719d1533ab03097aa"
+      },
+      "generationSource": {
+        "path": "assets/source/dungeon_cards/generated_sea.png",
+        "sha256": "02eafed29931d0908dd0fc58f131b4f6a3ffb24375353c2df4f2424b1f7a64e6",
+        "dimensions": [
+          1024,
+          1536
+        ]
+      },
+      "exports": [
+        {
+          "path": "assets/exports/dungeon_cards/sea.png",
+          "sha256": "40968f687fb213e722f99e58caa20cc1410318d6d1992e62490cb5dcd0e4ece0",
+          "dimensions": [
+            512,
+            768
+          ]
+        },
+        {
+          "path": "assets/exports/dungeon_cards/sea_atlas.png",
+          "sha256": "c66ea2abd36585931efaf0ceb1b15900aa7c1dd2d1da31dc2fe74bf8db34727e",
+          "dimensions": [
+            516,
+            772
+          ]
+        },
+        {
+          "path": "assets/exports/dungeon_cards/sea.json",
+          "sha256": "b37edb1d9174f6e4e7eba701986e9f095634105c43b631d68bf65f718bf8917b"
+        }
+      ],
+      "dimensions": [
+        512,
+        768
+      ],
+      "animated": false,
+      "transparency": "Opaque full-bleed illustration; border/text/selection are live UI",
+      "pivot": [
+        0,
+        0
+      ],
+      "collision": null,
+      "display": "Responsive card image; art-directed crop at short desktop height",
+      "layers": "Three explicitly separated editable spatial regions: distance, middle landmark, foreground. Not recovered original scene layers.",
+      "status": {
+        "produced": true,
+        "integrated": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      }
+    },
+    {
+      "id": "dungeon_card_hell",
+      "purpose": "Địa Ngục destination illustration only",
+      "source": {
+        "path": "assets/source/dungeon_cards/hell.aseprite",
+        "sha256": "1ea4a8fa212f7b1e15f00a8397cd4c086a248be0eeb88e3dbc63d746c209d997"
+      },
+      "generationSource": {
+        "path": "assets/source/dungeon_cards/generated_hell.png",
+        "sha256": "6c2b05723bea262a0de5eb780ddf7d5ef051586ee415fcf1f372fed895d6c432",
+        "dimensions": [
+          1024,
+          1536
+        ]
+      },
+      "exports": [
+        {
+          "path": "assets/exports/dungeon_cards/hell.png",
+          "sha256": "f9ac4a44e94c3cac604ca3d887954bfda6aed50d5ce2d471b27c682bd94ac6a3",
+          "dimensions": [
+            512,
+            768
+          ]
+        },
+        {
+          "path": "assets/exports/dungeon_cards/hell_atlas.png",
+          "sha256": "0640b1ec56ceb3f9f807a58ba6ab3fc95c5ce5bc320afa399ae30aa691d57773",
+          "dimensions": [
+            516,
+            772
+          ]
+        },
+        {
+          "path": "assets/exports/dungeon_cards/hell.json",
+          "sha256": "59e2fa844b1cc6604d228e40c900254e0be3b0bb5ac9364f77f4f1c5dab4a7de"
+        }
+      ],
+      "dimensions": [
+        512,
+        768
+      ],
+      "animated": false,
+      "transparency": "Opaque full-bleed illustration; border/text/selection are live UI",
+      "pivot": [
+        0,
+        0
+      ],
+      "collision": null,
+      "display": "Responsive card image; art-directed crop at short desktop height",
+      "layers": "Three explicitly separated editable spatial regions: distance, middle landmark, foreground. Not recovered original scene layers.",
+      "status": {
+        "produced": true,
+        "integrated": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      }
+    },
+    {
+      "id": "arena_ground_v2",
+      "purpose": "Expanded arena ground component, separate from statue/props/actors/HUD",
+      "source": {
+        "path": "assets/source/arena_v2/ground.aseprite",
+        "sha256": "a00af7856a1f2ade0444327ab3c81ccbfe2c8d57f94f952c814133a4ab507be7"
+      },
+      "exports": [
+        {
+          "path": "assets/exports/arena_v2/ground.png",
+          "sha256": "25e418e1ef3c9645ca2bc7f488b9019154712830ed9bf638e4df7a29e17a0198",
+          "dimensions": [
+            1600,
+            1152
+          ]
+        }
+      ],
+      "generationSource": [
+        {
+          "path": "assets/source/arena_v2/generated_ground.png",
+          "sha256": "1020a7fe2d9c949d781d46e2ee11dc64955d0d31350e5720eb47a9d62b6ec7b0",
+          "dimensions": [
+            1478,
+            1064
+          ]
+        },
+        {
+          "path": "assets/source/arena_v2/generated_masonry.png",
+          "sha256": "76cb830343918a652e8dadd1e91802a7baa85963eddc1b069a0c890498852c5c",
+          "dimensions": [
+            1478,
+            1064
+          ]
+        }
+      ],
+      "dimensions": [
+        1600,
+        1152
+      ],
+      "animated": false,
+      "pivot": [
+        0,
+        0
+      ],
+      "displayScale": 1,
+      "layers": [
+        "Reconstructed meadow",
+        "Detailed plate with edge transition",
+        "Approaches from authored 32px tile variants",
+        "Curved stone paving"
+      ],
+      "collision": "maps/arena.tmj shared authoritative geometry; no collision baked into art",
+      "status": {
+        "produced": true,
+        "integrated": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      }
+    },
+    {
+      "id": "arena_paving_v2",
+      "purpose": "Four reusable authored 32px stone slab variants",
+      "source": {
+        "path": "assets/source/arena_v2/paving.aseprite",
+        "sha256": "73c354d650f1a903c989d2e035e67e6aad21be50dfadaac7581ed88e6ae615aa"
+      },
+      "exports": [
+        {
+          "path": "assets/exports/arena_v2/paving.png",
+          "sha256": "dac2dc6a8f9f1b052b5338f072a57c5988c6ca29339ad564ed24e94414bbca8c",
+          "dimensions": [
+            128,
+            32
+          ]
+        },
+        {
+          "path": "assets/exports/arena_v2/paving.json",
+          "sha256": "8fb0a0422ffa0ae027aab4c78fe3fb9dded4e29014e67d11cfa4d420e126fbb8"
+        }
+      ],
+      "dimensions": [
+        32,
+        32
+      ],
+      "frames": 4,
+      "animated": false,
+      "pivot": [
+        0,
+        0
+      ],
+      "status": {
+        "produced": true,
+        "integrated": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      }
+    }
+  ],
+  "verification": {
+    "unitTests": "83 passed in 9 files",
+    "browserTests": "14 passed; final visual recapture 3 passed",
+    "evidence": "docs/evidence/arena-v2/",
+    "assetValidation": "scripts/verify-arena-v2.py PASS",
+    "directorApproval": "PENDING"
+  }
+}

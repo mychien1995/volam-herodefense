@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { actorFootPivot } from './art.js';
 /** Environment composition study only. No zone, travel, collision or combat state. */
 export class ForestStudyScene extends Phaser.Scene {
   constructor() {
@@ -43,7 +44,7 @@ export class ForestStudyScene extends Phaser.Scene {
     this.add.image(800, 430, 'dungeon_gate').setOrigin(0.5, 1).setDepth(430);
     this.add
       .sprite(800, 710, 'hero_cai_bang', 'idle_up_0')
-      .setOrigin(0.5, 1)
+      .setOrigin(...actorFootPivot(this, 'hero_cai_bang'))
       .setDepth(710)
       .play('hero_cai_bang:idle:up');
     this.add

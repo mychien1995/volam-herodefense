@@ -24,3 +24,6 @@ export const inputBindings = Object.freeze({
 
 export * from './arena.js';
 export * from './m1.js';
+export * from './schools.js';
+export * from './dungeon.js';
+export * from './invasion.js';

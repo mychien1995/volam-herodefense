@@ -1,3 +1,4 @@
+import { joinWaiting, startTogether } from './pregame-helper.js';
 import { expect, test, type Page } from '@playwright/test';
 test.use({ viewport: { width: 1440, height: 1100 } });
 interface Hero {
@@ -11,6 +12,7 @@ interface Hero {
   mana: number;
   xp: number;
   level: number;
+  lastSequence: number;
 }
 interface Snapshot {
   sessionId: string;
@@ -44,6 +46,7 @@ interface Presentation {
     depth: number;
     animation: string;
     frame: string;
+    texture: string;
   }>;
   trees: Array<{ x: number; y: number; depth: number }>;
   animations: string[];
@@ -60,29 +63,12 @@ async function enter(
   page: Page,
   nickname: string,
   roomId?: string,
+  defer = false,
 ): Promise<void> {
-  await page.goto('/?debug=1');
-  await expect(page.locator('#scene-status')).toHaveAttribute(
-    'data-ready',
-    'true',
-  );
-  await page.getByLabel('Nickname', { exact: true }).fill(nickname);
-  if (roomId) await page.getByLabel('Room ID').fill(roomId);
-  await page
-    .getByRole('button', {
-      name: roomId ? 'Join room' : 'Create room',
-      exact: true,
-    })
-    .click();
-  await expect(page.getByTestId('status')).toHaveText('Connected');
-  await expect
-    .poll(
-      async () =>
-        (await snapshot(page)).state?.players[(await snapshot(page)).sessionId]
-          ?.hp,
-    )
-    .toBeGreaterThan(0);
+  await joinWaiting(page, nickname, roomId);
+  if (!defer) await startTogether([page]);
 }
+
 async function selectRanged(page: Page): Promise<void> {
   await page.locator('[data-menu=skills]').first().click();
   await page.getByLabel('Normal attack').selectOption('cai_bang_chuong');
@@ -97,33 +83,29 @@ async function selectRanged(page: Page): Promise<void> {
 }
 async function moveTo(page: Page, x: number, y: number): Promise<void> {
   await page.locator('#game canvas').focus();
-  const held = new Set<string>();
-  const deadline = Date.now() + 8000;
-  try {
+  for (const [axis, target, negative, positive] of [
+    ['x', x, 'ArrowLeft', 'ArrowRight'],
+    ['y', y, 'ArrowUp', 'ArrowDown'],
+  ] as const) {
+    const deadline = Date.now() + 12000;
     while (Date.now() < deadline) {
       const p = await hero(page);
-      if (Math.hypot(p.x - x, p.y - y) < 7) return;
-      const desired = new Set<string>();
-      if (Math.abs(p.x - x) > 4)
-        desired.add(p.x < x ? 'ArrowRight' : 'ArrowLeft');
-      if (Math.abs(p.y - y) > 4) desired.add(p.y < y ? 'ArrowDown' : 'ArrowUp');
-      for (const key of held)
-        if (!desired.has(key)) {
-          await page.keyboard.up(key);
-          held.delete(key);
-        }
-      for (const key of desired)
-        if (!held.has(key)) {
-          await page.keyboard.down(key);
-          held.add(key);
-        }
-      await page.waitForTimeout(40);
+      const distance = target - p[axis];
+      if (Math.abs(distance) <= 8) break;
+      // One driver-side key press bounds the hold duration independently of
+      // screenshot/CDP latency. Measure only after the server observes release.
+      await page.keyboard.press(distance < 0 ? negative : positive, {
+        delay: Math.min(120, Math.max(30, Math.abs(distance) * 5 - 25)),
+      });
+      await expect
+        .poll(async () => (await hero(page)).lastSequence)
+        .toBeGreaterThan(p.lastSequence);
+      await expect.poll(async () => (await hero(page)).pose).not.toBe('walk');
     }
-    throw new Error(
-      `Could not reach (${x},${y}): ${JSON.stringify(await hero(page))}`,
-    );
-  } finally {
-    for (const key of held) await page.keyboard.up(key);
+    expect(
+      Math.abs((await hero(page))[axis] - target),
+      `Route axis ${axis} at (${x},${y})`,
+    ).toBeLessThanOrEqual(8);
   }
 }
 function monitor(page: Page): string[] {
@@ -138,6 +120,7 @@ function monitor(page: Page): string[] {
 test('fixed follow camera, eight-way movement and foreground occlusion', async ({
   page,
 }, info) => {
+  test.setTimeout(90000);
   const errors = monitor(page);
   await enter(page, 'Lữ Khách');
   const start = await presentation(page);
@@ -152,31 +135,47 @@ test('fixed follow camera, eight-way movement and foreground occlusion', async (
     .toBeCloseTo(-Math.SQRT1_2, 3);
   await page.keyboard.up('ArrowRight');
   await page.keyboard.up('ArrowUp');
-  await moveTo(page, 680, 680);
+  // The diagonal probe can travel north of the trunk while polling. Approach
+  // its south side through the open east lane, rather than steering through it.
+  await moveTo(page, 750, 690);
+  // Exercise open routes around the unchanged statue marker and its projected
+  // sculpture. This does not claim M1 has a solid statue collider.
+  await moveTo(page, 730, 690);
+  await moveTo(page, 730, 520);
+  await moveTo(page, 870, 520);
+  await page.screenshot({ path: info.outputPath('statue-routes.png') });
+  await moveTo(page, 870, 690);
+  await moveTo(page, 750, 690);
+  await moveTo(page, 680, 650);
+  expect((await presentation(page)).trees.some((t) => t.x === 680)).toBe(false);
+  // The old courtyard trunk is gone; use the relocated perimeter tree for
+  // the retained feet-depth/foreground regression.
+  await moveTo(page, 1260, 900);
+  await moveTo(page, 1220, 900);
   await expect
     .poll(
       async () =>
         (await presentation(page)).actors.find((p) => p.id === sessionId)?.y,
     )
-    .toBeGreaterThan(665);
+    .toBeGreaterThan(880);
   await page.screenshot({
     path: info.outputPath('front-of-tree.png'),
     fullPage: true,
   });
-  await moveTo(page, 640, 680);
-  await moveTo(page, 640, 610);
-  await moveTo(page, 680, 610);
+  await moveTo(page, 1260, 900);
+  await moveTo(page, 1260, 820);
+  await moveTo(page, 1220, 820);
   await expect
     .poll(
       async () =>
         (await presentation(page)).actors.find((p) => p.id === sessionId)?.y,
     )
-    .toBeLessThan(625);
+    .toBeLessThan(840);
   const p = await presentation(page);
   const s = await snapshot(page);
   const player = p.actors.find((item) => item.id === s.sessionId)!;
   expect(player.depth).toBeLessThan(
-    p.trees.find((tree) => tree.x === 680)!.depth,
+    p.trees.find((tree) => tree.x === 1220)!.depth,
   );
   expect(p.camera).not.toEqual(start.camera);
   expect(p.rotation).toBe(0);
@@ -187,10 +186,9 @@ test('fixed follow camera, eight-way movement and foreground occlusion', async (
     path: info.outputPath('behind-tree.png'),
     fullPage: true,
   });
-  await moveTo(page, 640, 610);
-  await moveTo(page, 640, 685);
+  await moveTo(page, 1260, 820);
   await page.keyboard.down('ArrowRight');
-  await expect.poll(async () => (await hero(page)).x).toBeGreaterThan(650);
+  await expect.poll(async () => (await hero(page)).x).toBeGreaterThan(1270);
   await page.keyboard.up('ArrowRight');
   const canvas = page.locator('#game canvas');
   expect(
@@ -206,6 +204,7 @@ test('fixed follow camera, eight-way movement and foreground occlusion', async (
 test('two clients agree on combat, manual cadence, skills and progression', async ({
   browser,
 }, info) => {
+  test.setTimeout(60000);
   const aContext = await browser.newContext({
     viewport: { width: 1440, height: 1100 },
   });
@@ -217,9 +216,10 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
   const errors = monitor(a);
   const bErrors = monitor(b);
   try {
-    await enter(a, 'Cái Bang');
+    await enter(a, 'Cái Bang', undefined, true);
     const id = (await snapshot(a)).roomId;
-    await enter(b, 'Đồng đội', id);
+    await enter(b, 'Đồng đội', id, true);
+    await startTogether([a, b]);
     const aId = (await snapshot(a)).sessionId;
     // Let the real AI approach. Do not walk toward an old target position:
     // movement/patch latency can carry the hero past it before the attack.
@@ -306,6 +306,20 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
     await expect(a.locator('#feedback')).toContainText('not equipped');
     // Finish through real manual inputs; no assumption that all projectiles hit one specific creep.
     await selectRanged(a);
+    await expect
+      .poll(
+        async () =>
+          (await presentation(a)).actors.find((actor) => actor.id === aId)
+            ?.texture,
+      )
+      .toBe('hero_cai_bang_chuong');
+    await expect
+      .poll(
+        async () =>
+          (await presentation(b)).actors.find((actor) => actor.id === aId)
+            ?.texture,
+      )
+      .toBe('hero_cai_bang_chuong');
     const latestAttack = async (): Promise<number> =>
       (await snapshot(a)).events
         .filter((event) => event.kind === 'attack' && event.sourceId === aId)
@@ -352,15 +366,17 @@ test('ranged projectile uses a fixed trajectory and original effect frames', asy
     )
     .toBe(0);
   await page.keyboard.press('KeyA');
+  let observed: { vx: number; vy: number } | undefined;
   await expect
     .poll(
-      async () => Object.keys((await snapshot(page)).state.projectiles).length,
+      async () => {
+        observed = Object.values((await snapshot(page)).state.projectiles)[0];
+        return !!observed;
+      },
       { intervals: [20, 20, 20] },
     )
-    .toBeGreaterThan(0);
-  const projectiles = (await snapshot(page)).state.projectiles;
-  const entry = Object.entries(projectiles)[0]!;
-  expect(Math.hypot(entry[1].vx, entry[1].vy)).toBeCloseTo(360, 2);
+    .toBe(true);
+  expect(Math.hypot(observed!.vx, observed!.vy)).toBeCloseTo(360, 2);
   await page.screenshot({
     path: info.outputPath('straight-projectile.png'),
     fullPage: true,
@@ -384,7 +400,14 @@ test('real PNG animation registry covers two actors, six states and four directi
   const initial = await read();
   expect(initial.ready).toBe(true);
   expect(initial.sprites).toHaveLength(48);
-  expect(initial.sprites.every((sprite) => sprite.total === 4)).toBe(true);
+  expect(
+    initial.sprites.every((sprite) => [2, 4, 6].includes(sprite.total)),
+  ).toBe(true);
+  expect(
+    initial.sprites
+      .filter((sprite) => sprite.animation.startsWith('hero_cai_bang:idle:'))
+      .every((sprite) => sprite.total === 2),
+  ).toBe(true);
   await expect
     .poll(async () =>
       (await read()).sprites
@@ -401,7 +424,7 @@ test('real PNG animation registry covers two actors, six states and four directi
   await expect
     .poll(async () =>
       (await read()).sprites
-        .filter((s) => s.animation.includes(':death:'))
+        .filter((s) => s.animation.startsWith('creep_outlaw:death:'))
         .every((s) => s.frame.endsWith('_3')),
     )
     .toBe(true);

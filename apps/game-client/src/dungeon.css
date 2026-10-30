@@ -1,0 +1,16 @@
+/* Dungeon progress is an in-viewport overlay. Existing arena/HUD layout stays intact. */
+#zone-status {
+  position: absolute;
+  top: 78px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  padding: 6px 12px;
+  margin: 0;
+  border: 1px solid #a68c54;
+  background: #243a31e8;
+  color: #f2deb0;
+  font-size: 12px;
+  text-align: center;
+  pointer-events: none;
+}

@@ -1,3 +1,4 @@
+import { joinWaiting, startTogether } from './pregame-helper.js';
 import { test, expect, type Page } from '@playwright/test';
 interface Snapshot {
   sessionId: string;
@@ -27,28 +28,19 @@ const hero = async (page: Page) => {
   const s = await read(page);
   return s.state.players[s.sessionId]!;
 };
-async function enter(page: Page, name: string, room?: string): Promise<void> {
-  await page.goto('/?debug=1');
-  await expect(page.locator('#scene-status')).toHaveAttribute(
-    'data-ready',
-    'true',
-  );
-  await page.getByLabel('Nickname', { exact: true }).fill(name);
-  if (room) await page.getByLabel('Room ID', { exact: true }).fill(room);
-  await page
-    .getByRole('button', {
-      name: room ? 'Join room' : 'Create room',
-      exact: true,
-    })
-    .click();
-  await expect
-    .poll(async () => {
-      const s = await read(page);
-      return s.state?.players?.[s.sessionId]?.hp ?? 0;
-    })
-    .toBeGreaterThan(0);
+async function enter(
+  page: Page,
+  name: string,
+  room?: string,
+  defer = false,
+): Promise<void> {
+  await joinWaiting(page, name, room);
+  if (!defer) await startTogether([page]);
 }
+
 async function open(page: Page, menu: string): Promise<void> {
+  if (!(await page.locator(`[data-menu="${menu}"]`).count()))
+    await page.locator('[data-menu="settings"]').click();
   await page.locator(`[data-menu="${menu}"]`).first().click();
   await expect(page.getByRole('dialog')).toBeVisible();
 }
@@ -69,6 +61,7 @@ for (const size of [
   test(`world and in-game menus fit ${size.width}x${size.height}`, async ({
     browser,
   }, info) => {
+    test.setTimeout(60000);
     const context = await browser.newContext({ viewport: size });
     const page = await context.newPage();
     const errors: string[] = [];
@@ -94,7 +87,7 @@ for (const size of [
       await inViewport(page, '.hotbar');
       await inViewport(page, '.system-buttons');
       await inViewport(page, '.bag-cluster');
-      await inViewport(page, '.minimap');
+      await expect(page.locator('.minimap')).toHaveCount(0);
       await page.screenshot({ path: info.outputPath('hub.png') });
       const gold = (await hero(page)).gold;
       for (const menu of [
@@ -138,7 +131,7 @@ for (const size of [
         if (menu === 'dungeons')
           await expect(
             page.getByRole('button', { name: 'Enter dungeon', exact: true }),
-          ).toBeDisabled();
+          ).toBeEnabled();
         await page.screenshot({ path: info.outputPath(`${menu}.png`) });
         await page.keyboard.press('Escape');
         await expect(page.getByRole('dialog')).toBeHidden();
@@ -161,8 +154,9 @@ test('menus release held movement, trap focus and preserve live two-client simul
   const a = await ca.newPage(),
     b = await cb.newPage();
   try {
-    await enter(a, 'Trúc Lâm');
-    await enter(b, 'Đồng đội', (await read(a)).roomId);
+    await enter(a, 'Trúc Lâm', undefined, true);
+    await enter(b, 'Đồng đội', (await read(a)).roomId, true);
+    await startTogether([a, b]);
     await expect(a.getByTestId('player-count')).toHaveText('2 / 6');
     const start = await hero(a);
     await a.keyboard.down('ArrowDown');
@@ -247,36 +241,25 @@ test('menus release held movement, trap focus and preserve live two-client simul
     await Promise.all([ca.close(), cb.close()]);
   }
 });
-test('world NPC clicks and forest study stay presentation-only', async ({
+test('utility menus open and forest art study stays presentation-only', async ({
   page,
 }, info) => {
   await page.setViewportSize({ width: 1280, height: 720 });
   await enter(page, 'Lữ Khách');
-  const clickNpc = async (x: number, y: number): Promise<void> => {
-    const camera = await page.evaluate<{ x: number; y: number }>(
-      'window.__VOLAM__.presentation().camera',
-    );
-    const box = (await page.locator('#game canvas').boundingBox())!;
-    const width = await page
-      .locator('#game canvas')
-      .evaluate((c: HTMLCanvasElement) => c.width);
-    await page.mouse.click(
-      box.x + ((x - camera.x) * box.width) / width,
-      box.y + ((y - camera.y) * box.width) / width,
-    );
-  };
-  await clickNpc(560, 690);
+  await page.locator('[data-menu=merchant]').click();
   await expect(page.getByRole('dialog')).toHaveAttribute(
     'data-menu',
     'merchant',
   );
   await page.keyboard.press('Escape');
-  await clickNpc(1040, 600);
+  await page.locator('[data-menu=dungeons]').click();
   await expect(page.getByRole('dialog')).toHaveAttribute(
     'data-menu',
     'dungeons',
   );
   const before = await read(page);
+  await page.keyboard.press('Escape');
+  await open(page, 'settings');
   await page.getByRole('button', { name: 'View forest art study' }).click();
   await expect(page.locator('#study-banner')).toBeVisible();
   await page.waitForTimeout(200);
@@ -294,7 +277,7 @@ test('world NPC clicks and forest study stay presentation-only', async ({
   await page.getByRole('button', { name: 'Return to arena' }).click();
   await expect(page.locator('#study-banner')).toBeHidden();
   await expect(page.locator('#game canvas')).toBeFocused();
-  await open(page, 'dungeons');
+  await open(page, 'settings');
   await page.getByRole('button', { name: 'View forest art study' }).click();
   await page.keyboard.press('Escape');
   await expect(page.locator('#study-banner')).toBeHidden();

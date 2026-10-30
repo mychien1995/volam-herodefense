@@ -1,5 +1,35 @@
 # Acceptance Tests — Rule-to-test traceability
 
+## Current menu-only dungeon access
+
+- No Dẫn Lộ sprite, label or NPC marker remains. Supported entry is enabled for a live arena player at the normal spawn, without walking to an interaction radius.
+- Core/server tests reject dead, pre-game or already-in-dungeon entry and preserve instance ownership, capacity, replay protection and physical exit validation.
+- Two-client browser tests use only the Phó Bản utility menu to enter shared or separate private instances, then verify combat, isolation, physical exit and retained empty-world state. This supersedes Guide-specific cases below.
+
+## Arena and selector visual v2
+
+- `tests/arena-layout.test.ts` checks removal of the interior trunk on the authoritative map, alignment of moved perimeter tree feet/collision, unchanged statue marker, open west/east routes and expanded Tiled paving.
+- `tests/e2e/arena-visual-v2.spec.ts` walks through the old tree footprint, checks the normal camera/HUD, four actual 512×768 card images, Vietnamese live controls, availability restrictions, close/Escape/focus and viewport containment at 944×466 and 1920×1080.
+- Genuine normal/critical combat events must match floating target ID, amount, critical flag and world anchor. Digits have no rectangular background, remain camera-scrolled, stack on rapid hits, and simultaneous multi-target hits stay associated with their targets. No fixed-position damage toast remains. Tests do not force RNG or inject fabricated combat events.
+- Preserve the existing shared/private dungeon, server reward, keyboard combat, projectile and animation regression suites. No new backend destination or skill is authorized by the card artwork.
+
+## M2A creep dungeon foundation — 2026-10-30
+
+- `tests/dungeons.test.ts`: a live arena hero must approach the Guide; a live dungeon hero must approach its physical exit. One authoritative membership, preserved progression/remaining cooldowns and canceled movement/queued attacks/projectiles across travel. Private owners cannot share worlds; shared capacity is six.
+- Full clear starts a rest then the next wave, scaling to the participant count at spawn. A mid-wave join does not change existing strength. Empty worlds freeze complete enemy/timer state, including a partially elapsed rest, and re-entry resumes it. Disconnecting the last participant also pauses.
+- Actual damage/contribution/death awards exactly the fixed EXP/gold pool to eligible present contributors; no cross-zone rewards and no items. Death countdown returns to the arena without EXP/gold loss.
+- `tests/dungeon-room.test.ts`: real Colyseus clients verify zone-filtered enemies, projectiles and events, private progress visibility, two shared occupants and a separate arena observer, replay/range/style validation, strict rejection of forged private instance IDs and pause/resume after exit.
+- `tests/e2e/dungeons.spec.ts`: two separate real Chromium contexts walk to/click the Guide, enter shared or different private instances, attack with A/Q/W, read synchronized enemy HP/rewards, use the physical exit and re-enter a paused dungeon. Menu and map transitions restore keyboard focus. Capture 1280×720 and 1920×1080 gameplay; monitor console/page/HTTP errors. Dungeon status must not overlap the combat toast.
+- M2A does not imply invasion, boss reset/loot, crafting or additional school acceptance. The dungeon environment and NPC/portal/enemy assets remain explicitly reused prototypes.
+
+## ART-01 replacement checks — 2026-10-30
+
+- Actual Chromium captures at 954×458, 1280×720 and 1920×1080 must show a full game viewport with compact live HUD, no exterior panel, center title/status block or minimap. Utility order is Settings/Quit/Phó Bản/Thương Gia/Lôi Đài; all existing menus remain reachable inside the viewport.
+- Load real PNGs/atlases and every water/glow frame without missing requests; validate frame bounds, tags, 160ms durations, padding, binary alpha and stable animation silhouettes. Approved Cái Bang hashes, four-facing idle/walk and both normal styles remain unchanged.
+- Two clients must observe the same movement/combat state; menu inputs must not send combat/movement, closing restores arrows/A/QWER, HP/mana/EXP/level/gold/cooldowns bind to server state. Quit really leaves; connection checks still acknowledge.
+- Existing tree collision/feet-depth occlusion and navigation remain intact. Statue art stays at its existing marker; M1's absence of statue/water colliders is disclosed, not changed or reported as implemented.
+- Review actual normal-zoom screenshots against the two approved concepts and rejected current build. Produced/integrated/runtime-verified are separate from director-approved. No bulk expansion before director sign-off.
+
 These are behavioral requirements, not already implemented tests. Codex should convert them to automated tests during the matching roadmap milestone and preserve them as regressions.
 
 ## A. Lobby and rooms
@@ -93,8 +123,41 @@ These are behavioral requirements, not already implemented tests. Codex should c
 - **Responsive:** Given 1280×720 and 1920×1080 desktop viewports (suggested test sizes), then all required HUD/modal content is reachable and not clipped.
 - **Visual regression:** When the implementation is reviewed, take real screenshots of game + inventory open + NPC menu open; compare positively to `in_game_world_reference.png` and negatively to `current_codex_dashboard_anti_reference.png`. Report placeholder imagery, real test commands, and any unimplemented systems.
 
-## v1.5 UI regression evidence — 2026-10-29
+## v1.6 Visual approval cases (ART-01)
 
-`tests/e2e/ui.spec.ts` verifies full-viewport canvas/HUD, bounded scrollable menus at 1280×720, 1920×1080 and 900×640, four equipment slots/disabled transactions, crafting tabs, actual NPC clicks, focus containment, held-input release, post-close Arrow/A/Q/W recovery, continued server ticks and shared second-player movement. Forest study tests confirm no room/position change and successful return; it is not a dungeon acceptance test.
+- GIVEN the actual running game screenshot, WHEN compared with the approved concept art and `current_game_2026_10_29_placeholder_anti_reference.png`, THEN the new hero/tree/tile/building/FX assets are demonstrably non-placeholder, cohesive and readable at target zoom.
+- GIVEN a hero walking and attacking in four directions, WHEN captured from Phaser, THEN animation frames are real source asset frames, pivots are consistent and collision remains server-owned.
+- GIVEN the small demo scene is complete, WHEN reviewed, THEN art is marked `NEEDS REVISION` until the director explicitly approves it. Tech tests passing does not implicitly approve art.
 
-All ten current browser tests passed along with the 62 headless/unit/server tests. Real evidence and honest placeholder status are in `docs/UI_V15_VERIFICATION.md`. Live raid warnings, real dungeon travel and item mutation remain untested/unimplemented until their gameplay milestones; the UI regression above does not mark those future requirements complete.
+
+## UI Phase 1 — dedicated pre-game school selection
+
+- Landing has exactly one nickname input; blank submission cannot advance. Room Browser displays actual rooms/counts/capacity/lock/phase, create/join and recoverable list/join errors.
+- Waiting lobby synchronizes connected players, room code and host; no school controls. Guests cannot start. Waiting host loss disables start without promoting a client.
+- Host start sends every connected client to SCHOOL_SELECTION in the same room. Four canonical schools only, distinct portraits, selected highlight, design-derived copy, confirm action and authoritative ready count.
+- Selection may change until confirmation; confirmed choice cannot change. Duplicates allowed. Empty/invalid school rejected by server; clients cannot advance themselves.
+- Tick/matchElapsedMs remain zero and no core hero/gameplay commands execute before every confirmation. Afterwards all level-1 heroes retain selected school IDs in the same IN_GAME room. Existing M1 arena/runtime art/combat remain the current prototype.
+- Selection disconnect leaves a visibly disconnected/unconfirmed roster slot and clock stopped; no timeout or auto-selection. Leave/recreate remains available.
+- Capture real browser screenshots at 1280×720 and 1920×1080; confirm no exterior dashboard or camera rescaling. Re-run movement/combat/modal/art regressions. See docs/UI_PHASE1_IMPLEMENTATION.md for measured results and limitations.
+
+## M2B — Statue invasion foundation
+
+- [x] Deterministic production waves at 180/360/540 seconds; exact 60/15-second warnings. Clock starts after the school confirmation barrier, not room creation.
+- [x] Server-only validated development override; 30-second interval warns at 10/3 seconds; production ignores overrides.
+- [x] West/east spawns, spawn-strength participant snapshots, multiple living waves coexist; no previous-wave clearing or invasion respawns.
+- [x] Statue objective movement, sticky player acquisition, invalid/dead/zone/leash release and return to objective. Detection/chase/rest are data driven.
+- [x] Common authoritative damage/death/reward pipeline; one fixed assist pool; hero death and five-second arena respawn without currency/EXP loss.
+- [x] Permanent statue damage with no repair/regeneration, one defeat transition, all zones/inputs/spawns frozen after defeat.
+- [x] Real SDK clients agree on warnings/timer, enemy HP/death, statue HP and rewards; dungeon filtering persists; separate rooms own independent defense state.
+- [x] Two real browser contexts verify joint invader hits/rewards, overlapping waves, public statue HP, warnings without dungeon recall, same defeat tick and frozen inputs. Invasion tests 2/2 passed; existing movement/combat/UI/dungeon browser regressions 11/11 passed. Screenshots inspected at normal gameplay zoom.
+- Browser-specific evidence and final results: docs/M2B_IMPLEMENTATION.md and docs/evidence/m2b/. The accelerated browser run uses a six-second interval and HP300; 3/6/9-minute production timing uses simulated time.
+- Remaining: production wave catalogue, bosses, victory/results, final tuning and enemy/VFX artwork approval. M2B does not authorize M2C.
+
+## Late-join correction
+
+- Non-full selection and active rooms expose an enabled Join button; both listed-room and room-code joins obey the same server admission policy.
+- A selection-phase entrant must confirm before the initial match clock starts. Existing selections and confirmation state remain intact.
+- An active-match entrant chooses a school locally while existing players continue; the global phase and clock never reset. Only confirmation creates their server-owned hero.
+- Forged gameplay/dungeon commands before confirmation are rejected. Pending players are absent from rendered arena actors. Repeated confirmation cannot duplicate/reset a hero.
+- Existing progression, statue HP and invasion deadline survive late entry. Full rooms reject a seventh client, an active free seat reopens when a pending entrant leaves, and defeated matches reject entry.
+- Live tick updates preserve school-control DOM/focus; arrows/A work after confirmation. See docs/LATE_JOIN_FIX.md for actual verification results.

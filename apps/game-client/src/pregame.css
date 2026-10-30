@@ -1,0 +1,354 @@
+#pregame {
+  --wood: #352117;
+  --gold: #d4b47b;
+  position: absolute;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background:
+    linear-gradient(#09232155, #10201b99),
+    url('/assets/pregame/background.png') center/cover;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #f9e3af;
+  overflow: auto;
+}
+#pregame button {
+  background: linear-gradient(#276344, #12472f);
+  border: 3px solid #ac8e5c;
+  box-shadow:
+    inset 0 0 0 2px #092e26,
+    0 2px 0 #1c110d;
+  padding: 12px 24px;
+  color: #ffe5ad;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+#pregame button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+#pregame button:focus-visible {
+  outline: 3px solid #fff2a5;
+  outline-offset: 3px;
+}
+#pregame input {
+  background: #241a18;
+  border: 3px solid #ad8b58;
+  padding: 14px;
+  color: #ffe8ba;
+  font-size: 20px;
+  min-width: 0;
+}
+.pre-window {
+  width: min(930px, 100%);
+  padding: 28px 38px 20px;
+  background: linear-gradient(100deg, #2d1b16ed, #513222f5, #2c1c17f5);
+  border: 8px ridge #9a734d;
+  box-shadow:
+    0 0 0 3px #182e23,
+    0 12px 45px #000a;
+  position: relative;
+  text-align: center;
+  max-height: calc(100% - 10px);
+  overflow: auto;
+}
+.pre-title {
+  background: linear-gradient(#285d46, #163d30);
+  border: 4px ridge #ad8d5a;
+  padding: 12px 25px;
+  width: fit-content;
+  margin: 0 auto 24px;
+  text-transform: uppercase;
+  color: #ffe6b4;
+  font-size: 32px;
+  text-shadow: 2px 3px #20140c;
+}
+.pre-room {
+  margin: 8px 0 20px;
+}
+.pre-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+}
+.pre-players {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.pre-players li {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 15px 12px;
+  border-bottom: 1px solid #927747;
+  font-size: 20px;
+}
+.parchment,
+.room-scroll {
+  background: #e2cc9b;
+  color: #362013;
+  padding: 15px;
+  border: 5px ridge #a88754;
+  max-height: 350px;
+  overflow: auto;
+}
+.pre-players span {
+  font-size: 15px;
+}
+.room-scroll table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.room-scroll td,
+.room-scroll th {
+  padding: 14px 10px;
+  border-bottom: 1px solid #ad9263;
+}
+.room-scroll th {
+  background: #c2a976;
+}
+.empty {
+  padding: 40px;
+}
+.pre-window form:not(#landing-form) {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 20px;
+}
+.pre-error,
+.pre-warning {
+  color: #ffd292;
+  min-height: 22px;
+}
+.pre-note {
+  font: 13px/1.4 system-ui;
+  color: #ded1b5;
+}
+.brand {
+  text-align: center;
+  margin-bottom: 35px;
+  text-shadow:
+    4px 5px #20120d,
+    -2px -2px #f3ce89;
+}
+.brand h1 {
+  font-size: 100px;
+  margin: 0;
+  color: #b48c5b;
+  line-height: 1.05;
+}
+.brand h2 {
+  font: 900 46px/1.1 system-ui;
+  margin: 0;
+  color: #efd092;
+  letter-spacing: 2px;
+}
+.landing {
+  flex-direction: column;
+}
+.landing-window {
+  width: 620px;
+  max-width: 100%;
+  padding: 24px;
+}
+#landing-form {
+  display: flex;
+  gap: 22px;
+}
+#landing-form input {
+  flex: 1;
+  width: 180px;
+}
+#landing-form button {
+  width: 170px;
+}
+.school-window {
+  width: min(1200px, 100%);
+  padding: 18px 24px;
+}
+.school-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+#pregame .school-card {
+  padding: 12px;
+  background: linear-gradient(#373323, #1b261f);
+  text-transform: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 2px solid #8f7548;
+  font-size: 14px;
+  box-shadow: none;
+}
+.school-card p {
+  font: 14px/1.35 system-ui;
+  margin: 7px 0;
+}
+.school-card small {
+  display: block;
+  font: 12px/1.35 system-ui;
+  margin: 5px 0;
+  color: #d7cfb6;
+}
+.school-card h3 {
+  font-size: 23px;
+  margin: 3px 0;
+}
+#pregame .school-card.selected {
+  border-color: #ffe39a;
+  background: linear-gradient(#445940, #243e30);
+  box-shadow:
+    0 0 0 2px #d4a753,
+    inset 0 0 20px #c8953a33;
+  opacity: 1;
+}
+.school-portrait {
+  width: 128px;
+  height: 145px;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  margin: 10px;
+}
+.school-portrait.cai {
+  background-image: url('/assets/characters/hero_cai_bang_idle.png');
+  background-size: 200px 200px;
+  background-position: center -25px;
+}
+.school-portrait.thien,
+.school-portrait.thieu {
+  background-image: url('/assets/pregame/thien_thieu_concept.png');
+  background-size: 768px 512px;
+  background-position: 0 -35px;
+}
+.school-portrait.thieu {
+  background-position: 0 -285px;
+}
+.school-portrait.vo {
+  background-image: url('/assets/pregame/vo_concept.png');
+  background-size: 768px 512px;
+  background-position: 0 -105px;
+}
+.element {
+  color: #f6cf78;
+}
+.school-window > .pre-players {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
+}
+.school-window > .pre-players li {
+  padding: 4px 10px;
+  font-size: 14px;
+  display: block;
+}
+.school-window > .pre-players span {
+  display: block;
+  font-size: 12px;
+}
+@media (min-width: 1700px) {
+  .pre-window {
+    width: 1050px;
+    padding: 36px 48px;
+  }
+  .school-window {
+    width: 1350px;
+  }
+  .school-portrait {
+    height: 170px;
+  }
+  .school-card p {
+    font-size: 16px !important;
+  }
+}
+@media (max-height: 800px) {
+  #pregame {
+    padding: 20px;
+  }
+  .school-window {
+    padding: 10px 18px;
+  }
+  .school-window .pre-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+    padding: 7px 20px;
+  }
+  .school-window .pre-room {
+    margin: 5px;
+  }
+  .school-portrait {
+    height: 100px;
+    margin: 2px;
+  }
+  .school-card p {
+    font-size: 12px !important;
+    margin: 4px 0;
+  }
+  .school-card small {
+    font-size: 11px;
+  }
+  .school-window .pre-actions {
+    margin-top: 10px;
+  }
+  .school-window .pre-note {
+    margin: 7px;
+  }
+  .pre-error {
+    margin: 6px 0;
+    min-height: 15px;
+  }
+}
+@media (max-width: 850px) {
+  .school-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .pre-window {
+    padding: 15px;
+  }
+  .brand h1 {
+    font-size: 70px;
+  }
+  .brand h2 {
+    font-size: 28px;
+  }
+  .pre-players li {
+    font-size: 16px;
+  }
+  #pregame button {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+#pregame[hidden] {
+  display: none;
+}
+
+#pregame .school-card:disabled {
+  opacity: 1;
+}
+.school-portrait.vo {
+  background-size: 1536px 1024px;
+  background-position: -1136px -130px;
+}
+@media (max-height: 800px) {
+  .school-portrait.vo {
+    background-position: -1136px -150px;
+  }
+  .school-portrait.cai {
+    background-size: 160px 160px;
+    background-position: center -20px;
+  }
+}

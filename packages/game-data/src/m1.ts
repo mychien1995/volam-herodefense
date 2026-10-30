@@ -60,6 +60,7 @@ export const simulationConfigSchema = z.strictObject({
   critMultiplier: positive,
   basics: z.record(z.string(), abilitySchema),
   skills: z.array(abilitySchema).length(2),
+  creepRespawn: z.boolean().default(true),
   creep: z.strictObject({
     hp: positive,
     defense: z.number().nonnegative(),

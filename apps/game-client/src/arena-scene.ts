@@ -1,8 +1,17 @@
 import Phaser from 'phaser';
-import { arena } from '@volam/game-data';
+import { arena, creepDungeon } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
 import type { CombatEvent } from '@volam/game-core';
-import { facing, preloadArt, registerArt } from './art.js';
+import { createArenaArt } from './arena-art01.js';
+import { FloatingDamage } from './floating-damage.js';
+import { createCreepDungeonArt } from './dungeon-presentation.js';
+import {
+  actorFootPivot,
+  facing,
+  heroTexture,
+  preloadArt,
+  registerArt,
+} from './art.js';
 interface EntityView {
   sprite: Phaser.GameObjects.Sprite;
   label: Phaser.GameObjects.Text;
@@ -10,7 +19,9 @@ interface EntityView {
   bar: Phaser.GameObjects.Graphics;
 }
 export class ArenaScene extends Phaser.Scene {
-  onNpc: (menu: 'merchant' | 'dungeons' | 'pvp') => void = () => {};
+  onNpc: (menu: 'merchant' | 'pvp') => void = () => {};
+  onDungeonExit: () => void = () => {};
+  private zoneId = 'arena';
   private snapshot: LobbyState | undefined;
   private sessionId = '';
   private actors = new Map<string, EntityView>();
@@ -19,6 +30,7 @@ export class ArenaScene extends Phaser.Scene {
   private ready = false;
   private followed = '';
   private lastEvent = 0;
+  private damage: FloatingDamage | undefined;
   constructor() {
     super('Arena');
   }
@@ -27,69 +39,8 @@ export class ArenaScene extends Phaser.Scene {
   }
   create(): void {
     registerArt(this);
-    const map = this.make.tilemap({ key: 'arena' });
-    const tiles = map.addTilesetImage('terrain', 'terrain', 32, 32, 0, 0);
-    if (!tiles) throw new Error('Missing terrain tileset.');
-    map.createLayer('ground', tiles)?.setDepth(-10000);
-    this.add.image(800, 680, 'courtyard_seal').setDepth(-9000).setAlpha(0.45);
-    // Decorative presentation only: retain M1 server collision/spawn geometry.
-    this.add.image(800, 576, 'statue_study').setOrigin(0.5, 1).setDepth(576);
-    for (const [x, y] of [
-      [720, 600],
-      [882, 600],
-      [720, 798],
-      [882, 798],
-    ] as const)
-      this.add.image(x, y, 'lantern').setOrigin(0.5, 1).setDepth(y);
-    for (const [x, y] of [
-      [520, 560],
-      [535, 810],
-      [1090, 840],
-      [1170, 600],
-      [620, 470],
-      [1000, 440],
-    ] as const)
-      this.add.image(x, y, 'bamboo').setOrigin(0.5, 1).setDepth(y);
-    this.npc(560, 710, 'merchant_stall', 'Thương Gia', 'merchant');
-    this.npc(1040, 620, 'dungeon_gate', 'Phó Bản', 'dungeons');
-    this.add
-      .text(800, 585, 'Statue · inactive', {
-        fontFamily: 'Georgia',
-        fontSize: '9px',
-        color: '#ead8ad',
-        backgroundColor: '#293f31',
-        padding: { x: 4, y: 2 },
-      })
-      .setOrigin(0.5, 0)
-      .setDepth(586);
-    for (const tree of arena.scenery)
-      this.trees.push(
-        this.add
-          .image(tree.x, tree.y, 'tree')
-          .setOrigin(0.5, 1)
-          .setDepth(tree.y),
-      );
-    for (const wall of arena.collision.filter((item) => item.width > 100)) {
-      this.add
-        .tileSprite(
-          wall.x + wall.width / 2,
-          wall.y + wall.height / 2,
-          wall.width,
-          wall.height,
-          'terrain',
-          2,
-        )
-        .setDepth(wall.y + wall.height);
-      this.add
-        .rectangle(
-          wall.x + wall.width / 2,
-          wall.y + wall.height,
-          wall.width,
-          6,
-          0x626957,
-        )
-        .setDepth(wall.y + wall.height + 1);
-    }
+    this.damage = new FloatingDamage(this);
+    this.drawZone('arena');
     this.cameras.main
       .setBounds(0, 0, arena.width, arena.height)
       .setZoom(1)
@@ -99,40 +50,34 @@ export class ArenaScene extends Phaser.Scene {
     this.ready = true;
     document.querySelector('#scene-status')?.setAttribute('data-ready', 'true');
   }
-  private npc(
-    x: number,
-    y: number,
-    texture: string,
-    label: string,
-    menu: 'merchant' | 'dungeons',
-  ): void {
-    const open = (pointer: Phaser.Input.Pointer): void => {
-      // Phaser listens at the document level: DOM HUD clicks must not reach NPCs.
-      if (pointer.event.target instanceof HTMLCanvasElement) this.onNpc(menu);
-    };
-    this.add
-      .image(x, y, texture)
-      .setOrigin(0.5, 1)
-      .setDepth(y)
-      .setInteractive({ useHandCursor: true })
-      .on('pointerup', open);
-    this.add
-      .text(x, y + 3, label + ' · Preview', {
-        fontFamily: 'Georgia',
-        fontSize: '10px',
-        color: '#f3dc9d',
-        backgroundColor: '#20372b',
-        padding: { x: 5, y: 3 },
-      })
-      .setOrigin(0.5, 0)
-      .setDepth(y + 0.3)
-      .setInteractive({ useHandCursor: true })
-      .on('pointerup', open);
-  }
   setSnapshot(snapshot: LobbyState | undefined, sessionId = ''): void {
     if (this.sessionId !== sessionId) this.lastEvent = 0;
     this.snapshot = snapshot;
     this.sessionId = sessionId;
+    const zoneId = snapshot?.players.get(sessionId)?.zoneId ?? 'arena';
+    if (this.ready && zoneId !== this.zoneId) this.drawZone(zoneId);
+  }
+  private drawZone(zoneId: string): void {
+    this.cameras.main.stopFollow();
+    this.tweens.killAll();
+    this.damage?.clear();
+    this.time.removeAllEvents();
+    for (const object of [...this.children.list]) object.destroy();
+    this.actors.clear();
+    this.shots.clear();
+    this.followed = '';
+    this.zoneId = zoneId;
+    if (zoneId === 'arena') {
+      this.trees = createArenaArt(this);
+      this.cameras.main
+        .setBounds(0, 0, arena.width, arena.height)
+        .centerOn(arena.spawn.x, arena.spawn.y);
+    } else {
+      this.trees = createCreepDungeonArt(this, () => this.onDungeonExit());
+      this.cameras.main
+        .setBounds(0, 0, creepDungeon.width, creepDungeon.height)
+        .centerOn(creepDungeon.spawn.x, creepDungeon.spawn.y);
+    }
   }
   private createActor(
     id: string,
@@ -145,7 +90,9 @@ export class ArenaScene extends Phaser.Scene {
       .setDepth(-5);
     const sprite = this.add
       .sprite(x, y, enemy ? 'creep_outlaw' : 'hero_cai_bang', 'idle_down_0')
-      .setOrigin(0.5, 1);
+      .setOrigin(
+        ...actorFootPivot(this, enemy ? 'creep_outlaw' : 'hero_cai_bang'),
+      );
     const label = this.add
       .text(x, y + 5, '', {
         fontFamily: 'monospace',
@@ -173,6 +120,7 @@ export class ArenaScene extends Phaser.Scene {
         hp: number;
         maxHp: number;
         pose: string;
+        basicId?: string;
       },
       enemy: boolean,
       name: string,
@@ -187,7 +135,12 @@ export class ArenaScene extends Phaser.Scene {
           Math.round(Phaser.Math.Linear(view.sprite.y, actor.y, weight)),
         )
         .setDepth(view.sprite.y);
-      const key = `${enemy ? 'creep_outlaw' : 'hero_cai_bang'}:${actor.pose}:${facing(actor.fx, actor.fy)}`;
+      const texture = enemy ? 'creep_outlaw' : heroTexture(actor.basicId);
+      if (view.sprite.texture.key !== texture)
+        view.sprite
+          .setTexture(texture, 'idle_down_0')
+          .setOrigin(...actorFootPivot(this, texture));
+      const key = `${texture}:${actor.pose}:${facing(actor.fx, actor.fy)}`;
       if (view.sprite.anims.currentAnim?.key !== key) view.sprite.play(key);
       view.label
         .setText(name)
@@ -197,12 +150,12 @@ export class ArenaScene extends Phaser.Scene {
       view.bar.clear().setDepth(view.sprite.y + 0.1);
       view.bar
         .fillStyle(0x293c37)
-        .fillRect(view.sprite.x - 14, view.sprite.y - 43, 28, 3);
+        .fillRect(view.sprite.x - 14, view.sprite.y - (enemy ? 43 : 48), 28, 3);
       view.bar
         .fillStyle(enemy ? 0xcc6e55 : 0x92c589)
         .fillRect(
           view.sprite.x - 14,
-          view.sprite.y - 43,
+          view.sprite.y - (enemy ? 43 : 48),
           Math.round((28 * actor.hp) / actor.maxHp),
           3,
         );
@@ -211,10 +164,13 @@ export class ArenaScene extends Phaser.Scene {
         this.followed = id;
       }
     };
-    state?.players?.forEach((hero, id) =>
-      render(id, hero, false, hero.nickname),
-    );
-    state?.creeps?.forEach((enemy, id) => render(id, enemy, true, 'Sơn tặc'));
+    state?.players?.forEach((hero, id) => {
+      if (hero.confirmed && hero.zoneId === this.zoneId)
+        render(id, hero, false, hero.nickname);
+    });
+    state?.creeps?.forEach((enemy, id) => {
+      if (enemy.zoneId === this.zoneId) render(id, enemy, true, 'Sơn tặc');
+    });
     for (const [id, view] of this.actors)
       if (!active.has(id)) {
         view.sprite.destroy();
@@ -229,6 +185,7 @@ export class ArenaScene extends Phaser.Scene {
       }
     const shotIds = new Set<string>();
     state?.projectiles?.forEach((shot, id) => {
+      if (shot.zoneId !== this.zoneId) return;
       shotIds.add(id);
       let sprite = this.shots.get(id);
       if (!sprite) {
@@ -258,27 +215,18 @@ export class ArenaScene extends Phaser.Scene {
       effect.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () =>
         effect.destroy(),
       );
-      const text = this.add
-        .text(
-          Math.round(event.x),
-          Math.round(event.y - 50),
-          `${event.critical ? '✦' : ''}${event.damage}`,
-          {
-            fontFamily: 'monospace',
-            fontSize: '10px',
-            color: event.critical ? '#ffe58a' : '#fff0d0',
-            stroke: '#393b36',
-            strokeThickness: 2,
-          },
-        )
-        .setDepth(5000);
-      this.tweens.add({
-        targets: text,
-        y: text.y - 18,
-        alpha: 0,
-        duration: 650,
-        onComplete: () => text.destroy(),
-      });
+      this.damage?.hit(
+        event,
+        !!this.snapshot?.players.has(event.targetId),
+        event.targetId === 'statue' ? 160 : undefined,
+      );
+      if (event.targetId === 'statue') {
+        const statue = this.children.getByName(
+          'art01:statue_male',
+        ) as Phaser.GameObjects.Image | null;
+        statue?.setTint(0xffd083);
+        this.time.delayedCall(140, () => statue?.clearTint());
+      }
     }
     if (event.kind === 'attack' && event.abilityId === 'cai_bang_bong') {
       const hero = this.snapshot?.players.get(event.sourceId);
@@ -299,6 +247,14 @@ export class ArenaScene extends Phaser.Scene {
     const unit = this.cameras.main.getWorldPoint(1, 0);
     return {
       ready: this.ready,
+      zoneId: this.zoneId,
+      damage: this.damage?.inspect(),
+      interactions: this.children.list
+        .filter((o) => o.name === 'dungeon-exit')
+        .map((o) => {
+          const image = o as Phaser.GameObjects.Image;
+          return { id: image.name, x: image.x, y: image.y };
+        }),
       rotation: Math.atan2(unit.y - origin.y, unit.x - origin.x),
       zoom: this.cameras.main.zoom,
       roundPixels: this.cameras.main.roundPixels,
@@ -310,6 +266,7 @@ export class ArenaScene extends Phaser.Scene {
         depth: view.sprite.depth,
         animation: view.sprite.anims.currentAnim?.key,
         frame: view.sprite.frame.name,
+        texture: view.sprite.texture.key,
       })),
       trees: this.trees.map((tree) => ({
         x: tree.x,
@@ -317,6 +274,34 @@ export class ArenaScene extends Phaser.Scene {
         depth: tree.depth,
       })),
       animations: this.anims.getAnimsFromTexture('hero_cai_bang'),
+      art01: {
+        textures: [
+          'arena_ground_art01',
+          'arena_world_art01',
+          'arena_garden_art01',
+          'arena_ambient_art01',
+        ].map((key) => ({
+          key,
+          exists: this.textures.exists(key),
+          frames: this.textures.get(key).getFrameNames(),
+        })),
+        objects: this.children.list
+          .filter((object) => object.name.startsWith('art01:'))
+          .map((object) => {
+            const view = object as Phaser.GameObjects.Sprite;
+            return {
+              name: view.name,
+              x: view.x,
+              y: view.y,
+              depth: view.depth,
+              frame: view.frame?.name,
+              animation: view.anims?.currentAnim?.key,
+            };
+          }),
+        statueCollision: this.snapshot?.defense.enabled
+          ? 'Authoritative pedestal footprint: x760,y548,w80,h28'
+          : 'M1 marker only; no authoritative solid statue collider',
+      },
     };
   }
 }

@@ -1,0 +1,24 @@
+{
+  "id": "new_character_revision_01",
+  "kind": "character",
+  "reviewed": false,
+  "source": "Gemini, user supplied; record generation date and source filename",
+  "license": "Record source/usage terms; do not invent third-party license claims",
+  "canvas": [80, 80],
+  "pivot": [40, 64],
+  "frames": [],
+  "tags": [],
+  "conventions": {
+    "directions": ["down", "left", "right", "up"],
+    "states": ["idle", "walk", "basic_attack"],
+    "frameName": "{state}_{direction}_{zero_based_tag_frame}",
+    "idle": {"frames": 2, "durationMs": 350},
+    "walk": {"frames": 4, "durationMs": 120},
+    "basic_attack": {"frames": 4, "durationMs": 75},
+    "bong_side_sweep": {"frames": 6, "durationMs": 50},
+    "frameExample": {"file": "assets/inbox/example.png", "rect": [0, 0, 80, 80], "offset": [0, 0], "durationMs": 350},
+    "tagExample": {"name": "idle_down", "from": 0, "to": 1},
+    "render": "nearest-neighbor, camera zoom 1, usual desktop integer display scale 2",
+    "sizePolicy": "80x80 is a baseline, not a forced resize. Enlarge the canvas and declare pivot for larger art. Keep original pixel scale; review scale mismatches."
+  }
+}

@@ -11,17 +11,17 @@
 ## 2. Onboarding, matchmaking and match state
 
 1. Landing page: user inputs **nickname**, optionally sees room list / join code, creates or joins a room, no registered account.
-2. Match room supports **1 to 6 active players**. Host chooses when to start (exact host/ready logic TBD). In room/lobby, players select a school; same-school duplicates allowed (proposed).
+2. Match room supports **1 to 6 active players**. Host starts the dedicated school selection step; all players must confirm before gameplay. After the host starts from the waiting lobby, players select/confirm schools on a dedicated screen; same-school duplicates allowed.
 3. Spawn at level 1 around central statue. Starting gold, inventory, skills, character HP/MP are new each match; **no progress persists**.
 4. Game clock begins; standard raid arrivals every **180 seconds**, independent of dungeon status or incomplete earlier raids.
-5. Between invasions: players use dungeon NPC, fight creeps/bosses, gain XP/gold/items, change skills in arena, shop/upgrade/craft, optionally initiate PvP.
+5. Between invasions: players use the Phó Bản menu from the arena, fight creeps/bosses, gain XP/gold/items, change skills in arena, shop/upgrade/craft, optionally initiate PvP.
 6. Victory: **Vương Trùng Dương** defeated with statue alive. Defeat: statue HP = 0. Results screen then room can end/return to lobby (rematch behavior TBD).
 
 ## 3. Arena
 
 - One central statue, initially full HP and **no healing, repair or regeneration**.
 - Creeps enter along **two opposing corridors (west/east)**. At least some room to maneuver and intercept; do not force single-file enemy traffic.
-- NPCs: Dungeon Guide, Merchant/Crafter (can be combined initially), PvP Steward.
+- Dungeon access uses the Phó Bản menu; no Dungeon Guide NPC. Other planned NPCs: Merchant/Crafter (can be combined initially), PvP Steward.
 - Changing normal attack, equipping any four school skills, and redistributing ranks is allowed **in arena**, including outside NPC menus if convenient; prohibited in dungeon and PvP zones.
 - 60-second and 15-second advance warning (visual + sound recommended); persistent next-invasion countdown in all maps.
 - No automatic teleport. Player must reach dungeon exit portal, interact, load the arena, and run toward statue. Design travel so manual return is physically achievable within the notice for attentive players.
@@ -63,7 +63,7 @@ The first final boss eligibility after chapter four: only once Bắc Cái is def
 | Private (1 player) | Solo progressive kill-to-advance waves | Solo fixed-strength farmable boss |
 | Shared (up to 6) | Cooperative kill-to-advance waves | Cooperative fixed-strength farmable boss |
 
-- Enter via Dungeon Guide NPC menu; separate instanced map/zone from arena, but still attached to same match. One player cannot simultaneously be in multiple zones. Combat state is authoritative per match.
+- Enter through the Phó Bản menu from anywhere in the arena while alive; no NPC/proximity requirement. Separate instanced map/zone remains attached to the same match. One player cannot simultaneously be in multiple zones. Combat state is authoritative per match.
 - Exit via **physical portal** inside dungeon; mouse to interact, return to arena NPC. Dungeon entry, transitions and teleports validated server-side.
 - Creep dungeons: spawn next wave **only after all living creeps from current wave are defeated**; wave difficulty increases; dungeon pauses when last participant leaves and resumes from same wave when someone returns. Define which enemies' HP/position are paused via snapshot, not erased.
 - Boss dungeons: fixed boss strength, can be killed repeatedly; after kill, wait a tunable respawn cooldown. If dungeon becomes empty with boss alive, start **30-second reset timer**; at expiry, restore HP and spawn position. If reentered before expiry, cancel reset. If boss already dead, use respawn cooldown logic instead; avoid resurrecting prematurely due to empty state.
@@ -104,3 +104,14 @@ The first final boss eligibility after chapter four: only once Bắc Cái is def
 ## In-game UI presentation (confirmed in v1.4)
 
 After joining a match, the central arena/dungeon/PvP world remains the dominant screen; hero HUD, statue HP, wave timer, skill bar, gold, inventory, merchant, crafting, dungeon and PvP windows all appear **inside or over the game viewport**. Do not implement the in-match game as a web dashboard with persistent room/hero/enemy panels outside the map. The lobby before joining may use a distinct menu screen. See `UI_UX_SPEC.md` for layout, interaction, input-focus and acceptance details. The sample screenshots in `assets/references/` are visual references, not ready-to-import gameplay animation sheets.
+
+
+## Confirmed dedicated pre-game school selection — 2026-10-30
+
+The current user correction supersedes school choices in the waiting lobby: **Landing (nickname only) → Room Browser (create/join) → Waiting Lobby (players/host/status) → host Start Game → dedicated School Selection → all confirmations → Main Arena**. School choices do not appear in the waiting lobby. Four canonical schools only: Cái Bang, Thiên Sơn, Võ Đang, Thiếu Lâm. Duplicate school choices are allowed. Players can change choices until confirmation, then their choice is locked. Confirmation progress is server state.
+
+The existing Colyseus room owns WAITING_LOBBY, SCHOOL_SELECTION and IN_GAME, host ID, school IDs and confirmations. Only the host can request Start Game in the waiting lobby. Simulation/input and matchElapsedMs remain stopped until every participant is connected and confirmed. Players then spawn at level 1 with one point near the central statue in the same room, retaining their chosen school in both network/player state and the core hero. No persistent accounts or progression. Invasions are still an unimplemented M2 feature; future scheduling must use the IN_GAME clock origin, never room creation.
+
+Disconnect safety: during selection retain a disconnected/unconfirmed participant and hold the barrier. Never auto-pick, expire, or silently start without that participant. Current clients can leave/recreate the room. Host migration, reconnect/rejoin grace, removal of absent participants and any timeout/auto-selection policy remain OPEN; no such policy is implemented. Waiting-lobby host loss disables starting; no silent host promotion.
+
+School descriptions, passives and basic styles come from CONTENT_DATA.md. School-specific numeric starting values and starting skill assignments beyond the Cái Bang M1 prototype are not finalized; show that explicitly instead of inventing mockup statistics. Phase 1 stores/validates selections but does not implement M3 school combat or bulk school gameplay art: the existing M1 combat tuning and approved Cái Bang runtime visual fallback remain in the arena. Distinct school card portraits are concept illustrations only.

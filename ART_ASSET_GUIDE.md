@@ -1,5 +1,19 @@
 # Pixel Art and Animation Pipeline — v1.3
 
+## Current arena/card revision — 2026-10-30
+
+The current loader supersedes the earlier ART-01 ground with `assets/exports/arena_v2/ground.png`, preserving approved actors and existing statue/prop/ambient exports. Six editable Aseprite sources under `assets/source/arena_v2/` and `assets/source/dungeon_cards/` produce the ground, four 32px paving variants and four separate 512×768 static card illustrations. `pnpm assets:export:visual` re-exports edited sources; `pnpm verify:assets` validates them. `assets/arena_v2.manifest.json` records source hashes, layers, pivots and verification status. Card UI text/control frames remain DOM components. New raster components were originally generated with built-in image_gen and prepared/exported using Aseprite 1.3.18.6; no original layers were recovered from a flattened concept. Runtime director approval remains pending.
+
+## ART-01 arena and HUD production candidate — 2026-10-30
+
+The current candidate has nine editable Aseprite sources in `assets/source/arena_art01/` and committed PNG/JSON exports in `assets/exports/arena_art01/`. `pnpm assets:export:arena` re-exports artist-edited sources without regenerating them; `pnpm verify:assets` validates both the approved actors and this candidate. See `assets/arena_art01.manifest.json` for per-component produced/integrated/runtime-verified status, and `docs/ART01_RUNTIME_REVIEW.md` for actual browser evidence. Runtime director approval remains pending; this does not approve other maps/schools or replace the approved Cái Bang baseline.
+
+## Approved initial character baseline — 2026-10-30
+
+The user approved the current Cái Bang Bổng/Chưởng authored idle/walk/normal attacks as the initial visual quality baseline. Actual conventions supersede earlier proposed character dimensions for this baseline: 80×80 transparent canvases, approximately 44px bodies, feet at (40,64), four directions, `{state}_{direction}_{tagframe}` names and Aseprite hash JSON with frame tags/pivot slice. Idle: 2×350ms; walk: 4×120ms; basic attack: 4×75ms, except Bổng side sweeps 6×50ms. Nearest filtering, camera zoom 1 and usual desktop display scale 2. Larger imported art needs its own canvas/pivot and scale review, not forced resizing. Cast/hurt/death aliases remain outside authored approval.
+
+Preserve approved source/export bytes in `assets/approved_cai_bang.lock.json`. For Gemini batches use `ASSET_INVENTORY.md`, `assets/intake/character_template.json`, `assets/intake/README.md` and `scripts/asset-intake.py`. A painted checkerboard is not alpha. Staging never installs unreviewed assets into runtime; first-batch scene approval remains separate from character approval.
+
 **PRIMARY ART REFERENCE:** `ART_DIRECTION_REFERENCE.md` and `assets/references/vo_dang_art_direction_reference.png` now define the required **detailed chibi wuxia pixel-art style**. The original image is a concept sheet, not a usable runtime spritesheet. The style and character silhouettes must be approved in a one-hero prototype before bulk asset creation.
 
 **CONFIRMED art direction:** classic Pokémon-style **2D pixel art with an orthographic, elevated/top-down three-quarter overworld camera**. The player views the character and surrounding map from above at a slightly angled perspective; the character's body/face and the fronts of structures remain visible. This is sometimes informally called "third-person from above"; it is **not** a 3D third-person chase camera, not a directly overhead bird's-eye view showing only heads, not an isometric diamond-grid game, and not a side-view platformer.
@@ -109,8 +123,6 @@ School art references: `assets/references/cai_bang_character_reference.png`, `th
 
 Create UI art suitable for a chibi wuxia pixel-art game: hero portraits, compact stat bars, icon hotbar, item icons/grids, readable framed NPC windows. Prefer original/licensed graphical borders and clear pixel-art icons. HUD must live above the world **within the game viewport**, with readable Vietnamese text and closeable in-game windows. No need for all UI to be authored as Phaser sprites; HTML/CSS modal views over the canvas are allowed as long as they stay within the viewport and match the game look. See `UI_UX_SPEC.md`.
 
-## v1.5 UI refactor asset status
+## v1.6 Art quality approval rule
 
-`assets/source/ui_world.py` authors eleven original UI/environment **prototype** sheets/images, refreshed terrain/tree textures and manifest metadata. It does not generate new school characters. The 16-frame 32px icon sheet and four 128×80 destination studies have explicit frame metadata; `verify-assets.py` verifies their nonempty cells. Runtime exports total sixteen PNGs including the existing M1 set. Normal builds only copy committed exports and never copy `assets/references/`.
-
-All supplied PNG references were inspected; filename/content mismatches are recorded in `assets/references/README.md`. No concept-sheet pixels were cropped, traced into an atlas or bundled as a world backdrop. These procedural pixel studies do not satisfy final detailed-art acceptance. See `docs/UI_V15_VERIFICATION.md` for real browser screenshots and remaining art work.
+The art pipeline's acceptance conditions are now defined in `ART_PRODUCTION_STANDARD.md`. A Phaser scene built from procedural placeholders is sufficient only for engineering smoke tests and **cannot count as production artwork**. Prove final quality first on one illustrated playable arena slice. The current screenshot is archived as `assets/references/current_game_2026_10_29_placeholder_anti_reference.png`. UI/HUD placement alone does not pass art review.

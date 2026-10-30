@@ -1,0 +1,1881 @@
+{
+  "version": 1,
+  "scope": "ART-01 arena and compact HUD only",
+  "date": "2026-10-30",
+  "approval": {
+    "concept": "User-approved direction: clean-arena-concept.png and arena-concept-1.png",
+    "runtime": "PENDING director review at normal gameplay zoom"
+  },
+  "referenceFiles": [
+    "assets/concept/clean-arena-concept.png",
+    "assets/concept/arena-concept-1.png",
+    "assets/concept/current-build.png"
+  ],
+  "sourceProcess": "Separate original generated ground, props, garden, icons and blank UI frames. Named layers were explicitly reconstructed in Aseprite; original layers were not recovered from the flattened concept.",
+  "generationInputs": [
+    {
+      "path": "assets/source/arena_art01/generated_frames.png",
+      "sha256": "910e2db4d84b359b3339b69633f9a1077358739d481fdf161a92c35b348c49c9"
+    },
+    {
+      "path": "assets/source/arena_art01/generated_garden.png",
+      "sha256": "3ab90ec2654ed0b2d57fd62fa025fd58aa6741400ad26f29f1fab4bb9614093d"
+    },
+    {
+      "path": "assets/source/arena_art01/generated_ground.png",
+      "sha256": "6744748698aba8979b3bfa892d644c83c2c9de835c5b864dc82de1c535ebcf13"
+    },
+    {
+      "path": "assets/source/arena_art01/generated_ground_native.png",
+      "sha256": "5628bd022409584507cdde8b3946a2bab0cd99883809b264bea40e729650749c"
+    },
+    {
+      "path": "assets/source/arena_art01/generated_hud.png",
+      "sha256": "1a91c24d88402b8580db5cbcd411745b3473789670f9c272a83bb611752fe5b3"
+    },
+    {
+      "path": "assets/source/arena_art01/generated_world.png",
+      "sha256": "03f1982e38ac3f917e07e0af60892a699903ed3b5bca66b0d1c106748172123f"
+    }
+  ],
+  "productionScripts": [
+    "scripts/assemble-arena-art01.lua",
+    "scripts/export-arena-art01.lua",
+    "scripts/export-arena-art01.mjs"
+  ],
+  "layout": {
+    "courtyardCenter": [
+      800,
+      576
+    ],
+    "statueMarker": [
+      800,
+      576
+    ],
+    "navigation": "Existing server map and spawn markers unchanged; only painted surfaces are adapted."
+  },
+  "verification": [
+    "scripts/verify-arena-art01.py",
+    "tests/e2e/art01.spec.ts",
+    "docs/ART01_RUNTIME_REVIEW.md"
+  ],
+  "remainingPlaceholders": [
+    "creep_outlaw enemy",
+    "fire projectile/impact",
+    "staff arc",
+    "cast/hurt/death fallback aliases",
+    "item-category icons and destination art outside ART-01",
+    "remote map edge continuation"
+  ],
+  "limitations": [
+    "M1 has no statue collider/health or invasions; no authoritative geometry was changed.",
+    "Inventory/shop/dungeon/PvP are real existing preview overlays without the later-milestone backends.",
+    "M1 has no quick-item backend or skill ranks, so no potion counts or rank values are invented.",
+    "Banner is static; water and lantern loops are texture flow/glow, not a claimed hand-drawn full-fluid animation."
+  ],
+  "assets": [
+    {
+      "id": "arena_ground",
+      "source": "assets/source/arena_art01/arena_ground.aseprite",
+      "export": "assets/exports/arena_art01/arena_ground.png",
+      "dimensions": [
+        1600,
+        1152
+      ],
+      "visibleBounds": [
+        0,
+        0,
+        1600,
+        1152
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "51b111d4b9d230a7156a0a7a04d1444dfacc97e3061023855e3f530f97f61d32",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "layers": [
+        "Continuous authored soil and stone substrate",
+        "Separated authored moss, grass and flowers",
+        "Reconstructed north approach edge continuation",
+        "Fine arena paving and natural verge - editable density pass"
+      ],
+      "collision": "Unchanged authoritative maps/arena.tmj. Ground art does not own collision.",
+      "animation": "static"
+    },
+    {
+      "id": "statue_male",
+      "source": "assets/source/arena_art01/world.aseprite",
+      "export": "assets/exports/arena_art01/statue_male.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "visibleBounds": [
+        48,
+        66,
+        145,
+        182
+      ],
+      "footPivotPixels": [
+        96,
+        184
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "6ef6343c12da64872b4b429ca7a130f3c5e8c3fea3097a7a39d117d39c03da2e",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/world.json",
+      "sheet": "assets/exports/arena_art01/world.png",
+      "frame": "statue_male",
+      "layers": [
+        {
+          "name": "Grounded bases, trunks, stone pedestal and poles",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Sculpture, tree canopies, bamboo and lantern housing",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static",
+      "worldPosition": [
+        800,
+        576
+      ],
+      "collision": "Existing M1 marker is non-solid. No client collider invented.",
+      "layersPurpose": "Stone sculpture separated from pedestal and steps."
+    },
+    {
+      "id": "tree_jade",
+      "source": "assets/source/arena_art01/world.aseprite",
+      "export": "assets/exports/arena_art01/tree_jade.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "visibleBounds": [
+        25,
+        45,
+        170,
+        181
+      ],
+      "footPivotPixels": [
+        96,
+        184
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "0eee10861d3c106e2cd58892ffa243f8db5cd25c4921067f0dff3c725d72f92e",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/world.json",
+      "sheet": "assets/exports/arena_art01/world.png",
+      "frame": "tree_jade",
+      "layers": [
+        {
+          "name": "Grounded bases, trunks, stone pedestal and poles",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Sculpture, tree canopies, bamboo and lantern housing",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static",
+      "collision": "Three existing authoritative trunk footprints; original map positions retained.",
+      "occlusion": "Separate base/canopy PNGs, both aligned to foot pivot; Y-sorted against actor feet."
+    },
+    {
+      "id": "tree_blossom",
+      "source": "assets/source/arena_art01/world.aseprite",
+      "export": "assets/exports/arena_art01/tree_blossom.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "visibleBounds": [
+        32,
+        55,
+        160,
+        181
+      ],
+      "footPivotPixels": [
+        96,
+        184
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "349f285a96bc0b359b7718f64d4eb91cfb52e23e8be052f5f4a9f00d6f57228f",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/world.json",
+      "sheet": "assets/exports/arena_art01/world.png",
+      "frame": "tree_blossom",
+      "layers": [
+        {
+          "name": "Grounded bases, trunks, stone pedestal and poles",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Sculpture, tree canopies, bamboo and lantern housing",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static",
+      "collision": "Three existing authoritative trunk footprints; original map positions retained.",
+      "occlusion": "Separate base/canopy PNGs, both aligned to foot pivot; Y-sorted against actor feet."
+    },
+    {
+      "id": "bamboo",
+      "source": "assets/source/arena_art01/world.aseprite",
+      "export": "assets/exports/arena_art01/bamboo.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "visibleBounds": [
+        55,
+        68,
+        144,
+        181
+      ],
+      "footPivotPixels": [
+        96,
+        184
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "895f667a748a24144b33e64c595a41fe94e68f88b4f36ece71e4e4d189a70a16",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/world.json",
+      "sheet": "assets/exports/arena_art01/world.png",
+      "frame": "bamboo",
+      "layers": [
+        {
+          "name": "Grounded bases, trunks, stone pedestal and poles",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Sculpture, tree canopies, bamboo and lantern housing",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "lantern",
+      "source": "assets/source/arena_art01/world.aseprite",
+      "export": "assets/exports/arena_art01/lantern.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "visibleBounds": [
+        87,
+        133,
+        106,
+        180
+      ],
+      "footPivotPixels": [
+        96,
+        184
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "aebedd5234a4f2e4faa899f76504fa893ce79b3e62dc0953a1aef4e4a2109e43",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": false,
+        "runtimeVerified": false,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/world.json",
+      "sheet": "assets/exports/arena_art01/world.png",
+      "frame": "lantern",
+      "layers": [
+        {
+          "name": "Grounded bases, trunks, stone pedestal and poles",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Sculpture, tree canopies, bamboo and lantern housing",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "red_banner",
+      "source": "assets/source/arena_art01/world.aseprite",
+      "export": "assets/exports/arena_art01/red_banner.png",
+      "dimensions": [
+        192,
+        192
+      ],
+      "visibleBounds": [
+        80,
+        103,
+        113,
+        181
+      ],
+      "footPivotPixels": [
+        96,
+        184
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "b572e1467f418220b14b517ac0d5adf623bac43481888d85d72a9e33368594fa",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/world.json",
+      "sheet": "assets/exports/arena_art01/world.png",
+      "frame": "red_banner",
+      "layers": [
+        {
+          "name": "Grounded bases, trunks, stone pedestal and poles",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Sculpture, tree canopies, bamboo and lantern housing",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static; no fabricated wind frames"
+    },
+    {
+      "id": "cascade",
+      "source": "assets/source/arena_art01/garden.aseprite",
+      "export": "assets/exports/arena_art01/cascade.png",
+      "dimensions": [
+        224,
+        224
+      ],
+      "visibleBounds": [
+        27,
+        42,
+        206,
+        210
+      ],
+      "footPivotPixels": [
+        112,
+        216
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "2ac614d11eabe29f982ecc16bd372eef0e8b4c1c902051f9d498bd0c9f35b26a",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/garden.json",
+      "sheet": "assets/exports/arena_art01/garden.png",
+      "frame": "cascade",
+      "layers": [
+        {
+          "name": "Shallow water and walkable bridge deck",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Flowering banks, rocks and rear railing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate bridge foreground railing",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "stream_pool",
+      "source": "assets/source/arena_art01/garden.aseprite",
+      "export": "assets/exports/arena_art01/stream_pool.png",
+      "dimensions": [
+        224,
+        224
+      ],
+      "visibleBounds": [
+        25,
+        31,
+        194,
+        210
+      ],
+      "footPivotPixels": [
+        112,
+        216
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "d36650746b106b3941390abc34dd702c56fb6a44d59f2607c32d9f2d29b3d778",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/garden.json",
+      "sheet": "assets/exports/arena_art01/garden.png",
+      "frame": "stream_pool",
+      "layers": [
+        {
+          "name": "Shallow water and walkable bridge deck",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Flowering banks, rocks and rear railing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate bridge foreground railing",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "bridge",
+      "source": "assets/source/arena_art01/garden.aseprite",
+      "export": "assets/exports/arena_art01/bridge.png",
+      "dimensions": [
+        224,
+        224
+      ],
+      "visibleBounds": [
+        50,
+        153,
+        178,
+        210
+      ],
+      "footPivotPixels": [
+        112,
+        216
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "ac19fa5e15398c246b86d93c3615b579bfaed8127860964ac35688549dd24ad9",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/garden.json",
+      "sheet": "assets/exports/arena_art01/garden.png",
+      "frame": "bridge",
+      "layers": [
+        {
+          "name": "Shallow water and walkable bridge deck",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Flowering banks, rocks and rear railing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate bridge foreground railing",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static",
+      "collision": "Existing walkable ground retained; no new barrier or navigation rule.",
+      "occlusion": "Deck below actors; foreground rail Y-sorted separately."
+    },
+    {
+      "id": "flower_rocks",
+      "source": "assets/source/arena_art01/garden.aseprite",
+      "export": "assets/exports/arena_art01/flower_rocks.png",
+      "dimensions": [
+        224,
+        224
+      ],
+      "visibleBounds": [
+        49,
+        99,
+        172,
+        204
+      ],
+      "footPivotPixels": [
+        112,
+        216
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "ba0bec859221b7a8b61df29e1914d84cc8e9c05dce7497672bb6ebb611597464",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/garden.json",
+      "sheet": "assets/exports/arena_art01/garden.png",
+      "frame": "flower_rocks",
+      "layers": [
+        {
+          "name": "Shallow water and walkable bridge deck",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Flowering banks, rocks and rear railing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate bridge foreground railing",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "cascade_flow",
+      "source": "assets/source/arena_art01/ambient.aseprite",
+      "sheet": "assets/exports/arena_art01/ambient.png",
+      "atlas": "assets/exports/arena_art01/ambient.json",
+      "dimensions": [
+        224,
+        224
+      ],
+      "footPivotPixels": [
+        112,
+        216
+      ],
+      "frames": [
+        "cascade_flow_0",
+        "cascade_flow_1",
+        "cascade_flow_2",
+        "cascade_flow_3"
+      ],
+      "durationMs": 160,
+      "repeat": -1,
+      "layers": [
+        {
+          "name": "Fixed rock banks and vegetation",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Water surface pixel flow - four phase loop",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "provenance": "Original generated garden/lantern artwork; Aseprite adjacent-water sampling and lantern-window luminance cels. Fixed geometry and binary alpha across loop.",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      }
+    },
+    {
+      "id": "stream_pool_flow",
+      "source": "assets/source/arena_art01/ambient.aseprite",
+      "sheet": "assets/exports/arena_art01/ambient.png",
+      "atlas": "assets/exports/arena_art01/ambient.json",
+      "dimensions": [
+        224,
+        224
+      ],
+      "footPivotPixels": [
+        112,
+        216
+      ],
+      "frames": [
+        "stream_pool_flow_0",
+        "stream_pool_flow_1",
+        "stream_pool_flow_2",
+        "stream_pool_flow_3"
+      ],
+      "durationMs": 160,
+      "repeat": -1,
+      "layers": [
+        {
+          "name": "Fixed rock banks and vegetation",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Water surface pixel flow - four phase loop",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "provenance": "Original generated garden/lantern artwork; Aseprite adjacent-water sampling and lantern-window luminance cels. Fixed geometry and binary alpha across loop.",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      }
+    },
+    {
+      "id": "lantern_glow",
+      "source": "assets/source/arena_art01/ambient.aseprite",
+      "sheet": "assets/exports/arena_art01/ambient.png",
+      "atlas": "assets/exports/arena_art01/ambient.json",
+      "dimensions": [
+        224,
+        224
+      ],
+      "footPivotPixels": [
+        112,
+        216
+      ],
+      "frames": [
+        "lantern_glow_0",
+        "lantern_glow_1",
+        "lantern_glow_2",
+        "lantern_glow_3"
+      ],
+      "durationMs": 160,
+      "repeat": -1,
+      "layers": [
+        {
+          "name": "Fixed rock banks and vegetation",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Water surface pixel flow - four phase loop",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "provenance": "Original generated garden/lantern artwork; Aseprite adjacent-water sampling and lantern-window luminance cels. Fixed geometry and binary alpha across loop.",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      }
+    },
+    {
+      "id": "icon_settings",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_settings.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        3,
+        2,
+        63,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "d4184c1e26868f9d4024726d7fe0aa1efcfab86f664b3724618bef9b2734d230",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_settings",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_quit",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_quit.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        3,
+        2,
+        62,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "5248942fe363d5d3f4e19449f67132afd156121ad3b09d561e358de461172fe0",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_quit",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_portal",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_portal.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        2,
+        2,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "2f8268305ace539888c39a6cb4db1ef2667614762baed4033cbadff4e9f5b138",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_portal",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_shop",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_shop.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        1,
+        2,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "f6de242063c69f49e766d4567601e0e06c840ba5f0c2b8a4e5b64b11b3df0e1c",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_shop",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_swords",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_swords.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        3,
+        1,
+        63,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "db80da7b3e8b318a2c960fa953dbab2fb4c71e09ed141a449b1739cf57d0652f",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_swords",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_bag",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_bag.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        2,
+        1,
+        62,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "a1b42c34b094e2af8f7ffd16ab9f33bf398bb480ab8f6e36dcda60f3b03e6c97",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_bag",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_gold",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_gold.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        2,
+        1,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "748ce9627a876fe2142196601c93b1a1ae5aea6e101a3eb77f76b098ba7f6d0b",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_gold",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_potion_hp",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_potion_hp.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        1,
+        1,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "4d6368673af4429ac04bc1bbdb7020cf8cdeb0dba0df36d0487d6a96403ca1e8",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": false,
+        "runtimeVerified": false,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_potion_hp",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_potion_mp",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_potion_mp.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        3,
+        2,
+        63,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "bf4f3c470bb715533981ed1bae60f21c1a1c48ddd65b6d0501c062fa82f0ddfb",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": false,
+        "runtimeVerified": false,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_potion_mp",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_staff",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_staff.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        3,
+        2,
+        62,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "11224a3d98f88bd9d07060c0766a26ab40f65397c703b88b9e0184befdcb8a95",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_staff",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_flame",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_flame.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        2,
+        2,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "37dc78973749ae59b395e60aac378aa4a7de5b1c8658e0c53d92275ea7b71aa6",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_flame",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_dragon",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_dragon.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        1,
+        2,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "6cc1b1fb690d1e27d7ef2a6efb3706bdd1b03c0445e325ad04f8b9c2234eebda",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_dragon",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_scroll",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_scroll.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        3,
+        1,
+        63,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "f7972264c8de33921ba6c3233b3f231ed7b8fd0559f0bcc472cd8880417ea9d1",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_scroll",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_jade",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_jade.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        3,
+        1,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "fd95134a2f3ed8d650202ad82bb9abb379dd085c732f25560be993337b40a4fa",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_jade",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_lock",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_lock.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        2,
+        1,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "4115569c693281de24b56ce0ec0befc1ca14e79420f3d7c965054725b971881b",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_lock",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_empty",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/icon_empty.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        1,
+        1,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "cce2235094e2abd49b87debef946e4989c8c2c56a249d5426737454329a196aa",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": false,
+        "runtimeVerified": false,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud.json",
+      "sheet": "assets/exports/arena_art01/hud.png",
+      "frame": "icon_empty",
+      "layers": [
+        {
+          "name": "Gold corner frames and charcoal slot backing",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Separate original painted icon glyphs",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "panel_frame",
+      "source": "assets/source/arena_art01/hud_frames.aseprite",
+      "export": "assets/exports/arena_art01/panel_frame.png",
+      "dimensions": [
+        600,
+        164
+      ],
+      "visibleBounds": [
+        3,
+        4,
+        596,
+        161
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "12ffef6efaa27a61848fb156d9993e881cd83a77e679d5772c537bad538825e6",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud_frames.json",
+      "sheet": "assets/exports/arena_art01/hud_frames.png",
+      "frame": "panel_frame",
+      "layers": [
+        {
+          "name": "Painted gold frame and bevel",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Empty charcoal panel / jewel meter surface",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "hotbar_frame",
+      "source": "assets/source/arena_art01/hud_frames.aseprite",
+      "export": "assets/exports/arena_art01/hotbar_frame.png",
+      "dimensions": [
+        600,
+        124
+      ],
+      "visibleBounds": [
+        6,
+        5,
+        593,
+        118
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "6ccb2ef6a134485af4a8b5dc60bb7ff9cbb28cb10d71e0c3ce1ad0f625705586",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud_frames.json",
+      "sheet": "assets/exports/arena_art01/hud_frames.png",
+      "frame": "hotbar_frame",
+      "layers": [
+        {
+          "name": "Painted gold frame and bevel",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Empty charcoal panel / jewel meter surface",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "portrait_frame",
+      "source": "assets/source/arena_art01/hud_frames.aseprite",
+      "export": "assets/exports/arena_art01/portrait_frame.png",
+      "dimensions": [
+        128,
+        128
+      ],
+      "visibleBounds": [
+        3,
+        4,
+        125,
+        126
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "b78591d566280b20b395d1fa756c0b760033d6dc66c8ad4814e2d88a78991aa8",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud_frames.json",
+      "sheet": "assets/exports/arena_art01/hud_frames.png",
+      "frame": "portrait_frame",
+      "layers": [
+        {
+          "name": "Painted gold frame and bevel",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Empty charcoal panel / jewel meter surface",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "bar_hp",
+      "source": "assets/source/arena_art01/hud_frames.aseprite",
+      "export": "assets/exports/arena_art01/bar_hp.png",
+      "dimensions": [
+        360,
+        32
+      ],
+      "visibleBounds": [
+        2,
+        2,
+        356,
+        29
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "63dc63bb0dfcb29664119856b7b6f2098affebf98e909878c228c78bc90be206",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud_frames.json",
+      "sheet": "assets/exports/arena_art01/hud_frames.png",
+      "frame": "bar_hp",
+      "layers": [
+        {
+          "name": "Painted gold frame and bevel",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Empty charcoal panel / jewel meter surface",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "bar_mp",
+      "source": "assets/source/arena_art01/hud_frames.aseprite",
+      "export": "assets/exports/arena_art01/bar_mp.png",
+      "dimensions": [
+        360,
+        32
+      ],
+      "visibleBounds": [
+        2,
+        3,
+        356,
+        30
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "f59b28a60f7f8fb68151fcc8e31aadb6abcd3b2d9f2a591af8caba8b1d331e4c",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud_frames.json",
+      "sheet": "assets/exports/arena_art01/hud_frames.png",
+      "frame": "bar_mp",
+      "layers": [
+        {
+          "name": "Painted gold frame and bevel",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Empty charcoal panel / jewel meter surface",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "bar_exp",
+      "source": "assets/source/arena_art01/hud_frames.aseprite",
+      "export": "assets/exports/arena_art01/bar_exp.png",
+      "dimensions": [
+        360,
+        32
+      ],
+      "visibleBounds": [
+        2,
+        3,
+        356,
+        29
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "8fd3b2892cdcf8b54e494c1a6deb663b0c6e67d8c68bc9869bdd1f28fec81804",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud_frames.json",
+      "sheet": "assets/exports/arena_art01/hud_frames.png",
+      "frame": "bar_exp",
+      "layers": [
+        {
+          "name": "Painted gold frame and bevel",
+          "opacity": 255,
+          "blendMode": "normal"
+        },
+        {
+          "name": "Empty charcoal panel / jewel meter surface",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "slot_normal",
+      "source": "assets/source/arena_art01/hud_states.aseprite",
+      "export": "assets/exports/arena_art01/slot_normal.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        1,
+        1,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "cce2235094e2abd49b87debef946e4989c8c2c56a249d5426737454329a196aa",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": false,
+        "runtimeVerified": false,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud_states.json",
+      "sheet": "assets/exports/arena_art01/hud_states.png",
+      "frame": "slot_normal",
+      "layers": [
+        {
+          "name": "Authored empty slot frame - state variants",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "slot_selected",
+      "source": "assets/source/arena_art01/hud_states.aseprite",
+      "export": "assets/exports/arena_art01/slot_selected.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        1,
+        1,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "c69081939d4a2e8fd3ad5766b6b6a0b6bd0b2efec200943e3a7b2a0fea22800c",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": false,
+        "runtimeVerified": false,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud_states.json",
+      "sheet": "assets/exports/arena_art01/hud_states.png",
+      "frame": "slot_selected",
+      "layers": [
+        {
+          "name": "Authored empty slot frame - state variants",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "slot_disabled",
+      "source": "assets/source/arena_art01/hud_states.aseprite",
+      "export": "assets/exports/arena_art01/slot_disabled.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        1,
+        1,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "da3884fd0101ca233a075e43be3a95b0a2cc8ad3ae9d6dabde5c6a05bb7b0704",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": false,
+        "runtimeVerified": false,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "atlas": "assets/exports/arena_art01/hud_states.json",
+      "sheet": "assets/exports/arena_art01/hud_states.png",
+      "frame": "slot_disabled",
+      "layers": [
+        {
+          "name": "Authored empty slot frame - state variants",
+          "opacity": 255,
+          "blendMode": "normal"
+        }
+      ],
+      "animation": "static"
+    },
+    {
+      "id": "icon_palm",
+      "source": "assets/source/arena_art01/icon_palm.aseprite",
+      "export": "assets/exports/arena_art01/icon_palm.png",
+      "dimensions": [
+        64,
+        64
+      ],
+      "visibleBounds": [
+        1,
+        1,
+        61,
+        62
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "a28223d39cf6ce988e4146355aa25ab30bb3099bc7111817dbaad702dc239265",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "animation": "static; single projectile for ranged basic"
+    },
+    {
+      "id": "key_badge",
+      "source": "assets/source/arena_art01/hud.aseprite",
+      "export": "assets/exports/arena_art01/key_badge.png",
+      "dimensions": [
+        24,
+        20
+      ],
+      "visibleBounds": [
+        1,
+        1,
+        23,
+        20
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "8ab283ba5f2152b9d3019e9f6587b547e098b363f45bf4e65ab11e28cd2c9cba",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "animation": "static; live DOM key labels"
+    },
+    {
+      "id": "north_wall_face",
+      "source": "assets/source/arena_art01/wall.aseprite",
+      "export": "assets/exports/arena_art01/wall.png",
+      "dimensions": [
+        64,
+        24
+      ],
+      "visibleBounds": [
+        0,
+        0,
+        64,
+        24
+      ],
+      "footPivotPixels": [
+        0,
+        0
+      ],
+      "displayScale": "1 logical world pixel; HUD responsive in viewport",
+      "sha256": "a8a2ac1b592b095c9427dba2e1d6e27b936e9105124d22bb9091c749e29025ae",
+      "status": {
+        "producedAsset": true,
+        "integratedAsset": true,
+        "runtimeVerified": true,
+        "directorApproved": false
+      },
+      "provenance": "Original project artwork generated with built-in image_gen from user-provided art direction; prepared and exported in Aseprite 1.3.18.6. No third-party game asset pack.",
+      "animation": "static; existing wall bounds only"
+    }
+  ]
+}

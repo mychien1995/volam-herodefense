@@ -54,6 +54,8 @@ export interface SimulationConfig {
   critMultiplier: number;
   basics: Record<string, Ability>;
   skills: Ability[];
+  /** Arena practice creeps respawn; dungeon waves replace them only on clear. */
+  creepRespawn?: boolean;
   creep: {
     hp: number;
     defense: number;
@@ -86,6 +88,7 @@ export interface Actor extends Point {
   cooldown: number;
 }
 export interface Hero extends Actor {
+  schoolId: string;
   nickname: string;
   mana: number;
   maxMana: number;
@@ -101,6 +104,16 @@ export interface Hero extends Actor {
   skillCooldowns: number[];
 }
 export interface Creep extends Actor {
+  stats?: SimulationConfig['creep'];
+  invasion?: {
+    wave: number;
+    lane: 'west' | 'east';
+    targetId: string;
+    chaseOrigin: Point;
+    reacquireAt: number;
+    chaseRange: number;
+    aggroRestTicks: number;
+  };
   spawn: Point;
   respawnAt: number;
   hits: Record<string, number>;
@@ -129,6 +142,7 @@ export interface CombatEvent extends Point {
   critical: boolean;
 }
 export interface World {
+  statue?: Actor & { radius: number };
   tick: number;
   heroes: Map<string, Hero>;
   creeps: Map<string, Creep>;

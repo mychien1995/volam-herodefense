@@ -1,0 +1,1216 @@
+{
+  "id": "creep_bandit_swordsman",
+  "nameVi": "Sơn Tặc Đao",
+  "category": "enemy",
+  "status": "prototype",
+  "reviewStatus": "STAGED_NOT_INTEGRATED",
+  "conceptApproval": "User identifies Phase 1A artwork as approved source of truth in current request",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+  "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6",
+  "source": "sprites/creeps/arena/bandit-swordsman/source/creep_bandit_swordsman.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 112,
+  "frameHeight": 96,
+  "footPivot": [
+    0.5,
+    0.7916666666666666
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "unproducedStates": [],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/idle_down_0.png",
+      "bounds": [
+        30,
+        33,
+        72,
+        76
+      ],
+      "sha256": "8a790beb11e513fcbdd7a79525e8dcd1e01ad6c8b59ba0fa532931d2703bdc67",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_down_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/idle_down_1.png",
+      "bounds": [
+        36,
+        33,
+        72,
+        76
+      ],
+      "sha256": "6deb2f49889522544d455e50d2cb5f7d7e05260b8dca60ddc61c41dbb0aeda92",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_down_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_down_0.png",
+      "bounds": [
+        41,
+        33,
+        78,
+        76
+      ],
+      "sha256": "1e2aeb78181ac554af114a435b26d53d9ee1e08b34052986fb4051536868a9f5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_down_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_down_1.png",
+      "bounds": [
+        44,
+        33,
+        77,
+        76
+      ],
+      "sha256": "0a106547555bcac1e0d0ce2108369b035df12ea47ef62cf4bfda2f6978ecb2f0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_down_2",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_down_2.png",
+      "bounds": [
+        44,
+        33,
+        77,
+        76
+      ],
+      "sha256": "d3ce1b387eef8911ec994b089ce3a21918afbb6bb3ed4e53238e035cc016dffa",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_down_3",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_down_3.png",
+      "bounds": [
+        42,
+        33,
+        77,
+        76
+      ],
+      "sha256": "75edc0bfb86eb034c2d5b4948e999c907d814634e493cb303c752f0f64b8a16a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_down_0.png",
+      "bounds": [
+        34,
+        24,
+        73,
+        76
+      ],
+      "sha256": "b92c77a1de141aea11b3102e671cc216cbdb05d47ea1c4538ae4e7c1e12800bd",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_down_1.png",
+      "bounds": [
+        38,
+        32,
+        74,
+        76
+      ],
+      "sha256": "7f18dfe9e30a115b10626ad7d1afc74bb66fb05e9231a5abd83e14b3d5c06fac",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_down_2.png",
+      "bounds": [
+        33,
+        32,
+        79,
+        76
+      ],
+      "sha256": "13ac75bd54a5b6bd4cfa492c30dfdd295976d6d1572e5b90cf33ae9f6d7bf3ef",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_down_3.png",
+      "bounds": [
+        30,
+        33,
+        72,
+        76
+      ],
+      "sha256": "8a790beb11e513fcbdd7a79525e8dcd1e01ad6c8b59ba0fa532931d2703bdc67",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_left_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/idle_left_0.png",
+      "bounds": [
+        31,
+        33,
+        70,
+        76
+      ],
+      "sha256": "c1188080ba4523a79bea3c49eb6951e3dc4e4127b70448825b1a3112a1b6952b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_left_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/idle_left_1.png",
+      "bounds": [
+        31,
+        33,
+        71,
+        76
+      ],
+      "sha256": "d6c47ec1a79f291ffbee8d8874dd51221c9de3c40e00872345b198c845761ea4",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_left_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_left_0.png",
+      "bounds": [
+        39,
+        33,
+        75,
+        76
+      ],
+      "sha256": "273ec3af1c8764e611a622ddc13559e81e18c91fcb13d8121acb55ff70943958",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_left_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_left_1.png",
+      "bounds": [
+        39,
+        33,
+        74,
+        76
+      ],
+      "sha256": "1d259fa4a7eb9fc85fe219e121f06f34b1ea0e3a67f2c62563db39045a014fc5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_left_2",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_left_2.png",
+      "bounds": [
+        38,
+        33,
+        74,
+        76
+      ],
+      "sha256": "b7fe2cf6807e82ac9342278fb967496b6b1880a9e3febe7dac0c188bc9c9184d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_left_3",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_left_3.png",
+      "bounds": [
+        39,
+        32,
+        76,
+        76
+      ],
+      "sha256": "d3ce0fed5cf3df551f112f14e160d74f50acb5d286fb9cb668d85af31da5855f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_left_0.png",
+      "bounds": [
+        38,
+        29,
+        76,
+        76
+      ],
+      "sha256": "0947c9e228d497bea6c3aefc6cf267ca02098e0d42f2464b6e3fe78e7f3ce9be",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_left_1.png",
+      "bounds": [
+        40,
+        37,
+        80,
+        76
+      ],
+      "sha256": "00375c5d1f44c63c3deb4ef95226e7164fb1ad843b30151a52183afb3dfae16e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_left_2.png",
+      "bounds": [
+        11,
+        37,
+        71,
+        76
+      ],
+      "sha256": "36c2ffaa0f6c18348730cba063d010218d97c34138bcc583a62458018799f865",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_left_3.png",
+      "bounds": [
+        29,
+        34,
+        69,
+        76
+      ],
+      "sha256": "67f99f44334f1c58ddd7d22a54a9174405fc46001a797fc7547be9acb0d2b7ef",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_right_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/idle_right_0.png",
+      "bounds": [
+        42,
+        30,
+        83,
+        76
+      ],
+      "sha256": "91eacf393e7e7147c5219f64cfe1dc71d91328f69ac0aa81560f2ed5441744d8",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_right_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/idle_right_1.png",
+      "bounds": [
+        42,
+        30,
+        84,
+        76
+      ],
+      "sha256": "9930dc1bfdf349d958a5050b7e1b71a3dc610224bb22b7dc4cd3af20534c21ff",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_right_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_right_0.png",
+      "bounds": [
+        42,
+        31,
+        81,
+        76
+      ],
+      "sha256": "fe61a9fcf8ceff4aecb073cdd1b3e0199b24e7386256f7d0b40090210eb18930",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_right_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_right_1.png",
+      "bounds": [
+        43,
+        31,
+        78,
+        76
+      ],
+      "sha256": "138ffb6150f7670096f0caf6a30777499b620ab525ec8cd52f93033f19d18983",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_right_2",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_right_2.png",
+      "bounds": [
+        43,
+        30,
+        80,
+        76
+      ],
+      "sha256": "32d4fc7c9bd18cfc5fe88f264d7fb4169ff228b3e9d645971d852447c36b75d2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_right_3",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_right_3.png",
+      "bounds": [
+        42,
+        30,
+        79,
+        76
+      ],
+      "sha256": "584c6fde2b9e949bef2c753210d2ad563bd2d4cdceac677f843baa45449cd264",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_right_0.png",
+      "bounds": [
+        35,
+        29,
+        73,
+        76
+      ],
+      "sha256": "8fc2824865161f79c41a9c65e7f62f328e443ade2b9f0253746c6d387db4d278",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_right_1.png",
+      "bounds": [
+        42,
+        37,
+        95,
+        76
+      ],
+      "sha256": "c07bc4c929ae63391b58b2390ff41dea600a1042f7e38b916c396897c8414852",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_right_2.png",
+      "bounds": [
+        42,
+        36,
+        94,
+        76
+      ],
+      "sha256": "080c4574a20de4829db203edacb9eaa05b82563416b67c84bb4015a043186234",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_right_3.png",
+      "bounds": [
+        42,
+        33,
+        80,
+        76
+      ],
+      "sha256": "8f611d09c6f14d3e3bbca162440886cbc6bd22b512749c57ee81e3ec69978d3a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_up_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/idle_up_0.png",
+      "bounds": [
+        40,
+        31,
+        81,
+        76
+      ],
+      "sha256": "f5307cd9f7410a08a6e14cf93719c964eb2db5795ee9fc7f99fae4c97437a0b2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "idle_up_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/idle_up_1.png",
+      "bounds": [
+        41,
+        31,
+        77,
+        76
+      ],
+      "sha256": "fc7621335504330f6736dffbd04d851d31a386931cdfb28375d315f1e1e2979f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_up_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_up_0.png",
+      "bounds": [
+        42,
+        30,
+        76,
+        76
+      ],
+      "sha256": "89801cf6cab8e3e505de3a7a5f9c7dd9ad3db07008082c3060cd1c8d7bb2293f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_up_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_up_1.png",
+      "bounds": [
+        43,
+        31,
+        77,
+        76
+      ],
+      "sha256": "60cca672ccca2036a1420edce4fc0c4a75b3bbfd63b967aa0f7849a199e1f215",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_up_2",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_up_2.png",
+      "bounds": [
+        43,
+        31,
+        76,
+        76
+      ],
+      "sha256": "b1cb68213a30c77ed9b99259142928db18e3f3a100adf5d68dece315a1a212f5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "walk_up_3",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/walk_up_3.png",
+      "bounds": [
+        40,
+        31,
+        71,
+        76
+      ],
+      "sha256": "5350ea326387b9abc29ddeb04ff8df6aaa47a3c37f3ef937e6a38844d7a53488",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_up_0.png",
+      "bounds": [
+        37,
+        30,
+        76,
+        76
+      ],
+      "sha256": "6aa34378057697efa8d0150932a5b50d814d70c41e746997fdc3d876eae1adb7",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_up_1.png",
+      "bounds": [
+        39,
+        36,
+        92,
+        76
+      ],
+      "sha256": "086c1559c7fdbb27b82d2c8c2a70264265f83c364541cd412692e5448189136d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/basic_attack_up_2.png",
+      "bounds": [
+        41,
+        34,
+        79,
+        76
+      ],
+      "sha256": "d8eeae1a1e34427efd801d9de37933d0077f3b94ae69db19eb33f9049ccf318e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/hurt_down_0.png",
+      "bounds": [
+        29,
+        34,
+        71,
+        76
+      ],
+      "sha256": "7861475582becf7e0016cb2a81239ad73409ffc78ffd1818698aacb1f099e9a4",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/hurt_down_1.png",
+      "bounds": [
+        34,
+        31,
+        77,
+        76
+      ],
+      "sha256": "f22ee7804e050e7f25aca2405fe9829055acf6b3e9225b3260909e7e7ecfe303",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_down_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_down_0.png",
+      "bounds": [
+        37,
+        40,
+        78,
+        76
+      ],
+      "sha256": "7ab5d5812390506bc8c48c7449fe02701be34a40079a60f5377d410a43881d78",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_down_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_down_1.png",
+      "bounds": [
+        33,
+        45,
+        80,
+        76
+      ],
+      "sha256": "29b4fdf995a6bada142234372e2d9123430aafa1caa2fbd129d9f4a27028c846",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_down_2",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_down_2.png",
+      "bounds": [
+        28,
+        55,
+        81,
+        76
+      ],
+      "sha256": "c12382e4940f1cbe682402696209c2ee47b9f5ae1d10bcb241adaeadfdc3c4cb",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_down_3",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_down_3.png",
+      "bounds": [
+        29,
+        56,
+        82,
+        76
+      ],
+      "sha256": "4f4f4f995fc07fe39c170bfed219e30526e13f9713ca6c372e5e5ed0034f416e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/hurt_left_0.png",
+      "bounds": [
+        30,
+        33,
+        70,
+        76
+      ],
+      "sha256": "3874118ac2b90ee12d66304a3911c86aaa2e00acbbb635bb191d07b939a9c72c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/hurt_left_1.png",
+      "bounds": [
+        30,
+        33,
+        72,
+        76
+      ],
+      "sha256": "bcc498b4b7e4537fabb9ee5883d7117fca6e9a781f49aacf20d505eb554efe90",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_left_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_left_0.png",
+      "bounds": [
+        38,
+        33,
+        75,
+        76
+      ],
+      "sha256": "0a1b6077443df5e101f7e5d4ba529701c36c2b1b6a4a7dbcdafd3a9a2c532df5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_left_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_left_1.png",
+      "bounds": [
+        33,
+        43,
+        79,
+        76
+      ],
+      "sha256": "46a38484afe81ab65991c23cff0e741db8ff5d871d820ff773b7ab4e245b7c93",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_left_2",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_left_2.png",
+      "bounds": [
+        30,
+        56,
+        90,
+        76
+      ],
+      "sha256": "dca17f9562c67ce550a10d5092707bad2c2ae8b3dd1f94e088364ae0ffda22fa",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_left_3",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_left_3.png",
+      "bounds": [
+        30,
+        56,
+        84,
+        76
+      ],
+      "sha256": "4abaa243a686576b9ba94750a526f867fdad2d4cf8971da378f3a73c2d450924",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/hurt_right_0.png",
+      "bounds": [
+        42,
+        32,
+        84,
+        76
+      ],
+      "sha256": "0df246f631560f59f6ef597d82b68ec15c73784d071e041f8a402c8b393c43c1",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/hurt_right_1.png",
+      "bounds": [
+        42,
+        31,
+        83,
+        76
+      ],
+      "sha256": "c27a5c9ccaca7ae04687b9c797eafd9bcf6f8cccf3897820e33ebb5f3406b987",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_right_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_right_0.png",
+      "bounds": [
+        36,
+        33,
+        74,
+        76
+      ],
+      "sha256": "9fed9599ceefd48253d9d0837e6a9e504a4225085a043abd6a5c1a3b679ffced",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_right_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_right_1.png",
+      "bounds": [
+        33,
+        44,
+        80,
+        76
+      ],
+      "sha256": "adbc03203f6e17bda898b29b3b2352860687a492101d9f68d9ae536b92b34644",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_right_2",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_right_2.png",
+      "bounds": [
+        29,
+        57,
+        86,
+        76
+      ],
+      "sha256": "aa83968c0b3ca73330a798782abc81db1c77f506a1402ea5adcf13f6299a1ee0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_right_3",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_right_3.png",
+      "bounds": [
+        27,
+        57,
+        84,
+        76
+      ],
+      "sha256": "ba7fbaf54f93639ded130a48522cbeabfcc4d3a7484d759e0c57711f0c3b1364",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/hurt_up_0.png",
+      "bounds": [
+        39,
+        35,
+        82,
+        76
+      ],
+      "sha256": "463b885e0cbecb524ec968dd35b83deb1899060d6fd8ccb334554015733df57e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/hurt_up_1.png",
+      "bounds": [
+        39,
+        33,
+        84,
+        76
+      ],
+      "sha256": "95493c3f8d51594aeb864a852407b3fe08ed5a11f446cec27f4fe153f11dc1b0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_up_0",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_up_0.png",
+      "bounds": [
+        44,
+        40,
+        84,
+        76
+      ],
+      "sha256": "539f2c8c3d6277e246f8cc2009a3ca3a7bf055bdbc4786a74ddcafb37bd1a3aa",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_up_1",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_up_1.png",
+      "bounds": [
+        33,
+        43,
+        82,
+        76
+      ],
+      "sha256": "992f84ba486b45a123eb5f43f57c4541dfce831c389dd77667e19fe7caa32383",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_up_2",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_up_2.png",
+      "bounds": [
+        42,
+        50,
+        94,
+        76
+      ],
+      "sha256": "42b8c3e8a84510f841727d6c899dc5061cd97727ad61c35acb9bc54b46396b7f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    },
+    {
+      "name": "death_up_3",
+      "file": "sprites/creeps/arena/bandit-swordsman/frames/death_up_3.png",
+      "bounds": [
+        35,
+        58,
+        91,
+        76
+      ],
+      "sha256": "9e13081c86e8b90addadfc26a561066736cb2e6803eeba3bd8a0212ad68bc613",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "sourceConceptSha256": "086aa93608b13ff21b0105405010f5fc7982389404f5e58fe6356c975e34f6b6"
+    }
+  ],
+  "animationAudit": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": 3,
+      "distinctFrames": 3
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": 4,
+      "distinctFrames": 4
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": 2,
+      "distinctFrames": 2
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": 4,
+      "distinctFrames": 4
+    }
+  ],
+  "provenance": "Original AI-assisted raster poses generated by OpenAI built-in image_gen using approved concept directly. Aseprite extracts masked generated pixels, removes alpha below 220, normalizes retained alpha to 255, applies fixed nearest-neighbour source scale and aligns feet. No concept pixels used as frames; no commercial sprite pack or separate third-party license claimed.",
+  "notes": "Original frontal attacks turn sideways and are rejected; corrected fourth frontal pose swaps hands and is rejected. Recovery holds original idle. Rear follow-through missing dao is rejected; rear attack has three poses.",
+  "rejectedMainFrameIndices": [
+    6,
+    7,
+    8,
+    9,
+    38
+  ],
+  "normalGameplayReview": "PASS: isolated Phaser 4.2.1, 1x logical / 2x display, all frames observed. No match integration or director runtime approval.",
+  "verificationEvidence": [
+    "sprites/creeps/arena/review/phaser_verification.json",
+    "sprites/creeps/arena/review/concept_comparison.png",
+    "sprites/creeps/arena/review/phaser_animation_preview.webm"
+  ]
+}

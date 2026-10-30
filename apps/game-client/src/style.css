@@ -186,9 +186,10 @@ button .pixel-icon {
   height: 76px;
   border: 1px solid #b99b64;
   background-color: #33493a;
-  background-image: url('/assets/characters/hero_cai_bang.png');
-  background-size: 384px 2304px;
-  background-position: -16px -6px;
+  background-image: url('/assets/characters/hero_cai_bang_idle.png');
+  background-size: 120px 120px;
+  background-position: center -16px;
+  background-repeat: no-repeat;
   image-rendering: pixelated;
 }
 .portrait span {
@@ -202,6 +203,10 @@ button .pixel-icon {
   font-size: 13px;
   font-weight: 700;
   color: #ffe0a0;
+}
+#viewport[data-basic-style='chuong'] .portrait,
+#viewport[data-basic-style='chuong'] .paper-hero {
+  background-image: url('/assets/characters/hero_cai_bang_chuong_idle.png');
 }
 .hero-bars {
   flex: 1;
@@ -731,8 +736,8 @@ button .pixel-icon {
   transform: translateX(-50%);
   width: 144px;
   height: 144px;
-  background: url('/assets/characters/hero_cai_bang.png') 0 0 / 576px 3456px
-    no-repeat;
+  background: url('/assets/characters/hero_cai_bang_idle.png') center / 144px
+    144px no-repeat;
   image-rendering: pixelated;
 }
 .equipment-display::after {

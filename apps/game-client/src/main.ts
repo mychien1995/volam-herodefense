@@ -11,6 +11,7 @@ import {
   combatEventSchema,
   rejectionSchema,
   type InputMessage,
+  type DungeonAction,
 } from '@volam/game-protocol';
 import { ArenaScene } from './arena-scene.js';
 import { ArtPreviewScene } from './art-preview.js';
@@ -18,9 +19,17 @@ import { bindGameplayInput } from './input.js';
 import { GameUI, element } from './ui.js';
 import { ForestStudyScene } from './forest-study.js';
 import './style.css';
+import './arena-hud.css';
+import './dungeon.css';
+import './dungeon-selector.css';
+import './defense-hud.css';
+import { PreGame } from './pregame.js';
 
 const artPreview = new URLSearchParams(location.search).has('artPreview');
 const ui = new GameUI(artPreview);
+const endpoint = import.meta.env['VITE_SERVER_URL'] ?? 'http://localhost:2567';
+const pregame = new PreGame(endpoint);
+if (artPreview) pregame.node.hidden = true;
 const arenaScene = new ArenaScene();
 const gallery = new ArtPreviewScene();
 const study = new ForestStudyScene();
@@ -62,7 +71,12 @@ const observer = new ResizeObserver(fit);
 observer.observe(element('#game'));
 fit();
 arenaScene.onNpc = (menu) => {
-  if (room && !ui.blocked) ui.open(menu);
+  if (room && !ui.blocked) {
+    ui.open(menu);
+  }
+};
+arenaScene.onDungeonExit = () => {
+  if (!ui.blocked) dungeonAction({ action: 'exit' });
 };
 ui.onStudy = (enabled) => {
   if (artPreview || !game.isBooted) return;
@@ -82,8 +96,31 @@ let sequence = 0;
 const events: CombatEvent[] = [];
 const form = element<HTMLFormElement>('#join-form');
 const status = element('#status');
+function dungeonAction(
+  action:
+    | { action: 'open' | 'exit' }
+    | { action: 'enter'; access: 'private' | 'shared' },
+): void {
+  if (
+    !room ||
+    room.state.phase !== 'IN_GAME' ||
+    !room.state.players.get(room.sessionId)?.confirmed
+  )
+    return;
+  room.send('dungeon-action', {
+    ...action,
+    protocolVersion: PROTOCOL_VERSION,
+    sequence: ++sequence,
+  } satisfies DungeonAction);
+}
 function send(command: Command): void {
-  if (!room || artPreview) return;
+  if (
+    !room ||
+    room.state.phase !== 'IN_GAME' ||
+    !room.state.players.get(room.sessionId)?.confirmed ||
+    artPreview
+  )
+    return;
   const payload = {
     ...command,
     sequence: ++sequence,
@@ -93,7 +130,11 @@ function send(command: Command): void {
 }
 const unbindInput = bindGameplayInput(
   send,
-  () => !!room && !artPreview,
+  () =>
+    !!room &&
+    room.state.phase === 'IN_GAME' &&
+    !!room.state.players.get(room.sessionId)?.confirmed &&
+    !artPreview,
   () => ui.blocked,
 );
 function controls(connected: boolean, busy = false): void {
@@ -115,6 +156,7 @@ async function connect(existing: boolean): Promise<void> {
   const roomId = element<HTMLInputElement>('#room-id').value.trim();
   if (!parsed.success) {
     status.textContent = `Use a nickname of 1–${lobbyConfig.nicknameMaxLength} letters, numbers or simple punctuation.`;
+    pregame.fail(status.textContent);
     return;
   }
   if (existing && !roomId) {
@@ -134,11 +176,27 @@ async function connect(existing: boolean): Promise<void> {
     status.textContent = 'Connected';
     ui.connected(joined.roomId, joined.sessionId);
     controls(true);
+    let previousZone = 'arena';
     joined.onStateChange((state) => {
       if (room === joined) {
-        arenaScene.setSnapshot(state, joined.sessionId);
+        const zone = state.players.get(joined.sessionId)?.zoneId ?? 'arena';
+        if (zone !== previousZone) {
+          previousZone = zone;
+          window.dispatchEvent(new Event('volam:controls-blocked'));
+          ui.close();
+        }
+        pregame.update(state, joined.roomId, joined.sessionId);
+        arenaScene.setSnapshot(
+          state.phase === 'IN_GAME' || state.phase === 'DEFEAT'
+            ? state
+            : undefined,
+          joined.sessionId,
+        );
         ui.refresh(state);
       }
+    });
+    joined.onMessage('dungeon-menu', () => {
+      if (room === joined) ui.open('dungeons');
     });
     joined.onMessage('connection-ack', (payload: unknown) => {
       const ack = connectionAckSchema.safeParse(payload);
@@ -150,37 +208,48 @@ async function connect(existing: boolean): Promise<void> {
     });
     joined.onMessage('combat-event', (payload: unknown) => {
       const parsedEvent = combatEventSchema.safeParse(payload);
-      if (!parsedEvent.success) return;
+      if (
+        !parsedEvent.success ||
+        parsedEvent.data.zoneId !==
+          joined.state.players.get(joined.sessionId)?.zoneId
+      )
+        return;
       events.push(parsedEvent.data);
       if (events.length > 60) events.shift();
       arenaScene.combat(parsedEvent.data);
-      if (
-        parsedEvent.data.sourceId === joined.sessionId &&
-        parsedEvent.data.kind === 'hit'
-      )
-        ui.notify(
-          `${parsedEvent.data.critical ? 'Critical · ' : ''}${parsedEvent.data.damage} damage`,
-        );
     });
     joined.onMessage('command-rejected', (payload: unknown) => {
       const rejected = rejectionSchema.safeParse(payload);
-      if (rejected.success) ui.notify(rejected.data.reason);
+      if (rejected.success) {
+        ui.notify(rejected.data.reason);
+        pregame.fail(rejected.data.reason);
+      }
     });
     joined.onError((code, message) => {
       status.textContent = `Connection error ${code}: ${message}`;
+      pregame.fail(status.textContent);
       element('#hud-connection').textContent = `Error ${code}`;
       ui.notify(status.textContent);
     });
     joined.onLeave((code) => {
       if (room !== joined) return;
       room = undefined;
+      pregame.disconnected(
+        `Disconnected (${code}). Create or join a room to return.`,
+      );
       arenaScene.setSnapshot(undefined);
       controls(false);
       ui.connected('', '');
       status.textContent = `Disconnected (${code}). Create or join a room to return.`;
     });
-    if (joined.state?.players) {
-      arenaScene.setSnapshot(joined.state, joined.sessionId);
+    if (joined.state?.players && joined.state.phase) {
+      pregame.update(joined.state, joined.roomId, joined.sessionId);
+      arenaScene.setSnapshot(
+        joined.state.phase === 'IN_GAME' || joined.state.phase === 'DEFEAT'
+          ? joined.state
+          : undefined,
+        joined.sessionId,
+      );
       ui.refresh(joined.state);
     }
     const canvas = element<HTMLCanvasElement>('#game canvas');
@@ -189,8 +258,16 @@ async function connect(existing: boolean): Promise<void> {
   } catch (error: unknown) {
     status.textContent = `Could not connect: ${error instanceof Error ? error.message : 'unknown error'}`;
     controls(false);
+    pregame.fail(status.textContent ?? 'Connection failed');
   }
 }
+pregame.onConnect = (nickname, id) => {
+  element<HTMLInputElement>('#nickname').value = nickname;
+  element<HTMLInputElement>('#room-id').value = id ?? '';
+  void connect(!!id);
+};
+pregame.onAction = (action) => room?.send('lobby-action', action);
+pregame.onLeave = () => void room?.leave();
 ui.onCheck = () =>
   room?.send('connection-check', {
     protocolVersion: PROTOCOL_VERSION,
@@ -200,6 +277,7 @@ ui.onLeave = () => {
   void room?.leave();
 };
 ui.onBasic = (id) => send({ kind: 'select-basic', id });
+ui.onDungeonEnter = (access) => dungeonAction({ action: 'enter', access });
 // Read-only browser evidence bridge, enabled explicitly for automated playtesting.
 if (new URLSearchParams(location.search).has('debug') || artPreview) {
   Object.defineProperty(window, '__VOLAM__', {
@@ -220,6 +298,7 @@ if (import.meta.hot)
   import.meta.hot.dispose(() => {
     void room?.leave();
     unbindInput();
+    pregame.destroy();
     ui.destroy();
     observer.disconnect();
     game.destroy(true);

@@ -1,5 +1,29 @@
 # Technical Architecture Decision Record v1.0
 
+## Current dungeon entry correction — 2026-10-30
+
+Dungeon entry uses the existing Phó Bản menu anywhere in the arena. The Guide sprite/label/map marker and proximity config are removed. `DungeonMatch.canEnterDungeon` validates alive arena membership; MatchRoom retains phase/replay/access validation. A `dungeon_return` spawn marker preserves the existing (960,576) exit/respawn destination independently of any NPC. Physical exit range, dungeon isolation, rewards and empty pause/resume remain unchanged. This supersedes Guide requirements in earlier implementation notes below.
+
+## Arena visual v2 — 2026-10-30
+
+The current arena loader uses `arena_v2/ground.png`; Tiled ground data records the matching 600×540 court and 160px approaches. The interior tree/collider is removed and the two remaining tree colliders follow their new perimeter feet positions. ART-01 statue/props/ambient animations are reused. `FloatingDamage` is a client-only world-space presentation of authoritative hit target/position/amount/critical fields, with bounded per-target burst offsets, nearby-target lanes and an 850ms rise/hold/fade. The fixed damage toast is removed. No core combat or protocol change occurs.
+
+`dungeon-selector.css` styles only the in-viewport dungeon modal. Individual original static card PNGs sit under live DOM labels and controls; existing Guide-validated entry remains. Unavailable destinations cannot become selections; Riêng/Chung sends the existing access value. Modal container state uses `data-active-menu`, while the dialog's `data-menu` is cleared on close. Debug-only forest study moves to Settings. See `docs/ARENA_VISUAL_V2_REVIEW.md` for asset tooling, runtime evidence and limits.
+
+## M2A implementation — 2026-10-30
+
+`game-core/DungeonMatch` owns an arena World and one World per private/shared creep instance. Membership, per-zone fixed clocks, kill-to-advance waves, empty pause/resume, transfer cleanup/cooldown conversion and the configurable five-second arena death recovery are engine/transport independent. Data and authoritative markers come from `game-data/dungeon.ts` and `maps/creep_forest.tmj`; the arena receives only a Guide NPC marker. See `docs/M2A_IMPLEMENTATION.md` for tuning and limits.
+
+Protocol v4 adds strictly validated `dungeon-action` open/enter/exit, hero zone/respawn state and dungeon progress. `MatchRoom` routes inputs to membership, namespaces dungeon entities and uses Colyseus StateViews for current-zone enemies/projectiles and hero spatial fields. Party metadata remains public within the room; private instance progress is owner-only. Combat events are sent only to current occupants and guarded by zone on the client. The arena clock continues while dungeon worlds pause empty.
+
+The existing `ArenaScene` switches map presentation, destroys old display objects and retains actor/camera/animation behavior. `dungeon-presentation.ts` reuses existing PNG/tile assets as an explicitly unapproved prototype. The existing in-viewport dungeon modal now drives real Guide-validated entry. A separate physical clickable exit drives validated return; there is no recall action. ForestStudy remains a presentation-only scene. No M2B invasion or boss systems are implemented.
+
+## ART-01 presentation integration — 2026-10-30
+
+`arena-art01.ts` composes the authored ground, prop atlases, separated tree base/canopy images, shallow garden water loops and bridge deck/front rails. The statue retains the existing (800,576) marker; all three tree trunk positions and the north wall retain shared-map collision. M1 has no statue solid collider or water collision, and this art task does not add one. `arena-scene.ts` retains actor interpolation, feet depth, approved animation selection, camera and authoritative combat-event rendering. `art.ts` registers padded world/garden/ambient atlases and 160ms decorative water/glow loops, independent of combat timing. Actor assets remain protected by the approved-byte lock.
+
+`arena-hud.css` and `ui.ts` render compact PNG-framed live DOM overlays. Utility handlers match actual menu buttons, not dialog containers; modal clicks stop before reaching the world and closing returns canvas focus. `assets:export:arena` exports artist-edited Aseprite sources; builds require only committed PNG/JSON files. `verify:assets` checks old and ART-01 exports. Provenance and approval are in `assets/arena_art01.manifest.json`; runtime evidence lives under docs/evidence/art01.
+
 ## 1. Recommended stack (proposed; confirmed as recommendation, not code already built)
 
 | Layer | Recommendation | Why |
@@ -135,3 +159,22 @@ Read `UI_UX_SPEC.md` before changing game-client layout. In-match UI should be c
 Modal open releases held movement and gates gameplay input. Close restores canvas focus; Tab stays within the modal. NPC handlers explicitly require the original pointer target to be the canvas, preventing DOM HUD clicks from leaking through Phaser's document-level input listener. Menus and the forest art study never pause server simulation. ForestStudy is a presentation scene, not a server zone or travel command. Existing combat/core/data/protocol/server/map geometry remain unchanged.
 
 The top-level `announcements` presentation layer (z=60) is above the modal (z=30); M2 must bind real raid alerts when available. No synthetic raid schedule is presented in M1. Official scaling/camera guidance checked against installed Phaser 4.2.1: https://docs.phaser.io/phaser/concepts/scale-manager and https://docs.phaser.io/phaser/concepts/cameras.
+
+
+## UI Phase 1 pre-game phases — 2026-10-30
+
+The existing MatchRoom owns WAITING_LOBBY → SCHOOL_SELECTION → IN_GAME, `hostId`, per-player `schoolId`, `confirmed` and `connected`. Protocol v3 adds validated `lobby-action` start/select/confirm messages; only the host starts selection. Confirmation is immutable and all participants must be connected and confirmed before creating level-1 core heroes, copying school IDs and enabling the fixed simulation timestep. Match elapsed milliseconds derive from simulation ticks; no room-creation clock drives gameplay. Existing M1 spawning/collision/combat tuning remains intact. Future invasion scheduling must derive from IN_GAME time.
+
+`GET /rooms` reads actual public Colyseus listings, including capacity, lock and phase. `pregame.ts` renders four interactive HTML screens inside the viewport wrapper and polls listings every three seconds. Landing nickname is memory-only; no accounts/storage are introduced. School identity text is shared data from CONTENT_DATA.md; numeric tuning and other schools' combat remain M3. Existing HUD/menu components resume when the pre-game overlay hides; Phaser scaling and camera are unchanged. Selection disconnects hold the confirmation barrier without an automatic policy; unresolved recovery choices live in OPEN_QUESTIONS.md.
+
+## M2B authoritative defense — 2026-10-30
+
+Protocol 5 extends the existing room and DungeonMatch with an optional engine-independent InvasionDirector. The live room enables it using validated game-data recipes and server environment defaults; pure M2A simulations can omit it. The IN_GAME clock drives fixed 180-second deadlines and 60/15-second notices. Arena stepping continues while participants farm dungeons; empty dungeon clocks still pause. Root defense Schema state is visible in every zone, while enemy/projectile/combat events remain zone filtered. StateView spatial filtering also remains active in DEFEAT.
+
+Invaders reuse Creep, the existing movement/collision, hit/death, assist reward and RNG pipeline. Each carries immutable spawn-strength data and mutable sticky aggro/leash state. Both lane markers and the statue marker come from the authoritative map. A solid pedestal footprint is added to live arena collision without moving the statue. Surviving waves append; dead invaders expire without respawn. Generic practice/dungeon creeps retain their existing behavior.
+
+Statue HP is an authoritative Actor and never regenerates. A single zero-HP transition publishes DEFEAT, freezes all zone clocks/combat/respawns and rejects later gameplay commands. The DOM DefenseHud stays inside the Phaser viewport, renders received tick/deadline values and global notices, and closes existing menus on defeat. Existing camera/art/input mappings are retained. See docs/M2B_IMPLEMENTATION.md for defaults, tests, evidence, development overrides and limits. No boss/20-wave campaign/M2C implementation is implied.
+
+## Join admission correction — 2026-10-30
+
+MatchRoom no longer explicitly locks at host Start; Colyseus automatic six-seat locking is retained, and DEFEAT explicitly locks. The global phase still gates the initial all-confirmed barrier. In IN_GAME, per-player confirmed state gates selection, hero creation and gameplay commands: unconfirmed late clients can only choose/confirm school, and confirming adds their hero without rebuilding any existing simulation state. PreGame derives its local selection screen from the entrant confirmation flag, and redraws only when phase/roster/selection changes, preserving control focus through 30 Hz world ticks. Main input guards and actor rendering also require confirmation. No wire-schema change or new client authority is introduced.

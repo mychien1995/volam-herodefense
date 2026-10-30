@@ -1,0 +1,91 @@
+{
+  "status": "CANDIDATE_VISUALLY_REVIEWED_NOT_DIRECTOR_APPROVED",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+  "conceptImagesInspected": [
+    "arena_creeps_01_04_master_v1.png"
+  ],
+  "conceptApproval": "Current user explicitly identifies Phase 1A designs as approved source of truth.",
+  "sourceImageUsedDirectlyForEveryGeneration": true,
+  "renderer": "Installed Phaser 4.2.1",
+  "displayScale": "640x360 logical canvas, 1280x720 display; camera zoom 1, nearest sampling.",
+  "checks": [
+    "Silhouette and chibi proportions compared to actual concept",
+    "Original costume, armor, accessories, palette and weapons retained",
+    "All four facings present",
+    "Five states: idle, walk, basic_attack, hurt, death",
+    "Every exported PNG has actual binary alpha, nonempty interior bounds and no canvas clipping",
+    "All 80 animation tags and 255 frames observed in actual Phaser playback",
+    "Comparison uses exact approved Cái Bang runtime PNG bytes"
+  ],
+  "assets": [
+    {
+      "slug": "wild-dog",
+      "frames": 64,
+      "preserved": "Large pointed ears, stocky quadruped, short raised tail, tan muzzle/chest/lower paws, amber eyes, dark gray-brown saddle, bite attack.",
+      "visualResult": "Same approved dog identity at small gameplay scale."
+    },
+    {
+      "slug": "bandit-grunt",
+      "frames": 64,
+      "preserved": "Spiky dark hair, ochre headband and ragged sleeveless tunic, wraps, cropped charcoal trousers, sandals, rough wooden club.",
+      "visualResult": "Same approved grunt identity at small gameplay scale."
+    },
+    {
+      "slug": "bandit-swordsman",
+      "frames": 63,
+      "preserved": "Slate-blue scarf/jacket, topknot, leather shoulder guard, straps and boots, curved broad single-edged dao with brass guard.",
+      "visualResult": "Same approved swordsman identity; larger transparent canvas prevents weapon clipping."
+    },
+    {
+      "slug": "bandit-archer",
+      "frames": 64,
+      "preserved": "Olive headscarf/robe, narrow body, light leather protection, recurved wooden bow, diagonal quiver and pale fletching.",
+      "visualResult": "Same approved archer identity; carrying/shooting-hand transfer remains a continuity review point."
+    }
+  ],
+  "rejections": [
+    "Dog original frontal bite turned sideways; all four frontal attack poses replaced.",
+    "Swordsman original frontal slash turned sideways; replaced with corrected front poses and original idle recovery.",
+    "Swordsman corrected fourth frontal pose swapped hands; excluded.",
+    "Swordsman rear attack follow-through lost its dao; excluded, giving a three-pose rear attack.",
+    "Archer original frontal shot aimed sideways; replaced with front-facing downward shot."
+  ],
+  "limitations": [
+    "Isolated staged Phaser renderer, not a match integration or six-player crowded-combat verification.",
+    "Director approval of production animations is pending.",
+    "No generated pose can guarantee pixel-exact fidelity to a concept illustration; compare supplied actual-render evidence.",
+    "Archer bow-hand transfer and swordsman rear timing merit director review."
+  ],
+  "evidence": [
+    "review/concept_comparison.png",
+    "review/idle_1280x720.png",
+    "review/walk_1280x720.png",
+    "review/basic_attack_1280x720.png",
+    "review/hurt_1280x720.png",
+    "review/death_1280x720.png",
+    "review/phaser_animation_preview.webm",
+    "review/phaser_verification.json"
+  ],
+  "commands": [
+    {
+      "command": "python -u sprites/creeps/arena/build_sprites.py",
+      "result": "PASS: 255 poses, true alpha, safe bounds, distinct authored poses, 80 tags and approved baseline hashes."
+    },
+    {
+      "command": "node sprites/creeps/arena/verify_phaser.mjs",
+      "result": "PASS: all 80 tags and 255 frames observed in Phaser; six screenshots and playback video."
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "PASS"
+    },
+    {
+      "command": "pnpm exec vitest run tests/assets.test.ts",
+      "result": "PASS: 3 tests"
+    },
+    {
+      "command": "pnpm test",
+      "result": "PASS: 98 tests across 11 files"
+    }
+  ]
+}

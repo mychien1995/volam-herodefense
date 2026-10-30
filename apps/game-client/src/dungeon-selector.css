@@ -1,0 +1,261 @@
+/* Only the dungeon modal changes. Compact HUD position and world zoom are retained. */
+#modal-layer[data-active-menu='dungeons'] {
+  padding: 24px 36px;
+  background: #061612a8;
+}
+.game-window[data-menu='dungeons'] {
+  width: min(1400px, 100%);
+  max-width: none;
+  height: min(900px, 100%);
+  max-height: 100%;
+  background: #0c211eef;
+  border: 1px solid #c3a166;
+  box-shadow:
+    inset 0 0 0 4px #142b26,
+    inset 0 0 0 5px #6f603b,
+    0 12px 70px #020c09d9;
+}
+.game-window[data-menu='dungeons'] .window-title {
+  padding: 16px 58px 12px;
+  background: linear-gradient(90deg, #102824, #1b3027, #102824);
+  border-bottom: 1px solid #887143;
+}
+.game-window[data-menu='dungeons'] .window-title h2 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: bold;
+  font-size: 30px;
+  letter-spacing: 0.5px;
+}
+.game-window[data-menu='dungeons'] .window-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 24px 8px;
+  flex: 1;
+  overflow: auto;
+}
+.dungeon-intro {
+  text-align: center;
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px;
+  color: #d8c28d;
+}
+.game-window[data-menu='dungeons'] .destinations {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  flex: 1;
+  min-height: 160px;
+}
+.game-window[data-menu='dungeons'] .destination {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  padding: 3px;
+  text-align: center;
+  background: #112622;
+  border: 1px solid #9b814d;
+  box-shadow: inset 0 0 0 1px #2d3a29;
+  overflow: hidden;
+  color: #ead8a6;
+}
+.destination-illustration {
+  display: block;
+  width: 100%;
+  height: 0;
+  min-height: 0;
+  flex: 1;
+  object-fit: cover;
+  object-position: 50% 48%;
+  image-rendering: pixelated;
+}
+.destination.sea .destination-illustration {
+  object-position: 50% 25%;
+}
+.destination.desert .destination-illustration {
+  object-position: 50% 35%;
+}
+.destination.hell .destination-illustration {
+  object-position: 50% 30%;
+}
+.destination-copy {
+  flex: none;
+  display: grid;
+  gap: 5px;
+  padding: 11px 4px 9px;
+  background: linear-gradient(#142c25, #0b201c);
+  border-top: 1px solid #947642;
+}
+.destination-copy strong {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 25px;
+  font-weight: bold;
+  color: #f4e1b1;
+}
+.destination-copy > span {
+  font-size: 13px;
+  color: #c2c6a3;
+}
+.destination-check {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  border: 2px solid #ebc65f;
+  background: #42351b;
+  color: #ffe8a2;
+  font-size: 25px;
+  line-height: 28px;
+  box-shadow: 0 0 8px #e9b43885;
+}
+.destination-availability {
+  position: absolute;
+  top: 10px;
+  right: 9px;
+  padding: 4px 8px;
+  border: 1px solid #a58b53;
+  background: #13231ee8;
+  font-size: 11px;
+  color: #e3c790;
+}
+.game-window[data-menu='dungeons'] .destination[aria-pressed='true'] {
+  border-color: #f0ce70;
+  box-shadow:
+    inset 0 0 0 2px #bb963d,
+    0 0 11px #c6a23d55;
+}
+.game-window[data-menu='dungeons'] .destination:hover {
+  border-color: #e2bf6c;
+  background: #203a2d;
+}
+.game-window[data-menu='dungeons'] button:focus-visible {
+  outline: 2px solid #fff0bd;
+  outline-offset: -5px;
+}
+.game-window[data-menu='dungeons'] .destination[aria-disabled='true'] {
+  cursor: default;
+}
+.game-window[data-menu='dungeons'] .dungeon-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 24px;
+  flex: none;
+  margin: 0;
+}
+.dungeon-choice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #e1c991;
+  font-size: 14px;
+}
+.dungeon-choice [role='radiogroup'] {
+  display: flex;
+  border: 1px solid #8b7446;
+  border-radius: 3px;
+  padding: 3px;
+  background: #0d1c18;
+}
+.dungeon-choice button {
+  border: 0;
+  min-width: 92px;
+  padding: 9px 14px;
+  background: transparent;
+  color: #c0c6af;
+}
+.dungeon-choice button[aria-checked='true'] {
+  background: linear-gradient(#ebd28d, #ba8d43);
+  color: #241d13;
+  box-shadow: inset 0 0 0 1px #f1dc9c;
+}
+.dungeon-choice button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+#dungeon-entry-note,
+#dungeon-availability {
+  margin: 0;
+  text-align: center;
+  font-size: 12px;
+  color: #c7c9ae;
+  flex: none;
+}
+#dungeon-availability {
+  color: #e3c286;
+}
+.game-window[data-menu='dungeons'] > .window-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 7px;
+  padding: 12px 24px;
+  border-top: 1px solid #8c7448;
+  background: #10251f;
+  flex: none;
+}
+.game-window[data-menu='dungeons'] > .window-footer button {
+  min-width: 150px;
+  padding: 10px 22px;
+  font-size: 16px;
+}
+.game-window[data-menu='dungeons'] #enter-dungeon {
+  min-width: 230px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 20px;
+}
+.game-window[data-menu='dungeons'] .menu-safety {
+  padding: 5px;
+  font-size: 10px;
+}
+@media (max-height: 700px) {
+  #modal-layer[data-active-menu='dungeons'] {
+    padding: 12px 20px;
+  }
+  .game-window[data-menu='dungeons'] .window-title {
+    padding: 8px 52px;
+  }
+  .game-window[data-menu='dungeons'] .window-title h2 {
+    font-size: 23px;
+  }
+  .game-window[data-menu='dungeons'] .window-body {
+    gap: 7px;
+    padding: 8px 16px;
+  }
+  .dungeon-intro {
+    font-size: 14px;
+  }
+  .game-window[data-menu='dungeons'] .destinations {
+    gap: 10px;
+    min-height: 130px;
+  }
+  .destination-copy {
+    padding: 6px 3px;
+    gap: 3px;
+  }
+  .destination-copy strong {
+    font-size: 19px;
+  }
+  .destination-copy > span {
+    font-size: 11px;
+  }
+  .game-window[data-menu='dungeons'] > .window-footer {
+    padding: 7px 16px;
+  }
+  .game-window[data-menu='dungeons'] > .window-footer button {
+    padding: 6px 16px;
+  }
+  .game-window[data-menu='dungeons'] #enter-dungeon {
+    font-size: 18px;
+    min-width: 185px;
+  }
+  .dungeon-choice button {
+    padding: 6px 10px;
+    min-width: 78px;
+  }
+}

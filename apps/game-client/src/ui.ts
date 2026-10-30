@@ -1,6 +1,7 @@
-import { arena, lobbyConfig, m1Config } from '@volam/game-data';
+import { arena, lobbyConfig, m1Config, schools } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
 import { icon, menuContents, menuTitles, type Menu } from './menus.js';
+import { DefenseHud } from './defense-hud.js';
 export function element<T extends HTMLElement>(selector: string): T {
   const found = document.querySelector<T>(selector);
   if (!found) throw new Error(`Missing element: ${selector}`);
@@ -12,22 +13,24 @@ export class GameUI {
   private sessionId = '';
   private roomId = '';
   private study = false;
+  private ended = false;
+  private defense: DefenseHud;
   private ack = 'Share the room ID with a friend.';
   private toastTimer: number | undefined;
   onBasic: (id: string) => void = () => {};
   onCheck: () => void = () => {};
   onLeave: () => void = () => {};
   onStudy: (enabled: boolean) => void = () => {};
+  onDungeonEnter: (access: 'private' | 'shared') => void = () => {};
   constructor(artPreview: boolean) {
     element('#app').innerHTML = `
       <main id="viewport" aria-label="Võ Lâm game viewport">
         <div id="game" aria-label="Game canvas"></div>
         <div id="hud" aria-label="In-game HUD">
-          <section class="hero-hud framed"><div class="portrait" title="M1 prototype artwork"><span id="hero-level">1</span></div><div class="hero-bars"><div class="hero-name"><strong id="hero-name">Traveler</strong><small>Cái Bang</small></div>
+          <section class="hero-hud framed"><div class="portrait" title="Approved Cái Bang character artwork"><span id="hero-level">1</span></div><div class="hero-bars"><div class="hero-name"><strong id="hero-name">Traveler</strong><small id="school-name">Cái Bang</small></div>
             <div class="meter hp" role="meter" aria-label="HP" aria-valuemin="0"><i></i><span id="hp-text">—</span></div><div class="meter mp" role="meter" aria-label="Mana" aria-valuemin="0"><i></i><span id="mp-text">—</span></div><div class="meter xp" role="meter" aria-label="Experience" aria-valuemin="0"><i></i><span id="xp-text">—</span></div></div></section>
-          <section class="world-status framed" aria-label="Statue and invasion status"><strong id="location-title">TỊNH PHONG VIỆN</strong><span>Statue — · Invasions inactive</span><small>M1 practice · prototype art</small></section>
-          <nav class="system-buttons" aria-label="Game menus"><button data-menu="skills" title="Skills / normal attack">${icon('scroll')}<span>Võ học</span></button><button data-menu="dungeons" title="Dungeon menu">${icon('portal')}<span>Phó bản</span></button><button data-menu="merchant" title="Merchant">${icon('shop')}<span>Thương gia</span></button><button data-menu="pvp" title="PvP preview">${icon('swords')}<span>Lôi đài</span></button><button data-menu="party" title="Players and connection">${icon('party')}<span>Đồng đội</span></button></nav>
-          <button class="room-chip framed" data-menu="party"><span id="hud-connection">Connected</span> · <span id="current-room" data-testid="room-id">—</span> · <span id="player-count" data-testid="player-count">0 / 6</span></button>
+          <nav class="system-buttons" aria-label="Game menus"><button data-menu="settings" title="Settings" aria-label="Settings">${icon('settings')}<span>Cài đặt</span></button><button data-action="quit" title="Quit" aria-label="Quit">${icon('quit')}<span>Thoát</span></button><button data-menu="dungeons" title="Phó Bản" aria-label="Phó Bản">${icon('portal')}<span>Phó Bản</span></button><button data-menu="merchant" title="Thương Gia" aria-label="Thương Gia">${icon('shop')}<span>Thương Gia</span></button><button data-menu="pvp" title="Lôi Đài" aria-label="Lôi Đài">${icon('swords')}<span>Lôi Đài</span></button></nav>
+          <span class="sr-only"><span id="hud-connection">Connected</span> · <span id="current-room" data-testid="room-id">—</span> · <span id="player-count" data-testid="player-count">0 / 6</span></span>
           <section class="bag-cluster framed"><button data-menu="inventory" title="Inventory">${icon('bag')}<span>Túi đồ</span></button><div>${icon('gold')}<strong class="live-gold">0</strong><small>Gold</small></div></section>
           <section class="hotbar framed" aria-label="Keyboard combat hotbar">
             ${[
@@ -43,9 +46,9 @@ export class GameUI {
               )
               .join('')}
             <button class="loadout-toggle" data-menu="skills" title="Change normal attack / view skills">◇</button>
-          </section><p class="control-hint">↑ ↓ ← → Move <span>·</span> A Attack <span>·</span> Q W E R Skills</p>
-          <section class="minimap framed" aria-label="Practice arena minimap"><header>Tịnh Phong Viện <small>N ↑</small></header><svg viewBox="0 0 200 144" role="img" aria-label="Live player and creep positions"><rect width="200" height="144" fill="#304c38"/><path d="M96 0h8v144h-8zM0 80h200v8H0zM84 60h40v40H84z" fill="#a59c77"/><g id="map-markers"></g></svg><small>● You <span>● Party</span> <em>● Creeps</em></small></section>
+          </section>
           <p id="scene-status" class="scene-ready" aria-hidden="true">${artPreview ? 'ART PREVIEW' : ''}</p>
+          <p id="zone-status" hidden role="status"></p>
         </div>
         <section id="lobby" class="lobby-layer"><div class="lobby-window framed"><p class="eyebrow">VÕ LÂM · HERO DEFENSE</p><h1>Tịnh Phong Viện</h1><p>A quiet courtyard. Your first steps in the martial world.</p><form id="join-form"><label for="nickname">Nickname</label><input id="nickname" maxlength="${lobbyConfig.nicknameMaxLength}" autocomplete="off" required placeholder="Your nickname"/><button type="submit" id="create" class="accent">Create room</button><div class="divider">or join a friend</div><label for="room-id">Room ID</label><div class="join-row"><input id="room-id" autocomplete="off" maxlength="64" placeholder="Paste room ID"/><button type="submit" id="join">Join room</button></div></form><p id="status" data-testid="status" role="status" aria-live="polite">Disconnected</p><small>Nickname only · 1–6 players · No saved progress<br>M1 combat prototype · Artwork awaiting review</small></div></section>
         <div id="modal-layer" hidden><section id="game-dialog" class="game-window framed" role="dialog" aria-modal="true" aria-labelledby="dialog-title" tabindex="-1"><header class="window-title"><span class="title-flourish">❖</span><h2 id="dialog-title"></h2><button id="close-menu" aria-label="Close menu">×</button></header><div id="dialog-content" class="window-body"></div><small class="menu-safety">The match continues while this menu is open · Escape to close</small></section></div>
@@ -53,17 +56,27 @@ export class GameUI {
         <div id="announcements" aria-live="polite"><p id="feedback" role="status" hidden></p></div>
         <p id="hero-stats" data-testid="hero-stats" class="sr-only"></p>
       </main>`;
+    this.defense = new DefenseHud(element('#viewport'), () => this.onLeave());
     if (artPreview) document.body.classList.add('art-preview');
     element('#viewport').addEventListener('click', (event) => {
       const target =
         event.target instanceof Element
-          ? event.target.closest<HTMLElement>('[data-menu]')
+          ? event.target.closest<HTMLElement>(
+              'button[data-menu],button[data-action]',
+            )
           : null;
-      if (target && this.roomId && !this.study)
-        this.open(target.dataset['menu'] as Menu);
+      if (target && this.roomId && !this.study) {
+        if (target.dataset['action'] === 'quit') this.onLeave();
+        else this.open(target.dataset['menu'] as Menu);
+      }
     });
     element('#modal-layer').addEventListener('click', (event) => {
       event.stopPropagation();
+      const target =
+        event.target instanceof Element
+          ? event.target.closest<HTMLElement>('button[data-menu]')
+          : null;
+      if (target && this.roomId) this.open(target.dataset['menu'] as Menu);
       if (event.target === element('#modal-layer')) this.close();
     });
     element('#close-menu').addEventListener('click', () => this.close());
@@ -73,7 +86,7 @@ export class GameUI {
     window.addEventListener('keydown', this.keydown, true);
   }
   get blocked(): boolean {
-    return !!this.menu || this.study;
+    return !!this.menu || this.study || this.ended;
   }
   private keydown = (event: KeyboardEvent): void => {
     if (event.code === 'Escape' && this.blocked) {
@@ -103,6 +116,8 @@ export class GameUI {
     }
   };
   connected(id: string, session: string): void {
+    this.ended = false;
+    this.defense.hide();
     this.roomId = id;
     this.sessionId = session;
     if (id) {
@@ -116,6 +131,7 @@ export class GameUI {
     if (!id) this.state = undefined;
   }
   open(menu: Menu): void {
+    if (this.ended) return;
     if (this.menu === menu) {
       this.close();
       return;
@@ -124,7 +140,15 @@ export class GameUI {
     window.dispatchEvent(new Event('volam:controls-blocked'));
     element('#dialog-title').textContent = menuTitles[menu];
     document.querySelector('#dialog-actions')?.remove();
-    element('#dialog-content').innerHTML = menuContents(menu);
+    element('#dialog-content').innerHTML = menuContents(
+      menu,
+      new URLSearchParams(location.search).has('debug'),
+    );
+    element('#modal-layer').dataset['activeMenu'] = menu;
+    element('.menu-safety').textContent =
+      menu === 'dungeons'
+        ? 'Trận đấu vẫn tiếp tục · Escape để đóng'
+        : 'The match continues while this menu is open · Escape to close';
     const footer =
       element('#dialog-content').querySelector<HTMLElement>('.window-footer');
     if (footer) {
@@ -136,6 +160,14 @@ export class GameUI {
     element('#modal-layer').hidden = false;
     element('#close-menu').focus({ preventScroll: true });
     const select = document.querySelector<HTMLSelectElement>('#basic-style');
+    document.querySelector('#fullscreen')?.addEventListener('click', () => {
+      const request = document.fullscreenElement
+        ? document.exitFullscreen()
+        : element('#viewport').requestFullscreen();
+      void request.catch(() =>
+        this.notify('Fullscreen is unavailable in this browser.'),
+      );
+    });
     select?.addEventListener('change', () => this.onBasic(select.value));
     document
       .querySelector('#check')
@@ -146,6 +178,34 @@ export class GameUI {
     document.querySelector('#forest-study')?.addEventListener('click', () => {
       this.close(false);
       this.setStudy(true);
+    });
+    document
+      .querySelector('#dungeon-close')
+      ?.addEventListener('click', () => this.close());
+    for (const button of document.querySelectorAll<HTMLButtonElement>(
+      '[data-access]',
+    ))
+      button.addEventListener('click', () => {
+        element<HTMLInputElement>('#dungeon-access').value =
+          button.dataset['access']!;
+        for (const peer of document.querySelectorAll('[data-access]'))
+          peer.setAttribute('aria-checked', String(peer === button));
+      });
+    for (const card of document.querySelectorAll<HTMLButtonElement>(
+      '[data-destination]',
+    ))
+      card.addEventListener('click', () => {
+        const unavailable = card.getAttribute('aria-disabled') === 'true';
+        const note = element('#dungeon-availability');
+        note.hidden = !unavailable;
+        note.textContent = unavailable
+          ? `${card.getAttribute('aria-label')} hiện chưa mở. Bạn có thể chọn Rừng Trúc.`
+          : '';
+      });
+    document.querySelector('#enter-dungeon')?.addEventListener('click', () => {
+      const access = element<HTMLInputElement>('#dungeon-access').value;
+      if (access === 'private' || access === 'shared')
+        this.onDungeonEnter(access);
     });
     for (const button of document.querySelectorAll<HTMLButtonElement>(
       '[data-shop-tab]',
@@ -162,6 +222,8 @@ export class GameUI {
   close(focus = true): void {
     this.menu = undefined;
     element('#modal-layer').hidden = true;
+    delete element('#modal-layer').dataset['activeMenu'];
+    delete element('#game-dialog').dataset['menu'];
     element('#dialog-content').replaceChildren();
     document.querySelector('#dialog-actions')?.remove();
     if (focus)
@@ -196,6 +258,13 @@ export class GameUI {
   }
   refresh(state: LobbyState): void {
     this.state = state;
+    if (state.phase === 'DEFEAT' && !this.ended) {
+      this.ended = true;
+      window.dispatchEvent(new Event('volam:controls-blocked'));
+      this.close(false);
+      this.setStudy(false);
+    }
+    this.defense.update(state);
     element('#player-count').textContent =
       `${state.players.size} / ${lobbyConfig.maxPlayers}`;
     const list = document.querySelector('#players');
@@ -229,21 +298,52 @@ export class GameUI {
         return row;
       }),
     );
-    element('#map-markers').innerHTML = [
-      ...[...state.players.entries()].map(
-        ([id, h]) =>
-          `<circle cx="${(h.x / arena.width) * 200}" cy="${(h.y / arena.height) * 144}" r="${id === this.sessionId ? 3 : 2}" fill="${id === this.sessionId ? '#ffdf8b' : '#78d9e2'}" stroke="#162c2c" stroke-width="1"/>`,
-      ),
-      ...[...state.creeps.values()]
-        .filter((h) => h.hp > 0)
-        .map(
-          (h) =>
-            `<circle cx="${(h.x / arena.width) * 200}" cy="${(h.y / arena.height) * 144}" r="1.8" fill="#e57963"/>`,
+    const markers = document.querySelector('#map-markers');
+    if (markers)
+      markers.innerHTML = [
+        ...[...state.players.entries()].map(
+          ([id, h]) =>
+            `<circle cx="${(h.x / arena.width) * 200}" cy="${(h.y / arena.height) * 144}" r="${id === this.sessionId ? 3 : 2}" fill="${id === this.sessionId ? '#ffdf8b' : '#78d9e2'}" stroke="#162c2c" stroke-width="1"/>`,
         ),
-    ].join('');
+        ...[...state.creeps.values()]
+          .filter((h) => h.hp > 0)
+          .map(
+            (h) =>
+              `<circle cx="${(h.x / arena.width) * 200}" cy="${(h.y / arena.height) * 144}" r="1.8" fill="#e57963"/>`,
+          ),
+      ].join('');
     const hero = state.players.get(this.sessionId);
     if (!hero) return;
+    const inArena = hero.zoneId === 'arena';
+    const canEnter = inArena && hero.hp > 0;
+    const enter = document.querySelector<HTMLButtonElement>('#enter-dungeon');
+    if (enter) enter.disabled = !canEnter;
+    const entryNote = document.querySelector('#dungeon-entry-note');
+    if (entryNote)
+      entryNote.textContent = canEnter
+        ? 'Chọn Riêng hoặc Chung để vào Rừng Trúc.'
+        : inArena
+          ? 'Bạn cần hồi sinh trước khi vào phó bản.'
+          : 'Đến cổng Lối Ra để trở về đấu trường.';
+    const studyButton =
+      document.querySelector<HTMLButtonElement>('#forest-study');
+    if (studyButton) studyButton.disabled = !inArena;
+    const zone = state.dungeons.get(hero.zoneId);
+    const zoneStatus = element('#zone-status');
+    zoneStatus.hidden = inArena && hero.respawnTicks <= 0;
+    zoneStatus.textContent =
+      hero.respawnTicks > 0
+        ? `Defeated · Return to arena in ${Math.ceil(hero.respawnTicks / m1Config.tickRate)}s`
+        : zone
+          ? `Rừng Trúc · ${zone.access === 'private' ? 'Private' : 'Shared'} · Wave ${zone.wave} · ${zone.living} remaining${zone.nextWaveTicks > 0 ? ` · Next wave ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''}`
+          : '';
     element('#hero-name').textContent = hero.nickname;
+    element('#school-name').textContent =
+      schools.find((s) => s.id === hero.schoolId)?.name ?? 'Cái Bang';
+    const chuong = hero.basicId === 'cai_bang_chuong';
+    element('#viewport').dataset['basicStyle'] = chuong ? 'chuong' : 'bong';
+    element('#slot-a .pixel-icon').className =
+      `pixel-icon ${chuong ? 'icon-palm' : 'icon-staff'}`;
     element('#hero-level').textContent = String(hero.level);
     for (const [name, value, max, label] of [
       ['hp', hero.hp, hero.maxHp, 'HP'],
@@ -268,6 +368,7 @@ export class GameUI {
     if (stats)
       stats.textContent = `Level ${hero.level} · HP ${Math.ceil(hero.hp)}/${hero.maxHp} · MP ${Math.floor(hero.mana)}/${hero.maxMana} · XP ${hero.xp} · Skill points ${hero.skillPoints}`;
     const select = document.querySelector<HTMLSelectElement>('#basic-style');
+    if (select) select.disabled = !inArena || hero.hp <= 0;
     if (select && document.activeElement !== select)
       select.value = hero.basicId;
     for (const [key, remaining, total, cost] of [

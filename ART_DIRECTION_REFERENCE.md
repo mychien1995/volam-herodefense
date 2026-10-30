@@ -71,3 +71,7 @@ The following **additional visual references are approved directionally** and sh
 - Use the references to set **visual ambition** for scene richness, but scale implementation sensibly for gameplay readability and production scope.
 - Preserve the previously locked character direction for Võ Đang, Cái Bang, Thiên Sơn and Thiếu Lâm.
 - Do not treat text labels, exact numbers, or UI copy in the images as final game data; only the **visual language and layout pattern** are being approved here.
+
+## v1.6 Current runtime screenshot — quality anti-reference
+
+`assets/references/current_game_2026_10_29_placeholder_anti_reference.png` is the latest actual prototype screenshot and is a **NEGATIVE visual-quality reference**. Its full-screen HUD is a correct *direction for placement* but its heroes, props, trees, repeated stone tiles, effects and UI textures are NOT acceptable visual quality. Consult `ART_PRODUCTION_STANDARD.md` before any further art expansion. Positive concepts remain concept references, not ready-to-load sprite atlases.

@@ -2,7 +2,8 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 2;
+export const PROTOCOL_VERSION = 5;
+export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
 export const nicknameSchema = z
@@ -74,7 +75,27 @@ export const combatEventSchema = z.strictObject({
   y: z.number().finite(),
   damage: z.number().nonnegative(),
   critical: z.boolean(),
+  zoneId: z.string().min(1),
 });
+export const dungeonActionSchema = z.discriminatedUnion('action', [
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    action: z.literal('open'),
+  }),
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    action: z.literal('enter'),
+    access: z.enum(['private', 'shared']),
+  }),
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    action: z.literal('exit'),
+  }),
+]);
+export type DungeonAction = z.infer<typeof dungeonActionSchema>;
 export const rejectionSchema = z.strictObject({
   protocolVersion: z.literal(PROTOCOL_VERSION),
   sequence: z.number().int().positive(),
@@ -84,6 +105,7 @@ export type ServerMessages = {
   'connection-ack': z.infer<typeof connectionAckSchema>;
   'combat-event': z.infer<typeof combatEventSchema>;
   'command-rejected': z.infer<typeof rejectionSchema>;
+  'dungeon-menu': { protocolVersion: typeof PROTOCOL_VERSION };
 };
 
 // Network representation only; core simulation remains independent of schemas.
@@ -99,7 +121,17 @@ const actorFields = {
 export const LobbyPlayer = schema(
   {
     ...actorFields,
+    x: t.number().default(0).view(),
+    y: t.number().default(0).view(),
+    fx: t.number().default(1).view(),
+    fy: t.number().default(0).view(),
+    pose: t.string().default('idle').view(),
+    zoneId: t.string().default('arena'),
+    respawnTicks: t.number().default(0),
     nickname: t.string(),
+    schoolId: t.string().default(''),
+    confirmed: t.boolean().default(false),
+    connected: t.boolean().default(true),
     checks: t.number().default(0),
     mana: t.number().default(0),
     maxMana: t.number().default(0),
@@ -116,7 +148,16 @@ export const LobbyPlayer = schema(
   'ArenaPlayer',
 );
 export type LobbyPlayer = SchemaType<typeof LobbyPlayer>;
-export const CreepState = schema({ ...actorFields }, 'ArenaCreep');
+export const CreepState = schema(
+  {
+    ...actorFields,
+    zoneId: t.string().default('arena'),
+    invasionWave: t.number().default(0),
+    lane: t.string().default(''),
+    targetId: t.string().default(''),
+  },
+  'ArenaCreep',
+);
 export type CreepState = SchemaType<typeof CreepState>;
 export const ProjectileState = schema(
   {
@@ -126,19 +167,74 @@ export const ProjectileState = schema(
     vy: t.number().default(0),
     ownerId: t.string().default(''),
     abilityId: t.string().default(''),
+    zoneId: t.string().default('arena'),
   },
   'ArenaProjectile',
+);
+export const DungeonState = schema(
+  {
+    id: t.string(),
+    access: t.string(),
+    ownerId: t.string(),
+    wave: t.number(),
+    occupants: t.number(),
+    paused: t.boolean(),
+    tick: t.number(),
+    living: t.number(),
+    spawnPlayerCount: t.number(),
+    nextWaveTicks: t.number(),
+  },
+  'CreepDungeon',
+);
+export type DungeonState = SchemaType<typeof DungeonState>;
+export const DefenseState = schema(
+  {
+    enabled: t.boolean().default(false),
+    statueHp: t.number().default(0),
+    statueMaxHp: t.number().default(0),
+    x: t.number().default(800),
+    y: t.number().default(576),
+    wave: t.number().default(0),
+    nextWaveTick: t.number().default(0),
+    intervalTicks: t.number().default(5400),
+    spawnPlayerCount: t.number().default(0),
+    noticeId: t.number().default(0),
+    noticeKind: t.string().default(''),
+    noticeWave: t.number().default(0),
+    noticeLeadTicks: t.number().default(0),
+    noticeUntilTick: t.number().default(0),
+    defeated: t.boolean().default(false),
+    defeatTick: t.number().default(0),
+  },
+  'StatueDefense',
 );
 export const LobbyState = schema(
   {
     protocolVersion: t.number().default(PROTOCOL_VERSION),
-    phase: t.string().default('arena'),
+    phase: t.string().default('WAITING_LOBBY'),
+    hostId: t.string().default(''),
+    matchElapsedMs: t.number().default(0),
     maxPlayers: t.number().default(lobbyConfig.maxPlayers),
     tick: t.number().default(0),
     players: t.map(LobbyPlayer),
-    creeps: t.map(CreepState),
-    projectiles: t.map(ProjectileState),
+    creeps: t.map(CreepState).view(),
+    projectiles: t.map(ProjectileState).view(),
+    dungeons: t.map(DungeonState).view(),
+    defense: t.ref(DefenseState).default(() => new DefenseState()),
   },
   'ArenaState',
 );
 export type LobbyState = SchemaType<typeof LobbyState>;
+
+export const schoolIdSchema = z.enum([
+  'cai_bang',
+  'thien_son',
+  'vo_dang',
+  'thieu_lam',
+]);
+export const lobbyActionSchema = z.discriminatedUnion('action', [
+  z.strictObject({ action: z.literal('start') }),
+  z.strictObject({ action: z.literal('select'), schoolId: schoolIdSchema }),
+  z.strictObject({ action: z.literal('confirm') }),
+]);
+export type LobbyAction = z.infer<typeof lobbyActionSchema>;

@@ -1,0 +1,399 @@
+/* ART-01: live DOM state over authored PNG frames, all within #viewport. */
+#hud {
+  --edge: clamp(10px, 1.35vw, 24px);
+}
+#hud .framed,
+.game-window.framed {
+  border: 10px solid transparent;
+  border-image: url('/assets/arena_art01/panel_frame.png') 22 fill / 10px;
+  background: none;
+  outline: 0;
+  box-shadow: 0 2px 5px #10140c70;
+  border-radius: 0;
+}
+#hud .framed::before,
+#hud .framed::after,
+.game-window.framed::before,
+.game-window.framed::after {
+  display: none;
+}
+.hero-hud {
+  left: var(--edge);
+  top: var(--edge);
+  width: clamp(255px, 22vw, 360px);
+  padding: 0;
+  height: clamp(82px, 7vw, 108px);
+  gap: 7px;
+}
+.portrait {
+  width: clamp(47px, 4.5vw, 70px);
+  height: 100%;
+  background-size: 112px 112px;
+  background-position: center -17px;
+  background-color: #302b22;
+  border: 5px solid transparent;
+  border-image: url('/assets/arena_art01/portrait_frame.png') 16 / 5px;
+}
+.portrait span {
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  min-width: 30px;
+}
+.hero-name {
+  margin: 0 0 4px;
+  align-items: baseline;
+}
+.hero-name strong {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(12px, 0.9vw, 15px);
+  max-width: 70%;
+  color: #fff0cd;
+}
+.hero-name small {
+  font-size: 9px;
+  white-space: nowrap;
+}
+.hero-bars {
+  padding-top: 1px;
+}
+.meter {
+  height: 15px;
+  margin-bottom: 4px;
+  border: 1px solid #746147;
+  box-shadow: none;
+  background: #161b1b;
+}
+.meter i {
+  border: 0;
+  background: url('/assets/arena_art01/bar_hp.png') center / 100% 100%;
+}
+.meter.mp i {
+  background: url('/assets/arena_art01/bar_mp.png') center / 100% 100%;
+}
+.meter.xp i {
+  background: url('/assets/arena_art01/bar_exp.png') center / 100% 100%;
+}
+.meter span {
+  font-size: 10px;
+  line-height: 13px;
+  text-shadow:
+    1px 1px 1px #000,
+    -1px -1px #000;
+}
+.meter.xp {
+  height: 11px;
+}
+.meter.xp span {
+  line-height: 9px;
+  font-size: 9px;
+}
+.system-buttons {
+  top: var(--edge);
+  right: var(--edge);
+  width: clamp(236px, 20vw, 360px);
+  gap: 4px;
+}
+.system-buttons button {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  gap: 0;
+}
+.system-buttons button:hover:not(:disabled) {
+  background: none;
+  filter: brightness(1.2);
+}
+.system-buttons .pixel-icon {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+.system-buttons button span:last-child {
+  font-size: clamp(8px, 0.65vw, 11px);
+  text-shadow:
+    0 1px 2px #000,
+    1px 1px #000;
+  color: #fff1ce;
+  margin-top: -1px;
+}
+.bag-cluster {
+  bottom: var(--edge);
+  left: var(--edge);
+  width: clamp(156px, 16vw, 252px);
+  min-height: 69px;
+  padding: 0 2px;
+  gap: 8px;
+  display: flex;
+}
+.bag-cluster button {
+  padding: 0;
+  background: none;
+}
+.bag-cluster button:hover:not(:disabled) {
+  background: none;
+  filter: brightness(1.2);
+}
+.bag-cluster button .pixel-icon {
+  width: clamp(34px, 3.5vw, 52px);
+  height: auto;
+  aspect-ratio: 1;
+}
+.bag-cluster > div {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.bag-cluster > div .pixel-icon {
+  width: 28px;
+  height: 28px;
+}
+.bag-cluster strong {
+  font-size: clamp(14px, 1.2vw, 21px);
+  min-width: 20px;
+}
+.bag-cluster small {
+  display: none;
+}
+.bag-cluster button span:last-child {
+  font-size: 9px;
+}
+.hotbar {
+  bottom: var(--edge);
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: clamp(292px, 26vw, 460px);
+  padding: 0 0 4px;
+  gap: 4px;
+  align-items: center;
+}
+#hud .hotbar.framed {
+  border-image-source: url('/assets/arena_art01/hotbar_frame.png');
+}
+.hotbar-slot {
+  flex: 1;
+  min-width: 0;
+  width: auto;
+  height: auto;
+  aspect-ratio: 1;
+  border: 0;
+  box-shadow: none;
+  background: none;
+}
+.hotbar-slot .pixel-icon {
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+}
+.hotbar-slot kbd {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -5px;
+  font-size: 11px;
+  min-width: 24px;
+  padding: 0 4px;
+  border: 0;
+  background: url('/assets/arena_art01/key_badge.png') center / 100% 100%;
+  line-height: 20px;
+}
+.hotbar-slot small {
+  display: none;
+}
+.hotbar-slot.unequipped {
+  border: 0;
+  background: none;
+}
+.hotbar-slot.unequipped .pixel-icon {
+  opacity: 0.45;
+}
+.cooldown-number {
+  font-size: 17px;
+}
+.cooldown-shade {
+  inset: 3px 3px auto;
+  max-height: calc(100% - 6px);
+}
+.hotbar-slot.cooling .pixel-icon {
+  filter: saturate(0.65);
+}
+.loadout-toggle {
+  display: block;
+  position: absolute;
+  right: -15px;
+  bottom: 16px;
+  width: 15px;
+  height: 24px;
+  font-size: 14px;
+  padding: 0;
+  text-shadow: 1px 1px #000;
+}
+.game-window {
+  max-width: 880px;
+  max-height: calc(100dvh - 170px);
+}
+#modal-layer {
+  padding: 88px 24px 82px;
+}
+.window-title {
+  background: #252016;
+}
+.window-body {
+  background: #151714f0;
+}
+.window-title h2 {
+  font-size: 21px;
+}
+.settings-controls {
+  display: grid;
+  gap: 12px;
+  max-width: 420px;
+  margin: auto;
+  padding: 16px;
+}
+.settings-controls p {
+  color: #d9cfb0;
+  line-height: 2;
+}
+.settings-controls button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+#announcements {
+  top: 110px;
+}
+.pixel-icon {
+  background-image: var(--art-icon);
+  background-size: 100% 100%;
+  background-position: center;
+}
+.icon-settings {
+  --art-icon: url('/assets/arena_art01/icon_settings.png');
+}
+.icon-quit {
+  --art-icon: url('/assets/arena_art01/icon_quit.png');
+}
+.icon-portal {
+  --art-icon: url('/assets/arena_art01/icon_portal.png');
+}
+.icon-shop {
+  --art-icon: url('/assets/arena_art01/icon_shop.png');
+}
+.icon-swords {
+  --art-icon: url('/assets/arena_art01/icon_swords.png');
+}
+.icon-bag {
+  --art-icon: url('/assets/arena_art01/icon_bag.png');
+}
+.icon-gold {
+  --art-icon: url('/assets/arena_art01/icon_gold.png');
+}
+.icon-potion {
+  --art-icon: url('/assets/arena_art01/icon_potion_hp.png');
+}
+.icon-potion-mp {
+  --art-icon: url('/assets/arena_art01/icon_potion_mp.png');
+}
+.icon-staff {
+  --art-icon: url('/assets/arena_art01/icon_staff.png');
+}
+.icon-flame {
+  --art-icon: url('/assets/arena_art01/icon_flame.png');
+}
+.icon-palm {
+  --art-icon: url('/assets/arena_art01/icon_palm.png');
+}
+.icon-dragon {
+  --art-icon: url('/assets/arena_art01/icon_dragon.png');
+}
+.icon-scroll,
+.icon-party {
+  --art-icon: url('/assets/arena_art01/icon_scroll.png');
+}
+.icon-jade {
+  --art-icon: url('/assets/arena_art01/icon_jade.png');
+}
+.icon-lock {
+  --art-icon: url('/assets/arena_art01/icon_lock.png');
+}
+/* Non-ART-01 item placeholders retain their old atlas until their own art gate. */
+.icon-robe,
+.icon-ore,
+.icon-leaf {
+  background-image: url('/assets/presentation/ui_icons.png');
+  background-size: 512px 32px;
+  background-position: calc(var(--icon-index) * -32px) 0;
+}
+.hotbar-slot .pixel-icon {
+  background-position: center;
+}
+@media (min-width: 1600px) {
+  .hero-hud {
+    height: 104px;
+  }
+  .meter {
+    height: 19px;
+  }
+  .meter span {
+    line-height: 17px;
+    font-size: 11px;
+  }
+  .meter.xp {
+    height: 13px;
+  }
+  .meter.xp span {
+    line-height: 11px;
+    font-size: 10px;
+  }
+  .portrait {
+    background-size: 144px 144px;
+    background-position: center -20px;
+  }
+}
+@media (max-width: 1000px) {
+  .hero-hud {
+    width: 255px;
+    height: 82px;
+  }
+  .hotbar {
+    width: 292px;
+  }
+  .hotbar-slot .pixel-icon {
+    background-position: center;
+  }
+  .system-buttons .pixel-icon {
+    transform: none;
+  }
+}
+@media (max-height: 540px) {
+  .hero-hud {
+    height: 78px;
+  }
+  #modal-layer {
+    padding: 78px 16px 76px;
+  }
+  .game-window {
+    max-height: calc(100dvh - 154px);
+  }
+  .window-title {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+  .window-title h2 {
+    font-size: 18px;
+  }
+  .window-body {
+    padding: 10px 16px;
+  }
+  #announcements {
+    top: 90px;
+  }
+}
