@@ -1,0 +1,123 @@
+{
+  "id": "arena_creep_final_fx",
+  "phase": "1J",
+  "status": "prototype",
+  "source": "assets/sprites/creeps/arena/waves-17-20-production/effects/source/arena_creep_final_fx.aseprite",
+  "generatedSource": "assets/sprites/creeps/arena/waves-17-20-production/effects/source/generated_v1.png",
+  "sourceSha256": "eb67cd24d809c207de9f3e976238617d04ae64bbf386c54d79388b869f91834e",
+  "generationPrompt": "assets/sprites/creeps/arena/waves-17-20-production/effects/source/generation_prompt_v1.json",
+  "canvas": [
+    64,
+    64
+  ],
+  "animations": [
+    {
+      "id": "shadow_contact",
+      "frames": [
+        "shadow_contact_0",
+        "shadow_contact_1",
+        "shadow_contact_2",
+        "shadow_contact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "texture": "arena_creep_final_fx",
+      "offsetY": -16,
+      "kind": "contact"
+    },
+    {
+      "id": "general_contact",
+      "frames": [
+        "general_contact_0",
+        "general_contact_1",
+        "general_contact_2",
+        "general_contact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "texture": "arena_creep_final_fx",
+      "offsetY": -3,
+      "kind": "contact"
+    },
+    {
+      "id": "blood_contact",
+      "frames": [
+        "blood_contact_0",
+        "blood_contact_1",
+        "blood_contact_2",
+        "blood_contact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "texture": "arena_creep_final_fx",
+      "offsetY": -16,
+      "kind": "contact"
+    },
+    {
+      "id": "vanguard_contact",
+      "frames": [
+        "vanguard_contact_0",
+        "vanguard_contact_1",
+        "vanguard_contact_2",
+        "vanguard_contact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "texture": "arena_creep_final_fx",
+      "offsetY": -3,
+      "kind": "contact"
+    },
+    {
+      "id": "blood_projectile",
+      "frames": [
+        "blood_projectile_0",
+        "blood_projectile_1",
+        "blood_projectile_2",
+        "blood_projectile_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": -1,
+      "texture": "arena_creep_final_fx",
+      "offsetY": -16,
+      "kind": "projectile"
+    },
+    {
+      "id": "shadow_trail",
+      "frames": [
+        "shadow_trail_0",
+        "shadow_trail_1",
+        "shadow_trail_2",
+        "shadow_trail_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": -1,
+      "texture": "arena_creep_final_fx",
+      "offsetY": -3,
+      "kind": "ambient"
+    },
+    {
+      "id": "vanguard_aura",
+      "frames": [
+        "vanguard_aura_0",
+        "vanguard_aura_1",
+        "vanguard_aura_2",
+        "vanguard_aura_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": -1,
+      "texture": "arena_creep_final_fx",
+      "offsetY": -3,
+      "kind": "ambient"
+    }
+  ],
+  "provenance": "Original AI-assisted concept-referenced VFX. Selected generated pixels assembled/exported with Aseprite. Contact/ambient are presentation only; projectile graphics do not add ranged AI or damage.",
+  "runtimeVerification": {
+    "status": "PASS",
+    "evidence": "docs/evidence/phase1j-integration/integration_verification.json",
+    "observedFrames": 28,
+    "observedClips": 7,
+    "fixtureOnlyProjectile": true,
+    "contactAmbientProjectileCleanup": true
+  },
+  "finalDirectorApproval": "Not independently claimed."
+}

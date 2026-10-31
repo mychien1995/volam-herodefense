@@ -220,6 +220,18 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
     const id = (await snapshot(a)).roomId;
     await enter(b, 'Đồng đội', id, true);
     await startTogether([a, b]);
+    const progressed = await a.evaluate<boolean>(
+      'window.__VOLAM__.snapshot().state.players[window.__VOLAM__.snapshot().sessionId].build.enabled',
+    );
+    if (progressed) {
+      await a.locator('[data-menu=skills]').first().click();
+      await a.locator('#loadout-q').selectOption('hoa_van_chuong');
+      await a.locator('#apply-loadout').click();
+      await expect(a.locator('[data-upgrade=hoa_van_chuong]')).toBeEnabled();
+      await a.locator('[data-upgrade=hoa_van_chuong]').click();
+      await expect(a.locator('#available-points')).toHaveText('0');
+      await a.keyboard.press('Escape');
+    }
     const aId = (await snapshot(a)).sessionId;
     // Let the real AI approach. Do not walk toward an old target position:
     // movement/patch latency can carry the hero past it before the attack.
@@ -301,9 +313,11 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
             (e) => e.kind === 'cast' && e.sourceId === aId,
           ).length,
       )
-      .toBe(2);
+      .toBe(progressed ? 1 : 2);
     await a.keyboard.press('KeyE');
-    await expect(a.locator('#feedback')).toContainText('not equipped');
+    await expect(a.locator('#feedback')).toContainText(
+      /not equipped|chưa trang bị/,
+    );
     // Finish through real manual inputs; no assumption that all projectiles hit one specific creep.
     await selectRanged(a);
     await expect

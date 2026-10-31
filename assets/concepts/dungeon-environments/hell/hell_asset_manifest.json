@@ -1,0 +1,3592 @@
+{
+  "schemaVersion": 1,
+  "id": "hell_dungeon_phase_2d",
+  "date": "2026-10-31",
+  "scope": "Asset production only; no bosses or integration.",
+  "status": "asset_export_complete_pending_integration_review",
+  "conceptApproval": "Automatic approval explicitly authorized by task.",
+  "provenance": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "method": "Original raster generation, PNG cel extraction, nearest sampling, metadata packaging.",
+    "license": "Original AI-assisted project artwork. No external commercial pack imported; no separate third-party license or exclusive copyright asserted.",
+    "promptFile": "assets/concepts/dungeon-environments/hell/generation_prompts.json",
+    "sourceFiles": [
+      "exec-fe21a1fd-f942-457f-951c-3a8f6f972f4c.png",
+      "exec-d2479ad3-1277-44b6-bbde-db679432171a.png",
+      "exec-5032b192-7032-4adc-b488-fe263f460e9f.png",
+      "exec-d33a4f10-7b14-4957-a5d5-7004faff49a8.png",
+      "exec-04e84b47-5cff-432d-ae1a-b1d986d050c4.png",
+      "exec-b2c6104a-ba09-42e1-98b3-5d8fb4ae39fa.png",
+      "exec-85b45c16-7772-46d1-94b1-3422610e833b.png",
+      "exec-8fa31fb0-7e23-454b-820c-667bcb55ecbc.png",
+      "exec-73a69b44-2e75-4eb5-a3dc-917728db649c.png",
+      "exec-d96ee2ef-1074-4fcd-a247-d0a2c03cc310.png",
+      "exec-109e3c7f-51ef-494d-a4c6-3c9faa47f4fe.png",
+      "exec-d224f871-07d5-48ee-9bc2-eea841f34718.png",
+      "exec-cebd6f71-2480-4b74-8110-957554550e6d.png",
+      "exec-cd4222be-47bc-4710-a35f-5b9e4fb81656.png",
+      "exec-a904009f-4095-4ac4-9750-0d45642af721.png",
+      "exec-6ea52c33-7a27-4f55-bb3f-90d1de1ecfc8.png",
+      "exec-acb5260c-0d68-4aff-ab1b-3c7d2a33a1d5.png",
+      "exec-e4170fef-c4ea-422c-bccf-274664a4cdf7.png",
+      "exec-cd52c9eb-acbd-474c-ac99-533cfd109af2.png",
+      "exec-e071ad90-a7a2-4bb2-9756-9bbd87af3d1e.png",
+      "exec-0ad2206b-90b1-48e5-8b04-a88257004346.png",
+      "exec-b36f251d-1935-4936-9a08-b834e8f032b0.png",
+      "exec-6eff7791-7db3-41a3-800b-dcfc8ad99305.png",
+      "exec-6cd50436-26c6-4eda-8c84-4ff15ba1cacb.png",
+      "exec-fa79c94e-a87e-4dac-8a03-613887a15f02.png"
+    ],
+    "referencesInspected": [
+      "assets/concept/arena-v2-approved.png",
+      "assets/concepts/dungeon-environments/bamboo-forest/dungeon-overview.png",
+      "assets/exports/bamboo_forest/terrain.png",
+      "assets/exports/bamboo_forest/scenery.png",
+      "assets/exports/characters/hero_vo_dang_idle.png",
+      "assets/references/vo_dang_character_reference.png",
+      "assets/references/hell_dungeon_reference.png",
+      "assets/concepts/arena-creeps/waves-13-16/arena_creeps_13_16_concept_sheet.png",
+      "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png"
+    ],
+    "unavailableReferences": [
+      "Bamboo creep package absent",
+      "Desert directories empty at inspection",
+      "Beach art package absent",
+      "assets/references/vo_dang_art_direction_reference.png absent; used actual vo_dang_character_reference.png"
+    ]
+  },
+  "environment": {
+    "overview": "assets/concepts/dungeon-environments/hell/dungeon_overview.png",
+    "tileset": "assets/tilesets/hell/terrain.tsj",
+    "terrain": "assets/tilesets/hell/terrain.png",
+    "tileCount": 272,
+    "props": "assets/sprites/environment/hell/props_metadata.json",
+    "propCount": 20,
+    "layout": "assets/concepts/dungeon-environments/hell/hell_layout.tmj"
+  },
+  "enemies": [
+    {
+      "id": "hell_xich_quy",
+      "nameVi": "Xích Quỷ",
+      "manifest": "assets/sprites/creeps/dungeons/hell/xich_quy/manifest.json"
+    },
+    {
+      "id": "hell_dia_nguc_khuyen",
+      "nameVi": "Địa Ngục Khuyển",
+      "manifest": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/manifest.json"
+    },
+    {
+      "id": "hell_dung_nham_linh",
+      "nameVi": "Dung Nham Linh",
+      "manifest": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/manifest.json"
+    },
+    {
+      "id": "hell_hac_viem_phap_su",
+      "nameVi": "Hắc Viêm Pháp Sư",
+      "manifest": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/manifest.json"
+    },
+    {
+      "id": "hell_hac_dien_nguu_ma",
+      "nameVi": "Hắc Diện Ngưu Ma",
+      "manifest": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/manifest.json"
+    },
+    {
+      "id": "hell_dung_nham_cu_nhan",
+      "nameVi": "Dung Nham Cự Nhân",
+      "manifest": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/manifest.json"
+    }
+  ],
+  "effects": {
+    "metadata": "assets/effects/dungeons/hell/effects_metadata.json",
+    "animationCount": 16
+  },
+  "integrated": false,
+  "runtimeVerified": false,
+  "verification": "assets/concepts/dungeon-environments/hell/verification.json",
+  "integrationReady": true,
+  "productionRuntimeApproved": false,
+  "verificationScope": "Single asset-level file validation plus focused visual correction/review; no game launch or runtime tests.",
+  "inventory": [
+    {
+      "path": "assets/concepts/dungeon-creeps/hell/concept_manifest.json",
+      "bytes": 1290,
+      "sha256": "e970bb421b9ac2857e8caaffe8111e88c203eff73ba9cb43fa31776d7f3f631a"
+    },
+    {
+      "path": "assets/concepts/dungeon-creeps/hell/dia_nguc_khuyen_concept.png",
+      "bytes": 435706,
+      "sha256": "c51c79b6b244b42057a3942a9bdafd7700d0430fe28fef99ec9d55aea253891e"
+    },
+    {
+      "path": "assets/concepts/dungeon-creeps/hell/dung_nham_cu_nhan_concept.png",
+      "bytes": 650601,
+      "sha256": "ee9dc5487dd7f0e7622813664c4ee825dc5a9d50647e527f0405b754932009b1"
+    },
+    {
+      "path": "assets/concepts/dungeon-creeps/hell/dung_nham_linh_concept.png",
+      "bytes": 474817,
+      "sha256": "8df5b310404466ba3ca965c9255f7598e4dfd30f49e23160e5e20710dc6d79e3"
+    },
+    {
+      "path": "assets/concepts/dungeon-creeps/hell/enemy_bestiary.png",
+      "bytes": 3207023,
+      "sha256": "ac9948a5af80271383e59188292ac04843937129aab164e2e1fbcd00a3593aa8"
+    },
+    {
+      "path": "assets/concepts/dungeon-creeps/hell/hac_dien_nguu_ma_concept.png",
+      "bytes": 544656,
+      "sha256": "62a4f525666690134de4290d92b92dcc0c0050cc4931b03308939fd3f1f12ffd"
+    },
+    {
+      "path": "assets/concepts/dungeon-creeps/hell/hac_viem_phap_su_concept.png",
+      "bytes": 492573,
+      "sha256": "07646d46e60b05285cdae71a4c7acd5880eec6642876941abcfb8609b3694692"
+    },
+    {
+      "path": "assets/concepts/dungeon-creeps/hell/xich_quy_concept.png",
+      "bytes": 412604,
+      "sha256": "6a23b725d070ba012d4182172b5226b58ee526aaca45ab37ab1e5d22b0d18906"
+    },
+    {
+      "path": "assets/concepts/dungeon-environments/hell/dungeon_overview.png",
+      "bytes": 3506604,
+      "sha256": "400421e22926ad82afd9215cd45e493891537dcde47be5bcb72621e03c466f4d"
+    },
+    {
+      "path": "assets/concepts/dungeon-environments/hell/generation_jobs.json",
+      "bytes": 1827,
+      "sha256": "263f11a6c6b8e0ce638132666df242b5f3fbcb2138a8fa066979e0da02c9105f"
+    },
+    {
+      "path": "assets/concepts/dungeon-environments/hell/generation_prompts.json",
+      "bytes": 47400,
+      "sha256": "d8c37f03989e8e5b1831856536acf123d4bf456f70500fec51b3936e037a0cdd"
+    },
+    {
+      "path": "assets/concepts/dungeon-environments/hell/hell_layout.tmj",
+      "bytes": 110072,
+      "sha256": "e1667de110ea92cd1e08ade0f77d72ece79ba781b9da5687649f381d9cd44120"
+    },
+    {
+      "path": "assets/concepts/dungeon-environments/hell/layout_notes.json",
+      "bytes": 505,
+      "sha256": "a479af3ce219ebf3ba6dc09aee8cfe22ab553a2caea335c8d34cf1063caf1c36"
+    },
+    {
+      "path": "assets/concepts/dungeon-environments/hell/package_assets.py",
+      "bytes": 27264,
+      "sha256": "2daf3b8a3a58a067adfdacfb1434f493e5a16841af05de3ed233ea9f362a34cc"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/atlas.json",
+      "bytes": 27679,
+      "sha256": "6278f68e0d1bb53a9408dae8368a69d251b898df2e9db1a16d892fa6387bdcef"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/effects_metadata.json",
+      "bytes": 7070,
+      "sha256": "f4f7f77dc1740820a82449fa9c8476736a4c370a439d8f46a31eee9bf4e7da3a"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/black_flame_projectile_0.png",
+      "bytes": 7145,
+      "sha256": "388c0d1947a5e73a937dea64bf1332cad6651cc03788dcab60bc43ac56e6596b"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/black_flame_projectile_1.png",
+      "bytes": 13286,
+      "sha256": "59201582f86e40c5df3b0bd2c5a5bb37000797e60b32b22ac156970e6d18e625"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/black_flame_projectile_2.png",
+      "bytes": 21366,
+      "sha256": "ca98ea5595e5bcf3cd5f2064c4cc987ee273882e744769dcaae0a55c17a487e0"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/black_flame_projectile_3.png",
+      "bytes": 16707,
+      "sha256": "844c6e9d4e09ac78724ea28dcaeefa1998931fa288d977aa41740bebe9b532c4"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/crimson_slash_0.png",
+      "bytes": 4086,
+      "sha256": "03d674da79de13b894a7c61ac87cbdad22fdace833d71077f3f267c543a9672c"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/crimson_slash_1.png",
+      "bytes": 12794,
+      "sha256": "330c90d39168a37eb4f890987a0442264ca8a5d552a4ff11dd932c60cc4a3b9d"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/crimson_slash_2.png",
+      "bytes": 15018,
+      "sha256": "3a5aa25c0dd8a2a948bf3d5c7a89707d27e7a4adbedde04136509a8400016b64"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/crimson_slash_3.png",
+      "bytes": 8615,
+      "sha256": "edd330cba9edb7bb511a0cc6822fa38463758a94e260b9149bd13fc698beff7e"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/crimson_weapon_trail_0.png",
+      "bytes": 5938,
+      "sha256": "c39b94e9f682e32e7351cb16fa9e6478594607d72e112b7c12b23e3b99fca4f3"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/crimson_weapon_trail_1.png",
+      "bytes": 12429,
+      "sha256": "f2a2239647098f859f80854d5ef8c3da44102695a23e3e5eb697d674684f7afb"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/crimson_weapon_trail_2.png",
+      "bytes": 16393,
+      "sha256": "efc396ed30fc7b0c1f2216f3ea7784b7b36197124a004ebca33045c3ae517b9c"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/crimson_weapon_trail_3.png",
+      "bytes": 6696,
+      "sha256": "a74e7dc12dc43c9bf56c14fcdf19c4073aa5b6f2913535e48b4d6c0e15ad51b7"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/dark_sigil_0.png",
+      "bytes": 5752,
+      "sha256": "dd25383627a60aeaf1b6a4aab4e695079bc6b860f2611397cd4135f701e71fa6"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/dark_sigil_1.png",
+      "bytes": 15702,
+      "sha256": "194f95981dc8cb81ffc46a1ca12868531802dc060c31c139abcfc3fab0b75a68"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/dark_sigil_2.png",
+      "bytes": 17738,
+      "sha256": "ec538b1b55ee5158e4cafafdd3555f53435b1b5691ecedd03a529b6d114734b9"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/dark_sigil_3.png",
+      "bytes": 16059,
+      "sha256": "fc0ed1d0dd0902925240ba2cc722e2a8c4a8023907d43f2e0040d1d45f9e9c85"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/ember_particles_0.png",
+      "bytes": 6009,
+      "sha256": "0e4d7f77b340d695d085b12d20b4e3ffe5ba13ee8a903d8b09a1b44ae9aaa987"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/ember_particles_1.png",
+      "bytes": 14526,
+      "sha256": "f8e1ec8a769da6a8ef250e9c770b4db90a27fc84f9bdfdb4e87c2319b871cd8c"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/ember_particles_2.png",
+      "bytes": 20632,
+      "sha256": "040bce2aeb8018a3c11de1c42282bb3ef9fc9f190f2dc33c30d0460187005645"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/ember_particles_3.png",
+      "bytes": 14238,
+      "sha256": "4d016dc38196a49d88f0206c2d54ef043bcbf83b83a13f868b02c35fc34779b8"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/ember_trail_0.png",
+      "bytes": 7967,
+      "sha256": "5ddd008142ab2c53624c1f1c44d41bd9b97d3db7fbe6705b812e7d28926803da"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/ember_trail_1.png",
+      "bytes": 12270,
+      "sha256": "789e148b20060da67ae999dac0450010bb620bc42b899082c2668e1ef2093df5"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/ember_trail_2.png",
+      "bytes": 16438,
+      "sha256": "0d665ef12a79a73f91599e11c4c0f412f0bc722db1dfebb8de9736be8e6b93ff"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/ember_trail_3.png",
+      "bytes": 12319,
+      "sha256": "fa082500e2182f07db6daaaefa438d74cb295fe4732616486b042a28126271f8"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/fiery_bite_0.png",
+      "bytes": 7284,
+      "sha256": "ff9eeb17ebb5346405750ff0c8b650bc06c19dac3cd6f2de19dacdf4728f7096"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/fiery_bite_1.png",
+      "bytes": 19053,
+      "sha256": "024b70784fd6709eceb430e2c3bc2d283b1032fbd8312fa3af87ef31736b42b8"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/fiery_bite_2.png",
+      "bytes": 25153,
+      "sha256": "c2b0f7d72eb74ac5490a7736d5197192c391f16a0ef34eaa8a13047451f2bb5c"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/fiery_bite_3.png",
+      "bytes": 16138,
+      "sha256": "d782ac2d8c194345860063731c36c2ffd1abdc6048dad5b701244475cae2a141"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/fire_impact_0.png",
+      "bytes": 9194,
+      "sha256": "18692da37e0281c2d56fbef196a35c5d74cf60ae7fe4b6ae30a267202bc7fec1"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/fire_impact_1.png",
+      "bytes": 20688,
+      "sha256": "65863fcde037efd16f85c0ba0ae11cbfa222610a0ec76e8b54501aa4e25e46f6"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/fire_impact_2.png",
+      "bytes": 24579,
+      "sha256": "f6649574f8fc8c15b84cd938b429642da72251b662716a5e4f858b3d993ead8f"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/fire_impact_3.png",
+      "bytes": 16837,
+      "sha256": "a2aa9318816c0700eecc778fdb998aa07ea4c7cb57d1d577a5ff491ab82e66ec"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/heavy_impact_0.png",
+      "bytes": 11582,
+      "sha256": "757f6d50f23a7d8aa9a95f09d7c6f45d320bdb15000fd43e21be996d1dc92de4"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/heavy_impact_1.png",
+      "bytes": 20867,
+      "sha256": "bc0fa3cb7a9cb0f49274578c9edba2267119063d3593ac5f6add2d6a2a351c82"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/heavy_impact_2.png",
+      "bytes": 19048,
+      "sha256": "e756825226e5119ce5b31616c461f11a40617bb969719195b80c67b2ab493120"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/heavy_impact_3.png",
+      "bytes": 11873,
+      "sha256": "f2759675dc350c60423ccc168ea00c94cc6f6a4ed163aab9f46c26b60e493e13"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/infernal_death_particles_0.png",
+      "bytes": 15500,
+      "sha256": "94469cc163ca0e102513e1a36108172c09623cb3f6f89fabfe8f794d131fc75a"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/infernal_death_particles_1.png",
+      "bytes": 19029,
+      "sha256": "a33706a1ae59381c6cb7a7e68ba6110a280128c8331c2a83115d4ec618003854"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/infernal_death_particles_2.png",
+      "bytes": 23223,
+      "sha256": "36c7b51adeb97a69474b293e1382eea214ce4c0db5801ec5b81bafe67fafe5b2"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/infernal_death_particles_3.png",
+      "bytes": 15048,
+      "sha256": "6c8ac35974cf9df89e8e9e660d4105fe27dabdf439e9dc6153ec6e4cba8d3e81"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/lava_impact_0.png",
+      "bytes": 7074,
+      "sha256": "4e2e570eac95184c6c4feb45cd43dcea406f36f59cdd0e3b9a66489f74d93092"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/lava_impact_1.png",
+      "bytes": 17201,
+      "sha256": "5eb2dcc426a938e62fd73a9f649c40223cfd6f691f4d05e042df07d3d45b2dbc"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/lava_impact_2.png",
+      "bytes": 21917,
+      "sha256": "a75c7d2d829ae635b61ae5c72be214db7be7ead9646b49c56e69538127ece14e"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/lava_impact_3.png",
+      "bytes": 11569,
+      "sha256": "4d50f8df40a2b3a0e6b0ed05ce0ce156eb86d5fc170aff2f59b1e02a744d9d2d"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/lava_splash_0.png",
+      "bytes": 5945,
+      "sha256": "7c25ce6b0b51dad4a18b7c9b7d7a847eb54015234f7fc7f1377b0999c3ad8856"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/lava_splash_1.png",
+      "bytes": 15474,
+      "sha256": "a60194ed5469c04e2dae932e408b7cd9984ad6c7c4ea5a0412ad07ebd21201f8"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/lava_splash_2.png",
+      "bytes": 19195,
+      "sha256": "1bec8e1ff70a0e5fb53c0689e792fccd26a985df2c0024b547a92b8c216e24ef"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/lava_splash_3.png",
+      "bytes": 10019,
+      "sha256": "4a44b356f73b88496fd6408f0b9a28a0709150243f3975161db2086f1634489a"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/molten_projectile_0.png",
+      "bytes": 6236,
+      "sha256": "079eee92c5e0e724399b5b5cc1fe12bb97b0e626346d319f43bfe27ad7ad69e2"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/molten_projectile_1.png",
+      "bytes": 12007,
+      "sha256": "45e9ae5c21ba4786b5f3fc18b0a8ea88bcd2f52632d6e324cd6fbd33a99698f4"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/molten_projectile_2.png",
+      "bytes": 19190,
+      "sha256": "98018ceef5a94aa6a0f5731f059c7691008129320668b8de089f370f0d7a76a6"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/molten_projectile_3.png",
+      "bytes": 12789,
+      "sha256": "d3a49f9832d7d48b0b92b43434d3ea0ed2bf20d44bc0c87ff77dc0cd88a713e7"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/molten_shockwave_0.png",
+      "bytes": 9134,
+      "sha256": "b624a183d92961fa41841575101e7d86f34e24fa111fee0c6cb3163a67ae7678"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/molten_shockwave_1.png",
+      "bytes": 16242,
+      "sha256": "c0f7195b230597b6b00f15dbe4332afbd085c69238be74b442716542f7b66605"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/molten_shockwave_2.png",
+      "bytes": 16094,
+      "sha256": "324f4f72f5828fe99979780008b554ca9ca6f022688bc48e775d75d9ef23ca91"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/molten_shockwave_3.png",
+      "bytes": 12191,
+      "sha256": "a8a640f8701c508a4233cfae3d6e1ce17b1c1d51b21e5dbc8672fea0219cfb36"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/stone_fragments_0.png",
+      "bytes": 5574,
+      "sha256": "815c176adbfb288bc7944eae674f08bc1193993883be1ddfc215acdc5d4ae7ef"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/stone_fragments_1.png",
+      "bytes": 11698,
+      "sha256": "b90726ba579d4d04359fb2743ce87b515127f50a4055feb70d6bceaee0de9c19"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/stone_fragments_2.png",
+      "bytes": 19198,
+      "sha256": "128abed102a85a4580f961af417e20b78fef25869b337f9c5d50e8d6f08a4f66"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/stone_fragments_3.png",
+      "bytes": 10096,
+      "sha256": "e88a98eb026f91a39885e1438b1a669a98b30ba304d985850a88d96ce9b328bf"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/violet_black_impact_0.png",
+      "bytes": 13455,
+      "sha256": "b3ef71a05e207f8db2c804075975559ffa5a3f7dc0af81e803c563c3b3357073"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/violet_black_impact_1.png",
+      "bytes": 22066,
+      "sha256": "585d6e24740b0c94978d0d65aab6937a249caafb5fda596ce35d40b6caab2d39"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/violet_black_impact_2.png",
+      "bytes": 24843,
+      "sha256": "b08187bdb22c049cf822c8053e183845936eb22ce7c0a32a3afb6c06497c2797"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/frames/violet_black_impact_3.png",
+      "bytes": 17706,
+      "sha256": "8803817ebb2200ba9387f83d66677e557e7f6a8a654eca1189dd5fb7f61afff8"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/source_vfx.png",
+      "bytes": 2522307,
+      "sha256": "1ce103459cf2ce1428ecb4b92004945892af3b3f3e01691f2a3f8dedcf521d5c"
+    },
+    {
+      "path": "assets/effects/dungeons/hell/spritesheet.png",
+      "bytes": 911396,
+      "sha256": "0c904e4cca91cde9b7286cfed8afabcc1df7f17de33b75932e5763825bcf5797"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/atlas.json",
+      "bytes": 20413,
+      "sha256": "a3997ceca1eee48e4a47b5a14a92c21b48c25a2b97e3d2879af701c6a4952429"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_down_0.png",
+      "bytes": 4488,
+      "sha256": "6037133ab915fcbf4bc67dae5e6a5094a6f4a731e858ca04c67d052bc56b84a2"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_down_1.png",
+      "bytes": 4867,
+      "sha256": "a8030376aa456dfe0a58b88275932e5ec221a25189a566be1345e1ba0fcaeb2a"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_down_2.png",
+      "bytes": 5354,
+      "sha256": "dd9dbf927aea470c7fdd61fb2b107abc7e9b87e45be7efbf8804b1c02623f5f3"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_down_3.png",
+      "bytes": 4724,
+      "sha256": "126f6236cc06ab1b712e7d93e31a4b1ded126cb93408bc1352b72f29fa6ad13c"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_left_0.png",
+      "bytes": 5717,
+      "sha256": "d6702f228d5e5063093a7488a35be6d00a6062eb73a22d14e45277e257f5631f"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_left_1.png",
+      "bytes": 6110,
+      "sha256": "e55a1ff64dbd737c958e4ee43efb955e04028684c7881d56d32cfed21ef50de8"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_left_2.png",
+      "bytes": 5775,
+      "sha256": "7be00d9a46a0f57ae080cc0bb00b563f332be4428caee1db4950280507798020"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_left_3.png",
+      "bytes": 5916,
+      "sha256": "67c1dfa661f7164ca7d52ee5805f2a5d5411f054efbce5645bc96e8900219938"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_right_0.png",
+      "bytes": 5866,
+      "sha256": "a26d87b130b4ede6c5abc60188cd4733f1ed0e3c8627426f91f1668f70394ecd"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_right_1.png",
+      "bytes": 5790,
+      "sha256": "a083282a79833a2def2f454bda4ded061b4aa64d2ca50f68e152ba3da381d87a"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_right_2.png",
+      "bytes": 5878,
+      "sha256": "f4e4bc19bdfdd88880245258ab0f2cbd00bc4f2d19a3c65aab06955e15722e11"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_right_3.png",
+      "bytes": 5880,
+      "sha256": "b63189753bf331995f76258d23f892443249c27aa1718de1a79d303a0a21f7c8"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_up_0.png",
+      "bytes": 4945,
+      "sha256": "6d9face6c1fdc3497869165ad18a285a8eb700d415fd439840e41277d6406a21"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_up_1.png",
+      "bytes": 5643,
+      "sha256": "2f91df269c9a53b872ba1cd0c499e90fad318413d605cb3ac84a1d48cc7e0abe"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_up_2.png",
+      "bytes": 5780,
+      "sha256": "2c4e41b2f0e24b3eb235690a749676d225d19ae00a9bfee8579ede107666cd15"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/basic_attack_up_3.png",
+      "bytes": 4825,
+      "sha256": "236c04b76b84cf6ce4243aee0a75c515c14e2cf1d66109efd2d7a8f5c86ccfb8"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/death_shared_0.png",
+      "bytes": 5676,
+      "sha256": "5f5caa31890656d3662e696bb9ba8b111c4f0726d4fd92218f5067416f79cb14"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/death_shared_1.png",
+      "bytes": 4931,
+      "sha256": "e6886f4e3fae2489abb57adbda7f7169f629a105e2c775d235d2ec18045c4acd"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/death_shared_2.png",
+      "bytes": 4618,
+      "sha256": "ce8de27066c619308c1e556de8b709418bee579152aa55db864e71c2d3ed126d"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/death_shared_3.png",
+      "bytes": 4101,
+      "sha256": "f12beb18a599486d7264ccc0bfa4918347e4e68aa2cdca3d1dcbe305a1d4ce94"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/hurt_shared_0.png",
+      "bytes": 4756,
+      "sha256": "b7ed54a837cc9857bff3123b3fd4679fdd352472f1b6d283fca492c9113d3b2e"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/hurt_shared_1.png",
+      "bytes": 5068,
+      "sha256": "a51bd6f847fc266b216ff05595b9d862081ca19b2ecaca6ecfb8c16562889bfb"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/idle_down_0.png",
+      "bytes": 6596,
+      "sha256": "8ef2567120157977f2ea3184e2e39158088ad1d543b898d7162f6cdc50ae797b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/idle_down_1.png",
+      "bytes": 6570,
+      "sha256": "7616393f7ea2394529011185d8f2f83e1d592a909dbcce2d6ce2c65b1516804f"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/idle_left_0.png",
+      "bytes": 7313,
+      "sha256": "bdd8dc5b29c9135b7297a144aae9991012338e8d641872972b026d0421b2183b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/idle_left_1.png",
+      "bytes": 7373,
+      "sha256": "be0a06eb82e3116c7063b6d915313ca5092eb39d49c0174cce3c2e58cec43a44"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/idle_right_0.png",
+      "bytes": 6964,
+      "sha256": "94c0de6077a7506abd9be9a209b390262e7bcccb00865d1586dec7a757c6e856"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/idle_right_1.png",
+      "bytes": 6971,
+      "sha256": "42b989fe458975a41dfad8bde14c26c3a3fda3202b7392bbd30f9578199bf5fb"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/idle_up_0.png",
+      "bytes": 7012,
+      "sha256": "e3e98799dcd2d04d9ad6ba02bcf2894676838e663804243ea61cf3f94bd8794d"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/idle_up_1.png",
+      "bytes": 6948,
+      "sha256": "f2f806bf1255825ac2e930c8c6b174131307b8f24464da5eac9f005eeed65693"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_down_0.png",
+      "bytes": 6376,
+      "sha256": "14633e089c023a23dd3ea4c819745f5f2408ce852ed37f9bbda8c9520e7bf77c"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_down_1.png",
+      "bytes": 6055,
+      "sha256": "5508513d053e628244ce1d9ab3be041eab02a8e7a62cfa9386b67f75c56dffe6"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_down_2.png",
+      "bytes": 6334,
+      "sha256": "6eca856c026fd1cc2b5997f0623cfbffdf7e0b706a92bec5b72e01c174d955d3"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_down_3.png",
+      "bytes": 6490,
+      "sha256": "9f4236b858c58ea61b1f89c0848f341250fd56b1232ba1f37c400375fabc1da0"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_left_0.png",
+      "bytes": 7032,
+      "sha256": "15186a00f357c135bcdf230f5777358886f7c23499be6494d12bf6a6e6877346"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_left_1.png",
+      "bytes": 7961,
+      "sha256": "1f141b9ca9edb2400342f00ae4ec38c394656597f1ff49bbcfae3505d0d111a9"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_left_2.png",
+      "bytes": 7046,
+      "sha256": "abb37075d9c2987a776997a81b6d6662f3327f474fe22b3787c89ac321a555fe"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_left_3.png",
+      "bytes": 7625,
+      "sha256": "0e953d3f558721dc82b6b8e7c412c9f8b7a27254f00e75ea419767f47c7d7798"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_right_0.png",
+      "bytes": 8766,
+      "sha256": "7c8f50934b12bad5fbd815fa46a5a50bc69100a20c8f177b5ae3438147b75e18"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_right_1.png",
+      "bytes": 7466,
+      "sha256": "4d83b04213ad541e0bdebdcfb71afe47f203d0694dfbdc1635615569fb0f6cc6"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_right_2.png",
+      "bytes": 6992,
+      "sha256": "46f3f12d978b1ddf9523d50b8c7ed010ac86a7d6fafa2e3d355048896a1b33cc"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_right_3.png",
+      "bytes": 8854,
+      "sha256": "e0a124e5bacfa8574396eeb94c5dc99b50a5df1b49ce521d0d4b7d64b7638c6b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_up_0.png",
+      "bytes": 6834,
+      "sha256": "ce544b6cf14d00f9ea3abee1eb311764df75cc9ca53eb399838095540013dbb7"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_up_1.png",
+      "bytes": 7417,
+      "sha256": "1d5acea64b219a91b9741d56e27da3c5ba30aa97b45b55b87d6d89eb09f664a6"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_up_2.png",
+      "bytes": 7428,
+      "sha256": "0814ef9489b1cd926680bb6aba60d6b7be86ad80d8c5cd06aee47185e2b32111"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/frames/walk_up_3.png",
+      "bytes": 6601,
+      "sha256": "ccc3a31820f82ac5ea67f7b3be22b98fa739b2a3b10ef7a10385faf095e43f76"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/manifest.json",
+      "bytes": 5318,
+      "sha256": "6a5cfcc97420a9a20fad92072d801efccd0b3f951c6ccc2464d101f400b88a70"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/source/attack_source.png",
+      "bytes": 1490418,
+      "sha256": "3bd4d272fb28989a90d8f16693a1b878e4b580cc9456d8d759226177c6985318"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/source/initial_animation_source.png",
+      "bytes": 2386353,
+      "sha256": "bae2d9a5e360765080c961350dfb7e7204b5352355ba386e8c8db0bd0c2d0916"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/source/locomotion_source.png",
+      "bytes": 2457214,
+      "sha256": "96cde39da5fc320d5313e6b1e87bc340f2b7967ee50680df454e10fe857fb2c9"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/spritesheet.png",
+      "bytes": 282976,
+      "sha256": "a8887ee31de3b7d13f71137ad1d17e97b25c8cda6662692426e8b863043a5950"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/atlas.json",
+      "bytes": 20579,
+      "sha256": "88323965af1bb2ea824eb9d5fc5fddcc0139924bb5940ab4388db72571033de0"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_down_0.png",
+      "bytes": 30621,
+      "sha256": "d8fcc9c12d6b0b2e8aed8d45c522c167b92cb01154c3bc4c82d707d9f90f9bc2"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_down_1.png",
+      "bytes": 32467,
+      "sha256": "acab7ac0f916f693246151f876cad9eeadcddfc74ba823755370abd3ed443cff"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_down_2.png",
+      "bytes": 26338,
+      "sha256": "8c840c0d8cf4b5bc3cc9319281139dec1df375ef71fba1b24bb9f4598a67c6c8"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_down_3.png",
+      "bytes": 29249,
+      "sha256": "daa3dc2b6f05b7c5c60349ecc6c88ce97a0a35df6fb89fd7d9f7043b6b36cbef"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_left_0.png",
+      "bytes": 27191,
+      "sha256": "f5c0ea13999b8160bc545b4d7940e5c05d2f85f8646aa9cfede23963090d77cf"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_left_1.png",
+      "bytes": 28564,
+      "sha256": "56273a3a1422b54916a3f93fe7114f26cb263d817f45e36c03cf9e8e530a23b6"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_left_2.png",
+      "bytes": 22614,
+      "sha256": "3d3db03c3412395919150fb7f59a98a0235f85c0a1374ad006512e5659c277e4"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_left_3.png",
+      "bytes": 21403,
+      "sha256": "366d3907e4d75f393f3e778dad780762eeb5eaff57079085790edb0e3efc79f5"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_right_0.png",
+      "bytes": 26975,
+      "sha256": "3733b25b235101bb71815ff4e32ff8e7a52ac8dbb87eb7b28617315955f3c6c3"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_right_1.png",
+      "bytes": 28953,
+      "sha256": "4c2a717812ea0d2c02d819325ac11123fd58adf27701a36dd5e7338bd476c780"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_right_2.png",
+      "bytes": 21469,
+      "sha256": "273409aad7652c8ce54e489ac7592c72e0ddf375f878185d335efe230bbd73ef"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_right_3.png",
+      "bytes": 22752,
+      "sha256": "0362bb116de6e1e13799cd18f4270a233b3a03393270de0671921cf5975c45f5"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_up_0.png",
+      "bytes": 28509,
+      "sha256": "7db9bb0d6ca3fc0fdc2b0493c012a090b9a31fd3cabf556a2d579b231ea0b11b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_up_1.png",
+      "bytes": 28291,
+      "sha256": "65de1fdd6db32561a7b70d7633abec1147a3d19c1cac9868e30ae516e6872fae"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_up_2.png",
+      "bytes": 25416,
+      "sha256": "f3f7419feda990bb32697d887d6929383e1dbcec24048ffe55db132f2ac387c1"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/basic_attack_up_3.png",
+      "bytes": 28509,
+      "sha256": "01e3c67742100377b2f678e21e0cb49a6dc6d3b82c96760029eee5140ed05727"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/death_shared_0.png",
+      "bytes": 39888,
+      "sha256": "a45f5d489bb13bd6b845f51be05bf91a3edede303cdf5da92a973f1ef99a0954"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/death_shared_1.png",
+      "bytes": 37061,
+      "sha256": "fa0b1b5b74c7e31dee16648e579ed1ab10993a0a40915f4c59b496a89fb2644b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/death_shared_2.png",
+      "bytes": 26294,
+      "sha256": "da2a2116ae0b89e45d177d31da08e93bc3cec3d55898c290aa9bbf79c73169f2"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/death_shared_3.png",
+      "bytes": 23875,
+      "sha256": "1a684cd8aa118242c15b86a2a893430421d319c9270ab7a2f2863fd7d3c43c3a"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/hurt_shared_0.png",
+      "bytes": 33707,
+      "sha256": "a544406d438823630206c86219e62c1273f6d5a867f43c68b0b29f34e08a351d"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/hurt_shared_1.png",
+      "bytes": 29259,
+      "sha256": "91bbb2855ee84763b517f7e3a51ddf2cfec2ddbabcc0eef9e0ea5d5a553605fb"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/idle_down_0.png",
+      "bytes": 30405,
+      "sha256": "f3e2e005353c30f35f56b897be1630ced43df56b90a5f434fe783bc49a39c68a"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/idle_down_1.png",
+      "bytes": 27257,
+      "sha256": "0ecb9a60cda5fb7d1e388688d693b725e6952acbea12933b2a1a002a171faf6c"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/idle_left_0.png",
+      "bytes": 24761,
+      "sha256": "cf050f563f85f5d35af41fb9498edb3d43261f68860c777eae5531684e3a797d"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/idle_left_1.png",
+      "bytes": 25388,
+      "sha256": "0170b516c33cf6447cdf92d2dc911e3c48f3577478a3d87f88ce519b3f918f7b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/idle_right_0.png",
+      "bytes": 25483,
+      "sha256": "214bcc08e575d9387ea203bc8002a048f8db8794f4c709c747e4f6aebcc215a7"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/idle_right_1.png",
+      "bytes": 25596,
+      "sha256": "13db637eda75d95298b78e5072521b8796fd36ba18f64f274d117eefc511aeed"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/idle_up_0.png",
+      "bytes": 30729,
+      "sha256": "703a98997cfe977ae8236b5dcd697ddd400a592319ecc342bdf38e1f692f8692"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/idle_up_1.png",
+      "bytes": 29342,
+      "sha256": "7c5e3d19c4e2358731f5570c7425eae6cf28371984ece3c5e5b316030919d4e1"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_down_0.png",
+      "bytes": 24928,
+      "sha256": "0c180b52c5b4b87171b0fb5e60d4a505935185e7d87f51a1bc559d7274b75442"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_down_1.png",
+      "bytes": 24663,
+      "sha256": "5ecbd37668e79b73043c719e7ec6f5e88dc251fb2b68bd0bbd39d4d82fa97539"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_down_2.png",
+      "bytes": 25230,
+      "sha256": "60ff926c76fb88df2d28189d7a287fbb01abf2d301deb3a7fd02755af4f64f19"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_down_3.png",
+      "bytes": 25530,
+      "sha256": "b48a16da767174d0296d29efb8d3ac6a561ad7ceebaece4cf4a12c24cfd3c592"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_left_0.png",
+      "bytes": 26269,
+      "sha256": "12551e48ac5b34c12a418a68a0ba4f3ac694fa5093d27cfbedb7093a8068b6c9"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_left_1.png",
+      "bytes": 27048,
+      "sha256": "e088c64eb78e38314c67d5e9935512b87d4815d5c9d5d7b4dd776bdfe112ade8"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_left_2.png",
+      "bytes": 26960,
+      "sha256": "a10d919eba2f03da07467515353c85ad85aac337897a6ef29d349e3e9eadd2cb"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_left_3.png",
+      "bytes": 30504,
+      "sha256": "e0fd70689d0c4b89f5c4d40282db21111cb5a920e104ddf9d38c4cd9c27e0fef"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_right_0.png",
+      "bytes": 28067,
+      "sha256": "cddfe341ae38ce070c9ccedf052e81451d65c56b521e4bf5bb505f0101e9f100"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_right_1.png",
+      "bytes": 25271,
+      "sha256": "12f0f2b31746f4077285c81e14aae7ae99fe338452fdf50c00dc9baa4c210c79"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_right_2.png",
+      "bytes": 25826,
+      "sha256": "040464083af398046f9d8ff56e493a146518c0a4ca50387fb64014f2bae7744d"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_right_3.png",
+      "bytes": 27051,
+      "sha256": "5569f04ea5cc16cc2d7bdf7c23fdbd3cdce36b94ebe77fa629494dafe6946646"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_up_0.png",
+      "bytes": 27575,
+      "sha256": "4bc6e295e88f561ae448e0a686e33fdcdc739a5d522cf3834c1fbb50bdc3cacd"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_up_1.png",
+      "bytes": 24820,
+      "sha256": "a07e76db412bff6a34a172545e30b2f1616731cfd32488615a8be668321fc433"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_up_2.png",
+      "bytes": 28063,
+      "sha256": "2ed341e79e2cea982868cbab6b97aea5395b791e593106903829949f16ea5a36"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/frames/walk_up_3.png",
+      "bytes": 26858,
+      "sha256": "e8569814724b807b0562ffdd743e8640793d89c1308581e0548d424508892364"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/manifest.json",
+      "bytes": 5810,
+      "sha256": "07e0057fd1e2fb239d738e470fe36cb15c3a8eff01657d19560d80f8fa059989"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/source/attack_source.png",
+      "bytes": 1981685,
+      "sha256": "043936e646001743aad79c04d63dd8e3beeadbd7bcac6a965baee01611fee0e8"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/source/front_windup_source.png",
+      "bytes": 833461,
+      "sha256": "e9a3446d09b54421aef430081a73f425c2e75f0ed30721e878913a2c13b04e55"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/source/initial_animation_source.png",
+      "bytes": 3149389,
+      "sha256": "5145173530e53a82ea32b638a5f28675477411cea8b89ccd1a48939442c7f75c"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/source/locomotion_source.png",
+      "bytes": 2871304,
+      "sha256": "6b428f60b19a9e76cc5533e46a06804dfd186db149330186c133cb9f792cb225"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/source/reaction_source.png",
+      "bytes": 2538712,
+      "sha256": "c449ff3c56c3c1b101e0a7a22734a0695d1e0bda8616b1f4e9e1cb752b6d8289"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/spritesheet.png",
+      "bytes": 1253807,
+      "sha256": "f1f691ad5da49b1cecac3cc0ecc4b43194b1f2c9efcaecf0dd82750b5a705794"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/atlas.json",
+      "bytes": 20559,
+      "sha256": "a3cd62b97ddc6a55a03d9e0a574324e76a264984b8abf1cd93ab9b0995ea2c57"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_down_0.png",
+      "bytes": 5774,
+      "sha256": "80cc4adf5ab655c6c83ec2e74cb7fa5cc835420f8f01269a4cd20dd22c01c7c5"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_down_1.png",
+      "bytes": 6949,
+      "sha256": "bd62f0f5d64223637035f41f7bb7dc45fc5baa4c2c4e9c98d6f68e30d2e7aa90"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_down_2.png",
+      "bytes": 8868,
+      "sha256": "64813b96658dbf9ae0616ad429ce6e889caf50665e2eb4236695df5933accb59"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_down_3.png",
+      "bytes": 5494,
+      "sha256": "7ba1038090852ce45142e2047c2a8c11164386b71364e9a818dc97e9cf98e24e"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_left_0.png",
+      "bytes": 5246,
+      "sha256": "5474b9726f2a83582051692139f0dee7a2bd03ef480bdfbe4fc706f8289b394c"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_left_1.png",
+      "bytes": 6930,
+      "sha256": "1dcb182f85c3a5da07ea4c2fca1377af88d907c55cf24a5b7390cbe418c46d8a"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_left_2.png",
+      "bytes": 8695,
+      "sha256": "74efb878ed679a1c7ac0f19838624dc03abe45177b7b029d2dc4c7cb0baa71b5"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_left_3.png",
+      "bytes": 5528,
+      "sha256": "fea40a72d6520a2a2d5faa1a0c23e5d5df97ad081ae34100e1f9563493b007e5"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_right_0.png",
+      "bytes": 5221,
+      "sha256": "040a25a3db533a71cbdc27eb22b1516ba570335cca5d394cc9c9c49f3eb95ffd"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_right_1.png",
+      "bytes": 6680,
+      "sha256": "e97f12a9b363cdd02c61bdf1e1d1d68189d0eac357630cd03a44eba07e6817ec"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_right_2.png",
+      "bytes": 8750,
+      "sha256": "5e0be5aa3d1aac7f7375e0d0e23be4cf3cd8c2c485f8910a97780554b7ac4a47"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_right_3.png",
+      "bytes": 5599,
+      "sha256": "f5001a739debc42528aa7e92ae60d367100335f97ba5046222a576db48ee2ae2"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_up_0.png",
+      "bytes": 5690,
+      "sha256": "7f8c73422a66aca0095cd9fb3f0551301b546200075bd0fc71107c4328bab447"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_up_1.png",
+      "bytes": 7105,
+      "sha256": "3717112d9e92adc8e46ebf956608353e084c1d18f6eb7b4d53c647b9ee42c1bc"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_up_2.png",
+      "bytes": 9117,
+      "sha256": "cf629c345a211347979fe57e5e2e67922b062d6554892241d17893987c6a9b61"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/basic_attack_up_3.png",
+      "bytes": 5670,
+      "sha256": "e390e7b68a5d4aa7062ed6e3491f374cb4d66d61c968d95da48c385f13aa61b5"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/death_shared_0.png",
+      "bytes": 7053,
+      "sha256": "2b9c51a04a28b24c42617dea28306f4c62db4b51436e3818409a9406fe4d9ad8"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/death_shared_1.png",
+      "bytes": 7035,
+      "sha256": "46c9d27e1ac5cec8f19d4a44801f3168fe9565af9e109962e66a17f9cea7d284"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/death_shared_2.png",
+      "bytes": 5474,
+      "sha256": "1fc0d4776fbddc0de0a9f5d1447d8e80759f5eb222e589961d66c5a855a0f5b5"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/death_shared_3.png",
+      "bytes": 6705,
+      "sha256": "81e79fc5cdc63d530d2415e8d2fd1b6d52656f18e614914c9268a4427043b2b4"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/hurt_shared_0.png",
+      "bytes": 6105,
+      "sha256": "1898320178960e74f5528fff08a3e0e17cfe68768fc6274da8c558d1449e0f84"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/hurt_shared_1.png",
+      "bytes": 6564,
+      "sha256": "e779a442f5cf9fc22d5255b2aa9bc00376f491d17fb561fb6f58276a2f9c14fa"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/idle_down_0.png",
+      "bytes": 7551,
+      "sha256": "82a06bc1dc4ef7ec50913be1fbb57034e603a81b15bb18156b6fc3ec3f19c093"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/idle_down_1.png",
+      "bytes": 6402,
+      "sha256": "749db5323c2a90770373df8277f337ce423397f2e57729589528680431f15408"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/idle_left_0.png",
+      "bytes": 6938,
+      "sha256": "c2d515c97b02ffefc177e24e236f5d3c19308cdc7510b922dd09b4b00b496e74"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/idle_left_1.png",
+      "bytes": 6835,
+      "sha256": "023c9b41162cbf73d6d90cb92c73f5b2947b35b2bfc8632fd94e23e71afa3549"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/idle_right_0.png",
+      "bytes": 6720,
+      "sha256": "c9cd51328838e43040278a126e3ee3c75c58a2dd0c0ca8482b92e03b641483e1"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/idle_right_1.png",
+      "bytes": 6658,
+      "sha256": "0c04edbaf9879cf192adf3235bcddd797a118c240c6830deb7a9112d4dbd57c7"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/idle_up_0.png",
+      "bytes": 7217,
+      "sha256": "eba27911b28c48a5b7e05b08a0926b7aca10809b26a000fa80b35e421c5c6081"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/idle_up_1.png",
+      "bytes": 7308,
+      "sha256": "5f4bdb04ff09b641758a08fc6467080f6c48a9c53ef48be4ac42a34cecb58f05"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_down_0.png",
+      "bytes": 6518,
+      "sha256": "783b62b33a9e8ec08d0087c84f9a4445b49605f7ccadbcab85f4197fbda4f438"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_down_1.png",
+      "bytes": 6969,
+      "sha256": "fe1c32a09542ab9915e5d29cfedf7e537c1b942e5fa733bb4fe40b6385d1fd87"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_down_2.png",
+      "bytes": 6605,
+      "sha256": "f368f3c2b3beaa8506e49688bdffc3b0f482c9334cfcfab23f2c61c7316a1dd9"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_down_3.png",
+      "bytes": 6869,
+      "sha256": "30c3c86bb903625b7a055b706184fcd71dfa3cae4e4a8223468145d1a18893f5"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_left_0.png",
+      "bytes": 6298,
+      "sha256": "cde354dab0fad033eae1a72bb6b00231325efe79708f76ce18e8b4b4558630eb"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_left_1.png",
+      "bytes": 6680,
+      "sha256": "7b3965c81969616e43ec5491a8c9bdaf04c5639e31fcb3929a54028abd7f8d33"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_left_2.png",
+      "bytes": 6555,
+      "sha256": "53a4e2a57f8f8c54e17d27fd7f1739e9edac0d01aef314413378395a3c0e8824"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_left_3.png",
+      "bytes": 6549,
+      "sha256": "d3850179429da8aac3ede260eeafce233bcef9fd5640731405c8f982826865e9"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_right_0.png",
+      "bytes": 6232,
+      "sha256": "61bdd113046b76f97316732bea69303aa8971a21654d376ff31d7b8f782f85cd"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_right_1.png",
+      "bytes": 6377,
+      "sha256": "53d6099c5621520984c14ec510c5722da3dd9a25f725bfc95147952dd4d753fa"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_right_2.png",
+      "bytes": 6499,
+      "sha256": "60587f4d0505560bba4854acf3f562c4a196be6802cdba79f6cf4f77090c6562"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_right_3.png",
+      "bytes": 6629,
+      "sha256": "9fe8cc70c03809d438c9ecdbf4c9415973d2fdf9d59b33ab9dae024d84e425d2"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_up_0.png",
+      "bytes": 6842,
+      "sha256": "a1845ce35d72f614e933d690683efe2cd7789d6d8d2385b2559169a75c137143"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_up_1.png",
+      "bytes": 7441,
+      "sha256": "f5ca01fc21f44dec5f09b50489f121024be33b18e516c22dae66a48748354f1f"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_up_2.png",
+      "bytes": 7177,
+      "sha256": "d926c92062ac63697d995a8e464a0dd737819892f0389ca3e650d1186959b5cc"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/frames/walk_up_3.png",
+      "bytes": 7025,
+      "sha256": "d51034c480615f5dd548322c6bf84a7575ace6cc7f58aab60dfe07a85902f2e3"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/manifest.json",
+      "bytes": 5325,
+      "sha256": "0f0c62bbd41b04c5afbd797e769c34315249a44f22d83026a1d52163626c9c71"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/source/attack_source.png",
+      "bytes": 1642092,
+      "sha256": "aff87e9627a1b720041546f297db1144f06d7f52c6cadb8de9436832fe2f99a2"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/source/initial_animation_source.png",
+      "bytes": 2836028,
+      "sha256": "dbc26bd179cf9ce8bb79ec02a9883cc387bf865fa3f591cc257b4c8c09b703eb"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/source/locomotion_source.png",
+      "bytes": 2653443,
+      "sha256": "b0fda0bfccc79f8c60b25c841f40d0c12d869ef4dc5166846bd277d969a719c0"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/dung_nham_linh/spritesheet.png",
+      "bytes": 302265,
+      "sha256": "92978b0dd9ef30b8a53f50e32f2f4c2d3285bccc09721b15751809a7f95020b9"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/atlas.json",
+      "bytes": 20571,
+      "sha256": "48b00d223ba9c156e3a3b4030b7803efb277d2d3bcced07344eae52275bfe4dc"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_down_0.png",
+      "bytes": 17321,
+      "sha256": "d889b776b1eabd5333ed8743cd5dfee0583fea2dc13c3038239c2f3389fbdb30"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_down_1.png",
+      "bytes": 19377,
+      "sha256": "b0648461d3b387e55103f4c52e8ccfc780f975ef9271e7c8896846b240bf7b45"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_down_2.png",
+      "bytes": 16663,
+      "sha256": "b3f6e0ea00de38033d6aa07915aa7f194b278f89990e615e8d14c0c1615025a8"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_down_3.png",
+      "bytes": 16411,
+      "sha256": "5aa7208b800eac87f18ca93c096d51fa65f0ab818b9de7e37975b0fd78c7af34"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_left_0.png",
+      "bytes": 14619,
+      "sha256": "087e55e4f285e4fe2e57a1d2fdf3428191aaa58cbea4578242d3e54069dd4a70"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_left_1.png",
+      "bytes": 17937,
+      "sha256": "aa745a76c98e2b69ebb538c6c68858936fbec0cc82e2d729753b56d75e1cbc39"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_left_2.png",
+      "bytes": 14137,
+      "sha256": "a1237b1794065999204ab57aa26a0abcfee59aa94ffe07e1b92837c2c69c5e66"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_left_3.png",
+      "bytes": 14825,
+      "sha256": "fab0a028807c77d00419b584c0243fc711390c11eb11eddd5aef38a2c11086e1"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_right_0.png",
+      "bytes": 15158,
+      "sha256": "cb88dfaf342d95c4aaf998806dc2cc909c0ec09d2e41c0afd8f4a21e2867834e"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_right_1.png",
+      "bytes": 16331,
+      "sha256": "10e11c2f5c91c5bc10539615dcd2d666483ee0aeebad8430d8c3851f5dc0872b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_right_2.png",
+      "bytes": 14335,
+      "sha256": "c5ba1fb2bc6ad428666e4534b856434f1df34f9d315163bc7514b8c7a4f1aafc"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_right_3.png",
+      "bytes": 14874,
+      "sha256": "5f67be7d002c3f389c7493f20c56edae1e6501e9ea85f443816977e17efcb4db"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_up_0.png",
+      "bytes": 13871,
+      "sha256": "bd6afa06d3bb119ccc1be707d70e17f48dbd8ebcc92329c5dcc23f873283961e"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_up_1.png",
+      "bytes": 15769,
+      "sha256": "7e31bad01ac591d1d6bec1ddb2a9f38cc3ff6b3dda7e48dacebc18f73c5b1218"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_up_2.png",
+      "bytes": 12708,
+      "sha256": "266a6b9386d513c99e0a463b6d890a8242e3f2284f55e0f9165b0285fdf22aec"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/basic_attack_up_3.png",
+      "bytes": 15165,
+      "sha256": "9da92396cc834ec199d05be0f74d04687d73a066f523794b9362bf347f3c23a1"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/death_shared_0.png",
+      "bytes": 18020,
+      "sha256": "677038a58a11225160f6b5ec129da0220a8dcaff50de3a2cdba7c22a294669fd"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/death_shared_1.png",
+      "bytes": 13172,
+      "sha256": "3dcd9d820481164b34f6e53b975d16eee5dd6c4e1db28686a2accee8f693e89a"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/death_shared_2.png",
+      "bytes": 11157,
+      "sha256": "ef5360998c1418cfdab2b8ea781e4034914faf5144e6112509f7d4b9dc717f67"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/death_shared_3.png",
+      "bytes": 13773,
+      "sha256": "63bb0d8c6abdddbb4487ffb61eaed06435ecf01c4a103b175490d213d0f72ebb"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/hurt_shared_0.png",
+      "bytes": 18449,
+      "sha256": "a200090c3397238e6a77a5292db2c2bd04d367a558e402786167e8cb74d773a1"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/hurt_shared_1.png",
+      "bytes": 15858,
+      "sha256": "db5232bd472586a79a885eff9c77e763dd14bea2540464be20b4b908144fb3cd"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/idle_down_0.png",
+      "bytes": 18392,
+      "sha256": "88fd66052f93eb1c2f028aeca1ff31b05b888aec6e2f98e36f2e121789426aa9"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/idle_down_1.png",
+      "bytes": 17170,
+      "sha256": "fa1b1ed0ed659fc551a182d4f83cd0b8cdcb26179739c3645385a22fec09782c"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/idle_left_0.png",
+      "bytes": 16538,
+      "sha256": "939df7b9dd2dbe3ae4e57911093e5f72cab55b5432b487ed6dbbb3229b40de29"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/idle_left_1.png",
+      "bytes": 16227,
+      "sha256": "da9f615dc0ad3c25284fba841cd9419929b920492346e9314b1e649506989e1c"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/idle_right_0.png",
+      "bytes": 17795,
+      "sha256": "2a4328e5db198f20fd555b299b4b00a152ed405d41f63479b00533168b21a678"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/idle_right_1.png",
+      "bytes": 17596,
+      "sha256": "963f2c926c760757cad6650e51de8a065d282043cdd77e5f685a91819c2bbc66"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/idle_up_0.png",
+      "bytes": 18950,
+      "sha256": "446fd12fa6ebc954233125c19ebf26d82936ad9c56395347d84fc7a5093861ce"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/idle_up_1.png",
+      "bytes": 18891,
+      "sha256": "6762aa30800333953cc18b487535fc26a03dfd9a05216ef4ba4ee8ab802378ef"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_down_0.png",
+      "bytes": 18591,
+      "sha256": "3b16cfdc771432be6edb8f15599dc78f983ffc3ac01afe217600d6e738bcdfab"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_down_1.png",
+      "bytes": 16609,
+      "sha256": "6e5faa10a7ea2c8b5c5dbb1c1eda0b57995d28f7a9f6e302b67c9e910cd7b03b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_down_2.png",
+      "bytes": 18133,
+      "sha256": "7467e022c56a0533a60d4e5bc16b5f431c707c400b038e72608f7ad47415d77f"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_down_3.png",
+      "bytes": 17872,
+      "sha256": "e57e2c57bb4174d028b8eec079236555116c5ae76c91c40f6a9ca4bc14fd2818"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_left_0.png",
+      "bytes": 16684,
+      "sha256": "91b120de7417d95ef1a4656a1a9d3c40599ec847785d145257852fcb110f1ac1"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_left_1.png",
+      "bytes": 15564,
+      "sha256": "31fbe81f548942917ad21b985e2b734b529666cd691cb71718e2e8ad0ef86b4d"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_left_2.png",
+      "bytes": 17039,
+      "sha256": "27c38c601e728bfb0f0b65df7e55aa242e05b396176e4d5ca6da4c7db8341c1d"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_left_3.png",
+      "bytes": 14826,
+      "sha256": "4f3a8f907aaa17125226162d0515dd67efca202712ec19ffb4aac82e07d00db7"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_right_0.png",
+      "bytes": 17071,
+      "sha256": "7e48a976dd9ad288403d725d9d6d0e46bb4b76d6cb398fece09e6b452b98f380"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_right_1.png",
+      "bytes": 16944,
+      "sha256": "7011c4d0e43e67a57103374176365d8640d9ffcc042cc7f53b7f7d259974fa86"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_right_2.png",
+      "bytes": 17633,
+      "sha256": "44a47d3d0c2b6b93483ccaa7dd63af6e4a2c0d7e8ae8cd08f89a97aa95454f72"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_right_3.png",
+      "bytes": 16519,
+      "sha256": "3e36e4ec91907f520fdac93981bdb7257fd223a1c0407df0b3d064f9006cdb38"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_up_0.png",
+      "bytes": 16459,
+      "sha256": "f1ef93d0b4dcd4a13f3325909eb158e3ee9f37d52fab64ea2ecd711b8da14bf8"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_up_1.png",
+      "bytes": 19198,
+      "sha256": "96374d482b2d4d1a1a0f30709bd461919c77692fcd73ecd1137d3a5859d7633b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_up_2.png",
+      "bytes": 18236,
+      "sha256": "434c6a5e728dd30d323c1d109ef17f90e2a31b490a6df45a0764d1f3bf598a1d"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/frames/walk_up_3.png",
+      "bytes": 18323,
+      "sha256": "913687ad3fbeb43f7ffdbb763e63eff6a1bce5246a5bc6349d0135bd74925365"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/manifest.json",
+      "bytes": 5324,
+      "sha256": "266e94526fc6743d5d88aa80a64986b183f6087811117083a66041719145c0de"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/source/attack_source.png",
+      "bytes": 1785676,
+      "sha256": "e646be0af3304022e6275bb7071a397a43922e373dcef29f502909b2989183db"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/source/initial_animation_source.png",
+      "bytes": 2835373,
+      "sha256": "56a7f8afe08cee29652a427752926983946a76d3bfb96270d7729e494b953995"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/source/locomotion_source.png",
+      "bytes": 2881347,
+      "sha256": "999f7f5be7bd09a3821f22f0b4ca72d094a64690668d3f7e1221c48de7a200ca"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/spritesheet.png",
+      "bytes": 752755,
+      "sha256": "e32de64048f7ac42a1e87cf7f57d5c19c13b44e81e93c15d24a6c78928e043ff"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/atlas.json",
+      "bytes": 21578,
+      "sha256": "64ca0e2906d4464cf8a04eef424bf9cc6afeb473df59b8b91f3a419590085b80"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_down_0.png",
+      "bytes": 6240,
+      "sha256": "ea00fd50218a07814e2dd7903261f4b76d63cb5af911909f09ea31da50e7c356"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_down_1.png",
+      "bytes": 6733,
+      "sha256": "684bfad2dbb9962d12f1d9f1158737da2c551c850fe5b6137af3c979d9c86d00"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_down_2.png",
+      "bytes": 5400,
+      "sha256": "fb7f4f087c86d1824dad9facff4a09c57b814dab38449e4efbdafac9516d6fa7"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_down_3.png",
+      "bytes": 6513,
+      "sha256": "7169e7ce4c0896baa837a3b82c68d644f67a0313fd248cb3607c94fb0043ff71"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_left_0.png",
+      "bytes": 5896,
+      "sha256": "d7a8dee4ab45e568444df4af87a8601c2b00af89c21eb6d9dada81c65b16e0c4"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_left_1.png",
+      "bytes": 6125,
+      "sha256": "1f0eb973d1286dc6e84f2996d8ead7977ea4f4ee26759bb7fe4e1061e2bb2996"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_left_2.png",
+      "bytes": 6138,
+      "sha256": "28dfc84bd86e321cbb94706cde9bc5bf58460d63f0581ebed42a67cceb847106"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_left_3.png",
+      "bytes": 5639,
+      "sha256": "ff4adaa1bf7ed773f57634fa11bd0a95f64d31a1b2db20f2268c802fc1099cd4"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_right_0.png",
+      "bytes": 5547,
+      "sha256": "f462239dcaa232f7560efafe24c982fd59773313f43757cc0eaac498a84fe3a4"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_right_1.png",
+      "bytes": 6385,
+      "sha256": "6e8d83d10ea0c35205098a08f836b51c8ff0b5e85eb92584a7e457e738f27f09"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_right_2.png",
+      "bytes": 5805,
+      "sha256": "5c46adccefbb7db782a361bb0242780bb6103bb3b5d90ffe28f818a9f92a426b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_right_3.png",
+      "bytes": 6131,
+      "sha256": "b344e5866aec6cf0fb7587f35801c5026d3f2d413ec66319b4c169fa0166adf5"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_up_0.png",
+      "bytes": 5958,
+      "sha256": "bda3bbee53564cdaa2b365ef39baac571f2b77aa37e2e8e338fe3f763dfeadd9"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_up_1.png",
+      "bytes": 6554,
+      "sha256": "0cb7fbddce948f7dc51dad6e5a832bc523d3c5172b9eeaeb7bdaa72ab8065b83"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_up_2.png",
+      "bytes": 6033,
+      "sha256": "d3d9275b05df5a7b145fba0e5cac74c47f8c20631578e23fa25690255a624745"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/basic_attack_up_3.png",
+      "bytes": 6354,
+      "sha256": "1ff20e90cbd2662e0e4d2c07b7efefbe654d923c1957a8faf8a9f78eef3768b5"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/death_shared_0.png",
+      "bytes": 6616,
+      "sha256": "1689e52452d798d87d3bc057b1b0af1f3779c2b6a6b4cce120ad082c0e68116e"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/death_shared_1.png",
+      "bytes": 4449,
+      "sha256": "4e9c998c95ad3e7ced7f3bdc486952476c3d3fdd70500bad6b21f1ad3b048ae1"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/death_shared_2.png",
+      "bytes": 4594,
+      "sha256": "0d80ef22bc9ca641292ca4a59d69a031caffca804a691834d31311732906d718"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/death_shared_3.png",
+      "bytes": 5218,
+      "sha256": "9c3c3f8bcf14876b6654abc4e4997bdb90b1950a5aa783ced4066a26ff60f1f9"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/hurt_shared_0.png",
+      "bytes": 7006,
+      "sha256": "95ac7a3672389f395eccf75dbd94e5721d7c786cdabbec3f2e64f6618960f750"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/hurt_shared_1.png",
+      "bytes": 6641,
+      "sha256": "8bf35610ceb9c0f2a870055befb8371c872decf8a84f56b3b2f1a645f4150fa1"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/idle_down_0.png",
+      "bytes": 7141,
+      "sha256": "474a633393054320343d56ee41a5c7c687ce7aeeb70b56faedb1c00bfeb9105f"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/idle_down_1.png",
+      "bytes": 7352,
+      "sha256": "e2533932737d0cf53d3a30a7ba961941e433dde87ed161fcba80aec34b46c9dc"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/idle_left_0.png",
+      "bytes": 6835,
+      "sha256": "e6d92796ae25a6b56d2f9b2a695be676e480d081d9654ea30bc7ef0554fd79a8"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/idle_left_1.png",
+      "bytes": 7212,
+      "sha256": "e7a671f40083fbb3f5eaaa34f9b57daba81cf22ecb7e48f0a6e87775a5a2316f"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/idle_right_0.png",
+      "bytes": 8303,
+      "sha256": "23f482e55c558932adaa13f04692bf3f70a4081e923574f822bbef2e4058ed2c"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/idle_right_1.png",
+      "bytes": 8424,
+      "sha256": "f9eddae707dc3c82081aab37a51c9d11af6b0a85bbe4c7da4b8b9729ee5403f7"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/idle_up_0.png",
+      "bytes": 7689,
+      "sha256": "5733ede452e36ef88f4d608cb359e758b879ff157346e8db48e99c12dc010c16"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/idle_up_1.png",
+      "bytes": 7555,
+      "sha256": "64d7b5803385847992f994763e8f792fcbc7ee587dd9d990b42458b22f5ba524"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_down_0.png",
+      "bytes": 6928,
+      "sha256": "4ccb433b4a9d137bebb5c12caf41bd49a6e9d79bdfc0bbca6691aebad34d601d"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_down_1.png",
+      "bytes": 6623,
+      "sha256": "f810a911a470fbbe1f9d42ac8ce4fdc1137ff16a28acd42ffc6e89aa9aedc7f3"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_down_2.png",
+      "bytes": 6989,
+      "sha256": "1bfbbf89aa9c34a268c57ba003f8240631e9ea6d824e484f7b79bab6721ff458"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_down_3.png",
+      "bytes": 7002,
+      "sha256": "de742217fa4b91fc6c408a799d9c23721de40d3e3c226478c1fc4326a35238cf"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_left_0.png",
+      "bytes": 7576,
+      "sha256": "819e72eb22dfbc1b93d0ec5aabd7b31ea0e32cb0080c03426cc5844633ba392b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_left_1.png",
+      "bytes": 7503,
+      "sha256": "3974f06a4d7267e259a505bffca2b8d77fa907b3af46f8f0c689607a6b8da412"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_left_2.png",
+      "bytes": 7428,
+      "sha256": "56843eb49e0940b45d0804d4d65e54690d8ae24bef02cacbdbf768d72fad6f90"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_left_3.png",
+      "bytes": 7790,
+      "sha256": "7017de3019c381d482a4716191ef89ae711d7d9353230b3f5ec10f9062b3d2ae"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_right_0.png",
+      "bytes": 7468,
+      "sha256": "e92d4e83e7ff1667e8630bfc168ee764bf56855bacbc639f92d6f476c1428f9a"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_right_1.png",
+      "bytes": 8115,
+      "sha256": "23c2153ce76d3b9d0bb85edf921bad6df9a25e26df95727306e5bd7f66b8e7df"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_right_2.png",
+      "bytes": 8033,
+      "sha256": "aef55b636f56d59737a4a4b3aa9fac0701538b5c1b77520346b85b875b484943"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_right_3.png",
+      "bytes": 8555,
+      "sha256": "5b96b5c2e7c9f3ac72579c58b6c39e9c22dd5495f39233e90a43b7c01277cd5b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_up_0.png",
+      "bytes": 7722,
+      "sha256": "5dc83e357bc243351695a3e71c2b4c84b643cc707156f5b483489195513a5599"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_up_1.png",
+      "bytes": 7190,
+      "sha256": "a00c3edbdae069fbbc00208af9ba1e1adb12fe2403d7cd1650dd39abf0c4adf8"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_up_2.png",
+      "bytes": 7214,
+      "sha256": "52791a76d873919dd480ebf29f505ad929dc0922ee8c1b926303cc8e1467208c"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/frames/walk_up_3.png",
+      "bytes": 7630,
+      "sha256": "3e17c69da0ffea72d02514d65b71a65a6fd8ae6dfb42f6f95f643cdcfbf55abb"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/manifest.json",
+      "bytes": 7130,
+      "sha256": "c5c15e43afa9633ede6b6495cf4e01b0d6411df88a5baf200a105eecf01210cc"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/source/attack_source.png",
+      "bytes": 1803806,
+      "sha256": "4c8d2b689ac91ba565e29ad3510df3828865f082fa9c5883715862a78ccce813"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/source/initial_animation_source.png",
+      "bytes": 2852915,
+      "sha256": "6f5e58cdba34af21df1a2fdad5a12a381bb5bf087d123e4d8de59205d4301622"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/source/locomotion_source.png",
+      "bytes": 2536024,
+      "sha256": "d019c71be939d39a06c6f519e5f91e3558223227f1a722ae4e025fcdc3b7838e"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/spritesheet.png",
+      "bytes": 305784,
+      "sha256": "992b90ae4fc2de6e3387f75cedb396070066cdce693f8e8a58940e4807fc15bc"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/atlas.json",
+      "bytes": 20267,
+      "sha256": "b06046a1f6be65f0afafe59a60c15d6e02cb1ce1dfab95db4a018e689d4334fe"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_down_0.png",
+      "bytes": 4058,
+      "sha256": "63d60a8b50283146f3d6aafafa1ea205d06755a5237f32adfdeb6bb95c0cbfa4"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_down_1.png",
+      "bytes": 4103,
+      "sha256": "c36b005558c60c9ca6baa4cdcad61f0a67ba6ceb9234ee53c5e348992b753853"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_down_2.png",
+      "bytes": 4029,
+      "sha256": "ddeac037213a2cc62a4bc7da9247058990ad31ffb66959be421a900321018503"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_down_3.png",
+      "bytes": 4008,
+      "sha256": "7e4eff385d827c806334615d640776d8936119b04da6b163e39f692ddef98d26"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_left_0.png",
+      "bytes": 3931,
+      "sha256": "9ed89ca1e2b3e994250104cff36ecee75df3a0300a059fe0201efd97ba34d1eb"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_left_1.png",
+      "bytes": 4379,
+      "sha256": "77460fab0271dc540bc2e19152c37a66cd9d724d95e20c470783c3eb6f274a9f"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_left_2.png",
+      "bytes": 3995,
+      "sha256": "6aa3bb70e55c196894d731526b70d2c86456c5954d87e045b573eb3a83f979e5"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_left_3.png",
+      "bytes": 3944,
+      "sha256": "79ee0bd2f474190231789f48e64f02368cc6aa8c425ee55adb37fc63b24cfd36"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_right_0.png",
+      "bytes": 4108,
+      "sha256": "19374af1d9e77ac3d3faeeaf479c2912d26e17ff18ba5a9a91627a0ffa036a3a"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_right_1.png",
+      "bytes": 4528,
+      "sha256": "ce8f6f936014cd8bd7b3deb0ea80d67ab9602f42b9923135c4a6dc68961d971b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_right_2.png",
+      "bytes": 4719,
+      "sha256": "96c2c866ed897c4597bf51970b1daddbeb9ba6b8158cdded464d85f551298b75"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_right_3.png",
+      "bytes": 4128,
+      "sha256": "181f5fa6af5e71164067395e2c2aec9c8c15d1f7ce24a65c488d42978b8e680c"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_up_0.png",
+      "bytes": 4642,
+      "sha256": "57cea3b31218f3bfa4f80bfbf62fced3cad0e07635cb85b2c4b07fffc3b7ed1f"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_up_1.png",
+      "bytes": 4473,
+      "sha256": "9295fd86bc6cf79c6a55e139e1cb0f7e51a3dc18b1b458de1e4681ae10742ad7"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_up_2.png",
+      "bytes": 4238,
+      "sha256": "1cbef787151f64ef7ba8b63e2a3f38c1a60d4f1182eebb5ab4ac921994658d99"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/basic_attack_up_3.png",
+      "bytes": 4673,
+      "sha256": "546dffaa8b8c0ace3909dd6bd75d5e0f6bdb1ecb13b9eaac73af73e0dd13ebe5"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/death_shared_0.png",
+      "bytes": 3330,
+      "sha256": "1982212144f4d6c103fa3f315c9f397258e32b46723892ed7573a7c56ac90abb"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/death_shared_1.png",
+      "bytes": 3350,
+      "sha256": "b52128f9c040c98a47281e1b1eb1ecc77acdf10601ceecad13792afb78dc3c5e"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/death_shared_2.png",
+      "bytes": 2497,
+      "sha256": "3b0ef50a9593a0a3970b609a31af2910ed681f236e50becc053068fee94e6e9d"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/death_shared_3.png",
+      "bytes": 2580,
+      "sha256": "7c8c69a9eccc55b89839a2f39b627bd7b7b8496c7e40011267d9bfc5eb531ea0"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/hurt_shared_0.png",
+      "bytes": 3770,
+      "sha256": "7d15f7c3c28acc972a1fb117d857b162019b2ecc7fb0ae3624168b2ec99e902f"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/hurt_shared_1.png",
+      "bytes": 3664,
+      "sha256": "f9b0657d1298bb3c15992d63635aceaf801f93d6139039560a41fa06a3ac3c27"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/idle_down_0.png",
+      "bytes": 3889,
+      "sha256": "73614f38b4b95cc431c43bbb0ded3fdc31357d28056f2b8569ffd5ab3402b7d1"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/idle_down_1.png",
+      "bytes": 3938,
+      "sha256": "e3ff1400d995587bd0ea71d7c29aaaa4dd2d83f61a4a3759b390222853f5ccc0"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/idle_left_0.png",
+      "bytes": 4157,
+      "sha256": "dc0443c93728c336f78dfdf8f6fc30b9f2adfb5f8bc63862eedfee84c00d69fd"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/idle_left_1.png",
+      "bytes": 3943,
+      "sha256": "ded4994a65f4e0d24ce73c258a04fc324e587c34baa2fe5edeb3ca68c74c1e4a"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/idle_right_0.png",
+      "bytes": 4120,
+      "sha256": "b51b50d5288c27303ea65732bd374a1cbb77e6c5548a01f46c48815d5941dbfa"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/idle_right_1.png",
+      "bytes": 4355,
+      "sha256": "d7b7329976898f75eb2f89f9eccfd98b61710e3c95159110287b312e1ad5a2ad"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/idle_up_0.png",
+      "bytes": 3903,
+      "sha256": "8dfc98e5cb8df452bbb0fab0d561057419e5b462d8f95b73f67795bff9b2433e"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/idle_up_1.png",
+      "bytes": 3886,
+      "sha256": "ebd9fc577e955f916b40715526341118599e44c4db3655b73e47fb0c82869adb"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_down_0.png",
+      "bytes": 3850,
+      "sha256": "25ee36711e91044d93448387f7042468e1aec8b3379f87bd06d675e12cbc043f"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_down_1.png",
+      "bytes": 3637,
+      "sha256": "f10fd5d66ac6e537467ee1486a4da3b0ea3e2f24c5b89e0fb8dc48fd67de2201"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_down_2.png",
+      "bytes": 3724,
+      "sha256": "85f7467ee56c1522ccc5aac2cc644f1bb91a75736a8d907f77e2bcff874b3d5f"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_down_3.png",
+      "bytes": 3647,
+      "sha256": "6c028134b9fe1df8166558153514611109d09d622a119aeae635d387927c6c9b"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_left_0.png",
+      "bytes": 3842,
+      "sha256": "4ecf079fe1520af8a3c489e7f51b58b78a5ebb565c5fb02eb17b3f97b2f2eafd"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_left_1.png",
+      "bytes": 3874,
+      "sha256": "e35f5ec4a9d51f7f8638491aee01eda0321bce99a584406402ad52b7445191cf"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_left_2.png",
+      "bytes": 3522,
+      "sha256": "44cbbd192da1296e6d58fd70c07444d0d5ad004ab181b3caa93c00b0838b5d30"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_left_3.png",
+      "bytes": 3836,
+      "sha256": "689820378bf5537481b2159e5bcea5ea60c973e8ebe5af0cf61b9a9dfb31f148"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_right_0.png",
+      "bytes": 4250,
+      "sha256": "39e36c3d95fbe00b86fb67b9b959d40541c66290fef137de49dd73468e548958"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_right_1.png",
+      "bytes": 3712,
+      "sha256": "9dd4ea30d590c2151ad3ea7289ff925fded265e9e92d989b88fdb0746093c6f1"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_right_2.png",
+      "bytes": 3832,
+      "sha256": "28e75c6a10d7497b3906dcf0e798bef11191c2dd6138a941e9a6cd00580e0917"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_right_3.png",
+      "bytes": 4269,
+      "sha256": "30c4be639873ffb3c1af9c8ed083697ecbee75890bc26efe00c895cc8ccad98e"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_up_0.png",
+      "bytes": 4728,
+      "sha256": "5cfafbad3719bbff137e84f3f3e106af1a3906634f72d45c0215e0d8020cc517"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_up_1.png",
+      "bytes": 4005,
+      "sha256": "870b48ce96c215b2df001565227727f7f4d0d61f48bbf1a042d4f943b0db0cfc"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_up_2.png",
+      "bytes": 4014,
+      "sha256": "0b272024c9583e3be681293cf71296302755a731ccd34894991220b850649581"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/frames/walk_up_3.png",
+      "bytes": 4008,
+      "sha256": "00a36221c0ece5ff5ea7286301c97a589ebde558c9180d481c8c0827d4436b36"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/manifest.json",
+      "bytes": 5471,
+      "sha256": "c351a98dddd9ef92cb67ea82ec7fbf68500bbf7ba980d3869b5db3d811320181"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/source/attack_source.png",
+      "bytes": 1675791,
+      "sha256": "1369cf636d8f82a2a222e09c9db79fd8a826a4d7b3014dc4981368f62bd103e2"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/source/initial_animation_source.png",
+      "bytes": 2665635,
+      "sha256": "ca164091cbd32b6026e89888cab93fb58eccfdf4db706d0a29a4971df8e90d0f"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/source/locomotion_source.png",
+      "bytes": 2731298,
+      "sha256": "3adb8cf1dbeb53bef893ab74d07d676eaf297ffabad0d2b45c9aef4b7308f1d8"
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/hell/xich_quy/spritesheet.png",
+      "bytes": 175006,
+      "sha256": "3173020396e22a5a0b2f897367c0cd3fa364426c597629278b38e6d454e5ccf5"
+    },
+    {
+      "path": "assets/sprites/environment/hell/burning_brazier.png",
+      "bytes": 10588,
+      "sha256": "a7f7ee5636ac72c3382f6d6d376bc03251d6c5ef58f30edc909c7fca1ae3cad3"
+    },
+    {
+      "path": "assets/sprites/environment/hell/charred_decorations.png",
+      "bytes": 7086,
+      "sha256": "3fa435615854d4be46d1dad53d6b40f3dbbc333dcbe24708bbc7f080641066f1"
+    },
+    {
+      "path": "assets/sprites/environment/hell/charred_tree.png",
+      "bytes": 31096,
+      "sha256": "dfa20ad078efe3760c47d530dd63d49dd6bbc5f43f3ed42749e22f3098e5177e"
+    },
+    {
+      "path": "assets/sprites/environment/hell/cursed_altar.png",
+      "bytes": 25241,
+      "sha256": "17359545e7e6662f8916e0c95b92f6f7ac77884097a6b063d2d32005a00e022e"
+    },
+    {
+      "path": "assets/sprites/environment/hell/cursed_banner.png",
+      "bytes": 5355,
+      "sha256": "87ac744758f64fea7a2017888c98d1aa5619ca57956655ec6a18119e5da4e4b8"
+    },
+    {
+      "path": "assets/sprites/environment/hell/demonic_pillar.png",
+      "bytes": 7904,
+      "sha256": "9c8f994750a2eed6534c08f5c36cb20eb02909e37c73947fc1ca7bdf2779a64a"
+    },
+    {
+      "path": "assets/sprites/environment/hell/fire_pit.png",
+      "bytes": 10839,
+      "sha256": "4dccc7626b5caa96cdddc25a8902d7e3ed461776363c04fc2227e176791fd36d"
+    },
+    {
+      "path": "assets/sprites/environment/hell/fortress_wall.png",
+      "bytes": 24221,
+      "sha256": "fd67293111aa9115635e343d3c63a8832a1524c536c8ae078d308af56874fdec"
+    },
+    {
+      "path": "assets/sprites/environment/hell/fortress_wall_north.png",
+      "bytes": 41091,
+      "sha256": "a0120df6e6f589379b841ff22db9db7568b4a3f667561c5ef034f271f776e0e8"
+    },
+    {
+      "path": "assets/sprites/environment/hell/guardian_statue.png",
+      "bytes": 19101,
+      "sha256": "d414bf6e6942264dfe42b6b24bd897fc357fada4ad9a8d9d8a490a20d2d69719"
+    },
+    {
+      "path": "assets/sprites/environment/hell/hanging_chains.png",
+      "bytes": 17004,
+      "sha256": "3795813a20d05a4652f4ef29b80a44991fda88531bd3f1ab77b9aeaa46811b26"
+    },
+    {
+      "path": "assets/sprites/environment/hell/hell_entrance.png",
+      "bytes": 74630,
+      "sha256": "a526725d5176d47ed1e28bd75cddf08d9fb4275d3e6ae1f2ebd440d69a2cd4dd"
+    },
+    {
+      "path": "assets/sprites/environment/hell/hell_exit_portal.png",
+      "bytes": 56845,
+      "sha256": "7cf93c735bc6ade7f55075df8b8fb6d706ff0ce68e877923cc9f2f2a74d82d72"
+    },
+    {
+      "path": "assets/sprites/environment/hell/iron_gate.png",
+      "bytes": 42257,
+      "sha256": "d0fd99b990f5353aa630ad66d43322386a46d51f5c90e773803489d3a8fd333b"
+    },
+    {
+      "path": "assets/sprites/environment/hell/obsidian_cliff.png",
+      "bytes": 37994,
+      "sha256": "348ea87b5dc8358136dba4ba5adf7835ebe82380e1737cc092333f50dd18b8bf"
+    },
+    {
+      "path": "assets/sprites/environment/hell/props_atlas.json",
+      "bytes": 7826,
+      "sha256": "436037485885b9c7131364ebc75480382dd17175b975cf107e7cdfa89c3a8815"
+    },
+    {
+      "path": "assets/sprites/environment/hell/props_atlas.png",
+      "bytes": 551092,
+      "sha256": "f7cb9d2b448b3412e3cfcec832736d47f05688046f1fd285b76de9efb687f7f8"
+    },
+    {
+      "path": "assets/sprites/environment/hell/props_metadata.json",
+      "bytes": 10461,
+      "sha256": "23428f9db4b195d4ef4d22e6e7c0dda430bd7ca53a4aa5c45819dea04f539f25"
+    },
+    {
+      "path": "assets/sprites/environment/hell/skeletal_remains.png",
+      "bytes": 5934,
+      "sha256": "7ab1c002fd22aa23efa979898e31605e323cb9b9adcf454677fc0e416a4fe459"
+    },
+    {
+      "path": "assets/sprites/environment/hell/source_props.png",
+      "bytes": 2345187,
+      "sha256": "5852dc96d7bc67f519870e80246857c0edb4cac410109a8b71822fbb25f9b52c"
+    },
+    {
+      "path": "assets/sprites/environment/hell/stone_bridge.png",
+      "bytes": 32671,
+      "sha256": "eec1d77bc05138162de90ef40f6148047ba80ac79fbfdd4a466d6e0261c5f4a4"
+    },
+    {
+      "path": "assets/sprites/environment/hell/stone_spikes.png",
+      "bytes": 12055,
+      "sha256": "e08b5741ff89eaef3b917575899a264e672a3e5678b7c6e1005dd1c1d8b51c5b"
+    },
+    {
+      "path": "assets/sprites/environment/hell/temple_gateway.png",
+      "bytes": 60518,
+      "sha256": "50cde62486fdee2c76a43dc92ef9ba6f5510ecb5aeaed986d498329302d6ffa3"
+    },
+    {
+      "path": "assets/sprites/environment/hell/volcanic_rocks.png",
+      "bytes": 13815,
+      "sha256": "148930bae3196dd5a2410c986ab51cf51e4a7c266d380f578e6d9ece34f0346a"
+    },
+    {
+      "path": "assets/tilesets/hell/source_terrain.png",
+      "bytes": 3623648,
+      "sha256": "781ea9c036d66a3b858b5214b244f9d50332e76cd9e56ec7b13c2c8428c08bc5"
+    },
+    {
+      "path": "assets/tilesets/hell/terrain.png",
+      "bytes": 326829,
+      "sha256": "39a00d50c21cd7bcecd163b9913a0cc40f20fe5a3b2aeb5836aeeb73f59290a6"
+    },
+    {
+      "path": "assets/tilesets/hell/terrain.tsj",
+      "bytes": 11657,
+      "sha256": "008499be3238f4da9fd9ae3e4299dd11245df2771434663425b93c390c36dfbd"
+    },
+    {
+      "path": "assets/tilesets/hell/terrain_metadata.json",
+      "bytes": 30481,
+      "sha256": "e47e2184a5ec6c20efe58e1880ec21d3b221cea98df221df04226d46b23924c4"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_000.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_001.png",
+      "bytes": 2463,
+      "sha256": "2f6920bf4939ce4ebe32f42ef548ebce9663ce5f9686b649b4ffb097f6aad0cc"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_002.png",
+      "bytes": 2467,
+      "sha256": "28991534bb93f082c4c29bd4e02c6aadc624b3a7a217fca0bc2841cf19529e25"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_003.png",
+      "bytes": 2525,
+      "sha256": "9577ba4510a482b0f0570da248d1a9054d6c7c75d0dcb4f6799ccd76bd70dc72"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_004.png",
+      "bytes": 2477,
+      "sha256": "8ebd5ba5c4e1ca254e9a4db9bcefc8397fee0bcae4f9ab40f3bdb74379458fb3"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_005.png",
+      "bytes": 2351,
+      "sha256": "13978d9b06ef9bcc8ebc8bc714604d999a8a9d803544c97346d1c309b33e955d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_006.png",
+      "bytes": 2604,
+      "sha256": "84148696fbe764553186fb5d4211e469c1311447051060dea2d6f638d47aa3cb"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_007.png",
+      "bytes": 2438,
+      "sha256": "94923c61003ca68ff876d7d28e41d63d98063bd6342eb558e8176d509c4f1f1f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_008.png",
+      "bytes": 2614,
+      "sha256": "a64fbc73e07ab103af66a6108573b339c0aad352e595ce78addd538a063b6231"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_009.png",
+      "bytes": 2719,
+      "sha256": "6da3a77ce727a9a4873adee428bf6a83707f43301fc6fe5ea8fe813663d2e727"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_010.png",
+      "bytes": 2652,
+      "sha256": "f89075ad87f4d92b82dfaaf9a313ad0f77057188b3e3baa158072cd66f7d11af"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_011.png",
+      "bytes": 2632,
+      "sha256": "a376f687a0f037bcfe7d412e8a547e58d2588c36b95e12f8013e9a36400e8dd5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_012.png",
+      "bytes": 2656,
+      "sha256": "19c295200c6a57217332bc623ef712cb481596e795792445dc6aec4d77d403e5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_013.png",
+      "bytes": 2538,
+      "sha256": "959766b43aaa3624f5364bbf9b967ddb21dca31e00484036dd7ce6ce274297da"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_014.png",
+      "bytes": 2635,
+      "sha256": "298022470fc80ce0a19da2e9493f9eddcbb1efd75e7ff74bf7bbc84d888d6b47"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_015.png",
+      "bytes": 2725,
+      "sha256": "92aa71d5296b20d378767bce7aa6d85fa09dbb9a1ba77ca471e1485c566ff176"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_016.png",
+      "bytes": 2880,
+      "sha256": "e960caf630ab7497e52cd48ee235373c3a59e5ee3b85f1f898c684b1fc69b7b6"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_017.png",
+      "bytes": 2857,
+      "sha256": "77cb25bd89a6316f76bd66d870e838fcaefaee10de96d6955a587d153661842f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_018.png",
+      "bytes": 2839,
+      "sha256": "3eda79ed838566d5a2113915e025cf5bbd356a4de9156d8990516fdc8ef37b9d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_019.png",
+      "bytes": 2865,
+      "sha256": "f03065fc651b5156d1c863721a93fede8ecbe89975a0f909870f05f47f3e6eb5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_020.png",
+      "bytes": 2779,
+      "sha256": "e1264acef58b288c2d03954c9d29e0eb0e97aa72a5aace4f88585179fa013163"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_021.png",
+      "bytes": 2895,
+      "sha256": "141d9e995ba20da4b50c946aade46b42f9af5527a683a881e133f75ae1f68891"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_022.png",
+      "bytes": 2758,
+      "sha256": "623a47e3f3b75b36518a1b317ad05ee2a0f5f09fa749615b6e062672a85a6e1f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_023.png",
+      "bytes": 2894,
+      "sha256": "11feee2ebd2f68f4cc34e79d1ce1167208b56e4d4cc0730225d8fb54e362d95e"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_024.png",
+      "bytes": 2658,
+      "sha256": "ede5e53f5b15f35e7b420eb3e27d972c412043e719235df2eabd37d3bbb61f65"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_025.png",
+      "bytes": 2582,
+      "sha256": "0427efe1b47a19e03940d03e75f36f18cea285daa175142630a41413112f562e"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_026.png",
+      "bytes": 2631,
+      "sha256": "1aaf181dfb326c05f5270590c2c3430d260cc3704003b37cc8b3a3cb4b15fcf8"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_027.png",
+      "bytes": 2619,
+      "sha256": "561592e6520849423afa2a50a3271c61ac97f0c092535c0ad8534baa169aaedf"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_028.png",
+      "bytes": 2584,
+      "sha256": "5cf9f69955e85b66be2b08a0f7cb1528ef82bf9887f7f377028de155f22bafee"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_029.png",
+      "bytes": 2527,
+      "sha256": "1787e380e3392aaa0cb8c8f2c063dee1a3c1cf7572a1e653b3967ffb5be8658f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_030.png",
+      "bytes": 2670,
+      "sha256": "76038b1f78e3f3119342f0e7b086289053820f09b19c24be7cbb44a44358957f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_031.png",
+      "bytes": 2635,
+      "sha256": "9ea2e17bb45ea9c49a300772c9bcc7c538cd901e6aee70f2939fd4834097fbb0"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_032.png",
+      "bytes": 2636,
+      "sha256": "3f899e8cfc9ae7ac36e522a9de901f9d197ede03a68eac7a80752940d4b91fd5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_033.png",
+      "bytes": 2538,
+      "sha256": "8aa0d4da657192e25d05c589f3e2a4c15d2a0a3e2af711af78c0f07bd8160f36"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_034.png",
+      "bytes": 2495,
+      "sha256": "8cba9ecc3cbcc037cc6a458310cd5d36e70956566259a5cbe40ae22d1a0e3fc6"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_035.png",
+      "bytes": 2440,
+      "sha256": "cfd78e8819ea86f149a7132182711bc32b0bd7374af583c37fcdede2ca0f4a7b"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_036.png",
+      "bytes": 2582,
+      "sha256": "e3ae167a95faccb1a35cfc434228a0e5361fa7c8e59a1be3fe65530b9ecb5e36"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_037.png",
+      "bytes": 2526,
+      "sha256": "4a5aac0dd05b71bb6875a449b5021c3bb3b296232085551267cf8545a4a2c163"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_038.png",
+      "bytes": 2468,
+      "sha256": "4c600233dc977832413ae1d8b44103759ced2e4ad67366ed8f725241d8e9c47d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_039.png",
+      "bytes": 2495,
+      "sha256": "c421319aafefabb1ba0af0c866b97753c41b90a94d54396af72e7d6e37fa14cd"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_040.png",
+      "bytes": 2534,
+      "sha256": "cc352dfd3b2cea822b67e7434346a377658ef2fc73b9975474194d06a6aa602c"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_041.png",
+      "bytes": 2555,
+      "sha256": "a79d114522df4a91f1166ea5fc3bf184600aec93fec07ef22cedf029e58e3dfc"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_042.png",
+      "bytes": 2521,
+      "sha256": "393101f4bea73700613d6b4038982e6394f636fb1073cac03345809e737419e7"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_043.png",
+      "bytes": 2498,
+      "sha256": "cb043cdac51a653c3ef434f3a61a4523f66659b3f8b43195cbc0bad447f3bbe1"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_044.png",
+      "bytes": 2531,
+      "sha256": "e020bcdd28bf9d1f24cda5141f64d57ccb6ff639134f7f0275989fc397d71fec"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_045.png",
+      "bytes": 2534,
+      "sha256": "8e2f866bdfb58378e1c0b15d5e884bc27f46f9ca9a71d7b3717e6a2b170e8cfa"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_046.png",
+      "bytes": 2409,
+      "sha256": "33a99fb1fb12022b671c675a7f1ab0fc5ac8d5fce3500c2c90f7d9236d78137d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_047.png",
+      "bytes": 2488,
+      "sha256": "0129cfd99fecc2d3f6a52e352fa23c910efc0fce8f2bffe1a9bf62cd08384f31"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_048.png",
+      "bytes": 2712,
+      "sha256": "061d900fdec9d36ab8080ff758aaa95517c445473b86730fae9776c7b3a8fb99"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_049.png",
+      "bytes": 2708,
+      "sha256": "0b8c55def9dff19f36dfff88029e681fdb2b59f34e3a008c1feb43e973459c66"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_050.png",
+      "bytes": 2777,
+      "sha256": "6dd674cf37756e912cc8625137dbbfc2287774ec8b2f0a80ff2b132ea003e4b5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_051.png",
+      "bytes": 2742,
+      "sha256": "331401d0b2fc73a9b903414fd9f83a05a69db880bbf40032e08d84b937a3fc91"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_052.png",
+      "bytes": 2712,
+      "sha256": "1b658ea0e48c19860335e75b64dc70169c76af67a7c6bf140e4cb5d3a237c175"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_053.png",
+      "bytes": 2737,
+      "sha256": "95c877d52f6928e463e32db72c3eaa2c87967712f12a9749aeecfdd3fe9a3849"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_054.png",
+      "bytes": 2744,
+      "sha256": "6506dcc60272d02a3ba2e70ecb30236aa9ff79b0095cd83b59e10cb6f259a75a"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_055.png",
+      "bytes": 2720,
+      "sha256": "17feef497e7a95107e448bbb3851733f0de0e3dda5aa813906a8e356c501e7aa"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_056.png",
+      "bytes": 2406,
+      "sha256": "f45c9349cff2fa7c8014b6a02095d6ca655b0d17b9ff315aa2322f79d0b895bd"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_057.png",
+      "bytes": 2555,
+      "sha256": "f37b04e1ff50da89893f3747dacf1850a1678e33e60c3f6b75fccbfb01c972b2"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_058.png",
+      "bytes": 2550,
+      "sha256": "07d2d6672989c02dd458bac7cccf71e67b8020e566e23acf3235a395c7441cd9"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_059.png",
+      "bytes": 2602,
+      "sha256": "1d0568292089b3a9e219a3d63024946fe5d23296b24fa135655068c1ec9d1d1a"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_060.png",
+      "bytes": 2513,
+      "sha256": "6f9270c3cf1e32c966e115f7aa8d70ff8d14f049e78a9d39413b162fc1f7f651"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_061.png",
+      "bytes": 2564,
+      "sha256": "67141922eba5d306a900d426fd82a899487ac6795a08c464eb5db79f7eb70965"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_062.png",
+      "bytes": 2548,
+      "sha256": "38a1ab01f1b565ad8372a6c0df1beacb511ffc2e22fe72ec45370a6af59d13ed"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_063.png",
+      "bytes": 2457,
+      "sha256": "aa196b20de4327d9d61852ed9de2099618b6388cabd4470f7a8345dd79c34313"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_064.png",
+      "bytes": 2712,
+      "sha256": "061d900fdec9d36ab8080ff758aaa95517c445473b86730fae9776c7b3a8fb99"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_065.png",
+      "bytes": 2708,
+      "sha256": "0b8c55def9dff19f36dfff88029e681fdb2b59f34e3a008c1feb43e973459c66"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_066.png",
+      "bytes": 2777,
+      "sha256": "6dd674cf37756e912cc8625137dbbfc2287774ec8b2f0a80ff2b132ea003e4b5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_067.png",
+      "bytes": 2742,
+      "sha256": "331401d0b2fc73a9b903414fd9f83a05a69db880bbf40032e08d84b937a3fc91"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_068.png",
+      "bytes": 2712,
+      "sha256": "1b658ea0e48c19860335e75b64dc70169c76af67a7c6bf140e4cb5d3a237c175"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_069.png",
+      "bytes": 2737,
+      "sha256": "95c877d52f6928e463e32db72c3eaa2c87967712f12a9749aeecfdd3fe9a3849"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_070.png",
+      "bytes": 2744,
+      "sha256": "6506dcc60272d02a3ba2e70ecb30236aa9ff79b0095cd83b59e10cb6f259a75a"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_071.png",
+      "bytes": 2720,
+      "sha256": "17feef497e7a95107e448bbb3851733f0de0e3dda5aa813906a8e356c501e7aa"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_072.png",
+      "bytes": 2726,
+      "sha256": "18419c10f615ce1a7fec380474f9ef6b132d1782170310c711ce469dfa1d7eef"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_073.png",
+      "bytes": 2755,
+      "sha256": "e9a154d57cc3b9aecb90d861ee7025454c4633e1627ac03fb1e2d3e9b8a8252e"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_074.png",
+      "bytes": 2798,
+      "sha256": "0f153281a3d6397e6d37b2b12dd43e3f1480e42338bd5e5ff7d5d2858c4c8390"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_075.png",
+      "bytes": 2775,
+      "sha256": "614868c725bf98e800b20603d9166a5c8ebe7078e9c26dafcbe46514e0200298"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_076.png",
+      "bytes": 2734,
+      "sha256": "8c116983a9f39caadd34215d5fef09983a8c90502653537c3a6f0cb54fb3e8b0"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_077.png",
+      "bytes": 2760,
+      "sha256": "bdfa96c35301713bd124c0511c3316d385fd0f062c1546332b2a9124a4460b10"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_078.png",
+      "bytes": 2760,
+      "sha256": "888fec43bab5d2d6ecd6972e8d1eaa1eeca062684d4c2a63252ed9f37dd0fb9d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_079.png",
+      "bytes": 2748,
+      "sha256": "207022eb728e12f29198bc2e59f0153dcd42f8533261cc0d03772a23a17f5d7f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_080.png",
+      "bytes": 2719,
+      "sha256": "e9242882982bbb3da9ff55eeadea9ccacd0fc2bb1f176b0e53999e9b2d702443"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_081.png",
+      "bytes": 2723,
+      "sha256": "8c58b6f0fb02f103eaf4e0e92d13266bf907f664026fc51ac205d10d1265ff43"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_082.png",
+      "bytes": 2779,
+      "sha256": "373ba2c9869bcdeaf364dd8787970ab138c8d1c25b9f431d3d25bd869c509d5b"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_083.png",
+      "bytes": 2764,
+      "sha256": "f1c48b4db1c66da7f51015886d8ec47456a2e8cbeefeea1e6415ca7ca87c753a"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_084.png",
+      "bytes": 2703,
+      "sha256": "89b0af080a90887f9d28e62e83b9f9c374034b95af209adcaf303174cdd87e0e"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_085.png",
+      "bytes": 2734,
+      "sha256": "80ce93b648b145bcd1b60bdaf15b249d2ecc538bc5fd1a7ed795bf450d18b2bc"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_086.png",
+      "bytes": 2745,
+      "sha256": "ea80c1fe5dfdbe5bf5c20f181c0545085402fa0b9627c82ffd96a6fdefd11df8"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_087.png",
+      "bytes": 2749,
+      "sha256": "096f69021d28c53ae53103a5f7f4a5cdacf2e973f05cf3a0ee12f11587a4f5f6"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_088.png",
+      "bytes": 2662,
+      "sha256": "7d71d2a32dbe87fe321629060855bc4172f2a09881d9be274fc076f1f8abb843"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_089.png",
+      "bytes": 2679,
+      "sha256": "9fed4e2d82ef54c85107f596772f4997fc564f2096e06bb22b025d1e6d0852e2"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_090.png",
+      "bytes": 2700,
+      "sha256": "3b0246cadd72c44e67c7ab20ed07724e22cc4f1200012bea762710ea2f14e230"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_091.png",
+      "bytes": 2708,
+      "sha256": "ec69994be6c0328afcf9ea941bf3d60742fc37059da1760bfbfed565ea0b8f33"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_092.png",
+      "bytes": 2649,
+      "sha256": "87913d6346dd9b209ee20353ba1be0d8a593c044b24acf7258203b51355ad3a6"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_093.png",
+      "bytes": 2644,
+      "sha256": "a01a067bb58c1a22b6854f22460af7b257fdf037e6e777560d0278e8f547574a"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_094.png",
+      "bytes": 2676,
+      "sha256": "1ae3c21a41b2772df6ceac213acf869daeae51f9b1b0087809e1a1b11a364c7b"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_095.png",
+      "bytes": 2693,
+      "sha256": "8fa46d5d9ab63c276926da623ac19edcfbaf7ebfc696e92e628ea2c7aa5581cb"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_096.png",
+      "bytes": 2717,
+      "sha256": "00a00bbddb20e214e98b5e5e6243d27ff80cad247483fe367bdee0b60298bbd0"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_097.png",
+      "bytes": 2720,
+      "sha256": "a19ecc0bdc38c52d5e6d94b5d59f7a1bfa59925b1157440a2bc22d1bbac9f80b"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_098.png",
+      "bytes": 2780,
+      "sha256": "58951b83ba40f7992bf035a63c1b084b534c16bb9ed2ed553d26ac85b63f2105"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_099.png",
+      "bytes": 2743,
+      "sha256": "f25d17884fca7b51ea3e0d0693b205457d3715ad1cebf64aee97fb0ab6d580a6"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_100.png",
+      "bytes": 2733,
+      "sha256": "336306d2ec7b96b37d10825a4fe6c5e0e8809b2b6ef62502c83d8aa65fe3370c"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_101.png",
+      "bytes": 2748,
+      "sha256": "7f15c4c1f69cf421c2530cd4f79d221f9c35d082c4c43cd88e276ce6063e9824"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_102.png",
+      "bytes": 2746,
+      "sha256": "9eb6a2c813bd7182625c7cd23de4d61d76dd45ed22b098f541434495ca7e1d93"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_103.png",
+      "bytes": 2729,
+      "sha256": "24c53f2dbe1d170e2657e3d59249c80ab09b68d9d771e8796e23f45af5a37193"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_104.png",
+      "bytes": 2587,
+      "sha256": "29c3d60b1ae6e8690589366434ffd6b6d6305d1c1b726a6c0b4d8bbaca73d60d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_105.png",
+      "bytes": 2616,
+      "sha256": "a5a286001aacdf7b09b0a7ad5056d3ee03ef394677bff1e68659ffed369ba96c"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_106.png",
+      "bytes": 2645,
+      "sha256": "40ff1b11ad3ec59d1bdb08681439b199296f479ad88496bf87af29385b7023da"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_107.png",
+      "bytes": 2612,
+      "sha256": "beaa1944375929235f875cf4661f474406b83dfe87b9f1175e61a3f4335c8cf1"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_108.png",
+      "bytes": 2606,
+      "sha256": "afd321eefdf0c45ceb473c5ad342d30f7bfcfcac9aab462d7636b9d5fabb5289"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_109.png",
+      "bytes": 2622,
+      "sha256": "64fdb813c3c8e1539ef71958f8875a873794b073c939c1553c17c55dcd0c22f5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_110.png",
+      "bytes": 2621,
+      "sha256": "21b380ccaf558e0164c62a167991ac7f5f86bd076bd3081509094e3a88ebeefe"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_111.png",
+      "bytes": 2610,
+      "sha256": "c25f8f702e0c53a8903366bfc3c0c1c13de1e70d16708dc5bfad76fc81434bc7"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_112.png",
+      "bytes": 2641,
+      "sha256": "094117ef8b273f0c437f6ae31ee7317b86de3e1cfddc6e33e23a072a483323de"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_113.png",
+      "bytes": 2627,
+      "sha256": "f073bc8f0960e05d559fddef093a7a4f66916ca884fd54d584b0126241b29855"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_114.png",
+      "bytes": 2691,
+      "sha256": "489e74dbc04463b609c43f3d2867fd63cbed535d2a4050a03b515b06fff94745"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_115.png",
+      "bytes": 2647,
+      "sha256": "3100510c443192337c6fe3ccd00b2a061f47e310cd7cb5cc5c14ae08398859e0"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_116.png",
+      "bytes": 2630,
+      "sha256": "fc03a3f04727301d8b220555162678514c8ddfe510cfad7909d0dcf39309eba3"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_117.png",
+      "bytes": 2646,
+      "sha256": "6358ed64e48d9f8190ea4a7d555ce54091fae00e80994d5ce539f42097f32df3"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_118.png",
+      "bytes": 2663,
+      "sha256": "6a357015756426009247e40c6c0a90df1c406ade0b88ae858cbe9e6e09246601"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_119.png",
+      "bytes": 2656,
+      "sha256": "731e2b0564e69e3cf7c000deeda7d4bf53a1f47fc76dad6b23687d573474adba"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_120.png",
+      "bytes": 2501,
+      "sha256": "4b446b7783c870bd34c5355db674ad7b43c99467f5f4e8a33f79501e99dbc9f0"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_121.png",
+      "bytes": 2503,
+      "sha256": "393dbf352ff2860e592f33f4d19755df4d64b7a1eb97199a4e5929239f9806c1"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_122.png",
+      "bytes": 2507,
+      "sha256": "02ab3ff55c9ff6d40cdc6327677bd7bc0789f6e456ad946817730dfaf8acde5d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_123.png",
+      "bytes": 2503,
+      "sha256": "12b99244f360a06e7f73af36916a3309989ecf85efaa1b2c7b57c9a73e1d903d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_124.png",
+      "bytes": 2503,
+      "sha256": "13e28f745ec1987c1e297f8cbad5246845ed7d4abec4b430fb92a9a2ee50cc54"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_125.png",
+      "bytes": 2497,
+      "sha256": "b0168705f6e48001a460cfd7de398bf9fbc9b6ff9c37d2564d6e0781b7fe447e"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_126.png",
+      "bytes": 2491,
+      "sha256": "a3c08878b6fd11ec947f365900ad4a759d3cbec688e23cfd5e514658f9c7bfee"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_127.png",
+      "bytes": 2517,
+      "sha256": "c53bc27d544c3aa8a168c8c6059f493e6ee52ac0d750a03605a4152385c3ca83"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_128.png",
+      "bytes": 2727,
+      "sha256": "c6d23dbd28104ce2db4ecda6d583f0a374cc4c40ec2f564f9199306c4438086c"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_129.png",
+      "bytes": 2735,
+      "sha256": "e2b65420a98866feb53b671a5392a9c601ae90fd0fed40a4e720228710dd0a86"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_130.png",
+      "bytes": 2789,
+      "sha256": "22235151f105ad95341393391fef0b9d5334fdf0898fce3bd3209b23b770bb72"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_131.png",
+      "bytes": 2753,
+      "sha256": "0605c6a0d59be5ddced2cd9adea7842c5ce789ec70d48c292ba0f4d35d0418bd"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_132.png",
+      "bytes": 2715,
+      "sha256": "567651b799381bc45a7060e19a4732ddd38bb6ec3e186938fd53ea3b5004bcf4"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_133.png",
+      "bytes": 2753,
+      "sha256": "aad85e7aac029d99fc82bb3a3999547260a7a503a896f3a3144c4927954b4998"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_134.png",
+      "bytes": 2761,
+      "sha256": "557679774ac21fc738c7ec366fd4721cc50ab08c4c53e34770c2952bd7525c32"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_135.png",
+      "bytes": 2736,
+      "sha256": "ab3f29ab3acb76286e1e9e6fca9559b26ce318b847b3efe9503eaf94eedb8da4"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_136.png",
+      "bytes": 2676,
+      "sha256": "e26335963c0e6ba79f4702d3f30ba1d57bec79329f0e1e3a134ac92304ada064"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_137.png",
+      "bytes": 2696,
+      "sha256": "944d24216e39a40a50d42f77859a82ac0da6fd20138d464b83717ece44f59c87"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_138.png",
+      "bytes": 2717,
+      "sha256": "469102abdfb429d29496627e76b99ff856cf03ca109bbbe0050756ce6ce38b04"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_139.png",
+      "bytes": 2698,
+      "sha256": "209368f834c8abc27f9872611531c9ec9db87f0d7367fdf313d6977b5412bdf9"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_140.png",
+      "bytes": 2662,
+      "sha256": "47469187591eeb337231feea8bf30083bfc563e8a6c916f136bc0a83251879ce"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_141.png",
+      "bytes": 2709,
+      "sha256": "751a5d4422617721a5adc531440764a767ecbd7baa26c27eb9110354987cfe9d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_142.png",
+      "bytes": 2689,
+      "sha256": "c53831e3fd54f7e03b1ddef69c581c4c99b67e20e3f74de4b2512d0eba20b059"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_143.png",
+      "bytes": 2694,
+      "sha256": "a7cb7f15b7ba30fad045788d99f84aa1505da06999d8caa3ad992d3851cc5d5a"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_144.png",
+      "bytes": 2591,
+      "sha256": "ac9756605a58bc46d8ced7537df68191164791d8add4915a28d49d8e2369b028"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_145.png",
+      "bytes": 2575,
+      "sha256": "27fc6f0a894b6ee0c0f7e9e7c7850c2eb50528d56292f6140654c5f940fcb0ed"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_146.png",
+      "bytes": 2640,
+      "sha256": "f711322d9a677a74c1227f97a69903265a7b1abbaffac4c548b3fe9319e0403b"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_147.png",
+      "bytes": 2604,
+      "sha256": "d048ca92a96e57191dfe5ffcc88703f282cb4f612da984699a7c752c6174cdd3"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_148.png",
+      "bytes": 2570,
+      "sha256": "0f73e1e8f8c779bdc971074b309915da66829d15d76da3125b99f7efedd15917"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_149.png",
+      "bytes": 2604,
+      "sha256": "0c073a44962d88de26e732d29584485d7bb3cf47afd662e126eb78cff6db112e"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_150.png",
+      "bytes": 2602,
+      "sha256": "04f4b106e742f1f0949945215fc9d17ff833fb62aac5af594a5334804f317c08"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_151.png",
+      "bytes": 2605,
+      "sha256": "656fe09764ba2727ae93b4aa65e79aa7517ad4adf1214e6b20065072e99380d3"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_152.png",
+      "bytes": 2509,
+      "sha256": "691977e9382d72d6a6d6dabf9ef3534f9be5ec7e474ca079f45cc9da74a6aa5e"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_153.png",
+      "bytes": 2529,
+      "sha256": "e65ab1b5f8d2338e1104db065a5ff20de97a17411a64f273b8f6f9e8f1b630e1"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_154.png",
+      "bytes": 2537,
+      "sha256": "913d98bb28e316b7fb605f5e65cc184c1410177498a0c6acf959258880d9a0d7"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_155.png",
+      "bytes": 2523,
+      "sha256": "0fe9f529e7218d7448034d986b78d4fcbfb097be7319bf2fbf2424c5a82768ae"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_156.png",
+      "bytes": 2497,
+      "sha256": "939eb148c4a77ae846c25d898c49730e6e3ef0d51c5cbc6b08191e118ede6b83"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_157.png",
+      "bytes": 2527,
+      "sha256": "9d9d7ecca119f0c135fdec21a7f0582349b375bb8cae37dd3a4f275ac11256ab"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_158.png",
+      "bytes": 2527,
+      "sha256": "69feb6373c5f058016f26a62a74dc8ea6059df2187f844366cd11302468a8e43"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_159.png",
+      "bytes": 2534,
+      "sha256": "3fc47bb192808bf5d7e69f6c7dff16dd3da9dfb29be4d2854b2c56c4dfe3d446"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_160.png",
+      "bytes": 2631,
+      "sha256": "565c8a857cf60e4ab8beac0b58bd378430ddf3013efb23f15f0d238c56e69759"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_161.png",
+      "bytes": 2628,
+      "sha256": "63bf0c5e07ffba00746c97850bbd9e4111762a5e14365502e5039bf1dc5c2311"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_162.png",
+      "bytes": 2672,
+      "sha256": "29254d915c19235454808e7b33d2265a8d650de156f09c0ec66b9ca7190732c8"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_163.png",
+      "bytes": 2626,
+      "sha256": "f3608fcec3b10236ad701971009ca539c95cf81e6b33378904ab1d87f81fbebe"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_164.png",
+      "bytes": 2640,
+      "sha256": "bf1b95463ad65d93f62412f2b9c43abbd8af1bbec1c9a2819d6e7a4e072fbb97"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_165.png",
+      "bytes": 2674,
+      "sha256": "40450643970b3adb694e8ea8443996cfc9e1fe17579cca9f30d6a6eef4c2c79c"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_166.png",
+      "bytes": 2652,
+      "sha256": "9c7c563d7c7c4cf450a15d9d91e57ab5261bd03f03914cc55a48fb1a16bee822"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_167.png",
+      "bytes": 2623,
+      "sha256": "33332b144230b4638090f936c19f7e520e5ab197b44c993324368a70d1ba2702"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_168.png",
+      "bytes": 2526,
+      "sha256": "d2c3aa6ac7b1a74e31a9eaee1409e7d80ab66c934c3ca3798390fe201bb85f3b"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_169.png",
+      "bytes": 2526,
+      "sha256": "80008a1a34458bb1918af7d317bb9eb93d673f704354a302251a565d8249afbe"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_170.png",
+      "bytes": 2521,
+      "sha256": "3f3eb5d11fa9f1a0834496ef2ac4d156d9db6131cea62a52a5d7faace06a62de"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_171.png",
+      "bytes": 2511,
+      "sha256": "f6549977ed05ae3a9ea5ce58ec67352a208732734f19a4a211968d94eea7479a"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_172.png",
+      "bytes": 2536,
+      "sha256": "0dd5ea9b7dbad74cf3c58aa9984e6eab5c1c4bc0c6525b68eb59c09c1912b09a"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_173.png",
+      "bytes": 2543,
+      "sha256": "c222efa79f6a14da38e94a7a2d1d1122978a3d6ae8b87338c04d971243f34fc6"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_174.png",
+      "bytes": 2536,
+      "sha256": "e52c38d1358829cbf725ba1fc986c20480a6801a220c53d0c8950f509fb6fb29"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_175.png",
+      "bytes": 2511,
+      "sha256": "6277449ec0a0315205aa2432b00ebfffe3edee73d39cdf2e1e22a9762259cc44"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_176.png",
+      "bytes": 2500,
+      "sha256": "4565c7ac250ebbb42f4ae7adb04cd1b3a2c354b8efa1a314ee40fc95862e891f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_177.png",
+      "bytes": 2492,
+      "sha256": "caaadba9aabad7cc12dc04121f8b98b1052adc39ef3ad860c3ab89b05c7e5f97"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_178.png",
+      "bytes": 2525,
+      "sha256": "5d1df1b716f9cf222cc76056054a8cd14a2e487f71c44e422c05b0ecf1b21cc5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_179.png",
+      "bytes": 2497,
+      "sha256": "37eefdac1d999980f234f412ed98b4d463f87393b96f5b32bc3e8a6b688f397a"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_180.png",
+      "bytes": 2509,
+      "sha256": "bb34182bc209bd5718e593f56b7bc61fe34ed6531d9414e8a3ee1ebd0a1a6d7f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_181.png",
+      "bytes": 2514,
+      "sha256": "7dabce5c05a95f91b44c1a2097772f4f5a7ea080b8d03ee4db48efd2d7181934"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_182.png",
+      "bytes": 2503,
+      "sha256": "74340b42cdd4c0eac7e44792b1c79f551076fcc7908b059b7dc5709e30ab72f1"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_183.png",
+      "bytes": 2497,
+      "sha256": "b676a3eb3a3bc7c2ba90287172450324ce30b66b0836e88a4c0a8b501c940783"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_184.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_185.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_186.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_187.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_188.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_189.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_190.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_191.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_192.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_193.png",
+      "bytes": 2451,
+      "sha256": "ad62be896132132fe1eee7909377c73730f369ccdf1d991423731337310224e2"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_194.png",
+      "bytes": 2461,
+      "sha256": "efade1e4f87efb476a05bcdcccb7259b9930096bd0dab2c0a5f11c0912ef318f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_195.png",
+      "bytes": 2561,
+      "sha256": "65dba2278367e2ae5ab6ebf7e93ec43fa6296976efbe8879ef0295b91230d39b"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_196.png",
+      "bytes": 2475,
+      "sha256": "6cd82c5ab49e161de6ebaedb65bac4ff2a30077b2343418d49ddf1b074519f35"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_197.png",
+      "bytes": 2514,
+      "sha256": "6b4510ec1f086d3ac6302adbfed7ca74297767d248f31e9b17b85de1db47317d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_198.png",
+      "bytes": 2593,
+      "sha256": "604af31f3d7f661f8e707ba3365b96372bda010946e55b919e5361bcbff44bfd"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_199.png",
+      "bytes": 2624,
+      "sha256": "9c0e04ff2d8a45f26f976635cf7b4364b069eb4ddb9d19bb909e5b7d4a930e1c"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_200.png",
+      "bytes": 2462,
+      "sha256": "5e111156362955df9c11bf9ede7c01f79909889ce008931a9a66d8e93e8fd47f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_201.png",
+      "bytes": 2565,
+      "sha256": "0ce6ff30c0b63ddcd728a28726406cb2ab565306857fd550d46a8d35569497f7"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_202.png",
+      "bytes": 2510,
+      "sha256": "0a24616b040914dae70c9756f86e9ab991443fc44103e1b9ba091861a4696a11"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_203.png",
+      "bytes": 2620,
+      "sha256": "ab8fa514a4b372ee5f9d7f5fe9969450a1883f85ebeec52b9d3f0d95d2766f38"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_204.png",
+      "bytes": 2594,
+      "sha256": "62fca287c72af3f57b41acfe311083024cbcf5ef9bb4aac9f39da0c08c2e8e24"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_205.png",
+      "bytes": 2632,
+      "sha256": "5dbcedbb2364482f35d54224f0f6be1b08f246770e633ad253b5b833a4678798"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_206.png",
+      "bytes": 2638,
+      "sha256": "ce3c42131922ac8107a3bc82202de766d18102718436f7390b781eb40eed3249"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_207.png",
+      "bytes": 2614,
+      "sha256": "a64fbc73e07ab103af66a6108573b339c0aad352e595ce78addd538a063b6231"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_208.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_209.png",
+      "bytes": 2543,
+      "sha256": "91eb610739f4fe6caa8f7861d34a6350951162cc85e201afdf2564693277b1d8"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_210.png",
+      "bytes": 2542,
+      "sha256": "a04f34019626caa3e4f041376367b0eacdbce62c3da035f708b71caa1704aac9"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_211.png",
+      "bytes": 2746,
+      "sha256": "bd95eba8754f2276bc2c2f02e740acdf42859ec869bcd933693ddef20fb7119b"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_212.png",
+      "bytes": 2568,
+      "sha256": "2ac8f809933fdb1b2755cde9eb823bc5cf958492b6dc8ab4684f0910ba8037c2"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_213.png",
+      "bytes": 2714,
+      "sha256": "1a0f57e1f200a3df2ce8090267837073ba1992ad0e1542cdb8a358458966df9f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_214.png",
+      "bytes": 2784,
+      "sha256": "1f32dfa212a782cfbeff331b35f289cf4c82f210cff30abfd413997561d34a12"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_215.png",
+      "bytes": 2881,
+      "sha256": "3e2d9a2fb07918280d00173908a6a6c1ff43d91af6e2d42a22f76566966f13e3"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_216.png",
+      "bytes": 2527,
+      "sha256": "4f970b2a71eb3869635388bf782734497e1ebc47c68c64f58e4f0a19e518c03d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_217.png",
+      "bytes": 2784,
+      "sha256": "d2a68dff9bf76ccb1023b2fb93f868bab55bf8a124e6f2ea870b719127e88a1f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_218.png",
+      "bytes": 2708,
+      "sha256": "1887a3909aebd4d2a95b8251dffe91dd2e61353b5d7bd6f3b6f6df93b24d193f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_219.png",
+      "bytes": 2881,
+      "sha256": "2f57a3d425ad7275a47190fd49939337003b580d51ff3413035de4b47e94039b"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_220.png",
+      "bytes": 2791,
+      "sha256": "71ad596be4835ef4d96b731706bebcad85aa444dd9931819806c0e5b9e88425a"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_221.png",
+      "bytes": 2881,
+      "sha256": "0611ab46846ff1b687b66012c5a99d92e6e8810fc3fa2ffce9e527557c93a96f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_222.png",
+      "bytes": 2875,
+      "sha256": "21c42b405fe53cca5ec6314ed4b5d56b49d283025c13d5d1d2223a22b57ff958"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_223.png",
+      "bytes": 2880,
+      "sha256": "e960caf630ab7497e52cd48ee235373c3a59e5ee3b85f1f898c684b1fc69b7b6"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_224.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_225.png",
+      "bytes": 2465,
+      "sha256": "cf444f94c9e2dade15b05c47224810705c8adb7f98132f48e1509257901726a2"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_226.png",
+      "bytes": 2483,
+      "sha256": "41d014bb1535c165f4ca15081b6eff1d2f0ad4e8b7d66df9b8071bcd6b5e19f8"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_227.png",
+      "bytes": 2577,
+      "sha256": "02f03e3a84ee1b37bedee96993b2807844c71236c93855bcb8ecaa34e358bec0"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_228.png",
+      "bytes": 2483,
+      "sha256": "32fd03a6d92cf7a439a86a23e3a4f3932619b2ba7178362da9447f30c0a2de36"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_229.png",
+      "bytes": 2541,
+      "sha256": "c63bc35321efc04bdead129b4c976bdbe61409580785188668fd373fb7b3cac6"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_230.png",
+      "bytes": 2618,
+      "sha256": "373dae92cefd291c87306a6f1c7a38adbd8be207ed462278e5170eec2c9d4314"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_231.png",
+      "bytes": 2661,
+      "sha256": "725cee6c0ab1e650be4f8f65f626d03da7ee380aef70f31ffad354728a213db6"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_232.png",
+      "bytes": 2483,
+      "sha256": "971aa3547e9493d6228056c734bda9116cb04002fcae0fa4917fca5e392c5f50"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_233.png",
+      "bytes": 2605,
+      "sha256": "15908310ee27236a0595bfd9ee1b227c28a7c49c7bc3ee0b2f06cb402e659270"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_234.png",
+      "bytes": 2559,
+      "sha256": "ef993cb3fc78b26cbddf47c548048f0ce294f7b2bb744ef086d4d332b9becb83"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_235.png",
+      "bytes": 2674,
+      "sha256": "58813aed7880a424b0d89543899776680b52216d7742b67f8125942666656326"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_236.png",
+      "bytes": 2627,
+      "sha256": "df0ba687620ea748d843ae4bbf5c687b643877f944608cf3b736409fcb82bcc6"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_237.png",
+      "bytes": 2674,
+      "sha256": "7708d0789e67f80404f59e793c21fee54f16640d4b5c7c636b6689abf5991498"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_238.png",
+      "bytes": 2676,
+      "sha256": "555fa2458e5201eb7a7a9d0adb83bf8ec8329443a2f9c17b990ee4d86dd353f3"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_239.png",
+      "bytes": 2658,
+      "sha256": "ede5e53f5b15f35e7b420eb3e27d972c412043e719235df2eabd37d3bbb61f65"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_240.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_241.png",
+      "bytes": 2478,
+      "sha256": "7e64fae48f170fb7ac2bbc0d6a61c3b4dd1d7c1fc83a3cc9765f2bbdb973d8ea"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_242.png",
+      "bytes": 2466,
+      "sha256": "76fd752801aabe101229fd8d2261192cc55ecbec0dcabf18a2a758bdbea4f370"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_243.png",
+      "bytes": 2542,
+      "sha256": "dc0be16a5727c8c2a03c4d4973a9b496c40a18ecf12d4aa83a3d03d0ccf95e2f"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_244.png",
+      "bytes": 2487,
+      "sha256": "0650f75651a0d6f045f7c9daa3a0d88f5ddc56a28272b36e4cf71e038b2e2bde"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_245.png",
+      "bytes": 2549,
+      "sha256": "315d14d5b4cadf2eb79e23b1076fbeacb206159706dd0cb21f81be03c684c7f0"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_246.png",
+      "bytes": 2562,
+      "sha256": "a8def012179ad1d83e099ce8d56ec79a836ec8cc20baf5a6836891c51f42f023"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_247.png",
+      "bytes": 2590,
+      "sha256": "cb7e60a2c764a6eb357b40111d76286522696c1a8537ed27bb85a8692909ecf3"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_248.png",
+      "bytes": 2474,
+      "sha256": "603322c008f759cffec4966c8e59b256ee3d2faa77feb6d71a9c062cab2f7ed5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_249.png",
+      "bytes": 2558,
+      "sha256": "1d854a21b99a8116bb28e4b221b594893b23366a6aaa959e91f79a8b567b101d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_250.png",
+      "bytes": 2498,
+      "sha256": "2e2df51b745112e2a74f56b1c33f0a4a8a514f63c30df1ee1667cd8284f04b08"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_251.png",
+      "bytes": 2616,
+      "sha256": "a86d056a2b43984091d3d73790d0cacc4b379626b556bab03da12f0a2c726027"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_252.png",
+      "bytes": 2553,
+      "sha256": "ab11097a875a1466e6df6f172b21cd5821a81f978aabd2d1980ea6c8e5adfe2d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_253.png",
+      "bytes": 2610,
+      "sha256": "0a8bbafbf98c1f106df7a20538e4e340a16835ddc231b52536f099de5ea125c1"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_254.png",
+      "bytes": 2608,
+      "sha256": "67cedeeaa24b822f803ec298ba4516a2e369d14379010957e7daadce2383c912"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_255.png",
+      "bytes": 2636,
+      "sha256": "3f899e8cfc9ae7ac36e522a9de901f9d197ede03a68eac7a80752940d4b91fd5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_256.png",
+      "bytes": 2382,
+      "sha256": "c856a7e3747f793c4edbfe1eeb80b734f34cc5135017657d9f0f9608b82fe8a5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_257.png",
+      "bytes": 2426,
+      "sha256": "13141c94be981f5228ce8e78d8fe40348ed00d052a5a6223c17df61c1f1789a2"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_258.png",
+      "bytes": 2462,
+      "sha256": "8c2a20fd2fdafacf97635f96111d6b2f5e5612740bcbb5db5e5f48c2baf2c2fb"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_259.png",
+      "bytes": 2468,
+      "sha256": "f37f107e9c630a3f53a38f7e6a7032c20a7b53ea72571a42ed44cf13c7c97132"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_260.png",
+      "bytes": 2477,
+      "sha256": "2dd2caf4203b5438cc913829bd7ed49dfc0da563956c49692841371de903b903"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_261.png",
+      "bytes": 2495,
+      "sha256": "d2116317d91ef10ec08a9ae1dc51ceb3693ee42020231c8b76f700ebfeba518d"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_262.png",
+      "bytes": 2520,
+      "sha256": "d00ba6f92c089de5d9d10d0e7614be579322f8b5ff779b70763a7815d4d6388b"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_263.png",
+      "bytes": 2513,
+      "sha256": "40ab79987c202998931f30d23a45d4d06028afcc9e401c69cc3985d330c247ac"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_264.png",
+      "bytes": 2450,
+      "sha256": "25f4954fd6fbfaea42d0a7ff2a4062c0ba4b87b5f393d89020bace00f1820217"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_265.png",
+      "bytes": 2469,
+      "sha256": "1e85fdd73f41d42a3d0fb9f1b042b90e0eb87014a37cc1fbfb8d420a33dbec0e"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_266.png",
+      "bytes": 2443,
+      "sha256": "f72d9863fb81cf8c818a71d0a1985262102ca8959964fa2e53525db003ca745e"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_267.png",
+      "bytes": 2477,
+      "sha256": "496e8853f8ac01268f182b5029c90cd3651acf4ff8d41848ba487668a64971a9"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_268.png",
+      "bytes": 2511,
+      "sha256": "caaf5e275a5adf409281428b228b55fc5826697dcd5af0fc55b1a275c928acb5"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_269.png",
+      "bytes": 2506,
+      "sha256": "62aeb8a2eac5cbdeefb86fa729bf7969523ccb37c60cec30184c1716d7246a90"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_270.png",
+      "bytes": 2527,
+      "sha256": "a42650a91611551ee68939e9e718267bec323957bb200dbc930c953f2c61a9c1"
+    },
+    {
+      "path": "assets/tilesets/hell/tiles/hell_tile_271.png",
+      "bytes": 2534,
+      "sha256": "cc352dfd3b2cea822b67e7434346a377658ef2fc73b9975474194d06a6aa602c"
+    }
+  ]
+}

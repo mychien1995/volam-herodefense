@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 5;
+export const PROTOCOL_VERSION = 9;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -41,6 +41,12 @@ export const inputSchema = z.discriminatedUnion('kind', [
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    kind: z.literal('dev-loadout'),
+    ids: z.array(z.string().regex(/^[a-z_]*$/)).length(4),
+  }),
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     kind: z.literal('move'),
     x: z.number().int().min(-1).max(1),
     y: z.number().int().min(-1).max(1),
@@ -60,14 +66,54 @@ export const inputSchema = z.discriminatedUnion('kind', [
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     kind: z.literal('select-basic'),
-    id: z.enum(['cai_bang_bong', 'cai_bang_chuong']),
+    id: z.enum([
+      'cai_bang_bong',
+      'cai_bang_chuong',
+      'thien_son_phien',
+      'thien_son_dao',
+      'vo_dang_quyen',
+      'vo_dang_kiem',
+      'thieu_lam_quyen',
+      'thieu_lam_dao',
+    ]),
   }),
 ]);
 export type InputMessage = z.infer<typeof inputSchema>;
+const buildBase = {
+  protocolVersion: z.literal(PROTOCOL_VERSION),
+  sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+  revision: z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER),
+};
+const assetId = z
+  .string()
+  .regex(/^[a-z_]+$/)
+  .max(80);
+export const buildActionSchema = z.discriminatedUnion('action', [
+  z.strictObject({
+    ...buildBase,
+    action: z.literal('loadout'),
+    ids: z.array(z.union([assetId, z.literal('')])).length(4),
+  }),
+  z.strictObject({
+    ...buildBase,
+    action: z.literal('upgrade'),
+    skillId: assetId,
+  }),
+  z.strictObject({ ...buildBase, action: z.literal('reset') }),
+  z.strictObject({
+    ...buildBase,
+    action: z.literal('basic'),
+    basicId: assetId,
+  }),
+]);
+export type BuildAction = z.infer<typeof buildActionSchema>;
+export const skillPreviewActionSchema = z.strictObject({
+  action: z.enum(['targets', 'attacker', 'clear']),
+});
 export const combatEventSchema = z.strictObject({
   protocolVersion: z.literal(PROTOCOL_VERSION),
   id: z.number().int().positive(),
-  kind: z.enum(['attack', 'hit', 'death', 'cast']),
+  kind: z.enum(['attack', 'hit', 'death', 'cast', 'effect', 'pulse']),
   sourceId: z.string(),
   targetId: z.string(),
   abilityId: z.string(),
@@ -76,6 +122,10 @@ export const combatEventSchema = z.strictObject({
   damage: z.number().nonnegative(),
   critical: z.boolean(),
   zoneId: z.string().min(1),
+  fx: z.number().finite().optional(),
+  fy: z.number().finite().optional(),
+  radius: z.number().nonnegative().optional(),
+  stage: z.string().optional(),
 });
 export const dungeonActionSchema = z.discriminatedUnion('action', [
   z.strictObject({
@@ -117,15 +167,51 @@ const actorFields = {
   fx: t.number().default(1),
   fy: t.number().default(0),
   pose: t.string().default('idle'),
+  statuses: t.string().default('[]'),
+  castAbilityId: t.string().default(''),
 };
+export const CharacterStatsState = schema(
+  {
+    maxHp: t.number(),
+    maxMana: t.number(),
+    attackPower: t.number(),
+    defense: t.number(),
+    attackSpeed: t.number(),
+    movementSpeed: t.number(),
+    critChance: t.number(),
+    critMultiplier: t.number(),
+    manaRegen: t.number(),
+    cooldownReduction: t.number(),
+    hpRegen: t.number(),
+  },
+  'CharacterStats',
+);
+export const BuildState = schema(
+  {
+    enabled: t.boolean().default(false),
+    revision: t.number().default(0),
+    earned: t.number().default(1),
+    allocated: t.number().default(0),
+    available: t.number().default(1),
+    surplus: t.number().default(0),
+    ranks: t.map('number'),
+    stats: t.ref(CharacterStatsState).default(() => new CharacterStatsState()),
+    sources: t.string().default('{}'),
+  },
+  'CharacterBuild',
+);
 export const LobbyPlayer = schema(
   {
+    build: t.ref(BuildState).default(() => new BuildState()),
     ...actorFields,
     x: t.number().default(0).view(),
     y: t.number().default(0).view(),
     fx: t.number().default(1).view(),
     fy: t.number().default(0).view(),
     pose: t.string().default('idle').view(),
+    statuses: t.string().default('[]').view(),
+    castAbilityId: t.string().default('').view(),
+    combos: t.string().default('[]').view(),
     zoneId: t.string().default('arena'),
     respawnTicks: t.number().default(0),
     nickname: t.string(),
@@ -144,6 +230,12 @@ export const LobbyPlayer = schema(
     basicCooldown: t.number().default(0),
     qCooldown: t.number().default(0),
     wCooldown: t.number().default(0),
+    eCooldown: t.number().default(0),
+    rCooldown: t.number().default(0),
+    qSkill: t.string().default('hoa_van_chuong'),
+    wSkill: t.string().default('cuong_long_loan_vu'),
+    eSkill: t.string().default(''),
+    rSkill: t.string().default(''),
   },
   'ArenaPlayer',
 );
@@ -186,6 +278,18 @@ export const DungeonState = schema(
   },
   'CreepDungeon',
 );
+export const AreaState = schema(
+  {
+    x: t.number(),
+    y: t.number(),
+    radius: t.number(),
+    ticks: t.number(),
+    ownerId: t.string(),
+    abilityId: t.string(),
+    zoneId: t.string(),
+  },
+  'CombatArea',
+);
 export type DungeonState = SchemaType<typeof DungeonState>;
 export const DefenseState = schema(
   {
@@ -215,10 +319,12 @@ export const LobbyState = schema(
     hostId: t.string().default(''),
     matchElapsedMs: t.number().default(0),
     maxPlayers: t.number().default(lobbyConfig.maxPlayers),
+    devSkillLoadout: t.boolean().default(false),
     tick: t.number().default(0),
     players: t.map(LobbyPlayer),
     creeps: t.map(CreepState).view(),
     projectiles: t.map(ProjectileState).view(),
+    areas: t.map(AreaState).view(),
     dungeons: t.map(DungeonState).view(),
     defense: t.ref(DefenseState).default(() => new DefenseState()),
   },

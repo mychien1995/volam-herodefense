@@ -1,0 +1,85 @@
+{
+  "milestone": "M3A",
+  "date": "2026-10-30",
+  "platform": "Windows, Node 26.0.0, Phaser 4.2.1, Colyseus 0.18, Chromium Playwright 1.64.1",
+  "checks": [
+    {
+      "command": "node assets/source/skills/cai-bang/build.mjs",
+      "result": "PASS",
+      "detail": "Aseprite 1.3.18.6-x64 actually batch-exported 21 retained sources, without --assemble; no art generation"
+    },
+    {
+      "command": "python assets/source/skills/cai-bang/validate.py",
+      "result": "PASS",
+      "detail": "21 components, 464 frames, 105 tags, 92 source-cell boundary checks; eight protected baseline files unchanged"
+    },
+    {
+      "command": "python scripts/verify-assets.py",
+      "result": "PASS",
+      "detail": "19 PNG entries / 392 frame references in the shared runtime manifest; skill validation is separate"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "PASS"
+    },
+    {
+      "command": "pnpm build",
+      "result": "PASS",
+      "limitation": "Existing large-bundle advisory remains"
+    },
+    {
+      "command": "pnpm test",
+      "result": "PASS",
+      "testFiles": 15,
+      "tests": 134,
+      "seconds": 33.57
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.skills.config.ts",
+      "result": "PASS",
+      "tests": 5,
+      "minutes": 3.6,
+      "detail": "Two real browser contexts; dedicated M3A gameplay and live frame observations"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.m3a-regression.config.ts",
+      "result": "PASS",
+      "tests": 16,
+      "minutes": 4.5
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.skills.config.ts --grep 'all ten supplied'",
+      "result": "PASS",
+      "tests": 1,
+      "seconds": 50.7,
+      "detail": "After canvas resize correction; explicit 1280x720 to 944x466 to 1920x1080 round-trip"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.m3a-regression.config.ts ui.spec.ts",
+      "result": "PASS",
+      "tests": 5,
+      "minutes": 1.1,
+      "detail": "After canvas resize correction"
+    },
+    {
+      "command": "pnpm --filter @volam/game-server exec tsx ../../tools/m3a-balance.ts",
+      "result": "PASS",
+      "probes": 240,
+      "limitation": "Four-second one-cast burst probes, no campaign/sustained or six-player balance claim"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS",
+      "detail": "Line-ending notices only"
+    }
+  ],
+  "evidenceType": "Actual runtime PNG screenshots and live-frame/state observations; no video recordings",
+  "assetStatus": "Produced, integrated and runtime verified; production-art director approval pending",
+  "remaining": [
+    "M3B rank/unlock/respec progression",
+    "Final tuning",
+    "Director visual approval",
+    "Legacy hero hurt/death and remaining world/dungeon placeholder work"
+  ],
+  "stoppedAfter": "M3A"
+}

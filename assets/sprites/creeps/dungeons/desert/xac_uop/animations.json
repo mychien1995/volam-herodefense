@@ -1,0 +1,944 @@
+{
+  "id": "xac_uop",
+  "nameVi": "Xác Ướp",
+  "frameSize": [
+    112,
+    96
+  ],
+  "bodyHeightTarget": 46,
+  "pivot": [
+    56,
+    80
+  ],
+  "frameCount": 64,
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+  ],
+  "tags": [
+    {
+      "name": "idle_down",
+      "from": 0,
+      "to": 1,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_down",
+      "from": 2,
+      "to": 5,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_down",
+      "from": 6,
+      "to": 7,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_down",
+      "from": 8,
+      "to": 11,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_down",
+      "from": 12,
+      "to": 15,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "idle_left",
+      "from": 16,
+      "to": 17,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_left",
+      "from": 18,
+      "to": 21,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_left",
+      "from": 22,
+      "to": 23,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_left",
+      "from": 24,
+      "to": 27,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_left",
+      "from": 28,
+      "to": 31,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "idle_right",
+      "from": 32,
+      "to": 33,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_right",
+      "from": 34,
+      "to": 37,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_right",
+      "from": 38,
+      "to": 39,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_right",
+      "from": 40,
+      "to": 43,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_right",
+      "from": 44,
+      "to": 47,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "idle_up",
+      "from": 48,
+      "to": 49,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_up",
+      "from": 50,
+      "to": 53,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_up",
+      "from": 54,
+      "to": 55,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_up",
+      "from": 56,
+      "to": 59,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_up",
+      "from": 60,
+      "to": 63,
+      "direction": "forward",
+      "repeat": 1
+    }
+  ],
+  "mirroredSequences": [
+    "attack_left"
+  ],
+  "status": "produced_asset_only_pending_runtime_review",
+  "conceptApproval": "Automatic concept acceptance explicitly instructed by user for this task; no runtime approval implied",
+  "frameOrigins": [
+    {
+      "frame": "idle_down_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        27,
+        25,
+        137,
+        154
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_down_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        177,
+        25,
+        297,
+        157
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        337,
+        25,
+        461,
+        160
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        496,
+        25,
+        618,
+        160
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_2.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        649,
+        24,
+        768,
+        159
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_3.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        789,
+        22,
+        912,
+        159
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_down_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        964,
+        29,
+        1079,
+        158
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_down_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        1103,
+        36,
+        1228,
+        158
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        29,
+        174,
+        158,
+        312
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        176,
+        174,
+        330,
+        312
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_2.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        345,
+        185,
+        486,
+        309
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_3.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        511,
+        188,
+        627,
+        310
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        652,
+        199,
+        775,
+        312
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        809,
+        203,
+        926,
+        312
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_2.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        945,
+        250,
+        1075,
+        311
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_3.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        1099,
+        236,
+        1236,
+        310
+      ],
+      "scale": 0.3484848484848485,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_left_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        25,
+        334,
+        142,
+        467
+      ],
+      "scale": 0.3458646616541353,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_left_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        168,
+        335,
+        280,
+        467
+      ],
+      "scale": 0.3458646616541353,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        317,
+        335,
+        450,
+        466
+      ],
+      "scale": 0.3458646616541353,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        493,
+        334,
+        603,
+        467
+      ],
+      "scale": 0.3458646616541353,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_2.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        642,
+        333,
+        771,
+        467
+      ],
+      "scale": 0.3458646616541353,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_3.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        796,
+        334,
+        919,
+        467
+      ],
+      "scale": 0.3458646616541353,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_left_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        962,
+        342,
+        1082,
+        469
+      ],
+      "scale": 0.3458646616541353,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_left_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        1118,
+        343,
+        1233,
+        469
+      ],
+      "scale": 0.3458646616541353,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_left_0.png",
+      "source": "xac_uop-attack-v2.png",
+      "rect": [
+        46,
+        94,
+        564,
+        596
+      ],
+      "scale": 0.0931174089068826,
+      "mirrored": true
+    },
+    {
+      "frame": "attack_left_1.png",
+      "source": "xac_uop-attack-v2.png",
+      "rect": [
+        638,
+        130,
+        1229,
+        596
+      ],
+      "scale": 0.0931174089068826,
+      "mirrored": true
+    },
+    {
+      "frame": "attack_left_2.png",
+      "source": "xac_uop-attack-v2.png",
+      "rect": [
+        55,
+        691,
+        645,
+        1176
+      ],
+      "scale": 0.0931174089068826,
+      "mirrored": true
+    },
+    {
+      "frame": "attack_left_3.png",
+      "source": "xac_uop-attack-v2.png",
+      "rect": [
+        718,
+        683,
+        1191,
+        1177
+      ],
+      "scale": 0.0931174089068826,
+      "mirrored": true
+    },
+    {
+      "frame": "death_left_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        652,
+        506,
+        769,
+        620
+      ],
+      "scale": 0.3458646616541353,
+      "mirrored": false
+    },
+    {
+      "frame": "death_left_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        794,
+        517,
+        927,
+        620
+      ],
+      "scale": 0.3458646616541353,
+      "mirrored": false
+    },
+    {
+      "frame": "death_left_2.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        944,
+        558,
+        1081,
+        615
+      ],
+      "scale": 0.3458646616541353,
+      "mirrored": false
+    },
+    {
+      "frame": "death_left_3.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        1107,
+        547,
+        1233,
+        616
+      ],
+      "scale": 0.3458646616541353,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_right_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        40,
+        646,
+        150,
+        779
+      ],
+      "scale": 0.3357664233576642,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_right_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        186,
+        643,
+        311,
+        780
+      ],
+      "scale": 0.3357664233576642,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        335,
+        646,
+        471,
+        779
+      ],
+      "scale": 0.3357664233576642,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        491,
+        644,
+        621,
+        780
+      ],
+      "scale": 0.3357664233576642,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_2.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        656,
+        646,
+        773,
+        780
+      ],
+      "scale": 0.3357664233576642,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_3.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        795,
+        647,
+        928,
+        781
+      ],
+      "scale": 0.3357664233576642,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_right_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        968,
+        647,
+        1098,
+        781
+      ],
+      "scale": 0.3357664233576642,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_right_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        1121,
+        639,
+        1234,
+        781
+      ],
+      "scale": 0.3357664233576642,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_0.png",
+      "source": "xac_uop-attack-v2.png",
+      "rect": [
+        46,
+        94,
+        564,
+        596
+      ],
+      "scale": 0.0931174089068826,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_1.png",
+      "source": "xac_uop-attack-v2.png",
+      "rect": [
+        638,
+        130,
+        1229,
+        596
+      ],
+      "scale": 0.0931174089068826,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_2.png",
+      "source": "xac_uop-attack-v2.png",
+      "rect": [
+        55,
+        691,
+        645,
+        1176
+      ],
+      "scale": 0.0931174089068826,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_3.png",
+      "source": "xac_uop-attack-v2.png",
+      "rect": [
+        718,
+        683,
+        1191,
+        1177
+      ],
+      "scale": 0.0931174089068826,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        650,
+        824,
+        771,
+        933
+      ],
+      "scale": 0.3357664233576642,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        795,
+        843,
+        922,
+        935
+      ],
+      "scale": 0.3357664233576642,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_2.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        948,
+        874,
+        1082,
+        935
+      ],
+      "scale": 0.3357664233576642,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_3.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        1105,
+        868,
+        1238,
+        936
+      ],
+      "scale": 0.3357664233576642,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_up_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        28,
+        951,
+        139,
+        1081
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_up_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        191,
+        953,
+        288,
+        1083
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        343,
+        953,
+        462,
+        1084
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        499,
+        953,
+        617,
+        1084
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_2.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        652,
+        953,
+        764,
+        1086
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_3.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        795,
+        952,
+        911,
+        1083
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_up_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        960,
+        956,
+        1064,
+        1083
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_up_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        1117,
+        963,
+        1211,
+        1084
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        21,
+        1099,
+        156,
+        1228
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        174,
+        1096,
+        330,
+        1227
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_2.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        359,
+        1102,
+        486,
+        1230
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_3.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        515,
+        1101,
+        635,
+        1230
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_0.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        661,
+        1110,
+        766,
+        1230
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_1.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        803,
+        1118,
+        932,
+        1230
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_2.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        948,
+        1163,
+        1084,
+        1231
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_3.png",
+      "source": "xac_uop-source.png",
+      "rect": [
+        1104,
+        1160,
+        1235,
+        1232
+      ],
+      "scale": 0.35384615384615387,
+      "mirrored": false
+    }
+  ]
+}

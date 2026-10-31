@@ -15,8 +15,10 @@ import {
 } from '@volam/game-protocol';
 import { ArenaScene } from './arena-scene.js';
 import { ArtPreviewScene } from './art-preview.js';
+import { ThienSonSkillPreviewScene } from './thien-son-skill-preview.js';
 import { bindGameplayInput } from './input.js';
 import { GameUI, element } from './ui.js';
+import { SkillPreview } from './skill-preview.js';
 import { ForestStudyScene } from './forest-study.js';
 import './style.css';
 import './arena-hud.css';
@@ -26,12 +28,19 @@ import './defense-hud.css';
 import { PreGame } from './pregame.js';
 
 const artPreview = new URLSearchParams(location.search).has('artPreview');
+const thienSonSkillReview =
+  artPreview &&
+  new URLSearchParams(location.search).get('thienSonSkills') === '1';
+const thieuLamReview = new URLSearchParams(location.search).has(
+  'thieuLamReview',
+);
 const ui = new GameUI(artPreview);
 const endpoint = import.meta.env['VITE_SERVER_URL'] ?? 'http://localhost:2567';
 const pregame = new PreGame(endpoint);
 if (artPreview) pregame.node.hidden = true;
 const arenaScene = new ArenaScene();
 const gallery = new ArtPreviewScene();
+const thienSonSkillGallery = new ThienSonSkillPreviewScene();
 const study = new ForestStudyScene();
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -46,7 +55,11 @@ const game = new Phaser.Game({
     antialiasGL: false,
   },
   scale: { mode: Phaser.Scale.NONE, zoom: 1 },
-  scene: artPreview ? [gallery] : [arenaScene, study],
+  scene: thienSonSkillReview
+    ? [thienSonSkillGallery]
+    : artPreview
+      ? [gallery]
+      : [arenaScene, study],
   input: { keyboard: false, mouse: true, touch: false },
   audio: { noAudio: true },
 });
@@ -60,11 +73,23 @@ const fit = (): void => {
     : host.clientWidth >= 960 && host.clientHeight >= 600
       ? 2
       : 1;
-  game.scale.setZoom(zoom);
   game.scale.resize(
-    artPreview ? 480 : Math.ceil(host.clientWidth / zoom),
-    artPreview ? 520 : Math.ceil(host.clientHeight / zoom),
+    thienSonSkillReview
+      ? Math.ceil(host.clientWidth / zoom)
+      : artPreview
+        ? thieuLamReview
+          ? 640
+          : 480
+        : Math.ceil(host.clientWidth / zoom),
+    thienSonSkillReview
+      ? Math.ceil(host.clientHeight / zoom)
+      : artPreview
+        ? 520
+        : Math.ceil(host.clientHeight / zoom),
   );
+  // NONE-mode resize at zoom 1 retains the previous CSS dimensions in Phaser
+  // 4.2.1. Apply zoom after the new base size so CSS size and input bounds agree.
+  game.scale.setZoom(zoom);
 };
 game.events.once(Phaser.Core.Events.READY, fit);
 const observer = new ResizeObserver(fit);
@@ -94,6 +119,13 @@ const client = new Client(
 let room: Room<MatchRoom> | undefined;
 let sequence = 0;
 const events: CombatEvent[] = [];
+const skillPreview = new SkillPreview(
+  element('#viewport'),
+  (ids) => send({ kind: 'dev-loadout', ids }),
+  () => send({ kind: 'cast', slot: 0 }),
+  send,
+  (action) => room?.send('skill-preview-action', { action }),
+);
 const form = element<HTMLFormElement>('#join-form');
 const status = element('#status');
 function dungeonAction(
@@ -193,6 +225,7 @@ async function connect(existing: boolean): Promise<void> {
           joined.sessionId,
         );
         ui.refresh(state);
+        skillPreview.update(state, joined.sessionId);
       }
     });
     joined.onMessage('dungeon-menu', () => {
@@ -240,6 +273,7 @@ async function connect(existing: boolean): Promise<void> {
       arenaScene.setSnapshot(undefined);
       controls(false);
       ui.connected('', '');
+      skillPreview.hide();
       status.textContent = `Disconnected (${code}). Create or join a room to return.`;
     });
     if (joined.state?.players && joined.state.phase) {
@@ -251,6 +285,7 @@ async function connect(existing: boolean): Promise<void> {
         joined.sessionId,
       );
       ui.refresh(joined.state);
+      skillPreview.update(joined.state, joined.sessionId);
     }
     const canvas = element<HTMLCanvasElement>('#game canvas');
     canvas.tabIndex = 0;
@@ -268,6 +303,16 @@ pregame.onConnect = (nickname, id) => {
 };
 pregame.onAction = (action) => room?.send('lobby-action', action);
 pregame.onLeave = () => void room?.leave();
+ui.onBuild = (change) => {
+  const hero = room?.state.players.get(room.sessionId);
+  if (!room || !hero?.build.enabled || room.state.phase !== 'IN_GAME') return;
+  room.send('build-action', {
+    ...change,
+    protocolVersion: PROTOCOL_VERSION,
+    sequence: ++sequence,
+    revision: hero.build.revision,
+  });
+};
 ui.onCheck = () =>
   room?.send('connection-check', {
     protocolVersion: PROTOCOL_VERSION,
@@ -277,6 +322,7 @@ ui.onLeave = () => {
   void room?.leave();
 };
 ui.onBasic = (id) => send({ kind: 'select-basic', id });
+ui.onLoadout = (ids) => send({ kind: 'dev-loadout', ids });
 ui.onDungeonEnter = (access) => dungeonAction({ action: 'enter', access });
 // Read-only browser evidence bridge, enabled explicitly for automated playtesting.
 if (new URLSearchParams(location.search).has('debug') || artPreview) {
@@ -290,7 +336,11 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
         events: events.map((event) => ({ ...event })),
       }),
       presentation: () =>
-        artPreview ? gallery.inspect() : arenaScene.inspect(),
+        thienSonSkillReview
+          ? thienSonSkillGallery.inspect()
+          : artPreview
+            ? gallery.inspect()
+            : arenaScene.inspect(),
     }),
   });
 }
@@ -300,6 +350,7 @@ if (import.meta.hot)
     unbindInput();
     pregame.destroy();
     ui.destroy();
+    skillPreview.destroy();
     observer.disconnect();
     game.destroy(true);
   });

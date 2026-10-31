@@ -1,0 +1,1698 @@
+{
+  "id": "creep_shadow_assassin",
+  "wave": 17,
+  "nameVi": "Ảnh Ma",
+  "phase": "1J",
+  "status": "prototype",
+  "reviewStatus": "RUNTIME_VERIFIED_PENDING_FINAL_DIRECTOR_REVIEW",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+  "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+  "masterConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+  "conceptApproval": "User explicitly approves generated concepts for this batch and authorizes immediate production, 2026-10-31. Runtime approval separate.",
+  "source": "assets/sprites/creeps/arena/anh-ma/source/creep_shadow_assassin.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 128,
+  "frameHeight": 112,
+  "bodyHeight": 48,
+  "footPivot": [
+    0.5,
+    0.7857142857142857
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 14.285714285714286,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 5.555555555555555,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 14.285714285714286,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 5.555555555555555,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 14.285714285714286,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 5.555555555555555,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 14.285714285714286,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 5.555555555555555,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_down_0.png",
+      "sha256": "87e593696029f12b22ce539051fcb023194d5490c93d4be141ff85b56f073f5f",
+      "bounds": [
+        38,
+        40,
+        91,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        170,
+        306
+      ]
+    },
+    {
+      "name": "idle_down_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_down_1.png",
+      "sha256": "1102355a9ebad17e87a45f3628fee8d4271f9aa4ca735ce78129766a53f35aae",
+      "bounds": [
+        37,
+        41,
+        91,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        476,
+        307
+      ]
+    },
+    {
+      "name": "walk_down_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_down_0.png",
+      "sha256": "d625620a7a8caadd7cec91f414ddfac7cc66b11aa009e30f27b8c5511ce8eea7",
+      "bounds": [
+        41,
+        39,
+        93,
+        89
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        156,
+        604
+      ]
+    },
+    {
+      "name": "walk_down_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_down_1.png",
+      "sha256": "bcd2170d277299f409b460b5173b2a996987a0aef5b61d81eb0ed0f29a629bd0",
+      "bounds": [
+        44,
+        39,
+        96,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        460,
+        604
+      ]
+    },
+    {
+      "name": "walk_down_2",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_down_2.png",
+      "sha256": "a46436281f66428619c495428809ab5949fd2fc6ebc0289a1349cea57a0d581c",
+      "bounds": [
+        34,
+        38,
+        83,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        810,
+        609
+      ]
+    },
+    {
+      "name": "walk_down_3",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_down_3.png",
+      "sha256": "5687e8a76d74f9cd8262ae43a985b443c7bb1277ba88751dddf6a2eb85719578",
+      "bounds": [
+        44,
+        39,
+        91,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1088,
+        606
+      ]
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_down_0.png",
+      "sha256": "2a6284ca4b287a647908032daec2621e7e2c1e7a82290a0f9f3d7ef2063b2bd6",
+      "bounds": [
+        51,
+        42,
+        99,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        123,
+        889
+      ]
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_down_1.png",
+      "sha256": "bb589157f2e8bdab58fe582ffbdc2c39cc59a24a592f7e833d6a33de41f1cf0e",
+      "bounds": [
+        42,
+        45,
+        102,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        444,
+        889
+      ]
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_down_2.png",
+      "sha256": "cced22184bb9d45b8f8c9c1bcd37dd74ff14944bff662e66ae44edc72bf30ad2",
+      "bounds": [
+        51,
+        44,
+        109,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        724,
+        889
+      ]
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_down_3.png",
+      "sha256": "1e76cad550d16b2723a13b7dc50c967da562eb2ad173ae5ab4899e582e04468c",
+      "bounds": [
+        48,
+        44,
+        102,
+        89
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1050,
+        875
+      ]
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_down_0.png",
+      "sha256": "c5d71d499b4e802c5e85f421a4f822bc3edea1a948a79a6b3012782f8f5bba71",
+      "bounds": [
+        50,
+        46,
+        98,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        740,
+        305
+      ]
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_down_1.png",
+      "sha256": "ca6571b15d8a9ecbc6ac4e061e1a6977e3d73ac98fa89df5a136b50f0271f6ab",
+      "bounds": [
+        49,
+        50,
+        99,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1054,
+        305
+      ]
+    },
+    {
+      "name": "death_down_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_down_0.png",
+      "sha256": "4c799ffea858651c225621c042061a4dc75301f85d88293f81a06c23ba490fb5",
+      "bounds": [
+        34,
+        47,
+        94,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        177,
+        1190
+      ]
+    },
+    {
+      "name": "death_down_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_down_1.png",
+      "sha256": "f6d1f3993c73742b0c38729d358a9dadc025962a2a38e691d5c823a1b49be6b4",
+      "bounds": [
+        36,
+        50,
+        92,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        484,
+        1190
+      ]
+    },
+    {
+      "name": "death_down_2",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_down_2.png",
+      "sha256": "12a29fffd7e5cd12bd9bfd71a328f96a32d0ca3ab040d4cd5e1710c9cc40db76",
+      "bounds": [
+        37,
+        47,
+        92,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        787,
+        1189
+      ]
+    },
+    {
+      "name": "death_down_3",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_down_3.png",
+      "sha256": "bfce8d93866e74facdc9bd3d5d0f6796ee7654f85482d7ea5b63d722fbd852bc",
+      "bounds": [
+        39,
+        62,
+        91,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1102,
+        1190
+      ]
+    },
+    {
+      "name": "idle_left_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_left_0.png",
+      "sha256": "7226b19bdda33737dec04dcd1209909fc9c77ffb68da07a5dc4875ce3115b4e0",
+      "bounds": [
+        26,
+        41,
+        81,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        239,
+        322
+      ]
+    },
+    {
+      "name": "idle_left_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_left_1.png",
+      "sha256": "3a178c8f86b626cdd35d1aac5087a6d9eda2e5c3f2ec4498669a395a7e08dafe",
+      "bounds": [
+        31,
+        41,
+        83,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        528,
+        322
+      ]
+    },
+    {
+      "name": "walk_left_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_left_0.png",
+      "sha256": "93d51c2a308b3c666bb489a3c671b046e96ed9b26cac24025e00780776048a03",
+      "bounds": [
+        47,
+        44,
+        101,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        127,
+        624
+      ]
+    },
+    {
+      "name": "walk_left_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_left_1.png",
+      "sha256": "41e562672561efabd6062a16f54a0e57830bce31a27aab015abac7be70add892",
+      "bounds": [
+        49,
+        42,
+        100,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        439,
+        626
+      ]
+    },
+    {
+      "name": "walk_left_2",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_left_2.png",
+      "sha256": "65cc1729c6c77cf3a404566e0ed1c58106da2b30f86ca739b41e850de7cd0705",
+      "bounds": [
+        45,
+        45,
+        98,
+        89
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        749,
+        624
+      ]
+    },
+    {
+      "name": "walk_left_3",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_left_3.png",
+      "sha256": "1a0983644924878e0e6f5202e52b9f4e7599ae9cb0a5d9a54361cc7429ebfe45",
+      "bounds": [
+        49,
+        44,
+        96,
+        89
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1051,
+        622
+      ]
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_left_0.png",
+      "sha256": "188f22aa9778177a02f4a103adddc21fb2672c594f934e02192343d1b93b930b",
+      "bounds": [
+        53,
+        42,
+        100,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        124,
+        920
+      ]
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_left_1.png",
+      "sha256": "7955588bfafd8251739c1feecce966e6d88e46c9e9a6e2d615a174a5e886060e",
+      "bounds": [
+        43,
+        47,
+        100,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        444,
+        916
+      ]
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_left_2.png",
+      "sha256": "496f3f7510dff1c27ae27c901362945be4f4c6aa931322d8353502e05e9ee770",
+      "bounds": [
+        49,
+        47,
+        102,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        737,
+        920
+      ]
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_left_3.png",
+      "sha256": "751fd8ae2159dccb712f564fa5751a0e4d87cbb832273a48c1310bebb201900b",
+      "bounds": [
+        26,
+        43,
+        78,
+        89
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1154,
+        919
+      ]
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_left_0.png",
+      "sha256": "35daf981ece33ce5abaf316fd550d3025f4a50b085643ff062ff3533dcb0e567",
+      "bounds": [
+        39,
+        44,
+        87,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        794,
+        320
+      ]
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_left_1.png",
+      "sha256": "fd4dee2c068062b4928975119649fccb2f08fc52b2c9c036cece90bf2f2c83d2",
+      "bounds": [
+        36,
+        50,
+        87,
+        89
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1104,
+        322
+      ]
+    },
+    {
+      "name": "death_left_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_left_0.png",
+      "sha256": "9fd29a3129234454c95ffafeb9090314ab67f6399d802a3532ebee6be35fac40",
+      "bounds": [
+        38,
+        52,
+        91,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        171,
+        1204
+      ]
+    },
+    {
+      "name": "death_left_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_left_1.png",
+      "sha256": "9c58cec25d6ef2e4f5a33a1df97c412552764cbfb34d178a7619bcd2413d6c62",
+      "bounds": [
+        38,
+        52,
+        91,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        475,
+        1204
+      ]
+    },
+    {
+      "name": "death_left_2",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_left_2.png",
+      "sha256": "4202b15f47e77a670c70d2c0f7da8e82f56a854aa9875c78e7c1bed7ab245532",
+      "bounds": [
+        38,
+        46,
+        91,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        790,
+        1211
+      ]
+    },
+    {
+      "name": "death_left_3",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_left_3.png",
+      "sha256": "6617cb245b0529bac69b015d7b192ce4d77eca58c146c2d60515ce00b290aa65",
+      "bounds": [
+        40,
+        52,
+        89,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1096,
+        1209
+      ]
+    },
+    {
+      "name": "idle_right_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_right_0.png",
+      "sha256": "33832b905b0561a313bb13102629196db7dba916d8f28dec2afe5bc3de46aa70",
+      "bounds": [
+        48,
+        40,
+        102,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        134,
+        308
+      ]
+    },
+    {
+      "name": "idle_right_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_right_1.png",
+      "sha256": "e99da45fda1af623919cd4fd7a24d87bfc1bad753cd3984789797c879ad888eb",
+      "bounds": [
+        46,
+        41,
+        100,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        447,
+        308
+      ]
+    },
+    {
+      "name": "walk_right_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_right_0.png",
+      "sha256": "87efbdf7337e89b7740672b6aa9e2c6d72626f4527b591bf03acd66840c9540c",
+      "bounds": [
+        34,
+        42,
+        90,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        191,
+        608
+      ]
+    },
+    {
+      "name": "walk_right_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_right_1.png",
+      "sha256": "ac5b119245a104136c9a5ffe1b73d695e7b56e04df34e4bc97300850de1e87c0",
+      "bounds": [
+        38,
+        42,
+        93,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        486,
+        614
+      ]
+    },
+    {
+      "name": "walk_right_2",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_right_2.png",
+      "sha256": "d65ab1e18de513eb1f2ac0140ebbcb3897eb10fd26b1b2c8e0e28b9aafa5856b",
+      "bounds": [
+        28,
+        42,
+        85,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        832,
+        616
+      ]
+    },
+    {
+      "name": "walk_right_3",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_right_3.png",
+      "sha256": "71d9d223a0b6f77a98f8710cd2947cdfdbf53a0981730f9928db8b0a20ce4268",
+      "bounds": [
+        27,
+        41,
+        84,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1144,
+        617
+      ]
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_right_0.png",
+      "sha256": "e705edd9f03055e583ce93f893166d266b200a31305f5f8d221761cb5b87e5a3",
+      "bounds": [
+        48,
+        45,
+        99,
+        89
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        116,
+        911
+      ]
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_right_1.png",
+      "sha256": "9b429c395b9afe6c7787760cd77d97cc807f61bb58b5a0b4590e343743a0e5d3",
+      "bounds": [
+        50,
+        48,
+        109,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        428,
+        914
+      ]
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_right_2.png",
+      "sha256": "33439177a788ce3908bd9b6f5160b5e72e9947f39cfdedef10e357a53a6c8b4b",
+      "bounds": [
+        51,
+        46,
+        114,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        718,
+        911
+      ]
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_right_3.png",
+      "sha256": "13346d5984e675368f02c180eeebb3d26dcec0401c6bf8b6276a3816c9d52fd9",
+      "bounds": [
+        47,
+        45,
+        103,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1052,
+        912
+      ]
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_right_0.png",
+      "sha256": "9f3c02436be687d9864b09ac1a21635a83698fc006470471a15ce1ae5640a8e5",
+      "bounds": [
+        40,
+        42,
+        101,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_hurt_corrected_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        244,
+        574
+      ]
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_right_1.png",
+      "sha256": "7b82f116144e0ec6a82fa171885b4a25c212d514c23712fdb126847dfc56d635",
+      "bounds": [
+        44,
+        44,
+        103,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_hurt_corrected_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        766,
+        574
+      ]
+    },
+    {
+      "name": "death_right_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_right_0.png",
+      "sha256": "d2eb12b0edebd8c7243e5ff2586c976265721ce54174b1fd427c3a267980b356",
+      "bounds": [
+        36,
+        52,
+        91,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        172,
+        1183
+      ]
+    },
+    {
+      "name": "death_right_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_right_1.png",
+      "sha256": "25efc995043b7f533219be06baa7030982f80338e9ca02134e397cc482595a83",
+      "bounds": [
+        35,
+        54,
+        94,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        491,
+        1184
+      ]
+    },
+    {
+      "name": "death_right_2",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_right_2.png",
+      "sha256": "a0afc0b0f4a960fa8e710306b03a021c02bed7b676fa3ce3b99880f152213274",
+      "bounds": [
+        36,
+        53,
+        92,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        795,
+        1184
+      ]
+    },
+    {
+      "name": "death_right_3",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_right_3.png",
+      "sha256": "31655fafa873bde86b05a3464bb50fdb6aadd89c89085e7e900040bc10ea638e",
+      "bounds": [
+        37,
+        53,
+        90,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1105,
+        1190
+      ]
+    },
+    {
+      "name": "idle_up_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_up_0.png",
+      "sha256": "8ac74745d19a4e3459dfcd65a1e4d130221974359711a6da2e9243937d974526",
+      "bounds": [
+        47,
+        41,
+        96,
+        89
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        142,
+        301
+      ]
+    },
+    {
+      "name": "idle_up_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_up_1.png",
+      "sha256": "00adc9876d6bbc5f9b3154aa472762a3cdc0c4362c9921a353606623a9d3b6a7",
+      "bounds": [
+        42,
+        41,
+        90,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        470,
+        303
+      ]
+    },
+    {
+      "name": "walk_up_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_up_0.png",
+      "sha256": "b40b94c73c217eafa99ce4fd4b231e3370117c913d26ec991cccf2a577fd1d06",
+      "bounds": [
+        43,
+        41,
+        90,
+        89
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        156,
+        603
+      ]
+    },
+    {
+      "name": "walk_up_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_up_1.png",
+      "sha256": "07c1ce8553a7593a1c7fa75a5c5528d369d354c424bf81281d544509982981bc",
+      "bounds": [
+        44,
+        40,
+        91,
+        89
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        464,
+        604
+      ]
+    },
+    {
+      "name": "walk_up_2",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_up_2.png",
+      "sha256": "503748f99c3a3a3394f756afcb5ddfb0c73628a6a7b4726079039d652a972622",
+      "bounds": [
+        45,
+        41,
+        90,
+        89
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        764,
+        603
+      ]
+    },
+    {
+      "name": "walk_up_3",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_up_3.png",
+      "sha256": "386116a654449fa24d2a9fb032b42f87d38fefcd5973504c9b3348b80578e98a",
+      "bounds": [
+        42,
+        41,
+        87,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1093,
+        603
+      ]
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_up_0.png",
+      "sha256": "6a6ed6c0cc1eb0a44812bd2a2a83a0c1ca632b9413225701bca0626a19d9f367",
+      "bounds": [
+        48,
+        44,
+        90,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        154,
+        890
+      ]
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_up_1.png",
+      "sha256": "0ff8a275bc88dd2626e06a09556769849620b434e175be4269d3c1943e73d391",
+      "bounds": [
+        42,
+        43,
+        100,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        444,
+        894
+      ]
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_up_2.png",
+      "sha256": "f211eb884f2134556d24b3f2de103c4ae6ef25e966e267c9026c6e59ba4cf703",
+      "bounds": [
+        48,
+        43,
+        109,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        730,
+        896
+      ]
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_up_3.png",
+      "sha256": "80babf09263882dd8b6d1b23a646bd0329b7a69a0e1718493c07bb249f03b35f",
+      "bounds": [
+        48,
+        43,
+        102,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1036,
+        886
+      ]
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_up_0.png",
+      "sha256": "b29b38089e0b14a670f29da3e6220cd12409004643760bf1eea27e321d20f7f3",
+      "bounds": [
+        40,
+        45,
+        85,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        792,
+        304
+      ]
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_up_1.png",
+      "sha256": "96a0e98497cb0ec5cb2e51b50a696abce07df1899aeac116411520323bd7514e",
+      "bounds": [
+        50,
+        50,
+        100,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1028,
+        305
+      ]
+    },
+    {
+      "name": "death_up_0",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_up_0.png",
+      "sha256": "a29938cd1e91453cc4b6a095dac3d81dbc04f54a50ce2330c949f992c514114f",
+      "bounds": [
+        38,
+        49,
+        90,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        176,
+        1195
+      ]
+    },
+    {
+      "name": "death_up_1",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_up_1.png",
+      "sha256": "9897956b8b4e7e56d5edbb1b228ff032dfc548b2df208555e9d6c2017afbb389",
+      "bounds": [
+        38,
+        46,
+        91,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        478,
+        1195
+      ]
+    },
+    {
+      "name": "death_up_2",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_up_2.png",
+      "sha256": "96e3157a6f56a106d870d63f88d5173807890a17b5bc02697a258349593af925",
+      "bounds": [
+        37,
+        54,
+        91,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        786,
+        1195
+      ]
+    },
+    {
+      "name": "death_up_3",
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_up_3.png",
+      "sha256": "ade24544a7e119db55bc05991f7061f109e0a34c3775c086663159d20752c195",
+      "bounds": [
+        37,
+        51,
+        90,
+        88
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1088,
+        1202
+      ]
+    }
+  ],
+  "animationAudit": [
+    {
+      "tag": "idle_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    }
+  ],
+  "sourceScales": {
+    "down": 0.21145374449339208,
+    "left": 0.19161676646706588,
+    "right": 0.21238938053097345,
+    "up": 0.2,
+    "right_hurt_corrected": 0.1188118811881188
+  },
+  "generatedSources": {
+    "down": {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "left": {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "right": {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "up": {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "right_hurt_corrected": {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/right_hurt_corrected_v1.png",
+      "expected": 4,
+      "rows": 1,
+      "cols": 4,
+      "referenceIndices": [
+        3
+      ]
+    }
+  },
+  "runtimeIntegration": true,
+  "rejectedSourceFrames": {
+    "right_v1.png": [
+      2,
+      3
+    ]
+  },
+  "provenance": "Original AI-assisted raster poses using approved concept images directly. Aseprite extracts masked generated pixels, removes alpha below220, preserves retained RGB, uses fixed nearest source scales and aligns feet. No concept-board crops used as frames; no commercial sprite pack or exclusive copyright claim.",
+  "notes": [
+    "Shadow right hurt preserves two visible blades."
+  ],
+  "generatedSourceHashes": {
+    "assets/sprites/creeps/arena/anh-ma/source/down_v1.png": "79c54b726c40139afaedd768151304ed73ebec3baf47a544d1294b66c7afa887",
+    "assets/sprites/creeps/arena/anh-ma/source/left_v1.png": "a574bc321d864d9419567fa4c9faa68053f5cc5d42331e8ccb31b201d2fbce8a",
+    "assets/sprites/creeps/arena/anh-ma/source/right_v1.png": "9bf96d6b999aee3f0b6d9bd912c79a93d58e153a250f24a49371d236455e38b5",
+    "assets/sprites/creeps/arena/anh-ma/source/up_v1.png": "bfec890920a9bfd6c9d491226fc82c58dd0e1052d13a9248641cb408428ff7a7",
+    "assets/sprites/creeps/arena/anh-ma/source/right_hurt_corrected_v1.png": "f43faf5fabeec8aa4a25c38020b4595c4ecf13959105ac29b1907ad2cc1051de"
+  },
+  "textureKey": "creep_shadow_assassin",
+  "animationKeys": [
+    "creep_shadow_assassin:idle:down",
+    "creep_shadow_assassin:walk:down",
+    "creep_shadow_assassin:basic_attack:down",
+    "creep_shadow_assassin:hurt:down",
+    "creep_shadow_assassin:death:down",
+    "creep_shadow_assassin:idle:left",
+    "creep_shadow_assassin:walk:left",
+    "creep_shadow_assassin:basic_attack:left",
+    "creep_shadow_assassin:hurt:left",
+    "creep_shadow_assassin:death:left",
+    "creep_shadow_assassin:idle:right",
+    "creep_shadow_assassin:walk:right",
+    "creep_shadow_assassin:basic_attack:right",
+    "creep_shadow_assassin:hurt:right",
+    "creep_shadow_assassin:death:right",
+    "creep_shadow_assassin:idle:up",
+    "creep_shadow_assassin:walk:up",
+    "creep_shadow_assassin:basic_attack:up",
+    "creep_shadow_assassin:hurt:up",
+    "creep_shadow_assassin:death:up"
+  ],
+  "finalDirectorApproval": "Not claimed; user auto-approval covers concepts and immediate batch production.",
+  "presentationCues": {
+    "dualBladeSlashes": "basic_attack_* frames1-2",
+    "shadowTrail": "walk state; presentation only, no new dash",
+    "disintegration": "death_* frames0-3"
+  },
+  "runtimeVerification": {
+    "status": "PASS",
+    "date": "2026-10-31",
+    "evidence": "docs/evidence/phase1j-integration/integration_verification.json",
+    "observedAnimationTags": 20,
+    "observedFrames": 64,
+    "sixRealClients": true,
+    "naturalCombatVerified": true,
+    "nativeScale": 1,
+    "nearestFiltering": true,
+    "serverStatsUnchanged": true
+  }
+}

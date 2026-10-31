@@ -1,0 +1,272 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\@playwright+test@1.64.1\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.thien-son-skills.config.ts",
+      "tests/e2e/thien-son-skills.spec.ts"
+    ],
+    "configFile": "D:\\Projects\\volam-hero-defense\\playwright.thien-son-skills.config.ts",
+    "rootDir": "D:/Projects/volam-hero-defense/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\thien-son-skills-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/Projects/volam-hero-defense/artifacts/thien-son-skills-playwright",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/Projects/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "thien-son-skills.spec.ts",
+          "gameplay.spec.ts"
+        ],
+        "timeout": 180000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Projects\\volam-hero-defense\\artifacts\\thien-son-skills-playwright",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "thien-son-skills.spec.ts",
+          "gameplay.spec.ts"
+        ],
+        "timeout": 180000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5186",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "video": "off",
+          "trace": "off",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "assets/reviews/skills/thien-son/playwright_results_v01.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "thien-son-skills.spec.ts",
+      "file": "thien-son-skills.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Thiên Sơn skill art",
+          "file": "thien-son-skills.spec.ts",
+          "line": 143,
+          "column": 6,
+          "specs": [
+            {
+              "title": "all atlas tags play their actual frames and metadata cadence in Phaser",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 56027,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-30T18:52:21.656Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "816a0d28e20908c4b16e-a700af0f8b5e7abf97fe",
+              "file": "thien-son-skills.spec.ts",
+              "line": 144,
+              "column": 3
+            },
+            {
+              "title": "stage composition, motion, expiry, pairing and normal-zoom readability",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 173458,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-30T18:53:18.096Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "816a0d28e20908c4b16e-7a9ed1f0b47fda73f367",
+              "file": "thien-son-skills.spec.ts",
+              "line": 221,
+              "column": 3
+            },
+            {
+              "title": "preview triggers never join a room or send gameplay commands",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 180000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 4251,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\thien-son-skills.spec.ts:413:21",
+                        "location": {
+                          "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\thien-son-skills.spec.ts",
+                          "column": 21,
+                          "line": 413
+                        },
+                        "snippet": "  411 |     expect(state.state).toBeUndefined();\n  412 |     expect(state.events).toEqual([]);\n> 413 |     expect(sockets).toBe(0);\n      |                     ^\n  414 |     expect(errors).toEqual([]);\n  415 |     writeFileSync(\n  416 |       resolve(evidence, 'preview_authority_guard_v01.json'),"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\thien-son-skills.spec.ts",
+                            "column": 21,
+                            "line": 413
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m0\u001b[39m\nReceived: \u001b[31m1\u001b[39m\n\n  411 |     expect(state.state).toBeUndefined();\n  412 |     expect(state.events).toEqual([]);\n> 413 |     expect(sockets).toBe(0);\n      |                     ^\n  414 |     expect(errors).toEqual([]);\n  415 |     writeFileSync(\n  416 |       resolve(evidence, 'preview_authority_guard_v01.json'),\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\thien-son-skills.spec.ts:413:21"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-30T18:56:11.579Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\Projects\\volam-hero-defense\\artifacts\\thien-son-skills-playwright\\thien-son-skills-Thiên-Sơn-f8081-m-or-send-gameplay-commands-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\thien-son-skills.spec.ts",
+                        "column": 21,
+                        "line": 413
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "816a0d28e20908c4b16e-3e0d0c913a43d720d14c",
+              "file": "thien-son-skills.spec.ts",
+              "line": 386,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-30T18:52:14.947Z",
+    "duration": 241782.777,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

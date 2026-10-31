@@ -1,0 +1,944 @@
+{
+  "id": "cu_nhan_sa_thach",
+  "nameVi": "Cự Nhân Sa Thạch",
+  "frameSize": [
+    144,
+    128
+  ],
+  "bodyHeightTarget": 72,
+  "pivot": [
+    72,
+    112
+  ],
+  "frameCount": 64,
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+  ],
+  "tags": [
+    {
+      "name": "idle_down",
+      "from": 0,
+      "to": 1,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_down",
+      "from": 2,
+      "to": 5,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_down",
+      "from": 6,
+      "to": 7,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_down",
+      "from": 8,
+      "to": 11,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_down",
+      "from": 12,
+      "to": 15,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "idle_left",
+      "from": 16,
+      "to": 17,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_left",
+      "from": 18,
+      "to": 21,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_left",
+      "from": 22,
+      "to": 23,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_left",
+      "from": 24,
+      "to": 27,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_left",
+      "from": 28,
+      "to": 31,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "idle_right",
+      "from": 32,
+      "to": 33,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_right",
+      "from": 34,
+      "to": 37,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_right",
+      "from": 38,
+      "to": 39,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_right",
+      "from": 40,
+      "to": 43,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_right",
+      "from": 44,
+      "to": 47,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "idle_up",
+      "from": 48,
+      "to": 49,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_up",
+      "from": 50,
+      "to": 53,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_up",
+      "from": 54,
+      "to": 55,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_up",
+      "from": 56,
+      "to": 59,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_up",
+      "from": 60,
+      "to": 63,
+      "direction": "forward",
+      "repeat": 1
+    }
+  ],
+  "mirroredSequences": [
+    "attack_left"
+  ],
+  "status": "produced_asset_only_pending_runtime_review",
+  "conceptApproval": "Automatic concept acceptance explicitly instructed by user for this task; no runtime approval implied",
+  "frameOrigins": [
+    {
+      "frame": "idle_down_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        24,
+        40,
+        161,
+        161
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_down_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        178,
+        40,
+        315,
+        161
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        330,
+        37,
+        468,
+        168
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        491,
+        36,
+        624,
+        167
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_2.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        642,
+        37,
+        769,
+        168
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_3.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        789,
+        35,
+        928,
+        168
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_down_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        947,
+        42,
+        1081,
+        175
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_down_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        1101,
+        52,
+        1237,
+        175
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        23,
+        189,
+        173,
+        331
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        191,
+        196,
+        318,
+        330
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_2.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        337,
+        217,
+        476,
+        321
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_3.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        492,
+        195,
+        624,
+        321
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        641,
+        195,
+        779,
+        314
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        788,
+        217,
+        916,
+        323
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_2.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        933,
+        248,
+        1096,
+        316
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_3.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        1108,
+        257,
+        1237,
+        320
+      ],
+      "scale": 0.5950413223140496,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_left_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        41,
+        345,
+        147,
+        479
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_left_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        192,
+        346,
+        294,
+        479
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        331,
+        345,
+        458,
+        474
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        484,
+        343,
+        613,
+        480
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_2.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        638,
+        343,
+        759,
+        473
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_3.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        785,
+        342,
+        909,
+        473
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_left_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        943,
+        349,
+        1069,
+        483
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_left_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        1097,
+        353,
+        1230,
+        483
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_left_0.png",
+      "source": "cu_nhan_sa_thach-attack-v2.png",
+      "rect": [
+        46,
+        34,
+        605,
+        623
+      ],
+      "scale": 0.14035087719298245,
+      "mirrored": true
+    },
+    {
+      "frame": "attack_left_1.png",
+      "source": "cu_nhan_sa_thach-attack-v2.png",
+      "rect": [
+        664,
+        151,
+        1222,
+        614
+      ],
+      "scale": 0.14035087719298245,
+      "mirrored": true
+    },
+    {
+      "frame": "attack_left_2.png",
+      "source": "cu_nhan_sa_thach-attack-v2.png",
+      "rect": [
+        46,
+        744,
+        636,
+        1166
+      ],
+      "scale": 0.14035087719298245,
+      "mirrored": true
+    },
+    {
+      "frame": "attack_left_3.png",
+      "source": "cu_nhan_sa_thach-attack-v2.png",
+      "rect": [
+        710,
+        675,
+        1191,
+        1188
+      ],
+      "scale": 0.14035087719298245,
+      "mirrored": true
+    },
+    {
+      "frame": "death_left_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        639,
+        497,
+        761,
+        625
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "death_left_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        780,
+        530,
+        919,
+        625
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "death_left_2.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        934,
+        554,
+        1092,
+        620
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "death_left_3.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        1105,
+        574,
+        1234,
+        628
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_right_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        40,
+        640,
+        144,
+        774
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_right_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        192,
+        640,
+        303,
+        774
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        339,
+        640,
+        466,
+        775
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        485,
+        640,
+        620,
+        775
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_2.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        646,
+        640,
+        766,
+        777
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_3.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        788,
+        640,
+        925,
+        775
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_right_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        947,
+        642,
+        1079,
+        782
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_right_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        1107,
+        644,
+        1228,
+        782
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_0.png",
+      "source": "cu_nhan_sa_thach-attack-v2.png",
+      "rect": [
+        46,
+        34,
+        605,
+        623
+      ],
+      "scale": 0.14035087719298245,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_1.png",
+      "source": "cu_nhan_sa_thach-attack-v2.png",
+      "rect": [
+        664,
+        151,
+        1222,
+        614
+      ],
+      "scale": 0.14035087719298245,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_2.png",
+      "source": "cu_nhan_sa_thach-attack-v2.png",
+      "rect": [
+        46,
+        744,
+        636,
+        1166
+      ],
+      "scale": 0.14035087719298245,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_3.png",
+      "source": "cu_nhan_sa_thach-attack-v2.png",
+      "rect": [
+        710,
+        675,
+        1191,
+        1188
+      ],
+      "scale": 0.14035087719298245,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        639,
+        797,
+        767,
+        924
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        779,
+        824,
+        930,
+        924
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_2.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        945,
+        865,
+        1086,
+        923
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_3.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        1100,
+        864,
+        1235,
+        928
+      ],
+      "scale": 0.5373134328358209,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_up_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        21,
+        948,
+        154,
+        1062
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_up_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        181,
+        947,
+        312,
+        1061
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        340,
+        947,
+        461,
+        1065
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        482,
+        946,
+        613,
+        1067
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_2.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        632,
+        946,
+        765,
+        1066
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_3.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        791,
+        946,
+        916,
+        1066
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_up_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        948,
+        948,
+        1080,
+        1065
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_up_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        1094,
+        959,
+        1230,
+        1065
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        20,
+        1074,
+        146,
+        1223
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        185,
+        1083,
+        314,
+        1226
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_2.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        328,
+        1112,
+        478,
+        1224
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_3.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        491,
+        1101,
+        622,
+        1223
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_0.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        635,
+        1101,
+        772,
+        1215
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_1.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        786,
+        1119,
+        932,
+        1224
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_2.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        941,
+        1145,
+        1095,
+        1221
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_3.png",
+      "source": "cu_nhan_sa_thach-source.png",
+      "rect": [
+        1107,
+        1148,
+        1237,
+        1224
+      ],
+      "scale": 0.631578947368421,
+      "mirrored": false
+    }
+  ]
+}

@@ -1,0 +1,1335 @@
+{
+  "id": "creep_skeleton_swordsman",
+  "nameVi": "Khô Lâu Kiếm Sĩ",
+  "phase": "1D",
+  "category": "enemy",
+  "status": "prototype",
+  "reviewStatus": "STAGED_NOT_INTEGRATED",
+  "conceptApproval": "User: concept approve, please proceed (2026-10-30)",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+  "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+  "masterConcept": "assets/concepts/arena-creeps/waves-05-08/arena_creeps_05_08_concept_sheet.png",
+  "source": "sprites/creeps/arena/skeleton-swordsman/source/creep_skeleton_swordsman.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 112,
+  "frameHeight": 96,
+  "footPivot": [
+    0.5,
+    0.7916666666666666
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2"
+      ],
+      "frameRate": 6.25,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2"
+      ],
+      "frameRate": 10,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/idle_down_0.png",
+      "bounds": [
+        30,
+        34,
+        72,
+        76
+      ],
+      "sha256": "f859c53dc9a4989f82771322e4d293eca8bc7f10245121d1912d472ee1d6e670",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "idle_down_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/idle_down_1.png",
+      "bounds": [
+        38,
+        34,
+        76,
+        76
+      ],
+      "sha256": "6be8edadd007342acc6a96d652f0fdabaa3fe8a11cbc662b8898cf7909e9afea",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "walk_down_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_down_0.png",
+      "bounds": [
+        42,
+        32,
+        80,
+        76
+      ],
+      "sha256": "2bbe7d6afe2d521d4c6cab6124b7e67ad98b87fb428ca46ddf50e42a70735968",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "walk_down_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_down_1.png",
+      "bounds": [
+        45,
+        33,
+        85,
+        76
+      ],
+      "sha256": "55e47615c8cb4ad77053bd73a8827d97a12fcf3d1545cc6543e6ca7b0401056e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 4
+    },
+    {
+      "name": "walk_down_2",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_down_2.png",
+      "bounds": [
+        43,
+        32,
+        80,
+        76
+      ],
+      "sha256": "0eaaf633982669979378a1eb9a23c64acc8b8e858a34f51a7a805cbdffb3048a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 5
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_down_0.png",
+      "bounds": [
+        33,
+        30,
+        72,
+        76
+      ],
+      "sha256": "fd67dbdcca3b4bfa00c2e2356b3cfd8462b6501ade8b0d98c8a76296788082eb",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 6
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_down_1.png",
+      "bounds": [
+        41,
+        35,
+        72,
+        76
+      ],
+      "sha256": "e832bad2a99a6cae438cd13cb6c510819cf1bcb3a1c98ba156fb0fbe68cf7f55",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 7
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_down_2.png",
+      "bounds": [
+        40,
+        35,
+        74,
+        76
+      ],
+      "sha256": "873ac75232bbdeb74efe997606b71fbf91578e43d0af19b5db9bb90a5ef22d6b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 8
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_down_3.png",
+      "bounds": [
+        37,
+        34,
+        79,
+        76
+      ],
+      "sha256": "04a6eb25c47c1205227383b4ebec0de5190e6f80dec3761d928f2e865890e433",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 9
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/hurt_down_0.png",
+      "bounds": [
+        35,
+        32,
+        82,
+        76
+      ],
+      "sha256": "e47eadce361ab53b8552ac483f65822f375cbfc92bd5d5b2afcd78014824c7c7",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/hurt_down_1.png",
+      "bounds": [
+        36,
+        32,
+        78,
+        76
+      ],
+      "sha256": "8b77b3795a740ad4b0e640eb0193c352bd0fb55b651dc71ae8f415f52dea0886",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "death_down_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_down_0.png",
+      "bounds": [
+        37,
+        38,
+        76,
+        76
+      ],
+      "sha256": "9e117d29512c58f34af65f015b6ef03ad021438126421508fdc6bb77e45736ff",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "death_down_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_down_1.png",
+      "bounds": [
+        36,
+        46,
+        83,
+        76
+      ],
+      "sha256": "33e9e4e44e418247c225ecd52dcd32409d5f69d279b825670f3e02b5d010dc89",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "death_down_2",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_down_2.png",
+      "bounds": [
+        28,
+        51,
+        82,
+        76
+      ],
+      "sha256": "2948c0200bf5ce49fbdd4197c43cf6b361be414128130c1222fe72ce03aaf4dc",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 4
+    },
+    {
+      "name": "death_down_3",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_down_3.png",
+      "bounds": [
+        32,
+        57,
+        90,
+        76
+      ],
+      "sha256": "608384f7d9f0f18d1a8d0c10ee71da8998c02ec8b017eeea91e9fd6a023f38f3",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 5
+    },
+    {
+      "name": "idle_left_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/idle_left_0.png",
+      "bounds": [
+        29,
+        32,
+        69,
+        76
+      ],
+      "sha256": "340b5bfc3875920441068887ee56ee1837d68900daaf0fa7cfe4c75f2406ec04",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "idle_left_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/idle_left_1.png",
+      "bounds": [
+        32,
+        32,
+        69,
+        76
+      ],
+      "sha256": "c33e75cfe79d07dca2eea1ca81f41d6f44b9d4bd60d6ed4a867350e6fef4d877",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "walk_left_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_left_0.png",
+      "bounds": [
+        32,
+        32,
+        66,
+        76
+      ],
+      "sha256": "2c10f8e2f1d2bae947ad5128d197fa19bef6acb0f6516be842538538c51a80ae",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 12
+    },
+    {
+      "name": "walk_left_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_left_1.png",
+      "bounds": [
+        32,
+        32,
+        70,
+        76
+      ],
+      "sha256": "1b18a4792e9481fa29c498b9199f81a74777c777f175b60d5e002bcef62a4f63",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 13
+    },
+    {
+      "name": "walk_left_2",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_left_2.png",
+      "bounds": [
+        33,
+        32,
+        70,
+        76
+      ],
+      "sha256": "315e18c85a5fd057fc85ef983a025aae411099289d8242cec778335b5afd0aa7",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 14
+    },
+    {
+      "name": "walk_left_3",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_left_3.png",
+      "bounds": [
+        33,
+        33,
+        70,
+        76
+      ],
+      "sha256": "fa28ba30b9d12ccaa2e1776f0142ee500866ede6a7434fa7f8e97212804c2587",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 15
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_left_0.png",
+      "bounds": [
+        36,
+        28,
+        71,
+        76
+      ],
+      "sha256": "d638f2c2ee2f04c56dc14c1db0859fb97a68a4c6d8601709aa02eb48d315c0a5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 16
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_left_1.png",
+      "bounds": [
+        36,
+        34,
+        70,
+        76
+      ],
+      "sha256": "736b3f475cd2dc5cb6d19f1237397b5f0b22f61258324b5a84b208229927953f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 17
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_left_2.png",
+      "bounds": [
+        30,
+        37,
+        71,
+        76
+      ],
+      "sha256": "df19bf8c720cc2459e5b30dcd59eed27997780b91533e9366b6dc4951bc54f1f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 18
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_left_3.png",
+      "bounds": [
+        33,
+        33,
+        69,
+        76
+      ],
+      "sha256": "fb720e181bb25e83d308ca6918c1b7044dc44d6e3a985b2b71df7427fec08003",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 19
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/hurt_left_0.png",
+      "bounds": [
+        25,
+        33,
+        74,
+        76
+      ],
+      "sha256": "488ee08704f026fa5cb3c7454d24385281707c9467518d4d11135a4bc5605227",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 6
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/hurt_left_1.png",
+      "bounds": [
+        37,
+        33,
+        78,
+        76
+      ],
+      "sha256": "9a1734ed23a95720f8d5178126d76dbf83f365e8f55d81c6be773fbac9a1071b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 7
+    },
+    {
+      "name": "death_left_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_left_0.png",
+      "bounds": [
+        36,
+        37,
+        78,
+        76
+      ],
+      "sha256": "634079ac320710c34967628c7b5310262465f37cefdbca44a6b2aee25214799f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 8
+    },
+    {
+      "name": "death_left_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_left_1.png",
+      "bounds": [
+        29,
+        46,
+        84,
+        76
+      ],
+      "sha256": "d0fd2a31ee8434fc2a0891323399bf270b36e0d1c633a3f4c8f0fb1027f30e22",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 9
+    },
+    {
+      "name": "death_left_2",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_left_2.png",
+      "bounds": [
+        27,
+        54,
+        80,
+        76
+      ],
+      "sha256": "c48c18050a84740741998c501c499458bdd2fc67b1bc3d18c34363ee332f6ef4",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "death_left_3",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_left_3.png",
+      "bounds": [
+        28,
+        58,
+        87,
+        76
+      ],
+      "sha256": "c67a3cbaed22585b32b83ef87ae1cb9dbea612d6bfca3b75b3b04a3c78733f88",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "idle_right_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/idle_right_0.png",
+      "bounds": [
+        43,
+        32,
+        80,
+        76
+      ],
+      "sha256": "7615b0ff6d41c2ed07700556e7dd7679d7e19e7f02c3427358abce9f39e124b7",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 20
+    },
+    {
+      "name": "idle_right_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/idle_right_1.png",
+      "bounds": [
+        42,
+        31,
+        81,
+        76
+      ],
+      "sha256": "2e274ecb812c3f9858c1f94e34b6b66fa79ece2487ffcb246609400c9c6e6719",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 21
+    },
+    {
+      "name": "walk_right_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_right_0.png",
+      "bounds": [
+        45,
+        31,
+        82,
+        76
+      ],
+      "sha256": "1fc73049b61c617bb69e7a189e6d0e18b554706db72a5144e379d7142b8d82b0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 22
+    },
+    {
+      "name": "walk_right_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_right_1.png",
+      "bounds": [
+        45,
+        31,
+        79,
+        76
+      ],
+      "sha256": "f3124e19615ffa8f9370fb859a5d7bc1555151b225b03653ce553a1f5890422b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 23
+    },
+    {
+      "name": "walk_right_2",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_right_2.png",
+      "bounds": [
+        42,
+        32,
+        79,
+        76
+      ],
+      "sha256": "aec7d7f8ddf5587d1a0c35ef3edd5e7eafb0e5cc32497ad68e6a797fac5595ba",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 24
+    },
+    {
+      "name": "walk_right_3",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_right_3.png",
+      "bounds": [
+        44,
+        32,
+        78,
+        76
+      ],
+      "sha256": "df033d0e8f2a0dc47af7068ad207d382f0c7315e343d1196c7819c115ad17014",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 25
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_right_0.png",
+      "bounds": [
+        41,
+        28,
+        82,
+        76
+      ],
+      "sha256": "813dcc59e96babecc449cc9e85987831c3c4e8c9c0bb7dbb119b073d63c33f9e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 26
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_right_1.png",
+      "bounds": [
+        40,
+        34,
+        85,
+        76
+      ],
+      "sha256": "f8433b60708df14fd904941a7adc784bebf3c1cb348c5f48801e27accf7fb55f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 27
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_right_2.png",
+      "bounds": [
+        42,
+        35,
+        82,
+        76
+      ],
+      "sha256": "0ce0d187c99b64bc8266770dd6dea2683361ff3dc7ae5e84f6906e48abe21fc6",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 28
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_right_3.png",
+      "bounds": [
+        43,
+        31,
+        79,
+        76
+      ],
+      "sha256": "0b48741fada14a2cbc2baaa206668b341bf0be8792905a2a15df44297ca5525e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 29
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/hurt_right_0.png",
+      "bounds": [
+        39,
+        32,
+        89,
+        76
+      ],
+      "sha256": "a5cda2a255f4fbbc59baf8616c601faf73f063c93b41db98ac4b425d6a330b1e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 12
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/hurt_right_1.png",
+      "bounds": [
+        36,
+        32,
+        77,
+        76
+      ],
+      "sha256": "7be309862020389a06fe4ebcacdc9a96dbf9c7fc1b7ff3057541a771620abfe0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 13
+    },
+    {
+      "name": "death_right_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_right_0.png",
+      "bounds": [
+        36,
+        39,
+        73,
+        76
+      ],
+      "sha256": "6f66b120646709592d7b356e2415dbd2088387f8dcd6940d1e995675200d441c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 14
+    },
+    {
+      "name": "death_right_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_right_1.png",
+      "bounds": [
+        42,
+        46,
+        93,
+        76
+      ],
+      "sha256": "e3c4fdf8756c5c9c5fbf27be5428511770432f3f51cd50f213bb8929c27e274e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 15
+    },
+    {
+      "name": "death_right_2",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_right_2.png",
+      "bounds": [
+        20,
+        54,
+        74,
+        76
+      ],
+      "sha256": "10b3ea54d430e3ca9cf9926db24b6421efd88cb00c80c9c46588dfabbea18463",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 16
+    },
+    {
+      "name": "death_right_3",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_right_3.png",
+      "bounds": [
+        28,
+        58,
+        88,
+        76
+      ],
+      "sha256": "01d31181c0df2c098a9aa16a87b808cf7f9ce26c48df2abda8ac82db23249a27",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 17
+    },
+    {
+      "name": "idle_up_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/idle_up_0.png",
+      "bounds": [
+        40,
+        32,
+        81,
+        76
+      ],
+      "sha256": "e3b71932a01d5fa4a15946f6d689e4f47a0f4780eeb9519dee0395bda2f497fa",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 30
+    },
+    {
+      "name": "idle_up_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/idle_up_1.png",
+      "bounds": [
+        34,
+        31,
+        76,
+        76
+      ],
+      "sha256": "8cc60ddd7e2cbf86ba875c47392fadde9add39e0647a8dbfe39ebdf4bb180827",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 31
+    },
+    {
+      "name": "walk_up_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_up_0.png",
+      "bounds": [
+        41,
+        31,
+        81,
+        76
+      ],
+      "sha256": "f742dee8d1cea4161c6667b124f6a1256cecaf20a1c0007ea1eb7e6cf91d1b3b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 32
+    },
+    {
+      "name": "walk_up_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_up_1.png",
+      "bounds": [
+        33,
+        31,
+        73,
+        76
+      ],
+      "sha256": "92749e320e2fe963f84db68b9cb6da8fef4d1bff4030ebc8516020cd48914bc9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 33
+    },
+    {
+      "name": "walk_up_2",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_up_2.png",
+      "bounds": [
+        32,
+        31,
+        72,
+        76
+      ],
+      "sha256": "0489414947cf848d50cd2985f0396a2d9387b004ec57306ae35ea9b7d3daeb80",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 34
+    },
+    {
+      "name": "walk_up_3",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/walk_up_3.png",
+      "bounds": [
+        41,
+        31,
+        80,
+        76
+      ],
+      "sha256": "dc6f16b347621c6a59cd6672513d9b4a5e123a2a50493342503f6793590d00b1",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 35
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_up_0.png",
+      "bounds": [
+        40,
+        27,
+        75,
+        76
+      ],
+      "sha256": "e272dcd524a51382d31ea873b1ac955ad7715354dcb59842c96becce708e379b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 36
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_up_1.png",
+      "bounds": [
+        40,
+        35,
+        82,
+        76
+      ],
+      "sha256": "937d745f9a30ae240a2e36f1f27b9956d996ab67036e58b169efdc95d0d9d351",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 37
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/basic_attack_up_2.png",
+      "bounds": [
+        40,
+        33,
+        80,
+        76
+      ],
+      "sha256": "eff9210c2020be06c548271f74609e21f10f3676d04c0b255d62eea4b0a60b58",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "selectedComponent": 39
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/hurt_up_0.png",
+      "bounds": [
+        35,
+        37,
+        77,
+        76
+      ],
+      "sha256": "1f8c81cdf4095947c73e22dd227ad4e1484fd777b7bf44f51e371e06674e8523",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 20
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/hurt_up_1.png",
+      "bounds": [
+        38,
+        31,
+        84,
+        76
+      ],
+      "sha256": "69aac197f0c87983d11e81fb2ad1355b23646c4205d907aa66daf88fca5b134a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 19
+    },
+    {
+      "name": "death_up_0",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_up_0.png",
+      "bounds": [
+        35,
+        37,
+        77,
+        76
+      ],
+      "sha256": "1f8c81cdf4095947c73e22dd227ad4e1484fd777b7bf44f51e371e06674e8523",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 20
+    },
+    {
+      "name": "death_up_1",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_up_1.png",
+      "bounds": [
+        37,
+        44,
+        75,
+        76
+      ],
+      "sha256": "91f1a3e7734b42505738fc09753a9b6b63d272777e07a4070ba2eb4f5e580346",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 21
+    },
+    {
+      "name": "death_up_2",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_up_2.png",
+      "bounds": [
+        18,
+        55,
+        76,
+        76
+      ],
+      "sha256": "590c2a462d0cd11e351f299e2ac3ef05425867a444ddf4db6154107d645da7c7",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 22
+    },
+    {
+      "name": "death_up_3",
+      "file": "sprites/creeps/arena/skeleton-swordsman/frames/death_up_3.png",
+      "bounds": [
+        33,
+        58,
+        91,
+        76
+      ],
+      "sha256": "c8de15742cccd375f08adf66cfc54fe97cb1341700a88a4977e15fc66934cd12",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "sourceConceptSha256": "69a0e13cb536498d1d872b85e6560a2abe62001dfd8783268c4033d5ca7c74fe",
+      "sourceImage": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "selectedComponent": 23
+    }
+  ],
+  "animationAudit": [
+    {
+      "tag": "idle_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_down",
+      "frames": 3,
+      "distinctDrawings": 3
+    },
+    {
+      "tag": "basic_attack_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_up",
+      "frames": 3,
+      "distinctDrawings": 3
+    },
+    {
+      "tag": "hurt_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    }
+  ],
+  "generatedSources": {
+    "main": {
+      "file": "sprites/creeps/arena/skeleton-swordsman/source/main_v1.png",
+      "originalGeneratedFilename": "exec-b94370b9-daa5-458c-894e-e4816bd0a9db.png",
+      "expected": 40,
+      "rows": 4,
+      "cols": 10,
+      "used": true,
+      "sha256": "02c9b3a86911d049ddb7257cbd9521f48ebb71d56220947da6df7ff6215fec62"
+    },
+    "reaction": {
+      "file": "sprites/creeps/arena/skeleton-swordsman/source/reaction_v1.png",
+      "originalGeneratedFilename": "exec-43aff283-f91c-480d-9570-7605b80a831e.png",
+      "expected": 24,
+      "rows": 4,
+      "cols": 6,
+      "used": true,
+      "sha256": "d44176ce98de137be4bd2f029cc3ea2abc7efe35241ca374cd28ca7d67bc57f6"
+    }
+  },
+  "sourceScales": {
+    "main": 0.25507246376811593,
+    "reaction": 0.21515892420537897
+  },
+  "notes": "Front walk and rear attack missing-sword frames excluded. Rear hurt uses the authored knee-buckle pose then recovery to retain jian; that knee pose is shared with death anticipation.",
+  "runtimeIntegration": false,
+  "provenance": "Original AI-assisted generated raster poses, approved concept images provided directly. Aseprite extracts masked generated pixels, removes alpha below220, preserves source RGB, normalizes retained alpha, applies fixed nearest-neighbour source scale and aligns feet. No concept pixels used as animation frames; no commercial sprite pack, separate third-party license or exclusive copyright claimed.",
+  "verification": "Awaiting isolated Phaser review; production owner approval pending",
+  "normalGameplayReview": "PASS: isolated Phaser 4.2.1, 1x logical / 2x display, all frames observed. No match integration or director runtime approval.",
+  "verificationEvidence": [
+    "sprites/creeps/arena/waves-05-08-production/review/phaser_verification.json",
+    "sprites/creeps/arena/waves-05-08-production/review/concept_comparison.png",
+    "sprites/creeps/arena/waves-05-08-production/review/phaser_animation_preview.webm"
+  ],
+  "unexportedComponents": {
+    "main": [
+      3,
+      38
+    ],
+    "reaction": [
+      18
+    ]
+  }
+}

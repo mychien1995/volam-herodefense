@@ -1,0 +1,4168 @@
+{
+  "assets": [
+    {
+      "id": "la_han_quyen_character",
+      "skillId": "la_han_quyen",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/la_han_quyen/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/la_han_quyen",
+      "rawSource": "assets/source/skills/thieu-lam/generated/la_han_quyen_character_v01.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Left facing uses four newly drawn direction-correction cels. Incorrect original row excluded; no character mirror transforms."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+      "correctionSources": [
+        "assets/source/skills/thieu-lam/generated/quyen_left_corrections_01_v01.png"
+      ]
+    },
+    {
+      "id": "la_han_quyen_vfx",
+      "skillId": "la_han_quyen",
+      "kind": "vfx",
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/la_han_quyen/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/la_han_quyen",
+      "rawSource": "assets/source/skills/thieu-lam/generated/la_han_quyen_vfx_v01.png",
+      "animations": [
+        {
+          "name": "release_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_right_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_right_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_right_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            18,
+            -22
+          ]
+        },
+        {
+          "name": "release_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_down_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_down_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_down_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "release_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_left_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_left_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_left_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            -18,
+            -22
+          ]
+        },
+        {
+          "name": "release_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_up_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_up_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_up_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/release_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        },
+        {
+          "name": "impact_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_right_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_right_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_right_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_down_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_down_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_down_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_left_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_left_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_left_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_up_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_up_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_up_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/impact_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "guard",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/guard_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/guard_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/guard_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/guard_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "guard",
+          "placement": "caster_body",
+          "effectPlacementOffset": [
+            0,
+            -22
+          ]
+        },
+        {
+          "name": "ending",
+          "frames": [
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/ending_0.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/ending_1.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/ending_2.png",
+            "assets/source/skills/thieu-lam/la_han_quyen/vfx/frames/ending_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "ending",
+          "placement": "caster_body",
+          "effectPlacementOffset": [
+            0,
+            -22
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "vi_da_quyen_character",
+      "skillId": "vi_da_quyen",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/vi_da_quyen/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/vi_da_quyen",
+      "rawSource": "assets/source/skills/thieu-lam/generated/vi_da_quyen_character_v01.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Left facing uses four newly drawn direction-correction cels. Incorrect original row excluded; no character mirror transforms."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+      "correctionSources": [
+        "assets/source/skills/thieu-lam/generated/quyen_left_corrections_01_v01.png"
+      ]
+    },
+    {
+      "id": "vi_da_quyen_vfx",
+      "skillId": "vi_da_quyen",
+      "kind": "vfx",
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/vi_da_quyen/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/vi_da_quyen",
+      "rawSource": "assets/source/skills/thieu-lam/generated/vi_da_quyen_vfx_v01.png",
+      "animations": [
+        {
+          "name": "release_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_right_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_right_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_right_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            18,
+            -22
+          ]
+        },
+        {
+          "name": "release_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_down_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_down_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_down_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "release_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_left_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_left_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_left_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            -18,
+            -22
+          ]
+        },
+        {
+          "name": "release_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_up_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_up_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_up_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/release_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        },
+        {
+          "name": "impact_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_right_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_right_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_right_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_down_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_down_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_down_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_left_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_left_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_left_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_up_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_up_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_up_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/impact_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "armor_break",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/armor_break_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/armor_break_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/armor_break_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/armor_break_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "armor_break",
+          "placement": "target_above_head",
+          "effectPlacementOffset": [
+            0,
+            -52
+          ]
+        },
+        {
+          "name": "ending",
+          "frames": [
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/ending_0.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/ending_1.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/ending_2.png",
+            "assets/source/skills/thieu-lam/vi_da_quyen/vfx/frames/ending_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "ending",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "dai_luc_kim_cuong_chuong_character",
+      "skillId": "dai_luc_kim_cuong_chuong",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/dai_luc_kim_cuong_chuong",
+      "rawSource": "assets/source/skills/thieu-lam/generated/dai_luc_kim_cuong_chuong_character_v01.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Left facing uses four newly drawn direction-correction cels. Incorrect original row excluded; no character mirror transforms."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+      "correctionSources": [
+        "assets/source/skills/thieu-lam/generated/quyen_left_corrections_01_v01.png"
+      ]
+    },
+    {
+      "id": "dai_luc_kim_cuong_chuong_vfx",
+      "skillId": "dai_luc_kim_cuong_chuong",
+      "kind": "vfx",
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/dai_luc_kim_cuong_chuong",
+      "rawSource": "assets/source/skills/thieu-lam/generated/dai_luc_kim_cuong_chuong_vfx_v01.png",
+      "animations": [
+        {
+          "name": "release_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_right_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_right_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_right_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            18,
+            -22
+          ]
+        },
+        {
+          "name": "release_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_down_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_down_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_down_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "release_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_left_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_left_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_left_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            -18,
+            -22
+          ]
+        },
+        {
+          "name": "release_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_up_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_up_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_up_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/release_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        },
+        {
+          "name": "impact_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_right_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_right_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_right_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_down_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_down_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_down_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_left_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_left_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_left_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_up_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_up_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_up_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/impact_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "empowered_release_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_right_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_right_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_right_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "empowered_release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            18,
+            -22
+          ]
+        },
+        {
+          "name": "empowered_release_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_down_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_down_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_down_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "empowered_release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "empowered_release_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_left_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_left_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_left_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "empowered_release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            -18,
+            -22
+          ]
+        },
+        {
+          "name": "empowered_release_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_up_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_up_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_up_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_release_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "empowered_release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        },
+        {
+          "name": "empowered_impact_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_right_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_right_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_right_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "empowered_impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "empowered_impact_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_down_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_down_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_down_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "empowered_impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "empowered_impact_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_left_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_left_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_left_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "empowered_impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "empowered_impact_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_up_0.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_up_1.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_up_2.png",
+            "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/vfx/frames/empowered_impact_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "empowered_impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "toan_phong_thoai_character",
+      "skillId": "toan_phong_thoai",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/toan_phong_thoai/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/toan_phong_thoai",
+      "rawSource": "assets/source/skills/thieu-lam/generated/toan_phong_thoai_character_v01.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Left facing uses four newly drawn direction-correction cels. Incorrect original row excluded; no character mirror transforms."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+      "correctionSources": [
+        "assets/source/skills/thieu-lam/generated/quyen_left_corrections_01_v01.png"
+      ]
+    },
+    {
+      "id": "toan_phong_thoai_vfx",
+      "skillId": "toan_phong_thoai",
+      "kind": "vfx",
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/toan_phong_thoai/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/toan_phong_thoai",
+      "rawSource": "assets/source/skills/thieu-lam/generated/toan_phong_thoai_vfx_v01.png",
+      "animations": [
+        {
+          "name": "windup",
+          "frames": [
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/windup_0.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/windup_1.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/windup_2.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/windup_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "windup",
+          "placement": "caster_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "spin",
+          "frames": [
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/spin_0.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/spin_1.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/spin_2.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/spin_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "spin",
+          "placement": "caster_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_right_0.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_right_1.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_right_2.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_down_0.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_down_1.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_down_2.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_left_0.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_left_1.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_left_2.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_up_0.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_up_1.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_up_2.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/impact_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "ending",
+          "frames": [
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/ending_0.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/ending_1.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/ending_2.png",
+            "assets/source/skills/thieu-lam/toan_phong_thoai/vfx/frames/ending_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "ending",
+          "placement": "caster_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "hoanh_tao_cuoc_character",
+      "skillId": "hoanh_tao_cuoc",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/hoanh_tao_cuoc",
+      "rawSource": "assets/source/skills/thieu-lam/generated/hoanh_tao_cuoc_character_v01.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Left facing uses four newly drawn direction-correction cels. Incorrect original row excluded; no character mirror transforms."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+      "correctionSources": [
+        "assets/source/skills/thieu-lam/generated/quyen_left_corrections_02_v01.png"
+      ]
+    },
+    {
+      "id": "hoanh_tao_cuoc_vfx",
+      "skillId": "hoanh_tao_cuoc",
+      "kind": "vfx",
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/hoanh_tao_cuoc",
+      "rawSource": "assets/source/skills/thieu-lam/generated/hoanh_tao_cuoc_vfx_v01.png",
+      "animations": [
+        {
+          "name": "preparation_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_right_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_right_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_right_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "preparation",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            28,
+            -22
+          ]
+        },
+        {
+          "name": "preparation_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_down_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_down_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_down_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "preparation",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "preparation_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_left_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_left_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_left_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "preparation",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            -28,
+            -22
+          ]
+        },
+        {
+          "name": "preparation_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_up_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_up_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_up_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/preparation_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "preparation",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        },
+        {
+          "name": "sweep_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_right_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_right_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_right_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "sweep",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            28,
+            -22
+          ]
+        },
+        {
+          "name": "sweep_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_down_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_down_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_down_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "sweep",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "sweep_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_left_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_left_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_left_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "sweep",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            -28,
+            -22
+          ]
+        },
+        {
+          "name": "sweep_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_up_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_up_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_up_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/sweep_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "sweep",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        },
+        {
+          "name": "impact_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_right_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_right_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_right_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_down_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_down_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_down_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_left_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_left_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_left_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_up_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_up_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_up_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/impact_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "ending_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_right_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_right_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_right_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "ending",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            28,
+            -22
+          ]
+        },
+        {
+          "name": "ending_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_down_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_down_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_down_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "ending",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "ending_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_left_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_left_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_left_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "ending",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            -28,
+            -22
+          ]
+        },
+        {
+          "name": "ending_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_up_0.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_up_1.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_up_2.png",
+            "assets/source/skills/thieu-lam/hoanh_tao_cuoc/vfx/frames/ending_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "ending",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "vo_anh_cuoc_character",
+      "skillId": "vo_anh_cuoc",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/vo_anh_cuoc/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/vo_anh_cuoc",
+      "rawSource": "assets/source/skills/thieu-lam/generated/vo_anh_cuoc_character_v02.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Left facing uses four newly drawn direction-correction cels. Incorrect original row excluded; no character mirror transforms."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+      "correctionSources": [
+        "assets/source/skills/thieu-lam/generated/quyen_left_corrections_02_v01.png"
+      ]
+    },
+    {
+      "id": "vo_anh_cuoc_vfx",
+      "skillId": "vo_anh_cuoc",
+      "kind": "vfx",
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/vo_anh_cuoc",
+      "rawSource": "assets/source/skills/thieu-lam/generated/vo_anh_cuoc_vfx_v01.png",
+      "animations": [
+        {
+          "name": "release_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_right_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_right_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_right_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "release",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            28,
+            -22
+          ]
+        },
+        {
+          "name": "release_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_down_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_down_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_down_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "release",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "release_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_left_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_left_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_left_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "release",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            -28,
+            -22
+          ]
+        },
+        {
+          "name": "release_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_up_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_up_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_up_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/release_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "release",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        },
+        {
+          "name": "impact_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_right_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_right_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_right_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_down_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_down_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_down_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_left_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_left_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_left_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_up_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_up_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_up_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/impact_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "empowered_release_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_right_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_right_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_right_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "empowered_release",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            28,
+            -22
+          ]
+        },
+        {
+          "name": "empowered_release_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_down_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_down_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_down_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "empowered_release",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "empowered_release_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_left_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_left_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_left_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "empowered_release",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            -28,
+            -22
+          ]
+        },
+        {
+          "name": "empowered_release_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_up_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_up_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_up_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_release_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "empowered_release",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        },
+        {
+          "name": "empowered_impact_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_right_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_right_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_right_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "empowered_impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "empowered_impact_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_down_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_down_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_down_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "empowered_impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "empowered_impact_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_left_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_left_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_left_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "empowered_impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "empowered_impact_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_up_0.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_up_1.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_up_2.png",
+            "assets/source/skills/thieu-lam/vo_anh_cuoc/vfx/frames/empowered_impact_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "empowered_impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "kim_cang_bat_hoai_character",
+      "skillId": "kim_cang_bat_hoai",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/kim_cang_bat_hoai",
+      "rawSource": "assets/source/skills/thieu-lam/generated/kim_cang_bat_hoai_character_v01.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Left facing uses four newly drawn direction-correction cels. Incorrect original row excluded; no character mirror transforms."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+      "correctionSources": [
+        "assets/source/skills/thieu-lam/generated/quyen_left_corrections_02_v01.png"
+      ]
+    },
+    {
+      "id": "kim_cang_bat_hoai_vfx",
+      "skillId": "kim_cang_bat_hoai",
+      "kind": "vfx",
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/kim_cang_bat_hoai",
+      "rawSource": "assets/source/skills/thieu-lam/generated/kim_cang_bat_hoai_vfx_v01.png",
+      "animations": [
+        {
+          "name": "activation",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/activation_0.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/activation_1.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/activation_2.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/activation_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "activation",
+          "placement": "caster_body",
+          "effectPlacementOffset": [
+            0,
+            -22
+          ]
+        },
+        {
+          "name": "loop",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/loop_0.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/loop_1.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/loop_2.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/loop_3.png"
+          ],
+          "durationMs": 100,
+          "loop": true,
+          "direction": "none",
+          "stage": "loop",
+          "placement": "caster_body",
+          "effectPlacementOffset": [
+            0,
+            -22
+          ]
+        },
+        {
+          "name": "hit_response",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/hit_response_0.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/hit_response_1.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/hit_response_2.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/hit_response_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "hit_response",
+          "placement": "caster_body",
+          "effectPlacementOffset": [
+            0,
+            -22
+          ]
+        },
+        {
+          "name": "ending",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/ending_0.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/ending_1.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/ending_2.png",
+            "assets/source/skills/thieu-lam/kim_cang_bat_hoai/vfx/frames/ending_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "ending",
+          "placement": "caster_body",
+          "effectPlacementOffset": [
+            0,
+            -22
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "nhu_lai_niet_ban_character",
+      "skillId": "nhu_lai_niet_ban",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/nhu_lai_niet_ban",
+      "rawSource": "assets/source/skills/thieu-lam/generated/nhu_lai_niet_ban_character_v01.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Left facing uses four newly drawn direction-correction cels. Incorrect original row excluded; no character mirror transforms."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+      "correctionSources": [
+        "assets/source/skills/thieu-lam/generated/quyen_left_corrections_02_v01.png"
+      ]
+    },
+    {
+      "id": "nhu_lai_niet_ban_vfx",
+      "skillId": "nhu_lai_niet_ban",
+      "kind": "vfx",
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/nhu_lai_niet_ban",
+      "rawSource": "assets/source/skills/thieu-lam/generated/nhu_lai_niet_ban_vfx_v01.png",
+      "animations": [
+        {
+          "name": "preparation",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/preparation_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/preparation_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/preparation_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/preparation_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "preparation",
+          "placement": "caster_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "ground_impact",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/ground_impact_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/ground_impact_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/ground_impact_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/ground_impact_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "ground_impact",
+          "placement": "ground",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "aftereffect",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/aftereffect_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/aftereffect_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/aftereffect_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/aftereffect_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "aftereffect",
+          "placement": "caster_body",
+          "effectPlacementOffset": [
+            0,
+            -22
+          ]
+        },
+        {
+          "name": "ending",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/ending_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/ending_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/ending_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/frames/ending_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "ending",
+          "placement": "ground",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "tru_ta_character",
+      "skillId": "tru_ta",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/tru_ta/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/tru_ta",
+      "rawSource": "assets/source/skills/thieu-lam/generated/tru_ta_character_v01.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Left attack uses four newly drawn right-hand-dao correction cels; original inconsistent left row excluded."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+      "correctionSources": [
+        "assets/source/skills/thieu-lam/generated/dao_left_corrections_v01.png"
+      ]
+    },
+    {
+      "id": "tru_ta_vfx",
+      "skillId": "tru_ta",
+      "kind": "vfx",
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/tru_ta/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/tru_ta",
+      "rawSource": "assets/source/skills/thieu-lam/generated/tru_ta_vfx_v01.png",
+      "animations": [
+        {
+          "name": "preparation_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_right_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_right_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_right_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "preparation",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            18,
+            -22
+          ]
+        },
+        {
+          "name": "preparation_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_down_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_down_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_down_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "preparation",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "preparation_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_left_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_left_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_left_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "preparation",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            -18,
+            -22
+          ]
+        },
+        {
+          "name": "preparation_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_up_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_up_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_up_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/preparation_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "preparation",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        },
+        {
+          "name": "slash_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_right_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_right_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_right_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "slash",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            28,
+            -22
+          ]
+        },
+        {
+          "name": "slash_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_down_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_down_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_down_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "slash",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "slash_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_left_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_left_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_left_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "slash",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            -28,
+            -22
+          ]
+        },
+        {
+          "name": "slash_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_up_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_up_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_up_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slash_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "slash",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        },
+        {
+          "name": "impact_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_right_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_right_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_right_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_down_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_down_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_down_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_left_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_left_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_left_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_up_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_up_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_up_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/impact_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "slow",
+          "frames": [
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slow_0.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slow_1.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slow_2.png",
+            "assets/source/skills/thieu-lam/tru_ta/vfx/frames/slow_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "slow",
+          "placement": "target_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "kim_quang_ho_tran_character",
+      "skillId": "kim_quang_ho_tran",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/kim_quang_ho_tran/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/kim_quang_ho_tran",
+      "rawSource": "assets/source/skills/thieu-lam/generated/kim_quang_ho_tran_character_v02.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "kim_quang_ho_tran_vfx",
+      "skillId": "kim_quang_ho_tran",
+      "kind": "vfx",
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/kim_quang_ho_tran",
+      "rawSource": "assets/source/skills/thieu-lam/generated/kim_quang_ho_tran_vfx_v01.png",
+      "animations": [
+        {
+          "name": "activation",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/activation_0.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/activation_1.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/activation_2.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/activation_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "activation",
+          "placement": "ground",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "loop",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/loop_0.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/loop_1.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/loop_2.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/loop_3.png"
+          ],
+          "durationMs": 100,
+          "loop": true,
+          "direction": "none",
+          "stage": "loop",
+          "placement": "ground",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "pulse",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/pulse_0.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/pulse_1.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/pulse_2.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/pulse_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "pulse",
+          "placement": "ground",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "ending",
+          "frames": [
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/ending_0.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/ending_1.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/ending_2.png",
+            "assets/source/skills/thieu-lam/kim_quang_ho_tran/vfx/frames/ending_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "ending",
+          "placement": "ground",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "tam_gioi_quy_thien_character",
+      "skillId": "tam_gioi_quy_thien",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/tam_gioi_quy_thien",
+      "rawSource": "assets/source/skills/thieu-lam/generated/tam_gioi_quy_thien_character_v01.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 90,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Left attack uses four newly drawn right-hand-dao correction cels; original inconsistent left row excluded."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+      "correctionSources": [
+        "assets/source/skills/thieu-lam/generated/dao_left_corrections_v01.png"
+      ]
+    },
+    {
+      "id": "tam_gioi_quy_thien_vfx",
+      "skillId": "tam_gioi_quy_thien",
+      "kind": "vfx",
+      "canvas": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/tam_gioi_quy_thien",
+      "rawSource": "assets/source/skills/thieu-lam/generated/tam_gioi_quy_thien_vfx_v01.png",
+      "animations": [
+        {
+          "name": "preparation_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_right_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_right_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_right_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "preparation",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            18,
+            -22
+          ]
+        },
+        {
+          "name": "preparation_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_down_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_down_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_down_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "preparation",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "preparation_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_left_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_left_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_left_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "preparation",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            -18,
+            -22
+          ]
+        },
+        {
+          "name": "preparation_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_up_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_up_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_up_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/preparation_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "preparation",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        },
+        {
+          "name": "slash_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_right_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_right_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_right_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "slash",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            28,
+            -22
+          ]
+        },
+        {
+          "name": "slash_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_down_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_down_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_down_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "slash",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -10
+          ]
+        },
+        {
+          "name": "slash_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_left_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_left_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_left_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "slash",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            -28,
+            -22
+          ]
+        },
+        {
+          "name": "slash_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_up_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_up_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_up_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/slash_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "slash",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -34
+          ]
+        },
+        {
+          "name": "impact_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_right_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_right_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_right_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_down_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_down_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_down_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_left_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_left_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_left_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_up_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_up_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_up_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/impact_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "armor_break",
+          "frames": [
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/armor_break_0.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/armor_break_1.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/armor_break_2.png",
+            "assets/source/skills/thieu-lam/tam_gioi_quy_thien/vfx/frames/armor_break_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "armor_break",
+          "placement": "target_above_head",
+          "effectPlacementOffset": [
+            0,
+            -52
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "bat_dong_minh_vuong_character",
+      "skillId": "bat_dong_minh_vuong",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/bat_dong_minh_vuong",
+      "rawSource": "assets/source/skills/thieu-lam/generated/bat_dong_minh_vuong_character_v02.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Four left-facing support-channel cels explicitly shared from new Kim Quang Ho Tran support cast to correct facing; this skill retains separate healing VFX and other12 own cels. No approved basic clips altered."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+      "correctionSources": [
+        "assets/source/skills/thieu-lam/generated/kim_quang_ho_tran_character_v02.png"
+      ]
+    },
+    {
+      "id": "bat_dong_minh_vuong_vfx",
+      "skillId": "bat_dong_minh_vuong",
+      "kind": "vfx",
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/bat_dong_minh_vuong",
+      "rawSource": "assets/source/skills/thieu-lam/generated/bat_dong_minh_vuong_vfx_v01.png",
+      "animations": [
+        {
+          "name": "activation",
+          "frames": [
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/activation_0.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/activation_1.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/activation_2.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/activation_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "activation",
+          "placement": "ground",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "healing_pulse",
+          "frames": [
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/healing_pulse_0.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/healing_pulse_1.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/healing_pulse_2.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/healing_pulse_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "healing_pulse",
+          "placement": "ground",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "loop",
+          "frames": [
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/loop_0.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/loop_1.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/loop_2.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/loop_3.png"
+          ],
+          "durationMs": 100,
+          "loop": true,
+          "direction": "none",
+          "stage": "loop",
+          "placement": "ground",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "ending",
+          "frames": [
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/ending_0.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/ending_1.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/ending_2.png",
+            "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/frames/ending_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "ending",
+          "placement": "ground",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    },
+    {
+      "id": "nhu_lai_thien_diep_character",
+      "skillId": "nhu_lai_thien_diep",
+      "kind": "character",
+      "canvas": [
+        128,
+        120
+      ],
+      "pivot": [
+        64,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character",
+      "exportFolder": "assets/exports/skills/thieu-lam/nhu_lai_thien_diep",
+      "rawSource": "assets/source/skills/thieu-lam/generated/nhu_lai_thien_diep_character_v01.png",
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_down_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_down_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_down_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_down_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "down",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_left_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_left_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_left_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_left_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "left",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_right_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_right_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_right_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_right_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "right",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_up_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_up_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_up_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/character/frames/cast_up_3.png"
+          ],
+          "durationMs": 110,
+          "loop": false,
+          "direction": "up",
+          "stage": "cast",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Left attack uses four newly drawn right-hand-dao correction cels; original inconsistent left row excluded."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+      "correctionSources": [
+        "assets/source/skills/thieu-lam/generated/dao_left_corrections_v01.png"
+      ]
+    },
+    {
+      "id": "nhu_lai_thien_diep_vfx",
+      "skillId": "nhu_lai_thien_diep",
+      "kind": "vfx",
+      "canvas": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        96
+      ],
+      "sourceFolder": "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx",
+      "exportFolder": "assets/exports/skills/thieu-lam/nhu_lai_thien_diep",
+      "rawSource": "assets/source/skills/thieu-lam/generated/nhu_lai_thien_diep_vfx_v01.png",
+      "animations": [
+        {
+          "name": "release_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_right_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_right_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_right_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "release",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            46,
+            -22
+          ]
+        },
+        {
+          "name": "release_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_down_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_down_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_down_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "release",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            50
+          ]
+        },
+        {
+          "name": "release_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_left_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_left_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_left_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "release",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            -46,
+            -22
+          ]
+        },
+        {
+          "name": "release_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_up_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_up_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_up_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/release_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "release",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -94
+          ]
+        },
+        {
+          "name": "travel_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_right_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_right_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_right_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_right_3.png"
+          ],
+          "durationMs": 100,
+          "loop": true,
+          "direction": "right",
+          "stage": "travel",
+          "placement": "projectile",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "travel_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_down_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_down_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_down_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_down_3.png"
+          ],
+          "durationMs": 100,
+          "loop": true,
+          "direction": "down",
+          "stage": "travel",
+          "placement": "projectile",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "travel_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_left_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_left_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_left_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_left_3.png"
+          ],
+          "durationMs": 100,
+          "loop": true,
+          "direction": "left",
+          "stage": "travel",
+          "placement": "projectile",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "travel_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_up_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_up_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_up_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/travel_up_3.png"
+          ],
+          "durationMs": 100,
+          "loop": true,
+          "direction": "up",
+          "stage": "travel",
+          "placement": "projectile",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_right",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_right_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_right_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_right_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_right_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "right",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_down_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_down_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_down_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_down_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "down",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_left_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_left_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_left_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_left_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "left",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_up_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_up_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_up_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/impact_up_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "up",
+          "stage": "impact",
+          "placement": "target",
+          "effectPlacementOffset": [
+            0,
+            0
+          ]
+        },
+        {
+          "name": "ally_defense",
+          "frames": [
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/ally_defense_0.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/ally_defense_1.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/ally_defense_2.png",
+            "assets/source/skills/thieu-lam/nhu_lai_thien_diep/vfx/frames/ally_defense_3.png"
+          ],
+          "durationMs": 70,
+          "loop": false,
+          "direction": "none",
+          "stage": "ally_defense",
+          "placement": "caster_body",
+          "effectPlacementOffset": [
+            0,
+            -22
+          ]
+        }
+      ],
+      "reuseNotes": [
+        "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+      ],
+      "artMethod": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration."
+    }
+  ],
+  "icons": [
+    {
+      "id": "la_han_quyen",
+      "nameVi": "La Hán Quyền",
+      "source": "assets/source/skills/thieu-lam/la_han_quyen/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/la_han_quyen/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/la_han_quyen/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/la_han_quyen/la_han_quyen_concept_v01.png",
+      "sourceRectPx": [
+        738,
+        686,
+        1143,
+        1088
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "vi_da_quyen",
+      "nameVi": "Vi Đà Quyền",
+      "source": "assets/source/skills/thieu-lam/vi_da_quyen/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/vi_da_quyen/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/vi_da_quyen/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/vi_da_quyen/vi_da_quyen_concept_v01.png",
+      "sourceRectPx": [
+        701,
+        687,
+        1170,
+        1152
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "dai_luc_kim_cuong_chuong",
+      "nameVi": "Đại Lực Kim Cương Chưởng",
+      "source": "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/dai_luc_kim_cuong_chuong/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/dai_luc_kim_cuong_chuong/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/dai_luc_kim_cuong_chuong/dai_luc_kim_cuong_chuong_concept_v01.png",
+      "sourceRectPx": [
+        713,
+        666,
+        1165,
+        1142
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "toan_phong_thoai",
+      "nameVi": "Toàn Phong Thoái",
+      "source": "assets/source/skills/thieu-lam/toan_phong_thoai/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/toan_phong_thoai/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/toan_phong_thoai/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/toan_phong_thoai/toan_phong_thoai_concept_v01.png",
+      "sourceRectPx": [
+        732,
+        706,
+        1150,
+        1120
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "hoanh_tao_cuoc",
+      "nameVi": "Hoành Tảo Cước",
+      "source": "assets/source/skills/thieu-lam/hoanh_tao_cuoc/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/hoanh_tao_cuoc/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/hoanh_tao_cuoc/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/hoanh_tao_cuoc/hoanh_tao_cuoc_concept_v01.png",
+      "sourceRectPx": [
+        703,
+        663,
+        1157,
+        1111
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "vo_anh_cuoc",
+      "nameVi": "Vô Ảnh Cước",
+      "source": "assets/source/skills/thieu-lam/vo_anh_cuoc/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/vo_anh_cuoc/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/vo_anh_cuoc/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/vo_anh_cuoc/vo_anh_cuoc_concept_v01.png",
+      "sourceRectPx": [
+        706,
+        667,
+        1165,
+        1126
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "kim_cang_bat_hoai",
+      "nameVi": "Kim Cang Bất Hoại",
+      "source": "assets/source/skills/thieu-lam/kim_cang_bat_hoai/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/kim_cang_bat_hoai/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/kim_cang_bat_hoai/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/kim_cang_bat_hoai/kim_cang_bat_hoai_concept_v01.png",
+      "sourceRectPx": [
+        734,
+        714,
+        1132,
+        1106
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "nhu_lai_niet_ban",
+      "nameVi": "Như Lai Niết Bàn",
+      "source": "assets/source/skills/thieu-lam/nhu_lai_niet_ban/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/nhu_lai_niet_ban/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/nhu_lai_niet_ban/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/nhu_lai_niet_ban/nhu_lai_niet_ban_concept_v01.png",
+      "sourceRectPx": [
+        726,
+        704,
+        1145,
+        1121
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "tru_ta",
+      "nameVi": "Tru Tà",
+      "source": "assets/source/skills/thieu-lam/tru_ta/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/tru_ta/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/tru_ta/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/tru_ta/tru_ta_concept_v01.png",
+      "sourceRectPx": [
+        701,
+        660,
+        1195,
+        1133
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "kim_quang_ho_tran",
+      "nameVi": "Kim Quang Hộ Trận",
+      "source": "assets/source/skills/thieu-lam/kim_quang_ho_tran/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/kim_quang_ho_tran/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/kim_quang_ho_tran/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/kim_quang_ho_tran/kim_quang_ho_tran_concept_v01.png",
+      "sourceRectPx": [
+        723,
+        675,
+        1164,
+        1096
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "tam_gioi_quy_thien",
+      "nameVi": "Tam Giới Quy Thiền",
+      "source": "assets/source/skills/thieu-lam/tam_gioi_quy_thien/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/tam_gioi_quy_thien/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/tam_gioi_quy_thien/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/tam_gioi_quy_thien/tam_gioi_quy_thien_concept_v01.png",
+      "sourceRectPx": [
+        737,
+        699,
+        1142,
+        1108
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "bat_dong_minh_vuong",
+      "nameVi": "Bất Động Minh Vương",
+      "source": "assets/source/skills/thieu-lam/bat_dong_minh_vuong/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/bat_dong_minh_vuong/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/bat_dong_minh_vuong/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/bat_dong_minh_vuong/bat_dong_minh_vuong_concept_v01.png",
+      "sourceRectPx": [
+        722,
+        701,
+        1156,
+        1135
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "nhu_lai_thien_diep",
+      "nameVi": "Như Lai Thiên Diệp",
+      "source": "assets/source/skills/thieu-lam/nhu_lai_thien_diep/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/nhu_lai_thien_diep/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/nhu_lai_thien_diep/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/nhu_lai_thien_diep/nhu_lai_thien_diep_concept_v01.png",
+      "sourceRectPx": [
+        715,
+        686,
+        1165,
+        1134
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    },
+    {
+      "id": "dich_can_kinh",
+      "nameVi": "Dịch Cân Kinh",
+      "source": "assets/source/skills/thieu-lam/dich_can_kinh/icon/icon.png",
+      "editableSource": "assets/source/skills/thieu-lam/dich_can_kinh/icon/icon.aseprite",
+      "path": "assets/exports/skills/thieu-lam/dich_can_kinh/icon.png",
+      "dimensionsPx": [
+        64,
+        64
+      ],
+      "concept": "assets/concepts/skills/thieu-lam/dich_can_kinh/dich_can_kinh_concept_v01.png",
+      "sourceRectPx": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "processing": "Specifically drawn icon panel extracted and sampled to64px; character concepts are never used as animation cels.",
+      "status": "prototype_approval_gate_waived"
+    }
+  ]
+}

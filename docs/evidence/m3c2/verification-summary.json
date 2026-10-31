@@ -1,0 +1,109 @@
+{
+  "date": "2026-10-31",
+  "milestone": "M3C2",
+  "status": "verified",
+  "unitIntegration": {
+    "passed": 266,
+    "files": 22
+  },
+  "workflowChecks": 8,
+  "assetValidators": 10,
+  "typechecks": "passed",
+  "productionBuild": "passed",
+  "browserLatestPassed": 11,
+  "browserAccounting": "Final pipeline passed all non-browser stages and10/11 browser cases. The normal-farming test incorrectly treated the latest60 client events as a complete history; changed only test-side accumulation, passed tool typecheck and the affected case on targeted recheck. All11 latest results pass across these runs; not a claim of a single green11-case pipeline invocation.",
+  "finalCommand": "pnpm check:final --config playwright.m3c2.config.ts tests/e2e/m3c2-preview.spec.ts tests/e2e/m3c2.spec.ts tests/e2e/skills.spec.ts tests/e2e/m3c1-preview.spec.ts",
+  "recheckCommand": "node tools/run-playwright.mjs test --config playwright.m3c2.config.ts tests/e2e/m3c2.spec.ts --grep normal",
+  "cases": [
+    {
+      "project": "runtime-preview",
+      "file": "m3c1-preview.spec.ts",
+      "title": "M3C1 runtime preview: all ten wind skills, both melee basics and four dash directions are visible to a fire-school peer",
+      "status": "passed",
+      "durationMs": 68130,
+      "report": "playwright-final-attempt.json"
+    },
+    {
+      "project": "runtime-preview",
+      "file": "m3c1-preview.spec.ts",
+      "title": "M3C1 six-player mixed-school effects keep caster ownership, scale and feet depth",
+      "status": "passed",
+      "durationMs": 68989,
+      "report": "playwright-final-attempt.json"
+    },
+    {
+      "project": "runtime-preview",
+      "file": "m3c2-preview.spec.ts",
+      "title": "M3C2 real preview: all ten skills and two basics show authored frames, shield/refund/counter and stationary areas to three schools",
+      "status": "passed",
+      "durationMs": 68967,
+      "report": "playwright-final-attempt.json"
+    },
+    {
+      "project": "runtime-preview",
+      "file": "m3c2-preview.spec.ts",
+      "title": "M3C2 both baseline styles animate every authored cardinal idle/walk/attack tag in Phaser",
+      "status": "passed",
+      "durationMs": 6487,
+      "report": "playwright-final-attempt.json"
+    },
+    {
+      "project": "runtime-preview",
+      "file": "skills.spec.ts",
+      "title": "all ten supplied skill animations load, animate and are observed by a second player",
+      "status": "passed",
+      "durationMs": 41686,
+      "report": "playwright-final-attempt.json"
+    },
+    {
+      "project": "runtime-preview",
+      "file": "skills.spec.ts",
+      "title": "two Cái Bang players cast into shared dungeon enemies and clean a buff on physical exit",
+      "status": "passed",
+      "durationMs": 19977,
+      "report": "playwright-final-attempt.json"
+    },
+    {
+      "project": "runtime-preview",
+      "file": "skills.spec.ts",
+      "title": "projectile and control skills damage arena invaders with shared authoritative feedback",
+      "status": "passed",
+      "durationMs": 48395,
+      "report": "playwright-final-attempt.json"
+    },
+    {
+      "project": "runtime-preview",
+      "file": "skills.spec.ts",
+      "title": "a real enemy kills a player during a skill channel and both clients clean the effect",
+      "status": "passed",
+      "durationMs": 34994,
+      "report": "playwright-final-attempt.json"
+    },
+    {
+      "project": "runtime-preview",
+      "file": "skills.spec.ts",
+      "title": "staff control, armor break, stun and the heavy finisher use their own supplied effects",
+      "status": "passed",
+      "durationMs": 27623,
+      "report": "playwright-final-attempt.json"
+    },
+    {
+      "project": "progression-regression",
+      "file": "m3c2.spec.ts",
+      "title": "M3C2 normal three-school progression, shared dungeon farming, read-only builds, mana sustain and arena defense",
+      "status": "passed",
+      "durationMs": 69071,
+      "report": "playwright-results.json"
+    },
+    {
+      "project": "progression-regression",
+      "file": "m3c2.spec.ts",
+      "title": "M3C2 six-player natural combat: three schools keep effects owned, feet/pivots readable and rewards authoritative",
+      "status": "passed",
+      "durationMs": 211717,
+      "report": "playwright-final-attempt.json"
+    }
+  ],
+  "recordingsProduced": false,
+  "testEnvironment": "Real Chromium, isolated dev server/client services,30-second development invasion interval and100000 statue HP; production remains180 seconds. Legacy rank1 preview is separate from normal point-funded progression."
+}

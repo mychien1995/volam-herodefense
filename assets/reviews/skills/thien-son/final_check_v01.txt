@@ -1,0 +1,141 @@
+$ node scripts/check-workflow.mjs final "--config" "playwright.thien-son-skills.config.ts" "tests/e2e/thien-son-skills.spec.ts" "tests/e2e/gameplay.spec.ts" "--grep" "Thiên Sơn skill art|two clients agree|ranged projectile"
+
+[check] prepare assets (once)
+Prepared assets in D:\Projects\volam-hero-defense\apps\game-client\public\assets\ (0 written, 1309 unchanged)
+[check] prepare assets (once): 1.40s
+
+[check] compile TypeScript
+[check] compile TypeScript: 0.53s
+
+[check] typecheck tests and tools
+[check] typecheck tests and tools: 0.91s
+
+[check] workflow regression checks
+✔ unchanged assets keep their timestamps; changed, corrupt and missing outputs are repaired (25.2049ms)
+✔ generated UTF-8 metadata is written only when its bytes change (14.3034ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 166.9093
+[check] workflow regression checks: 0.28s
+
+[check] all unit/integration tests
+
+ RUN  v5.0.5 D:/Projects/volam-hero-defense
+
+
+ Test Files  17 passed (17)
+      Tests  174 passed (174)
+   Start at  02:08:37
+   Duration  28.49s (tests 65%, import 34%, worker 1%, transform 1%)
+
+    Isolate  17 workers spawned · ~259ms startup each (spawn + environment, per file)
+             at least ~4.15s faster with isolate: false — reuses workers across files instead of one per file
+
+[check] all unit/integration tests: 29.16s
+
+[check] production client build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 200 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     0.49 kB │ gzip:   0.31 kB
+dist/assets/index-iUV02riq.css     43.89 kB │ gzip:  10.73 kB
+dist/assets/index-Din7oPxl.js   1,841.06 kB │ gzip: 480.51 kB
+
+✓ built in 2.84s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[check] production client build: 3.33s
+
+[check] scripts/verify-assets.py
+PASS: 23 runtime PNG entries, 680 frame references, bounds/provenance valid; approved Bong 44 / Chuong 40 source poses, tags, binary alpha and pivots verified
+[check] scripts/verify-assets.py: 0.52s
+
+[check] scripts/verify-arena-art01.py
+PASS: 9 Aseprite sources, 6 padded atlases, 59 RGBA exports; bounds, tags, timing, stable loop alpha and approved Cái Bang hashes
+[check] scripts/verify-arena-art01.py: 0.66s
+
+[check] scripts/verify-arena-v2.py
+PASS: 6 editable Aseprite sources, 1600x1152 opaque ground, 4 separate 512x768 cards/atlases, 32px paving, protected character hashes
+[check] scripts/verify-arena-v2.py: 0.51s
+
+[check] scripts/verify-thien-son.py
+PASS: approved character lock and concept hash; 80 distinct authored PNG cels, 24 tags, binary alpha, bounds/no clipping, fixed foot baseline64, durations, individual PNG/atlas equality and source paths.
+[check] scripts/verify-thien-son.py: 0.45s
+
+[check] scripts/verify-vo-dang.py
+PASS: approved character lock and concept hash; 80 distinct authored PNG cels, 24 tags, binary alpha, bounds/no clipping, foot baseline64 with <=1px raster edge tolerance, durations, individual PNG/atlas equality and source paths.
+[check] scripts/verify-vo-dang.py: 0.50s
+
+[check] scripts/verify-thieu-lam.py
+PASS: approved concept and 275 protected files; 80 distinct transparent PNG cels, 24 authored tags, bounds, pivots, timings, source headers, individual/atlas equality and explicit fallback metadata.
+[check] scripts/verify-thieu-lam.py: 0.55s
+
+[check] scripts/verify-thien-son-skills.py
+{"status": "PASS", "scope": "Actual editable sources, individual cels, PNG/hash-JSON atlases and presentation metadata; Phaser verification recorded separately", "components": 20, "animationTags": 146, "exportedCels": 534, "icons": 13, "iconAtlasFrames": 13, "approvedFrameReuseCels": 17, "protectedAndConceptFilesUnchanged": 213, "characterBodyHeightTarget": 44, "characterHeight": 80, "feetY": 64, "alpha": "character/VFX binary transparent; approved icon ground intentionally opaque", "productionArtApproved": false}
+[check] scripts/verify-thien-son-skills.py: 1.34s
+
+[check] browser verification
+
+   ___      _                                   ___   _  ___  
+  / __\___ | |_   _ ___  ___ _   _ ___  __   __/ _ \ / |( _ ) 
+ / /  / _ \| | | | / __|/ _ \ | | / __| \ \ / / | | || |/ _ \ 
+/ /__| (_) | | |_| \__ \  __/ |_| \__ \  \ V /| |_| || | (_) |
+\____/\___/|_|\__, |___/\___|\__,_|___/   \_/  \___(_)_|\___/ 
+              |___/                                           
+
+             · Multiplayer Framework for Node.js ·
+
+💖 Consider becoming a Sponsor on GitHub → https://github.com/sponsors/endel
+🌟 Give us a star on GitHub → https://github.com/colyseus/colyseus
+☁️  Deploy and scale your project on Colyseus Cloud → https://cloud.colyseus.io
+
+
+Running 5 tests using 1 worker
+
+(node:64704) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  1 [chromium] › tests\e2e\gameplay.spec.ts:204:1 › two clients agree on combat, manual cadence, skills and progression (20.7s)
+(node:29556) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 2 [chromium] › tests\e2e\gameplay.spec.ts:355:1 › ranged projectile uses a fixed trajectory and original effect frames (4.7s)
+  ok 3 [chromium] › tests\e2e\thien-son-skills.spec.ts:144:3 › Thiên Sơn skill art › all atlas tags play their actual frames and metadata cadence in Phaser (52.0s)
+  ok 4 [chromium] › tests\e2e\thien-son-skills.spec.ts:221:3 › Thiên Sơn skill art › stage composition, motion, expiry, pairing and normal-zoom readability (2.1m)
+  ok 5 [chromium] › tests\e2e\thien-son-skills.spec.ts:386:3 › Thiên Sơn skill art › preview triggers never join a room or send gameplay commands (7.4s)
+
+
+  1) [chromium] › tests\e2e\gameplay.spec.ts:204:1 › two clients agree on combat, manual cadence, skills and progression 
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 90
+    Received:   100
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      294 |     await a.keyboard.press('KeyQ');
+      295 |     await a.keyboard.press('KeyW');
+    > 296 |     await expect.poll(async () => (await hero(a)).mana).toBeLessThan(90);
+          |                                                         ^
+      297 |     await expect
+      298 |       .poll(
+      299 |         async () =>
+        at D:\Projects\volam-hero-defense\tests\e2e\gameplay.spec.ts:296:57
+
+    Error Context: artifacts\thien-son-skills-playwright\gameplay-two-clients-agree-0849f-ence-skills-and-progression-chromium\error-context.md
+
+  1 failed
+    [chromium] › tests\e2e\gameplay.spec.ts:204:1 › two clients agree on combat, manual cadence, skills and progression 
+  4 passed (3.5m)
+[check] browser verification: 213.49s
+[ELIFECYCLE] Command failed with exit code 1.

@@ -1,0 +1,1754 @@
+{
+  "id": "creep_demon_vanguard",
+  "wave": 20,
+  "nameVi": "Ma Vương Tiên Phong",
+  "phase": "1J",
+  "status": "prototype",
+  "reviewStatus": "RUNTIME_VERIFIED_PENDING_FINAL_DIRECTOR_REVIEW",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+  "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+  "masterConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+  "conceptApproval": "User explicitly approves generated concepts for this batch and authorizes immediate production, 2026-10-31. Runtime approval separate.",
+  "source": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/creep_demon_vanguard.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 160,
+  "frameHeight": 144,
+  "bodyHeight": 66,
+  "footPivot": [
+    0.5,
+    0.7777777777777778
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 5.0,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 5.0,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 5.0,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 5.0,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_down_0.png",
+      "sha256": "a594025f7a46ea2625d7b3cb71629641e04d8004965c2044305e9de92206abab",
+      "bounds": [
+        40,
+        47,
+        126,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        160,
+        287
+      ]
+    },
+    {
+      "name": "idle_down_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_down_1.png",
+      "sha256": "4d00f2beb906eaa2c7ce6b0f31b69062a8cb82cb0a6cfc1467e8f15a65e0ac09",
+      "bounds": [
+        43,
+        47,
+        127,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        452,
+        289
+      ]
+    },
+    {
+      "name": "walk_down_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_down_0.png",
+      "sha256": "ea83a8cc6f0d9ff3b347ae52dfc9038112f8cd72d06c6409eab7e938558f8a50",
+      "bounds": [
+        25,
+        44,
+        99,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_corrected_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        308,
+        799
+      ]
+    },
+    {
+      "name": "walk_down_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_down_1.png",
+      "sha256": "6a1c6f10a1b83e5c0b1951f8ee9a89ae6fc578a6fad7f5c8f39b002a62e50183",
+      "bounds": [
+        40,
+        46,
+        112,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_corrected_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        672,
+        793
+      ]
+    },
+    {
+      "name": "walk_down_2",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_down_2.png",
+      "sha256": "78df514645fefac345e2ddf3e09d04ed63436867ce036647e97de6a4536c4fbb",
+      "bounds": [
+        26,
+        48,
+        101,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_corrected_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        1170,
+        796
+      ]
+    },
+    {
+      "name": "walk_down_3",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_down_3.png",
+      "sha256": "2bed32cd4549603eedb6ce53e7ec8c223f8d9755185066a2788cda56b075ed8c",
+      "bounds": [
+        30,
+        45,
+        101,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_corrected_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1590,
+        794
+      ]
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_down_0.png",
+      "sha256": "9817373c1b96a9dc480424735844aba2f82d6b9f311f9587449d69e85f8f4dbc",
+      "bounds": [
+        53,
+        23,
+        132,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        120,
+        908
+      ]
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_down_1.png",
+      "sha256": "735ff5bca99f58de4404a8213563e61e26496639472dbd138f266d4fa8fa5329",
+      "bounds": [
+        53,
+        40,
+        113,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        472,
+        898
+      ]
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_down_2.png",
+      "sha256": "ec46dd9d2884d9b3ae85368592abbccebf400906db648d61e824dfd51747e425",
+      "bounds": [
+        70,
+        54,
+        142,
+        118
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        698,
+        904
+      ]
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_down_3.png",
+      "sha256": "42750a2ec318720a589d0b4d2e0a78f8c14ad611da624a06a6dc03b51d863224",
+      "bounds": [
+        32,
+        47,
+        117,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1088,
+        902
+      ]
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_down_0.png",
+      "sha256": "cba0ed4e249f3734e74eddb103196c6f1381af14d482e79b616d20e452c78a67",
+      "bounds": [
+        45,
+        53,
+        118,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_corrected_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        222,
+        375
+      ]
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_down_1.png",
+      "sha256": "a41bc68d7e3b40468eae423691cf45ba38dfe120c7a05c8a77f56947d3238230",
+      "bounds": [
+        26,
+        57,
+        97,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_corrected_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        755,
+        372
+      ]
+    },
+    {
+      "name": "death_down_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_down_0.png",
+      "sha256": "b6d4617ed6bd51e71ac5ac46b66a10204ff1ae26ba506a386ab3f9a26ceb0ad3",
+      "bounds": [
+        37,
+        46,
+        124,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        162,
+        1208
+      ]
+    },
+    {
+      "name": "death_down_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_down_1.png",
+      "sha256": "6af322ff24a7813452625c0bda18ad90d806ebf23b52721d8c7682517a12713d",
+      "bounds": [
+        37,
+        57,
+        124,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        460,
+        1211
+      ]
+    },
+    {
+      "name": "death_down_2",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_down_2.png",
+      "sha256": "402b259137f1b010c08830075bf253464edda1cf083387efcff9b2d856fa5d83",
+      "bounds": [
+        40,
+        66,
+        120,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        771,
+        1223
+      ]
+    },
+    {
+      "name": "death_down_3",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_down_3.png",
+      "sha256": "5f921b58caa0bece33e7d20c5c640e09229451def53d6474c4b1e5da36ddd550",
+      "bounds": [
+        38,
+        78,
+        122,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1100,
+        1211
+      ]
+    },
+    {
+      "name": "idle_left_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_left_0.png",
+      "sha256": "ce491d62ec7da79a90836b717a5c344ee5076d75626058d40ee449d7ee2dc218",
+      "bounds": [
+        39,
+        49,
+        126,
+        114
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        151,
+        287
+      ]
+    },
+    {
+      "name": "idle_left_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_left_1.png",
+      "sha256": "945b7580f5282abffe0dd828b35254d11b968b40496ac1f24df358c386b24c36",
+      "bounds": [
+        28,
+        48,
+        116,
+        114
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        496,
+        289
+      ]
+    },
+    {
+      "name": "walk_left_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_left_0.png",
+      "sha256": "82cde770c32f385787b042ebbeed9ee685d9c0e647faf1a11209088e79285717",
+      "bounds": [
+        32,
+        46,
+        119,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        180,
+        582
+      ]
+    },
+    {
+      "name": "walk_left_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_left_1.png",
+      "sha256": "0d8d116b41bf1549a698b96af03f0308bd514572835863d0490b91c8d223398d",
+      "bounds": [
+        35,
+        47,
+        121,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        480,
+        584
+      ]
+    },
+    {
+      "name": "walk_left_2",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_left_2.png",
+      "sha256": "eee12a7c1acbf9ed903414cb48d29bc9f7f67f7c4fd572037c6297774c16bea4",
+      "bounds": [
+        38,
+        46,
+        118,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        804,
+        587
+      ]
+    },
+    {
+      "name": "walk_left_3",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_left_3.png",
+      "sha256": "5c929e915a52683ad12394ddf1a476229e87c2696155893c5986fb76c8a50fe1",
+      "bounds": [
+        41,
+        46,
+        122,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1094,
+        584
+      ]
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_left_0.png",
+      "sha256": "d8e5d23354d201fa31a667dc3380f886aa0dc005e3099ce75429d5342596abf5",
+      "bounds": [
+        57,
+        23,
+        129,
+        114
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        136,
+        908
+      ]
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_left_1.png",
+      "sha256": "bb34b6bc04bbd286c15090a976cc8038f3b8cd22d8aa4c86357c4c32d05bf1dd",
+      "bounds": [
+        46,
+        42,
+        130,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        436,
+        910
+      ]
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_left_2.png",
+      "sha256": "2240b272e9f36510b547f0720b8e29a23fdf180b600f7f2e0ed78d3ebcc1c560",
+      "bounds": [
+        29,
+        57,
+        119,
+        116
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        802,
+        904
+      ]
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_left_3.png",
+      "sha256": "7c0747acb284f8375b31b41eae098ecb650b8d8048824f4ec3d7462a73ca58eb",
+      "bounds": [
+        38,
+        47,
+        122,
+        115
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1082,
+        906
+      ]
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_left_0.png",
+      "sha256": "55dcbf93d12a9c67b894f6eadfdc67b1fa99ad9b232d3a9cf59c6718eb22c845",
+      "bounds": [
+        44,
+        52,
+        125,
+        115
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        777,
+        285
+      ]
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_left_1.png",
+      "sha256": "a066439994b62f3e6bf15a5a0956882a7a536a7e1af7ccf77afa83913433124b",
+      "bounds": [
+        43,
+        51,
+        122,
+        115
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1088,
+        286
+      ]
+    },
+    {
+      "name": "death_left_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_left_0.png",
+      "sha256": "1e5e95a8078adb11f444cf9018d47b44cef8ee3f1a174bd73bf4eb3368598422",
+      "bounds": [
+        37,
+        46,
+        124,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        164,
+        1206
+      ]
+    },
+    {
+      "name": "death_left_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_left_1.png",
+      "sha256": "8714e5792a505bcaf2a11fd56ed0f3de73b99748c328efe1a1b15862371aae1e",
+      "bounds": [
+        37,
+        59,
+        123,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        468,
+        1208
+      ]
+    },
+    {
+      "name": "death_left_2",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_left_2.png",
+      "sha256": "a0f0ecc4093cea5155628ab1cb992b3e92ccddc1b540677c51e66b9a49ce8f82",
+      "bounds": [
+        35,
+        68,
+        124,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        785,
+        1221
+      ]
+    },
+    {
+      "name": "death_left_3",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_left_3.png",
+      "sha256": "fbcd552587963a4fd688af441d4fd0a5ca6d3597fafe4df3e917c6154322abaf",
+      "bounds": [
+        37,
+        74,
+        123,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1092,
+        1219
+      ]
+    },
+    {
+      "name": "idle_right_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_right_0.png",
+      "sha256": "da7550217dfafa9d16e48aded6a7408f1be9b3e2ad0de2b44f69fd91046763a7",
+      "bounds": [
+        39,
+        47,
+        123,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        163,
+        294
+      ]
+    },
+    {
+      "name": "idle_right_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_right_1.png",
+      "sha256": "8bdbde90f89a0f9ec3365350592075bd7093a8e0b0b9a692fcfb30345db77bbe",
+      "bounds": [
+        42,
+        47,
+        124,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        469,
+        294
+      ]
+    },
+    {
+      "name": "walk_right_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_right_0.png",
+      "sha256": "2b0157bbd1b4b13cc28fea3948e7dd0bbcde523b68d0bbc7cc4859792fce304a",
+      "bounds": [
+        25,
+        48,
+        114,
+        115
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_corrected_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        308,
+        810
+      ]
+    },
+    {
+      "name": "walk_right_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_right_1.png",
+      "sha256": "55461213e6dd2cab8d0efe6876c9b48d96240d19f1282cb27152bd84c44a937d",
+      "bounds": [
+        31,
+        48,
+        109,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_corrected_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        729,
+        809
+      ]
+    },
+    {
+      "name": "walk_right_2",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_right_2.png",
+      "sha256": "eb172d4045c03ef4a35cc0336e9a8d1c9dbf3a8ac58f860b9af73294c1f296e9",
+      "bounds": [
+        31,
+        47,
+        112,
+        115
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_corrected_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        1144,
+        808
+      ]
+    },
+    {
+      "name": "walk_right_3",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_right_3.png",
+      "sha256": "dbe7b9fedd35187feecd60c728074cb119d18835a82ba96067634c549b31d6de",
+      "bounds": [
+        40,
+        46,
+        118,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_corrected_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1548,
+        815
+      ]
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_right_0.png",
+      "sha256": "4742aaaea09fbec7cfef3d0d522fad3e1ff396859debbad6d06a916751067a9b",
+      "bounds": [
+        49,
+        29,
+        128,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        140,
+        917
+      ]
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_right_1.png",
+      "sha256": "3a7633b0bec29bf81c8ff3837016dd9154ac88617afc72b65056dd811cde9a4d",
+      "bounds": [
+        64,
+        36,
+        136,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        438,
+        917
+      ]
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_right_2.png",
+      "sha256": "2df78f9b4cac7785fadee2cc21311ba2d6f3c8515858a4b599c703d9ef6a5ac7",
+      "bounds": [
+        40,
+        62,
+        121,
+        117
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        807,
+        916
+      ]
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_right_3.png",
+      "sha256": "10f466d52ad241617a12169c0a4d595b8db03d3eee2aada5791dd010d3e7fede",
+      "bounds": [
+        48,
+        49,
+        125,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1060,
+        914
+      ]
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_right_0.png",
+      "sha256": "549cdf501256fac84133a76cc0689191b653b7a184a3c4fbaece0d85e6f23a30",
+      "bounds": [
+        39,
+        57,
+        123,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_corrected_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        229,
+        400
+      ]
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_right_1.png",
+      "sha256": "a49d6b6adc81561b6dab2c7661d2b9e0440e462e0bb0004a87cb567232b71756",
+      "bounds": [
+        25,
+        46,
+        111,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_corrected_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        750,
+        408
+      ]
+    },
+    {
+      "name": "death_right_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_right_0.png",
+      "sha256": "68ff48b4cfefd6c9222cdff3a97452901ba180fd238d84bf0138d40826bda0a3",
+      "bounds": [
+        38,
+        48,
+        122,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        166,
+        1211
+      ]
+    },
+    {
+      "name": "death_right_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_right_1.png",
+      "sha256": "2718513c98aaa32c15369fe6a0d239f50814017f12978064db83601ffa029e77",
+      "bounds": [
+        37,
+        59,
+        122,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        486,
+        1211
+      ]
+    },
+    {
+      "name": "death_right_2",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_right_2.png",
+      "sha256": "d1ceb78160495c7c283bb2e7276282cbf207999055da7b7195ce04cb0c364322",
+      "bounds": [
+        40,
+        66,
+        120,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        788,
+        1220
+      ]
+    },
+    {
+      "name": "death_right_3",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_right_3.png",
+      "sha256": "efc52f3613d194e907662f092137d5540785baa65d1b1cd647244df742a2c11a",
+      "bounds": [
+        38,
+        76,
+        122,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1093,
+        1211
+      ]
+    },
+    {
+      "name": "idle_up_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_up_0.png",
+      "sha256": "069d3b8ea2d0557456955b8fea09c49c5a729110a24187ba35f4b2cbc7aff744",
+      "bounds": [
+        37,
+        47,
+        122,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_v2.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        276,
+        396
+      ]
+    },
+    {
+      "name": "idle_up_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_up_1.png",
+      "sha256": "42b04bef2cd0ee9d62a503eb1510691c8de768bc4fb1bc43761217bbe9396e0f",
+      "bounds": [
+        43,
+        48,
+        125,
+        114
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_v2.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        672,
+        394
+      ]
+    },
+    {
+      "name": "walk_up_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_up_0.png",
+      "sha256": "aa48c52c73ca794649f73875a653cce1b2b76afde96de2a11c6bc063824ea6bc",
+      "bounds": [
+        44,
+        51,
+        127,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_v2.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        242,
+        812
+      ]
+    },
+    {
+      "name": "walk_up_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_up_1.png",
+      "sha256": "290e88f0f1398bc26144fe125b6cdbe5bafbf546104cbd024dc41160102989ef",
+      "bounds": [
+        59,
+        46,
+        144,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_v2.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        596,
+        812
+      ]
+    },
+    {
+      "name": "walk_up_2",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_up_2.png",
+      "sha256": "adbca8bcc06ec2d0ebd8ed85e8c1b50cb635c8a1972a4299e396853fff4f46d8",
+      "bounds": [
+        45,
+        50,
+        132,
+        114
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_v2.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        1080,
+        813
+      ]
+    },
+    {
+      "name": "walk_up_3",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_up_3.png",
+      "sha256": "001988f0b37309f95575235814ab854435c8b94028bde1e7b9e64c6c9f030035",
+      "bounds": [
+        64,
+        48,
+        140,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_v2.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1460,
+        820
+      ]
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_up_0.png",
+      "sha256": "43351214b9e345a3886dab40f32c6676d8f1839a3180e8b0921e7822892f44fd",
+      "bounds": [
+        58,
+        26,
+        126,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        126,
+        912
+      ]
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_up_1.png",
+      "sha256": "42376c2fb9ead9beea1b0f7438d8730bb40a939b94abc9109d1008ad62f8f7aa",
+      "bounds": [
+        66,
+        49,
+        121,
+        114
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        444,
+        905
+      ]
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_up_2.png",
+      "sha256": "08ae4e32c22752f66d6f0846043c39c7b568c270c0111e7817ed0c6bf6df2d19",
+      "bounds": [
+        54,
+        58,
+        123,
+        118
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        745,
+        912
+      ]
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_up_3.png",
+      "sha256": "1b8538c51aebacfa2a57322b5cdab1bd3939c68de153d8ea39710227ac7c598d",
+      "bounds": [
+        44,
+        46,
+        121,
+        113
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1055,
+        912
+      ]
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_up_0.png",
+      "sha256": "6afafaeb46294ba546ad76d9eb6811fb4bd1a1b271c847ba6f5dfe9c9cc5f92c",
+      "bounds": [
+        39,
+        52,
+        128,
+        114
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_v2.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        1102,
+        406
+      ]
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_up_1.png",
+      "sha256": "d5b98aaded3670bb3b6ac256d825b2e926cd34f793b8d63eba92a061ac04b7a8",
+      "bounds": [
+        33,
+        51,
+        119,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_v2.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1565,
+        402
+      ]
+    },
+    {
+      "name": "death_up_0",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_up_0.png",
+      "sha256": "251f14310a29fc9411f45f329729b80ce56996a8ec4e9468ce3bd086aa31ac5a",
+      "bounds": [
+        42,
+        54,
+        117,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        158,
+        1203
+      ]
+    },
+    {
+      "name": "death_up_1",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_up_1.png",
+      "sha256": "4afbea18613e2ae8a42ce17c0b1005b797d300bbaa376caf0942e6fe75b688af",
+      "bounds": [
+        38,
+        59,
+        122,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        452,
+        1204
+      ]
+    },
+    {
+      "name": "death_up_2",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_up_2.png",
+      "sha256": "82546d54804c29f3f240e6303cba552912cda0ba36fdcfc496078f0f054c22d4",
+      "bounds": [
+        40,
+        69,
+        120,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        774,
+        1220
+      ]
+    },
+    {
+      "name": "death_up_3",
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_up_3.png",
+      "sha256": "316aaf7ad98c93aca4482743776e67309ba825e6bed7ab12816f010496e29171",
+      "bounds": [
+        38,
+        78,
+        122,
+        112
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sourceConceptSha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1",
+      "sourceImage": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1087,
+        1221
+      ]
+    }
+  ],
+  "animationAudit": [
+    {
+      "tag": "idle_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    }
+  ],
+  "sourceScales": {
+    "down": 0.308411214953271,
+    "left": 0.3013698630136986,
+    "right": 0.29333333333333333,
+    "up": 0.28695652173913044,
+    "down_corrected": 0.2078740157480315,
+    "right_corrected": 0.2129032258064516,
+    "up_locomotion": 0.20754716981132076
+  },
+  "generatedSources": {
+    "down": {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "left": {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "right": {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "up": {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "down_corrected": {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_corrected_v1.png",
+      "expected": 8,
+      "rows": 2,
+      "cols": 4,
+      "referenceIndices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "right_corrected": {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_corrected_v1.png",
+      "expected": 8,
+      "rows": 2,
+      "cols": 4,
+      "referenceIndices": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "up_locomotion": {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_v2.png",
+      "expected": 8,
+      "rows": 2,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    }
+  },
+  "runtimeIntegration": true,
+  "rejectedSourceFrames": {
+    "down_v1.png": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "right_v1.png": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "up_v1.png": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "up_corrected_v1.png": "Rejected failed handedness edit"
+  },
+  "provenance": "Original AI-assisted raster poses using approved concept images directly. Aseprite extracts masked generated pixels, removes alpha below220, preserves retained RGB, uses fixed nearest source scales and aligns feet. No concept-board crops used as frames; no commercial sprite pack or exclusive copyright claim.",
+  "notes": [
+    "Vanguard down/right walk and hurt plus up idle/walk/hurt use corrected persistent-right-hand blade sources."
+  ],
+  "generatedSourceHashes": {
+    "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png": "aeeb29a89dc9d415b44d8986a48d74c46d9d43db877682627f233a9b6ed9c8bc",
+    "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png": "9c9d297fba3ec3fce1b7408eb1ac2fbeb89153ac4299b718554d656614176756",
+    "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png": "6b3a7832f06903b491d64821dfed64a82501d95f5d0d3234b95e9c67518c81ab",
+    "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_v1.png": "d43540ede75a24dd210b88d205ece72582af7e55e8eb9042a39223643eaa45aa",
+    "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_corrected_v1.png": "7234e06b3c15ca38ef7cdc1ceee1fa0395f0d484cbc5f1614b8eebad80c1b87d",
+    "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_corrected_v1.png": "0b3f758747c8661e8e43ee0cb9a0230db6e1dd90e87c51b26e1e197e1348b350",
+    "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_v2.png": "1d6253a7e23fd8c51eddb243c67e3501efeb1db334fe205309a78c34c3fb7af8"
+  },
+  "textureKey": "creep_demon_vanguard",
+  "animationKeys": [
+    "creep_demon_vanguard:idle:down",
+    "creep_demon_vanguard:walk:down",
+    "creep_demon_vanguard:basic_attack:down",
+    "creep_demon_vanguard:hurt:down",
+    "creep_demon_vanguard:death:down",
+    "creep_demon_vanguard:idle:left",
+    "creep_demon_vanguard:walk:left",
+    "creep_demon_vanguard:basic_attack:left",
+    "creep_demon_vanguard:hurt:left",
+    "creep_demon_vanguard:death:left",
+    "creep_demon_vanguard:idle:right",
+    "creep_demon_vanguard:walk:right",
+    "creep_demon_vanguard:basic_attack:right",
+    "creep_demon_vanguard:hurt:right",
+    "creep_demon_vanguard:death:right",
+    "creep_demon_vanguard:idle:up",
+    "creep_demon_vanguard:walk:up",
+    "creep_demon_vanguard:basic_attack:up",
+    "creep_demon_vanguard:hurt:up",
+    "creep_demon_vanguard:death:up"
+  ],
+  "finalDirectorApproval": "Not claimed; user auto-approval covers concepts and immediate batch production.",
+  "presentationCues": {
+    "cleave": "basic_attack_* frames0-1",
+    "heavyImpact": "basic_attack_* frame2",
+    "recovery": "basic_attack_* frame3"
+  },
+  "runtimeVerification": {
+    "status": "PASS",
+    "date": "2026-10-31",
+    "evidence": "docs/evidence/phase1j-integration/integration_verification.json",
+    "observedAnimationTags": 20,
+    "observedFrames": 64,
+    "sixRealClients": true,
+    "naturalCombatVerified": true,
+    "nativeScale": 1,
+    "nearestFiltering": true,
+    "serverStatsUnchanged": true
+  }
+}

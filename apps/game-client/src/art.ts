@@ -1,8 +1,16 @@
 import Phaser from 'phaser';
 import { preloadBambooForestArt } from './dungeon-presentation.js';
+import { preloadSkillArt, registerSkillArt } from './skill-vfx.js';
+import type { ArenaCreepManifest } from './arena-creeps.js';
 export const actorSheets = [
   { id: 'hero_cai_bang', folder: 'characters' },
   { id: 'hero_cai_bang_chuong', folder: 'characters' },
+  { id: 'hero_thien_son', folder: 'characters' },
+  { id: 'hero_thien_son_dao', folder: 'characters' },
+  { id: 'hero_vo_dang', folder: 'characters' },
+  { id: 'hero_vo_dang_kiem', folder: 'characters' },
+  { id: 'hero_thieu_lam', folder: 'characters' },
+  { id: 'hero_thieu_lam_dao', folder: 'characters' },
   { id: 'creep_outlaw', folder: 'enemies' },
 ] as const;
 export const poses = [
@@ -14,24 +22,47 @@ export const poses = [
   'death',
 ] as const;
 export const facings = ['down', 'left', 'right', 'up'] as const;
+// Explicit art-review variant only; never sends a weapon/loadout command.
+const artQuery = new URLSearchParams(location.search);
+const reviewDao =
+  artQuery.has('debug') && artQuery.get('thienSonWeapon') === 'dao';
+const reviewKiem =
+  artQuery.has('debug') && artQuery.get('voDangWeapon') === 'kiem';
+const reviewThieuLamDao =
+  artQuery.has('debug') && artQuery.get('thieuLamWeapon') === 'dao';
 export function heroTexture(
   basicId?: string,
-): 'hero_cai_bang' | 'hero_cai_bang_chuong' {
+  schoolId?: string,
+):
+  | 'hero_cai_bang'
+  | 'hero_cai_bang_chuong'
+  | 'hero_thien_son'
+  | 'hero_thien_son_dao'
+  | 'hero_vo_dang'
+  | 'hero_vo_dang_kiem'
+  | 'hero_thieu_lam'
+  | 'hero_thieu_lam_dao' {
+  if (schoolId === 'thieu_lam' || basicId?.startsWith('thieu_lam_'))
+    return basicId === 'thieu_lam_dao' || reviewThieuLamDao
+      ? 'hero_thieu_lam_dao'
+      : 'hero_thieu_lam';
+  if (schoolId === 'vo_dang' || basicId?.startsWith('vo_dang_'))
+    return basicId === 'vo_dang_kiem' || reviewKiem
+      ? 'hero_vo_dang_kiem'
+      : 'hero_vo_dang';
+  if (schoolId === 'thien_son' || basicId?.startsWith('thien_son_'))
+    return basicId === 'thien_son_dao' || reviewDao
+      ? 'hero_thien_son_dao'
+      : 'hero_thien_son';
   return basicId === 'cai_bang_chuong'
     ? 'hero_cai_bang_chuong'
     : 'hero_cai_bang';
 }
-export function facing(x: number, y: number): string {
-  return Math.abs(x) >= Math.abs(y)
-    ? x < 0
-      ? 'left'
-      : 'right'
-    : y < 0
-      ? 'up'
-      : 'down';
-}
+export { facing } from './facing.js';
 export function preloadArt(scene: Phaser.Scene): void {
   preloadBambooForestArt(scene);
+  preloadSkillArt(scene);
+  scene.load.pack('arena_creep_pack', '/assets/arena_creeps/pack.json');
   scene.load.image('arena_ground_art01', '/assets/arena_v2/ground.png');
   scene.load.atlas(
     'arena_world_art01',
@@ -108,11 +139,16 @@ export function actorFootPivot(
   id: string,
 ): [number, number] {
   const manifest = scene.cache.json.get('art_manifest') as Manifest;
-  const entry = manifest.assets.find((asset) => asset.id === id);
+  const creeps = scene.cache.json.get('arena_creeps_manifest') as
+    ArenaCreepManifest | undefined;
+  const entry =
+    manifest.assets.find((asset) => asset.id === id) ??
+    creeps?.assets.find((asset) => asset.id === id);
   if (!entry) throw new Error(`Missing actor pivot: ${id}`);
   return entry.footPivot;
 }
 export function registerArt(scene: Phaser.Scene): void {
+  registerSkillArt(scene);
   for (const id of [
     'arena_ground_art01',
     'arena_world_art01',
@@ -159,6 +195,45 @@ export function registerArt(scene: Phaser.Scene): void {
         repeat: anim.repeat,
       });
     }
+  }
+  const creeps = scene.cache.json.get(
+    'arena_creeps_manifest',
+  ) as ArenaCreepManifest;
+  for (const entry of creeps.assets) {
+    scene.textures.get(entry.id).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    for (const anim of entry.animations) {
+      const key = `${entry.id}:${anim.state}:${anim.direction}`;
+      for (const frame of anim.frames)
+        if (!scene.textures.get(entry.id).has(frame))
+          throw new Error(`Missing ${entry.id}/${frame}`);
+      if (!scene.anims.exists(key))
+        scene.anims.create({
+          key,
+          frames: anim.frames.map((frame) => ({ key: entry.id, frame })),
+          frameRate: anim.frameRate,
+          repeat: anim.repeat,
+        });
+    }
+  }
+  scene.textures
+    .get('arena_creep_impacts')
+    .setFilter(Phaser.Textures.FilterMode.NEAREST);
+  for (const effect of creeps.effects) {
+    const texture = effect.texture ?? 'arena_creep_impacts';
+    scene.textures.get(texture).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    for (const frame of effect.frames)
+      if (!scene.textures.get(texture).has(frame))
+        throw new Error(`Missing ${texture}/${frame}`);
+    if (!scene.anims.exists(effect.id))
+      scene.anims.create({
+        key: effect.id,
+        frames: effect.frames.map((frame) => ({
+          key: texture,
+          frame,
+        })),
+        frameRate: effect.frameRate,
+        repeat: effect.repeat ?? 0,
+      });
   }
   for (const id of [
     'tree',

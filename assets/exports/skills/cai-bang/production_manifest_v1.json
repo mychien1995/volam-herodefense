@@ -1,0 +1,4380 @@
+{
+  "schemaVersion": 1,
+  "createdOn": "2026-10-30",
+  "scope": "Isolated skill asset production and preview only",
+  "conceptApproval": "User approved all ten Phase A concepts",
+  "productionArtApproved": false,
+  "runtimeIntegrated": false,
+  "assets": [
+    {
+      "id": "shared_fire_vfx",
+      "skillId": "shared_fire",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "vfx",
+      "source": "assets/source/skills/cai-bang/shared_fire/vfx/shared_fire_vfx.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/shared_fire/shared_fire_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/shared_fire/shared_fire_vfx.json",
+      "frameDimensions": [
+        64,
+        64
+      ],
+      "pivot": [
+        32,
+        32
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "palm_flash_right",
+          "frames": [
+            "palm_flash_right_0",
+            "palm_flash_right_1",
+            "palm_flash_right_2",
+            "palm_flash_right_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 18.181818181818183,
+          "durationMsPerFrame": 55,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            18,
+            -21
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "palm_flash_down",
+          "frames": [
+            "palm_flash_down_0",
+            "palm_flash_down_1",
+            "palm_flash_down_2",
+            "palm_flash_down_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 18.181818181818183,
+          "durationMsPerFrame": 55,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -9
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "palm_flash_left",
+          "frames": [
+            "palm_flash_left_0",
+            "palm_flash_left_1",
+            "palm_flash_left_2",
+            "palm_flash_left_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 18.181818181818183,
+          "durationMsPerFrame": 55,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            -18,
+            -21
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "palm_flash_up",
+          "frames": [
+            "palm_flash_up_0",
+            "palm_flash_up_1",
+            "palm_flash_up_2",
+            "palm_flash_up_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 18.181818181818183,
+          "durationMsPerFrame": 55,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "release",
+          "placement": "caster_hand",
+          "effectPlacementOffset": [
+            0,
+            -33
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "small_impact_right",
+          "frames": [
+            "small_impact_right_0",
+            "small_impact_right_1",
+            "small_impact_right_2",
+            "small_impact_right_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 16.666666666666668,
+          "durationMsPerFrame": 60,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "small_impact_down",
+          "frames": [
+            "small_impact_down_0",
+            "small_impact_down_1",
+            "small_impact_down_2",
+            "small_impact_down_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 16.666666666666668,
+          "durationMsPerFrame": 60,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "small_impact_left",
+          "frames": [
+            "small_impact_left_0",
+            "small_impact_left_1",
+            "small_impact_left_2",
+            "small_impact_left_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 16.666666666666668,
+          "durationMsPerFrame": 60,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "small_impact_up",
+          "frames": [
+            "small_impact_up_0",
+            "small_impact_up_1",
+            "small_impact_up_2",
+            "small_impact_up_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 16.666666666666668,
+          "durationMsPerFrame": 60,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "burn_flecks",
+          "frames": [
+            "burn_flecks_0",
+            "burn_flecks_1",
+            "burn_flecks_2",
+            "burn_flecks_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 11.11111111111111,
+          "durationMsPerFrame": 90,
+          "loop": true,
+          "repeat": -1,
+          "direction": "none",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "burn",
+          "placement": "ground",
+          "effectPlacementOffset": [
+            0,
+            -2
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "provenance": {
+        "method": "OpenAI built-in image_gen.imagegen; Aseprite 1.3.18.6 packing",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "hoa_van_chuong_vfx",
+      "skillId": "hoa_van_chuong",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "vfx",
+      "source": "assets/source/skills/cai-bang/hoa_van_chuong/vfx/hoa_van_chuong_vfx.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/hoa_van_chuong/hoa_van_chuong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/hoa_van_chuong/hoa_van_chuong_vfx.json",
+      "frameDimensions": [
+        64,
+        64
+      ],
+      "pivot": [
+        32,
+        32
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "projectile_right",
+          "frames": [
+            "projectile_right_0",
+            "projectile_right_1",
+            "projectile_right_2",
+            "projectile_right_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": true,
+          "repeat": -1,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "travel",
+          "placement": "projectile_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "projectile_down",
+          "frames": [
+            "projectile_down_0",
+            "projectile_down_1",
+            "projectile_down_2",
+            "projectile_down_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": true,
+          "repeat": -1,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "travel",
+          "placement": "projectile_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "projectile_left",
+          "frames": [
+            "projectile_left_0",
+            "projectile_left_1",
+            "projectile_left_2",
+            "projectile_left_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": true,
+          "repeat": -1,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "travel",
+          "placement": "projectile_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "projectile_up",
+          "frames": [
+            "projectile_up_0",
+            "projectile_up_1",
+            "projectile_up_2",
+            "projectile_up_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": true,
+          "repeat": -1,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "travel",
+          "placement": "projectile_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact",
+          "frames": [
+            "impact_0",
+            "impact_1",
+            "impact_2",
+            "impact_3"
+          ],
+          "frameDimensions": [
+            64,
+            64
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": false,
+          "repeat": 0,
+          "direction": "none",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            32,
+            32
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "provenance": {
+        "method": "OpenAI built-in image_gen.imagegen; Aseprite 1.3.18.6 packing",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "hoa_van_chuong_character",
+      "skillId": "hoa_van_chuong",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "character",
+      "source": "assets/source/skills/cai-bang/hoa_van_chuong/character/hoa_van_chuong_character.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/hoa_van_chuong/hoa_van_chuong_character.png",
+      "atlas": "assets/exports/skills/cai-bang/hoa_van_chuong/hoa_van_chuong_character.json",
+      "frameDimensions": [
+        80,
+        80
+      ],
+      "pivot": [
+        40,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "cast_down_0",
+            "cast_down_1",
+            "cast_down_2",
+            "cast_down_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "cast_left_0",
+            "cast_left_1",
+            "cast_left_2",
+            "cast_left_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "cast_right_0",
+            "cast_right_1",
+            "cast_right_2",
+            "cast_right_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "cast_up_0",
+            "cast_up_1",
+            "cast_up_2",
+            "cast_up_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        }
+      ],
+      "provenance": {
+        "method": "reuse_approved_raster_frames",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "cuong_long_loan_vu_vfx",
+      "skillId": "cuong_long_loan_vu",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "vfx",
+      "source": "assets/source/skills/cai-bang/cuong_long_loan_vu/vfx/cuong_long_loan_vu_vfx.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/cuong_long_loan_vu/cuong_long_loan_vu_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/cuong_long_loan_vu/cuong_long_loan_vu_vfx.json",
+      "frameDimensions": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "projectile_right",
+          "frames": [
+            "projectile_right_0",
+            "projectile_right_1",
+            "projectile_right_2",
+            "projectile_right_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": true,
+          "repeat": -1,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "travel",
+          "placement": "projectile_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "projectile_down",
+          "frames": [
+            "projectile_down_0",
+            "projectile_down_1",
+            "projectile_down_2",
+            "projectile_down_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": true,
+          "repeat": -1,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "travel",
+          "placement": "projectile_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "projectile_left",
+          "frames": [
+            "projectile_left_0",
+            "projectile_left_1",
+            "projectile_left_2",
+            "projectile_left_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": true,
+          "repeat": -1,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "travel",
+          "placement": "projectile_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "projectile_up",
+          "frames": [
+            "projectile_up_0",
+            "projectile_up_1",
+            "projectile_up_2",
+            "projectile_up_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": true,
+          "repeat": -1,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "travel",
+          "placement": "projectile_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact",
+          "frames": [
+            "impact_0",
+            "impact_1",
+            "impact_2",
+            "impact_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": false,
+          "repeat": 0,
+          "direction": "none",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "provenance": {
+        "method": "OpenAI built-in image_gen.imagegen; Aseprite 1.3.18.6 packing",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "cuong_long_loan_vu_character",
+      "skillId": "cuong_long_loan_vu",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "character",
+      "source": "assets/source/skills/cai-bang/cuong_long_loan_vu/character/cuong_long_loan_vu_character.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/cuong_long_loan_vu/cuong_long_loan_vu_character.png",
+      "atlas": "assets/exports/skills/cai-bang/cuong_long_loan_vu/cuong_long_loan_vu_character.json",
+      "frameDimensions": [
+        80,
+        80
+      ],
+      "pivot": [
+        40,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "cast_down_0",
+            "cast_down_1",
+            "cast_down_2",
+            "cast_down_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "cast_left_0",
+            "cast_left_1",
+            "cast_left_2",
+            "cast_left_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "cast_right_0",
+            "cast_right_1",
+            "cast_right_2",
+            "cast_right_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "cast_up_0",
+            "cast_up_1",
+            "cast_up_2",
+            "cast_up_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        }
+      ],
+      "provenance": {
+        "method": "reuse_approved_raster_frames",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "phi_long_tai_thien_vfx",
+      "skillId": "phi_long_tai_thien",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "vfx",
+      "source": "assets/source/skills/cai-bang/phi_long_tai_thien/vfx/phi_long_tai_thien_vfx.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/phi_long_tai_thien/phi_long_tai_thien_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/phi_long_tai_thien/phi_long_tai_thien_vfx.json",
+      "frameDimensions": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "wave_right",
+          "frames": [
+            "wave_right_0",
+            "wave_right_1",
+            "wave_right_2",
+            "wave_right_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "travel",
+          "placement": "wave_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "wave_down",
+          "frames": [
+            "wave_down_0",
+            "wave_down_1",
+            "wave_down_2",
+            "wave_down_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "travel",
+          "placement": "wave_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "wave_left",
+          "frames": [
+            "wave_left_0",
+            "wave_left_1",
+            "wave_left_2",
+            "wave_left_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "travel",
+          "placement": "wave_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "wave_up",
+          "frames": [
+            "wave_up_0",
+            "wave_up_1",
+            "wave_up_2",
+            "wave_up_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "travel",
+          "placement": "wave_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_right",
+          "frames": [
+            "impact_right_0",
+            "impact_right_1",
+            "impact_right_2",
+            "impact_right_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "impact_down_0",
+            "impact_down_1",
+            "impact_down_2",
+            "impact_down_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "impact_left_0",
+            "impact_left_1",
+            "impact_left_2",
+            "impact_left_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "impact_up_0",
+            "impact_up_1",
+            "impact_up_2",
+            "impact_up_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "provenance": {
+        "method": "OpenAI built-in image_gen.imagegen; Aseprite 1.3.18.6 packing",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "phi_long_tai_thien_character",
+      "skillId": "phi_long_tai_thien",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "character",
+      "source": "assets/source/skills/cai-bang/phi_long_tai_thien/character/phi_long_tai_thien_character.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/phi_long_tai_thien/phi_long_tai_thien_character.png",
+      "atlas": "assets/exports/skills/cai-bang/phi_long_tai_thien/phi_long_tai_thien_character.json",
+      "frameDimensions": [
+        80,
+        80
+      ],
+      "pivot": [
+        40,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "cast_down_0",
+            "cast_down_1",
+            "cast_down_2",
+            "cast_down_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "cast_left_0",
+            "cast_left_1",
+            "cast_left_2",
+            "cast_left_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "cast_right_0",
+            "cast_right_1",
+            "cast_right_2",
+            "cast_right_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "cast_up_0",
+            "cast_up_1",
+            "cast_up_2",
+            "cast_up_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        }
+      ],
+      "provenance": {
+        "method": "reuse_approved_raster_frames",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "hang_long_hoa_vu_vfx",
+      "skillId": "hang_long_hoa_vu",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "vfx",
+      "source": "assets/source/skills/cai-bang/hang_long_hoa_vu/vfx/hang_long_hoa_vu_vfx.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/hang_long_hoa_vu/hang_long_hoa_vu_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/hang_long_hoa_vu/hang_long_hoa_vu_vfx.json",
+      "frameDimensions": [
+        160,
+        160
+      ],
+      "pivot": [
+        80,
+        80
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "wave_right",
+          "frames": [
+            "wave_right_0",
+            "wave_right_1",
+            "wave_right_2",
+            "wave_right_3"
+          ],
+          "frameDimensions": [
+            160,
+            160
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            80,
+            80
+          ],
+          "stage": "travel",
+          "placement": "wave_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "wave_down",
+          "frames": [
+            "wave_down_0",
+            "wave_down_1",
+            "wave_down_2",
+            "wave_down_3"
+          ],
+          "frameDimensions": [
+            160,
+            160
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            80,
+            80
+          ],
+          "stage": "travel",
+          "placement": "wave_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "wave_left",
+          "frames": [
+            "wave_left_0",
+            "wave_left_1",
+            "wave_left_2",
+            "wave_left_3"
+          ],
+          "frameDimensions": [
+            160,
+            160
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            80,
+            80
+          ],
+          "stage": "travel",
+          "placement": "wave_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "wave_up",
+          "frames": [
+            "wave_up_0",
+            "wave_up_1",
+            "wave_up_2",
+            "wave_up_3"
+          ],
+          "frameDimensions": [
+            160,
+            160
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            80,
+            80
+          ],
+          "stage": "travel",
+          "placement": "wave_world_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_right",
+          "frames": [
+            "impact_right_0",
+            "impact_right_1",
+            "impact_right_2",
+            "impact_right_3"
+          ],
+          "frameDimensions": [
+            160,
+            160
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            80,
+            80
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "impact_down_0",
+            "impact_down_1",
+            "impact_down_2",
+            "impact_down_3"
+          ],
+          "frameDimensions": [
+            160,
+            160
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            80,
+            80
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "impact_left_0",
+            "impact_left_1",
+            "impact_left_2",
+            "impact_left_3"
+          ],
+          "frameDimensions": [
+            160,
+            160
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            80,
+            80
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "impact_up_0",
+            "impact_up_1",
+            "impact_up_2",
+            "impact_up_3"
+          ],
+          "frameDimensions": [
+            160,
+            160
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            80,
+            80
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "provenance": {
+        "method": "OpenAI built-in image_gen.imagegen; Aseprite 1.3.18.6 packing",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "hang_long_hoa_vu_character",
+      "skillId": "hang_long_hoa_vu",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "character",
+      "source": "assets/source/skills/cai-bang/hang_long_hoa_vu/character/hang_long_hoa_vu_character.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/hang_long_hoa_vu/hang_long_hoa_vu_character.png",
+      "atlas": "assets/exports/skills/cai-bang/hang_long_hoa_vu/hang_long_hoa_vu_character.json",
+      "frameDimensions": [
+        80,
+        80
+      ],
+      "pivot": [
+        40,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "cast_down_0",
+            "cast_down_1",
+            "cast_down_2",
+            "cast_down_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "cast_left_0",
+            "cast_left_1",
+            "cast_left_2",
+            "cast_left_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "cast_right_0",
+            "cast_right_1",
+            "cast_right_2",
+            "cast_right_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "cast_up_0",
+            "cast_up_1",
+            "cast_up_2",
+            "cast_up_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        }
+      ],
+      "provenance": {
+        "method": "reuse_approved_raster_frames",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "khang_long_huu_hoi_vfx",
+      "skillId": "khang_long_huu_hoi",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "vfx",
+      "source": "assets/source/skills/cai-bang/khang_long_huu_hoi/vfx/khang_long_huu_hoi_vfx.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/khang_long_huu_hoi/khang_long_huu_hoi_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/khang_long_huu_hoi/khang_long_huu_hoi_vfx.json",
+      "frameDimensions": [
+        96,
+        96
+      ],
+      "pivot": [
+        48,
+        48
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "activation",
+          "frames": [
+            "activation_0",
+            "activation_1",
+            "activation_2",
+            "activation_3"
+          ],
+          "frameDimensions": [
+            96,
+            96
+          ],
+          "frameCount": 4,
+          "frameRate": 12.5,
+          "durationMsPerFrame": 80,
+          "loop": false,
+          "repeat": 0,
+          "direction": "none",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            48,
+            48
+          ],
+          "stage": "buff_activation",
+          "placement": "caster_body",
+          "effectPlacementOffset": [
+            0,
+            -22
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "buff",
+          "frames": [
+            "buff_0",
+            "buff_1",
+            "buff_2",
+            "buff_3"
+          ],
+          "frameDimensions": [
+            96,
+            96
+          ],
+          "frameCount": 4,
+          "frameRate": 9.090909090909092,
+          "durationMsPerFrame": 110,
+          "loop": true,
+          "repeat": -1,
+          "direction": "none",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            48,
+            48
+          ],
+          "stage": "buff_loop",
+          "placement": "caster_body",
+          "effectPlacementOffset": [
+            0,
+            -22
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "provenance": {
+        "method": "OpenAI built-in image_gen.imagegen; Aseprite 1.3.18.6 packing",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "khang_long_huu_hoi_character",
+      "skillId": "khang_long_huu_hoi",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "character",
+      "source": "assets/source/skills/cai-bang/khang_long_huu_hoi/character/khang_long_huu_hoi_character.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/khang_long_huu_hoi/khang_long_huu_hoi_character.png",
+      "atlas": "assets/exports/skills/cai-bang/khang_long_huu_hoi/khang_long_huu_hoi_character.json",
+      "frameDimensions": [
+        80,
+        80
+      ],
+      "pivot": [
+        40,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "cast_down_0",
+            "cast_down_1",
+            "cast_down_2",
+            "cast_down_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "cast_left_0",
+            "cast_left_1",
+            "cast_left_2",
+            "cast_left_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "cast_right_0",
+            "cast_right_1",
+            "cast_right_2",
+            "cast_right_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "cast_up_0",
+            "cast_up_1",
+            "cast_up_2",
+            "cast_up_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang_chuong.json"
+        }
+      ],
+      "provenance": {
+        "method": "reuse_approved_raster_frames",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "hoanh_tao_bong_vfx",
+      "skillId": "hoanh_tao_bong",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "vfx",
+      "source": "assets/source/skills/cai-bang/hoanh_tao_bong/vfx/hoanh_tao_bong_vfx.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/hoanh_tao_bong/hoanh_tao_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/hoanh_tao_bong/hoanh_tao_bong_vfx.json",
+      "frameDimensions": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "sweep_right",
+          "frames": [
+            "sweep_right_0",
+            "sweep_right_1",
+            "sweep_right_2",
+            "sweep_right_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "staff_sweep",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            20,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "sweep_down",
+          "frames": [
+            "sweep_down_0",
+            "sweep_down_1",
+            "sweep_down_2",
+            "sweep_down_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "staff_sweep",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            2
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "sweep_left",
+          "frames": [
+            "sweep_left_0",
+            "sweep_left_1",
+            "sweep_left_2",
+            "sweep_left_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "staff_sweep",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            -20,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "sweep_up",
+          "frames": [
+            "sweep_up_0",
+            "sweep_up_1",
+            "sweep_up_2",
+            "sweep_up_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "staff_sweep",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -38
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_right",
+          "frames": [
+            "impact_right_0",
+            "impact_right_1",
+            "impact_right_2",
+            "impact_right_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 16.666666666666668,
+          "durationMsPerFrame": 60,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "impact_down_0",
+            "impact_down_1",
+            "impact_down_2",
+            "impact_down_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 16.666666666666668,
+          "durationMsPerFrame": 60,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "impact_left_0",
+            "impact_left_1",
+            "impact_left_2",
+            "impact_left_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 16.666666666666668,
+          "durationMsPerFrame": 60,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "impact_up_0",
+            "impact_up_1",
+            "impact_up_2",
+            "impact_up_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 16.666666666666668,
+          "durationMsPerFrame": 60,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "provenance": {
+        "method": "OpenAI built-in image_gen.imagegen; Aseprite 1.3.18.6 packing",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "hoanh_tao_bong_character",
+      "skillId": "hoanh_tao_bong",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "character",
+      "source": "assets/source/skills/cai-bang/hoanh_tao_bong/character/hoanh_tao_bong_character.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/hoanh_tao_bong/hoanh_tao_bong_character.png",
+      "atlas": "assets/exports/skills/cai-bang/hoanh_tao_bong/hoanh_tao_bong_character.json",
+      "frameDimensions": [
+        80,
+        80
+      ],
+      "pivot": [
+        40,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "cast_down_0",
+            "cast_down_1",
+            "cast_down_2",
+            "cast_down_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang.json"
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "cast_left_0",
+            "cast_left_1",
+            "cast_left_2",
+            "cast_left_3",
+            "cast_left_4",
+            "cast_left_5"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 6,
+          "frameRate": 20,
+          "durationMsPerFrame": 50,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang.json"
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "cast_right_0",
+            "cast_right_1",
+            "cast_right_2",
+            "cast_right_3",
+            "cast_right_4",
+            "cast_right_5"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 6,
+          "frameRate": 20,
+          "durationMsPerFrame": 50,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang.json"
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "cast_up_0",
+            "cast_up_1",
+            "cast_up_2",
+            "cast_up_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang.json"
+        }
+      ],
+      "provenance": {
+        "method": "reuse_approved_raster_frames",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "pha_giap_bong_vfx",
+      "skillId": "pha_giap_bong",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "vfx",
+      "source": "assets/source/skills/cai-bang/pha_giap_bong/vfx/pha_giap_bong_vfx.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/pha_giap_bong/pha_giap_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/pha_giap_bong/pha_giap_bong_vfx.json",
+      "frameDimensions": [
+        96,
+        96
+      ],
+      "pivot": [
+        48,
+        48
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "impact_right",
+          "frames": [
+            "impact_right_0",
+            "impact_right_1",
+            "impact_right_2",
+            "impact_right_3"
+          ],
+          "frameDimensions": [
+            96,
+            96
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            48,
+            48
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_down",
+          "frames": [
+            "impact_down_0",
+            "impact_down_1",
+            "impact_down_2",
+            "impact_down_3"
+          ],
+          "frameDimensions": [
+            96,
+            96
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            48,
+            48
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_left",
+          "frames": [
+            "impact_left_0",
+            "impact_left_1",
+            "impact_left_2",
+            "impact_left_3"
+          ],
+          "frameDimensions": [
+            96,
+            96
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            48,
+            48
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact_up",
+          "frames": [
+            "impact_up_0",
+            "impact_up_1",
+            "impact_up_2",
+            "impact_up_3"
+          ],
+          "frameDimensions": [
+            96,
+            96
+          ],
+          "frameCount": 4,
+          "frameRate": 15.384615384615385,
+          "durationMsPerFrame": 65,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            48,
+            48
+          ],
+          "stage": "impact",
+          "placement": "hit_position",
+          "effectPlacementOffset": [
+            0,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "defense_break",
+          "frames": [
+            "defense_break_0",
+            "defense_break_1",
+            "defense_break_2",
+            "defense_break_3"
+          ],
+          "frameDimensions": [
+            96,
+            96
+          ],
+          "frameCount": 4,
+          "frameRate": 11.11111111111111,
+          "durationMsPerFrame": 90,
+          "loop": false,
+          "repeat": 0,
+          "direction": "none",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            48,
+            48
+          ],
+          "stage": "debuff",
+          "placement": "target_above_head",
+          "effectPlacementOffset": [
+            0,
+            -52
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "provenance": {
+        "method": "OpenAI built-in image_gen.imagegen; Aseprite 1.3.18.6 packing",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "pha_giap_bong_character",
+      "skillId": "pha_giap_bong",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "character",
+      "source": "assets/source/skills/cai-bang/pha_giap_bong/character/pha_giap_bong_character.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/pha_giap_bong/pha_giap_bong_character.png",
+      "atlas": "assets/exports/skills/cai-bang/pha_giap_bong/pha_giap_bong_character.json",
+      "frameDimensions": [
+        80,
+        80
+      ],
+      "pivot": [
+        40,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "cast_down_0",
+            "cast_down_1",
+            "cast_down_2",
+            "cast_down_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "New generated heavy-strike poses; fixed-scale Aseprite alignment"
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "cast_left_0",
+            "cast_left_1",
+            "cast_left_2",
+            "cast_left_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "New generated heavy-strike poses; fixed-scale Aseprite alignment"
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "cast_right_0",
+            "cast_right_1",
+            "cast_right_2",
+            "cast_right_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "New generated heavy-strike poses; fixed-scale Aseprite alignment"
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "cast_up_0",
+            "cast_up_1",
+            "cast_up_2",
+            "cast_up_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_attack_followthrough_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "New generated heavy-strike poses; fixed-scale Aseprite alignment"
+        }
+      ],
+      "provenance": {
+        "method": "New generated heavy-strike poses; fixed-scale Aseprite alignment",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "cam_long_cong_vfx",
+      "skillId": "cam_long_cong",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "vfx",
+      "source": "assets/source/skills/cai-bang/cam_long_cong/vfx/cam_long_cong_vfx.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/cam_long_cong/cam_long_cong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/cam_long_cong/cam_long_cong_vfx.json",
+      "frameDimensions": [
+        128,
+        128
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "extend_right",
+          "frames": [
+            "extend_right_0",
+            "extend_right_1",
+            "extend_right_2",
+            "extend_right_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 11.11111111111111,
+          "durationMsPerFrame": 90,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "pull_extension",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            65,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "extend_down",
+          "frames": [
+            "extend_down_0",
+            "extend_down_1",
+            "extend_down_2",
+            "extend_down_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 11.11111111111111,
+          "durationMsPerFrame": 90,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "pull_extension",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            47
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "extend_left",
+          "frames": [
+            "extend_left_0",
+            "extend_left_1",
+            "extend_left_2",
+            "extend_left_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 11.11111111111111,
+          "durationMsPerFrame": 90,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "pull_extension",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            -65,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "extend_up",
+          "frames": [
+            "extend_up_0",
+            "extend_up_1",
+            "extend_up_2",
+            "extend_up_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 11.11111111111111,
+          "durationMsPerFrame": 90,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "pull_extension",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -83
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "retract_right",
+          "frames": [
+            "retract_right_0",
+            "retract_right_1",
+            "retract_right_2",
+            "retract_right_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "pull_retraction",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            65,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "retract_down",
+          "frames": [
+            "retract_down_0",
+            "retract_down_1",
+            "retract_down_2",
+            "retract_down_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "pull_retraction",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            47
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "retract_left",
+          "frames": [
+            "retract_left_0",
+            "retract_left_1",
+            "retract_left_2",
+            "retract_left_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "pull_retraction",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            -65,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "retract_up",
+          "frames": [
+            "retract_up_0",
+            "retract_up_1",
+            "retract_up_2",
+            "retract_up_3"
+          ],
+          "frameDimensions": [
+            128,
+            128
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            64,
+            64
+          ],
+          "stage": "pull_retraction",
+          "placement": "caster_front",
+          "effectPlacementOffset": [
+            0,
+            -83
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "provenance": {
+        "method": "OpenAI built-in image_gen.imagegen; Aseprite 1.3.18.6 packing",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "cam_long_cong_character",
+      "skillId": "cam_long_cong",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "character",
+      "source": "assets/source/skills/cai-bang/cam_long_cong/character/cam_long_cong_character.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/cam_long_cong/cam_long_cong_character.png",
+      "atlas": "assets/exports/skills/cai-bang/cam_long_cong/cam_long_cong_character.json",
+      "frameDimensions": [
+        80,
+        80
+      ],
+      "pivot": [
+        40,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "cast_down_0",
+            "cast_down_1",
+            "cast_down_2",
+            "cast_down_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 11.11111111111111,
+          "durationMsPerFrame": 90,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_channel_pull_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "New generated staff-held channel poses; localized front arm/staff mirror-band correction in Aseprite"
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "cast_left_0",
+            "cast_left_1",
+            "cast_left_2",
+            "cast_left_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 11.11111111111111,
+          "durationMsPerFrame": 90,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_channel_pull_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "New generated staff-held channel poses; localized front arm/staff mirror-band correction in Aseprite"
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "cast_right_0",
+            "cast_right_1",
+            "cast_right_2",
+            "cast_right_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 11.11111111111111,
+          "durationMsPerFrame": 90,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_channel_pull_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "New generated staff-held channel poses; localized front arm/staff mirror-band correction in Aseprite"
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "cast_up_0",
+            "cast_up_1",
+            "cast_up_2",
+            "cast_up_3"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 4,
+          "frameRate": 11.11111111111111,
+          "durationMsPerFrame": 90,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "preparation_channel_pull_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "New generated staff-held channel poses; localized front arm/staff mirror-band correction in Aseprite"
+        }
+      ],
+      "provenance": {
+        "method": "New generated staff-held channel poses; localized front arm/staff mirror-band correction in Aseprite",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "truy_phong_bong_vfx",
+      "skillId": "truy_phong_bong",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "vfx",
+      "source": "assets/source/skills/cai-bang/truy_phong_bong/vfx/truy_phong_bong_vfx.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frameDimensions": [
+        96,
+        96
+      ],
+      "pivot": [
+        48,
+        48
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "speed_right",
+          "frames": [
+            "speed_right_0",
+            "speed_right_1",
+            "speed_right_2",
+            "speed_right_3"
+          ],
+          "frameDimensions": [
+            96,
+            96
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            48,
+            48
+          ],
+          "stage": "dash_trail",
+          "placement": "caster_rear",
+          "effectPlacementOffset": [
+            -15,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "speed_down",
+          "frames": [
+            "speed_down_0",
+            "speed_down_1",
+            "speed_down_2",
+            "speed_down_3"
+          ],
+          "frameDimensions": [
+            96,
+            96
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            48,
+            48
+          ],
+          "stage": "dash_trail",
+          "placement": "caster_rear",
+          "effectPlacementOffset": [
+            0,
+            -33
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "speed_left",
+          "frames": [
+            "speed_left_0",
+            "speed_left_1",
+            "speed_left_2",
+            "speed_left_3"
+          ],
+          "frameDimensions": [
+            96,
+            96
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            48,
+            48
+          ],
+          "stage": "dash_trail",
+          "placement": "caster_rear",
+          "effectPlacementOffset": [
+            15,
+            -18
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "speed_up",
+          "frames": [
+            "speed_up_0",
+            "speed_up_1",
+            "speed_up_2",
+            "speed_up_3"
+          ],
+          "frameDimensions": [
+            96,
+            96
+          ],
+          "frameCount": 4,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            48,
+            48
+          ],
+          "stage": "dash_trail",
+          "placement": "caster_rear",
+          "effectPlacementOffset": [
+            0,
+            -3
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "stun",
+          "frames": [
+            "stun_0",
+            "stun_1",
+            "stun_2",
+            "stun_3"
+          ],
+          "frameDimensions": [
+            96,
+            96
+          ],
+          "frameCount": 4,
+          "frameRate": 11.764705882352942,
+          "durationMsPerFrame": 85,
+          "loop": false,
+          "repeat": 0,
+          "direction": "none",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            48,
+            48
+          ],
+          "stage": "stun_status",
+          "placement": "target_above_head",
+          "effectPlacementOffset": [
+            0,
+            -52
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "provenance": {
+        "method": "OpenAI built-in image_gen.imagegen; Aseprite 1.3.18.6 packing",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "truy_phong_bong_character",
+      "skillId": "truy_phong_bong",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "character",
+      "source": "assets/source/skills/cai-bang/truy_phong_bong/character/truy_phong_bong_character.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_character.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_character.json",
+      "frameDimensions": [
+        80,
+        80
+      ],
+      "pivot": [
+        40,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "cast_down_0",
+            "cast_down_1",
+            "cast_down_2",
+            "cast_down_3",
+            "cast_down_4",
+            "cast_down_5",
+            "cast_down_6",
+            "cast_down_7"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 8,
+          "frameRate": 16.666666666666668,
+          "durationMsPerFrame": 60,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "dash_footwork_then_staff_contact",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang.json"
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "cast_left_0",
+            "cast_left_1",
+            "cast_left_2",
+            "cast_left_3",
+            "cast_left_4",
+            "cast_left_5",
+            "cast_left_6",
+            "cast_left_7",
+            "cast_left_8",
+            "cast_left_9"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 10,
+          "frameRate": 16.666666666666668,
+          "durationMsPerFrame": 60,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "dash_footwork_then_staff_contact",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang.json"
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "cast_right_0",
+            "cast_right_1",
+            "cast_right_2",
+            "cast_right_3",
+            "cast_right_4",
+            "cast_right_5",
+            "cast_right_6",
+            "cast_right_7",
+            "cast_right_8",
+            "cast_right_9"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 10,
+          "frameRate": 16.666666666666668,
+          "durationMsPerFrame": 60,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "dash_footwork_then_staff_contact",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang.json"
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "cast_up_0",
+            "cast_up_1",
+            "cast_up_2",
+            "cast_up_3",
+            "cast_up_4",
+            "cast_up_5",
+            "cast_up_6",
+            "cast_up_7"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 8,
+          "frameRate": 16.666666666666668,
+          "durationMsPerFrame": 60,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "dash_footwork_then_staff_contact",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Unmodified distinct approved baseline frames reused from assets/exports/characters/hero_cai_bang.json"
+        }
+      ],
+      "provenance": {
+        "method": "reuse_approved_raster_frames",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "thien_ha_vo_cau_vfx",
+      "skillId": "thien_ha_vo_cau",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "vfx",
+      "source": "assets/source/skills/cai-bang/thien_ha_vo_cau/vfx/thien_ha_vo_cau_vfx.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/thien_ha_vo_cau/thien_ha_vo_cau_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/thien_ha_vo_cau/thien_ha_vo_cau_vfx.json",
+      "frameDimensions": [
+        160,
+        160
+      ],
+      "pivot": [
+        80,
+        80
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "whirlwind",
+          "frames": [
+            "whirlwind_0",
+            "whirlwind_1",
+            "whirlwind_2",
+            "whirlwind_3"
+          ],
+          "frameDimensions": [
+            160,
+            160
+          ],
+          "frameCount": 4,
+          "frameRate": 12.5,
+          "durationMsPerFrame": 80,
+          "loop": true,
+          "repeat": -1,
+          "direction": "none",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            80,
+            80
+          ],
+          "stage": "multi_hit_whirlwind",
+          "placement": "caster_body",
+          "effectPlacementOffset": [
+            0,
+            -12
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "name": "impact",
+          "frames": [
+            "impact_0",
+            "impact_1",
+            "impact_2",
+            "impact_3"
+          ],
+          "frameDimensions": [
+            160,
+            160
+          ],
+          "frameCount": 4,
+          "frameRate": 14.285714285714286,
+          "durationMsPerFrame": 70,
+          "loop": false,
+          "repeat": 0,
+          "direction": "none",
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "pivot": [
+            80,
+            80
+          ],
+          "stage": "finishing_smash",
+          "placement": "caster_front_ground",
+          "effectPlacementOffset": [
+            0,
+            -4
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "provenance": {
+        "method": "OpenAI built-in image_gen.imagegen; Aseprite 1.3.18.6 packing",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    },
+    {
+      "id": "thien_ha_vo_cau_character",
+      "skillId": "thien_ha_vo_cau",
+      "status": "produced_candidate_pending_runtime_review",
+      "kind": "character",
+      "source": "assets/source/skills/cai-bang/thien_ha_vo_cau/character/thien_ha_vo_cau_character.aseprite",
+      "sheet": "assets/exports/skills/cai-bang/thien_ha_vo_cau/thien_ha_vo_cau_character.png",
+      "atlas": "assets/exports/skills/cai-bang/thien_ha_vo_cau/thien_ha_vo_cau_character.json",
+      "frameDimensions": [
+        80,
+        80
+      ],
+      "pivot": [
+        40,
+        64
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "animations": [
+        {
+          "name": "cast_down",
+          "frames": [
+            "cast_down_0",
+            "cast_down_1",
+            "cast_down_2",
+            "cast_down_3",
+            "cast_down_4",
+            "cast_down_5",
+            "cast_down_6",
+            "cast_down_7"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 8,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "down",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "multi_hit_sweeps_then_heavy_smash_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Reused approved sweep poses followed by newly generated heavy-strike finish"
+        },
+        {
+          "name": "cast_left",
+          "frames": [
+            "cast_left_0",
+            "cast_left_1",
+            "cast_left_2",
+            "cast_left_3",
+            "cast_left_4",
+            "cast_left_5",
+            "cast_left_6",
+            "cast_left_7",
+            "cast_left_8",
+            "cast_left_9"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 10,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "left",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "multi_hit_sweeps_then_heavy_smash_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Reused approved sweep poses followed by newly generated heavy-strike finish"
+        },
+        {
+          "name": "cast_right",
+          "frames": [
+            "cast_right_0",
+            "cast_right_1",
+            "cast_right_2",
+            "cast_right_3",
+            "cast_right_4",
+            "cast_right_5",
+            "cast_right_6",
+            "cast_right_7",
+            "cast_right_8",
+            "cast_right_9"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 10,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "right",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "multi_hit_sweeps_then_heavy_smash_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Reused approved sweep poses followed by newly generated heavy-strike finish"
+        },
+        {
+          "name": "cast_up",
+          "frames": [
+            "cast_up_0",
+            "cast_up_1",
+            "cast_up_2",
+            "cast_up_3",
+            "cast_up_4",
+            "cast_up_5",
+            "cast_up_6",
+            "cast_up_7"
+          ],
+          "frameDimensions": [
+            80,
+            80
+          ],
+          "frameCount": 8,
+          "frameRate": 13.333333333333334,
+          "durationMsPerFrame": 75,
+          "loop": false,
+          "repeat": 0,
+          "direction": "up",
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "pivot": [
+            40,
+            64
+          ],
+          "stage": "multi_hit_sweeps_then_heavy_smash_recovery",
+          "placement": "character_feet",
+          "effectPlacementOffset": [
+            0,
+            0
+          ],
+          "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+          "provenance": "Reused approved sweep poses followed by newly generated heavy-strike finish"
+        }
+      ],
+      "provenance": {
+        "method": "Reused approved sweep poses followed by newly generated heavy-strike finish",
+        "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+        "reference": "assets/concepts/skills/cai-bang/",
+        "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+      },
+      "runtimeIntegrated": false,
+      "productionArtApproved": false
+    }
+  ]
+}

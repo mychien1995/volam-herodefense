@@ -1,0 +1,944 @@
+{
+  "id": "sa_tac",
+  "nameVi": "Sa Tặc",
+  "frameSize": [
+    112,
+    96
+  ],
+  "bodyHeightTarget": 44,
+  "pivot": [
+    56,
+    80
+  ],
+  "frameCount": 64,
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+  ],
+  "tags": [
+    {
+      "name": "idle_down",
+      "from": 0,
+      "to": 1,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_down",
+      "from": 2,
+      "to": 5,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_down",
+      "from": 6,
+      "to": 7,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_down",
+      "from": 8,
+      "to": 11,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_down",
+      "from": 12,
+      "to": 15,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "idle_left",
+      "from": 16,
+      "to": 17,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_left",
+      "from": 18,
+      "to": 21,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_left",
+      "from": 22,
+      "to": 23,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_left",
+      "from": 24,
+      "to": 27,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_left",
+      "from": 28,
+      "to": 31,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "idle_right",
+      "from": 32,
+      "to": 33,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_right",
+      "from": 34,
+      "to": 37,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_right",
+      "from": 38,
+      "to": 39,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_right",
+      "from": 40,
+      "to": 43,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_right",
+      "from": 44,
+      "to": 47,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "idle_up",
+      "from": 48,
+      "to": 49,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_up",
+      "from": 50,
+      "to": 53,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_up",
+      "from": 54,
+      "to": 55,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_up",
+      "from": 56,
+      "to": 59,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_up",
+      "from": 60,
+      "to": 63,
+      "direction": "forward",
+      "repeat": 1
+    }
+  ],
+  "mirroredSequences": [
+    "attack_left"
+  ],
+  "status": "produced_asset_only_pending_runtime_review",
+  "conceptApproval": "Automatic concept acceptance explicitly instructed by user for this task; no runtime approval implied",
+  "frameOrigins": [
+    {
+      "frame": "idle_down_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        32,
+        27,
+        136,
+        169
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_down_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        183,
+        27,
+        293,
+        170
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        339,
+        31,
+        450,
+        173
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        495,
+        30,
+        606,
+        173
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_2.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        652,
+        30,
+        768,
+        175
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_3.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        805,
+        31,
+        916,
+        173
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_down_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        963,
+        41,
+        1073,
+        173
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_down_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        1113,
+        46,
+        1224,
+        170
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        32,
+        189,
+        129,
+        329
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        169,
+        192,
+        300,
+        331
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_2.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        335,
+        208,
+        486,
+        333
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_3.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        500,
+        206,
+        614,
+        333
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        658,
+        220,
+        766,
+        330
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        817,
+        234,
+        918,
+        332
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_2.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        947,
+        263,
+        1086,
+        333
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_3.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        1099,
+        272,
+        1243,
+        334
+      ],
+      "scale": 0.3076923076923077,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_left_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        45,
+        357,
+        132,
+        490
+      ],
+      "scale": 0.3308270676691729,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_left_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        179,
+        357,
+        307,
+        489
+      ],
+      "scale": 0.3308270676691729,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        342,
+        355,
+        461,
+        489
+      ],
+      "scale": 0.3308270676691729,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        505,
+        356,
+        617,
+        490
+      ],
+      "scale": 0.3308270676691729,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_2.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        652,
+        356,
+        775,
+        490
+      ],
+      "scale": 0.3308270676691729,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_3.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        819,
+        356,
+        929,
+        490
+      ],
+      "scale": 0.3308270676691729,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_left_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        964,
+        364,
+        1082,
+        489
+      ],
+      "scale": 0.3308270676691729,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_left_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        1124,
+        364,
+        1231,
+        489
+      ],
+      "scale": 0.3308270676691729,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_left_0.png",
+      "source": "sa_tac-attack-v2.png",
+      "rect": [
+        130,
+        100,
+        509,
+        579
+      ],
+      "scale": 0.10945273631840796,
+      "mirrored": true
+    },
+    {
+      "frame": "attack_left_1.png",
+      "source": "sa_tac-attack-v2.png",
+      "rect": [
+        675,
+        195,
+        1233,
+        581
+      ],
+      "scale": 0.10945273631840796,
+      "mirrored": true
+    },
+    {
+      "frame": "attack_left_2.png",
+      "source": "sa_tac-attack-v2.png",
+      "rect": [
+        71,
+        773,
+        645,
+        1121
+      ],
+      "scale": 0.10945273631840796,
+      "mirrored": true
+    },
+    {
+      "frame": "attack_left_3.png",
+      "source": "sa_tac-attack-v2.png",
+      "rect": [
+        738,
+        738,
+        1154,
+        1140
+      ],
+      "scale": 0.10945273631840796,
+      "mirrored": true
+    },
+    {
+      "frame": "death_left_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        656,
+        525,
+        753,
+        646
+      ],
+      "scale": 0.3308270676691729,
+      "mirrored": false
+    },
+    {
+      "frame": "death_left_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        797,
+        555,
+        931,
+        646
+      ],
+      "scale": 0.3308270676691729,
+      "mirrored": false
+    },
+    {
+      "frame": "death_left_2.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        947,
+        578,
+        1085,
+        646
+      ],
+      "scale": 0.3308270676691729,
+      "mirrored": false
+    },
+    {
+      "frame": "death_left_3.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        1100,
+        595,
+        1233,
+        651
+      ],
+      "scale": 0.3308270676691729,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_right_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        17,
+        671,
+        128,
+        805
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_right_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        170,
+        671,
+        305,
+        805
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        332,
+        672,
+        436,
+        807
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        493,
+        672,
+        597,
+        805
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_2.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        642,
+        673,
+        757,
+        808
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_3.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        803,
+        673,
+        912,
+        807
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_right_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        963,
+        679,
+        1060,
+        806
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_right_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        1119,
+        679,
+        1221,
+        807
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_0.png",
+      "source": "sa_tac-attack-v2.png",
+      "rect": [
+        130,
+        100,
+        509,
+        579
+      ],
+      "scale": 0.10945273631840796,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_1.png",
+      "source": "sa_tac-attack-v2.png",
+      "rect": [
+        675,
+        195,
+        1233,
+        581
+      ],
+      "scale": 0.10945273631840796,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_2.png",
+      "source": "sa_tac-attack-v2.png",
+      "rect": [
+        71,
+        773,
+        645,
+        1121
+      ],
+      "scale": 0.10945273631840796,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_3.png",
+      "source": "sa_tac-attack-v2.png",
+      "rect": [
+        738,
+        738,
+        1154,
+        1140
+      ],
+      "scale": 0.10945273631840796,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        660,
+        848,
+        763,
+        966
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        803,
+        877,
+        932,
+        963
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_2.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        956,
+        902,
+        1077,
+        964
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_3.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        1099,
+        902,
+        1234,
+        969
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_up_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        43,
+        983,
+        141,
+        1102
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_up_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        194,
+        982,
+        296,
+        1103
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        353,
+        983,
+        446,
+        1107
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        507,
+        982,
+        609,
+        1107
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_2.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        661,
+        982,
+        765,
+        1108
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_3.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        820,
+        982,
+        926,
+        1106
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_up_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        950,
+        996,
+        1063,
+        1103
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_up_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        1110,
+        994,
+        1221,
+        1104
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        33,
+        1112,
+        139,
+        1238
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        162,
+        1120,
+        306,
+        1241
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_2.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        323,
+        1130,
+        463,
+        1240
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_3.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        504,
+        1122,
+        617,
+        1242
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_0.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        663,
+        1122,
+        776,
+        1241
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_1.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        802,
+        1140,
+        913,
+        1240
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_2.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        942,
+        1159,
+        1086,
+        1235
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_3.png",
+      "source": "sa_tac-source.png",
+      "rect": [
+        1104,
+        1174,
+        1237,
+        1242
+      ],
+      "scale": 0.36363636363636365,
+      "mirrored": false
+    }
+  ]
+}

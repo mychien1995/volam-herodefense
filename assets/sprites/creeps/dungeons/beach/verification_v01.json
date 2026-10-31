@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-31",
+  "scope": "One final asset-level check only; no Phaser/gameplay/video verification.",
+  "status": "issues",
+  "counts": {
+    "pngFiles": 1071,
+    "enemyFrames": 384,
+    "enemySets": 6,
+    "vfxFrames": 64,
+    "props": 25,
+    "tiles": 512,
+    "editableSources": 34,
+    "animationTags": 136
+  },
+  "issues": [
+    "thuy_quy/death_down_2 invalid canvas/alpha",
+    "thuy_quy/death_down_2 empty or boundary-clipped"
+  ],
+  "checks": [
+    "Expected files/inventory hashes",
+    "PNG integrity",
+    "JSON and hash-atlas structure",
+    "32px terrain dimensions and material repeat edges",
+    "Prop binary alpha",
+    "Six complete directional enemy frame sets",
+    "Distinct raster frames per authored animation",
+    "Gunner aim/fire and shaman cast/water_attack phase references",
+    "VFX coverage and distinct cels",
+    "Editable Aseprite headers",
+    "Beach output organization"
+  ],
+  "limits": [
+    "Raster uniqueness does not prove smooth animation, correct facing or six-player readability. Runtime review remains for the separate integration task."
+  ]
+}

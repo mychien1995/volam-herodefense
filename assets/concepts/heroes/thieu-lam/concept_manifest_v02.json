@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "schoolId": "thieu_lam",
+  "date": "2026-10-31",
+  "phase": 1,
+  "status": "approved",
+  "reviewStatus": "CONCEPT APPROVED",
+  "selectedReviewCandidate": "assets/concepts/heroes/thieu-lam/thieu-lam-concept-v02.png",
+  "approvedConcept": "assets/concepts/heroes/thieu-lam/thieu-lam-concept-v02.png",
+  "approvalEvidence": {
+    "source": "User message in this chat",
+    "text": "approved",
+    "date": "2026-10-31",
+    "scope": "Concept v02 approved for both Quyen and Dao production idle/walk/basic attacks. Final runtime art approval remains separate."
+  },
+  "scope": "Character concept only. No production animation assets, runtime integration, gameplay changes or recordings.",
+  "documentsRead": [
+    "AGENTS.md",
+    "DECISIONS.md",
+    "CONTENT_DATA.md",
+    "ART_DIRECTION_REFERENCE.md",
+    "ART_PRODUCTION_STANDARD.md",
+    "ART_ASSET_GUIDE.md",
+    "TECHNICAL_ARCHITECTURE.md",
+    "docs/DEVELOPMENT_WORKFLOW.md",
+    "ROADMAP.md",
+    ".agents/skills/pixel-art-pipeline/SKILL.md"
+  ],
+  "preGenerationAudit": {
+    "dedicatedConceptsFound": 0,
+    "dedicatedProductionSourcesFound": 0,
+    "dedicatedRuntimeAtlasesFound": 0,
+    "dedicatedApprovalLocksFound": 0,
+    "resumeStage": "Phase 1 concept",
+    "existingMaterials": [
+      "artwork/thieu-lam-thien-son.png",
+      "assets/exports/pregame/thien_thieu_concept.png"
+    ],
+    "pregameStatus": "Existing user-supplied composite still illustration, review_pending; not a production animation or dedicated concept approval.",
+    "preservedAllExistingAssets": true
+  },
+  "referenceInventoryNotes": [
+    "assets/references/vo_dang_art_direction_reference.png is absent. Inspected assets/references/vo_dang_character_reference.png as the actual equivalent; no reference renamed.",
+    "assets/references/current_codex_dashboard_anti_reference.png contains a Vo Dang concept sheet, not a dashboard. The actual exterior-dashboard anti-reference is assets/references/wuxia_town_world_reference.png.",
+    "assets/references/thien_son_thieu_lam_character_reference.png and in_game_world_reference.png contain the detailed town overworld. Actual school sheet is artwork/thieu-lam-thien-son.png; Thieu Lam is the lower gold/ochre shaved-head monk, Thien Son is the upper ivory/blue long-haired martial artist.",
+    "assets/references/README.md has historical alias-absence notes; in_game_world_reference.png currently exists and was inspected.",
+    "The current_game_2026_10_29_placeholder_anti_reference.png contains rejected block heroes, repeated sparse terrain and primitive foliage; it is not the target art style."
+  ],
+  "preGenerationArtReadout": {
+    "proportions": "Oversized expressive heads, compact bodies and short planted feet; Thieu Lam has a broad stable monk silhouette distinct from the slender long-haired schools.",
+    "linework": "Dark selective stepped contours, clustered highlights and fabric folds with readable hands and weapons; no primitive geometry.",
+    "palette": "School monk uses saffron/ochre, warm brown and dark sash, pale wraps and warm skin; Kim identity uses restrained gold material accents.",
+    "perspective": "Fixed orthographic elevated three-quarter overworld view; scalp/shoulder top planes visible without isometric terrain or rotating camera.",
+    "weapon": "Actual lower monk sheet depicts a broad pale single-edged dao with curved upswept tip and short dark handle. Maintain blade visibility and a believable grip."
+  },
+  "design": {
+    "identity": "Male shaved-head disciplined Buddhist warrior monk, compact sturdy chibi build, strong shoulders, calm stern brows, grounded stance.",
+    "costume": "Ochre/saffron cross-collar short-sleeved tunic, brown edging and sash, split short robe panels, dark brown trousers, pale wrist/shin wraps, dark cloth shoes and wooden prayer beads.",
+    "presentations": [
+      "Full-body unarmed guard",
+      "Same full-body character with broad curved steel dao in anatomical right hand and free left hand guarding"
+    ],
+    "element": "Kim / Gold through costume/materials only; no skill VFX.",
+    "lighting": "Coherent soft upper-left highlights; warm brown shadows.",
+    "iterations": "v01 retained as original exploration. v02 deliberately increases head-to-body ratio and shortens torso/legs for the school-family chibi silhouette; preferred for director review."
+  },
+  "sourceLicense": "Original AI-assisted project concept generated with built-in OpenAI image_gen. Director-provided reference ownership/licensing is not independently established; used as design guidance, no sprite-pack import or source-sheet pixel extraction; no exclusive copyright assertion.",
+  "existingProductionConventionsInspected": {
+    "canvasPx": [
+      80,
+      80
+    ],
+    "bodyHeightLogicalPx": 44,
+    "feetPivotPx": [
+      40,
+      64
+    ],
+    "voDangSwordCanvasPx": [
+      96,
+      80
+    ],
+    "voDangSwordFeetPivotPx": [
+      48,
+      64
+    ],
+    "normalizedOrigin": [
+      0.5,
+      0.8
+    ],
+    "directions": [
+      "down",
+      "left",
+      "right",
+      "up"
+    ],
+    "frameNames": "{state}_{direction}_{zero_based_tag_frame}",
+    "atlas": "PNG + Aseprite hash JSON; frameTags and feet pivot slice",
+    "timing": "Approved baseline idle 2x350ms, walk 4x120ms, attack 4x75ms; Cai Bang staff side attacks 6x50ms.",
+    "thieuLamProductionContractLocked": false,
+    "note": "Production frame size, weapon margins, timing and pivot must be chosen after explicit concept approval; these are inspected baselines only."
+  },
+  "limitations": [
+    "Enlarged static concept illustration; redraw gameplay frames at intentional pixel density rather than shrink this board.",
+    "v02 has a more compact head/body ratio; exact normal-zoom readability and camera/scale match require production and Phaser review.",
+    "Fine bead, face and cloth details need deliberate gameplay-scale simplification; the blade must remain broad and visible.",
+    "Concept backgrounds are opaque; production transparency, four-facing consistency, frame motion, pivots, timing, transitions, six-player scale and occlusion are not verified."
+  ],
+  "runtimeIntegration": true,
+  "productionSpritesGenerated": true,
+  "animationTags": [],
+  "stopCondition": "Concept and requested runtime character art approved and locked; workflow complete.",
+  "referencesVisuallyInspected": [
+    {
+      "path": "artwork/thieu-lam-thien-son.png",
+      "sha256": "9d7fb45b2a86935098b654e6c07d91b319081f2fad2016435ef4778f5c9f20e5",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/exports/pregame/thien_thieu_concept.png",
+      "sha256": "9d7fb45b2a86935098b654e6c07d91b319081f2fad2016435ef4778f5c9f20e5",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/vo_dang_character_reference.png",
+      "sha256": "a31a5bdebe5afff273f1e68f0741162e17f3a38e9ee98d1a273d0a797f93c6fd",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/cai_bang_character_reference.png",
+      "sha256": "236b8faa83f8773247d0dd9994bbb52cdb957932400e715953f23e6ac424fecf",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/current_game_2026_10_29_placeholder_anti_reference.png",
+      "sha256": "7650239f6117b3d92ed6e8b1efdafe7213680f258c979808a09a82d2d6c2cdc5",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/current_codex_dashboard_anti_reference.png",
+      "sha256": "a31a5bdebe5afff273f1e68f0741162e17f3a38e9ee98d1a273d0a797f93c6fd",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/in_game_world_reference.png",
+      "sha256": "34dcde54031a4e6fbe565ca3dcbf1c458337fefdb5cb8b06e5967897c51d70e6",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/thien_son_thieu_lam_character_reference.png",
+      "sha256": "34dcde54031a4e6fbe565ca3dcbf1c458337fefdb5cb8b06e5967897c51d70e6",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/wuxia_town_world_reference.png",
+      "sha256": "9738c40a806ac2395a4c2445551dc557dde291dc3c1c26ac2e2eb30a0ffc7ba4",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/central_arena_hub_reference.png",
+      "sha256": "cf20dcdd390d5ad8880bab6d595fd7a5e54024b09cc53f7f1da617b4013ab9d4",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/arena_battle_reference.png",
+      "sha256": "4c5312c75da8ce5e370351218ef25880b4b0056802d562db3a5f1b89682349d5",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/forest_dungeon_reference.png",
+      "sha256": "f7789a37bd47adf937ee9a828a7f2e5a54fb86cc6cc03fd4a91276c4f3be7618",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/desert_dungeon_reference.png",
+      "sha256": "87f09d8422cad1a22bcb7a2734873e6b1389af1739b5bbddc6ea0e3a156c44e9",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/sea_dungeon_reference.png",
+      "sha256": "0c5d201500471be50daca87fd129762ce2326fcb5c7364977125a15c9bcdeb25",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/hell_dungeon_reference.png",
+      "sha256": "a372a829afccc74063aa65d18881a15a6b89f9cfd50fefc5332f9fe2dc99f69c",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/dungeon_selection_menu_reference.png",
+      "sha256": "325ae9e22d833f7ef5d54ffebc9e8a9ba3727089bbff30aa6e6a85771af2ac8a",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/merchant_shop_menu_reference.png",
+      "sha256": "bea6d2f8569903398aebeccad68bb557a84a7292b90ca320e63ca09999083001",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/references/inventory_menu_reference.png",
+      "sha256": "4774e907e081fd8b53f75a61800d8e5cef00fc1b2cfbe401f49b018a2f503749",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/exports/characters/hero_cai_bang.png",
+      "sha256": "96764db1e1985a50976366df7f8495612ee0657b057a63c595b0cb7de74eb365",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/exports/characters/hero_cai_bang_chuong.png",
+      "sha256": "ee61122b40899484ac1d8aafbba656575c42950cf86edb808d24e2528b044c69",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/exports/characters/hero_vo_dang.png",
+      "sha256": "ae533568429e62962a7b95b725b02315c17d60b596e7b9dceffdbede9d2da54b",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/exports/characters/hero_vo_dang_kiem.png",
+      "sha256": "14199a8a48c6a4975f4c8ea68806b95058b8dfa4a486c893e1aea092fae7e20a",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/exports/characters/hero_thien_son.png",
+      "sha256": "be15e9d08d54ad591c37a215b7694f126104042a895eefcf0a9290752e3a0761",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/exports/characters/hero_thien_son_dao.png",
+      "sha256": "1f2a85617d72da044c2133bffdce4f84ac861150c15ac97ca149b832c782f929",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/concepts/heroes/vo-dang/vo-dang-concept-v01.png",
+      "sha256": "263d91c071b25d655032b8d77a3f922a821a0075a7bad6b6a992375764a28c35",
+      "visuallyInspected": true
+    },
+    {
+      "path": "assets/concepts/heroes/thien-son/thien-son-concept-v01.png",
+      "sha256": "fb10f582becb87e8b6ff14acd78e14b4742ecc085463a56783b6c1b5827dff68",
+      "visuallyInspected": true
+    }
+  ],
+  "id": "hero_thieu_lam_concept_v02",
+  "version": 2,
+  "file": "assets/concepts/heroes/thieu-lam/thieu-lam-concept-v02.png",
+  "output": {
+    "dimensionsPx": [
+      1254,
+      1254
+    ],
+    "mode": "RGB",
+    "alphaRange": [
+      255,
+      255
+    ],
+    "bytes": 1753400,
+    "sha256": "faf8895706c53c933dda4fe0e4a8c93e88feb992326236bd1c8998b1d01c5c03",
+    "runtimeSprite": false,
+    "transparentBackgroundRequested": false,
+    "savedBytesMatchGeneratedOriginal": true
+  },
+  "generation": {
+    "tool": "built-in image_gen",
+    "promptFile": "assets/concepts/heroes/thieu-lam/generation_prompt_v02.json",
+    "inputRole": "Targeted edit of v01 with actual monk sheet and approved Vo Dang/Thien Son concepts supplied as supporting references",
+    "originalGeneratedBasename": "exec-624142b9-c263-4b0b-8b4b-cd0791474382.png",
+    "exactPrompt": "Use case: identity-preserve / targeted concept proportion revision.\nEdit target Image 1: thieu-lam-concept-v01.png. Supporting reference Image 2: artwork/thieu-lam-thien-son.png, specifically the shaved-head gold-robed monk in the LOWER HALF. Supporting style references Images 3 and 4: approved Vo Dang and Thien Son concepts.\nCreate the v02 CONCEPT board by redrawing Image 1's exact same monk identity and two presentations in distinctly more compact CHIBI proportions, closer to the tiny monk silhouettes in Image 2. This is the only principal design change: enlarge the bald head and shorten the torso and legs so each complete standing monk measures approximately 2.5 to 2.75 head-heights from scalp to soles. The head should occupy about 36-40 percent of total character height. Keep broad sturdy shoulders, strong forearms, readable large hands and a squat planted martial stance. Do not keep the tall four-head proportions of Image 1.\nPreserve: shaved head, calm stern thick brows, warm skin, saffron ochre cross-collar short-sleeved tunic and split robe panels, dark brown sash and edging, brown trousers, ivory wrist/shin wraps, dark cloth shoes, restrained wooden beads. Same costume, face, palette, lighting, proportions and accessories on both poses. One unarmed guarded stance and one supporting pose with a broad curved single-edged pale-steel dao held in the anatomical right hand, free left hand guarding. No staff or straight jian.\nRedraw both bodies with the same clearly elevated orthographic THREE-QUARTER overworld viewpoint as Image 2's monk: visible scalp top and shoulders, mildly foreshortened body and short visible feet. No isometric diamond-grid, eye-level heroic illustration, 3D or side-view camera. Keep the unarmed guard and strong blade silhouette clear when imagined at small gameplay size.\nPreserve detailed chibi wuxia pixel illustration quality with crisp stepped selective outlines and coherent pixel clusters, ochre cloth folds, warm brown shadows, soft upper-left daylight and restrained gold guard/material accents. Avoid noisy all-over dithering or blurry painterly brushwork. No magical aura, effects, armor, extra limbs or weapon.\nLayout: square slate/blue-gray concept board with the two complete full-body variants separated side-by-side at the same scale, generous breathing room. Leave at least five percent canvas margin around EVERY head, hand, foot and blade tip. Keep the entire curved dao clearly inside the canvas and still substantial. Underneath, small restrained palette swatches. No words, labels, watermark, UI, environment or extra characters. Concept art only, not an animation atlas; never resize the illustration into production sprites.",
+    "referencePaths": [
+      "assets/concepts/heroes/thieu-lam/thieu-lam-concept-v01.png",
+      "artwork/thieu-lam-thien-son.png",
+      "assets/concepts/heroes/vo-dang/vo-dang-concept-v01.png",
+      "assets/concepts/heroes/thien-son/thien-son-concept-v01.png"
+    ]
+  },
+  "validation": {
+    "pngVerifyAndDecode": "PASS",
+    "savedBytesMatchGeneratedOriginal": true,
+    "savedConceptOpenedAndVisuallyInspected": true,
+    "approvedBaselineHashes": [
+      {
+        "lock": "assets/approved_cai_bang.lock.json",
+        "sha256": "f6597d9cd1c66455b9025615eb7f804a3628964c79b486445f20ab5dc410fc95",
+        "protectedFiles": 8,
+        "result": "PASS"
+      },
+      {
+        "lock": "assets/approved_thien_son.lock.json",
+        "sha256": "2a66f973d42b8e79132984e27ffb1fc32ded01bf0104417e16d3103179f2251a",
+        "protectedFiles": 89,
+        "result": "PASS"
+      },
+      {
+        "lock": "assets/approved_vo_dang.lock.json",
+        "sha256": "8ae9d2bdcc40d9792e012da8ac7cc13af805fa3d76f2ca61ba6cddec29078baf",
+        "protectedFiles": 89,
+        "result": "PASS"
+      }
+    ],
+    "normalGameplayZoomVerified": false,
+    "fourDirectionConsistencyVerified": false,
+    "phaserVerification": "Not run: concept-only stage awaiting explicit approval.",
+    "typecheckTestsBrowserSmoke": "Not run: no code or runtime inputs changed.",
+    "visualReview": "Complete head, hands, feet and dao present; coherent costume/palette across both static presentations. v01 is taller; v02 is preferred for compact chibi proportions. No animation or runtime approval implied."
+  },
+  "approvedConceptFilename": "thieu-lam-concept-v02.png",
+  "conceptApprovedOn": "2026-10-31",
+  "productionManifest": "assets/source/characters/thieu_lam_v01/production_manifest_v01.json",
+  "runtimeReview": "assets/reviews/thieu_lam_v01/README.md",
+  "runtimeFinalArtApproval": "APPROVED",
+  "runtimeArtApprovedOn": "2026-10-31",
+  "runtimeFinalArtApprovalEvidence": {
+    "source": "User message in this chat",
+    "text": "all approved, has sprites been created for this ?",
+    "scope": [
+      "four-facing idle",
+      "four-facing walk",
+      "four-facing Quyen basic attack",
+      "four-facing Dao basic attack"
+    ]
+  },
+  "approvalLock": "assets/approved_thieu_lam.lock.json"
+}

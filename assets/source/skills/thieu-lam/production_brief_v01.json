@@ -1,0 +1,427 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "schoolId": "thieu_lam",
+  "scope": "13 active skill concepts, new character actions, separate VFX,13 active icons and Dịch Cân Kinh passive icon; presentation-only Phaser integration.",
+  "approvalGate": "approval gate waived by user",
+  "approvalEvidence": "I explicitly waive concept and final-art approval gates for this task. Do not stop to request approval between stages.",
+  "independentlyReviewedApproval": false,
+  "status": "produced_and_verified_approval_gate_waived",
+  "existingSkillBatchFound": false,
+  "baselineLock": "assets/approved_thieu_lam.lock.json",
+  "readDocuments": [
+    "AGENTS.md",
+    "DECISIONS.md",
+    "CONTENT_DATA.md",
+    "COMBAT_SYSTEM.md",
+    "ART_DIRECTION_REFERENCE.md",
+    "ART_PRODUCTION_STANDARD.md",
+    "ART_ASSET_GUIDE.md",
+    "TECHNICAL_ARCHITECTURE.md",
+    "docs/DEVELOPMENT_WORKFLOW.md",
+    "UI_UX_SPEC.md",
+    "ROADMAP.md"
+  ],
+  "referenceNotes": [
+    "Actual Thieu Lam monk is in the lower half of artwork/thieu-lam-thien-son.png.",
+    "vo_dang_art_direction_reference.png is absent; vo_dang_character_reference.png is the actual inspected style reference.",
+    "current_codex_dashboard_anti_reference.png actually contains a Vo Dang sheet; wuxia_town_world_reference.png is the actual exterior-dashboard negative.",
+    "in_game_world_reference.png and thien_son_thieu_lam_character_reference.png depict the same detailed town scene.",
+    "The current_game_2026_10_29_placeholder_anti_reference.png is rejected flat/block artwork."
+  ],
+  "artReadout": "Approved monk: roughly2.5-head compact sturdy chibi, shaved head, readable wrapped fists/feet, ochre short robes/brown sash/beads, broad curved steel dao. Upper-left lighting, crisp selective pixel clusters, fixed elevated three-quarter orthographic camera; no new character design.",
+  "openQuestionTreatment": "Bất Động Minh Vương follows currently documented healing artwork interpretation; mitigation question remains open. All VFX counts/cadence/radii are presentation proposals, not mechanics.",
+  "reusePolicy": "Approved normal-attack clips remain byte-identical. New skill actions separately authored; shared stages/loops/cardinal VFX transforms explicitly listed. No mirrored weapon-hand character poses.",
+  "skills": [
+    {
+      "id": "la_han_quyen",
+      "nameVi": "La Hán Quyền",
+      "style": "quyen",
+      "action": "Heavy closed-fist punch: low planted guard, chamber right fist, powerful short frontal punch, recover into protective guard. No open-palm spell.",
+      "effect": "Tight golden knuckle release, compact forward impact and a brief restrained guarding shimmer.",
+      "icon": "A single wrapped clenched fist in a compact angular gold guard.",
+      "stages": [
+        [
+          "release",
+          true,
+          "caster_hand"
+        ],
+        [
+          "impact",
+          true,
+          "target"
+        ],
+        [
+          "guard",
+          false,
+          "caster_body"
+        ],
+        [
+          "ending",
+          false,
+          "caster_body"
+        ]
+      ]
+    },
+    {
+      "id": "vi_da_quyen",
+      "nameVi": "Vi Đà Quyền",
+      "style": "quyen",
+      "action": "Deliberate armor-breaking fist strike: crossed guard, turn hip and chamber fist, short driving hammer-like punch, retract. Distinct from La Han's straight guard punch.",
+      "effect": "Short dense gold strike, sharp fracture impact, small broken-armor marker, fading shards.",
+      "icon": "A wrapped fist striking a split bronze breastplate.",
+      "stages": [
+        [
+          "release",
+          true,
+          "caster_hand"
+        ],
+        [
+          "impact",
+          true,
+          "target"
+        ],
+        [
+          "armor_break",
+          false,
+          "target_above_head"
+        ],
+        [
+          "ending",
+          false,
+          "target"
+        ]
+      ]
+    },
+    {
+      "id": "dai_luc_kim_cuong_chuong",
+      "nameVi": "Đại Lực Kim Cương Chưởng",
+      "style": "quyen",
+      "action": "Heavy open-palm finisher: sink weight, draw open right palm to waist, thrust a large readable palm forward with planted legs, recover. Same monk, no giant replacement body.",
+      "effect": "Normal gold palm release and impact; separately stronger but readable empowered palm release and impact, target-specific presentation only.",
+      "icon": "A broad open golden palm with a bright compact diamond core.",
+      "stages": [
+        [
+          "release",
+          true,
+          "caster_hand"
+        ],
+        [
+          "impact",
+          true,
+          "target"
+        ],
+        [
+          "empowered_release",
+          true,
+          "caster_hand"
+        ],
+        [
+          "empowered_impact",
+          true,
+          "target"
+        ]
+      ]
+    },
+    {
+      "id": "toan_phong_thoai",
+      "nameVi": "Toàn Phong Thoái",
+      "style": "quyen",
+      "action": "Spinning kick: guard/coil torso, turn on planted supporting foot and lift knee, extend sweeping spinning kick through facing direction, settle to guard. Clear wrapped feet and physically coherent hips.",
+      "effect": "Coiling gold windup, thin ground-plane elliptical spin arc, compact kick contact, diminishing arc.",
+      "icon": "One wrapped leg and cloth shoe turning inside a thin golden spiral.",
+      "stages": [
+        [
+          "windup",
+          false,
+          "caster_feet"
+        ],
+        [
+          "spin",
+          false,
+          "caster_feet"
+        ],
+        [
+          "impact",
+          true,
+          "target"
+        ],
+        [
+          "ending",
+          false,
+          "caster_feet"
+        ]
+      ]
+    },
+    {
+      "id": "hoanh_tao_cuoc",
+      "nameVi": "Hoành Tảo Cước",
+      "style": "quyen",
+      "action": "Low sweeping kick: lower center of mass, brace with bent supporting leg, extend the other leg into a broad ground-level sweep toward facing, recover upright. Do not replace this with a high roundhouse.",
+      "effect": "Low ochre preparation flecks, broad thin low golden crescent, contact dust/shards, fading ground trace.",
+      "icon": "A low extended wrapped foot sweeping a wide golden crescent.",
+      "stages": [
+        [
+          "preparation",
+          true,
+          "caster_front"
+        ],
+        [
+          "sweep",
+          true,
+          "caster_front"
+        ],
+        [
+          "impact",
+          true,
+          "target"
+        ],
+        [
+          "ending",
+          true,
+          "caster_front"
+        ]
+      ]
+    },
+    {
+      "id": "vo_anh_cuoc",
+      "nameVi": "Vô Ảnh Cước",
+      "style": "quyen",
+      "action": "Rapid kick finisher: compact spring-loaded guard, one forceful front kick, alternate-leg follow-up with coherent hip transfer, recoil to guard. Feet deliberately airborne in kicks, unchanged ground anchor.",
+      "effect": "Normal short rapid gold foot traces and contact; separate empowered denser foot traces and contact. No global combo aura.",
+      "icon": "Three staggered wrapped-foot impressions progressing forward in gold.",
+      "stages": [
+        [
+          "release",
+          true,
+          "caster_front"
+        ],
+        [
+          "impact",
+          true,
+          "target"
+        ],
+        [
+          "empowered_release",
+          true,
+          "caster_front"
+        ],
+        [
+          "empowered_impact",
+          true,
+          "target"
+        ]
+      ]
+    },
+    {
+      "id": "kim_cang_bat_hoai",
+      "nameVi": "Kim Cang Bất Hoại",
+      "style": "quyen",
+      "action": "Defensive activation: planted guard, close crossed wrapped forearms at chest, brace with squared shoulders and fists, controlled return. No attack, meditation levitation or weapon.",
+      "effect": "Open golden protective ribs forming around body, restrained loop, brief hit response, clean dissolve. Center stays transparent enough to see monk.",
+      "icon": "Crossed wrapped forearms inside a compact segmented golden shield.",
+      "stages": [
+        [
+          "activation",
+          false,
+          "caster_body"
+        ],
+        [
+          "loop",
+          false,
+          "caster_body"
+        ],
+        [
+          "hit_response",
+          false,
+          "caster_body"
+        ],
+        [
+          "ending",
+          false,
+          "caster_body"
+        ]
+      ]
+    },
+    {
+      "id": "nhu_lai_niet_ban",
+      "nameVi": "Như Lai Niết Bàn",
+      "style": "quyen",
+      "action": "Ground-strike ultimate: deep grounded preparation, raise striking fist/forearm while supporting hand guards, drive fist down into the ground with deliberate full-body commitment, recover from low stance. No giant Buddha replacing the character.",
+      "effect": "Compact gathered gold above ground, forceful golden ground impact with open-center fractured ring, restrained defensive aftereffect, ending sparks.",
+      "icon": "A descending wrapped fist striking a golden lotus-shaped ground fracture.",
+      "stages": [
+        [
+          "preparation",
+          false,
+          "caster_feet"
+        ],
+        [
+          "ground_impact",
+          false,
+          "ground"
+        ],
+        [
+          "aftereffect",
+          false,
+          "caster_body"
+        ],
+        [
+          "ending",
+          false,
+          "ground"
+        ]
+      ]
+    },
+    {
+      "id": "tru_ta",
+      "nameVi": "Tru Tà",
+      "style": "dao",
+      "action": "Wide frontal melee dao slash: right-hand blade drawn back, broad horizontal cut into facing, follow-through with visible curved blade and left-hand guard, recovery. Blade stays attached to anatomical right hand.",
+      "effect": "Short metal-gold preparation glint, broad restrained gold melee slash, compact hit sparkle, small slowing ring marker. No traveling projectile.",
+      "icon": "The approved broad curved steel dao crossing a golden crescent.",
+      "stages": [
+        [
+          "preparation",
+          true,
+          "caster_hand"
+        ],
+        [
+          "slash",
+          true,
+          "caster_front"
+        ],
+        [
+          "impact",
+          true,
+          "target"
+        ],
+        [
+          "slow",
+          false,
+          "target_feet"
+        ]
+      ]
+    },
+    {
+      "id": "kim_quang_ho_tran",
+      "nameVi": "Kim Quang Hộ Trận",
+      "style": "dao",
+      "action": "Ally protection field: stable dao guard, hold right-hand dao upright clear of head while left palm extends in a measured channel, brace stance, recover with blade visible. Do not drop or switch weapon.",
+      "effect": "Elliptical ground-plane defense field activation, open gold perimeter loop with small shield motifs, restrained outward defense pulse, ending. Not a healing spell.",
+      "icon": "A small golden shield at the center of an open protective ring.",
+      "stages": [
+        [
+          "activation",
+          false,
+          "ground"
+        ],
+        [
+          "loop",
+          false,
+          "ground"
+        ],
+        [
+          "pulse",
+          false,
+          "ground"
+        ],
+        [
+          "ending",
+          false,
+          "ground"
+        ]
+      ]
+    },
+    {
+      "id": "tam_gioi_quy_thien",
+      "nameVi": "Tam Giới Quy Thiền",
+      "style": "dao",
+      "action": "Powerful armor-breaking dao cut: deliberate high/diagonal preparation in right hand, heavy descending diagonal slash into facing, low strong follow-through, planted recovery. Clear broad blade distinct from Tru Ta horizontal cut.",
+      "effect": "Dense gold edge charge, forceful diagonal cut, localized fractured-armor contact, small armor-break marker.",
+      "icon": "A descending broad dao splitting a bronze armor plate with three gold fragments.",
+      "stages": [
+        [
+          "preparation",
+          true,
+          "caster_hand"
+        ],
+        [
+          "slash",
+          true,
+          "caster_front"
+        ],
+        [
+          "impact",
+          true,
+          "target"
+        ],
+        [
+          "armor_break",
+          false,
+          "target_above_head"
+        ]
+      ]
+    },
+    {
+      "id": "bat_dong_minh_vuong",
+      "nameVi": "Bất Động Minh Vương",
+      "style": "dao",
+      "action": "Steady healing channel: dao held safely upright in anatomical right hand, left open palm close to chest then extends slightly, grounded controlled breathing, return. Strong practical monk identity.",
+      "effect": "Documented area-healing presentation: open gold lotus activation, soft outward healing pulse, restrained lotus perimeter loop, ending. Use healing interpretation only; do not settle open mitigation design question.",
+      "icon": "A small golden lotus with rising restorative light and an open palm.",
+      "stages": [
+        [
+          "activation",
+          false,
+          "ground"
+        ],
+        [
+          "healing_pulse",
+          false,
+          "ground"
+        ],
+        [
+          "loop",
+          false,
+          "ground"
+        ],
+        [
+          "ending",
+          false,
+          "ground"
+        ]
+      ]
+    },
+    {
+      "id": "nhu_lai_thien_diep",
+      "nameVi": "Như Lai Thiên Diệp",
+      "style": "dao",
+      "action": "Wide golden-wave ultimate: grounded dao preparation, sweeping right-hand dao release into facing, extended broad follow-through with visible blade, measured recovery. No homing or spinning thrown weapon.",
+      "effect": "Layered leaf-shaped gold wave release, straight-traveling wide wave, compact directional impact, restrained separate allied-defense feedback. Keep center/character readable.",
+      "icon": "Layered golden leaf-shaped waves fanning forward above a small shield.",
+      "stages": [
+        [
+          "release",
+          true,
+          "caster_front"
+        ],
+        [
+          "travel",
+          true,
+          "projectile"
+        ],
+        [
+          "impact",
+          true,
+          "target"
+        ],
+        [
+          "ally_defense",
+          false,
+          "caster_body"
+        ]
+      ]
+    }
+  ]
+}

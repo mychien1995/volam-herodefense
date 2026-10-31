@@ -40,7 +40,7 @@ test('dedicated selection after host start synchronizes different schools', asyn
     const id = (await snapshot(a)).roomId;
     await joinWaiting(b, 'Bạch Vân', id);
     await expect(a.locator('#pregame .pre-players')).toContainText('Bạch Vân');
-    await expect(a.locator('[data-school]')).toHaveCount(0);
+    await expect(a.locator('#pregame button[data-school]')).toHaveCount(0);
     await expect(
       b.getByRole('button', { name: 'Start Game', exact: true }),
     ).toBeDisabled();
@@ -49,19 +49,19 @@ test('dedicated selection after host start synchronizes different schools', asyn
     await a.getByRole('button', { name: 'Start Game', exact: true }).click();
     for (const p of [a, b])
       await expect(p.locator('.pre-title')).toHaveText('School Selection');
-    await a.locator('[data-school=cai_bang]').click();
-    await expect(a.locator('[data-school=cai_bang]')).toHaveAttribute(
+    await a.locator('#pregame button[data-school=cai_bang]').click();
+    await expect(a.locator('#pregame button[data-school=cai_bang]')).toHaveAttribute(
       'aria-pressed',
       'true',
     );
-    await a.locator('[data-school=vo_dang]').click();
+    await a.locator('#pregame button[data-school=vo_dang]').click();
     await a
       .getByRole('button', { name: 'Confirm Selection', exact: true })
       .click();
     await expect(b.getByTestId('selection-ready')).toHaveText('1/2 Ready');
     expect((await snapshot(b)).state.matchElapsedMs).toBe(0);
-    await b.locator('[data-school=thieu_lam]').click();
-    await expect(b.locator('[data-school=thieu_lam]')).toHaveAttribute(
+    await b.locator('#pregame button[data-school=thieu_lam]').click();
+    await expect(b.locator('#pregame button[data-school=thieu_lam]')).toHaveAttribute(
       'aria-pressed',
       'true',
     );
@@ -146,8 +146,8 @@ test('selection disconnect visibly holds the room without automatic choice', asy
     await expect(a.locator('.pre-warning')).toContainText(
       'participant disconnected',
     );
-    await a.locator('[data-school=thien_son]').click();
-    await expect(a.locator('[data-school=thien_son]')).toHaveAttribute(
+    await a.locator('#pregame button[data-school=thien_son]').click();
+    await expect(a.locator('#pregame button[data-school=thien_son]')).toHaveAttribute(
       'aria-pressed',
       'true',
     );

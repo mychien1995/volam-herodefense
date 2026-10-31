@@ -21,7 +21,8 @@ export default async function setup(): Promise<() => Promise<void>> {
   };
   try {
     if (!(await running('http://localhost:2567/health'))) {
-      const server = createGameServer();
+      process.env['VOLAM_DEV_PRACTICE_CREEPS'] = '1'; // Explicit historical combat fixture.
+const server = createGameServer();
       await server.listen(2567);
       closers.push(() => server.gracefullyShutdown(false));
     }

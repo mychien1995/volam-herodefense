@@ -1,0 +1,2599 @@
+{
+  "phase": "1I+1J",
+  "date": "2026-10-31",
+  "status": "COMPLETE_RUNTIME_VERIFIED",
+  "scope": "Only final arena creep assets/integration/tests/evidence; other sessions work excluded.",
+  "modifiedExistingOrShared": [
+    "scripts/prepare-arena-creeps.mjs",
+    "tests/arena-creep-presentation.test.ts",
+    "assets/arena_creeps.manifest.json",
+    "assets/ASSET_MANIFEST.md",
+    "tools/verify-arena-creeps-13-16.py",
+    "tools/verify-arena-creeps-13-16.mjs"
+  ],
+  "newEntrypoints": [
+    "tools/verify-arena-creeps-17-20.py",
+    "tools/verify-arena-creeps-17-20.mjs",
+    "tools/compare-arena-creeps-17-20.mjs",
+    "tests/e2e/arena-creeps-17-20.spec.ts",
+    "playwright.arena-creeps-final.config.ts",
+    "docs/PHASE_1J_INTEGRATION.md"
+  ],
+  "preparedPublicCopies": [
+    "apps/game-client/public/assets/arena_creeps/anh-ma/spritesheet.png",
+    "apps/game-client/public/assets/arena_creeps/anh-ma/atlas.json",
+    "apps/game-client/public/assets/arena_creeps/ma-tuong-thiet-giap/spritesheet.png",
+    "apps/game-client/public/assets/arena_creeps/ma-tuong-thiet-giap/atlas.json",
+    "apps/game-client/public/assets/arena_creeps/huyet-ma-phap-su/spritesheet.png",
+    "apps/game-client/public/assets/arena_creeps/huyet-ma-phap-su/atlas.json",
+    "apps/game-client/public/assets/arena_creeps/ma-vuong-tien-phong/spritesheet.png",
+    "apps/game-client/public/assets/arena_creeps/ma-vuong-tien-phong/atlas.json",
+    "apps/game-client/public/assets/arena_creeps/pack.json",
+    "apps/game-client/public/assets/arena_creeps/manifest.json",
+    "apps/game-client/public/assets/arena_creeps/final_fx_spritesheet.png",
+    "apps/game-client/public/assets/arena_creeps/final_fx_atlas.json"
+  ],
+  "characterFrames": 256,
+  "effectFrames": 28,
+  "sourceAssets": [
+    "anh-ma",
+    "ma-tuong-thiet-giap",
+    "huyet-ma-phap-su",
+    "ma-vuong-tien-phong"
+  ],
+  "recordCount": 425,
+  "inventoryFile": "assets/sprites/creeps/arena/waves-17-20-production/delivery_files_v1.json",
+  "selfHashExcluded": true,
+  "records": [
+    {
+      "file": "apps/game-client/public/assets/arena_creeps/anh-ma/atlas.json",
+      "kind": "prepared-runtime-copy",
+      "bytes": 28493,
+      "sha256": "c92f2669b74e59fe48bf81409e5fa0d39893becdc71c1873d97ff3b85822e894"
+    },
+    {
+      "file": "apps/game-client/public/assets/arena_creeps/anh-ma/spritesheet.png",
+      "kind": "prepared-runtime-copy",
+      "bytes": 267370,
+      "sha256": "d700b233cc1b3f417146874df2f3649f8eecac2ebb13323f3d884ef2187beb8f"
+    },
+    {
+      "file": "apps/game-client/public/assets/arena_creeps/final_fx_atlas.json",
+      "kind": "prepared-runtime-copy",
+      "bytes": 12465,
+      "sha256": "5b50b3c9d18d4f082c30728583f63e4651921ffc4cade5da3c31ef843cf1da86"
+    },
+    {
+      "file": "apps/game-client/public/assets/arena_creeps/final_fx_spritesheet.png",
+      "kind": "prepared-runtime-copy",
+      "bytes": 15668,
+      "sha256": "cb016dca6c97ed7584e6de95c20428091ba3e6e8395aaf2b4463d452d34e2808"
+    },
+    {
+      "file": "apps/game-client/public/assets/arena_creeps/huyet-ma-phap-su/atlas.json",
+      "kind": "prepared-runtime-copy",
+      "bytes": 28532,
+      "sha256": "a748a38c32bdb52ca488f8863d10e432d213389f140594ca968ad8097a501852"
+    },
+    {
+      "file": "apps/game-client/public/assets/arena_creeps/huyet-ma-phap-su/spritesheet.png",
+      "kind": "prepared-runtime-copy",
+      "bytes": 329484,
+      "sha256": "d0e6dcb38370ddc441dd3b23932c95c3165b78f69ec1caf54ef24763a6f5ca92"
+    },
+    {
+      "file": "apps/game-client/public/assets/arena_creeps/ma-tuong-thiet-giap/atlas.json",
+      "kind": "prepared-runtime-copy",
+      "bytes": 28533,
+      "sha256": "eb38a57cfef5a12b7e621f7c3549c3d3760873bbcce8fb739e467d34fdbadc20"
+    },
+    {
+      "file": "apps/game-client/public/assets/arena_creeps/ma-tuong-thiet-giap/spritesheet.png",
+      "kind": "prepared-runtime-copy",
+      "bytes": 448661,
+      "sha256": "d7f9fc20e90166b20f311b22d701cda98a364d099a4fdc3dfeb0035b13c19733"
+    },
+    {
+      "file": "apps/game-client/public/assets/arena_creeps/ma-vuong-tien-phong/atlas.json",
+      "kind": "prepared-runtime-copy",
+      "bytes": 28533,
+      "sha256": "eb38a57cfef5a12b7e621f7c3549c3d3760873bbcce8fb739e467d34fdbadc20"
+    },
+    {
+      "file": "apps/game-client/public/assets/arena_creeps/ma-vuong-tien-phong/spritesheet.png",
+      "kind": "prepared-runtime-copy",
+      "bytes": 566054,
+      "sha256": "86dcb21073bd58abdab04d32b3b85fb1e4df5a89d5796629ee365bb972cf303f"
+    },
+    {
+      "file": "apps/game-client/public/assets/arena_creeps/manifest.json",
+      "kind": "prepared-runtime-copy",
+      "bytes": 137202,
+      "sha256": "a592e3bc3421df7388311eea36232d9ae7c61dc7b0cca343e0d0984715ef903a"
+    },
+    {
+      "file": "apps/game-client/public/assets/arena_creeps/pack.json",
+      "kind": "prepared-runtime-copy",
+      "bytes": 5355,
+      "sha256": "ff0a88b91cdb6a452e6c8894c51788ea25518e6d75c73484305ffeedb0e8884f"
+    },
+    {
+      "file": "assets/ASSET_MANIFEST.md",
+      "kind": "modified-existing/shared",
+      "bytes": 15893,
+      "sha256": "0174e97974e9c8c65eeba403ba2d8315516bdd83f54c401e8923ef9d05c1c5cb"
+    },
+    {
+      "file": "assets/arena_creeps.manifest.json",
+      "kind": "modified-existing/shared",
+      "bytes": 137202,
+      "sha256": "a592e3bc3421df7388311eea36232d9ae7c61dc7b0cca343e0d0984715ef903a"
+    },
+    {
+      "file": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2452887,
+      "sha256": "c9fe0d99e83a32c7a97bea6cd23ddefc5dadaec6fd69ab4182abbee98a7a7de1"
+    },
+    {
+      "file": "assets/concepts/arena-creeps/waves-17-20/concept_manifest_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3436,
+      "sha256": "16ea9fa4a178ad7ae356de7b853405beb21fcc648530f0b319bb6e85f9ba61e4"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/atlas.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 28493,
+      "sha256": "c92f2669b74e59fe48bf81409e5fa0d39893becdc71c1873d97ff3b85822e894"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4665,
+      "sha256": "2a6284ca4b287a647908032daec2621e7e2c1e7a82290a0f9f3d7ef2063b2bd6"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4684,
+      "sha256": "bb589157f2e8bdab58fe582ffbdc2c39cc59a24a592f7e833d6a33de41f1cf0e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_down_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4613,
+      "sha256": "cced22184bb9d45b8f8c9c1bcd37dd74ff14944bff662e66ae44edc72bf30ad2"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_down_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4582,
+      "sha256": "1e76cad550d16b2723a13b7dc50c967da562eb2ad173ae5ab4899e582e04468c"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4626,
+      "sha256": "188f22aa9778177a02f4a103adddc21fb2672c594f934e02192343d1b93b930b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4443,
+      "sha256": "7955588bfafd8251739c1feecce966e6d88e46c9e9a6e2d615a174a5e886060e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_left_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4645,
+      "sha256": "496f3f7510dff1c27ae27c901362945be4f4c6aa931322d8353502e05e9ee770"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_left_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4678,
+      "sha256": "751fd8ae2159dccb712f564fa5751a0e4d87cbb832273a48c1310bebb201900b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4726,
+      "sha256": "e705edd9f03055e583ce93f893166d266b200a31305f5f8d221761cb5b87e5a3"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4646,
+      "sha256": "9b429c395b9afe6c7787760cd77d97cc807f61bb58b5a0b4590e343743a0e5d3"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_right_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5284,
+      "sha256": "33439177a788ce3908bd9b6f5160b5e72e9947f39cfdedef10e357a53a6c8b4b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_right_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4770,
+      "sha256": "13346d5984e675368f02c180eeebb3d26dcec0401c6bf8b6276a3816c9d52fd9"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4165,
+      "sha256": "6a6ed6c0cc1eb0a44812bd2a2a83a0c1ca632b9413225701bca0626a19d9f367"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4827,
+      "sha256": "0ff8a275bc88dd2626e06a09556769849620b434e175be4269d3c1943e73d391"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_up_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5177,
+      "sha256": "f211eb884f2134556d24b3f2de103c4ae6ef25e966e267c9026c6e59ba4cf703"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/basic_attack_up_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4608,
+      "sha256": "80babf09263882dd8b6d1b23a646bd0329b7a69a0e1718493c07bb249f03b35f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4590,
+      "sha256": "4c799ffea858651c225621c042061a4dc75301f85d88293f81a06c23ba490fb5"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3990,
+      "sha256": "f6d1f3993c73742b0c38729d358a9dadc025962a2a38e691d5c823a1b49be6b4"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_down_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3731,
+      "sha256": "12a29fffd7e5cd12bd9bfd71a328f96a32d0ca3ab040d4cd5e1710c9cc40db76"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_down_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2517,
+      "sha256": "bfce8d93866e74facdc9bd3d5d0f6796ee7654f85482d7ea5b63d722fbd852bc"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3956,
+      "sha256": "9fd29a3129234454c95ffafeb9090314ab67f6399d802a3532ebee6be35fac40"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3844,
+      "sha256": "9c58cec25d6ef2e4f5a33a1df97c412552764cbfb34d178a7619bcd2413d6c62"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_left_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3889,
+      "sha256": "4202b15f47e77a670c70d2c0f7da8e82f56a854aa9875c78e7c1bed7ab245532"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_left_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3010,
+      "sha256": "6617cb245b0529bac69b015d7b192ce4d77eca58c146c2d60515ce00b290aa65"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3812,
+      "sha256": "d2eb12b0edebd8c7243e5ff2586c976265721ce54174b1fd427c3a267980b356"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3795,
+      "sha256": "25efc995043b7f533219be06baa7030982f80338e9ca02134e397cc482595a83"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_right_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3489,
+      "sha256": "a0afc0b0f4a960fa8e710306b03a021c02bed7b676fa3ce3b99880f152213274"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_right_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2762,
+      "sha256": "31655fafa873bde86b05a3464bb50fdb6aadd89c89085e7e900040bc10ea638e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4031,
+      "sha256": "a29938cd1e91453cc4b6a095dac3d81dbc04f54a50ce2330c949f992c514114f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4176,
+      "sha256": "9897956b8b4e7e56d5edbb1b228ff032dfc548b2df208555e9d6c2017afbb389"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_up_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3798,
+      "sha256": "96e3157a6f56a106d870d63f88d5173807890a17b5bc02697a258349593af925"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/death_up_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3246,
+      "sha256": "ade24544a7e119db55bc05991f7061f109e0a34c3775c086663159d20752c195"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3932,
+      "sha256": "c5d71d499b4e802c5e85f421a4f822bc3edea1a948a79a6b3012782f8f5bba71"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4051,
+      "sha256": "ca6571b15d8a9ecbc6ac4e061e1a6977e3d73ac98fa89df5a136b50f0271f6ab"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4363,
+      "sha256": "35daf981ece33ce5abaf316fd550d3025f4a50b085643ff062ff3533dcb0e567"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4258,
+      "sha256": "fd4dee2c068062b4928975119649fccb2f08fc52b2c9c036cece90bf2f2c83d2"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5448,
+      "sha256": "9f3c02436be687d9864b09ac1a21635a83698fc006470471a15ce1ae5640a8e5"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5290,
+      "sha256": "7b82f116144e0ec6a82fa171885b4a25c212d514c23712fdb126847dfc56d635"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4126,
+      "sha256": "b29b38089e0b14a670f29da3e6220cd12409004643760bf1eea27e321d20f7f3"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/hurt_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4101,
+      "sha256": "96a0e98497cb0ec5cb2e51b50a696abce07df1899aeac116411520323bd7514e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4745,
+      "sha256": "87e593696029f12b22ce539051fcb023194d5490c93d4be141ff85b56f073f5f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4763,
+      "sha256": "1102355a9ebad17e87a45f3628fee8d4271f9aa4ca735ce78129766a53f35aae"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4761,
+      "sha256": "7226b19bdda33737dec04dcd1209909fc9c77ffb68da07a5dc4875ce3115b4e0"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4928,
+      "sha256": "3a178c8f86b626cdd35d1aac5087a6d9eda2e5c3f2ec4498669a395a7e08dafe"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4970,
+      "sha256": "33832b905b0561a313bb13102629196db7dba916d8f28dec2afe5bc3de46aa70"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5057,
+      "sha256": "e99da45fda1af623919cd4fd7a24d87bfc1bad753cd3984789797c879ad888eb"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4491,
+      "sha256": "8ac74745d19a4e3459dfcd65a1e4d130221974359711a6da2e9243937d974526"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/idle_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4589,
+      "sha256": "00adc9876d6bbc5f9b3154aa472762a3cdc0c4362c9921a353606623a9d3b6a7"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4738,
+      "sha256": "d625620a7a8caadd7cec91f414ddfac7cc66b11aa009e30f27b8c5511ce8eea7"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4556,
+      "sha256": "bcd2170d277299f409b460b5173b2a996987a0aef5b61d81eb0ed0f29a629bd0"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_down_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4571,
+      "sha256": "a46436281f66428619c495428809ab5949fd2fc6ebc0289a1349cea57a0d581c"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_down_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4342,
+      "sha256": "5687e8a76d74f9cd8262ae43a985b443c7bb1277ba88751dddf6a2eb85719578"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4561,
+      "sha256": "93d51c2a308b3c666bb489a3c671b046e96ed9b26cac24025e00780776048a03"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4351,
+      "sha256": "41e562672561efabd6062a16f54a0e57830bce31a27aab015abac7be70add892"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_left_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4562,
+      "sha256": "65cc1729c6c77cf3a404566e0ed1c58106da2b30f86ca739b41e850de7cd0705"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_left_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4051,
+      "sha256": "1a0983644924878e0e6f5202e52b9f4e7599ae9cb0a5d9a54361cc7429ebfe45"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4986,
+      "sha256": "87efbdf7337e89b7740672b6aa9e2c6d72626f4527b591bf03acd66840c9540c"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4827,
+      "sha256": "ac5b119245a104136c9a5ffe1b73d695e7b56e04df34e4bc97300850de1e87c0"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_right_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4975,
+      "sha256": "d65ab1e18de513eb1f2ac0140ebbcb3897eb10fd26b1b2c8e0e28b9aafa5856b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_right_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4737,
+      "sha256": "71d9d223a0b6f77a98f8710cd2947cdfdbf53a0981730f9928db8b0a20ce4268"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4475,
+      "sha256": "b40b94c73c217eafa99ce4fd4b231e3370117c913d26ec991cccf2a577fd1d06"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4331,
+      "sha256": "07c1ce8553a7593a1c7fa75a5c5528d369d354c424bf81281d544509982981bc"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_up_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4311,
+      "sha256": "503748f99c3a3a3394f756afcb5ddfb0c73628a6a7b4726079039d652a972622"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/frames/walk_up_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4299,
+      "sha256": "386116a654449fa24d2a9fb032b42f87d38fefcd5973504c9b3348b80578e98a"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/manifest.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 54363,
+      "sha256": "caa398c0d26bd5722e23427136b76794717dd2f8c08a59f6ce4eb0c90ba7818b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/creep_shadow_assassin.aseprite",
+      "kind": "new-deliverable/evidence",
+      "bytes": 261383,
+      "sha256": "724d5a96f82a746dbc3f1fd85309824a33a6ad50814132b0f91f00e4326718d8"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/down_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3348,
+      "sha256": "3dbfaf4883cd07019cd47f3ac0551c1bbd67d24da25783c4fb688f71b7fc52e7"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1828248,
+      "sha256": "79c54b726c40139afaedd768151304ed73ebec3baf47a544d1294b66c7afa887"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/extraction_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2645780,
+      "sha256": "383aaef0ca8a7e7ede66f06f096a4529355953821b839fda7780337a76812321"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/left_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3923,
+      "sha256": "ad48aa1e5f3cd6500ce97a62871c71a839d76de1f36980eae7a00b4926cb1d57"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1765406,
+      "sha256": "a574bc321d864d9419567fa4c9faa68053f5cc5d42331e8ccb31b201d2fbce8a"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/right_hurt_corrected_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1386,
+      "sha256": "ed28456df291beb555e52562ecdf40434a2e5a3e20d176a87dca5332109736be"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/right_hurt_corrected_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1114160,
+      "sha256": "f43faf5fabeec8aa4a25c38020b4595c4ecf13959105ac29b1907ad2cc1051de"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/right_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3927,
+      "sha256": "e0401230fdf241cbd920344f6a641486148cc05774aea404b4f6b157bfa44d94"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1624561,
+      "sha256": "9bf96d6b999aee3f0b6d9bd912c79a93d58e153a250f24a49371d236455e38b5"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/up_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3930,
+      "sha256": "65cfe2e68e499893babe17d2c9f5f8d8f4dcf362ace71b39249e95635e0a7140"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1723332,
+      "sha256": "bfec890920a9bfd6c9d491226fc82c58dd0e1052d13a9248641cb408428ff7a7"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/anh-ma/spritesheet.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 267370,
+      "sha256": "d700b233cc1b3f417146874df2f3649f8eecac2ebb13323f3d884ef2187beb8f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/atlas.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 28532,
+      "sha256": "a748a38c32bdb52ca488f8863d10e432d213389f140594ca968ad8097a501852"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5762,
+      "sha256": "ce6cdd40b2c6e051a1516c2ecfa21d21ecceac96304ba8eb43a0f1e9fa58ae13"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5682,
+      "sha256": "c592b20bfb592931c43fba1044292119631ba76d4762a7a2d62bc327cfe5405b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_down_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5929,
+      "sha256": "bf415e6ec22241b82d36bfef47932f0759cd798d1c8fb8178a046ae00fc3f9fc"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_down_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5526,
+      "sha256": "9b24158892576fbc2b41d6cd9af4bc294833c343eb0b57050b6e14cca0cbd575"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5966,
+      "sha256": "ae441b4a9d68f45b605dfa7cc97caac1c3be104dd5891f8c47fb1a40660508e4"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6334,
+      "sha256": "27e144100e77f4ff952c15a8e4e0fdc44cbe549185509dc56c4f29b94df62c6c"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_left_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6101,
+      "sha256": "694866346e47a35bcbebe5dc843067784d48f169fdc98bb8d0280f04579f3ffc"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_left_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5936,
+      "sha256": "e89f3b2fa87cd5d750515ecf3bd1c3f0293a024f74450146679a7246d30a5e1d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6198,
+      "sha256": "f80b0a55840d249af2264b718d9d0287c5f841a3117341f9a0eb3633510a862d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6377,
+      "sha256": "c1ca3fc2b226d68fda6b9fcd88f00d174844aac377d094f9572aa866502d5fa2"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_right_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6486,
+      "sha256": "8a0dd7de9adf3b528fe0b9c958d0fcb59a117114ad86660947e5989f6db8df04"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_right_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6093,
+      "sha256": "570b4e5df338bdaf4a8d3bfebc6a39b1256278ddd5f2c558c53a7b9dadc9e847"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5640,
+      "sha256": "d77ce81acac4f4ba1f0aa7996057640b9742005a9dcc058f8f4cf85e9b536e5d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5952,
+      "sha256": "cf0059d121a17909f2cf30c1787450e0cb43fcf23e2511a340cc9658468e033f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_up_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6699,
+      "sha256": "91e1fcb48bb46f6dc297e8341d16f8e030e3b9974357bcf6064bd1e467763bbe"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/basic_attack_up_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5624,
+      "sha256": "629ffb317b5686ec94552275381bc3a45ed49cce497978262376934e33b0eccf"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5588,
+      "sha256": "37732cc6b59270fe6dbeed8c985af72e2fc6d8429927f6ace838102431431115"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4555,
+      "sha256": "6eb24ca69a3faa698b3cdf39fa311bba00cb7e53059431f98f3dd0268b15bcda"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_down_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3165,
+      "sha256": "04a85a5eb9f0e186e7fce554d499a248783d8358e8d7eb62d0d2066699bd6f4b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_down_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2401,
+      "sha256": "58a90a78a06ad394149fae25807e041a265d83572144d8c2c2a430ad2a4ea5ec"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5564,
+      "sha256": "5bfb1ec44e36c4e748b72caec6ed452b57cb0c46d5991d1068e22e31df18b0fd"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4758,
+      "sha256": "0b907779054d9f8c68e941331c8e4a6840e5fd90226bb6cdd1ac821cfda55e45"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_left_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4105,
+      "sha256": "ad805faa811c6f6a3592303e6fe0f97bd29e0288c9110f200fee8dd6dea3358a"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_left_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2396,
+      "sha256": "7ebdca8166632779a0a03515b5e357fe20f602949ade2ae55679772a8da10423"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5773,
+      "sha256": "4bdd2aa8070f32589bb94c8eba83351ab2e377ca030d8b70e4bd3dea1a1a17ec"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5098,
+      "sha256": "1fe6565fb02541a46c3a9c3683520699b9b699f9f28ab79ba30bd29079e7b487"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_right_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3691,
+      "sha256": "bfcea95a0149f9e57ee5c56947be6e0f67971c480d4dd415174c27975fe307f5"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_right_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2394,
+      "sha256": "9531986f1e4dc66b7000f0ff64883ec343cb2003cffc2d0192ad1e1eabe7d855"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5818,
+      "sha256": "e446aa9d0e994d96643f537f64c6a3f145730e17e8fce030e8b2394d2af90117"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5050,
+      "sha256": "0561fa6e1e419d6220f2657463a26bb378d33a0023acd081258fb64949ae1c0d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_up_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3575,
+      "sha256": "878fbeddace3d2af3396e5062e4eed1cc5f23595f4dda617055cc1840b5356bd"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/death_up_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2798,
+      "sha256": "5a5497a6100b06adfba79689da7020066ab34ab0be5b5e97935b05fbcf8cfa63"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/hurt_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5404,
+      "sha256": "b9933ddb06b44a971f68acf92638484d3f2a0797b54eb4147cdca7c8785a4817"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/hurt_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5068,
+      "sha256": "35a95d44976cfb175a080e851031cde52b17ec8571e7e0567923ddc2c4e34160"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/hurt_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5664,
+      "sha256": "f480c063d128dd443fc04be832c7c6c152c45eeb50044553e3e7a1d57c75e9d9"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/hurt_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5015,
+      "sha256": "0c72796394e82ebf3d48b98ca83b6dc4494c8620ad3174a64ab216d7c1f64d15"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/hurt_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5753,
+      "sha256": "e041f309d8a80a5d1b7152d3829ae626d2a2da9addf748f4a1dfc76704f6ec2e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/hurt_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5491,
+      "sha256": "71b51aa93b86529c2c076cbef258027075e749698942ff3208025aec2869a62b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/hurt_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5828,
+      "sha256": "31bf6a3ad9cbe5eb8ed5fb7ae63da651ce1c06dba9c2d7e246053565b3b9435a"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/hurt_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5641,
+      "sha256": "437beb9d0469e7522458e12f6d9446f1ba94e09f4b67eecc732a76ccc3c06935"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/idle_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5670,
+      "sha256": "6cd2c286026fe97f7d4106cbffa6dd9bf7fb1001e7cb427d5a1638ea2652ddb5"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/idle_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5383,
+      "sha256": "230d32f07b772d021c696e103523aa2dc063f86b58b413490a9fef1b32d77f92"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/idle_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5799,
+      "sha256": "b4910bf29cf1607a8d95700668b15db4ad4ed6d773cef5ce81571ae9d0bd4aff"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/idle_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5908,
+      "sha256": "2a75120f7a1c22e1d4583cf67ec22c8c82538bf2862c8d4b4354e9b11122bd13"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/idle_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5914,
+      "sha256": "e486c12c4f6e2d1f27ebe760b9a251c7a3662ba4d2e6a414dd9f9539e23e25f3"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/idle_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6002,
+      "sha256": "f71d5f870cee401dcbcce2bac1b5180b7b571e5262a30a3276572b46a41ab83d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/idle_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5669,
+      "sha256": "301f98523b1606ba3eeae9f6a6832f5b5194f024e740268c800f4b5de3712f12"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/idle_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5759,
+      "sha256": "a208d99db2e5d67cbc3c3af779ff17bfe8d2ed7a413b7c6eef1632eaec27f46e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5614,
+      "sha256": "661c61e774d6562c0eb8dd4b800ffc5c544fe2a5ea3a1b42c73f58d45b244657"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5467,
+      "sha256": "a25238ff45b8caea2d5a27c79c46221c19c3a931d80a3c9daca61fad225370f9"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_down_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5423,
+      "sha256": "6674a50716c2538d9fadb968c67809454a5fcc505d05be1edd4ab0d3c5de3b89"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_down_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5315,
+      "sha256": "37b83bc12b7ae1530bece6d65768d623d386bb85c9d201194b7865042c472495"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5954,
+      "sha256": "6906afcfda6e5d2872d72432d814e8b070030d8f50b8ea4406398c73f1123d41"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6082,
+      "sha256": "c8c6be35605d3a3583f65549a76d4b89dfcf47a701cbf29d3eb70cc563974de7"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_left_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6001,
+      "sha256": "5467cfe00c98671b0190de9876913b8dae1ec5800e2d7d798cae3e2af60b98e8"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_left_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5833,
+      "sha256": "8b0e978da127fa9069b579ce259a294bfefeebc481987b4de702d5651b121685"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5881,
+      "sha256": "497d4498339da2ffef36bc4125ab34ed468a4b78eca98ff9e2e3eb97ccfd0ec4"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5613,
+      "sha256": "ea19b06a691ac085b7155cb9aa17ebf6cf6baea7fcd752594e6d5d2b3894ce38"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_right_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5623,
+      "sha256": "e2434d9606d09b201f30137dcd8a946d569cd97fca2948c3e2ffaa9a509e40cd"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_right_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5535,
+      "sha256": "6d498c248d4f67170fd7f3c5b8fb997d5e59e3c2b14c0940bd55f99f7afc1afd"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5543,
+      "sha256": "301850d4245d54413b6780a11fc07dbdd0cfac0bb578b84f8bab52f89e0cc6a9"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5584,
+      "sha256": "b93f349c1b8c119b82dcaa107aff240c1d2223d500caacbb0cefc8a70572cb0a"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_up_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5283,
+      "sha256": "0798c2b01520d70ba0466cba5c26c73e683c315663bf265879538dbe549e0f47"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/frames/walk_up_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5562,
+      "sha256": "f45d12ea006aca913a962c0f9d730ebd658fbc32d15008da51c5bfa1d531cb68"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/manifest.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 55483,
+      "sha256": "dfbc90601b79d439c774451448613dab7d137bb17a09581cc86f5b6b1e39a62a"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/creep_blood_demon_warlock.aseprite",
+      "kind": "new-deliverable/evidence",
+      "bytes": 342847,
+      "sha256": "a9b6a9f1d31b944e9b4a1dab15094dd347ac1e2970da6bc18d659d2c68bc4a49"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/down_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3617,
+      "sha256": "97b713be07406694bcd7871a8d8dd0310e2ac5190faea714688bf3505605ffef"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/down_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1806571,
+      "sha256": "9fa659dc8fd4a4d331fd0b86cdbd88895192a1005aed31ae1a1b7cfd9512ff40"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/extraction_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2547776,
+      "sha256": "c2fe0e14e5ec9cf77b44789443839ad83d477bf07c82f7a9e7315a2b6dca3204"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/left_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4202,
+      "sha256": "d923775a88ee28b42041cb753a72901187af85fbbe56e5b09e32b6726294caeb"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/left_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1695601,
+      "sha256": "1bac8c49914efbe154d66b917c6455b61eb9917324fd241587b40d369a58c0ff"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/right_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4206,
+      "sha256": "c5ad0d69de7e207ba45a968d6687488af7693394f06a9b3049c6e71643d1ce34"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/right_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1822240,
+      "sha256": "42c104eb9a488a024eeb8598c1f936e192a5cb0253e5c82de1b9b5cc364c7316"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/up_corrected_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1580,
+      "sha256": "754593c91126e0737a8cc3c631ce907812b8718d7834c5c791a59304d27aba6d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/up_corrected_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1778681,
+      "sha256": "1abd4cfb3e18cca7362b86eff8ae770f82f4f587a3f5fedf5bf5ef18c21582d7"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/up_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4209,
+      "sha256": "20aad68304ddcd349bc0b60b0a7d8476c8622fcd23d166fb86ecfe0b5e4455d4"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/up_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1720062,
+      "sha256": "0c1b0ea4a0b7f624190446d0da853fc80aa70a94f1c32ffb0714a61b5dad395e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/spritesheet.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 329484,
+      "sha256": "d0e6dcb38370ddc441dd3b23932c95c3165b78f69ec1caf54ef24763a6f5ca92"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/atlas.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 28533,
+      "sha256": "eb38a57cfef5a12b7e621f7c3549c3d3760873bbcce8fb739e467d34fdbadc20"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9093,
+      "sha256": "d4a59b207b9323f7e0f25b82a65ff07b75500e63263ed4fdefefc87d770439fd"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8609,
+      "sha256": "80c91648fa24c1068ee85aa9c78062f19f3812bf78ae359bb4ab8d2189821994"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_down_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8751,
+      "sha256": "f4839b64029ff7a2d8f3ed6a4310694510b4152f0b18b78f9375e4c64f0670c9"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_down_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8777,
+      "sha256": "834d40319068c51228a0ed40ffc99eafbafc4d5a0903f541b897b3bc569efb41"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9062,
+      "sha256": "cb572614d61fc273883fc380c43f66ef01536121429e17449753a0852b14ed80"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9255,
+      "sha256": "f7e95a18a94e56e7e453b45f8c99e00270cdba17dd61b92830309817987fa6ba"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_left_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7606,
+      "sha256": "38792963d8dbf17cd8d731576cd9339eaa7fb31271a936fea89d28ba37b48126"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_left_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7767,
+      "sha256": "afe71d966a897b0a08056302cff3b660958af2d6f27f3b3c0fd3afa974399ae9"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8930,
+      "sha256": "6383f085769faf2d9fef5447f708c70fb818fa651e2e03ed6c8d01497023053d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8717,
+      "sha256": "661ab76728d9a951a14cf51d681f41fd31219cf40f6ea5797ecf444fba27588e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_right_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6959,
+      "sha256": "208bcd2bebcaa37e00da66a9923a16f35d7015733554e8c44dabb14c0ce11381"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_right_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6709,
+      "sha256": "07a5730ed5a70495e19635473c35fb6eee3dc16412ccc8fb3a8b54ff07c6680f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7866,
+      "sha256": "b50d141dc1551c585c0a1d81705cdf48b179d3cf03797ab306dfa0bcf7b26fa3"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8055,
+      "sha256": "c2890320adf5a69122f5aa35280f1f2d733b6826661523b61f3aeedbd11176e0"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_up_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7053,
+      "sha256": "06e897f269dbd38674b8dc199d584041538944e7b8c24caf523e1c057296da57"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/basic_attack_up_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5851,
+      "sha256": "e528f1d30f7adf0f4a60128f241e6c880cf6bb17725957613c0c341fef3c30b4"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7487,
+      "sha256": "97f3eaa25691a6e5c8522c8852c09fdfa1ba55245db3f12becee54848bfc1b32"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6515,
+      "sha256": "205790c10cf3e91fc1177f17c9ddf8f083a88bd567c1e4f2fa46a22d1f5366bb"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_down_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6076,
+      "sha256": "49a9943788b0740e23f79929c655771f6df0856ea436fc3929caf2355c3ae121"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_down_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5352,
+      "sha256": "66a3bb093338f80b34e7fcb21c5a7aabe9639efb27a55f33a95cd5786c7eea96"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7029,
+      "sha256": "31c4c9c1e0e178073584d40790aa7d90bc7cc1a9459a827176ba444596781655"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6717,
+      "sha256": "975bf8aebee4bdf5a3893637f546a60f188c4dccaa13c3afd7602176203e7b28"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_left_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6592,
+      "sha256": "5d6ddaf5accbf0297a64edbf9a4cba69ff5504d6aa4cebc6fa108d67e15936ca"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_left_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5338,
+      "sha256": "46dcbca408318df286f369a170518f06c2b18dff7e87452cc2d7808d6e38dce5"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6889,
+      "sha256": "4a726143e9fedafc1e099e10e905522193514b53faf0c64276250567202ca05a"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6127,
+      "sha256": "b149694216401df11ad3ab673fe6a3c488f6a72d5abe34238f1bda13128f2dda"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_right_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6127,
+      "sha256": "b89ef68807523c0c94413fc3992e6064ac1ba12340bc89efd73e3dd735e4cf2f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_right_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5485,
+      "sha256": "fc6b6e12c7dc6d3089fa32f5a37495897ae41155d42de51952887a17e3b754d0"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6682,
+      "sha256": "cdf703dde13bd03da6962caeb54d8692a14f7641199794a503e712a7048e2227"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5699,
+      "sha256": "5a5b12a2413accff9a7cf7acc74af33d40cf08ccaa666a89cc34f736fad032d7"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_up_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5060,
+      "sha256": "8fda5fd38b0c0e8ae55f8d78be337648d5058634859e7eaaa2a072232255ea0e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/death_up_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4814,
+      "sha256": "5b23ef2c432fda146a89ff87b94ec8665b2d1d617126a0adb44073f9893daccd"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/hurt_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7440,
+      "sha256": "d529c1a866886f1a60b40846c5518a24f35ed0de8347278a99db24c3190d3203"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/hurt_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7145,
+      "sha256": "ace35f8fc840705b014af778d4bf4a1b225e81f9faaa3c4b04e825fe59977b62"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/hurt_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7028,
+      "sha256": "29f80f1c859ed15964ab1bbef867a7ec6a7ac1489e7e77e556ac9e680a1c86b4"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/hurt_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7670,
+      "sha256": "3a85e71b04df231f9fbdda66684633a6158d0c781dd0f2687ac92daacbdf53e2"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/hurt_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7413,
+      "sha256": "0957a490e3f870c0792eaa549fd2a3a6b8a9b27fb46ae7facdaf2cd647663964"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/hurt_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7135,
+      "sha256": "09f8040bd576f4094bdfb4767b4140b78353f8ea96d9525142428fcf647d6243"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/hurt_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6500,
+      "sha256": "523501ab1a53ede6c78f595beb247079839a4e9c090531ff57ad89f21c0739b0"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/hurt_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6419,
+      "sha256": "8e46f46a8cc25b34bc8fc927ae708c13f8d8d49a58252e2d5c5d330bbc3bdd53"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/idle_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8262,
+      "sha256": "9b6e2ace54b0fe83e02e2c026b98e4718aebe8e99a1d488d754a366f10029a4c"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/idle_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8541,
+      "sha256": "f2ee94c9441fe54b61a93d3c56b70af2f2cfcd2eb34d64acdc628b547dca6fb1"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/idle_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7693,
+      "sha256": "10ce4d12cb5033bf19979bd61cc95f0c4f3cf65b3e932cea328b258adf408d39"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/idle_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7996,
+      "sha256": "d4328a570cb55335dfa9bb492a2b1001fe75506e4ca162421633c9dc8b77617c"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/idle_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7707,
+      "sha256": "fb287415584362a6463ff898b2ef443f6e93c375f336957a8d71f327e37b6969"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/idle_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7931,
+      "sha256": "93dd0f7badc5975a669d0f29b7d4fb54b85ca57f86b7d351e13942f68ffa1975"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/idle_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6950,
+      "sha256": "a0b63ed78ecb044a351307f15b5ae648d8686c343a10e95f27358c03b87a6b38"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/idle_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7265,
+      "sha256": "3556c7241f30a79646c4e1198efc9bb79618d75f75a41def491bcdb1ee6a749d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8114,
+      "sha256": "def31c60c7bcdfbb1808198d52deb772b545d7bb7a320707815deeb414dd0436"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7808,
+      "sha256": "08102120b982dd598e93c141e15a7389a5caf851666261710bb21c3cc9df490f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_down_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7740,
+      "sha256": "78b68a971f22d446a5e1a4c143487ef8300b6e9c2266dcb79e0235aeba81d2f9"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_down_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8001,
+      "sha256": "e6b00726014ba34e0a006f50075dec28d9e86830d1dec66a5e8a9a5b650233fe"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7499,
+      "sha256": "8faa500d9e13daabc90742027794d7ecb37e68d339d9d2e5527fa00894dcc787"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7576,
+      "sha256": "53e5da497db731ac774727ca61e0ba7b39bda211c0f879a58286f27445f55bcd"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_left_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7753,
+      "sha256": "2dc8dddbe9e24d3e9e1beeb6b09e4b2e04d61f866d9639eeaeb0c7825845bbc6"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_left_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7759,
+      "sha256": "8d304261cb6db64b2b0d3777b153aba6c4da1aed8bbf36e1a57c81f3536eb097"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7309,
+      "sha256": "c690b0de03ec49af999d7561e63e4adadba35833df5e52e975c127310fefcd3b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7022,
+      "sha256": "42c63542157144db641a930834d014d8ee7f29dedbb6ec924643a2193c55496f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_right_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7083,
+      "sha256": "681cef1b561ace944f3c41ab1a027df12c8aedcd15bc79e74d85408e3c6ccb2c"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_right_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7097,
+      "sha256": "b389cf95966bd0b740a31077a326cbc61c7a7ce105432f9bc07423bcc57e6726"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6753,
+      "sha256": "e51f480a97c196915b230c1149348ce6680940e25d373f8c6728eebe606fb631"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6637,
+      "sha256": "4ef04cc4e8b172123fc8b6cca1b24090519c300060b1d5e8f9e30fcb33d91065"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_up_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6728,
+      "sha256": "e3425ce0d1f733a7f5ad12bdaae2dc28c6090acd2d234b7b9897d34c06b44bf7"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/frames/walk_up_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6684,
+      "sha256": "a8a4b6468877facb7f483cdedfe0235b051396965227904de92ddac2cbd0e316"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/manifest.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 55778,
+      "sha256": "27b3dbd4bd91bc069c8501d8e45d00e16ccd7cab975c2cbdeb8470d22d045deb"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/creep_armored_demon_general.aseprite",
+      "kind": "new-deliverable/evidence",
+      "bytes": 456028,
+      "sha256": "d64f1ba81dacbde7702836e747e2bc614e4336ea49a41cb0debe26ddde8c00ef"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/down_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3343,
+      "sha256": "a154f6295954e18a9568bd26a284800c5dc6d0085f14c33e3fadc3a97b589796"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/down_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1799918,
+      "sha256": "0f4c6dfdd201e0e5e6bcb6d890b9974f5c336eb419f3afcf56244e704c2e7a8c"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/extraction_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2309345,
+      "sha256": "2f7cb5fc86f97f0414383659f51ac4c349319be308c02d7adfb70fd99797100d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/left_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3931,
+      "sha256": "ee4ce80ea4fe4e98aa5267021fbbd10ec04d1787d34a6a56021a2a1ac65a4db0"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/left_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1671719,
+      "sha256": "9dac51da34e4c702059f78b718981ae864820d3771e175dea4fd73c8dfa6edaa"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/right_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3935,
+      "sha256": "fc8c56ec9547bed3cd4c4d591d7c1c1dd36ba6180b36b3520fc25d5379615615"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/right_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1695659,
+      "sha256": "642011414b662798936b2dcfe48962ec46616a5daa30731c8aac7635ce87b427"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/up_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3938,
+      "sha256": "f474e5b01513b641c187e68bfc3da5fafed2927234c5fd8edaadc3158013a687"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/up_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1583083,
+      "sha256": "cade21659d61dde71f72dabd528b6577385dd17de731786e53935008009d12aa"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/spritesheet.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 448661,
+      "sha256": "d7f9fc20e90166b20f311b22d701cda98a364d099a4fdc3dfeb0035b13c19733"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/atlas.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 28533,
+      "sha256": "eb38a57cfef5a12b7e621f7c3549c3d3760873bbcce8fb739e467d34fdbadc20"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 11884,
+      "sha256": "9817373c1b96a9dc480424735844aba2f82d6b9f311f9587449d69e85f8f4dbc"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10219,
+      "sha256": "735ff5bca99f58de4404a8213563e61e26496639472dbd138f266d4fa8fa5329"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_down_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9617,
+      "sha256": "ec46dd9d2884d9b3ae85368592abbccebf400906db648d61e824dfd51747e425"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_down_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10660,
+      "sha256": "42750a2ec318720a589d0b4d2e0a78f8c14ad611da624a06a6dc03b51d863224"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 11417,
+      "sha256": "d8e5d23354d201fa31a667dc3380f886aa0dc005e3099ce75429d5342596abf5"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10230,
+      "sha256": "bb34b6bc04bbd286c15090a976cc8038f3b8cd22d8aa4c86357c4c32d05bf1dd"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_left_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9123,
+      "sha256": "2240b272e9f36510b547f0720b8e29a23fdf180b600f7f2e0ed78d3ebcc1c560"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_left_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10108,
+      "sha256": "7c0747acb284f8375b31b41eae098ecb650b8d8048824f4ec3d7462a73ca58eb"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10938,
+      "sha256": "4742aaaea09fbec7cfef3d0d522fad3e1ff396859debbad6d06a916751067a9b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10231,
+      "sha256": "3a7633b0bec29bf81c8ff3837016dd9154ac88617afc72b65056dd811cde9a4d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_right_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8404,
+      "sha256": "2df78f9b4cac7785fadee2cc21311ba2d6f3c8515858a4b599c703d9ef6a5ac7"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_right_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9461,
+      "sha256": "10f466d52ad241617a12169c0a4d595b8db03d3eee2aada5791dd010d3e7fede"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10823,
+      "sha256": "43351214b9e345a3886dab40f32c6676d8f1839a3180e8b0921e7822892f44fd"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8442,
+      "sha256": "42376c2fb9ead9beea1b0f7438d8730bb40a939b94abc9109d1008ad62f8f7aa"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_up_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8113,
+      "sha256": "08ae4e32c22752f66d6f0846043c39c7b568c270c0111e7817ed0c6bf6df2d19"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/basic_attack_up_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9152,
+      "sha256": "1b8538c51aebacfa2a57322b5cdab1bd3939c68de153d8ea39710227ac7c598d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9637,
+      "sha256": "b6d4617ed6bd51e71ac5ac46b66a10204ff1ae26ba506a386ab3f9a26ceb0ad3"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8902,
+      "sha256": "6af322ff24a7813452625c0bda18ad90d806ebf23b52721d8c7682517a12713d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_down_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8002,
+      "sha256": "402b259137f1b010c08830075bf253464edda1cf083387efcff9b2d856fa5d83"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_down_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6537,
+      "sha256": "5f921b58caa0bece33e7d20c5c640e09229451def53d6474c4b1e5da36ddd550"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10070,
+      "sha256": "1e5e95a8078adb11f444cf9018d47b44cef8ee3f1a174bd73bf4eb3368598422"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8349,
+      "sha256": "8714e5792a505bcaf2a11fd56ed0f3de73b99748c328efe1a1b15862371aae1e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_left_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8540,
+      "sha256": "a0f0ecc4093cea5155628ab1cb992b3e92ccddc1b540677c51e66b9a49ce8f82"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_left_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7243,
+      "sha256": "fbcd552587963a4fd688af441d4fd0a5ca6d3597fafe4df3e917c6154322abaf"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9464,
+      "sha256": "68ff48b4cfefd6c9222cdff3a97452901ba180fd238d84bf0138d40826bda0a3"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8481,
+      "sha256": "2718513c98aaa32c15369fe6a0d239f50814017f12978064db83601ffa029e77"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_right_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7518,
+      "sha256": "d1ceb78160495c7c283bb2e7276282cbf207999055da7b7195ce04cb0c364322"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_right_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6930,
+      "sha256": "efc52f3613d194e907662f092137d5540785baa65d1b1cd647244df742a2c11a"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8298,
+      "sha256": "251f14310a29fc9411f45f329729b80ce56996a8ec4e9468ce3bd086aa31ac5a"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7799,
+      "sha256": "4afbea18613e2ae8a42ce17c0b1005b797d300bbaa376caf0942e6fe75b688af"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_up_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7352,
+      "sha256": "82546d54804c29f3f240e6303cba552912cda0ba36fdcfc496078f0f054c22d4"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/death_up_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 6385,
+      "sha256": "316aaf7ad98c93aca4482743776e67309ba825e6bed7ab12816f010496e29171"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8202,
+      "sha256": "cba0ed4e249f3734e74eddb103196c6f1381af14d482e79b616d20e452c78a67"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7814,
+      "sha256": "a41bc68d7e3b40468eae423691cf45ba38dfe120c7a05c8a77f56947d3238230"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9275,
+      "sha256": "55dcbf93d12a9c67b894f6eadfdc67b1fa99ad9b232d3a9cf59c6718eb22c845"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9458,
+      "sha256": "a066439994b62f3e6bf15a5a0956882a7a536a7e1af7ccf77afa83913433124b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9094,
+      "sha256": "549cdf501256fac84133a76cc0689191b653b7a184a3c4fbaece0d85e6f23a30"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9613,
+      "sha256": "a49d6b6adc81561b6dab2c7661d2b9e0440e462e0bb0004a87cb567232b71756"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8705,
+      "sha256": "6afafaeb46294ba546ad76d9eb6811fb4bd1a1b271c847ba6f5dfe9c9cc5f92c"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/hurt_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8472,
+      "sha256": "d5b98aaded3670bb3b6ac256d825b2e926cd34f793b8d63eba92a061ac04b7a8"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10524,
+      "sha256": "a594025f7a46ea2625d7b3cb71629641e04d8004965c2044305e9de92206abab"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10240,
+      "sha256": "4d00f2beb906eaa2c7ce6b0f31b69062a8cb82cb0a6cfc1467e8f15a65e0ac09"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10202,
+      "sha256": "ce491d62ec7da79a90836b717a5c344ee5076d75626058d40ee449d7ee2dc218"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10161,
+      "sha256": "945b7580f5282abffe0dd828b35254d11b968b40496ac1f24df358c386b24c36"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9816,
+      "sha256": "da7550217dfafa9d16e48aded6a7408f1be9b3e2ad0de2b44f69fd91046763a7"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9678,
+      "sha256": "8bdbde90f89a0f9ec3365350592075bd7093a8e0b0b9a692fcfb30345db77bbe"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9444,
+      "sha256": "069d3b8ea2d0557456955b8fea09c49c5a729110a24187ba35f4b2cbc7aff744"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/idle_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8701,
+      "sha256": "42b04bef2cd0ee9d62a503eb1510691c8de768bc4fb1bc43761217bbe9396e0f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_down_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8815,
+      "sha256": "ea83a8cc6f0d9ff3b347ae52dfc9038112f8cd72d06c6409eab7e938558f8a50"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_down_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8554,
+      "sha256": "6a1c6f10a1b83e5c0b1951f8ee9a89ae6fc578a6fad7f5c8f39b002a62e50183"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_down_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8504,
+      "sha256": "78df514645fefac345e2ddf3e09d04ed63436867ce036647e97de6a4536c4fbb"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_down_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8777,
+      "sha256": "2bed32cd4549603eedb6ce53e7ec8c223f8d9755185066a2788cda56b075ed8c"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_left_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9380,
+      "sha256": "82cde770c32f385787b042ebbeed9ee685d9c0e647faf1a11209088e79285717"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_left_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9478,
+      "sha256": "0d8d116b41bf1549a698b96af03f0308bd514572835863d0490b91c8d223398d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_left_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9098,
+      "sha256": "eee12a7c1acbf9ed903414cb48d29bc9f7f67f7c4fd572037c6297774c16bea4"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_left_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8876,
+      "sha256": "5c929e915a52683ad12394ddf1a476229e87c2696155893c5986fb76c8a50fe1"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_right_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10356,
+      "sha256": "2b0157bbd1b4b13cc28fea3948e7dd0bbcde523b68d0bbc7cc4859792fce304a"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_right_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9338,
+      "sha256": "55461213e6dd2cab8d0efe6876c9b48d96240d19f1282cb27152bd84c44a937d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_right_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9803,
+      "sha256": "eb172d4045c03ef4a35cc0336e9a8d1c9dbf3a8ac58f860b9af73294c1f296e9"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_right_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 9596,
+      "sha256": "dbe7b9fedd35187feecd60c728074cb119d18835a82ba96067634c549b31d6de"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_up_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8391,
+      "sha256": "aa48c52c73ca794649f73875a653cce1b2b76afde96de2a11c6bc063824ea6bc"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_up_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8932,
+      "sha256": "290e88f0f1398bc26144fe125b6cdbe5bafbf546104cbd024dc41160102989ef"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_up_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8816,
+      "sha256": "adbca8bcc06ec2d0ebd8ed85e8c1b50cb635c8a1972a4299e396853fff4f46d8"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/frames/walk_up_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 8174,
+      "sha256": "001988f0b37309f95575235814ab854435c8b94028bde1e7b9e64c6c9f030035"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/manifest.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 57699,
+      "sha256": "4be9e1678fe1b7ed156d1bfbc9f490bf5cba73fa059bb2e9ee5b672c506522d0"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/creep_demon_vanguard.aseprite",
+      "kind": "new-deliverable/evidence",
+      "bytes": 579401,
+      "sha256": "3ef21ac4816e5a84ebcf588d5acb4465e89daf8eef78c4c60fb9df0b1be42812"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_corrected_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2070,
+      "sha256": "41faa670a8a8e1381c9be98534967048b5e88c0600e2b6a45ea614cca4b2c5da"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_corrected_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1354153,
+      "sha256": "7234e06b3c15ca38ef7cdc1ceee1fa0395f0d484cbc5f1614b8eebad80c1b87d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3604,
+      "sha256": "17d0377344e59fa6a383b28b7d0190d85a8710b1a9965eb02f16825ba5f76597"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1631454,
+      "sha256": "aeeb29a89dc9d415b44d8986a48d74c46d9d43db877682627f233a9b6ed9c8bc"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/extraction_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2029504,
+      "sha256": "77b48eeb581f282789af8c20d83bd8bcf2a3f25b5e622ae6ecd4127191c6d72e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4192,
+      "sha256": "20e869145a9296cc94083ae4215e169a84b34af67581a23e8e35bae71d63316d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1734641,
+      "sha256": "9c9d297fba3ec3fce1b7408eb1ac2fbeb89153ac4299b718554d656614176756"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_corrected_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1669,
+      "sha256": "c6c8995af1165590dbe3f134246f18d682a171f75428a799083808c68d6702c3"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_corrected_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1424400,
+      "sha256": "0b3f758747c8661e8e43ee0cb9a0230db6e1dd90e87c51b26e1e197e1348b350"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4196,
+      "sha256": "9fd0f32641914b13cdd019d4338973f757d15caab9b42d2ebf236524a8711569"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1608144,
+      "sha256": "6b3a7832f06903b491d64821dfed64a82501d95f5d0d3234b95e9c67518c81ab"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_corrected_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1585,
+      "sha256": "e78f4e48595fb1e6d1fa6cd200e5a35fa6dc4e964a91e566914579cf3de4ccc4"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_corrected_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1653828,
+      "sha256": "76e86dad5fc2c2b20df7cd746320082bc7b385e9480da23d671c56e8dae8d3f8"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_request_v2.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2031,
+      "sha256": "d9939fda4c6ad9aa41421c308f63e13636be1bef29496ecddeefec0effb8e925"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_v2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1412655,
+      "sha256": "1d6253a7e23fd8c51eddb243c67e3501efeb1db334fe205309a78c34c3fb7af8"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4199,
+      "sha256": "2abdb0d384608106d0564b9367eb2be63b5b57bef91dc1a3fad2c7c76e8975e5"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1649796,
+      "sha256": "d43540ede75a24dd210b88d205ece72582af7e55e8eb9042a39223643eaa45aa"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/spritesheet.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 566054,
+      "sha256": "86dcb21073bd58abdab04d32b3b85fb1e4df5a89d5796629ee365bb972cf303f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/README.md",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4506,
+      "sha256": "487b956ab9e0d3fba46bee70de3981c1c6caf772f41aed47068ab46f8865ab8d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/approved_inputs_lock.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 178117,
+      "sha256": "231d5d48a5dd31045ba6b8d8372fc07a493993c81f52a572a632960944469e94"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/build_effects.py",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5798,
+      "sha256": "7f320b1526eaaecf18d89da3412a8c09389d25cf4ad5369d2963cb626c62232b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/build_sprites.py",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10958,
+      "sha256": "ae55c84c3faaf424fed43b142b823eff25a794b27197239c15d164cbc5a376fe"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/atlas.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 12465,
+      "sha256": "5b50b3c9d18d4f082c30728583f63e4651921ffc4cade5da3c31ef843cf1da86"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/blood_contact_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 466,
+      "sha256": "97d7ff4c17bd347fe434f01d7961b3c8621e949c2733ced3adb001d0c5ba54a2"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/blood_contact_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1088,
+      "sha256": "d04caa4a3263be978b8ba3c0c6840568ff03b3246f46c1974efec80a8b73b54c"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/blood_contact_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 877,
+      "sha256": "2bcbba13274950c3620187d61564cbf0b25f53c1fef5f4c8a2fcce16d545f892"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/blood_contact_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 303,
+      "sha256": "5fd25ff797454cfed1181b6bfa10251ea47977e9273521eae444f2d468fd3ac3"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/blood_projectile_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 449,
+      "sha256": "e765f35d2485bf92e74b7fcc29acf9acd888500e9727657d3e6b1083ca78f50a"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/blood_projectile_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 561,
+      "sha256": "e64d833b231c9987af8d501f093f05e3c8db2d339b3b280d6767c6af5384fe4e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/blood_projectile_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 545,
+      "sha256": "14540394b06c5fa35880642de7322e1559d37c663bf9ff9da0fcb959c4fb9e55"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/blood_projectile_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 400,
+      "sha256": "0aaa13e9bfbe355fc83efb844223e0415d0b4dd7666d6f877ff463b3f6fd7547"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/general_contact_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 772,
+      "sha256": "014da4529287ecf4370dda9030d045b942eab0078bc291d1ccaa22a03b8687f3"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/general_contact_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1724,
+      "sha256": "2d7ee2a2867de61c260bdc1ae18e92bc67e5b59411e1a65e04003754c94c3743"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/general_contact_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 977,
+      "sha256": "57ee011d846bb3951d2df42eeafae9e6f7498a23c02bbfe511303cbe08e9d373"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/general_contact_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 471,
+      "sha256": "67f8e3de4a7df265707bc06aae6e95a7a5a4d4ebdaf69f14d1200437b1ec9a2b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/shadow_contact_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 735,
+      "sha256": "cc3f875fc0cdc3e7e8fe41764931edf46ac1b6d88b81b09f937d200df128c01f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/shadow_contact_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1258,
+      "sha256": "ad3c47a7690fd9f853ea13c9c3089cb968c9bc95f3aa9e469be041e5f156178e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/shadow_contact_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 951,
+      "sha256": "1fd0f4a1b6a447fc132436663b91b9507396117488a470554a80aa1ecebcefdc"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/shadow_contact_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 530,
+      "sha256": "29f821799e7925f8ff8c1deae832e2e3f4ae0e8d2d89a6b89377e9980089aae5"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/shadow_trail_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 194,
+      "sha256": "05ed32d8cf99a89367a84c272508dedcb8acf9c4913d5fece759b08aef990fea"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/shadow_trail_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 295,
+      "sha256": "bc7f6a791bb7a6c07883b5b9dfd78a17ae7405365facb8368c465ff81d5b64f9"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/shadow_trail_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 261,
+      "sha256": "5194d5cffc8a2fe78ba62de7155d80870f4cb5baa01b68b74c423dc1e13cf9ae"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/shadow_trail_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 181,
+      "sha256": "5f0db20422ed2b8a8e6fec819562e6ebd2233ff5a59ec8c00aaa603232c73273"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/vanguard_aura_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 235,
+      "sha256": "f46ef038c3bc70648205674212ffc2917cae486bc0bfe9e7b4fb15ed965d4cf4"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/vanguard_aura_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 346,
+      "sha256": "f27a9e2bcf71cf735e2eb26946b2d6bb9966426c92a5a206e7f2da6b0fd5e7da"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/vanguard_aura_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 281,
+      "sha256": "2d32c4f7f15c0dc12369f8f1ed7917597d9378abf52028e0facb13d592498a01"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/vanguard_aura_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 172,
+      "sha256": "058cd42bac4a8cb2dc8c5b30aa381cf2eff0b9f9b00837b25086d09eb41da45f"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/vanguard_contact_0.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 697,
+      "sha256": "84250120cdefea2f15119d1bff93c31a25a0be6b2ab9084318e5d4d19cd0d79c"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/vanguard_contact_1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2166,
+      "sha256": "adbbc2e3617fe871ed3003b2e6cd03ebb19994614353c02d4cc0bff0f88010bc"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/vanguard_contact_2.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1281,
+      "sha256": "8a538f417b04392afb194e83510060486eb82fce843ab1022948fffed3e21021"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/frames/vanguard_contact_3.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 682,
+      "sha256": "a3af0e9b921f7a109386dc190d4742be3762ebcce10316114cf99f3eaaa89e76"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/manifest.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 3497,
+      "sha256": "f6a8545e54ace743bd0c5178af012ba67f9f952ab65543aedd374ee21fd43b6d"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/source/arena_creep_final_fx.aseprite",
+      "kind": "new-deliverable/evidence",
+      "bytes": 18977,
+      "sha256": "988fc3cb94b1346499abbde1026b536e0f9e1aeb26617b6b4e43316fcd8c805b"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/source/extraction_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 631597,
+      "sha256": "51bdec580cf7cc77981de886fae2a96645f6f9ad062b8a9801705824af2af285"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/source/generated_v1.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1332952,
+      "sha256": "eb67cd24d809c207de9f3e976238617d04ae64bbf386c54d79388b869f91834e"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/source/generation_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2947,
+      "sha256": "f24068af1156de5019c3466786ddd9f137a6126d44bbe6d7346aa1075fc51324"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/effects/spritesheet.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 15668,
+      "sha256": "cb016dca6c97ed7584e6de95c20428091ba3e6e8395aaf2b4463d452d34e2808"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/master_request_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4949,
+      "sha256": "23380486dba94ce20e27042c93260f1157a3c2fe1f421629e5f1df84e1e04775"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/production_config_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 10276,
+      "sha256": "e598f519209e9189d9a60226534b9118a27eb28f7608c0b2d1cbb0115a236d84"
+    },
+    {
+      "file": "assets/sprites/creeps/arena/waves-17-20-production/production_manifest_v1.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 2053,
+      "sha256": "b8fcbc2c51519629c7e4468d272987a837c5c8a9f622c86425b4a1f432419111"
+    },
+    {
+      "file": "docs/PHASE_1J_INTEGRATION.md",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7928,
+      "sha256": "e4a1d214fb82aaf93916a50cb96d35414dd0ea9940d47c309badf46364b881b4"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/anh-ma-comparison.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 315062,
+      "sha256": "e33d190c5d03770539a38608f54936693b3d9075c92c2e2b4b6874110095b809"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-basic_attack-down.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1715839,
+      "sha256": "90f719b51c8a952edc7b11f86249b56e44786cf6a1f55676ca5ad5999db3cdd2"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-brute-behind-tree.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1672943,
+      "sha256": "80184ebd18bb0280dff767dc6d7685b7de1a700ae2c98a06b33c40f2fbcb54c5"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-brute-in-front-of-tree.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1671601,
+      "sha256": "15e10a626eca88eb9561ecd7b4882baa1b4cdc58dfe6d3d3703484a5d6bdd504"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-death-down.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1717156,
+      "sha256": "0e514b2a35d2b0474c1e229176f57cd0527b3a02b1ef6779938dad929c53771d"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-death-wave-17.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1736593,
+      "sha256": "2a3f4b6c461c990253fa1fde9a978cd3b924055b558f82ea94fae54386b027ea"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-death-wave-18.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1735941,
+      "sha256": "1b5bafda4e10eef3648f013f91feb9114c58d87315866d7a26870fcf2c326992"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-death-wave-19.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1719939,
+      "sha256": "fd3b6877df036abac0aeef071af3f89eb18709fda17135dd71d4e1b7b8180514"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-death-wave-20.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1722694,
+      "sha256": "859c18298ebe87125e6ef15c4d59e5b741f8d2db6dea3aec94d60ef544e337d5"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-failure.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1718709,
+      "sha256": "dcf424e4b4baebaf6ec2f3846c65d8514d1f28f10d0ffd49d8ef804592f6e171"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-hurt-down.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1711833,
+      "sha256": "408b7f5634ea48b095733fa8138adf57a2c026d8d659f6c39ca60379d8976c80"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-idle-down.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1716458,
+      "sha256": "658d42c5ccae8cc4a2d6bd228b8a036578143d5f8aeab247ed41fc9ec5748f53"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-independent-instances.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1712012,
+      "sha256": "ef602215a91f9af83aa69f03be22ca1e133a39546b5c58d6a65e1022fcc69e5c"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-native-1x.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1116250,
+      "sha256": "3961e30cd9144d101b458d164413cdec17a203b7f150b18c0d63c71302f7b988"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-natural-attacks.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1717840,
+      "sha256": "3624ff082c2c5dd6bd5e82a2a3e0464c0c313a086a328da6f11913f3eadc8726"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-projectile-renderer-fixture.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1717130,
+      "sha256": "0a035681a3e6289dda39d355b200a61bbfce4fe7c263407355710f1526bf4c89"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-walk-down.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1713002,
+      "sha256": "e1317b9cc2f662eec530a1840c0b0307754ccf22efe6ea76aea557b4f04d72cb"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-walk-left.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1713959,
+      "sha256": "0608f10104da46749ad625f84a98354ee4701497f2390558d02c2a33f1d2f677"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-walk-right.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1715109,
+      "sha256": "8b720fb4dc3f5af47f8d6338f81dd738819d6a79a07f91a49ab3842b365c45f5"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-walk-up.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1713948,
+      "sha256": "75096d70a782436c06557f24fe43757efc5a2d83e1cefe0ac6ac2318a7f4b372"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-waves-01-08.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1703712,
+      "sha256": "e2c8bbee80ee7b5dd97136ea2a2e71c17dc8a000c6538a41d729bb590fff390b"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-waves-01-20.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1711844,
+      "sha256": "accebfe42dc9fd30bd2ea1aabe425e0f67bd83374025d875ee23a194cec5bd3c"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-waves-09-12.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1715654,
+      "sha256": "0138748213c2dd6a1fca5d16435355649ce77c820c544e4b3f1e6ebe3d7f356c"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/arena-waves-13-16-regression.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1711525,
+      "sha256": "58d25ec365ce4e7b8def06c8b094a25028fdc526a41b1cb49262d00bcaef56bd"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/combat_diagnostic.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 31947,
+      "sha256": "c9250788b3ffeaf041a6b8af19f4a1a440d4d038415c79bd391f4e78596199af"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/concept-production-arena-comparison.html",
+      "kind": "new-deliverable/evidence",
+      "bytes": 5076,
+      "sha256": "229a0a23b31f9c428308d4f16e8253a141dbf2880be8a40f8e0da986297206e6"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/concept-production-arena-comparison.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1397328,
+      "sha256": "0ed7cbfc229ef2b38da4449a3ee2164655c598b466a7ffeef7e5dacd86f28781"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/failure.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 67252,
+      "sha256": "3973e3b6dd14822fe0eeae5da085f0f033fe03d094184d54133c94637619c4c0"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/final-check.log",
+      "kind": "new-deliverable/evidence",
+      "bytes": 7315,
+      "sha256": "553c8762dbb650ae813c397c95ef79983d88422fbe2d36a834a5fc76b4145190"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/huyet-ma-phap-su-comparison.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 339760,
+      "sha256": "8513530b4c6f839f22e69e023fe413884df11c2170ab6e8be5ae5599ff039920"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/integration_verification.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 90000,
+      "sha256": "295e45c7aebd95c5e1821ec37ab5036d708c28d98a3024d1474179ee8600151c"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/iteration1-arena-failure.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1717804,
+      "sha256": "f6b7355f8eee41c6b2fddf529b851d3db4eeaa901193f9737a28b7c62aaae68e"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/iteration1-failure.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 126226,
+      "sha256": "af9263af15ea020bcd29f43f1600029ca936f067fd48b0a1a4c26455b44dd9b3"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/iteration2-arena-failure.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1718709,
+      "sha256": "dcf424e4b4baebaf6ec2f3846c65d8514d1f28f10d0ffd49d8ef804592f6e171"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/iteration2-failure.json",
+      "kind": "new-deliverable/evidence",
+      "bytes": 67252,
+      "sha256": "3973e3b6dd14822fe0eeae5da085f0f033fe03d094184d54133c94637619c4c0"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/ma-tuong-thiet-giap-comparison.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 354293,
+      "sha256": "3f4b654f1fb37561f7562a3580504e39191b9782c82f869b83d43cb0f8b26ae9"
+    },
+    {
+      "file": "docs/evidence/phase1j-integration/ma-vuong-tien-phong-comparison.png",
+      "kind": "new-deliverable/evidence",
+      "bytes": 370314,
+      "sha256": "3550e60f21ed188e14081120f7d670ceaa3970e52708a50a35a648b7e78e268b"
+    },
+    {
+      "file": "playwright.arena-creeps-final.config.ts",
+      "kind": "new-deliverable/evidence",
+      "bytes": 329,
+      "sha256": "0a7777ac8368b89f74e9f1d0b79482bbe815775ddcc4fc857370bbfe0a082e91"
+    },
+    {
+      "file": "scripts/prepare-arena-creeps.mjs",
+      "kind": "modified-existing/shared",
+      "bytes": 5798,
+      "sha256": "38c5f24c9b3968645ebd4860ab93ff6de34c9f01fc99517f4f740e23125793c3"
+    },
+    {
+      "file": "tests/arena-creep-presentation.test.ts",
+      "kind": "modified-existing/shared",
+      "bytes": 4149,
+      "sha256": "541b7f3a9521ef9efc989565413f844f48274db27fa3f3c2739f062753494f94"
+    },
+    {
+      "file": "tests/e2e/arena-creeps-17-20.spec.ts",
+      "kind": "new-deliverable/evidence",
+      "bytes": 1194,
+      "sha256": "3f567d18cf0cbe1c984e60a897cdd9931afe56106117f2f27fa7e6e7769466f8"
+    },
+    {
+      "file": "tools/compare-arena-creeps-17-20.mjs",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4929,
+      "sha256": "0409b96171a761428b0ef4b0702f2446e7edd049bb3e5293f51804efe4cf2727"
+    },
+    {
+      "file": "tools/verify-arena-creeps-13-16.mjs",
+      "kind": "modified-existing/shared",
+      "bytes": 19864,
+      "sha256": "4b8b8caf003d86e043d529a2ea21da299a1ec28b0bf008f5716d823de49a3b38"
+    },
+    {
+      "file": "tools/verify-arena-creeps-13-16.py",
+      "kind": "modified-existing/shared",
+      "bytes": 4077,
+      "sha256": "4a70dfe88ee0bb5c0176990d4cf50d2aabfd95cc1af7ecd4ae0c9dcca6b90a19"
+    },
+    {
+      "file": "tools/verify-arena-creeps-17-20.mjs",
+      "kind": "new-deliverable/evidence",
+      "bytes": 21723,
+      "sha256": "b9e939bf4f0547cc5df2506bef807785086820b3a5797c258eea722eb8b7c8cb"
+    },
+    {
+      "file": "tools/verify-arena-creeps-17-20.py",
+      "kind": "new-deliverable/evidence",
+      "bytes": 4423,
+      "sha256": "3de15b9da80eadd19be9a358991e203bb1418032a7372974402438c1e56f4aa0"
+    }
+  ]
+}

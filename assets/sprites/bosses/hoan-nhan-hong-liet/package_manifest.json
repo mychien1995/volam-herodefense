@@ -1,0 +1,1662 @@
+{
+  "id": "phase_3b_hoan_nhan_hong_liet",
+  "status": "produced_unintegrated",
+  "conceptsAutomaticallyApproved": true,
+  "runtimeVerified": false,
+  "runtimeApproved": false,
+  "components": [
+    {
+      "id": "boss_hoan_nhan_hong_liet",
+      "status": "prototype",
+      "productionStatus": "produced_unintegrated",
+      "conceptApproval": "automatic_for_this_task",
+      "runtimeVerified": false,
+      "runtimeApproved": false,
+      "image": "assets/sprites/bosses/hoan-nhan-hong-liet/spritesheet.png",
+      "atlas": "assets/sprites/bosses/hoan-nhan-hong-liet/atlas.json",
+      "frameSize": [
+        128,
+        128
+      ],
+      "footAnchorPx": [
+        64,
+        104
+      ],
+      "animations": [
+        {
+          "id": "idle_down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameDurationMs": 350,
+          "loop": true
+        },
+        {
+          "id": "hurt_down",
+          "frames": [
+            "hurt_down_0",
+            "hurt_down_1"
+          ],
+          "frameDurationMs": 120,
+          "loop": false
+        },
+        {
+          "id": "walk_down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameDurationMs": 150,
+          "loop": true
+        },
+        {
+          "id": "basic_attack_down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameDurationMs": 110,
+          "loop": false
+        },
+        {
+          "id": "ground_slam_down",
+          "frames": [
+            "ground_slam_down_0",
+            "ground_slam_down_1",
+            "ground_slam_down_2",
+            "ground_slam_down_3"
+          ],
+          "frameDurationMs": 140,
+          "loop": false
+        },
+        {
+          "id": "lava_cast_down",
+          "frames": [
+            "lava_cast_down_0",
+            "lava_cast_down_1",
+            "lava_cast_down_2",
+            "lava_cast_down_3"
+          ],
+          "frameDurationMs": 160,
+          "loop": false
+        },
+        {
+          "id": "command_down",
+          "frames": [
+            "command_down_0",
+            "command_down_1",
+            "command_down_2",
+            "command_down_3"
+          ],
+          "frameDurationMs": 180,
+          "loop": false
+        },
+        {
+          "id": "ultimate_charge_down",
+          "frames": [
+            "ultimate_charge_down_0",
+            "ultimate_charge_down_1",
+            "ultimate_charge_down_2",
+            "ultimate_charge_down_3"
+          ],
+          "frameDurationMs": 220,
+          "loop": false
+        },
+        {
+          "id": "death_down",
+          "frames": [
+            "death_down_0",
+            "death_down_1",
+            "death_down_2",
+            "death_down_3"
+          ],
+          "frameDurationMs": 180,
+          "loop": false
+        },
+        {
+          "id": "low_hp_idle_down",
+          "frames": [
+            "low_hp_idle_down_0",
+            "low_hp_idle_down_1",
+            "low_hp_idle_down_2",
+            "low_hp_idle_down_3"
+          ],
+          "frameDurationMs": 250,
+          "loop": true
+        },
+        {
+          "id": "idle_up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameDurationMs": 350,
+          "loop": true
+        },
+        {
+          "id": "hurt_up",
+          "frames": [
+            "hurt_up_0",
+            "hurt_up_1"
+          ],
+          "frameDurationMs": 120,
+          "loop": false
+        },
+        {
+          "id": "walk_up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameDurationMs": 150,
+          "loop": true
+        },
+        {
+          "id": "basic_attack_up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameDurationMs": 110,
+          "loop": false
+        },
+        {
+          "id": "ground_slam_up",
+          "frames": [
+            "ground_slam_up_0",
+            "ground_slam_up_1",
+            "ground_slam_up_2",
+            "ground_slam_up_3"
+          ],
+          "frameDurationMs": 140,
+          "loop": false
+        },
+        {
+          "id": "lava_cast_up",
+          "frames": [
+            "lava_cast_up_0",
+            "lava_cast_up_1",
+            "lava_cast_up_2",
+            "lava_cast_up_3"
+          ],
+          "frameDurationMs": 160,
+          "loop": false
+        },
+        {
+          "id": "command_up",
+          "frames": [
+            "command_up_0",
+            "command_up_1",
+            "command_up_2",
+            "command_up_3"
+          ],
+          "frameDurationMs": 180,
+          "loop": false
+        },
+        {
+          "id": "ultimate_charge_up",
+          "frames": [
+            "ultimate_charge_up_0",
+            "ultimate_charge_up_1",
+            "ultimate_charge_up_2",
+            "ultimate_charge_up_3"
+          ],
+          "frameDurationMs": 220,
+          "loop": false
+        },
+        {
+          "id": "death_up",
+          "frames": [
+            "death_up_0",
+            "death_up_1",
+            "death_up_2",
+            "death_up_3"
+          ],
+          "frameDurationMs": 180,
+          "loop": false
+        },
+        {
+          "id": "low_hp_idle_up",
+          "frames": [
+            "low_hp_idle_up_0",
+            "low_hp_idle_up_1",
+            "low_hp_idle_up_2",
+            "low_hp_idle_up_3"
+          ],
+          "frameDurationMs": 250,
+          "loop": true
+        },
+        {
+          "id": "idle_left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameDurationMs": 350,
+          "loop": true
+        },
+        {
+          "id": "hurt_left",
+          "frames": [
+            "hurt_left_0",
+            "hurt_left_1"
+          ],
+          "frameDurationMs": 120,
+          "loop": false
+        },
+        {
+          "id": "walk_left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameDurationMs": 150,
+          "loop": true
+        },
+        {
+          "id": "basic_attack_left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameDurationMs": 110,
+          "loop": false
+        },
+        {
+          "id": "ground_slam_left",
+          "frames": [
+            "ground_slam_left_0",
+            "ground_slam_left_1",
+            "ground_slam_left_2",
+            "ground_slam_left_3"
+          ],
+          "frameDurationMs": 140,
+          "loop": false
+        },
+        {
+          "id": "lava_cast_left",
+          "frames": [
+            "lava_cast_left_0",
+            "lava_cast_left_1",
+            "lava_cast_left_2",
+            "lava_cast_left_3"
+          ],
+          "frameDurationMs": 160,
+          "loop": false
+        },
+        {
+          "id": "command_left",
+          "frames": [
+            "command_left_0",
+            "command_left_1",
+            "command_left_2",
+            "command_left_3"
+          ],
+          "frameDurationMs": 180,
+          "loop": false
+        },
+        {
+          "id": "ultimate_charge_left",
+          "frames": [
+            "ultimate_charge_left_0",
+            "ultimate_charge_left_1",
+            "ultimate_charge_left_2",
+            "ultimate_charge_left_3"
+          ],
+          "frameDurationMs": 220,
+          "loop": false
+        },
+        {
+          "id": "death_left",
+          "frames": [
+            "death_left_0",
+            "death_left_1",
+            "death_left_2",
+            "death_left_3"
+          ],
+          "frameDurationMs": 180,
+          "loop": false
+        },
+        {
+          "id": "low_hp_idle_left",
+          "frames": [
+            "low_hp_idle_left_0",
+            "low_hp_idle_left_1",
+            "low_hp_idle_left_2",
+            "low_hp_idle_left_3"
+          ],
+          "frameDurationMs": 250,
+          "loop": true
+        },
+        {
+          "id": "idle_right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameDurationMs": 350,
+          "loop": true
+        },
+        {
+          "id": "hurt_right",
+          "frames": [
+            "hurt_right_0",
+            "hurt_right_1"
+          ],
+          "frameDurationMs": 120,
+          "loop": false
+        },
+        {
+          "id": "walk_right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameDurationMs": 150,
+          "loop": true
+        },
+        {
+          "id": "basic_attack_right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameDurationMs": 110,
+          "loop": false
+        },
+        {
+          "id": "ground_slam_right",
+          "frames": [
+            "ground_slam_right_0",
+            "ground_slam_right_1",
+            "ground_slam_right_2",
+            "ground_slam_right_3"
+          ],
+          "frameDurationMs": 140,
+          "loop": false
+        },
+        {
+          "id": "lava_cast_right",
+          "frames": [
+            "lava_cast_right_0",
+            "lava_cast_right_1",
+            "lava_cast_right_2",
+            "lava_cast_right_3"
+          ],
+          "frameDurationMs": 160,
+          "loop": false
+        },
+        {
+          "id": "command_right",
+          "frames": [
+            "command_right_0",
+            "command_right_1",
+            "command_right_2",
+            "command_right_3"
+          ],
+          "frameDurationMs": 180,
+          "loop": false
+        },
+        {
+          "id": "ultimate_charge_right",
+          "frames": [
+            "ultimate_charge_right_0",
+            "ultimate_charge_right_1",
+            "ultimate_charge_right_2",
+            "ultimate_charge_right_3"
+          ],
+          "frameDurationMs": 220,
+          "loop": false
+        },
+        {
+          "id": "death_right",
+          "frames": [
+            "death_right_0",
+            "death_right_1",
+            "death_right_2",
+            "death_right_3"
+          ],
+          "frameDurationMs": 180,
+          "loop": false
+        },
+        {
+          "id": "low_hp_idle_right",
+          "frames": [
+            "low_hp_idle_right_0",
+            "low_hp_idle_right_1",
+            "low_hp_idle_right_2",
+            "low_hp_idle_right_3"
+          ],
+          "frameDurationMs": 250,
+          "loop": true
+        }
+      ],
+      "sourceJobs": [
+        "boss_down",
+        "boss_up",
+        "boss_left",
+        "boss_right",
+        "lowHp"
+      ],
+      "provenance": "Original AI artwork generated with built-in image_gen for this task; PNG source retained. No third-party sprite copied.",
+      "licenseNote": "AI-generated output; subject to applicable OpenAI terms. No external licensed asset claim.",
+      "sourceFormat": "Flattened PNG drawings; no recovered layered Aseprite source.",
+      "bodyHeightTargetPx": 64,
+      "wholeSheetScales": {
+        "down": 0.32,
+        "up": 0.3545706371191136,
+        "left": 0.3395225464190981,
+        "right": 0.3545706371191136
+      }
+    },
+    {
+      "id": "mongolian_footman",
+      "status": "prototype",
+      "productionStatus": "produced_unintegrated",
+      "conceptApproval": "automatic_for_this_task",
+      "runtimeVerified": false,
+      "runtimeApproved": false,
+      "image": "assets/sprites/summons/mongolian-footman/spritesheet.png",
+      "atlas": "assets/sprites/summons/mongolian-footman/atlas.json",
+      "frameSize": [
+        96,
+        96
+      ],
+      "footAnchorPx": [
+        48,
+        76
+      ],
+      "animations": [
+        {
+          "id": "idle_down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameDurationMs": 350,
+          "loop": true
+        },
+        {
+          "id": "walk_down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "hurt_down",
+          "frames": [
+            "hurt_down_0",
+            "hurt_down_1"
+          ],
+          "frameDurationMs": 110,
+          "loop": false
+        },
+        {
+          "id": "death_down",
+          "frames": [
+            "death_down_0",
+            "death_down_1",
+            "death_down_2"
+          ],
+          "frameDurationMs": 170,
+          "loop": false
+        },
+        {
+          "id": "arrival_down",
+          "frames": [
+            "arrival_down_0"
+          ],
+          "frameDurationMs": 150,
+          "loop": false
+        },
+        {
+          "id": "basic_attack_down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "shield_guard_down",
+          "frames": [
+            "shield_guard_down_0"
+          ],
+          "frameDurationMs": 180,
+          "loop": true
+        },
+        {
+          "id": "idle_up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameDurationMs": 350,
+          "loop": true
+        },
+        {
+          "id": "walk_up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "hurt_up",
+          "frames": [
+            "hurt_up_0",
+            "hurt_up_1"
+          ],
+          "frameDurationMs": 110,
+          "loop": false
+        },
+        {
+          "id": "death_up",
+          "frames": [
+            "death_up_0",
+            "death_up_1",
+            "death_up_2"
+          ],
+          "frameDurationMs": 170,
+          "loop": false
+        },
+        {
+          "id": "arrival_up",
+          "frames": [
+            "arrival_up_0"
+          ],
+          "frameDurationMs": 150,
+          "loop": false
+        },
+        {
+          "id": "basic_attack_up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "shield_guard_up",
+          "frames": [
+            "shield_guard_up_0"
+          ],
+          "frameDurationMs": 180,
+          "loop": true
+        },
+        {
+          "id": "idle_left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameDurationMs": 350,
+          "loop": true
+        },
+        {
+          "id": "walk_left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "hurt_left",
+          "frames": [
+            "hurt_left_0",
+            "hurt_left_1"
+          ],
+          "frameDurationMs": 110,
+          "loop": false
+        },
+        {
+          "id": "death_left",
+          "frames": [
+            "death_left_0",
+            "death_left_1",
+            "death_left_2"
+          ],
+          "frameDurationMs": 170,
+          "loop": false
+        },
+        {
+          "id": "arrival_left",
+          "frames": [
+            "arrival_left_0"
+          ],
+          "frameDurationMs": 150,
+          "loop": false
+        },
+        {
+          "id": "basic_attack_left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "shield_guard_left",
+          "frames": [
+            "shield_guard_left_0"
+          ],
+          "frameDurationMs": 180,
+          "loop": true
+        },
+        {
+          "id": "idle_right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameDurationMs": 350,
+          "loop": true
+        },
+        {
+          "id": "walk_right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "hurt_right",
+          "frames": [
+            "hurt_right_0",
+            "hurt_right_1"
+          ],
+          "frameDurationMs": 110,
+          "loop": false
+        },
+        {
+          "id": "death_right",
+          "frames": [
+            "death_right_0",
+            "death_right_1",
+            "death_right_2"
+          ],
+          "frameDurationMs": 170,
+          "loop": false
+        },
+        {
+          "id": "arrival_right",
+          "frames": [
+            "arrival_right_0"
+          ],
+          "frameDurationMs": 150,
+          "loop": false
+        },
+        {
+          "id": "basic_attack_right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "shield_guard_right",
+          "frames": [
+            "shield_guard_right_0"
+          ],
+          "frameDurationMs": 180,
+          "loop": true
+        }
+      ],
+      "sourceJobs": [
+        "footman"
+      ],
+      "provenance": "Original AI artwork generated with built-in image_gen for this task; PNG source retained. No third-party sprite copied.",
+      "licenseNote": "AI-generated output; subject to applicable OpenAI terms. No external licensed asset claim.",
+      "sourceFormat": "Flattened PNG drawings; no recovered layered Aseprite source.",
+      "bodyHeightTargetPx": 48,
+      "exportScale": 0.32653061224489793,
+      "arrivalNote": "One authored arrival keypose plus separately animated arrival_dust; not a fabricated multi-frame character arrival."
+    },
+    {
+      "id": "mongolian_archer",
+      "status": "prototype",
+      "productionStatus": "produced_unintegrated",
+      "conceptApproval": "automatic_for_this_task",
+      "runtimeVerified": false,
+      "runtimeApproved": false,
+      "image": "assets/sprites/summons/mongolian-archer/spritesheet.png",
+      "atlas": "assets/sprites/summons/mongolian-archer/atlas.json",
+      "frameSize": [
+        96,
+        96
+      ],
+      "footAnchorPx": [
+        48,
+        76
+      ],
+      "animations": [
+        {
+          "id": "idle_down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameDurationMs": 350,
+          "loop": true
+        },
+        {
+          "id": "walk_down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "hurt_down",
+          "frames": [
+            "hurt_down_0",
+            "hurt_down_1"
+          ],
+          "frameDurationMs": 110,
+          "loop": false
+        },
+        {
+          "id": "death_down",
+          "frames": [
+            "death_down_0",
+            "death_down_1",
+            "death_down_2"
+          ],
+          "frameDurationMs": 170,
+          "loop": false
+        },
+        {
+          "id": "arrival_down",
+          "frames": [
+            "arrival_down_0"
+          ],
+          "frameDurationMs": 150,
+          "loop": false
+        },
+        {
+          "id": "bow_draw_down",
+          "frames": [
+            "bow_draw_down_0",
+            "bow_draw_down_1"
+          ],
+          "frameDurationMs": 160,
+          "loop": false
+        },
+        {
+          "id": "arrow_release_down",
+          "frames": [
+            "arrow_release_down_0",
+            "arrow_release_down_1"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "idle_up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameDurationMs": 350,
+          "loop": true
+        },
+        {
+          "id": "walk_up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "hurt_up",
+          "frames": [
+            "hurt_up_0",
+            "hurt_up_1"
+          ],
+          "frameDurationMs": 110,
+          "loop": false
+        },
+        {
+          "id": "death_up",
+          "frames": [
+            "death_up_0",
+            "death_up_1",
+            "death_up_2"
+          ],
+          "frameDurationMs": 170,
+          "loop": false
+        },
+        {
+          "id": "arrival_up",
+          "frames": [
+            "arrival_up_0"
+          ],
+          "frameDurationMs": 150,
+          "loop": false
+        },
+        {
+          "id": "bow_draw_up",
+          "frames": [
+            "bow_draw_up_0",
+            "bow_draw_up_1"
+          ],
+          "frameDurationMs": 160,
+          "loop": false
+        },
+        {
+          "id": "arrow_release_up",
+          "frames": [
+            "arrow_release_up_0",
+            "arrow_release_up_1"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "idle_left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameDurationMs": 350,
+          "loop": true
+        },
+        {
+          "id": "walk_left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "hurt_left",
+          "frames": [
+            "hurt_left_0",
+            "hurt_left_1"
+          ],
+          "frameDurationMs": 110,
+          "loop": false
+        },
+        {
+          "id": "death_left",
+          "frames": [
+            "death_left_0",
+            "death_left_1",
+            "death_left_2"
+          ],
+          "frameDurationMs": 170,
+          "loop": false
+        },
+        {
+          "id": "arrival_left",
+          "frames": [
+            "arrival_left_0"
+          ],
+          "frameDurationMs": 150,
+          "loop": false
+        },
+        {
+          "id": "bow_draw_left",
+          "frames": [
+            "bow_draw_left_0",
+            "bow_draw_left_1"
+          ],
+          "frameDurationMs": 160,
+          "loop": false
+        },
+        {
+          "id": "arrow_release_left",
+          "frames": [
+            "arrow_release_left_0",
+            "arrow_release_left_1"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "idle_right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameDurationMs": 350,
+          "loop": true
+        },
+        {
+          "id": "walk_right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "hurt_right",
+          "frames": [
+            "hurt_right_0",
+            "hurt_right_1"
+          ],
+          "frameDurationMs": 110,
+          "loop": false
+        },
+        {
+          "id": "death_right",
+          "frames": [
+            "death_right_0",
+            "death_right_1",
+            "death_right_2"
+          ],
+          "frameDurationMs": 170,
+          "loop": false
+        },
+        {
+          "id": "arrival_right",
+          "frames": [
+            "arrival_right_0"
+          ],
+          "frameDurationMs": 150,
+          "loop": false
+        },
+        {
+          "id": "bow_draw_right",
+          "frames": [
+            "bow_draw_right_0",
+            "bow_draw_right_1"
+          ],
+          "frameDurationMs": 160,
+          "loop": false
+        },
+        {
+          "id": "arrow_release_right",
+          "frames": [
+            "arrow_release_right_0",
+            "arrow_release_right_1"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        }
+      ],
+      "sourceJobs": [
+        "archer"
+      ],
+      "provenance": "Original AI artwork generated with built-in image_gen for this task; PNG source retained. No third-party sprite copied.",
+      "licenseNote": "AI-generated output; subject to applicable OpenAI terms. No external licensed asset claim.",
+      "sourceFormat": "Flattened PNG drawings; no recovered layered Aseprite source.",
+      "bodyHeightTargetPx": 46,
+      "exportScale": 0.3194444444444444,
+      "arrivalNote": "One authored arrival keypose plus separately animated arrival_dust; not a fabricated multi-frame character arrival."
+    },
+    {
+      "id": "hoan_nhan_hong_liet_vfx",
+      "status": "prototype",
+      "productionStatus": "produced_unintegrated",
+      "conceptApproval": "automatic_for_this_task",
+      "runtimeVerified": false,
+      "runtimeApproved": false,
+      "image": "assets/effects/bosses/hoan-nhan-hong-liet/spritesheet.png",
+      "atlas": "assets/effects/bosses/hoan-nhan-hong-liet/atlas.json",
+      "frameSize": [
+        256,
+        256
+      ],
+      "footAnchorPx": [
+        128,
+        128
+      ],
+      "animations": [
+        {
+          "id": "saber_slash",
+          "frames": [
+            "saber_slash_0",
+            "saber_slash_1",
+            "saber_slash_2",
+            "saber_slash_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "weapon_impact_dust_sparks",
+          "frames": [
+            "weapon_impact_dust_sparks_0",
+            "weapon_impact_dust_sparks_1",
+            "weapon_impact_dust_sparks_2",
+            "weapon_impact_dust_sparks_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "traveling_fissure",
+          "frames": [
+            "traveling_fissure_0",
+            "traveling_fissure_1",
+            "traveling_fissure_2",
+            "traveling_fissure_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "lava_eruption",
+          "frames": [
+            "lava_eruption_0",
+            "lava_eruption_1",
+            "lava_eruption_2",
+            "lava_eruption_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "molten_splash",
+          "frames": [
+            "molten_splash_0",
+            "molten_splash_1",
+            "molten_splash_2",
+            "molten_splash_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "burning_ground",
+          "frames": [
+            "burning_ground_0",
+            "burning_ground_1",
+            "burning_ground_2",
+            "burning_ground_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "lava_wall_rise",
+          "frames": [
+            "lava_wall_rise_0",
+            "lava_wall_rise_1",
+            "lava_wall_rise_2",
+            "lava_wall_rise_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "lava_wall_dissipate",
+          "frames": [
+            "lava_wall_dissipate_0",
+            "lava_wall_dissipate_1",
+            "lava_wall_dissipate_2",
+            "lava_wall_dissipate_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "military_signal",
+          "frames": [
+            "military_signal_0",
+            "military_signal_1",
+            "military_signal_2",
+            "military_signal_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "normal_arrow",
+          "frames": [
+            "normal_arrow_0",
+            "normal_arrow_1",
+            "normal_arrow_2",
+            "normal_arrow_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "flaming_arrow",
+          "frames": [
+            "flaming_arrow_0",
+            "flaming_arrow_1",
+            "flaming_arrow_2",
+            "flaming_arrow_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "arrow_impact",
+          "frames": [
+            "arrow_impact_0",
+            "arrow_impact_1",
+            "arrow_impact_2",
+            "arrow_impact_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "arrival_dust",
+          "frames": [
+            "arrival_dust_0",
+            "arrival_dust_1",
+            "arrival_dust_2",
+            "arrival_dust_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "expanding_shockwave",
+          "frames": [
+            "expanding_shockwave_0",
+            "expanding_shockwave_1",
+            "expanding_shockwave_2",
+            "expanding_shockwave_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "ultimate_eruption",
+          "frames": [
+            "ultimate_eruption_0",
+            "ultimate_eruption_1",
+            "ultimate_eruption_2",
+            "ultimate_eruption_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "ultimate_ending",
+          "frames": [
+            "ultimate_ending_0",
+            "ultimate_ending_1",
+            "ultimate_ending_2",
+            "ultimate_ending_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "fissure_warning",
+          "frames": [
+            "fissure_warning_0",
+            "fissure_warning_1",
+            "fissure_warning_2",
+            "fissure_warning_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "eruption_warning",
+          "frames": [
+            "eruption_warning_0",
+            "eruption_warning_1",
+            "eruption_warning_2",
+            "eruption_warning_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "wall_warning",
+          "frames": [
+            "wall_warning_0",
+            "wall_warning_1",
+            "wall_warning_2",
+            "wall_warning_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "safe_gap_boundaries",
+          "frames": [
+            "safe_gap_boundaries_0",
+            "safe_gap_boundaries_1",
+            "safe_gap_boundaries_2",
+            "safe_gap_boundaries_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "volley_warning",
+          "frames": [
+            "volley_warning_0",
+            "volley_warning_1",
+            "volley_warning_2",
+            "volley_warning_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "rally_formation",
+          "frames": [
+            "rally_formation_0",
+            "rally_formation_1",
+            "rally_formation_2",
+            "rally_formation_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "ultimate_warning_cross",
+          "frames": [
+            "ultimate_warning_cross_0",
+            "ultimate_warning_cross_1",
+            "ultimate_warning_cross_2",
+            "ultimate_warning_cross_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "ultimate_warning_sectors",
+          "frames": [
+            "ultimate_warning_sectors_0",
+            "ultimate_warning_sectors_1",
+            "ultimate_warning_sectors_2",
+            "ultimate_warning_sectors_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "armor_glow",
+          "frames": [
+            "armor_glow_0",
+            "armor_glow_1",
+            "armor_glow_2",
+            "armor_glow_3"
+          ],
+          "frameDurationMs": 120,
+          "loop": true
+        },
+        {
+          "id": "defense_impact",
+          "frames": [
+            "defense_impact_0",
+            "defense_impact_1",
+            "defense_impact_2",
+            "defense_impact_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "ground_rumble",
+          "frames": [
+            "ground_rumble_0",
+            "ground_rumble_1",
+            "ground_rumble_2",
+            "ground_rumble_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        },
+        {
+          "id": "burning_impact",
+          "frames": [
+            "burning_impact_0",
+            "burning_impact_1",
+            "burning_impact_2",
+            "burning_impact_3"
+          ],
+          "frameDurationMs": 90,
+          "loop": false
+        }
+      ],
+      "sourceJobs": [
+        "basicVfx",
+        "lavaVfx",
+        "militaryVfx",
+        "telegraphs",
+        "passiveVfx"
+      ],
+      "provenance": "Original AI artwork generated with built-in image_gen for this task; PNG source retained. No third-party sprite copied.",
+      "licenseNote": "AI-generated output; subject to applicable OpenAI terms. No external licensed asset claim.",
+      "sourceFormat": "Flattened PNG drawings; no recovered layered Aseprite source.",
+      "groundAnchorPx": [
+        128,
+        208
+      ],
+      "projectileDirection": "right",
+      "sourceRowBoundsPx": {
+        "lavaVfx": [
+          0,
+          246,
+          510,
+          696,
+          1024,
+          1253,
+          1419,
+          1582,
+          1774
+        ],
+        "militaryVfx": [
+          0,
+          333,
+          496,
+          684,
+          919,
+          1117,
+          1302,
+          1595,
+          1774
+        ],
+        "telegraphs": [
+          0,
+          200,
+          425,
+          607,
+          787,
+          992,
+          1211,
+          1434,
+          1774
+        ]
+      },
+      "exportAlphaNoiseCutoff": 2,
+      "unusedSourceRows": {
+        "lavaVfx": [
+          0,
+          1
+        ]
+      },
+      "unusedReason": "Generator baked character art into two VFX rows; replaced by effects-only basicVfx source.",
+      "telegraphSafety": "Warning alpha is artwork, never an authoritative collision mask. Open pattern gaps are intentional; validate against server shapes when integrating."
+    },
+    {
+      "id": "mongolian_headquarters_props",
+      "status": "prototype",
+      "productionStatus": "produced_unintegrated",
+      "conceptApproval": "automatic_for_this_task",
+      "runtimeVerified": false,
+      "runtimeApproved": false,
+      "image": "assets/sprites/environment/mongolian-headquarters/spritesheet.png",
+      "atlas": "assets/sprites/environment/mongolian-headquarters/atlas.json",
+      "frameSize": [
+        384,
+        384
+      ],
+      "footAnchorPx": [
+        192,
+        368
+      ],
+      "animations": [
+        {
+          "id": "command_tent",
+          "frames": [
+            "command_tent_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "watchtower",
+          "frames": [
+            "watchtower_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "palisade_horizontal",
+          "frames": [
+            "palisade_horizontal_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "palisade_vertical",
+          "frames": [
+            "palisade_vertical_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "military_gate",
+          "frames": [
+            "military_gate_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "yurt",
+          "frames": [
+            "yurt_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "soldier_tent",
+          "frames": [
+            "soldier_tent_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "return_portal",
+          "frames": [
+            "return_portal_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "army_banner",
+          "frames": [
+            "army_banner_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "signal_pennant",
+          "frames": [
+            "signal_pennant_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "saber_shield_rack",
+          "frames": [
+            "saber_shield_rack_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "bow_quiver_rack",
+          "frames": [
+            "bow_quiver_rack_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "supply_crate",
+          "frames": [
+            "supply_crate_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "open_supply_crate",
+          "frames": [
+            "open_supply_crate_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "barrel",
+          "frames": [
+            "barrel_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "supply_sacks",
+          "frames": [
+            "supply_sacks_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "burning_brazier",
+          "frames": [
+            "burning_brazier_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "military_drum",
+          "frames": [
+            "military_drum_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "saddle_trestle",
+          "frames": [
+            "saddle_trestle_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "horse_tack_rack",
+          "frames": [
+            "horse_tack_rack_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "volcanic_rocks",
+          "frames": [
+            "volcanic_rocks_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "ash_basalt_rock",
+          "frames": [
+            "ash_basalt_rock_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "boundary_lava_rock",
+          "frames": [
+            "boundary_lava_rock_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        },
+        {
+          "id": "command_horn_carpet",
+          "frames": [
+            "command_horn_carpet_0"
+          ],
+          "frameDurationMs": 100,
+          "loop": false
+        }
+      ],
+      "sourceJobs": [
+        "structures",
+        "props"
+      ],
+      "provenance": "Original AI artwork generated with built-in image_gen for this task; PNG source retained. No third-party sprite copied.",
+      "licenseNote": "AI-generated output; subject to applicable OpenAI terms. No external licensed asset claim.",
+      "sourceFormat": "Flattened PNG drawings; no recovered layered Aseprite source."
+    }
+  ],
+  "generationMethod": "Built-in image_gen; exact prompts and retained source destinations in generation_jobs.json.",
+  "exportMethod": "Pillow/NumPy offline extraction, uniform nearest resampling, RGBA atlas packing and texture masks; no generated pose transforms.",
+  "observations": [],
+  "sourceLimitations": [
+    "Flattened PNG source; no artist-layered Aseprite files.",
+    "No Phaser, motion, multiplayer zoom or authoritative telegraph validation performed by instruction."
+  ],
+  "exportAlphaNoiseCutoff": 2
+}

@@ -1,0 +1,103 @@
+{
+  "image": "desert-terrain.png",
+  "tileWidth": 32,
+  "tileHeight": 32,
+  "columns": 16,
+  "tileCount": 344,
+  "margin": 0,
+  "spacing": 0,
+  "tileIdsAreZeroBased": true,
+  "groups": {
+    "smooth_sand": {
+      "firstId": 0,
+      "count": 4,
+      "type": "material"
+    },
+    "rough_sand": {
+      "firstId": 4,
+      "count": 4,
+      "type": "material"
+    },
+    "cracked_dry_earth": {
+      "firstId": 8,
+      "count": 4,
+      "type": "material"
+    },
+    "rocky_ground": {
+      "firstId": 12,
+      "count": 4,
+      "type": "material"
+    },
+    "sandstone_path": {
+      "firstId": 16,
+      "count": 4,
+      "type": "material"
+    },
+    "dune_sand": {
+      "firstId": 20,
+      "count": 4,
+      "type": "material"
+    },
+    "sand_to_rough_sand": {
+      "firstId": 24,
+      "count": 64,
+      "type": "corner_mask",
+      "maskBits": [
+        "NW",
+        "NE",
+        "SE",
+        "SW"
+      ],
+      "phaseCount": 4
+    },
+    "sand_to_cracked_dry_earth": {
+      "firstId": 88,
+      "count": 64,
+      "type": "corner_mask",
+      "maskBits": [
+        "NW",
+        "NE",
+        "SE",
+        "SW"
+      ],
+      "phaseCount": 4
+    },
+    "sand_to_rocky_ground": {
+      "firstId": 152,
+      "count": 64,
+      "type": "corner_mask",
+      "maskBits": [
+        "NW",
+        "NE",
+        "SE",
+        "SW"
+      ],
+      "phaseCount": 4
+    },
+    "sand_to_sandstone_path": {
+      "firstId": 216,
+      "count": 64,
+      "type": "corner_mask",
+      "maskBits": [
+        "NW",
+        "NE",
+        "SE",
+        "SW"
+      ],
+      "phaseCount": 4
+    },
+    "sand_to_dune_sand": {
+      "firstId": 280,
+      "count": 64,
+      "type": "corner_mask",
+      "maskBits": [
+        "NW",
+        "NE",
+        "SE",
+        "SW"
+      ],
+      "phaseCount": 4
+    }
+  },
+  "notes": "Authored raster samples with edge conditioning and deterministic corner masks; not a runtime map. IDs use mask*4+phase."
+}

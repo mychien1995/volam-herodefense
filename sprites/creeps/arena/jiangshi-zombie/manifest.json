@@ -1,0 +1,1409 @@
+{
+  "id": "creep_jiangshi_zombie",
+  "nameVi": "Cương Thi",
+  "phase": "1F",
+  "category": "enemy",
+  "status": "prototype",
+  "reviewStatus": "STAGED_NOT_INTEGRATED",
+  "conceptApproval": "User: approved, please proceed (2026-10-30), after Phase 1E concept delivery",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+  "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+  "masterConcept": "assets/concepts/arena-creeps/waves-09-12/arena_creeps_09_12_concept_sheet.png",
+  "source": "sprites/creeps/arena/jiangshi-zombie/source/creep_jiangshi_zombie.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 96,
+  "frameHeight": 96,
+  "footPivot": [
+    0.5,
+    0.7916666666666666
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/idle_down_0.png",
+      "bounds": [
+        32,
+        32,
+        65,
+        76
+      ],
+      "sha256": "a4707d6430d54818cb6c4e97a2094a81085f2e72817054d962c585040e14d287",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "idle_down_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/idle_down_1.png",
+      "bounds": [
+        32,
+        33,
+        64,
+        76
+      ],
+      "sha256": "03661b6bc335f8338e99d3875c041fdfb03d781e534e7722350cd6cc51952899",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "walk_down_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_down_0.png",
+      "bounds": [
+        35,
+        32,
+        65,
+        76
+      ],
+      "sha256": "f20fce076fe975ddd2f96d2b5127fec09fa19d93a905c729e66b706aa0c12715",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "walk_down_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_down_1.png",
+      "bounds": [
+        30,
+        32,
+        63,
+        76
+      ],
+      "sha256": "fb57ca9f74bf08a3685e11198d7307f8b5f0c97030df0a1f00a82938cdda9a74",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "walk_down_2",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_down_2.png",
+      "bounds": [
+        32,
+        32,
+        62,
+        76
+      ],
+      "sha256": "585e7b80fc1579c6ea464db5d1b7444456056bca1c53ff9197c2e86e4cc04d31",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 4
+    },
+    {
+      "name": "walk_down_3",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_down_3.png",
+      "bounds": [
+        33,
+        33,
+        63,
+        76
+      ],
+      "sha256": "198e692fae31e4d0d86c20d01f33f55c44f7c473ae7247526e045a6f226b5bf5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 5
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_down_0.png",
+      "bounds": [
+        31,
+        31,
+        65,
+        76
+      ],
+      "sha256": "d96f5acdd16a30a4871c02bcd652aa79e7703b99e14ddaef1c87250321f045bd",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/attack_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_down_1.png",
+      "bounds": [
+        29,
+        32,
+        59,
+        76
+      ],
+      "sha256": "2efc98782ce3ee6d8aa4cfcddb3b631d7eafa5d9afb04f577de53588afb992c8",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/attack_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_down_2.png",
+      "bounds": [
+        24,
+        33,
+        61,
+        76
+      ],
+      "sha256": "1f462d47a42840b32d664faf05dd0672479566d36946f78203b51a1db109613d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/attack_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_down_3.png",
+      "bounds": [
+        31,
+        31,
+        64,
+        76
+      ],
+      "sha256": "ef396728be12b2177e6079a51c32123ebd0ed150739c959663a8ed272ef4881b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/attack_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/hurt_down_0.png",
+      "bounds": [
+        31,
+        32,
+        64,
+        76
+      ],
+      "sha256": "0241a89eaa7b9136a780927c69e4c044cca56b69223675301654d4834f868584",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/hurt_down_1.png",
+      "bounds": [
+        26,
+        32,
+        60,
+        76
+      ],
+      "sha256": "4d8750828a88cd4f72baa69a39f4fafa403ca9c691859bb1f7f9180eccec757f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "death_down_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_down_0.png",
+      "bounds": [
+        34,
+        37,
+        70,
+        76
+      ],
+      "sha256": "c82ab2f150e5a38174c71ca73b7e6bd8e33820bdb64cc1ce9616efdb9bdd9525",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "death_down_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_down_1.png",
+      "bounds": [
+        29,
+        42,
+        72,
+        76
+      ],
+      "sha256": "40dc66a543b48f5c00bbac5cc246e599d803548e0d6cec4fe4c369d289e2bc50",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "death_down_2",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_down_2.png",
+      "bounds": [
+        24,
+        46,
+        72,
+        76
+      ],
+      "sha256": "e32b0ab2733b607481af4a72b2a0d6c71c2a0bccd28bb1282af0b25e6b226b25",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 4
+    },
+    {
+      "name": "death_down_3",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_down_3.png",
+      "bounds": [
+        18,
+        55,
+        78,
+        76
+      ],
+      "sha256": "1e4d06421454d93953fa43d4e862739d2f21948c884b6efa98b6db8296e0ec76",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 5
+    },
+    {
+      "name": "idle_left_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/idle_left_0.png",
+      "bounds": [
+        29,
+        32,
+        60,
+        76
+      ],
+      "sha256": "98caba594a154a76ab95f7408a4bcacc1cb186e10462ad94eaf3e9576db3fa7f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "idle_left_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/idle_left_1.png",
+      "bounds": [
+        30,
+        32,
+        62,
+        76
+      ],
+      "sha256": "7ddc4ba7cea51d2ca641a7794bc83bca6cd1f82b566664aa05463808d34a79db",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 12
+    },
+    {
+      "name": "walk_left_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_left_0.png",
+      "bounds": [
+        28,
+        31,
+        61,
+        76
+      ],
+      "sha256": "1f41a88d3e5e88432b6a08e16a7d2ef06ef5fed2d5deca5520e99b64c05a84a5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 13
+    },
+    {
+      "name": "walk_left_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_left_1.png",
+      "bounds": [
+        25,
+        31,
+        58,
+        76
+      ],
+      "sha256": "64f1641f7f9df0c4b8e3bf9dd86773e52f9cf3fb66f73309a680c7a5849feaa2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 14
+    },
+    {
+      "name": "walk_left_2",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_left_2.png",
+      "bounds": [
+        28,
+        31,
+        61,
+        76
+      ],
+      "sha256": "2b2697ad18d884fd3554577b960d742f7d907e525027905242262025646bedb0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 15
+    },
+    {
+      "name": "walk_left_3",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_left_3.png",
+      "bounds": [
+        29,
+        32,
+        61,
+        76
+      ],
+      "sha256": "cdaee8835e21c5a5b842516ac46ada8f57dd1b9faf8fd991ac60886bd570c382",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 16
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_left_0.png",
+      "bounds": [
+        26,
+        31,
+        65,
+        76
+      ],
+      "sha256": "4bec43e885ecf811876e66be6e3a32ec70b334bbfce7f5c71d5508279a392f76",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/attack_left_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_left_1.png",
+      "bounds": [
+        23,
+        32,
+        69,
+        76
+      ],
+      "sha256": "c8bb28f513df99d0611f0fa903238bb80c59edcd16837f4a15824d6ff229af76",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/attack_left_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_left_2.png",
+      "bounds": [
+        13,
+        34,
+        64,
+        76
+      ],
+      "sha256": "db3c84072350ec2607737815a5f5e8c55cffb57a71bcee4e9da0a60704a25f9c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/attack_left_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_left_3.png",
+      "bounds": [
+        25,
+        33,
+        67,
+        76
+      ],
+      "sha256": "e68abc1665ab69f47fe4fcad485cceca054bcdf55e5bd1b2709d686f6fe1728f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/attack_left_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/hurt_left_0.png",
+      "bounds": [
+        28,
+        32,
+        61,
+        76
+      ],
+      "sha256": "bd1b74e65a6ed3fbb6aa5a373349fa8d1ceb0b116c713f71832db38272c177d1",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 6
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/hurt_left_1.png",
+      "bounds": [
+        27,
+        32,
+        60,
+        76
+      ],
+      "sha256": "8ae1d61523f884807732827c0b70923d738533515a1f94dbcdb1698459f06d2f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 7
+    },
+    {
+      "name": "death_left_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_left_0.png",
+      "bounds": [
+        23,
+        39,
+        68,
+        76
+      ],
+      "sha256": "e5f2b2031c9838fd3b9ea68e371607eb80184f590970d4c23b647675aa92989c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 8
+    },
+    {
+      "name": "death_left_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_left_1.png",
+      "bounds": [
+        27,
+        43,
+        73,
+        76
+      ],
+      "sha256": "0550138c9344203c9e4d3dfb7a1f60a1cdc48d668d39a524f5778c4f08bda081",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 9
+    },
+    {
+      "name": "death_left_2",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_left_2.png",
+      "bounds": [
+        30,
+        46,
+        78,
+        76
+      ],
+      "sha256": "09f471c66740c04b11a91a30cbf1d0e4c4eb494598d0ca628d0c443d93819e38",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "death_left_3",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_left_3.png",
+      "bounds": [
+        29,
+        56,
+        84,
+        76
+      ],
+      "sha256": "cb6b79a169bae9be127adfc25eb8c871d2e886988370d9a222376b662de62a91",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "idle_right_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/idle_right_0.png",
+      "bounds": [
+        34,
+        32,
+        66,
+        76
+      ],
+      "sha256": "a196ee07b399c59427acac4bdb73d0db5d403709b67507438a4cece300ff4396",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 22
+    },
+    {
+      "name": "idle_right_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/idle_right_1.png",
+      "bounds": [
+        37,
+        32,
+        69,
+        76
+      ],
+      "sha256": "bbce81b98cca92358e3a5bb2647b441889490d9f70e1a3e6573cac9d156d306a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 23
+    },
+    {
+      "name": "walk_right_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_right_0.png",
+      "bounds": [
+        34,
+        32,
+        68,
+        76
+      ],
+      "sha256": "1c36944caf15b299fb6fb477c1d51fd2c0dc20e1c43979401fa73843cfe2ad3b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 24
+    },
+    {
+      "name": "walk_right_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_right_1.png",
+      "bounds": [
+        38,
+        31,
+        71,
+        76
+      ],
+      "sha256": "c41015414b1de9e57ebc5b3e30b92def977461c4e7945bb4742c16038cd6c996",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 25
+    },
+    {
+      "name": "walk_right_2",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_right_2.png",
+      "bounds": [
+        36,
+        31,
+        69,
+        76
+      ],
+      "sha256": "b85ac292a9b166bd901d32d9e661e472291aed54a02ff4ebc63aacbc973e2df1",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 26
+    },
+    {
+      "name": "walk_right_3",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_right_3.png",
+      "bounds": [
+        35,
+        31,
+        69,
+        76
+      ],
+      "sha256": "b9796f3532f585743739cd971c6ec7e42b1c34b6cc778feb3eae556f35484c28",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 27
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_right_0.png",
+      "bounds": [
+        35,
+        32,
+        69,
+        76
+      ],
+      "sha256": "b25231228f7b7fb392455d8ef33cbe824237c059ec5e5c972a44fb264ab32cbe",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/attack_v1.png",
+      "selectedComponent": 8
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_right_1.png",
+      "bounds": [
+        30,
+        34,
+        69,
+        76
+      ],
+      "sha256": "46e42e609f6128b3e5309fe7a4e1f6cdaf0db02088cd78270acc7b9fc96323da",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/attack_v1.png",
+      "selectedComponent": 9
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_right_2.png",
+      "bounds": [
+        27,
+        34,
+        79,
+        76
+      ],
+      "sha256": "261fa6c774cdc1e49a561cb5dbb615a831fe5ad572a8212431e920934773ca01",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/attack_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_right_3.png",
+      "bounds": [
+        37,
+        32,
+        71,
+        76
+      ],
+      "sha256": "8253712abc6b6950008639e933d92c602c1f7f13edd8063c0f8b1c6c0febb497",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/attack_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/hurt_right_0.png",
+      "bounds": [
+        34,
+        32,
+        69,
+        76
+      ],
+      "sha256": "b218f7dfd811da3c45c384b5e1013a62c290fba8938dd0af4c22a2c771fa0f9b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 12
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/hurt_right_1.png",
+      "bounds": [
+        33,
+        32,
+        69,
+        76
+      ],
+      "sha256": "0b68fc90449f2883d8e01927fcbd24bcec9712bccd7dc05f518a5590b611d7f3",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 13
+    },
+    {
+      "name": "death_right_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_right_0.png",
+      "bounds": [
+        30,
+        39,
+        72,
+        76
+      ],
+      "sha256": "d4b8146df61444d9d927123ad437deff53d23467189bd8d3e8fdd5939e3a7c4f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 14
+    },
+    {
+      "name": "death_right_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_right_1.png",
+      "bounds": [
+        24,
+        43,
+        70,
+        76
+      ],
+      "sha256": "c95efb785f8c3e82aa30fbdcaad0c8c11537d7a3932340d0035f0df3c3813a5d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 15
+    },
+    {
+      "name": "death_right_2",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_right_2.png",
+      "bounds": [
+        19,
+        47,
+        69,
+        76
+      ],
+      "sha256": "8062381b6a13a36f97991fb3651a72ba8236a8f67addd54b6b0a2cb294040605",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 16
+    },
+    {
+      "name": "death_right_3",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_right_3.png",
+      "bounds": [
+        11,
+        53,
+        69,
+        76
+      ],
+      "sha256": "5ca10078508b0b4f5853e71e3778ab53c70d253a19a6b531198330e82060f3d9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 17
+    },
+    {
+      "name": "idle_up_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/idle_up_0.png",
+      "bounds": [
+        31,
+        32,
+        63,
+        76
+      ],
+      "sha256": "249d7dad2816960c04fa9acab67b52956ee44a8538132f252b0f7602a6e675cc",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 33
+    },
+    {
+      "name": "idle_up_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/idle_up_1.png",
+      "bounds": [
+        32,
+        31,
+        64,
+        76
+      ],
+      "sha256": "2ac598b1e8bf6bda0e550746342fe2283a085b0d52c8548b2aa6600a014ed4b1",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 34
+    },
+    {
+      "name": "walk_up_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_up_0.png",
+      "bounds": [
+        33,
+        32,
+        66,
+        76
+      ],
+      "sha256": "12757a0e081ff87a19846a8e958db56a8cbb6740001e91e95cda2ed04cac69a6",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 35
+    },
+    {
+      "name": "walk_up_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_up_1.png",
+      "bounds": [
+        31,
+        32,
+        63,
+        76
+      ],
+      "sha256": "3cd1f98334caeeac94ad161b7d987edfc27986b5a562de24cabac565ca44e23b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 36
+    },
+    {
+      "name": "walk_up_2",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_up_2.png",
+      "bounds": [
+        34,
+        31,
+        66,
+        76
+      ],
+      "sha256": "b077492a5b444005b90f6e4144a2a53d4a476f16d67231a1b0b08bb1e65f987e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 37
+    },
+    {
+      "name": "walk_up_3",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/walk_up_3.png",
+      "bounds": [
+        32,
+        31,
+        64,
+        76
+      ],
+      "sha256": "5b9ecb720af8d22049db469d1e7ea8316c9b72f73a07aa527e8a2a367bacd7b1",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 38
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_up_0.png",
+      "bounds": [
+        32,
+        32,
+        65,
+        76
+      ],
+      "sha256": "42f6bd8df31a5964a64f9bd9014eae4ccdd55a41f1ebb56f9d49f8d69b94184c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 39
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_up_1.png",
+      "bounds": [
+        27,
+        33,
+        64,
+        76
+      ],
+      "sha256": "b89d96c643f01c62211ebb3dfc6e0382e5f8887502bebdc53bf90e447f972f10",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 40
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_up_2.png",
+      "bounds": [
+        25,
+        34,
+        65,
+        76
+      ],
+      "sha256": "a6c539821543f460b5570ea557a79687990d5f69f0888adc6259ae37e6676c8c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 41
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/basic_attack_up_3.png",
+      "bounds": [
+        32,
+        32,
+        64,
+        76
+      ],
+      "sha256": "bd919dd40ec206bc126f9dc9e178ba606e72d5e76acd86531f719542b6ba08e0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "selectedComponent": 42
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/hurt_up_0.png",
+      "bounds": [
+        31,
+        31,
+        65,
+        76
+      ],
+      "sha256": "f5a39e5eab38729d61595b1ae6075af7135edc213bd64f382251057ce0e06a38",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 18
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/hurt_up_1.png",
+      "bounds": [
+        27,
+        31,
+        61,
+        76
+      ],
+      "sha256": "96ccab093f9ec5ebbcb4b4eb706c86040644258fa70500ed5164a2d334f44368",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 19
+    },
+    {
+      "name": "death_up_0",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_up_0.png",
+      "bounds": [
+        33,
+        35,
+        70,
+        76
+      ],
+      "sha256": "8397e5f5528988c3f37f33d13388f0cdd793fb399f9586e3c7c1a9ac0312a647",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 20
+    },
+    {
+      "name": "death_up_1",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_up_1.png",
+      "bounds": [
+        27,
+        42,
+        72,
+        76
+      ],
+      "sha256": "1718d67682130ad37dcda3d0a551c0a0ccf569d13b85923617877d3631ea47ab",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 21
+    },
+    {
+      "name": "death_up_2",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_up_2.png",
+      "bounds": [
+        24,
+        50,
+        77,
+        76
+      ],
+      "sha256": "3a678c4ae0bf8936d6b80f0b65bc0db786dc002ad347efa8c151398d1a62f033",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 22
+    },
+    {
+      "name": "death_up_3",
+      "file": "sprites/creeps/arena/jiangshi-zombie/frames/death_up_3.png",
+      "bounds": [
+        23,
+        54,
+        80,
+        76
+      ],
+      "sha256": "038e4f48a65dfb5bb57e4b7f2acd0849942c72f37d86da599ace0a4c4e204d38",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "sourceConceptSha256": "3f4c55e79742fb08fa8e5d9132a550b4d3968906d67b8cddc845e3b27a341116",
+      "sourceImage": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "selectedComponent": 23
+    }
+  ],
+  "animationAudit": [
+    {
+      "tag": "idle_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    }
+  ],
+  "generatedSources": {
+    "main": {
+      "file": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+      "originalGeneratedFilename": "exec-692eccb8-fe28-4a62-8759-c5242aa56afa.png",
+      "expected": 44,
+      "rows": 4,
+      "cols": 11,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        1,
+        11,
+        12,
+        22,
+        23,
+        33,
+        34
+      ],
+      "sha256": "cc165bba8c2c63b5f656300ecd3625085181ad5b20a9bd094a648cf438216b6e"
+    },
+    "reaction": {
+      "file": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+      "originalGeneratedFilename": "exec-cc0c72e4-785e-4209-b9a8-16b1d2ad5be8.png",
+      "expected": 24,
+      "rows": 4,
+      "cols": 6,
+      "used": true,
+      "heightReferenceIndices": [
+        1,
+        7,
+        13,
+        19
+      ],
+      "sha256": "e8537a9130645e981c94ee8075132b72d6b97042b152734194417dd32901b8f5"
+    },
+    "attack": {
+      "file": "sprites/creeps/arena/jiangshi-zombie/source/attack_v1.png",
+      "originalGeneratedFilename": "exec-71dc776a-5dd6-40c8-a6ba-c1e80b82fd37.png",
+      "expected": 12,
+      "rows": 3,
+      "cols": 4,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        4,
+        8
+      ],
+      "sha256": "dd2a3deb48ea922f1f7841c41dc46e0b1b92e971ade4b9f660c0944d541fc822"
+    },
+    "attack_left": {
+      "file": "sprites/creeps/arena/jiangshi-zombie/source/attack_left_v1.png",
+      "expected": 4,
+      "rows": 2,
+      "cols": 2,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        3
+      ],
+      "originalGeneratedFilename": "exec-9fc2fee6-3b22-4b26-b98d-385e0e5c0220.png",
+      "sha256": "128dd4fd36223058dc454639841b2a9a86098873950ff5ada49201ddc4f83c3a"
+    }
+  },
+  "sourceScales": {
+    "main": 0.25507246376811593,
+    "reaction": 0.20323325635103925,
+    "attack": 0.15017064846416384,
+    "attack_left": 0.09865470852017937
+  },
+  "notes": "Extra generated column measured explicitly; first ten per row used, with regenerated front/side attacks.",
+  "runtimeIntegration": false,
+  "provenance": "Original AI-assisted generated raster poses, approved concept images provided directly. Aseprite extracts masked generated pixels, removes alpha below220, preserves source RGB, normalizes retained alpha, applies fixed nearest-neighbour source scale and aligns feet. No concept pixels used as animation frames; no commercial sprite pack, separate third-party license or exclusive copyright claimed.",
+  "verification": "Isolated Phaser verification passed; owner animation approval pending; not integrated.",
+  "normalGameplayReview": "PASS: isolated Phaser 4.2.1, 1x logical/1x and2x display, all frames observed, native loop/one-shot/facing transitions and constant origins checked. No live-match integration or owner runtime approval.",
+  "verificationEvidence": [
+    "sprites/creeps/arena/waves-09-12-production/review/phaser_verification.json",
+    "sprites/creeps/arena/waves-09-12-production/review/concept_comparison.png"
+  ],
+  "wave": 9,
+  "artifactHashes": {
+    "spritesheet.png": "f90096e8506494b4d7edadebbf41b6d5acb891f2bd845bff33dd607e3fa052d7",
+    "atlas.json": "9fbd26e6c01edacc645a497d271a24c7389a64468c9d08ec0902df03e3be927e",
+    "source/creep_jiangshi_zombie.aseprite": "43d3f87f26d4a3f824b085fb88ee7f26b09e6048d0cd5d07f70a86e147c2c161"
+  },
+  "fidelityReview": "sprites/creeps/arena/waves-09-12-production/concept_fidelity_review.json"
+}

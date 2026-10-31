@@ -6,6 +6,7 @@ import { createGameServer } from '../apps/game-server/src/app.config.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 
 let server: ColyseusTestServer;
+const previousLegacy = process.env['VOLAM_DEV_LEGACY_SKILLS'];
 const previous = process.env['VOLAM_INVASION_INTERVAL_SECONDS'];
 const client = new Client('http://localhost:2568');
 const options = (nickname: string) => ({
@@ -13,6 +14,7 @@ const options = (nickname: string) => ({
   protocolVersion: PROTOCOL_VERSION,
 });
 beforeAll(async () => {
+  process.env['VOLAM_DEV_LEGACY_SKILLS'] = '1';
   process.env['VOLAM_INVASION_INTERVAL_SECONDS'] = '3';
   server = await boot(createGameServer(), 2568);
 });
@@ -20,6 +22,9 @@ afterEach(async () => {
   await server.cleanup();
 });
 afterAll(async () => {
+  if (previousLegacy === undefined)
+    delete process.env['VOLAM_DEV_LEGACY_SKILLS'];
+  else process.env['VOLAM_DEV_LEGACY_SKILLS'] = previousLegacy;
   await server.shutdown();
   if (previous === undefined)
     delete process.env['VOLAM_INVASION_INTERVAL_SECONDS'];
@@ -106,6 +111,9 @@ it('shares one enemy HP/death and one reward pool between two SDK attackers', as
   await begin(a, b);
   const room = server.getRoomById<MatchRoom>(a.roomId);
   advance(room, 91);
+  // Both attackers must land a hit to test the split pool. A random first-hit
+  // critical can kill this fixture early; crit mechanics have separate tests.
+  room.world.random = () => 0.99;
   const enemy = [...room.world.creeps.values()].find((e) => e.invasion)!;
   // Server-owned fixture isolates one invader; commands still traverse the real SDK.
   room.world.creeps.clear();

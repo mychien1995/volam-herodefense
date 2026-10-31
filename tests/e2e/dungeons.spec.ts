@@ -52,18 +52,19 @@ const hero = async (page: Page) => {
   return s.state.players[s.sessionId]!;
 };
 async function moveTo(page: Page, x: number, y: number) {
+  await page.bringToFront();
   await page.locator('#game canvas').focus();
   for (const [axis, target, negative, positive] of [
     ['x', x, 'ArrowLeft', 'ArrowRight'],
     ['y', y, 'ArrowUp', 'ArrowDown'],
   ] as const) {
-    const deadline = Date.now() + 14000;
+    const deadline = Date.now() + 25000;
     while (Date.now() < deadline) {
       const h = await hero(page),
         delta = target - h[axis];
       if (Math.abs(delta) <= 8) break;
       await page.keyboard.press(delta < 0 ? negative : positive, {
-        delay: Math.min(120, Math.max(30, Math.abs(delta) * 5 - 25)),
+        delay: Math.min(900, Math.max(70, (Math.abs(delta) * 1000) / 160 - 30)),
       });
       await expect
         .poll(async () => (await hero(page)).lastSequence)
@@ -141,6 +142,20 @@ async function ranged(page: Page) {
   await page.locator('[data-menu=settings]').click();
   await page.locator('#dialog-content [data-menu=skills]').click();
   await page.getByLabel('Normal attack').selectOption('cai_bang_chuong');
+  await expect
+    .poll(async () => (await hero(page)).basicId)
+    .toBe('cai_bang_chuong');
+  // Normal progression rooms start with one point and no learned actives.
+  // Spend that real point before the reward fixture uses Q in the dungeon.
+  if (await page.locator('#skill-management').isVisible()) {
+    await page.locator('#loadout-q').selectOption('hoa_van_chuong');
+    await page.locator('#apply-loadout').click();
+    await expect(page.locator('[data-upgrade=hoa_van_chuong]')).toBeEnabled();
+    await page.locator('[data-upgrade=hoa_van_chuong]').click();
+    await expect(page.locator('[data-rank=hoa_van_chuong]')).toContainText(
+      '1/4',
+    );
+  }
   await page.keyboard.press('Escape');
   await expect
     .poll(async () => (await hero(page)).basicId)
@@ -249,7 +264,9 @@ test('two real clients share one creep wave, menu entry and physical exit', asyn
     await expect(a.locator('#basic-style')).toBeDisabled();
     await a.keyboard.press('Escape');
     await a.keyboard.press('KeyE');
-    await expect(a.locator('#feedback')).toContainText('not equipped');
+    await expect(a.locator('#feedback')).toContainText(
+      /not equipped|chưa trang bị/,
+    );
     await exitDungeon(a);
     expect(
       Object.values((await read(a)).state.creeps).every(

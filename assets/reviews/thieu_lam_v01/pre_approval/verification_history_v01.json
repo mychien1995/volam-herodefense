@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-31",
+  "runs": [
+    {
+      "command": "python -X utf8 assets/source/characters/thieu_lam_v01/inspect_sources.py; python -X utf8 assets/source/characters/thieu_lam_v01/measure_frames.py; node scripts/export-thieu-lam.mjs --assemble",
+      "result": "PASS",
+      "details": "12 retained generated PNG sources;80 selected original poses;two40-cel Aseprite sources and PNG/hash-JSON exports."
+    },
+    {
+      "command": "python -X utf8 scripts/verify-thieu-lam.py",
+      "result": "PASS",
+      "details": "80 distinct transparent cels,24 tags, pivots, durations, bounds, individual/atlas equality and186 approved files."
+    },
+    {
+      "command": "pnpm check:browser --config playwright.thieu-lam.config.ts tests/e2e/thieu-lam-art.spec.ts --grep \"both weapon\"",
+      "result": "PASS",
+      "testsPassed": 1,
+      "details": "24 live tags/80 observed frames, no page or asset errors."
+    },
+    {
+      "command": "pnpm check:final --config playwright.thieu-lam.config.ts tests/e2e/thieu-lam-art.spec.ts tests/e2e/gameplay.spec.ts",
+      "result": "INITIAL BROWSER STAGE FAILED",
+      "unitIntegrationPassed": 174,
+      "browserPassed": 7,
+      "browserFailed": 2,
+      "details": [
+        "Legacy Cái Bang skill fixture expected starting skills while current M3B defaults are empty.",
+        "Quyen RAF sampling saw2of4 attack frames on initial run."
+      ],
+      "allPriorStages": "PASS"
+    },
+    {
+      "command": "pnpm check:browser --config playwright.thieu-lam.config.ts tests/e2e/thieu-lam-art.spec.ts tests/e2e/gameplay.spec.ts --grep \"quyen real match|two clients agree\"",
+      "result": "PARTIAL",
+      "testsPassed": 1,
+      "testsFailed": 1,
+      "details": "Legacy-skill server fixture corrected; shared combat passed. Quyen observed all4 attack frames in down/left, then exact idle-world-position check failed on a final1px interpolation settle. No production animation or combat change.",
+      "report": "playwright_failed_focused_results_v01.json"
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit; pnpm check:browser --config playwright.thieu-lam.config.ts tests/e2e/thieu-lam-art.spec.ts tests/e2e/gameplay.spec.ts",
+      "result": "PASS",
+      "testsPassed": 9,
+      "details": "Full idle breathing interval added to stationary settle fixture. All9 browser cases passed. Screenshot review then caught HUD portrait using the old Cai Bang fallback.",
+      "report": "playwright_before_portrait_results_v01.json"
+    },
+    {
+      "command": "pnpm check:final --config playwright.thieu-lam.config.ts tests/e2e/thieu-lam-art.spec.ts tests/e2e/gameplay.spec.ts",
+      "result": "All174 unit/integration tests,workflow tests,typechecks,build and asset validators passed. Browser8passed/1failed on existing1px idle interpolation fixture after portrait fix.",
+      "report": "playwright_final_stages_results_v01.json"
+    },
+    {
+      "command": "pnpm check:browser --config playwright.thieu-lam.config.ts tests/e2e/thieu-lam-art.spec.ts --grep \"quyen real match\"",
+      "result": "Failed: observer650ms window could expire before driver keypress reached rendering; exact logs retained.",
+      "report": "playwright_observer_deadline_failure_v01.json"
+    },
+    {
+      "command": "pnpm check:browser --config playwright.thieu-lam.config.ts tests/e2e/thieu-lam-art.spec.ts --grep \"quyen real match\"",
+      "result": "Failed after observer deadline correction: late/short network pose could end before the local clip completed. Reused existing client-only one-shot playback for the monk; added direct Phaser animation event evidence.",
+      "report": "playwright_short_network_pose_failure_v01.json"
+    },
+    {
+      "command": "pnpm check:final --config playwright.thieu-lam.config.ts tests/e2e/thieu-lam-art.spec.ts tests/e2e/gameplay.spec.ts",
+      "result": "All pre-browser stages PASS:174unit/integration tests,2workflow tests,typechecks,build and6asset validators. Browser8PASS,1fixturefailure: final90ms down-facing key pulse coalesced before authoritative tick. All dao facings/attack frame checks had passed before screenshot-facing assertion.",
+      "report": "playwright_final_with_playback_results_v01.json"
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit; pnpm check:browser --config playwright.thieu-lam.config.ts tests/e2e/thieu-lam-art.spec.ts --grep \"Dao art-review\"",
+      "actualGrep": "Đao art-review",
+      "result": "PASS: corrected test waits for authoritative walk-facing before releasing key. One failed browser case rerun successfully; all9unique scenarios PASS across final run and focused rerun. No production code changed after the last full final run.",
+      "report": "playwright_results_v01.json"
+    }
+  ],
+  "finalRun": "All required final stages and9unique browser scenarios passed across final run and focused rerun; see verification_summary_v01.json. Runtime art remains pending director approval.",
+  "recordingPolicy": "Video and traces off; PNGs and JSON observations only."
+}

@@ -1,0 +1,101 @@
+{
+  "id": "thien_ha_vo_cau_vfx",
+  "skillId": "thien_ha_vo_cau",
+  "status": "produced_candidate_pending_runtime_review",
+  "kind": "vfx",
+  "source": "assets/source/skills/cai-bang/thien_ha_vo_cau/vfx/thien_ha_vo_cau_vfx.aseprite",
+  "sheet": "assets/exports/skills/cai-bang/thien_ha_vo_cau/thien_ha_vo_cau_vfx.png",
+  "atlas": "assets/exports/skills/cai-bang/thien_ha_vo_cau/thien_ha_vo_cau_vfx.json",
+  "frameDimensions": [
+    160,
+    160
+  ],
+  "pivot": [
+    80,
+    80
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "animations": [
+    {
+      "name": "whirlwind",
+      "frames": [
+        "whirlwind_0",
+        "whirlwind_1",
+        "whirlwind_2",
+        "whirlwind_3"
+      ],
+      "frameDimensions": [
+        160,
+        160
+      ],
+      "frameCount": 4,
+      "frameRate": 12.5,
+      "durationMsPerFrame": 80,
+      "loop": true,
+      "repeat": -1,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        80,
+        80
+      ],
+      "stage": "multi_hit_whirlwind",
+      "placement": "caster_body",
+      "effectPlacementOffset": [
+        0,
+        -12
+      ],
+      "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+      "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+    },
+    {
+      "name": "impact",
+      "frames": [
+        "impact_0",
+        "impact_1",
+        "impact_2",
+        "impact_3"
+      ],
+      "frameDimensions": [
+        160,
+        160
+      ],
+      "frameCount": 4,
+      "frameRate": 14.285714285714286,
+      "durationMsPerFrame": 70,
+      "loop": false,
+      "repeat": 0,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        80,
+        80
+      ],
+      "stage": "finishing_smash",
+      "placement": "caster_front_ground",
+      "effectPlacementOffset": [
+        0,
+        -4
+      ],
+      "timingAuthority": "Visual cadence only. Server events control damage, impacts, buff/CC/burn lifetime. Unimplemented skill timing is provisional.",
+      "provenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+    }
+  ],
+  "provenance": {
+    "method": "OpenAI built-in image_gen.imagegen; Aseprite 1.3.18.6 packing",
+    "prompts": "assets/source/skills/cai-bang/generation_prompts_v2.json",
+    "reference": "assets/concepts/skills/cai-bang/",
+    "license": "Original AI-assisted project art and reused approved project pixels. No external asset pack. No claim of exclusive copyright or separately verified reference license."
+  },
+  "runtimeIntegrated": false,
+  "productionArtApproved": false
+}

@@ -1,0 +1,467 @@
+{
+  "scope": "M3C3 engineering/gameplay integration; no M3D balance or new final skill-art approval",
+  "date": "2026-10-31",
+  "finalPipeline": {
+    "unitNetworkTests": 309,
+    "unitFiles": 24,
+    "workflowChecks": 8,
+    "assetValidators": 10,
+    "typechecks": "passed",
+    "build": "passed",
+    "browserAttempt": {
+      "startTime": "2026-10-31T07:32:10.972Z",
+      "duration": 920976.328,
+      "expected": 21,
+      "skipped": 0,
+      "unexpected": 3,
+      "flaky": 0
+    },
+    "log": "final-acceptance.log"
+  },
+  "targetedRecheck": {
+    "stats": {
+      "startTime": "2026-10-31T07:48:05.652Z",
+      "duration": 274874.999,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "log": "browser-recheck.log",
+    "typecheck": "passed after fixture changes"
+  },
+  "latestDistinctBrowserCases": [
+    {
+      "file": "m3c1-preview.spec.ts",
+      "title": "M3C1 runtime preview: all ten wind skills, both melee basics and four dash directions are visible to a fire-school peer",
+      "project": "runtime-preview",
+      "status": "passed"
+    },
+    {
+      "file": "m3c1-preview.spec.ts",
+      "title": "M3C1 six-player mixed-school effects keep caster ownership, scale and feet depth",
+      "project": "runtime-preview",
+      "status": "passed"
+    },
+    {
+      "file": "m3c2-preview.spec.ts",
+      "title": "M3C2 real preview: all ten skills and two basics show authored frames, shield/refund/counter and stationary areas to three schools",
+      "project": "runtime-preview",
+      "status": "passed"
+    },
+    {
+      "file": "m3c2-preview.spec.ts",
+      "title": "M3C2 both baseline styles animate every authored cardinal idle/walk/attack tag in Phaser",
+      "project": "runtime-preview",
+      "status": "passed"
+    },
+    {
+      "file": "m3c3-preview.spec.ts",
+      "title": "M3C3 two-client live authored skills, both target combos, golden support/mitigation and independent basics",
+      "project": "runtime-preview",
+      "status": "passed"
+    },
+    {
+      "file": "m3c3-preview.spec.ts",
+      "title": "M3C3 both baseline styles animate every authored cardinal idle/walk/attack tag in Phaser",
+      "project": "runtime-preview",
+      "status": "passed"
+    },
+    {
+      "file": "skills.spec.ts",
+      "title": "all ten supplied skill animations load, animate and are observed by a second player",
+      "project": "runtime-preview",
+      "status": "passed"
+    },
+    {
+      "file": "skills.spec.ts",
+      "title": "two Cái Bang players cast into shared dungeon enemies and clean a buff on physical exit",
+      "project": "runtime-preview",
+      "status": "passed"
+    },
+    {
+      "file": "skills.spec.ts",
+      "title": "projectile and control skills damage arena invaders with shared authoritative feedback",
+      "project": "runtime-preview",
+      "status": "passed"
+    },
+    {
+      "file": "skills.spec.ts",
+      "title": "a real enemy kills a player during a skill channel and both clients clean the effect",
+      "project": "runtime-preview",
+      "status": "passed"
+    },
+    {
+      "file": "skills.spec.ts",
+      "title": "staff control, armor break, stun and the heavy finisher use their own supplied effects",
+      "project": "runtime-preview",
+      "status": "passed"
+    },
+    {
+      "file": "dungeons.spec.ts",
+      "title": "two real clients share one creep wave, menu entry and physical exit",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "dungeons.spec.ts",
+      "title": "two real clients farm separate private instances and retain empty wave snapshots",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "gameplay.spec.ts",
+      "title": "fixed follow camera, eight-way movement and foreground occlusion",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "gameplay.spec.ts",
+      "title": "two clients agree on combat, manual cadence, skills and progression",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "gameplay.spec.ts",
+      "title": "ranged projectile uses a fixed trajectory and original effect frames",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "gameplay.spec.ts",
+      "title": "real PNG animation registry covers two actors, six states and four directions",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "m3c3.spec.ts",
+      "title": "M3C3 normal four-school progression, shared dungeon farming, read-only builds, mana sustain and arena defense",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "m3c3.spec.ts",
+      "title": "M3C3 six-player natural combat: four schools keep effects owned, feet/pivots readable and rewards authoritative",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "ui.spec.ts",
+      "title": "world and in-game menus fit 1280x720",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "ui.spec.ts",
+      "title": "world and in-game menus fit 1920x1080",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "ui.spec.ts",
+      "title": "world and in-game menus fit 900x640",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "ui.spec.ts",
+      "title": "menus release held movement, trap focus and preserve live two-client simulation",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "ui.spec.ts",
+      "title": "utility menus open and forest art study stays presentation-only",
+      "project": "progression-regression",
+      "status": "passed"
+    },
+    {
+      "file": "progression.spec.ts",
+      "title": "M3C3 Thiếu Lâm uses its own thirteen-skill catalogue and starts with empty slots",
+      "project": "progression-regression",
+      "status": "passed"
+    }
+  ],
+  "latestDistinctBrowserPassCount": 25,
+  "balanceRuns": 144,
+  "registry": {
+    "components": 87,
+    "tags": 596,
+    "frameReferences": 2362
+  },
+  "gold": {
+    "components": 26,
+    "tags": 182,
+    "frameReferences": 728,
+    "sourcePublicPairs": [
+      {
+        "file": "assets/exports/skills/thieu-lam/la_han_quyen/la_han_quyen_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/la_han_quyen/la_han_quyen_character.png",
+        "sha256": "86fa9a1b39cc3b3171d51511cf8f063bc4b8e31d51ccb0219b7044ae9a661e12"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/la_han_quyen/la_han_quyen_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/la_han_quyen/la_han_quyen_character.json",
+        "sha256": "e7193c59bfb67cfd3f74a6a338b4027897fb20bf1572e2fee9b5d0820d33fcad"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/la_han_quyen/la_han_quyen_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/la_han_quyen/la_han_quyen_vfx.png",
+        "sha256": "e150fe722953d21ffc4435ae11b2c04fcb344120d335bf45b0af07f32706ccc3"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/la_han_quyen/la_han_quyen_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/la_han_quyen/la_han_quyen_vfx.json",
+        "sha256": "10baf4c0da618c0580f329c6824d9f0800c919f57b9b3fdb650e3eeec50e1a8c"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/vi_da_quyen/vi_da_quyen_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/vi_da_quyen/vi_da_quyen_character.png",
+        "sha256": "4d02caac7859a98f02ba8a32bfbd716e5c3ea28e5343e713735397537ad38afe"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/vi_da_quyen/vi_da_quyen_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/vi_da_quyen/vi_da_quyen_character.json",
+        "sha256": "bdd147cae4b3e73286f3991bd4d5e531394b29ace7f26c45c0707018f24b4ea8"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/vi_da_quyen/vi_da_quyen_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/vi_da_quyen/vi_da_quyen_vfx.png",
+        "sha256": "55a3504caa9e6c63ecb2e75fca5046629a14d3e6845b2dd296dbf070ab122926"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/vi_da_quyen/vi_da_quyen_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/vi_da_quyen/vi_da_quyen_vfx.json",
+        "sha256": "5b961c1802cb818d7fbaf7047587b61fc5bbd9e42b7bd45731a0c081a768aab6"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/dai_luc_kim_cuong_chuong/dai_luc_kim_cuong_chuong_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/dai_luc_kim_cuong_chuong/dai_luc_kim_cuong_chuong_character.png",
+        "sha256": "b05b6cb9dff08de644efc9a966bd7cc8c9c248a6fb461f2357c32f90b670c0f0"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/dai_luc_kim_cuong_chuong/dai_luc_kim_cuong_chuong_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/dai_luc_kim_cuong_chuong/dai_luc_kim_cuong_chuong_character.json",
+        "sha256": "a6aa963abcd716198f8b105b7df728229ffaba3755bf6fbf756a556fb1dea2ff"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/dai_luc_kim_cuong_chuong/dai_luc_kim_cuong_chuong_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/dai_luc_kim_cuong_chuong/dai_luc_kim_cuong_chuong_vfx.png",
+        "sha256": "184d861b86a6ee460953e36adf940a3b8eb8b8ebeff96c6d8cded05317beed94"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/dai_luc_kim_cuong_chuong/dai_luc_kim_cuong_chuong_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/dai_luc_kim_cuong_chuong/dai_luc_kim_cuong_chuong_vfx.json",
+        "sha256": "cb292a468e70b25b1a1dbf17bf0d0323e760099c0410feccd2b0858c7052cbef"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/toan_phong_thoai/toan_phong_thoai_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/toan_phong_thoai/toan_phong_thoai_character.png",
+        "sha256": "87a763b532584a4bd3d3fedf5641ca31e00be23b980ed3b966ed3bf18257f2f7"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/toan_phong_thoai/toan_phong_thoai_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/toan_phong_thoai/toan_phong_thoai_character.json",
+        "sha256": "9bb7640826066bc5a0fda5ddd7e787df7e1e6c86f114f49e0eb35f94aaf654d8"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/toan_phong_thoai/toan_phong_thoai_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/toan_phong_thoai/toan_phong_thoai_vfx.png",
+        "sha256": "4101f7ce9d6357e8ff1fb7b6deebb72ac799dbe0509a0e4d82a9271358932a8c"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/toan_phong_thoai/toan_phong_thoai_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/toan_phong_thoai/toan_phong_thoai_vfx.json",
+        "sha256": "7e2237780eb3e631d6e41188dbb5a3e1c503e1975d219f3037f678beb21ad5ea"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/hoanh_tao_cuoc/hoanh_tao_cuoc_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/hoanh_tao_cuoc/hoanh_tao_cuoc_character.png",
+        "sha256": "44857dacd8aa20177d37b3152eb64ecec2df9464adb6c6d2e27fe20d3e926d28"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/hoanh_tao_cuoc/hoanh_tao_cuoc_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/hoanh_tao_cuoc/hoanh_tao_cuoc_character.json",
+        "sha256": "b39e9ec07de0185b591f60721d01d3821d147d58dfdc43b3ae11cd645e702fb2"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/hoanh_tao_cuoc/hoanh_tao_cuoc_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/hoanh_tao_cuoc/hoanh_tao_cuoc_vfx.png",
+        "sha256": "55b490229fba772070a6f0428700e2f1d673d47bf173fcb39c7ff1b01626caf9"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/hoanh_tao_cuoc/hoanh_tao_cuoc_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/hoanh_tao_cuoc/hoanh_tao_cuoc_vfx.json",
+        "sha256": "75f575f08426201f5bc360cc6cdffbbcc60fc50f634c60b07f4168f1ad7b57da"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/vo_anh_cuoc/vo_anh_cuoc_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/vo_anh_cuoc/vo_anh_cuoc_character.png",
+        "sha256": "52fbaa62471b9d8b361a1e5eb1d057ac62a14f34a3065a2501980b34ee41e2d3"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/vo_anh_cuoc/vo_anh_cuoc_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/vo_anh_cuoc/vo_anh_cuoc_character.json",
+        "sha256": "5324f4b6c51b8bd9e0ce79c11fec3e7efcde6250e80320792879fb5b6d8b8197"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/vo_anh_cuoc/vo_anh_cuoc_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/vo_anh_cuoc/vo_anh_cuoc_vfx.png",
+        "sha256": "cfe5ce1a3f401e678fb6e80d92ff1d7476ad422ebee775b68b54a040a458017c"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/vo_anh_cuoc/vo_anh_cuoc_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/vo_anh_cuoc/vo_anh_cuoc_vfx.json",
+        "sha256": "fae92e8943160b6c05753c6e884a515077b25de81437261a1ebf25973f5d4d35"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/kim_cang_bat_hoai/kim_cang_bat_hoai_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/kim_cang_bat_hoai/kim_cang_bat_hoai_character.png",
+        "sha256": "96f00c1a9f04e6cdf4691e4cce0f2b034a3cda20969e5a70f334582a814faf65"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/kim_cang_bat_hoai/kim_cang_bat_hoai_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/kim_cang_bat_hoai/kim_cang_bat_hoai_character.json",
+        "sha256": "e4cbb7b5c124d5ee977c26e9bad91633209649a29eae3c8ea5a9443e92072cce"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/kim_cang_bat_hoai/kim_cang_bat_hoai_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/kim_cang_bat_hoai/kim_cang_bat_hoai_vfx.png",
+        "sha256": "4161adcc8f496a103bd256e2de0c9711190193037a6d8fbba083c3534ec26d44"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/kim_cang_bat_hoai/kim_cang_bat_hoai_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/kim_cang_bat_hoai/kim_cang_bat_hoai_vfx.json",
+        "sha256": "ac244438118ccd9c1886bada9015d30e7557498777833ef550c51c5315319f76"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/nhu_lai_niet_ban/nhu_lai_niet_ban_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/nhu_lai_niet_ban/nhu_lai_niet_ban_character.png",
+        "sha256": "2d4da9d8f3b70c74988df4eb698824bcb2ea22c33a26ab639bcc2652e060d10d"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/nhu_lai_niet_ban/nhu_lai_niet_ban_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/nhu_lai_niet_ban/nhu_lai_niet_ban_character.json",
+        "sha256": "d8d9a593c2fe1b9ae01effecc3d76787ad84a912171c5c51dfd4e358ea816756"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/nhu_lai_niet_ban/nhu_lai_niet_ban_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/nhu_lai_niet_ban/nhu_lai_niet_ban_vfx.png",
+        "sha256": "1d48c46a494f587c4a1b67866d44b629841a636fc7a9995f4454d4b9b23b6579"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/nhu_lai_niet_ban/nhu_lai_niet_ban_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/nhu_lai_niet_ban/nhu_lai_niet_ban_vfx.json",
+        "sha256": "2819f91408776f0bdb2e6ed3b497d263cadb496429c05598f9b478cbb6703bf3"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/tru_ta/tru_ta_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/tru_ta/tru_ta_character.png",
+        "sha256": "7cc76e52a2e437c148adf836e5f97f389fadf43b85652cc4978cb711c19d821b"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/tru_ta/tru_ta_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/tru_ta/tru_ta_character.json",
+        "sha256": "dc82a1ad830075742eb0b77e7170d16f46488df915f8b561adbd60385b8d4aaf"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/tru_ta/tru_ta_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/tru_ta/tru_ta_vfx.png",
+        "sha256": "19c4d6b8f3459148cff89399c99720fdd604fb871ed61031066d65edb301172d"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/tru_ta/tru_ta_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/tru_ta/tru_ta_vfx.json",
+        "sha256": "7871a87d3acc1c39336b378e0ec1a95307b10b19f02e38dd867cb310720c0ffd"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/kim_quang_ho_tran/kim_quang_ho_tran_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/kim_quang_ho_tran/kim_quang_ho_tran_character.png",
+        "sha256": "2f5c1f863479bca1595a8fae9c55ba799e7080529d19eb87cc81b4514378292b"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/kim_quang_ho_tran/kim_quang_ho_tran_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/kim_quang_ho_tran/kim_quang_ho_tran_character.json",
+        "sha256": "c97ea15617f7742812b910ab59502bdae145d182e056385e5558c69e541182a7"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/kim_quang_ho_tran/kim_quang_ho_tran_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/kim_quang_ho_tran/kim_quang_ho_tran_vfx.png",
+        "sha256": "d990a89abb444b90e08ebe8fc5c082b7d7f109278c2a4eb286952bc5d7d9ea61"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/kim_quang_ho_tran/kim_quang_ho_tran_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/kim_quang_ho_tran/kim_quang_ho_tran_vfx.json",
+        "sha256": "b694e54d5159a3263ec9610368a53a39c077819ea5fb02bd4087384c3f71cd03"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/tam_gioi_quy_thien/tam_gioi_quy_thien_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/tam_gioi_quy_thien/tam_gioi_quy_thien_character.png",
+        "sha256": "206418b52877b9e3861118088a6f0fbf1b6d6411abeae5efc3bd5562f7465a1a"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/tam_gioi_quy_thien/tam_gioi_quy_thien_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/tam_gioi_quy_thien/tam_gioi_quy_thien_character.json",
+        "sha256": "282cda2b603a0482ad46304793022a21ff8265bfff2cdd48bddf45d2134eb812"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/tam_gioi_quy_thien/tam_gioi_quy_thien_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/tam_gioi_quy_thien/tam_gioi_quy_thien_vfx.png",
+        "sha256": "5d0deb54b62b264ef9f36c15ecb7523aa78497da729b30a4c325b113eee0a069"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/tam_gioi_quy_thien/tam_gioi_quy_thien_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/tam_gioi_quy_thien/tam_gioi_quy_thien_vfx.json",
+        "sha256": "39636bdba5037b58db0f189f92808d5d7b47afcf2c6aae299bd06be612c98b43"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/bat_dong_minh_vuong/bat_dong_minh_vuong_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/bat_dong_minh_vuong/bat_dong_minh_vuong_character.png",
+        "sha256": "73679657c8b33b53901de34865522a40295e18032a4684f0c57186e566b18235"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/bat_dong_minh_vuong/bat_dong_minh_vuong_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/bat_dong_minh_vuong/bat_dong_minh_vuong_character.json",
+        "sha256": "4d6ffa7ec9b98297e8fa965917a8840cbfcb32123d42b52cb29639ee2efb4230"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/bat_dong_minh_vuong/bat_dong_minh_vuong_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/bat_dong_minh_vuong/bat_dong_minh_vuong_vfx.png",
+        "sha256": "4e505b85222000799ab2097f83164b86791d38b42e38b07e28f5f7bd2339c919"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/bat_dong_minh_vuong/bat_dong_minh_vuong_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/bat_dong_minh_vuong/bat_dong_minh_vuong_vfx.json",
+        "sha256": "aae849b08dcc42b9ec92bceb06cdf3873f43ba6d9bdd63d6c1cd990099890400"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/nhu_lai_thien_diep/nhu_lai_thien_diep_character.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/nhu_lai_thien_diep/nhu_lai_thien_diep_character.png",
+        "sha256": "2713170789eaf6c3582d87ad3f405da74883832cc3f77a51feee15a4dad33311"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/nhu_lai_thien_diep/nhu_lai_thien_diep_character.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/nhu_lai_thien_diep/nhu_lai_thien_diep_character.json",
+        "sha256": "a1e3e570b58ddc34efd468ec01e7d004eaf5536131876613ba7c38f3c1c6cd87"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/nhu_lai_thien_diep/nhu_lai_thien_diep_vfx.png",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/nhu_lai_thien_diep/nhu_lai_thien_diep_vfx.png",
+        "sha256": "454ace13eaf367fb913e0d08f874b0e5561b78621737cb7fd15e6d48ea6771e3"
+      },
+      {
+        "file": "assets/exports/skills/thieu-lam/nhu_lai_thien_diep/nhu_lai_thien_diep_vfx.json",
+        "public": "apps/game-client/public/assets/skills/thieu-lam/nhu_lai_thien_diep/nhu_lai_thien_diep_vfx.json",
+        "sha256": "9afba7c76b36c0f9942ac5f80dd58c994a0bce323c574557d53a40180e1ef222"
+      }
+    ],
+    "artStatus": "prototype_approval_gate_waived"
+  },
+  "notes": [
+    "Original final browser attempt21/24 passed; corrected fixture assumptions/coordination then all5 targeted rechecks passed. This is not one green25-case invocation.",
+    "No runtime balance changes after the309-test run; subsequent edits concern browser fixtures, documentation and the working-directory-independent balance report path.",
+    "Existing large-client-chunk build advisory remains.",
+    "Browser services use30s development invasion interval and100000 statueHP; production180s unchanged.",
+    "PNG/live frame observations only; no recordings."
+  ]
+}

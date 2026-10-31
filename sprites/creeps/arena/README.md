@@ -48,7 +48,7 @@ See `concept_fidelity_review.json` for the source inventory, preserved character
 
 ## Actual Phaser evidence
 
-`review/phaser_animation_preview.webm` records the installed Phaser 4.2.1 rendering all five states.
+Routine verification uses PNG screenshots and live Phaser frame-observation reports; no recording is generated. The existing `review/phaser_animation_preview.webm` is preserved as historical evidence.
 `review/concept_comparison.png` compares the actual approved concept against staged sprites at 1× logical scale / 2× desktop display, beside the unchanged approved hero.
 Separate idle, walk, attack, hurt and death screenshots are included.
 `review/phaser_verification.json` records all 80 observed tags and 255 observed frames with zero page/loader errors.
@@ -70,3 +70,5 @@ Original AI-assisted artwork generated with the built-in OpenAI image generator 
 
 **Stop at these four staged enemies for animation review.**
 
+
+Recordings require an explicit user request for the current task, per `AGENTS.md`; routine verification must not run video recording, encoding or conversion tools. Inspect motion, transitions and positioning live in Phaser.

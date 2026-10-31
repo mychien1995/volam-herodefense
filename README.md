@@ -1,5 +1,11 @@
 # Run the current playable prototype
 
+Current gameplay checkpoint: **M3C3 — Thiếu Lâm implemented and verified**, alongside Cái Bang, Thiên Sơn and Võ Đang. All43 actives,eight basics and four automatic passives are registered. See [implementation/results](docs/M3C3_IMPLEMENTATION.md),[skill/asset mapping](docs/M3C3_SKILL_ASSET_MAP.md) and [roadmap](ROADMAP.md). Normal heroes start with one point and empty active slots; learn skills in the arena. Thiếu Lâm skill candidates retain their existing art-approval waiver; independent baseline hurt/death remain missing. M3D is not started automatically.
+
+For focused iteration and a single complete final verification run, see [Development workflow](docs/DEVELOPMENT_WORKFLOW.md). Use `pnpm check:quick <test file>` while iterating and `pnpm check:final [relevant Playwright arguments]` after the final changes; asset preparation and full tests are shared within the final run.
+
+Visual evidence follows the recording policy in `AGENTS.md`: lightweight PNG screenshots and live Phaser frame/transition/gameplay checks; no routine video/animated-image generation, recording, encoding or conversion. Recordings require an explicit user request. Existing recordings are preserved.
+
 On Windows, double-click `start-game.cmd`, or run this in PowerShell:
 
 ```powershell
@@ -7,11 +13,11 @@ cd D:\Projects\volam-hero-defense
 .\start-game.cmd
 ```
 
-The launcher finds `pnpm.cmd` on PATH or in the existing bundled tools directory; it does not change your global PATH or install packages. Keep the terminal open and visit the URL printed by Vite, normally <http://127.0.0.1:5173>. Enter a nickname, create a room, start, select Cái Bang and confirm. Arrow keys move; A attacks; Q/W cast the prototype skills; E/R are unequipped. Escape closes menus. Ctrl+C stops the local services (confirm Y if Windows asks).
+The launcher finds `pnpm.cmd` on PATH or in the existing bundled tools directory; it does not change your global PATH or install packages. Keep the terminal open and visit the URL printed by Vite, normally <http://127.0.0.1:5173>. Enter a nickname, create a room, start, select a school and confirm. Open Võ Học to equip and learn skills with earned points. Arrow keys move; A uses the independent basic style; Q/W/E/R cast learned equipped skills. Escape closes menus. Ctrl+C stops the local services (confirm Y if Windows asks).
 
 The repository dependencies are already installed in the current workspace. The historical handoff below describes the broader design; it does not mean every later gameplay milestone is implemented.
 
-M2A adds a working Rừng Trúc creep dungeon. Click the top-right **Phó Bản** button anywhere in the arena, choose **Riêng** (your own retained instance) or **Chung** (same room party), then **Vào Phó Bản**. No Dẫn Lộ NPC is required. Fight with A/Q/W, then walk to the western **Lối Ra** portal and click it to return. Empty dungeons pause and resume on re-entry. Friends must join the same waiting room before the host starts. Other dungeon destinations and boss encounters remain unavailable. See `docs/M2A_IMPLEMENTATION.md` for verification and prototype limits.
+M2A adds a working Rừng Trúc creep dungeon. Click the top-right **Phó Bản** button anywhere in the arena, choose **Riêng** (your own retained instance) or **Chung** (same room party), then **Vào Phó Bản**. No Dẫn Lộ NPC is required. Fight with A and your learned Q/W/E/R skills, then walk to the western **Lối Ra** portal and click it to return. Empty dungeons pause and resume on re-entry. Friends join the same room; active-match entrants select and confirm their school before entering gameplay. Other dungeon destinations and boss encounters remain unavailable. See `docs/M2A_IMPLEMENTATION.md` for verification and prototype limits.
 
 # v1.4: In-game HUD and UI layout update
 
@@ -81,3 +87,9 @@ This package now includes a larger approved reference set under `assets/referenc
 ## v1.6 correction: asset creation versus engine
 
 The existing game screenshot `assets/references/current_game_2026_10_29_placeholder_anti_reference.png` demonstrates that *correct HUD placement is not sufficient*. The visual bar is the detailed wuxia reference set. See `ART_PRODUCTION_STANDARD.md` and `CODEX_ART_QUALITY_RESCUE_TASK.md` for a mandatory real-art, one-screen approval milestone. Phaser 4 is the retained engine; quality depends on source art, animations, coherent tilemaps, and visual review. Do not quietly treat procedural placeholders as production art.
+
+## M3B — Cái Bang builds
+
+Restart the server and refresh clients for protocol7. Run `.\start-game.cmd` from the repository root; no development skill flag is needed. Choose Cái Bang, open the diamond/point badge beside the hotbar (or Settings → Võ Học), choose Q/W/E/R skills, apply, then spend the initial point to learn a rank. A is independent. Earn EXP in arena/dungeons, upgrade at rank gates, and return to the arena for free changes/reset. Outside arena the menu is read-only.
+
+Rules, proposed tuning and actual174-test/16-browser results: [M3B implementation](docs/M3B_IMPLEMENTATION.md). Screenshots and state/frame evidence: [M3B evidence](docs/evidence/m3b/README.md). Reproduce focused browsers with `pnpm test:e2e:progression`, deterministic legal-build probes with `pnpm test:balance:m3b`, or the complete final scope with `pnpm check:final --config playwright.progression.config.ts`. M3C has not started.

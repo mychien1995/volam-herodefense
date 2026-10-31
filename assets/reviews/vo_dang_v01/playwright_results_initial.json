@@ -1,0 +1,474 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\@playwright+test@1.64.1\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.vo-dang.config.ts"
+    ],
+    "configFile": "D:\\Projects\\volam-hero-defense\\playwright.vo-dang.config.ts",
+    "rootDir": "D:/Projects/volam-hero-defense/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\vo-dang-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/Projects/volam-hero-defense/artifacts/vo-dang-playwright",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/Projects/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "vo-dang-art.spec.ts",
+          "gameplay.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Projects\\volam-hero-defense\\artifacts\\vo-dang-playwright",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "vo-dang-art.spec.ts",
+          "gameplay.spec.ts"
+        ],
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5192",
+          "video": "off",
+          "trace": "off",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "assets/reviews/vo_dang_v01/playwright_results_v01.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "gameplay.spec.ts",
+      "file": "gameplay.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "fixed follow camera, eight-way movement and foreground occlusion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 35150,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T14:51:09.196Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-6dcd09b26fdceac04115",
+          "file": "gameplay.spec.ts",
+          "line": 120,
+          "column": 1
+        },
+        {
+          "title": "two clients agree on combat, manual cadence, skills and progression",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18650,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T14:51:44.533Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-c521143d201aa5dd8929",
+          "file": "gameplay.spec.ts",
+          "line": 204,
+          "column": 1
+        },
+        {
+          "title": "ranged projectile uses a fixed trajectory and original effect frames",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4674,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T14:52:03.198Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-872738e593b4d8a1353d",
+          "file": "gameplay.spec.ts",
+          "line": 355,
+          "column": 1
+        },
+        {
+          "title": "real PNG animation registry covers two actors, six states and four directions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2650,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T14:52:07.891Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-69f311d090ea1b84150a",
+          "file": "gameplay.spec.ts",
+          "line": 387,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "vo-dang-art.spec.ts",
+      "file": "vo-dang-art.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Võ Đang both weapon atlases play all 24 authored tags in Phaser",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5545,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T14:52:11.293Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7dab54032673cb25cb73-dd7d37d002a25ae4f608",
+          "file": "vo-dang-art.spec.ts",
+          "line": 85,
+          "column": 1
+        },
+        {
+          "title": "Võ Đang quyen real match: four facings, transitions and shared authority",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18402,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T14:52:16.984Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7dab54032673cb25cb73-a7d350654dc566819531",
+          "file": "vo-dang-art.spec.ts",
+          "line": 143,
+          "column": 3
+        },
+        {
+          "title": "Võ Đang Kiếm art-review variant real match: four facings, transitions and shared authority",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 14479,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 2\u001b[39m\n\u001b[31m+ Received  + 2\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   559,\u001b[39m\n\u001b[32m-   713,\u001b[39m\n\u001b[31m+   560,\u001b[39m\n\u001b[31m+   712,\u001b[39m\n\u001b[2m  ]\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 2\u001b[39m\n\u001b[31m+ Received  + 2\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   559,\u001b[39m\n\u001b[32m-   713,\u001b[39m\n\u001b[31m+   560,\u001b[39m\n\u001b[31m+   712,\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\vo-dang-art.spec.ts:203:36",
+                    "location": {
+                      "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\vo-dang-art.spec.ts",
+                      "column": 36,
+                      "line": 203
+                    },
+                    "snippet": "  201 |           await a.waitForTimeout(400);\n  202 |           const idle = await actor();\n> 203 |           expect([idle.x, idle.y]).toEqual([stable.x, stable.y]);\n      |                                    ^\n  204 |           expect(idle.depth).toBe(idle.y);\n  205 |           expect(idle.origin).toEqual([0.5, 0.8]);\n  206 |           expect(idle.scale).toEqual([1, 1]);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\vo-dang-art.spec.ts",
+                        "column": 36,
+                        "line": 203
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 2\u001b[39m\n\u001b[31m+ Received  + 2\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   559,\u001b[39m\n\u001b[32m-   713,\u001b[39m\n\u001b[31m+   560,\u001b[39m\n\u001b[31m+   712,\u001b[39m\n\u001b[2m  ]\u001b[22m\n\n  201 |           await a.waitForTimeout(400);\n  202 |           const idle = await actor();\n> 203 |           expect([idle.x, idle.y]).toEqual([stable.x, stable.y]);\n      |                                    ^\n  204 |           expect(idle.depth).toBe(idle.y);\n  205 |           expect(idle.origin).toEqual([0.5, 0.8]);\n  206 |           expect(idle.scale).toEqual([1, 1]);\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\vo-dang-art.spec.ts:203:36"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T14:52:35.402Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\Projects\\volam-hero-defense\\artifacts\\vo-dang-playwright\\vo-dang-art-Võ-Đang-Kiếm-a-d47b6-itions-and-shared-authority-chromium\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\vo-dang-art.spec.ts",
+                    "column": 36,
+                    "line": 203
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "7dab54032673cb25cb73-43ae6fbd12fae06807e6",
+          "file": "vo-dang-art.spec.ts",
+          "line": 143,
+          "column": 3
+        },
+        {
+          "title": "Six-player mixed-school scene preserves Võ Đang scale and feet depth",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 52781,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T14:52:50.735Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7dab54032673cb25cb73-54025380a95c961f767f",
+          "file": "vo-dang-art.spec.ts",
+          "line": 339,
+          "column": 1
+        },
+        {
+          "title": "Võ Đang feet sort in front of and behind the actual perimeter tree",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10756,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T14:53:43.675Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7dab54032673cb25cb73-8338d3a0c677698eaed1",
+          "file": "vo-dang-art.spec.ts",
+          "line": 462,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-30T14:51:06.956Z",
+    "duration": 167633.34300000002,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

@@ -1,0 +1,1814 @@
+{
+  "id": "beach_thuy_quy",
+  "nameVi": "Thủy Quỷ",
+  "category": "enemy",
+  "status": "incomplete_asset_issue",
+  "conceptApproval": "Automatically approved by Phase 2C user instruction, 2026-10-31",
+  "sourceConcept": "assets/concepts/dungeon-creeps/beach/thuy_quy_concept_v01.png",
+  "sheet": "assets/sprites/creeps/dungeons/beach/thuy_quy/spritesheet.png",
+  "atlas": "assets/sprites/creeps/dungeons/beach/thuy_quy/atlas.json",
+  "source": "assets/sprites/creeps/dungeons/beach/thuy_quy/source/thuy_quy_v01.aseprite",
+  "frameWidth": 144,
+  "frameHeight": 128,
+  "bodyScaleReference": {
+    "humanoidHeight": 48,
+    "crabWidth": 64,
+    "approvedHeroBodyHeight": 44
+  },
+  "footPivot": [
+    0.5,
+    0.828125
+  ],
+  "feetPixels": [
+    72,
+    106
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/idle_down_0.png",
+      "sha256": "c5193faec779999f7e2029e14a3e13603c47d03d356eab394d099cd3ead9bf63",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          36,
+          33,
+          97,
+          131
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          47.0,
+          131
+        ],
+        "placement": [
+          55,
+          58
+        ]
+      }
+    },
+    {
+      "name": "idle_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/idle_down_1.png",
+      "sha256": "121337a407c14baf9ec3ea1b9ee722fcc84ca0b5f2513593ab864545e31cddf3",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          199,
+          33,
+          108,
+          133
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          52.0,
+          133
+        ],
+        "placement": [
+          53,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_down_0.png",
+      "sha256": "e8a1920056cacede2717cc05b2144aa0bf2cc7e38e99aac82b62b6dcaf06e323",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          346,
+          34,
+          104,
+          132
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          54.0,
+          132
+        ],
+        "placement": [
+          52,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_down_1.png",
+      "sha256": "64c34e1d1c54ec337dd4fd6c0bc422d01b79074074c4debb6eebada92074445c",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          502,
+          36,
+          109,
+          135
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          57.0,
+          135
+        ],
+        "placement": [
+          51,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_down_2",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_down_2.png",
+      "sha256": "6bfa8686b35fd682a50f1b9dc4e1142032017a7841ed4eb3849f25254acea6c2",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          658,
+          36,
+          106,
+          134
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          55.0,
+          134
+        ],
+        "placement": [
+          52,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_down_3",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_down_3.png",
+      "sha256": "f46dde3f35b05eb0841d1b456b3847166b63f8f37c3f008bb5b584f0471337ba",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          817,
+          36,
+          100,
+          134
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          53.0,
+          134
+        ],
+        "placement": [
+          53,
+          57
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_down_0.png",
+      "sha256": "f1c1aca7d85ad924def50b03d0092ad3874d64e6b099f82572c215ed220717e9",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          969,
+          38,
+          120,
+          125
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          33.0,
+          125
+        ],
+        "placement": [
+          60,
+          61
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_down_1.png",
+      "sha256": "87112bf5911980e27ab1da37a24f81701284dd32d530c1210c0a4cab8c34a7df",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1131,
+          38,
+          105,
+          128
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          44.0,
+          128
+        ],
+        "placement": [
+          56,
+          59
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_down_2.png",
+      "sha256": "ad48bd9a902475fd88446f15680da946995fc4b3df6732e313767853fa532b52",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          19,
+          205,
+          151,
+          129
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          106.0,
+          129
+        ],
+        "placement": [
+          33,
+          59
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_down_3.png",
+      "sha256": "a55fbdb107e8a77a3c6ae6e6f7a028dc1a8146f4d24e4a063ad55620eeadb6a3",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          162,
+          166,
+          148,
+          166
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          102.5,
+          166
+        ],
+        "placement": [
+          35,
+          46
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/hurt_down_0.png",
+      "sha256": "df2edd8525a70a96128d00fd26f6f4048e81dac7a343eb1c850c06e3b85783d2",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          357,
+          167,
+          113,
+          167
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          58.0,
+          167
+        ],
+        "placement": [
+          51,
+          45
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/hurt_down_1.png",
+      "sha256": "216e7ec989e6bffe96360a0457c9bc1fd3c3ef6ab802cb198d32020b4360b5b7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          516,
+          204,
+          98,
+          130
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          67.0,
+          130
+        ],
+        "placement": [
+          48,
+          59
+        ]
+      }
+    },
+    {
+      "name": "death_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_down_0.png",
+      "sha256": "a50fe4150025d05d9961a9b5c0393d0ab7e33de45cd4cf91db6bfdc3f1d420e9",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          665,
+          222,
+          110,
+          107
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          64.0,
+          107
+        ],
+        "placement": [
+          49,
+          67
+        ]
+      }
+    },
+    {
+      "name": "death_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_down_1.png",
+      "sha256": "93f16bde03b0b14b15f956ea4042c39ba4f62bdef6d6a21cee42bb5f2afc6e75",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          803,
+          262,
+          139,
+          65
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          59.0,
+          65
+        ],
+        "placement": [
+          51,
+          82
+        ]
+      }
+    },
+    {
+      "name": "death_down_2",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_down_2.png",
+      "sha256": "9f3924bf4863c6df6ac0b2233a581389036ecd88f808d7d77bce4b8e61abbeae",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          977,
+          164,
+          22,
+          143
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          0.0,
+          143
+        ],
+        "placement": [
+          72,
+          54
+        ]
+      }
+    },
+    {
+      "name": "death_down_3",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_down_3.png",
+      "sha256": "e134c5f1f7a1b0e471b6110a9d4d18f1eb019f1a8e8b422f2a52c6d2d07f0ef0",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1130,
+          166,
+          108,
+          164
+        ],
+        "fixedSourceScale": 0.36363636363636365,
+        "sourceFootInCrop": [
+          51.0,
+          164
+        ],
+        "placement": [
+          53,
+          46
+        ]
+      }
+    },
+    {
+      "name": "idle_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/idle_left_0.png",
+      "sha256": "0b5b65b150c4149cd6b770d158571a9a6be205a8db11ce985baade45f54a2ace",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 16,
+        "sourceRect": [
+          32,
+          359,
+          101,
+          121
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          82.0,
+          121
+        ],
+        "placement": [
+          39,
+          58
+        ]
+      }
+    },
+    {
+      "name": "idle_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/idle_left_1.png",
+      "sha256": "01e88d6ad2fcee1fca5d10301e502a770974e6ed4294823d9356d43e1f4e6aeb",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 17,
+        "sourceRect": [
+          186,
+          358,
+          104,
+          121
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          69.0,
+          121
+        ],
+        "placement": [
+          45,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_left_0.png",
+      "sha256": "9e17c5644378777777f28d44fe8c84a5eb5ebbd05ba0d192c29a8ea9cac32b7a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 18,
+        "sourceRect": [
+          342,
+          358,
+          106,
+          122
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          57.0,
+          122
+        ],
+        "placement": [
+          49,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_left_1.png",
+      "sha256": "d3ba0d19b9f8ad9631a0c0e9a9c972746729babe507c35f9ce00cfdf5b50979d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 19,
+        "sourceRect": [
+          502,
+          359,
+          104,
+          123
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          70.0,
+          123
+        ],
+        "placement": [
+          44,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_left_2",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_left_2.png",
+      "sha256": "b19a9337d6ea3826cf19e53bca7beeab3c58d54b54d7fde53f413cb204608223",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 20,
+        "sourceRect": [
+          653,
+          358,
+          103,
+          122
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          61.0,
+          122
+        ],
+        "placement": [
+          48,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_left_3",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_left_3.png",
+      "sha256": "6d98a35bfb71b94509e66236f5ea336e1b0b29f47fed97b98561224c70dec035",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 21,
+        "sourceRect": [
+          804,
+          330,
+          107,
+          152
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          64.0,
+          152
+        ],
+        "placement": [
+          47,
+          46
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_left_0.png",
+      "sha256": "d0e6b3a9788c53cb7c4484203148c3394b0575fe8653772c6d64ee6878008ad7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 22,
+        "sourceRect": [
+          960,
+          295,
+          136,
+          187
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          76.0,
+          187
+        ],
+        "placement": [
+          42,
+          32
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_left_1.png",
+      "sha256": "e43a893b692727ed65628dcd1bcc62df1671656b6446822fcc7d531c91ea4449",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 23,
+        "sourceRect": [
+          1136,
+          364,
+          94,
+          117
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          38.0,
+          117
+        ],
+        "placement": [
+          57,
+          60
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_left_2.png",
+      "sha256": "871fb19e01eabea5aa405b3fbf19989503e8c90511983b77c0822bf7c61f0122",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 24,
+        "sourceRect": [
+          20,
+          513,
+          143,
+          126
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          111.0,
+          126
+        ],
+        "placement": [
+          28,
+          56
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_left_3.png",
+      "sha256": "19fea76e9363b964333ba0dd2e2621d61417dd4db0bd39bf83f5099ff6af5dfa",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 25,
+        "sourceRect": [
+          197,
+          511,
+          111,
+          125
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          55.0,
+          125
+        ],
+        "placement": [
+          50,
+          56
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/hurt_left_0.png",
+      "sha256": "9c9f5e935bc438433f2a108f11b4a1a4f45e8f7bd55b54a2f6d94d88ba1944a7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 26,
+        "sourceRect": [
+          358,
+          514,
+          112,
+          125
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          80.0,
+          125
+        ],
+        "placement": [
+          40,
+          56
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/hurt_left_1.png",
+      "sha256": "6ffff0c1a8f8a53eea8253a4dbed3a7c3552e322d780343a6e739c6adde92501",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 27,
+        "sourceRect": [
+          516,
+          520,
+          109,
+          118
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          48.0,
+          118
+        ],
+        "placement": [
+          53,
+          59
+        ]
+      }
+    },
+    {
+      "name": "death_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_left_0.png",
+      "sha256": "d0b2b61eb551304b24b6512bb703344764ed80b248ea23f7565e3f9643bdf07f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 28,
+        "sourceRect": [
+          660,
+          472,
+          133,
+          167
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          55.0,
+          167
+        ],
+        "placement": [
+          50,
+          40
+        ]
+      }
+    },
+    {
+      "name": "death_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_left_1.png",
+      "sha256": "38cbe5b3c01c595374ebb4568be95497022e7941dacc736720e5e28ce6905ea9",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 29,
+        "sourceRect": [
+          819,
+          466,
+          120,
+          176
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          60.0,
+          176
+        ],
+        "placement": [
+          48,
+          36
+        ]
+      }
+    },
+    {
+      "name": "death_left_2",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_left_2.png",
+      "sha256": "d248daa02820b038d4b8f615c81edc01ff88cb1af3e5ad0908d4f899fc823d04",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 30,
+        "sourceRect": [
+          980,
+          584,
+          96,
+          51
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          39.0,
+          51
+        ],
+        "placement": [
+          57,
+          86
+        ]
+      }
+    },
+    {
+      "name": "death_left_3",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_left_3.png",
+      "sha256": "3a8b115e4ffd7173b6e18a750e089a0ad4f945c446c4b1977006649b072b07dc",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 31,
+        "sourceRect": [
+          1123,
+          596,
+          106,
+          45
+        ],
+        "fixedSourceScale": 0.39669421487603307,
+        "sourceFootInCrop": [
+          35.0,
+          45
+        ],
+        "placement": [
+          58,
+          88
+        ]
+      }
+    },
+    {
+      "name": "idle_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/idle_right_0.png",
+      "sha256": "24b335a6aaf3f65534bd86fd3a7e7e9ec927bb0836ed4d997dd519333aa8f9b0",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 32,
+        "sourceRect": [
+          47,
+          662,
+          116,
+          134
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          23.0,
+          134
+        ],
+        "placement": [
+          64,
+          58
+        ]
+      }
+    },
+    {
+      "name": "idle_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/idle_right_1.png",
+      "sha256": "4f1c9b2564e04c8d6e5cb36242b73afbf2335953465322bd131a9bef5ed9a595",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 33,
+        "sourceRect": [
+          202,
+          664,
+          117,
+          133
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          32.0,
+          133
+        ],
+        "placement": [
+          60,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_right_0.png",
+      "sha256": "ffb761d6374f6ee24ac116bac5677c287f2da4db66fe5ceb94b16156a1804435",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 34,
+        "sourceRect": [
+          362,
+          667,
+          108,
+          126
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          47.0,
+          126
+        ],
+        "placement": [
+          55,
+          61
+        ]
+      }
+    },
+    {
+      "name": "walk_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_right_1.png",
+      "sha256": "0c121088f5085fc7015fa48adedc4f440607593e3a7a1d1f2df64ec4f3bb77aa",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 35,
+        "sourceRect": [
+          514,
+          667,
+          104,
+          130
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          32.0,
+          130
+        ],
+        "placement": [
+          60,
+          59
+        ]
+      }
+    },
+    {
+      "name": "walk_right_2",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_right_2.png",
+      "sha256": "b719df84cc5ff5bb14322e0d7a8b2b97d5f8904ee9c2a5e1e490a4cd27f33a98",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 36,
+        "sourceRect": [
+          668,
+          666,
+          109,
+          130
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          45.0,
+          130
+        ],
+        "placement": [
+          56,
+          59
+        ]
+      }
+    },
+    {
+      "name": "walk_right_3",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_right_3.png",
+      "sha256": "f5e110899436626be213363bb23e2adfff354db3e1f10715e272a7f6e5d11ca6",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 37,
+        "sourceRect": [
+          820,
+          668,
+          110,
+          128
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          40.0,
+          128
+        ],
+        "placement": [
+          58,
+          60
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_right_0.png",
+      "sha256": "5a6f28eb4bf8bc976a7774022b95eec26afb2d5f0d896fcd77c36301078ffc13",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 38,
+        "sourceRect": [
+          968,
+          666,
+          118,
+          134
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          32.0,
+          134
+        ],
+        "placement": [
+          60,
+          58
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_right_1.png",
+      "sha256": "a016facb2b0fae75ba307a4498d7fdd43df68630af9d6325ada0c3d08cbfe794",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 39,
+        "sourceRect": [
+          1129,
+          675,
+          119,
+          126
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          50.0,
+          126
+        ],
+        "placement": [
+          54,
+          61
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_right_2.png",
+      "sha256": "2cca5c2a8186384ff59b07b0c4bd64c04ad97235052a6e0e893782e69e501b5c",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 40,
+        "sourceRect": [
+          25,
+          796,
+          141,
+          150
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          57.0,
+          150
+        ],
+        "placement": [
+          52,
+          52
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_right_3.png",
+      "sha256": "485c95c6bae2eeb2b3d4d01ba2ffefb92216763fe2cfac3c7004c57626a9f233",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 41,
+        "sourceRect": [
+          197,
+          818,
+          96,
+          130
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          49.0,
+          130
+        ],
+        "placement": [
+          54,
+          59
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/hurt_right_0.png",
+      "sha256": "206cb156e806807a90cff05d28b46618a8964e2eeb8636feba9fc6a801028468",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 42,
+        "sourceRect": [
+          348,
+          793,
+          109,
+          157
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          50.0,
+          157
+        ],
+        "placement": [
+          54,
+          50
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/hurt_right_1.png",
+      "sha256": "be322da474a7b830cf15251bf4476552955a1a8bad957fbfcf3956c9a295f783",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 43,
+        "sourceRect": [
+          502,
+          826,
+          106,
+          127
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          37.0,
+          127
+        ],
+        "placement": [
+          59,
+          60
+        ]
+      }
+    },
+    {
+      "name": "death_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_right_0.png",
+      "sha256": "d379eb4444957231fc32a90b6ecacc1331bf40e0e4e733ec7cbdd17fe98fa803",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 44,
+        "sourceRect": [
+          651,
+          860,
+          126,
+          88
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          77.0,
+          88
+        ],
+        "placement": [
+          44,
+          74
+        ]
+      }
+    },
+    {
+      "name": "death_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_right_1.png",
+      "sha256": "85f3eecfbd64f9197bd8a26586fb1f063ae1a7d834f770920fb901982448b2ff",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 45,
+        "sourceRect": [
+          811,
+          888,
+          126,
+          61
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          53.0,
+          61
+        ],
+        "placement": [
+          53,
+          84
+        ]
+      }
+    },
+    {
+      "name": "death_right_2",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_right_2.png",
+      "sha256": "8e695aa26dfb83e561ac464359ec9ad062b6f288cd642ca0f22c11f699a4e7e4",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 46,
+        "sourceRect": [
+          973,
+          907,
+          102,
+          38
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          51.5,
+          38
+        ],
+        "placement": [
+          53,
+          92
+        ]
+      }
+    },
+    {
+      "name": "death_right_3",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_right_3.png",
+      "sha256": "b1d257b961aaed55ec4b2fc9e21aacf66238667e3a1f85df51d0e1ff2c3e7e51",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 47,
+        "sourceRect": [
+          1120,
+          905,
+          110,
+          43
+        ],
+        "fixedSourceScale": 0.3595505617977528,
+        "sourceFootInCrop": [
+          64.0,
+          43
+        ],
+        "placement": [
+          49,
+          91
+        ]
+      }
+    },
+    {
+      "name": "idle_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/idle_up_0.png",
+      "sha256": "87f4a26c0da411eb19e58fe066c792301c75a0d9c044e5c3d7f91665615676aa",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 48,
+        "sourceRect": [
+          34,
+          973,
+          91,
+          124
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          43.0,
+          124
+        ],
+        "placement": [
+          56,
+          59
+        ]
+      }
+    },
+    {
+      "name": "idle_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/idle_up_1.png",
+      "sha256": "276e67906d5684aff9bf4d110c49188b8276365399bd1eeccf8b6af643980fb0",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 49,
+        "sourceRect": [
+          192,
+          973,
+          100,
+          127
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          49.0,
+          127
+        ],
+        "placement": [
+          53,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_up_0.png",
+      "sha256": "2da509823b5b7201183dad56fcb58247aa0edffeeecfbbb183e759e5d72b5fc9",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 50,
+        "sourceRect": [
+          345,
+          974,
+          99,
+          125
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          54.0,
+          125
+        ],
+        "placement": [
+          51,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_up_1.png",
+      "sha256": "de7e5382967ba8368af90e92bd61a49bf48f9925fe804be1fd399dc4bdf33554",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 51,
+        "sourceRect": [
+          499,
+          973,
+          96,
+          127
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          54.0,
+          127
+        ],
+        "placement": [
+          51,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_up_2",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_up_2.png",
+      "sha256": "543a33b606df3e8a58768a69d46f651bbae744d72c30634a85462e91405d3bc8",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 52,
+        "sourceRect": [
+          657,
+          974,
+          98,
+          125
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          46.0,
+          125
+        ],
+        "placement": [
+          54,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_up_3",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/walk_up_3.png",
+      "sha256": "031355e08ece6b40edbe954259e655ac8436452407dc7055073ea4dabe985c50",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 53,
+        "sourceRect": [
+          814,
+          975,
+          107,
+          127
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          48.0,
+          127
+        ],
+        "placement": [
+          54,
+          57
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_up_0.png",
+      "sha256": "3c662fb0e0050352623d649305740feb7136624128489a2c92c130979387034a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 54,
+        "sourceRect": [
+          969,
+          937,
+          130,
+          167
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          59.0,
+          167
+        ],
+        "placement": [
+          49,
+          42
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_up_1.png",
+      "sha256": "7aea0334bddbfd7e9d9e32b036d08acc19c35a7ea23fdf4389087de326a27f2d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 55,
+        "sourceRect": [
+          1135,
+          975,
+          112,
+          127
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          43.0,
+          127
+        ],
+        "placement": [
+          56,
+          57
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_up_2.png",
+      "sha256": "805faf1a5abd35ed5b7c3d15f5aa4c49def75097f942a78f17ec19ef8d5bd23d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 56,
+        "sourceRect": [
+          19,
+          1111,
+          140,
+          122
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          50.0,
+          122
+        ],
+        "placement": [
+          53,
+          59
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/basic_attack_up_3.png",
+      "sha256": "1e6369674d32c76b10adf2fd2430898c51b65edbe5d6d826d8313315e2c5f1dd",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 57,
+        "sourceRect": [
+          193,
+          1117,
+          113,
+          113
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          89.0,
+          113
+        ],
+        "placement": [
+          38,
+          63
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/hurt_up_0.png",
+      "sha256": "82a4820066248c171608c1066eb289602dc0d0e5621165f1d6fa98e99306b1c4",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 58,
+        "sourceRect": [
+          345,
+          1120,
+          109,
+          113
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          57.0,
+          113
+        ],
+        "placement": [
+          50,
+          63
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/hurt_up_1.png",
+      "sha256": "82109f0badc8ffca9f9ae9734e0049f81c98ad97c5b841c4514c0d5fab4a3036",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 59,
+        "sourceRect": [
+          492,
+          1122,
+          112,
+          113
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          55.0,
+          113
+        ],
+        "placement": [
+          51,
+          63
+        ]
+      }
+    },
+    {
+      "name": "death_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_up_0.png",
+      "sha256": "91607d242b69e936c5d1c3e8eb4ed8c930aa6b40fb7b32769258ec55dee1925e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 60,
+        "sourceRect": [
+          635,
+          1152,
+          133,
+          84
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          67.0,
+          84
+        ],
+        "placement": [
+          46,
+          74
+        ]
+      }
+    },
+    {
+      "name": "death_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_up_1.png",
+      "sha256": "5ab6146b3c77ecaa133599bc6eae7f22b9112a883b626e1ff5c9f62af50b9b9d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 61,
+        "sourceRect": [
+          826,
+          1183,
+          102,
+          50
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          56.0,
+          50
+        ],
+        "placement": [
+          51,
+          87
+        ]
+      }
+    },
+    {
+      "name": "death_up_2",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_up_2.png",
+      "sha256": "0ee5ec070308406f1e96c544b9dca0f9edb74006b2ed678ac3d5b9a0a88ea104",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 62,
+        "sourceRect": [
+          976,
+          1187,
+          83,
+          41
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          54.0,
+          41
+        ],
+        "placement": [
+          51,
+          90
+        ]
+      }
+    },
+    {
+      "name": "death_up_3",
+      "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_up_3.png",
+      "sha256": "664b9a605d964d616c0852f59dcab5f58f826af86a3cfffad77b278438a0887d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
+        "sourceCell": 63,
+        "sourceRect": [
+          1112,
+          1179,
+          118,
+          50
+        ],
+        "fixedSourceScale": 0.38247011952191234,
+        "sourceFootInCrop": [
+          84.0,
+          50
+        ],
+        "placement": [
+          40,
+          87
+        ]
+      }
+    }
+  ],
+  "sourceScales": {
+    "down": 0.36363636363636365,
+    "left": 0.39669421487603307,
+    "right": 0.3595505617977528,
+    "up": 0.38247011952191234
+  },
+  "runtimeIntegrated": false,
+  "runtimeVerified": false,
+  "notes": [
+    "Original generated cels; fixed nearest-neighbor scale per source direction; binary alpha245 cleanup.",
+    "Visual animation only. No damage, hit timing, status effect, spawn or collision rules."
+  ],
+  "knownIssues": [
+    {
+      "frame": "death_down_2",
+      "issue": "Fully transparent export; death_down needs an authored visible dissolve transition cel."
+    }
+  ]
+}

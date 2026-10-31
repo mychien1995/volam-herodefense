@@ -1,0 +1,1423 @@
+{
+  "id": "creep_stone_golem",
+  "nameVi": "Thạch Nhân",
+  "phase": "1F",
+  "category": "enemy",
+  "status": "prototype",
+  "reviewStatus": "STAGED_NOT_INTEGRATED",
+  "conceptApproval": "User: approved, please proceed (2026-10-30), after Phase 1E concept delivery",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+  "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+  "masterConcept": "assets/concepts/arena-creeps/waves-09-12/arena_creeps_09_12_concept_sheet.png",
+  "source": "sprites/creeps/arena/stone-golem/source/creep_stone_golem.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 176,
+  "frameHeight": 144,
+  "footPivot": [
+    0.5,
+    0.8333333333333334
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/idle_down_0.png",
+      "bounds": [
+        46,
+        55,
+        126,
+        120
+      ],
+      "sha256": "75db9e730e18ab83632a5d2231b119fb98cdade3148d9c06916c03bf2862da68",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "idle_down_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/idle_down_1.png",
+      "bounds": [
+        51,
+        54,
+        125,
+        120
+      ],
+      "sha256": "f2d0a6e1eb4f2b9c567e183a49ab997ce47c20c37256d8a6a8be3b38a4b6a3a4",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "walk_down_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_down_0.png",
+      "bounds": [
+        53,
+        51,
+        131,
+        120
+      ],
+      "sha256": "55311a3d394a338f1d30c38e0c83e81e25aa96351d1b3a26c875aab7ac9326cc",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "walk_down_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_down_1.png",
+      "bounds": [
+        53,
+        55,
+        121,
+        120
+      ],
+      "sha256": "db32bd7042e5baf8d10dbe0cfb5d1340aea0517bb3ac5baaa4c70ab26f8261fc",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "walk_down_2",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_down_2.png",
+      "bounds": [
+        45,
+        54,
+        119,
+        120
+      ],
+      "sha256": "8194d7b81eab3776127be33973aa1718163ee5f1678cf68b7cb5a10d3f07b31d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 4
+    },
+    {
+      "name": "walk_down_3",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_down_3.png",
+      "bounds": [
+        60,
+        53,
+        132,
+        120
+      ],
+      "sha256": "eb902334bf3b466d106ecca4e2a381cda63f28e6f8b6c07386b9529531bb4768",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 5
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_down_0.png",
+      "bounds": [
+        46,
+        54,
+        130,
+        120
+      ],
+      "sha256": "48f9375fd961b3aa4fea158aaec9d39dd54d718419fd961669b1a8da3a15aa85",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/attack_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_down_1.png",
+      "bounds": [
+        46,
+        44,
+        128,
+        120
+      ],
+      "sha256": "9e8ab1cf4e456a075e1f134018b9842c1ca3cb3c8a25e006db0a0ee4561ab540",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/attack_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_down_2.png",
+      "bounds": [
+        57,
+        57,
+        135,
+        120
+      ],
+      "sha256": "9e11e46f843081fe7036143b9f9fb3c0cb269c342c069581e15e0bcd6e5e3593",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/attack_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_down_3.png",
+      "bounds": [
+        45,
+        55,
+        130,
+        120
+      ],
+      "sha256": "f3e0361575b32af063bef82f13adbf38b7637f924ebad80c597d40958c4ab47a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/attack_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/hurt_down_0.png",
+      "bounds": [
+        43,
+        47,
+        121,
+        120
+      ],
+      "sha256": "71aae0bee008150e1e65fbfbe2c129f6044c061af00861fd7b48da4f3f0d9046",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/hurt_down_1.png",
+      "bounds": [
+        48,
+        55,
+        122,
+        120
+      ],
+      "sha256": "0c282dee36cfc02dc8cac98b56a050bede15008f896e269aa28612a6556b390d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "death_down_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_down_0.png",
+      "bounds": [
+        46,
+        62,
+        119,
+        120
+      ],
+      "sha256": "5d08744ad9a01745d924ef61b2b3cd9b0144fb5c6e2d0140de5daee0e3e11c8d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "death_down_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_down_1.png",
+      "bounds": [
+        54,
+        69,
+        123,
+        120
+      ],
+      "sha256": "77227861f2606c77e3a0cd995693502f0cc9e069aaff45677ea4f5252e8ddf02",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "death_down_2",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_down_2.png",
+      "bounds": [
+        49,
+        73,
+        129,
+        120
+      ],
+      "sha256": "5df178e13f40c5378f89c2500e7ecbd35a49863eb24830b8ddf9ee23502cc87c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 4
+    },
+    {
+      "name": "death_down_3",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_down_3.png",
+      "bounds": [
+        45,
+        82,
+        132,
+        120
+      ],
+      "sha256": "951d058da0cc836e6fa9ebf10ddcf4f27ad38805d56370717fc19dabc76398a6",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 5
+    },
+    {
+      "name": "idle_left_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/idle_left_0.png",
+      "bounds": [
+        65,
+        54,
+        116,
+        120
+      ],
+      "sha256": "1dc2f9a2317a914f2eac356eb7d289418f00a2e39110876cc2755c3e7965cfce",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "idle_left_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/idle_left_1.png",
+      "bounds": [
+        63,
+        52,
+        117,
+        120
+      ],
+      "sha256": "22f0aceb8fdb85fa53505a95443b0b43409f0c54cf555b3cf9c80edb533adf42",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "walk_left_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_left_0.png",
+      "bounds": [
+        59,
+        50,
+        119,
+        120
+      ],
+      "sha256": "21e52d366ab9d0c7b5beca0ce3b90666ddfcde39d1959f7c77d92c7e4054c052",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 12
+    },
+    {
+      "name": "walk_left_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_left_1.png",
+      "bounds": [
+        60,
+        50,
+        116,
+        120
+      ],
+      "sha256": "314b28ad3a1988bf8d6478397edd6f96619f53ce18d98bfeec5bd6c37be38600",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 13
+    },
+    {
+      "name": "walk_left_2",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_left_2.png",
+      "bounds": [
+        55,
+        50,
+        119,
+        120
+      ],
+      "sha256": "da4ea0f93acb186c65938588213d596260777e4824cfa0553a73741741c65fc0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 14
+    },
+    {
+      "name": "walk_left_3",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_left_3.png",
+      "bounds": [
+        53,
+        50,
+        110,
+        120
+      ],
+      "sha256": "4b81f9a187e0f625d0db6d29a82550d16388e424fe92c404a81d8d4c6727d0ab",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 15
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_left_0.png",
+      "bounds": [
+        43,
+        53,
+        128,
+        120
+      ],
+      "sha256": "a156fa446772aaa127f5f1567543d223884448a2bc95507bcc277c794faf20c6",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/attack_left_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_left_1.png",
+      "bounds": [
+        49,
+        33,
+        132,
+        120
+      ],
+      "sha256": "cb0b719e776277b85dcd024e251df70db74ac6c6e4d53ccb825f0f60a4bc6fce",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/attack_left_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_left_2.png",
+      "bounds": [
+        8,
+        58,
+        127,
+        120
+      ],
+      "sha256": "7d743593554094c8edc71db019a717768797edd4c230fe92ac66cd80d79ab542",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/attack_left_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_left_3.png",
+      "bounds": [
+        43,
+        55,
+        128,
+        120
+      ],
+      "sha256": "a71faad6723856d9c8240989b1bdb38d1e3acd11a4f196fcb891ce4c765e8d09",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/attack_left_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/hurt_left_0.png",
+      "bounds": [
+        39,
+        50,
+        115,
+        120
+      ],
+      "sha256": "b4eacc6242e14d7268e4897b4e3c9e4e59063ae5f05e08d0b9a644f863d83ee5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 6
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/hurt_left_1.png",
+      "bounds": [
+        55,
+        53,
+        115,
+        120
+      ],
+      "sha256": "1ee009c5d1a82d4a13246bd181b04f62014f9c57ed3946e1fdfa8e43088191e4",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 7
+    },
+    {
+      "name": "death_left_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_left_0.png",
+      "bounds": [
+        59,
+        59,
+        119,
+        120
+      ],
+      "sha256": "14dd22221395b9a8a0790f9da6e5365237d8fef4cd7c8d376afbd59f40d7393f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 8
+    },
+    {
+      "name": "death_left_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_left_1.png",
+      "bounds": [
+        57,
+        63,
+        122,
+        120
+      ],
+      "sha256": "6955dc1cf56892001e5a15ff2928e8260de8546a1d136d6821be644ddd69e761",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 9
+    },
+    {
+      "name": "death_left_2",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_left_2.png",
+      "bounds": [
+        46,
+        74,
+        128,
+        120
+      ],
+      "sha256": "a03187f23ae68ea790d32675974c5c1d469b902cfc2d243c2a7f65be625b869b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "death_left_3",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_left_3.png",
+      "bounds": [
+        49,
+        84,
+        141,
+        120
+      ],
+      "sha256": "54d5c9b7b40ea4f1a162f0250c7c06b98c3ff9deb262f25c90ef1bde508ae415",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "idle_right_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/idle_right_0.png",
+      "bounds": [
+        63,
+        49,
+        117,
+        120
+      ],
+      "sha256": "79ab601d8f89fb8020305c43bfcb2f6c52c0c38d1bf9f70399c1f10ffab62726",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 20
+    },
+    {
+      "name": "idle_right_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/idle_right_1.png",
+      "bounds": [
+        61,
+        51,
+        116,
+        120
+      ],
+      "sha256": "5b14c5df9e231c6f126e9b856fe3e526522302f761d02d4a7665b2b468f8e244",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 21
+    },
+    {
+      "name": "walk_right_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_right_0.png",
+      "bounds": [
+        59,
+        48,
+        115,
+        120
+      ],
+      "sha256": "b62fadaecb57689a47d7f7b57eadaa732e6b468c7c445bbef3a6d6e1347dbeb6",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 22
+    },
+    {
+      "name": "walk_right_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_right_1.png",
+      "bounds": [
+        58,
+        49,
+        121,
+        120
+      ],
+      "sha256": "f9df41bc01b424302720b4ffea2ba3cf9e1a58a8bb348fcb8f518b92a7ed7fc9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 23
+    },
+    {
+      "name": "walk_right_2",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_right_2.png",
+      "bounds": [
+        62,
+        49,
+        122,
+        120
+      ],
+      "sha256": "89ffd04375a7e12c48f6a25a8f504a04809f759950522819d19721f6de24567f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 24
+    },
+    {
+      "name": "walk_right_3",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_right_3.png",
+      "bounds": [
+        63,
+        50,
+        120,
+        120
+      ],
+      "sha256": "8c905efd45cfb9f4b54f205ca96e19933f830db77c1bdc2ded392fad3b86fde2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 25
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_right_0.png",
+      "bounds": [
+        45,
+        55,
+        129,
+        120
+      ],
+      "sha256": "689f83f1943ad9eece912fc79b680025ef84448e4c5864b292c93b72e23e7fdb",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/attack_right_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_right_1.png",
+      "bounds": [
+        51,
+        41,
+        139,
+        120
+      ],
+      "sha256": "d09c95c50a71a456404c61cbd9ab030e1a7563e0d9aabe78e5b2b58f072f11c4",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/attack_right_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_right_2.png",
+      "bounds": [
+        31,
+        51,
+        139,
+        120
+      ],
+      "sha256": "637658abef8cdf9e2254d6c9f4efa0fecef43ddf35ac56aca6c666b5c5644965",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/attack_right_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_right_3.png",
+      "bounds": [
+        52,
+        53,
+        136,
+        120
+      ],
+      "sha256": "3d8c17bb0deb73c516369fc824764d4f4cfbcfe3f4de35ba73f75ecf4e4bfe17",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/attack_right_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/hurt_right_0.png",
+      "bounds": [
+        61,
+        49,
+        139,
+        120
+      ],
+      "sha256": "41fc88a6398176d84e9a359a056d7e046e693d48f27befdacd3c2280a479c3f5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 12
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/hurt_right_1.png",
+      "bounds": [
+        57,
+        51,
+        121,
+        120
+      ],
+      "sha256": "67781d62ed2493ca22a8a191a5760ae1ae9f9578b88df734009a2e63b32fb8de",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 13
+    },
+    {
+      "name": "death_right_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_right_0.png",
+      "bounds": [
+        57,
+        60,
+        118,
+        120
+      ],
+      "sha256": "c23bc006fc8133e485b8ea35bb21a58786c55a60a9ef6b9c3a6c3752d32bcfd5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 14
+    },
+    {
+      "name": "death_right_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_right_1.png",
+      "bounds": [
+        51,
+        65,
+        125,
+        120
+      ],
+      "sha256": "4f5e1ad8e9e99cb3155481e995961fd43d0794c293f30d218bf8c2a51e23f1ae",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 15
+    },
+    {
+      "name": "death_right_2",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_right_2.png",
+      "bounds": [
+        48,
+        75,
+        131,
+        120
+      ],
+      "sha256": "2708d5b0a2010a99d3814f65d7f6596be75e6e52b2ca155eff86fa7b47da92e9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 16
+    },
+    {
+      "name": "death_right_3",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_right_3.png",
+      "bounds": [
+        39,
+        82,
+        126,
+        120
+      ],
+      "sha256": "f1463f2c2b72431c56c53d8d67ddce293f62f900a848832ad29f7865444a1a4e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 17
+    },
+    {
+      "name": "idle_up_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/idle_up_0.png",
+      "bounds": [
+        50,
+        55,
+        127,
+        120
+      ],
+      "sha256": "5e9fc0465ba14205f67ca208289d1f57986a27a6fe0ea380f768853e99549ea5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 30
+    },
+    {
+      "name": "idle_up_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/idle_up_1.png",
+      "bounds": [
+        53,
+        55,
+        127,
+        120
+      ],
+      "sha256": "42e72f0b6d4aba3d129e4a2e58c5794ff092febdd83b65e14aae804544ce16bb",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 31
+    },
+    {
+      "name": "walk_up_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_up_0.png",
+      "bounds": [
+        50,
+        53,
+        126,
+        120
+      ],
+      "sha256": "3b1d4321c696ff642aa6adfa22839dc25ed15cc225e66f004c36c25fc97aeb7b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 32
+    },
+    {
+      "name": "walk_up_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_up_1.png",
+      "bounds": [
+        56,
+        54,
+        130,
+        120
+      ],
+      "sha256": "c8c87576dc748fe8e90b822abfb936a662290b0f4dc7696392b66f0c95e38b2a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 33
+    },
+    {
+      "name": "walk_up_2",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_up_2.png",
+      "bounds": [
+        54,
+        54,
+        125,
+        120
+      ],
+      "sha256": "9a611e1852acd2c85861e383ed35aa4ede5cb4fb2fee3394d804528b1cddfc45",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 34
+    },
+    {
+      "name": "walk_up_3",
+      "file": "sprites/creeps/arena/stone-golem/frames/walk_up_3.png",
+      "bounds": [
+        59,
+        54,
+        130,
+        120
+      ],
+      "sha256": "0a0ae02e4b216a01b9e0530a602cd5c0e4a49157adea23992be7d154b9e2667b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 35
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_up_0.png",
+      "bounds": [
+        61,
+        56,
+        136,
+        120
+      ],
+      "sha256": "2d073329fd2eecec44889b481a1483dc1e3e5b2a78d27d7be67757261ba6245e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 36
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_up_1.png",
+      "bounds": [
+        55,
+        48,
+        120,
+        120
+      ],
+      "sha256": "dc82790e2c8ae038dfbec3ea23c2a184b0743edc6acb679323dd727754dfe1f5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 37
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_up_2.png",
+      "bounds": [
+        55,
+        69,
+        125,
+        120
+      ],
+      "sha256": "ddf1d6c6f53243320e569724a26ea7c14935b5a11ddef0cdce21ad007ec2082b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 38
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "sprites/creeps/arena/stone-golem/frames/basic_attack_up_3.png",
+      "bounds": [
+        47,
+        57,
+        130,
+        120
+      ],
+      "sha256": "cafe9b954e1d1455e16df06d15e469e2a845b8f364bcc0f507ce50565d91be26",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "selectedComponent": 39
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/hurt_up_0.png",
+      "bounds": [
+        44,
+        48,
+        127,
+        120
+      ],
+      "sha256": "2e525c644d071d59bd5b03c14c35fbdcddec6b3c036e3dc0f5b9526c2fe07fa2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 18
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/hurt_up_1.png",
+      "bounds": [
+        50,
+        56,
+        124,
+        120
+      ],
+      "sha256": "b260c56937112b771fa8cf60ab717d25a5e1432a8e82d3f734b83710e84cf408",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 19
+    },
+    {
+      "name": "death_up_0",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_up_0.png",
+      "bounds": [
+        55,
+        61,
+        124,
+        120
+      ],
+      "sha256": "8704d19674c996c7cf31e366982484c9a6e90207845bdf28deae0141fe2cb33f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 20
+    },
+    {
+      "name": "death_up_1",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_up_1.png",
+      "bounds": [
+        57,
+        64,
+        129,
+        120
+      ],
+      "sha256": "9ddec7620681c7845040f959dbf7ba3216f2dc709501b6444bc954071547d478",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 21
+    },
+    {
+      "name": "death_up_2",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_up_2.png",
+      "bounds": [
+        49,
+        77,
+        133,
+        120
+      ],
+      "sha256": "d8632f144ee3e7edbea3db716a3e7d3500fb43bc1af4cab70f5df69c155cfe77",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 22
+    },
+    {
+      "name": "death_up_3",
+      "file": "sprites/creeps/arena/stone-golem/frames/death_up_3.png",
+      "bounds": [
+        38,
+        85,
+        125,
+        120
+      ],
+      "sha256": "6f53e2273ff865bae79c532eb7e5e1e651ec96fb0536202f87cd32305659ba4b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "sourceConceptSha256": "1d603ba5774dd293a5ed45a1da4236bf16654c9e62fb16540aff3966307731a3",
+      "sourceImage": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "selectedComponent": 23
+    }
+  ],
+  "animationAudit": [
+    {
+      "tag": "idle_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    }
+  ],
+  "generatedSources": {
+    "main": {
+      "file": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+      "originalGeneratedFilename": "exec-b0ba2706-a940-4ca0-bf8f-4de0f8971198.png",
+      "expected": 40,
+      "rows": 4,
+      "cols": 10,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        1,
+        10,
+        11,
+        20,
+        21,
+        30,
+        31
+      ],
+      "sha256": "e1afcf7d26a7bccba93791d23c06a7919c36d769f5dcc10f56aacdd2f7135065"
+    },
+    "reaction": {
+      "file": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+      "originalGeneratedFilename": "exec-9c66b2df-26e8-4d97-afeb-ccfa02524daf.png",
+      "expected": 24,
+      "rows": 4,
+      "cols": 6,
+      "used": true,
+      "heightReferenceIndices": [
+        1,
+        7,
+        13,
+        19
+      ],
+      "sha256": "039e398f0220e1c1f271b5cbe57f69bb5079f8c608996c04b8567e37ab10ecbf"
+    },
+    "attack": {
+      "file": "sprites/creeps/arena/stone-golem/source/attack_v1.png",
+      "originalGeneratedFilename": "exec-abc3a257-92e9-449f-bd34-53c2fe0e9d4f.png",
+      "expected": 12,
+      "rows": 3,
+      "cols": 4,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        4,
+        8
+      ],
+      "sha256": "4386af63bf95a66e9fbfa1af16dc097e6902683eb24f4c15b287c4693e690719"
+    },
+    "attack_left": {
+      "file": "sprites/creeps/arena/stone-golem/source/attack_left_v1.png",
+      "expected": 4,
+      "rows": 2,
+      "cols": 2,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        3
+      ],
+      "originalGeneratedFilename": "exec-e6f0dfd5-cb73-43a0-9a4c-19bb29fd7ead.png",
+      "sha256": "58c390c20200e0ef99cc4b9d18f92a980986bb9fbfb237b5c872ecd1678c4f28"
+    },
+    "attack_right": {
+      "file": "sprites/creeps/arena/stone-golem/source/attack_right_v1.png",
+      "expected": 4,
+      "rows": 2,
+      "cols": 2,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        3
+      ],
+      "originalGeneratedFilename": "exec-a1adddae-ac09-4134-bca4-849254aace16.png",
+      "sha256": "b7eeacc49275f2057f623db4b406dbd6d4c49b5c0d4cb3e974a16bb49c708766"
+    }
+  },
+  "sourceScales": {
+    "main": 0.4024390243902439,
+    "reaction": 0.3308270676691729,
+    "attack": 0.2490566037735849,
+    "attack_left": 0.1783783783783784,
+    "attack_right": 0.17098445595854922
+  },
+  "notes": "Directional side attacks regenerated to preserve moss shoulder and profile. Connected collapsed body retained on death.",
+  "runtimeIntegration": false,
+  "provenance": "Original AI-assisted generated raster poses, approved concept images provided directly. Aseprite extracts masked generated pixels, removes alpha below220, preserves source RGB, normalizes retained alpha, applies fixed nearest-neighbour source scale and aligns feet. No concept pixels used as animation frames; no commercial sprite pack, separate third-party license or exclusive copyright claimed.",
+  "verification": "Isolated Phaser verification passed; owner animation approval pending; not integrated.",
+  "normalGameplayReview": "PASS: isolated Phaser 4.2.1, 1x logical/1x and2x display, all frames observed, native loop/one-shot/facing transitions and constant origins checked. No live-match integration or owner runtime approval.",
+  "verificationEvidence": [
+    "sprites/creeps/arena/waves-09-12-production/review/phaser_verification.json",
+    "sprites/creeps/arena/waves-09-12-production/review/concept_comparison.png"
+  ],
+  "wave": 12,
+  "artifactHashes": {
+    "spritesheet.png": "ebd30419342d1b24d94ebd7c63665a39f19442c8c562709fc6f85f1a5de14f8f",
+    "atlas.json": "883986a6a16616484b9192ad5557584cfeba0106f8becc1bd58149f63cd22ed0",
+    "source/creep_stone_golem.aseprite": "e148f6a37f715b35cae62eefd89b3cb3bc6f9c88f3e119ddf550a2a0cf84d2b1"
+  },
+  "fidelityReview": "sprites/creeps/arena/waves-09-12-production/concept_fidelity_review.json"
+}

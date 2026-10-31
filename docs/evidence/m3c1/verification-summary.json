@@ -1,0 +1,220 @@
+{
+  "milestone": "M3C1",
+  "verifiedOn": "2026-10-31",
+  "finalCommand": "pnpm check:final --config playwright.m3c1.config.ts tests/e2e/m3c1-preview.spec.ts tests/e2e/m3c1.spec.ts tests/e2e/skills.spec.ts",
+  "finalStatus": "passed",
+  "finalLog": "final-acceptance.log",
+  "durationSeconds": 458.57,
+  "unitAndNetworkTests": 226,
+  "testFiles": 20,
+  "workflowChecks": 2,
+  "assetValidators": [
+    "scripts/verify-assets.py",
+    "scripts/verify-arena-art01.py",
+    "scripts/verify-arena-v2.py",
+    "scripts/verify-thien-son.py",
+    "scripts/verify-vo-dang.py",
+    "scripts/verify-thieu-lam.py",
+    "scripts/verify-thien-son-skills.py",
+    "scripts/verify-thieu-lam-skills.py",
+    "scripts/verify-bamboo-forest.py"
+  ],
+  "finalBrowserCases": 8,
+  "distinctBrowserCasesLatestPassingAcrossRuns": 24,
+  "accounting": "The broader 24-case run initially had 5 failures. All five passed after fixture/service corrections; the final canonical pipeline passed all eight selected cases. This is not a single green 24-case invocation.",
+  "browserCases": [
+    {
+      "status": "passed",
+      "project": "runtime-preview",
+      "file": "tests\\e2e\\m3c1-preview.spec.ts",
+      "title": "M3C1 runtime preview: all ten wind skills, both melee basics and four dash directions are visible to a fire-school peer",
+      "log": "final-acceptance.log",
+      "duration": "1.1m"
+    },
+    {
+      "status": "passed",
+      "project": "runtime-preview",
+      "file": "tests\\e2e\\m3c1-preview.spec.ts",
+      "title": "M3C1 six-player mixed-school effects keep caster ownership, scale and feet depth",
+      "log": "final-acceptance.log",
+      "duration": "1.0m"
+    },
+    {
+      "status": "passed",
+      "project": "runtime-preview",
+      "file": "tests\\e2e\\skills.spec.ts",
+      "title": "all ten supplied skill animations load, animate and are observed by a second player",
+      "log": "final-acceptance.log",
+      "duration": "40.1s"
+    },
+    {
+      "status": "passed",
+      "project": "runtime-preview",
+      "file": "tests\\e2e\\skills.spec.ts",
+      "title": "two Cái Bang players cast into shared dungeon enemies and clean a buff on physical exit",
+      "log": "final-acceptance.log",
+      "duration": "18.3s"
+    },
+    {
+      "status": "passed",
+      "project": "runtime-preview",
+      "file": "tests\\e2e\\skills.spec.ts",
+      "title": "projectile and control skills damage arena invaders with shared authoritative feedback",
+      "log": "final-acceptance.log",
+      "duration": "54.8s"
+    },
+    {
+      "status": "passed",
+      "project": "runtime-preview",
+      "file": "tests\\e2e\\skills.spec.ts",
+      "title": "a real enemy kills a player during a skill channel and both clients clean the effect",
+      "log": "final-acceptance.log",
+      "duration": "40.9s"
+    },
+    {
+      "status": "passed",
+      "project": "runtime-preview",
+      "file": "tests\\e2e\\skills.spec.ts",
+      "title": "staff control, armor break, stun and the heavy finisher use their own supplied effects",
+      "log": "final-acceptance.log",
+      "duration": "37.5s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\dungeons.spec.ts",
+      "title": "two real clients share one creep wave, menu entry and physical exit",
+      "log": "isolated-services-smoke.log",
+      "duration": "32.4s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\dungeons.spec.ts",
+      "title": "two real clients farm separate private instances and retain empty wave snapshots",
+      "log": "final-verification.log",
+      "duration": "55.0s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\gameplay.spec.ts",
+      "title": "fixed follow camera, eight-way movement and foreground occlusion",
+      "log": "final-verification.log",
+      "duration": "35.9s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\gameplay.spec.ts",
+      "title": "ranged projectile uses a fixed trajectory and original effect frames",
+      "log": "final-verification.log",
+      "duration": "4.9s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\gameplay.spec.ts",
+      "title": "real PNG animation registry covers two actors, six states and four directions",
+      "log": "final-verification.log",
+      "duration": "3.3s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\late-join.spec.ts",
+      "title": "Join remains enabled after host starts school selection",
+      "log": "final-verification.log",
+      "duration": "7.8s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\late-join.spec.ts",
+      "title": "Join active match, choose school with stable focus, spawn without resetting host or clock",
+      "log": "final-verification.log",
+      "duration": "11.4s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\m3c1.spec.ts",
+      "title": "M3C1 normal mixed-school progression: shared farming, independent ranks, mobility, statue defense and cleanup",
+      "log": "final-acceptance.log",
+      "duration": "1.3m"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\progression.spec.ts",
+      "title": "M3B two players earn independently, upgrade mixed builds, return, respec and resume farming",
+      "log": "isolated-services-smoke.log",
+      "duration": "59.5s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\progression.spec.ts",
+      "title": "M3B live modal preserves controls and invasion warnings while two players see learned skill effects",
+      "log": "isolated-services-smoke.log",
+      "duration": "45.5s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\progression.spec.ts",
+      "title": "M3B skill menu stays inside compact and large full game viewports",
+      "log": "final-verification.log",
+      "duration": "8.6s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\progression.spec.ts",
+      "title": "M3B unsupported school cannot use the Cái Bang catalogue",
+      "log": "final-verification.log",
+      "duration": "3.0s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\ui.spec.ts",
+      "title": "world and in-game menus fit 1280x720",
+      "log": "final-verification.log",
+      "duration": "6.0s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\ui.spec.ts",
+      "title": "world and in-game menus fit 1920x1080",
+      "log": "final-verification.log",
+      "duration": "15.8s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\ui.spec.ts",
+      "title": "world and in-game menus fit 900x640",
+      "log": "final-verification.log",
+      "duration": "13.4s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\ui.spec.ts",
+      "title": "menus release held movement, trap focus and preserve live two-client simulation",
+      "log": "final-verification.log",
+      "duration": "9.3s"
+    },
+    {
+      "status": "passed",
+      "project": "progression-regression",
+      "file": "tests\\e2e\\ui.spec.ts",
+      "title": "utility menus open and forest art study stays presentation-only",
+      "log": "final-verification.log",
+      "duration": "4.0s"
+    }
+  ],
+  "recordingsCreated": false
+}

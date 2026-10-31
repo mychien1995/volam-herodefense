@@ -22,7 +22,8 @@ export default async function setup() {
     }
   };
   try {
-    const server = createGameServer();
+    process.env['VOLAM_DEV_PRACTICE_CREEPS'] = '1'; // Explicit historical combat fixture.
+const server = createGameServer();
     await server.listen(2570);
     closers.push(() => server.gracefullyShutdown(false));
     const client = await createServer({

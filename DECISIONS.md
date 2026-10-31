@@ -1,5 +1,23 @@
 # Approved decisions & assumptions register
 
+## School avatar and clean arena spawn — 2026-10-31
+
+The user requests the Thiếu Lâm selection avatar be corrected,the three permanent spawn sơn tặc removed,and creep nameplates replaced by an upcoming-wave notice. Selection now reuses the approved monk idle sprite. Regular matches publish no practice enemies; scheduled invasions and dungeon populations are retained. Historical combat test targets require explicit development-only `VOLAM_DEV_PRACTICE_CREEPS=1`,ignored in production. Creeps retain sprites,health bars and effects but no under-sprite text; player names remain. The next invasion creep type and warning names come from the same retained wave art manifest as the rendered creeps. Wave timing,combat,rewards and server authority are unchanged.
+
+
+## M3C3 Thiếu Lâm — 2026-10-31
+
+The user explicitly authorizes the fourth school: all13 canonical actives,both independent basics,Dịch Cân Kinh and both same-target Phát Động chains with retained supplied artwork and existing multiplayer/progression. The request cuts off before its Đao section; the five canonical CONTENT_DATA definitions are used. Bất Động retains the proposed healing pulse. Six-second per-step windows,out-of-order same-chain resets,unrelated-active/A preservation and all numerical profiles remain configurable proposals in `game-data/thieu-lam.ts`. Interrupt resistance blocks new stuns/hostile displacement,never all damage. Ally support never heals statue or revives. Exact mechanics/tests/art status:`docs/M3C3_IMPLEMENTATION.md`. M3D and later systems are outside this assignment.
+
+
+## M3C1 Thiên Sơn — 2026-10-31
+
+The director explicitly authorizes Thiên Sơn as the second playable school: both Phiến/Đao basics remain melee, all ten canonical actives, Bắc Minh automatic speed/attack-speed/crit growth, M3B ranks/points/arena-only loadouts, existing sprite/VFX integration and mixed Cái Bang multiplayer. Supplied Võ Đang/Thiếu Lâm assets are audited only; their combat, equipment, crafting, PvP, bosses and new environments remain outside this batch. Existing approved character bytes are retained, without artwork generation or new art approval claims.
+
+Configurable M3C1 proposals: school base/growth/surplus and explicit skill ranks are in `game-data/thien-son.ts`. Directional actions capture facing, moving spins follow current owner position, and active timed actions block another combat action until completion. Phong Ảnh's one-second rank1 window starts at cast, evades one incoming enemy hit and counters only in range with clear terrain; unused windows expire. These resolve previously unspecified numeric/timing details without replacing the canonical mechanics. See `docs/M3C1_IMPLEMENTATION.md`; final balance and supplied skill-art director approval remain separate.
+
+**Confirmed evidence policy (2026-10-30):** Follow `AGENTS.md` visual verification and recording policy. Routine development, asset generation and tests use lightweight PNG screenshots and live Phaser assertions/frame observations. Do not create video/animated-image evidence or run recording, encoding or conversion tools. Recordings require an explicit user request for the current task; preserve all existing recordings. Animation, transition, positioning and gameplay validation remain required.
+
 ## Menu-only dungeon entry — 2026-10-30
 
 The user explicitly removes Dẫn Lộ / Dungeon Guide from the arena. Living players enter supported dungeons through the top-right Phó Bản menu from anywhere in the arena. No NPC interaction or proximity gate remains. Server phase, alive/arena membership, instance ownership/capacity and availability validation remain authoritative. The physical dungeon exit and existing arena return point (960,576) remain. This supersedes earlier Guide-entry requirements; no new destination or recall action is added.
@@ -108,3 +126,43 @@ PROPOSED configurable prototype tuning (not final approved balance): statue HP20
 ## Join after host school selection — 2026-10-30 correction
 
 The user reported that a second player cannot join after the host starts/selects a school. Rooms now remain joinable with free seats in WAITING_LOBBY, SCHOOL_SELECTION and IN_GAME. This supersedes the earlier start-time room lock. During initial selection, new entrants join the existing confirmation barrier. During active play, only the entrant sees school selection; they spawn once, at level 1 with one point and no XP/gold, after server-validated confirmation. Existing participants, progression, statue HP, dungeon state and invasion deadlines are preserved. Pending entrants cannot move, attack or enter dungeons and do not count as spawned simulation participants. Confirmed school choices remain immutable. Six-seat capacity and defeat closure remain enforced. This does not implement reconnect/progress recovery or host migration.
+
+## M3A Cái Bang integration scope — 2026-10-30
+
+CONFIRMED by the explicit M3A assignment: implement all ten canonical Cái Bang active mechanics, preserve both approved basic styles, integrate the supplied character/VFX artwork into actual server-authoritative gameplay, and reuse the system for future schools. Cầm Long remains pull + silence + disarm, without stun or prevented movement. Artwork never determines damage, range, RNG or combat timing. Existing controls, room/dungeon isolation and the compact HUD remain.
+
+PROPOSED implementation tuning: rank-1 numbers for the eight newly implemented skills and Tiêu Diêu Công growth are configurable in `packages/game-data/src/cai-bang.ts`; the exact values and measured probes are documented in `docs/M3A_IMPLEMENTATION.md`. These are not approved final balance. Strongest nonstacking status magnitudes and same-source refresh are the current test policy. Successful control records meaningful-assist eligibility in the existing fixed EXP/gold pool, without adding damage or another reward pool.
+
+The user permits a development-only testing loadout before M3B. The implemented adapter is server-flagged, ignored in production, Cái Bang-only and arena-only; it preserves resources, hostile statuses and per-ability cooldowns. The live preview uses actual server commands. This does not decide progression unlocks/ranks or implement full respec. Supplied art is produced, integrated and runtime verified; director approval of production animations remains pending. No other-school combat or M3B work is authorized by this milestone.
+
+## M3B progression authorization — 2026-10-31
+
+The explicit M3B assignment supersedes the previous stop gate for this milestone only. Implement Cái Bang's real earned-point progression, four-slot mixed-style builds, independent A, rank upgrades, free arena-only respec, automatic school/passive growth, surplus accounting and the existing in-viewport skill menu. Reuse M3A mechanics/art. Other-school combat remains unimplemented; normal rooms no longer give unsupported schools the historical free Cái Bang active defaults. Their old A prototype is not a completed school kit.
+
+PROPOSED defaults, recorded before implementation in `docs/M3B_RULES.md`: normal ranks4 at1/3/5/7, ultimate ranks3 at6/10/14, one optional ultimate in any slot, no duplicate assignments; one point/rank. New Cái Bang players have empty active slots and one available point. Allocations belong to the current four-skill build; moving preserves rank, removing refunds it, reset retains slot choices at rank0. Existing cumulative60 EXP/level is capped at1740 for level30. Numeric growth, rank values, surplus coefficients and clamps remain configurable proposals, not final approved balance.
+
+Cooldown debt follows canonical ability IDs across all build changes; A shares one cooldown across its choices. Upgrades/resets never shorten existing expiry or refill resources. Build commits cancel owned temporary effects and preserve hostile control. Earned=allocated+available+surplus; only a fully maxed four-slot build converts remaining points into surplus. Stats derive fresh from separate layers, never from previously accumulated totals. Server phase/zone/life, expected revision, monotonic sequence, ownership, gates, budget and slot rules validate every atomic commit. M3C is not authorized by M3B.
+
+## Thiên Sơn runtime art approval — 2026-10-30
+
+The director explicitly approved the final normal-zoom Thiên Sơn character result after the seven-check Phaser review (user: “approved, please proceed”). Approval covers both current fan/curved đao styles, four-facing idle/walk/normal attacks, 80 authored cels and their exact approved concept `assets/concepts/heroes/thien-son/thien-son-concept-v01.png`. Both runtime entries are `approved`; `assets/approved_thien_son.lock.json` locks source/export/concept bytes. Cast/hurt/death reuse is outside authored approval. This closes the requested character-art workflow; it does not authorize school combat abilities, balance changes, other schools or environment expansion.
+
+
+## Võ Đang character art approval - 2026-10-30
+
+The user explicitly approved the final four-facing idle, walk, Quyền and Kiếm character artwork after the saved Phaser review. Exact concept `assets/concepts/heroes/vo-dang/vo-dang-concept-v01.png`, two editable sources, two PNG/JSON atlases, idle previews and80 frame PNGs are protected as89 files in `assets/approved_vo_dang.lock.json`. Both character runtime entries are approved. Preserve those bytes; revisions require a separate reviewed version. Cast/hurt/death aliases are outside authored-art approval. This approval does not implement school combat/passives, change server authority or authorize other-school/environment work.
+
+
+## Võ Đang skill artwork final approval — 2026-10-31
+
+The user explicitly approved all produced Võ Đang skill artwork and all13 production icons after the final Phaser review (user: “all approved”). Approval covers20 character/VFX components,636 exported cels/163 tags,33 editable Aseprite sources, the two unchanged approved normal-attack reuses and the disclosed optional shared straight-qi preview. Exact files are protected separately by `assets/approved_vo_dang_skills.lock.json`; the original89-file character lock is unchanged. Thái Cực Tâm Pháp remains icon-only. This is final artwork approval, not approval or implementation of Võ Đang mechanics, numerical tuning or gameplay integration. See `assets/reviews/skills/vo-dang/README.md`.
+
+## Thiên Sơn skill artwork final approval — 2026-10-31
+
+CONFIRMED by the director after the M3C1 runtime delivery: “skill artwork approved”. Approval covers the ten integrated Thiên Sơn active character/VFX sets and thirteen active/basic/passive icons, including disclosed supplied-frame reuse. `assets/approved_thien_son_skills.lock.json` records exact approved source/export bytes; current runtime integration metadata marks productionArtApproved true. Historical export-time manifests remain historical snapshots. The existing approved character baseline is unchanged. Missing authored baseline hurt/death frames, other-school/environment art and provisional numerical balance are outside this approval. Stop after M3C1.
+
+## M3C2 Võ Đang — 2026-10-31
+
+The explicit assignment authorizes Võ Đang as the third playable school: both Quyền/Kiếm basics, all ten canonical actives, Thái Cực Tâm Pháp, M3B ranks/points/surplus/arena-only respec, retained approved sprites/icons/VFX, shared three-school multiplayer and dev preview. Thiếu Lâm and later milestones remain out of scope. Existing approved art bytes are preserved.
+
+PROVISIONAL configurable defaults: timed mana shield (the toggle question remains open), stationary caster-position formations with scheduled ticks, a single counter trigger that takes the incoming hit and requires survival, and the numeric rank/growth/proc/absorption data in `game-data/vo-dang.ts`. These do not finalize balance or replace canonical mechanics. See `docs/M3C2_IMPLEMENTATION.md`.

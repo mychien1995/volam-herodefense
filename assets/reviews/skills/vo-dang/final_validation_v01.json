@@ -1,0 +1,60 @@
+{
+  "status": "PASS_all_final_stages_completed_after_focused_recovery",
+  "createdOn": "2026-10-31",
+  "scope": "Võ Đang art production/isolated preview, plus existing legacy gameplay regression fixtures. No school gameplay implementation.",
+  "commands": [
+    {
+      "command": "pnpm check:final --config playwright.vo-dang-skills.config.ts tests/e2e/gameplay.spec.ts --grep 'two clients agree|ranged projectile'",
+      "result": "Stopped during compile on unrelated thien-son-skill-preview.ts Camera.rotationZ type error; no successful whole-pipeline claim."
+    },
+    {
+      "command": "pnpm exec tsc -b",
+      "result": "PASS on focused rerun after unrelated source changed externally."
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit",
+      "result": "PASS; rerun for the dedicated fixture correction also passed."
+    },
+    {
+      "command": "node --test scripts/tests/asset-files.test.mjs",
+      "result": "PASS2/2."
+    },
+    {
+      "command": "pnpm exec vitest run",
+      "result": "PASS174 tests in17 files."
+    },
+    {
+      "command": "pnpm --filter @volam/game-client build",
+      "result": "PASS; existing large-chunk warning."
+    },
+    {
+      "command": "pnpm verify:assets",
+      "result": "PASS all6 repository asset validators."
+    },
+    {
+      "command": "python -X utf8 assets/source/skills/vo-dang/validate.py",
+      "result": "PASS20 components,636 cels,163 tags,13 icons,89 protected files."
+    },
+    {
+      "command": "node assets/source/skills/vo-dang/verify_phaser.mjs",
+      "result": "PASS all163 tags/all frames,4facings, stages, cleanup, conditional feedback, straight travel,13 icons; actual PNG evidence; no recordings."
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.vo-dang-skills.config.ts tests/e2e/gameplay.spec.ts --grep 'two clients agree|ranged projectile'",
+      "result": "Final PASS2/2,30.8s. Dedicated non-production VOLAM_DEV_LEGACY_SKILLS=1 fixture as documented in docs/M3B_RULES.md."
+    }
+  ],
+  "priorBrowserFailures": [
+    "Initial run: room-code fill timeout; projectile case passed.",
+    "Focused retry: old Q/W mana assertion failed because the dedicated setup omitted the documented legacy fixture flag.",
+    "Corrected only new test setup; did not alter normal production loadouts or gameplay; final both cases passed."
+  ],
+  "fullSuiteRepeated": false,
+  "baselineProtectedFilesUnchanged": 89,
+  "editableAsepriteSources": 33,
+  "allConceptApprovalsVerified": true,
+  "productionArtApproval": "pending",
+  "recordingsGenerated": false,
+  "reviewURL": "http://127.0.0.1:8766/assets/reviews/skills/vo-dang/index.html",
+  "reviewHttpStatusObserved": 200
+}

@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-31",
+  "changes": [
+    "Thiếu Lâm card reuses approved monk idle PNG",
+    "Normal/production matches have no practice creeps; explicit development fixtures only",
+    "No creep name/status text under sprites; health bars and player labels retained",
+    "Manifest-derived next invasion creep names appear in HUD/notices"
+  ],
+  "checks": {
+    "focusedServerTests": 26,
+    "finalUnitNetworkTests": 312,
+    "unitFiles": 25,
+    "workflowChecks": 8,
+    "assetValidators": 10,
+    "typecheck": "passed",
+    "build": "passed",
+    "finalBrowser": "passed",
+    "finalCssBrowserRecheck": {
+      "startTime": "2026-10-31T08:51:33.829Z",
+      "duration": 27845.823,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "initialEnemyCount": 0,
+  "clientErrors": [
+    [],
+    []
+  ],
+  "commands": [
+    "pnpm check:quick tests/clean-spawn-room.test.ts tests/room.test.ts tests/progression-room.test.ts tests/skill-room.test.ts",
+    "pnpm check:final --config playwright.clean-match.config.ts",
+    "pnpm check:browser --config playwright.clean-match.config.ts"
+  ],
+  "notes": [
+    "Final pipeline passed in90.08s. The final CSS gap adjustment received a focused production rebuild and two-client check in35.55s; successful full unit/asset stages were retained.",
+    "Initial final attempt stopped at one unused test-variable typecheck, corrected before the successful312-test run.",
+    "Only existing approved art is reused; no assets regenerated and no recordings.",
+    "Browser uses an8-second development invasion interval and100000 statueHP; production timing/HP are unchanged.",
+    "Existing large-client-chunk advisory remains."
+  ]
+}

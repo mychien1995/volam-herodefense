@@ -23,9 +23,11 @@ export async function startTogether(pages: Page[], ids: string[] = []) {
     await expect(page.locator('#pregame .pre-title')).toHaveText(
       'School Selection',
     );
-    await page.locator(`[data-school=${ids[i] ?? 'cai_bang'}]`).click();
+    await page
+      .locator(`#pregame button[data-school=${ids[i] ?? 'cai_bang'}]`)
+      .click();
     await expect(
-      page.locator(`[data-school=${ids[i] ?? 'cai_bang'}]`),
+      page.locator(`#pregame button[data-school=${ids[i] ?? 'cai_bang'}]`),
     ).toHaveAttribute('aria-pressed', 'true');
     await page
       .getByRole('button', { name: 'Confirm Selection', exact: true })

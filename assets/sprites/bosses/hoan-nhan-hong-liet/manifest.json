@@ -1,0 +1,461 @@
+{
+  "id": "boss_hoan_nhan_hong_liet",
+  "status": "prototype",
+  "productionStatus": "produced_unintegrated",
+  "conceptApproval": "automatic_for_this_task",
+  "runtimeVerified": false,
+  "runtimeApproved": false,
+  "image": "assets/sprites/bosses/hoan-nhan-hong-liet/spritesheet.png",
+  "atlas": "assets/sprites/bosses/hoan-nhan-hong-liet/atlas.json",
+  "frameSize": [
+    128,
+    128
+  ],
+  "footAnchorPx": [
+    64,
+    104
+  ],
+  "animations": [
+    {
+      "id": "idle_down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameDurationMs": 350,
+      "loop": true
+    },
+    {
+      "id": "hurt_down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameDurationMs": 120,
+      "loop": false
+    },
+    {
+      "id": "walk_down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameDurationMs": 150,
+      "loop": true
+    },
+    {
+      "id": "basic_attack_down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameDurationMs": 110,
+      "loop": false
+    },
+    {
+      "id": "ground_slam_down",
+      "frames": [
+        "ground_slam_down_0",
+        "ground_slam_down_1",
+        "ground_slam_down_2",
+        "ground_slam_down_3"
+      ],
+      "frameDurationMs": 140,
+      "loop": false
+    },
+    {
+      "id": "lava_cast_down",
+      "frames": [
+        "lava_cast_down_0",
+        "lava_cast_down_1",
+        "lava_cast_down_2",
+        "lava_cast_down_3"
+      ],
+      "frameDurationMs": 160,
+      "loop": false
+    },
+    {
+      "id": "command_down",
+      "frames": [
+        "command_down_0",
+        "command_down_1",
+        "command_down_2",
+        "command_down_3"
+      ],
+      "frameDurationMs": 180,
+      "loop": false
+    },
+    {
+      "id": "ultimate_charge_down",
+      "frames": [
+        "ultimate_charge_down_0",
+        "ultimate_charge_down_1",
+        "ultimate_charge_down_2",
+        "ultimate_charge_down_3"
+      ],
+      "frameDurationMs": 220,
+      "loop": false
+    },
+    {
+      "id": "death_down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameDurationMs": 180,
+      "loop": false
+    },
+    {
+      "id": "low_hp_idle_down",
+      "frames": [
+        "low_hp_idle_down_0",
+        "low_hp_idle_down_1",
+        "low_hp_idle_down_2",
+        "low_hp_idle_down_3"
+      ],
+      "frameDurationMs": 250,
+      "loop": true
+    },
+    {
+      "id": "idle_up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameDurationMs": 350,
+      "loop": true
+    },
+    {
+      "id": "hurt_up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameDurationMs": 120,
+      "loop": false
+    },
+    {
+      "id": "walk_up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameDurationMs": 150,
+      "loop": true
+    },
+    {
+      "id": "basic_attack_up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameDurationMs": 110,
+      "loop": false
+    },
+    {
+      "id": "ground_slam_up",
+      "frames": [
+        "ground_slam_up_0",
+        "ground_slam_up_1",
+        "ground_slam_up_2",
+        "ground_slam_up_3"
+      ],
+      "frameDurationMs": 140,
+      "loop": false
+    },
+    {
+      "id": "lava_cast_up",
+      "frames": [
+        "lava_cast_up_0",
+        "lava_cast_up_1",
+        "lava_cast_up_2",
+        "lava_cast_up_3"
+      ],
+      "frameDurationMs": 160,
+      "loop": false
+    },
+    {
+      "id": "command_up",
+      "frames": [
+        "command_up_0",
+        "command_up_1",
+        "command_up_2",
+        "command_up_3"
+      ],
+      "frameDurationMs": 180,
+      "loop": false
+    },
+    {
+      "id": "ultimate_charge_up",
+      "frames": [
+        "ultimate_charge_up_0",
+        "ultimate_charge_up_1",
+        "ultimate_charge_up_2",
+        "ultimate_charge_up_3"
+      ],
+      "frameDurationMs": 220,
+      "loop": false
+    },
+    {
+      "id": "death_up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameDurationMs": 180,
+      "loop": false
+    },
+    {
+      "id": "low_hp_idle_up",
+      "frames": [
+        "low_hp_idle_up_0",
+        "low_hp_idle_up_1",
+        "low_hp_idle_up_2",
+        "low_hp_idle_up_3"
+      ],
+      "frameDurationMs": 250,
+      "loop": true
+    },
+    {
+      "id": "idle_left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameDurationMs": 350,
+      "loop": true
+    },
+    {
+      "id": "hurt_left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameDurationMs": 120,
+      "loop": false
+    },
+    {
+      "id": "walk_left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameDurationMs": 150,
+      "loop": true
+    },
+    {
+      "id": "basic_attack_left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameDurationMs": 110,
+      "loop": false
+    },
+    {
+      "id": "ground_slam_left",
+      "frames": [
+        "ground_slam_left_0",
+        "ground_slam_left_1",
+        "ground_slam_left_2",
+        "ground_slam_left_3"
+      ],
+      "frameDurationMs": 140,
+      "loop": false
+    },
+    {
+      "id": "lava_cast_left",
+      "frames": [
+        "lava_cast_left_0",
+        "lava_cast_left_1",
+        "lava_cast_left_2",
+        "lava_cast_left_3"
+      ],
+      "frameDurationMs": 160,
+      "loop": false
+    },
+    {
+      "id": "command_left",
+      "frames": [
+        "command_left_0",
+        "command_left_1",
+        "command_left_2",
+        "command_left_3"
+      ],
+      "frameDurationMs": 180,
+      "loop": false
+    },
+    {
+      "id": "ultimate_charge_left",
+      "frames": [
+        "ultimate_charge_left_0",
+        "ultimate_charge_left_1",
+        "ultimate_charge_left_2",
+        "ultimate_charge_left_3"
+      ],
+      "frameDurationMs": 220,
+      "loop": false
+    },
+    {
+      "id": "death_left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameDurationMs": 180,
+      "loop": false
+    },
+    {
+      "id": "low_hp_idle_left",
+      "frames": [
+        "low_hp_idle_left_0",
+        "low_hp_idle_left_1",
+        "low_hp_idle_left_2",
+        "low_hp_idle_left_3"
+      ],
+      "frameDurationMs": 250,
+      "loop": true
+    },
+    {
+      "id": "idle_right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameDurationMs": 350,
+      "loop": true
+    },
+    {
+      "id": "hurt_right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameDurationMs": 120,
+      "loop": false
+    },
+    {
+      "id": "walk_right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameDurationMs": 150,
+      "loop": true
+    },
+    {
+      "id": "basic_attack_right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameDurationMs": 110,
+      "loop": false
+    },
+    {
+      "id": "ground_slam_right",
+      "frames": [
+        "ground_slam_right_0",
+        "ground_slam_right_1",
+        "ground_slam_right_2",
+        "ground_slam_right_3"
+      ],
+      "frameDurationMs": 140,
+      "loop": false
+    },
+    {
+      "id": "lava_cast_right",
+      "frames": [
+        "lava_cast_right_0",
+        "lava_cast_right_1",
+        "lava_cast_right_2",
+        "lava_cast_right_3"
+      ],
+      "frameDurationMs": 160,
+      "loop": false
+    },
+    {
+      "id": "command_right",
+      "frames": [
+        "command_right_0",
+        "command_right_1",
+        "command_right_2",
+        "command_right_3"
+      ],
+      "frameDurationMs": 180,
+      "loop": false
+    },
+    {
+      "id": "ultimate_charge_right",
+      "frames": [
+        "ultimate_charge_right_0",
+        "ultimate_charge_right_1",
+        "ultimate_charge_right_2",
+        "ultimate_charge_right_3"
+      ],
+      "frameDurationMs": 220,
+      "loop": false
+    },
+    {
+      "id": "death_right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameDurationMs": 180,
+      "loop": false
+    },
+    {
+      "id": "low_hp_idle_right",
+      "frames": [
+        "low_hp_idle_right_0",
+        "low_hp_idle_right_1",
+        "low_hp_idle_right_2",
+        "low_hp_idle_right_3"
+      ],
+      "frameDurationMs": 250,
+      "loop": true
+    }
+  ],
+  "sourceJobs": [
+    "boss_down",
+    "boss_up",
+    "boss_left",
+    "boss_right",
+    "lowHp"
+  ],
+  "provenance": "Original AI artwork generated with built-in image_gen for this task; PNG source retained. No third-party sprite copied.",
+  "licenseNote": "AI-generated output; subject to applicable OpenAI terms. No external licensed asset claim.",
+  "sourceFormat": "Flattened PNG drawings; no recovered layered Aseprite source.",
+  "bodyHeightTargetPx": 64,
+  "wholeSheetScales": {
+    "down": 0.32,
+    "up": 0.3545706371191136,
+    "left": 0.3395225464190981,
+    "right": 0.3545706371191136
+  }
+}

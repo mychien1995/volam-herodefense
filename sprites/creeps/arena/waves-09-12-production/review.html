@@ -1,0 +1,71 @@
+<!doctype html><meta charset="utf-8"><title>Phase 1F staged sprite verification</title>
+<style>html,body{margin:0;background:#d8cfb3}canvas{display:block;image-rendering:pixelated}</style>
+<script src="/apps/game-client/node_modules/phaser/dist/phaser.js"></script>
+<script>
+const base='/sprites/creeps/arena/';
+const assets=[['jiangshi-zombie','creep_jiangshi_zombie','Cương Thi'],['vengeful-spirit','creep_vengeful_spirit','Oán Linh'],['armored-skeleton','creep_armored_skeleton','Thiết Giáp Khô Lâu'],['stone-golem','creep_stone_golem','Thạch Nhân']];
+const params=new URLSearchParams(location.search),pose=params.get('pose')||'idle';
+const backdrop=params.get('backdrop')||'plain',crowd=params.has('crowd'),display=Number(params.get('display')||2);
+const directions=['down','left','right','up'],sprites=[],baselines=[],manifests=new Map();
+window.__SPRITE_REVIEW__={ready:false,errors:[]};
+new Phaser.Game({type:Phaser.AUTO,width:640,height:360,zoom:display,pixelArt:true,roundPixels:true,backgroundColor:'#d8cfb3',audio:{noAudio:true},scene:{
+preload(){
+ this.load.atlas('hero','/assets/exports/characters/hero_cai_bang.png','/assets/exports/characters/hero_cai_bang.json');
+ this.load.image('ground','/assets/exports/arena_v2/ground.png');
+ this.load.atlas('wave7',base+'skeleton-swordsman/spritesheet.png',base+'skeleton-swordsman/atlas.json');
+ this.load.json('wave7_manifest',base+'skeleton-swordsman/manifest.json');
+ for(const [slug,id]of assets){
+  this.load.atlas(id,base+slug+'/spritesheet.png',base+slug+'/atlas.json');
+  this.load.json(id+'_manifest',base+slug+'/manifest.json');
+ }
+ this.load.on('loaderror',file=>window.__SPRITE_REVIEW__.errors.push(file.url));
+},
+create(){
+ const scene=this;
+ this.cameras.main.setZoom(1);
+ for(const key of ['hero','wave7','ground',...assets.map(a=>a[1])])this.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+ if(backdrop!=='plain'||crowd)this.add.image(backdrop==='grass'?0:-480,backdrop==='grass'?0:-390,'ground').setOrigin(0).setDepth(-1000);
+ const text=(x,y,value,size=10)=>this.add.text(x,y,value,{fontFamily:'Arial',fontSize:size+'px',color:'#30291f',backgroundColor:'#e8dfca',padding:{x:2,y:1},wordWrap:{width:96}}).setDepth(10000);
+ text(8,5,'PHASE 1F · '+pose+' · '+display+'x display · '+(crowd?'staged crowd':backdrop));
+ if(!crowd){
+  text(115,24,'Cái Bang',9);text(176,24,'Wave 7',9);
+  directions.forEach((d,i)=>text(225+i*110,24,d));
+ }else text(8,23,'Six hero drawings + sixteen enemies; isolated art staging, not a multiplayer match',9);
+ const old=this.cache.json.get('wave7_manifest');
+ if(crowd){
+  [[180,154],[260,174],[340,164],[420,184],[220,244],[390,254]].forEach(([x,y])=>baselines.push(this.add.sprite(x,y,'hero','idle_down_0').setOrigin(.5,.8).setDepth(y)));
+ }
+ assets.forEach(([slug,id,label],row)=>{
+  const m=this.cache.json.get(id+'_manifest');manifests.set(id,m);
+  for(const a of m.animations){
+   for(const f of a.frames)if(!this.textures.get(id).has(f))throw Error('Missing frame '+f);
+   this.anims.create({key:id+':'+a.state+':'+a.direction,frames:a.frames.map(frame=>({key:id,frame})),frameRate:a.frameRate,repeat:a.repeat});
+  }
+  const y=crowd?102+row*65:92+row*80;
+  if(!crowd){
+   text(8,y-32,label);
+   baselines.push(this.add.sprite(142,y,'hero','idle_down_0').setOrigin(.5,.8));
+   baselines.push(this.add.sprite(190,y,'wave7','idle_down_0').setOrigin(...old.footPivot));
+  }
+  directions.forEach((d,col)=>{
+   const a=m.animations.find(a=>a.state===pose&&a.direction===d);
+   const x=crowd?210+col*85:240+col*110;
+   const s=this.add.sprite(x,y,id,a.frames[0]).setOrigin(...m.footPivot).setDepth(y);
+   s.setData({reviewId:id,reviewDirection:d,reviewFrames:a.frames});
+   s.play({key:id+':'+pose+':'+d,repeat:-1,repeatDelay:pose==='basic_attack'?300:0});sprites.push(s);
+  });
+ });
+ window.__SPRITE_REVIEW__.showFrame=index=>sprites.forEach(s=>{
+  s.anims.pause();const frames=s.getData('reviewFrames');s.setFrame(frames[Math.min(index,frames.length-1)]);
+ });
+ window.__SPRITE_REVIEW__.playNative=(state,overrideDirection)=>sprites.forEach(s=>{
+  const id=s.getData('reviewId'),d=overrideDirection||s.getData('reviewDirection');
+  s.play(id+':'+state+':'+d);
+ });
+ window.__SPRITE_REVIEW__.snapshot=()=>({ready:true,pose,backdrop,crowd,phaser:Phaser.VERSION,errors:window.__SPRITE_REVIEW__.errors,baselineSprites:baselines.length,
+  sprites:sprites.map(s=>({id:s.getData('reviewId'),direction:s.getData('reviewDirection'),animation:s.anims.currentAnim.key,frame:s.frame.name,total:s.anims.currentAnim.frames.length,isPlaying:s.anims.isPlaying,width:s.frame.width,height:s.frame.height,origin:[s.originX,s.originY],position:[s.x,s.y],scale:[s.scaleX,s.scaleY]}))});
+ window.__SPRITE_REVIEW__.ready=true;
+}
+}});
+</script>
+

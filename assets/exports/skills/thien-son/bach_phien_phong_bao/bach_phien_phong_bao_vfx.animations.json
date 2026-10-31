@@ -1,0 +1,152 @@
+{
+  "id": "bach_phien_phong_bao_vfx",
+  "skillId": "bach_phien_phong_bao",
+  "kind": "vfx",
+  "status": "prototype_pending_final_art_approval",
+  "source": "assets/source/skills/thien-son/bach_phien_phong_bao/vfx/bach_phien_phong_bao_vfx.aseprite",
+  "sheet": "assets/exports/skills/thien-son/bach_phien_phong_bao/bach_phien_phong_bao_vfx.png",
+  "atlas": "assets/exports/skills/thien-son/bach_phien_phong_bao/bach_phien_phong_bao_vfx.json",
+  "frameDimensions": [
+    160,
+    160
+  ],
+  "pivot": [
+    80,
+    80
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "animations": [
+    {
+      "name": "gather",
+      "frames": [
+        "gather_0",
+        "gather_1",
+        "gather_2",
+        "gather_3"
+      ],
+      "frameDimensions": [
+        160,
+        160
+      ],
+      "frameCount": 4,
+      "frameRate": 15.384615384615385,
+      "durationMsPerFrame": 65,
+      "loop": false,
+      "repeat": 0,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        80,
+        80
+      ],
+      "stage": "whirlwind_activation",
+      "placement": "caster_body",
+      "effectPlacementOffset": [
+        0,
+        -16
+      ],
+      "timingAuthority": "Presentation-only provisional cadence; no cooldown, movement, hitbox or authoritative hit timing.",
+      "provenance": "Original generated isolated Wind drawings, Aseprite hard-alpha cleanup. Directional wind uses exact quarter turns; ground ellipses remain unrotated; small hand cues reuse the same art with directional placement.",
+      "sourceStageReuse": null
+    },
+    {
+      "name": "whirlwind",
+      "frames": [
+        "whirlwind_0",
+        "whirlwind_1",
+        "whirlwind_2",
+        "whirlwind_3"
+      ],
+      "frameDimensions": [
+        160,
+        160
+      ],
+      "frameCount": 4,
+      "frameRate": 12.5,
+      "durationMsPerFrame": 80,
+      "loop": true,
+      "repeat": -1,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        80,
+        80
+      ],
+      "stage": "moving_fan_whirlwind",
+      "placement": "caster_body",
+      "effectPlacementOffset": [
+        0,
+        -16
+      ],
+      "timingAuthority": "Presentation-only provisional cadence; no cooldown, movement, hitbox or authoritative hit timing.",
+      "provenance": "Original generated isolated Wind drawings, Aseprite hard-alpha cleanup. Directional wind uses exact quarter turns; ground ellipses remain unrotated; small hand cues reuse the same art with directional placement.",
+      "sourceStageReuse": null
+    },
+    {
+      "name": "expiry",
+      "frames": [
+        "expiry_0",
+        "expiry_1",
+        "expiry_2",
+        "expiry_3"
+      ],
+      "frameDimensions": [
+        160,
+        160
+      ],
+      "frameCount": 4,
+      "frameRate": 15.384615384615385,
+      "durationMsPerFrame": 65,
+      "loop": false,
+      "repeat": 0,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        80,
+        80
+      ],
+      "stage": "whirlwind_expiry",
+      "placement": "caster_body",
+      "effectPlacementOffset": [
+        0,
+        -16
+      ],
+      "timingAuthority": "Presentation-only provisional cadence; no cooldown, movement, hitbox or authoritative hit timing.",
+      "provenance": "Original generated isolated Wind drawings, Aseprite hard-alpha cleanup. Directional wind uses exact quarter turns; ground ellipses remain unrotated; small hand cues reuse the same art with directional placement.",
+      "sourceStageReuse": null
+    }
+  ],
+  "canvasReason": "Effect-specific transparent canvas",
+  "approvedFrameReuse": [],
+  "approvedConcept": "assets/concepts/skills/thien-son/bach_phien_phong_bao-concept-v01.png",
+  "provenance": {
+    "method": "Original generated isolated Wind drawings, Aseprite hard-alpha cleanup. Directional wind uses exact quarter turns; ground ellipses remain unrotated; small hand cues reuse the same art with directional placement.",
+    "prompts": "assets/source/skills/thien-son/generation_prompts_v01.json",
+    "recipe": "assets/source/skills/thien-son/recipe_v01.json",
+    "license": "Original AI-assisted project art from approved project references. No external asset pack or exclusive-rights claim."
+  },
+  "runtimeIntegrated": false,
+  "visualPreviewVerified": true,
+  "productionArtApproved": false,
+  "hashes": {
+    "source": "13fa33bad835344109938256c03f984ed2c617eae55bc2c2cb3c57af96f79a1b",
+    "sheet": "05143b280c7c0224c961625e0a6575c4eae0c7e5c22570564c7b5b15c35a6a28",
+    "atlas": "05947f06e4ac37d4ff38a9868f28b892c0137fc7da0c7c6bcf6ffc3dde67ae14"
+  },
+  "previewIntegrated": true,
+  "gameplayIntegration": "pending; no authoritative implementation added",
+  "previewVerification": "assets/reviews/skills/thien-son/verification_report_v01.json"
+}

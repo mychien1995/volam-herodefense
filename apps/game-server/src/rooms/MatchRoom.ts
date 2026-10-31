@@ -2,9 +2,20 @@ import { randomInt } from 'node:crypto';
 import { Room, ServerError, validate, type Client } from '@colyseus/core';
 import { serverInvasionDefinition } from '../invasion-config.js';
 import { lobbyConfig, m1Config, creepDungeon } from '@volam/game-data';
-import { DungeonMatch, type Actor, type MatchZone } from '@volam/game-core';
+import {
+  DungeonMatch,
+  initializeProgression,
+  characterStats,
+  pointAccounting,
+  equippedAbility,
+  addCreep,
+  blocked,
+  type Actor,
+  type MatchZone,
+} from '@volam/game-core';
 import {
   lobbyActionSchema,
+  buildActionSchema,
   LobbyState,
   LobbyPlayer,
   CreepState,
@@ -18,6 +29,8 @@ import {
   dungeonActionSchema,
   DungeonState,
   StateView,
+  AreaState,
+  skillPreviewActionSchema,
 } from '@volam/game-protocol';
 
 type MatchClient = Client<{ auth: JoinOptions; messages: ServerMessages }>;
@@ -39,7 +52,87 @@ export class MatchRoom extends Room<{
   private readonly checkSequences = new Map<string, number>();
   private readonly dungeonSequences = new Map<string, number>();
   private eventSequence = 0;
+  readonly legacySkills =
+    process.env['NODE_ENV'] !== 'production' &&
+    process.env['VOLAM_DEV_LEGACY_SKILLS'] === '1';
+  readonly devSkillLoadout =
+    this.legacySkills && process.env['VOLAM_DEV_SKILLS'] === '1';
   override messages = {
+    'skill-preview-action': validate(
+      skillPreviewActionSchema,
+      (client: MatchClient, input) => {
+        const hero = this.simulation.hero(client.sessionId),
+          zone = this.simulation.zoneOf(client.sessionId);
+        if (
+          !this.devSkillLoadout ||
+          this.state.phase !== 'IN_GAME' ||
+          !hero ||
+          hero.hp <= 0 ||
+          zone?.access !== 'arena'
+        )
+          return;
+        const prefix = `preview_${client.sessionId}_`;
+        zone.world.combos = (zone.world.combos ?? []).filter(
+          (c) => !c.targetId.startsWith(prefix),
+        );
+        for (const id of zone.world.creeps.keys())
+          if (id.startsWith(prefix)) zone.world.creeps.delete(id);
+        if (input.action !== 'clear')
+          for (let i = 0; i < (input.action === 'attacker' ? 1 : 3); i++) {
+            const point = {
+              x: hero.x + hero.fx * (24 + i * 48),
+              y: hero.y + hero.fy * (24 + i * 48),
+            };
+            if (
+              blocked(
+                point,
+                zone.config.creep.radius,
+                zone.config.width,
+                zone.config.height,
+                zone.config.collision,
+              )
+            )
+              continue;
+            const enemy = addCreep(zone.world, prefix + i, point, zone.config);
+            enemy.hp = enemy.maxHp = 10000;
+            enemy.stats = {
+              ...zone.config.creep,
+              hp: 10000,
+              speed: 0,
+              defense: 0,
+              xp: 0,
+              gold: 0,
+              damage: 12,
+              attackCooldownTicks: 45,
+              attackRange: 40,
+              detectionRange: input.action === 'attacker' ? 65 : 1,
+            };
+          }
+        this.syncState();
+      },
+    ),
+    'build-action': validate(
+      buildActionSchema,
+      (client: MatchClient, input) => {
+        const reason =
+          this.state.phase !== 'IN_GAME' ||
+          !this.state.players.get(client.sessionId)?.confirmed
+            ? 'Chọn và xác nhận môn phái trước khi đổi võ học.'
+            : this.simulation.modifyBuild(
+                client.sessionId,
+                input.sequence,
+                input.revision,
+                input,
+              );
+        if (reason)
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason,
+          });
+        this.syncState();
+      },
+    ),
     'lobby-action': validate(
       lobbyActionSchema,
       (client: MatchClient, action) => {
@@ -79,6 +172,21 @@ export class MatchRoom extends Room<{
                 player.nickname,
               );
               hero.schoolId = player.schoolId;
+              if (
+                this.legacySkills &&
+                ['thien_son', 'vo_dang', 'thieu_lam'].includes(hero.schoolId)
+              ) {
+                hero.basicId =
+                  m1Config.progression!.schools[hero.schoolId]!.basicIds[0]!;
+                hero.skillIds = ['', '', '', ''];
+              }
+              if (
+                !this.legacySkills &&
+                !initializeProgression(hero, m1Config)
+              ) {
+                hero.skillIds = ['', '', '', ''];
+                hero.skillCooldowns = [0, 0, 0, 0];
+              }
               this.syncState();
             } else if (
               [...this.state.players.values()].every(
@@ -88,6 +196,21 @@ export class MatchRoom extends Room<{
               for (const [id, p] of this.state.players) {
                 const hero = this.simulation.add(id, p.nickname);
                 hero.schoolId = p.schoolId;
+                if (
+                  this.legacySkills &&
+                  ['thien_son', 'vo_dang', 'thieu_lam'].includes(hero.schoolId)
+                ) {
+                  hero.basicId =
+                    m1Config.progression!.schools[hero.schoolId]!.basicIds[0]!;
+                  hero.skillIds = ['', '', '', ''];
+                }
+                if (
+                  !this.legacySkills &&
+                  !initializeProgression(hero, m1Config)
+                ) {
+                  hero.skillIds = ['', '', '', ''];
+                  hero.skillCooldowns = [0, 0, 0, 0];
+                }
               }
               this.state.phase = 'IN_GAME';
               void this.setMetadata({ phase: this.state.phase });
@@ -169,11 +292,69 @@ export class MatchRoom extends Room<{
         });
         return;
       }
-      if (input.kind === 'cast' && !m1Config.skills[input.slot]) {
+      if (
+        input.kind === 'select-basic' &&
+        ((!this.legacySkills &&
+          this.simulation.hero(client.sessionId)?.schoolId !== 'cai_bang') ||
+          (this.legacySkills &&
+            !m1Config.progression?.schools[
+              this.simulation.hero(client.sessionId)?.schoolId ?? ''
+            ]?.basicIds.includes(input.id)))
+      ) {
         client.send('command-rejected', {
           protocolVersion: PROTOCOL_VERSION,
           sequence: input.sequence,
-          reason: 'This slot is not equipped.',
+          reason:
+            'Đòn đánh môn phái này chưa mở. Không thể dùng võ học môn phái khác.',
+        });
+        return;
+      }
+      if (
+        input.kind === 'dev-loadout' &&
+        (!this.devSkillLoadout ||
+          !['cai_bang', 'thien_son', 'vo_dang', 'thieu_lam'].includes(
+            this.simulation.hero(client.sessionId)?.schoolId ?? '',
+          ))
+      ) {
+        client.send('command-rejected', {
+          protocolVersion: PROTOCOL_VERSION,
+          sequence: input.sequence,
+          reason: 'Development skill loadouts are disabled.',
+        });
+        return;
+      }
+      if (
+        input.kind === 'dev-loadout' &&
+        (input.ids.some(
+          (id) =>
+            id &&
+            m1Config.progression?.skills[id]?.schoolId !==
+              this.simulation.hero(client.sessionId)?.schoolId,
+        ) ||
+          new Set(input.ids.filter(Boolean)).size !==
+            input.ids.filter(Boolean).length)
+      ) {
+        client.send('command-rejected', {
+          protocolVersion: PROTOCOL_VERSION,
+          sequence: input.sequence,
+          reason: 'Unknown or duplicate skill in test loadout.',
+        });
+        return;
+      }
+      if (
+        input.kind === 'cast' &&
+        !equippedAbility(
+          this.simulation.hero(client.sessionId)!,
+          input.slot,
+          m1Config,
+        )
+      ) {
+        client.send('command-rejected', {
+          protocolVersion: PROTOCOL_VERSION,
+          sequence: input.sequence,
+          reason: this.simulation.hero(client.sessionId)?.progression
+            ? 'Kỹ năng chưa trang bị hoặc chưa học. Dùng điểm tại Võ Học trong đấu trường.'
+            : 'This slot is not equipped.',
         });
         return;
       }
@@ -191,6 +372,13 @@ export class MatchRoom extends Room<{
     }),
   };
   override onCreate(): void {
+    // Historical combat targets are explicit development fixtures, never match spawns.
+    if (!(
+      process.env['NODE_ENV'] !== 'production' &&
+      process.env['VOLAM_DEV_PRACTICE_CREEPS'] === '1'
+    ))
+      this.world.creeps.clear();
+    this.state.devSkillLoadout = this.devSkillLoadout;
     this.metadata = { phase: this.state.phase };
     this.patchRate = 1000 / m1Config.tickRate;
     this.syncState();
@@ -257,6 +445,10 @@ export class MatchRoom extends Room<{
     this.syncState();
   }
   override onLeave(client: MatchClient): void {
+    for (const zone of this.simulation.zones.values())
+      for (const id of zone.world.creeps.keys())
+        if (id.startsWith(`preview_${client.sessionId}_`))
+          zone.world.creeps.delete(id);
     this.simulation.remove(client.sessionId);
     if (this.state.phase === 'SCHOOL_SELECTION') {
       const player = this.state.players.get(client.sessionId);
@@ -280,6 +472,7 @@ export class MatchRoom extends Room<{
       pose: string;
     },
     source: Actor,
+    tick: number,
   ): void {
     target.x = source.x;
     target.y = source.y;
@@ -288,6 +481,23 @@ export class MatchRoom extends Room<{
     target.hp = source.hp;
     target.maxHp = source.maxHp;
     target.pose = source.pose;
+    const actor = target as typeof target & {
+      statuses: string;
+      castAbilityId: string;
+    };
+    actor.statuses = JSON.stringify(
+      (source.statuses ?? [])
+        .filter((s) => s.until > tick)
+        .map((s) => ({
+          kind: s.kind,
+          abilityId: s.abilityId,
+          sourceId: s.sourceId,
+          ticks: s.until - tick,
+          magnitude: s.magnitude,
+          secondary: s.secondary,
+        })),
+    );
+    actor.castAbilityId = source.castAbilityId ?? '';
   }
   private syncState(): void {
     this.state.tick = this.world.tick;
@@ -321,8 +531,23 @@ export class MatchRoom extends Room<{
       const hero = this.simulation.hero(id)!;
       const target = this.state.players.get(id);
       if (!target) continue;
-      this.syncActor(target, hero);
+      this.syncActor(target, hero, zone.world.tick);
       target.zoneId = zone.id;
+      target.combos = JSON.stringify(
+        (zone.world.combos ?? [])
+          .filter(
+            (c) =>
+              c.sourceId === id &&
+              c.until > zone.world.tick &&
+              (zone.world.creeps.get(c.targetId)?.hp ?? 0) > 0,
+          )
+          .map((c) => ({
+            id: c.id,
+            targetId: c.targetId,
+            step: c.step,
+            ticks: c.until - zone.world.tick,
+          })),
+      );
       target.respawnTicks = Math.max(
         0,
         (this.simulation.respawns.get(id) ?? 0) - this.simulation.tick,
@@ -333,6 +558,19 @@ export class MatchRoom extends Room<{
       target.gold = hero.gold;
       target.level = hero.level;
       target.skillPoints = hero.skillPoints;
+      target.build.enabled = !!hero.progression;
+      if (hero.progression) {
+        Object.assign(target.build, pointAccounting(hero, m1Config));
+        target.build.revision = hero.progression.revision;
+        const stats = characterStats(hero, m1Config, zone.world.tick);
+        Object.assign(target.build.stats, stats.total);
+        target.build.sources = JSON.stringify(stats.sources);
+        for (const key of target.build.ranks.keys())
+          if (!Object.hasOwn(hero.progression.ranks, key))
+            target.build.ranks.delete(key);
+        for (const [key, rank] of Object.entries(hero.progression.ranks))
+          target.build.ranks.set(key, rank);
+      }
       target.basicId = hero.basicId;
       target.lastSequence = hero.lastSequence;
       target.basicCooldown = Math.max(0, hero.cooldown - zone.world.tick);
@@ -344,9 +582,23 @@ export class MatchRoom extends Room<{
         0,
         (hero.skillCooldowns[1] ?? 0) - zone.world.tick,
       );
+      target.eCooldown = Math.max(
+        0,
+        (hero.skillCooldowns[2] ?? 0) - zone.world.tick,
+      );
+      target.rCooldown = Math.max(
+        0,
+        (hero.skillCooldowns[3] ?? 0) - zone.world.tick,
+      );
+      const ids = hero.skillIds ?? m1Config.skills.map((s) => s.id);
+      target.qSkill = ids[0] ?? '';
+      target.wSkill = ids[1] ?? '';
+      target.eSkill = ids[2] ?? '';
+      target.rSkill = ids[3] ?? '';
     }
     const creepKeys = new Set<string>(),
-      shotKeys = new Set<string>();
+      shotKeys = new Set<string>(),
+      areaKeys = new Set<string>();
     for (const zone of this.simulation.zones.values()) {
       if (zone.access !== 'arena') {
         let dungeon = this.state.dungeons.get(zone.id);
@@ -378,11 +630,39 @@ export class MatchRoom extends Room<{
           target = new CreepState();
           this.state.creeps.set(id, target);
         }
-        this.syncActor(target, enemy);
+        this.syncActor(target, enemy, zone.world.tick);
+        if (enemy.hp > 0 && enemy.burnUntil > zone.world.tick) {
+          const statuses = JSON.parse(target.statuses) as unknown[];
+          statuses.push({
+            kind: 'burn',
+            abilityId: 'cuong_long_loan_vu',
+            sourceId: enemy.burnSource,
+            ticks: enemy.burnUntil - zone.world.tick,
+          });
+          target.statuses = JSON.stringify(statuses);
+        }
         target.zoneId = zone.id;
         target.invasionWave = enemy.invasion?.wave ?? 0;
         target.lane = enemy.invasion?.lane ?? '';
         target.targetId = enemy.invasion?.targetId ?? '';
+      }
+      for (const area of zone.world.areas ?? []) {
+        const id = this.entityKey(zone, area.id);
+        areaKeys.add(id);
+        let target = this.state.areas.get(id);
+        if (!target) {
+          target = new AreaState();
+          this.state.areas.set(id, target);
+        }
+        Object.assign(target, {
+          x: area.x,
+          y: area.y,
+          radius: area.effect.radius,
+          ticks: area.until - zone.world.tick,
+          ownerId: area.ownerId,
+          abilityId: area.abilityId,
+          zoneId: zone.id,
+        });
       }
       for (const [localId, shot] of zone.world.projectiles) {
         const id = this.entityKey(zone, localId);
@@ -413,6 +693,12 @@ export class MatchRoom extends Room<{
           if (client.view?.has(target)) client.view.remove(target);
         this.state.projectiles.delete(id);
       }
+    for (const [id, target] of this.state.areas)
+      if (!areaKeys.has(id)) {
+        for (const client of this.clients)
+          if (client.view?.has(target)) client.view.remove(target);
+        this.state.areas.delete(id);
+      }
     for (const client of this.clients) {
       const view = client.view;
       if (!view) continue;
@@ -428,6 +714,7 @@ export class MatchRoom extends Room<{
       for (const entity of [
         ...this.state.creeps.values(),
         ...this.state.projectiles.values(),
+        ...this.state.areas.values(),
       ]) {
         if (entity.zoneId === zoneId && !view.has(entity)) view.add(entity);
         else if (entity.zoneId !== zoneId && view.has(entity))

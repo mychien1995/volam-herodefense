@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-31",
+  "result": "PASS across final stages and focused failed-case rerun",
+  "unitIntegrationTestsPassed": 174,
+  "workflowTestsPassed": 2,
+  "browserScenariosPassed": 9,
+  "scenarios": [
+    {
+      "title": "fixed follow camera, eight-way movement and foreground occlusion",
+      "status": "passed",
+      "durationMs": 33724
+    },
+    {
+      "title": "two clients agree on combat, manual cadence, skills and progression",
+      "status": "passed",
+      "durationMs": 22157
+    },
+    {
+      "title": "ranged projectile uses a fixed trajectory and original effect frames",
+      "status": "passed",
+      "durationMs": 7803
+    },
+    {
+      "title": "real PNG animation registry covers two actors, six states and four directions",
+      "status": "passed",
+      "durationMs": 3836
+    },
+    {
+      "title": "Thiếu Lâm both weapon atlases play all 24 authored tags in Phaser",
+      "status": "passed",
+      "durationMs": 6204
+    },
+    {
+      "title": "Thiếu Lâm quyen real match: four facings, transitions and shared authority",
+      "status": "passed",
+      "durationMs": 22601
+    },
+    {
+      "title": "Thiếu Lâm Đao art-review variant real match: four facings, transitions and shared authority",
+      "status": "passed",
+      "durationMs": 26396
+    },
+    {
+      "title": "Six-player mixed-school scene preserves Thiếu Lâm scale and feet depth",
+      "status": "passed",
+      "durationMs": 56497
+    },
+    {
+      "title": "Thiếu Lâm feet sort in front of and behind the actual perimeter tree",
+      "status": "passed",
+      "durationMs": 11493
+    }
+  ],
+  "fullRunReport": "playwright_final_with_playback_results_v01.json",
+  "focusedSuccessfulReport": "pre_approval/playwright_results_v01.json",
+  "typechecksBuildAssetValidators": "PASS",
+  "approvedFilesUnchanged": 186,
+  "all80FramesObservedLive": true,
+  "all4AttackFramesInEveryFacingAndStyle": true,
+  "video": "off",
+  "trace": "off",
+  "finalArtApproval": "APPROVED",
+  "approvalLock": "assets/approved_thieu_lam.lock.json",
+  "approvedOn": "2026-10-31",
+  "approvalVerification": {
+    "approvedFilesLocked": 89,
+    "allProtectedFilesVerified": 275,
+    "typechecks": "PASS",
+    "assetPreparation": "PASS",
+    "exporterOverwriteGuard": "PASS: expected rejection before export",
+    "browserChecksPassed": 2,
+    "command": "pnpm check:browser --config playwright.thieu-lam.config.ts tests/e2e/thieu-lam-art.spec.ts --grep \"both weapon|quyen real match\"",
+    "report": "playwright_approval_results_v01.json",
+    "artworkRegenerated": false
+  }
+}

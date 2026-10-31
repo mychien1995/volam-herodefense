@@ -17,7 +17,7 @@ Read `AGENTS.md`, `ART_PRODUCTION_STANDARD.md`, `ART_DIRECTION_REFERENCE.md`, `A
 - Produce (or import legitimately licensed) consistent gameplay sprites, transparent walk/idle/attack frames, PNG spritesheets/atlases + JSON, coherent tilesets, and UI image assets. Do not crop presentation/concept sheets as fake sprite atlases.
 - Use detailed wuxia chibi proportions, coherent lighting/palette, 3/4 elevated top-down view and correct layering/pivots. Match *the visual standard* of the references; not a pixel-for-pixel reproduction.
 - Integrate the art in the actual running Phaser scene while retaining keyboard controls and multiplayer, not as a static mockup.
-- Capture an actual game screenshot at 1280x720 and at intended normal gameplay scale, plus an animation preview. Compare against `central_arena_hub_reference.png`, `cai_bang_character_reference.png`, `wuxia_town_world_reference.png` and the current anti-reference.
+- Capture an actual game screenshot at 1280x720 and at intended normal gameplay scale, plus a static PNG animation contact sheet and live Phaser frame/transition observations. Follow the recording policy in `AGENTS.md`; recordings require an explicit user request. Compare against `central_arena_hub_reference.png`, `cai_bang_character_reference.png`, `wuxia_town_world_reference.png` and the current anti-reference.
 - Record original file paths, source/license, asset dimensions, all placeholder statuses, remaining visual gaps and tests. Ask for **art approval** before producing the other schools or entire environment set.
 
 ## Do NOT

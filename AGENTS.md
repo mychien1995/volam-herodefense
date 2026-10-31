@@ -2,6 +2,16 @@
 
 # Repository instructions for Codex and other coding agents
 
+## Visual verification and recording policy (confirmed 2026-10-30)
+
+- Routine development, asset generation and testing must not generate WebM, MP4, GIF, animated-image or other video recordings as evidence.
+- Use lightweight PNG screenshots when visual evidence is useful, plus frame-observation reports, assertions and logs.
+- Continue validating sprite animation frames/timing, transitions, facing, pivots/positioning, effects and gameplay behavior in the running Phaser client. A screenshot alone does not prove motion or server correctness.
+- Do not invoke recording, video encoding or conversion tools (including FFmpeg or Playwright video capture) during routine work. Keep browser video disabled; diagnostic traces must not capture screenshot playback streams.
+- Generate gameplay or animation recordings only when the user explicitly requests recordings for that task. A request to test, animate, preview or verify art is not a request to record it.
+- Preserve existing video assets, recordings and historical evidence. Do not delete or regenerate them as cleanup.
+- This policy applies to future Codex sessions, local skills, scripts and CI; older evidence or review notes do not create a recording requirement.
+
 This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D multiplayer martial-arts statue-defense RPG. **Do not start coding the full game until reading the design handoff.**
 
 ## Read before touching code
@@ -30,6 +40,8 @@ This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D
 - **Confirmed reference set (v1.5):** inspect `assets/references/central_arena_hub_reference.png`, `arena_battle_reference.png`, `forest_dungeon_reference.png`, `desert_dungeon_reference.png`, `sea_dungeon_reference.png`, `hell_dungeon_reference.png`, `dungeon_selection_menu_reference.png`, `merchant_shop_menu_reference.png`, `inventory_menu_reference.png`, plus the school character references. Use them as the primary art/UI benchmark. The world must occupy the full match viewport; inventory/shop/dungeon menus must appear as in-world overlays inside the viewport. Document source/license; no animation-driven authoritative damage. M0 placeholders are acceptable; avoid bulk artwork generation before playtesting.
 
 ## Working method
+
+- Follow `docs/DEVELOPMENT_WORKFLOW.md` for validation scope. During iteration use focused test/asset/browser checks. After the final implementation change, use `pnpm check:final [relevant Playwright arguments]` once instead of separately chaining preparation, typecheck, full tests and build. It retains all final typechecks, unit/integration tests, build, asset validators and relevant browser checks. Do not rerun a successful full suite solely for summary/report/approval metadata edits; validate affected metadata/guards and rerun checks whose inputs changed. All existing live Phaser, reference comparison, PNG evidence and explicit director art-approval requirements remain mandatory.
 
 - Implement **only the requested roadmap milestone**. Start with M0. Do not implement M1+ unasked.
 - At start of a task, state files read, brief plan and any blocking ambiguity; propose small configurable defaults for non-blocking open questions.

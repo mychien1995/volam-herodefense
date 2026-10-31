@@ -1,5 +1,10 @@
 # Balancing Plan v1.0 — hard but fair
 
+## M3C3 provisional Gold tuning — 2026-10-31
+
+`game-data/thieu-lam.ts` contains all explicit rank/base/growth/innate/surplus/sequence values. `tools/m3c3-balance.ts` measures legal four-school builds at1/6/15/30,both basics,three fixed seeds,and compares valid A/B versus wrong-order Gold sequences with identical targets and pressure. Output:`artifacts/m3c3-balance.json`. It is a controlled implementation probe,not final M3D balance,economy,PvP,boss or campaign acceptance. No other school's numeric tuning is changed.
+
+
 ## 1. Intent and philosophy
 
 - The game **should be hard**, including for well-equipped teams; a skilled solo clear remains possible. Fair failure should tell the player what to do better next attempt.
@@ -98,3 +103,13 @@ Report: DPS on single target, effective AoE DPS, survival time, hit probability,
 - Maintain separate `NORMAL`, `DEV_FAST`, and later optional `HARD` mode configs **only if approved**; DEV_FAST is test-only, never changes production 180-second raid interval.
 - Record losses: cause of statue damage, lane leak count, waves alive simultaneously, boss mechanics hit/missed, player deaths and disconnects. User can then tune to make failures learnable.
 - Run regression simulations after each ability or equipment change, but always playtest actual movement/animation latency.
+
+## M3B measured progression proposals — 2026-10-31
+
+`packages/game-data/src/progression-data.ts` contains provisional Cái Bang base/growth, explicit rank variants, gates and surplus values. Base level1/rank1 attacks retain M3A damage/timing. Added growth is MP2 and defense0.15 per level; existing HP8/attack2 and Tiêu Diêu attack0.3/crit0.002/crit multiplier0.005 are derived as separate sources. Surplus contributes attack1.2/crit0.003/crit multiplier0.01 per point. No final balance approval is implied. Full tables/formula order are in `docs/M3B_IMPLEMENTATION.md`.
+
+Actual48 legal mixed-build probes (eight seconds, three seeds, both A choices, levels1/6/15/30) produced these three-target aggregate DPS ranges:58.25–93.375,166.75–246.375,293.75–486.75,579.25–1083. Level30 Attack Power is111.5 or112.7 for14/15 surplus. Rank allocation uses the real point/gate validator; mana/cooldowns are active. Data: `artifacts/m3b-balance.json` and `docs/evidence/m3b/balance.json`. Immortal stationary targets give no economy/survival result, and the script does not model optimal human play, campaign difficulty, boss resistance, PvP, equipment or six-player performance. These results motivate later tuning; they do not authorize a rule change or retuning other schools.
+
+## M3C2 Võ Đang tuning proposals — 2026-10-31
+
+Configured mana/regen/CDR identity and shield/counter/formation ranks are in `packages/game-data/src/vo-dang.ts`; all remain provisional. The legal48-probe workload in `tools/m3c2-balance.ts` measured aggregate stationary three-target DPS ranges77.25–116.875 atLv1,293.375–361 atLv6,627.625–743.125 atLv15,916.25–1065 atLv30 (eight seconds,seeds42/1337/9001,both basics,mixed styles,optional ultimate). Costs/cooldowns/earned budgets remain real. See `artifacts/m3c2-balance.json`. This is not survival,economy,optimal-human,PvP,boss or campaign balance. Shield affordability/partial depletion and regen caps have deterministic tests; no other-school tuning changed.

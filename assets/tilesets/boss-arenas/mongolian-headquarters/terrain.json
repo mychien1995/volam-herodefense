@@ -1,0 +1,71 @@
+{
+  "image": "terrain.png",
+  "tileWidth": 32,
+  "tileHeight": 32,
+  "columns": 16,
+  "tileCount": 112,
+  "margin": 0,
+  "spacing": 0,
+  "groups": {
+    "dirt": {
+      "firstId": 0,
+      "count": 16,
+      "kind": "4x4_material_patch",
+      "repeatsAsPatch": true
+    },
+    "ash": {
+      "firstId": 16,
+      "count": 16,
+      "kind": "4x4_material_patch",
+      "repeatsAsPatch": true
+    },
+    "courtyard_stone": {
+      "firstId": 32,
+      "count": 16,
+      "kind": "4x4_material_patch",
+      "repeatsAsPatch": true
+    },
+    "volcanic_ground": {
+      "firstId": 48,
+      "count": 16,
+      "kind": "4x4_material_patch",
+      "repeatsAsPatch": true
+    },
+    "dirt_to_ash": {
+      "firstId": 64,
+      "count": 16,
+      "kind": "corner_mask",
+      "maskBits": [
+        "top_left",
+        "top_right",
+        "bottom_right",
+        "bottom_left"
+      ]
+    },
+    "dirt_to_courtyard_stone": {
+      "firstId": 80,
+      "count": 16,
+      "kind": "corner_mask",
+      "maskBits": [
+        "top_left",
+        "top_right",
+        "bottom_right",
+        "bottom_left"
+      ]
+    },
+    "ash_to_volcanic_ground": {
+      "firstId": 96,
+      "count": 16,
+      "kind": "corner_mask",
+      "maskBits": [
+        "top_left",
+        "top_right",
+        "bottom_right",
+        "bottom_left"
+      ]
+    }
+  },
+  "status": "produced_unintegrated",
+  "source": "assets/tilesets/boss-arenas/mongolian-headquarters/source/materials_source.png",
+  "note": "Material variants are a coherent4x4 patch; transition masks are offline texture composites, not terrain gameplay or collision."
+}

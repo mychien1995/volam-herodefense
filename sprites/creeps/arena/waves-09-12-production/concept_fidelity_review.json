@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "phase": "1F",
+  "createdOn": "2026-10-30",
+  "status": "NEEDS_OWNER_ANIMATION_REVIEW",
+  "conceptApproval": "User: approved, please proceed; authorizes production from approved Phase1E artwork, not automatic animation approval.",
+  "scope": "Only Waves9–12 four-direction idle, walk, basic_attack, hurt and death candidates. Not installed into the live match.",
+  "imagesInspectedBeforeGeneration": [
+    "assets/concepts/arena-creeps/waves-09-12/arena_creeps_09_12_concept_sheet.png",
+    "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+    "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+    "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+    "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+    "sprites/creeps/arena/waves-05-08-production/review/idle_1280x720.png",
+    "assets/references/current_game_2026_10_29_placeholder_anti_reference.png"
+  ],
+  "directReferenceInputs": "Each of all17 generation calls received the relevant approved individual concept directly. Main/reaction calls also used the approved master; actual production comparison or generated pose sheet supplied style/continuity support.",
+  "sharedReview": {
+    "camera": "Elevated orthographic three-quarter overworld view preserved; no isometric or side-scrolling camera.",
+    "style": "Dark stepped outlines, clustered shading, restrained material palettes and warm upper-left light; larger supernatural designs retain compact proportions.",
+    "scale": "44/52/54/66px body-height targets against actual unchanged ~44px Cái Bang and Wave7. Canvases provide independent weapon/fist clearance.",
+    "transparency": "All exported frame pixels are binary alpha0/255, with a transparent exterior and no baked floor/shadow. Source alpha below220 removed, retained RGB preserved and alpha normalized via Aseprite. The spirit keeps a dense luminous core and bright wisps; continuous semitransparency is not claimed.",
+    "motion": "Authored generated pose changes; no synthetic still-image transform animation. All80 tags and255 frames observed in installed Phaser4.2.1. Native loops, one-shot final-frame holds, rapid facing changes and fixed scene positions/origins checked.",
+    "background": "Actual existing arena ground used unchanged for grass and paving comparisons. Blue-violet spirit core remains visible. Grass detail competes with small lower-body outlines; no terrain change made.",
+    "crowd": "Six hero drawings and16 enemies staged with Y-depth ordering. Checks overlap/scale only, not real six-client gameplay."
+  },
+  "characters": [
+    {
+      "wave": 9,
+      "id": "creep_jiangshi_zombie",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "preserved": [
+        "Pale sage-gray hands/face, green eyes",
+        "Charcoal-indigo robe, crimson trim/sash, dark round cap and ochre forehead talisman",
+        "Stiff extended arms and compact boots; rear has no forehead talisman",
+        "Four cardinal facings, stiff locomotion, hand lunge, flinch and full fallen body"
+      ],
+      "corrections": "Main contained44 instead of40 poses; actual4x11 grid measured. Extra column ignored; front/right attacks taken from12-pose supplemental source, left attack regenerated as4 locked-profile poses.",
+      "concerns": [
+        "Talisman ink becomes symbolic red pixels at44px; small cap trim/red dots vary across sources.",
+        "Left attack uses one arm cocked during wind-up before both hands extend; review stiffness/attack feel."
+      ]
+    },
+    {
+      "wave": 10,
+      "id": "creep_vengeful_spirit",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "preserved": [
+        "Navy hair, pale face/ice-blue eyes, blue-violet Chinese robe and plum sash",
+        "No feet; connected curling wisp lower body",
+        "Dense dark-edged luminous core, small hand glow",
+        "Gliding walk, palm cast, recoil and grounded spectral collapse"
+      ],
+      "corrections": "Front/side casts regenerated to keep their facing. A4px hover gap is included in non-death anchors. No detached projectile or free particle asset was created.",
+      "concerns": [
+        "Deliberately dense binary-alpha core rather than continuously translucent body; approve luminosity over grass.",
+        "Hands/hair/tail cluster details simplify at52px; rear cast reads mainly through the raised hand."
+      ]
+    },
+    {
+      "wave": 11,
+      "id": "creep_armored_skeleton",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "lineage": "assets/concepts/arena-creeps/waves-05-08/kho_lau_kiem_si_concept.png",
+      "preserved": [
+        "Wave7 cracked ivory skull/joints, teal rags and bronze lineage",
+        "Amber eyes, paired massive pauldrons and ancient Chinese lamellar armor",
+        "Anatomical right-hand straight ring-pommel jian and left-hand cloud-scroll shield",
+        "Larger54px armored silhouette; bone fingers and full retained equipment"
+      ],
+      "corrections": "Frontal walk source component3 lacked a sword and is excluded;3 valid poses exported. Front attack regenerated; left/right attacks regenerated independently to prevent wrong-facing strikes. Sword clearance increased with160x112 canvas while body scale stays54px.",
+      "concerns": [
+        "Frontal walk is3 poses/480ms rather than4; cadence requires owner review.",
+        "Cloud-scroll, rivets and rust clusters vary slightly between generated groups; equipment identity/hands remain clear."
+      ]
+    },
+    {
+      "wave": 12,
+      "id": "creep_stone_golem",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "preserved": [
+        "Massive fists, short heavy legs, carved stone-guardian brow",
+        "Taupe-gray/brown chipped rock, moss and sprout on anatomical left shoulder",
+        "Jade eyes/chest seal/forearm cracks; round rear spinal carving without front chest seal",
+        "Largest regular enemy at66px target, heavy step/strike, connected grounded collapse"
+      ],
+      "corrections": "Side attacks regenerated independently. Canvas176x144 provides fist-swing clearance without shrinking the66px body target. No shockwave, flying stone or separate skill-effect asset generated.",
+      "concerns": [
+        "Side strikes include pronounced three-quarter torso lean while heads remain oriented toward the attack side; review continuity with side idle.",
+        "Moss leaves/stone cracks/rune paths simplify and vary in microdetail; broad position and jade accents remain consistent.",
+        "Large fist span obscures nearby units when overlapping; staged crowd preview is provided, live crowd/effect readability remains untested."
+      ]
+    }
+  ],
+  "finalScreenshotsOpened": [
+    "sprites/creeps/arena/waves-09-12-production/review/idle_1280x720.png",
+    "sprites/creeps/arena/waves-09-12-production/review/walk_1280x720.png",
+    "sprites/creeps/arena/waves-09-12-production/review/basic_attack_1280x720.png",
+    "sprites/creeps/arena/waves-09-12-production/review/basic_attack_windup_1280x720.png",
+    "sprites/creeps/arena/waves-09-12-production/review/hurt_1280x720.png",
+    "sprites/creeps/arena/waves-09-12-production/review/death_1280x720.png",
+    "sprites/creeps/arena/waves-09-12-production/review/idle_grass_1280x720.png",
+    "sprites/creeps/arena/waves-09-12-production/review/idle_stone_1280x720.png",
+    "sprites/creeps/arena/waves-09-12-production/review/crowd_1280x720.png",
+    "sprites/creeps/arena/waves-09-12-production/review/idle_640x360.png",
+    "sprites/creeps/arena/waves-09-12-production/review/concept_comparison.png"
+  ],
+  "checks": {
+    "buildExport": "PASS: PNG bounds/alpha, atlas/tag names, >=2 distinct drawings in every sequence, source hashes, approved-input hashes.",
+    "phaser": "PASS: installed4.2.1, all80 tags/all255 frames, native playback and facing/position checks,11 PNG screenshots.",
+    "typecheck": "PASS: pnpm typecheck",
+    "regression": "PASS: pnpm test,98 tests across11 files",
+    "recording": false,
+    "liveMatchIntegration": false,
+    "networkOrCombatTiming": false,
+    "directorAnimationApproval": false
+  },
+  "preservation": "All previously approved artwork and existing recordings unchanged. Four concurrent README/review-tool changes applying the newer screenshot-only policy were reviewed and preserved; both initial and current hashes are explicitly recorded in approved_inputs_lock.json.",
+  "stopCondition": "Stop at these four staged production candidates for owner animation review. No next wave batch or live integration authorized by this pass."
+}

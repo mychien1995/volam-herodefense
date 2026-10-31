@@ -1,3 +1,7 @@
+import type {
+  HeroProgression,
+  ProgressionDefinition,
+} from './progression-types.js';
 export interface Point {
   x: number;
   y: number;
@@ -18,6 +22,11 @@ export interface ProjectileEffect {
   splashRadius: number;
   burnDamage: number;
   burnTicks: number;
+  piercing?: boolean | undefined;
+  useFacing?: boolean | undefined;
+  knockback?: number | undefined;
+  statuses?: StatusSpec[] | undefined;
+  spreadAngle?: number | undefined;
 }
 export interface ArcEffect {
   mode: 'arc';
@@ -25,15 +34,132 @@ export interface ArcEffect {
   range: number;
   halfAngle: number;
   cleave: number;
+  singleTarget?: boolean | undefined;
+  statuses?: StatusSpec[] | undefined;
+  pull?: number | undefined;
+  armorPenetration?: number | undefined;
+  slowedBonus?: number | undefined;
+  manaRefund?: number | undefined;
+  projectileProc?: { chance: number; effect: ProjectileEffect } | undefined;
+  windupTicks?: number | undefined;
+}
+export interface ComboSpec {
+  id: 'phat_dong_a' | 'phat_dong_b';
+  step: 1 | 2 | 3;
+  windowTicks: number;
+  multiplier: number;
+}
+export interface AllyEffect {
+  radius: number;
+  heal?: number | undefined;
+  statuses?: StatusSpec[] | undefined;
+}
+export interface SupportEffect extends AllyEffect {
+  mode: 'support';
+  durationTicks: number;
+  tickInterval: number;
+}
+export type StatusKind =
+  | 'slow'
+  | 'attack_slow'
+  | 'attack_break'
+  | 'mana_shield'
+  | 'damage_reduction'
+  | 'defense_buff'
+  | 'interrupt_resist'
+  | 'support_aura'
+  | 'stun'
+  | 'silence'
+  | 'disarm'
+  | 'defense_break'
+  | 'crit_buff'
+  | 'speed_buff'
+  | 'counter'
+  | 'dash'
+  | 'channel';
+export interface StatusSpec {
+  kind: StatusKind;
+  durationTicks: number;
+  magnitude: number;
+  secondary?: number | undefined;
+  evade?: boolean | undefined;
+}
+export interface StatusEffect extends StatusSpec {
+  sourceId: string;
+  abilityId: string;
+  until: number;
+}
+export interface BuffEffect {
+  mode: 'buff';
+  durationTicks: number;
+  critChance: number;
+  critMultiplier: number;
+  movementSpeed?: number | undefined;
+  attackSpeed?: number | undefined;
+}
+export interface ManaShieldEffect {
+  mode: 'mana_shield';
+  durationTicks: number;
+  absorbFraction: number;
+  manaPerDamage: number;
+}
+export interface CounterEffect {
+  mode: 'counter';
+  durationTicks: number;
+  damage: number;
+  range: number;
+  evade: boolean;
+}
+export interface AreaEffect {
+  mode: 'area';
+  durationTicks: number;
+  tickInterval: number;
+  radius: number;
+  damage: number;
+  statuses?: StatusSpec[] | undefined;
+}
+export interface DashEffect {
+  mode: 'dash';
+  distance: number;
+  speed: number;
+  radius: number;
+  damage: number;
+  stunTicks: number;
+  counter?:
+    { durationTicks: number; damage: number; range: number } | undefined;
+}
+export interface MultiHitEffect {
+  mode: 'multi_hit';
+  range: number;
+  damage: number;
+  hits: number;
+  spacingTicks: number;
+  finisherDamage: number;
+  finisherRange: number;
+  halfAngle?: number | undefined;
+  slowedBonus?: number | undefined;
 }
 export interface Ability {
   id: string;
   nameVi: string;
   cooldownTicks: number;
   manaCost: number;
-  effect: ProjectileEffect | ArcEffect;
+  combo?: ComboSpec | undefined;
+  selfStatuses?: StatusSpec[] | undefined;
+  allies?: AllyEffect | undefined;
+  effect:
+    | ProjectileEffect
+    | ArcEffect
+    | BuffEffect
+    | DashEffect
+    | MultiHitEffect
+    | ManaShieldEffect
+    | CounterEffect
+    | AreaEffect
+    | SupportEffect;
 }
 export interface SimulationConfig {
+  progression?: ProgressionDefinition | undefined;
   tickRate: number;
   inputTimeoutTicks: number;
   width: number;
@@ -54,6 +180,14 @@ export interface SimulationConfig {
   critMultiplier: number;
   basics: Record<string, Ability>;
   skills: Ability[];
+  skillCatalogue?: Record<string, Ability> | undefined;
+  caiBangPassive?:
+    | {
+        damagePerLevel: number;
+        critChancePerLevel: number;
+        critMultiplierPerLevel: number;
+      }
+    | undefined;
   /** Arena practice creeps respawn; dungeon waves replace them only on clear. */
   creepRespawn?: boolean;
   creep: {
@@ -75,6 +209,7 @@ export type Command =
   | { kind: 'move'; x: number; y: number }
   | { kind: 'basic' }
   | { kind: 'cast'; slot: number }
+  | { kind: 'dev-loadout'; ids: string[] }
   | { kind: 'select-basic'; id: string };
 export interface Actor extends Point {
   id: string;
@@ -86,8 +221,11 @@ export interface Actor extends Point {
   actionUntil: number;
   hurtUntil: number;
   cooldown: number;
+  statuses?: StatusEffect[];
+  castAbilityId?: string;
 }
 export interface Hero extends Actor {
+  progression?: HeroProgression | undefined;
   schoolId: string;
   nickname: string;
   mana: number;
@@ -102,6 +240,8 @@ export interface Hero extends Actor {
   lastMoveTick: number;
   lastSequence: number;
   skillCooldowns: number[];
+  skillIds?: string[];
+  abilityCooldowns?: Record<string, number>;
 }
 export interface Creep extends Actor {
   stats?: SimulationConfig['creep'];
@@ -131,17 +271,68 @@ export interface Projectile extends Point {
   remaining: number;
   rawDamage: number;
   effect: ProjectileEffect;
+  hitIds?: string[];
+  critChance?: number;
+  critMultiplier?: number;
 }
 export interface CombatEvent extends Point {
   id: number;
-  kind: 'attack' | 'hit' | 'death' | 'cast';
+  kind: 'attack' | 'hit' | 'death' | 'cast' | 'effect' | 'pulse';
   sourceId: string;
   targetId: string;
   abilityId: string;
   damage: number;
   critical: boolean;
+  fx?: number | undefined;
+  fy?: number | undefined;
+  radius?: number | undefined;
+  stage?: string | undefined;
+}
+export interface SkillAction {
+  id: string;
+  ownerId: string;
+  abilityId: string;
+  kind: 'dash' | 'multi_hit' | 'arc';
+  until: number;
+  nextTick: number;
+  remaining: number;
+  fx: number;
+  fy: number;
+  hitIds: string[];
+  effect: DashEffect | MultiHitEffect | ArcEffect;
+  ability?: Ability | undefined;
+  comboTargets?: Record<string, boolean> | undefined;
+  rawDamage: number;
+  finisherDamage: number;
+  critChance: number;
+  critMultiplier: number;
+}
+export interface CombatArea extends Point {
+  id: string;
+  ownerId: string;
+  abilityId: string;
+  until: number;
+  nextTick: number;
+  effect: AreaEffect;
+  rawDamage: number;
+  critChance: number;
+  critMultiplier: number;
 }
 export interface World {
+  combos?: Array<{
+    sourceId: string;
+    targetId: string;
+    id: string;
+    step: number;
+    until: number;
+  }>;
+  supports?: Array<{
+    ownerId: string;
+    abilityId: string;
+    until: number;
+    nextTick: number;
+    effect: SupportEffect;
+  }>;
   statue?: Actor & { radius: number };
   tick: number;
   heroes: Map<string, Hero>;
@@ -161,5 +352,9 @@ export interface World {
     dx: number;
     dy: number;
     rawDamage: number;
+    critChance?: number;
+    critMultiplier?: number;
   }>;
+  actions?: SkillAction[];
+  areas?: CombatArea[];
 }

@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "id": "toan_chan_truc_lam_layout_reference",
+  "implementationStatus": "specification_only",
+  "coordinateUnits": "logical pixels; suggested 32px grid",
+  "canvas": {
+    "width": 1536,
+    "height": 1152
+  },
+  "centralOpenCombat": {
+    "x": 320,
+    "y": 288,
+    "width": 896,
+    "height": 640
+  },
+  "centerpiece": {
+    "x": 768,
+    "y": 608,
+    "asset": "assets/tilesets/boss-arenas/toan-chan-truc-lam/yin_yang_platform.png",
+    "scale": 1
+  },
+  "markers": [
+    {
+      "id": "boss_spawn",
+      "x": 768,
+      "y": 384
+    },
+    {
+      "id": "player_entrance",
+      "x": 768,
+      "y": 1024
+    },
+    {
+      "id": "return_portal",
+      "x": 256,
+      "y": 864
+    },
+    {
+      "id": "disciple_entry_west",
+      "x": 128,
+      "y": 448
+    },
+    {
+      "id": "disciple_entry_northeast",
+      "x": 1312,
+      "y": 256
+    },
+    {
+      "id": "disciple_entry_east",
+      "x": 1408,
+      "y": 704
+    }
+  ],
+  "wineDeliveryPaths": [
+    [
+      [
+        128,
+        448
+      ],
+      [
+        352,
+        448
+      ],
+      [
+        576,
+        544
+      ]
+    ],
+    [
+      [
+        1312,
+        256
+      ],
+      [
+        1184,
+        352
+      ],
+      [
+        1024,
+        512
+      ]
+    ],
+    [
+      [
+        1408,
+        704
+      ],
+      [
+        1184,
+        704
+      ],
+      [
+        1024,
+        640
+      ]
+    ]
+  ],
+  "edgeDressing": [
+    {
+      "id": "pavilion",
+      "x": 768,
+      "y": 256
+    },
+    {
+      "id": "wine_rest",
+      "x": 352,
+      "y": 256
+    },
+    {
+      "id": "wine_storage",
+      "x": 1184,
+      "y": 288
+    },
+    {
+      "id": "training_props",
+      "x": 224,
+      "y": 608
+    }
+  ],
+  "rules": [
+    "Six players; keep central combat unobstructed.",
+    "Bamboo, roof, rocks and fences stay at perimeter.",
+    "Wine paths are visual planning, not implemented AI/navigation.",
+    "No collision geometry or server authority is defined by this art file.",
+    "Preserve world viewport and existing camera; no UI layout changes."
+  ],
+  "concept": "assets/concepts/arenas/toan-chan-truc-lam/arena_layout_concept_v01.png"
+}

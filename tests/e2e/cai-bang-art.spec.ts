@@ -121,10 +121,8 @@ test('Cái Bang Phaser animation preview loops both styles and twenty-four autho
   mkdirSync(evidence, { recursive: true });
   const context = await browser.newContext({
     viewport: { width: 960, height: 1040 },
-    recordVideo: { dir: captured, size: { width: 960, height: 1040 } },
   });
   const page = await context.newPage();
-  const video = page.video()!;
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/?artPreview=1&caiBangReview=1');
@@ -166,7 +164,8 @@ test('Cái Bang Phaser animation preview loops both styles and twenty-four autho
       {
         errors,
         observations: 140,
-        capture: 'continuous Playwright WebM video, 960x1040',
+        capture:
+          'PNG gallery screenshot and live Phaser frame observations, 960x1040',
         observed: Object.fromEntries(
           [...observed].map(([key, frames]) => [key, [...frames]]),
         ),
@@ -176,7 +175,6 @@ test('Cái Bang Phaser animation preview loops both styles and twenty-four autho
     ),
   );
   await context.close();
-  await video.saveAs(resolve(evidence, 'phaser_animation_preview.webm'));
 });
 
 test('Chưởng normal selection uses unarmed walk, idle and palm art in four directions', async ({

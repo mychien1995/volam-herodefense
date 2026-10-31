@@ -1,0 +1,4577 @@
+{
+  "schemaVersion": 1,
+  "createdOn": "2026-10-31",
+  "timezone": "Asia/Saigon",
+  "scope": "desert_asset_production_only",
+  "generator": "OpenAI built-in image_gen.imagegen",
+  "provenance": "Original AI-assisted generated rasters guided by existing project references; nearest-neighbour export/cutout cleanup. No third-party commercial pack imported. No exclusive copyright or third-party license asserted.",
+  "conceptApproval": "User explicitly instructed automatic acceptance of the six creep concepts. Environment and runtime art are not marked approved.",
+  "status": "produced_pending_future_phaser_integration_and_runtime_director_review",
+  "sourceNotes": [
+    "generation_prompts.json retains all18 exact prompts and generator original paths.",
+    "Generated source rasters are flattened PNGs; no layered or Aseprite originals are claimed.",
+    "side-attack-correction.png is superseded by the four individual attack-v2 sources; original attempt retained for provenance.",
+    "Source transparency had near-opaque cores and translucent mattes; exports use binary alpha threshold245 for actors/props and128 for VFX, with hidden RGB zeroed.",
+    "No runtime/loader/map/server/config changes or gameplay verification in this task."
+  ],
+  "verification": {
+    "method": "Single final lightweight Pillow verify+load, dimensions/alpha, inventory, JSON/atlas bounds and frame comparisons; no test suite or Phaser launch",
+    "result": "PASS",
+    "pngFiles": 498,
+    "corruptImages": 0,
+    "environmentSprites": 20,
+    "terrainTiles": 344,
+    "creepConceptPanels": 6,
+    "creepFrames": 380,
+    "creepAnimationTags": 120,
+    "vfxEffects": 8,
+    "vfxFrames": 48,
+    "projectiles": 4,
+    "actors": [
+      {
+        "id": "bo_cap_cat",
+        "frames": 64,
+        "animationTags": 20,
+        "frameSize": [
+          128,
+          112
+        ],
+        "uniqueFramesWithinEverySequence": true
+      },
+      {
+        "id": "sa_xa",
+        "frames": 60,
+        "animationTags": 20,
+        "frameSize": [
+          128,
+          96
+        ],
+        "uniqueFramesWithinEverySequence": true
+      },
+      {
+        "id": "sa_tac",
+        "frames": 64,
+        "animationTags": 20,
+        "frameSize": [
+          112,
+          96
+        ],
+        "uniqueFramesWithinEverySequence": true
+      },
+      {
+        "id": "cung_thu_sa_mac",
+        "frames": 64,
+        "animationTags": 20,
+        "frameSize": [
+          112,
+          96
+        ],
+        "uniqueFramesWithinEverySequence": true
+      },
+      {
+        "id": "xac_uop",
+        "frames": 64,
+        "animationTags": 20,
+        "frameSize": [
+          112,
+          96
+        ],
+        "uniqueFramesWithinEverySequence": true
+      },
+      {
+        "id": "cu_nhan_sa_thach",
+        "frames": 64,
+        "animationTags": 20,
+        "frameSize": [
+          144,
+          128
+        ],
+        "uniqueFramesWithinEverySequence": true
+      }
+    ]
+  },
+  "images": [
+    {
+      "file": "assets/concepts/dungeon-creeps/desert/bo_cap_cat-concept.png",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "sha256": "351327fcd143d2bd58383526a40212bff3a1388f55dce341c67898eeef26b983"
+    },
+    {
+      "file": "assets/concepts/dungeon-creeps/desert/cu_nhan_sa_thach-concept.png",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "sha256": "baf8b65c86a9d402e224719bc8053dfd4d2be02dfd7ad80ca24e875e68e82a21"
+    },
+    {
+      "file": "assets/concepts/dungeon-creeps/desert/cung_thu_sa_mac-concept.png",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "sha256": "fd7a86157854fc89843b06de4ba3b336dfd0d9b4a6e6a76d5b461c303d452319"
+    },
+    {
+      "file": "assets/concepts/dungeon-creeps/desert/desert-creeps-master.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "sha256": "f51a3ae02b7596f6d2b8718f0994b168f2ce687a496acf02500ee4915da74c77"
+    },
+    {
+      "file": "assets/concepts/dungeon-creeps/desert/sa_tac-concept.png",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "sha256": "2bed91f695685194386b8bc619946b8a1f8bbad82514ad21f31e7c211a82cacd"
+    },
+    {
+      "file": "assets/concepts/dungeon-creeps/desert/sa_xa-concept.png",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "sha256": "9eacb2fb18996d11295fd02b793ea51f7263dea5b6995ab0c9e230eacf2aa672"
+    },
+    {
+      "file": "assets/concepts/dungeon-creeps/desert/xac_uop-concept.png",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGB",
+      "sha256": "62a78ddac5eaa6973862463b73ee11822ef07ffbb8ef4dd6c757b51efb208a9e"
+    },
+    {
+      "file": "assets/concepts/dungeon-environments/desert/desert-environment-concept.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "sha256": "094b8c2b164812e16c2a77dcc8c86691549fd478d3eb427006d9f17a12207dae"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/arrow_down.png",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "sha256": "394b7902d5e4a7865937a18ddf3f60ca5b53b6f3df85919ab6aa6b5065a9a61a"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/arrow_impact/arrow_impact_0.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "76811843b510d534d37ac951cd44b65e490f8149f04d00f6d9839bfd4f15a3cc"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/arrow_impact/arrow_impact_1.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "1adfa22f1f2add7627fd19c369293911a721d825dc2a05992cc7b7c38cf60f83"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/arrow_impact/arrow_impact_2.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c2ce5c135b2bba720013b10796da9c415fc3bf831be7a615dd5be202a45d9f35"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/arrow_impact/arrow_impact_3.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "b9e66d9936bcb7a06aee50b92cec43828ce2416c146564f24b72a8f48b91beb7"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/arrow_impact/arrow_impact_4.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "34114d8cae9ee41660b5f4763c309d8dedbd62d6e7024a66c4f2390aa5757c7e"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/arrow_impact/arrow_impact_5.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0dd190cd2b4158d3e25a4ba40dd148f8e2daa96905381e19f91c2e462314d399"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/arrow_impact/spritesheet.png",
+      "size": [
+        576,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "401092e529d9f7d33eeb346bc464a307cd9df6825d33a96ed9a7e64562d585f7"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/arrow_left.png",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "sha256": "a5a1b6a6beed0cba5401044356fb975d77b7b12740f2c79a6265cd3933905cea"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/arrow_right.png",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "sha256": "fb12c33333adc9cc2d854bf24aab09e286bc5b9c5eb1ee545d7d50ad18d81a7a"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/arrow_up.png",
+      "size": [
+        48,
+        48
+      ],
+      "mode": "RGBA",
+      "sha256": "d5bc656e51468c0ba6e51520a7c3224991d9f4e224f0cb802a608b1b71ed2e12"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/golem_ground_impact/golem_ground_impact_0.png",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "4fc0cb68aa1a7eb33a9e1b54b9660d47569ce2145d36f8b728c9644a99e188d4"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/golem_ground_impact/golem_ground_impact_1.png",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "06df35fcac5552826100e36ffce96a55da685e63fe0e8e58bd8813476e00b0e5"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/golem_ground_impact/golem_ground_impact_2.png",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "00218d0fdebfda4c884182162d26b9ab771a1142ab72fd41c686c05c0f0d4262"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/golem_ground_impact/golem_ground_impact_3.png",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "cc5cbe31b0bbcea0c2506b18716d104e78a40fb83902973127e70231dea4a056"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/golem_ground_impact/golem_ground_impact_4.png",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "b4772c85a5bea53dd4e0fa4f47308f9302c2db7ae9897c747fee410d84a08c3c"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/golem_ground_impact/golem_ground_impact_5.png",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "a71977d27528fe86f9149aee808a34308ba4eab5cfc2b82246e56a4b56c5fa86"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/golem_ground_impact/spritesheet.png",
+      "size": [
+        768,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "1b5b53cdca5180722626cc1508ac3d8e5e22f9f7d01ca5d6a480f69121caf9ed"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/mummy_disintegration/mummy_disintegration_0.png",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "590ab5dfc69904a28726ab0ab801d13afaaecb9b241d9dc708852e0fe86014b9"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/mummy_disintegration/mummy_disintegration_1.png",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "ac0676c5a264797081c8bc222dab8c960a216fc1839aa8060cc8d985b63fe982"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/mummy_disintegration/mummy_disintegration_2.png",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "b6c7cb22eb386e7902616cdfc679d783666bad22527baebf5879cda17151cd83"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/mummy_disintegration/mummy_disintegration_3.png",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "86ccbf9dcd51a275d946c1defee3bcbfb5197de2342400716252ea5c266f9d85"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/mummy_disintegration/mummy_disintegration_4.png",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "d32986f980266ae9c156e24357038cf6eb2eb191add2ff534879cf7d7c465f79"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/mummy_disintegration/mummy_disintegration_5.png",
+      "size": [
+        128,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "1201b7ac44e0e3205e8e18715c30d02148190fa8402b766874c9ee69696e8c38"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/mummy_disintegration/spritesheet.png",
+      "size": [
+        768,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "fff2751165dbac9c536f42d2baf3409dee9683c1292155bd61f55e3fbee3851f"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/sand_dust/sand_dust_0.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "d6fcfe2ada6d30158c7e0cda05b355244db3a0780f73ab97ee9af1c7f9877a4b"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/sand_dust/sand_dust_1.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "646de70fec55b68b1a1c2fa06c2e5e629dc8d99f4da95a3e1bc9c669ff0e6367"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/sand_dust/sand_dust_2.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2185c26d9da85479059522130b11c329db21fa61840a0efc4b18af54de90f77e"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/sand_dust/sand_dust_3.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "029ebb5277110d3feff2b472745e29bb9e1bd0e09b3cd5d679fb6446e9c6333f"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/sand_dust/sand_dust_4.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "a3d6e8e76521fb6109eb42cf1f603726df87f0e364eebf285be5c0b31831d6d1"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/sand_dust/sand_dust_5.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "f42cecfb7cb2c4708f6d51f4a942cea0cf1d31eddf05874c61fbd34a82f11d77"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/sand_dust/spritesheet.png",
+      "size": [
+        576,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0636dfbf56ff57b61518bbf9de94cb975b5762c2c8acc7cce17478b2c116084b"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_pincer/scorpion_pincer_0.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2ea2e3d5aea28d081afddd864f92a909772a998e65321877e06f52b6815ea1fe"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_pincer/scorpion_pincer_1.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "d41181c2a528a2b5058294b9c2e72f4907652e0075c3ad4161e9c4f21ab83492"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_pincer/scorpion_pincer_2.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "ff5f61e69329cf0c70d4e478c1a93b1995a53252c15a261cbb912c92133bbb3f"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_pincer/scorpion_pincer_3.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0ae9ec9246b3a795906bbf8faa3dfe8f48062d670cb9667dc3796136d9107439"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_pincer/scorpion_pincer_4.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2be3a3c6a0da86d0e7eb08d4f2ee79119eb92a1f26d0782332a52bdd60fbd74c"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_pincer/scorpion_pincer_5.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "9dc88066f1baaf694209747d83cfd0855715641572f4ec4a34a68af45a1161dc"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_pincer/spritesheet.png",
+      "size": [
+        576,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "221fb8ac96bba900d81477a6c5e657d1efddf8ca805fea7909d44c22e8f57718"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_sting/scorpion_sting_0.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "5ab3b8092de33dd8b33be5598c5d41552870ed2eed4c78b41b2e5cd4fa8c6f2c"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_sting/scorpion_sting_1.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "814d02da9667bd864e9bad7920a31394aeac5e425df69cec4d1d5a9750b15c0d"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_sting/scorpion_sting_2.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "06785ed34b9b40a600eb9ba9986e235d1f443f986b1ad86275770065461a309a"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_sting/scorpion_sting_3.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2d8990a74565619161911bac7f42f89effb566a5dd69ac50ab88d6c816a8a65f"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_sting/scorpion_sting_4.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "af42edccf63d47c16943d20f0c2fa242e93eb6c4945da22efe8467355914533f"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_sting/scorpion_sting_5.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "426a4e025738bdaf99b4e391a61f35d0bc906b0c17d5e388dfc799f0da938e3f"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/scorpion_sting/spritesheet.png",
+      "size": [
+        576,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "a6710f386cb4f17d6449e37b616dea0cbad982b00e62a2e34ae959962306d69e"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/slash_impact/slash_impact_0.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "69839a9a6bc498221f23966d751ce659b85694b44fdd913d0b0a75008337f71c"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/slash_impact/slash_impact_1.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2f1d42928398306a5dbf0820b020cee319477ccb2c9f23506006528026d45382"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/slash_impact/slash_impact_2.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "e6274c8f58220ee4c5ac995ea8a334e610a383cbb94c93e87674c428c234760c"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/slash_impact/slash_impact_3.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "cf736b5d88f2e16315a04eae237c6835d403782992638aa626f6e8e7aa46c437"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/slash_impact/slash_impact_4.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "cba73445b0e80c5776b8a4452055233fbec64e9d12598446bf5d9692fb9163af"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/slash_impact/slash_impact_5.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "8e2795c3c2aa704b9655036a6c27d95c19ab7585c62ce4bde75529b686945b4e"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/slash_impact/spritesheet.png",
+      "size": [
+        576,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "561f7d3a48096a6e3240a56be820f8167b708adf40ccbaf0683bf5c45fbb3cd2"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/viper_bite/spritesheet.png",
+      "size": [
+        576,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "3a5ce177c54610c8ca20986fb2f89b7ea6e1c8e00861d9f0f4f31f8fc7dc9cd8"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/viper_bite/viper_bite_0.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0b8378e0acc39adab07d5516725718feedf2d3f69123a4423236fa23793c3793"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/viper_bite/viper_bite_1.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "12e6a9e7a7dca56803855c1a639651083fa83ef9d20ecd30621944ba112e2d90"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/viper_bite/viper_bite_2.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "dd22f562c9b44bf431cbd3337c8095384a52fa1e192d58b32fa75ca7b334982f"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/viper_bite/viper_bite_3.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "40707533aefc1c8211e4c8a426482cd6904b78fc002f0dd7c764a7cd58bd1b18"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/viper_bite/viper_bite_4.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "7664dc4338b0db0324351f46ace45840dd475178902c517e8c499fca264981f7"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/viper_bite/viper_bite_5.png",
+      "size": [
+        96,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "bbb42c1c9d9f806f2fc43f625e20e17e45b6011b51967c53f9e4f7f77fa51aa9"
+    },
+    {
+      "file": "assets/source/desert/archer-attack-correction.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "de8562f186c7084defd7f6bf2e94be8a3cb7beeb7b68c1a71619feeeca55993c"
+    },
+    {
+      "file": "assets/source/desert/bo_cap_cat-source.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "6daed1d18654dc92501624368a1f33caecdbf7f24ea6b949de7a34c973a1dccd"
+    },
+    {
+      "file": "assets/source/desert/cu_nhan_sa_thach-attack-v2.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "6ee0829498a888005fa0e3df6e3f6fbfdc30173f0d28bc4e8a819a3114c3fad8"
+    },
+    {
+      "file": "assets/source/desert/cu_nhan_sa_thach-source.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "16aea51218ab40eca8e189dae3fbec096a178102179d2d05bc4751194f0c54b6"
+    },
+    {
+      "file": "assets/source/desert/cung_thu_sa_mac-source.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "607e21baddc38c2dd5abe613da8b801931f67d62f675f92ef9ffb27349ba5dc8"
+    },
+    {
+      "file": "assets/source/desert/generated-portals.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "500263f84fdff4f5f765ee98f5cb0ba1e35dacd5329707d8f4649f1eb70fc44c"
+    },
+    {
+      "file": "assets/source/desert/generated-props.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "d83c37752ea54eddfcd2f239be2ddd942c57f7c245dbcc71a2165f711ce399a5"
+    },
+    {
+      "file": "assets/source/desert/generated-terrain.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "sha256": "681a8b22b62888e081ccc508ffd335582ea60c70ebc9ecd3e6daf033d8faf4df"
+    },
+    {
+      "file": "assets/source/desert/sa_tac-attack-v2.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "3cf11ffd7221597e5cd0778670ffe1f3d4347be62148b9ab7b96fea893a204e6"
+    },
+    {
+      "file": "assets/source/desert/sa_tac-source.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "ef1d5da8fa04b705abc0c8e467a4c575ad7e94a38479164716bb2fbc4585fbcb"
+    },
+    {
+      "file": "assets/source/desert/sa_xa-attack-v2.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "8c65e9e69c32f0a3c0bedf9f2693acaa5bbc822b0528641757ab7e34609d267c"
+    },
+    {
+      "file": "assets/source/desert/sa_xa-source.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "cf336ea60eb2ff1ce78c6e1269be773e0b216a91d45679f45eb2323738ba2c82"
+    },
+    {
+      "file": "assets/source/desert/side-attack-correction.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "2b15eca948d0f5ff224a0930802147d8ff68c339839fdc13b44492689c739adc"
+    },
+    {
+      "file": "assets/source/desert/vfx-source.png",
+      "size": [
+        1086,
+        1448
+      ],
+      "mode": "RGBA",
+      "sha256": "9965b918ea35312a3c806f704bd0238db6372fc08e9feaa9b2397809b82ae718"
+    },
+    {
+      "file": "assets/source/desert/xac_uop-attack-v2.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "322bde1b3a46a5e79fd37a9b2100849b99995cc8c3c38a41bfa8ad505d78510a"
+    },
+    {
+      "file": "assets/source/desert/xac_uop-source.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA",
+      "sha256": "a4988206d8a982d3f1b3d38297a6398dde0710b5ffe14a0e3bc44d22ddd97c6b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_down_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "eb26524910143bb4e05b025befae46469708325627ec39ade24a39533434b559"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_down_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "84ce9c4285d001fdf4c403c17c10890b881b96cdfdfffa5dec27cdf5ea153471"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_down_2.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "2580f0f49f8728218afa3a11454e4d196f4d2940badb3099adbca99899636771"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_down_3.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "9d2d3bcf13e13149477e5705c1d2a3d326a315f6416bb8046a09e658ce65f1d0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_left_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "b508606ac0518b7b23cd438f38893fc7a73137bb060552662ce3ffbd6a560fd9"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_left_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "32e6556874e446a13a77e1baa837f98eb70c970c1b2292b707ce7ffbf523b74b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_left_2.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "7b1ab294038a3b1f1ab10ed05ec3bb3caa15363f78670a70c8cdb70dacb37f38"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_left_3.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "733d28b1ab5176e0cf129bd0b9463e77be279c0445e6ce644559f8694cfcf6ba"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_right_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "800ce6e82a5f83164c3f579367a064bd0c5fd67da8c79dbef7700df129ee682a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_right_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "61cc9f9788031305ae4a894b24ef3676d8cc2dd58063eb22a60eade0ed9cc5d4"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_right_2.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "fbdc5bb6c20f570ac8341c9be1af7b95fd22a28eb9da8dac0134c7cb983c8cfe"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_right_3.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "25a614240a379e1537d8844ed6f571c4819f68498ccbb79c13535176c175598a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_up_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "a36c697c60852196912d2830a9e87f02d8cc71cfea6c4dd66412517880abb635"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_up_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "d72f895d8e0500c8d917511a8d7486d00f159a79ef3fbfb4aaf003dd365b3cb9"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_up_2.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "442a132b13a552c60bbd646795e70b250384a1b9771a6b73375d1c524e5f0d7b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/attack_up_3.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "af7d87d2c60fe118f3672bbf2d7678a89cad8d0561d80dd0b008dc877a0373af"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_down_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "adad0744e8f6d566e769b28cac3bbbb5c7628b6e3a6c443997f82ad13ef6dd0b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_down_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "287e233f620cf311c5f10024d5108f8e6acad9efe099ffdca64e16384befea4e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_down_2.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "0158891fd1caea76c05a1c74b606ee80320880bccf92e42a7352a60859fadd31"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_down_3.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "c984153b150fb3f3d03de17a0acb1422a5fe8d2280fca4859298357cd4fc6bb2"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_left_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "ec2e57af7120d593a9ce9dc129644bd14d7dda67e0a53566f3e92004486b75e7"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_left_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "9968b9a43361b6d5683f9afe790d0881ccf5059a67eba7404539a4a886a9d6a1"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_left_2.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "32d3050be8cb1bfa044ac48a83bf5d7ca664998bae41a51374079aeee0377b97"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_left_3.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "e96a407ab3b3b02c0a6b1adf1d5c2d0e0b071af64ca9c291a4ca7068f35f2aa8"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_right_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "2b1e1caf5b70ebe15d93f14808893197a407d01ef73fea16f4723003ca76f46f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_right_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "9ca8b13d1f4c707c0567b85cd598422582a14581676c7be0ed4cd76e89e634a3"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_right_2.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "31edd1e4f4566faf27498e958fbe2d436bcb419c6cd81e06c2810920a08ae9ac"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_right_3.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "5919360d7606aae250e3d02da2d3c4893b0756222b1881ac139641eb4b3b194e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_up_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "95fc1d2285d15448551aae60849d2fafbdb3837077d88f80a43c4c932dc28f06"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_up_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "a0dd2ffdd02772906443ad3b298ee2359cd6cf189314a4f27ed226f27a26e447"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_up_2.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "69b330e53537cdbe8d19402338a4c8a8c3fa5792890edbd8a018220b48e501f4"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/death_up_3.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "af261ba0b465f130b8a11119195233762124f4b61a0878888de992190dfe78e1"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/hit_down_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "b5001b495dbeecff5599222bcc74b95738e4b34805a1ec7f63231165224f626e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/hit_down_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "61e7e4833de1427eb58862991fcc971f63a67e2bf5ca9fc2eca0f4907184d5b5"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/hit_left_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "a7c936ecc1270031634e3b7be684d5ce6ad8ea6037a94dad4996e9ebe39813c7"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/hit_left_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "a1120b0aba0cc0f990611085e4f7d0807ffe9774d44813199eea310fb3c80987"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/hit_right_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "5e6bd976aaa71d18cbbc0a5db7ff2da0c8b3bf792993b7fe839bf0c4be439b72"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/hit_right_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "3285bb2253862cd24d77423bea2141f47d5685091e49bd19839dcae0cbc6e15c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/hit_up_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "cba73fb6bfcfde2c72fdf03af8264a7f4526b702662af790e07a368ee371a94c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/hit_up_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "4488c775b4b272940e149c9a17b9cc068b00daad2b5ccf40a9fbd890f50bed68"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/idle_down_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "8b72a00b1f42baf0230e4ec01de59755c1dd202751fd89442d2779220c20df6f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/idle_down_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "a8679a6747ad1d659811771978e407be6e8ea3b88ae8d61a962c025ae2f7b924"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/idle_left_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "ac92fe240f7ba6f32a783b34e252b9b6a93c6c8d811f9606d3d0c382f77cbc13"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/idle_left_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "9ebe6bfdf0537cf9fe6f471c24a16c73b7e570e24bee1030a81fd50d7e7b9af1"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/idle_right_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "e4fe16588c44a9bc756ac5d51570004de34a91176068944f0f4f175d9bc731e1"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/idle_right_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "ee3b421fee23a026503839ca1a792d50f6e249d1dadd4e9d81e5548febdedd78"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/idle_up_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "4cab6c8fb656d29b9fe637fe6faeabd93aa757dd9949907f92b4c55be716e781"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/idle_up_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "0f36727e21796e546de5e8434fb2afd574dedcd6644c4753f56cb9318fdb7baa"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_down_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "3a18d1c5dbd90f92e9cdb89618f94138cf4e3d6e60712a452a55b0b30f02b5cd"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_down_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "506bb8350846feb21bd876bc0944ab0d1726ed34dd2bf87b20712e89ebb4ceba"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_down_2.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "b8392b81d4524608dc528bc557f023f4139b7b2553b78c45f5bb425452a6f04c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_down_3.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "36c8a37464fa0668c5bedd4b0c7ba2a22a94b9982954fdddb585d97e34884a19"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_left_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "1a479e3e84804a79eebb6cba6fffbe95e32688cfc7e7254dcf1500558e96ac06"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_left_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "33fb5e8447fa22f9163d01b5cae2636073b4cad5b48897031649997f79ea89a6"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_left_2.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "7b84d1ad6ba98c59056b2b54842e990de550448e28857211d6bcfea3112c004c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_left_3.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "19ae51e4208107913cd9af7ff68189ee047a389f9b8ca85882852e535c1f6db1"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_right_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "ec70dece15dc647ee6b9dc726627a4d3ba3c1e3cca996662d1d513ba7d4b9ad1"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_right_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "a84444e1cd72cb30dd768b52a54db2825545b6bc74a0292b546c5d9d79fdc73e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_right_2.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "0db932c37e175a6331e324cfd87480f989547b9f4598ff3c568fecf4adb2df9e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_right_3.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "634374c6af976e80993f571b0797210656b0cc5ecaa12aef241c7b0ac476759d"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_up_0.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "fb104901e0010c8842582663d16b641e4247bfcb7bd7a25913a96525855d99cb"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_up_1.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "dbf7c8e9845d7094f721639a932984461a7e70cb2ea6afeeed92765cff11bf54"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_up_2.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "b9e652cb39f0bcc98313bc1596c20629e3fa311c20d5b49d1547bfe600ca0ab6"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/frames/walk_up_3.png",
+      "size": [
+        128,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "e5d5b783da2202330adbd865aace4abd4f934248b8de5e1628c7fa5e9c305bc1"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/bo_cap_cat/spritesheet.png",
+      "size": [
+        1024,
+        896
+      ],
+      "mode": "RGBA",
+      "sha256": "2063b94bc651e128812db88e410464ac07a55881c1880c108c17eed519d256c4"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_down_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "5ccde76a38e3f37944046dcbebb34474a05eac66aabbafe39eb5062e7b0afa9e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_down_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "178b8dfb8c6b4e0c64e6b99c45c76dcbe552291c0294c92f75179182f00e1e02"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_down_2.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "edfb22eacc5716bf52ee24ee7e9f729bf045ea0ceaa1c36af36a385c7e739ae0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_down_3.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "d3842eabc3d21761ea9cc203c1d6901aaa26319ac37483d35ee6f389e37c741c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_left_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "65544122fc55c97b9fb2a89ec7ba328a2d00e1ec50f6f7148733c16a62bc366b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_left_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "c43300b2734eeccf5976a9cf9987534df9ff5b83da7b04414466170835261335"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_left_2.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "f24999e220bb32f953cbb907ce0ce443f5020fc92adb3e628a31f1d0cc734722"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_left_3.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "b92e6e1a7591bc7143a37235b3fbd5b5add531a173ea91ba27a50ae9b73f7e2d"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_right_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "c8d7a1e2bacb9156475f4d9cffb2497d3d4a0d53692c989eaa9de272f07382fa"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_right_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "2e58916ee75de8154e5178f75f5f6e816a4f3c6397bdff56ff599d3cb0614d9f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_right_2.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "8ec9a4ebf7edc096f50f2b1d76ba9e71a02c53268b37fef05080ef439694ffb8"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_right_3.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "a475fa4701a57bce01ad2039788cd6753c297e7253249b31dd90fd8ff101d71f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_up_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "5a1a2de12253501ca6bdcf74918b77098e19a14a6a5e11de539cd27060d53e65"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_up_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "5be4fc86912bbe902c756b82217fb52161ddf6d7e823b04dd09ae0263a75ecc0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_up_2.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "bdeeb37a3b96cfc48ea42faf390cb660db87818bec9b31bc8b3f0119f08f2d3c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/attack_up_3.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "b1a23118fd2308e004d6e2e49799c4fa24977030d30f23cff8ab4e83bd17ef15"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_down_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "92532926bae8ffec6f1dda05600982a858e3826f780f3554a4edddf355f56b6c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_down_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "cc23873b47535bda7cb563b88152214d42531ae1b6c7ea894a8b344c4623a4c0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_down_2.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "a80d3f7ad4e65fe0ffcb889b7d2a9dba68394f61028ac53d73938d8b4a0b5c7b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_down_3.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "8b5b621cc8ecc3ca587dc0f103da9b3d19b841dd3c895816c86363c10249ca2b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_left_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "7350fcc658c066f6caf3fc6a0761c2fec6c23fdd5ad25fccc72796220a17412f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_left_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "92b93c0286037c92ff23cec643c9faf853b90a2b4ac547eed146be47095e8005"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_left_2.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "8777bffcf985ea2b4cd30928e27354635cee624e0f60262a5eeae6ed15dccefb"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_left_3.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "aa7bee57ea4baeb7086e817a959e4030320500111f223ea2c12f476e4cd451a3"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_right_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "72ab2d21fca7a892b6a582fcb885c43eb460be46784b177ef54a9e020c636de1"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_right_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "9c8010a595247f789afeb3f1f9e02036d92255e423cf94259a847ad3eda9444a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_right_2.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "2080bf280904810fdb93f441721d287ae2a45872cf29c466fbfeef2c5b6db98b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_right_3.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "76301acdfad4e6362136fe7abb60cc0ace741db69936fd61c1b52b2c7fc99825"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_up_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "02b06b5892164d7a5e6c6d20defc2ef4c6ba9a1c41b4e2678fe2b6aad83efebd"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_up_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "ca0aec87620efa07f504e8001af9596386da6968a788786bd6dfe16e61c203c9"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_up_2.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "4ea0b7695b3f5773ccffb514d3bcaeb9f720d5e923140c8a6ba3c5d4357b1167"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/death_up_3.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "de27f634c5922a626f44e916828e75d5d7d3a53cdb25bab66ac0d86777a23877"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/hit_down_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "764fce2e8d82410a566d43395f3ad2999c07b8e1a8867ca4a9aaa703469a9374"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/hit_down_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "2215f9c4dea868699de796af96779b3905e371ffdbb0e47f697a0aad357bdd28"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/hit_left_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "3c9551d263209539c3abb49c452b275ae79273fc97d9eca50baf95faa8f8b518"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/hit_left_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "aa7e26a25c0e9afcbc970e43148d2b6be8fe44ed3f3490563f94e686844d42a0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/hit_right_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "bd42bac56ed3c8b49edaaa2dcebf6519ccb6923371b041806e1a90eeeebac229"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/hit_right_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "cc81e9a198245b817c5525c8c063d11bf1b04280d0110353cfc28808d3d4a36b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/hit_up_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "185bdd5e46c415294088229e065e72ebde9d94056711c33fa6b5546fbc4fb891"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/hit_up_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "5f8e437d7c2e020b8a22b320e7ec549cb1ea9ff1409bdf70d32ac96cfd2411c6"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/idle_down_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "a6cec7e1ec517e9985a10e110ae04fc30b96aa38b58846b1711affb1fc799912"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/idle_down_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "0c3a1f1e06f666122ae02e138f48e6e3da0f30c846442755a913fc315ed59df6"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/idle_left_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "a6ec416444c40c0b62d4bd798cc877162cd4b280c6229432e3b6e000d67470f8"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/idle_left_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "c124953e25ed50be79200d2412ee7011701cd4bc1239bdcd7a9072e77fa53c97"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/idle_right_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "a281f7a68dc30c43a0352b62349189c1c8954bfedcef593c3d2e78170b9f90c0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/idle_right_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "d99dd65680ded6ce348ac57cfb8173656b4a93398a0003f0abdaba525a7a59cd"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/idle_up_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "034098cdf4b96d8f58d98f325779c52581247039920e475f3fe571177176d9f8"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/idle_up_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "8c148d3d4610ea8ba753b55899f4da09a1dfd6058b360ad703cb2ded1366fc8c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_down_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "28b2c89f6706eeec45cdd3b5a851a03178e5b6552b8e335921894f60d9051a04"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_down_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "31236db1ef87a9c38344f65df57e2b9d42ea7a3f3b75e17e4da2ae282f1cb10a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_down_2.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "edb8dcbb6e7e8e95c66953d57929a524ba6ca4dea2fa7ab3df007ba5115eb3c5"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_down_3.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "7764f34c7f804ababd577321e7e741820477111644ac6ac627d1d72ddf4bf4ab"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_left_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "198335cb1f73b7628e729ab5eb31a388605dc35f3db7bffd0aa8ac2a5825d711"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_left_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "26ac0bd11694544d52f429affb806295ecb64e21943093bc617da0570b5a0168"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_left_2.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "bcfc18ecd3dd1461b7f702cc3d8243f970e2463d21ac947c3273a4fb46287c8a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_left_3.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "fe146b056f21a41adf8b9b65d64d5adb8042f2a08f5b93f77e8556cba92b9c59"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_right_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "d8981b0fab967771b5936b24efd631018e01b8749ca8710df336e0ae49929b4d"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_right_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "9d9c4753340a032d382cf118603ed19046e00e58b0c454967419a01af3e257b8"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_right_2.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "0bf248a2ce6d7c960777c01d5cb6057db1ea65227b19a26cc29c2309ffb4e8e0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_right_3.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "83b7f3145647c964ef011f94539b499671ff144773e84e46e93851571d4373d6"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_up_0.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "0d0be3ada843ed0d631309266e6c456c8c6418086ef1edfa3eeb66678c77edc8"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_up_1.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "40543ce2c9a28f8c387926dc3f9266b951f54598a07f32215a494a22cd3a8613"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_up_2.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "ddd17c38d945ca6981819e52dd3eb8e8634ea0cc161197f8be097b7e3ac1e059"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/frames/walk_up_3.png",
+      "size": [
+        144,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "808af73c11001d1111183e9e92fa0becba834613bd6aee48d4b6e6f26de4371d"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/spritesheet.png",
+      "size": [
+        1152,
+        1024
+      ],
+      "mode": "RGBA",
+      "sha256": "3c5a990715743379335ddec83807d7ccc7c5a8de5a065bc80faa8e9b829fff9f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "522b64608311acbd9647f56b7f723d434210bfa37ce5cb986691bfbeb703ed53"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "1d835ae061e4117314d3b8d8f8589e2e6635d2af9c00e202e8853f97d2b09046"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_down_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "07996f7d776eaf30a0b7fd4d6df7aa830bb10501d296c4fa8f686632b3132eb8"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_down_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "4e85723c42e6e116710c0f7716fdd741161f695dfd20837adb5d7b545c9c8947"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "7616015d2c749462869c86fb890f743af434347a45a421ffe4dd4385bbe14724"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "f365d4b1c4eb120d30394aaf5bd0d1eac6236d33d4d6c1fbf020269bf887dc9f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_left_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "5df98196bb690ca6885a43422eb2f1cfeec87f12f3bfb5b6515749a67ec815c7"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_left_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "daf07159d0dbe94e046fcb40459f3ce6b7905ec4e5a431818fbf830436308e75"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "8e3eac8a1cf85048596941be0e26576aba283f291188bffc945c7e5ea83b4f11"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "372a26c5dc98037607a4c366823e97f3cc56ac4defa6ee9075e5f9c58bffa207"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_right_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "3f58df7664c125141e7cec12a5e75f3c23d193301f916f24f3ca8f7301ae0232"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_right_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c19e7bda40c865d64e3b0df193a27e9b6b0e4fc2c7d4988785fd7ff8eebaf433"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "20693aca89e665d73d2efe8f9affae7f37ffde2afc14d65843d0740b121e8568"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "665e66e86039f86ff3e16679482b59ddeb34f54a304eaad5a5b092c2e0ccc910"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_up_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2c2fd738f168412464115b61ef634f1771f14a8001268a4f1b4e93a2e6119c32"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/attack_up_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "7c2ca5de90e4c53c824df51fcbdd0e4336966ce3a6863ed6e9f98a03e085ffea"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "4d1cda5ba8c54e45e497eff395433995d318e7047a104de03bf3005de7d2e608"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "3620a51346ec5facf469543684b8dc084ec039d30d62f47dc187214eee14d398"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_down_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2ca945b729e32f140fbd6b6a23ed449d746c55ec718d36689f6413f36bc96912"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_down_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "133726cb193d137b8ab121e9f264365674d94610207aeb5edc414b92fd3014c7"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "40180929aa868f8726ce864a20571df90aa0b09287277492c2befda1356b72da"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "6b466c9a29acf59fc84f2e840dc651b111bf8ab49f9492272dc887c810f63769"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_left_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "09d65f34c54db8db99533fbf45b9cb628e013248e3a387d57d43de60a595c19b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_left_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "a3b63755a4c3b63cb7b5caa47b024b28a6d736c6d878f8ce1ea07bc097a64371"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "14fb19b0c924d192fc6730aa5f0d583810e652c054c92e47bd7317026c5e983f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "bde9615ffe77432feddc40a62bcaf5e39cdb97b3ec9db9e3e87b385e2f2753c9"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_right_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "4aaad253b8cbb5f877a97193622afb8c3e49e280722aaa035cb99bfe98557dbb"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_right_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "aa468b4abba1749bdd00cbc426ae08435193f5eb9ef716b2a59b8bc6794dffc7"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "a61450477f6ecbed8843beb4782775b9b724251e2d785140ba66a117b7bd1bab"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "966e9e8b1bed5f8a1ea4204715a6a44370c27bd3a1aa99f32ec3a9c7629f0b40"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_up_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c53104170cff2e7708d2ff8016d6aa745714da72bfaf0e1af7ec26a73df4fec0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/death_up_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "b802f0f74b47565302d8df60c0f423f584d5787532343acb3a29a64e3d4ebeed"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/hit_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "b5af53dcaa1ec2b3bc921cd677747b4bd0227e385e64abab95d08d02e655dc1b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/hit_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "3fa2d638cd35163188e515fe07ea83bace1ca684fb913569fe14245ea4f095d3"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/hit_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "99fed81d291d7605420dd12003d28fb37d5be5fd52841d8d8433269f054a865b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/hit_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c892ce66eedc5f64834855bb9d11c7c03f165ca9eff2eb5aa7a0e9c4c48531fd"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/hit_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "85659f71538859fd10ba6d863c26f30a738d22c0ca3099e862cc21d96a52a7d3"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/hit_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "b9866ae249da29065586adaf0304843c0d86f34ccfa31422d9489096b2c9bcbf"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/hit_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "18d62579edc1cc78b94110c2c82b2c5b17dac842cf5ad3902b62e0513ba4357e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/hit_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "382ab0bbd682b053e5f4c2ded76bcc084e3b9424dc5b85c211500858386f1e39"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/idle_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "04c3b663891199f277e4774f3ea0018665579d37706dc775b773327844726345"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/idle_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "6c2576ab1f35f04626c144a27e60a8bef62c87b6e9fc59409a60a4b3bc12a37e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/idle_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c69b89a3119ce6612bd2e8a42cbbc53555654bd4d9027640ccc33ed3d9e7ec22"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/idle_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "41e72c4fa8019a8038c36432771bcd7b6cc4970a9d344e75b3670a56e56f4f31"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/idle_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "be893151633c5dc148f22a9f7f9babbe51af1cb3c3add8e6832971957bfbab87"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/idle_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "4d2634e4cd6367c20246059e6f2a505eacdb558a74c41720320d1109ed2e940f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/idle_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "f07633980c414b086a9fbc4f170902243c89c6f2464ce4f1121c1b2bacde313a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/idle_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "ace930ed3994c1fa0fe66a79e63d0859cb70be49ac6743a7bfcbcf18fa7f2d0c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "75f4df99a8769890409778d4d27c575b8d80fb2cee31b33acaa2f8729d31b7bb"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "12191dd803e4e9319be8a55ffd7723dbade213fd2ece41438549df3480cf879d"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_down_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "111de8080b00c5721c394fa08b810872574b00b2d94d5c446a8e97353f233398"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_down_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0e7855eba9ce0be1d23e3f936b19f854869f88b67110d6a8d2cbc1bfc35b7bdb"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "8a8b7b20153b76914a8d359cf43bc8e6e4c55a433d4c30ca87976d7d7eb2490c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "017235f6b61a01785c83d853e35574a2ad3e96f71b5c5eda4ddedf0d332896e9"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_left_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "246f64969de6aa494a5d9733fe0cca98aad475ba9b4989ece52edccf88e38477"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_left_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0a9ced44636a738c73363831137782015811c3bdd2f7a1d81542569d7aa3aa80"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "5d4a345a26da5349c77c4af6b670e1fd4f79bcdad38810da991dd17a97f17fd3"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "4d2ea3ba6038e7a63c6ca9a288b20ed7d5b36ded12f885cbafe2d4d1c88eb1a1"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_right_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "9dc792fa544b5bf1f714e6126aa0c4d52bd8160f1c7ddcb6c5af50ec0d08d22a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_right_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0112c6235fb3be93bcfc694386e82b647e8f11155eb359182c68cb9048556220"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "42063a4704b4b5c54c0cd0cbc5618b90b8236ff3802a33969868ee970dc0fc1b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "9da9256c288c9812ed4c1669646f3b03b7f341ca813e7f52e8fe904c97a3d892"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_up_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "95634993579ccc89273f7ae81c10e507ed935957e1457fa6c203bf84a8a42cf6"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/frames/walk_up_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "bbaa52653f9538ecd6e919ced0fc79220bd5c57316cdabb80d1ad984b35ea160"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/spritesheet.png",
+      "size": [
+        896,
+        768
+      ],
+      "mode": "RGBA",
+      "sha256": "1c92be776960d7f62094eced4e981dc239336c392e70112c3a54246b9ec8d169"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "43d6b53dd0701d117a685987a7aa24279af4bc7e02d63d194edfe4396c6f610d"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2f4a12d83815ebfa8a49c4bf904b352d1aa7a3de10cceff9caf433d4fb994eae"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_down_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2356a0ba233d099e50f5dfdc6574503401d690b5b7c5505abb393ed1c2d606aa"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_down_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "74c94a16117f05df15bee48713dc224d058853692b123977042bbecad73c4cd3"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0ab59452916d020a8b45e46f98e2e2b08ad506538f381eb7d15bb8dfdf45e329"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "73e83567128ad878b74b9a6721fa4a947b28318fb42b7d1d8a1e7272851604ca"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_left_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "e85c92c68aa68ed5a3c14a184afc35abb60457c1df86ef982ff25fa248deca3c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_left_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "caf38f8820137a11e44828301150c7851da51474776c5adf4d9b6713c02ef365"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "5f25529cad2fc1dea079539d6cd474e5a929a83ef13a1c2ceae7a7a6f437fbe6"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "58367fbca014aaf334b632e33e60efc800fac63721e10dc780745119d72d663f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_right_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "a918a3c26ce5a88e973b66ace11c14066cbf1d848396c8c4d62fa6c0a87a0d7b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_right_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "360ec876ddeac6fe51a7e0b0b07a67e16b980f96af33fcb95b1716b1c5021f86"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "25cdd175f902c8dc481e93b207fa51b4ce6c20b3391e5411729bbe40fad2af03"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "ff59d36e7b2e8c6a4b59a707c593dccaf69696dfc4a32875ba4f6c5bcbd85b69"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_up_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c0ebb0b930beb87e108a3e02c09fa77ebb6d81500ce36e79662e004a0e6370f5"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/attack_up_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "e572368734ee141eb6241b6cbbf45cf693d3bf9fcbdbfeb2ccb26fe0a512c4ea"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "b221d2ae7bf91a4146a7560e5f461554a3f7d16044f52e50c324094ec4cb2c55"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "1b82fe7b375a24368a3a4220d89ff0bdc5897f15ac8e9f062cff4b036a4f291b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_down_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "150028ffafe162180f0fcdf9571d1f6ae329d03474d27b1745f69adb106294d1"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_down_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "61fc72aa5f2cf7cf9fbc73b1f5b43d36b4668fc63f399c441ab2db2421388905"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "bf8961aeeeec9ff9c7963e43158ab198474ee84a1072fc1b6914a0069648f8b2"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "e14dded86a67e3e4925ab8002fc405f4af8a26b7e7352a6da1560e00979b3940"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_left_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "6c5086007b13343da7a8b2fba1d0409b200b7b0c64a5ebd33809b70bbfcccdfb"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_left_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "bb57bf406a11578a93e84760f7ecab2e40e07fa89630e540309529a1991a45bf"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2050ec0fbe28e2a48923ff387211f7fabd7770994af7411de7e2fa0de8684761"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "97d24a61e5dcb5247fc9ea97a5a8097b813f3cc58562ac465286320babf6ba15"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_right_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0e31c9251fcf0dff683c25221289ecfa7790fcaf836e5bf96f9c3fb496a46b27"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_right_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c2ef1af18f5d8f2e07b22f34f0b0cb4d8ded84897b5a7dc6c1a8014b30ba0345"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "846a7ece88f78578f8fa150e5404105c45687c948f7e681552dea38db9de783c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "7ce7a53e965a2385061230ed5948d0061485872685fe759c07b8d2ffba125157"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_up_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "72ad90ca5349ffe8a48a86ddf3db779e8873df89357daa39a226e632ff13738c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/death_up_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "789d3b99d14f92f5ddac10665a5344a20e9cdbb778e2804884ca0cac2764cbae"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/hit_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "7346fc4b41e662546310d530bc0fe0c7d33c7392bed47491aae92bbd40ef3f11"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/hit_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "4addfb97d1515ca139bcf23c1acb887156e6b6c9cf7f47cb99559a9db4b9dcf9"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/hit_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "e82c23082bfd75e7108993bfd9416e8b038e76d1b5b8ac7e14a45e48049846c3"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/hit_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "3e916b26e7b8ce06d1ad53b4d288d6831f5a84bad0c62f0f9de3074550afce62"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/hit_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0b1ad4eff73a3d116e869559c3b6dbbeed7e09dde240da503c5e96188dbab05e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/hit_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "fd0425dec55ae2cb63ec9dab78cf3f7662ccb610c2c42c004a8a5eea114c2e5b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/hit_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "50fe5a643956d75bbc6e2a19866163256d928bd28a73f3fb249b7dafd048a7c9"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/hit_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "987bf22eeb1f491fe63b26170e3ee466f48295d72d97dd13c3b154424a394454"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/idle_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2d4e0d35ff8fc1d3fb32f3bd02cb9e55b14aa1ee0b8703eecc3655d0d0404f7d"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/idle_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "1bdcfd66ff6c8526ff294b9078d3d6ad7e3cc52107673974c0af7cd8d5d618f0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/idle_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "e4ed2a83f3d6f474c789901534cff14575b70817c88215c4ee7bf74faf651ff9"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/idle_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "45c3e1782b9299a4c2c9ea6673cdffe3e31bce545fb41021009e72956096fc9e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/idle_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "5d4717ad1401ca454a90304efedd00dbb25b0bb0e9133240a929161180f5dd2b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/idle_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "b7817fb623949e2d6926efee1c113bd2d608fbcd935061d013980ffa7c21980e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/idle_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "17be839e673b4b9a2a35493bf6d05fe345580ab75be5c462a010acef7836d186"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/idle_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "52a15e7ef45e9831c74790a2f3a3003b1746000dec42418fec7eacd5bca112cb"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "f84978db5a649d159667e9a31777db635b2798da43efb04b1ef2fac0dcb6583d"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "28d2011adb7c6143f051c97d67295fca3a283c5de4fe31ab3c34d379bf776d4f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_down_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "6863b325f4da100efa8dd47d730230a20d532a5b99c94f8eeeff3059160ecf76"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_down_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "fe57ad332dcf27404d0d91fa0612e81004b133756b7859f5393ed7e32c5b4157"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "5a66200765529a0dbef6b8132f10c3b59d0e0181f5d8a651ca5041d4e0071c85"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "d1ecbeb5d1bce170db665ccc10f5875c3e643bef3f8be4f8ff89191a0e869fc6"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_left_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "94ffe36359aa8b650e5fa6d74ed7258bd9577c4ac30a374a8cb137c09c66dad2"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_left_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "4c872af5cb211b1800bae42fe3e841d41cf6699c487513e634d48d60ca59103a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "a6f220a37ecdaec2873fb0c4a710be64ac8bc9e6af09c621a3c7a0830201ed13"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "a94075d6f6604f0e02975170b2f5916ec6f09977a0e27de69612ed8afffabfd5"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_right_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "db6b7613b5fc0449f3aed9fa8f7f82cb0199ea80f107325b2452e1bc25ab1dcd"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_right_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "39900705f5286908bdfc2d994a25e8629d566a5d6f17eb77f7b788d6470576a4"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "a86470a96f1d30099b98f0e5f6c83d1da35e3bd6d9c9acf16590d58464020f48"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "47e73d351568fee7fbb194bfe1cb2581f7f0af374689d4495b687b627b9d63fd"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_up_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "f05a2d4b93cd89f173a3cf9a1be9231bb4786d39627ac52ed863f0ab77da27f0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/frames/walk_up_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "ffc1cc029448c671d00fcd559185f2dc3df4a2fd70a39e71af6b4a120bfc7fd7"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_tac/spritesheet.png",
+      "size": [
+        896,
+        768
+      ],
+      "mode": "RGBA",
+      "sha256": "0bd01118c8201c5d93789359d9a2d249d94897adab0609cbf3175cb33e688956"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_down_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "7e86bded7ee3b4c0389037d053775620f84d1648bf6c9f0169e490c3ac99f518"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_down_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "759191c513a2bcafe113e92ab9bc8dc322c208e545a6aaf0dcd0b24bcf313694"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_down_2.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "47099261438c728fe7fff417d9f12c8d4fe6b19cb258b54a0840f01026702f6b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_down_3.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "438b0acddb8fb5f5dcf9ae4dec300060f38cbeb36104d297ef52cacb957fae7b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_left_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "24d014edbb02dc6b1bb929bfd7e3362507f93694717570c5b9cb2e2d1da6df95"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_left_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "884684d9e4ac5329505ffcb6aea36a57f610da42516804970137daabc065a17c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_left_2.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "ead28f46d36e76a921e2f6e70058662cd5b5d2e3630edc94e69b089e22d02d20"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_left_3.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "d394b638f0d43db99e1be0e4a6d1369c69f89d33081870e955bec189cd564c58"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_right_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "47cd4208771a9943fcf069e9462b0b4dea3777063808b4395221709fcc3de72a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_right_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "6660ec0d397664af854b3dfaed2fddc9a5146db2f29778b80d84dae3fd8f0612"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_right_2.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "60a1388afbccfafbbdcb5c762dcb7f2a2844855d33ed2f02ecc02ca7b9afc8b3"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_right_3.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2151ccf8a682c24b0821a54c08a78c320a6da956bcb4edebdb544d136591712e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_up_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2aa8d3cbbec7b25863a9ce82ac61ee8fb2ce23984161fbf316ceac9b5736f889"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_up_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "f5ef727e1056033dbddbb508526884737efd6f0e2781781a943fe7f0b2f74041"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_up_2.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "68a5937bec8a00d5dfa5eb6535e7584a96d406955a2d87744d1e710e300593ae"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/attack_up_3.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c7cde595de1d6b11c5d529fadfbca7f4e019e40f9927c621b82e3de3973addb5"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/death_down_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "6bf39c1325f23fee9bc639454f27d9f8ee76ca0c49a3343332964e6e811bdfd8"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/death_down_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c4c38d6b198292bacd264247e02d08236c17323918304bc3d5363e35987556bc"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/death_down_2.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "7baf1576fb3ac89baf625f090cbae51258c35e63bfdf83a829101d2b9698e111"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/death_left_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "fc9c57505f8c1458a4afe7f37d07271f499b091140bd3f264d5eb9b87ee9ce55"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/death_left_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "f50d121d1133cc0edef9e98d810378d97a9a1a79731274657539ee2b391f27e2"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/death_left_2.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "e4f044b251911761fb0a907b5d49c82eb1f7feaba969663cb6ec7dbfb59b3f4b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/death_right_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "9a4dcfa5e7d503c2d7475cdcefc38a8d11fa7e2ac6c7fac1fec362b08568274b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/death_right_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "70e559e5b80b80c6b915df334962104cffeb6edff9c0606d2379aeae218bff4d"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/death_right_2.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "6a6ab26f1381c449e26f78cc969f7f1350df3410666d91149c57718ca9b302ea"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/death_up_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "cf5df96607739fdca8529cebf25f81fdf8b2015a382bfca3c4c61a97b423efcc"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/death_up_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0bc2c90ac01a73737297d080e9a38bdda1c75a98fecf631e1ffe5e6784e60d3f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/death_up_2.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "61560ebb8ceea5697d9da4618248cca22edba91a72d49f79d9099b4f3afba27e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/hit_down_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "59bb1566e38ac9166a942f50fb05b9ec035a8a298e9335ac5674220d893202cc"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/hit_down_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2bf91c19cfc4959decc07a1a2b3d49497d48a691bf7f5360e688d97cc0b7f25b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/hit_left_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "a49f2f08f4c111667c51d163bbb97aa31ccbf1ec07ccc32eee70e5ba1187906b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/hit_left_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "7c25f8215b7601f1afbf31a646d7774e123fb8a70fd325ff054e4f39be6d1130"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/hit_right_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c9006031f61c16066af09c73a29dc369c950bec3db12291b641b654d9064439b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/hit_right_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "4c565c43f46ce2feb29143fa7dde9cc37b8976c118c35e67e8ed61844c855560"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/hit_up_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "69ac36f391b52a4f7e0df7c09b240b55e18d5281577219219f3d5058dba41d2a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/hit_up_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "4db02491c752bf7c505b6e5718b7e725de9e7ff7b92e9c1823c5a49e4766c98a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/idle_down_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "d1245baa14ae5122b736cc27b3f23e19667ef8817373dbf4544e8fa21d173327"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/idle_down_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "ed4c0d5b262b5d01d9a04af0b5d4668c160684b71c0e7104e513899e2b9541b0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/idle_left_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "524c497367d317a5df56fe20803daf9dad2235671473c1d98be789c3ded9eb73"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/idle_left_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "d9c6b2fadc6387b0734e3f50a8d307d0cdc93f0e0ac2c41cdad5bd189044f08a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/idle_right_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "110c6e6d7c4186e73bc8a9644a563f980d6722aec0a234edc9ad3dc117b25e55"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/idle_right_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c5d9ffaf654a303702ba1770a244f1b04c907323b9383f6475d7c4d90ec6c2fa"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/idle_up_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "6851207925d5794ef2fafe02379efaaf54203c3a5750e47471c1af53d3426367"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/idle_up_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "91a7ceb070a88fded1bfdebcbe0a2a476ae9e41e258df4ec337e546911fd8c60"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_down_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c90103c0efc7485229af3bf84fc5b8086abb1eae0e894826274c3e47fc45c522"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_down_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "4802654111a770c4d893f6966cb8d42dd12bc0595be2da6d8f32fb905b2af19c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_down_2.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "27546ec85d76713335d466fe5e1d2477d43d959837ae39ce494b8015c5336e84"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_down_3.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "f8615bc54b8d71659719435a49a8642b5607d0ad785797afb0577938c6de305f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_left_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "5b44e03fd090a0bcc05c39535c7ff5b8d8d0eedb290a3a0b8d74b09cd8f0e61b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_left_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "934a3dc2d077329453f4d3e00284b863acb4d18e7e0bc797263edc1219fb17b0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_left_2.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0874c8e39ab622c7cda9e0ff3e73f95753cfbb934f862c09dead618e31c6fa5b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_left_3.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "7bfc21493a79d978f3594d0a402762b9e2ab504ed6e0b9bd3bed148ced836b3b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_right_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "6df255157c53e859e9bf037160b4205c9768707a90e5d96e1b3cac5713f384ea"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_right_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "4f454190d4a6e49de7c232c6a85d3b962e50132238233c77cd452c9be17bfd6b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_right_2.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c7a57095cf7b0be3ecf82506b0f5596ae92d2742c4607a6fc268e1a4da689422"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_right_3.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "88da95b7282604388bedf7a7c1b5372cf8bb408f1df2e5aacd3ed0efe2e39b4b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_up_0.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "7ae3d2f803c8ebb961bc3444b78ba2a4f0d22edac59798a1311879a8e412adb7"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_up_1.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "1c19ed64ff60412c9eb70cbbb6e27c96b3d06d93e0145699bbc9934004b2c146"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_up_2.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "ef5cd908315f7411bab9d57776738b7b7b4dd3c1d975e99f3767fb0a555025c7"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/frames/walk_up_3.png",
+      "size": [
+        128,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "3a32f66673c5d1ba805c99a369345a4bc97d9d6aab646417e1a79b91ec6c9b5b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/sa_xa/spritesheet.png",
+      "size": [
+        1024,
+        768
+      ],
+      "mode": "RGBA",
+      "sha256": "a60b4f01d3d6bd50ff182bd311d0a31b4d9f263827bd827853fac961f642c844"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "67637d223c83e42d08245ba396f960512eb63c322c555d7c48e7ef3c25bce312"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0c4239e1844bc30812ffc29787e28ce27880c7814df4e390f1928f3b6adf8ceb"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_down_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "07563ee44dff68948bfba9a2b53f72a4035885d56448cbc82833fe9f74202832"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_down_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "81de9d7c7a7f48213963b023f92a4ae4a7b700582b1566c81fdc71331b684d74"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "284a3663dfdf2afe68f63bce3aca8b4fd1de3bdc87aec32cca5d8991d0515124"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "939a71af3f27f0297436293cc8889f03b56d26c38f440c5b95056f280ed2de0d"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_left_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2c3af0a3cd89c45c5c61e5164274b48d374bd811bdfeb9de61fe1706f7523ae6"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_left_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c7b94eb89cfad10600143940b4d7cdecffed416a8b797918b17836dd9355bde5"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "e40ff24578fac734b982cab236f3a3ed88e4cb5210f20eee4cd3a49668bdc2d6"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "da73bf3c40dcc4fb744eca31e80a7f7bfe3e9346f6b81b78ef4ea26578339cc1"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_right_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "6e5e42b498075318c567b38f315853224198d9a5c24f2a329c0bb162ecaca492"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_right_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "fdd0052701308f6d5a34f2b2a3c55b85cc419095ad00920d3a71a4e1d268b278"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "9537a91201903f998a59a612a8e0b76dff1eda0bae2461e5fc897206f07ae5d7"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "f92dff65baf8a5612344b8501aa3e1db9697d380123d1ae4d84023f926cff9b5"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_up_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "d012d334b06527e23c4c9d4985ae29cd976539f6cd9b3ea6d9a2eaa3bba37585"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/attack_up_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "6e38fdc1678aa9ade8ac48b4d67522f206344350bb4dfacac2fd0495b474ed92"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "ee4fad2e1d63dafeb0d94b7352bed47bf3523b483344eb48b045d7c0641ab33b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "58c9541463896d38499c555818527cacf478323f9a1a5c0a3dbf6aa5cd99644f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_down_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "e1be83361f35db0a7e8b9a2e72a6cf24ea0dbe978ed8638bdda4c6f4b1d06abd"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_down_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "66b1c214684f00d50e62241c41b0f275d33d244233ff2238560077fec9d5d733"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "7e2950f297f4cb51c3c98d1ac57b0fa2e188838f3b513203be8795d6edf8b933"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "02d0c227d6ce3e2e3d22aeb1326ef69b3bd7efcfa90fab22cd2cafcd06c46dbe"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_left_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "648c85bc31c01f2362b577533dda34d9c9fa9d198b53e9910f1bef863109efcc"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_left_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "52d2bb7acae5783aca500876bef740f054879d23d65a28c451f74aef1640c98d"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "32396f021f57e3699577d5d699bb257a92c080e7cd4996ef795106303238aac0"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "a821230d1726f21b32d53c0d29771e1da866cb530740dc3f3055352d211adb18"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_right_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0aaa417603cabeb1e51d97933d9ef90bc5cce5843abbdf7fefc77775b116c703"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_right_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "10166f9c32ae1cd9f43049dab2f7b1d96efa195ba1828f085afaf77a01319980"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "73a70fdf1e4c512093c252afc8fa51149b563b8a8e4b6d2ea49fd1251399d1b2"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "9246412ecdec0006d8540a11ebf50e5589177fa417e1d7df60ccaa25d048899d"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_up_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "3cb39eb8ebe2eafa805f43b8fd0d825b71d1c796cd46f9b097066fcacf998140"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/death_up_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "3cfe6745d93978ff1e32930c4e3d7e5867b095cf4911b874f808e8a7dcd5b34f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/hit_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0344ffbb2a6a92c45c759bf07a5cbccba97ee13a1e1e8fbc8165a08f9eaa6f4f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/hit_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "1a5dd64cb7de640dcb350b145a23ea5a9fdf4bba80cea3bc2e66dc576a0132e7"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/hit_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "0b0104df36cab4f2a011e770b057d1359a080c9832486bf5ba05865c57e9190f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/hit_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "48f053c4876860a7d3b8e1e6bc67d9e0bf276d41891d4edfe1c4dbbb6190ff4b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/hit_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "7cb5747c8253d84e6a16514318ae36f603a14f0ab3dad7d989173f9068ac5098"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/hit_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "3c8843b7994726aeebeb2ef83c7617cf6f14fa44bf93a24dcd3d17f2d6719b6b"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/hit_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "99552a969bed1885fac006f3a0af71da2217ab1b72209da8baaf71b54df5c20f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/hit_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "a536abd20f34ef02e8074cd3d72de88829b3b22a693f93c828a465f19676894a"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/idle_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "5cb488467c949ea1d11daaa313adbdcb8b39e018c00e492714002ae0300b61ac"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/idle_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2193dc9a6d914126dd0ed620d36cdc3275962576e0e275a6817c2f5b21065c25"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/idle_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "b44eedca8ca6059f17ac741280152bf83a619948b3a3a938f66bcd8762341f41"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/idle_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "8ae96ee53d3d21a443b49f7d231e9f99dfdf1b82119a40fee53bc681226bc40c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/idle_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "78d65ff25e6530817b9e6abd63b83fc1b6980b611d64f7fdf6d072f5b77a7edd"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/idle_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "012e81a74062d456d364260eefeed0ff3f9762f39c91b5e31b772f010e178b12"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/idle_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "400c65a25be47d540301fd86ad8f7b00b937b9e4af54c77378ceda7c803fe4fa"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/idle_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "f6c358b06028267e70fa6e21b6e74974ce876b9d00145734c4e082612b35d82f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_down_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "ea8650b58fdc5a2dde15fa977ee662c20b197e1f03ce9f79579dbbf5295e7db5"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_down_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "4506b29fdfad69159c244bc777f8a320ebf8df14a6ee65cfd4736bc0d0c12b25"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_down_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "bd458e802444d368dd8f0c2ed0de5afcb78c30747635b1843e01f0ea3ecfb0cb"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_down_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "c31f9b226cfd69e9ce84b021af5b5f3c23e4462d14fdf3d5084f663b411b2df8"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_left_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "2b7ad84a4ffcc9e95123ce3f3ad4599415ab86643a5ef47137c6ad4f5c822f4e"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_left_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "8eaa642289a5db92e19acceb16112ce7eca64c6b7e9728ead3ac794d6ee5b6d6"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_left_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "e63e330a4935af8fc1b741e88e83507d7ffe92a3d6ea83e16fad2c6606ef807f"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_left_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "d716ab0f8beed03d55c8ccd4aa3f7efe7b0564c7d94e44308ba8efc53d43b515"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_right_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "b408bc6220dee298ab7479d067fad08523838c2f13b9ef82172965a4c0826532"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_right_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "99f0e6d99eb24c0bb20d54711727791f11aa3e40b20beb774e0080a93706c786"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_right_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "24131fb1e3251471e2e2bbcecfa8c4ff3c4d73ffc5e14b40a645dc0bebea0b8c"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_right_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "980b5636dbe37237e426140f8aa2206ac12c5b034599617297d16652bf2965c7"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_up_0.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "3018e12e7d21ff21cb4a07c392a442e1a804277a8c7006ff01172547fd35cbbe"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_up_1.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "fde720d0fd93fad6ff143a60ef49a9c03f1b2e723c7753fce812618efe99e561"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_up_2.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "ab8913b40bbeef15249d214f5cc1cf2a6778fca62ec8e523864d16c902d80060"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/frames/walk_up_3.png",
+      "size": [
+        112,
+        96
+      ],
+      "mode": "RGBA",
+      "sha256": "65f2ac0d59f911c218882f5d8534da05b21418426bb5fea4a46d52d8283a31be"
+    },
+    {
+      "file": "assets/sprites/creeps/dungeons/desert/xac_uop/spritesheet.png",
+      "size": [
+        896,
+        768
+      ],
+      "mode": "RGBA",
+      "sha256": "da831996e7a8ac50f8465a8579c9dd5e84f41c3a2f6c39c690368fe9516cb4af"
+    },
+    {
+      "file": "assets/sprites/environment/desert/abandoned_temple.png",
+      "size": [
+        160,
+        160
+      ],
+      "mode": "RGBA",
+      "sha256": "f1e5433e8df2ab83174094a8070661a6086733f444f243a2748fcea06dc4cc69"
+    },
+    {
+      "file": "assets/sprites/environment/desert/ancient_monument.png",
+      "size": [
+        80,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "f87e49193794af70edd974d745490cde9241e0a0f99496a2d1bf557206142021"
+    },
+    {
+      "file": "assets/sprites/environment/desert/broken_pillar.png",
+      "size": [
+        64,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "33a56dc647fad54352e570d3cba2d5822b0f0609357b84d9f7916d57491a9342"
+    },
+    {
+      "file": "assets/sprites/environment/desert/cliff_corner.png",
+      "size": [
+        144,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "80b7a01530149a93033dc9490b1a012fdc61a0ea449e6ca6da06e184be3bc106"
+    },
+    {
+      "file": "assets/sprites/environment/desert/cliff_straight.png",
+      "size": [
+        160,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "ffc16f5f4c6e98bf42a60e71f0310d9d4ea94d3f1510e715e31bcb2a5e8199e6"
+    },
+    {
+      "file": "assets/sprites/environment/desert/dead_tree.png",
+      "size": [
+        128,
+        144
+      ],
+      "mode": "RGBA",
+      "sha256": "14f83464c956dbcb0a89558386b7237b508a447c610b9668d5e7362b9def9eab"
+    },
+    {
+      "file": "assets/sprites/environment/desert/desert-scenery.png",
+      "size": [
+        1024,
+        960
+      ],
+      "mode": "RGBA",
+      "sha256": "6eec88395e702ddb9bb77f8c97c2cb37efeea446493476da4881d313f7551190"
+    },
+    {
+      "file": "assets/sprites/environment/desert/desert_barrel.png",
+      "size": [
+        56,
+        64
+      ],
+      "mode": "RGBA",
+      "sha256": "014ac35417bbf5f224c9fecde1d98502c7d35ba7da9173adb60d2ba8c521ac2a"
+    },
+    {
+      "file": "assets/sprites/environment/desert/desert_crate.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "sha256": "1deb81a5b8fc81dd56d9e27efe45c31a8be06c4d029536337a6af704ca0d226c"
+    },
+    {
+      "file": "assets/sprites/environment/desert/dry_bush.png",
+      "size": [
+        64,
+        56
+      ],
+      "mode": "RGBA",
+      "sha256": "21868ffe755425838943ee5f4f6257a5e09baa8530f3723165b65d612b21657f"
+    },
+    {
+      "file": "assets/sprites/environment/desert/dungeon_entrance.png",
+      "size": [
+        192,
+        176
+      ],
+      "mode": "RGBA",
+      "sha256": "2f48f526f0303c02627587c5c44306c34fd92cc49f30205539e05a4a51602c28"
+    },
+    {
+      "file": "assets/sprites/environment/desert/dungeon_exit_portal.png",
+      "size": [
+        192,
+        176
+      ],
+      "mode": "RGBA",
+      "sha256": "44695a2625e634d4f95be11107ae6b2de0257f68101a54790dfa2d4907659a8d"
+    },
+    {
+      "file": "assets/sprites/environment/desert/dust_decal.png",
+      "size": [
+        96,
+        48
+      ],
+      "mode": "RGBA",
+      "sha256": "299b510f591fcd5b650f939b9fd349e908e54dcb7818dc9bae04483108486a21"
+    },
+    {
+      "file": "assets/sprites/environment/desert/gate_steps_base.png",
+      "size": [
+        192,
+        104
+      ],
+      "mode": "RGBA",
+      "sha256": "64c14445878ae65112133aefd323c542a4d5e0a40328d6952e6236031bd046bd"
+    },
+    {
+      "file": "assets/sprites/environment/desert/guardian_lion_ruin.png",
+      "size": [
+        80,
+        112
+      ],
+      "mode": "RGBA",
+      "sha256": "d414d1e493203abe3208175c2237682326d88984ddcba3fa59e5f8a4f518dea9"
+    },
+    {
+      "file": "assets/sprites/environment/desert/pebble_scatter.png",
+      "size": [
+        64,
+        40
+      ],
+      "mode": "RGBA",
+      "sha256": "1687f2276fff96e04f40f3ef0fa98fe6652229c6deba4cab7e6f6fad801c3e70"
+    },
+    {
+      "file": "assets/sprites/environment/desert/ruin_wall_horizontal.png",
+      "size": [
+        160,
+        88
+      ],
+      "mode": "RGBA",
+      "sha256": "57f891af2c92c36994761508a10a645d399987c924361ef6f5e4d43d631db148"
+    },
+    {
+      "file": "assets/sprites/environment/desert/ruin_wall_vertical.png",
+      "size": [
+        80,
+        128
+      ],
+      "mode": "RGBA",
+      "sha256": "7f95b6f62e3edefad9a2b90e89643bca9e80085abc69bfa54c8e27dc705eda28"
+    },
+    {
+      "file": "assets/sprites/environment/desert/ruined_gate_frame.png",
+      "size": [
+        192,
+        144
+      ],
+      "mode": "RGBA",
+      "sha256": "b62f5008c174634b7f69799487b1e71bcba69fddeab3b63c9524828d34df6537"
+    },
+    {
+      "file": "assets/sprites/environment/desert/ruined_gateway.png",
+      "size": [
+        192,
+        176
+      ],
+      "mode": "RGBA",
+      "sha256": "9ca589c450d294ac878853ecb3209c15649a44eb09a6cb13cec5813cf71c751e"
+    },
+    {
+      "file": "assets/sprites/environment/desert/sandstone_rocks.png",
+      "size": [
+        96,
+        80
+      ],
+      "mode": "RGBA",
+      "sha256": "ed53a25abde08269146b294c202622fbed6b2cb8c9d4da8bc3d8d96884838b33"
+    },
+    {
+      "file": "assets/tilesets/desert/cracked_dry_earth-material.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "sha256": "274fa49f43f470969f1c54f4619884d968c241af1b2b49d10dba62ea202c3dea"
+    },
+    {
+      "file": "assets/tilesets/desert/desert-terrain.png",
+      "size": [
+        512,
+        704
+      ],
+      "mode": "RGBA",
+      "sha256": "fc85a116be5a04617d01a9ac0282bfb19d0f426bf3b32b2c0dcf0bc7de7bc09f"
+    },
+    {
+      "file": "assets/tilesets/desert/dune_sand-material.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "sha256": "2f55534a8e9a2d869d9d93b647ab7a754d0bd009d6120df81ec9b93f6fbb1899"
+    },
+    {
+      "file": "assets/tilesets/desert/rocky_ground-material.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "sha256": "44c9f99ecb19ad255c6b245940430d914acefd4b83030b33c69e042a21caa422"
+    },
+    {
+      "file": "assets/tilesets/desert/rough_sand-material.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "sha256": "d171305ba6e4ab8b020bc185fc002700958a9a4ea95583fca0e76027f8984250"
+    },
+    {
+      "file": "assets/tilesets/desert/sandstone_path-material.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "sha256": "b33297a218d242198b91910b654e2a2e45c2fd2070791095f20de6d6bcc960aa"
+    },
+    {
+      "file": "assets/tilesets/desert/smooth_sand-material.png",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "sha256": "9f8026fdde282f96e9b93c682dddb065ae367c3d75a461501a406dfdf23839dd"
+    }
+  ]
+}

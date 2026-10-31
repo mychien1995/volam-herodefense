@@ -1,0 +1,1896 @@
+{
+  "id": "beach_hai_vu",
+  "nameVi": "Hải Vu",
+  "category": "enemy",
+  "status": "produced_asset_only",
+  "conceptApproval": "Automatically approved by Phase 2C user instruction, 2026-10-31",
+  "sourceConcept": "assets/concepts/dungeon-creeps/beach/hai_vu_concept_v01.png",
+  "sheet": "assets/sprites/creeps/dungeons/beach/hai_vu/spritesheet.png",
+  "atlas": "assets/sprites/creeps/dungeons/beach/hai_vu/atlas.json",
+  "source": "assets/sprites/creeps/dungeons/beach/hai_vu/source/hai_vu_v01.aseprite",
+  "frameWidth": 144,
+  "frameHeight": 128,
+  "bodyScaleReference": {
+    "humanoidHeight": 48,
+    "crabWidth": 64,
+    "approvedHeroBodyHeight": 44
+  },
+  "footPivot": [
+    0.5,
+    0.828125
+  ],
+  "feetPixels": [
+    72,
+    106
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "cast",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "water_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "cast",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "water_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "cast",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "water_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "cast",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "water_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/idle_down_0.png",
+      "sha256": "0c531c77a1aa032a5518f85a220b14b1701a35d7ace9aa68fb7f093014912b5f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          59,
+          29,
+          241,
+          282
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          99.0,
+          282
+        ],
+        "placement": [
+          55,
+          58
+        ]
+      }
+    },
+    {
+      "name": "idle_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/idle_down_1.png",
+      "sha256": "bb8081361ebe45707b3bee395f2ced0514ba22c04bed7eccc3f9bf7d0f718689",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          378,
+          28,
+          222,
+          283
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          111.0,
+          283
+        ],
+        "placement": [
+          53,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_down_0.png",
+      "sha256": "10c7f4062b56170a31a1114c12e574d104f17c1bc3d907a0a37af2744729d8eb",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          668,
+          34,
+          261,
+          277
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          139.0,
+          277
+        ],
+        "placement": [
+          48,
+          59
+        ]
+      }
+    },
+    {
+      "name": "walk_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_down_1.png",
+      "sha256": "65be4ed62c0345c7b0c581cfdecb2edb0bb6d04f5c476d20723b816fc3ba792e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          990,
+          32,
+          252,
+          277
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          139.0,
+          277
+        ],
+        "placement": [
+          48,
+          59
+        ]
+      }
+    },
+    {
+      "name": "walk_down_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_down_2.png",
+      "sha256": "e07449ba3f7b183a751341dd467ed5e017bdea6649cec92ac734c068ade1daef",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          47,
+          336,
+          246,
+          282
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          144.0,
+          282
+        ],
+        "placement": [
+          48,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_down_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_down_3.png",
+      "sha256": "97a8ca3b38650262db8471a173d5107eb67379ec77c081c5fa34175b0517f168",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          361,
+          335,
+          238,
+          286
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          142.5,
+          285
+        ],
+        "placement": [
+          48,
+          58
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_down_0.png",
+      "sha256": "776ee8b9bf6f2e3073e65c9878f5bebae899780bfd1ca910870b2b706726bf40",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          667,
+          365,
+          255,
+          258
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          87.0,
+          257
+        ],
+        "placement": [
+          57,
+          62
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_down_1.png",
+      "sha256": "e5030276c988ef5b266a1482cc5f2d5053652d245bb5f0b41afe1bef7ca9bf6b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          966,
+          327,
+          269,
+          296
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          103.0,
+          295
+        ],
+        "placement": [
+          54,
+          56
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_down_2.png",
+      "sha256": "6c9fce8716b5b50c89192ad4b15a35fd9df6c592dfb35fa1635f346329e8b209",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          34,
+          642,
+          301,
+          281
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          86.5,
+          280
+        ],
+        "placement": [
+          57,
+          58
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_down_3.png",
+      "sha256": "54135d6b3586fcd7ae4f7354aa4de1d5c5d05b4f6741286648850cdbaec54f68",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          357,
+          650,
+          274,
+          277
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          71.5,
+          276
+        ],
+        "placement": [
+          60,
+          59
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/hurt_down_0.png",
+      "sha256": "df482356ced49aca6621449dd71bdb621c3d652cdce816166f819e38bcdc8019",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          669,
+          677,
+          266,
+          256
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          88.0,
+          255
+        ],
+        "placement": [
+          57,
+          63
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/hurt_down_1.png",
+      "sha256": "40b91b4a4f018dc71b728031af4f7979bb7365aa088d3d420006ad7ace718daf",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          990,
+          661,
+          254,
+          267
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          83.0,
+          267
+        ],
+        "placement": [
+          58,
+          61
+        ]
+      }
+    },
+    {
+      "name": "death_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_down_0.png",
+      "sha256": "02441066b59432cbd456c8448a2cfec1d69bfe039f5b98db420b2d0642ff8299",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          35,
+          966,
+          262,
+          237
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          121.0,
+          237
+        ],
+        "placement": [
+          51,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_down_1.png",
+      "sha256": "f343983279006794173b7786adc6af8316f5c29cadc832b8d7e6236a8e7c7590",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          337,
+          998,
+          290,
+          212
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          159.0,
+          212
+        ],
+        "placement": [
+          45,
+          70
+        ]
+      }
+    },
+    {
+      "name": "death_down_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_down_2.png",
+      "sha256": "ebfa3bb36eb07b79aa0baf3dc367a9eb3dc829df3c4f185c3f7f4ffb2879b864",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          642,
+          1024,
+          288,
+          177
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          96.0,
+          177
+        ],
+        "placement": [
+          56,
+          76
+        ]
+      }
+    },
+    {
+      "name": "death_down_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_down_3.png",
+      "sha256": "63e607f924e5be01635172ef6dab5f770f88821f05b0269922e300d1bd02bc1c",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_down_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          941,
+          1038,
+          297,
+          160
+        ],
+        "fixedSourceScale": 0.16991150442477876,
+        "sourceFootInCrop": [
+          194.0,
+          160
+        ],
+        "placement": [
+          39,
+          79
+        ]
+      }
+    },
+    {
+      "name": "idle_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/idle_left_0.png",
+      "sha256": "f5cfae6259b59284e34e085397f61261812268799b533aa23495c23ffbbb7e52",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          46,
+          38,
+          261,
+          283
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          154.0,
+          282
+        ],
+        "placement": [
+          46,
+          58
+        ]
+      }
+    },
+    {
+      "name": "idle_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/idle_left_1.png",
+      "sha256": "a98107638adebdd85b76917d5a8f0c4637b8e64fab52a686a03ac33dc141fd5a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          343,
+          36,
+          258,
+          285
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          143.0,
+          284
+        ],
+        "placement": [
+          48,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_left_0.png",
+      "sha256": "fa2217b3bd9ef6b3b8b633081d6852c010c32a90ce646b81dc84197c441917e1",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          632,
+          51,
+          290,
+          270
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          106.0,
+          269
+        ],
+        "placement": [
+          54,
+          61
+        ]
+      }
+    },
+    {
+      "name": "walk_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_left_1.png",
+      "sha256": "ae01dfc56d86bc8bb97179e21de2e92be26a87cac7068ed88e0c4dec07f0eba0",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          961,
+          50,
+          272,
+          269
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          175.0,
+          268
+        ],
+        "placement": [
+          42,
+          61
+        ]
+      }
+    },
+    {
+      "name": "walk_left_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_left_2.png",
+      "sha256": "31ec97c193bcdd426485306c71cb9f98ee0a71bc7a9a6208452a18c082ed7cfe",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          47,
+          353,
+          270,
+          274
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          104.0,
+          273
+        ],
+        "placement": [
+          54,
+          60
+        ]
+      }
+    },
+    {
+      "name": "walk_left_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_left_3.png",
+      "sha256": "8a63921b6f3c7184d1c183b3b3307ff5c2f105a072c0864184d8896a6981c982",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          353,
+          355,
+          267,
+          267
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          172.0,
+          267
+        ],
+        "placement": [
+          43,
+          61
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_left_0.png",
+      "sha256": "1503820d3b16eea9ba4f59a298dd7448bc44f383f6a7fcdbf331e468673354ee",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          642,
+          402,
+          310,
+          224
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          233.0,
+          223
+        ],
+        "placement": [
+          33,
+          68
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_left_1.png",
+      "sha256": "4479a0d3c18b3e3ed47c77d5010ab7a0e2c25dc009df113393539e65328830cb",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          963,
+          349,
+          283,
+          279
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          192.0,
+          279
+        ],
+        "placement": [
+          40,
+          59
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_left_2.png",
+      "sha256": "14015495dae9db69566c3bd0603d5e3aeb27e74189dfbfc408ca46df945c6c86",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          10,
+          661,
+          378,
+          241
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          296.0,
+          240
+        ],
+        "placement": [
+          22,
+          65
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_left_3.png",
+      "sha256": "980c9fe9300b830d22ffce2e1d4851ecf10ed01e26095289921c34508d81e4f5",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          318,
+          655,
+          338,
+          247
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          218.5,
+          246
+        ],
+        "placement": [
+          35,
+          64
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/hurt_left_0.png",
+      "sha256": "9657273a65a5fd8b9be0e74c47430f1c8aba48fcb704264c0c9222c4a16a5d64",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          630,
+          668,
+          307,
+          234
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          188.0,
+          233
+        ],
+        "placement": [
+          40,
+          67
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/hurt_left_1.png",
+      "sha256": "245f87f8f05008bb7dadcc1ce59c9ba357ccfe8544f897f1721c962238c4f904",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          988,
+          668,
+          261,
+          236
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          170.5,
+          236
+        ],
+        "placement": [
+          43,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_left_0.png",
+      "sha256": "2ed468d0b42720bc8cf265700311c730cc3e802ded55ae554d67851ee75b6be7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          71,
+          956,
+          243,
+          219
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          141.0,
+          219
+        ],
+        "placement": [
+          48,
+          69
+        ]
+      }
+    },
+    {
+      "name": "death_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_left_1.png",
+      "sha256": "3cf8ac89e783035a4eb97d1a58d7b6befb95a0e2529a345773c36894e2af2e06",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          345,
+          1003,
+          289,
+          191
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          126.0,
+          191
+        ],
+        "placement": [
+          51,
+          74
+        ]
+      }
+    },
+    {
+      "name": "death_left_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_left_2.png",
+      "sha256": "cd982c8b35fc851fcdad61d5ab40c6fa529d4f67d407aa57a98b7ca49e948c17",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          648,
+          1028,
+          275,
+          153
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          86.0,
+          153
+        ],
+        "placement": [
+          57,
+          80
+        ]
+      }
+    },
+    {
+      "name": "death_left_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_left_3.png",
+      "sha256": "59d555f7714c316a336603b5ea1291a837c6d3c1b0bf38312a9861d1b74e3716",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_left_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          952,
+          1047,
+          294,
+          134
+        ],
+        "fixedSourceScale": 0.16901408450704225,
+        "sourceFootInCrop": [
+          119.0,
+          134
+        ],
+        "placement": [
+          52,
+          83
+        ]
+      }
+    },
+    {
+      "name": "idle_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/idle_right_0.png",
+      "sha256": "1bc9075e40323d530ef6f80f93c685c378f47d479fab4f96bc87fb16151aa4a8",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          69,
+          44,
+          227,
+          256
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          85.5,
+          256
+        ],
+        "placement": [
+          56,
+          58
+        ]
+      }
+    },
+    {
+      "name": "idle_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/idle_right_1.png",
+      "sha256": "f687b7979e542550c75020a11fd9283762f6c42d55f926270fe936a09f0ddad5",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          379,
+          48,
+          222,
+          252
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          91.0,
+          252
+        ],
+        "placement": [
+          55,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_right_0.png",
+      "sha256": "ca0801cb4cc457f1a84c445fbd77820e93877ac01696a00bfe10bcf2c688d1c2",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          683,
+          57,
+          252,
+          243
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          140.0,
+          243
+        ],
+        "placement": [
+          46,
+          60
+        ]
+      }
+    },
+    {
+      "name": "walk_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_right_1.png",
+      "sha256": "9f3b1217260f77f742e19d4d2d2b8867e89403c6201f14bacad074f67974ee4e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1007,
+          52,
+          260,
+          247
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          157.0,
+          247
+        ],
+        "placement": [
+          42,
+          59
+        ]
+      }
+    },
+    {
+      "name": "walk_right_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_right_2.png",
+      "sha256": "3f46529c2c28ae65089161e05a79d12aa7fac7a758f451b23651818c18ae9b23",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          59,
+          335,
+          261,
+          252
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          158.0,
+          252
+        ],
+        "placement": [
+          42,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_right_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_right_3.png",
+      "sha256": "aec08bd75cb9a964c7e62be817ea7988725e1dfc9ecbe9acfe6340793c48643c",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          368,
+          336,
+          262,
+          250
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          91.5,
+          250
+        ],
+        "placement": [
+          55,
+          59
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_right_0.png",
+      "sha256": "7e8f566591951e401a8ace4cc71d811285c16f7130868214ac6737851e176d79",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          672,
+          366,
+          313,
+          222
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          188.0,
+          222
+        ],
+        "placement": [
+          36,
+          64
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_right_1.png",
+      "sha256": "10179e8bf258e40f941ee943a2603be0e3a887adb066428b18dfbd1914c93254",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          989,
+          337,
+          291,
+          261
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          77.0,
+          260
+        ],
+        "placement": [
+          57,
+          57
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_right_2.png",
+      "sha256": "5bc7aa5f26a64ad2648f1d98373b2ca4459eb0c4419d183505e66fbf12650e8b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          36,
+          632,
+          329,
+          241
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          180.5,
+          240
+        ],
+        "placement": [
+          38,
+          61
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_right_3.png",
+      "sha256": "a688998f466eb584a666cc982ea3a6b8fbd73676bf6c385ce0075ffe48b38a8b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          379,
+          632,
+          299,
+          241
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          162.0,
+          241
+        ],
+        "placement": [
+          41,
+          60
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/hurt_right_0.png",
+      "sha256": "ceb699fc820dbe55bf390ccee8881ae0a65ac7ade494f4f1a750026411c936e8",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          710,
+          665,
+          248,
+          212
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          94.0,
+          212
+        ],
+        "placement": [
+          54,
+          66
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/hurt_right_1.png",
+      "sha256": "1b93b45c57f7a20ff47ee7d922be836d252ee3d2dbcb5e7dca9b677d957a9046",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1009,
+          655,
+          279,
+          222
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          86.0,
+          222
+        ],
+        "placement": [
+          56,
+          64
+        ]
+      }
+    },
+    {
+      "name": "death_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_right_0.png",
+      "sha256": "3925ac9832906ab60f4c1e707ed02eb9285312673c041953ca77659659c8afeb",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          56,
+          950,
+          211,
+          189
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          89.0,
+          189
+        ],
+        "placement": [
+          55,
+          70
+        ]
+      }
+    },
+    {
+      "name": "death_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_right_1.png",
+      "sha256": "38251cf04a13d04eea6f3a5d40aa9ee22c1e8586315412e364ab8abab801c47b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          333,
+          972,
+          304,
+          171
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          124.0,
+          171
+        ],
+        "placement": [
+          49,
+          74
+        ]
+      }
+    },
+    {
+      "name": "death_right_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_right_2.png",
+      "sha256": "a5ce87842a957850ed7ff0209bb2044b14f7e3db803283635a9c2c962f3e4230",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          634,
+          1004,
+          324,
+          145
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          221.0,
+          145
+        ],
+        "placement": [
+          30,
+          79
+        ]
+      }
+    },
+    {
+      "name": "death_right_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_right_3.png",
+      "sha256": "404137816bac5ec96565c6409b7fc4e2309519bff6087a4fd5964a74f1b6a95f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_right_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          976,
+          1018,
+          318,
+          135
+        ],
+        "fixedSourceScale": 0.1889763779527559,
+        "sourceFootInCrop": [
+          196.0,
+          135
+        ],
+        "placement": [
+          35,
+          80
+        ]
+      }
+    },
+    {
+      "name": "idle_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/idle_up_0.png",
+      "sha256": "6778aae3d86fbbf99f408769348a026eb63f424b718d6ad28177495fbd3d4bdf",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          70,
+          57,
+          210,
+          236
+        ],
+        "fixedSourceScale": 0.20512820512820512,
+        "sourceFootInCrop": [
+          86.0,
+          236
+        ],
+        "placement": [
+          54,
+          58
+        ]
+      }
+    },
+    {
+      "name": "idle_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/idle_up_1.png",
+      "sha256": "319af49cb6bfb93784ed818b44e741cfbefcf2188f184fbc9caf0de904101ef1",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          379,
+          62,
+          186,
+          232
+        ],
+        "fixedSourceScale": 0.20512820512820512,
+        "sourceFootInCrop": [
+          74.0,
+          231
+        ],
+        "placement": [
+          57,
+          59
+        ]
+      }
+    },
+    {
+      "name": "walk_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_up_0.png",
+      "sha256": "9855b7a498f04f810453d208c1c02b7c02156b86fd36c6da44577770d4505fc9",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_walk_corrected_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          301,
+          11,
+          359,
+          482
+        ],
+        "fixedSourceScale": 0.1032258064516129,
+        "sourceFootInCrop": [
+          180.0,
+          481
+        ],
+        "placement": [
+          53,
+          56
+        ]
+      }
+    },
+    {
+      "name": "walk_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_up_1.png",
+      "sha256": "ee5a1bdb370d726175ba754f45508b907e3c878e06e69db202432647d8c4a967",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_walk_corrected_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          895,
+          26,
+          362,
+          463
+        ],
+        "fixedSourceScale": 0.1032258064516129,
+        "sourceFootInCrop": [
+          196.0,
+          462
+        ],
+        "placement": [
+          52,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_up_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_up_2.png",
+      "sha256": "ccbb9d642a414e5c0fb2310be5e21175895f7d5d48fb63aa6718896a3ebc51db",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_walk_corrected_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          291,
+          516,
+          377,
+          467
+        ],
+        "fixedSourceScale": 0.1032258064516129,
+        "sourceFootInCrop": [
+          173.0,
+          466
+        ],
+        "placement": [
+          54,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_up_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/walk_up_3.png",
+      "sha256": "96d1f52cbfe1d6d6e707b2292783f37b03f6a2fac3bdc3cd28f77ad500e0ce97",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_walk_corrected_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          904,
+          524,
+          366,
+          454
+        ],
+        "fixedSourceScale": 0.1032258064516129,
+        "sourceFootInCrop": [
+          167.0,
+          454
+        ],
+        "placement": [
+          55,
+          59
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_up_0.png",
+      "sha256": "ed7174f0c392fae83519c2e47aef9ebc828d03758f486bc17263992b12a03193",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          679,
+          394,
+          233,
+          213
+        ],
+        "fixedSourceScale": 0.20512820512820512,
+        "sourceFootInCrop": [
+          123.0,
+          213
+        ],
+        "placement": [
+          47,
+          62
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_up_1.png",
+      "sha256": "fb51ed10cc9d5720e7d9f5aaf43714cdcf769bf5dc5bc7b715ebcfab5ac471c1",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          987,
+          318,
+          237,
+          295
+        ],
+        "fixedSourceScale": 0.20512820512820512,
+        "sourceFootInCrop": [
+          149.0,
+          294
+        ],
+        "placement": [
+          41,
+          46
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_up_2.png",
+      "sha256": "0b8340f022f4e647440a9b87c0eca72e3d9623e873019f46258138234d770dfa",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          50,
+          651,
+          269,
+          254
+        ],
+        "fixedSourceScale": 0.20512820512820512,
+        "sourceFootInCrop": [
+          168.0,
+          253
+        ],
+        "placement": [
+          38,
+          54
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/basic_attack_up_3.png",
+      "sha256": "8a594805d3cb8524d89198601a97593c2a67617c4114b008d671f5e7229d5f8c",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          357,
+          670,
+          253,
+          231
+        ],
+        "fixedSourceScale": 0.20512820512820512,
+        "sourceFootInCrop": [
+          158.0,
+          231
+        ],
+        "placement": [
+          40,
+          59
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/hurt_up_0.png",
+      "sha256": "abcddaa7c939838c86695808b249d434ce99a5fb15f2eb194238f80809bc2dd0",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          669,
+          663,
+          253,
+          244
+        ],
+        "fixedSourceScale": 0.20512820512820512,
+        "sourceFootInCrop": [
+          96.0,
+          244
+        ],
+        "placement": [
+          52,
+          56
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/hurt_up_1.png",
+      "sha256": "4b30c139b03217fe3ec4e6766ab31cde53e8b9c8c727c2681eb9828b93aa982f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1000,
+          685,
+          218,
+          220
+        ],
+        "fixedSourceScale": 0.20512820512820512,
+        "sourceFootInCrop": [
+          104.0,
+          219
+        ],
+        "placement": [
+          51,
+          61
+        ]
+      }
+    },
+    {
+      "name": "death_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_up_0.png",
+      "sha256": "a599b649e955e99d7e9a082b3f7c3b81c6d9c3a923b7bc95bcbd93f124cb50aa",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          60,
+          972,
+          213,
+          217
+        ],
+        "fixedSourceScale": 0.20512820512820512,
+        "sourceFootInCrop": [
+          108.0,
+          217
+        ],
+        "placement": [
+          50,
+          61
+        ]
+      }
+    },
+    {
+      "name": "death_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_up_1.png",
+      "sha256": "2b7a7bcc78941c911fc3c3a245714450af06730601dffc28d0e93ee5c5debbb3",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          351,
+          984,
+          244,
+          201
+        ],
+        "fixedSourceScale": 0.20512820512820512,
+        "sourceFootInCrop": [
+          112.0,
+          201
+        ],
+        "placement": [
+          49,
+          65
+        ]
+      }
+    },
+    {
+      "name": "death_up_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_up_2.png",
+      "sha256": "d9b313139298f24bcd5aece6eeb5a7dcd3343750720e96d1f72bb89a8dda019b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          646,
+          1070,
+          279,
+          114
+        ],
+        "fixedSourceScale": 0.20512820512820512,
+        "sourceFootInCrop": [
+          100.0,
+          114
+        ],
+        "placement": [
+          51,
+          83
+        ]
+      }
+    },
+    {
+      "name": "death_up_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_vu/frames/death_up_3.png",
+      "sha256": "47e90070681fe966df5dc0a7008c4d1c4eebaab22d83a7176a06754efcf93d72",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/shaman_up_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          948,
+          1069,
+          298,
+          104
+        ],
+        "fixedSourceScale": 0.20512820512820512,
+        "sourceFootInCrop": [
+          145.0,
+          104
+        ],
+        "placement": [
+          42,
+          85
+        ]
+      }
+    }
+  ],
+  "sourceScales": {
+    "down": 0.16991150442477876,
+    "left": 0.16901408450704225,
+    "right": 0.1889763779527559,
+    "up": 0.20512820512820512
+  },
+  "runtimeIntegrated": false,
+  "runtimeVerified": false,
+  "notes": [
+    "Original generated cels; fixed nearest-neighbor scale per source direction; binary alpha245 cleanup.",
+    "Visual animation only. No damage, hit timing, status effect, spawn or collision rules."
+  ]
+}

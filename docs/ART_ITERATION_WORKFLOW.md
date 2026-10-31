@@ -1,0 +1,53 @@
+# Faster art production and staged multiplayer checks
+
+Confirmed by the owner's 2026-10-31 request: start art iteration with two players, optionally three. Retain one six-player combat/readability check at final delivery. Player count does not change image-generator latency; it reduces browser startup, rendering load and repeated debugging cost. Measure each stage rather than promise an unmeasured speedup.
+
+**Lean evidence default (owner request, 2026-10-31):** successful routine frame runs save no PNGs, only console results and one compact machine-readable report. Failures retain a diagnostic PNG and state/log details. Final new-art review saves two arena PNGs (design/scale and natural combat), the required concept comparison/deliverable artwork, provenance and approval record. Add `--evidence review` to the frame command for detailed captures/dumps when investigating a visual issue. Preserve existing historical evidence. Requested concept boards, production frames and comparison images remain deliverables; they are not disposable test evidence.
+
+## Production sequence
+
+1. Inspect the approved concept and an existing production sprite once per batch. Record exact reference paths/hashes and the existing canvas, feet pivot, scale and animation convention. Keep approved inputs locked.
+2. Reuse the existing extraction/assembly/registration workflow. Parameterize enemy definitions, source selection, scale and timing; avoid writing another batch-specific extractor or browser fixture for the same contract.
+3. Validate one representative directional source through extraction and export before expanding the remaining requests. Check weapon count/hand, facing, alpha, source cell separation, feet and scale immediately. This is an internal production check, not an additional owner approval gate.
+4. Retain every valid generated source. Retry the defective pose/direction or coherent animation group only; do not regenerate an entire enemy/batch for one bad hand or staff. Record the exact prompt, references and request start/end times. Batch independent generator requests when supported, without assuming the service executes them concurrently.
+5. Export only changed sources when the exporter supports selection. Match actual source/prompt/reference/config hashes before reusing results, validate the reused files and keep approved-byte guards active. Do not invent a completed asset or skip source/PNG/atlas checks. This policy does not add a new automatic image-generation cache.
+6. Run static frame/atlas/provenance validation first. Only after it passes, run the two-player Phaser frame profile. Correct the affected source or integration and rerun the relevant check. Use three players when checking an extra overlap or peer interaction.
+7. After the final implementation change, run the normal final pipeline once with the six-player profile. Preserve natural combat, damage/death/reward synchronization, multiplayer readability and existing asset regressions. A fast frame pass is never final acceptance.
+8. Record approval using one batched metadata/hash update. Do not regenerate artwork or repeat successful full/browser suites for approval-only bookkeeping.
+
+## Working commands
+
+The existing Waves 13–16 fixture now supports these profiles without changing any approved artwork or game rules:
+
+| Stage | Command | Coverage |
+| --- | --- | --- |
+| Frame files first | `python -X utf8 tools/verify-arena-creeps-13-16.py` | Every source/export/atlas frame, alpha, bounds, timings, protected inputs |
+| Default iteration | `pnpm check:art:frames` | Two real browser clients, all 256 character frames / 80 tags, full cycles, native scale, tree depth, independent instances, authoritative peer movement and projectile/ambient renderer fixtures; development client, zero success PNGs |
+| Extra peer | `pnpm check:art:frames --players 3` | Same frame/renderer coverage with three clients |
+| Final delivery | `pnpm check:final --config playwright.arena-creeps.config.ts` | Full checks plus six-client natural combat, contact FX, hurt/death/rewards and all frame coverage |
+
+The frame-only profile does **not** verify natural combat, contact-hit effects, rewards or six-player behavior. Its JSON explicitly records `naturalCombat: false` and `finalAcceptance: false`. The final command rejects a reduced profile before preparation. Future batch fixtures should reuse this profile/options contract and substitute their actual manifest/wave IDs; these commands do not generate later-wave artwork.
+
+New workflow evidence is saved under `docs/evidence/arena-creep-workflow/{frames|full}-{N}-players-{minimal|review}/`, separate from historical/approved evidence. Reports retain exact observed frame names, measured phase timings, outcomes and acceptance scope. Live frame/completion checks remain mandatory; PNGs are reserved for final new-art review, explicit detailed review or failures. Video and trace recording remain disabled.
+
+The frame command prepares assets and compiles the current sources once, then uses this fixture's Vite development client. It avoids an unused production bundle build while iterating. The `--dev-client` shortcut is restricted to this known development-client fixture and rejected in final mode. The final pipeline retains its production build and all asset checks.
+
+Default iteration performs independent-actor, native-pixel, foreground-depth and projectile checks without success captures. Detailed review captures the three prior milestone views; detailed final review retains the full gallery. Default final review keeps `arena-idle-down.png` and `arena-natural-attacks.png`. All profiles still run their original assertions. Reduced capture frequency is not a reason to skip inspecting a new/changed design before approval.
+
+Frame observation waits stop after the required drawings and complete cycles are observed, with bounded failure deadlines. They use the existing Phaser observation sets instead of repeatedly sampling every live sprite at 25ms intervals. A timeout or missing frame fails the run; it is not a skipped check.
+
+## Measured workflow verification — 2026-10-31
+
+- Initial two-player profile, retaining the old screenshot frequency/production build: **200.96s end to end**, 165.49s browser stage, 158.26s inside the fixture. This demonstrated that reducing client count alone did not guarantee a faster run.
+- Optimized `pnpm check:art:frames`: **87.02s end to end**, 70.40s browser stage, 64.66s inside the fixture. Two actual clients observed **256 frames / 80 tags**, full cycles and one-shot completions; all pose origins/depth checks, native-pixel/depth/projectile fixtures and real peer movement passed. Three milestone PNGs were captured, the native-pixel PNG was opened, and the browser error list was empty. `naturalCombat` and `finalAcceptance` are both false as required.
+- Phase timings in the optimized fixture: services 1.12s; two clients 31.72s; director/asset fixtures 2.00s; directional frames 20.76s; scale/depth/FX 7.64s; peer input 1.24s; final assertions 0.18s. Source: `docs/evidence/arena-creep-workflow/frames-2-players/integration_verification.json` and `frames-2-optimized-check.log`.
+- Background activity differed during these measurements (81 Node and 55 Edge processes were present during inspection). These are observed before/after timings, not a controlled benchmark or a guaranteed percentage improvement. No image-generation latency improvement is claimed. Generation savings rely on reusing valid sources, early source validation and focused corrections as described above.
+- The three-player option and invalid/final-profile guards are covered by regression tests; live browser verification for this workflow uses the default two-player profile and final six-player profile.
+- Final validation: `pnpm check:final --config playwright.arena-creeps.config.ts` passed project/test/tool typechecks, **six workflow regression tests**, **226 unit/integration tests across 20 files**, production build and all **nine configured asset validators**. Its first browser run failed the existing 30-second combat fixture: three heroes died while screenshot/focus waits delayed the shared attack-input loop. That failure is retained as `full-6-players/initial-failure.json` / `initial-arena-failure.png` and in `final-workflow-check.log`.
+- Fixed the test fixture, not gameplay: each browser now focuses once and drives its own normal A key independently of screenshot capture; authoritative cooldowns still apply. Existing ranged helpers start within supporting range in the server-only arrangement fixture. Natural hurt/death completion waits on observed completion events. One actual post-combat PNG replaces per-kill blocking captures. No HP, damage, stats or game rules were changed.
+- Reran **only the affected browser stage** using `node tools/run-playwright.mjs test --config playwright.arena-creeps.config.ts`: **PASS**, one full six-client test in 2.0 minutes. The fixture measured **115.79s**: services 0.72s; joins 52.45s; existing-art/director fixtures 5.87s; all directional frames 31.68s; scale/depth/FX 8.08s; peer input 0.84s; real combat/hurt/death/rewards 15.94s; final assertions 0.22s. All 256 character frames / 80 tags, all 28 FX frames, server stats, invasion definition, six-client HP/rewards and cleanup checks passed; `finalAcceptance: true`, error list empty. Evidence: `full-6-players/integration_verification.json`, `arena-natural-attacks.png`, `arena-natural-deaths.png` and `final-browser-rerun.log`. The successful unit/build/asset stages were retained rather than repeated for this fixture-only fix.
+
+Scoped implementation: `tools/arena-creep-qa-options.mjs`, the existing `tools/verify-arena-creeps-13-16.mjs`, `scripts/check-arena-creep-frames.mjs`, `scripts/check-workflow.mjs`, `scripts/tests/arena-creep-qa-options.test.mjs`, `tests/e2e/arena-creeps-13-16.spec.ts` and the new `package.json` command. This workflow and the development/pixel-art/playtest instructions document the staged policy. No image-generation requests, approved artwork, game-client presentation code or server/core mechanics were changed.
+
+
+Lean capture verification (2026-10-31): six focused policy/guard tests passed; `pnpm check:art:frames` passed in 77.30s end to end (62.00s inside the fixture), retaining all 256 observed frames / 80 tags with zero success PNGs and an 11,838-byte report. No art/runtime/frame/gameplay assertions changed; the previously passed full six-player check was retained rather than repeated for this capture/report-only edit. Historical evidence was preserved. These measured times vary with machine load.

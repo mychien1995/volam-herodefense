@@ -1,0 +1,239 @@
+import type { Ability, ProgressionDefinition } from '@volam/game-core';
+import { abilitySchema } from './ability-schema.js';
+import { skillRankGates } from './progression-data.js';
+
+/** M3C1 numeric proposals at 30 ticks/s. Both styles are strictly melee. */
+export const thienSonBasics: Record<string, Ability> = {
+  thien_son_phien: {
+    id: 'thien_son_phien',
+    nameVi: 'Thiên Sơn Phiến',
+    manaCost: 0,
+    cooldownTicks: 14,
+    effect: {
+      mode: 'arc',
+      damage: 24,
+      range: 62,
+      halfAngle: Math.PI / 2,
+      cleave: 0.7,
+    },
+  },
+  thien_son_dao: {
+    id: 'thien_son_dao',
+    nameVi: 'Thiên Sơn Đao',
+    manaCost: 0,
+    cooldownTicks: 12,
+    effect: {
+      mode: 'arc',
+      damage: 30,
+      range: 58,
+      halfAngle: Math.PI / 4,
+      cleave: 0.3,
+    },
+  },
+};
+const multi = (
+  range: number,
+  damage: number,
+  hits: number,
+  spacingTicks: number,
+  halfAngle?: number,
+): Ability['effect'] => ({
+  mode: 'multi_hit',
+  range,
+  damage,
+  hits,
+  spacingTicks,
+  finisherDamage: 0,
+  finisherRange: range,
+  ...(halfAngle === undefined ? {} : { halfAngle }),
+});
+export const thienSonSkills: Ability[] = [
+  {
+    id: 'lien_hoa_phien',
+    nameVi: 'Liên Hoa Phiến',
+    manaCost: 18,
+    cooldownTicks: 90,
+    effect: multi(78, 16, 4, 4, Math.PI / 2),
+  },
+  {
+    id: 'luc_duong_chuong',
+    nameVi: 'Lục Dương Chưởng',
+    manaCost: 24,
+    cooldownTicks: 180,
+    effect: multi(80, 15, 6, 8),
+  },
+  {
+    id: 'luu_phong_bo',
+    nameVi: 'Lưu Phong Bộ',
+    manaCost: 12,
+    cooldownTicks: 120,
+    effect: {
+      mode: 'dash',
+      distance: 140,
+      speed: 700,
+      radius: 18,
+      damage: 0,
+      stunTicks: 0,
+    },
+  },
+  {
+    id: 'chiet_mai_thu',
+    nameVi: 'Chiết Mai Thủ',
+    manaCost: 20,
+    cooldownTicks: 360,
+    effect: {
+      mode: 'buff',
+      durationTicks: 180,
+      critChance: 0,
+      critMultiplier: 0,
+      movementSpeed: 0.3,
+      attackSpeed: 0.35,
+    },
+  },
+  {
+    id: 'bach_phien_phong_bao',
+    nameVi: 'Bách Phiến Phong Bạo',
+    manaCost: 42,
+    cooldownTicks: 540,
+    effect: multi(115, 22, 10, 7),
+  },
+  {
+    id: 'phi_anh_tram',
+    nameVi: 'Phi Ảnh Trảm',
+    manaCost: 22,
+    cooldownTicks: 180,
+    effect: {
+      mode: 'dash',
+      distance: 150,
+      speed: 750,
+      radius: 24,
+      damage: 58,
+      stunTicks: 0,
+    },
+  },
+  {
+    id: 'truy_hon_dao',
+    nameVi: 'Truy Hồn Đao',
+    manaCost: 18,
+    cooldownTicks: 120,
+    effect: {
+      ...multi(72, 30, 2, 5, Math.PI / 3),
+      slowedBonus: 0.4,
+    } as Ability['effect'],
+  },
+  {
+    id: 'phong_anh_hoan_vi',
+    nameVi: 'Phong Ảnh Hoán Vị',
+    manaCost: 20,
+    cooldownTicks: 240,
+    effect: {
+      mode: 'dash',
+      distance: 65,
+      speed: 650,
+      radius: 18,
+      damage: 0,
+      stunTicks: 0,
+      counter: { durationTicks: 30, damage: 60, range: 90 },
+    },
+  },
+  {
+    id: 'liet_phong_dao',
+    nameVi: 'Liệt Phong Đao',
+    manaCost: 25,
+    cooldownTicks: 180,
+    effect: {
+      mode: 'arc',
+      damage: 75,
+      range: 72,
+      halfAngle: Math.PI / 3,
+      cleave: 0.5,
+      armorPenetration: 0.5,
+    },
+  },
+  {
+    id: 'bach_liet_thien_kich',
+    nameVi: 'Bách Liệt Thiên Kích',
+    manaCost: 45,
+    cooldownTicks: 540,
+    effect: {
+      ...multi(90, 13, 10, 2, Math.PI / 4),
+      finisherDamage: 45,
+      finisherRange: 100,
+    } as Ability['effect'],
+  },
+];
+const descriptions = [
+  'Bốn nhịp phiến liên tiếp trong cung rộng phía trước.',
+  'Xoay người sáu nhịp quanh bản thân; có thể di chuyển khi xoay.',
+  'Lướt ngắn theo hướng nhìn, dừng trước địa hình; không gây sát thương.',
+  'Tạm tăng tốc độ di chuyển và tốc độ đánh; không cộng dồn.',
+  'Tuyệt kỹ: phong bạo lớn theo người, mười nhịp sát thương diện rộng.',
+  'Lướt về trước, chém mạnh một lần mỗi địch trên đường; không làm choáng.',
+  'Hai nhát chém nhanh phía trước, tăng sát thương lên mục tiêu đang chậm.',
+  'Bước né ngắn; trong cửa sổ phản kích, né một đòn và phản chém địch trong tầm.',
+  'Chém mạnh phía trước, xuyên một phần phòng thủ riêng cho đòn này.',
+  'Tuyệt kỹ: mười nhát chém cực nhanh phía trước và một nhát kết thúc.',
+];
+export function addThienSonProgression(d: ProgressionDefinition): void {
+  d.schools['thien_son'] = {
+    passiveId: 'bac_minh_than_cong',
+    basicIds: ['thien_son_phien', 'thien_son_dao'],
+    base: {
+      maxHp: 135,
+      maxMana: 100,
+      attackPower: 24,
+      defense: 0,
+      attackSpeed: 1.1,
+      movementSpeed: 180,
+      critChance: 0.14,
+      critMultiplier: 1.5,
+      manaRegen: 6,
+      cooldownReduction: 0,
+      hpRegen: 0,
+    },
+    growth: { maxHp: 6, maxMana: 2, attackPower: 1.6, defense: 0.1 },
+    innate: { movementSpeed: 1.1, attackSpeed: 0.012, critChance: 0.003 },
+    surplus: { movementSpeed: 1.3, attackSpeed: 0.012, critChance: 0.003 },
+  };
+  thienSonSkills.forEach((base, i) => {
+    const ultimate = i === 4 || i === 9;
+    const gates = ultimate ? skillRankGates.ultimate : skillRankGates.standard;
+    const ranks = gates.map((_, r) => {
+      const a = abilitySchema.parse(base),
+        e = a.effect;
+      a.manaCost += (ultimate ? 3 : 1) * r;
+      a.cooldownTicks -= (ultimate ? 15 : 3) * r;
+      if (e.mode === 'multi_hit') {
+        e.damage += (ultimate ? 4 : 3) * r;
+        e.range += 4 * r;
+        e.finisherRange += 4 * r;
+        if (e.finisherDamage) e.finisherDamage += 12 * r;
+        if (e.slowedBonus) e.slowedBonus += 0.05 * r;
+      } else if (e.mode === 'dash') {
+        e.distance += 8 * r;
+        if (e.damage) e.damage += 9 * r;
+        if (e.counter) {
+          e.counter.damage += 10 * r;
+          e.counter.durationTicks += 3 * r;
+        }
+      } else if (e.mode === 'buff') {
+        e.movementSpeed = (e.movementSpeed ?? 0) + 0.04 * r;
+        e.attackSpeed = (e.attackSpeed ?? 0) + 0.05 * r;
+        e.durationTicks += 15 * r;
+      } else if (e.mode === 'arc') {
+        e.damage += 10 * r;
+        e.armorPenetration = (e.armorPenetration ?? 0) + 0.05 * r;
+      }
+      return a;
+    });
+    d.skills[base.id] = {
+      id: base.id,
+      schoolId: 'thien_son',
+      style: i < 5 ? 'Phiến' : 'Đao',
+      ultimate,
+      descriptionVi: descriptions[i]!,
+      levelGates: [...gates],
+      ranks,
+    };
+  });
+}

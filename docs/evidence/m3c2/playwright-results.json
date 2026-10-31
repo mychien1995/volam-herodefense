@@ -1,0 +1,232 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\@playwright+test@1.64.1\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.m3c2.config.ts",
+      "tests/e2e/m3c2.spec.ts",
+      "--grep",
+      "normal"
+    ],
+    "configFile": "D:\\Projects\\volam-hero-defense\\playwright.m3c2.config.ts",
+    "rootDir": "D:/Projects/volam-hero-defense/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c2-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/Projects/volam-hero-defense/artifacts/playwright-m3c2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "runtime-preview",
+        "name": "runtime-preview",
+        "testDir": "D:/Projects/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c2-preview.spec.ts",
+          "skills.spec.ts",
+          "m3c1-preview.spec.ts"
+        ],
+        "timeout": 180000
+      },
+      {
+        "outputDir": "D:/Projects/volam-hero-defense/artifacts/playwright-m3c2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "progression-regression",
+        "name": "progression-regression",
+        "testDir": "D:/Projects/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c2.spec.ts",
+          "progression.spec.ts",
+          "gameplay.spec.ts",
+          "dungeons.spec.ts",
+          "ui.spec.ts"
+        ],
+        "timeout": 180000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-m3c2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "runtime-preview",
+        "testDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c2-preview.spec.ts",
+          "skills.spec.ts",
+          "m3c1-preview.spec.ts"
+        ],
+        "timeout": 180000,
+        "use": {
+          "video": "off",
+          "trace": "off",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "baseURL": "http://127.0.0.1:5188"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "runtime-preview"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-m3c2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "progression-regression",
+        "testDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c2.spec.ts",
+          "progression.spec.ts",
+          "gameplay.spec.ts",
+          "dungeons.spec.ts",
+          "ui.spec.ts"
+        ],
+        "timeout": 180000,
+        "use": {
+          "video": "off",
+          "trace": "off",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "baseURL": "http://127.0.0.1:5186"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "progression-regression"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "docs/evidence/m3c2/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "m3c2.spec.ts",
+      "file": "m3c2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M3C2 normal three-school progression, shared dungeon farming, read-only builds, mana sustain and arena defense",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 69071,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T03:18:44.847Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "15ad698d3ca8ee6ffcfe-9c8f3801598d986985a8",
+          "file": "m3c2.spec.ts",
+          "line": 18,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T03:18:42.580Z",
+    "duration": 71709.772,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

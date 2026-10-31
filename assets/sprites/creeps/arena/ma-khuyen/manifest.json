@@ -1,0 +1,1651 @@
+{
+  "id": "creep_demon_hound",
+  "wave": 13,
+  "nameVi": "Ma Khuyển",
+  "phase": "1H",
+  "status": "approved",
+  "reviewStatus": "DIRECTOR_APPROVED",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+  "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+  "masterConcept": "assets/concepts/arena-creeps/waves-13-16/arena_creeps_13_16_concept_sheet.png",
+  "conceptApproval": "Owner explicitly approved Phase1G concepts, 2026-10-31; current request authorizes sprite production and integration.",
+  "source": "assets/sprites/creeps/arena/ma-khuyen/source/creep_demon_hound.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 128,
+  "frameHeight": 96,
+  "bodyHeight": 34,
+  "footPivot": [
+    0.5,
+    0.7916666666666666
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 6.666666666666667,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 6.666666666666667,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 6.666666666666667,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 6.666666666666667,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/idle_down_0.png",
+      "sha256": "ca718f612f0b04b07aa658de913b44a91d055d123f40eb36b67b888fabaa4668",
+      "bounds": [
+        48,
+        42,
+        84,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        156,
+        286
+      ]
+    },
+    {
+      "name": "idle_down_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/idle_down_1.png",
+      "sha256": "10a78d80524e8fa7a0ed75040b821ba90ceb4718616127239da68b39306688db",
+      "bounds": [
+        49,
+        42,
+        83,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        460,
+        286
+      ]
+    },
+    {
+      "name": "walk_down_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_down_0.png",
+      "sha256": "a6a43340af437bbb4f593f62139ef50629d44abb7e431b713190655a414df96c",
+      "bounds": [
+        53,
+        43,
+        80,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        164,
+        574
+      ]
+    },
+    {
+      "name": "walk_down_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_down_1.png",
+      "sha256": "d2efa0933475440f5678ae72ba771b11b23e8f68c2d308ace40b60ba16ef4fbc",
+      "bounds": [
+        49,
+        42,
+        78,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        488,
+        594
+      ]
+    },
+    {
+      "name": "walk_down_2",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_down_2.png",
+      "sha256": "c0de94735fc13ed78540eb0ef65980f3bea1a9f22a6bc5531f92bb0e457bc7e5",
+      "bounds": [
+        52,
+        41,
+        84,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        756,
+        589
+      ]
+    },
+    {
+      "name": "walk_down_3",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_down_3.png",
+      "sha256": "8b02ae62aa7510cfb3e47d036873ba11de6a4e56fbbd160b5db0125e01968e85",
+      "bounds": [
+        54,
+        40,
+        82,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1070,
+        593
+      ]
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_down_0.png",
+      "sha256": "dfb483b010255a84540ddf1d99866aff5dc5b633ec51db517c54f01d35e9dc29",
+      "bounds": [
+        48,
+        42,
+        84,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        159,
+        890
+      ]
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_down_1.png",
+      "sha256": "a800f8589ea006833a75405370b82b3f040281fd18d63b74cb70b21a1f105b57",
+      "bounds": [
+        43,
+        39,
+        76,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        512,
+        898
+      ]
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_down_2.png",
+      "sha256": "3792525a41ae6ccdf9ee26e969eb774648c30c98e4072552d28750f567e07073",
+      "bounds": [
+        47,
+        42,
+        86,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        770,
+        883
+      ]
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_down_3.png",
+      "sha256": "1e2ef966c581a6bef20fc4150abcb697d86687ee2f6ff5979ce498368896becc",
+      "bounds": [
+        47,
+        46,
+        81,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1084,
+        884
+      ]
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/hurt_down_0.png",
+      "sha256": "b1002f1056ae7bfbc946b78f8fb03b6a4a792c7c7ef0f633abcfd3e5e66a8b8a",
+      "bounds": [
+        51,
+        43,
+        84,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        766,
+        286
+      ]
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/hurt_down_1.png",
+      "sha256": "9d24d5f4ba2333e564ce9762cd6b87fea43b3796cba86e98ac4e0a9a77806892",
+      "bounds": [
+        50,
+        42,
+        83,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1079,
+        287
+      ]
+    },
+    {
+      "name": "death_down_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_down_0.png",
+      "sha256": "bbaed641575c851bde0942e12d8095e6389cb4789a225f8987e3fab3e4c53a20",
+      "bounds": [
+        50,
+        42,
+        87,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        139,
+        1202
+      ]
+    },
+    {
+      "name": "death_down_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_down_1.png",
+      "sha256": "930b737fc154de37bdaa074c3989a63f438552a5bf27dd665acc6aa5225c4af1",
+      "bounds": [
+        49,
+        48,
+        86,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        444,
+        1189
+      ]
+    },
+    {
+      "name": "death_down_2",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_down_2.png",
+      "sha256": "f5b94835c61a5580c50983104f25bb1330f4976165113091788f0e6aff74d73f",
+      "bounds": [
+        48,
+        56,
+        88,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        750,
+        1186
+      ]
+    },
+    {
+      "name": "death_down_3",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_down_3.png",
+      "sha256": "7bf5d0579257e96e6090ec84aaa1520765b0fc76367f84f05ade8d2545548f1d",
+      "bounds": [
+        50,
+        57,
+        89,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1050,
+        1183
+      ]
+    },
+    {
+      "name": "idle_left_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/idle_left_0.png",
+      "sha256": "e6559814b5da018640d87aec0c5092a8bffb42ca51134fd972eccbd26589811e",
+      "bounds": [
+        53,
+        42,
+        88,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        126,
+        318
+      ]
+    },
+    {
+      "name": "idle_left_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/idle_left_1.png",
+      "sha256": "926d7ac1cf5dac4f4e6e7b5112ce407f803f9975b4325c0ec5b529e3b89c0272",
+      "bounds": [
+        52,
+        42,
+        90,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        432,
+        319
+      ]
+    },
+    {
+      "name": "walk_left_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_left_0.png",
+      "sha256": "0e5d7e919399f173c2468cbf38a0a519e17aa2190b8ef1b2565d416b82d37500",
+      "bounds": [
+        56,
+        47,
+        97,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        86,
+        603
+      ]
+    },
+    {
+      "name": "walk_left_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_left_1.png",
+      "sha256": "e2d43cf4f67b45ca5069740d15f7fc797c29bbac8d34a385c43ae9f1cf53a2b7",
+      "bounds": [
+        48,
+        47,
+        91,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        440,
+        590
+      ]
+    },
+    {
+      "name": "walk_left_2",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_left_2.png",
+      "sha256": "8bf67d9d0b13c38015af65991f6472665fe2ee8b9925d711b914cdb24bdeb474",
+      "bounds": [
+        43,
+        49,
+        85,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        784,
+        603
+      ]
+    },
+    {
+      "name": "walk_left_3",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_left_3.png",
+      "sha256": "38ad14d6e1bb1a88dc0534b6d23e472480081fbf60889f5397cd6bdb3ecab6a4",
+      "bounds": [
+        42,
+        49,
+        87,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1086,
+        588
+      ]
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_left_0.png",
+      "sha256": "ad09dc5b10eb288a309226929a558a2ef4cc7a91114a61f088602bf89cbd694c",
+      "bounds": [
+        52,
+        51,
+        93,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        122,
+        889
+      ]
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_left_1.png",
+      "sha256": "28b097d7f82e80fa45f1f24c1767036f19fe5c22e3397e777c8a7d7196a0fd20",
+      "bounds": [
+        40,
+        43,
+        80,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        511,
+        874
+      ]
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_left_2.png",
+      "sha256": "20d10ccc3d308a7f05aca8811cbddd76526d05c6160dec30400e6ddce64b9af5",
+      "bounds": [
+        35,
+        46,
+        81,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        818,
+        856
+      ]
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_left_3.png",
+      "sha256": "9035b7088fe89cd36f7b65f4e3e261bddfb8d1daec8e486df909707e3407162e",
+      "bounds": [
+        43,
+        42,
+        84,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1094,
+        894
+      ]
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/hurt_left_0.png",
+      "sha256": "7a98e0c34674c7ca335f2f0a2f9d03353605dd2bfe1978b14496d967a84945de",
+      "bounds": [
+        53,
+        46,
+        94,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        722,
+        322
+      ]
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/hurt_left_1.png",
+      "sha256": "d2aa3cda87fae1f514e806802eb972416c19288f8b09c6607f020d7e9e617522",
+      "bounds": [
+        52,
+        44,
+        91,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1048,
+        328
+      ]
+    },
+    {
+      "name": "death_left_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_left_0.png",
+      "sha256": "ac567cb37dc89c9f739be4906de8551cb0d6b9e44e251989628bf01c55e1a015",
+      "bounds": [
+        53,
+        44,
+        94,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        110,
+        1198
+      ]
+    },
+    {
+      "name": "death_left_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_left_1.png",
+      "sha256": "3bd978adb476898f06291f5bfe9fe72646a0974aecc14946cb1b2276b7ef26a8",
+      "bounds": [
+        43,
+        50,
+        84,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        482,
+        1193
+      ]
+    },
+    {
+      "name": "death_left_2",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_left_2.png",
+      "sha256": "99ef773a86380963cda3961f2b11cf28d364722cc4b3a59fa3649ba8e417c698",
+      "bounds": [
+        42,
+        56,
+        86,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        778,
+        1192
+      ]
+    },
+    {
+      "name": "death_left_3",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_left_3.png",
+      "sha256": "69853498de494a4fb33df338990d8259a061f8e3be81a32f1a9fd2cdb6ac9563",
+      "bounds": [
+        45,
+        59,
+        87,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1078,
+        1194
+      ]
+    },
+    {
+      "name": "idle_right_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/idle_right_0.png",
+      "sha256": "07453a872512b60cd3d785797fee95aee49f53fe082154f08774d9cce3bdeb68",
+      "bounds": [
+        42,
+        42,
+        87,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        163,
+        303
+      ]
+    },
+    {
+      "name": "idle_right_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/idle_right_1.png",
+      "sha256": "12cdf680b812fd2cad8bbb88e8efba96a399976cebb1e49a9d3aae2dc1c710a3",
+      "bounds": [
+        44,
+        42,
+        88,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        462,
+        303
+      ]
+    },
+    {
+      "name": "walk_right_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_right_0.png",
+      "sha256": "60d83446ec3bd4fdefa3349f3afba82f2fe540cceaec25868ef67b3b266bf36e",
+      "bounds": [
+        38,
+        44,
+        83,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        184,
+        575
+      ]
+    },
+    {
+      "name": "walk_right_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_right_1.png",
+      "sha256": "2ee391777a915d94b4e3409aa200978ec7766154fb49e5753bba93b878975cfc",
+      "bounds": [
+        24,
+        44,
+        73,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        566,
+        577
+      ]
+    },
+    {
+      "name": "walk_right_2",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_right_2.png",
+      "sha256": "ff1cd59a0fc8cf5f8452b241643ae8cdebfbe47ff72b9416c7ab701421688eeb",
+      "bounds": [
+        31,
+        44,
+        75,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        851,
+        591
+      ]
+    },
+    {
+      "name": "walk_right_3",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_right_3.png",
+      "sha256": "12f6b3f0f71415356065ab597d596effe3c2bef28a1e9bf87b742c662f69d02e",
+      "bounds": [
+        26,
+        46,
+        73,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1182,
+        579
+      ]
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_right_0.png",
+      "sha256": "11c34de12fcb40ceb4f80da75a3a04ffaec6ba7e78748845f3bf4785f25eb391",
+      "bounds": [
+        31,
+        42,
+        76,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        236,
+        885
+      ]
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_right_1.png",
+      "sha256": "24dc0bb658dbf50581ac11c820b4226ab2bc13d6554f1f25514da43666963251",
+      "bounds": [
+        41,
+        44,
+        88,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        466,
+        879
+      ]
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_right_2.png",
+      "sha256": "198066a3b22a9914657cb3c811e9e2e86669b08e73ca7e133a06ab7b98a10718",
+      "bounds": [
+        48,
+        45,
+        96,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        747,
+        842
+      ]
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_right_3.png",
+      "sha256": "2fb71d2549aa663937cefd00950516a6743cc274f37f042f71a1c279cf17617e",
+      "bounds": [
+        30,
+        42,
+        75,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1162,
+        887
+      ]
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/hurt_right_0.png",
+      "sha256": "8a8b4b350b4baa3aaaf8d431708482beca020e9d424fa3cf8c2f170b218816a7",
+      "bounds": [
+        43,
+        44,
+        84,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        778,
+        299
+      ]
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/hurt_right_1.png",
+      "sha256": "8191e3a88ebab6c8e0985f31fcdf403b9dac54ceb8120bce286bf6ed9cc96c92",
+      "bounds": [
+        45,
+        45,
+        89,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1070,
+        301
+      ]
+    },
+    {
+      "name": "death_right_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_right_0.png",
+      "sha256": "fe1631239dac34d9fc8cb6f48ea178769becf06354d2950d33c7f4cc78dd99cd",
+      "bounds": [
+        41,
+        44,
+        85,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        166,
+        1179
+      ]
+    },
+    {
+      "name": "death_right_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_right_1.png",
+      "sha256": "41a30873e5c710fb4a0c67f1f6949a1814dd9e1f041b339641d896e1bc7aac69",
+      "bounds": [
+        30,
+        48,
+        78,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        540,
+        1175
+      ]
+    },
+    {
+      "name": "death_right_2",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_right_2.png",
+      "sha256": "23dff450cc2ebf645b3066d134550a31c2455a7194c20d854224b588d469706f",
+      "bounds": [
+        32,
+        51,
+        78,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        842,
+        1180
+      ]
+    },
+    {
+      "name": "death_right_3",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_right_3.png",
+      "sha256": "43455dcfa527b938c609fe1dad0a343d27ee7e904d14a0da6eff05401d7ce948",
+      "bounds": [
+        40,
+        55,
+        86,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1097,
+        1177
+      ]
+    },
+    {
+      "name": "idle_up_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/idle_up_0.png",
+      "sha256": "77cb16766ed1cf9f3c4abe1c31e3755f8868e0da917bec630a5042d61cd233e4",
+      "bounds": [
+        51,
+        42,
+        77,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        171,
+        307
+      ]
+    },
+    {
+      "name": "idle_up_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/idle_up_1.png",
+      "sha256": "beeec77cb16ec35251ba605b0e05873174778a422d9c80f215ba32177c3c704c",
+      "bounds": [
+        52,
+        43,
+        77,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        476,
+        308
+      ]
+    },
+    {
+      "name": "walk_up_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_up_0.png",
+      "sha256": "5d43a53c055dd6dca8b6a5455c66d1b4f62a84b6c4f5b8e8f606a365c6145563",
+      "bounds": [
+        53,
+        41,
+        78,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        175,
+        617
+      ]
+    },
+    {
+      "name": "walk_up_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_up_1.png",
+      "sha256": "4867ccbc94bbf956881e5ac41b5a7b64d0ef5eab243b3a1bbf5328460ca6a35a",
+      "bounds": [
+        53,
+        41,
+        74,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        476,
+        611
+      ]
+    },
+    {
+      "name": "walk_up_2",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_up_2.png",
+      "sha256": "3cca827722a8c69aee9517de59644bd3d85eb145553d9e520aba3a7c73e77f5a",
+      "bounds": [
+        47,
+        43,
+        72,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        810,
+        605
+      ]
+    },
+    {
+      "name": "walk_up_3",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/walk_up_3.png",
+      "sha256": "48c6a0590e9760b6a0a6ec349915ee3a08222d7abd11654c7d83ae3c87bcc6b0",
+      "bounds": [
+        54,
+        41,
+        80,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1068,
+        615
+      ]
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_up_0.png",
+      "sha256": "3544bf217cc642b6c4e4c58eb2c70d1fdc74235a578db484cc197934e3ddcc2e",
+      "bounds": [
+        51,
+        49,
+        77,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        172,
+        907
+      ]
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_up_1.png",
+      "sha256": "b7158eac9346ed886cb4130f28d1d7e0359c648c689c7e96836cea1d26193f8d",
+      "bounds": [
+        44,
+        41,
+        74,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        514,
+        911
+      ]
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_up_2.png",
+      "sha256": "825d8f15e11ffd6222b69c347422fc0cfc6ee729ad9f8f3c23624a33749f8cc5",
+      "bounds": [
+        46,
+        38,
+        72,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        818,
+        920
+      ]
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/basic_attack_up_3.png",
+      "sha256": "bb8abef989696cb1b8341bf74abdf01a1cf105116c56513c646cb734bf98ee37",
+      "bounds": [
+        53,
+        46,
+        81,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1075,
+        910
+      ]
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/hurt_up_0.png",
+      "sha256": "2a63978d9d2340a71c9b26e3e1614bd3289126538ece8f0355088b65e4fe87af",
+      "bounds": [
+        47,
+        42,
+        75,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        788,
+        306
+      ]
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/hurt_up_1.png",
+      "sha256": "8479039429a4071ec1aef19025e0ce6a3287f6b5b6bd73ae468d4c1f3472a566",
+      "bounds": [
+        50,
+        42,
+        77,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1094,
+        306
+      ]
+    },
+    {
+      "name": "death_up_0",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_up_0.png",
+      "sha256": "6f86d36c2968f24820a488c13395a43995c71414529bae967a5fa3bd47d5b5ad",
+      "bounds": [
+        50,
+        46,
+        77,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        186,
+        1198
+      ]
+    },
+    {
+      "name": "death_up_1",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_up_1.png",
+      "sha256": "dd82897b8bdd38d5327e2a4b9ca72c212514f6cc06aeeb16c65f8f017d97dc3d",
+      "bounds": [
+        48,
+        49,
+        79,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        478,
+        1186
+      ]
+    },
+    {
+      "name": "death_up_2",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_up_2.png",
+      "sha256": "c68535b5990dae17e1d8006c522ead7009baffa377401e4e919fe0daee0a1374",
+      "bounds": [
+        57,
+        53,
+        90,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        707,
+        1195
+      ]
+    },
+    {
+      "name": "death_up_3",
+      "file": "assets/sprites/creeps/arena/ma-khuyen/frames/death_up_3.png",
+      "sha256": "842672d84d312165542140334adf5bd89ee243d16d2eb2bd97936ba1f6e08b9a",
+      "bounds": [
+        47,
+        57,
+        82,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "sourceConceptSha256": "0477a19ef7ae3bcffd2f8f340a3cc1079319a6572c832409e23d20b273de9bf3",
+      "sourceImage": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1090,
+        1194
+      ]
+    }
+  ],
+  "animationAudit": [
+    {
+      "tag": "idle_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    }
+  ],
+  "sourceScales": {
+    "down": 0.13793103448275862,
+    "left": 0.14437367303609341,
+    "right": 0.15632183908045977,
+    "up": 0.12830188679245283
+  },
+  "generatedSources": {
+    "down": {
+      "file": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "left": {
+      "file": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "right": {
+      "file": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "up": {
+      "file": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    }
+  },
+  "runtimeIntegration": true,
+  "rejectedSourceFrames": {},
+  "provenance": "Original AI-assisted raster poses using approved concept images directly. Aseprite extracts masked generated pixels, removes alpha below220, preserves retained RGB, uses fixed nearest source scales and aligns feet. No concept-board crops used as frames; no commercial sprite pack or exclusive copyright claim.",
+  "notes": [],
+  "runtimeVerification": "docs/evidence/phase1h-integration/integration_verification.json",
+  "finalRuntimeArtApproved": true,
+  "approvedOn": "2026-10-31",
+  "authority": "Game owner explicitly approved the delivered Phase 1H artwork after the final six-client Phaser validation and comparison PNGs.",
+  "approvalEvidence": "all approve",
+  "approvalScope": [
+    "Waves13–16 four-facing idle, movement, attack, hurt and death artwork",
+    "256 distinct character PNG frames / 80 animation tags",
+    "28 VFX frames / 7 animation tags and existing-event presentation",
+    "final normal-zoom and native-pixel runtime appearance"
+  ],
+  "excludedScope": [
+    "new ranged AI or projectile combat mechanics",
+    "charge, burn, shockwave or balance changes",
+    "Waves17–20 / Phase1I",
+    "rejected unused generated poses as production frames"
+  ],
+  "approvalLock": "assets/approved_arena_creeps_13_16.lock.json"
+}

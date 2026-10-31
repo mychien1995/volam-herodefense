@@ -1,34 +1,23 @@
+import {
+  thieuLamBasics,
+  thieuLamSkills,
+  addThieuLamProgression,
+} from './thieu-lam.js';
 import { z } from 'zod';
 import type { SimulationConfig } from '@volam/game-core';
 import { arena } from './arena.js';
+import { caiBangExtraSkills, caiBangPassive } from './cai-bang.js';
+import {
+  thienSonBasics,
+  thienSonSkills,
+  addThienSonProgression,
+} from './thien-son.js';
+import { abilitySchema } from './ability-schema.js';
+import { voDangBasics, voDangSkills, addVoDangProgression } from './vo-dang.js';
+import { createProgression, progressionSchema } from './progression-data.js';
+export { abilitySchema } from './ability-schema.js';
 const positive = z.number().finite().positive();
 const count = z.number().int().nonnegative();
-const projectile = z.strictObject({
-  mode: z.literal('projectile'),
-  damage: positive,
-  speed: positive,
-  range: positive,
-  radius: positive,
-  count: count.min(1).max(5),
-  spacingTicks: count,
-  splashRadius: z.number().nonnegative(),
-  burnDamage: z.number().nonnegative(),
-  burnTicks: count,
-});
-const arc = z.strictObject({
-  mode: z.literal('arc'),
-  damage: positive,
-  range: positive,
-  halfAngle: positive.max(Math.PI),
-  cleave: z.number().min(0).max(1),
-});
-export const abilitySchema = z.strictObject({
-  id: z.string().regex(/^[a-z_]+$/),
-  nameVi: z.string().min(1),
-  cooldownTicks: count.min(1),
-  manaCost: z.number().nonnegative(),
-  effect: z.discriminatedUnion('mode', [projectile, arc]),
-});
 const rect = z.strictObject({
   x: z.number().finite(),
   y: z.number().finite(),
@@ -40,6 +29,7 @@ const point = z.strictObject({
   y: z.number().finite(),
 });
 export const simulationConfigSchema = z.strictObject({
+  progression: progressionSchema.optional(),
   tickRate: count.min(10).max(60),
   inputTimeoutTicks: count.min(1),
   width: positive,
@@ -60,6 +50,14 @@ export const simulationConfigSchema = z.strictObject({
   critMultiplier: positive,
   basics: z.record(z.string(), abilitySchema),
   skills: z.array(abilitySchema).length(2),
+  skillCatalogue: z.record(z.string(), abilitySchema).optional(),
+  caiBangPassive: z
+    .strictObject({
+      damagePerLevel: z.number().nonnegative(),
+      critChancePerLevel: z.number().nonnegative(),
+      critMultiplierPerLevel: z.number().nonnegative(),
+    })
+    .optional(),
   creepRespawn: z.boolean().default(true),
   creep: z.strictObject({
     hp: positive,
@@ -89,7 +87,7 @@ const shot = {
   burnTicks: 0,
 };
 /** M1 playable tuning only. No final school balance, dungeon or invasion recipes. */
-export const m1Config: SimulationConfig = simulationConfigSchema.parse({
+const initialConfig: SimulationConfig = simulationConfigSchema.parse({
   tickRate: 30,
   inputTimeoutTicks: 15,
   width: arena.width,
@@ -168,3 +166,34 @@ export const m1Config: SimulationConfig = simulationConfigSchema.parse({
     assistTicks: 300,
   },
 });
+
+export const m1Config: SimulationConfig = simulationConfigSchema.parse({
+  ...initialConfig,
+  basics: {
+    ...initialConfig.basics,
+    ...thienSonBasics,
+    ...voDangBasics,
+    ...thieuLamBasics,
+  },
+  skillCatalogue: Object.fromEntries(
+    [
+      ...initialConfig.skills,
+      ...caiBangExtraSkills,
+      ...thienSonSkills,
+      ...voDangSkills,
+      ...thieuLamSkills,
+    ].map((s) => [s.id, s]),
+  ),
+  caiBangPassive,
+});
+
+// Validate all rank variants before exposing progression to a room.
+m1Config.progression = createProgression(
+  Object.fromEntries(
+    [...initialConfig.skills, ...caiBangExtraSkills].map((s) => [s.id, s]),
+  ),
+);
+addThienSonProgression(m1Config.progression);
+addVoDangProgression(m1Config.progression);
+addThieuLamProgression(m1Config.progression);
+progressionSchema.parse(m1Config.progression);

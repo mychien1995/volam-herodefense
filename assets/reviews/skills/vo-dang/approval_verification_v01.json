@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "approvedOn": "2026-10-31",
+  "approvalEvidence": {
+    "source": "User message in this chat after final production/Phaser delivery",
+    "text": "all approved",
+    "approvedOn": "2026-10-31",
+    "stage": "final_production_art_approval",
+    "scope": "All10 active skill character/VFX sets, all13 production icons and disclosed approved-character/shared-qi reuse presented in the final review. No gameplay mechanics or integration approved by this art decision."
+  },
+  "approvedComponents": 20,
+  "approvedIcons": 13,
+  "approvedEntries": 13,
+  "lockedFiles": 1441,
+  "artMediaFilesUnchanged": 1494,
+  "originalCharacterFilesUnchanged": 89,
+  "originalCharacterLockUnchanged": true,
+  "gameplayIntegration": "pending",
+  "scope": "Approval metadata and exact-file lock only; no regeneration or gameplay change.",
+  "regenerationGuards": [
+    {
+      "command": "node assets/source/skills/vo-dang/build.mjs --assemble",
+      "result": "PASS: refuses approved regeneration before writing assets"
+    },
+    {
+      "command": "python -X utf8 assets/source/skills/vo-dang/prepare.py",
+      "result": "PASS: refuses approved regeneration before writing assets"
+    },
+    {
+      "command": "python -X utf8 assets/source/skills/vo-dang/make_review.py",
+      "result": "PASS: refuses approved regeneration before writing assets"
+    }
+  ],
+  "focusedWorkflowTests": "PASS2/2",
+  "assetPreparationGuard": "PASS: node scripts/prepare-assets.mjs",
+  "approvedFilesRecheckedAfterGuardTests": 1441,
+  "approvalLabelBrowserCheck": {
+    "status": "PASS",
+    "coverageEntries": 13,
+    "livePhaserReady": true,
+    "note": "PRESENTATION-ONLY PREVIEW · no room, RNG, damage, costs or cooldowns · timings/counts/footprints are illustrative · artwork approved · gameplay implementation pending",
+    "errors": [],
+    "recordingsGenerated": false
+  },
+  "preparationCorruptionGuard": {
+    "status": "PASS",
+    "method": "Actual prepare-assets guard executed in isolated temporary fixture with all current lock names; no approved art modified."
+  }
+}

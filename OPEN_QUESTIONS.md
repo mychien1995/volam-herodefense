@@ -1,5 +1,10 @@
 # Open Decisions and Safe Provisional Defaults
 
+## M3C3 implemented provisional choices — 2026-10-31
+
+Bất Động Minh Vương retains the canonical proposed one-pulse healing; mitigation/protection remains open. Six-second Phát Động windows refresh per valid setup step; wrong-order same-chain skills reset only that target,while A/unrelated actives preserve state. Vô Ảnh consumes once per target/cast and empowers its six valid kicks. Rank/growth/surplus/defense/heal/mitigation values remain M3D tuning inputs. Supplied skill-art waiver is retained and does not become final director approval. These choices permit M3C3 completion without reopening confirmed progression/control/authority rules.
+
+
 **Instruction to Codex:** Do not quietly treat any of these as user-approved. For early milestones, a small temporary configurable behavior is acceptable, but label it and do not couple architecture to it. Defer questions not blocking the current milestone.
 
 | Priority | Open choice | Suggested *temporary* choice | First affects |
@@ -80,3 +85,11 @@ Acceptance tests updated:
 - Selection reconnect/rejoin grace and identity recovery, removing disconnected participants, cancellation back to waiting, timeout and automatic choice: unresolved. Current selection holds with the absent participant unconfirmed; no implicit choice or timer.
 - Exact numeric level-1 school attributes and initial active-skill assignments for all four schools: not finalized. Current M1 combat sandbox remains unchanged; selection stores the canonical school identity. UI shows qualitative identities and explicitly undefined starting sets, rather than mockup numbers.
 - Non-Cái Bang gameplay animation assets remain outside UI Phase 1; concept portraits are not animation atlases.
+
+## M3B configurable defaults in use — 2026-10-31
+
+The requested progression milestone is implemented using the documented rank gates/caps and explicit provisional rank/growth/surplus values. This does not finalize balance. Current refund, cooldown and point-accounting policy was recorded before coding in docs/M3B_RULES.md; exact values and measured legal-build probes are in docs/M3B_IMPLEMENTATION.md. Full other-school kits and equipment remain outside M3B. Do not reopen these implementation choices as routine approval blockers; future tuning can change the validated data while preserving confirmed one-point/level, arena-only changes and nonstacking surplus rules.
+
+## M3C2 provisional implementation — 2026-10-31
+
+Thái Cực Thần Công uses the suggested configurable timed-shield prototype; toggle versus timed remains OPEN. Numerical Võ Đang base/growth/innate/surplus,rank effects,25% Kiếm Khí chance,shield conversion,stationary formation cadence and one-trigger counter values are explicit proposals in `game-data/vo-dang.ts`. They need balance review, not a new school progression framework. Retained character/skill artwork has its existing separate approvals; independent baseline hurt/death frames remain missing.

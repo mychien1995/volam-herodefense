@@ -1,0 +1,195 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\@playwright+test@1.64.1\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.vo-dang-skills.config.ts",
+      "tests/e2e/gameplay.spec.ts",
+      "--grep",
+      "two clients agree"
+    ],
+    "configFile": "D:\\Projects\\volam-hero-defense\\playwright.vo-dang-skills.config.ts",
+    "rootDir": "D:/Projects/volam-hero-defense/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\vo-dang-skills-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/Projects/volam-hero-defense/artifacts/vo-dang-skills-regression",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/Projects/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "gameplay.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Projects\\volam-hero-defense\\artifacts\\vo-dang-skills-regression",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "gameplay.spec.ts"
+        ],
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5216",
+          "video": "off",
+          "trace": "off",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "assets/reviews/skills/vo-dang/gameplay_regression_v01.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "gameplay.spec.ts",
+      "file": "gameplay.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "two clients agree on combat, manual cadence, skills and progression",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 20050,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m90\u001b[39m\nReceived:   \u001b[31m100\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m90\u001b[39m\nReceived:   \u001b[31m100\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\gameplay.spec.ts:296:57",
+                    "location": {
+                      "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\gameplay.spec.ts",
+                      "column": 57,
+                      "line": 296
+                    },
+                    "snippet": "  294 |     await a.keyboard.press('KeyQ');\n  295 |     await a.keyboard.press('KeyW');\n> 296 |     await expect.poll(async () => (await hero(a)).mana).toBeLessThan(90);\n      |                                                         ^\n  297 |     await expect\n  298 |       .poll(\n  299 |         async () =>"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\gameplay.spec.ts",
+                        "column": 57,
+                        "line": 296
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m90\u001b[39m\nReceived:   \u001b[31m100\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  294 |     await a.keyboard.press('KeyQ');\n  295 |     await a.keyboard.press('KeyW');\n> 296 |     await expect.poll(async () => (await hero(a)).mana).toBeLessThan(90);\n      |                                                         ^\n  297 |     await expect\n  298 |       .poll(\n  299 |         async () =>\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\gameplay.spec.ts:296:57"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T18:47:52.277Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\Projects\\volam-hero-defense\\artifacts\\vo-dang-skills-regression\\gameplay-two-clients-agree-0849f-ence-skills-and-progression-chromium\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\gameplay.spec.ts",
+                    "column": 57,
+                    "line": 296
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-c521143d201aa5dd8929",
+          "file": "gameplay.spec.ts",
+          "line": 204,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-30T18:47:50.087Z",
+    "duration": 22565.271,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

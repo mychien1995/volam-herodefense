@@ -1,0 +1,1333 @@
+{
+  "id": "creep_black_clad_assassin",
+  "nameVi": "Hắc Y Sát Thủ",
+  "phase": "1D",
+  "category": "enemy",
+  "status": "prototype",
+  "reviewStatus": "STAGED_NOT_INTEGRATED",
+  "conceptApproval": "User: concept approve, please proceed (2026-10-30)",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+  "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+  "masterConcept": "assets/concepts/arena-creeps/waves-05-08/arena_creeps_05_08_concept_sheet.png",
+  "source": "sprites/creeps/arena/black-clad-assassin/source/creep_black_clad_assassin.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 96,
+  "frameHeight": 96,
+  "footPivot": [
+    0.5,
+    0.7916666666666666
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2"
+      ],
+      "frameRate": 10,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2"
+      ],
+      "frameRate": 10,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2"
+      ],
+      "frameRate": 10,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/idle_down_0.png",
+      "bounds": [
+        29,
+        36,
+        65,
+        76
+      ],
+      "sha256": "5daa72d5612563fa2adebbb42bac328cbcf4802109f277b73aaa11e2f214111a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "idle_down_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/idle_down_1.png",
+      "bounds": [
+        30,
+        36,
+        66,
+        76
+      ],
+      "sha256": "9bdf43b231dca9ae30471cf16325f849da8c9727dc7062a585acd60e74e4d9bd",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "walk_down_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_down_0.png",
+      "bounds": [
+        32,
+        34,
+        65,
+        76
+      ],
+      "sha256": "3f7404f767bdf4dd5018acb5e7718f2d7c36687b2d7562faa90be5c78b46d720",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/front_walk_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "walk_down_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_down_1.png",
+      "bounds": [
+        32,
+        34,
+        67,
+        76
+      ],
+      "sha256": "d4903d264ae2588283c6f8a9ad072977524253736071e3e70b119fd3755a81c9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/front_walk_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "walk_down_2",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_down_2.png",
+      "bounds": [
+        31,
+        34,
+        65,
+        76
+      ],
+      "sha256": "bc2bed81c5c696dd21a81f177cfe3e5a55c023668dce4f8ffc38853a9f815037",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/front_walk_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "walk_down_3",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_down_3.png",
+      "bounds": [
+        33,
+        34,
+        68,
+        76
+      ],
+      "sha256": "bc58f67a72cffb7072774afb8fcf40138050c5bcda49d7157f6690572e794466",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/front_walk_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_down_0.png",
+      "bounds": [
+        28,
+        37,
+        67,
+        76
+      ],
+      "sha256": "56a2d611d36eb6d4538253905ebf7aa2db49c93a5708b98e6639f1d6b0ba1c99",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 6
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_down_1.png",
+      "bounds": [
+        17,
+        42,
+        71,
+        76
+      ],
+      "sha256": "06fbb7a7797cca2bb56213ebd8d808710de5dde18d6b20db65027181f856f0a1",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 7
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_down_2.png",
+      "bounds": [
+        28,
+        37,
+        69,
+        76
+      ],
+      "sha256": "53d815396f825c9a1348f4bca3200a0281f89411fb8599eb21f2f37cc19c922e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 9
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/hurt_down_0.png",
+      "bounds": [
+        28,
+        35,
+        69,
+        76
+      ],
+      "sha256": "02a2e821bfb036c1e8425eea0d9b6cea7cd7edf839c5d62c25e6b361c1886e12",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/hurt_down_1.png",
+      "bounds": [
+        27,
+        35,
+        70,
+        76
+      ],
+      "sha256": "3f9e2af2a7a80d536cac2bf07004338bd1ac5f690b766bf639b347640298e672",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "death_down_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_down_0.png",
+      "bounds": [
+        31,
+        39,
+        69,
+        76
+      ],
+      "sha256": "5570da3942f8726b98b2e6e1b083656ea19f4f5ec075889977f03921d6401ae0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "death_down_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_down_1.png",
+      "bounds": [
+        28,
+        42,
+        68,
+        76
+      ],
+      "sha256": "c0bfb9b43b90f2ff64f0408350467745a759a29eca5a97034644c111717cb211",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "death_down_2",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_down_2.png",
+      "bounds": [
+        19,
+        51,
+        78,
+        76
+      ],
+      "sha256": "f0cb291d2d0608d2ad6e2aa261138ec8debc7b5a2088a4e4b9acf76ac991d0fb",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 4
+    },
+    {
+      "name": "death_down_3",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_down_3.png",
+      "bounds": [
+        11,
+        55,
+        67,
+        76
+      ],
+      "sha256": "a650797e82e6dc3966fa07f8afcdca839bdee254a85e7281aa6e324d9e13964d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 5
+    },
+    {
+      "name": "idle_left_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/idle_left_0.png",
+      "bounds": [
+        31,
+        34,
+        64,
+        76
+      ],
+      "sha256": "0e882d681ca7a4a41ebff1b1dcec6b51066d15f279e0615312012075735530a3",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "idle_left_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/idle_left_1.png",
+      "bounds": [
+        31,
+        34,
+        65,
+        76
+      ],
+      "sha256": "7a95eaa9cfd585ef1fc3d2a2dc789c7ee0d70cc8887155b50b96e41a0a1dcc27",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "walk_left_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_left_0.png",
+      "bounds": [
+        32,
+        34,
+        64,
+        76
+      ],
+      "sha256": "f7460c203d70119c552f4b4e67533d247afcad4e3a19334d7538aaf014fbf1b4",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 12
+    },
+    {
+      "name": "walk_left_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_left_1.png",
+      "bounds": [
+        36,
+        33,
+        64,
+        76
+      ],
+      "sha256": "48955a344e49a268de45fef8c757c137b45a9c23722e055867e11775593fbe96",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 13
+    },
+    {
+      "name": "walk_left_2",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_left_2.png",
+      "bounds": [
+        33,
+        34,
+        63,
+        76
+      ],
+      "sha256": "06a343e6bfd868968456b445662e777083a15464ed9d0770b360ae25be6c5845",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 14
+    },
+    {
+      "name": "walk_left_3",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_left_3.png",
+      "bounds": [
+        33,
+        34,
+        64,
+        76
+      ],
+      "sha256": "a3a527d942f3f4f8270b0c207e932b735d51fd08a7c0cc224571f6aff428aaa2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 15
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_left_0.png",
+      "bounds": [
+        25,
+        41,
+        77,
+        76
+      ],
+      "sha256": "bcf08ad93b6ed7a5b96c814f751f5cf954c33c0784f51bdf61a40841cd6ca8a0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 17
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_left_1.png",
+      "bounds": [
+        24,
+        43,
+        73,
+        76
+      ],
+      "sha256": "67efdeec2e6a04765e87b526495372816937aa547be238cb14f22365c11ae9ca",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 18
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_left_2.png",
+      "bounds": [
+        27,
+        36,
+        67,
+        76
+      ],
+      "sha256": "1d3b6b0f60dfb9784718505365f8aefa1e2b92f57f74c816e997d987ed0d9fb5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 19
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/hurt_left_0.png",
+      "bounds": [
+        27,
+        33,
+        66,
+        76
+      ],
+      "sha256": "20a36ee8c0dd9090c5ddd058b75ae7c5f8620a3d6eef8b74a6fe55cbb792b302",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 6
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/hurt_left_1.png",
+      "bounds": [
+        27,
+        33,
+        64,
+        76
+      ],
+      "sha256": "983a939661a90f8cd82aafc27b2849fde77e42addf0d4126f49fe376e19a91f9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 7
+    },
+    {
+      "name": "death_left_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_left_0.png",
+      "bounds": [
+        30,
+        38,
+        67,
+        76
+      ],
+      "sha256": "a4605f018cdf01892e61abd30c30ac2bfa47a4de40b0f030dbdab399b9161490",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 8
+    },
+    {
+      "name": "death_left_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_left_1.png",
+      "bounds": [
+        28,
+        40,
+        69,
+        76
+      ],
+      "sha256": "169188b75ac2148cd8bc881ddf862350b7792a5cc47c1624951cccddd79a1352",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 9
+    },
+    {
+      "name": "death_left_2",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_left_2.png",
+      "bounds": [
+        29,
+        53,
+        85,
+        76
+      ],
+      "sha256": "f6f5413ac7e850de7d9b3764f92140e355be2494e4b162a26cacabc008ea0e1c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "death_left_3",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_left_3.png",
+      "bounds": [
+        20,
+        56,
+        82,
+        76
+      ],
+      "sha256": "aa23c49e552b2034c6001ee155ad41395560092aefad70719770ccc3b766bd83",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "idle_right_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/idle_right_0.png",
+      "bounds": [
+        32,
+        33,
+        64,
+        76
+      ],
+      "sha256": "33ae1bc6efdf60527ebe10f976012597b3f9d4d264e19e67712a361b6685829c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 20
+    },
+    {
+      "name": "idle_right_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/idle_right_1.png",
+      "bounds": [
+        33,
+        33,
+        65,
+        76
+      ],
+      "sha256": "8e5ac9c81f371c92ba293d76696a7721a15a569797ab9a135ddd725f0ab5d9b8",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 21
+    },
+    {
+      "name": "walk_right_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_right_0.png",
+      "bounds": [
+        33,
+        34,
+        63,
+        76
+      ],
+      "sha256": "262a1b8fabb8837cc2c731fa61f6d430392d601852d9dd9e6f8f347255960ff1",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 22
+    },
+    {
+      "name": "walk_right_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_right_1.png",
+      "bounds": [
+        36,
+        33,
+        66,
+        76
+      ],
+      "sha256": "ebda60fab638c9a79ed186b35a4f94f8f1e43eaa3dc1ffe680a8d3f203d7b6cf",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 23
+    },
+    {
+      "name": "walk_right_2",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_right_2.png",
+      "bounds": [
+        33,
+        33,
+        64,
+        76
+      ],
+      "sha256": "d622b9f0ccb894c2543370049c08fd37f6d8577223dff26478c860510740962e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 24
+    },
+    {
+      "name": "walk_right_3",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_right_3.png",
+      "bounds": [
+        34,
+        34,
+        66,
+        76
+      ],
+      "sha256": "46b3ae1e461e226deeba7971ad91b2b4de7e0d86754737be6a520e2692ba8a5f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 25
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_right_0.png",
+      "bounds": [
+        29,
+        37,
+        69,
+        76
+      ],
+      "sha256": "060979b31a2ed58efc6d1e9bb459be3e58e60c65fb6ff454a4c47e3028ae40aa",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 26
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_right_1.png",
+      "bounds": [
+        19,
+        41,
+        72,
+        76
+      ],
+      "sha256": "2b7d081e3c75402f2740d327303afea961ab1349001fe1af3129f491e6088f21",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 27
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_right_2.png",
+      "bounds": [
+        33,
+        41,
+        82,
+        76
+      ],
+      "sha256": "26e30768809953a24311675bad850a53661170139174c9acc0d1f3d2c5a8c05c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 28
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_right_3.png",
+      "bounds": [
+        29,
+        37,
+        70,
+        76
+      ],
+      "sha256": "d9adfefa060e6224053cfa013da5e641e917f047b227ab2fbb60e83b568c2388",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 29
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/hurt_right_0.png",
+      "bounds": [
+        28,
+        33,
+        70,
+        76
+      ],
+      "sha256": "748f9c1cad0f51f85dc0319140ec193e8c10d6beeae1e618c339aeb9a2b59696",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 12
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/hurt_right_1.png",
+      "bounds": [
+        31,
+        32,
+        67,
+        76
+      ],
+      "sha256": "a44bebc3c709d70e7d7e57fa60b4322ea4a1ca599cf1f9cf4eec24e92c2277d0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 13
+    },
+    {
+      "name": "death_right_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_right_0.png",
+      "bounds": [
+        33,
+        37,
+        72,
+        76
+      ],
+      "sha256": "016fc3967af34f879dc076ebb0e256816c183e966a9246c9fb5e97b6702f7488",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 14
+    },
+    {
+      "name": "death_right_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_right_1.png",
+      "bounds": [
+        25,
+        39,
+        70,
+        76
+      ],
+      "sha256": "9f20756d3c71389d3d3d1eec85976c1a636e9badad4cf84d386efaa8529f1207",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 15
+    },
+    {
+      "name": "death_right_2",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_right_2.png",
+      "bounds": [
+        8,
+        53,
+        69,
+        76
+      ],
+      "sha256": "a73a4c08b9270d7010e00f470a229a02c0923e5590d175ae70378063ba77a0ca",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 16
+    },
+    {
+      "name": "death_right_3",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_right_3.png",
+      "bounds": [
+        6,
+        54,
+        65,
+        76
+      ],
+      "sha256": "284aba5b6b54ae708b1c1abaa1a4221125fd9c607a0e67e66066a5dc36115493",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 17
+    },
+    {
+      "name": "idle_up_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/idle_up_0.png",
+      "bounds": [
+        28,
+        35,
+        67,
+        76
+      ],
+      "sha256": "37311b0eb03fcaa3e05729074e1d0537cdadff9679beabddafb58480f1948f10",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 30
+    },
+    {
+      "name": "idle_up_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/idle_up_1.png",
+      "bounds": [
+        29,
+        34,
+        68,
+        76
+      ],
+      "sha256": "6e16489a1b67f81d9536e9afd5db62096c56c77b060aecd98fd5edcf841c029e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 31
+    },
+    {
+      "name": "walk_up_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_up_0.png",
+      "bounds": [
+        30,
+        33,
+        66,
+        76
+      ],
+      "sha256": "b13c6181fe2c073dc548a7f5ee24bff1a52567c6c6d7a064df7d11c0d25d33fb",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 32
+    },
+    {
+      "name": "walk_up_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_up_1.png",
+      "bounds": [
+        26,
+        32,
+        63,
+        76
+      ],
+      "sha256": "c2821a439a09494f46b7bc360a6b64ec9744b9ebc1e341d80c58468687539d03",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 33
+    },
+    {
+      "name": "walk_up_2",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_up_2.png",
+      "bounds": [
+        29,
+        32,
+        65,
+        76
+      ],
+      "sha256": "50afcf1ea20c147a3faa1050163e642c16e52a342112b67260c5d8bd2f8848e9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 34
+    },
+    {
+      "name": "walk_up_3",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/walk_up_3.png",
+      "bounds": [
+        31,
+        32,
+        65,
+        76
+      ],
+      "sha256": "c045733227327234eb50c226681bb69267253179a2c91b5a5546ef40e422bbdf",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 35
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_up_0.png",
+      "bounds": [
+        28,
+        35,
+        68,
+        76
+      ],
+      "sha256": "62a1aec01069a1acc2b2b04402cfec9056677f5dd6567feb5f244d308665dfd3",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 36
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_up_1.png",
+      "bounds": [
+        20,
+        38,
+        72,
+        76
+      ],
+      "sha256": "59ee2cf5bed26f8741a3f23e87f3e3c3b4af526ea89add7b93d9c0d577c89010",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 37
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/basic_attack_up_2.png",
+      "bounds": [
+        27,
+        35,
+        67,
+        76
+      ],
+      "sha256": "bb0010e2f7f77c9a47ab27e09a057fb62e338915f239781d4e106eec52201387",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "selectedComponent": 39
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/hurt_up_0.png",
+      "bounds": [
+        27,
+        35,
+        67,
+        76
+      ],
+      "sha256": "87e0b5485148ea1578f8a7327539d1c6a8dfefbbe4029b4f4c8a4bcc4eede305",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 18
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/hurt_up_1.png",
+      "bounds": [
+        31,
+        35,
+        74,
+        76
+      ],
+      "sha256": "52b3890354ecab45e47d60c2e35db0f961c73fd20ac256d2319b10a4bc195eb9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 19
+    },
+    {
+      "name": "death_up_0",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_up_0.png",
+      "bounds": [
+        31,
+        36,
+        68,
+        76
+      ],
+      "sha256": "3645ee3f5f38ecf16d863a813a29ca5feb34e0e27cd8bd2f5767ba35644f89fa",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 20
+    },
+    {
+      "name": "death_up_1",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_up_1.png",
+      "bounds": [
+        30,
+        42,
+        75,
+        76
+      ],
+      "sha256": "107baeb6bed3c194209fc43f7f34c4fc5b8d9bac1241d7c746fd0bd2918d46b3",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 21
+    },
+    {
+      "name": "death_up_2",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_up_2.png",
+      "bounds": [
+        17,
+        49,
+        73,
+        76
+      ],
+      "sha256": "71eb62c855354d779aede0536ea2e4027d75e7df8fce67f4d8c1ec75993d90b0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 22
+    },
+    {
+      "name": "death_up_3",
+      "file": "sprites/creeps/arena/black-clad-assassin/frames/death_up_3.png",
+      "bounds": [
+        13,
+        54,
+        70,
+        76
+      ],
+      "sha256": "401f5f7bb01d3d7df1e40a59eff90a0185b847bca93d7cfbf36018464441c3eb",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-05-08/hac_y_sat_thu_concept.png",
+      "sourceConceptSha256": "5b9a720a05a7e30bd0c2e7108fcf9692f71da6bf7567362c744660527f8260b7",
+      "sourceImage": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "selectedComponent": 23
+    }
+  ],
+  "animationAudit": [
+    {
+      "tag": "idle_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_down",
+      "frames": 3,
+      "distinctDrawings": 3
+    },
+    {
+      "tag": "hurt_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_left",
+      "frames": 3,
+      "distinctDrawings": 3
+    },
+    {
+      "tag": "hurt_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_up",
+      "frames": 3,
+      "distinctDrawings": 3
+    },
+    {
+      "tag": "hurt_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    }
+  ],
+  "generatedSources": {
+    "main": {
+      "file": "sprites/creeps/arena/black-clad-assassin/source/main_v1.png",
+      "originalGeneratedFilename": "exec-da2022a2-ede3-446b-9707-cca57dbb56ed.png",
+      "expected": 40,
+      "rows": 4,
+      "cols": 10,
+      "used": true,
+      "sha256": "7b2753ed27a5e2a99047581330f527ab56b46415c9664845b960b840755fe410"
+    },
+    "reaction": {
+      "file": "sprites/creeps/arena/black-clad-assassin/source/reaction_v1.png",
+      "originalGeneratedFilename": "exec-d815d827-42ff-4321-987b-9e675b344693.png",
+      "expected": 24,
+      "rows": 4,
+      "cols": 6,
+      "used": true,
+      "sha256": "b7947bb523227053aeed037d9ab8bd9fac22d876e8f19379682c9c053705432e"
+    },
+    "front_walk": {
+      "file": "sprites/creeps/arena/black-clad-assassin/source/front_walk_v1.png",
+      "originalGeneratedFilename": "exec-6ee8c0d9-3d47-4461-b019-edf7e26a282d.png",
+      "expected": 4,
+      "rows": 2,
+      "cols": 2,
+      "used": true,
+      "sha256": "62f2db34da157eebee7550f87d5a5cf9e35420b49595f8e5b555749b3241c511"
+    }
+  },
+  "sourceScales": {
+    "main": 0.25766871165644173,
+    "reaction": 0.21483375959079284,
+    "front_walk": 0.10144927536231885
+  },
+  "notes": "Frontal walking regenerated; wrong-facing attack frames excluded. Three-pose frontal/left/rear attacks retain both daggers.",
+  "runtimeIntegration": false,
+  "provenance": "Original AI-assisted generated raster poses, approved concept images provided directly. Aseprite extracts masked generated pixels, removes alpha below220, preserves source RGB, normalizes retained alpha, applies fixed nearest-neighbour source scale and aligns feet. No concept pixels used as animation frames; no commercial sprite pack, separate third-party license or exclusive copyright claimed.",
+  "verification": "Awaiting isolated Phaser review; production owner approval pending",
+  "normalGameplayReview": "PASS: isolated Phaser 4.2.1, 1x logical / 2x display, all frames observed. No match integration or director runtime approval.",
+  "verificationEvidence": [
+    "sprites/creeps/arena/waves-05-08-production/review/phaser_verification.json",
+    "sprites/creeps/arena/waves-05-08-production/review/concept_comparison.png",
+    "sprites/creeps/arena/waves-05-08-production/review/phaser_animation_preview.webm"
+  ],
+  "unexportedComponents": {
+    "main": [
+      2,
+      3,
+      4,
+      5,
+      8,
+      16,
+      38
+    ],
+    "reaction": [],
+    "front_walk": []
+  }
+}

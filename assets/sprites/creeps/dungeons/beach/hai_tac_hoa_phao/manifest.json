@@ -1,0 +1,1896 @@
+{
+  "id": "beach_hai_tac_hoa_phao",
+  "nameVi": "Hải Tặc Hỏa Pháo",
+  "category": "enemy",
+  "status": "produced_asset_only",
+  "conceptApproval": "Automatically approved by Phase 2C user instruction, 2026-10-31",
+  "sourceConcept": "assets/concepts/dungeon-creeps/beach/hai_tac_hoa_phao_concept_v01.png",
+  "sheet": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/spritesheet.png",
+  "atlas": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/atlas.json",
+  "source": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/source/hai_tac_hoa_phao_v01.aseprite",
+  "frameWidth": 144,
+  "frameHeight": 128,
+  "bodyScaleReference": {
+    "humanoidHeight": 48,
+    "crabWidth": 64,
+    "approvedHeroBodyHeight": 44
+  },
+  "footPivot": [
+    0.5,
+    0.828125
+  ],
+  "feetPixels": [
+    72,
+    106
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "aim",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "fire",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "aim",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "fire",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "aim",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "fire",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "aim",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    },
+    {
+      "state": "fire",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 10,
+      "repeat": 0,
+      "relationship": "authored phase of basic_attack; same cels, no invented frames"
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/idle_down_0.png",
+      "sha256": "a483225150771728b8ed5bd3baa837390aeb9f002f7c28ee3e60dc5fc6dc2d46",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          33,
+          15,
+          114,
+          125
+        ],
+        "fixedSourceScale": 0.3855421686746988,
+        "sourceFootInCrop": [
+          91.0,
+          125
+        ],
+        "placement": [
+          37,
+          58
+        ]
+      }
+    },
+    {
+      "name": "idle_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/idle_down_1.png",
+      "sha256": "7f06f3521e545987a83bdf96fd985ac2b1b7a25ed86463273db62b14d70e31cf",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          212,
+          16,
+          106,
+          124
+        ],
+        "fixedSourceScale": 0.3855421686746988,
+        "sourceFootInCrop": [
+          77.0,
+          123
+        ],
+        "placement": [
+          42,
+          59
+        ]
+      }
+    },
+    {
+      "name": "walk_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_down_0.png",
+      "sha256": "86fd3725c80c678dc370811bc39cb13092deb4595344ace1e561606be7d2bb5d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          378,
+          16,
+          108,
+          124
+        ],
+        "fixedSourceScale": 0.3855421686746988,
+        "sourceFootInCrop": [
+          50.0,
+          124
+        ],
+        "placement": [
+          53,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_down_1.png",
+      "sha256": "7213c5f611037128013ab6187011384fec7428af85ec165c4ff380dcf2393e52",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          553,
+          16,
+          111,
+          129
+        ],
+        "fixedSourceScale": 0.3855421686746988,
+        "sourceFootInCrop": [
+          75.0,
+          129
+        ],
+        "placement": [
+          43,
+          56
+        ]
+      }
+    },
+    {
+      "name": "walk_down_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_down_2.png",
+      "sha256": "430511248b5323e7f7be66c48800c7c25ec663c231fb09d927966188752657e7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          729,
+          16,
+          108,
+          124
+        ],
+        "fixedSourceScale": 0.3855421686746988,
+        "sourceFootInCrop": [
+          45.0,
+          124
+        ],
+        "placement": [
+          55,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_down_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_down_3.png",
+      "sha256": "0911763f7bca0eb3097a3c24b1c9feca23a0e9cf2b092f98563736929b53c3dd",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          906,
+          16,
+          94,
+          126
+        ],
+        "fixedSourceScale": 0.3855421686746988,
+        "sourceFootInCrop": [
+          31.5,
+          126
+        ],
+        "placement": [
+          60,
+          57
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_down_0.png",
+      "sha256": "d7dd29ae19198e54398c67209b394b89da2ba92a383eb61e6421cb8b4f75bfd7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          1063,
+          14,
+          143,
+          131
+        ],
+        "fixedSourceScale": 0.3855421686746988,
+        "sourceFootInCrop": [
+          98.0,
+          131
+        ],
+        "placement": [
+          34,
+          55
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_down_1.png",
+      "sha256": "74156699ba61206ac3d07d19aad18596461ae36214476eb58d7ccce866887e0b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1250,
+          16,
+          124,
+          128
+        ],
+        "fixedSourceScale": 0.3855421686746988,
+        "sourceFootInCrop": [
+          87.0,
+          127
+        ],
+        "placement": [
+          38,
+          57
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_down_2.png",
+      "sha256": "ab7002d53c26208b8d73c279263ddfea410fa1e027e8f0f9fb963cf167c3fc59",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          9,
+          161,
+          160,
+          122
+        ],
+        "fixedSourceScale": 0.3855421686746988,
+        "sourceFootInCrop": [
+          130.0,
+          122
+        ],
+        "placement": [
+          22,
+          59
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_down_3.png",
+      "sha256": "f416fd84937336d9e7a9a9d9eea52728b3ac85d4ccced252239afc9b9342896d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          203,
+          161,
+          133,
+          121
+        ],
+        "fixedSourceScale": 0.3855421686746988,
+        "sourceFootInCrop": [
+          38.0,
+          120
+        ],
+        "placement": [
+          57,
+          60
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/hurt_down_0.png",
+      "sha256": "864225aa3659eb2d74bcc5e686227a0972ca9e30ce0c562d2e37dfa31b997b7d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          384,
+          164,
+          99,
+          118
+        ],
+        "fixedSourceScale": 0.3855421686746988,
+        "sourceFootInCrop": [
+          29.5,
+          118
+        ],
+        "placement": [
+          61,
+          61
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/hurt_down_1.png",
+      "sha256": "041ce94c2f04443f5557897518a618f7307bcb4a8d28573a87e684d6b57eeca7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          547,
+          173,
+          126,
+          110
+        ],
+        "fixedSourceScale": 0.3855421686746988,
+        "sourceFootInCrop": [
+          44.0,
+          110
+        ],
+        "placement": [
+          55,
+          64
+        ]
+      }
+    },
+    {
+      "name": "death_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_down_0.png",
+      "sha256": "93b3251b5eb061f39ce3bf6d079833f40c5f8e990c4f2be9d706cc308636d5fc",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          88,
+          46,
+          231,
+          198
+        ],
+        "fixedSourceScale": 0.20202020202020202,
+        "sourceFootInCrop": [
+          105.0,
+          198
+        ],
+        "placement": [
+          51,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_down_1.png",
+      "sha256": "9b431c46f3042971534a536d00628833d199b2f068d33efb05e20ed5e62a5cd6",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          422,
+          58,
+          311,
+          186
+        ],
+        "fixedSourceScale": 0.20202020202020202,
+        "sourceFootInCrop": [
+          171.0,
+          186
+        ],
+        "placement": [
+          37,
+          68
+        ]
+      }
+    },
+    {
+      "name": "death_down_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_down_2.png",
+      "sha256": "4caf58423204e4733031a2f3aa4f32733b9b0d512a8972c6c1a0d1a57dc9c54d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          789,
+          108,
+          340,
+          142
+        ],
+        "fixedSourceScale": 0.20202020202020202,
+        "sourceFootInCrop": [
+          195.0,
+          142
+        ],
+        "placement": [
+          33,
+          77
+        ]
+      }
+    },
+    {
+      "name": "death_down_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_down_3.png",
+      "sha256": "8ee685efa653a0c0b753c912d5a44d6e920a3f2b78f92733c2c5cb879ec2a2b3",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1178,
+          128,
+          299,
+          120
+        ],
+        "fixedSourceScale": 0.20202020202020202,
+        "sourceFootInCrop": [
+          213.0,
+          120
+        ],
+        "placement": [
+          29,
+          82
+        ]
+      }
+    },
+    {
+      "name": "idle_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/idle_left_0.png",
+      "sha256": "7948e32888e57215835526ef625a3131d7e7d9038d6581f28ec6d45102ee2044",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 16,
+        "sourceRect": [
+          46,
+          298,
+          114,
+          118
+        ],
+        "fixedSourceScale": 0.4085106382978723,
+        "sourceFootInCrop": [
+          27.0,
+          118
+        ],
+        "placement": [
+          61,
+          58
+        ]
+      }
+    },
+    {
+      "name": "idle_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/idle_left_1.png",
+      "sha256": "aced0129132f4413c829f91fe91bedcd6b069c99e922f8a772547113394d239e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 17,
+        "sourceRect": [
+          220,
+          300,
+          111,
+          117
+        ],
+        "fixedSourceScale": 0.4085106382978723,
+        "sourceFootInCrop": [
+          36.0,
+          117
+        ],
+        "placement": [
+          57,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_left_0.png",
+      "sha256": "91d073550e3fa52ea44a073214b46df038802122029f367f80ec272e276a78c6",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 18,
+        "sourceRect": [
+          384,
+          301,
+          115,
+          117
+        ],
+        "fixedSourceScale": 0.4085106382978723,
+        "sourceFootInCrop": [
+          78.0,
+          117
+        ],
+        "placement": [
+          40,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_left_1.png",
+      "sha256": "3e20086ce3a15c8fa466c9e45452b824157485650e98051a5eaa2c7d4734aa32",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 19,
+        "sourceRect": [
+          555,
+          302,
+          115,
+          121
+        ],
+        "fixedSourceScale": 0.4085106382978723,
+        "sourceFootInCrop": [
+          83.0,
+          121
+        ],
+        "placement": [
+          38,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_left_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_left_2.png",
+      "sha256": "4a2f5f8be55ac0da9beda47d8915ddc67ae260f699e8db698b243e42f731aa00",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 20,
+        "sourceRect": [
+          735,
+          303,
+          115,
+          122
+        ],
+        "fixedSourceScale": 0.4085106382978723,
+        "sourceFootInCrop": [
+          29.0,
+          122
+        ],
+        "placement": [
+          60,
+          56
+        ]
+      }
+    },
+    {
+      "name": "walk_left_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_left_3.png",
+      "sha256": "0fd0def2863d891da9d941b6a40bd0d69f68e64b23cdfb43f9238253a15f330e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 21,
+        "sourceRect": [
+          905,
+          300,
+          109,
+          123
+        ],
+        "fixedSourceScale": 0.4085106382978723,
+        "sourceFootInCrop": [
+          77.0,
+          123
+        ],
+        "placement": [
+          41,
+          56
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_left_0.png",
+      "sha256": "9a7b2cf13794cdc48d9d83d3f7066fc35b55eb50f4821cbe244aca2c0d296e5e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 22,
+        "sourceRect": [
+          1066,
+          301,
+          121,
+          122
+        ],
+        "fixedSourceScale": 0.4085106382978723,
+        "sourceFootInCrop": [
+          37.0,
+          122
+        ],
+        "placement": [
+          57,
+          56
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_left_1.png",
+      "sha256": "01d07a0cc4c985ef19712b96c97727a5e03c10db3a0021f24798ebb9e9d74262",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 23,
+        "sourceRect": [
+          1207,
+          302,
+          160,
+          123
+        ],
+        "fixedSourceScale": 0.4085106382978723,
+        "sourceFootInCrop": [
+          73.0,
+          123
+        ],
+        "placement": [
+          42,
+          56
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_left_2.png",
+      "sha256": "c77c667f8c5d89763560f0558688df1144451d725cea87f7d1f7461665cfd762",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 24,
+        "sourceRect": [
+          13,
+          431,
+          171,
+          119
+        ],
+        "fixedSourceScale": 0.4085106382978723,
+        "sourceFootInCrop": [
+          86.5,
+          119
+        ],
+        "placement": [
+          37,
+          57
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_left_3.png",
+      "sha256": "ec3746d3761e806bbbd434b2d5fd473fd7793d22dfb2ef1fa91a5141e901abf7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 25,
+        "sourceRect": [
+          172,
+          432,
+          160,
+          119
+        ],
+        "fixedSourceScale": 0.4085106382978723,
+        "sourceFootInCrop": [
+          133.0,
+          119
+        ],
+        "placement": [
+          18,
+          57
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/hurt_left_0.png",
+      "sha256": "dcbd3d374ec69eb8204f57c427f923d77067da4489c7e9204d857ba2a13335bf",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 26,
+        "sourceRect": [
+          385,
+          434,
+          107,
+          117
+        ],
+        "fixedSourceScale": 0.4085106382978723,
+        "sourceFootInCrop": [
+          33.0,
+          117
+        ],
+        "placement": [
+          59,
+          58
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/hurt_left_1.png",
+      "sha256": "cf8e449ddef37fbf1d4dd11bcf4d8e94ebd1129e7f08c5becfac97c4d7d54c6a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 27,
+        "sourceRect": [
+          548,
+          443,
+          114,
+          109
+        ],
+        "fixedSourceScale": 0.4085106382978723,
+        "sourceFootInCrop": [
+          62.0,
+          109
+        ],
+        "placement": [
+          47,
+          61
+        ]
+      }
+    },
+    {
+      "name": "death_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_left_0.png",
+      "sha256": "604aa60ec6414a193d19d6bb463c0d38489067e8c00476d5f347e15f9ef9d768",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          65,
+          272,
+          263,
+          210
+        ],
+        "fixedSourceScale": 0.19047619047619047,
+        "sourceFootInCrop": [
+          155.0,
+          210
+        ],
+        "placement": [
+          42,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_left_1.png",
+      "sha256": "bc42d7f3b922eb096002e730702b330327bd3c7bf29c17e0371eba9fe8f818f6",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          411,
+          299,
+          316,
+          183
+        ],
+        "fixedSourceScale": 0.19047619047619047,
+        "sourceFootInCrop": [
+          185.0,
+          183
+        ],
+        "placement": [
+          37,
+          71
+        ]
+      }
+    },
+    {
+      "name": "death_left_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_left_2.png",
+      "sha256": "49aaa0196cc7f267704e2d9fe2e9e28e2b52ba512fb904cddee1a85b8a3e7840",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          783,
+          344,
+          345,
+          136
+        ],
+        "fixedSourceScale": 0.19047619047619047,
+        "sourceFootInCrop": [
+          193.0,
+          136
+        ],
+        "placement": [
+          35,
+          80
+        ]
+      }
+    },
+    {
+      "name": "death_left_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_left_3.png",
+      "sha256": "dccf9101d8725b3db84dcc2c351105b15caef786eabf352eb349800077c5ee51",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1166,
+          361,
+          317,
+          121
+        ],
+        "fixedSourceScale": 0.19047619047619047,
+        "sourceFootInCrop": [
+          269.0,
+          121
+        ],
+        "placement": [
+          21,
+          83
+        ]
+      }
+    },
+    {
+      "name": "idle_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/idle_right_0.png",
+      "sha256": "df5d29e8e2cf124f3981ee24dd3f454822678907e645381012509616e19479bb",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 32,
+        "sourceRect": [
+          31,
+          564,
+          112,
+          124
+        ],
+        "fixedSourceScale": 0.3950617283950617,
+        "sourceFootInCrop": [
+          81.0,
+          123
+        ],
+        "placement": [
+          40,
+          57
+        ]
+      }
+    },
+    {
+      "name": "idle_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/idle_right_1.png",
+      "sha256": "35efc51f60ac88ae442c8db1e3842f7a1a81522cd1919a126bd264de45bda3e1",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 33,
+        "sourceRect": [
+          207,
+          566,
+          114,
+          119
+        ],
+        "fixedSourceScale": 0.3950617283950617,
+        "sourceFootInCrop": [
+          71.0,
+          119
+        ],
+        "placement": [
+          44,
+          59
+        ]
+      }
+    },
+    {
+      "name": "walk_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_right_0.png",
+      "sha256": "af180fe685ca3645c75e4ded560aab4ebb78d4ec95b69a6202803b97bb82147c",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 34,
+        "sourceRect": [
+          373,
+          566,
+          123,
+          121
+        ],
+        "fixedSourceScale": 0.3950617283950617,
+        "sourceFootInCrop": [
+          42.0,
+          121
+        ],
+        "placement": [
+          55,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_right_1.png",
+      "sha256": "40476a8e476c3013eac2d686bb6787297bd61cfa2a829ea7e4754bb6e9e84622",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 35,
+        "sourceRect": [
+          554,
+          570,
+          116,
+          124
+        ],
+        "fixedSourceScale": 0.3950617283950617,
+        "sourceFootInCrop": [
+          32.0,
+          124
+        ],
+        "placement": [
+          59,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_right_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_right_2.png",
+      "sha256": "ab0e2dad0411f3e7dba85fb12572f215a6c95e7942afdb56e0634147baccbd39",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 36,
+        "sourceRect": [
+          726,
+          569,
+          120,
+          125
+        ],
+        "fixedSourceScale": 0.3950617283950617,
+        "sourceFootInCrop": [
+          91.0,
+          125
+        ],
+        "placement": [
+          36,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_right_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_right_3.png",
+      "sha256": "2ccadd44053298c8d4f357b1b33c42b2cfe6674e597fbe544e90d332c7c70cd1",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 37,
+        "sourceRect": [
+          900,
+          569,
+          116,
+          129
+        ],
+        "fixedSourceScale": 0.3950617283950617,
+        "sourceFootInCrop": [
+          98.0,
+          128
+        ],
+        "placement": [
+          33,
+          55
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_right_0.png",
+      "sha256": "987db3a918d802463822ba4290b43b6444076334401eb0090d5736aecb9125d6",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 38,
+        "sourceRect": [
+          1070,
+          565,
+          161,
+          135
+        ],
+        "fixedSourceScale": 0.3950617283950617,
+        "sourceFootInCrop": [
+          91.0,
+          135
+        ],
+        "placement": [
+          36,
+          53
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_right_1.png",
+      "sha256": "e178f696e4c3e4b2c902af085df1b771e61c8d32f0076aa97c3880d69f63d7ee",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 39,
+        "sourceRect": [
+          1253,
+          570,
+          124,
+          127
+        ],
+        "fixedSourceScale": 0.3950617283950617,
+        "sourceFootInCrop": [
+          87.0,
+          127
+        ],
+        "placement": [
+          38,
+          56
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_right_2.png",
+      "sha256": "894a8e5272c50fd2f368756584a3c685b1be292e75b55e5d66696ec0f55f4754",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 40,
+        "sourceRect": [
+          17,
+          707,
+          177,
+          127
+        ],
+        "fixedSourceScale": 0.3950617283950617,
+        "sourceFootInCrop": [
+          93.0,
+          127
+        ],
+        "placement": [
+          35,
+          56
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_right_3.png",
+      "sha256": "720a09ce147e635ceb0c6e56910142fbdaaac1795bdcb213b134b37bf6661490",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 41,
+        "sourceRect": [
+          203,
+          707,
+          129,
+          127
+        ],
+        "fixedSourceScale": 0.3950617283950617,
+        "sourceFootInCrop": [
+          106.0,
+          127
+        ],
+        "placement": [
+          30,
+          56
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/hurt_right_0.png",
+      "sha256": "636b215cd6338dd78b39e34108e2bd7813485ec56e579d8185f230b14b6a4c45",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 42,
+        "sourceRect": [
+          370,
+          706,
+          130,
+          128
+        ],
+        "fixedSourceScale": 0.3950617283950617,
+        "sourceFootInCrop": [
+          89.0,
+          128
+        ],
+        "placement": [
+          37,
+          55
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/hurt_right_1.png",
+      "sha256": "ed83b9b78588315ad2b2fb7711b3edb57ed109b4e0cc2c5be0251cf7da19f5ff",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 43,
+        "sourceRect": [
+          554,
+          717,
+          119,
+          114
+        ],
+        "fixedSourceScale": 0.3950617283950617,
+        "sourceFootInCrop": [
+          76.5,
+          114
+        ],
+        "placement": [
+          42,
+          61
+        ]
+      }
+    },
+    {
+      "name": "death_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_right_0.png",
+      "sha256": "a8dc148122ba91a87f85ae2c3b08d4686da7f70d27a4c39ac40c1b4d32fd0cc9",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          76,
+          522,
+          275,
+          209
+        ],
+        "fixedSourceScale": 0.19138755980861244,
+        "sourceFootInCrop": [
+          106.0,
+          209
+        ],
+        "placement": [
+          52,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_right_1.png",
+      "sha256": "6baeb44bd7dc48e48d3cec909131cdbb451bdaf12392b0af618ccaff2115a72e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          411,
+          543,
+          325,
+          195
+        ],
+        "fixedSourceScale": 0.19138755980861244,
+        "sourceFootInCrop": [
+          127.0,
+          195
+        ],
+        "placement": [
+          48,
+          69
+        ]
+      }
+    },
+    {
+      "name": "death_right_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_right_2.png",
+      "sha256": "cf7ab15a6bf76fd53c4f86fc2c513b8748ffd25bfb9963bb321404b9e0649af2",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          779,
+          589,
+          350,
+          138
+        ],
+        "fixedSourceScale": 0.19138755980861244,
+        "sourceFootInCrop": [
+          153.0,
+          138
+        ],
+        "placement": [
+          43,
+          80
+        ]
+      }
+    },
+    {
+      "name": "death_right_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_right_3.png",
+      "sha256": "09b5d14372a798d84fd9f1e08716d6b5b9468e1cb83441d00d2287aaf640514a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1172,
+          600,
+          328,
+          129
+        ],
+        "fixedSourceScale": 0.19138755980861244,
+        "sourceFootInCrop": [
+          205.0,
+          129
+        ],
+        "placement": [
+          33,
+          81
+        ]
+      }
+    },
+    {
+      "name": "idle_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/idle_up_0.png",
+      "sha256": "26e450e15eb325c41d38e87aad1a9542ecb922d60209d851e6daf56e11ad16ea",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 48,
+        "sourceRect": [
+          47,
+          848,
+          106,
+          116
+        ],
+        "fixedSourceScale": 0.41025641025641024,
+        "sourceFootInCrop": [
+          27.0,
+          115
+        ],
+        "placement": [
+          61,
+          59
+        ]
+      }
+    },
+    {
+      "name": "idle_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/idle_up_1.png",
+      "sha256": "62da11cc006fb0b120721d4cf6ad187b794dcc97f32859e733b1091adb154a7d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 49,
+        "sourceRect": [
+          208,
+          847,
+          114,
+          118
+        ],
+        "fixedSourceScale": 0.41025641025641024,
+        "sourceFootInCrop": [
+          55.5,
+          118
+        ],
+        "placement": [
+          49,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_up_0.png",
+      "sha256": "a2727aa4a88980bcfafec210635fcb4f90124766aefb411d6cd12b13e71af693",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 50,
+        "sourceRect": [
+          386,
+          847,
+          111,
+          122
+        ],
+        "fixedSourceScale": 0.41025641025641024,
+        "sourceFootInCrop": [
+          41.0,
+          122
+        ],
+        "placement": [
+          55,
+          56
+        ]
+      }
+    },
+    {
+      "name": "walk_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_up_1.png",
+      "sha256": "538973c9d74fbb8dc322835223517806df7e1c8e9cd2410fb8a4ed4bfab12857",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 51,
+        "sourceRect": [
+          558,
+          848,
+          120,
+          120
+        ],
+        "fixedSourceScale": 0.41025641025641024,
+        "sourceFootInCrop": [
+          31.0,
+          120
+        ],
+        "placement": [
+          59,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_up_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_up_2.png",
+      "sha256": "3416d5852fe7094ae80834bbd4802ba957465ee22c315763ad28d4ebb107ea83",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 52,
+        "sourceRect": [
+          731,
+          849,
+          102,
+          125
+        ],
+        "fixedSourceScale": 0.41025641025641024,
+        "sourceFootInCrop": [
+          66.0,
+          124
+        ],
+        "placement": [
+          45,
+          55
+        ]
+      }
+    },
+    {
+      "name": "walk_up_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/walk_up_3.png",
+      "sha256": "d9c11fd61d50f1b97d065ec7f681e78634fff1a6e861d4a07f979a407332628f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 53,
+        "sourceRect": [
+          901,
+          850,
+          112,
+          123
+        ],
+        "fixedSourceScale": 0.41025641025641024,
+        "sourceFootInCrop": [
+          65.5,
+          123
+        ],
+        "placement": [
+          45,
+          56
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_up_0.png",
+      "sha256": "c460979b2cde2f9f5a8ff708c33d3f91be0ec5b1f2df07e36a926af82c491644",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 54,
+        "sourceRect": [
+          1077,
+          848,
+          132,
+          126
+        ],
+        "fixedSourceScale": 0.41025641025641024,
+        "sourceFootInCrop": [
+          54.0,
+          126
+        ],
+        "placement": [
+          50,
+          54
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_up_1.png",
+      "sha256": "4c2cebd1e8841f8e4c0e905809b3a7449cff9fdb89f195057b5fbfa5d07f8e87",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 55,
+        "sourceRect": [
+          1256,
+          852,
+          121,
+          121
+        ],
+        "fixedSourceScale": 0.41025641025641024,
+        "sourceFootInCrop": [
+          25.0,
+          120
+        ],
+        "placement": [
+          62,
+          57
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_up_2.png",
+      "sha256": "070f04dd51f453c246ff1b81fea0b51602ccd7140aaf39aad28c025dbee58fa2",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 56,
+        "sourceRect": [
+          25,
+          978,
+          158,
+          125
+        ],
+        "fixedSourceScale": 0.41025641025641024,
+        "sourceFootInCrop": [
+          99.0,
+          125
+        ],
+        "placement": [
+          31,
+          55
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/basic_attack_up_3.png",
+      "sha256": "bfc6720572ba875a7ec1e43a51c08386fe2845025b33ef0c9b6410d845139c52",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 57,
+        "sourceRect": [
+          215,
+          978,
+          123,
+          125
+        ],
+        "fixedSourceScale": 0.41025641025641024,
+        "sourceFootInCrop": [
+          86.5,
+          125
+        ],
+        "placement": [
+          37,
+          55
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/hurt_up_0.png",
+      "sha256": "f15582a78421e09330d236e0f1830dd27b8b636fb47fea78ca349a00db5a1f71",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 58,
+        "sourceRect": [
+          388,
+          978,
+          119,
+          124
+        ],
+        "fixedSourceScale": 0.41025641025641024,
+        "sourceFootInCrop": [
+          65.0,
+          124
+        ],
+        "placement": [
+          45,
+          55
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/hurt_up_1.png",
+      "sha256": "73bad93479eaad4ea4cd90e393254e07564099ac77cf99ff234702fae3be6abc",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/hai_tac_hoa_phao_sprites_source_v01.png",
+        "sourceCell": 59,
+        "sourceRect": [
+          557,
+          993,
+          119,
+          108
+        ],
+        "fixedSourceScale": 0.41025641025641024,
+        "sourceFootInCrop": [
+          79.0,
+          108
+        ],
+        "placement": [
+          40,
+          62
+        ]
+      }
+    },
+    {
+      "name": "death_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_up_0.png",
+      "sha256": "1b8d1ff68636a6e9d6cf8322b204c02ecd593802639bd5e8d4723b8b653d7962",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          82,
+          752,
+          258,
+          211
+        ],
+        "fixedSourceScale": 0.1895734597156398,
+        "sourceFootInCrop": [
+          113.0,
+          211
+        ],
+        "placement": [
+          51,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_up_1.png",
+      "sha256": "513ac5bc17c6d80a295e2f2fea21b9e142474dbffadc4f0882a5b390e8b6bfa1",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          421,
+          773,
+          325,
+          195
+        ],
+        "fixedSourceScale": 0.1895734597156398,
+        "sourceFootInCrop": [
+          207.5,
+          195
+        ],
+        "placement": [
+          33,
+          69
+        ]
+      }
+    },
+    {
+      "name": "death_up_2",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_up_2.png",
+      "sha256": "e7337e1e1f7a4f9a58abdb482d5ba474eca9df269ea1dce6b8b3543bdc7a10d1",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          780,
+          800,
+          339,
+          165
+        ],
+        "fixedSourceScale": 0.1895734597156398,
+        "sourceFootInCrop": [
+          207.0,
+          165
+        ],
+        "placement": [
+          33,
+          75
+        ]
+      }
+    },
+    {
+      "name": "death_up_3",
+      "file": "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/frames/death_up_3.png",
+      "sha256": "51e7433a25bcaa8972409cf04434621453e2ce7065ec61649b6def330c5c040f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/gunner_death_alpha_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1183,
+          815,
+          317,
+          154
+        ],
+        "fixedSourceScale": 0.1895734597156398,
+        "sourceFootInCrop": [
+          152.0,
+          154
+        ],
+        "placement": [
+          43,
+          77
+        ]
+      }
+    }
+  ],
+  "sourceScales": {
+    "down": 0.3855421686746988,
+    "left": 0.4085106382978723,
+    "right": 0.3950617283950617,
+    "up": 0.41025641025641024
+  },
+  "runtimeIntegrated": false,
+  "runtimeVerified": false,
+  "notes": [
+    "Original generated cels; fixed nearest-neighbor scale per source direction; binary alpha245 cleanup.",
+    "Visual animation only. No damage, hit timing, status effect, spawn or collision rules."
+  ]
+}

@@ -1,5 +1,7 @@
 # Acceptance Tests — Rule-to-test traceability
 
+**Confirmed evidence policy (2026-10-30):** Follow `AGENTS.md` visual verification and recording policy. Routine development, asset generation and tests use lightweight PNG screenshots and live Phaser assertions/frame observations. Do not create video/animated-image evidence or run recording, encoding or conversion tools. Recordings require an explicit user request for the current task; preserve all existing recordings. Animation, transition, positioning and gameplay validation remain required.
+
 ## Current menu-only dungeon access
 
 - No Dẫn Lộ sprite, label or NPC marker remains. Supported entry is enabled for a live arena player at the normal spawn, without walking to an interaction radius.
@@ -161,3 +163,68 @@ These are behavioral requirements, not already implemented tests. Codex should c
 - Forged gameplay/dungeon commands before confirmation are rejected. Pending players are absent from rendered arena actors. Repeated confirmation cannot duplicate/reset a hero.
 - Existing progression, statue HP and invasion deadline survive late entry. Full rooms reject a seventh client, an active free seat reopens when a pending entrant leaves, and defeated matches reject entry.
 - Live tick updates preserve school-control DOM/focus; arrows/A work after confirmation. See docs/LATE_JOIN_FIX.md for actual verification results.
+
+## M3A — Complete Cái Bang mechanics and supplied skill sprites
+
+- [x] All ten canonical active skills have deterministic resource/cooldown/cast validation and their specified targeting/effects. Both A styles and automatic Tiêu Diêu Công growth remain distinct. No targeted mouse spell or client damage calculation.
+- [x] Three-shot non-homing fire, blast/burn, piercing knockback wave, temporary crit buff, large fire wave, wide slow sweep, single armor break, pull/silence/disarm, swept dash/stun and multi-hit whirlwind/finisher execute authoritatively. Cầm Long neither stuns nor prevents movement.
+- [x] Snapshot damage/crit statistics, authoritative impact heading, status refresh/expiry, invalid casts, cooldown swapping/spam, control assists and fixed reward conservation are tested.
+- [x] Death/disconnect/travel cancel owned temporary actions and shots; self buffs clear. Existing applied enemy effects preserve local expiry and empty-dungeon pause behavior. Separate zones and rooms remain isolated.
+- [x] All supplied character/VFX assets map by canonical IDs: 21 components, 464 file-validated frames and 105 registered animation tags. PNG/JSON/required icon presence, frame bounds/counts and unique animation keys are checked. Baseline source/export hashes remain unchanged; actual Aseprite batch export ran.
+- [x] Five two-context browser scenarios verify all-ten casts/live frames, shared projectile hits, dungeon exit cleanup, arena invader combat, resource spam, natural mid-channel death and staff status/finisher feedback. Every component has multiple actual observed frames; this is not a claim that every direction/tag was exercised in multiplayer.
+- [x] Existing UI/input/camera/lobby/dungeon regressions: 16 browser scenarios passed, including 900×640, 1280×720 and 1920×1080. Compact preview evidence is also captured at 944×466. No new page/console/asset-loading errors were found by the checked scenarios.
+- [x] Typecheck/build passed; 134 unit/network tests in 15 files passed. Deterministic 240-probe output is recorded as provisional tuning evidence, not final balance approval.
+- [x] Development-only arena loadout and optional live preview use the real server pipeline; production disables the flag, and invalid/duplicate/reserved IDs are rejected. No rank/respec progression UI is implemented.
+- [ ] Director visual approval of production skill animations at normal gameplay zoom. Existing legacy hero hurt/death and dungeon/world placeholders are not approved by these functional checks.
+
+Evidence, commands and limits: `docs/M3A_IMPLEMENTATION.md`, `docs/M3A_SKILL_ASSET_MAP.md`, `docs/evidence/m3a/` and `assets/exports/skills/cai-bang/runtime_integration_v1.json`. Stop at M3A; no M3B expansion.
+
+## M3B — Skill progression, loadout and character stats
+
+- [x] Level1 has exactly one earned/available point and empty active slots; earned points cap at30. Existing60 EXP/level curve and shared arena/dungeon character remain server-owned; EXP caps at1740 and the level30 HUD shows MAX.
+- [x] Mixed Chưởng/Bổng Q/W/E/R assignments, independent A, no duplicate skills, no foreign skills, optional single ultimate and configurable standard/ultimate rank gates. Rank0 cannot cast. Unsupported schools no longer receive historical Cái Bang active defaults in normal rooms.
+- [x] One point per rank; upgrade budget/gates/caps validated. Explicit rank variants change real damage, control, burn, buff, range, MP/CD as appropriate while preserving M3A rank1 mechanics and canonical visual IDs.
+- [x] Living-arena-only changes and free reset; dungeon/PvP information is read-only. Removing skills refunds ranks, moving preserves them. Expected revisions, shared monotonic sequences and strict network payloads prevent replay/concurrent spending and forged values.
+- [x] Cooldowns follow canonical IDs through removal/swap/upgrade/reset/relearn. A shares an expiry across its styles. Zone changes preserve remaining time. No build change refills HP/MP or clears hostile control.
+- [x] Derived point accounting and stat layers never accumulate former bonuses. Level30 fixtures prove16 allocated+14 surplus, or15+15. A missing/unmaxed slot disables surplus; repeated100 resets/rebuilds preserve points/stats/resources exactly.
+- [x] Separate base, automatic level growth, Tiêu Diêu, surplus, temporary and reserved zero-equipment layers. Actual defense, movement, mana regeneration, A cadence and CDR consume effective stats. Passive costs no points/slots; death cannot be bypassed by level-up.
+- [x] Real SDK clients verify independent progression/rewards, peer rank/stat state, room isolation, malformed/stale/spam guards, dungeon edits/exit/reset, level30 surplus and production flag enforcement.
+- [x] Functional in-viewport skill overlay uses existing ten icons and frame art; all style sections, draft slots, rank previews, costs/locks, A, ledger, stats, passive/surplus and reset are available. Existing controls/camera/HUD are retained. No new artwork or equipment backend.
+- Live browser verification, screenshots and final totals: `docs/M3B_IMPLEMENTATION.md` and `docs/evidence/m3b/`. Final verification must be reported from actual command results; this checklist does not approve visual art or final numerical balance. M3C remains out of scope.
+- [x] Final M3B pipeline:174 unit/network tests,2 workflow tests, typechecks/build and6 current asset validators passed;16 browser scenarios passed. Two real clients exercised independent earning/builds, mixed ranks, physical exit/reset/re-entry, shared VFX, real invader damage and live menu warnings. Menu bounds/input recovery passed at supported desktop sizes; compact944×466 →1920×1080 resize and live rank/point badges passed. No new browser/page/asset-loading errors were reported by the scenarios. No live PvP, six-player benchmark or final balance/art approval is claimed.
+
+
+## Thieu Lam character prototype checks - 2026-10-31
+
+- scripts/verify-thieu-lam.py validates the explicitly approved v02 concept, two genuine40-cel Aseprite sources,80 distinct transparent PNG frames,24 authored tags, four facings, timing, pivots, clipping, individual/atlas equality and existing approved locks.
+- tests/e2e/thieu-lam-art.spec.ts verifies the real Phaser gallery and keyboard-driven matches for both presentations, all basic-attack frames through Phaser events, bounded existing world interpolation, exact asset origins/scales, portrait binding, shared server state/unchanged attack IDs, mixed-school six-player scale, normal/logical-size PNGs and real tree occlusion.
+- Runtime final art approval was separately recorded on2026-10-31; the89-file approved-byte lock preserves the reviewed assets. Cast/hurt/death reuse is disclosed, debug dao is presentation-only and no school mechanics are added. PNG/JSON evidence only.
+## M3C1 Thiên Sơn acceptance
+
+- Both Phiến/Đao A styles are melee with distinct speed, damage, frontal angle and primary/secondary cleave; no fan projectile.
+- All ten canonical actives have behavior-specific deterministic cases, explicit rank variants and mana/cooldown/cast guards. Liên Hoa has four frontal pulses; Lục Dương and Bách Phiến follow a moving owner; Lưu Phong and Phi Ảnh obey swept terrain/bounds; Truy Hồn reevaluates slow per cut; Chiết Mai expires without stacking; Phong Ảnh consumes/expires its counter window; Liệt Phong penetrates only its own strike; Bách Liệt has ten forward cuts plus finisher.
+- M3B owns points/ranks/loadouts/basic selection and cooldown debt. Only Thiên Sơn skills are legal for Thiên Sơn; both styles mix without an equipment restriction; one optional ultimate and existing rank gates remain. Bắc Minh and surplus derive school-specific speed/attack-speed/crit without stacking on reset.
+- Shared two-client server/browser tests exercise Cái Bang and Thiên Sơn damage on the same enemy, independent XP/builds, real dash positions, owner-bound buffs/VFX, dungeon travel cleanup and statue defense. Existing Cái Bang, progression, UI, dungeon, room-isolation and respawn cases remain in the regression scope.
+- PNG/atlas audits and actual runtime frame observations validate supplied components, pivots, four dash directions, multiple casters and cleanup. No recordings. Thiên Sơn skill artwork received explicit director approval on2026-10-31; missing authored baseline hurt/death remains disclosed. Actual final results are recorded in `docs/M3C1_IMPLEMENTATION.md` after execution.
+
+## M3C2 Võ Đang
+
+- `tests/vo-dang-skills.test.ts`: behavior-specific cases for both basics/all ten actives,mana/RNG/cast validation,shield full/partial/lethal/post-armor handling,independent slows/debuff expiry,hit-only refund/regen caps,zone entry/exit/tick cadence,overlap/dedup,counter trigger/expiry/range/terrain/recursion/survival,rank/ultimate gates/points/passive/surplus,and death/travel/respec cleanup.
+- `tests/vo-dang-room.test.ts`: three real school clients,shared dungeon combat/event/state/mana/rewards,room/private-zone isolation,area ownership/cleanup,normal-room preview fixture rejection and arena invasion-entity skill use. Capacity remains six.
+- `tests/e2e/m3c2-preview.spec.ts`: all ten retained skill phases,two basics,real shield absorption/refund/counter dummies,stationary formation observers and both baseline styles' four-direction live frames.
+- `tests/e2e/m3c2.spec.ts`: normal point-funded three-school farming/M3B editing/arena defense plus six-player natural combat/readability. PNGs/frame/state observations only. Final measured results are recorded in `docs/M3C2_IMPLEMENTATION.md`; the existence of a test is not a passing claim.
+
+## M3C3 Thiếu Lâm
+
+- Exactly43 active definitions/eight basics across four schools; Gold has8 Quyền/5 Đao,automatic passive and independent A. Ranks/resources/point gates/cooldown debt/arena-only editing use M3B.
+- Both chains require same-target successful hits,including secondary cleave. Misses/wrong target/another attacker/expired stages never empower. A/unrelated actives preserve progress; A/B chains stay independent. Vô Ảnh resolves one empowerment per target/cast with six deterministic kicks.
+- Vulnerable windups can miss/be interrupted; protected Kim Cang takes reduced damage while resisting new stuns/hostile displacement. Guard/ultimate aftereffect expire. Gold support uses same-zone living allies,strongest nonstacking defense,bounded heal,range/terrain checks and lifecycle cleanup; no statue repair/revival/enemy healing.
+- Four real SDK clients agree on combo/empowered hit/support/mana/rewards and retain zone/room isolation. Browser cases use real keyboard/menus,all thirteen retained sprite/VFX pairs,two basics,two combos,normal four-school progression/farming/defense and six-client natural combat/readability. PNG/frame logs only.
+- Exact actual commands/results and art-approval limitations:`docs/M3C3_IMPLEMENTATION.md`; do not treat test-file existence as a passing result. Stop before M3D.
+
+## Clean spawn and wave information — 2026-10-31
+
+- Thiếu Lâm selection card uses the approved monk idle image,matching its runtime identity.
+- Normal rooms have no initial practice enemies and never respawn them; only explicit non-production fixtures opt in. Dungeon enemies and scheduled two-sided invasions remain.
+- All creep under-sprite name/status labels are hidden; health bars/effects and player labels remain visible. The next invasion name advances from the real wave manifest,and both arena/dungeon peers see the same wave notice.
+- `tests/clean-spawn-room.test.ts` checks regular/opt-in/production behavior. `tests/e2e/clean-match.spec.ts` checks two-client selection,empty spawn,movement,dungeon/invasion labels,health bars and synchronized upcoming roster. Actual results are recorded in `docs/evidence/clean-match/verification-summary.json` after execution.

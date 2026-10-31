@@ -22,8 +22,7 @@ const url='http://127.0.0.1:'+server.address().port;
 let browser;const errors=[];const observations=[];
 try{
  browser=await chromium.launch({headless:true});
- const page=await browser.newPage({viewport:{width:1280,height:720},deviceScaleFactor:1,recordVideo:{dir:resolve(root,'artifacts/arena_creeps_phaser_v1'),size:{width:1280,height:720}}});
- const video=page.video();
+ const page=await browser.newPage({viewport:{width:1280,height:720},deviceScaleFactor:1});
  page.on('pageerror',error=>errors.push(error.message));
  for(const pose of ['idle','walk','basic_attack','hurt','death']){
   await page.goto(url+'/sprites/creeps/arena/review.html?pose='+pose);
@@ -50,7 +49,7 @@ try{
  await page.screenshot({path:resolve(evidence,'concept_comparison.png'),fullPage:true});
  if(errors.length)throw Error(errors.join('\n'));
  writeFileSync(resolve(evidence,'phaser_verification.json'),JSON.stringify({status:'PASS',scope:'Isolated actual Phaser renderer; no match integration or multiplayer verification',errors,observations},null,2));
- await page.context().close();await video.saveAs(resolve(evidence,'phaser_animation_preview.webm'));
+ await page.context().close();
  const tags=observations.reduce((sum,o)=>sum+o.sprites.length,0);
  const frames=observations.reduce((sum,o)=>sum+o.sprites.reduce((n,s)=>n+s.total,0),0);
  const indexPath=resolve(here,'production_manifest_v1.json');
@@ -59,11 +58,11 @@ try{
   const path=resolve(here,asset.slug,'manifest.json');
   const manifest=JSON.parse(readFileSync(path,'utf8'));
   manifest.normalGameplayReview='PASS: isolated Phaser '+observations[0].phaser+', 1x logical / 2x display, all frames observed. No match integration or director runtime approval.';
-  manifest.verificationEvidence=['sprites/creeps/arena/review/phaser_verification.json','sprites/creeps/arena/review/concept_comparison.png','sprites/creeps/arena/review/phaser_animation_preview.webm'];
+  manifest.verificationEvidence=['sprites/creeps/arena/review/phaser_verification.json','sprites/creeps/arena/review/concept_comparison.png'];
   writeFileSync(path,JSON.stringify(manifest,null,2)+'\n');
  }
  Object.assign(index,{totalFrames:frames,totalAnimationTags:tags,verification:'PASS: isolated Phaser; director review pending; not integrated'});
  writeFileSync(indexPath,JSON.stringify(index,null,2)+'\n');
- console.log('PASS: Phaser '+observations[0].phaser+', 16 sprites per pose, all '+tags+' tags and '+frames+' frames observed; 6 screenshots and real-render animation video captured.');
+ console.log('PASS: Phaser '+observations[0].phaser+', 16 sprites per pose, all '+tags+' tags and '+frames+' frames observed; 6 PNG screenshots captured; live frame observations saved.');
 }finally{await browser?.close();await new Promise(ok=>server.close(ok));}
 

@@ -1,0 +1,795 @@
+{
+  "milestone": "M3C1",
+  "verifiedOn": "2026-10-31",
+  "runtimeIntegrated": true,
+  "gameplayImplemented": true,
+  "functionalVerification": "passed",
+  "productionArtApproved": true,
+  "approvedBaselineHashesPreserved": true,
+  "sourceManifest": "production_manifest_v01.json",
+  "verificationSummary": "docs/evidence/m3c1/verification-summary.json",
+  "runtimeFrames": "docs/evidence/m3c1/runtime-frame-observations.json",
+  "skillAssetMap": "docs/M3C1_SKILL_ASSET_MAP.md",
+  "components": [
+    {
+      "id": "lien_hoa_phien_character",
+      "skillId": "lien_hoa_phien",
+      "kind": "character",
+      "sheet": "assets/exports/skills/thien-son/lien_hoa_phien/lien_hoa_phien_character.png",
+      "atlas": "assets/exports/skills/thien-son/lien_hoa_phien/lien_hoa_phien_character.json",
+      "sha256": {
+        "sheet": "8f8fcb6f4ac8b2e69dc81a8c0357009209e238c2b160f24c3f6d2aa126e13b2d",
+        "atlas": "f33c8eb7564b049e53adb553b82510da83190bd75952e3903a3a7f24dbc79f92"
+      },
+      "frameDimensions": [
+        96,
+        80
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "cast_down",
+        "cast_left",
+        "cast_right",
+        "cast_up",
+        "rapid_down",
+        "rapid_left",
+        "rapid_right",
+        "rapid_up"
+      ],
+      "observedFrameCount": 6,
+      "observedFrames": [
+        "lien_hoa_phien_character:cast_down_0",
+        "lien_hoa_phien_character:cast_down_1",
+        "lien_hoa_phien_character:cast_down_2",
+        "lien_hoa_phien_character:cast_down_3",
+        "lien_hoa_phien_character:rapid_down_0",
+        "lien_hoa_phien_character:rapid_down_1"
+      ]
+    },
+    {
+      "id": "lien_hoa_phien_vfx",
+      "skillId": "lien_hoa_phien",
+      "kind": "vfx",
+      "sheet": "assets/exports/skills/thien-son/lien_hoa_phien/lien_hoa_phien_vfx.png",
+      "atlas": "assets/exports/skills/thien-son/lien_hoa_phien/lien_hoa_phien_vfx.json",
+      "sha256": {
+        "sheet": "ddc8cf1f02a44d3cf52cb6f9e963d45e0ae50eaef8aa47be4c450371d8be3735",
+        "atlas": "08b739893353166d4a4c6b766bdcf66c82b856148e18a4c1aa286485b3bbb9dc"
+      },
+      "frameDimensions": [
+        96,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "sweep_right",
+        "sweep_down",
+        "sweep_left",
+        "sweep_up",
+        "contact_right",
+        "contact_down",
+        "contact_left",
+        "contact_up"
+      ],
+      "observedFrameCount": 4,
+      "observedFrames": [
+        "lien_hoa_phien_vfx:sweep_down_0",
+        "lien_hoa_phien_vfx:sweep_down_1",
+        "lien_hoa_phien_vfx:sweep_down_2",
+        "lien_hoa_phien_vfx:sweep_down_3"
+      ]
+    },
+    {
+      "id": "luc_duong_chuong_character",
+      "skillId": "luc_duong_chuong",
+      "kind": "character",
+      "sheet": "assets/exports/skills/thien-son/luc_duong_chuong/luc_duong_chuong_character.png",
+      "atlas": "assets/exports/skills/thien-son/luc_duong_chuong/luc_duong_chuong_character.json",
+      "sha256": {
+        "sheet": "b12a7954e3c32cfa0fb931e08cd0c821b86439d91acd3fef4f7a5dbfdcb922b9",
+        "atlas": "b2654d817f9113bab3032640a315d166ee8d83a5953c7959680eee0839550e0b"
+      },
+      "frameDimensions": [
+        96,
+        80
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "cast_down",
+        "cast_left",
+        "cast_right",
+        "cast_up",
+        "spin_down",
+        "spin_left",
+        "spin_right",
+        "spin_up"
+      ],
+      "observedFrameCount": 9,
+      "observedFrames": [
+        "luc_duong_chuong_character:cast_down_0",
+        "luc_duong_chuong_character:cast_down_1",
+        "luc_duong_chuong_character:cast_down_2",
+        "luc_duong_chuong_character:cast_down_3",
+        "luc_duong_chuong_character:cast_right_0",
+        "luc_duong_chuong_character:spin_down_0",
+        "luc_duong_chuong_character:spin_down_1",
+        "luc_duong_chuong_character:spin_down_2",
+        "luc_duong_chuong_character:spin_down_3"
+      ]
+    },
+    {
+      "id": "luc_duong_chuong_vfx",
+      "skillId": "luc_duong_chuong",
+      "kind": "vfx",
+      "sheet": "assets/exports/skills/thien-son/luc_duong_chuong/luc_duong_chuong_vfx.png",
+      "atlas": "assets/exports/skills/thien-son/luc_duong_chuong/luc_duong_chuong_vfx.json",
+      "sha256": {
+        "sheet": "c5d1b505cf8249782548042fbc938d4dfd89a124cd6337b3d46035ea214f1394",
+        "atlas": "0c78eb15a694ac4b622d58d78bfcd30862816c2edc6cd1457771511c911ee370"
+      },
+      "frameDimensions": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "gather",
+        "spin",
+        "expiry"
+      ],
+      "observedFrameCount": 10,
+      "observedFrames": [
+        "luc_duong_chuong_vfx:expiry_1",
+        "luc_duong_chuong_vfx:expiry_2",
+        "luc_duong_chuong_vfx:expiry_3",
+        "luc_duong_chuong_vfx:gather_1",
+        "luc_duong_chuong_vfx:gather_2",
+        "luc_duong_chuong_vfx:gather_3",
+        "luc_duong_chuong_vfx:spin_0",
+        "luc_duong_chuong_vfx:spin_1",
+        "luc_duong_chuong_vfx:spin_2",
+        "luc_duong_chuong_vfx:spin_3"
+      ]
+    },
+    {
+      "id": "luu_phong_bo_character",
+      "skillId": "luu_phong_bo",
+      "kind": "character",
+      "sheet": "assets/exports/skills/thien-son/luu_phong_bo/luu_phong_bo_character.png",
+      "atlas": "assets/exports/skills/thien-son/luu_phong_bo/luu_phong_bo_character.json",
+      "sha256": {
+        "sheet": "7d78ea43e6df4dc04464fc91b5638c9ba2d9c84d93afe39220cbb9326f549565",
+        "atlas": "f30a2b6ee49c9e1fe33d35112906a94041492982ae14a071ea086671aa8b620d"
+      },
+      "frameDimensions": [
+        96,
+        80
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "cast_down",
+        "cast_left",
+        "cast_right",
+        "cast_up"
+      ],
+      "observedFrameCount": 4,
+      "observedFrames": [
+        "luu_phong_bo_character:cast_right_0",
+        "luu_phong_bo_character:cast_right_1",
+        "luu_phong_bo_character:cast_right_2",
+        "luu_phong_bo_character:cast_right_3"
+      ]
+    },
+    {
+      "id": "luu_phong_bo_vfx",
+      "skillId": "luu_phong_bo",
+      "kind": "vfx",
+      "sheet": "assets/exports/skills/thien-son/luu_phong_bo/luu_phong_bo_vfx.png",
+      "atlas": "assets/exports/skills/thien-son/luu_phong_bo/luu_phong_bo_vfx.json",
+      "sha256": {
+        "sheet": "88e457cd1276fc8785c2d2cdf2ac5c97c374f47e49a5f5b7d633b7c765b3c805",
+        "atlas": "a71306edc7db6169e318f5873c69a66cc06cd463acd617c0f47b5ed82fee57f5"
+      },
+      "frameDimensions": [
+        96,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "trail_right",
+        "trail_down",
+        "trail_left",
+        "trail_up",
+        "settle"
+      ],
+      "observedFrameCount": 6,
+      "observedFrames": [
+        "luu_phong_bo_vfx:settle_1",
+        "luu_phong_bo_vfx:settle_2",
+        "luu_phong_bo_vfx:settle_3",
+        "luu_phong_bo_vfx:trail_right_1",
+        "luu_phong_bo_vfx:trail_right_2",
+        "luu_phong_bo_vfx:trail_right_3"
+      ]
+    },
+    {
+      "id": "chiet_mai_thu_character",
+      "skillId": "chiet_mai_thu",
+      "kind": "character",
+      "sheet": "assets/exports/skills/thien-son/chiet_mai_thu/chiet_mai_thu_character.png",
+      "atlas": "assets/exports/skills/thien-son/chiet_mai_thu/chiet_mai_thu_character.json",
+      "sha256": {
+        "sheet": "74bdc8accfd69ba23e7edb4be1d72dc833216fd13bd1086573fbd939a38da043",
+        "atlas": "fb1cf1b71273d75cfeeb6ebf4fd4b345c969ecd9818a2f45beeb9da3569bcfa3"
+      },
+      "frameDimensions": [
+        80,
+        80
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "cast_down",
+        "cast_left",
+        "cast_right",
+        "cast_up"
+      ],
+      "observedFrameCount": 4,
+      "observedFrames": [
+        "chiet_mai_thu_character:cast_right_0",
+        "chiet_mai_thu_character:cast_right_1",
+        "chiet_mai_thu_character:cast_right_2",
+        "chiet_mai_thu_character:cast_right_3"
+      ]
+    },
+    {
+      "id": "chiet_mai_thu_vfx",
+      "skillId": "chiet_mai_thu",
+      "kind": "vfx",
+      "sheet": "assets/exports/skills/thien-son/chiet_mai_thu/chiet_mai_thu_vfx.png",
+      "atlas": "assets/exports/skills/thien-son/chiet_mai_thu/chiet_mai_thu_vfx.json",
+      "sha256": {
+        "sheet": "c95528f17442e3e65b556afa37dd4812d09eda300c0c41d5f2f324b61b0c70f7",
+        "atlas": "9034476ac992d0749d879e19d677b76c1921952c190c4242ab81f30c663573e0"
+      },
+      "frameDimensions": [
+        96,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "wrist_activation_right",
+        "wrist_activation_down",
+        "wrist_activation_left",
+        "wrist_activation_up",
+        "heel_activation",
+        "wrist_loop_right",
+        "wrist_loop_down",
+        "wrist_loop_left",
+        "wrist_loop_up",
+        "heel_loop",
+        "wrist_expiry_right",
+        "wrist_expiry_down",
+        "wrist_expiry_left",
+        "wrist_expiry_up",
+        "heel_expiry"
+      ],
+      "observedFrameCount": 15,
+      "observedFrames": [
+        "chiet_mai_thu_vfx:heel_activation_1",
+        "chiet_mai_thu_vfx:heel_activation_2",
+        "chiet_mai_thu_vfx:heel_activation_3",
+        "chiet_mai_thu_vfx:heel_loop_0",
+        "chiet_mai_thu_vfx:heel_loop_1",
+        "chiet_mai_thu_vfx:heel_loop_2",
+        "chiet_mai_thu_vfx:heel_loop_3",
+        "chiet_mai_thu_vfx:wrist_activation_right_1",
+        "chiet_mai_thu_vfx:wrist_activation_right_2",
+        "chiet_mai_thu_vfx:wrist_activation_right_3",
+        "chiet_mai_thu_vfx:wrist_expiry_right_1",
+        "chiet_mai_thu_vfx:wrist_loop_right_0",
+        "chiet_mai_thu_vfx:wrist_loop_right_1",
+        "chiet_mai_thu_vfx:wrist_loop_right_2",
+        "chiet_mai_thu_vfx:wrist_loop_right_3"
+      ]
+    },
+    {
+      "id": "bach_phien_phong_bao_character",
+      "skillId": "bach_phien_phong_bao",
+      "kind": "character",
+      "sheet": "assets/exports/skills/thien-son/bach_phien_phong_bao/bach_phien_phong_bao_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_phien_phong_bao/bach_phien_phong_bao_character.json",
+      "sha256": {
+        "sheet": "b9b4097084ee5fd9e8b40b672f956a1b549331553174410ac63554c9cffc143f",
+        "atlas": "53dae2461ab3331707686a4cbb70f9d304efa0b6caf3ba13f4780bfb86856c83"
+      },
+      "frameDimensions": [
+        96,
+        80
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "cast_down",
+        "cast_left",
+        "cast_right",
+        "cast_up",
+        "whirl_down",
+        "whirl_left",
+        "whirl_right",
+        "whirl_up"
+      ],
+      "observedFrameCount": 6,
+      "observedFrames": [
+        "bach_phien_phong_bao_character:cast_right_0",
+        "bach_phien_phong_bao_character:cast_right_1",
+        "bach_phien_phong_bao_character:cast_right_2",
+        "bach_phien_phong_bao_character:cast_right_3",
+        "bach_phien_phong_bao_character:whirl_right_0",
+        "bach_phien_phong_bao_character:whirl_right_1"
+      ]
+    },
+    {
+      "id": "bach_phien_phong_bao_vfx",
+      "skillId": "bach_phien_phong_bao",
+      "kind": "vfx",
+      "sheet": "assets/exports/skills/thien-son/bach_phien_phong_bao/bach_phien_phong_bao_vfx.png",
+      "atlas": "assets/exports/skills/thien-son/bach_phien_phong_bao/bach_phien_phong_bao_vfx.json",
+      "sha256": {
+        "sheet": "05143b280c7c0224c961625e0a6575c4eae0c7e5c22570564c7b5b15c35a6a28",
+        "atlas": "05947f06e4ac37d4ff38a9868f28b892c0137fc7da0c7c6bcf6ffc3dde67ae14"
+      },
+      "frameDimensions": [
+        160,
+        160
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "gather",
+        "whirlwind",
+        "expiry"
+      ],
+      "observedFrameCount": 10,
+      "observedFrames": [
+        "bach_phien_phong_bao_vfx:expiry_1",
+        "bach_phien_phong_bao_vfx:expiry_2",
+        "bach_phien_phong_bao_vfx:expiry_3",
+        "bach_phien_phong_bao_vfx:gather_1",
+        "bach_phien_phong_bao_vfx:gather_2",
+        "bach_phien_phong_bao_vfx:gather_3",
+        "bach_phien_phong_bao_vfx:whirlwind_0",
+        "bach_phien_phong_bao_vfx:whirlwind_1",
+        "bach_phien_phong_bao_vfx:whirlwind_2",
+        "bach_phien_phong_bao_vfx:whirlwind_3"
+      ]
+    },
+    {
+      "id": "phi_anh_tram_character",
+      "skillId": "phi_anh_tram",
+      "kind": "character",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "sha256": {
+        "sheet": "09735ac2436db2965075bcb259d751c42bbd219bf6712d6df2f792db7ec6d471",
+        "atlas": "99f6c8b2715ab02ed859c15e38cef63bb4e282de080e2b71d03737e93e2c9b6b"
+      },
+      "frameDimensions": [
+        112,
+        80
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "cast_down",
+        "cast_left",
+        "cast_right",
+        "cast_up"
+      ],
+      "observedFrameCount": 4,
+      "observedFrames": [
+        "phi_anh_tram_character:cast_right_0",
+        "phi_anh_tram_character:cast_right_1",
+        "phi_anh_tram_character:cast_right_2",
+        "phi_anh_tram_character:cast_right_3"
+      ]
+    },
+    {
+      "id": "phi_anh_tram_vfx",
+      "skillId": "phi_anh_tram",
+      "kind": "vfx",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_vfx.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_vfx.json",
+      "sha256": {
+        "sheet": "7f0551e94f828c827fbdfaf49833a708b7a38411ef645f827443cedc3c650435",
+        "atlas": "89694d9822c3e38dbd519da98bbee1569b680a7030b47afdb4281938db830573"
+      },
+      "frameDimensions": [
+        96,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "trail_right",
+        "trail_down",
+        "trail_left",
+        "trail_up",
+        "slash_right",
+        "slash_down",
+        "slash_left",
+        "slash_up"
+      ],
+      "observedFrameCount": 2,
+      "observedFrames": [
+        "phi_anh_tram_vfx:trail_right_1",
+        "phi_anh_tram_vfx:trail_right_2"
+      ]
+    },
+    {
+      "id": "truy_hon_dao_character",
+      "skillId": "truy_hon_dao",
+      "kind": "character",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "sha256": {
+        "sheet": "cc76e8c328a23838f84e1b8c4cafb6aeb7c480910543c4882e50783fa687c6d0",
+        "atlas": "4e3575e268483a7ea0a2bc701996192d847c0d956d3d7ed5e77ca068a0b95023"
+      },
+      "frameDimensions": [
+        96,
+        80
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "cast_down",
+        "cast_left",
+        "cast_right",
+        "cast_up"
+      ],
+      "observedFrameCount": 4,
+      "observedFrames": [
+        "truy_hon_dao_character:cast_right_0",
+        "truy_hon_dao_character:cast_right_1",
+        "truy_hon_dao_character:cast_right_2",
+        "truy_hon_dao_character:cast_right_3"
+      ]
+    },
+    {
+      "id": "truy_hon_dao_vfx",
+      "skillId": "truy_hon_dao",
+      "kind": "vfx",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_vfx.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_vfx.json",
+      "sha256": {
+        "sheet": "c2e7c2cc62a7112c5554b7f3abf0d1c9a145d4b99c7e3de3ffddca3c0ce6d43b",
+        "atlas": "d4acfbf4f3de99a2708a0b76489b4826e650c94c24562be4a2862562239c9541"
+      },
+      "frameDimensions": [
+        96,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "first_cut_right",
+        "first_cut_down",
+        "first_cut_left",
+        "first_cut_up",
+        "second_cut_right",
+        "second_cut_down",
+        "second_cut_left",
+        "second_cut_up"
+      ],
+      "observedFrameCount": 6,
+      "observedFrames": [
+        "truy_hon_dao_vfx:first_cut_right_1",
+        "truy_hon_dao_vfx:first_cut_right_2",
+        "truy_hon_dao_vfx:first_cut_right_3",
+        "truy_hon_dao_vfx:second_cut_right_1",
+        "truy_hon_dao_vfx:second_cut_right_2",
+        "truy_hon_dao_vfx:second_cut_right_3"
+      ]
+    },
+    {
+      "id": "phong_anh_hoan_vi_character",
+      "skillId": "phong_anh_hoan_vi",
+      "kind": "character",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "sha256": {
+        "sheet": "07aed7d18be3707fc860bec7148f6d2812b068075c3c263405c657d5b2ae808f",
+        "atlas": "fb35fbc79d32dfb70c336100f882a30c4cd94f3899c0edd069a81966f80c1d75"
+      },
+      "frameDimensions": [
+        96,
+        80
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "cast_down",
+        "cast_left",
+        "cast_right",
+        "cast_up",
+        "counter_down",
+        "counter_left",
+        "counter_right",
+        "counter_up"
+      ],
+      "observedFrameCount": 4,
+      "observedFrames": [
+        "phong_anh_hoan_vi_character:cast_right_0",
+        "phong_anh_hoan_vi_character:cast_right_1",
+        "phong_anh_hoan_vi_character:cast_right_2",
+        "phong_anh_hoan_vi_character:cast_right_3"
+      ]
+    },
+    {
+      "id": "phong_anh_hoan_vi_vfx",
+      "skillId": "phong_anh_hoan_vi",
+      "kind": "vfx",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_vfx.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_vfx.json",
+      "sha256": {
+        "sheet": "c54dcc264249f87cefff5401632ebfd8b9849afac6df445f3b5bf95e9432bd03",
+        "atlas": "45073a50ca9dbfee0b78b8d54f61675d8661257902f9c9e4030171fb52b47d8d"
+      },
+      "frameDimensions": [
+        96,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "step_right",
+        "step_down",
+        "step_left",
+        "step_up",
+        "ready_right",
+        "ready_down",
+        "ready_left",
+        "ready_up",
+        "expiry_right",
+        "expiry_down",
+        "expiry_left",
+        "expiry_up"
+      ],
+      "observedFrameCount": 8,
+      "observedFrames": [
+        "phong_anh_hoan_vi_vfx:expiry_right_1",
+        "phong_anh_hoan_vi_vfx:ready_right_0",
+        "phong_anh_hoan_vi_vfx:ready_right_1",
+        "phong_anh_hoan_vi_vfx:ready_right_2",
+        "phong_anh_hoan_vi_vfx:ready_right_3",
+        "phong_anh_hoan_vi_vfx:step_right_1",
+        "phong_anh_hoan_vi_vfx:step_right_2",
+        "phong_anh_hoan_vi_vfx:step_right_3"
+      ]
+    },
+    {
+      "id": "liet_phong_dao_character",
+      "skillId": "liet_phong_dao",
+      "kind": "character",
+      "sheet": "assets/exports/skills/thien-son/liet_phong_dao/liet_phong_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/liet_phong_dao/liet_phong_dao_character.json",
+      "sha256": {
+        "sheet": "39effb70bb0ff1dfb6361b89fb39a2389a691a9c3b6effe5b513b5188ad2a953",
+        "atlas": "7ab8a170644b34d59f6f70b6932465db3ab5d0d71c7af27719f88df5e574f05a"
+      },
+      "frameDimensions": [
+        128,
+        80
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "cast_down",
+        "cast_left",
+        "cast_right",
+        "cast_up"
+      ],
+      "observedFrameCount": 4,
+      "observedFrames": [
+        "liet_phong_dao_character:cast_right_0",
+        "liet_phong_dao_character:cast_right_1",
+        "liet_phong_dao_character:cast_right_2",
+        "liet_phong_dao_character:cast_right_3"
+      ]
+    },
+    {
+      "id": "liet_phong_dao_vfx",
+      "skillId": "liet_phong_dao",
+      "kind": "vfx",
+      "sheet": "assets/exports/skills/thien-son/liet_phong_dao/liet_phong_dao_vfx.png",
+      "atlas": "assets/exports/skills/thien-son/liet_phong_dao/liet_phong_dao_vfx.json",
+      "sha256": {
+        "sheet": "709d56e503b3a7e6ab33b32229ba7c213d34d61acf421b07ee0e3cde73a6952b",
+        "atlas": "110170072a2cf9eac5754305e7acc262bd6a8e0c5222c7ad9ffdbce32071b817"
+      },
+      "frameDimensions": [
+        96,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "strike_right",
+        "strike_down",
+        "strike_left",
+        "strike_up",
+        "contact_right",
+        "contact_down",
+        "contact_left",
+        "contact_up"
+      ],
+      "observedFrameCount": 3,
+      "observedFrames": [
+        "liet_phong_dao_vfx:strike_right_1",
+        "liet_phong_dao_vfx:strike_right_2",
+        "liet_phong_dao_vfx:strike_right_3"
+      ]
+    },
+    {
+      "id": "bach_liet_thien_kich_character",
+      "skillId": "bach_liet_thien_kich",
+      "kind": "character",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "sha256": {
+        "sheet": "862aa79911093ea2285dc376bffc0ea11b279ac9ceea62ea25dbec732923d439",
+        "atlas": "b2c0780e5e1f9146342a142811be260f2247a3de266b806dde0f1beeb9104336"
+      },
+      "frameDimensions": [
+        112,
+        80
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "cast_down",
+        "cast_left",
+        "cast_right",
+        "cast_up",
+        "flurry_down",
+        "flurry_left",
+        "flurry_right",
+        "flurry_up",
+        "finish_down",
+        "finish_left",
+        "finish_right",
+        "finish_up"
+      ],
+      "observedFrameCount": 8,
+      "observedFrames": [
+        "bach_liet_thien_kich_character:cast_right_0",
+        "bach_liet_thien_kich_character:cast_right_1",
+        "bach_liet_thien_kich_character:cast_right_2",
+        "bach_liet_thien_kich_character:cast_right_3",
+        "bach_liet_thien_kich_character:finish_right_0",
+        "bach_liet_thien_kich_character:finish_right_1",
+        "bach_liet_thien_kich_character:flurry_right_0",
+        "bach_liet_thien_kich_character:flurry_right_1"
+      ]
+    },
+    {
+      "id": "bach_liet_thien_kich_vfx",
+      "skillId": "bach_liet_thien_kich",
+      "kind": "vfx",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_vfx.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_vfx.json",
+      "sha256": {
+        "sheet": "210efdb99891ab002d1f453829253bf389487858ced3c24a09a67aa22419b612",
+        "atlas": "ebb1079cf65b23d5649b5885b5d19033807510779f1779ca08c5af2c67c8cd55"
+      },
+      "frameDimensions": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "registeredTags": [
+        "coil_right",
+        "coil_down",
+        "coil_left",
+        "coil_up",
+        "flurry_right",
+        "flurry_down",
+        "flurry_left",
+        "flurry_up",
+        "finisher_right",
+        "finisher_down",
+        "finisher_left",
+        "finisher_up"
+      ],
+      "observedFrameCount": 10,
+      "observedFrames": [
+        "bach_liet_thien_kich_vfx:coil_right_1",
+        "bach_liet_thien_kich_vfx:coil_right_2",
+        "bach_liet_thien_kich_vfx:coil_right_3",
+        "bach_liet_thien_kich_vfx:finisher_right_1",
+        "bach_liet_thien_kich_vfx:finisher_right_2",
+        "bach_liet_thien_kich_vfx:finisher_right_3",
+        "bach_liet_thien_kich_vfx:flurry_right_0",
+        "bach_liet_thien_kich_vfx:flurry_right_1",
+        "bach_liet_thien_kich_vfx:flurry_right_2",
+        "bach_liet_thien_kich_vfx:flurry_right_3"
+      ]
+    }
+  ],
+  "limitations": [
+    "Dedicated baseline hurt/death frames are absent; existing idle aliases remain.",
+    "Numerical combat tuning remains provisional."
+  ],
+  "approvalRecord": "assets/approved_thien_son_skills.lock.json",
+  "approvedOn": "2026-10-31",
+  "approvalEvidence": "skill artwork approved"
+}

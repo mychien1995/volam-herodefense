@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "scope": "single_final_lightweight_asset_only_verification",
+  "date": "2026-10-31",
+  "checks": [
+    "concept and required category presence",
+    "PNG decode/integrity",
+    "portable JSON/TSJ parse",
+    "file hashes",
+    "nonempty transparent exported frames",
+    "atlas bounds and pixel equality",
+    "transparent export padding",
+    "animation references, durations and unique cels",
+    "skill mapping file references",
+    "32px tile dimensions",
+    "handoff and folder inventory"
+  ],
+  "stats": {
+    "pngFiles": 363,
+    "jsonFiles": 25,
+    "exportedFrames": 300,
+    "animations": 79,
+    "props": 16,
+    "tiles": 16
+  },
+  "errors": [],
+  "visualReview": "Source sheets, final contact sheets, static scale comparison and static arena assembly inspected.",
+  "deferred": [
+    "Phaser integration/playback",
+    "animation jitter and foot continuity in motion",
+    "directional cast gesture review",
+    "exact terrain seam certification",
+    "gameplay and six-player readability",
+    "final runtime director approval"
+  ],
+  "recordingsCreated": false,
+  "gameTestsRun": false
+}

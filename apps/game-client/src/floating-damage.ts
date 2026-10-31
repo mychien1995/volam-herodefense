@@ -54,15 +54,25 @@ export class FloatingDamage {
       (targetHeight ?? (heroTarget ? 59 : 54)) -
       offset * 14;
     const text = this.scene.add
-      .text(x, y, `${event.critical ? '✦' : ''}${event.damage}`, {
-        fontFamily: '"Segoe UI", sans-serif',
-        fontStyle: 'bold',
-        fontSize: event.critical ? '14px' : '12px',
-        color: event.critical ? '#ffc85c' : '#fff4db',
-        stroke: '#282017',
-        strokeThickness: 3,
-        padding: { x: 3, y: 2 },
-      })
+      .text(
+        x,
+        y,
+        `${event.stage === 'empowered' ? '◆' : ''}${event.critical ? '✦' : ''}${Number(event.damage.toFixed(2))}`,
+        {
+          fontFamily: '"Segoe UI", sans-serif',
+          fontStyle: 'bold',
+          fontSize: event.critical ? '14px' : '12px',
+          color:
+            event.stage === 'empowered'
+              ? '#ffe078'
+              : event.critical
+                ? '#ffc85c'
+                : '#fff4db',
+          stroke: '#282017',
+          strokeThickness: 3,
+          padding: { x: 3, y: 2 },
+        },
+      )
       .setOrigin(0.5, 1)
       .setDepth(10000 + event.y)
       .setName(`damage:${event.id}`);

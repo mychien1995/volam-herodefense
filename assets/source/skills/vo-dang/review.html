@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="vi">
+  <meta charset="utf-8" /><title>Võ Đang skill art preview</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      margin: 0;
+      background: #172027;
+      color: #eee6d8;
+      font: 12px Arial;
+    }
+    #viewport {
+      position: relative;
+      width: min(1280px, 100vw);
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+      image-rendering: pixelated;
+    }
+    #controls {
+      position: absolute;
+      z-index: 3;
+      left: 8px;
+      top: 8px;
+      right: 8px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+      background: #15202eeb;
+      padding: 5px;
+      border: 1px solid #a8b3bb;
+    }
+    select,
+    button {
+      font: 12px Arial;
+      background: #263343;
+      color: #f0e8d8;
+      border: 1px solid #86969f;
+      padding: 4px;
+    }
+    #selected-icon {
+      width: 44px;
+      height: 44px;
+      image-rendering: pixelated;
+    }
+    #note {
+      position: absolute;
+      bottom: 6px;
+      left: 8px;
+      right: 8px;
+      padding: 5px;
+      background: #15202ee8;
+      pointer-events: none;
+    }
+    #icons {
+      position: absolute;
+      inset: 90px 15px 45px;
+      display: none;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      background: #142231d9;
+      padding: 15px;
+    }
+    #icons article {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    #icons img {
+      image-rendering: pixelated;
+    }
+    #icons span {
+      width: 100%;
+      color: #eee8da;
+    }
+    label {
+      white-space: nowrap;
+    }
+  </style>
+  <div id="viewport">
+    <div id="controls">
+      <img id="selected-icon" alt="Selected skill icon" /><select
+        id="skill"
+        aria-label="Skill"
+      ></select
+      ><select id="mode" aria-label="Review mode">
+        <option value="combined">Combined</option>
+        <option value="character">Character clips</option>
+        <option value="vfx">VFX stages</option>
+        <option value="six">Six simultaneous casts</option>
+        <option value="icons">All icons</option></select
+      ><select id="direction" aria-label="Facing">
+        <option>right</option>
+        <option>down</option>
+        <option>left</option>
+        <option>up</option></select
+      ><select id="terrain" aria-label="Background">
+        <option>arena</option>
+        <option>light</option>
+        <option>dark</option></select
+      ><label
+        ><input id="hit" type="checkbox" checked />Hit / counter trigger</label
+      ><label><input id="qi" type="checkbox" />Basic qi demo</label
+      ><button id="replay">Preview A/QWER</button
+      ><button id="pause">Pause</button>
+    </div>
+    <div id="icons"></div>
+    <div id="note">
+      PRESENTATION-ONLY PREVIEW · no room, RNG, damage, costs or cooldowns ·
+      timings/counts/footprints are illustrative · artwork approved · gameplay
+      implementation pending
+    </div>
+  </div>
+  <script src="/apps/game-client/node_modules/phaser/dist/phaser.js"></script>
+  <script type="module" src="./review.mjs"></script>
+</html>

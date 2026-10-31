@@ -1,0 +1,233 @@
+{
+  "id": "hell_dung_nham_cu_nhan",
+  "nameVi": "Dung Nham Cự Nhân",
+  "status": "produced_pending_integration_review",
+  "sourceConcept": "assets/concepts/dungeon-creeps/hell/dung_nham_cu_nhan_concept.png",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "sources": [
+    "source/locomotion_source.png",
+    "source/attack_source.png",
+    "source/initial_animation_source.png",
+    "source/reaction_source.png",
+    "source/front_windup_source.png"
+  ],
+  "frameWidth": 224,
+  "frameHeight": 192,
+  "bodyHeight": 100,
+  "footPivot": [
+    0.5,
+    0.8541666666666666
+  ],
+  "groundAnchorPx": [
+    112,
+    164
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "sharedStates": [
+    "hurt",
+    "death"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "shared",
+      "frames": [
+        "hurt_shared_0",
+        "hurt_shared_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "shared",
+      "frames": [
+        "death_shared_0",
+        "death_shared_1",
+        "death_shared_2",
+        "death_shared_3"
+      ],
+      "frameRate": 6.666666666666667,
+      "repeat": 0
+    }
+  ],
+  "frameCount": 46,
+  "sampling": "nearest",
+  "sourceNormalization": {
+    "locomotion": {
+      "scale": 0.45248868778280543,
+      "anchorY": 221.0
+    },
+    "attack": {
+      "scale": 0.4357298474945534,
+      "anchorY": 229.5
+    },
+    "sharedReactions": {
+      "scale": 0.2554278416347382,
+      "anchorY": 391.5
+    }
+  },
+  "integrated": false,
+  "runtimeVerified": false,
+  "animationAuthority": "Presentation only; server determines all actions, trajectories, damage and timing.",
+  "authoring": "46 unique drawn cels:24 locomotion,16 facing attacks,2 shared hurt,4 shared death. No static idle substitutions. Alpha silhouettes are grouped by source-cell centroid to preserve whole poses crossing nominal grid boundaries; lower opaque feet are aligned to a fixed export pivot. Initial sheet retained as reaction source; unused pose groups are superseded.",
+  "integrationReview": [
+    "Check continuity between separately generated locomotion, attack and reaction sources.",
+    "Shared hurt/death are deliberate non-directional clips; do not pretend they have four authored facings."
+  ],
+  "sourceCorrections": [
+    "Horned initial colossus rejected; dedicated hornless sources used.",
+    "Left/right contact cels selected by actual facing.",
+    "Front raised fist replaced with unclipped dedicated cel; feet anchor retained."
+  ],
+  "unusedSourceNotice": "Initial sheet incorrectly resembles a horned bull; retained for provenance only, never exported into this character."
+}

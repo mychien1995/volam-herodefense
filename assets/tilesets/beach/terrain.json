@@ -1,0 +1,276 @@
+{
+  "tileSize": [
+    32,
+    32
+  ],
+  "tileCount": 512,
+  "zeroBasedIds": true,
+  "groups": {
+    "dry_sand": {
+      "firstTile": 0,
+      "count": 4
+    },
+    "wet_sand": {
+      "firstTile": 4,
+      "count": 4
+    },
+    "shallow_water": {
+      "firstTile": 8,
+      "count": 4
+    },
+    "deep_water": {
+      "firstTile": 12,
+      "count": 4
+    },
+    "rocky_coast": {
+      "firstTile": 16,
+      "count": 4
+    },
+    "stone_path": {
+      "firstTile": 20,
+      "count": 4
+    },
+    "coastal_grass": {
+      "firstTile": 24,
+      "count": 4
+    },
+    "dock_horizontal": {
+      "firstTile": 28,
+      "count": 4
+    },
+    "seafoam": {
+      "firstTile": 32,
+      "count": 4
+    },
+    "coral_sand": {
+      "firstTile": 36,
+      "count": 4
+    },
+    "shell_sand": {
+      "firstTile": 40,
+      "count": 4
+    },
+    "cliff_top": {
+      "firstTile": 44,
+      "count": 4
+    },
+    "tidal_sand": {
+      "firstTile": 48,
+      "count": 4
+    },
+    "shallow_water_b": {
+      "firstTile": 52,
+      "count": 4
+    },
+    "deep_water_b": {
+      "firstTile": 56,
+      "count": 4
+    },
+    "dock_vertical": {
+      "firstTile": 60,
+      "count": 4
+    },
+    "sand_to_wet": {
+      "firstTile": 64,
+      "count": 64,
+      "masks": 16,
+      "phases": 4,
+      "cornerBitOrder": [
+        "NW",
+        "NE",
+        "SE",
+        "SW"
+      ]
+    },
+    "wet_to_water": {
+      "firstTile": 128,
+      "count": 64,
+      "masks": 16,
+      "phases": 4,
+      "cornerBitOrder": [
+        "NW",
+        "NE",
+        "SE",
+        "SW"
+      ]
+    },
+    "shallow_to_deep": {
+      "firstTile": 192,
+      "count": 64,
+      "masks": 16,
+      "phases": 4,
+      "cornerBitOrder": [
+        "NW",
+        "NE",
+        "SE",
+        "SW"
+      ]
+    },
+    "sand_to_rock": {
+      "firstTile": 256,
+      "count": 64,
+      "masks": 16,
+      "phases": 4,
+      "cornerBitOrder": [
+        "NW",
+        "NE",
+        "SE",
+        "SW"
+      ]
+    },
+    "sand_to_stone": {
+      "firstTile": 320,
+      "count": 64,
+      "masks": 16,
+      "phases": 4,
+      "cornerBitOrder": [
+        "NW",
+        "NE",
+        "SE",
+        "SW"
+      ]
+    },
+    "sand_to_grass": {
+      "firstTile": 384,
+      "count": 64,
+      "masks": 16,
+      "phases": 4,
+      "cornerBitOrder": [
+        "NW",
+        "NE",
+        "SE",
+        "SW"
+      ]
+    },
+    "water_edge_foam": {
+      "firstTile": 448,
+      "count": 64,
+      "masks": 16,
+      "phases": 4,
+      "transparentOverlay": true
+    }
+  },
+  "animations": [
+    {
+      "name": "shallow_water",
+      "tileid": 8,
+      "animation": [
+        {
+          "tileid": 8,
+          "duration": 180
+        },
+        {
+          "tileid": 9,
+          "duration": 180
+        },
+        {
+          "tileid": 10,
+          "duration": 180
+        },
+        {
+          "tileid": 11,
+          "duration": 180
+        }
+      ],
+      "sourceMotion": "phase-shifted authored texture, not four independently redrawn water cels"
+    },
+    {
+      "name": "deep_water",
+      "tileid": 12,
+      "animation": [
+        {
+          "tileid": 12,
+          "duration": 180
+        },
+        {
+          "tileid": 13,
+          "duration": 180
+        },
+        {
+          "tileid": 14,
+          "duration": 180
+        },
+        {
+          "tileid": 15,
+          "duration": 180
+        }
+      ],
+      "sourceMotion": "phase-shifted authored texture, not four independently redrawn water cels"
+    },
+    {
+      "name": "seafoam",
+      "tileid": 32,
+      "animation": [
+        {
+          "tileid": 32,
+          "duration": 180
+        },
+        {
+          "tileid": 33,
+          "duration": 180
+        },
+        {
+          "tileid": 34,
+          "duration": 180
+        },
+        {
+          "tileid": 35,
+          "duration": 180
+        }
+      ],
+      "sourceMotion": "phase-shifted authored texture, not four independently redrawn water cels"
+    },
+    {
+      "name": "shallow_water_b",
+      "tileid": 52,
+      "animation": [
+        {
+          "tileid": 52,
+          "duration": 180
+        },
+        {
+          "tileid": 53,
+          "duration": 180
+        },
+        {
+          "tileid": 54,
+          "duration": 180
+        },
+        {
+          "tileid": 55,
+          "duration": 180
+        }
+      ],
+      "sourceMotion": "phase-shifted authored texture, not four independently redrawn water cels"
+    },
+    {
+      "name": "deep_water_b",
+      "tileid": 56,
+      "animation": [
+        {
+          "tileid": 56,
+          "duration": 180
+        },
+        {
+          "tileid": 57,
+          "duration": 180
+        },
+        {
+          "tileid": 58,
+          "duration": 180
+        },
+        {
+          "tileid": 59,
+          "duration": 180
+        }
+      ],
+      "sourceMotion": "phase-shifted authored texture, not four independently redrawn water cels"
+    }
+  ],
+  "source": "assets/tilesets/beach/source/terrain_source_v01.png",
+  "notes": [
+    "Material sources are authored rasters; edge conditioning and binary marching-square masks assemble reusable transitions.",
+    "Terrain is not a playable map. Semantic collision and navigability require later authoritative map authoring.",
+    "Foam mask0 and mask15 are intentionally empty: no shoreline crosses a uniform tile."
+  ]
+}

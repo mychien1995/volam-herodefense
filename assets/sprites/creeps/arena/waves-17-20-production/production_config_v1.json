@@ -1,0 +1,406 @@
+{
+  "phase": "1J",
+  "masterConcept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+  "conceptApproval": "User explicitly approves generated concepts for this batch and authorizes immediate production, 2026-10-31. Runtime approval separate.",
+  "assets": [
+    {
+      "key": "shadow",
+      "slug": "anh-ma",
+      "id": "creep_shadow_assassin",
+      "nameVi": "Ảnh Ma",
+      "wave": 17,
+      "height": 48,
+      "canvas": [
+        128,
+        112
+      ],
+      "pivot": [
+        64,
+        88
+      ],
+      "concept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sources": {
+        "down": {
+          "file": "assets/sprites/creeps/arena/anh-ma/source/down_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "left": {
+          "file": "assets/sprites/creeps/arena/anh-ma/source/left_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "right": {
+          "file": "assets/sprites/creeps/arena/anh-ma/source/right_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "up": {
+          "file": "assets/sprites/creeps/arena/anh-ma/source/up_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "right_hurt_corrected": {
+          "file": "assets/sprites/creeps/arena/anh-ma/source/right_hurt_corrected_v1.png",
+          "expected": 4,
+          "rows": 1,
+          "cols": 4,
+          "referenceIndices": [
+            3
+          ]
+        }
+      },
+      "overrides": {
+        "hurt_right": {
+          "source": "right_hurt_corrected",
+          "indices": [
+            0,
+            1
+          ]
+        }
+      },
+      "timings": {
+        "idle": 700,
+        "walk": 360,
+        "basic_attack": 280,
+        "hurt": 240,
+        "death": 720
+      },
+      "presentationCues": {
+        "dualBladeSlashes": "basic_attack_* frames1-2",
+        "shadowTrail": "walk state; presentation only, no new dash",
+        "disintegration": "death_* frames0-3"
+      }
+    },
+    {
+      "key": "general",
+      "slug": "ma-tuong-thiet-giap",
+      "id": "creep_armored_demon_general",
+      "nameVi": "Ma Tướng Thiết Giáp",
+      "wave": 18,
+      "height": 58,
+      "canvas": [
+        160,
+        144
+      ],
+      "pivot": [
+        80,
+        112
+      ],
+      "concept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sources": {
+        "down": {
+          "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/down_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "left": {
+          "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/left_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "right": {
+          "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/right_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "up": {
+          "file": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/source/up_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        }
+      },
+      "overrides": {},
+      "timings": {
+        "idle": 700,
+        "walk": 480,
+        "basic_attack": 480,
+        "hurt": 240,
+        "death": 800
+      },
+      "presentationCues": {
+        "overheadAnticipation": "basic_attack_* frame0",
+        "halberdSweep": "basic_attack_* frames1-2",
+        "heavyRecovery": "basic_attack_* frame3"
+      }
+    },
+    {
+      "key": "warlock",
+      "slug": "huyet-ma-phap-su",
+      "id": "creep_blood_demon_warlock",
+      "nameVi": "Huyết Ma Pháp Sư",
+      "wave": 19,
+      "height": 52,
+      "canvas": [
+        144,
+        128
+      ],
+      "pivot": [
+        72,
+        100
+      ],
+      "concept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sources": {
+        "down": {
+          "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/down_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "left": {
+          "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/left_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "right": {
+          "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/right_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "up": {
+          "file": "assets/sprites/creeps/arena/huyet-ma-phap-su/source/up_corrected_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        }
+      },
+      "overrides": {},
+      "timings": {
+        "idle": 700,
+        "walk": 480,
+        "basic_attack": 400,
+        "hurt": 240,
+        "death": 720
+      },
+      "presentationCues": {
+        "cast": "basic_attack_* frames0-1",
+        "projectileRelease": "basic_attack_* frame2; artwork only, stock invasion AI remains melee",
+        "dissolve": "death_* frames0-3"
+      }
+    },
+    {
+      "key": "vanguard",
+      "slug": "ma-vuong-tien-phong",
+      "id": "creep_demon_vanguard",
+      "nameVi": "Ma Vương Tiên Phong",
+      "wave": 20,
+      "height": 66,
+      "canvas": [
+        160,
+        144
+      ],
+      "pivot": [
+        80,
+        112
+      ],
+      "concept": "assets/concepts/arena-creeps/waves-17-20/arena_creeps_17_20_concept_sheet.png",
+      "sources": {
+        "down": {
+          "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "left": {
+          "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/left_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "right": {
+          "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "up": {
+          "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "down_corrected": {
+          "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/down_corrected_v1.png",
+          "expected": 8,
+          "rows": 2,
+          "cols": 4,
+          "referenceIndices": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "right_corrected": {
+          "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/right_corrected_v1.png",
+          "expected": 8,
+          "rows": 2,
+          "cols": 4,
+          "referenceIndices": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "up_locomotion": {
+          "file": "assets/sprites/creeps/arena/ma-vuong-tien-phong/source/up_locomotion_v2.png",
+          "expected": 8,
+          "rows": 2,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        }
+      },
+      "overrides": {
+        "hurt_down": {
+          "source": "down_corrected",
+          "indices": [
+            0,
+            1
+          ]
+        },
+        "walk_down": {
+          "source": "down_corrected",
+          "indices": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "hurt_right": {
+          "source": "right_corrected",
+          "indices": [
+            0,
+            1
+          ]
+        },
+        "walk_right": {
+          "source": "right_corrected",
+          "indices": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "idle_up": {
+          "source": "up_locomotion",
+          "indices": [
+            0,
+            1
+          ]
+        },
+        "hurt_up": {
+          "source": "up_locomotion",
+          "indices": [
+            2,
+            3
+          ]
+        },
+        "walk_up": {
+          "source": "up_locomotion",
+          "indices": [
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      },
+      "timings": {
+        "idle": 700,
+        "walk": 480,
+        "basic_attack": 480,
+        "hurt": 240,
+        "death": 800
+      },
+      "presentationCues": {
+        "cleave": "basic_attack_* frames0-1",
+        "heavyImpact": "basic_attack_* frame2",
+        "recovery": "basic_attack_* frame3"
+      }
+    }
+  ]
+}

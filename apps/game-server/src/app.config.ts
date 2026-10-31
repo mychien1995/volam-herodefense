@@ -31,7 +31,7 @@ export function createGameServer() {
       }),
       health: createEndpoint('/health', { method: 'GET' }, async () => ({
         status: 'ok',
-        milestone: 'M2B',
+        milestone: 'M3B',
         protocolVersion: PROTOCOL_VERSION,
       })),
     }),

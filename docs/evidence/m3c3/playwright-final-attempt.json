@@ -1,0 +1,1167 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\@playwright+test@1.64.1\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.m3c3.config.ts",
+      "tests/e2e/m3c3-preview.spec.ts",
+      "tests/e2e/m3c3.spec.ts",
+      "tests/e2e/skills.spec.ts",
+      "tests/e2e/m3c1-preview.spec.ts",
+      "tests/e2e/m3c2-preview.spec.ts",
+      "tests/e2e/gameplay.spec.ts",
+      "tests/e2e/dungeons.spec.ts",
+      "tests/e2e/ui.spec.ts"
+    ],
+    "configFile": "D:\\Projects\\volam-hero-defense\\playwright.m3c3.config.ts",
+    "rootDir": "D:/Projects/volam-hero-defense/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/Projects/volam-hero-defense/artifacts/playwright-m3c3",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "runtime-preview",
+        "name": "runtime-preview",
+        "testDir": "D:/Projects/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c3-preview.spec.ts",
+          "skills.spec.ts",
+          "m3c1-preview.spec.ts",
+          "m3c2-preview.spec.ts"
+        ],
+        "timeout": 180000
+      },
+      {
+        "outputDir": "D:/Projects/volam-hero-defense/artifacts/playwright-m3c3",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "progression-regression",
+        "name": "progression-regression",
+        "testDir": "D:/Projects/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c3.spec.ts",
+          "progression.spec.ts",
+          "gameplay.spec.ts",
+          "dungeons.spec.ts",
+          "ui.spec.ts"
+        ],
+        "timeout": 180000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-m3c3",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "runtime-preview",
+        "testDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c3-preview.spec.ts",
+          "skills.spec.ts",
+          "m3c1-preview.spec.ts",
+          "m3c2-preview.spec.ts"
+        ],
+        "timeout": 180000,
+        "use": {
+          "video": "off",
+          "trace": "off",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "baseURL": "http://127.0.0.1:5192"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "runtime-preview"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-m3c3",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "progression-regression",
+        "testDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c3.spec.ts",
+          "progression.spec.ts",
+          "gameplay.spec.ts",
+          "dungeons.spec.ts",
+          "ui.spec.ts"
+        ],
+        "timeout": 180000,
+        "use": {
+          "video": "off",
+          "trace": "off",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "baseURL": "http://127.0.0.1:5190"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "progression-regression"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "docs/evidence/m3c3/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "m3c1-preview.spec.ts",
+      "file": "m3c1-preview.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M3C1 runtime preview: all ten wind skills, both melee basics and four dash directions are visible to a fire-school peer",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "runtime-preview",
+              "projectName": "runtime-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 67998,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:32:14.302Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "78a4c6c6d5e743b48dbf-aaaaf45947b1e6ccd7e7",
+          "file": "m3c1-preview.spec.ts",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "M3C1 six-player mixed-school effects keep caster ownership, scale and feet depth",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "runtime-preview",
+              "projectName": "runtime-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 72857,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:33:22.450Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "78a4c6c6d5e743b48dbf-99ea71f15547c410ea00",
+          "file": "m3c1-preview.spec.ts",
+          "line": 195,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "m3c2-preview.spec.ts",
+      "file": "m3c2-preview.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M3C2 real preview: all ten skills and two basics show authored frames, shield/refund/counter and stationary areas to three schools",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "runtime-preview",
+              "projectName": "runtime-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 67478,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:34:35.359Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "be058455ac139099781b-c3ca1295fd53e7d4b186",
+          "file": "m3c2-preview.spec.ts",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "M3C2 both baseline styles animate every authored cardinal idle/walk/attack tag in Phaser",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "runtime-preview",
+              "projectName": "runtime-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7180,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:35:42.856Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "be058455ac139099781b-5ce4935408eb85f01c50",
+          "file": "m3c2-preview.spec.ts",
+          "line": 235,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "m3c3-preview.spec.ts",
+      "file": "m3c3-preview.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M3C3 two-client live authored skills, both target combos, golden support/mitigation and independent basics",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "runtime-preview",
+              "projectName": "runtime-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 65505,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:35:50.076Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4d8659fae03bdcd9b0d8-1cd7727007613e26cfc1",
+          "file": "m3c3-preview.spec.ts",
+          "line": 19,
+          "column": 1
+        },
+        {
+          "title": "M3C3 both baseline styles animate every authored cardinal idle/walk/attack tag in Phaser",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "runtime-preview",
+              "projectName": "runtime-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6700,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:36:55.595Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4d8659fae03bdcd9b0d8-396117264386e05c927d",
+          "file": "m3c3-preview.spec.ts",
+          "line": 213,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "skills.spec.ts",
+      "file": "skills.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "all ten supplied skill animations load, animate and are observed by a second player",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "runtime-preview",
+              "projectName": "runtime-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 41404,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:37:02.333Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "024b5a36f2868d8a0332-e42303a4805c149b33b5",
+          "file": "skills.spec.ts",
+          "line": 175,
+          "column": 1
+        },
+        {
+          "title": "two Cái Bang players cast into shared dungeon enemies and clean a buff on physical exit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "runtime-preview",
+              "projectName": "runtime-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 19967,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:37:43.749Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "024b5a36f2868d8a0332-d3ae86e4ebd270120ae8",
+          "file": "skills.spec.ts",
+          "line": 321,
+          "column": 1
+        },
+        {
+          "title": "projectile and control skills damage arena invaders with shared authoritative feedback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "runtime-preview",
+              "projectName": "runtime-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 50000,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:38:03.731Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "024b5a36f2868d8a0332-2f632b87aa74169d5644",
+          "file": "skills.spec.ts",
+          "line": 410,
+          "column": 1
+        },
+        {
+          "title": "a real enemy kills a player during a skill channel and both clients clean the effect",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "runtime-preview",
+              "projectName": "runtime-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 36490,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:38:53.746Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "024b5a36f2868d8a0332-4173ca7c6501ecc4c238",
+          "file": "skills.spec.ts",
+          "line": 505,
+          "column": 1
+        },
+        {
+          "title": "staff control, armor break, stun and the heavy finisher use their own supplied effects",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "runtime-preview",
+              "projectName": "runtime-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 27355,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:39:30.253Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "024b5a36f2868d8a0332-86a830e665bc2f5db52c",
+          "file": "skills.spec.ts",
+          "line": 580,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "dungeons.spec.ts",
+      "file": "dungeons.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "two real clients share one creep wave, menu entry and physical exit",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 30044,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at earnReward (D:\\Projects\\volam-hero-defense\\tests\\e2e\\dungeons.spec.ts:177:6)\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\dungeons.spec.ts:228:5",
+                    "location": {
+                      "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\dungeons.spec.ts",
+                      "column": 6,
+                      "line": 177
+                    },
+                    "snippet": "  175 |   await expect\n  176 |     .poll(async () => (await hero(page)).xp)\n> 177 |     .toBeGreaterThan(before.xp);\n      |      ^\n  178 |   expect((await hero(page)).gold).toBeGreaterThan(before.gold);\n  179 |   // Retreat before screenshots/second-client inspection: the live dungeon must\n  180 |   // continue attacking while the test driver is busy, just as an open menu does."
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\dungeons.spec.ts",
+                        "column": 6,
+                        "line": 177
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0\u001b[39m\nReceived:   \u001b[31m0\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  175 |   await expect\n  176 |     .poll(async () => (await hero(page)).xp)\n> 177 |     .toBeGreaterThan(before.xp);\n      |      ^\n  178 |   expect((await hero(page)).gold).toBeGreaterThan(before.gold);\n  179 |   // Retreat before screenshots/second-client inspection: the live dungeon must\n  180 |   // continue attacking while the test driver is busy, just as an open menu does.\n    at earnReward (D:\\Projects\\volam-hero-defense\\tests\\e2e\\dungeons.spec.ts:177:6)\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\dungeons.spec.ts:228:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:39:58.442Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-m3c3\\dungeons-two-real-clients--791cd-enu-entry-and-physical-exit-progression-regression\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\dungeons.spec.ts",
+                    "column": 6,
+                    "line": 177
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "1b850e6f3b3c9c32e651-a0f3cb8e43c8df73f237",
+          "file": "dungeons.spec.ts",
+          "line": 185,
+          "column": 1
+        },
+        {
+          "title": "two real clients farm separate private instances and retain empty wave snapshots",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 150000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 31003,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:40:29.311Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1b850e6f3b3c9c32e651-4c72599dd29f5f80296a",
+          "file": "dungeons.spec.ts",
+          "line": 291,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "gameplay.spec.ts",
+      "file": "gameplay.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "fixed follow camera, eight-way movement and foreground occlusion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 33440,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:41:00.477Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-79503a75f72865f87a88",
+          "file": "gameplay.spec.ts",
+          "line": 120,
+          "column": 1
+        },
+        {
+          "title": "two clients agree on combat, manual cadence, skills and progression",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 22129,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m90\u001b[39m\nReceived:   \u001b[31m100\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m90\u001b[39m\nReceived:   \u001b[31m100\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\gameplay.spec.ts:296:57",
+                    "location": {
+                      "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\gameplay.spec.ts",
+                      "column": 57,
+                      "line": 296
+                    },
+                    "snippet": "  294 |     await a.keyboard.press('KeyQ');\n  295 |     await a.keyboard.press('KeyW');\n> 296 |     await expect.poll(async () => (await hero(a)).mana).toBeLessThan(90);\n      |                                                         ^\n  297 |     await expect\n  298 |       .poll(\n  299 |         async () =>"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\gameplay.spec.ts",
+                        "column": 57,
+                        "line": 296
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m90\u001b[39m\nReceived:   \u001b[31m100\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  294 |     await a.keyboard.press('KeyQ');\n  295 |     await a.keyboard.press('KeyW');\n> 296 |     await expect.poll(async () => (await hero(a)).mana).toBeLessThan(90);\n      |                                                         ^\n  297 |     await expect\n  298 |       .poll(\n  299 |         async () =>\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\gameplay.spec.ts:296:57"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:41:33.947Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-m3c3\\gameplay-two-clients-agree-0849f-ence-skills-and-progression-progression-regression\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\gameplay.spec.ts",
+                    "column": 57,
+                    "line": 296
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-189d5b1fe6cbe065d31d",
+          "file": "gameplay.spec.ts",
+          "line": 204,
+          "column": 1
+        },
+        {
+          "title": "ranged projectile uses a fixed trajectory and original effect frames",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5373,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:41:56.852Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-c7e4cb2216e594ce74ad",
+          "file": "gameplay.spec.ts",
+          "line": 355,
+          "column": 1
+        },
+        {
+          "title": "real PNG animation registry covers two actors, six states and four directions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3790,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:42:02.370Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-59e3cc35083ea0c9ba22",
+          "file": "gameplay.spec.ts",
+          "line": 387,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "m3c3.spec.ts",
+      "file": "m3c3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M3C3 normal four-school progression, shared dungeon farming, read-only builds, mana sustain and arena defense",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 115936,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:42:06.200Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "84ef6c2f8a2a29a37186-ff5ad6c6ca7f646498c2",
+          "file": "m3c3.spec.ts",
+          "line": 18,
+          "column": 1
+        },
+        {
+          "title": "M3C3 six-player natural combat: four schools keep effects owned, feet/pivots readable and rewards authoritative",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 159352,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:283:43",
+                    "location": {
+                      "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts",
+                      "column": 43,
+                      "line": 283
+                    },
+                    "snippet": "  281 |     }\n  282 |     const heroes = await Promise.all(pages.map(hero));\n> 283 |     expect(heroes.every((h) => h.xp > 0)).toBe(true);\n      |                                           ^\n  284 |     const naturalCombat = await read(pages[0]!);\n  285 |     // Combat may legitimately kill/respawn a participant between CDP reads.\n  286 |     // Retain real reward evidence, then gather the whole living party for the"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts",
+                        "column": 43,
+                        "line": 283
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  281 |     }\n  282 |     const heroes = await Promise.all(pages.map(hero));\n> 283 |     expect(heroes.every((h) => h.xp > 0)).toBe(true);\n      |                                           ^\n  284 |     const naturalCombat = await read(pages[0]!);\n  285 |     // Combat may legitimately kill/respawn a participant between CDP reads.\n  286 |     // Retain real reward evidence, then gather the whole living party for the\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:283:43"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:44:02.165Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-m3c3\\m3c3-M3C3-six-player-natur-a25df-e-and-rewards-authoritative-progression-regression\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts",
+                    "column": 43,
+                    "line": 283
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "84ef6c2f8a2a29a37186-2a499163d4ceb8a3bc7a",
+          "file": "m3c3.spec.ts",
+          "line": 203,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "ui.spec.ts",
+      "file": "ui.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "world and in-game menus fit 1280x720",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6511,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:46:42.530Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d425444c687fa36b5882-5aded0aef414a889d383",
+          "file": "ui.spec.ts",
+          "line": 62,
+          "column": 3
+        },
+        {
+          "title": "world and in-game menus fit 1920x1080",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15362,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:46:49.203Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d425444c687fa36b5882-9711b46a3d83660ddeab",
+          "file": "ui.spec.ts",
+          "line": 62,
+          "column": 3
+        },
+        {
+          "title": "world and in-game menus fit 900x640",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12598,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:47:04.579Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d425444c687fa36b5882-2b967974f190af5daf9c",
+          "file": "ui.spec.ts",
+          "line": 62,
+          "column": 3
+        },
+        {
+          "title": "menus release held movement, trap focus and preserve live two-client simulation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 10309,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:47:17.191Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d425444c687fa36b5882-5572a1bf729fc0213531",
+          "file": "ui.spec.ts",
+          "line": 148,
+          "column": 1
+        },
+        {
+          "title": "utility menus open and forest art study stays presentation-only",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "progression-regression",
+              "projectName": "progression-regression",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4315,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T07:47:27.512Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "d425444c687fa36b5882-f6db57e81727544307ba",
+          "file": "ui.spec.ts",
+          "line": 260,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T07:32:10.972Z",
+    "duration": 920976.328,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0
+  }
+}

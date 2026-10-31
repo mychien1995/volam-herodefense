@@ -1,0 +1,945 @@
+{
+  "id": "cung_thu_sa_mac",
+  "nameVi": "Cung Thủ Sa Mạc",
+  "frameSize": [
+    112,
+    96
+  ],
+  "bodyHeightTarget": 44,
+  "pivot": [
+    56,
+    80
+  ],
+  "frameCount": 64,
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "states": [
+    "idle",
+    "walk",
+    "attack",
+    "hit",
+    "death"
+  ],
+  "tags": [
+    {
+      "name": "idle_down",
+      "from": 0,
+      "to": 1,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_down",
+      "from": 2,
+      "to": 5,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_down",
+      "from": 6,
+      "to": 7,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_down",
+      "from": 8,
+      "to": 11,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_down",
+      "from": 12,
+      "to": 15,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "idle_left",
+      "from": 16,
+      "to": 17,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_left",
+      "from": 18,
+      "to": 21,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_left",
+      "from": 22,
+      "to": 23,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_left",
+      "from": 24,
+      "to": 27,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_left",
+      "from": 28,
+      "to": 31,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "idle_right",
+      "from": 32,
+      "to": 33,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_right",
+      "from": 34,
+      "to": 37,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_right",
+      "from": 38,
+      "to": 39,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_right",
+      "from": 40,
+      "to": 43,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_right",
+      "from": 44,
+      "to": 47,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "idle_up",
+      "from": 48,
+      "to": 49,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "walk_up",
+      "from": 50,
+      "to": 53,
+      "direction": "forward",
+      "repeat": 0
+    },
+    {
+      "name": "hit_up",
+      "from": 54,
+      "to": 55,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "attack_up",
+      "from": 56,
+      "to": 59,
+      "direction": "forward",
+      "repeat": 1
+    },
+    {
+      "name": "death_up",
+      "from": 60,
+      "to": 63,
+      "direction": "forward",
+      "repeat": 1
+    }
+  ],
+  "mirroredSequences": [
+    "attack_left",
+    "death_right"
+  ],
+  "status": "produced_asset_only_pending_runtime_review",
+  "conceptApproval": "Automatic concept acceptance explicitly instructed by user for this task; no runtime approval implied",
+  "frameOrigins": [
+    {
+      "frame": "idle_down_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        33,
+        37,
+        132,
+        163
+      ],
+      "scale": 0.3464566929133858,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_down_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        189,
+        37,
+        286,
+        164
+      ],
+      "scale": 0.3464566929133858,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        348,
+        42,
+        440,
+        166
+      ],
+      "scale": 0.3464566929133858,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        498,
+        43,
+        600,
+        166
+      ],
+      "scale": 0.3464566929133858,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_2.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        646,
+        43,
+        758,
+        166
+      ],
+      "scale": 0.3464566929133858,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_down_3.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        810,
+        40,
+        919,
+        166
+      ],
+      "scale": 0.3464566929133858,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_down_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        971,
+        53,
+        1069,
+        162
+      ],
+      "scale": 0.3464566929133858,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_down_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        1115,
+        56,
+        1218,
+        162
+      ],
+      "scale": 0.3464566929133858,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_0.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        45,
+        39,
+        296,
+        309
+      ],
+      "scale": 0.16296296296296298,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_1.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        376,
+        37,
+        625,
+        309
+      ],
+      "scale": 0.16296296296296298,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_2.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        667,
+        37,
+        905,
+        312
+      ],
+      "scale": 0.16296296296296298,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_down_3.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        978,
+        37,
+        1219,
+        310
+      ],
+      "scale": 0.16296296296296298,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        645,
+        209,
+        755,
+        322
+      ],
+      "scale": 0.3464566929133858,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        796,
+        218,
+        909,
+        317
+      ],
+      "scale": 0.3464566929133858,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_2.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        936,
+        250,
+        1071,
+        325
+      ],
+      "scale": 0.3464566929133858,
+      "mirrored": false
+    },
+    {
+      "frame": "death_down_3.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        1101,
+        263,
+        1240,
+        323
+      ],
+      "scale": 0.3464566929133858,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_left_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        36,
+        353,
+        138,
+        485
+      ],
+      "scale": 0.3333333333333333,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_left_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        190,
+        354,
+        293,
+        485
+      ],
+      "scale": 0.3333333333333333,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        357,
+        357,
+        456,
+        482
+      ],
+      "scale": 0.3333333333333333,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        499,
+        357,
+        608,
+        484
+      ],
+      "scale": 0.3333333333333333,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_2.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        660,
+        359,
+        764,
+        482
+      ],
+      "scale": 0.3333333333333333,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_left_3.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        811,
+        359,
+        911,
+        484
+      ],
+      "scale": 0.3333333333333333,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_left_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        970,
+        376,
+        1069,
+        483
+      ],
+      "scale": 0.3333333333333333,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_left_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        1119,
+        385,
+        1221,
+        485
+      ],
+      "scale": 0.3333333333333333,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_left_0.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        32,
+        351,
+        316,
+        608
+      ],
+      "scale": 0.176,
+      "mirrored": true
+    },
+    {
+      "frame": "attack_left_1.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        350,
+        332,
+        626,
+        607
+      ],
+      "scale": 0.176,
+      "mirrored": true
+    },
+    {
+      "frame": "attack_left_2.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        642,
+        334,
+        916,
+        608
+      ],
+      "scale": 0.176,
+      "mirrored": true
+    },
+    {
+      "frame": "attack_left_3.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        987,
+        350,
+        1217,
+        609
+      ],
+      "scale": 0.176,
+      "mirrored": true
+    },
+    {
+      "frame": "death_left_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        644,
+        517,
+        769,
+        635
+      ],
+      "scale": 0.3333333333333333,
+      "mirrored": false
+    },
+    {
+      "frame": "death_left_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        804,
+        526,
+        915,
+        635
+      ],
+      "scale": 0.3333333333333333,
+      "mirrored": false
+    },
+    {
+      "frame": "death_left_2.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        935,
+        563,
+        1079,
+        636
+      ],
+      "scale": 0.3333333333333333,
+      "mirrored": false
+    },
+    {
+      "frame": "death_left_3.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        1093,
+        575,
+        1234,
+        630
+      ],
+      "scale": 0.3333333333333333,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_right_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        29,
+        673,
+        144,
+        799
+      ],
+      "scale": 0.3384615384615385,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_right_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        188,
+        671,
+        300,
+        801
+      ],
+      "scale": 0.3384615384615385,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        339,
+        673,
+        457,
+        800
+      ],
+      "scale": 0.3384615384615385,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        499,
+        673,
+        610,
+        803
+      ],
+      "scale": 0.3384615384615385,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_2.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        653,
+        673,
+        770,
+        801
+      ],
+      "scale": 0.3384615384615385,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_right_3.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        819,
+        674,
+        920,
+        804
+      ],
+      "scale": 0.3384615384615385,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_right_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        966,
+        690,
+        1077,
+        801
+      ],
+      "scale": 0.3384615384615385,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_right_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        1118,
+        693,
+        1228,
+        804
+      ],
+      "scale": 0.3384615384615385,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_0.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        32,
+        351,
+        316,
+        608
+      ],
+      "scale": 0.176,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_1.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        350,
+        332,
+        626,
+        607
+      ],
+      "scale": 0.176,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_2.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        642,
+        334,
+        916,
+        608
+      ],
+      "scale": 0.176,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_right_3.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        987,
+        350,
+        1217,
+        609
+      ],
+      "scale": 0.176,
+      "mirrored": false
+    },
+    {
+      "frame": "death_right_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        644,
+        517,
+        769,
+        635
+      ],
+      "scale": 0.3384615384615385,
+      "mirrored": true
+    },
+    {
+      "frame": "death_right_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        804,
+        526,
+        915,
+        635
+      ],
+      "scale": 0.3384615384615385,
+      "mirrored": true
+    },
+    {
+      "frame": "death_right_2.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        935,
+        563,
+        1079,
+        636
+      ],
+      "scale": 0.3384615384615385,
+      "mirrored": true
+    },
+    {
+      "frame": "death_right_3.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        1093,
+        575,
+        1234,
+        630
+      ],
+      "scale": 0.3384615384615385,
+      "mirrored": true
+    },
+    {
+      "frame": "idle_up_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        35,
+        837,
+        134,
+        964
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "idle_up_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        191,
+        834,
+        291,
+        968
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        346,
+        838,
+        447,
+        972
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        497,
+        837,
+        601,
+        970
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_2.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        652,
+        833,
+        751,
+        969
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "walk_up_3.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        814,
+        836,
+        912,
+        969
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_up_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        968,
+        852,
+        1073,
+        973
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "hit_up_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        1117,
+        858,
+        1222,
+        973
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_0.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        55,
+        627,
+        263,
+        947
+      ],
+      "scale": 0.18487394957983194,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_1.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        369,
+        625,
+        590,
+        950
+      ],
+      "scale": 0.18487394957983194,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_2.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        672,
+        620,
+        902,
+        947
+      ],
+      "scale": 0.18487394957983194,
+      "mirrored": false
+    },
+    {
+      "frame": "attack_up_3.png",
+      "source": "archer-attack-correction.png",
+      "rect": [
+        1001,
+        659,
+        1212,
+        949
+      ],
+      "scale": 0.18487394957983194,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_0.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        655,
+        1001,
+        763,
+        1133
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_1.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        805,
+        1018,
+        911,
+        1127
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_2.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        939,
+        1062,
+        1081,
+        1128
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    },
+    {
+      "frame": "death_up_3.png",
+      "source": "cung_thu_sa_mac-source.png",
+      "rect": [
+        1104,
+        1064,
+        1241,
+        1128
+      ],
+      "scale": 0.3283582089552239,
+      "mirrored": false
+    }
+  ]
+}

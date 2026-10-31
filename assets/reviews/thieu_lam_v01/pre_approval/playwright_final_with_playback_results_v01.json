@@ -1,0 +1,476 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\@playwright+test@1.64.1\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.thieu-lam.config.ts",
+      "tests/e2e/thieu-lam-art.spec.ts",
+      "tests/e2e/gameplay.spec.ts"
+    ],
+    "configFile": "D:\\Projects\\volam-hero-defense\\playwright.thieu-lam.config.ts",
+    "rootDir": "D:/Projects/volam-hero-defense/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\thieu-lam-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/Projects/volam-hero-defense/artifacts/thieu-lam-playwright",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/Projects/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "thieu-lam-art.spec.ts",
+          "gameplay.spec.ts"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Projects\\volam-hero-defense\\artifacts\\thieu-lam-playwright",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "chromium",
+        "testDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "thieu-lam-art.spec.ts",
+          "gameplay.spec.ts"
+        ],
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://127.0.0.1:5193",
+          "video": "off",
+          "trace": "off",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "assets/reviews/thieu_lam_v01/playwright_results_v01.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "gameplay.spec.ts",
+      "file": "gameplay.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "fixed follow camera, eight-way movement and foreground occlusion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 33724,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T18:18:07.632Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-6dcd09b26fdceac04115",
+          "file": "gameplay.spec.ts",
+          "line": 120,
+          "column": 1
+        },
+        {
+          "title": "two clients agree on combat, manual cadence, skills and progression",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22157,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T18:18:41.537Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-c521143d201aa5dd8929",
+          "file": "gameplay.spec.ts",
+          "line": 204,
+          "column": 1
+        },
+        {
+          "title": "ranged projectile uses a fixed trajectory and original effect frames",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7803,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T18:19:03.709Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-872738e593b4d8a1353d",
+          "file": "gameplay.spec.ts",
+          "line": 355,
+          "column": 1
+        },
+        {
+          "title": "real PNG animation registry covers two actors, six states and four directions",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3836,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T18:19:11.547Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-69f311d090ea1b84150a",
+          "file": "gameplay.spec.ts",
+          "line": 387,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "thieu-lam-art.spec.ts",
+      "file": "thieu-lam-art.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Thiếu Lâm both weapon atlases play all 24 authored tags in Phaser",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6204,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T18:19:16.654Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8cc487dcff1f1b8a0a4d-640557f773693d45b523",
+          "file": "thieu-lam-art.spec.ts",
+          "line": 86,
+          "column": 1
+        },
+        {
+          "title": "Thiếu Lâm quyen real match: four facings, transitions and shared authority",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22601,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T18:19:23.072Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8cc487dcff1f1b8a0a4d-f5ef6d754f3daed4d589",
+          "file": "thieu-lam-art.spec.ts",
+          "line": 144,
+          "column": 3
+        },
+        {
+          "title": "Thiếu Lâm Đao art-review variant real match: four facings, transitions and shared authority",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 27917,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"hero_thieu_lam_dao:idle:\u001b[7mdown\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"hero_thieu_lam_dao:idle:\u001b[7mup\u001b[27m\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"hero_thieu_lam_dao:idle:\u001b[7mdown\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"hero_thieu_lam_dao:idle:\u001b[7mup\u001b[27m\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\thieu-lam-art.spec.ts:371:12",
+                    "location": {
+                      "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\thieu-lam-art.spec.ts",
+                      "column": 12,
+                      "line": 371
+                    },
+                    "snippet": "  369 |         await expect\n  370 |           .poll(async () => (await actor()).animation)\n> 371 |           .toBe(texture + ':idle:down');\n      |            ^\n  372 |         const label = dao ? 'dao' : 'quyen';\n  373 |         await a.screenshot({\n  374 |           path: resolve(evidence, label + '_gameplay_1280x720.png'),"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\thieu-lam-art.spec.ts",
+                        "column": 12,
+                        "line": 371
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"hero_thieu_lam_dao:idle:\u001b[7mdown\u001b[27m\"\u001b[39m\nReceived: \u001b[31m\"hero_thieu_lam_dao:idle:\u001b[7mup\u001b[27m\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  369 |         await expect\n  370 |           .poll(async () => (await actor()).animation)\n> 371 |           .toBe(texture + ':idle:down');\n      |            ^\n  372 |         const label = dao ? 'dao' : 'quyen';\n  373 |         await a.screenshot({\n  374 |           path: resolve(evidence, label + '_gameplay_1280x720.png'),\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\thieu-lam-art.spec.ts:371:12"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T18:19:45.689Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\Projects\\volam-hero-defense\\artifacts\\thieu-lam-playwright\\thieu-lam-art-Thiếu-Lâm-Đa-45371-itions-and-shared-authority-chromium\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\thieu-lam-art.spec.ts",
+                    "column": 12,
+                    "line": 371
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "8cc487dcff1f1b8a0a4d-342aed7faece179d28fe",
+          "file": "thieu-lam-art.spec.ts",
+          "line": 144,
+          "column": 3
+        },
+        {
+          "title": "Six-player mixed-school scene preserves Thiếu Lâm scale and feet depth",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 180000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 56497,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T18:20:14.814Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8cc487dcff1f1b8a0a4d-a7f61792fcf4963145e2",
+          "file": "thieu-lam-art.spec.ts",
+          "line": 421,
+          "column": 1
+        },
+        {
+          "title": "Thiếu Lâm feet sort in front of and behind the actual perimeter tree",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11493,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-30T18:21:11.522Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8cc487dcff1f1b8a0a4d-a10be11789013fddbb0f",
+          "file": "thieu-lam-art.spec.ts",
+          "line": 543,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-30T18:18:04.954Z",
+    "duration": 198255.424,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

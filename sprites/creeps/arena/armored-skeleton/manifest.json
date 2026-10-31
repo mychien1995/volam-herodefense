@@ -1,0 +1,1407 @@
+{
+  "id": "creep_armored_skeleton",
+  "nameVi": "Thiết Giáp Khô Lâu",
+  "phase": "1F",
+  "category": "enemy",
+  "status": "prototype",
+  "reviewStatus": "STAGED_NOT_INTEGRATED",
+  "conceptApproval": "User: approved, please proceed (2026-10-30), after Phase 1E concept delivery",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+  "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+  "masterConcept": "assets/concepts/arena-creeps/waves-09-12/arena_creeps_09_12_concept_sheet.png",
+  "source": "sprites/creeps/arena/armored-skeleton/source/creep_armored_skeleton.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 160,
+  "frameHeight": 112,
+  "footPivot": [
+    0.5,
+    0.8035714285714286
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2"
+      ],
+      "frameRate": 6.25,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/idle_down_0.png",
+      "bounds": [
+        52,
+        36,
+        114,
+        90
+      ],
+      "sha256": "20d4905da6103f12eddd5fad87f99316d92ef6c60f42497f813a0e9b8807b127",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "idle_down_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/idle_down_1.png",
+      "bounds": [
+        53,
+        36,
+        113,
+        90
+      ],
+      "sha256": "203970f803171b4d52b635592dca79ce63a3c3739d21dd3f494b15ea42d03338",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "walk_down_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_down_0.png",
+      "bounds": [
+        56,
+        37,
+        111,
+        90
+      ],
+      "sha256": "3ee77c5ad975dec5e8c686fd55ab4e4150e0e0fa5b17678de2f5ae0b4f31e6e7",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "walk_down_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_down_1.png",
+      "bounds": [
+        58,
+        34,
+        112,
+        90
+      ],
+      "sha256": "f0a3e10dbef4424a020a12528b0372a9389593da4618f0656e5f7acb434e379d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 4
+    },
+    {
+      "name": "walk_down_2",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_down_2.png",
+      "bounds": [
+        61,
+        37,
+        109,
+        90
+      ],
+      "sha256": "0e4fd7380c1a98cebad2028a6c15fbf97241363beb43193ec1424ed48735e803",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 5
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_down_0.png",
+      "bounds": [
+        45,
+        33,
+        116,
+        90
+      ],
+      "sha256": "c779cfe58659ef3c251b6283bc3915cc94b5c33161728534fe7fca83536e2a58",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/attack_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_down_1.png",
+      "bounds": [
+        42,
+        21,
+        108,
+        90
+      ],
+      "sha256": "ce2472f0b373ac51f03eadfa89889b2c9bed03a1ba896f792b0820d3325431b2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/attack_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_down_2.png",
+      "bounds": [
+        62,
+        32,
+        115,
+        90
+      ],
+      "sha256": "d800c01c44c340cf0abcd8e73bab8420438def4fbc574fbf6c6e45750d5cd009",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/attack_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_down_3.png",
+      "bounds": [
+        46,
+        33,
+        115,
+        90
+      ],
+      "sha256": "de531ba63f92f8589974b1b9227c8ca62f9e8240b40bf6053002f5013e9433a3",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/attack_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/hurt_down_0.png",
+      "bounds": [
+        54,
+        37,
+        114,
+        90
+      ],
+      "sha256": "a96e444745190a24fcebc208f4b498d382601d065ec3c04cffd16d5902123930",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/hurt_down_1.png",
+      "bounds": [
+        54,
+        36,
+        114,
+        90
+      ],
+      "sha256": "1a01e63226f1b67c4f66067b5422ec137f92c06c434f9c25e8f48b07445caabe",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "death_down_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_down_0.png",
+      "bounds": [
+        55,
+        38,
+        108,
+        90
+      ],
+      "sha256": "1b578531e901a3a11ee43bd59c8f9318bcc59f4a029fedcb00cc525f38d5b231",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "death_down_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_down_1.png",
+      "bounds": [
+        54,
+        43,
+        112,
+        90
+      ],
+      "sha256": "70fc890b715649603362af743456b5f92a33c5905a5f903b66df0e5a815ab14e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "death_down_2",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_down_2.png",
+      "bounds": [
+        46,
+        47,
+        113,
+        90
+      ],
+      "sha256": "31b1f0c00302d3673e6cb3d0b1d04fe4748a224dfe3db1b534835566e1baa08b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 4
+    },
+    {
+      "name": "death_down_3",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_down_3.png",
+      "bounds": [
+        47,
+        52,
+        114,
+        90
+      ],
+      "sha256": "a3362480ecd411bf4d67b46a1ba637ad1ac0375853ef6d19eabbf41795c8b93a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 5
+    },
+    {
+      "name": "idle_left_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/idle_left_0.png",
+      "bounds": [
+        49,
+        37,
+        103,
+        90
+      ],
+      "sha256": "7ec7dba32ba8cf5ba5107b2a5afa331beeedc5c6983014d6857579b2933f8244",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "idle_left_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/idle_left_1.png",
+      "bounds": [
+        49,
+        36,
+        103,
+        90
+      ],
+      "sha256": "6c95759373cbfd8d0448071f129ed1e90361111bb1815afc204d471d3d436b9b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "walk_left_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_left_0.png",
+      "bounds": [
+        49,
+        37,
+        103,
+        90
+      ],
+      "sha256": "9a39fa6c27f1e88d9d6ced17f6583e3906458bc69dc38371e5c6b5644d887584",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 12
+    },
+    {
+      "name": "walk_left_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_left_1.png",
+      "bounds": [
+        54,
+        37,
+        101,
+        90
+      ],
+      "sha256": "30847dfa3230e7b7bdbaae8d2f57b9a340c9e3152e087b4b5952e6d47005c859",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 13
+    },
+    {
+      "name": "walk_left_2",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_left_2.png",
+      "bounds": [
+        50,
+        37,
+        101,
+        90
+      ],
+      "sha256": "a21d51b78f1cfd609946d23137ef2e97047a2e0240727792b55efd88f8f7d6b1",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 14
+    },
+    {
+      "name": "walk_left_3",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_left_3.png",
+      "bounds": [
+        53,
+        38,
+        100,
+        90
+      ],
+      "sha256": "6e4d0e4ad6ebca37b36b8a49b2eac2ea339605cf40bee53b023d51b60c7fc335",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 15
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_left_0.png",
+      "bounds": [
+        49,
+        36,
+        116,
+        90
+      ],
+      "sha256": "25eba70dbcd3b400eb31a691047e0b5257e61e9252eee8dc0b88299e7a6f1bd8",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/attack_left_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_left_1.png",
+      "bounds": [
+        57,
+        17,
+        107,
+        90
+      ],
+      "sha256": "5bc4ca589467e6e455385380f5fcc6cf45c23cced20d426b3982e97e98a4396d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/attack_left_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_left_2.png",
+      "bounds": [
+        9,
+        37,
+        107,
+        90
+      ],
+      "sha256": "5427b4d1376419ff8f2b0ad996eeacfc74771d20b73abc876b7a58dbfdb81692",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/attack_left_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_left_3.png",
+      "bounds": [
+        36,
+        36,
+        105,
+        90
+      ],
+      "sha256": "1f7ff83b987cebbcd3bb30a70cd5ba2371a3f0d876e3b052d5280852eee43d96",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/attack_left_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/hurt_left_0.png",
+      "bounds": [
+        44,
+        38,
+        103,
+        90
+      ],
+      "sha256": "45b8eb0bc9dc050dba8576ae320580f3c47b1e9dc5dbc0e7af670aafb3faa293",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 6
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/hurt_left_1.png",
+      "bounds": [
+        43,
+        37,
+        104,
+        90
+      ],
+      "sha256": "b3113d78427a4cfffcdcf9f1eaab8a5bc96b97703261eda749fa2b0eca0c931f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 7
+    },
+    {
+      "name": "death_left_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_left_0.png",
+      "bounds": [
+        44,
+        41,
+        105,
+        90
+      ],
+      "sha256": "e7e5d74bc16e5e42bb095ded14349c55a7f7ee161f09a80241430510740e3476",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 8
+    },
+    {
+      "name": "death_left_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_left_1.png",
+      "bounds": [
+        58,
+        45,
+        114,
+        90
+      ],
+      "sha256": "e9667664d0079a10b5a05b9aac7bfaf468c9436acfe4a9e40dfea535ce851c97",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 9
+    },
+    {
+      "name": "death_left_2",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_left_2.png",
+      "bounds": [
+        46,
+        49,
+        114,
+        90
+      ],
+      "sha256": "c9b3c3c3438ad831781e7009e8db7ef20c49e1bc39fa3c1e640482d6f8352a39",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "death_left_3",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_left_3.png",
+      "bounds": [
+        43,
+        57,
+        112,
+        90
+      ],
+      "sha256": "bf1be9e1a60319e9649f43024dcbd11b252cc8bc264b63394ccc9258c0b0bb82",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "idle_right_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/idle_right_0.png",
+      "bounds": [
+        56,
+        38,
+        111,
+        90
+      ],
+      "sha256": "4692fb8fe4aeb6eaff8d172169c9d5e0bf53ddee9ee9e8a6429225d871581835",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 20
+    },
+    {
+      "name": "idle_right_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/idle_right_1.png",
+      "bounds": [
+        57,
+        39,
+        112,
+        90
+      ],
+      "sha256": "80039e2c8463a16874dbd15ca22a3fa8dd6e1fc9ecf6f8ec86e283dcc1f71ced",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 21
+    },
+    {
+      "name": "walk_right_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_right_0.png",
+      "bounds": [
+        57,
+        37,
+        109,
+        90
+      ],
+      "sha256": "119f8d8cbed909f910e81490f0c3d90f2d98b60b108d19478f3c5cff0960851d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 22
+    },
+    {
+      "name": "walk_right_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_right_1.png",
+      "bounds": [
+        58,
+        37,
+        108,
+        90
+      ],
+      "sha256": "3da93ce47a942145955e35f244472bc10afd94779d80420c103bbd8320ae1065",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 23
+    },
+    {
+      "name": "walk_right_2",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_right_2.png",
+      "bounds": [
+        59,
+        37,
+        108,
+        90
+      ],
+      "sha256": "f3770ab7e4c528b505711d3755705911afe7b8a3b5c6cc4047f26baa267cf30d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 24
+    },
+    {
+      "name": "walk_right_3",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_right_3.png",
+      "bounds": [
+        57,
+        39,
+        113,
+        90
+      ],
+      "sha256": "3df829ad51405693d967c57dbbb136530b02736cbd2688f2834aa99bc51f881f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 25
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_right_0.png",
+      "bounds": [
+        50,
+        36,
+        109,
+        90
+      ],
+      "sha256": "0ffc7bfeee911019ff556f4408237bf0fe41708312c5898a0f86bdfa1cdf945a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/attack_right_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_right_1.png",
+      "bounds": [
+        41,
+        17,
+        110,
+        90
+      ],
+      "sha256": "fce4f9977241ad45478bfb4d687c73f489b79cdaa112f1ac703cd7521b9b736e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/attack_right_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_right_2.png",
+      "bounds": [
+        40,
+        38,
+        121,
+        90
+      ],
+      "sha256": "2f316883e6c91c56564c6a91fe00cb1e382a664ad6dbb62465905ed60af864d3",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/attack_right_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_right_3.png",
+      "bounds": [
+        50,
+        36,
+        108,
+        90
+      ],
+      "sha256": "6d124d1552b3926bf36e5b82ca37c82bec71d5113b55659d92b32b4ea773cb6b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/attack_right_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/hurt_right_0.png",
+      "bounds": [
+        54,
+        34,
+        113,
+        90
+      ],
+      "sha256": "4fc408c2dc7d9cd8366ddde0b17aaf9966df75ee50704d1b3ba16a36c52c6026",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 12
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/hurt_right_1.png",
+      "bounds": [
+        57,
+        36,
+        113,
+        90
+      ],
+      "sha256": "524846c35628bffa5c8fa98f67160deaaf1ec5a42aba3ed4949034537de5133d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 13
+    },
+    {
+      "name": "death_right_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_right_0.png",
+      "bounds": [
+        60,
+        37,
+        118,
+        90
+      ],
+      "sha256": "5ddde90ff8b5631ae09561c547a6fd664964fa4f80a71536ae367f50809c4fdb",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 14
+    },
+    {
+      "name": "death_right_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_right_1.png",
+      "bounds": [
+        50,
+        48,
+        109,
+        90
+      ],
+      "sha256": "973a92574214f61ccded55910723a24dcbce5acaefae272de11ae19e1ed31c99",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 15
+    },
+    {
+      "name": "death_right_2",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_right_2.png",
+      "bounds": [
+        44,
+        46,
+        107,
+        90
+      ],
+      "sha256": "ef87e33310e4949427b2e692489f21d5a659aa84ffb3d654fc92727b22010451",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 16
+    },
+    {
+      "name": "death_right_3",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_right_3.png",
+      "bounds": [
+        43,
+        57,
+        111,
+        90
+      ],
+      "sha256": "8461ec062281b5a65286392e67dbe307b58b214bfafd848a3282485532e01374",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 17
+    },
+    {
+      "name": "idle_up_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/idle_up_0.png",
+      "bounds": [
+        48,
+        36,
+        109,
+        90
+      ],
+      "sha256": "13957f884a05db7b7c594ec0e5c28bf3b6674339ebeba28127e177aaa6aeccf6",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 30
+    },
+    {
+      "name": "idle_up_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/idle_up_1.png",
+      "bounds": [
+        45,
+        36,
+        110,
+        90
+      ],
+      "sha256": "d0bb0a0cf9f6dc6e9b058b7b62089c9e55bd167122316bafc68ba51a9fd584ed",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 31
+    },
+    {
+      "name": "walk_up_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_up_0.png",
+      "bounds": [
+        56,
+        36,
+        110,
+        90
+      ],
+      "sha256": "bf744c2a48be32875d97f6833203d1ba221d630e8f7cded4c94fb678e37f4e9a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 32
+    },
+    {
+      "name": "walk_up_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_up_1.png",
+      "bounds": [
+        49,
+        38,
+        109,
+        90
+      ],
+      "sha256": "07efda0d19ee6dded15f51602418cc8d16fce2746e4fdcf9dc6ec33ca5ac0681",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 33
+    },
+    {
+      "name": "walk_up_2",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_up_2.png",
+      "bounds": [
+        45,
+        36,
+        103,
+        90
+      ],
+      "sha256": "ff4aa71392f9ca56586ca04a1e2ea370934511adbb1f89ff7da87f23ba281264",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 34
+    },
+    {
+      "name": "walk_up_3",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/walk_up_3.png",
+      "bounds": [
+        44,
+        35,
+        101,
+        90
+      ],
+      "sha256": "3eeeb714d918a6969e6ba0f23b5ce2b76be87372ba37a7476afdeb18abd1faf0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 35
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_up_0.png",
+      "bounds": [
+        44,
+        39,
+        107,
+        90
+      ],
+      "sha256": "9cdf156e2f2bcb0d622f2ace6aae49de6d4525ef54abdd47a5d86b4701bce181",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 36
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_up_1.png",
+      "bounds": [
+        54,
+        33,
+        108,
+        90
+      ],
+      "sha256": "bf1f257dd73cd2e88add66b097004d0eb508e16281d73d15b42b811b887c3001",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 37
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_up_2.png",
+      "bounds": [
+        45,
+        38,
+        110,
+        90
+      ],
+      "sha256": "9f55b1f5646b0df8550c642945cb9c2f0114b55715bbd69a49bf01edc870e100",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 38
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/basic_attack_up_3.png",
+      "bounds": [
+        46,
+        36,
+        106,
+        90
+      ],
+      "sha256": "08e3ad4701f4b6c07711f29c3625f4d06044fba337e44b7cb1bf2688dba714c9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "selectedComponent": 39
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/hurt_up_0.png",
+      "bounds": [
+        54,
+        34,
+        115,
+        90
+      ],
+      "sha256": "32e5a2e20b86999e53ba79f292df8a6ee25dfad0e91de7b0f7e9b671c60b250d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 18
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/hurt_up_1.png",
+      "bounds": [
+        52,
+        34,
+        114,
+        90
+      ],
+      "sha256": "b2a921ab4ed722edefe894800cca8bf3e20efe0c5cd6fe40ff4e8bdcd94aa023",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 19
+    },
+    {
+      "name": "death_up_0",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_up_0.png",
+      "bounds": [
+        46,
+        38,
+        106,
+        90
+      ],
+      "sha256": "b926e0c012785e8a14697c4b17550cbccc45ddfaf6e66ed2947d6fb1c6f57d60",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 20
+    },
+    {
+      "name": "death_up_1",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_up_1.png",
+      "bounds": [
+        44,
+        47,
+        108,
+        90
+      ],
+      "sha256": "9d4183c9b5c7b0c1cca917a1d9a159db48b60a449aaaae1535b1db824445196f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 21
+    },
+    {
+      "name": "death_up_2",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_up_2.png",
+      "bounds": [
+        49,
+        47,
+        114,
+        90
+      ],
+      "sha256": "fe48b8f0cbc8fe6d32efb8e566fe84ac8e46cb188912febdbdb1fccd71545266",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 22
+    },
+    {
+      "name": "death_up_3",
+      "file": "sprites/creeps/arena/armored-skeleton/frames/death_up_3.png",
+      "bounds": [
+        36,
+        56,
+        103,
+        90
+      ],
+      "sha256": "660467d558116c77e47280340ef0aae29ed4055eb9715f9c58912ad56ed4b45b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "sourceConceptSha256": "997aab8d2edeacde7e473b08c32086f52e8f9b7c469aa40dcc704e6fe834b6cf",
+      "sourceImage": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "selectedComponent": 23
+    }
+  ],
+  "animationAudit": [
+    {
+      "tag": "idle_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_down",
+      "frames": 3,
+      "distinctDrawings": 3
+    },
+    {
+      "tag": "basic_attack_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    }
+  ],
+  "generatedSources": {
+    "main": {
+      "file": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+      "originalGeneratedFilename": "exec-cad6b8af-aa13-4eab-bb43-309570a1d51e.png",
+      "expected": 40,
+      "rows": 4,
+      "cols": 10,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        1,
+        10,
+        11,
+        20,
+        21,
+        30,
+        31
+      ],
+      "sha256": "fa262143d3c39a4926e6b6a3ce2350dcb970f251f3ae0b40b72145e92a431ab5"
+    },
+    "reaction": {
+      "file": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+      "originalGeneratedFilename": "exec-d67c19af-3660-415e-8667-14af21390237.png",
+      "expected": 24,
+      "rows": 4,
+      "cols": 6,
+      "used": true,
+      "heightReferenceIndices": [
+        1,
+        7,
+        13,
+        19
+      ],
+      "sha256": "a322bda4fd62a08bb857d8113235811ce34199a92e65714a39244de30b1bfeca"
+    },
+    "attack": {
+      "file": "sprites/creeps/arena/armored-skeleton/source/attack_v1.png",
+      "originalGeneratedFilename": "exec-c05047b1-1e36-40c5-983e-e3fbfe0f3f41.png",
+      "expected": 12,
+      "rows": 3,
+      "cols": 4,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        4,
+        8
+      ],
+      "sha256": "3b43e05b3681077153edb6bd8b2a6792992b346487d28052f8fbf296a3cca823"
+    },
+    "attack_left": {
+      "file": "sprites/creeps/arena/armored-skeleton/source/attack_left_v1.png",
+      "expected": 4,
+      "rows": 2,
+      "cols": 2,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        3
+      ],
+      "originalGeneratedFilename": "exec-92f86783-5612-4b11-9697-2cabc6efa6c1.png",
+      "sha256": "6dbbd5305155d651de56267a6118078eadaa4f531a34bbadb477e93aff4820d4"
+    },
+    "attack_right": {
+      "file": "sprites/creeps/arena/armored-skeleton/source/attack_right_v1.png",
+      "expected": 4,
+      "rows": 2,
+      "cols": 2,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        3
+      ],
+      "originalGeneratedFilename": "exec-809c695b-898f-4fd2-93ac-dbea781c6ac5.png",
+      "sha256": "828c34d67945b4dfc91ce1f0e9934e79e48264a307db1e5d1d4a29389927fe80"
+    }
+  },
+  "sourceScales": {
+    "main": 0.3312883435582822,
+    "reaction": 0.27621483375959077,
+    "attack": 0.2231404958677686,
+    "attack_left": 0.14958448753462603,
+    "attack_right": 0.15384615384615385
+  },
+  "notes": "Missing-sword frontal walk pose excluded. Front and side attacks regenerated; right-hand jian and left-hand shield retained.",
+  "runtimeIntegration": false,
+  "provenance": "Original AI-assisted generated raster poses, approved concept images provided directly. Aseprite extracts masked generated pixels, removes alpha below220, preserves source RGB, normalizes retained alpha, applies fixed nearest-neighbour source scale and aligns feet. No concept pixels used as animation frames; no commercial sprite pack, separate third-party license or exclusive copyright claimed.",
+  "verification": "Isolated Phaser verification passed; owner animation approval pending; not integrated.",
+  "normalGameplayReview": "PASS: isolated Phaser 4.2.1, 1x logical/1x and2x display, all frames observed, native loop/one-shot/facing transitions and constant origins checked. No live-match integration or owner runtime approval.",
+  "verificationEvidence": [
+    "sprites/creeps/arena/waves-09-12-production/review/phaser_verification.json",
+    "sprites/creeps/arena/waves-09-12-production/review/concept_comparison.png"
+  ],
+  "wave": 11,
+  "artifactHashes": {
+    "spritesheet.png": "d2b0c7087535b138894e8da2f86cbef992c0b05b7e0ee5151ad2824e5b99dca7",
+    "atlas.json": "b77f4d0dcded0c558d9c77f2e4dec9e30f66066f54e9b2b0870bf7049c20c2d5",
+    "source/creep_armored_skeleton.aseprite": "492729d5e595697cc7bd9682c968a3fda22747b2d3f006b4d9e0542dd5f8be00"
+  },
+  "fidelityReview": "sprites/creeps/arena/waves-09-12-production/concept_fidelity_review.json"
+}

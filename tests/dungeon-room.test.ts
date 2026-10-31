@@ -8,6 +8,7 @@ import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 import { creepDungeon } from '@volam/game-data';
 
 let server: ColyseusTestServer;
+const previousLegacy = process.env['VOLAM_DEV_LEGACY_SKILLS'];
 const client = new Client('http://localhost:2568');
 const sequences = new Map<string, number>();
 const next = (room: Room<MatchRoom>) => {
@@ -16,6 +17,7 @@ const next = (room: Room<MatchRoom>) => {
   return value;
 };
 beforeAll(async () => {
+  process.env['VOLAM_DEV_LEGACY_SKILLS'] = '1';
   server = await boot(createGameServer(), 2568);
 });
 afterEach(async () => {
@@ -23,6 +25,9 @@ afterEach(async () => {
   sequences.clear();
 });
 afterAll(async () => {
+  if (previousLegacy === undefined)
+    delete process.env['VOLAM_DEV_LEGACY_SKILLS'];
+  else process.env['VOLAM_DEV_LEGACY_SKILLS'] = previousLegacy;
   await server.shutdown();
 });
 async function join(count = 2) {
@@ -38,7 +43,11 @@ async function join(count = 2) {
         protocolVersion: PROTOCOL_VERSION,
       }),
     );
-  await Promise.all(rooms.map((r) => r.waitForInitialState()));
+  await Promise.all(
+    rooms.map((r) =>
+      expect.poll(() => r.state?.players?.has(r.sessionId)).toBe(true),
+    ),
+  );
   a.send('lobby-action', { action: 'start' });
   for (const room of rooms) {
     await expect.poll(() => room.state.phase).toBe('SCHOOL_SELECTION');
@@ -84,7 +93,9 @@ describe('M2A real Colyseus zone authority and views', () => {
       nickname: 'Waiting',
       protocolVersion: PROTOCOL_VERSION,
     });
-    await room.waitForInitialState();
+    await expect
+      .poll(() => room.state?.players?.has(room.sessionId))
+      .toBe(true);
     const rejected = room.waitForMessage('command-rejected');
     room.send('dungeon-action', {
       protocolVersion: PROTOCOL_VERSION,

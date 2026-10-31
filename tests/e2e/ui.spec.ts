@@ -17,6 +17,7 @@ interface Snapshot {
         basicCooldown: number;
         basicId: string;
         lastSequence: number;
+        build?: { enabled: boolean };
       }
     >;
   };
@@ -157,6 +158,21 @@ test('menus release held movement, trap focus and preserve live two-client simul
     await enter(a, 'Trúc Lâm', undefined, true);
     await enter(b, 'Đồng đội', (await read(a)).roomId, true);
     await startTogether([a, b]);
+    const progressed = !!(await hero(a)).build?.enabled;
+    if (progressed) {
+      // M3B starts with one earned point, rather than the historical two free
+      // M1 skills. Learn Q through the real UI before testing input recovery.
+      await open(a, 'skills');
+      await a.locator('#loadout-q').selectOption('hoa_van_chuong');
+      await a.locator('#apply-loadout').click();
+      await expect(a.locator('#slot-q')).toHaveAttribute(
+        'data-skill-id',
+        'hoa_van_chuong',
+      );
+      await a.locator('[data-upgrade=hoa_van_chuong]').click();
+      await expect(a.locator('#available-points')).toHaveText('0');
+      await a.keyboard.press('Escape');
+    }
     await expect(a.getByTestId('player-count')).toHaveText('2 / 6');
     const start = await hero(a);
     await a.keyboard.down('ArrowDown');
@@ -236,7 +252,7 @@ test('menus release held movement, trap focus and preserve live two-client simul
             (e) => e.sourceId === before.sessionId && e.kind === 'cast',
           ).length,
       )
-      .toBe(2);
+      .toBe(progressed ? 1 : 2);
   } finally {
     await Promise.all([ca.close(), cb.close()]);
   }

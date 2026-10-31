@@ -1,0 +1,171 @@
+{
+  "id": "nhu_lai_niet_ban_vfx",
+  "skillId": "nhu_lai_niet_ban",
+  "kind": "vfx",
+  "status": "prototype_approval_gate_waived",
+  "approvalGate": "approval gate waived by user",
+  "source": "assets/source/skills/thieu-lam/nhu_lai_niet_ban/vfx/nhu_lai_niet_ban_vfx.aseprite",
+  "sheet": "assets/exports/skills/thieu-lam/nhu_lai_niet_ban/nhu_lai_niet_ban_vfx.png",
+  "atlas": "assets/exports/skills/thieu-lam/nhu_lai_niet_ban/nhu_lai_niet_ban_vfx.json",
+  "sourceSha256": "c0124c8ebd052678d3b6946f58e1b2aad2279d06f98599921f4ea157521bc6f9",
+  "sheetSha256": "691c85b3486fd0ffa20edf5508ac8c5928bdead4b45c130752b4013433ac1f19",
+  "atlasSha256": "1731bb8f0c64b0c320d62715244caae9946d6ac79f9d25d6491f8c6fd3232cde",
+  "rawSource": "assets/source/skills/thieu-lam/generated/nhu_lai_niet_ban_vfx_v01.png",
+  "frameDimensions": [
+    192,
+    192
+  ],
+  "pivot": [
+    96,
+    96
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "animations": [
+    {
+      "name": "preparation",
+      "frames": [
+        "preparation_0",
+        "preparation_1",
+        "preparation_2",
+        "preparation_3"
+      ],
+      "frameDimensions": [
+        192,
+        192
+      ],
+      "frameCount": 4,
+      "frameRate": 14.285714285714286,
+      "durationMsPerFrame": 70,
+      "loop": false,
+      "repeat": 0,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        96,
+        96
+      ],
+      "stage": "preparation",
+      "placement": "caster_feet",
+      "effectPlacementOffset": [
+        0,
+        0
+      ],
+      "timingAuthority": "Presentation only. Authoritative events determine hit, lifetime, healing, defense and same-target combo eligibility. No gameplay implementation."
+    },
+    {
+      "name": "ground_impact",
+      "frames": [
+        "ground_impact_0",
+        "ground_impact_1",
+        "ground_impact_2",
+        "ground_impact_3"
+      ],
+      "frameDimensions": [
+        192,
+        192
+      ],
+      "frameCount": 4,
+      "frameRate": 14.285714285714286,
+      "durationMsPerFrame": 70,
+      "loop": false,
+      "repeat": 0,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        96,
+        96
+      ],
+      "stage": "ground_impact",
+      "placement": "ground",
+      "effectPlacementOffset": [
+        0,
+        0
+      ],
+      "timingAuthority": "Presentation only. Authoritative events determine hit, lifetime, healing, defense and same-target combo eligibility. No gameplay implementation."
+    },
+    {
+      "name": "aftereffect",
+      "frames": [
+        "aftereffect_0",
+        "aftereffect_1",
+        "aftereffect_2",
+        "aftereffect_3"
+      ],
+      "frameDimensions": [
+        192,
+        192
+      ],
+      "frameCount": 4,
+      "frameRate": 14.285714285714286,
+      "durationMsPerFrame": 70,
+      "loop": false,
+      "repeat": 0,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        96,
+        96
+      ],
+      "stage": "aftereffect",
+      "placement": "caster_body",
+      "effectPlacementOffset": [
+        0,
+        -22
+      ],
+      "timingAuthority": "Presentation only. Authoritative events determine hit, lifetime, healing, defense and same-target combo eligibility. No gameplay implementation."
+    },
+    {
+      "name": "ending",
+      "frames": [
+        "ending_0",
+        "ending_1",
+        "ending_2",
+        "ending_3"
+      ],
+      "frameDimensions": [
+        192,
+        192
+      ],
+      "frameCount": 4,
+      "frameRate": 14.285714285714286,
+      "durationMsPerFrame": 70,
+      "loop": false,
+      "repeat": 0,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        96,
+        96
+      ],
+      "stage": "ending",
+      "placement": "ground",
+      "effectPlacementOffset": [
+        0,
+        0
+      ],
+      "timingAuthority": "Presentation only. Authoritative events determine hit, lifetime, healing, defense and same-target combo eligibility. No gameplay implementation."
+    }
+  ],
+  "provenance": "Original image_gen raster cels; binary-alpha cleanup, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+  "reuseNotes": [
+    "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+  ],
+  "gameplayIntegrated": false,
+  "previewIntegrated": true,
+  "productionArtApproved": false
+}

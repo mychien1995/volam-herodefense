@@ -1,4 +1,22 @@
+import { expireCombos } from './combos.js';
+import {
+  equippedAbility,
+  perform,
+  stepSkillActions,
+  stepAreas,
+  stepSupports,
+} from './skills.js';
+import { emit, hurt, offensiveStats } from './combat.js';
+import {
+  cancelOwnedEffects,
+  expireStatuses,
+  hasStatus,
+  applyStatus,
+  statusValue,
+  displace,
+} from './status.js';
 import { createSeededRandom } from './random.js';
+import { abilityCooldown, characterStats } from './progression.js';
 import {
   blocked,
   direction,
@@ -8,10 +26,7 @@ import {
   segmentRect,
 } from './geometry.js';
 import type {
-  Ability,
-  Actor,
   Command,
-  CombatEvent,
   Creep,
   Hero,
   Point,
@@ -112,11 +127,15 @@ export function addHero(
     lastMoveTick: 0,
     lastSequence: 0,
     skillCooldowns: [0, 0, 0, 0],
+    skillIds: config.skills.map((s) => s.id),
+    abilityCooldowns: {},
+    statuses: [],
   };
   world.heroes.set(id, hero);
   return hero;
 }
 export function removeHero(world: World, id: string): void {
+  cancelOwnedEffects(world, id);
   world.heroes.delete(id);
   for (const [key, shot] of world.projectiles)
     if (shot.ownerId === id) world.projectiles.delete(key);
@@ -149,171 +168,6 @@ export function submitInput(
     world.pending.push({ heroId, command });
   return true;
 }
-function emit(world: World, event: Omit<CombatEvent, 'id'>): void {
-  world.events.push({ id: world.nextEvent++, ...event });
-}
-function hurt(
-  world: World,
-  target: Actor,
-  sourceId: string,
-  abilityId: string,
-  raw: number,
-  config: SimulationConfig,
-): void {
-  if (target.hp <= 0) return;
-  const enemy = world.creeps.get(target.id);
-  const critical = world.random() < config.critChance;
-  const damage = Math.max(
-    1,
-    Math.round(
-      raw *
-        (100 / (100 + (enemy ? (enemy.stats ?? config.creep).defense : 0))) *
-        (critical ? config.critMultiplier : 1),
-    ),
-  );
-  target.hp = Math.max(0, target.hp - damage);
-  target.hurtUntil = world.tick + 6;
-  if (enemy) enemy.hits[sourceId] = world.tick;
-  emit(world, {
-    kind: 'hit',
-    sourceId,
-    targetId: target.id,
-    abilityId,
-    damage,
-    critical,
-    x: target.x,
-    y: target.y,
-  });
-  if (target.hp === 0) {
-    target.pose = 'death';
-    emit(world, {
-      kind: 'death',
-      sourceId,
-      targetId: target.id,
-      abilityId,
-      damage: 0,
-      critical: false,
-      x: target.x,
-      y: target.y,
-    });
-    if (enemy) {
-      enemy.respawnAt = world.tick + config.creep.respawnTicks;
-      reward(world, enemy, config);
-    }
-  }
-}
-function reward(world: World, creep: Creep, config: SimulationConfig): void {
-  const stats = creep.stats ?? config.creep;
-  const eligible = [...world.heroes.values()]
-    .filter(
-      (hero) =>
-        creep.hits[hero.id] !== undefined &&
-        world.tick - (creep.hits[hero.id] ?? 0) <= stats.assistTicks,
-    )
-    .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
-  eligible.forEach((hero, i) => {
-    hero.xp +=
-      Math.floor(stats.xp / eligible.length) +
-      (i < stats.xp % eligible.length ? 1 : 0);
-    hero.gold +=
-      Math.floor(stats.gold / eligible.length) +
-      (i < stats.gold % eligible.length ? 1 : 0);
-    const nextLevel = Math.min(
-      config.maxLevel,
-      Math.floor(hero.xp / config.xpPerLevel) + 1,
-    );
-    const growth = nextLevel - hero.level;
-    const alive = hero.hp > 0;
-    hero.level = nextLevel;
-    hero.skillPoints = nextLevel;
-    hero.maxHp += growth * config.hpPerLevel;
-    if (alive)
-      hero.hp = Math.min(hero.maxHp, hero.hp + growth * config.hpPerLevel);
-  });
-}
-function targetDirection(world: World, hero: Hero, range: number): Point {
-  const nearest = [...world.creeps.values()]
-    .filter((enemy) => enemy.hp > 0 && distance(hero, enemy) <= range)
-    .sort(
-      (a, b) =>
-        distance(hero, a) - distance(hero, b) ||
-        (a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
-    )[0];
-  return nearest
-    ? direction(nearest.x - hero.x, nearest.y - hero.y)
-    : { x: hero.fx, y: hero.fy };
-}
-function perform(
-  world: World,
-  hero: Hero,
-  ability: Ability,
-  config: SimulationConfig,
-  kind: 'attack' | 'cast',
-): void {
-  const effect = ability.effect;
-  hero.pose = kind === 'cast' ? 'cast' : 'basic_attack';
-  hero.actionUntil = world.tick + 12;
-  emit(world, {
-    kind,
-    sourceId: hero.id,
-    targetId: '',
-    abilityId: ability.id,
-    damage: 0,
-    critical: false,
-    x: hero.x,
-    y: hero.y,
-  });
-  const rawDamage = effect.damage + (hero.level - 1) * config.attackPerLevel;
-  if (effect.mode === 'arc') {
-    const targets = [...world.creeps.values()]
-      .filter((enemy) => {
-        const delta = direction(enemy.x - hero.x, enemy.y - hero.y);
-        return (
-          enemy.hp > 0 &&
-          !config.collision.some(
-            (wall) => segmentRect(hero, enemy, wall) !== undefined,
-          ) &&
-          distance(hero, enemy) <=
-            effect.range + (enemy.stats ?? config.creep).radius &&
-          delta.x * hero.fx + delta.y * hero.fy >= Math.cos(effect.halfAngle)
-        );
-      })
-      .sort((a, b) => {
-        const da = direction(a.x - hero.x, a.y - hero.y);
-        const db = direction(b.x - hero.x, b.y - hero.y);
-        return (
-          db.x * hero.fx + db.y * hero.fy - (da.x * hero.fx + da.y * hero.fy) ||
-          distance(hero, a) - distance(hero, b) ||
-          (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)
-        );
-      });
-    targets.forEach((enemy, i) =>
-      hurt(
-        world,
-        enemy,
-        hero.id,
-        ability.id,
-        rawDamage * (i === 0 ? 1 : effect.cleave),
-        config,
-      ),
-    );
-  } else {
-    const aim = targetDirection(world, hero, effect.range);
-    hero.fx = aim.x;
-    hero.fy = aim.y;
-    for (let i = 0; i < effect.count; i++)
-      world.shots.push({
-        tick: world.tick + i * effect.spacingTicks,
-        ownerId: hero.id,
-        ability,
-        x: hero.x,
-        y: hero.y,
-        dx: aim.x,
-        dy: aim.y,
-        rawDamage,
-      });
-  }
-}
 function runCommand(
   world: World,
   hero: Hero,
@@ -321,29 +175,77 @@ function runCommand(
   config: SimulationConfig,
 ): void {
   if (hero.hp <= 0) return;
+  if (command.kind === 'dev-loadout') {
+    if (hero.progression) return;
+    if (
+      command.ids.length !== 4 ||
+      command.ids.some(
+        (id) => id && !Object.hasOwn(config.skillCatalogue ?? {}, id),
+      ) ||
+      new Set(command.ids.filter(Boolean)).size !==
+        command.ids.filter(Boolean).length
+    )
+      return;
+    hero.abilityCooldowns ??= {};
+    (hero.skillIds ?? config.skills.map((s) => s.id)).forEach((id, i) => {
+      hero.abilityCooldowns![id] = Math.max(
+        hero.abilityCooldowns![id] ?? 0,
+        hero.skillCooldowns[i] ?? 0,
+      );
+    });
+    const foreignStatuses = (hero.statuses ?? []).filter(
+      (s) => s.sourceId !== hero.id,
+    );
+    cancelOwnedEffects(world, hero.id);
+    hero.statuses = foreignStatuses;
+    hero.skillIds = [...command.ids];
+    hero.skillCooldowns = command.ids.map(
+      (id) => hero.abilityCooldowns![id] ?? 0,
+    );
+    return;
+  }
   if (command.kind === 'select-basic') {
+    if (hero.progression) return;
     if (config.basics[command.id]) hero.basicId = command.id;
     return;
   }
   if (command.kind === 'basic') {
+    if (
+      hasStatus(hero, 'stun', world.tick) ||
+      hasStatus(hero, 'disarm', world.tick) ||
+      (world.actions ?? []).some((a) => a.ownerId === hero.id)
+    )
+      return;
     const ability = config.basics[hero.basicId];
     if (ability && world.tick >= hero.cooldown) {
-      hero.cooldown = world.tick + ability.cooldownTicks;
+      hero.cooldown =
+        world.tick + abilityCooldown(hero, ability, config, world.tick, true);
       perform(world, hero, ability, config, 'attack');
     }
   }
   if (command.kind === 'cast') {
-    const ability = config.skills[command.slot];
+    if (
+      hasStatus(hero, 'stun', world.tick) ||
+      hasStatus(hero, 'silence', world.tick) ||
+      (world.actions ?? []).some((a) => a.ownerId === hero.id)
+    )
+      return;
+    const ability = equippedAbility(hero, command.slot, config);
     if (
       !ability ||
       !Number.isInteger(command.slot) ||
       command.slot < 0 ||
+      command.slot > 3 ||
       world.tick < (hero.skillCooldowns[command.slot] ?? Infinity) ||
+      world.tick < (hero.abilityCooldowns?.[ability.id] ?? 0) ||
       hero.mana < ability.manaCost
     )
       return;
     hero.mana -= ability.manaCost;
-    hero.skillCooldowns[command.slot] = world.tick + ability.cooldownTicks;
+    hero.skillCooldowns[command.slot] =
+      world.tick + abilityCooldown(hero, ability, config, world.tick);
+    hero.abilityCooldowns ??= {};
+    hero.abilityCooldowns[ability.id] = hero.skillCooldowns[command.slot]!;
     perform(world, hero, ability, config, 'cast');
   }
 }
@@ -366,8 +268,8 @@ function advanceProjectile(
       wallT,
       segmentRect(shot, end, wall, shot.effect.radius) ?? Infinity,
     );
-  const collision = [...world.creeps.values()]
-    .filter((enemy) => enemy.hp > 0)
+  const collisions = [...world.creeps.values()]
+    .filter((enemy) => enemy.hp > 0 && !(shot.hitIds ?? []).includes(enemy.id))
     .map((enemy) => ({
       enemy,
       t: segmentCircle(
@@ -385,10 +287,25 @@ function advanceProjectile(
       (a, b) =>
         a.t - b.t ||
         (a.enemy.id < b.enemy.id ? -1 : a.enemy.id > b.enemy.id ? 1 : 0),
-    )[0];
-  if (collision) {
-    shot.x += (end.x - shot.x) * collision.t;
-    shot.y += (end.y - shot.y) * collision.t;
+    );
+  const hits = shot.effect.piercing ? collisions : collisions.slice(0, 1);
+  shot.hitIds ??= [];
+  for (const collision of hits) {
+    if (shot.effect.splashRadius > 0)
+      emit(world, {
+        kind: 'pulse',
+        sourceId: shot.ownerId,
+        targetId: collision.enemy.id,
+        abilityId: shot.abilityId,
+        x: collision.enemy.x,
+        y: collision.enemy.y,
+        fx: dir.x,
+        fy: dir.y,
+        radius: shot.effect.splashRadius,
+        stage: 'explosion',
+        damage: 0,
+        critical: false,
+      });
     const victims = [...world.creeps.values()].filter(
       (enemy) =>
         enemy.hp > 0 &&
@@ -397,7 +314,30 @@ function advanceProjectile(
             distance(enemy, collision.enemy) <= shot.effect.splashRadius)),
     );
     for (const enemy of victims) {
-      hurt(world, enemy, shot.ownerId, shot.abilityId, shot.rawDamage, config);
+      if (shot.hitIds.includes(enemy.id)) continue;
+      shot.hitIds.push(enemy.id);
+      hurt(world, enemy, shot.ownerId, shot.abilityId, shot.rawDamage, config, {
+        ...(shot.critChance === undefined
+          ? offensiveStats(world, shot.ownerId, config)
+          : {
+              critChance: shot.critChance,
+              critMultiplier: shot.critMultiplier ?? config.critMultiplier,
+            }),
+        fx: dir.x,
+        fy: dir.y,
+      });
+      if (enemy.hp > 0)
+        for (const status of shot.effect.statuses ?? [])
+          applyStatus(enemy, status, shot.ownerId, shot.abilityId, world.tick);
+      if (enemy.hp > 0 && shot.effect.knockback)
+        displace(
+          enemy,
+          dir.x * shot.effect.knockback,
+          dir.y * shot.effect.knockback,
+          (enemy.stats ?? config.creep).radius,
+          config,
+          world.tick,
+        );
       if (enemy.hp > 0 && shot.effect.burnDamage > 0) {
         enemy.burnSource = shot.ownerId;
         enemy.burnDamage = shot.effect.burnDamage;
@@ -405,8 +345,12 @@ function advanceProjectile(
         enemy.burnNext = world.tick + config.tickRate;
       }
     }
-    world.projectiles.delete(shot.id);
-  } else if (wallT < Infinity || shot.remaining <= length)
+  }
+  if (
+    (hits.length > 0 && !shot.effect.piercing) ||
+    wallT < Infinity ||
+    shot.remaining <= length
+  )
     world.projectiles.delete(shot.id);
   else {
     shot.x = end.x;
@@ -417,9 +361,13 @@ function advanceProjectile(
 export function stepWorld(world: World, config: SimulationConfig): void {
   world.tick++;
   world.events = [];
+  expireStatuses(world);
+  expireCombos(world);
   for (const hero of world.heroes.values()) {
     if (hero.hp <= 0) {
       hero.pose = 'death';
+      cancelOwnedEffects(world, hero.id);
+      hero.statuses = [];
       continue;
     }
     if (world.tick - hero.lastMoveTick > config.inputTimeoutTicks) {
@@ -427,14 +375,19 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       hero.moveY = 0;
     }
     const movement = direction(hero.moveX, hero.moveY);
-    if (movement.x || movement.y) {
+    const stats = characterStats(hero, config, world.tick).total;
+    if (
+      (movement.x || movement.y) &&
+      !hasStatus(hero, 'stun', world.tick) &&
+      !hasStatus(hero, 'dash', world.tick)
+    ) {
       hero.fx = movement.x;
       hero.fy = movement.y;
       moveCircle(
         hero,
         {
-          x: (movement.x * config.speed) / config.tickRate,
-          y: (movement.y * config.speed) / config.tickRate,
+          x: (movement.x * stats.movementSpeed) / config.tickRate,
+          y: (movement.y * stats.movementSpeed) / config.tickRate,
         },
         config.radius,
         config.width,
@@ -444,15 +397,22 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     }
     hero.mana = Math.min(
       hero.maxMana,
-      hero.mana + config.manaRegen / config.tickRate,
+      hero.mana + stats.manaRegen / config.tickRate,
     );
+    hero.hp = Math.min(hero.maxHp, hero.hp + stats.hpRegen / config.tickRate);
     if (world.tick >= hero.actionUntil)
-      hero.pose = movement.x || movement.y ? 'walk' : 'idle';
+      hero.pose =
+        !hasStatus(hero, 'stun', world.tick) && (movement.x || movement.y)
+          ? 'walk'
+          : 'idle';
   }
   for (const input of world.pending.splice(0)) {
     const hero = world.heroes.get(input.heroId);
     if (hero) runCommand(world, hero, input.command, config);
   }
+  stepSkillActions(world, config);
+  stepAreas(world, config);
+  stepSupports(world, config);
   for (const scheduled of world.shots.filter(
     (item) => item.tick <= world.tick,
   )) {
@@ -472,6 +432,12 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       vy: scheduled.dy * scheduled.ability.effect.speed,
       remaining: scheduled.ability.effect.range,
       rawDamage: scheduled.rawDamage,
+      ...(scheduled.critChance === undefined
+        ? {}
+        : {
+            critChance: scheduled.critChance,
+            critMultiplier: scheduled.critMultiplier ?? config.critMultiplier,
+          }),
       effect: scheduled.ability.effect,
     });
   }
@@ -547,14 +513,22 @@ export function stepWorld(world: World, config: SimulationConfig): void {
         : objective
           ? stats.attackRange + objective.radius
           : 2);
-    if (moving) {
+    if (moving && !hasStatus(enemy, 'stun', world.tick)) {
       enemy.fx = delta.x;
       enemy.fy = delta.y;
       moveCircle(
         enemy,
         {
-          x: (delta.x * stats.speed) / config.tickRate,
-          y: (delta.y * stats.speed) / config.tickRate,
+          x:
+            (delta.x *
+              stats.speed *
+              (1 - Math.min(0.85, statusValue(enemy, 'slow', world.tick)))) /
+            config.tickRate,
+          y:
+            (delta.y *
+              stats.speed *
+              (1 - Math.min(0.85, statusValue(enemy, 'slow', world.tick)))) /
+            config.tickRate,
         },
         stats.radius,
         config.width,
@@ -563,8 +537,19 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       );
     }
     const victim = hero ?? objective;
-    if (victim && !moving && world.tick >= enemy.cooldown) {
-      enemy.cooldown = world.tick + stats.attackCooldownTicks;
+    if (
+      victim &&
+      !moving &&
+      world.tick >= enemy.cooldown &&
+      !hasStatus(enemy, 'stun', world.tick) &&
+      !hasStatus(enemy, 'disarm', world.tick)
+    ) {
+      enemy.cooldown =
+        world.tick +
+        Math.ceil(
+          stats.attackCooldownTicks /
+            (1 - Math.min(0.85, statusValue(enemy, 'attack_slow', world.tick))),
+        );
       enemy.actionUntil = world.tick + 12;
       enemy.pose = 'basic_attack';
       emit(world, {
@@ -580,7 +565,9 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       hurt(world, victim, enemy.id, 'creep_strike', stats.damage, config);
       if (world.statue?.hp === 0) break;
     }
-    if (world.tick >= enemy.actionUntil) enemy.pose = moving ? 'walk' : 'idle';
+    if (world.tick >= enemy.actionUntil)
+      enemy.pose =
+        !hasStatus(enemy, 'stun', world.tick) && moving ? 'walk' : 'idle';
   }
   for (const actor of [...world.heroes.values(), ...world.creeps.values()]) {
     if (actor.hp <= 0) actor.pose = 'death';

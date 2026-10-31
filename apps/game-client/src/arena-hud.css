@@ -397,3 +397,30 @@
     top: 90px;
   }
 }
+
+/* Match selected-school presentation without changing HUD geometry. */
+#viewport[data-hero-school='thien_son'] .portrait,
+#viewport[data-hero-school='thien_son'] .paper-hero,
+#viewport[data-hero-school='thieu_lam'] .portrait,
+#viewport[data-hero-school='thieu_lam'] .paper-hero {
+  background-image: var(--hero-idle);
+}
+
+#viewport[data-hero-school='vo_dang'] .portrait,
+#viewport[data-hero-school='vo_dang'] .paper-hero {
+  background-image: var(--hero-idle);
+}
+
+#phat-dong-progress {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 360px;
+  padding: 4px 8px;
+  background: #17251de8;
+  color: #ffde87;
+  font-size: 11px;
+  white-space: nowrap;
+  pointer-events: none;
+}

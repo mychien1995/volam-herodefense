@@ -1,0 +1,941 @@
+{
+  "schemaVersion": 1,
+  "schoolId": "thien_son",
+  "element": "phong",
+  "version": "v01",
+  "createdOn": "2026-10-31",
+  "phase": 1,
+  "status": "concepts_approved_production_verified_final_art_pending",
+  "assetType": "opaque key-pose and icon concept boards; NOT runtime animation or final icons",
+  "source": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "authorship": "original AI-assisted art from project references; no external sprite pack; no exclusive-rights claim",
+    "prompts": "assets/concepts/skills/thien-son/generation_prompts_v01.json",
+    "layoutTool": "Aseprite 1.3.18.6-x64",
+    "layoutRecipe": "assets/concepts/skills/thien-son/concept_layout_v01.json",
+    "layoutScript": "assets/concepts/skills/thien-son/assemble_concepts_v01.lua"
+  },
+  "approvedCharacterBaseline": {
+    "lock": "assets/approved_thien_son.lock.json",
+    "concept": "assets/concepts/heroes/thien-son/thien-son-concept-v01.png",
+    "fanAtlas": "assets/exports/characters/hero_thien_son.png",
+    "daoAtlas": "assets/exports/characters/hero_thien_son_dao.png",
+    "canvas": [
+      80,
+      80
+    ],
+    "feet": [
+      40,
+      64
+    ],
+    "bodyHeightApprox": 44,
+    "facings": [
+      "down",
+      "left",
+      "right",
+      "up"
+    ],
+    "status": "approved existing character unchanged; approval does not transfer to these skill concepts"
+  },
+  "authoritativeDocuments": [
+    "AGENTS.md",
+    "DECISIONS.md",
+    "CONTENT_DATA.md",
+    "COMBAT_SYSTEM.md",
+    "ART_DIRECTION_REFERENCE.md",
+    "ART_PRODUCTION_STANDARD.md",
+    "ART_ASSET_GUIDE.md",
+    "TECHNICAL_ARCHITECTURE.md",
+    "docs/DEVELOPMENT_WORKFLOW.md",
+    ".agents/skills/pixel-art-pipeline/SKILL.md"
+  ],
+  "referencesInspected": [
+    {
+      "path": "assets/concepts/heroes/thien-son/thien-son-concept-v01.png",
+      "role": "primary approved identity"
+    },
+    {
+      "path": "assets/exports/characters/hero_thien_son.png",
+      "role": "primary approved fan scale/palette/weapon placement"
+    },
+    {
+      "path": "assets/exports/characters/hero_thien_son_dao.png",
+      "role": "primary approved dao scale/palette/weapon placement"
+    },
+    {
+      "path": "assets/references/vo_dang_character_reference.png",
+      "role": "positive school style"
+    },
+    {
+      "path": "assets/references/cai_bang_character_reference.png",
+      "role": "positive school proportions, contrast"
+    },
+    {
+      "path": "artwork/thieu-lam-thien-son.png",
+      "role": "costume/style audit only; obsolete ice motifs rejected"
+    },
+    {
+      "path": "assets/references/current_game_2026_10_29_placeholder_anti_reference.png",
+      "role": "rejected placeholder art"
+    },
+    {
+      "path": "assets/references/current_codex_dashboard_anti_reference.png",
+      "role": "inspected requested alias; file actually contains Vo Dang art"
+    },
+    {
+      "path": "assets/references/in_game_world_reference.png",
+      "role": "positive gameplay framing"
+    },
+    {
+      "path": "assets/references/wuxia_town_world_reference.png",
+      "role": "actual exterior-dashboard anti-reference"
+    },
+    {
+      "path": "assets/references/thien_son_thieu_lam_character_reference.png",
+      "role": "inspected alias; file actually contains town art"
+    },
+    {
+      "path": "assets/concepts/skills/cai-bang/cai_bang_skills_sheet_03_v1.png",
+      "role": "existing skill-board audit"
+    },
+    {
+      "path": "assets/exports/skills/cai-bang/thien_ha_vo_cau/thien_ha_vo_cau_vfx.png",
+      "role": "existing production VFX audit"
+    },
+    {
+      "path": "assets/exports/skills/cai-bang/thien_ha_vo_cau/icon.png",
+      "role": "existing 64px icon audit"
+    },
+    {
+      "path": "assets/references/central_arena_hub_reference.png",
+      "role": "positive world/overlay benchmark"
+    },
+    {
+      "path": "assets/references/arena_battle_reference.png",
+      "role": "positive world/overlay benchmark"
+    },
+    {
+      "path": "assets/references/forest_dungeon_reference.png",
+      "role": "positive world/overlay benchmark"
+    },
+    {
+      "path": "assets/references/desert_dungeon_reference.png",
+      "role": "positive world/overlay benchmark"
+    },
+    {
+      "path": "assets/references/sea_dungeon_reference.png",
+      "role": "positive world/overlay benchmark"
+    },
+    {
+      "path": "assets/references/hell_dungeon_reference.png",
+      "role": "positive world/overlay benchmark"
+    },
+    {
+      "path": "assets/references/dungeon_selection_menu_reference.png",
+      "role": "positive world/overlay benchmark"
+    },
+    {
+      "path": "assets/references/merchant_shop_menu_reference.png",
+      "role": "positive world/overlay benchmark"
+    },
+    {
+      "path": "assets/references/inventory_menu_reference.png",
+      "role": "positive world/overlay benchmark"
+    }
+  ],
+  "referenceCaveats": [
+    "Historical vo_dang_art_direction_reference.png alias is absent; actual vo_dang_character_reference.png inspected.",
+    "Historical ice Thiên Sơn motifs are overridden by approved Wind hero.",
+    "Generated stone-patch vignettes are concept illustrations, not in-game screenshots, scale measurements or hitboxes.",
+    "Board pose count and numbered stages are illustrative choreography, not a gameplay hit count or timing.",
+    "All facing production, exact hand continuity, foot pivots and gameplay-scale readability require later exported-frame/Phaser checks."
+  ],
+  "proposalsAndLimits": [
+    "All wind shapes, key-pose choreography, icons and buff/counter feedback are proposals pending per-entry approval.",
+    "Both fan and dao are melee; wind strokes remain local and attached to action, never detached projectiles.",
+    "Lưu Phong Bộ movement; Phi Ảnh Trảm offensive dash; Phong Ảnh Hoán Vị evasive step then conditional counter or expiry; echoes are temporal feedback only.",
+    "Truy Hồn Đao bonus against an already slowed target does not apply slow.",
+    "Liệt Phong Đao plate/guard is a penetration metaphor; no armor destruction or defense reduction.",
+    "Bách Liệt Thiên Kích is a close forward flurry, without added dash, ranged beam or hit-count claim.",
+    "Chiết Mai Thủ sustained wisps must remain sparse at wrist/heel; no shield or large aura.",
+    "Bắc Minh Thần Công is icon only; no persistent aura proposed.",
+    "No runtime bindings, abilities, movement rules, damage, status, cooldowns, loadouts or authoritative simulation changes."
+  ],
+  "existingProductionAudit": {
+    "school": "cai_bang",
+    "characterCanvas": [
+      80,
+      80
+    ],
+    "feet": [
+      40,
+      64
+    ],
+    "vfxCanvases": [
+      64,
+      96,
+      128,
+      160
+    ],
+    "iconFileSize": [
+      64,
+      64
+    ],
+    "characterAndVfxSeparate": true,
+    "productionFolderPlan": [
+      "assets/source/skills/thien-son/",
+      "assets/exports/skills/thien-son/",
+      "assets/reviews/skills/thien-son/"
+    ],
+    "theseFoldersCreated": false
+  },
+  "preservedEarlierVersion": {
+    "path": "assets/concepts/skills/thien-son/thien-son-basic-passive-icons-concept-v01.png",
+    "selected": false,
+    "reason": "v02 removes invented jade blade inlay; v01 preserved"
+  },
+  "review": {
+    "fullReview": "assets/concepts/skills/thien-son/review-v01.html",
+    "iconSizes": "assets/concepts/skills/thien-son/icon-review-v01.html",
+    "skillOverview": "assets/concepts/skills/thien-son/thien-son-skill-overview-v01.png",
+    "iconOverview": "assets/concepts/skills/thien-son/thien-son-icon-overview-v01.png",
+    "validation": "assets/concepts/skills/thien-son/validation_v01.json"
+  },
+  "entries": [
+    {
+      "id": "lien_hoa_phien",
+      "name": "Liên Hoa Phiến",
+      "style": "phien",
+      "ultimate": false,
+      "definition": "Several rapid frontal fan hits; melee.",
+      "visual": "Short layered fan-shaped wind crescents closely following the open fan across a shallow FRONTAL sector. Separate sequential sweeps, not a ring or ranged volley.",
+      "poses": [
+        "Anticipation: open fan drawn back across chest, compact planted stance.",
+        "Action: rapid fan slash with a few distinct shallow forward fan-edge echoes, feet planted, face and fan readable.",
+        "Recovery: right hand returns fan to guard, small local contact wisps fade."
+      ],
+      "stages": "Near-hand activation wisp -> successive short frontal air arcs -> tiny close contact flicks -> clear fade; no detached projectiles.",
+      "icon": "An ivory OPEN FAN with THREE short nested forward crescents; broad fan ribs remain dominant. Distinguish from single normal fan icon by the triple arc rhythm.",
+      "kind": "active",
+      "conceptPath": "assets/concepts/skills/thien-son/lien_hoa_phien-concept-v01.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/lien_hoa_phien-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "approved",
+        "approvedFilename": "lien_hoa_phien-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/lien_hoa_phien-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "lien_hoa_phien-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/lien_hoa_phien-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "new skill-specific poses proposed; no production authored",
+      "vfxPlan": "wind stages proposed on concept board; production not started",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    },
+    {
+      "id": "luc_duong_chuong",
+      "name": "Lục Dương Chưởng",
+      "style": "phien",
+      "ultimate": false,
+      "definition": "Moving spinning attack with repeated nearby damage.",
+      "visual": "Compact low broken wind ring around the feet/waist, following a turning hero and a short continuous ground path. Fan stays in the right hand. Open ring segments, never a tall tornado.",
+      "poses": [
+        "Anticipation: knees bend, fan across body to wind up rotation.",
+        "Action: turn on a grounded foot, robe hem flares, open fan sweeps around a close broken wind ring; one intermediate turning pose visible as a small sequence inset.",
+        "Recovery: finish the turn facing forward, ring breaks into short curling wisps."
+      ],
+      "stages": "Gather at fan -> close waist/foot spin moving with hero -> local contact swirls -> dissolve. Show nearby footprint; no pull, stun or stationary zone.",
+      "icon": "Low circular spiral seen from above with a tiny ivory fan tip and open center. A compact ROUND ring, distinct from the tall ultimate funnel.",
+      "kind": "active",
+      "conceptPath": "assets/concepts/skills/thien-son/luc_duong_chuong-concept-v01.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/luc_duong_chuong-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "approved",
+        "approvedFilename": "luc_duong_chuong-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/luc_duong_chuong-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "luc_duong_chuong-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/luc_duong_chuong-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "new skill-specific poses proposed; no production authored",
+      "vfxPlan": "wind stages proposed on concept board; production not started",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    },
+    {
+      "id": "luu_phong_bo",
+      "name": "Lưu Phong Bộ",
+      "style": "phien",
+      "ultimate": false,
+      "definition": "Short directional dash.",
+      "visual": "A short forward ground dash with parallel tapering air streaks trailing BEHIND the planted arrival pose, fluttering ribbons, one restrained translucent prior-position silhouette as temporal echo. No attack arcs or impacts.",
+      "poses": [
+        "Anticipation: lower weight toward front foot, fan carried at side.",
+        "Action: short forward step-dash to the right with one pale trailing temporal afterimage connected by air wisps; feet stay over the ground plane.",
+        "Recovery: regain upright guard with fan visible, trail thins behind heels."
+      ],
+      "stages": "Lean -> continuous directional travel along short path -> settle/fade. No teleport portal, no slash, no contact hit, no invulnerability cue.",
+      "icon": "A small DARK SHOE/heel silhouette riding THREE parallel tapered horizontal wind streaks. A movement icon with NO blade or fan crescent.",
+      "kind": "active",
+      "conceptPath": "assets/concepts/skills/thien-son/luu_phong_bo-concept-v01.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/luu_phong_bo-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "approved",
+        "approvedFilename": "luu_phong_bo-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/luu_phong_bo-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "luu_phong_bo-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/luu_phong_bo-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "new skill-specific poses proposed; no production authored",
+      "vfxPlan": "wind stages proposed on concept board; production not started",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    },
+    {
+      "id": "chiet_mai_thu",
+      "name": "Chiết Mai Thủ",
+      "style": "phien",
+      "ultimate": false,
+      "definition": "Temporary attack-speed and movement-speed buff.",
+      "visual": "A brief jade-white pulse at wrist and ankles, then TWO short restrained separate wrist/heel wisps. Tiny accents only; no full-body shield/bubble, no outgoing attack and no giant persistent aura.",
+      "poses": [
+        "Anticipation: fan held right, left hand forms a refined two-finger gesture near collar.",
+        "Activation: compact flash at right wrist and heels, ribbons lift slightly with a fresh breeze.",
+        "Sustained/recovery: return to relaxed fan guard with only two sparse short wrist/ankle wisps; also show feedback fading cleanly."
+      ],
+      "stages": "Buff activation -> restrained temporary sustained feedback at wrists/heels -> clean expiration. No damage/target impact, no cooldown/cost/duration claims.",
+      "icon": "A refined TWO-FINGER HAND gesture framed by two rising wind commas/small speed ticks. No flower petals, frost, shield or clock text.",
+      "kind": "active",
+      "conceptPath": "assets/concepts/skills/thien-son/chiet_mai_thu-concept-v01.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/chiet_mai_thu-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "approved",
+        "approvedFilename": "chiet_mai_thu-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/chiet_mai_thu-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "chiet_mai_thu-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/chiet_mai_thu-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "new skill-specific poses proposed; no production authored",
+      "vfxPlan": "wind stages proposed on concept board; production not started",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    },
+    {
+      "id": "bach_phien_phong_bao",
+      "name": "Bách Phiến Phong Bạo",
+      "style": "phien",
+      "ultimate": true,
+      "definition": "Large moving fan whirlwind; ultimate.",
+      "visual": "A larger OPEN, low-to-mid-height WIND HELIX anchored on and moving WITH the hero. Ivory fan-leaf-shaped air ribbons suggest revolving fan edges. Hero's face/feet stay visible through the open center. Visually larger than close spin, not screen-filling.",
+      "poses": [
+        "Anticipation: fan raised outward in a deliberate wide grounded stance.",
+        "Action: broad layered broken wind helix wraps around hero at three-quarter ground angle, one clear open fan in hand; sweeping silk/air blades do not detach into missiles.",
+        "Recovery: helix unwraps into thinning ribbon ends and the hero settles to guard."
+      ],
+      "stages": "Fan gather -> expanding open helix -> continuous moving whirlwind footprint -> local fade. No suction/pull/lift, projectile volley, launched tornado or extra movement distance/range claims.",
+      "icon": "A TALL OPEN SPIRAL/FUNNEL with clearly recognizable ivory folding-fan ribs along its lower rim, hollow center. Larger dynamic silhouette than compact Lục Dương ring.",
+      "kind": "active",
+      "conceptPath": "assets/concepts/skills/thien-son/bach_phien_phong_bao-concept-v01.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/bach_phien_phong_bao-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "approved",
+        "approvedFilename": "bach_phien_phong_bao-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/bach_phien_phong_bao-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "bach_phien_phong_bao-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/bach_phien_phong_bao-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "new skill-specific poses proposed; no production authored",
+      "vfxPlan": "wind stages proposed on concept board; production not started",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    },
+    {
+      "id": "phi_anh_tram",
+      "name": "Phi Ảnh Trảm",
+      "style": "dao",
+      "ultimate": false,
+      "definition": "Forward dash with a hard slash.",
+      "visual": "A single continuous forward body dash followed by ONE bold diagonal CLOSE blade crescent at arrival. Narrow trailing wind behind; contact flash tied to blade edge.",
+      "poses": [
+        "Anticipation: curved dao chambered behind the right shoulder, weight ready to travel forward.",
+        "Action: grounded rightward dash into one forceful close slash; one subtle trail marks prior position and a solid crescent stays ATTACHED to the blade reach.",
+        "Recovery: stop in a braced landing stance, blade low, trailing air expires."
+      ],
+      "stages": "Windup -> offensive dash -> one close-contact slash -> recovery. No teleportation, ranged blade wave, stun, enlarged strike reach or additional hits.",
+      "icon": "ONE diagonal curved SILVER BLADE at the leading end of straight trailing wind streaks. Clear attack-and-forward-motion silhouette; distinct from shoe-only dash.",
+      "kind": "active",
+      "conceptPath": "assets/concepts/skills/thien-son/phi_anh_tram-concept-v01.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/phi_anh_tram-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "approved",
+        "approvedFilename": "phi_anh_tram-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/phi_anh_tram-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "phi_anh_tram-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/phi_anh_tram-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "new skill-specific poses proposed; no production authored",
+      "vfxPlan": "wind stages proposed on concept board; production not started",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    },
+    {
+      "id": "truy_hon_dao",
+      "name": "Truy Hồn Đao",
+      "style": "dao",
+      "ultimate": false,
+      "definition": "Two quick hits, with bonus damage against slowed targets.",
+      "visual": "Two distinct successive close dao cuts with different angles, drawn in two SEPARATE action sub-panels to make temporal sequence unambiguous. A faint existing dull foot-wisp on a neutral target may signify an already-slowed target, never newly applied slow.",
+      "poses": [
+        "Anticipation: compact right-hand dao guard.",
+        "Action: TWO adjacent temporal cells labelled HIT 1 then HIT 2, first rising oblique cut and second descending cut; each has one short blade-attached air arc.",
+        "Recovery: withdraw dao to ready, two local contact wisps have faded."
+      ],
+      "stages": "First close cut -> distinct second close cut -> clear fade. Bonus vs previously slowed target is a condition only; no new slow/CC/debuff inflicted, no lifesteal, no homing.",
+      "icon": "TWO separate curved SILVER CUT marks in an offset double-diagonal rhythm, two distinct not crossed into a defensive shield. No skulls or tracking arrow.",
+      "kind": "active",
+      "conceptPath": "assets/concepts/skills/thien-son/truy_hon_dao-concept-v01.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/truy_hon_dao-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "approved",
+        "approvedFilename": "truy_hon_dao-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/truy_hon_dao-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "truy_hon_dao-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/truy_hon_dao-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "new skill-specific poses proposed; no production authored",
+      "vfxPlan": "wind stages proposed on concept board; production not started",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    },
+    {
+      "id": "phong_anh_hoan_vi",
+      "name": "Phong Ảnh Hoán Vị",
+      "style": "dao",
+      "ultimate": false,
+      "definition": "Evasive short step with a timed counter window.",
+      "visual": "A small oblique SIDE step, one thin residual silhouette at previous footing, then a poised right-hand curved-dao guard with a tiny broken hook/comma of wind near the hilt. Counter-branch sketch is conditional, not guaranteed damage.",
+      "poses": [
+        "Anticipation: dao drawn into a compact guard.",
+        "Action: short diagonal evasive step off the old line, continuous tiny ground trail, one faint prior-position echo.",
+        "Counter-ready/recovery: settled guard with one subtle hilt wisp; show two small branch insets: conditional short counter-cut if triggered, and clean fade if no trigger."
+      ],
+      "stages": "Evasive step -> brief counter-ready cue -> conditional melee counter OR expiry. No swapped enemy positions, teleport, clone/summon, shield, invulnerability bubble or new target selection.",
+      "icon": "A curved SILVER GUARD/BLADE with a single hooked RETURN wind stroke and an offset faint short echo. A bent/returning motif distinct from straight offensive dash and two-hit diagonal pair.",
+      "kind": "active",
+      "conceptPath": "assets/concepts/skills/thien-son/phong_anh_hoan_vi-concept-v01.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/phong_anh_hoan_vi-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "approved",
+        "approvedFilename": "phong_anh_hoan_vi-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/phong_anh_hoan_vi-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "phong_anh_hoan_vi-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/phong_anh_hoan_vi-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "new skill-specific poses proposed; no production authored",
+      "vfxPlan": "wind stages proposed on concept board; production not started",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    },
+    {
+      "id": "liet_phong_dao",
+      "name": "Liệt Phong Đao",
+      "style": "dao",
+      "ultimate": false,
+      "definition": "One heavy strike with partial defense penetration.",
+      "visual": "One heavy compressed close sword-edge slash, a dense short wind wedge concentrated at CONTACT, a small generic plate/guard outline the edge PARTLY passes through as a penetration metaphor. No persistent broken-shield debuff mark.",
+      "poses": [
+        "Anticipation: grounded heavy stance with curved dao lifted over the right shoulder.",
+        "Action: one forceful downward-forward close strike, single thick sharp tapered air wedge hugs blade and a tight local contact flash.",
+        "Recovery: blade finishes low, compressed air breaks into two small wisps then clears."
+      ],
+      "stages": "Heavy windup -> ONE penetrating contact stroke -> compact impact -> fade. Partial defense penetration only: not defense reduction, armor destruction, ranged projectile, shockwave, stun or ground rupture.",
+      "icon": "ONE thick downward diagonal SILVER blade edge with a short compressed wedge crossing a small partial plate outline. Single forceful stroke; no broken-shield debuff emblem.",
+      "kind": "active",
+      "conceptPath": "assets/concepts/skills/thien-son/liet_phong_dao-concept-v01.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/liet_phong_dao-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "approved",
+        "approvedFilename": "liet_phong_dao-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/liet_phong_dao-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "liet_phong_dao-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/liet_phong_dao-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "new skill-specific poses proposed; no production authored",
+      "vfxPlan": "wind stages proposed on concept board; production not started",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    },
+    {
+      "id": "bach_liet_thien_kich",
+      "name": "Bách Liệt Thiên Kích",
+      "style": "dao",
+      "ultimate": true,
+      "definition": "Extremely fast forward melee combo; ultimate.",
+      "visual": "A rapid forward-oriented melee flurry of MANY short blade-edge strokes concentrated just ahead of the hero, ending in one readable close finishing cut. Negative-space gaps between slashes; subtle arm/weapon temporal echoes, no arena-wide cyclone.",
+      "poses": [
+        "Anticipation: low coiled dao stance and gathered narrow wind at the arm.",
+        "Action: quick forward melee flurry shown as a strip of three temporal key moments with dense but separated SHORT local blade strokes; hero remains visible and grounded.",
+        "Recovery/finisher: one clearly readable close finishing cut, then controlled guard with effects dissipating."
+      ],
+      "stages": "Coil -> rapid forward local multi-cut sequence -> final close cut -> dissipation. No teleport jumps, extra dash ability, tracking projectiles, huge ranged sword-beam, exact hit-count/timing/range claim or new crowd control.",
+      "icon": "A tight forward CLUSTER of FIVE short sharp silver slash ticks with one strong terminal stroke. A compact multi-strike burst, distinct from two-cut Truy Hồn and single Liệt Phong.",
+      "kind": "active",
+      "conceptPath": "assets/concepts/skills/thien-son/bach_liet_thien_kich-concept-v01.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/bach_liet_thien_kich-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "approved",
+        "approvedFilename": "bach_liet_thien_kich-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/bach_liet_thien_kich-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "bach_liet_thien_kich-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/bach_liet_thien_kich-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "new skill-specific poses proposed; no production authored",
+      "vfxPlan": "wind stages proposed on concept board; production not started",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    },
+    {
+      "id": "thien_son_phien",
+      "name": "Thiên Sơn Phiến",
+      "style": "phien",
+      "kind": "normal",
+      "definition": "Normal fan melee attack; reuse approved character animation.",
+      "icon": "ONE clean ivory open folding combat FAN, dark jade ribs and edge, a SINGLE tiny near-edge wind accent. No flurry/triple arcs; fan silhouette dominates.",
+      "conceptPath": "assets/concepts/skills/thien-son/thien-son-basic-passive-icons-concept-v02.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/thien_son_phien-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "not_applicable_icon_only",
+        "approvedFilename": null
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "thien_son_phien-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/thien_son_phien-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "reuse approved basic attack; no new animation",
+      "vfxPlan": "not applicable",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    },
+    {
+      "id": "thien_son_dao",
+      "name": "Thiên Sơn Đao",
+      "style": "dao",
+      "kind": "normal",
+      "definition": "Normal curved dao melee attack; reuse approved character animation.",
+      "icon": "ONE simple curved SILVER Chinese DAO with jade handle and silver guard on a clear diagonal. No dash streaks or multi-cut flurry; blade silhouette dominates.",
+      "conceptPath": "assets/concepts/skills/thien-son/thien-son-basic-passive-icons-concept-v02.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/thien_son_dao-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "not_applicable_icon_only",
+        "approvedFilename": null
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "thien_son_dao-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/thien_son_dao-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "reuse approved basic attack; no new animation",
+      "vfxPlan": "not applicable",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    },
+    {
+      "id": "bac_minh_than_cong",
+      "name": "Bắc Minh Thần Công",
+      "style": "innate",
+      "kind": "passive",
+      "definition": "Innate movement/attack-speed/crit growth; icon only. No persistent aura proposed.",
+      "icon": "A centered JADE DISC/MEDALLION holding a hollow S-shaped WHITE WIND CURRENT and a small silver pinpoint. Balanced quiet internal-energy emblem; no Yin-Yang dots, snowflake, shield or active slash.",
+      "conceptPath": "assets/concepts/skills/thien-son/thien-son-basic-passive-icons-concept-v02.png",
+      "iconConceptPath": "assets/concepts/skills/thien-son/bac_minh_than_cong-icon-concept-v01.png",
+      "conceptApproval": {
+        "status": "not_applicable_icon_only",
+        "approvedFilename": null
+      },
+      "iconConceptApproval": {
+        "status": "approved",
+        "approvedFilename": "bac_minh_than_cong-icon-concept-v01.png",
+        "approvedPath": "assets/concepts/skills/thien-son/bac_minh_than_cong-icon-concept-v01.png",
+        "approvedOn": "2026-10-31",
+        "source": "User explicit concept approval"
+      },
+      "characterPlan": "not applicable; icon only; no persistent aura",
+      "vfxPlan": "not applicable",
+      "productionStatus": "produced_prototype_pending_final_art_approval",
+      "phaserVisualVerification": "PASS_in_presentation_only_preview",
+      "gameplayIntegration": "pending; no gameplay implementation in this task",
+      "finalArtApproval": "pending_explicit_user_approval"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "assets/concepts/skills/thien-son/bac_minh_than_cong-icon-concept-v01.png",
+      "sha256": "6555536139543f98e4fce6a5845ee1a4ec541f8b0baaa4cac99f797a13cb2fdd",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/bach_liet_thien_kich-concept-v01.png",
+      "sha256": "ece04032a29fba101ca5f02b91ca82c3cbabe71da0acc7e8f6673c4665a608d0",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/bach_liet_thien_kich-icon-concept-v01.png",
+      "sha256": "b0cc637d7a9df80569e3e773635a3e95a1bdc7d1e256cd228ee2e5d178d9eced",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/bach_phien_phong_bao-concept-v01.png",
+      "sha256": "124332a4a1904b6a16d32252b564f350182d400e6247a76bd16f289d2dfd0b68",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/bach_phien_phong_bao-icon-concept-v01.png",
+      "sha256": "34c3deb8c5edd9dce24a82c4319ecfe5db83ed4e6a24fbbde944bc560fdc06b9",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/chiet_mai_thu-concept-v01.png",
+      "sha256": "258ab9e0b489ecbad62c6e691ab69f2dc49d50f9c5c07e3c5cd305c777836a7d",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/chiet_mai_thu-icon-concept-v01.png",
+      "sha256": "5acee49fc4544cd50f5f4ff48797ac1f8c82585adcef90de95f732e146c00058",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/lien_hoa_phien-concept-v01.png",
+      "sha256": "e845e8ea0c56e5da1188f79a5cef290e5fc2c5910705428502054dc99b0ef48e",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/lien_hoa_phien-icon-concept-v01.png",
+      "sha256": "ddc3580944c3e6f1f33423266782f4fd9192c5e779485d0642c126e0c05265c7",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/liet_phong_dao-concept-v01.png",
+      "sha256": "017ba045b68eb97bfad82b3541fb34f60827f727ab7cc7083467ccdbd986b4f6",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/liet_phong_dao-icon-concept-v01.png",
+      "sha256": "ab953f253d8cbbc85c4d6dbdfbb4396f1f74156b605beadfa48fa338cbcb65fb",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/luc_duong_chuong-concept-v01.png",
+      "sha256": "2fc3b33b3a190663793f148bd705f5d1c88cb40ba06ddf0d3c5079f504e1efdd",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/luc_duong_chuong-icon-concept-v01.png",
+      "sha256": "ab375c0ccae1419bf378efed0646abfa9d8bcf28df0cc3dc8f5a73e7a81970bf",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/luu_phong_bo-concept-v01.png",
+      "sha256": "b7f8c30c713ded8288420405312657d2b032f98368d201836109f5d930f2fe90",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/luu_phong_bo-icon-concept-v01.png",
+      "sha256": "5a871bdf7434a537b919234d82b8b64c0db5a5dee003b65d8e6eff1b457f99c0",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/phi_anh_tram-concept-v01.png",
+      "sha256": "7b461eb819871dc16b57e3c843716053e95267da6b6e8f4b98858f54c51c5cda",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/phi_anh_tram-icon-concept-v01.png",
+      "sha256": "a44773118b00098c1a0f6eef6b7110216716e24f04511de2b99569f06287ae44",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/phong_anh_hoan_vi-concept-v01.png",
+      "sha256": "54cd0980141ad078e829f050436cfc8d78376068fea5181256de38f9255bc992",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/phong_anh_hoan_vi-icon-concept-v01.png",
+      "sha256": "c6d7844b350849f1fd69760325ad926b939f2ae8d7ed27e610a489c43dc3af6e",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/thien-son-basic-passive-icons-concept-v01.png",
+      "sha256": "f67a71e8e61dcb0250deb4afd9568d439192788162b34f9c1efc86384ef9fe5b",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/thien-son-basic-passive-icons-concept-v02.png",
+      "sha256": "fb49d8d3b65451b5f4ccc82e341bf8343bd8a977ea1c02cbf3454379427ca089",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/thien-son-icon-overview-v01.png",
+      "sha256": "0cac88f44945978f95c26f31075318e76b9885afeed2de77651277f70af2c64e",
+      "size": [
+        1440,
+        1713
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/thien-son-skill-overview-v01.png",
+      "sha256": "2b760f1b42cd93054ae23353dd2fc109366922e6923fc9e6fc6ffa5ba1055e69",
+      "size": [
+        1560,
+        2608
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/thien_son_dao-icon-concept-v01.png",
+      "sha256": "048082d3b8ff63495a0c5243d22f8b6a85c24f764f8ccd40d8571fe9bc6a322e",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/thien_son_phien-icon-concept-v01.png",
+      "sha256": "fa64cdb0174f4e1f0aad0896e8206eff0046fc3dfa219ac844e7f96412dc7563",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/truy_hon_dao-concept-v01.png",
+      "sha256": "7ab6e1324efcfd1bdfebc002d78848e467537cc22c51527892ef3f13b4adbe8c",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGB",
+      "purpose": "concept review only"
+    },
+    {
+      "path": "assets/concepts/skills/thien-son/truy_hon_dao-icon-concept-v01.png",
+      "sha256": "18a3aa0dd5f1455b331b4fa9cdfcd0c3aa6ac9395ff7bd369b2732657f587cf3",
+      "size": [
+        256,
+        256
+      ],
+      "mode": "RGBA",
+      "purpose": "concept review only"
+    }
+  ],
+  "conceptApprovalRecord": "assets/concepts/skills/thien-son/concept_approval_v01.json",
+  "productionManifest": "assets/exports/skills/thien-son/production_manifest_v01.json"
+}

@@ -1,0 +1,510 @@
+{
+  "schemaVersion": 1,
+  "scope": "PRESENTATION-ONLY art choreography; no server connection, damage, cooldown, costs, hitbox, authoritative movement or gameplay timing.",
+  "coordinates": "Logical pixels at camera zoom1, normal display scale2. Travel values are illustrative preview motion, never skill ranges.",
+  "plans": [
+    {
+      "id": "lien_hoa_phien",
+      "style": "fan",
+      "duration": 1050,
+      "actors": [
+        {
+          "asset": "lien_hoa_phien_character",
+          "tag": "cast",
+          "at": 0
+        },
+        {
+          "asset": "lien_hoa_phien_character",
+          "tag": "rapid",
+          "at": 70,
+          "repeat": -1
+        },
+        {
+          "asset": "lien_hoa_phien_character",
+          "tag": "cast",
+          "at": 530,
+          "holdFrame": 3
+        },
+        {
+          "asset": "hero_thien_son",
+          "tag": "idle",
+          "at": 620
+        }
+      ],
+      "effects": [
+        {
+          "asset": "lien_hoa_phien_vfx",
+          "tag": "sweep",
+          "at": 70,
+          "repeat": 1,
+          "ttl": 540
+        },
+        {
+          "asset": "lien_hoa_phien_vfx",
+          "tag": "contact",
+          "at": 240
+        }
+      ]
+    },
+    {
+      "id": "luc_duong_chuong",
+      "style": "fan",
+      "duration": 1500,
+      "actors": [
+        {
+          "asset": "luc_duong_chuong_character",
+          "tag": "cast",
+          "at": 0
+        },
+        {
+          "asset": "luc_duong_chuong_character",
+          "tag": "spin",
+          "at": 120,
+          "repeat": -1
+        },
+        {
+          "asset": "luc_duong_chuong_character",
+          "tag": "cast",
+          "at": 950,
+          "holdFrame": 3
+        },
+        {
+          "asset": "hero_thien_son",
+          "tag": "idle",
+          "at": 1050
+        }
+      ],
+      "effects": [
+        {
+          "asset": "luc_duong_chuong_vfx",
+          "tag": "gather",
+          "at": 0,
+          "wrap": true
+        },
+        {
+          "asset": "luc_duong_chuong_vfx",
+          "tag": "spin",
+          "at": 200,
+          "ttl": 750,
+          "wrap": true
+        },
+        {
+          "asset": "luc_duong_chuong_vfx",
+          "tag": "expiry",
+          "at": 950,
+          "wrap": true
+        }
+      ],
+      "motion": {
+        "at": 170,
+        "duration": 700,
+        "along": 24,
+        "across": 0
+      }
+    },
+    {
+      "id": "luu_phong_bo",
+      "style": "fan",
+      "duration": 900,
+      "actors": [
+        {
+          "asset": "luu_phong_bo_character",
+          "tag": "cast",
+          "at": 0
+        },
+        {
+          "asset": "hero_thien_son",
+          "tag": "idle",
+          "at": 330
+        }
+      ],
+      "effects": [
+        {
+          "asset": "luu_phong_bo_vfx",
+          "tag": "trail",
+          "at": 70
+        },
+        {
+          "asset": "luu_phong_bo_vfx",
+          "tag": "settle",
+          "at": 290
+        }
+      ],
+      "motion": {
+        "at": 75,
+        "duration": 210,
+        "along": 32,
+        "across": 0
+      },
+      "afterimageAt": 90
+    },
+    {
+      "id": "chiet_mai_thu",
+      "style": "fan",
+      "duration": 1450,
+      "actors": [
+        {
+          "asset": "chiet_mai_thu_character",
+          "tag": "cast",
+          "at": 0
+        },
+        {
+          "asset": "hero_thien_son",
+          "tag": "idle",
+          "at": 430
+        }
+      ],
+      "effects": [
+        {
+          "asset": "chiet_mai_thu_vfx",
+          "tag": "wrist_activation",
+          "at": 0
+        },
+        {
+          "asset": "chiet_mai_thu_vfx",
+          "tag": "heel_activation",
+          "at": 0
+        },
+        {
+          "asset": "chiet_mai_thu_vfx",
+          "tag": "wrist_loop",
+          "at": 270,
+          "ttl": 770
+        },
+        {
+          "asset": "chiet_mai_thu_vfx",
+          "tag": "heel_loop",
+          "at": 270,
+          "ttl": 770
+        },
+        {
+          "asset": "chiet_mai_thu_vfx",
+          "tag": "wrist_expiry",
+          "at": 1040
+        },
+        {
+          "asset": "chiet_mai_thu_vfx",
+          "tag": "heel_expiry",
+          "at": 1040
+        }
+      ]
+    },
+    {
+      "id": "bach_phien_phong_bao",
+      "style": "fan",
+      "duration": 1650,
+      "actors": [
+        {
+          "asset": "bach_phien_phong_bao_character",
+          "tag": "cast",
+          "at": 0
+        },
+        {
+          "asset": "bach_phien_phong_bao_character",
+          "tag": "whirl",
+          "at": 100,
+          "repeat": -1
+        },
+        {
+          "asset": "bach_phien_phong_bao_character",
+          "tag": "cast",
+          "at": 1160,
+          "holdFrame": 3
+        },
+        {
+          "asset": "hero_thien_son",
+          "tag": "idle",
+          "at": 1260
+        }
+      ],
+      "effects": [
+        {
+          "asset": "bach_phien_phong_bao_vfx",
+          "tag": "gather",
+          "at": 0,
+          "wrap": true
+        },
+        {
+          "asset": "bach_phien_phong_bao_vfx",
+          "tag": "whirlwind",
+          "at": 230,
+          "ttl": 900,
+          "wrap": true
+        },
+        {
+          "asset": "bach_phien_phong_bao_vfx",
+          "tag": "expiry",
+          "at": 1130,
+          "wrap": true
+        }
+      ],
+      "motion": {
+        "at": 220,
+        "duration": 850,
+        "along": 24,
+        "across": 0
+      }
+    },
+    {
+      "id": "phi_anh_tram",
+      "style": "dao",
+      "duration": 950,
+      "actors": [
+        {
+          "asset": "phi_anh_tram_character",
+          "tag": "cast",
+          "at": 0
+        },
+        {
+          "asset": "hero_thien_son_dao",
+          "tag": "idle",
+          "at": 380
+        }
+      ],
+      "effects": [
+        {
+          "asset": "phi_anh_tram_vfx",
+          "tag": "trail",
+          "at": 80
+        },
+        {
+          "asset": "phi_anh_tram_vfx",
+          "tag": "slash",
+          "at": 155
+        }
+      ],
+      "motion": {
+        "at": 80,
+        "duration": 110,
+        "along": 28,
+        "across": 0
+      },
+      "afterimageAt": 85
+    },
+    {
+      "id": "truy_hon_dao",
+      "style": "dao",
+      "duration": 950,
+      "actors": [
+        {
+          "asset": "truy_hon_dao_character",
+          "tag": "cast",
+          "at": 0
+        },
+        {
+          "asset": "hero_thien_son_dao",
+          "tag": "idle",
+          "at": 350
+        }
+      ],
+      "effects": [
+        {
+          "asset": "truy_hon_dao_vfx",
+          "tag": "first_cut",
+          "at": 70
+        },
+        {
+          "asset": "truy_hon_dao_vfx",
+          "tag": "second_cut",
+          "at": 170
+        }
+      ]
+    },
+    {
+      "id": "phong_anh_hoan_vi",
+      "style": "dao",
+      "duration": 1450,
+      "actors": [
+        {
+          "asset": "phong_anh_hoan_vi_character",
+          "tag": "cast",
+          "at": 0
+        },
+        {
+          "asset": "phong_anh_hoan_vi_character",
+          "tag": "cast",
+          "at": 270,
+          "holdFrame": 2
+        },
+        {
+          "asset": "phong_anh_hoan_vi_character",
+          "tag": "counter",
+          "at": 850,
+          "when": "counter"
+        },
+        {
+          "asset": "hero_thien_son_dao",
+          "tag": "idle",
+          "at": 850,
+          "when": "expiry"
+        },
+        {
+          "asset": "hero_thien_son_dao",
+          "tag": "idle",
+          "at": 1160,
+          "when": "counter"
+        }
+      ],
+      "effects": [
+        {
+          "asset": "phong_anh_hoan_vi_vfx",
+          "tag": "step",
+          "at": 60
+        },
+        {
+          "asset": "phong_anh_hoan_vi_vfx",
+          "tag": "ready",
+          "at": 250,
+          "ttl": 600
+        },
+        {
+          "asset": "phong_anh_hoan_vi_vfx",
+          "tag": "expiry",
+          "at": 850,
+          "when": "expiry"
+        },
+        {
+          "asset": "phi_anh_tram_vfx",
+          "tag": "slash",
+          "at": 900,
+          "when": "counter"
+        }
+      ],
+      "motion": {
+        "at": 70,
+        "duration": 180,
+        "along": 0,
+        "across": 20
+      },
+      "afterimageAt": 75,
+      "reuse": "Counter character uses unchanged approved dao attack cels; counter wind reuses Phi Ảnh Trảm's close slash."
+    },
+    {
+      "id": "liet_phong_dao",
+      "style": "dao",
+      "duration": 1000,
+      "actors": [
+        {
+          "asset": "liet_phong_dao_character",
+          "tag": "cast",
+          "at": 0
+        },
+        {
+          "asset": "hero_thien_son_dao",
+          "tag": "idle",
+          "at": 520
+        }
+      ],
+      "effects": [
+        {
+          "asset": "liet_phong_dao_vfx",
+          "tag": "strike",
+          "at": 130
+        },
+        {
+          "asset": "liet_phong_dao_vfx",
+          "tag": "contact",
+          "at": 250
+        }
+      ]
+    },
+    {
+      "id": "bach_liet_thien_kich",
+      "style": "dao",
+      "duration": 1450,
+      "actors": [
+        {
+          "asset": "bach_liet_thien_kich_character",
+          "tag": "cast",
+          "at": 0
+        },
+        {
+          "asset": "bach_liet_thien_kich_character",
+          "tag": "flurry",
+          "at": 100,
+          "repeat": -1
+        },
+        {
+          "asset": "bach_liet_thien_kich_character",
+          "tag": "finish",
+          "at": 880
+        },
+        {
+          "asset": "hero_thien_son_dao",
+          "tag": "idle",
+          "at": 1100
+        }
+      ],
+      "effects": [
+        {
+          "asset": "bach_liet_thien_kich_vfx",
+          "tag": "coil",
+          "at": 0
+        },
+        {
+          "asset": "bach_liet_thien_kich_vfx",
+          "tag": "flurry",
+          "at": 160,
+          "ttl": 740
+        },
+        {
+          "asset": "bach_liet_thien_kich_vfx",
+          "tag": "finisher",
+          "at": 890
+        }
+      ]
+    },
+    {
+      "id": "thien_son_phien",
+      "style": "fan",
+      "duration": 800,
+      "actors": [
+        {
+          "asset": "hero_thien_son",
+          "tag": "basic_attack",
+          "at": 0
+        },
+        {
+          "asset": "hero_thien_son",
+          "tag": "idle",
+          "at": 340
+        }
+      ],
+      "effects": [],
+      "reuse": "Approved normal fan animation, no new character clip or VFX."
+    },
+    {
+      "id": "thien_son_dao",
+      "style": "dao",
+      "duration": 800,
+      "actors": [
+        {
+          "asset": "hero_thien_son_dao",
+          "tag": "basic_attack",
+          "at": 0
+        },
+        {
+          "asset": "hero_thien_son_dao",
+          "tag": "idle",
+          "at": 340
+        }
+      ],
+      "effects": [],
+      "reuse": "Approved normal dao animation, no new character clip or VFX."
+    },
+    {
+      "id": "bac_minh_than_cong",
+      "style": "fan",
+      "duration": 650,
+      "actors": [
+        {
+          "asset": "hero_thien_son",
+          "tag": "idle",
+          "at": 0
+        }
+      ],
+      "effects": [],
+      "reuse": "Icon-only passive: approved idle shown for context; no aura or activation."
+    }
+  ]
+}

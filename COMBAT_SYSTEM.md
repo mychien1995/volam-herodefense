@@ -1,5 +1,16 @@
 # Combat System Specification v1.0
 
+## M3C3 reusable combos and ally protection — 2026-10-31
+
+Target sequences use attacker+target+chain IDs and simulation expiry. Cleave counts; misses do not. A/unrelated actives preserve progress; an invalid same-chain order clears that target. Vô Ảnh consumes once per target/cast and caches eligibility across its deterministic six-hit schedule. Delayed arcs capture heading/offense and validate current target position/terrain after windup. Strongest nonstacking damage reduction applies after armor/crit and before mana shield/HP,cap85%. Flat defense buffs,owner-following ally auras and bounded healing are shared effects. Living same-zone heroes only; never statue repair,enemy healing or resurrection. New stun/hostile displacement is resisted during Kim Cang; damage remains possible. Death/travel/respec/disconnect/defeat clean up sequences and owned ally protection. Details/defaults:`docs/M3C3_IMPLEMENTATION.md`.
+
+
+## M3C1 shared movement / wind extensions — 2026-10-31
+
+Optional multi-hit half-angle captures cast facing while origin follows the owner. Each scheduled pulse tests current target position/line of sight once, independently of network or animation events; radial spins omit the half-angle. Zero-damage dashes provide collision-validated mobility without inventing damage/stun. Dash target IDs deduplicate damage along the swept path. Temporary movement/attack-speed buffs use strongest nonstacking magnitudes in M3B's derived stat sources and expire by simulation tick.
+
+Per-strike defense penetration multiplies remaining nonnegative defense by `(1 - penetration)` before normal mitigation/crit/rounding. A slowed-target bonus checks the current slow at each hit, not only at cast. A counter status evades one incoming enemy hit, consumes the window before retaliation, and only retaliates against a living attacker in range with clear terrain. Death/travel/respec cancel the same owned actions/statuses as M3A/M3B. These reusable effects introduce no client authority, equipment requirement or other-school combat.
+
 ## 1. Input contract (CONFIRMED)
 
 - Arrow keys: movement (eight directions if simultaneous arrows enabled; proposed).
@@ -96,3 +107,17 @@ Algorithm (logical spec):
 - Server validates stamina/mana, cooldown, ability unlock, equipped skill, rank, location, line-of-sight/range, collision, cooldown and input rate. Server owns RNG and event log.
 - Entity types and combat components independent of rendering engine; integrate with Phaser only for visuals, sound, local UI and client-side prediction when proven necessary.
 - For active skills triggered with QWER, direction from facing/last input and modes from data; no pointer target.
+
+## M3B implemented progression policy — 2026-10-31
+
+The currently selected rank gates/caps above remain configurable proposals. Cái Bang normal rooms now start with four empty slots and one available point; rank0 cannot cast. A is independently available. Learning/upgrading an equipped skill costs one point. Moving it to another slot retains rank, while removing it refunds ranks; reset refunds every allocation and retains assignments at rank0. At most one optional ultimate, in any slot, and no duplicates. Other-school active defaults are not granted in normal rooms.
+
+Point accounting is `earned = allocated + available + surplus`, with earned=min(level,30). Surplus only activates when all four nonempty skills are max-ranked; four normals consume16 at cap, or three normals+ultimate15. Build changes and level gains recalculate bonuses from current state. EXP retains the existing60-per-level curve and caps at1740.
+
+Persistent cooldown debt is keyed by ability ID and is never shortened by moving, unequipping/re-equipping, upgrading or resetting. A uses a shared cooldown across both styles. Zone transfer preserves remaining durations. Build changes are living-arena-only, cancel owned temporary actions/projectiles/self buffs, preserve hostile control and do not heal/refill HP/MP. Death and defeat retain their existing authoritative lifecycle.
+
+`game-data/progression-data.ts` defines explicit rank variants: damage, blast/burn, pull/knockback, slow/armor-break/stun durations, buff strength, reach and MP/cooldown improvements as appropriate. Rank1 preserves M3A. Raw damage keeps the configured rank base plus Attack Power above the school baseline, then the existing defense/crit pipeline. School base, level, innate, surplus, temporary and reserved zero-equipment sources are separate. See `docs/M3B_IMPLEMENTATION.md` for exact proposals, commands and measured limits. No other-school mechanics or equipment were added.
+
+## M3C2 reusable Yin–Yang effects — 2026-10-31
+
+Shared deterministic core now supports timed resource shields (post-armor fraction bounded by actual mana),fixed-position periodic areas with authoritative target checks/expiry,one-per-cast successful-hit mana refunds,Attack Power reduction and independent Attack Speed slows. Strongest statuses do not add; same source refreshes. Projectile procs/spread reuse fixed captured trajectories and per-projectile target deduplication. Counter metadata distinguishes evasion from taking the hit; reactive strikes cannot recurse and lethal hits prevent retaliation. Normal regen/refunds cap at max mana. Death/travel/respec/disconnect/defeat cancel owned temporary effects. Details/formulas/provisional data and tests are in `docs/M3C2_IMPLEMENTATION.md`.

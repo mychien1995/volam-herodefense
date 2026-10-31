@@ -1,0 +1,1808 @@
+{
+  "id": "beach_cua_khong_lo",
+  "nameVi": "Cua Khổng Lồ",
+  "category": "enemy",
+  "status": "produced_asset_only",
+  "conceptApproval": "Automatically approved by Phase 2C user instruction, 2026-10-31",
+  "sourceConcept": "assets/concepts/dungeon-creeps/beach/cua_khong_lo_concept_v01.png",
+  "sheet": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/spritesheet.png",
+  "atlas": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/atlas.json",
+  "source": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/source/cua_khong_lo_v01.aseprite",
+  "frameWidth": 144,
+  "frameHeight": 128,
+  "bodyScaleReference": {
+    "humanoidHeight": 48,
+    "crabWidth": 64,
+    "approvedHeroBodyHeight": 44
+  },
+  "footPivot": [
+    0.5,
+    0.828125
+  ],
+  "feetPixels": [
+    72,
+    106
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/idle_down_0.png",
+      "sha256": "02ab9676cb64b9ad9d85dfa8bb060ca2ba36acff46ad9d9dadacc9745b4a3b79",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          36,
+          73,
+          304,
+          170
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          112.0,
+          170
+        ],
+        "placement": [
+          48,
+          70
+        ]
+      }
+    },
+    {
+      "name": "idle_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/idle_down_1.png",
+      "sha256": "cbdb8fa0a4d4311e70bd0c7fdd12eaadbbc8a32a1e37b364aa226d854533dbc6",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          386,
+          75,
+          303,
+          164
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          195.0,
+          164
+        ],
+        "placement": [
+          31,
+          71
+        ]
+      }
+    },
+    {
+      "name": "walk_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_down_0.png",
+      "sha256": "63d89fd8dfeaad52d3bcef683756b9f7c749937565ea73944bb96fb4eff3db7e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          727,
+          76,
+          302,
+          170
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          121.0,
+          170
+        ],
+        "placement": [
+          46,
+          70
+        ]
+      }
+    },
+    {
+      "name": "walk_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_down_1.png",
+      "sha256": "9cf7dc2a36fe0255776c825f451645f5aecd135ddb060736fa8382d1fadab47d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1072,
+          75,
+          301,
+          169
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          274.0,
+          169
+        ],
+        "placement": [
+          14,
+          70
+        ]
+      }
+    },
+    {
+      "name": "walk_down_2",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_down_2.png",
+      "sha256": "964aa9cde7bdc0d42e71d2fa99040c27a604225f5cba3be2a53d8fbebbc2fe7d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          34,
+          342,
+          305,
+          175
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          127.0,
+          175
+        ],
+        "placement": [
+          45,
+          69
+        ]
+      }
+    },
+    {
+      "name": "walk_down_3",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_down_3.png",
+      "sha256": "4669b48e5ff5f2949712e5b4de2499eb5a916c0a240aa10fb63a921684062f91",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          401,
+          343,
+          288,
+          172
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          48.0,
+          172
+        ],
+        "placement": [
+          62,
+          70
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_down_0.png",
+      "sha256": "5de34d8bcd1c9fa652455bb259451076fcf439b96bc3ca5fb9e6d8dfdd4fe451",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          735,
+          314,
+          303,
+          211
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          93.0,
+          211
+        ],
+        "placement": [
+          52,
+          62
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_down_1.png",
+      "sha256": "2d50cfd041b1d1c3841be4e16a2164e1fce48298ab169c6ca257d6cd9f4fbc2e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1085,
+          316,
+          288,
+          208
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          182.0,
+          208
+        ],
+        "placement": [
+          34,
+          62
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_down_2.png",
+      "sha256": "0e4c87451ff8c84e741687b444834a8762c3e4ae8a001b6bc21746afb29baa6c",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          40,
+          604,
+          308,
+          187
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          131.0,
+          187
+        ],
+        "placement": [
+          44,
+          67
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_down_3.png",
+      "sha256": "49407bbf828eb9d6e650f0c0e0a041667c7490444cd1763c46d1f52de74f1f02",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          393,
+          598,
+          298,
+          187
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          68.0,
+          187
+        ],
+        "placement": [
+          58,
+          67
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/hurt_down_0.png",
+      "sha256": "d6cda79b1fcbb4aa536ce59b021b3783a77c71741d5c1f6abb8a13dd2038bcaa",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          725,
+          613,
+          303,
+          166
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          132.0,
+          166
+        ],
+        "placement": [
+          44,
+          71
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/hurt_down_1.png",
+      "sha256": "dd8f4136507b3bb2a6c708f3d1136821ac298e886d337e2ba5fb13ca0f3906de",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1078,
+          607,
+          302,
+          169
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          122.5,
+          169
+        ],
+        "placement": [
+          46,
+          70
+        ]
+      }
+    },
+    {
+      "name": "death_down_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_down_0.png",
+      "sha256": "72b1834e990f56a138a332febb675502d9e8570c1a862b0a8bfb90d39d50558e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          40,
+          864,
+          308,
+          204
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          236.0,
+          204
+        ],
+        "placement": [
+          22,
+          63
+        ]
+      }
+    },
+    {
+      "name": "death_down_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_down_1.png",
+      "sha256": "241792253e77ce62d33d5ef34fdb1547c0a97cccc8debd7eee581f15fdc10a30",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          402,
+          851,
+          282,
+          221
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          249.0,
+          221
+        ],
+        "placement": [
+          19,
+          59
+        ]
+      }
+    },
+    {
+      "name": "death_down_2",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_down_2.png",
+      "sha256": "4b7282b35179caef73f747cd38aba8e1e8ce178da08d15c739eae47fdb254f42",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          757,
+          907,
+          270,
+          149
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          147.0,
+          149
+        ],
+        "placement": [
+          41,
+          75
+        ]
+      }
+    },
+    {
+      "name": "death_down_3",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_down_3.png",
+      "sha256": "3026643b8cecba362deb2400b9bb9bed2ff6278631998014f4a16b8303737894",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_down_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1095,
+          911,
+          276,
+          136
+        ],
+        "fixedSourceScale": 0.21087314662273476,
+        "sourceFootInCrop": [
+          126.0,
+          136
+        ],
+        "placement": [
+          45,
+          77
+        ]
+      }
+    },
+    {
+      "name": "idle_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/idle_left_0.png",
+      "sha256": "429aafa097f8f2b40046ac4cc73b7ea0063456dbfaada9b3a1879a0922e6cb17",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          55,
+          80,
+          306,
+          164
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          178.0,
+          164
+        ],
+        "placement": [
+          35,
+          72
+        ]
+      }
+    },
+    {
+      "name": "idle_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/idle_left_1.png",
+      "sha256": "1b4a17ae7f620c6f67ac9055fb0870b4466c1065894809844f5b1b3627020920",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          411,
+          73,
+          312,
+          173
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          178.0,
+          173
+        ],
+        "placement": [
+          35,
+          70
+        ]
+      }
+    },
+    {
+      "name": "walk_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_left_0.png",
+      "sha256": "a1ab650228ac73414b5bfa501238d5727bb986db4713e69072da42b1c518b70f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          790,
+          80,
+          317,
+          163
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          178.0,
+          163
+        ],
+        "placement": [
+          35,
+          72
+        ]
+      }
+    },
+    {
+      "name": "walk_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_left_1.png",
+      "sha256": "e314c5534540ad2b8cdf383eccc19979097a66fd7386231ee4dad7989bf7695f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1181,
+          74,
+          302,
+          171
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          228.0,
+          171
+        ],
+        "placement": [
+          25,
+          71
+        ]
+      }
+    },
+    {
+      "name": "walk_left_2",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_left_2.png",
+      "sha256": "5e64ef7f0eb23a3017be1a80ef7d49c48ab4e9fc9cba172aab198b7463ccaf96",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          42,
+          331,
+          307,
+          163
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          251.0,
+          163
+        ],
+        "placement": [
+          20,
+          72
+        ]
+      }
+    },
+    {
+      "name": "walk_left_3",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_left_3.png",
+      "sha256": "0ada19656b8c397905c865fbffa25346654c4dc59bbd0e9a0fefc6c0b77bcb80",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          419,
+          327,
+          313,
+          168
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          178.0,
+          168
+        ],
+        "placement": [
+          35,
+          71
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_left_0.png",
+      "sha256": "ea49ac6d0b7e96bf27c94da8fb9da57d8ba4f82ec7399b532fa0ae0758305027",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          852,
+          273,
+          269,
+          225
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          189.0,
+          225
+        ],
+        "placement": [
+          33,
+          59
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_left_1.png",
+      "sha256": "675984f90a2d8fe980d1d07fc518b72ebc741ee9b97286c1645545b6c63d1ac4",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1203,
+          298,
+          294,
+          195
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          206.0,
+          195
+        ],
+        "placement": [
+          29,
+          66
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_left_2.png",
+      "sha256": "f811b7d108e60ab52ca7128b30a5b939eec9c7c57459038ff128b24d7a0a1704",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          39,
+          569,
+          394,
+          165
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          306.0,
+          165
+        ],
+        "placement": [
+          9,
+          72
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_left_3.png",
+      "sha256": "1db14b082dc99f5eb8c6fa4c4bbc0d77eb213be724f7457d93e946e491a72e60",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          444,
+          565,
+          315,
+          168
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          244.0,
+          168
+        ],
+        "placement": [
+          21,
+          71
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/hurt_left_0.png",
+      "sha256": "22dc447a7fb51df42ef94d79c1fa02fb0084db344a6003e2516ac3de2d9d8128",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          841,
+          548,
+          257,
+          179
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          140.0,
+          179
+        ],
+        "placement": [
+          43,
+          69
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/hurt_left_1.png",
+      "sha256": "121bdaedbbfdddbd3b43cb49240e8308c4a3130e968a4ae723a0f65f88a65ca3",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1176,
+          561,
+          310,
+          169
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          83.0,
+          169
+        ],
+        "placement": [
+          55,
+          71
+        ]
+      }
+    },
+    {
+      "name": "death_left_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_left_0.png",
+      "sha256": "7376a5aeb7a3f2975563f303bca03787ed0ae74e88ac8b3ee6dd4b62317d1bd0",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          54,
+          773,
+          313,
+          195
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          243.0,
+          195
+        ],
+        "placement": [
+          22,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_left_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_left_1.png",
+      "sha256": "90169ed1ccba5af3bd56266558e7826f889e458be7e92b20a76a0951f3bceb6d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          442,
+          797,
+          308,
+          171
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          209.0,
+          171
+        ],
+        "placement": [
+          29,
+          71
+        ]
+      }
+    },
+    {
+      "name": "death_left_2",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_left_2.png",
+      "sha256": "c2454b38559834b5a9346ca039322827c55dda1e41a31404854c724aa55bb62f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          824,
+          816,
+          299,
+          138
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          172.0,
+          138
+        ],
+        "placement": [
+          36,
+          77
+        ]
+      }
+    },
+    {
+      "name": "death_left_3",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_left_3.png",
+      "sha256": "e940e7bd64ae28f3dd94e7890a9f622718dffd9247f7f55dc62311102400df2d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_left_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1215,
+          811,
+          263,
+          145
+        ],
+        "fixedSourceScale": 0.20711974110032363,
+        "sourceFootInCrop": [
+          123.0,
+          145
+        ],
+        "placement": [
+          47,
+          76
+        ]
+      }
+    },
+    {
+      "name": "idle_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/idle_right_0.png",
+      "sha256": "e01e6e86a984505d4b786a03b941d5cd7215a6b9d055b7b2892f8f7d26661f0d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          58,
+          62,
+          301,
+          166
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          124.0,
+          166
+        ],
+        "placement": [
+          46,
+          71
+        ]
+      }
+    },
+    {
+      "name": "idle_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/idle_right_1.png",
+      "sha256": "c4c5ca597c4302544227b7c8c0e68e76e9a59e79056fb8c48d956ddc22f208ff",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          436,
+          59,
+          303,
+          167
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          82.0,
+          167
+        ],
+        "placement": [
+          55,
+          71
+        ]
+      }
+    },
+    {
+      "name": "walk_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_right_0.png",
+      "sha256": "bb606aea2e5c58e52ebe1fba43602c36b6a8d6b01c183117d4384d5cff528ac9",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          800,
+          60,
+          303,
+          158
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          144.0,
+          158
+        ],
+        "placement": [
+          41,
+          73
+        ]
+      }
+    },
+    {
+      "name": "walk_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_right_1.png",
+      "sha256": "9fae4d9ad9cf222ebed1166e179490d2418c3703ed3957dd5916643475261adb",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1182,
+          61,
+          304,
+          157
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          109.0,
+          157
+        ],
+        "placement": [
+          49,
+          73
+        ]
+      }
+    },
+    {
+      "name": "walk_right_2",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_right_2.png",
+      "sha256": "5c36446f4c247fe3ae5ec766d4a5b4033f386b7202c2d330284bab1e5e89e5af",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          50,
+          303,
+          316,
+          164
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          143.5,
+          164
+        ],
+        "placement": [
+          42,
+          71
+        ]
+      }
+    },
+    {
+      "name": "walk_right_3",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_right_3.png",
+      "sha256": "fc1851d7666f17f413123076e170651d4d4a0a7f74e3845756c91573c046ea87",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          432,
+          302,
+          306,
+          172
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          146.0,
+          172
+        ],
+        "placement": [
+          41,
+          70
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_right_0.png",
+      "sha256": "ae34a9c676da0ebf831e8320066ebccc5803446fbad0199be65e9d9f7e6aac6f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          797,
+          283,
+          304,
+          197
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          36.0,
+          197
+        ],
+        "placement": [
+          64,
+          64
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_right_1.png",
+      "sha256": "ad9642251673e1acc5835e6c7079b0a7860ee79c32edcedb10c449aa5763be3f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1186,
+          272,
+          307,
+          205
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          112.0,
+          205
+        ],
+        "placement": [
+          48,
+          63
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_right_2.png",
+      "sha256": "e07c0b2c32ef2d34e6a58d56f90c8a05a7073d897cc5dd16e8a6783968e7fd18",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          48,
+          545,
+          374,
+          163
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          127.0,
+          163
+        ],
+        "placement": [
+          45,
+          71
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_right_3.png",
+      "sha256": "5e073e060dede51749be34710a3a6e22c383cc3d55c3ce9faa844a607007843c",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          441,
+          544,
+          298,
+          170
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          115.0,
+          170
+        ],
+        "placement": [
+          48,
+          70
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/hurt_right_0.png",
+      "sha256": "7d005ce9c6c11d53496559fdb813a11d52080b29ae052fcf1dbe8a5b0bce1819",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          800,
+          529,
+          302,
+          186
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          143.0,
+          186
+        ],
+        "placement": [
+          42,
+          67
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/hurt_right_1.png",
+      "sha256": "230e624dc821987f002c9adf52660491b0e3f1e97538dc2a3f8f0c087914e2d9",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1185,
+          543,
+          301,
+          167
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          137.0,
+          167
+        ],
+        "placement": [
+          43,
+          71
+        ]
+      }
+    },
+    {
+      "name": "death_right_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_right_0.png",
+      "sha256": "14fd61cb706a55e7270bcb059f731168872bf4e85dbb619c35abaa6d4d4ac129",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          48,
+          774,
+          313,
+          190
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          86.0,
+          190
+        ],
+        "placement": [
+          54,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_right_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_right_1.png",
+      "sha256": "4f0c3f36956c13d28ff3ddbd88355653c613b46427636c2e8aae2ab42ee9fdd1",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          427,
+          788,
+          310,
+          170
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          251.0,
+          170
+        ],
+        "placement": [
+          19,
+          70
+        ]
+      }
+    },
+    {
+      "name": "death_right_2",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_right_2.png",
+      "sha256": "db38610fc55381237826e43a9bd785c5bdd0fe26dd3c94e4fb1b3a6416f7e432",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          817,
+          801,
+          291,
+          148
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          194.0,
+          148
+        ],
+        "placement": [
+          31,
+          75
+        ]
+      }
+    },
+    {
+      "name": "death_right_3",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_right_3.png",
+      "sha256": "45bf61d65b806daa7fd7f53e9aa420d0b1d45941e3778fec915b3c28ee9d7035",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_right_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1186,
+          804,
+          293,
+          148
+        ],
+        "fixedSourceScale": 0.2119205298013245,
+        "sourceFootInCrop": [
+          149.0,
+          148
+        ],
+        "placement": [
+          40,
+          75
+        ]
+      }
+    },
+    {
+      "name": "idle_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/idle_up_0.png",
+      "sha256": "1d0d0c0188e3e2ccbc289c04ebea62c1b367d1aefa0efa230a64e5940fec438e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          64,
+          47,
+          286,
+          183
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          69.5,
+          183
+        ],
+        "placement": [
+          57,
+          68
+        ]
+      }
+    },
+    {
+      "name": "idle_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/idle_up_1.png",
+      "sha256": "78aaf6e122b404fcfdd7b4a9f05430f5ffb7eb30a9d2051e407b966215b1cceb",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          416,
+          30,
+          324,
+          201
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          254.0,
+          201
+        ],
+        "placement": [
+          19,
+          64
+        ]
+      }
+    },
+    {
+      "name": "walk_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_up_0.png",
+      "sha256": "e01e0f6b906a51d3b48a283d3396b63221560dbae1de1a1f994c37474f665673",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          800,
+          43,
+          309,
+          181
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          85.0,
+          181
+        ],
+        "placement": [
+          54,
+          68
+        ]
+      }
+    },
+    {
+      "name": "walk_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_up_1.png",
+      "sha256": "1d79e9064b474ae84f6a19e677b0d0372804e398cbca8341b7461a4f25206f3f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1175,
+          42,
+          298,
+          187
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          76.0,
+          187
+        ],
+        "placement": [
+          56,
+          67
+        ]
+      }
+    },
+    {
+      "name": "walk_up_2",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_up_2.png",
+      "sha256": "508fdaaa83a56d5a04b37706a6fa2cb7fc85450b5d85c365b1f480a0531be066",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          56,
+          292,
+          304,
+          190
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          252.0,
+          190
+        ],
+        "placement": [
+          19,
+          66
+        ]
+      }
+    },
+    {
+      "name": "walk_up_3",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/walk_up_3.png",
+      "sha256": "2a383fd0b951aca0191841fcdf5e923af03a9f710297eb722d0ac533c47308db",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          423,
+          289,
+          320,
+          192
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          232.0,
+          192
+        ],
+        "placement": [
+          23,
+          66
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_up_0.png",
+      "sha256": "a6ff02d036c9e0e1dc99b74e2d9bad9ca47fbfbe221ac82a84b89519e86af205",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          803,
+          269,
+          314,
+          225
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          69.0,
+          225
+        ],
+        "placement": [
+          58,
+          59
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_up_1.png",
+      "sha256": "57a18a178d2ec0bfecba91a1bd4ba8a595c7edf52ccb7b20317c814b0e867e1c",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1186,
+          273,
+          293,
+          222
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          43.0,
+          222
+        ],
+        "placement": [
+          63,
+          59
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_up_2.png",
+      "sha256": "cf250f5e87d29e33f50be5067a555db6a540bb21e64950b7df50b8c147fbabfd",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          27,
+          519,
+          359,
+          230
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          279.0,
+          230
+        ],
+        "placement": [
+          13,
+          58
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/basic_attack_up_3.png",
+      "sha256": "446fad5114a4c302141034b448c2e453d0efe62084dedb6ebff1cb211b431ac2",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          433,
+          526,
+          290,
+          220
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          148.5,
+          220
+        ],
+        "placement": [
+          41,
+          60
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/hurt_up_0.png",
+      "sha256": "ca34801b590db63e71ee871d77beeff65f77f25fe343f52a687e3ccad6f475bb",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          800,
+          525,
+          343,
+          227
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          203.0,
+          227
+        ],
+        "placement": [
+          29,
+          58
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/hurt_up_1.png",
+      "sha256": "bc5a4b3f8fa8a56b78d1c2c5e99312fce3bc81c3e0e85ebad586af2064e77ab7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1172,
+          559,
+          324,
+          183
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          58.0,
+          183
+        ],
+        "placement": [
+          60,
+          68
+        ]
+      }
+    },
+    {
+      "name": "death_up_0",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_up_0.png",
+      "sha256": "91077bffcf4ed56916b411833db0f4edec66e4c82808b45cb734f97deb68e18e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          48,
+          768,
+          327,
+          223
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          237.0,
+          223
+        ],
+        "placement": [
+          22,
+          59
+        ]
+      }
+    },
+    {
+      "name": "death_up_1",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_up_1.png",
+      "sha256": "73fd33a85854ec82f1ddc34cc4da285e8a3609b4f36d177530fc5324341ed608",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          428,
+          794,
+          333,
+          190
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          209.0,
+          190
+        ],
+        "placement": [
+          28,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_up_2",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_up_2.png",
+      "sha256": "2a2446247d8843f4f44fbebaf0b9e3489556613f1f547dcc2cf726d5948dbcc0",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          817,
+          809,
+          273,
+          158
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          132.0,
+          158
+        ],
+        "placement": [
+          44,
+          73
+        ]
+      }
+    },
+    {
+      "name": "death_up_3",
+      "file": "assets/sprites/creeps/dungeons/beach/cua_khong_lo/frames/death_up_3.png",
+      "sha256": "144c8c1619cb8bd3ba07c7880a3ef52ec72ee418185c6a67b7d169e4944dfa16",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/beach/source/crab_up_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1210,
+          804,
+          251,
+          161
+        ],
+        "fixedSourceScale": 0.2098360655737705,
+        "sourceFootInCrop": [
+          125.0,
+          161
+        ],
+        "placement": [
+          46,
+          72
+        ]
+      }
+    }
+  ],
+  "sourceScales": {
+    "down": 0.21087314662273476,
+    "left": 0.20711974110032363,
+    "right": 0.2119205298013245,
+    "up": 0.2098360655737705
+  },
+  "runtimeIntegrated": false,
+  "runtimeVerified": false,
+  "notes": [
+    "Original generated cels; fixed nearest-neighbor scale per source direction; binary alpha245 cleanup.",
+    "Visual animation only. No damage, hit timing, status effect, spawn or collision rules."
+  ]
+}

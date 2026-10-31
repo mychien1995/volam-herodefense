@@ -1,0 +1,473 @@
+{
+  "schemaVersion": 1,
+  "id": "cai_bang_skills_phase_a_v1",
+  "createdOn": "2026-10-30",
+  "status": "concept_approved",
+  "scope": "All 10 active skills: Phase A concept art only. No production frames, atlases, animation metadata or runtime integration.",
+  "workflow": [
+    "Concept",
+    "Approved",
+    "Frames",
+    "Sprite Sheet",
+    "Validated"
+  ],
+  "provenance": {
+    "method": "OpenAI built-in image_gen.imagegen",
+    "authorship": "Original AI-assisted concept artwork; no external sprite pack imported. No claim of human hand-pixelled authorship, exclusive copyright, or separately verified third-party reference license.",
+    "references": [
+      "assets/exports/characters/hero_cai_bang_chuong.png",
+      "assets/references/cai_bang_character_reference.png",
+      "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png",
+      "assets/concept/arena-v2-approved.png",
+      "assets/exports/characters/hero_cai_bang.png"
+    ],
+    "prompts": "generation_prompts_v1.json",
+    "referencePriority": "Approved Cái Bang runtime Bổng/Chưởng atlases are primary; director character sheet secondary; creep/arena sheets provide shared style/context.",
+    "contactSheet": "Generated thumbnail overview; exact source boards in sheet files are authoritative."
+  },
+  "baseline": {
+    "canvasPx": [
+      80,
+      80
+    ],
+    "bodyHeightLogicalPxApprox": 44,
+    "footPivotPx": [
+      40,
+      64
+    ],
+    "origin": [
+      0.5,
+      0.8
+    ],
+    "cameraZoom": 1,
+    "usualDisplayScale": 2,
+    "approvedLock": "assets/approved_cai_bang.lock.json",
+    "unchanged": true
+  },
+  "stages": [
+    "cast",
+    "buildup",
+    "release",
+    "impact_or_self_buff",
+    "approximate_game_scale"
+  ],
+  "sheets": [
+    {
+      "file": "cai_bang_skills_sheet_01_v1.png",
+      "generatedSourceFilename": "exec-dd7610fb-0799-4b76-ac20-f79b74268391.png",
+      "status": "concept_approved",
+      "dimensionsPx": [
+        1536,
+        1024
+      ],
+      "animationAtlas": false,
+      "sha256": "c1e1f91ab1427aa7480e220508035a64dd6d943512caf0963fcf7cc727b93be3"
+    },
+    {
+      "file": "cai_bang_skills_sheet_02_v1.png",
+      "generatedSourceFilename": "exec-bab5232d-c3ac-4677-8d9f-e32c789f9596.png",
+      "status": "concept_approved",
+      "dimensionsPx": [
+        1536,
+        1024
+      ],
+      "animationAtlas": false,
+      "sha256": "e0650f32efd5b2c592a4404bd51b202ff156e8f95fe2deceab65df79854cbc9e"
+    },
+    {
+      "file": "cai_bang_skills_sheet_03_v1.png",
+      "generatedSourceFilename": "exec-6f7719ca-fc53-4940-bb21-4a49fb79fb4b.png",
+      "status": "concept_approved",
+      "dimensionsPx": [
+        1536,
+        1024
+      ],
+      "animationAtlas": false,
+      "sha256": "76f536a7e1d4dedde1d76d03610141dfe496e5d35003016b929b0165b312a0be"
+    },
+    {
+      "file": "cai_bang_skills_sheet_04_v1.png",
+      "generatedSourceFilename": "exec-5f3f1184-8bde-49f1-a787-0d9fe5095ceb.png",
+      "status": "concept_approved",
+      "dimensionsPx": [
+        1536,
+        1024
+      ],
+      "animationAtlas": false,
+      "sha256": "ce8faeb709386ddc6f60f73c1c4524d5a197726525403a3cbe7ca327e7b77299"
+    }
+  ],
+  "skills": [
+    {
+      "id": "hoa_van_chuong",
+      "nameVi": "Hỏa Vân Chưởng",
+      "sheet": "cai_bang_skills_sheet_01_v1.png",
+      "behaviorSource": "packages/game-data/src/m1.ts; packages/game-core/src/simulation.ts",
+      "implementation": "implemented",
+      "behavior": "Three quick straight non-homing fire projectiles; each impact is small.",
+      "progress": {
+        "Concept": "generated",
+        "Approved": "concept_approved_by_user_2026_10_30",
+        "Frames": "produced",
+        "SpriteSheet": "packed_png_and_json",
+        "Validated": "file_and_isolated_phaser_pass"
+      },
+      "stageCoverage": {
+        "cast": true,
+        "buildup": true,
+        "release": true,
+        "impact_or_self_buff": true,
+        "approximate_game_scale": true
+      },
+      "needsReview": [],
+      "productionTiming": null,
+      "productionFrameDimensions": null,
+      "productionMetadata": null
+    },
+    {
+      "id": "cuong_long_loan_vu",
+      "nameVi": "Cuồng Long Loạn Vũ",
+      "sheet": "cai_bang_skills_sheet_01_v1.png",
+      "behaviorSource": "packages/game-data/src/m1.ts; packages/game-core/src/simulation.ts",
+      "implementation": "implemented",
+      "behavior": "One exploding projectile with splash and burn.",
+      "progress": {
+        "Concept": "generated",
+        "Approved": "concept_approved_by_user_2026_10_30",
+        "Frames": "produced",
+        "SpriteSheet": "packed_png_and_json",
+        "Validated": "file_and_isolated_phaser_pass"
+      },
+      "stageCoverage": {
+        "cast": true,
+        "buildup": true,
+        "release": true,
+        "impact_or_self_buff": true,
+        "approximate_game_scale": true
+      },
+      "needsReview": [
+        "Reduce dense center of impact flame before production; keep ground and target silhouettes visible."
+      ],
+      "productionTiming": null,
+      "productionFrameDimensions": null,
+      "productionMetadata": null
+    },
+    {
+      "id": "phi_long_tai_thien",
+      "nameVi": "Phi Long Tại Thiên",
+      "sheet": "cai_bang_skills_sheet_01_v1.png",
+      "behaviorSource": "CONTENT_DATA.md (design specification; numeric behavior not implemented)",
+      "implementation": "spec_only",
+      "behavior": "Frontal fire shockwave with knockback; grounded caster.",
+      "progress": {
+        "Concept": "generated",
+        "Approved": "concept_approved_by_user_2026_10_30",
+        "Frames": "produced",
+        "SpriteSheet": "packed_png_and_json",
+        "Validated": "file_and_isolated_phaser_pass"
+      },
+      "stageCoverage": {
+        "cast": true,
+        "buildup": true,
+        "release": true,
+        "impact_or_self_buff": true,
+        "approximate_game_scale": true
+      },
+      "needsReview": [
+        "Knockback arrows are review annotations, not runtime VFX."
+      ],
+      "productionTiming": null,
+      "productionFrameDimensions": null,
+      "productionMetadata": null
+    },
+    {
+      "id": "khang_long_huu_hoi",
+      "nameVi": "Kháng Long Hữu Hối",
+      "sheet": "cai_bang_skills_sheet_02_v1.png",
+      "behaviorSource": "CONTENT_DATA.md (design specification; numeric behavior not implemented)",
+      "implementation": "spec_only",
+      "behavior": "Temporary self buff to critical chance and critical damage; no outgoing hit.",
+      "progress": {
+        "Concept": "generated",
+        "Approved": "concept_approved_by_user_2026_10_30",
+        "Frames": "produced",
+        "SpriteSheet": "packed_png_and_json",
+        "Validated": "file_and_isolated_phaser_pass"
+      },
+      "stageCoverage": {
+        "cast": true,
+        "buildup": true,
+        "release": true,
+        "impact_or_self_buff": true,
+        "approximate_game_scale": true
+      },
+      "needsReview": [
+        "Confirm compact wrist/shoulder dragon accent; do not turn it into an outgoing attack."
+      ],
+      "productionTiming": null,
+      "productionFrameDimensions": null,
+      "productionMetadata": null
+    },
+    {
+      "id": "hang_long_hoa_vu",
+      "nameVi": "Hàng Long Hỏa Vũ",
+      "sheet": "cai_bang_skills_sheet_02_v1.png",
+      "behaviorSource": "CONTENT_DATA.md (design specification; numeric behavior not implemented)",
+      "implementation": "spec_only",
+      "behavior": "One broad forward-traveling fire wave, dragon heads embedded in crest.",
+      "progress": {
+        "Concept": "generated",
+        "Approved": "concept_approved_by_user_2026_10_30",
+        "Frames": "produced",
+        "SpriteSheet": "packed_png_and_json",
+        "Validated": "file_and_isolated_phaser_pass"
+      },
+      "stageCoverage": {
+        "cast": true,
+        "buildup": true,
+        "release": true,
+        "impact_or_self_buff": true,
+        "approximate_game_scale": true
+      },
+      "needsReview": [
+        "Thin overlapping flame ribbons and preserve open gaps before production; six-player readability untested."
+      ],
+      "productionTiming": null,
+      "productionFrameDimensions": null,
+      "productionMetadata": null
+    },
+    {
+      "id": "hoanh_tao_bong",
+      "nameVi": "Hoành Tảo Bổng",
+      "sheet": "cai_bang_skills_sheet_03_v1.png",
+      "behaviorSource": "CONTENT_DATA.md (design specification; numeric behavior not implemented)",
+      "implementation": "spec_only",
+      "behavior": "Wide frontal rotational staff sweep with damage and slow.",
+      "progress": {
+        "Concept": "generated",
+        "Approved": "concept_approved_by_user_2026_10_30",
+        "Frames": "produced",
+        "SpriteSheet": "packed_png_and_json",
+        "Validated": "file_and_isolated_phaser_pass"
+      },
+      "stageCoverage": {
+        "cast": true,
+        "buildup": true,
+        "release": true,
+        "impact_or_self_buff": true,
+        "approximate_game_scale": true
+      },
+      "needsReview": [
+        "Keep rotational sweep and side-of-shaft contact in future animation."
+      ],
+      "productionTiming": null,
+      "productionFrameDimensions": null,
+      "productionMetadata": null
+    },
+    {
+      "id": "pha_giap_bong",
+      "nameVi": "Phá Giáp Bổng",
+      "sheet": "cai_bang_skills_sheet_03_v1.png",
+      "behaviorSource": "CONTENT_DATA.md (design specification; numeric behavior not implemented)",
+      "implementation": "spec_only",
+      "behavior": "Heavy staff strike with temporary defense reduction.",
+      "progress": {
+        "Concept": "generated",
+        "Approved": "concept_approved_by_user_2026_10_30",
+        "Frames": "produced",
+        "SpriteSheet": "packed_png_and_json",
+        "Validated": "file_and_isolated_phaser_pass"
+      },
+      "stageCoverage": {
+        "cast": true,
+        "buildup": true,
+        "release": true,
+        "impact_or_self_buff": true,
+        "approximate_game_scale": true
+      },
+      "needsReview": [
+        "Release shows downward smash while impact still reads as forward thrust: reconcile pose continuity before frames.",
+        "Cracked shield is a concept status cue, not an approved runtime status icon."
+      ],
+      "productionTiming": null,
+      "productionFrameDimensions": null,
+      "productionMetadata": null
+    },
+    {
+      "id": "cam_long_cong",
+      "nameVi": "Cầm Long Công",
+      "sheet": "cai_bang_skills_sheet_03_v1.png",
+      "behaviorSource": "CONTENT_DATA.md (design specification; numeric behavior not implemented)",
+      "implementation": "spec_only",
+      "behavior": "Limited pull of enemies in front plus silence and disarm; movement remains allowed.",
+      "progress": {
+        "Concept": "generated",
+        "Approved": "concept_approved_by_user_2026_10_30",
+        "Frames": "produced",
+        "SpriteSheet": "packed_png_and_json",
+        "Validated": "file_and_isolated_phaser_pass"
+      },
+      "stageCoverage": {
+        "cast": true,
+        "buildup": true,
+        "release": true,
+        "impact_or_self_buff": true,
+        "approximate_game_scale": true
+      },
+      "needsReview": [
+        "Dragon heads are extending/retracting ribbons, not damaging projectiles.",
+        "Pull arrows and suppression icons are review annotations only; no equipment loss."
+      ],
+      "productionTiming": null,
+      "productionFrameDimensions": null,
+      "productionMetadata": null
+    },
+    {
+      "id": "truy_phong_bong",
+      "nameVi": "Truy Phong Bổng",
+      "sheet": "cai_bang_skills_sheet_04_v1.png",
+      "behaviorSource": "CONTENT_DATA.md (design specification; numeric behavior not implemented)",
+      "implementation": "spec_only",
+      "behavior": "Directional dash that hits and stuns.",
+      "progress": {
+        "Concept": "generated",
+        "Approved": "concept_approved_by_user_2026_10_30",
+        "Frames": "produced",
+        "SpriteSheet": "packed_png_and_json",
+        "Validated": "file_and_isolated_phaser_pass"
+      },
+      "stageCoverage": {
+        "cast": true,
+        "buildup": true,
+        "release": true,
+        "impact_or_self_buff": true,
+        "approximate_game_scale": true
+      },
+      "needsReview": [
+        "One struck enemy illustrates the concept; the sheet does not define a one-target cap or dash range.",
+        "Afterimages are visual guides, not extra characters or hits."
+      ],
+      "productionTiming": null,
+      "productionFrameDimensions": null,
+      "productionMetadata": null
+    },
+    {
+      "id": "thien_ha_vo_cau",
+      "nameVi": "Thiên Hạ Vô Cẩu",
+      "sheet": "cai_bang_skills_sheet_04_v1.png",
+      "behaviorSource": "CONTENT_DATA.md (design specification; numeric behavior not implemented)",
+      "implementation": "spec_only",
+      "behavior": "Close-range multi-hit staff whirlwind ending in a heavy smash.",
+      "progress": {
+        "Concept": "generated",
+        "Approved": "concept_approved_by_user_2026_10_30",
+        "Frames": "produced",
+        "SpriteSheet": "packed_png_and_json",
+        "Validated": "file_and_isolated_phaser_pass"
+      },
+      "stageCoverage": {
+        "cast": true,
+        "buildup": true,
+        "release": true,
+        "impact_or_self_buff": true,
+        "approximate_game_scale": true
+      },
+      "needsReview": [
+        "Thin circular ribbons around face/feet for crowded play; avoid raised flame occluding enemies.",
+        "No environmental destruction or added knockback is implied."
+      ],
+      "productionTiming": null,
+      "productionFrameDimensions": null,
+      "productionMetadata": null
+    }
+  ],
+  "additionalAbilities": [
+    {
+      "id": "cai_bang_chuong",
+      "nameVi": "Cái Bang Chưởng",
+      "status": "reuse_approved_character_animation",
+      "asset": "assets/exports/characters/hero_cai_bang_chuong.png",
+      "notes": "Reuse approved 4-direction palm attack. Existing fire VFX is prototype and is not approved."
+    },
+    {
+      "id": "cai_bang_bong",
+      "nameVi": "Cái Bang Bổng",
+      "status": "reuse_approved_character_animation",
+      "asset": "assets/exports/characters/hero_cai_bang.png",
+      "notes": "Reuse approved 4-direction staff attacks, including six-frame side sweeps. Existing drawn arc is prototype."
+    },
+    {
+      "id": "tieu_dieu_cong",
+      "nameVi": "Tiêu Diêu Công",
+      "status": "no_new_art_required_by_current_definition",
+      "notes": "Automatic damage/crit growth by level; no activated or idle aura required. School passive gameplay not yet implemented; no invented activation/aura."
+    }
+  ],
+  "discrepancies": [
+    {
+      "skill": "hoa_van_chuong",
+      "brief": "Single powerful palm burst",
+      "followed": "Implemented three rapid straight non-homing shots."
+    },
+    {
+      "skill": "cuong_long_loan_vu",
+      "brief": "Rapid multiple palm strikes / multi-hit",
+      "followed": "Implemented one exploding projectile plus area burn; dragon curls decorate the one projectile/explosion."
+    },
+    {
+      "skill": "phi_long_tai_thien",
+      "brief": "Flying dragon attack",
+      "followed": "Spec frontal shockwave and knockback; hero stays grounded."
+    },
+    {
+      "skill": "khang_long_huu_hoi",
+      "brief": "Heavy damaging dragon palm",
+      "followed": "Spec self crit buff; dragon energy remains around the caster, no outgoing damage."
+    },
+    {
+      "skill": "hang_long_hoa_vu",
+      "brief": "Large expanding eruption / multiple dragons",
+      "followed": "Spec single forward-traveling wave; dragon motifs embedded in wave, no omnidirectional AoE."
+    },
+    {
+      "skill": "cam_long_cong",
+      "brief": "Target control",
+      "followed": "Spec multiple enemies in front, limited pull + silence + disarm, movement allowed, no stun or item drops."
+    },
+    {
+      "skill": "truy_phong_bong",
+      "brief": "Rapid staff attack",
+      "followed": "Spec directional dash + hit + stun."
+    }
+  ],
+  "missingReferences": [
+    "assets/references/vo_dang_art_direction_reference.png; inspected existing vo_dang_character_reference.png instead"
+  ],
+  "referenceStatusNote": "Expected user paths exist. Arena-creep concept folder's own README/manifest still say pending approval; treated as style context without changing its approval status.",
+  "qualityLimits": [
+    "All sheets are flattened concept illustrations, not pixel-perfect runtime sprites.",
+    "Game-scale vignettes are generated approximations, not measured 1x gameplay or screenshots.",
+    "Sequential cells may overlap stages spatially (not animation frame sequences).",
+    "Pose continuity, all four facings, exact palette, alpha, pivot and animation quality remain Phase B work.",
+    "Six-player simultaneous effects and light/dark terrain tests have not run.",
+    "Phá Giáp strike pose needs reconciliation; large fire impacts require density review."
+  ],
+  "checks": {
+    "allTenConceptsGenerated": true,
+    "allFiveStagesPresent": true,
+    "visuallyInspected": true,
+    "pngIntegrity": "passed_all_five_pngs",
+    "approvedBaselineHashes": "passed_all_eight_locked_files",
+    "runtimeIntegrated": false,
+    "phaserPlaybackTested": false,
+    "mechanicsChanged": false,
+    "coverage": "passed_ten_unique_ids_and_five_stages_each"
+  },
+  "approvalCheckpoint": "Concept approval received. Phase B may proceed in batches of 2-3. No production gameplay integration.",
+  "approval": {
+    "approvedOn": "2026-10-30",
+    "authority": "User: approved, please proceed with next step",
+    "scope": "All ten Phase A concepts; authorizes Phase B production, not production gameplay integration or runtime art approval."
+  },
+  "productionProgressManifest": "assets/exports/skills/cai-bang/progress_manifest_v1.json"
+}

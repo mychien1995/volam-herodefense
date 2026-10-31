@@ -12,6 +12,7 @@ import { createGameServer } from '../apps/game-server/src/app.config.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 
 let server: ColyseusTestServer;
+const previousLegacy = process.env['VOLAM_DEV_LEGACY_SKILLS'];
 const client = new Client<ReturnType<typeof createGameServer>>(
   'http://localhost:2568',
 );
@@ -19,13 +20,22 @@ const options = (nickname: string): JoinOptions => ({
   nickname,
   protocolVersion: PROTOCOL_VERSION,
 });
+const previousPracticeCreeps = process.env['VOLAM_DEV_PRACTICE_CREEPS'];
 beforeAll(async () => {
+  process.env['VOLAM_DEV_PRACTICE_CREEPS'] = '1';
+  process.env['VOLAM_DEV_LEGACY_SKILLS'] = '1';
   server = await boot(createGameServer(), 2568);
 });
 afterEach(async () => {
   await server.cleanup();
 });
 afterAll(async () => {
+  if (previousPracticeCreeps === undefined)
+    delete process.env['VOLAM_DEV_PRACTICE_CREEPS'];
+  else process.env['VOLAM_DEV_PRACTICE_CREEPS'] = previousPracticeCreeps;
+  if (previousLegacy === undefined)
+    delete process.env['VOLAM_DEV_LEGACY_SKILLS'];
+  else process.env['VOLAM_DEV_LEGACY_SKILLS'] = previousLegacy;
   await server.shutdown();
 });
 
@@ -34,7 +44,7 @@ describe('real Colyseus room + SDK clients', () => {
     const response = await server.http.get('/health');
     expect(response.data).toEqual({
       status: 'ok',
-      milestone: 'M2B',
+      milestone: 'M3B',
       protocolVersion: PROTOCOL_VERSION,
     });
   });
@@ -87,7 +97,7 @@ describe('real Colyseus room + SDK clients', () => {
   it('isolates room state with duplicate display nicknames', async () => {
     const a = await client.create(MATCH_ROOM, options('Hero'));
     const b = await client.create(MATCH_ROOM, options('Hero'));
-    await b.waitForInitialState();
+    await expect.poll(() => b.state?.players?.has(b.sessionId)).toBe(true);
     const ack = a.waitForMessage('connection-ack');
     a.send('connection-check', {
       protocolVersion: PROTOCOL_VERSION,
@@ -230,8 +240,10 @@ describe('M1 authoritative room gameplay', () => {
   it('rejects empty slots and forged movement/damage messages without affecting another room', async () => {
     const a = await client.create(MATCH_ROOM, options('First'));
     const other = await client.create(MATCH_ROOM, options('Other room'));
-    await a.waitForInitialState();
-    await other.waitForInitialState();
+    await expect.poll(() => a.state?.players?.has(a.sessionId)).toBe(true);
+    await expect
+      .poll(() => other.state?.players?.has(other.sessionId))
+      .toBe(true);
     await begin(a);
     await begin(other);
     const rejection = a.waitForMessage('command-rejected');

@@ -20,41 +20,102 @@ export class ArtPreviewScene extends Phaser.Scene {
   create(): void {
     registerArt(this);
     this.cameras.main.setBackgroundColor('#4b6453');
-    if (new URLSearchParams(location.search).has('caiBangReview')) {
+    const thienSonReview = new URLSearchParams(location.search).has(
+      'thienSonReview',
+    );
+    const voDangReview = new URLSearchParams(location.search).has(
+      'voDangReview',
+    );
+    const thieuLamReview = new URLSearchParams(location.search).has(
+      'thieuLamReview',
+    );
+    if (
+      thienSonReview ||
+      voDangReview ||
+      thieuLamReview ||
+      new URLSearchParams(location.search).has('caiBangReview')
+    ) {
       this.expected = 24;
-      this.add.text(12, 12, 'CAI BANG · BONG SWEEP + CHUONG', {
-        fontFamily: 'monospace',
-        fontSize: '12px',
-        color: '#f9e5b6',
-      });
+      this.add.text(
+        12,
+        12,
+        thieuLamReview
+          ? 'THIEU LAM · QUYEN + BROAD CURVED DAO'
+          : voDangReview
+            ? 'VO DANG · QUYEN + STRAIGHT SWORD'
+            : thienSonReview
+              ? 'THIEN SON · FAN + CURVED DAO'
+              : 'CAI BANG · BONG SWEEP + CHUONG',
+        {
+          fontFamily: 'monospace',
+          fontSize: '12px',
+          color: '#f9e5b6',
+        },
+      );
       this.add.text(
         12,
         34,
-        'Approved initial baseline · same hero · normal-attack styles',
+        thieuLamReview
+          ? 'APPROVED v01 · four-facing idle/walk/Quyen/Dao'
+          : voDangReview
+            ? 'APPROVED v01 · four-facing idle/walk/Quyen/Kiem'
+            : thienSonReview
+              ? 'APPROVED v01 · four-facing idle/walk/fan/dao'
+              : 'Approved initial baseline · same hero · normal-attack styles',
         {
           fontFamily: 'monospace',
           fontSize: '9px',
           color: '#f9e5b6',
         },
       );
-      this.add.text(120, 57, 'BONG', {
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        color: '#f9e5b6',
-      });
-      this.add.text(332, 57, 'CHUONG', {
-        fontFamily: 'monospace',
-        fontSize: '11px',
-        color: '#f9e5b6',
-      });
-      for (const [style, sheet] of [
-        'hero_cai_bang',
-        'hero_cai_bang_chuong',
-      ].entries()) {
+      this.add.text(
+        120,
+        57,
+        thieuLamReview || voDangReview
+          ? 'QUYEN'
+          : thienSonReview
+            ? 'FAN'
+            : 'BONG',
+        {
+          fontFamily: 'monospace',
+          fontSize: '11px',
+          color: '#f9e5b6',
+        },
+      );
+      this.add.text(
+        thieuLamReview ? 420 : 332,
+        57,
+        voDangReview
+          ? 'KIEM'
+          : thieuLamReview || thienSonReview
+            ? 'DAO'
+            : 'CHUONG',
+        {
+          fontFamily: 'monospace',
+          fontSize: '11px',
+          color: '#f9e5b6',
+        },
+      );
+      for (const [style, sheet] of (thieuLamReview
+        ? ['hero_thieu_lam', 'hero_thieu_lam_dao']
+        : voDangReview
+          ? ['hero_vo_dang', 'hero_vo_dang_kiem']
+          : thienSonReview
+            ? ['hero_thien_son', 'hero_thien_son_dao']
+            : ['hero_cai_bang', 'hero_cai_bang_chuong']
+      ).entries()) {
         ['idle', 'walk', 'basic_attack'].forEach((pose, column) => {
-          const x = (style === 0 ? 80 : 300) + column * 70;
+          const x = thieuLamReview
+            ? (style === 0 ? 80 : 360) + column * 90
+            : (style === 0 ? 80 : 300) + column * 70;
           const label =
-            pose === 'basic_attack' ? (style === 0 ? 'Sweep' : 'Palm') : pose;
+            pose === 'basic_attack'
+              ? thienSonReview || voDangReview || thieuLamReview
+                ? 'attack'
+                : style === 0
+                  ? 'Sweep'
+                  : 'Palm'
+              : pose;
           this.add.text(x - 20, 83, label, {
             fontFamily: 'monospace',
             fontSize: '11px',
@@ -93,7 +154,9 @@ export class ArtPreviewScene extends Phaser.Scene {
     );
     // Keep the original actor/creep diagnostic layout; both hero styles have the dedicated review above.
     actorSheets
-      .filter((sheet) => sheet.id !== 'hero_cai_bang_chuong')
+      .filter(
+        (sheet) => sheet.id === 'hero_cai_bang' || sheet.id === 'creep_outlaw',
+      )
       .forEach((sheet, family) => {
         const offset = 28 + family * 240;
         this.add.text(10, offset, sheet.id, {
@@ -126,6 +189,12 @@ export class ArtPreviewScene extends Phaser.Scene {
         animation: sprite.anims.currentAnim?.key,
         frame: sprite.frame.name,
         total: sprite.anims.currentAnim?.frames.length,
+        frameRate: sprite.anims.currentAnim?.frameRate,
+        playing: sprite.anims.isPlaying,
+        x: sprite.x,
+        y: sprite.y,
+        origin: [sprite.originX, sprite.originY],
+        scale: [sprite.scaleX, sprite.scaleY],
       })),
     };
   }

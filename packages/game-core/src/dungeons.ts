@@ -1,4 +1,7 @@
 import { distance } from './geometry.js';
+import { cancelOwnedEffects } from './status.js';
+import { changeBuild, refreshCharacter } from './progression.js';
+import type { BuildChange } from './progression-types.js';
 import { InvasionDirector, type InvasionDefinition } from './invasions.js';
 import {
   addHero,
@@ -173,10 +176,35 @@ export class DungeonMatch {
     if (this.invasion?.defeated) return 'The match has ended.';
     const zone = this.zoneOf(id);
     if (!zone) return 'Player is not in an active zone.';
-    if (command.kind === 'select-basic' && zone.access !== 'arena')
+    if (
+      this.hero(id)?.progression &&
+      ['select-basic', 'dev-loadout'].includes(command.kind)
+    )
+      return 'Dùng yêu cầu võ học để đổi kỹ năng.';
+    if (
+      (command.kind === 'select-basic' || command.kind === 'dev-loadout') &&
+      zone.access !== 'arena'
+    )
       return 'Change your normal attack in the arena only.';
     submitInput(zone.world, id, sequence, command);
     return undefined;
+  }
+  modifyBuild(
+    id: string,
+    sequence: number,
+    revision: number,
+    change: BuildChange,
+  ): string | undefined {
+    const hero = this.hero(id),
+      zone = this.zoneOf(id);
+    if (!hero || !zone) return 'Chưa tham gia trận đấu.';
+    if (!Number.isSafeInteger(sequence) || sequence <= hero.lastSequence)
+      return 'Yêu cầu đã được xử lý.';
+    hero.lastSequence = sequence;
+    if (this.invasion?.defeated) return 'Trận đấu đã kết thúc.';
+    if (zone.id !== 'arena' || zone.access !== 'arena')
+      return 'Chỉ được đổi võ học tại đấu trường. Trong phó bản hoặc PvP chỉ có thể xem.';
+    return changeBuild(zone.world, hero, zone.config, revision, change);
   }
   step(): void {
     if (this.invasion?.defeated) {
@@ -202,7 +230,14 @@ export class DungeonMatch {
         this.events.push({ zoneId: zone.id, event });
       if (zone.access === 'arena') {
         this.invasion?.afterStep(zone.world, this.tick);
-        if (this.invasion?.defeated) return;
+        if (this.invasion?.defeated) {
+          for (const active of this.zones.values()) {
+            for (const id of active.world.heroes.keys())
+              cancelOwnedEffects(active.world, id);
+            active.world.pending = [];
+          }
+          return;
+        }
       }
       if (
         zone.access !== 'arena' &&
@@ -271,6 +306,11 @@ export class DungeonMatch {
       destination.world.tick + Math.max(0, until - source.world.tick);
     hero.cooldown = convert(hero.cooldown);
     hero.skillCooldowns = hero.skillCooldowns.map(convert);
+    if (hero.abilityCooldowns)
+      for (const key of Object.keys(hero.abilityCooldowns))
+        hero.abilityCooldowns[key] = convert(hero.abilityCooldowns[key]!);
+    hero.statuses = [];
+    refreshCharacter(hero, destination.config);
     removeHero(source.world, id); // cancels queued inputs, future shots and owned missiles
     hero.x = position.x;
     hero.y = position.y;

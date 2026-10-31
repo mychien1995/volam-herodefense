@@ -4,7 +4,8 @@ import { createGameServer } from '../../apps/game-server/dist/app.config.js';
 
 /** Isolated services; no edits to user servers or compiled client endpoints. */
 export default async function setup() {
-  const server = createGameServer();
+  process.env['VOLAM_DEV_PRACTICE_CREEPS'] = '1'; // Explicit historical combat fixture.
+const server = createGameServer();
   await server.listen(2587);
   try {
     const client = await createServer({

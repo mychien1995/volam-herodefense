@@ -1,5 +1,7 @@
 # Visual Production Standard and Art Approval Gate — v1.6
 
+**Confirmed evidence policy (2026-10-30):** Follow `AGENTS.md` visual verification and recording policy. Routine development, asset generation and tests use lightweight PNG screenshots and live Phaser assertions/frame observations. Do not create video/animated-image evidence or run recording, encoding or conversion tools. Recordings require an explicit user request for the current task; preserve all existing recordings. Animation, transition, positioning and gameplay validation remain required.
+
 ## 0. Status and purpose
 
 **Confirmed art-direction requirement, not a provisional suggestion.** The game must eventually match the *visual level and composition language* of the director's provided references (`assets/references/`). An attractive rendered reference is not equivalent to runtime art. A compiled or playable Phaser scene with primitive/generated placeholders is **not** an art milestone and cannot be described as visually complete.
@@ -42,7 +44,7 @@ The latest screenshot `assets/references/current_game_2026_10_29_placeholder_ant
 
 ### Phase C: import and visual approval
 - Integrate the above assets in the real Phaser client and run the existing multiplayer + input code without altering authoritative game rules.
-- Provide PNG sprite atlas + metadata, individual asset previews, 1x game-resolution screenshot, target-display screenshot, animation test capture and a simple `assets/ASSET_MANIFEST.md` (file, type, source/license, dimensions, animation tags, status).
+- Provide PNG sprite atlas + metadata, individual asset previews, 1x game-resolution screenshot, target-display screenshot, animation-frame/timing observation report from live Phaser checks and a simple `assets/ASSET_MANIFEST.md` (file, type, source/license, dimensions, animation tags, status).
 - Compare actual screenshots side by side against the **positive art references** and the **latest anti-reference screenshot** in a short review document. Explicitly describe remaining mismatches.
 - Director must approve visual direction (`APPROVED`) before Codex propagates that character/tileset/UI style across the other schools and maps. If no artist/tool can produce sufficient assets, pause art production and report required inputs instead of filling the map with procedural shapes.
 

@@ -1,0 +1,382 @@
+{
+  "phase": 1,
+  "status": "PASS",
+  "scope": "concept PNGs, manifests, static icon-size review and preservation only; no production or gameplay verification",
+  "commandsObtained": [
+    {
+      "command": "python -X utf8 assets/concepts/skills/thien-son/prepare_concept_review_v01.py",
+      "result": "PASS: 13 entries, 12 generated boards including preserved extra-icon v01 and corrected v02, 13 crop recipes"
+    },
+    {
+      "command": "\"C:/Program Files/Aseprite/Aseprite.exe\" -b --script-param root=D:/Projects/volam-hero-defense --script-param recipe=D:/Projects/volam-hero-defense/assets/concepts/skills/thien-son/concept_layout_v01.json --script assets/concepts/skills/thien-son/assemble_concepts_v01.lua",
+      "result": "Exit 0; all 13 concept-icon PNGs and key-pose overview exist"
+    },
+    {
+      "command": "node assets/concepts/skills/thien-son/capture_icon_review_v01.mjs",
+      "result": "PASS: 13 cards, 52 images decoded, 39 reductions exactly 64/48/32 CSS px, no page errors, one PNG screenshot, video/trace disabled"
+    },
+    {
+      "command": "python -X utf8 assets/concepts/skills/thien-son/validate_concepts_v01.py",
+      "result": "PASS if this report was written"
+    }
+  ],
+  "approvedLockFiles": {
+    "checked": 186,
+    "changed": 0,
+    "result": "PASS"
+  },
+  "preExistingSkillFiles": {
+    "checked": 601,
+    "changed": 0,
+    "result": "PASS"
+  },
+  "productionFolders": {
+    "created": false,
+    "result": "PASS"
+  },
+  "pngsDecoded": 27,
+  "pngs": [
+    {
+      "file": "bach_liet_thien_kich-concept-v01.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "ece04032a29fba101ca5f02b91ca82c3cbabe71da0acc7e8f6673c4665a608d0"
+    },
+    {
+      "file": "bach_liet_thien_kich-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "b0cc637d7a9df80569e3e773635a3e95a1bdc7d1e256cd228ee2e5d178d9eced"
+    },
+    {
+      "file": "bach_phien_phong_bao-concept-v01.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "124332a4a1904b6a16d32252b564f350182d400e6247a76bd16f289d2dfd0b68"
+    },
+    {
+      "file": "bach_phien_phong_bao-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "34c3deb8c5edd9dce24a82c4319ecfe5db83ed4e6a24fbbde944bc560fdc06b9"
+    },
+    {
+      "file": "bac_minh_than_cong-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "6555536139543f98e4fce6a5845ee1a4ec541f8b0baaa4cac99f797a13cb2fdd"
+    },
+    {
+      "file": "chiet_mai_thu-concept-v01.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "258ab9e0b489ecbad62c6e691ab69f2dc49d50f9c5c07e3c5cd305c777836a7d"
+    },
+    {
+      "file": "chiet_mai_thu-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "5acee49fc4544cd50f5f4ff48797ac1f8c82585adcef90de95f732e146c00058"
+    },
+    {
+      "file": "lien_hoa_phien-concept-v01.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "e845e8ea0c56e5da1188f79a5cef290e5fc2c5910705428502054dc99b0ef48e"
+    },
+    {
+      "file": "lien_hoa_phien-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "ddc3580944c3e6f1f33423266782f4fd9192c5e779485d0642c126e0c05265c7"
+    },
+    {
+      "file": "liet_phong_dao-concept-v01.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "017ba045b68eb97bfad82b3541fb34f60827f727ab7cc7083467ccdbd986b4f6"
+    },
+    {
+      "file": "liet_phong_dao-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "ab953f253d8cbbc85c4d6dbdfbb4396f1f74156b605beadfa48fa338cbcb65fb"
+    },
+    {
+      "file": "luc_duong_chuong-concept-v01.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "2fc3b33b3a190663793f148bd705f5d1c88cb40ba06ddf0d3c5079f504e1efdd"
+    },
+    {
+      "file": "luc_duong_chuong-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "ab375c0ccae1419bf378efed0646abfa9d8bcf28df0cc3dc8f5a73e7a81970bf"
+    },
+    {
+      "file": "luu_phong_bo-concept-v01.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "b7f8c30c713ded8288420405312657d2b032f98368d201836109f5d930f2fe90"
+    },
+    {
+      "file": "luu_phong_bo-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "5a871bdf7434a537b919234d82b8b64c0db5a5dee003b65d8e6eff1b457f99c0"
+    },
+    {
+      "file": "phi_anh_tram-concept-v01.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "7b461eb819871dc16b57e3c843716053e95267da6b6e8f4b98858f54c51c5cda"
+    },
+    {
+      "file": "phi_anh_tram-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "a44773118b00098c1a0f6eef6b7110216716e24f04511de2b99569f06287ae44"
+    },
+    {
+      "file": "phong_anh_hoan_vi-concept-v01.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "54cd0980141ad078e829f050436cfc8d78376068fea5181256de38f9255bc992"
+    },
+    {
+      "file": "phong_anh_hoan_vi-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "c6d7844b350849f1fd69760325ad926b939f2ae8d7ed27e610a489c43dc3af6e"
+    },
+    {
+      "file": "thien-son-basic-passive-icons-concept-v01.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "f67a71e8e61dcb0250deb4afd9568d439192788162b34f9c1efc86384ef9fe5b"
+    },
+    {
+      "file": "thien-son-basic-passive-icons-concept-v02.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "fb49d8d3b65451b5f4ccc82e341bf8343bd8a977ea1c02cbf3454379427ca089"
+    },
+    {
+      "file": "thien-son-icon-overview-v01.png",
+      "size": [
+        1440,
+        1713
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "0cac88f44945978f95c26f31075318e76b9885afeed2de77651277f70af2c64e"
+    },
+    {
+      "file": "thien-son-skill-overview-v01.png",
+      "size": [
+        1560,
+        2608
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "2b760f1b42cd93054ae23353dd2fc109366922e6923fc9e6fc6ffa5ba1055e69"
+    },
+    {
+      "file": "thien_son_dao-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "048082d3b8ff63495a0c5243d22f8b6a85c24f764f8ccd40d8571fe9bc6a322e"
+    },
+    {
+      "file": "thien_son_phien-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "fa64cdb0174f4e1f0aad0896e8206eff0046fc3dfa219ac844e7f96412dc7563"
+    },
+    {
+      "file": "truy_hon_dao-concept-v01.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "7ab6e1324efcfd1bdfebc002d78848e467537cc22c51527892ef3f13b4adbe8c"
+    },
+    {
+      "file": "truy_hon_dao-icon-concept-v01.png",
+      "size": [
+        256,
+        256
+      ],
+      "alpha": [
+        255,
+        255
+      ],
+      "sha256": "18a3aa0dd5f1455b331b4fa9cdfcd0c3aa6ac9395ff7bd369b2732657f587cf3"
+    }
+  ],
+  "uniqueIconConcepts": 13,
+  "activeConcepts": 10,
+  "prompts": 12,
+  "individualApprovals": "all pending; none inherited from approved character",
+  "visualObservations": [
+    "All ten saved key-pose boards visually inspected: approved ivory/jade male topknot identity, readable fan/curved dao, wind-only arcs and temporal trails.",
+    "Movement dash, offensive dash/slash and evasive-step/counter use different action structures; counter and expiry are separate branches.",
+    "Close spin uses a low ring; fan ultimate uses an open larger helix; two-hit, heavy single strike and close flurry are separate dao studies.",
+    "All 13 icon crops and their screenshot observed at 64/48/32 CSS px. Main silhouettes remain recognizable; embroidery/small accents diminish at 32px.",
+    "Basic/passive v01 preserved; selected v02 removes invented blade inlay. Passive has icon only, no persistent aura.",
+    "These are opaque concept PNGs. Transparency, cels, direction consistency, pivots, VFX cleanup/timing, exact HUD fit and normal gameplay zoom remain production checks."
+  ],
+  "unverified": [
+    "No production PNG frames, atlases, final icons or editable animation sources created.",
+    "No Phaser skill preview or combat behavior tested in Phase1.",
+    "No typecheck/unit/build/game browser suite run: runtime and gameplay code were not changed."
+  ],
+  "recordingsGenerated": false
+}

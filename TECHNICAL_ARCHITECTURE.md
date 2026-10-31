@@ -1,5 +1,22 @@
 # Technical Architecture Decision Record v1.0
 
+## M3C3 fourth-school integration — 2026-10-31
+
+Thiếu Lâm composes shared arc,multi-hit,buff,projectile and new ally-support effects via validated `game-data/thieu-lam.ts`. Deterministic `combos.ts` owns per-source/target/chain state; action-local caches prevent repeated finisher consumption. Protocol9 adds only a view-filtered player combo projection; room authority/zone isolation and M3B stay intact. Prepared skill art now merges all four retained manifests. Semantic gold/support/empowered phases use the existing PNG/atlas renderer; supplied source bytes are retained. See `docs/M3C3_IMPLEMENTATION.md` and `docs/M3C3_SKILL_ASSET_MAP.md`.
+
+
+## M3C1 second-school integration — 2026-10-31
+
+Thiên Sơn is configured by `game-data/thien-son.ts` and initialized through M3B's existing profile/rank/point path. `game-core` adds optional directional multi-hit bounds, non-damaging dashes/counter windows, speed buffs, fractional penetration and conditional slow damage; it retains deterministic ticks and no rendering/network imports. MatchRoom synchronizes the existing status/build/position/event fields and validates school ownership. No separate room/progression implementation is added.
+
+Asset preparation validates and merges retained Cái Bang/Thiên Sơn manifests into the shared animation registry. Semantic phases, scale and authored direction offsets stay in the existing raster presentation contract. Persistent wind effects are keyed by owner/status/ability and follow that owner's rendered authoritative position; multi-hit pulses do not restart character casts. Skill menus/icons filter the current school and remain viewport overlays. See `docs/M3C1_IMPLEMENTATION.md` and `docs/M3C1_SKILL_ASSET_MAP.md` for mechanics, provenance, test scope and limitations.
+
+## Thiếu Lâm character presentation prototype — 2026-10-31
+
+`art.ts` registers `hero_thieu_lam` and `hero_thieu_lam_dao` through the existing PNG/hash-JSON loader, animation registry and manifest foot origins. Server-selected Thiếu Lâm uses the unarmed visual; `?debug=1&thieuLamWeapon=dao` changes local presentation only, without a network/loadout command. The HUD reuses the square unarmed idle export for both variants. `?artPreview=1&thieuLamReview=1` uses the existing in-viewport gallery at640×520 logical resolution; gameplay viewport/camera dimensions are unchanged. The requested authored idle/walk/basic-attack frames were explicitly approved on2026-10-31 and are protected by assets/approved_thieu_lam.lock.json.
+
+Thiếu Lâm reuses the existing client-only `CreepPlayback` one-shot helper to complete an animation across a shorter/late server pose; server action ticks, movement, collision, hit/damage, resources and cooldowns remain untouched. The existing debug inspection now exposes observed monk animation frames from actual Phaser animation start/update events, alongside sampled screen frames. Dedicated art tests own ports2603/5193 and PNG/JSON evidence paths; their legacy Cái Bang skill regression uses the existing test-server-only legacy-loadout switch. Production art/provenance: `assets/source/characters/thieu_lam_v01/production_manifest_v01.json`; actual results: `assets/reviews/thieu_lam_v01/README.md`. No Thiếu Lâm combat mechanics, active-skill art, VFX or new gameplay rules are implemented.
+
 ## Current dungeon entry correction — 2026-10-30
 
 Dungeon entry uses the existing Phó Bản menu anywhere in the arena. The Guide sprite/label/map marker and proximity config are removed. `DungeonMatch.canEnterDungeon` validates alive arena membership; MatchRoom retains phase/replay/access validation. A `dungeon_return` spawn marker preserves the existing (960,576) exit/respawn destination independently of any NPC. Physical exit range, dungeon isolation, rewards and empty pause/resume remain unchanged. This supersedes Guide requirements in earlier implementation notes below.
@@ -178,3 +195,27 @@ Statue HP is an authoritative Actor and never regenerates. A single zero-HP tran
 ## Join admission correction — 2026-10-30
 
 MatchRoom no longer explicitly locks at host Start; Colyseus automatic six-seat locking is retained, and DEFEAT explicitly locks. The global phase still gates the initial all-confirmed barrier. In IN_GAME, per-player confirmed state gates selection, hero creation and gameplay commands: unconfirmed late clients can only choose/confirm school, and confirming adds their hero without rebuilding any existing simulation state. PreGame derives its local selection screen from the entrant confirmation flag, and redraws only when phase/roster/selection changes, preserving control focus through 30 Hz world ticks. Main input guards and actor rendering also require confirmation. No wire-schema change or new client authority is introduced.
+
+## M3A ability execution and presentation — 2026-10-30
+
+Protocol 6 adds four equipped skill IDs and cooldowns, cast identity, zone-filtered status state, and authoritative effect/pulse events with facing and stage. `game-core/combat.ts` owns the shared hit/crit/death/reward path; `skills.ts` executes data-defined projectile, arc, buff, swept dash and timed multi-hit effects; `status.ts` owns status refresh, expiry and collision-respecting displacement. Direct offensive statistics snapshot when casting. Impacts retain authoritative projectile heading. No renderer/network imports enter the core.
+
+Per-ability cooldown expiry prevents swapping slots to bypass a cooldown; existing per-slot display state remains available. Travel converts expiry into the destination's local tick domain. Death, travel and disconnection cancel owned actions/projectiles and self buffs. Already applied enemy burns/debuffs expire locally and pause with empty dungeons. Successful hostile control participates in the existing fixed assist reward pool. Cầm Long applies pull, silence and disarm without stun or movement restriction.
+
+`game-data/cai-bang.ts` contains the complete rank-1 test catalogue and provisional passive tuning. `skill-art.ts` validates exported animation metadata and binds canonical IDs to cast, travel, release, impact, finisher and persistent-status stages. `game-client/skill-vfx.ts` is a reusable renderer using authored atlas frames, pivots, direction, integer scale and offsets; state/event cleanup scopes every effect to its live zone. VFX timing never schedules damage. The HUD renders authoritative equipment/resources/cooldowns without changing placement.
+
+`VOLAM_DEV_SKILLS=1` is honored only outside production. Confirmed Cái Bang players can use an arena-only four-slot test adapter; unknown/duplicate/reserved IDs are rejected. The optional `?skillPreview=1` panel sends the same real equip/cast commands and cannot refill resources or bypass cooldowns. Full progression, rank gates and respec remain M3B. See `docs/M3A_IMPLEMENTATION.md` for verification and asset provenance. Official APIs checked against installed Phaser 4.2.1 and Colyseus 0.18: https://docs.phaser.io/phaser/concepts/animations and https://docs.colyseus.io/state/schema.
+
+## M3B build/stat framework — 2026-10-31
+
+Protocol7 adds a nested per-player BuildState with revision, four-way point accounting, rank map, effective stats and source breakdown, keeping each Schema below63 fields. Strict `build-action` requests carry desired IDs/operation, shared monotonic sequence and expected revision. MatchRoom validates phase/confirmation; DungeonMatch validates actual zone/life/defeat; synchronous core validation checks ownership, gates, duplicates, ultimate count and budget before a single commit. Level gains invalidate stale revisions. Spatial/effect StateViews and zone event filtering are unchanged.
+
+`progression-types.ts` defines reusable school/rank/stat contracts; `progression.ts` derives all sources, handles EXP, point accounting and build commits. `progression-data.ts` validates all explicit rank variants and profiles. `combat.ts` retains one shared reward path and calls the EXP calculator; `skills.ts` resolves the equipped learned rank before existing handlers. Hero defense, regeneration, movement, A cadence, crit and active cooldown calculation consume derived stats. Runtime visual keys remain canonical M3A IDs.
+
+Normal Cái Bang heroes initialize with one point and empty actives. Unsupported schools receive no foreign Cái Bang active defaults; their existing A remains a prototype pending M3C. Historical M1/M3A fixtures explicitly enable non-production `VOLAM_DEV_LEGACY_SKILLS=1`; the old arbitrary-rank1 adapter additionally requires `VOLAM_DEV_SKILLS=1`. Production ignores both. No equipment API, other-school kit, XP client input or persisted build is added.
+
+The existing modal hosts `SkillMenu`, a stable-DOM component that submits requested modifications and renders synchronized ranks/stats/eligibility. A local draft is not authoritative. World size, compact HUD placement, focus/input capture, critical warnings and camera remain intact. The optional legacy art preview remains separate from normal progression. See `docs/M3B_IMPLEMENTATION.md` for formulas, tests, evidence and limits.
+
+## M3C2 implementation extension
+
+`World.areas` and shared shield/counter/refund/status/proc handlers remain engine/network independent. Protocol8 adds an `AreaState` map through existing zone-scoped StateViews; the client only renders server position,radius,lifetime and combat events. No new client authority,room capacity change or parallel progression UI is introduced. `vo-dang.ts` contains validated school/rank tuning; `docs/M3C2_IMPLEMENTATION.md` documents formulas/lifecycle/testing.

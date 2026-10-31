@@ -1,0 +1,113 @@
+{
+  "milestone": "M3B",
+  "date": "2026-10-31",
+  "status": "Implemented and verified; balance proposals and visual review remain separate",
+  "finalCommand": "pnpm check:final --config playwright.progression.config.ts --grep-invert 'two clients agree on combat'",
+  "result": "PASS",
+  "totalSeconds": 362.02,
+  "checks": {
+    "projectCompilation": "PASS",
+    "testToolTypecheck": "PASS",
+    "workflowTests": {
+      "passed": 2
+    },
+    "unitNetworkTests": {
+      "files": 17,
+      "passed": 174,
+      "vitestSeconds": 26.74
+    },
+    "productionBuild": "PASS",
+    "assetValidators": {
+      "passed": 6,
+      "mainRuntimePngEntries": 23,
+      "mainRuntimeFrameReferences": 680,
+      "includesConcurrentOtherArt": true
+    },
+    "chromiumBrowserTests": {
+      "passed": 16,
+      "seconds": 324.81,
+      "newM3BCases": 4,
+      "existingRegressionCases": 12
+    }
+  },
+  "additionalCommands": [
+    {
+      "command": "pnpm check:browser --config playwright.progression.config.ts tests/e2e/progression.spec.ts --grep 'stays inside compact'",
+      "result": "PASS",
+      "cases": 1,
+      "playwrightSeconds": 14.3,
+      "helperSeconds": 23.02,
+      "detail": "Added real visible hotbar rank1 and available-point0 assertions; screenshot captured"
+    },
+    {
+      "command": "pnpm --filter @volam/game-server exec tsx ../../tools/m3b-balance.ts",
+      "result": "PASS",
+      "legalEightSecondProbes": 48,
+      "seeds": [
+        42,
+        1337,
+        9001
+      ],
+      "levels": [
+        1,
+        6,
+        15,
+        30
+      ],
+      "output": "artifacts/m3b-balance.json"
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit",
+      "result": "PASS",
+      "detail": "After correcting absolute probe artifact path"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS",
+      "detail": "Existing CRLF notices only"
+    }
+  ],
+  "browserFixture": {
+    "invasionIntervalSeconds": 30,
+    "statueHp": 100000,
+    "heroEnemyXpRankInjection": false,
+    "video": "off",
+    "trace": "off",
+    "productionInvasionSeconds": 180
+  },
+  "observations": [
+    "Independent earned EXP and builds, A reaches level4 and B level2 in separate private farming",
+    "Arena upgrade/reset then physical exit/re-entry retains progression",
+    "Two nearby players observe different learned M3A effects",
+    "Open menu captures keys while server warnings/clock continue",
+    "Modified build confirms actual invasion damage",
+    "Unsupported school cannot access Cái Bang active catalogue"
+  ],
+  "surplusFixtures": {
+    "fourNormals": {
+      "level": 30,
+      "earned": 30,
+      "allocated": 16,
+      "available": 0,
+      "surplus": 14
+    },
+    "threeNormalsUltimate": {
+      "level": 30,
+      "earned": 30,
+      "allocated": 15,
+      "available": 0,
+      "surplus": 15
+    }
+  },
+  "art": "Reused unchanged M3A skill PNGs, atlases, icons and existing frame art. No new artwork/Aseprite export produced for M3B.",
+  "limits": [
+    "Provisional gates, rank/growth/surplus numbers and clamps",
+    "Level30/surplus verified with core/SDK fixtures, not manual full-match level30 run",
+    "No live PvP or six-player performance/campaign balance measurement",
+    "Unsupported schools retain only their pre-existing A prototype; no new full kits",
+    "Legacy hurt/death and world/dungeon visual placeholders remain outside this milestone",
+    "Existing large-client-chunk build advisory",
+    "Director UI/art approval is separate from functional verification"
+  ],
+  "stopAfter": "M3B; M3C not started"
+}

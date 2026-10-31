@@ -1,0 +1,1395 @@
+{
+  "id": "creep_vengeful_spirit",
+  "nameVi": "Oán Linh",
+  "phase": "1F",
+  "category": "enemy",
+  "status": "prototype",
+  "reviewStatus": "STAGED_NOT_INTEGRATED",
+  "conceptApproval": "User: approved, please proceed (2026-10-30), after Phase 1E concept delivery",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+  "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+  "masterConcept": "assets/concepts/arena-creeps/waves-09-12/arena_creeps_09_12_concept_sheet.png",
+  "source": "sprites/creeps/arena/vengeful-spirit/source/creep_vengeful_spirit.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 112,
+  "frameHeight": 112,
+  "footPivot": [
+    0.5,
+    0.8035714285714286
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/idle_down_0.png",
+      "bounds": [
+        32,
+        35,
+        76,
+        86
+      ],
+      "sha256": "2bcd8cedc89a0ed61950f054daf491eb85500e117cb572626679682eea7c1e96",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "idle_down_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/idle_down_1.png",
+      "bounds": [
+        33,
+        35,
+        76,
+        86
+      ],
+      "sha256": "a3940723d9b5e750fb2a741c2207a724f2a6b6fd86e654b945f680bdb09c1c5c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "walk_down_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_down_0.png",
+      "bounds": [
+        29,
+        35,
+        74,
+        86
+      ],
+      "sha256": "4015c66a4c5fd6309a79a4c48cd8bcb1a98b079d9f1f67083f324d5e05957b4c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "walk_down_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_down_1.png",
+      "bounds": [
+        31,
+        34,
+        77,
+        86
+      ],
+      "sha256": "a668ca7a071ab4ccb070da5eefb420d8d853becc10f1567957365db73f94e640",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "walk_down_2",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_down_2.png",
+      "bounds": [
+        31,
+        35,
+        77,
+        86
+      ],
+      "sha256": "11724d6c7dab9583a22001300d63575cb6cc95f942d024828be7411c232ecee5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 4
+    },
+    {
+      "name": "walk_down_3",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_down_3.png",
+      "bounds": [
+        32,
+        35,
+        76,
+        86
+      ],
+      "sha256": "95e2e18ce0105d7ec7c13bc7326cf945d5380242b49d915925b3677831fc5633",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 5
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_down_0.png",
+      "bounds": [
+        32,
+        33,
+        78,
+        86
+      ],
+      "sha256": "672d4a5077640d6bf421478491db5222757d31d77c0ba6d899bd759e953dac37",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_down_1.png",
+      "bounds": [
+        30,
+        33,
+        79,
+        86
+      ],
+      "sha256": "275c375018d45e7cbf651451ce40c3f501ec65058bb5dab3aefbd902fe203cc9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_down_2.png",
+      "bounds": [
+        31,
+        33,
+        78,
+        86
+      ],
+      "sha256": "e27cdf4d8d381c4f3faa69d305923d59e29cb82c77fb87491470612ee1c2e811",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_down_3.png",
+      "bounds": [
+        31,
+        33,
+        78,
+        86
+      ],
+      "sha256": "8286c5ca02bbcf5cc1cc7413f8207aa7b16b4cf013ea4fd598ee1917ba9131f9",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/hurt_down_0.png",
+      "bounds": [
+        33,
+        33,
+        77,
+        86
+      ],
+      "sha256": "7d53c7376fdc82e0a3d4c501fa024a4fbd4cad8064b3bc6df8a6b3402891e8a7",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 0
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/hurt_down_1.png",
+      "bounds": [
+        32,
+        33,
+        76,
+        86
+      ],
+      "sha256": "14b1422e124b3a28e6742040c3bd1bb573f07ab8ec5ef2172f1f8a50df8ff116",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 1
+    },
+    {
+      "name": "death_down_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_down_0.png",
+      "bounds": [
+        32,
+        41,
+        77,
+        90
+      ],
+      "sha256": "79bfaf3df50560443ca52558ba9d499c15948fc3f3984c76e1e769a83b9cac80",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 2
+    },
+    {
+      "name": "death_down_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_down_1.png",
+      "bounds": [
+        33,
+        46,
+        78,
+        90
+      ],
+      "sha256": "308dc465c4f01af119889b271039d67811217e8b0d45d5aad4d1b2c6dd7359f4",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 3
+    },
+    {
+      "name": "death_down_2",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_down_2.png",
+      "bounds": [
+        33,
+        52,
+        79,
+        90
+      ],
+      "sha256": "523800436eff0f7f57ee64c22ff4a8e97aac1385451d3de19d883fc63cd14936",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 4
+    },
+    {
+      "name": "death_down_3",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_down_3.png",
+      "bounds": [
+        28,
+        63,
+        86,
+        90
+      ],
+      "sha256": "ca78db18a20693b49cdc5f60577c52cf7b4b02b8a5973c1b0672cde37c7b4b4e",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 5
+    },
+    {
+      "name": "idle_left_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/idle_left_0.png",
+      "bounds": [
+        36,
+        34,
+        76,
+        86
+      ],
+      "sha256": "065d179b81026bcae479a1200c72e009876388d3e58ce09968ecd151c7ff2bf5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "idle_left_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/idle_left_1.png",
+      "bounds": [
+        36,
+        34,
+        76,
+        86
+      ],
+      "sha256": "a798db6bc80d3c39c334b477cfff49c34314d0b3b37afe68c9be20ea29a8d3ad",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "walk_left_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_left_0.png",
+      "bounds": [
+        29,
+        34,
+        71,
+        86
+      ],
+      "sha256": "47efdcd77db27bac9f286544726979ad5364f7d3eaa90c9a06dc9f00d9b1e20c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 12
+    },
+    {
+      "name": "walk_left_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_left_1.png",
+      "bounds": [
+        32,
+        35,
+        73,
+        86
+      ],
+      "sha256": "fd7e9d99f944829d7ee09bd45bd43cc799620f3574096f57a7578b671aa5e39a",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 13
+    },
+    {
+      "name": "walk_left_2",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_left_2.png",
+      "bounds": [
+        29,
+        35,
+        75,
+        86
+      ],
+      "sha256": "c5668eae38722e42b3b79f6595222a4a6d039aa953471e2a0ee5f43d5b2a13a3",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 14
+    },
+    {
+      "name": "walk_left_3",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_left_3.png",
+      "bounds": [
+        29,
+        34,
+        70,
+        86
+      ],
+      "sha256": "aedc63703a10815eaf8b4b8f261ac78e425bdf2936ab021f265b8a48118e1469",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 15
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_left_0.png",
+      "bounds": [
+        32,
+        34,
+        79,
+        86
+      ],
+      "sha256": "07aa15fbc477bff57b54250af95e604837883e23da1bcf3805ef3b54fae63fb5",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "selectedComponent": 4
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_left_1.png",
+      "bounds": [
+        34,
+        35,
+        77,
+        86
+      ],
+      "sha256": "e48f7586f9090809f54aff58b3e77aac52ec7cfc55cdadfa88a5b4d95f66cd5b",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "selectedComponent": 5
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_left_2.png",
+      "bounds": [
+        23,
+        34,
+        78,
+        86
+      ],
+      "sha256": "0de03a844a55456184c2abe905afcdcc5f129ac3f1077b11e68c8ab5d94f0ea0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "selectedComponent": 6
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_left_3.png",
+      "bounds": [
+        33,
+        34,
+        80,
+        86
+      ],
+      "sha256": "a0e7ac65e625e6bc29ce4b1d1577982406f51ad30204b66c996bcca7fa666a61",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "selectedComponent": 7
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/hurt_left_0.png",
+      "bounds": [
+        29,
+        35,
+        78,
+        86
+      ],
+      "sha256": "d30eec988f463c885467b1e3296b908f0ecdb9731fc359bf987f475009d19d85",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 6
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/hurt_left_1.png",
+      "bounds": [
+        34,
+        35,
+        77,
+        86
+      ],
+      "sha256": "12e4db56aa788182aa6a462fead06fe3ae41ce9a1f41df66325bb2c9c8d8dbae",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 7
+    },
+    {
+      "name": "death_left_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_left_0.png",
+      "bounds": [
+        33,
+        40,
+        77,
+        90
+      ],
+      "sha256": "97aa45511e58f8008032d48f0d8b8307b12378a61de493df59d6fdf52167ace6",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 8
+    },
+    {
+      "name": "death_left_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_left_1.png",
+      "bounds": [
+        35,
+        44,
+        78,
+        90
+      ],
+      "sha256": "091164776caa8be742e54b77cc6d881c1f58752fe0bed54723c9866cac184540",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 9
+    },
+    {
+      "name": "death_left_2",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_left_2.png",
+      "bounds": [
+        33,
+        52,
+        79,
+        90
+      ],
+      "sha256": "e39a92009a358b80c4602684f4bf463c978edfa3f8a80e80518fbc423a6998cc",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "death_left_3",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_left_3.png",
+      "bounds": [
+        30,
+        64,
+        86,
+        90
+      ],
+      "sha256": "63cd6964fb4bb748b2763e71f7996237a854be92cd9b53f00623649e0d4e8994",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "idle_right_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/idle_right_0.png",
+      "bounds": [
+        37,
+        34,
+        78,
+        86
+      ],
+      "sha256": "98bcce27cf4d367d45a58f944c95c4b06be97e9ddb80f34f7a1b71ef25c33d86",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 20
+    },
+    {
+      "name": "idle_right_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/idle_right_1.png",
+      "bounds": [
+        37,
+        34,
+        77,
+        86
+      ],
+      "sha256": "b9192206baf687c3771244f001a84a003da7641844f609722452ca8c6ad060f2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 21
+    },
+    {
+      "name": "walk_right_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_right_0.png",
+      "bounds": [
+        39,
+        34,
+        84,
+        86
+      ],
+      "sha256": "d0f9db55e6d70527cbf216aaa5c84ee3ecb35c34f9e599ebf09901ed3e61bdaf",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 22
+    },
+    {
+      "name": "walk_right_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_right_1.png",
+      "bounds": [
+        38,
+        34,
+        82,
+        86
+      ],
+      "sha256": "688e9e679649f7cb34c4dae7ca557fe8c0c5ec3c16c437b61557d87abaa1298c",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 23
+    },
+    {
+      "name": "walk_right_2",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_right_2.png",
+      "bounds": [
+        38,
+        35,
+        84,
+        86
+      ],
+      "sha256": "331676a2861dc37009b4ccee039d76ee78134b317db50fb34de55b8651fa0eac",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 24
+    },
+    {
+      "name": "walk_right_3",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_right_3.png",
+      "bounds": [
+        43,
+        34,
+        85,
+        86
+      ],
+      "sha256": "46a4d65c41c20bdede7a383adc282d5ee0472a08c6929ae710f041fa0d62778f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 25
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_right_0.png",
+      "bounds": [
+        31,
+        34,
+        78,
+        86
+      ],
+      "sha256": "1b72b189a29c85fb03619df67f08ccb99458dbe0470321429c987a7c2d9e3585",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "selectedComponent": 8
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_right_1.png",
+      "bounds": [
+        34,
+        34,
+        78,
+        86
+      ],
+      "sha256": "bd06e3682965ce2769381cbdbd02f4689b997dde12bff2b1c060cee60acb58f0",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "selectedComponent": 9
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_right_2.png",
+      "bounds": [
+        36,
+        34,
+        90,
+        86
+      ],
+      "sha256": "8e5f8170f33bd6870fef5289d98c73001583e9384cc650b61b069cdd152d4ed3",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "selectedComponent": 10
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_right_3.png",
+      "bounds": [
+        32,
+        34,
+        78,
+        86
+      ],
+      "sha256": "e0126d09d269095b57569408d83147e23cb39c571dabe707b1f067e9c144095d",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "selectedComponent": 11
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/hurt_right_0.png",
+      "bounds": [
+        37,
+        35,
+        84,
+        86
+      ],
+      "sha256": "402d69a5b857fd452417d755927068f605726b7a3d1b0b055ee4fc77e869eacc",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 12
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/hurt_right_1.png",
+      "bounds": [
+        37,
+        35,
+        78,
+        86
+      ],
+      "sha256": "5107a9500ad8f6abca3bcfd2a8f122a9e3ef55333556fe34459204236cfe2ec2",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 13
+    },
+    {
+      "name": "death_right_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_right_0.png",
+      "bounds": [
+        36,
+        39,
+        80,
+        90
+      ],
+      "sha256": "2c3a6a758b440b7b28e45f69fcd0bb8a01002a20798b795ce68afbc7afdf1078",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 14
+    },
+    {
+      "name": "death_right_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_right_1.png",
+      "bounds": [
+        37,
+        44,
+        79,
+        90
+      ],
+      "sha256": "5d0a051dbbf9672659e8919c6a668f1b5717a10df2e4c84036b6971931015b65",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 15
+    },
+    {
+      "name": "death_right_2",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_right_2.png",
+      "bounds": [
+        33,
+        52,
+        80,
+        90
+      ],
+      "sha256": "fdf79d18b53a3e1a75d8b28e6124783f6592337e3602866314c9a31fd8753c59",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 16
+    },
+    {
+      "name": "death_right_3",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_right_3.png",
+      "bounds": [
+        27,
+        62,
+        86,
+        90
+      ],
+      "sha256": "09c1e28b4f4a7144c2688cd853590d33302a5038d784cc6df47364c3f3651ee3",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 17
+    },
+    {
+      "name": "idle_up_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/idle_up_0.png",
+      "bounds": [
+        34,
+        33,
+        77,
+        86
+      ],
+      "sha256": "ea1958f9f59875d308e0aa93a588e44ed59ca07a781394266506e7b800209174",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 30
+    },
+    {
+      "name": "idle_up_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/idle_up_1.png",
+      "bounds": [
+        35,
+        33,
+        77,
+        86
+      ],
+      "sha256": "27f08fec9f53b0b6d5ca4619aa629d0ddbaf0aa8137483811b99e2d744eaf206",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 31
+    },
+    {
+      "name": "walk_up_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_up_0.png",
+      "bounds": [
+        32,
+        33,
+        78,
+        86
+      ],
+      "sha256": "c619f13d4287283d4ea065c2662299bbf68496e35c19ba3706b816c9c624db47",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 32
+    },
+    {
+      "name": "walk_up_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_up_1.png",
+      "bounds": [
+        32,
+        33,
+        78,
+        86
+      ],
+      "sha256": "2c8c25469b71534cc28a3f03f402ede3d35c5e0df6d4d6b666d2025d9e0a53f1",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 33
+    },
+    {
+      "name": "walk_up_2",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_up_2.png",
+      "bounds": [
+        38,
+        33,
+        83,
+        86
+      ],
+      "sha256": "f7ad70088e61ea43c5f85101e661293b24f19914a6f9415bc26c2298bde95bde",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 34
+    },
+    {
+      "name": "walk_up_3",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/walk_up_3.png",
+      "bounds": [
+        29,
+        32,
+        74,
+        86
+      ],
+      "sha256": "e1f90b302637c068fec833c78cf8fe583a8c8000b1220af3568b19b8d3246ffa",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 35
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_up_0.png",
+      "bounds": [
+        34,
+        33,
+        79,
+        86
+      ],
+      "sha256": "ce68980fa833364b954c285cd52a8d66ca408ba705ae8bc85f35bb1740a76ede",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 36
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_up_1.png",
+      "bounds": [
+        38,
+        33,
+        87,
+        86
+      ],
+      "sha256": "43f615e990cc8b6984fd066f18acbec48e423a997014c871e24c84f0250101b6",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 37
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_up_2.png",
+      "bounds": [
+        38,
+        33,
+        86,
+        86
+      ],
+      "sha256": "e0c33d88bb9c5657ca02a3acf58c63fae27cdf680716bc38323b15deb8a3d474",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 38
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/basic_attack_up_3.png",
+      "bounds": [
+        35,
+        33,
+        78,
+        86
+      ],
+      "sha256": "dc919221048d94cf676d418eb97c47c122e791deee2ca90d8a359a6455866b8f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "selectedComponent": 39
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/hurt_up_0.png",
+      "bounds": [
+        31,
+        31,
+        78,
+        86
+      ],
+      "sha256": "f581cd96137c1088fe696fcf61ebf08ad82bfefc2685f9ef74717b2dea2116bd",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 18
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/hurt_up_1.png",
+      "bounds": [
+        32,
+        32,
+        79,
+        86
+      ],
+      "sha256": "71011124edc5674ba3c88edf4fd55e2291a5dafa61fd43829997e07c20ff4580",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 19
+    },
+    {
+      "name": "death_up_0",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_up_0.png",
+      "bounds": [
+        30,
+        39,
+        77,
+        90
+      ],
+      "sha256": "ddc77eef2031c4b37df771349668b66e93ea4e961ac71ba8bfd214d0802cba3f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 20
+    },
+    {
+      "name": "death_up_1",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_up_1.png",
+      "bounds": [
+        32,
+        42,
+        78,
+        90
+      ],
+      "sha256": "b6b84886f31ed453f751f8aad92cfd9f261ba05dda8e14a92a4313582fc5afa6",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 21
+    },
+    {
+      "name": "death_up_2",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_up_2.png",
+      "bounds": [
+        30,
+        50,
+        83,
+        90
+      ],
+      "sha256": "500e72b551cc0801db12ea346e5b4c41b2dba948a3796709fbcdd339113b9ace",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 22
+    },
+    {
+      "name": "death_up_3",
+      "file": "sprites/creeps/arena/vengeful-spirit/frames/death_up_3.png",
+      "bounds": [
+        21,
+        57,
+        77,
+        90
+      ],
+      "sha256": "1eac749b97575a1c96e0319ee53213fa91769f93a43527d5979072e405dc3b0f",
+      "sourceConcept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "sourceConceptSha256": "5c4237b66c74a2aea695117693a8ec95d63736e9d13fda5a3f7ca421847e9ad4",
+      "sourceImage": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "selectedComponent": 23
+    }
+  ],
+  "animationAudit": [
+    {
+      "tag": "idle_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    }
+  ],
+  "generatedSources": {
+    "main": {
+      "file": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+      "originalGeneratedFilename": "exec-f575a198-9021-408c-aa29-f71351660948.png",
+      "expected": 40,
+      "rows": 4,
+      "cols": 10,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        1,
+        10,
+        11,
+        20,
+        21,
+        30,
+        31
+      ],
+      "sha256": "6d7a5c45971d6ad18b8639eb56a5727b9ba4850f857b21425a82e7cd8e0bcdba"
+    },
+    "reaction": {
+      "file": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+      "originalGeneratedFilename": "exec-d9c16abd-56c2-4f5f-a9fa-31cbc0c54fb6.png",
+      "expected": 24,
+      "rows": 4,
+      "cols": 6,
+      "used": true,
+      "heightReferenceIndices": [
+        1,
+        7,
+        13,
+        19
+      ],
+      "sha256": "80be60e5559d8355bc3664e2558a8ffd9fe6edf03ee244f0d6d22706bd549dc4"
+    },
+    "attack": {
+      "file": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+      "originalGeneratedFilename": "exec-ac4142b5-c12b-42bc-a63b-2a5debf397a5.png",
+      "expected": 12,
+      "rows": 3,
+      "cols": 4,
+      "used": true,
+      "heightReferenceIndices": [
+        0,
+        4,
+        8
+      ],
+      "sha256": "2bfa1436f668616366669041fc100f10cd2d2a12e2e265b2281e81042260d9fe"
+    }
+  },
+  "sourceScales": {
+    "main": 0.287292817679558,
+    "reaction": 0.22365591397849463,
+    "attack": 0.17993079584775087
+  },
+  "notes": "Front and side cast poses regenerated with locked facing. Dense luminous core and connected wisps retained; no detached projectile asset.",
+  "runtimeIntegration": false,
+  "provenance": "Original AI-assisted generated raster poses, approved concept images provided directly. Aseprite extracts masked generated pixels, removes alpha below220, preserves source RGB, normalizes retained alpha, applies fixed nearest-neighbour source scale and aligns feet. No concept pixels used as animation frames; no commercial sprite pack, separate third-party license or exclusive copyright claimed.",
+  "verification": "Isolated Phaser verification passed; owner animation approval pending; not integrated.",
+  "normalGameplayReview": "PASS: isolated Phaser 4.2.1, 1x logical/1x and2x display, all frames observed, native loop/one-shot/facing transitions and constant origins checked. No live-match integration or owner runtime approval.",
+  "verificationEvidence": [
+    "sprites/creeps/arena/waves-09-12-production/review/phaser_verification.json",
+    "sprites/creeps/arena/waves-09-12-production/review/concept_comparison.png"
+  ],
+  "wave": 10,
+  "artifactHashes": {
+    "spritesheet.png": "46b769a1f8de72647dc3e97f96bed311f65f1f6b99834abffb8d03f71ad43ff9",
+    "atlas.json": "a3765a60f22aeb097a4475bbd70e63f26e342b16947d619a673f31b589183bff",
+    "source/creep_vengeful_spirit.aseprite": "8ea0f0f305d94f66dce0d3069220935cd272313214598fa2127aa08383467d85"
+  },
+  "fidelityReview": "sprites/creeps/arena/waves-09-12-production/concept_fidelity_review.json"
+}

@@ -1,0 +1,3121 @@
+{
+  "id": "boss_package_ly_mac_sau_v01",
+  "date": "2026-10-31",
+  "scope": "asset_production_only",
+  "nameVi": "Lý Mạc Sầu",
+  "arenaNameVi": "Cổ Mộ Phái",
+  "summonNameVi": "Âm binh phái Cổ Mộ",
+  "generator": "built-in image_gen",
+  "provenance": "Original generated raster artwork from user brief and repository art direction; no external asset pack. Exact prompts/source rectangles retained.",
+  "license": "Provided for use in this project; no third-party sprite pack attribution required; no exclusive copyright claim.",
+  "conceptApproval": "Automatically approved by explicit user instruction for this task",
+  "productionStatus": "produced_staged_candidate",
+  "runtimeIntegrated": false,
+  "runtimeVerified": false,
+  "runtimeApproved": false,
+  "folders": [
+    "assets/concepts/bosses/ly-mac-sau",
+    "assets/concepts/arenas/co-mo-phai",
+    "assets/sprites/bosses/ly-mac-sau",
+    "assets/sprites/summons/co-mo-am-binh",
+    "assets/effects/bosses/ly-mac-sau",
+    "assets/sprites/environment/co-mo-phai"
+  ],
+  "counts": {
+    "bossFrames": 128,
+    "bossAnimationGroups": 36,
+    "minionFrames": 64,
+    "minionAnimationGroups": 20,
+    "vfxFrames": 92,
+    "vfxAnimationGroups": 23,
+    "props": 16,
+    "terrainTiles": 16
+  },
+  "referencesInspected": [
+    "AGENTS.md",
+    "ART_ASSET_GUIDE.md",
+    "GAME_DESIGN.md",
+    "CONTENT_DATA.md",
+    "ART_DIRECTION_REFERENCE.md",
+    "ART_PRODUCTION_STANDARD.md",
+    "TECHNICAL_ARCHITECTURE.md",
+    "ROADMAP.md",
+    "assets/references/vo_dang_character_reference.png",
+    "assets/references/current_game_2026_10_29_placeholder_anti_reference.png",
+    "assets/references/central_arena_hub_reference.png",
+    "assets/references/arena_battle_reference.png",
+    "assets/references/forest_dungeon_reference.png",
+    "assets/references/desert_dungeon_reference.png",
+    "assets/references/sea_dungeon_reference.png",
+    "assets/references/hell_dungeon_reference.png",
+    "assets/references/cai_bang_character_reference.png",
+    "assets/references/thien_son_thieu_lam_character_reference.png",
+    "assets/exports/characters/hero_vo_dang.png",
+    "sprites/creeps/arena/vengeful-spirit/spritesheet.png",
+    "assets/sprites/creeps/dungeons/beach/hai_tac/spritesheet.png",
+    "assets/sprites/environment/hell/guardian_statue.png",
+    "assets/concepts/dungeon-environments/hell/dungeon_overview.png"
+  ],
+  "referenceExceptions": [
+    "The older vo_dang_art_direction_reference.png filename is absent; the retained vo_dang_character_reference.png was inspected.",
+    "No existing named boss/elite production set was found in the inspected asset tree."
+  ],
+  "sourceSelection": {
+    "bossBaseline": "source/{direction}_source_v01.png",
+    "bossBasic": "source/basic_attacks_v03.png; left windup/recovery from sweeps_v03; up recovery from up_source_v01 idle",
+    "bossSweep": "source/sweeps_v03.png",
+    "excludedSources": [
+      "source/down_attacks_v02.png",
+      "source/down_attacks_alpha_v02.png"
+    ],
+    "reason": "Opaque attempted wide corrections are retained for provenance, never exported."
+  },
+  "limitations": [
+    "No live animation/gameplay verification per explicit scope.",
+    "Channel/summon gesture facing and generated shape continuity need directional motion review.",
+    "Exact terrain tile seam continuity and automatic transition masks are not certified.",
+    "Source images are flattened raster PNGs, not layered Aseprite projects.",
+    "Final hand attachment offsets, occlusion, collision, normal-zoom readability and runtime director approval are deferred."
+  ],
+  "files": [
+    {
+      "path": "assets/concepts/bosses/ly-mac-sau/co_mo_am_binh_concept_v01.png",
+      "bytes": 3037789,
+      "sha256": "a2ea265deb0ace438083847759a18f0b796c8151fb4106e94dda2fa353df836d",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/concepts/bosses/ly-mac-sau/individual_concept_v01.png",
+      "bytes": 2267851,
+      "sha256": "f45ca8347de59e23d9d40c71b40c30fd92a0eefb4b5f4faac53e1348eef63745",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/concepts/bosses/ly-mac-sau/master_concept_v01.png",
+      "bytes": 3260168,
+      "sha256": "4f25a5fc05692380c525ac8309395bffd4001de7838f97804a3aa370dc70c0c4",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/concepts/arenas/co-mo-phai/arena_overview_v01.png",
+      "bytes": 3241955,
+      "sha256": "8e5f8e0a4847c628aa1eb327b2cc6b00bb78ad99e48a699be400a2c25f175db3",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/concepts/arenas/co-mo-phai/layout_asset_assembly_1x.png",
+      "bytes": 775677,
+      "sha256": "188ac1d5a3009a52451ee7ac3f01949bf02fa8ebbb2cc14606fead7eb2e2e355",
+      "width": 1280,
+      "height": 960,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/concepts/arenas/co-mo-phai/layout_guide.json",
+      "bytes": 1937,
+      "sha256": "9f39a02a88593247929658c404b59ccc1b0f9961a173b644e107ecec08a49ce2"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/animations.json",
+      "bytes": 9629,
+      "sha256": "4cfe0fcaf19a423719cf14a56b714a0f53b196ceaa102fda9277eb86a9b6416e"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/atlas.json",
+      "bytes": 58852,
+      "sha256": "da9b85881da45be335fafdaef1f89d0763cf554f663f99b0e743369e0d3bd4bf"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/contact_sheet.png",
+      "bytes": 686453,
+      "sha256": "7901b349ec7c0409af495325b86ffd50480055da9fb6896bb07292b1ec239df0",
+      "width": 1152,
+      "height": 2048,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_down_0.png",
+      "bytes": 6471,
+      "sha256": "aa2455274f2230afb73ba649b23b69b624e1a69dd3556ed81d41a35a6871b3f1",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_down_1.png",
+      "bytes": 7260,
+      "sha256": "47fa83fe75b07bde2b7f2b1c363baec934c037cd951d27b9785e0b5fdc13cda3",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_down_2.png",
+      "bytes": 6194,
+      "sha256": "b341a3d1b5eaba5e6f5ab6903046feab9be0736b21beb84677fafdd572dcf3f0",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_down_3.png",
+      "bytes": 6353,
+      "sha256": "d13eee83a9902c2f5b6baf3c8e12d98b36eb8c423dbace445753eaa418edc5bf",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_left_0.png",
+      "bytes": 7407,
+      "sha256": "7510c26dadfee15ad220cdee8ac68bff44776abb1f89f73ccaf40d13d132e415",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_left_1.png",
+      "bytes": 8483,
+      "sha256": "3117055a9ac1c43102878b84ad0ea51f2811e42185247ba912e3366f228926d9",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_left_2.png",
+      "bytes": 7347,
+      "sha256": "1b7b69945cae8b4c9da2e687cb03f68a1e60f9c7697ca4ee38a1cc019c1af8dc",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_left_3.png",
+      "bytes": 7523,
+      "sha256": "95d65d50937f36db15a2d1e3c6ebb574b8ac93fc9803c5d5e5e7d97346521add",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_right_0.png",
+      "bytes": 7480,
+      "sha256": "d058388b260e3d0cef6b523554c29c1a9a6d528c1e60ba2d225e4b5ae0214b9c",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_right_1.png",
+      "bytes": 7581,
+      "sha256": "5de19aa70df7864d3c8ffdf617d40fad6a41a98a269af819ec4f94ce8a2c7418",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_right_2.png",
+      "bytes": 6737,
+      "sha256": "7c08fc97a8701499c18997b2046a19e7b8d96ba5c312008750ff8b2e42485928",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_right_3.png",
+      "bytes": 8032,
+      "sha256": "5cc8990c284ab99deb8240e27bd5826ceaa87f228cda4da0fc13a28562bc1d8f",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_up_0.png",
+      "bytes": 6451,
+      "sha256": "8f6f25376d5839ed36960661f457661f4a095a755ac025de6480e196f1ade9a7",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_up_1.png",
+      "bytes": 7248,
+      "sha256": "978cc9c8b9b2b1b2185ef15f170b2b023a08f60b67fcb4ce5f838acd86ce8fb6",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_up_2.png",
+      "bytes": 7482,
+      "sha256": "1b1cb100e502107b57b23df8bd305c86599765427bfbe8a5c1957429ffb2777e",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/basic_attack_up_3.png",
+      "bytes": 5800,
+      "sha256": "118f8cdf0d6d9e5dd26626f35d532464a0bf83bc98d15d7c39af8bf4f56d965b",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_down_0.png",
+      "bytes": 6735,
+      "sha256": "9d75a79dfbd7ea7953d9e1a434e8b5f5fda8ada03b26549e8de9606b1f751d16",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_down_1.png",
+      "bytes": 6604,
+      "sha256": "82a8ddcfc3c52af97a7a6ff3ce63913a989c7d0ce2b81ddc8d5527d8d7160007",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_down_2.png",
+      "bytes": 5473,
+      "sha256": "a2bd3116cc3b359d84d46cfd29b65f4c2fbc032a19d24c8aabdf8e852b97a491",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_down_3.png",
+      "bytes": 4302,
+      "sha256": "ed524a567504d1f2daffbde604c4f30b311b0a8f2ace999a4a2e776ac5f638d5",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_left_0.png",
+      "bytes": 6151,
+      "sha256": "7be44c8be3b903f0388b8ab5f8d02fba3dbfcb13504f33742a11d58a6c24865a",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_left_1.png",
+      "bytes": 5599,
+      "sha256": "0bf8e5bbde3fdf6e7bc5a584be8d43b23a8b4f31922e69b2cff8c4dff31d7400",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_left_2.png",
+      "bytes": 5125,
+      "sha256": "3d84bfc2ab9b7f2c66fd5aa40dd4803816a3ad51108d20387446b7253be3cb4e",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_left_3.png",
+      "bytes": 4455,
+      "sha256": "ebd1ce7457e235e6ef27bb9810e5f4e357ff55a692a72a9401632002f490a3b1",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_right_0.png",
+      "bytes": 6648,
+      "sha256": "2f004a948b3c5d8547d6e98cfe73b52c80403b54b839e590fe10792a1b5f1f1d",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_right_1.png",
+      "bytes": 6546,
+      "sha256": "6996a494fd9b461cf071c50baf02c2d7fdfebfa54ba0d29c92ffb8e713c16888",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_right_2.png",
+      "bytes": 5231,
+      "sha256": "79cc45249b6f1559270c37e1f314b1443261c9ee872e9d0299025511dca0199e",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_right_3.png",
+      "bytes": 4552,
+      "sha256": "21eb803de5c28cc2aa6c33c8d741f3e9ecf980c0eb29cce200115555995af042",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_up_0.png",
+      "bytes": 6735,
+      "sha256": "2204636a1d4d3c46a6c1dbd165c0386cb3153e7975cd3b2acac57f6f7505f54b",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_up_1.png",
+      "bytes": 7142,
+      "sha256": "4e7726eec18aab91f2fdc5dac1b15521edced8e45867dd18b0e8333bd51dcedd",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_up_2.png",
+      "bytes": 5981,
+      "sha256": "7c261b993b47d46b1616af4daca2c5b7d40526f48330bccd1b575489ee5d33a2",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/death_up_3.png",
+      "bytes": 5346,
+      "sha256": "e1b805e4bad9f49d908f7850314e8b236b429dc5dc1315982597314e82fcdf10",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_down_0.png",
+      "bytes": 7511,
+      "sha256": "0fe0e64ca2c49952e5fd4d566ac10461055a9b56446bbcf9b0760556c71e8a32",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_down_1.png",
+      "bytes": 8084,
+      "sha256": "420930aef9dab61e3343dcd1ec27250315ddea570744f0a8e0b4ec9194feef83",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_down_2.png",
+      "bytes": 9369,
+      "sha256": "c0f70a0e782c9b28de05f6312c664885b573e6e8edc5e2d686bb70320777fb3b",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_down_3.png",
+      "bytes": 6930,
+      "sha256": "d9904071877e35b89d6b98b65351b3719537820179b78e54246caca6b672e3c2",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_left_0.png",
+      "bytes": 7945,
+      "sha256": "94c2e3494d97040795dbfcdb84be2eec6358c3685928bbb9cdeb44767b20673f",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_left_1.png",
+      "bytes": 8483,
+      "sha256": "3117055a9ac1c43102878b84ad0ea51f2811e42185247ba912e3366f228926d9",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_left_2.png",
+      "bytes": 10429,
+      "sha256": "05b8d6013d7b31f67bc67bd250202df71066c3ac93191f14cf75e57069180968",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_left_3.png",
+      "bytes": 7523,
+      "sha256": "95d65d50937f36db15a2d1e3c6ebb574b8ac93fc9803c5d5e5e7d97346521add",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_right_0.png",
+      "bytes": 7776,
+      "sha256": "0b572b7e60083cf78503491e7142dafb586d12c70dddca013277f6998b307110",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_right_1.png",
+      "bytes": 8492,
+      "sha256": "262c321f0086b135d0ba1f4056d8ac0bc4219127422d0cdeddde94647a3b2577",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_right_2.png",
+      "bytes": 10017,
+      "sha256": "a92132a66946a06ac90521a3950c9eaf5b2e87f4fdb9ad6a3f28bbc4c8015f06",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_right_3.png",
+      "bytes": 7567,
+      "sha256": "0604081800fd27646936a5dba241f1848f2e1981d53c4bb4b24d77bf4b78391f",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_up_0.png",
+      "bytes": 7501,
+      "sha256": "bcb022d38b5cbf8bd47b7ca51b1f1c29743bf3584a74a44051f5caa46ac13207",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_up_1.png",
+      "bytes": 8779,
+      "sha256": "12c5e2ab5ae52abd62fc4839b9725046d06522f27eba852b0634e248acc331c3",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_up_2.png",
+      "bytes": 9759,
+      "sha256": "5d66e14d277399bb14989608729e075da5f28264503f5c90550c679fb7c7a52a",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/fast_sweep_up_3.png",
+      "bytes": 6405,
+      "sha256": "07847d2126987456ad4bed9a3dbed3ef8a4d102b00d12f50c9a40a0cf0e95595",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/hurt_down_0.png",
+      "bytes": 6662,
+      "sha256": "d201e415ebadd06841a6e842343c3e0876e8a28ae98eef4050c9273b968d0ee4",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/hurt_down_1.png",
+      "bytes": 6577,
+      "sha256": "d151cf86e6080cbf3e873409fb66e3b3ab9f10dce76a199288856ae8ac76411e",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/hurt_left_0.png",
+      "bytes": 6012,
+      "sha256": "7cd2f3b3be54c7ec891e2ed33fbdcc4dd48247b2feda680f90519a985fbd22f3",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/hurt_left_1.png",
+      "bytes": 6741,
+      "sha256": "b33c58e989759e0963739a5af555aeb17ad64d34f4277dc1218a0715e00bd94c",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/hurt_right_0.png",
+      "bytes": 6346,
+      "sha256": "a828af2a90e77657c5d3f1d5e1c84dc37d29846826c782acfad477c911c85949",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/hurt_right_1.png",
+      "bytes": 6494,
+      "sha256": "44e5db29822299d0333e7e8697e6bf3b13c598d46b58f51e4085b60b75b1abd6",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/hurt_up_0.png",
+      "bytes": 6502,
+      "sha256": "c8cd9b1e3b49e041787a458f7ad5e97e36e4a1654a1249435a99a6726adf0a6e",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/hurt_up_1.png",
+      "bytes": 6289,
+      "sha256": "0302b3dd000e8eab2231c6a7a34c98593c133baac96f1cdc4a2ac0b056712748",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/idle_down_0.png",
+      "bytes": 6876,
+      "sha256": "2cae8ab145bfa0c3a9211e634fe5dc84127fafee0e325b2b8ecda56673103fa0",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/idle_down_1.png",
+      "bytes": 6715,
+      "sha256": "97783b1be31a3b5cbcc670edd887c63ee6d654afc3e05f72beba22708f3df352",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/idle_left_0.png",
+      "bytes": 6858,
+      "sha256": "716e8767086ac86c646856963ba69b497f5ca0e729de3db381611498f8561014",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/idle_left_1.png",
+      "bytes": 6699,
+      "sha256": "8490a27d3b62e33de8f8b7a2beb2761c404d61e1c3172d31e92f96b61ce79c8f",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/idle_right_0.png",
+      "bytes": 6514,
+      "sha256": "e989cc29783eaf9c53159321e419bacf5e95366607ea3485b4bafd62715fdc9f",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/idle_right_1.png",
+      "bytes": 6790,
+      "sha256": "adc3afe2065bd516405831393425cc6a731e39eb35fa6d9abdfaff8e2befa57a",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/idle_up_0.png",
+      "bytes": 6579,
+      "sha256": "51bc7005f8405e0292f47e03f3099a86688497c4c7ca9c5b944fb2613dd25fca",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/idle_up_1.png",
+      "bytes": 5800,
+      "sha256": "118f8cdf0d6d9e5dd26626f35d532464a0bf83bc98d15d7c39af8bf4f56d965b",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_down_0.png",
+      "bytes": 6251,
+      "sha256": "e7296bc087b70a43f0069e9cc75304a316a6c45c2fe1569113e8441fb825c634",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_down_1.png",
+      "bytes": 6306,
+      "sha256": "2f66c652553c77753ce69c64196bc3c8801b351109e6efbfd484775f79628530",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_down_2.png",
+      "bytes": 6473,
+      "sha256": "b1b27e02fa9610abf72abd4d68254f73cee529f722f77e5a8da4f1a15cdaeeed",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_down_3.png",
+      "bytes": 6737,
+      "sha256": "df2ca841775b0931a38df0a2e22a94bb21bcf7f00b9c06430c32b1f1c1eae8d8",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_left_0.png",
+      "bytes": 6220,
+      "sha256": "81cce9d67f8f56693853d00bbf6f0481544bd30fd4e37d8c17336638da2a538a",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_left_1.png",
+      "bytes": 6396,
+      "sha256": "839625d7f118407e82496308963711095eb74e61b8843ee51d0ed7acbd1c27ce",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_left_2.png",
+      "bytes": 6679,
+      "sha256": "d22808fa0b3bfdea854f9a702bc3635c43b4625ede2d31ed7a38a123cd00a5ef",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_left_3.png",
+      "bytes": 6148,
+      "sha256": "7038cf8fa4004eb74fd35fb17de03f4c2e0b212bab802971e3cd2b136b456b61",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_right_0.png",
+      "bytes": 6691,
+      "sha256": "438a253360790ab63c620872c1bb8321f98702c6e251c8e40285dc8daacf0428",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_right_1.png",
+      "bytes": 7194,
+      "sha256": "7b09e716c93a48042332c91c3046b554bcd00af57cf6dec91a6b5a9fdb0a749d",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_right_2.png",
+      "bytes": 7871,
+      "sha256": "a8f716bad010be0274d11e1840049b93457b990d15d10e803958720981e02074",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_right_3.png",
+      "bytes": 6612,
+      "sha256": "cf52d040be05f596e42ba3ad3091c2b7e24ae265784a67a6cad650d1512f3503",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_up_0.png",
+      "bytes": 6559,
+      "sha256": "b18eba5a13162c58a0444e1091714d022972ed3b9664cc5bfd17987833740780",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_up_1.png",
+      "bytes": 6715,
+      "sha256": "ebc882f8162aa2202a105114a44dce8eb790c5b348d0b7e2bf9a8950fb97e69f",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_up_2.png",
+      "bytes": 6934,
+      "sha256": "fe8ff046a11ca83fe1e4c7d274903b63a45ba468535f6cf3afad7e8c227380d1",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/needle_cast_up_3.png",
+      "bytes": 6926,
+      "sha256": "a0b1914d22655defa52518212710b3bc2a13480532117d87ae27b5031f0e685d",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_down_0.png",
+      "bytes": 6361,
+      "sha256": "e97853b10fe9cbff58733618de79e94e65d21a7f20fbebec2a10f5169403c83e",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_down_1.png",
+      "bytes": 6468,
+      "sha256": "1b772ba16fb4d0746e57bcb721a22b37459139a22bf62af57e8c9c1d02e11b61",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_down_2.png",
+      "bytes": 7083,
+      "sha256": "e415d894e591e236c29a3eba062428ce68c388d3242997a499407c10309f27d1",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_down_3.png",
+      "bytes": 6268,
+      "sha256": "500b537dd141882d6f223b9771b7689e707f67c5f586299f03bdc097eab67790",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_left_0.png",
+      "bytes": 5976,
+      "sha256": "02dc4d7f8c1f367fd3695d6b380729bc437dd09082a51d1b5ee66333d88e58b8",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_left_1.png",
+      "bytes": 6184,
+      "sha256": "45944bc623b0af5c17f0c2e49f2bfd8249b4ae41f4efe4bbfa922a0c4a9afd53",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_left_2.png",
+      "bytes": 6849,
+      "sha256": "ae69eb5e0751633e2bc9e65183bf29cf00e8660235728c410b9dcc6d4f948225",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_left_3.png",
+      "bytes": 6028,
+      "sha256": "e891c711a87107a5a1730b79091343a1716ea700c2fb2326170fd8692b324808",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_right_0.png",
+      "bytes": 6765,
+      "sha256": "eb8b32e39ac341e0640d88d0ca7973508995d6a2c1ab1960fbc1850cfe1c1c11",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_right_1.png",
+      "bytes": 6870,
+      "sha256": "a65f2a2f369fa56e97553c6588baa76034e5b16261d59ae61ee3a01f243f58bb",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_right_2.png",
+      "bytes": 7372,
+      "sha256": "2c4a4c9eaf5fc0bf6331f2702ce1c38b2a34851a77e44fda039b8a9173bb1efa",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_right_3.png",
+      "bytes": 6807,
+      "sha256": "9c17c6cbcc6efe0b81d5494f2462210897a5a74b1eeafc140839b35ee981e657",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_up_0.png",
+      "bytes": 6390,
+      "sha256": "2df35bdd3fdd24eaf04bce5bf5eb5b4004e10fcb239167f8099285847f578d9a",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_up_1.png",
+      "bytes": 6133,
+      "sha256": "4f451b81d953dcf87929d36a1f0116d77529a150355c2a281cba02f2b3f009bb",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_up_2.png",
+      "bytes": 6794,
+      "sha256": "b10502be8a64afb47c1cea0a2aaf9d4206cdc47b289e8a63f00291be957c5f47",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/palm_channel_up_3.png",
+      "bytes": 6071,
+      "sha256": "1411d1ee6cc7b5c055dcdd241cf913d42856664d3cbe42d9b3a1632b9014d2d6",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_down_0.png",
+      "bytes": 6954,
+      "sha256": "68dc5342a6264f19ed876858b7b973522b5b670a56e25c83415abab10cc9267c",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_down_1.png",
+      "bytes": 7043,
+      "sha256": "c92b8369473a094e527e1db950fcaca4dbedd6db89ac9d5e926c4ffadf766ada",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_down_2.png",
+      "bytes": 7096,
+      "sha256": "71910bde5be15028a2d81a5f5220e6c97f577b9bb366155798ae326ee98eeb1b",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_down_3.png",
+      "bytes": 6502,
+      "sha256": "ac107c69387bc44406a956a0ae332e771b4d0a9cf8a1e4a646bbcac2459f0645",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_left_0.png",
+      "bytes": 6835,
+      "sha256": "44aba4c491504bab6219df9971d567270e894d04425f1dba0d7a6408bf7688e7",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_left_1.png",
+      "bytes": 7007,
+      "sha256": "473edccc95be1d6da3a0dc62c1ed33fa506b3df645ab2e8e2b27616dc44eab8d",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_left_2.png",
+      "bytes": 7083,
+      "sha256": "d815dd8e7304b65d568aa59985e1bd2d184720907b0f15703171e95b0b601b7f",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_left_3.png",
+      "bytes": 6593,
+      "sha256": "de8c1bbb648555370ca4372fcfe37168ac69f0818cc014539b40423fb42ddf15",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_right_0.png",
+      "bytes": 7352,
+      "sha256": "25784460118fe305b6589247729050c3b10a6743763ad68d0ed47a79f1568476",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_right_1.png",
+      "bytes": 7714,
+      "sha256": "f6a7ea1c2f212eb1e0b9c7d87c5ade575334c8e0296cc2a90535c1973a64bfac",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_right_2.png",
+      "bytes": 8432,
+      "sha256": "89554e0b553a4790d69323ca1386bcdece0bb34190c6c156f43063d921e01014",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_right_3.png",
+      "bytes": 7184,
+      "sha256": "023376ec931cf7782a996408413f89dd925f19febb622e7c7aacffd47394552d",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_up_0.png",
+      "bytes": 6942,
+      "sha256": "7f96fdfa4087ef66cccd6ff428b23fd3bf1a6798a1f8582fcec076b7af327ba6",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_up_1.png",
+      "bytes": 7131,
+      "sha256": "1308781fc028bd646bd006b546cce2e9756085c1263c35671520e43d82f18e90",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_up_2.png",
+      "bytes": 7758,
+      "sha256": "019efd5fd5a2bfddd1881a73a744d12448b39f67ac8cf41f66b9eadfc58d53b0",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/summon_cast_up_3.png",
+      "bytes": 7104,
+      "sha256": "c946d2ea00cc4c0d87a1d00ba2925574b7b70790437ff36f3b2a9aa925bfc4ff",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_down_0.png",
+      "bytes": 6424,
+      "sha256": "4f769582f0b1203f2c8e8a0a842af8cc0de3d89c74bb7d6c49262ada7dabe1ef",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_down_1.png",
+      "bytes": 6228,
+      "sha256": "d1afbda4a1341a2ecc9bbc291e7446c07b773e6919a41d3a9510ecdecd51ce5c",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_down_2.png",
+      "bytes": 5935,
+      "sha256": "5b17c3c20a0840d6fda4de29663626a314022525cd005e0573cf75ac5d4e75b6",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_down_3.png",
+      "bytes": 6037,
+      "sha256": "8d1dc4463b48222ee05867b13ca6f8a32d5138e84f75fc4f080cc3ddec9e838e",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_left_0.png",
+      "bytes": 6622,
+      "sha256": "58a3dc0e0bb181dfcd81725743524fc4267300d373163847db0fdecd46fc6ec8",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_left_1.png",
+      "bytes": 6245,
+      "sha256": "5277a419e4e3340583d1b37cb7481356762073a05188be89d3d15c43af75572b",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_left_2.png",
+      "bytes": 6655,
+      "sha256": "eea113face372733fc056dd530db9ca2684779c2032f4340c86c80bc1076a98a",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_left_3.png",
+      "bytes": 6165,
+      "sha256": "154cf043cfe842bae322c25abd9607914b4ffac87048443b633d0957ac8ee132",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_right_0.png",
+      "bytes": 6827,
+      "sha256": "5ddbb0cb4dd2e06774a37c3f15525846ac98ea2c293718c1f75f67d946793ef8",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_right_1.png",
+      "bytes": 6410,
+      "sha256": "b4549fe9f7154e65c7a5aacd5809ef8b1cfeac7664d4b253e4d82f6fc8361aa6",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_right_2.png",
+      "bytes": 6453,
+      "sha256": "c1d84a92f91eef4958c6a8dfa20305d7a5383e615a28acb24fe27a23c7ccf5fb",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_right_3.png",
+      "bytes": 6734,
+      "sha256": "57a45eb32617b42bbf8c6fb1ef7b0bd69a2e1df406227ea5cccdee9bb4044ed4",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_up_0.png",
+      "bytes": 6371,
+      "sha256": "cec76814b702a2e638ec1fec8b8df1445b277f401b101d5f6f2a04867e9c07f1",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_up_1.png",
+      "bytes": 6495,
+      "sha256": "18cc4e4bc7b7acc621f4b4a43c2cf3f757965d57c222c33117f7a6b8a6622fd0",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_up_2.png",
+      "bytes": 6330,
+      "sha256": "d8ad4e2fdc75e4b961ba0c13fb1af3bd341dd48bdba8b2d19d3018e3aabbda02",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/frames/walk_up_3.png",
+      "bytes": 6391,
+      "sha256": "57dfb458c76cbaa146d7079ca7b1939e35c3fa9de87305ab6c728673f523b5aa",
+      "width": 144,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/manifest.json",
+      "bytes": 1833,
+      "sha256": "8972ee82c15d6dcae0863f45b0a03107555bbe05d0f31af3a53e9a8e7ed7fb95"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/palette_and_scale.json",
+      "bytes": 617,
+      "sha256": "04e089eeadc9fe377b43e0fdbcecc0926ff2cae65a2456bc1bb47a3e3109a54d"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/scale_comparison_1x.png",
+      "bytes": 38703,
+      "sha256": "ac20f48aa35b550c67d922071c60557c91e0cac3ab841430c9a2159507615f81",
+      "width": 512,
+      "height": 192,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/scale_comparison_2x.png",
+      "bytes": 55948,
+      "sha256": "33257230aa5651c8bd76ba83400537fcf9a539564a3073a60ca8c4a142853228",
+      "width": 1024,
+      "height": 384,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/skill_asset_map.json",
+      "bytes": 14123,
+      "sha256": "add6175bba9fb5fd202a762e16b670e5d5e92e766ce50d6b376bc1accea909ac"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/basic_attacks_v03.png",
+      "bytes": 2026289,
+      "sha256": "66b78ffba3587751aed09ad7f26b92d111d35c43e75bf45d695298f79de71bb1",
+      "width": 1263,
+      "height": 1245,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/down_attacks_alpha_v02.png",
+      "bytes": 2327131,
+      "sha256": "d68837e2654671682bc149c08950460ec1b08d80ce096c01af69003bd76b1bb6",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/down_attacks_v02.png",
+      "bytes": 2352676,
+      "sha256": "0b384bc2b9f12254fbb151b36fca0ccee0a2fae6885486bd1f072014a51683db",
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/down_source_v01.png",
+      "bytes": 2698142,
+      "sha256": "76bed4ebc6af171fb707073d64d88b43f468f9c11be684c5388872623b9fa45e",
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/extraction_recipes_v01.json",
+      "bytes": 138898,
+      "sha256": "25f937a4442e73dfd4b68c16c3f2bbe4bcd43c40b83f32713577cbc8e0b0e336"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/generation_jobs_v01.json",
+      "bytes": 40754,
+      "sha256": "4ebbcd8c50e6e70965f5dfe73390e709164f761d848d757f07e1ff81339b47e0"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/generation_prompts_0.json",
+      "bytes": 9177,
+      "sha256": "d797ad8b71a6cc5f7ff0958f2b04b4b5a492310184527a3602d3515567a27cac"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/generation_prompts_12.json",
+      "bytes": 6329,
+      "sha256": "c83f478adce56e66ced0dccf42ef41bc6dabef50db5bd30566539b13238f633f"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/generation_prompts_15.json",
+      "bytes": 2023,
+      "sha256": "382c335077c0bb5dfb53d283f5beb3f5df097c020fd683bf465e6a6a3d473ff2"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/generation_prompts_16.json",
+      "bytes": 4147,
+      "sha256": "8d48f512d179d88f2791b417cb97dc692d5865d60f8adffe454aa23393aef78e"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/generation_prompts_4.json",
+      "bytes": 9743,
+      "sha256": "6c260519746f43a67f159ca7b7038d038ec394056de444471d516f4b3f93df08"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/generation_prompts_8.json",
+      "bytes": 9348,
+      "sha256": "83f2afb35846566c056f8f2e5718a89a92aa42af50545d7241442d7ec76f16dc"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/left_source_v01.png",
+      "bytes": 2930636,
+      "sha256": "058466e6d52fad14ec27596105904941a60d66b946322cd61ad1d312ce77436c",
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/package_assets.py",
+      "bytes": 16762,
+      "sha256": "d6db4a135a3f589f726460baa8a1caab79819db3629dbffe7cae3fe5df9e1084"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/README.md",
+      "bytes": 544,
+      "sha256": "0be6955cb4605915dd85cce63a89eea84c73ce14b3d750ab3ada7c7cc643afa3"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/right_source_v01.png",
+      "bytes": 2427163,
+      "sha256": "bf35c2e6ae14401a33111c7bcc0d0250758e24b7353ac4fd8ffcd9d91d909336",
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/sweeps_v03.png",
+      "bytes": 1991061,
+      "sha256": "c90ddf2bd918b64f0898d8025fd64363b1e65da7401d74d63be2e1f7fc700908",
+      "width": 1261,
+      "height": 1247,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/source/up_source_v01.png",
+      "bytes": 2602438,
+      "sha256": "2c11fed1981d41f2804ac596c718e0691dda8d6da0dc78c752d3b5d222a988cf",
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/spritesheet.png",
+      "bytes": 855698,
+      "sha256": "d9ae8fe3150e4f8226b959af3ee2e1f9aaa6e35e927cc90df66744cf40d8a692",
+      "width": 1152,
+      "height": 2048,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/animations.json",
+      "bytes": 4918,
+      "sha256": "aa90e53dc61d7cb3e42a66d577d9be1526f733bdc012f59e2451a1bc881afd8f"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/atlas.json",
+      "bytes": 30082,
+      "sha256": "d14871a55ca54729be95805d951bb639e524388b75a0b7600ee354ef7b832f75"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/contact_sheet.png",
+      "bytes": 207302,
+      "sha256": "21321d54a1dc03b1a3313daf89fd1928c10e0898259b454ae0c3ad79b4d051b6",
+      "width": 896,
+      "height": 896,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_down_0.png",
+      "bytes": 4675,
+      "sha256": "3d8b385dc423e009aa50dacc3b9e55110a3440c3968ba98b859b552b1866f5f7",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_down_1.png",
+      "bytes": 4523,
+      "sha256": "cd89aff2814267ace33ce63346186ea0408842fbdd54280c626e2dbb14e45e19",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_down_2.png",
+      "bytes": 4287,
+      "sha256": "c2599982e843bdd6976732a1bee78b3cb3dcc0f30a37128fa553d8bb6c9f245a",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_down_3.png",
+      "bytes": 3904,
+      "sha256": "4e26c20fcced5a4d675dc6eeb7e966c4f98521f3054d1070ad7fffccd788c2ea",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_left_0.png",
+      "bytes": 4253,
+      "sha256": "a19101dbfa9815190ec31fdb6d4b8001d44f5410ba4f70ddf407c47743d2107e",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_left_1.png",
+      "bytes": 4549,
+      "sha256": "72d51fdfdbc5a61d380cda9ecd83ba5de0d8c414d8f39890e798e50b34786531",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_left_2.png",
+      "bytes": 4380,
+      "sha256": "854e604375abb922cca03df864999590b2f64fd6236766b51ebe1646b0d8cfff",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_left_3.png",
+      "bytes": 4011,
+      "sha256": "07b64104ca83024c1e844860c46cd5db86a06e9df9c1fe59d73960de3d1227dd",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_right_0.png",
+      "bytes": 4314,
+      "sha256": "728df6e2b5b9e4c63fd0867e2b8e218c2c0948b3b0fc40f1fbe787d4d2d8f8b9",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_right_1.png",
+      "bytes": 4426,
+      "sha256": "20bdd1b5e13ade25680739f41a9a0a8a73ecc05e0b3029e783e49f91a96a82f9",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_right_2.png",
+      "bytes": 4166,
+      "sha256": "435af10aeb5e8d9c8c6fc2d01037fc17b1c9788b1cbe76dc946cbbb750c82fc7",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_right_3.png",
+      "bytes": 3748,
+      "sha256": "9be087e5a54c75a70e584fe181505ff54dc91d09700a6c5f79bd0caf7adecac8",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_up_0.png",
+      "bytes": 4421,
+      "sha256": "d2a39fc260483987a25eb09b1517f45c19c7a033df1f0b72dd3b084fb4d2568b",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_up_1.png",
+      "bytes": 5353,
+      "sha256": "bc70dad4564b5eb7be7b531c34533f7ae593e69af60aa419d0dbe88111293d34",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_up_2.png",
+      "bytes": 4664,
+      "sha256": "bf245467cb537d7035276665aac009bf655c030dc85f84e2032037a9df07ff97",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/basic_attack_up_3.png",
+      "bytes": 4807,
+      "sha256": "ee8006c08daa0a72e884827c96e1fdeb4fe0b2ce84b5efac14f41370e4140325",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_down_0.png",
+      "bytes": 3676,
+      "sha256": "8e77657083796801fa9a74c8ebf7aa13bcb5ce5729d99b3fcbc24a279e7b0060",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_down_1.png",
+      "bytes": 4188,
+      "sha256": "04f46a661dc1cfbfb299567251fe112efca6046c11c2ee36bae1c520db073a9c",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_down_2.png",
+      "bytes": 3792,
+      "sha256": "aea7ce4ccd87e310f34f98c7cecbe32e8798df17548f8107239615fb8622eaa3",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_down_3.png",
+      "bytes": 3252,
+      "sha256": "01e4a9a264e5da459973a54d637c2393e5de997582fd5f8365aa719f11ff7193",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_left_0.png",
+      "bytes": 3548,
+      "sha256": "c81630ed5182338d5e34116656aee28c8a967982f6f75e1409d7889c530bcc0e",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_left_1.png",
+      "bytes": 4536,
+      "sha256": "7a45345718fafc699ee26dcce34fcbd71b4d2634503a80f1427379e6248ecd64",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_left_2.png",
+      "bytes": 4201,
+      "sha256": "a3a05ee218d1bd72a07d9d820f08498887298fb5dc074442558c77552577e652",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_left_3.png",
+      "bytes": 3617,
+      "sha256": "5fc94752ef3721ff10fee6e389454c0398c5de2eaca04954daa69f90f45c7bb0",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_right_0.png",
+      "bytes": 3480,
+      "sha256": "212a11256ee633783a6c143a25a97239e1a6e42d78270f52209ea4ded8409ac0",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_right_1.png",
+      "bytes": 4238,
+      "sha256": "17ffa8c6a4a4381d4cadea2d77bd673f4349813c57d5c627d61cef1c9f7f4a96",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_right_2.png",
+      "bytes": 3422,
+      "sha256": "98d4d1c16c65a81bf530d241113f32735f4342807c5767de7291e3a0682edac3",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_right_3.png",
+      "bytes": 2693,
+      "sha256": "45a17af86cd869f000edae47f9223dde57e7d726bcb05dc8d3539a5e2f5dfff3",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_up_0.png",
+      "bytes": 3818,
+      "sha256": "fb73635f5c61e0e121022f15563317befe1aaac349a1c98c5b869928a47624be",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_up_1.png",
+      "bytes": 5070,
+      "sha256": "fcf397b7ecf902df517b462861e57c0ef08f479e8868d1984e1168ae4009f8f2",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_up_2.png",
+      "bytes": 4504,
+      "sha256": "529d60602d0b9a2c6541c8eb9f12027cb4549d994ebd1047a93f0d40606ccde8",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/death_up_3.png",
+      "bytes": 3700,
+      "sha256": "15533d2e7339ac88a33f632648025e77d140f334afd2cf2f162f4b6ffb4a781c",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/hurt_down_0.png",
+      "bytes": 3854,
+      "sha256": "8865d21f6e41c2624481557f6e48d606d3d69c9c6c194ad5c5109be137bd2fd3",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/hurt_down_1.png",
+      "bytes": 4237,
+      "sha256": "19a247b941dd79db5ced60ce7bb186e1e2226d9be99d838223b99899325bf832",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/hurt_left_0.png",
+      "bytes": 3851,
+      "sha256": "c69b3aa730d0b92bf60bde00e994404c53ed508d16b9c3854363305eccd03267",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/hurt_left_1.png",
+      "bytes": 4256,
+      "sha256": "15b702b4c86f3e6bc8614fddf514b1c2a75af83f69676c68daae2a0c0a2c8b8a",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/hurt_right_0.png",
+      "bytes": 3819,
+      "sha256": "53fb198f5e898e420abfae059c9d91d02c0ef0a793829c4301927a81257d920c",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/hurt_right_1.png",
+      "bytes": 3930,
+      "sha256": "b82bbe12c27b9a1add2c8dc1da5dbec03ce21aace62153dac00859dd041181d0",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/hurt_up_0.png",
+      "bytes": 4339,
+      "sha256": "d93383e1fa8a18fa2074c98ab126e7079dbbfa491b49e47c1113de141a2d23d7",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/hurt_up_1.png",
+      "bytes": 4268,
+      "sha256": "f7b8cde5398a8a237cedfbeca357cbe09dbde9852ebf2799b41357e69faf8dc2",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/idle_down_0.png",
+      "bytes": 4193,
+      "sha256": "5c05b8710c30e1892e6a2a6c9a153913973b8cb1797df26f0cac01444dbafb68",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/idle_down_1.png",
+      "bytes": 4304,
+      "sha256": "6a0edef32ee17c7088e302fbe45ac1a50cc4ab80d5863d464fc90e5f15a634c7",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/idle_left_0.png",
+      "bytes": 4473,
+      "sha256": "eed67e67d4cd68203d0b18bde6844acf7aa6a75a842b4057f5e94ab9d0bd57bf",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/idle_left_1.png",
+      "bytes": 4498,
+      "sha256": "91167488b9ac4ef07e30c35985a91a6fabe7d91c42af55b83b678cfe86669f4e",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/idle_right_0.png",
+      "bytes": 4076,
+      "sha256": "a83323bdce194fd5bf33e1bd9b3fea6e813a9ce911cb9218980528beef8cc5a7",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/idle_right_1.png",
+      "bytes": 4075,
+      "sha256": "7fbf387816b00b4b16abf6fa2fe205af92ceffe6c7638753879051688cd78626",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/idle_up_0.png",
+      "bytes": 4534,
+      "sha256": "42de8e7dbc396c4422d267155cff8e4721b931a1919a4999f904299b3e4e45c5",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/idle_up_1.png",
+      "bytes": 4522,
+      "sha256": "20d557ef9de8c0d1895e0e9730d9c3bc76de39fe07dd3e96de588d7005ebd827",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_down_0.png",
+      "bytes": 4564,
+      "sha256": "97a84f2185d15d75e121fd69c874180ac5a2d8b877e6086b2af80a85ab9b1b70",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_down_1.png",
+      "bytes": 4437,
+      "sha256": "b004c4ad89706e0c160aab8c876ca62ed92b4510299341661f3aa619939e6760",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_down_2.png",
+      "bytes": 4352,
+      "sha256": "6b6732b0d86d500084214baf711509f904082f185a34b72acd2081ff0fd4b4c9",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_down_3.png",
+      "bytes": 4566,
+      "sha256": "b9eecddf6349ab513561b9328faeeb0b6d4c1f17e264890e89adcbe94194bab0",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_left_0.png",
+      "bytes": 4236,
+      "sha256": "0592eb4eba4dfb0f32bbd370608bd93af371966c656d0e7382fa304f33af3842",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_left_1.png",
+      "bytes": 4381,
+      "sha256": "914fec57aeb1bc373db9bf54d41fab924397e4f3bd08955bf6dafca73f326a7c",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_left_2.png",
+      "bytes": 4450,
+      "sha256": "0cb414224fe8ec9ff7e9643ede0625133718d7928d7f24d71886d546568a9abb",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_left_3.png",
+      "bytes": 4204,
+      "sha256": "33b5c1863b49597edd8f2934011490e94208dbc6c7190800ed2e243d36ca6077",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_right_0.png",
+      "bytes": 4293,
+      "sha256": "c7d295f3a051a55f02295798783257dd942677e850e5705007c9970915061fea",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_right_1.png",
+      "bytes": 4241,
+      "sha256": "712be99c22d0e539f5fbd2197d57d8c1a2485043959d7f0bd1bf91fa741d6f87",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_right_2.png",
+      "bytes": 4233,
+      "sha256": "924a405c3ce55e7460da1e6a83c874c961e149f9a0de026c1b69a709d2772f24",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_right_3.png",
+      "bytes": 4199,
+      "sha256": "4b8955b0fa3087ef3e1b4d23b02c51bb78ad3d6031f594f17736fec26318fe59",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_up_0.png",
+      "bytes": 4549,
+      "sha256": "effe0307ad4df593dc236ac1835b442579547425c7527cc0c1ab7f3c999da962",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_up_1.png",
+      "bytes": 4812,
+      "sha256": "4969126b87e2abdbabf575148ee10f11776046e8182a99b0ad4e8fa7e6ecfc46",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_up_2.png",
+      "bytes": 4578,
+      "sha256": "89d85e619f1ea9f58e5160ffb1162f8ca02b018ed59c642874002e24b7c296d3",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/frames/walk_up_3.png",
+      "bytes": 4675,
+      "sha256": "5ba7bca375abb0e7710e45f7732d507722d9b2495be05f28305b3ddfbb9c3808",
+      "width": 112,
+      "height": 112,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/manifest.json",
+      "bytes": 1352,
+      "sha256": "1e2f6f21b674b9b1f87e5faa83a9dbb73c2cfaea096980583cd32ffff1ecfad6"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/source/down_right_source_v01.png",
+      "bytes": 2882718,
+      "sha256": "ffb4b72cd6058358f8b5786ab234cfe3a00214adb526e8083ccf4f83b15f7021",
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/source/left_up_source_v01.png",
+      "bytes": 2670307,
+      "sha256": "5edb2c535594426bdb813222c97dbca88cdd8cf6e8bf238067c5c9dce8c2d545",
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/spritesheet.png",
+      "bytes": 263236,
+      "sha256": "28183184df2b0148a44408c43337ccb0587dc861beeae7d718e58488cf5a0010",
+      "width": 896,
+      "height": 896,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/animations.json",
+      "bytes": 8867,
+      "sha256": "1f96fb683c382e206e393ebd657f89ce4e47bd09e784a4c0db62a1f1212e6961"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/atlas.json",
+      "bytes": 42147,
+      "sha256": "9cb315b91f6d701ee5be7a508e86242743e551d5ec3234a4b901100812f38f09"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/contact_sheet.png",
+      "bytes": 840064,
+      "sha256": "d80ad0047b85d29ca59da7153fbe607f9239ff44aae42d32b2af4a53b61a3bf3",
+      "width": 1280,
+      "height": 1920,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/basic_hit_0.png",
+      "bytes": 5356,
+      "sha256": "897b3c453e82858b93492ec51ec9159cb29e9c7ffdbae194f254953f70f1f8dc",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/basic_hit_1.png",
+      "bytes": 8185,
+      "sha256": "dae337e7f86c66b1527af11ba7160343ae7480f199323fbba86ee5223396891f",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/basic_hit_2.png",
+      "bytes": 4149,
+      "sha256": "0049bda5399e27b8c3b6ff9b8884c2b1e610ccb165bd60d174a8acdf242dbaf1",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/basic_hit_3.png",
+      "bytes": 2139,
+      "sha256": "fe06984cbf76ecef5c3a9a0d7a58df3f2ff40adc88fa6b59b1f41336535af4df",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/chilling_slow_0.png",
+      "bytes": 11630,
+      "sha256": "d319557fbc8389d8adb1bdd5697c8c22c9715e371fb00b7fff07f5824d065ca0",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/chilling_slow_1.png",
+      "bytes": 13975,
+      "sha256": "294fb9f3323c758177507f60ba1612e03b0dd861849287d6a2f14874b5816f69",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/chilling_slow_2.png",
+      "bytes": 17865,
+      "sha256": "11629d6f1051d197f9fc8b2cdd0422a243063bc73d1ba1429e6f6c804b8e4928",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/chilling_slow_3.png",
+      "bytes": 10914,
+      "sha256": "ea37c9973538569f4fa0e582f39857aace2e88172d32842f7fde89cd0e6b7dcd",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/co_mo_sigil_0.png",
+      "bytes": 9369,
+      "sha256": "db696fafddf85c11b7035c51c8b031192e14ba268ee21432a625c35af1ece305",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/co_mo_sigil_1.png",
+      "bytes": 15255,
+      "sha256": "f30a8d1228e2c33385b3ea80ec3826f7c38b2a4da25f471762eb0a745c144aa2",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/co_mo_sigil_2.png",
+      "bytes": 21554,
+      "sha256": "39504e68396290910d617082c4a304d7b7f05ebb5f32565366a2579953ba750a",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/co_mo_sigil_3.png",
+      "bytes": 9943,
+      "sha256": "e8b61ec9a5ac286f00e6d4ec6d11f42f611410ba3cd2f1c6cc20e78653ec0034",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/co_mo_spawn_0.png",
+      "bytes": 10439,
+      "sha256": "1723f7ad1fa208f6cd4e574d53bc4503fa3f9c79e87c946fd299e90000c93b47",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/co_mo_spawn_1.png",
+      "bytes": 16779,
+      "sha256": "0fc4209b053fe8f1c46045a4881979b6ec017fa8330affb76126fb996736cec5",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/co_mo_spawn_2.png",
+      "bytes": 23742,
+      "sha256": "b910ad534296a6730ce9c3b5f29ac2b88b8bb0f9250b124d32fa98fa44bf0df6",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/co_mo_spawn_3.png",
+      "bytes": 10766,
+      "sha256": "5f64a3183fdbdac131efbfaccf7e8e3ba7c98c89a53aea82214a3c8023902359",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/defeat_burst_0.png",
+      "bytes": 13243,
+      "sha256": "2d56f166423af29952ab875a0e5573e0e180d7f9651da94817c344da90f27123",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/defeat_burst_1.png",
+      "bytes": 21153,
+      "sha256": "e6786df98e6f0e29f2cc714732147982968fd530be561c4df2c1e781c58c70ca",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/defeat_burst_2.png",
+      "bytes": 18836,
+      "sha256": "ed3f80cc3373c7e4453c24d3ecb19f6d593ca9bdd7d502ffc03559dfde991221",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/defeat_burst_3.png",
+      "bytes": 6252,
+      "sha256": "b456aa7ae5c4a95376ceb8de838048a367edbd44be3d788facbab7a667f2f5ce",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/duster_sweep_trail_0.png",
+      "bytes": 7639,
+      "sha256": "e161a2932fc2308f0dcde242ec0418a8be41f4861174ab6c352df274c20a95c2",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/duster_sweep_trail_1.png",
+      "bytes": 13386,
+      "sha256": "c58a1eab76e396c7ce758f9b73629a35b9003061f35588c4b304be6db7fbda3a",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/duster_sweep_trail_2.png",
+      "bytes": 16059,
+      "sha256": "dd8f7da11c5e4e405323743693327ec419ad35ba0a7bd530d2a9d4cf57fcdaa1",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/duster_sweep_trail_3.png",
+      "bytes": 7007,
+      "sha256": "9dd3bf9c9188cc56d3614a02155a1805d32e0ef2c825920169057dba37612e14",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/edge_emission_0.png",
+      "bytes": 12272,
+      "sha256": "fd1b373d71c784c06c860cda90e0ff741beb03d99ab0cf9c9a73d9ab0c9bca29",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/edge_emission_1.png",
+      "bytes": 14365,
+      "sha256": "67ff3349d04787fd81cdffcc3a65f2218fddd17ac8720ba17659d68476eb75cc",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/edge_emission_2.png",
+      "bytes": 20689,
+      "sha256": "7aa14df24783683e022bba65a807bb3e2a63f45c1e5de7edfac0a95e220f548b",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/edge_emission_3.png",
+      "bytes": 11356,
+      "sha256": "93f6153433cee718270b496973f87dacfa433840f22f0aaca096c19c5490334f",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/edge_warning_0.png",
+      "bytes": 10088,
+      "sha256": "9fe45b19d8a0a6be8edf7c3f31016a46e06e74eb81755486fbebc67af99c63e1",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/edge_warning_1.png",
+      "bytes": 10762,
+      "sha256": "04bf186f6251c6c42fb5eb86e600fbca63c5dee7f799c5bee73a621870ddf5c9",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/edge_warning_2.png",
+      "bytes": 12298,
+      "sha256": "a74922fd1991c0952587684268e5b6e2e7696b7033b5706511f1ce0cf438e63c",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/edge_warning_3.png",
+      "bytes": 15926,
+      "sha256": "0f295c1a56182330e7c2ff65167c067619016b560a6229fde3e0f33e7a35dd7e",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/hp_drain_0.png",
+      "bytes": 3917,
+      "sha256": "757df2145e033dc7587fa14223a078f39f54114bd68c3c565ab0c86745c9bb36",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/hp_drain_1.png",
+      "bytes": 6493,
+      "sha256": "26f409eda40bfeb66e6a6724817cc2f39ce37e4ff80a6140240e863ef9335508",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/hp_drain_2.png",
+      "bytes": 11257,
+      "sha256": "29fde6f651676af97978c44b74eeb2e37fa8c13edab5552ab53e7fc4d70c7050",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/hp_drain_3.png",
+      "bytes": 4149,
+      "sha256": "4c79b4e8a32787b5dc377a3c491e92c0bcfc32d4f85347496ef25a934b17d535",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/melee_impact_0.png",
+      "bytes": 7159,
+      "sha256": "e2137af2f5b0762dc9839897aa5d2fd13dbebe86fc3d0b7ec5204b5d1d3d5bdd",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/melee_impact_1.png",
+      "bytes": 12012,
+      "sha256": "9bae57192b2d27914cce7d2e2c919b8b840204879f47a0368735b5d6739b14b2",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/melee_impact_2.png",
+      "bytes": 8578,
+      "sha256": "7bcd3e7796b6197df002f8369298e1748700e7c2c3ecbfa4170c5998df0a969c",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/melee_impact_3.png",
+      "bytes": 2646,
+      "sha256": "41f32c550a1a36a15e36023dded148bb2959dc42ade67867120782c11c358ee7",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_aoe_warning_0.png",
+      "bytes": 4110,
+      "sha256": "6e845253ebfb174fd7b97deecdde23ff94bdb6f854365c914d1269af56167775",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_aoe_warning_1.png",
+      "bytes": 6599,
+      "sha256": "4ee62892c3ab90716409bc39391b92ee513afe1601f8e2f509d825bc1f33f710",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_aoe_warning_2.png",
+      "bytes": 10089,
+      "sha256": "0a50f07a453b7eb01aded4c0e3275f34a4f6af8e4b18fd289fc4611173d1914a",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_aoe_warning_3.png",
+      "bytes": 5759,
+      "sha256": "2f00f438da3fdface35932f3ee93fec65a3537c3ff47450df5387153a3ba7113",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_poison_impact_0.png",
+      "bytes": 7849,
+      "sha256": "46472716b896785c46eb98ef085540e955091af88c679fd1d518d606c2be491f",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_poison_impact_1.png",
+      "bytes": 14606,
+      "sha256": "1f561562cbd8ef0922a2b75370f94024b237849bdee3aae4b0ecdda4bc670df8",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_poison_impact_2.png",
+      "bytes": 23595,
+      "sha256": "76dce5400abc150be9241d8156402da70d06f3797ad1fd25f7d102ea001bd508",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_poison_impact_3.png",
+      "bytes": 10925,
+      "sha256": "18c026624ffb0030c8659684f023e50b7e4042275142837eca45ac4a1d0c1846",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_projectile_0.png",
+      "bytes": 3888,
+      "sha256": "571ec0fe5ab87278e75cfffe5a967005b0cae089c0021002cac68848e577e841",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_projectile_1.png",
+      "bytes": 4916,
+      "sha256": "4765a6f7c58436b6e91d0dea33090788995e01766a9521b3c73d9899f02078ce",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_projectile_2.png",
+      "bytes": 6556,
+      "sha256": "7556458b6b17eedc1d863f83862d1189e809e27d1aa679221cd1aa9a621b0274",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_projectile_3.png",
+      "bytes": 4995,
+      "sha256": "3d76e5eed28fcb440b610e9840e89f3260f92e92c494eb14c3c2f63e88ca431c",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_spread_0.png",
+      "bytes": 8414,
+      "sha256": "9c63388421bc2d8508a087b1d271ec621cd92579a6eb9ca3f3a6b381b816c286",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_spread_1.png",
+      "bytes": 12881,
+      "sha256": "e4c41756aa0f7c62773e44062c87f06d1656f4b3fd859234bbfba7e8b105ed4a",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_spread_2.png",
+      "bytes": 15863,
+      "sha256": "e4f1b9d09cc0ade4bda74f5e7adf1d6ccdb4bf7889a6b888ec43a7d961d75c30",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/needle_spread_3.png",
+      "bytes": 9287,
+      "sha256": "ab98b363edee3dc6a66e38f621fe5258c7adc78a1f2b4c7597f70b32c3dbb66f",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/ngu_doc_impact_0.png",
+      "bytes": 9658,
+      "sha256": "49520abc301cd36c7787128b7d73f2d705df27cb676ae2a38afc47e7e4429ee8",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/ngu_doc_impact_1.png",
+      "bytes": 19118,
+      "sha256": "6ac20aa49111a86db2e2533c5e6df55899b2456a88662a77eebf2b6b969a562c",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/ngu_doc_impact_2.png",
+      "bytes": 24900,
+      "sha256": "b8d98ac2148a1a26cd2992adbb7eac8ce30fd9b9b32085da170ce287b2a0b699",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/ngu_doc_impact_3.png",
+      "bytes": 11768,
+      "sha256": "b31ae38862ae583f4a24123abd14adb99cd7d43aeb709a72503f05004ed49ff3",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/ngu_doc_projectile_0.png",
+      "bytes": 8840,
+      "sha256": "768869e57661beeb1b976fae2f89a9f1b8abe17a5bf5418cb80e4320c2044645",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/ngu_doc_projectile_1.png",
+      "bytes": 11155,
+      "sha256": "03ce6bddefab72ace0799a00880b39f528c384fb7082028143d60fe990788b95",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/ngu_doc_projectile_2.png",
+      "bytes": 16520,
+      "sha256": "2dd230c1919c96380364dac39f6acd3ae9b1e5b3f30baac5bf33c73bda3a3a48",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/ngu_doc_projectile_3.png",
+      "bytes": 7924,
+      "sha256": "fa8742db6b4a7181ac39a0b5405ff773086c19ad74c8e0c1e93c76752f7715fc",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_charge_0.png",
+      "bytes": 10760,
+      "sha256": "59dc6040b46705effc514eb30d5e958ceff927c71f3fcd5ecc03c1966db1a34d",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_charge_1.png",
+      "bytes": 21660,
+      "sha256": "1ee7c890c18dbfc3701c5e394be2952fb9943ce618553903a916dd5337afdfc4",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_charge_2.png",
+      "bytes": 24339,
+      "sha256": "80df8cfde1d7efb1902f116e4890321869e2844618a5ad7d1f00123c1e439615",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_charge_3.png",
+      "bytes": 17648,
+      "sha256": "7f62bc10c9420844ec9b8dd3b51b8e7ec1e5f1866a496fcb01c2d51532ae779a",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_impact_0.png",
+      "bytes": 7551,
+      "sha256": "cd976a7c40fbb93de903fcd821b457c2bb745da750ca33d0024c5a7f7c5dc775",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_impact_1.png",
+      "bytes": 22805,
+      "sha256": "b24c24c85791d21a110a33566939439cb7a6ed2f23d2798b2806d37d29920372",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_impact_2.png",
+      "bytes": 24450,
+      "sha256": "f5a78f32d2e2cae64f46acdd800becdb92bbd95fec4f454a155a1385f1b4fa80",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_impact_3.png",
+      "bytes": 14036,
+      "sha256": "a8a65aff7ebda8eb2e68af8f23e6ca210e6ac74bab2c2e774200d879480155eb",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_lane_warning_0.png",
+      "bytes": 6576,
+      "sha256": "7710357fa121dc138d6a9ad1e0de1fd99ba287926708140200d834475540434f",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_lane_warning_1.png",
+      "bytes": 8368,
+      "sha256": "fc6b511494e30aeb1eb8611a0064d7112087bf22ccddfc694d25c61c51241138",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_lane_warning_2.png",
+      "bytes": 9321,
+      "sha256": "2116b99cf2a6b961b24f5052a83b82d8cef8dfbd0f31de60d93c636c67e29b3c",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_lane_warning_3.png",
+      "bytes": 12469,
+      "sha256": "e89ae7e9f3fd28a0f23dabb9e8f40a5f99346e9bb4472d1db7fefad46dbd215a",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_projectile_0.png",
+      "bytes": 14662,
+      "sha256": "7fe194a8adec6b49c948329da62356c7ac35459645fb9e326baba21ef2583800",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_projectile_1.png",
+      "bytes": 16912,
+      "sha256": "fe043c6b31120bd6fe946f6fc137764ecc2622b5c9c3276d1d7024bd274bb41c",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_projectile_2.png",
+      "bytes": 17712,
+      "sha256": "cd72ae95a0bd1988d9a99836c654cf234af92c7ada180b52b7f5efc41576cd51",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/palm_projectile_3.png",
+      "bytes": 15458,
+      "sha256": "5436e9a53060e050e031f9cad8efa5628bd77e2739f95b618212a7cb5de77666",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/phase_two_activation_0.png",
+      "bytes": 9427,
+      "sha256": "8e30b009fce636810ca2714e48b0ec36e4b1f170fa87192356bef22a4cd2cb72",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/phase_two_activation_1.png",
+      "bytes": 17898,
+      "sha256": "932f3f8ee5f92fa606b788b06cf6de101aa71ca1d24fb8dcde21bb6e913fb8f6",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/phase_two_activation_2.png",
+      "bytes": 24905,
+      "sha256": "1bac66e0c2b6acb48b0aa1c709d66fd704d1da14f81c3f0a27ceaecc270219ad",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/phase_two_activation_3.png",
+      "bytes": 10010,
+      "sha256": "1b9a60cfc9a299b21df5527e1860f22345851ab0256c042b8b8bedb39b1eaea4",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/poison_status_0.png",
+      "bytes": 6949,
+      "sha256": "082980c218ae194c00b7503ca722438151603201b8f67796d931a62bfacb27f4",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/poison_status_1.png",
+      "bytes": 11067,
+      "sha256": "1d23fad50a084888413ef2a3a681dfe23b5b0560c842b10f27ab8581532ccba4",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/poison_status_2.png",
+      "bytes": 15765,
+      "sha256": "f2f22a460a2df2305a874c77614f224f8fe310e7f2406cd8f42aaaf0fa118d11",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/poison_status_3.png",
+      "bytes": 6725,
+      "sha256": "810f2ce0f7a1c4e6c606f0c77676f5ee1125cdfc80f389484b05462fb3aff6fb",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/sweep_cone_warning_0.png",
+      "bytes": 6875,
+      "sha256": "5f449f280e9819eb6ece74d5a165ed759332ba564b4a40e428629aa6b767874e",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/sweep_cone_warning_1.png",
+      "bytes": 10260,
+      "sha256": "7a32fa34a70c35433428e4a25f4c9f084754780f4c01a768b37518a7cf6c90f9",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/sweep_cone_warning_2.png",
+      "bytes": 11991,
+      "sha256": "ea5bb63ece7be1c5aeb841d7ec7060c83ed022e7c0cf311c2bd37a1957a00947",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/frames/sweep_cone_warning_3.png",
+      "bytes": 13933,
+      "sha256": "63837e0b705df2f026bb4a21bcc462ad16b6dd0df73f2e9a2bf927a9bc01722d",
+      "width": 160,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/manifest.json",
+      "bytes": 1700,
+      "sha256": "b871a8c0d0f1bb34b2ea40ed664aa6342d21883271796d586953ad494abe9154"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/source/bang_phach_source_v01.png",
+      "bytes": 1932990,
+      "sha256": "21b0cf825f1192270baabbc9bfb89f4cc64f3b9cc9ce38d3dd0cd739e7dc6eea",
+      "width": 948,
+      "height": 1659,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/source/palm_sweep_source_v01.png",
+      "bytes": 1762991,
+      "sha256": "177df56c1716d3ee43d3423bb35274923fccc46f6161a7a883772f5db6d26999",
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/source/summon_phase_source_v01.png",
+      "bytes": 2431895,
+      "sha256": "b8f9bb870dfd83510e5cd844bfbadab6105af78ca480669d6a781b615a7a7df6",
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/spritesheet.png",
+      "bytes": 1112168,
+      "sha256": "3d41af3f1f4f85cd42cee21c56926ae1b98b00511bbc4da3aa3c21c201009c65",
+      "width": 1280,
+      "height": 1920,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/altar.png",
+      "bytes": 19232,
+      "sha256": "9303c9df1c7f4196b36c003a1c9384122388480c6540654debef86172aa4da62",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/animations.json",
+      "bytes": 150,
+      "sha256": "f3e20f1ab9d87d1e06a03a0fa50271a17f3b492aee17ead19e2c08eb2a27795e"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/atlas.json",
+      "bytes": 7413,
+      "sha256": "41259c35d179e987d72d26b860dcec1838a5a31869eaf514760d0c2778a1533d"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/cave_corner.png",
+      "bytes": 21493,
+      "sha256": "351108e20bcc1bd8f5f232bb073ee92e47b49abaf33f868c0e4ca66a7c675fb3",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/cave_rubble.png",
+      "bytes": 14157,
+      "sha256": "6290bb89117d01ace75f150f1b90d1d028a5698c27b237139bb213d657e6dd05",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/cave_wall_horizontal.png",
+      "bytes": 18826,
+      "sha256": "d29e37bb50b1cae1638242820a9de5c5ce7aa914a793aadaf994f1e64a254c3b",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/cave_wall_vertical.png",
+      "bytes": 17088,
+      "sha256": "c6645ff8f7397ecb3aab493512e7e2e1754801617539c1990257b9150a248444",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/contact_sheet.png",
+      "bytes": 238148,
+      "sha256": "bdb4b1eeea28f883b468c692d89e78290f8f45a228d34f170b88627a868794a0",
+      "width": 1536,
+      "height": 384,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/faded_banner.png",
+      "bytes": 14633,
+      "sha256": "52096aeca72797dc645e7accc30616a7bc4c64e903d67e023bdf580004c1b973",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/female_founder_statue.png",
+      "bytes": 26962,
+      "sha256": "e7d6e76a3ec171326e31ff9c8423ab622066e5bf4ce7d314c7abb8dd77ac3f17",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/altar.png",
+      "bytes": 19232,
+      "sha256": "9303c9df1c7f4196b36c003a1c9384122388480c6540654debef86172aa4da62",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/cave_corner.png",
+      "bytes": 21493,
+      "sha256": "351108e20bcc1bd8f5f232bb073ee92e47b49abaf33f868c0e4ca66a7c675fb3",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/cave_rubble.png",
+      "bytes": 14157,
+      "sha256": "6290bb89117d01ace75f150f1b90d1d028a5698c27b237139bb213d657e6dd05",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/cave_wall_horizontal.png",
+      "bytes": 18826,
+      "sha256": "d29e37bb50b1cae1638242820a9de5c5ce7aa914a793aadaf994f1e64a254c3b",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/cave_wall_vertical.png",
+      "bytes": 17088,
+      "sha256": "c6645ff8f7397ecb3aab493512e7e2e1754801617539c1990257b9150a248444",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/faded_banner.png",
+      "bytes": 14633,
+      "sha256": "52096aeca72797dc645e7accc30616a7bc4c64e903d67e023bdf580004c1b973",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/female_founder_statue.png",
+      "bytes": 26962,
+      "sha256": "e7d6e76a3ec171326e31ff9c8423ab622066e5bf4ce7d314c7abb8dd77ac3f17",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/funerary_urn.png",
+      "bytes": 15108,
+      "sha256": "b95c23371573b0a2d8c17f8697bf4e8e9dd637c656da36b3507fdf0d4d1ff40e",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/jade_lantern.png",
+      "bytes": 12346,
+      "sha256": "de21b15035a32b01c1a9edbaec483c0755be20ecfc11376b75c7f9eda9f1c5c4",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/lotus_pillar.png",
+      "bytes": 16339,
+      "sha256": "3800aa2592a6f1766c69d3591d194e937b82a09da8e76c07f66b54db8b0eecbd",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/male_founder_statue.png",
+      "bytes": 29093,
+      "sha256": "2cfd214b6f6b85624c119634079dab1efe2b8f6dcd5120f8a18dcd6197f6fb47",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/plum_vase.png",
+      "bytes": 11308,
+      "sha256": "8a65bb85a9e82755c8a4350102c4edf78596c8ec7fc6f869d86e461550a3b078",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/stalagmites.png",
+      "bytes": 16162,
+      "sha256": "a4acd226a72d2e1c61354bdecec219ae69fe11776ee1d2b1badcb3d3b870a90b",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/stone_bench.png",
+      "bytes": 9021,
+      "sha256": "14597475ee6fc4a54fd289b69be59754766f3872d757c2ae0cb8c12e42a6aab1",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/sword_rack.png",
+      "bytes": 16406,
+      "sha256": "2e99da7d8ead07bd2c7e4837a6ce621a72f6da0ada810a3d06dd0ef418f21fe0",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/frames/tomb_school_arch.png",
+      "bytes": 33631,
+      "sha256": "3e0a501f3772905c6ddb6c30890f5adbbb5abea5223cdea58431608917510076",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/funerary_urn.png",
+      "bytes": 15108,
+      "sha256": "b95c23371573b0a2d8c17f8697bf4e8e9dd637c656da36b3507fdf0d4d1ff40e",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/jade_lantern.png",
+      "bytes": 12346,
+      "sha256": "de21b15035a32b01c1a9edbaec483c0755be20ecfc11376b75c7f9eda9f1c5c4",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/lotus_pillar.png",
+      "bytes": 16339,
+      "sha256": "3800aa2592a6f1766c69d3591d194e937b82a09da8e76c07f66b54db8b0eecbd",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/male_founder_statue.png",
+      "bytes": 29093,
+      "sha256": "2cfd214b6f6b85624c119634079dab1efe2b8f6dcd5120f8a18dcd6197f6fb47",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/manifest.json",
+      "bytes": 6569,
+      "sha256": "1e11bce96bb7a1c954801c87e75de0f77a9369e0198931740e857b8e0cc72b81"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/plum_vase.png",
+      "bytes": 11308,
+      "sha256": "8a65bb85a9e82755c8a4350102c4edf78596c8ec7fc6f869d86e461550a3b078",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/source/props_source_v01.png",
+      "bytes": 2445203,
+      "sha256": "3fde8bad3b759347ed85c952a4ad14196b41cae7aaf9912afd01f873907aa284",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/source/terrain_source_v01.png",
+      "bytes": 3299290,
+      "sha256": "1c5518f3c1a4bb89bc33dabea646f010b920c3af46d2d65d2d6297f8b2474894",
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/spritesheet.png",
+      "bytes": 291105,
+      "sha256": "0e290fe1682b349c01d8073ca0784781682bc800f384c8607cadffd249c5b8b5",
+      "width": 1536,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/stalagmites.png",
+      "bytes": 16162,
+      "sha256": "a4acd226a72d2e1c61354bdecec219ae69fe11776ee1d2b1badcb3d3b870a90b",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/stone_bench.png",
+      "bytes": 9021,
+      "sha256": "14597475ee6fc4a54fd289b69be59754766f3872d757c2ae0cb8c12e42a6aab1",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/sword_rack.png",
+      "bytes": 16406,
+      "sha256": "2e99da7d8ead07bd2c7e4837a6ce621a72f6da0ada810a3d06dd0ef418f21fe0",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/terrain.json",
+      "bytes": 3315,
+      "sha256": "4b72b56d5f444a662fa260aa42cad2b1d6a133df8c07fe6b2ebb1ca634d364b0"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/terrain.png",
+      "bytes": 45831,
+      "sha256": "f8d254fe06443cbc63848c0193ffaee1f387203c756b7967cfd5573bdaac55af",
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/terrain.tsj",
+      "bytes": 257,
+      "sha256": "ec5863f95927b5077ae0b9ffe61874bf2f16bd63e506a53cd6721e2f39e35033"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/bedrock_a.png",
+      "bytes": 3211,
+      "sha256": "07d51d3a05a00d35c2b14eaaca703354746e054a49dd71add99f9cf3c76d780e",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/bedrock_b.png",
+      "bytes": 3267,
+      "sha256": "e8a20b76d0e940963c706351b24007daf1b9d7d9d4d2fa8011faf522af1a5f2b",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/bedrock_c.png",
+      "bytes": 3165,
+      "sha256": "cbd8f2998cf38c2ed1c6fff29e3a020efe9412a24d0cabf58546918ed19a6e82",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/bedrock_d.png",
+      "bytes": 3208,
+      "sha256": "ec3308adaa9a3a0a360526446f89736d4f5fd1736c942bfa768388a911785bb6",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/border_corner.png",
+      "bytes": 3099,
+      "sha256": "da55522642d8e3fcd4133b4f054393f2f826776101deaeae1baf7b31c6468b4d",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/border_horizontal.png",
+      "bytes": 3093,
+      "sha256": "1fb0013d8bb0e2da9f5da0697a7f08bdc4c560681f94367467ae68f58c000ee5",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/border_vertical.png",
+      "bytes": 3175,
+      "sha256": "aa64c6ca0a73825b11ca7dadd716f81a337d0fc26f17aac54c849ae842976ada",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/lotus_engraving.png",
+      "bytes": 3331,
+      "sha256": "259d758be984a56cad29f78748c48fe6d00a0fc3f110d66284c85f5a4edde93c",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_clean_a.png",
+      "bytes": 2954,
+      "sha256": "ce6b9fee8f4a8c3eeb4004e68b613762270fea5a9ab6163926f8c2deca1bdc6e",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_clean_b.png",
+      "bytes": 3007,
+      "sha256": "3a4a1e82a428b1cbb4f4a0bc71bcc263ff9548fc14c042e80e323b71af83701b",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_clean_c.png",
+      "bytes": 3058,
+      "sha256": "b65ccaa33caa77726020d98ecdf3b49f565b633e183121f8c5a681154699023d",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_clean_d.png",
+      "bytes": 3058,
+      "sha256": "eb15b292ab65cbe2f47f3f08ff87aa22945af78d313f86f4f1bd7b45098ce6da",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_damp.png",
+      "bytes": 3136,
+      "sha256": "028785c70b383681d48f1be98f7d9bfbb1bae72dcae59f191c01962ee7082756",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_dust.png",
+      "bytes": 3247,
+      "sha256": "7dc1699af74d8e2bf477c12a989f609fccc85bdce5d342dc9e3826a11c34a2d9",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_fractured.png",
+      "bytes": 3242,
+      "sha256": "015b9b69335b1218767b0ab42479815b5a5b0df0faee4a5f5492f6768251aede",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_moss.png",
+      "bytes": 3075,
+      "sha256": "8d5c4f0be6f9e6bd702c92ec1900478de4f1c149a6a12eeee248910228cc6a3a",
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tomb_school_arch.png",
+      "bytes": 33631,
+      "sha256": "3e0a501f3772905c6ddb6c30890f5adbbb5abea5223cdea58431608917510076",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    }
+  ]
+}

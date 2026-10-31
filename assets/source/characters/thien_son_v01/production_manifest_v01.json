@@ -1,0 +1,731 @@
+{
+  "schemaVersion": 1,
+  "createdOn": "2026-10-30",
+  "schoolId": "thien_son",
+  "displayName": "Thiên Sơn",
+  "element": "Phong (Wind)",
+  "status": "approved",
+  "reviewStatus": "APPROVED",
+  "approvedConcept": {
+    "path": "assets/concepts/heroes/thien-son/thien-son-concept-v01.png",
+    "sha256": "fb10f582becb87e8b6ff14acd78e14b4742ecc085463a56783b6c1b5827dff68",
+    "filename": "thien-son-concept-v01.png",
+    "approvedOn": "2026-10-30",
+    "approvalEvidence": "User: approved, please proceed"
+  },
+  "generator": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "promptRecord": "generation_prompts_v01.json",
+    "reference": "Approved concept v01, matching newly generated poses and approved Cai Bang scale reference for the rejected initial layout only",
+    "provenance": "Original AI-assisted project raster poses, not copied concept-sheet frames or a third-party sprite pack. No exclusive copyright or independently verified ownership of director-supplied older references asserted."
+  },
+  "sources": [
+    {
+      "path": "assets/source/characters/thien_son_v01/generated/down_dao.png",
+      "sha256": "76a4267eb9cd9fcb15124cef6430c73da344295e7d2c9a168f6a0833ea22914c",
+      "selected": true,
+      "rejectionReason": null,
+      "originalGeneratedFilename": "exec-e7f4523e-d969-4563-90b4-cb8734a2acf3.png"
+    },
+    {
+      "path": "assets/source/characters/thien_son_v01/generated/down_fan.png",
+      "sha256": "6ad3b65d076001546d3d325f5cc705f5a36b1fc99822bcfb794c96c979211093",
+      "selected": true,
+      "rejectionReason": null,
+      "originalGeneratedFilename": "exec-5309643e-0df6-4e15-b67b-b1c54956a54c.png"
+    },
+    {
+      "path": "assets/source/characters/thien_son_v01/generated/down_initial_rejected.png",
+      "sha256": "434ccc3cc4827c743d3f9bdb0598a6d9081dbe206f83e1609f8d911de0901c07",
+      "selected": false,
+      "rejectionReason": "Wrong requested pose layout; not exported",
+      "originalGeneratedFilename": "exec-b4d258e6-5f3f-4b5b-bddd-816147899bc3.png"
+    },
+    {
+      "path": "assets/source/characters/thien_son_v01/generated/left_dao.png",
+      "sha256": "082250a71aaebb7b40540a0ab65b5351a971da5aa69d97e7b9c24800877f8208",
+      "selected": true,
+      "rejectionReason": null,
+      "originalGeneratedFilename": "exec-41822dfc-7d8a-467c-b2c1-817ccc4fa7de.png"
+    },
+    {
+      "path": "assets/source/characters/thien_son_v01/generated/left_fan.png",
+      "sha256": "feb10c246db07fd13e07b18d110f0ba704085a438209ade59e9a550c7030283c",
+      "selected": true,
+      "rejectionReason": null,
+      "originalGeneratedFilename": "exec-17d71e0f-991e-4721-8482-4383387c13d4.png"
+    },
+    {
+      "path": "assets/source/characters/thien_son_v01/generated/right_dao.png",
+      "sha256": "44aa2712ad47b0b2c6f27de9cfc96c5c55a82353ac47e8b4aea6300fa9c9d2d0",
+      "selected": true,
+      "rejectionReason": null,
+      "originalGeneratedFilename": "exec-0360f41c-521c-40b3-b24a-b0ef00892ab1.png"
+    },
+    {
+      "path": "assets/source/characters/thien_son_v01/generated/right_fan.png",
+      "sha256": "ec5ce30cfa03c8a8579ded14c2fcc1d8823909cabedd3eac6ce49050202b07e4",
+      "selected": true,
+      "rejectionReason": null,
+      "originalGeneratedFilename": "exec-ce3b6927-973f-479a-89b1-81b969b1e6b3.png"
+    },
+    {
+      "path": "assets/source/characters/thien_son_v01/generated/up_dao.png",
+      "sha256": "61fee588e2eacc828961fec406f6311db810b3b99ab7e61f97cb1c449fcf5eca",
+      "selected": true,
+      "rejectionReason": null,
+      "originalGeneratedFilename": "exec-32f3d6bc-1e1c-4480-9f7f-fcde4cb5f0df.png"
+    },
+    {
+      "path": "assets/source/characters/thien_son_v01/generated/up_fan.png",
+      "sha256": "3793674e1857d6e858323727423472c05352436e8945596bd2ab940d7c4f7456",
+      "selected": true,
+      "rejectionReason": null,
+      "originalGeneratedFilename": "exec-6682bcd5-95d5-4cdb-8e79-a5930daa125c.png"
+    }
+  ],
+  "processing": {
+    "editor": "Aseprite 1.3.18.6-x64",
+    "assembly": "assemble.lua",
+    "sourceInspection": "inspect_sources.py",
+    "sourceRegions": "source_components_v01.json",
+    "placementAndScales": "frame_sources_v01.json",
+    "alphaThreshold": 220,
+    "alphaCleanup": "Keep connected original source RGBA pixels with alpha >=220, make retained source RGB opaque. Exclude disconnected generator speckles/halo. No new illustration drawn by code.",
+    "resampling": "Aseprite nearest-neighbour, single measured body scale per source strip; never fit each animation frame independently.",
+    "facings": "All four cardinal directions drawn separately. No mirroring of asymmetric weapons.",
+    "exportCommand": "node scripts/export-thien-son.mjs",
+    "reassembleCommand": "node scripts/export-thien-son.mjs --assemble",
+    "editableSourceWarning": "Default export preserves manually edited Aseprite sources. --assemble intentionally rebuilds from preserved generated poses and measured placements.",
+    "approvedSourcePolicy": "Approved source and export bytes are hash-locked. Exporter refuses overwriting these IDs; future art changes require a separately reviewed revision."
+  },
+  "assets": [
+    {
+      "id": "hero_thien_son",
+      "weapon": "fan",
+      "status": "approved",
+      "finalArtApproval": true,
+      "approvedConcept": "assets/concepts/heroes/thien-son/thien-son-concept-v01.png",
+      "files": [
+        {
+          "path": "assets/source/characters/thien_son_v01/hero_thien_son.aseprite",
+          "sha256": "365db5ce84c5fd8741b29430f87f6e9187d106f73a8781dc9bf60fb48290fe35"
+        },
+        {
+          "path": "assets/exports/characters/hero_thien_son.png",
+          "sha256": "be15e9d08d54ad591c37a215b7694f126104042a895eefcf0a9290752e3a0761"
+        },
+        {
+          "path": "assets/exports/characters/hero_thien_son.json",
+          "sha256": "b82085483d532ac739e21c6a5eb115b91dd4a86f95ebc09a7f70ce5d593337f4"
+        },
+        {
+          "path": "assets/exports/characters/hero_thien_son_idle.png",
+          "sha256": "3ffe1dab3b722bc21c96f7564214dd4168ee794a14a9e259a668fc2205cfdf02"
+        }
+      ],
+      "individualFrames": [
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_down_0.png",
+          "sha256": "8da0a3e29c23b7184f9fadd18bc14b34488d7bc17f0cab79305778b64ef039d8"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_down_1.png",
+          "sha256": "3f0ca583396a7cfafb1a747386aa8cd0f764390091f7890bf506753b7249249c"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_down_2.png",
+          "sha256": "a5300b4c46a912b92fded3e393168c6e29a5ed3e61acb7d47ddd0c73d4f4612f"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_down_3.png",
+          "sha256": "c956e1e1a98691f17a5c45310c8ac930d53f57578641ef62a67ef29eaa4246eb"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_left_0.png",
+          "sha256": "b3a7690443e28963eb451353813356b902d864134c58c5733d452c2878f50173"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_left_1.png",
+          "sha256": "3d0565d956c0239d57b47262ce3be5ff86a43fd644637dd98af313c9892769c9"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_left_2.png",
+          "sha256": "c0285019a0c56eb760b7be1612cccf7c2bc7ae00c4e45b06b78cb2b8b41532d1"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_left_3.png",
+          "sha256": "741cca2994db6e0b524862808c211dcb0d80e517c9d6879778d71067b79a428f"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_right_0.png",
+          "sha256": "147f6531c0ffa03794d047953f329063aa64db1b775691eaf6c0d932f40725c0"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_right_1.png",
+          "sha256": "b30a8fb6bdec626badaf3b78d9d7c5606de3b9b1ebbc4dcceafe4e6d52081b7d"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_right_2.png",
+          "sha256": "79a30874cf6ea705d761e7e124075c841556de1b2eb3e4df25705e78050c2f2e"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_right_3.png",
+          "sha256": "1d5e6c83f6e787bfd7b81ce622e95abf3720face99bfe80b084f4d850159b430"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_up_0.png",
+          "sha256": "c395c88d8279c71ba823e7f2086c8cf0cc029ce9cbea5e43a75ab7bee40918d4"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_up_1.png",
+          "sha256": "48254a42763f5abb08127ab0eee8776af3a5b0a4e88a36abff821e756a3de3b2"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_up_2.png",
+          "sha256": "5ed3dec7873a64bfaa5af9efa6fc47377df658bd7968622c239085fab612e840"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/basic_attack_up_3.png",
+          "sha256": "1ba7aacf237c843f6dd3b3c2e49969381882c2806b2bc96514a3d4c9be09c8ed"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/idle_down_0.png",
+          "sha256": "3ffe1dab3b722bc21c96f7564214dd4168ee794a14a9e259a668fc2205cfdf02"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/idle_down_1.png",
+          "sha256": "73971949b678133ad58952a65621d2cffc88143833e250e0b19db4fa88c7a0b9"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/idle_left_0.png",
+          "sha256": "bc97cfed794ebe65df815579b5daf2cc3e268b3d71d5b96bd4917946164d6a91"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/idle_left_1.png",
+          "sha256": "8fb7446e5bb80e299fb2ac812b488435e9629b2303df7e8faf7cb9f7e5bb5933"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/idle_right_0.png",
+          "sha256": "aeef46d1a2ddd068c20e43d609056afd3b7d71ffde741ac17cca6eff0a603d17"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/idle_right_1.png",
+          "sha256": "3406bab53b50f592918411f58dd62618f7c59acff3169ddbf1d217b524e82316"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/idle_up_0.png",
+          "sha256": "13ed4cfe70b3aa8c90baf10ec69c3c5ce883f390f102aa112f73d5e37e6252ab"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/idle_up_1.png",
+          "sha256": "9c276a97cf7fcbfe02ce5e20662304c14beb6e9dec3aa7ce3d06b58881c25a04"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_down_0.png",
+          "sha256": "ceaff61f27c7c4eb9db91ac5bdc66964772247ff2c8de377170570fca5796e7e"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_down_1.png",
+          "sha256": "f0c173bb19b9f914e048d2c77b5c48fecfede904031564f275c3bf0211d6d3db"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_down_2.png",
+          "sha256": "95b8d9442c72d35d4e65cdfe8026f81ed695342df4151c48161896151986c75c"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_down_3.png",
+          "sha256": "7ee1393fd4c9e018b28cace9e67038c56b611aebf968fe2a3532c2e879c04541"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_left_0.png",
+          "sha256": "80248e7a5bc3adc3ed107ce907d61fb822db4a28045e5b9a724abdb366520170"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_left_1.png",
+          "sha256": "fcd9f60d65d7c5b3f8b89f654fdca6ebd0c1149665f40e6886afb6a4a534ab15"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_left_2.png",
+          "sha256": "e76232587822d703cf28a70ef9d8ce5ad6ce632073535e32e0967704e50cb8b5"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_left_3.png",
+          "sha256": "a0fee21ddc4339154ba1754e8ab37f36b1b1bc0867a5a42d26d581012c469b39"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_right_0.png",
+          "sha256": "abf42ec4cdbb380d039c7c99996d4eee764dd423fb47cf143007d76b4ac15d3a"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_right_1.png",
+          "sha256": "417bc9f3a7f1e5d5179471e564f1a4528d43fd83d749563d71497e2d0f430be6"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_right_2.png",
+          "sha256": "26496d6a37c9ceec9fe346f08882349be122426b1b5adf7f1d6ce2c6b9d0c637"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_right_3.png",
+          "sha256": "2b7ac59349c20a6df8367dd751bb31887cfcd148de20cf8a5c35446f3b1cc065"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_up_0.png",
+          "sha256": "39cbc1f98083d49435ddacbd8462590490f45ce778754a68bab2b2becbb03ab0"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_up_1.png",
+          "sha256": "196175f237c1f0bcd90c11831f3d32e4969e9e9840d7fd76392d72220e8f91cc"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_up_2.png",
+          "sha256": "7e3fef4336efd8d38335ad89ec9cf0d2d214e322c5c1c8bb37fcfa1651f4b5cf"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_up_3.png",
+          "sha256": "3a889c12563515e2889cfebd156a35487e72ae1b204eb7a6b338848e9d184856"
+        }
+      ],
+      "canvas": [
+        80,
+        80
+      ],
+      "bodyHeightApproxPx": 44,
+      "footPivotPx": [
+        40,
+        64
+      ],
+      "authoredTags": [
+        "idle_down",
+        "walk_down",
+        "basic_attack_down",
+        "idle_left",
+        "walk_left",
+        "basic_attack_left",
+        "idle_right",
+        "walk_right",
+        "basic_attack_right",
+        "idle_up",
+        "walk_up",
+        "basic_attack_up"
+      ],
+      "frameCounts": {
+        "idle": 2,
+        "walk": 4,
+        "basic_attack": 4
+      },
+      "durationMs": {
+        "idle": 350,
+        "walk": 120,
+        "basic_attack": 75
+      },
+      "totalAuthoredFrames": 40,
+      "fallbacks": {
+        "cast": "basic_attack (reuse, not authored cast art)",
+        "hurt": "idle (reuse, not authored hurt art)",
+        "death": "idle (reuse, not authored death art)"
+      },
+      "approvedOn": "2026-10-30",
+      "approvalScope": [
+        "idle",
+        "walk",
+        "basic_attack"
+      ]
+    },
+    {
+      "id": "hero_thien_son_dao",
+      "weapon": "dao",
+      "status": "approved",
+      "finalArtApproval": true,
+      "approvedConcept": "assets/concepts/heroes/thien-son/thien-son-concept-v01.png",
+      "files": [
+        {
+          "path": "assets/source/characters/thien_son_v01/hero_thien_son_dao.aseprite",
+          "sha256": "bc3078947e00bc97ef75af2c19cae668e48ff3a892988d9e55b2e2e203d49219"
+        },
+        {
+          "path": "assets/exports/characters/hero_thien_son_dao.png",
+          "sha256": "1f2a85617d72da044c2133bffdce4f84ac861150c15ac97ca149b832c782f929"
+        },
+        {
+          "path": "assets/exports/characters/hero_thien_son_dao.json",
+          "sha256": "5c89ba6167b7008c01d523e9fc27134e758d725348165dd95c626c0993d2d33a"
+        },
+        {
+          "path": "assets/exports/characters/hero_thien_son_dao_idle.png",
+          "sha256": "eff5427297737711d7ecada53f3be89636bdc0e886700f361307cf37889fca9c"
+        }
+      ],
+      "individualFrames": [
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_down_0.png",
+          "sha256": "ec10491f4426891d5a69d233b1d69399127671d12c4f837db2291ac6f7a03367"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_down_1.png",
+          "sha256": "48543fc5e0648fde8b2bfe8878f84389a8b46892d8a3d7e246eb47c0334de4c5"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_down_2.png",
+          "sha256": "a33f1d2a21ec3d4984e8c522e9cc5f8add1b0a25043e4b11f18aa08e522a7c90"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_down_3.png",
+          "sha256": "19f0ee4a5f75f268124dc720e77781c2cfecb05e0e0d36b0e9f9d3029e040ad1"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_left_0.png",
+          "sha256": "0e518f8d3379dca31ec025d506b74a55e6c882a15044f1fe8644e0d9f9e7f4cb"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_left_1.png",
+          "sha256": "f7dd7480ebe2834c8cb3ce8f539cd2179a5f8013a74149a02bc891b3b569e6cf"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_left_2.png",
+          "sha256": "6d6e3a933e331563308cbae30887aef4d969158faa8a43461af9885c1646cb2a"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_left_3.png",
+          "sha256": "79fc4776ed0667744a4ae0c876db160191b5a5bcf66940ea1616c365518f8dfe"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_right_0.png",
+          "sha256": "6dfa2c226cdc6feacb9ad5e9fcca66fa5112e58969420ad7b0de61f4e9a90325"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_right_1.png",
+          "sha256": "ee80f763f7d5b9d3bd32977e9440e375055688fef34b53ad707783ac462c0d0f"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_right_2.png",
+          "sha256": "d46b53deb2cbefcf2fd9e51fe1d587b7159371d15239456bff8353c28cf634f9"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_right_3.png",
+          "sha256": "d321e3c29e937df327e9cf07e778ba8117bff0063f398ec12273d7efefdb3c7f"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_up_0.png",
+          "sha256": "0b5c5f2fe727d93e5a055637e38c5e745893fef572829e52c67f5d32a3c1bec3"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_up_1.png",
+          "sha256": "6153706c3693a9e44e4b7fdc4af508060762cf44aeb739d17c8bc72a436e2c42"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_up_2.png",
+          "sha256": "472c8fb626345043d5cceb8eba5fc0bb50aefc268c34843a2d60e72bfa5fdc0c"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/basic_attack_up_3.png",
+          "sha256": "85427cb474f909cbfaaf1fa9721da6412922c747a14498f6909b76a584e61c98"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/idle_down_0.png",
+          "sha256": "eff5427297737711d7ecada53f3be89636bdc0e886700f361307cf37889fca9c"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/idle_down_1.png",
+          "sha256": "aca6be27a0330219f9d8f44812d8004c569da08f359aa288364306d77132e19a"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/idle_left_0.png",
+          "sha256": "5504234e2a1c38288bdd65ab6a1fafa4c4977d222b2090fc28ebc93a6c5075eb"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/idle_left_1.png",
+          "sha256": "271141c1d76ba805da22858b87f5f9fdd32abf834bbb4e8ce79c0a869aa78725"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/idle_right_0.png",
+          "sha256": "54cf7ad20bb76af3e25ab4b660ad6a892dc7530841f5cd4cedc640e96f0872cd"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/idle_right_1.png",
+          "sha256": "b1555e68d36b4c722669682021b32b662b05ec83dcb7a36080612d1adb52a22a"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/idle_up_0.png",
+          "sha256": "7c324b3fa5e9febb53aa6a1a33ecfe97e9b5a047f69359fc5e1692ff0b8c63f2"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/idle_up_1.png",
+          "sha256": "291c7141859e1ea2802215eade0b8fcc21f679a5726ca837c23b4d21f6b97a2e"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_down_0.png",
+          "sha256": "90a9bef8683f0c9de6b754cb6fab0a36ea09fb48a7d21e3b75c7988eeea2d990"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_down_1.png",
+          "sha256": "11d35d416a426e5a353e66a9e6354eb2830c56700d647ea291528fd87a067072"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_down_2.png",
+          "sha256": "2efaee6c3d8a959ce9b9cb5787c2cbc97d15ea97b11593ad3dce6aa37b75ed0b"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_down_3.png",
+          "sha256": "8d08dec86f9d70e4c34cd89848509ea718d04678535f611b88db601153fa7c02"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_left_0.png",
+          "sha256": "8d31d5d2c7624728b4bbb3b5c1a77972c6404d0cd14d744e8ba6a6d2514c6254"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_left_1.png",
+          "sha256": "a8c464125cb51a18fedef52f90715948211caf81eb949227e698da764500ab89"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_left_2.png",
+          "sha256": "8e046b1dc1346550dad0f248177546242290fe4c82db438948ba80f6698d4f80"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_left_3.png",
+          "sha256": "f14ef24d1819d8f8abc1cfa4e9cdfe695c878f037c6520904f9dd862ce63d4a0"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_right_0.png",
+          "sha256": "a1036234836a447ce94cecbe1d044a87ab8242d10b1afa3a8c1287d747fa6cba"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_right_1.png",
+          "sha256": "0aab64e7835ef79ca387dba0b38c726d3ddd4d6ef452578c0261c8b9131f75bb"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_right_2.png",
+          "sha256": "1a89b36cc5cf8352dd146555495f0582e3752ae5e8ddea6a0dd145873bdb684c"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_right_3.png",
+          "sha256": "84a7d98186885f0a79e53b5e73f82718147391e1e61ccbe7edfb6ac77bc55258"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_up_0.png",
+          "sha256": "ada9d33f2c563c73378c51a963f5ce9a5c474a609586a661c2aea9be906c39db"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_up_1.png",
+          "sha256": "a6ac589da4c7f7c38f08d5cd5c6430ec743f2ed4e5f8d0cc5c167e6296a3c654"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_up_2.png",
+          "sha256": "9656061dc9f287d6f622cbde071808208d7fc1fa9555d456973409375cf4e0b4"
+        },
+        {
+          "path": "assets/exports/characters/thien_son_v01/dao/frames/walk_up_3.png",
+          "sha256": "888f4b50ef6a945974353648f06bf6033365e16f2391d4858e06779bae59c3d4"
+        }
+      ],
+      "canvas": [
+        80,
+        80
+      ],
+      "bodyHeightApproxPx": 44,
+      "footPivotPx": [
+        40,
+        64
+      ],
+      "authoredTags": [
+        "idle_down",
+        "walk_down",
+        "basic_attack_down",
+        "idle_left",
+        "walk_left",
+        "basic_attack_left",
+        "idle_right",
+        "walk_right",
+        "basic_attack_right",
+        "idle_up",
+        "walk_up",
+        "basic_attack_up"
+      ],
+      "frameCounts": {
+        "idle": 2,
+        "walk": 4,
+        "basic_attack": 4
+      },
+      "durationMs": {
+        "idle": 350,
+        "walk": 120,
+        "basic_attack": 75
+      },
+      "totalAuthoredFrames": 40,
+      "fallbacks": {
+        "cast": "basic_attack (reuse, not authored cast art)",
+        "hurt": "idle (reuse, not authored hurt art)",
+        "death": "idle (reuse, not authored death art)"
+      },
+      "approvedOn": "2026-10-30",
+      "approvalScope": [
+        "idle",
+        "walk",
+        "basic_attack"
+      ]
+    }
+  ],
+  "integration": {
+    "runtimeManifest": "assets/manifest.json",
+    "loader": "apps/game-client/src/art.ts",
+    "actorSelection": "Replicated schoolId thien_son selects hero_thien_son fan artwork. Canonical future thien_son_dao ID is presentation-bound, but no new combat ID is implemented.",
+    "liveDaoReview": "/?debug=1&thienSonWeapon=dao changes only local Thiên Sơn artwork, never server weapon, basicId, stats, hits or abilities. Join/select Thiên Sơn normally.",
+    "bothWeaponGallery": "/?artPreview=1&thienSonReview=1 uses the same loader, metadata and animation registry.",
+    "portrait": "Existing HUD portrait/paper doll bind selected school texture; no HUD geometry or control changes.",
+    "serverAuthorityPreserved": true,
+    "combatAbilitiesChanged": false,
+    "newCombatAbilitiesImplemented": false
+  },
+  "verification": {
+    "exportValidation": "export_validation_v01.json",
+    "command": "python scripts/verify-thien-son.py",
+    "status": "PASS",
+    "runtimeReview": "assets/reviews/thien_son_v01/README.md",
+    "runtimeVerification": "PASS: five dedicated real Chromium/Phaser checks (4 character/party + 1 foreground-depth), with PNG and live frame/state observations. Final director approval remains pending.",
+    "browserConfig": "playwright.thien-son.config.ts",
+    "browserServices": {
+      "client": "127.0.0.1:5189",
+      "server": "127.0.0.1:2599",
+      "hotReload": false,
+      "watch": false,
+      "video": "off",
+      "trace": "off"
+    },
+    "typecheck": "PASS: pnpm typecheck",
+    "unitIntegration": "PASS: pnpm test; 134 tests in 15 files",
+    "build": "PASS: pnpm build; existing large-chunk warning",
+    "assetVerification": "PASS: pnpm verify:assets (includes verify-thien-son.py), plus approved baseline hashes",
+    "evidence": [
+      {
+        "path": "assets/reviews/thien_son_v01/both_weapons_phaser_2x.png",
+        "sha256": "32114b946feb0a6898712a6efcf28c124c74eb7cee2749c8c027e950e65f2c4d"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/fan_gameplay_1280x720.png",
+        "sha256": "e24b32b6b00da49bf0ccb1fc3c04c652c591a112895f76c35926a5154b6f802f"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/fan_gameplay_1920x1080.png",
+        "sha256": "2052b86507c66eca521789f65331ee417f09d00bf7110bd07fa98709e58b3980"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/fan_logical_1x.png",
+        "sha256": "6d8e1fcb8cf41ab14563e5c3414c386ec5d0b2efffadb189a430d14059cb90ea"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/dao_gameplay_1280x720.png",
+        "sha256": "ed7d7291197d3849f860959b8a65faaad2bdbeb52946b1393d1fbc3dc02b27e1"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/dao_gameplay_1920x1080.png",
+        "sha256": "cc8e3486aa06b5a5b49cc51f5a97f163197d624a695bdc12664844b17a6ce7ad"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/dao_logical_1x.png",
+        "sha256": "2ba6c032b27d2fa9d1ff621741b4b5beaa5ea25d42398d2411e920256a91f156"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/six_players_1280x720.png",
+        "sha256": "6092a475e5cf6bcbfbe06f92de7f388fd5bef28dc25fcc72291dd9b306aee838"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/six_players_1920x1080.png",
+        "sha256": "9977a30e686d96278fd91758745f81e53b8e8cc914c5f697a99423b92c280a7e"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/front_of_tree_1280x720.png",
+        "sha256": "cf9fbc9edb56a783200e52b396eb2186f3421824d18ebca1929c7f0a8d7daa82"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/behind_tree_1280x720.png",
+        "sha256": "4cf8ce60e7e60ec1cd3b767c43a0e8f15dfe1ad96961bea703aa247c8d0df9f0"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/animation_observations.json",
+        "sha256": "ad1ef17033970e1e1e23d716c8468ed6e0c119a49561fb4af3668ae6d78cf1bd"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/fan_match_observations.json",
+        "sha256": "792f95b66fbeb9910d43be54c0cb38c00431a2ef7e726973ff9af314385c6fa3"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/dao_match_observations.json",
+        "sha256": "64dab505662d3a06823c0b64586b8fae9a1368b4a8384f02b7197a4a13376986"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/six_player_observations.json",
+        "sha256": "76343f45fa8e6b2e2a194d8bb487fcd8c2c4d58582bcfa6f66d38d8670bf8f10"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/occlusion_observations.json",
+        "sha256": "400b4af8fb72b5be683193cdafe90e7940a4fde27d5c752a7ec1575dc5be3570"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/playwright_character_results_v01.json",
+        "sha256": "4b7e567029f93a2c4c9e780c2eb2aa199d5ef7c19928660d24ac62b99f9eb776"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/playwright_occlusion_results_v01.json",
+        "sha256": "a81c08c1a71b38910084233b5183a334dfa8f576fa52160e9ae371c08ec8a9bf"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/playwright_combat_results_v01.json",
+        "sha256": "63355c208872ad20090c14f8a35274a32736734b38ec89b4dcce4a9758e5871a"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/README.md",
+        "sha256": "16835521bae46a9540d3b6845f36048e14cfd1566c70531701ee4038d3a55686"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/playwright_approval_results_v01.json",
+        "sha256": "515e0f973b12ce7cf6886650c24a00c5051ee5ebdf202ca6129ee34d17f2938e"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/both_weapons_pre_approval_phaser_2x.png",
+        "sha256": "61da0d5b4c5ebc09f384a0da231fefde78feaf303f9ca5353259d106f8d1bb56"
+      },
+      {
+        "path": "assets/reviews/thien_son_v01/animation_observations_pre_approval.json",
+        "sha256": "cbd813f8a374debed1c914c308f1ef2c57c6227632177de40e1bba1b838cd5c3"
+      }
+    ],
+    "combatSmokeRecheck": "PASS: two unchanged existing real combat/progression and fixed-projectile smoke checks on dedicated services",
+    "finalScopedBrowserChecksPassed": 7,
+    "postApproval": {
+      "approvedOn": "2026-10-30",
+      "lockedFiles": 89,
+      "approvedArtworkBytesChanged": false,
+      "exportOverwriteGuard": "PASS: rejected without changing locked files",
+      "prepareBuildHashEnforcement": "PASS",
+      "typecheck": "PASS",
+      "unitIntegration": "PASS: 134 tests, 15 files",
+      "productionBuild": "PASS",
+      "assetValidation": "PASS",
+      "phaserSmoke": "PASS: 1 check, 24 authored tags, approved review label",
+      "machineReport": "assets/reviews/thien_son_v01/playwright_approval_results_v01.json"
+    }
+  },
+  "finalArtApproval": {
+    "approved": true,
+    "approvedOn": "2026-10-30",
+    "evidence": {
+      "source": "Explicit user message after final in-game art review",
+      "text": "approved, please proceed"
+    },
+    "scope": [
+      "four-facing idle",
+      "four-facing walk",
+      "four-facing fan basic attack",
+      "four-facing curved dao basic attack"
+    ],
+    "excludedScope": [
+      "authored cast/hurt/death art (existing reuse only)",
+      "school combat abilities and tuning",
+      "other schools and environment art"
+    ],
+    "lockManifest": "assets/approved_thien_son.lock.json"
+  },
+  "approvedOn": "2026-10-30",
+  "approvalLock": "assets/approved_thien_son.lock.json",
+  "approvalLockSha256": "2a66f973d42b8e79132984e27ffb1fc32ded01bf0104417e16d3103179f2251a"
+}

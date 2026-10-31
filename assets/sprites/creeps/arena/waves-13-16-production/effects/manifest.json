@@ -1,0 +1,134 @@
+{
+  "id": "arena_creep_demon_fx",
+  "phase": "1H",
+  "status": "approved",
+  "source": "assets/sprites/creeps/arena/waves-13-16-production/effects/source/arena_creep_demon_fx.aseprite",
+  "generatedSource": "assets/sprites/creeps/arena/waves-13-16-production/effects/source/generated_v1.png",
+  "sourceSha256": "e4a5d9b2995aa073c6ecac868f5efebeb72821625f5dfe0d84d3a154ea1577e2",
+  "generationPrompt": "assets/sprites/creeps/arena/waves-13-16-production/effects/source/generation_prompt_v1.json",
+  "canvas": [
+    64,
+    64
+  ],
+  "animations": [
+    {
+      "id": "demon_hound_contact",
+      "frames": [
+        "demon_hound_contact_0",
+        "demon_hound_contact_1",
+        "demon_hound_contact_2",
+        "demon_hound_contact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "texture": "arena_creep_demon_fx",
+      "offsetY": -16,
+      "kind": "contact"
+    },
+    {
+      "id": "fire_imp_contact",
+      "frames": [
+        "fire_imp_contact_0",
+        "fire_imp_contact_1",
+        "fire_imp_contact_2",
+        "fire_imp_contact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "texture": "arena_creep_demon_fx",
+      "offsetY": -16,
+      "kind": "contact"
+    },
+    {
+      "id": "fire_cultist_contact",
+      "frames": [
+        "fire_cultist_contact_0",
+        "fire_cultist_contact_1",
+        "fire_cultist_contact_2",
+        "fire_cultist_contact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "texture": "arena_creep_demon_fx",
+      "offsetY": -16,
+      "kind": "contact"
+    },
+    {
+      "id": "horned_brute_contact",
+      "frames": [
+        "horned_brute_contact_0",
+        "horned_brute_contact_1",
+        "horned_brute_contact_2",
+        "horned_brute_contact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "texture": "arena_creep_demon_fx",
+      "offsetY": -3,
+      "kind": "contact"
+    },
+    {
+      "id": "fire_imp_projectile",
+      "frames": [
+        "fire_imp_projectile_0",
+        "fire_imp_projectile_1",
+        "fire_imp_projectile_2",
+        "fire_imp_projectile_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": -1,
+      "texture": "arena_creep_demon_fx",
+      "offsetY": -16,
+      "kind": "projectile"
+    },
+    {
+      "id": "fire_cultist_projectile",
+      "frames": [
+        "fire_cultist_projectile_0",
+        "fire_cultist_projectile_1",
+        "fire_cultist_projectile_2",
+        "fire_cultist_projectile_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": -1,
+      "texture": "arena_creep_demon_fx",
+      "offsetY": -16,
+      "kind": "projectile"
+    },
+    {
+      "id": "demon_hound_embers",
+      "frames": [
+        "demon_hound_embers_0",
+        "demon_hound_embers_1",
+        "demon_hound_embers_2",
+        "demon_hound_embers_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": -1,
+      "texture": "arena_creep_demon_fx",
+      "offsetY": -16,
+      "kind": "ambient"
+    }
+  ],
+  "provenance": "Original AI-assisted concept-referenced VFX. Selected generated pixels assembled/exported with Aseprite. Contact/ambient are presentation only; projectile graphics do not add ranged AI or damage.",
+  "reviewStatus": "DIRECTOR_APPROVED",
+  "runtimeIntegration": true,
+  "runtimeVerification": "docs/evidence/phase1h-integration/integration_verification.json",
+  "finalRuntimeArtApproved": true,
+  "approvedOn": "2026-10-31",
+  "authority": "Game owner explicitly approved the delivered Phase 1H artwork after the final six-client Phaser validation and comparison PNGs.",
+  "approvalEvidence": "all approve",
+  "approvalScope": [
+    "Waves13–16 four-facing idle, movement, attack, hurt and death artwork",
+    "256 distinct character PNG frames / 80 animation tags",
+    "28 VFX frames / 7 animation tags and existing-event presentation",
+    "final normal-zoom and native-pixel runtime appearance"
+  ],
+  "excludedScope": [
+    "new ranged AI or projectile combat mechanics",
+    "charge, burn, shockwave or balance changes",
+    "Waves17–20 / Phase1I",
+    "rejected unused generated poses as production frames"
+  ],
+  "approvalLock": "assets/approved_arena_creeps_13_16.lock.json"
+}

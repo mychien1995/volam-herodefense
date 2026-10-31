@@ -1,0 +1,131 @@
+{
+  "phase": "1D",
+  "status": "PRODUCTION_CANDIDATES_OWNER_REVIEW_PENDING",
+  "conceptApproval": "User: concept approve, please proceed (2026-10-30)",
+  "conceptDirectory": "assets/concepts/arena-creeps/waves-05-08/",
+  "approvedConceptsOpenedBeforeGeneration": true,
+  "individualAndMasterImagesProvidedToGenerator": true,
+  "scope": "Waves 5–8 only; four-direction idle/walk/basic_attack/hurt/death; staged separately from gameplay.",
+  "outputs": [
+    {
+      "id": "creep_black_clad_assassin",
+      "folder": "sprites/creeps/arena/black-clad-assassin/",
+      "frames": 61,
+      "canvas": [
+        96,
+        96
+      ],
+      "pivot": [
+        48,
+        76
+      ]
+    },
+    {
+      "id": "creep_corrupted_monk",
+      "folder": "sprites/creeps/arena/corrupted-monk/",
+      "frames": 63,
+      "canvas": [
+        112,
+        96
+      ],
+      "pivot": [
+        56,
+        76
+      ]
+    },
+    {
+      "id": "creep_skeleton_swordsman",
+      "folder": "sprites/creeps/arena/skeleton-swordsman/",
+      "frames": 62,
+      "canvas": [
+        112,
+        96
+      ],
+      "pivot": [
+        56,
+        76
+      ]
+    },
+    {
+      "id": "creep_skeleton_archer",
+      "folder": "sprites/creeps/arena/skeleton-archer/",
+      "frames": 64,
+      "canvas": [
+        96,
+        96
+      ],
+      "pivot": [
+        48,
+        76
+      ]
+    }
+  ],
+  "visualComparison": {
+    "renderer": "Phaser 4.2.1",
+    "cameraZoom": 1,
+    "logicalCanvas": [
+      640,
+      360
+    ],
+    "displayCanvas": [
+      1280,
+      720
+    ],
+    "references": "Exact approved Cái Bang and Phase 1B bandit-grunt PNGs in the same renderer",
+    "viewsInspected": [
+      "idle",
+      "walk",
+      "basic_attack",
+      "hurt",
+      "death"
+    ],
+    "preserved": "Assassin hood/mask/crimson/two daggers; monk bald head/rust robes/beads/banded staff; skeleton aged ivory/teal/rust and jian versus lighter bow/quiver silhouette.",
+    "result": "Recognizable approved designs at normal display scale. Four facings, equipment and final resting corpses visible. Production director approval remains pending."
+  },
+  "selectionsAndRejectedFrames": [
+    "Assassin frontal walk regenerated. Wrong-facing frontal/left/rear attack poses excluded; those attacks have three poses.",
+    "Monk left/right/rear sources regenerated independently. Wrong-facing left anticipation excluded; left attack has three poses.",
+    "Skeleton swordsman front walk missing-blade pose excluded: three walk poses. Rear attack missing-blade pose excluded: three attack poses.",
+    "Skeleton swordsman rear hurt uses generated knee-buckle and recovery poses; knee-buckle drawing is shared with death anticipation to retain the sword.",
+    "Skeleton archer front/left/right sources replaced with one-facing sources. Revised rear sheet rejected for mirrored gear; original rear idle/walk retained.",
+    "Skeleton archer rear shot uses four named frames with three distinct drawings: raised bow reused for release and original idle for recovery. No missing-bow release exported."
+  ],
+  "remainingReviewPoints": [
+    "Frontal archer bow grip transfers between carry and shooting position; inspect smoothness in video.",
+    "Attack torso rotation and the shorter three-pose cycles merit animation-feel review.",
+    "Exact prayer-bead/band count and small eye-glow hue contrast simplify at 42–46px; concept identity is retained, but pixel-perfect accessory continuity is not claimed.",
+    "This is an isolated Phaser renderer review, not live-match input, combat, server animation-event integration or six-player crowd verification."
+  ],
+  "checks": [
+    {
+      "command": "python -u sprites/creeps/arena/waves-05-08-production/build_sprites.py",
+      "result": "PASS: 250 exported frames, 80 tags, genuine binary alpha, safe bounds, authored per-sequence variation, approved hash preservation"
+    },
+    {
+      "command": "node sprites/creeps/arena/waves-05-08-production/verify_phaser.mjs",
+      "result": "PASS: all 80 tags and 250 frame names observed in actual Phaser, zero page/loader errors, six screenshots and video"
+    },
+    {
+      "command": "pnpm typecheck",
+      "result": "PASS"
+    },
+    {
+      "command": "pnpm test",
+      "result": "PASS: 98 tests across 11 files"
+    }
+  ],
+  "approvedExistingFilesUnchanged": 328,
+  "evidence": [
+    "review/idle_1280x720.png",
+    "review/walk_1280x720.png",
+    "review/basic_attack_1280x720.png",
+    "review/hurt_1280x720.png",
+    "review/death_1280x720.png",
+    "review/concept_comparison.png",
+    "review/phaser_animation_preview.webm",
+    "review/phaser_verification.json"
+  ],
+  "runtimeIntegration": false,
+  "gameplayChanges": false,
+  "nextBatchGenerated": false
+}

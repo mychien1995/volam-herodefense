@@ -35,7 +35,7 @@ export function menuContents(menu: Menu, debug = false): string {
         <div class="window-footer"><span>${icon('gold')} <b class="live-gold">0</b> gold</span><button disabled>Equip</button><button disabled>Drop / Sell</button></div>
       </section></div>`;
     case 'dungeons':
-      return `<p class="dungeon-intro">Bốn vùng đất · Bốn thử thách</p>
+      return `<p class="dungeon-intro"><span class="dungeon-school-avatar" role="img" aria-label="Current school character"></span>Bốn vùng đất · Bốn thử thách</p>
       <div class="destinations">${[
         ['forest', 'Rừng Trúc', 'Rừng trúc · Suối ngọc'],
         ['desert', 'Sa Mạc', 'Cát vàng · Cổ tích'],
@@ -70,9 +70,9 @@ export function menuContents(menu: Menu, debug = false): string {
       <div id="craft-content" hidden><div class="craft-recipe"><span>${icon('staff')}<small>Max basic item</small></span><b>＋</b><span>${icon('ore')}<small>Boss material</small></span><b>＋</b><span>${icon('gold')}<small>Gold · TBD</small></span><b>→</b><span>${icon('jade')}<small>Crafted item</small></span></div><p class="muted">Recipe illustration only. Required items, costs and results have not been implemented.</p><button disabled>Craft · unavailable</button></div>
       <div class="window-footer"><span>${icon('gold')} <b class="live-gold">0</b> gold</span><span>Prices and recipes pending</span></div>`;
     case 'skills':
-      return `<p class="menu-intro">Cái Bang · M1 practice loadout</p><label for="basic-style">Normal attack · A</label><select id="basic-style"><option value="cai_bang_bong">Cái Bang Bổng · melee</option><option value="cai_bang_chuong">Cái Bang Chưởng · ranged</option></select>
+      return `<p class="menu-intro">Cái Bang · Q/W/E/R loadout</p><label for="basic-style">Normal attack · A</label><select id="basic-style"><option value="cai_bang_bong">Cái Bang Bổng · melee</option><option value="cai_bang_chuong">Cái Bang Chưởng · ranged</option></select>
       <div class="ability-list"><article>${icon('flame')}<div><kbd>Q</kbd><h3>Hỏa Vân Chưởng</h3><p>Three paced, straight shots · 18 MP</p></div></article><article>${icon('dragon')}<div><kbd>W</kbd><h3>Cuồng Long Loạn Vũ</h3><p>Explosive shot and burn · 25 MP</p></div></article></div>
-      <p class="muted">E and R are unequipped. Full school selection, skill allocation and respec are future milestones.</p><button disabled>Allocate skill points · unavailable</button>`;
+      <p class="muted">Skill ranks, progression and respec UI belong to the next milestone.</p><button disabled>Allocate skill points · unavailable</button>`;
     case 'party':
       return `<div class="room-strip"><span>Room <strong id="party-room">—</strong></span><span id="connection-status">Connected</span></div><p class="muted">Share this room ID to invite a friend. Nicknames only · 6 player cap.</p><ul id="players" data-testid="players" class="party-list"></ul><div class="window-footer"><button id="check">Check connection</button><button id="leave" class="danger">Leave</button></div><p id="ack" class="muted" aria-live="polite">Share the room ID with a friend.</p><details><summary>Practice enemies</summary><ul id="creeps" data-testid="creeps"></ul></details>`;
     case 'pvp':

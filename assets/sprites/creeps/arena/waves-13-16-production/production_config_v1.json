@@ -1,0 +1,303 @@
+{
+  "phase": "1H",
+  "conceptApproval": "Owner explicitly approved Phase1G concepts, 2026-10-31; current request authorizes sprite production and integration.",
+  "masterConcept": "assets/concepts/arena-creeps/waves-13-16/arena_creeps_13_16_concept_sheet.png",
+  "assets": [
+    {
+      "key": "hound",
+      "slug": "ma-khuyen",
+      "concept": "assets/concepts/arena-creeps/waves-13-16/ma_khuyen_concept.png",
+      "id": "creep_demon_hound",
+      "nameVi": "Ma Khuyển",
+      "height": 34,
+      "canvas": [
+        128,
+        96
+      ],
+      "pivot": [
+        64,
+        76
+      ],
+      "wave": 13,
+      "sources": {
+        "down": {
+          "file": "assets/sprites/creeps/arena/ma-khuyen/source/down_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "left": {
+          "file": "assets/sprites/creeps/arena/ma-khuyen/source/left_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "right": {
+          "file": "assets/sprites/creeps/arena/ma-khuyen/source/right_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "up": {
+          "file": "assets/sprites/creeps/arena/ma-khuyen/source/up_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        }
+      },
+      "overrides": {},
+      "timings": {
+        "idle": 700,
+        "walk": 400,
+        "basic_attack": 300,
+        "hurt": 240,
+        "death": 600
+      }
+    },
+    {
+      "key": "imp",
+      "slug": "tieu-hoa-quy",
+      "concept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "id": "creep_fire_imp",
+      "nameVi": "Tiểu Hỏa Quỷ",
+      "height": 32,
+      "canvas": [
+        96,
+        96
+      ],
+      "pivot": [
+        48,
+        76
+      ],
+      "wave": 14,
+      "sources": {
+        "down": {
+          "file": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "left": {
+          "file": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "right": {
+          "file": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "up": {
+          "file": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        }
+      },
+      "overrides": {},
+      "timings": {
+        "idle": 600,
+        "walk": 400,
+        "basic_attack": 400,
+        "hurt": 240,
+        "death": 600
+      }
+    },
+    {
+      "key": "cultist",
+      "slug": "hoa-phap-su",
+      "concept": "assets/concepts/arena-creeps/waves-13-16/hoa_phap_su_concept.png",
+      "id": "creep_fire_cultist",
+      "nameVi": "Hỏa Pháp Sư",
+      "height": 48,
+      "canvas": [
+        144,
+        128
+      ],
+      "pivot": [
+        72,
+        106
+      ],
+      "wave": 15,
+      "sources": {
+        "down": {
+          "file": "assets/sprites/creeps/arena/hoa-phap-su/source/down_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "left": {
+          "file": "assets/sprites/creeps/arena/hoa-phap-su/source/left_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "right": {
+          "file": "assets/sprites/creeps/arena/hoa-phap-su/source/right_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "up": {
+          "file": "assets/sprites/creeps/arena/hoa-phap-su/source/up_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "right_attack_death_fix": {
+          "file": "assets/sprites/creeps/arena/hoa-phap-su/source/right_attack_death_fix_v1.png",
+          "expected": 8,
+          "rows": 2,
+          "cols": 4,
+          "referenceIndices": [
+            0
+          ]
+        }
+      },
+      "overrides": {
+        "basic_attack_right": {
+          "source": "right_attack_death_fix",
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "death_right": {
+          "source": "right_attack_death_fix",
+          "indices": [
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      },
+      "timings": {
+        "idle": 800,
+        "walk": 640,
+        "basic_attack": 480,
+        "hurt": 280,
+        "death": 700
+      }
+    },
+    {
+      "key": "brute",
+      "slug": "nguu-ma",
+      "concept": "assets/concepts/arena-creeps/waves-13-16/nguu_ma_concept.png",
+      "id": "creep_horned_demon_brute",
+      "nameVi": "Ngưu Ma",
+      "height": 66,
+      "canvas": [
+        192,
+        160
+      ],
+      "pivot": [
+        96,
+        134
+      ],
+      "wave": 16,
+      "sources": {
+        "down": {
+          "file": "assets/sprites/creeps/arena/nguu-ma/source/down_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "left": {
+          "file": "assets/sprites/creeps/arena/nguu-ma/source/left_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "right": {
+          "file": "assets/sprites/creeps/arena/nguu-ma/source/right_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        },
+        "up": {
+          "file": "assets/sprites/creeps/arena/nguu-ma/source/up_v1.png",
+          "expected": 16,
+          "rows": 4,
+          "cols": 4,
+          "referenceIndices": [
+            0,
+            1
+          ]
+        }
+      },
+      "overrides": {},
+      "timings": {
+        "idle": 900,
+        "walk": 720,
+        "basic_attack": 560,
+        "hurt": 320,
+        "death": 840
+      }
+    }
+  ]
+}

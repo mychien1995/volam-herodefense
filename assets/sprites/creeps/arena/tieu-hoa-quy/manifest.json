@@ -1,0 +1,1651 @@
+{
+  "id": "creep_fire_imp",
+  "wave": 14,
+  "nameVi": "Tiểu Hỏa Quỷ",
+  "phase": "1H",
+  "status": "approved",
+  "reviewStatus": "DIRECTOR_APPROVED",
+  "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+  "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+  "masterConcept": "assets/concepts/arena-creeps/waves-13-16/arena_creeps_13_16_concept_sheet.png",
+  "conceptApproval": "Owner explicitly approved Phase1G concepts, 2026-10-31; current request authorizes sprite production and integration.",
+  "source": "assets/sprites/creeps/arena/tieu-hoa-quy/source/creep_fire_imp.aseprite",
+  "sheet": "spritesheet.png",
+  "atlas": "atlas.json",
+  "frameWidth": 96,
+  "frameHeight": 96,
+  "bodyHeight": 32,
+  "footPivot": [
+    0.5,
+    0.7916666666666666
+  ],
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "authoredStates": [
+    "idle",
+    "walk",
+    "basic_attack",
+    "hurt",
+    "death"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 3.3333333333333335,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 6.666666666666667,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 3.3333333333333335,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 6.666666666666667,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 3.3333333333333335,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 6.666666666666667,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 3.3333333333333335,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 6.666666666666667,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/idle_down_0.png",
+      "sha256": "dce9232463acef815af44d7d0e75fe5db0f6077fa2e7f3814ff045c4a4407562",
+      "bounds": [
+        35,
+        44,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        165,
+        301
+      ]
+    },
+    {
+      "name": "idle_down_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/idle_down_1.png",
+      "sha256": "3265f02344c0cc4713e9d5e5f30103af9bfa47e7b576e413e9046ea2e78d86e6",
+      "bounds": [
+        34,
+        45,
+        61,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        482,
+        299
+      ]
+    },
+    {
+      "name": "walk_down_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_down_0.png",
+      "sha256": "e5df08945a09bc8c9c443c74e0ba2e20831c97a5131619f3d366364e7eadbcd7",
+      "bounds": [
+        32,
+        43,
+        58,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        184,
+        609
+      ]
+    },
+    {
+      "name": "walk_down_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_down_1.png",
+      "sha256": "b29e8bc9d7d06aa687f5340c72961af8c86bd38b670130011e54159860015abf",
+      "bounds": [
+        35,
+        43,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        474,
+        604
+      ]
+    },
+    {
+      "name": "walk_down_2",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_down_2.png",
+      "sha256": "e27defba979198fca074e060088534cc5413015c363979d366ce6b3e4d32e3c2",
+      "bounds": [
+        39,
+        44,
+        65,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        760,
+        608
+      ]
+    },
+    {
+      "name": "walk_down_3",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_down_3.png",
+      "sha256": "fc41f973cbff8745b9727c202a4300bd0cd06feefb6dee03afc8faf27e34566a",
+      "bounds": [
+        32,
+        42,
+        58,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1110,
+        610
+      ]
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_down_0.png",
+      "sha256": "d6f059e78a166998067d3f80b678fd61efc65a4cb1d7f4fb44d852e2c3840225",
+      "bounds": [
+        34,
+        44,
+        59,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        165,
+        915
+      ]
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_down_1.png",
+      "sha256": "7ffd2dee8be76e34ed30e0d47bd4df4bebbe241ab99af7f6ea937e56931d8ebf",
+      "bounds": [
+        32,
+        43,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        482,
+        907
+      ]
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_down_2.png",
+      "sha256": "f80621d466f3eee92098f2af2d58ecbdf031577c5efe126ee18ec54e1bf97700",
+      "bounds": [
+        36,
+        43,
+        67,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        784,
+        914
+      ]
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_down_3.png",
+      "sha256": "763939180a405896d6367ad14531005a2b55fc92c9f9123ea76660a1149e368f",
+      "bounds": [
+        34,
+        43,
+        64,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1094,
+        914
+      ]
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/hurt_down_0.png",
+      "sha256": "d6c84ee73520ba55e4c9ee90452e830db9b837df01b27fecc48f6887eb049164",
+      "bounds": [
+        36,
+        44,
+        60,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        778,
+        303
+      ]
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/hurt_down_1.png",
+      "sha256": "4370b3ff7cc31210961ca52a4673a6f48c532952f080c5c63200d0d6dc064773",
+      "bounds": [
+        36,
+        44,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1082,
+        302
+      ]
+    },
+    {
+      "name": "death_down_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_down_0.png",
+      "sha256": "46e79b57d8aac12ee0aef83687e7afba847851204ff47befaaa1595ef2a9ecbe",
+      "bounds": [
+        34,
+        45,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        180,
+        1199
+      ]
+    },
+    {
+      "name": "death_down_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_down_1.png",
+      "sha256": "673f797222273c0dcabd02bcf91e7589a19bd30d1c4a8b07720680523a9d3cb4",
+      "bounds": [
+        34,
+        52,
+        64,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        478,
+        1187
+      ]
+    },
+    {
+      "name": "death_down_2",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_down_2.png",
+      "sha256": "2183096113f5a44aa7efd70c11ebaebde588339ef1c35a03845c61dbf4c7f6f6",
+      "bounds": [
+        36,
+        58,
+        67,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        752,
+        1190
+      ]
+    },
+    {
+      "name": "death_down_3",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_down_3.png",
+      "sha256": "39668e900c3095fff0a8443f83dc9da23d04c3784fb7fa9fe705243811daba79",
+      "bounds": [
+        33,
+        59,
+        68,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1066,
+        1181
+      ]
+    },
+    {
+      "name": "idle_left_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/idle_left_0.png",
+      "sha256": "f91666e56f9a6a80b389475a32636a427230ca9d1fb7dadc0027383aa7e00ba8",
+      "bounds": [
+        36,
+        44,
+        63,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        172,
+        307
+      ]
+    },
+    {
+      "name": "idle_left_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/idle_left_1.png",
+      "sha256": "fe0514c55a06c892f52900bc01385367d536ad15d85f6483424167fedcdb7813",
+      "bounds": [
+        34,
+        45,
+        61,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        488,
+        307
+      ]
+    },
+    {
+      "name": "walk_left_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_left_0.png",
+      "sha256": "3b8da71b437fa43d689a4eeefcf30a5c42aaceab91bbf49d8a61608d64e322b6",
+      "bounds": [
+        36,
+        44,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        167,
+        602
+      ]
+    },
+    {
+      "name": "walk_left_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_left_1.png",
+      "sha256": "6051bf90811fe7f670a7ec15bd4393dfc8984eb860ba39c13c847924c6102b84",
+      "bounds": [
+        35,
+        44,
+        63,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        480,
+        602
+      ]
+    },
+    {
+      "name": "walk_left_2",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_left_2.png",
+      "sha256": "b83e677f0b5ed5dee66e395ca05e4d76aab7cb39c31890d926f09b64f6c2d6c6",
+      "bounds": [
+        34,
+        44,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        790,
+        602
+      ]
+    },
+    {
+      "name": "walk_left_3",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_left_3.png",
+      "sha256": "0bca9d7ff2411a8aea0a6cf55a6acc3b10608a902c14bb977f06f93e238ae2a1",
+      "bounds": [
+        36,
+        44,
+        63,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1106,
+        602
+      ]
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_left_0.png",
+      "sha256": "ab80448350a8bcdd1754c7029b731d2a9017749399fe118b212149649a5c02a5",
+      "bounds": [
+        33,
+        45,
+        59,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        193,
+        904
+      ]
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_left_1.png",
+      "sha256": "89576cc3dd81693cd57a8e51ba95d306cf7f51181d722486305d07e8c584f93c",
+      "bounds": [
+        32,
+        42,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        494,
+        906
+      ]
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_left_2.png",
+      "sha256": "6dd28ab84fde5d571cd479077ae0ccd5bf8edc2889fca629845fb3828b2f9c8e",
+      "bounds": [
+        23,
+        44,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        826,
+        906
+      ]
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_left_3.png",
+      "sha256": "e41dc1826b280d072ec0b7288ee855202dbb7e0df1a4cde7cdb6fa8105464416",
+      "bounds": [
+        34,
+        42,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1114,
+        906
+      ]
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/hurt_left_0.png",
+      "sha256": "7033e9e98508ac0f2480231a41a64372ef98980a1bc417fda2a26c7f25aa013e",
+      "bounds": [
+        37,
+        46,
+        63,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        784,
+        307
+      ]
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/hurt_left_1.png",
+      "sha256": "948c13a21046c6cbb65d6b9121989b5225d48ae658144c4ee130b805a87b111f",
+      "bounds": [
+        35,
+        44,
+        60,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1102,
+        307
+      ]
+    },
+    {
+      "name": "death_left_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_left_0.png",
+      "sha256": "d1c152e7273dae101bbbf5299c3cb5cbf39b1c8052231bb22ab06afad94e43c7",
+      "bounds": [
+        30,
+        47,
+        59,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        204,
+        1198
+      ]
+    },
+    {
+      "name": "death_left_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_left_1.png",
+      "sha256": "a861f1a1d493f9479eee18cb136a7f03dca7c2870bf36723e1c0d228a3e62218",
+      "bounds": [
+        29,
+        53,
+        60,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        500,
+        1196
+      ]
+    },
+    {
+      "name": "death_left_2",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_left_2.png",
+      "sha256": "82928290d389ac6418664b27fa48a12f3d49b1da44d7fa72193fc9703d138f2e",
+      "bounds": [
+        32,
+        58,
+        68,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        780,
+        1195
+      ]
+    },
+    {
+      "name": "death_left_3",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_left_3.png",
+      "sha256": "14dbfc83b5fe1e42c23be7a1fb3977cf41bacb8290cbc697233049e8dedeb634",
+      "bounds": [
+        33,
+        61,
+        68,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1080,
+        1194
+      ]
+    },
+    {
+      "name": "idle_right_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/idle_right_0.png",
+      "sha256": "9669d2557e25bc65e5e7b249df1b2b4fd69b784b3155ceb90a55b956d67fa46d",
+      "bounds": [
+        33,
+        44,
+        61,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        174,
+        313
+      ]
+    },
+    {
+      "name": "idle_right_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/idle_right_1.png",
+      "sha256": "b630b275e9d0569766feb102e803bc404aac2b9bc9684433fe8b438dfd0ca6ee",
+      "bounds": [
+        35,
+        44,
+        60,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        480,
+        313
+      ]
+    },
+    {
+      "name": "walk_right_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_right_0.png",
+      "sha256": "ef9bfeae7389427683d53adc3294a2bf312df15897ed0f80d82fb9f8a0d53e15",
+      "bounds": [
+        32,
+        44,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        182,
+        616
+      ]
+    },
+    {
+      "name": "walk_right_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_right_1.png",
+      "sha256": "91d2a6e06c5a01f281c2dab86958d43762ab717990186f814c80f5de832d2092",
+      "bounds": [
+        33,
+        44,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        491,
+        616
+      ]
+    },
+    {
+      "name": "walk_right_2",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_right_2.png",
+      "sha256": "c8d48934e473df58b1ae41531b8896e96e492e6ddec62202c67e6bd395e81cba",
+      "bounds": [
+        34,
+        44,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        796,
+        619
+      ]
+    },
+    {
+      "name": "walk_right_3",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_right_3.png",
+      "sha256": "ecee6400614828904d5b65570c2644747ad0bfeba0a48ee5460d06211371825f",
+      "bounds": [
+        33,
+        46,
+        61,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1103,
+        616
+      ]
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_right_0.png",
+      "sha256": "440dace8f701a7f03f53d36ad6b3161f4674e4e9039eafe8e1abc1cc5a814fe6",
+      "bounds": [
+        33,
+        45,
+        61,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        174,
+        918
+      ]
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_right_1.png",
+      "sha256": "ac5ee174555f13a4efced6abe5664a38f84cd7d97c59e86f463b98b14161036b",
+      "bounds": [
+        35,
+        44,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        470,
+        918
+      ]
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_right_2.png",
+      "sha256": "30f653383f53be94be1e8ceab6251d6907a8b728aaf347413f9f4ec36afaa5e7",
+      "bounds": [
+        34,
+        44,
+        72,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        757,
+        920
+      ]
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_right_3.png",
+      "sha256": "2a28bb67a7626d628062eb71a0cf5efdd17aa53430452f825ecd70b8dee1cbf0",
+      "bounds": [
+        35,
+        45,
+        63,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1104,
+        919
+      ]
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/hurt_right_0.png",
+      "sha256": "a665c4e0284d2d617725203162045eca072bc2c4f85895c62249d610c08cb330",
+      "bounds": [
+        31,
+        45,
+        59,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        813,
+        316
+      ]
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/hurt_right_1.png",
+      "sha256": "edbb88e46725b63fd085838fe047a88c6639d4a9487b6a52d2139e8cfd12b0a5",
+      "bounds": [
+        35,
+        44,
+        60,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1096,
+        314
+      ]
+    },
+    {
+      "name": "death_right_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_right_0.png",
+      "sha256": "d3cd4006fdbd93f847a870b9a0d9a54492ad48c2b4487e0f7aadf8aa933e840b",
+      "bounds": [
+        36,
+        46,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        171,
+        1204
+      ]
+    },
+    {
+      "name": "death_right_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_right_1.png",
+      "sha256": "c8b3768c8efac458aa1b2d3504e649449320fbf43c1924bd61b0adaccf897e25",
+      "bounds": [
+        29,
+        53,
+        57,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        524,
+        1208
+      ]
+    },
+    {
+      "name": "death_right_2",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_right_2.png",
+      "sha256": "69d827148f8d4f85c9c0acfcfd08abc0aab829189ffac61a71d8954f2ec3e693",
+      "bounds": [
+        26,
+        59,
+        57,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        836,
+        1208
+      ]
+    },
+    {
+      "name": "death_right_3",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_right_3.png",
+      "sha256": "c1985ea77dd0a00dc03d73af30321cc90462f59532c4c9d52dcb72f79032829e",
+      "bounds": [
+        27,
+        60,
+        61,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1122,
+        1203
+      ]
+    },
+    {
+      "name": "idle_up_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/idle_up_0.png",
+      "sha256": "bf0fdf48a4becb9b9f8bdb6ac90503bab18b8618e2fb4854bca0d4bee8e7690a",
+      "bounds": [
+        33,
+        44,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 0,
+      "sourceFoot": [
+        166,
+        314
+      ]
+    },
+    {
+      "name": "idle_up_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/idle_up_1.png",
+      "sha256": "9d34c7d3367f2924a107ea21159d4f748605a930b55f58e7f0144f7c049fcc20",
+      "bounds": [
+        34,
+        44,
+        64,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 1,
+      "sourceFoot": [
+        479,
+        306
+      ]
+    },
+    {
+      "name": "walk_up_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_up_0.png",
+      "sha256": "00751c2a13b490c8378bd401fa19f1bcdf674f19da0ba36c94c2bce53407b741",
+      "bounds": [
+        31,
+        43,
+        60,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 4,
+      "sourceFoot": [
+        187,
+        618
+      ]
+    },
+    {
+      "name": "walk_up_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_up_1.png",
+      "sha256": "a85795ec5c2917d8e13d812985ccfe6c0509a8eb9613a90f6195be60cb176f04",
+      "bounds": [
+        37,
+        43,
+        68,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 5,
+      "sourceFoot": [
+        462,
+        614
+      ]
+    },
+    {
+      "name": "walk_up_2",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_up_2.png",
+      "sha256": "b561bdc09c120c9133c8455f801816886674808a1232d84c7a53ebb89505f217",
+      "bounds": [
+        39,
+        43,
+        67,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 6,
+      "sourceFoot": [
+        755,
+        620
+      ]
+    },
+    {
+      "name": "walk_up_3",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/walk_up_3.png",
+      "sha256": "a84de6b457e781f5a507abfb86b26e3ffbe9b7beef4bf2f7f99e9c83d8c9a0f7",
+      "bounds": [
+        32,
+        42,
+        60,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 7,
+      "sourceFoot": [
+        1098,
+        623
+      ]
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_up_0.png",
+      "sha256": "64124f29dacf0b5cc461c5f7887e5bd3a5a189511580b2a0194e14ff0ce9726f",
+      "bounds": [
+        33,
+        45,
+        63,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 8,
+      "sourceFoot": [
+        171,
+        924
+      ]
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_up_1.png",
+      "sha256": "fb73e0d04e74f01fce69b0cf10b03e8fad0411ebf3536e7b5707f25c31fa634f",
+      "bounds": [
+        34,
+        42,
+        63,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 9,
+      "sourceFoot": [
+        492,
+        926
+      ]
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_up_2.png",
+      "sha256": "e155ed8bcf2ba37aded2325bdeac5fd9ef653424df9153449dfcaf11f61e787b",
+      "bounds": [
+        34,
+        42,
+        66,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 10,
+      "sourceFoot": [
+        773,
+        931
+      ]
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/basic_attack_up_3.png",
+      "sha256": "bab32d096f8de55367c012ab1c77e4ccdb25684769fd0c73fe5286f85b28841b",
+      "bounds": [
+        32,
+        43,
+        61,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 11,
+      "sourceFoot": [
+        1103,
+        931
+      ]
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/hurt_up_0.png",
+      "sha256": "7a464794dbb2f583fb963beb71dd797d28dcd6fb9305f87fea4af3a4c98a7aef",
+      "bounds": [
+        34,
+        44,
+        62,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 2,
+      "sourceFoot": [
+        782,
+        312
+      ]
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/hurt_up_1.png",
+      "sha256": "1fd10b276319f3f36198803ec4caff52f1ebc8674de4068905b090e22a190008",
+      "bounds": [
+        35,
+        45,
+        61,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 3,
+      "sourceFoot": [
+        1088,
+        309
+      ]
+    },
+    {
+      "name": "death_up_0",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_up_0.png",
+      "sha256": "51b45d48a9ac275998821095b61ceb434aedcfc9076a7214668cf4178447592c",
+      "bounds": [
+        37,
+        45,
+        65,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 12,
+      "sourceFoot": [
+        140,
+        1209
+      ]
+    },
+    {
+      "name": "death_up_1",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_up_1.png",
+      "sha256": "287dcc9859e25f788be962c609d41e749a51aa597cba2039af8c57e5a0aafce9",
+      "bounds": [
+        36,
+        53,
+        61,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 13,
+      "sourceFoot": [
+        466,
+        1205
+      ]
+    },
+    {
+      "name": "death_up_2",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_up_2.png",
+      "sha256": "3a28cd09bb8e119878ec1fb979381099d8a17077fcabc41d8ce8f9ff8d1937dd",
+      "bounds": [
+        32,
+        56,
+        61,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 14,
+      "sourceFoot": [
+        792,
+        1202
+      ]
+    },
+    {
+      "name": "death_up_3",
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/frames/death_up_3.png",
+      "sha256": "0e83bd7ce01f4c02881ce54d4a07725e3d3a742272c2a10976cca387bc8051b7",
+      "bounds": [
+        30,
+        59,
+        64,
+        76
+      ],
+      "sourceConcept": "assets/concepts/arena-creeps/waves-13-16/tieu_hoa_quy_concept.png",
+      "sourceConceptSha256": "1e947d4ae0c32b98d6a0797ad01f698ee6ee9cec0aad73926847891f40eb451e",
+      "sourceImage": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "selectedComponent": 15,
+      "sourceFoot": [
+        1104,
+        1202
+      ]
+    }
+  ],
+  "animationAudit": [
+    {
+      "tag": "idle_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_down",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_down",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_left",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_left",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_right",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_right",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "idle_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "walk_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "basic_attack_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    },
+    {
+      "tag": "hurt_up",
+      "frames": 2,
+      "distinctDrawings": 2
+    },
+    {
+      "tag": "death_up",
+      "frames": 4,
+      "distinctDrawings": 4
+    }
+  ],
+  "sourceScales": {
+    "down": 0.13250517598343686,
+    "left": 0.13008130081300814,
+    "right": 0.12673267326732673,
+    "up": 0.1285140562248996
+  },
+  "generatedSources": {
+    "down": {
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/source/down_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "left": {
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/source/left_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "right": {
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/source/right_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    },
+    "up": {
+      "file": "assets/sprites/creeps/arena/tieu-hoa-quy/source/up_v1.png",
+      "expected": 16,
+      "rows": 4,
+      "cols": 4,
+      "referenceIndices": [
+        0,
+        1
+      ]
+    }
+  },
+  "runtimeIntegration": true,
+  "rejectedSourceFrames": {},
+  "provenance": "Original AI-assisted raster poses using approved concept images directly. Aseprite extracts masked generated pixels, removes alpha below220, preserves retained RGB, uses fixed nearest source scales and aligns feet. No concept-board crops used as frames; no commercial sprite pack or exclusive copyright claim.",
+  "notes": [],
+  "runtimeVerification": "docs/evidence/phase1h-integration/integration_verification.json",
+  "finalRuntimeArtApproved": true,
+  "approvedOn": "2026-10-31",
+  "authority": "Game owner explicitly approved the delivered Phase 1H artwork after the final six-client Phaser validation and comparison PNGs.",
+  "approvalEvidence": "all approve",
+  "approvalScope": [
+    "Waves13–16 four-facing idle, movement, attack, hurt and death artwork",
+    "256 distinct character PNG frames / 80 animation tags",
+    "28 VFX frames / 7 animation tags and existing-event presentation",
+    "final normal-zoom and native-pixel runtime appearance"
+  ],
+  "excludedScope": [
+    "new ranged AI or projectile combat mechanics",
+    "charge, burn, shockwave or balance changes",
+    "Waves17–20 / Phase1I",
+    "rejected unused generated poses as production frames"
+  ],
+  "approvalLock": "assets/approved_arena_creeps_13_16.lock.json"
+}

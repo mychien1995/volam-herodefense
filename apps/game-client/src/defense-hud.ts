@@ -1,5 +1,5 @@
 import type { LobbyState } from '@volam/game-protocol';
-import { m1Config } from '@volam/game-data';
+import { m1Config, invasionCreepName } from '@volam/game-data';
 
 export class DefenseHud {
   private readonly panel = document.createElement('section');
@@ -11,7 +11,7 @@ export class DefenseHud {
     this.panel.className = 'framed';
     this.panel.hidden = true;
     this.panel.innerHTML =
-      '<strong>Tượng trấn phái</strong><div id="statue-meter" role="meter" aria-label="Statue HP" aria-valuemin="0"><i></i><span></span></div><span id="invasion-countdown"></span>';
+      '<strong>Tượng trấn phái</strong><div id="statue-meter" role="meter" aria-label="Statue HP" aria-valuemin="0"><i></i><span></span></div><span id="invasion-countdown"></span><span id="next-invasion-creep"></span>';
     this.warning.id = 'invasion-warning';
     this.warning.hidden = true;
     this.warning.setAttribute('role', 'status');
@@ -56,6 +56,14 @@ export class DefenseHud {
       : `Đợt ${d.wave} · Đợt ${d.wave + 1} sau ${Math.floor(seconds / 60)
           .toString()
           .padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`;
+    const nextName = invasionCreepName(d.wave + 1);
+    const roster = this.panel.querySelector<HTMLElement>(
+      '#next-invasion-creep',
+    )!;
+    roster.hidden = d.defeated || !nextName;
+    roster.textContent = nextName ? `Sắp tới: ${nextName}` : '';
+    const noticeName = invasionCreepName(d.noticeWave);
+    const rosterNotice = noticeName ? ` · ${noticeName}` : '';
     const showNotice =
       !d.defeated && d.noticeId > 0 && state.tick < d.noticeUntilTick;
     this.warning.hidden = !showNotice;
@@ -63,8 +71,8 @@ export class DefenseHud {
     if (showNotice)
       this.warning.textContent =
         d.noticeKind === 'wave'
-          ? `Đợt ${d.noticeWave} đã đến từ hai hướng Tây và Đông!`
-          : `Đợt ${d.noticeWave} sẽ đến sau ${d.noticeLeadTicks / m1Config.tickRate} giây!`;
+          ? `Đợt ${d.noticeWave} đã đến từ hai hướng Tây và Đông!${rosterNotice}`
+          : `Đợt ${d.noticeWave} sẽ đến sau ${d.noticeLeadTicks / m1Config.tickRate} giây!${rosterNotice}`;
     this.warning.dataset['noticeId'] = String(d.noticeId);
     if (d.defeated && !this.wasDefeated)
       this.defeat

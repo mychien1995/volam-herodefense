@@ -1,0 +1,4737 @@
+{
+  "status": "passed",
+  "scope": "One final lightweight offline package verification plus targeted corrective VFX alpha recheck; no Phaser or gameplay execution.",
+  "pngCount": 574,
+  "components": [
+    {
+      "id": "boss_hoan_nhan_hong_liet",
+      "frameCount": 144,
+      "animationCount": 40
+    },
+    {
+      "id": "mongolian_footman",
+      "frameCount": 64,
+      "animationCount": 28
+    },
+    {
+      "id": "mongolian_archer",
+      "frameCount": 64,
+      "animationCount": 28
+    },
+    {
+      "id": "hoan_nhan_hong_liet_vfx",
+      "frameCount": 112,
+      "animationCount": 28
+    },
+    {
+      "id": "mongolian_headquarters_props",
+      "frameCount": 24,
+      "animationCount": 24
+    }
+  ],
+  "attackSets": 7,
+  "passiveSets": 1,
+  "terrainTiles": 112,
+  "environmentProps": 24,
+  "errors": [],
+  "missingAssets": [],
+  "runtimeVerified": false,
+  "limitations": [
+    "Animation motion, multiplayer zoom, actual attack-vector orientation and safe-area collision require future runtime review.",
+    "Human arrival uses one character keypose plus a four-frame dust effect.",
+    "Entrance and return may reuse the same portal artwork."
+  ],
+  "files": [
+    {
+      "path": "assets/concepts/arenas/mongolian-headquarters/arena_overview.png",
+      "sha256": "2b3c14144ba141b550cf5d4ee85089b8772a7271ece78b959e7ebc7c29864d07",
+      "bytes": 3632694,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/concepts/arenas/mongolian-headquarters/layout_reference.json",
+      "sha256": "68589b8103022f68f2f46335f4a179411cda98edf34fe148a4fb1c82407919f4",
+      "bytes": 1198
+    },
+    {
+      "path": "assets/concepts/bosses/hoan-nhan-hong-liet/master_concept.png",
+      "sha256": "44d6a371584476ecf3c455bd72155fe16296e3cbcd9f6fce4281b456dab38914",
+      "bytes": 3147150,
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/concepts/summons/mongolian-soldiers/combined_concept.png",
+      "sha256": "816d4555948caa9c82b2e258a8a8ecac1ac8b7252c32873403a75235a3bbd65c",
+      "bytes": 3144577,
+      "width": 1536,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/ability_asset_map.json",
+      "sha256": "3ac501f666b41ff9e1a94859b1cdb123252911bcddc3f1b759dd6cc8c12aba70",
+      "bytes": 2593
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/atlas.json",
+      "sha256": "c340a6c7ca0db18666bf5309cc12983bca29d1c4f2efcbd5c6733ef70236e5d1",
+      "bytes": 56076
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/armor_glow_0.png",
+      "sha256": "97ead727d88102e7fa9b79acc1df58d5e8a1eb45cf664224ca130653428e9cfc",
+      "bytes": 10866,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/armor_glow_1.png",
+      "sha256": "be0a9bd36e9d4de1ee82a575e3d280dd15c1c594cf69778bf716005bb70aa9cd",
+      "bytes": 16676,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/armor_glow_2.png",
+      "sha256": "0cdf4936d54beffadcf994ae5a6683d15a4685fa9d56a96ba42538c56cef4cff",
+      "bytes": 23655,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/armor_glow_3.png",
+      "sha256": "148302be293fd4aefaf154225b1a727f13062a58c57c3fb0a835db79bcf4c9e1",
+      "bytes": 11692,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/arrival_dust_0.png",
+      "sha256": "282561b69a11881a71496fb1169b649d746142cc58c70687606aa033a92d6eca",
+      "bytes": 12131,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/arrival_dust_1.png",
+      "sha256": "90ee5cf5721ba658565e817408e41d343a92038c0c933dd24d82126f81ba5533",
+      "bytes": 21588,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/arrival_dust_2.png",
+      "sha256": "8bcc883b70a0b8860768c0b423928c789676100db61a2ad0f964af18036a7ce2",
+      "bytes": 22825,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/arrival_dust_3.png",
+      "sha256": "7461598eb2b4e895d2e10917ac5b466fb72c587d332a382df4164f84b1ecede8",
+      "bytes": 16328,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/arrow_impact_0.png",
+      "sha256": "5e52229db5afd21b4f73f1aeaddeb2fafec6c61e5e83b21d516d64ba8346c581",
+      "bytes": 15117,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/arrow_impact_1.png",
+      "sha256": "338475cd976852b4982ce6649cef4355cad8eaf2da3c20c0d04bebc6d93c31dc",
+      "bytes": 19881,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/arrow_impact_2.png",
+      "sha256": "fb1948b862862c2526da5f52c7481fbe8f2881784904b55746c16d31da175a6b",
+      "bytes": 23262,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/arrow_impact_3.png",
+      "sha256": "8e2ae7bc0f039252bd3074c90c985f9c3811749164be91ea8db4cf6e5c6847e0",
+      "bytes": 17724,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/burning_ground_0.png",
+      "sha256": "21bf724b383ef6d525615ed45c3cb7044f09658aeccf0b85fbe6742479110b6c",
+      "bytes": 19907,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/burning_ground_1.png",
+      "sha256": "1dac50e213f797257bd30cea29230bc6ef86a7273c9e1700688d3bc50cf303b3",
+      "bytes": 19736,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/burning_ground_2.png",
+      "sha256": "c75ca621f651e33e3096a440f7bdbc51575b714a9d3af84f1f7771cb76fb19ea",
+      "bytes": 19996,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/burning_ground_3.png",
+      "sha256": "0ef4c4b609fd5516b326cdd42c8bcec253ccbc547b3da505844ac47cc6baad9f",
+      "bytes": 16499,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/burning_impact_0.png",
+      "sha256": "f00b57a272e589fcc3d95224d693d3c03b2050e9a6e26f44167bb45e5373f610",
+      "bytes": 12655,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/burning_impact_1.png",
+      "sha256": "0c2e3de5a1dd79733d635c1004dd6fb1a9da0c559376416a83e00e3f29e0f317",
+      "bytes": 23104,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/burning_impact_2.png",
+      "sha256": "c1d4e04531c3ef5f0edffb197a2ba36c0c104342a1d28d8429c4c3935a43c24c",
+      "bytes": 21290,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/burning_impact_3.png",
+      "sha256": "c54176776567896792bccc64bee4db84bc1b37d28257a32e5f4e0dfbd85ac89f",
+      "bytes": 14365,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/defense_impact_0.png",
+      "sha256": "7f05e217946f482c28f5e80e522b1611644f9eebc1feb2a88d89350f5af911dc",
+      "bytes": 20261,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/defense_impact_1.png",
+      "sha256": "7cd6132e0f7f5848405ef60f74e2dd57ea71361a9cee0f668ed75facb5f3e00f",
+      "bytes": 26538,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/defense_impact_2.png",
+      "sha256": "aca0da4b0a1686a0fb48d7472cde49667c12a03f2dc038a48e45084da2e7d312",
+      "bytes": 21586,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/defense_impact_3.png",
+      "sha256": "8b9029eac99fcbf9977fd8d2a65812ccf9d87dcd9a1f8a683be7fe4181880971",
+      "bytes": 14242,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/eruption_warning_0.png",
+      "sha256": "c69e9ce5c44f3353ef3f8380fffbae25ad1eda66beaabdc95b95e5d0aaa8c741",
+      "bytes": 17719,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/eruption_warning_1.png",
+      "sha256": "c62a818c3aa40b423712b231ddb45343805a23481b17b5c6480a8c4e1c2f72ab",
+      "bytes": 18953,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/eruption_warning_2.png",
+      "sha256": "ac6f6282b0db2260f2b8b1a36ec75a35abd16a4996c76418580bc2cd5fda35d4",
+      "bytes": 21500,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/eruption_warning_3.png",
+      "sha256": "118ce295ac1f4c796745b732ae830ac8dc41643aac8c7c68cbcd7ae5a514cb75",
+      "bytes": 23451,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/expanding_shockwave_0.png",
+      "sha256": "21056fa491bb145e18f47ac3fa159bc694cc485f59bd5ff134fcaa73f0b122e6",
+      "bytes": 14099,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/expanding_shockwave_1.png",
+      "sha256": "f10411bf2e7f2b76d03317c8d51206836998db0be1bacbf460d85b44d65a3c64",
+      "bytes": 20262,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/expanding_shockwave_2.png",
+      "sha256": "f5ad52a47d406bbd4ba011a27ef29294f78383cf2ee3f7e2e7ea5bd5a74ed078",
+      "bytes": 23932,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/expanding_shockwave_3.png",
+      "sha256": "d327635491afcd14aebbda05135c2d5f11a87b9b94f330a73e18e7cafa8caf61",
+      "bytes": 16839,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/fissure_warning_0.png",
+      "sha256": "81e72173e86c363accd37ce4ff0b5830596329f28cee91d0bd141e12d93e1bfd",
+      "bytes": 10077,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/fissure_warning_1.png",
+      "sha256": "70d7d792f5c19626974376c4b59cff79e25cc1eb001e93f1b5ebe2db58c87390",
+      "bytes": 12085,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/fissure_warning_2.png",
+      "sha256": "2952a6ecce501d4117c1dac065eaf3bd7a25404cb72165989a9915347a1969a3",
+      "bytes": 13943,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/fissure_warning_3.png",
+      "sha256": "4969760d6e47db1c45942a4e4fc8515cf823601c80073cb2ecf77c82add0271d",
+      "bytes": 14720,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/flaming_arrow_0.png",
+      "sha256": "20d79e7aca7ff4dee197f3d8c63f2dd4dcab891083ca46ac0d37583860c265d4",
+      "bytes": 7804,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/flaming_arrow_1.png",
+      "sha256": "4b97692560698befb9263c200a4a79353b8f49d8826c95dd96d771e6a98ae05b",
+      "bytes": 12603,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/flaming_arrow_2.png",
+      "sha256": "45313c9fa9632567c5dec14df3613ba5da33d61b92ebca0638137954760853e5",
+      "bytes": 16686,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/flaming_arrow_3.png",
+      "sha256": "eb98206bf839523deb7f5a5a58403eb0d5d72ba017e48d7be36ed76786f5917e",
+      "bytes": 12827,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ground_rumble_0.png",
+      "sha256": "fa232b38c711ba86121a52717721f46460b562d7c77b9bff7ef4d195ac069996",
+      "bytes": 7262,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ground_rumble_1.png",
+      "sha256": "b562fc9943d53523185afc67df0de225947ff2f45eed3cee2d5db4b6457908e2",
+      "bytes": 18309,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ground_rumble_2.png",
+      "sha256": "37b65892dababe52f6461996b7e9bfe5507c88ace41eb3b2c9b0023bbd329f21",
+      "bytes": 29556,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ground_rumble_3.png",
+      "sha256": "e55229d092ec42ec30666817448dd4c17311ca21548b476fe48449a9da17b451",
+      "bytes": 14437,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/lava_eruption_0.png",
+      "sha256": "3c7c832d8774a65b8acf87f51c000ae677c6997d799250f91eb42b1aa9c4fcdd",
+      "bytes": 19311,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/lava_eruption_1.png",
+      "sha256": "eb0db8bec5ffc542c70ea21963d01b70479d320cc5de3cc69203e62566ea75db",
+      "bytes": 33634,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/lava_eruption_2.png",
+      "sha256": "a3b903e9ca69a2ca58bd218890e2bf01a86955bb1b31df6fc2a347222da20d1e",
+      "bytes": 50082,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/lava_eruption_3.png",
+      "sha256": "48250a386fcf30a958b928dbc386b0b00a34a3b076724e6bfdda78ffa49a8c80",
+      "bytes": 30813,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/lava_wall_dissipate_0.png",
+      "sha256": "d05c240d7ac68384c7a77b9fee04970933a21c7be13f029fbe53ebf3f0ab8705",
+      "bytes": 24520,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/lava_wall_dissipate_1.png",
+      "sha256": "5f1f487429446de9f6e38f53703d588f28334ef8d0a20be0e9b8da0a775a4514",
+      "bytes": 24931,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/lava_wall_dissipate_2.png",
+      "sha256": "19396525dc61310a1a7077ba00f19686a94dbf4683c78cbfb737d370168cd7a3",
+      "bytes": 19198,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/lava_wall_dissipate_3.png",
+      "sha256": "f50c8cae5f106c6873e21ab7fb5ca8d18d1cf4741a7736449bf74a0f204a04ba",
+      "bytes": 12551,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/lava_wall_rise_0.png",
+      "sha256": "72701a4629da1f094cd86ba6d2e78a5c2a74547c6b968c0110c293222ccb25ff",
+      "bytes": 5281,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/lava_wall_rise_1.png",
+      "sha256": "27a1d497d45433114c4076ec555abc4c46f3d4a946799ab810195ea7da0dbe0a",
+      "bytes": 13893,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/lava_wall_rise_2.png",
+      "sha256": "f19f06470f8a282aeb4a7f8119686ef133cecb619bb7123970981a0662473af0",
+      "bytes": 22485,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/lava_wall_rise_3.png",
+      "sha256": "832d905583f68c16f9420177e1c35baea34283ba8220225f3baa8953c9d9be34",
+      "bytes": 22367,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/military_signal_0.png",
+      "sha256": "b48af867876d9aed3e6f492af9b371c8feca67f23c9af9fe26b8b72716555108",
+      "bytes": 18499,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/military_signal_1.png",
+      "sha256": "eecf872e5f7c89cd73e7c786834bf249cc7ac61c9147d0a4bede6a6eceb5faa4",
+      "bytes": 26875,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/military_signal_2.png",
+      "sha256": "68f4e2d47cf0b8fc270f4d1e9df6dcff06b4e21d418f628639c56a6e6332d729",
+      "bytes": 35355,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/military_signal_3.png",
+      "sha256": "f99270792b30ebef12f96f48d8a3450e1fe79537b1bf4a37acc2899b5fb93a08",
+      "bytes": 25249,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/molten_splash_0.png",
+      "sha256": "46b42b6c60ab5b2efc3af58f115a7b2dbe9c1365716dcdf07ac250336490f4a0",
+      "bytes": 14583,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/molten_splash_1.png",
+      "sha256": "227412749167626abd83235ee7f4fc379d4b9eec8db78b9b8cac7813a9f564ec",
+      "bytes": 27946,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/molten_splash_2.png",
+      "sha256": "b9ee5337e18429615e7b06d2e033769a1105c87d30160e8d5a114feb4d6e7ce6",
+      "bytes": 24742,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/molten_splash_3.png",
+      "sha256": "fe76de4d43685bd98f946056dbcaefa59537fad5459f2319c329685b9c967ce5",
+      "bytes": 17990,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/normal_arrow_0.png",
+      "sha256": "eab64b5630409c0803aba5a30018caadb40743ab36337286163a119bd55566d2",
+      "bytes": 4741,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/normal_arrow_1.png",
+      "sha256": "6ab1e7319b3362ac3d0e7cd29aa7507cce2e80da666e45148e89a45ba6db88b7",
+      "bytes": 7405,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/normal_arrow_2.png",
+      "sha256": "adc3cec42a675f0a86150164026c9b8c5b82ed8d2bc2cdec05ba5420cbf91d96",
+      "bytes": 9032,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/normal_arrow_3.png",
+      "sha256": "ab374f7d9e125fb9ae75a0b5ca407bc1b8a978a86a192d21da730bb3fc39f885",
+      "bytes": 8656,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/rally_formation_0.png",
+      "sha256": "5acfdfeeb2cbcc26e879e971d42479f46128b8aeeb3b51351029f93f5a567f8f",
+      "bytes": 16757,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/rally_formation_1.png",
+      "sha256": "6ebd602d7475ffc573622861b8cf9588b1470d191f9a9b11812314d30941cdef",
+      "bytes": 18347,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/rally_formation_2.png",
+      "sha256": "e526ffb08a8cd3f9e66df78994f8ac221f86f8ef41200f2d7094bc3cb228bacd",
+      "bytes": 19345,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/rally_formation_3.png",
+      "sha256": "afd71fc9026ce2bdfc1087fdd13fbff49f2d81c3ead99018b392ad55b70646dc",
+      "bytes": 21875,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/saber_slash_0.png",
+      "sha256": "4e6fc3d61b82bbb5ce40aad9bf5bbd9cd67b6f4fe6b4d324ff8fbc9c95ba324d",
+      "bytes": 12922,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/saber_slash_1.png",
+      "sha256": "09335487a2eb5b759954ac624634e2f98ac4e8a7d9ef7160d3cf6aa5277d507c",
+      "bytes": 20449,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/saber_slash_2.png",
+      "sha256": "cfa6333d2b4c798c4fc795e22b575a8fbcdf340bbbe3ba7a97c833738c49cde9",
+      "bytes": 11738,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/saber_slash_3.png",
+      "sha256": "4ef0d6625b0b3c43b10650e0efcfef8bddd347dccbbd7551291493ac63b1c424",
+      "bytes": 6861,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/safe_gap_boundaries_0.png",
+      "sha256": "f8aa3263b4eee14ffbf9caa7db8afcb84d2a591d2febff5747b6c17a4f1b50d1",
+      "bytes": 7712,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/safe_gap_boundaries_1.png",
+      "sha256": "91746a1daf8f04904c6b507c13a43c019ced228f7b2f32f8953c9a72e4a1b8bf",
+      "bytes": 9178,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/safe_gap_boundaries_2.png",
+      "sha256": "84e0a7877b34d0e6b1c0c39671e7f154428b419c502a89c1e29479a3d321ee81",
+      "bytes": 10665,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/safe_gap_boundaries_3.png",
+      "sha256": "d2e54d4f71cc3a8aa6dcf165c2eb03986177d62196e5a354dd5a09a21be83387",
+      "bytes": 11009,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/traveling_fissure_0.png",
+      "sha256": "743904ea6e88c1b09e991564cf474743267d3d93fc83d224e0227873ae46ab4b",
+      "bytes": 8395,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/traveling_fissure_1.png",
+      "sha256": "ff8fc4926d91ed24d09bd80146f2453431539007e727e531b2c9248aae8376e0",
+      "bytes": 15702,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/traveling_fissure_2.png",
+      "sha256": "e44e73bad34c5297ac50cb635d79dd8e044336e5f541e8aaf01133d1807d428e",
+      "bytes": 20141,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/traveling_fissure_3.png",
+      "sha256": "4914ba047455b76d8c53937cdb51bafd321b4ed06a15e9c3a0106f222c4e4e91",
+      "bytes": 21525,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_ending_0.png",
+      "sha256": "2101d0b4358e897a3bb68fcc5f1fa0b8b61e288b9397dc281b00c61a44c63c8d",
+      "bytes": 11215,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_ending_1.png",
+      "sha256": "cbddcad5960b68ae4334cdb9bf145f2fe38fba551fb82d6f39b7994d37c70e3e",
+      "bytes": 21498,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_ending_2.png",
+      "sha256": "a03c5d782f3836aaa65d2219849b9a1c62a72651be69c673a631aaebf4ea7bc6",
+      "bytes": 20378,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_ending_3.png",
+      "sha256": "ffe381ec65bd522334457939c159e4a3577989ca01c2f3194841daeb9e4e5e01",
+      "bytes": 16122,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_eruption_0.png",
+      "sha256": "f5dd64feca5b82487c9ce1090c610ec3ad2ea0cec1d959c4813b036c1f0b38ad",
+      "bytes": 20010,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_eruption_1.png",
+      "sha256": "67263c8b4157ff068e266baa777b099fc53414430fd8f05be81216983ff07817",
+      "bytes": 29901,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_eruption_2.png",
+      "sha256": "c541a5a30ec4ede1f190ccb98424620d0927484d6634184a2fe4d614686cd851",
+      "bytes": 44879,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_eruption_3.png",
+      "sha256": "04cfd1b8de4c704de6a1ab71d474ff21cbe13d39fbaee0046be61efa97094ac6",
+      "bytes": 32395,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_warning_cross_0.png",
+      "sha256": "1a341d532fed5c738c4205316ae402321e2fca0fdffa6b43357f5733aacbad4b",
+      "bytes": 23885,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_warning_cross_1.png",
+      "sha256": "3ee9f7e926ecf81fae87223fdfb78d1b42d97fb862299c13f2ab16da06d64005",
+      "bytes": 26060,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_warning_cross_2.png",
+      "sha256": "640cfda398faa789f397e0af6f13c968835b88c7db0eae20721c02f0956a9aac",
+      "bytes": 27184,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_warning_cross_3.png",
+      "sha256": "442461c2a5e3bda5846aeb4e8850b5a5c24e9aa35f6761ab2db389b4a2b6a3bb",
+      "bytes": 27965,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_warning_sectors_0.png",
+      "sha256": "2117c58692fa2d9b13b3ff78bc4610dbeb55f09a25d80798fdfdf97668f1149c",
+      "bytes": 21488,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_warning_sectors_1.png",
+      "sha256": "022ef4109e0a09fbf3797fef47b86f7ecc50059f9f4f0592ffeade887b860b14",
+      "bytes": 22056,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_warning_sectors_2.png",
+      "sha256": "ea72d09c9cf66b47d51b4e5b8006a6cea5d7d998f34947c0973f4bb8ebd1b7cf",
+      "bytes": 25048,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/ultimate_warning_sectors_3.png",
+      "sha256": "792736e4adbd18fa63f3db8e2623a6d622890e898d6697cb546b5b57a12b6217",
+      "bytes": 26521,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/volley_warning_0.png",
+      "sha256": "5ec314388438d6dccdf208d0d43a8452cc42a492174ddcc4604e0d640765883b",
+      "bytes": 16367,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/volley_warning_1.png",
+      "sha256": "e15bf683d952070061ffe544bb623ae91264bf28f10e2799bae295eea0a64b87",
+      "bytes": 18664,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/volley_warning_2.png",
+      "sha256": "f592c3c56ba5d427545b063ef5b3f68ec7551dcb963ca0dd678a988a2f8ff7ef",
+      "bytes": 22122,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/volley_warning_3.png",
+      "sha256": "f5a748e4a10ec42ef77f9b3e4819dcd885c1c7ea27d3d5b147be2a09dd3288be",
+      "bytes": 22897,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/wall_warning_0.png",
+      "sha256": "2612744f1f6a701dfa3377c2a39b7be639b78559469f689994843ad9f7b1ae64",
+      "bytes": 12734,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/wall_warning_1.png",
+      "sha256": "5e35093351e8bf9c427454da32246392e22ba59ce33c5602b4bfcbcab08c5a57",
+      "bytes": 15295,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/wall_warning_2.png",
+      "sha256": "863379ff3f60394d69d34989d3be7d469470955fa97c5b78a37be1a2cc22fe60",
+      "bytes": 16441,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/wall_warning_3.png",
+      "sha256": "2102caca64437641663dd9006435dd2cdf1526ee072110ba4838d03ffd37103d",
+      "bytes": 17354,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/weapon_impact_dust_sparks_0.png",
+      "sha256": "d73607aaba3ff85853846f780eef7792d487305814bc11208eee918df5bd8ed5",
+      "bytes": 12104,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/weapon_impact_dust_sparks_1.png",
+      "sha256": "0188dbc503d5514c1befb33c7f8319b996c62f7b660f3d9ebc135a209683b128",
+      "bytes": 27624,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/weapon_impact_dust_sparks_2.png",
+      "sha256": "3aeba60d958dd37ce4402904fb61e1bbc79476a975713a5d116e877b00782f26",
+      "bytes": 16840,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/frames/weapon_impact_dust_sparks_3.png",
+      "sha256": "a3203009f1bb97604d61e15b77e038379a119e66d96de8fe6624c8c7e6c947eb",
+      "bytes": 8575,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/manifest.json",
+      "sha256": "6bf01f68752e336bb118ae592ded8a581e5ae70f22f6a73222b355a6475dd3f4",
+      "bytes": 8780
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/source/basic_vfx_source.png",
+      "sha256": "dd341d67db59a9893657b3fedd64b180e767681c420d590cf90fdc4cf80c6d2d",
+      "bytes": 1200593,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/source/lava_vfx_source.png",
+      "sha256": "611efc95adaa1a0fcb10f06878810f559d333cd2e4c7598c679d573c1482f921",
+      "bytes": 2180237,
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/source/military_vfx_source.png",
+      "sha256": "21fafd1b32eb80e8be38c92fd3ecccca537a1f18ea4a21968d1e7ca8847ed9f8",
+      "bytes": 1907792,
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/source/passive_vfx_source.png",
+      "sha256": "76afcd749ea11a24ec654c1e7bb959fd177d16a99242efd429802ba59e58d6f1",
+      "bytes": 1711266,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/source/telegraphs_source.png",
+      "sha256": "fd0f35d6f0d06ade1d5ba0dce7af4fb26527cb265cf52779360d09035b05d2fb",
+      "bytes": 1827738,
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/effects/bosses/hoan-nhan-hong-liet/spritesheet.png",
+      "sha256": "4786b46f27bcf7102263e81b1119e3fa4005b590c890ba60d4299ba2508f35bc",
+      "bytes": 2082841,
+      "width": 2048,
+      "height": 3584,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/atlas.json",
+      "sha256": "ad3dd03d8ed0398b4822a4d30d09e947c65e8ac22245ebf62fe281f5e4dba19e",
+      "bytes": 72578
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/export_package.py",
+      "sha256": "e7f730af37fb2257ab9a9f78c195f295a42bc203a6a7c14c8792aeccd340d7c4",
+      "bytes": 23511
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/extraction.json",
+      "sha256": "d4dd8e041b4716e2e0c19763629ad1044e0d68efa878dbef2131cdd39447a36a",
+      "bytes": 34524
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_down_0.png",
+      "sha256": "561efa860add00a6c58245ef45c59a138d09b218d074772097598492753625a2",
+      "bytes": 9610,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_down_1.png",
+      "sha256": "7651ad46dcccef73031b23bdc50431b603eef10ee468fb76bfd1812b513436b4",
+      "bytes": 9022,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_down_2.png",
+      "sha256": "ed7ecae165492b49d2ab887897bb0993f44421681a9d8acdd74cf60e10ad947f",
+      "bytes": 8027,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_down_3.png",
+      "sha256": "7b920c8f3956ae03e4508833be0e1cd0c6d0bd500ee9d6cd94916e0a09ca9da1",
+      "bytes": 7999,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_left_0.png",
+      "sha256": "8c3a7e95c6cf816e053a9520b11ffaa7f0722f18520989e3540c13e3ac94669e",
+      "bytes": 8569,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_left_1.png",
+      "sha256": "0cc86a813082bc131b767b6567acd3c5e8b45b07b484c16dbedb07bf16c5f9ca",
+      "bytes": 7910,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_left_2.png",
+      "sha256": "9f8061f0e254a2e9d3741dfaff76ebf3107556597f6f68e8ed1450ec379ce44a",
+      "bytes": 8254,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_left_3.png",
+      "sha256": "11424b8fb2a87368c147671b96d58449ebe08d6d86fe4b131b48acb7d6859e69",
+      "bytes": 7391,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_right_0.png",
+      "sha256": "2b347c7bca0b330b0a58a0bbc91ceb21d9631efc8d324526026f00fdbd98771b",
+      "bytes": 9547,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_right_1.png",
+      "sha256": "a6269715541691af82500cd6bc04efbcb4a6bcd1d58b12a19e2f961d08a00b81",
+      "bytes": 8446,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_right_2.png",
+      "sha256": "ccce605417f604bdf55e67093f53b533febd8fc06e691b7fec32f65a82fa67e3",
+      "bytes": 9204,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_right_3.png",
+      "sha256": "1e4d1546c565e6c44e0f1d2a9b8c52b4e4ec5c578239d8f2891d7c156947aff4",
+      "bytes": 7669,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_up_0.png",
+      "sha256": "1dabbad1170ffe01435dd6bbdd6e78380af4ff29061562b58775c371331c12c5",
+      "bytes": 9317,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_up_1.png",
+      "sha256": "bd1eb026101c38f75e660170240d8ae46f8b17f555fbf8dca7110f79612da019",
+      "bytes": 9372,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_up_2.png",
+      "sha256": "103a6c1e408948a642a9b9586d439ced9261e5ad17fb98f70d69ec658b642892",
+      "bytes": 9475,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/basic_attack_up_3.png",
+      "sha256": "b889eec6e2613d34f161431bbad48bb3452571195d1c304e9564178b8c6fb027",
+      "bytes": 8164,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_down_0.png",
+      "sha256": "a0f3a2ba0c385c96870a60f4235915c7402ffacb428c9bb4d43e2149e5afc6b4",
+      "bytes": 8329,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_down_1.png",
+      "sha256": "16d08cd42cdced4af4cbf174ce8b8e0208612b74f591f0678f4f63210d753325",
+      "bytes": 9631,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_down_2.png",
+      "sha256": "9c39ec2b1bdf53a1d6b1a39bd2566c4a6f167793b633d404df32f62fbd60556d",
+      "bytes": 8958,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_down_3.png",
+      "sha256": "0d2c5870dfd3ccf3c91b051e52116e1fd3306fe81ee747aff7bfa56933be9444",
+      "bytes": 7966,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_left_0.png",
+      "sha256": "31531c2bf66e082f200bfcc964493d64d763a8de02841203ad4b8973f15b3197",
+      "bytes": 7736,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_left_1.png",
+      "sha256": "ecea1331dd4fa9b5964f5623260843b3bf66222c7208b3a148895edbe089324f",
+      "bytes": 8513,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_left_2.png",
+      "sha256": "e77e6d5a0d3ca9c2073e256368db4cfacc7758778e26ef5bd8562078600ea770",
+      "bytes": 8036,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_left_3.png",
+      "sha256": "100768c4bf8af5835b2539389d4fbe68f18c6b06a347f4f1b3188e0475b7e402",
+      "bytes": 7996,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_right_0.png",
+      "sha256": "6451c3464fe7cd366caacfdf895667a69928413f9bc72f22485ced38732a3f98",
+      "bytes": 8964,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_right_1.png",
+      "sha256": "a1e3835e39d05cea25760f4629f58a247bbb2ec7989f09c06662c863253348dd",
+      "bytes": 10486,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_right_2.png",
+      "sha256": "035112787a6058941885f834fc60a6bea5899c06e04a9bef3e561e8cb0411cd9",
+      "bytes": 9917,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_right_3.png",
+      "sha256": "83b5c630f15c52c4b3d0e6c99a1d7c63cc80862f728819a5596bb063af3df4a4",
+      "bytes": 8748,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_up_0.png",
+      "sha256": "f88af11f9b868b4d9a1728ddf783065e9cca9a35e1729d46b48ec0a605928554",
+      "bytes": 6932,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_up_1.png",
+      "sha256": "24555d41549e49db3f5f4a0299b624ab1fdbdb7f7baefa25b38cfb65161530de",
+      "bytes": 8790,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_up_2.png",
+      "sha256": "f764cfee8691e7a1f92962cb9862a139ed021ea899264821bd184e8a0262492b",
+      "bytes": 8069,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/command_up_3.png",
+      "sha256": "88efc60d55357e0ef51bd140f54791834756d12fa854ad13b6b893be95f0b1bd",
+      "bytes": 7112,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_down_0.png",
+      "sha256": "34352dc819b35efd5da1907f02c5b5aa149f5572b0dbf8e2f8d0570f5671b5ea",
+      "bytes": 7529,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_down_1.png",
+      "sha256": "e6201bf5483f02eff79c384d42d07008ad7abd97dc14b4315cbab8112883760e",
+      "bytes": 6667,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_down_2.png",
+      "sha256": "c6160ad05bbaa1a05b98083d0285e15b04855a083a42a7307f2a8325da40a22e",
+      "bytes": 5523,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_down_3.png",
+      "sha256": "14fe353f459ccb3cc99e5aab06c6608a80d70961f495b34b95a104d1f334363b",
+      "bytes": 6442,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_left_0.png",
+      "sha256": "032b0de2a3aa16e8a1a65361c1d0bb40fdfec8ea8933a1929eac70b812ba4955",
+      "bytes": 7150,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_left_1.png",
+      "sha256": "2b4c509db428522c4feee6418efeb86fdeed75af5cc8da246dbc419302be1b2a",
+      "bytes": 6404,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_left_2.png",
+      "sha256": "bbee691fb1e262339d1f8a423104e8e6f696f9f5d487566ad9f58a47bebdee19",
+      "bytes": 5694,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_left_3.png",
+      "sha256": "1b77e319e99fe2d069fd10d7ce9bf0ea3ced25acbd17a0c77e135e7966661cf8",
+      "bytes": 4422,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_right_0.png",
+      "sha256": "b11475daa3c73bcd1a60b5a951f4aabddbf52de2d65480032033fbd26ffe000e",
+      "bytes": 7939,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_right_1.png",
+      "sha256": "29afcdae5e42b027d93985dead7aff1bb30b660897e9846bc3ac08dc66710bdc",
+      "bytes": 7199,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_right_2.png",
+      "sha256": "58c11fa0523be601c96b4cea8ff0fff9df439eac373da2375b417f40447d3b10",
+      "bytes": 5881,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_right_3.png",
+      "sha256": "49923e8f9152a44bd748815ac798e56ceeb5bccde39ea22fddf2ca0ff1fa4eae",
+      "bytes": 5163,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_up_0.png",
+      "sha256": "9c79cded5da23abe659d56df255ffa73d4271ed37a5ce71f605b4bd42a68103c",
+      "bytes": 7869,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_up_1.png",
+      "sha256": "e32d16b9758224e1403696ecd017d8ef9b87477702daa64224bd0d67173845e3",
+      "bytes": 7784,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_up_2.png",
+      "sha256": "21bb6dcd323080835727584b4979fabc5c5d8ac619d8c7f52eeb0a2c27578c60",
+      "bytes": 6536,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/death_up_3.png",
+      "sha256": "ae5f2aac8d8a07d84e0609b32219ee51f2e93f0a4b0dd4682355c9c0eb170b40",
+      "bytes": 7117,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_down_0.png",
+      "sha256": "11985c5cc72d96c31c3a1a77043f886994c338dc6469849c3f8e8c5adb0bc519",
+      "bytes": 11810,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_down_1.png",
+      "sha256": "f4788d1f2537b85ef9a4bf38555528492175ad262bc9ee1eaaa32442f1a49253",
+      "bytes": 8685,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_down_2.png",
+      "sha256": "128d9434d834599659b1e10c5999094589cc03f91e71e852bdae3339794b94f4",
+      "bytes": 8639,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_down_3.png",
+      "sha256": "21894d284f75d16846d6132e8150eceec8610317ed21b84a6ef6ba32a4add4b3",
+      "bytes": 8183,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_left_0.png",
+      "sha256": "3bd17d916def7703f5cdf6f15734fbfc41dd36882e9086e937c1d60d8446e250",
+      "bytes": 10253,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_left_1.png",
+      "sha256": "8e375a67cf6a28740b4ac3072f8256a544eb1f51a68248e8127ace2a5e0e3c26",
+      "bytes": 7417,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_left_2.png",
+      "sha256": "0acc129190dd712a2a74637991ddc554484d86a8dbc90ed917a6ebe4c03a1765",
+      "bytes": 7291,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_left_3.png",
+      "sha256": "b87e6efbfc2d1646d96c1319fdb31dd0dc3a6beaad9551e330fe4a16a043e498",
+      "bytes": 7208,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_right_0.png",
+      "sha256": "052f02d76869bc8f14f8eb89f7859684ad49c2bb4f07a4de876e1f4a7ac4f8ad",
+      "bytes": 10927,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_right_1.png",
+      "sha256": "f461685d7bcd7e6d7b83ccf3db08f8eb120260c74df0c00323f2a7ad440ae74f",
+      "bytes": 7830,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_right_2.png",
+      "sha256": "de2584855cbef8340de835da329e4c7914f5834022f436863ebcbefe37c6ebc2",
+      "bytes": 8048,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_right_3.png",
+      "sha256": "1ff173b8e608cd58b29d6def0d6b5c48fe0ef7e8eb554074988b18b0b8cd7d0f",
+      "bytes": 7676,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_up_0.png",
+      "sha256": "788dc482742b20ff580048623e43df4dbeff85346552023a0ca4e3ed6df45c61",
+      "bytes": 8926,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_up_1.png",
+      "sha256": "7595ae032a1434dbedaa5f4612f4e7ffff1a5f4d86f65bad65adec046a24d2aa",
+      "bytes": 7490,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_up_2.png",
+      "sha256": "858223ef4895130c1614188a3742202b8f111ec154c8c43f0a81bdaf63f91e20",
+      "bytes": 6826,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ground_slam_up_3.png",
+      "sha256": "421a39bcca1b370c798aaf42ee61267534cef4a1dd5c04ddd67c82e846d7c88f",
+      "bytes": 8009,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/hurt_down_0.png",
+      "sha256": "2c2f3aafa693163c74d5b1a882e8ded5dd4bc9d70c8cf49960110ae48487c552",
+      "bytes": 7564,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/hurt_down_1.png",
+      "sha256": "dca7c6cae75a52b79141db55343c1d9f409b04b7267c1b74a5b8a8c7a7ebbe3d",
+      "bytes": 7889,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/hurt_left_0.png",
+      "sha256": "f8e6e04aef2c060b034b9ff6e26e7e4bc9c9fcbcb01114c5797439db688be6f5",
+      "bytes": 8394,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/hurt_left_1.png",
+      "sha256": "7b01137437fca47ba10b54d6c86ff9fe085d652ff68cf0c0b64d0fb9dbfd6278",
+      "bytes": 7901,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/hurt_right_0.png",
+      "sha256": "835b8d4d8e98c930b44c478c83d94a5c6205259feadced1dc978e8cf3c2772e6",
+      "bytes": 8550,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/hurt_right_1.png",
+      "sha256": "dff30acf5abeaf119bd9f97fdc8e572b58ad36904997f62306e889669d917db4",
+      "bytes": 8418,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/hurt_up_0.png",
+      "sha256": "c595cb8b9923995cc288dd9e904308eb1a0b104db7f8e4c9b1ecb151d328b75a",
+      "bytes": 7943,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/hurt_up_1.png",
+      "sha256": "c5096b8b006d404b35fa5f69c57c3c7971cb157f74fe28e4069c45f20dbcf4a4",
+      "bytes": 8312,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/idle_down_0.png",
+      "sha256": "0fc11c3ab2b48d5657029ccb46d4e1a1fdd02ab847a1ca2fed6b2c0964d01e2e",
+      "bytes": 8231,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/idle_down_1.png",
+      "sha256": "178feabc35d8debff2899d81b3ebbd5e1fee4dbb8a6b62d53b2109972e8fc7d3",
+      "bytes": 8053,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/idle_left_0.png",
+      "sha256": "2bd4c618bc4a852777d7f2a42cf56275f9bcb71a273e298212ed295e3dbb4177",
+      "bytes": 8037,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/idle_left_1.png",
+      "sha256": "815fbbbcff41a48c31af20c44b0cdf0218aec86cc92fe1138ab1ca6e3ec67862",
+      "bytes": 7888,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/idle_right_0.png",
+      "sha256": "463ccc1138f98ac523ccc41067221c6e9fbb9a4b23b001849fa1cf1b2cac3320",
+      "bytes": 7718,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/idle_right_1.png",
+      "sha256": "b465ab4bd1eded488fedde50fea94785ef05aeb776851aee3aad1305640e4371",
+      "bytes": 7955,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/idle_up_0.png",
+      "sha256": "7b58d7b7c67d8180e0a673001d131bcca08d8a7df9cdabc2a9d5580be408c807",
+      "bytes": 7913,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/idle_up_1.png",
+      "sha256": "d2e2634e63467f23949600fb589d27611a738f385d8b83acb8f7808ef844979b",
+      "bytes": 8216,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_down_0.png",
+      "sha256": "f3ba152405670b3b3ae65a17469e4c05ca3606710b5c2ccc3d016b06a98d0fe1",
+      "bytes": 7936,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_down_1.png",
+      "sha256": "b63960205357b1ee4cb5d03431bc5e2fe25370c2406562262c22525cc48e53b2",
+      "bytes": 9474,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_down_2.png",
+      "sha256": "2c1f939e84350eeba46f3e07dfd46a849b8756e124a438b9bb0626e855cb7636",
+      "bytes": 9615,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_down_3.png",
+      "sha256": "6f1031918ce785abe8b1a67a3a2e5be875a83babbaa2e3f981adb5dd39321454",
+      "bytes": 7915,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_left_0.png",
+      "sha256": "2f13fccfe355aec7b8a199c38a0f9f1d9ab82bb4d4ffc2e5c024d765220bc959",
+      "bytes": 8639,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_left_1.png",
+      "sha256": "a85e22ea2e437f7b153a79f1c7223e0446f8727a663713101527dac69f65b712",
+      "bytes": 8501,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_left_2.png",
+      "sha256": "6a51289a2ec8eab5dceab8d192196912932d20c81ace64498c56550e5455f426",
+      "bytes": 8067,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_left_3.png",
+      "sha256": "1c91798005474e6a51512e23a335b79cd4691bf110d5edff339e5b2f18222494",
+      "bytes": 8033,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_right_0.png",
+      "sha256": "1dc0733b5c7a87bb2eced7781cda480288742bbf069b14f1fc82bc287e198441",
+      "bytes": 8959,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_right_1.png",
+      "sha256": "81dfba389fe9f76a87a50ab339dc82b87edf0a973ffa8131d16559f2256ac480",
+      "bytes": 9780,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_right_2.png",
+      "sha256": "9959e043c16f6587002596ed524e237151b604d12ea1a4a48ec2848abc679ddb",
+      "bytes": 9777,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_right_3.png",
+      "sha256": "10cc6cc3b5e46147e351d0fe74ae97ebf5cf4b6ee950e9e0eb6a2d4a3be9a727",
+      "bytes": 8820,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_up_0.png",
+      "sha256": "729622fae80edfba6d06c4de2acc7bd30dd27f073d9f195c2d22e4e226efa686",
+      "bytes": 7747,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_up_1.png",
+      "sha256": "a403e618c8bc83aad46970230880ccc3bf14a495cbcfd4a89c9a3c449a0b96d8",
+      "bytes": 8492,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_up_2.png",
+      "sha256": "de1527498f8ba622d92e1bbae99870b4b205f84cb5be1b984ece6b73a3f49a34",
+      "bytes": 7772,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/lava_cast_up_3.png",
+      "sha256": "b0120f3b0946eb455a846c6f199a02296d8528e06d54f90c9bfaccd7d43b5d19",
+      "bytes": 7874,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_down_0.png",
+      "sha256": "5d2d80d3c25b86faa034955dcc7667a384e8174f109c21de79a0b9c96e6fe503",
+      "bytes": 7721,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_down_1.png",
+      "sha256": "45b0a21d99eb47441f245cca174feabfa54ab62d42b1e8cde5fdcfa9f30ba17e",
+      "bytes": 7489,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_down_2.png",
+      "sha256": "9a351115859c63af2c08f0a03b355b3dc253550017daaf3d919eb2739022113b",
+      "bytes": 8197,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_down_3.png",
+      "sha256": "599654d26f11dfd214505d6788f808b4cb60fca6b6b4bc452ccb15ebc7970764",
+      "bytes": 7733,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_left_0.png",
+      "sha256": "2b3c7a5de01b412026c770ce35a105f62bea27246394f4baf3e7f03108a64a10",
+      "bytes": 7832,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_left_1.png",
+      "sha256": "e8c8f6fa51b9b0e4d224503130840a4f1e8d46a674a206e9aea21b04feaf1471",
+      "bytes": 7685,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_left_2.png",
+      "sha256": "265ff04459ac2d7fc953752199e6fbd1d8a13d186cfc75d41ae201c689a6572f",
+      "bytes": 7932,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_left_3.png",
+      "sha256": "5bb0e0d22fffcbfd336292574482065cadf5af6c7de735719fb2718cadf9ca48",
+      "bytes": 7609,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_right_0.png",
+      "sha256": "3ece98fe76c032b34e9e12b22450c0e5171be8221db843301ebdbc069e8c54eb",
+      "bytes": 7320,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_right_1.png",
+      "sha256": "ff5cd6fc8f63b5b2cbae0506d071e62abae304f4b04ed97e7455c2871e4856f5",
+      "bytes": 7007,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_right_2.png",
+      "sha256": "f16e244ce48a4f9f1bcf483d97e372e8ef55498a772b5b200a07c5e8db322cfe",
+      "bytes": 7524,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_right_3.png",
+      "sha256": "98646b717a3dfd618c7f809b1ff28998f4515a6249292f01b1c9cb64a9be48bb",
+      "bytes": 7142,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_up_0.png",
+      "sha256": "afb44af21adb0181ab877c566e0a288f94a7edc48ee4ff9838853fca20f4956e",
+      "bytes": 8105,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_up_1.png",
+      "sha256": "b4308e746c68107f4823a83813cf7d2a0a9f1322ec998e1b530d0ebf6160d534",
+      "bytes": 8239,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_up_2.png",
+      "sha256": "546ddbaf425f0b985e3e6ef629402e1eea4bc8dc5c815d566bf196bf9ca733d2",
+      "bytes": 8430,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/low_hp_idle_up_3.png",
+      "sha256": "3b901f37282ec96531418d41fc595d8b6c9d2ced16e51b4edb1c3adbbcf1fa38",
+      "bytes": 8030,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_down_0.png",
+      "sha256": "da8432398b8b9210eb6a615836343864a5eac0161c32b39fa03ff6b5d6d9ae62",
+      "bytes": 7391,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_down_1.png",
+      "sha256": "17e40ca010c4b5287e104707385e7a4d39bfa4cb2f03711120fc972213c58321",
+      "bytes": 9002,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_down_2.png",
+      "sha256": "73ec69debaf5826ee964f5dbc4a94309ecdd45e884fac4e65897f07b901a6e45",
+      "bytes": 9469,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_down_3.png",
+      "sha256": "5ede925bdc986d58dcdffd8e6b4f2c09e5e12968c948a86a6cd08d8e6ad411ea",
+      "bytes": 7137,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_left_0.png",
+      "sha256": "cc7f2752dc8e1635525b9e1d7e4af4c42b7512a2fe332f1116f3a2de6e5896c1",
+      "bytes": 7957,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_left_1.png",
+      "sha256": "28eba18f5983d30173399fd5f7dc7e1c055ebd93ccd782b9e0c92c1084f0ff21",
+      "bytes": 10007,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_left_2.png",
+      "sha256": "ba52cdd1c12b9d9315c03e290787ba5288102276751e7b7f06fd5c0c8d6889e3",
+      "bytes": 9850,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_left_3.png",
+      "sha256": "85d4019f90ffa6737fc019149e479e280ef17234b9a7265dafc68782fe6daad9",
+      "bytes": 8911,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_right_0.png",
+      "sha256": "9eda5c3838f4973da6bb652c34cae285f124c14318a0c0cd8a7811d0ecbe3c31",
+      "bytes": 9360,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_right_1.png",
+      "sha256": "fb6a5da96f5ae5c6f9cdd2bb42743fe76ad68b01fff16c311174c646d8416a61",
+      "bytes": 9316,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_right_2.png",
+      "sha256": "ab05c2e378beaad78ebc326f4dcebd9ca653dc8fa1db10171853dd9f69dafb6f",
+      "bytes": 10576,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_right_3.png",
+      "sha256": "379170eba57cdf22ffbe4124b57bf0530cf682ee9374b98326144e89b259ddf4",
+      "bytes": 7616,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_up_0.png",
+      "sha256": "a756025c66684c3f192dddc2e9ffc14ee00e822e046912030ac137c22c3e5028",
+      "bytes": 8134,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_up_1.png",
+      "sha256": "437763d63429f2a94f1af0fff7b9563578913ed66e4d08e6d879cc277fb9992b",
+      "bytes": 8667,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_up_2.png",
+      "sha256": "d840d369932f0b890b78037aedda801d72407525aa51af410f2a578cea778975",
+      "bytes": 8250,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/ultimate_charge_up_3.png",
+      "sha256": "2594ea71f17c4e13941a9e151996866eb64154648792b5c8a03e57db02e51437",
+      "bytes": 7381,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_down_0.png",
+      "sha256": "95bdc842f05ad422f4ac88c45fb992f38eefea267989297d561e4b43eb865e7b",
+      "bytes": 7853,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_down_1.png",
+      "sha256": "9ff575c3ee3d833fde8d985127d4781fb887ab38cc4d9dcd7f0244334e2a64aa",
+      "bytes": 7676,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_down_2.png",
+      "sha256": "67bcc5924525139c91595c1ab0f99862996234864617f386ff7bba3e4e131cde",
+      "bytes": 8370,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_down_3.png",
+      "sha256": "6646d69d25b93230bf854bd3222461e77a06371556bf2a9e1f4ab9591e8ef6a8",
+      "bytes": 7288,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_left_0.png",
+      "sha256": "aefccff26f71bc96dfe35448ae6401e56f12b6a5d10bf41e33a74a916199b83e",
+      "bytes": 8300,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_left_1.png",
+      "sha256": "d640074c9af40be6e21feae6b319547c1c3c6191a91c3d113187d023b275eac0",
+      "bytes": 8243,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_left_2.png",
+      "sha256": "f2f24348291d82fd3e6f9558c51bc57c78b518305ea803ba7344b6a4bb110114",
+      "bytes": 8348,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_left_3.png",
+      "sha256": "b34fcd75dbbad53ace55b8a2656eae29c563228216aa3601b5e9af03a34fc2b9",
+      "bytes": 7916,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_right_0.png",
+      "sha256": "c1b2769efc32f14552283b8ab9531914bed2de95fc2c840c0c3211b271a982e4",
+      "bytes": 8197,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_right_1.png",
+      "sha256": "ab2f3526e7078db246643dca30a1a61f9aca31c759311315b4e825a80fb07253",
+      "bytes": 7655,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_right_2.png",
+      "sha256": "0e2474dcc726c10bc84ada13844ab70acd627ecc86f17e970831c347c44dc53a",
+      "bytes": 7845,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_right_3.png",
+      "sha256": "2103a9ea242d053707190500b3af27d7c0345b8861ab38b42956d64ca07dcadb",
+      "bytes": 8187,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_up_0.png",
+      "sha256": "51b37e65f24a87ac44dab1732a0e40aed4c7292ba76f7401f344fd29d9068b0d",
+      "bytes": 8394,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_up_1.png",
+      "sha256": "f7998b1abbb2bcdee3680c9344f08a76f4e7aa1b57541db0467e6e458415a79b",
+      "bytes": 8379,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_up_2.png",
+      "sha256": "953d5dafb23634b365ac2cfa625b276acbd1425addac9f692c409c34e5bedab1",
+      "bytes": 8543,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/frames/walk_up_3.png",
+      "sha256": "e38a05bd84e18c7354fa8e62f8f692cfaeea185c394a90b9746a247d00b2a54c",
+      "bytes": 8397,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/generation_jobs.json",
+      "sha256": "e444f15fb772383eb1bc30883d1d6121ef153f707e39370c8175e18a449d60a7",
+      "bytes": 32517
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/manifest.json",
+      "sha256": "3823c95febb96500c9bc037241339d61b526eba376fcf0d3094d5912a6f1e819",
+      "bytes": 10175
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/package_manifest.json",
+      "sha256": "39a2e1cf9281dbdcbdadf628c39beca462d023ff828def8c49cedfd5587bdd3d",
+      "bytes": 43162
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/portrait.png",
+      "sha256": "fd80a0a45c406a29315000e0816a0d3145abe20f66203ddf1d76d101a663bcda",
+      "bytes": 128600,
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/source/down_source.png",
+      "sha256": "bf5d434b76b9eb669ec0a1f9921e1ec946a5091550d10016fb4c9b3b33e0e74d",
+      "bytes": 2386900,
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/source/left_source.png",
+      "sha256": "122bd62ac9739bda03fffe0a88ccffe20b28ad5646eb34ecc2380995fb97a149",
+      "bytes": 2118435,
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/source/low_hp_source.png",
+      "sha256": "25358bb1136db782bbc74a7d85ae6918d2b60fcf579a11c37836cbe93614ffd4",
+      "bytes": 2310139,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/source/portrait_source.png",
+      "sha256": "4d921b189e52e65e58171bdbe385b22f0b01bb2eb8eff32d8726cfb7906609e2",
+      "bytes": 1995706,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/source/right_source.png",
+      "sha256": "4142a74834008670a4b54a425f7ac0ce605602b0fe3bd9c36d132684e6b5ef45",
+      "bytes": 2101737,
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/source/up_source.png",
+      "sha256": "8dc871f895605bdb7f171db07fdda0ec373393298c5138f804f5be9477e5d64a",
+      "bytes": 1992528,
+      "width": 887,
+      "height": 1774,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/bosses/hoan-nhan-hong-liet/spritesheet.png",
+      "sha256": "574c339a650165b762114f7e6bccdaefb9cca951b4cacf04fda35210e5865803",
+      "bytes": 1157564,
+      "width": 1024,
+      "height": 2304,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/army_banner.png",
+      "sha256": "63cc445efd74c30f71f9a99e50445d7c2ede7ccfe95e9bd87ce8245c8bf51bd8",
+      "bytes": 12811,
+      "width": 96,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/ash_basalt_rock.png",
+      "sha256": "b70db3d4fc82b1b0bb7edaaf483345728af1dd45afb2d0bd161d7d6cc5dda6ae",
+      "bytes": 9344,
+      "width": 128,
+      "height": 64,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/atlas.json",
+      "sha256": "d3f643e712af2516f971953f6782171b3afa43600229ec448333f181a5d29c3b",
+      "bytes": 15455
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/barrel.png",
+      "sha256": "d517a5b15239d0c786a4c7298d3a92bbcda9e03af262e494ef0f4d6805e6943d",
+      "bytes": 11907,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/boundary_lava_rock.png",
+      "sha256": "2c8101e1085440c4b99859bc5f595a8125489f22f5a425a5b433189439261629",
+      "bytes": 11102,
+      "width": 128,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/bow_quiver_rack.png",
+      "sha256": "30d1ce72e9821913cb9c6c3c07a905ac8481ba4a90c329e189321263c053ad42",
+      "bytes": 13381,
+      "width": 96,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/burning_brazier.png",
+      "sha256": "d4acb1582077d4ca464371424c3d4d281874bbfc851fefcfd1ff29c066643181",
+      "bytes": 12202,
+      "width": 96,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/command_horn_carpet.png",
+      "sha256": "b20534753c98df4d26cd51fd3f682dc73d665066c23d468c36681d3436ed141e",
+      "bytes": 13637,
+      "width": 128,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/command_tent.png",
+      "sha256": "13e88e586eb65638001c6e1c6490092d6d2ef67be0f793b5a8c04d2c1bac0ed3",
+      "bytes": 158936,
+      "width": 352,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/army_banner_0.png",
+      "sha256": "84498098e97500da8c024f20d2c2c57dad8ef3ae26845a58567099649089e193",
+      "bytes": 14555,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/ash_basalt_rock_0.png",
+      "sha256": "34871ede97071b700fc7c029ea62b0c8dcdf312465299a867c6240e9b9bc354f",
+      "bytes": 10875,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/barrel_0.png",
+      "sha256": "f7304282c19a4d19782b5f9acc7c02cac91ebdfb2c8af1159b481a42d40fca90",
+      "bytes": 13670,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/boundary_lava_rock_0.png",
+      "sha256": "cfb65c8160168efe8f37fce3f78c21b7e794708c2317af5767228804c4d5fd35",
+      "bytes": 12641,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/bow_quiver_rack_0.png",
+      "sha256": "ff9f40fb33feba61b96c8431ff84b5ae07230d76541cf38a24619d6cc3daaeeb",
+      "bytes": 15109,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/burning_brazier_0.png",
+      "sha256": "e5f952d1df96b15ee6fe785159ee2e7515f314a9c7a93ed52afd459ce614af01",
+      "bytes": 13855,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/command_horn_carpet_0.png",
+      "sha256": "4a49be31e601f70348e0e4ee0bfedbf33d0f012cb9c6161cfb8a2f7d8901d7bb",
+      "bytes": 15217,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/command_tent_0.png",
+      "sha256": "d28522f7e705a5af49e30ab7bceeccf03a86af8da1ce3a5e5813f4e71f3baaaa",
+      "bytes": 160259,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/horse_tack_rack_0.png",
+      "sha256": "b8698398ae8f9365e267b822de7ebf39d1c2094c95e7fdeff01ac452c7aa0947",
+      "bytes": 15883,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/military_drum_0.png",
+      "sha256": "b605d335d665ec2a283d10d0e52f0f4ffa088106a532e111c503debeb4d706a5",
+      "bytes": 22770,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/military_gate_0.png",
+      "sha256": "45ef7f667d85e585d12fd9346003a27de855f2e56db3f4bb0d0b1b66b28cc357",
+      "bytes": 80306,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/open_supply_crate_0.png",
+      "sha256": "b3875678a13e719a817f30fe7e5ba7e6c3f92862f815068aa838bcae46fc8d2d",
+      "bytes": 18297,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/palisade_horizontal_0.png",
+      "sha256": "76e24288605f465ca665313123654dd685d05fc75f4919ed81601687adcb6ac8",
+      "bytes": 74998,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/palisade_vertical_0.png",
+      "sha256": "bd68248cff5dcacba936929dfbb4b57b6f2573b7f4f2e00c9e3b61b46bc678f7",
+      "bytes": 30289,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/return_portal_0.png",
+      "sha256": "aeb3a6f1d3348c24416111f239821627ca321f3b51a9d255b31b5a05daf004f9",
+      "bytes": 66851,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/saber_shield_rack_0.png",
+      "sha256": "d226d3a3cf7c47090929e00ddfc307d6cdf70cfdfa28ce4758d15296c6df0aa6",
+      "bytes": 19160,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/saddle_trestle_0.png",
+      "sha256": "c4b51f360ecb5c59e17681e1824300bc03f492b497510007d77f680d87ce6c67",
+      "bytes": 19493,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/signal_pennant_0.png",
+      "sha256": "315d0c5802efcb8c522458080020c510df3de4682d22cb2f96f58db839322768",
+      "bytes": 10841,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/soldier_tent_0.png",
+      "sha256": "d2db13680d947962ac780721e04845dc42858d294b6b85ccf2e6d33df6a1e25a",
+      "bytes": 53925,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/supply_crate_0.png",
+      "sha256": "46e39abc0a5d04c342b23fc5471034d101bf119257309b3528d5a502e2e054d5",
+      "bytes": 17024,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/supply_sacks_0.png",
+      "sha256": "3a3c4f1a9e4ccaf3dc345c1857e8f37c311134d748770d3a3e8d94cc75ba5222",
+      "bytes": 17678,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/volcanic_rocks_0.png",
+      "sha256": "5432783737feaf1fad31df6f8ef4261c40572c4970eaf5ffccaa620bd563547e",
+      "bytes": 12630,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/watchtower_0.png",
+      "sha256": "7ca31b73eb0258a3f9a7e3fe75b9bb760315a0b43bb08db21f79b89edeedea8e",
+      "bytes": 56739,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/frames/yurt_0.png",
+      "sha256": "a8c4b6134f1e59d44f9307c2a1cc612e18812cfcad6fb34d73a90dc005b4fa15",
+      "bytes": 56064,
+      "width": 384,
+      "height": 384,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/horse_tack_rack.png",
+      "sha256": "4fd839a27fd6367022b7d9b94bc95b8cda081348ff8fff8f664652c34eafde2f",
+      "bytes": 14068,
+      "width": 96,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/manifest.json",
+      "sha256": "8372ea132a4a1da2d213fc5e80e1a98247db7f68993f229924bab9fe46a79d40",
+      "bytes": 4592
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/military_drum.png",
+      "sha256": "3d836bc1f313bf0689c45956dab18df7d1e4c8858a30ec50a4fa1832155308dc",
+      "bytes": 20829,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/military_gate.png",
+      "sha256": "1363c1369e1488e8b0e57de2cd75df8a7132f54c7985b9f60ee9af0a518c0585",
+      "bytes": 78423,
+      "width": 288,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/open_supply_crate.png",
+      "sha256": "300dfbf00c47fb08037726dfb86940a0dd52a6f6c0ea1659a6f8b064ee9598cf",
+      "bytes": 16556,
+      "width": 128,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/palisade_horizontal.png",
+      "sha256": "82737370c9f5998d699b70ef0ed9cfbfd2d20b01fd86fa27a002e63b873e26d6",
+      "bytes": 72877,
+      "width": 288,
+      "height": 160,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/palisade_vertical.png",
+      "sha256": "dcebbf6f3b1073ea7a08aede3c1ea85897cc4c6183ba50e4f99fa57e7b69e121",
+      "bytes": 27929,
+      "width": 96,
+      "height": 224,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/props_metadata.json",
+      "sha256": "366e2395f088b2bb09b074548c130e60665d9509dff8e355599db54f87c7b211",
+      "bytes": 13103
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/return_portal.png",
+      "sha256": "ceeab4b439d56dcf1445d5f94235cf099ffdd2c5ef12ed7d98847e13f2d6d769",
+      "bytes": 64918,
+      "width": 224,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/saber_shield_rack.png",
+      "sha256": "d8a99e69f57a0b71e76d86f8a38281171233b3e76bcb49ae1f4e2ccea0515570",
+      "bytes": 17332,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/saddle_trestle.png",
+      "sha256": "e4fc0b922ea38afc0f55df4881cc09c87fdcf8189d02d78f9fb8a8efc91f5ce4",
+      "bytes": 17690,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/signal_pennant.png",
+      "sha256": "79d1e04266456416ea21e0d4b0aa41cc2cd02470309f4131faaa0907a46152d1",
+      "bytes": 9444,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/soldier_tent.png",
+      "sha256": "f6dd06f8cddadfc4dd86054584baaea7b2a48496eff2f2c3fa8354a1132ba0fa",
+      "bytes": 51616,
+      "width": 224,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/source/props_source.png",
+      "sha256": "fd05b432255a2a2c718f8a7bfcf81b79be009dcfb4d5e1b60dcdbb20357c443e",
+      "bytes": 2142682,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/source/structures_source.png",
+      "sha256": "8b8b4313e12d7eccf90e2e8dec1ae47794150f7b2145270b8946480009fb73ab",
+      "bytes": 2379729,
+      "width": 1774,
+      "height": 887,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/spritesheet.png",
+      "sha256": "d9b50b6c9e8fa0ec52ff50f4e2095081dfbbd47fd9f1acde3887758ffffaa6ae",
+      "bytes": 825981,
+      "width": 3072,
+      "height": 1152,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/supply_crate.png",
+      "sha256": "58f4ffeda50290dc2d7bb4a39f8c4d4b6d348a0cd365cea4114f262cfad9001e",
+      "bytes": 15294,
+      "width": 128,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/supply_sacks.png",
+      "sha256": "da90fcffab471f24c91a5fbdfe4c2cb333963c14c32a14a6abb5fd63d1420e74",
+      "bytes": 15952,
+      "width": 128,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/volcanic_rocks.png",
+      "sha256": "02ba2214dc0f8a28a69b7e13470916864b7e4992b3116933e161b88a4adc53fb",
+      "bytes": 10966,
+      "width": 128,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/watchtower.png",
+      "sha256": "47cc220a24fc6826a93896803663843b02c363f61512f23b3ace57338aca31e5",
+      "bytes": 54639,
+      "width": 192,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/environment/mongolian-headquarters/yurt.png",
+      "sha256": "f491fe7431f8035796e6eaea942eab6f56d1ec6daecfcb6adb98b78b2a29b110",
+      "bytes": 53573,
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/atlas.json",
+      "sha256": "f2a2b8bb78e3c95931bf266e8b9e429e9911922688f01f382caceb0a633ea296",
+      "bytes": 34200
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/arrival_down_0.png",
+      "sha256": "16eda5d98bbba8b3ee759574a0e8243075786f057daec6be6ecb6a3ce7d4098c",
+      "bytes": 3917,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/arrival_left_0.png",
+      "sha256": "ccaa7632dcef5ccd66c9d9c73d132d1879f198a4b40ceb1088e7e9f3a6040363",
+      "bytes": 4278,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/arrival_right_0.png",
+      "sha256": "1f8874bd9063cc9bff7fa363ad709a302d364a098de3bbeeecda045fcc6a6ae8",
+      "bytes": 4036,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/arrival_up_0.png",
+      "sha256": "cc69d73b453beef20c63b8729df4f90ec055a733f0fde601238067a906aee27e",
+      "bytes": 3862,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/arrow_release_down_0.png",
+      "sha256": "a55a8373533a3f4d1e8c89ff41ede1f9151aaee91872c9e05258cedf9c704510",
+      "bytes": 4471,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/arrow_release_down_1.png",
+      "sha256": "8b78a7d8a8940ef1b10582e4dee1d6332c78b4650b4bf0244431fc0a1649f595",
+      "bytes": 4045,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/arrow_release_left_0.png",
+      "sha256": "890732dd826232e86d952b7b55b97b1836e48a2058256114ff9ef869c27b5dc0",
+      "bytes": 4397,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/arrow_release_left_1.png",
+      "sha256": "01041886d1852e4de168d357fdf106a54cfa9a4ae67bdd436943c1573da18700",
+      "bytes": 4099,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/arrow_release_right_0.png",
+      "sha256": "d3acace567441b5f791a23cd601c6b22c9b36030f69ce13b8a8f5004ec4329a4",
+      "bytes": 4375,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/arrow_release_right_1.png",
+      "sha256": "cc27f7bbffed9eadf8a580aa1fec161ccdaa8e44f59ce18c83117a8ac30b7a84",
+      "bytes": 4114,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/arrow_release_up_0.png",
+      "sha256": "b41ccff9cc309e3b44d26fe6848eb5f09f7c32d350299316eaea5cb6540f30c2",
+      "bytes": 4241,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/arrow_release_up_1.png",
+      "sha256": "b68a5e56ef7f99d078ee53065f10a046c715a766c298519986effe8af5606337",
+      "bytes": 4101,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/bow_draw_down_0.png",
+      "sha256": "ae40e82e7af2132fa265af9a7632ff500dd0aebb7ae55cc0c1f85365c0160a1c",
+      "bytes": 4156,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/bow_draw_down_1.png",
+      "sha256": "7521734fe0706a65a46d2c25ba3b07d127506aea8ef67bf3112e67c417ea980f",
+      "bytes": 4638,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/bow_draw_left_0.png",
+      "sha256": "c8970ef76e2f35f900e6589cc25ff9d364550534874d5410e12ad52a11b00e60",
+      "bytes": 4325,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/bow_draw_left_1.png",
+      "sha256": "7b000084bd4048a1547dfdea316df8962775b41153a35096173e661833b09659",
+      "bytes": 4550,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/bow_draw_right_0.png",
+      "sha256": "637135d206b9e57f100e7730d35d8b6c28b83f63203d52c8c7a7d297d187d5d0",
+      "bytes": 4228,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/bow_draw_right_1.png",
+      "sha256": "d0c40376570286a4026994460010346afad9509c3debf4f67fe3b2449fb038cf",
+      "bytes": 4725,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/bow_draw_up_0.png",
+      "sha256": "df66398c520a831ae6c3d9cb5d27fe1ae6b73f0f78652a101240b13c0594a909",
+      "bytes": 4233,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/bow_draw_up_1.png",
+      "sha256": "ed32c96ed963a5d812885bd1ada2f30e464ef04d7432fc6b26fe596058526d83",
+      "bytes": 4318,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/death_down_0.png",
+      "sha256": "829e48c874df14ec6a3b6d7a595d2c44520b9d6b464b4278dbc2a9a512dc28bd",
+      "bytes": 3584,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/death_down_1.png",
+      "sha256": "dc05dd33fc8fe7b665b41559c61c2694a31104a94b2ec2c0f4860e450ed107e9",
+      "bytes": 2688,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/death_down_2.png",
+      "sha256": "b22e607925724d00f2f5834c478867178f3ab2c7bc977c047db0e654cfb56970",
+      "bytes": 2715,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/death_left_0.png",
+      "sha256": "9db325be8c8379c6a823587e5ef279f4bd373b604c3931613257b586b4c63034",
+      "bytes": 3454,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/death_left_1.png",
+      "sha256": "3033c6a7d3b94b4e3290a43a3852f58dc3ebb322edc7669accd7d0d39b936e82",
+      "bytes": 2825,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/death_left_2.png",
+      "sha256": "0eaa0ad21c9b057df72a5ad17eff6856bf1ab2e0bce34e80bb9dfabcd6cf7c9f",
+      "bytes": 2522,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/death_right_0.png",
+      "sha256": "1185fabfb1012f3693b85b70874d4bbaba99ef50bec4f3ec16835a282b3ee30e",
+      "bytes": 3350,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/death_right_1.png",
+      "sha256": "73cf53939bcfa72b0c5a12af8e192973b5195770c377d559929049aee0030692",
+      "bytes": 2615,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/death_right_2.png",
+      "sha256": "f5a91207642134aca6f23e811f1ad6004ef6ff7c2fab5572af790f667bf817ed",
+      "bytes": 2543,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/death_up_0.png",
+      "sha256": "f13a53fa5277d251b77fcbd2d715d1bb3f2029268ffc3de71022c48df4cf4c46",
+      "bytes": 3329,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/death_up_1.png",
+      "sha256": "bb8798a2b45a29b7750390f7835aa4a631b32a03a65c0dd84d370c6cf85dad8b",
+      "bytes": 2832,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/death_up_2.png",
+      "sha256": "548caefd2a96c57369b21d8ff033b72592bd5b420e8f994c8a3ad52b86a07827",
+      "bytes": 2806,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/hurt_down_0.png",
+      "sha256": "5f201edb2e58ce1ab5bdf5f6f9941a3075f15e8fe3ebe317ce5bec842dc572a3",
+      "bytes": 3614,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/hurt_down_1.png",
+      "sha256": "065eecf3a83069264420aa4c822d1e2312bfdbdb1cfae48e664268cff0bfd8ad",
+      "bytes": 3300,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/hurt_left_0.png",
+      "sha256": "7631fdf72bcfb5ede269b0aa02ff550816dd3c76968b1af798e41a84f7f5bc0e",
+      "bytes": 4403,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/hurt_left_1.png",
+      "sha256": "889eaeb091c8ac4f4af6a857f72ce7b2d495dd04c488aa9fae87a5d77e611476",
+      "bytes": 3945,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/hurt_right_0.png",
+      "sha256": "8a09ac57215d53cfa4474e774d72005c16a767b6ce7b75fca352dd350c0e438c",
+      "bytes": 3942,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/hurt_right_1.png",
+      "sha256": "96a89ae46e4dcf894c86a3944caafa7ffbac635a0685570e52da2f63975dcce7",
+      "bytes": 3663,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/hurt_up_0.png",
+      "sha256": "affcc4554d0c99fa8c3878366b71388fcedadb668b5baeb61f0b6f1e18c839ad",
+      "bytes": 3737,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/hurt_up_1.png",
+      "sha256": "d8cd415123ee0f3a03d434cc68e26cff09657ec0d888183bd7c7d40c2e13f0af",
+      "bytes": 3658,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/idle_down_0.png",
+      "sha256": "ec9df3c51e37352bf31c6728081ed51c3eed0790ae93c00a1b882ea84a24e60f",
+      "bytes": 3497,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/idle_down_1.png",
+      "sha256": "e3081e784a2a23dc4c6dbf078ab873c17db6b8dd2cdda9f13d3eebf98021b657",
+      "bytes": 3506,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/idle_left_0.png",
+      "sha256": "1cc4687c817722bff9e5a01c9f45ee9627f89ee10da1851f0cb9748a453f1a5c",
+      "bytes": 3553,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/idle_left_1.png",
+      "sha256": "d92ecabb9b7bfc53f4f68e30b4e96f830ccd2f358b24630ae367d0ab0f3fc96a",
+      "bytes": 3559,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/idle_right_0.png",
+      "sha256": "d53ca0cd9752474296f8dffec8620b1230955050531b2514a831aacac4194a4d",
+      "bytes": 3265,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/idle_right_1.png",
+      "sha256": "80951d1c495ecfbd7676523b064f7a436bb3c31921e1a8e151731f925267c663",
+      "bytes": 3416,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/idle_up_0.png",
+      "sha256": "c839c38663091a1bee49a27506e05727d5cc357d1623fa8aa95a5c9946b8f12b",
+      "bytes": 3545,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/idle_up_1.png",
+      "sha256": "21773dddcbdc850e71af1fef8337cad91ca8f004b595442c9dd4df7797890fb9",
+      "bytes": 3478,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_down_0.png",
+      "sha256": "c90907966656adb0b6e9b7cc74f82b042b9f479217a9e27bd277fc8f953897a1",
+      "bytes": 3436,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_down_1.png",
+      "sha256": "f0032d42561ee4a5b3733f87efe5c9602e8e7d49fd1f808a1273abda9393acd6",
+      "bytes": 3350,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_down_2.png",
+      "sha256": "987646de3ca110d7b9ed95c3fd5b26e78e6b5b0cfb8b11c844d70843a2341a09",
+      "bytes": 3547,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_down_3.png",
+      "sha256": "bc8193163f2a4110fbc70ddabb2660a5e0e971bb5b081d2487fb6f949a2b45f0",
+      "bytes": 3426,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_left_0.png",
+      "sha256": "43b6deeb52bbf88947f45eee56555ce4282f590d4a3b9be213338ec52a68a56a",
+      "bytes": 3697,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_left_1.png",
+      "sha256": "58a5414515aa4a24cd17b741957fcfdcedec8ee93ee145dc15b5031295b87516",
+      "bytes": 3576,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_left_2.png",
+      "sha256": "69e73cd21d1473afc73e68908eb6180f4a1eac1fd932c0cb3f93ef2f3d10b112",
+      "bytes": 3803,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_left_3.png",
+      "sha256": "3b90c006e5f21a8a551027de7998e925160def1b74e123c4aae91b592c7f8484",
+      "bytes": 3713,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_right_0.png",
+      "sha256": "3345733ac988d2530faba433ffcb91e157d90c18da3e8e2f5401743c0f77075a",
+      "bytes": 3716,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_right_1.png",
+      "sha256": "ea7c89e823611700091810d1d22470441e4cc3902a3cac5d55c7ac90721a28b8",
+      "bytes": 3762,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_right_2.png",
+      "sha256": "33083e54107461fb62367ed286ae0f385f0212bd9fccc52ccf3cf9a8e52716fb",
+      "bytes": 3629,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_right_3.png",
+      "sha256": "a5dd7a249f7e4375f464c7c2cdb37d916a78dff008cd578ba1a0148d6d0ae85b",
+      "bytes": 3587,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_up_0.png",
+      "sha256": "bcae1b03a11d068f7d37e0e57dbc44825b264109eea520f722ce6f74abe54c09",
+      "bytes": 3527,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_up_1.png",
+      "sha256": "8e712626aab773eb0ce6d3e346715353df70dfa88f97b6ab480d006a133dbbc2",
+      "bytes": 3556,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_up_2.png",
+      "sha256": "41c6f6e3ba56e8e4b86504dddd5a628f1fc7d99beabdc880c5c223ac19b43913",
+      "bytes": 3613,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/frames/walk_up_3.png",
+      "sha256": "14764198b6a641fa85e436d80409f69d3f2444f33bf7482f171bb18396ff293d",
+      "bytes": 3697,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/manifest.json",
+      "sha256": "5a1011766e96ae9713baec2ab6bdb4d327eb55afdf71893ce4bdccafa539fe4e",
+      "bytes": 6129
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/source/animation_source.png",
+      "sha256": "17009a0c76ebc1d27c6b5d005f6967086fe7641e349c45501b02741ab104e168",
+      "bytes": 2225655,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-archer/spritesheet.png",
+      "sha256": "56e6cff6aae99ef0b23ffe03fe7e3df495305d62f9eb80ddb312775d2a43c70d",
+      "bytes": 228202,
+      "width": 768,
+      "height": 768,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/atlas.json",
+      "sha256": "bce2db12b45773c27703ed032e4ac507b81c50c5aa0b090c60729f73ecb3d94c",
+      "bytes": 34236
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/arrival_down_0.png",
+      "sha256": "62385931fdb31e29a02d930a50b11b001e966e728136721d1c576d2c357778bf",
+      "bytes": 4516,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/arrival_left_0.png",
+      "sha256": "17a77ead57c24dd704bf5899f5870a763eaebe19a3380cc265e34d5dc9adfa0d",
+      "bytes": 4838,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/arrival_right_0.png",
+      "sha256": "27449138bf30d3248e09b5b21d5ce02c78839d6d70445e2598cab359cce002e4",
+      "bytes": 4984,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/arrival_up_0.png",
+      "sha256": "d405b66904c3c7fe1cbb47d14f5791fd034aac6cf820f42b80f1387ba5e88180",
+      "bytes": 4703,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/basic_attack_down_0.png",
+      "sha256": "ed863100f0407da09abd14056d2cd4130b9e6688f2237654f9fd7e13b60a9ca6",
+      "bytes": 5125,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/basic_attack_down_1.png",
+      "sha256": "33de14b616916d73cf19348610b1255962eed4524799f9fda43c77de420943a3",
+      "bytes": 5186,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/basic_attack_down_2.png",
+      "sha256": "f48a5067ce824b3ddeb5da32fbe5f268860be90045e24509199bdb4545130193",
+      "bytes": 4440,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/basic_attack_left_0.png",
+      "sha256": "bffe5b44a1b740883291bbf0e39fff96caa899aa2e95c7853a7f0e5bab202622",
+      "bytes": 5076,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/basic_attack_left_1.png",
+      "sha256": "107f3f9c4f8769fc11fc982a9f4c9994a96d452d2c0add2d8da668d12e36eab0",
+      "bytes": 4847,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/basic_attack_left_2.png",
+      "sha256": "ca946e354424471d69209f4eabcc59c6ad60582902fd30d3d641b93ce9715c26",
+      "bytes": 4383,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/basic_attack_right_0.png",
+      "sha256": "83090a9d82085b69be376f8fd2d44dc2c03542a81791b446ca34657c63d23ba9",
+      "bytes": 5653,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/basic_attack_right_1.png",
+      "sha256": "ba726fd8662e1fbdbb40b92bd68a4de8fe91170beb33c2029c8323a78a7c0e97",
+      "bytes": 5153,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/basic_attack_right_2.png",
+      "sha256": "c4cc409f9171842114191b1cc4d59f650a4ba5a05a64fbbb4d40c10c2cd4ff77",
+      "bytes": 4790,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/basic_attack_up_0.png",
+      "sha256": "da0123520ba70f486e98f40f1bb68872a2c24b32d798c611644e87fabf753651",
+      "bytes": 5218,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/basic_attack_up_1.png",
+      "sha256": "ba0fec33b0e18109d691391f1c727e441efea16d916e8b1d294411d28563145a",
+      "bytes": 5447,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/basic_attack_up_2.png",
+      "sha256": "b80ddab2486cc54d2af4bcce045d637077612cdad177e80b3b87d8fb96c09d45",
+      "bytes": 4728,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/death_down_0.png",
+      "sha256": "8bf1f975813726bcf0dc6e42f11cbfa339b48e174902b9752fbddc6fe7898637",
+      "bytes": 3648,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/death_down_1.png",
+      "sha256": "d96376a7cbf9a99916bbb002023daafc6d69cf14f0ecd7af77a38ab6b9592cfe",
+      "bytes": 3565,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/death_down_2.png",
+      "sha256": "fd720af26fe41bb4f4ebfe166565c7957b3148b9613f4b8f9a7e1f2a3b813da1",
+      "bytes": 3101,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/death_left_0.png",
+      "sha256": "80f205455616fb402cb6221c633aaaa4d7d7bca45374c93fb26fa9d774b5257e",
+      "bytes": 4045,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/death_left_1.png",
+      "sha256": "41607527abfa221d57048a86c4b696fdb3227701ea9a0b8a34fc6065f9710371",
+      "bytes": 3775,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/death_left_2.png",
+      "sha256": "e220317266ae85c525a6b7e5fb35d416439b70d5e7b19e1e422430722d90429a",
+      "bytes": 3268,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/death_right_0.png",
+      "sha256": "01f022e16d30261a0a3d457e3d1184b48e49b4399d8c88986f53873f0e16e48f",
+      "bytes": 4036,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/death_right_1.png",
+      "sha256": "dd7f4199ee37ed4c8102cc21eb3cddd803f0dd2d638d3b8106b4f79b9b9f76cc",
+      "bytes": 3511,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/death_right_2.png",
+      "sha256": "c18836e56db835e5d5a6415e28e523f52ec06f8b16d827ea529094558341b395",
+      "bytes": 3398,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/death_up_0.png",
+      "sha256": "a37e73111742b95551acb9b895f4393032370712ca8305ba1815432f516aff2b",
+      "bytes": 3731,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/death_up_1.png",
+      "sha256": "16197c9d2538dd68a56952183e4f025b901fb6c57aa84550ba6d6a88f8b77d65",
+      "bytes": 3529,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/death_up_2.png",
+      "sha256": "ad941934654eb29c0a6e0c78c23b2add72b95c82b9e0a8ba1c9c2a52feee12f9",
+      "bytes": 3466,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/hurt_down_0.png",
+      "sha256": "92e648f54b6927226065ba105cb9f7d98e36b2fd09219fa2925047ac6f1655f1",
+      "bytes": 4718,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/hurt_down_1.png",
+      "sha256": "91debdc27b6e85e4f117844aa95364a1daa14fcb2a8839f0204be11b0e8e8e55",
+      "bytes": 4651,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/hurt_left_0.png",
+      "sha256": "11090d45a09fa1fded70a011b66273c97cfe43e921955c7b9bfe52db5d5b4a9b",
+      "bytes": 5192,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/hurt_left_1.png",
+      "sha256": "7975d35346e2812ece004f73cec3a30724b65c99c161de0db37bf43e63f435d5",
+      "bytes": 4749,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/hurt_right_0.png",
+      "sha256": "8a987ad4b607a699fab7d6dc2c6e634cf6442053c0d4c15eed48b51f2a5aeca3",
+      "bytes": 4963,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/hurt_right_1.png",
+      "sha256": "35da153ad114d8e47a5e9451d48ba75a5edfad74592bdeee7de585c5807fdf1a",
+      "bytes": 4876,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/hurt_up_0.png",
+      "sha256": "e7c6ef0ab2681ef01a42ec7d29188d97faa5099f1b549b79cfe2440e383803b0",
+      "bytes": 5018,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/hurt_up_1.png",
+      "sha256": "d4edf01ebde0b93b907b88a135660429b917a36c5c737b38b04792ebb3374364",
+      "bytes": 4656,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/idle_down_0.png",
+      "sha256": "63b22e9df43541836bb431a3ec4a35e16b0979f4fff0ed2f58e26da834622c58",
+      "bytes": 4432,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/idle_down_1.png",
+      "sha256": "c491bfe2dd898a0ef6761002e513c385bf4c218c7a20381c0348686c619b9cff",
+      "bytes": 4371,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/idle_left_0.png",
+      "sha256": "b15ecd27cba51e1928b1e582a4cf449ab5fec6ea1194f07690afb7f0c23e8c22",
+      "bytes": 4460,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/idle_left_1.png",
+      "sha256": "18a1894365cabca859fd0c22d9eafddc711daf8e2560261ed39637584d932d83",
+      "bytes": 4501,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/idle_right_0.png",
+      "sha256": "b6b4053953804ac8670f4f3f2ef21a253261e09e2c283c4c5fd43e02c08b56c2",
+      "bytes": 4572,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/idle_right_1.png",
+      "sha256": "dc5dfb83d4f9d4b5846e655c679dd38a89c99caa270b85e9e1cf5118e96162d2",
+      "bytes": 4630,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/idle_up_0.png",
+      "sha256": "96f1e82da496accba8f7cf586e41208bafd1943eff8fa576ed86a37da735e335",
+      "bytes": 4558,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/idle_up_1.png",
+      "sha256": "770758e57a234b4e7c9ed99ff3065abc067b34ecbd4d19db099bf3ffae3acd8d",
+      "bytes": 4522,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/shield_guard_down_0.png",
+      "sha256": "cceee0e4c3a7d7330df011a4b9949eea620f6ac3d992b27f0fa326bbfcc21461",
+      "bytes": 4101,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/shield_guard_left_0.png",
+      "sha256": "29c873471aa6a39024e4f1d2a4c10bd373356d1c2795fe1fcf1c80af1d06563a",
+      "bytes": 4462,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/shield_guard_right_0.png",
+      "sha256": "a41259e28cf7ea79219dab554e8da8eee6e11d1944198a843eacd48f6f749506",
+      "bytes": 4588,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/shield_guard_up_0.png",
+      "sha256": "8941692567fc71fc1ac7f7c68ae6263a6a3287607dd3d014e01d1e6e75f544b6",
+      "bytes": 4373,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_down_0.png",
+      "sha256": "5bf74fee2045512b002c81dae65b1b34a7ee6c59ff91eea66b77d9ef485c7bcd",
+      "bytes": 4292,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_down_1.png",
+      "sha256": "c1f7ac923fdbdb2d4bfb9534a00e5254ad9b20bf127c7aafb8671b4534b570f3",
+      "bytes": 4389,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_down_2.png",
+      "sha256": "022a951ebc3a5c7f323af2f29451b6350e8dfa985dbc5f583d13e1128b446dcb",
+      "bytes": 4238,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_down_3.png",
+      "sha256": "0da8199683664446e44f79fa6bcf9ec83c6cffd840ce944a1a45e8c79a953ec0",
+      "bytes": 4252,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_left_0.png",
+      "sha256": "5c7806b9f9edd4d02b19353ae1d9be26a0624504a2e709835f00c05021c11622",
+      "bytes": 4551,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_left_1.png",
+      "sha256": "f323822e63b634ad39767b1d79ebe3e6d53e6a628c4df0bd435fa95295a94d92",
+      "bytes": 4452,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_left_2.png",
+      "sha256": "b530ee6c0857b5adfb525ea4a52b009ddbbc756352f776d4390d16f3159d7a60",
+      "bytes": 4401,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_left_3.png",
+      "sha256": "641642f070c4def0e70f1707df78086c72a10991683d84cba8b19a623e834b02",
+      "bytes": 4344,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_right_0.png",
+      "sha256": "1a76279506cf86575b403a58b8c9608d705bcf050923d6093d6339ca3f24108d",
+      "bytes": 4707,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_right_1.png",
+      "sha256": "59f597d3ea996542269e86b18519a99ec585e01a0ab55142ab33441f8c0852cd",
+      "bytes": 4516,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_right_2.png",
+      "sha256": "92a4b6242a71668f34e5098bf6d0d82af67af15a12c5ac5930bfc65c71409fab",
+      "bytes": 4321,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_right_3.png",
+      "sha256": "1eff7afa6e03942b041cf45dfe5236733148f1d3fee5a56ec5781d55c16eeedb",
+      "bytes": 4611,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_up_0.png",
+      "sha256": "b1fb05f5117d02f47115b284d9c20d05592cb6dc53c9a6c7dbb47cedc5d7e416",
+      "bytes": 4765,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_up_1.png",
+      "sha256": "f8839293789dc4cf1feec1980868f04ea519a90fc95d18f6cf179532aa90b9f3",
+      "bytes": 4576,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_up_2.png",
+      "sha256": "5b73c2df5c3299e9f7d8271bc884c834619396abf109960169cac28c101ceec6",
+      "bytes": 4683,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/frames/walk_up_3.png",
+      "sha256": "46990aa2f93c5af0b54a2370ce24ec9c68c900725aa53102780acd636d636902",
+      "bytes": 4354,
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/manifest.json",
+      "sha256": "2f2507c30196e1e32ccab48b4b4de251146e396870ad4e1be2cd0acf83cb1ef9",
+      "bytes": 6166
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/source/animation_source.png",
+      "sha256": "0340aaa7d789ac8a34950d84610d27ea53d80fe55ee9a925403751dcf22f1555",
+      "bytes": 2611090,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/sprites/summons/mongolian-footman/spritesheet.png",
+      "sha256": "c39e8e3a885d4437e042ecac338ac94a454faf95be405ae8b5c95a77303139ea",
+      "bytes": 278480,
+      "width": 768,
+      "height": 768,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/ash_material.png",
+      "sha256": "67438e4d5f4a0b27a66c06d246a78273e3294cb977737b8b75120aae28fba6a4",
+      "bytes": 44439,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/courtyard_stone_material.png",
+      "sha256": "b59a00e87a8885da7b607b5850ecb819ca09184a49b6ddeff1186fa9673d68f8",
+      "bytes": 42742,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/dirt_material.png",
+      "sha256": "d92d5a3b8bf38ab1d28c95831ac5cdec5c36240861d4c39cd0e6c96e4c5b84af",
+      "bytes": 47260,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/source/materials_source.png",
+      "sha256": "c488b6146c76090329f6bbd4f38ebcc8fe23c77559369f44c84a99bd1cd8bbea",
+      "bytes": 3637436,
+      "width": 1254,
+      "height": 1254,
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/terrain.json",
+      "sha256": "d61241035637ed55278a3c800f76398bbd47d0598c0e75149d864b62dca2a121",
+      "bytes": 1679
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/terrain.png",
+      "sha256": "03756954ba7c5a034f77db10b1f6312f681de82d25b06fb7137393d8be9a6e8b",
+      "bytes": 197005,
+      "width": 512,
+      "height": 224,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_000.png",
+      "sha256": "8c6c357d623c187b12ae07118a4bbc4bea13d5ab02d3588d608c7e852d79948b",
+      "bytes": 3237,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_001.png",
+      "sha256": "6760deed017cdc35ab5bec73d91a5fa6a34b2718101ef712389cd9e53d1a82a9",
+      "bytes": 3156,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_002.png",
+      "sha256": "4b16888817c66669c18a3d587286daeae94db4c776b6357e694b634b7f3a8a3b",
+      "bytes": 3244,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_003.png",
+      "sha256": "9f2833da0397388da0844600a8c800e27371b90bfbe6826e29a0fd4218600ade",
+      "bytes": 3172,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_004.png",
+      "sha256": "fb3c8c56737500b06da9c3c78925cdac51adf7d6caae599008ba15f643623897",
+      "bytes": 3221,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_005.png",
+      "sha256": "94564267c45b407bdfbb5fdb8366ff5aeecd66cb093b86e1bb5e0d797df2c559",
+      "bytes": 3220,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_006.png",
+      "sha256": "649bc834ae3b5a7592d4126739dd0a6abba5b649175915491eca7c8e0f7c1b61",
+      "bytes": 3187,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_007.png",
+      "sha256": "c667e91a6313e064b2a676511e4cfe7ff0ec439139fdbdbb1a6ba214d0a717e7",
+      "bytes": 3175,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_008.png",
+      "sha256": "c841cacedc418cf90d7b249ba0c04ea7a4b1a0e48751c60d81bc597a162bec9f",
+      "bytes": 3211,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_009.png",
+      "sha256": "45090fb94ac05be99ba900bae50472568c94de464590e547d13b43801a30d719",
+      "bytes": 3192,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_010.png",
+      "sha256": "19e892654cfdb81055a8a4424e3a00d2d53f4652ebe95a287085e16d9c743f1e",
+      "bytes": 3203,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_011.png",
+      "sha256": "f3be63768959a472aafb7fa6f2c240dfb9926f4b3c846fa96887e68bfdd5893f",
+      "bytes": 3219,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_012.png",
+      "sha256": "308c8e7b471b5ba231cb34c698b1bdd5ce841681d778c2c43bd1abf4004c65b2",
+      "bytes": 3185,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_013.png",
+      "sha256": "d6e459e53da60b47a8861d195ff817d950ee6304ab68caa0b23f586cc3d06e0a",
+      "bytes": 3186,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_014.png",
+      "sha256": "3fb14b67cc80eb21211d35dccf0483dc0d269c41a61d0f2dc9b5a2b7af6bba88",
+      "bytes": 3146,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_015.png",
+      "sha256": "bdff8e45004b1d519d825fd177ac9ccc5fc6276c282bc8e01d13131c2beb7d02",
+      "bytes": 3151,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_016.png",
+      "sha256": "ba46d1b73c7fff995ed384c3befe286338d9e4dbfc85d10a98d74e64ecbd70cb",
+      "bytes": 3120,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_017.png",
+      "sha256": "64e76612d08fb60ea4f51e59dd150dc8772763bfa17efe0477206ec62a5d18fb",
+      "bytes": 3131,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_018.png",
+      "sha256": "5737f721dac4fed056ac48f9bc28c273620b092116a0a161e399bd75dade5f50",
+      "bytes": 3161,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_019.png",
+      "sha256": "2ac8873452d2d8e39553efc3933cb721863c4f74cdecd01aa1e7ff567be04561",
+      "bytes": 3031,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_020.png",
+      "sha256": "8107ffbbee6150db236cbad05cbd7bdc1e3970a1ff36af02fca06ca62ff0d848",
+      "bytes": 3089,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_021.png",
+      "sha256": "827fcba28b97ce189dc0a9f07046740bf44ad654dbae8fc0c84c29bc1ccaaf77",
+      "bytes": 3147,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_022.png",
+      "sha256": "7a5904365e922bace1bb6154830805605e3e6b0043b2aa12e3a5082433760046",
+      "bytes": 3106,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_023.png",
+      "sha256": "cecae1b7ffde7de34e16df0d7890f86884fa8d075bc1446037fccbb6bb5381bf",
+      "bytes": 3136,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_024.png",
+      "sha256": "ca6fa64ccf8dfd950a22ca13f81763a0df2993ede6ec124e7b225434830fcf1a",
+      "bytes": 3152,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_025.png",
+      "sha256": "fa66a4c6b2d32d531550edd19708beec0a142b531490deb7147eaea86d328a09",
+      "bytes": 3135,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_026.png",
+      "sha256": "d8be80d6d43fbb0d0180c2e92a3c02c9bda25461bc4590ca60c9dbe702170093",
+      "bytes": 3165,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_027.png",
+      "sha256": "1b2aa2906755829612acf9a3b405b634f82786f4f1101d986a071263a7f73d87",
+      "bytes": 3188,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_028.png",
+      "sha256": "311ebbcd1411d89f08588fac34a7ed32f22d77edb8795874cfb0680ec4db10e1",
+      "bytes": 3125,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_029.png",
+      "sha256": "f4524b22df6c780eaa8722813b30605d679447397e94f169fc8fdc920fadaee6",
+      "bytes": 3140,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_030.png",
+      "sha256": "89d18a6374d400dd2ee65ee77a8c1c12cf251508c59d60db876b56aa28dbbf69",
+      "bytes": 3146,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_031.png",
+      "sha256": "da7587ce50433030e1f2107c6541df2c8d215f01354e0a57dd9944d64d9f3000",
+      "bytes": 3167,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_032.png",
+      "sha256": "1475eb877fcf52178fe75b0de18e2e50a9f6ef2a5a40c390c0c493e6690e79d8",
+      "bytes": 2988,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_033.png",
+      "sha256": "0593b50d891baf8f1d1ad2a6d33872e8dde2f5bf27567db22672f39ecbdcaf35",
+      "bytes": 2915,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_034.png",
+      "sha256": "31c07fa56fbacb0b4810a5d162affbe9ba4b6d9c9a39ae248444547d074c95a9",
+      "bytes": 3019,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_035.png",
+      "sha256": "c051df2209632f3c69a92090fa9888110a3198569ddcc5abf583cad39b439d42",
+      "bytes": 2927,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_036.png",
+      "sha256": "dbb617d3ebb3c99c8f5e2bcab19ca26fd457257e60fb9f498995365dade355ac",
+      "bytes": 2959,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_037.png",
+      "sha256": "170b07a6dace920161b3d9405e69388dd99312be666888d4254a2c66718078ca",
+      "bytes": 2971,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_038.png",
+      "sha256": "ed4a58a97fee1563a4ec0b0a3cb67595782e7a18e161531eca9f3654df382181",
+      "bytes": 2970,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_039.png",
+      "sha256": "dedfaad95af89b6647bdd857115ac0c6f50fddbc70f8c155c7c81bce695adbce",
+      "bytes": 2909,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_040.png",
+      "sha256": "b172142229c379e6e3cd3ada79888e6c921f1a4c98debcdbf3d488dc4fd56006",
+      "bytes": 2939,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_041.png",
+      "sha256": "a2e05cac19b03c2a5e590fe6ad4e6012347ab4e06213c16238c0fdaae41aead7",
+      "bytes": 2976,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_042.png",
+      "sha256": "4577ca583a015bfc93a8bf7780b143e9e869970c3af8a596a940551530860cf0",
+      "bytes": 2984,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_043.png",
+      "sha256": "1877ff275c62c329cfeab74c5d1c6f3000f956461038bbea8dae996137b10117",
+      "bytes": 2958,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_044.png",
+      "sha256": "f5012f4f83ca3423a2b495e4f60361585c76d49342fdbe15b386da6dd48e66ac",
+      "bytes": 2956,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_045.png",
+      "sha256": "befb0f67c82cc4e300771365f4974afe9c2f620ba09252399c8eea26e4e60dea",
+      "bytes": 2955,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_046.png",
+      "sha256": "b344e2446aa6fbc3f2c70f6d8d67414ced4fca1a36af5e9c9f5cd383bbbdab1c",
+      "bytes": 2905,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_047.png",
+      "sha256": "e9d6b2c2496c20a623489e1c614035ef552c0dc07065e7f8ea2e7ad052f41509",
+      "bytes": 3001,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_048.png",
+      "sha256": "4e57e47ae1e5a3df049ef2c9d65a64b52027e2ac2ab01fb295abd9bc320206fa",
+      "bytes": 2876,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_049.png",
+      "sha256": "afa62cb77fd7f4683b2ee126bc2d1e76b08304b40ee55ff26ed93d38dbac500a",
+      "bytes": 2834,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_050.png",
+      "sha256": "91061d9b8a70732a3f7c99cb3fc3d0baac79e5d947053ff54d3e736c4ddf4b2c",
+      "bytes": 2865,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_051.png",
+      "sha256": "c6b48a2e5761f109e4cbea7479dd4fa0c0f9366a707a50187b8dab545e42ed0b",
+      "bytes": 2767,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_052.png",
+      "sha256": "054f78e2675f2321990e26682162d79a6b37da7511784d84b0cc8a1fd0c907a7",
+      "bytes": 2858,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_053.png",
+      "sha256": "feccca57296a1aecf32b536a2893a78ef99c4adbc8112c6912ae1331630dfea5",
+      "bytes": 2830,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_054.png",
+      "sha256": "d3c36a29b3d8c3cd20453594616f2246ddb78b857d15cdf7044eac6d551314ab",
+      "bytes": 2881,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_055.png",
+      "sha256": "60ad39e587f80298c8338b445c868c1613afd4fa2bfbfd20e0f0021bd0d94c5e",
+      "bytes": 2827,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_056.png",
+      "sha256": "e3b780a728e84240b22b0511063d913e04f2942d683d580b6630c9ee5ce0ee61",
+      "bytes": 2822,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_057.png",
+      "sha256": "ec95395d877ab58eca8e81ae624314d23953cc2cfb96f0467fd83eb5542eb9b7",
+      "bytes": 2831,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_058.png",
+      "sha256": "5650664b4ce27d9c57b7405008f92ffcd8ab1dda5118e65e395b8224d16ae64a",
+      "bytes": 2854,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_059.png",
+      "sha256": "a38a2cc84a21fb394050a6c0f9f8c585b05e490c7ac0ac8e35e05d8fabecb7bb",
+      "bytes": 2860,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_060.png",
+      "sha256": "3a8f76e699ef1341b435a523d79a825b024b4c4ad99c6b0ad8e38faed8098bc7",
+      "bytes": 2819,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_061.png",
+      "sha256": "dd2761e5e7f0b1a4a20ecea4bcaaac7b3b4069822f4a61257c429d7f1a0e5e3c",
+      "bytes": 2833,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_062.png",
+      "sha256": "35f5bb3fa08b12ece7e8aa67e8b03feb05b963551b2118b5d4e296e765622146",
+      "bytes": 2829,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_063.png",
+      "sha256": "d5bdcf2361f28d98672b25066818460317d4beeaf7174cc883eb99593ce84800",
+      "bytes": 2815,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_064.png",
+      "sha256": "8c6c357d623c187b12ae07118a4bbc4bea13d5ab02d3588d608c7e852d79948b",
+      "bytes": 3237,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_065.png",
+      "sha256": "6193441c6b9cca26c358944e41ca0e3a0b5b7cd797dc032f32dceb0aa51ed164",
+      "bytes": 3236,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_066.png",
+      "sha256": "1d6bfdadca96c3e393c61a3118e1de0b6b42c293db97bae8485d31dab8e26b46",
+      "bytes": 3243,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_067.png",
+      "sha256": "9cd2509d181e21edcbea147b75ad268b4c2f8721e3ee1afd45e4bbe3c7788fd5",
+      "bytes": 3212,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_068.png",
+      "sha256": "4ed4181f99e520cd3ec3c3c2988c17d01cdeb40afa05e05cd22ebd8426800674",
+      "bytes": 3234,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_069.png",
+      "sha256": "60c1267f87ed4a01b78a749974889872f7a8cc5e1273b9be2bbb056bf3d53bd2",
+      "bytes": 3197,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_070.png",
+      "sha256": "936ab3257ea0b0f2cd9f496d7a9034e7fc0baf882d8b8e555e7830c0af9299ff",
+      "bytes": 3216,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_071.png",
+      "sha256": "35cb204b4f888cc9442995b3e48f7ae4e3d148fd37a449ced650431be90b162f",
+      "bytes": 3168,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_072.png",
+      "sha256": "70b5169f46bd8acb4615ec696160c397f174548a650bce907a5054d522abcd1f",
+      "bytes": 3225,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_073.png",
+      "sha256": "1bbef3f713a5e945356ec13583058285ce3862695e8df8b131b842ef6af8c48c",
+      "bytes": 3178,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_074.png",
+      "sha256": "b9387f374d0f6bd618175e8f29517fa5b3c5ca65c5fb7e7e55b250e747f62c1e",
+      "bytes": 3205,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_075.png",
+      "sha256": "e4f1166a4fdcdca9d7fabcfc9294a62cab282816d831c78fc25faf1311ec7513",
+      "bytes": 3159,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_076.png",
+      "sha256": "9775996bdebe0854e10b736882f7d0d0151d4eff5efba462fbd0f4feaeafc694",
+      "bytes": 3172,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_077.png",
+      "sha256": "399f4164a9b4266f87b9618f4d96250081bbb4829e97d0335ee748afafffd801",
+      "bytes": 3135,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_078.png",
+      "sha256": "76d7780f99e29dbc5cfc1999a7b468d398b85b1d1bae4be182d4962733654660",
+      "bytes": 3161,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_079.png",
+      "sha256": "ba46d1b73c7fff995ed384c3befe286338d9e4dbfc85d10a98d74e64ecbd70cb",
+      "bytes": 3120,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_080.png",
+      "sha256": "8c6c357d623c187b12ae07118a4bbc4bea13d5ab02d3588d608c7e852d79948b",
+      "bytes": 3237,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_081.png",
+      "sha256": "e8245269d7d3b99d8d6f180dc2dcd967a2fe5a41137ae8e87d1a855c445e84a0",
+      "bytes": 3215,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_082.png",
+      "sha256": "580140ce3c003a8496b2a52f1bf3626b9cf41d1c40f60a26749cf9773563de63",
+      "bytes": 3216,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_083.png",
+      "sha256": "135b8bf7deb86900a668d6b667e2c184d54635031d8cc188c8cce57c51792fe9",
+      "bytes": 3146,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_084.png",
+      "sha256": "af7e076d94f3b6ad17dd0cb1e8b6da60d6ce3a145447a962d4025e0ceb238a81",
+      "bytes": 3211,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_085.png",
+      "sha256": "c5e36ad534fa63eed5b7cd67b2c650dad0f3af4ea0515505776063151733e14b",
+      "bytes": 3135,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_086.png",
+      "sha256": "bae0a2c7dae153853b1e85aa048ef2ae188923e4bb2bcdc57805983c08afa2f5",
+      "bytes": 3134,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_087.png",
+      "sha256": "e0b38c8a3a011d12a20e7889fb3723fe9175315dc2ff49e610b5ccf743b0bd30",
+      "bytes": 3049,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_088.png",
+      "sha256": "2a6165d3e95ba95e420f975618d52c00db55eb3752dd659686ed384d7277422d",
+      "bytes": 3210,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_089.png",
+      "sha256": "d617dcc415e841c009be94cee884252d1c8fd693b30a96edd652cd0fced0f47c",
+      "bytes": 3139,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_090.png",
+      "sha256": "f83de04595df80d90b20f24f2f974135a9e51916eecfc6c0b336ee86250faee5",
+      "bytes": 3147,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_091.png",
+      "sha256": "1222c06c58f75ff602ea4a5bd609010f0d7ce5fd9a2f26a578f3106be1300775",
+      "bytes": 3055,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_092.png",
+      "sha256": "5f8279f5bcf92b16de282ad3c58979947f5a6b99e5bfd3e6099fe72009714f8c",
+      "bytes": 3118,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_093.png",
+      "sha256": "8d01405ddc3964c2afa09657c72f16bd0676673a36276f6710843b853a9bdd5a",
+      "bytes": 3023,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_094.png",
+      "sha256": "f68cd4d4fb67dda0c98b48941db16da0b1faf689d1c795b6e1bfd5989c22f107",
+      "bytes": 3048,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_095.png",
+      "sha256": "1475eb877fcf52178fe75b0de18e2e50a9f6ef2a5a40c390c0c493e6690e79d8",
+      "bytes": 2988,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_096.png",
+      "sha256": "ba46d1b73c7fff995ed384c3befe286338d9e4dbfc85d10a98d74e64ecbd70cb",
+      "bytes": 3120,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_097.png",
+      "sha256": "a0a521a4db71c14df5450ef78ff3ad456b4bac91a3a8d05c720dca68899f3c0c",
+      "bytes": 3093,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_098.png",
+      "sha256": "beff8d66361b2ca3d94e311a7db422a5516874d6989ec3f7c10ca2e3ebf6091f",
+      "bytes": 3082,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_099.png",
+      "sha256": "779a355cc29f9a9a046511da7f64dd71afde3de503fefb03e3557042fac4f236",
+      "bytes": 3003,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_100.png",
+      "sha256": "7cfa7efb9993b87d90434aca0659cc9a27c60d654e4725c77593deaccfd63d8c",
+      "bytes": 3109,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_101.png",
+      "sha256": "af4cf918cfc545c38db8dd89ea27a2c92e4a07d62c106ea1570bf4670c459af1",
+      "bytes": 3038,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_102.png",
+      "sha256": "c11c7dc0c0e0231912bdb6246f01bfa709d2ef53d0aceb9018da0debeb7f8b76",
+      "bytes": 3011,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_103.png",
+      "sha256": "0ef20f936f435a8fc0543d4daa7e7592d9baec163fb0733f6886137363965d82",
+      "bytes": 2950,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_104.png",
+      "sha256": "1bf7bce66f2261df3869e2ff7340ff901bcc144d737da0a06491d142dd1f8393",
+      "bytes": 3083,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_105.png",
+      "sha256": "e8d3e06b629f693a493f586fddbb7d43f27f020031b85e8ce40adb433025ba89",
+      "bytes": 3013,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_106.png",
+      "sha256": "c1451b413a7a8fa07e0cf9095c434c66b2d499b4c137a4c972f03bc287843c26",
+      "bytes": 2987,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_107.png",
+      "sha256": "8bfe3d313089fad52ab54eec0ea6c2697b4c5dcbb6d482397ae76f5eee2743bf",
+      "bytes": 2912,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_108.png",
+      "sha256": "ef37588ef7310714cc914eebd6303c66ad0439009c814d81a5bfbfddaeeab225",
+      "bytes": 3019,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_109.png",
+      "sha256": "648c186e285db73acbbbf5e851dcba54189edcc82c7347fd44e46fcc2b6e9a18",
+      "bytes": 2913,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_110.png",
+      "sha256": "659463e8e3d113a2ca3ab8c8014a72e165cb85a96d31972964d6a2019968bfc5",
+      "bytes": 2934,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/tiles/headquarters_tile_111.png",
+      "sha256": "4e57e47ae1e5a3df049ef2c9d65a64b52027e2ac2ab01fb295abd9bc320206fa",
+      "bytes": 2876,
+      "width": 32,
+      "height": 32,
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/mongolian-headquarters/volcanic_ground_material.png",
+      "sha256": "06b7147732a7c35bffe53393b3cc443bbf90831e0e63bd0c077ab1eddfe7ffaa",
+      "bytes": 40288,
+      "width": 128,
+      "height": 128,
+      "mode": "RGBA"
+    }
+  ],
+  "correctiveRecheck": {
+    "scope": "Only changed VFX exports and updated metadata hashes; no full suite repeated.",
+    "resolvedInitialIssues": [
+      "Safe gap center obscured: wall_warning_2",
+      "Safe gap center obscured: ultimate_warning_cross_2"
+    ],
+    "alphaNoiseCutoff": 2,
+    "checkedVfxFrames": 112
+  }
+}

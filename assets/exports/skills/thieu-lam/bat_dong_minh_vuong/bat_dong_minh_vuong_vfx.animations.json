@@ -1,0 +1,172 @@
+{
+  "id": "bat_dong_minh_vuong_vfx",
+  "skillId": "bat_dong_minh_vuong",
+  "kind": "vfx",
+  "status": "prototype_approval_gate_waived",
+  "approvalGate": "approval gate waived by user",
+  "source": "assets/source/skills/thieu-lam/bat_dong_minh_vuong/vfx/bat_dong_minh_vuong_vfx.aseprite",
+  "sheet": "assets/exports/skills/thieu-lam/bat_dong_minh_vuong/bat_dong_minh_vuong_vfx.png",
+  "atlas": "assets/exports/skills/thieu-lam/bat_dong_minh_vuong/bat_dong_minh_vuong_vfx.json",
+  "sourceSha256": "88c62a562d806f9a5f76701bf0350bd542577940d4136edcac5be89f47aa775e",
+  "sheetSha256": "4e505b85222000799ab2097f83164b86791d38b42e38b07e28f5f7bd2339c919",
+  "atlasSha256": "aae849b08dcc42b9ec92bceb06cdf3873f43ba6d9bdd63d6c1cd990099890400",
+  "rawSource": "assets/source/skills/thieu-lam/generated/bat_dong_minh_vuong_vfx_v01.png",
+  "correctionSources": [],
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "animations": [
+    {
+      "name": "activation",
+      "frames": [
+        "activation_0",
+        "activation_1",
+        "activation_2",
+        "activation_3"
+      ],
+      "frameDimensions": [
+        256,
+        256
+      ],
+      "frameCount": 4,
+      "frameRate": 14.285714285714286,
+      "durationMsPerFrame": 70,
+      "loop": false,
+      "repeat": 0,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "stage": "activation",
+      "placement": "ground",
+      "effectPlacementOffset": [
+        0,
+        0
+      ],
+      "timingAuthority": "Presentation only. Authoritative events determine hit, lifetime, healing, defense and same-target combo eligibility. No gameplay implementation."
+    },
+    {
+      "name": "healing_pulse",
+      "frames": [
+        "healing_pulse_0",
+        "healing_pulse_1",
+        "healing_pulse_2",
+        "healing_pulse_3"
+      ],
+      "frameDimensions": [
+        256,
+        256
+      ],
+      "frameCount": 4,
+      "frameRate": 14.285714285714286,
+      "durationMsPerFrame": 70,
+      "loop": false,
+      "repeat": 0,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "stage": "healing_pulse",
+      "placement": "ground",
+      "effectPlacementOffset": [
+        0,
+        0
+      ],
+      "timingAuthority": "Presentation only. Authoritative events determine hit, lifetime, healing, defense and same-target combo eligibility. No gameplay implementation."
+    },
+    {
+      "name": "loop",
+      "frames": [
+        "loop_0",
+        "loop_1",
+        "loop_2",
+        "loop_3"
+      ],
+      "frameDimensions": [
+        256,
+        256
+      ],
+      "frameCount": 4,
+      "frameRate": 10,
+      "durationMsPerFrame": 100,
+      "loop": true,
+      "repeat": -1,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "stage": "loop",
+      "placement": "ground",
+      "effectPlacementOffset": [
+        0,
+        0
+      ],
+      "timingAuthority": "Presentation only. Authoritative events determine hit, lifetime, healing, defense and same-target combo eligibility. No gameplay implementation."
+    },
+    {
+      "name": "ending",
+      "frames": [
+        "ending_0",
+        "ending_1",
+        "ending_2",
+        "ending_3"
+      ],
+      "frameDimensions": [
+        256,
+        256
+      ],
+      "frameCount": 4,
+      "frameRate": 14.285714285714286,
+      "durationMsPerFrame": 70,
+      "loop": false,
+      "repeat": 0,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        128,
+        128
+      ],
+      "stage": "ending",
+      "placement": "ground",
+      "effectPlacementOffset": [
+        0,
+        0
+      ],
+      "timingAuthority": "Presentation only. Authoritative events determine hit, lifetime, healing, defense and same-target combo eligibility. No gameplay implementation."
+    }
+  ],
+  "provenance": "Original image_gen raster cels; binary-alpha cleanup, removal of tiny disconnected alpha debris, measured fixed-scale nearest sampling and anchor alignment. No procedural substitute illustration.",
+  "reuseNotes": [
+    "Directional VFX use exact integer quarter-turn variants of the authored RIGHT-facing raster stage. Non-directional stages share one elevated-view drawing across facings. Character directions are separately drawn, never mirrored."
+  ],
+  "gameplayIntegrated": false,
+  "previewIntegrated": true,
+  "productionArtApproved": false
+}

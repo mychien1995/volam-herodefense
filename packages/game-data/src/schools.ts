@@ -9,7 +9,7 @@ export const schools = [
     attributes: 'Thiên về sát thương, tỉ lệ và sát thương bạo kích.',
     passive: 'Tiêu Diêu Công',
     basics: 'Cái Bang Bổng · Cái Bang Chưởng',
-    starting: 'Prototype hiện có: Hỏa Vân Chưởng · Cuồng Long Loạn Vũ',
+    starting: '1 điểm kỹ năng · Chọn và học võ công trong đấu trường.',
     portrait: 'cai',
   },
   {
@@ -21,7 +21,7 @@ export const schools = [
     attributes: 'Thiên về tốc độ di chuyển, tốc độ đánh và bạo kích.',
     passive: 'Bắc Minh Thần Công',
     basics: 'Thiên Sơn Phiến · Thiên Sơn Đao',
-    starting: 'Kỹ năng khởi đầu: chưa được xác định.',
+    starting: '1 điểm kỹ năng · Chọn và học võ công trong đấu trường.',
     portrait: 'thien',
   },
   {
@@ -33,7 +33,7 @@ export const schools = [
     attributes: 'Thiên về nội lực, hồi nội lực và giảm hồi chiêu.',
     passive: 'Thái Cực Tâm Pháp',
     basics: 'Võ Đang Quyền · Võ Đang Kiếm',
-    starting: 'Kỹ năng khởi đầu: chưa được xác định.',
+    starting: '1 điểm kỹ năng · Chọn và học võ công trong đấu trường.',
     portrait: 'vo',
   },
   {
@@ -45,7 +45,7 @@ export const schools = [
     attributes: 'Thiên về sinh lực, phòng thủ và hồi phục.',
     passive: 'Dịch Cân Kinh',
     basics: 'Thiếu Lâm Quyền · Thiếu Lâm Đao',
-    starting: 'Kỹ năng khởi đầu: chưa được xác định.',
+    starting: '1 điểm kỹ năng · Chọn và học võ công trong đấu trường.',
     portrait: 'thieu',
   },
 ] as const;

@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "id": "vfx_statuses",
+  "image": "vfx_statuses.png",
+  "atlas": "vfx_statuses.json",
+  "frameSize": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "animations": [
+    {
+      "key": "vfx_statuses_protection_loop",
+      "name": "protection_loop",
+      "frames": [
+        "protection_loop_0",
+        "protection_loop_1",
+        "protection_loop_2",
+        "protection_loop_3"
+      ],
+      "frameRate": 8,
+      "repeat": -1,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "direction": null,
+      "stage": "protection_loop",
+      "placement": "overlay",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    },
+    {
+      "key": "vfx_statuses_immune_hit",
+      "name": "immune_hit",
+      "frames": [
+        "immune_hit_0",
+        "immune_hit_1",
+        "immune_hit_2",
+        "immune_hit_3"
+      ],
+      "frameRate": 12,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "direction": null,
+      "stage": "immune_hit",
+      "placement": "overlay",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    },
+    {
+      "key": "vfx_statuses_wine_damage_indicator",
+      "name": "wine_damage_indicator",
+      "frames": [
+        "wine_damage_indicator_0",
+        "wine_damage_indicator_1",
+        "wine_damage_indicator_2",
+        "wine_damage_indicator_3"
+      ],
+      "frameRate": 12,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "direction": null,
+      "stage": "wine_damage_indicator",
+      "placement": "overlay",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    }
+  ],
+  "note": "Visual playback proposals only. No damage, stun, buff duration or cooldown is defined."
+}

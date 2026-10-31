@@ -1,4 +1,65 @@
-# Current gameplay milestone — M2B, 2026-10-30
+# Current gameplay milestone — M3C3, 2026-10-31
+
+**M3C3 — Thiếu Lâm: implemented and verified.** All13 active skills,both A styles,Dịch Cân Kinh,per-target A/B combos,ally support and retained sprites use the existing shared frameworks. Details/defaults/results:`docs/M3C3_IMPLEMENTATION.md`; mappings/provenance:`docs/M3C3_SKILL_ASSET_MAP.md`. All four launch schools now have43 active definitions/eight basics. No final balance or new skill-art approval is inferred.
+
+**Stop after M3C3. M3D validation/balancing is not started automatically.** Earlier milestones below are historical.
+
+## Completed M3C2 — 2026-10-31
+
+**M3C2 — Võ Đang: implemented and verified.** Details,commands,exact test accounting and limitations: `docs/M3C2_IMPLEMENTATION.md`. All ten skill statuses and retained sprite mapping: `docs/M3C2_SKILL_ASSET_MAP.md`; actual PNG/frame/state/hash evidence: `docs/evidence/m3c2/`.
+
+- [x] Selectable Võ Đang,Quyền/Kiếm A with server-owned non-homing Kiếm Khí proc,all ten canonical active skills,Thái Cực Tâm Pháp and school-specific base/growth/surplus.
+- [x] Reusable deterministic mana shield,stationary ticked formations,one-trigger non-evading counter,mana refunds/regen,Attack Power debuff and independent movement/attack slows.
+- [x] M3B ranks/points/mixed styles/ultimate limits/arena-only respec/cooldown debt retained; foreign-school builds rejected.
+- [x] Approved two-style baseline,20 skill character/VFX components,163 tags,636 frame references and13 icons integrated without art generation;89 baseline/1441 skill-art protected files checked unchanged. Missing baseline hurt/death remain disclosed aliases.
+- [x] 266 unit/network tests in22 files,eight workflow checks,typechecks,production build andten asset validators passed. Eleven latest browser scenarios pass across the final attempt(10/11) and the corrected event-history fixture's targeted recheck(1/1). This is not a single green11-case final invocation; exact accounting is in `verification-summary.json`.
+- [x] Actual all-skill/four-direction animations,three-school dungeon progression/arena defense,six-player natural combat/rewards and separate six-hero arena readability verified with PNGs/live frame/state observations. Cái Bang and Thiên Sơn regressions passed. No recordings.
+
+Timed shield and numeric tuning remain configurable proposals,not finalized balance. **Stop after M3C2. Do not implement Thiếu Lâm or later milestones automatically.** Previous milestone scopes below are historical.
+
+## Completed M3C1 — 2026-10-31
+
+**M3C1 — Thiên Sơn: implemented and verified.** Exact mechanics,commands,results and limits: `docs/M3C1_IMPLEMENTATION.md`. Three-school inventory and all skill mappings: `docs/M3C1_SKILL_ASSET_MAP.md`; actual PNG/frame/state/log evidence: `docs/evidence/m3c1/`.
+
+- [x] Thiên Sơn selectable with both melee A choices,all ten distinct active skills,Bắc Minh automatic growth and M3B school-owned ranks/points/loadouts/surplus/arena-only editing.
+- [x] Shared authoritative swept dashes,moving/directional timed attacks,speed buffs,evasion/counter,conditional slowed-target damage and defense penetration; death/travel/disconnect cleanup.
+- [x] Twenty supplied character/VFX components,146 tags,534 frame references and13 icons integrated into the existing animation engine,hotbar,menu,avatars and runtime preview. Approved baseline hashes preserved. Võ Đang/Thiếu Lâm inventoried only.
+- [x] Final pipeline:226 unit/network tests in20 files,two workflow checks,typechecks,production build,nine asset validators and eight real browser cases passed. All24 broader browser scenarios have passing latest results across recorded runs; see the report for exact accounting.
+- [x] Mixed Cái Bang/Thiên Sơn dungeon farming,independent progression,statue defense,two/six-player caster ownership,all skills/both basics/four dash directions and Cái Bang regression verified with live state/frame observations and PNGs. No recordings.
+- [x] Director approved Thiên Sơn skill artwork on2026-10-31 (user: “skill artwork approved”); exact assets are recorded in `assets/approved_thien_son_skills.lock.json`. Dedicated hurt/death frames remain missing; existing aliases are disclosed. Numerical balance remains provisional.
+
+**Stop after M3C1.** Võ Đang/Thiếu Lâm combat,equipment/crafting,PvP,bosses and new environments remain out of scope. Thiên Sơn skill artwork has explicit director approval; other art approvals remain separate.
+
+## Completed M3B — 2026-10-31
+
+**M3B — Character Progression, Skill Loadout & Upgrades: implemented and verified.** See `docs/M3B_IMPLEMENTATION.md`, `docs/M3B_RULES.md` and `docs/evidence/m3b/` for precise accounting, proposed tuning, actual commands and PNG/state/frame evidence. Reuses M3A combat, sprites, icons and the full-size game viewport.
+
+- [x] Level1–30, exactly one earned point per level including1; shared arena/dungeon EXP, cap1740 under the existing60-EXP curve, no persistence. New Cái Bang heroes start with one available point and empty active slots.
+- [x] Four server-owned Q/W/E/R assignments, mixed Chưởng/Bổng, independent A, no duplicates/foreign skills and one optional ultimate. Standard4/ultimate3 caps and1/3/5/7 versus6/10/14 gates remain configurable proposals.
+- [x] Point-funded explicit rank variants for all ten skills; rank0 cannot cast. Free living-arena-only reset/change, removing refunds ranks, moving preserves them. Cooldown debt survives swapping, removal, upgrades, reset and relearning; no resource refill or hostile-control cleansing.
+- [x] Automatic school/passive stat layers, real defense/movement/regen/cadence/CDR use, reserved zero equipment layer and recalculated surplus. Level30 fixtures verify16+14 and15+15 accounting;100 reset/rebuild cycles cannot duplicate points/stats/resources.
+- [x] Strict atomic requests with revision/sequence/ownership/gate/budget checks; production ignores legacy sandbox flags. Unsupported schools receive no foreign Cái Bang active defaults. Their old A prototype remains outside the completed Cái Bang kit.
+- [x] In-viewport skill catalogue, icons, slots, rank previews/costs/locks, A choice, point ledger, stats/passive/surplus and reset; read-only outside arena. Compact HUD shows available points/ranks and level30 EXP MAX. No new sprite generation or whole-HUD redesign.
+- [x] Final pipeline passed:174 unit/network tests in17 files,2 workflow checks, project/tool typechecks, production build and all6 current asset validators.16 real-browser scenarios passed, including4 M3B scenarios plus movement/animation/projectile/lobby/dungeon/UI regressions. Additional live hotbar-rank assertion and PNG capture passed.48 legal seeded build probes recorded as provisional balance evidence.
+- [x] Two clients earned/leveled independently, used different learned builds, observed casts, returned through the physical exit, upgraded/respecced and resumed farming. Open menus preserve the invasion clock/warnings; modified builds damaged actual invaders. Screenshots inspected at944×466,1280×720 and1920×1080. No video recordings.
+
+**Stop after M3B. M3C has not started.** Rank/growth/surplus coefficients and final numerical balance remain proposed; UI remains available for director review. Existing unapproved world/dungeon and legacy hurt/death visuals are not declared finished by functional progression checks. Other schools' full combat, equipment/crafting, boss dungeons, PvP and production20-wave content remain out of scope.
+
+## Previous gameplay checkpoint — M3A
+
+**M3A — Cái Bang skills and supplied sprite integration: implemented and runtime verified; director visual approval pending.** See `docs/M3A_IMPLEMENTATION.md`, `docs/M3A_SKILL_ASSET_MAP.md` and `docs/evidence/m3a/`. The user reports M2C complete; the prior repository checkpoint below recorded M2B. Existing working systems were reused without inventing an M2C completion report.
+
+- [x] All ten canonical Cái Bang active skills, distinct approved Bổng/Chưởng normals and configurable Tiêu Diêu Công growth. Server-owned targeting, damage, RNG, mana, cooldowns, status duration, swept dash/pull, piercing projectiles and timed multi-hit finisher.
+- [x] Shared combat/reward pipeline, control-only assist eligibility, per-ability cooldowns, death/travel/disconnect cleanup and preserved empty-dungeon timer semantics.
+- [x] Supplied21 character/VFX components integrated through a reusable validated animation/stage manifest. All464 frame references file-validated; all105 animation tags registered; actual motion observed in every component. Approved baseline hashes unchanged; Aseprite batch export actually executed. No new artwork generation.
+- [x] Live Q/W/E/R icons, cooldown and unavailable states within the existing compact HUD. Development-only arena loadout and optional live Skill VFX Preview use real server commands/resources. No M3B rank/unlock/respec UI.
+- [x] Typecheck/build passed;134 automated tests in15 files passed, including26 skill mechanics/lifecycle cases, two asset-contract cases and three real-SDK skill cases.240 seeded four-second probes recorded; numerical defaults remain provisional.
+- [x] Five two-context M3A browser scenarios passed;16 existing movement/combat/dungeon/lobby/UI regressions passed. Actual screenshots and frame observations captured; no video recording. Enemy/environment and legacy hurt/death placeholders remain separate visual work.
+- [ ] Director approval of integrated skill production artwork at normal gameplay zoom. Concept approval is not runtime art approval.
+
+**Stop after M3A. M3B has not started.** No other-school combat, boss dungeons, crafting, PvP or production20-wave expansion is implemented by this task. Historical milestone checkpoints follow.
+
+## Previous gameplay checkpoint — M2B
 
 **Join correction verified:** non-full rooms remain joinable during school selection and active play. Late entrants select/confirm before spawning, without restarting the match or resetting progression/statue HP/timing. Six seats and defeat closure remain enforced. 98 unit/network tests, two late-join browser scenarios and three existing pre-game browser tests passed; see `docs/LATE_JOIN_FIX.md`. No M2C work.
 
@@ -112,4 +173,4 @@ The game director rejected a prototype with permanent exterior admin-style sideb
 
 ## Mandatory visual checkpoint: ART-01 (v1.6)
 
-Before expanding the full environment or school art set, conduct `ART-01` — a one-screen genuine-art vertical slice as specified in `ART_PRODUCTION_STANDARD.md`. Stop producing entire new maps using procedural placeholders; do an art source audit, produce/import and integrate a complete small set of character, NPC, enemy, tree, building, ground, VFX and UI assets, then show **actual Phaser play screenshots and animation previews** to the game director. Gameplay/infra milestones may be separately verified with placeholders, but art milestones remain unapproved until director sign-off. Run `CODEX_ART_QUALITY_RESCUE_TASK.md` as a focused task in the existing repo.
+Before expanding the full environment or school art set, conduct `ART-01` — a one-screen genuine-art vertical slice as specified in `ART_PRODUCTION_STANDARD.md`. Stop producing entire new maps using procedural placeholders; do an art source audit, produce/import and integrate a complete small set of character, NPC, enemy, tree, building, ground, VFX and UI assets, then show **actual Phaser play PNG screenshots, static animation contact sheets and live frame/transition observations (recordings only on explicit user request, per `AGENTS.md`)** to the game director. Gameplay/infra milestones may be separately verified with placeholders, but art milestones remain unapproved until director sign-off. Run `CODEX_ART_QUALITY_RESCUE_TASK.md` as a focused task in the existing repo.

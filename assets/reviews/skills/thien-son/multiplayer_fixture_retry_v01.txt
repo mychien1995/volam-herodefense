@@ -1,0 +1,30 @@
+
+   ___      _                                   ___   _  ___  
+  / __\___ | |_   _ ___  ___ _   _ ___  __   __/ _ \ / |( _ ) 
+ / /  / _ \| | | | / __|/ _ \ | | / __| \ \ / / | | || |/ _ \ 
+/ /__| (_) | | |_| \__ \  __/ |_| \__ \  \ V /| |_| || | (_) |
+\____/\___/|_|\__, |___/\___|\__,_|___/   \_/  \___(_)_|\___/ 
+              |___/                                           
+
+             · Multiplayer Framework for Node.js ·
+
+💖 Consider becoming a Sponsor on GitHub → https://github.com/sponsors/endel
+🌟 Give us a star on GitHub → https://github.com/colyseus/colyseus
+☁️  Deploy and scale your project on Colyseus Cloud → https://cloud.colyseus.io
+
+Error: Port 5186 is already in use
+
+   at thien-son-skills-setup.ts:45
+
+  43 |   try {
+  44 |     await server.listen(2596);
+> 45 |     await client.listen();
+     |     ^
+  46 |     if (!(await fetch('http://127.0.0.1:2596/health')).ok)
+  47 |       throw new Error('Art-test server not healthy');
+  48 |   } catch (error) {
+    at httpServerStart (D:\Projects\volam-hero-defense\node_modules\.pnpm\vite@8.3.5_@types+node@26.6.5_esbuild@0.28.2_tsx@4.23.15\node_modules\vite\dist\node\chunks\node.js:14661:10)
+    at startServer (D:\Projects\volam-hero-defense\node_modules\.pnpm\vite@8.3.5_@types+node@26.6.5_esbuild@0.28.2_tsx@4.23.15\node_modules\vite\dist\node\chunks\node.js:25127:30)
+    at Object.listen (D:\Projects\volam-hero-defense\node_modules\.pnpm\vite@8.3.5_@types+node@26.6.5_esbuild@0.28.2_tsx@4.23.15\node_modules\vite\dist\node\chunks\node.js:24933:4)
+    at setup (D:\Projects\volam-hero-defense\tests\e2e\thien-son-skills-setup.ts:45:5)
+

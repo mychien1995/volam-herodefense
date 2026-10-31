@@ -1,0 +1,73 @@
+{
+  "status": "passed",
+  "scope": "One final asset-level verification; no game launch or integration tests.",
+  "checks": [
+    "Expected files",
+    "PNG decode/full load",
+    "32px tile dimensions and periodic material edges",
+    "Prop alpha",
+    "Six enemy required clips and distinct cels",
+    "Atlas rectangles/tags/PNG equality",
+    "Tiled references/markers",
+    "Task-only directories/no recordings"
+  ],
+  "counts": {
+    "pngs": 672,
+    "jsonDocuments": 24,
+    "terrainTiles": 272,
+    "props": 20,
+    "enemies": 6,
+    "enemyCels": 276,
+    "vfxEffects": 16,
+    "vfxCels": 64
+  },
+  "enemies": [
+    {
+      "id": "xich_quy",
+      "cels": 46,
+      "clips": 14
+    },
+    {
+      "id": "dia_nguc_khuyen",
+      "cels": 46,
+      "clips": 14
+    },
+    {
+      "id": "dung_nham_linh",
+      "cels": 46,
+      "clips": 14
+    },
+    {
+      "id": "hac_viem_phap_su",
+      "cels": 46,
+      "clips": 22
+    },
+    {
+      "id": "hac_dien_nguu_ma",
+      "cels": 46,
+      "clips": 14
+    },
+    {
+      "id": "dung_nham_cu_nhan",
+      "cels": 46,
+      "clips": 14
+    }
+  ],
+  "issues": [],
+  "limitations": [
+    "No runtime, gameplay, temporal playback, six-player readability or director production approval was performed.",
+    "Static file checks do not certify animation continuity, smooth lava playback or collision integration."
+  ],
+  "reviewCorrections": [
+    "Within the same final review, uniform-grid extraction was replaced by connected-alpha silhouette grouping; corrected six enemy exports were visually inspected in memory.",
+    "Lateral imp/colossus contact poses were selected by actual facing; horned colossus attempts were excluded from exports; raised front fist uses its unclipped replacement cel."
+  ],
+  "visualInspection": {
+    "exportedEnemyAtlases": 6,
+    "propAtlas": true,
+    "vfxAtlas": true,
+    "evidenceFilesCreated": false,
+    "runtimePlayback": false
+  },
+  "postReviewProcessing": "The full file-level validation was run once. The extraction correction retained PNG/atlas schemas, frame counts and paths; affected exports received focused visual review. No second full verification suite was run."
+}

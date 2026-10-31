@@ -1,0 +1,152 @@
+{
+  "id": "luc_duong_chuong_vfx",
+  "skillId": "luc_duong_chuong",
+  "kind": "vfx",
+  "status": "prototype_pending_final_art_approval",
+  "source": "assets/source/skills/thien-son/luc_duong_chuong/vfx/luc_duong_chuong_vfx.aseprite",
+  "sheet": "assets/exports/skills/thien-son/luc_duong_chuong/luc_duong_chuong_vfx.png",
+  "atlas": "assets/exports/skills/thien-son/luc_duong_chuong/luc_duong_chuong_vfx.json",
+  "frameDimensions": [
+    128,
+    128
+  ],
+  "pivot": [
+    64,
+    64
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "animations": [
+    {
+      "name": "gather",
+      "frames": [
+        "gather_0",
+        "gather_1",
+        "gather_2",
+        "gather_3"
+      ],
+      "frameDimensions": [
+        128,
+        128
+      ],
+      "frameCount": 4,
+      "frameRate": 15.384615384615385,
+      "durationMsPerFrame": 65,
+      "loop": false,
+      "repeat": 0,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "stage": "spin_activation",
+      "placement": "caster_body",
+      "effectPlacementOffset": [
+        0,
+        -9
+      ],
+      "timingAuthority": "Presentation-only provisional cadence; no cooldown, movement, hitbox or authoritative hit timing.",
+      "provenance": "Original generated isolated Wind drawings, Aseprite hard-alpha cleanup. Directional wind uses exact quarter turns; ground ellipses remain unrotated; small hand cues reuse the same art with directional placement.",
+      "sourceStageReuse": null
+    },
+    {
+      "name": "spin",
+      "frames": [
+        "spin_0",
+        "spin_1",
+        "spin_2",
+        "spin_3"
+      ],
+      "frameDimensions": [
+        128,
+        128
+      ],
+      "frameCount": 4,
+      "frameRate": 12.5,
+      "durationMsPerFrame": 80,
+      "loop": true,
+      "repeat": -1,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "stage": "moving_close_spin",
+      "placement": "caster_body",
+      "effectPlacementOffset": [
+        0,
+        -9
+      ],
+      "timingAuthority": "Presentation-only provisional cadence; no cooldown, movement, hitbox or authoritative hit timing.",
+      "provenance": "Original generated isolated Wind drawings, Aseprite hard-alpha cleanup. Directional wind uses exact quarter turns; ground ellipses remain unrotated; small hand cues reuse the same art with directional placement.",
+      "sourceStageReuse": null
+    },
+    {
+      "name": "expiry",
+      "frames": [
+        "expiry_0",
+        "expiry_1",
+        "expiry_2",
+        "expiry_3"
+      ],
+      "frameDimensions": [
+        128,
+        128
+      ],
+      "frameCount": 4,
+      "frameRate": 15.384615384615385,
+      "durationMsPerFrame": 65,
+      "loop": false,
+      "repeat": 0,
+      "direction": "none",
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "pivot": [
+        64,
+        64
+      ],
+      "stage": "spin_expiry",
+      "placement": "caster_body",
+      "effectPlacementOffset": [
+        0,
+        -9
+      ],
+      "timingAuthority": "Presentation-only provisional cadence; no cooldown, movement, hitbox or authoritative hit timing.",
+      "provenance": "Original generated isolated Wind drawings, Aseprite hard-alpha cleanup. Directional wind uses exact quarter turns; ground ellipses remain unrotated; small hand cues reuse the same art with directional placement.",
+      "sourceStageReuse": null
+    }
+  ],
+  "canvasReason": "Effect-specific transparent canvas",
+  "approvedFrameReuse": [],
+  "approvedConcept": "assets/concepts/skills/thien-son/luc_duong_chuong-concept-v01.png",
+  "provenance": {
+    "method": "Original generated isolated Wind drawings, Aseprite hard-alpha cleanup. Directional wind uses exact quarter turns; ground ellipses remain unrotated; small hand cues reuse the same art with directional placement.",
+    "prompts": "assets/source/skills/thien-son/generation_prompts_v01.json",
+    "recipe": "assets/source/skills/thien-son/recipe_v01.json",
+    "license": "Original AI-assisted project art from approved project references. No external asset pack or exclusive-rights claim."
+  },
+  "runtimeIntegrated": false,
+  "visualPreviewVerified": true,
+  "productionArtApproved": false,
+  "hashes": {
+    "source": "f7c4b2d1cd74450eafeae08b32377fd729139b3195f4725d758bda4b2b2dc163",
+    "sheet": "c5d1b505cf8249782548042fbc938d4dfd89a124cd6337b3d46035ea214f1394",
+    "atlas": "0c78eb15a694ac4b622d58d78bfcd30862816c2edc6cd1457771511c911ee370"
+  },
+  "previewIntegrated": true,
+  "gameplayIntegration": "pending; no authoritative implementation added",
+  "previewVerification": "assets/reviews/skills/thien-son/verification_report_v01.json"
+}

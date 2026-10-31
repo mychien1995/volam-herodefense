@@ -1,7 +1,16 @@
-import { arena, lobbyConfig, m1Config, schools } from '@volam/game-data';
+import { heroTexture } from './art.js';
+import {
+  arena,
+  lobbyConfig,
+  m1Config,
+  schools,
+  skillIcon,
+} from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
 import { icon, menuContents, menuTitles, type Menu } from './menus.js';
 import { DefenseHud } from './defense-hud.js';
+import { SkillMenu } from './skill-menu.js';
+import type { BuildChange } from '@volam/game-core';
 export function element<T extends HTMLElement>(selector: string): T {
   const found = document.querySelector<T>(selector);
   if (!found) throw new Error(`Missing element: ${selector}`);
@@ -15,9 +24,12 @@ export class GameUI {
   private study = false;
   private ended = false;
   private defense: DefenseHud;
+  private skillMenu: SkillMenu | undefined;
+  onBuild: (change: BuildChange) => void = () => {};
   private ack = 'Share the room ID with a friend.';
   private toastTimer: number | undefined;
   onBasic: (id: string) => void = () => {};
+  onLoadout: (ids: string[]) => void = () => {};
   onCheck: () => void = () => {};
   onLeave: () => void = () => {};
   onStudy: (enabled: boolean) => void = () => {};
@@ -45,7 +57,7 @@ export class GameUI {
                   `<div id="slot-${key}" class="hotbar-slot ${key === 'e' || key === 'r' ? 'unequipped' : ''}" title="${title}">${icon(art!)}<kbd>${key!.toUpperCase()}</kbd><b id="timer-${key}" class="cooldown-number"></b><small id="cooldown-${key}">${key === 'q' ? '18 MP' : key === 'w' ? '25 MP' : key === 'a' ? 'Bổng' : 'Empty'}</small><div class="cooldown-shade"></div></div>`,
               )
               .join('')}
-            <button class="loadout-toggle" data-menu="skills" title="Change normal attack / view skills">◇</button>
+            <button class="loadout-toggle" data-menu="skills" title="Võ học / điểm kỹ năng">◇<span id="available-points"></span></button>
           </section>
           <p id="scene-status" class="scene-ready" aria-hidden="true">${artPreview ? 'ART PREVIEW' : ''}</p>
           <p id="zone-status" hidden role="status"></p>
@@ -159,6 +171,7 @@ export class GameUI {
     element('#game-dialog').dataset['menu'] = menu;
     element('#modal-layer').hidden = false;
     element('#close-menu').focus({ preventScroll: true });
+    this.skillMenu = undefined;
     const select = document.querySelector<HTMLSelectElement>('#basic-style');
     document.querySelector('#fullscreen')?.addEventListener('click', () => {
       const request = document.fullscreenElement
@@ -169,6 +182,71 @@ export class GameUI {
       );
     });
     select?.addEventListener('change', () => this.onBasic(select.value));
+    if (menu === 'skills' && this.state) {
+      const h = this.state.players.get(this.sessionId),
+        ids = [h?.qSkill, h?.wSkill, h?.eSkill, h?.rSkill];
+      if (h?.build.enabled) {
+        this.skillMenu = new SkillMenu(
+          element('#dialog-content'),
+          (change) => this.onBuild(change),
+          h.schoolId,
+        );
+        this.skillMenu.update(h);
+      } else if (
+        h &&
+        h.schoolId !== 'cai_bang' &&
+        !this.state.devSkillLoadout
+      ) {
+        element('#dialog-content').innerHTML =
+          `<p>Võ học ${schools.find((s) => s.id === h.schoolId)?.name ?? ''} chưa mở.</p><p class="muted">Môn phái này sẽ có bộ kỹ năng riêng. Hiện chưa thể học hoặc trang bị võ công Cái Bang.</p>`;
+      } else {
+        const list = element('#dialog-content .ability-list');
+        list.innerHTML = ids
+          .map((id, i) => {
+            const a = id ? m1Config.skillCatalogue?.[id] : undefined;
+            return `<article><div><kbd>${'QWER'[i]}</kbd><h3>${a?.nameVi ?? 'Chưa trang bị'}</h3><p>${a ? `${a.manaCost} MP · ${a.cooldownTicks / m1Config.tickRate}s` : ''}</p></div></article>`;
+          })
+          .join('');
+        if (
+          this.state.devSkillLoadout &&
+          h &&
+          m1Config.progression?.schools[h.schoolId]
+        ) {
+          const panel = document.createElement('div');
+          panel.className = 'dev-loadout';
+          panel.innerHTML =
+            '<p>Development test loadout · Rank 1. Mana and cooldowns remain authoritative.</p>' +
+            ids
+              .map(
+                (id, i) =>
+                  `<label>${'QWER'[i]}<select data-skill-slot="${i}" aria-label="Test skill ${'QWER'[i]}"><option value="">Chưa trang bị</option>${Object.values(
+                    m1Config.skillCatalogue ?? {},
+                  )
+                    .filter(
+                      (a) =>
+                        m1Config.progression?.skills[a.id]?.schoolId ===
+                        h.schoolId,
+                    )
+                    .map(
+                      (a) =>
+                        `<option value="${a.id}" ${id === a.id ? 'selected' : ''}>${a.nameVi}</option>`,
+                    )
+                    .join('')}</select></label>`,
+              )
+              .join('') +
+            `<button id="apply-test-skills" ${h.zoneId !== 'arena' || h.hp <= 0 ? 'disabled' : ''}>Apply test loadout</button>`;
+          list.after(panel);
+          panel.querySelector('button')!.addEventListener('click', () => {
+            this.onLoadout(
+              [...panel.querySelectorAll<HTMLSelectElement>('select')].map(
+                (s) => s.value,
+              ),
+            );
+            this.close();
+          });
+        }
+      }
+    }
     document
       .querySelector('#check')
       ?.addEventListener('click', () => this.onCheck());
@@ -221,6 +299,7 @@ export class GameUI {
   }
   close(focus = true): void {
     this.menu = undefined;
+    this.skillMenu = undefined;
     element('#modal-layer').hidden = true;
     delete element('#modal-layer').dataset['activeMenu'];
     delete element('#game-dialog').dataset['menu'];
@@ -314,6 +393,10 @@ export class GameUI {
       ].join('');
     const hero = state.players.get(this.sessionId);
     if (!hero) return;
+    this.skillMenu?.update(hero);
+    element('#available-points').textContent = hero.build.enabled
+      ? String(hero.build.available)
+      : '';
     const inArena = hero.zoneId === 'arena';
     const canEnter = inArena && hero.hp > 0;
     const enter = document.querySelector<HTMLButtonElement>('#enter-dungeon');
@@ -340,6 +423,24 @@ export class GameUI {
     element('#hero-name').textContent = hero.nickname;
     element('#school-name').textContent =
       schools.find((s) => s.id === hero.schoolId)?.name ?? 'Cái Bang';
+    element('#viewport').dataset['heroSchool'] = hero.schoolId;
+    element('#viewport').style.setProperty(
+      '--hero-idle',
+      'url("/assets/characters/' +
+        // Both monk weapon presentations share one square portrait source.
+        (hero.schoolId === 'thieu_lam'
+          ? 'hero_thieu_lam'
+          : heroTexture(hero.basicId, hero.schoolId)) +
+        '_idle.png")',
+    );
+    element('.portrait').title =
+      hero.schoolId === 'thieu_lam'
+        ? 'Approved Thiếu Lâm character artwork'
+        : hero.schoolId === 'vo_dang'
+          ? 'Approved Võ Đang character artwork'
+          : hero.schoolId === 'thien_son'
+            ? 'Approved Thiên Sơn character artwork'
+            : 'Approved Cái Bang character artwork';
     const chuong = hero.basicId === 'cai_bang_chuong';
     element('#viewport').dataset['basicStyle'] = chuong ? 'chuong' : 'bong';
     element('#slot-a .pixel-icon').className =
@@ -352,13 +453,15 @@ export class GameUI {
     ] as const) {
       const meter = element(`.meter.${name}`);
       // XP is cumulative; only the visual progress within the current level wraps.
-      const progress = name === 'xp' ? value % max : value;
+      const capped = name === 'xp' && hero.level >= m1Config.maxLevel;
+      const progress = name === 'xp' ? (capped ? max : value % max) : value;
       meter.setAttribute('aria-valuenow', String(progress));
       meter.setAttribute('aria-valuemax', String(max));
       meter.querySelector<HTMLElement>('i')!.style.width =
         `${Math.min(100, Math.max(0, (progress / max) * 100))}%`;
-      element(`#${name}-text`).textContent =
-        `${label} ${Math.floor(progress)} / ${max}`;
+      element(`#${name}-text`).textContent = capped
+        ? 'EXP MAX · Cấp 30'
+        : `${label} ${Math.floor(progress)} / ${max}`;
     }
     element('#hero-stats').textContent =
       `Lv ${hero.level} · HP ${Math.ceil(hero.hp)}/${hero.maxHp} · MP ${Math.floor(hero.mana)}/${hero.maxMana} · XP ${hero.xp} · Gold ${hero.gold} · Skill points ${hero.skillPoints}`;
@@ -371,44 +474,137 @@ export class GameUI {
     if (select) select.disabled = !inArena || hero.hp <= 0;
     if (select && document.activeElement !== select)
       select.value = hero.basicId;
-    for (const [key, remaining, total, cost] of [
-      [
-        'a',
-        hero.basicCooldown,
-        m1Config.basics[hero.basicId]?.cooldownTicks ?? 18,
-        0,
-      ],
-      [
-        'q',
-        hero.qCooldown,
-        m1Config.skills[0]!.cooldownTicks,
-        m1Config.skills[0]!.manaCost,
-      ],
-      [
-        'w',
-        hero.wCooldown,
-        m1Config.skills[1]!.cooldownTicks,
-        m1Config.skills[1]!.manaCost,
-      ],
-    ] as const) {
-      const slot = element(`#slot-${key}`);
-      const cooling = remaining > 0;
+    let combo = document.querySelector<HTMLElement>('#phat-dong-progress');
+    if (!combo) {
+      combo = document.createElement('div');
+      combo.id = 'phat-dong-progress';
+      document.querySelector('#slot-q')?.parentElement?.append(combo);
+    }
+    const records = JSON.parse(hero.combos) as Array<{
+      id: string;
+      targetId: string;
+      step: number;
+      ticks: number;
+    }>;
+    combo.hidden = hero.schoolId !== 'thieu_lam' || records.length === 0;
+    combo.textContent =
+      records
+        .slice(0, 3)
+        .map(
+          (c) =>
+            `${c.id === 'phat_dong_a' ? 'A' : 'B'} ${c.step}/3 · ${(c.ticks / m1Config.tickRate).toFixed(1)}s`,
+        )
+        .join(' | ') +
+      (records.length > 3 ? ` +${records.length - 3} địch` : '');
+    combo.title = records
+      .map(
+        (c) =>
+          `${c.id === 'phat_dong_a' ? 'A' : 'B'} · ${c.targetId} · ${c.step}/3`,
+      )
+      .join('\n');
+    const slots = [
+      {
+        key: 'a' as const,
+        remaining: hero.basicCooldown,
+        ability: m1Config.basics[hero.basicId],
+      },
+      ...(['q', 'w', 'e', 'r'] as const).map((key) => ({
+        key,
+        remaining: hero[`${key}Cooldown`],
+        ability: hero.build.enabled
+          ? m1Config.progression?.skills[hero[`${key}Skill`]]?.ranks[
+              Math.max(0, (hero.build.ranks.get(hero[`${key}Skill`]) ?? 0) - 1)
+            ]
+          : m1Config.skillCatalogue?.[hero[`${key}Skill`]],
+      })),
+    ];
+    const activeStatuses = JSON.parse(hero.statuses) as Array<{ kind: string }>;
+    for (const { key, remaining, ability } of slots) {
+      const rank =
+        key === 'a'
+          ? 1
+          : hero.build.enabled
+            ? (hero.build.ranks.get(hero[`${key}Skill`]) ?? 0)
+            : 1;
+      const slot = element(`#slot-${key}`),
+        cooling = remaining > 0,
+        cost = ability?.manaCost ?? 0;
       slot.classList.toggle('cooling', cooling);
-      slot.classList.toggle('unavailable', hero.hp <= 0 || hero.mana < cost);
+      const controlled = activeStatuses.some((s) =>
+        [
+          'stun',
+          'dash',
+          'channel',
+          key === 'a' ? 'disarm' : 'silence',
+        ].includes(s.kind),
+      );
+      slot.classList.toggle(
+        'unavailable',
+        !ability ||
+          rank === 0 ||
+          hero.hp <= 0 ||
+          hero.mana < cost ||
+          controlled,
+      );
+      slot.classList.toggle('unequipped', !ability);
+      if (key !== 'a') {
+        let badge = slot.querySelector<HTMLElement>('.skill-rank');
+        if (!badge) {
+          badge = document.createElement('b');
+          badge.className = 'skill-rank';
+          slot.append(badge);
+        }
+        badge.textContent = hero.build.enabled && ability ? String(rank) : '';
+        const art = slot.querySelector<HTMLElement>('.pixel-icon')!;
+        art.className = ability
+          ? 'pixel-icon skill-icon'
+          : 'pixel-icon icon-lock';
+        art.style.backgroundImage = ability
+          ? `url("${skillIcon(ability.id)}")`
+          : '';
+        art.style.backgroundPosition = ability ? 'center' : '';
+        art.style.backgroundSize = ability ? 'contain' : '';
+        art.style.backgroundRepeat = 'no-repeat';
+      }
+      if (
+        key === 'a' &&
+        ['thien_son', 'vo_dang', 'thieu_lam'].includes(hero.schoolId)
+      ) {
+        const art = slot.querySelector<HTMLElement>('.pixel-icon')!;
+        art.className = 'pixel-icon skill-icon';
+        art.style.background = `url("${skillIcon(hero.basicId)}") center / contain no-repeat`;
+      } else if (key === 'a')
+        slot.querySelector<HTMLElement>('.pixel-icon')!.style.background = '';
       element(`#timer-${key}`).textContent = cooling
         ? (remaining / m1Config.tickRate).toFixed(1)
         : '';
       slot.querySelector<HTMLElement>('.cooldown-shade')!.style.height =
-        `${Math.min(100, (remaining / (total || 1)) * 100)}%`;
+        `${Math.min(100, (remaining / (ability?.cooldownTicks || 1)) * 100)}%`;
       element(`#cooldown-${key}`).textContent =
         key === 'a'
-          ? hero.basicId === 'cai_bang_bong'
-            ? 'Bổng'
-            : 'Chưởng'
-          : `${cost} MP`;
-      slot.title = `${key === 'a' ? 'Normal attack' : key === 'q' ? 'Hỏa Vân Chưởng' : 'Cuồng Long Loạn Vũ'} · ${cooling ? 'Cooldown' : hero.mana < cost ? 'Need mana' : 'Ready'}`;
+          ? hero.schoolId === 'thieu_lam'
+            ? hero.basicId === 'thieu_lam_quyen'
+              ? 'Quyền'
+              : 'Đao'
+            : hero.schoolId === 'vo_dang'
+              ? hero.basicId === 'vo_dang_quyen'
+                ? 'Quyền'
+                : 'Kiếm'
+              : hero.schoolId === 'thien_son'
+                ? hero.basicId === 'thien_son_phien'
+                  ? 'Phiến'
+                  : 'Đao'
+                : hero.basicId === 'cai_bang_bong'
+                  ? 'Bổng'
+                  : 'Chưởng'
+          : ability
+            ? `${cost} MP`
+            : 'Empty';
+      slot.title = `${ability?.nameVi ?? 'Chưa trang bị'}${key !== 'a' && hero.build.enabled ? ' · Bậc ' + rank : ''} · ${!ability ? 'Unavailable' : rank === 0 ? 'Chưa học' : controlled ? 'Controlled' : cooling ? 'Cooldown' : hero.mana < cost ? 'Need mana' : 'Ready'}`;
+      slot.dataset['skillId'] = ability?.id ?? '';
     }
   }
+
   destroy(): void {
     window.removeEventListener('keydown', this.keydown, true);
     window.clearTimeout(this.toastTimer);

@@ -1,0 +1,60 @@
+{
+  "phase": "1J",
+  "status": "INTEGRATED_RUNTIME_VERIFIED",
+  "assets": [
+    {
+      "id": "creep_shadow_assassin",
+      "wave": 17,
+      "slug": "anh-ma",
+      "manifest": "assets/sprites/creeps/arena/anh-ma/manifest.json",
+      "frames": 64
+    },
+    {
+      "id": "creep_armored_demon_general",
+      "wave": 18,
+      "slug": "ma-tuong-thiet-giap",
+      "manifest": "assets/sprites/creeps/arena/ma-tuong-thiet-giap/manifest.json",
+      "frames": 64
+    },
+    {
+      "id": "creep_blood_demon_warlock",
+      "wave": 19,
+      "slug": "huyet-ma-phap-su",
+      "manifest": "assets/sprites/creeps/arena/huyet-ma-phap-su/manifest.json",
+      "frames": 64
+    },
+    {
+      "id": "creep_demon_vanguard",
+      "wave": 20,
+      "slug": "ma-vuong-tien-phong",
+      "manifest": "assets/sprites/creeps/arena/ma-vuong-tien-phong/manifest.json",
+      "frames": 64
+    }
+  ],
+  "totalFrames": 256,
+  "totalAnimationTags": 80,
+  "approvedFilesUnchanged": 1285,
+  "conceptApproval": "User explicitly approves generated concepts for this batch and authorizes immediate production, 2026-10-31. Runtime approval separate.",
+  "productionArtApproved": false,
+  "validation": {
+    "status": "PASS",
+    "command": "pnpm check:final --config playwright.arena-creeps-final.config.ts",
+    "totalSeconds": 376.23,
+    "workflowTests": 2,
+    "unitIntegrationTests": 226,
+    "unitIntegrationFiles": 20,
+    "browserTests": 1,
+    "realClients": 6,
+    "loadedArenaTextures": 20,
+    "characterFramesObserved": 256,
+    "characterTagsObserved": 80,
+    "effectFramesObserved": 28,
+    "effectTagsObserved": 7,
+    "errors": [],
+    "report": "docs/evidence/phase1j-integration/integration_verification.json"
+  },
+  "limitations": [
+    "Stock invasion AI remains melee. Separate blood projectile tested with existing server-owned zero-damage fixture; no new mechanics.",
+    "Concepts auto-approved by current user instruction; final runtime director approval not independently claimed."
+  ]
+}

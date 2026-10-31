@@ -56,14 +56,14 @@ test('Join remains enabled after host starts school selection', async ({
     await joinWaiting(a, 'Host');
     const id = (await read(a)).roomId;
     await a.getByRole('button', { name: 'Start Game', exact: true }).click();
-    await a.locator('[data-school=cai_bang]').click();
+    await a.locator('#pregame button[data-school=cai_bang]').click();
     await joinListed(b, id);
     await a
       .getByRole('button', { name: 'Confirm Selection', exact: true })
       .click();
     await expect(b.getByTestId('selection-ready')).toHaveText('1/2 Ready');
     expect((await read(a)).state.tick).toBe(0);
-    await b.locator('[data-school=vo_dang]').click();
+    await b.locator('#pregame button[data-school=vo_dang]').click();
     await b
       .getByRole('button', { name: 'Confirm Selection', exact: true })
       .click();
@@ -93,8 +93,8 @@ test('Join active match, choose school with stable focus, spawn without resettin
       id = before.roomId;
     await joinListed(b, id);
     const guest = (await read(b)).sessionId;
-    await b.locator('[data-school=thien_son]').click();
-    const choice = b.locator('[data-school=thien_son]');
+    await b.locator('#pregame button[data-school=thien_son]').click();
+    const choice = b.locator('#pregame button[data-school=thien_son]');
     await expect(choice).toHaveAttribute('aria-pressed', 'true');
     await choice.focus();
     const focused = await choice.elementHandle();

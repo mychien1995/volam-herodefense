@@ -1,0 +1,541 @@
+{
+  "phase": "1F",
+  "conceptApproval": "User: approved, please proceed (2026-10-30), after Phase 1E concept delivery",
+  "masterConcept": "assets/concepts/arena-creeps/waves-09-12/arena_creeps_09_12_concept_sheet.png",
+  "assets": [
+    {
+      "slug": "jiangshi-zombie",
+      "id": "creep_jiangshi_zombie",
+      "nameVi": "Cương Thi",
+      "concept": "assets/concepts/arena-creeps/waves-09-12/cuong_thi_concept.png",
+      "targetHeight": 44,
+      "canvas": [
+        96,
+        96
+      ],
+      "pivot": [
+        48,
+        76
+      ],
+      "details": "The exact approved Jiangshi: pale gray/sage face and hands, green eye glows, short ragged black hair, dark round flat Qing-style cap with crimson round knob, ochre forehead talisman with red ink strokes, long torn charcoal-indigo Chinese robe with muted crimson lapel/edge trim, crimson waist sash and tied rear tails, short dark boots. Same cap/robe/talisman proportions. Forehead talisman visible front and profile, NEVER on back of cap. Stiff arms extended forward, elbows nearly straight, pale claw hands; no weapons. No redesign as black Western zombie or different hat.",
+      "idle": "subtle rigid shoulder/robe shift, talisman tip flutters",
+      "walk": "four stiff hopping steps, paired feet lift and land, arms remain forward; no normal jaunty run",
+      "attack": "stiff-arm lunge: slight backward coil, two pale hands thrust forward, full lunge contact, arms recover; no giant energy plume",
+      "reaction": "hurt1 rigid recoil, hurt2 return; death1 knees buckle, death2 torso tips down, death3 falls, death4 completely fallen robe-clad body on ground, cap and talisman retained",
+      "sources": {
+        "main": {
+          "file": "sprites/creeps/arena/jiangshi-zombie/source/main_v1.png",
+          "originalGeneratedFilename": "exec-692eccb8-fe28-4a62-8759-c5242aa56afa.png",
+          "expected": 44,
+          "rows": 4,
+          "cols": 11,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            1,
+            11,
+            12,
+            22,
+            23,
+            33,
+            34
+          ]
+        },
+        "reaction": {
+          "file": "sprites/creeps/arena/jiangshi-zombie/source/reaction_v1.png",
+          "originalGeneratedFilename": "exec-cc0c72e4-785e-4209-b9a8-16b1d2ad5be8.png",
+          "expected": 24,
+          "rows": 4,
+          "cols": 6,
+          "used": true,
+          "heightReferenceIndices": [
+            1,
+            7,
+            13,
+            19
+          ]
+        },
+        "attack": {
+          "file": "sprites/creeps/arena/jiangshi-zombie/source/attack_v1.png",
+          "originalGeneratedFilename": "exec-71dc776a-5dd6-40c8-a6ba-c1e80b82fd37.png",
+          "expected": 12,
+          "rows": 3,
+          "cols": 4,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            4,
+            8
+          ]
+        },
+        "attack_left": {
+          "file": "sprites/creeps/arena/jiangshi-zombie/source/attack_left_v1.png",
+          "expected": 4,
+          "rows": 2,
+          "cols": 2,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            3
+          ],
+          "originalGeneratedFilename": "exec-9fc2fee6-3b22-4b26-b98d-385e0e5c0220.png"
+        }
+      },
+      "directionSources": {
+        "down": {
+          "key": "main",
+          "row": 0
+        },
+        "left": {
+          "key": "main",
+          "row": 1
+        },
+        "right": {
+          "key": "main",
+          "row": 2
+        },
+        "up": {
+          "key": "main",
+          "row": 3
+        }
+      },
+      "selections": {},
+      "overrides": {
+        "basic_attack_down": {
+          "key": "attack",
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "basic_attack_left": {
+          "key": "attack_left",
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "basic_attack_right": {
+          "key": "attack",
+          "indices": [
+            8,
+            9,
+            10,
+            11
+          ]
+        }
+      },
+      "hoverGap": 0,
+      "notes": "Extra generated column measured explicitly; first ten per row used, with regenerated front/side attacks."
+    },
+    {
+      "slug": "vengeful-spirit",
+      "id": "creep_vengeful_spirit",
+      "nameVi": "Oán Linh",
+      "concept": "assets/concepts/arena-creeps/waves-09-12/oan_linh_concept.png",
+      "targetHeight": 52,
+      "canvas": [
+        112,
+        112
+      ],
+      "pivot": [
+        56,
+        90
+      ],
+      "details": "The exact approved floating Chinese spirit: luminous pale blue-white face, ice-blue eyes, long dark navy hair parted around face and flowing separated locks, tattered deep blue-violet crossed-lapel robes, small muted plum sash/round clasp, pale spectral claw hands, luminous cobalt/lavender tapered curling wisps instead of legs. Dark indigo contours and dense solid visible body core, tips ethereal but readable. No feet, wings, weapon, skeletal skull or hood. BACK shows long hair and robe, NO front face. Keep same robe/hair/sash shape and palette. Keep wisps connected to robe, no detached particles.",
+      "idle": "two distinct hand/hair/wisp drawings, slight hover breathing",
+      "walk": "four gliding poses with hair and lower robe-tail movement, upright body at steady height, no legs or walking feet",
+      "attack": "spectral palm cast: gather arm to chest, palm extends toward row-facing direction, fully extended claw hand with a SMALL glow touching fingers, return. No flying projectile or detached orb asset; change pose deliberately",
+      "reaction": "hurt1 shoulders and head recoil, hurt2 returns; death1 curls inward, death2 sinks lower with head slumped, death3 folds spectral robe into connected crouched coil, death4 dim crumpled hair/robe/wisp mass near ground. Keep recognizable connected silhouette even final, no detached floating scraps or blank frame",
+      "sources": {
+        "main": {
+          "file": "sprites/creeps/arena/vengeful-spirit/source/main_v1.png",
+          "originalGeneratedFilename": "exec-f575a198-9021-408c-aa29-f71351660948.png",
+          "expected": 40,
+          "rows": 4,
+          "cols": 10,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            1,
+            10,
+            11,
+            20,
+            21,
+            30,
+            31
+          ]
+        },
+        "reaction": {
+          "file": "sprites/creeps/arena/vengeful-spirit/source/reaction_v1.png",
+          "originalGeneratedFilename": "exec-d9c16abd-56c2-4f5f-a9fa-31cbc0c54fb6.png",
+          "expected": 24,
+          "rows": 4,
+          "cols": 6,
+          "used": true,
+          "heightReferenceIndices": [
+            1,
+            7,
+            13,
+            19
+          ]
+        },
+        "attack": {
+          "file": "sprites/creeps/arena/vengeful-spirit/source/attack_v1.png",
+          "originalGeneratedFilename": "exec-ac4142b5-c12b-42bc-a63b-2a5debf397a5.png",
+          "expected": 12,
+          "rows": 3,
+          "cols": 4,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            4,
+            8
+          ]
+        }
+      },
+      "directionSources": {
+        "down": {
+          "key": "main",
+          "row": 0
+        },
+        "left": {
+          "key": "main",
+          "row": 1
+        },
+        "right": {
+          "key": "main",
+          "row": 2
+        },
+        "up": {
+          "key": "main",
+          "row": 3
+        }
+      },
+      "selections": {},
+      "overrides": {
+        "basic_attack_down": {
+          "key": "attack",
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "basic_attack_left": {
+          "key": "attack",
+          "indices": [
+            4,
+            5,
+            6,
+            7
+          ]
+        },
+        "basic_attack_right": {
+          "key": "attack",
+          "indices": [
+            8,
+            9,
+            10,
+            11
+          ]
+        }
+      },
+      "hoverGap": 4,
+      "notes": "Front and side cast poses regenerated with locked facing. Dense luminous core and connected wisps retained; no detached projectile asset."
+    },
+    {
+      "slug": "armored-skeleton",
+      "id": "creep_armored_skeleton",
+      "nameVi": "Thiết Giáp Khô Lâu",
+      "concept": "assets/concepts/arena-creeps/waves-09-12/thiet_giap_kho_lau_concept.png",
+      "targetHeight": 54,
+      "canvas": [
+        160,
+        112
+      ],
+      "pivot": [
+        80,
+        90
+      ],
+      "details": "The exact approved armored skeleton, same cracked aged-ivory skull/short teeth and bony joints as Wave7 but broad massive ancient Chinese iron/bronze lamellar armor, TWO huge bronze-rimmed pauldrons, dark teal ragged neck/waist cloth, brown belt/brass buckle, plated shins, glowing amber-orange eye sockets, bare skull no helmet. ONE heavy straight broad Chinese JIAN with brass crossguard and ring pommel ALWAYS anatomical RIGHT hand (front viewer-left, rear viewer-right). ONE tall dark iron/bronze round-corner rectangular cloud-scroll SHIELD ALWAYS anatomical LEFT hand (front viewer-right, rear viewer-left). Both retained all poses and all facings. In left profile shield near viewer, sword far hand with blade tip protruding left from below shield. Right profile near sword arm, far shield edge visible. Same paired armor width and palette throughout. No dao/axe, extra weapon, European knight, hand swap or disappearance.",
+      "idle": "two subtle armor/shoulder settle drawings with sword/shield retained",
+      "walk": "four weighted stepping poses with alternating feet, controlled shield sway and sword visible",
+      "attack": "heavy right-hand sword strike: low guard, right sword arm raised overhead, downward blade contact toward row-facing direction, guard recovery. Left shield braced throughout; sword blade in every pose",
+      "reaction": "hurt1 braced recoil behind shield, hurt2 recovery; death1 knees buckle, death2 kneels head bowed, death3 body tips over, death4 fully fallen armored skeleton on ground with same sword and shield held close/touching body, no dismembered separate pieces",
+      "sources": {
+        "main": {
+          "file": "sprites/creeps/arena/armored-skeleton/source/main_v1.png",
+          "originalGeneratedFilename": "exec-cad6b8af-aa13-4eab-bb43-309570a1d51e.png",
+          "expected": 40,
+          "rows": 4,
+          "cols": 10,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            1,
+            10,
+            11,
+            20,
+            21,
+            30,
+            31
+          ]
+        },
+        "reaction": {
+          "file": "sprites/creeps/arena/armored-skeleton/source/reaction_v1.png",
+          "originalGeneratedFilename": "exec-d67c19af-3660-415e-8667-14af21390237.png",
+          "expected": 24,
+          "rows": 4,
+          "cols": 6,
+          "used": true,
+          "heightReferenceIndices": [
+            1,
+            7,
+            13,
+            19
+          ]
+        },
+        "attack": {
+          "file": "sprites/creeps/arena/armored-skeleton/source/attack_v1.png",
+          "originalGeneratedFilename": "exec-c05047b1-1e36-40c5-983e-e3fbfe0f3f41.png",
+          "expected": 12,
+          "rows": 3,
+          "cols": 4,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            4,
+            8
+          ]
+        },
+        "attack_left": {
+          "file": "sprites/creeps/arena/armored-skeleton/source/attack_left_v1.png",
+          "expected": 4,
+          "rows": 2,
+          "cols": 2,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            3
+          ],
+          "originalGeneratedFilename": "exec-92f86783-5612-4b11-9697-2cabc6efa6c1.png"
+        },
+        "attack_right": {
+          "file": "sprites/creeps/arena/armored-skeleton/source/attack_right_v1.png",
+          "expected": 4,
+          "rows": 2,
+          "cols": 2,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            3
+          ],
+          "originalGeneratedFilename": "exec-809c695b-898f-4fd2-93ac-dbea781c6ac5.png"
+        }
+      },
+      "directionSources": {
+        "down": {
+          "key": "main",
+          "row": 0
+        },
+        "left": {
+          "key": "main",
+          "row": 1
+        },
+        "right": {
+          "key": "main",
+          "row": 2
+        },
+        "up": {
+          "key": "main",
+          "row": 3
+        }
+      },
+      "selections": {
+        "walk_down": [
+          2,
+          4,
+          5
+        ]
+      },
+      "overrides": {
+        "basic_attack_down": {
+          "key": "attack",
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "basic_attack_left": {
+          "key": "attack_left",
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "basic_attack_right": {
+          "key": "attack_right",
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      },
+      "hoverGap": 0,
+      "notes": "Missing-sword frontal walk pose excluded. Front and side attacks regenerated; right-hand jian and left-hand shield retained."
+    },
+    {
+      "slug": "stone-golem",
+      "id": "creep_stone_golem",
+      "nameVi": "Thạch Nhân",
+      "concept": "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "targetHeight": 66,
+      "canvas": [
+        176,
+        144
+      ],
+      "pivot": [
+        88,
+        120
+      ],
+      "details": "The exact approved broad squat ancient Chinese temple stone guardian: huge irregular stone fists/arms, short heavy legs, carved angular brow and jade eyes, chipped layered taupe-gray/brown rocks, stone cloud-scroll carvings, bright JADE CENTRAL CHEST SEAL on FRONT only, jade forearm crack runes, round circular carved spinal stone on BACK without glowing chest seal. Moss with small green sprout ALWAYS anatomical LEFT shoulder: front viewer-right, rear viewer-left; consistent through profiles and actions. Huge fists and body mass, not robot/Minecraft cubes or smooth 3D. Preserve same head shape, big arms, short legs, stones/moss color and jade accents; no equipment/clothes.",
+      "idle": "two subtle chest/arm settle drawings, same mass and moss shoulder",
+      "walk": "four heavy slow alternating steps with fist counter-swing, no exaggerated stretch or different body size",
+      "attack": "heavy fist slam: fists low guard, right fist draws up, fist slams down in row-facing direction, recovery. Ground contact pose only, NO ground cracks, flying rocks, shockwave or detached VFX. Keep vegetation on same shoulder",
+      "reaction": "hurt1 heavy shoulder recoil, hurt2 returns; death1 stone knees buckle, death2 hunched kneel with dimmer jade, death3 torso folds to ground, death4 grounded slumped connected stone body with huge fists beside it, moss remains, dim jade. No disconnected rubble piles or missing body",
+      "sources": {
+        "main": {
+          "file": "sprites/creeps/arena/stone-golem/source/main_v1.png",
+          "originalGeneratedFilename": "exec-b0ba2706-a940-4ca0-bf8f-4de0f8971198.png",
+          "expected": 40,
+          "rows": 4,
+          "cols": 10,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            1,
+            10,
+            11,
+            20,
+            21,
+            30,
+            31
+          ]
+        },
+        "reaction": {
+          "file": "sprites/creeps/arena/stone-golem/source/reaction_v1.png",
+          "originalGeneratedFilename": "exec-9c66b2df-26e8-4d97-afeb-ccfa02524daf.png",
+          "expected": 24,
+          "rows": 4,
+          "cols": 6,
+          "used": true,
+          "heightReferenceIndices": [
+            1,
+            7,
+            13,
+            19
+          ]
+        },
+        "attack": {
+          "file": "sprites/creeps/arena/stone-golem/source/attack_v1.png",
+          "originalGeneratedFilename": "exec-abc3a257-92e9-449f-bd34-53c2fe0e9d4f.png",
+          "expected": 12,
+          "rows": 3,
+          "cols": 4,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            4,
+            8
+          ]
+        },
+        "attack_left": {
+          "file": "sprites/creeps/arena/stone-golem/source/attack_left_v1.png",
+          "expected": 4,
+          "rows": 2,
+          "cols": 2,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            3
+          ],
+          "originalGeneratedFilename": "exec-e6f0dfd5-cb73-43a0-9a4c-19bb29fd7ead.png"
+        },
+        "attack_right": {
+          "file": "sprites/creeps/arena/stone-golem/source/attack_right_v1.png",
+          "expected": 4,
+          "rows": 2,
+          "cols": 2,
+          "used": true,
+          "heightReferenceIndices": [
+            0,
+            3
+          ],
+          "originalGeneratedFilename": "exec-a1adddae-ac09-4134-bca4-849254aace16.png"
+        }
+      },
+      "directionSources": {
+        "down": {
+          "key": "main",
+          "row": 0
+        },
+        "left": {
+          "key": "main",
+          "row": 1
+        },
+        "right": {
+          "key": "main",
+          "row": 2
+        },
+        "up": {
+          "key": "main",
+          "row": 3
+        }
+      },
+      "selections": {},
+      "overrides": {
+        "basic_attack_down": {
+          "key": "attack",
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "basic_attack_left": {
+          "key": "attack_left",
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "basic_attack_right": {
+          "key": "attack_right",
+          "indices": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      },
+      "hoverGap": 0,
+      "notes": "Directional side attacks regenerated to preserve moss shoulder and profile. Connected collapsed body retained on death."
+    }
+  ]
+}

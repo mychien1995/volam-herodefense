@@ -3,7 +3,15 @@ import { arena, creepDungeon } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
 import type { CombatEvent } from '@volam/game-core';
 import { createArenaArt } from './arena-art01.js';
+import {
+  arenaCreepArt,
+  CreepPlayback,
+  type ArenaCreepArt,
+  type ArenaCreepManifest,
+} from './arena-creeps.js';
 import { FloatingDamage } from './floating-damage.js';
+import { SkillVfx } from './skill-vfx.js';
+import { ArenaCreepEffects } from './arena-creep-effects.js';
 import { createCreepDungeonArt } from './dungeon-presentation.js';
 import {
   actorFootPivot,
@@ -17,6 +25,9 @@ interface EntityView {
   label: Phaser.GameObjects.Text;
   shadow: Phaser.GameObjects.Ellipse;
   bar: Phaser.GameObjects.Graphics;
+  creepArt: ArenaCreepArt | undefined;
+  playback: CreepPlayback;
+  lastHp: number;
 }
 export class ArenaScene extends Phaser.Scene {
   onNpc: (menu: 'merchant' | 'pvp') => void = () => {};
@@ -25,12 +36,23 @@ export class ArenaScene extends Phaser.Scene {
   private snapshot: LobbyState | undefined;
   private sessionId = '';
   private actors = new Map<string, EntityView>();
-  private shots = new Map<string, Phaser.GameObjects.Sprite>();
+  private vfx: SkillVfx | undefined;
+  private creepEffects: ArenaCreepEffects | undefined;
   private trees: Phaser.GameObjects.Image[] = [];
   private ready = false;
   private followed = '';
   private lastEvent = 0;
   private damage: FloatingDamage | undefined;
+  private completedAnimations: Array<{
+    id: string;
+    key: string;
+    frame: string | number;
+    at: number;
+  }> = [];
+  private impacts: Array<{ id: string; sourceId: string; targetId: string }> =
+    [];
+  private observedCreepFrames = new Map<string, Set<string>>();
+  private observedHeroFrames = new Map<string, Set<string>>();
   constructor() {
     super('Arena');
   }
@@ -40,6 +62,11 @@ export class ArenaScene extends Phaser.Scene {
   create(): void {
     registerArt(this);
     this.damage = new FloatingDamage(this);
+    this.vfx = new SkillVfx(this);
+    this.creepEffects = new ArenaCreepEffects(
+      this,
+      this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest,
+    );
     this.drawZone('arena');
     this.cameras.main
       .setBounds(0, 0, arena.width, arena.height)
@@ -51,7 +78,16 @@ export class ArenaScene extends Phaser.Scene {
     document.querySelector('#scene-status')?.setAttribute('data-ready', 'true');
   }
   setSnapshot(snapshot: LobbyState | undefined, sessionId = ''): void {
-    if (this.sessionId !== sessionId) this.lastEvent = 0;
+    if (this.sessionId !== sessionId) {
+      this.lastEvent = 0;
+      this.vfx?.clear();
+      this.creepEffects?.clear();
+    }
+    if (!snapshot) {
+      this.vfx?.clear();
+      this.creepEffects?.clear();
+      this.damage?.clear();
+    }
     this.snapshot = snapshot;
     this.sessionId = sessionId;
     const zoneId = snapshot?.players.get(sessionId)?.zoneId ?? 'arena';
@@ -61,10 +97,15 @@ export class ArenaScene extends Phaser.Scene {
     this.cameras.main.stopFollow();
     this.tweens.killAll();
     this.damage?.clear();
+    this.vfx?.clear();
+    this.creepEffects?.clear();
     this.time.removeAllEvents();
     for (const object of [...this.children.list]) object.destroy();
     this.actors.clear();
-    this.shots.clear();
+    this.completedAnimations.length = 0;
+    this.impacts.length = 0;
+    this.observedCreepFrames.clear();
+    this.observedHeroFrames.clear();
     this.followed = '';
     this.zoneId = zoneId;
     if (zoneId === 'arena') {
@@ -84,15 +125,14 @@ export class ArenaScene extends Phaser.Scene {
     x: number,
     y: number,
     enemy: boolean,
+    texture: string,
   ): EntityView {
     const shadow = this.add
       .ellipse(x, y - 3, 22, 8, 0x233e34, 0.35)
       .setDepth(-5);
     const sprite = this.add
-      .sprite(x, y, enemy ? 'creep_outlaw' : 'hero_cai_bang', 'idle_down_0')
-      .setOrigin(
-        ...actorFootPivot(this, enemy ? 'creep_outlaw' : 'hero_cai_bang'),
-      );
+      .sprite(x, y, texture, 'idle_down_0')
+      .setOrigin(...actorFootPivot(this, texture));
     const label = this.add
       .text(x, y + 5, '', {
         fontFamily: 'monospace',
@@ -102,7 +142,40 @@ export class ArenaScene extends Phaser.Scene {
         padding: { x: 2, y: 1 },
       })
       .setOrigin(0.5, 0);
-    const view = { sprite, label, shadow, bar: this.add.graphics() };
+    const view: EntityView = {
+      sprite,
+      label,
+      shadow,
+      bar: this.add.graphics(),
+      creepArt: undefined,
+      playback: new CreepPlayback(),
+      lastHp: Infinity,
+    };
+    const observeFrame = () => {
+      if (!view.creepArt && !sprite.texture.key.startsWith('hero_thieu_lam'))
+        return;
+      const key = sprite.anims.currentAnim?.key;
+      if (!key) return;
+      const observed = view.creepArt
+        ? this.observedCreepFrames
+        : this.observedHeroFrames;
+      const frames = observed.get(key) ?? new Set<string>();
+      frames.add(String(sprite.frame.name));
+      observed.set(key, frames);
+    };
+    sprite.on(Phaser.Animations.Events.ANIMATION_START, observeFrame);
+    sprite.on(Phaser.Animations.Events.ANIMATION_UPDATE, observeFrame);
+    sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      if (!view.creepArt) return;
+      this.completedAnimations.push({
+        id,
+        key: sprite.anims.currentAnim?.key ?? '',
+        frame: sprite.frame.name,
+        at: this.time.now,
+      });
+      if (this.completedAnimations.length > 120)
+        this.completedAnimations.shift();
+    });
     this.actors.set(id, view);
     return view;
   }
@@ -121,13 +194,49 @@ export class ArenaScene extends Phaser.Scene {
         maxHp: number;
         pose: string;
         basicId?: string;
+        schoolId?: string;
+        invasionWave?: number;
+        castAbilityId?: string;
+        statuses?: string;
       },
       enemy: boolean,
       name: string,
     ): void => {
       active.add(id);
+      const art = enemy
+        ? arenaCreepArt(
+            this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest,
+            actor.invasionWave,
+            this.zoneId,
+          )
+        : undefined;
+      const cast = !enemy
+        ? this.vfx?.actorCast(
+            id,
+            actor.castAbilityId ?? '',
+            actor.pose,
+            actor.fx,
+            actor.fy,
+            actor.hp,
+          )
+        : undefined;
+      const texture =
+        cast?.texture ??
+        (enemy
+          ? (art?.id ?? 'creep_outlaw')
+          : heroTexture(actor.basicId, actor.schoolId));
       const view =
-        this.actors.get(id) ?? this.createActor(id, actor.x, actor.y, enemy);
+        this.actors.get(id) ??
+        this.createActor(
+          id,
+          actor.x,
+          actor.y,
+          enemy,
+          enemy ? texture : heroTexture(actor.basicId, actor.schoolId),
+        );
+      view.creepArt = art;
+      if (actor.hp > 0 && view.lastHp <= 0) view.playback = new CreepPlayback();
+      view.lastHp = actor.hp;
       const weight = Math.min(1, delta / 45);
       view.sprite
         .setPosition(
@@ -135,27 +244,69 @@ export class ArenaScene extends Phaser.Scene {
           Math.round(Phaser.Math.Linear(view.sprite.y, actor.y, weight)),
         )
         .setDepth(view.sprite.y);
-      const texture = enemy ? 'creep_outlaw' : heroTexture(actor.basicId);
       if (view.sprite.texture.key !== texture)
         view.sprite
-          .setTexture(texture, 'idle_down_0')
-          .setOrigin(...actorFootPivot(this, texture));
-      const key = `${texture}:${actor.pose}:${facing(actor.fx, actor.fy)}`;
+          .setTexture(texture, cast ? cast.firstFrame : 'idle_down_0')
+          .setOrigin(...(cast?.origin ?? actorFootPivot(this, texture)));
+      const direction = facing(actor.fx, actor.fy);
+      // Keep this prototype's authored one-shots complete across a short/late
+      // network pose. This never changes movement, combat or server clocks.
+      const authoredMonk =
+        !enemy && !cast && texture.startsWith('hero_thieu_lam');
+      const pose =
+        art || authoredMonk
+          ? view.playback.resolve(
+              actor.hp <= 0 ? 'death' : actor.pose,
+              direction,
+              this.time.now,
+              (state) => this.creepDuration(texture, state, direction),
+            )
+          : { state: actor.pose, direction };
+      const key =
+        cast?.animation ?? `${texture}:${pose.state}:${pose.direction}`;
+      if (!enemy) view.sprite.setScale(cast?.scale ?? 1);
+      if (art) {
+        const alpha = view.playback.alpha(this.time.now, art.wave === 10);
+        view.sprite.setAlpha(alpha);
+        view.shadow.setAlpha(alpha);
+        view.label.setVisible(false);
+        view.bar.setVisible(actor.hp > 0);
+      }
       if (view.sprite.anims.currentAnim?.key !== key) view.sprite.play(key);
+      if (cast)
+        this.vfx?.observeCharacter(texture, String(view.sprite.frame.name));
+      const states = JSON.parse(actor.statuses ?? '[]') as Array<{
+        kind: string;
+      }>;
+      const labels: Record<string, string> = {
+        silence: 'Câm lặng',
+        disarm: 'Tước vũ khí',
+        slow: 'Chậm',
+      };
+      const controls = states
+        .map((s) => labels[s.kind])
+        .filter((s): s is string => !!s);
       view.label
-        .setText(name)
+        .setVisible(!enemy && actor.hp > 0)
+        .setText(enemy ? '' : [name, ...new Set(controls)].join('\n'))
         .setPosition(view.sprite.x, view.sprite.y + 5)
         .setDepth(view.sprite.y + 0.2);
       view.shadow.setPosition(view.sprite.x, view.sprite.y - 3);
+      if (art)
+        view.shadow.setDisplaySize(
+          Math.max(18, Math.round(art.bodyHeight * 0.6)),
+          8,
+        );
+      const barOffset = art ? art.bodyHeight + 5 : enemy ? 43 : 48;
       view.bar.clear().setDepth(view.sprite.y + 0.1);
       view.bar
         .fillStyle(0x293c37)
-        .fillRect(view.sprite.x - 14, view.sprite.y - (enemy ? 43 : 48), 28, 3);
+        .fillRect(view.sprite.x - 14, view.sprite.y - barOffset, 28, 3);
       view.bar
         .fillStyle(enemy ? 0xcc6e55 : 0x92c589)
         .fillRect(
           view.sprite.x - 14,
-          view.sprite.y - (enemy ? 43 : 48),
+          view.sprite.y - barOffset,
           Math.round((28 * actor.hp) / actor.maxHp),
           3,
         );
@@ -173,6 +324,17 @@ export class ArenaScene extends Phaser.Scene {
     });
     for (const [id, view] of this.actors)
       if (!active.has(id)) {
+        if (view.playback.retain(this.time.now, view.creepArt?.wave === 10)) {
+          const alpha = view.playback.alpha(
+            this.time.now,
+            view.creepArt?.wave === 10,
+          );
+          view.sprite.setAlpha(alpha);
+          view.shadow.setAlpha(alpha);
+          view.bar.setVisible(false);
+          view.label.setVisible(false);
+          continue;
+        }
         view.sprite.destroy();
         view.label.destroy();
         view.shadow.destroy();
@@ -183,42 +345,81 @@ export class ArenaScene extends Phaser.Scene {
           this.followed = '';
         }
       }
-    const shotIds = new Set<string>();
-    state?.projectiles?.forEach((shot, id) => {
-      if (shot.zoneId !== this.zoneId) return;
-      shotIds.add(id);
-      let sprite = this.shots.get(id);
-      if (!sprite) {
-        sprite = this.add.sprite(shot.x, shot.y - 18, 'fire').play('fire_orb');
-        this.shots.set(id, sprite);
-      }
-      sprite
-        .setPosition(Math.round(shot.x), Math.round(shot.y - 18))
-        .setDepth(shot.y + 0.3)
-        .setFlipX(shot.vx < 0);
-    });
-    for (const [id, sprite] of this.shots)
-      if (!shotIds.has(id)) {
-        sprite.destroy();
-        this.shots.delete(id);
-      }
+    this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
+    this.creepEffects?.sync(
+      state,
+      this.zoneId,
+      (id) => this.actors.get(id)?.sprite,
+    );
+  }
+
+  private creepDuration(
+    texture: string,
+    state: string,
+    direction: string,
+  ): number {
+    const anim = this.anims.get(`${texture}:${state}:${direction}`);
+    return anim ? (anim.frames.length * 1000) / anim.frameRate : 0;
+  }
+  private creepAction(
+    id: string,
+    state: 'basic_attack' | 'hurt' | 'death',
+  ): void {
+    const view = this.actors.get(id);
+    if (!view?.creepArt) return;
+    const actor = this.snapshot?.creeps.get(id);
+    const direction = actor
+      ? facing(actor.fx, actor.fy)
+      : (view.playback.hold?.direction ?? 'down');
+    if (
+      view.playback.begin(
+        state,
+        direction,
+        this.time.now,
+        this.creepDuration(view.creepArt.id, state, direction),
+      )
+    )
+      view.sprite.play(`${view.creepArt.id}:${state}:${direction}`);
   }
   combat(event: CombatEvent): void {
     if (!this.ready || event.id <= this.lastEvent) return;
     this.lastEvent = event.id;
+    if (event.kind === 'attack')
+      this.creepAction(event.sourceId, 'basic_attack');
+    if (event.kind === 'hit') this.creepAction(event.targetId, 'hurt');
+    if (event.kind === 'death') this.creepAction(event.targetId, 'death');
+    const source = this.snapshot?.creeps.get(event.sourceId);
+    const impact =
+      event.kind === 'hit' && source
+        ? arenaCreepArt(
+            this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest,
+            source.invasionWave,
+            source.zoneId,
+          )?.impact
+        : undefined;
+    if (impact) {
+      this.creepEffects?.contact(impact, event.x, event.y);
+      this.impacts.push({
+        id: impact,
+        sourceId: event.sourceId,
+        targetId: event.targetId,
+      });
+      if (this.impacts.length > 60) this.impacts.shift();
+    } else this.vfx?.event(event);
+    // A fast school can begin another valid A before the old server pose
+    // returns to idle. Restart only on a new authoritative attack, never hits.
+    if (event.kind === 'attack') {
+      const sprite = this.actors.get(event.sourceId)?.sprite;
+      if (sprite?.anims.currentAnim?.key.includes(':basic_attack:'))
+        sprite.anims.restart();
+    }
     if (event.kind === 'hit') {
-      const effect = this.add
-        .sprite(Math.round(event.x), Math.round(event.y - 18), 'fire')
-        .setDepth(event.y + 0.5)
-        .play('fire_impact');
-      if (event.abilityId === 'cuong_long_loan_vu') effect.setScale(2);
-      effect.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () =>
-        effect.destroy(),
-      );
       this.damage?.hit(
         event,
         !!this.snapshot?.players.has(event.targetId),
-        event.targetId === 'statue' ? 160 : undefined,
+        event.targetId === 'statue'
+          ? 160
+          : this.actors.get(event.targetId)?.creepArt?.bodyHeight,
       );
       if (event.targetId === 'statue') {
         const statue = this.children.getByName(
@@ -247,8 +448,11 @@ export class ArenaScene extends Phaser.Scene {
     const unit = this.cameras.main.getWorldPoint(1, 0);
     return {
       ready: this.ready,
+      sceneTime: this.time.now,
       zoneId: this.zoneId,
       damage: this.damage?.inspect(),
+      skills: this.vfx?.inspect(),
+      creepEffects: this.creepEffects?.inspect(),
       interactions: this.children.list
         .filter((o) => o.name === 'dungeon-exit')
         .map((o) => {
@@ -259,6 +463,28 @@ export class ArenaScene extends Phaser.Scene {
       zoom: this.cameras.main.zoom,
       roundPixels: this.cameras.main.roundPixels,
       camera: { x: this.cameras.main.scrollX, y: this.cameras.main.scrollY },
+      completedAnimations: this.completedAnimations.map((a) => ({ ...a })),
+      observedHeroFrames: Object.fromEntries(
+        [...this.observedHeroFrames].map(([key, frames]) => [key, [...frames]]),
+      ),
+      observedCreepFrames: Object.fromEntries(
+        [...this.observedCreepFrames].map(([key, frames]) => [
+          key,
+          [...frames],
+        ]),
+      ),
+      impacts: this.impacts.map((a) => ({ ...a })),
+      arenaCreeps: (
+        this.cache.json.get('arena_creeps_manifest') as
+          ArenaCreepManifest | undefined
+      )?.assets.map((a) => ({
+        id: a.id,
+        wave: a.wave,
+        texture: this.textures.exists(a.id),
+        animations: a.animations.map(
+          (v) => `${a.id}:${v.state}:${v.direction}`,
+        ),
+      })),
       actors: [...this.actors].map(([id, view]) => ({
         id,
         x: view.sprite.x,
@@ -267,6 +493,14 @@ export class ArenaScene extends Phaser.Scene {
         animation: view.sprite.anims.currentAnim?.key,
         frame: view.sprite.frame.name,
         texture: view.sprite.texture.key,
+        origin: [view.sprite.originX, view.sprite.originY],
+        scale: [view.sprite.scaleX, view.sprite.scaleY],
+        alpha: view.sprite.alpha,
+        playing: view.sprite.anims.isPlaying,
+        wave: view.creepArt?.wave,
+        hp: view.lastHp,
+        label: { text: view.label.text, visible: view.label.visible },
+        healthBarVisible: view.bar.visible,
       })),
       trees: this.trees.map((tree) => ({
         x: tree.x,

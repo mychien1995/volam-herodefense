@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-30",
+  "uniqueScenarios": 9,
+  "allLatestResultsPassed": true,
+  "initialRun": {
+    "passed": 8,
+    "failed": 1
+  },
+  "intermediateFocusedRetry": {
+    "passed": 0,
+    "failed": 1
+  },
+  "finalFocusedRerun": {
+    "passed": 2,
+    "failed": 0
+  },
+  "failureResolution": "Test-only: per-step rounded interpolation can settle one pixel from the server endpoint. Require stationary rendered coordinates, exact no-drift across idle frames, and <=2px renderer/server offset. Production renderer unchanged.",
+  "scenarios": [
+    {
+      "title": "fixed follow camera, eight-way movement and foreground occlusion",
+      "file": "gameplay.spec.ts",
+      "status": "passed",
+      "report": "playwright_results_initial.json"
+    },
+    {
+      "title": "two clients agree on combat, manual cadence, skills and progression",
+      "file": "gameplay.spec.ts",
+      "status": "passed",
+      "report": "playwright_results_initial.json"
+    },
+    {
+      "title": "ranged projectile uses a fixed trajectory and original effect frames",
+      "file": "gameplay.spec.ts",
+      "status": "passed",
+      "report": "playwright_results_initial.json"
+    },
+    {
+      "title": "real PNG animation registry covers two actors, six states and four directions",
+      "file": "gameplay.spec.ts",
+      "status": "passed",
+      "report": "playwright_results_initial.json"
+    },
+    {
+      "title": "Võ Đang both weapon atlases play all 24 authored tags in Phaser",
+      "file": "vo-dang-art.spec.ts",
+      "status": "passed",
+      "report": "playwright_results_initial.json"
+    },
+    {
+      "title": "Võ Đang quyen real match: four facings, transitions and shared authority",
+      "file": "vo-dang-art.spec.ts",
+      "status": "passed",
+      "report": "playwright_results_v01.json"
+    },
+    {
+      "title": "Võ Đang Kiếm art-review variant real match: four facings, transitions and shared authority",
+      "file": "vo-dang-art.spec.ts",
+      "status": "passed",
+      "report": "playwright_results_v01.json"
+    },
+    {
+      "title": "Six-player mixed-school scene preserves Võ Đang scale and feet depth",
+      "file": "vo-dang-art.spec.ts",
+      "status": "passed",
+      "report": "playwright_results_initial.json"
+    },
+    {
+      "title": "Võ Đang feet sort in front of and behind the actual perimeter tree",
+      "file": "vo-dang-art.spec.ts",
+      "status": "passed",
+      "report": "playwright_results_initial.json"
+    }
+  ],
+  "recordingPolicy": {
+    "video": "off",
+    "trace": "off",
+    "evidence": "PNG and sampled frame/state JSON only"
+  }
+}

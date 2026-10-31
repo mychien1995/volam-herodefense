@@ -1,0 +1,111 @@
+<!doctype html><meta charset="utf-8"><title>Cái Bang skill animation review</title>
+<style>html,body{margin:0;background:#241f1b;font:14px system-ui;color:#ffe4b0}canvas{display:block;image-rendering:pixelated}#controls{position:absolute;left:10px;top:8px;z-index:2;background:#281d14e8;padding:6px 10px;border:1px solid #a77536;display:flex;gap:8px;align-items:center}select,button{background:#38291d;color:#ffe4b0;border:1px solid #88643d;padding:4px}#note{position:absolute;bottom:8px;left:10px;color:#ffe4b0;background:#201912da;padding:3px 8px;pointer-events:none}</style>
+<div id="controls"><select id="skill"></select><select id="mode"><option>arena</option><option>character</option><option>vfx</option><option>combined</option><option>six</option></select><select id="terrain"><option>arena</option><option>light</option><option>dark</option></select><select id="direction"><option>right</option><option>down</option><option>left</option><option>up</option></select><button id="pause">Pause</button></div>
+<div id="note">ISOLATED ASSET VIEWER · visual timings only · no server/gameplay integration · 1 logical px = 2 display px</div>
+<script src="/apps/game-client/node_modules/phaser/dist/phaser.js"></script><script type="module">
+const q=new URLSearchParams(location.search);
+const manifest=await fetch('/assets/exports/skills/cai-bang/production_manifest_v1.json').then(r=>r.json());
+const all=manifest.assets;const skills=[...new Set(all.filter(a=>a.kind==='character').map(a=>a.skillId))];
+const skill=q.get('skill')||skills[0],mode=q.get('mode')||'arena',terrain=q.get('terrain')||'arena',direction=q.get('direction')||'right';
+for(const id of skills){const opt=document.createElement('option');opt.value=id;opt.textContent=id.replaceAll('_',' ');document.querySelector('#skill').append(opt);}
+for(const [id,value] of Object.entries({skill,mode,terrain,direction})){const e=document.querySelector('#'+id);e.value=value;e.onchange=()=>{q.set(id,e.value);location.search=q.toString();};}
+const selected=all.filter(a=>a.skillId===skill||a.skillId==='shared_fire');
+const characters=selected.find(a=>a.kind==='character'),effect=selected.find(a=>a.kind==='vfx'&&a.skillId===skill),shared=selected.find(a=>a.skillId==='shared_fire');
+const tracked=[],errors=[];let sceneRef,paused=false,clock=0;
+window.__SKILL_REVIEW__={ready:false,errors};
+const directions=['right','down','left','up'],vectors={right:[1,0],left:[-1,0],down:[0,1],up:[0,-1]};
+const active=[];
+new Phaser.Game({type:Phaser.AUTO,width:640,height:360,zoom:2,pixelArt:true,roundPixels:true,backgroundColor:'#c6b797',audio:{noAudio:true},scene:{
+preload(){
+ for(const a of selected)this.load.atlas(a.id,'/'+a.sheet,'/'+a.atlas);
+ this.load.image('arena','/assets/exports/arena_v2/ground.png');
+ this.load.atlas('enemy','/sprites/creeps/arena/bandit-grunt/spritesheet.png','/sprites/creeps/arena/bandit-grunt/atlas.json');
+ this.load.on('loaderror',file=>errors.push(file.url));
+},
+create(){
+ sceneRef=this;this.cameras.main.setZoom(1);
+ if(terrain==='arena'&&(mode==='arena'||mode==='six'))this.add.image(-480,-430,'arena').setOrigin(0);
+ else this.cameras.main.setBackgroundColor(terrain==='dark'?'#24372f':'#c6b797');
+ for(const a of selected){this.textures.get(a.id).setFilter(Phaser.Textures.FilterMode.NEAREST);for(const anim of a.animations){
+  const key=a.id+':'+anim.name;
+  this.anims.create({key,frames:anim.frames.map(frame=>({key:a.id,frame})),frameRate:anim.frameRate,repeat:-1});
+ }}
+ this.add.text(8,31,skill.replaceAll('_',' ').toUpperCase()+' / '+mode,{fontFamily:'Arial',fontSize:'10px',color:terrain==='dark'?'#ffe9bf':'#472e19'}).setDepth(1000);
+ const make=(a,anim,x,y,label=true)=>{const s=this.add.sprite(x,y,a.id,anim.frames[0]).setOrigin(...anim.origin).play(a.id+':'+anim.name);tracked.push({sprite:s,asset:a.id,anim});if(label)this.add.text(x-50,y+24,anim.name,{fontFamily:'Arial',fontSize:'8px',color:terrain==='dark'?'#ffe9bf':'#472e19'});return s;};
+ if(mode==='character'){directions.forEach((d,i)=>make(characters,characters.animations.find(a=>a.direction===d),80+i*160,185));}
+ else if(mode==='vfx'){
+  const anims=(q.has('shared')?[shared]:[effect]).flatMap(a=>a.animations.map(anim=>({a,anim})));
+  const cols=q.has('shared')?6:5,rows=Math.ceil(anims.length/cols);
+  anims.forEach(({a,anim},i)=>make(a,anim,320/cols+(i%cols)*(640/cols),85+Math.floor(i/cols)*(245/rows),false));
+ }else{
+  const six=mode==='six';const list=six?[[80,135,'right'],[560,135,'left'],[80,280,'right'],[560,280,'left'],[255,110,'down'],[390,310,'up']]:[[direction==='left'?480:direction==='up'?320:direction==='down'?320:145,direction==='up'?290:direction==='down'?110:230,direction]];
+  for(const [x,y,d] of list){
+   const char=make(characters,characters.animations.find(a=>a.direction===d),x,y,false);
+   const [dx,dy]=vectors[d];const distance=['hoanh_tao_bong','pha_giap_bong','thien_ha_vo_cau'].includes(skill)?52:six?85:skill==='cam_long_cong'?100:skill==='truy_phong_bong'?150:185;const ex=x+dx*distance,ey=y+dy*distance;
+   const enemy=this.add.sprite(ex,ey,'enemy','idle_down_0').setOrigin(.5,.8);
+   active.push({char,enemy,x,y,d,ex,ey});
+  }
+ }
+ window.__SKILL_REVIEW__.ready=true;
+ window.__SKILL_REVIEW__.snapshot=()=>({ready:true,phaser:Phaser.VERSION,skill,mode,terrain,direction,clock,errors,sprites:tracked.filter(t=>t.sprite.active).map(t=>({asset:t.asset,animation:t.anim.name,frame:t.sprite.frame.name,total:t.anim.frameCount,dimensions:[t.sprite.frame.width,t.sprite.frame.height],origin:[t.sprite.originX,t.sprite.originY]})),liveEffects:ephemeral.filter(x=>x.s.active).length});
+ window.__SKILL_REVIEW__.setTime=t=>{paused=true;clock=t;render(t);};
+ document.querySelector('#pause').onclick=()=>{paused=!paused;document.querySelector('#pause').textContent=paused?'Play':'Pause';};
+},
+update(time,delta){if(!paused){clock+=delta;render(clock);}}
+}});
+let ephemeral=[];
+function spriteAt(a,anim,x,y,age){if(!anim||age<0)return;const n=Math.floor(age/anim.durationMsPerFrame);if(!anim.loop&&n>=anim.frames.length)return;const frame=anim.frames[n%anim.frames.length];const s=sceneRef.add.sprite(Math.round(x),Math.round(y),a.id,frame).setOrigin(...anim.origin);ephemeral.push({s});return s;}
+function render(time){
+ if(!sceneRef||!active.length)return;
+ for(const {s}of ephemeral)s.destroy();ephemeral=[];
+ const t=time%(skill==='cuong_long_loan_vu'?4200:2200);
+ for(const actor of active){
+ const {x,y,d,ex,ey,char,enemy}=actor;const [dx,dy]=vectors[d];const ca=characters.animations.find(a=>a.direction===d);char.anims.pause();
+ char.setFrame(ca.frames[Math.min(ca.frames.length-1,Math.floor(t/ca.durationMsPerFrame))]);
+ const get=(prefix,owner=effect)=>owner.animations.find(a=>a.name===prefix+'_'+d)||owner.animations.find(a=>a.name===prefix);
+ const flash=get('palm_flash',shared);
+ if(t<220)spriteAt(shared,flash,x+dx*18,y+dy*12-21,t);
+ const projectile=get('projectile');
+ if(projectile){
+  const speed=skill==='hoa_van_chuong'?360:300;
+  const travel=Math.hypot(ex-x,ey-y)/speed*1000;
+  const delays=skill==='hoa_van_chuong'?[0,100,200]:[0];
+  for(const delay of delays){
+   const age=t-delay;
+   if(age>=0&&age<travel){const dist=age/1000*speed;spriteAt(effect,projectile,x+dx*dist,y+dy*dist-18,age);}
+   else if(age>=travel){spriteAt(effect,get('impact'),ex,ey-18,age-travel);}
+  }
+  if(skill==='cuong_long_loan_vu'&&t>travel&&t<travel+3000){const a=get('burn_flecks',shared);spriteAt(shared,a,ex,ey-2,t);}
+ }else if(['phi_long_tai_thien','hang_long_hoa_vu'].includes(skill)){
+  const age=t-120;const dist=Math.max(0,age)*.24;
+  spriteAt(effect,get('wave'),x+dx*(35+dist),y+dy*(35+dist)-18,age);
+  spriteAt(effect,get('impact'),x+dx*120,y+dy*120-18,t-500);
+ }else if(skill==='khang_long_huu_hoi'){
+  if(t<320)spriteAt(effect,get('activation'),x,y-22,t);
+  else if(t<1600)spriteAt(effect,get('buff'),x,y-22,t-320);
+ }else if(skill==='hoanh_tao_bong'){
+  spriteAt(effect,get('sweep'),x+dx*20,y+dy*20-18,t-70);
+  spriteAt(shared,get('small_impact',shared),ex,ey-18,t-210);
+ }else if(skill==='pha_giap_bong'){
+  spriteAt(effect,get('impact'),ex,ey-18,t-150);
+  spriteAt(effect,get('defense_break'),ex,ey-52,t-210);
+ }else if(skill==='cam_long_cong'){
+  const age=t-100;
+  if(age<360)spriteAt(effect,get('extend'),x+dx*65,y+dy*65-18,age);
+  else spriteAt(effect,get('retract'),x+dx*65,y+dy*65-18,age-360);
+  const pull=Math.max(0,Math.min(1,(age-360)/300))*30;
+  enemy.setPosition(Math.round(ex-dx*pull),Math.round(ey-dy*pull));
+ }else if(skill==='truy_phong_bong'){
+  const move=Math.max(0,Math.min(110,(t-80)*.45));
+  char.setPosition(Math.round(x+dx*move),Math.round(y+dy*move));
+  spriteAt(effect,get('speed'),x+dx*(move-15),y+dy*(move-15)-18,t-80);
+  spriteAt(shared,get('small_impact',shared),x+dx*150,y+dy*150-18,t-330);
+  spriteAt(effect,get('stun'),ex,ey-52,t-330);
+ }else if(skill==='thien_ha_vo_cau'){
+  if(t>60&&t<530)spriteAt(effect,get('whirlwind'),x,y-12,(t-60)%320);
+  spriteAt(effect,get('impact'),x+dx*30,y+dy*30-4,t-530);
+ }
+ enemy.setDepth(ey);char.setDepth(y+.01);
+ }
+}
+</script>

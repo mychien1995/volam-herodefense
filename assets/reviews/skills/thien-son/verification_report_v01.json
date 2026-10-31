@@ -1,0 +1,57 @@
+{
+  "status": "PASS_after_focused_fixture_rerun",
+  "scope": "Skill art, actual exports and actual Phaser preview; gameplay implementation remains pending",
+  "commands": [
+    {
+      "command": "node assets/source/skills/thien-son/build_v01.mjs --assemble",
+      "result": "PASS: 20 components, 146 tags, 534 cels, 13 icons; original approved art guarded"
+    },
+    {
+      "command": "node assets/source/skills/thien-son/build_icons_v01.mjs",
+      "result": "PASS: 13 icon PNGs, editable sources, family PNG/hash-JSON atlas"
+    },
+    {
+      "command": "python -X utf8 assets/source/skills/thien-son/validate_v01.py",
+      "result": "PASS: source/atlas equality, binary transparency, distinct frames, bounds, pivots, timing and 17 approved reused cels"
+    },
+    {
+      "command": "pnpm check:final --config playwright.thien-son-skills.config.ts tests/e2e/thien-son-skills.spec.ts tests/e2e/gameplay.spec.ts --grep \"Thiên Sơn skill art|two clients agree|ranged projectile\"",
+      "result": "Typechecks, 2 workflow tests, 174 unit/integration tests, build and all asset validators PASS; 4 of 5 browser scenarios PASS. Legacy two-client fixture failed because its Q/W slots were empty under the normal M3B fixture. Failed run retained."
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit",
+      "result": "PASS after browser-fixture correction"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.thien-son-skills.config.ts tests/e2e/gameplay.spec.ts --grep \"two clients agree\"",
+      "result": "PASS: 1 scenario after matching the existing development legacy-loadout fixture. Final dedicated ports: client5196, server2596. One intermediate setup attempt used a port occupied by another task and ran no tests; that service was not borrowed or stopped."
+    },
+    {
+      "command": "node assets/source/skills/thien-son/verify_all_facings_v01.mjs",
+      "result": "PASS: ten active skills composed in all four facings, offsets/depth/recovery/cleanup, plus light/dark QA PNGs; no room connection."
+    },
+    {
+      "command": "node assets/source/skills/thien-son/make_overview_v01.mjs",
+      "result": "PASS: contact overview from actual PNG screenshots at native display scale; not a recording"
+    }
+  ],
+  "unitIntegrationTestsPassed": 174,
+  "workflowTestsPassed": 2,
+  "uniqueBrowserScenariosPassed": 5,
+  "phaserVersion": "4.2.1",
+  "animationTagsObserved": 146,
+  "exportedCels": 534,
+  "iconsAtActualHudCssSize": 64,
+  "fourFacingComposedActiveSkills": 10,
+  "protectedAndConceptFilesUnchanged": 213,
+  "knownWarnings": [
+    "Existing large client bundle warning; build passed."
+  ],
+  "limitations": [
+    "Visual assets verified in preview; gameplay implementation pending.",
+    "Six-actor render is a presentation readability check, not a six-client multiplayer or performance benchmark.",
+    "Authoritative Thiên Sơn skills, passive bonuses, costs, cooldowns, hitboxes and loadout integration were not implemented or combat-tested.",
+    "New production art remains prototype pending explicit final director approval."
+  ],
+  "recordingsGenerated": false
+}

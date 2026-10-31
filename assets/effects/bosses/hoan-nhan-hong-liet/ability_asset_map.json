@@ -1,0 +1,94 @@
+{
+  "attackSetCount": 7,
+  "passiveSetCount": 1,
+  "abilities": {
+    "dai_mac_chien_dao": {
+      "nameVi": "Đại Mạc Chiến Đao",
+      "character": "basic_attack_{direction}",
+      "vfx": [
+        "saber_slash",
+        "weapon_impact_dust_sparks"
+      ]
+    },
+    "dung_nham_liet_dia": {
+      "nameVi": "Dung Nham Liệt Địa",
+      "character": "ground_slam_{direction}",
+      "vfx": [
+        "fissure_warning",
+        "ground_rumble",
+        "traveling_fissure",
+        "lava_eruption",
+        "burning_impact"
+      ]
+    },
+    "hoa_son_bao_phat": {
+      "nameVi": "Hỏa Sơn Bạo Phát",
+      "character": "lava_cast_{direction}",
+      "vfx": [
+        "eruption_warning",
+        "ground_rumble",
+        "lava_eruption",
+        "molten_splash",
+        "burning_ground"
+      ]
+    },
+    "liet_diem_phong_toa": {
+      "nameVi": "Liệt Diễm Phong Tỏa",
+      "character": "lava_cast_{direction}",
+      "vfx": [
+        "wall_warning",
+        "safe_gap_boundaries",
+        "lava_wall_rise",
+        "lava_wall_dissipate"
+      ]
+    },
+    "hoa_tien_te_phat": {
+      "nameVi": "Hỏa Tiễn Tề Phát",
+      "character": "command_{direction}",
+      "vfx": [
+        "military_signal",
+        "volley_warning",
+        "flaming_arrow",
+        "arrow_impact",
+        "burning_ground"
+      ]
+    },
+    "thiet_ky_trieu_binh": {
+      "nameVi": "Thiết Kỵ Triệu Binh",
+      "character": "command_{direction}",
+      "vfx": [
+        "military_signal",
+        "arrival_dust",
+        "rally_formation"
+      ]
+    },
+    "van_ly_nham_hoa": {
+      "nameVi": "Vạn Lý Nham Hỏa",
+      "character": "ultimate_charge_{direction}",
+      "vfx": [
+        "ultimate_warning_cross",
+        "ultimate_warning_sectors",
+        "ultimate_eruption",
+        "expanding_shockwave",
+        "burning_ground",
+        "ultimate_ending"
+      ]
+    },
+    "hac_nham_chien_giap": {
+      "nameVi": "Hắc Nham Chiến Giáp",
+      "character": "low_hp_idle_{direction}",
+      "vfx": [
+        "armor_glow",
+        "defense_impact"
+      ]
+    }
+  },
+  "reuseDisclosures": [
+    "Skills2 and3 share lava_cast character animation.",
+    "Skills4 and5 share command character animation.",
+    "Footman impact reuses weapon_impact_dust_sparks.",
+    "Archer normal/flaming arrows and arrow_impact use the boss army VFX atlas."
+  ],
+  "balanceValues": null,
+  "authority": "Presentation only. No trigger, damage, cooldown, movement or collision logic."
+}
