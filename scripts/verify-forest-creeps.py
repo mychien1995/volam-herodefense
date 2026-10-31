@@ -6,6 +6,7 @@ R=Path(__file__).resolve().parents[1]
 C=R/'assets/sprites/creeps/dungeons/forest'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def verify_actor(m):
+    # Immutable production-delivery metadata; current approval is in the separate lock.
     assert m['status']=='candidate' and not m['directorApproved'] and not m['runtimeIntegrated']
     assert (R/m['sourceConcept']).is_file()
     atlas=json.loads((R/m['atlas']).read_text('utf8'))
@@ -89,13 +90,23 @@ def main():
             dest=public/'effects'/name
             if dest.exists():assert sha(dest)==sha(R/m[key]),str(dest)
     runtime_path=public/'runtime-manifest.json'
+    approval_path=R/'assets/approved_forest_creeps.lock.json'
+    approved=False
+    if approval_path.exists():
+        approval=json.loads(approval_path.read_text('utf8'))
+        assert approval['approvalEvidence']=='I approved the artwork' and approval['finalRuntimeArtApproved']
+        assert len(approval['archetypeIds'])==6
+        for path,h in approval['files'].items():assert sha(R/path)==h,path
+        protected['approved_forest_creeps.lock.json']=len(approval['files'])
+        approved=True
     runtime_summary=None
     if runtime_path.exists():
         runtime=json.loads(runtime_path.read_text('utf8'))
-        assert runtime['status']=='candidate' and not runtime['directorApproved'] and not runtime['normalForestRosterIntegrated']
+        assert runtime['status']==('approved' if approved else 'candidate') and runtime['directorApproved']==approved and not runtime['normalForestRosterIntegrated']
         assert len(runtime['assets'])==6 and len(runtime['effects'])==28
         for path,h in runtime['files'].items():assert sha(R/path)==h,path
         for a in runtime['assets']:
+            assert a['directorApproved']==approved and a['status']==('approved' if approved else 'candidate')
             assert a['id']=='forest_'+a['archetypeId'] and a['displayScale']==1
             source_atlas=json.loads((R/a['atlas']).read_text('utf8'))
             for anim in a['animations']:
@@ -105,11 +116,11 @@ def main():
             original=next(s for s in original_fx['sequences'] if 'forest_fx:'+s['name']==a['id'])
             for key in ['frames','origin','offset','placement','repeat','stage','ownerTypeId']:assert a[key]==original[key]
             assert a['durations']==[original['durationMs']]*4
-        runtime_summary={'actors':6,'effects':28,'normalForestRosterIntegrated':False,'directorApproved':False}
-    report={'status':'PASS','scope':'Static files only; candidate art, no gameplay or director approval',
+        runtime_summary={'actors':6,'effects':28,'normalForestRosterIntegrated':False,'directorApproved':approved}
+    report={'status':'PASS','scope':'Static files and explicit approval lock only; no gameplay acceptance' if approved else 'Static files only; candidate art, no gameplay or director approval',
             'actors':results,'characterFrames':sum(a['frames'] for a in results),'effectFrames':effect_count,'protectedInputs':protected}
     if runtime_summary:report['runtimeAdapter']=runtime_summary
-    out=R/('docs/evidence/forest-creep-runtime-2026-10-31/static-validation.json' if runtime_summary else 'assets/reviews/forest_creeps_v01/static_validation.json')
+    out=R/('docs/evidence/forest-creep-approval-2026-10-31/static-validation.json' if approved else 'docs/evidence/forest-creep-runtime-2026-10-31/static-validation.json' if runtime_summary else 'assets/reviews/forest_creeps_v01/static_validation.json')
     out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n','utf8')
     print(json.dumps(report,ensure_ascii=False),flush=True)
 if __name__=='__main__':main()

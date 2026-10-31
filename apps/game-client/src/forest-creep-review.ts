@@ -69,6 +69,9 @@ class ForestReview extends ArenaScene {
     const manifest = this.cache.json.get(
       'forest_creeps_manifest',
     ) as ForestCreepManifest;
+    if (manifest.assets.every((a) => a.status === 'approved'))
+      document.querySelector('#review-title strong')!.textContent =
+        'Rừng Trúc · APPROVED ART REVIEW';
     this.roster = manifest.assets.filter(
       (a) => !query.get('enemy') || a.archetypeId === query.get('enemy'),
     );

@@ -9,6 +9,32 @@ export function prepareForestCreepReview() {
     root,
   );
   if (!existsSync(source)) return;
+  const approvalPath = new URL('assets/approved_forest_creeps.lock.json', root);
+  const approval = existsSync(approvalPath)
+    ? JSON.parse(readFileSync(approvalPath, 'utf8'))
+    : undefined;
+  if (approval)
+    for (const [path, expected] of Object.entries(approval.files)) {
+      const actual = createHash('sha256')
+        .update(readFileSync(new URL(path, root)))
+        .digest('hex');
+      if (actual !== expected)
+        throw Error('Approved Forest artwork changed: ' + path);
+    }
+  const approved = approval?.finalRuntimeArtApproved === true;
+  writeIfChanged(
+    new URL('apps/game-client/src/forest-art-approval.generated.json', root),
+    JSON.stringify(
+      {
+        approvedTypes: approved ? approval.archetypeIds : [],
+        approvalLock: approved
+          ? 'assets/approved_forest_creeps.lock.json'
+          : null,
+      },
+      null,
+      2,
+    ) + '\n',
+  );
   const manifest = JSON.parse(readFileSync(source, 'utf8'));
   const dest = new URL(
     'apps/game-client/public/assets/forest_creep_review/',
@@ -53,6 +79,8 @@ export function prepareForestCreepReview() {
     });
     assets.push({
       ...asset,
+      status: approved ? 'approved' : asset.status,
+      directorApproved: approved,
       archetypeId: asset.typeId,
       slug: asset.typeId,
       wave: 0,
@@ -129,8 +157,8 @@ export function prepareForestCreepReview() {
     new URL('runtime-manifest.json', dest),
     JSON.stringify(
       {
-        status: 'candidate',
-        directorApproved: false,
+        status: approved ? 'approved' : 'candidate',
+        directorApproved: approved,
         normalForestRosterIntegrated: false,
         assets,
         effects: effectsList,

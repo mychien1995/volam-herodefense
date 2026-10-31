@@ -1,4 +1,5 @@
 import type { ArenaCreepArt, ArenaCreepManifest } from './arena-creeps.js';
+import approval from './forest-art-approval.generated.json' with { type: 'json' };
 
 export const forestTypes = [
   'truc_xa',
@@ -9,15 +10,24 @@ export const forestTypes = [
   'truc_yeu',
 ] as const;
 export type ForestType = (typeof forestTypes)[number];
+export const forestArtStatus = (type: string): 'approved' | 'candidate' =>
+  approval.approvedTypes.includes(type) ? 'approved' : 'candidate';
 export function forestArtNotice(types: string[]): string {
   const known = types.filter((type) =>
     forestTypes.includes(type as ForestType),
   ).length;
+  const label = types
+    .filter((type) => forestTypes.includes(type as ForestType))
+    .every((type) => forestArtStatus(type) === 'approved')
+    ? 'approved art'
+    : 'candidate';
   return known === 0
     ? 'Creep: placeholder · server chưa cấp loại Rừng Trúc'
     : known < types.length
-      ? 'Creep: candidate + placeholder · thiếu loại server'
-      : 'Creep: candidate · chưa được duyệt hình ảnh';
+      ? `Creep: ${label} + placeholder · thiếu loại server`
+      : label === 'approved art'
+        ? 'Creep: approved art · Rừng Trúc'
+        : 'Creep: candidate · chưa được duyệt hình ảnh';
 }
 export interface ForestCreepManifest extends ArenaCreepManifest {
   assets: Array<

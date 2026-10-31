@@ -166,6 +166,8 @@ def main():
     parser.add_argument('--enemy', choices=list(ENEMIES))
     parser.add_argument('--effects',action='store_true')
     args=parser.parse_args()
+    if (ROOT/'assets/approved_forest_creeps.lock.json').exists():
+        raise SystemExit('Approved Forest v01 is locked. Export a separately reviewed revision; do not overwrite approved files.')
     REVIEW.mkdir(parents=True,exist_ok=True)
     selected=[] if args.effects else [args.enemy] if args.enemy else list(ENEMIES)
     for key in selected: package_actor(key)

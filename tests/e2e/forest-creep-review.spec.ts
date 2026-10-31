@@ -1,5 +1,9 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync, mkdirSync, writeFileSync, existsSync } from 'node:fs';
+import {
+  forestTypes,
+  forestArtStatus,
+} from '../../apps/game-client/src/forest-creeps.js';
 const root = 'assets/sprites/creeps/dungeons/forest/';
 interface Animation {
   state: string;
@@ -61,7 +65,7 @@ test('isolated forest candidate: directional cycles, pivots, depth, VFX and six-
         sequences: Array<{ name: string; frames: string[]; repeat: number }>;
       })
     : undefined;
-  const out = `docs/evidence/forest-creep-runtime-2026-10-31/${players === 2 ? 'iteration-2' : 'final-6'}`;
+  const out = `${process.env['FOREST_EVIDENCE_DIR'] ?? 'docs/evidence/forest-creep-runtime-2026-10-31'}/${players === 2 ? 'iteration-2' : 'final-6'}`;
   mkdirSync(out, { recursive: true });
   const contexts = await Promise.all(
     Array.from({ length: players }, () =>
@@ -258,7 +262,9 @@ test('isolated forest candidate: directional cycles, pivots, depth, VFX and six-
           naturalCombat: false,
           rewards: false,
           gameplayIntegration: false,
-          directorApproved: false,
+          directorApproved: forestTypes.every(
+            (type) => forestArtStatus(type) === 'approved',
+          ),
           coverage,
           durations,
           effectCoverage,
