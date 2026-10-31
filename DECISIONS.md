@@ -10,6 +10,10 @@ The user explicitly confirms retaining current regular4/ultimate3 caps, level ga
 
 # Approved decisions & assumptions register
 
+## Beach integration request — 2026-11-01
+
+The user explicitly authorizes Beach environment and six-creep integration exclusively in worktree/branch `wip/m3d/beach-dungeon`. The existing **Biển** card now selects authoritative destination `sea`, with separate private/shared instances. Existing forest/desert behavior, generic M2A tuning, server authority and Space-at-physical-door controls remain. No species-specific cannon/water/poison/summon profiles were supplied, so retained appearances reuse the common creep mechanics. The documented empty Thủy Quỷ death cel is corrected from its retained original raster; no bulk artwork is generated and runtime director approval stays pending. See `docs/BEACH_INTEGRATION.md`.
+
 ## Desert integration request — 2026-10-31
 
 The user explicitly authorizes integrating the retained Sa Mạc environment and six creep appearances into Phaser, with the existing server-authoritative dungeon systems and in-viewport menu. Sa Mạc now supports separate private/shared instances; forest remains the default destination. This supersedes earlier descriptions of Sa Mạc as unavailable. Retained artwork is reused without bulk generation or automatic ART-01/runtime director approval. No species-specific stats/abilities were supplied: the six appearances reuse the current M2A generic creep profile and rewards, with specialized ranged/poison/area mechanics pending authored definitions. See `docs/DESERT_INTEGRATION.md`.

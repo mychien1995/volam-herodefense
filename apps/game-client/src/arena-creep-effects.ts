@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { isBeachZone } from './beach-art.js';
 import type { LobbyState } from '@volam/game-protocol';
 import { arenaCreepArt, type ArenaCreepManifest } from './arena-creeps.js';
 import {
@@ -90,7 +91,7 @@ export class ArenaCreepEffects {
     if (
       !state ||
       state.phase === 'DEFEAT' ||
-      (zone !== 'arena' && !isForestZone(zone))
+      (zone !== 'arena' && !isForestZone(zone) && !isBeachZone(zone))
     ) {
       this.clear();
       return;

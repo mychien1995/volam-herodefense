@@ -1,0 +1,3127 @@
+{
+  "status": "prototype_pending_runtime_director_review",
+  "provenance": {
+    "method": "Original OpenAI built-in image_gen raster artwork; connected-alpha extraction, nearest sampling, binary alpha cleanup, anchored atlas packing, Aseprite editable sources.",
+    "license": "Original AI-assisted project artwork; no third-party pack or exclusive copyright claim.",
+    "prompts": "assets/sprites/creeps/dungeons/beach/source/generation_prompts_v01.json"
+  },
+  "sourceManifest": "assets/sprites/creeps/dungeons/beach/beach_manifest_v01.json",
+  "gameplay": "Retained M2A generic melee profiles; no cannon, water spell, poison or aquatic movement mechanics supplied.",
+  "assets": [
+    {
+      "id": "beach_cua_khong_lo",
+      "archetypeId": "cua_khong_lo",
+      "wave": 0,
+      "slug": "cua_khong_lo",
+      "nameVi": "Cua Khổng Lồ",
+      "status": "prototype",
+      "bodyHeight": 48,
+      "footPivot": [
+        0.5,
+        0.828125
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "down",
+          "frames": [
+            "hurt_down_0",
+            "hurt_down_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "down",
+          "frames": [
+            "death_down_0",
+            "death_down_1",
+            "death_down_2",
+            "death_down_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "left",
+          "frames": [
+            "hurt_left_0",
+            "hurt_left_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "left",
+          "frames": [
+            "death_left_0",
+            "death_left_1",
+            "death_left_2",
+            "death_left_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "right",
+          "frames": [
+            "hurt_right_0",
+            "hurt_right_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "right",
+          "frames": [
+            "death_right_0",
+            "death_right_1",
+            "death_right_2",
+            "death_right_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "up",
+          "frames": [
+            "hurt_up_0",
+            "hurt_up_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "up",
+          "frames": [
+            "death_up_0",
+            "death_up_1",
+            "death_up_2",
+            "death_up_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/beach/cua_khong_lo_concept_v01.png",
+      "sourceConceptSha256": "b6e39f332c12ee1244628b05ac13934980fbc4c4010f2c8bfc6cd5f8603a14a6"
+    },
+    {
+      "id": "beach_hai_xa",
+      "archetypeId": "hai_xa",
+      "wave": 0,
+      "slug": "hai_xa",
+      "nameVi": "Hải Xà",
+      "status": "prototype",
+      "bodyHeight": 48,
+      "footPivot": [
+        0.5,
+        0.828125
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "down",
+          "frames": [
+            "hurt_down_0",
+            "hurt_down_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "down",
+          "frames": [
+            "death_down_0",
+            "death_down_1",
+            "death_down_2",
+            "death_down_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "left",
+          "frames": [
+            "hurt_left_0",
+            "hurt_left_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "left",
+          "frames": [
+            "death_left_0",
+            "death_left_1",
+            "death_left_2",
+            "death_left_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "right",
+          "frames": [
+            "hurt_right_0",
+            "hurt_right_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "right",
+          "frames": [
+            "death_right_0",
+            "death_right_1",
+            "death_right_2",
+            "death_right_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "up",
+          "frames": [
+            "hurt_up_0",
+            "hurt_up_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "up",
+          "frames": [
+            "death_up_0",
+            "death_up_1",
+            "death_up_2",
+            "death_up_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/beach/hai_xa_concept_v01.png",
+      "sourceConceptSha256": "75c6f3fdc8d3014363ab1e991ca19e867cd8382226b91156db4e2deb8387c30c"
+    },
+    {
+      "id": "beach_hai_tac",
+      "archetypeId": "hai_tac",
+      "wave": 0,
+      "slug": "hai_tac",
+      "nameVi": "Hải Tặc",
+      "status": "prototype",
+      "bodyHeight": 48,
+      "footPivot": [
+        0.5,
+        0.828125
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "down",
+          "frames": [
+            "hurt_down_0",
+            "hurt_down_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "down",
+          "frames": [
+            "death_down_0",
+            "death_down_1",
+            "death_down_2",
+            "death_down_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "left",
+          "frames": [
+            "hurt_left_0",
+            "hurt_left_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "left",
+          "frames": [
+            "death_left_0",
+            "death_left_1",
+            "death_left_2",
+            "death_left_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "right",
+          "frames": [
+            "hurt_right_0",
+            "hurt_right_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "right",
+          "frames": [
+            "death_right_0",
+            "death_right_1",
+            "death_right_2",
+            "death_right_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "up",
+          "frames": [
+            "hurt_up_0",
+            "hurt_up_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "up",
+          "frames": [
+            "death_up_0",
+            "death_up_1",
+            "death_up_2",
+            "death_up_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/beach/hai_tac_concept_v01.png",
+      "sourceConceptSha256": "efcfb4b6247cb850981c4801de60d26271f5e70b6174cae2cec5b6dda4377a0e"
+    },
+    {
+      "id": "beach_hai_tac_hoa_phao",
+      "archetypeId": "hai_tac_hoa_phao",
+      "wave": 0,
+      "slug": "hai_tac_hoa_phao",
+      "nameVi": "Hải Tặc Hỏa Pháo",
+      "status": "prototype",
+      "bodyHeight": 48,
+      "footPivot": [
+        0.5,
+        0.828125
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "down",
+          "frames": [
+            "hurt_down_0",
+            "hurt_down_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "down",
+          "frames": [
+            "death_down_0",
+            "death_down_1",
+            "death_down_2",
+            "death_down_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "left",
+          "frames": [
+            "hurt_left_0",
+            "hurt_left_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "left",
+          "frames": [
+            "death_left_0",
+            "death_left_1",
+            "death_left_2",
+            "death_left_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "right",
+          "frames": [
+            "hurt_right_0",
+            "hurt_right_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "right",
+          "frames": [
+            "death_right_0",
+            "death_right_1",
+            "death_right_2",
+            "death_right_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "up",
+          "frames": [
+            "hurt_up_0",
+            "hurt_up_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "up",
+          "frames": [
+            "death_up_0",
+            "death_up_1",
+            "death_up_2",
+            "death_up_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "aim",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "fire",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "aim",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "fire",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "aim",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "fire",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "aim",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "fire",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/beach/hai_tac_hoa_phao_concept_v01.png",
+      "sourceConceptSha256": "afb011be01182f8adc7bf22ea45b725de559eff31ac89639595ff04308715154"
+    },
+    {
+      "id": "beach_thuy_quy",
+      "archetypeId": "thuy_quy",
+      "wave": 0,
+      "slug": "thuy_quy",
+      "nameVi": "Thủy Quỷ",
+      "status": "prototype",
+      "bodyHeight": 48,
+      "footPivot": [
+        0.5,
+        0.828125
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "down",
+          "frames": [
+            "hurt_down_0",
+            "hurt_down_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "down",
+          "frames": [
+            "death_down_0",
+            "death_down_1",
+            "death_down_2",
+            "death_down_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "left",
+          "frames": [
+            "hurt_left_0",
+            "hurt_left_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "left",
+          "frames": [
+            "death_left_0",
+            "death_left_1",
+            "death_left_2",
+            "death_left_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "right",
+          "frames": [
+            "hurt_right_0",
+            "hurt_right_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "right",
+          "frames": [
+            "death_right_0",
+            "death_right_1",
+            "death_right_2",
+            "death_right_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "up",
+          "frames": [
+            "hurt_up_0",
+            "hurt_up_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "up",
+          "frames": [
+            "death_up_0",
+            "death_up_1",
+            "death_up_2",
+            "death_up_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/beach/thuy_quy_concept_v01.png",
+      "sourceConceptSha256": "8b71e5a4ebf12fad025981c2dcadfa5e7626fb92a25931618a0980e4bbf7cca2"
+    },
+    {
+      "id": "beach_hai_vu",
+      "archetypeId": "hai_vu",
+      "wave": 0,
+      "slug": "hai_vu",
+      "nameVi": "Hải Vu",
+      "status": "prototype",
+      "bodyHeight": 48,
+      "footPivot": [
+        0.5,
+        0.828125
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "down",
+          "frames": [
+            "hurt_down_0",
+            "hurt_down_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "down",
+          "frames": [
+            "death_down_0",
+            "death_down_1",
+            "death_down_2",
+            "death_down_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "left",
+          "frames": [
+            "hurt_left_0",
+            "hurt_left_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "left",
+          "frames": [
+            "death_left_0",
+            "death_left_1",
+            "death_left_2",
+            "death_left_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "right",
+          "frames": [
+            "hurt_right_0",
+            "hurt_right_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "right",
+          "frames": [
+            "death_right_0",
+            "death_right_1",
+            "death_right_2",
+            "death_right_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": -1,
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "up",
+          "frames": [
+            "hurt_up_0",
+            "hurt_up_1"
+          ],
+          "frameRate": 7.142857142857143,
+          "repeat": 0,
+          "durations": [
+            140,
+            140
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "up",
+          "frames": [
+            "death_up_0",
+            "death_up_1",
+            "death_up_2",
+            "death_up_3"
+          ],
+          "frameRate": 5.882352941176471,
+          "repeat": 0,
+          "durations": [
+            170,
+            170,
+            170,
+            170
+          ]
+        },
+        {
+          "state": "cast",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "water_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "cast",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "water_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "cast",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "water_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "cast",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        },
+        {
+          "state": "water_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": 0,
+          "relationship": "authored phase of basic_attack; same cels, no invented frames",
+          "durations": [
+            100,
+            100
+          ]
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/beach/hai_vu_concept_v01.png",
+      "sourceConceptSha256": "dd2edb5e0c21873ee572c846a6c87828989e6cf03a44825893233a1b21547b65"
+    }
+  ],
+  "effects": [
+    {
+      "id": "beach_fx:pincer_impact",
+      "texture": "beach_fx",
+      "frames": [
+        "pincer_impact_0",
+        "pincer_impact_1",
+        "pincer_impact_2",
+        "pincer_impact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:sand_particles",
+      "texture": "beach_fx",
+      "frames": [
+        "sand_particles_0",
+        "sand_particles_1",
+        "sand_particles_2",
+        "sand_particles_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:serpent_bite",
+      "texture": "beach_fx",
+      "frames": [
+        "serpent_bite_0",
+        "serpent_bite_1",
+        "serpent_bite_2",
+        "serpent_bite_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:water_splash",
+      "texture": "beach_fx",
+      "frames": [
+        "water_splash_0",
+        "water_splash_1",
+        "water_splash_2",
+        "water_splash_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:pirate_slash",
+      "texture": "beach_fx",
+      "frames": [
+        "pirate_slash_0",
+        "pirate_slash_1",
+        "pirate_slash_2",
+        "pirate_slash_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:weapon_impact",
+      "texture": "beach_fx",
+      "frames": [
+        "weapon_impact_0",
+        "weapon_impact_1",
+        "weapon_impact_2",
+        "weapon_impact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:cannon_projectile",
+      "texture": "beach_fx",
+      "frames": [
+        "cannon_projectile_0",
+        "cannon_projectile_1",
+        "cannon_projectile_2",
+        "cannon_projectile_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": -1,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:muzzle_flash",
+      "texture": "beach_fx",
+      "frames": [
+        "muzzle_flash_0",
+        "muzzle_flash_1",
+        "muzzle_flash_2",
+        "muzzle_flash_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:powder_smoke",
+      "texture": "beach_fx",
+      "frames": [
+        "powder_smoke_0",
+        "powder_smoke_1",
+        "powder_smoke_2",
+        "powder_smoke_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:cannon_impact",
+      "texture": "beach_fx",
+      "frames": [
+        "cannon_impact_0",
+        "cannon_impact_1",
+        "cannon_impact_2",
+        "cannon_impact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:water_droplets",
+      "texture": "beach_fx",
+      "frames": [
+        "water_droplets_0",
+        "water_droplets_1",
+        "water_droplets_2",
+        "water_droplets_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:spectral_mist",
+      "texture": "beach_fx",
+      "frames": [
+        "spectral_mist_0",
+        "spectral_mist_1",
+        "spectral_mist_2",
+        "spectral_mist_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:spectral_impact",
+      "texture": "beach_fx",
+      "frames": [
+        "spectral_impact_0",
+        "spectral_impact_1",
+        "spectral_impact_2",
+        "spectral_impact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:water_projectile",
+      "texture": "beach_fx",
+      "frames": [
+        "water_projectile_0",
+        "water_projectile_1",
+        "water_projectile_2",
+        "water_projectile_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": -1,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:magic_splash",
+      "texture": "beach_fx",
+      "frames": [
+        "magic_splash_0",
+        "magic_splash_1",
+        "magic_splash_2",
+        "magic_splash_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "id": "beach_fx:aquatic_formation",
+      "texture": "beach_fx",
+      "frames": [
+        "aquatic_formation_0",
+        "aquatic_formation_1",
+        "aquatic_formation_2",
+        "aquatic_formation_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ]
+    }
+  ],
+  "scenery": [
+    {
+      "id": "palm_tall",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/palm_tall.png",
+      "originalDimensions": [
+        152,
+        192
+      ],
+      "originalPivot": [
+        0.5,
+        0.96875
+      ]
+    },
+    {
+      "id": "palm_broad",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/palm_broad.png",
+      "originalDimensions": [
+        144,
+        168
+      ],
+      "originalPivot": [
+        0.5,
+        0.9642857142857143
+      ]
+    },
+    {
+      "id": "tropical_bush",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/tropical_bush.png",
+      "originalDimensions": [
+        96,
+        72
+      ],
+      "originalPivot": [
+        0.5,
+        0.9166666666666666
+      ]
+    },
+    {
+      "id": "coastal_grass",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/coastal_grass.png",
+      "originalDimensions": [
+        64,
+        56
+      ],
+      "originalPivot": [
+        0.5,
+        0.8928571428571429
+      ]
+    },
+    {
+      "id": "coastal_rocks",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/coastal_rocks.png",
+      "originalDimensions": [
+        96,
+        80
+      ],
+      "originalPivot": [
+        0.5,
+        0.925
+      ]
+    },
+    {
+      "id": "cliff_formation",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/cliff_formation.png",
+      "originalDimensions": [
+        128,
+        144
+      ],
+      "originalPivot": [
+        0.5,
+        0.9583333333333334
+      ]
+    },
+    {
+      "id": "coral",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/coral.png",
+      "originalDimensions": [
+        64,
+        64
+      ],
+      "originalPivot": [
+        0.5,
+        0.90625
+      ]
+    },
+    {
+      "id": "seashells",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/seashells.png",
+      "originalDimensions": [
+        48,
+        40
+      ],
+      "originalPivot": [
+        0.5,
+        0.85
+      ]
+    },
+    {
+      "id": "driftwood",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/driftwood.png",
+      "originalDimensions": [
+        104,
+        56
+      ],
+      "originalPivot": [
+        0.5,
+        0.8928571428571429
+      ]
+    },
+    {
+      "id": "broken_boat",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/broken_boat.png",
+      "originalDimensions": [
+        144,
+        96
+      ],
+      "originalPivot": [
+        0.5,
+        0.9375
+      ]
+    },
+    {
+      "id": "shipwreck_bow",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/shipwreck_bow.png",
+      "originalDimensions": [
+        176,
+        144
+      ],
+      "originalPivot": [
+        0.5,
+        0.9583333333333334
+      ]
+    },
+    {
+      "id": "shipwreck_mast",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/shipwreck_mast.png",
+      "originalDimensions": [
+        128,
+        160
+      ],
+      "originalPivot": [
+        0.5,
+        0.9625
+      ]
+    },
+    {
+      "id": "barrel",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/barrel.png",
+      "originalDimensions": [
+        48,
+        64
+      ],
+      "originalPivot": [
+        0.5,
+        0.90625
+      ]
+    },
+    {
+      "id": "crate",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/crate.png",
+      "originalDimensions": [
+        56,
+        56
+      ],
+      "originalPivot": [
+        0.5,
+        0.8928571428571429
+      ]
+    },
+    {
+      "id": "fishing_net",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/fishing_net.png",
+      "originalDimensions": [
+        96,
+        96
+      ],
+      "originalPivot": [
+        0.5,
+        0.9375
+      ]
+    },
+    {
+      "id": "rope_coil",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/rope_coil.png",
+      "originalDimensions": [
+        64,
+        56
+      ],
+      "originalPivot": [
+        0.5,
+        0.8928571428571429
+      ]
+    },
+    {
+      "id": "pirate_tent",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/pirate_tent.png",
+      "originalDimensions": [
+        160,
+        144
+      ],
+      "originalPivot": [
+        0.5,
+        0.9583333333333334
+      ]
+    },
+    {
+      "id": "pirate_camp_supplies",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/pirate_camp_supplies.png",
+      "originalDimensions": [
+        112,
+        96
+      ],
+      "originalPivot": [
+        0.5,
+        0.9375
+      ]
+    },
+    {
+      "id": "wooden_bridge",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/wooden_bridge.png",
+      "originalDimensions": [
+        192,
+        112
+      ],
+      "originalPivot": [
+        0.5,
+        0.9464285714285714
+      ]
+    },
+    {
+      "id": "dock_pillars",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/dock_pillars.png",
+      "originalDimensions": [
+        80,
+        104
+      ],
+      "originalPivot": [
+        0.5,
+        0.9423076923076923
+      ]
+    },
+    {
+      "id": "coastal_ruins",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/coastal_ruins.png",
+      "originalDimensions": [
+        176,
+        144
+      ],
+      "originalPivot": [
+        0.5,
+        0.9583333333333334
+      ]
+    },
+    {
+      "id": "weathered_lantern",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/weathered_lantern.png",
+      "originalDimensions": [
+        64,
+        112
+      ],
+      "originalPivot": [
+        0.5,
+        0.9464285714285714
+      ]
+    },
+    {
+      "id": "pirate_banner",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/pirate_banner.png",
+      "originalDimensions": [
+        96,
+        144
+      ],
+      "originalPivot": [
+        0.5,
+        0.9583333333333334
+      ]
+    },
+    {
+      "id": "dungeon_entrance",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/dungeon_entrance.png",
+      "originalDimensions": [
+        192,
+        160
+      ],
+      "originalPivot": [
+        0.5,
+        0.9625
+      ]
+    },
+    {
+      "id": "dungeon_exit_portal",
+      "size": [
+        208,
+        208
+      ],
+      "pivot": [
+        104,
+        196
+      ],
+      "layer": "feet",
+      "originalFile": "assets/sprites/environment/beach/dungeon_exit_portal.png",
+      "originalDimensions": [
+        144,
+        160
+      ],
+      "originalPivot": [
+        0.5,
+        0.9625
+      ]
+    }
+  ],
+  "files": {
+    "assets/tilesets/beach/terrain.png": "40ee282c0238058b30f10f8a3e790b33dca0be1e08fa446d5252be6c48ef0f88",
+    "assets/tilesets/beach/terrain.json": "ac155406ea084678977d09a7c99f03534309ce3d7ad7f51d075b6cd95b6736b4",
+    "assets/sprites/environment/beach/scenery.png": "85e21437332062df3ddd3c7aa3c98cea3da74260057ed88a7773bf199552818f",
+    "assets/sprites/environment/beach/atlas.json": "98032084b18b6262a78eba7502abbfe9f92b1593b090998d969a1826823aba26",
+    "assets/sprites/creeps/dungeons/beach/cua_khong_lo/spritesheet.png": "5715411a0a34ac97d850275ed73e720576bc1707dfec1a718a16f6e6ffe6084d",
+    "assets/sprites/creeps/dungeons/beach/cua_khong_lo/atlas.json": "4432ccbd914f7a5d4708f7e8f18e5c6eb40b77170ea3702af289d406f8bb3add",
+    "assets/sprites/creeps/dungeons/beach/hai_xa/spritesheet.png": "c09f31d709f3055a7784695284f3629714247d09b9f45ab215446999cdda4a65",
+    "assets/sprites/creeps/dungeons/beach/hai_xa/atlas.json": "4432ccbd914f7a5d4708f7e8f18e5c6eb40b77170ea3702af289d406f8bb3add",
+    "assets/sprites/creeps/dungeons/beach/hai_tac/spritesheet.png": "f528f5d86bfa2defb429a3acc02fa17a11735f9395043af19c96e032880e05ad",
+    "assets/sprites/creeps/dungeons/beach/hai_tac/atlas.json": "4432ccbd914f7a5d4708f7e8f18e5c6eb40b77170ea3702af289d406f8bb3add",
+    "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/spritesheet.png": "b1f02e78b7581f9bb521426ce86a9eabae90d697497e52d79176004a796fcf4b",
+    "assets/sprites/creeps/dungeons/beach/hai_tac_hoa_phao/atlas.json": "4432ccbd914f7a5d4708f7e8f18e5c6eb40b77170ea3702af289d406f8bb3add",
+    "assets/sprites/creeps/dungeons/beach/thuy_quy/spritesheet.png": "19472de6834fada5ce28dcdb9bced39fac3d2adcdb6e0c00dd1ddc4aa5ce2a5a",
+    "assets/sprites/creeps/dungeons/beach/thuy_quy/atlas.json": "4432ccbd914f7a5d4708f7e8f18e5c6eb40b77170ea3702af289d406f8bb3add",
+    "assets/sprites/creeps/dungeons/beach/hai_vu/spritesheet.png": "9088135999df41ff0d3624fd5f165e603e63ca44881d5fe0fa080a4c385a360b",
+    "assets/sprites/creeps/dungeons/beach/hai_vu/atlas.json": "4432ccbd914f7a5d4708f7e8f18e5c6eb40b77170ea3702af289d406f8bb3add",
+    "assets/effects/dungeons/beach/spritesheet.png": "6be5acaefd055a74ae017a05ee1280dc38d4301adf6d7b08e50e45b374894f31",
+    "assets/effects/dungeons/beach/atlas.json": "c4b531948ed6ce18d9d7e3604e3bb0302c35599c8a6b0b8f793fd0847a0e413e"
+  }
+}

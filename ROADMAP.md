@@ -1,5 +1,7 @@
 # Current gameplay milestone — M3C3, 2026-10-31
 
+The separately requested Beach integration is confined to `wip/m3d/beach-dungeon`, reusing retained Beach art and existing M2A mechanics. It adds `sea` private/shared instances, composed map/collision, animation/effect presentation and scoped verification. Specialized enemy mechanics and runtime director approval remain pending. No other dungeon or later milestone is included. See `docs/BEACH_INTEGRATION.md`.
+
 The separately requested Sa Mạc integration reuses retained environment/six-creep artwork and current M2A mechanics. It adds forest/desert destination isolation, map/collision/animation integration and focused validation only. Per-species combat design and runtime director art approval remain pending; no later milestone or other destination is included. See `docs/DESERT_INTEGRATION.md`.
 
 **M3C3 feedback gameplay trial — implemented and verified.** Accepted-A chains, two-leg fan, adjusted reach/timing, dash immunity/guard, bounded CDR, travelling palms, toggle shield and formation confinement use retained art. Final verification:330 unit/network tests,8 workflow checks,10 asset validators and11 browser cases including six-player natural combat/readability;384 before/after balance probes. Numeric tuning remains provisional and new sprite production/integration is pending. See `docs/M3C3_FEEDBACK_IMPLEMENTATION.md`. No M3D or later milestone starts automatically.

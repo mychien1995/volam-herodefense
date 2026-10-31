@@ -1,5 +1,9 @@
 # Beach Dungeon / Bờ Biển — Phase 2C asset handoff
 
+## Integration follow-up — 2026-11-01
+
+The retained package is now integrated for review in worktree `wip/m3d/beach-dungeon` using the existing **Biển** / `sea` destination and server-authoritative generic creep mechanics. The documented empty Thủy Quỷ `death_down_2` was re-extracted from its original authored dissolve source; its individual frame, atlas pixels, editable actor source and provenance were updated. Current static verification passes all 384 nonempty cels/136 entries. Historical production-only notes/results below remain intact; final runtime/director approval is separate and pending. See `docs/BEACH_INTEGRATION.md` for implementation, evidence and gameplay gaps.
+
 Asset production only, 2026-10-31. Concepts are automatically approved under the current task. Production exports are staged; nothing is registered, loaded or integrated into Phaser. No gameplay/runtime files, other dungeon artwork, browser sessions, recordings or screenshot evidence were changed or created.
 
 ## Environment

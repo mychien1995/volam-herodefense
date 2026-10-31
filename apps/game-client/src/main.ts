@@ -147,7 +147,7 @@ function dungeonAction(
     | {
         action: 'enter';
         access: 'private' | 'shared';
-        destination: 'forest' | 'desert';
+        destination: 'forest' | 'desert' | 'sea';
       },
 ): void {
   if (

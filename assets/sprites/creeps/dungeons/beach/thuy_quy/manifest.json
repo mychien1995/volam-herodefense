@@ -2,7 +2,7 @@
   "id": "beach_thuy_quy",
   "nameVi": "Thủy Quỷ",
   "category": "enemy",
-  "status": "incomplete_asset_issue",
+  "status": "prototype_pending_runtime_director_review",
   "conceptApproval": "Automatically approved by Phase 2C user instruction, 2026-10-31",
   "sourceConcept": "assets/concepts/dungeon-creeps/beach/thuy_quy_concept_v01.png",
   "sheet": "assets/sprites/creeps/dungeons/beach/thuy_quy/spritesheet.png",
@@ -595,24 +595,24 @@
     {
       "name": "death_down_2",
       "file": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_down_2.png",
-      "sha256": "9f3924bf4863c6df6ac0b2233a581389036ecd88f808d7d77bce4b8e61abbeae",
+      "sha256": "adaadd9b99040bedf1e370812abeaffd3b052038bc2331b56cb2f04924d308d6",
       "extraction": {
         "source": "assets/sprites/creeps/dungeons/beach/source/thuy_quy_sprites_source_v01.png",
         "sourceCell": 14,
         "sourceRect": [
-          977,
-          164,
-          22,
-          143
+          930,
+          248,
+          168,
+          87
         ],
         "fixedSourceScale": 0.36363636363636365,
         "sourceFootInCrop": [
-          0.0,
-          143
+          93.0,
+          87
         ],
         "placement": [
-          72,
-          54
+          38,
+          74
         ]
       }
     },
@@ -1805,10 +1805,20 @@
     "Original generated cels; fixed nearest-neighbor scale per source direction; binary alpha245 cleanup.",
     "Visual animation only. No damage, hit timing, status effect, spawn or collision rules."
   ],
-  "knownIssues": [
+  "knownIssues": [],
+  "corrections": [
     {
+      "date": "2026-11-01",
       "frame": "death_down_2",
-      "issue": "Fully transparent export; death_down needs an authored visible dissolve transition cel."
+      "method": "Re-extracted inspected authored dissolve pixels from original source using unchanged down-facing scale and feet pivot.",
+      "sourceSha256": "1b2e44b73434e3b49fd5fbdefc64f27693d398e8b6f20ec538347c9289c8c8aa",
+      "sourceRect": [
+        930,
+        248,
+        168,
+        87
+      ],
+      "newFrameSha256": "adaadd9b99040bedf1e370812abeaffd3b052038bc2331b56cb2f04924d308d6"
     }
   ]
 }
