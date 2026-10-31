@@ -1,0 +1,60 @@
+$ node scripts/check-workflow.mjs browser "--config" "playwright.forest-natural.config.ts" "tests/e2e/forest-natural.spec.ts" "--grep" "^2 clients"
+
+[check] prepare assets (once)
+Prepared assets in D:\Projects\volam-hero-defense\apps\game-client\public\assets\ (0 written, 4709 unchanged)
+[check] prepare assets (once): 66.86s
+
+[check] compile TypeScript
+[check] compile TypeScript: 2.40s
+
+[check] production client build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 225 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/volam-build-endpoint.json      0.03 kB │ gzip:   0.05 kB
+dist/index.html                     0.50 kB │ gzip:   0.33 kB
+dist/assets/index-BgwAKm5-.css     48.73 kB │ gzip:  11.61 kB
+dist/assets/index-Cr9AZkzG.js   2,830.62 kB │ gzip: 565.01 kB
+
+✓ built in 11.47s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[PLUGIN_TIMINGS] JavaScript callbacks ran for 10.7s of this 11.5s build (94%).
+The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - plugin vite:prepare-out-dir renderStart (70%, 8.0s, 1 call)
+Additional callback time came from the callbacks below and from callbacks under 1s.
+1 callback is listed without a time. Its calls overlapped, so the time inside one call includes work from other calls. To find its cost, profile the build with `node --cpu-prof`:
+  - plugin vite:css transform (10 calls)
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+
+[check] production client build: 13.63s
+
+[check] browser verification
+ℹ️  optional .env file not found: .env.development, .env
+
+   ___      _                                   ___   _  ___  
+  / __\___ | |_   _ ___  ___ _   _ ___  __   __/ _ \ / |( _ ) 
+ / /  / _ \| | | | / __|/ _ \ | | / __| \ \ / / | | || |/ _ \ 
+/ /__| (_) | | |_| \__ \  __/ |_| \__ \  \ V /| |_| || | (_) |
+\____/\___/|_|\__, |___/\___|\__,_|___/   \_/  \___(_)_|\___/ 
+              |___/                                           
+
+             · Multiplayer Framework for Node.js ·
+
+💖 Consider becoming a Sponsor on GitHub → https://github.com/sponsors/endel
+🌟 Give us a star on GitHub → https://github.com/colyseus/colyseus
+☁️  Deploy and scale your project on Colyseus Cloud → https://cloud.colyseus.io
+
+6:08:35 AM [vite] (client) Re-optimizing dependencies because vite config has changed
+Error: No tests found.
+Make sure that arguments are regular expressions matching test files.
+You may need to escape symbols like "$" or "*" and quote the arguments.
+
+[check] browser verification: 10.73s
+[check] failure timings: D:\Projects\volam-hero-defense\.cache\check-workflow\browser-timings.json
+[ELIFECYCLE] Command failed with exit code 1.
