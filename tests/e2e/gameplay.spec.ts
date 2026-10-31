@@ -2,6 +2,7 @@ import { joinWaiting, startTogether } from './pregame-helper.js';
 import { expect, test, type Page } from '@playwright/test';
 test.use({ viewport: { width: 1440, height: 1100 } });
 interface Hero {
+  basicId: string;
   x: number;
   y: number;
   hp: number;
@@ -288,7 +289,7 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
           (event) =>
             event.kind === 'hit' &&
             event.sourceId === aId &&
-            event.abilityId === 'cai_bang_bong',
+            event.abilityId === position.basicId,
         ),
       )
       .toBe(true);
@@ -296,7 +297,7 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
       (event) =>
         event.kind === 'hit' &&
         event.sourceId === aId &&
-        event.abilityId === 'cai_bang_bong',
+        event.abilityId === position.basicId,
     );
     expect(hit).toBeDefined();
     await expect

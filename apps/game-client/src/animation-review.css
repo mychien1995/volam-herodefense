@@ -1,0 +1,98 @@
+.animation-review #game {
+  overflow: hidden;
+}
+.animation-review-controls,
+.animation-review-note {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  z-index: 40;
+  color: #e9e4d0;
+  background: #142329ed;
+  border: 1px solid #9a9272;
+  box-shadow: 0 3px 18px #0005;
+  border-radius: 6px;
+  font:
+    13px/1.45 system-ui,
+    sans-serif;
+  padding: 10px 14px;
+}
+.animation-review-controls {
+  top: 12px;
+}
+.review-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 3px 0;
+}
+.review-toolbar strong {
+  color: #e7d5a1;
+  letter-spacing: 1px;
+}
+.review-toolbar span {
+  color: #acbebb;
+}
+.review-toolbar a {
+  margin-left: auto;
+  color: #e7d5a1;
+}
+.animation-review-controls select,
+.animation-review-controls button {
+  width: auto;
+  max-width: 310px;
+  min-height: 32px;
+  padding: 4px 8px;
+  border: 1px solid #64736d;
+  border-radius: 4px;
+  background: #22393d;
+  color: #f1eddb;
+  font: inherit;
+}
+.animation-review-controls select:disabled {
+  opacity: 0.45;
+}
+.review-options label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+}
+.review-options input {
+  width: auto;
+  margin: 0;
+}
+.review-options input[type='range'] {
+  width: clamp(120px, 22vw, 380px);
+  accent-color: #9acdc5;
+}
+.animation-review-note {
+  bottom: 14px;
+  pointer-events: none;
+}
+.animation-review-note strong {
+  color: #e7d5a1;
+  font-size: 16px;
+}
+.animation-review-note p {
+  margin: 4px 0;
+}
+.animation-review-note output {
+  color: #99d6cb;
+}
+@media (max-width: 900px) {
+  .animation-review-controls,
+  .animation-review-note {
+    left: 6px;
+    right: 6px;
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+  .animation-review-controls select {
+    max-width: 230px;
+  }
+  .animation-review-note strong {
+    font-size: 13px;
+  }
+}

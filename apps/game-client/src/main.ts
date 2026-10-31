@@ -17,6 +17,7 @@ import {
 import { ArenaScene } from './arena-scene.js';
 import { ArtPreviewScene } from './art-preview.js';
 import { ThienSonSkillPreviewScene } from './thien-son-skill-preview.js';
+import { AnimationReviewScene } from './animation-review.js';
 import { bindGameplayInput } from './input.js';
 import { GameUI, element } from './ui.js';
 import { SkillPreview } from './skill-preview.js';
@@ -29,6 +30,9 @@ import './defense-hud.css';
 import { PreGame } from './pregame.js';
 
 const artPreview = new URLSearchParams(location.search).has('artPreview');
+const animationReview =
+  artPreview &&
+  new URLSearchParams(location.search).get('animationReview') === '1';
 const thienSonSkillReview =
   artPreview &&
   new URLSearchParams(location.search).get('thienSonSkills') === '1';
@@ -42,6 +46,7 @@ if (artPreview) pregame.node.hidden = true;
 const arenaScene = new ArenaScene();
 const gallery = new ArtPreviewScene();
 const thienSonSkillGallery = new ThienSonSkillPreviewScene();
+const animationReviewGallery = new AnimationReviewScene();
 const study = new ForestStudyScene();
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -56,33 +61,38 @@ const game = new Phaser.Game({
     antialiasGL: false,
   },
   scale: { mode: Phaser.Scale.NONE, zoom: 1 },
-  scene: thienSonSkillReview
-    ? [thienSonSkillGallery]
-    : artPreview
-      ? [gallery]
-      : [arenaScene, study],
+  scene: animationReview
+    ? [animationReviewGallery]
+    : thienSonSkillReview
+      ? [thienSonSkillGallery]
+      : artPreview
+        ? [gallery]
+        : [arenaScene, study],
   input: { keyboard: false, mouse: true, touch: false },
   audio: { noAudio: true },
 });
 // A fixed integer display scale preserves square pixels. Resize the world view,
 // rather than reserving page space for HUD or stretching a fixed aspect ratio.
+let reviewScaleOverride: number | undefined;
 const fit = (): void => {
   if (!game.isBooted) return;
   const host = element('#game');
-  const zoom = artPreview
-    ? 2
-    : host.clientWidth >= 960 && host.clientHeight >= 600
+  const zoom = animationReview
+    ? reviewScaleOverride ?? (host.clientWidth >= 960 && host.clientHeight >= 600 ? 2 : 1)
+    : artPreview
       ? 2
-      : 1;
+      : host.clientWidth >= 960 && host.clientHeight >= 600
+        ? 2
+        : 1;
   game.scale.resize(
-    thienSonSkillReview
+    thienSonSkillReview || animationReview
       ? Math.ceil(host.clientWidth / zoom)
       : artPreview
         ? thieuLamReview
           ? 640
           : 480
         : Math.ceil(host.clientWidth / zoom),
-    thienSonSkillReview
+    thienSonSkillReview || animationReview
       ? Math.ceil(host.clientHeight / zoom)
       : artPreview
         ? 520
@@ -91,6 +101,11 @@ const fit = (): void => {
   // NONE-mode resize at zoom 1 retains the previous CSS dimensions in Phaser
   // 4.2.1. Apply zoom after the new base size so CSS size and input bounds agree.
   game.scale.setZoom(zoom);
+  if (animationReview) animationReviewGallery.setDisplayScale(zoom);
+};
+animationReviewGallery.onDisplayScale = (zoom) => {
+  reviewScaleOverride = zoom;
+  fit();
 };
 game.events.once(Phaser.Core.Events.READY, fit);
 const observer = new ResizeObserver(fit);
@@ -346,11 +361,13 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
         events: events.map((event) => ({ ...event })),
       }),
       presentation: () =>
-        thienSonSkillReview
-          ? thienSonSkillGallery.inspect()
-          : artPreview
-            ? gallery.inspect()
-            : arenaScene.inspect(),
+        animationReview
+          ? animationReviewGallery.inspect()
+          : thienSonSkillReview
+            ? thienSonSkillGallery.inspect()
+            : artPreview
+              ? gallery.inspect()
+              : arenaScene.inspect(),
       ...(new URLSearchParams(location.search).get('feedbackArtReview') === '1'
         ? {
             // Explicit presentation-only renderer fixture: no command or state mutation.

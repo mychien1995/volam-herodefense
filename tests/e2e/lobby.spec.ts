@@ -32,12 +32,12 @@ test('two clients share a waiting room, rejoin before start, check connection an
     }
     await a.getByRole('button', { name: 'Kiểm tra kết nối' }).click();
     await expect(a.locator('#ack')).toHaveText(
-      /Server acknowledged check #\d+\. Count: 1\./,
+      /Server đã nhận kiểm tra #\d+\. Tổng: 1\./,
     );
     for (const p of [a, b])
       await expect(
         p.getByTestId('players').locator('li').filter({ hasText: 'Võ Lâm' }),
-      ).toContainText('Checks: 1');
+      ).toContainText('Lần kiểm tra: 1');
     await a.screenshot({ path: testInfo.outputPath('two-clients-a.png') });
     await b.close();
     await expect(a.getByTestId('player-count')).toHaveText('1 / 6');
