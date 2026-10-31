@@ -1,5 +1,13 @@
 # Combat System Specification v1.0
 
+## Current M3C3 feedback override — 2026-10-31
+
+The approved feedback trial supersedes historical behavior below. Basic chains advance once after server A eligibility/cadence checks; primary/secondary hits never advance them. Skill/data-defined minimum intervals bound Attack Speed; no second basic animation lock is added. Fan A uses a straight outbound leg then a straight return toward the owner's position sampled at turnaround, with independent hit deduplication and no further tracking. New travelling palms refund once per cast on a confirmed hit; multi-projectile casts share refund state. Radial bursts capture each burst's origin and eight fixed directions.
+
+Moving dash ticks grant direct-hit immunity only; periodic damage bypasses it and cannot trigger counters. Spin mitigation is scoped to the active action, composes strongest-only with existing guard, and retains the 85% global cap. Chiết Mai grants a strongest-only cooldown buff within the existing total CDR cap; it never rewrites existing cooldown debt. Toggle shields cost no activation mana in this numeric trial, transfer post-mitigation damage to finite mana, apply unaffordable remainder to HP and never refill resources when toggled. One simulation tick bounds toggle input processing.
+
+Confinement samples entry every tick separately from damage pulses, clips movement/knockback at active area boundaries and preserves terrain, attacks and movement inside. Forced-movement-immune adapters and interrupt resistance bypass confinement; no boss implementation is introduced. Death/travel/respec/disconnect/defeat cancel owned projectiles, actions, areas, toggle shield and basic chains. Same-target Thiếu Lâm Phát Động remains unchanged. See `docs/M3C3_FEEDBACK_IMPLEMENTATION.md` for tuning and evidence.
+
 ## M3C3 reusable combos and ally protection — 2026-10-31
 
 Target sequences use attacker+target+chain IDs and simulation expiry. Cleave counts; misses do not. A/unrelated actives preserve progress; an invalid same-chain order clears that target. Vô Ảnh consumes once per target/cast and caches eligibility across its deterministic six-hit schedule. Delayed arcs capture heading/offense and validate current target position/terrain after windup. Strongest nonstacking damage reduction applies after armor/crit and before mana shield/HP,cap85%. Flat defense buffs,owner-following ally auras and bounded healing are shared effects. Living same-zone heroes only; never statue repair,enemy healing or resurrection. New stun/hostile displacement is resisted during Kim Cang; damage remains possible. Death/travel/respec/disconnect/defeat clean up sequences and owned ally protection. Details/defaults:`docs/M3C3_IMPLEMENTATION.md`.

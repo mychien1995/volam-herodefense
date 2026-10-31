@@ -41,6 +41,8 @@ export interface CreepDungeonDefinition {
   damagePerWave: number;
   hpPerAdditionalPlayer: number;
   damagePerAdditionalPlayer: number;
+  /** Optional visual identities; all use the existing common creep mechanics. */
+  creepRoster?: string[] | undefined;
 }
 export interface MatchZone {
   id: string;
@@ -51,6 +53,7 @@ export interface MatchZone {
   wave: number;
   spawnPlayerCount: number;
   nextWaveAt: number | undefined;
+  dungeon?: CreepDungeonDefinition;
 }
 export interface ZoneCombatEvent {
   zoneId: string;
@@ -66,12 +69,19 @@ export class DungeonMatch {
   readonly invasion: InvasionDirector | undefined;
   tick = 0;
   events: ZoneCombatEvent[] = [];
+  readonly definitions = new Map<string, CreepDungeonDefinition>();
   constructor(
     readonly base: SimulationConfig,
     readonly dungeon: CreepDungeonDefinition,
     private readonly seed = 42,
     invasion?: InvasionDefinition,
+    additionalDungeons: CreepDungeonDefinition[] = [],
   ) {
+    for (const definition of [dungeon, ...additionalDungeons]) {
+      if (this.definitions.has(definition.id))
+        throw new Error(`Duplicate dungeon definition: ${definition.id}`);
+      this.definitions.set(definition.id, definition);
+    }
     this.arena = {
       id: 'arena',
       access: 'arena',
@@ -117,19 +127,25 @@ export class DungeonMatch {
       this.zoneOf(id)?.access === 'arena'
     );
   }
-  enter(id: string, access: DungeonAccess): string | undefined {
+  enter(
+    id: string,
+    access: DungeonAccess,
+    destination = this.dungeon.id,
+  ): string | undefined {
+    const dungeon = this.definitions.get(destination);
+    if (!dungeon || !['private', 'shared'].includes(access))
+      return 'This dungeon destination is unavailable.';
     if (!this.canEnterDungeon(id))
       return 'Enter dungeons from the arena while alive.';
     const key =
       access === 'shared'
-        ? `${this.dungeon.id}_shared`
-        : `${this.dungeon.id}_private_${id}`;
+        ? `${dungeon.id}_shared`
+        : `${dungeon.id}_private_${id}`;
     let zone = this.zones.get(key);
     if (
       zone &&
       ((zone.ownerId && zone.ownerId !== id) ||
-        zone.world.heroes.size >=
-          (access === 'private' ? 1 : this.dungeon.capacity))
+        zone.world.heroes.size >= (access === 'private' ? 1 : dungeon.capacity))
     )
       return 'This dungeon instance is full or private.';
     if (!zone) {
@@ -137,7 +153,7 @@ export class DungeonMatch {
       let seed = this.seed;
       for (const c of key)
         seed = Math.imul(seed ^ c.charCodeAt(0), 16777619) >>> 0;
-      const config = this.waveConfig(1, 1);
+      const config = this.waveConfig(1, 1, dungeon);
       zone = {
         id: key,
         access,
@@ -147,13 +163,15 @@ export class DungeonMatch {
         wave: 1,
         spawnPlayerCount: 1,
         nextWaveAt: undefined,
+        dungeon,
       };
       spawnCreeps(zone.world, config, 'wave_1');
+      this.assignRoster(zone);
       this.zones.set(key, zone);
     }
     this.transfer(id, zone, {
-      x: this.dungeon.spawn.x,
-      y: this.dungeon.spawn.y + zone.world.heroes.size * 24,
+      x: dungeon.spawn.x,
+      y: dungeon.spawn.y + zone.world.heroes.size * 24,
     });
     return undefined;
   }
@@ -166,10 +184,11 @@ export class DungeonMatch {
       zone.access === 'arena' ||
       !hero ||
       hero.hp <= 0 ||
-      distance(hero, this.dungeon.exit) > this.dungeon.exitRange
+      !zone.dungeon ||
+      distance(hero, zone.dungeon.exit) > zone.dungeon.exitRange
     )
       return 'Walk to the physical dungeon exit portal to return.';
-    this.transfer(id, this.arena, this.dungeon.arenaReturn);
+    this.transfer(id, this.arena, zone.dungeon.arenaReturn);
     return undefined;
   }
   input(id: string, sequence: number, command: Command): string | undefined {
@@ -243,12 +262,18 @@ export class DungeonMatch {
         zone.access !== 'arena' &&
         [...zone.world.creeps.values()].every((c) => c.hp <= 0)
       ) {
-        zone.nextWaveAt ??= zone.world.tick + this.dungeon.restTicks;
+        const dungeon = zone.dungeon!;
+        zone.nextWaveAt ??= zone.world.tick + dungeon.restTicks;
         if (zone.world.tick >= zone.nextWaveAt) {
           zone.wave++;
           zone.spawnPlayerCount = zone.world.heroes.size;
-          zone.config = this.waveConfig(zone.wave, zone.spawnPlayerCount);
+          zone.config = this.waveConfig(
+            zone.wave,
+            zone.spawnPlayerCount,
+            dungeon,
+          );
           spawnCreeps(zone.world, zone.config, `wave_${zone.wave}`);
+          this.assignRoster(zone);
           zone.nextWaveAt = undefined;
         }
       }
@@ -257,10 +282,11 @@ export class DungeonMatch {
     for (const id of this.membership.keys()) {
       const hero = this.hero(id);
       if (!hero || hero.hp > 0) continue;
+      const dungeon = this.zoneOf(id)?.dungeon ?? this.dungeon;
       if (!this.respawns.has(id))
-        this.respawns.set(id, this.tick + this.dungeon.respawnTicks);
+        this.respawns.set(id, this.tick + dungeon.respawnTicks);
       if (this.tick >= this.respawns.get(id)!) {
-        this.transfer(id, this.arena, this.dungeon.arenaReturn);
+        this.transfer(id, this.arena, dungeon.arenaReturn);
         hero.hp = hero.maxHp;
         hero.mana = hero.maxMana;
         hero.pose = 'idle';
@@ -268,8 +294,18 @@ export class DungeonMatch {
       }
     }
   }
-  private waveConfig(wave: number, players: number): SimulationConfig {
-    const d = this.dungeon;
+  private assignRoster(zone: MatchZone): void {
+    const roster = zone.dungeon?.creepRoster;
+    if (!roster?.length) return;
+    let i = (zone.wave - 1) * zone.config.creepSpawns.length;
+    for (const creep of zone.world.creeps.values())
+      creep.archetypeId = roster[i++ % roster.length]!;
+  }
+  private waveConfig(
+    wave: number,
+    players: number,
+    d: CreepDungeonDefinition,
+  ): SimulationConfig {
     const count = Math.ceil(
       d.baseCount * (1 + d.countPerAdditionalPlayer * (players - 1)),
     );

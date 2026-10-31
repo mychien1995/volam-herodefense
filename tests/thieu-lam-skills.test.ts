@@ -155,7 +155,7 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
       dao = thieuLamBasics.thieu_lam_dao!;
     expect(punch.cooldownTicks).toBeGreaterThan(dao.cooldownTicks);
     if (punch.effect.mode === 'arc' && dao.effect.mode === 'arc') {
-      expect(punch.effect.damage).toBeGreaterThan(dao.effect.damage);
+      expect(punch.effect.damage).toBeGreaterThanOrEqual(dao.effect.damage);
       expect(punch.effect.range).toBeLessThan(dao.effect.range);
       expect(punch.effect.halfAngle).toBeLessThan(dao.effect.halfAngle);
     }

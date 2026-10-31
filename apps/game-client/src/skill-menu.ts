@@ -22,12 +22,12 @@ export function abilitySummary(a: Ability): string {
   if (e.mode === 'arc')
     result = `${e.damage} sát thương · tầm ${e.range}${e.pull ? ` · kéo ${e.pull}` : ''}${e.armorPenetration ? ' · xuyên thủ ' + Math.round(e.armorPenetration * 100) + '%' : ''}${(e.statuses ?? []).map((s) => ` · ${s.kind === 'slow' ? `chậm ${Math.round(s.magnitude * 100)}%` : s.kind === 'attack_break' ? `giảm công ${Math.round(s.magnitude * 100)}%` : s.kind === 'attack_slow' ? `chậm đánh ${Math.round(s.magnitude * 100)}%` : s.kind === 'defense_break' ? `giảm thủ ${s.magnitude}` : s.kind === 'silence' ? 'câm lặng' : 'tước vũ khí'} ${seconds(s.durationTicks)}s`).join('')}`;
   if (e.mode === 'mana_shield')
-    result = `Hấp thụ ${Math.round(e.absorbFraction * 100)}% · ${e.manaPerDamage.toFixed(2)} MP / sát thương hấp thụ · ${seconds(e.durationTicks)}s`;
+    result = `Hấp thụ ${Math.round(e.absorbFraction * 100)}% · ${e.manaPerDamage.toFixed(2)} MP / sát thương hấp thụ · ${e.toggle ? 'bật/tắt' : seconds(e.durationTicks) + 's'}`;
   if (e.mode === 'area')
     result = `${e.damage} sát thương / ${seconds(e.tickInterval)}s · bán kính ${e.radius} · ${seconds(e.durationTicks)}s`;
   if (e.mode === 'counter')
     result = `${e.damage} phản kích một lần · tầm ${e.range} · cửa sổ ${seconds(e.durationTicks)}s`;
-  if (e.mode === 'arc' && e.manaRefund)
+  if ((e.mode === 'arc' || e.mode === 'projectile') && e.manaRefund)
     result += ` · hoàn ${e.manaRefund} MP khi trúng`;
   if (e.mode === 'arc' && e.projectileProc)
     result += ` · ${e.projectileProc.chance * 100}% kiếm khí`;
@@ -35,6 +35,9 @@ export function abilitySummary(a: Ability): string {
     result = [
       e.movementSpeed ? `+${Math.round(e.movementSpeed * 100)}% di chuyển` : '',
       e.attackSpeed ? `+${Math.round(e.attackSpeed * 100)}% tốc đánh` : '',
+      e.cooldownReduction
+        ? `+${Math.round(e.cooldownReduction * 100)}% giảm hồi chiêu (có giới hạn)`
+        : '',
       e.critChance ? `+${Math.round(e.critChance * 100)}% bạo kích` : '',
       e.critMultiplier
         ? `+${Math.round(e.critMultiplier * 100)}% sát thương bạo kích`
@@ -43,12 +46,19 @@ export function abilitySummary(a: Ability): string {
       .filter(Boolean)
       .join(' · ');
   if (e.mode === 'dash')
-    result = `${e.damage} sát thương · lướt ${e.distance}${e.stunTicks ? ' · choáng ' + seconds(e.stunTicks) + 's' : ''}${e.counter ? ' · né một đòn / phản kích ' + seconds(e.counter.durationTicks) + 's' : ''}`;
+    result = `${e.damage} sát thương · lướt ${e.distance}${e.stunTicks ? ' · choáng ' + seconds(e.stunTicks) + 's' : ''}${e.invulnerable ? ' · miễn sát thương trực tiếp khi đang lướt, DOT vẫn tác dụng' : ''}${e.counter ? ' · phản kích ' + seconds(e.counter.durationTicks) + 's' : ''}`;
   if (e.mode === 'multi_hit')
     result = `${e.hits} × ${e.damage} + ${e.finisherDamage} kết thúc · tầm ${e.range}/${e.finisherRange}`;
   if (e.mode === 'projectile')
     for (const s of e.statuses ?? [])
-      result += ` · ${s.kind === 'attack_slow' ? 'chậm đánh' : 'chậm di chuyển'} ${Math.round(s.magnitude * 100)}% / ${seconds(s.durationTicks)}s`;
+      result += ` · ${s.kind === 'attack_slow' ? 'chậm đánh' : s.kind === 'attack_break' ? 'giảm công' : 'chậm di chuyển'} ${Math.round(s.magnitude * 100)}% / ${seconds(s.durationTicks)}s`;
+  if (e.mode === 'projectile' && e.boomerang)
+    result += ' · trúng một lần mỗi lượt đi/về';
+  if (e.mode === 'area' && e.confines) result += ' · giữ địch trong biên trận';
+  if (e.mode === 'multi_hit' && e.guard)
+    result += ` · giảm ${Math.round(e.guard * 100)}% sát thương khi xoay`;
+  if (e.mode === 'multi_hit' && e.projectileBurst)
+    result += ` · phóng quạt ${e.projectileBurst.count} hướng`;
   if (e.mode === 'support')
     result = `${e.heal ? 'Hồi ' + e.heal + ' HP' : 'Hào quang phòng thủ +' + (e.statuses?.[0]?.magnitude ?? 0)} · bán kính ${e.radius} · ${seconds(e.durationTicks)}s`;
   if (a.combo)
@@ -58,7 +68,7 @@ export function abilitySummary(a: Ability): string {
       result += ` · giảm sát thương ${Math.round(s.magnitude * 100)}% / ${seconds(s.durationTicks)}s`;
   if (a.allies)
     result += ` · đồng đội +${a.allies.statuses?.[0]?.magnitude ?? 0} phòng thủ / ${seconds(a.allies.statuses?.[0]?.durationTicks ?? 0)}s`;
-  return `${result} · ${a.manaCost} MP · hồi ${seconds(a.cooldownTicks)}s`;
+  return `${result} · ${a.manaCost} MP · ${e.mode === 'mana_shield' && e.toggle ? 'bật/tắt không hồi chiêu phụ' : `${Object.hasOwn(m1Config.basics, a.id) ? 'nhịp cơ sở' : 'hồi'} ${seconds(a.cooldownTicks)}s`}`;
 }
 /** Stable DOM and local draft selections; only the server commits ranks/stats. */
 export class SkillMenu {

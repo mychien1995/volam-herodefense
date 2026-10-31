@@ -2,30 +2,40 @@ import type { Ability, ProgressionDefinition } from '@volam/game-core';
 import { abilitySchema } from './ability-schema.js';
 import { skillRankGates } from './progression-data.js';
 
-/** M3C1 numeric proposals at 30 ticks/s. Both styles are strictly melee. */
+/** M3C3 feedback trial at 30 ticks/s. Phiến is now a two-leg non-tracking fan. */
 export const thienSonBasics: Record<string, Ability> = {
   thien_son_phien: {
     id: 'thien_son_phien',
     nameVi: 'Thiên Sơn Phiến',
     manaCost: 0,
-    cooldownTicks: 14,
+    cooldownTicks: 9,
+    minIntervalTicks: 5,
     effect: {
-      mode: 'arc',
-      damage: 24,
-      range: 62,
-      halfAngle: Math.PI / 2,
-      cleave: 0.7,
+      mode: 'projectile',
+      damage: 12,
+      range: 220,
+      speed: 400,
+      radius: 10,
+      count: 1,
+      spacingTicks: 0,
+      splashRadius: 0,
+      burnDamage: 0,
+      burnTicks: 0,
+      boomerang: true,
+      piercing: true,
+      attackPowerScale: 0.5,
     },
   },
   thien_son_dao: {
     id: 'thien_son_dao',
     nameVi: 'Thiên Sơn Đao',
     manaCost: 0,
-    cooldownTicks: 12,
+    cooldownTicks: 9,
+    minIntervalTicks: 5,
     effect: {
       mode: 'arc',
       damage: 30,
-      range: 58,
+      range: 72,
       halfAngle: Math.PI / 4,
       cleave: 0.3,
     },
@@ -53,14 +63,14 @@ export const thienSonSkills: Ability[] = [
     nameVi: 'Liên Hoa Phiến',
     manaCost: 18,
     cooldownTicks: 90,
-    effect: multi(78, 16, 4, 4, Math.PI / 2),
+    effect: multi(100, 16, 6, 5, Math.PI / 2),
   },
   {
     id: 'luc_duong_chuong',
     nameVi: 'Lục Dương Chưởng',
     manaCost: 24,
     cooldownTicks: 180,
-    effect: multi(80, 15, 6, 8),
+    effect: { ...multi(100, 15, 6, 8), guard: 0.65 } as Ability['effect'],
   },
   {
     id: 'luu_phong_bo',
@@ -72,7 +82,7 @@ export const thienSonSkills: Ability[] = [
       distance: 140,
       speed: 700,
       radius: 18,
-      damage: 0,
+      damage: 30,
       stunTicks: 0,
     },
   },
@@ -88,6 +98,7 @@ export const thienSonSkills: Ability[] = [
       critMultiplier: 0,
       movementSpeed: 0.3,
       attackSpeed: 0.35,
+      cooldownReduction: 0.2,
     },
   },
   {
@@ -95,7 +106,26 @@ export const thienSonSkills: Ability[] = [
     nameVi: 'Bách Phiến Phong Bạo',
     manaCost: 42,
     cooldownTicks: 540,
-    effect: multi(115, 22, 10, 7),
+    effect: {
+      ...multi(150, 22, 12, 8),
+      projectileBurstEvery: 3,
+      projectileBurst: {
+        mode: 'projectile',
+        damage: 6,
+        speed: 340,
+        range: 210,
+        radius: 8,
+        count: 8,
+        spacingTicks: 0,
+        splashRadius: 0,
+        burnDamage: 0,
+        burnTicks: 0,
+        piercing: true,
+        useFacing: true,
+        radial: true,
+        attackPowerScale: 0.2,
+      },
+    } as Ability['effect'],
   },
   {
     id: 'phi_anh_tram',
@@ -109,6 +139,7 @@ export const thienSonSkills: Ability[] = [
       radius: 24,
       damage: 58,
       stunTicks: 0,
+      invulnerable: true,
     },
   },
   {
@@ -117,7 +148,19 @@ export const thienSonSkills: Ability[] = [
     manaCost: 18,
     cooldownTicks: 120,
     effect: {
-      ...multi(72, 30, 2, 5, Math.PI / 3),
+      mode: 'projectile',
+      damage: 30,
+      speed: 420,
+      range: 240,
+      radius: 14,
+      count: 2,
+      spacingTicks: 3,
+      splashRadius: 0,
+      burnDamage: 0,
+      burnTicks: 0,
+      piercing: true,
+      useFacing: true,
+      statuses: [{ kind: 'slow', magnitude: 0.25, durationTicks: 75 }],
       slowedBonus: 0.4,
     } as Ability['effect'],
   },
@@ -133,6 +176,7 @@ export const thienSonSkills: Ability[] = [
       radius: 18,
       damage: 0,
       stunTicks: 0,
+      invulnerable: true,
       counter: { durationTicks: 30, damage: 60, range: 90 },
     },
   },
@@ -156,21 +200,21 @@ export const thienSonSkills: Ability[] = [
     manaCost: 45,
     cooldownTicks: 540,
     effect: {
-      ...multi(90, 13, 10, 2, Math.PI / 4),
+      ...multi(110, 13, 10, 2, Math.PI / 4),
       finisherDamage: 45,
-      finisherRange: 100,
+      finisherRange: 125,
     } as Ability['effect'],
   },
 ];
 const descriptions = [
-  'Bốn nhịp phiến liên tiếp trong cung rộng phía trước.',
-  'Xoay người sáu nhịp quanh bản thân; có thể di chuyển khi xoay.',
-  'Lướt ngắn theo hướng nhìn, dừng trước địa hình; không gây sát thương.',
-  'Tạm tăng tốc độ di chuyển và tốc độ đánh; không cộng dồn.',
-  'Tuyệt kỹ: phong bạo lớn theo người, mười nhịp sát thương diện rộng.',
-  'Lướt về trước, chém mạnh một lần mỗi địch trên đường; không làm choáng.',
-  'Hai nhát chém nhanh phía trước, tăng sát thương lên mục tiêu đang chậm.',
-  'Bước né ngắn; trong cửa sổ phản kích, né một đòn và phản chém địch trong tầm.',
+  'Sáu nhịp phiến liên tiếp trong cung rộng phía trước.',
+  'Xoay sáu nhịp quanh bản thân, giảm mạnh sát thương nhận trong lúc xoay.',
+  'Lướt theo hướng nhìn, gây sát thương một lần mỗi địch đi qua; dừng trước địa hình.',
+  'Tạm tăng tốc di chuyển, tốc đánh và giảm hồi chiêu có giới hạn; không cộng dồn.',
+  'Tuyệt kỹ: mười hai nhịp phong bạo theo người, bốn đợt quạt bay tám hướng.',
+  'Lướt chém một lần mỗi địch; miễn sát thương trực tiếp trên các tick đang lướt, không chặn DOT.',
+  'Hai luồng đao khí bay thẳng, làm chậm; tăng sát thương lên địch đang chậm.',
+  'Né miễn sát thương trực tiếp lúc di chuyển; cửa sổ phản kích sau đó không miễn sát thương.',
   'Chém mạnh phía trước, xuyên một phần phòng thủ riêng cho đòn này.',
   'Tuyệt kỹ: mười nhát chém cực nhanh phía trước và một nhát kết thúc.',
 ];
@@ -209,6 +253,7 @@ export function addThienSonProgression(d: ProgressionDefinition): void {
         e.finisherRange += 4 * r;
         if (e.finisherDamage) e.finisherDamage += 12 * r;
         if (e.slowedBonus) e.slowedBonus += 0.05 * r;
+        if (e.projectileBurst) e.projectileBurst.damage += r;
       } else if (e.mode === 'dash') {
         e.distance += 8 * r;
         if (e.damage) e.damage += 9 * r;
@@ -220,6 +265,14 @@ export function addThienSonProgression(d: ProgressionDefinition): void {
         e.movementSpeed = (e.movementSpeed ?? 0) + 0.04 * r;
         e.attackSpeed = (e.attackSpeed ?? 0) + 0.05 * r;
         e.durationTicks += 15 * r;
+        e.cooldownReduction = Math.min(
+          0.3,
+          (e.cooldownReduction ?? 0) + 0.03 * r,
+        );
+      } else if (e.mode === 'projectile') {
+        e.damage += 5 * r;
+        e.range += 10 * r;
+        if (e.slowedBonus) e.slowedBonus += 0.05 * r;
       } else if (e.mode === 'arc') {
         e.damage += 10 * r;
         e.armorPenetration = (e.armorPenetration ?? 0) + 0.05 * r;

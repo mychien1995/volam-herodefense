@@ -1,0 +1,239 @@
+{
+  "schemaVersion": 2,
+  "id": "thien_son_wind_actions_v2_impact",
+  "handoffId": "thien_son_wind_actions_v2",
+  "role": "impact",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_wind_actions_v2_impact.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_wind_actions_v2/thien_son_wind_actions_v2_impact.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_wind_actions_v2/thien_son_wind_actions_v2_impact.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "crossed_hit_down",
+      "phase": "impact",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "once per confirmed crossed target",
+      "frames": [
+        "crossed_hit_down_0",
+        "crossed_hit_down_1",
+        "crossed_hit_down_2",
+        "crossed_hit_down_3",
+        "crossed_hit_down_4",
+        "crossed_hit_down_5"
+      ],
+      "frameDurationsMs": [
+        45,
+        45,
+        45,
+        45,
+        45,
+        45
+      ],
+      "durationMsTotal": 270,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "crossed_hit_down_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "crossed_hit_left",
+      "phase": "impact",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "once per confirmed crossed target",
+      "frames": [
+        "crossed_hit_left_0",
+        "crossed_hit_left_1",
+        "crossed_hit_left_2",
+        "crossed_hit_left_3",
+        "crossed_hit_left_4",
+        "crossed_hit_left_5"
+      ],
+      "frameDurationsMs": [
+        45,
+        45,
+        45,
+        45,
+        45,
+        45
+      ],
+      "durationMsTotal": 270,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "crossed_hit_left_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "crossed_hit_right",
+      "phase": "impact",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "once per confirmed crossed target",
+      "frames": [
+        "crossed_hit_right_0",
+        "crossed_hit_right_1",
+        "crossed_hit_right_2",
+        "crossed_hit_right_3",
+        "crossed_hit_right_4",
+        "crossed_hit_right_5"
+      ],
+      "frameDurationsMs": [
+        45,
+        45,
+        45,
+        45,
+        45,
+        45
+      ],
+      "durationMsTotal": 270,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "crossed_hit_right_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "crossed_hit_up",
+      "phase": "impact",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "once per confirmed crossed target",
+      "frames": [
+        "crossed_hit_up_0",
+        "crossed_hit_up_1",
+        "crossed_hit_up_2",
+        "crossed_hit_up_3",
+        "crossed_hit_up_4",
+        "crossed_hit_up_5"
+      ],
+      "frameDurationsMs": [
+        45,
+        45,
+        45,
+        45,
+        45,
+        45
+      ],
+      "durationMsTotal": 270,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "crossed_hit_up_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

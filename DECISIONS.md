@@ -1,5 +1,15 @@
 # Approved decisions & assumptions register
 
+## Desert integration request — 2026-10-31
+
+The user explicitly authorizes integrating the retained Sa Mạc environment and six creep appearances into Phaser, with the existing server-authoritative dungeon systems and in-viewport menu. Sa Mạc now supports separate private/shared instances; forest remains the default destination. This supersedes earlier descriptions of Sa Mạc as unavailable. Retained artwork is reused without bulk generation or automatic ART-01/runtime director approval. No species-specific stats/abilities were supplied: the six appearances reuse the current M2A generic creep profile and rewards, with specialized ranged/poison/area mechanics pending authored definitions. See `docs/DESERT_INTEGRATION.md`.
+
+## M3C3 playtest feedback trial — 2026-10-31
+
+The director explicitly authorizes the gameplay feedback revision without new artwork. This supersedes earlier melee-Phiến/timed-shield/single-hit-evasion descriptions: Phiến A is a two-straight-leg boomerang, one hit per target per leg; both Thiên Sơn A profiles have a 0.3s base cadence with a configurable floor. Cái Bang Chưởng empowers every sixth accepted A, not cleaves; Bổng cycles thrust/sweep/lift/smash without adding airborne control. Võ Đang/Thiếu Lâm hand alternation is an authoritative presentation stage, pending matching art. No-cooldown A means a finite attack cadence without an extra wait, never click-rate damage.
+
+Chiết Mai has bounded active cooldown reduction. Phi Ảnh/Phong Ảnh immunity covers only moving dash ticks and never existing DOT; the later counter is not invulnerable. Thái Cực Thần Công is a resource-safe toggle with overflow to HP. Thái Cực Trận confines enemies without stopping actions inside and respects forced-movement immunity. Dịch Cân Kinh already owns HP regen and is not duplicated. All numeric reach/damage/duration/conversion changes remain configurable trial tuning. Exact before/after and pending asset contracts: `docs/M3C3_FEEDBACK_IMPLEMENTATION.md`. Retained asset bytes/approval locks and unrelated concurrent art remain untouched; no M3D/campaign/boss/PvP/equipment expansion is authorized.
+
 ## School avatar and clean arena spawn — 2026-10-31
 
 The user requests the Thiếu Lâm selection avatar be corrected,the three permanent spawn sơn tặc removed,and creep nameplates replaced by an upcoming-wave notice. Selection now reuses the approved monk idle sprite. Regular matches publish no practice enemies; scheduled invasions and dungeon populations are retained. Historical combat test targets require explicit development-only `VOLAM_DEV_PRACTICE_CREEPS=1`,ignored in production. Creeps retain sprites,health bars and effects but no under-sprite text; player names remain. The next invasion creep type and warning names come from the same retained wave art manifest as the rendered creeps. Wave timing,combat,rewards and server authority are unchanged.

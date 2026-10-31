@@ -1,0 +1,1611 @@
+{
+  "schemaVersion": 2,
+  "id": "thien_son_dao_v2_character",
+  "handoffId": "thien_son_dao_v2",
+  "role": "character",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_dao_v2_character.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_dao_v2/thien_son_dao_v2_character.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_dao_v2/thien_son_dao_v2_character.json",
+  "frameDimensions": [
+    160,
+    120
+  ],
+  "pivot": [
+    80,
+    96
+  ],
+  "origin": [
+    0.5,
+    0.8
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "basic_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 300,
+      "minAcceptedAttackMs": 166.6667,
+      "playback": "fit accepted server interval; restartable; no animation lock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "basic_down_0",
+        "basic_down_1",
+        "basic_down_2",
+        "basic_down_3"
+      ],
+      "frameDurationsMs": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "basic_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "phi_anh_tram_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "phi_anh_tram_cast_down_0",
+        "phi_anh_tram_cast_down_1",
+        "phi_anh_tram_cast_down_2",
+        "phi_anh_tram_cast_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "phi_anh_tram_cast_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "phong_anh_hoan_vi_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "phong_anh_hoan_vi_cast_down_0",
+        "phong_anh_hoan_vi_cast_down_1",
+        "phong_anh_hoan_vi_cast_down_2",
+        "phong_anh_hoan_vi_cast_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "phong_anh_hoan_vi_cast_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "phong_anh_hoan_vi_counter_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "release/contact",
+        "recovery"
+      ],
+      "frames": [
+        "phong_anh_hoan_vi_counter_down_0",
+        "phong_anh_hoan_vi_counter_down_1",
+        "phong_anh_hoan_vi_counter_down_2",
+        "phong_anh_hoan_vi_counter_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "truy_hon_dao_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "truy_hon_dao_cast_down_0",
+        "truy_hon_dao_cast_down_1",
+        "truy_hon_dao_cast_down_2",
+        "truy_hon_dao_cast_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "truy_hon_dao_cast_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "bach_liet_thien_kich_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "bach_liet_thien_kich_cast_down_0",
+        "bach_liet_thien_kich_cast_down_1",
+        "bach_liet_thien_kich_cast_down_2",
+        "bach_liet_thien_kich_cast_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "bach_liet_thien_kich_cast_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "bach_liet_thien_kich_flurry_down",
+      "phase": "loop",
+      "direction": "down",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "bach_liet_thien_kich_flurry_down_0",
+        "bach_liet_thien_kich_flurry_down_1"
+      ],
+      "frameDurationsMs": [
+        70,
+        70
+      ],
+      "durationMsTotal": 140,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "bach_liet_thien_kich_finish_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact"
+      ],
+      "frames": [
+        "bach_liet_thien_kich_finish_down_0",
+        "bach_liet_thien_kich_finish_down_1"
+      ],
+      "frameDurationsMs": [
+        70,
+        70
+      ],
+      "durationMsTotal": 140,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "basic_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 300,
+      "minAcceptedAttackMs": 166.6667,
+      "playback": "fit accepted server interval; restartable; no animation lock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "basic_left_0",
+        "basic_left_1",
+        "basic_left_2",
+        "basic_left_3"
+      ],
+      "frameDurationsMs": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "basic_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "phi_anh_tram_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "phi_anh_tram_cast_left_0",
+        "phi_anh_tram_cast_left_1",
+        "phi_anh_tram_cast_left_2",
+        "phi_anh_tram_cast_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "phi_anh_tram_cast_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "phong_anh_hoan_vi_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "phong_anh_hoan_vi_cast_left_0",
+        "phong_anh_hoan_vi_cast_left_1",
+        "phong_anh_hoan_vi_cast_left_2",
+        "phong_anh_hoan_vi_cast_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "phong_anh_hoan_vi_cast_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "phong_anh_hoan_vi_counter_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "release/contact",
+        "recovery"
+      ],
+      "frames": [
+        "phong_anh_hoan_vi_counter_left_0",
+        "phong_anh_hoan_vi_counter_left_1",
+        "phong_anh_hoan_vi_counter_left_2",
+        "phong_anh_hoan_vi_counter_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "truy_hon_dao_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "truy_hon_dao_cast_left_0",
+        "truy_hon_dao_cast_left_1",
+        "truy_hon_dao_cast_left_2",
+        "truy_hon_dao_cast_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "truy_hon_dao_cast_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "bach_liet_thien_kich_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "bach_liet_thien_kich_cast_left_0",
+        "bach_liet_thien_kich_cast_left_1",
+        "bach_liet_thien_kich_cast_left_2",
+        "bach_liet_thien_kich_cast_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "bach_liet_thien_kich_cast_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "bach_liet_thien_kich_flurry_left",
+      "phase": "loop",
+      "direction": "left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "bach_liet_thien_kich_flurry_left_0",
+        "bach_liet_thien_kich_flurry_left_1"
+      ],
+      "frameDurationsMs": [
+        70,
+        70
+      ],
+      "durationMsTotal": 140,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "bach_liet_thien_kich_finish_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact"
+      ],
+      "frames": [
+        "bach_liet_thien_kich_finish_left_0",
+        "bach_liet_thien_kich_finish_left_1"
+      ],
+      "frameDurationsMs": [
+        70,
+        70
+      ],
+      "durationMsTotal": 140,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "basic_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 300,
+      "minAcceptedAttackMs": 166.6667,
+      "playback": "fit accepted server interval; restartable; no animation lock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "basic_right_0",
+        "basic_right_1",
+        "basic_right_2",
+        "basic_right_3"
+      ],
+      "frameDurationsMs": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "basic_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "phi_anh_tram_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "phi_anh_tram_cast_right_0",
+        "phi_anh_tram_cast_right_1",
+        "phi_anh_tram_cast_right_2",
+        "phi_anh_tram_cast_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "phi_anh_tram_cast_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "phong_anh_hoan_vi_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "phong_anh_hoan_vi_cast_right_0",
+        "phong_anh_hoan_vi_cast_right_1",
+        "phong_anh_hoan_vi_cast_right_2",
+        "phong_anh_hoan_vi_cast_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "phong_anh_hoan_vi_cast_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "phong_anh_hoan_vi_counter_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "release/contact",
+        "recovery"
+      ],
+      "frames": [
+        "phong_anh_hoan_vi_counter_right_0",
+        "phong_anh_hoan_vi_counter_right_1",
+        "phong_anh_hoan_vi_counter_right_2",
+        "phong_anh_hoan_vi_counter_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "truy_hon_dao_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "truy_hon_dao_cast_right_0",
+        "truy_hon_dao_cast_right_1",
+        "truy_hon_dao_cast_right_2",
+        "truy_hon_dao_cast_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "truy_hon_dao_cast_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "bach_liet_thien_kich_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "bach_liet_thien_kich_cast_right_0",
+        "bach_liet_thien_kich_cast_right_1",
+        "bach_liet_thien_kich_cast_right_2",
+        "bach_liet_thien_kich_cast_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "bach_liet_thien_kich_cast_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "bach_liet_thien_kich_flurry_right",
+      "phase": "loop",
+      "direction": "right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "bach_liet_thien_kich_flurry_right_0",
+        "bach_liet_thien_kich_flurry_right_1"
+      ],
+      "frameDurationsMs": [
+        70,
+        70
+      ],
+      "durationMsTotal": 140,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "bach_liet_thien_kich_finish_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact"
+      ],
+      "frames": [
+        "bach_liet_thien_kich_finish_right_0",
+        "bach_liet_thien_kich_finish_right_1"
+      ],
+      "frameDurationsMs": [
+        70,
+        70
+      ],
+      "durationMsTotal": 140,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "basic_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 300,
+      "minAcceptedAttackMs": 166.6667,
+      "playback": "fit accepted server interval; restartable; no animation lock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "basic_up_0",
+        "basic_up_1",
+        "basic_up_2",
+        "basic_up_3"
+      ],
+      "frameDurationsMs": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "basic_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "phi_anh_tram_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "phi_anh_tram_cast_up_0",
+        "phi_anh_tram_cast_up_1",
+        "phi_anh_tram_cast_up_2",
+        "phi_anh_tram_cast_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "phi_anh_tram_cast_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "phong_anh_hoan_vi_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "phong_anh_hoan_vi_cast_up_0",
+        "phong_anh_hoan_vi_cast_up_1",
+        "phong_anh_hoan_vi_cast_up_2",
+        "phong_anh_hoan_vi_cast_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "phong_anh_hoan_vi_cast_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "phong_anh_hoan_vi_counter_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "release/contact",
+        "recovery"
+      ],
+      "frames": [
+        "phong_anh_hoan_vi_counter_up_0",
+        "phong_anh_hoan_vi_counter_up_1",
+        "phong_anh_hoan_vi_counter_up_2",
+        "phong_anh_hoan_vi_counter_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "truy_hon_dao_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "truy_hon_dao_cast_up_0",
+        "truy_hon_dao_cast_up_1",
+        "truy_hon_dao_cast_up_2",
+        "truy_hon_dao_cast_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "truy_hon_dao_cast_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "bach_liet_thien_kich_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "bach_liet_thien_kich_cast_up_0",
+        "bach_liet_thien_kich_cast_up_1",
+        "bach_liet_thien_kich_cast_up_2",
+        "bach_liet_thien_kich_cast_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "bach_liet_thien_kich_cast_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "bach_liet_thien_kich_flurry_up",
+      "phase": "loop",
+      "direction": "up",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "bach_liet_thien_kich_flurry_up_0",
+        "bach_liet_thien_kich_flurry_up_1"
+      ],
+      "frameDurationsMs": [
+        70,
+        70
+      ],
+      "durationMsTotal": 140,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "bach_liet_thien_kich_finish_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact"
+      ],
+      "frames": [
+        "bach_liet_thien_kich_finish_up_0",
+        "bach_liet_thien_kich_finish_up_1"
+      ],
+      "frameDurationsMs": [
+        70,
+        70
+      ],
+      "durationMsTotal": 140,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

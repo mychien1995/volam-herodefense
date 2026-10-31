@@ -1,4 +1,6 @@
 import { expireCombos } from './combos.js';
+import { nextBasic } from './basic-attacks.js';
+import { captureConfinement, confineMovement } from './confinement.js';
 import {
   equippedAbility,
   perform,
@@ -206,7 +208,10 @@ function runCommand(
   }
   if (command.kind === 'select-basic') {
     if (hero.progression) return;
-    if (config.basics[command.id]) hero.basicId = command.id;
+    if (config.basics[command.id]) {
+      hero.basicId = command.id;
+      hero.basicChains = {};
+    }
     return;
   }
   if (command.kind === 'basic') {
@@ -220,7 +225,8 @@ function runCommand(
     if (ability && world.tick >= hero.cooldown) {
       hero.cooldown =
         world.tick + abilityCooldown(hero, ability, config, world.tick, true);
-      perform(world, hero, ability, config, 'attack');
+      const next = nextBasic(hero, ability);
+      perform(world, hero, next.ability, config, 'attack', next.stage);
     }
   }
   if (command.kind === 'cast') {
@@ -231,6 +237,15 @@ function runCommand(
     )
       return;
     const ability = equippedAbility(hero, command.slot, config);
+    const togglingOff =
+      ability?.effect.mode === 'mana_shield' &&
+      ability.effect.toggle &&
+      hero.statuses?.some(
+        (s) =>
+          s.kind === 'mana_shield' &&
+          s.abilityId === ability.id &&
+          s.until > world.tick,
+      );
     if (
       !ability ||
       !Number.isInteger(command.slot) ||
@@ -238,15 +253,22 @@ function runCommand(
       command.slot > 3 ||
       world.tick < (hero.skillCooldowns[command.slot] ?? Infinity) ||
       world.tick < (hero.abilityCooldowns?.[ability.id] ?? 0) ||
-      hero.mana < ability.manaCost
+      (!togglingOff && hero.mana < ability.manaCost)
     )
       return;
-    hero.mana -= ability.manaCost;
+    if (!togglingOff) hero.mana -= ability.manaCost;
     hero.skillCooldowns[command.slot] =
       world.tick + abilityCooldown(hero, ability, config, world.tick);
     hero.abilityCooldowns ??= {};
     hero.abilityCooldowns[ability.id] = hero.skillCooldowns[command.slot]!;
-    perform(world, hero, ability, config, 'cast');
+    perform(
+      world,
+      hero,
+      ability,
+      config,
+      'cast',
+      togglingOff ? 'toggle_off' : undefined,
+    );
   }
 }
 function advanceProjectile(
@@ -316,19 +338,49 @@ function advanceProjectile(
     for (const enemy of victims) {
       if (shot.hitIds.includes(enemy.id)) continue;
       shot.hitIds.push(enemy.id);
-      hurt(world, enemy, shot.ownerId, shot.abilityId, shot.rawDamage, config, {
-        ...(shot.critChance === undefined
-          ? offensiveStats(world, shot.ownerId, config)
-          : {
-              critChance: shot.critChance,
-              critMultiplier: shot.critMultiplier ?? config.critMultiplier,
-            }),
-        fx: dir.x,
-        fy: dir.y,
-      });
+      const hit = hurt(
+        world,
+        enemy,
+        shot.ownerId,
+        shot.abilityId,
+        shot.rawDamage,
+        config,
+        {
+          ...(shot.critChance === undefined
+            ? offensiveStats(world, shot.ownerId, config)
+            : {
+                critChance: shot.critChance,
+                critMultiplier: shot.critMultiplier ?? config.critMultiplier,
+              }),
+          fx: dir.x,
+          fy: dir.y,
+          slowedBonus: shot.effect.slowedBonus,
+        },
+      );
+      if (hit && shot.refund && !shot.refund.used) {
+        shot.refund.used = true;
+        const hero = world.heroes.get(shot.ownerId);
+        if (hero && hero.hp > 0) {
+          hero.mana = Math.min(hero.maxMana, hero.mana + shot.refund.amount);
+          emit(world, {
+            kind: 'pulse',
+            sourceId: hero.id,
+            targetId: hero.id,
+            abilityId: shot.abilityId,
+            x: hero.x,
+            y: hero.y,
+            fx: dir.x,
+            fy: dir.y,
+            stage: 'refund',
+            damage: 0,
+            critical: false,
+          });
+        }
+      }
       if (enemy.hp > 0)
         for (const status of shot.effect.statuses ?? [])
           applyStatus(enemy, status, shot.ownerId, shot.abilityId, world.tick);
+      const before = { x: enemy.x, y: enemy.y };
       if (enemy.hp > 0 && shot.effect.knockback)
         displace(
           enemy,
@@ -338,6 +390,7 @@ function advanceProjectile(
           config,
           world.tick,
         );
+      confineMovement(world, enemy, before, config);
       if (enemy.hp > 0 && shot.effect.burnDamage > 0) {
         enemy.burnSource = shot.ownerId;
         enemy.burnDamage = shot.effect.burnDamage;
@@ -349,13 +402,40 @@ function advanceProjectile(
   if (
     (hits.length > 0 && !shot.effect.piercing) ||
     wallT < Infinity ||
-    shot.remaining <= length
+    (shot.remaining <= length &&
+      (!shot.effect.boomerang || shot.leg === 'return'))
   )
     world.projectiles.delete(shot.id);
   else {
     shot.x = end.x;
     shot.y = end.y;
     shot.remaining -= length;
+    if (shot.remaining <= 0 && shot.effect.boomerang && shot.leg !== 'return') {
+      const owner = world.heroes.get(shot.ownerId);
+      if (!owner || owner.hp <= 0) {
+        world.projectiles.delete(shot.id);
+        return;
+      }
+      const aim = direction(owner.x - shot.x, owner.y - shot.y);
+      shot.vx = aim.x * shot.effect.speed;
+      shot.vy = aim.y * shot.effect.speed;
+      shot.remaining = distance(owner, shot);
+      shot.leg = 'return';
+      shot.hitIds = [];
+      emit(world, {
+        kind: 'pulse',
+        sourceId: owner.id,
+        targetId: '',
+        abilityId: shot.abilityId,
+        x: shot.x,
+        y: shot.y,
+        fx: aim.x,
+        fy: aim.y,
+        stage: 'projectile_return',
+        damage: 0,
+        critical: false,
+      });
+    }
   }
 }
 export function stepWorld(world: World, config: SimulationConfig): void {
@@ -410,6 +490,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     const hero = world.heroes.get(input.heroId);
     if (hero) runCommand(world, hero, input.command, config);
   }
+  captureConfinement(world, config);
   stepSkillActions(world, config);
   stepAreas(world, config);
   stepSupports(world, config);
@@ -439,6 +520,11 @@ export function stepWorld(world: World, config: SimulationConfig): void {
             critMultiplier: scheduled.critMultiplier ?? config.critMultiplier,
           }),
       effect: scheduled.ability.effect,
+      ...(scheduled.ability.effect.boomerang
+        ? { leg: 'outbound' as const }
+        : {}),
+      ...(scheduled.refund ? { refund: scheduled.refund } : {}),
+      ...(scheduled.stage ? { stage: scheduled.stage } : {}),
     });
   }
   world.shots = world.shots.filter((item) => item.tick > world.tick);
@@ -463,7 +549,10 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       world.tick <= enemy.burnUntil &&
       world.tick >= enemy.burnNext
     ) {
-      hurt(world, enemy, enemy.burnSource, 'burn', enemy.burnDamage, config);
+      hurt(world, enemy, enemy.burnSource, 'burn', enemy.burnDamage, config, {
+        ...offensiveStats(world, enemy.burnSource, config),
+        periodic: true,
+      });
       enemy.burnNext += config.tickRate;
     }
     if (enemy.hp <= 0) continue;
@@ -514,6 +603,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
           ? stats.attackRange + objective.radius
           : 2);
     if (moving && !hasStatus(enemy, 'stun', world.tick)) {
+      const before = { x: enemy.x, y: enemy.y };
       enemy.fx = delta.x;
       enemy.fy = delta.y;
       moveCircle(
@@ -535,6 +625,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
         config.height,
         config.collision,
       );
+      confineMovement(world, enemy, before, config);
     }
     const victim = hero ?? objective;
     if (

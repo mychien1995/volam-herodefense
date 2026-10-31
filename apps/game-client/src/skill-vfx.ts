@@ -10,6 +10,9 @@ import {
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
 import { facing } from './facing.js';
+import { FeedbackVfx } from './feedback-vfx.js';
+import { feedbackArt } from './feedback-art.js';
+import { feedbackProjectile, feedbackScale } from './feedback-visuals.js';
 import {
   preloadRasterAnimations,
   registerRasterAnimations,
@@ -18,9 +21,11 @@ import {
 const components = new Map(skillArt.assets.map((a) => [a.id, a]));
 export function preloadSkillArt(scene: Phaser.Scene): void {
   preloadRasterAnimations(scene, skillArt.assets);
+  preloadRasterAnimations(scene, feedbackArt);
 }
 export function registerSkillArt(scene: Phaser.Scene): void {
   registerRasterAnimations(scene, skillArt.assets);
+  registerRasterAnimations(scene, feedbackArt);
 }
 interface EffectView {
   sprite: Phaser.GameObjects.Sprite;
@@ -38,6 +43,7 @@ interface VfxActor {
   zoneId: string;
 }
 export class SkillVfx {
+  private feedback: FeedbackVfx;
   private transient = new Set<EffectView>();
   private persistent = new Map<string, EffectView>();
   private projectiles = new Map<string, EffectView>();
@@ -55,7 +61,9 @@ export class SkillVfx {
     }
   >();
   private state: LobbyState | undefined;
-  constructor(private scene: Phaser.Scene) {}
+  constructor(private scene: Phaser.Scene) {
+    this.feedback = new FeedbackVfx(scene);
+  }
   private tag(
     asset: string,
     prefix: string,
@@ -83,7 +91,10 @@ export class SkillVfx {
     const sprite = this.scene.add
       .sprite(x, y, asset, tag.frames[0]!)
       .setOrigin(...tag.origin)
-      .setScale(components.get(asset)?.displayScale ?? 1);
+      .setScale(
+        (components.get(asset)?.displayScale ?? 1) *
+          feedbackScale(asset, prefix),
+      );
     sprite.play({
       key: skillAnimationKey(asset, tag.name),
       ...(loop ? { repeat: -1 } : {}),
@@ -141,6 +152,17 @@ export class SkillVfx {
     );
     if (!view) return;
     if (
+      ['hoanh_tao_bong', 'cam_long_cong'].includes(event.abilityId) &&
+      event.radius &&
+      event.kind === 'cast'
+    )
+      view.sprite.setScale(
+        Math.max(
+          1,
+          event.radius / (event.abilityId === 'cam_long_cong' ? 160 : 64),
+        ),
+      );
+    if (
       event.radius &&
       view.tag.placement === 'ground' &&
       (skillVisualStages[event.abilityId]?.area ||
@@ -164,9 +186,22 @@ export class SkillVfx {
     );
   }
   event(e: CombatEvent): void {
-    const skill = basicSkillVisualAliases[e.abilityId] ?? e.abilityId;
+    if (e.kind === 'attack') this.casts.delete(e.sourceId);
+    if (this.feedback.event(e)) return;
+    const skill =
+      e.abilityId === 'thien_son_phien'
+        ? 'lien_hoa_phien'
+        : e.abilityId === 'thien_son_dao'
+          ? 'liet_phong_dao'
+          : (basicSkillVisualAliases[e.abilityId] ?? e.abilityId);
     const visual = skillVisualStages[skill];
     if (e.kind === 'attack') this.casts.delete(e.sourceId);
+    if (e.kind === 'attack' && e.abilityId === 'cai_bang_bong')
+      this.burst(
+        'hoanh_tao_bong_vfx',
+        e.stage === 'smash' ? 'impact' : 'sweep',
+        e,
+      );
     if (e.kind === 'attack' && e.abilityId.startsWith('thien_son_'))
       this.burst(
         e.abilityId === 'thien_son_phien'
@@ -190,12 +225,25 @@ export class SkillVfx {
         e,
       );
     if (e.kind === 'cast') {
+      if (e.stage === 'toggle_off') {
+        this.casts.delete(e.sourceId);
+        return;
+      }
       this.casts.set(e.sourceId, {
         abilityId: e.abilityId,
         fx: e.fx ?? 1,
         fy: e.fy ?? 0,
       });
-      if (visual?.release) this.burst(`${e.abilityId}_vfx`, visual.release, e);
+      if (e.abilityId === 'hoanh_tao_bong') {
+        for (const [fx, fy] of [
+          [1, 0],
+          [0, 1],
+          [-1, 0],
+          [0, -1],
+        ])
+          this.burst('hoanh_tao_bong_vfx', 'sweep', { ...e, fx, fy });
+      } else if (visual?.release)
+        this.burst(`${e.abilityId}_vfx`, visual.release, e);
       if (visual?.sharedRelease)
         this.burst(
           visual.sharedRelease.asset,
@@ -251,7 +299,10 @@ export class SkillVfx {
           prefix: 'finish',
         });
       const cast = this.casts.get(e.sourceId);
-      const repeated = cast && (cast.pulses = (cast.pulses ?? 0) + 1) > 1;
+      const repeated =
+        e.stage === 'sweep' &&
+        cast &&
+        (cast.pulses = (cast.pulses ?? 0) + 1) > 1;
       if (e.stage === 'counter' && visual?.received)
         this.burst(`${e.abilityId}_vfx`, visual.received, e);
       if (e.stage === 'absorb' && visual?.absorption)
@@ -278,7 +329,11 @@ export class SkillVfx {
               : repeated
                 ? visual?.repeatPulse
                 : visual?.pulse;
-      if (animation) this.burst(`${e.abilityId}_vfx`, animation, e);
+      if (
+        animation &&
+        ['area_tick', 'finisher', 'explosion', 'sweep'].includes(e.stage ?? '')
+      )
+        this.burst(`${e.abilityId}_vfx`, animation, e);
     }
   }
   sync(
@@ -287,6 +342,7 @@ export class SkillVfx {
     renderPosition?: (id: string) => { x: number; y: number } | undefined,
   ): void {
     this.state = state;
+    this.feedback.sync(state, zoneId, renderPosition);
     if (state?.phase === 'DEFEAT') {
       this.clear();
       return;
@@ -324,6 +380,7 @@ export class SkillVfx {
         magnitude: number;
       }>;
       for (const s of statuses) {
+        if (this.feedback.suppressesStatus(s.abilityId, s.kind)) continue;
         const stage = skillVisualStages[s.abilityId];
         const definition =
           stage?.persistent &&
@@ -370,7 +427,11 @@ export class SkillVfx {
           if (view) this.persistent.set(key, view);
         }
         if (view) this.place(view, point.x, point.y);
-        if (view && s.kind === 'support_aura')
+        if (
+          view &&
+          ['support_aura', 'channel'].includes(s.kind) &&
+          s.magnitude > 1
+        )
           view.sprite.setScale((s.magnitude * 2) / view.tag.frameDimensions[0]);
         if (stage?.extraPersistent) {
           const extraKey = key + ':extra';
@@ -396,6 +457,7 @@ export class SkillVfx {
     state?.players.forEach((a, id) => syncActor(id, a));
     state?.creeps.forEach((a, id) => syncActor(id, a));
     state?.areas.forEach((a, id) => {
+      if (this.feedback.areaHandled(a.abilityId)) return;
       if (a.zoneId !== zoneId) return;
       const key = 'area:' + id,
         prefix = skillVisualStages[a.abilityId]?.area;
@@ -451,11 +513,14 @@ export class SkillVfx {
       }
     const shots = new Set<string>();
     state?.projectiles.forEach((p, id) => {
+      if (this.feedback.projectileHandled(p.abilityId, p.stage)) return;
       if (p.zoneId !== zoneId) return;
       shots.add(id);
       const skill = basicSkillVisualAliases[p.abilityId] ?? p.abilityId;
-      const prefix = skillVisualStages[skill]?.travel ?? 'projectile',
-        asset = `${skill}_vfx`;
+      const temporary = feedbackProjectile(p.abilityId, p.stage);
+      const prefix =
+          temporary?.prefix ?? skillVisualStages[skill]?.travel ?? 'projectile',
+        asset = temporary?.asset ?? `${skill}_vfx`;
       let v = this.projectiles.get(id);
       if (!v) {
         v = this.make(asset, prefix, p.x, p.y, p.vx, p.vy, p.ownerId, true);
@@ -463,6 +528,18 @@ export class SkillVfx {
       }
       if (v) {
         this.place(v, p.x, p.y);
+        if (temporary) {
+          v.sprite.setScale(temporary.scale);
+          if (temporary.centered)
+            v.sprite
+              .setOrigin(0.5, 0.5)
+              .setPosition(Math.round(p.x), Math.round(p.y - 20))
+              .setDepth(p.y + 0.4);
+        } else if (
+          p.abilityId === 'huyen_am_chuong' ||
+          p.abilityId === 'hang_long_hoa_vu'
+        )
+          v.sprite.setScale(1.4);
         const angle: Record<string, number> = {
           right: 0,
           down: Math.PI / 2,
@@ -493,6 +570,9 @@ export class SkillVfx {
         firstFrame: string;
         scale: number;
         durationMs: number;
+        token: string;
+        timeScale: number;
+        startFrame: number;
       }
     | undefined {
     const asset = `${id}_character`,
@@ -505,9 +585,13 @@ export class SkillVfx {
       firstFrame: tag.frames[0]!,
       scale: components.get(asset)?.displayScale ?? 1,
       durationMs: (tag.frames.length / tag.frameRate) * 1000,
+      token: 'legacy',
+      timeScale: 1,
+      startFrame: 0,
     };
   }
   clear(): void {
+    this.feedback.clear();
     this.casts.clear();
     for (const v of [
       ...this.transient,
@@ -520,6 +604,7 @@ export class SkillVfx {
     this.projectiles.clear();
   }
   observeCharacter(texture: string, frame: string) {
+    this.feedback.observeCharacter(texture, frame);
     if (components.has(texture)) {
       this.frameObservations.add(`${texture}:${frame}`);
       this.played.add(`${texture}:cast`);
@@ -533,6 +618,9 @@ export class SkillVfx {
     fy: number,
     hp: number,
   ) {
+    const updated = this.feedback.actorCast(id, pose, fx, fy, hp);
+    if (updated) return updated;
+    if (this.feedback.handles(abilityId) && pose === 'cast') return;
     if (hp <= 0 || this.state?.phase === 'DEFEAT') {
       this.casts.delete(id);
       return;
@@ -580,6 +668,7 @@ export class SkillVfx {
   }
   inspect() {
     return {
+      feedback: this.feedback.inspect(),
       loadedComponents: skillArt.assets.filter((a) =>
         this.scene.textures.exists(a.id),
       ).length,
@@ -600,6 +689,7 @@ export class SkillVfx {
         depth: v.sprite.depth,
         x: v.sprite.x,
         y: v.sprite.y,
+        scale: v.sprite.scaleX,
       })),
       projectiles: [...this.projectiles].map(([id, v]) => ({
         id,
@@ -608,8 +698,15 @@ export class SkillVfx {
         depth: v.sprite.depth,
         x: v.sprite.x,
         y: v.sprite.y,
+        scale: v.sprite.scaleX,
       })),
       observedFrames: [...this.frameObservations],
     };
+  }
+  reviewFeedback(asset: string, tag: string, x: number, y: number) {
+    return this.feedback.review(asset, tag, x, y);
+  }
+  suppressesCastPose(id: string) {
+    return this.feedback.suppressesCastPose(id);
   }
 }

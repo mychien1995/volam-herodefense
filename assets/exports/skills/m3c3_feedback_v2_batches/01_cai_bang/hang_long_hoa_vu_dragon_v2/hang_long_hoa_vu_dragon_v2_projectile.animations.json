@@ -1,0 +1,211 @@
+{
+  "schemaVersion": 2,
+  "id": "hang_long_hoa_vu_dragon_v2_projectile",
+  "handoffId": "hang_long_hoa_vu_dragon_v2",
+  "role": "projectile",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/01_cai_bang/hang_long_hoa_vu_dragon_v2_projectile.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/hang_long_hoa_vu_dragon_v2/hang_long_hoa_vu_dragon_v2_projectile.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/hang_long_hoa_vu_dragon_v2/hang_long_hoa_vu_dragon_v2_projectile.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "travel_down",
+      "phase": "travel",
+      "direction": "down",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "authoredHeadingDegrees": 90,
+      "trajectory": "one large dragon follows server projectile fixed velocity",
+      "frames": [
+        "travel_down_0",
+        "travel_down_1",
+        "travel_down_2",
+        "travel_down_3",
+        "travel_down_4",
+        "travel_down_5"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 420,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "travel_left",
+      "phase": "travel",
+      "direction": "left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "authoredHeadingDegrees": 180,
+      "trajectory": "one large dragon follows server projectile fixed velocity",
+      "frames": [
+        "travel_left_0",
+        "travel_left_1",
+        "travel_left_2",
+        "travel_left_3",
+        "travel_left_4",
+        "travel_left_5"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 420,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "travel_right",
+      "phase": "travel",
+      "direction": "right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "authoredHeadingDegrees": 0,
+      "trajectory": "one large dragon follows server projectile fixed velocity",
+      "frames": [
+        "travel_right_0",
+        "travel_right_1",
+        "travel_right_2",
+        "travel_right_3",
+        "travel_right_4",
+        "travel_right_5"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 420,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "travel_up",
+      "phase": "travel",
+      "direction": "up",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "authoredHeadingDegrees": 270,
+      "trajectory": "one large dragon follows server projectile fixed velocity",
+      "frames": [
+        "travel_up_0",
+        "travel_up_1",
+        "travel_up_2",
+        "travel_up_3",
+        "travel_up_4",
+        "travel_up_5"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 420,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

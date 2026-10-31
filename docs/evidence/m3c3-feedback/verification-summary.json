@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "command": "pnpm check:final --config playwright.feedback.config.ts --grep 'feedback|normal four-school|six-player natural combat|two clients agree|ranged projectile|two real clients'",
+  "finalSeconds": 553.67,
+  "typecheck": "PASS",
+  "workflowTests": 8,
+  "unitIntegrationTests": 330,
+  "unitFiles": 26,
+  "assetValidators": 10,
+  "productionBuild": "PASS",
+  "assetPreparation": {
+    "written": 0,
+    "unchanged": 2150
+  },
+  "browser": {
+    "startTime": "2026-10-31T11:12:25.018Z",
+    "duration": 481035.63200000004,
+    "expected": 11,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "balanceProbes": 384,
+  "baseline": {
+    "commit": "c810cf87f69e51bb62d907ecd4b9fa0664ebe38a",
+    "preparedJson": [
+      "arena-map.json",
+      "creep-forest-map.json",
+      "skill-art.json"
+    ],
+    "source": "Unmodified git HEAD core/data TypeScript plus unchanged prepared map/art JSON in an ignored artifact directory; no checkout or historical evidence changed."
+  },
+  "sixPlayerXp": [
+    34,
+    10,
+    34,
+    34,
+    34,
+    34
+  ],
+  "sixPlayerErrors": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
+  "art": "Retained raster stand-ins only; no new assets integrated or approval implied.",
+  "recordingsCreated": false,
+  "limitations": [
+    "Provisional numeric tuning",
+    "No campaign, boss, PvP or economy balance claim",
+    "New production animation art remains pending",
+    "New preview frame observations are subsets; retained baselines have their separate four-direction check"
+  ]
+}

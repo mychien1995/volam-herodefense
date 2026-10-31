@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 2,
+  "id": "cai_bang_chuong_dragon_v2_projectile",
+  "handoffId": "cai_bang_chuong_dragon_v2",
+  "role": "projectile",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/01_cai_bang/cai_bang_chuong_dragon_v2_projectile.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/cai_bang_chuong_dragon_v2/cai_bang_chuong_dragon_v2_projectile.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/cai_bang_chuong_dragon_v2/cai_bang_chuong_dragon_v2_projectile.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "dragon_travel_down",
+      "phase": "travel",
+      "direction": "down",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "authoredHeadingDegrees": 90,
+      "trajectory": "fixed server velocity; no homing",
+      "frames": [
+        "dragon_travel_down_0",
+        "dragon_travel_down_1",
+        "dragon_travel_down_2",
+        "dragon_travel_down_3",
+        "dragon_travel_down_4",
+        "dragon_travel_down_5"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 420,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "hoa_van_travel_down",
+      "phase": "travel",
+      "direction": "down",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "authoredHeadingDegrees": 90,
+      "serverFanAnglesDegrees": [
+        -30,
+        0,
+        30
+      ],
+      "drawsSingleProjectile": true,
+      "frames": [
+        "hoa_van_travel_down_0",
+        "hoa_van_travel_down_1",
+        "hoa_van_travel_down_2",
+        "hoa_van_travel_down_3",
+        "hoa_van_travel_down_4",
+        "hoa_van_travel_down_5"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 360,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "dragon_travel_left",
+      "phase": "travel",
+      "direction": "left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "authoredHeadingDegrees": 180,
+      "trajectory": "fixed server velocity; no homing",
+      "frames": [
+        "dragon_travel_left_0",
+        "dragon_travel_left_1",
+        "dragon_travel_left_2",
+        "dragon_travel_left_3",
+        "dragon_travel_left_4",
+        "dragon_travel_left_5"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 420,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "hoa_van_travel_left",
+      "phase": "travel",
+      "direction": "left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "authoredHeadingDegrees": 180,
+      "serverFanAnglesDegrees": [
+        -30,
+        0,
+        30
+      ],
+      "drawsSingleProjectile": true,
+      "frames": [
+        "hoa_van_travel_left_0",
+        "hoa_van_travel_left_1",
+        "hoa_van_travel_left_2",
+        "hoa_van_travel_left_3",
+        "hoa_van_travel_left_4",
+        "hoa_van_travel_left_5"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 360,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "dragon_travel_right",
+      "phase": "travel",
+      "direction": "right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "authoredHeadingDegrees": 0,
+      "trajectory": "fixed server velocity; no homing",
+      "frames": [
+        "dragon_travel_right_0",
+        "dragon_travel_right_1",
+        "dragon_travel_right_2",
+        "dragon_travel_right_3",
+        "dragon_travel_right_4",
+        "dragon_travel_right_5"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 420,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "hoa_van_travel_right",
+      "phase": "travel",
+      "direction": "right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "authoredHeadingDegrees": 0,
+      "serverFanAnglesDegrees": [
+        -30,
+        0,
+        30
+      ],
+      "drawsSingleProjectile": true,
+      "frames": [
+        "hoa_van_travel_right_0",
+        "hoa_van_travel_right_1",
+        "hoa_van_travel_right_2",
+        "hoa_van_travel_right_3",
+        "hoa_van_travel_right_4",
+        "hoa_van_travel_right_5"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 360,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "dragon_travel_up",
+      "phase": "travel",
+      "direction": "up",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "authoredHeadingDegrees": 270,
+      "trajectory": "fixed server velocity; no homing",
+      "frames": [
+        "dragon_travel_up_0",
+        "dragon_travel_up_1",
+        "dragon_travel_up_2",
+        "dragon_travel_up_3",
+        "dragon_travel_up_4",
+        "dragon_travel_up_5"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 420,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "hoa_van_travel_up",
+      "phase": "travel",
+      "direction": "up",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "authoredHeadingDegrees": 270,
+      "serverFanAnglesDegrees": [
+        -30,
+        0,
+        30
+      ],
+      "drawsSingleProjectile": true,
+      "frames": [
+        "hoa_van_travel_up_0",
+        "hoa_van_travel_up_1",
+        "hoa_van_travel_up_2",
+        "hoa_van_travel_up_3",
+        "hoa_van_travel_up_4",
+        "hoa_van_travel_up_5"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 360,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

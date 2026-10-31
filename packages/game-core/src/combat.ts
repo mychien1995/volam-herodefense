@@ -5,7 +5,7 @@ import type {
   SimulationConfig,
   World,
 } from './types.js';
-import { cancelOwnedEffects, statusValue } from './status.js';
+import { cancelOwnedEffects, hasStatus, statusValue } from './status.js';
 import { characterStats, gainExperience } from './progression.js';
 import { direction, distance, segmentRect } from './geometry.js';
 import { comboHit } from './combos.js';
@@ -28,11 +28,15 @@ export function hurt(
     armorPenetration?: number | undefined;
     slowedBonus?: number | undefined;
     reactive?: boolean | undefined;
+    periodic?: boolean | undefined;
     combo?: ComboSpec | undefined;
     comboTargets?: Record<string, boolean> | undefined;
   },
 ): boolean {
   if (target.hp <= 0 || raw <= 0) return false;
+  // DOT remains damage; immunity exists only on actual moving dash ticks.
+  if (!snapshot?.periodic && hasStatus(target, 'dash_guard', world.tick))
+    return false;
   let empowered = false;
   if (
     snapshot?.combo &&
@@ -67,6 +71,7 @@ export function hurt(
   // so counters cannot recursively trigger each other or fire twice in a tick.
   const counter =
     !snapshot?.reactive &&
+    !snapshot?.periodic &&
     world.heroes.has(target.id) &&
     target.statuses?.find((s) => s.kind === 'counter' && s.until > world.tick);
   const attacker = world.creeps.get(sourceId);
@@ -153,7 +158,14 @@ export function hurt(
   );
   const mitigation = Math.min(
     0.85,
-    statusValue(target, 'damage_reduction', world.tick),
+    Math.max(
+      statusValue(target, 'damage_reduction', world.tick),
+      ...(world.actions ?? [])
+        .filter((a) => a.ownerId === target.id && a.until > world.tick)
+        .map((a) =>
+          a.effect.mode === 'multi_hit' ? (a.effect.guard ?? 0) : 0,
+        ),
+    ),
   );
   if (mitigation > 0) {
     const before = damage;

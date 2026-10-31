@@ -1,0 +1,1863 @@
+{
+  "schemaVersion": 1,
+  "id": "forest_truc_yeu",
+  "typeId": "truc_yeu",
+  "nameVi": "Trúc Yêu",
+  "category": "enemy",
+  "status": "candidate",
+  "produced": true,
+  "directorApproved": false,
+  "runtimeIntegrated": false,
+  "runtimeVerified": true,
+  "sourceConcept": "assets/concepts/dungeon-creeps/forest/truc_yeu_concept_v01.png",
+  "sheet": "assets/sprites/creeps/dungeons/forest/truc_yeu/spritesheet.png",
+  "atlas": "assets/sprites/creeps/dungeons/forest/truc_yeu/atlas.json",
+  "source": "assets/sprites/creeps/dungeons/forest/truc_yeu/source/truc_yeu_v01.aseprite",
+  "frameWidth": 192,
+  "frameHeight": 128,
+  "feetPixels": [
+    96,
+    106
+  ],
+  "footPivot": [
+    0.5,
+    0.828125
+  ],
+  "displayScale": 1,
+  "bodyTargetPixels": 56,
+  "bodyTargetAxis": "height",
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    }
+  ],
+  "anchorMethod": "Median lower contact pixels from existing actor anchor helper",
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/idle_down_0.png",
+      "sha256": "cc456d78cf9b38fc5480931ce9c8777aa660b9cc0bd9b1979791ca82b7bff6e6",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          103,
+          17,
+          227,
+          229
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          122.0,
+          229
+        ],
+        "placement": [
+          66,
+          50
+        ]
+      }
+    },
+    {
+      "name": "idle_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/idle_down_1.png",
+      "sha256": "410ae4f72b2ddab55056674e7339f0f7e61828c171a472501aa905af1b4cd031",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          463,
+          17,
+          223,
+          229
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          93.0,
+          229
+        ],
+        "placement": [
+          73,
+          50
+        ]
+      }
+    },
+    {
+      "name": "walk_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_down_0.png",
+      "sha256": "d2c07fe52572cdcfa9341033102c85932aa165d424ebefeb9697b7e17127bad3",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          850,
+          14,
+          222,
+          240
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          124.0,
+          240
+        ],
+        "placement": [
+          66,
+          47
+        ]
+      }
+    },
+    {
+      "name": "walk_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_down_1.png",
+      "sha256": "964b893e7b7fdf46298ded88d7334d016befdb5f9c3a03d4de5d1d91d6714e8b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1214,
+          15,
+          224,
+          234
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          133.0,
+          234
+        ],
+        "placement": [
+          63,
+          49
+        ]
+      }
+    },
+    {
+      "name": "walk_down_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_down_2.png",
+      "sha256": "87d117a6d0bea2aa7bc83aa183653736d850427834b929040f5c0671ba5461a0",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          95,
+          269,
+          244,
+          231
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          141.0,
+          231
+        ],
+        "placement": [
+          62,
+          50
+        ]
+      }
+    },
+    {
+      "name": "walk_down_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_down_3.png",
+      "sha256": "4df12571f091bb0dce92f6279a2b51fed8a4a78d7c8a32c08d96f10d5f441df4",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          479,
+          264,
+          226,
+          237
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          109.0,
+          237
+        ],
+        "placement": [
+          69,
+          48
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_down_0.png",
+      "sha256": "123aaee1ca45adf5014ecd5a3f29de4284557afde70dc779b2de386f853209aa",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          802,
+          274,
+          317,
+          226
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          189.0,
+          226
+        ],
+        "placement": [
+          50,
+          51
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_down_1.png",
+      "sha256": "f03822444657f4d5c63a09f3bd7fbc7b866bdafd6bdd5a598af8d1fea4865f72",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1184,
+          268,
+          292,
+          241
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          94.0,
+          241
+        ],
+        "placement": [
+          73,
+          47
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_down_2.png",
+      "sha256": "49d79e62172b94e72248360abeecd27d1add34c7f9842e786af73ccfb9e4a705",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          72,
+          522,
+          307,
+          221
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          105.0,
+          221
+        ],
+        "placement": [
+          70,
+          52
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_down_3.png",
+      "sha256": "dd683b6ff555fe0ffc7fc279ee28756657dc322906be36910eab7043a4443941",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          443,
+          517,
+          283,
+          232
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          91.0,
+          232
+        ],
+        "placement": [
+          74,
+          49
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/hurt_down_0.png",
+      "sha256": "d742fdbda42888bf861a9ecfee95ee8d4d6cedddcfe67cd4006ef2eb565366fe",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          829,
+          515,
+          262,
+          238
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          82.0,
+          238
+        ],
+        "placement": [
+          76,
+          48
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/hurt_down_1.png",
+      "sha256": "4e468c2ab099692d7fa281f84e210d7d6d2edcb49720ea8220f3712728c6b34f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1208,
+          519,
+          260,
+          226
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          169.0,
+          226
+        ],
+        "placement": [
+          55,
+          51
+        ]
+      }
+    },
+    {
+      "name": "death_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_down_0.png",
+      "sha256": "e482ed41f2f6d8ba4cc48e589192c9f4874f9facf5dd47535d2608d57f919db4",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          87,
+          758,
+          232,
+          242
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          122.0,
+          242
+        ],
+        "placement": [
+          66,
+          47
+        ]
+      }
+    },
+    {
+      "name": "death_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_down_1.png",
+      "sha256": "e8962a39dfde8844ddd62a1c322482e64e199b27db95a741e8ab83e46d19025a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          430,
+          784,
+          300,
+          222
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          76.0,
+          222
+        ],
+        "placement": [
+          77,
+          52
+        ]
+      }
+    },
+    {
+      "name": "death_down_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_down_2.png",
+      "sha256": "a75296db09da51a9e6002d55df9d68f7780f4b657216c9ada058ea58ba077ef5",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          754,
+          813,
+          390,
+          165
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          324.0,
+          165
+        ],
+        "placement": [
+          17,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_down_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_down_3.png",
+      "sha256": "b6c4f2161e84b52667d73eefd6c6596b31dc54223f304efce476aab5cf30109d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1168,
+          829,
+          339,
+          145
+        ],
+        "fixedSourceScale": 0.2445414847161572,
+        "sourceFootInCrop": [
+          145.0,
+          145
+        ],
+        "placement": [
+          61,
+          71
+        ]
+      }
+    },
+    {
+      "name": "idle_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/idle_left_0.png",
+      "sha256": "96caa6572678839f9b0060fb6daec0e50fb361cc1e4f6d642f96a7c76332bdfb",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          139,
+          25,
+          215,
+          230
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          84.0,
+          230
+        ],
+        "placement": [
+          75,
+          49
+        ]
+      }
+    },
+    {
+      "name": "idle_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/idle_left_1.png",
+      "sha256": "b2dd7210100d218a80ee0e478896383e40ccfa99f8e987de22404b5ab755f9fb",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          478,
+          28,
+          210,
+          225
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          80.0,
+          225
+        ],
+        "placement": [
+          76,
+          51
+        ]
+      }
+    },
+    {
+      "name": "walk_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_left_0.png",
+      "sha256": "7b123decdc34f60984095ed694b0a454a0513b2ed85638ea388d886198a7739a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          802,
+          22,
+          230,
+          231
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          84.0,
+          231
+        ],
+        "placement": [
+          75,
+          49
+        ]
+      }
+    },
+    {
+      "name": "walk_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_left_1.png",
+      "sha256": "8a922633cf978503765d60eb05fbae673b44db742d038f23439a6d159f5a3fb1",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1175,
+          24,
+          248,
+          229
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          62.0,
+          229
+        ],
+        "placement": [
+          81,
+          50
+        ]
+      }
+    },
+    {
+      "name": "walk_left_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_left_2.png",
+      "sha256": "5c7a38368ba678dea37f5b073a99e94d4411cb4541e81e4a961672543cf11787",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          134,
+          281,
+          236,
+          230
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          75.0,
+          230
+        ],
+        "placement": [
+          78,
+          49
+        ]
+      }
+    },
+    {
+      "name": "walk_left_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_left_3.png",
+      "sha256": "97c219a27b58e58b68583da8c6d4ca973b47c20295140e74a01cb8d0967178a4",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          471,
+          281,
+          233,
+          225
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          61.0,
+          225
+        ],
+        "placement": [
+          81,
+          51
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_left_0.png",
+      "sha256": "b95acdd4014985d6a5b17b7b6adb337680c63ab5bcebef9854b56ba180335b6a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          815,
+          314,
+          264,
+          198
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          105.0,
+          198
+        ],
+        "placement": [
+          70,
+          57
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_left_1.png",
+      "sha256": "22e36a8eb4c93bd0b1b2bb1262a89d24b78a7855a8fa3a6e989bfcf3ad0cb449",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1175,
+          277,
+          281,
+          236
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          179.0,
+          236
+        ],
+        "placement": [
+          52,
+          48
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_left_2.png",
+      "sha256": "ce2379f9b4c73351b371ee93245cc23266f2757e0db3b6f0598af45d81c62496",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          41,
+          543,
+          361,
+          215
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          193.0,
+          215
+        ],
+        "placement": [
+          48,
+          53
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_left_3.png",
+      "sha256": "c3d4c463a2ed22c18381a4f08a516df38eba5d4bddf824d5bb5ec9cab7fac1ab",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          401,
+          543,
+          376,
+          214
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          287.0,
+          214
+        ],
+        "placement": [
+          25,
+          53
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/hurt_left_0.png",
+      "sha256": "913ce4a3b5c45a1f8522df985540076b3162bcaea8c3c051dc0148f88342c233",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          775,
+          542,
+          302,
+          220
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          200.0,
+          220
+        ],
+        "placement": [
+          47,
+          52
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/hurt_left_1.png",
+      "sha256": "b468d6d5d099547a2a4e4f49e1ad85d4be3e9f4ad3dad73d60ffa9b8ebce8eec",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1208,
+          553,
+          230,
+          208
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          97.0,
+          208
+        ],
+        "placement": [
+          72,
+          55
+        ]
+      }
+    },
+    {
+      "name": "death_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_left_0.png",
+      "sha256": "04562a3d0e253020df7099c62956da924de6dcfb7623e03c24c406880a8c12ef",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          121,
+          783,
+          205,
+          218
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          91.0,
+          218
+        ],
+        "placement": [
+          74,
+          52
+        ]
+      }
+    },
+    {
+      "name": "death_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_left_1.png",
+      "sha256": "c2662c9677be12e7447ed08a87a82721716926ceb91f487aa06166b0f30439ee",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          401,
+          812,
+          310,
+          174
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          180.0,
+          174
+        ],
+        "placement": [
+          52,
+          63
+        ]
+      }
+    },
+    {
+      "name": "death_left_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_left_2.png",
+      "sha256": "4ef606fb37664429ce8079d43a632938c6945d280230076e2055673e1c3f2420",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          761,
+          871,
+          344,
+          121
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          205.0,
+          121
+        ],
+        "placement": [
+          46,
+          76
+        ]
+      }
+    },
+    {
+      "name": "death_left_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_left_3.png",
+      "sha256": "38edf55b30104baedbf19a5714d4142ce4878a0cff6f273cb2475fbd9a3ba498",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1148,
+          889,
+          317,
+          98
+        ],
+        "fixedSourceScale": 0.24615384615384617,
+        "sourceFootInCrop": [
+          172.0,
+          98
+        ],
+        "placement": [
+          54,
+          82
+        ]
+      }
+    },
+    {
+      "name": "idle_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/idle_right_0.png",
+      "sha256": "c70e490265e65546118d7303b81bb91af583c9b76b90b5ad13ed0955bf5a447f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          72,
+          17,
+          240,
+          237
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          79.0,
+          237
+        ],
+        "placement": [
+          77,
+          50
+        ]
+      }
+    },
+    {
+      "name": "idle_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/idle_right_1.png",
+      "sha256": "289ae164017f8f648f35aabda16fafac5090e8c60b3d73847b3565ecde438d48",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          479,
+          19,
+          204,
+          235
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          87.0,
+          235
+        ],
+        "placement": [
+          75,
+          50
+        ]
+      }
+    },
+    {
+      "name": "walk_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_right_0.png",
+      "sha256": "2d33ad36d996b062ec382384d09287a230dd7bf5e42d7b838fef5bd0a0502a9f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          852,
+          18,
+          222,
+          238
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          139.0,
+          238
+        ],
+        "placement": [
+          63,
+          50
+        ]
+      }
+    },
+    {
+      "name": "walk_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_right_1.png",
+      "sha256": "daabb7ab74c4eb12e9333434b9fa12a3daab3d4fb79279c8ecd421524d0c514f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1204,
+          17,
+          258,
+          231
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          170.0,
+          231
+        ],
+        "placement": [
+          56,
+          51
+        ]
+      }
+    },
+    {
+      "name": "walk_right_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_right_2.png",
+      "sha256": "b0a2c21f38e6ca1a54f265fe05845885a1df5d2db72e6482af38e39eb6be88de",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          62,
+          276,
+          274,
+          226
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          182.0,
+          226
+        ],
+        "placement": [
+          53,
+          52
+        ]
+      }
+    },
+    {
+      "name": "walk_right_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_right_3.png",
+      "sha256": "2285613b463059a64db00422d3b973a837fe16a11bcee11c1ebec6ba3fafa7aa",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          450,
+          272,
+          249,
+          229
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          177.0,
+          229
+        ],
+        "placement": [
+          54,
+          52
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_right_0.png",
+      "sha256": "04b389db4198e5b50d925b8ef1349ebe87284e79ed5cc6b715284ff195e7cb29",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          811,
+          289,
+          293,
+          213
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          165.0,
+          213
+        ],
+        "placement": [
+          57,
+          55
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_right_1.png",
+      "sha256": "481f8f75848a689dff3eca56f9356e8dfe9027b7335c0d04986a56dfa9c8479d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1209,
+          276,
+          286,
+          225
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          162.0,
+          225
+        ],
+        "placement": [
+          58,
+          53
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_right_2.png",
+      "sha256": "cd8edd2f85fd83e34a18a4b90a791ee04c2cff376964cf76bd9e0c2d977ceac1",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          48,
+          535,
+          373,
+          216
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          166.0,
+          216
+        ],
+        "placement": [
+          57,
+          55
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_right_3.png",
+      "sha256": "4bf3f6f1a8eef995c6cb5c07cc147a82a3f3df4f228ed86d66bc9e01302d39d1",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          394,
+          536,
+          343,
+          217
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          232.0,
+          217
+        ],
+        "placement": [
+          41,
+          55
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/hurt_right_0.png",
+      "sha256": "80125a4d734cb3c5542b5e8b6fe8c3902ba13c9f7ccb4af21810c06425b52268",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          834,
+          526,
+          252,
+          233
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          129.0,
+          233
+        ],
+        "placement": [
+          65,
+          51
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/hurt_right_1.png",
+      "sha256": "672b8d145c6c5c2d8982af1175be108b14bb102a14db433f8af55767563cce28",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1223,
+          539,
+          224,
+          212
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          127.0,
+          212
+        ],
+        "placement": [
+          66,
+          56
+        ]
+      }
+    },
+    {
+      "name": "death_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_right_0.png",
+      "sha256": "6f00ba390f94a0fa7931cf9a295473f604779ca75c4a118ab9ed23f578360341",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          80,
+          774,
+          204,
+          222
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          127.0,
+          222
+        ],
+        "placement": [
+          66,
+          53
+        ]
+      }
+    },
+    {
+      "name": "death_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_right_1.png",
+      "sha256": "0d17ee0ea5022a02492cbbe45854a1b01110feee112ee557f5ee53eae55111c9",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          435,
+          805,
+          294,
+          183
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          270.0,
+          183
+        ],
+        "placement": [
+          32,
+          63
+        ]
+      }
+    },
+    {
+      "name": "death_right_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_right_2.png",
+      "sha256": "296907d663e6dbca79fe9654d093278f1186414049b9467cfe1ba9f1a8dd70e5",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          774,
+          862,
+          340,
+          125
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          263.0,
+          125
+        ],
+        "placement": [
+          34,
+          76
+        ]
+      }
+    },
+    {
+      "name": "death_right_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_right_3.png",
+      "sha256": "311a6a45eb4e091dd885659ebfaafd295bb3f9fec8f61cf60415d2ebba92e6aa",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1160,
+          883,
+          338,
+          105
+        ],
+        "fixedSourceScale": 0.23728813559322035,
+        "sourceFootInCrop": [
+          248.0,
+          105
+        ],
+        "placement": [
+          37,
+          81
+        ]
+      }
+    },
+    {
+      "name": "idle_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/idle_up_0.png",
+      "sha256": "f721f9f0ba93b2d74f0939cdfd7dbb81418d5ffa8ac1635302241832145bdcd7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          130,
+          15,
+          213,
+          235
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          119.0,
+          235
+        ],
+        "placement": [
+          68,
+          50
+        ]
+      }
+    },
+    {
+      "name": "idle_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/idle_up_1.png",
+      "sha256": "5e5ef2b70c43a847d2c49b89cc840e5a6d271fea68a8d67f8940fd9904f91020",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          463,
+          16,
+          201,
+          235
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          82.0,
+          235
+        ],
+        "placement": [
+          76,
+          50
+        ]
+      }
+    },
+    {
+      "name": "walk_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_up_0.png",
+      "sha256": "e14a307458d94b90ddc62e64a6c5a65db02e0fbeb709d28c6646dae4065b0e20",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          815,
+          13,
+          211,
+          239
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          101.0,
+          239
+        ],
+        "placement": [
+          72,
+          49
+        ]
+      }
+    },
+    {
+      "name": "walk_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_up_1.png",
+      "sha256": "405c286376fab958a273ac82c2680d1799b46b2279d1f8c8d9b411808ea35c0f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1191,
+          13,
+          222,
+          241
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          95.0,
+          241
+        ],
+        "placement": [
+          73,
+          49
+        ]
+      }
+    },
+    {
+      "name": "walk_up_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_up_2.png",
+      "sha256": "6a69baccfec2d8ea38f34c2df63cdbc3b4a7bd177f2c872a9029776622e94c0e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          123,
+          272,
+          215,
+          237
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          133.0,
+          237
+        ],
+        "placement": [
+          64,
+          50
+        ]
+      }
+    },
+    {
+      "name": "walk_up_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/walk_up_3.png",
+      "sha256": "d692c39a8a9f3558470df23e6c566aa5969e1bf515e62be7b4434cf8197ae5b3",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          458,
+          271,
+          231,
+          237
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          130.0,
+          237
+        ],
+        "placement": [
+          65,
+          50
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_up_0.png",
+      "sha256": "d965df14b283860f9f61da35d0a68cb7208b1f6c5e3aebe6b4a75ab306409dc8",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          801,
+          279,
+          210,
+          232
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          84.0,
+          232
+        ],
+        "placement": [
+          76,
+          51
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_up_1.png",
+      "sha256": "e77342f5081b07a62f31233e447e6e1e26def75abf36e8cea574284dc99596c3",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1163,
+          280,
+          317,
+          230
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          184.0,
+          230
+        ],
+        "placement": [
+          52,
+          51
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_up_2.png",
+      "sha256": "0a804ebfd0584634fbb4963f5decfacaa9987b950c6b722ced1d2328dbe076d7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          109,
+          517,
+          236,
+          242
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          119.0,
+          242
+        ],
+        "placement": [
+          68,
+          48
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/basic_attack_up_3.png",
+      "sha256": "9ee9984bb8926a082d0156fa643a936c2193cad3d9757dc5315b1b9e72f93348",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          457,
+          534,
+          308,
+          229
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          185.0,
+          229
+        ],
+        "placement": [
+          52,
+          51
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/hurt_up_0.png",
+      "sha256": "c3f7acfe6b8dc8daa4fb65ed1f2e78c142cc30f70ae7e5876ff8b001d3140357",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          835,
+          533,
+          220,
+          230
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          79.0,
+          230
+        ],
+        "placement": [
+          77,
+          51
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/hurt_up_1.png",
+      "sha256": "7b252dd6def3e916d96d248bc30990fb1bd49bd53eed7fcf4bb25a74da872073",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1209,
+          535,
+          202,
+          225
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          54.0,
+          225
+        ],
+        "placement": [
+          83,
+          52
+        ]
+      }
+    },
+    {
+      "name": "death_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_up_0.png",
+      "sha256": "fefa96cbf001510643fc2963c32364c22f7d62c83cc3180de86e7980a3c09890",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          130,
+          775,
+          242,
+          223
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          101.0,
+          223
+        ],
+        "placement": [
+          72,
+          53
+        ]
+      }
+    },
+    {
+      "name": "death_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_up_1.png",
+      "sha256": "bb29d60d506394f39460f42222a98a8daf5145a9c57eb555f9bb079aa2b9745a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          438,
+          797,
+          259,
+          167
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          146.0,
+          167
+        ],
+        "placement": [
+          61,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_up_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_up_2.png",
+      "sha256": "1cc3eff115aefbd93656b7bbb75e20799c81e6b0edf97706848c5218cf85164e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          749,
+          863,
+          339,
+          134
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          219.0,
+          134
+        ],
+        "placement": [
+          44,
+          74
+        ]
+      }
+    },
+    {
+      "name": "death_up_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_yeu/frames/death_up_3.png",
+      "sha256": "74bced71327ea3e23016b8987f38099d856d9a24dfc9d509cd5d49effb963382",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1130,
+          883,
+          360,
+          108
+        ],
+        "fixedSourceScale": 0.23829787234042554,
+        "sourceFootInCrop": [
+          244.0,
+          108
+        ],
+        "placement": [
+          38,
+          80
+        ]
+      }
+    }
+  ],
+  "sourceScales": {
+    "down": 0.2445414847161572,
+    "left": 0.24615384615384617,
+    "right": 0.23728813559322035,
+    "up": 0.23829787234042554
+  },
+  "generatedSources": [
+    {
+      "path": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_down_source_v01.png",
+      "sha256": "4b0e9d4ba1f2c11815cee11cc5f6bafd447e1f59e70ff690684f2f8279a4545d",
+      "layout": [
+        4,
+        4
+      ]
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_left_source_v01.png",
+      "sha256": "7d48ec9e3b46df26d2dc83763a95aeef3b33d23e3649ddcfd68982c2a99f0c98",
+      "layout": [
+        4,
+        4
+      ]
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_right_source_v01.png",
+      "sha256": "bee2d0f3264b3ca979ce785a4c255cc46be0df8ab16cb65b0962f5efa1e20bff",
+      "layout": [
+        4,
+        4
+      ]
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/forest/source/truc_yeu_up_source_v01.png",
+      "sha256": "35d9e8104a2b4d74bfaab82033ed6556281a6cf3e365c8804c45565072b85a7e",
+      "layout": [
+        4,
+        4
+      ]
+    }
+  ],
+  "provenance": {
+    "method": "Retained original image_gen cels; connected-alpha245 extraction, fixed directional nearest sampling and anchored atlas packing.",
+    "license": "Original AI-assisted project raster artwork generated with OpenAI built-in image_gen; no third-party pack or exclusive copyright claim.",
+    "prompts": "assets/sprites/creeps/dungeons/forest/source/generation_prompts_v01.json"
+  },
+  "reuse": {
+    "mirroredDirections": [],
+    "syntheticAnimationFrames": 0
+  },
+  "notes": [
+    "All poses use independent generated source cels. No server type registration or gameplay changes.",
+    "Editable Aseprite contains extracted raster cels, not reconstructed illustration layers.",
+    "Low creatures use the same declared bottom-contact anchor contract; physical collision is not encoded."
+  ],
+  "verificationScope": "isolated_phaser_art_review_only",
+  "verification": {
+    "status": "PASS",
+    "scope": "Isolated controlled Phaser 4 review; no natural combat, rewards, networked enemy integration or director approval",
+    "browserClients": 6,
+    "heroScaleStandIns": 6,
+    "evidence": "assets/reviews/forest_creeps_v01/final-6/observations.json",
+    "evidenceSha256": "8f43ef8f31d4eeea7a6a9cfcc7c0e38c2aa1def7e85afb80a20cfc178ebf9a5c"
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 2,
+  "id": "thien_son_dao_v2_afterimage",
+  "handoffId": "thien_son_dao_v2",
+  "role": "afterimage",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_dao_v2_afterimage.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_dao_v2/thien_son_dao_v2_afterimage.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_dao_v2/thien_son_dao_v2_afterimage.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "moving_ghost_down",
+      "phase": "loop",
+      "direction": "down",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "moving dash ticks only; cleanup at dash end; afterimage is not immunity authority",
+      "frames": [
+        "moving_ghost_down_0",
+        "moving_ghost_down_1"
+      ],
+      "frameDurationsMs": [
+        55,
+        55
+      ],
+      "durationMsTotal": 110,
+      "frameCount": 2,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "moving_ghost_left",
+      "phase": "loop",
+      "direction": "left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "moving dash ticks only; cleanup at dash end; afterimage is not immunity authority",
+      "frames": [
+        "moving_ghost_left_0",
+        "moving_ghost_left_1"
+      ],
+      "frameDurationsMs": [
+        55,
+        55
+      ],
+      "durationMsTotal": 110,
+      "frameCount": 2,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "moving_ghost_right",
+      "phase": "loop",
+      "direction": "right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "moving dash ticks only; cleanup at dash end; afterimage is not immunity authority",
+      "frames": [
+        "moving_ghost_right_0",
+        "moving_ghost_right_1"
+      ],
+      "frameDurationsMs": [
+        55,
+        55
+      ],
+      "durationMsTotal": 110,
+      "frameCount": 2,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "moving_ghost_up",
+      "phase": "loop",
+      "direction": "up",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "moving dash ticks only; cleanup at dash end; afterimage is not immunity authority",
+      "frames": [
+        "moving_ghost_up_0",
+        "moving_ghost_up_1"
+      ],
+      "frameDurationsMs": [
+        55,
+        55
+      ],
+      "durationMsTotal": 110,
+      "frameCount": 2,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

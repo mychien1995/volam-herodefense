@@ -1,0 +1,1587 @@
+{
+  "schemaVersion": 2,
+  "id": "vo_dang_hands_v2_character",
+  "handoffId": "vo_dang_hands_v2",
+  "role": "character",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2_character.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_character.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_character.json",
+  "frameDimensions": [
+    160,
+    120
+  ],
+  "pivot": [
+    80,
+    96
+  ],
+  "origin": [
+    0.5,
+    0.8
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "left_palm_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 300,
+      "serverStage": "left_palm",
+      "playback": "fit accepted interval; visual marker never schedules knockback",
+      "frames": [
+        "left_palm_down_0",
+        "left_palm_down_1",
+        "left_palm_down_2",
+        "left_palm_down_3"
+      ],
+      "frameDurationsMs": [
+        60,
+        70,
+        80,
+        90
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "left_palm_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "right_palm_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 300,
+      "serverStage": "right_palm",
+      "playback": "fit accepted interval; visual marker never schedules knockback",
+      "frames": [
+        "right_palm_down_0",
+        "right_palm_down_1",
+        "right_palm_down_2",
+        "right_palm_down_3"
+      ],
+      "frameDurationsMs": [
+        60,
+        70,
+        80,
+        90
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "right_palm_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luong_nghi_thu_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "luong_nghi_thu_cast_down_0",
+        "luong_nghi_thu_cast_down_1",
+        "luong_nghi_thu_cast_down_2",
+        "luong_nghi_thu_cast_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "luong_nghi_thu_cast_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "huyen_am_chuong_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "huyen_am_chuong_cast_down_0",
+        "huyen_am_chuong_cast_down_1",
+        "huyen_am_chuong_cast_down_2",
+        "huyen_am_chuong_cast_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "huyen_am_chuong_cast_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "duong_khi_kich_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "duong_khi_kich_cast_down_0",
+        "duong_khi_kich_cast_down_1",
+        "duong_khi_kich_cast_down_2",
+        "duong_khi_kich_cast_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "duong_khi_kich_cast_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "sword_cut_1_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 400,
+      "sequence": "forward source then reversed articulated source, shared endpoint continuity; visual alternation only",
+      "provenance": "retained approved basic cels, temporal order reversed for returning cut",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "sword_cut_1_down_0",
+        "sword_cut_1_down_1",
+        "sword_cut_1_down_2",
+        "sword_cut_1_down_3"
+      ],
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "sword_cut_1_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "sword_cut_2_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 400,
+      "sequence": "forward source then reversed articulated source, shared endpoint continuity; visual alternation only",
+      "provenance": "retained approved basic cels, temporal order reversed for returning cut",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "release/contact",
+        "recovery"
+      ],
+      "frames": [
+        "sword_cut_2_down_0",
+        "sword_cut_2_down_1",
+        "sword_cut_2_down_2",
+        "sword_cut_2_down_3"
+      ],
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "sword_cut_2_down_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "left_palm_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 300,
+      "serverStage": "left_palm",
+      "playback": "fit accepted interval; visual marker never schedules knockback",
+      "frames": [
+        "left_palm_left_0",
+        "left_palm_left_1",
+        "left_palm_left_2",
+        "left_palm_left_3"
+      ],
+      "frameDurationsMs": [
+        60,
+        70,
+        80,
+        90
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "left_palm_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "right_palm_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 300,
+      "serverStage": "right_palm",
+      "playback": "fit accepted interval; visual marker never schedules knockback",
+      "frames": [
+        "right_palm_left_0",
+        "right_palm_left_1",
+        "right_palm_left_2",
+        "right_palm_left_3"
+      ],
+      "frameDurationsMs": [
+        60,
+        70,
+        80,
+        90
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "right_palm_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luong_nghi_thu_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "luong_nghi_thu_cast_left_0",
+        "luong_nghi_thu_cast_left_1",
+        "luong_nghi_thu_cast_left_2",
+        "luong_nghi_thu_cast_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "luong_nghi_thu_cast_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "huyen_am_chuong_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "huyen_am_chuong_cast_left_0",
+        "huyen_am_chuong_cast_left_1",
+        "huyen_am_chuong_cast_left_2",
+        "huyen_am_chuong_cast_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "huyen_am_chuong_cast_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "duong_khi_kich_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "duong_khi_kich_cast_left_0",
+        "duong_khi_kich_cast_left_1",
+        "duong_khi_kich_cast_left_2",
+        "duong_khi_kich_cast_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "duong_khi_kich_cast_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "sword_cut_1_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 400,
+      "sequence": "forward source then reversed articulated source, shared endpoint continuity; visual alternation only",
+      "provenance": "retained approved basic cels, temporal order reversed for returning cut",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "sword_cut_1_left_0",
+        "sword_cut_1_left_1",
+        "sword_cut_1_left_2",
+        "sword_cut_1_left_3"
+      ],
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "sword_cut_1_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "sword_cut_2_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 400,
+      "sequence": "forward source then reversed articulated source, shared endpoint continuity; visual alternation only",
+      "provenance": "retained approved basic cels, temporal order reversed for returning cut",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "release/contact",
+        "recovery"
+      ],
+      "frames": [
+        "sword_cut_2_left_0",
+        "sword_cut_2_left_1",
+        "sword_cut_2_left_2",
+        "sword_cut_2_left_3"
+      ],
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "sword_cut_2_left_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "left_palm_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 300,
+      "serverStage": "left_palm",
+      "playback": "fit accepted interval; visual marker never schedules knockback",
+      "frames": [
+        "left_palm_right_0",
+        "left_palm_right_1",
+        "left_palm_right_2",
+        "left_palm_right_3"
+      ],
+      "frameDurationsMs": [
+        60,
+        70,
+        80,
+        90
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "left_palm_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "right_palm_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 300,
+      "serverStage": "right_palm",
+      "playback": "fit accepted interval; visual marker never schedules knockback",
+      "frames": [
+        "right_palm_right_0",
+        "right_palm_right_1",
+        "right_palm_right_2",
+        "right_palm_right_3"
+      ],
+      "frameDurationsMs": [
+        60,
+        70,
+        80,
+        90
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "right_palm_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luong_nghi_thu_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "luong_nghi_thu_cast_right_0",
+        "luong_nghi_thu_cast_right_1",
+        "luong_nghi_thu_cast_right_2",
+        "luong_nghi_thu_cast_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "luong_nghi_thu_cast_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "huyen_am_chuong_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "huyen_am_chuong_cast_right_0",
+        "huyen_am_chuong_cast_right_1",
+        "huyen_am_chuong_cast_right_2",
+        "huyen_am_chuong_cast_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "huyen_am_chuong_cast_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "duong_khi_kich_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "duong_khi_kich_cast_right_0",
+        "duong_khi_kich_cast_right_1",
+        "duong_khi_kich_cast_right_2",
+        "duong_khi_kich_cast_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "duong_khi_kich_cast_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "sword_cut_1_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 400,
+      "sequence": "forward source then reversed articulated source, shared endpoint continuity; visual alternation only",
+      "provenance": "retained approved basic cels, temporal order reversed for returning cut",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "sword_cut_1_right_0",
+        "sword_cut_1_right_1",
+        "sword_cut_1_right_2",
+        "sword_cut_1_right_3"
+      ],
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "sword_cut_1_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "sword_cut_2_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 400,
+      "sequence": "forward source then reversed articulated source, shared endpoint continuity; visual alternation only",
+      "provenance": "retained approved basic cels, temporal order reversed for returning cut",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "release/contact",
+        "recovery"
+      ],
+      "frames": [
+        "sword_cut_2_right_0",
+        "sword_cut_2_right_1",
+        "sword_cut_2_right_2",
+        "sword_cut_2_right_3"
+      ],
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "sword_cut_2_right_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "left_palm_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 300,
+      "serverStage": "left_palm",
+      "playback": "fit accepted interval; visual marker never schedules knockback",
+      "frames": [
+        "left_palm_up_0",
+        "left_palm_up_1",
+        "left_palm_up_2",
+        "left_palm_up_3"
+      ],
+      "frameDurationsMs": [
+        60,
+        70,
+        80,
+        90
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "left_palm_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "right_palm_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 300,
+      "serverStage": "right_palm",
+      "playback": "fit accepted interval; visual marker never schedules knockback",
+      "frames": [
+        "right_palm_up_0",
+        "right_palm_up_1",
+        "right_palm_up_2",
+        "right_palm_up_3"
+      ],
+      "frameDurationsMs": [
+        60,
+        70,
+        80,
+        90
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "right_palm_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luong_nghi_thu_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "luong_nghi_thu_cast_up_0",
+        "luong_nghi_thu_cast_up_1",
+        "luong_nghi_thu_cast_up_2",
+        "luong_nghi_thu_cast_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "luong_nghi_thu_cast_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "huyen_am_chuong_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "huyen_am_chuong_cast_up_0",
+        "huyen_am_chuong_cast_up_1",
+        "huyen_am_chuong_cast_up_2",
+        "huyen_am_chuong_cast_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "huyen_am_chuong_cast_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "duong_khi_kich_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "duong_khi_kich_cast_up_0",
+        "duong_khi_kich_cast_up_1",
+        "duong_khi_kich_cast_up_2",
+        "duong_khi_kich_cast_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "duong_khi_kich_cast_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "sword_cut_1_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 400,
+      "sequence": "forward source then reversed articulated source, shared endpoint continuity; visual alternation only",
+      "provenance": "retained approved basic cels, temporal order reversed for returning cut",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "sword_cut_1_up_0",
+        "sword_cut_1_up_1",
+        "sword_cut_1_up_2",
+        "sword_cut_1_up_3"
+      ],
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "sword_cut_1_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "sword_cut_2_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 400,
+      "sequence": "forward source then reversed articulated source, shared endpoint continuity; visual alternation only",
+      "provenance": "retained approved basic cels, temporal order reversed for returning cut",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "release/contact",
+        "recovery"
+      ],
+      "frames": [
+        "sword_cut_2_up_0",
+        "sword_cut_2_up_1",
+        "sword_cut_2_up_2",
+        "sword_cut_2_up_3"
+      ],
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "sword_cut_2_up_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

@@ -1,5 +1,19 @@
 # Acceptance Tests — Rule-to-test traceability
 
+## Desert integration — 2026-10-31
+
+- `tests/desert-dungeon.test.ts`: all markers and six entry seats reachable, solid prop collision, validated destination/default compatibility, separate private/shared/forest state, empty pause/resume, physical exit and deterministic six-appearance rotation with unchanged common creep tuning.
+- `tests/dungeon-room.test.ts`: real SDK clients receive server-selected desert identities and isolated destination/private views; distant exit is rejected and physical return removes desert entities.
+- `scripts/verify-desert.py`: original production hashes, all 380 PNG/atlas frames and 120 tags, explicit timings and map/runtime byte parity.
+- `playwright.desert.config.ts`: two-browser all-frame/timing/facing/pivot/one-shot review, six-client natural combat/reward/wave/collision/physical-return/readability checks (two browsers rendering the party plus four SDK clients), plus existing forest private/shared regressions. Recording stays disabled; runtime director approval is separate and pending.
+
+## M3C3 feedback trial — 2026-10-31
+
+- `tests/m3c3-feedback.test.ts`: accepted-A chains without spam/cleave acceleration, divergent fixed rays, per-leg fan deduplication and growth scaling, walls, once-per-cast hit refunds, bounded CDR/debt, action-only guard, moving-dash direct immunity with continuing DOT, radial fan bursts, resource-safe shield toggle and overflow, confinement/overlaps/expiry/immunity, owned-effect cleanup and single-source HP regen.
+- Updated school/unit/network regressions assert the newly authorized behavior; historical melee fan, timed shield and post-dash one-hit evasion expectations are superseded.
+- `tests/e2e/feedback.spec.ts`: real two-client movement/inputs, observer VFX frames, fan return, traveling blades/palms, forward fire wave, shield on/off and channel cleanup with errors checked. `playwright.feedback.config.ts` also selects real normal progression/dungeon/manual-combat/projectile/six-player cases; video/trace remain off.
+- Final commands/results and honest pending-art status are recorded in `docs/M3C3_FEEDBACK_IMPLEMENTATION.md` after execution. No new art or final balance approval is inferred.
+
 **Confirmed evidence policy (2026-10-30):** Follow `AGENTS.md` visual verification and recording policy. Routine development, asset generation and tests use lightweight PNG screenshots and live Phaser assertions/frame observations. Do not create video/animated-image evidence or run recording, encoding or conversion tools. Recordings require an explicit user request for the current task; preserve all existing recordings. Animation, transition, positioning and gameplay validation remain required.
 
 ## Current menu-only dungeon access

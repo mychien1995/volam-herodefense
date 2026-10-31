@@ -5,6 +5,7 @@ export interface ActorAnimation {
   frames: string[];
   frameRate: number;
   repeat: number;
+  durations?: number[];
 }
 export interface ArenaCreepArt {
   id: string;
@@ -29,6 +30,10 @@ export interface CreepEffectAnimation {
   repeat?: number;
   offsetY?: number;
   kind?: 'contact' | 'projectile' | 'ambient';
+  durations?: number[];
+  origin?: [number, number];
+  offset?: [number, number];
+  placement?: string;
 }
 export interface ArenaCreepManifest {
   assets: ArenaCreepArt[];

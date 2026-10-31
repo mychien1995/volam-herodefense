@@ -27,6 +27,11 @@ export interface ProjectileEffect {
   knockback?: number | undefined;
   statuses?: StatusSpec[] | undefined;
   spreadAngle?: number | undefined;
+  boomerang?: boolean | undefined;
+  manaRefund?: number | undefined;
+  slowedBonus?: number | undefined;
+  radial?: boolean | undefined;
+  attackPowerScale?: number | undefined;
 }
 export interface ArcEffect {
   mode: 'arc';
@@ -42,6 +47,7 @@ export interface ArcEffect {
   manaRefund?: number | undefined;
   projectileProc?: { chance: number; effect: ProjectileEffect } | undefined;
   windupTicks?: number | undefined;
+  knockback?: number | undefined;
 }
 export interface ComboSpec {
   id: 'phat_dong_a' | 'phat_dong_b';
@@ -74,8 +80,10 @@ export type StatusKind =
   | 'defense_break'
   | 'crit_buff'
   | 'speed_buff'
+  | 'cooldown_buff'
   | 'counter'
   | 'dash'
+  | 'dash_guard'
   | 'channel';
 export interface StatusSpec {
   kind: StatusKind;
@@ -83,6 +91,7 @@ export interface StatusSpec {
   magnitude: number;
   secondary?: number | undefined;
   evade?: boolean | undefined;
+  toggle?: boolean | undefined;
 }
 export interface StatusEffect extends StatusSpec {
   sourceId: string;
@@ -96,12 +105,14 @@ export interface BuffEffect {
   critMultiplier: number;
   movementSpeed?: number | undefined;
   attackSpeed?: number | undefined;
+  cooldownReduction?: number | undefined;
 }
 export interface ManaShieldEffect {
   mode: 'mana_shield';
   durationTicks: number;
   absorbFraction: number;
   manaPerDamage: number;
+  toggle?: boolean | undefined;
 }
 export interface CounterEffect {
   mode: 'counter';
@@ -117,6 +128,7 @@ export interface AreaEffect {
   radius: number;
   damage: number;
   statuses?: StatusSpec[] | undefined;
+  confines?: boolean | undefined;
 }
 export interface DashEffect {
   mode: 'dash';
@@ -125,6 +137,7 @@ export interface DashEffect {
   radius: number;
   damage: number;
   stunTicks: number;
+  invulnerable?: boolean | undefined;
   counter?:
     { durationTicks: number; damage: number; range: number } | undefined;
 }
@@ -138,12 +151,24 @@ export interface MultiHitEffect {
   finisherRange: number;
   halfAngle?: number | undefined;
   slowedBonus?: number | undefined;
+  projectileBurst?: ProjectileEffect | undefined;
+  projectileBurstEvery?: number | undefined;
+  guard?: number | undefined;
 }
 export interface Ability {
   id: string;
   nameVi: string;
   cooldownTicks: number;
   manaCost: number;
+  minIntervalTicks?: number | undefined;
+  basicCombo?:
+    | Array<{
+        stage: string;
+        damageMultiplier: number;
+        halfAngle?: number | undefined;
+        splashRadius?: number | undefined;
+      }>
+    | undefined;
   combo?: ComboSpec | undefined;
   selfStatuses?: StatusSpec[] | undefined;
   allies?: AllyEffect | undefined;
@@ -223,6 +248,8 @@ export interface Actor extends Point {
   cooldown: number;
   statuses?: StatusEffect[];
   castAbilityId?: string;
+  /** Future boss adapters can opt out of forced movement without inventing a boss system. */
+  forcedMovementImmune?: boolean;
 }
 export interface Hero extends Actor {
   progression?: HeroProgression | undefined;
@@ -242,8 +269,11 @@ export interface Hero extends Actor {
   skillCooldowns: number[];
   skillIds?: string[];
   abilityCooldowns?: Record<string, number>;
+  basicChains?: Record<string, number>;
 }
 export interface Creep extends Actor {
+  /** Server-selected presentation identity; does not grant extra abilities. */
+  archetypeId?: string;
   stats?: SimulationConfig['creep'];
   invasion?: {
     wave: number;
@@ -274,6 +304,9 @@ export interface Projectile extends Point {
   hitIds?: string[];
   critChance?: number;
   critMultiplier?: number;
+  leg?: 'outbound' | 'return';
+  refund?: { amount: number; used: boolean };
+  stage?: string;
 }
 export interface CombatEvent extends Point {
   id: number;
@@ -317,6 +350,7 @@ export interface CombatArea extends Point {
   rawDamage: number;
   critChance: number;
   critMultiplier: number;
+  trappedIds?: string[];
 }
 export interface World {
   combos?: Array<{
@@ -354,6 +388,8 @@ export interface World {
     rawDamage: number;
     critChance?: number;
     critMultiplier?: number;
+    refund?: { amount: number; used: boolean };
+    stage?: string;
   }>;
   actions?: SkillAction[];
   areas?: CombatArea[];

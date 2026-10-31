@@ -44,4 +44,11 @@ lock=json.loads((concept/'approved_concepts_v1.lock.json').read_text(encoding='u
 for f in lock['files']:assert hashlib.sha256((concept/f['path']).read_bytes()).hexdigest()==f['sha256'],f['path']
 old=json.loads((R/'assets/approved_cai_bang.lock.json').read_text(encoding='utf-8'))
 for p,h in old['files'].items():assert hashlib.sha256((R/p).read_bytes()).hexdigest()==h,p
-print(f"PASS: 19 transparent sprites, {groups['tileCount']} opaque 32px tiles, 6 periodic materials, 70 map props; concept and hero locks unchanged")
+approved=json.loads((R/'assets/approved_bamboo_forest.lock.json').read_text(encoding='utf-8'))
+for p,h in approved['files'].items():assert hashlib.sha256((R/p).read_bytes()).hexdigest()==h,p
+public=R/'apps/game-client/public/assets'
+for name in ['terrain.png','scenery.png','scenery.json']:
+ assert (E/name).read_bytes()==(public/'bamboo_forest'/name).read_bytes(),f'public Bamboo Forest mismatch: {name}'
+assert (R/'maps/creep_forest.tmj').read_bytes()==(public/'creep_forest.tmj').read_bytes()
+assert (R/'maps/creep_forest.tmj').read_bytes()==(R/'packages/game-data/src/creep-forest-map.json').read_bytes()
+print(f"PASS: 19 transparent sprites, {groups['tileCount']} opaque 32px tiles, 6 periodic materials, 70 map props; concept, hero and Bamboo production locks unchanged; public/shared-map bytes match")

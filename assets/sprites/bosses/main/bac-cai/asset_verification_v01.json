@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "scope": "one lightweight offline asset verification",
+  "date": "2026-10-31",
+  "bossId": "bac_cai",
+  "pngFilesDecoded": 428,
+  "exportHashesChecked": 412,
+  "atlasesChecked": 7,
+  "atlasFrameReferences": 393,
+  "animationGroups": 105,
+  "characterCels": 224,
+  "vfxCels": 160,
+  "icons": 9,
+  "checks": [
+    "Concepts exist",
+    "Four-direction 14-action coverage: 56 clips / 224 character cels",
+    "Staff, dragon palm, ultimate, defense and shared VFX: 40 clips / 160 cels",
+    "Nine icons and 256px portrait exist",
+    "All package PNGs decode and all JSON parses",
+    "All 412 export hashes and dimensions match manifest",
+    "Seven atlases: bounds, explicit frame rectangles and cel pixel equality",
+    "Every multi-cel animation contains four distinct frame files",
+    "Production cels nonempty, binary alpha, padded clear canvas edges",
+    "Consistent ASCII filenames and folder isolation"
+  ],
+  "issues": [],
+  "runtimeStarted": false,
+  "runtimeVerified": false,
+  "recordingsGenerated": false,
+  "missingAssetCategories": [],
+  "limitations": [
+    "Visual atlas/frame inspection completed; smoothness, transitions and six-player grass readability were not runtime tested, as requested.",
+    "Concept scale panel is illustrative; production dimensions explicitly reference the existing 44px approved hero baseline."
+  ]
+}

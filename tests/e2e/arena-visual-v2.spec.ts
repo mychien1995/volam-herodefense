@@ -174,11 +174,11 @@ for (const size of [
         'aria-pressed',
         'true',
       );
-      await expect(page.locator('[data-destination=desert]')).toBeDisabled();
-      await page.locator('[data-destination=desert]').focus();
+      await expect(page.locator('[data-destination=sea]')).toBeDisabled();
+      await page.locator('[data-destination=sea]').focus();
       await page.keyboard.press('Enter');
       await expect(page.locator('#dungeon-availability')).toContainText(
-        'Sa Mạc hiện chưa mở',
+        'Biển hiện chưa mở',
       );
       await expect(page.locator('[data-destination=forest]')).toHaveAttribute(
         'aria-pressed',

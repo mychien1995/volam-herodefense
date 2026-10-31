@@ -61,6 +61,8 @@ export function expireStatuses(world: World): void {
     );
 }
 export function cancelOwnedEffects(world: World, id: string): void {
+  const owner = world.heroes.get(id);
+  if (owner) owner.basicChains = {};
   world.combos = (world.combos ?? []).filter(
     (c) => c.sourceId !== id && c.targetId !== id,
   );
@@ -93,7 +95,11 @@ export function displace(
   config: SimulationConfig,
   tick?: number,
 ): void {
-  if (tick !== undefined && hasStatus(actor, 'interrupt_resist', tick)) return;
+  if (
+    tick !== undefined &&
+    (actor.forcedMovementImmune || hasStatus(actor, 'interrupt_resist', tick))
+  )
+    return;
   const steps = Math.max(1, Math.ceil(Math.hypot(dx, dy) / 4));
   for (let i = 0; i < steps; i++)
     moveCircle(

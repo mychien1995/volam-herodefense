@@ -1,5 +1,9 @@
 # Open Decisions and Safe Provisional Defaults
 
+## Resolved by M3C3 feedback — 2026-10-31
+
+Thái Cực Thần Công is now explicitly a toggle, superseding the earlier timed-shield open question/prototype. The director also authorizes ranged boomerang Phiến, moving-dash-only direct immunity with continuing DOT, bounded Chiết Mai CDR and confinement without stun. Numeric conversion/floors/ranges/damage/durations remain trial tuning in data. See `docs/M3C3_FEEDBACK_IMPLEMENTATION.md`. New concept approval does not approve production sprites or actual Phaser visuals; retained raster stand-ins remain explicitly temporary.
+
 ## M3C3 implemented provisional choices — 2026-10-31
 
 Bất Động Minh Vương retains the canonical proposed one-pulse healing; mitigation/protection remains open. Six-second Phát Động windows refresh per valid setup step; wrong-order same-chain skills reset only that target,while A/unrelated actives preserve state. Vô Ảnh consumes once per target/cast and empowers its six valid kicks. Rank/growth/surplus/defense/heal/mitigation values remain M3D tuning inputs. Supplied skill-art waiver is retained and does not become final director approval. These choices permit M3C3 completion without reopening confirmed progression/control/authority rules.

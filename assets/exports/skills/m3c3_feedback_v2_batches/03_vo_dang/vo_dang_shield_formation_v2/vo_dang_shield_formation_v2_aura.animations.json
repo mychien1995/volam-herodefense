@@ -1,0 +1,247 @@
+{
+  "schemaVersion": 2,
+  "id": "vo_dang_shield_formation_v2_aura",
+  "handoffId": "vo_dang_shield_formation_v2",
+  "role": "aura",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2_aura.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_aura.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_aura.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "mana_opening",
+      "phase": "opening",
+      "direction": "nondirectional",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        -26
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "server toggle/status/absorb/depletion only; no invulnerability; zero mana means no absorption",
+      "frames": [
+        "mana_opening_0",
+        "mana_opening_1",
+        "mana_opening_2",
+        "mana_opening_3",
+        "mana_opening_4",
+        "mana_opening_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        65,
+        65,
+        65,
+        65
+      ],
+      "durationMsTotal": 390,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "mana_loop",
+      "phase": "loop",
+      "direction": "nondirectional",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        -26
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "server toggle/status/absorb/depletion only; no invulnerability; zero mana means no absorption",
+      "frames": [
+        "mana_loop_0",
+        "mana_loop_1",
+        "mana_loop_2",
+        "mana_loop_3",
+        "mana_loop_4",
+        "mana_loop_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        65,
+        65,
+        65,
+        65
+      ],
+      "durationMsTotal": 390,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "mana_absorb",
+      "phase": "impact",
+      "direction": "nondirectional",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        -26
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "server toggle/status/absorb/depletion only; no invulnerability; zero mana means no absorption",
+      "frames": [
+        "mana_absorb_0",
+        "mana_absorb_1",
+        "mana_absorb_2",
+        "mana_absorb_3",
+        "mana_absorb_4",
+        "mana_absorb_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        65,
+        65,
+        65,
+        65
+      ],
+      "durationMsTotal": 390,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "mana_off",
+      "phase": "ending",
+      "direction": "nondirectional",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        -26
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "server toggle/status/absorb/depletion only; no invulnerability; zero mana means no absorption",
+      "frames": [
+        "mana_off_0",
+        "mana_off_1",
+        "mana_off_2",
+        "mana_off_3",
+        "mana_off_4",
+        "mana_off_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        65,
+        65,
+        65,
+        65
+      ],
+      "durationMsTotal": 390,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "mana_depleted",
+      "phase": "ending",
+      "direction": "nondirectional",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        -26
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "server toggle/status/absorb/depletion only; no invulnerability; zero mana means no absorption",
+      "frames": [
+        "mana_depleted_0",
+        "mana_depleted_1",
+        "mana_depleted_2",
+        "mana_depleted_3",
+        "mana_depleted_4",
+        "mana_depleted_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        65,
+        65,
+        65,
+        65
+      ],
+      "durationMsTotal": 390,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

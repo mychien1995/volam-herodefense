@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 2,
+  "id": "vo_dang_shield_formation_v2_ground",
+  "handoffId": "vo_dang_shield_formation_v2",
+  "role": "ground",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2_ground.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_ground.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_ground.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "formation_opening",
+      "phase": "opening",
+      "direction": "nondirectional",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "projection": "original authored ground raster projected to shallow elevated orthographic ellipse; no character deformation",
+      "hitboxAuthority": false,
+      "frames": [
+        "formation_opening_0",
+        "formation_opening_1",
+        "formation_opening_2",
+        "formation_opening_3",
+        "formation_opening_4",
+        "formation_opening_5"
+      ],
+      "frameDurationsMs": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "durationMsTotal": 480,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "formation_loop",
+      "phase": "loop",
+      "direction": "nondirectional",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "projection": "original authored ground raster projected to shallow elevated orthographic ellipse; no character deformation",
+      "hitboxAuthority": false,
+      "frames": [
+        "formation_loop_0",
+        "formation_loop_1",
+        "formation_loop_2",
+        "formation_loop_3",
+        "formation_loop_4",
+        "formation_loop_5"
+      ],
+      "frameDurationsMs": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "durationMsTotal": 480,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "formation_ending",
+      "phase": "ending",
+      "direction": "nondirectional",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "projection": "original authored ground raster projected to shallow elevated orthographic ellipse; no character deformation",
+      "hitboxAuthority": false,
+      "frames": [
+        "formation_ending_0",
+        "formation_ending_1",
+        "formation_ending_2",
+        "formation_ending_3",
+        "formation_ending_4",
+        "formation_ending_5"
+      ],
+      "frameDurationsMs": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "durationMsTotal": 480,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "inward_response_down",
+      "phase": "impact",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "only confirmed containment response from targets inside attempting exit",
+      "meaning": "inward boundary qi; not stun, root, cage or outward knockback",
+      "frames": [
+        "inward_response_down_0",
+        "inward_response_down_1",
+        "inward_response_down_2",
+        "inward_response_down_3",
+        "inward_response_down_4",
+        "inward_response_down_5"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 360,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "inward_response_down_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "inward_response_left",
+      "phase": "impact",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "only confirmed containment response from targets inside attempting exit",
+      "meaning": "inward boundary qi; not stun, root, cage or outward knockback",
+      "frames": [
+        "inward_response_left_0",
+        "inward_response_left_1",
+        "inward_response_left_2",
+        "inward_response_left_3",
+        "inward_response_left_4",
+        "inward_response_left_5"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 360,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "inward_response_left_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "inward_response_right",
+      "phase": "impact",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "only confirmed containment response from targets inside attempting exit",
+      "meaning": "inward boundary qi; not stun, root, cage or outward knockback",
+      "frames": [
+        "inward_response_right_0",
+        "inward_response_right_1",
+        "inward_response_right_2",
+        "inward_response_right_3",
+        "inward_response_right_4",
+        "inward_response_right_5"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 360,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "inward_response_right_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "inward_response_up",
+      "phase": "impact",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "only confirmed containment response from targets inside attempting exit",
+      "meaning": "inward boundary qi; not stun, root, cage or outward knockback",
+      "frames": [
+        "inward_response_up_0",
+        "inward_response_up_1",
+        "inward_response_up_2",
+        "inward_response_up_3",
+        "inward_response_up_4",
+        "inward_response_up_5"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 360,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "inward_response_up_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

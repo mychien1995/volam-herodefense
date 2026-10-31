@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 2,
+  "id": "thien_son_fan_v2_aura",
+  "handoffId": "thien_son_fan_v2",
+  "role": "aura",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_fan_v2_aura.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_fan_v2/thien_son_fan_v2_aura.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_fan_v2/thien_son_fan_v2_aura.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "storm_opening",
+      "phase": "opening",
+      "direction": "nondirectional",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        -18
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "serverPulses": 12,
+      "pulseSpacingTicks": 8,
+      "rangeReferenceOnly": 150,
+      "frames": [
+        "storm_opening_0",
+        "storm_opening_1"
+      ],
+      "frameDurationsMs": [
+        65,
+        65
+      ],
+      "durationMsTotal": 130,
+      "frameCount": 2,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "storm_loop",
+      "phase": "loop",
+      "direction": "nondirectional",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        -18
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "serverPulses": 12,
+      "pulseSpacingTicks": 8,
+      "rangeReferenceOnly": 150,
+      "frames": [
+        "storm_loop_0",
+        "storm_loop_1",
+        "storm_loop_2",
+        "storm_loop_3",
+        "storm_loop_4",
+        "storm_loop_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        65,
+        65,
+        65,
+        65
+      ],
+      "durationMsTotal": 390,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "storm_ending",
+      "phase": "ending",
+      "direction": "nondirectional",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        -18
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "serverPulses": 12,
+      "pulseSpacingTicks": 8,
+      "rangeReferenceOnly": 150,
+      "frames": [
+        "storm_ending_0",
+        "storm_ending_1"
+      ],
+      "frameDurationsMs": [
+        65,
+        65
+      ],
+      "durationMsTotal": 130,
+      "frameCount": 2,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

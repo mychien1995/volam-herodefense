@@ -1,0 +1,35 @@
+# 03_vo_dang - production handoff
+
+Status: **PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW**. Concept and staff sample approved; not integrated or verified in Phaser.
+
+[Native contact overview](batch_contact_overview_1x.png) · [Gameplay mockup display2x](gameplay_mockup_2x_1280.png) · [Logical1x](gameplay_mockup_1x_640.png) · [File validation](file_validation.json)
+
+Mockup uses exact exported pixels over historical gameplay; it is not a new game capture. Character/shadow/runtime authority remain separate.
+
+| Asset / role | Source | PNG | Atlas | Metadata | Contact sheet |
+|---|---|---|---|---|---|
+| vo_dang_hands_v2_character | [ASE](../../../../source/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2_character.aseprite) | [PNG](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_character.png) | [JSON](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_character.json) | [phases](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_character.animations.json) | [PNG](vo_dang_hands_v2_character_contact_1x.png) |
+| vo_dang_shield_formation_v2_character | [ASE](../../../../source/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2_character.aseprite) | [PNG](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_character.png) | [JSON](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_character.json) | [phases](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_character.animations.json) | [PNG](vo_dang_shield_formation_v2_character_contact_1x.png) |
+| vo_dang_hands_v2_projectile | [ASE](../../../../source/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2_projectile.aseprite) | [PNG](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_projectile.png) | [JSON](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_projectile.json) | [phases](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_projectile.animations.json) | [PNG](vo_dang_hands_v2_projectile_contact_1x.png) |
+| vo_dang_hands_v2_impact | [ASE](../../../../source/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2_impact.aseprite) | [PNG](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_impact.png) | [JSON](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_impact.json) | [phases](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_impact.animations.json) | [PNG](vo_dang_hands_v2_impact_contact_1x.png) |
+| vo_dang_hands_v2_aura | [ASE](../../../../source/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2_aura.aseprite) | [PNG](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_aura.png) | [JSON](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_aura.json) | [phases](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_aura.animations.json) | [PNG](vo_dang_hands_v2_aura_contact_1x.png) |
+| vo_dang_shield_formation_v2_aura | [ASE](../../../../source/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2_aura.aseprite) | [PNG](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_aura.png) | [JSON](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_aura.json) | [phases](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_aura.animations.json) | [PNG](vo_dang_shield_formation_v2_aura_contact_1x.png) |
+| vo_dang_shield_formation_v2_ground | [ASE](../../../../source/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2_ground.aseprite) | [PNG](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_ground.png) | [JSON](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_ground.json) | [phases](../../../../exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_shield_formation_v2/vo_dang_shield_formation_v2_ground.animations.json) | [PNG](vo_dang_shield_formation_v2_ground_contact_1x.png) |
+
+## Skill / server-stage handoff
+
+| Skill/stage | New asset role/tag | Binding/lifetime |
+|---|---|---|
+| vo_dang_quyen A / left_palm / right_palm | vo_dang_hands_v2 / left_palm_* / right_palm_* / palm_contact_* | accepted A stage; server owns range65 and knockback |
+| vo_dang_kiem A / accepted A; flowing cuts | vo_dang_hands_v2 / sword_cut_1_* / sword_cut_2_* | 400ms base; renderer may alternate visuals; existing server proc unchanged |
+| luong_nghi_thu / straight piercing projectile | vo_dang_hands_v2 / luong_nghi_* | range240/speed390 reference only; actual heading from server |
+| huyen_am_chuong / large projectile / confirmed impact | vo_dang_hands_v2 / huyen_am_* | range260/radius30 reference; no art hitbox |
+| duong_khi_kich / projectile / hit / refund | vo_dang_hands_v2 / duong_khi_* / mana_refund_* | white five-digit qi palm; refund7MP once only server refund event |
+| thai_cuc_than_cong / on / active / absorb / off / mana depleted | vo_dang_shield_formation_v2 / mana_opening / mana_loop / mana_absorb / mana_off / mana_depleted | state-driven unlimited loop; free toggle; finite MP cost pays actual absorbed damage; remove at zero mana or cleanup |
+| thai_cuc_tran / activation / confinement loop / inward response / expiry | vo_dang_shield_formation_v2 / formation_* / inward_response_* | boundary keeps existing inside targets in; targets may move and attack within; terrain/forced movement immunity respected; no stun |
+
+No game code, Phaser, runtime mapping or approval locks changed. New editable sources have separate character/projectile/impact/ground/aura roles. All contact markers are visual only; server events decide hits. Loops follow authoritative action/status/projectile lifetime and cancel on cleanup.
+
+Reuse/transform details and exact file hashes: source production_manifest.json and *_frame_plan.json. Retained sources are copied as actual pixels, not regenerated. New source is original AI-assisted raster; no concept-sheet crops, geometry-generated art, exclusive-rights or human hand-pixelled authorship claim.
+
+Runtime gate remains: actual four-facing frame playback, feet/Y-depth, timing/cancellation, weapon/hand continuity, normal zoom and six-player readability in Phaser. No GIF/video.

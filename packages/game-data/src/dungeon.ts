@@ -65,6 +65,7 @@ export const creepDungeonSchema = z
     damagePerWave: z.number().nonnegative(),
     hpPerAdditionalPlayer: z.number().nonnegative(),
     damagePerAdditionalPlayer: z.number().nonnegative(),
+    creepRoster: z.array(z.string().regex(/^[a-z_]+$/)).min(1).optional(),
   })
   .superRefine((d, ctx) => {
     if (

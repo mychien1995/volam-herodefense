@@ -198,7 +198,7 @@ export const skillVisualStages: Record<
     impact: 'impact',
     persistent: 'ally_defense',
   },
-  luong_nghi_thu: { release: 'release', impact: 'impact' },
+  luong_nghi_thu: { release: 'release', travel: 'release', impact: 'impact' },
   huyen_am_chuong: {
     release: 'release',
     travel: 'travel',
@@ -207,6 +207,7 @@ export const skillVisualStages: Record<
   },
   duong_khi_kich: {
     release: 'release',
+    travel: 'release',
     impact: 'impact',
     refund: 'mana_return',
   },
@@ -273,7 +274,11 @@ export const skillVisualStages: Record<
   },
   khang_long_huu_hoi: { release: 'activation', persistent: 'buff' },
   hoanh_tao_bong: { release: 'sweep', impact: 'impact' },
-  pha_giap_bong: { impact: 'impact', persistent: 'defense_break' },
+  pha_giap_bong: {
+    release: 'impact',
+    impact: 'impact',
+    persistent: 'defense_break',
+  },
   cam_long_cong: { release: 'extend', control: 'retract' },
   truy_phong_bong: { persistent: 'speed' },
   thien_ha_vo_cau: { persistent: 'whirlwind', finisherImpact: 'impact' },
@@ -288,7 +293,7 @@ export const skillVisualStages: Record<
     characterLoop: 'spin',
     expiry: 'expiry',
   },
-  luu_phong_bo: { persistent: 'trail', expiry: 'settle' },
+  luu_phong_bo: { persistent: 'trail', impact: 'settle', expiry: 'settle' },
   chiet_mai_thu: {
     release: 'wrist_activation',
     sharedRelease: { asset: 'chiet_mai_thu_vfx', animation: 'heel_activation' },
@@ -303,7 +308,11 @@ export const skillVisualStages: Record<
     expiry: 'expiry',
   },
   phi_anh_tram: { persistent: 'trail', impact: 'slash' },
-  truy_hon_dao: { pulse: 'first_cut', repeatPulse: 'second_cut' },
+  truy_hon_dao: {
+    release: 'first_cut',
+    travel: 'first_cut',
+    impact: 'second_cut',
+  },
   phong_anh_hoan_vi: {
     release: 'step',
     persistent: 'ready',

@@ -143,7 +143,14 @@ describe('M2A deterministic creep instances', () => {
   it('cancels owned missiles, queued shots and held movement when leaving or disconnecting', () => {
     const match = setup(),
       { hero, zone } = ready(match, 'a');
-    Object.assign(hero, { x: 340, y: 240 });
+    // Hỏa Vân is now simultaneous; use the real paced Vạn Kiếm wave
+    // to retain coverage of both queued and already-spawned projectile cleanup.
+    Object.assign(hero, {
+      x: 340,
+      y: 240,
+      schoolId: 'vo_dang',
+      skillIds: ['van_kiem_quy_tong', '', '', ''],
+    });
     match.input('a', 1, { kind: 'cast', slot: 0 });
     match.step();
     expect(zone.world.projectiles.size).toBeGreaterThan(0);

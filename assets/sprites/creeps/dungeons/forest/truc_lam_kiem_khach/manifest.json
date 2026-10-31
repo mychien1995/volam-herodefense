@@ -1,0 +1,1863 @@
+{
+  "schemaVersion": 1,
+  "id": "forest_truc_lam_kiem_khach",
+  "typeId": "truc_lam_kiem_khach",
+  "nameVi": "Trúc Lâm Kiếm Khách",
+  "category": "enemy",
+  "status": "candidate",
+  "produced": true,
+  "directorApproved": false,
+  "runtimeIntegrated": false,
+  "runtimeVerified": true,
+  "sourceConcept": "assets/concepts/dungeon-creeps/forest/truc_lam_kiem_khach_concept_v02.png",
+  "sheet": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/spritesheet.png",
+  "atlas": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/atlas.json",
+  "source": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/source/truc_lam_kiem_khach_v01.aseprite",
+  "frameWidth": 144,
+  "frameHeight": 128,
+  "feetPixels": [
+    72,
+    106
+  ],
+  "footPivot": [
+    0.5,
+    0.828125
+  ],
+  "displayScale": 1,
+  "bodyTargetPixels": 44,
+  "bodyTargetAxis": "height",
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    }
+  ],
+  "anchorMethod": "Existing warm-boot detector excludes pale sword pixels",
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/idle_down_0.png",
+      "sha256": "42da9dcab98a7a8fd661c866738aae5b5f8ab81ab706bdf2667c2351f98643c4",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          127,
+          15,
+          190,
+          252
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          81.0,
+          251
+        ],
+        "placement": [
+          58,
+          62
+        ]
+      }
+    },
+    {
+      "name": "idle_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/idle_down_1.png",
+      "sha256": "0fa398a60be1c44a4a134c75067b54daf076703b006d2cd0822a1b28d5188686",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          470,
+          14,
+          180,
+          250
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          76.5,
+          249
+        ],
+        "placement": [
+          59,
+          62
+        ]
+      }
+    },
+    {
+      "name": "walk_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_down_0.png",
+      "sha256": "cb9291b441c6cadc863509d3dbe15a20c2f755bff4e477da6692551a93fbd38c",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          834,
+          14,
+          188,
+          254
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          104.0,
+          253
+        ],
+        "placement": [
+          54,
+          61
+        ]
+      }
+    },
+    {
+      "name": "walk_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_down_1.png",
+      "sha256": "829570a3a7a34be09c940be44f4c69e15d8efb3c963e0bb77098299de4139aed",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1167,
+          14,
+          225,
+          254
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          135.5,
+          253
+        ],
+        "placement": [
+          48,
+          61
+        ]
+      }
+    },
+    {
+      "name": "walk_down_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_down_2.png",
+      "sha256": "c4cfdf3d7582b6bc1ad291f13c709731d80ad50c31a56d937f793ee390804585",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          130,
+          281,
+          199,
+          251
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          121.0,
+          250
+        ],
+        "placement": [
+          51,
+          62
+        ]
+      }
+    },
+    {
+      "name": "walk_down_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_down_3.png",
+      "sha256": "ce33aefec6f5a205812ae6863945ae1901fc8d54991e5b21d30944b80166a68d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          467,
+          279,
+          217,
+          252
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          86.0,
+          252
+        ],
+        "placement": [
+          57,
+          62
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_down_0.png",
+      "sha256": "990baeac9dc9090dcbc3fc8e5d314e6e9cb85f4bff2b41294554883d9492624b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          848,
+          290,
+          237,
+          247
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          33.0,
+          237
+        ],
+        "placement": [
+          66,
+          64
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_down_1.png",
+      "sha256": "c063177e5457ac1c6eac758d481003a6ff02ebaa56ca35b5d15104d0c95c6111",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1197,
+          288,
+          240,
+          243
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          178.0,
+          243
+        ],
+        "placement": [
+          41,
+          63
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_down_2.png",
+      "sha256": "6eea8aa75867006b99e7376f6013ef172ae71c54b6e472d74d7c3bc27e4784c5",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          102,
+          543,
+          231,
+          264
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          56.0,
+          244
+        ],
+        "placement": [
+          62,
+          63
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_down_3.png",
+      "sha256": "99000e7f557b806a0b796baf1746f35d7b9053609a00b31e8ad7703eb7ba663b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          473,
+          547,
+          252,
+          254
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          36.0,
+          237
+        ],
+        "placement": [
+          66,
+          64
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/hurt_down_0.png",
+      "sha256": "2d1bb3a7491cc18fbd5d47ae59254c41426ff38a4984afcf0ff259a0b7be8003",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          803,
+          542,
+          261,
+          242
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          160.0,
+          241
+        ],
+        "placement": [
+          44,
+          64
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/hurt_down_1.png",
+      "sha256": "32a001489154fbec19120e234e818acc10d98771579f5d3564ccb4deb5a25560",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1167,
+          548,
+          237,
+          236
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          106.0,
+          235
+        ],
+        "placement": [
+          53,
+          65
+        ]
+      }
+    },
+    {
+      "name": "death_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_down_0.png",
+      "sha256": "969270bdd463655a5ad92669ff9cdd075938a5036cda39139e42a5a18ae2a01a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          51,
+          802,
+          302,
+          191
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          164.0,
+          191
+        ],
+        "placement": [
+          43,
+          72
+        ]
+      }
+    },
+    {
+      "name": "death_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_down_1.png",
+      "sha256": "5b1db6827708e3b289fbb430fadf2a3faf42e3907d9b2f39337df5112263170b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          404,
+          821,
+          327,
+          172
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          186.0,
+          172
+        ],
+        "placement": [
+          39,
+          76
+        ]
+      }
+    },
+    {
+      "name": "death_down_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_down_2.png",
+      "sha256": "39098762ae31cd9d37d908b9df6a9a2924f63a56934b7a3ae6ac61c8dda1efc0",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          756,
+          859,
+          348,
+          130
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          214.0,
+          130
+        ],
+        "placement": [
+          34,
+          83
+        ]
+      }
+    },
+    {
+      "name": "death_down_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_down_3.png",
+      "sha256": "8d0448ad178f89c70c0ba18c819bf8ae8b0c4496e36c7c7c1f3029536341a2ef",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1137,
+          867,
+          366,
+          124
+        ],
+        "fixedSourceScale": 0.176,
+        "sourceFootInCrop": [
+          256.0,
+          124
+        ],
+        "placement": [
+          27,
+          84
+        ]
+      }
+    },
+    {
+      "name": "idle_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/idle_left_0.png",
+      "sha256": "460ba66b53d01d1c95c717a039d9ca0d33f1eba4770429179a3a0fda1238ed79",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          67,
+          20,
+          257,
+          264
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          192.0,
+          264
+        ],
+        "placement": [
+          40,
+          62
+        ]
+      }
+    },
+    {
+      "name": "idle_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/idle_left_1.png",
+      "sha256": "40e453ba8811d71ab6865ba35da9e31fecc4435f65f36a825afeb7f274071fca",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          421,
+          18,
+          252,
+          266
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          182.0,
+          265
+        ],
+        "placement": [
+          42,
+          62
+        ]
+      }
+    },
+    {
+      "name": "walk_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_left_0.png",
+      "sha256": "7e74659c26b863f70571701c9831f2fe1ae754655263f5788ecfaed7f89bcdf5",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          774,
+          19,
+          288,
+          265
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          119.0,
+          264
+        ],
+        "placement": [
+          52,
+          62
+        ]
+      }
+    },
+    {
+      "name": "walk_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_left_1.png",
+      "sha256": "d15d417bd047b515201d567bace14a61b0a33a447d20835c83aeb88be4df3a40",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1170,
+          18,
+          269,
+          266
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          118.0,
+          264
+        ],
+        "placement": [
+          52,
+          62
+        ]
+      }
+    },
+    {
+      "name": "walk_left_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_left_2.png",
+      "sha256": "f21a675698c6157b4e68bdbc2d66b5e98bc00db8ba110eed02c47a359301ffc0",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          39,
+          296,
+          286,
+          254
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          126.5,
+          253
+        ],
+        "placement": [
+          51,
+          64
+        ]
+      }
+    },
+    {
+      "name": "walk_left_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_left_3.png",
+      "sha256": "677f3c3a2222ef5146227f31c51d5dc9c37bb6695258d5afa27c0ca703646be7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          417,
+          297,
+          268,
+          250
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          92.0,
+          250
+        ],
+        "placement": [
+          57,
+          64
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_left_0.png",
+      "sha256": "6e0cb5b58e064540beb8c9083d1e7f0a116d48d3fff3dd07e51766732c05733f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          852,
+          308,
+          298,
+          240
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          196.0,
+          239
+        ],
+        "placement": [
+          39,
+          66
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_left_1.png",
+      "sha256": "20e46ca5c0428fea7ef371843e310d34188b2334509a3e3bfab423b3b70e6b44",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1220,
+          304,
+          256,
+          246
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          41.0,
+          246
+        ],
+        "placement": [
+          65,
+          65
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_left_2.png",
+      "sha256": "88cb996939720bec6746ab7bb129135d3014fae0d70aba757b5b99d993e63290",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          27,
+          559,
+          392,
+          225
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          316.5,
+          224
+        ],
+        "placement": [
+          19,
+          69
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_left_3.png",
+      "sha256": "ca3d67f1f3ba2f87f23fc931f431393c7f37e6ad9d5248de33bba005ea0752ce",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          425,
+          552,
+          334,
+          234
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          163.5,
+          233
+        ],
+        "placement": [
+          45,
+          67
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/hurt_left_0.png",
+      "sha256": "78b32854190875f3dd4937f56c80d424f1df64dd18dc1ce96cb71a3a3d53cdcf",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          802,
+          565,
+          318,
+          223
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          261.0,
+          222
+        ],
+        "placement": [
+          29,
+          69
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/hurt_left_1.png",
+      "sha256": "979739d8aa60a6777b10555fbf4915ea6f58055f41abd563ff01eb065479c77d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1211,
+          552,
+          232,
+          234
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          202.0,
+          233
+        ],
+        "placement": [
+          38,
+          67
+        ]
+      }
+    },
+    {
+      "name": "death_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_left_0.png",
+      "sha256": "9659f9f9fe37f8d1e1a23e1f07ee46cea9dff950a94721b2cfe854b1dfdc767c",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          50,
+          788,
+          263,
+          213
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          144.0,
+          213
+        ],
+        "placement": [
+          48,
+          71
+        ]
+      }
+    },
+    {
+      "name": "death_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_left_1.png",
+      "sha256": "b4bcf3b37602e52ec3aca5abacab0a3668e3793a32e2dba4b6718a9666bac642",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          370,
+          815,
+          349,
+          183
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          166.0,
+          183
+        ],
+        "placement": [
+          44,
+          76
+        ]
+      }
+    },
+    {
+      "name": "death_left_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_left_2.png",
+      "sha256": "80e26e9e7b37ea6509837166ff2ef59c9a5c9f7d56fb2f11387e8a02b0edffd9",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          767,
+          865,
+          352,
+          121
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          113.0,
+          121
+        ],
+        "placement": [
+          53,
+          86
+        ]
+      }
+    },
+    {
+      "name": "death_left_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_left_3.png",
+      "sha256": "b96b2f5ae1419872dbfeb492341070c2c6ac1691b71aa307f2f5583d40ec0c7b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1151,
+          883,
+          363,
+          110
+        ],
+        "fixedSourceScale": 0.166351606805293,
+        "sourceFootInCrop": [
+          96.0,
+          110
+        ],
+        "placement": [
+          56,
+          88
+        ]
+      }
+    },
+    {
+      "name": "idle_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/idle_right_0.png",
+      "sha256": "a7c74ee29f1c3f8fc68b33678358377ef418d8824240fed7863e624c202a3138",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          75,
+          37,
+          213,
+          249
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          97.0,
+          249
+        ],
+        "placement": [
+          55,
+          62
+        ]
+      }
+    },
+    {
+      "name": "idle_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/idle_right_1.png",
+      "sha256": "23757f2125962d30fa631104487f0290b8b46845ab9faa1a9252feb58b39db33",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          444,
+          32,
+          212,
+          253
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          77.0,
+          253
+        ],
+        "placement": [
+          59,
+          62
+        ]
+      }
+    },
+    {
+      "name": "walk_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_right_0.png",
+      "sha256": "9dc29d42b6cfaf6a3a8c7874f929890dfa6701a894fc1503ced8003d2a3d5cca",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          831,
+          37,
+          274,
+          245
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          155.0,
+          244
+        ],
+        "placement": [
+          45,
+          63
+        ]
+      }
+    },
+    {
+      "name": "walk_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_right_1.png",
+      "sha256": "bb5e5f146952e61af9a5dcc16e5c073ccaf7694b4eb6ed036900630ef732e630",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1208,
+          41,
+          293,
+          243
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          40.0,
+          242
+        ],
+        "placement": [
+          65,
+          64
+        ]
+      }
+    },
+    {
+      "name": "walk_right_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_right_2.png",
+      "sha256": "1673b462edcd03eb8a21a2cf64d0dd7d351eafec3e9e2b17478c8eefdf357cae",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          112,
+          304,
+          283,
+          245
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          150.0,
+          244
+        ],
+        "placement": [
+          46,
+          63
+        ]
+      }
+    },
+    {
+      "name": "walk_right_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_right_3.png",
+      "sha256": "07ec27b0ed47391a2726422bfabababe83af539ace6b37a089c7a1f822088798",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          468,
+          305,
+          310,
+          243
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          174.0,
+          243
+        ],
+        "placement": [
+          41,
+          63
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_right_0.png",
+      "sha256": "43ce1ecd63b54e054064a3851bd7e12bafe8fdcf1689f04e26557b42f86c26cd",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          808,
+          263,
+          301,
+          289
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          220.0,
+          288
+        ],
+        "placement": [
+          33,
+          56
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_right_1.png",
+      "sha256": "adb72f5a88e8f46e5ecea6717a02d81f4326cdafd3844d153639af7434c7cb34",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1231,
+          308,
+          237,
+          244
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          182.0,
+          244
+        ],
+        "placement": [
+          40,
+          63
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_right_2.png",
+      "sha256": "c2759e30c5a3b0d559012320be6ef0ada7e51a334ce4d01b487b5b0d08343a21",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          67,
+          569,
+          376,
+          228
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          31.0,
+          227
+        ],
+        "placement": [
+          67,
+          66
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_right_3.png",
+      "sha256": "f43001ae6181fe2d83557033914dd9020f20a1e31970d991239726d0a7fcf1f7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          466,
+          568,
+          365,
+          231
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          17.0,
+          230
+        ],
+        "placement": [
+          69,
+          66
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/hurt_right_0.png",
+      "sha256": "af3f7d377abf169249a76fbec5496dabf2b8cc8a1c2a69924b08509b357b4111",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          845,
+          577,
+          263,
+          219
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          101.0,
+          218
+        ],
+        "placement": [
+          54,
+          68
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/hurt_right_1.png",
+      "sha256": "6e87110cd50060218df500166194fa165963c0360f0e69e0a8ab5795ecf2978d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1254,
+          575,
+          221,
+          221
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          22.0,
+          217
+        ],
+        "placement": [
+          68,
+          68
+        ]
+      }
+    },
+    {
+      "name": "death_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_right_0.png",
+      "sha256": "3933ec05607ac3cae568c4a6209dcff4a4169fb913019d3f393749b155579368",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          99,
+          796,
+          200,
+          209
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          135.0,
+          209
+        ],
+        "placement": [
+          48,
+          69
+        ]
+      }
+    },
+    {
+      "name": "death_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_right_1.png",
+      "sha256": "dd3f8c9a454ba530fc43507624d15f67f45f8efe369902a9dc45d673dd6257e0",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          440,
+          808,
+          337,
+          180
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          142.0,
+          180
+        ],
+        "placement": [
+          47,
+          74
+        ]
+      }
+    },
+    {
+      "name": "death_right_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_right_2.png",
+      "sha256": "00e972d41ea7fce39ca8cafaf25771fec43de03af6de85eb5bcd6f26a381ac7a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          786,
+          854,
+          344,
+          139
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          274.0,
+          139
+        ],
+        "placement": [
+          24,
+          82
+        ]
+      }
+    },
+    {
+      "name": "death_right_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_right_3.png",
+      "sha256": "4aff0fe765369f8095a31232e2dbb98a9202f8958d761f2d869c2ac3ef800594",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1182,
+          883,
+          333,
+          108
+        ],
+        "fixedSourceScale": 0.1752988047808765,
+        "sourceFootInCrop": [
+          283.0,
+          108
+        ],
+        "placement": [
+          22,
+          87
+        ]
+      }
+    },
+    {
+      "name": "idle_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/idle_up_0.png",
+      "sha256": "d51bac05e00d0867aeebf467bde15b146912ad568388f7f5986abe4c56c72369",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          106,
+          16,
+          221,
+          244
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          121.0,
+          244
+        ],
+        "placement": [
+          50,
+          62
+        ]
+      }
+    },
+    {
+      "name": "idle_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/idle_up_1.png",
+      "sha256": "beefd809b435c87599e8a6073342fd8c65f37382786900210dbe973b8d5b96b2",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          478,
+          16,
+          227,
+          245
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          126.0,
+          244
+        ],
+        "placement": [
+          49,
+          62
+        ]
+      }
+    },
+    {
+      "name": "walk_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_up_0.png",
+      "sha256": "6286394d618c36c15a7174d99306e8e8092bcd1aeec90ecb38356914c72a39f1",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          848,
+          17,
+          240,
+          253
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          116.0,
+          252
+        ],
+        "placement": [
+          51,
+          61
+        ]
+      }
+    },
+    {
+      "name": "walk_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_up_1.png",
+      "sha256": "dfc2601bed4af43c65a029957587172dce381459f60111d7bc3b4523a9a13c80",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1242,
+          16,
+          225,
+          254
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          96.0,
+          253
+        ],
+        "placement": [
+          55,
+          60
+        ]
+      }
+    },
+    {
+      "name": "walk_up_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_up_2.png",
+      "sha256": "ac4c7e56ae75c37643afd911f4c0e6cae0aa8d144f3da5afce446a5b09ca2549",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          87,
+          277,
+          237,
+          247
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          91.0,
+          246
+        ],
+        "placement": [
+          56,
+          62
+        ]
+      }
+    },
+    {
+      "name": "walk_up_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/walk_up_3.png",
+      "sha256": "bdac49e9898594493be6212c7d7e54c1da9cc634ec4aeeedc55ee793944bb594",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          471,
+          276,
+          238,
+          248
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          109.0,
+          247
+        ],
+        "placement": [
+          52,
+          61
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_up_0.png",
+      "sha256": "13ebdea8d0355d7c04192b44deb00a802e2a1e341f4c2d7378f97436fa07599f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          829,
+          292,
+          298,
+          229
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          173.0,
+          228
+        ],
+        "placement": [
+          41,
+          65
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_up_1.png",
+      "sha256": "ae5c6a74064a225ed5453df00fe704dca015676fa26ca674dfe5615c81b412cf",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1230,
+          266,
+          248,
+          258
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          181.0,
+          256
+        ],
+        "placement": [
+          39,
+          60
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_up_2.png",
+      "sha256": "698ae25c55579ef584f635832aabc30798c5a1d051a65e435333cd0c0797028e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          79,
+          512,
+          279,
+          258
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          76.0,
+          257
+        ],
+        "placement": [
+          58,
+          60
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/basic_attack_up_3.png",
+      "sha256": "336fa863cfe5fcdea7d0ba77e71126841ab34a86ebc2cc6662f1a99d788c95f9",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          460,
+          547,
+          283,
+          214
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          155.0,
+          213
+        ],
+        "placement": [
+          44,
+          68
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/hurt_up_0.png",
+      "sha256": "e9d7fd73b0f8b94f3ca559e1110884ff4bd6c60d48f2f20b5c060f05e8fb59aa",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          863,
+          553,
+          240,
+          209
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          134.0,
+          209
+        ],
+        "placement": [
+          48,
+          68
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/hurt_up_1.png",
+      "sha256": "e36db04183d08462f27e9a88e03e960c0e19180a977f68800d94365e7d2dd90b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1232,
+          548,
+          250,
+          220
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          142.0,
+          220
+        ],
+        "placement": [
+          46,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_up_0.png",
+      "sha256": "2f30119560560e91150ff497cba1efaba7e7ec4832769e9b2d274c97c179c916",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          86,
+          782,
+          263,
+          207
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          112.0,
+          207
+        ],
+        "placement": [
+          52,
+          69
+        ]
+      }
+    },
+    {
+      "name": "death_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_up_1.png",
+      "sha256": "f94082ff2b373608d113c4513dfca7a085c14be065bcd7bcae96e6a0ba9c6895",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          430,
+          802,
+          304,
+          190
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          132.0,
+          190
+        ],
+        "placement": [
+          48,
+          72
+        ]
+      }
+    },
+    {
+      "name": "death_up_2",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_up_2.png",
+      "sha256": "9550eb6c6c5fe99c4b997613a38062bfa235575c75293ac0b0d6a43e90f4b3d6",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          789,
+          847,
+          313,
+          152
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          206.0,
+          152
+        ],
+        "placement": [
+          35,
+          79
+        ]
+      }
+    },
+    {
+      "name": "death_up_3",
+      "file": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/frames/death_up_3.png",
+      "sha256": "32e8f5c603cbdbf4c4866e611c90f53b9e381a6f18b10b1a36a57159b475950a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1169,
+          879,
+          320,
+          113
+        ],
+        "fixedSourceScale": 0.18032786885245902,
+        "sourceFootInCrop": [
+          150.0,
+          113
+        ],
+        "placement": [
+          45,
+          86
+        ]
+      }
+    }
+  ],
+  "sourceScales": {
+    "down": 0.176,
+    "left": 0.166351606805293,
+    "right": 0.1752988047808765,
+    "up": 0.18032786885245902
+  },
+  "generatedSources": [
+    {
+      "path": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_down_source_v02.png",
+      "sha256": "f0524347c78d32812b8d0a4dd8ceb4db50be224f504240a18d8eaa0383f3610a",
+      "layout": [
+        4,
+        4
+      ]
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_left_source_v02.png",
+      "sha256": "d929208b7bb34271da9ba5cfa467f8ef61013f4fe8d19ab33581d2b5f72cb1b0",
+      "layout": [
+        4,
+        4
+      ]
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_right_source_v01.png",
+      "sha256": "5ea180c24d266c8ebcc6293236fc1fcd58b3393e822736c8152deb55d2ffc173",
+      "layout": [
+        4,
+        4
+      ]
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/forest/source/truc_lam_kiem_khach_up_source_v01.png",
+      "sha256": "a0f1bb0ed7be8d00391f28d74055f7b58d5114588a9037417aac4c455b4bd1be",
+      "layout": [
+        4,
+        4
+      ]
+    }
+  ],
+  "provenance": {
+    "method": "Retained original image_gen cels; connected-alpha245 extraction, fixed directional nearest sampling and anchored atlas packing.",
+    "license": "Original AI-assisted project raster artwork generated with OpenAI built-in image_gen; no third-party pack or exclusive copyright claim.",
+    "prompts": "assets/sprites/creeps/dungeons/forest/source/generation_prompts_v01.json"
+  },
+  "reuse": {
+    "mirroredDirections": [],
+    "syntheticAnimationFrames": 0
+  },
+  "notes": [
+    "All poses use independent generated source cels. No server type registration or gameplay changes.",
+    "Editable Aseprite contains extracted raster cels, not reconstructed illustration layers.",
+    "Low creatures use the same declared bottom-contact anchor contract; physical collision is not encoded."
+  ],
+  "verificationScope": "isolated_phaser_art_review_only",
+  "verification": {
+    "status": "PASS",
+    "scope": "Isolated controlled Phaser 4 review; no natural combat, rewards, networked enemy integration or director approval",
+    "browserClients": 6,
+    "heroScaleStandIns": 6,
+    "evidence": "assets/reviews/forest_creeps_v01/final-6/observations.json",
+    "evidenceSha256": "8f43ef8f31d4eeea7a6a9cfcc7c0e38c2aa1def7e85afb80a20cfc178ebf9a5c"
+  }
+}

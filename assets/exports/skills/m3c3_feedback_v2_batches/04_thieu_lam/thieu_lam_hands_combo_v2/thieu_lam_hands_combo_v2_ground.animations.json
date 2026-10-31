@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 2,
+  "id": "thieu_lam_hands_combo_v2_ground",
+  "handoffId": "thieu_lam_hands_combo_v2",
+  "role": "ground",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/04_thieu_lam/thieu_lam_hands_combo_v2_ground.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/04_thieu_lam/thieu_lam_hands_combo_v2/thieu_lam_hands_combo_v2_ground.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/04_thieu_lam/thieu_lam_hands_combo_v2/thieu_lam_hands_combo_v2_ground.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "empowered_contact",
+      "phase": "impact",
+      "direction": "nondirectional",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trigger": "confirmed empowered contact only; no extra area damage",
+      "frames": [
+        "empowered_contact_0",
+        "empowered_contact_1",
+        "empowered_contact_2",
+        "empowered_contact_3",
+        "empowered_contact_4",
+        "empowered_contact_5"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 360,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "empowered_contact_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

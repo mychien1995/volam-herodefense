@@ -131,7 +131,11 @@ const status = element('#status');
 function dungeonAction(
   action:
     | { action: 'open' | 'exit' }
-    | { action: 'enter'; access: 'private' | 'shared' },
+    | {
+        action: 'enter';
+        access: 'private' | 'shared';
+        destination: 'forest' | 'desert';
+      },
 ): void {
   if (
     !room ||
@@ -323,7 +327,8 @@ ui.onLeave = () => {
 };
 ui.onBasic = (id) => send({ kind: 'select-basic', id });
 ui.onLoadout = (ids) => send({ kind: 'dev-loadout', ids });
-ui.onDungeonEnter = (access) => dungeonAction({ action: 'enter', access });
+ui.onDungeonEnter = (access, destination) =>
+  dungeonAction({ action: 'enter', access, destination });
 // Read-only browser evidence bridge, enabled explicitly for automated playtesting.
 if (new URLSearchParams(location.search).has('debug') || artPreview) {
   Object.defineProperty(window, '__VOLAM__', {
@@ -341,6 +346,10 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
           : artPreview
             ? gallery.inspect()
             : arenaScene.inspect(),
+      ...(new URLSearchParams(location.search).get('feedbackArtReview')==='1' ? {
+        // Explicit presentation-only renderer fixture: no command or state mutation.
+        reviewFeedback:(asset:string,tag:string,x:number,y:number)=>arenaScene.reviewFeedback(asset,tag,x,y),
+      } : {}),
     }),
   });
 }

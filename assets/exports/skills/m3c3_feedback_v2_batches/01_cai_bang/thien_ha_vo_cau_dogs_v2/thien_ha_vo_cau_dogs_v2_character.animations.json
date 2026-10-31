@@ -1,0 +1,619 @@
+{
+  "schemaVersion": 2,
+  "id": "thien_ha_vo_cau_dogs_v2_character",
+  "handoffId": "thien_ha_vo_cau_dogs_v2",
+  "role": "character",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/01_cai_bang/thien_ha_vo_cau_dogs_v2_character.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/thien_ha_vo_cau_dogs_v2/thien_ha_vo_cau_dogs_v2_character.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/thien_ha_vo_cau_dogs_v2/thien_ha_vo_cau_dogs_v2_character.json",
+  "frameDimensions": [
+    160,
+    120
+  ],
+  "pivot": [
+    80,
+    96
+  ],
+  "origin": [
+    0.5,
+    0.8
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "opening_down",
+      "phase": "opening",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact"
+      ],
+      "frames": [
+        "opening_down_0",
+        "opening_down_1"
+      ],
+      "frameDurationsMs": [
+        55,
+        55
+      ],
+      "durationMsTotal": 110,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "whirl_down",
+      "phase": "loop",
+      "direction": "down",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "characterMotion": "eight actual authored poses from four cardinal facings; never rotation of still",
+      "framePhases": [
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "whirl_down_0",
+        "whirl_down_1",
+        "whirl_down_2",
+        "whirl_down_3",
+        "whirl_down_4",
+        "whirl_down_5",
+        "whirl_down_6",
+        "whirl_down_7"
+      ],
+      "frameDurationsMs": [
+        55,
+        55,
+        55,
+        55,
+        55,
+        55,
+        55,
+        55
+      ],
+      "durationMsTotal": 440,
+      "frameCount": 8,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "ending_down",
+      "phase": "ending",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        0
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "ending_down_0",
+        "ending_down_1",
+        "ending_down_2"
+      ],
+      "frameDurationsMs": [
+        40,
+        60,
+        100
+      ],
+      "durationMsTotal": 200,
+      "frameCount": 3,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 0,
+          "frame": "ending_down_0",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "opening_left",
+      "phase": "opening",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact"
+      ],
+      "frames": [
+        "opening_left_0",
+        "opening_left_1"
+      ],
+      "frameDurationsMs": [
+        55,
+        55
+      ],
+      "durationMsTotal": 110,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "whirl_left",
+      "phase": "loop",
+      "direction": "left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "characterMotion": "eight actual authored poses from four cardinal facings; never rotation of still",
+      "framePhases": [
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "whirl_left_0",
+        "whirl_left_1",
+        "whirl_left_2",
+        "whirl_left_3",
+        "whirl_left_4",
+        "whirl_left_5",
+        "whirl_left_6",
+        "whirl_left_7"
+      ],
+      "frameDurationsMs": [
+        55,
+        55,
+        55,
+        55,
+        55,
+        55,
+        55,
+        55
+      ],
+      "durationMsTotal": 440,
+      "frameCount": 8,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "ending_left",
+      "phase": "ending",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        0
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "ending_left_0",
+        "ending_left_1",
+        "ending_left_2"
+      ],
+      "frameDurationsMs": [
+        40,
+        60,
+        100
+      ],
+      "durationMsTotal": 200,
+      "frameCount": 3,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 0,
+          "frame": "ending_left_0",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "opening_right",
+      "phase": "opening",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact"
+      ],
+      "frames": [
+        "opening_right_0",
+        "opening_right_1"
+      ],
+      "frameDurationsMs": [
+        55,
+        55
+      ],
+      "durationMsTotal": 110,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "whirl_right",
+      "phase": "loop",
+      "direction": "right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "characterMotion": "eight actual authored poses from four cardinal facings; never rotation of still",
+      "framePhases": [
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "whirl_right_0",
+        "whirl_right_1",
+        "whirl_right_2",
+        "whirl_right_3",
+        "whirl_right_4",
+        "whirl_right_5",
+        "whirl_right_6",
+        "whirl_right_7"
+      ],
+      "frameDurationsMs": [
+        55,
+        55,
+        55,
+        55,
+        55,
+        55,
+        55,
+        55
+      ],
+      "durationMsTotal": 440,
+      "frameCount": 8,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "ending_right",
+      "phase": "ending",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        0
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "ending_right_0",
+        "ending_right_1",
+        "ending_right_2"
+      ],
+      "frameDurationsMs": [
+        40,
+        60,
+        100
+      ],
+      "durationMsTotal": 200,
+      "frameCount": 3,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 0,
+          "frame": "ending_right_0",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "opening_up",
+      "phase": "opening",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact"
+      ],
+      "frames": [
+        "opening_up_0",
+        "opening_up_1"
+      ],
+      "frameDurationsMs": [
+        55,
+        55
+      ],
+      "durationMsTotal": 110,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "whirl_up",
+      "phase": "loop",
+      "direction": "up",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "characterMotion": "eight actual authored poses from four cardinal facings; never rotation of still",
+      "framePhases": [
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "whirl_up_0",
+        "whirl_up_1",
+        "whirl_up_2",
+        "whirl_up_3",
+        "whirl_up_4",
+        "whirl_up_5",
+        "whirl_up_6",
+        "whirl_up_7"
+      ],
+      "frameDurationsMs": [
+        55,
+        55,
+        55,
+        55,
+        55,
+        55,
+        55,
+        55
+      ],
+      "durationMsTotal": 440,
+      "frameCount": 8,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "ending_up",
+      "phase": "ending",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        0
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "ending_up_0",
+        "ending_up_1",
+        "ending_up_2"
+      ],
+      "frameDurationsMs": [
+        40,
+        60,
+        100
+      ],
+      "durationMsTotal": 200,
+      "frameCount": 3,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 0,
+          "frame": "ending_up_0",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

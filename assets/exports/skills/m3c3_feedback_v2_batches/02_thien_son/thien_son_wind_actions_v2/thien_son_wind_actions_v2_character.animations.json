@@ -1,0 +1,1227 @@
+{
+  "schemaVersion": 2,
+  "id": "thien_son_wind_actions_v2_character",
+  "handoffId": "thien_son_wind_actions_v2",
+  "role": "character",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_wind_actions_v2_character.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_wind_actions_v2/thien_son_wind_actions_v2_character.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_wind_actions_v2/thien_son_wind_actions_v2_character.json",
+  "frameDimensions": [
+    160,
+    120
+  ],
+  "pivot": [
+    80,
+    96
+  ],
+  "origin": [
+    0.5,
+    0.8
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "lien_hoa_phien_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "lien_hoa_phien_cast_down_0",
+        "lien_hoa_phien_cast_down_1",
+        "lien_hoa_phien_cast_down_2",
+        "lien_hoa_phien_cast_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "lien_hoa_phien_cast_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "lien_hoa_phien_rapid_down",
+      "phase": "loop",
+      "direction": "down",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "lien_hoa_phien_rapid_down_0",
+        "lien_hoa_phien_rapid_down_1"
+      ],
+      "frameDurationsMs": [
+        70,
+        70
+      ],
+      "durationMsTotal": 140,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luc_duong_chuong_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "luc_duong_chuong_cast_down_0",
+        "luc_duong_chuong_cast_down_1",
+        "luc_duong_chuong_cast_down_2",
+        "luc_duong_chuong_cast_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "luc_duong_chuong_cast_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luc_duong_chuong_spin_down",
+      "phase": "loop",
+      "direction": "down",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "loop",
+        "loop",
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "luc_duong_chuong_spin_down_0",
+        "luc_duong_chuong_spin_down_1",
+        "luc_duong_chuong_spin_down_2",
+        "luc_duong_chuong_spin_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luu_phong_bo_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "luu_phong_bo_cast_down_0",
+        "luu_phong_bo_cast_down_1",
+        "luu_phong_bo_cast_down_2",
+        "luu_phong_bo_cast_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "luu_phong_bo_cast_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "chiet_mai_thu_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "chiet_mai_thu_cast_down_0",
+        "chiet_mai_thu_cast_down_1",
+        "chiet_mai_thu_cast_down_2",
+        "chiet_mai_thu_cast_down_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "chiet_mai_thu_cast_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "lien_hoa_phien_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "lien_hoa_phien_cast_left_0",
+        "lien_hoa_phien_cast_left_1",
+        "lien_hoa_phien_cast_left_2",
+        "lien_hoa_phien_cast_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "lien_hoa_phien_cast_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "lien_hoa_phien_rapid_left",
+      "phase": "loop",
+      "direction": "left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "lien_hoa_phien_rapid_left_0",
+        "lien_hoa_phien_rapid_left_1"
+      ],
+      "frameDurationsMs": [
+        70,
+        70
+      ],
+      "durationMsTotal": 140,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luc_duong_chuong_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "luc_duong_chuong_cast_left_0",
+        "luc_duong_chuong_cast_left_1",
+        "luc_duong_chuong_cast_left_2",
+        "luc_duong_chuong_cast_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "luc_duong_chuong_cast_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luc_duong_chuong_spin_left",
+      "phase": "loop",
+      "direction": "left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "loop",
+        "loop",
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "luc_duong_chuong_spin_left_0",
+        "luc_duong_chuong_spin_left_1",
+        "luc_duong_chuong_spin_left_2",
+        "luc_duong_chuong_spin_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luu_phong_bo_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "luu_phong_bo_cast_left_0",
+        "luu_phong_bo_cast_left_1",
+        "luu_phong_bo_cast_left_2",
+        "luu_phong_bo_cast_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "luu_phong_bo_cast_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "chiet_mai_thu_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "chiet_mai_thu_cast_left_0",
+        "chiet_mai_thu_cast_left_1",
+        "chiet_mai_thu_cast_left_2",
+        "chiet_mai_thu_cast_left_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "chiet_mai_thu_cast_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "lien_hoa_phien_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "lien_hoa_phien_cast_right_0",
+        "lien_hoa_phien_cast_right_1",
+        "lien_hoa_phien_cast_right_2",
+        "lien_hoa_phien_cast_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "lien_hoa_phien_cast_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "lien_hoa_phien_rapid_right",
+      "phase": "loop",
+      "direction": "right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "lien_hoa_phien_rapid_right_0",
+        "lien_hoa_phien_rapid_right_1"
+      ],
+      "frameDurationsMs": [
+        70,
+        70
+      ],
+      "durationMsTotal": 140,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luc_duong_chuong_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "luc_duong_chuong_cast_right_0",
+        "luc_duong_chuong_cast_right_1",
+        "luc_duong_chuong_cast_right_2",
+        "luc_duong_chuong_cast_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "luc_duong_chuong_cast_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luc_duong_chuong_spin_right",
+      "phase": "loop",
+      "direction": "right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "loop",
+        "loop",
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "luc_duong_chuong_spin_right_0",
+        "luc_duong_chuong_spin_right_1",
+        "luc_duong_chuong_spin_right_2",
+        "luc_duong_chuong_spin_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luu_phong_bo_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "luu_phong_bo_cast_right_0",
+        "luu_phong_bo_cast_right_1",
+        "luu_phong_bo_cast_right_2",
+        "luu_phong_bo_cast_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "luu_phong_bo_cast_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "chiet_mai_thu_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "chiet_mai_thu_cast_right_0",
+        "chiet_mai_thu_cast_right_1",
+        "chiet_mai_thu_cast_right_2",
+        "chiet_mai_thu_cast_right_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "chiet_mai_thu_cast_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "lien_hoa_phien_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "lien_hoa_phien_cast_up_0",
+        "lien_hoa_phien_cast_up_1",
+        "lien_hoa_phien_cast_up_2",
+        "lien_hoa_phien_cast_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "lien_hoa_phien_cast_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "lien_hoa_phien_rapid_up",
+      "phase": "loop",
+      "direction": "up",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "lien_hoa_phien_rapid_up_0",
+        "lien_hoa_phien_rapid_up_1"
+      ],
+      "frameDurationsMs": [
+        70,
+        70
+      ],
+      "durationMsTotal": 140,
+      "frameCount": 2,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luc_duong_chuong_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "luc_duong_chuong_cast_up_0",
+        "luc_duong_chuong_cast_up_1",
+        "luc_duong_chuong_cast_up_2",
+        "luc_duong_chuong_cast_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "luc_duong_chuong_cast_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luc_duong_chuong_spin_up",
+      "phase": "loop",
+      "direction": "up",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "loop",
+        "loop",
+        "loop",
+        "loop"
+      ],
+      "frames": [
+        "luc_duong_chuong_spin_up_0",
+        "luc_duong_chuong_spin_up_1",
+        "luc_duong_chuong_spin_up_2",
+        "luc_duong_chuong_spin_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "luu_phong_bo_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "luu_phong_bo_cast_up_0",
+        "luu_phong_bo_cast_up_1",
+        "luu_phong_bo_cast_up_2",
+        "luu_phong_bo_cast_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "luu_phong_bo_cast_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "chiet_mai_thu_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "release/contact",
+        "recovery",
+        "recovery"
+      ],
+      "frames": [
+        "chiet_mai_thu_cast_up_0",
+        "chiet_mai_thu_cast_up_1",
+        "chiet_mai_thu_cast_up_2",
+        "chiet_mai_thu_cast_up_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "chiet_mai_thu_cast_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

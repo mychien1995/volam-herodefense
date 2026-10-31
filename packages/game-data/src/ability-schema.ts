@@ -17,14 +17,17 @@ const status = z.strictObject({
     'defense_break',
     'crit_buff',
     'speed_buff',
+    'cooldown_buff',
     'counter',
     'dash',
+    'dash_guard',
     'channel',
   ]),
   durationTicks: count.min(1),
   magnitude: z.number().finite().nonnegative(),
   secondary: z.number().finite().nonnegative().optional(),
   evade: z.boolean().optional(),
+  toggle: z.boolean().optional(),
 });
 const projectile = z.strictObject({
   mode: z.literal('projectile'),
@@ -32,7 +35,7 @@ const projectile = z.strictObject({
   speed: positive,
   range: positive,
   radius: positive,
-  count: count.min(1).max(5),
+  count: count.min(1).max(8),
   spacingTicks: count,
   splashRadius: z.number().nonnegative(),
   burnDamage: z.number().nonnegative(),
@@ -42,6 +45,11 @@ const projectile = z.strictObject({
   knockback: z.number().nonnegative().optional(),
   statuses: z.array(status).optional(),
   spreadAngle: z.number().finite().min(0).max(Math.PI).optional(),
+  radial: z.boolean().optional(),
+  attackPowerScale: z.number().finite().min(0).max(1).optional(),
+  boomerang: z.boolean().optional(),
+  manaRefund: z.number().finite().nonnegative().optional(),
+  slowedBonus: z.number().finite().nonnegative().optional(),
 });
 const arc = z.strictObject({
   mode: z.literal('arc'),
@@ -59,6 +67,7 @@ const arc = z.strictObject({
     .strictObject({ chance: z.number().min(0).max(1), effect: projectile })
     .optional(),
   windupTicks: count.min(1).optional(),
+  knockback: z.number().finite().nonnegative().optional(),
 });
 const allies = z.strictObject({
   radius: positive,
@@ -70,6 +79,19 @@ export const abilitySchema = z.strictObject({
   nameVi: z.string().min(1),
   cooldownTicks: count.min(1),
   manaCost: z.number().nonnegative(),
+  minIntervalTicks: count.min(1).optional(),
+  basicCombo: z
+    .array(
+      z.strictObject({
+        stage: z.string().min(1),
+        damageMultiplier: positive,
+        halfAngle: positive.max(Math.PI).optional(),
+        splashRadius: z.number().finite().nonnegative().optional(),
+      }),
+    )
+    .min(2)
+    .max(8)
+    .optional(),
   combo: z
     .strictObject({
       id: z.enum(['phat_dong_a', 'phat_dong_b']),
@@ -96,6 +118,7 @@ export const abilitySchema = z.strictObject({
       durationTicks: count.min(1),
       absorbFraction: positive.max(1),
       manaPerDamage: positive,
+      toggle: z.boolean().optional(),
     }),
     z.strictObject({
       mode: z.literal('area'),
@@ -104,6 +127,7 @@ export const abilitySchema = z.strictObject({
       radius: positive,
       damage: positive,
       statuses: z.array(status).optional(),
+      confines: z.boolean().optional(),
     }),
     z.strictObject({
       mode: z.literal('counter'),
@@ -119,6 +143,7 @@ export const abilitySchema = z.strictObject({
       critMultiplier: z.number().nonnegative(),
       movementSpeed: z.number().min(0).max(1).optional(),
       attackSpeed: z.number().min(0).max(2).optional(),
+      cooldownReduction: z.number().min(0).max(0.8).optional(),
     }),
     z.strictObject({
       mode: z.literal('dash'),
@@ -127,6 +152,7 @@ export const abilitySchema = z.strictObject({
       radius: positive,
       damage: z.number().nonnegative(),
       stunTicks: count,
+      invulnerable: z.boolean().optional(),
       counter: z
         .strictObject({
           durationTicks: count.min(1),
@@ -145,6 +171,9 @@ export const abilitySchema = z.strictObject({
       finisherRange: positive,
       halfAngle: positive.max(Math.PI).optional(),
       slowedBonus: z.number().nonnegative().optional(),
+      projectileBurst: projectile.optional(),
+      projectileBurstEvery: count.min(1).max(12).optional(),
+      guard: z.number().finite().min(0).max(0.85).optional(),
     }),
   ]),
 });

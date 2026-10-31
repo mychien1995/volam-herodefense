@@ -1,0 +1,535 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\@playwright+test@1.64.1\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.feedback-v2.config.ts",
+      "--grep",
+      "feedback v2|normal four-school|six-player natural combat|two clients agree|ranged projectile"
+    ],
+    "configFile": "D:\\Projects\\volam-hero-defense\\playwright.feedback-v2.config.ts",
+    "rootDir": "D:/Projects/volam-hero-defense/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\feedback-v2-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/Projects/volam-hero-defense/artifacts/playwright-feedback-v2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "feedback-v2-preview",
+        "name": "feedback-v2-preview",
+        "testDir": "D:/Projects/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "feedback-v2.spec.ts"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "D:/Projects/volam-hero-defense/artifacts/playwright-feedback-v2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "feedback-v2-natural",
+        "name": "feedback-v2-natural",
+        "testDir": "D:/Projects/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c3.spec.ts",
+          "gameplay.spec.ts"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-feedback-v2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "feedback-v2-preview",
+        "testDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "feedback-v2.spec.ts"
+        ],
+        "timeout": 240000,
+        "use": {
+          "video": "off",
+          "trace": "off",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "baseURL": "http://127.0.0.1:5232"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "feedback-v2-preview"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-feedback-v2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "feedback-v2-natural",
+        "testDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c3.spec.ts",
+          "gameplay.spec.ts"
+        ],
+        "timeout": 240000,
+        "use": {
+          "video": "off",
+          "trace": "off",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "baseURL": "http://127.0.0.1:5230"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "feedback-v2-natural"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "docs/evidence/m3c3-feedback-v2-runtime/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "feedback-v2.spec.ts",
+      "file": "feedback-v2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "feedback v2 Cái Bang: accepted staff beats, sixth palm, three rays, dragon, controls and dogs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "feedback-v2-preview",
+              "projectName": "feedback-v2-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 57519,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T14:51:41.572Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9f47bfb781bce452faa0-7669d3b99a150d68b4d2",
+          "file": "feedback-v2.spec.ts",
+          "line": 269,
+          "column": 1
+        },
+        {
+          "title": "feedback v2 Thiên Sơn: two fan legs, speed-adjustable A, wind phases, eight-way fans and dao stages",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "feedback-v2-preview",
+              "projectName": "feedback-v2-preview",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 30081,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at cast (D:\\Projects\\volam-hero-defense\\tests\\e2e\\feedback-v2.spec.ts:97:6)\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\feedback-v2.spec.ts:490:5",
+                    "location": {
+                      "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\feedback-v2.spec.ts",
+                      "column": 6,
+                      "line": 97
+                    },
+                    "snippet": "   95 |       ),\n   96 |     )\n>  97 |     .toBe(true);\n      |      ^\n   98 | }\n   99 | async function equipSlots(p: Page, ids: string[]) {\n  100 |   await p.locator('[data-menu=settings]').click();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\feedback-v2.spec.ts",
+                        "column": 6,
+                        "line": 97
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n   95 |       ),\n   96 |     )\n>  97 |     .toBe(true);\n      |      ^\n   98 | }\n   99 | async function equipSlots(p: Page, ids: string[]) {\n  100 |   await p.locator('[data-menu=settings]').click();\n    at cast (D:\\Projects\\volam-hero-defense\\tests\\e2e\\feedback-v2.spec.ts:97:6)\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\feedback-v2.spec.ts:490:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T14:52:39.223Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-feedback-v2\\feedback-v2-feedback-v2-Th-d16a8-ght-way-fans-and-dao-stages-feedback-v2-preview\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\feedback-v2.spec.ts",
+                    "column": 6,
+                    "line": 97
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "9f47bfb781bce452faa0-1544b306dc4cc911b6f0",
+          "file": "feedback-v2.spec.ts",
+          "line": 403,
+          "column": 1
+        },
+        {
+          "title": "feedback v2 Võ Đang: alternating palms, connected sword, traveling qi, five shield states and formation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "feedback-v2-preview",
+              "projectName": "feedback-v2-preview",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 62154,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T14:53:10.211Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9f47bfb781bce452faa0-d62e5d2bc00281d5aa66",
+          "file": "feedback-v2.spec.ts",
+          "line": 554,
+          "column": 1
+        },
+        {
+          "title": "feedback v2 Thiếu Lâm: alternating fists, three silhouettes, server empowerment and broad saber",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "feedback-v2-preview",
+              "projectName": "feedback-v2-preview",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 36367,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T14:54:12.516Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "9f47bfb781bce452faa0-b9f902cd95eb11730676",
+          "file": "feedback-v2.spec.ts",
+          "line": 694,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "gameplay.spec.ts",
+      "file": "gameplay.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "two clients agree on combat, manual cadence, skills and progression",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "feedback-v2-natural",
+              "projectName": "feedback-v2-natural",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22354,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T14:54:49.509Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-411e56539276b38c336c",
+          "file": "gameplay.spec.ts",
+          "line": 204,
+          "column": 1
+        },
+        {
+          "title": "ranged projectile uses a fixed trajectory and original effect frames",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "feedback-v2-natural",
+              "projectName": "feedback-v2-natural",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5376,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T14:55:11.998Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "a8475ef9564cfbc88065-4e6889300a0b85a1cdb5",
+          "file": "gameplay.spec.ts",
+          "line": 369,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "m3c3.spec.ts",
+      "file": "m3c3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M3C3 normal four-school progression, shared dungeon farming, read-only builds, mana sustain and arena defense",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "feedback-v2-natural",
+              "projectName": "feedback-v2-natural",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 133604,
+                  "error": {
+                    "message": "Error: {\"axis\":\"x\",\"target\":831.3860473632812,\"hero\":{\"build\":{\"enabled\":true,\"revision\":7,\"earned\":3,\"allocated\":3,\"available\":0,\"surplus\":0,\"ranks\":{\"la_han_quyen\":1,\"kim_cang_bat_hoai\":1,\"kim_quang_ho_tran\":1},\"stats\":{\"maxHp\":248,\"maxMana\":114,\"attackPower\":33.20000076293945,\"defense\":15.800000190734863,\"attackSpeed\":1,\"movementSpeed\":148,\"critChance\":0.05999999865889549,\"critMultiplier\":1.5,\"manaRegen\":6,\"cooldownReduction\":0,\"hpRegen\":1.440000057220459},\"sources\":\"{\\\"base\\\":{\\\"maxHp\\\":220,\\\"maxMana\\\":110,\\\"attackPower\\\":30,\\\"defense\\\":14,\\\"attackSpeed\\\":1,\\\"movementSpeed\\\":148,\\\"critChance\\\":0.06,\\\"critMultiplier\\\":1.5,\\\"manaRegen\\\":6,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":1.2},\\\"growth\\\":{\\\"maxHp\\\":20,\\\"maxMana\\\":4,\\\"attackPower\\\":3.2,\\\"defense\\\":0.8,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0},\\\"innate\\\":{\\\"maxHp\\\":8,\\\"maxMana\\\":0,\\\"attackPower\\\":0,\\\"defense\\\":1,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0.24},\\\"surplus\\\":{\\\"maxHp\\\":0,\\\"maxMana\\\":0,\\\"attackPower\\\":0,\\\"defense\\\":0,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0},\\\"equipment\\\":{\\\"maxHp\\\":0,\\\"maxMana\\\":0,\\\"attackPower\\\":0,\\\"defense\\\":0,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0},\\\"temporary\\\":{\\\"maxHp\\\":0,\\\"maxMana\\\":0,\\\"attackPower\\\":0,\\\"defense\\\":0,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0}}\"},\"x\":851.4666748046875,\"y\":576,\"hp\":0,\"maxHp\":248,\"fx\":-1,\"fy\":0,\"pose\":\"death\",\"statuses\":\"[]\",\"castAbilityId\":\"la_han_quyen\",\"combos\":\"[]\",\"zoneId\":\"arena\",\"respawnTicks\":87,\"nickname\":\"Playable 3\",\"schoolId\":\"thieu_lam\",\"confirmed\":true,\"connected\":true,\"checks\":0,\"mana\":114,\"maxMana\":114,\"level\":3,\"xp\":165,\"gold\":33,\"skillPoints\":0,\"basicId\":\"thieu_lam_dao\",\"lastSequence\":293,\"basicCooldown\":0,\"qCooldown\":0,\"wCooldown\":0,\"eCooldown\":0,\"rCooldown\":0,\"qSkill\":\"la_han_quyen\",\"wSkill\":\"kim_cang_bat_hoai\",\"eSkill\":\"kim_quang_ho_tran\",\"rSkill\":\"\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10\u001b[39m\nReceived:    \u001b[31m20.08062744140625\u001b[39m",
+                    "stack": "Error: {\"axis\":\"x\",\"target\":831.3860473632812,\"hero\":{\"build\":{\"enabled\":true,\"revision\":7,\"earned\":3,\"allocated\":3,\"available\":0,\"surplus\":0,\"ranks\":{\"la_han_quyen\":1,\"kim_cang_bat_hoai\":1,\"kim_quang_ho_tran\":1},\"stats\":{\"maxHp\":248,\"maxMana\":114,\"attackPower\":33.20000076293945,\"defense\":15.800000190734863,\"attackSpeed\":1,\"movementSpeed\":148,\"critChance\":0.05999999865889549,\"critMultiplier\":1.5,\"manaRegen\":6,\"cooldownReduction\":0,\"hpRegen\":1.440000057220459},\"sources\":\"{\\\"base\\\":{\\\"maxHp\\\":220,\\\"maxMana\\\":110,\\\"attackPower\\\":30,\\\"defense\\\":14,\\\"attackSpeed\\\":1,\\\"movementSpeed\\\":148,\\\"critChance\\\":0.06,\\\"critMultiplier\\\":1.5,\\\"manaRegen\\\":6,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":1.2},\\\"growth\\\":{\\\"maxHp\\\":20,\\\"maxMana\\\":4,\\\"attackPower\\\":3.2,\\\"defense\\\":0.8,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0},\\\"innate\\\":{\\\"maxHp\\\":8,\\\"maxMana\\\":0,\\\"attackPower\\\":0,\\\"defense\\\":1,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0.24},\\\"surplus\\\":{\\\"maxHp\\\":0,\\\"maxMana\\\":0,\\\"attackPower\\\":0,\\\"defense\\\":0,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0},\\\"equipment\\\":{\\\"maxHp\\\":0,\\\"maxMana\\\":0,\\\"attackPower\\\":0,\\\"defense\\\":0,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0},\\\"temporary\\\":{\\\"maxHp\\\":0,\\\"maxMana\\\":0,\\\"attackPower\\\":0,\\\"defense\\\":0,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0}}\"},\"x\":851.4666748046875,\"y\":576,\"hp\":0,\"maxHp\":248,\"fx\":-1,\"fy\":0,\"pose\":\"death\",\"statuses\":\"[]\",\"castAbilityId\":\"la_han_quyen\",\"combos\":\"[]\",\"zoneId\":\"arena\",\"respawnTicks\":87,\"nickname\":\"Playable 3\",\"schoolId\":\"thieu_lam\",\"confirmed\":true,\"connected\":true,\"checks\":0,\"mana\":114,\"maxMana\":114,\"level\":3,\"xp\":165,\"gold\":33,\"skillPoints\":0,\"basicId\":\"thieu_lam_dao\",\"lastSequence\":293,\"basicCooldown\":0,\"qCooldown\":0,\"wCooldown\":0,\"eCooldown\":0,\"rCooldown\":0,\"qSkill\":\"la_han_quyen\",\"wSkill\":\"kim_cang_bat_hoai\",\"eSkill\":\"kim_quang_ho_tran\",\"rSkill\":\"\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10\u001b[39m\nReceived:    \u001b[31m20.08062744140625\u001b[39m\n    at moveTo (D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c1-helpers.ts:145:7)\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:198:9",
+                    "location": {
+                      "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c1-helpers.ts",
+                      "column": 7,
+                      "line": 145
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39mm3c1-helpers.ts:145\n\n  143 |       Math.abs(final[axis] - target),\n  144 |       JSON.stringify({ axis, target, hero: final }),\n> 145 |     ).toBeLessThanOrEqual(10);\n      |       ^\n  146 |   }\n  147 | }\n  148 | export async function enter(p: Page) {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c1-helpers.ts",
+                        "column": 7,
+                        "line": 145
+                      },
+                      "message": "Error: {\"axis\":\"x\",\"target\":831.3860473632812,\"hero\":{\"build\":{\"enabled\":true,\"revision\":7,\"earned\":3,\"allocated\":3,\"available\":0,\"surplus\":0,\"ranks\":{\"la_han_quyen\":1,\"kim_cang_bat_hoai\":1,\"kim_quang_ho_tran\":1},\"stats\":{\"maxHp\":248,\"maxMana\":114,\"attackPower\":33.20000076293945,\"defense\":15.800000190734863,\"attackSpeed\":1,\"movementSpeed\":148,\"critChance\":0.05999999865889549,\"critMultiplier\":1.5,\"manaRegen\":6,\"cooldownReduction\":0,\"hpRegen\":1.440000057220459},\"sources\":\"{\\\"base\\\":{\\\"maxHp\\\":220,\\\"maxMana\\\":110,\\\"attackPower\\\":30,\\\"defense\\\":14,\\\"attackSpeed\\\":1,\\\"movementSpeed\\\":148,\\\"critChance\\\":0.06,\\\"critMultiplier\\\":1.5,\\\"manaRegen\\\":6,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":1.2},\\\"growth\\\":{\\\"maxHp\\\":20,\\\"maxMana\\\":4,\\\"attackPower\\\":3.2,\\\"defense\\\":0.8,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0},\\\"innate\\\":{\\\"maxHp\\\":8,\\\"maxMana\\\":0,\\\"attackPower\\\":0,\\\"defense\\\":1,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0.24},\\\"surplus\\\":{\\\"maxHp\\\":0,\\\"maxMana\\\":0,\\\"attackPower\\\":0,\\\"defense\\\":0,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0},\\\"equipment\\\":{\\\"maxHp\\\":0,\\\"maxMana\\\":0,\\\"attackPower\\\":0,\\\"defense\\\":0,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0},\\\"temporary\\\":{\\\"maxHp\\\":0,\\\"maxMana\\\":0,\\\"attackPower\\\":0,\\\"defense\\\":0,\\\"attackSpeed\\\":0,\\\"movementSpeed\\\":0,\\\"critChance\\\":0,\\\"critMultiplier\\\":0,\\\"manaRegen\\\":0,\\\"cooldownReduction\\\":0,\\\"hpRegen\\\":0}}\"},\"x\":851.4666748046875,\"y\":576,\"hp\":0,\"maxHp\":248,\"fx\":-1,\"fy\":0,\"pose\":\"death\",\"statuses\":\"[]\",\"castAbilityId\":\"la_han_quyen\",\"combos\":\"[]\",\"zoneId\":\"arena\",\"respawnTicks\":87,\"nickname\":\"Playable 3\",\"schoolId\":\"thieu_lam\",\"confirmed\":true,\"connected\":true,\"checks\":0,\"mana\":114,\"maxMana\":114,\"level\":3,\"xp\":165,\"gold\":33,\"skillPoints\":0,\"basicId\":\"thieu_lam_dao\",\"lastSequence\":293,\"basicCooldown\":0,\"qCooldown\":0,\"wCooldown\":0,\"eCooldown\":0,\"rCooldown\":0,\"qSkill\":\"la_han_quyen\",\"wSkill\":\"kim_cang_bat_hoai\",\"eSkill\":\"kim_quang_ho_tran\",\"rSkill\":\"\"}}\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10\u001b[39m\nReceived:    \u001b[31m20.08062744140625\u001b[39m\n\n   at m3c1-helpers.ts:145\n\n  143 |       Math.abs(final[axis] - target),\n  144 |       JSON.stringify({ axis, target, hero: final }),\n> 145 |     ).toBeLessThanOrEqual(10);\n      |       ^\n  146 |   }\n  147 | }\n  148 | export async function enter(p: Page) {\n    at moveTo (D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c1-helpers.ts:145:7)\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:198:9"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T14:55:17.414Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-feedback-v2\\m3c3-M3C3-normal-four-scho-11283-a-sustain-and-arena-defense-feedback-v2-natural\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c1-helpers.ts",
+                    "column": 7,
+                    "line": 145
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "84ef6c2f8a2a29a37186-7c69dfe90c8dfc4ea31f",
+          "file": "m3c3.spec.ts",
+          "line": 22,
+          "column": 1
+        },
+        {
+          "title": "M3C3 six-player natural combat: four schools keep effects owned, feet/pivots readable and rewards authoritative",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "feedback-v2-natural",
+              "projectName": "feedback-v2-natural",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 213104,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T14:57:31.698Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "84ef6c2f8a2a29a37186-0442a480bdaa1a3fb1c1",
+          "file": "m3c3.spec.ts",
+          "line": 237,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T14:51:38.920Z",
+    "duration": 566236.236,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

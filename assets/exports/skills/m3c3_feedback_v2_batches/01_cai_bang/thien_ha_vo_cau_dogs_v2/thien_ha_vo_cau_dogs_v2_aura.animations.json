@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 2,
+  "id": "thien_ha_vo_cau_dogs_v2_aura",
+  "handoffId": "thien_ha_vo_cau_dogs_v2",
+  "role": "aura",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/01_cai_bang/thien_ha_vo_cau_dogs_v2_aura.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/thien_ha_vo_cau_dogs_v2/thien_ha_vo_cau_dogs_v2_aura.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/thien_ha_vo_cau_dogs_v2/thien_ha_vo_cau_dogs_v2_aura.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "opening",
+      "phase": "opening",
+      "direction": "nondirectional",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "frames": [
+        "opening_0",
+        "opening_1"
+      ],
+      "frameDurationsMs": [
+        60,
+        60
+      ],
+      "durationMsTotal": 120,
+      "frameCount": 2,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "whirlwind",
+      "phase": "loop",
+      "direction": "nondirectional",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "frames": [
+        "whirlwind_0",
+        "whirlwind_1",
+        "whirlwind_2",
+        "whirlwind_3"
+      ],
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "durationMsTotal": 280,
+      "frameCount": 4,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "ending",
+      "phase": "ending",
+      "direction": "nondirectional",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "frames": [
+        "ending_0",
+        "ending_1"
+      ],
+      "frameDurationsMs": [
+        75,
+        75
+      ],
+      "durationMsTotal": 150,
+      "frameCount": 2,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

@@ -12,6 +12,7 @@ export interface RasterAnimation {
   stage: string;
   placement: string;
   effectPlacementOffset: [number, number];
+  frameDurationsMs?: number[];
 }
 export interface RasterComponent {
   id: string;
@@ -58,8 +59,16 @@ export function registerRasterAnimations(
       if (!scene.anims.exists(key))
         scene.anims.create({
           key,
-          frames: tag.frames.map((frame) => ({ key: asset.id, frame })),
-          frameRate: tag.frameRate,
+          // Installed Phaser4.2.1 uses frame.duration as the absolute delay
+          // (Animation.getFirstTick/updateNextTick), unlike older Phaser3 docs.
+          frames: tag.frames.map((frame, i) => ({
+            key: asset.id,
+            frame,
+            ...(tag.frameDurationsMs
+              ? { duration: tag.frameDurationsMs[i]! }
+              : {}),
+          })),
+          frameRate: tag.frameDurationsMs ? 1000 : tag.frameRate,
           repeat: tag.repeat,
         });
     }

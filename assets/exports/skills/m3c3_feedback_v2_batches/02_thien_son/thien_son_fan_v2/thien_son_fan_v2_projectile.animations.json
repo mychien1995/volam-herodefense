@@ -1,0 +1,795 @@
+{
+  "schemaVersion": 2,
+  "id": "thien_son_fan_v2_projectile",
+  "handoffId": "thien_son_fan_v2",
+  "role": "projectile",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_fan_v2_projectile.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_fan_v2/thien_son_fan_v2_projectile.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_fan_v2/thien_son_fan_v2_projectile.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "outbound_down",
+      "phase": "travel",
+      "direction": "down",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "artAuthoredHeadingDegrees": 0,
+      "leg": "outbound",
+      "path": "server straight segment; return samples owner once; not homing",
+      "frames": [
+        "outbound_down_0",
+        "outbound_down_1",
+        "outbound_down_2",
+        "outbound_down_3",
+        "outbound_down_4",
+        "outbound_down_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "return_down",
+      "phase": "travel",
+      "direction": "down",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "artAuthoredHeadingDegrees": 180,
+      "leg": "return",
+      "path": "server straight segment; return samples owner once; not homing",
+      "frames": [
+        "return_down_0",
+        "return_down_1",
+        "return_down_2",
+        "return_down_3",
+        "return_down_4",
+        "return_down_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "outbound_left",
+      "phase": "travel",
+      "direction": "left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "artAuthoredHeadingDegrees": 0,
+      "leg": "outbound",
+      "path": "server straight segment; return samples owner once; not homing",
+      "frames": [
+        "outbound_left_0",
+        "outbound_left_1",
+        "outbound_left_2",
+        "outbound_left_3",
+        "outbound_left_4",
+        "outbound_left_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "return_left",
+      "phase": "travel",
+      "direction": "left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "artAuthoredHeadingDegrees": 180,
+      "leg": "return",
+      "path": "server straight segment; return samples owner once; not homing",
+      "frames": [
+        "return_left_0",
+        "return_left_1",
+        "return_left_2",
+        "return_left_3",
+        "return_left_4",
+        "return_left_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "outbound_right",
+      "phase": "travel",
+      "direction": "right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "artAuthoredHeadingDegrees": 0,
+      "leg": "outbound",
+      "path": "server straight segment; return samples owner once; not homing",
+      "frames": [
+        "outbound_right_0",
+        "outbound_right_1",
+        "outbound_right_2",
+        "outbound_right_3",
+        "outbound_right_4",
+        "outbound_right_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "return_right",
+      "phase": "travel",
+      "direction": "right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "artAuthoredHeadingDegrees": 180,
+      "leg": "return",
+      "path": "server straight segment; return samples owner once; not homing",
+      "frames": [
+        "return_right_0",
+        "return_right_1",
+        "return_right_2",
+        "return_right_3",
+        "return_right_4",
+        "return_right_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "outbound_up",
+      "phase": "travel",
+      "direction": "up",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "artAuthoredHeadingDegrees": 0,
+      "leg": "outbound",
+      "path": "server straight segment; return samples owner once; not homing",
+      "frames": [
+        "outbound_up_0",
+        "outbound_up_1",
+        "outbound_up_2",
+        "outbound_up_3",
+        "outbound_up_4",
+        "outbound_up_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "return_up",
+      "phase": "travel",
+      "direction": "up",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "arbitraryHeading": true,
+      "artAuthoredHeadingDegrees": 180,
+      "leg": "return",
+      "path": "server straight segment; return samples owner once; not homing",
+      "frames": [
+        "return_up_0",
+        "return_up_1",
+        "return_up_2",
+        "return_up_3",
+        "return_up_4",
+        "return_up_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "storm_fan_right",
+      "phase": "travel",
+      "direction": "right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "artAuthoredHeadingDegrees": 0,
+      "arbitraryHeading": true,
+      "burstCount": 4,
+      "directionsPerBurst": 8,
+      "rangeReferenceOnly": 210,
+      "speedReferenceOnly": 340,
+      "frames": [
+        "storm_fan_right_0",
+        "storm_fan_right_1",
+        "storm_fan_right_2",
+        "storm_fan_right_3",
+        "storm_fan_right_4",
+        "storm_fan_right_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "storm_fan_down_right",
+      "phase": "travel",
+      "direction": "down_right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "artAuthoredHeadingDegrees": 0,
+      "arbitraryHeading": true,
+      "burstCount": 4,
+      "directionsPerBurst": 8,
+      "rangeReferenceOnly": 210,
+      "speedReferenceOnly": 340,
+      "frames": [
+        "storm_fan_down_right_0",
+        "storm_fan_down_right_1",
+        "storm_fan_down_right_2",
+        "storm_fan_down_right_3",
+        "storm_fan_down_right_4",
+        "storm_fan_down_right_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "storm_fan_down",
+      "phase": "travel",
+      "direction": "down",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "artAuthoredHeadingDegrees": 0,
+      "arbitraryHeading": true,
+      "burstCount": 4,
+      "directionsPerBurst": 8,
+      "rangeReferenceOnly": 210,
+      "speedReferenceOnly": 340,
+      "frames": [
+        "storm_fan_down_0",
+        "storm_fan_down_1",
+        "storm_fan_down_2",
+        "storm_fan_down_3",
+        "storm_fan_down_4",
+        "storm_fan_down_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "storm_fan_down_left",
+      "phase": "travel",
+      "direction": "down_left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "artAuthoredHeadingDegrees": 0,
+      "arbitraryHeading": true,
+      "burstCount": 4,
+      "directionsPerBurst": 8,
+      "rangeReferenceOnly": 210,
+      "speedReferenceOnly": 340,
+      "frames": [
+        "storm_fan_down_left_0",
+        "storm_fan_down_left_1",
+        "storm_fan_down_left_2",
+        "storm_fan_down_left_3",
+        "storm_fan_down_left_4",
+        "storm_fan_down_left_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "storm_fan_left",
+      "phase": "travel",
+      "direction": "left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "artAuthoredHeadingDegrees": 0,
+      "arbitraryHeading": true,
+      "burstCount": 4,
+      "directionsPerBurst": 8,
+      "rangeReferenceOnly": 210,
+      "speedReferenceOnly": 340,
+      "frames": [
+        "storm_fan_left_0",
+        "storm_fan_left_1",
+        "storm_fan_left_2",
+        "storm_fan_left_3",
+        "storm_fan_left_4",
+        "storm_fan_left_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "storm_fan_up_left",
+      "phase": "travel",
+      "direction": "up_left",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "artAuthoredHeadingDegrees": 0,
+      "arbitraryHeading": true,
+      "burstCount": 4,
+      "directionsPerBurst": 8,
+      "rangeReferenceOnly": 210,
+      "speedReferenceOnly": 340,
+      "frames": [
+        "storm_fan_up_left_0",
+        "storm_fan_up_left_1",
+        "storm_fan_up_left_2",
+        "storm_fan_up_left_3",
+        "storm_fan_up_left_4",
+        "storm_fan_up_left_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "storm_fan_up",
+      "phase": "travel",
+      "direction": "up",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "artAuthoredHeadingDegrees": 0,
+      "arbitraryHeading": true,
+      "burstCount": 4,
+      "directionsPerBurst": 8,
+      "rangeReferenceOnly": 210,
+      "speedReferenceOnly": 340,
+      "frames": [
+        "storm_fan_up_0",
+        "storm_fan_up_1",
+        "storm_fan_up_2",
+        "storm_fan_up_3",
+        "storm_fan_up_4",
+        "storm_fan_up_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "storm_fan_up_right",
+      "phase": "travel",
+      "direction": "up_right",
+      "loop": true,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "artAuthoredHeadingDegrees": 0,
+      "arbitraryHeading": true,
+      "burstCount": 4,
+      "directionsPerBurst": 8,
+      "rangeReferenceOnly": 210,
+      "speedReferenceOnly": 340,
+      "frames": [
+        "storm_fan_up_right_0",
+        "storm_fan_up_right_1",
+        "storm_fan_up_right_2",
+        "storm_fan_up_right_3",
+        "storm_fan_up_right_4",
+        "storm_fan_up_right_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": false,
+      "repeat": -1,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

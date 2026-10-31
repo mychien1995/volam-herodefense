@@ -13,15 +13,19 @@ if (preview) {
 }
 process.env.VOLAM_INVASION_INTERVAL_SECONDS = '30';
 process.env.VOLAM_DEV_STATUE_HP = '100000';
-const serverPort = preview ? 2588 : 2586,
-  clientPort = preview ? 5192 : 5190;
+const offset = Number(process.env.VOLAM_TEST_PORT_OFFSET ?? 0);
+const serverPort = (preview ? 2588 : 2586) + offset,
+  clientPort = (preview ? 5192 : 5190) + offset;
 process.env['VOLAM_DEV_PRACTICE_CREEPS'] = '1'; // Explicit historical combat fixture.
 const server = createGameServer();
 const client = await createServer({
   root: fileURLToPath(new URL('../../apps/game-client', import.meta.url)),
   cacheDir: fileURLToPath(
     new URL(
-      '../../.cache/vite-m3c3-' + (preview ? 'preview' : 'normal'),
+      '../../.cache/vite-m3c3-' +
+        (preview ? 'preview' : 'normal') +
+        '-' +
+        offset,
       import.meta.url,
     ),
   ),

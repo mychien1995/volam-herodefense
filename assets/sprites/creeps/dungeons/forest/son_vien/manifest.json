@@ -1,0 +1,1862 @@
+{
+  "schemaVersion": 1,
+  "id": "forest_son_vien",
+  "typeId": "son_vien",
+  "nameVi": "Sơn Viên",
+  "category": "enemy",
+  "status": "candidate",
+  "produced": true,
+  "directorApproved": false,
+  "runtimeIntegrated": false,
+  "runtimeVerified": true,
+  "sourceConcept": "assets/concepts/dungeon-creeps/forest/son_vien_concept_v01.png",
+  "sheet": "assets/sprites/creeps/dungeons/forest/son_vien/spritesheet.png",
+  "atlas": "assets/sprites/creeps/dungeons/forest/son_vien/atlas.json",
+  "source": "assets/sprites/creeps/dungeons/forest/son_vien/source/son_vien_v01.aseprite",
+  "frameWidth": 144,
+  "frameHeight": 128,
+  "feetPixels": [
+    72,
+    106
+  ],
+  "footPivot": [
+    0.5,
+    0.828125
+  ],
+  "displayScale": 1,
+  "bodyTargetPixels": 48,
+  "bodyTargetAxis": "height",
+  "directions": [
+    "down",
+    "left",
+    "right",
+    "up"
+  ],
+  "animations": [
+    {
+      "state": "idle",
+      "direction": "down",
+      "frames": [
+        "idle_down_0",
+        "idle_down_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "down",
+      "frames": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "down",
+      "frames": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "down",
+      "frames": [
+        "hurt_down_0",
+        "hurt_down_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "down",
+      "frames": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "left",
+      "frames": [
+        "idle_left_0",
+        "idle_left_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "left",
+      "frames": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "left",
+      "frames": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "left",
+      "frames": [
+        "hurt_left_0",
+        "hurt_left_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "left",
+      "frames": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "right",
+      "frames": [
+        "idle_right_0",
+        "idle_right_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "right",
+      "frames": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "right",
+      "frames": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "right",
+      "frames": [
+        "hurt_right_0",
+        "hurt_right_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "right",
+      "frames": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    },
+    {
+      "state": "idle",
+      "direction": "up",
+      "frames": [
+        "idle_up_0",
+        "idle_up_1"
+      ],
+      "frameRate": 2.857142857142857,
+      "repeat": -1
+    },
+    {
+      "state": "walk",
+      "direction": "up",
+      "frames": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "frameRate": 8.333333333333334,
+      "repeat": -1
+    },
+    {
+      "state": "basic_attack",
+      "direction": "up",
+      "frames": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "frameRate": 10.0,
+      "repeat": 0
+    },
+    {
+      "state": "hurt",
+      "direction": "up",
+      "frames": [
+        "hurt_up_0",
+        "hurt_up_1"
+      ],
+      "frameRate": 7.142857142857143,
+      "repeat": 0
+    },
+    {
+      "state": "death",
+      "direction": "up",
+      "frames": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ],
+      "frameRate": 5.882352941176471,
+      "repeat": 0
+    }
+  ],
+  "frames": [
+    {
+      "name": "idle_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/idle_down_0.png",
+      "sha256": "6cdf8d497d6b269bfd735eb9579b09aa6b3a82499d4f0d62a9bf5721ddad73f3",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          103,
+          35,
+          266,
+          213
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          146.0,
+          213
+        ],
+        "placement": [
+          39,
+          57
+        ]
+      }
+    },
+    {
+      "name": "idle_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/idle_down_1.png",
+      "sha256": "1b73dde5ae65d2ea26e5bde37cf4619fff4dba039e153cc1b26b86bea77e63de",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          447,
+          38,
+          267,
+          207
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          159.0,
+          207
+        ],
+        "placement": [
+          36,
+          59
+        ]
+      }
+    },
+    {
+      "name": "walk_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_down_0.png",
+      "sha256": "0e11276c0c1b75839e5ed771b0937bc6c9ec65d85045481c73c07763ee452f6d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          820,
+          31,
+          260,
+          222
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          92.0,
+          222
+        ],
+        "placement": [
+          51,
+          55
+        ]
+      }
+    },
+    {
+      "name": "walk_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_down_1.png",
+      "sha256": "aee784a11d873a9d23343cf86dff1bfa66d7c9876e853c325992bb295ddede72",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1177,
+          30,
+          257,
+          219
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          196.0,
+          219
+        ],
+        "placement": [
+          27,
+          56
+        ]
+      }
+    },
+    {
+      "name": "walk_down_2",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_down_2.png",
+      "sha256": "c529817dfda5e551882e50e05a2ccad0d30067f79b8b5f3e3daa99cee858e555",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          110,
+          269,
+          249,
+          213
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          149.0,
+          213
+        ],
+        "placement": [
+          38,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_down_3",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_down_3.png",
+      "sha256": "6b0054851f24920c9da708c1fae7eabc5bdeba662804713ce2d41f0afedebf95",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          451,
+          275,
+          252,
+          213
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          63.0,
+          213
+        ],
+        "placement": [
+          58,
+          57
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_down_0.png",
+      "sha256": "029c2abb73207a860ff17188ceb53e69d05b5af2e24cfc4390885545a61f151b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          815,
+          290,
+          282,
+          204
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          213.0,
+          204
+        ],
+        "placement": [
+          23,
+          59
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_down_1.png",
+      "sha256": "edfb9e82debe69bf3f07ff86c10db51d1e07ef2d8aa2af4f8f8b8692021d787c",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1187,
+          248,
+          288,
+          264
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          222.0,
+          264
+        ],
+        "placement": [
+          21,
+          46
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_2",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_down_2.png",
+      "sha256": "b70fcb2ab10e60a4c4ab6a11001d5dd67315d96c0286151fbd018e07fe446e40",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          81,
+          498,
+          305,
+          243
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          220.0,
+          243
+        ],
+        "placement": [
+          22,
+          50
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_down_3",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_down_3.png",
+      "sha256": "0aca18a0046fbf458bd37ab884cfb7875c6fa935e4af906aae02ba1bb1dc5a97",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          383,
+          508,
+          364,
+          226
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          182.0,
+          226
+        ],
+        "placement": [
+          30,
+          54
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/hurt_down_0.png",
+      "sha256": "49e365bb91bd4a3b1ae1bdd8fa2adb5efb6f327e5fa7d051ce096af7fcb7850e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          822,
+          517,
+          262,
+          221
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          98.0,
+          221
+        ],
+        "placement": [
+          50,
+          55
+        ]
+      }
+    },
+    {
+      "name": "hurt_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/hurt_down_1.png",
+      "sha256": "4d038a8db7d0cdb5c41bdd5adc374ffac66da22a85c8571970ea3a3e655d9b0f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1177,
+          531,
+          287,
+          206
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          216.0,
+          206
+        ],
+        "placement": [
+          23,
+          59
+        ]
+      }
+    },
+    {
+      "name": "death_down_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_down_0.png",
+      "sha256": "6a6277a196db232fee023fe774a45f5d821c827fdb33a84345be73f22af541f3",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          106,
+          744,
+          258,
+          241
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          89.0,
+          241
+        ],
+        "placement": [
+          52,
+          51
+        ]
+      }
+    },
+    {
+      "name": "death_down_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_down_1.png",
+      "sha256": "42368cdfc72908738f6f271d53a2deb4c6ccde639b1f6b5a3a416eeee5d43f96",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          432,
+          778,
+          318,
+          206
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          127.0,
+          206
+        ],
+        "placement": [
+          43,
+          59
+        ]
+      }
+    },
+    {
+      "name": "death_down_2",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_down_2.png",
+      "sha256": "686aef9c63ff9394d8927ed3762c493a4d7e80d5368f5938d8d0bdcb24400ae8",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          786,
+          819,
+          334,
+          155
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          178.0,
+          155
+        ],
+        "placement": [
+          31,
+          71
+        ]
+      }
+    },
+    {
+      "name": "death_down_3",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_down_3.png",
+      "sha256": "a745925263727fa711fcac96614176abb13c1f380903deeb731f016b61e4489b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1153,
+          844,
+          342,
+          123
+        ],
+        "fixedSourceScale": 0.22857142857142856,
+        "sourceFootInCrop": [
+          200.0,
+          123
+        ],
+        "placement": [
+          26,
+          78
+        ]
+      }
+    },
+    {
+      "name": "idle_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/idle_left_0.png",
+      "sha256": "11d46f036956ef896781361285861086bd15de4c8036b949f21cabadf8fb1b44",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          59,
+          41,
+          302,
+          214
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          157.0,
+          214
+        ],
+        "placement": [
+          38,
+          59
+        ]
+      }
+    },
+    {
+      "name": "idle_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/idle_left_1.png",
+      "sha256": "d74ddd6625abf0f6977e4ed0bb9ff38b881798b12b28a4c9971c6df59baf98c7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          429,
+          31,
+          293,
+          224
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          123.0,
+          224
+        ],
+        "placement": [
+          45,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_left_0.png",
+      "sha256": "179b0ae09159317a152f7ec5d472a58032c93be4f8df308f0ebfe4b64046e94d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          798,
+          43,
+          294,
+          212
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          124.0,
+          212
+        ],
+        "placement": [
+          45,
+          60
+        ]
+      }
+    },
+    {
+      "name": "walk_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_left_1.png",
+      "sha256": "ba3aca3184f27fade61fbf2655aefdf26d5c813bac7e401589f693144414d963",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1160,
+          30,
+          313,
+          219
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          179.0,
+          219
+        ],
+        "placement": [
+          33,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_left_2",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_left_2.png",
+      "sha256": "a9204be3c15aa2cac7594149636e8a9e2cf51a5569200d9c9964918046e779ac",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          47,
+          286,
+          308,
+          216
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          139.0,
+          216
+        ],
+        "placement": [
+          42,
+          59
+        ]
+      }
+    },
+    {
+      "name": "walk_left_3",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_left_3.png",
+      "sha256": "3e06640fc7911e6344861cc5c27a9673ab695d52d7e122a6e57bb582bda2ff16",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          439,
+          289,
+          289,
+          208
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          132.0,
+          208
+        ],
+        "placement": [
+          43,
+          60
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_left_0.png",
+      "sha256": "411a405fda3206a6db0ce1cfd8cf809d879e4a42da8fc044e2910b3afdd44552",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          799,
+          307,
+          314,
+          196
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          155.0,
+          196
+        ],
+        "placement": [
+          38,
+          63
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_left_1.png",
+      "sha256": "76c9e17d92ff877f501929303c74c1b0cd66705bb4c08dee63d25cae7640eb37",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1188,
+          261,
+          305,
+          248
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          201.0,
+          248
+        ],
+        "placement": [
+          28,
+          52
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_2",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_left_2.png",
+      "sha256": "f1f83e92e2c2d45b149eaa360ec6522ffbb1074275a567e2ae3191441f6a0514",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          31,
+          535,
+          352,
+          214
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          61.0,
+          214
+        ],
+        "placement": [
+          59,
+          59
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_left_3",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_left_3.png",
+      "sha256": "66c1235faf409ec40903c3daf1643436192a7e24885e4aa1fc5650d77c6233ba",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          436,
+          527,
+          310,
+          209
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          174.0,
+          209
+        ],
+        "placement": [
+          34,
+          60
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/hurt_left_0.png",
+      "sha256": "d55e8a39c4fb703cf5b31d11d8cf5307b9995fdf992393e5f88c1f1cfcde2f84",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          830,
+          522,
+          268,
+          228
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          138.0,
+          228
+        ],
+        "placement": [
+          42,
+          56
+        ]
+      }
+    },
+    {
+      "name": "hurt_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/hurt_left_1.png",
+      "sha256": "c322a5a0fd3f1662fd6b2b2bfde4ddbed6a98bf838e959fad92a4f391ef53a15",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1187,
+          528,
+          302,
+          221
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          153.0,
+          221
+        ],
+        "placement": [
+          38,
+          58
+        ]
+      }
+    },
+    {
+      "name": "death_left_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_left_0.png",
+      "sha256": "2c01eae3970817f68f0a8b6b12ecec92ab87b22c67fed6994006a7388d5a2495",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          56,
+          766,
+          298,
+          207
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          157.0,
+          207
+        ],
+        "placement": [
+          38,
+          61
+        ]
+      }
+    },
+    {
+      "name": "death_left_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_left_1.png",
+      "sha256": "29db6f1e9b43f5000c7c3fff95f18ad5865e168414132cbf08345c9cd87217bf",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          405,
+          781,
+          332,
+          194
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          162.0,
+          194
+        ],
+        "placement": [
+          36,
+          63
+        ]
+      }
+    },
+    {
+      "name": "death_left_2",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_left_2.png",
+      "sha256": "b58c74a0636b4c94783ff80d491fc723c8900e1ec6731d9af46f4ffede509457",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          784,
+          801,
+          334,
+          182
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          150.0,
+          182
+        ],
+        "placement": [
+          39,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_left_3",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_left_3.png",
+      "sha256": "66259ce82e7f4b7ae8d6c7a288933efd0b245cff7e43adc05093638f4a6c7d9d",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1159,
+          827,
+          341,
+          154
+        ],
+        "fixedSourceScale": 0.2191780821917808,
+        "sourceFootInCrop": [
+          159.0,
+          154
+        ],
+        "placement": [
+          37,
+          72
+        ]
+      }
+    },
+    {
+      "name": "idle_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/idle_right_0.png",
+      "sha256": "cab4d1fb3000c36f3d0657f17670495542790cd1616d91043183de8b757531a2",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          46,
+          19,
+          305,
+          244
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          155.0,
+          244
+        ],
+        "placement": [
+          42,
+          58
+        ]
+      }
+    },
+    {
+      "name": "idle_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/idle_right_1.png",
+      "sha256": "16ca61dd82e6efbed8d477eb5b37772c7dd2965fde7606d140dd6e91070b830a",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          428,
+          19,
+          297,
+          247
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          120.0,
+          247
+        ],
+        "placement": [
+          49,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_right_0.png",
+      "sha256": "bda4d0d21680a3d5f8c0db90f5e457b06752b19c61d775c9e8f9b97580f36e2b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          800,
+          35,
+          281,
+          228
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          174.0,
+          228
+        ],
+        "placement": [
+          38,
+          61
+        ]
+      }
+    },
+    {
+      "name": "walk_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_right_1.png",
+      "sha256": "8f8758ba9e2a86d3fc6ff8e619eb0d7dfe5c942276e5b95fcb3054b1ef8baded",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1175,
+          32,
+          334,
+          229
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          203.0,
+          229
+        ],
+        "placement": [
+          32,
+          61
+        ]
+      }
+    },
+    {
+      "name": "walk_right_2",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_right_2.png",
+      "sha256": "e7811e0aabe404133f1440020bfc8d59ef645a43f78fac7860de6e8c0c52150b",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          19,
+          262,
+          344,
+          259
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          199.0,
+          259
+        ],
+        "placement": [
+          33,
+          55
+        ]
+      }
+    },
+    {
+      "name": "walk_right_3",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_right_3.png",
+      "sha256": "82577a8807efd8a4d6b3e5d14fc3bab478b1465a01bc131bb86a26ab38a33da3",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          428,
+          291,
+          305,
+          226
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          203.0,
+          226
+        ],
+        "placement": [
+          32,
+          62
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_right_0.png",
+      "sha256": "a0b6a749806e7faab107ecdce179329d91053284e21b1bad1b50859d94c908d5",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          815,
+          309,
+          317,
+          218
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          187.0,
+          218
+        ],
+        "placement": [
+          35,
+          63
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_right_1.png",
+      "sha256": "ebffef85e4fd995d2c7de31a9814ea5f89be47a776c8ad61e44aebe31fb50c11",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1200,
+          269,
+          311,
+          263
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          175.0,
+          263
+        ],
+        "placement": [
+          38,
+          55
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_2",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_right_2.png",
+      "sha256": "d62f06df996d17e954be709ac928841446423440648b47e8c4016abbec44b481",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          25,
+          549,
+          392,
+          213
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          156.5,
+          213
+        ],
+        "placement": [
+          41,
+          64
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_right_3",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_right_3.png",
+      "sha256": "0c0ace301147c4fd5d7a799a7825acdf6b776acafef0f33644f335cf631d0c9f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          469,
+          546,
+          291,
+          218
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          163.0,
+          218
+        ],
+        "placement": [
+          40,
+          63
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/hurt_right_0.png",
+      "sha256": "1b59d8440162571567b252d6555efcd10e81ef7782386665beef4a85930114ec",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          834,
+          530,
+          286,
+          234
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          208.0,
+          234
+        ],
+        "placement": [
+          31,
+          60
+        ]
+      }
+    },
+    {
+      "name": "hurt_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/hurt_right_1.png",
+      "sha256": "b377d4e092bea330d9c5268ea05870a43f0fa2fb732871b6ba2cd27ed1810aeb",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1212,
+          552,
+          288,
+          216
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          113.0,
+          216
+        ],
+        "placement": [
+          50,
+          64
+        ]
+      }
+    },
+    {
+      "name": "death_right_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_right_0.png",
+      "sha256": "6626ce8482260d9eec745f80214f9803c9f4d24a238ac82bbf743998722ce9d0",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          39,
+          772,
+          300,
+          226
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          173.5,
+          226
+        ],
+        "placement": [
+          38,
+          62
+        ]
+      }
+    },
+    {
+      "name": "death_right_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_right_1.png",
+      "sha256": "38ad0265fac8f56373e205b6ec592c4aae2712ffa51cfd139835f8f81b413d01",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          374,
+          796,
+          366,
+          203
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          211.0,
+          203
+        ],
+        "placement": [
+          31,
+          66
+        ]
+      }
+    },
+    {
+      "name": "death_right_2",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_right_2.png",
+      "sha256": "158ae008987d6732fe43d89c0a469cf563eda01800ae162d314489b354f52688",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          767,
+          838,
+          369,
+          148
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          225.0,
+          148
+        ],
+        "placement": [
+          28,
+          77
+        ]
+      }
+    },
+    {
+      "name": "death_right_3",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_right_3.png",
+      "sha256": "a4f0184b9dd3cfd181def54137ba92c282ddf668ac731bdadaaa4fd1356dd177",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1158,
+          856,
+          360,
+          129
+        ],
+        "fixedSourceScale": 0.1955193482688391,
+        "sourceFootInCrop": [
+          194.0,
+          129
+        ],
+        "placement": [
+          34,
+          81
+        ]
+      }
+    },
+    {
+      "name": "idle_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/idle_up_0.png",
+      "sha256": "c84cc6a101de3325e3ee3c2e9d8c17159f906e498fb12590a2c1113d90e5bc30",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 0,
+        "sourceRect": [
+          91,
+          33,
+          278,
+          218
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          115.0,
+          218
+        ],
+        "placement": [
+          47,
+          58
+        ]
+      }
+    },
+    {
+      "name": "idle_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/idle_up_1.png",
+      "sha256": "2b49775b57b2c5432a56be36294ea0b5af26e93998446a9a72409d74543fb008",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 1,
+        "sourceRect": [
+          431,
+          33,
+          273,
+          217
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          160.0,
+          217
+        ],
+        "placement": [
+          37,
+          58
+        ]
+      }
+    },
+    {
+      "name": "walk_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_up_0.png",
+      "sha256": "4ad914adfa98e703636ab0d0edf8527356e83abef3ef5ae27d23668f9b337c42",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 2,
+        "sourceRect": [
+          818,
+          33,
+          244,
+          224
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          141.0,
+          224
+        ],
+        "placement": [
+          41,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_up_1.png",
+      "sha256": "fbbf7f3d4ea02f7e3f9b56f43f7388691e2ce94f83e1e62bba0c2c005906c286",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 3,
+        "sourceRect": [
+          1189,
+          25,
+          235,
+          227
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          113.0,
+          227
+        ],
+        "placement": [
+          47,
+          56
+        ]
+      }
+    },
+    {
+      "name": "walk_up_2",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_up_2.png",
+      "sha256": "f3be58190ac7e6eeb1d7637ab9ff71715136ffef11b680b34e36776a6c49c211",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 4,
+        "sourceRect": [
+          94,
+          279,
+          265,
+          222
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          108.0,
+          222
+        ],
+        "placement": [
+          48,
+          57
+        ]
+      }
+    },
+    {
+      "name": "walk_up_3",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/walk_up_3.png",
+      "sha256": "fc6d69c46339b9f7a4844e03ac3b524ab3d5af552b6ca335d20a1b22f2d1d00e",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 5,
+        "sourceRect": [
+          443,
+          278,
+          269,
+          221
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          113.0,
+          221
+        ],
+        "placement": [
+          47,
+          57
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_up_0.png",
+      "sha256": "a58aec3504888687d6a686ad0548da55bbffedb53f39d8f4b506724533b3f987",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 6,
+        "sourceRect": [
+          817,
+          303,
+          274,
+          196
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          107.0,
+          196
+        ],
+        "placement": [
+          48,
+          63
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_up_1.png",
+      "sha256": "a1f3bc107c8454bfd60ab8159a01451a069b9c52589086aa924404d39ba0c188",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 7,
+        "sourceRect": [
+          1193,
+          267,
+          255,
+          234
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          144.0,
+          234
+        ],
+        "placement": [
+          40,
+          54
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_2",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_up_2.png",
+      "sha256": "3b3ca31126cc21e97000e59276b15c0ce996214bcca635dd8ca677c551367561",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 8,
+        "sourceRect": [
+          62,
+          549,
+          326,
+          190
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          127.0,
+          190
+        ],
+        "placement": [
+          44,
+          64
+        ]
+      }
+    },
+    {
+      "name": "basic_attack_up_3",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/basic_attack_up_3.png",
+      "sha256": "86f504f024b17ee86ff3f1af397d48b59d96f697c284ebfc8064cddc232bf835",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 9,
+        "sourceRect": [
+          440,
+          526,
+          289,
+          216
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          183.0,
+          216
+        ],
+        "placement": [
+          32,
+          58
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/hurt_up_0.png",
+      "sha256": "407d517e6178da53c1e2538c099be8f4738188492967b314533cac97dc032c81",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 10,
+        "sourceRect": [
+          848,
+          522,
+          262,
+          225
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          159.0,
+          225
+        ],
+        "placement": [
+          37,
+          56
+        ]
+      }
+    },
+    {
+      "name": "hurt_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/hurt_up_1.png",
+      "sha256": "4a6daac5e7ab890ad6f2c2163b3e4fb4de66a697b0eccf0fa53db2948f37ed99",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 11,
+        "sourceRect": [
+          1181,
+          537,
+          280,
+          210
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          169.0,
+          210
+        ],
+        "placement": [
+          35,
+          60
+        ]
+      }
+    },
+    {
+      "name": "death_up_0",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_up_0.png",
+      "sha256": "0a47c14b22f0ecb77aef852f2c799b9246269f448c92263aae804bddf241a32f",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 12,
+        "sourceRect": [
+          85,
+          763,
+          282,
+          226
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          150.0,
+          226
+        ],
+        "placement": [
+          39,
+          56
+        ]
+      }
+    },
+    {
+      "name": "death_up_1",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_up_1.png",
+      "sha256": "72037ccfdaec9c7ab820473a5e28e21db96c49f56998a19a7783bb9411244041",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 13,
+        "sourceRect": [
+          438,
+          758,
+          293,
+          223
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          142.0,
+          223
+        ],
+        "placement": [
+          41,
+          57
+        ]
+      }
+    },
+    {
+      "name": "death_up_2",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_up_2.png",
+      "sha256": "c33a983a694976d2092b8d5461433885ace6e09693e09e29e57ff46edddaaa25",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 14,
+        "sourceRect": [
+          790,
+          824,
+          325,
+          151
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          154.0,
+          151
+        ],
+        "placement": [
+          38,
+          73
+        ]
+      }
+    },
+    {
+      "name": "death_up_3",
+      "file": "assets/sprites/creeps/dungeons/forest/son_vien/frames/death_up_3.png",
+      "sha256": "7602b6e737f3425e3157c2043e5340bef9587c3cdc2e6f45e2239b276672d0e7",
+      "extraction": {
+        "source": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+        "sourceCell": 15,
+        "sourceRect": [
+          1164,
+          860,
+          326,
+          114
+        ],
+        "fixedSourceScale": 0.2206896551724138,
+        "sourceFootInCrop": [
+          174.0,
+          114
+        ],
+        "placement": [
+          34,
+          81
+        ]
+      }
+    }
+  ],
+  "sourceScales": {
+    "down": 0.22857142857142856,
+    "left": 0.2191780821917808,
+    "right": 0.1955193482688391,
+    "up": 0.2206896551724138
+  },
+  "generatedSources": [
+    {
+      "path": "assets/sprites/creeps/dungeons/forest/source/son_vien_down_source_v01.png",
+      "sha256": "c38ead1e5c0ecf2a206057732fb740738d04832a1da31543e6cda806de57176b",
+      "layout": [
+        4,
+        4
+      ]
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/forest/source/son_vien_left_source_v01.png",
+      "sha256": "bc28adae6825b97cb79814dcd019d11961fd20b3151763ebc03bd55e8971487f",
+      "layout": [
+        4,
+        4
+      ]
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/forest/source/son_vien_right_source_v01.png",
+      "sha256": "abad4ad0d42e98a3f7fe2dc1a237518a1ae854c08ef4dd724a5f5ba8c02223a7",
+      "layout": [
+        4,
+        4
+      ]
+    },
+    {
+      "path": "assets/sprites/creeps/dungeons/forest/source/son_vien_up_source_v01.png",
+      "sha256": "f1d2aadd7a7c65d4c214878a8952507309a1ba04bb0f9aa358efa8eafbe744ad",
+      "layout": [
+        4,
+        4
+      ]
+    }
+  ],
+  "provenance": {
+    "method": "Retained original image_gen cels; connected-alpha245 extraction, fixed directional nearest sampling and anchored atlas packing.",
+    "license": "Original AI-assisted project raster artwork generated with OpenAI built-in image_gen; no third-party pack or exclusive copyright claim.",
+    "prompts": "assets/sprites/creeps/dungeons/forest/source/generation_prompts_v01.json"
+  },
+  "reuse": {
+    "mirroredDirections": [],
+    "syntheticAnimationFrames": 0
+  },
+  "notes": [
+    "All poses use independent generated source cels. No server type registration or gameplay changes.",
+    "Editable Aseprite contains extracted raster cels, not reconstructed illustration layers.",
+    "Low creatures use the same declared bottom-contact anchor contract; physical collision is not encoded."
+  ],
+  "verificationScope": "isolated_phaser_art_review_only",
+  "verification": {
+    "status": "PASS",
+    "scope": "Isolated controlled Phaser 4 review; no natural combat, rewards, networked enemy integration or director approval",
+    "browserClients": 6,
+    "heroScaleStandIns": 6,
+    "evidence": "assets/reviews/forest_creeps_v01/final-6/observations.json",
+    "evidenceSha256": "8f43ef8f31d4eeea7a6a9cfcc7c0e38c2aa1def7e85afb80a20cfc178ebf9a5c"
+  }
+}

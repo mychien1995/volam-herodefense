@@ -1,0 +1,92 @@
+{
+  "id": "vfx_dan_chi_than_cong",
+  "image": "vfx_dan_chi_than_cong.png",
+  "atlas": "vfx_dan_chi_than_cong.json",
+  "frameSize": [
+    160,
+    160
+  ],
+  "pivot": [
+    80,
+    80
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "animations": [
+    {
+      "name": "finger_projectile",
+      "frames": [
+        "finger_projectile_0",
+        "finger_projectile_1",
+        "finger_projectile_2",
+        "finger_projectile_3"
+      ],
+      "durationMs": 100,
+      "repeat": 0,
+      "placement": "overlay",
+      "telegraph": false,
+      "direction": "right",
+      "role": "visual_effect",
+      "key": "vfx_dan_chi_than_cong_finger_projectile",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    },
+    {
+      "name": "finger_trail",
+      "frames": [
+        "finger_trail_0",
+        "finger_trail_1",
+        "finger_trail_2",
+        "finger_trail_3"
+      ],
+      "durationMs": 100,
+      "repeat": 0,
+      "placement": "overlay",
+      "telegraph": false,
+      "direction": "right",
+      "role": "visual_effect",
+      "key": "vfx_dan_chi_than_cong_finger_trail",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    },
+    {
+      "name": "finger_impact",
+      "frames": [
+        "finger_impact_0",
+        "finger_impact_1",
+        "finger_impact_2",
+        "finger_impact_3"
+      ],
+      "durationMs": 100,
+      "repeat": 0,
+      "placement": "overlay",
+      "telegraph": false,
+      "direction": null,
+      "role": "visual_effect",
+      "key": "vfx_dan_chi_than_cong_finger_impact",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    },
+    {
+      "name": "finger_warning",
+      "frames": [
+        "finger_warning_0",
+        "finger_warning_1",
+        "finger_warning_2",
+        "finger_warning_3"
+      ],
+      "durationMs": 100,
+      "repeat": 0,
+      "placement": "ground",
+      "telegraph": true,
+      "direction": null,
+      "role": "warning",
+      "key": "vfx_dan_chi_than_cong_finger_warning",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    }
+  ],
+  "note": "Visual playback proposals only. No damage, cooldown, heal magnitude, gameplay duration or spawn logic."
+}

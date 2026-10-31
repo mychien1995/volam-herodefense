@@ -1,0 +1,415 @@
+{
+  "schemaVersion": 2,
+  "id": "bong_controls_v2_projectile",
+  "handoffId": "bong_controls_v2",
+  "role": "projectile",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/01_cai_bang/bong_controls_v2_projectile.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/bong_controls_v2/bong_controls_v2_projectile.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/bong_controls_v2/bong_controls_v2_projectile.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "claw_extend_down",
+      "phase": "extend",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trajectory": "owner-front reach artwork; no gameplay projectile or stun introduced",
+      "frames": [
+        "claw_extend_down_0",
+        "claw_extend_down_1",
+        "claw_extend_down_2",
+        "claw_extend_down_3",
+        "claw_extend_down_4",
+        "claw_extend_down_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "claw_retract_down",
+      "phase": "retract",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trajectory": "inward pull, not movement lock",
+      "frames": [
+        "claw_retract_down_0",
+        "claw_retract_down_1",
+        "claw_retract_down_2",
+        "claw_retract_down_3",
+        "claw_retract_down_4",
+        "claw_retract_down_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "claw_retract_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "claw_extend_left",
+      "phase": "extend",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trajectory": "owner-front reach artwork; no gameplay projectile or stun introduced",
+      "frames": [
+        "claw_extend_left_0",
+        "claw_extend_left_1",
+        "claw_extend_left_2",
+        "claw_extend_left_3",
+        "claw_extend_left_4",
+        "claw_extend_left_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "claw_retract_left",
+      "phase": "retract",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trajectory": "inward pull, not movement lock",
+      "frames": [
+        "claw_retract_left_0",
+        "claw_retract_left_1",
+        "claw_retract_left_2",
+        "claw_retract_left_3",
+        "claw_retract_left_4",
+        "claw_retract_left_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "claw_retract_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "claw_extend_right",
+      "phase": "extend",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trajectory": "owner-front reach artwork; no gameplay projectile or stun introduced",
+      "frames": [
+        "claw_extend_right_0",
+        "claw_extend_right_1",
+        "claw_extend_right_2",
+        "claw_extend_right_3",
+        "claw_extend_right_4",
+        "claw_extend_right_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "claw_retract_right",
+      "phase": "retract",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trajectory": "inward pull, not movement lock",
+      "frames": [
+        "claw_retract_right_0",
+        "claw_retract_right_1",
+        "claw_retract_right_2",
+        "claw_retract_right_3",
+        "claw_retract_right_4",
+        "claw_retract_right_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "claw_retract_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "claw_extend_up",
+      "phase": "extend",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trajectory": "owner-front reach artwork; no gameplay projectile or stun introduced",
+      "frames": [
+        "claw_extend_up_0",
+        "claw_extend_up_1",
+        "claw_extend_up_2",
+        "claw_extend_up_3",
+        "claw_extend_up_4",
+        "claw_extend_up_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "claw_retract_up",
+      "phase": "retract",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "trajectory": "inward pull, not movement lock",
+      "frames": [
+        "claw_retract_up_0",
+        "claw_retract_up_1",
+        "claw_retract_up_2",
+        "claw_retract_up_3",
+        "claw_retract_up_4",
+        "claw_retract_up_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "claw_retract_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

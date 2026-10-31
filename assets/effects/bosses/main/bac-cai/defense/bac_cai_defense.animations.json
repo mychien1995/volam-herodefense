@@ -1,0 +1,164 @@
+{
+  "id": "bac_cai_defense",
+  "image": "bac_cai_defense.png",
+  "atlas": "bac_cai_defense.json",
+  "frameSize": [
+    160,
+    160
+  ],
+  "pivot": [
+    80,
+    80
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "animations": [
+    {
+      "name": "master_aura",
+      "direction": "none",
+      "frames": [
+        "master_aura_0",
+        "master_aura_1",
+        "master_aura_2",
+        "master_aura_3"
+      ],
+      "durationMs": 100,
+      "repeat": -1,
+      "placement": "overlay",
+      "rotationPolicy": "presentation only; orient right-authored paths to server aim; do not rotate ground ellipses",
+      "suggestedAlpha": 0.35,
+      "key": "bac_cai_defense_master_aura",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    },
+    {
+      "name": "strong_hit",
+      "direction": "none",
+      "frames": [
+        "strong_hit_0",
+        "strong_hit_1",
+        "strong_hit_2",
+        "strong_hit_3"
+      ],
+      "durationMs": 100,
+      "repeat": 0,
+      "placement": "overlay",
+      "rotationPolicy": "presentation only; orient right-authored paths to server aim; do not rotate ground ellipses",
+      "suggestedAlpha": 1.0,
+      "key": "bac_cai_defense_strong_hit",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    },
+    {
+      "name": "critical_hit",
+      "direction": "none",
+      "frames": [
+        "critical_hit_0",
+        "critical_hit_1",
+        "critical_hit_2",
+        "critical_hit_3"
+      ],
+      "durationMs": 100,
+      "repeat": 0,
+      "placement": "overlay",
+      "rotationPolicy": "presentation only; orient right-authored paths to server aim; do not rotate ground ellipses",
+      "suggestedAlpha": 1.0,
+      "key": "bac_cai_defense_critical_hit",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    },
+    {
+      "name": "resistance_flash",
+      "direction": "none",
+      "frames": [
+        "resistance_flash_0",
+        "resistance_flash_1",
+        "resistance_flash_2",
+        "resistance_flash_3"
+      ],
+      "durationMs": 100,
+      "repeat": 0,
+      "placement": "overlay",
+      "rotationPolicy": "presentation only; orient right-authored paths to server aim; do not rotate ground ellipses",
+      "suggestedAlpha": 1.0,
+      "key": "bac_cai_defense_resistance_flash",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    },
+    {
+      "name": "shield_activate",
+      "direction": "none",
+      "frames": [
+        "shield_activate_0",
+        "shield_activate_1",
+        "shield_activate_2",
+        "shield_activate_3"
+      ],
+      "durationMs": 100,
+      "repeat": 0,
+      "placement": "overlay",
+      "rotationPolicy": "presentation only; orient right-authored paths to server aim; do not rotate ground ellipses",
+      "suggestedAlpha": 1.0,
+      "key": "bac_cai_defense_shield_activate",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    },
+    {
+      "name": "counter_shield",
+      "direction": "none",
+      "frames": [
+        "counter_shield_0",
+        "counter_shield_1",
+        "counter_shield_2",
+        "counter_shield_3"
+      ],
+      "durationMs": 100,
+      "repeat": -1,
+      "placement": "overlay",
+      "rotationPolicy": "presentation only; orient right-authored paths to server aim; do not rotate ground ellipses",
+      "suggestedAlpha": 0.65,
+      "key": "bac_cai_defense_counter_shield",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    },
+    {
+      "name": "counter_warning",
+      "direction": "radial",
+      "frames": [
+        "counter_warning_0",
+        "counter_warning_1",
+        "counter_warning_2",
+        "counter_warning_3"
+      ],
+      "durationMs": 120,
+      "repeat": 0,
+      "placement": "overlay",
+      "rotationPolicy": "presentation only; orient right-authored paths to server aim; do not rotate ground ellipses",
+      "suggestedAlpha": 1.0,
+      "key": "bac_cai_defense_counter_warning",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    },
+    {
+      "name": "shield_expire",
+      "direction": "none",
+      "frames": [
+        "shield_expire_0",
+        "shield_expire_1",
+        "shield_expire_2",
+        "shield_expire_3"
+      ],
+      "durationMs": 100,
+      "repeat": 0,
+      "placement": "overlay",
+      "rotationPolicy": "presentation only; orient right-authored paths to server aim; do not rotate ground ellipses",
+      "suggestedAlpha": 1.0,
+      "key": "bac_cai_defense_shield_expire",
+      "animationTimingOnly": true,
+      "authoritativeHitEvents": []
+    }
+  ],
+  "note": "Visual playback only. No gameplay, damage, range, timing, AI or phase definitions."
+}

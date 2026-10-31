@@ -5,7 +5,7 @@ import { CloseCode } from '@colyseus/core';
 import { createGameServer } from '../apps/game-server/src/app.config.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
-import { creepDungeon } from '@volam/game-data';
+import { creepDungeon, desertDungeon, desertRoster } from '@volam/game-data';
 
 let server: ColyseusTestServer;
 const previousLegacy = process.env['VOLAM_DEV_LEGACY_SKILLS'];
@@ -88,6 +88,64 @@ async function exit(room: Room<MatchRoom>, authority: MatchRoom) {
 }
 
 describe('M2A real Colyseus zone authority and views', () => {
+  it('syncs desert server identities and isolates destination/private views with physical return', async () => {
+    const {
+      rooms: [a, b],
+      authority,
+    } = await join();
+    a!.send('dungeon-action', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: next(a!),
+      action: 'enter',
+      access: 'shared',
+      destination: 'desert',
+    });
+    b!.send('dungeon-action', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: next(b!),
+      action: 'enter',
+      access: 'private',
+      destination: 'desert',
+    });
+    await expect
+      .poll(() => a!.state.players.get(a!.sessionId)?.zoneId)
+      .toBe('desert_shared');
+    await expect
+      .poll(() => b!.state.players.get(b!.sessionId)?.zoneId)
+      .toBe(`desert_private_${b!.sessionId}`);
+    await expect.poll(() => [...a!.state.creeps.values()].length).toBe(3);
+    expect([...a!.state.creeps.values()].map((c) => c.archetypeId)).toEqual(
+      desertRoster.slice(0, 3),
+    );
+    expect(
+      [...a!.state.creeps.values()].every((c) => c.zoneId === 'desert_shared'),
+    ).toBe(true);
+    expect(
+      [...b!.state.creeps.values()].every(
+        (c) => c.zoneId === `desert_private_${b!.sessionId}`,
+      ),
+    ).toBe(true);
+    const far = a!.waitForMessage('command-rejected');
+    a!.send('dungeon-action', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: next(a!),
+      action: 'exit',
+    });
+    expect((await far).reason).toContain('physical');
+    Object.assign(authority.simulation.hero(a!.sessionId)!, desertDungeon.exit);
+    a!.send('dungeon-action', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: next(a!),
+      action: 'exit',
+    });
+    await expect
+      .poll(() => a!.state.players.get(a!.sessionId)?.zoneId)
+      .toBe('arena');
+    await expect.poll(() => a!.state.creeps.size).toBe(0);
+    expect(authority.simulation.hero(a!.sessionId)).toMatchObject(
+      desertDungeon.arenaReturn,
+    );
+  });
   it('rejects dungeon travel before the match starts without creating a hero or instance', async () => {
     const room = await client.create<MatchRoom>(MATCH_ROOM, {
       nickname: 'Waiting',

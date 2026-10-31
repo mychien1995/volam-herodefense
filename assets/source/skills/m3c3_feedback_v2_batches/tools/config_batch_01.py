@@ -1,0 +1,50 @@
+from config_api import *
+b=Batch('01_cai_bang');a='cai_bang_chuong_dragon_v2';big='hang_long_hoa_vu_dragon_v2';ctl='bong_controls_v2';dogs='thien_ha_vo_cau_dogs_v2'
+angles={'right':0,'down':90,'left':180,'up':270};row={'right':0,'down':1,'up':2,'left':0}
+for d in DIRS:
+ b.add(a,'character','chuong_sixth_cast_'+d,basic('hero_cai_bang_chuong',d),'cast',d,ms=75,contacts=[1],framePhases=['anticipation','release','contact','recovery'])
+ b.add(a,'character','hoa_van_cast_'+d,retained('cai-bang','hoa_van_chuong','character','cast_'+d),'cast',d,ms=75,contacts=[1],framePhases=['anticipation','release','contact','recovery'])
+ b.add(a,'projectile','dragon_travel_'+d,fx('cb_small_dragon_projectiles_v2',row[d],0.20,mirror=d=='left'),'travel',d,True,70,arbitraryHeading=True,authoredHeadingDegrees=angles[d],trajectory='fixed server velocity; no homing')
+ b.add(a,'projectile','hoa_van_travel_'+d,fx('cb_small_dragon_projectiles_v2',3,0.25,rotation=angles[d]),'travel',d,True,60,arbitraryHeading=True,authoredHeadingDegrees=angles[d],serverFanAnglesDegrees=[-30,0,30],drawsSingleProjectile=True)
+ b.add(a,'impact','small_impact_'+d,retained('cai-bang','shared_fire','vfx','small_impact_'+d),'impact',d,ms=55,contacts=[0])
+ b.add(a,'aura','palm_release_'+d,retained('cai-bang','shared_fire','vfx','palm_flash_'+d),'release',d,ms=55,offset={'right':[18,-21],'left':[-18,-21],'down':[0,-12],'up':[0,-30]}[d])
+ b.add(big,'character','cast_'+d,retained('cai-bang','hang_long_hoa_vu','character','cast_'+d),'cast',d,ms=75,contacts=[1],framePhases=['anticipation','release','contact','recovery'])
+ b.add(big,'projectile','travel_'+d,fx('cb_great_fire_dragon_v2',row[d],0.76,mirror=d=='left'),'travel',d,True,70,arbitraryHeading=True,authoredHeadingDegrees=angles[d],trajectory='one large dragon follows server projectile fixed velocity')
+ b.add(big,'impact','impact_'+d,fx('cb_great_fire_dragon_v2',3,0.50,indexes=[0,1,3,4,5],rotation=angles[d]),'impact',d,ms=60,contacts=[1])
+ b.add(big,'impact','ending_'+d,fx('cb_great_fire_dragon_v2',3,0.50,indexes=[4,5],rotation=angles[d]),'ending',d,ms=75)
+ b.add(big,'aura','release_'+d,retained('cai-bang','shared_fire','vfx','palm_flash_'+d),'release',d,ms=55)
+ for skill,beat in [('hoanh_tao_bong','sweep'),('pha_giap_bong','overhead'),('truy_phong_bong','thrust')]:
+  b.add(ctl,'character',skill+'_cast_'+d,sample(beat,d),'cast',d,ms=[40,40,40,50,70,60],contacts=[2],framePhases=['anticipation','anticipation','contact','follow_through','recovery','handoff'])
+ b.add(ctl,'character','cam_long_cast_'+d,retained('cai-bang','cam_long_cong','character','cast_'+d),'cast',d,ms=75,contacts=[1])
+ b.add(ctl,'projectile','claw_extend_'+d,fx('cb_staff_control_fx_v2',2,0.65,rotation=angles[d]),'extend',d,ms=50,trajectory='owner-front reach artwork; no gameplay projectile or stun introduced')
+ b.add(ctl,'projectile','claw_retract_'+d,fx('cb_staff_control_fx_v2',3,0.65,rotation=angles[d]),'retract',d,ms=50,contacts=[1],trajectory='inward pull, not movement lock')
+ b.add(ctl,'ground','slam_'+d,fx('cb_staff_control_fx_v2',1,0.50),'impact',d,ms=55,contacts=[2],offset={'right':[30,0],'left':[-30,0],'down':[0,24],'up':[0,-32]}[d],playOnConfirmedMissCast=True)
+ b.add(ctl,'impact','dash_hit_'+d,sample('thrust',d,'vfx')[2:5],'impact',d,ms=55,contacts=[0])
+ b.add(ctl,'aura','dash_trail_'+d,retained('cai-bang','truy_phong_bong','vfx','speed_'+d),'loop',d,True,55,lifetime='moving dash ticks only')
+ b.add(dogs,'character','opening_'+d,sample('sweep',d)[:2],'opening',d,ms=55)
+ order=['right','down','left','up'];start=order.index(d);seq=[]
+ for q in range(4):seq+=sample('sweep',order[(start+q)%4])[2:4]
+ b.add(dogs,'character','whirl_'+d,seq,'loop',d,True,55,characterMotion='eight actual authored poses from four cardinal facings; never rotation of still')
+ b.add(dogs,'character','ending_'+d,sample('overhead',d)[2:5],'ending',d,ms=[40,60,100],contacts=[0])
+ b.add(dogs,'projectile','dog_run_'+d,fx('cb_fire_dog_gallop_v2',row[d],0.23,rows=3,mirror=d=='left',anchor=[0.5,0.75]),'gallop',d,True,65,arbitraryHeading=True,authoredHeadingDegrees=angles[d],ephemeralOrbitArtworkOnly=True)
+b.add(big,'aura','gather',retained('cai-bang','khang_long_huu_hoi','vfx','activation'),'opening',ms=65)
+b.add(ctl,'ground','radial_sweep',fx('cb_staff_control_fx_v2',0,0.85),'release',ms=50,contacts=[2],serverAngleDegrees=360,serverRangeReference=110,groundPlane='never rotate to vertical')
+b.add(dogs,'aura','opening',retained('cai-bang','thien_ha_vo_cau','vfx','whirlwind')[:2],'opening',ms=60)
+b.add(dogs,'aura','whirlwind',retained('cai-bang','thien_ha_vo_cau','vfx','whirlwind'),'loop',loop=True,ms=70)
+b.add(dogs,'aura','ending',retained('cai-bang','thien_ha_vo_cau','vfx','whirlwind')[2:],'ending',ms=75)
+b.add(dogs,'ground','final_smash',fx('cb_staff_control_fx_v2',1,0.68),'impact',ms=55,contacts=[2],serverFinisherRangeReference=160)
+b.references=[{'handoffId':'cai_bang_bong_basic_v2','path':'assets/source/skills/cai-bang/cai_bang_bong_a_m3c3_feedback_v2/production_manifest.json','condition':'director-approved sample retained byte-for-byte, no regeneration','tagAliases':{'thrust':'combo_thrust_{direction}','sweep':'combo_sweep_{direction}','lift':'combo_rising_{direction}','smash':'combo_overhead_{direction}'},'serverBasicIntervalTicks':18}]
+b.bind('cai_bang_chuong','accepted A stage dragon (sixth only)',a+'_character/projectile/impact','chuong_sixth_cast_{d}; dragon_travel_{d}; small_impact_{d}','hand release -> server projectile -> actual target hit; first five As keep approved baseline')
+b.bind('hoa_van_chuong','three simultaneous server projectiles',a+'_character/projectile/impact','hoa_van_cast_{d}; hoa_van_travel_{d}; small_impact_{d}','instantiate single-bolt art for -30/0/+30degrees; never triple-composite projectile')
+b.bind('hang_long_hoa_vu','cast/projectile/hit/despawn',big+'_character/aura/projectile/impact','cast_{d}; gather; release_{d}; travel_{d}; impact_{d}; ending_{d}','gather/release at caster; travel loops on synchronized world projectile; impact only on server hit')
+b.bind('hoanh_tao_bong','accepted cast / actual sweep pulse',ctl+'_character/ground','hoanh_tao_bong_cast_{d}; radial_sweep','full360 owner-centered sweep, no duplicate visuals from refund/control pulses')
+b.bind('pha_giap_bong','accepted cast including miss',ctl+'_character/ground','pha_giap_bong_cast_{d}; slam_{d}','caster-front ground impact visible even on miss; hit stats remain server')
+b.bind('cam_long_cong','cast + control confirmation',ctl+'_character/projectile','cam_long_cast_{d}; claw_extend_{d}; claw_retract_{d}','owner-front long claw and inward pull; silence/disarm, no stun or foot lock')
+b.bind('truy_phong_bong','moving dash / real hit',ctl+'_character/aura/impact','truy_phong_bong_cast_{d}; dash_trail_{d}; dash_hit_{d}','trail follows moving actor, impact on target; no animation-derived damage')
+b.bind('thien_ha_vo_cau','channel opening / four pulses / final / cleanup',dogs+'_character/aura/projectile/ground','opening_{d}; whirl_{d}; dog_run_{d}; whirlwind; final_smash; ending','ephemeral dogs loop around owner; final smash once on server finisher; ending on lifecycle cleanup')
+b.mock(a+'_projectile','dragon_travel_right',2,'SIXTH PALM DRAGON')
+b.mock(big+'_projectile','travel_right',2,'HANG LONG FIRE DRAGON')
+b.mock(ctl+'_projectile','claw_extend_right',4,'CAM LONG CLAW')
+b.mock(dogs+'_projectile','dog_run_right',2,'FIRE DOG GALLOP')
+b.reused=['Approved Bong sample exact character/VFX pixels; no regeneration','Approved Cai Bang Chuong baseline and retained four-facing cast components','Retained palm-flash/small impact/gather/whirlwind/dash-trail phases at native scale']
+b.save()

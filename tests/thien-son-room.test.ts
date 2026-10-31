@@ -136,7 +136,7 @@ it('synchronizes mixed-school shared combat, independent builds/rewards, dash po
     });
   await expect
     .poll(() => ea.filter((e) => e.kind === 'hit').length, { timeout: 5000 })
-    .toBeGreaterThanOrEqual(9);
+    .toBeGreaterThanOrEqual(7);
   await expect
     .poll(() => eb.filter((e) => e.kind === 'hit').length)
     .toBe(ea.filter((e) => e.kind === 'hit').length);

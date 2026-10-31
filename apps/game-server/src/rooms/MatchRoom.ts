@@ -1,7 +1,7 @@
 import { randomInt } from 'node:crypto';
 import { Room, ServerError, validate, type Client } from '@colyseus/core';
 import { serverInvasionDefinition } from '../invasion-config.js';
-import { lobbyConfig, m1Config, creepDungeon } from '@volam/game-data';
+import { lobbyConfig, m1Config, creepDungeon, desertDungeon } from '@volam/game-data';
 import {
   DungeonMatch,
   initializeProgression,
@@ -47,6 +47,7 @@ export class MatchRoom extends Room<{
     creepDungeon,
     this.seed,
     serverInvasionDefinition(),
+    [desertDungeon],
   );
   readonly world = this.simulation.arena.world;
   private readonly checkSequences = new Map<string, number>();
@@ -266,7 +267,7 @@ export class MatchRoom extends Room<{
         }
         const reason =
           input.action === 'enter'
-            ? this.simulation.enter(client.sessionId, input.access)
+            ? this.simulation.enter(client.sessionId, input.access, input.destination)
             : this.simulation.exit(client.sessionId);
         if (reason) return reject(reason);
         const hero = this.simulation.hero(client.sessionId);
@@ -643,6 +644,7 @@ export class MatchRoom extends Room<{
         }
         target.zoneId = zone.id;
         target.invasionWave = enemy.invasion?.wave ?? 0;
+        target.archetypeId = enemy.archetypeId ?? '';
         target.lane = enemy.invasion?.lane ?? '';
         target.targetId = enemy.invasion?.targetId ?? '';
       }
@@ -679,6 +681,9 @@ export class MatchRoom extends Room<{
         target.ownerId = shot.ownerId;
         target.abilityId = shot.abilityId;
         target.zoneId = zone.id;
+        target.radius = shot.effect.radius;
+        target.stage = shot.stage ?? '';
+        target.leg = shot.leg ?? '';
       }
     }
     for (const [id, target] of this.state.creeps)

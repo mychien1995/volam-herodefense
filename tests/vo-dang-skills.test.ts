@@ -83,11 +83,15 @@ describe('M3C2 authoritative Yin–Yang', () => {
       const f = fixture(id);
       f.hero.mana = 0;
       f.cast();
-      expect(f.events).toEqual([]);
+      expect(f.events.filter((e) => e.kind === 'cast')).toHaveLength(
+        id === 'thai_cuc_than_cong' ? 1 : 0,
+      );
       f.hero.mana = 180;
       f.hero.hp = 0;
       f.cast();
-      expect(f.events).toEqual([]);
+      expect(f.events.filter((e) => e.kind === 'cast')).toHaveLength(
+        id === 'thai_cuc_than_cong' ? 1 : 0,
+      );
       const g = fixture(id);
       applyStatus(
         g.hero,
@@ -109,7 +113,9 @@ describe('M3C2 authoritative Yin–Yang', () => {
       ).toBe(false);
       for (let i = 0; i < 8; i++) h.input({ kind: 'cast', slot: 0 });
       h.steps(1);
-      expect(h.events.filter((e) => e.kind === 'cast')).toHaveLength(1);
+      expect(h.events.filter((e) => e.kind === 'cast')).toHaveLength(
+        id === 'thai_cuc_than_cong' ? 2 : 1,
+      );
       expect(h.hero.mana).toBe(
         180 -
           m1Config.skillCatalogue![id]!.manaCost +
@@ -176,8 +182,9 @@ describe('M3C2 authoritative Yin–Yang', () => {
   it('Lưỡng Nghi reduces actual enemy attack power, strongest nonstacking refresh and exact expiry', () => {
     const f = fixture();
     f.cast();
+    f.steps(2);
     const e = f.enemies[0]!;
-    expect(hasStatus(e, 'attack_break', 1)).toBe(true);
+    expect(hasStatus(e, 'attack_break', f.world.tick)).toBe(true);
     const hp = f.hero.hp;
     hurt(f.world, f.hero, e.id, 'strike', 50, f.config);
     expect(f.hero.hp).toBe(hp - 40);
@@ -245,24 +252,28 @@ describe('M3C2 authoritative Yin–Yang', () => {
     const f = fixture('duong_khi_kich');
     f.enemies[1]!.x = 345;
     f.cast();
+    f.steps(3);
     expect(f.hero.mana).toBe(177);
     expect(f.events.filter((e) => e.stage === 'refund')).toHaveLength(1);
     f.cast();
     expect(f.hero.mana).toBe(177);
     const g = fixture('duong_khi_kich');
     g.hero.fx = -1;
-    g.enemies[2]!.x = 100;
+    g.enemies[2]!.x = 20;
     g.cast();
+    g.steps(25);
     expect(g.hero.mana).toBe(170);
     const h = fixture('duong_khi_kich');
     h.enemies[0]!.hp = 1;
     h.cast();
+    h.steps(3);
     expect(h.hero.mana).toBe(177);
     const j = fixture('duong_khi_kich');
     const a = structuredClone(j.config.skillCatalogue!['duong_khi_kich']!);
-    if (a.effect.mode === 'arc') a.effect.manaRefund = 100;
+    if (a.effect.mode === 'projectile') a.effect.manaRefund = 100;
     j.config.skillCatalogue![a.id] = a;
     j.cast();
+    j.steps(3);
     expect(j.hero.mana).toBe(180);
   });
   it('Thái Cực shield spends mana after armor, partially absorbs depletion and applies lethal remainder', () => {
@@ -270,18 +281,20 @@ describe('M3C2 authoritative Yin–Yang', () => {
     f.cast();
     const hp = f.hero.hp;
     hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 100, f.config);
-    expect(f.hero.hp).toBe(hp - 20);
-    expect(f.hero.mana).toBe(68);
+    expect(f.hero.hp).toBe(hp);
+    expect(f.hero.mana).toBe(55);
     f.hero.mana = 25;
     hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 100, f.config);
     expect(f.hero.mana).toBe(0);
-    expect(f.hero.hp).toBe(hp - 100);
+    expect(f.hero.hp).toBe(hp - 80);
     hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 100, f.config);
     expect(f.hero.hp).toBe(0);
     expect(f.hero.statuses).toEqual([]);
     const g = fixture('thai_cuc_than_cong');
     g.cast();
     g.steps(180);
+    expect(hasStatus(g.hero, 'mana_shield', g.world.tick)).toBe(true);
+    g.cast();
     expect(hasStatus(g.hero, 'mana_shield', g.world.tick)).toBe(false);
     const before = g.hero.mana;
     hurt(g.world, g.hero, g.enemies[0]!.id, 'strike', 10, g.config);
@@ -303,8 +316,8 @@ describe('M3C2 authoritative Yin–Yang', () => {
     const hp = f.hero.hp,
       mana = f.hero.mana;
     hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 100, f.config);
-    expect(f.hero.hp).toBe(hp - 10);
-    expect(f.hero.mana).toBe(mana - 50);
+    expect(f.hero.hp).toBe(hp);
+    expect(f.hero.mana).toBe(mana - 62.5);
   });
   it('shield uses only strongest active shield and insufficient mana never prevents lethal damage', () => {
     const f = fixture('thai_cuc_than_cong');
@@ -326,7 +339,7 @@ describe('M3C2 authoritative Yin–Yang', () => {
     g.hero.hp = 20;
     g.hero.mana = 100;
     hurt(g.world, g.hero, g.enemies[0]!.id, 'strike', 30, g.config);
-    expect(g.hero.hp).toBe(14);
+    expect(g.hero.hp).toBe(20);
   });
   it.each(['thai_cuc_tran', 'bat_quai_kiem_tran'])(
     '%s is stationary, ticks exactly, validates entry/exit/terrain, and expires',
@@ -588,7 +601,9 @@ describe('M3C2 authoritative Yin–Yang', () => {
       expect(ranks).toHaveLength(
         ['thai_cuc_tran', 'van_kiem_quy_tong'].includes(base.id) ? 3 : 4,
       );
-      expect(ranks.at(-1)!.cooldownTicks).toBeLessThan(base.cooldownTicks);
+      if (base.id === 'thai_cuc_than_cong')
+        expect(ranks.at(-1)!.cooldownTicks).toBe(1);
+      else expect(ranks.at(-1)!.cooldownTicks).toBeLessThan(base.cooldownTicks);
     }
     expect(
       abilitySchema.safeParse({

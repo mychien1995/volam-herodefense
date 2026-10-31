@@ -1,11 +1,12 @@
 import { expect, test, type Page } from '@playwright/test';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { Client, type Room } from '@colyseus/sdk';
 import { PROTOCOL_VERSION } from '@volam/game-protocol';
 import type { MatchRoom } from '../../apps/game-server/src/rooms/MatchRoom.js';
 import { joinWaiting, startTogether } from './pregame-helper.js';
 const evidence =
-  process.env['VOLAM_BAMBOO_EVIDENCE_DIR'] ?? 'assets/reviews/bamboo_forest_v1';
+  process.env['VOLAM_BAMBOO_EVIDENCE_DIR'] ??
+  'docs/evidence/bamboo-integration-2026-10-31';
 interface Hero {
   x: number;
   y: number;
@@ -24,7 +25,19 @@ interface View {
   rotation: number;
   zoneId: string;
   camera: { x: number; y: number };
+  sceneTime: number;
+  observedCreepFrames: Record<string, string[]>;
+  completedAnimations: Array<{ id: string; key: string; at: number }>;
   trees: Array<{ x: number; y: number; depth: number }>;
+  bambooScenery: Array<{
+    name: string;
+    texture: string;
+    x: number;
+    y: number;
+    depth: number;
+    origin: number[];
+    scale: number[];
+  }>;
   actors: Array<{
     id: string;
     x: number;
@@ -33,6 +46,9 @@ interface View {
     frame: string;
     animation: string;
     texture: string;
+    artStatus?: string;
+    origin: number[];
+    scale: number[];
   }>;
 }
 const read = (p: Page): Promise<Snap> =>
@@ -54,12 +70,23 @@ async function moveTo(p: Page, x: number, y: number) {
       const h = await hero(p),
         delta = target - h[axis];
       if (Math.abs(delta) <= 6) break;
-      await p.keyboard.press(delta < 0 ? neg : pos, {
-        delay: Math.min(100, Math.max(30, Math.abs(delta) * 5 - 20)),
-      });
-      await expect
-        .poll(async () => (await hero(p)).lastSequence)
-        .toBeGreaterThan(h.lastSequence);
+      const key = delta < 0 ? neg : pos;
+      await p.keyboard.down(key);
+      try {
+        await p.waitForTimeout(
+          Math.min(100, Math.max(30, Math.abs(delta) * 5 - 20)),
+        );
+        // Keep the real key held until a rendered input frame reaches the server.
+        // A complete 30ms press can fall between frames on a loaded test machine.
+        await expect
+          .poll(async () => (await hero(p)).lastSequence, {
+            intervals: [16],
+            timeout: 8000,
+          })
+          .toBeGreaterThan(h.lastSequence);
+      } finally {
+        await p.keyboard.up(key);
+      }
       await expect.poll(async () => (await hero(p)).pose).not.toBe('walk');
     }
     expect(
@@ -76,6 +103,115 @@ async function enter(p: Page) {
   await expect
     .poll(async () => (await view(p)).zoneId)
     .toBe((await hero(p)).zoneId);
+  await expect(p.locator('#zone-status')).toContainText('Creep: placeholder');
+}
+
+async function observePlaceholderAnimations(p: Page, peer: Page) {
+  const manifest = JSON.parse(readFileSync('assets/manifest.json', 'utf8'));
+  const art = manifest.assets.find(
+    (a: { id: string }) => a.id === 'creep_outlaw',
+  );
+  const room = (await read(p)).roomId;
+  const observed: Record<string, string[]> = {};
+  const timings: Record<string, number> = {};
+  for (const pose of [
+    'idle',
+    'walk',
+    'basic_attack',
+    'cast',
+    'hurt',
+    'death',
+  ]) {
+    for (const direction of ['down', 'left', 'right', 'up']) {
+      await p.bringToFront();
+      const start = (await view(p)).sceneTime;
+      const peerStart = (await view(peer)).sceneTime;
+      const response = await p.request.post(
+        `http://127.0.0.1:5187/__bamboo-pose?room=${encodeURIComponent(room)}&pose=${pose}&direction=${direction}`,
+      );
+      if (!response.ok())
+        throw Error(
+          `Pose fixture ${response.status()}: ${await response.text()}`,
+        );
+      const { ids } = (await response.json()) as { ids: string[] };
+      const animations = [
+        art.animations.find(
+          (a: { state: string; direction: string }) =>
+            a.state === pose && a.direction === direction,
+        ),
+      ];
+      await expect
+        .poll(
+          async () => {
+            const v = await view(p);
+            return animations.every((anim, i) => {
+              const key = `creep_outlaw:${pose}:${anim.direction}`;
+              const actor = v.actors.find((a) => a.id === ids[i]);
+              const frames = v.observedCreepFrames[key] ?? [];
+              return (
+                actor?.animation === key &&
+                anim.frames.every((f: string) => frames.includes(f)) &&
+                (anim.repeat === -1 ||
+                  v.completedAnimations.some(
+                    (a) => a.id === actor.id && a.key === key && a.at >= start,
+                  ))
+              );
+            });
+          },
+          { timeout: 8000, intervals: [60] },
+        )
+        .toBe(true);
+      const v = await view(p);
+      timings[pose + ':' + direction] = v.sceneTime - start;
+      for (const anim of animations) {
+        const key = `creep_outlaw:${pose}:${anim.direction}`;
+        observed[key] = v.observedCreepFrames[key]!;
+        expect(new Set(observed[key])).toEqual(new Set(anim.frames));
+      }
+      for (const id of ids) {
+        const actor = v.actors.find((a) => a.id === id)!;
+        expect(actor.artStatus).toBe('placeholder');
+        expect(actor.origin).toEqual([0.5, 1]);
+        expect(actor.scale).toEqual([1, 1]);
+        expect(actor.depth).toBe(actor.y);
+        // A background client can finish a one-shot before it is sampled.
+        // Observe its actual cels/completion instead of requiring a simultaneous key.
+        await peer.bringToFront();
+        const anim = animations[0]!;
+        const key = `creep_outlaw:${pose}:${direction}`;
+        await expect
+          .poll(
+            async () => {
+              const other = await view(peer);
+              return (
+                anim.frames.every((f: string) =>
+                  (other.observedCreepFrames[key] ?? []).includes(f),
+                ) &&
+                (anim.repeat === -1
+                  ? other.actors.find((a) => a.id === id)?.animation === key
+                  : other.completedAnimations.some(
+                      (a) => a.id === id && a.key === key && a.at >= peerStart,
+                    ))
+              );
+            },
+            { timeout: 8000, intervals: [60] },
+          )
+          .toBe(true);
+      }
+      if (pose === 'walk')
+        await p.screenshot({
+          path: evidence + '/creep_placeholder_walk_' + direction + '.png',
+        });
+    }
+  }
+  return {
+    status: 'placeholder',
+    source: art.source,
+    texture: art.id,
+    controlledServerPoses: true,
+    observed,
+    timings,
+  };
 }
 test('six players share authored forest; server collision, depth and physical return remain intact', async ({
   browser,
@@ -121,18 +257,24 @@ test('six players share authored forest; server collision, depth and physical re
         b.send('lobby-action', { action: 'confirm' });
       }),
     ]);
+    // Enter idle SDK peers immediately, before waiting on browser menu rendering.
+    // They have no combat controller to defend themselves in the practice arena.
+    await Promise.all(
+      bots.map(async (b) => {
+        await expect.poll(() => b.state.phase).toBe('IN_GAME');
+        b.send('dungeon-action', {
+          protocolVersion: PROTOCOL_VERSION,
+          sequence: 1,
+          action: 'enter',
+          access: 'shared',
+          destination: 'forest',
+        });
+        await expect
+          .poll(() => b.state.players.get(b.sessionId)?.zoneId)
+          .not.toBe('arena');
+      }),
+    );
     for (const p of pages) await enter(p);
-    for (const b of bots) {
-      b.send('dungeon-action', {
-        protocolVersion: PROTOCOL_VERSION,
-        sequence: 1,
-        action: 'enter',
-        access: 'shared',
-      });
-      await expect
-        .poll(() => b.state.players.get(b.sessionId)?.zoneId)
-        .not.toBe('arena');
-    }
     await expect
       .poll(
         async () =>
@@ -181,6 +323,13 @@ test('six players share authored forest; server collision, depth and physical re
 
     await a.screenshot({ path: evidence + '/six_players_1920.png' });
     await a.setViewportSize({ width: 1280, height: 720 });
+    const viewport = (await a.locator('#viewport').boundingBox())!;
+    const canvas = (await a.locator('#game canvas').boundingBox())!;
+    expect(canvas).toEqual(viewport);
+    expect(viewport).toEqual({ x: 0, y: 0, width: 1280, height: 720 });
+    const statusBox = (await a.locator('#zone-status').boundingBox())!;
+    expect(statusBox.x).toBeGreaterThanOrEqual(0);
+    expect(statusBox.x + statusBox.width).toBeLessThanOrEqual(1280);
     await a.screenshot({ path: evidence + '/entry_portal_1280.png' });
     await a.setViewportSize({ width: 1920, height: 1080 });
     const frames = new Set<string>();
@@ -218,6 +367,24 @@ test('six players share authored forest; server collision, depth and physical re
     await moveTo(a, 392, 192);
     await moveTo(a, 440, 192);
     const behind = await view(a);
+    const metadata = JSON.parse(
+      readFileSync('assets/bamboo_forest.manifest.json', 'utf8'),
+    );
+    expect(behind.bambooScenery).toHaveLength(70);
+    for (const prop of behind.bambooScenery) {
+      const asset = metadata.assets.find(
+        (a: { id: string }) => a.id === prop.name,
+      );
+      expect(prop.texture).toBe('bamboo_scenery');
+      expect(prop.origin).toEqual(asset.footPivot);
+      expect(prop.scale).toEqual([1, 1]);
+      expect([-9000, prop.y]).toContain(prop.depth);
+    }
+    const deck = behind.bambooScenery.find((o) => o.name === 'bridge_deck')!;
+    const rail = behind.bambooScenery.find((o) => o.name === 'bridge_front')!;
+    expect(deck.depth).toBe(-9000);
+    expect(rail.depth).toBe(rail.y);
+    expect(rail.depth).toBeGreaterThan(deck.depth);
     expect(behind.actors.find((o) => o.id === aid)!.depth).toBeLessThan(240);
     expect(
       behind.trees.some((t) => t.x === 440 && t.y === 240 && t.depth === 240),
@@ -238,6 +405,10 @@ test('six players share authored forest; server collision, depth and physical re
     await a.screenshot({ path: evidence + '/bridge_and_stream.png' });
     await moveTo(a, 224, 500);
     await moveTo(a, 224, 320);
+    const placeholderAnimations = await observePlaceholderAnimations(
+      a,
+      pages[1]!,
+    );
     await moveTo(a, 176, 320);
     const v = await view(a),
       box = (await a.locator('#game canvas').boundingBox())!;
@@ -250,6 +421,7 @@ test('six players share authored forest; server collision, depth and physical re
     );
     await expect.poll(async () => (await hero(a)).zoneId).toBe('arena');
     await expect.poll(async () => (await view(a)).zoneId).toBe('arena');
+    await expect(a.locator('#zone-status')).toBeHidden();
     expect((await hero(pages[1]!)).zoneId).not.toBe('arena');
     expect(errors).toEqual([]);
     writeFileSync(
@@ -261,6 +433,7 @@ test('six players share authored forest; server collision, depth and physical re
           behind,
           front,
           observedWalkFrames: [...frames],
+          placeholderAnimations,
           portalReturn: true,
           bridgeCrossed: true,
           errors,

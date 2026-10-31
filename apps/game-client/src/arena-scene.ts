@@ -1,5 +1,11 @@
 import Phaser from 'phaser';
-import { arena, creepDungeon } from '@volam/game-data';
+import { arena, dungeonForZone } from '@volam/game-data';
+import { desertCreepArt } from './desert-art.js';
+import {
+  forestCreepArt,
+  forestStrikeEffects,
+  type ForestCreepManifest,
+} from './forest-creeps.js';
 import type { LobbyState } from '@volam/game-protocol';
 import type { CombatEvent } from '@volam/game-core';
 import { createArenaArt } from './arena-art01.js';
@@ -15,6 +21,7 @@ import { ArenaCreepEffects } from './arena-creep-effects.js';
 import { createCreepDungeonArt } from './dungeon-presentation.js';
 import {
   actorFootPivot,
+  creepPlaceholderTexture,
   facing,
   heroTexture,
   preloadArt,
@@ -35,15 +42,15 @@ export class ArenaScene extends Phaser.Scene {
   private zoneId = 'arena';
   private snapshot: LobbyState | undefined;
   private sessionId = '';
-  private actors = new Map<string, EntityView>();
+  protected actors = new Map<string, EntityView>();
   private vfx: SkillVfx | undefined;
-  private creepEffects: ArenaCreepEffects | undefined;
+  protected creepEffects: ArenaCreepEffects | undefined;
   private trees: Phaser.GameObjects.Image[] = [];
   private ready = false;
   private followed = '';
   private lastEvent = 0;
   private damage: FloatingDamage | undefined;
-  private completedAnimations: Array<{
+  protected completedAnimations: Array<{
     id: string;
     key: string;
     frame: string | number;
@@ -51,8 +58,13 @@ export class ArenaScene extends Phaser.Scene {
   }> = [];
   private impacts: Array<{ id: string; sourceId: string; targetId: string }> =
     [];
-  private observedCreepFrames = new Map<string, Set<string>>();
+  protected observedCreepFrames = new Map<string, Set<string>>();
   private observedHeroFrames = new Map<string, Set<string>>();
+  protected creepRepeats = new Map<string, number>();
+  private creepFrameTimes = new Map<
+    string,
+    Array<{ id: string; frame: string; at: number }>
+  >();
   constructor() {
     super('Arena');
   }
@@ -66,6 +78,13 @@ export class ArenaScene extends Phaser.Scene {
     this.creepEffects = new ArenaCreepEffects(
       this,
       this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest,
+      this.cache.json.get('forest_creeps_manifest') as ForestCreepManifest,
+    );
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
+      this.creepEffects?.clear(),
+    );
+    this.events.once(Phaser.Scenes.Events.DESTROY, () =>
+      this.creepEffects?.clear(),
     );
     this.drawZone('arena');
     this.cameras.main
@@ -106,6 +125,8 @@ export class ArenaScene extends Phaser.Scene {
     this.impacts.length = 0;
     this.observedCreepFrames.clear();
     this.observedHeroFrames.clear();
+    this.creepRepeats.clear();
+    this.creepFrameTimes.clear();
     this.followed = '';
     this.zoneId = zoneId;
     if (zoneId === 'arena') {
@@ -114,10 +135,15 @@ export class ArenaScene extends Phaser.Scene {
         .setBounds(0, 0, arena.width, arena.height)
         .centerOn(arena.spawn.x, arena.spawn.y);
     } else {
-      this.trees = createCreepDungeonArt(this, () => this.onDungeonExit());
+      const dungeon = dungeonForZone(zoneId);
+      this.trees = createCreepDungeonArt(
+        this,
+        () => this.onDungeonExit(),
+        dungeon.id,
+      );
       this.cameras.main
-        .setBounds(0, 0, creepDungeon.width, creepDungeon.height)
-        .centerOn(creepDungeon.spawn.x, creepDungeon.spawn.y);
+        .setBounds(0, 0, dungeon.width, dungeon.height)
+        .centerOn(dungeon.spawn.x, dungeon.spawn.y);
     }
   }
   private createActor(
@@ -131,7 +157,12 @@ export class ArenaScene extends Phaser.Scene {
       .ellipse(x, y - 3, 22, 8, 0x233e34, 0.35)
       .setDepth(-5);
     const sprite = this.add
-      .sprite(x, y, texture, 'idle_down_0')
+      .sprite(
+        x,
+        y,
+        texture,
+        texture.startsWith('desert_') ? 'idle_down_0.png' : 'idle_down_0',
+      )
       .setOrigin(...actorFootPivot(this, texture));
     const label = this.add
       .text(x, y + 5, '', {
@@ -152,21 +183,42 @@ export class ArenaScene extends Phaser.Scene {
       lastHp: Infinity,
     };
     const observeFrame = () => {
-      if (!view.creepArt && !sprite.texture.key.startsWith('hero_thieu_lam'))
-        return;
+      const creep =
+        !!view.creepArt || sprite.texture.key === creepPlaceholderTexture;
+      if (!creep && !sprite.texture.key.startsWith('hero_thieu_lam')) return;
       const key = sprite.anims.currentAnim?.key;
       if (!key) return;
-      const observed = view.creepArt
+      const observed = creep
         ? this.observedCreepFrames
         : this.observedHeroFrames;
       const frames = observed.get(key) ?? new Set<string>();
       frames.add(String(sprite.frame.name));
       observed.set(key, frames);
+      if (creep) {
+        const times = this.creepFrameTimes.get(key) ?? [];
+        if (
+          times.at(-1)?.id !== id ||
+          times.at(-1)?.frame !== String(sprite.frame.name)
+        )
+          times.push({
+            id,
+            frame: String(sprite.frame.name),
+            at: this.time.now,
+          });
+        if (times.length > 24) times.shift();
+        this.creepFrameTimes.set(key, times);
+      }
     };
     sprite.on(Phaser.Animations.Events.ANIMATION_START, observeFrame);
     sprite.on(Phaser.Animations.Events.ANIMATION_UPDATE, observeFrame);
-    sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+    sprite.on(Phaser.Animations.Events.ANIMATION_REPEAT, () => {
       if (!view.creepArt) return;
+      const key = sprite.anims.currentAnim?.key ?? '';
+      this.creepRepeats.set(key, (this.creepRepeats.get(key) ?? 0) + 1);
+    });
+    sprite.on(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+      if (!view.creepArt && sprite.texture.key !== creepPlaceholderTexture)
+        return;
       this.completedAnimations.push({
         id,
         key: sprite.anims.currentAnim?.key ?? '',
@@ -196,6 +248,7 @@ export class ArenaScene extends Phaser.Scene {
         basicId?: string;
         schoolId?: string;
         invasionWave?: number;
+        archetypeId?: string;
         castAbilityId?: string;
         statuses?: string;
       },
@@ -204,11 +257,19 @@ export class ArenaScene extends Phaser.Scene {
     ): void => {
       active.add(id);
       const art = enemy
-        ? arenaCreepArt(
+        ? (forestCreepArt(
+            this.cache.json.get(
+              'forest_creeps_manifest',
+            ) as ForestCreepManifest,
+            actor.archetypeId,
+            this.zoneId,
+          ) ??
+          desertCreepArt(this, actor.archetypeId, this.zoneId) ??
+          arenaCreepArt(
             this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest,
             actor.invasionWave,
             this.zoneId,
-          )
+          ))
         : undefined;
       const cast = !enemy
         ? this.vfx?.actorCast(
@@ -223,7 +284,7 @@ export class ArenaScene extends Phaser.Scene {
       const texture =
         cast?.texture ??
         (enemy
-          ? (art?.id ?? 'creep_outlaw')
+          ? (art?.id ?? creepPlaceholderTexture)
           : heroTexture(actor.basicId, actor.schoolId));
       const view =
         this.actors.get(id) ??
@@ -246,7 +307,14 @@ export class ArenaScene extends Phaser.Scene {
         .setDepth(view.sprite.y);
       if (view.sprite.texture.key !== texture)
         view.sprite
-          .setTexture(texture, cast ? cast.firstFrame : 'idle_down_0')
+          .setTexture(
+            texture,
+            cast
+              ? cast.firstFrame
+              : texture.startsWith('desert_')
+                ? 'idle_down_0.png'
+                : 'idle_down_0',
+          )
           .setOrigin(...(cast?.origin ?? actorFootPivot(this, texture)));
       const direction = facing(actor.fx, actor.fy);
       // Keep this prototype's authored one-shots complete across a short/late
@@ -263,7 +331,8 @@ export class ArenaScene extends Phaser.Scene {
             )
           : { state: actor.pose, direction };
       const key =
-        cast?.animation ?? `${texture}:${pose.state}:${pose.direction}`;
+        cast?.animation ??
+        `${texture}:${pose.state === 'cast' && this.vfx?.suppressesCastPose(id) ? 'idle' : pose.state}:${pose.direction}`;
       if (!enemy) view.sprite.setScale(cast?.scale ?? 1);
       if (art) {
         const alpha = view.playback.alpha(this.time.now, art.wave === 10);
@@ -272,7 +341,13 @@ export class ArenaScene extends Phaser.Scene {
         view.label.setVisible(false);
         view.bar.setVisible(actor.hp > 0);
       }
-      if (view.sprite.anims.currentAnim?.key !== key) view.sprite.play(key);
+      const newFeedback =
+        cast?.token.startsWith('feedback:') &&
+        view.sprite.getData('feedbackToken') !== cast.token;
+      if (view.sprite.anims.currentAnim?.key !== key || newFeedback)
+        view.sprite.play({ key, startFrame: cast?.startFrame ?? 0 });
+      view.sprite.anims.timeScale = cast?.timeScale ?? 1;
+      view.sprite.setData('feedbackToken', cast?.token ?? '');
       if (cast)
         this.vfx?.observeCharacter(texture, String(view.sprite.frame.name));
       const states = JSON.parse(actor.statuses ?? '[]') as Array<{
@@ -359,7 +434,12 @@ export class ArenaScene extends Phaser.Scene {
     direction: string,
   ): number {
     const anim = this.anims.get(`${texture}:${state}:${direction}`);
-    return anim ? (anim.frames.length * 1000) / anim.frameRate : 0;
+    return anim
+      ? anim.frames.reduce(
+          (total, frame) => total + (frame.duration || 1000 / anim.frameRate),
+          0,
+        )
+      : 0;
   }
   private creepAction(
     id: string,
@@ -381,14 +461,35 @@ export class ArenaScene extends Phaser.Scene {
     )
       view.sprite.play(`${view.creepArt.id}:${state}:${direction}`);
   }
-  combat(event: CombatEvent): void {
+  combat(event: CombatEvent & { zoneId?: string }): void {
     if (!this.ready || event.id <= this.lastEvent) return;
     this.lastEvent = event.id;
+    if (event.zoneId && event.zoneId !== this.zoneId) return;
     if (event.kind === 'attack')
       this.creepAction(event.sourceId, 'basic_attack');
     if (event.kind === 'hit') this.creepAction(event.targetId, 'hurt');
     if (event.kind === 'death') this.creepAction(event.targetId, 'death');
     const source = this.snapshot?.creeps.get(event.sourceId);
+    const forest =
+      source &&
+      source.zoneId === this.zoneId &&
+      forestCreepArt(
+        this.cache.json.get('forest_creeps_manifest') as ForestCreepManifest,
+        source.archetypeId,
+        this.zoneId,
+      );
+    if (forest && source) {
+      const direction = facing(event.fx ?? source.fx, event.fy ?? source.fy);
+      for (const cue of forestStrikeEffects(
+        forest.archetypeId,
+        event.kind,
+        event.abilityId,
+        direction,
+      )) {
+        const point = cue.anchor === 'source' ? source : event;
+        this.creepEffects?.contact(cue.id, point.x, point.y, event.sourceId);
+      }
+    }
     const impact =
       event.kind === 'hit' && source
         ? arenaCreepArt(
@@ -408,7 +509,7 @@ export class ArenaScene extends Phaser.Scene {
     } else this.vfx?.event(event);
     // A fast school can begin another valid A before the old server pose
     // returns to idle. Restart only on a new authoritative attack, never hits.
-    if (event.kind === 'attack') {
+    if (event.kind === 'attack' && !forest) {
       const sprite = this.actors.get(event.sourceId)?.sprite;
       if (sprite?.anims.currentAnim?.key.includes(':basic_attack:'))
         sprite.anims.restart();
@@ -427,19 +528,6 @@ export class ArenaScene extends Phaser.Scene {
         ) as Phaser.GameObjects.Image | null;
         statue?.setTint(0xffd083);
         this.time.delayedCall(140, () => statue?.clearTint());
-      }
-    }
-    if (event.kind === 'attack' && event.abilityId === 'cai_bang_bong') {
-      const hero = this.snapshot?.players.get(event.sourceId);
-      if (hero) {
-        const arc = this.add.graphics().setDepth(event.y + 0.4);
-        const angle = Math.atan2(hero.fy, hero.fx);
-        arc
-          .lineStyle(2, 0xf1d39b, 0.8)
-          .beginPath()
-          .arc(event.x, event.y - 16, 35, angle - 1, angle + 1)
-          .strokePath();
-        this.time.delayedCall(160, () => arc.destroy());
       }
     }
   }
@@ -473,6 +561,8 @@ export class ArenaScene extends Phaser.Scene {
           [...frames],
         ]),
       ),
+      creepRepeats: Object.fromEntries(this.creepRepeats),
+      creepFrameTimes: Object.fromEntries(this.creepFrameTimes),
       impacts: this.impacts.map((a) => ({ ...a })),
       arenaCreeps: (
         this.cache.json.get('arena_creeps_manifest') as
@@ -485,6 +575,15 @@ export class ArenaScene extends Phaser.Scene {
           (v) => `${a.id}:${v.state}:${v.direction}`,
         ),
       })),
+      forestCreeps: (
+        this.cache.json.get('forest_creeps_manifest') as
+          ForestCreepManifest | undefined
+      )?.assets.map((a) => ({
+        id: a.id,
+        archetypeId: a.archetypeId,
+        texture: this.textures.exists(a.id),
+        status: a.status,
+      })),
       actors: [...this.actors].map(([id, view]) => ({
         id,
         x: view.sprite.x,
@@ -493,6 +592,10 @@ export class ArenaScene extends Phaser.Scene {
         animation: view.sprite.anims.currentAnim?.key,
         frame: view.sprite.frame.name,
         texture: view.sprite.texture.key,
+        artStatus:
+          view.sprite.texture.key === creepPlaceholderTexture
+            ? 'placeholder'
+            : view.creepArt?.status,
         origin: [view.sprite.originX, view.sprite.originY],
         scale: [view.sprite.scaleX, view.sprite.scaleY],
         alpha: view.sprite.alpha,
@@ -507,6 +610,39 @@ export class ArenaScene extends Phaser.Scene {
         y: tree.y,
         depth: tree.depth,
       })),
+      bambooScenery: this.children.list
+        .filter(
+          (o) =>
+            o.name.startsWith('bamboo:') && !o.name.startsWith('bamboo:layer:'),
+        )
+        .map((o) => {
+          const image = o as Phaser.GameObjects.Image;
+          return {
+            name: image.frame.name,
+            texture: image.texture.key,
+            x: image.x,
+            y: image.y,
+            depth: image.depth,
+            origin: [image.originX, image.originY],
+            scale: [image.scaleX, image.scaleY],
+          };
+        }),
+      desertScenery: this.children.list
+        .filter(
+          (o) =>
+            o.name.startsWith('desert:') && !o.name.startsWith('desert:layer:'),
+        )
+        .map((o) => {
+          const image = o as Phaser.GameObjects.Image;
+          return {
+            name: image.frame.name,
+            x: image.x,
+            y: image.y,
+            depth: image.depth,
+            origin: [image.originX, image.originY],
+            scale: [image.scaleX, image.scaleY],
+          };
+        }),
       animations: this.anims.getAnimsFromTexture('hero_cai_bang'),
       art01: {
         textures: [
@@ -537,5 +673,8 @@ export class ArenaScene extends Phaser.Scene {
           : 'M1 marker only; no authoritative solid statue collider',
       },
     };
+  }
+  reviewFeedback(asset: string, tag: string, x: number, y: number) {
+    return this.vfx?.reviewFeedback(asset, tag, x, y);
   }
 }

@@ -14,7 +14,11 @@ import {
   enter,
   exit,
 } from './m3c1-helpers.js';
-const out = 'docs/evidence/m3c3';
+const out = process.env['VOLAM_FEEDBACK_V2_REVIEW']
+  ? 'docs/evidence/m3c3-feedback-v2-runtime'
+  : process.env['VOLAM_FEEDBACK_REVIEW']
+    ? 'docs/evidence/m3c3-feedback'
+    : 'docs/evidence/m3c3';
 test('M3C3 normal four-school progression, shared dungeon farming, read-only builds, mana sustain and arena defense', async ({
   browser,
 }) => {
@@ -76,35 +80,65 @@ test('M3C3 normal four-school progression, shared dungeon farming, read-only bui
       await close(p);
     }
     for (const p of pages) await enter(p);
-    for (let i = 0; i < 4; i++)
-      await moveTo(pages[i]!, 500 + i * 10, 320 + i * 12);
+    // Stage outside aggro while menus are checked, then approach together.
+    for (const p of pages) await moveTo(p, 240, 320);
     await menu(c);
     await expect(c.locator('#skill-readonly')).toContainText('Chỉ xem');
     await expect(c.locator('#basic-style')).toBeDisabled();
     await close(c);
+    await Promise.all(
+      pages.map((p, i) => moveTo(p, 550 + i * 10, 320 + i * 12)),
+    );
+    await Promise.all(
+      pages.map((p) => p.keyboard.press('ArrowRight', { delay: 70 })),
+    );
     const ids = await Promise.all(
         pages.map(async (p) => (await read(p)).sessionId),
       ),
       end = Date.now() + 35000;
     const participants = new Set<string>();
     const observeHits = async () => {
-      for (const p of pages)
-        for (const e of (await read(p)).events)
+      for (const s of await Promise.all(pages.map(read)))
+        for (const e of s.events)
           if (e.kind === 'hit' && ids.includes(e.sourceId))
             participants.add(e.sourceId);
     };
     await observeHits();
-    while (Date.now() < end && (await hero(c)).level < 3) {
-      for (const p of pages) {
-        if ((await hero(p)).hp <= 0) continue;
-        await p.locator('#game canvas').focus();
-        if ((await hero(p)).qCooldown === 0) await p.keyboard.press('KeyQ');
-        if ((await hero(p)).basicCooldown === 0) await p.keyboard.press('KeyA');
+    let stop = false;
+    const fighters = pages.map(async (p) => {
+      await p.locator('#game canvas').focus();
+      while (!stop && Date.now() < end) {
+        const h = await hero(p);
+        if (h.hp > 0) {
+          if (h.qCooldown === 0) await p.keyboard.press('KeyQ');
+          if (h.basicCooldown === 0) await p.keyboard.press('KeyA');
+        }
+        await p.waitForTimeout(80);
       }
-      await observeHits();
-      await c.waitForTimeout(200);
+    });
+    try {
+      while (Date.now() < end && (await hero(c)).level < 3) {
+        await observeHits();
+        await c.waitForTimeout(200);
+      }
+    } finally {
+      stop = true;
+      await Promise.all(fighters);
     }
     await observeHits();
+    await writeFile(
+      `${out}/four-player-natural-attempt.json`,
+      JSON.stringify(
+        {
+          heroes: await Promise.all(pages.map(hero)),
+          participants: [...participants],
+          state: await read(c),
+          errors,
+        },
+        null,
+        2,
+      ),
+    );
     expect((await hero(c)).level).toBeGreaterThanOrEqual(3);
     expect((await hero(c)).xp).toBeGreaterThan(0);
     const farm = await read(c);
@@ -161,14 +195,26 @@ test('M3C3 normal four-school progression, shared dungeon farming, read-only bui
               Math.hypot(b.x - h.x, b.y - h.y),
           )[0];
       if (e) {
-        await moveTo(
-          c,
-          Math.max(120, Math.min(1450, e.x - 25)),
-          Math.max(620, Math.min(900, e.y)),
-        );
-        await c.keyboard.press('ArrowRight', { delay: 40 });
-        await c.keyboard.press('KeyA');
-        if ((await hero(c)).qCooldown === 0) await c.keyboard.press('KeyQ');
+        if (h.hp > 0) {
+          // A moving enemy is not a fixed movement assertion. Steer briefly,
+          // then attack; never spend 25s trying to stand on a stale target point.
+          const dx = e.x - h.x,
+            dy = e.y - h.y;
+          const key =
+            Math.abs(dx) > Math.abs(dy)
+              ? dx < 0
+                ? 'ArrowLeft'
+                : 'ArrowRight'
+              : dy < 0
+                ? 'ArrowUp'
+                : 'ArrowDown';
+          await c.keyboard.press(key, {
+            delay: Math.hypot(dx, dy) > 65 ? 160 : 40,
+          });
+          const now = await hero(c);
+          if (now.basicCooldown === 0) await c.keyboard.press('KeyA');
+          if (now.qCooldown === 0) await c.keyboard.press('KeyQ');
+        }
       }
       const current = await read(c);
       defended = current.events.some(
@@ -235,9 +281,15 @@ test('M3C3 six-player natural combat: four schools keep effects owned, feet/pivo
       const p = pages[i]!,
         skill =
           schools[i] === 'thieu_lam'
-            ? 'toan_phong_thoai'
+            ? process.env['VOLAM_FEEDBACK_V2_REVIEW']
+              ? i === 0
+                ? 'la_han_quyen'
+                : 'vi_da_quyen'
+              : 'toan_phong_thoai'
             : schools[i] === 'vo_dang'
-              ? 'bat_quai_kiem_tran'
+              ? process.env['VOLAM_FEEDBACK_V2_REVIEW']
+                ? 'luong_nghi_thu'
+                : 'bat_quai_kiem_tran'
               : schools[i] === 'thien_son'
                 ? 'luc_duong_chuong'
                 : 'hoa_van_chuong';
@@ -245,14 +297,17 @@ test('M3C3 six-player natural combat: four schools keep effects owned, feet/pivo
       await loadout(p, [skill, '', '', '']);
       await upgrade(p, skill);
       await close(p);
-      await enter(p);
     }
+    await Promise.all(pages.map(enter));
     // Stage safely, then approach together; nobody idles alone in six-player aggro.
     for (const p of pages) await moveTo(p, 240, 320);
     await Promise.all(
       pages.map((p, i) =>
-        moveTo(p, 500 + (i % 3) * 10, 310 + Math.floor(i / 3) * 20),
+        moveTo(p, 550 + (i % 3) * 10, 310 + Math.floor(i / 3) * 20),
       ),
+    );
+    await Promise.all(
+      pages.map((p) => p.keyboard.press('ArrowRight', { delay: 70 })),
     );
     await Promise.all(
       pages.map(async (p) => {
@@ -267,6 +322,10 @@ test('M3C3 six-player natural combat: four schools keep effects owned, feet/pivo
           (await read(first)).events.filter((e) => e.kind === 'hit').length,
       )
       .toBeGreaterThan(0);
+    if (process.env['VOLAM_FEEDBACK_V2_REVIEW'])
+      await first.screenshot({
+        path: `${out}/six-player-natural-contact-1920.png`,
+      });
     const end = Date.now() + 35000;
     while (
       Date.now() < end &&

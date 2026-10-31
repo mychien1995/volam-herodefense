@@ -1,7 +1,18 @@
 import Phaser from 'phaser';
+import { preloadForestCreepArt, registerForestCreepArt } from './forest-art.js';
+import type { ForestCreepManifest } from './forest-creeps.js';
+import { forestArtNotice } from './forest-creeps.js';
+import {
+  preloadDesertArt,
+  registerDesertArt,
+  type DesertManifest,
+} from './desert-art.js';
 import { preloadBambooForestArt } from './dungeon-presentation.js';
 import { preloadSkillArt, registerSkillArt } from './skill-vfx.js';
 import type { ArenaCreepManifest } from './arena-creeps.js';
+// Retained M1 prototype, not an arena production creep or finished forest art.
+export const creepPlaceholderTexture = 'creep_outlaw';
+export const bambooCreepArtNotice = forestArtNotice([]);
 export const actorSheets = [
   { id: 'hero_cai_bang', folder: 'characters' },
   { id: 'hero_cai_bang_chuong', folder: 'characters' },
@@ -60,7 +71,9 @@ export function heroTexture(
 }
 export { facing } from './facing.js';
 export function preloadArt(scene: Phaser.Scene): void {
+  preloadForestCreepArt(scene);
   preloadBambooForestArt(scene);
+  preloadDesertArt(scene);
   preloadSkillArt(scene);
   scene.load.pack('arena_creep_pack', '/assets/arena_creeps/pack.json');
   scene.load.image('arena_ground_art01', '/assets/arena_v2/ground.png');
@@ -143,11 +156,20 @@ export function actorFootPivot(
     ArenaCreepManifest | undefined;
   const entry =
     manifest.assets.find((asset) => asset.id === id) ??
-    creeps?.assets.find((asset) => asset.id === id);
-  if (!entry) throw new Error(`Missing actor pivot: ${id}`);
-  return entry.footPivot;
+    creeps?.assets.find((asset) => asset.id === id) ??
+    (
+      scene.cache.json.get('desert_manifest') as DesertManifest | undefined
+    )?.assets.find((a) => a.id === id);
+  const forest = (
+    scene.cache.json.get('forest_creeps_manifest') as
+      ForestCreepManifest | undefined
+  )?.assets.find((a) => a.id === id);
+  if (!entry && !forest) throw new Error(`Missing actor pivot: ${id}`);
+  return (entry ?? forest)!.footPivot;
 }
 export function registerArt(scene: Phaser.Scene): void {
+  registerForestCreepArt(scene);
+  registerDesertArt(scene);
   registerSkillArt(scene);
   for (const id of [
     'arena_ground_art01',

@@ -155,18 +155,19 @@ describe('M1 manual attacks and the two data-driven abilities', () => {
     expect(a.enemy.hp).toBe(120);
     expect(a.world.projectiles.size).toBe(0);
   });
-  it('Hỏa Vân Chưởng emits exactly three paced straight shots, spends mana once and respects cooldown', () => {
+  it('Hỏa Vân Chưởng emits three simultaneous divergent straight shots, spends mana once and respects cooldown', () => {
     const a = setup();
     a.input({ kind: 'cast', slot: 0 });
     a.input({ kind: 'cast', slot: 0 });
     a.steps(1);
     expect(a.hero.mana).toBe(82);
-    expect(a.world.projectiles.size).toBe(1);
+    expect(a.world.projectiles.size).toBe(3);
     a.steps(7);
     expect(a.world.projectiles.size).toBe(3);
     expect(
       [...a.world.projectiles.values()].every(
-        (shot) => shot.vx === 360 && shot.vy === 0,
+        (shot) =>
+          shot.vx > 0 && Math.abs(Math.hypot(shot.vx, shot.vy) - 360) < 0.001,
       ),
     ).toBe(true);
   });

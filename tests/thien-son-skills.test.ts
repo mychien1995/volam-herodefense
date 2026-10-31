@@ -126,12 +126,12 @@ describe('M3C1 authoritative wind mechanics', () => {
       expect(h.hero.mana).toBe(100);
     },
   );
-  it('Phiến is a wide melee arc with 70% cleave and no projectile; Đao is faster, narrower and stronger', () => {
+  it('Phiến is a two-leg ranged fan; Đao retains narrow melee and reduced cleave', () => {
     const f = fixture();
     f.input({ kind: 'basic' });
-    f.steps(1);
-    expect(f.hits()[0]!.damage).toBe(24);
-    expect(f.hits(f.enemies[1]!.id)[0]!.damage).toBe(17);
+    f.steps(40);
+    expect(f.hits().map((e) => e.damage)).toEqual([12, 12]);
+    expect(f.hits(f.enemies[1]!.id)).toHaveLength(0);
     expect(f.enemies[2]!.hp).toBe(10000);
     expect(f.world.projectiles.size).toBe(0);
     const g = fixture();
@@ -140,7 +140,7 @@ describe('M3C1 authoritative wind mechanics', () => {
     g.steps(1);
     expect(g.hits()[0]!.damage).toBe(30);
     expect(g.hits(g.enemies[1]!.id)[0]!.damage).toBe(9);
-    expect(g.hero.cooldown).toBeLessThan(f.hero.cooldown);
+    expect(g.config.basics['thien_son_dao']!.cooldownTicks).toBe(9);
     g.enemies[0]!.x = 500;
     g.enemies[1]!.y = 370;
     g.steps(15);
@@ -149,16 +149,16 @@ describe('M3C1 authoritative wind mechanics', () => {
     expect(g.hits()).toHaveLength(1);
     expect(g.world.projectiles.size).toBe(0);
   });
-  it('Liên Hoa hits four frontal pulses at ticks 1/5/9/13, never behind or through a wall', () => {
+  it('Liên Hoa hits six frontal pulses at ticks 1/6/11/16/21/26, never behind or through a wall', () => {
     const f = fixture();
     f.cast();
     expect(f.hits()).toHaveLength(1);
     f.steps(3);
     expect(f.hits()).toHaveLength(1);
-    f.steps(1);
+    f.steps(2);
     expect(f.hits()).toHaveLength(2);
-    f.steps(16);
-    expect(f.hits().map((e) => e.damage)).toEqual([16, 16, 16, 16]);
+    f.steps(25);
+    expect(f.hits().map((e) => e.damage)).toEqual([16, 16, 16, 16, 16, 16]);
     expect(f.enemies[2]!.hp).toBe(10000);
     const g = fixture();
     g.config.collision = [{ x: 320, y: 250, width: 5, height: 100 }];
@@ -184,12 +184,12 @@ describe('M3C1 authoritative wind mechanics', () => {
     expect(g.hits().length).toBeGreaterThan(0);
     expect(g.hits().length).toBeLessThan(6);
   });
-  it('Lưu Phong is non-damaging, directional, stops at thin terrain and stays in zone bounds', () => {
+  it('Lưu Phong damages crossed targets once, stops at thin terrain and stays in zone bounds', () => {
     const f = fixture('luu_phong_bo');
     f.cast();
     f.steps(10);
     expect(f.hero.x).toBeCloseTo(440);
-    expect(f.hits()).toHaveLength(0);
+    expect(f.hits().map((e) => e.damage)).toEqual([30]);
     const g = fixture('luu_phong_bo');
     g.config.collision = [{ x: 330, y: 250, width: 1, height: 100 }];
     g.cast();
@@ -232,13 +232,15 @@ describe('M3C1 authoritative wind mechanics', () => {
       before,
     );
   });
-  it('Bách Phiến hits a larger full circle ten times and follows its owner while moving', () => {
+  it('Bách Phiến has twelve radial pulses plus eight-way projectiles', () => {
     const f = fixture('bach_phien_phong_bao');
     f.enemies[0]!.x = 410;
     f.cast();
-    f.steps(75);
-    expect(f.hits()).toHaveLength(10);
-    expect(f.hits(f.enemies[2]!.id)).toHaveLength(10);
+    f.steps(120);
+    expect(f.hits().filter((e) => e.damage === 22)).toHaveLength(12);
+    expect(
+      f.hits(f.enemies[2]!.id).filter((e) => e.damage === 22),
+    ).toHaveLength(12);
     expect(f.world.actions).toHaveLength(0);
     expect(f.world.projectiles.size).toBe(0);
   });
@@ -266,10 +268,10 @@ describe('M3C1 authoritative wind mechanics', () => {
     );
     f.cast();
     f.steps(12);
-    expect(f.hits().map((e) => e.damage)).toEqual([42, 30]);
+    expect(f.hits().map((e) => e.damage)).toEqual([42, 42]);
     expect(f.enemies[2]!.hp).toBe(10000);
   });
-  it('Phong Ảnh steps then evades one incoming hit and counters once; expiration restores incoming damage', () => {
+  it('Phong Ảnh counters once after its dash without extending dash damage immunity', () => {
     const f = fixture('phong_anh_hoan_vi');
     f.cast();
     f.steps(4);
@@ -277,11 +279,11 @@ describe('M3C1 authoritative wind mechanics', () => {
       enemy = f.enemies[0]!;
     enemy.x = f.hero.x + 25;
     hurt(f.world, f.hero, enemy.id, 'enemy_basic', 10, f.config);
-    expect(f.hero.hp).toBe(hp);
+    expect(f.hero.hp).toBe(hp - 10);
     expect(enemy.hp).toBe(9940);
     expect(hasStatus(f.hero, 'counter', f.world.tick)).toBe(false);
     hurt(f.world, f.hero, enemy.id, 'enemy_basic', 10, f.config);
-    expect(f.hero.hp).toBe(hp - 10);
+    expect(f.hero.hp).toBe(hp - 20);
     const g = fixture('phong_anh_hoan_vi');
     g.cast();
     g.steps(30);
@@ -297,9 +299,10 @@ describe('M3C1 authoritative wind mechanics', () => {
     expect(f.hits()[0]!.damage).toBe(50);
     expect(f.enemies[0]!.statuses ?? []).toHaveLength(0);
     f.steps(15);
+    f.hero.basicId = 'thien_son_dao';
     f.input({ kind: 'basic' });
     f.steps(1);
-    expect(f.hits().at(-1)!.damage).toBe(12);
+    expect(f.hits().at(-1)!.damage).toBe(15);
   });
   it('Bách Liệt is ten fast forward hits plus a finisher, with no rear damage or network-driven extra hits', () => {
     const f = fixture('bach_liet_thien_kich');

@@ -1,0 +1,5712 @@
+{
+  "sixPlayers": true,
+  "collision": {
+    "build": {
+      "enabled": true,
+      "revision": 0,
+      "earned": 1,
+      "allocated": 0,
+      "available": 1,
+      "surplus": 0,
+      "ranks": {},
+      "stats": {
+        "maxHp": 160,
+        "maxMana": 100,
+        "attackPower": 28,
+        "defense": 0,
+        "attackSpeed": 1,
+        "movementSpeed": 160,
+        "critChance": 0.10000000149011612,
+        "critMultiplier": 1.5,
+        "manaRegen": 6,
+        "cooldownReduction": 0,
+        "hpRegen": 0
+      },
+      "sources": "{\"base\":{\"maxHp\":160,\"maxMana\":100,\"attackPower\":28,\"defense\":0,\"attackSpeed\":1,\"movementSpeed\":160,\"critChance\":0.1,\"critMultiplier\":1.5,\"manaRegen\":6,\"cooldownReduction\":0,\"hpRegen\":0},\"growth\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"innate\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"surplus\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"equipment\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"temporary\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0}}"
+    },
+    "x": 437.3333435058594,
+    "y": 250.6666717529297,
+    "hp": 160,
+    "maxHp": 160,
+    "fx": 0,
+    "fy": -1,
+    "pose": "walk",
+    "statuses": "[]",
+    "castAbilityId": "",
+    "combos": "[]",
+    "zoneId": "forest_shared",
+    "respawnTicks": 0,
+    "nickname": "Forest 1",
+    "schoolId": "cai_bang",
+    "confirmed": true,
+    "connected": true,
+    "checks": 0,
+    "mana": 100,
+    "maxMana": 100,
+    "level": 1,
+    "xp": 0,
+    "gold": 0,
+    "skillPoints": 1,
+    "basicId": "cai_bang_bong",
+    "lastSequence": 50,
+    "basicCooldown": 0,
+    "qCooldown": 0,
+    "wCooldown": 0,
+    "eCooldown": 0,
+    "rCooldown": 0,
+    "qSkill": "",
+    "wSkill": "",
+    "eSkill": "",
+    "rSkill": ""
+  },
+  "behind": {
+    "ready": true,
+    "sceneTime": 36952.8,
+    "zoneId": "forest_shared",
+    "damage": {
+      "history": [],
+      "active": []
+    },
+    "skills": {
+      "feedback": {
+        "loadedComponents": 45,
+        "registeredAnimations": 571,
+        "played": [],
+        "observedFrames": [],
+        "observedCount": 0,
+        "completed": {},
+        "frameTimes": {},
+        "events": [],
+        "persistent": [],
+        "projectiles": [],
+        "transient": [],
+        "poses": []
+      },
+      "loadedComponents": 87,
+      "registeredAnimations": 596,
+      "played": [],
+      "transient": 0,
+      "persistent": [],
+      "projectiles": [],
+      "observedFrames": []
+    },
+    "creepEffects": {
+      "played": [],
+      "observedFrames": [],
+      "contacts": 0,
+      "ambient": [],
+      "projectiles": []
+    },
+    "interactions": [
+      {
+        "id": "dungeon-exit",
+        "x": 160,
+        "y": 320
+      }
+    ],
+    "rotation": 0,
+    "zoom": 1,
+    "roundPixels": true,
+    "camera": {
+      "x": 0,
+      "y": 0
+    },
+    "completedAnimations": [],
+    "observedHeroFrames": {},
+    "observedCreepFrames": {
+      "creep_outlaw:idle:up": [
+        "idle_up_0",
+        "idle_up_1",
+        "idle_up_2",
+        "idle_up_3"
+      ],
+      "creep_outlaw:walk:down": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "creep_outlaw:idle:down": [
+        "idle_down_0",
+        "idle_down_1",
+        "idle_down_2",
+        "idle_down_3"
+      ],
+      "creep_outlaw:walk:up": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "creep_outlaw:walk:left": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ]
+    },
+    "creepRepeats": {},
+    "creepFrameTimes": {
+      "creep_outlaw:idle:up": [
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_up_3",
+          "at": 30336.4
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_3",
+          "at": 30336.4
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_3",
+          "at": 30336.4
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_up_0",
+          "at": 30436.4
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_0",
+          "at": 30436.4
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_0",
+          "at": 30436.4
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_up_1",
+          "at": 30553.1
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_1",
+          "at": 30553.1
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_1",
+          "at": 30553.1
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_up_2",
+          "at": 30686.4
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_2",
+          "at": 30686.4
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_2",
+          "at": 30686.4
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_0",
+          "at": 36002.8
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_0",
+          "at": 36002.8
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_1",
+          "at": 36102.8
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_1",
+          "at": 36102.8
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_2",
+          "at": 36219.5
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_2",
+          "at": 36219.5
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_3",
+          "at": 36369.5
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_3",
+          "at": 36369.5
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_0",
+          "at": 36469.5
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_0",
+          "at": 36469.5
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_1",
+          "at": 36586.1
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_1",
+          "at": 36586.1
+        }
+      ],
+      "creep_outlaw:walk:down": [
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_1",
+          "at": 32453
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_1",
+          "at": 32453
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_1",
+          "at": 32453
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_2",
+          "at": 32569.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_2",
+          "at": 32569.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_2",
+          "at": 32569.6
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_3",
+          "at": 32652.9
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_3",
+          "at": 32652.9
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_3",
+          "at": 32652.9
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_0",
+          "at": 32769.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_0",
+          "at": 32769.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_0",
+          "at": 32769.6
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_1",
+          "at": 32853
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_1",
+          "at": 32853
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_1",
+          "at": 32853
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_2",
+          "at": 32969.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_2",
+          "at": 32969.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_2",
+          "at": 32969.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_0",
+          "at": 36736.1
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_0",
+          "at": 36736.1
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_1",
+          "at": 36802.8
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_1",
+          "at": 36802.8
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_2",
+          "at": 36919.5
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_2",
+          "at": 36919.5
+        }
+      ],
+      "creep_outlaw:idle:down": [
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_down_2",
+          "at": 27703.1
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_2",
+          "at": 27703.1
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_2",
+          "at": 27703.1
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_down_0",
+          "at": 33003
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_0",
+          "at": 33003
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_0",
+          "at": 33003
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_down_1",
+          "at": 33119.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_1",
+          "at": 33119.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_1",
+          "at": 33119.6
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_down_2",
+          "at": 33236.3
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_2",
+          "at": 33236.3
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_2",
+          "at": 33236.3
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_down_3",
+          "at": 33353
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_3",
+          "at": 33353
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_3",
+          "at": 33353
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_down_0",
+          "at": 33469.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_0",
+          "at": 33469.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_0",
+          "at": 33469.6
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_down_1",
+          "at": 33619.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_1",
+          "at": 33619.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_1",
+          "at": 33619.6
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_down_2",
+          "at": 33736.3
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_2",
+          "at": 33736.3
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_2",
+          "at": 33736.3
+        }
+      ],
+      "creep_outlaw:walk:up": [
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_up_2",
+          "at": 34952.8
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_0",
+          "at": 34952.8
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_0",
+          "at": 34952.8
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_up_3",
+          "at": 35036.2
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_1",
+          "at": 35069.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_1",
+          "at": 35069.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_2",
+          "at": 35152.8
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_2",
+          "at": 35152.8
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_3",
+          "at": 35252.9
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_3",
+          "at": 35252.9
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_0",
+          "at": 35336.2
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_0",
+          "at": 35336.2
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_1",
+          "at": 35452.9
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_1",
+          "at": 35452.9
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_2",
+          "at": 35552.8
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_2",
+          "at": 35552.8
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_3",
+          "at": 35669.5
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_3",
+          "at": 35669.5
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_0",
+          "at": 35736.2
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_0",
+          "at": 35736.2
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_1",
+          "at": 35852.9
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_1",
+          "at": 35852.9
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_2",
+          "at": 35952.8
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_2",
+          "at": 35952.8
+        }
+      ],
+      "creep_outlaw:walk:left": [
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_0",
+          "at": 34419.6
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_1",
+          "at": 34502.9
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_2",
+          "at": 34619.5
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_3",
+          "at": 34686.3
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_0",
+          "at": 35152.8
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_1",
+          "at": 35219.5
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_2",
+          "at": 35336.2
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_3",
+          "at": 35402.8
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_0",
+          "at": 35519.6
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_1",
+          "at": 35636.2
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_2",
+          "at": 35736.2
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_3",
+          "at": 35819.5
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_0",
+          "at": 35919.5
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_1",
+          "at": 36036.2
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_2",
+          "at": 36102.8
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_3",
+          "at": 36219.5
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_0",
+          "at": 36336.2
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_1",
+          "at": 36436.2
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_2",
+          "at": 36519.5
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_3",
+          "at": 36619.5
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_0",
+          "at": 36736.1
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_1",
+          "at": 36802.8
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_2",
+          "at": 36919.5
+        }
+      ]
+    },
+    "impacts": [],
+    "arenaCreeps": [
+      {
+        "id": "creep_wild_dog",
+        "wave": 1,
+        "texture": true,
+        "animations": [
+          "creep_wild_dog:idle:down",
+          "creep_wild_dog:walk:down",
+          "creep_wild_dog:basic_attack:down",
+          "creep_wild_dog:idle:left",
+          "creep_wild_dog:walk:left",
+          "creep_wild_dog:basic_attack:left",
+          "creep_wild_dog:idle:right",
+          "creep_wild_dog:walk:right",
+          "creep_wild_dog:basic_attack:right",
+          "creep_wild_dog:idle:up",
+          "creep_wild_dog:walk:up",
+          "creep_wild_dog:basic_attack:up",
+          "creep_wild_dog:hurt:down",
+          "creep_wild_dog:death:down",
+          "creep_wild_dog:hurt:left",
+          "creep_wild_dog:death:left",
+          "creep_wild_dog:hurt:right",
+          "creep_wild_dog:death:right",
+          "creep_wild_dog:hurt:up",
+          "creep_wild_dog:death:up"
+        ]
+      },
+      {
+        "id": "creep_bandit_grunt",
+        "wave": 2,
+        "texture": true,
+        "animations": [
+          "creep_bandit_grunt:idle:down",
+          "creep_bandit_grunt:walk:down",
+          "creep_bandit_grunt:basic_attack:down",
+          "creep_bandit_grunt:idle:left",
+          "creep_bandit_grunt:walk:left",
+          "creep_bandit_grunt:basic_attack:left",
+          "creep_bandit_grunt:idle:right",
+          "creep_bandit_grunt:walk:right",
+          "creep_bandit_grunt:basic_attack:right",
+          "creep_bandit_grunt:idle:up",
+          "creep_bandit_grunt:walk:up",
+          "creep_bandit_grunt:basic_attack:up",
+          "creep_bandit_grunt:hurt:down",
+          "creep_bandit_grunt:death:down",
+          "creep_bandit_grunt:hurt:left",
+          "creep_bandit_grunt:death:left",
+          "creep_bandit_grunt:hurt:right",
+          "creep_bandit_grunt:death:right",
+          "creep_bandit_grunt:hurt:up",
+          "creep_bandit_grunt:death:up"
+        ]
+      },
+      {
+        "id": "creep_bandit_swordsman",
+        "wave": 3,
+        "texture": true,
+        "animations": [
+          "creep_bandit_swordsman:idle:down",
+          "creep_bandit_swordsman:walk:down",
+          "creep_bandit_swordsman:basic_attack:down",
+          "creep_bandit_swordsman:idle:left",
+          "creep_bandit_swordsman:walk:left",
+          "creep_bandit_swordsman:basic_attack:left",
+          "creep_bandit_swordsman:idle:right",
+          "creep_bandit_swordsman:walk:right",
+          "creep_bandit_swordsman:basic_attack:right",
+          "creep_bandit_swordsman:idle:up",
+          "creep_bandit_swordsman:walk:up",
+          "creep_bandit_swordsman:basic_attack:up",
+          "creep_bandit_swordsman:hurt:down",
+          "creep_bandit_swordsman:death:down",
+          "creep_bandit_swordsman:hurt:left",
+          "creep_bandit_swordsman:death:left",
+          "creep_bandit_swordsman:hurt:right",
+          "creep_bandit_swordsman:death:right",
+          "creep_bandit_swordsman:hurt:up",
+          "creep_bandit_swordsman:death:up"
+        ]
+      },
+      {
+        "id": "creep_bandit_archer",
+        "wave": 4,
+        "texture": true,
+        "animations": [
+          "creep_bandit_archer:idle:down",
+          "creep_bandit_archer:walk:down",
+          "creep_bandit_archer:basic_attack:down",
+          "creep_bandit_archer:idle:left",
+          "creep_bandit_archer:walk:left",
+          "creep_bandit_archer:basic_attack:left",
+          "creep_bandit_archer:idle:right",
+          "creep_bandit_archer:walk:right",
+          "creep_bandit_archer:basic_attack:right",
+          "creep_bandit_archer:idle:up",
+          "creep_bandit_archer:walk:up",
+          "creep_bandit_archer:basic_attack:up",
+          "creep_bandit_archer:hurt:down",
+          "creep_bandit_archer:death:down",
+          "creep_bandit_archer:hurt:left",
+          "creep_bandit_archer:death:left",
+          "creep_bandit_archer:hurt:right",
+          "creep_bandit_archer:death:right",
+          "creep_bandit_archer:hurt:up",
+          "creep_bandit_archer:death:up"
+        ]
+      },
+      {
+        "id": "creep_black_clad_assassin",
+        "wave": 5,
+        "texture": true,
+        "animations": [
+          "creep_black_clad_assassin:idle:down",
+          "creep_black_clad_assassin:walk:down",
+          "creep_black_clad_assassin:basic_attack:down",
+          "creep_black_clad_assassin:hurt:down",
+          "creep_black_clad_assassin:death:down",
+          "creep_black_clad_assassin:idle:left",
+          "creep_black_clad_assassin:walk:left",
+          "creep_black_clad_assassin:basic_attack:left",
+          "creep_black_clad_assassin:hurt:left",
+          "creep_black_clad_assassin:death:left",
+          "creep_black_clad_assassin:idle:right",
+          "creep_black_clad_assassin:walk:right",
+          "creep_black_clad_assassin:basic_attack:right",
+          "creep_black_clad_assassin:hurt:right",
+          "creep_black_clad_assassin:death:right",
+          "creep_black_clad_assassin:idle:up",
+          "creep_black_clad_assassin:walk:up",
+          "creep_black_clad_assassin:basic_attack:up",
+          "creep_black_clad_assassin:hurt:up",
+          "creep_black_clad_assassin:death:up"
+        ]
+      },
+      {
+        "id": "creep_corrupted_monk",
+        "wave": 6,
+        "texture": true,
+        "animations": [
+          "creep_corrupted_monk:idle:down",
+          "creep_corrupted_monk:walk:down",
+          "creep_corrupted_monk:basic_attack:down",
+          "creep_corrupted_monk:hurt:down",
+          "creep_corrupted_monk:death:down",
+          "creep_corrupted_monk:idle:left",
+          "creep_corrupted_monk:walk:left",
+          "creep_corrupted_monk:basic_attack:left",
+          "creep_corrupted_monk:hurt:left",
+          "creep_corrupted_monk:death:left",
+          "creep_corrupted_monk:idle:right",
+          "creep_corrupted_monk:walk:right",
+          "creep_corrupted_monk:basic_attack:right",
+          "creep_corrupted_monk:hurt:right",
+          "creep_corrupted_monk:death:right",
+          "creep_corrupted_monk:idle:up",
+          "creep_corrupted_monk:walk:up",
+          "creep_corrupted_monk:basic_attack:up",
+          "creep_corrupted_monk:hurt:up",
+          "creep_corrupted_monk:death:up"
+        ]
+      },
+      {
+        "id": "creep_skeleton_swordsman",
+        "wave": 7,
+        "texture": true,
+        "animations": [
+          "creep_skeleton_swordsman:idle:down",
+          "creep_skeleton_swordsman:walk:down",
+          "creep_skeleton_swordsman:basic_attack:down",
+          "creep_skeleton_swordsman:hurt:down",
+          "creep_skeleton_swordsman:death:down",
+          "creep_skeleton_swordsman:idle:left",
+          "creep_skeleton_swordsman:walk:left",
+          "creep_skeleton_swordsman:basic_attack:left",
+          "creep_skeleton_swordsman:hurt:left",
+          "creep_skeleton_swordsman:death:left",
+          "creep_skeleton_swordsman:idle:right",
+          "creep_skeleton_swordsman:walk:right",
+          "creep_skeleton_swordsman:basic_attack:right",
+          "creep_skeleton_swordsman:hurt:right",
+          "creep_skeleton_swordsman:death:right",
+          "creep_skeleton_swordsman:idle:up",
+          "creep_skeleton_swordsman:walk:up",
+          "creep_skeleton_swordsman:basic_attack:up",
+          "creep_skeleton_swordsman:hurt:up",
+          "creep_skeleton_swordsman:death:up"
+        ]
+      },
+      {
+        "id": "creep_skeleton_archer",
+        "wave": 8,
+        "texture": true,
+        "animations": [
+          "creep_skeleton_archer:idle:down",
+          "creep_skeleton_archer:walk:down",
+          "creep_skeleton_archer:basic_attack:down",
+          "creep_skeleton_archer:hurt:down",
+          "creep_skeleton_archer:death:down",
+          "creep_skeleton_archer:idle:left",
+          "creep_skeleton_archer:walk:left",
+          "creep_skeleton_archer:basic_attack:left",
+          "creep_skeleton_archer:hurt:left",
+          "creep_skeleton_archer:death:left",
+          "creep_skeleton_archer:idle:right",
+          "creep_skeleton_archer:walk:right",
+          "creep_skeleton_archer:basic_attack:right",
+          "creep_skeleton_archer:hurt:right",
+          "creep_skeleton_archer:death:right",
+          "creep_skeleton_archer:idle:up",
+          "creep_skeleton_archer:walk:up",
+          "creep_skeleton_archer:basic_attack:up",
+          "creep_skeleton_archer:hurt:up",
+          "creep_skeleton_archer:death:up"
+        ]
+      },
+      {
+        "id": "creep_jiangshi_zombie",
+        "wave": 9,
+        "texture": true,
+        "animations": [
+          "creep_jiangshi_zombie:idle:down",
+          "creep_jiangshi_zombie:walk:down",
+          "creep_jiangshi_zombie:basic_attack:down",
+          "creep_jiangshi_zombie:hurt:down",
+          "creep_jiangshi_zombie:death:down",
+          "creep_jiangshi_zombie:idle:left",
+          "creep_jiangshi_zombie:walk:left",
+          "creep_jiangshi_zombie:basic_attack:left",
+          "creep_jiangshi_zombie:hurt:left",
+          "creep_jiangshi_zombie:death:left",
+          "creep_jiangshi_zombie:idle:right",
+          "creep_jiangshi_zombie:walk:right",
+          "creep_jiangshi_zombie:basic_attack:right",
+          "creep_jiangshi_zombie:hurt:right",
+          "creep_jiangshi_zombie:death:right",
+          "creep_jiangshi_zombie:idle:up",
+          "creep_jiangshi_zombie:walk:up",
+          "creep_jiangshi_zombie:basic_attack:up",
+          "creep_jiangshi_zombie:hurt:up",
+          "creep_jiangshi_zombie:death:up"
+        ]
+      },
+      {
+        "id": "creep_vengeful_spirit",
+        "wave": 10,
+        "texture": true,
+        "animations": [
+          "creep_vengeful_spirit:idle:down",
+          "creep_vengeful_spirit:walk:down",
+          "creep_vengeful_spirit:basic_attack:down",
+          "creep_vengeful_spirit:hurt:down",
+          "creep_vengeful_spirit:death:down",
+          "creep_vengeful_spirit:idle:left",
+          "creep_vengeful_spirit:walk:left",
+          "creep_vengeful_spirit:basic_attack:left",
+          "creep_vengeful_spirit:hurt:left",
+          "creep_vengeful_spirit:death:left",
+          "creep_vengeful_spirit:idle:right",
+          "creep_vengeful_spirit:walk:right",
+          "creep_vengeful_spirit:basic_attack:right",
+          "creep_vengeful_spirit:hurt:right",
+          "creep_vengeful_spirit:death:right",
+          "creep_vengeful_spirit:idle:up",
+          "creep_vengeful_spirit:walk:up",
+          "creep_vengeful_spirit:basic_attack:up",
+          "creep_vengeful_spirit:hurt:up",
+          "creep_vengeful_spirit:death:up"
+        ]
+      },
+      {
+        "id": "creep_armored_skeleton",
+        "wave": 11,
+        "texture": true,
+        "animations": [
+          "creep_armored_skeleton:idle:down",
+          "creep_armored_skeleton:walk:down",
+          "creep_armored_skeleton:basic_attack:down",
+          "creep_armored_skeleton:hurt:down",
+          "creep_armored_skeleton:death:down",
+          "creep_armored_skeleton:idle:left",
+          "creep_armored_skeleton:walk:left",
+          "creep_armored_skeleton:basic_attack:left",
+          "creep_armored_skeleton:hurt:left",
+          "creep_armored_skeleton:death:left",
+          "creep_armored_skeleton:idle:right",
+          "creep_armored_skeleton:walk:right",
+          "creep_armored_skeleton:basic_attack:right",
+          "creep_armored_skeleton:hurt:right",
+          "creep_armored_skeleton:death:right",
+          "creep_armored_skeleton:idle:up",
+          "creep_armored_skeleton:walk:up",
+          "creep_armored_skeleton:basic_attack:up",
+          "creep_armored_skeleton:hurt:up",
+          "creep_armored_skeleton:death:up"
+        ]
+      },
+      {
+        "id": "creep_stone_golem",
+        "wave": 12,
+        "texture": true,
+        "animations": [
+          "creep_stone_golem:idle:down",
+          "creep_stone_golem:walk:down",
+          "creep_stone_golem:basic_attack:down",
+          "creep_stone_golem:hurt:down",
+          "creep_stone_golem:death:down",
+          "creep_stone_golem:idle:left",
+          "creep_stone_golem:walk:left",
+          "creep_stone_golem:basic_attack:left",
+          "creep_stone_golem:hurt:left",
+          "creep_stone_golem:death:left",
+          "creep_stone_golem:idle:right",
+          "creep_stone_golem:walk:right",
+          "creep_stone_golem:basic_attack:right",
+          "creep_stone_golem:hurt:right",
+          "creep_stone_golem:death:right",
+          "creep_stone_golem:idle:up",
+          "creep_stone_golem:walk:up",
+          "creep_stone_golem:basic_attack:up",
+          "creep_stone_golem:hurt:up",
+          "creep_stone_golem:death:up"
+        ]
+      },
+      {
+        "id": "creep_demon_hound",
+        "wave": 13,
+        "texture": true,
+        "animations": [
+          "creep_demon_hound:idle:down",
+          "creep_demon_hound:walk:down",
+          "creep_demon_hound:basic_attack:down",
+          "creep_demon_hound:hurt:down",
+          "creep_demon_hound:death:down",
+          "creep_demon_hound:idle:left",
+          "creep_demon_hound:walk:left",
+          "creep_demon_hound:basic_attack:left",
+          "creep_demon_hound:hurt:left",
+          "creep_demon_hound:death:left",
+          "creep_demon_hound:idle:right",
+          "creep_demon_hound:walk:right",
+          "creep_demon_hound:basic_attack:right",
+          "creep_demon_hound:hurt:right",
+          "creep_demon_hound:death:right",
+          "creep_demon_hound:idle:up",
+          "creep_demon_hound:walk:up",
+          "creep_demon_hound:basic_attack:up",
+          "creep_demon_hound:hurt:up",
+          "creep_demon_hound:death:up"
+        ]
+      },
+      {
+        "id": "creep_fire_imp",
+        "wave": 14,
+        "texture": true,
+        "animations": [
+          "creep_fire_imp:idle:down",
+          "creep_fire_imp:walk:down",
+          "creep_fire_imp:basic_attack:down",
+          "creep_fire_imp:hurt:down",
+          "creep_fire_imp:death:down",
+          "creep_fire_imp:idle:left",
+          "creep_fire_imp:walk:left",
+          "creep_fire_imp:basic_attack:left",
+          "creep_fire_imp:hurt:left",
+          "creep_fire_imp:death:left",
+          "creep_fire_imp:idle:right",
+          "creep_fire_imp:walk:right",
+          "creep_fire_imp:basic_attack:right",
+          "creep_fire_imp:hurt:right",
+          "creep_fire_imp:death:right",
+          "creep_fire_imp:idle:up",
+          "creep_fire_imp:walk:up",
+          "creep_fire_imp:basic_attack:up",
+          "creep_fire_imp:hurt:up",
+          "creep_fire_imp:death:up"
+        ]
+      },
+      {
+        "id": "creep_fire_cultist",
+        "wave": 15,
+        "texture": true,
+        "animations": [
+          "creep_fire_cultist:idle:down",
+          "creep_fire_cultist:walk:down",
+          "creep_fire_cultist:basic_attack:down",
+          "creep_fire_cultist:hurt:down",
+          "creep_fire_cultist:death:down",
+          "creep_fire_cultist:idle:left",
+          "creep_fire_cultist:walk:left",
+          "creep_fire_cultist:basic_attack:left",
+          "creep_fire_cultist:hurt:left",
+          "creep_fire_cultist:death:left",
+          "creep_fire_cultist:idle:right",
+          "creep_fire_cultist:walk:right",
+          "creep_fire_cultist:basic_attack:right",
+          "creep_fire_cultist:hurt:right",
+          "creep_fire_cultist:death:right",
+          "creep_fire_cultist:idle:up",
+          "creep_fire_cultist:walk:up",
+          "creep_fire_cultist:basic_attack:up",
+          "creep_fire_cultist:hurt:up",
+          "creep_fire_cultist:death:up"
+        ]
+      },
+      {
+        "id": "creep_horned_demon_brute",
+        "wave": 16,
+        "texture": true,
+        "animations": [
+          "creep_horned_demon_brute:idle:down",
+          "creep_horned_demon_brute:walk:down",
+          "creep_horned_demon_brute:basic_attack:down",
+          "creep_horned_demon_brute:hurt:down",
+          "creep_horned_demon_brute:death:down",
+          "creep_horned_demon_brute:idle:left",
+          "creep_horned_demon_brute:walk:left",
+          "creep_horned_demon_brute:basic_attack:left",
+          "creep_horned_demon_brute:hurt:left",
+          "creep_horned_demon_brute:death:left",
+          "creep_horned_demon_brute:idle:right",
+          "creep_horned_demon_brute:walk:right",
+          "creep_horned_demon_brute:basic_attack:right",
+          "creep_horned_demon_brute:hurt:right",
+          "creep_horned_demon_brute:death:right",
+          "creep_horned_demon_brute:idle:up",
+          "creep_horned_demon_brute:walk:up",
+          "creep_horned_demon_brute:basic_attack:up",
+          "creep_horned_demon_brute:hurt:up",
+          "creep_horned_demon_brute:death:up"
+        ]
+      },
+      {
+        "id": "creep_shadow_assassin",
+        "wave": 17,
+        "texture": true,
+        "animations": [
+          "creep_shadow_assassin:idle:down",
+          "creep_shadow_assassin:walk:down",
+          "creep_shadow_assassin:basic_attack:down",
+          "creep_shadow_assassin:hurt:down",
+          "creep_shadow_assassin:death:down",
+          "creep_shadow_assassin:idle:left",
+          "creep_shadow_assassin:walk:left",
+          "creep_shadow_assassin:basic_attack:left",
+          "creep_shadow_assassin:hurt:left",
+          "creep_shadow_assassin:death:left",
+          "creep_shadow_assassin:idle:right",
+          "creep_shadow_assassin:walk:right",
+          "creep_shadow_assassin:basic_attack:right",
+          "creep_shadow_assassin:hurt:right",
+          "creep_shadow_assassin:death:right",
+          "creep_shadow_assassin:idle:up",
+          "creep_shadow_assassin:walk:up",
+          "creep_shadow_assassin:basic_attack:up",
+          "creep_shadow_assassin:hurt:up",
+          "creep_shadow_assassin:death:up"
+        ]
+      },
+      {
+        "id": "creep_armored_demon_general",
+        "wave": 18,
+        "texture": true,
+        "animations": [
+          "creep_armored_demon_general:idle:down",
+          "creep_armored_demon_general:walk:down",
+          "creep_armored_demon_general:basic_attack:down",
+          "creep_armored_demon_general:hurt:down",
+          "creep_armored_demon_general:death:down",
+          "creep_armored_demon_general:idle:left",
+          "creep_armored_demon_general:walk:left",
+          "creep_armored_demon_general:basic_attack:left",
+          "creep_armored_demon_general:hurt:left",
+          "creep_armored_demon_general:death:left",
+          "creep_armored_demon_general:idle:right",
+          "creep_armored_demon_general:walk:right",
+          "creep_armored_demon_general:basic_attack:right",
+          "creep_armored_demon_general:hurt:right",
+          "creep_armored_demon_general:death:right",
+          "creep_armored_demon_general:idle:up",
+          "creep_armored_demon_general:walk:up",
+          "creep_armored_demon_general:basic_attack:up",
+          "creep_armored_demon_general:hurt:up",
+          "creep_armored_demon_general:death:up"
+        ]
+      },
+      {
+        "id": "creep_blood_demon_warlock",
+        "wave": 19,
+        "texture": true,
+        "animations": [
+          "creep_blood_demon_warlock:idle:down",
+          "creep_blood_demon_warlock:walk:down",
+          "creep_blood_demon_warlock:basic_attack:down",
+          "creep_blood_demon_warlock:hurt:down",
+          "creep_blood_demon_warlock:death:down",
+          "creep_blood_demon_warlock:idle:left",
+          "creep_blood_demon_warlock:walk:left",
+          "creep_blood_demon_warlock:basic_attack:left",
+          "creep_blood_demon_warlock:hurt:left",
+          "creep_blood_demon_warlock:death:left",
+          "creep_blood_demon_warlock:idle:right",
+          "creep_blood_demon_warlock:walk:right",
+          "creep_blood_demon_warlock:basic_attack:right",
+          "creep_blood_demon_warlock:hurt:right",
+          "creep_blood_demon_warlock:death:right",
+          "creep_blood_demon_warlock:idle:up",
+          "creep_blood_demon_warlock:walk:up",
+          "creep_blood_demon_warlock:basic_attack:up",
+          "creep_blood_demon_warlock:hurt:up",
+          "creep_blood_demon_warlock:death:up"
+        ]
+      },
+      {
+        "id": "creep_demon_vanguard",
+        "wave": 20,
+        "texture": true,
+        "animations": [
+          "creep_demon_vanguard:idle:down",
+          "creep_demon_vanguard:walk:down",
+          "creep_demon_vanguard:basic_attack:down",
+          "creep_demon_vanguard:hurt:down",
+          "creep_demon_vanguard:death:down",
+          "creep_demon_vanguard:idle:left",
+          "creep_demon_vanguard:walk:left",
+          "creep_demon_vanguard:basic_attack:left",
+          "creep_demon_vanguard:hurt:left",
+          "creep_demon_vanguard:death:left",
+          "creep_demon_vanguard:idle:right",
+          "creep_demon_vanguard:walk:right",
+          "creep_demon_vanguard:basic_attack:right",
+          "creep_demon_vanguard:hurt:right",
+          "creep_demon_vanguard:death:right",
+          "creep_demon_vanguard:idle:up",
+          "creep_demon_vanguard:walk:up",
+          "creep_demon_vanguard:basic_attack:up",
+          "creep_demon_vanguard:hurt:up",
+          "creep_demon_vanguard:death:up"
+        ]
+      }
+    ],
+    "actors": [
+      {
+        "id": "HWW8TK332",
+        "x": 443,
+        "y": 197,
+        "depth": 197,
+        "animation": "hero_cai_bang:idle:right",
+        "frame": "idle_right_0",
+        "texture": "hero_cai_bang",
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 160,
+        "label": {
+          "text": "Forest 1",
+          "visible": true
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "0ss2b-Do1",
+        "x": 309,
+        "y": 320,
+        "depth": 320,
+        "animation": "hero_cai_bang:idle:right",
+        "frame": "idle_right_0",
+        "texture": "hero_cai_bang",
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 160,
+        "label": {
+          "text": "Forest 3",
+          "visible": true
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "vtPv9yhHv",
+        "x": 347,
+        "y": 397,
+        "depth": 397,
+        "animation": "hero_cai_bang:idle:right",
+        "frame": "idle_right_1",
+        "texture": "hero_cai_bang",
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 160,
+        "label": {
+          "text": "Forest 4",
+          "visible": true
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "t9TlBcpS9",
+        "x": 288,
+        "y": 453,
+        "depth": 453,
+        "animation": "hero_cai_bang:idle:right",
+        "frame": "idle_right_0",
+        "texture": "hero_cai_bang",
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 160,
+        "label": {
+          "text": "Forest 5",
+          "visible": true
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "EPfuXjB3H",
+        "x": 416,
+        "y": 392,
+        "depth": 392,
+        "animation": "hero_cai_bang:idle:right",
+        "frame": "idle_right_1",
+        "texture": "hero_cai_bang",
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 160,
+        "label": {
+          "text": "Forest 6",
+          "visible": true
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "forest_shared:wave_1_0",
+        "x": 541,
+        "y": 226,
+        "depth": 226,
+        "animation": "creep_outlaw:walk:left",
+        "frame": "walk_left_2",
+        "texture": "creep_outlaw",
+        "artStatus": "placeholder",
+        "origin": [
+          0.5,
+          1
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 120,
+        "label": {
+          "text": "",
+          "visible": false
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "forest_shared:wave_1_1",
+        "x": 600,
+        "y": 256,
+        "depth": 256,
+        "animation": "creep_outlaw:walk:down",
+        "frame": "walk_down_2",
+        "texture": "creep_outlaw",
+        "artStatus": "placeholder",
+        "origin": [
+          0.5,
+          1
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 120,
+        "label": {
+          "text": "",
+          "visible": false
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "forest_shared:wave_1_2",
+        "x": 600,
+        "y": 296,
+        "depth": 296,
+        "animation": "creep_outlaw:walk:down",
+        "frame": "walk_down_2",
+        "texture": "creep_outlaw",
+        "artStatus": "placeholder",
+        "origin": [
+          0.5,
+          1
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 120,
+        "label": {
+          "text": "",
+          "visible": false
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "xpHlCufy8",
+        "x": 240,
+        "y": 440,
+        "depth": 440,
+        "animation": "hero_cai_bang:idle:right",
+        "frame": "idle_right_0",
+        "texture": "hero_cai_bang",
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 160,
+        "label": {
+          "text": "Forest 2",
+          "visible": true
+        },
+        "healthBarVisible": true
+      }
+    ],
+    "trees": [
+      {
+        "x": 24,
+        "y": 136,
+        "depth": 136
+      },
+      {
+        "x": 104,
+        "y": 148,
+        "depth": 148
+      },
+      {
+        "x": 184,
+        "y": 160,
+        "depth": 160
+      },
+      {
+        "x": 264,
+        "y": 136,
+        "depth": 136
+      },
+      {
+        "x": 344,
+        "y": 148,
+        "depth": 148
+      },
+      {
+        "x": 424,
+        "y": 160,
+        "depth": 160
+      },
+      {
+        "x": 504,
+        "y": 136,
+        "depth": 136
+      },
+      {
+        "x": 584,
+        "y": 148,
+        "depth": 148
+      },
+      {
+        "x": 664,
+        "y": 160,
+        "depth": 160
+      },
+      {
+        "x": 744,
+        "y": 136,
+        "depth": 136
+      },
+      {
+        "x": 824,
+        "y": 148,
+        "depth": 148
+      },
+      {
+        "x": 904,
+        "y": 160,
+        "depth": 160
+      },
+      {
+        "x": 24,
+        "y": 280,
+        "depth": 280
+      },
+      {
+        "x": 24,
+        "y": 404,
+        "depth": 404
+      },
+      {
+        "x": 24,
+        "y": 536,
+        "depth": 536
+      },
+      {
+        "x": 936,
+        "y": 280,
+        "depth": 280
+      },
+      {
+        "x": 936,
+        "y": 404,
+        "depth": 404
+      },
+      {
+        "x": 936,
+        "y": 536,
+        "depth": 536
+      },
+      {
+        "x": 440,
+        "y": 240,
+        "depth": 240
+      },
+      {
+        "x": 840,
+        "y": 440,
+        "depth": 440
+      },
+      {
+        "x": 32,
+        "y": 656,
+        "depth": 656
+      },
+      {
+        "x": 128,
+        "y": 656,
+        "depth": 656
+      },
+      {
+        "x": 400,
+        "y": 656,
+        "depth": 656
+      },
+      {
+        "x": 496,
+        "y": 656,
+        "depth": 656
+      },
+      {
+        "x": 608,
+        "y": 656,
+        "depth": 656
+      },
+      {
+        "x": 928,
+        "y": 656,
+        "depth": 656
+      }
+    ],
+    "bambooScenery": [
+      {
+        "name": "grass_tuft",
+        "texture": "bamboo_scenery",
+        "x": 320,
+        "y": 215,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "grass_tuft",
+        "texture": "bamboo_scenery",
+        "x": 784,
+        "y": 184,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "grass_tuft",
+        "texture": "bamboo_scenery",
+        "x": 90,
+        "y": 440,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "grass_tuft",
+        "texture": "bamboo_scenery",
+        "x": 528,
+        "y": 487,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "grass_tuft",
+        "texture": "bamboo_scenery",
+        "x": 902,
+        "y": 350,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "grass_tuft",
+        "texture": "bamboo_scenery",
+        "x": 400,
+        "y": 510,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_root",
+        "texture": "bamboo_scenery",
+        "x": 392,
+        "y": 205,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.9
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_root",
+        "texture": "bamboo_scenery",
+        "x": 878,
+        "y": 475,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.9
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_root",
+        "texture": "bamboo_scenery",
+        "x": 74,
+        "y": 510,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.9
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bridge_deck",
+        "texture": "bamboo_scenery",
+        "x": 224,
+        "y": 612,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.9642857142857143
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bridge_deck",
+        "texture": "bamboo_scenery",
+        "x": 800,
+        "y": 612,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.9642857142857143
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 24,
+        "y": 136,
+        "depth": 136,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 264,
+        "y": 136,
+        "depth": 136,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 504,
+        "y": 136,
+        "depth": 136,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 744,
+        "y": 136,
+        "depth": 136,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 104,
+        "y": 148,
+        "depth": 148,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 344,
+        "y": 148,
+        "depth": 148,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 584,
+        "y": 148,
+        "depth": 148,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 824,
+        "y": 148,
+        "depth": 148,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "shrine",
+        "texture": "bamboo_scenery",
+        "x": 480,
+        "y": 156,
+        "depth": 156,
+        "origin": [
+          0.5,
+          0.9722222222222222
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 184,
+        "y": 160,
+        "depth": 160,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 424,
+        "y": 160,
+        "depth": 160,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 664,
+        "y": 160,
+        "depth": 160,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 904,
+        "y": 160,
+        "depth": 160,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gate",
+        "texture": "bamboo_scenery",
+        "x": 760,
+        "y": 164,
+        "depth": 164,
+        "origin": [
+          0.5,
+          0.9722222222222222
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "ruin_wall",
+        "texture": "bamboo_scenery",
+        "x": 328,
+        "y": 168,
+        "depth": 168,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "ruin_wall",
+        "texture": "bamboo_scenery",
+        "x": 624,
+        "y": 168,
+        "depth": 168,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stone_lantern",
+        "texture": "bamboo_scenery",
+        "x": 392,
+        "y": 172,
+        "depth": 172,
+        "origin": [
+          0.5,
+          0.9583333333333334
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stone_lantern",
+        "texture": "bamboo_scenery",
+        "x": 568,
+        "y": 172,
+        "depth": 172,
+        "origin": [
+          0.5,
+          0.9583333333333334
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 565,
+        "y": 174,
+        "depth": 174,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_rocks",
+        "texture": "bamboo_scenery",
+        "x": 84,
+        "y": 176,
+        "depth": 176,
+        "origin": [
+          0.5,
+          0.9444444444444444
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 350,
+        "y": 184,
+        "depth": 184,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_rocks",
+        "texture": "bamboo_scenery",
+        "x": 590,
+        "y": 190,
+        "depth": 190,
+        "origin": [
+          0.5,
+          0.9444444444444444
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stone_monument",
+        "texture": "bamboo_scenery",
+        "x": 775,
+        "y": 195,
+        "depth": 195,
+        "origin": [
+          0.5,
+          0.9615384615384616
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 85,
+        "y": 202,
+        "depth": 202,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 894,
+        "y": 212,
+        "depth": 212,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 440,
+        "y": 240,
+        "depth": 240,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_rocks",
+        "texture": "bamboo_scenery",
+        "x": 890,
+        "y": 270,
+        "depth": 270,
+        "origin": [
+          0.5,
+          0.9444444444444444
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 24,
+        "y": 280,
+        "depth": 280,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 936,
+        "y": 280,
+        "depth": 280,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stone_lantern",
+        "texture": "bamboo_scenery",
+        "x": 212,
+        "y": 300,
+        "depth": 300,
+        "origin": [
+          0.5,
+          0.9583333333333334
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stone_lantern",
+        "texture": "bamboo_scenery",
+        "x": 104,
+        "y": 308,
+        "depth": 308,
+        "origin": [
+          0.5,
+          0.9583333333333334
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 24,
+        "y": 404,
+        "depth": 404,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 936,
+        "y": 404,
+        "depth": 404,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 840,
+        "y": 440,
+        "depth": 440,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "training_dummy",
+        "texture": "bamboo_scenery",
+        "x": 398,
+        "y": 448,
+        "depth": 448,
+        "origin": [
+          0.5,
+          0.95
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "training_dummy",
+        "texture": "bamboo_scenery",
+        "x": 540,
+        "y": 448,
+        "depth": 448,
+        "origin": [
+          0.5,
+          0.95
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stump",
+        "texture": "bamboo_scenery",
+        "x": 342,
+        "y": 468,
+        "depth": 468,
+        "origin": [
+          0.5,
+          0.9285714285714286
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 80,
+        "y": 482,
+        "depth": 482,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 362,
+        "y": 488,
+        "depth": 488,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 548,
+        "y": 500,
+        "depth": 500,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 906,
+        "y": 500,
+        "depth": 500,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stone_lantern",
+        "texture": "bamboo_scenery",
+        "x": 806,
+        "y": 500,
+        "depth": 500,
+        "origin": [
+          0.5,
+          0.9583333333333334
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_fence",
+        "texture": "bamboo_scenery",
+        "x": 330,
+        "y": 510,
+        "depth": 510,
+        "origin": [
+          0.5,
+          0.9285714285714286
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_fence",
+        "texture": "bamboo_scenery",
+        "x": 520,
+        "y": 522,
+        "depth": 522,
+        "origin": [
+          0.5,
+          0.9285714285714286
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 24,
+        "y": 536,
+        "depth": 536,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 936,
+        "y": 536,
+        "depth": 536,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_rocks",
+        "texture": "bamboo_scenery",
+        "x": 74,
+        "y": 540,
+        "depth": 540,
+        "origin": [
+          0.5,
+          0.9444444444444444
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_rocks",
+        "texture": "bamboo_scenery",
+        "x": 572,
+        "y": 560,
+        "depth": 560,
+        "origin": [
+          0.5,
+          0.9444444444444444
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_rocks",
+        "texture": "bamboo_scenery",
+        "x": 908,
+        "y": 560,
+        "depth": 560,
+        "origin": [
+          0.5,
+          0.9444444444444444
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "canopy",
+        "texture": "bamboo_scenery",
+        "x": 24,
+        "y": 608,
+        "depth": 608,
+        "origin": [
+          0.5,
+          0.9642857142857143
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "canopy",
+        "texture": "bamboo_scenery",
+        "x": 936,
+        "y": 608,
+        "depth": 608,
+        "origin": [
+          0.5,
+          0.9642857142857143
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bridge_front",
+        "texture": "bamboo_scenery",
+        "x": 224,
+        "y": 612,
+        "depth": 612,
+        "origin": [
+          0.5,
+          0.9642857142857143
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bridge_front",
+        "texture": "bamboo_scenery",
+        "x": 800,
+        "y": 612,
+        "depth": 612,
+        "origin": [
+          0.5,
+          0.9642857142857143
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_single",
+        "texture": "bamboo_scenery",
+        "x": 32,
+        "y": 656,
+        "depth": 656,
+        "origin": [
+          0.5,
+          0.9772727272727273
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_single",
+        "texture": "bamboo_scenery",
+        "x": 128,
+        "y": 656,
+        "depth": 656,
+        "origin": [
+          0.5,
+          0.9772727272727273
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_single",
+        "texture": "bamboo_scenery",
+        "x": 400,
+        "y": 656,
+        "depth": 656,
+        "origin": [
+          0.5,
+          0.9772727272727273
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_single",
+        "texture": "bamboo_scenery",
+        "x": 496,
+        "y": 656,
+        "depth": 656,
+        "origin": [
+          0.5,
+          0.9772727272727273
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_single",
+        "texture": "bamboo_scenery",
+        "x": 608,
+        "y": 656,
+        "depth": 656,
+        "origin": [
+          0.5,
+          0.9772727272727273
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_single",
+        "texture": "bamboo_scenery",
+        "x": 928,
+        "y": 656,
+        "depth": 656,
+        "origin": [
+          0.5,
+          0.9772727272727273
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "desertScenery": [],
+    "animations": [
+      "hero_cai_bang:idle:down",
+      "hero_cai_bang:walk:down",
+      "hero_cai_bang:basic_attack:down",
+      "hero_cai_bang:idle:left",
+      "hero_cai_bang:walk:left",
+      "hero_cai_bang:basic_attack:left",
+      "hero_cai_bang:idle:right",
+      "hero_cai_bang:walk:right",
+      "hero_cai_bang:basic_attack:right",
+      "hero_cai_bang:idle:up",
+      "hero_cai_bang:walk:up",
+      "hero_cai_bang:basic_attack:up",
+      "hero_cai_bang:cast:down",
+      "hero_cai_bang:hurt:down",
+      "hero_cai_bang:death:down",
+      "hero_cai_bang:cast:left",
+      "hero_cai_bang:hurt:left",
+      "hero_cai_bang:death:left",
+      "hero_cai_bang:cast:right",
+      "hero_cai_bang:hurt:right",
+      "hero_cai_bang:death:right",
+      "hero_cai_bang:cast:up",
+      "hero_cai_bang:hurt:up",
+      "hero_cai_bang:death:up"
+    ],
+    "art01": {
+      "textures": [
+        {
+          "key": "arena_ground_art01",
+          "exists": true,
+          "frames": []
+        },
+        {
+          "key": "arena_world_art01",
+          "exists": true,
+          "frames": [
+            "statue_male",
+            "tree_jade",
+            "tree_blossom",
+            "bamboo",
+            "lantern",
+            "red_banner"
+          ]
+        },
+        {
+          "key": "arena_garden_art01",
+          "exists": true,
+          "frames": [
+            "cascade",
+            "stream_pool",
+            "bridge",
+            "flower_rocks"
+          ]
+        },
+        {
+          "key": "arena_ambient_art01",
+          "exists": true,
+          "frames": [
+            "cascade_flow_0",
+            "cascade_flow_1",
+            "cascade_flow_2",
+            "cascade_flow_3",
+            "stream_pool_flow_0",
+            "stream_pool_flow_1",
+            "stream_pool_flow_2",
+            "stream_pool_flow_3",
+            "lantern_glow_0",
+            "lantern_glow_1",
+            "lantern_glow_2",
+            "lantern_glow_3"
+          ]
+        }
+      ],
+      "objects": [],
+      "statueCollision": "Authoritative pedestal footprint: x760,y548,w80,h28"
+    }
+  },
+  "front": {
+    "ready": true,
+    "sceneTime": 41852.6,
+    "zoneId": "forest_shared",
+    "damage": {
+      "history": [],
+      "active": []
+    },
+    "skills": {
+      "feedback": {
+        "loadedComponents": 45,
+        "registeredAnimations": 571,
+        "played": [],
+        "observedFrames": [],
+        "observedCount": 0,
+        "completed": {},
+        "frameTimes": {},
+        "events": [],
+        "persistent": [],
+        "projectiles": [],
+        "transient": [],
+        "poses": []
+      },
+      "loadedComponents": 87,
+      "registeredAnimations": 596,
+      "played": [],
+      "transient": 0,
+      "persistent": [],
+      "projectiles": [],
+      "observedFrames": []
+    },
+    "creepEffects": {
+      "played": [],
+      "observedFrames": [],
+      "contacts": 0,
+      "ambient": [],
+      "projectiles": []
+    },
+    "interactions": [
+      {
+        "id": "dungeon-exit",
+        "x": 160,
+        "y": 320
+      }
+    ],
+    "rotation": 0,
+    "zoom": 1,
+    "roundPixels": true,
+    "camera": {
+      "x": 0,
+      "y": 0
+    },
+    "completedAnimations": [],
+    "observedHeroFrames": {},
+    "observedCreepFrames": {
+      "creep_outlaw:idle:up": [
+        "idle_up_0",
+        "idle_up_1",
+        "idle_up_2",
+        "idle_up_3"
+      ],
+      "creep_outlaw:walk:down": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "creep_outlaw:idle:down": [
+        "idle_down_0",
+        "idle_down_1",
+        "idle_down_2",
+        "idle_down_3"
+      ],
+      "creep_outlaw:walk:up": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "creep_outlaw:walk:left": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ]
+    },
+    "creepRepeats": {},
+    "creepFrameTimes": {
+      "creep_outlaw:idle:up": [
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_up_3",
+          "at": 30336.4
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_3",
+          "at": 30336.4
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_3",
+          "at": 30336.4
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_up_0",
+          "at": 30436.4
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_0",
+          "at": 30436.4
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_0",
+          "at": 30436.4
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_up_1",
+          "at": 30553.1
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_1",
+          "at": 30553.1
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_1",
+          "at": 30553.1
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_up_2",
+          "at": 30686.4
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_2",
+          "at": 30686.4
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_2",
+          "at": 30686.4
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_0",
+          "at": 36002.8
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_0",
+          "at": 36002.8
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_1",
+          "at": 36102.8
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_1",
+          "at": 36102.8
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_2",
+          "at": 36219.5
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_2",
+          "at": 36219.5
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_3",
+          "at": 36369.5
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_3",
+          "at": 36369.5
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_0",
+          "at": 36469.5
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_0",
+          "at": 36469.5
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_up_1",
+          "at": 36586.1
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_up_1",
+          "at": 36586.1
+        }
+      ],
+      "creep_outlaw:walk:down": [
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_3",
+          "at": 38236.1
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_3",
+          "at": 38236.1
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_0",
+          "at": 38302.7
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_0",
+          "at": 38302.7
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_1",
+          "at": 38419.4
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_1",
+          "at": 38419.4
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_2",
+          "at": 38536
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_2",
+          "at": 38536
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_3",
+          "at": 38619.4
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_3",
+          "at": 38619.4
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_0",
+          "at": 38719.4
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_0",
+          "at": 38719.4
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_1",
+          "at": 38836.1
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_1",
+          "at": 38836.1
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_down_2",
+          "at": 38919.4
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_down_2",
+          "at": 38919.4
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_0",
+          "at": 41086
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_1",
+          "at": 41169.3
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_2",
+          "at": 41286
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_3",
+          "at": 41352.7
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_0",
+          "at": 41469.3
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_1",
+          "at": 41585.9
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_2",
+          "at": 41652.6
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_down_3",
+          "at": 41769.3
+        }
+      ],
+      "creep_outlaw:idle:down": [
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_3",
+          "at": 33353
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_down_0",
+          "at": 33469.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_0",
+          "at": 33469.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_0",
+          "at": 33469.6
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_down_1",
+          "at": 33619.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_1",
+          "at": 33619.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_1",
+          "at": 33619.6
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "idle_down_2",
+          "at": 33736.3
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_2",
+          "at": 33736.3
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_2",
+          "at": 33736.3
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_0",
+          "at": 38986.1
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_0",
+          "at": 38986.1
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_1",
+          "at": 39102.7
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_1",
+          "at": 39102.7
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_2",
+          "at": 39219.3
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_2",
+          "at": 39219.3
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_3",
+          "at": 39336
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_3",
+          "at": 39336
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_0",
+          "at": 39486
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_0",
+          "at": 39486
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_1",
+          "at": 39602.7
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_1",
+          "at": 39602.7
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "idle_down_2",
+          "at": 39719.4
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "idle_down_2",
+          "at": 39719.4
+        }
+      ],
+      "creep_outlaw:walk:up": [
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_2",
+          "at": 40419.3
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_2",
+          "at": 40419.3
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_3",
+          "at": 40519.3
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_3",
+          "at": 40519.3
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_0",
+          "at": 40602.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_0",
+          "at": 40602.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_1",
+          "at": 40719.3
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_1",
+          "at": 40719.3
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_2",
+          "at": 40835.9
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_2",
+          "at": 40835.9
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_3",
+          "at": 40902.7
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_3",
+          "at": 40902.7
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_0",
+          "at": 41019.3
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_0",
+          "at": 41019.3
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_1",
+          "at": 41086
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_1",
+          "at": 41086
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_2",
+          "at": 41202.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_2",
+          "at": 41202.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_3",
+          "at": 41319.3
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_3",
+          "at": 41319.3
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_0",
+          "at": 41385.9
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_0",
+          "at": 41385.9
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_up_1",
+          "at": 41502.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_up_1",
+          "at": 41502.6
+        }
+      ],
+      "creep_outlaw:walk:left": [
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_2",
+          "at": 39336
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_3",
+          "at": 39452.7
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_0",
+          "at": 39519.4
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_1",
+          "at": 39636
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_2",
+          "at": 39719.4
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_3",
+          "at": 39836.1
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_0",
+          "at": 39952.6
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_1",
+          "at": 40036
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_2",
+          "at": 40152.6
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_3",
+          "at": 40219.3
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_0",
+          "at": 40336
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_1",
+          "at": 40419.3
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_2",
+          "at": 40519.3
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_3",
+          "at": 40636
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_0",
+          "at": 40719.3
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_1",
+          "at": 40835.9
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_2",
+          "at": 40936
+        },
+        {
+          "id": "forest_shared:wave_1_0",
+          "frame": "walk_left_3",
+          "at": 41019.3
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_left_0",
+          "at": 41585.9
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_left_0",
+          "at": 41585.9
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_left_1",
+          "at": 41652.6
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_left_1",
+          "at": 41652.6
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "frame": "walk_left_2",
+          "at": 41769.3
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "frame": "walk_left_2",
+          "at": 41769.3
+        }
+      ]
+    },
+    "impacts": [],
+    "arenaCreeps": [
+      {
+        "id": "creep_wild_dog",
+        "wave": 1,
+        "texture": true,
+        "animations": [
+          "creep_wild_dog:idle:down",
+          "creep_wild_dog:walk:down",
+          "creep_wild_dog:basic_attack:down",
+          "creep_wild_dog:idle:left",
+          "creep_wild_dog:walk:left",
+          "creep_wild_dog:basic_attack:left",
+          "creep_wild_dog:idle:right",
+          "creep_wild_dog:walk:right",
+          "creep_wild_dog:basic_attack:right",
+          "creep_wild_dog:idle:up",
+          "creep_wild_dog:walk:up",
+          "creep_wild_dog:basic_attack:up",
+          "creep_wild_dog:hurt:down",
+          "creep_wild_dog:death:down",
+          "creep_wild_dog:hurt:left",
+          "creep_wild_dog:death:left",
+          "creep_wild_dog:hurt:right",
+          "creep_wild_dog:death:right",
+          "creep_wild_dog:hurt:up",
+          "creep_wild_dog:death:up"
+        ]
+      },
+      {
+        "id": "creep_bandit_grunt",
+        "wave": 2,
+        "texture": true,
+        "animations": [
+          "creep_bandit_grunt:idle:down",
+          "creep_bandit_grunt:walk:down",
+          "creep_bandit_grunt:basic_attack:down",
+          "creep_bandit_grunt:idle:left",
+          "creep_bandit_grunt:walk:left",
+          "creep_bandit_grunt:basic_attack:left",
+          "creep_bandit_grunt:idle:right",
+          "creep_bandit_grunt:walk:right",
+          "creep_bandit_grunt:basic_attack:right",
+          "creep_bandit_grunt:idle:up",
+          "creep_bandit_grunt:walk:up",
+          "creep_bandit_grunt:basic_attack:up",
+          "creep_bandit_grunt:hurt:down",
+          "creep_bandit_grunt:death:down",
+          "creep_bandit_grunt:hurt:left",
+          "creep_bandit_grunt:death:left",
+          "creep_bandit_grunt:hurt:right",
+          "creep_bandit_grunt:death:right",
+          "creep_bandit_grunt:hurt:up",
+          "creep_bandit_grunt:death:up"
+        ]
+      },
+      {
+        "id": "creep_bandit_swordsman",
+        "wave": 3,
+        "texture": true,
+        "animations": [
+          "creep_bandit_swordsman:idle:down",
+          "creep_bandit_swordsman:walk:down",
+          "creep_bandit_swordsman:basic_attack:down",
+          "creep_bandit_swordsman:idle:left",
+          "creep_bandit_swordsman:walk:left",
+          "creep_bandit_swordsman:basic_attack:left",
+          "creep_bandit_swordsman:idle:right",
+          "creep_bandit_swordsman:walk:right",
+          "creep_bandit_swordsman:basic_attack:right",
+          "creep_bandit_swordsman:idle:up",
+          "creep_bandit_swordsman:walk:up",
+          "creep_bandit_swordsman:basic_attack:up",
+          "creep_bandit_swordsman:hurt:down",
+          "creep_bandit_swordsman:death:down",
+          "creep_bandit_swordsman:hurt:left",
+          "creep_bandit_swordsman:death:left",
+          "creep_bandit_swordsman:hurt:right",
+          "creep_bandit_swordsman:death:right",
+          "creep_bandit_swordsman:hurt:up",
+          "creep_bandit_swordsman:death:up"
+        ]
+      },
+      {
+        "id": "creep_bandit_archer",
+        "wave": 4,
+        "texture": true,
+        "animations": [
+          "creep_bandit_archer:idle:down",
+          "creep_bandit_archer:walk:down",
+          "creep_bandit_archer:basic_attack:down",
+          "creep_bandit_archer:idle:left",
+          "creep_bandit_archer:walk:left",
+          "creep_bandit_archer:basic_attack:left",
+          "creep_bandit_archer:idle:right",
+          "creep_bandit_archer:walk:right",
+          "creep_bandit_archer:basic_attack:right",
+          "creep_bandit_archer:idle:up",
+          "creep_bandit_archer:walk:up",
+          "creep_bandit_archer:basic_attack:up",
+          "creep_bandit_archer:hurt:down",
+          "creep_bandit_archer:death:down",
+          "creep_bandit_archer:hurt:left",
+          "creep_bandit_archer:death:left",
+          "creep_bandit_archer:hurt:right",
+          "creep_bandit_archer:death:right",
+          "creep_bandit_archer:hurt:up",
+          "creep_bandit_archer:death:up"
+        ]
+      },
+      {
+        "id": "creep_black_clad_assassin",
+        "wave": 5,
+        "texture": true,
+        "animations": [
+          "creep_black_clad_assassin:idle:down",
+          "creep_black_clad_assassin:walk:down",
+          "creep_black_clad_assassin:basic_attack:down",
+          "creep_black_clad_assassin:hurt:down",
+          "creep_black_clad_assassin:death:down",
+          "creep_black_clad_assassin:idle:left",
+          "creep_black_clad_assassin:walk:left",
+          "creep_black_clad_assassin:basic_attack:left",
+          "creep_black_clad_assassin:hurt:left",
+          "creep_black_clad_assassin:death:left",
+          "creep_black_clad_assassin:idle:right",
+          "creep_black_clad_assassin:walk:right",
+          "creep_black_clad_assassin:basic_attack:right",
+          "creep_black_clad_assassin:hurt:right",
+          "creep_black_clad_assassin:death:right",
+          "creep_black_clad_assassin:idle:up",
+          "creep_black_clad_assassin:walk:up",
+          "creep_black_clad_assassin:basic_attack:up",
+          "creep_black_clad_assassin:hurt:up",
+          "creep_black_clad_assassin:death:up"
+        ]
+      },
+      {
+        "id": "creep_corrupted_monk",
+        "wave": 6,
+        "texture": true,
+        "animations": [
+          "creep_corrupted_monk:idle:down",
+          "creep_corrupted_monk:walk:down",
+          "creep_corrupted_monk:basic_attack:down",
+          "creep_corrupted_monk:hurt:down",
+          "creep_corrupted_monk:death:down",
+          "creep_corrupted_monk:idle:left",
+          "creep_corrupted_monk:walk:left",
+          "creep_corrupted_monk:basic_attack:left",
+          "creep_corrupted_monk:hurt:left",
+          "creep_corrupted_monk:death:left",
+          "creep_corrupted_monk:idle:right",
+          "creep_corrupted_monk:walk:right",
+          "creep_corrupted_monk:basic_attack:right",
+          "creep_corrupted_monk:hurt:right",
+          "creep_corrupted_monk:death:right",
+          "creep_corrupted_monk:idle:up",
+          "creep_corrupted_monk:walk:up",
+          "creep_corrupted_monk:basic_attack:up",
+          "creep_corrupted_monk:hurt:up",
+          "creep_corrupted_monk:death:up"
+        ]
+      },
+      {
+        "id": "creep_skeleton_swordsman",
+        "wave": 7,
+        "texture": true,
+        "animations": [
+          "creep_skeleton_swordsman:idle:down",
+          "creep_skeleton_swordsman:walk:down",
+          "creep_skeleton_swordsman:basic_attack:down",
+          "creep_skeleton_swordsman:hurt:down",
+          "creep_skeleton_swordsman:death:down",
+          "creep_skeleton_swordsman:idle:left",
+          "creep_skeleton_swordsman:walk:left",
+          "creep_skeleton_swordsman:basic_attack:left",
+          "creep_skeleton_swordsman:hurt:left",
+          "creep_skeleton_swordsman:death:left",
+          "creep_skeleton_swordsman:idle:right",
+          "creep_skeleton_swordsman:walk:right",
+          "creep_skeleton_swordsman:basic_attack:right",
+          "creep_skeleton_swordsman:hurt:right",
+          "creep_skeleton_swordsman:death:right",
+          "creep_skeleton_swordsman:idle:up",
+          "creep_skeleton_swordsman:walk:up",
+          "creep_skeleton_swordsman:basic_attack:up",
+          "creep_skeleton_swordsman:hurt:up",
+          "creep_skeleton_swordsman:death:up"
+        ]
+      },
+      {
+        "id": "creep_skeleton_archer",
+        "wave": 8,
+        "texture": true,
+        "animations": [
+          "creep_skeleton_archer:idle:down",
+          "creep_skeleton_archer:walk:down",
+          "creep_skeleton_archer:basic_attack:down",
+          "creep_skeleton_archer:hurt:down",
+          "creep_skeleton_archer:death:down",
+          "creep_skeleton_archer:idle:left",
+          "creep_skeleton_archer:walk:left",
+          "creep_skeleton_archer:basic_attack:left",
+          "creep_skeleton_archer:hurt:left",
+          "creep_skeleton_archer:death:left",
+          "creep_skeleton_archer:idle:right",
+          "creep_skeleton_archer:walk:right",
+          "creep_skeleton_archer:basic_attack:right",
+          "creep_skeleton_archer:hurt:right",
+          "creep_skeleton_archer:death:right",
+          "creep_skeleton_archer:idle:up",
+          "creep_skeleton_archer:walk:up",
+          "creep_skeleton_archer:basic_attack:up",
+          "creep_skeleton_archer:hurt:up",
+          "creep_skeleton_archer:death:up"
+        ]
+      },
+      {
+        "id": "creep_jiangshi_zombie",
+        "wave": 9,
+        "texture": true,
+        "animations": [
+          "creep_jiangshi_zombie:idle:down",
+          "creep_jiangshi_zombie:walk:down",
+          "creep_jiangshi_zombie:basic_attack:down",
+          "creep_jiangshi_zombie:hurt:down",
+          "creep_jiangshi_zombie:death:down",
+          "creep_jiangshi_zombie:idle:left",
+          "creep_jiangshi_zombie:walk:left",
+          "creep_jiangshi_zombie:basic_attack:left",
+          "creep_jiangshi_zombie:hurt:left",
+          "creep_jiangshi_zombie:death:left",
+          "creep_jiangshi_zombie:idle:right",
+          "creep_jiangshi_zombie:walk:right",
+          "creep_jiangshi_zombie:basic_attack:right",
+          "creep_jiangshi_zombie:hurt:right",
+          "creep_jiangshi_zombie:death:right",
+          "creep_jiangshi_zombie:idle:up",
+          "creep_jiangshi_zombie:walk:up",
+          "creep_jiangshi_zombie:basic_attack:up",
+          "creep_jiangshi_zombie:hurt:up",
+          "creep_jiangshi_zombie:death:up"
+        ]
+      },
+      {
+        "id": "creep_vengeful_spirit",
+        "wave": 10,
+        "texture": true,
+        "animations": [
+          "creep_vengeful_spirit:idle:down",
+          "creep_vengeful_spirit:walk:down",
+          "creep_vengeful_spirit:basic_attack:down",
+          "creep_vengeful_spirit:hurt:down",
+          "creep_vengeful_spirit:death:down",
+          "creep_vengeful_spirit:idle:left",
+          "creep_vengeful_spirit:walk:left",
+          "creep_vengeful_spirit:basic_attack:left",
+          "creep_vengeful_spirit:hurt:left",
+          "creep_vengeful_spirit:death:left",
+          "creep_vengeful_spirit:idle:right",
+          "creep_vengeful_spirit:walk:right",
+          "creep_vengeful_spirit:basic_attack:right",
+          "creep_vengeful_spirit:hurt:right",
+          "creep_vengeful_spirit:death:right",
+          "creep_vengeful_spirit:idle:up",
+          "creep_vengeful_spirit:walk:up",
+          "creep_vengeful_spirit:basic_attack:up",
+          "creep_vengeful_spirit:hurt:up",
+          "creep_vengeful_spirit:death:up"
+        ]
+      },
+      {
+        "id": "creep_armored_skeleton",
+        "wave": 11,
+        "texture": true,
+        "animations": [
+          "creep_armored_skeleton:idle:down",
+          "creep_armored_skeleton:walk:down",
+          "creep_armored_skeleton:basic_attack:down",
+          "creep_armored_skeleton:hurt:down",
+          "creep_armored_skeleton:death:down",
+          "creep_armored_skeleton:idle:left",
+          "creep_armored_skeleton:walk:left",
+          "creep_armored_skeleton:basic_attack:left",
+          "creep_armored_skeleton:hurt:left",
+          "creep_armored_skeleton:death:left",
+          "creep_armored_skeleton:idle:right",
+          "creep_armored_skeleton:walk:right",
+          "creep_armored_skeleton:basic_attack:right",
+          "creep_armored_skeleton:hurt:right",
+          "creep_armored_skeleton:death:right",
+          "creep_armored_skeleton:idle:up",
+          "creep_armored_skeleton:walk:up",
+          "creep_armored_skeleton:basic_attack:up",
+          "creep_armored_skeleton:hurt:up",
+          "creep_armored_skeleton:death:up"
+        ]
+      },
+      {
+        "id": "creep_stone_golem",
+        "wave": 12,
+        "texture": true,
+        "animations": [
+          "creep_stone_golem:idle:down",
+          "creep_stone_golem:walk:down",
+          "creep_stone_golem:basic_attack:down",
+          "creep_stone_golem:hurt:down",
+          "creep_stone_golem:death:down",
+          "creep_stone_golem:idle:left",
+          "creep_stone_golem:walk:left",
+          "creep_stone_golem:basic_attack:left",
+          "creep_stone_golem:hurt:left",
+          "creep_stone_golem:death:left",
+          "creep_stone_golem:idle:right",
+          "creep_stone_golem:walk:right",
+          "creep_stone_golem:basic_attack:right",
+          "creep_stone_golem:hurt:right",
+          "creep_stone_golem:death:right",
+          "creep_stone_golem:idle:up",
+          "creep_stone_golem:walk:up",
+          "creep_stone_golem:basic_attack:up",
+          "creep_stone_golem:hurt:up",
+          "creep_stone_golem:death:up"
+        ]
+      },
+      {
+        "id": "creep_demon_hound",
+        "wave": 13,
+        "texture": true,
+        "animations": [
+          "creep_demon_hound:idle:down",
+          "creep_demon_hound:walk:down",
+          "creep_demon_hound:basic_attack:down",
+          "creep_demon_hound:hurt:down",
+          "creep_demon_hound:death:down",
+          "creep_demon_hound:idle:left",
+          "creep_demon_hound:walk:left",
+          "creep_demon_hound:basic_attack:left",
+          "creep_demon_hound:hurt:left",
+          "creep_demon_hound:death:left",
+          "creep_demon_hound:idle:right",
+          "creep_demon_hound:walk:right",
+          "creep_demon_hound:basic_attack:right",
+          "creep_demon_hound:hurt:right",
+          "creep_demon_hound:death:right",
+          "creep_demon_hound:idle:up",
+          "creep_demon_hound:walk:up",
+          "creep_demon_hound:basic_attack:up",
+          "creep_demon_hound:hurt:up",
+          "creep_demon_hound:death:up"
+        ]
+      },
+      {
+        "id": "creep_fire_imp",
+        "wave": 14,
+        "texture": true,
+        "animations": [
+          "creep_fire_imp:idle:down",
+          "creep_fire_imp:walk:down",
+          "creep_fire_imp:basic_attack:down",
+          "creep_fire_imp:hurt:down",
+          "creep_fire_imp:death:down",
+          "creep_fire_imp:idle:left",
+          "creep_fire_imp:walk:left",
+          "creep_fire_imp:basic_attack:left",
+          "creep_fire_imp:hurt:left",
+          "creep_fire_imp:death:left",
+          "creep_fire_imp:idle:right",
+          "creep_fire_imp:walk:right",
+          "creep_fire_imp:basic_attack:right",
+          "creep_fire_imp:hurt:right",
+          "creep_fire_imp:death:right",
+          "creep_fire_imp:idle:up",
+          "creep_fire_imp:walk:up",
+          "creep_fire_imp:basic_attack:up",
+          "creep_fire_imp:hurt:up",
+          "creep_fire_imp:death:up"
+        ]
+      },
+      {
+        "id": "creep_fire_cultist",
+        "wave": 15,
+        "texture": true,
+        "animations": [
+          "creep_fire_cultist:idle:down",
+          "creep_fire_cultist:walk:down",
+          "creep_fire_cultist:basic_attack:down",
+          "creep_fire_cultist:hurt:down",
+          "creep_fire_cultist:death:down",
+          "creep_fire_cultist:idle:left",
+          "creep_fire_cultist:walk:left",
+          "creep_fire_cultist:basic_attack:left",
+          "creep_fire_cultist:hurt:left",
+          "creep_fire_cultist:death:left",
+          "creep_fire_cultist:idle:right",
+          "creep_fire_cultist:walk:right",
+          "creep_fire_cultist:basic_attack:right",
+          "creep_fire_cultist:hurt:right",
+          "creep_fire_cultist:death:right",
+          "creep_fire_cultist:idle:up",
+          "creep_fire_cultist:walk:up",
+          "creep_fire_cultist:basic_attack:up",
+          "creep_fire_cultist:hurt:up",
+          "creep_fire_cultist:death:up"
+        ]
+      },
+      {
+        "id": "creep_horned_demon_brute",
+        "wave": 16,
+        "texture": true,
+        "animations": [
+          "creep_horned_demon_brute:idle:down",
+          "creep_horned_demon_brute:walk:down",
+          "creep_horned_demon_brute:basic_attack:down",
+          "creep_horned_demon_brute:hurt:down",
+          "creep_horned_demon_brute:death:down",
+          "creep_horned_demon_brute:idle:left",
+          "creep_horned_demon_brute:walk:left",
+          "creep_horned_demon_brute:basic_attack:left",
+          "creep_horned_demon_brute:hurt:left",
+          "creep_horned_demon_brute:death:left",
+          "creep_horned_demon_brute:idle:right",
+          "creep_horned_demon_brute:walk:right",
+          "creep_horned_demon_brute:basic_attack:right",
+          "creep_horned_demon_brute:hurt:right",
+          "creep_horned_demon_brute:death:right",
+          "creep_horned_demon_brute:idle:up",
+          "creep_horned_demon_brute:walk:up",
+          "creep_horned_demon_brute:basic_attack:up",
+          "creep_horned_demon_brute:hurt:up",
+          "creep_horned_demon_brute:death:up"
+        ]
+      },
+      {
+        "id": "creep_shadow_assassin",
+        "wave": 17,
+        "texture": true,
+        "animations": [
+          "creep_shadow_assassin:idle:down",
+          "creep_shadow_assassin:walk:down",
+          "creep_shadow_assassin:basic_attack:down",
+          "creep_shadow_assassin:hurt:down",
+          "creep_shadow_assassin:death:down",
+          "creep_shadow_assassin:idle:left",
+          "creep_shadow_assassin:walk:left",
+          "creep_shadow_assassin:basic_attack:left",
+          "creep_shadow_assassin:hurt:left",
+          "creep_shadow_assassin:death:left",
+          "creep_shadow_assassin:idle:right",
+          "creep_shadow_assassin:walk:right",
+          "creep_shadow_assassin:basic_attack:right",
+          "creep_shadow_assassin:hurt:right",
+          "creep_shadow_assassin:death:right",
+          "creep_shadow_assassin:idle:up",
+          "creep_shadow_assassin:walk:up",
+          "creep_shadow_assassin:basic_attack:up",
+          "creep_shadow_assassin:hurt:up",
+          "creep_shadow_assassin:death:up"
+        ]
+      },
+      {
+        "id": "creep_armored_demon_general",
+        "wave": 18,
+        "texture": true,
+        "animations": [
+          "creep_armored_demon_general:idle:down",
+          "creep_armored_demon_general:walk:down",
+          "creep_armored_demon_general:basic_attack:down",
+          "creep_armored_demon_general:hurt:down",
+          "creep_armored_demon_general:death:down",
+          "creep_armored_demon_general:idle:left",
+          "creep_armored_demon_general:walk:left",
+          "creep_armored_demon_general:basic_attack:left",
+          "creep_armored_demon_general:hurt:left",
+          "creep_armored_demon_general:death:left",
+          "creep_armored_demon_general:idle:right",
+          "creep_armored_demon_general:walk:right",
+          "creep_armored_demon_general:basic_attack:right",
+          "creep_armored_demon_general:hurt:right",
+          "creep_armored_demon_general:death:right",
+          "creep_armored_demon_general:idle:up",
+          "creep_armored_demon_general:walk:up",
+          "creep_armored_demon_general:basic_attack:up",
+          "creep_armored_demon_general:hurt:up",
+          "creep_armored_demon_general:death:up"
+        ]
+      },
+      {
+        "id": "creep_blood_demon_warlock",
+        "wave": 19,
+        "texture": true,
+        "animations": [
+          "creep_blood_demon_warlock:idle:down",
+          "creep_blood_demon_warlock:walk:down",
+          "creep_blood_demon_warlock:basic_attack:down",
+          "creep_blood_demon_warlock:hurt:down",
+          "creep_blood_demon_warlock:death:down",
+          "creep_blood_demon_warlock:idle:left",
+          "creep_blood_demon_warlock:walk:left",
+          "creep_blood_demon_warlock:basic_attack:left",
+          "creep_blood_demon_warlock:hurt:left",
+          "creep_blood_demon_warlock:death:left",
+          "creep_blood_demon_warlock:idle:right",
+          "creep_blood_demon_warlock:walk:right",
+          "creep_blood_demon_warlock:basic_attack:right",
+          "creep_blood_demon_warlock:hurt:right",
+          "creep_blood_demon_warlock:death:right",
+          "creep_blood_demon_warlock:idle:up",
+          "creep_blood_demon_warlock:walk:up",
+          "creep_blood_demon_warlock:basic_attack:up",
+          "creep_blood_demon_warlock:hurt:up",
+          "creep_blood_demon_warlock:death:up"
+        ]
+      },
+      {
+        "id": "creep_demon_vanguard",
+        "wave": 20,
+        "texture": true,
+        "animations": [
+          "creep_demon_vanguard:idle:down",
+          "creep_demon_vanguard:walk:down",
+          "creep_demon_vanguard:basic_attack:down",
+          "creep_demon_vanguard:hurt:down",
+          "creep_demon_vanguard:death:down",
+          "creep_demon_vanguard:idle:left",
+          "creep_demon_vanguard:walk:left",
+          "creep_demon_vanguard:basic_attack:left",
+          "creep_demon_vanguard:hurt:left",
+          "creep_demon_vanguard:death:left",
+          "creep_demon_vanguard:idle:right",
+          "creep_demon_vanguard:walk:right",
+          "creep_demon_vanguard:basic_attack:right",
+          "creep_demon_vanguard:hurt:right",
+          "creep_demon_vanguard:death:right",
+          "creep_demon_vanguard:idle:up",
+          "creep_demon_vanguard:walk:up",
+          "creep_demon_vanguard:basic_attack:up",
+          "creep_demon_vanguard:hurt:up",
+          "creep_demon_vanguard:death:up"
+        ]
+      }
+    ],
+    "actors": [
+      {
+        "id": "HWW8TK332",
+        "x": 443,
+        "y": 277,
+        "depth": 277,
+        "animation": "hero_cai_bang:idle:right",
+        "frame": "idle_right_0",
+        "texture": "hero_cai_bang",
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 160,
+        "label": {
+          "text": "Forest 1",
+          "visible": true
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "0ss2b-Do1",
+        "x": 309,
+        "y": 320,
+        "depth": 320,
+        "animation": "hero_cai_bang:idle:right",
+        "frame": "idle_right_0",
+        "texture": "hero_cai_bang",
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 160,
+        "label": {
+          "text": "Forest 3",
+          "visible": true
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "vtPv9yhHv",
+        "x": 347,
+        "y": 397,
+        "depth": 397,
+        "animation": "hero_cai_bang:idle:right",
+        "frame": "idle_right_1",
+        "texture": "hero_cai_bang",
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 160,
+        "label": {
+          "text": "Forest 4",
+          "visible": true
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "t9TlBcpS9",
+        "x": 288,
+        "y": 453,
+        "depth": 453,
+        "animation": "hero_cai_bang:idle:right",
+        "frame": "idle_right_0",
+        "texture": "hero_cai_bang",
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 160,
+        "label": {
+          "text": "Forest 5",
+          "visible": true
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "EPfuXjB3H",
+        "x": 416,
+        "y": 392,
+        "depth": 392,
+        "animation": "hero_cai_bang:idle:right",
+        "frame": "idle_right_1",
+        "texture": "hero_cai_bang",
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 160,
+        "label": {
+          "text": "Forest 6",
+          "visible": true
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "forest_shared:wave_1_0",
+        "x": 477,
+        "y": 210,
+        "depth": 210,
+        "animation": "creep_outlaw:walk:down",
+        "frame": "walk_down_3",
+        "texture": "creep_outlaw",
+        "artStatus": "placeholder",
+        "origin": [
+          0.5,
+          1
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 120,
+        "label": {
+          "text": "",
+          "visible": false
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "forest_shared:wave_1_1",
+        "x": 592,
+        "y": 261,
+        "depth": 261,
+        "animation": "creep_outlaw:walk:left",
+        "frame": "walk_left_2",
+        "texture": "creep_outlaw",
+        "artStatus": "placeholder",
+        "origin": [
+          0.5,
+          1
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 120,
+        "label": {
+          "text": "",
+          "visible": false
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "forest_shared:wave_1_2",
+        "x": 592,
+        "y": 299,
+        "depth": 299,
+        "animation": "creep_outlaw:walk:left",
+        "frame": "walk_left_2",
+        "texture": "creep_outlaw",
+        "artStatus": "placeholder",
+        "origin": [
+          0.5,
+          1
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 120,
+        "label": {
+          "text": "",
+          "visible": false
+        },
+        "healthBarVisible": true
+      },
+      {
+        "id": "xpHlCufy8",
+        "x": 240,
+        "y": 440,
+        "depth": 440,
+        "animation": "hero_cai_bang:idle:right",
+        "frame": "idle_right_0",
+        "texture": "hero_cai_bang",
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "alpha": 1,
+        "playing": true,
+        "hp": 160,
+        "label": {
+          "text": "Forest 2",
+          "visible": true
+        },
+        "healthBarVisible": true
+      }
+    ],
+    "trees": [
+      {
+        "x": 24,
+        "y": 136,
+        "depth": 136
+      },
+      {
+        "x": 104,
+        "y": 148,
+        "depth": 148
+      },
+      {
+        "x": 184,
+        "y": 160,
+        "depth": 160
+      },
+      {
+        "x": 264,
+        "y": 136,
+        "depth": 136
+      },
+      {
+        "x": 344,
+        "y": 148,
+        "depth": 148
+      },
+      {
+        "x": 424,
+        "y": 160,
+        "depth": 160
+      },
+      {
+        "x": 504,
+        "y": 136,
+        "depth": 136
+      },
+      {
+        "x": 584,
+        "y": 148,
+        "depth": 148
+      },
+      {
+        "x": 664,
+        "y": 160,
+        "depth": 160
+      },
+      {
+        "x": 744,
+        "y": 136,
+        "depth": 136
+      },
+      {
+        "x": 824,
+        "y": 148,
+        "depth": 148
+      },
+      {
+        "x": 904,
+        "y": 160,
+        "depth": 160
+      },
+      {
+        "x": 24,
+        "y": 280,
+        "depth": 280
+      },
+      {
+        "x": 24,
+        "y": 404,
+        "depth": 404
+      },
+      {
+        "x": 24,
+        "y": 536,
+        "depth": 536
+      },
+      {
+        "x": 936,
+        "y": 280,
+        "depth": 280
+      },
+      {
+        "x": 936,
+        "y": 404,
+        "depth": 404
+      },
+      {
+        "x": 936,
+        "y": 536,
+        "depth": 536
+      },
+      {
+        "x": 440,
+        "y": 240,
+        "depth": 240
+      },
+      {
+        "x": 840,
+        "y": 440,
+        "depth": 440
+      },
+      {
+        "x": 32,
+        "y": 656,
+        "depth": 656
+      },
+      {
+        "x": 128,
+        "y": 656,
+        "depth": 656
+      },
+      {
+        "x": 400,
+        "y": 656,
+        "depth": 656
+      },
+      {
+        "x": 496,
+        "y": 656,
+        "depth": 656
+      },
+      {
+        "x": 608,
+        "y": 656,
+        "depth": 656
+      },
+      {
+        "x": 928,
+        "y": 656,
+        "depth": 656
+      }
+    ],
+    "bambooScenery": [
+      {
+        "name": "grass_tuft",
+        "texture": "bamboo_scenery",
+        "x": 320,
+        "y": 215,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "grass_tuft",
+        "texture": "bamboo_scenery",
+        "x": 784,
+        "y": 184,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "grass_tuft",
+        "texture": "bamboo_scenery",
+        "x": 90,
+        "y": 440,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "grass_tuft",
+        "texture": "bamboo_scenery",
+        "x": 528,
+        "y": 487,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "grass_tuft",
+        "texture": "bamboo_scenery",
+        "x": 902,
+        "y": 350,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "grass_tuft",
+        "texture": "bamboo_scenery",
+        "x": 400,
+        "y": 510,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.875
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_root",
+        "texture": "bamboo_scenery",
+        "x": 392,
+        "y": 205,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.9
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_root",
+        "texture": "bamboo_scenery",
+        "x": 878,
+        "y": 475,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.9
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_root",
+        "texture": "bamboo_scenery",
+        "x": 74,
+        "y": 510,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.9
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bridge_deck",
+        "texture": "bamboo_scenery",
+        "x": 224,
+        "y": 612,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.9642857142857143
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bridge_deck",
+        "texture": "bamboo_scenery",
+        "x": 800,
+        "y": 612,
+        "depth": -9000,
+        "origin": [
+          0.5,
+          0.9642857142857143
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 24,
+        "y": 136,
+        "depth": 136,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 264,
+        "y": 136,
+        "depth": 136,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 504,
+        "y": 136,
+        "depth": 136,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 744,
+        "y": 136,
+        "depth": 136,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 104,
+        "y": 148,
+        "depth": 148,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 344,
+        "y": 148,
+        "depth": 148,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 584,
+        "y": 148,
+        "depth": 148,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 824,
+        "y": 148,
+        "depth": 148,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "shrine",
+        "texture": "bamboo_scenery",
+        "x": 480,
+        "y": 156,
+        "depth": 156,
+        "origin": [
+          0.5,
+          0.9722222222222222
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 184,
+        "y": 160,
+        "depth": 160,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 424,
+        "y": 160,
+        "depth": 160,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 664,
+        "y": 160,
+        "depth": 160,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 904,
+        "y": 160,
+        "depth": 160,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gate",
+        "texture": "bamboo_scenery",
+        "x": 760,
+        "y": 164,
+        "depth": 164,
+        "origin": [
+          0.5,
+          0.9722222222222222
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "ruin_wall",
+        "texture": "bamboo_scenery",
+        "x": 328,
+        "y": 168,
+        "depth": 168,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "ruin_wall",
+        "texture": "bamboo_scenery",
+        "x": 624,
+        "y": 168,
+        "depth": 168,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stone_lantern",
+        "texture": "bamboo_scenery",
+        "x": 392,
+        "y": 172,
+        "depth": 172,
+        "origin": [
+          0.5,
+          0.9583333333333334
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stone_lantern",
+        "texture": "bamboo_scenery",
+        "x": 568,
+        "y": 172,
+        "depth": 172,
+        "origin": [
+          0.5,
+          0.9583333333333334
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 565,
+        "y": 174,
+        "depth": 174,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_rocks",
+        "texture": "bamboo_scenery",
+        "x": 84,
+        "y": 176,
+        "depth": 176,
+        "origin": [
+          0.5,
+          0.9444444444444444
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 350,
+        "y": 184,
+        "depth": 184,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_rocks",
+        "texture": "bamboo_scenery",
+        "x": 590,
+        "y": 190,
+        "depth": 190,
+        "origin": [
+          0.5,
+          0.9444444444444444
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stone_monument",
+        "texture": "bamboo_scenery",
+        "x": 775,
+        "y": 195,
+        "depth": 195,
+        "origin": [
+          0.5,
+          0.9615384615384616
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 85,
+        "y": 202,
+        "depth": 202,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 894,
+        "y": 212,
+        "depth": 212,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 440,
+        "y": 240,
+        "depth": 240,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_rocks",
+        "texture": "bamboo_scenery",
+        "x": 890,
+        "y": 270,
+        "depth": 270,
+        "origin": [
+          0.5,
+          0.9444444444444444
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 24,
+        "y": 280,
+        "depth": 280,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 936,
+        "y": 280,
+        "depth": 280,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stone_lantern",
+        "texture": "bamboo_scenery",
+        "x": 212,
+        "y": 300,
+        "depth": 300,
+        "origin": [
+          0.5,
+          0.9583333333333334
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stone_lantern",
+        "texture": "bamboo_scenery",
+        "x": 104,
+        "y": 308,
+        "depth": 308,
+        "origin": [
+          0.5,
+          0.9583333333333334
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 24,
+        "y": 404,
+        "depth": 404,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_jade",
+        "texture": "bamboo_scenery",
+        "x": 936,
+        "y": 404,
+        "depth": 404,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 840,
+        "y": 440,
+        "depth": 440,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "training_dummy",
+        "texture": "bamboo_scenery",
+        "x": 398,
+        "y": 448,
+        "depth": 448,
+        "origin": [
+          0.5,
+          0.95
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "training_dummy",
+        "texture": "bamboo_scenery",
+        "x": 540,
+        "y": 448,
+        "depth": 448,
+        "origin": [
+          0.5,
+          0.95
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stump",
+        "texture": "bamboo_scenery",
+        "x": 342,
+        "y": 468,
+        "depth": 468,
+        "origin": [
+          0.5,
+          0.9285714285714286
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 80,
+        "y": 482,
+        "depth": 482,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 362,
+        "y": 488,
+        "depth": 488,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 548,
+        "y": 500,
+        "depth": 500,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bush",
+        "texture": "bamboo_scenery",
+        "x": 906,
+        "y": 500,
+        "depth": 500,
+        "origin": [
+          0.5,
+          0.9375
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "stone_lantern",
+        "texture": "bamboo_scenery",
+        "x": 806,
+        "y": 500,
+        "depth": 500,
+        "origin": [
+          0.5,
+          0.9583333333333334
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_fence",
+        "texture": "bamboo_scenery",
+        "x": 330,
+        "y": 510,
+        "depth": 510,
+        "origin": [
+          0.5,
+          0.9285714285714286
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_fence",
+        "texture": "bamboo_scenery",
+        "x": 520,
+        "y": 522,
+        "depth": 522,
+        "origin": [
+          0.5,
+          0.9285714285714286
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 24,
+        "y": 536,
+        "depth": 536,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_gold",
+        "texture": "bamboo_scenery",
+        "x": 936,
+        "y": 536,
+        "depth": 536,
+        "origin": [
+          0.5,
+          0.9791666666666666
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_rocks",
+        "texture": "bamboo_scenery",
+        "x": 74,
+        "y": 540,
+        "depth": 540,
+        "origin": [
+          0.5,
+          0.9444444444444444
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_rocks",
+        "texture": "bamboo_scenery",
+        "x": 572,
+        "y": 560,
+        "depth": 560,
+        "origin": [
+          0.5,
+          0.9444444444444444
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "moss_rocks",
+        "texture": "bamboo_scenery",
+        "x": 908,
+        "y": 560,
+        "depth": 560,
+        "origin": [
+          0.5,
+          0.9444444444444444
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "canopy",
+        "texture": "bamboo_scenery",
+        "x": 24,
+        "y": 608,
+        "depth": 608,
+        "origin": [
+          0.5,
+          0.9642857142857143
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "canopy",
+        "texture": "bamboo_scenery",
+        "x": 936,
+        "y": 608,
+        "depth": 608,
+        "origin": [
+          0.5,
+          0.9642857142857143
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bridge_front",
+        "texture": "bamboo_scenery",
+        "x": 224,
+        "y": 612,
+        "depth": 612,
+        "origin": [
+          0.5,
+          0.9642857142857143
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bridge_front",
+        "texture": "bamboo_scenery",
+        "x": 800,
+        "y": 612,
+        "depth": 612,
+        "origin": [
+          0.5,
+          0.9642857142857143
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_single",
+        "texture": "bamboo_scenery",
+        "x": 32,
+        "y": 656,
+        "depth": 656,
+        "origin": [
+          0.5,
+          0.9772727272727273
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_single",
+        "texture": "bamboo_scenery",
+        "x": 128,
+        "y": 656,
+        "depth": 656,
+        "origin": [
+          0.5,
+          0.9772727272727273
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_single",
+        "texture": "bamboo_scenery",
+        "x": 400,
+        "y": 656,
+        "depth": 656,
+        "origin": [
+          0.5,
+          0.9772727272727273
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_single",
+        "texture": "bamboo_scenery",
+        "x": 496,
+        "y": 656,
+        "depth": 656,
+        "origin": [
+          0.5,
+          0.9772727272727273
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_single",
+        "texture": "bamboo_scenery",
+        "x": 608,
+        "y": 656,
+        "depth": 656,
+        "origin": [
+          0.5,
+          0.9772727272727273
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      },
+      {
+        "name": "bamboo_single",
+        "texture": "bamboo_scenery",
+        "x": 928,
+        "y": 656,
+        "depth": 656,
+        "origin": [
+          0.5,
+          0.9772727272727273
+        ],
+        "scale": [
+          1,
+          1
+        ]
+      }
+    ],
+    "desertScenery": [],
+    "animations": [
+      "hero_cai_bang:idle:down",
+      "hero_cai_bang:walk:down",
+      "hero_cai_bang:basic_attack:down",
+      "hero_cai_bang:idle:left",
+      "hero_cai_bang:walk:left",
+      "hero_cai_bang:basic_attack:left",
+      "hero_cai_bang:idle:right",
+      "hero_cai_bang:walk:right",
+      "hero_cai_bang:basic_attack:right",
+      "hero_cai_bang:idle:up",
+      "hero_cai_bang:walk:up",
+      "hero_cai_bang:basic_attack:up",
+      "hero_cai_bang:cast:down",
+      "hero_cai_bang:hurt:down",
+      "hero_cai_bang:death:down",
+      "hero_cai_bang:cast:left",
+      "hero_cai_bang:hurt:left",
+      "hero_cai_bang:death:left",
+      "hero_cai_bang:cast:right",
+      "hero_cai_bang:hurt:right",
+      "hero_cai_bang:death:right",
+      "hero_cai_bang:cast:up",
+      "hero_cai_bang:hurt:up",
+      "hero_cai_bang:death:up"
+    ],
+    "art01": {
+      "textures": [
+        {
+          "key": "arena_ground_art01",
+          "exists": true,
+          "frames": []
+        },
+        {
+          "key": "arena_world_art01",
+          "exists": true,
+          "frames": [
+            "statue_male",
+            "tree_jade",
+            "tree_blossom",
+            "bamboo",
+            "lantern",
+            "red_banner"
+          ]
+        },
+        {
+          "key": "arena_garden_art01",
+          "exists": true,
+          "frames": [
+            "cascade",
+            "stream_pool",
+            "bridge",
+            "flower_rocks"
+          ]
+        },
+        {
+          "key": "arena_ambient_art01",
+          "exists": true,
+          "frames": [
+            "cascade_flow_0",
+            "cascade_flow_1",
+            "cascade_flow_2",
+            "cascade_flow_3",
+            "stream_pool_flow_0",
+            "stream_pool_flow_1",
+            "stream_pool_flow_2",
+            "stream_pool_flow_3",
+            "lantern_glow_0",
+            "lantern_glow_1",
+            "lantern_glow_2",
+            "lantern_glow_3"
+          ]
+        }
+      ],
+      "objects": [],
+      "statueCollision": "Authoritative pedestal footprint: x760,y548,w80,h28"
+    }
+  },
+  "observedWalkFrames": [
+    "walk_right_0",
+    "walk_right_1"
+  ],
+  "placeholderAnimations": {
+    "status": "placeholder",
+    "source": "assets/source/m1_art.py",
+    "texture": "creep_outlaw",
+    "controlledServerPoses": true,
+    "observed": {
+      "creep_outlaw:idle:down": [
+        "idle_down_0",
+        "idle_down_1",
+        "idle_down_2",
+        "idle_down_3"
+      ],
+      "creep_outlaw:idle:left": [
+        "idle_left_0",
+        "idle_left_1",
+        "idle_left_2",
+        "idle_left_3"
+      ],
+      "creep_outlaw:idle:right": [
+        "idle_right_0",
+        "idle_right_1",
+        "idle_right_2",
+        "idle_right_3"
+      ],
+      "creep_outlaw:idle:up": [
+        "idle_up_0",
+        "idle_up_1",
+        "idle_up_2",
+        "idle_up_3"
+      ],
+      "creep_outlaw:walk:down": [
+        "walk_down_0",
+        "walk_down_1",
+        "walk_down_2",
+        "walk_down_3"
+      ],
+      "creep_outlaw:walk:left": [
+        "walk_left_0",
+        "walk_left_1",
+        "walk_left_2",
+        "walk_left_3"
+      ],
+      "creep_outlaw:walk:right": [
+        "walk_right_0",
+        "walk_right_1",
+        "walk_right_2",
+        "walk_right_3"
+      ],
+      "creep_outlaw:walk:up": [
+        "walk_up_0",
+        "walk_up_1",
+        "walk_up_2",
+        "walk_up_3"
+      ],
+      "creep_outlaw:basic_attack:down": [
+        "basic_attack_down_0",
+        "basic_attack_down_1",
+        "basic_attack_down_2",
+        "basic_attack_down_3"
+      ],
+      "creep_outlaw:basic_attack:left": [
+        "basic_attack_left_0",
+        "basic_attack_left_1",
+        "basic_attack_left_2",
+        "basic_attack_left_3"
+      ],
+      "creep_outlaw:basic_attack:right": [
+        "basic_attack_right_0",
+        "basic_attack_right_1",
+        "basic_attack_right_2",
+        "basic_attack_right_3"
+      ],
+      "creep_outlaw:basic_attack:up": [
+        "basic_attack_up_0",
+        "basic_attack_up_1",
+        "basic_attack_up_2",
+        "basic_attack_up_3"
+      ],
+      "creep_outlaw:cast:down": [
+        "cast_down_0",
+        "cast_down_1",
+        "cast_down_2",
+        "cast_down_3"
+      ],
+      "creep_outlaw:cast:left": [
+        "cast_left_0",
+        "cast_left_1",
+        "cast_left_2",
+        "cast_left_3"
+      ],
+      "creep_outlaw:cast:right": [
+        "cast_right_0",
+        "cast_right_1",
+        "cast_right_2",
+        "cast_right_3"
+      ],
+      "creep_outlaw:cast:up": [
+        "cast_up_0",
+        "cast_up_1",
+        "cast_up_2",
+        "cast_up_3"
+      ],
+      "creep_outlaw:hurt:down": [
+        "hurt_down_0",
+        "hurt_down_1",
+        "hurt_down_2",
+        "hurt_down_3"
+      ],
+      "creep_outlaw:hurt:left": [
+        "hurt_left_0",
+        "hurt_left_1",
+        "hurt_left_2",
+        "hurt_left_3"
+      ],
+      "creep_outlaw:hurt:right": [
+        "hurt_right_0",
+        "hurt_right_1",
+        "hurt_right_2",
+        "hurt_right_3"
+      ],
+      "creep_outlaw:hurt:up": [
+        "hurt_up_0",
+        "hurt_up_1",
+        "hurt_up_2",
+        "hurt_up_3"
+      ],
+      "creep_outlaw:death:down": [
+        "death_down_0",
+        "death_down_1",
+        "death_down_2",
+        "death_down_3"
+      ],
+      "creep_outlaw:death:left": [
+        "death_left_0",
+        "death_left_1",
+        "death_left_2",
+        "death_left_3"
+      ],
+      "creep_outlaw:death:right": [
+        "death_right_0",
+        "death_right_1",
+        "death_right_2",
+        "death_right_3"
+      ],
+      "creep_outlaw:death:up": [
+        "death_up_0",
+        "death_up_1",
+        "death_up_2",
+        "death_up_3"
+      ]
+    },
+    "timings": {
+      "idle:down": 400,
+      "idle:left": 333.40000000000146,
+      "idle:right": 716.5,
+      "idle:up": 349.90000000000146,
+      "walk:down": 350,
+      "walk:left": 350,
+      "walk:right": 316.6999999999971,
+      "walk:up": 350,
+      "basic_attack:down": 849.9000000000087,
+      "basic_attack:left": 866.5999999999913,
+      "basic_attack:right": 800,
+      "basic_attack:up": 816.5,
+      "cast:down": 833.3000000000029,
+      "cast:left": 816.6999999999971,
+      "cast:right": 866.6000000000058,
+      "cast:up": 833.4000000000087,
+      "hurt:down": 866.6999999999971,
+      "hurt:left": 900,
+      "hurt:right": 883.2999999999884,
+      "hurt:up": 933.3000000000029,
+      "death:down": 883.3000000000029,
+      "death:left": 933.3000000000029,
+      "death:right": 916.6999999999971,
+      "death:up": 816.6999999999971
+    }
+  },
+  "portalReturn": true,
+  "bridgeCrossed": true,
+  "errors": []
+}

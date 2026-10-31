@@ -62,8 +62,8 @@ export const caiBangExtraSkills: Ability[] = [
     effect: {
       mode: 'arc',
       damage: 40,
-      range: 85,
-      halfAngle: Math.PI * 0.65,
+      range: 110,
+      halfAngle: Math.PI,
       cleave: 1,
       statuses: [{ kind: 'slow', durationTicks: 90, magnitude: 0.4 }],
     },
@@ -76,7 +76,7 @@ export const caiBangExtraSkills: Ability[] = [
     effect: {
       mode: 'arc',
       damage: 55,
-      range: 65,
+      range: 78,
       halfAngle: Math.PI / 4,
       cleave: 1,
       singleTarget: true,
@@ -91,10 +91,10 @@ export const caiBangExtraSkills: Ability[] = [
     effect: {
       mode: 'arc',
       damage: 0,
-      range: 160,
+      range: 220,
       halfAngle: Math.PI / 3,
       cleave: 1,
-      pull: 90,
+      pull: 120,
       statuses: [
         { kind: 'silence', durationTicks: 60, magnitude: 1 },
         { kind: 'disarm', durationTicks: 60, magnitude: 1 },
@@ -111,7 +111,7 @@ export const caiBangExtraSkills: Ability[] = [
       distance: 140,
       speed: 700,
       radius: 24,
-      damage: 44,
+      damage: 66,
       stunTicks: 30,
     },
   },
@@ -122,12 +122,12 @@ export const caiBangExtraSkills: Ability[] = [
     cooldownTicks: 540,
     effect: {
       mode: 'multi_hit',
-      range: 90,
+      range: 135,
       damage: 18,
       hits: 4,
       spacingTicks: 7,
       finisherDamage: 75,
-      finisherRange: 110,
+      finisherRange: 160,
     },
   },
 ];

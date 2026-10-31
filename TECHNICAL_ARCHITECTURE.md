@@ -1,5 +1,13 @@
 # Technical Architecture Decision Record v1.0
 
+## Desert integration — 2026-10-31
+
+Protocol 11 adds optional validated forest/desert selection (forest default) and a server-selected creep archetype ID. DungeonMatch registers multiple definitions while retaining its existing constructor/default behavior; every dungeon zone owns its definition, geometry and independent clock. The shared Tiled desert map drives authoritative collision/markers and Phaser presentation. Retained original PNG/atlas metadata feeds `desert-art.ts`, including explicit per-frame timings and foot pivots. No enemy stats, AI, damage, rewards or projectile behavior changes. Source/provenance/status, specialized-behavior gaps and validation: `docs/DESERT_INTEGRATION.md`.
+
+## M3C3 feedback gameplay revision — 2026-10-31
+
+Reusable core extensions add accepted-input basic stages, two-leg projectiles, per-cast refunds, per-projectile growth coefficients, moving-dash guards, action-scoped mitigation, radial projectile bursts, bounded CDR, toggle shields and terrain-safe area confinement. `basic-attacks.ts` and `confinement.ts` remain engine/transport independent. Protocol10 projects projectile radius/stage/leg; clients cannot submit those fields. `feedback-visuals.ts` explicitly reuses retained raster assets, while semantic phases and observer frame checks keep presentation independent of authoritative damage. No PNG/atlas/approval lock changes or new art integration. Details: `docs/M3C3_FEEDBACK_IMPLEMENTATION.md`.
+
 ## M3C3 fourth-school integration — 2026-10-31
 
 Thiếu Lâm composes shared arc,multi-hit,buff,projectile and new ally-support effects via validated `game-data/thieu-lam.ts`. Deterministic `combos.ts` owns per-source/target/chain state; action-local caches prevent repeated finisher consumption. Protocol9 adds only a view-filtered player combo projection; room authority/zone isolation and M3B stay intact. Prepared skill art now merges all four retained manifests. Semantic gold/support/empowered phases use the existing PNG/atlas renderer; supplied source bytes are retained. See `docs/M3C3_IMPLEMENTATION.md` and `docs/M3C3_SKILL_ASSET_MAP.md`.

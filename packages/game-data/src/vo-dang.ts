@@ -24,24 +24,31 @@ export const voDangBasics: Record<string, Ability> = {
     id: 'vo_dang_quyen',
     nameVi: 'Võ Đang Quyền',
     manaCost: 0,
-    cooldownTicks: 13,
+    cooldownTicks: 9,
+    minIntervalTicks: 5,
+    basicCombo: [
+      { stage: 'left_palm', damageMultiplier: 1 },
+      { stage: 'right_palm', damageMultiplier: 1 },
+    ],
     effect: {
       mode: 'arc',
       damage: 19,
-      range: 50,
+      range: 65,
       halfAngle: Math.PI / 3,
       cleave: 0.2,
+      knockback: 10,
     },
   },
   vo_dang_kiem: {
     id: 'vo_dang_kiem',
     nameVi: 'Võ Đang Kiếm',
     manaCost: 0,
-    cooldownTicks: 18,
+    cooldownTicks: 12,
+    minIntervalTicks: 5,
     effect: {
       mode: 'arc',
       damage: 27,
-      range: 62,
+      range: 78,
       halfAngle: Math.PI / 3,
       cleave: 0.35,
       projectileProc: { chance: 0.25, effect: swordQi },
@@ -53,13 +60,14 @@ export const voDangSkills: Ability[] = [
     id: 'luong_nghi_thu',
     nameVi: 'Lưỡng Nghi Thủ',
     manaCost: 8,
-    cooldownTicks: 60,
+    cooldownTicks: 42,
     effect: {
-      mode: 'arc',
+      ...swordQi,
       damage: 28,
-      range: 64,
-      halfAngle: Math.PI / 3,
-      cleave: 0.5,
+      range: 240,
+      radius: 14,
+      useFacing: true,
+      piercing: true,
       statuses: [{ kind: 'attack_break', durationTicks: 90, magnitude: 0.2 }],
     },
   },
@@ -71,9 +79,9 @@ export const voDangSkills: Ability[] = [
     effect: {
       ...swordQi,
       damage: 30,
-      range: 170,
+      range: 260,
       speed: 300,
-      radius: 22,
+      radius: 30,
       useFacing: true,
       piercing: true,
       statuses: [
@@ -86,26 +94,28 @@ export const voDangSkills: Ability[] = [
     id: 'duong_khi_kich',
     nameVi: 'Dương Khí Kích',
     manaCost: 10,
-    cooldownTicks: 75,
+    cooldownTicks: 48,
     effect: {
-      mode: 'arc',
+      ...swordQi,
       damage: 34,
-      range: 60,
-      halfAngle: Math.PI / 3,
-      cleave: 0.4,
+      range: 220,
+      radius: 16,
+      useFacing: true,
+      piercing: true,
       manaRefund: 7,
     },
   },
   {
     id: 'thai_cuc_than_cong',
     nameVi: 'Thái Cực Thần Công',
-    manaCost: 12,
-    cooldownTicks: 270,
+    manaCost: 0,
+    cooldownTicks: 1,
     effect: {
       mode: 'mana_shield',
       durationTicks: 180,
-      absorbFraction: 0.8,
+      absorbFraction: 1,
       manaPerDamage: 1.25,
+      toggle: true,
     },
   },
   {
@@ -119,6 +129,7 @@ export const voDangSkills: Ability[] = [
       tickInterval: 30,
       radius: 125,
       damage: 24,
+      confines: true,
       statuses: [
         { kind: 'slow', durationTicks: 35, magnitude: 0.35 },
         { kind: 'attack_slow', durationTicks: 35, magnitude: 0.2 },
@@ -200,11 +211,11 @@ export const voDangSkills: Ability[] = [
   },
 ];
 const descriptions = [
-  'Chưởng nhanh ít hao nội lực, tạm giảm lực công kích của địch trúng đòn.',
-  'Sóng âm bay thẳng tầm ngắn; giảm riêng tốc độ di chuyển và tốc độ đánh.',
-  'Chưởng cận chiến; hoàn nội lực một lần khi trúng ít nhất một địch, không hoàn khi hụt.',
-  'Khiên có thời hạn: dùng nội lực hấp thụ sát thương; nội lực cạn thì nhận phần còn lại.',
-  'Tuyệt kỹ: trận âm dương cố định tại chỗ thi triển, gây sát thương và làm chậm theo nhịp.',
+  'Âm dương bay thẳng, tạm giảm lực công kích của địch trúng đòn.',
+  'Sóng âm lớn bay thẳng; giảm riêng tốc độ di chuyển và tốc độ đánh.',
+  'Khí chưởng bay thẳng; hoàn nội lực một lần khi trúng, không hoàn khi hụt.',
+  'Bật/tắt khiên dùng nội lực chịu sát thương; không phí bật và không hồi chiêu phụ. Thiếu nội lực nhận phần còn lại.',
+  'Tuyệt kỹ: trận âm dương cố định, sát thương theo nhịp; địch không vượt biên, vẫn di chuyển và đánh bên trong; địch miễn cưỡng chế được thoát.',
   'Bốn nhát kiếm mạnh liên tiếp trong cung phía trước.',
   'Kiếm khí bay thẳng theo hướng nhìn, xuyên nhiều địch nhưng mỗi địch chỉ trúng một lần.',
   'Kiếm trận cố định tại chỗ thi triển, gây sát thương theo nhịp lên địch trong trận.',
@@ -238,8 +249,10 @@ export function addVoDangProgression(d: ProgressionDefinition): void {
     const ranks = gates.map((_, r) => {
       const a = abilitySchema.parse(base),
         e = a.effect;
-      a.manaCost += r * (ultimate ? 2 : 1);
-      a.cooldownTicks -= r * (ultimate ? 12 : 3);
+      if (e.mode !== 'mana_shield' || !e.toggle) {
+        a.manaCost += r * (ultimate ? 2 : 1);
+        a.cooldownTicks -= r * (ultimate ? 12 : 3);
+      }
       if (e.mode === 'arc' || e.mode === 'projectile') {
         e.damage += r * (ultimate ? 9 : 6);
         e.range += r * 5;
@@ -247,10 +260,10 @@ export function addVoDangProgression(d: ProgressionDefinition): void {
           s.magnitude += 0.03 * r;
           s.durationTicks += 10 * r;
         }
-        if (e.mode === 'arc' && e.manaRefund) e.manaRefund += 2 * r;
+        if (e.manaRefund) e.manaRefund += 2 * r;
       } else if (e.mode === 'mana_shield') {
         e.durationTicks += 15 * r;
-        e.absorbFraction += 0.05 * r;
+        e.absorbFraction = Math.min(1, e.absorbFraction + 0.05 * r);
         e.manaPerDamage -= 0.1 * r;
       } else if (e.mode === 'area') {
         e.damage += r * 5;

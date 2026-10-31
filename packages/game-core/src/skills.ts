@@ -2,6 +2,7 @@ import { direction, distance, segmentCircle, segmentRect } from './geometry.js';
 import { emit, hurt, offensiveStats } from './combat.js';
 import { applyStatus, displace, hasStatus } from './status.js';
 import { rankedAbility, characterStats } from './progression.js';
+import { captureConfinement, confineMovement } from './confinement.js';
 import type {
   Ability,
   AllyEffect,
@@ -64,6 +65,7 @@ function damageFor(
   raw: number,
   config: SimulationConfig,
   tick: number,
+  growthScale = 1,
 ): number {
   if (hero.progression)
     return raw <= 0
@@ -71,13 +73,15 @@ function damageFor(
       : Math.max(
           1,
           raw +
-            characterStats(hero, config, tick).total.attackPower -
-            config.progression!.schools[hero.schoolId]!.base.attackPower,
+            (characterStats(hero, config, tick).total.attackPower -
+              config.progression!.schools[hero.schoolId]!.base.attackPower) *
+              growthScale,
         );
   return raw <= 0
     ? 0
     : raw +
-        Math.max(0, hero.level - 1) *
+        growthScale *
+          Math.max(0, hero.level - 1) *
           (config.attackPerLevel +
             (hero.schoolId === 'cai_bang'
               ? (config.caiBangPassive?.damagePerLevel ?? 0)
@@ -92,11 +96,16 @@ function queueProjectiles(
   config: SimulationConfig,
   dx: number,
   dy: number,
+  stage?: string,
 ): void {
   const crit = offensiveStats(world, hero.id, config);
+  const refund = effect.manaRefund
+    ? { amount: effect.manaRefund, used: false }
+    : undefined;
   for (let i = 0; i < effect.count; i++) {
-    const angle =
-      effect.spreadAngle && effect.count > 1
+    const angle = effect.radial
+      ? (Math.PI * 2 * i) / effect.count
+      : effect.spreadAngle && effect.count > 1
         ? -effect.spreadAngle / 2 +
           (effect.spreadAngle * i) / (effect.count - 1)
         : 0;
@@ -108,8 +117,16 @@ function queueProjectiles(
       y: hero.y,
       dx: dx * Math.cos(angle) - dy * Math.sin(angle),
       dy: dx * Math.sin(angle) + dy * Math.cos(angle),
-      rawDamage: damageFor(hero, effect.damage, config, world.tick),
+      rawDamage: damageFor(
+        hero,
+        effect.damage,
+        config,
+        world.tick,
+        effect.attackPowerScale ?? 1,
+      ),
       ...crit,
+      ...(refund ? { refund } : {}),
+      ...(stage ? { stage } : {}),
     });
   }
 }
@@ -195,6 +212,7 @@ function strikeArc(
         ) || hit;
     }
     if (enemy.hp <= 0) return;
+    const before = { x: enemy.x, y: enemy.y };
     for (const status of effect.statuses ?? [])
       applyStatus(enemy, status, hero.id, ability.id, world.tick);
     if (effect.pull) {
@@ -209,6 +227,16 @@ function strikeArc(
         world.tick,
       );
     }
+    if (effect.knockback)
+      displace(
+        enemy,
+        heading.fx * effect.knockback,
+        heading.fy * effect.knockback,
+        (enemy.stats ?? config.creep).radius,
+        config,
+        world.tick,
+      );
+    confineMovement(world, enemy, before, config);
     if (effect.statuses?.length || effect.pull) {
       enemy.hits[hero.id] = world.tick;
       emit(world, {
@@ -256,6 +284,7 @@ export function perform(
   ability: Ability,
   config: SimulationConfig,
   kind: 'attack' | 'cast',
+  stage?: string,
 ): void {
   const effect = ability.effect,
     crit = offensiveStats(world, hero.id, config);
@@ -265,7 +294,7 @@ export function perform(
     hero.fy = aim.y;
   }
   hero.pose = kind === 'cast' ? 'cast' : 'basic_attack';
-  hero.actionUntil = world.tick + 12;
+  hero.actionUntil = kind === 'attack' ? hero.cooldown : world.tick + 12;
   hero.castAbilityId = ability.id;
   emit(world, {
     kind,
@@ -278,6 +307,8 @@ export function perform(
     y: hero.y,
     fx: hero.fx,
     fy: hero.fy,
+    radius: 'range' in effect ? effect.range : 0,
+    ...(stage ? { stage } : {}),
   });
   if (!(effect.mode === 'arc' && effect.windupTicks))
     for (const spec of ability.selfStatuses ?? [])
@@ -285,7 +316,16 @@ export function perform(
   if (ability.allies)
     supportAllies(world, hero, ability.id, ability.allies, config);
   if (effect.mode === 'projectile') {
-    queueProjectiles(world, hero, ability, effect, config, hero.fx, hero.fy);
+    queueProjectiles(
+      world,
+      hero,
+      ability,
+      effect,
+      config,
+      hero.fx,
+      hero.fy,
+      stage,
+    );
   } else if (effect.mode === 'arc') {
     if (effect.windupTicks) {
       const duration = effect.windupTicks + 1;
@@ -340,13 +380,29 @@ export function perform(
       effect,
     });
   } else if (effect.mode === 'mana_shield') {
+    const active = hero.statuses?.some(
+      (s) =>
+        s.kind === 'mana_shield' &&
+        s.abilityId === ability.id &&
+        s.until > world.tick,
+    );
+    if (effect.toggle && active) {
+      hero.statuses = hero.statuses!.filter(
+        (s) => !(s.kind === 'mana_shield' && s.abilityId === ability.id),
+      );
+      cue(world, hero, ability.id, 'toggle_off');
+      return;
+    }
     applyStatus(
       hero,
       {
         kind: 'mana_shield',
-        durationTicks: effect.durationTicks,
+        durationTicks: effect.toggle
+          ? Number.MAX_SAFE_INTEGER - world.tick
+          : effect.durationTicks,
         magnitude: effect.absorbFraction,
         secondary: effect.manaPerDamage,
+        toggle: effect.toggle,
       },
       hero.id,
       ability.id,
@@ -382,7 +438,20 @@ export function perform(
       rawDamage: damageFor(hero, effect.damage, config, world.tick),
       ...crit,
     });
+    captureConfinement(world, config);
   } else if (effect.mode === 'buff') {
+    if (effect.cooldownReduction)
+      applyStatus(
+        hero,
+        {
+          kind: 'cooldown_buff',
+          durationTicks: effect.durationTicks,
+          magnitude: effect.cooldownReduction,
+        },
+        hero.id,
+        ability.id,
+        world.tick,
+      );
     if (effect.movementSpeed || effect.attackSpeed)
       applyStatus(
         hero,
@@ -418,6 +487,7 @@ export function perform(
           durationTicks: effect.counter.durationTicks,
           magnitude: damageFor(hero, effect.counter.damage, config, world.tick),
           secondary: effect.counter.range,
+          evade: false,
         },
         hero.id,
         ability.id,
@@ -433,7 +503,7 @@ export function perform(
       {
         kind: effect.mode === 'dash' ? 'dash' : 'channel',
         durationTicks: duration,
-        magnitude: 1,
+        magnitude: effect.mode === 'multi_hit' ? effect.range : 1,
       },
       hero.id,
       ability.id,
@@ -508,6 +578,7 @@ export function stepAreas(world: World, config: SimulationConfig): void {
 }
 export function stepSkillActions(world: World, config: SimulationConfig): void {
   for (const action of world.actions ?? []) {
+    if (action.until <= world.tick) continue;
     const hero = world.heroes.get(action.ownerId);
     if (!hero || hero.hp <= 0 || hasStatus(hero, 'stun', world.tick)) {
       action.until = world.tick;
@@ -543,6 +614,14 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
         old = { x: hero.x, y: hero.y },
         n = Math.min(action.remaining, e.speed / config.tickRate);
       displace(hero, action.fx * n, action.fy * n, config.radius, config);
+      if (e.invulnerable && distance(old, hero) > 0.01)
+        applyStatus(
+          hero,
+          { kind: 'dash_guard', durationTicks: 1, magnitude: 1 },
+          hero.id,
+          action.abilityId,
+          world.tick,
+        );
       action.remaining -= n;
       for (const enemy of world.creeps.values()) {
         if (
@@ -587,6 +666,20 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
         finish = action.remaining === 0,
         radius = finish ? e.finisherRange : e.range;
       cue(world, hero, action.abilityId, finish ? 'finisher' : 'sweep', radius);
+      if (
+        !finish &&
+        e.projectileBurst &&
+        (e.hits - action.remaining) % (e.projectileBurstEvery ?? 1) === 0
+      )
+        queueProjectiles(
+          world,
+          hero,
+          action.ability!,
+          e.projectileBurst,
+          config,
+          action.fx,
+          action.fy,
+        );
       for (const enemy of world.creeps.values())
         if (
           (!finish || e.finisherDamage > 0) &&

@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 2,
+  "id": "hang_long_hoa_vu_dragon_v2_impact",
+  "handoffId": "hang_long_hoa_vu_dragon_v2",
+  "role": "impact",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/01_cai_bang/hang_long_hoa_vu_dragon_v2_impact.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/hang_long_hoa_vu_dragon_v2/hang_long_hoa_vu_dragon_v2_impact.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/hang_long_hoa_vu_dragon_v2/hang_long_hoa_vu_dragon_v2_impact.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "impact_down",
+      "phase": "impact",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "frames": [
+        "impact_down_0",
+        "impact_down_1",
+        "impact_down_2",
+        "impact_down_3",
+        "impact_down_4"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 5,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "impact_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "ending_down",
+      "phase": "ending",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "frames": [
+        "ending_down_0",
+        "ending_down_1"
+      ],
+      "frameDurationsMs": [
+        75,
+        75
+      ],
+      "durationMsTotal": 150,
+      "frameCount": 2,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "impact_left",
+      "phase": "impact",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "frames": [
+        "impact_left_0",
+        "impact_left_1",
+        "impact_left_2",
+        "impact_left_3",
+        "impact_left_4"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 5,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "impact_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "ending_left",
+      "phase": "ending",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "frames": [
+        "ending_left_0",
+        "ending_left_1"
+      ],
+      "frameDurationsMs": [
+        75,
+        75
+      ],
+      "durationMsTotal": 150,
+      "frameCount": 2,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "impact_right",
+      "phase": "impact",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "frames": [
+        "impact_right_0",
+        "impact_right_1",
+        "impact_right_2",
+        "impact_right_3",
+        "impact_right_4"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 5,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "impact_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "ending_right",
+      "phase": "ending",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "frames": [
+        "ending_right_0",
+        "ending_right_1"
+      ],
+      "frameDurationsMs": [
+        75,
+        75
+      ],
+      "durationMsTotal": 150,
+      "frameCount": 2,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "impact_up",
+      "phase": "impact",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "frames": [
+        "impact_up_0",
+        "impact_up_1",
+        "impact_up_2",
+        "impact_up_3",
+        "impact_up_4"
+      ],
+      "frameDurationsMs": [
+        60,
+        60,
+        60,
+        60,
+        60
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 5,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "impact_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "ending_up",
+      "phase": "ending",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "frames": [
+        "ending_up_0",
+        "ending_up_1"
+      ],
+      "frameDurationsMs": [
+        75,
+        75
+      ],
+      "durationMsTotal": 150,
+      "frameCount": 2,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

@@ -108,6 +108,11 @@ export function characterStats(
   sources.temporary.defense =
     statusValue(hero, 'defense_buff', tick) -
     statusValue(hero, 'defense_break', tick);
+  sources.temporary.cooldownReduction = statusValue(
+    hero,
+    'cooldown_buff',
+    tick,
+  );
   const speed = statusValue(hero, 'speed_buff', tick);
   const attackSpeed = Math.max(
     0,
@@ -231,10 +236,11 @@ export function abilityCooldown(
   tick: number,
   basic = false,
 ): number {
-  if (!hero.progression) return ability.cooldownTicks;
+  if (!hero.progression)
+    return Math.max(ability.minIntervalTicks ?? 1, ability.cooldownTicks);
   const stats = characterStats(hero, config, tick).total;
   return Math.max(
-    1,
+    ability.minIntervalTicks ?? 1,
     Math.ceil(
       ability.cooldownTicks *
         (basic ? 1 / stats.attackSpeed : 1 - stats.cooldownReduction),

@@ -1,4 +1,5 @@
 import { heroTexture } from './art.js';
+import { forestArtNotice } from './forest-creeps.js';
 import {
   arena,
   lobbyConfig,
@@ -22,6 +23,7 @@ export class GameUI {
   private sessionId = '';
   private roomId = '';
   private study = false;
+  private dungeonDestination: 'forest' | 'desert' = 'forest';
   private ended = false;
   private defense: DefenseHud;
   private skillMenu: SkillMenu | undefined;
@@ -33,7 +35,10 @@ export class GameUI {
   onCheck: () => void = () => {};
   onLeave: () => void = () => {};
   onStudy: (enabled: boolean) => void = () => {};
-  onDungeonEnter: (access: 'private' | 'shared') => void = () => {};
+  onDungeonEnter: (
+    access: 'private' | 'shared',
+    destination: 'forest' | 'desert',
+  ) => void = () => {};
   constructor(artPreview: boolean) {
     element('#app').innerHTML = `
       <main id="viewport" aria-label="Võ Lâm game viewport">
@@ -143,6 +148,7 @@ export class GameUI {
     if (!id) this.state = undefined;
   }
   open(menu: Menu): void {
+    if (menu === 'dungeons') this.dungeonDestination = 'forest';
     if (this.ended) return;
     if (this.menu === menu) {
       this.close();
@@ -277,13 +283,28 @@ export class GameUI {
         const note = element('#dungeon-availability');
         note.hidden = !unavailable;
         note.textContent = unavailable
-          ? `${card.getAttribute('aria-label')} hiện chưa mở. Bạn có thể chọn Rừng Trúc.`
+          ? `${card.getAttribute('aria-label')} hiện chưa mở. Bạn có thể chọn Rừng Trúc hoặc Sa Mạc.`
           : '';
+        const destination = card.dataset['destination'];
+        if (
+          !unavailable &&
+          (destination === 'forest' || destination === 'desert')
+        ) {
+          this.dungeonDestination = destination;
+          for (const peer of document.querySelectorAll<HTMLButtonElement>(
+            '[data-destination]',
+          )) {
+            peer.setAttribute('aria-pressed', String(peer === card));
+            const check = peer.querySelector<HTMLElement>('.destination-check');
+            if (check) check.hidden = peer !== card;
+          }
+          if (this.state) this.refresh(this.state);
+        }
       });
     document.querySelector('#enter-dungeon')?.addEventListener('click', () => {
       const access = element<HTMLInputElement>('#dungeon-access').value;
       if (access === 'private' || access === 'shared')
-        this.onDungeonEnter(access);
+        this.onDungeonEnter(access, this.dungeonDestination);
     });
     for (const button of document.querySelectorAll<HTMLButtonElement>(
       '[data-shop-tab]',
@@ -404,7 +425,7 @@ export class GameUI {
     const entryNote = document.querySelector('#dungeon-entry-note');
     if (entryNote)
       entryNote.textContent = canEnter
-        ? 'Chọn Riêng hoặc Chung để vào Rừng Trúc.'
+        ? `Chọn Riêng hoặc Chung để vào ${this.dungeonDestination === 'desert' ? 'Sa Mạc' : 'Rừng Trúc'}.`
         : inArena
           ? 'Bạn cần hồi sinh trước khi vào phó bản.'
           : 'Đến cổng Lối Ra để trở về đấu trường.';
@@ -414,11 +435,20 @@ export class GameUI {
     const zone = state.dungeons.get(hero.zoneId);
     const zoneStatus = element('#zone-status');
     zoneStatus.hidden = inArena && hero.respawnTicks <= 0;
+    const desert = hero.zoneId.startsWith('desert_');
+    const artNotice = desert
+      ? 'Creep: prototype · chờ duyệt hình ảnh trong game'
+      : forestArtNotice(
+          [...state.creeps.values()]
+            .filter((a) => a.zoneId === hero.zoneId)
+            .map((a) => a.archetypeId),
+        );
+    zoneStatus.title = zone ? artNotice : '';
     zoneStatus.textContent =
       hero.respawnTicks > 0
         ? `Defeated · Return to arena in ${Math.ceil(hero.respawnTicks / m1Config.tickRate)}s`
         : zone
-          ? `Rừng Trúc · ${zone.access === 'private' ? 'Private' : 'Shared'} · Wave ${zone.wave} · ${zone.living} remaining${zone.nextWaveTicks > 0 ? ` · Next wave ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''}`
+          ? `${desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Private' : 'Shared'} · Wave ${zone.wave} · ${zone.living} remaining${zone.nextWaveTicks > 0 ? ` · Next wave ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
           : '';
     element('#hero-name').textContent = hero.nickname;
     element('#school-name').textContent =

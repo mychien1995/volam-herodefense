@@ -17,7 +17,7 @@ export const schools = [
     name: 'Thiên Sơn',
     element: 'Phong',
     description: 'Linh hoạt, tốc độ cao; sức chống chịu thấp hơn.',
-    style: 'Phiến và Đao đều cận chiến.',
+    style: 'Phiến ném quạt đi/về; Đao cận chiến cơ động.',
     attributes: 'Thiên về tốc độ di chuyển, tốc độ đánh và bạo kích.',
     passive: 'Bắc Minh Thần Công',
     basics: 'Thiên Sơn Phiến · Thiên Sơn Đao',

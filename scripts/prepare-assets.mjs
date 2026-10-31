@@ -2,6 +2,9 @@ import { mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { prepareArenaCreeps } from './prepare-arena-creeps.mjs';
+import { prepareForestCreepReview } from './prepare-forest-creep-review.mjs';
+import { prepareDesertAssets } from './prepare-desert-assets.mjs';
+import { prepareFeedbackV2Art } from './prepare-feedback-v2-art.mjs';
 import {
   assetWrites,
   copyIfChanged,
@@ -13,6 +16,7 @@ for (const [name, label] of [
   ['approved_cai_bang.lock.json', 'Cai Bang'],
   ['approved_thien_son.lock.json', 'Thien Son'],
   ['approved_vo_dang.lock.json', 'Vo Dang'],
+  ['approved_bamboo_forest.lock.json', 'Bamboo Forest environment'],
   ['approved_vo_dang_skills.lock.json', 'Vo Dang skills'],
   ['approved_thieu_lam.lock.json', 'Thieu Lam'],
   ['approved_arena_creeps_13_16.lock.json', 'arena creeps Waves 13–16'],
@@ -33,6 +37,7 @@ for (const [name, label] of [
   }
 }
 const dest = new URL('apps/game-client/public/assets/', root);
+prepareFeedbackV2Art();
 const skills = JSON.parse(
   readFileSync(
     new URL('assets/exports/skills/cai-bang/production_manifest_v1.json', root),
@@ -126,6 +131,8 @@ copyIfChanged(
   new URL('packages/game-data/src/arena-map.json', root),
 );
 prepareArenaCreeps();
+prepareForestCreepReview();
+prepareDesertAssets();
 console.info(
   `Prepared assets in ${fileURLToPath(dest)} (${assetWrites.changed} written, ${assetWrites.unchanged} unchanged)`,
 );

@@ -190,7 +190,8 @@ it('three schools share dungeon/arena combat, authoritative shield/counter/refun
   await expect
     .poll(() => events[1]!.some((e) => e.stage === 'counter'))
     .toBe(true);
-  expect(h.hp).toBeLessThan(h.maxHp);
+  expect(h.hp).toBe(h.maxHp);
+  expect(h.mana).toBeLessThan(h.maxMana);
   await expect
     .poll(() => events[2]!.some((e) => e.stage === 'refund'))
     .toBe(true);

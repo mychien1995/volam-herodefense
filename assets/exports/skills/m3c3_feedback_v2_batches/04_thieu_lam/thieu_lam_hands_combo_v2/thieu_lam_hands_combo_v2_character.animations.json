@@ -1,0 +1,2003 @@
+{
+  "schemaVersion": 2,
+  "id": "thieu_lam_hands_combo_v2_character",
+  "handoffId": "thieu_lam_hands_combo_v2",
+  "role": "character",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/04_thieu_lam/thieu_lam_hands_combo_v2_character.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/04_thieu_lam/thieu_lam_hands_combo_v2/thieu_lam_hands_combo_v2_character.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/04_thieu_lam/thieu_lam_hands_combo_v2/thieu_lam_hands_combo_v2_character.json",
+  "frameDimensions": [
+    160,
+    120
+  ],
+  "pivot": [
+    80,
+    96
+  ],
+  "origin": [
+    0.5,
+    0.8
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "left_fist_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 933.3333,
+      "minAcceptedAttackMs": 200,
+      "serverStage": "left_fist",
+      "playback": "fit accepted server interval; no visual hit clock; same-target combo remains server-owned",
+      "frames": [
+        "left_fist_down_0",
+        "left_fist_down_1",
+        "left_fist_down_2",
+        "left_fist_down_3"
+      ],
+      "frameDurationsMs": [
+        160,
+        160,
+        300,
+        313
+      ],
+      "durationMsTotal": 933,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "left_fist_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "right_fist_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 933.3333,
+      "minAcceptedAttackMs": 200,
+      "serverStage": "right_fist",
+      "playback": "fit accepted server interval; no visual hit clock; same-target combo remains server-owned",
+      "frames": [
+        "right_fist_down_0",
+        "right_fist_down_1",
+        "right_fist_down_2",
+        "right_fist_down_3"
+      ],
+      "frameDurationsMs": [
+        160,
+        160,
+        300,
+        313
+      ],
+      "durationMsTotal": 933,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "right_fist_down_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "la_han_quyen_normal_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "normal",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "la_han_quyen_normal_down_0",
+        "la_han_quyen_normal_down_1",
+        "la_han_quyen_normal_down_2",
+        "la_han_quyen_normal_down_3",
+        "la_han_quyen_normal_down_4",
+        "la_han_quyen_normal_down_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "la_han_quyen_normal_down_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "la_han_quyen_empowered_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "empowered",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "la_han_quyen_empowered_down_0",
+        "la_han_quyen_empowered_down_1",
+        "la_han_quyen_empowered_down_2",
+        "la_han_quyen_empowered_down_3",
+        "la_han_quyen_empowered_down_4",
+        "la_han_quyen_empowered_down_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "la_han_quyen_empowered_down_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "vi_da_quyen_normal_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "normal",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "vi_da_quyen_normal_down_0",
+        "vi_da_quyen_normal_down_1",
+        "vi_da_quyen_normal_down_2",
+        "vi_da_quyen_normal_down_3",
+        "vi_da_quyen_normal_down_4",
+        "vi_da_quyen_normal_down_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "vi_da_quyen_normal_down_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "vi_da_quyen_empowered_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "empowered",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "vi_da_quyen_empowered_down_0",
+        "vi_da_quyen_empowered_down_1",
+        "vi_da_quyen_empowered_down_2",
+        "vi_da_quyen_empowered_down_3",
+        "vi_da_quyen_empowered_down_4",
+        "vi_da_quyen_empowered_down_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "vi_da_quyen_empowered_down_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "dai_luc_kim_cuong_chuong_normal_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "normal",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "dai_luc_kim_cuong_chuong_normal_down_0",
+        "dai_luc_kim_cuong_chuong_normal_down_1",
+        "dai_luc_kim_cuong_chuong_normal_down_2",
+        "dai_luc_kim_cuong_chuong_normal_down_3",
+        "dai_luc_kim_cuong_chuong_normal_down_4",
+        "dai_luc_kim_cuong_chuong_normal_down_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "dai_luc_kim_cuong_chuong_normal_down_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "dai_luc_kim_cuong_chuong_empowered_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "empowered",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "dai_luc_kim_cuong_chuong_empowered_down_0",
+        "dai_luc_kim_cuong_chuong_empowered_down_1",
+        "dai_luc_kim_cuong_chuong_empowered_down_2",
+        "dai_luc_kim_cuong_chuong_empowered_down_3",
+        "dai_luc_kim_cuong_chuong_empowered_down_4",
+        "dai_luc_kim_cuong_chuong_empowered_down_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "dai_luc_kim_cuong_chuong_empowered_down_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "left_fist_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 933.3333,
+      "minAcceptedAttackMs": 200,
+      "serverStage": "left_fist",
+      "playback": "fit accepted server interval; no visual hit clock; same-target combo remains server-owned",
+      "frames": [
+        "left_fist_left_0",
+        "left_fist_left_1",
+        "left_fist_left_2",
+        "left_fist_left_3"
+      ],
+      "frameDurationsMs": [
+        160,
+        160,
+        300,
+        313
+      ],
+      "durationMsTotal": 933,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "left_fist_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "right_fist_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 933.3333,
+      "minAcceptedAttackMs": 200,
+      "serverStage": "right_fist",
+      "playback": "fit accepted server interval; no visual hit clock; same-target combo remains server-owned",
+      "frames": [
+        "right_fist_left_0",
+        "right_fist_left_1",
+        "right_fist_left_2",
+        "right_fist_left_3"
+      ],
+      "frameDurationsMs": [
+        160,
+        160,
+        300,
+        313
+      ],
+      "durationMsTotal": 933,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "right_fist_left_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "la_han_quyen_normal_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "normal",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "unarmed left-facing uses exact mirrored right poses; robe/bead design preserved",
+      "frames": [
+        "la_han_quyen_normal_left_0",
+        "la_han_quyen_normal_left_1",
+        "la_han_quyen_normal_left_2",
+        "la_han_quyen_normal_left_3",
+        "la_han_quyen_normal_left_4",
+        "la_han_quyen_normal_left_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "la_han_quyen_normal_left_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "la_han_quyen_empowered_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "empowered",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "unarmed left-facing uses exact mirrored right poses; robe/bead design preserved",
+      "frames": [
+        "la_han_quyen_empowered_left_0",
+        "la_han_quyen_empowered_left_1",
+        "la_han_quyen_empowered_left_2",
+        "la_han_quyen_empowered_left_3",
+        "la_han_quyen_empowered_left_4",
+        "la_han_quyen_empowered_left_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "la_han_quyen_empowered_left_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "vi_da_quyen_normal_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "normal",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "unarmed left-facing uses exact mirrored right poses; robe/bead design preserved",
+      "frames": [
+        "vi_da_quyen_normal_left_0",
+        "vi_da_quyen_normal_left_1",
+        "vi_da_quyen_normal_left_2",
+        "vi_da_quyen_normal_left_3",
+        "vi_da_quyen_normal_left_4",
+        "vi_da_quyen_normal_left_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "vi_da_quyen_normal_left_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "vi_da_quyen_empowered_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "empowered",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "unarmed left-facing uses exact mirrored right poses; robe/bead design preserved",
+      "frames": [
+        "vi_da_quyen_empowered_left_0",
+        "vi_da_quyen_empowered_left_1",
+        "vi_da_quyen_empowered_left_2",
+        "vi_da_quyen_empowered_left_3",
+        "vi_da_quyen_empowered_left_4",
+        "vi_da_quyen_empowered_left_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "vi_da_quyen_empowered_left_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "dai_luc_kim_cuong_chuong_normal_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "normal",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "unarmed left-facing uses exact mirrored right poses; robe/bead design preserved",
+      "frames": [
+        "dai_luc_kim_cuong_chuong_normal_left_0",
+        "dai_luc_kim_cuong_chuong_normal_left_1",
+        "dai_luc_kim_cuong_chuong_normal_left_2",
+        "dai_luc_kim_cuong_chuong_normal_left_3",
+        "dai_luc_kim_cuong_chuong_normal_left_4",
+        "dai_luc_kim_cuong_chuong_normal_left_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "dai_luc_kim_cuong_chuong_normal_left_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "dai_luc_kim_cuong_chuong_empowered_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "empowered",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "unarmed left-facing uses exact mirrored right poses; robe/bead design preserved",
+      "frames": [
+        "dai_luc_kim_cuong_chuong_empowered_left_0",
+        "dai_luc_kim_cuong_chuong_empowered_left_1",
+        "dai_luc_kim_cuong_chuong_empowered_left_2",
+        "dai_luc_kim_cuong_chuong_empowered_left_3",
+        "dai_luc_kim_cuong_chuong_empowered_left_4",
+        "dai_luc_kim_cuong_chuong_empowered_left_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "dai_luc_kim_cuong_chuong_empowered_left_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "left_fist_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 933.3333,
+      "minAcceptedAttackMs": 200,
+      "serverStage": "left_fist",
+      "playback": "fit accepted server interval; no visual hit clock; same-target combo remains server-owned",
+      "frames": [
+        "left_fist_right_0",
+        "left_fist_right_1",
+        "left_fist_right_2",
+        "left_fist_right_3"
+      ],
+      "frameDurationsMs": [
+        160,
+        160,
+        300,
+        313
+      ],
+      "durationMsTotal": 933,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "left_fist_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "right_fist_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 933.3333,
+      "minAcceptedAttackMs": 200,
+      "serverStage": "right_fist",
+      "playback": "fit accepted server interval; no visual hit clock; same-target combo remains server-owned",
+      "frames": [
+        "right_fist_right_0",
+        "right_fist_right_1",
+        "right_fist_right_2",
+        "right_fist_right_3"
+      ],
+      "frameDurationsMs": [
+        160,
+        160,
+        300,
+        313
+      ],
+      "durationMsTotal": 933,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "right_fist_right_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "la_han_quyen_normal_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "normal",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "la_han_quyen_normal_right_0",
+        "la_han_quyen_normal_right_1",
+        "la_han_quyen_normal_right_2",
+        "la_han_quyen_normal_right_3",
+        "la_han_quyen_normal_right_4",
+        "la_han_quyen_normal_right_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "la_han_quyen_normal_right_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "la_han_quyen_empowered_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "empowered",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "la_han_quyen_empowered_right_0",
+        "la_han_quyen_empowered_right_1",
+        "la_han_quyen_empowered_right_2",
+        "la_han_quyen_empowered_right_3",
+        "la_han_quyen_empowered_right_4",
+        "la_han_quyen_empowered_right_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "la_han_quyen_empowered_right_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "vi_da_quyen_normal_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "normal",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "vi_da_quyen_normal_right_0",
+        "vi_da_quyen_normal_right_1",
+        "vi_da_quyen_normal_right_2",
+        "vi_da_quyen_normal_right_3",
+        "vi_da_quyen_normal_right_4",
+        "vi_da_quyen_normal_right_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "vi_da_quyen_normal_right_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "vi_da_quyen_empowered_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "empowered",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "vi_da_quyen_empowered_right_0",
+        "vi_da_quyen_empowered_right_1",
+        "vi_da_quyen_empowered_right_2",
+        "vi_da_quyen_empowered_right_3",
+        "vi_da_quyen_empowered_right_4",
+        "vi_da_quyen_empowered_right_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "vi_da_quyen_empowered_right_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "dai_luc_kim_cuong_chuong_normal_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "normal",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "dai_luc_kim_cuong_chuong_normal_right_0",
+        "dai_luc_kim_cuong_chuong_normal_right_1",
+        "dai_luc_kim_cuong_chuong_normal_right_2",
+        "dai_luc_kim_cuong_chuong_normal_right_3",
+        "dai_luc_kim_cuong_chuong_normal_right_4",
+        "dai_luc_kim_cuong_chuong_normal_right_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "dai_luc_kim_cuong_chuong_normal_right_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "dai_luc_kim_cuong_chuong_empowered_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "empowered",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "dai_luc_kim_cuong_chuong_empowered_right_0",
+        "dai_luc_kim_cuong_chuong_empowered_right_1",
+        "dai_luc_kim_cuong_chuong_empowered_right_2",
+        "dai_luc_kim_cuong_chuong_empowered_right_3",
+        "dai_luc_kim_cuong_chuong_empowered_right_4",
+        "dai_luc_kim_cuong_chuong_empowered_right_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "dai_luc_kim_cuong_chuong_empowered_right_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "left_fist_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 933.3333,
+      "minAcceptedAttackMs": 200,
+      "serverStage": "left_fist",
+      "playback": "fit accepted server interval; no visual hit clock; same-target combo remains server-owned",
+      "frames": [
+        "left_fist_up_0",
+        "left_fist_up_1",
+        "left_fist_up_2",
+        "left_fist_up_3"
+      ],
+      "frameDurationsMs": [
+        160,
+        160,
+        300,
+        313
+      ],
+      "durationMsTotal": 933,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "left_fist_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "right_fist_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "contact",
+        "recovery",
+        "guard"
+      ],
+      "baseAttackMs": 933.3333,
+      "minAcceptedAttackMs": 200,
+      "serverStage": "right_fist",
+      "playback": "fit accepted server interval; no visual hit clock; same-target combo remains server-owned",
+      "frames": [
+        "right_fist_up_0",
+        "right_fist_up_1",
+        "right_fist_up_2",
+        "right_fist_up_3"
+      ],
+      "frameDurationsMs": [
+        160,
+        160,
+        300,
+        313
+      ],
+      "durationMsTotal": 933,
+      "frameCount": 4,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 1,
+          "frame": "right_fist_up_1",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "la_han_quyen_normal_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "normal",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "la_han_quyen_normal_up_0",
+        "la_han_quyen_normal_up_1",
+        "la_han_quyen_normal_up_2",
+        "la_han_quyen_normal_up_3",
+        "la_han_quyen_normal_up_4",
+        "la_han_quyen_normal_up_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "la_han_quyen_normal_up_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "la_han_quyen_empowered_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "empowered",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "la_han_quyen_empowered_up_0",
+        "la_han_quyen_empowered_up_1",
+        "la_han_quyen_empowered_up_2",
+        "la_han_quyen_empowered_up_3",
+        "la_han_quyen_empowered_up_4",
+        "la_han_quyen_empowered_up_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "la_han_quyen_empowered_up_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "vi_da_quyen_normal_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "normal",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "vi_da_quyen_normal_up_0",
+        "vi_da_quyen_normal_up_1",
+        "vi_da_quyen_normal_up_2",
+        "vi_da_quyen_normal_up_3",
+        "vi_da_quyen_normal_up_4",
+        "vi_da_quyen_normal_up_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "vi_da_quyen_normal_up_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "vi_da_quyen_empowered_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "empowered",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "vi_da_quyen_empowered_up_0",
+        "vi_da_quyen_empowered_up_1",
+        "vi_da_quyen_empowered_up_2",
+        "vi_da_quyen_empowered_up_3",
+        "vi_da_quyen_empowered_up_4",
+        "vi_da_quyen_empowered_up_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "vi_da_quyen_empowered_up_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "dai_luc_kim_cuong_chuong_normal_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "normal",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "dai_luc_kim_cuong_chuong_normal_up_0",
+        "dai_luc_kim_cuong_chuong_normal_up_1",
+        "dai_luc_kim_cuong_chuong_normal_up_2",
+        "dai_luc_kim_cuong_chuong_normal_up_3",
+        "dai_luc_kim_cuong_chuong_normal_up_4",
+        "dai_luc_kim_cuong_chuong_normal_up_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "dai_luc_kim_cuong_chuong_normal_up_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "dai_luc_kim_cuong_chuong_empowered_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "framePhases": [
+        "anticipation",
+        "anticipation",
+        "contact",
+        "follow-through",
+        "recovery",
+        "guard"
+      ],
+      "variant": "empowered",
+      "empoweredMotion": "same stance cels; empowered differentiation supplied by separate stronger VFX, no character growth",
+      "directionReuse": "independently authored source",
+      "frames": [
+        "dai_luc_kim_cuong_chuong_empowered_up_0",
+        "dai_luc_kim_cuong_chuong_empowered_up_1",
+        "dai_luc_kim_cuong_chuong_empowered_up_2",
+        "dai_luc_kim_cuong_chuong_empowered_up_3",
+        "dai_luc_kim_cuong_chuong_empowered_up_4",
+        "dai_luc_kim_cuong_chuong_empowered_up_5"
+      ],
+      "frameDurationsMs": [
+        65,
+        65,
+        60,
+        70,
+        60,
+        80
+      ],
+      "durationMsTotal": 400,
+      "frameCount": 6,
+      "pivot": [
+        80,
+        96
+      ],
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "dai_luc_kim_cuong_chuong_empowered_up_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

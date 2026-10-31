@@ -1,0 +1,294 @@
+{
+  "schemaVersion": 2,
+  "id": "bong_controls_v2_ground",
+  "handoffId": "bong_controls_v2",
+  "role": "ground",
+  "status": "PRODUCTION_CANDIDATE_PENDING_RUNTIME_REVIEW",
+  "source": "assets/source/skills/m3c3_feedback_v2_batches/01_cai_bang/bong_controls_v2_ground.aseprite",
+  "sheet": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/bong_controls_v2/bong_controls_v2_ground.png",
+  "atlas": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/bong_controls_v2/bong_controls_v2_ground.json",
+  "frameDimensions": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "displayScale": 1,
+  "runtimeIntegrated": false,
+  "runtimeApproved": false,
+  "animations": [
+    {
+      "name": "slam_down",
+      "phase": "impact",
+      "direction": "down",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        24
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "playOnConfirmedMissCast": true,
+      "frames": [
+        "slam_down_0",
+        "slam_down_1",
+        "slam_down_2",
+        "slam_down_3",
+        "slam_down_4",
+        "slam_down_5"
+      ],
+      "frameDurationsMs": [
+        55,
+        55,
+        55,
+        55,
+        55,
+        55
+      ],
+      "durationMsTotal": 330,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "slam_down_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "slam_left",
+      "phase": "impact",
+      "direction": "left",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        -30,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "playOnConfirmedMissCast": true,
+      "frames": [
+        "slam_left_0",
+        "slam_left_1",
+        "slam_left_2",
+        "slam_left_3",
+        "slam_left_4",
+        "slam_left_5"
+      ],
+      "frameDurationsMs": [
+        55,
+        55,
+        55,
+        55,
+        55,
+        55
+      ],
+      "durationMsTotal": 330,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "slam_left_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "slam_right",
+      "phase": "impact",
+      "direction": "right",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        30,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "playOnConfirmedMissCast": true,
+      "frames": [
+        "slam_right_0",
+        "slam_right_1",
+        "slam_right_2",
+        "slam_right_3",
+        "slam_right_4",
+        "slam_right_5"
+      ],
+      "frameDurationsMs": [
+        55,
+        55,
+        55,
+        55,
+        55,
+        55
+      ],
+      "durationMsTotal": 330,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "slam_right_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "slam_up",
+      "phase": "impact",
+      "direction": "up",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        -32
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "playOnConfirmedMissCast": true,
+      "frames": [
+        "slam_up_0",
+        "slam_up_1",
+        "slam_up_2",
+        "slam_up_3",
+        "slam_up_4",
+        "slam_up_5"
+      ],
+      "frameDurationsMs": [
+        55,
+        55,
+        55,
+        55,
+        55,
+        55
+      ],
+      "durationMsTotal": 330,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "slam_up_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    },
+    {
+      "name": "radial_sweep",
+      "phase": "release",
+      "direction": "nondirectional",
+      "loop": false,
+      "contactFrames": [
+        2
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "serverAngleDegrees": 360,
+      "serverRangeReference": 110,
+      "groundPlane": "never rotate to vertical",
+      "frames": [
+        "radial_sweep_0",
+        "radial_sweep_1",
+        "radial_sweep_2",
+        "radial_sweep_3",
+        "radial_sweep_4",
+        "radial_sweep_5"
+      ],
+      "frameDurationsMs": [
+        50,
+        50,
+        50,
+        50,
+        50,
+        50
+      ],
+      "durationMsTotal": 300,
+      "frameCount": 6,
+      "pivot": [
+        128,
+        128
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "displayScale": 1,
+      "oneShot": true,
+      "repeat": 0,
+      "contactMarkers": [
+        {
+          "frameIndex": 2,
+          "frame": "radial_sweep_2",
+          "kind": "visual_contact",
+          "serverDriven": true
+        }
+      ],
+      "damageAuthority": "Server only; markers and durations never create hits/damage."
+    }
+  ]
+}

@@ -42,6 +42,11 @@ export const thieuLamBasics: Record<string, Ability> = {
     nameVi: 'Thiếu Lâm Quyền',
     manaCost: 0,
     cooldownTicks: 28,
+    minIntervalTicks: 6,
+    basicCombo: [
+      { stage: 'left_fist', damageMultiplier: 1 },
+      { stage: 'right_fist', damageMultiplier: 1 },
+    ],
     effect: arc(38, 48, 0.25, Math.PI / 4),
   },
   thieu_lam_dao: {
@@ -49,7 +54,7 @@ export const thieuLamBasics: Record<string, Ability> = {
     nameVi: 'Thiếu Lâm Đao',
     manaCost: 0,
     cooldownTicks: 23,
-    effect: arc(32, 62, 0.55, Math.PI / 2.5),
+    effect: arc(38, 80, 0.55, Math.PI / 2.5),
   },
 };
 export const thieuLamSkills: Ability[] = [
@@ -144,7 +149,7 @@ export const thieuLamSkills: Ability[] = [
     manaCost: 12,
     cooldownTicks: 90,
     effect: {
-      ...arc(42, 84, 0.7, Math.PI / 2),
+      ...arc(42, 115, 0.85, Math.PI * 0.65),
       statuses: [{ kind: 'slow', magnitude: 0.3, durationTicks: 90 }],
     },
   },

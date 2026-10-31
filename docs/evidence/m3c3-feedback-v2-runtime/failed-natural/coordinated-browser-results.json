@@ -1,0 +1,278 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "D:\\Projects\\volam-hero-defense\\node_modules\\.pnpm\\@playwright+test@1.64.1\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.feedback-v2.config.ts",
+      "--project",
+      "feedback-v2-natural",
+      "--grep",
+      "normal four-school|six-player natural combat"
+    ],
+    "configFile": "D:\\Projects\\volam-hero-defense\\playwright.feedback-v2.config.ts",
+    "rootDir": "D:/Projects/volam-hero-defense/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\feedback-v2-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/Projects/volam-hero-defense/artifacts/playwright-feedback-v2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "feedback-v2-preview",
+        "name": "feedback-v2-preview",
+        "testDir": "D:/Projects/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "feedback-v2.spec.ts"
+        ],
+        "timeout": 240000
+      },
+      {
+        "outputDir": "D:/Projects/volam-hero-defense/artifacts/playwright-feedback-v2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "feedback-v2-natural",
+        "name": "feedback-v2-natural",
+        "testDir": "D:/Projects/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c3.spec.ts",
+          "gameplay.spec.ts"
+        ],
+        "timeout": 240000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-feedback-v2",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "feedback-v2-natural",
+        "testDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "D:\\Projects\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c3.spec.ts",
+          "gameplay.spec.ts"
+        ],
+        "timeout": 240000,
+        "use": {
+          "video": "off",
+          "trace": "off",
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "baseURL": "http://127.0.0.1:5230"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "feedback-v2-natural"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "docs/evidence/m3c3-feedback-v2-runtime/playwright-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "m3c3.spec.ts",
+      "file": "m3c3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M3C3 normal four-school progression, shared dungeon farming, read-only builds, mana sustain and arena defense",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 240000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "feedback-v2-natural",
+              "projectName": "feedback-v2-natural",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 91723,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m3\u001b[39m\nReceived:    \u001b[31m1\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m3\u001b[39m\nReceived:    \u001b[31m1\u001b[39m\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:139:35",
+                    "location": {
+                      "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts",
+                      "column": 35,
+                      "line": 139
+                    },
+                    "snippet": "  137 |       ),\n  138 |     );\n> 139 |     expect((await hero(c)).level).toBeGreaterThanOrEqual(3);\n      |                                   ^\n  140 |     expect((await hero(c)).xp).toBeGreaterThan(0);\n  141 |     const farm = await read(c);\n  142 |     // snapshot() intentionally retains only the latest60 events. Accumulate"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts",
+                        "column": 35,
+                        "line": 139
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m3\u001b[39m\nReceived:    \u001b[31m1\u001b[39m\n\n  137 |       ),\n  138 |     );\n> 139 |     expect((await hero(c)).level).toBeGreaterThanOrEqual(3);\n      |                                   ^\n  140 |     expect((await hero(c)).xp).toBeGreaterThan(0);\n  141 |     const farm = await read(c);\n  142 |     // snapshot() intentionally retains only the latest60 events. Accumulate\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:139:35"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T14:44:58.577Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-feedback-v2\\m3c3-M3C3-normal-four-scho-11283-a-sustain-and-arena-defense-feedback-v2-natural\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts",
+                    "column": 35,
+                    "line": 139
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "84ef6c2f8a2a29a37186-7c69dfe90c8dfc4ea31f",
+          "file": "m3c3.spec.ts",
+          "line": 22,
+          "column": 1
+        },
+        {
+          "title": "M3C3 six-player natural combat: four schools keep effects owned, feet/pivots readable and rewards authoritative",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "feedback-v2-natural",
+              "projectName": "feedback-v2-natural",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 144622,
+                  "error": {
+                    "message": "Error: [{\"school\":\"thieu_lam\",\"hp\":218.8800048828125,\"xp\":0,\"zone\":\"forest_shared\"},{\"school\":\"cai_bang\",\"hp\":200,\"xp\":330,\"zone\":\"arena\"},{\"school\":\"thien_son\",\"hp\":165,\"xp\":330,\"zone\":\"arena\"},{\"school\":\"thieu_lam\",\"hp\":102.14399719238281,\"xp\":430,\"zone\":\"forest_shared\"},{\"school\":\"vo_dang\",\"hp\":150,\"xp\":0,\"zone\":\"arena\"},{\"school\":\"thien_son\",\"hp\":114.1500015258789,\"xp\":1730,\"zone\":\"arena\"}]\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: [{\"school\":\"thieu_lam\",\"hp\":218.8800048828125,\"xp\":0,\"zone\":\"forest_shared\"},{\"school\":\"cai_bang\",\"hp\":200,\"xp\":330,\"zone\":\"arena\"},{\"school\":\"thien_son\",\"hp\":165,\"xp\":330,\"zone\":\"arena\"},{\"school\":\"thieu_lam\",\"hp\":102.14399719238281,\"xp\":430,\"zone\":\"forest_shared\"},{\"school\":\"vo_dang\",\"hp\":150,\"xp\":0,\"zone\":\"arena\"},{\"school\":\"thien_son\",\"hp\":114.1500015258789,\"xp\":1730,\"zone\":\"arena\"}]\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:342:7",
+                    "location": {
+                      "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts",
+                      "column": 7,
+                      "line": 342
+                    },
+                    "snippet": "  340 |           xp: h.xp,\n  341 |           zone: h.zoneId,\n> 342 |         })),\n      |       ^\n  343 |       ),\n  344 |     ).toBe(true);\n  345 |     const naturalCombat = await read(pages[0]!);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts",
+                        "column": 7,
+                        "line": 342
+                      },
+                      "message": "Error: [{\"school\":\"thieu_lam\",\"hp\":218.8800048828125,\"xp\":0,\"zone\":\"forest_shared\"},{\"school\":\"cai_bang\",\"hp\":200,\"xp\":330,\"zone\":\"arena\"},{\"school\":\"thien_son\",\"hp\":165,\"xp\":330,\"zone\":\"arena\"},{\"school\":\"thieu_lam\",\"hp\":102.14399719238281,\"xp\":430,\"zone\":\"forest_shared\"},{\"school\":\"vo_dang\",\"hp\":150,\"xp\":0,\"zone\":\"arena\"},{\"school\":\"thien_son\",\"hp\":114.1500015258789,\"xp\":1730,\"zone\":\"arena\"}]\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n  340 |           xp: h.xp,\n  341 |           zone: h.zoneId,\n> 342 |         })),\n      |       ^\n  343 |       ),\n  344 |     ).toBe(true);\n  345 |     const naturalCombat = await read(pages[0]!);\n    at D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:342:7"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-31T14:46:31.223Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "D:\\Projects\\volam-hero-defense\\artifacts\\playwright-feedback-v2\\m3c3-M3C3-six-player-natur-a25df-e-and-rewards-authoritative-feedback-v2-natural\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "D:\\Projects\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts",
+                    "column": 7,
+                    "line": 342
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "84ef6c2f8a2a29a37186-0442a480bdaa1a3fb1c1",
+          "file": "m3c3.spec.ts",
+          "line": 234,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-31T14:44:56.597Z",
+    "duration": 239684.786,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 2,
+    "flaky": 0
+  }
+}

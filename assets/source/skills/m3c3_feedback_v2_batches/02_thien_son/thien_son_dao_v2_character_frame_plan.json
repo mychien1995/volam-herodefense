@@ -1,0 +1,5399 @@
+{
+  "package": "thien_son_dao_v2",
+  "role": "character",
+  "canvas": [
+    160,
+    120
+  ],
+  "pivot": [
+    80,
+    96
+  ],
+  "clips": [
+    {
+      "name": "basic_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_down_0",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_down_1",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_down_2",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_down_3",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        }
+      ],
+      "durations": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 300,
+      "minAcceptedAttackMs": 166.6667,
+      "playback": "fit accepted server interval; restartable; no animation lock"
+    },
+    {
+      "name": "phi_anh_tram_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_down_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_down_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_down_2",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_down_3",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "phong_anh_hoan_vi_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_down_0",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_down_1",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_down_2",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_down_3",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "phong_anh_hoan_vi_counter_down",
+      "phase": "loop",
+      "direction": "down",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_down_0",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_down_1",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_down_2",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_down_3",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "truy_hon_dao_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_down_0",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_down_1",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_down_2",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_down_3",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "bach_liet_thien_kich_cast_down",
+      "phase": "cast",
+      "direction": "down",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_down_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_down_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_down_2",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_down_3",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "bach_liet_thien_kich_flurry_down",
+      "phase": "loop",
+      "direction": "down",
+      "loop": true,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "flurry_down_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "flurry_down_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "bach_liet_thien_kich_finish_down",
+      "phase": "loop",
+      "direction": "down",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "finish_down_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "finish_down_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "basic_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_left_0",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_left_1",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_left_2",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_left_3",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        }
+      ],
+      "durations": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 300,
+      "minAcceptedAttackMs": 166.6667,
+      "playback": "fit accepted server interval; restartable; no animation lock"
+    },
+    {
+      "name": "phi_anh_tram_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_left_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_left_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_left_2",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_left_3",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "phong_anh_hoan_vi_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_left_0",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_left_1",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_left_2",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_left_3",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "phong_anh_hoan_vi_counter_left",
+      "phase": "loop",
+      "direction": "left",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_left_0",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_left_1",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_left_2",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_left_3",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "truy_hon_dao_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_left_0",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_left_1",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_left_2",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_left_3",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "bach_liet_thien_kich_cast_left",
+      "phase": "cast",
+      "direction": "left",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_left_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_left_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_left_2",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_left_3",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "bach_liet_thien_kich_flurry_left",
+      "phase": "loop",
+      "direction": "left",
+      "loop": true,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "flurry_left_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "flurry_left_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "bach_liet_thien_kich_finish_left",
+      "phase": "loop",
+      "direction": "left",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "finish_left_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "finish_left_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "basic_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_right_0",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_right_1",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_right_2",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_right_3",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        }
+      ],
+      "durations": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 300,
+      "minAcceptedAttackMs": 166.6667,
+      "playback": "fit accepted server interval; restartable; no animation lock"
+    },
+    {
+      "name": "phi_anh_tram_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_right_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_right_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_right_2",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_right_3",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "phong_anh_hoan_vi_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_right_0",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_right_1",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_right_2",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_right_3",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "phong_anh_hoan_vi_counter_right",
+      "phase": "loop",
+      "direction": "right",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_right_0",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_right_1",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_right_2",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_right_3",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "truy_hon_dao_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_right_0",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_right_1",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_right_2",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_right_3",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "bach_liet_thien_kich_cast_right",
+      "phase": "cast",
+      "direction": "right",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_right_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_right_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_right_2",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_right_3",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "bach_liet_thien_kich_flurry_right",
+      "phase": "loop",
+      "direction": "right",
+      "loop": true,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "flurry_right_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "flurry_right_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "bach_liet_thien_kich_finish_right",
+      "phase": "loop",
+      "direction": "right",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "finish_right_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "finish_right_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "basic_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_up_0",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_up_1",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_up_2",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+          "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+          "frame": "basic_attack_up_3",
+          "anchor": [
+            40.0,
+            64.0
+          ],
+          "sourceProvenance": "approved baseline raster, preserved"
+        }
+      ],
+      "durations": [
+        75,
+        75,
+        75,
+        75
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "baseAttackMs": 300,
+      "minAcceptedAttackMs": 166.6667,
+      "playback": "fit accepted server interval; restartable; no animation lock"
+    },
+    {
+      "name": "phi_anh_tram_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_up_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_up_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_up_2",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+          "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+          "frame": "cast_up_3",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "phong_anh_hoan_vi_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_up_0",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_up_1",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_up_2",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "cast_up_3",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "phong_anh_hoan_vi_counter_up",
+      "phase": "loop",
+      "direction": "up",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_up_0",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_up_1",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_up_2",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+          "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+          "frame": "counter_up_3",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "truy_hon_dao_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_up_0",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_up_1",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_up_2",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+          "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+          "frame": "cast_up_3",
+          "anchor": [
+            48,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "bach_liet_thien_kich_cast_up",
+      "phase": "cast",
+      "direction": "up",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_up_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_up_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_up_2",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "cast_up_3",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70,
+        70,
+        70
+      ],
+      "contactFrames": [
+        1
+      ],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "bach_liet_thien_kich_flurry_up",
+      "phase": "loop",
+      "direction": "up",
+      "loop": true,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "flurry_up_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "flurry_up_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    },
+    {
+      "name": "bach_liet_thien_kich_finish_up",
+      "phase": "loop",
+      "direction": "up",
+      "loop": false,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "finish_up_0",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+          "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+          "frame": "finish_up_1",
+          "anchor": [
+            56,
+            64
+          ],
+          "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel."
+        }
+      ],
+      "durations": [
+        70,
+        70
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock"
+    }
+  ],
+  "id": "thien_son_dao_v2_character",
+  "frames": [
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_down_0",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        480,
+        0,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_down_0",
+      "tag": "basic_down",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_down_1",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        560,
+        0,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_down_1",
+      "tag": "basic_down",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_down_2",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        640,
+        0,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_down_2",
+      "tag": "basic_down",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_down_3",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        720,
+        0,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_down_3",
+      "tag": "basic_down",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_down_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        0,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_down_0",
+      "tag": "phi_anh_tram_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_down_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        112,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_down_1",
+      "tag": "phi_anh_tram_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_down_2",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        224,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_down_2",
+      "tag": "phi_anh_tram_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_down_3",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        336,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_down_3",
+      "tag": "phi_anh_tram_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_down_0",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        0,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_down_0",
+      "tag": "phong_anh_hoan_vi_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_down_1",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        96,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_down_1",
+      "tag": "phong_anh_hoan_vi_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_down_2",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        192,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_down_2",
+      "tag": "phong_anh_hoan_vi_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_down_3",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        288,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_down_3",
+      "tag": "phong_anh_hoan_vi_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_down_0",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        0,
+        160,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_down_0",
+      "tag": "phong_anh_hoan_vi_counter_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_down_1",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        96,
+        160,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_down_1",
+      "tag": "phong_anh_hoan_vi_counter_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_down_2",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        192,
+        160,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_down_2",
+      "tag": "phong_anh_hoan_vi_counter_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_down_3",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        288,
+        160,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_down_3",
+      "tag": "phong_anh_hoan_vi_counter_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_down_0",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        0,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_down_0",
+      "tag": "truy_hon_dao_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_down_1",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        96,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_down_1",
+      "tag": "truy_hon_dao_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_down_2",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        192,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_down_2",
+      "tag": "truy_hon_dao_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_down_3",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        288,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_down_3",
+      "tag": "truy_hon_dao_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_down_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        0,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_down_0",
+      "tag": "bach_liet_thien_kich_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_down_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        112,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_down_1",
+      "tag": "bach_liet_thien_kich_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_down_2",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        224,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_down_2",
+      "tag": "bach_liet_thien_kich_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_down_3",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        336,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_down_3",
+      "tag": "bach_liet_thien_kich_cast_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "flurry_down_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        0,
+        160,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_flurry_down_0",
+      "tag": "bach_liet_thien_kich_flurry_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "flurry_down_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        112,
+        160,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_flurry_down_1",
+      "tag": "bach_liet_thien_kich_flurry_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "finish_down_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        0,
+        240,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_finish_down_0",
+      "tag": "bach_liet_thien_kich_finish_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "finish_down_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        112,
+        240,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_finish_down_1",
+      "tag": "bach_liet_thien_kich_finish_down",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_left_0",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        480,
+        80,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_left_0",
+      "tag": "basic_left",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_left_1",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        560,
+        80,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_left_1",
+      "tag": "basic_left",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_left_2",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        640,
+        80,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_left_2",
+      "tag": "basic_left",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_left_3",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        720,
+        80,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_left_3",
+      "tag": "basic_left",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_left_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        448,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_left_0",
+      "tag": "phi_anh_tram_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_left_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        560,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_left_1",
+      "tag": "phi_anh_tram_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_left_2",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        672,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_left_2",
+      "tag": "phi_anh_tram_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_left_3",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        784,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_left_3",
+      "tag": "phi_anh_tram_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_left_0",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        384,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_left_0",
+      "tag": "phong_anh_hoan_vi_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_left_1",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        480,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_left_1",
+      "tag": "phong_anh_hoan_vi_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_left_2",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        576,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_left_2",
+      "tag": "phong_anh_hoan_vi_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_left_3",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        672,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_left_3",
+      "tag": "phong_anh_hoan_vi_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_left_0",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        384,
+        160,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_left_0",
+      "tag": "phong_anh_hoan_vi_counter_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_left_1",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        480,
+        160,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_left_1",
+      "tag": "phong_anh_hoan_vi_counter_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_left_2",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        576,
+        160,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_left_2",
+      "tag": "phong_anh_hoan_vi_counter_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_left_3",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        672,
+        160,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_left_3",
+      "tag": "phong_anh_hoan_vi_counter_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_left_0",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        384,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_left_0",
+      "tag": "truy_hon_dao_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_left_1",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        480,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_left_1",
+      "tag": "truy_hon_dao_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_left_2",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        576,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_left_2",
+      "tag": "truy_hon_dao_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_left_3",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        672,
+        0,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_left_3",
+      "tag": "truy_hon_dao_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_left_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        448,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_left_0",
+      "tag": "bach_liet_thien_kich_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_left_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        560,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_left_1",
+      "tag": "bach_liet_thien_kich_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_left_2",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        672,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_left_2",
+      "tag": "bach_liet_thien_kich_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_left_3",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        784,
+        0,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_left_3",
+      "tag": "bach_liet_thien_kich_cast_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "flurry_left_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        224,
+        160,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_flurry_left_0",
+      "tag": "bach_liet_thien_kich_flurry_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "flurry_left_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        336,
+        160,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_flurry_left_1",
+      "tag": "bach_liet_thien_kich_flurry_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "finish_left_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        224,
+        240,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_finish_left_0",
+      "tag": "bach_liet_thien_kich_finish_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "finish_left_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        336,
+        240,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_finish_left_1",
+      "tag": "bach_liet_thien_kich_finish_left",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_right_0",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        480,
+        160,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_right_0",
+      "tag": "basic_right",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_right_1",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        560,
+        160,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_right_1",
+      "tag": "basic_right",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_right_2",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        640,
+        160,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_right_2",
+      "tag": "basic_right",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_right_3",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        720,
+        160,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_right_3",
+      "tag": "basic_right",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_right_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        0,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_right_0",
+      "tag": "phi_anh_tram_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_right_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        112,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_right_1",
+      "tag": "phi_anh_tram_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_right_2",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        224,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_right_2",
+      "tag": "phi_anh_tram_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_right_3",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        336,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_right_3",
+      "tag": "phi_anh_tram_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_right_0",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        0,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_right_0",
+      "tag": "phong_anh_hoan_vi_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_right_1",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        96,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_right_1",
+      "tag": "phong_anh_hoan_vi_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_right_2",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        192,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_right_2",
+      "tag": "phong_anh_hoan_vi_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_right_3",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        288,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_right_3",
+      "tag": "phong_anh_hoan_vi_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_right_0",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        0,
+        240,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_right_0",
+      "tag": "phong_anh_hoan_vi_counter_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_right_1",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        96,
+        240,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_right_1",
+      "tag": "phong_anh_hoan_vi_counter_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_right_2",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        192,
+        240,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_right_2",
+      "tag": "phong_anh_hoan_vi_counter_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_right_3",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        288,
+        240,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_right_3",
+      "tag": "phong_anh_hoan_vi_counter_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_right_0",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        0,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_right_0",
+      "tag": "truy_hon_dao_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_right_1",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        96,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_right_1",
+      "tag": "truy_hon_dao_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_right_2",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        192,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_right_2",
+      "tag": "truy_hon_dao_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_right_3",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        288,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_right_3",
+      "tag": "truy_hon_dao_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_right_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        0,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_right_0",
+      "tag": "bach_liet_thien_kich_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_right_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        112,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_right_1",
+      "tag": "bach_liet_thien_kich_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_right_2",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        224,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_right_2",
+      "tag": "bach_liet_thien_kich_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_right_3",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        336,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_right_3",
+      "tag": "bach_liet_thien_kich_cast_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "flurry_right_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        448,
+        160,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_flurry_right_0",
+      "tag": "bach_liet_thien_kich_flurry_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "flurry_right_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        560,
+        160,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_flurry_right_1",
+      "tag": "bach_liet_thien_kich_flurry_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "finish_right_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        448,
+        240,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_finish_right_0",
+      "tag": "bach_liet_thien_kich_finish_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "finish_right_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        560,
+        240,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_finish_right_1",
+      "tag": "bach_liet_thien_kich_finish_right",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_up_0",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        480,
+        240,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_up_0",
+      "tag": "basic_up",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_up_1",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        560,
+        240,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_up_1",
+      "tag": "basic_up",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_up_2",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        640,
+        240,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_up_2",
+      "tag": "basic_up",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/characters/hero_thien_son_dao.png",
+      "atlas": "assets/exports/characters/hero_thien_son_dao.json",
+      "frame": "basic_attack_up_3",
+      "anchor": [
+        40.0,
+        64.0
+      ],
+      "sourceProvenance": "approved baseline raster, preserved",
+      "rect": [
+        720,
+        240,
+        80,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/characters/hero_thien_son_dao.png",
+      "name": "basic_up_3",
+      "tag": "basic_up",
+      "durationMs": 75,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_up_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        448,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_up_0",
+      "tag": "phi_anh_tram_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_up_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        560,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_up_1",
+      "tag": "phi_anh_tram_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_up_2",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        672,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_up_2",
+      "tag": "phi_anh_tram_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "atlas": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.json",
+      "frame": "cast_up_3",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        784,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phi_anh_tram/phi_anh_tram_character.png",
+      "name": "phi_anh_tram_cast_up_3",
+      "tag": "phi_anh_tram_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_up_0",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        384,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_up_0",
+      "tag": "phong_anh_hoan_vi_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_up_1",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        480,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_up_1",
+      "tag": "phong_anh_hoan_vi_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_up_2",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        576,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_up_2",
+      "tag": "phong_anh_hoan_vi_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "cast_up_3",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        672,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_cast_up_3",
+      "tag": "phong_anh_hoan_vi_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_up_0",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        384,
+        240,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_up_0",
+      "tag": "phong_anh_hoan_vi_counter_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_up_1",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        480,
+        240,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_up_1",
+      "tag": "phong_anh_hoan_vi_counter_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_up_2",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        576,
+        240,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_up_2",
+      "tag": "phong_anh_hoan_vi_counter_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "atlas": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.json",
+      "frame": "counter_up_3",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        672,
+        240,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/phong_anh_hoan_vi/phong_anh_hoan_vi_character.png",
+      "name": "phong_anh_hoan_vi_counter_up_3",
+      "tag": "phong_anh_hoan_vi_counter_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_up_0",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        384,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_up_0",
+      "tag": "truy_hon_dao_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_up_1",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        480,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_up_1",
+      "tag": "truy_hon_dao_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_up_2",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        576,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_up_2",
+      "tag": "truy_hon_dao_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "atlas": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.json",
+      "frame": "cast_up_3",
+      "anchor": [
+        48,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        672,
+        80,
+        96,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/truy_hon_dao/truy_hon_dao_character.png",
+      "name": "truy_hon_dao_cast_up_3",
+      "tag": "truy_hon_dao_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_up_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        448,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_up_0",
+      "tag": "bach_liet_thien_kich_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_up_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        560,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_up_1",
+      "tag": "bach_liet_thien_kich_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_up_2",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        672,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_up_2",
+      "tag": "bach_liet_thien_kich_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "cast_up_3",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        784,
+        80,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_cast_up_3",
+      "tag": "bach_liet_thien_kich_cast_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "flurry_up_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        672,
+        160,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_flurry_up_0",
+      "tag": "bach_liet_thien_kich_flurry_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "flurry_up_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        784,
+        160,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_flurry_up_1",
+      "tag": "bach_liet_thien_kich_flurry_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "finish_up_0",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        672,
+        240,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_finish_up_0",
+      "tag": "bach_liet_thien_kich_finish_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "atlas": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.json",
+      "frame": "finish_up_1",
+      "anchor": [
+        56,
+        64
+      ],
+      "sourceProvenance": "New image-generated skill-specific cels; Aseprite binary-alpha/palette-fringe cleanup, fixed scale per facing and measured shoe anchors. Explicit approved-frame reuse is recorded per cel.",
+      "rect": [
+        784,
+        240,
+        112,
+        80
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/thien-son/bach_liet_thien_kich/bach_liet_thien_kich_character.png",
+      "name": "bach_liet_thien_kich_finish_up_1",
+      "tag": "bach_liet_thien_kich_finish_up",
+      "durationMs": 70,
+      "canvas": [
+        160,
+        120
+      ],
+      "pivot": [
+        80,
+        96
+      ]
+    }
+  ],
+  "sourceFile": "assets/source/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_dao_v2_character.aseprite",
+  "individualDirectory": "assets/exports/skills/m3c3_feedback_v2_batches/02_thien_son/thien_son_dao_v2/character_frames"
+}

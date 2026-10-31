@@ -1,0 +1,2477 @@
+{
+  "status": "integrated_pending_runtime_director_review",
+  "provenance": "Original AI-assisted generated rasters guided by existing project references; nearest-neighbour export/cutout cleanup. No third-party commercial pack imported. No exclusive copyright or third-party license asserted.",
+  "sourceManifest": "assets/source/desert/asset_manifest.json",
+  "gameplay": "Existing M2A common creep profiles; no species abilities or archer projectiles supplied.",
+  "assets": [
+    {
+      "id": "desert_bo_cap_cat",
+      "archetypeId": "bo_cap_cat",
+      "wave": 0,
+      "slug": "bo_cap_cat",
+      "nameVi": "Bọ Cạp Cát",
+      "status": "prototype",
+      "bodyHeight": 56,
+      "footPivot": [
+        0.5,
+        0.8571428571428571
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0.png",
+            "idle_down_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0.png",
+            "walk_down_1.png",
+            "walk_down_2.png",
+            "walk_down_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "down",
+          "frames": [
+            "hit_down_0.png",
+            "hit_down_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "attack_down_0.png",
+            "attack_down_1.png",
+            "attack_down_2.png",
+            "attack_down_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "down",
+          "frames": [
+            "death_down_0.png",
+            "death_down_1.png",
+            "death_down_2.png",
+            "death_down_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0.png",
+            "idle_left_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0.png",
+            "walk_left_1.png",
+            "walk_left_2.png",
+            "walk_left_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "left",
+          "frames": [
+            "hit_left_0.png",
+            "hit_left_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "attack_left_0.png",
+            "attack_left_1.png",
+            "attack_left_2.png",
+            "attack_left_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "left",
+          "frames": [
+            "death_left_0.png",
+            "death_left_1.png",
+            "death_left_2.png",
+            "death_left_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0.png",
+            "idle_right_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0.png",
+            "walk_right_1.png",
+            "walk_right_2.png",
+            "walk_right_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "right",
+          "frames": [
+            "hit_right_0.png",
+            "hit_right_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "attack_right_0.png",
+            "attack_right_1.png",
+            "attack_right_2.png",
+            "attack_right_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "right",
+          "frames": [
+            "death_right_0.png",
+            "death_right_1.png",
+            "death_right_2.png",
+            "death_right_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0.png",
+            "idle_up_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0.png",
+            "walk_up_1.png",
+            "walk_up_2.png",
+            "walk_up_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "up",
+          "frames": [
+            "hit_up_0.png",
+            "hit_up_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "attack_up_0.png",
+            "attack_up_1.png",
+            "attack_up_2.png",
+            "attack_up_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "up",
+          "frames": [
+            "death_up_0.png",
+            "death_up_1.png",
+            "death_up_2.png",
+            "death_up_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/desert/bo_cap_cat-concept.png",
+      "sourceConceptSha256": "351327fcd143d2bd58383526a40212bff3a1388f55dce341c67898eeef26b983"
+    },
+    {
+      "id": "desert_sa_xa",
+      "archetypeId": "sa_xa",
+      "wave": 0,
+      "slug": "sa_xa",
+      "nameVi": "Sa Xà",
+      "status": "prototype",
+      "bodyHeight": 36,
+      "footPivot": [
+        0.5,
+        0.8333333333333334
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0.png",
+            "idle_down_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0.png",
+            "walk_down_1.png",
+            "walk_down_2.png",
+            "walk_down_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "down",
+          "frames": [
+            "hit_down_0.png",
+            "hit_down_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "attack_down_0.png",
+            "attack_down_1.png",
+            "attack_down_2.png",
+            "attack_down_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "down",
+          "frames": [
+            "death_down_0.png",
+            "death_down_1.png",
+            "death_down_2.png"
+          ],
+          "durations": [
+            120,
+            160,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0.png",
+            "idle_left_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0.png",
+            "walk_left_1.png",
+            "walk_left_2.png",
+            "walk_left_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "left",
+          "frames": [
+            "hit_left_0.png",
+            "hit_left_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "attack_left_0.png",
+            "attack_left_1.png",
+            "attack_left_2.png",
+            "attack_left_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "left",
+          "frames": [
+            "death_left_0.png",
+            "death_left_1.png",
+            "death_left_2.png"
+          ],
+          "durations": [
+            120,
+            160,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0.png",
+            "idle_right_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0.png",
+            "walk_right_1.png",
+            "walk_right_2.png",
+            "walk_right_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "right",
+          "frames": [
+            "hit_right_0.png",
+            "hit_right_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "attack_right_0.png",
+            "attack_right_1.png",
+            "attack_right_2.png",
+            "attack_right_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "right",
+          "frames": [
+            "death_right_0.png",
+            "death_right_1.png",
+            "death_right_2.png"
+          ],
+          "durations": [
+            120,
+            160,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0.png",
+            "idle_up_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0.png",
+            "walk_up_1.png",
+            "walk_up_2.png",
+            "walk_up_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "up",
+          "frames": [
+            "hit_up_0.png",
+            "hit_up_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "attack_up_0.png",
+            "attack_up_1.png",
+            "attack_up_2.png",
+            "attack_up_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "up",
+          "frames": [
+            "death_up_0.png",
+            "death_up_1.png",
+            "death_up_2.png"
+          ],
+          "durations": [
+            120,
+            160,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/desert/sa_xa-concept.png",
+      "sourceConceptSha256": "9eacb2fb18996d11295fd02b793ea51f7263dea5b6995ab0c9e230eacf2aa672"
+    },
+    {
+      "id": "desert_sa_tac",
+      "archetypeId": "sa_tac",
+      "wave": 0,
+      "slug": "sa_tac",
+      "nameVi": "Sa Tặc",
+      "status": "prototype",
+      "bodyHeight": 44,
+      "footPivot": [
+        0.5,
+        0.8333333333333334
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0.png",
+            "idle_down_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0.png",
+            "walk_down_1.png",
+            "walk_down_2.png",
+            "walk_down_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "down",
+          "frames": [
+            "hit_down_0.png",
+            "hit_down_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "attack_down_0.png",
+            "attack_down_1.png",
+            "attack_down_2.png",
+            "attack_down_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "down",
+          "frames": [
+            "death_down_0.png",
+            "death_down_1.png",
+            "death_down_2.png",
+            "death_down_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0.png",
+            "idle_left_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0.png",
+            "walk_left_1.png",
+            "walk_left_2.png",
+            "walk_left_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "left",
+          "frames": [
+            "hit_left_0.png",
+            "hit_left_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "attack_left_0.png",
+            "attack_left_1.png",
+            "attack_left_2.png",
+            "attack_left_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "left",
+          "frames": [
+            "death_left_0.png",
+            "death_left_1.png",
+            "death_left_2.png",
+            "death_left_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0.png",
+            "idle_right_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0.png",
+            "walk_right_1.png",
+            "walk_right_2.png",
+            "walk_right_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "right",
+          "frames": [
+            "hit_right_0.png",
+            "hit_right_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "attack_right_0.png",
+            "attack_right_1.png",
+            "attack_right_2.png",
+            "attack_right_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "right",
+          "frames": [
+            "death_right_0.png",
+            "death_right_1.png",
+            "death_right_2.png",
+            "death_right_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0.png",
+            "idle_up_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0.png",
+            "walk_up_1.png",
+            "walk_up_2.png",
+            "walk_up_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "up",
+          "frames": [
+            "hit_up_0.png",
+            "hit_up_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "attack_up_0.png",
+            "attack_up_1.png",
+            "attack_up_2.png",
+            "attack_up_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "up",
+          "frames": [
+            "death_up_0.png",
+            "death_up_1.png",
+            "death_up_2.png",
+            "death_up_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/desert/sa_tac-concept.png",
+      "sourceConceptSha256": "2bed91f695685194386b8bc619946b8a1f8bbad82514ad21f31e7c211a82cacd"
+    },
+    {
+      "id": "desert_cung_thu_sa_mac",
+      "archetypeId": "cung_thu_sa_mac",
+      "wave": 0,
+      "slug": "cung_thu_sa_mac",
+      "nameVi": "Cung Thủ Sa Mạc",
+      "status": "prototype",
+      "bodyHeight": 44,
+      "footPivot": [
+        0.5,
+        0.8333333333333334
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0.png",
+            "idle_down_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0.png",
+            "walk_down_1.png",
+            "walk_down_2.png",
+            "walk_down_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "down",
+          "frames": [
+            "hit_down_0.png",
+            "hit_down_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "attack_down_0.png",
+            "attack_down_1.png",
+            "attack_down_2.png",
+            "attack_down_3.png"
+          ],
+          "durations": [
+            100,
+            110,
+            70,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "down",
+          "frames": [
+            "death_down_0.png",
+            "death_down_1.png",
+            "death_down_2.png",
+            "death_down_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0.png",
+            "idle_left_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0.png",
+            "walk_left_1.png",
+            "walk_left_2.png",
+            "walk_left_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "left",
+          "frames": [
+            "hit_left_0.png",
+            "hit_left_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "attack_left_0.png",
+            "attack_left_1.png",
+            "attack_left_2.png",
+            "attack_left_3.png"
+          ],
+          "durations": [
+            100,
+            110,
+            70,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "left",
+          "frames": [
+            "death_left_0.png",
+            "death_left_1.png",
+            "death_left_2.png",
+            "death_left_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0.png",
+            "idle_right_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0.png",
+            "walk_right_1.png",
+            "walk_right_2.png",
+            "walk_right_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "right",
+          "frames": [
+            "hit_right_0.png",
+            "hit_right_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "attack_right_0.png",
+            "attack_right_1.png",
+            "attack_right_2.png",
+            "attack_right_3.png"
+          ],
+          "durations": [
+            100,
+            110,
+            70,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "right",
+          "frames": [
+            "death_right_0.png",
+            "death_right_1.png",
+            "death_right_2.png",
+            "death_right_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0.png",
+            "idle_up_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0.png",
+            "walk_up_1.png",
+            "walk_up_2.png",
+            "walk_up_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "up",
+          "frames": [
+            "hit_up_0.png",
+            "hit_up_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "attack_up_0.png",
+            "attack_up_1.png",
+            "attack_up_2.png",
+            "attack_up_3.png"
+          ],
+          "durations": [
+            100,
+            110,
+            70,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "up",
+          "frames": [
+            "death_up_0.png",
+            "death_up_1.png",
+            "death_up_2.png",
+            "death_up_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/desert/cung_thu_sa_mac-concept.png",
+      "sourceConceptSha256": "fd7a86157854fc89843b06de4ba3b336dfd0d9b4a6e6a76d5b461c303d452319"
+    },
+    {
+      "id": "desert_xac_uop",
+      "archetypeId": "xac_uop",
+      "wave": 0,
+      "slug": "xac_uop",
+      "nameVi": "Xác Ướp",
+      "status": "prototype",
+      "bodyHeight": 46,
+      "footPivot": [
+        0.5,
+        0.8333333333333334
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0.png",
+            "idle_down_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0.png",
+            "walk_down_1.png",
+            "walk_down_2.png",
+            "walk_down_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "down",
+          "frames": [
+            "hit_down_0.png",
+            "hit_down_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "attack_down_0.png",
+            "attack_down_1.png",
+            "attack_down_2.png",
+            "attack_down_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "down",
+          "frames": [
+            "death_down_0.png",
+            "death_down_1.png",
+            "death_down_2.png",
+            "death_down_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0.png",
+            "idle_left_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0.png",
+            "walk_left_1.png",
+            "walk_left_2.png",
+            "walk_left_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "left",
+          "frames": [
+            "hit_left_0.png",
+            "hit_left_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "attack_left_0.png",
+            "attack_left_1.png",
+            "attack_left_2.png",
+            "attack_left_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "left",
+          "frames": [
+            "death_left_0.png",
+            "death_left_1.png",
+            "death_left_2.png",
+            "death_left_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0.png",
+            "idle_right_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0.png",
+            "walk_right_1.png",
+            "walk_right_2.png",
+            "walk_right_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "right",
+          "frames": [
+            "hit_right_0.png",
+            "hit_right_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "attack_right_0.png",
+            "attack_right_1.png",
+            "attack_right_2.png",
+            "attack_right_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "right",
+          "frames": [
+            "death_right_0.png",
+            "death_right_1.png",
+            "death_right_2.png",
+            "death_right_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0.png",
+            "idle_up_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0.png",
+            "walk_up_1.png",
+            "walk_up_2.png",
+            "walk_up_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "up",
+          "frames": [
+            "hit_up_0.png",
+            "hit_up_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "attack_up_0.png",
+            "attack_up_1.png",
+            "attack_up_2.png",
+            "attack_up_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "up",
+          "frames": [
+            "death_up_0.png",
+            "death_up_1.png",
+            "death_up_2.png",
+            "death_up_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/desert/xac_uop-concept.png",
+      "sourceConceptSha256": "62a78ddac5eaa6973862463b73ee11822ef07ffbb8ef4dd6c757b51efb208a9e"
+    },
+    {
+      "id": "desert_cu_nhan_sa_thach",
+      "archetypeId": "cu_nhan_sa_thach",
+      "wave": 0,
+      "slug": "cu_nhan_sa_thach",
+      "nameVi": "Cự Nhân Sa Thạch",
+      "status": "prototype",
+      "bodyHeight": 72,
+      "footPivot": [
+        0.5,
+        0.875
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0.png",
+            "idle_down_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0.png",
+            "walk_down_1.png",
+            "walk_down_2.png",
+            "walk_down_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "down",
+          "frames": [
+            "hit_down_0.png",
+            "hit_down_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "attack_down_0.png",
+            "attack_down_1.png",
+            "attack_down_2.png",
+            "attack_down_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "down",
+          "frames": [
+            "death_down_0.png",
+            "death_down_1.png",
+            "death_down_2.png",
+            "death_down_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0.png",
+            "idle_left_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0.png",
+            "walk_left_1.png",
+            "walk_left_2.png",
+            "walk_left_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "left",
+          "frames": [
+            "hit_left_0.png",
+            "hit_left_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "attack_left_0.png",
+            "attack_left_1.png",
+            "attack_left_2.png",
+            "attack_left_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "left",
+          "frames": [
+            "death_left_0.png",
+            "death_left_1.png",
+            "death_left_2.png",
+            "death_left_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0.png",
+            "idle_right_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0.png",
+            "walk_right_1.png",
+            "walk_right_2.png",
+            "walk_right_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "right",
+          "frames": [
+            "hit_right_0.png",
+            "hit_right_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "attack_right_0.png",
+            "attack_right_1.png",
+            "attack_right_2.png",
+            "attack_right_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "right",
+          "frames": [
+            "death_right_0.png",
+            "death_right_1.png",
+            "death_right_2.png",
+            "death_right_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0.png",
+            "idle_up_1.png"
+          ],
+          "durations": [
+            350,
+            350
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0.png",
+            "walk_up_1.png",
+            "walk_up_2.png",
+            "walk_up_3.png"
+          ],
+          "durations": [
+            120,
+            120,
+            120,
+            120
+          ],
+          "frameRate": 1000,
+          "repeat": -1
+        },
+        {
+          "state": "hurt",
+          "direction": "up",
+          "frames": [
+            "hit_up_0.png",
+            "hit_up_1.png"
+          ],
+          "durations": [
+            90,
+            90
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "attack_up_0.png",
+            "attack_up_1.png",
+            "attack_up_2.png",
+            "attack_up_3.png"
+          ],
+          "durations": [
+            110,
+            80,
+            80,
+            130
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        },
+        {
+          "state": "death",
+          "direction": "up",
+          "frames": [
+            "death_up_0.png",
+            "death_up_1.png",
+            "death_up_2.png",
+            "death_up_3.png"
+          ],
+          "durations": [
+            100,
+            120,
+            150,
+            600
+          ],
+          "frameRate": 1000,
+          "repeat": 0
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/desert/cu_nhan_sa_thach-concept.png",
+      "sourceConceptSha256": "baf8b65c86a9d402e224719bc8053dfd4d2be02dfd7ad80ca24e875e68e82a21"
+    }
+  ],
+  "effects": [],
+  "scenery": [
+    {
+      "id": "sandstone_rocks",
+      "size": [
+        96,
+        80
+      ],
+      "pivot": [
+        48,
+        76
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        25,
+        58,
+        296,
+        296
+      ]
+    },
+    {
+      "id": "cliff_straight",
+      "size": [
+        160,
+        112
+      ],
+      "pivot": [
+        80,
+        108
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        329,
+        51,
+        622,
+        290
+      ]
+    },
+    {
+      "id": "cliff_corner",
+      "size": [
+        144,
+        112
+      ],
+      "pivot": [
+        72,
+        108
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        659,
+        33,
+        954,
+        299
+      ]
+    },
+    {
+      "id": "broken_pillar",
+      "size": [
+        64,
+        112
+      ],
+      "pivot": [
+        32,
+        108
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        1018,
+        22,
+        1229,
+        316
+      ]
+    },
+    {
+      "id": "ruin_wall_horizontal",
+      "size": [
+        160,
+        88
+      ],
+      "pivot": [
+        80,
+        84
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        27,
+        392,
+        386,
+        614
+      ]
+    },
+    {
+      "id": "ruin_wall_vertical",
+      "size": [
+        80,
+        128
+      ],
+      "pivot": [
+        40,
+        124
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        426,
+        321,
+        623,
+        618
+      ]
+    },
+    {
+      "id": "ruined_gateway",
+      "size": [
+        192,
+        176
+      ],
+      "pivot": [
+        96,
+        172
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        642,
+        320,
+        996,
+        632
+      ]
+    },
+    {
+      "id": "ancient_monument",
+      "size": [
+        80,
+        112
+      ],
+      "pivot": [
+        40,
+        108
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        1026,
+        348,
+        1237,
+        626
+      ]
+    },
+    {
+      "id": "dead_tree",
+      "size": [
+        128,
+        144
+      ],
+      "pivot": [
+        64,
+        140
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        57,
+        642,
+        356,
+        914
+      ]
+    },
+    {
+      "id": "dry_bush",
+      "size": [
+        64,
+        56
+      ],
+      "pivot": [
+        32,
+        52
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        425,
+        713,
+        626,
+        900
+      ]
+    },
+    {
+      "id": "desert_crate",
+      "size": [
+        64,
+        64
+      ],
+      "pivot": [
+        32,
+        60
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        687,
+        712,
+        948,
+        903
+      ]
+    },
+    {
+      "id": "desert_barrel",
+      "size": [
+        56,
+        64
+      ],
+      "pivot": [
+        28,
+        60
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        1026,
+        723,
+        1229,
+        914
+      ]
+    },
+    {
+      "id": "abandoned_temple",
+      "size": [
+        160,
+        160
+      ],
+      "pivot": [
+        80,
+        156
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        19,
+        926,
+        364,
+        1229
+      ]
+    },
+    {
+      "id": "guardian_lion_ruin",
+      "size": [
+        80,
+        112
+      ],
+      "pivot": [
+        40,
+        108
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-props.png",
+      "sourceRect": [
+        399,
+        925,
+        658,
+        1227
+      ]
+    },
+    {
+      "id": "pebble_scatter",
+      "size": [
+        64,
+        40
+      ],
+      "pivot": [
+        32,
+        36
+      ],
+      "layer": "ground",
+      "source": "generated-props.png",
+      "sourceRect": [
+        658,
+        1024,
+        943,
+        1187
+      ]
+    },
+    {
+      "id": "dust_decal",
+      "size": [
+        96,
+        48
+      ],
+      "pivot": [
+        48,
+        44
+      ],
+      "layer": "ground",
+      "source": "generated-props.png",
+      "sourceRect": [
+        987,
+        983,
+        1219,
+        1200
+      ]
+    },
+    {
+      "id": "dungeon_entrance",
+      "size": [
+        192,
+        176
+      ],
+      "pivot": [
+        96,
+        172
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-portals.png",
+      "sourceRect": [
+        31,
+        147,
+        606,
+        646
+      ]
+    },
+    {
+      "id": "dungeon_exit_portal",
+      "size": [
+        192,
+        176
+      ],
+      "pivot": [
+        96,
+        172
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-portals.png",
+      "sourceRect": [
+        660,
+        148,
+        1235,
+        653
+      ]
+    },
+    {
+      "id": "ruined_gate_frame",
+      "size": [
+        192,
+        144
+      ],
+      "pivot": [
+        96,
+        140
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-portals.png",
+      "sourceRect": [
+        62,
+        766,
+        590,
+        1151
+      ]
+    },
+    {
+      "id": "gate_steps_base",
+      "size": [
+        192,
+        104
+      ],
+      "pivot": [
+        96,
+        100
+      ],
+      "layer": "feet_y_sorted",
+      "source": "generated-portals.png",
+      "sourceRect": [
+        658,
+        862,
+        1228,
+        1158
+      ]
+    }
+  ],
+  "files": {
+    "assets/tilesets/desert/desert-terrain.png": "fc85a116be5a04617d01a9ac0282bfb19d0f426bf3b32b2c0dcf0bc7de7bc09f",
+    "assets/tilesets/desert/desert-terrain.json": "d44028e4aaf62d8e036e184aa40ad3dca2a50a92a59deb5235f73ed35dd44759",
+    "assets/sprites/environment/desert/desert-scenery.png": "6eec88395e702ddb9bb77f8c97c2cb37efeea446493476da4881d313f7551190",
+    "assets/sprites/environment/desert/desert-scenery.json": "99eae634e15be4b1bbdf1fed17b7d43fd46f784ad29c89caa927b51c3a9577ff",
+    "assets/sprites/creeps/dungeons/desert/bo_cap_cat/spritesheet.png": "2063b94bc651e128812db88e410464ac07a55881c1880c108c17eed519d256c4",
+    "assets/sprites/creeps/dungeons/desert/bo_cap_cat/atlas.json": "1463abf08ebc4ab2408d8425531c45041bda119d7dd02bf027da30329faf95bc",
+    "assets/sprites/creeps/dungeons/desert/bo_cap_cat/animations.json": "b9b880d93789c26151c59a8a52a1b8904792dffc2c94208436251633142adf12",
+    "assets/sprites/creeps/dungeons/desert/sa_xa/spritesheet.png": "a60b4f01d3d6bd50ff182bd311d0a31b4d9f263827bd827853fac961f642c844",
+    "assets/sprites/creeps/dungeons/desert/sa_xa/atlas.json": "e76afb6fb66d5e0ab1ef23848ab75a41894c4a578774cac5339df8496a73c7cf",
+    "assets/sprites/creeps/dungeons/desert/sa_xa/animations.json": "bff04293f84065f35f5b5f76ec55acb7c47d547ba253408927591b3a6c609cd6",
+    "assets/sprites/creeps/dungeons/desert/sa_tac/spritesheet.png": "0bd01118c8201c5d93789359d9a2d249d94897adab0609cbf3175cb33e688956",
+    "assets/sprites/creeps/dungeons/desert/sa_tac/atlas.json": "497e58f6c739b659f8815e3118d046716169a8a74c879434d704eced6ef04931",
+    "assets/sprites/creeps/dungeons/desert/sa_tac/animations.json": "81b50873cc45b70de4559f23ebb571080a0e7277760e8b539e11f313195b30b7",
+    "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/spritesheet.png": "1c92be776960d7f62094eced4e981dc239336c392e70112c3a54246b9ec8d169",
+    "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/atlas.json": "9f53d97d352e9b7340d8fddba335c49d21e27b6a163b4adc780c4850753a99b4",
+    "assets/sprites/creeps/dungeons/desert/cung_thu_sa_mac/animations.json": "660fdeac3f69d060fe4aab017204257e33ca2887797b406f666827f0616f573e",
+    "assets/sprites/creeps/dungeons/desert/xac_uop/spritesheet.png": "da831996e7a8ac50f8465a8579c9dd5e84f41c3a2f6c39c690368fe9516cb4af",
+    "assets/sprites/creeps/dungeons/desert/xac_uop/atlas.json": "497e58f6c739b659f8815e3118d046716169a8a74c879434d704eced6ef04931",
+    "assets/sprites/creeps/dungeons/desert/xac_uop/animations.json": "e57ceca170822e5a3537b1955cc67cff4d4fce78bc7156d35d76582b5a5e6eb4",
+    "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/spritesheet.png": "3c5a990715743379335ddec83807d7ccc7c5a8de5a065bc80faa8e9b829fff9f",
+    "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/atlas.json": "d2244da2d33b46991112800bdc64736e260fc621216dceeb38d28cb06d599941",
+    "assets/sprites/creeps/dungeons/desert/cu_nhan_sa_thach/animations.json": "f2d743496229fbaa82fb10a578d401379e23b8dcbd87762c0800b6def3d59846"
+  }
+}

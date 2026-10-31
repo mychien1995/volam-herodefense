@@ -1,0 +1,775 @@
+{
+  "package": "bong_controls_v2",
+  "role": "aura",
+  "canvas": [
+    256,
+    256
+  ],
+  "pivot": [
+    128,
+    128
+  ],
+  "clips": [
+    {
+      "name": "dash_trail_down",
+      "phase": "loop",
+      "direction": "down",
+      "loop": true,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_down_0",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_down_1",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_down_2",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_down_3",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "durations": [
+        55,
+        55,
+        55,
+        55
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "lifetime": "moving dash ticks only"
+    },
+    {
+      "name": "dash_trail_left",
+      "phase": "loop",
+      "direction": "left",
+      "loop": true,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_left_0",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_left_1",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_left_2",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_left_3",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "durations": [
+        55,
+        55,
+        55,
+        55
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "lifetime": "moving dash ticks only"
+    },
+    {
+      "name": "dash_trail_right",
+      "phase": "loop",
+      "direction": "right",
+      "loop": true,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_right_0",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_right_1",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_right_2",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_right_3",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "durations": [
+        55,
+        55,
+        55,
+        55
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "lifetime": "moving dash ticks only"
+    },
+    {
+      "name": "dash_trail_up",
+      "phase": "loop",
+      "direction": "up",
+      "loop": true,
+      "frames": [
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_up_0",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_up_1",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_up_2",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        },
+        {
+          "kind": "atlas",
+          "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+          "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+          "frame": "speed_up_3",
+          "anchor": [
+            48,
+            48
+          ],
+          "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite"
+        }
+      ],
+      "durations": [
+        55,
+        55,
+        55,
+        55
+      ],
+      "contactFrames": [],
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "server event/state, never frame clock",
+      "lifetime": "moving dash ticks only"
+    }
+  ],
+  "id": "bong_controls_v2_aura",
+  "frames": [
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_down_0",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        384,
+        0,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_down_0",
+      "tag": "dash_trail_down",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_down_1",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        480,
+        0,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_down_1",
+      "tag": "dash_trail_down",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_down_2",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        576,
+        0,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_down_2",
+      "tag": "dash_trail_down",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_down_3",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        672,
+        0,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_down_3",
+      "tag": "dash_trail_down",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_left_0",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        0,
+        96,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_left_0",
+      "tag": "dash_trail_left",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_left_1",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        96,
+        96,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_left_1",
+      "tag": "dash_trail_left",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_left_2",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        192,
+        96,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_left_2",
+      "tag": "dash_trail_left",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_left_3",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        288,
+        96,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_left_3",
+      "tag": "dash_trail_left",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_right_0",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_right_0",
+      "tag": "dash_trail_right",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_right_1",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        96,
+        0,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_right_1",
+      "tag": "dash_trail_right",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_right_2",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        192,
+        0,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_right_2",
+      "tag": "dash_trail_right",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_right_3",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        288,
+        0,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_right_3",
+      "tag": "dash_trail_right",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_up_0",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        384,
+        96,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_up_0",
+      "tag": "dash_trail_up",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_up_1",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        480,
+        96,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_up_1",
+      "tag": "dash_trail_up",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_up_2",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        576,
+        96,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_up_2",
+      "tag": "dash_trail_up",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    },
+    {
+      "kind": "atlas",
+      "sheet": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "atlas": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.json",
+      "frame": "speed_up_3",
+      "anchor": [
+        48,
+        48
+      ],
+      "sourceProvenance": "Original generated animation source; alpha cleanup and fixed-scale alignment in Aseprite",
+      "rect": [
+        672,
+        96,
+        96,
+        96
+      ],
+      "scale": 1,
+      "threshold": 0,
+      "source": "assets/exports/skills/cai-bang/truy_phong_bong/truy_phong_bong_vfx.png",
+      "name": "dash_trail_up_3",
+      "tag": "dash_trail_up",
+      "durationMs": 55,
+      "canvas": [
+        256,
+        256
+      ],
+      "pivot": [
+        128,
+        128
+      ]
+    }
+  ],
+  "sourceFile": "assets/source/skills/m3c3_feedback_v2_batches/01_cai_bang/bong_controls_v2_aura.aseprite",
+  "individualDirectory": "assets/exports/skills/m3c3_feedback_v2_batches/01_cai_bang/bong_controls_v2/aura_frames"
+}
