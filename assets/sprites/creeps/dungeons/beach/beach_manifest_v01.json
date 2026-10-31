@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "beach_dungeon_phase2c_v01",
   "date": "2026-10-31",
-  "status": "produced_with_one_incomplete_enemy_animation",
+  "status": "prototype_pending_runtime_director_review",
   "conceptApproval": "Automatically approved by the current user request.",
   "scope": "Beach asset production only; no map/runtime registration or gameplay changes.",
   "provenance": {
@@ -673,7 +673,7 @@
       "nameVi": "Thủy Quỷ",
       "manifest": "assets/sprites/creeps/dungeons/beach/thuy_quy/manifest.json",
       "frames": 64,
-      "status": "incomplete_asset_issue"
+      "status": "prototype_pending_runtime_director_review"
     },
     {
       "id": "hai_vu",
@@ -5768,8 +5768,8 @@
     },
     {
       "path": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_down_2.png",
-      "sha256": "9f3924bf4863c6df6ac0b2233a581389036ecd88f808d7d77bce4b8e61abbeae",
-      "bytes": 152
+      "sha256": "adaadd9b99040bedf1e370812abeaffd3b052038bc2331b56cb2f04924d308d6",
+      "bytes": 1735
     },
     {
       "path": "assets/sprites/creeps/dungeons/beach/thuy_quy/frames/death_down_3.png",
@@ -5998,18 +5998,18 @@
     },
     {
       "path": "assets/sprites/creeps/dungeons/beach/thuy_quy/manifest.json",
-      "sha256": "f3080863f7d16b1c17b080591484343d26e8bf61eaaf15c8d774ab9cdfca32a4",
-      "bytes": 48872
+      "sha256": "4a086bfd3a375f3e5c1a14fa2c6452df8f1926a1d581c4826e04158fbf7554ab",
+      "bytes": 49245
     },
     {
       "path": "assets/sprites/creeps/dungeons/beach/thuy_quy/source/thuy_quy_v01.aseprite",
-      "sha256": "bc98f7bc61f437af67ce524c93e32ff19772770b71240703fdbc7a224476bd32",
-      "bytes": 240242
+      "sha256": "5a8e231b8c21be8002a59c37e7233e317b5b446462142d328e9d3caec2f20a37",
+      "bytes": 241661
     },
     {
       "path": "assets/sprites/creeps/dungeons/beach/thuy_quy/spritesheet.png",
-      "sha256": "6c23d6059503ec863a405f423f92ed9473017877148d9a9f94c127b75e3676de",
-      "bytes": 242159
+      "sha256": "19472de6834fada5ce28dcdb9bced39fac3d2adcdb6e0c00dd1ddc4aa5ce2a5a",
+      "bytes": 243249
     },
     {
       "path": "assets/effects/dungeons/beach/atlas.json",
@@ -6358,12 +6358,20 @@
     }
   ],
   "verification": "assets/sprites/creeps/dungeons/beach/verification_v01.json",
-  "knownIssues": [
+  "knownIssues": [],
+  "corrections": [
     {
-      "asset": "thuy_quy",
+      "date": "2026-11-01",
       "frame": "death_down_2",
-      "status": "incomplete",
-      "issue": "Fully transparent export; no runtime integration performed."
+      "method": "Re-extracted inspected authored dissolve pixels from original source using unchanged down-facing scale and feet pivot.",
+      "sourceSha256": "1b2e44b73434e3b49fd5fbdefc64f27693d398e8b6f20ec538347c9289c8c8aa",
+      "sourceRect": [
+        930,
+        248,
+        168,
+        87
+      ],
+      "newFrameSha256": "adaadd9b99040bedf1e370812abeaffd3b052038bc2331b56cb2f04924d308d6"
     }
   ]
 }

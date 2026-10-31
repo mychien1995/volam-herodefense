@@ -1,4 +1,9 @@
 import Phaser from 'phaser';
+import {
+  preloadBeachArt,
+  registerBeachArt,
+  type BeachManifest,
+} from './beach-art.js';
 import { preloadForestCreepArt, registerForestCreepArt } from './forest-art.js';
 import type { ForestCreepManifest } from './forest-creeps.js';
 import { forestArtNotice } from './forest-creeps.js';
@@ -71,6 +76,7 @@ export function heroTexture(
 }
 export { facing } from './facing.js';
 export function preloadArt(scene: Phaser.Scene): void {
+  preloadBeachArt(scene);
   preloadForestCreepArt(scene);
   preloadBambooForestArt(scene);
   preloadDesertArt(scene);
@@ -156,6 +162,9 @@ export function actorFootPivot(
     ArenaCreepManifest | undefined;
   const entry =
     manifest.assets.find((asset) => asset.id === id) ??
+    (
+      scene.cache.json.get('beach_manifest') as BeachManifest | undefined
+    )?.assets.find((a) => a.id === id) ??
     creeps?.assets.find((asset) => asset.id === id) ??
     (
       scene.cache.json.get('desert_manifest') as DesertManifest | undefined
@@ -168,6 +177,7 @@ export function actorFootPivot(
   return (entry ?? forest)!.footPivot;
 }
 export function registerArt(scene: Phaser.Scene): void {
+  registerBeachArt(scene);
   registerForestCreepArt(scene);
   registerDesertArt(scene);
   registerSkillArt(scene);

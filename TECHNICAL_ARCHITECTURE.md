@@ -4,6 +4,10 @@ BuildState adds mode, branchId and planned slotSkills. Validated mode/branch mes
 
 # Technical Architecture Decision Record v1.0
 
+## Beach integration — 2026-11-01
+
+Protocol 13 extends the validated destination selector to forest/desert/sea. `game-data/dungeon-registry.ts` resolves all three definitions; Beach uses the existing server-selected creep identity and per-zone authoritative world/geometry/clock. One composed Tiled map supplies collision/markers and Phaser layers. Retained actor/prop/effect atlases and water metadata feed the existing loaders, playback, feet depth and effect cleanup; no specialized enemy gameplay is inferred. The desert atlas-map renderer and isolated art QA service are parameterized rather than replaced. Worktree scope, source correction, provenance, tests and limitations: `docs/BEACH_INTEGRATION.md`.
+
 ## Desert integration — 2026-10-31
 
 Protocol 11 adds optional validated forest/desert selection (forest default) and a server-selected creep archetype ID. DungeonMatch registers multiple definitions while retaining its existing constructor/default behavior; every dungeon zone owns its definition, geometry and independent clock. The shared Tiled desert map drives authoritative collision/markers and Phaser presentation. Retained original PNG/atlas metadata feeds `desert-art.ts`, including explicit per-frame timings and foot pivots. No enemy stats, AI, damage, rewards or projectile behavior changes. Source/provenance/status, specialized-behavior gaps and validation: `docs/DESERT_INTEGRATION.md`.

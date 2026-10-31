@@ -9,6 +9,12 @@
 
 # Acceptance Tests — Rule-to-test traceability
 
+## Beach integration — 2026-11-01
+
+- `tests/beach-dungeon.test.ts` covers shared map reachability, six entry seats, water/prop collision, bridge/dock traversal, destination validation, private/shared/forest/desert isolation, empty pause/resume and unchanged generic tuning/roster rotation.
+- `scripts/verify-beach.py` checks original provenance, 384 nonempty cels/136 entries, corrected editable source, atlas pixels/timings, 512 tiles, 25 props, 64 effects cels and runtime map copies.
+- `playwright.beach.config.ts` runs two-client full-frame/phase/timing/pivot/completion checks, six-client natural combat/rewards/contact cues/water collision/Space exit (two browsers plus four SDK clients), Beach private pause/resume and desert entry/return, plus existing forest private/shared regressions. Capture is PNG/JSON only; runtime art approval remains pending.
+
 ## Desert integration — 2026-10-31
 
 - `tests/desert-dungeon.test.ts`: all markers and six entry seats reachable, solid prop collision, validated destination/default compatibility, separate private/shared/forest state, empty pause/resume, physical exit and deterministic six-appearance rotation with unchanged common creep tuning.

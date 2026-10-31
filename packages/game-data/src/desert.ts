@@ -54,5 +54,3 @@ for (const p of [
   )
     throw new Error('Desert marker outside walkable map bounds.');
 }
-export const dungeonForZone = (zone: string): CreepDungeonDefinition =>
-  zone.startsWith('desert_') ? desertDungeon : creepDungeon;

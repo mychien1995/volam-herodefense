@@ -6,6 +6,7 @@ import {
   m1Config,
   creepDungeon,
   desertDungeon,
+  beachDungeon,
 } from '@volam/game-data';
 import {
   DungeonMatch,
@@ -52,7 +53,7 @@ export class MatchRoom extends Room<{
     creepDungeon,
     this.seed,
     serverInvasionDefinition(),
-    [desertDungeon],
+    [desertDungeon, beachDungeon],
   );
   readonly world = this.simulation.arena.world;
   private readonly checkSequences = new Map<string, number>();

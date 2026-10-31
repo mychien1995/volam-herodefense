@@ -2,6 +2,12 @@ import Phaser from 'phaser';
 import { arena, dungeonForZone } from '@volam/game-data';
 import { desertCreepArt } from './desert-art.js';
 import {
+  beachCreepArt,
+  beachStrikeEffect,
+  isBeachZone,
+  type BeachManifest,
+} from './beach-art.js';
+import {
   forestCreepArt,
   forestStrikeEffects,
   type ForestCreepManifest,
@@ -76,7 +82,15 @@ export class ArenaScene extends Phaser.Scene {
     this.vfx = new SkillVfx(this);
     this.creepEffects = new ArenaCreepEffects(
       this,
-      this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest,
+      {
+        ...(this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest),
+        effects: [
+          ...(
+            this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest
+          ).effects,
+          ...(this.cache.json.get('beach_manifest') as BeachManifest).effects,
+        ],
+      },
       this.cache.json.get('forest_creeps_manifest') as ForestCreepManifest,
     );
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
@@ -259,6 +273,7 @@ export class ArenaScene extends Phaser.Scene {
             actor.archetypeId,
             this.zoneId,
           ) ??
+          beachCreepArt(this, actor.archetypeId, this.zoneId) ??
           desertCreepArt(this, actor.archetypeId, this.zoneId) ??
           arenaCreepArt(
             this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest,
@@ -465,6 +480,15 @@ export class ArenaScene extends Phaser.Scene {
     if (event.kind === 'hit') this.creepAction(event.targetId, 'hurt');
     if (event.kind === 'death') this.creepAction(event.targetId, 'death');
     const source = this.snapshot?.creeps.get(event.sourceId);
+    if (source && isBeachZone(source.zoneId) && source.zoneId === this.zoneId) {
+      const effect = beachStrikeEffect(
+        source.archetypeId,
+        event.kind,
+        event.abilityId,
+      );
+      if (effect)
+        this.creepEffects?.contact(effect, event.x, event.y, event.sourceId);
+    }
     const forest =
       source &&
       source.zoneId === this.zoneId &&
@@ -626,6 +650,31 @@ export class ArenaScene extends Phaser.Scene {
         .filter(
           (o) =>
             o.name.startsWith('desert:') && !o.name.startsWith('desert:layer:'),
+        )
+        .map((o) => {
+          const image = o as Phaser.GameObjects.Image;
+          return {
+            name: image.frame.name,
+            x: image.x,
+            y: image.y,
+            depth: image.depth,
+            origin: [image.originX, image.originY],
+            scale: [image.scaleX, image.scaleY],
+          };
+        }),
+      beachWaterPhases: this.zoneId.startsWith('sea_')
+        ? this.registry.get('beachWaterPhases')
+        : [],
+      beachWaterTile: this.zoneId.startsWith('sea_')
+        ? (
+            this.children.list.find((o) => o.name === 'beach:layer:ground') as
+              Phaser.Tilemaps.TilemapLayer | undefined
+          )?.getTileAt(0, 0)?.index
+        : undefined,
+      beachScenery: this.children.list
+        .filter(
+          (o) =>
+            o.name.startsWith('beach:') && !o.name.startsWith('beach:layer:'),
         )
         .map((o) => {
           const image = o as Phaser.GameObjects.Image;

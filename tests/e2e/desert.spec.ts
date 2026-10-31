@@ -6,7 +6,7 @@ import { PROTOCOL_VERSION } from '@volam/game-protocol';
 import { m1Config } from '@volam/game-data';
 import type { MatchRoom } from '../../apps/game-server/src/rooms/MatchRoom.js';
 const evidence = 'docs/evidence/desert-integration-2026-10-31';
-interface Actor {
+export interface Actor {
   x: number;
   y: number;
   hp: number;
@@ -16,7 +16,7 @@ interface Actor {
   lastSequence: number;
   archetypeId?: string;
 }
-interface Snap {
+export interface Snap {
   sessionId: string;
   roomId: string;
   state: {
@@ -32,7 +32,7 @@ interface Snap {
     zoneId: string;
   }>;
 }
-interface View {
+export interface View {
   zoneId: string;
   zoom: number;
   rotation: number;

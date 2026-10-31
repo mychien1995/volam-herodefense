@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { prepareArenaCreeps } from './prepare-arena-creeps.mjs';
 import { prepareForestCreepReview } from './prepare-forest-creep-review.mjs';
 import { prepareDesertAssets } from './prepare-desert-assets.mjs';
+import { prepareBeachAssets } from './prepare-beach-assets.mjs';
 import { prepareFeedbackV2Art } from './prepare-feedback-v2-art.mjs';
 import {
   assetWrites,
@@ -134,6 +135,7 @@ copyIfChanged(
 prepareArenaCreeps();
 prepareForestCreepReview();
 prepareDesertAssets();
+prepareBeachAssets();
 console.info(
   `Prepared assets in ${fileURLToPath(dest)} (${assetWrites.changed} written, ${assetWrites.unchanged} unchanged)`,
 );

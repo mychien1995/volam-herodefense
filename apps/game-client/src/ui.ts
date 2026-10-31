@@ -24,7 +24,7 @@ export class GameUI {
   private sessionId = '';
   private roomId = '';
   private study = false;
-  private dungeonDestination: 'forest' | 'desert' = 'forest';
+  private dungeonDestination: 'forest' | 'desert' | 'sea' = 'forest';
   private ended = false;
   private dead = false;
   private defense: DefenseHud;
@@ -39,7 +39,7 @@ export class GameUI {
   onStudy: (enabled: boolean) => void = () => {};
   onDungeonEnter: (
     access: 'private' | 'shared',
-    destination: 'forest' | 'desert',
+    destination: 'forest' | 'desert' | 'sea',
   ) => void = () => {};
   constructor(artPreview: boolean) {
     element('#app').innerHTML = `
@@ -328,7 +328,9 @@ export class GameUI {
         const destination = card.dataset['destination'];
         if (
           !unavailable &&
-          (destination === 'forest' || destination === 'desert')
+          (destination === 'forest' ||
+            destination === 'desert' ||
+            destination === 'sea')
         ) {
           this.dungeonDestination = destination;
           for (const peer of document.querySelectorAll<HTMLButtonElement>(
@@ -481,7 +483,7 @@ export class GameUI {
     const entryNote = document.querySelector('#dungeon-entry-note');
     if (entryNote)
       entryNote.textContent = canEnter
-        ? `Chọn Riêng hoặc Chung để vào ${this.dungeonDestination === 'desert' ? 'Sa Mạc' : 'Rừng Trúc'}.`
+        ? `Chọn Riêng hoặc Chung để vào ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển' }[this.dungeonDestination]}.`
         : inArena
           ? 'Bạn cần hồi sinh trước khi vào phó bản.'
           : 'Đến gần cửa rồi nhấn Space để về đấu trường.';
@@ -492,19 +494,21 @@ export class GameUI {
     const zoneStatus = element('#zone-status');
     zoneStatus.hidden = inArena && hero.respawnTicks <= 0;
     const desert = hero.zoneId.startsWith('desert_');
-    const artNotice = desert
-      ? 'Hình quái đang chờ duyệt'
-      : forestArtNotice(
-          [...state.creeps.values()]
-            .filter((a) => a.zoneId === hero.zoneId)
-            .map((a) => a.archetypeId),
-        );
+    const beach = hero.zoneId.startsWith('sea_');
+    const artNotice =
+      desert || beach
+        ? 'Hình quái đang chờ duyệt'
+        : forestArtNotice(
+            [...state.creeps.values()]
+              .filter((a) => a.zoneId === hero.zoneId)
+              .map((a) => a.archetypeId),
+          );
     zoneStatus.title = zone ? artNotice : '';
     zoneStatus.textContent =
       hero.respawnTicks > 0
         ? `Đã gục ngã · Về đấu trường sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`
         : zone
-          ? `${desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
+          ? `${beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
           : '';
     element('#hero-name').textContent = hero.nickname;
     element('#school-name').textContent =

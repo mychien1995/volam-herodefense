@@ -1,0 +1,33 @@
+{
+  "worktree": "C:/Users/ADMIN/.codex/worktrees/beach-dungeon/volam-hero-defense",
+  "branch": "wip/m3d/beach-dungeon",
+  "baseCommit": "de1b3282906cd4c3952c4c821354b86ccf052a77",
+  "finalPipeline": {
+    "command": "pnpm check:final --config playwright.beach.config.ts",
+    "runs": 1,
+    "overall": "FAIL: frame case disconnected in lobby; all prior stages and four browser cases passed",
+    "workflowChecksPassed": 18,
+    "unitIntegrationTestsPassed": 357,
+    "assetValidatorsPassed": 13,
+    "productionBuild": "PASS",
+    "typechecks": "PASS",
+    "originalTimings": "final-pipeline-timings.json"
+  },
+  "focusedRecovery": {
+    "sixPlayerCommand": "node tools/run-playwright.mjs test --config playwright.beach.config.ts tests/e2e/beach.spec.ts --grep \"two clients|six clients\"",
+    "sixPlayerResult": "PASS, 57.6s, two browser contexts plus four SDK clients, including peer removal on both browsers",
+    "frameIntermediateResult": "FAIL, test pose HTTP ECONNRESET at death:right",
+    "finalFrameCommand": "node tools/run-playwright.mjs test --config playwright.beach.config.ts tests/e2e/beach.spec.ts --grep \"two clients\"",
+    "finalFrameResult": "PASS, 1.3m total, 136 tags/384 unique cels, complete canvas visibility on both clients",
+    "toolsTypecheck": "pnpm exec tsc -p tsconfig.tools.json --noEmit: PASS",
+    "expandedStaticValidation": "python -X utf8 scripts/verify-beach.py: PASS",
+    "allFiveDistinctSelectedBrowserCasesPassedAcrossFinalAndRecovery": true
+  },
+  "motionReport": "frames.json",
+  "authorityReport": "combat.json",
+  "pngEvidence": ["beach-six-player-1920.png", "beach-combat-1280.png", "beach-frames-1280.png"],
+  "runtimeDirectorArtApproval": "PENDING",
+  "speciesSpecificCombatProfiles": "NOT SUPPLIED; unchanged generic M2A melee tuning reused",
+  "videoAndTraceScreenshotStreams": "DISABLED",
+  "merged": false
+}
