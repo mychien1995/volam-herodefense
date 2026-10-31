@@ -1,0 +1,59 @@
+{
+  "tool": "OpenAI built-in image_gen.imagegen",
+  "date": "2026-10-31",
+  "sources": {
+    "veg": "exec-f65d9f3f-7326-4bdc-b639-3b40c9ded008.png",
+    "props": "exec-ee925acd-a3c6-42db-9cc8-e7a5427df68c.png",
+    "terrain": "exec-0cff4e3c-ec50-4370-a56b-af9cabe7dc06.png",
+    "portal": "exec-1772e338-be1a-4d39-9612-34c1f22ae160.png"
+  },
+  "requests": [
+    {
+      "id": "veg",
+      "prompt": "Create actual reusable production game asset source raster, NOT a concept board. Premium detailed wuxia 2D PIXEL ART matching the APPROVED input references precisely, lush jade/emerald/moss and bamboo-yellow, warm stonegray/natural brown, crisp clustered pixels, warm dark stepped edges, upper-left light. Elevated orthographic top-down three-quarter RPG view, upright verticals, axis-aligned square ground, NEVER diamond-grid isometric, no perspective vanishing point, no3D. No typography, labels, frames, paper, background scene, HUD, people or creatures. Transparent PNG1536x1024, EXACT FOUR COLUMNS by TWO ROWS uniform invisible384x512 cells; each isolated object completely fits its own cell with generous fully transparent margin, same ground contact baseline near lower part of each cell. Row1 left to right: ONE dense tall bamboo cluster (multiple tall stalks, rich canopy, no rocks at base), ONE second dense bamboo cluster with more yellow-green highlights, ONE tall individual bamboo culm with sparse branching leaves, ONE low dense jade broadleaf bush. Row2 left to right: ONE low grass/ivory-flower tuft patch; ONE moss-covered twisted root; ONE aged mossy tree stump; ONE separate overhanging bamboo LEAF CANOPY spray curved outward for foreground overlap, no stump or trunk. Keep all separate with large gaps. True alpha background; no checkerboard. These are detailed production sprite sources for extraction, not terrain dioramas.",
+      "references": [
+        "assets/concepts/dungeon-environments/bamboo-forest/vegetation-concept.png",
+        "assets/concepts/dungeon-environments/bamboo-forest/dungeon-overview.png"
+      ]
+    },
+    {
+      "id": "props",
+      "prompt": "Create actual reusable production game asset source raster, NOT a concept board. Premium detailed wuxia 2D PIXEL ART matching the APPROVED input references precisely, lush jade/emerald/moss and bamboo-yellow, warm stonegray/natural brown, crisp clustered pixels, warm dark stepped edges, upper-left light. Elevated orthographic top-down three-quarter RPG view, upright verticals, axis-aligned square ground, NEVER diamond-grid isometric, no perspective vanishing point, no3D. No typography, labels, frames, paper, background scene, HUD, people or creatures. Transparent PNG1536x1536 EXACT THREE COLUMNS by THREE ROWS uniform invisible512x512 cells. Nine isolated complete prop sprites, centered in own cell with fully transparent generous margin, never overlap other cells. Row1: ancient Chinese gray STONE LANTERN with warm amber window/moss; LOW BROKEN TEMPLE WALL horizontal frontage with geometric trim/moss; small CHINESE ROADSIDE SHRINE gray curled roof/red wood/altar. Row2: low BAMBOO FENCE horizontal frontage; broad OPEN BAMBOO GATE no door; weathered gray STONE MONUMENT/stele with abstract engraving/moss. Row3: WOODEN MARTIAL TRAINING DUMMY three arm pegs/red practice mark (inanimate); small broad FLAT WOODEN BRIDGE deck aligned north-south, horizontal planks, low side rails, NO painted water beneath; group of gray MOSSY ROCKS. Follow existing concepts, NOT a redesign. No large dirt/grass patch grounds under props, just tight contact shadow. No transparent checkerboard painted in image. Each object must fit own cell. No text.",
+      "references": [
+        "assets/concepts/dungeon-environments/bamboo-forest/structures-concept.png",
+        "assets/concepts/dungeon-environments/bamboo-forest/dungeon-overview.png"
+      ]
+    },
+    {
+      "id": "terrain",
+      "prompt": "Create actual reusable production game asset source raster, NOT a concept board. Premium detailed wuxia 2D PIXEL ART matching the APPROVED input references precisely, lush jade/emerald/moss and bamboo-yellow, warm stonegray/natural brown, crisp clustered pixels, warm dark stepped edges, upper-left light. Elevated orthographic top-down three-quarter RPG view, upright verticals, axis-aligned square ground, NEVER diamond-grid isometric, no perspective vanishing point, no3D. No typography, labels, frames, paper, background scene, HUD, people or creatures. Opaque1536x1024 terrain material source, exactly3 columns x2rows of SIX512x512 perfectly square material texture swatches, filling entire raster without gaps, borders, shadows, text or labels. Every512x512 swatch seamless/tileable on all4edges. Top-down square ground-plane only, each swatch all ONE material continuously edge-to-edge; no perspective or outer framing. Row1: rich short EMERALD GRASS ground subtle scattered individual blades with sparse yellowgreen tips, no plants/clusters; warm NATURAL DIRT ground subtle pebbles and low-detail earth, no grass; dense short dark JADE MOSS ground. Row2: old weathered warmgray CRACKED SQUARE STONE PAVING, square slabs axisaligned each slab roughly128x128 sourcepixels, narrow dark cracks and subtle sparse moss; warm earth with SPARSE FALLEN BAMBOO LEAVES (small brown/yellowgreen leaves); shallow jade/turquoise STREAM WATER ripples with visible small stones, no bank edges. Uniform tiny pixel texture density across all six. Flat diffuse upper-left lit ground, no vignettes. These six continuous material textures are production source for32px tile extraction. Strongly match approved terrain materials, but NO bamboo trunks, props, frames or surrounding scenery.",
+      "references": [
+        "assets/concepts/dungeon-environments/bamboo-forest/terrain-concept.png",
+        "assets/concepts/dungeon-environments/bamboo-forest/combat-clearing-and-portal.png"
+      ]
+    },
+    {
+      "id": "portal",
+      "prompt": "Create actual reusable production game asset source raster, NOT a concept board. Premium detailed wuxia 2D PIXEL ART matching the APPROVED input references precisely, lush jade/emerald/moss and bamboo-yellow, warm stonegray/natural brown, crisp clustered pixels, warm dark stepped edges, upper-left light. Elevated orthographic top-down three-quarter RPG view, upright verticals, axis-aligned square ground, NEVER diamond-grid isometric, no perspective vanishing point, no3D. No typography, labels, frames, paper, background scene, HUD, people or creatures. Transparent PNG1024x1024, ONLY ONE isolated complete dungeon EXIT PORTAL structure matching input1 approved western portal exactly: weathered Chinese gray stone RECTANGULAR ARCH, shallow curled Chinese stone cap, small aged red cloth ties either side, LOW STONE THRESHOLD flush to ground, clear blue-jade luminous swirling oval inside arch. No stone lanterns (export separately), no plants, no text, no giant dirt patch. Entire structure and restrained aura fully inside canvas with transparent padding at least80px around. View straight south-facing in game elevated orthographic camera, arch upright, visible cap top and base top as pixel art. Crisp authored pixels, no blurry airbrushed aura. This single portal is for real game sprite extraction at roughly104x144 logical size. True alpha around object, no painted checkerboard.",
+      "references": [
+        "assets/concepts/dungeon-environments/bamboo-forest/combat-clearing-and-portal.png",
+        "assets/concepts/dungeon-environments/bamboo-forest/structures-concept.png"
+      ]
+    }
+  ],
+  "corrections": [
+    {
+      "output": "generated_veg_key.png",
+      "originalGeneratedFilename": "exec-d7d819d3-fbfb-4adb-a5e0-faeb27f93463.png",
+      "prompt": "Edit ONLY the background of this pixel-art vegetation sprite source sheet. Preserve all EIGHT existing plant/object designs and placements exactly. Replace every bit of cloudy green background and every empty gap between stalks/leaves with ONE PERFECTLY FLAT UNIFORM BRIGHT MAGENTA #FF00FF backdrop. The flat magenta must touch the actual hard pixel edge of every plant, including every hole between bamboo stalks and leaves. NO green glow, no green haze, no gradient, no shading on the magenta. This is a chroma-key production sprite source: plants are green, all empty background is hot pink. Do NOT draw outlines of magenta over plants. No added ground patches, text, frames or objects.1536x1024, same art and layout. OPAQUE solid magenta background.",
+      "reference": "assets/source/bamboo_forest/generated_veg.png",
+      "selection": "used; key removed during deterministic export"
+    },
+    {
+      "originalGeneratedFilename": "exec-d5bcc38a-7ac2-4ffb-b716-a622f615e61a.png",
+      "prompt": "Edit this production sprite source sheet. Preserve exactly the eight existing vegetation designs, colors, shapes and their placements. REMOVE the cloudy green background completely. Every pixel outside actual bamboo stalks, leaves, bushes, grass, roots, stump and canopy branches must have alpha ZERO, including every space between leaves, and all gaps between the eight separate objects. The green cloud/matte is NOT part of these sprites. Do NOT replace with black, paper, checkerboard, gradient or another color. No ground rectangle, glow, vignette or ambient haze. Hard clean crisp pixel-art silhouettes, actual transparent alpha. Preserve pixel art detail and objects; no redesign. Keep the same1536x1024canvas and current layout.",
+      "reference": "assets/source/bamboo_forest/generated_veg.png",
+      "selection": "rejected; retained green matte, not used in exports"
+    }
+  ]
+}

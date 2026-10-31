@@ -25,9 +25,11 @@
     "assets:generate": "python assets/source/m1_art.py && python assets/source/ui_world.py",
     "test:balance": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/m1-balance.ts",
     "test:balance:m2b": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/m2b-balance.ts",
-    "verify:assets": "python scripts/verify-assets.py && python scripts/verify-arena-art01.py && python scripts/verify-arena-v2.py",
+    "verify:assets": "python scripts/verify-assets.py && python scripts/verify-arena-art01.py && python scripts/verify-arena-v2.py && python scripts/verify-bamboo-forest.py",
     "assets:export:arena": "node scripts/export-arena-art01.mjs",
-    "assets:export:visual": "node scripts/export-arena-v2.mjs"
+    "assets:export:visual": "node scripts/export-arena-v2.mjs",
+    "assets:export:bamboo": "node scripts/export-bamboo-forest.mjs",
+    "assets:verify:bamboo": "python scripts/verify-bamboo-forest.py"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

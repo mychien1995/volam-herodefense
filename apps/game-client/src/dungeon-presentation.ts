@@ -1,48 +1,78 @@
 import Phaser from 'phaser';
-import { creepDungeon, dungeonMapObjects } from '@volam/game-data';
+import { creepDungeon } from '@volam/game-data';
 
+/** Dungeon-only assets use the same PNG/hash-atlas and Tiled pipeline as arena. */
+export function preloadBambooForestArt(scene: Phaser.Scene): void {
+  scene.load.image('bamboo_terrain', '/assets/bamboo_forest/terrain.png');
+  scene.load.atlas(
+    'bamboo_scenery',
+    '/assets/bamboo_forest/scenery.png',
+    '/assets/bamboo_forest/scenery.json',
+  );
+}
 function clickOnCanvas(
   pointer: Phaser.Input.Pointer,
   action: () => void,
 ): void {
   if (pointer.event.target instanceof HTMLCanvasElement) action();
 }
-/** M2A environment prototype: existing tile/PNG assets, no regenerated artwork. */
+
+/** Presentation of shared map objects; collision remains server-owned. */
 export function createCreepDungeonArt(
   scene: Phaser.Scene,
   exit: () => void,
 ): Phaser.GameObjects.Image[] {
+  for (const key of ['bamboo_terrain', 'bamboo_scenery'])
+    scene.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
   const map = scene.make.tilemap({ key: 'creep_forest' });
-  const tiles = map.addTilesetImage('terrain', 'terrain', 32, 32, 0, 0);
-  if (!tiles) throw new Error('Missing shared dungeon terrain.');
-  map.createLayer('ground', tiles)?.setDepth(-10000);
+  const tiles = map.addTilesetImage(
+    'bamboo_terrain',
+    'bamboo_terrain',
+    32,
+    32,
+    0,
+    0,
+  );
+  if (!tiles) throw new Error('Missing Bamboo Forest terrain.');
+  for (const [i, name] of ['ground', 'paving', 'details'].entries()) {
+    const layer = map.createLayer(name, tiles);
+    if (!layer) throw new Error(`Missing Bamboo Forest layer: ${name}`);
+    layer.setDepth(-10000 + i).setName(`bamboo:layer:${name}`);
+  }
   const trees: Phaser.GameObjects.Image[] = [];
-  for (const marker of dungeonMapObjects.filter((o) => o.type === 'tree'))
-    trees.push(
-      scene.add
-        .image(marker.x, marker.y, 'arena_world_art01', 'tree_jade')
-        .setOrigin(0.5, 184 / 192)
-        .setDepth(marker.y),
+  for (const marker of map.getObjectLayer('scenery')?.objects ?? []) {
+    if (!scene.textures.get('bamboo_scenery').has(marker.name))
+      throw new Error(`Missing Bamboo Forest frame: ${marker.name}`);
+    const image = scene.add.image(
+      marker.x ?? 0,
+      marker.y ?? 0,
+      'bamboo_scenery',
+      marker.name,
     );
-  for (const [x, y] of [
-    [100, 180],
-    [300, 170],
-    [520, 160],
-    [760, 170],
-    [900, 180],
-    [100, 540],
-    [340, 560],
-    [580, 560],
-    [800, 560],
-  ] as const)
-    scene.add
-      .image(x, y, 'arena_world_art01', 'bamboo')
-      .setOrigin(0.5, 184 / 192)
-      .setDepth(y);
+    const ground = marker.properties?.some(
+      (p: { name: string; value: unknown }) =>
+        p.name === 'renderLayer' && p.value === 'ground',
+    );
+    image
+      .setOrigin(0.5, (image.height - 4) / image.height)
+      .setDepth(ground ? -9000 : image.y)
+      .setName(`bamboo:${marker.name}`);
+    if (
+      marker.name.startsWith('bamboo_') &&
+      marker.name !== 'bamboo_fence' &&
+      marker.name !== 'bamboo_gate'
+    )
+      trees.push(image);
+  }
   const portal = creepDungeon.exit;
-  scene.add
-    .image(portal.x, portal.y, 'dungeon_gate')
-    .setOrigin(0.5, 1)
+  const arch = scene.add.image(
+    portal.x,
+    portal.y,
+    'bamboo_scenery',
+    'exit_portal',
+  );
+  arch
+    .setOrigin(0.5, (arch.height - 4) / arch.height)
     .setDepth(portal.y)
     .setName('dungeon-exit')
     .setInteractive({ useHandCursor: true })

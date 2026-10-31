@@ -1,0 +1,946 @@
+{
+  "schemaVersion": 1,
+  "id": "bamboo_forest_environment_v1",
+  "date": "2026-10-31",
+  "status": "approved",
+  "scope": "One Bamboo Forest environment and existing dungeon map only",
+  "source": {
+    "method": "Original image_gen component production guided by five approved concepts; deterministic native PNG preparation and Aseprite source/export",
+    "license": "Original AI-assisted project artwork; no external pack imported and no separate third-party license or exclusive copyright asserted. Existing reference ownership not independently verified.",
+    "prompts": "assets/source/bamboo_forest/generation_prompts.json",
+    "workflow": "assets/source/bamboo_forest/README.md",
+    "approvedConceptLock": "assets/concepts/dungeon-environments/bamboo-forest/approved_concepts_v1.lock.json"
+  },
+  "terrain": {
+    "tileSize": [
+      32,
+      32
+    ],
+    "tileCount": 344,
+    "periodicMaterialCount": 6,
+    "source": "assets/source/bamboo_forest/terrain.aseprite",
+    "export": "assets/exports/bamboo_forest/terrain.png",
+    "groups": {
+      "material_0": 1,
+      "material_1": 5,
+      "material_2": 9,
+      "material_3": 13,
+      "material_4": 17,
+      "material_5": 21,
+      "grass_to_1": 25,
+      "grass_to_2": 89,
+      "grass_to_3": 153,
+      "grass_to_5": 217,
+      "dirt_to_stone": 281
+    },
+    "status": "approved"
+  },
+  "assets": [
+    {
+      "id": "bamboo_jade",
+      "dimensions": [
+        152,
+        192
+      ],
+      "footPivot": [
+        0.5,
+        0.9791666666666666
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/bamboo_jade.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/bamboo_jade.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "bamboo_gold",
+      "dimensions": [
+        152,
+        192
+      ],
+      "footPivot": [
+        0.5,
+        0.9791666666666666
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/bamboo_gold.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/bamboo_gold.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "bamboo_single",
+      "dimensions": [
+        96,
+        176
+      ],
+      "footPivot": [
+        0.5,
+        0.9772727272727273
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/bamboo_single.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/bamboo_single.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "bush",
+      "dimensions": [
+        96,
+        64
+      ],
+      "footPivot": [
+        0.5,
+        0.9375
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/bush.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/bush.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "grass_tuft",
+      "dimensions": [
+        48,
+        32
+      ],
+      "footPivot": [
+        0.5,
+        0.875
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/grass_tuft.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/grass_tuft.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "moss_root",
+      "dimensions": [
+        80,
+        40
+      ],
+      "footPivot": [
+        0.5,
+        0.9
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/moss_root.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/moss_root.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "stump",
+      "dimensions": [
+        64,
+        56
+      ],
+      "footPivot": [
+        0.5,
+        0.9285714285714286
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/stump.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/stump.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "canopy",
+      "dimensions": [
+        128,
+        112
+      ],
+      "footPivot": [
+        0.5,
+        0.9642857142857143
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/canopy.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/canopy.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "stone_lantern",
+      "dimensions": [
+        64,
+        96
+      ],
+      "footPivot": [
+        0.5,
+        0.9583333333333334
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/stone_lantern.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/stone_lantern.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "ruin_wall",
+      "dimensions": [
+        128,
+        64
+      ],
+      "footPivot": [
+        0.5,
+        0.9375
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/ruin_wall.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/ruin_wall.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "shrine",
+      "dimensions": [
+        144,
+        144
+      ],
+      "footPivot": [
+        0.5,
+        0.9722222222222222
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/shrine.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/shrine.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "bamboo_fence",
+      "dimensions": [
+        112,
+        56
+      ],
+      "footPivot": [
+        0.5,
+        0.9285714285714286
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/bamboo_fence.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/bamboo_fence.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "bamboo_gate",
+      "dimensions": [
+        152,
+        144
+      ],
+      "footPivot": [
+        0.5,
+        0.9722222222222222
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/bamboo_gate.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/bamboo_gate.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "stone_monument",
+      "dimensions": [
+        96,
+        104
+      ],
+      "footPivot": [
+        0.5,
+        0.9615384615384616
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/stone_monument.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/stone_monument.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "training_dummy",
+      "dimensions": [
+        64,
+        80
+      ],
+      "footPivot": [
+        0.5,
+        0.95
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/training_dummy.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/training_dummy.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "moss_rocks",
+      "dimensions": [
+        96,
+        72
+      ],
+      "footPivot": [
+        0.5,
+        0.9444444444444444
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/moss_rocks.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/moss_rocks.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "exit_portal",
+      "dimensions": [
+        128,
+        144
+      ],
+      "footPivot": [
+        0.5,
+        0.9722222222222222
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/exit_portal.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/exit_portal.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "bridge_deck",
+      "dimensions": [
+        144,
+        112
+      ],
+      "footPivot": [
+        0.5,
+        0.9642857142857143
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/bridge_deck.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/bridge_deck.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    },
+    {
+      "id": "bridge_front",
+      "dimensions": [
+        144,
+        112
+      ],
+      "footPivot": [
+        0.5,
+        0.9642857142857143
+      ],
+      "status": "approved",
+      "produced": true,
+      "integrated": true,
+      "runtimeVerified": true,
+      "source": "assets/source/bamboo_forest/sprites/bridge_front.aseprite",
+      "individualPNG": "assets/source/bamboo_forest/sprites/bridge_front.png",
+      "atlas": "assets/exports/bamboo_forest/scenery.json",
+      "sheet": "assets/exports/bamboo_forest/scenery.png",
+      "animationTags": []
+    }
+  ],
+  "map": {
+    "file": "maps/creep_forest.tmj",
+    "orientation": "orthogonal",
+    "dimensionsTiles": [
+      30,
+      20
+    ],
+    "logicalDimensions": [
+      960,
+      640
+    ],
+    "entry": [
+      240,
+      320
+    ],
+    "exit": [
+      160,
+      320
+    ],
+    "sceneryPlacements": 70,
+    "collisionRectangles": 49,
+    "authority": "Existing shared Tiled collision/marker data consumed by game-data and authoritative server",
+    "status": "approved"
+  },
+  "validation": {
+    "unitAndNetworkTests": 101,
+    "browserScenarios": 7,
+    "assetValidators": 4,
+    "typecheck": true,
+    "build": true,
+    "runtimeVerified": true,
+    "conceptHashesUnchanged": true,
+    "approvedHeroHashesUnchanged": true,
+    "sixParticipants": {
+      "renderedBrowserClients": 2,
+      "ordinarySDKClients": 4
+    },
+    "videoGenerated": false,
+    "report": "assets/reviews/bamboo_forest_v1/README.md",
+    "observations": "assets/reviews/bamboo_forest_v1/observations.json"
+  },
+  "directorApproval": {
+    "concepts": "approved 2026-10-31",
+    "productionRuntime": "approved 2026-10-31"
+  },
+  "files": [
+    {
+      "path": "assets/source/bamboo_forest/generated_portal.png",
+      "bytes": 1250108,
+      "sha256": "f0b2a1f440a3dc3c345227aac1caa2a242a63666ebf0efef33af8e70e9eea12c",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/generated_props.png",
+      "bytes": 2075714,
+      "sha256": "d8aae38cd7e5f6b54bbacc0d0636f2e8a9703a353a43201d14efed97b7edcf7a",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/generated_terrain.png",
+      "bytes": 4006295,
+      "sha256": "9f14c80f28c6ba56881f8f23bad8e89a417cfd9094f588ba0166087feab1f17a",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/source/bamboo_forest/generated_veg.png",
+      "bytes": 2694938,
+      "sha256": "6ae42b5ead4596fb40db269dc73c77794fe1e2f552915d62af4266b53d33fefd",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/generated_veg_key.png",
+      "bytes": 2335809,
+      "sha256": "5ec3dfbae5ada76c6d36793480bd7aab68756e01f1d9ffe9932417e8071d111c",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/source/bamboo_forest/generation_prompts.json",
+      "bytes": 9664,
+      "sha256": "e1453e64826d346c264b3ff4da8cb605ec1d564867ed796cd103278003696dc0"
+    },
+    {
+      "path": "assets/source/bamboo_forest/material_0.png",
+      "bytes": 11332,
+      "sha256": "3327d3dbfef88c4a2bb3b0ce357953b1b81da6cd6616844edbd38222933c3163",
+      "dimensions": [
+        64,
+        64
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/source/bamboo_forest/material_1.png",
+      "bytes": 11048,
+      "sha256": "cd135d3a1f9093a54b9c650fa151b784065d1263b4a13966caaf9ba24374b190",
+      "dimensions": [
+        64,
+        64
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/source/bamboo_forest/material_2.png",
+      "bytes": 11498,
+      "sha256": "8d3de722b22ba1e3258f87a17b2f32118d52f9b314580e6c70645ae922583cda",
+      "dimensions": [
+        64,
+        64
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/source/bamboo_forest/material_3.png",
+      "bytes": 11331,
+      "sha256": "a93ba11d321f4139f8711867c7244c383756d3bfe89f6582ab314879e5800da4",
+      "dimensions": [
+        64,
+        64
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/source/bamboo_forest/material_4.png",
+      "bytes": 11417,
+      "sha256": "67c58fd99c84fa60ad75e837459e15763a65dc8b4004b31dd2644eb84614dd41",
+      "dimensions": [
+        64,
+        64
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/source/bamboo_forest/material_5.png",
+      "bytes": 11019,
+      "sha256": "76d42cd8affdf46ba8c3e83ffe895a567b093c6bbf16f68f27ff10f1574df209",
+      "dimensions": [
+        64,
+        64
+      ],
+      "mode": "RGB"
+    },
+    {
+      "path": "assets/source/bamboo_forest/README.md",
+      "bytes": 2782,
+      "sha256": "247e4d89d18fdf60d7dddf1ed4dd20f82c3be75683768c68ee44ad298737ba4a"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprite_metadata.json",
+      "bytes": 3895,
+      "sha256": "9e7d71701cbc4f928501a9504995c44a22d385a1d82447bf3499458caebb4e6b"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bamboo_fence.aseprite",
+      "bytes": 12063,
+      "sha256": "d6fd308d32b02e4902981e7d22f71acc6badea3c1a3b78699a0ad0ebee488a8a"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bamboo_fence.png",
+      "bytes": 10148,
+      "sha256": "0c0dcb1433e43201989a16d210be294a76f4cb88198ed41d89e3f881765eff8a",
+      "dimensions": [
+        112,
+        56
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bamboo_gate.aseprite",
+      "bytes": 38964,
+      "sha256": "6c696dc78b5647ef6662ce6b2a29c18449a68ad31f1ea29156b4492723292ffa"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bamboo_gate.png",
+      "bytes": 36174,
+      "sha256": "badc31d37ec7178a32efcd75fd9944d22948f14ace268f93df211aa50002a740",
+      "dimensions": [
+        152,
+        144
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bamboo_gold.aseprite",
+      "bytes": 53132,
+      "sha256": "dd4a37417b6f4ae3c108c512514ee4bc102c6ebc2f5007e6220996cda41db801"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bamboo_gold.png",
+      "bytes": 51751,
+      "sha256": "850ee4b1a7baeeb206bee20b649f8f8dca8aa48a21e9af26df29d7bbd8ce3946",
+      "dimensions": [
+        152,
+        192
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bamboo_jade.aseprite",
+      "bytes": 59085,
+      "sha256": "13144a63df1d8320e993c25159b7429dd938ef2ec6da3962319bd1d26ccac35f"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bamboo_jade.png",
+      "bytes": 56918,
+      "sha256": "452c798d277e2a18bf41682118384c20fe87656c67b667259fb761348a46eda3",
+      "dimensions": [
+        152,
+        192
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bamboo_single.aseprite",
+      "bytes": 17282,
+      "sha256": "8d77283798dd383ef27e38cbb376fdd55f4450e47f59fc611fb3972d3bcf9252"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bamboo_single.png",
+      "bytes": 16757,
+      "sha256": "8136d32cea0b6377aafe10fc01e133583fe7095dca327bd8e6999ea78d3e1b67",
+      "dimensions": [
+        96,
+        176
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bridge.png",
+      "bytes": 29207,
+      "sha256": "b91fb4f7215aea5e206b8ef882ea474998494eedf266b6a956d6015fcf503d86",
+      "dimensions": [
+        144,
+        112
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bridge_deck.aseprite",
+      "bytes": 27537,
+      "sha256": "c40ae2d01b8f79590859b2ef4b5a5b8f170c2a6126e2b820d744431da5b47a7a"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bridge_deck.png",
+      "bytes": 22370,
+      "sha256": "6017ee239f8d02c829e87864f4c70869dfca4f0f61fb32deb7f7604adebee87f",
+      "dimensions": [
+        144,
+        112
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bridge_front.aseprite",
+      "bytes": 8999,
+      "sha256": "956db134ec8f04ebc16e63ca79ad92a522865589a671fa6a38190a9ffe2febed"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bridge_front.png",
+      "bytes": 6711,
+      "sha256": "608f7016779de41271a54f37a262f989ff7b37ef9e1b58f6759a9dfa6e3e8ff9",
+      "dimensions": [
+        144,
+        112
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bush.aseprite",
+      "bytes": 9022,
+      "sha256": "e00521fe2753148ea63289e62764ad30b25b67db5bda5331a29d95288b568df1"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/bush.png",
+      "bytes": 7592,
+      "sha256": "f6e045f8f60830cffe927b9eb3d88f84ff54080d4ac0fc5542ffccd3a283c76e",
+      "dimensions": [
+        96,
+        64
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/canopy.aseprite",
+      "bytes": 22651,
+      "sha256": "8de273a7e569aacb99ac9c670829264b9524353ff206b3c702590785df16d2f9"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/canopy.png",
+      "bytes": 21526,
+      "sha256": "8c633209ffb150966a4f9e68d8f7e05404ff76c7909b6a351c2659af4615e242",
+      "dimensions": [
+        128,
+        112
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/exit_portal.aseprite",
+      "bytes": 34460,
+      "sha256": "99da4ba0d268a57a12f7e5700f0e775fc94d5016d29bab1fdb6d54fbaf34ce02"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/exit_portal.png",
+      "bytes": 30019,
+      "sha256": "8c4c9e1b63bef9d6217d1047ee35ec535d594c90e2e7b1af69914ca26bc95237",
+      "dimensions": [
+        128,
+        144
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/grass_tuft.aseprite",
+      "bytes": 3811,
+      "sha256": "c0c962559ebebd7e92d7e1846a300705b425cecb0b892ea14b37286a5f98c26a"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/grass_tuft.png",
+      "bytes": 2056,
+      "sha256": "95291721a9dc109635cbefe121bd0b476f1e0ecaea7e63606278e56de14066e4",
+      "dimensions": [
+        48,
+        32
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/moss_rocks.aseprite",
+      "bytes": 9169,
+      "sha256": "f158e65fb01814c03454bccbd9a7cb17bd48cc897225b8e0e5ca6c2354e00c79"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/moss_rocks.png",
+      "bytes": 7443,
+      "sha256": "a4e83845542c3f78689620dfd0ef971065aac4978ae43083cf7577c4f1ea5616",
+      "dimensions": [
+        96,
+        72
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/moss_root.aseprite",
+      "bytes": 4266,
+      "sha256": "dbaa9b7bc6ebbe19ccdb6e0d6209858202447dbbaf5c13700e8f30114c108339"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/moss_root.png",
+      "bytes": 2730,
+      "sha256": "d70d44647d48421311763be4239df5f9de19fca9cee4e888edfbbb137261770c",
+      "dimensions": [
+        80,
+        40
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/ruin_wall.aseprite",
+      "bytes": 19554,
+      "sha256": "8910f0fa4b25c301138f903bd52134d6db1677b94bb5d87389d60dad3b6aa3ed"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/ruin_wall.png",
+      "bytes": 17415,
+      "sha256": "d8120360e1c73ac6f60e699a17a3125b7d8b26532993706ac37708b640d2f761",
+      "dimensions": [
+        128,
+        64
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/shrine.aseprite",
+      "bytes": 51250,
+      "sha256": "9b45505d82c52073bcac28b63abeabd6a8e7946779d1eb9ce13b09166877fa2f"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/shrine.png",
+      "bytes": 46650,
+      "sha256": "01a10558c492dfedf815166b8bf1635a00e09dc023466f2590db0fc2e5dc34e2",
+      "dimensions": [
+        144,
+        144
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/stone_lantern.aseprite",
+      "bytes": 12657,
+      "sha256": "1a11ff773180d29de1cf2710c926933bd675d754df18b53a237538e26ca5ef3b"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/stone_lantern.png",
+      "bytes": 10859,
+      "sha256": "99d3217d8c6fc7f1df2d08e1d8f1083056e5033d284212384661b92e1bae446b",
+      "dimensions": [
+        64,
+        96
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/stone_monument.aseprite",
+      "bytes": 20045,
+      "sha256": "c639238616c4e62d63d54569eeea96c478b7ca389c85e80bee6770fed260ef8d"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/stone_monument.png",
+      "bytes": 17440,
+      "sha256": "d01be6f7eb7c9dddb475ae2dd86a652fbe92e7bd08278cb04f3916460cd875ee",
+      "dimensions": [
+        96,
+        104
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/stump.aseprite",
+      "bytes": 6678,
+      "sha256": "e5fb147fa3b4443d1f42d3ba9b43c2f37e479cd9337c714e2af663a74913a8a7"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/stump.png",
+      "bytes": 5203,
+      "sha256": "81a0630a6f046c686dee25c7cd6a7b91ab9325b3649f09de9a610438a4ef6b74",
+      "dimensions": [
+        64,
+        56
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/training_dummy.aseprite",
+      "bytes": 9294,
+      "sha256": "f6986179471a68e2aebb04bfcc7ef888230eab414a2b6848cb565fb9f9c640ea"
+    },
+    {
+      "path": "assets/source/bamboo_forest/sprites/training_dummy.png",
+      "bytes": 7624,
+      "sha256": "7de0e277e0442151daa2713591942b5420311a78ffacea8ef755132789188fb7",
+      "dimensions": [
+        64,
+        80
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/terrain.aseprite",
+      "bytes": 625793,
+      "sha256": "a1bcc2729b7594ee7ccb4b5dbbecbe855b3761df6f4e773d226c038c2e55ef95"
+    },
+    {
+      "path": "assets/source/bamboo_forest/terrain.png",
+      "bytes": 627854,
+      "sha256": "a5067ed0b8ad04cd9fe84a03ceb5fcc6133b096c38a0292fb14b58f3bf3b7e90",
+      "dimensions": [
+        512,
+        704
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/source/bamboo_forest/terrain_groups.json",
+      "bytes": 339,
+      "sha256": "6e25f9d26b1a806b728db0cc0c4b01812e5368b41b98c9bdebf6811ad02317e1"
+    },
+    {
+      "path": "assets/exports/bamboo_forest/scenery.json",
+      "bytes": 6937,
+      "sha256": "3d532a113825b3cc5a42de74392d4a046555a46a34de1db574452d47b47d0c5b"
+    },
+    {
+      "path": "assets/exports/bamboo_forest/scenery.png",
+      "bytes": 385788,
+      "sha256": "6e26d4d6887b462524d40dec4371537cac55d349f466c91849b00e15525a527f",
+      "dimensions": [
+        1024,
+        768
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "assets/exports/bamboo_forest/terrain.png",
+      "bytes": 637705,
+      "sha256": "9888de25a89244f06d31d95c7e457d281e61a7d363d073aadf9fb638ef59984c",
+      "dimensions": [
+        512,
+        704
+      ],
+      "mode": "RGBA"
+    },
+    {
+      "path": "maps/creep_forest.tmj",
+      "bytes": 70226,
+      "sha256": "ec9e0eda8e2fce1ef9a8269f9046c1e3277884e4f4ee3bd779cea060a3a6143d"
+    }
+  ],
+  "stopCondition": "Phase 2 approved. Stop here; Bamboo Forest creeps and subsequent phases require a separate task.",
+  "approval": {
+    "date": "2026-10-31",
+    "timezone": "Asia/Saigon",
+    "authority": "game director / user",
+    "statement": "all approve",
+    "scope": "Bamboo Forest Phase 2 environment production assets, one integrated playable map and reviewed normal-zoom in-game result",
+    "nextPhaseAuthorized": false
+  }
+}

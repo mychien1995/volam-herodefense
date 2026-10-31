@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { preloadBambooForestArt } from './dungeon-presentation.js';
 export const actorSheets = [
   { id: 'hero_cai_bang', folder: 'characters' },
   { id: 'hero_cai_bang_chuong', folder: 'characters' },
@@ -30,6 +31,7 @@ export function facing(x: number, y: number): string {
       : 'down';
 }
 export function preloadArt(scene: Phaser.Scene): void {
+  preloadBambooForestArt(scene);
   scene.load.image('arena_ground_art01', '/assets/arena_v2/ground.png');
   scene.load.atlas(
     'arena_world_art01',
