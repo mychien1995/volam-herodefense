@@ -1,15 +1,23 @@
 import { defineConfig, devices } from '@playwright/test';
 
+import { qaSession } from './tools/qa-session.mjs';
+const session = qaSession();
+
 export default defineConfig({
+  outputDir: session.outputDir,
   testDir: './tests/e2e',
   // Accelerated invasion scenarios own separate server settings and ports.
-  testIgnore: ['**/invasion.spec.ts', '**/skills.spec.ts', '**/progression.spec.ts'],
+  testIgnore: [
+    '**/invasion.spec.ts',
+    '**/skills.spec.ts',
+    '**/progression.spec.ts',
+  ],
   fullyParallel: false,
   workers: 1,
   timeout: 30_000,
   reporter: 'list',
   use: {
-    baseURL: 'http://127.0.0.1:5173',
+    baseURL: session.clientUrl,
     video: 'off',
     trace: {
       mode: 'retain-on-failure',

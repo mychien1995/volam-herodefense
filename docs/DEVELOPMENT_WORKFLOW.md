@@ -55,3 +55,24 @@ Record the exact final commands/results and any limitations. If a check fails, r
 - Formatting and diff-whitespace checks passed. Quick mode with no test path and an unknown mode both exited 1 before preparing assets. The standard existing large-client-chunk build warning remains.
 
 These are measured stage timings, not a guaranteed overall speedup. No new final-art acceptance is claimed; future artwork still requires the full relevant live character/party/depth review and director approval above.
+
+## Isolated workflow sessions
+
+The default gameplay smoke and Waves 13–16 arena QA profiles share `tools/qa-session.mjs`. Keep the existing defaults when working alone. For parallel sessions, choose unused ports and a distinct session name before any build/check:
+
+```powershell
+$env:VOLAM_QA_SESSION = 'process-improvement'
+$env:VOLAM_QA_SERVER_PORT = '2788'
+$env:VOLAM_QA_CLIENT_PORT = '5386'
+pnpm check:art:frames
+# After focused checks and the final implementation change:
+pnpm check:final --config playwright.arena-creeps.config.ts
+```
+
+`VOLAM_QA_SESSION` separates Vite cache, Playwright outputs and evidence. Explicit overrides are `VOLAM_QA_VITE_CACHE`, `VOLAM_QA_PLAYWRIGHT_OUTPUT` and `VOLAM_QA_EVIDENCE_DIR` (the evidence root retains profile subdirectories). `VITE_SERVER_URL` remains available; managed QA requires it to identify the configured local server port. The check runner derives it from `VOLAM_QA_SERVER_PORT` when omitted. Set ports before building: the default preview checks the bundle's emitted `volam-build-endpoint.json` and rejects a stale endpoint. Direct browser-stage retries must use the same endpoint/build inputs. No successful stage result is loaded from a prior report.
+
+Both profiles refuse occupied ports and verify the owned server's run identity and protocol plus the client's identity/endpoint. The default historical combat fixture explicitly sets/restores development mode so Vite preview cannot silently disable its practice-creep prerequisite. Cleanup closes only handles created by that setup. No service discovery by healthy port, shell process-tree killing or other checkout changes are performed. Older dedicated school/dungeon configs retain their existing fixed isolated services; they have not been migrated to these overrides.
+
+The single-pass pipeline now writes compact per-stage timings, exit status and run identity on success or failure. Without a session, reports are `.cache/check-workflow/{mode}-timings.json`; session reports use `docs/evidence/sessions/<session>/check-workflow/`. Preparation, compilation, tool typechecking, unit checks, production build, validators and browser time remain separate. Arena reports additionally separate services, joins, frame observations, presentation checks, movement and natural combat. These are measurements, not reusable validation results. Browser-only retries use `node tools/run-playwright.mjs test <the same relevant scope>` after fixture-only fixes; rerun dependencies whenever their actual inputs change.
+
+Reuse the existing exporters, manifests, exact approved-byte guards and frame/review profiles. Validate one directional source before expanding a batch, retain valid outputs and retry only defective components as described in `ART_ITERATION_WORKFLOW.md`. This tooling change creates no artwork, recordings or approval. Required final PNGs/reference comparisons and director approval remain unchanged.

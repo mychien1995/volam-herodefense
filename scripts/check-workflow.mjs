@@ -2,7 +2,15 @@ import { spawnSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { readFileSync, existsSync } from 'node:fs';
+import {
+  readFileSync,
+  existsSync,
+  readdirSync,
+  mkdirSync,
+  writeFileSync,
+} from 'node:fs';
+import { randomUUID } from 'node:crypto';
+import { qaSession, qaEvidenceDirectory } from '../tools/qa-session.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const require = createRequire(import.meta.url);
@@ -58,7 +66,41 @@ function binary(name, command) {
     typeof pkg.bin === 'string' ? pkg.bin : pkg.bin[command],
   );
 }
+process.env.VOLAM_QA_RUN_ID = randomUUID();
+if (process.env.VOLAM_QA_SERVER_PORT) {
+  process.env.VITE_SERVER_URL ??= `http://127.0.0.1:${process.env.VOLAM_QA_SERVER_PORT}`;
+}
+// Validate overrides before asset preparation; no cached stage success is consumed.
+const session = qaSession();
+if (session.cacheDir) process.env.VOLAM_QA_VITE_CACHE ??= session.cacheDir;
 const elapsed = performance.now();
+const reportDirectory = resolve(
+  root,
+  qaEvidenceDirectory('.cache/check-workflow'),
+);
+mkdirSync(reportDirectory, { recursive: true });
+const reportPath = resolve(reportDirectory, `${mode}-timings.json`);
+const report = {
+  runId: process.env.VOLAM_QA_RUN_ID,
+  mode,
+  args,
+  startedAt: new Date().toISOString(),
+  status: 'RUNNING',
+  stages: [],
+};
+const saveReport = () =>
+  writeFileSync(
+    reportPath,
+    JSON.stringify(
+      {
+        ...report,
+        totalSeconds: Number(((performance.now() - elapsed) / 1000).toFixed(2)),
+      },
+      null,
+      2,
+    ) + '\n',
+  );
+saveReport();
 function run(label, command, commandArgs, cwd = root) {
   const start = performance.now();
   console.info(`\n[check] ${label}`);
@@ -70,8 +112,20 @@ function run(label, command, commandArgs, cwd = root) {
   console.info(
     `[check] ${label}: ${((performance.now() - start) / 1000).toFixed(2)}s`,
   );
+  report.stages.push({
+    label,
+    seconds: Number(((performance.now() - start) / 1000).toFixed(2)),
+    status: result.error || result.status !== 0 ? 'FAIL' : 'PASS',
+    exitCode: result.status,
+    ...(result.error ? { error: String(result.error) } : {}),
+  });
+  if (result.error || result.status !== 0) report.status = 'FAIL';
+  saveReport();
   if (result.error) console.error(result.error);
-  if (result.error || result.status !== 0) process.exit(result.status || 1);
+  if (result.error || result.status !== 0) {
+    console.error(`[check] failure timings: ${reportPath}`);
+    process.exit(result.status || 1);
+  }
 }
 const node = (label, script, scriptArgs = [], cwd) =>
   run(label, process.execPath, [script, ...scriptArgs], cwd);
@@ -97,8 +151,9 @@ if (mode !== 'browser') {
       '--noEmit',
     ]);
     node('workflow regression checks', '--test', [
-      'scripts/tests/asset-files.test.mjs',
-      'scripts/tests/arena-creep-qa-options.test.mjs',
+      ...readdirSync(resolve(root, 'scripts/tests'))
+        .filter((name) => name.endsWith('.test.mjs'))
+        .map((name) => `scripts/tests/${name}`),
     ]);
   }
   node(
@@ -132,6 +187,9 @@ if (mode !== 'quick') {
   }
   node('browser verification', 'tools/run-playwright.mjs', ['test', ...args]);
 }
+report.status = 'PASS';
+saveReport();
+console.info(`[check] timings: ${reportPath}`);
 console.info(
   `\n[check] ${mode} passed in ${((performance.now() - elapsed) / 1000).toFixed(2)}s`,
 );

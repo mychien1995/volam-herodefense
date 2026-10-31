@@ -238,12 +238,21 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
     const nearby = async () => {
       const s = await snapshot(a),
         h = s.state.players[aId]!;
-      return Object.values(s.state.creeps)
+      if (!h || h.hp <= 0)
+        throw Error(
+          `Combat fixture actor unavailable: ${JSON.stringify({ roomId: s.roomId, sessionId: aId, tick: s.state.tick, hero: h })}`,
+        );
+      const target = Object.values(s.state.creeps)
         .filter((c) => c.hp > 0)
         .sort(
           (c, d) =>
             Math.hypot(c.x - h.x, c.y - h.y) - Math.hypot(d.x - h.x, d.y - h.y),
-        )[0]!;
+        )[0];
+      if (!target)
+        throw Error(
+          `Combat fixture has no living practice creep: room=${s.roomId}, tick=${s.state.tick}. Check the owned server's development fixture environment.`,
+        );
+      return target;
     };
     await expect
       .poll(async () => {

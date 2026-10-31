@@ -46,6 +46,12 @@ describe('real Colyseus room + SDK clients', () => {
       status: 'ok',
       milestone: 'M3B',
       protocolVersion: PROTOCOL_VERSION,
+      ...(process.env['VOLAM_QA_RUN_ID']
+        ? {
+            service: 'volam-game-server',
+            runId: process.env['VOLAM_QA_RUN_ID'],
+          }
+        : {}),
     });
   });
   it('joins two clients by ID and synchronizes a server-owned check', async () => {

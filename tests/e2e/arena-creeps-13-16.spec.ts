@@ -4,6 +4,8 @@ import { promisify } from 'node:util';
 import { readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 
+import { qaEvidenceDirectory } from '../../tools/qa-session.mjs';
+
 const mode = process.env.ARENA_CREEP_QA_MODE ?? 'full';
 const players =
   process.env.ARENA_CREEP_QA_PLAYERS ?? (mode === 'frames' ? '2' : '6');
@@ -30,7 +32,10 @@ test(`arena creeps: ${mode} profile with ${players} clients`, async () => {
   );
   console.log(result.stdout);
   const reportPath = resolve(
-    `docs/evidence/arena-creep-workflow/${mode}-${players}-players-${evidence}/integration_verification.json`,
+    qaEvidenceDirectory(
+      `docs/evidence/arena-creep-workflow/${mode}-${players}-players-${evidence}`,
+    ),
+    'integration_verification.json',
   );
   expect(statSync(reportPath).mtimeMs).toBeGreaterThanOrEqual(started);
   const report = JSON.parse(readFileSync(reportPath, 'utf8'));

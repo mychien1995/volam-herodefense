@@ -1,5 +1,6 @@
+import { qaEvidenceDirectory } from './qa-session.mjs';
 /** Two/three-client frame iteration and the unchanged six-client final combat gate. */
-export function arenaCreepQaOptions(args) {
+export function arenaCreepQaOptions(args, env = process.env) {
   let mode, players;
   let evidence = 'minimal';
   let combatOnly = false;
@@ -30,7 +31,10 @@ export function arenaCreepQaOptions(args) {
     players,
     combatOnly,
     evidence,
-    evidenceDirectory: `docs/evidence/arena-creep-workflow/${mode}-${players}-players-${evidence}${combatOnly ? '-combat-only' : ''}`,
+    evidenceDirectory: qaEvidenceDirectory(
+      `docs/evidence/arena-creep-workflow/${mode}-${players}-players-${evidence}${combatOnly ? '-combat-only' : ''}`,
+      env,
+    ),
   };
 }
 

@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "baseline": "066f785",
+  "branch": "wip/m3d/process-improvement",
+  "validationPolicy": "Stopped the final pipeline on the exact health fixture assertion; reran affected room tests/typechecks and remaining stages. Reran only the default browser scope after its fixture environment fix. No unrelated successful build, full suite or six-client rerun.",
+  "workflowTests": 17,
+  "unitIntegrationCoverage": 342,
+  "affectedRoomRerun": 14,
+  "assetValidators": 12,
+  "fullArena": {
+    "status": "PASS",
+    "players": 6,
+    "frames": 256,
+    "tags": 80,
+    "seconds": 194.39,
+    "timings": [
+      {
+        "phase": "owned service startup",
+        "seconds": 0.88
+      },
+      {
+        "phase": "browser launch",
+        "seconds": 0.13
+      },
+      {
+        "phase": "6 browser clients joined and ready",
+        "seconds": 131.17
+      },
+      {
+        "phase": "director fixtures and existing-art regression gallery",
+        "seconds": 2.44
+      },
+      {
+        "phase": "all authored directional frames and complete animation cycles",
+        "seconds": 29.66
+      },
+      {
+        "phase": "native scale, depth, projectile and ambient presentation",
+        "seconds": 4.35
+      },
+      {
+        "phase": "authoritative peer movement",
+        "seconds": 0.81
+      },
+      {
+        "phase": "six-player natural combat, hurt, death and rewards",
+        "seconds": 22.24
+      },
+      {
+        "phase": "final assertions",
+        "seconds": 2.72
+      }
+    ]
+  },
+  "focusedArena": {
+    "status": "PASS",
+    "players": 2,
+    "seconds": 45.99
+  },
+  "defaultSmoke": {
+    "status": "PASS",
+    "tests": 3,
+    "reportedTotal": "1.6m (Playwright rounded)",
+    "ownedServiceStartupSeconds": 0.59,
+    "testSeconds": [
+      50.9,
+      10.1,
+      24.8
+    ]
+  },
+  "recordings": false,
+  "generatedArtwork": false,
+  "directorApprovalChanged": false,
+  "limitations": [
+    "No controlled speedup measurement",
+    "Legacy dedicated school/dungeon and unit-room ports are not migrated",
+    "Fresh baseline checkout line-ending guards require exact retained bytes"
+  ]
+}

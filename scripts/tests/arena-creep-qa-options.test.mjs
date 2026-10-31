@@ -1,12 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  arenaCreepQaOptions,
+  arenaCreepQaOptions as optionsFromEnvironment,
   shouldCaptureArenaCreepPng,
   arenaCreepSavedReport,
 } from '../../tools/arena-creep-qa-options.mjs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+const arenaCreepQaOptions = (args) => optionsFromEnvironment(args, {});
 
 test('keeps final six-client coverage and separates fast evidence from approved history', () => {
   assert.deepEqual(arenaCreepQaOptions([]), {

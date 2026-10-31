@@ -22,7 +22,7 @@
     "check:browser": "node scripts/check-workflow.mjs browser",
     "check:art:frames": "node scripts/check-arena-creep-frames.mjs",
     "check:final": "node scripts/check-workflow.mjs final",
-    "test:workflow": "node --test scripts/tests/asset-files.test.mjs",
+    "test:workflow": "node --test scripts/tests/*.test.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "verify:handoff": "python scripts/verify_handoff.py",

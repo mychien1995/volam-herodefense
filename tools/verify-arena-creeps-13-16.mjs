@@ -1,5 +1,14 @@
 import { ColyseusTestServer } from '@colyseus/testing';
 import { createServer } from 'vite';
+import { PROTOCOL_VERSION } from '@volam/game-protocol';
+import {
+  qaSession,
+  requireFreePorts,
+  verifyQaIdentity,
+  qaIdentityPlugin,
+  ownedQaServices,
+} from './qa-session.mjs';
+import { waitForQa, requireQaActor } from './qa-wait.mjs';
 import { createGameServer } from '../apps/game-server/dist/app.config.js';
 import { m1Config } from '../packages/game-data/dist/index.js';
 import { readFileSync, mkdirSync, writeFileSync } from 'node:fs';
@@ -11,6 +20,13 @@ import {
   arenaCreepSavedReport,
 } from './arena-creep-qa-options.mjs';
 const options = arenaCreepQaOptions(process.argv.slice(2));
+const session = qaSession({
+  profile: 'arena-creeps',
+  serverPort: 2588,
+  clientPort: 5186,
+});
+process.env.VOLAM_QA_RUN_ID = session.runId;
+const owned = ownedQaServices();
 const root = resolve('.'),
   out = resolve(root, options.evidenceDirectory);
 const started = performance.now(),
@@ -33,14 +49,16 @@ const errors = [],
   shots = [],
   sourceStats = new Map();
 let server, client, browser;
-const wait = async (fn, label, timeout = 12000) => {
-  const end = Date.now() + timeout;
-  while (Date.now() < end) {
-    if (await fn()) return;
-    await new Promise((r) => setTimeout(r, 70));
-  }
-  throw Error('Timeout: ' + label);
-};
+const wait = (fn, label, timeout = 12000) =>
+  waitForQa(fn, label, {
+    timeout,
+    diagnostics: async () => ({
+      errors: errors.slice(-8),
+      ...(contexts[0]?.pages()[0]
+        ? { snapshot: await read(contexts[0].pages()[0]) }
+        : {}),
+    }),
+  });
 const read = (p) => p.evaluate(() => window.__VOLAM__.snapshot()),
   inspect = (p) => p.evaluate(() => window.__VOLAM__.presentation());
 const shot = async (p, n) => {
@@ -49,33 +67,42 @@ const shot = async (p, n) => {
   shots.push(n);
 };
 try {
+  await requireFreePorts(session);
   const gameServer = createGameServer();
-  await gameServer.listen(2588);
+  await gameServer.listen(session.serverPort);
   server = new ColyseusTestServer(gameServer);
-  assert(
-    (await fetch('http://127.0.0.1:2588/health')).ok,
-    'test server health',
-  );
-  process.env.VITE_SERVER_URL = 'http://127.0.0.1:2588';
+  owned.add(() => server.shutdown());
+  await verifyQaIdentity(`${session.serverUrl}/health`, {
+    service: 'volam-game-server',
+    runId: session.runId,
+    protocolVersion: PROTOCOL_VERSION,
+  });
   client = await createServer({
     root: resolve(root, 'apps/game-client'),
     configFile: false,
+    cacheDir: session.cacheDir,
+    plugins: [qaIdentityPlugin(session)],
     server: {
       host: '127.0.0.1',
-      port: 5186,
+      port: session.clientPort,
       strictPort: true,
       watch: null,
       hmr: false,
     },
     define: {
-      'import.meta.env.VITE_SERVER_URL': JSON.stringify(
-        'http://127.0.0.1:2588',
-      ),
+      'import.meta.env.VITE_SERVER_URL': JSON.stringify(session.serverUrl),
     },
   });
+  owned.add(() => client.close());
   await client.listen();
+  await verifyQaIdentity(`${session.clientUrl}/__volam_qa_identity`, {
+    service: 'volam-qa-client',
+    runId: session.runId,
+    serverUrl: session.serverUrl,
+  });
+  mark('owned service startup');
   browser = await chromium.launch({ headless: true });
-  mark('isolated services and browser');
+  mark('browser launch');
   const pages = [];
   let roomId;
   for (let n = 0; n < options.players; n++) {
@@ -96,17 +123,46 @@ try {
     p.on('requestfailed', (r) =>
       errors.push(r.url() + ' ' + r.failure()?.errorText),
     );
-    await p.goto('http://127.0.0.1:5186/?debug=1');
+    await p.goto(session.clientUrl + '/?debug=1');
     await p.locator('#pre-nickname').fill('Creep QA ' + (n + 1));
     await p.getByRole('button', { name: 'Enter Game', exact: true }).click();
     if (roomId) {
-      await p.getByLabel('Room code', { exact: true }).fill(roomId);
-      await p
-        .getByRole('button', { name: 'Join by code', exact: true })
-        .click();
+      // Wait for the authoritative room-list response before interacting. A list
+      // refresh may replace the code form between its fill and submit.
+      await p.locator(`[data-action=join][data-room="${roomId}"]`).click();
     } else
       await p.getByRole('button', { name: 'Create room', exact: true }).click();
-    await wait(async () => !!(await read(p))?.roomId, 'join');
+    await waitForQa(
+      async () => {
+        const state = await read(p);
+        const notice = await p.locator('.pre-error').textContent();
+        if (state.roomId && roomId && state.roomId !== roomId)
+          throw Error(
+            `Client ${n + 1} joined wrong room ${state.roomId}, expected ${roomId}`,
+          );
+        if (state.roomId && state.state?.players?.[state.sessionId])
+          return true;
+        // An older room-list fetch can finish after connect starts. Its notice is
+        // not a join rejection; check the owned service rather than trust that text.
+        if (notice?.startsWith('Room list unavailable'))
+          await verifyQaIdentity(`${session.serverUrl}/health`, {
+            runId: session.runId,
+          });
+        else if (notice && notice !== 'Connecting…')
+          throw Error(
+            `Client ${n + 1} join rejected: ${notice}; ${JSON.stringify(state)}`,
+          );
+        return false;
+      },
+      `client ${n + 1} authoritative room join`,
+      {
+        diagnostics: async () => ({
+          snapshot: await read(p),
+          notice: await p.locator('.pre-error').textContent(),
+          errors: errors.slice(-8),
+        }),
+      },
+    );
     roomId ??= (await read(p)).roomId;
   }
   await pages[0]
@@ -209,13 +265,24 @@ try {
   assert(
     gallery.arenaCreeps.every((a) => a.texture && a.animations.length === 20),
   );
+  const waitForWaves = (waves) =>
+    wait(
+      async () => {
+        const actors = (await inspect(pages[0])).actors.filter((a) => a.wave);
+        return (
+          actors.length === waves.length &&
+          waves.every((wave) => actors.some((a) => a.wave === wave))
+        );
+      },
+      'rendered authoritative waves ' + waves.join(','),
+    );
   await shot(pages[0], 'arena-waves-01-16.png');
   if (options.mode === 'full') {
     arrange(Array.from({ length: 8 }, (_, i) => i + 1));
-    await pages[0].waitForTimeout(380);
+    await waitForWaves(Array.from({ length: 8 }, (_, i) => i + 1));
     await shot(pages[0], 'arena-waves-01-08.png');
     arrange([9, 10, 11, 12]);
-    await pages[0].waitForTimeout(380);
+    await waitForWaves([9, 10, 11, 12]);
     await shot(pages[0], 'arena-waves-09-12.png');
   }
   // Two genuine Wave13 spawns share a texture but retain independent animation state.
@@ -346,7 +413,15 @@ try {
   // Inspect the same production actors at native pixels and across an existing foreground tree.
   arrange([13, 14, 15, 16], 'idle', 'down');
   await pages[0].setViewportSize({ width: 900, height: 560 });
-  await pages[0].waitForTimeout(500);
+  await wait(
+    async () =>
+      pages[0]
+        .locator('#game canvas')
+        .evaluate(
+          (c) => c.width === c.getBoundingClientRect().width && c.width > 0,
+        ),
+    'native viewport resize',
+  );
   const nativePixels = await pages[0].locator('#game canvas').evaluate((c) => ({
     width: c.width,
     displayWidth: c.getBoundingClientRect().width,
@@ -365,14 +440,21 @@ try {
   const brute = saved.get(16);
   brute.x = 1220;
   brute.y = 842;
-  await pages[0].waitForTimeout(600);
+  const waitForBruteY = (y) =>
+    wait(async () => {
+      const actor = (await inspect(pages[0])).actors.find(
+        (a) => a.id === brute.id,
+      );
+      return !!actor && Math.abs(actor.y - y) < 1;
+    }, 'authoritative brute Y=' + y);
+  await waitForBruteY(842);
   const behind = await inspect(pages[0]),
     tree = behind.trees.find((t) => t.x === 1220 && t.y === 870);
   assert(tree);
   assert(behind.actors.find((a) => a.id === brute.id).depth < tree.depth);
   await shot(pages[0], 'arena-brute-behind-tree.png');
   brute.y = 920;
-  await pages[0].waitForTimeout(500);
+  await waitForBruteY(920);
   const front = await inspect(pages[0]);
   assert(front.actors.find((a) => a.id === brute.id).depth > tree.depth);
   await shot(pages[0], 'arena-brute-in-front-of-tree.png');
@@ -382,10 +464,13 @@ try {
     front: front.actors.find((a) => a.id === brute.id),
   };
   Object.assign(heroes[0], home);
-  await pages[0].waitForTimeout(500);
+  await wait(async () => {
+    const state = await read(pages[0]);
+    return Math.abs(state.state.players[state.sessionId].x - home.x) < 1;
+  }, 'hero position restored');
   // Isolated renderer contract: server-owned non-damaging projectiles. Normal creep AI remains melee.
   arrange([13, 14, 15, 16], 'idle', 'down');
-  await pages[0].waitForTimeout(400);
+  await waitForWaves([13, 14, 15, 16]);
   const projectileFixture = {
     label:
       'SERVER FIXTURE ONLY: existing generic projectile state, zero damage; no new enemy AI attack',
@@ -426,7 +511,11 @@ try {
     async () => (await inspect(pages[0])).creepEffects.projectiles.length === 2,
     'server-owned projectile rendering',
   );
-  await pages[0].waitForTimeout(550);
+  const projectileTick = (await read(pages[0])).state.tick;
+  await wait(
+    async () => (await read(pages[0])).state.tick > projectileTick + 1,
+    'projectile authoritative advancement',
+  );
   const projectileSample = await pages[0].evaluate(() => ({
     presentation: window.__VOLAM__.presentation(),
     snapshot: window.__VOLAM__.snapshot(),
@@ -459,9 +548,22 @@ try {
     movingPage = pages.at(-1),
     startX = movingHero.x;
   await movingPage.locator('#game canvas').focus();
-  await movingPage.keyboard.down('ArrowRight');
-  await movingPage.waitForTimeout(180);
-  await movingPage.keyboard.up('ArrowRight');
+  try {
+    await movingPage.keyboard.down('ArrowRight');
+    await wait(
+      () =>
+        requireQaActor(
+          room.world.heroes.get(movingHero.id),
+          movingHero.id,
+          'arena',
+          room.simulation.zoneOf(movingHero.id)?.id,
+        ).x >
+        startX + 8,
+      'authoritative movement',
+    );
+  } finally {
+    await movingPage.keyboard.up('ArrowRight');
+  }
   await wait(
     async () =>
       Object.values((await read(pages[0])).state.players).some(
@@ -480,6 +582,13 @@ try {
       await p.getByLabel('Normal attack · A').selectOption('cai_bang_chuong');
       await p.keyboard.press('Escape');
     }
+    for (const h of heroes)
+      requireQaActor(
+        room.world.heroes.get(h.id),
+        h.id,
+        'arena',
+        room.simulation.zoneOf(h.id)?.id,
+      );
     const naturalStart = (await inspect(pages[0])).sceneTime;
     arrange([13, 14, 15, 16]);
     heroes.forEach((h, i) => {
@@ -519,19 +628,76 @@ try {
     let driving = true;
     const alive = () =>
       ids.some((id) => (room.world.creeps.get(id)?.hp ?? 0) > 0);
-    const drivers = pages.map(async (p) => {
+    const drivers = pages.map(async (p, index) => {
+      const h = heroes[index];
       while (driving && Date.now() < end && alive()) {
+        requireQaActor(
+          room.world.heroes.get(h.id),
+          h.id,
+          'arena',
+          room.simulation.zoneOf(h.id)?.id,
+        );
+        const before = h.lastSequence;
         await p.keyboard.press('KeyA');
-        await new Promise((resolve) => setTimeout(resolve, 200));
+        await wait(
+          () => {
+            requireQaActor(
+              room.world.heroes.get(h.id),
+              h.id,
+              'arena',
+              room.simulation.zoneOf(h.id)?.id,
+            );
+            return !alive() || h.lastSequence > before;
+          },
+          'A input acknowledgement ' + h.id,
+          3000,
+        );
+        await wait(
+          () => {
+            requireQaActor(
+              room.world.heroes.get(h.id),
+              h.id,
+              'arena',
+              room.simulation.zoneOf(h.id)?.id,
+            );
+            return !alive() || h.cooldown <= room.world.tick;
+          },
+          'authoritative A cooldown ' + h.id,
+          3000,
+        );
       }
     });
+    // Attach rejection handling immediately, while PNG capture is still in flight.
+    let driverError;
+    const driven = Promise.allSettled(
+      drivers.map((driver) =>
+        driver.catch((error) => {
+          driverError ??= error;
+          driving = false;
+          throw error;
+        }),
+      ),
+    );
     try {
       await shot(pages[0], 'arena-natural-attacks.png');
-      while (Date.now() < end && alive())
-        await new Promise((resolve) => setTimeout(resolve, 100));
+      await wait(
+        () => {
+          if (driverError) throw driverError;
+          for (const h of heroes)
+            requireQaActor(
+              room.world.heroes.get(h.id),
+              h.id,
+              'arena',
+              room.simulation.zoneOf(h.id)?.id,
+            );
+          return !alive();
+        },
+        'all four enemies killed by real A commands',
+        Math.max(1, end - Date.now()),
+      );
     } finally {
       driving = false;
-      await Promise.all(drivers);
+      await driven;
     }
     assert(
       ids.every((id) => (room.world.creeps.get(id)?.hp ?? 0) === 0),
@@ -616,6 +782,8 @@ try {
   assert.equal(errors.length, 0, errors.join('\n'));
   const report = {
     status: 'PASS',
+    runId: session.runId,
+    services: { client: session.clientUrl, server: session.serverUrl },
     fixture: `Actual ${options.players}-browser MatchRoom/ArenaScene. Director deadlines triggered in a server-owned fixture for Waves1–16; normal production180s cadence/stat recipes unmodified. Existing stun used only for deterministic pose coverage. ${naturalCombat ? 'Natural AI and real A inputs used for combat.' : 'FRAME ITERATION ONLY: no natural combat, contact-hit or reward verification; final six-player pass remains required.'}`,
     mode: options.mode,
     evidence: options.evidence,
@@ -663,16 +831,29 @@ try {
 } catch (e) {
   failed = true;
   const p = contexts[0]?.pages()[0];
-  const diagnostics = p
-    ? { snapshot: await read(p), presentation: await inspect(p) }
-    : {};
-  if (p) await shot(p, 'arena-failure.png');
+  const diagnostics = {};
+  if (p && !p.isClosed()) {
+    for (const [key, operation] of [
+      ['snapshot', () => read(p)],
+      ['presentation', () => inspect(p)],
+      ['capture', () => shot(p, 'arena-failure.png')],
+    ]) {
+      try {
+        diagnostics[key] = await operation();
+      } catch (error) {
+        diagnostics[key] = String(error);
+      }
+    }
+  }
   writeFileSync(
     resolve(out, 'failure.json'),
     JSON.stringify(
       {
         error: String(e),
         stack: e.stack,
+        runId: session.runId,
+        timings,
+        totalSeconds: (performance.now() - started) / 1000,
         errors,
         screenshots: shots,
         ...diagnostics,
@@ -683,9 +864,11 @@ try {
   );
   throw e;
 } finally {
-  for (const c of contexts) await c.close();
-  await browser?.close();
-  await client?.close();
-  await server?.shutdown();
+  try {
+    await Promise.allSettled(contexts.map((c) => c.close()));
+    await browser?.close();
+  } finally {
+    await owned.close();
+  }
   if (failed) process.exitCode = 1;
 }
