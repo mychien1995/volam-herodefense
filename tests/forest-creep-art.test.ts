@@ -3,6 +3,7 @@ import { expect, it } from 'vitest';
 import {
   forestCreepArt,
   forestArtNotice,
+  forestArtStatus,
   forestStrikeEffects,
   forestTypes,
   type ForestCreepManifest,
@@ -14,18 +15,20 @@ const m = JSON.parse(
     'utf8',
   ),
 ) as ForestCreepManifest;
-it('labels candidate art separately from unmapped placeholders', () => {
+it('labels artwork approval separately from unmapped placeholders', () => {
   expect(forestArtNotice([''])).toContain('placeholder');
-  expect(forestArtNotice(['truc_xa'])).toContain('candidate');
+  expect(forestArtNotice(['truc_xa'])).toContain(forestArtStatus('truc_xa'));
   expect(forestArtNotice(['truc_xa', 'unknown'])).toContain(
-    'candidate + placeholder',
+    forestArtStatus('truc_xa') === 'approved'
+      ? 'approved art + placeholder'
+      : 'candidate + placeholder',
   );
 });
 it('selects exact server forest types only; preserves unknown/other-zone fallback', () => {
   for (const type of forestTypes) {
     expect(forestCreepArt(m, type, 'forest_shared')?.id).toBe('forest_' + type);
     expect(forestCreepArt(m, type, 'forest_private_player')?.status).toBe(
-      'candidate',
+      forestArtStatus(type),
     );
     for (const zone of [
       'arena',

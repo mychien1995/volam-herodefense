@@ -1,0 +1,36 @@
+{
+  "runId": "e3755115-6399-451d-a702-277674395f08",
+  "mode": "browser",
+  "args": [
+    "--config=playwright.arena-creeps.config.ts"
+  ],
+  "startedAt": "2026-10-31T16:56:38.725Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 14.92,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.38,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 17.25,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "browser verification",
+      "seconds": 34.04,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 67.62
+}

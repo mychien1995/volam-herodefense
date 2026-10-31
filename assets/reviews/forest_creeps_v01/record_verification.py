@@ -8,6 +8,8 @@ def read(p):return json.loads(p.read_text('utf8'))
 def write(p,v):p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n','utf8')
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 p=argparse.ArgumentParser();p.add_argument('--players',type=int,choices=[2,6],required=True);args=p.parse_args()
+if (R/'assets/approved_forest_creeps.lock.json').exists():
+    raise SystemExit('Approved Forest production metadata is locked. Record new runtime verification separately.')
 profile='representative-2' if args.players==2 else 'final-6'
 evidence=HERE/profile/'observations.json';v=read(evidence)
 assert v['status']=='PASS' and v['browserClients']==args.players and not v['gameplayIntegration']

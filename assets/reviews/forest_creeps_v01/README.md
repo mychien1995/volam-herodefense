@@ -1,5 +1,7 @@
 # Bamboo Forest creep candidate delivery — 2026-10-31
 
+**Subsequent director approval — 2026-10-31:** user: “I approved the artwork”. The selected six-enemy production art and VFX are now approved and pinned by `assets/approved_forest_creeps.lock.json`; see `docs/FOREST_CREEP_ART_APPROVAL.md`. This report retains its original candidate-delivery history. Approval does not supply the missing authoritative Forest spawn roster or authorize new gameplay.
+
 All six requested species have original concept sheets, 64-cel gameplay packages and separate VFX. These are **candidates**, not director-approved art. The existing Bamboo environment remains approved and unchanged. Ordinary dungeon gameplay still uses the labelled `creep_outlaw` placeholder; no forest type registration, AI, ability, collision, damage, status, balance, wave or loot rule was added by this batch.
 
 ## Deliverables

@@ -6,6 +6,7 @@ import type { MatchRoom } from '../../apps/game-server/src/rooms/MatchRoom.js';
 import { joinWaiting, startTogether } from './pregame-helper.js';
 import {
   forestTypes,
+  forestArtStatus,
   forestStrikeEffects,
 } from '../../apps/game-client/src/forest-creeps.js';
 const inspect = (p: Page): Promise<any> =>
@@ -17,7 +18,7 @@ test('controlled server forest types reach the normal renderer; event dedup and 
 }) => {
   const players = Number(process.env['FOREST_REVIEW_PLAYERS'] ?? 6);
   test.setTimeout(players === 6 ? 360000 : 180000);
-  const out = `docs/evidence/forest-creep-runtime-2026-10-31/wire-${players}`;
+  const out = `${process.env['FOREST_EVIDENCE_DIR'] ?? 'docs/evidence/forest-creep-runtime-2026-10-31'}/wire-${players}`;
   mkdirSync(out, { recursive: true });
   const contexts = await Promise.all(
     Array.from({ length: 2 }, () =>
@@ -121,7 +122,7 @@ test('controlled server forest types reach the normal renderer; event dedup and 
                 (a: any) =>
                   a.id === id &&
                   a.texture === 'forest_' + type &&
-                  a.artStatus === 'candidate',
+                  a.artStatus === forestArtStatus(type),
               ),
             );
           })
@@ -227,7 +228,9 @@ test('controlled server forest types reach the normal renderer; event dedup and 
           controlledServerFixture: true,
           naturalForestSpawn: false,
           damageAndRewardsVerified: false,
-          directorApproved: false,
+          directorApproved: forestTypes.every(
+            (type) => forestArtStatus(type) === 'approved',
+          ),
           coverage,
           errors,
         },

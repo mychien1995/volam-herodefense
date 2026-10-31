@@ -17,6 +17,7 @@ for (const [name, label] of [
   ['approved_thien_son.lock.json', 'Thien Son'],
   ['approved_vo_dang.lock.json', 'Vo Dang'],
   ['approved_bamboo_forest.lock.json', 'Bamboo Forest environment'],
+  ['approved_forest_creeps.lock.json', 'Bamboo Forest creep artwork'],
   ['approved_vo_dang_skills.lock.json', 'Vo Dang skills'],
   ['approved_thieu_lam.lock.json', 'Thieu Lam'],
   ['approved_arena_creeps_13_16.lock.json', 'arena creeps Waves 13–16'],

@@ -1,5 +1,7 @@
 # Bamboo Forest — tích hợp candidate sprite/VFX vào Phaser 4
 
+**Cập nhật approval 2026-10-31:** director đã xác nhận “I approved the artwork”. [Approval record](FOREST_CREEP_ART_APPROVAL.md) và `assets/approved_forest_creeps.lock.json` hiện là nguồn approval chính thức. Phần dưới là báo cáo tích hợp và candidate review trước approval; runtime status/nhãn hiện được suy từ approval lock. Dữ liệu spawn Forest vẫn còn thiếu, không tự bật loài vào wave.
+
 Phạm vi: nối bộ artwork đã có vào loader, registry, `ArenaScene`, playback và effect renderer chung. Không tạo/export lại artwork, không thay AI, abilities, damage, status, spawn/wave composition, balance, collision, RNG hay loot. Môi trường Bamboo vẫn **approved**; sáu creep/VFX vẫn **candidate**, chưa được director duyệt.
 
 ## Kết quả và giới hạn quan trọng

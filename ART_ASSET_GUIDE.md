@@ -1,5 +1,9 @@
 # Pixel Art and Animation Pipeline — v1.3
 
+## Bamboo Forest creep artwork approval — 2026-10-31
+
+The director explicitly approved the selected six-enemy sprite/VFX batch (“I approved the artwork”): 384 character frames / 120 directional clips and 112 VFX frames / 28 sequences. `assets/approved_forest_creeps.lock.json` pins 565 selected concepts, production assets, sources and provenance files. Original delivery metadata remains historical; runtime approval status derives from the lock. No artwork bytes were changed. Forest spawn/type distribution and unsupported VFX gameplay contracts remain pending. See `docs/FOREST_CREEP_ART_APPROVAL.md`.
+
 ## M3C3 retained Thiếu Lâm integration — 2026-10-31
 
 The supplied26 character/VFX components and14 skill/passive icon directories are registered through the shared four-school atlas pipeline. No source bytes are regenerated. Independent A uses approved baseline sprites and reuses La Hán/Tru Tà icons because dedicated basic icons were not supplied. Semantic empowered hits,guards,ground impact,aura and healing phases follow authoritative events/statuses. Exact paths,pivots,frames,provenance/waiver and missing/unused phases:`docs/M3C3_SKILL_ASSET_MAP.md`. Skill candidate status remains `prototype_approval_gate_waived`,not final director approval. Existing independent baseline hurt/death remain missing aliases.

@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "reviewedCommit": "efd345e",
+  "reviewFixCommit": "4adaa0b",
+  "targetBaseline": "218e73e",
+  "reviewFinding": {
+    "priority": "P2",
+    "issue": "Validation orchestration applied gameplay endpoint defaults to quick and dedicated-config runs.",
+    "resolution": "Select the managed browser profile; do not impose its endpoint policy on quick or legacy dedicated checks. Regression covers positional/equal config forms and correct default/arena validation."
+  },
+  "preservation": {
+    "targetFiles": 31,
+    "exactGitBlobsPreserved": true,
+    "forestApprovedHashes": 565,
+    "otherSessionCheckoutModified": false
+  },
+  "checks": {
+    "workflowRegressions": 18,
+    "forestUnitTests": 4,
+    "projectCompilation": "PASS",
+    "toolsTestsTypecheck": "PASS",
+    "productionBuild": "PASS",
+    "forestValidator": "PASS",
+    "twoClientFrames": 256,
+    "animationTags": 80,
+    "productionProjectileSmoke": "PASS"
+  },
+  "timings": {
+    "prepare": 14.92,
+    "compile": 1.38,
+    "build": 17.25,
+    "browserReruns": [
+      {
+        "stage": "default projectile smoke",
+        "exitCode": 0,
+        "seconds": 22.16
+      },
+      {
+        "stage": "two-client arena browser retry",
+        "exitCode": 0,
+        "seconds": 62.23
+      }
+    ],
+    "twoClientFixture": 54.58
+  },
+  "initialBrowserFailure": "WebSocket 1006 on client 2 during join; retained diagnostics. Browser-only retry passed on unchanged inputs.",
+  "scope": "No full unit suite, all-asset suite or six-player combat rerun; integration did not change their relevant mechanics, assertions or art inputs. Prior evidence remains retained.",
+  "recordings": false
+}
