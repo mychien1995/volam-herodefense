@@ -71,8 +71,13 @@ async function enter(
 
 async function selectRanged(page: Page): Promise<void> {
   await page.locator('[data-menu=skills]').first().click();
-  await page.getByLabel('Normal attack').selectOption('cai_bang_chuong');
-  await page.getByRole('button', { name: 'Close menu', exact: true }).click();
+  if (await page.locator('#skill-branch').isVisible())
+    await page.locator('#skill-branch').selectOption('cai_bang_chuong');
+  else
+    await page
+      .getByLabel('Đánh thường · A', { exact: true })
+      .selectOption('cai_bang_chuong');
+  await page.getByRole('button', { name: 'Đóng menu', exact: true }).click();
   await expect
     .poll(async () => {
       const s = await snapshot(page);
@@ -225,10 +230,11 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
     );
     if (progressed) {
       await a.locator('[data-menu=skills]').first().click();
-      await a.locator('#loadout-q').selectOption('hoa_van_chuong');
-      await a.locator('#apply-loadout').click();
-      await expect(a.locator('[data-upgrade=hoa_van_chuong]')).toBeEnabled();
-      await a.locator('[data-upgrade=hoa_van_chuong]').click();
+      await a.locator('#skill-branch').selectOption('cai_bang_chuong');
+      await expect(a.locator('#slot-q')).toHaveAttribute(
+        'data-skill-id',
+        'hoa_van_chuong',
+      );
       await expect(a.locator('#available-points')).toHaveText('0');
       await a.keyboard.press('Escape');
     }

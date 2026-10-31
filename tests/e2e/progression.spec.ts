@@ -82,6 +82,14 @@ function monitor(p: Page) {
 async function menu(p: Page) {
   await p.locator('.loadout-toggle').click();
   await expect(p.locator('#skill-management')).toBeVisible();
+  if ((await p.locator('#skill-mode').inputValue()) === 'default') {
+    await p.locator('#skill-mode').selectOption('custom');
+    await expect
+      .poll(async () => p.locator('#skill-mode').inputValue())
+      .toBe('custom');
+    await p.locator('#reset-skills').click();
+    await expect(p.locator('#reset-skills')).toBeDisabled();
+  }
 }
 async function close(p: Page) {
   await p.keyboard.press('Escape');
@@ -145,17 +153,7 @@ async function enter(p: Page, access: 'private' | 'shared') {
 }
 async function exit(p: Page) {
   await moveTo(p, 160, 320);
-  const info = await view(p),
-    o = info.interactions.find((o) => o.id === 'dungeon-exit')!,
-    c = p.locator('#game canvas'),
-    b = (await c.boundingBox())!;
-  const z = await c.evaluate(
-    (n) => n.clientWidth / (n as HTMLCanvasElement).width,
-  );
-  await p.mouse.click(
-    b.x + (o.x - info.camera.x) * z,
-    b.y + (o.y - 20 - info.camera.y) * z,
-  );
+  await p.keyboard.press('Space');
   await expect.poll(async () => (await hero(p)).zoneId).toBe('arena');
 }
 async function farm(p: Page, minimumLevel: number) {
@@ -190,8 +188,8 @@ test('M3B two players earn independently, upgrade mixed builds, return, respec a
     expect((await hero(a)).build).toMatchObject({
       enabled: true,
       earned: 1,
-      allocated: 0,
-      available: 1,
+      allocated: 1,
+      available: 0,
       surplus: 0,
     });
     await menu(a);
@@ -206,7 +204,7 @@ test('M3B two players earn independently, upgrade mixed builds, return, respec a
     ]);
     await upgrade(a, 'hoa_van_chuong');
     await expect(a.locator('[data-upgrade=hoanh_tao_bong]')).toBeDisabled();
-    await a.getByLabel('Normal attack · A').selectOption('cai_bang_chuong');
+    await a.getByLabel('Đánh thường · A').selectOption('cai_bang_chuong');
     await expect
       .poll(async () => (await hero(a)).basicId)
       .toBe('cai_bang_chuong');

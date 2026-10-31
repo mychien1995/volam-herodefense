@@ -1,3 +1,9 @@
+## Small gameplay changes — 2026-10-31
+
+The user explicitly requests Vietnamese product UI, compact school selection with Leave left/Confirm right, Space at physical dungeon doors, Quit first with confirmation, P for Võ Học, local grayscale death and central-arena respawn. New normal players use Default mode: choose a branch, automatically learn/equip Q→W→E→R, and skill ranks belong to slots when replacing same-branch skills. Custom retains manual rank allocation, mixed styles and independent A. All build edits remain living-arena-only and server-owned.
+
+The user explicitly confirms retaining current regular4/ultimate3 caps, level gates and the existing surplus mechanism. Each slot's quota is floor((min(level,30)+3-slotIndex)/4); learned rank is bounded by quota, unlocked ranks and cap. Unallocated gated points remain pending; surplus applies only when all four skills are maxed. Four regular starters follow catalogue order (Thiếu Lâm Quyền uses combo A plus Toàn Phong Thoái). Mode/branch changes recalculate and preserve cooldown debt without resource refill. Normal dungeon exits retain their return marker; only death respawn now uses the arena hero-spawn marker, with the existing five-second delay and no gold/XP penalty. No new artwork or broader M3D balancing is authorized. Details: docs/SMALL_GAMEPLAY_CHANGES.md.
+
 # Approved decisions & assumptions register
 
 ## Desert integration request — 2026-10-31

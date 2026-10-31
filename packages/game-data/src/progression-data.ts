@@ -19,6 +19,16 @@ const statShape = {
 const bonuses = z.strictObject(statShape).partial();
 export const progressionSchema = z
   .strictObject({
+    defaultBranches: z
+      .record(
+        z.string(),
+        z.strictObject({
+          schoolId: z.string(),
+          style: z.string(),
+          skillIds: z.array(z.string()).length(4),
+        }),
+      )
+      .optional(),
     skills: z.record(
       z.string(),
       z.strictObject({
@@ -47,6 +57,22 @@ export const progressionSchema = z
     maxCooldownReduction: n.max(0.8),
   })
   .superRefine((d, c) => {
+    for (const [basicId, branch] of Object.entries(d.defaultBranches ?? {})) {
+      if (
+        !d.schools[branch.schoolId]?.basicIds.includes(basicId) ||
+        new Set(branch.skillIds).size !== 4 ||
+        branch.skillIds.some(
+          (id) =>
+            d.skills[id]?.schoolId !== branch.schoolId ||
+            d.skills[id]?.style !== branch.style ||
+            d.skills[id]?.ultimate,
+        )
+      )
+        c.addIssue({
+          code: 'custom',
+          message: `Invalid default branch ${basicId}`,
+        });
+    }
     for (const [id, s] of Object.entries(d.skills)) {
       if (
         s.id !== id ||

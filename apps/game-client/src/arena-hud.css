@@ -424,3 +424,35 @@
   white-space: nowrap;
   pointer-events: none;
 }
+
+#game.hero-dead {
+  filter: grayscale(1);
+}
+#respawn-overlay,
+#dungeon-exit-hint {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;
+  padding: 12px 22px;
+  background: #17201deb;
+  border: 2px solid #b9a072;
+  color: #fff0d0;
+  text-align: center;
+  pointer-events: none;
+}
+#respawn-overlay {
+  top: 42%;
+  display: grid;
+  gap: 8px;
+}
+#respawn-overlay strong {
+  font-size: 23px;
+}
+#respawn-overlay[hidden],
+#dungeon-exit-hint[hidden] {
+  display: none;
+}
+#dungeon-exit-hint {
+  bottom: 115px;
+}

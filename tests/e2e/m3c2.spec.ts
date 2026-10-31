@@ -55,7 +55,7 @@ test('M3C2 normal three-school progression, shared dungeon farming, read-only bu
           'Thái Cực Tâm Pháp',
         );
         await p
-          .getByLabel('Normal attack · A', { exact: true })
+          .getByLabel('Đánh thường · A', { exact: true })
           .selectOption('vo_dang_kiem');
         await expect
           .poll(async () => (await hero(c)).basicId)

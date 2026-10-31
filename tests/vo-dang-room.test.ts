@@ -1,3 +1,4 @@
+import { initializeProgression } from '@volam/game-core';
 import { afterAll, afterEach, beforeAll, it, expect } from 'vitest';
 import { ColyseusTestServer } from '@colyseus/testing';
 import { Client } from '@colyseus/sdk';
@@ -75,6 +76,15 @@ it('three schools share dungeon/arena combat, authoritative shield/counter/refun
   await expect.poll(() => c.state.phase).toBe('IN_GAME');
   const room = server.getRoomById<MatchRoom>(a.roomId),
     h = room.simulation.hero(c.sessionId)!;
+  for (const peer of [a, b, c])
+    initializeProgression(
+      room.simulation.hero(peer.sessionId)!,
+      m1Config,
+      'custom',
+    );
+  await expect
+    .poll(() => c.state.players.get(c.sessionId)!.build.mode)
+    .toBe('custom');
   expect(h.maxMana).toBe(180);
   expect(h.basicId).toBe('vo_dang_quyen');
   expect(h.progression).toBeDefined();

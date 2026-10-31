@@ -15,13 +15,18 @@ const m = JSON.parse(
     'utf8',
   ),
 ) as ForestCreepManifest;
-it('labels artwork approval separately from unmapped placeholders', () => {
-  expect(forestArtNotice([''])).toContain('placeholder');
-  expect(forestArtNotice(['truc_xa'])).toContain(forestArtStatus('truc_xa'));
-  expect(forestArtNotice(['truc_xa', 'unknown'])).toContain(
+it('labels artwork approval in Vietnamese separately from unmapped placeholders', () => {
+  expect(forestArtNotice([''])).toContain('hình tạm');
+  const label =
     forestArtStatus('truc_xa') === 'approved'
-      ? 'approved art + placeholder'
-      : 'candidate + placeholder',
+      ? 'hình ảnh đã duyệt'
+      : 'bản thử nghiệm';
+  expect(forestArtNotice(['truc_xa'])).toContain(label);
+  expect(forestArtNotice(['truc_xa', 'unknown'])).toContain(
+    `${label} và hình tạm`,
+  );
+  expect(forestArtNotice(['truc_xa'])).not.toMatch(
+    /Creep|candidate|approved art|placeholder/,
   );
 });
 it('selects exact server forest types only; preserves unknown/other-zone fallback', () => {

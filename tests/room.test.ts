@@ -259,7 +259,7 @@ describe('M1 authoritative room gameplay', () => {
       kind: 'cast',
       slot: 3,
     });
-    expect((await rejection).reason).toContain('not equipped');
+    expect((await rejection).reason).toContain('chưa được trang bị');
     const initial = server
       .getRoomById<MatchRoom>(other.roomId)
       .world.heroes.get(other.sessionId)!.x;
@@ -325,12 +325,12 @@ describe('authoritative pre-game phases', () => {
       sequence: 1,
       kind: 'basic',
     });
-    expect((await early).reason).toContain('not begun');
+    expect((await early).reason).toContain('chưa bắt đầu');
     a.send('lobby-action', { action: 'start' });
     await expect.poll(() => room.state.phase).toBe('SCHOOL_SELECTION');
     const empty = b.waitForMessage('command-rejected');
     b.send('lobby-action', { action: 'confirm' });
-    expect((await empty).reason).toContain('Choose');
+    expect((await empty).reason).toContain('Hãy chọn');
     a.send('lobby-action', { action: 'select', schoolId: 'vo_dang' });
     a.send('lobby-action', { action: 'select', schoolId: 'thieu_lam' });
     a.send('lobby-action', { action: 'confirm' });
@@ -341,7 +341,7 @@ describe('authoritative pre-game phases', () => {
     expect(room.world.tick).toBe(0);
     const locked = a.waitForMessage('command-rejected');
     a.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
-    expect((await locked).reason).toContain('not editable');
+    expect((await locked).reason).toContain('Không thể đổi');
     const late = await client.joinById<MatchRoom>(a.roomId, options('Late'));
     b.send('lobby-action', { action: 'select', schoolId: 'thieu_lam' });
     b.send('lobby-action', { action: 'confirm' });
@@ -378,7 +378,7 @@ describe('authoritative pre-game phases', () => {
       sequence: 1,
       kind: 'basic',
     });
-    expect((await early).reason).toContain('confirm');
+    expect((await early).reason).toContain('xác nhận');
     const dungeon = b.waitForMessage('command-rejected');
     b.send('dungeon-action', {
       protocolVersion: PROTOCOL_VERSION,
@@ -386,7 +386,7 @@ describe('authoritative pre-game phases', () => {
       action: 'enter',
       access: 'private',
     });
-    expect((await dungeon).reason).toContain('confirm');
+    expect((await dungeon).reason).toContain('xác nhận');
     b.send('lobby-action', { action: 'select', schoolId: 'vo_dang' });
     b.send('lobby-action', { action: 'confirm' });
     await expect
@@ -409,7 +409,7 @@ describe('authoritative pre-game phases', () => {
     expect(room.simulation.invasion!.nextWaveTick).toBe(deadline);
     const repeated = b.waitForMessage('command-rejected');
     b.send('lobby-action', { action: 'confirm' });
-    expect((await repeated).reason).toContain('not editable');
+    expect((await repeated).reason).toContain('Không thể đổi');
     expect(room.world.heroes.size).toBe(2);
   });
   it('keeps the six-seat limit and reopens an active seat after a pending entrant leaves', async () => {

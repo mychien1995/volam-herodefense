@@ -47,7 +47,7 @@ test('M3C1 normal mixed-school progression: shared farming, independent ranks, m
     ]);
     await upgrade(b, 'luc_duong_chuong');
     await b
-      .getByLabel('Normal attack · A', { exact: true })
+      .getByLabel('Đánh thường · A', { exact: true })
       .selectOption('thien_son_dao');
     await expect
       .poll(async () => (await hero(b)).basicId)
@@ -58,7 +58,7 @@ test('M3C1 normal mixed-school progression: shared farming, independent ranks, m
     await loadout(a, ['hoa_van_chuong', '', '', '']);
     await upgrade(a, 'hoa_van_chuong');
     await a
-      .getByLabel('Normal attack · A', { exact: true })
+      .getByLabel('Đánh thường · A', { exact: true })
       .selectOption('cai_bang_chuong');
     await close(a);
     await b.locator('[data-menu=dungeons]').click();

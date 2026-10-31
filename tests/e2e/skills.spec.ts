@@ -63,13 +63,16 @@ const out = 'docs/evidence/m3a';
 async function join(p: Page, name: string, room?: string) {
   await p.goto('/?debug=1&skillPreview=1');
   await p.locator('#pre-nickname').fill(name);
-  await p.getByRole('button', { name: 'Enter Game', exact: true }).click();
+  await p.getByRole('button', { name: 'Vào game', exact: true }).click();
   if (room) {
-    await p.getByLabel('Room code', { exact: true }).fill(room);
-    await p.getByRole('button', { name: 'Join by code', exact: true }).click();
+    await p
+      .locator('#pregame')
+      .getByLabel('Mã phòng', { exact: true })
+      .fill(room);
+    await p.getByRole('button', { name: 'Vào bằng mã', exact: true }).click();
   } else
-    await p.getByRole('button', { name: 'Create room', exact: true }).click();
-  await expect(p.locator('#pregame .pre-title')).toHaveText('Waiting Lobby');
+    await p.getByRole('button', { name: 'Tạo phòng', exact: true }).click();
+  await expect(p.locator('#pregame .pre-title')).toHaveText('Phòng chờ');
 }
 function monitor(p: Page) {
   const errors: string[] = [];

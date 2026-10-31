@@ -198,7 +198,7 @@ test('Chưởng normal selection uses unarmed walk, idle and palm art in four di
       (await presentation(page)).actors.find((a) => a.id === state.sessionId)!;
     await page.locator('[data-menu=skills]').first().click();
     await page.getByLabel('Normal attack').selectOption('cai_bang_chuong');
-    await page.getByRole('button', { name: 'Close menu', exact: true }).click();
+    await page.getByRole('button', { name: 'Đóng menu', exact: true }).click();
     await expect
       .poll(async () => (await actor()).animation)
       .toContain('hero_cai_bang_chuong:');
@@ -248,7 +248,7 @@ test('Chưởng normal selection uses unarmed walk, idle and palm art in four di
       await page.locator('[data-menu=skills]').first().click();
       await page.getByLabel('Normal attack').selectOption('cai_bang_bong');
       await page
-        .getByRole('button', { name: 'Close menu', exact: true })
+        .getByRole('button', { name: 'Đóng menu', exact: true })
         .click();
       await expect
         .poll(async () => (await actor()).animation)

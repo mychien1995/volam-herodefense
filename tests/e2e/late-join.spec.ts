@@ -28,13 +28,13 @@ const read = (p: Page): Promise<Snapshot> =>
 async function joinListed(p: Page, id: string) {
   await p.goto('/?debug=1');
   await p.locator('#pre-nickname').fill('Late guest');
-  await p.getByRole('button', { name: 'Enter Game', exact: true }).click();
+  await p.getByRole('button', { name: 'Vào game', exact: true }).click();
   const row = p.locator('#pregame tbody tr').filter({ hasText: id });
   await expect(
-    row.getByRole('button', { name: 'Join', exact: true }),
+    row.getByRole('button', { name: 'Vào phòng', exact: true }),
   ).toBeEnabled();
-  await row.getByRole('button', { name: 'Join', exact: true }).click();
-  await expect(p.locator('#pregame .pre-title')).toHaveText('School Selection');
+  await row.getByRole('button', { name: 'Vào phòng', exact: true }).click();
+  await expect(p.locator('#pregame .pre-title')).toHaveText('Chọn môn phái');
 }
 function errors(p: Page) {
   const result: string[] = [];
@@ -55,18 +55,16 @@ test('Join remains enabled after host starts school selection', async ({
   try {
     await joinWaiting(a, 'Host');
     const id = (await read(a)).roomId;
-    await a.getByRole('button', { name: 'Start Game', exact: true }).click();
+    await a.getByRole('button', { name: 'Bắt đầu', exact: true }).click();
     await a.locator('#pregame button[data-school=cai_bang]').click();
     await joinListed(b, id);
-    await a
-      .getByRole('button', { name: 'Confirm Selection', exact: true })
-      .click();
-    await expect(b.getByTestId('selection-ready')).toHaveText('1/2 Ready');
+    await a.getByRole('button', { name: 'Xác nhận', exact: true }).click();
+    await expect(b.getByTestId('selection-ready')).toHaveText(
+      '1/2 đã sẵn sàng',
+    );
     expect((await read(a)).state.tick).toBe(0);
     await b.locator('#pregame button[data-school=vo_dang]').click();
-    await b
-      .getByRole('button', { name: 'Confirm Selection', exact: true })
-      .click();
+    await b.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     await expect(a.locator('#pregame')).toBeHidden();
     await expect(b.locator('#pregame')).toBeHidden();
     expect(failures.flat()).toEqual([]);
@@ -116,9 +114,7 @@ test('Join active match, choose school with stable focus, spawn without resettin
     await b.screenshot({
       path: 'docs/evidence/late-join/active-school-selection.png',
     });
-    await b
-      .getByRole('button', { name: 'Confirm Selection', exact: true })
-      .click();
+    await b.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     await expect(b.locator('#pregame')).toBeHidden();
     await expect
       .poll(async () => (await read(a)).state.players[guest]!.hp)

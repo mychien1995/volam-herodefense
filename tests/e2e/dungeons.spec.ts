@@ -78,6 +78,10 @@ async function moveTo(page: Page, x: number, y: number) {
   }
 }
 async function clickWorld(page: Page, id: string) {
+  if (id === 'dungeon-exit') {
+    await page.keyboard.press('Space');
+    return;
+  }
   // Read-only evidence bridge converts an actual Phaser object to a mouse click.
   const p = await view(page),
     object = p.interactions.find((o) => o.id === id)!;
@@ -141,21 +145,18 @@ function monitor(page: Page) {
 async function ranged(page: Page) {
   await page.locator('[data-menu=settings]').click();
   await page.locator('#dialog-content [data-menu=skills]').click();
-  await page.getByLabel('Normal attack').selectOption('cai_bang_chuong');
-  await expect
-    .poll(async () => (await hero(page)).basicId)
-    .toBe('cai_bang_chuong');
-  // Normal progression rooms start with one point and no learned actives.
-  // Spend that real point before the reward fixture uses Q in the dungeon.
-  if (await page.locator('#skill-management').isVisible()) {
-    await page.locator('#loadout-q').selectOption('hoa_van_chuong');
-    await page.locator('#apply-loadout').click();
-    await expect(page.locator('[data-upgrade=hoa_van_chuong]')).toBeEnabled();
-    await page.locator('[data-upgrade=hoa_van_chuong]').click();
+  if (await page.locator('#skill-branch').isVisible()) {
+    await page.locator('#skill-branch').selectOption('cai_bang_chuong');
     await expect(page.locator('[data-rank=hoa_van_chuong]')).toContainText(
       '1/4',
     );
-  }
+  } else
+    await page
+      .getByLabel('Đánh thường · A', { exact: true })
+      .selectOption('cai_bang_chuong');
+  await expect
+    .poll(async () => (await hero(page)).basicId)
+    .toBe('cai_bang_chuong');
   await page.keyboard.press('Escape');
   await expect
     .poll(async () => (await hero(page)).basicId)

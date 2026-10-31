@@ -104,26 +104,26 @@ for (const size of [
         if (await page.locator('#dialog-actions').count())
           await inViewport(page, '#dialog-actions');
         await expect(
-          page.getByRole('button', { name: 'Close menu', exact: true }),
+          page.getByRole('button', { name: 'Đóng menu', exact: true }),
         ).toBeVisible();
         if (menu === 'inventory') {
           await expect(page.locator('.equipment-slot')).toHaveCount(4);
           await expect(page.locator('.bag-grid button')).toHaveCount(12);
           await expect(
-            page.getByRole('button', { name: 'Equip', exact: true }),
+            page.getByRole('button', { name: 'Trang bị', exact: true }),
           ).toBeDisabled();
         }
         if (menu === 'merchant') {
           await expect(
             page.getByRole('button', {
-              name: 'Buy · unavailable',
+              name: 'Mua · Chưa mở',
               exact: true,
             }),
           ).toBeDisabled();
           await page.getByRole('tab', { name: 'Chế tạo' }).click();
           await expect(
             page.getByRole('button', {
-              name: 'Craft · unavailable',
+              name: 'Chế tạo · Chưa mở',
               exact: true,
             }),
           ).toBeDisabled();
@@ -131,8 +131,11 @@ for (const size of [
         }
         if (menu === 'dungeons')
           await expect(
-            page.getByRole('button', { name: 'Enter dungeon', exact: true }),
+            page.getByRole('button', { name: 'Vào phó bản', exact: true }),
           ).toBeEnabled();
+        expect(await page.locator('#game-dialog').innerText()).not.toMatch(
+          /\b(Empty|Preview|Unavailable|Equip|Drop|Sell|Room|Nickname|Settings|Quit|Ready|Catalogue|pending)\b/,
+        );
         await page.screenshot({ path: info.outputPath(`${menu}.png`) });
         await page.keyboard.press('Escape');
         await expect(page.getByRole('dialog')).toBeHidden();
@@ -163,13 +166,11 @@ test('menus release held movement, trap focus and preserve live two-client simul
       // M3B starts with one earned point, rather than the historical two free
       // M1 skills. Learn Q through the real UI before testing input recovery.
       await open(a, 'skills');
-      await a.locator('#loadout-q').selectOption('hoa_van_chuong');
-      await a.locator('#apply-loadout').click();
+      await a.locator('#skill-branch').selectOption('cai_bang_chuong');
       await expect(a.locator('#slot-q')).toHaveAttribute(
         'data-skill-id',
         'hoa_van_chuong',
       );
-      await a.locator('[data-upgrade=hoa_van_chuong]').click();
       await expect(a.locator('#available-points')).toHaveText('0');
       await a.keyboard.press('Escape');
     }
@@ -276,7 +277,7 @@ test('utility menus open and forest art study stays presentation-only', async ({
   const before = await read(page);
   await page.keyboard.press('Escape');
   await open(page, 'settings');
-  await page.getByRole('button', { name: 'View forest art study' }).click();
+  await page.getByRole('button', { name: 'Xem bản mẫu rừng' }).click();
   await expect(page.locator('#study-banner')).toBeVisible();
   await page.waitForTimeout(200);
   await page.screenshot({ path: info.outputPath('forest-study.png') });
@@ -290,11 +291,11 @@ test('utility menus open and forest art study stays presentation-only', async ({
   expect((await hero(page)).x).toBeCloseTo(pos.x, 3);
   expect((await hero(page)).y).toBeCloseTo(pos.y, 3);
   expect((await read(page)).roomId).toBe(before.roomId);
-  await page.getByRole('button', { name: 'Return to arena' }).click();
+  await page.getByRole('button', { name: 'Về đấu trường' }).click();
   await expect(page.locator('#study-banner')).toBeHidden();
   await expect(page.locator('#game canvas')).toBeFocused();
   await open(page, 'settings');
-  await page.getByRole('button', { name: 'View forest art study' }).click();
+  await page.getByRole('button', { name: 'Xem bản mẫu rừng' }).click();
   await page.keyboard.press('Escape');
   await expect(page.locator('#study-banner')).toBeHidden();
 });

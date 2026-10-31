@@ -11,7 +11,7 @@ export class DefenseHud {
     this.panel.className = 'framed';
     this.panel.hidden = true;
     this.panel.innerHTML =
-      '<strong>Tượng trấn phái</strong><div id="statue-meter" role="meter" aria-label="Statue HP" aria-valuemin="0"><i></i><span></span></div><span id="invasion-countdown"></span><span id="next-invasion-creep"></span>';
+      '<strong>Tượng trấn phái</strong><div id="statue-meter" role="meter" aria-label="Sinh lực tượng" aria-valuemin="0"><i></i><span></span></div><span id="invasion-countdown"></span><span id="next-invasion-creep"></span>';
     this.warning.id = 'invasion-warning';
     this.warning.hidden = true;
     this.warning.setAttribute('role', 'status');

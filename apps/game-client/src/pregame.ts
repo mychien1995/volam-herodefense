@@ -34,7 +34,7 @@ export class PreGame {
   onAction: (action: LobbyAction) => void = () => {};
   constructor(private endpoint: string) {
     this.node.id = 'pregame';
-    this.node.setAttribute('aria-label', 'Pre-game');
+    this.node.setAttribute('aria-label', 'Trước trận');
     document.querySelector('#viewport')!.append(this.node);
     document.querySelector<HTMLElement>('#lobby')!.hidden = true;
     this.node.addEventListener('click', (e) => {
@@ -69,7 +69,7 @@ export class PreGame {
         const input = form.querySelector<HTMLInputElement>('input')!;
         this.nickname = input.value.normalize('NFC').trim();
         if (!this.nickname) {
-          this.notice = 'Enter a nickname.';
+          this.notice = 'Hãy nhập biệt danh.';
           this.render();
           return;
         }
@@ -82,7 +82,7 @@ export class PreGame {
           .value.trim();
         if (code) this.connect(code);
         else {
-          this.notice = 'Enter a room code.';
+          this.notice = 'Hãy nhập mã phòng.';
           this.render();
         }
       }
@@ -94,7 +94,7 @@ export class PreGame {
   }
   private connect(id?: string) {
     this.busy = true;
-    this.notice = 'Connecting…';
+    this.notice = 'Đang kết nối…';
     this.render();
     this.onConnect(this.nickname, id);
   }
@@ -146,11 +146,13 @@ export class PreGame {
       const response = await fetch(`${this.endpoint}/rooms`, {
         signal: AbortSignal.timeout(4000),
       });
-      if (!response.ok) throw new Error('Room list unavailable');
+      if (!response.ok) throw new Error('Không tải được danh sách phòng');
       this.rows = (await response.json()) as RoomListing[];
-      if (this.notice.startsWith('Room list')) this.notice = '';
+      if (this.notice.startsWith('Không tải được danh sách phòng'))
+        this.notice = '';
     } catch {
-      this.notice = 'Room list unavailable. Check connection and retry.';
+      this.notice =
+        'Không tải được danh sách phòng. Hãy kiểm tra kết nối và thử lại.';
     }
     if (this.screen === 'browser' && document.activeElement?.id !== 'pre-code')
       this.render();
@@ -163,26 +165,26 @@ export class PreGame {
     let title = '';
     if (this.screen === 'landing') {
       this.node.classList.add('landing');
-      this.node.innerHTML = `<div class="brand"><h1>Võ Lâm</h1><h2>HERO DEFENSE</h2></div><section class="pre-window landing-window"><form id="landing-form"><label class="sr-only" for="pre-nickname">Nickname</label><input id="pre-nickname" name="nickname" maxlength="20" autocomplete="off" required placeholder="NICKNAME" value="${escape(this.nickname)}"/><button>Enter Game</button></form><p role="status">${escape(this.notice)}</p></section>`;
+      this.node.innerHTML = `<div class="brand"><h1>Võ Lâm</h1><h2>ANH HÙNG THỦ THÀNH</h2></div><section class="pre-window landing-window"><form id="landing-form"><label class="sr-only" for="pre-nickname">Biệt danh</label><input id="pre-nickname" name="nickname" maxlength="20" autocomplete="off" required placeholder="BIỆT DANH" value="${escape(this.nickname)}"/><button>Vào game</button></form><p role="status">${escape(this.notice)}</p></section>`;
       return;
     }
     this.node.classList.remove('landing');
     if (this.screen === 'browser') {
-      title = 'Room Browser';
-      content = `<div class="room-scroll"><table><thead><tr><th>Room / code</th><th>Players</th><th>Status</th><th></th></tr></thead><tbody>${this.rows.map((r) => `<tr><td>${escape(r.roomId)}</td><td>${r.clients}/${r.maxClients}</td><td>${escape(r.phase)}</td><td><button data-action="join" data-room="${escape(r.roomId)}" ${this.busy || r.locked || r.clients >= r.maxClients || !['WAITING_LOBBY', 'SCHOOL_SELECTION', 'IN_GAME'].includes(r.phase) ? 'disabled' : ''}>Join</button></td></tr>`).join('')}</tbody></table>${this.rows.length ? '' : '<p class="empty">No rooms yet. Create the first room.</p>'}</div><div class="pre-actions">${button('Back', 'back', this.busy)}${button('Refresh', 'refresh', this.busy)}${button('Create room', 'create', this.busy)}</div><form id="code-form"><label class="sr-only" for="pre-code">Room code</label><input id="pre-code" placeholder="ROOM CODE" autocomplete="off"/><button ${this.busy ? 'disabled' : ''}>Join by code</button></form>`;
+      title = 'Danh sách phòng';
+      content = `<div class="room-scroll"><table><thead><tr><th>Phòng / Mã</th><th>Người chơi</th><th>Trạng thái</th><th></th></tr></thead><tbody>${this.rows.map((r) => `<tr><td>${escape(r.roomId)}</td><td>${r.clients}/${r.maxClients}</td><td>${escape(({ WAITING_LOBBY: 'Đang chờ', SCHOOL_SELECTION: 'Chọn phái', IN_GAME: 'Trong trận', DEFEAT: 'Đã kết thúc' } as Record<string, string>)[r.phase] ?? 'Không khả dụng')}</td><td><button data-action="join" data-room="${escape(r.roomId)}" ${this.busy || r.locked || r.clients >= r.maxClients || !['WAITING_LOBBY', 'SCHOOL_SELECTION', 'IN_GAME'].includes(r.phase) ? 'disabled' : ''}>Vào phòng</button></td></tr>`).join('')}</tbody></table>${this.rows.length ? '' : '<p class="empty">Chưa có phòng. Hãy tạo phòng đầu tiên.</p>'}</div><div class="pre-actions">${button('Quay lại', 'back', this.busy)}${button('Làm mới', 'refresh', this.busy)}${button('Tạo phòng', 'create', this.busy)}</div><form id="code-form"><label class="sr-only" for="pre-code">Mã phòng</label><input id="pre-code" placeholder="MÃ PHÒNG" autocomplete="off"/><button ${this.busy ? 'disabled' : ''}>Vào bằng mã</button></form>`;
     } else if (this.state) {
       const state = this.state;
       const players = [...state.players.entries()];
       const self = state.players.get(this.session);
       const host = state.players.get(state.hostId);
       const hostHere = !!host?.connected;
-      const list = `<ul class="pre-players">${players.map(([id, p]) => `<li><strong>${escape(p.nickname)}</strong><span>${id === state.hostId ? '♛ Host · ' : ''}${!p.connected ? 'Disconnected' : p.confirmed ? 'Confirmed' : ['SCHOOL_SELECTION', 'IN_GAME'].includes(state.phase) ? 'Choosing…' : 'Connected'}${p.schoolId ? ' · ' + escape(schools.find((s) => s.id === p.schoolId)?.name ?? '') : ''}</span></li>`).join('')}</ul>`;
+      const list = `<ul class="pre-players">${players.map(([id, p]) => `<li><strong>${escape(p.nickname)}</strong><span>${id === state.hostId ? '♛ Host · ' : ''}${!p.connected ? 'Mất kết nối' : p.confirmed ? 'Đã xác nhận' : ['SCHOOL_SELECTION', 'IN_GAME'].includes(state.phase) ? 'Đang chọn…' : 'Connected'}${p.schoolId ? ' · ' + escape(schools.find((s) => s.id === p.schoolId)?.name ?? '') : ''}</span></li>`).join('')}</ul>`;
       if (state.phase === 'WAITING_LOBBY') {
-        title = 'Waiting Lobby';
-        content = `<p class="pre-room">Room ${escape(this.roomId)} · ${players.length}/6 players</p><div class="parchment">${list}</div><p>${hostHere ? 'The host starts school selection.' : 'Host disconnected. Leave and recreate this room; host transfer is unresolved.'}</p><div class="pre-actions">${button('Start Game', 'start', this.session !== state.hostId || !hostHere)}${button('Leave room', 'leave')}</div>`;
+        title = 'Phòng chờ';
+        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · ${players.length}/6 người chơi</p><div class="parchment">${list}</div><p>${hostHere ? 'Host bắt đầu để mọi người chọn phái.' : 'Host đã mất kết nối. Hãy rời và tạo phòng mới.'}</p><div class="pre-actions">${button('Bắt đầu', 'start', this.session !== state.hostId || !hostHere)}${button('Rời phòng', 'leave')}</div>`;
       } else {
-        title = 'School Selection';
-        content = `<p class="pre-room">Room ${escape(this.roomId)} · <strong data-testid="selection-ready">${players.filter(([, p]) => p.connected && p.confirmed).length}/${players.length} Ready</strong></p><div class="school-grid">${schools.map((s) => `<button type="button" class="school-card ${self?.schoolId === s.id ? 'selected' : ''}" data-action="school" data-school="${s.id}" aria-pressed="${self?.schoolId === s.id}" ${self?.confirmed ? 'disabled' : ''}><h3>${s.name}</h3><div role="img" aria-label="${s.name} portrait" class="school-portrait ${s.portrait}"></div><span class="element">${s.element}</span><p>${s.description}</p><p>${s.style}</p><p>${s.attributes}</p><p><b>${s.passive}</b></p><small>${s.basics}</small><small>${s.starting}</small></button>`).join('')}</div><p class="pre-note">Level 1 · 1 skill point · Same-school selections allowed. School starting attributes and skill sets are awaiting final design values.</p>${list}<div class="pre-actions">${button(self?.confirmed ? 'Selection confirmed' : 'Confirm Selection', 'confirm', !self?.schoolId || !!self?.confirmed)}${button('Leave room', 'leave')}</div>${players.some(([, p]) => !p.connected) ? '<p class="pre-warning">Selection paused: a participant disconnected. No automatic school or timeout is applied. Leave and recreate the room.</p>' : ''}`;
+        title = 'Chọn môn phái';
+        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <strong data-testid="selection-ready">${players.filter(([, p]) => p.connected && p.confirmed).length}/${players.length} đã sẵn sàng</strong></p><div class="school-grid">${schools.map((s) => `<button type="button" class="school-card ${self?.schoolId === s.id ? 'selected' : ''}" data-action="school" data-school="${s.id}" aria-pressed="${self?.schoolId === s.id}" ${self?.confirmed ? 'disabled' : ''}><h3>${s.name}</h3><div role="img" aria-label="${s.name} — chân dung" class="school-portrait ${s.portrait}"></div><span class="element">${s.element}</span><p>${s.description}</p><small>${s.basics}</small></button>`).join('')}</div><p class="pre-note">Cấp 1 · Tự học kỹ năng theo Q → W → E → R · Có thể chọn trùng phái.</p>${list}<div class="pre-actions">${button('Rời phòng', 'leave')}${button(self?.confirmed ? 'Đã xác nhận' : 'Xác nhận', 'confirm', !self?.schoolId || !!self?.confirmed)}</div>${players.some(([, p]) => !p.connected) ? '<p class="pre-warning">Đang chờ người chơi mất kết nối. Không tự chọn phái hoặc bắt đầu trận. Bạn có thể rời và tạo phòng mới.</p>' : ''}`;
       }
     }
     this.node.innerHTML = `<section class="pre-window ${this.screen === 'SCHOOL_SELECTION' ? 'school-window' : ''}"><h1 class="pre-title">${title}</h1>${content}<p class="pre-error" role="status" aria-live="polite">${escape(this.notice)}</p></section>`;

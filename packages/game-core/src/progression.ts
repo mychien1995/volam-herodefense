@@ -5,6 +5,7 @@ import type {
   PointAccounting,
   StatBonuses,
   StatCalculation,
+  SkillMode,
 } from './progression-types.js';
 import { cancelOwnedEffects, statusValue } from './status.js';
 
@@ -167,16 +168,60 @@ export function refreshCharacter(hero: Hero, config: SimulationConfig): void {
   hero.mana = Math.min(hero.mana, s.maxMana);
   hero.skillPoints = pointAccounting(hero, config).available;
 }
+/** Points belong to Q/W/E/R, bounded by the existing rank caps and level gates. */
+export function automaticRanks(
+  ids: string[],
+  level: number,
+  config: SimulationConfig,
+): Record<string, number> {
+  const ranks: Record<string, number> = {};
+  ids.forEach((id, slot) => {
+    const skill = config.progression?.skills[id];
+    if (!skill) return;
+    const quota = Math.max(
+      0,
+      Math.floor((Math.min(config.maxLevel, level) + 3 - slot) / 4),
+    );
+    const unlocked = skill.levelGates.filter((gate) => level >= gate).length;
+    const rank = Math.min(quota, unlocked, skill.ranks.length);
+    if (rank > 0) ranks[id] = rank;
+  });
+  return ranks;
+}
+function applyAutomaticProgression(hero: Hero, config: SimulationConfig): void {
+  const p = hero.progression!;
+  p.ranks = automaticRanks(p.defaultSkills, hero.level, config);
+  const previousIds = hero.skillIds ?? [];
+  const previousCooldowns = hero.skillCooldowns;
+  hero.skillIds = p.defaultSkills.map((id) => (p.ranks[id] ? id : ''));
+  hero.skillCooldowns = hero.skillIds.map((id, slot) =>
+    Math.max(
+      id && id === previousIds[slot] ? (previousCooldowns[slot] ?? 0) : 0,
+      id ? (hero.abilityCooldowns?.[id] ?? 0) : 0,
+    ),
+  );
+}
 /** Explicit activation lets old isolated combat fixtures retain their historical M1/M3A contracts. */
 export function initializeProgression(
   hero: Hero,
   config: SimulationConfig,
+  mode: SkillMode = 'custom',
 ): boolean {
   if (!config.progression?.schools[hero.schoolId]) return false;
-  hero.progression = { revision: 0, ranks: {} };
+  const branchId = config.progression.schools[hero.schoolId]!.basicIds[0]!;
+  const branch = config.progression.defaultBranches?.[branchId];
+  if (mode === 'default' && !branch) return false;
+  hero.progression = {
+    revision: 0,
+    ranks: {},
+    mode,
+    branchId,
+    defaultSkills: [...(branch?.skillIds ?? [])],
+  };
   hero.skillIds = ['', '', '', ''];
   hero.skillCooldowns = [0, 0, 0, 0];
   hero.basicId = config.progression.schools[hero.schoolId]!.basicIds[0]!;
+  if (mode === 'default') applyAutomaticProgression(hero, config);
   refreshCharacter(hero, config);
   hero.hp = hero.maxHp;
   hero.mana = hero.maxMana;
@@ -200,7 +245,11 @@ export function gainExperience(
     Math.floor(hero.xp / config.xpPerLevel) + 1,
   );
   if (hero.progression) {
-    if (hero.level !== oldLevel) hero.progression.revision++;
+    if (hero.level !== oldLevel) {
+      hero.progression.revision++;
+      if (hero.progression.mode === 'default')
+        applyAutomaticProgression(hero, config);
+    }
     refreshCharacter(hero, config);
   } else {
     hero.skillPoints = hero.level;
@@ -264,7 +313,31 @@ export function changeBuild(
     return 'Võ học đã thay đổi. Hãy thử lại với trạng thái mới.';
   let ids = [...(hero.skillIds ?? ['', '', '', ''])],
     ranks = { ...p.ranks },
-    basic = hero.basicId;
+    basic = hero.basicId,
+    mode = p.mode,
+    branchId = p.branchId,
+    defaultSkills = [...p.defaultSkills];
+  if (change.action === 'mode') {
+    if (!['default', 'custom'].includes(change.mode))
+      return 'Chế độ võ học không hợp lệ.';
+    mode = change.mode;
+    if (mode === 'default') basic = branchId;
+  }
+  if (
+    change.action === 'branch' ||
+    (change.action === 'basic' && mode === 'default')
+  ) {
+    if (mode !== 'default') return 'Chọn nhánh tự động trong chế độ Mặc định.';
+    const branch = def.defaultBranches?.[change.basicId];
+    if (
+      !branch ||
+      branch.schoolId !== hero.schoolId ||
+      !profile.basicIds.includes(change.basicId)
+    )
+      return 'Nhánh võ học không thuộc môn phái của bạn.';
+    branchId = basic = change.basicId;
+    defaultSkills = [...branch.skillIds];
+  }
   if (change.action === 'loadout') {
     ids = [...change.ids];
     if (
@@ -282,10 +355,21 @@ export function changeBuild(
     }
     if (ids.filter((id) => def.skills[id]?.ultimate).length > def.maxUltimates)
       return 'Chỉ được trang bị một tuyệt kỹ.';
-    ranks = Object.fromEntries(
-      ids.filter(Boolean).map((id) => [id, p.ranks[id] ?? 0]),
-    );
+    if (mode === 'default') {
+      const branch = def.defaultBranches?.[branchId];
+      if (
+        !branch ||
+        ids.some((id) => !id || def.skills[id]?.style !== branch.style)
+      )
+        return 'Chế độ Mặc định chỉ cho phép bốn kỹ năng cùng nhánh.';
+      defaultSkills = [...ids];
+    } else
+      ranks = Object.fromEntries(
+        ids.filter(Boolean).map((id) => [id, p.ranks[id] ?? 0]),
+      );
   } else if (change.action === 'upgrade') {
+    if (mode === 'default')
+      return 'Chế độ Mặc định tự phân điểm theo ô Q → W → E → R.';
     const skill = Object.hasOwn(def.skills, change.skillId)
       ? def.skills[change.skillId]
       : undefined;
@@ -302,15 +386,23 @@ export function changeBuild(
     if (pointAccounting(hero, config).available < 1)
       return 'Không đủ điểm kỹ năng.';
     ranks[change.skillId] = next;
-  } else if (change.action === 'reset')
+  } else if (change.action === 'reset') {
+    if (mode === 'default') return 'Chuyển sang Tùy chỉnh để tự phân lại điểm.';
     ranks = Object.fromEntries(ids.filter(Boolean).map((id) => [id, 0]));
-  else if (change.action === 'basic') {
+  } else if (change.action === 'basic') {
     if (
       !profile.basicIds.includes(change.basicId) ||
       !Object.hasOwn(config.basics, change.basicId)
     )
       return 'Đòn đánh không thuộc môn phái của bạn.';
     basic = change.basicId;
+  }
+  if (mode === 'default') {
+    const branch = def.defaultBranches?.[branchId];
+    if (!branch || branch.schoolId !== hero.schoolId)
+      return 'Nhánh võ học chưa mở.';
+    ranks = automaticRanks(defaultSkills, hero.level, config);
+    ids = defaultSkills.map((id) => (ranks[id] ? id : ''));
   }
   if (Object.values(ranks).reduce((a, b) => a + b, 0) > hero.level)
     return 'Vượt quá số điểm đã nhận.';
@@ -332,6 +424,9 @@ export function changeBuild(
   hero.skillIds = ids;
   hero.skillCooldowns = ids.map((id) => hero.abilityCooldowns![id] ?? 0);
   hero.basicId = basic;
+  p.mode = mode;
+  p.branchId = branchId;
+  p.defaultSkills = defaultSkills;
   p.ranks = ranks;
   p.revision++;
   refreshCharacter(hero, config);

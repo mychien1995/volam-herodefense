@@ -1,0 +1,112 @@
+{
+  "verifiedOn": "2026-11-01",
+  "timezone": "Asia/Saigon",
+  "branch": "wip/m3d/small-game-play-change",
+  "runtimeCodeChangedAfterFinalPipeline": false,
+  "checks": {
+    "typecheck": "PASS",
+    "workflow": {
+      "passed": 8
+    },
+    "unitIntegration": {
+      "passed": 353,
+      "files": 30
+    },
+    "productionBuild": "PASS",
+    "assetValidators": {
+      "passed": 12
+    },
+    "browser": {
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 205.325358
+    }
+  },
+  "commands": [
+    {
+      "command": "pnpm check:final --config playwright.small-gameplay.config.ts",
+      "result": "Typecheck, workflow, all unit/integration, build and all asset validators passed; browser11/12. One test-only movement-settle assertion failed."
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit",
+      "result": "PASS after test-only helper updates"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.small-gameplay.config.ts",
+      "result": "Final browser rerun PASS12/12, no retries"
+    }
+  ],
+  "environment": {
+    "node": "26.0.0",
+    "pnpm": "11.25.0",
+    "phaser": "4.2.1",
+    "colyseusCore": "0.18.23",
+    "schema": "5.0.42",
+    "sdk": "0.18.8",
+    "browser": "Playwright Chromium",
+    "serverPort": 2667,
+    "fixturePort": 2668,
+    "clientPort": 5207,
+    "clientBuildEndpoint": "VITE_SERVER_URL=http://127.0.0.1:2667"
+  },
+  "fixtureLimits": [
+    "Controlled XP/position/death/one-HP target setup exists only in tests/e2e/small-gameplay-service.mjs, never production routes.",
+    "One keyboard kill validates actual reward-triggered Lv2/W learning; larger-level and death-boundary tests use explicit authoritative fixtures.",
+    "No full campaign, numerical rebalance, new art generation or new director approval.",
+    "Original checkout uncommitted forest-art work is preserved separately."
+  ],
+  "recording": {
+    "video": "off",
+    "trace": "off",
+    "pngs": {
+      "death-local.png": {
+        "sha256": "088de36f895ca70525a1a02a19177fbfb983e1bea95045afe1f614e989b2c497",
+        "bytes": 400122
+      },
+      "door-desert.png": {
+        "sha256": "eb034335d3f2cd435c6f6e72f9e640d7636e4320f0bbeac0f8fc10e2f1ac59db",
+        "bytes": 566763
+      },
+      "door-forest.png": {
+        "sha256": "c7b921a43d8e77cbebd617118d2ca2c7853a9fdbfa8444271856fd4f362cd623",
+        "bytes": 629762
+      },
+      "quit-confirm.png": {
+        "sha256": "9a6a6be477d9c9f45b7908ff6b58745b6bdc8bd61171f43dc12286cc74abaa10",
+        "bytes": 679091
+      },
+      "selection-1280.png": {
+        "sha256": "f2e2d40dd599c47767c37ec2a2465d484827766a3a40c5af50db78d53b317219",
+        "bytes": 752708
+      },
+      "selection-1920.png": {
+        "sha256": "76f8e9f3d574e394834af7ad92c54e41878dddf72fe3cd02e54c77dd6b5b0032",
+        "bytes": 2227715
+      },
+      "selection-944.png": {
+        "sha256": "2166bc71f822aa4524432599de56cc5b5093201b5e896fd7e7a5bd1888add38c",
+        "bytes": 337556
+      },
+      "skills-custom-1280.png": {
+        "sha256": "62d80608be480a1477b6ffd75dbb80ecb1c8b50956df47ed6390cc66786e8e3d",
+        "bytes": 457404
+      },
+      "skills-default-1280.png": {
+        "sha256": "25277841f80d80bc8db48e64028e5a7bb156da413ca99dc7ccc9a8000403bea9",
+        "bytes": 454028
+      }
+    }
+  },
+  "visualReview": [
+    "selection-944.png",
+    "selection-1280.png",
+    "selection-1920.png",
+    "skills-default-1280.png",
+    "skills-custom-1280.png",
+    "door-forest.png",
+    "door-desert.png",
+    "death-local.png",
+    "quit-confirm.png"
+  ]
+}

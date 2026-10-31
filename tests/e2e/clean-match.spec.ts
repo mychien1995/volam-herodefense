@@ -21,10 +21,10 @@ test('approved monk avatar, clean spawn, unnamed creeps and synchronized next-wa
   try {
     await joinWaiting(a, 'Monk');
     await joinWaiting(b, 'Observer', (await read(a)).roomId);
-    await a.getByRole('button', { name: 'Start Game', exact: true }).click();
+    await a.getByRole('button', { name: 'Bắt đầu', exact: true }).click();
     for (const p of pages) {
       await expect(p.locator('#pregame .pre-title')).toHaveText(
-        'School Selection',
+        'Chọn môn phái',
       );
       await expect(p.locator('[data-school=thieu_lam] [role=img]')).toHaveCSS(
         'background-image',
@@ -35,9 +35,7 @@ test('approved monk avatar, clean spawn, unnamed creeps and synchronized next-wa
     await a.locator('[data-school=thieu_lam]').click();
     await b.locator('[data-school=cai_bang]').click();
     for (const p of pages)
-      await p
-        .getByRole('button', { name: 'Confirm Selection', exact: true })
-        .click();
+      await p.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     for (const p of pages) await expect(p.locator('#pregame')).toBeHidden();
     for (const p of pages) {
       expect(Object.keys((await read(p)).state.creeps)).toHaveLength(0);

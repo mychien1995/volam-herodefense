@@ -242,7 +242,9 @@ test('dungeon warning, overlapping waves, persistent statue damage, responsive H
     expect((await read(a)).state.tick).toBe(s.state.tick);
     await a.screenshot({ path: `${evidence}/defeat-1920.png` });
     await a.getByRole('button', { name: 'Rời trận', exact: true }).click();
-    await expect(a.locator('#pregame .pre-title')).toHaveText('Room Browser');
+    await expect(a.locator('#pregame .pre-title')).toHaveText(
+      'Danh sách phòng',
+    );
     expect(errors.flat()).toEqual([]);
   } finally {
     await ca.close();

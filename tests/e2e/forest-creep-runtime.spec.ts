@@ -84,7 +84,7 @@ test('controlled server forest types reach the normal renderer; event dedup and 
             return s.state.players[s.sessionId].zoneId;
           })
           .toBe('forest_shared');
-        await expect(p.locator('#zone-status')).toContainText('placeholder');
+        await expect(p.locator('#zone-status')).toContainText('hình tạm');
       }),
     );
     const call = async (params: Record<string, string>) => {
@@ -208,7 +208,7 @@ test('controlled server forest types reach the normal renderer; event dedup and 
       call({ archetype: 'son_vien', pose: 'basic_attack', emit: 'attack' }),
     ]);
     await second.dispose();
-    await pages[0]!.getByRole('button', { name: 'Quit', exact: true }).click();
+    await pages[0]!.getByRole('button', { name: 'Thoát', exact: true }).click();
     await expect(pages[0]!.locator('#pregame')).toBeVisible();
     await expect
       .poll(async () => (await inspect(pages[0]!)).actors.length)

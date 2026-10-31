@@ -1,3 +1,4 @@
+import { initializeProgression } from '@volam/game-core';
 import { afterAll, afterEach, beforeAll, it, expect } from 'vitest';
 import { ColyseusTestServer } from '@colyseus/testing';
 import { Client } from '@colyseus/sdk';
@@ -48,7 +49,7 @@ const opts = (nickname: string) => ({
 const create = (name: string) =>
   client.create<LobbyState>(MATCH_ROOM, opts(name));
 type Peer = Awaited<ReturnType<typeof create>>;
-async function start(a: Peer, b?: Peer) {
+async function start(a: Peer, b?: Peer, custom = true) {
   await expect.poll(() => a.state.players?.size).toBe(b ? 2 : 1);
   a.send('lobby-action', { action: 'start' });
   await expect.poll(() => a.state.phase).toBe('SCHOOL_SELECTION');
@@ -57,6 +58,17 @@ async function start(a: Peer, b?: Peer) {
     p.send('lobby-action', { action: 'confirm' });
   }
   await expect.poll(() => a.state.phase).toBe('IN_GAME');
+  if (!custom) return;
+  const authority = server.getRoomById<MatchRoom>(a.roomId);
+  for (const peer of b ? [a, b] : [a])
+    initializeProgression(
+      authority.simulation.hero(peer.sessionId)!,
+      m1Config,
+      'custom',
+    );
+  await expect
+    .poll(() => a.state.players.get(a.sessionId)!.build.mode)
+    .toBe('custom');
 }
 function send(
   p: Peer,
@@ -183,7 +195,7 @@ it('rejects replay, stale concurrent upgrades, forged values, foreign IDs and po
     kind: 'dev-loadout',
     ids: ['hang_long_hoa_vu', '', '', ''],
   });
-  expect((await denial).reason).toContain('disabled');
+  expect((await denial).reason).toContain('đang tắt');
 });
 it('rejects all build changes inside a dungeon, preserves state on exit, then allows a free arena reset', async () => {
   const a = await create('A');
@@ -294,7 +306,7 @@ it('ignores legacy and arbitrary loadout environment flags in production rooms',
     delete process.env['VOLAM_DEV_LEGACY_SKILLS'];
   }
 });
-it('starts Thiếu Lâm with empty active slots and rejects foreign build requests', async () => {
+it('starts Thiếu Lâm with its first automatic active and rejects foreign build requests', async () => {
   const a = await create('Future school');
   await expect.poll(() => a.state.players?.size).toBe(1);
   a.send('lobby-action', { action: 'start' });
@@ -302,7 +314,7 @@ it('starts Thiếu Lâm with empty active slots and rejects foreign build reques
   a.send('lobby-action', { action: 'select', schoolId: 'thieu_lam' });
   a.send('lobby-action', { action: 'confirm' });
   await expect.poll(() => a.state.phase).toBe('IN_GAME');
-  expect(a.state.players.get(a.sessionId)!.qSkill).toBe('');
+  expect(a.state.players.get(a.sessionId)!.qSkill).toBe('la_han_quyen');
   const refusal = a.waitForMessage('command-rejected');
   send(a, { action: 'loadout', ids: ['hoa_van_chuong', '', '', ''] }, 1);
   expect((await refusal).reason).toContain('không thuộc');
@@ -311,7 +323,48 @@ it('starts Thiếu Lâm with empty active slots and rejects foreign build reques
     protocolVersion: PROTOCOL_VERSION,
     sequence: 2,
     kind: 'cast',
-    slot: 0,
+    slot: 1,
   });
   expect((await cast).reason).toContain('chưa trang bị');
+});
+
+it('normal clients receive automatic slot ranks and both peers observe level2 W, branch changes and rejected dungeon respec', async () => {
+  const a = await create('Tự động'),
+    b = await client.joinById<LobbyState>(a.roomId, opts('Đồng đội'));
+  await start(a, b, false);
+  await expect
+    .poll(() => b.state.players.get(a.sessionId)!.build.mode)
+    .toBe('default');
+  const h = a.state.players.get(a.sessionId)!;
+  expect(h.qSkill).toBe('hoanh_tao_bong');
+  expect(h.wSkill).toBe('');
+  expect(h.build.allocated).toBe(1);
+  const authority = server.getRoomById<MatchRoom>(a.roomId);
+  gainExperience(authority.simulation.hero(a.sessionId)!, 60, m1Config);
+  await expect
+    .poll(() => b.state.players.get(a.sessionId)!.wSkill)
+    .toBe('pha_giap_bong');
+  expect(
+    b.state.players.get(a.sessionId)!.build.ranks.get('pha_giap_bong'),
+  ).toBe(1);
+  expect(b.state.players.get(b.sessionId)!.level).toBe(1);
+  await commit(a, { action: 'branch', basicId: 'cai_bang_chuong' }, 1);
+  await expect
+    .poll(() => b.state.players.get(a.sessionId)!.qSkill)
+    .toBe('hoa_van_chuong');
+  a.send('dungeon-action', {
+    action: 'enter',
+    access: 'shared',
+    sequence: 2,
+    protocolVersion: PROTOCOL_VERSION,
+  });
+  await expect
+    .poll(() => a.state.players.get(a.sessionId)!.zoneId)
+    .not.toBe('arena');
+  const refusals: Array<{ reason: string }> = [];
+  a.onMessage('command-rejected', (m) => refusals.push(m));
+  send(a, { action: 'mode', mode: 'custom' }, 3);
+  await expect.poll(() => refusals.length).toBe(1);
+  expect(refusals[0]!.reason).toMatch(/đấu trường/);
+  expect(a.state.players.get(a.sessionId)!.build.mode).toBe('default');
 });

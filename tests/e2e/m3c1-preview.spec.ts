@@ -19,15 +19,16 @@ test('M3C1 runtime preview: all ten wind skills, both melee basics and four dash
   async function join(p: typeof a, name: string, room?: string) {
     await p.goto('/?debug=1&skillPreview=1');
     await p.locator('#pre-nickname').fill(name);
-    await p.getByRole('button', { name: 'Enter Game', exact: true }).click();
+    await p.getByRole('button', { name: 'Vào game', exact: true }).click();
     if (room) {
-      await p.getByLabel('Room code', { exact: true }).fill(room);
       await p
-        .getByRole('button', { name: 'Join by code', exact: true })
-        .click();
+        .locator('#pregame')
+        .getByLabel('Mã phòng', { exact: true })
+        .fill(room);
+      await p.getByRole('button', { name: 'Vào bằng mã', exact: true }).click();
     } else
-      await p.getByRole('button', { name: 'Create room', exact: true }).click();
-    await expect(p.locator('#pregame .pre-title')).toHaveText('Waiting Lobby');
+      await p.getByRole('button', { name: 'Tạo phòng', exact: true }).click();
+    await expect(p.locator('#pregame .pre-title')).toHaveText('Phòng chờ');
   }
   try {
     await join(a, 'Fire observer');
@@ -219,20 +220,19 @@ test('M3C1 six-player mixed-school effects keep caster ownership, scale and feet
       const p = pages[i]!;
       await p.goto('/?debug=1&skillPreview=1');
       await p.locator('#pre-nickname').fill('Party ' + (i + 1));
-      await p.getByRole('button', { name: 'Enter Game', exact: true }).click();
+      await p.getByRole('button', { name: 'Vào game', exact: true }).click();
       if (room) {
-        await p.getByLabel('Room code', { exact: true }).fill(room);
         await p
-          .getByRole('button', { name: 'Join by code', exact: true })
+          .locator('#pregame')
+          .getByLabel('Mã phòng', { exact: true })
+          .fill(room);
+        await p
+          .getByRole('button', { name: 'Vào bằng mã', exact: true })
           .click();
       } else {
-        await p
-          .getByRole('button', { name: 'Create room', exact: true })
-          .click();
+        await p.getByRole('button', { name: 'Tạo phòng', exact: true }).click();
       }
-      await expect(p.locator('#pregame .pre-title')).toHaveText(
-        'Waiting Lobby',
-      );
+      await expect(p.locator('#pregame .pre-title')).toHaveText('Phòng chờ');
       if (!room) room = (await read(p)).roomId;
     }
     await startTogether(pages, schools);

@@ -1,0 +1,47 @@
+{
+  "date": "2026-11-01",
+  "targetBranch": "milestone/m3d",
+  "targetBeforeMerge": "52c6c46e46e39104e6bd24cb1ee26a83230c7b9e",
+  "sourceBranch": "wip/m3d/small-game-play-change",
+  "sourceCommit": "a714bab5c537250f8a4d69427cbba78e89e5257b",
+  "validationScope": "affected tests only, as requested; no check:final or full suite rerun",
+  "commands": [
+    {
+      "command": "pnpm check:quick tests/default-builds.test.ts tests/progression.test.ts tests/progression-room.test.ts tests/dungeons.test.ts tests/dungeon-room.test.ts tests/desert-dungeon.test.ts tests/invasions.test.ts tests/invasion-room.test.ts tests/room.test.ts tests/protocol.test.ts tests/skill-room.test.ts tests/thien-son-room.test.ts tests/vo-dang-room.test.ts tests/thieu-lam-room.test.ts tests/forest-creep-art.test.ts",
+      "result": "PASS",
+      "tests": 152,
+      "files": 15
+    },
+    {
+      "command": "node --test scripts/tests/qa-session.test.mjs scripts/tests/qa-wait.test.mjs",
+      "result": "PASS",
+      "tests": 10
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit",
+      "result": "PASS"
+    },
+    {
+      "command": "pnpm check:browser --config playwright.small-gameplay.config.ts",
+      "result": "PASS",
+      "tests": 12,
+      "durationSeconds": 203.83
+    },
+    {
+      "command": "python -X utf8 scripts/verify-forest-creeps.py",
+      "result": "PASS",
+      "scope": "static assets and approval locks only"
+    }
+  ],
+  "qaEnvironment": {
+    "VOLAM_QA_SESSION": "small-gameplay-integration",
+    "VOLAM_QA_PLAYWRIGHT_OUTPUT": "D:/Projects/volam-hero-defense/artifacts/small-gameplay-integration",
+    "VITE_SERVER_URL": "http://127.0.0.1:2667"
+  },
+  "concurrentWork": "Unstaged main.ts animation-review changes and untracked animation-review files appeared during testing; excluded from merge commit. Tested production build predates these source edits.",
+  "limitations": [
+    "Did not rerun unrelated art/browser suites or balance simulations.",
+    "Static forest validator does not establish normal forest roster integration; existing approved-art runtime gate is preserved."
+  ],
+  "videoGenerated": false
+}

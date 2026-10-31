@@ -1,3 +1,4 @@
+import { initializeProgression } from '@volam/game-core';
 import { afterAll, afterEach, beforeAll, it, expect } from 'vitest';
 import { ColyseusTestServer } from '@colyseus/testing';
 import { Client } from '@colyseus/sdk';
@@ -43,6 +44,16 @@ async function start(a: Peer, b: Peer) {
   b.send('lobby-action', { action: 'select', schoolId: 'thien_son' });
   b.send('lobby-action', { action: 'confirm' });
   await expect.poll(() => b.state.phase).toBe('IN_GAME');
+  const authority = server.getRoomById<MatchRoom>(a.roomId);
+  for (const peer of [a, b])
+    initializeProgression(
+      authority.simulation.hero(peer.sessionId)!,
+      m1Config,
+      'custom',
+    );
+  await expect
+    .poll(() => b.state.players.get(b.sessionId)!.build.mode)
+    .toBe('custom');
 }
 let seq = 0;
 async function build(p: Peer, c: BuildChange) {

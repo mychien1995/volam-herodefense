@@ -1,3 +1,9 @@
+## Small gameplay UI amendment — 2026-10-31
+
+Current user changes supersede older English copy and utility order: Vietnamese UI, Quit first at the left edge of the existing utility group, then Settings/Phó Bản/Thương Gia/Lôi Đài. Quit opens an in-viewport confirmation with Stay/Leave actions. P toggles Võ Học without intercepting text/select input or other modal ownership. Dungeon doors use proximity plus Space, with an in-viewport prompt; portal clicks no longer exit. Local death desaturates the world canvas while the respawn message and HUD stay readable.
+
+School selection retains four portraits but shows only element, brief identity and branch names; Leave left/Confirm right and all six roster entries fit the supported desktop views without scrolling. Võ Học shows Default/Custom, branch and slot ranks using retained icons. Default starts new players with automatic left-to-right point allocation; Custom retains existing manual controls. See docs/SMALL_GAMEPLAY_CHANGES.md for limits and acceptance.
+
 # Võ Lâm Hero Defense — In-game UI / UX specification v1.4
 
 ## ART-01 compact HUD amendment — 2026-10-30
