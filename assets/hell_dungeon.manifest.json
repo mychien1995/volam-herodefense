@@ -1,0 +1,2346 @@
+{
+  "status": "prototype_pending_runtime_director_review",
+  "sourceManifest": "assets/concepts/dungeon-environments/hell/hell_asset_manifest.json",
+  "provenance": {
+    "tool": "OpenAI built-in image_gen.imagegen",
+    "method": "Original raster generation, PNG cel extraction, nearest sampling, metadata packaging.",
+    "license": "Original AI-assisted project artwork. No external commercial pack imported; no separate third-party license or exclusive copyright asserted.",
+    "promptFile": "assets/concepts/dungeon-environments/hell/generation_prompts.json",
+    "sourceFiles": [
+      "exec-fe21a1fd-f942-457f-951c-3a8f6f972f4c.png",
+      "exec-d2479ad3-1277-44b6-bbde-db679432171a.png",
+      "exec-5032b192-7032-4adc-b488-fe263f460e9f.png",
+      "exec-d33a4f10-7b14-4957-a5d5-7004faff49a8.png",
+      "exec-04e84b47-5cff-432d-ae1a-b1d986d050c4.png",
+      "exec-b2c6104a-ba09-42e1-98b3-5d8fb4ae39fa.png",
+      "exec-85b45c16-7772-46d1-94b1-3422610e833b.png",
+      "exec-8fa31fb0-7e23-454b-820c-667bcb55ecbc.png",
+      "exec-73a69b44-2e75-4eb5-a3dc-917728db649c.png",
+      "exec-d96ee2ef-1074-4fcd-a247-d0a2c03cc310.png",
+      "exec-109e3c7f-51ef-494d-a4c6-3c9faa47f4fe.png",
+      "exec-d224f871-07d5-48ee-9bc2-eea841f34718.png",
+      "exec-cebd6f71-2480-4b74-8110-957554550e6d.png",
+      "exec-cd4222be-47bc-4710-a35f-5b9e4fb81656.png",
+      "exec-a904009f-4095-4ac4-9750-0d45642af721.png",
+      "exec-6ea52c33-7a27-4f55-bb3f-90d1de1ecfc8.png",
+      "exec-acb5260c-0d68-4aff-ab1b-3c7d2a33a1d5.png",
+      "exec-e4170fef-c4ea-422c-bccf-274664a4cdf7.png",
+      "exec-cd52c9eb-acbd-474c-ac99-533cfd109af2.png",
+      "exec-e071ad90-a7a2-4bb2-9756-9bbd87af3d1e.png",
+      "exec-0ad2206b-90b1-48e5-8b04-a88257004346.png",
+      "exec-b36f251d-1935-4936-9a08-b834e8f032b0.png",
+      "exec-6eff7791-7db3-41a3-800b-dcfc8ad99305.png",
+      "exec-6cd50436-26c6-4eda-8c84-4ff15ba1cacb.png",
+      "exec-fa79c94e-a87e-4dac-8a03-613887a15f02.png"
+    ],
+    "referencesInspected": [
+      "assets/concept/arena-v2-approved.png",
+      "assets/concepts/dungeon-environments/bamboo-forest/dungeon-overview.png",
+      "assets/exports/bamboo_forest/terrain.png",
+      "assets/exports/bamboo_forest/scenery.png",
+      "assets/exports/characters/hero_vo_dang_idle.png",
+      "assets/references/vo_dang_character_reference.png",
+      "assets/references/hell_dungeon_reference.png",
+      "assets/concepts/arena-creeps/waves-13-16/arena_creeps_13_16_concept_sheet.png",
+      "assets/concepts/arena-creeps/waves-09-12/thach_nhan_concept.png",
+      "assets/concepts/arena-creeps/waves-01-04/arena_creeps_01_04_master_v1.png"
+    ],
+    "unavailableReferences": [
+      "Bamboo creep package absent",
+      "Desert directories empty at inspection",
+      "Beach art package absent",
+      "assets/references/vo_dang_art_direction_reference.png absent; used actual vo_dang_character_reference.png"
+    ]
+  },
+  "gameplay": "Existing generic M2A melee tuning. No lava damage, fireball, curse, summon, flight or boss mechanics.",
+  "assets": [
+    {
+      "id": "hell_xich_quy",
+      "archetypeId": "hell_xich_quy",
+      "wave": 0,
+      "slug": "hell_xich_quy",
+      "nameVi": "Xích Quỷ",
+      "status": "prototype",
+      "bodyHeight": 36,
+      "footPivot": [
+        0.5,
+        0.8
+      ],
+      "frameSize": [
+        80,
+        80
+      ],
+      "groundAnchorPx": [
+        40,
+        64
+      ],
+      "sharedStates": [
+        "hurt",
+        "death"
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "shared",
+          "frames": [
+            "hurt_shared_0",
+            "hurt_shared_1"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": 0,
+          "durations": [
+            120,
+            120
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "shared",
+          "frames": [
+            "death_shared_0",
+            "death_shared_1",
+            "death_shared_2",
+            "death_shared_3"
+          ],
+          "frameRate": 6.666666666666667,
+          "repeat": 0,
+          "durations": [
+            150,
+            150,
+            150,
+            150
+          ]
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/hell/xich_quy_concept.png",
+      "sourceConceptSha256": "6a23b725d070ba012d4182172b5226b58ee526aaca45ab37ab1e5d22b0d18906",
+      "sourceRasters": [
+        "assets/sprites/creeps/dungeons/hell/xich_quy/source/locomotion_source.png",
+        "assets/sprites/creeps/dungeons/hell/xich_quy/source/attack_source.png",
+        "assets/sprites/creeps/dungeons/hell/xich_quy/source/initial_animation_source.png"
+      ],
+      "editableSource": "Retained source PNG rasters; no layered Aseprite source supplied."
+    },
+    {
+      "id": "hell_dia_nguc_khuyen",
+      "archetypeId": "hell_dia_nguc_khuyen",
+      "wave": 0,
+      "slug": "hell_dia_nguc_khuyen",
+      "nameVi": "Địa Ngục Khuyển",
+      "status": "prototype",
+      "bodyHeight": 42,
+      "footPivot": [
+        0.5,
+        0.7916666666666666
+      ],
+      "frameSize": [
+        128,
+        96
+      ],
+      "groundAnchorPx": [
+        64,
+        76
+      ],
+      "sharedStates": [
+        "hurt",
+        "death"
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "shared",
+          "frames": [
+            "hurt_shared_0",
+            "hurt_shared_1"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": 0,
+          "durations": [
+            120,
+            120
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "shared",
+          "frames": [
+            "death_shared_0",
+            "death_shared_1",
+            "death_shared_2",
+            "death_shared_3"
+          ],
+          "frameRate": 6.666666666666667,
+          "repeat": 0,
+          "durations": [
+            150,
+            150,
+            150,
+            150
+          ]
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/hell/dia_nguc_khuyen_concept.png",
+      "sourceConceptSha256": "c51c79b6b244b42057a3942a9bdafd7700d0430fe28fef99ec9d55aea253891e",
+      "sourceRasters": [
+        "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/source/locomotion_source.png",
+        "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/source/attack_source.png",
+        "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/source/initial_animation_source.png"
+      ],
+      "editableSource": "Retained source PNG rasters; no layered Aseprite source supplied."
+    },
+    {
+      "id": "hell_dung_nham_linh",
+      "archetypeId": "hell_dung_nham_linh",
+      "wave": 0,
+      "slug": "hell_dung_nham_linh",
+      "nameVi": "Dung Nham Linh",
+      "status": "prototype",
+      "bodyHeight": 50,
+      "footPivot": [
+        0.5,
+        0.8035714285714286
+      ],
+      "frameSize": [
+        112,
+        112
+      ],
+      "groundAnchorPx": [
+        56,
+        90
+      ],
+      "sharedStates": [
+        "hurt",
+        "death"
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "shared",
+          "frames": [
+            "hurt_shared_0",
+            "hurt_shared_1"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": 0,
+          "durations": [
+            120,
+            120
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "shared",
+          "frames": [
+            "death_shared_0",
+            "death_shared_1",
+            "death_shared_2",
+            "death_shared_3"
+          ],
+          "frameRate": 6.666666666666667,
+          "repeat": 0,
+          "durations": [
+            150,
+            150,
+            150,
+            150
+          ]
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/hell/dung_nham_linh_concept.png",
+      "sourceConceptSha256": "8df5b310404466ba3ca965c9255f7598e4dfd30f49e23160e5e20710dc6d79e3",
+      "sourceRasters": [
+        "assets/sprites/creeps/dungeons/hell/dung_nham_linh/source/locomotion_source.png",
+        "assets/sprites/creeps/dungeons/hell/dung_nham_linh/source/attack_source.png",
+        "assets/sprites/creeps/dungeons/hell/dung_nham_linh/source/initial_animation_source.png"
+      ],
+      "editableSource": "Retained source PNG rasters; no layered Aseprite source supplied."
+    },
+    {
+      "id": "hell_hac_viem_phap_su",
+      "archetypeId": "hell_hac_viem_phap_su",
+      "wave": 0,
+      "slug": "hell_hac_viem_phap_su",
+      "nameVi": "Hắc Viêm Pháp Sư",
+      "status": "prototype",
+      "bodyHeight": 54,
+      "footPivot": [
+        0.5,
+        0.8035714285714286
+      ],
+      "frameSize": [
+        128,
+        112
+      ],
+      "groundAnchorPx": [
+        64,
+        90
+      ],
+      "sharedStates": [
+        "hurt",
+        "death"
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "cast",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75
+          ]
+        },
+        {
+          "state": "projectile_release",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "cast",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75
+          ]
+        },
+        {
+          "state": "projectile_release",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "cast",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75
+          ]
+        },
+        {
+          "state": "projectile_release",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "cast",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75
+          ]
+        },
+        {
+          "state": "projectile_release",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "shared",
+          "frames": [
+            "hurt_shared_0",
+            "hurt_shared_1"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": 0,
+          "durations": [
+            120,
+            120
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "shared",
+          "frames": [
+            "death_shared_0",
+            "death_shared_1",
+            "death_shared_2",
+            "death_shared_3"
+          ],
+          "frameRate": 6.666666666666667,
+          "repeat": 0,
+          "durations": [
+            150,
+            150,
+            150,
+            150
+          ]
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/hell/hac_viem_phap_su_concept.png",
+      "sourceConceptSha256": "07646d46e60b05285cdae71a4c7acd5880eec6642876941abcfb8609b3694692",
+      "sourceRasters": [
+        "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/source/locomotion_source.png",
+        "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/source/attack_source.png",
+        "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/source/initial_animation_source.png"
+      ],
+      "editableSource": "Retained source PNG rasters; no layered Aseprite source supplied."
+    },
+    {
+      "id": "hell_hac_dien_nguu_ma",
+      "archetypeId": "hell_hac_dien_nguu_ma",
+      "wave": 0,
+      "slug": "hell_hac_dien_nguu_ma",
+      "nameVi": "Hắc Diện Ngưu Ma",
+      "status": "prototype",
+      "bodyHeight": 76,
+      "footPivot": [
+        0.5,
+        0.8375
+      ],
+      "frameSize": [
+        192,
+        160
+      ],
+      "groundAnchorPx": [
+        96,
+        134
+      ],
+      "sharedStates": [
+        "hurt",
+        "death"
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "shared",
+          "frames": [
+            "hurt_shared_0",
+            "hurt_shared_1"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": 0,
+          "durations": [
+            120,
+            120
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "shared",
+          "frames": [
+            "death_shared_0",
+            "death_shared_1",
+            "death_shared_2",
+            "death_shared_3"
+          ],
+          "frameRate": 6.666666666666667,
+          "repeat": 0,
+          "durations": [
+            150,
+            150,
+            150,
+            150
+          ]
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/hell/hac_dien_nguu_ma_concept.png",
+      "sourceConceptSha256": "62a4f525666690134de4290d92b92dcc0c0050cc4931b03308939fd3f1f12ffd",
+      "sourceRasters": [
+        "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/source/locomotion_source.png",
+        "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/source/attack_source.png",
+        "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/source/initial_animation_source.png"
+      ],
+      "editableSource": "Retained source PNG rasters; no layered Aseprite source supplied."
+    },
+    {
+      "id": "hell_dung_nham_cu_nhan",
+      "archetypeId": "hell_dung_nham_cu_nhan",
+      "wave": 0,
+      "slug": "hell_dung_nham_cu_nhan",
+      "nameVi": "Dung Nham Cự Nhân",
+      "status": "prototype",
+      "bodyHeight": 100,
+      "footPivot": [
+        0.5,
+        0.8541666666666666
+      ],
+      "frameSize": [
+        224,
+        192
+      ],
+      "groundAnchorPx": [
+        112,
+        164
+      ],
+      "sharedStates": [
+        "hurt",
+        "death"
+      ],
+      "animations": [
+        {
+          "state": "idle",
+          "direction": "down",
+          "frames": [
+            "idle_down_0",
+            "idle_down_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "down",
+          "frames": [
+            "walk_down_0",
+            "walk_down_1",
+            "walk_down_2",
+            "walk_down_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "down",
+          "frames": [
+            "basic_attack_down_0",
+            "basic_attack_down_1",
+            "basic_attack_down_2",
+            "basic_attack_down_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "left",
+          "frames": [
+            "idle_left_0",
+            "idle_left_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "left",
+          "frames": [
+            "walk_left_0",
+            "walk_left_1",
+            "walk_left_2",
+            "walk_left_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "left",
+          "frames": [
+            "basic_attack_left_0",
+            "basic_attack_left_1",
+            "basic_attack_left_2",
+            "basic_attack_left_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "right",
+          "frames": [
+            "idle_right_0",
+            "idle_right_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "right",
+          "frames": [
+            "walk_right_0",
+            "walk_right_1",
+            "walk_right_2",
+            "walk_right_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "right",
+          "frames": [
+            "basic_attack_right_0",
+            "basic_attack_right_1",
+            "basic_attack_right_2",
+            "basic_attack_right_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "idle",
+          "direction": "up",
+          "frames": [
+            "idle_up_0",
+            "idle_up_1"
+          ],
+          "frameRate": 2.857142857142857,
+          "repeat": -1,
+          "durations": [
+            350,
+            350
+          ]
+        },
+        {
+          "state": "walk",
+          "direction": "up",
+          "frames": [
+            "walk_up_0",
+            "walk_up_1",
+            "walk_up_2",
+            "walk_up_3"
+          ],
+          "frameRate": 10,
+          "repeat": -1,
+          "durations": [
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "state": "basic_attack",
+          "direction": "up",
+          "frames": [
+            "basic_attack_up_0",
+            "basic_attack_up_1",
+            "basic_attack_up_2",
+            "basic_attack_up_3"
+          ],
+          "frameRate": 13.333333333333334,
+          "repeat": 0,
+          "durations": [
+            75,
+            75,
+            75,
+            75
+          ]
+        },
+        {
+          "state": "hurt",
+          "direction": "shared",
+          "frames": [
+            "hurt_shared_0",
+            "hurt_shared_1"
+          ],
+          "frameRate": 8.333333333333334,
+          "repeat": 0,
+          "durations": [
+            120,
+            120
+          ]
+        },
+        {
+          "state": "death",
+          "direction": "shared",
+          "frames": [
+            "death_shared_0",
+            "death_shared_1",
+            "death_shared_2",
+            "death_shared_3"
+          ],
+          "frameRate": 6.666666666666667,
+          "repeat": 0,
+          "durations": [
+            150,
+            150,
+            150,
+            150
+          ]
+        }
+      ],
+      "sourceConcept": "assets/concepts/dungeon-creeps/hell/dung_nham_cu_nhan_concept.png",
+      "sourceConceptSha256": "ee9dc5487dd7f0e7622813664c4ee825dc5a9d50647e527f0405b754932009b1",
+      "sourceRasters": [
+        "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/source/locomotion_source.png",
+        "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/source/attack_source.png",
+        "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/source/initial_animation_source.png",
+        "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/source/reaction_source.png",
+        "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/source/front_windup_source.png"
+      ],
+      "editableSource": "Retained source PNG rasters; no layered Aseprite source supplied."
+    }
+  ],
+  "effects": [
+    {
+      "id": "hell_ember_particles",
+      "frames": [
+        "ember_particles_0",
+        "ember_particles_1",
+        "ember_particles_2",
+        "ember_particles_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_crimson_slash",
+      "frames": [
+        "crimson_slash_0",
+        "crimson_slash_1",
+        "crimson_slash_2",
+        "crimson_slash_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_fiery_bite",
+      "frames": [
+        "fiery_bite_0",
+        "fiery_bite_1",
+        "fiery_bite_2",
+        "fiery_bite_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_ember_trail",
+      "frames": [
+        "ember_trail_0",
+        "ember_trail_1",
+        "ember_trail_2",
+        "ember_trail_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_molten_projectile",
+      "frames": [
+        "molten_projectile_0",
+        "molten_projectile_1",
+        "molten_projectile_2",
+        "molten_projectile_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": "right",
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_lava_impact",
+      "frames": [
+        "lava_impact_0",
+        "lava_impact_1",
+        "lava_impact_2",
+        "lava_impact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_black_flame_projectile",
+      "frames": [
+        "black_flame_projectile_0",
+        "black_flame_projectile_1",
+        "black_flame_projectile_2",
+        "black_flame_projectile_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": "right",
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_violet_black_impact",
+      "frames": [
+        "violet_black_impact_0",
+        "violet_black_impact_1",
+        "violet_black_impact_2",
+        "violet_black_impact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_dark_sigil",
+      "frames": [
+        "dark_sigil_0",
+        "dark_sigil_1",
+        "dark_sigil_2",
+        "dark_sigil_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_heavy_impact",
+      "frames": [
+        "heavy_impact_0",
+        "heavy_impact_1",
+        "heavy_impact_2",
+        "heavy_impact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_stone_fragments",
+      "frames": [
+        "stone_fragments_0",
+        "stone_fragments_1",
+        "stone_fragments_2",
+        "stone_fragments_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_crimson_weapon_trail",
+      "frames": [
+        "crimson_weapon_trail_0",
+        "crimson_weapon_trail_1",
+        "crimson_weapon_trail_2",
+        "crimson_weapon_trail_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_lava_splash",
+      "frames": [
+        "lava_splash_0",
+        "lava_splash_1",
+        "lava_splash_2",
+        "lava_splash_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_molten_shockwave",
+      "frames": [
+        "molten_shockwave_0",
+        "molten_shockwave_1",
+        "molten_shockwave_2",
+        "molten_shockwave_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_infernal_death_particles",
+      "frames": [
+        "infernal_death_particles_0",
+        "infernal_death_particles_1",
+        "infernal_death_particles_2",
+        "infernal_death_particles_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    },
+    {
+      "id": "hell_fire_impact",
+      "frames": [
+        "fire_impact_0",
+        "fire_impact_1",
+        "fire_impact_2",
+        "fire_impact_3"
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "projectileDirection": null,
+      "presentationOnly": true,
+      "texture": "hell_fx"
+    }
+  ],
+  "scenery": [
+    {
+      "id": "volcanic_rocks",
+      "size": [
+        96,
+        96
+      ],
+      "pivot": [
+        48,
+        92
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/volcanic_rocks.png"
+    },
+    {
+      "id": "obsidian_cliff",
+      "size": [
+        160,
+        144
+      ],
+      "pivot": [
+        80,
+        140
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/obsidian_cliff.png"
+    },
+    {
+      "id": "stone_spikes",
+      "size": [
+        96,
+        112
+      ],
+      "pivot": [
+        48,
+        108
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/stone_spikes.png"
+    },
+    {
+      "id": "demonic_pillar",
+      "size": [
+        80,
+        160
+      ],
+      "pivot": [
+        40,
+        156
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/demonic_pillar.png"
+    },
+    {
+      "id": "fortress_wall",
+      "size": [
+        160,
+        112
+      ],
+      "pivot": [
+        80,
+        108
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/fortress_wall.png"
+    },
+    {
+      "id": "temple_gateway",
+      "size": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        188
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/temple_gateway.png"
+    },
+    {
+      "id": "cursed_altar",
+      "size": [
+        144,
+        112
+      ],
+      "pivot": [
+        72,
+        108
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/cursed_altar.png"
+    },
+    {
+      "id": "guardian_statue",
+      "size": [
+        112,
+        160
+      ],
+      "pivot": [
+        56,
+        156
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/guardian_statue.png"
+    },
+    {
+      "id": "burning_brazier",
+      "size": [
+        64,
+        96
+      ],
+      "pivot": [
+        32,
+        92
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/burning_brazier.png"
+    },
+    {
+      "id": "hanging_chains",
+      "size": [
+        96,
+        128
+      ],
+      "pivot": [
+        48,
+        124
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/hanging_chains.png"
+    },
+    {
+      "id": "iron_gate",
+      "size": [
+        176,
+        128
+      ],
+      "pivot": [
+        88,
+        124
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/iron_gate.png"
+    },
+    {
+      "id": "charred_tree",
+      "size": [
+        144,
+        160
+      ],
+      "pivot": [
+        72,
+        156
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/charred_tree.png"
+    },
+    {
+      "id": "skeletal_remains",
+      "size": [
+        96,
+        64
+      ],
+      "pivot": [
+        48,
+        60
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/skeletal_remains.png"
+    },
+    {
+      "id": "cursed_banner",
+      "size": [
+        80,
+        144
+      ],
+      "pivot": [
+        40,
+        140
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/cursed_banner.png"
+    },
+    {
+      "id": "fire_pit",
+      "size": [
+        96,
+        80
+      ],
+      "pivot": [
+        48,
+        76
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/fire_pit.png"
+    },
+    {
+      "id": "hell_entrance",
+      "size": [
+        192,
+        192
+      ],
+      "pivot": [
+        96,
+        188
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/hell_entrance.png"
+    },
+    {
+      "id": "hell_exit_portal",
+      "size": [
+        160,
+        176
+      ],
+      "pivot": [
+        80,
+        172
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/hell_exit_portal.png"
+    },
+    {
+      "id": "charred_decorations",
+      "size": [
+        96,
+        64
+      ],
+      "pivot": [
+        48,
+        60
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/charred_decorations.png"
+    },
+    {
+      "id": "fortress_wall_north",
+      "size": [
+        160,
+        128
+      ],
+      "pivot": [
+        80,
+        124
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/fortress_wall_north.png"
+    },
+    {
+      "id": "stone_bridge",
+      "size": [
+        192,
+        144
+      ],
+      "pivot": [
+        96,
+        140
+      ],
+      "layer": "feet_y_sort",
+      "originalFile": "assets/sprites/environment/hell/stone_bridge.png"
+    }
+  ],
+  "files": {
+    "assets/tilesets/hell/terrain.png": "39a00d50c21cd7bcecd163b9913a0cc40f20fe5a3b2aeb5836aeeb73f59290a6",
+    "assets/tilesets/hell/terrain.tsj": "008499be3238f4da9fd9ae3e4299dd11245df2771434663425b93c390c36dfbd",
+    "assets/sprites/environment/hell/props_atlas.png": "f7cb9d2b448b3412e3cfcec832736d47f05688046f1fd285b76de9efb687f7f8",
+    "assets/sprites/environment/hell/props_atlas.json": "436037485885b9c7131364ebc75480382dd17175b975cf107e7cdfa89c3a8815",
+    "assets/sprites/creeps/dungeons/hell/xich_quy/spritesheet.png": "3173020396e22a5a0b2f897367c0cd3fa364426c597629278b38e6d454e5ccf5",
+    "assets/sprites/creeps/dungeons/hell/xich_quy/atlas.json": "b06046a1f6be65f0afafe59a60c15d6e02cb1ce1dfab95db4a018e689d4334fe",
+    "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/spritesheet.png": "a8887ee31de3b7d13f71137ad1d17e97b25c8cda6662692426e8b863043a5950",
+    "assets/sprites/creeps/dungeons/hell/dia_nguc_khuyen/atlas.json": "a3997ceca1eee48e4a47b5a14a92c21b48c25a2b97e3d2879af701c6a4952429",
+    "assets/sprites/creeps/dungeons/hell/dung_nham_linh/spritesheet.png": "92978b0dd9ef30b8a53f50e32f2f4c2d3285bccc09721b15751809a7f95020b9",
+    "assets/sprites/creeps/dungeons/hell/dung_nham_linh/atlas.json": "a3cd62b97ddc6a55a03d9e0a574324e76a264984b8abf1cd93ab9b0995ea2c57",
+    "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/spritesheet.png": "992b90ae4fc2de6e3387f75cedb396070066cdce693f8e8a58940e4807fc15bc",
+    "assets/sprites/creeps/dungeons/hell/hac_viem_phap_su/atlas.json": "64ca0e2906d4464cf8a04eef424bf9cc6afeb473df59b8b91f3a419590085b80",
+    "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/spritesheet.png": "e32de64048f7ac42a1e87cf7f57d5c19c13b44e81e93c15d24a6c78928e043ff",
+    "assets/sprites/creeps/dungeons/hell/hac_dien_nguu_ma/atlas.json": "48b00d223ba9c156e3a3b4030b7803efb277d2d3bcced07344eae52275bfe4dc",
+    "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/spritesheet.png": "f1f691ad5da49b1cecac3cc0ecc4b43194b1f2c9efcaecf0dd82750b5a705794",
+    "assets/sprites/creeps/dungeons/hell/dung_nham_cu_nhan/atlas.json": "88323965af1bb2ea824eb9d5fc5fddcc0139924bb5940ab4388db72571033de0",
+    "assets/effects/dungeons/hell/spritesheet.png": "0c904e4cca91cde9b7286cfed8afabcc1df7f17de33b75932e5763825bcf5797",
+    "assets/effects/dungeons/hell/atlas.json": "6278f68e0d1bb53a9408dae8368a69d251b898df2e9db1a16d892fa6387bdcef"
+  }
+}

@@ -1,3 +1,9 @@
+## Hell integration — 2026-11-01
+
+- `tests/hell-dungeon.test.ts`: reachable markers/six seats, lava/prop collision, bridge route, validated selector, private/shared/forest/desert isolation, pause/resume, physical return and unchanged generic tuning/roster rotation.
+- `scripts/verify-hell.py`: exact source inventory, 276 nonempty cels/92 tags, shared hurt/death, native pivots/dimensions/timing, all prop/VFX atlas bounds/alpha and runtime/map parity.
+- `playwright.hell.config.ts`: two-browser actual-frame/one-shot/terrain review, six participants (two browser contexts plus four SDK clients) in real-stat combat, rewards/wave progression, collision/return/disconnect cleanup, private isolation and existing forest/desert/Beach regressions. PNG evidence only; director approval remains pending.
+
 ## Small gameplay changes — 2026-10-31
 
 - New normal clients start Default; Lv1..6 slot ranks are 1/0/0/0,1/1/0/0,1/1/1/0,1/1/1/1,2/1/1/1,2/2/1/1. Both peers observe automatic learning/equipping. Same-branch replacement retains slot allocation; mixed/foreign/duplicate/empty default builds are rejected atomically.

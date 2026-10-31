@@ -1,5 +1,10 @@
 import Phaser from 'phaser';
-import { creepDungeon, desertDungeon, beachDungeon } from '@volam/game-data';
+import {
+  creepDungeon,
+  desertDungeon,
+  beachDungeon,
+  hellDungeon,
+} from '@volam/game-data';
 import type { DesertManifest } from './desert-art.js';
 
 /** Dungeon-only assets use the same PNG/hash-atlas and Tiled pipeline as arena. */
@@ -16,7 +21,11 @@ export function createCreepDungeonArt(
   scene: Phaser.Scene,
   destination = 'forest',
 ): Phaser.GameObjects.Image[] {
-  if (destination === 'desert' || destination === 'sea')
+  if (
+    destination === 'desert' ||
+    destination === 'sea' ||
+    destination === 'hell'
+  )
     return createAtlasDungeonArt(scene, destination);
   for (const key of ['bamboo_terrain', 'bamboo_scenery'])
     scene.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
@@ -89,8 +98,9 @@ function createAtlasDungeonArt(
   destination: string,
 ): Phaser.GameObjects.Image[] {
   const beach = destination === 'sea';
-  const prefix = beach ? 'beach' : 'desert';
-  const dungeon = beach ? beachDungeon : desertDungeon;
+  const hell = destination === 'hell';
+  const prefix = hell ? 'hell' : beach ? 'beach' : 'desert';
+  const dungeon = hell ? hellDungeon : beach ? beachDungeon : desertDungeon;
   for (const key of [`${prefix}_terrain`, `${prefix}_scenery`])
     scene.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
   const map = scene.make.tilemap({ key: `creep_${prefix}` });
@@ -102,21 +112,36 @@ function createAtlasDungeonArt(
     0,
     0,
   );
-  if (!tiles) throw new Error('Missing desert terrain.');
-  const names = beach
-    ? ['ground', 'shoreline']
-    : ['ground', 'paving', 'details'];
+  if (!tiles) throw new Error(`Missing ${prefix} terrain.`);
+  const names = hell
+    ? ['ground']
+    : beach
+      ? ['ground', 'shoreline']
+      : ['ground', 'paving', 'details'];
   const waterTiles: Array<{
     tile: Phaser.Tilemaps.Tile;
     frames: number[];
     offset: number;
   }> = [];
-  const waterMetadata = beach ? thisWaterMetadata(scene) : [];
+  const waterMetadata = hell
+    ? (
+        scene.cache.json.get('hell_terrain_metadata') as {
+          tiles: Array<{
+            animation?: Array<{ tileid: number; duration: number }>;
+          }>;
+        }
+      ).tiles.filter(
+        (t): t is { animation: Array<{ tileid: number; duration: number }> } =>
+          !!t.animation,
+      )
+    : beach
+      ? thisWaterMetadata(scene)
+      : [];
   for (const [i, name] of names.entries()) {
     const layer = map.createLayer(name, tiles);
-    if (!layer) throw new Error(`Missing desert layer: ${name}`);
+    if (!layer) throw new Error(`Missing ${prefix} layer: ${name}`);
     layer.setDepth(-10000 + i).setName(`${prefix}:layer:${name}`);
-    if (beach && name === 'ground')
+    if ((beach || hell) && name === 'ground')
       layer.forEachTile((tile) => {
         const index = tile.index - 1;
         for (const sequence of waterMetadata) {
@@ -126,17 +151,18 @@ function createAtlasDungeonArt(
         }
       });
   }
-  if (beach) {
+  if (beach || hell) {
     let step = 0;
-    scene.registry.set('beachWaterPhases', [0]);
+    const phaseKey = hell ? 'hellLavaPhases' : 'beachWaterPhases';
+    scene.registry.set(phaseKey, [0]);
     scene.time.addEvent({
       delay: waterMetadata[0]!.animation[0]!.duration,
       loop: true,
       callback: () => {
-        step = (step + 1) % 4;
+        step = (step + 1) % waterMetadata[0]!.animation.length;
         for (const { tile, frames, offset } of waterTiles)
           tile.index = frames[(offset + step) % frames.length]! + 1;
-        const phases = scene.registry.get('beachWaterPhases') as number[];
+        const phases = scene.registry.get(phaseKey) as number[];
         if (!phases.includes(step)) phases.push(step);
       },
     });
@@ -145,7 +171,7 @@ function createAtlasDungeonArt(
   const foreground: Phaser.GameObjects.Image[] = [];
   const place = (name: string, x: number, y: number, ground = false) => {
     const metadata = manifest.scenery.find((p) => p.id === name);
-    if (!metadata) throw new Error(`Missing desert scenery: ${name}`);
+    if (!metadata) throw new Error(`Missing ${prefix} scenery: ${name}`);
     return scene.add
       .image(x, y, `${prefix}_scenery`, name)
       .setOrigin(
@@ -162,6 +188,13 @@ function createAtlasDungeonArt(
     );
     const image = place(marker.name, marker.x ?? 0, marker.y ?? 0, ground);
     if (
+      marker.properties?.some(
+        (p: { name: string; value: unknown }) =>
+          p.name === 'renderLayer' && p.value === 'foreground',
+      )
+    )
+      image.setDepth(10000);
+    if (
       [
         'dead_tree',
         'abandoned_temple',
@@ -169,12 +202,19 @@ function createAtlasDungeonArt(
         'palm_tall',
         'palm_broad',
         'shipwreck_mast',
+        'demonic_pillar',
+        'temple_gateway',
+        'guardian_statue',
+        'charred_tree',
+        'fortress_wall',
       ].includes(marker.name)
     )
       foreground.push(image);
   }
   const p = dungeon.exit;
-  place('dungeon_exit_portal', p.x, p.y).setName('dungeon-exit');
+  place(hell ? 'hell_exit_portal' : 'dungeon_exit_portal', p.x, p.y).setName(
+    'dungeon-exit',
+  );
   scene.add
     .text(p.x, p.y + 5, 'Lối Ra · Về đấu trường', {
       fontFamily: 'Segoe UI',

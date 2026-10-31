@@ -8,6 +8,10 @@ BuildState adds mode, branchId and planned slotSkills. Validated mode/branch mes
 
 # Technical Architecture Decision Record v1.0
 
+## Hell integration / protocol14 — 2026-11-01
+
+The existing destination registry and validated selector add `hell`; `DungeonMatch` still owns zone geometry, membership, clocks, combat and rewards. A reconciled copy of the retained Hell Tiled layout supplies server solids/markers and Phaser terrain/scenery. Existing atlas rendering, eight-phase authored terrain playback, feet depth, generic contact effects and one-shot cleanup are reused. Animation-key lookup can select an actual `shared` clip when no directional clip exists. No spell/projectile mechanics are inferred from assets. Exact retained byte guards and Hell text checkout attributes preserve independent provenance. See `docs/HELL_INTEGRATION.md`.
+
 ## Beach integration — 2026-11-01
 
 Protocol 13 extends the validated destination selector to forest/desert/sea. `game-data/dungeon-registry.ts` resolves all three definitions; Beach uses the existing server-selected creep identity and per-zone authoritative world/geometry/clock. One composed Tiled map supplies collision/markers and Phaser layers. Retained actor/prop/effect atlases and water metadata feed the existing loaders, playback, feet depth and effect cleanup; no specialized enemy gameplay is inferred. The desert atlas-map renderer and isolated art QA service are parameterized rather than replaced. Worktree scope, source correction, provenance, tests and limitations: `docs/BEACH_INTEGRATION.md`.

@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 13;
+export const PROTOCOL_VERSION = 14;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -148,7 +148,7 @@ export const dungeonActionSchema = z.discriminatedUnion('action', [
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     action: z.literal('enter'),
     access: z.enum(['private', 'shared']),
-    destination: z.enum(['forest', 'desert', 'sea']).optional(),
+    destination: z.enum(['forest', 'desert', 'sea', 'hell']).optional(),
   }),
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),

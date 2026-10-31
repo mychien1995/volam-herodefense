@@ -1,0 +1,42 @@
+{
+  "worktree": "C:/Users/ADMIN/.codex/worktrees/hell/volam-hero-defense",
+  "branch": "wip/m3d/hell",
+  "baseline": "0aeddd21c7532798100fbe3c092d7156739bb332",
+  "finalPipeline": {
+    "command": "pnpm check:final --config playwright.hell.config.ts",
+    "runs": 1,
+    "overall": "FAIL in two QA arrangements; all preceding stages and three browser cases passed",
+    "workflowChecksPassed": 18,
+    "unitIntegrationTestsPassed": 370,
+    "unitIntegrationFilesPassed": 33,
+    "assetValidatorsPassed": 14,
+    "typechecks": "PASS",
+    "productionBuild": "PASS with existing large-bundle warning",
+    "originalTimings": "final-pipeline-timings.json"
+  },
+  "focusedRecovery": {
+    "sixPlayerCommand": "node tools/run-playwright.mjs test --config playwright.hell.config.ts tests/e2e/hell.spec.ts --grep \"six clients|Hell private instances\"",
+    "sixPlayerResult": "PASS, 56.7s; encounter positions moved off authoritative lava-transition solids; real combat unchanged",
+    "privateIntermediateResult": "FAIL: helper walked along solid transition edge; hero died and helper continued in arena",
+    "finalPrivateCommand": "node tools/run-playwright.mjs test --config playwright.hell.config.ts tests/e2e/hell.spec.ts --grep \"Hell private instances\"",
+    "finalPrivateResult": "PASS, 1.0m test / 1.2m total; real keyboard route via bridge centre, private pause/resume and desert/Beach return",
+    "toolsTypecheck": "pnpm exec tsc -p tsconfig.tools.json --noEmit: PASS",
+    "geometryRegression": "pnpm exec vitest run tests/hell-dungeon.test.ts: 4 PASS",
+    "allFiveDistinctBrowserCasesPassed": true,
+    "productionRuntimeChangedForRecovery": false
+  },
+  "frameReport": "frames.json",
+  "uniqueCreepCels": 276,
+  "authoredAnimationTags": 92,
+  "sharedFacingStates": ["hurt", "death"],
+  "combatReport": "combat.json",
+  "combatParticipants": {"browserContexts": 2, "sdkClients": 4},
+  "screenshots": ["hell-six-player-1920.png", "hell-combat-1280.png", "hell-frames-1280.png"],
+  "provenanceCheckoutReport": "checkout-validation.json",
+  "sourceRasterPixelsChanged": false,
+  "speciesSpecificCombatProfiles": "NOT SUPPLIED; existing generic M2A melee tuning reused",
+  "runtimeDirectorArtApproval": "PENDING",
+  "recordings": false,
+  "traceScreenshotStreams": false,
+  "merged": false
+}

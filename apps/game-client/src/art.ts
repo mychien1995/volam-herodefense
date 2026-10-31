@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { preloadHellArt, registerHellArt } from './hell-art.js';
 import {
   preloadBeachArt,
   registerBeachArt,
@@ -77,6 +78,7 @@ export function heroTexture(
 export { facing } from './facing.js';
 export function preloadArt(scene: Phaser.Scene): void {
   preloadBeachArt(scene);
+  preloadHellArt(scene);
   preloadForestCreepArt(scene);
   preloadBambooForestArt(scene);
   preloadDesertArt(scene);
@@ -165,6 +167,9 @@ export function actorFootPivot(
     (
       scene.cache.json.get('beach_manifest') as BeachManifest | undefined
     )?.assets.find((a) => a.id === id) ??
+    (
+      scene.cache.json.get('hell_manifest') as DesertManifest | undefined
+    )?.assets.find((a) => a.id === id) ??
     creeps?.assets.find((asset) => asset.id === id) ??
     (
       scene.cache.json.get('desert_manifest') as DesertManifest | undefined
@@ -178,6 +183,7 @@ export function actorFootPivot(
 }
 export function registerArt(scene: Phaser.Scene): void {
   registerBeachArt(scene);
+  registerHellArt(scene);
   registerForestCreepArt(scene);
   registerDesertArt(scene);
   registerSkillArt(scene);
