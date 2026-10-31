@@ -1,5 +1,19 @@
 # Beach dungeon integration — 2026-11-01
 
+## Follow-up: integrated into milestone/m3d
+
+At the user's explicit follow-up request, committed the completed Beach work as `414396ee` and merged it into **`milestone/m3d`** in **`D:/Projects/volam-hero-defense`** with merge commit **`8cfab018`**. The target checkout was clean before integration. The merge preserved newer forest roster progression and animation-review work without conflicts. The worktree-only/no-merge restrictions below describe the original delivery; this follow-up explicitly authorizes main-checkout integration.
+
+Only checks affected by integration were repeated:
+
+- `pnpm check:quick tests/beach-dungeon.test.ts tests/desert-dungeon.test.ts tests/dungeons.test.ts tests/dungeon-room.test.ts`: **29 passed across 4 files** (22.51s including preparation/shared compilation). Includes newer forest roster/private-cursor regression coverage.
+- `pnpm exec tsc -b` and `pnpm exec tsc -p tsconfig.tools.json --noEmit`: **PASS**.
+- `python -X utf8 scripts/verify-beach.py`: **PASS**, retained asset hashes, all actor/prop/effect alpha/bounds/timing/pivots and runtime copies/map parity.
+- `node tools/run-playwright.mjs test --config playwright.beach.config.ts tests/e2e/beach.spec.ts --grep "Beach private instances"`: **PASS**, one two-browser case, 31.0s test / 34.2s total; Beach entry, authoritative physical return, private filtering and empty pause/resume, desert entry/return, no browser errors.
+- `git checkout-index --prefix=.cache/beach-checkout-check/ -- assets/sprites/creeps/dungeons/beach/thuy_quy/manifest.json` followed by an SHA256 assertion: **PASS**, checkout reproduces the independently recorded manifest bytes. Diff whitespace checks passed.
+
+The first focused run stopped during preparation because Git's default LF checkout changed the corrected Thủy Quỷ manifest's byte hash. Added a narrow `.gitattributes` **`text eol=crlf`** rule for that single manifest and restored only bytes that exactly match its existing provenance SHA256. No source drawing, animation, combat rule or provenance hash changed. Standard preparation refreshed arena runtime-manifest hashes to this checkout's actual existing atlas bytes. Historical original evidence remains unchanged. No full suite, six-player run, frame gallery, artwork generation or recording was repeated for this merge. Runtime director art approval remains **pending**.
+
 All task edits, dependency installation, generated runtime assets, builds, tests and evidence are confined to **C:/Users/ADMIN/.codex/worktrees/beach-dungeon/volam-hero-defense**, branch **wip/m3d/beach-dungeon**. The worktree was created from `milestone/m3d` commit `de1b3282906cd4c3952c4c821354b86ccf052a77` and was clean before task edits. No main-checkout edits, branch switch, wholesale dirty-tree copy or merge-back is performed.
 
 ## Scope and source audit
