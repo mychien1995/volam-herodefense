@@ -4,7 +4,8 @@ import { Client, type Room } from '@colyseus/sdk';
 import { PROTOCOL_VERSION } from '@volam/game-protocol';
 import type { MatchRoom } from '../../apps/game-server/src/rooms/MatchRoom.js';
 import { joinWaiting, startTogether } from './pregame-helper.js';
-const evidence = 'assets/reviews/bamboo_forest_v1';
+const evidence =
+  process.env['VOLAM_BAMBOO_EVIDENCE_DIR'] ?? 'assets/reviews/bamboo_forest_v1';
 interface Hero {
   x: number;
   y: number;
