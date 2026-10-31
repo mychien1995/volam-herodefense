@@ -1,3 +1,7 @@
+## Small gameplay / protocol12 — 2026-10-31
+
+BuildState adds mode, branchId and planned slotSkills. Validated mode/branch messages use the existing revision/sequence/zone-owned build path. Default branch presets live in game-data/default-builds.ts; deterministic rank allocation lives in game-core/progression.ts and runs on level gains and validated build changes. Planned zero-rank slots become equipped only when learned. Custom mechanics and per-ID cooldown debt remain. Death recovery now uses base.spawn; ordinary door returns retain dungeon.arenaReturn. Keyboard interaction and CSS grayscale are client presentation only. The isolated browser fixture controls live under tests/e2e and are absent from production server routes. See docs/SMALL_GAMEPLAY_CHANGES.md.
+
 # Technical Architecture Decision Record v1.0
 
 ## Desert integration — 2026-10-31

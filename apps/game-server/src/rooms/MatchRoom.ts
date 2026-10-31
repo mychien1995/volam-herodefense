@@ -1,7 +1,12 @@
 import { randomInt } from 'node:crypto';
 import { Room, ServerError, validate, type Client } from '@colyseus/core';
 import { serverInvasionDefinition } from '../invasion-config.js';
-import { lobbyConfig, m1Config, creepDungeon, desertDungeon } from '@volam/game-data';
+import {
+  lobbyConfig,
+  m1Config,
+  creepDungeon,
+  desertDungeon,
+} from '@volam/game-data';
 import {
   DungeonMatch,
   initializeProgression,
@@ -150,10 +155,10 @@ export class MatchRoom extends Room<{
             this.state.phase !== 'WAITING_LOBBY' ||
             client.sessionId !== this.state.hostId
           )
-            return reject('Only the host can start from the waiting lobby.');
+            return reject('Chỉ host được bắt đầu từ phòng chờ.');
           if ([...this.state.players.values()].some((p) => !p.connected))
             return reject(
-              'A participant is disconnected. Leave and recreate the room.',
+              'Có người chơi mất kết nối. Hãy rời và tạo phòng mới.',
             );
           this.state.phase = 'SCHOOL_SELECTION';
           void this.setMetadata({ phase: this.state.phase });
@@ -162,10 +167,10 @@ export class MatchRoom extends Room<{
             !['SCHOOL_SELECTION', 'IN_GAME'].includes(this.state.phase) ||
             player.confirmed
           )
-            return reject('Selection is not editable in this phase.');
+            return reject('Không thể đổi lựa chọn ở giai đoạn này.');
           if (action.action === 'select') player.schoolId = action.schoolId;
           else {
-            if (!player.schoolId) return reject('Choose a school first.');
+            if (!player.schoolId) return reject('Hãy chọn môn phái trước.');
             player.confirmed = true;
             if (this.state.phase === 'IN_GAME') {
               const hero = this.simulation.add(
@@ -183,7 +188,7 @@ export class MatchRoom extends Room<{
               }
               if (
                 !this.legacySkills &&
-                !initializeProgression(hero, m1Config)
+                !initializeProgression(hero, m1Config, 'default')
               ) {
                 hero.skillIds = ['', '', '', ''];
                 hero.skillCooldowns = [0, 0, 0, 0];
@@ -207,7 +212,7 @@ export class MatchRoom extends Room<{
                 }
                 if (
                   !this.legacySkills &&
-                  !initializeProgression(hero, m1Config)
+                  !initializeProgression(hero, m1Config, 'default')
                 ) {
                   hero.skillIds = ['', '', '', ''];
                   hero.skillCooldowns = [0, 0, 0, 0];
@@ -247,9 +252,9 @@ export class MatchRoom extends Room<{
             reason,
           });
         if (this.state.phase !== 'IN_GAME')
-          return reject('Gameplay has not begun.');
+          return reject('Trận đấu chưa bắt đầu.');
         if (!this.state.players.get(client.sessionId)?.confirmed)
-          return reject('Choose and confirm a school before playing.');
+          return reject('Hãy chọn và xác nhận môn phái trước khi chơi.');
         if (
           input.sequence <= (this.dungeonSequences.get(client.sessionId) ?? 0)
         )
@@ -257,7 +262,7 @@ export class MatchRoom extends Room<{
         this.dungeonSequences.set(client.sessionId, input.sequence);
         if (input.action === 'open') {
           if (!this.simulation.canEnterDungeon(client.sessionId))
-            return reject('Enter dungeons from the arena while alive.');
+            return reject('Chỉ vào phó bản khi còn sống tại đấu trường.');
           client.send(
             'dungeon-menu',
             { protocolVersion: PROTOCOL_VERSION },
@@ -267,7 +272,11 @@ export class MatchRoom extends Room<{
         }
         const reason =
           input.action === 'enter'
-            ? this.simulation.enter(client.sessionId, input.access, input.destination)
+            ? this.simulation.enter(
+                client.sessionId,
+                input.access,
+                input.destination,
+              )
             : this.simulation.exit(client.sessionId);
         if (reason) return reject(reason);
         const hero = this.simulation.hero(client.sessionId);
@@ -281,7 +290,7 @@ export class MatchRoom extends Room<{
         client.send('command-rejected', {
           protocolVersion: PROTOCOL_VERSION,
           sequence: input.sequence,
-          reason: 'Gameplay has not begun.',
+          reason: 'Trận đấu chưa bắt đầu.',
         });
         return;
       }
@@ -289,7 +298,7 @@ export class MatchRoom extends Room<{
         client.send('command-rejected', {
           protocolVersion: PROTOCOL_VERSION,
           sequence: input.sequence,
-          reason: 'Choose and confirm a school before playing.',
+          reason: 'Hãy chọn và xác nhận môn phái trước khi chơi.',
         });
         return;
       }
@@ -320,7 +329,7 @@ export class MatchRoom extends Room<{
         client.send('command-rejected', {
           protocolVersion: PROTOCOL_VERSION,
           sequence: input.sequence,
-          reason: 'Development skill loadouts are disabled.',
+          reason: 'Bộ kỹ năng thử nghiệm đang tắt.',
         });
         return;
       }
@@ -338,7 +347,7 @@ export class MatchRoom extends Room<{
         client.send('command-rejected', {
           protocolVersion: PROTOCOL_VERSION,
           sequence: input.sequence,
-          reason: 'Unknown or duplicate skill in test loadout.',
+          reason: 'Bộ thử nghiệm có kỹ năng không hợp lệ hoặc bị trùng.',
         });
         return;
       }
@@ -355,7 +364,7 @@ export class MatchRoom extends Room<{
           sequence: input.sequence,
           reason: this.simulation.hero(client.sessionId)?.progression
             ? 'Kỹ năng chưa trang bị hoặc chưa học. Dùng điểm tại Võ Học trong đấu trường.'
-            : 'This slot is not equipped.',
+            : 'Ô này chưa được trang bị.',
         });
         return;
       }
@@ -425,18 +434,19 @@ export class MatchRoom extends Room<{
     if (!parsed.success)
       throw new ServerError(
         400,
-        `Use a nickname of 1–${lobbyConfig.nicknameMaxLength} characters and a compatible client.`,
+        `Biệt danh cần từ 1–${lobbyConfig.nicknameMaxLength} ký tự và phiên bản game tương thích.`,
       );
     return parsed.data;
   }
   override onJoin(client: MatchClient, _options: JoinOptions): void {
-    if (!client.auth) throw new ServerError(400, 'Invalid join.');
+    if (!client.auth)
+      throw new ServerError(400, 'Yêu cầu vào phòng không hợp lệ.');
     if (
       !['WAITING_LOBBY', 'SCHOOL_SELECTION', 'IN_GAME'].includes(
         this.state.phase,
       )
     )
-      throw new ServerError(403, 'This match has ended.');
+      throw new ServerError(403, 'Trận đấu đã kết thúc.');
     if (!this.state.hostId) this.state.hostId = client.sessionId;
     client.view = new StateView();
     this.state.players.set(
@@ -563,6 +573,11 @@ export class MatchRoom extends Room<{
       if (hero.progression) {
         Object.assign(target.build, pointAccounting(hero, m1Config));
         target.build.revision = hero.progression.revision;
+        target.build.mode = hero.progression.mode;
+        target.build.branchId = hero.progression.branchId;
+        hero.progression.defaultSkills.forEach((id, i) => {
+          target.build.slotSkills[i] = id;
+        });
         const stats = characterStats(hero, m1Config, zone.world.tick);
         Object.assign(target.build.stats, stats.total);
         target.build.sources = JSON.stringify(stats.sources);

@@ -192,7 +192,7 @@ describe('M2B deterministic statue defense', () => {
     expect(match.hero('a')).toBe(hero);
     expect(hero.hp).toBe(hero.maxHp);
     expect(hero).toMatchObject({
-      ...creepDungeon.arenaReturn,
+      ...match.base.spawn,
       xp: 45,
       gold: 19,
     });
@@ -230,8 +230,8 @@ describe('M2B deterministic statue defense', () => {
       hp: world.statue!.hp,
     }).toEqual(frozen);
     expect(match.invasion!.events).toEqual([]);
-    expect(match.input('a', 99, { kind: 'basic' })).toContain('ended');
-    expect(match.exit('b')).toContain('ended');
+    expect(match.input('a', 99, { kind: 'basic' })).toContain('kết thúc');
+    expect(match.exit('b')).toContain('kết thúc');
   });
   it('keeps dungeon membership/worlds isolated while the global schedule and warnings continue', () => {
     const { match, hero } = setup();

@@ -14,10 +14,10 @@ export function forestArtNotice(types: string[]): string {
     forestTypes.includes(type as ForestType),
   ).length;
   return known === 0
-    ? 'Creep: placeholder · server chưa cấp loại Rừng Trúc'
+    ? 'Quái: hình tạm · server chưa cấp loại Rừng Trúc'
     : known < types.length
-      ? 'Creep: candidate + placeholder · thiếu loại server'
-      : 'Creep: candidate · chưa được duyệt hình ảnh';
+      ? 'Quái: bản thử nghiệm và hình tạm · thiếu loại từ server'
+      : 'Quái: bản thử nghiệm · chưa được duyệt hình ảnh';
 }
 export interface ForestCreepManifest extends ArenaCreepManifest {
   assets: Array<

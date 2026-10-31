@@ -294,3 +294,39 @@
     font-size: 12px;
   }
 }
+
+.skill-mode-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+  margin: 8px 0;
+}
+.skill-mode-controls label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.skill-mode-controls p {
+  flex-basis: 100%;
+  margin: 0;
+  color: #d9d0b4;
+  font-size: 13px;
+}
+.skill-card[hidden],
+.skill-basic[hidden],
+#skill-branch-label[hidden],
+#reset-skills[hidden] {
+  display: none;
+}
+
+.skill-style[hidden] {
+  display: none;
+}
+.skill-loadout:has(.skill-basic[hidden]) {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.skill-catalogue:has(.skill-style[hidden]) {
+  grid-template-columns: minmax(0, 1fr);
+}

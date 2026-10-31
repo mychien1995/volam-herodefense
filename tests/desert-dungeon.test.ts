@@ -70,7 +70,7 @@ describe('desert map and authoritative destination contract', () => {
     ).toBe(false);
     const m = setup();
     m.add('a', 'A');
-    expect(m.enter('a', 'shared', 'sea')).toContain('unavailable');
+    expect(m.enter('a', 'shared', 'sea')).toContain('chưa mở');
     expect(m.zones.size).toBe(1);
     expect(m.enter('a', 'shared')).toBeUndefined();
     expect(m.zoneOf('a')!.id).toBe('forest_shared');
@@ -89,7 +89,7 @@ describe('desert map and authoritative destination contract', () => {
     expect(z.config.collision).toEqual(d.collision);
     expect(privateZone).not.toBe(z);
     expect(forest).not.toBe(z);
-    expect(m.exit('a')).toContain('physical');
+    expect(m.exit('a')).toContain('Space');
     for (const id of ['a', 'b']) {
       Object.assign(m.hero(id)!, d.exit);
       expect(m.exit(id)).toBeUndefined();

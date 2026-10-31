@@ -4,6 +4,7 @@ export function bindGameplayInput(
   send: (command: Command) => void,
   connected: () => boolean,
   blocked: () => boolean = () => false,
+  interact: () => void = () => {},
 ): () => void {
   const held = new Set<string>();
   const move = (): void =>
@@ -31,6 +32,11 @@ export function bindGameplayInput(
       return;
     }
     if (event.repeat) return;
+    if (event.code === 'Space') {
+      event.preventDefault();
+      interact();
+      return;
+    }
     if (event.code === inputBindings.basicAttack) {
       event.preventDefault();
       send({ kind: 'basic' });

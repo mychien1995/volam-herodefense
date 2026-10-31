@@ -65,13 +65,19 @@ async function waiting(p: Page, nickname: string, room?: string, dao = false) {
   await p.bringToFront();
   await p.goto('/?debug=1' + (dao ? '&thieuLamWeapon=dao' : ''));
   await p.locator('#pre-nickname').fill(nickname);
-  await p.getByRole('button', { name: 'Enter Game', exact: true }).click();
+  await p.getByRole('button', { name: 'Vào game', exact: true }).click();
   if (room) {
-    await p.getByLabel('Room code', { exact: true }).fill(room);
-    await p.getByLabel('Room code', { exact: true }).press('Enter');
+    await p
+      .locator('#pregame')
+      .getByLabel('Mã phòng', { exact: true })
+      .fill(room);
+    await p
+      .locator('#pregame')
+      .getByLabel('Mã phòng', { exact: true })
+      .press('Enter');
   } else
-    await p.getByRole('button', { name: 'Create room', exact: true }).click();
-  await expect(p.locator('#pregame .pre-title')).toHaveText('Waiting Lobby');
+    await p.getByRole('button', { name: 'Tạo phòng', exact: true }).click();
+  await expect(p.locator('#pregame .pre-title')).toHaveText('Phòng chờ');
 }
 async function move(p: Page, key: string, ms: number) {
   await p.bringToFront();

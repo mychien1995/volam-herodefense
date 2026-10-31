@@ -5,11 +5,12 @@ export type Menu =
   | 'skills'
   | 'party'
   | 'pvp'
-  | 'settings';
+  | 'settings'
+  | 'quit';
 export const icon = (name: string, extra = ''): string =>
   `<span class="pixel-icon icon-${name} ${extra}" aria-hidden="true"></span>`;
 const unavailable =
-  '<p class="preview-note">PREVIEW · This system has no M1 backend. No items, gold or travel are changed.</p>';
+  '<p class="preview-note">Xem trước · Tính năng này chưa mở. Chưa thể giao dịch hoặc sử dụng vật phẩm.</p>';
 export const menuTitles: Record<Menu, string> = {
   inventory: 'Túi Đồ',
   dungeons: 'Chọn Phó Bản',
@@ -18,24 +19,27 @@ export const menuTitles: Record<Menu, string> = {
   party: 'Đồng Đội',
   pvp: 'Lôi Đài',
   settings: 'Cài Đặt',
+  quit: 'Rời trận',
 };
 export function menuContents(menu: Menu, debug = false): string {
   switch (menu) {
+    case 'quit':
+      return '<p>Bạn có muốn rời trận? Tiến trình trong trận sẽ không được lưu.</p><div class="window-footer"><button id="cancel-quit">Ở lại</button><button id="confirm-quit" class="danger">Rời trận</button></div>';
     case 'settings':
-      return `<div class="settings-controls"><p>↑ ↓ ← → · Di chuyển<br>A · Đánh thường<br>Q W E R · Kỹ năng<br>Escape · Đóng cửa sổ</p><button data-menu="skills">${icon('scroll')} Võ học / đổi đòn đánh</button><button data-menu="party">${icon('party')} Đồng đội / kết nối</button><button id="fullscreen">Toàn màn hình</button>${debug ? '<button id="forest-study">View forest art study</button>' : ''}</div>`;
+      return `<div class="settings-controls"><p>↑ ↓ ← → · Di chuyển<br>A · Đánh thường<br>Q W E R · Kỹ năng<br>P · Võ Học<br>Space · Rời phó bản khi gần cửa<br>Escape · Đóng cửa sổ</p><button data-menu="skills">${icon('scroll')} Võ học / đổi đòn đánh</button><button data-menu="party">${icon('party')} Đồng đội / kết nối</button><button id="fullscreen">Toàn màn hình</button>${debug ? '<button id="forest-study">Xem bản mẫu rừng</button>' : ''}</div>`;
     case 'inventory':
       return `${unavailable}
-      <div class="inventory-layout"><section class="equipment-pane"><h3>Trang bị <small>4 slots</small></h3>
-        <div class="equipment-display"><div class="paper-hero" aria-label="Existing prototype hero art"></div>
-          ${[0, 1, 2, 3].map((i) => `<button class="equipment-slot e${i}" disabled aria-label="Empty equipment slot ${i + 1}">${icon(['staff', 'robe', 'jade', 'scroll'][i]!)}<small>${i + 1}</small></button>`).join('')}
-        </div><p class="muted">No equipment in this prototype.<br>Slot categories await review.</p><div id="inventory-stats" class="stat-lines"></div></section>
-      <section class="backpack-pane"><h3>Hành trang <small>Empty · preview grid</small></h3>
-        <div class="bag-grid">${Array.from({ length: 12 }, (_, i) => `<button disabled aria-label="Empty backpack preview slot ${i + 1}"><span>＋</span></button>`).join('')}</div>
-        <div class="item-description"><span class="ornament">◇</span><h3>A journey yet to begin</h3><p>Items you obtain will appear here. Equipment, selling and dropping arrive with the item milestone.</p></div>
-        <div class="window-footer"><span>${icon('gold')} <b class="live-gold">0</b> gold</span><button disabled>Equip</button><button disabled>Drop / Sell</button></div>
+      <div class="inventory-layout"><section class="equipment-pane"><h3>Trang bị <small>4 ô</small></h3>
+        <div class="equipment-display"><div class="paper-hero" aria-label="Hình nhân vật hiện tại"></div>
+          ${[0, 1, 2, 3].map((i) => `<button class="equipment-slot e${i}" disabled aria-label="Ô trang bị trống ${i + 1}">${icon(['staff', 'robe', 'jade', 'scroll'][i]!)}<small>${i + 1}</small></button>`).join('')}
+        </div><p class="muted">Chưa có trang bị.<br>Loại ô trang bị đang chờ hoàn thiện.</p><div id="inventory-stats" class="stat-lines"></div></section>
+      <section class="backpack-pane"><h3>Hành trang <small>Trống · Bảng xem trước</small></h3>
+        <div class="bag-grid">${Array.from({ length: 12 }, (_, i) => `<button disabled aria-label="Ô hành trang xem trước ${i + 1}"><span>＋</span></button>`).join('')}</div>
+        <div class="item-description"><span class="ornament">◇</span><h3>Hành trang đang trống</h3><p>Vật phẩm nhặt được sẽ xuất hiện tại đây. Trang bị, bán và thả vật phẩm sẽ được bổ sung sau.</p></div>
+        <div class="window-footer"><span>${icon('gold')} <b class="live-gold">0</b> vàng</span><button disabled>Trang bị</button><button disabled>Thả / Bán</button></div>
       </section></div>`;
     case 'dungeons':
-      return `<p class="dungeon-intro"><span class="dungeon-school-avatar" role="img" aria-label="Current school character"></span>Bốn vùng đất · Bốn thử thách</p>
+      return `<p class="dungeon-intro"><span class="dungeon-school-avatar" role="img" aria-label="Nhân vật môn phái đang chọn"></span>Bốn vùng đất · Bốn thử thách</p>
       <div class="destinations">${[
         ['forest', 'Rừng Trúc', 'Rừng trúc · Suối ngọc'],
         ['desert', 'Sa Mạc', 'Cát vàng · Cổ tích'],
@@ -47,35 +51,35 @@ export function menuContents(menu: Menu, debug = false): string {
             `<button type="button" class="destination ${id}" data-destination="${id}" aria-label="${name}" aria-pressed="${id === 'forest'}" aria-disabled="${!['forest', 'desert'].includes(id!)}"><img class="destination-illustration" src="/assets/dungeon_cards/${id}.png" alt="${desc}"/><span class="destination-copy"><strong>${name}</strong><span>${desc}</span></span>${['forest', 'desert'].includes(id!) ? `<span class="destination-check" aria-hidden="true" ${id === 'forest' ? '' : 'hidden'}>✓</span>` : '<span class="destination-availability">Chưa mở</span>'}</button>`,
         )
         .join('')}</div>
-      <div class="dungeon-options"><div class="dungeon-choice"><span>Tổ đội</span><div role="radiogroup" aria-label="Tổ đội"><button type="button" role="radio" data-access="private" aria-checked="true">Riêng</button><button type="button" role="radio" data-access="shared" aria-checked="false">Chung</button></div><input id="dungeon-access" type="hidden" value="private"/></div><div class="dungeon-choice"><span>Thử thách</span><div role="radiogroup" aria-label="Thử thách"><button type="button" role="radio" aria-checked="true">Quái thường</button><button type="button" role="radio" aria-checked="false" disabled title="Phó bản Boss hiện chưa mở">Boss · Chưa mở</button></div></div></div>
+      <div class="dungeon-options"><div class="dungeon-choice"><span>Tổ đội</span><div role="radiogroup" aria-label="Tổ đội"><button type="button" role="radio" data-access="private" aria-checked="true">Riêng</button><button type="button" role="radio" data-access="shared" aria-checked="false">Chung</button></div><input id="dungeon-access" type="hidden" value="private"/></div><div class="dungeon-choice"><span>Thử thách</span><div role="radiogroup" aria-label="Thử thách"><button type="button" role="radio" aria-checked="true">Quái thường</button><button type="button" role="radio" aria-checked="false" disabled title="Phó bản thủ lĩnh hiện chưa mở">Thủ lĩnh · Chưa mở</button></div></div></div>
       <p id="dungeon-entry-note" role="status"></p><p id="dungeon-availability" aria-live="polite" hidden></p>
-      <div class="window-footer"><button id="dungeon-close">Đóng</button><button id="enter-dungeon" class="accent" aria-label="Enter dungeon" disabled>Vào Phó Bản</button></div>`;
+      <div class="window-footer"><button id="dungeon-close">Đóng</button><button id="enter-dungeon" class="accent" aria-label="Vào phó bản" disabled>Vào Phó Bản</button></div>`;
     case 'merchant':
-      return `${unavailable}<div role="tablist" aria-label="Merchant sections" class="menu-tabs"><button role="tab" aria-selected="true" data-shop-tab="shop">Cửa hàng</button><button role="tab" aria-selected="false" data-shop-tab="craft">Chế tạo</button></div>
+      return `${unavailable}<div role="tablist" aria-label="Các mục thương gia" class="menu-tabs"><button role="tab" aria-selected="true" data-shop-tab="shop">Cửa hàng</button><button role="tab" aria-selected="false" data-shop-tab="craft">Chế tạo</button></div>
       <div id="shop-content"><div class="shop-layout"><div class="shop-grid">${[
-        ['staff', 'Weapon study'],
-        ['robe', 'Armor study'],
-        ['jade', 'Accessory study'],
-        ['scroll', 'Recipe study'],
-        ['potion', 'Consumable study'],
-        ['ore', 'Material study'],
+        ['staff', 'Vũ khí mẫu'],
+        ['robe', 'Áo giáp mẫu'],
+        ['jade', 'Phụ kiện mẫu'],
+        ['scroll', 'Công thức mẫu'],
+        ['potion', 'Vật phẩm tiêu hao mẫu'],
+        ['ore', 'Nguyên liệu mẫu'],
       ]
         .map(
           ([id, label]) =>
-            `<button disabled class="shop-item">${icon(id!)}<span>${label}</span><small>Catalogue pending</small></button>`,
+            `<button disabled class="shop-item">${icon(id!)}<span>${label}</span><small>Chưa có danh mục</small></button>`,
         )
         .join(
           '',
-        )}</div><section class="shop-details"><h3>Welcome, traveler.</h3><p>The merchant is a menu preview. Item names, prices and effects will come from approved game data.</p><p class="muted">No purchases or sales are possible.</p><button disabled>Buy · unavailable</button></section></div></div>
-      <div id="craft-content" hidden><div class="craft-recipe"><span>${icon('staff')}<small>Max basic item</small></span><b>＋</b><span>${icon('ore')}<small>Boss material</small></span><b>＋</b><span>${icon('gold')}<small>Gold · TBD</small></span><b>→</b><span>${icon('jade')}<small>Crafted item</small></span></div><p class="muted">Recipe illustration only. Required items, costs and results have not been implemented.</p><button disabled>Craft · unavailable</button></div>
-      <div class="window-footer"><span>${icon('gold')} <b class="live-gold">0</b> gold</span><span>Prices and recipes pending</span></div>`;
+        )}</div><section class="shop-details"><h3>Chào mừng thiếu hiệp.</h3><p>Cửa hàng hiện là bản xem trước. Danh mục, giá và công dụng vật phẩm sẽ được bổ sung sau.</p><p class="muted">Chưa thể mua hoặc bán.</p><button disabled>Mua · Chưa mở</button></section></div></div>
+      <div id="craft-content" hidden><div class="craft-recipe"><span>${icon('staff')}<small>Vật phẩm cơ bản tối đa</small></span><b>＋</b><span>${icon('ore')}<small>Nguyên liệu thủ lĩnh</small></span><b>＋</b><span>${icon('gold')}<small>Vàng · Chưa định giá</small></span><b>→</b><span>${icon('jade')}<small>Vật phẩm chế tạo</small></span></div><p class="muted">Đây là minh họa công thức. Nguyên liệu, chi phí và kết quả chưa được triển khai.</p><button disabled>Chế tạo · Chưa mở</button></div>
+      <div class="window-footer"><span>${icon('gold')} <b class="live-gold">0</b> vàng</span><span>Giá và công thức chưa mở</span></div>`;
     case 'skills':
-      return `<p class="menu-intro">Cái Bang · Q/W/E/R loadout</p><label for="basic-style">Normal attack · A</label><select id="basic-style"><option value="cai_bang_bong">Cái Bang Bổng · melee</option><option value="cai_bang_chuong">Cái Bang Chưởng · ranged</option></select>
-      <div class="ability-list"><article>${icon('flame')}<div><kbd>Q</kbd><h3>Hỏa Vân Chưởng</h3><p>Three paced, straight shots · 18 MP</p></div></article><article>${icon('dragon')}<div><kbd>W</kbd><h3>Cuồng Long Loạn Vũ</h3><p>Explosive shot and burn · 25 MP</p></div></article></div>
-      <p class="muted">Skill ranks, progression and respec UI belong to the next milestone.</p><button disabled>Allocate skill points · unavailable</button>`;
+      return `<p class="menu-intro">Cái Bang · Bộ kỹ năng Q/W/E/R</p><label for="basic-style">Đánh thường · A</label><select id="basic-style"><option value="cai_bang_bong">Cái Bang Bổng · Cận chiến</option><option value="cai_bang_chuong">Cái Bang Chưởng · Tầm xa</option></select>
+      <div class="ability-list"><article>${icon('flame')}<div><kbd>Q</kbd><h3>Hỏa Vân Chưởng</h3><p>Ba chưởng bay thẳng · 18 nội lực</p></div></article><article>${icon('dragon')}<div><kbd>W</kbd><h3>Cuồng Long Loạn Vũ</h3><p>Chưởng nổ và thiêu đốt · 25 nội lực</p></div></article></div>
+      <p class="muted">Dùng chế độ Võ Học để học và thay đổi kỹ năng.</p><button disabled>Phân điểm · Chưa mở</button>`;
     case 'party':
-      return `<div class="room-strip"><span>Room <strong id="party-room">—</strong></span><span id="connection-status">Connected</span></div><p class="muted">Share this room ID to invite a friend. Nicknames only · 6 player cap.</p><ul id="players" data-testid="players" class="party-list"></ul><div class="window-footer"><button id="check">Check connection</button><button id="leave" class="danger">Leave</button></div><p id="ack" class="muted" aria-live="polite">Share the room ID with a friend.</p><details><summary>Practice enemies</summary><ul id="creeps" data-testid="creeps"></ul></details>`;
+      return `<div class="room-strip"><span>Phòng <strong id="party-room">—</strong></span><span id="connection-status">Connected</span></div><p class="muted">Chia sẻ mã phòng để mời bạn. Chỉ cần biệt danh · Tối đa 6 người.</p><ul id="players" data-testid="players" class="party-list"></ul><div class="window-footer"><button id="check">Kiểm tra kết nối</button><button id="leave" class="danger">Rời trận</button></div><p id="ack" class="muted" aria-live="polite">Chia sẻ mã phòng với bạn bè.</p><details><summary>Quái tập luyện</summary><ul id="creeps" data-testid="creeps"></ul></details>`;
     case 'pvp':
-      return `${unavailable}<div class="pvp-sides"><section><h3>Side A</h3><span>◇</span><button disabled>Join A</button></section><section><h3>Side B</h3><span>◇</span><button disabled>Join B</button></section></div><p class="muted">PvP has not been implemented. This window establishes its in-game placement.</p><button disabled>Ready · unavailable</button>`;
+      return `${unavailable}<div class="pvp-sides"><section><h3>Đội A</h3><span>◇</span><button disabled>Vào đội A</button></section><section><h3>Đội B</h3><span>◇</span><button disabled>Vào đội B</button></section></div><p class="muted">Đấu đối kháng chưa mở. Đây là cửa sổ xem trước.</p><button disabled>Sẵn sàng · Chưa mở</button>`;
   }
 }

@@ -372,3 +372,112 @@
   background-size: 160px 160px;
   background-position: center;
 }
+
+/* Compact selection keeps its four portraits, roster and primary action visible. */
+.school-window {
+  padding: 12px 18px;
+}
+.school-window .pre-title {
+  font-size: 25px;
+  margin-bottom: 8px;
+  padding: 6px 22px;
+}
+.school-window .pre-room {
+  margin: 5px 0 10px;
+}
+.school-window .pre-actions {
+  margin-top: 10px;
+}
+.school-window .school-card p {
+  margin: 5px 0;
+}
+.school-window .school-card {
+  min-width: 0;
+}
+.school-window .school-portrait {
+  height: 100px;
+  margin: 2px;
+}
+.school-window .pre-error:empty {
+  display: none;
+}
+.school-window .pre-note {
+  margin: 8px 0;
+}
+@media (max-width: 850px) and (min-width: 600px) {
+  .school-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 7px;
+  }
+  #pregame .school-card {
+    padding: 6px;
+  }
+  .school-card h3 {
+    font-size: 19px;
+  }
+  .school-portrait {
+    width: 100%;
+  }
+}
+@media (max-height: 550px) and (min-width: 600px) {
+  #pregame {
+    padding: 10px;
+  }
+  .school-window .school-portrait {
+    height: 65px;
+    background-size: 120px 120px;
+    background-position: center;
+  }
+  .school-window .pre-players li {
+    padding: 2px 6px;
+  }
+  .school-window .pre-actions button {
+    padding: 7px 18px;
+    font-size: 15px;
+  }
+  .school-window .pre-note {
+    margin: 4px 0;
+  }
+}
+
+@media (max-height: 550px) and (min-width: 600px) {
+  .school-window {
+    padding: 6px 12px;
+  }
+  .school-window .pre-title {
+    font-size: 22px;
+    padding: 4px 18px;
+    margin-bottom: 4px;
+  }
+  #pregame .school-window .school-card {
+    padding: 6px;
+  }
+  .school-window .school-card h3 {
+    font-size: 20px;
+  }
+  .school-window .school-portrait {
+    height: 52px;
+    background-size: 100px 100px;
+  }
+  .school-window .pre-players {
+    margin-top: 4px;
+  }
+  .school-window .pre-players li {
+    font-size: 12px;
+  }
+  .school-window .pre-players span {
+    font-size: 10px;
+  }
+  .school-window .pre-note {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+  .school-window .pre-actions {
+    margin-top: 6px;
+  }
+  #pregame .school-window .pre-actions button {
+    min-height: 32px;
+    padding: 6px 14px;
+    font-size: 14px;
+  }
+}

@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 11;
+export const PROTOCOL_VERSION = 12;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -16,7 +16,7 @@ export const nicknameSchema = z
       .max(lobbyConfig.nicknameMaxLength)
       .regex(
         /^[\p{L}\p{M}\p{N} _.'-]+$/u,
-        'Use letters, numbers, spaces or simple punctuation.',
+        'Chỉ dùng chữ, số, khoảng trắng hoặc dấu câu đơn giản.',
       ),
   );
 
@@ -89,6 +89,16 @@ const assetId = z
   .regex(/^[a-z_]+$/)
   .max(80);
 export const buildActionSchema = z.discriminatedUnion('action', [
+  z.strictObject({
+    ...buildBase,
+    action: z.literal('mode'),
+    mode: z.enum(['default', 'custom']),
+  }),
+  z.strictObject({
+    ...buildBase,
+    action: z.literal('branch'),
+    basicId: assetId,
+  }),
   z.strictObject({
     ...buildBase,
     action: z.literal('loadout'),
@@ -190,6 +200,9 @@ export const CharacterStatsState = schema(
 export const BuildState = schema(
   {
     enabled: t.boolean().default(false),
+    mode: t.string().default('custom'),
+    branchId: t.string().default(''),
+    slotSkills: t.array('string'),
     revision: t.number().default(0),
     earned: t.number().default(1),
     allocated: t.number().default(0),

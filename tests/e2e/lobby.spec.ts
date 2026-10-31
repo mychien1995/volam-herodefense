@@ -15,11 +15,14 @@ test('two clients share a waiting room, rejoin before start, check connection an
     const id = await a.evaluate<string>('window.__VOLAM__.snapshot().roomId');
     await joinWaiting(b, 'Thiếu Lâm', id);
     await expect(a.locator('.pre-players')).toContainText('Thiếu Lâm');
-    await b.getByRole('button', { name: 'Leave room', exact: true }).click();
-    await expect(b.locator('.pre-title')).toHaveText('Room Browser');
+    await b.getByRole('button', { name: 'Rời phòng', exact: true }).click();
+    await expect(b.locator('.pre-title')).toHaveText('Danh sách phòng');
     await expect(a.locator('.pre-players')).not.toContainText('Thiếu Lâm');
-    await b.getByLabel('Room code', { exact: true }).fill(id);
-    await b.getByRole('button', { name: 'Join by code', exact: true }).click();
+    await b
+      .locator('#pregame')
+      .getByLabel('Mã phòng', { exact: true })
+      .fill(id);
+    await b.getByRole('button', { name: 'Vào bằng mã', exact: true }).click();
     await expect(a.locator('.pre-players')).toContainText('Thiếu Lâm');
     await startTogether([a, b]);
     for (const p of [a, b]) {
@@ -27,7 +30,7 @@ test('two clients share a waiting room, rejoin before start, check connection an
       await p.locator('[data-menu=party]').first().click();
       await expect(p.getByTestId('player-count')).toHaveText('2 / 6');
     }
-    await a.getByRole('button', { name: 'Check connection' }).click();
+    await a.getByRole('button', { name: 'Kiểm tra kết nối' }).click();
     await expect(a.locator('#ack')).toHaveText(
       /Server acknowledged check #\d+\. Count: 1\./,
     );

@@ -1,3 +1,4 @@
+import { initializeProgression } from '@volam/game-core';
 import { afterAll, afterEach, beforeAll, it, expect } from 'vitest';
 import { ColyseusTestServer } from '@colyseus/testing';
 import { Client } from '@colyseus/sdk';
@@ -75,6 +76,15 @@ it('four schools share authoritative combos, support, damage and rewards; zones/
   await expect.poll(() => gold.state.phase).toBe('IN_GAME');
   const room = server.getRoomById<MatchRoom>(gold.roomId),
     h = room.simulation.hero(gold.sessionId)!;
+  for (const peer of peers)
+    initializeProgression(
+      room.simulation.hero(peer.sessionId)!,
+      m1Config,
+      'custom',
+    );
+  await expect
+    .poll(() => gold.state.players.get(gold.sessionId)!.build.mode)
+    .toBe('custom');
   expect(h.maxHp).toBe(220);
   expect(h.basicId).toBe('thieu_lam_quyen');
   expect(h.skillIds).toEqual(['', '', '', '']);

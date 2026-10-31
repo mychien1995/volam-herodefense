@@ -31,7 +31,14 @@ export interface RankedSkill {
   levelGates: number[];
   ranks: Ability[];
 }
+export interface DefaultBranch {
+  schoolId: string;
+  style: string;
+  skillIds: string[];
+}
+export type SkillMode = 'default' | 'custom';
 export interface ProgressionDefinition {
+  defaultBranches?: Record<string, DefaultBranch> | undefined;
   skills: Record<string, RankedSkill>;
   schools: Record<string, SchoolStatProfile>;
   maxUltimates: number;
@@ -40,9 +47,14 @@ export interface ProgressionDefinition {
 }
 export interface HeroProgression {
   revision: number;
+  mode: SkillMode;
+  branchId: string;
+  defaultSkills: string[];
   ranks: Record<string, number>;
 }
 export type BuildChange =
+  | { action: 'mode'; mode: SkillMode }
+  | { action: 'branch'; basicId: string }
   | { action: 'loadout'; ids: string[] }
   | { action: 'upgrade'; skillId: string }
   | { action: 'reset' }

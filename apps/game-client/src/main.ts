@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
+import { connectionReason } from './connection-copy.js';
 import { Client, type Room } from '@colyseus/sdk';
 import type { MatchRoom } from '../../game-server/src/rooms/MatchRoom.js';
-import { lobbyConfig } from '@volam/game-data';
+import { lobbyConfig, dungeonForZone } from '@volam/game-data';
 import type { Command, CombatEvent } from '@volam/game-core';
 import {
   MATCH_ROOM,
@@ -100,9 +101,6 @@ arenaScene.onNpc = (menu) => {
     ui.open(menu);
   }
 };
-arenaScene.onDungeonExit = () => {
-  if (!ui.blocked) dungeonAction({ action: 'exit' });
-};
 ui.onStudy = (enabled) => {
   if (artPreview || !game.isBooted) return;
   if (enabled) {
@@ -171,7 +169,14 @@ const unbindInput = bindGameplayInput(
     room.state.phase === 'IN_GAME' &&
     !!room.state.players.get(room.sessionId)?.confirmed &&
     !artPreview,
-  () => ui.blocked,
+  () => ui.blocked || (room?.state?.players?.get(room.sessionId)?.hp ?? 0) <= 0,
+  () => {
+    const hero = room?.state.players.get(room.sessionId);
+    if (!hero || hero.zoneId === 'arena' || hero.hp <= 0) return;
+    const d = dungeonForZone(hero.zoneId);
+    if (Math.hypot(hero.x - d.exit.x, hero.y - d.exit.y) <= d.exitRange)
+      dungeonAction({ action: 'exit' });
+  },
 );
 function controls(connected: boolean, busy = false): void {
   for (const field of form.querySelectorAll<
@@ -191,16 +196,16 @@ async function connect(existing: boolean): Promise<void> {
   });
   const roomId = element<HTMLInputElement>('#room-id').value.trim();
   if (!parsed.success) {
-    status.textContent = `Use a nickname of 1–${lobbyConfig.nicknameMaxLength} letters, numbers or simple punctuation.`;
+    status.textContent = `Biệt danh cần từ 1–${lobbyConfig.nicknameMaxLength} ký tự chữ, số hoặc dấu câu đơn giản.`;
     pregame.fail(status.textContent);
     return;
   }
   if (existing && !roomId) {
-    status.textContent = 'Enter a room ID to join.';
+    status.textContent = 'Hãy nhập mã phòng để tham gia.';
     return;
   }
   controls(false, true);
-  status.textContent = 'Connecting…';
+  status.textContent = 'Đang kết nối…';
   try {
     const joined = existing
       ? await client.joinById<MatchRoom>(roomId, parsed.data)
@@ -239,8 +244,8 @@ async function connect(existing: boolean): Promise<void> {
       const ack = connectionAckSchema.safeParse(payload);
       ui.acknowledge(
         ack.success
-          ? `Server acknowledged check #${ack.data.sequence}. Count: ${ack.data.checks}.`
-          : 'Incompatible server acknowledgement.',
+          ? `Server đã nhận kiểm tra #${ack.data.sequence}. Tổng: ${ack.data.checks}.`
+          : 'Phản hồi server không tương thích.',
       );
     });
     joined.onMessage('combat-event', (payload: unknown) => {
@@ -263,22 +268,22 @@ async function connect(existing: boolean): Promise<void> {
       }
     });
     joined.onError((code, message) => {
-      status.textContent = `Connection error ${code}: ${message}`;
+      status.textContent = `Lỗi kết nối ${code}: ${connectionReason(message ?? '')}`;
       pregame.fail(status.textContent);
-      element('#hud-connection').textContent = `Error ${code}`;
+      element('#hud-connection').textContent = `Lỗi ${code}`;
       ui.notify(status.textContent);
     });
     joined.onLeave((code) => {
       if (room !== joined) return;
       room = undefined;
       pregame.disconnected(
-        `Disconnected (${code}). Create or join a room to return.`,
+        `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`,
       );
       arenaScene.setSnapshot(undefined);
       controls(false);
       ui.connected('', '');
       skillPreview.hide();
-      status.textContent = `Disconnected (${code}). Create or join a room to return.`;
+      status.textContent = `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`;
     });
     if (joined.state?.players && joined.state.phase) {
       pregame.update(joined.state, joined.roomId, joined.sessionId);
@@ -295,9 +300,9 @@ async function connect(existing: boolean): Promise<void> {
     canvas.tabIndex = 0;
     canvas.focus();
   } catch (error: unknown) {
-    status.textContent = `Could not connect: ${error instanceof Error ? error.message : 'unknown error'}`;
+    status.textContent = `Không thể kết nối: ${connectionReason(error instanceof Error ? error.message : '')}`;
     controls(false);
-    pregame.fail(status.textContent ?? 'Connection failed');
+    pregame.fail(status.textContent ?? 'Kết nối thất bại');
   }
 }
 pregame.onConnect = (nickname, id) => {
@@ -346,10 +351,17 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
           : artPreview
             ? gallery.inspect()
             : arenaScene.inspect(),
-      ...(new URLSearchParams(location.search).get('feedbackArtReview')==='1' ? {
-        // Explicit presentation-only renderer fixture: no command or state mutation.
-        reviewFeedback:(asset:string,tag:string,x:number,y:number)=>arenaScene.reviewFeedback(asset,tag,x,y),
-      } : {}),
+      ...(new URLSearchParams(location.search).get('feedbackArtReview') === '1'
+        ? {
+            // Explicit presentation-only renderer fixture: no command or state mutation.
+            reviewFeedback: (
+              asset: string,
+              tag: string,
+              x: number,
+              y: number,
+            ) => arenaScene.reviewFeedback(asset, tag, x, y),
+          }
+        : {}),
     }),
   });
 }

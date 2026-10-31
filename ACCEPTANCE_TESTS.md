@@ -1,3 +1,12 @@
+## Small gameplay changes — 2026-10-31
+
+- New normal clients start Default; Lv1..6 slot ranks are 1/0/0/0,1/1/0/0,1/1/1/0,1/1/1/1,2/1/1/1,2/2/1/1. Both peers observe automatic learning/equipping. Same-branch replacement retains slot allocation; mixed/foreign/duplicate/empty default builds are rejected atomically.
+- Existing caps/gates/one-ultimate/arena-only rules remain; pending and surplus points reconcile with earned budget. Repeated mode/branch changes never duplicate stats, shorten cooldown debt or refill resources. Custom mixing/manual learning remains functional.
+- All product copy, accessible labels and normal server rejections are Vietnamese, except agreed common terms/keys. Six-player school selection fits944×466,1280×720,1920×1080 without scrolling or clipped action buttons, Leave left/Confirm right.
+- Space at both supported dungeon doors requires a living nearby player. Distant presses, repeat events and portal clicks do not exit. Opening menus blocks interaction; server proximity/phase/membership checks remain.
+- P toggles Võ Học, respects typing/select/other-dialog ownership and restores combat focus when closing. Quit is first and only leaves after explicit confirmation.
+- Local death grays only that player's world, blocks movement/combat, keeps a readable countdown and respawns after the existing delay at the central arena hero-spawn marker from arena/forest/desert. Colors/controls recover on respawn and leave. No XP/gold loss.
+
 # Acceptance Tests — Rule-to-test traceability
 
 ## Desert integration — 2026-10-31

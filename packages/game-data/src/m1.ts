@@ -4,6 +4,7 @@ import {
   addThieuLamProgression,
 } from './thieu-lam.js';
 import { z } from 'zod';
+import { defaultBranches } from './default-builds.js';
 import type { SimulationConfig } from '@volam/game-core';
 import { arena } from './arena.js';
 import { caiBangExtraSkills, caiBangPassive } from './cai-bang.js';
@@ -215,4 +216,5 @@ m1Config.progression = createProgression(
 addThienSonProgression(m1Config.progression);
 addVoDangProgression(m1Config.progression);
 addThieuLamProgression(m1Config.progression);
+m1Config.progression.defaultBranches = defaultBranches;
 progressionSchema.parse(m1Config.progression);

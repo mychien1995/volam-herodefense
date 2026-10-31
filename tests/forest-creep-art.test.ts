@@ -15,10 +15,10 @@ const m = JSON.parse(
   ),
 ) as ForestCreepManifest;
 it('labels candidate art separately from unmapped placeholders', () => {
-  expect(forestArtNotice([''])).toContain('placeholder');
-  expect(forestArtNotice(['truc_xa'])).toContain('candidate');
+  expect(forestArtNotice([''])).toContain('hình tạm');
+  expect(forestArtNotice(['truc_xa'])).toContain('bản thử nghiệm');
   expect(forestArtNotice(['truc_xa', 'unknown'])).toContain(
-    'candidate + placeholder',
+    'bản thử nghiệm và hình tạm',
   );
 });
 it('selects exact server forest types only; preserves unknown/other-zone fallback', () => {

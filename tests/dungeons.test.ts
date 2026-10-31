@@ -52,16 +52,16 @@ describe('M2A deterministic creep instances', () => {
     const match = setup(),
       hero = match.add('a', 'Hero');
     hero.hp = 0;
-    expect(match.enter('a', 'private')).toContain('alive');
+    expect(match.enter('a', 'private')).toContain('còn sống');
     expect(match.zones.size).toBe(1);
     hero.hp = hero.maxHp;
     const { zone } = ready(match, 'a');
-    expect(match.exit('a')).toContain('physical');
+    expect(match.exit('a')).toContain('Space');
     expect(match.zoneOf('a')).toBe(zone);
-    expect(match.enter('a', 'shared')).toContain('arena');
+    expect(match.enter('a', 'shared')).toContain('đấu trường');
     hero.hp = 0;
     Object.assign(hero, match.dungeon.exit);
-    expect(match.exit('a')).toContain('physical');
+    expect(match.exit('a')).toContain('Space');
   });
   it('puts two shared participants in one instance and enforces capacity', () => {
     const match = setup();
@@ -74,7 +74,7 @@ describe('M2A deterministic creep instances', () => {
     expect(first.zone.world.creeps.size).toBe(3);
     expect(first.zone.world.creeps.values().next().value!.maxHp).toBe(hp);
     match.add('g', 'Seventh');
-    expect(match.enter('g', 'shared')).toContain('full');
+    expect(match.enter('g', 'shared')).toContain('đầy');
     expect(match.zoneOf('g')!.access).toBe('arena');
   });
   it('isolates identical coordinates, entity IDs, damage, gold and EXP between private instances', () => {
@@ -136,7 +136,7 @@ describe('M2A deterministic creep instances', () => {
       { hero } = ready(match, 'a');
     expect(
       match.input('a', 1, { kind: 'select-basic', id: 'cai_bang_chuong' }),
-    ).toContain('arena only');
+    ).toContain('đấu trường');
     match.step();
     expect(hero.basicId).toBe('cai_bang_bong');
   });
@@ -258,7 +258,7 @@ describe('M2A deterministic creep instances', () => {
     expect(hero).toMatchObject({
       xp: 45,
       gold: 19,
-      ...match.dungeon.arenaReturn,
+      ...match.base.spawn,
     });
     expect(zone.world.heroes.size).toBe(0);
   });

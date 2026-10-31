@@ -159,7 +159,7 @@ it('cleans self buffs, queued effects and channels on zone travel without leakin
     kind: 'dev-loadout',
     ids: ['cam_long_cong', '', '', ''],
   });
-  expect((await invalid).reason).toContain('arena');
+  expect((await invalid).reason).toContain('đấu trường');
   const h = room.simulation.hero(a.sessionId)!;
   h.hp = 0;
   await expect
@@ -182,7 +182,7 @@ it('rejects duplicate/unknown loadouts and disables development changes without 
       kind: 'dev-loadout',
       ids,
     });
-    expect((await rejected).reason).toContain('Unknown or duplicate');
+    expect((await rejected).reason).toContain('không hợp lệ hoặc bị trùng');
   }
   process.env['VOLAM_DEV_SKILLS'] = '0';
   try {
@@ -196,7 +196,7 @@ it('rejects duplicate/unknown loadouts and disables development changes without 
       kind: 'dev-loadout',
       ids: ['cam_long_cong', '', '', ''],
     });
-    expect((await rejected).reason).toContain('disabled');
+    expect((await rejected).reason).toContain('đang tắt');
   } finally {
     process.env['VOLAM_DEV_SKILLS'] = '1';
   }

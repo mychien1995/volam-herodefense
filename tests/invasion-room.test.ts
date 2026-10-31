@@ -1,5 +1,6 @@
 import { afterAll, afterEach, beforeAll, expect, it } from 'vitest';
 import { boot, type ColyseusTestServer } from '@colyseus/testing';
+import { m1Config } from '@volam/game-data';
 import { Client } from '@colyseus/sdk';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 import { createGameServer } from '../apps/game-server/src/app.config.js';
@@ -174,8 +175,8 @@ it('broadcasts death/respawn, then freezes the match at a single defeat', async 
   const respawn = room.simulation.respawns.get(a.sessionId)!;
   advance(room, respawn + 1);
   await expect.poll(() => b.state.players.get(a.sessionId)?.hp).toBe(h.maxHp);
-  expect(h.x).toBe(960);
-  expect(h.y).toBe(576);
+  expect(h.x).toBe(m1Config.spawn.x);
+  expect(h.y).toBe(m1Config.spawn.y);
   room.world.statue!.hp = 0;
   await expect.poll(() => a.state.phase).toBe('DEFEAT');
   await expect.poll(() => b.state.phase).toBe('DEFEAT');

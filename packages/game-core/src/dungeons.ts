@@ -134,9 +134,9 @@ export class DungeonMatch {
   ): string | undefined {
     const dungeon = this.definitions.get(destination);
     if (!dungeon || !['private', 'shared'].includes(access))
-      return 'This dungeon destination is unavailable.';
+      return 'Phó bản này chưa mở.';
     if (!this.canEnterDungeon(id))
-      return 'Enter dungeons from the arena while alive.';
+      return 'Chỉ vào phó bản khi còn sống tại đấu trường.';
     const key =
       access === 'shared'
         ? `${dungeon.id}_shared`
@@ -147,7 +147,7 @@ export class DungeonMatch {
       ((zone.ownerId && zone.ownerId !== id) ||
         zone.world.heroes.size >= (access === 'private' ? 1 : dungeon.capacity))
     )
-      return 'This dungeon instance is full or private.';
+      return 'Phó bản đã đầy hoặc thuộc về người chơi khác.';
     if (!zone) {
       // Hash instance identity so private RNG streams do not consume arena RNG.
       let seed = this.seed;
@@ -176,7 +176,7 @@ export class DungeonMatch {
     return undefined;
   }
   exit(id: string): string | undefined {
-    if (this.invasion?.defeated) return 'The match has ended.';
+    if (this.invasion?.defeated) return 'Trận đấu đã kết thúc.';
     const zone = this.zoneOf(id),
       hero = this.hero(id);
     if (
@@ -187,14 +187,14 @@ export class DungeonMatch {
       !zone.dungeon ||
       distance(hero, zone.dungeon.exit) > zone.dungeon.exitRange
     )
-      return 'Walk to the physical dungeon exit portal to return.';
+      return 'Hãy đến gần cửa và nhấn Space để rời phó bản.';
     this.transfer(id, this.arena, zone.dungeon.arenaReturn);
     return undefined;
   }
   input(id: string, sequence: number, command: Command): string | undefined {
-    if (this.invasion?.defeated) return 'The match has ended.';
+    if (this.invasion?.defeated) return 'Trận đấu đã kết thúc.';
     const zone = this.zoneOf(id);
-    if (!zone) return 'Player is not in an active zone.';
+    if (!zone) return 'Người chơi chưa ở trong khu vực hoạt động.';
     if (
       this.hero(id)?.progression &&
       ['select-basic', 'dev-loadout'].includes(command.kind)
@@ -204,7 +204,7 @@ export class DungeonMatch {
       (command.kind === 'select-basic' || command.kind === 'dev-loadout') &&
       zone.access !== 'arena'
     )
-      return 'Change your normal attack in the arena only.';
+      return 'Chỉ được đổi đòn đánh thường tại đấu trường.';
     submitInput(zone.world, id, sequence, command);
     return undefined;
   }
@@ -286,7 +286,7 @@ export class DungeonMatch {
       if (!this.respawns.has(id))
         this.respawns.set(id, this.tick + dungeon.respawnTicks);
       if (this.tick >= this.respawns.get(id)!) {
-        this.transfer(id, this.arena, dungeon.arenaReturn);
+        this.transfer(id, this.arena, this.base.spawn);
         hero.hp = hero.maxHp;
         hero.mana = hero.maxMana;
         hero.pose = 'idle';

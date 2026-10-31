@@ -38,7 +38,6 @@ interface EntityView {
 }
 export class ArenaScene extends Phaser.Scene {
   onNpc: (menu: 'merchant' | 'pvp') => void = () => {};
-  onDungeonExit: () => void = () => {};
   private zoneId = 'arena';
   private snapshot: LobbyState | undefined;
   private sessionId = '';
@@ -136,11 +135,7 @@ export class ArenaScene extends Phaser.Scene {
         .centerOn(arena.spawn.x, arena.spawn.y);
     } else {
       const dungeon = dungeonForZone(zoneId);
-      this.trees = createCreepDungeonArt(
-        this,
-        () => this.onDungeonExit(),
-        dungeon.id,
-      );
+      this.trees = createCreepDungeonArt(this, dungeon.id);
       this.cameras.main
         .setBounds(0, 0, dungeon.width, dungeon.height)
         .centerOn(dungeon.spawn.x, dungeon.spawn.y);

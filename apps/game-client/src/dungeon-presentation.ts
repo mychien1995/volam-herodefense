@@ -11,20 +11,12 @@ export function preloadBambooForestArt(scene: Phaser.Scene): void {
     '/assets/bamboo_forest/scenery.json',
   );
 }
-function clickOnCanvas(
-  pointer: Phaser.Input.Pointer,
-  action: () => void,
-): void {
-  if (pointer.event.target instanceof HTMLCanvasElement) action();
-}
-
 /** Presentation of shared map objects; collision remains server-owned. */
 export function createCreepDungeonArt(
   scene: Phaser.Scene,
-  exit: () => void,
   destination = 'forest',
 ): Phaser.GameObjects.Image[] {
-  if (destination === 'desert') return createDesertArt(scene, exit);
+  if (destination === 'desert') return createDesertArt(scene);
   for (const key of ['bamboo_terrain', 'bamboo_scenery'])
     scene.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
   const map = scene.make.tilemap({ key: 'creep_forest' });
@@ -77,9 +69,7 @@ export function createCreepDungeonArt(
   arch
     .setOrigin(0.5, (arch.height - 4) / arch.height)
     .setDepth(portal.y)
-    .setName('dungeon-exit')
-    .setInteractive({ useHandCursor: true })
-    .on('pointerup', (p: Phaser.Input.Pointer) => clickOnCanvas(p, exit));
+    .setName('dungeon-exit');
   scene.add
     .text(portal.x, portal.y + 5, 'Lối Ra · Về đấu trường', {
       fontFamily: 'Segoe UI',
@@ -89,16 +79,11 @@ export function createCreepDungeonArt(
       padding: { x: 4, y: 2 },
     })
     .setOrigin(0.5, 0)
-    .setDepth(portal.y + 0.2)
-    .setInteractive({ useHandCursor: true })
-    .on('pointerup', (p: Phaser.Input.Pointer) => clickOnCanvas(p, exit));
+    .setDepth(portal.y + 0.2);
   return trees;
 }
 
-function createDesertArt(
-  scene: Phaser.Scene,
-  exit: () => void,
-): Phaser.GameObjects.Image[] {
+function createDesertArt(scene: Phaser.Scene): Phaser.GameObjects.Image[] {
   for (const key of ['desert_terrain', 'desert_scenery'])
     scene.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
   const map = scene.make.tilemap({ key: 'creep_desert' });
@@ -142,12 +127,7 @@ function createDesertArt(
       foreground.push(image);
   }
   const p = desertDungeon.exit;
-  place('dungeon_exit_portal', p.x, p.y)
-    .setName('dungeon-exit')
-    .setInteractive({ useHandCursor: true })
-    .on('pointerup', (pointer: Phaser.Input.Pointer) =>
-      clickOnCanvas(pointer, exit),
-    );
+  place('dungeon_exit_portal', p.x, p.y).setName('dungeon-exit');
   scene.add
     .text(p.x, p.y + 5, 'Lối Ra · Về đấu trường', {
       fontFamily: 'Segoe UI',
@@ -157,10 +137,6 @@ function createDesertArt(
       padding: { x: 4, y: 2 },
     })
     .setOrigin(0.5, 0)
-    .setDepth(p.y + 0.2)
-    .setInteractive({ useHandCursor: true })
-    .on('pointerup', (pointer: Phaser.Input.Pointer) =>
-      clickOnCanvas(pointer, exit),
-    );
+    .setDepth(p.y + 0.2);
   return foreground;
 }

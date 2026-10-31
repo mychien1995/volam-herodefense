@@ -93,6 +93,14 @@ export function monitor(p: Page) {
 export async function menu(p: Page) {
   await p.locator('.loadout-toggle').click();
   await expect(p.locator('#skill-management')).toBeVisible();
+  if ((await p.locator('#skill-mode').inputValue()) === 'default') {
+    await p.locator('#skill-mode').selectOption('custom');
+    await expect
+      .poll(async () => p.locator('#skill-mode').inputValue())
+      .toBe('custom');
+    await p.locator('#reset-skills').click();
+    await expect(p.locator('#reset-skills')).toBeDisabled();
+  }
 }
 export async function close(p: Page) {
   await p.keyboard.press('Escape');
@@ -153,14 +161,6 @@ export async function enter(p: Page) {
 }
 export async function exit(p: Page) {
   await moveTo(p, 160, 320);
-  const info = await view(p),
-    o = info.interactions.find((o) => o.id === 'dungeon-exit')!,
-    c = p.locator('#game canvas'),
-    box = (await c.boundingBox())!,
-    z = await c.evaluate((n) => n.clientWidth / (n as HTMLCanvasElement).width);
-  await p.mouse.click(
-    box.x + (o.x - info.camera.x) * z,
-    box.y + (o.y - 20 - info.camera.y) * z,
-  );
+  await p.keyboard.press('Space');
   await expect.poll(async () => (await hero(p)).zoneId).toBe('arena');
 }

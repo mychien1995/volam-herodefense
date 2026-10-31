@@ -131,7 +131,7 @@ describe('M2A real Colyseus zone authority and views', () => {
       sequence: next(a!),
       action: 'exit',
     });
-    expect((await far).reason).toContain('physical');
+    expect((await far).reason).toContain('Space');
     Object.assign(authority.simulation.hero(a!.sessionId)!, desertDungeon.exit);
     a!.send('dungeon-action', {
       protocolVersion: PROTOCOL_VERSION,
@@ -161,7 +161,7 @@ describe('M2A real Colyseus zone authority and views', () => {
       action: 'enter',
       access: 'private',
     });
-    expect((await rejected).reason).toContain('not begun');
+    expect((await rejected).reason).toContain('chưa bắt đầu');
     const authority = server.getRoomById<MatchRoom>(room.roomId);
     expect(authority.simulation.membership.size).toBe(0);
     expect(authority.simulation.zones.size).toBe(1);
@@ -181,7 +181,7 @@ describe('M2A real Colyseus zone authority and views', () => {
       action: 'enter',
       access: 'private',
     });
-    expect((await rejected).reason).toContain('alive');
+    expect((await rejected).reason).toContain('còn sống');
     expect(authority.simulation.zones.size).toBe(1);
     hero.hp = hero.maxHp;
     await enter(a!, authority, 'private');
@@ -192,7 +192,7 @@ describe('M2A real Colyseus zone authority and views', () => {
       sequence: next(a!),
       action: 'exit',
     });
-    expect((await far).reason).toContain('physical');
+    expect((await far).reason).toContain('Space');
     expect(authority.simulation.zoneOf(a!.sessionId)).toBe(zone);
     const style = a!.waitForMessage('command-rejected');
     a!.send('input', {
@@ -201,7 +201,7 @@ describe('M2A real Colyseus zone authority and views', () => {
       kind: 'select-basic',
       id: 'cai_bang_chuong',
     });
-    expect((await style).reason).toContain('arena only');
+    expect((await style).reason).toContain('đấu trường');
     await exit(a!, authority);
     expect(authority.simulation.hero(a!.sessionId)!).toMatchObject(
       creepDungeon.arenaReturn,
