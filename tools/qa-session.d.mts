@@ -32,3 +32,9 @@ export function ownedQaServices(): {
   add(close: () => unknown): void;
   close(): Promise<void>;
 };
+
+export function qaWorkflowSession(
+  mode: 'quick' | 'browser' | 'final',
+  args?: string[],
+  env?: NodeJS.ProcessEnv,
+): QaSession;

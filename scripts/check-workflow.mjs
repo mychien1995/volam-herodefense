@@ -10,7 +10,10 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { randomUUID } from 'node:crypto';
-import { qaSession, qaEvidenceDirectory } from '../tools/qa-session.mjs';
+import {
+  qaWorkflowSession,
+  qaEvidenceDirectory,
+} from '../tools/qa-session.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const require = createRequire(import.meta.url);
@@ -71,7 +74,7 @@ if (process.env.VOLAM_QA_SERVER_PORT) {
   process.env.VITE_SERVER_URL ??= `http://127.0.0.1:${process.env.VOLAM_QA_SERVER_PORT}`;
 }
 // Validate overrides before asset preparation; no cached stage success is consumed.
-const session = qaSession();
+const session = qaWorkflowSession(mode, args);
 if (session.cacheDir) process.env.VOLAM_QA_VITE_CACHE ??= session.cacheDir;
 const elapsed = performance.now();
 const reportDirectory = resolve(

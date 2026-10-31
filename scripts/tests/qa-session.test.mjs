@@ -4,6 +4,7 @@ import { createServer } from 'node:http';
 import { resolve } from 'node:path';
 import {
   qaSession,
+  qaWorkflowSession,
   qaEvidenceDirectory,
   requireFreePorts,
   verifyQaIdentity,
@@ -179,4 +180,46 @@ test('client middleware identifies the actual owned run and cleanup attempts all
   await assert.rejects(owned.close(), /cleanup failed/);
   await owned.close();
   assert.deepEqual(calls, ['client', 'server']);
+});
+
+test('workflow selects the managed profile rather than forcing every run to gameplay ports', () => {
+  const env = { VITE_SERVER_URL: 'http://localhost:2588' };
+  for (const args of [
+    ['--config', 'playwright.arena-creeps.config.ts'],
+    ['--config=playwright.arena-creeps.config.ts'],
+    ['-c', 'C:\\repo\\playwright.arena-creeps.config.ts'],
+  ]) {
+    const session = qaWorkflowSession('browser', args, env);
+    assert.equal(session.serverPort, 2588);
+    assert.equal(session.clientPort, 5186);
+    assert.equal(session.serverUrl, env.VITE_SERVER_URL);
+  }
+  for (const [mode, args] of [
+    ['quick', ['tests/forest-creep-art.test.ts']],
+    ['browser', ['--config', 'playwright.forest.config.ts']],
+    ['final', ['--config=playwright.skills.config.ts']],
+  ]) {
+    assert.doesNotThrow(() =>
+      qaWorkflowSession(mode, args, {
+        VITE_SERVER_URL: 'https://independent.example:8443',
+      }),
+    );
+  }
+  assert.throws(
+    () => qaWorkflowSession('browser', [], env),
+    /configured local server port/,
+  );
+  assert.throws(
+    () =>
+      qaWorkflowSession(
+        'final',
+        ['--config=playwright.arena-creeps.config.ts'],
+        { VITE_SERVER_URL: 'http://localhost:2567' },
+      ),
+    /configured local server port/,
+  );
+  assert.throws(
+    () => qaWorkflowSession('browser', ['--config'], {}),
+    /requires a path/,
+  );
 });

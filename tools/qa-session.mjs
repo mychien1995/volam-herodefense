@@ -54,6 +54,38 @@ export function qaSession(defaults = {}, env = process.env) {
   };
 }
 
+/** Only managed browser profiles own endpoint validation; quick/legacy checks do not. */
+export function qaWorkflowSession(mode, args = [], env = process.env) {
+  let config;
+  if (mode !== 'quick')
+    for (let i = 0; i < args.length; i++) {
+      if (args[i] === '--config' || args[i] === '-c') {
+        config = args[++i];
+        if (!config || config.startsWith('-'))
+          throw Error('--config requires a path');
+      } else if (args[i].startsWith('--config=') || args[i].startsWith('-c='))
+        config = args[i].slice(args[i].indexOf('=') + 1);
+    }
+  const name = config?.split(/[\\/]/).at(-1);
+  if (
+    mode === 'quick' ||
+    (name &&
+      !['playwright.config.ts', 'playwright.arena-creeps.config.ts'].includes(
+        name,
+      ))
+  ) {
+    const pathsEnvironment = { ...env };
+    delete pathsEnvironment.VITE_SERVER_URL;
+    return qaSession({}, pathsEnvironment);
+  }
+  return qaSession(
+    name === 'playwright.arena-creeps.config.ts'
+      ? { profile: 'arena-creeps', serverPort: 2588, clientPort: 5186 }
+      : {},
+    env,
+  );
+}
+
 export function qaEvidenceDirectory(defaultDirectory, env = process.env) {
   const base =
     env.VOLAM_QA_EVIDENCE_DIR ??
