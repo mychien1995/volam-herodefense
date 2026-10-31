@@ -2,6 +2,8 @@
 
 ## Bamboo Forest creep artwork approval — 2026-10-31
 
+Runtime update 2026-11-01: the director has now separately authorized the Forest six-type server roster. Normal private/shared spawns use that roster; approved artwork/locks and unsupported VFX mechanic boundaries remain unchanged. Current natural-gameplay evidence is recorded in `docs/FOREST_CREEP_RUNTIME_INTEGRATION.md`; the approval-time roster-pending sentence below is historical.
+
 The director explicitly approved the selected six-enemy sprite/VFX batch (“I approved the artwork”): 384 character frames / 120 directional clips and 112 VFX frames / 28 sequences. `assets/approved_forest_creeps.lock.json` pins 565 selected concepts, production assets, sources and provenance files. Original delivery metadata remains historical; runtime approval status derives from the lock. No artwork bytes were changed. Forest spawn/type distribution and unsupported VFX gameplay contracts remain pending. See `docs/FOREST_CREEP_ART_APPROVAL.md`.
 
 ## M3C3 retained Thiếu Lâm integration — 2026-10-31

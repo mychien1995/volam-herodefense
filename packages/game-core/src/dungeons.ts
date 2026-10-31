@@ -53,6 +53,8 @@ export interface MatchZone {
   wave: number;
   spawnPlayerCount: number;
   nextWaveAt: number | undefined;
+  /** Forest visual roster continues through actual spawn counts, per instance. */
+  forestRosterCursor?: number;
   dungeon?: CreepDungeonDefinition;
 }
 export interface ZoneCombatEvent {
@@ -297,9 +299,13 @@ export class DungeonMatch {
   private assignRoster(zone: MatchZone): void {
     const roster = zone.dungeon?.creepRoster;
     if (!roster?.length) return;
-    let i = (zone.wave - 1) * zone.config.creepSpawns.length;
+    const forest = zone.dungeon?.id === 'forest';
+    let i = forest
+      ? (zone.forestRosterCursor ?? 0)
+      : (zone.wave - 1) * zone.config.creepSpawns.length;
     for (const creep of zone.world.creeps.values())
       creep.archetypeId = roster[i++ % roster.length]!;
+    if (forest) zone.forestRosterCursor = i % roster.length;
   }
   private waveConfig(
     wave: number,

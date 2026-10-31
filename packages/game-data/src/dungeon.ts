@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { blocked, type CreepDungeonDefinition } from '@volam/game-core';
 import raw from './creep-forest-map.json' with { type: 'json' };
+import forestRosterData from './forest-creep-roster.json' with { type: 'json' };
 import { mapObjects } from './arena.js';
 import { m1Config } from './m1.js';
 
@@ -65,7 +66,10 @@ export const creepDungeonSchema = z
     damagePerWave: z.number().nonnegative(),
     hpPerAdditionalPlayer: z.number().nonnegative(),
     damagePerAdditionalPlayer: z.number().nonnegative(),
-    creepRoster: z.array(z.string().regex(/^[a-z_]+$/)).min(1).optional(),
+    creepRoster: z
+      .array(z.string().regex(/^[a-z_]+$/))
+      .min(1)
+      .optional(),
   })
   .superRefine((d, ctx) => {
     if (
@@ -79,9 +83,12 @@ export const creepDungeonSchema = z
           'Dungeon needs unique spawn slots for its maximum scaled wave.',
       });
   });
+/** Director-authorized visual roster; all species retain the common M2A profile. */
+export const forestRoster: readonly string[] = forestRosterData;
 /** M2A prototype tuning, separate from mechanics and not a final balance claim. */
 export const creepDungeon: CreepDungeonDefinition = creepDungeonSchema.parse({
   id: 'forest',
+  creepRoster: [...forestRoster],
   width: map.width * 32,
   height: map.height * 32,
   collision: map.layers

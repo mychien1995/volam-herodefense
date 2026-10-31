@@ -103,116 +103,10 @@ async function enter(p: Page) {
   await expect
     .poll(async () => (await view(p)).zoneId)
     .toBe((await hero(p)).zoneId);
-  await expect(p.locator('#zone-status')).toContainText('Creep: placeholder');
+  await expect(p.locator('#zone-status')).toContainText('hình ảnh đã duyệt');
+  await expect(p.locator('#zone-status')).not.toContainText('hình tạm');
 }
 
-async function observePlaceholderAnimations(p: Page, peer: Page) {
-  const manifest = JSON.parse(readFileSync('assets/manifest.json', 'utf8'));
-  const art = manifest.assets.find(
-    (a: { id: string }) => a.id === 'creep_outlaw',
-  );
-  const room = (await read(p)).roomId;
-  const observed: Record<string, string[]> = {};
-  const timings: Record<string, number> = {};
-  for (const pose of [
-    'idle',
-    'walk',
-    'basic_attack',
-    'cast',
-    'hurt',
-    'death',
-  ]) {
-    for (const direction of ['down', 'left', 'right', 'up']) {
-      await p.bringToFront();
-      const start = (await view(p)).sceneTime;
-      const peerStart = (await view(peer)).sceneTime;
-      const response = await p.request.post(
-        `http://127.0.0.1:5187/__bamboo-pose?room=${encodeURIComponent(room)}&pose=${pose}&direction=${direction}`,
-      );
-      if (!response.ok())
-        throw Error(
-          `Pose fixture ${response.status()}: ${await response.text()}`,
-        );
-      const { ids } = (await response.json()) as { ids: string[] };
-      const animations = [
-        art.animations.find(
-          (a: { state: string; direction: string }) =>
-            a.state === pose && a.direction === direction,
-        ),
-      ];
-      await expect
-        .poll(
-          async () => {
-            const v = await view(p);
-            return animations.every((anim, i) => {
-              const key = `creep_outlaw:${pose}:${anim.direction}`;
-              const actor = v.actors.find((a) => a.id === ids[i]);
-              const frames = v.observedCreepFrames[key] ?? [];
-              return (
-                actor?.animation === key &&
-                anim.frames.every((f: string) => frames.includes(f)) &&
-                (anim.repeat === -1 ||
-                  v.completedAnimations.some(
-                    (a) => a.id === actor.id && a.key === key && a.at >= start,
-                  ))
-              );
-            });
-          },
-          { timeout: 8000, intervals: [60] },
-        )
-        .toBe(true);
-      const v = await view(p);
-      timings[pose + ':' + direction] = v.sceneTime - start;
-      for (const anim of animations) {
-        const key = `creep_outlaw:${pose}:${anim.direction}`;
-        observed[key] = v.observedCreepFrames[key]!;
-        expect(new Set(observed[key])).toEqual(new Set(anim.frames));
-      }
-      for (const id of ids) {
-        const actor = v.actors.find((a) => a.id === id)!;
-        expect(actor.artStatus).toBe('placeholder');
-        expect(actor.origin).toEqual([0.5, 1]);
-        expect(actor.scale).toEqual([1, 1]);
-        expect(actor.depth).toBe(actor.y);
-        // A background client can finish a one-shot before it is sampled.
-        // Observe its actual cels/completion instead of requiring a simultaneous key.
-        await peer.bringToFront();
-        const anim = animations[0]!;
-        const key = `creep_outlaw:${pose}:${direction}`;
-        await expect
-          .poll(
-            async () => {
-              const other = await view(peer);
-              return (
-                anim.frames.every((f: string) =>
-                  (other.observedCreepFrames[key] ?? []).includes(f),
-                ) &&
-                (anim.repeat === -1
-                  ? other.actors.find((a) => a.id === id)?.animation === key
-                  : other.completedAnimations.some(
-                      (a) => a.id === id && a.key === key && a.at >= peerStart,
-                    ))
-              );
-            },
-            { timeout: 8000, intervals: [60] },
-          )
-          .toBe(true);
-      }
-      if (pose === 'walk')
-        await p.screenshot({
-          path: evidence + '/creep_placeholder_walk_' + direction + '.png',
-        });
-    }
-  }
-  return {
-    status: 'placeholder',
-    source: art.source,
-    texture: art.id,
-    controlledServerPoses: true,
-    observed,
-    timings,
-  };
-}
 test('six players share authored forest; server collision, depth and physical return remain intact', async ({
   browser,
 }) => {
@@ -405,20 +299,8 @@ test('six players share authored forest; server collision, depth and physical re
     await a.screenshot({ path: evidence + '/bridge_and_stream.png' });
     await moveTo(a, 224, 500);
     await moveTo(a, 224, 320);
-    const placeholderAnimations = await observePlaceholderAnimations(
-      a,
-      pages[1]!,
-    );
     await moveTo(a, 176, 320);
-    const v = await view(a),
-      box = (await a.locator('#game canvas').boundingBox())!;
-    const scale = await a
-      .locator('#game canvas')
-      .evaluate((n) => n.clientWidth / (n as HTMLCanvasElement).width);
-    await a.mouse.click(
-      box.x + (160 - v.camera.x) * scale,
-      box.y + (300 - v.camera.y) * scale,
-    );
+    await a.keyboard.press('Space');
     await expect.poll(async () => (await hero(a)).zoneId).toBe('arena');
     await expect.poll(async () => (await view(a)).zoneId).toBe('arena');
     await expect(a.locator('#zone-status')).toBeHidden();
@@ -433,7 +315,8 @@ test('six players share authored forest; server collision, depth and physical re
           behind,
           front,
           observedWalkFrames: [...frames],
-          placeholderAnimations,
+          normalForestRoster: true,
+          controlledServerPoses: false,
           portalReturn: true,
           bridgeCrossed: true,
           errors,

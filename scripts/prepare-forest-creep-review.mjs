@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { copyIfChanged, writeIfChanged } from './asset-files.mjs';
 import { createHash } from 'node:crypto';
+import forestRoster from '../packages/game-data/src/forest-creep-roster.json' with { type: 'json' };
 const root = new URL('../', import.meta.url);
 export function prepareForestCreepReview() {
   const source = new URL(
@@ -53,6 +54,10 @@ export function prepareForestCreepReview() {
     effectsList = [],
     pack = [],
     files = {};
+  if (JSON.stringify(forestRoster) !== JSON.stringify(expected))
+    throw Error(
+      'Authoritative Forest roster must match the selected six art IDs in order',
+    );
   const read = (path) => JSON.parse(readFileSync(new URL(path, root), 'utf8'));
   const hash = (path) => {
     files[path] = createHash('sha256')
@@ -159,7 +164,13 @@ export function prepareForestCreepReview() {
       {
         status: approved ? 'approved' : 'candidate',
         directorApproved: approved,
-        normalForestRosterIntegrated: false,
+        normalForestRosterIntegrated: true,
+        authoritativeRoster: {
+          source: 'packages/game-data/src/forest-creep-roster.json',
+          archetypeIds: forestRoster,
+          assignment: 'DungeonMatch.assignRoster',
+          commonGameplayProfile: true,
+        },
         assets,
         effects: effectsList,
         files,

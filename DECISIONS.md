@@ -1,3 +1,7 @@
+## Forest authoritative visual roster — 2026-11-01
+
+The director explicitly authorizes the Forest roster in order: `truc_xa`, `doc_chu`, `son_vien`, `truc_lam_kiem_khach`, `moc_linh`, `truc_yeu`. The existing server roster assignment owns these identities in private/shared gameplay. Forest continues the cycle by actual spawn count per instance, including when participant scaling changes wave size. Three-creep waves use the first three, then the last three. Existing counts, common creep stats/AI, rewards, RNG and collision remain unchanged. Artwork approval is already recorded separately; this authorization adds no species abilities, statuses, projectiles or balance changes. See `docs/FOREST_CREEP_RUNTIME_INTEGRATION.md` for current verification and retained historical review evidence.
+
 ## Small gameplay changes — 2026-10-31
 
 The user explicitly requests Vietnamese product UI, compact school selection with Leave left/Confirm right, Space at physical dungeon doors, Quit first with confirmation, P for Võ Học, local grayscale death and central-arena respawn. New normal players use Default mode: choose a branch, automatically learn/equip Q→W→E→R, and skill ranks belong to slots when replacing same-branch skills. Custom retains manual rank allocation, mixed styles and independent A. All build edits remain living-arena-only and server-owned.

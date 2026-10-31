@@ -1,5 +1,7 @@
 # Bamboo Forest creep artwork — director approval
 
+**Runtime update 2026-11-01:** the director separately authorized the ordered six-type authoritative Forest roster. That later authorization supersedes the roster-pending state in this historical approval record; the lock and artwork approval itself are unchanged. Current server assignment and natural-gameplay verification: `FOREST_CREEP_RUNTIME_INTEGRATION.md`. Unsupported species abilities/VFX phase contracts remain unimplemented.
+
 Approved on **2026-10-31** by the game director. Exact approval: **“I approved the artwork”**.
 
 This approves the selected six-enemy Bamboo Forest artwork delivered and reviewed in this chat: Trúc Xà, Độc Chu, Sơn Viên, Trúc Lâm Kiếm Khách, Mộc Linh and Trúc Yêu; selected concepts/comparison; **384 directional character frames / 120 clips**; **112 VFX frames / 28 sequences**; and the reviewed normal-zoom appearance.

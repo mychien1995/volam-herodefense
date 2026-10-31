@@ -9,7 +9,9 @@ import { forestTypes } from '../../apps/game-client/src/forest-creeps.js';
 
 /** Isolated services; no edits to user servers or compiled client endpoints. */
 export default async function setup() {
-  process.env['VOLAM_DEV_PRACTICE_CREEPS'] = '1'; // Explicit historical combat fixture.
+  const natural = process.env['FOREST_NATURAL_PLAYTEST'] === '1';
+  const previousPractice = process.env['VOLAM_DEV_PRACTICE_CREEPS'];
+  process.env['VOLAM_DEV_PRACTICE_CREEPS'] = natural ? '0' : '1';
   const server = createGameServer();
   await server.listen(2587);
   const authority = new ColyseusTestServer(server);
@@ -30,14 +32,16 @@ export default async function setup() {
           'http://127.0.0.1:2587',
         ),
       },
-      plugins: [
-        {
-          name: 'bamboo-test-pose-fixture',
-          configureServer(client) {
-            client.middlewares.use('/__bamboo-pose', poseFixture);
-          },
-        },
-      ],
+      plugins: natural
+        ? []
+        : [
+            {
+              name: 'bamboo-test-pose-fixture',
+              configureServer(client) {
+                client.middlewares.use('/__bamboo-pose', poseFixture);
+              },
+            },
+          ],
     });
     // Test-service-only pose fixture. Never shipped in the game/client protocol.
     // Ordinary dungeon tests still exercise natural AI, hits and rewards separately.
@@ -146,6 +150,9 @@ export default async function setup() {
     return async () => {
       await client.close();
       await server.gracefullyShutdown(false);
+      if (previousPractice === undefined)
+        delete process.env['VOLAM_DEV_PRACTICE_CREEPS'];
+      else process.env['VOLAM_DEV_PRACTICE_CREEPS'] = previousPractice;
     };
   } catch (e) {
     await server.gracefullyShutdown(false);

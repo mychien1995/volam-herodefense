@@ -1,3 +1,7 @@
+## Forest visual roster — 2026-11-01
+
+`game-data/forest-creep-roster.json` is the authoritative ordered six-ID source consumed by `creepDungeon.creepRoster` and the existing Forest asset adapter. `DungeonMatch.assignRoster()` retains a Forest-only per-instance cursor through actual spawn counts; Desert keeps its previous assignment behavior. Existing `CreepState.archetypeId` and MatchRoom projection carry the type; the client registry still selects solely from that field in Forest zones. No protocol, combat-event or renderer API change is required. Static roster metadata is distinct from natural gameplay verification; the new input-only browser scope disables the old pose endpoint and practice targets. See `docs/FOREST_CREEP_RUNTIME_INTEGRATION.md`.
+
 ## Small gameplay / protocol12 — 2026-10-31
 
 BuildState adds mode, branchId and planned slotSkills. Validated mode/branch messages use the existing revision/sequence/zone-owned build path. Default branch presets live in game-data/default-builds.ts; deterministic rank allocation lives in game-core/progression.ts and runs on level gains and validated build changes. Planned zero-rank slots become equipped only when learned. Custom mechanics and per-ID cooldown debt remain. Death recovery now uses base.spawn; ordinary door returns retain dungeon.arenaReturn. Keyboard interaction and CSS grayscale are client presentation only. The isolated browser fixture controls live under tests/e2e and are absent from production server routes. See docs/SMALL_GAMEPLAY_CHANGES.md.

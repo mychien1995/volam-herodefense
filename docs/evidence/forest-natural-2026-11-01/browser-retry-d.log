@@ -1,0 +1,79 @@
+ℹ️  optional .env file not found: .env.development, .env
+
+   ___      _                                   ___   _  ___  
+  / __\___ | |_   _ ___  ___ _   _ ___  __   __/ _ \ / |( _ ) 
+ / /  / _ \| | | | / __|/ _ \ | | / __| \ \ / / | | || |/ _ \ 
+/ /__| (_) | | |_| \__ \  __/ |_| \__ \  \ V /| |_| || | (_) |
+\____/\___/|_|\__, |___/\___|\__,_|___/   \_/  \___(_)_|\___/ 
+              |___/                                           
+
+             · Multiplayer Framework for Node.js ·
+
+💖 Consider becoming a Sponsor on GitHub → https://github.com/sponsors/endel
+🌟 Give us a star on GitHub → https://github.com/colyseus/colyseus
+☁️  Deploy and scale your project on Colyseus Cloud → https://cloud.colyseus.io
+
+
+Running 3 tests using 1 worker
+
+(node:25176) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [chromium] › tests\e2e\forest-natural.spec.ts:205:3 › 2 clients: natural shared Forest spawns and clears two authoritative waves (1.0m)
+  x  2 [chromium] › tests\e2e\forest-natural.spec.ts:205:3 › 6 clients: natural shared Forest spawns and clears two authoritative waves (1.3m)
+(node:56284) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  x  3 [chromium] › tests\e2e\forest-natural.spec.ts:494:1 › private Forest advances its own three-creep roster without leaking types or rewards (1.2m)
+
+
+  1) [chromium] › tests\e2e\forest-natural.spec.ts:205:3 › 6 clients: natural shared Forest spawns and clears two authoritative waves 
+
+    Error: expect(locator).toHaveText(expected) failed
+
+    Locator:  locator('#pregame .pre-title')
+    Expected: "Phòng chờ"
+    Received: "Danh sách phòng"
+    Timeout:  15000ms
+
+    Call log:
+      - Expect "toHaveText" locator('#pregame .pre-title') with timeout 15000ms
+      - waiting for locator('#pregame .pre-title')
+        6 × locator resolved to <h1 class="pre-title">Danh sách phòng</h1>
+          - unexpected value "Danh sách phòng"
+
+
+       at pregame-helper.ts:16
+
+      14 |   } else
+      15 |     await page.getByRole('button', { name: 'Tạo phòng', exact: true }).click();
+    > 16 |   await expect(page.locator('#pregame .pre-title')).toHaveText('Phòng chờ', {
+         |                                                     ^
+      17 |     timeout: 15000,
+      18 |   });
+      19 |   await expect(
+        at joinWaiting (C:\Users\ADMIN\.codex\worktrees\bamboo\volam-hero-defense\tests\e2e\pregame-helper.ts:16:53)
+        at C:\Users\ADMIN\.codex\worktrees\bamboo\volam-hero-defense\tests\e2e\forest-natural.spec.ts:223:9
+
+    Error Context: test-results\forest-natural\forest-natural-6-clients-n-b82c3-ars-two-authoritative-waves-chromium\error-context.md
+
+  2) [chromium] › tests\e2e\forest-natural.spec.ts:494:1 › private Forest advances its own three-creep roster without leaking types or rewards 
+
+    TypeError: Cannot read properties of undefined (reading 'players')
+
+      14 | async function hero(p: Page) {
+      15 |   const s = await read(p);
+    > 16 |   return s.state.players[s.sessionId];
+         |                  ^
+      17 | }
+      18 | async function enter(p: Page, access: 'private' | 'shared') {
+      19 |   await p.getByRole('button', { name: 'Phó Bản', exact: true }).click();
+        at hero (C:\Users\ADMIN\.codex\worktrees\bamboo\volam-hero-defense\tests\e2e\forest-natural.spec.ts:16:18)
+        at expect.poll.intervals (C:\Users\ADMIN\.codex\worktrees\bamboo\volam-hero-defense\tests\e2e\forest-natural.spec.ts:58:30)
+        at move (C:\Users\ADMIN\.codex\worktrees\bamboo\volam-hero-defense\tests\e2e\forest-natural.spec.ts:57:9)
+        at C:\Users\ADMIN\.codex\worktrees\bamboo\volam-hero-defense\tests\e2e\forest-natural.spec.ts:521:5
+
+    Error Context: test-results\forest-natural\forest-natural-private-For-b727a-ut-leaking-types-or-rewards-chromium\error-context.md
+
+  2 failed
+    [chromium] › tests\e2e\forest-natural.spec.ts:205:3 › 6 clients: natural shared Forest spawns and clears two authoritative waves 
+    [chromium] › tests\e2e\forest-natural.spec.ts:494:1 › private Forest advances its own three-creep roster without leaking types or rewards 
+  1 passed (3.6m)

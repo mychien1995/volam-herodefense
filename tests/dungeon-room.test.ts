@@ -5,7 +5,12 @@ import { CloseCode } from '@colyseus/core';
 import { createGameServer } from '../apps/game-server/src/app.config.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
-import { creepDungeon, desertDungeon, desertRoster } from '@volam/game-data';
+import {
+  creepDungeon,
+  desertDungeon,
+  desertRoster,
+  forestRoster,
+} from '@volam/game-data';
 
 let server: ColyseusTestServer;
 const previousLegacy = process.env['VOLAM_DEV_LEGACY_SKILLS'];
@@ -225,6 +230,16 @@ describe('M2A real Colyseus zone authority and views', () => {
     const zone = authority.simulation.zoneOf(a!.sessionId)!;
     expect(authority.simulation.zoneOf(b!.sessionId)).toBe(zone);
     await expect.poll(() => a!.state.creeps.size).toBe(3);
+    const firstForestTypes = forestRoster.slice(0, 3);
+    await expect
+      .poll(() => [...a!.state.creeps.values()].map((c) => c.archetypeId))
+      .toEqual(firstForestTypes);
+    await expect
+      .poll(() => [...b!.state.creeps.values()].map((c) => c.archetypeId))
+      .toEqual(firstForestTypes);
+    expect([...zone.world.creeps.values()].map((c) => c.archetypeId)).toEqual(
+      firstForestTypes,
+    );
     await expect
       .poll(() =>
         [...b!.state.creeps.values()].every((e) => e.zoneId === zone.id),

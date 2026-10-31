@@ -1,7 +1,7 @@
 """Read-only validation of real forest PNG/atlas/source exports and protected inputs."""
 from pathlib import Path
 from PIL import Image
-import argparse, hashlib, json, struct
+import argparse, hashlib, json, os, struct
 R=Path(__file__).resolve().parents[1]
 C=R/'assets/sprites/creeps/dungeons/forest'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -102,7 +102,12 @@ def main():
     runtime_summary=None
     if runtime_path.exists():
         runtime=json.loads(runtime_path.read_text('utf8'))
-        assert runtime['status']==('approved' if approved else 'candidate') and runtime['directorApproved']==approved and not runtime['normalForestRosterIntegrated']
+        assert runtime['status']==('approved' if approved else 'candidate') and runtime['directorApproved']==approved
+        roster_path='packages/game-data/src/forest-creep-roster.json'
+        roster=json.loads((R/roster_path).read_text('utf8'))
+        assert roster==['truc_xa','doc_chu','son_vien','truc_lam_kiem_khach','moc_linh','truc_yeu']
+        assert runtime['normalForestRosterIntegrated'] is True
+        assert runtime['authoritativeRoster']=={'source':roster_path,'archetypeIds':roster,'assignment':'DungeonMatch.assignRoster','commonGameplayProfile':True}
         assert len(runtime['assets'])==6 and len(runtime['effects'])==28
         for path,h in runtime['files'].items():assert sha(R/path)==h,path
         for a in runtime['assets']:
@@ -116,11 +121,12 @@ def main():
             original=next(s for s in original_fx['sequences'] if 'forest_fx:'+s['name']==a['id'])
             for key in ['frames','origin','offset','placement','repeat','stage','ownerTypeId']:assert a[key]==original[key]
             assert a['durations']==[original['durationMs']]*4
-        runtime_summary={'actors':6,'effects':28,'normalForestRosterIntegrated':False,'directorApproved':approved}
+        runtime_summary={'actors':6,'effects':28,'normalForestRosterIntegrated':True,'archetypeIds':roster,'directorApproved':approved}
     report={'status':'PASS','scope':'Static files and explicit approval lock only; no gameplay acceptance' if approved else 'Static files only; candidate art, no gameplay or director approval',
             'actors':results,'characterFrames':sum(a['frames'] for a in results),'effectFrames':effect_count,'protectedInputs':protected}
     if runtime_summary:report['runtimeAdapter']=runtime_summary
-    out=R/('docs/evidence/forest-creep-approval-2026-10-31/static-validation.json' if approved else 'docs/evidence/forest-creep-runtime-2026-10-31/static-validation.json' if runtime_summary else 'assets/reviews/forest_creeps_v01/static_validation.json')
+    # Validation must never overwrite historical art-approval/runtime evidence.
+    out=R/os.environ.get('FOREST_EVIDENCE_DIR','.cache/forest-creeps')/'static-validation.json'
     out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n','utf8')
     print(json.dumps(report,ensure_ascii=False),flush=True)
 if __name__=='__main__':main()

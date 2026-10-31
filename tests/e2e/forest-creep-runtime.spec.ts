@@ -84,7 +84,10 @@ test('controlled server forest types reach the normal renderer; event dedup and 
             return s.state.players[s.sessionId].zoneId;
           })
           .toBe('forest_shared');
-        await expect(p.locator('#zone-status')).toContainText('hình tạm');
+        await expect(p.locator('#zone-status')).toContainText(
+          'hình ảnh đã duyệt',
+        );
+        await expect(p.locator('#zone-status')).not.toContainText('hình tạm');
       }),
     );
     const call = async (params: Record<string, string>) => {

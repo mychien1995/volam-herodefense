@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { DungeonMatch, type MatchZone, type Hero } from '@volam/game-core';
-import { m1Config, creepDungeon, creepDungeonSchema } from '@volam/game-data';
+import {
+  m1Config,
+  creepDungeon,
+  creepDungeonSchema,
+  forestRoster,
+  desertDungeon,
+} from '@volam/game-data';
 
 function setup() {
   const config = structuredClone(m1Config);
@@ -48,6 +54,79 @@ const steps = (match: DungeonMatch, n: number) => {
 };
 
 describe('M2A deterministic creep instances', () => {
+  it('uses the authorized Forest roster across three-creep private waves and keeps private cursors independent', () => {
+    expect(forestRoster).toEqual([
+      'truc_xa',
+      'doc_chu',
+      'son_vien',
+      'truc_lam_kiem_khach',
+      'moc_linh',
+      'truc_yeu',
+    ]);
+    expect(creepDungeon.creepRoster).toEqual(forestRoster);
+    expect(desertDungeon.creepRoster).not.toEqual(forestRoster);
+    const match = setup(),
+      a = ready(match, 'a'),
+      b = ready(match, 'b');
+    const types = (z: MatchZone) =>
+      [...z.world.creeps.values()].map((c) => c.archetypeId);
+    expect(types(a.zone)).toEqual(forestRoster.slice(0, 3));
+    clear(match, a.zone, a.hero);
+    steps(match, creepDungeon.restTicks);
+    expect(a.zone.wave).toBe(2);
+    expect(a.zone.world.creeps.size).toBe(3);
+    expect(types(a.zone)).toEqual(forestRoster.slice(3));
+    expect(b.zone.wave).toBe(1);
+    expect(types(b.zone)).toEqual(forestRoster.slice(0, 3));
+    clear(match, a.zone, a.hero);
+    steps(match, creepDungeon.restTicks);
+    expect(types(a.zone)).toEqual(forestRoster.slice(0, 3));
+  });
+  it.each([1, 2, 6])(
+    'changes only Forest appearance IDs, retaining the existing %i-player wave scaling, RNG and rewards',
+    (players) => {
+      const match = setup();
+      const generic = structuredClone(creepDungeon);
+      delete generic.creepRoster;
+      const before = new DungeonMatch(structuredClone(match.base), generic, 42);
+      for (const m of [match, before]) {
+        for (let i = 0; i < players; i++) ready(m, 'p' + i, 'shared');
+      }
+      const z = match.zoneOf('p0')!,
+        old = before.zoneOf('p0')!;
+      const withoutArt = (zone: MatchZone) =>
+        JSON.stringify(
+          [...zone.world.creeps.values()].map(
+            ({ archetypeId: _art, ...creep }) => creep,
+          ),
+        );
+      expect(withoutArt(z)).toBe(withoutArt(old));
+      for (const [m, zone] of [
+        [match, z],
+        [before, old],
+      ] as const) {
+        clear(m, zone, m.hero('p0')!);
+        steps(m, creepDungeon.restTicks);
+      }
+      const count = Math.ceil(
+        creepDungeon.baseCount *
+          (1 + creepDungeon.countPerAdditionalPlayer * (players - 1)),
+      );
+      expect(z.wave).toBe(2);
+      expect(z.world.creeps.size).toBe(count);
+      expect(z.config).toEqual(old.config);
+      expect(withoutArt(z)).toBe(withoutArt(old));
+      expect(z.world.random()).toBe(old.world.random());
+      expect(match.hero('p0')).toEqual(before.hero('p0'));
+      expect([...z.world.creeps.values()].map((c) => c.archetypeId)).toEqual(
+        Array.from(
+          { length: count },
+          (_, i) =>
+            forestRoster[(creepDungeon.baseCount + i) % forestRoster.length],
+        ),
+      );
+    },
+  );
   it('allows menu entry anywhere in the arena, requires a live hero and retains the physical exit', () => {
     const match = setup(),
       hero = match.add('a', 'Hero');

@@ -9,6 +9,7 @@ import {
   type ForestCreepManifest,
 } from '../apps/game-client/src/forest-creeps.js';
 import { CreepPlayback } from '../apps/game-client/src/arena-creeps.js';
+import { creepDungeon, forestRoster } from '@volam/game-data';
 const m = JSON.parse(
   readFileSync(
     'apps/game-client/public/assets/forest_creep_review/runtime-manifest.json',
@@ -30,6 +31,8 @@ it('labels artwork approval in Vietnamese separately from unmapped placeholders'
   );
 });
 it('selects exact server forest types only; preserves unknown/other-zone fallback', () => {
+  expect(creepDungeon.creepRoster).toEqual([...forestTypes]);
+  expect(forestRoster).toEqual(m.assets.map((a) => a.archetypeId));
   for (const type of forestTypes) {
     expect(forestCreepArt(m, type, 'forest_shared')?.id).toBe('forest_' + type);
     expect(forestCreepArt(m, type, 'forest_private_player')?.status).toBe(

@@ -1,0 +1,234 @@
+{
+  "status": "PASS via retained final stages and affected browser retry",
+  "branch": "wip/m3d/bamboo",
+  "finalCommand": {
+    "command": "pnpm check:final --config playwright.forest-natural.config.ts",
+    "exitCode": 1,
+    "browserPassed": 5,
+    "browserFailed": 1,
+    "log": "final-check.log"
+  },
+  "retainedChecks": {
+    "workflow": 18,
+    "unitIntegration": 357,
+    "unitFiles": 30,
+    "assetValidators": 12,
+    "projectTypecheck": true,
+    "testToolTypecheck": true,
+    "productionBuild": true
+  },
+  "latestAffectedBrowserCommand": {
+    "command": "node tools/run-playwright.mjs test --config playwright.forest-natural.config.ts tests/e2e/forest-natural.spec.ts",
+    "exitCode": 0,
+    "casesPassed": 3,
+    "log": "network-final.log"
+  },
+  "sixPlayerProfile": {
+    "networkClients": 6,
+    "browserRenderers": 2,
+    "sdkClients": 4,
+    "naturalGameplay": true,
+    "naturalSixBrowserPassClaimed": false
+  },
+  "actualSpawns": [
+    {
+      "participants": 2,
+      "wave1": [
+        {
+          "id": "forest_shared:wave_1_0",
+          "type": "truc_xa",
+          "maxHp": 120
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "type": "doc_chu",
+          "maxHp": 120
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "type": "son_vien",
+          "maxHp": 120
+        }
+      ],
+      "wave2": [
+        {
+          "id": "forest_shared:wave_2_0",
+          "type": "truc_lam_kiem_khach",
+          "maxHp": 160
+        },
+        {
+          "id": "forest_shared:wave_2_1",
+          "type": "moc_linh",
+          "maxHp": 160
+        },
+        {
+          "id": "forest_shared:wave_2_2",
+          "type": "truc_yeu",
+          "maxHp": 160
+        },
+        {
+          "id": "forest_shared:wave_2_3",
+          "type": "truc_xa",
+          "maxHp": 160
+        },
+        {
+          "id": "forest_shared:wave_2_4",
+          "type": "doc_chu",
+          "maxHp": 160
+        }
+      ],
+      "wave2SpawnPlayerCount": 2,
+      "xpTotal": 480,
+      "goldTotal": 96
+    },
+    {
+      "participants": 6,
+      "wave1": [
+        {
+          "id": "forest_shared:wave_1_0",
+          "type": "truc_xa",
+          "maxHp": 120
+        },
+        {
+          "id": "forest_shared:wave_1_1",
+          "type": "doc_chu",
+          "maxHp": 120
+        },
+        {
+          "id": "forest_shared:wave_1_2",
+          "type": "son_vien",
+          "maxHp": 120
+        }
+      ],
+      "wave2": [
+        {
+          "id": "forest_shared:wave_2_0",
+          "type": "truc_lam_kiem_khach",
+          "maxHp": 248
+        },
+        {
+          "id": "forest_shared:wave_2_1",
+          "type": "moc_linh",
+          "maxHp": 248
+        },
+        {
+          "id": "forest_shared:wave_2_2",
+          "type": "truc_yeu",
+          "maxHp": 248
+        },
+        {
+          "id": "forest_shared:wave_2_3",
+          "type": "truc_xa",
+          "maxHp": 248
+        },
+        {
+          "id": "forest_shared:wave_2_4",
+          "type": "doc_chu",
+          "maxHp": 248
+        },
+        {
+          "id": "forest_shared:wave_2_5",
+          "type": "son_vien",
+          "maxHp": 248
+        },
+        {
+          "id": "forest_shared:wave_2_6",
+          "type": "truc_lam_kiem_khach",
+          "maxHp": 248
+        },
+        {
+          "id": "forest_shared:wave_2_7",
+          "type": "moc_linh",
+          "maxHp": 248
+        },
+        {
+          "id": "forest_shared:wave_2_8",
+          "type": "truc_yeu",
+          "maxHp": 248
+        },
+        {
+          "id": "forest_shared:wave_2_9",
+          "type": "truc_xa",
+          "maxHp": 248
+        },
+        {
+          "id": "forest_shared:wave_2_10",
+          "type": "doc_chu",
+          "maxHp": 248
+        },
+        {
+          "id": "forest_shared:wave_2_11",
+          "type": "son_vien",
+          "maxHp": 248
+        }
+      ],
+      "wave2SpawnPlayerCount": 6,
+      "xpTotal": 900,
+      "goldTotal": 180
+    }
+  ],
+  "privateWave1": [
+    {
+      "id": "forest_private_GpsOGwQxe:wave_1_0",
+      "type": "truc_xa",
+      "maxHp": 120
+    },
+    {
+      "id": "forest_private_GpsOGwQxe:wave_1_1",
+      "type": "doc_chu",
+      "maxHp": 120
+    },
+    {
+      "id": "forest_private_GpsOGwQxe:wave_1_2",
+      "type": "son_vien",
+      "maxHp": 120
+    }
+  ],
+  "privateWave2": [
+    {
+      "id": "forest_private_GpsOGwQxe:wave_2_0",
+      "type": "truc_lam_kiem_khach",
+      "maxHp": 138
+    },
+    {
+      "id": "forest_private_GpsOGwQxe:wave_2_1",
+      "type": "moc_linh",
+      "maxHp": 138
+    },
+    {
+      "id": "forest_private_GpsOGwQxe:wave_2_2",
+      "type": "truc_yeu",
+      "maxHp": 138
+    }
+  ],
+  "naturalEffectsPlayed": [
+    "forest_fx:doc_chu_fang_contact",
+    "forest_fx:moc_linh_wood_impact",
+    "forest_fx:son_vien_slam_impact",
+    "forest_fx:son_vien_windup_dust",
+    "forest_fx:truc_lam_kiem_khach_slash_left",
+    "forest_fx:truc_lam_kiem_khach_sword_contact",
+    "forest_fx:truc_xa_bite_contact",
+    "forest_fx:truc_yeu_slash_left",
+    "forest_fx:truc_yeu_splinter_impact"
+  ],
+  "protectedAssets": {
+    "approved_bamboo_forest.lock.json": {
+      "sha256": "1a6f89320a6f683b636df916d181ab32d916d95678c86223f4748bf5251cf515",
+      "unchangedFromCanonicalCheckout": true,
+      "verifiedFiles": 60,
+      "mismatches": []
+    },
+    "approved_forest_creeps.lock.json": {
+      "sha256": "9769792b1effb2c83a5db512cab9aef0dab73ed1fabc82d37bc5a04075473bcc",
+      "unchangedFromCanonicalCheckout": true,
+      "verifiedFiles": 565,
+      "mismatches": []
+    }
+  },
+  "sourceArtworkChanged": false,
+  "artDirectorApproved": true,
+  "unsupportedVfxSequences": 13,
+  "productionCodeChangedAfterFinalPipeline": false,
+  "testOnlyChangesAfterFinalPipeline": true
+}

@@ -1,4 +1,20 @@
-# Bamboo Forest — tích hợp candidate sprite/VFX vào Phaser 4
+# Bamboo Forest — sprite/VFX và roster gameplay
+
+## Hiện tại — roster authoritative được cho phép 2026-11-01
+
+Director đã cho phép bổ sung roster thật, độc lập với approval artwork ngày 2026-10-31. `packages/game-data/src/forest-creep-roster.json` cấp đúng thứ tự `truc_xa`, `doc_chu`, `son_vien`, `truc_lam_kiem_khach`, `moc_linh`, `truc_yeu` cho `creepDungeon.creepRoster`. `DungeonMatch.assignRoster()` được tái sử dụng; riêng Forest lưu cursor theo tổng lượt spawn thực tế của từng instance, tránh bỏ qua ID khi số người thay đổi count giữa hai wave. Desert giữ cách phân roster cũ.
+
+Wave đầu vẫn có ba con vì instance được tạo khi người đầu tiên vào. Private tiếp tục ba con: wave 1 ba ID đầu, wave 2 ba ID cuối, wave 3 quay lại đầu. Shared áp dụng scaling sẵn có ở wave kế: hai người có năm con, sáu người có mười hai con; bắt đầu từ ID tiếp theo của cursor, không ép wave thành sáu con. Mọi loài giữ nguyên common creep profile, AI, hit timing, XP/vàng, RNG và collision. Không thêm ability/status/projectile/loot.
+
+`MatchRoom` đã chiếu `archetypeId` vào `CreepState`; client loader/registry/renderer và binding `creep_strike` đã hoạt động nên không sửa chúng. Metadata adapter hiện ghi `normalForestRosterIntegrated=true`, nguồn roster và common-profile scope. Giá trị này mô tả đường code/dữ liệu; kết quả natural playtest phải đọc riêng bên dưới. Unknown/missing type vẫn trả fallback có nhãn; unit test fallback tách biệt với regression Forest có roster.
+
+Scope mới `playwright.forest-natural.config.ts` dùng server/game/menu bình thường và tắt practice targets cùng route pose. Browser dùng bridge **chỉ đọc** để quan sát, menu và Arrow/A/Q để hành động. Sáu-player gate tái sử dụng cấu hình Bamboo **hai browser renderer + bốn SDK peer**: SDK chỉ gửi message player hợp lệ qua protocol, không sửa simulation. Cả sáu tham gia cùng shared Forest, nhận cùng ID và đánh thật. Một lần join lại URL `/` không query/debug/review kiểm tra HUD/art trong game thường. Không gọi pose endpoint, không sửa state/HP/stats, không giả lập clear wave. Các lần sáu browser bị lỗi join/input pacing được giữ log riêng; không nhận chúng là PASS. Regression Bamboo giữ collision, foreground, bridge, scale/full viewport và physical exit bằng Space theo điều khiển hiện tại. Review/all-frame và controlled-wire cũ vẫn được giữ riêng, không tính là natural gameplay.
+
+Evidence mới ở `docs/evidence/forest-natural-2026-11-01/`; lịch sử bên dưới và các thư mục 2026-10-31 giữ nguyên. Artwork, môi trường, map, manifests sản xuất và approval locks không thay đổi. Source manifests ghi candidate tại thời điểm sản xuất vẫn là lịch sử; trạng thái artwork hiện tại là **approved**, không có approval mới do task này tạo.
+
+**Kết quả thực chạy:** [report/commands/failures/PNG](evidence/forest-natural-2026-11-01/README.md). Final pipeline qua typechecks, 18 workflow checks, 357 unit/integration tests và 12 asset validators; browser lượt đầu 5 PASS/1 FAIL. Sau sửa driver test, affected browser scope cuối **3/3 PASS** (2-player shared, 6-player shared, 2 private); ba regression Bamboo/dungeon từ final run vẫn PASS. Không gọi đây là một lần `check:final` xanh trọn vẹn. Sáu network participants (hai renderer/bốn SDK) thực sự clear 3 + 12 creep, đồng bộ tổng **900 XP/180 vàng** và đủ sáu archetype. Private sinh ba ID đầu rồi ba ID cuối; shared hai người sinh 3 + 5 con và đồng bộ 480 XP/96 vàng. Không sửa implementation production sau final pipeline; chỉ test driver được typecheck/rerun phần bị ảnh hưởng.
+
+### Báo cáo lịch sử — tích hợp/review trước khi được cấp roster
 
 **Cập nhật approval 2026-10-31:** director đã xác nhận “I approved the artwork”. [Approval record](FOREST_CREEP_ART_APPROVAL.md) và `assets/approved_forest_creeps.lock.json` hiện là nguồn approval chính thức. Phần dưới là báo cáo tích hợp và candidate review trước approval; runtime status/nhãn hiện được suy từ approval lock. Dữ liệu spawn Forest vẫn còn thiếu, không tự bật loài vào wave.
 

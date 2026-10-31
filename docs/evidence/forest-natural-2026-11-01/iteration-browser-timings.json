@@ -1,0 +1,40 @@
+{
+  "runId": "868cd2d7-faca-46fd-98ed-933915bfbf31",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.forest-natural.config.ts",
+    "tests/e2e/forest-natural.spec.ts",
+    "--grep",
+    "2 clients|private Forest"
+  ],
+  "startedAt": "2026-10-31T17:27:18.323Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 7.39,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.08,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 7.15,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "browser verification",
+      "seconds": 91.52,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 107.16
+}
