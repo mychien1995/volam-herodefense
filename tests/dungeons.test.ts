@@ -222,13 +222,21 @@ describe('M2A deterministic creep instances', () => {
   it('cancels owned missiles, queued shots and held movement when leaving or disconnecting', () => {
     const match = setup(),
       { hero, zone } = ready(match, 'a');
-    // Hỏa Vân is now simultaneous; use the real paced Vạn Kiếm wave
-    // to retain coverage of both queued and already-spawned projectile cleanup.
+    // Controlled paced projectile data exercises generic queued-shot cleanup.
+    // Vạn Kiếm now schedules radial bursts in an authoritative channel.
+    const paced = structuredClone(
+      zone.config.skillCatalogue!['nhan_kiem_hop_nhat']!,
+    );
+    if (paced.effect.mode !== 'projectile')
+      throw Error('Expected projectile fixture');
+    paced.effect.count = 3;
+    paced.effect.spacingTicks = 4;
+    zone.config.skillCatalogue!['nhan_kiem_hop_nhat'] = paced;
     Object.assign(hero, {
       x: 340,
       y: 240,
       schoolId: 'vo_dang',
-      skillIds: ['van_kiem_quy_tong', '', '', ''],
+      skillIds: ['nhan_kiem_hop_nhat', '', '', ''],
     });
     match.input('a', 1, { kind: 'cast', slot: 0 });
     match.step();

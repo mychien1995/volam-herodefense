@@ -1,0 +1,290 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\node_modules\\.pnpm\\@playwright+test@1.64.1\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.animation-change.config.ts",
+      "--grep",
+      "thieu_lam|six-player natural"
+    ],
+    "configFile": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\playwright.animation-change.config.ts",
+    "rootDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\animation-change-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/artifacts/animation-change",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "approved-animation-live",
+        "name": "approved-animation-live",
+        "testDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "animation-change.spec.ts"
+        ],
+        "timeout": 300000
+      },
+      {
+        "outputDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/artifacts/animation-change",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "approved-animation-natural",
+        "name": "approved-animation-natural",
+        "testDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c3.spec.ts"
+        ],
+        "timeout": 300000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\artifacts\\animation-change",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "approved-animation-live",
+        "testDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": "animation-change.spec.ts",
+        "timeout": 300000,
+        "use": {
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "video": "off",
+          "trace": "off",
+          "actionTimeout": 30000,
+          "baseURL": "http://127.0.0.1:5442"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "approved-animation-live"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\artifacts\\animation-change",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "approved-animation-natural",
+        "testDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": "m3c3.spec.ts",
+        "timeout": 300000,
+        "use": {
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "video": "off",
+          "trace": "off",
+          "actionTimeout": 30000,
+          "baseURL": "http://127.0.0.1:5440"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "approved-animation-natural"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "docs/evidence/animation-change/browser-final-selected-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "animation-change.spec.ts",
+      "file": "animation-change.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "approved animations thieu_lam: two real clients, four facings, authoritative lifetime and cleanup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "approved-animation-live",
+              "projectName": "approved-animation-live",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 79886,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T00:08:15.135Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2a36ba61fd220eccbd31-355fc81d75be6d7251d9",
+          "file": "animation-change.spec.ts",
+          "line": 106,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "m3c3.spec.ts",
+      "file": "m3c3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M3C3 six-player natural combat: four schools keep effects owned, feet/pivots readable and rewards authoritative",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "approved-animation-natural",
+              "projectName": "approved-animation-natural",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 199690,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m1\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m2\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m3\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m4\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m5\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m6\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] six confirmed\n"
+                    },
+                    {
+                      "text": "[animation-change natural] legal builds equipped\n"
+                    },
+                    {
+                      "text": "[animation-change natural] combat/reward observation complete\n"
+                    },
+                    {
+                      "text": "[animation-change natural] all six returned alive\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T00:09:35.827Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "84ef6c2f8a2a29a37186-ba1be2eb02903230117d",
+          "file": "m3c3.spec.ts",
+          "line": 252,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-01T00:08:10.824Z",
+    "duration": 285050.51399999997,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -8,7 +8,8 @@ import {
   stepAreas,
   stepSupports,
 } from './skills.js';
-import { emit, hurt, offensiveStats } from './combat.js';
+import { emit, hurt, offensiveStats, expireGuardCounters } from './combat.js';
+import { ownerProtection } from './protection.js';
 import {
   cancelOwnedEffects,
   expireStatuses,
@@ -248,6 +249,13 @@ function runCommand(
       );
     if (
       !ability ||
+      (ability.effect.mode === 'guard_counter' &&
+        hero.statuses?.some(
+          (s) =>
+            s.kind === 'guard_counter' &&
+            s.abilityId === ability.id &&
+            s.until > world.tick,
+        )) ||
       !Number.isInteger(command.slot) ||
       command.slot < 0 ||
       command.slot > 3 ||
@@ -441,6 +449,7 @@ function advanceProjectile(
 export function stepWorld(world: World, config: SimulationConfig): void {
   world.tick++;
   world.events = [];
+  expireGuardCounters(world, config);
   expireStatuses(world);
   expireCombos(world);
   for (const hero of world.heroes.values()) {
@@ -479,7 +488,13 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       hero.maxMana,
       hero.mana + stats.manaRegen / config.tickRate,
     );
-    hero.hp = Math.min(hero.maxHp, hero.hp + stats.hpRegen / config.tickRate);
+    const fieldRegen =
+      (ownerProtection(world, hero)?.effect.ownerRegenFraction ?? 0) *
+      hero.maxHp;
+    hero.hp = Math.min(
+      hero.maxHp,
+      hero.hp + (stats.hpRegen + fieldRegen) / config.tickRate,
+    );
     if (world.tick >= hero.actionUntil)
       hero.pose =
         !hasStatus(hero, 'stun', world.tick) && (movement.x || movement.y)

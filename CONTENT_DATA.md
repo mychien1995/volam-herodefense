@@ -35,14 +35,14 @@
 
 | ID | Vietnamese display name | Style | Proposed effect and reason |
 |---|---|---|---|
-| `lien_hoa_phien` | **Liên Hoa Phiến** | Phiến | Several rapid frontal fan hits; reliable melee AoE. |
+| `lien_hoa_phien` | **Liên Hoa Phiến** | Phiến | Fixed owner-only protective lotus: immunity and increased HP regeneration while inside; leaving removes both and reentry restores them until expiry. No damage. |
 | `luc_duong_chuong` | **Lục Dương Chưởng** | Phiến | Moving spinning attack dealing repeated nearby damage; PvE wave farm. |
 | `luu_phong_bo` | **Lưu Phong Bộ** | Phiến | Short directional dash; pursuit/escape and spacing. |
 | `chiet_mai_thu` | **Chiết Mai Thủ** | Phiến | Temporary Attack Speed + Movement Speed buff; fast-attack identity. |
 | `bach_phien_phong_bao` | **Bách Phiến Phong Bạo** | Phiến U | Large moving fan whirlwind; high AoE output. |
 | `phi_anh_tram` | **Phi Ảnh Trảm** | Đao | Forward dash with hard slash; melee engage. |
 | `truy_hon_dao` | **Truy Hồn Đao** | Đao | Two quick hits, bonus vs slowed targets; follow-up pressure. |
-| `phong_anh_hoan_vi` | **Phong Ảnh Hoán Vị** | Đao | Evasive short step with timed counter window; reaction skill. |
+| `phong_anh_hoan_vi` | **Phong Ảnh Hoán Vị** | Đao | Short retreat opposite the facing captured at cast, preserving facing; existing movement-only evasion/counter remain unchanged. |
 | `liet_phong_dao` | **Liệt Phong Đao** | Đao | Hard strike with partial defense penetration; anti-tank. |
 | `bach_liet_thien_kich` | **Bách Liệt Thiên Kích** | Đao U | Extremely fast multi-hit forward melee combo; PvP finisher. |
 
@@ -64,8 +64,8 @@
 | `that_tinh_kiem` | **Thất Tinh Kiếm** | Kiếm | Several strong close-range sword slashes; dedicated melee damage. |
 | `nhan_kiem_hop_nhat` | **Nhân Kiếm Hợp Nhất** | Kiếm | Piercing non-homing sword-energy projectile; ranged option. |
 | `bat_quai_kiem_tran` | **Bát Quái Kiếm Trận** | Kiếm | Sword formation damaging enemies in a zone; defensive zone control. |
-| `toa_sat_bac_do` | **Tọa Sát Bác Đồ** | Kiếm | Short counter stance; being attacked prompts retaliatory slash; deliberate defense. |
-| `van_kiem_quy_tong` | **Vạn Kiếm Quy Tông** | Kiếm U | Several sword-energy waves in wide frontal pattern; powerful burst. |
+| `toa_sat_bac_do` | **Tọa Sát Bác Đồ** | Kiếm | Guard up to 5s with 70% damage reduction; accumulate actual HP loss, release once radially at expiry or strictly above 20% maximum HP, using exactly accumulated loss. |
+| `van_kiem_quy_tong` | **Vạn Kiếm Quy Tông** | Kiếm U | Continuous straight eight-way sword bursts for a configurable initial 5s; provisional tuning, no homing. |
 
 ## Thiếu Lâm — Gold / Kim
 

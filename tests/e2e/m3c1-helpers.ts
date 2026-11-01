@@ -110,7 +110,14 @@ export async function close(p: Page) {
 export async function loadout(p: Page, ids: string[]) {
   for (let i = 0; i < 4; i++)
     await p.locator('#loadout-' + 'qwer'[i]).selectOption(ids[i] ?? '');
-  const rev = (await hero(p)).build.revision;
+  const current = await hero(p);
+  if (
+    [current.qSkill, current.wSkill, current.eSkill, current.rSkill].every(
+      (id, i) => id === (ids[i] ?? ''),
+    )
+  )
+    return;
+  const rev = current.build.revision;
   await p.locator('#apply-loadout').click();
   await expect
     .poll(async () => (await hero(p)).build.revision)
@@ -125,6 +132,7 @@ export async function upgrade(p: Page, id: string) {
 }
 export async function moveTo(p: Page, x: number, y: number) {
   await p.bringToFront();
+  await p.keyboard.press('Escape');
   await p.locator('#game canvas').focus();
   const xa = ['x', x, 'ArrowLeft', 'ArrowRight'] as const,
     ya = ['y', y, 'ArrowUp', 'ArrowDown'] as const;
@@ -141,9 +149,14 @@ export async function moveTo(p: Page, x: number, y: number) {
       await p.keyboard.press(d < 0 ? negative : positive, {
         delay: Math.min(900, Math.max(70, (Math.abs(d) * 1000) / speed - 30)),
       });
-      await expect
-        .poll(async () => (await hero(p)).lastSequence)
-        .toBeGreaterThan(h.lastSequence);
+      // A just-reactivated tab may discard its first key while a travel/death
+      // overlay closes. Retry real keyboard input; final server coordinates
+      // below remain mandatory and no state is injected.
+      if ((await hero(p)).lastSequence <= h.lastSequence) {
+        await p.keyboard.press('Escape');
+        await p.locator('#game canvas').focus();
+        continue;
+      }
       await expect.poll(async () => (await hero(p)).pose).not.toBe('walk');
     }
     const final = await hero(p);

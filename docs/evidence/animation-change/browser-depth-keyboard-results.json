@@ -1,0 +1,229 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\node_modules\\.pnpm\\@playwright+test@1.64.1\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.animation-change.config.ts",
+      "--project",
+      "approved-animation-natural"
+    ],
+    "configFile": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\playwright.animation-change.config.ts",
+    "rootDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\animation-change-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/artifacts/animation-change",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "approved-animation-live",
+        "name": "approved-animation-live",
+        "testDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "animation-change.spec.ts"
+        ],
+        "timeout": 300000
+      },
+      {
+        "outputDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/artifacts/animation-change",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "approved-animation-natural",
+        "name": "approved-animation-natural",
+        "testDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c3.spec.ts"
+        ],
+        "timeout": 300000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\artifacts\\animation-change",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "approved-animation-natural",
+        "testDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": "m3c3.spec.ts",
+        "timeout": 300000,
+        "use": {
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "video": "off",
+          "trace": "off",
+          "actionTimeout": 30000,
+          "baseURL": "http://127.0.0.1:5440"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "approved-animation-natural"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "docs/evidence/animation-change/browser-depth-keyboard-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "m3c3.spec.ts",
+      "file": "m3c3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M3C3 six-player natural combat: four schools keep effects owned, feet/pivots readable and rewards authoritative",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "approved-animation-natural",
+              "projectName": "approved-animation-natural",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 104364,
+                  "error": {
+                    "message": "Error: Join UI diagnostic: {\"url\":\"http://127.0.0.1:5440/?debug=1\",\"title\":\"Danh sách phòng\",\"notice\":\"Mất kết nối (1006). Hãy tạo hoặc vào phòng để trở lại.\",\"status\":\"Mất kết nối (1006). Hãy tạo hoặc vào phòng để trở lại.\",\"html\":\"<section class=\\\"pre-window \\\"><h1 class=\\\"pre-title\\\">Danh sách phòng</h1><div class=\\\"room-scroll\\\"><table><thead><tr><th>Phòng / Mã</th><th>Người chơi</th><th>Trạng thái</th><th></th></tr></thead><tbody><tr><td>Mpzy4m33E</td><td>5/6</td><td>Đang chờ</td><td><button data-action=\\\"join\\\" data-room=\\\"Mpzy4m33E\\\">Vào phòng</button></td></tr></tbody></table></div><div class=\\\"pre-actions\\\"><button type=\\\"button\\\" data-action=\\\"back\\\">Quay lại</button><button type=\\\"button\\\" data-action=\\\"refresh\\\">Làm mới</button><button type=\\\"button\\\" data-action=\\\"create\\\">Tạo phòng</button></div><form id=\\\"code-form\\\"><label class=\\\"sr-only\\\" for=\\\"pre-code\\\">Mã phòng</label><input id=\\\"pre-code\\\" placeholder=\\\"MÃ PHÒNG\\\" autocomplete=\\\"off\\\"><button>Vào bằng mã</button></form><p class=\\\"pre-error\\\" role=\\\"status\\\" aria-live=\\\"polite\\\">Mất kết nối (1006). Hãy tạo hoặc vào phòng để trở lại.</p></section>\"}",
+                    "stack": "Error: Join UI diagnostic: {\"url\":\"http://127.0.0.1:5440/?debug=1\",\"title\":\"Danh sách phòng\",\"notice\":\"Mất kết nối (1006). Hãy tạo hoặc vào phòng để trở lại.\",\"status\":\"Mất kết nối (1006). Hãy tạo hoặc vào phòng để trở lại.\",\"html\":\"<section class=\\\"pre-window \\\"><h1 class=\\\"pre-title\\\">Danh sách phòng</h1><div class=\\\"room-scroll\\\"><table><thead><tr><th>Phòng / Mã</th><th>Người chơi</th><th>Trạng thái</th><th></th></tr></thead><tbody><tr><td>Mpzy4m33E</td><td>5/6</td><td>Đang chờ</td><td><button data-action=\\\"join\\\" data-room=\\\"Mpzy4m33E\\\">Vào phòng</button></td></tr></tbody></table></div><div class=\\\"pre-actions\\\"><button type=\\\"button\\\" data-action=\\\"back\\\">Quay lại</button><button type=\\\"button\\\" data-action=\\\"refresh\\\">Làm mới</button><button type=\\\"button\\\" data-action=\\\"create\\\">Tạo phòng</button></div><form id=\\\"code-form\\\"><label class=\\\"sr-only\\\" for=\\\"pre-code\\\">Mã phòng</label><input id=\\\"pre-code\\\" placeholder=\\\"MÃ PHÒNG\\\" autocomplete=\\\"off\\\"><button>Vào bằng mã</button></form><p class=\\\"pre-error\\\" role=\\\"status\\\" aria-live=\\\"polite\\\">Mất kết nối (1006). Hãy tạo hoặc vào phòng để trở lại.</p></section>\"}\n    at joinWaiting (C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\pregame-helper.ts:42:11)\n    at C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:280:7",
+                    "cause": {
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#pregame .pre-title')\nExpected: \u001b[32m\"Phòng chờ\"\u001b[39m\nReceived: \u001b[31m\"Danh sách phòng\"\u001b[39m\nTimeout:  45000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('#pregame .pre-title') with timeout 45000ms\u001b[22m\n\u001b[2m  - waiting for locator('#pregame .pre-title')\u001b[22m\n\u001b[2m    70 × locator resolved to <h1 class=\"pre-title\">Danh sách phòng</h1>\u001b[22m\n\u001b[2m       - unexpected value \"Danh sách phòng\"\u001b[22m\n",
+                      "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#pregame .pre-title')\nExpected: \u001b[32m\"Phòng chờ\"\u001b[39m\nReceived: \u001b[31m\"Danh sách phòng\"\u001b[39m\nTimeout:  45000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('#pregame .pre-title') with timeout 45000ms\u001b[22m\n\u001b[2m  - waiting for locator('#pregame .pre-title')\u001b[22m\n\u001b[2m    70 × locator resolved to <h1 class=\"pre-title\">Danh sách phòng</h1>\u001b[22m\n\u001b[2m       - unexpected value \"Danh sách phòng\"\u001b[22m\n\n    at joinWaiting (C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\pregame-helper.ts:31:55)\n    at C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:280:7"
+                    },
+                    "location": {
+                      "file": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\pregame-helper.ts",
+                      "column": 11,
+                      "line": 42
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39mpregame-helper.ts:42\n\n  40 |       html: document.querySelector('#pregame')?.innerHTML,\n  41 |     }));\n> 42 |     throw new Error('Join UI diagnostic: ' + JSON.stringify(diagnostic), {\n     |           ^\n  43 |       cause: error,\n  44 |     });\n  45 |   }"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\pregame-helper.ts",
+                        "column": 11,
+                        "line": 42
+                      },
+                      "message": "Error: Join UI diagnostic: {\"url\":\"http://127.0.0.1:5440/?debug=1\",\"title\":\"Danh sách phòng\",\"notice\":\"Mất kết nối (1006). Hãy tạo hoặc vào phòng để trở lại.\",\"status\":\"Mất kết nối (1006). Hãy tạo hoặc vào phòng để trở lại.\",\"html\":\"<section class=\\\"pre-window \\\"><h1 class=\\\"pre-title\\\">Danh sách phòng</h1><div class=\\\"room-scroll\\\"><table><thead><tr><th>Phòng / Mã</th><th>Người chơi</th><th>Trạng thái</th><th></th></tr></thead><tbody><tr><td>Mpzy4m33E</td><td>5/6</td><td>Đang chờ</td><td><button data-action=\\\"join\\\" data-room=\\\"Mpzy4m33E\\\">Vào phòng</button></td></tr></tbody></table></div><div class=\\\"pre-actions\\\"><button type=\\\"button\\\" data-action=\\\"back\\\">Quay lại</button><button type=\\\"button\\\" data-action=\\\"refresh\\\">Làm mới</button><button type=\\\"button\\\" data-action=\\\"create\\\">Tạo phòng</button></div><form id=\\\"code-form\\\"><label class=\\\"sr-only\\\" for=\\\"pre-code\\\">Mã phòng</label><input id=\\\"pre-code\\\" placeholder=\\\"MÃ PHÒNG\\\" autocomplete=\\\"off\\\"><button>Vào bằng mã</button></form><p class=\\\"pre-error\\\" role=\\\"status\\\" aria-live=\\\"polite\\\">Mất kết nối (1006). Hãy tạo hoặc vào phòng để trở lại.</p></section>\"}\n\n   at pregame-helper.ts:42\n\n  40 |       html: document.querySelector('#pregame')?.innerHTML,\n  41 |     }));\n> 42 |     throw new Error('Join UI diagnostic: ' + JSON.stringify(diagnostic), {\n     |           ^\n  43 |       cause: error,\n  44 |     });\n  45 |   }\n    at joinWaiting (C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\pregame-helper.ts:42:11)\n    at C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:280:7\n[cause]: Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('#pregame .pre-title')\nExpected: \u001b[32m\"Phòng chờ\"\u001b[39m\nReceived: \u001b[31m\"Danh sách phòng\"\u001b[39m\nTimeout:  45000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" locator('#pregame .pre-title') with timeout 45000ms\u001b[22m\n\u001b[2m  - waiting for locator('#pregame .pre-title')\u001b[22m\n\u001b[2m    70 × locator resolved to <h1 class=\"pre-title\">Danh sách phòng</h1>\u001b[22m\n\u001b[2m       - unexpected value \"Danh sách phòng\"\u001b[22m\n\n    at joinWaiting (C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\pregame-helper.ts:31:55)\n    at C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:280:7"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m1\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m2\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m3\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m4\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m5\u001b[39m\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T00:26:04.692Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\artifacts\\animation-change\\m3c3-M3C3-six-player-natur-a25df-e-and-rewards-authoritative-approved-animation-natural\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\pregame-helper.ts",
+                    "column": 11,
+                    "line": 42
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "84ef6c2f8a2a29a37186-ba1be2eb02903230117d",
+          "file": "m3c3.spec.ts",
+          "line": 252,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-01T00:26:01.188Z",
+    "duration": 108178.079,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

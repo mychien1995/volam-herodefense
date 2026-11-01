@@ -10,11 +10,11 @@ import { PROTOCOL_VERSION, MATCH_ROOM } from '@volam/game-protocol';
 import { MatchRoom } from './rooms/MatchRoom.js';
 import { serverInvasionDefinition } from './invasion-config.js';
 
-export function createGameServer() {
+export function createGameServer(transport?: WebSocketTransport) {
   const validationRunId = process.env['VOLAM_QA_RUN_ID'];
   serverInvasionDefinition(); // Fail startup, rather than the first room, for invalid dev tuning.
   return defineServer({
-    transport: new WebSocketTransport({ maxPayload: 2048 }),
+    transport: transport ?? new WebSocketTransport({ maxPayload: 2048 }),
     rooms: { [MATCH_ROOM]: defineRoom(MatchRoom) },
     routes: createRouter({
       rooms: createEndpoint('/rooms', { method: 'GET' }, async () => {

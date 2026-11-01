@@ -1,6 +1,12 @@
 import { expect, type Page } from '@playwright/test';
-export async function joinWaiting(page: Page, nickname: string, room?: string) {
-  await page.goto('/?debug=1');
+export async function joinWaiting(
+  page: Page,
+  nickname: string,
+  room?: string,
+  query = '/?debug=1',
+  timeout = 15000,
+) {
+  await page.goto(query);
   await page.locator('#pre-nickname').fill(nickname);
   await page.getByRole('button', { name: 'Vào game', exact: true }).click();
   if (room) {
@@ -13,18 +19,35 @@ export async function joinWaiting(page: Page, nickname: string, room?: string) {
       .click();
   } else
     await page.getByRole('button', { name: 'Tạo phòng', exact: true }).click();
-  await expect(page.locator('#pregame .pre-title')).toHaveText('Phòng chờ', {
-    timeout: 15000,
-  });
+  try {
+    await expect(page.locator('#pregame .pre-title')).toHaveText('Phòng chờ', {
+      timeout,
+    });
+  } catch (error) {
+    const diagnostic = await page.evaluate(() => ({
+      url: location.href,
+      title: document.querySelector('#pregame .pre-title')?.textContent,
+      notice: document.querySelector('#pregame .pre-error')?.textContent,
+      status: document.querySelector('#status')?.textContent,
+      html: document.querySelector('#pregame')?.innerHTML,
+    }));
+    throw new Error('Join UI diagnostic: ' + JSON.stringify(diagnostic), {
+      cause: error,
+    });
+  }
   await expect(
     page.locator('#pregame .pre-players strong').filter({ hasText: nickname }),
-  ).toHaveCount(1, { timeout: 15000 });
+  ).toHaveCount(1, { timeout });
 }
-export async function startTogether(pages: Page[], ids: string[] = []) {
+export async function startTogether(
+  pages: Page[],
+  ids: string[] = [],
+  timeout = 15000,
+) {
   for (const page of pages)
     await expect
       .poll(() => page.locator('#pregame .pre-players li').count(), {
-        timeout: 15000,
+        timeout,
       })
       .toBeGreaterThanOrEqual(pages.length);
   await pages[0]!.getByRole('button', { name: 'Bắt đầu', exact: true }).click();

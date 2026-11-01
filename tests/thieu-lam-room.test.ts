@@ -101,7 +101,7 @@ it('four schools share authoritative combos, support, damage and rewards; zones/
       'kim_quang_ho_tran',
     ],
     ['hoa_van_chuong', '', '', ''],
-    ['lien_hoa_phien', '', '', ''],
+    ['luc_duong_chuong', '', '', ''],
     ['luong_nghi_thu', '', '', ''],
   ];
   for (const [i, p] of peers.entries()) {

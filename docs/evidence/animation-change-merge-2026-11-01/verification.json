@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "date": "2026-11-01",
+  "targetBranch": "milestone/m3d",
+  "targetBase": "0aeddd21",
+  "sourceBranch": "wip/m3d/animation-change",
+  "sourceCommit": "0e3b10c9",
+  "mergeStrategy": "no-ff, retain both histories",
+  "approvalFilesChecked": 15,
+  "retainedFilesChecked": 100,
+  "approvedIndexBytesMatch": true,
+  "gameplayChangedBeyondReviewedSource": false,
+  "sourceMechanicsRendererBlobsIdentical": 10,
+  "existingBeachBambooIntegrationBlobsRetained": 11,
+  "conflictsResolved": {
+    "newlineOnlyApprovedJson": 5,
+    "assetPreparationCombined": true,
+    "assetManifestAppendRetained": true
+  },
+  "checks": [
+    {
+      "command": "pnpm check:quick tests/animation-change.test.ts tests/vo-dang-room.test.ts tests/thien-son-skills.test.ts tests/vo-dang-skills.test.ts tests/dungeons.test.ts tests/beach-dungeon.test.ts tests/desert-dungeon.test.ts",
+      "status": "PASS",
+      "tests": 115,
+      "files": 7
+    },
+    {
+      "command": "pnpm exec tsc -b",
+      "status": "PASS"
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit",
+      "status": "PASS"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.animation-change.config.ts --project approved-animation-live --grep \"thien_son|zone change\"",
+      "status": "PASS",
+      "tests": 2,
+      "seconds": 87.80388099999999
+    },
+    {
+      "command": "git diff --cached --check",
+      "status": "PASS"
+    }
+  ],
+  "priorFullVerification": "docs/evidence/animation-change/verification-summary.json",
+  "priorFullSuiteRerun": false,
+  "priorSixPlayerRerun": false,
+  "artRegenerated": false,
+  "recordingsCreated": false,
+  "historicalEvidenceOverwritten": false,
+  "pngInspected": "lien_hoa_phien-live.png",
+  "deployed": false
+}

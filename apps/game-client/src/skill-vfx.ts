@@ -12,6 +12,7 @@ import type { LobbyState } from '@volam/game-protocol';
 import { facing } from './facing.js';
 import { FeedbackVfx } from './feedback-vfx.js';
 import { feedbackArt } from './feedback-art.js';
+import { ApprovedSkillVfx, approvedSkillAssets } from './approved-skill-vfx.js';
 import { feedbackProjectile, feedbackScale } from './feedback-visuals.js';
 import {
   preloadRasterAnimations,
@@ -22,10 +23,12 @@ const components = new Map(skillArt.assets.map((a) => [a.id, a]));
 export function preloadSkillArt(scene: Phaser.Scene): void {
   preloadRasterAnimations(scene, skillArt.assets);
   preloadRasterAnimations(scene, feedbackArt);
+  preloadRasterAnimations(scene, approvedSkillAssets);
 }
 export function registerSkillArt(scene: Phaser.Scene): void {
   registerRasterAnimations(scene, skillArt.assets);
   registerRasterAnimations(scene, feedbackArt);
+  registerRasterAnimations(scene, approvedSkillAssets);
 }
 interface EffectView {
   sprite: Phaser.GameObjects.Sprite;
@@ -44,6 +47,7 @@ interface VfxActor {
 }
 export class SkillVfx {
   private feedback: FeedbackVfx;
+  private approved: ApprovedSkillVfx;
   private transient = new Set<EffectView>();
   private persistent = new Map<string, EffectView>();
   private projectiles = new Map<string, EffectView>();
@@ -63,6 +67,7 @@ export class SkillVfx {
   private state: LobbyState | undefined;
   constructor(private scene: Phaser.Scene) {
     this.feedback = new FeedbackVfx(scene);
+    this.approved = new ApprovedSkillVfx(scene);
   }
   private tag(
     asset: string,
@@ -186,6 +191,7 @@ export class SkillVfx {
     );
   }
   event(e: CombatEvent): void {
+    if (this.approved.event(e)) return;
     if (e.kind === 'attack') this.casts.delete(e.sourceId);
     if (this.feedback.event(e)) return;
     const skill =
@@ -342,6 +348,7 @@ export class SkillVfx {
     renderPosition?: (id: string) => { x: number; y: number } | undefined,
   ): void {
     this.state = state;
+    this.approved.sync(state, zoneId, renderPosition);
     this.feedback.sync(state, zoneId, renderPosition);
     if (state?.phase === 'DEFEAT') {
       this.clear();
@@ -380,6 +387,7 @@ export class SkillVfx {
         magnitude: number;
       }>;
       for (const s of statuses) {
+        if (this.approved.handles(s.abilityId)) continue;
         if (this.feedback.suppressesStatus(s.abilityId, s.kind)) continue;
         const stage = skillVisualStages[s.abilityId];
         const definition =
@@ -457,6 +465,7 @@ export class SkillVfx {
     state?.players.forEach((a, id) => syncActor(id, a));
     state?.creeps.forEach((a, id) => syncActor(id, a));
     state?.areas.forEach((a, id) => {
+      if (this.approved.handles(a.abilityId)) return;
       if (this.feedback.areaHandled(a.abilityId)) return;
       if (a.zoneId !== zoneId) return;
       const key = 'area:' + id,
@@ -513,6 +522,7 @@ export class SkillVfx {
       }
     const shots = new Set<string>();
     state?.projectiles.forEach((p, id) => {
+      if (this.approved.handles(p.abilityId)) return;
       if (this.feedback.projectileHandled(p.abilityId, p.stage)) return;
       if (p.zoneId !== zoneId) return;
       shots.add(id);
@@ -591,6 +601,7 @@ export class SkillVfx {
     };
   }
   clear(): void {
+    this.approved.clear();
     this.feedback.clear();
     this.casts.clear();
     for (const v of [
@@ -604,6 +615,7 @@ export class SkillVfx {
     this.projectiles.clear();
   }
   observeCharacter(texture: string, frame: string) {
+    this.approved.observe(texture, frame);
     this.feedback.observeCharacter(texture, frame);
     if (components.has(texture)) {
       this.frameObservations.add(`${texture}:${frame}`);
@@ -618,6 +630,9 @@ export class SkillVfx {
     fy: number,
     hp: number,
   ) {
+    const approved = this.approved.actorCast(id, pose, fx, fy, hp);
+    if (approved) return approved;
+    if (this.approved.handles(abilityId)) return undefined;
     const updated = this.feedback.actorCast(id, pose, fx, fy, hp);
     if (updated) return updated;
     if (this.feedback.handles(abilityId) && pose === 'cast') return;
@@ -668,6 +683,7 @@ export class SkillVfx {
   }
   inspect() {
     return {
+      approved: this.approved.inspect(),
       feedback: this.feedback.inspect(),
       loadedComponents: skillArt.assets.filter((a) =>
         this.scene.textures.exists(a.id),

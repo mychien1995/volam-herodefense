@@ -198,7 +198,9 @@ it('three schools share dungeon/arena combat, authoritative shield/counter/refun
     .poll(() => events[0]!.some((e) => e.stage === 'absorb'))
     .toBe(true);
   await expect
-    .poll(() => events[1]!.some((e) => e.stage === 'counter'))
+    .poll(() => events[1]!.some((e) => e.stage === 'counter_release'), {
+      timeout: 8000,
+    })
     .toBe(true);
   expect(h.hp).toBe(h.maxHp);
   expect(h.mana).toBeLessThan(h.maxMana);
@@ -293,4 +295,86 @@ it('three schools share dungeon/arena combat, authoritative shield/counter/refun
   await a.leave();
   await b.leave();
   await isolate.leave();
+});
+
+it('synchronizes actual received guard damage and an early single reflection to both SDK peers', async () => {
+  seq = 0;
+  const a = await create('Guard'),
+    b = await client.joinById<LobbyState>(a.roomId, opts('Observer'));
+  await expect.poll(() => a.state.players.size).toBe(2);
+  a.send('lobby-action', { action: 'start' });
+  await expect.poll(() => a.state.phase).toBe('SCHOOL_SELECTION');
+  for (const p of [a, b]) {
+    p.send('lobby-action', { action: 'select', schoolId: 'vo_dang' });
+    p.send('lobby-action', { action: 'confirm' });
+  }
+  await expect.poll(() => a.state.phase).toBe('IN_GAME');
+  const room = server.getRoomById<MatchRoom>(a.roomId),
+    h = room.simulation.hero(a.sessionId)!;
+  initializeProgression(h, m1Config, 'custom');
+  await expect
+    .poll(() => a.state.players.get(a.sessionId)!.build.mode)
+    .toBe('custom');
+  await build(a, { action: 'loadout', ids: ['toa_sat_bac_do', '', '', ''] });
+  await build(a, { action: 'upgrade', skillId: 'toa_sat_bac_do' });
+  room.world.creeps.clear();
+  Object.assign(h, { x: 800, y: 980, fx: 1, fy: 0 });
+  const target = addCreep(
+    room.world,
+    'guard_probe',
+    { x: 825, y: 980 },
+    m1Config,
+  );
+  target.hp = target.maxHp = 10000;
+  target.stats = {
+    ...m1Config.creep,
+    defense: 0,
+    damage: 60,
+    speed: 0,
+    detectionRange: 65,
+    attackRange: 40,
+    attackCooldownTicks: 45,
+  };
+  target.cooldown = 30;
+  const events: { id: number; stage?: string; damage: number }[][] = [[], []];
+  [a, b].forEach((p, i) =>
+    p.onMessage('combat-event', (e) => events[i]!.push(e)),
+  );
+  cast(a, 0);
+  await expect
+    .poll(() => a.state.players.get(a.sessionId)!.statuses)
+    .toContain('guard_counter');
+  await expect
+    .poll(
+      () =>
+        JSON.parse(b.state.players.get(a.sessionId)!.statuses).find(
+          (s: { kind: string }) => s.kind === 'guard_counter',
+        )?.receivedDamage,
+    )
+    .toBeGreaterThan(0);
+  for (const list of events)
+    await expect
+      .poll(() => list.filter((e) => e.stage === 'counter_release').length, {
+        timeout: 5000,
+      })
+      .toBe(1);
+  const total = events[0]!
+    .filter((e) => e.stage === 'guard_received')
+    .reduce((n, e) => n + e.damage, 0);
+  expect(total).toBeGreaterThan(h.maxHp * 0.2);
+  for (const list of events)
+    expect(list.find((e) => e.stage === 'counter_release')!.damage).toBeCloseTo(
+      total,
+    );
+  expect(target.hp).toBeCloseTo(10000 - total);
+  await expect
+    .poll(() => b.state.players.get(a.sessionId)!.statuses)
+    .not.toContain('guard_counter');
+  expect(
+    events[0]!.filter((e) => e.stage === 'counter_release').map((e) => e.id),
+  ).toEqual(
+    events[1]!.filter((e) => e.stage === 'counter_release').map((e) => e.id),
+  );
+  await a.leave();
+  await b.leave();
 });

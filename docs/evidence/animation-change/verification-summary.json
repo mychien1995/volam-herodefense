@@ -1,0 +1,268 @@
+{
+  "status": "INTEGRATED_VERIFIED",
+  "date": "2026-11-01",
+  "worktree": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense",
+  "branch": "wip/m3d/animation-change",
+  "baseCommit": "b376bc51ef9102a7db68288a5d4a6e5ce9127622",
+  "integrationAuthorizedByCurrentInstruction": true,
+  "artApproval": "director-approved animation-review-v01; historical deferral superseded",
+  "approvedFileHashesChecked": 15,
+  "retainedReferenceHashesChecked": 100,
+  "hashMismatches": [],
+  "gitFiltersPreserveApprovedBytes": true,
+  "artRegenerated": false,
+  "recordingsCreated": false,
+  "merged": false,
+  "deployed": false,
+  "finalCommand": "pnpm check:final --config playwright.animation-change.config.ts",
+  "finalExitCode": 0,
+  "workflowTestsPassed": 18,
+  "unitIntegrationTestsPassed": 386,
+  "assetValidatorsPassed": 12,
+  "browserTestsPassed": 6,
+  "finalSeconds": 541.88,
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 7.18,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.81,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 0.95,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.4,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 60.72,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 8.35,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-assets.py",
+      "seconds": 0.39,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-arena-art01.py",
+      "seconds": 0.6,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-arena-v2.py",
+      "seconds": 0.48,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-thien-son.py",
+      "seconds": 0.42,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-vo-dang.py",
+      "seconds": 0.41,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-thieu-lam.py",
+      "seconds": 0.49,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-thien-son-skills.py",
+      "seconds": 1.18,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-vo-dang-skills.py",
+      "seconds": 1.86,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-thieu-lam-skills.py",
+      "seconds": 3.4,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-bamboo-forest.py",
+      "seconds": 0.45,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-desert.py",
+      "seconds": 0.83,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-forest-creeps.py",
+      "seconds": 2.38,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "browser verification",
+      "seconds": 450.56,
+      "status": "PASS",
+      "exitCode": 0
+    }
+  ],
+  "balanceProbes": 144,
+  "observations": {
+    "thien_son": {
+      "records": 4,
+      "framesObserved": 56,
+      "phases": [
+        "lotus_ground",
+        "protected_inside",
+        "lotus_ending",
+        "light_afterimage",
+        "dash_wind"
+      ]
+    },
+    "vo_dang": {
+      "records": 6,
+      "framesObserved": 86,
+      "phases": [
+        "confirmed_sword_impact",
+        "seven_sword_strike",
+        "seven_stars_gather",
+        "star_impact",
+        "guard_70_percent",
+        "sheathed_readiness",
+        "radial_release",
+        "counter_release",
+        "authoritative_projectile",
+        "sword_gather",
+        "sword_dissolve"
+      ]
+    },
+    "thieu_lam": {
+      "records": 8,
+      "framesObserved": 165,
+      "phases": [
+        "golden_palm_travel",
+        "confirmed_palm_impact",
+        "armor_break_seal",
+        "three_seals",
+        "confirmed_armor_hit",
+        "three_realms_slash",
+        "minh_vuong_open",
+        "minh_vuong_sustain",
+        "minh_vuong_close",
+        "ally_defense",
+        "authoritative_projectile",
+        "thousand_leaf_ending",
+        "anticipation_release",
+        "blade_contact",
+        "short_recovery"
+      ]
+    }
+  },
+  "sixPlayer": {
+    "xp": [
+      62,
+      102,
+      72,
+      32,
+      32,
+      60
+    ],
+    "aliveAfterReturn": true,
+    "phase": "IN_GAME",
+    "zoom": 1,
+    "rotation": 0,
+    "errors": [
+      [],
+      [],
+      [],
+      [],
+      [],
+      []
+    ],
+    "groundBelowActors": true,
+    "note": "Real natural dungeon combat/rewards, then real arena formation. Retreating actors may physically overlap allies; no synthetic displacement/separation."
+  },
+  "pngs": {
+    "lien_hoa_phien-live.png": {
+      "sha256": "88072d637783ee36e1271eb34ef7838214c79e40abbae4eee8fa44100a591107",
+      "bytes": 1714422
+    },
+    "nhu_lai_thien_diep-live.png": {
+      "sha256": "560706df3d7d7e2c05c8c3d8b99bfe1cf9d8373a975690fef98ba061238eac0a",
+      "bytes": 1720539
+    },
+    "van_kiem_quy_tong-live.png": {
+      "sha256": "79e8e44b46a85419b621e3c730a8194b7805dea32dfe11810d9e484d4a28f788",
+      "bytes": 1742684
+    },
+    "natural/six-player-combat-1280.png": {
+      "sha256": "fb9e71db6ab45dec0221d7caff94089b2b6975c90e063623a35efd03606573aa",
+      "bytes": 844140
+    },
+    "natural/six-player-combat-1920.png": {
+      "sha256": "48765f6473f7d02e68e1449cb662b1b7bc8e7c5903281cb7dab39af8ff513f01",
+      "bytes": 1733168
+    },
+    "natural/six-player-natural-contact-1920.png": {
+      "sha256": "4a831ea6793576fb94b9894f9092448d516cc3533e3be75a398d15a0861a8698",
+      "bytes": 1344298
+    }
+  },
+  "provisionalTuning": {
+    "lien_hoa_phien": {
+      "seconds": 6,
+      "radius": 85,
+      "additionalMaxHpRegenPerSecond": 0.08,
+      "baseCooldownSeconds": 15
+    },
+    "van_kiem_quy_tong": {
+      "seconds": 5,
+      "burstCount": 13,
+      "swordsPerBurst": 8
+    }
+  },
+  "qaOnly": {
+    "invasionIntervalSeconds": 180,
+    "statueHp": 100000,
+    "webSocketPingIntervalMs": 10000,
+    "webSocketPingMaxRetries": 6,
+    "productionTransportDefaultsChanged": false
+  },
+  "limits": [
+    "Numerical tuning is not final balance",
+    "No PvP, optimal-play/campaign/economy or FPS benchmark acceptance",
+    "Reviewed cue order/cels retained; presentation windows/paths adapt to actual authoritative lifetimes, ranges and received projectile positions",
+    "Historical failed iteration reports remain separate from final-results.json"
+  ]
+}

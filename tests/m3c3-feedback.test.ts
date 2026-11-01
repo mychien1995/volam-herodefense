@@ -186,7 +186,7 @@ describe('M3C3 feedback authoritative trial', () => {
       hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 10, f.config);
       expect(f.hero.hp).toBe(before - 10);
       const g = fixture(id);
-      g.config.collision = [{ x: 310, y: 200, width: 2, height: 200 }];
+      g.config.collision = [{ x: id === 'phong_anh_hoan_vi' ? 288 : 310, y: 200, width: 2, height: 200 }];
       g.cast();
       expect(hasStatus(g.hero, 'dash_guard', g.world.tick)).toBe(false);
     },

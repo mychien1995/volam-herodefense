@@ -1,3 +1,4 @@
+import { WebSocketTransport } from '@colyseus/ws-transport';
 // Test-owned services: reporting backpressure must never pause a room clock.
 import { createServer } from 'vite';
 import { fileURLToPath } from 'node:url';
@@ -11,13 +12,26 @@ if (preview) {
   delete process.env.VOLAM_DEV_LEGACY_SKILLS;
   delete process.env.VOLAM_DEV_SKILLS;
 }
-process.env.VOLAM_INVASION_INTERVAL_SECONDS = '30';
+// Animation review needs canonical pacing while six clients configure legal builds.
+process.env.VOLAM_INVASION_INTERVAL_SECONDS = process.env.VOLAM_ANIMATION_CHANGE
+  ? '180'
+  : '30';
 process.env.VOLAM_DEV_STATUE_HP = '100000';
 const offset = Number(process.env.VOLAM_TEST_PORT_OFFSET ?? 0);
 const serverPort = (preview ? 2588 : 2586) + offset,
   clientPort = (preview ? 5192 : 5190) + offset;
 process.env['VOLAM_DEV_PRACTICE_CREEPS'] = '1'; // Explicit historical combat fixture.
-const server = createGameServer();
+// Loading six raster clients can stall the headless host beyond the default heartbeat.
+// Only this QA-owned transport gets a longer allowance; production defaults stay intact.
+const server = createGameServer(
+  process.env.VOLAM_ANIMATION_CHANGE
+    ? new WebSocketTransport({
+        maxPayload: 2048,
+        pingInterval: 10000,
+        pingMaxRetries: 6,
+      })
+    : undefined,
+);
 const client = await createServer({
   root: fileURLToPath(new URL('../../apps/game-client', import.meta.url)),
   cacheDir: fileURLToPath(

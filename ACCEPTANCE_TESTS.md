@@ -263,3 +263,11 @@ Evidence, commands and limits: `docs/M3A_IMPLEMENTATION.md`, `docs/M3A_SKILL_ASS
 - Normal server state carries identical archetype IDs to shared occupants. Exact client lookup renders approved Forest atlases; missing/unknown IDs retain the independently tested labelled fallback.
 - Shared two-client and final six-player natural combat (two browser renderers + four SDK peers), private-instance isolation, real attacks/hurt/death/VFX, synchronized fixed XP/gold pools, physical exits, pause/re-entry and Bamboo foreground/collision are covered by `playwright.forest-natural.config.ts`. SDK peers send validated player inputs only. No pose route, state mutation, stat overrides or artificial wave clearing belongs in that scope.
 - Approved environment/creep bytes and locks remain exact. Existing all-frame review evidence is historical and separate from the new natural gameplay results. Executed outcomes and failures are recorded in `docs/FOREST_CREEP_RUNTIME_INTEGRATION.md`.
+
+
+## Animation-change integration — 2026-11-01
+
+- `tests/animation-change.test.ts`: planted owner-only field, exact edge/outside/reentry, direct/DoT immunity, healing/cap/refresh/no stacking, expiry/death/travel/removal; four backward facings and swept collision with unchanged Phi Ảnh; guard below/equal/above20%, accumulated actual HP loss including shields, fractional reflection, exact5s/zero damage, no double reduction/growth/crit/recursive release, single release/LOS/cancellation and blocked active recast; five-second104-shot straight burst/channel lifecycle and schema guards.
+- `tests/vo-dang-room.test.ts`: real SDK peers observe stored actual guard loss, identical early release ID/sum and cleanup, alongside existing multi-school/zone/reward checks.
+- `playwright.animation-change.config.ts`: two real clients, all ten revised animations in four facings (including accepted Đao A cadence), native foot pivots and server lifetime cleanup; actual zone/disconnect/death/respawn; six real players using legal earned builds, natural dungeon combat/XP followed by overlapping effects at gameplay zoom1 at1920/1280.
+- Evidence uses PNG/frame observations/server logs only. No recordings, synthetic XP/rewards or gallery-only acceptance. Approved source/export and100 retained reference hashes must pass preparation.
