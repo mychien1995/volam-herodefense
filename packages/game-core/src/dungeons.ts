@@ -1,3 +1,5 @@
+import { KimLuanEncounter } from './kim-luan.js';
+import type { KimDefinition } from './kim-types.js';
 import { spawnChu } from './chu-ba-thong.js';
 import { validateChuDefinition, type ChuDefinition } from './chu-types.js';
 import { HongLietEncounter } from './hong-liet.js';
@@ -29,6 +31,7 @@ import type {
 
 export type DungeonAccess = 'private' | 'shared';
 export interface CreepDungeonDefinition {
+  kimBoss?: KimDefinition;
   boss?: HongLietDefinition;
   bossEncounter?: BossEncounterDefinition | undefined;
   id: string;
@@ -54,6 +57,7 @@ export interface CreepDungeonDefinition {
   creepRoster?: string[] | undefined;
 }
 export interface MatchZone {
+  kim?: KimLuanEncounter;
   encounter?: HongLietEncounter;
   emptyBossResetAt?: number | undefined;
   bossRespawnAt?: number | undefined;
@@ -132,6 +136,7 @@ export class DungeonMatch {
   remove(id: string): void {
     const zone = this.zoneOf(id);
     if (zone) removeHero(zone.world, id);
+    if (zone?.kim && !zone.world.heroes.size) zone.kim.clear(zone.world);
     if (zone?.dungeon?.bossEncounter && !zone.world.heroes.size)
       zone.emptyBossResetAt =
         this.tick + zone.dungeon.bossEncounter.emptyResetTicks;
@@ -187,7 +192,10 @@ export class DungeonMatch {
         nextWaveAt: undefined,
         dungeon,
       };
-      if (dungeon.boss) {
+      if (dungeon.kimBoss) {
+        zone.kim = new KimLuanEncounter(dungeon.kimBoss);
+        zone.kim.initialize(zone.world, config);
+      } else if (dungeon.boss) {
         zone.encounter = new HongLietEncounter(dungeon.boss);
         zone.encounter.initialize(zone.world, config);
       } else if (dungeon.chuBoss) {
@@ -196,7 +204,7 @@ export class DungeonMatch {
       } else if (dungeon.bossEncounter) {
         spawnBossEncounter(zone.world, config, key);
       } else spawnCreeps(zone.world, config, 'wave_1');
-      if (!zone.encounter && !zone.world.chu && !zone.world.boss)
+      if (!zone.encounter && !zone.kim && !zone.world.chu && !zone.world.boss)
         this.assignRoster(zone);
       this.zones.set(key, zone);
     }
@@ -205,7 +213,7 @@ export class DungeonMatch {
     this.transfer(
       id,
       zone,
-      dungeon.boss || dungeon.chuBoss
+      dungeon.boss || dungeon.chuBoss || dungeon.kimBoss
         ? {
             x: dungeon.spawn.x + ((occupant % 3) - 1) * 28,
             y:
@@ -281,6 +289,16 @@ export class DungeonMatch {
       this.membership.size,
     );
     for (const zone of this.zones.values()) {
+      if (zone.kim?.phase === 'defeated') {
+        zone.bossDiedMatchTick ??= this.tick;
+        if (
+          this.tick - zone.bossDiedMatchTick >=
+          zone.kim.definition.respawnTicks
+        ) {
+          zone.kim.initialize(zone.world, zone.config);
+          delete zone.bossDiedMatchTick;
+        }
+      }
       const encounter = zone.dungeon?.bossEncounter;
       if (encounter) {
         const boss = zone.world.creeps.get(zone.world.boss!.actorId)!;
@@ -337,6 +355,7 @@ export class DungeonMatch {
             zone.emptySince = this.tick;
           }
         }
+        zone.kim?.emptyStep(zone.world, zone.config, this.tick);
         zone.encounter?.emptyStep(zone.world, zone.config, this.tick);
         continue;
       }
@@ -345,6 +364,7 @@ export class DungeonMatch {
       stepWorld(zone.world, zone.config);
       if (wasDead === undefined && zone.world.chu?.deadAt !== undefined)
         zone.bossDiedMatchTick = this.tick;
+      zone.kim?.step(zone.world, zone.config);
       zone.encounter?.step(zone.world, zone.config);
       if (encounter && zone.world.creeps.get(zone.world.boss!.actorId)!.hp <= 0)
         zone.bossRespawnAt ??= this.tick + encounter.respawnTicks;
@@ -354,6 +374,7 @@ export class DungeonMatch {
         this.invasion?.afterStep(zone.world, this.tick);
         if (this.invasion?.defeated) {
           for (const active of this.zones.values()) {
+            active.kim?.clear(active.world);
             for (const id of active.world.heroes.keys())
               cancelOwnedEffects(active.world, id);
             active.world.pending = [];
@@ -367,6 +388,7 @@ export class DungeonMatch {
         zone.access !== 'arena' &&
         !zone.dungeon?.boss &&
         !zone.dungeon?.chuBoss &&
+        !zone.dungeon?.kimBoss &&
         !encounter &&
         [...zone.world.creeps.values()].every((c) => c.hp <= 0)
       ) {
@@ -429,7 +451,7 @@ export class DungeonMatch {
       collision: d.collision,
       spawn: d.spawn,
       creepSpawns: Array.from(
-        { length: d.boss || d.chuBoss ? 0 : count },
+        { length: d.boss || d.chuBoss || d.kimBoss ? 0 : count },
         (_, i) => ({
           ...d.creepSpawns[i % d.creepSpawns.length]!,
         }),
@@ -464,6 +486,7 @@ export class DungeonMatch {
     hero.statuses = [];
     refreshCharacter(hero, destination.config);
     removeHero(source.world, id);
+    if (source.kim && !source.world.heroes.size) source.kim.clear(source.world);
     if (source.encounter && !source.world.heroes.size)
       source.encounter.clear(source.world); // cancels queued inputs, future shots and owned missiles
     if (source.dungeon?.bossEncounter && !source.world.heroes.size)

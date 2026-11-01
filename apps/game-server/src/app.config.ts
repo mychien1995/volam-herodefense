@@ -6,11 +6,14 @@ import {
   createRouter,
 } from '@colyseus/core';
 import { WebSocketTransport } from '@colyseus/ws-transport';
+import { Encoder } from '@colyseus/schema';
 import { PROTOCOL_VERSION, MATCH_ROOM } from '@volam/game-protocol';
 import { MatchRoom } from './rooms/MatchRoom.js';
 import { serverInvasionDefinition } from './invasion-config.js';
 
 export function createGameServer(transport?: WebSocketTransport) {
+  // Dense boss waves use delta state, but the initial full snapshot needs room.
+  Encoder.BUFFER_SIZE = Math.max(Encoder.BUFFER_SIZE, 128 * 1024);
   const validationRunId = process.env['VOLAM_QA_RUN_ID'];
   serverInvasionDefinition(); // Fail startup, rather than the first room, for invalid dev tuning.
   return defineServer({

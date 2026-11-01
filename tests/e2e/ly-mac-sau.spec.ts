@@ -459,6 +459,7 @@ test('M3D selector retains existing dungeons and enters Cổ Mộ through normal
     ['sea', 'Biển'],
     ['hong_liet', 'Hoàn Nhan Hồng Liệt'],
     ['chu_ba_thong', 'Chu Bá Thông'],
+    ['kim_luan', 'Kim Luân Pháp Vương · Tương Dương'],
     ['co_mo', 'Lý Mạc Sầu'],
   ] as const;
   const entries: Array<{ destination: string; zone: string }> = [];
@@ -513,7 +514,7 @@ test('M3D selector retains existing dungeons and enters Cổ Mộ through normal
           expect(
             (await card.locator('img').boundingBox())!.height,
           ).toBeGreaterThan(30);
-          for (const boss of ['hong_liet', 'chu_ba_thong']) {
+          for (const boss of ['hong_liet', 'chu_ba_thong', 'kim_luan']) {
             const peer = (await p
               .locator(`.destinations > [data-destination="${boss}"]`)
               .boundingBox())!;

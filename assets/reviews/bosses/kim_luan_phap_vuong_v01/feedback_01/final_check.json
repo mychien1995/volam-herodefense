@@ -1,0 +1,70 @@
+{
+  "revision": "feedback_01",
+  "status": "SCOPED_ART_AND_TRAJECTORY_PASS_FULL_PIPELINE_BLOCKED",
+  "branch": "wip/m3d/kim-luan-phap-vuong",
+  "commands": {
+    "trajectory": "node --test assets/reviews/bosses/kim_luan_phap_vuong_v01/choreography.test.mjs",
+    "static": "python assets/source/bosses/kim_luan_phap_vuong_v01/verify.py",
+    "browser": "node tools/run-playwright.mjs test --config assets/reviews/bosses/kim_luan_phap_vuong_v01/playwright.config.mjs",
+    "full": "pnpm check:final --config assets/reviews/bosses/kim_luan_phap_vuong_v01/playwright.config.mjs"
+  },
+  "results": {
+    "trajectoryTests": 7,
+    "trajectoryStatus": "PASS",
+    "browserTests": 1,
+    "browserGroups": 73,
+    "browserStatus": "PASS",
+    "browserDurationSeconds": 34.8,
+    "observedFrames": 184,
+    "observedClips": 53,
+    "static": {
+      "status": "PASS",
+      "sourceExportFrames": 220,
+      "characterAndVfxFrames": 208,
+      "props": 12,
+      "tiles": 256,
+      "playbackFrames": 184,
+      "playbackClips": 53,
+      "excludedBaselineAttackCandidates": 24,
+      "approval": "pending",
+      "serverMechanics": false,
+      "retainedArtFilesUnchanged": 262
+    },
+    "formatAndDiffCheck": "PASS"
+  },
+  "fullPipeline": {
+    "failedStage": "prepare assets",
+    "error": "Beach retained asset changed without provenance update: assets/tilesets/beach/terrain.tsj",
+    "unchangedBeachSha256": "079bfd7a34c731931f9c34e11525661ed8c46f502dd645245fd68a3a860e1a94",
+    "notRun": [
+      "project/tool typechecks",
+      "global unit/integration suite",
+      "production build",
+      "remaining global asset validators"
+    ],
+    "guardBypassed": false,
+    "timings": "docs/evidence/sessions/kim-luan-feedback-01-final/check-workflow/final-timings.json"
+  },
+  "renderedInputs": {
+    "assets/reviews/bosses/kim_luan_phap_vuong_v01/review.js": "09ec5f231de6922f19fdf407f994955b715aee8a902b75037bf16bc0037b6b69",
+    "assets/reviews/bosses/kim_luan_phap_vuong_v01/choreography.mjs": "060a771afb8551dce2dabc092c35280f7d097e44e80cd582c37d2b4331bf0b77",
+    "assets/reviews/bosses/kim_luan_phap_vuong_v01/data.json": "685308bb03aee72d4c24e94ce74e6076b7645771df7a97fcce0967f4e8749607",
+    "assets/exports/bosses/kim_luan_phap_vuong_v01/manifest.json": "d06f84328a5543f767c02849c13440f92b378974ec80a2d2165f12aa64474af8"
+  },
+  "newArtwork": {
+    "tool": "OpenAI built-in image_gen",
+    "sources": [
+      "generated/elephant_up.png",
+      "generated/stomp_safe.png"
+    ],
+    "newCels": 8,
+    "retainedOriginalFilesUnchanged": 262,
+    "prompts": [
+      "elephant_up_request.json",
+      "stomp_request.json",
+      "stomp_correction_request.json"
+    ],
+    "directorApproved": false
+  },
+  "scope": "Standalone real Phaser art/trajectory preview; one browser, six hero figures. No real gameplay damage, AI, multiplayer or balance acceptance."
+}

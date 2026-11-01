@@ -26,8 +26,13 @@ export class GameUI {
   private roomId = '';
   private study = false;
   private dungeonDestination:
-    'forest' | 'desert' | 'sea' | 'chu_ba_thong' | 'hong_liet' | 'co_mo' =
-    'forest';
+    | 'forest'
+    | 'desert'
+    | 'sea'
+    | 'chu_ba_thong'
+    | 'hong_liet'
+    | 'kim_luan'
+    | 'co_mo' = 'forest';
   private ended = false;
   private dead = false;
   private defense: DefenseHud;
@@ -43,7 +48,13 @@ export class GameUI {
   onDungeonEnter: (
     access: 'private' | 'shared',
     destination:
-      'forest' | 'desert' | 'sea' | 'chu_ba_thong' | 'hong_liet' | 'co_mo',
+      | 'forest'
+      | 'desert'
+      | 'sea'
+      | 'chu_ba_thong'
+      | 'hong_liet'
+      | 'kim_luan'
+      | 'co_mo',
   ) => void = () => {};
   constructor(artPreview: boolean) {
     element('#app').innerHTML = `
@@ -337,6 +348,7 @@ export class GameUI {
             destination === 'sea' ||
             destination === 'chu_ba_thong' ||
             destination === 'hong_liet' ||
+            destination === 'kim_luan' ||
             destination === 'co_mo')
         ) {
           this.dungeonDestination = destination;
@@ -489,15 +501,18 @@ export class GameUI {
     if (enter) enter.disabled = !canEnter;
     const kind = document.querySelector('#dungeon-kind');
     if (kind)
-      kind.textContent = ['chu_ba_thong', 'hong_liet', 'co_mo'].includes(
-        this.dungeonDestination,
-      )
+      kind.textContent = [
+        'chu_ba_thong',
+        'hong_liet',
+        'kim_luan',
+        'co_mo',
+      ].includes(this.dungeonDestination)
         ? 'Thủ lĩnh'
         : 'Quái thường';
     const entryNote = document.querySelector('#dungeon-entry-note');
     if (entryNote)
       entryNote.textContent = canEnter
-        ? `Chọn Riêng hoặc Chung để vào ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển', chu_ba_thong: 'Chu Bá Thông', hong_liet: 'Hoàn Nhan Hồng Liệt', co_mo: 'Cổ Mộ Phái' }[this.dungeonDestination]}.`
+        ? `Chọn Riêng hoặc Chung để vào ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển', chu_ba_thong: 'Chu Bá Thông', hong_liet: 'Hoàn Nhan Hồng Liệt', kim_luan: 'Kim Luân Pháp Vương · Tương Dương', co_mo: 'Cổ Mộ Phái' }[this.dungeonDestination]}.`
         : inArena
           ? 'Bạn cần hồi sinh trước khi vào phó bản.'
           : 'Đến gần cửa rồi nhấn Space để về đấu trường.';
@@ -531,6 +546,7 @@ export class GameUI {
           : `${Math.ceil(boss.hp)} / ${boss.maxHp}`;
     }
     const hongLiet = hero.zoneId.startsWith('hong_liet_');
+    const kim = hero.zoneId.startsWith('kim_luan_');
     const artNotice =
       dungeon?.id === 'chu_ba_thong'
         ? 'Art đã duyệt · gameplay thử nghiệm'
@@ -550,11 +566,15 @@ export class GameUI {
       hero.respawnTicks > 0
         ? `Đã gục ngã · Về đấu trường sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`
         : zone
-          ? coMo
-            ? `Cổ Mộ Phái · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · ${zone.respawnTicks > 0 ? `Lý Mạc Sầu hồi sinh sau ${Math.ceil(zone.respawnTicks / m1Config.tickRate)}s` : 'Lý Mạc Sầu'}`
-            : hongLiet
-              ? `Hoàn Nhan Hồng Liệt · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · HP ${Math.ceil(zone.bossHp)} / ${zone.bossMaxHp}${zone.bossRespawnTicks ? ` · Hồi sinh ${Math.ceil(zone.bossRespawnTicks / 30)}s` : ''}`
-              : `${dungeon?.id === 'chu_ba_thong' ? 'Chu Bá Thông' : beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
+          ? kim
+            ? 'Kim Luân Pháp Vương · Tương Dương · ' +
+              zone.living +
+              ' địch còn sống'
+            : coMo
+              ? `Cổ Mộ Phái · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · ${zone.respawnTicks > 0 ? `Lý Mạc Sầu hồi sinh sau ${Math.ceil(zone.respawnTicks / m1Config.tickRate)}s` : 'Lý Mạc Sầu'}`
+              : hongLiet
+                ? `Hoàn Nhan Hồng Liệt · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · HP ${Math.ceil(zone.bossHp)} / ${zone.bossMaxHp}${zone.bossRespawnTicks ? ` · Hồi sinh ${Math.ceil(zone.bossRespawnTicks / 30)}s` : ''}`
+                : `${dungeon?.id === 'chu_ba_thong' ? 'Chu Bá Thông' : beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
           : '';
     const claims = JSON.parse(hero.bossLoot || '[]') as Array<{
       nameVi: string;

@@ -14,6 +14,7 @@ import {
   beachDungeon,
   chuBaThongDungeon,
   hongLietDungeon,
+  kimLuanDungeon,
   coMoDungeon,
 } from '@volam/game-data';
 import {
@@ -67,6 +68,7 @@ export class MatchRoom extends Room<{
       beachDungeon,
       chuBaThongDungeon,
       hongLietDungeon,
+      kimLuanDungeon,
       coMoDungeon,
     ],
   );
@@ -277,7 +279,14 @@ export class MatchRoom extends Room<{
           input.index,
           input.itemId,
           input.action,
-          chuBaThongDungeon.chuBoss!.loot[0]!,
+          [
+            ...chuBaThongDungeon.chuBoss!.loot,
+            ...kimLuanDungeon.kimBoss!.loot,
+          ].find((i) => i.id === input.itemId) ?? {
+            id: '',
+            nameVi: '',
+            sellGold: 0,
+          },
         );
         if (error)
           client.send('command-rejected', {
@@ -713,7 +722,9 @@ export class MatchRoom extends Room<{
         }
         dungeon.encounter = zone.world.chu
           ? JSON.stringify(chuView(zone.world, zone.config))
-          : '';
+          : zone.kim
+            ? JSON.stringify({ ...zone.kim.view(zone.world), effects: [] })
+            : '';
         const boss =
           zone.encounter && zone.world.creeps.get(zone.encounter.bossId);
         dungeon.bossHp = boss?.hp ?? 0;
@@ -777,7 +788,10 @@ export class MatchRoom extends Room<{
         target.lane = enemy.invasion?.lane ?? '';
         target.targetId = enemy.invasion?.targetId ?? '';
       }
-      for (const effect of zone.encounter?.effects.values() ?? []) {
+      for (const effect of [
+        ...(zone.encounter?.effects.values() ?? []),
+        ...(zone.kim?.effects.values() ?? []),
+      ]) {
         const id = this.entityKey(zone, effect.id);
         bossEffectKeys.add(id);
         let target = this.state.bossEffects.get(id);
@@ -801,7 +815,15 @@ export class MatchRoom extends Room<{
           'expiresAt',
           'damageUntil',
         ] as const)
-          (target as unknown as Record<string, unknown>)[key] = effect[key];
+          (target as unknown as Record<string, unknown>)[key] =
+            key in effect
+              ? (effect as unknown as Record<string, unknown>)[key]
+              : effect.expiresAt;
+        target.speed = effect.speed;
+        target.index = 'index' in effect ? (effect.index ?? 0) : 0;
+        target.maxRadius = 'maxRadius' in effect ? (effect.maxRadius ?? 0) : 0;
+        target.previousRadius =
+          'previousRadius' in effect ? (effect.previousRadius ?? 0) : 0;
         target.zoneId = zone.id;
       }
       for (const area of zone.world.areas ?? []) {
@@ -894,6 +916,7 @@ export class MatchRoom extends Room<{
         const visible =
           dungeon.id === zoneId ||
           (!dungeon.id.startsWith('chu_ba_thong_') &&
+            !dungeon.id.startsWith('kim_luan_') &&
             (dungeon.access === 'shared' ||
               dungeon.ownerId === client.sessionId));
         if (visible && !view.has(dungeon)) view.add(dungeon);

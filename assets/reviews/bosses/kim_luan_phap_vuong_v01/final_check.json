@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-01",
+  "branch": "wip/m3d/kim-luan-phap-vuong",
+  "status": "SCOPED_ART_PASS_FULL_PIPELINE_BLOCKED",
+  "finalPipeline": {
+    "command": "pnpm check:final --config assets/reviews/bosses/kim_luan_phap_vuong_v01/playwright.config.mjs",
+    "failedStage": "prepare assets (once)",
+    "error": "Beach retained asset changed without provenance update: assets/tilesets/beach/terrain.tsj",
+    "expected": "3f77f94292b30f7a3661058613e001bd4dc21f4aaff309bf9f81233055219922",
+    "actual": "079bfd7a34c731931f9c34e11525661ed8c46f502dd645245fd68a3a860e1a94",
+    "gitHead": "079bfd7a34c731931f9c34e11525661ed8c46f502dd645245fd68a3a860e1a94",
+    "unchangedFromHead": true,
+    "notRun": [
+      "project/tool typechecks",
+      "full unit/integration suite",
+      "production build",
+      "remaining global asset validators"
+    ],
+    "guardBypassed": false
+  },
+  "scoped": {
+    "static": "PASS: 212 source/export cels, 176 playback frames, 50 clips, 12 props, 256 tiles",
+    "browserCommand": "node tools/run-playwright.mjs test --config assets/reviews/bosses/kim_luan_phap_vuong_v01/playwright.config.mjs",
+    "browser": "PASS: 1 test / 65 assertion groups, 31.6 seconds",
+    "realReviewBrowsers": 1,
+    "partyFigures": 6,
+    "serverMechanics": false,
+    "multiplayerAcceptance": false,
+    "directorApproved": false
+  },
+  "artManifestSha256": "0a0d42a5f8c1ee6d08114c4471b50207f47877185ab1fd58575d764cf54682af"
+}

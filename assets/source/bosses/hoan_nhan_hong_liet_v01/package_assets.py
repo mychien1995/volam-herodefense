@@ -12,7 +12,8 @@ from raster_components import components
 BASE=Path(__file__).parent
 OUT=ROOT/'assets/exports/bosses/hoan_nhan_hong_liet_v01'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
-def export():
+def export(base=BASE,out=OUT):
+ BASE=Path(base);OUT=Path(out)
  OUT.mkdir(parents=True,exist_ok=True)
  cfg=json.loads((BASE/'generation.json').read_text(encoding='utf-8-sig')); assets=[]
  for rec in cfg['requests']:
@@ -72,4 +73,10 @@ def export():
   assets.append({k:v for k,v in rec.items() if k not in ['prompt','started','finished']}|{'source':src.relative_to(ROOT).as_posix(),'sourceSha256':sha(src),'sourceDimensions':list(raw.size),'sheet':png.relative_to(ROOT).as_posix(),'atlas':atlas.relative_to(ROOT).as_posix(),'sheetSha256':sha(png),'atlasSha256':sha(atlas),'scale':factor,'origin':[.5,.8] if rec['kind']=='character' else [.5,.65],'frames':measured,'status':'prototype_pending_director_review','runtimeIntegrated':False})
   print(cid,len(frames),'frames',raw.size,'=>',sheet.size,'scale',round(factor,4))
  (OUT/'manifest.json').write_text(json.dumps({'status':'prototype_pending_director_review','runtimeIntegrated':False,'assets':assets},ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
-if __name__=='__main__':export()
+if __name__=='__main__':
+ import argparse
+ parser=argparse.ArgumentParser(description='Retained alpha-gutter sprite exporter; no art generation.')
+ parser.add_argument('--base',type=Path,default=BASE)
+ parser.add_argument('--out',type=Path,default=OUT)
+ args=parser.parse_args()
+ export(args.base.resolve(),args.out.resolve())

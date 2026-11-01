@@ -1,0 +1,26 @@
+{
+  "reviewedAt": "2026-11-01T12:28:24.838615+00:00",
+  "status": "actual PNGs inspected; runtime director approval pending",
+  "positiveReferences": [
+    "assets/reviews/bosses/kim_luan_phap_vuong_v01/feedback_02/revision-overview.png",
+    "assets/references/in_game_world_reference.png"
+  ],
+  "antiReference": "assets/references/current_game_2026_10_29_placeholder_anti_reference.png",
+  "actualPNGs": [
+    "docs/evidence/kim-luan-runtime/two-clients.png",
+    "docs/evidence/kim-luan-runtime/six-clients.png",
+    "docs/evidence/kim-luan-runtime/chan-thien.png",
+    "docs/evidence/kim-luan-runtime/elephant-cover.png",
+    "docs/evidence/kim-luan-runtime/enrage.png"
+  ],
+  "observations": [
+    "Real authored stone tiles, independently placed gate/wall/drum/brazier props and detailed raster bodies are visible, replacing the initial missing-ground defect without changing source PNGs.",
+    "Elevated orthographic view, nonrotating camera and existing normal display scale are retained. HUD and boss/loot overlays occupy the game viewport.",
+    "The actual game uses its existing 2x integer display scale at1440x1000, while approved overview shows the entire map at reduced scale; camera crop and HUD differ, retained art does not.",
+    "Thin local Chấn Thiên ellipse and per-cel pivots follow the approved raster; real up-facing elephants appear in enrage. Server geometry tests separately verify contact, cover and limits.",
+    "All184 selected frames across53 registered clips were observed moving in real Phaser with timestamps; no body rotation/mirroring was introduced.",
+    "Natural six-client PNG shows normal HP, real damage/status effects and all six school bodies. Closely clustered melee labels can overlap; no final runtime art approval is inferred."
+  ],
+  "fixtureDisclosure": "chan-thien/elephant-cover/enrage PNGs use explicitly labeled test-service phase/HP fixtures to inspect rendering. They are not natural combat or kill evidence. Natural two/six-client evidence is separate.",
+  "recordingsGenerated": false
+}

@@ -48,7 +48,7 @@ const chuHud = new ChuHud((action, id, itemId) => {
       protocolVersion: PROTOCOL_VERSION,
       sequence: ++sequence,
       index: id,
-      itemId: 'toan_chan_tien_tuu',
+      itemId: itemId === 'kim_luan_tan_phien' ? itemId : 'toan_chan_tien_tuu',
       action,
     });
   else if (action === 'roll' || action === 'pass' || action === 'pickup')
@@ -169,7 +169,13 @@ function dungeonAction(
         action: 'enter';
         access: 'private' | 'shared';
         destination:
-          'forest' | 'desert' | 'sea' | 'chu_ba_thong' | 'hong_liet' | 'co_mo';
+          | 'forest'
+          | 'desert'
+          | 'sea'
+          | 'chu_ba_thong'
+          | 'hong_liet'
+          | 'kim_luan'
+          | 'co_mo';
       },
 ): void {
   if (
@@ -379,6 +385,12 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
   Object.defineProperty(window, '__VOLAM__', {
     configurable: true,
     value: Object.freeze({
+      ...(import.meta.env.VITE_KIM_FRAME_TEST
+        ? {
+            reviewKim: (bundle: string, clip: string) =>
+              arenaScene.reviewKim(bundle, clip),
+          }
+        : {}),
       reviewChu: (
         bundle: string,
         tag: string,

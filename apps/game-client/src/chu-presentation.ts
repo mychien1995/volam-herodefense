@@ -204,7 +204,10 @@ export class ChuPresentation {
     for (const s of this.views.values()) s.setData('chuActive', false);
     for (const l of this.labels.values()) l.setVisible(false);
     const encoded = state?.dungeons.get(zoneId)?.encounter;
-    this.latest = encoded ? (JSON.parse(encoded) as ChuView) : null;
+    this.latest =
+      zoneId.startsWith('chu_ba_thong_') && encoded
+        ? (JSON.parse(encoded) as ChuView)
+        : null;
     const v = this.latest;
     if (v) {
       const t = v.elapsed,

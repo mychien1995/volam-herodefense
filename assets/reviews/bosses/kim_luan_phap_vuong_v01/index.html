@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Tương Dương · Kim Luân Pháp Vương</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="review.css" />
+  </head>
+  <body>
+    <main id="viewport">
+      <div id="game"></div>
+      <div id="tools" class="overlay">
+        <div class="top">
+          <span class="badge"
+            >TƯƠNG DƯƠNG <small>ART v01 · CHỜ DUYỆT</small></span
+          >
+          <div>
+            <button id="gallery">Sprite</button
+            ><select id="facing" aria-label="Hướng">
+              <option value="down">↓ Xuống</option>
+              <option value="left">← Trái</option>
+              <option value="right">→ Phải</option>
+              <option value="up">↑ Lên</option></select
+            ><select id="party" aria-label="Số hình nhân vật">
+              <option value="1">1 người</option>
+              <option value="2">2 người</option>
+              <option value="3">3 người</option>
+              <option value="6" selected>6 người</option>
+            </select>
+          </div>
+        </div>
+        <div id="caption" role="status"></div>
+        <div class="bottom">
+          <div class="row">
+            <select id="mode" aria-label="Chiêu thức"></select
+            ><button id="pause">Dừng</button><button id="restart">Từ đầu</button
+            ><select id="speed" aria-label="Tốc độ">
+              <option value=".25">0,25×</option>
+              <option value=".5">0,5×</option>
+              <option selected value="1">1×</option></select
+            ><label id="rescueWrap"
+              ><input id="rescue" type="checkbox" />Đồng đội cứu</label
+            >
+          </div>
+          <div class="row">
+            <input
+              id="timeline"
+              aria-label="Thời gian"
+              type="range"
+              min="0"
+              max="20"
+              step=".01"
+              value="0"
+            /><output id="time">0.0s</output>
+          </div>
+          <small
+            >← ↑ ↓ → di chuyển · A thử đánh luân xa · Space dừng · H ẩn HUD ·
+            Bản xem mỹ thuật, chưa có sát thương/server</small
+          >
+        </div>
+      </div>
+      <dialog id="sheets">
+        <button id="close">Đóng</button
+        ><select id="bundle" aria-label="Bộ atlas"></select>
+        <div id="sheetWrap"><img id="sheet" alt="Atlas PNG thực tế" /></div>
+      </dialog>
+    </main>
+    <script src="/apps/game-client/node_modules/phaser/dist/phaser.min.js"></script>
+    <script type="module" src="review.js?feedback=2"></script>
+  </body>
+</html>
