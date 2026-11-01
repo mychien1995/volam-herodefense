@@ -1,3 +1,7 @@
+## Chu Bá Thông focused integration gate — 2026-11-01
+
+Required: exact approved102 input hashes;107 real Phaser clips/428 frames; three normals and five specials; feet coverage/ranged fists; no homing; warning/travel/contact/dissipation with hand capsule bounds; rescue/solo/death/disconnect/timeout30s; swept fast spin; exact nonrecursive reflection; server/client moving fields; disciples equal dungeon members; private/shared isolation; alive empty30s reset versus dead45s respawn; fixed XP pool and one owned/drop item with validated roll/pass/pickup/sell/drop; physical Space return, original controls, in-viewport HUD and six-client readability. Automated results and remaining art/balance scope: `docs/CHU_BA_THONG_INTEGRATION.md`. Passing tests is not final director art approval.
+
 ## Small gameplay changes — 2026-10-31
 
 - New normal clients start Default; Lv1..6 slot ranks are 1/0/0/0,1/1/0/0,1/1/1/0,1/1/1/1,2/1/1/1,2/2/1/1. Both peers observe automatic learning/equipping. Same-branch replacement retains slot allocation; mixed/foreign/duplicate/empty default builds are rejected atomically.

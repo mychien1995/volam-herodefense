@@ -1,3 +1,4 @@
+import { stepChu, constrainChuTrap } from './chu-ba-thong.js';
 import { expireCombos } from './combos.js';
 import { nextBasic } from './basic-attacks.js';
 import { captureConfinement, confineMovement } from './confinement.js';
@@ -501,10 +502,12 @@ export function stepWorld(world: World, config: SimulationConfig): void {
           ? 'walk'
           : 'idle';
   }
+  stepChu(world, config);
   for (const input of world.pending.splice(0)) {
     const hero = world.heroes.get(input.heroId);
     if (hero) runCommand(world, hero, input.command, config);
   }
+  constrainChuTrap(world, config);
   captureConfinement(world, config);
   stepSkillActions(world, config);
   stepAreas(world, config);
@@ -545,6 +548,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   world.shots = world.shots.filter((item) => item.tick > world.tick);
   for (const shot of world.projectiles.values())
     advanceProjectile(world, shot, config);
+  constrainChuTrap(world, config);
   for (const [id, enemy] of world.creeps) {
     if (enemy.hp <= 0) {
       if (enemy.invasion && world.tick >= enemy.respawnAt) {
@@ -571,6 +575,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       enemy.burnNext += config.tickRate;
     }
     if (enemy.hp <= 0) continue;
+    if (enemy.bossEncounter) continue;
     const stats = enemy.stats ?? config.creep;
     const nearest = [...world.heroes.values()]
       .filter(

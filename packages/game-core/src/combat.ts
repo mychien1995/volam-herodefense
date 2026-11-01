@@ -32,6 +32,7 @@ export function hurt(
     reactive?: boolean | undefined;
     preserveFraction?: boolean | undefined;
     periodic?: boolean | undefined;
+    resolvedReflection?: boolean | undefined;
     combo?: ComboSpec | undefined;
     comboTargets?: Record<string, boolean> | undefined;
   },
@@ -155,12 +156,13 @@ export function hurt(
         statusValue(world.creeps.get(sourceId)!, 'attack_break', world.tick),
       )
     : 1;
-  const adjusted =
-    raw *
-    reduction *
-    condition *
-    (100 / (100 + defense)) *
-    (critical ? stats.critMultiplier : 1);
+  const adjusted = snapshot?.resolvedReflection
+    ? raw
+    : raw *
+      reduction *
+      condition *
+      (100 / (100 + defense)) *
+      (critical ? stats.critMultiplier : 1);
   // Stored actual HP loss is already fractional after mitigation; reflection must
   // not invent an extra point through the normal attack rounding/minimum rule.
   let damage = snapshot?.preserveFraction
@@ -178,7 +180,7 @@ export function hurt(
         ),
     ),
   );
-  if (mitigation > 0) {
+  if (mitigation > 0 && !snapshot?.resolvedReflection) {
     const before = damage;
     damage *= 1 - mitigation;
     const guard = target.statuses?.find(
@@ -264,6 +266,30 @@ export function hurt(
     fx: snapshot?.fx ?? heading?.fx ?? 1,
     fy: snapshot?.fy ?? heading?.fy ?? 0,
   });
+  if (
+    enemy?.bossEncounter &&
+    world.chu?.phase === 'reflect' &&
+    !snapshot?.reactive &&
+    target.hp < beforeHp
+  ) {
+    const attacker = world.heroes.get(sourceId);
+    if (attacker && attacker.hp > 0)
+      hurt(
+        world,
+        attacker,
+        target.id,
+        'can_khon_phan_chan',
+        beforeHp - target.hp,
+        config,
+        {
+          critChance: 0,
+          critMultiplier: 1,
+          reactive: true,
+          preserveFraction: true,
+          resolvedReflection: true,
+        },
+      );
+  }
   if (target.hp === 0) {
     world.combos = (world.combos ?? []).filter(
       (c) => c.sourceId !== target.id && c.targetId !== target.id,
@@ -283,7 +309,7 @@ export function hurt(
     });
     if (enemy) {
       enemy.respawnAt = world.tick + config.creep.respawnTicks;
-      reward(world, enemy, config);
+      if (!enemy.bossEncounter) reward(world, enemy, config);
     }
   }
   if (counter && counter.evade === false) retaliate();

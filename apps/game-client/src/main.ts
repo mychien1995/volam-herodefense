@@ -1,3 +1,5 @@
+import { ChuHud } from './chu-hud.js';
+import './chu-hud.css';
 import Phaser from 'phaser';
 import { connectionReason } from './connection-copy.js';
 import { Client, type Room } from '@colyseus/sdk';
@@ -40,6 +42,24 @@ const thieuLamReview = new URLSearchParams(location.search).has(
   'thieuLamReview',
 );
 const ui = new GameUI(artPreview);
+const chuHud = new ChuHud((action, id, itemId) => {
+  if (itemId && (action === 'sell' || action === 'drop'))
+    room?.send('boss-item-action', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: ++sequence,
+      index: id,
+      itemId: 'toan_chan_tien_tuu',
+      action,
+    });
+  else if (action === 'roll' || action === 'pass' || action === 'pickup')
+    room?.send('boss-loot-action', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: ++sequence,
+      lootId: id,
+      action,
+    });
+});
+chuHud.onNotify = (message) => ui.notify(message);
 const endpoint = import.meta.env['VITE_SERVER_URL'] ?? 'http://localhost:2567';
 const pregame = new PreGame(endpoint);
 if (artPreview) pregame.node.hidden = true;
@@ -78,7 +98,8 @@ const fit = (): void => {
   if (!game.isBooted) return;
   const host = element('#game');
   const zoom = animationReview
-    ? reviewScaleOverride ?? (host.clientWidth >= 960 && host.clientHeight >= 600 ? 2 : 1)
+    ? (reviewScaleOverride ??
+      (host.clientWidth >= 960 && host.clientHeight >= 600 ? 2 : 1))
     : artPreview
       ? 2
       : host.clientWidth >= 960 && host.clientHeight >= 600
@@ -147,7 +168,7 @@ function dungeonAction(
     | {
         action: 'enter';
         access: 'private' | 'shared';
-        destination: 'forest' | 'desert' | 'sea';
+        destination: 'forest' | 'desert' | 'sea' | 'chu_ba_thong';
       },
 ): void {
   if (
@@ -235,6 +256,7 @@ async function connect(existing: boolean): Promise<void> {
     let previousZone = 'arena';
     joined.onStateChange((state) => {
       if (room === joined) {
+        chuHud.sync(state, joined.sessionId);
         const zone = state.players.get(joined.sessionId)?.zoneId ?? 'arena';
         if (zone !== previousZone) {
           previousZone = zone;
@@ -290,6 +312,7 @@ async function connect(existing: boolean): Promise<void> {
     });
     joined.onLeave((code) => {
       if (room !== joined) return;
+      chuHud.sync(undefined, '');
       room = undefined;
       pregame.disconnected(
         `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`,
@@ -347,6 +370,7 @@ ui.onLeave = () => {
 };
 ui.onBasic = (id) => send({ kind: 'select-basic', id });
 ui.onLoadout = (ids) => send({ kind: 'dev-loadout', ids });
+window.addEventListener('click', () => chuHud.inventory());
 ui.onDungeonEnter = (access, destination) =>
   dungeonAction({ action: 'enter', access, destination });
 // Read-only browser evidence bridge, enabled explicitly for automated playtesting.
@@ -354,6 +378,13 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
   Object.defineProperty(window, '__VOLAM__', {
     configurable: true,
     value: Object.freeze({
+      reviewChu: (
+        bundle: string,
+        tag: string,
+        x: number,
+        y: number,
+        ms: number,
+      ) => arenaScene.reviewChu(bundle, tag, x, y, ms),
       snapshot: () => ({
         sessionId: room?.sessionId,
         roomId: room?.roomId,

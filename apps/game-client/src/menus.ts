@@ -28,30 +28,31 @@ export function menuContents(menu: Menu, debug = false): string {
     case 'settings':
       return `<div class="settings-controls"><p>↑ ↓ ← → · Di chuyển<br>A · Đánh thường<br>Q W E R · Kỹ năng<br>P · Võ Học<br>Space · Rời phó bản khi gần cửa<br>Escape · Đóng cửa sổ</p><button data-menu="skills">${icon('scroll')} Võ học / đổi đòn đánh</button><button data-menu="party">${icon('party')} Đồng đội / kết nối</button><button id="fullscreen">Toàn màn hình</button>${debug ? '<button id="forest-study">Xem bản mẫu rừng</button>' : ''}</div>`;
     case 'inventory':
-      return `${unavailable}
+      return `<p>Chiến lợi phẩm nhận trong trận. Bốn ô trang bị chưa mở.</p>
       <div class="inventory-layout"><section class="equipment-pane"><h3>Trang bị <small>4 ô</small></h3>
         <div class="equipment-display"><div class="paper-hero" aria-label="Hình nhân vật hiện tại"></div>
           ${[0, 1, 2, 3].map((i) => `<button class="equipment-slot e${i}" disabled aria-label="Ô trang bị trống ${i + 1}">${icon(['staff', 'robe', 'jade', 'scroll'][i]!)}<small>${i + 1}</small></button>`).join('')}
         </div><p class="muted">Chưa có trang bị.<br>Loại ô trang bị đang chờ hoàn thiện.</p><div id="inventory-stats" class="stat-lines"></div></section>
-      <section class="backpack-pane"><h3>Hành trang <small>Trống · Bảng xem trước</small></h3>
+      <section class="backpack-pane"><h3>Hành trang <small>Chiến lợi phẩm trong trận</small></h3>
         <div class="bag-grid">${Array.from({ length: 12 }, (_, i) => `<button disabled aria-label="Ô hành trang xem trước ${i + 1}"><span>＋</span></button>`).join('')}</div>
-        <div class="item-description"><span class="ornament">◇</span><h3>Hành trang đang trống</h3><p>Vật phẩm nhặt được sẽ xuất hiện tại đây. Trang bị, bán và thả vật phẩm sẽ được bổ sung sau.</p></div>
-        <div class="window-footer"><span>${icon('gold')} <b class="live-gold">0</b> vàng</span><button disabled>Trang bị</button><button disabled>Thả / Bán</button></div>
+        <div class="item-description"><span class="ornament">◇</span><h3>Chiến lợi phẩm trong trận</h3><p>Bán từng vật phẩm trong hành trang; thả và nhặt lại tại phó bản thủ lĩnh. Trang bị chưa mở.</p></div>
+        <div class="window-footer"><span>${icon('gold')} <b class="live-gold">0</b> vàng</span><button disabled>Trang bị</button><span>Chọn vật phẩm để bán hoặc thả</span></div>
       </section></div>`;
     case 'dungeons':
-      return `<p class="dungeon-intro"><span class="dungeon-school-avatar" role="img" aria-label="Nhân vật môn phái đang chọn"></span>Bốn vùng đất · Bốn thử thách</p>
+      return `<p class="dungeon-intro"><span class="dungeon-school-avatar" role="img" aria-label="Nhân vật môn phái đang chọn"></span>Phó bản quái thường và thủ lĩnh</p>
       <div class="destinations">${[
         ['forest', 'Rừng Trúc', 'Rừng trúc · Suối ngọc'],
         ['desert', 'Sa Mạc', 'Cát vàng · Cổ tích'],
         ['sea', 'Biển', 'Đảo xa · Sóng biếc'],
         ['hell', 'Địa Ngục', 'Dung nham · Hỏa ngục'],
+        ['chu_ba_thong', 'Chu Bá Thông', 'Thủ lĩnh · Toàn Chân Trúc Lâm'],
       ]
         .map(
           ([id, name, desc]) =>
-            `<button type="button" class="destination ${id}" data-destination="${id}" aria-label="${name}" aria-pressed="${id === 'forest'}" aria-disabled="${!['forest', 'desert', 'sea'].includes(id!)}"><img class="destination-illustration" src="/assets/dungeon_cards/${id}.png" alt="${desc}"/><span class="destination-copy"><strong>${name}</strong><span>${desc}</span></span>${['forest', 'desert', 'sea'].includes(id!) ? `<span class="destination-check" aria-hidden="true" ${id === 'forest' ? '' : 'hidden'}>✓</span>` : '<span class="destination-availability">Chưa mở</span>'}</button>`,
+            `<button type="button" class="destination ${id}" data-destination="${id}" aria-label="${name}" aria-pressed="${id === 'forest'}" aria-disabled="${!['forest', 'desert', 'sea', 'chu_ba_thong'].includes(id!)}"><img class="destination-illustration" src="${id === 'chu_ba_thong' ? '/assets/chu/boss_idle.png' : '/assets/dungeon_cards/' + id + '.png'}" alt="${desc}"/><span class="destination-copy"><strong>${name}</strong><span>${desc}</span></span>${['forest', 'desert', 'sea', 'chu_ba_thong'].includes(id!) ? `<span class="destination-check" aria-hidden="true" ${id === 'forest' ? '' : 'hidden'}>✓</span>` : '<span class="destination-availability">Chưa mở</span>'}</button>`,
         )
         .join('')}</div>
-      <div class="dungeon-options"><div class="dungeon-choice"><span>Tổ đội</span><div role="radiogroup" aria-label="Tổ đội"><button type="button" role="radio" data-access="private" aria-checked="true">Riêng</button><button type="button" role="radio" data-access="shared" aria-checked="false">Chung</button></div><input id="dungeon-access" type="hidden" value="private"/></div><div class="dungeon-choice"><span>Thử thách</span><div role="radiogroup" aria-label="Thử thách"><button type="button" role="radio" aria-checked="true">Quái thường</button><button type="button" role="radio" aria-checked="false" disabled title="Phó bản thủ lĩnh hiện chưa mở">Thủ lĩnh · Chưa mở</button></div></div></div>
+      <div class="dungeon-options"><div class="dungeon-choice"><span>Tổ đội</span><div role="radiogroup" aria-label="Tổ đội"><button type="button" role="radio" data-access="private" aria-checked="true">Riêng</button><button type="button" role="radio" data-access="shared" aria-checked="false">Chung</button></div><input id="dungeon-access" type="hidden" value="private"/></div><div class="dungeon-choice"><span>Thử thách</span><strong id="dungeon-kind">Quái thường</strong></div></div>
       <p id="dungeon-entry-note" role="status"></p><p id="dungeon-availability" aria-live="polite" hidden></p>
       <div class="window-footer"><button id="dungeon-close">Đóng</button><button id="enter-dungeon" class="accent" aria-label="Vào phó bản" disabled>Vào Phó Bản</button></div>`;
     case 'merchant':

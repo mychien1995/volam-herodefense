@@ -1,3 +1,8 @@
+import { chuView, chuLootAction, chuItemAction } from '@volam/game-core';
+import {
+  bossLootActionSchema,
+  bossItemActionSchema,
+} from '@volam/game-protocol';
 import { randomInt } from 'node:crypto';
 import { Room, ServerError, validate, type Client } from '@colyseus/core';
 import { serverInvasionDefinition } from '../invasion-config.js';
@@ -7,6 +12,7 @@ import {
   creepDungeon,
   desertDungeon,
   beachDungeon,
+  chuBaThongDungeon,
 } from '@volam/game-data';
 import {
   DungeonMatch,
@@ -53,7 +59,7 @@ export class MatchRoom extends Room<{
     creepDungeon,
     this.seed,
     serverInvasionDefinition(),
-    [desertDungeon, beachDungeon],
+    [desertDungeon, beachDungeon, chuBaThongDungeon],
   );
   readonly world = this.simulation.arena.world;
   private readonly checkSequences = new Map<string, number>();
@@ -241,6 +247,59 @@ export class MatchRoom extends Room<{
           sequence: input.sequence,
           checks: player.checks,
         });
+      },
+    ),
+    'boss-item-action': validate(
+      bossItemActionSchema,
+      (client: MatchClient, input) => {
+        const hero = this.simulation.hero(client.sessionId),
+          zone = this.simulation.zoneOf(client.sessionId);
+        if (
+          this.state.phase !== 'IN_GAME' ||
+          !hero ||
+          !zone ||
+          input.sequence <= hero.lastSequence
+        )
+          return;
+        hero.lastSequence = input.sequence;
+        const error = chuItemAction(
+          zone.world,
+          client.sessionId,
+          input.index,
+          input.itemId,
+          input.action,
+          chuBaThongDungeon.boss!.loot[0]!,
+        );
+        if (error)
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason: error,
+          });
+        this.syncState();
+      },
+    ),
+    'boss-loot-action': validate(
+      bossLootActionSchema,
+      (client: MatchClient, input) => {
+        if (this.state.phase !== 'IN_GAME') return;
+        const hero = this.simulation.hero(client.sessionId),
+          zone = this.simulation.zoneOf(client.sessionId);
+        if (!hero || !zone || input.sequence <= hero.lastSequence) return;
+        hero.lastSequence = input.sequence;
+        const error = chuLootAction(
+          zone.world,
+          client.sessionId,
+          input.lootId,
+          input.action,
+        );
+        if (error)
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason: error,
+          });
+        this.syncState();
       },
     ),
     'dungeon-action': validate(
@@ -546,6 +605,7 @@ export class MatchRoom extends Room<{
       const target = this.state.players.get(id);
       if (!target) continue;
       this.syncActor(target, hero, zone.world.tick);
+      target.bossItems = JSON.stringify(hero.bossItems ?? []);
       target.zoneId = zone.id;
       target.combos = JSON.stringify(
         (zone.world.combos ?? [])
@@ -625,6 +685,9 @@ export class MatchRoom extends Room<{
           dungeon = new DungeonState();
           this.state.dungeons.set(zone.id, dungeon);
         }
+        dungeon.encounter = zone.world.chu
+          ? JSON.stringify(chuView(zone.world, zone.config))
+          : '';
         dungeon.id = zone.id;
         dungeon.access = zone.access;
         dungeon.ownerId = zone.ownerId;
@@ -745,7 +808,10 @@ export class MatchRoom extends Room<{
       }
       for (const dungeon of this.state.dungeons.values()) {
         const visible =
-          dungeon.access === 'shared' || dungeon.ownerId === client.sessionId;
+          dungeon.id === zoneId ||
+          (!dungeon.id.startsWith('chu_ba_thong_') &&
+            (dungeon.access === 'shared' ||
+              dungeon.ownerId === client.sessionId));
         if (visible && !view.has(dungeon)) view.add(dungeon);
         else if (!visible && view.has(dungeon)) view.remove(dungeon);
       }

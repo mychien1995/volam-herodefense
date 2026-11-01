@@ -24,7 +24,8 @@ export class GameUI {
   private sessionId = '';
   private roomId = '';
   private study = false;
-  private dungeonDestination: 'forest' | 'desert' | 'sea' = 'forest';
+  private dungeonDestination: 'forest' | 'desert' | 'sea' | 'chu_ba_thong' =
+    'forest';
   private ended = false;
   private dead = false;
   private defense: DefenseHud;
@@ -39,7 +40,7 @@ export class GameUI {
   onStudy: (enabled: boolean) => void = () => {};
   onDungeonEnter: (
     access: 'private' | 'shared',
-    destination: 'forest' | 'desert' | 'sea',
+    destination: 'forest' | 'desert' | 'sea' | 'chu_ba_thong',
   ) => void = () => {};
   constructor(artPreview: boolean) {
     element('#app').innerHTML = `
@@ -330,7 +331,8 @@ export class GameUI {
           !unavailable &&
           (destination === 'forest' ||
             destination === 'desert' ||
-            destination === 'sea')
+            destination === 'sea' ||
+            destination === 'chu_ba_thong')
         ) {
           this.dungeonDestination = destination;
           for (const peer of document.querySelectorAll<HTMLButtonElement>(
@@ -480,10 +482,14 @@ export class GameUI {
     const canEnter = inArena && hero.hp > 0;
     const enter = document.querySelector<HTMLButtonElement>('#enter-dungeon');
     if (enter) enter.disabled = !canEnter;
+    const kind = document.querySelector('#dungeon-kind');
+    if (kind)
+      kind.textContent =
+        this.dungeonDestination === 'chu_ba_thong' ? 'Thủ lĩnh' : 'Quái thường';
     const entryNote = document.querySelector('#dungeon-entry-note');
     if (entryNote)
       entryNote.textContent = canEnter
-        ? `Chọn Riêng hoặc Chung để vào ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển' }[this.dungeonDestination]}.`
+        ? `Chọn Riêng hoặc Chung để vào ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển', chu_ba_thong: 'Chu Bá Thông' }[this.dungeonDestination]}.`
         : inArena
           ? 'Bạn cần hồi sinh trước khi vào phó bản.'
           : 'Đến gần cửa rồi nhấn Space để về đấu trường.';
@@ -496,19 +502,21 @@ export class GameUI {
     const desert = hero.zoneId.startsWith('desert_');
     const beach = hero.zoneId.startsWith('sea_');
     const artNotice =
-      desert || beach
-        ? 'Hình quái đang chờ duyệt'
-        : forestArtNotice(
-            [...state.creeps.values()]
-              .filter((a) => a.zoneId === hero.zoneId)
-              .map((a) => a.archetypeId),
-          );
+      dungeon?.id === 'chu_ba_thong'
+        ? 'Art đã duyệt · gameplay thử nghiệm'
+        : desert || beach
+          ? 'Hình quái đang chờ duyệt'
+          : forestArtNotice(
+              [...state.creeps.values()]
+                .filter((a) => a.zoneId === hero.zoneId)
+                .map((a) => a.archetypeId),
+            );
     zoneStatus.title = zone ? artNotice : '';
     zoneStatus.textContent =
       hero.respawnTicks > 0
         ? `Đã gục ngã · Về đấu trường sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`
         : zone
-          ? `${beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
+          ? `${dungeon?.id === 'chu_ba_thong' ? 'Chu Bá Thông' : beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
           : '';
     element('#hero-name').textContent = hero.nickname;
     element('#school-name').textContent =

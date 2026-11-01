@@ -1,3 +1,7 @@
+## Chu Bá Thông encounter authorization — 2026-11-01
+
+The director explicitly approved feedback01 artwork/choreography and requested integration solely in `wip/m3d/chu-ba-thong`. This adds the private/shared Chu Bá Thông dungeon, three normals, five named specials, moving Yin–Yang fields, faster/wider spin, smaller hands and one wine disciple per member, reusing current progression/controls. Server owns all attacks/geometry/status/RNG/loot; wine delivery grants no inferred immunity/buff. Preview approval is pinned separately from pending runtime art approval. Damage/HP/reward coefficients and control policy remain documented trial defaults. Exact mechanics, ownership and limitations: `docs/CHU_BA_THONG_INTEGRATION.md`.
+
 ## Forest authoritative visual roster — 2026-11-01
 
 The director explicitly authorizes the Forest roster in order: `truc_xa`, `doc_chu`, `son_vien`, `truc_lam_kiem_khach`, `moc_linh`, `truc_yeu`. The existing server roster assignment owns these identities in private/shared gameplay. Forest continues the cycle by actual spawn count per instance, including when participant scaling changes wave size. Three-creep waves use the first three, then the last three. Existing counts, common creep stats/AI, rewards, RNG and collision remain unchanged. Artwork approval is already recorded separately; this authorization adds no species abilities, statuses, projectiles or balance changes. See `docs/FOREST_CREEP_RUNTIME_INTEGRATION.md` for current verification and retained historical review evidence.

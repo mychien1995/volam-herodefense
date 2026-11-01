@@ -1,0 +1,16 @@
+{
+  "status": "BLOCKED_AT_EXISTING_APPROVAL_GUARD",
+  "command": "pnpm check:final --config assets/reviews/chu_ba_thong_v02/playwright.config.mjs",
+  "stage": "prepare assets",
+  "file": "assets/effects/dungeons/forest/atlas.json",
+  "expectedSha256": "5e18c1fdcdccdbf914070049b09b06f49830a3183f890ea3be373e6970e879ac",
+  "actualSha256": "13f3ad6fd76531532e974808b0ad5428dd38c4f6044c63157c9291fa8970b02d",
+  "fileMatchesGitHEAD": true,
+  "unrun": [
+    "project/tool typechecks",
+    "full unit/integration suite",
+    "game production build",
+    "remaining game asset validators"
+  ],
+  "resolution": "Not modified: unrelated approved Forest baseline. Standalone art browser stage run separately."
+}

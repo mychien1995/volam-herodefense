@@ -1,3 +1,7 @@
+## Chu Bá Thông integration — 2026-11-01
+
+Protocol14 adds the boss destination, scoped encounter projection and validated loot/material requests. Optional boss state in engine-independent World/Creep/DungeonMatch composes with the existing damage/progression and private/shared zone pipeline. A per-zone server state machine supplies phase clocks, swept palms/projectiles/spin, confinement and moving field geometry. Renderer/UI consume that projection inside the current Phaser viewport; no client animation drives hits. Match-clock empty reset/dead respawn deadlines remain distinct. Source/approval guards, legal-build probes and runtime limitations: `docs/CHU_BA_THONG_INTEGRATION.md`.
+
 ## Forest visual roster — 2026-11-01
 
 `game-data/forest-creep-roster.json` is the authoritative ordered six-ID source consumed by `creepDungeon.creepRoster` and the existing Forest asset adapter. `DungeonMatch.assignRoster()` retains a Forest-only per-instance cursor through actual spawn counts; Desert keeps its previous assignment behavior. Existing `CreepState.archetypeId` and MatchRoom projection carry the type; the client registry still selects solely from that field in Forest zones. No protocol, combat-event or renderer API change is required. Static roster metadata is distinct from natural gameplay verification; the new input-only browser scope disables the old pose endpoint and practice targets. See `docs/FOREST_CREEP_RUNTIME_INTEGRATION.md`.

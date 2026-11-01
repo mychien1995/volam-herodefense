@@ -1,0 +1,665 @@
+{
+  "id": "chu_ba_thong_review_v02",
+  "date": "2026-11-01",
+  "branch": "wip/m3d/chu-ba-thong",
+  "status": "prototype_pending_director_review",
+  "scope": "Standalone offline canvas review only. No Phaser, game-core, server or runtime registry edits.",
+  "provenance": "Retained original AI-assisted project rasters plus three new built-in image_gen sources. No third-party game art copied. No exclusive copyright assertion.",
+  "prompts": "generation_prompts.json",
+  "approval": "No new director approval claimed; old v01 approval metadata is retained historical data only.",
+  "runtimeVerified": false,
+  "phaserVerified": false,
+  "arena": "Authored retained metatiles and separate props assembled at native raster scale; not a flattened concept screenshot or runtime collision map.",
+  "newFrames": 24,
+  "bossPivot": [
+    56,
+    80
+  ],
+  "handPivot": [
+    112,
+    112
+  ],
+  "playbackFps": 10,
+  "frameObservations": [
+    {
+      "frame": "sweep_0",
+      "bounds": [
+        32,
+        24,
+        80,
+        80
+      ],
+      "uniqueHash": "05f58fefb92c78ba852ed63d7d4e8d10743bf6b08226c08476453511be07786e"
+    },
+    {
+      "frame": "sweep_1",
+      "bounds": [
+        32,
+        23,
+        81,
+        80
+      ],
+      "uniqueHash": "41ad3b5d1db6afa8109ee7eff85014f87cf9a240ba9d28e9ef5321d9205c1570"
+    },
+    {
+      "frame": "sweep_2",
+      "bounds": [
+        30,
+        24,
+        83,
+        80
+      ],
+      "uniqueHash": "80e8406c941d6d8605faf40845671e0c9a509f2c90bcd17ae84d2e2eb82e21cb"
+    },
+    {
+      "frame": "sweep_3",
+      "bounds": [
+        34,
+        24,
+        79,
+        80
+      ],
+      "uniqueHash": "bac41e4c6875ff01b195a06beb2638f5a29d530f75cb514fb698eb3520bbad18"
+    },
+    {
+      "frame": "punch_left_0",
+      "bounds": [
+        32,
+        24,
+        81,
+        80
+      ],
+      "uniqueHash": "b914fddad10d11dc2ec85af89a4965da8b94ed2b4e373c25496b6e65f4988b38"
+    },
+    {
+      "frame": "punch_left_1",
+      "bounds": [
+        32,
+        23,
+        80,
+        80
+      ],
+      "uniqueHash": "1bd2b4e588d6aeca09cb6e0e4ca52e3d685b77613673ab7f93b660ebc6addd8e"
+    },
+    {
+      "frame": "punch_left_2",
+      "bounds": [
+        32,
+        23,
+        80,
+        80
+      ],
+      "uniqueHash": "4905b2f7ae2cb05ca14271370151446627f9c361ff0bbeb69ebc57565d47b70d"
+    },
+    {
+      "frame": "punch_left_3",
+      "bounds": [
+        33,
+        23,
+        79,
+        80
+      ],
+      "uniqueHash": "0e82f898c58a053b339362d2999fca3b59c00642082ec870d1ece200fc22924a"
+    },
+    {
+      "frame": "punch_right_0",
+      "bounds": [
+        31,
+        23,
+        81,
+        80
+      ],
+      "uniqueHash": "61f6c03e2b928dfb7e376a01ed4d12c77a774036e9a3a56a7c36f92a939c5d3a"
+    },
+    {
+      "frame": "punch_right_1",
+      "bounds": [
+        32,
+        23,
+        81,
+        80
+      ],
+      "uniqueHash": "db55de6d6b44c58090c519e2c7e71b4d11a3c369684f37c1f0dd94174babc1d9"
+    },
+    {
+      "frame": "punch_right_2",
+      "bounds": [
+        31,
+        24,
+        81,
+        80
+      ],
+      "uniqueHash": "9af8de8ecdd4ae4d255eb7fa19e043b1c1083ea511c26d8b2cc5641705d9fa03"
+    },
+    {
+      "frame": "punch_right_3",
+      "bounds": [
+        33,
+        24,
+        79,
+        80
+      ],
+      "uniqueHash": "3c75e9aad1016946a96cc8f458a1d922ed24632ff517ef515f9bb7ca2b73106b"
+    },
+    {
+      "frame": "spin_0",
+      "bounds": [
+        26,
+        23,
+        85,
+        80
+      ],
+      "uniqueHash": "ff1104482bfecede0a45173a765c7d16ef836f36b77840b101fb18800f12b008"
+    },
+    {
+      "frame": "spin_1",
+      "bounds": [
+        28,
+        25,
+        83,
+        80
+      ],
+      "uniqueHash": "068f953abd4934644560166d41567721e6982d452a0eb71564431ad89b6f98da"
+    },
+    {
+      "frame": "spin_2",
+      "bounds": [
+        27,
+        24,
+        85,
+        80
+      ],
+      "uniqueHash": "20076233f0e40017e44a6cc89fcfaeb5fbbe225766d83a0edc174ab99718c547"
+    },
+    {
+      "frame": "spin_3",
+      "bounds": [
+        20,
+        24,
+        93,
+        80
+      ],
+      "uniqueHash": "92c52f653b26a22cfb19730cc23f08f743a9aa2c7d22c4f80e85c309c9d6103b"
+    },
+    {
+      "frame": "yin_hand_0",
+      "bounds": [
+        18,
+        50,
+        205,
+        175
+      ],
+      "uniqueHash": "9146f3e0d2a37af553199071d7f10ef93c91658debf6b9113b03c63474a1bd36"
+    },
+    {
+      "frame": "yin_hand_1",
+      "bounds": [
+        13,
+        48,
+        211,
+        177
+      ],
+      "uniqueHash": "bf256a4201168f3a015df2b3de1da2f14f512bb44fecc94b59dacbacaaab44c4"
+    },
+    {
+      "frame": "yin_hand_2",
+      "bounds": [
+        19,
+        22,
+        209,
+        203
+      ],
+      "uniqueHash": "b3eb8d741bc6c28df0498ff38d600fc95479a1009d89d237946e68015a402aba"
+    },
+    {
+      "frame": "yin_hand_3",
+      "bounds": [
+        16,
+        42,
+        208,
+        181
+      ],
+      "uniqueHash": "720ff62c8b20375ad0ef944cb6953d3c81307da21196dea4548a2685b23c8311"
+    },
+    {
+      "frame": "yang_hand_0",
+      "bounds": [
+        18,
+        48,
+        205,
+        175
+      ],
+      "uniqueHash": "b7231e3fa5484fba95ffcd57b7055fa9980c9de3edb8144da777b366dbd611f7"
+    },
+    {
+      "frame": "yang_hand_1",
+      "bounds": [
+        13,
+        48,
+        211,
+        176
+      ],
+      "uniqueHash": "bc7d63f5e4b4fa5981084697bf143e1d42aa640daa28d080a68b8654abb9f77e"
+    },
+    {
+      "frame": "yang_hand_2",
+      "bounds": [
+        16,
+        22,
+        209,
+        202
+      ],
+      "uniqueHash": "7eef2fb8dfcd56cc9b8aadb7d9b3fc8782d086bfcf871310640a175cb12bffc3"
+    },
+    {
+      "frame": "yang_hand_3",
+      "bounds": [
+        16,
+        42,
+        208,
+        181
+      ],
+      "uniqueHash": "e05f4bb73c753871012b170d28f39b7f479eca4cffc918c74bfeb5b882aa793b"
+    }
+  ],
+  "usedAssets": [
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/am_duong_nghich_chuyen/vfx_am_duong_nghich_chuyen.animations.json",
+      "sha256": "fc460f86d6def5f3849f6515c50916c325cbdcacfd55ba1e471d5388e6fdd83c"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/am_duong_nghich_chuyen/vfx_am_duong_nghich_chuyen.json",
+      "sha256": "8305cb366e795d6408bf4b6f8a5e2a694575855eef14bf4395be7f792790185e"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/am_duong_nghich_chuyen/vfx_am_duong_nghich_chuyen.png",
+      "sha256": "db942421db100be5f6c8070c563e5c4feab5fe36ee7520dce8d88b494f14f224"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/can_khon_phan_chan/vfx_can_khon_phan_chan.animations.json",
+      "sha256": "47cee1252557e315ff1140e452b39ddcb92359cef28093046aa543d1856adaa0"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/can_khon_phan_chan/vfx_can_khon_phan_chan.json",
+      "sha256": "d31442bce76de91d7765dd63d5218500cd331c525b6cdf5f86be754db11b64e7"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/can_khon_phan_chan/vfx_can_khon_phan_chan.png",
+      "sha256": "ea8a0c5f9af99efd6cd194dd4dc2493760404f6ef9a7104fe3760c85f277ab2d"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/khong_minh_quyen/vfx_khong_minh_quyen.animations.json",
+      "sha256": "fd36219f0219a8919e8fa2c6d7398ebef082d7c4446fbed96b2d6e7ed6b57317"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/khong_minh_quyen/vfx_khong_minh_quyen.json",
+      "sha256": "952fa6de8fb1414e2f691892889394e61bfc3907c50496c9c8927e88bc729646"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/khong_minh_quyen/vfx_khong_minh_quyen.png",
+      "sha256": "5ba5c429f3f0cc687212c0336cb6ffdefc17e15642b7206a27ec89931429ccd9"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/song_thu_ho_bac/giant_hands_source_v02.png",
+      "sha256": "e0dc44b0a44bb5e05ff9bb94aff8cc4fcc5e5eb3bd8f23fce55a70c56c22c64b"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/song_thu_ho_bac/giant_hands_v02.json",
+      "sha256": "c3f13491014d30ac245a051b61f80a9c2a1a2eeccae6500b3744970d05339891"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/song_thu_ho_bac/giant_hands_v02.png",
+      "sha256": "c5ff105bba21ac76ca5ca7e6c24bf3e68162497b9d48bd70d0d9bfd2855179e6"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/song_thu_ho_bac/vfx_song_thu_ho_bac.animations.json",
+      "sha256": "e9861cb9abac335d5a378785efa926c0d7dd8e07d31c6e751fafa1e6974f1abb"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/song_thu_ho_bac/vfx_song_thu_ho_bac.json",
+      "sha256": "f6bec932cb9ee6773260445dda56e2f504611c382ad36583da28312b21269485"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/song_thu_ho_bac/vfx_song_thu_ho_bac.png",
+      "sha256": "c10a6b5daff5675bc6878231ee68b3b1b8e27ab190381b19e43920c4cd5ce7d9"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/thai_cuc_am_duong_tran/vfx_thai_cuc_am_duong_tran.animations.json",
+      "sha256": "45c3ec77a259da40db2ced51112e1c816fe8cb108dcb7ea3204bb2bac855c6b4"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/thai_cuc_am_duong_tran/vfx_thai_cuc_am_duong_tran.json",
+      "sha256": "9e94ba9d20e107787e7ee6aff038324d5a905db202f5506c4f5a55ac828a8db3"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/thai_cuc_am_duong_tran/vfx_thai_cuc_am_duong_tran.png",
+      "sha256": "62735aa171a3537bc2a6333c5393984d3b3ca45f57b14c37057917d2f5d06cfb"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/tuy_tien_bo/vfx_tuy_tien_bo.animations.json",
+      "sha256": "e3aa22a499be1ed9209e9f1d4562dcea22e035ac1a15bfc408a23eb3ac6203a6"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/tuy_tien_bo/vfx_tuy_tien_bo.json",
+      "sha256": "2eca4a03864187d2fd2d6903cdadfbe8651aa74f64887e30c27128475c35e17c"
+    },
+    {
+      "path": "assets/effects/bosses/chu-ba-thong/skills/tuy_tien_bo/vfx_tuy_tien_bo.png",
+      "sha256": "f263bac37388301644f792c55a84a6a9e8e0e794a9555198528428a665c72a1a"
+    },
+    {
+      "path": "assets/exports/bamboo_forest/terrain.png",
+      "sha256": "9888de25a89244f06d31d95c7e457d281e61a7d363d073aadf9fb638ef59984c"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/idle_down_0.png",
+      "sha256": "3ffe1dab3b722bc21c96f7564214dd4168ee794a14a9e259a668fc2205cfdf02"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_down_0.png",
+      "sha256": "ceaff61f27c7c4eb9db91ac5bdc66964772247ff2c8de377170570fca5796e7e"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_down_1.png",
+      "sha256": "f0c173bb19b9f914e048d2c77b5c48fecfede904031564f275c3bf0211d6d3db"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_down_2.png",
+      "sha256": "95b8d9442c72d35d4e65cdfe8026f81ed695342df4151c48161896151986c75c"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_down_3.png",
+      "sha256": "7ee1393fd4c9e018b28cace9e67038c56b611aebf968fe2a3532c2e879c04541"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_left_0.png",
+      "sha256": "80248e7a5bc3adc3ed107ce907d61fb822db4a28045e5b9a724abdb366520170"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_left_1.png",
+      "sha256": "fcd9f60d65d7c5b3f8b89f654fdca6ebd0c1149665f40e6886afb6a4a534ab15"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_left_2.png",
+      "sha256": "e76232587822d703cf28a70ef9d8ce5ad6ce632073535e32e0967704e50cb8b5"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_left_3.png",
+      "sha256": "a0fee21ddc4339154ba1754e8ab37f36b1b1bc0867a5a42d26d581012c469b39"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_right_0.png",
+      "sha256": "abf42ec4cdbb380d039c7c99996d4eee764dd423fb47cf143007d76b4ac15d3a"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_right_1.png",
+      "sha256": "417bc9f3a7f1e5d5179471e564f1a4528d43fd83d749563d71497e2d0f430be6"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_right_2.png",
+      "sha256": "26496d6a37c9ceec9fe346f08882349be122426b1b5adf7f1d6ce2c6b9d0c637"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_right_3.png",
+      "sha256": "2b7ac59349c20a6df8367dd751bb31887cfcd148de20cf8a5c35446f3b1cc065"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_up_0.png",
+      "sha256": "39cbc1f98083d49435ddacbd8462590490f45ce778754a68bab2b2becbb03ab0"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_up_1.png",
+      "sha256": "196175f237c1f0bcd90c11831f3d32e4969e9e9840d7fd76392d72220e8f91cc"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_up_2.png",
+      "sha256": "7e3fef4336efd8d38335ad89ec9cf0d2d214e322c5c1c8bb37fcfa1651f4b5cf"
+    },
+    {
+      "path": "assets/exports/characters/thien_son_v01/fan/frames/walk_up_3.png",
+      "sha256": "3a889c12563515e2889cfebd156a35487e72ae1b204eb7a6b338848e9d184856"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/idle_down_0.png",
+      "sha256": "ae343ce02ab65eaee97ef1e45c0183ca73aa9089cb3292b5cfc6c6987d3f13bb"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_down_0.png",
+      "sha256": "2502e52ade836d0d6fe5e48a91a9762ccb7b4aa77aec188ff5d4f2fc9699645e"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_down_1.png",
+      "sha256": "c582ec5ceb53c3679aa8eaa69871dce6dd3804b6471b578ff6422aeb777da3d9"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_down_2.png",
+      "sha256": "3452fdcb6de531d934398ed05c28afb3a3401f90788e667d78c80a12cd876c99"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_down_3.png",
+      "sha256": "b81d8028d3422ed5c7b7271ff2609b1bc7fabb30a91c95533140518fdb31f60d"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_left_0.png",
+      "sha256": "e28a02ccb2f9f6b1e7a84eaef08026fd550803beefa0adae771b2db5c3d5c56c"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_left_1.png",
+      "sha256": "f068eb895ef8bca36561ac2194d4aecc2f4e18a16ff545a074c8f1d2dcb56e24"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_left_2.png",
+      "sha256": "05f0488a10c5f2da31b1b228dad2296979da3de1f9fdc3914a56de208c29de0c"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_left_3.png",
+      "sha256": "506c7eec80276b33e942d9b1b25c419706d27f26858254842395bec963c11979"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_right_0.png",
+      "sha256": "e2f03cb3f48079c19857d92ccaa3577986bbc433319279d58c2408ace03e772c"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_right_1.png",
+      "sha256": "db70a072dd7d047bd1ff2fdefc71fa81a0b64c99e3fb52da60b23067fd31a2aa"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_right_2.png",
+      "sha256": "001132740f795bbf63119efccc493eff1c5f6811a44b0d8e95921b5af6804fa7"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_right_3.png",
+      "sha256": "6ced8233bebde6ddd80d54681966f5bec6090d31aa294227f40508c1bfdfe642"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_up_0.png",
+      "sha256": "303e5f6e6cd55b2784788ab14e18503d43fc8b36c4399c23d2dd4243cf3b363f"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_up_1.png",
+      "sha256": "0791825574b70ff00ffa35bb22149bb395d5b221f9b982cd3a653491ba6b0927"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_up_2.png",
+      "sha256": "2c46b58eb838f12f683095cdae4efc90d48aedbdd1609409f23058948810d9d3"
+    },
+    {
+      "path": "assets/exports/characters/thieu_lam_v01/quyen/frames/walk_up_3.png",
+      "sha256": "344784554a647a2673b9c4542402cfbee30d90aedaea3325194b695af6235abe"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/idle_down_0.png",
+      "sha256": "2bec46939dc478cd2fa71f3aa2974fc69ee03a097ce18e716dd051a9e266ec29"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_down_0.png",
+      "sha256": "bb44141138361f57f474ae8dad4e413b918c6bcc23a3412c89da2ec46d3c4b50"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_down_1.png",
+      "sha256": "ea2f0277f23a752a99a9bdb2b0d71dc4713eab48eebc59c8dcb01450e625ac1a"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_down_2.png",
+      "sha256": "efb1d68342b845beade9cdb4d4db77ab5314e6b1ee0835d5228d3a13b6d155b2"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_down_3.png",
+      "sha256": "17c481448c3d9aa0c37d29dfbc816fbecc5cd6133d85c8dd945d709ac8041a71"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_left_0.png",
+      "sha256": "0f94b7a360a4025a128bf0ec43efb1c52235c9160f2d92fb9798d930a37298ae"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_left_1.png",
+      "sha256": "3bda2542436062bf9260282f7d3a49ab15297058ddeaa4e239c8a46ee45e5873"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_left_2.png",
+      "sha256": "2e14b9b5b1fec3c36f232242abcf482a219d774859a490b7777d9ae3d8685273"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_left_3.png",
+      "sha256": "2488ac1de3096f463c034144aed6ea81927f131a957d4db01d26f313701a2482"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_right_0.png",
+      "sha256": "0b28c4bdcb5465353a3fc4346eadbe93a5930dae8d28aa7348b147f702aa82c4"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_right_1.png",
+      "sha256": "1f23a5d7add9dce0d4872b5a7ea95ffa10b820fd13faf2681a35305dcc83deba"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_right_2.png",
+      "sha256": "1a801ff41d333338d346c6d1ffd80a5cbafb0a8390cef95eab20751e5c94dd2f"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_right_3.png",
+      "sha256": "c93d35f163b03029d87131b7c2e44df1a4ce98af757aac82070d1e55e9708150"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_up_0.png",
+      "sha256": "cd9f0cc59c33b642c79ec08aabff6954abbd3b08779578dcfe8836583326a4da"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_up_1.png",
+      "sha256": "e44ea0a54ddea8b5097342f32911b481340f2038737a844d4463c8d3ceee894f"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_up_2.png",
+      "sha256": "c2a4ceb4183060d14a5bd1cefbae1bdc297c617a61f048259d194f7824d44d6b"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_up_3.png",
+      "sha256": "07a59d845e3345d33ab47d795adad66d7f9fe6c7d251a0d51b8eb18de08655c4"
+    },
+    {
+      "path": "assets/sprites/bosses/chu-ba-thong/boss_chu_ba_thong.animations.json",
+      "sha256": "c83473b383434fd0d9bb3b0ee6d2adc242ef40ab083b0c67c9e3eb3b409dbaea"
+    },
+    {
+      "path": "assets/sprites/bosses/chu-ba-thong/boss_chu_ba_thong.json",
+      "sha256": "37f8314c7994d99939ce535f6af7b771a890d92e081e683bdf081b22e3aeb6fd"
+    },
+    {
+      "path": "assets/sprites/bosses/chu-ba-thong/boss_chu_ba_thong.png",
+      "sha256": "719ec4f668e1696c20842e913aff8b79c85868de07cb14504830fa0026c289e5"
+    },
+    {
+      "path": "assets/sprites/bosses/chu-ba-thong/boss_review_actions_v02.json",
+      "sha256": "aeaaf4d1058caaedde4f9def3735d56b3b530ecdf4998a53ca7e887a5e37adac"
+    },
+    {
+      "path": "assets/sprites/bosses/chu-ba-thong/boss_review_actions_v02.png",
+      "sha256": "d5e04e320e6f47154d0fc7776c8ba11a7694bdd45c4fc4a487d1330386b5631e"
+    },
+    {
+      "path": "assets/sprites/bosses/chu-ba-thong/source/review_actions_v02.png",
+      "sha256": "2540a1d47b9c37a62fd84ce3f60cb41e2f9bb7808cd5dc6e7f4c2eac9d096c59"
+    },
+    {
+      "path": "assets/sprites/bosses/chu-ba-thong/source/spin_left_correction_v02.png",
+      "sha256": "ac07ca7f9e2df606818b83af7bb7438eebd3aec88037e148010e8dc52bda1ed6"
+    },
+    {
+      "path": "assets/sprites/environment/toan-chan-truc-lam/bamboo_cluster.png",
+      "sha256": "452c798d277e2a18bf41682118384c20fe87656c67b667259fb761348a46eda3"
+    },
+    {
+      "path": "assets/sprites/environment/toan-chan-truc-lam/bamboo_fence_low.png",
+      "sha256": "6f93700c5eda4fc5b082a3162c2b97f22f26423992ca873c6e0b5c91293b42d9"
+    },
+    {
+      "path": "assets/sprites/environment/toan-chan-truc-lam/broken_practice_poles.png",
+      "sha256": "32b2643b595207776aee0b302a59308b954c234cec4d8c30e481b721018cf93d"
+    },
+    {
+      "path": "assets/sprites/environment/toan-chan-truc-lam/entrance_gate.png",
+      "sha256": "ac56fe314db245c0d04fc501c445a9208bbebbc98753e2f02516ba3fd43d5f7f"
+    },
+    {
+      "path": "assets/sprites/environment/toan-chan-truc-lam/moss_rock.png",
+      "sha256": "c30f0bce4438481fbe378d09992d552a486200bbc67a5fd80af634f691c9c4a1"
+    },
+    {
+      "path": "assets/sprites/environment/toan-chan-truc-lam/stone_lantern.png",
+      "sha256": "540f89014bcebaa1a85d1b6a0f7cdcd68327cc9c8a74a9915c847d8c992a0f4f"
+    },
+    {
+      "path": "assets/sprites/environment/toan-chan-truc-lam/taoist_banner.png",
+      "sha256": "3e602d9f374a5828e16ecac5ac76d6ba4f89c35e45b606164f3a7a7258bfdfe5"
+    },
+    {
+      "path": "assets/sprites/environment/toan-chan-truc-lam/taoist_pavilion.png",
+      "sha256": "f6675ab268ba25833256785c1ca7af0e0e742a5f4d4233ec30fbe2a5acea1aa9"
+    },
+    {
+      "path": "assets/sprites/environment/toan-chan-truc-lam/training_dummy.png",
+      "sha256": "ea7bfadd9b81927594c2e2739082880fb48f47e3ea5cb1dfa388cdb037817da5"
+    },
+    {
+      "path": "assets/sprites/environment/toan-chan-truc-lam/wine_rest_table.png",
+      "sha256": "0f90311f87a6725bd106a4b4fee6e2560d96957cc6ea22cef86d57c8936b0cbe"
+    },
+    {
+      "path": "assets/sprites/environment/toan-chan-truc-lam/wine_storage_rack.png",
+      "sha256": "ab957ac2a1edd7feabfdd10a0478c9852c8d84b9e94465fdfccdc9ef915ae677"
+    },
+    {
+      "path": "assets/sprites/summons/toan-chan-disciples/toan_chan_disciple.animations.json",
+      "sha256": "fb15c36e3e79d55edd3b8590bf2a2fb5501fb5d9e053df691ef19b0adc85f2fa"
+    },
+    {
+      "path": "assets/sprites/summons/toan-chan-disciples/toan_chan_disciple.json",
+      "sha256": "89efce24e099181773c91a01c02df45ca50fdfd22e18bcb4173f98e12304057d"
+    },
+    {
+      "path": "assets/sprites/summons/toan-chan-disciples/toan_chan_disciple.png",
+      "sha256": "9bc902067774f77b63d0e527d463a6d7a9eba65f0dc31abe56290e137eef48ee"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/toan-chan-truc-lam/ancient_path_material.png",
+      "sha256": "b3e3431beb28b874771e92ed06fc2d3b50888b7b6346b3e240df888f48187b2e"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/toan-chan-truc-lam/bamboo_ground_material.png",
+      "sha256": "4bb3c99721c4aea8ed25c1e10314faad2135ae1121ef0176ecde7cf2dccfa459"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/toan-chan-truc-lam/mossy_stone_material.png",
+      "sha256": "bfdc4418cd229dc284fc7a05c8a209abf2a6450d0d04c6f90f2d3cb0d9535f4e"
+    },
+    {
+      "path": "assets/tilesets/boss-arenas/toan-chan-truc-lam/yin_yang_platform.png",
+      "sha256": "4066435dfa0bffc49760c4396d04e3889f11f84fd0ff28e1411c8d5874b05aed"
+    }
+  ],
+  "limitations": [
+    "Supplementary attacks are front-facing art only. Baseline boss and disciple retain four facings.",
+    "Spin final left cel was corrected from a separate retained original source; scale continuity still awaits director review.",
+    "Arena is one-screen composition; repeated stone metatile transitions still need director review.",
+    "Standalone preview demonstrates visual rules only; no combat or multiplayer authority implemented."
+  ]
+}

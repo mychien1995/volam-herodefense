@@ -1,0 +1,56 @@
+{
+  "status": "PASS_REQUIRED_STAGES_WITH_BROWSER_STAGE_RETRY",
+  "date": "2026-11-01",
+  "branch": "wip/m3d/chu-ba-thong",
+  "commands": [
+    {
+      "command": "pnpm check:final --config playwright.chu-ba-thong.config.ts",
+      "result": "TypeScript, tools, 18 workflow checks, 411 unit/integration tests, production build and all 14 asset validators PASS; browser stage initially FAIL on hands-stage observation fixture; raw status retained in check-final-stages.json"
+    },
+    {
+      "command": "VOLAM_CHU_QA_PLAYERS=2 node tools/run-playwright.mjs test --config playwright.chu-ba-thong.config.ts",
+      "result": "PASS earlier two-client iteration, 107 clips/428 frames; report-2-players.json"
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit",
+      "result": "PASS after browser fixture/assertion-only changes"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.chu-ba-thong.config.ts",
+      "result": "PASS final six-client test; includes real-input ranged dodge, moving-field alignment, hands stages/natural death and recovery, spin poses/history, shared kill/one item, private solo trap and960x600 overlays",
+      "elapsedMs": 129790
+    },
+    {
+      "command": "node tools/chu-balance.mjs",
+      "result": "192 fixed-seed trial probes completed; not final balance"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS; no approved tracked PNG diffs"
+    }
+  ],
+  "browserFailureDiagnosis": "Initial hands observation lost when the whole arranged party stood in both palm axes; fixture observer now dodges diagonally. Additional projectile check first sampled after short-range contact; ranged witness moved to250px solely in test setup. Runtime speeds/damage unchanged.",
+  "approvedInputs": 102,
+  "clipsObserved": 107,
+  "frameReferencesObserved": 428,
+  "sixClientConsoleErrors": [],
+  "actualPngs": [
+    "arena-6-players.png",
+    "hands-6-players.png",
+    "hands-impact-6-players.png",
+    "natural-combat-loot-6-players.png",
+    "palm-dodge-6-players.png",
+    "private-960-6-players.png",
+    "spin-6-players.png",
+    "ultimate-6-players.png"
+  ],
+  "missingArt": "New sweep and left/right punch body poses only face down. No artwork generated or body rotated.",
+  "limits": [
+    "Runtime director approval pending",
+    "Trial HP/damage/rewards/control defaults, not final balance",
+    "Browser party sizes2/6; deterministic sizes1–6",
+    "No long-duration human progression/latency/reconnection soak",
+    "Frame sweep uses presentation-only fixture; natural combat uses level30 test arrangement"
+  ],
+  "recording": false
+}

@@ -39,3 +39,5 @@ export * from './progression-data.js';
 export * from './thieu-lam.js';
 
 export * from './wave-presentation.js';
+
+export * from './chu-ba-thong.js';

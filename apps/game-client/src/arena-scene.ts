@@ -1,3 +1,4 @@
+import { ChuPresentation } from './chu-presentation.js';
 import Phaser from 'phaser';
 import { arena, dungeonForZone } from '@volam/game-data';
 import { desertCreepArt } from './desert-art.js';
@@ -51,6 +52,7 @@ export class ArenaScene extends Phaser.Scene {
   private vfx: SkillVfx | undefined;
   protected creepEffects: ArenaCreepEffects | undefined;
   private trees: Phaser.GameObjects.Image[] = [];
+  private chu: ChuPresentation | undefined;
   private ready = false;
   private followed = '';
   private lastEvent = 0;
@@ -78,6 +80,7 @@ export class ArenaScene extends Phaser.Scene {
   }
   create(): void {
     registerArt(this);
+    this.chu = new ChuPresentation(this);
     this.damage = new FloatingDamage(this);
     this.vfx = new SkillVfx(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.vfx?.clear());
@@ -135,6 +138,7 @@ export class ArenaScene extends Phaser.Scene {
     this.creepEffects?.clear();
     this.time.removeAllEvents();
     for (const object of [...this.children.list]) object.destroy();
+    this.chu?.clear();
     this.actors.clear();
     this.completedAnimations.length = 0;
     this.impacts.length = 0;
@@ -407,6 +411,7 @@ export class ArenaScene extends Phaser.Scene {
         render(id, hero, false, hero.nickname);
     });
     state?.creeps?.forEach((enemy, id) => {
+      if (enemy.archetypeId === 'chu_ba_thong') return;
       if (enemy.zoneId === this.zoneId) render(id, enemy, true, 'Sơn tặc');
     });
     for (const [id, view] of this.actors)
@@ -432,6 +437,7 @@ export class ArenaScene extends Phaser.Scene {
           this.followed = '';
         }
       }
+    this.chu?.sync(state, this.zoneId);
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
     this.creepEffects?.sync(
       state,
@@ -552,10 +558,20 @@ export class ArenaScene extends Phaser.Scene {
       }
     }
   }
+  reviewChu(
+    bundle: string,
+    tag: string,
+    x: number,
+    y: number,
+    milliseconds: number,
+  ) {
+    this.chu?.review(bundle, tag, x, y, milliseconds);
+  }
   inspect() {
     const origin = this.cameras.main.getWorldPoint(0, 0);
     const unit = this.cameras.main.getWorldPoint(1, 0);
     return {
+      chu: this.chu?.inspect(),
       ready: this.ready,
       sceneTime: this.time.now,
       zoneId: this.zoneId,

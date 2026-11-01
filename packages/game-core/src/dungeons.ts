@@ -1,3 +1,5 @@
+import { spawnChu } from './chu-ba-thong.js';
+import { validateChuDefinition, type ChuDefinition } from './chu-types.js';
 import { distance } from './geometry.js';
 import { cancelOwnedEffects } from './status.js';
 import { changeBuild, refreshCharacter } from './progression.js';
@@ -24,6 +26,7 @@ import type {
 export type DungeonAccess = 'private' | 'shared';
 export interface CreepDungeonDefinition {
   id: string;
+  boss?: ChuDefinition;
   width: number;
   height: number;
   collision: Rect[];
@@ -55,6 +58,8 @@ export interface MatchZone {
   nextWaveAt: number | undefined;
   /** Forest visual roster continues through actual spawn counts, per instance. */
   forestRosterCursor?: number;
+  emptySince?: number;
+  bossDiedMatchTick?: number;
   dungeon?: CreepDungeonDefinition;
 }
 export interface ZoneCombatEvent {
@@ -82,6 +87,7 @@ export class DungeonMatch {
     for (const definition of [dungeon, ...additionalDungeons]) {
       if (this.definitions.has(definition.id))
         throw new Error(`Duplicate dungeon definition: ${definition.id}`);
+      if (definition.boss) validateChuDefinition(definition.boss, base);
       this.definitions.set(definition.id, definition);
     }
     this.arena = {
@@ -167,7 +173,10 @@ export class DungeonMatch {
         nextWaveAt: undefined,
         dungeon,
       };
-      spawnCreeps(zone.world, config, 'wave_1');
+      if (dungeon.boss) {
+        zone.world.creeps.clear();
+        spawnChu(zone.world, config, dungeon.boss);
+      } else spawnCreeps(zone.world, config, 'wave_1');
       this.assignRoster(zone);
       this.zones.set(key, zone);
     }
@@ -242,11 +251,42 @@ export class DungeonMatch {
       this.membership.size,
     );
     for (const zone of this.zones.values()) {
+      if (zone.dungeon?.boss && zone.world.chu?.deadAt !== undefined) {
+        zone.bossDiedMatchTick ??= this.tick;
+        if (
+          this.tick - zone.bossDiedMatchTick >=
+          zone.dungeon.boss.bossRespawnTicks
+        ) {
+          spawnChu(zone.world, zone.config, zone.dungeon.boss, zone.world.chu);
+          delete zone.bossDiedMatchTick;
+        }
+      }
       if (zone.access !== 'arena' && !zone.world.heroes.size) {
         zone.world.events = [];
+        if (zone.dungeon?.boss) {
+          zone.emptySince ??= this.tick;
+          const previous = zone.world.chu;
+          if (previous)
+            for (const loot of previous.loot)
+              if (loot.state === 'rolling') loot.state = 'ground';
+          if (
+            previous?.deadAt === undefined &&
+            this.tick - zone.emptySince >= zone.dungeon.boss.emptyResetTicks
+          ) {
+            spawnChu(zone.world, zone.config, zone.dungeon.boss, previous);
+            zone.world.projectiles.clear();
+            zone.world.actions = [];
+            zone.world.areas = [];
+            zone.emptySince = this.tick;
+          }
+        }
         continue;
       }
+      delete zone.emptySince;
+      const wasDead = zone.world.chu?.deadAt;
       stepWorld(zone.world, zone.config);
+      if (wasDead === undefined && zone.world.chu?.deadAt !== undefined)
+        zone.bossDiedMatchTick = this.tick;
       for (const event of zone.world.events)
         this.events.push({ zoneId: zone.id, event });
       if (zone.access === 'arena') {
@@ -262,6 +302,7 @@ export class DungeonMatch {
       }
       if (
         zone.access !== 'arena' &&
+        !zone.dungeon?.boss &&
         [...zone.world.creeps.values()].every((c) => c.hp <= 0)
       ) {
         const dungeon = zone.dungeon!;
@@ -321,7 +362,7 @@ export class DungeonMatch {
       height: d.height,
       collision: d.collision,
       spawn: d.spawn,
-      creepSpawns: Array.from({ length: count }, (_, i) => ({
+      creepSpawns: Array.from({ length: d.boss ? 0 : count }, (_, i) => ({
         ...d.creepSpawns[i % d.creepSpawns.length]!,
       })),
       creepRespawn: false,

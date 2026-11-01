@@ -1,0 +1,105 @@
+#chu-boss-hud {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(330px, 30vw);
+  padding: 6px 10px;
+  z-index: 12;
+  text-align: center;
+  background: #152520ed;
+  color: #f8e5b6;
+  pointer-events: none;
+  font-size: 13px;
+}
+#chu-boss-hud strong,
+#chu-boss-hud small {
+  display: block;
+}
+.chu-health {
+  position: relative;
+  background: #332b25;
+  height: 14px;
+  margin: 4px 0;
+}
+.chu-health i {
+  display: block;
+  background: #a94e3d;
+  height: 100%;
+}
+.chu-health span {
+  position: absolute;
+  inset: 0;
+  color: white;
+  font-size: 10px;
+  line-height: 14px;
+}
+#chu-loot {
+  position: absolute;
+  right: 12px;
+  bottom: 85px;
+  max-width: 260px;
+  max-height: 40vh;
+  overflow: auto;
+  padding: 10px;
+  z-index: 22;
+  background: #182923ef;
+  color: #f8e5b6;
+}
+#chu-loot strong,
+#chu-loot small {
+  display: block;
+  margin-bottom: 5px;
+}
+#chu-loot button {
+  margin-right: 5px;
+}
+.chu-bag-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+}
+.chu-bag-item img {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+.chu-bag-item span {
+  width: 100%;
+}
+.chu-bag-item button {
+  font-size: 11px;
+  padding: 2px 4px;
+}
+
+#viewport[data-chu='true'] #defense-hud {
+  left: 16px;
+  top: 112px;
+  transform: none;
+  width: 220px;
+  font-size: 10px;
+}
+#viewport[data-chu='true'] #zone-status {
+  display: none;
+}
+#chu-boss-hud {
+  border: 8px solid transparent;
+  border-image: url('/assets/arena_art01/panel_frame.png') 22 fill / 8px;
+  background: none;
+  z-index: 21;
+}
+@media (max-width: 1000px) {
+  #chu-boss-hud {
+    top: 112px;
+    width: 240px;
+  }
+  #viewport[data-chu='true'] #defense-hud {
+    left: auto;
+    right: 12px;
+    top: auto;
+    bottom: 155px;
+    width: 205px;
+  }
+}

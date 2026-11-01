@@ -1,3 +1,4 @@
+import type { ChuEncounter } from './chu-types.js';
 import type {
   HeroProgression,
   ProgressionDefinition,
@@ -267,6 +268,7 @@ export interface Actor extends Point {
   forcedMovementImmune?: boolean;
 }
 export interface Hero extends Actor {
+  bossItems?: string[];
   progression?: HeroProgression | undefined;
   schoolId: string;
   nickname: string;
@@ -287,6 +289,7 @@ export interface Hero extends Actor {
   basicChains?: Record<string, number>;
 }
 export interface Creep extends Actor {
+  bossEncounter?: boolean;
   /** Server-selected presentation identity; does not grant extra abilities. */
   archetypeId?: string;
   stats?: SimulationConfig['creep'];
@@ -368,6 +371,7 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  chu?: ChuEncounter;
   combos?: Array<{
     sourceId: string;
     targetId: string;

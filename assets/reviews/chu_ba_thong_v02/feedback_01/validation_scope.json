@@ -1,0 +1,33 @@
+{
+  "status": "PREVIEW_VERIFIED",
+  "scope": "Standalone art choreography only, no Phaser/server/damage changes",
+  "checks": 28,
+  "sourceAssetsUnchanged": 98,
+  "previewFiles": [
+    {
+      "path": "assets/reviews/chu_ba_thong_v02/review.js",
+      "sha256": "171799659807edb25034cccf3d7579aeb2b4124d5eefb8228134594d6d3e3d3c"
+    },
+    {
+      "path": "assets/reviews/chu_ba_thong_v02/tuning.js",
+      "sha256": "cdb34982b82d7661a222fc111a0921827cf062c08a21c5d61ee5f1b895396a51"
+    },
+    {
+      "path": "assets/reviews/chu_ba_thong_v02/index.html",
+      "sha256": "6cbfb7652c145d693821d146638d2c1faa672592908c3f5cd835d020150d69a0"
+    },
+    {
+      "path": "assets/reviews/chu_ba_thong_v02/verify.mjs",
+      "sha256": "f487fc09f70b35fa8a07bf54a1473752965272d6c5e0ac45cd38e57362e85a6b"
+    },
+    {
+      "path": "assets/reviews/chu_ba_thong_v02/review.spec.mjs",
+      "sha256": "2e2027e33c699e4de5338af78927712fd1f5a0f9519bec9d26065a702b00d598"
+    }
+  ],
+  "browserCommand": "node tools/run-playwright.mjs test --config assets/reviews/chu_ba_thong_v02/playwright.config.mjs",
+  "browserResult": "PASS: 1 test, 28 assertion groups",
+  "finalCommand": "pnpm check:final --config assets/reviews/chu_ba_thong_v02/playwright.config.mjs",
+  "finalResult": "Stopped at existing approved Forest atlas hash guard; later full stages unrun",
+  "forestFileMatchesHEAD": true
+}

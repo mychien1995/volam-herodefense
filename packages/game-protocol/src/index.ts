@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 13;
+export const PROTOCOL_VERSION = 14;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -148,7 +148,7 @@ export const dungeonActionSchema = z.discriminatedUnion('action', [
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     action: z.literal('enter'),
     access: z.enum(['private', 'shared']),
-    destination: z.enum(['forest', 'desert', 'sea']).optional(),
+    destination: z.enum(['forest', 'desert', 'sea', 'chu_ba_thong']).optional(),
   }),
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
@@ -156,6 +156,19 @@ export const dungeonActionSchema = z.discriminatedUnion('action', [
     action: z.literal('exit'),
   }),
 ]);
+export const bossLootActionSchema = z.strictObject({
+  protocolVersion: z.literal(PROTOCOL_VERSION),
+  sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+  lootId: z.number().int().positive(),
+  action: z.enum(['roll', 'pass', 'pickup']),
+});
+export const bossItemActionSchema = z.strictObject({
+  protocolVersion: z.literal(PROTOCOL_VERSION),
+  sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+  index: z.number().int().min(0),
+  itemId: z.literal('toan_chan_tien_tuu'),
+  action: z.enum(['sell', 'drop']),
+});
 export type DungeonAction = z.infer<typeof dungeonActionSchema>;
 export const rejectionSchema = z.strictObject({
   protocolVersion: z.literal(PROTOCOL_VERSION),
@@ -228,6 +241,7 @@ export const LobbyPlayer = schema(
     combos: t.string().default('[]').view(),
     zoneId: t.string().default('arena'),
     respawnTicks: t.number().default(0),
+    bossItems: t.string().default('[]'),
     nickname: t.string(),
     schoolId: t.string().default(''),
     confirmed: t.boolean().default(false),
@@ -287,6 +301,7 @@ export const DungeonState = schema(
     access: t.string(),
     ownerId: t.string(),
     wave: t.number(),
+    encounter: t.string().default(''),
     occupants: t.number(),
     paused: t.boolean(),
     tick: t.number(),

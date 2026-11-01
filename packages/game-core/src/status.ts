@@ -34,7 +34,12 @@ export function applyStatus(
   abilityId: string,
   tick: number,
 ): void {
-  if (spec.kind === 'stun' && hasStatus(actor, 'interrupt_resist', tick))
+  if (
+    ('bossEncounter' in actor &&
+      actor.bossEncounter &&
+      ['stun', 'silence', 'disarm'].includes(spec.kind)) ||
+    (spec.kind === 'stun' && hasStatus(actor, 'interrupt_resist', tick))
+  )
     return;
   actor.statuses ??= [];
   const old = actor.statuses.find(
