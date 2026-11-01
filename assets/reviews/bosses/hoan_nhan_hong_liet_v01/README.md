@@ -3,6 +3,10 @@
 Ngày: 2026-11-01. Branch: `wip/m3d/hoan-nhan-hong-liet`.
 Trạng thái: **PROTOTYPE — CHỜ DIRECTOR REVIEW**. Chưa sửa hoặc tích hợp code Phaser, game-core, server, protocol, dữ liệu combat hay package/build configuration.
 
+## Director approval — 2026-11-01
+
+Anh đã xác nhận “approve” cho bản preview hiện tại và yêu cầu prompt tích hợp trên cùng worktree. Trạng thái hiện tại: **APPROVED VISUAL PREVIEW FOR PHASER INTEGRATION**. [Approval record](director_approval.json) ghim SHA-256 các input; không sửa pixel/atlas, không tự duyệt cels lỗi đã loại. Phaser/combat/multiplayer chưa được tích hợp hoặc xác minh. Các mục “chờ review” bên dưới là trạng thái lịch sử tại lần giao prototype.
+
 ## Mở bản xem
 
 [Preview động](http://127.0.0.1:5198/assets/reviews/bosses/hoan_nhan_hong_liet_v01/).
