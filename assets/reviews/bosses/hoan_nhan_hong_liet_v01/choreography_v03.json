@@ -1,0 +1,154 @@
+{
+  "revision": "v03",
+  "status": "pending_director_review",
+  "scope": "standalone_art_choreography_only_no_gameplay_integration",
+  "thrust": {
+    "spreadDegrees": [
+      -18,
+      0,
+      18
+    ],
+    "scaleX": 1.55,
+    "scaleY": 1.15,
+    "pivot": [
+      58,
+      175
+    ],
+    "forwardOffset": 24,
+    "heightOffset": 24
+  },
+  "sweep": {
+    "previousScale": 1.05,
+    "reachMultiplier": 1.5,
+    "pivot": [
+      160,
+      120
+    ],
+    "frontOnly": true
+  },
+  "cannons": {
+    "muzzleBounds": {
+      "left": 285,
+      "top": 190,
+      "right": 995,
+      "bottom": 680
+    },
+    "horizontalLanes": [
+      290,
+      390,
+      490,
+      590
+    ],
+    "verticalLanes": [
+      390,
+      550,
+      710,
+      870
+    ],
+    "warningUntil": 1.6,
+    "fireUntil": 5.8,
+    "cleanupAt": 7,
+    "volleyInterval": 0.65,
+    "projectileSpeed": 600,
+    "boltScaleX": 0.42,
+    "boltScaleY": 0.35,
+    "warningOpaqueBounds": [
+      107,
+      304,
+      415,
+      359
+    ],
+    "warningThicknessScale": 0.55
+  },
+  "lava": {
+    "effectId": "vfx_lava_lane_v03",
+    "dashStart": 1.0,
+    "dashEnd": 1.8,
+    "recoveryEnd": 2.05,
+    "burnUntil": 12,
+    "cleanupAt": 13.6,
+    "sourceReferenceWidth": 320,
+    "surfaceScaleY": 1.2,
+    "warningScaleY": 1.65,
+    "effectAlpha": 0.92,
+    "warningAlpha": 0.65,
+    "clipHalfWidth": 60,
+    "strideSeconds": 0.08,
+    "paths": {
+      "right": [
+        [
+          390,
+          475
+        ],
+        [
+          940,
+          475
+        ]
+      ],
+      "left": [
+        [
+          900,
+          475
+        ],
+        [
+          350,
+          475
+        ]
+      ],
+      "down": [
+        [
+          640,
+          230
+        ],
+        [
+          640,
+          680
+        ]
+      ],
+      "up": [
+        [
+          640,
+          680
+        ],
+        [
+          640,
+          230
+        ]
+      ]
+    },
+    "frameAnchors": {
+      "cast_0": [
+        261.5,
+        332.0
+      ],
+      "cast_1": [
+        258.0,
+        331.0
+      ],
+      "cast_2": [
+        256.0,
+        319.0
+      ],
+      "cast_3": [
+        255.0,
+        325.0
+      ],
+      "impact_0": [
+        261.5,
+        272.5
+      ],
+      "impact_1": [
+        258.0,
+        274.0
+      ],
+      "impact_2": [
+        255.5,
+        274.5
+      ],
+      "impact_3": [
+        255.5,
+        278.5
+      ]
+    }
+  }
+}

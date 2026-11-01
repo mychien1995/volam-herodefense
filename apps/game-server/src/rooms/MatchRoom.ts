@@ -13,6 +13,7 @@ import {
   desertDungeon,
   beachDungeon,
   chuBaThongDungeon,
+  hongLietDungeon,
 } from '@volam/game-data';
 import {
   DungeonMatch,
@@ -42,6 +43,7 @@ import {
   DungeonState,
   StateView,
   AreaState,
+  BossEffectState,
   skillPreviewActionSchema,
 } from '@volam/game-protocol';
 
@@ -59,7 +61,7 @@ export class MatchRoom extends Room<{
     creepDungeon,
     this.seed,
     serverInvasionDefinition(),
-    [desertDungeon, beachDungeon, chuBaThongDungeon],
+    [desertDungeon, beachDungeon, chuBaThongDungeon, hongLietDungeon],
   );
   readonly world = this.simulation.arena.world;
   private readonly checkSequences = new Map<string, number>();
@@ -268,7 +270,7 @@ export class MatchRoom extends Room<{
           input.index,
           input.itemId,
           input.action,
-          chuBaThongDungeon.boss!.loot[0]!,
+          chuBaThongDungeon.chuBoss!.loot[0]!,
         );
         if (error)
           client.send('command-rejected', {
@@ -453,8 +455,19 @@ export class MatchRoom extends Room<{
     this.patchRate = 1000 / m1Config.tickRate;
     this.syncState();
     this.setFixedTimestep(() => {
-      if (this.state.phase !== 'IN_GAME' || !this.simulation.membership.size)
+      if (this.state.phase !== 'IN_GAME') return;
+      if (!this.simulation.membership.size) {
+        // Keep boss empty-reset clocks advancing while a late joiner is selecting a school.
+        this.simulation.tick++;
+        for (const zone of this.simulation.zones.values())
+          zone.encounter?.emptyStep(
+            zone.world,
+            zone.config,
+            this.simulation.tick,
+          );
+        this.syncState();
         return;
+      }
       this.simulation.step();
       if (this.simulation.invasion?.defeated) {
         this.state.phase = 'DEFEAT';
@@ -470,12 +483,16 @@ export class MatchRoom extends Room<{
             ...event,
             id: ++this.eventSequence,
             zoneId,
-            sourceId: zone.world.creeps.has(event.sourceId)
-              ? this.entityKey(zone, event.sourceId)
-              : event.sourceId,
-            targetId: zone.world.creeps.has(event.targetId)
-              ? this.entityKey(zone, event.targetId)
-              : event.targetId,
+            sourceId:
+              zone.world.creeps.has(event.sourceId) ||
+              event.sourceId.startsWith('hl_minion_')
+                ? this.entityKey(zone, event.sourceId)
+                : event.sourceId,
+            targetId:
+              zone.world.creeps.has(event.targetId) ||
+              event.targetId.startsWith('hl_minion_')
+                ? this.entityKey(zone, event.targetId)
+                : event.targetId,
             protocolVersion: PROTOCOL_VERSION,
           },
           {
@@ -677,7 +694,8 @@ export class MatchRoom extends Room<{
     }
     const creepKeys = new Set<string>(),
       shotKeys = new Set<string>(),
-      areaKeys = new Set<string>();
+      areaKeys = new Set<string>(),
+      bossEffectKeys = new Set<string>();
     for (const zone of this.simulation.zones.values()) {
       if (zone.access !== 'arena') {
         let dungeon = this.state.dungeons.get(zone.id);
@@ -688,6 +706,13 @@ export class MatchRoom extends Room<{
         dungeon.encounter = zone.world.chu
           ? JSON.stringify(chuView(zone.world, zone.config))
           : '';
+        const boss =
+          zone.encounter && zone.world.creeps.get(zone.encounter.bossId);
+        dungeon.bossHp = boss?.hp ?? 0;
+        dungeon.bossMaxHp = boss?.maxHp ?? 0;
+        dungeon.bossRespawnTicks = zone.encounter?.respawnAt
+          ? Math.max(0, zone.encounter.respawnAt - zone.world.tick)
+          : 0;
         dungeon.id = zone.id;
         dungeon.access = zone.access;
         dungeon.ownerId = zone.ownerId;
@@ -726,8 +751,38 @@ export class MatchRoom extends Room<{
         target.zoneId = zone.id;
         target.invasionWave = enemy.invasion?.wave ?? 0;
         target.archetypeId = enemy.archetypeId ?? '';
+        target.actionStartedAt = enemy.encounterAction?.startedAt ?? 0;
+        target.actionActiveAt = enemy.encounterAction?.activeAt ?? 0;
+        target.actionEndsAt = enemy.encounterAction?.endsAt ?? 0;
         target.lane = enemy.invasion?.lane ?? '';
         target.targetId = enemy.invasion?.targetId ?? '';
+      }
+      for (const effect of zone.encounter?.effects.values() ?? []) {
+        const id = this.entityKey(zone, effect.id);
+        bossEffectKeys.add(id);
+        let target = this.state.bossEffects.get(id);
+        if (!target) {
+          target = new BossEffectState();
+          this.state.bossEffects.set(id, target);
+        }
+        for (const key of [
+          'kind',
+          'castId',
+          'ownerId',
+          'abilityId',
+          'x',
+          'y',
+          'fx',
+          'fy',
+          'length',
+          'radius',
+          'startedAt',
+          'activeAt',
+          'expiresAt',
+          'damageUntil',
+        ] as const)
+          (target as unknown as Record<string, unknown>)[key] = effect[key];
+        target.zoneId = zone.id;
       }
       for (const area of zone.world.areas ?? []) {
         const id = this.entityKey(zone, area.id);
@@ -767,6 +822,12 @@ export class MatchRoom extends Room<{
         target.leg = shot.leg ?? '';
       }
     }
+    for (const [id, target] of this.state.bossEffects)
+      if (!bossEffectKeys.has(id)) {
+        for (const client of this.clients)
+          if (client.view?.has(target)) client.view.remove(target);
+        this.state.bossEffects.delete(id);
+      }
     for (const [id, target] of this.state.creeps)
       if (!creepKeys.has(id)) {
         for (const client of this.clients)
@@ -801,6 +862,7 @@ export class MatchRoom extends Room<{
         ...this.state.creeps.values(),
         ...this.state.projectiles.values(),
         ...this.state.areas.values(),
+        ...this.state.bossEffects.values(),
       ]) {
         if (entity.zoneId === zoneId && !view.has(entity)) view.add(entity);
         else if (entity.zoneId !== zoneId && view.has(entity))

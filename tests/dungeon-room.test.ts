@@ -381,4 +381,162 @@ describe('M2A real Colyseus zone authority and views', () => {
       1,
     );
   });
+  it('projects Hong Liet v04 cues to both occupants, isolates private state, and clears a disconnected empty encounter', async () => {
+    const {
+      rooms: [a, b, c],
+      authority,
+    } = await join(3);
+    for (const room of [a!, b!])
+      room.send('dungeon-action', {
+        protocolVersion: PROTOCOL_VERSION,
+        sequence: next(room),
+        action: 'enter',
+        access: 'shared',
+        destination: 'hong_liet',
+      });
+    for (const room of [a!, b!])
+      await expect
+        .poll(() => room.state.players.get(room.sessionId)?.zoneId)
+        .toBe('hong_liet_shared');
+    const z = authority.simulation.zoneOf(a!.sessionId)!,
+      e = z.encounter!;
+    e.clear(z.world);
+    e.begin(
+      z.world,
+      z.config,
+      'hoa_phao_thien_la',
+      authority.simulation.hero(a!.sessionId)!,
+    );
+    for (const room of [a!, b!])
+      await expect
+        .poll(
+          () =>
+            [...room.state.bossEffects.values()].filter(
+              (cue) => cue.kind === 'cannon',
+            ).length,
+        )
+        .toBe(16);
+    const geometry = (room: Room<MatchRoom>) =>
+      [...room.state.bossEffects.values()]
+        .filter((cue) => cue.kind === 'line')
+        .map((cue) => [cue.x, cue.y, cue.fx, cue.fy, cue.length, cue.activeAt]);
+    expect(geometry(a!)).toEqual(geometry(b!));
+    expect(geometry(a!)).toHaveLength(8);
+    expect(c!.state.bossEffects.size).toBe(0);
+    const pulsesA: Array<{
+        kind: string;
+        abilityId: string;
+        targetId?: string;
+      }> = [],
+      pulsesB: typeof pulsesA = [];
+    a!.onMessage('combat-event', (message) => pulsesA.push(message));
+    b!.onMessage('combat-event', (message) => pulsesB.push(message));
+    await expect
+      .poll(
+        () =>
+          pulsesA.some(
+            (p) => p.kind === 'pulse' && p.abilityId === 'hoa_phao_thien_la',
+          ),
+        { timeout: 4000 },
+      )
+      .toBe(true);
+    await expect
+      .poll(
+        () =>
+          pulsesB.some(
+            (p) => p.kind === 'pulse' && p.abilityId === 'hoa_phao_thien_la',
+          ),
+        { timeout: 4000 },
+      )
+      .toBe(true);
+    await expect
+      .poll(() =>
+        [...a!.state.bossEffects.values()].some(
+          (cue) => cue.kind === 'projectile',
+        ),
+      )
+      .toBe(true);
+    c!.send('dungeon-action', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: next(c!),
+      action: 'enter',
+      access: 'private',
+      destination: 'hong_liet',
+    });
+    await expect
+      .poll(() => c!.state.players.get(c!.sessionId)?.zoneId)
+      .toBe(`hong_liet_private_${c!.sessionId}`);
+    expect(
+      [...c!.state.creeps.values()].every(
+        (enemy) => enemy.zoneId === `hong_liet_private_${c!.sessionId}`,
+      ),
+    ).toBe(true);
+    expect(
+      [...c!.state.bossEffects.values()].every(
+        (cue) => cue.zoneId === `hong_liet_private_${c!.sessionId}`,
+      ),
+    ).toBe(true);
+    e.clear(z.world);
+    e.begin(
+      z.world,
+      z.config,
+      'thiet_ky_trieu_binh',
+      authority.simulation.hero(a!.sessionId)!,
+    );
+    await expect
+      .poll(
+        () =>
+          [...a!.state.creeps.values()].some(
+            (m) => m.archetypeId === 'mongol_infantry',
+          ),
+        { timeout: 3000 },
+      )
+      .toBe(true);
+    const minion = [...z.world.creeps.values()].find(
+      (m) => m.archetypeId === 'mongol_infantry',
+    )!;
+    minion.hp = 1;
+    Object.assign(authority.simulation.hero(a!.sessionId)!, {
+      x: minion.x - 20,
+      y: minion.y,
+      fx: 1,
+      fy: 0,
+    });
+    a!.send('input', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: next(a!),
+      kind: 'basic',
+    });
+    await expect
+      .poll(
+        () =>
+          pulsesA.some(
+            (p) => p.kind === 'death' && p.targetId === `${z.id}:${minion.id}`,
+          ),
+        { timeout: 2000 },
+      )
+      .toBe(true);
+    // Start another long-lived grid to verify the final disconnect cancels it.
+    e.clear(z.world);
+    e.begin(
+      z.world,
+      z.config,
+      'hoa_phao_thien_la',
+      authority.simulation.hero(a!.sessionId)!,
+    );
+    b!.connection.close();
+    await expect
+      .poll(() => authority.simulation.zoneOf(b!.sessionId))
+      .toBeUndefined();
+    expect(z.world.heroes.size).toBe(1);
+    expect(e.effects.size).toBeGreaterThan(0);
+    await a!.leave();
+    await expect.poll(() => e.effects.size).toBe(0);
+    expect(
+      [...z.world.creeps.values()].some((m) =>
+        m.archetypeId?.startsWith('mongol_'),
+      ),
+    ).toBe(false);
+    expect(z.world.creeps.get(e.bossId)!.castAbilityId).toBe('');
+  });
 });

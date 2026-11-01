@@ -1,0 +1,409 @@
+{
+  "status": "PASS_RUNTIME_VERIFIED_NOT_NEW_ART_APPROVAL",
+  "previewCommit": "82eaa5ca",
+  "approvalCommit": "d62da39e",
+  "command": "pnpm check:final --config playwright.hong-liet.config.ts",
+  "pipeline": {
+    "runId": "f578fafd-a8a8-4947-87f5-a1864080a5e3",
+    "mode": "final",
+    "args": [
+      "--config",
+      "playwright.hong-liet.config.ts"
+    ],
+    "startedAt": "2026-11-01T04:15:18.936Z",
+    "status": "PASS",
+    "stages": [
+      {
+        "label": "prepare assets (once)",
+        "seconds": 8.07,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "compile TypeScript",
+        "seconds": 0.58,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "typecheck tests and tools",
+        "seconds": 0.91,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "workflow regression checks",
+        "seconds": 0.45,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "all unit/integration tests",
+        "seconds": 65.51,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "production client build",
+        "seconds": 7.69,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-assets.py",
+        "seconds": 0.41,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-arena-art01.py",
+        "seconds": 0.74,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-arena-v2.py",
+        "seconds": 0.74,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-thien-son.py",
+        "seconds": 0.46,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-vo-dang.py",
+        "seconds": 0.48,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-thieu-lam.py",
+        "seconds": 0.7,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-thien-son-skills.py",
+        "seconds": 1.67,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-vo-dang-skills.py",
+        "seconds": 2.4,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-thieu-lam-skills.py",
+        "seconds": 4.06,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-bamboo-forest.py",
+        "seconds": 0.58,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-desert.py",
+        "seconds": 4.49,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-forest-creeps.py",
+        "seconds": 2.84,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-beach.py",
+        "seconds": 1.77,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "browser verification",
+        "seconds": 134.03,
+        "status": "PASS",
+        "exitCode": 0
+      }
+    ],
+    "totalSeconds": 238.61
+  },
+  "tests": {
+    "unitIntegration": 412,
+    "workflow": 18,
+    "phaserBrowser": 2
+  },
+  "twoClientActions": [
+    "lien_hoa_phien",
+    "hong_liet_a1",
+    "hong_liet_a2",
+    "dung_nham_liet_dia",
+    "hoa_son_bao_phat",
+    "liet_diem_phong_toa",
+    "hoa_tien_te_phat",
+    "thiet_ky_trieu_binh",
+    "van_ly_nham_hoa",
+    "hoa_phao_thien_la"
+  ],
+  "sixClientCombat": {
+    "participants": [
+      "IpCE1E0h0",
+      "J9pTJdvu4",
+      "8c8qrnqRA",
+      "GyNs4DQvl",
+      "z6YXb8Q5i",
+      "kqOwwZj0X"
+    ],
+    "bossHits": 159,
+    "minHp": 1496,
+    "maxSummons": 8,
+    "maxCannons": 16,
+    "maxAlive": 6,
+    "partyCaptured": true,
+    "errors": []
+  },
+  "observedFrames": {
+    "boss_locomotion": [
+      "down_idle_a",
+      "down_idle_b",
+      "down_walk_a",
+      "down_walk_b",
+      "down_walk_c",
+      "down_walk_d",
+      "left_idle_a",
+      "left_idle_b",
+      "left_walk_a",
+      "left_walk_b",
+      "left_walk_c",
+      "left_walk_d",
+      "right_idle_a",
+      "right_idle_b",
+      "up_idle_a",
+      "up_idle_b",
+      "up_walk_a",
+      "up_walk_b",
+      "up_walk_c",
+      "up_walk_d"
+    ],
+    "boss_basics": [
+      "down_sweep_0",
+      "down_sweep_1",
+      "down_sweep_2",
+      "down_sweep_3",
+      "down_thrust_0",
+      "down_thrust_3",
+      "left_sweep_0",
+      "left_sweep_1",
+      "left_sweep_2",
+      "left_sweep_3",
+      "left_thrust_0",
+      "left_thrust_3",
+      "up_thrust_0",
+      "up_thrust_3"
+    ],
+    "vfx_basics": [
+      "sweep_0",
+      "sweep_1",
+      "sweep_2",
+      "sweep_3",
+      "thrust_0",
+      "thrust_1",
+      "thrust_2",
+      "thrust_3"
+    ],
+    "boss_thrust_vertical": [
+      "down_thrust_1",
+      "down_thrust_2"
+    ],
+    "boss_casts": [
+      "down_command_0",
+      "down_command_1",
+      "down_command_2",
+      "left_command_0",
+      "left_command_1",
+      "left_command_2",
+      "left_stomp_0",
+      "left_stomp_1",
+      "left_stomp_2",
+      "right_command_0",
+      "right_command_1",
+      "right_command_2",
+      "up_command_0",
+      "up_command_1",
+      "up_command_2"
+    ],
+    "vfx_stomp": [
+      "cast_0",
+      "cast_1",
+      "cast_2",
+      "cast_3",
+      "impact_0",
+      "impact_1",
+      "impact_2",
+      "impact_3"
+    ],
+    "vfx_volcano": [
+      "cast_0",
+      "cast_1",
+      "cast_2",
+      "cast_3",
+      "impact_0",
+      "impact_1",
+      "impact_2",
+      "impact_3"
+    ],
+    "vfx_lava_lane_v03": [
+      "cast_0",
+      "impact_0",
+      "impact_1",
+      "impact_2",
+      "impact_3"
+    ],
+    "minion_archer": [
+      "down_idle_0",
+      "down_idle_1",
+      "down_walk_0",
+      "down_walk_1",
+      "left_attack_0",
+      "left_attack_1",
+      "left_idle_0",
+      "left_idle_1",
+      "left_walk_0",
+      "left_walk_1",
+      "left_walk_2",
+      "left_walk_3",
+      "right_attack_0",
+      "right_attack_1",
+      "right_idle_0",
+      "right_idle_1",
+      "right_walk_0",
+      "right_walk_1",
+      "right_walk_2",
+      "right_walk_3"
+    ],
+    "vfx_arrows": [
+      "right_0",
+      "right_1",
+      "right_2",
+      "right_3"
+    ],
+    "minion_infantry": [
+      "down_idle_0",
+      "down_idle_1",
+      "down_walk_0",
+      "down_walk_1",
+      "down_walk_2",
+      "down_walk_3",
+      "left_attack_0",
+      "left_attack_1",
+      "left_idle_0",
+      "left_idle_1",
+      "left_walk_0",
+      "left_walk_1",
+      "left_walk_2",
+      "left_walk_3",
+      "right_attack_0",
+      "right_attack_1",
+      "right_idle_0",
+      "right_idle_1",
+      "right_walk_0",
+      "right_walk_1",
+      "right_walk_2",
+      "right_walk_3"
+    ],
+    "vfx_meteor": [
+      "cast_0",
+      "cast_1",
+      "impact_0",
+      "impact_1",
+      "impact_2",
+      "impact_3"
+    ],
+    "vfx_meteor_safe": [
+      "fall_0",
+      "fall_1"
+    ],
+    "cannon_clean": [
+      "recoil_down",
+      "recoil_left",
+      "recoil_right",
+      "recoil_up",
+      "rest_down",
+      "rest_up"
+    ],
+    "vfx_lava_lane": [
+      "cast_0"
+    ]
+  },
+  "naturalFacingCoverage": {
+    "boss_locomotion": [
+      "down",
+      "left",
+      "right",
+      "up"
+    ],
+    "boss_basics": [
+      "down",
+      "left",
+      "up"
+    ],
+    "boss_thrust_vertical": [
+      "down"
+    ],
+    "boss_casts": [
+      "down",
+      "left",
+      "right",
+      "up"
+    ],
+    "minion_archer": [
+      "down",
+      "left",
+      "right"
+    ],
+    "minion_infantry": [
+      "down",
+      "left",
+      "right"
+    ]
+  },
+  "images": {
+    "lava-active-trail.png": "df69bbb6a6b51c8e3fcae2c241e04a40f5fe29ca397420af349e5baa6a9992c6",
+    "meteor-active.png": "597d27b6b1e9733f929e73d4be093168648fa448f509005be4875d8292532e82",
+    "six-active-party.png": "7a6ec333551e21a90992b7aecbff51aff0aa9c1d785091656859ab043877d6d0",
+    "six-client-1.png": "53c441653c2b09790f473cf7736814916942f182c0e49c570b306e6f97c7936e",
+    "six-client-2.png": "e66fc49a1519aef01fe892b25c6f28e8d641b0d625657a45bf10b83072712159",
+    "two-hoa_phao_thien_la.png": "3dfcdc6627b8bb03344719702cabe4a76d4a758b7128383afccc6f9569f164ad",
+    "two-hong_liet_a1.png": "e1d4867760c820aec38ce8fe269d24618816e6c6552f9d1c9bf66760e9dfcc0a",
+    "two-liet_diem_phong_toa.png": "523ad068effda89ae64ab4a82e2833cdf9d4a9dd9591ef1a169f7e9e87af4841",
+    "two-van_ly_nham_hoa.png": "3a2c359e018bdd12241149bc8837c7324875f7cfad224dba1c3e4e3ede5f0b39"
+  },
+  "visualInspection": {
+    "actualNormalZoom": 1,
+    "bossLocomotionDirections": [
+      "down",
+      "left",
+      "right",
+      "up"
+    ],
+    "actorFeetYDepth": "Assertions passed on rendered boss/minion images; environment props use ground anchor/Y-depth.",
+    "v04Comparison": "Identity/palette/scale retained. A1 warning and rays span600 from emission; v03 thin trail follows traveled server feet and cools; selected safe meteor and clean cannons observed. Original pinned inputs unchanged.",
+    "environment": "Retained modular original terrain/props, not overview background. Newly composed runtime map has no separate director art approval.",
+    "readabilityLimit": "Name labels can overlap when melee heroes cluster tightly; actual six-player combat/participation is recorded, not static stand-ins.",
+    "coverageLimit": "Natural combat sampled facings/actions; it is not an exhaustive runtime screenshot of every cel in every facing. Missing hurt/death and minion vertical contacts retain explicit fallbacks."
+  },
+  "unsupported": [
+    "Item drop/eligible roll backend absent; no fake loot created.",
+    "Authored hurt/death and vertical minion attack cels not supplied; fallbacks disclosed.",
+    "Audio was not part of this integration."
+  ],
+  "recordings": "none; PNG/frame observations/assertions/logs only"
+}

@@ -1,0 +1,211 @@
+$ node scripts/check-workflow.mjs final "--config" "playwright.hong-liet.config.ts"
+
+[check] prepare assets (once)
+Hoan Nhan Hong Liet v04: 40 pinned inputs; 16 atlases validated.
+Prepared assets in C:\Users\ADMIN\.codex\worktrees\hoan-nhan-hong-liet\volam-hero-defense\apps\game-client\public\assets\ (16 written, 4756 unchanged)
+[check] prepare assets (once): 8.07s
+
+[check] compile TypeScript
+[check] compile TypeScript: 0.58s
+
+[check] typecheck tests and tools
+[check] typecheck tests and tools: 0.91s
+
+[check] workflow regression checks
+✔ keeps final six-client coverage and separates fast evidence from approved history (1.6765ms)
+✔ rejects invalid profiles instead of reporting reduced coverage as final (0.544ms)
+✔ minimal capture saves no success PNGs in iteration and exactly two final views (0.2383ms)
+✔ review capture remains opt-in and preserves the detailed frame report (0.2259ms)
+✔ final command rejects a reduced browser profile before preparing assets (111.1701ms)
+✔ a development-client shortcut cannot skip the final production build (88.8691ms)
+✔ unchanged assets keep their timestamps; changed, corrupt and missing outputs are repaired (19.7803ms)
+✔ generated UTF-8 metadata is written only when its bytes change (11.4344ms)
+✔ defaults and independent session overrides preserve profile contracts (1.8528ms)
+✔ invalid ports and contradictory or remote endpoints fail before preparation (0.3917ms)
+✔ a healthy occupied service is never borrowed or stopped (51.6517ms)
+✔ identity rejects wrong run, endpoint, HTTP failures and non-JSON health pages (16.0477ms)
+✔ client middleware identifies the actual owned run and cleanup attempts all owners once (1.3916ms)
+✔ workflow selects the managed profile rather than forcing every run to gameplay ports (0.7368ms)
+✔ observation waits finish on acknowledgement without spending the deadline (12.1719ms)
+✔ impossible prerequisites and read errors fail on their first observation (0.9187ms)
+✔ missing acknowledgements retain the failed label and compact authoritative diagnostics (29.2663ms)
+✔ core worlds supply zone membership separately from actor data (0.4466ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 359.7771
+[check] workflow regression checks: 0.45s
+
+[check] all unit/integration tests
+
+ RUN  v5.0.5 C:/Users/ADMIN/.codex/worktrees/hoan-nhan-hong-liet/volam-hero-defense
+
+
+ Test Files  34 passed (34)
+      Tests  412 passed (412)
+   Start at  11:15:29
+   Duration  64.91s (tests 68%, import 30%, transform 2%)
+
+    Isolate  34 workers spawned · ~209ms startup each (spawn + environment, per file)
+             at least ~6.90s faster with isolate: false — reuses workers across files instead of one per file
+
+[check] all unit/integration tests: 65.51s
+
+[check] production client build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 238 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/volam-build-endpoint.json      0.03 kB │ gzip:   0.05 kB
+dist/index.html                     0.50 kB │ gzip:   0.33 kB
+dist/assets/index-BgwAKm5-.css     48.73 kB │ gzip:  11.61 kB
+dist/assets/index-2EzCrl3n.js   2,919.03 kB │ gzip: 581.82 kB
+
+✓ built in 7.09s
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[PLUGIN_TIMINGS] JavaScript callbacks ran for 6.4s of this 7.1s build (90%).
+The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - plugin vite:prepare-out-dir renderStart (87%, 6.2s, 1 call)
+Additional callback time came from the callbacks below and from callbacks under 1s.
+1 callback is listed without a time. Its calls overlapped, so the time inside one call includes work from other calls. To find its cost, profile the build with `node --cpu-prof`:
+  - plugin vite:css transform (10 calls)
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+
+[check] production client build: 7.68s
+
+[check] scripts/verify-assets.py
+PASS: 23 runtime PNG entries, 680 frame references, bounds/provenance valid; approved Bong 44 / Chuong 40 source poses, tags, binary alpha and pivots verified
+[check] scripts/verify-assets.py: 0.41s
+
+[check] scripts/verify-arena-art01.py
+PASS: 9 Aseprite sources, 6 padded atlases, 59 RGBA exports; bounds, tags, timing, stable loop alpha and approved Cái Bang hashes
+[check] scripts/verify-arena-art01.py: 0.74s
+
+[check] scripts/verify-arena-v2.py
+PASS: 6 editable Aseprite sources, 1600x1152 opaque ground, 4 separate 512x768 cards/atlases, 32px paving, protected character hashes
+[check] scripts/verify-arena-v2.py: 0.74s
+
+[check] scripts/verify-thien-son.py
+PASS: approved character lock and concept hash; 80 distinct authored PNG cels, 24 tags, binary alpha, bounds/no clipping, fixed foot baseline64, durations, individual PNG/atlas equality and source paths.
+[check] scripts/verify-thien-son.py: 0.46s
+
+[check] scripts/verify-vo-dang.py
+PASS: approved character lock and concept hash; 80 distinct authored PNG cels, 24 tags, binary alpha, bounds/no clipping, foot baseline64 with <=1px raster edge tolerance, durations, individual PNG/atlas equality and source paths.
+[check] scripts/verify-vo-dang.py: 0.48s
+
+[check] scripts/verify-thieu-lam.py
+PASS: approved concept and 275 protected files; 80 distinct transparent PNG cels, 24 authored tags, bounds, pivots, timings, source headers, individual/atlas equality and explicit fallback metadata.
+[check] scripts/verify-thieu-lam.py: 0.70s
+
+[check] scripts/verify-thien-son-skills.py
+{"status": "PASS", "scope": "Actual editable sources, individual cels, PNG/hash-JSON atlases and presentation metadata; Phaser verification recorded separately", "components": 20, "animationTags": 146, "exportedCels": 534, "icons": 13, "iconAtlasFrames": 13, "approvedFrameReuseCels": 17, "protectedAndConceptFilesUnchanged": 213, "characterBodyHeightTarget": 44, "characterHeight": 80, "feetY": 64, "alpha": "character/VFX binary transparent; approved icon ground intentionally opaque", "productionArtApproved": false}
+[check] scripts/verify-thien-son-skills.py: 1.67s
+
+[check] scripts/verify-vo-dang-skills.py
+{
+  "status": "PASS",
+  "scope": "Source/export/metadata validation only; director approval is recorded separately; no gameplay integration.",
+  "componentCount": 20,
+  "icons": 13,
+  "animationTags": 163,
+  "exportedCels": 636,
+  "distinctCharacterRasters": 157,
+  "distinctVfxRastersIncludingCardinalTransforms": 460,
+  "approvedCharacterFilesUnchanged": 89,
+  "checks": [
+    "editable source hashes",
+    "PNG/JSON/frame equality",
+    "binary alpha",
+    "no clipping",
+    "distinct motion",
+    "pivots/durations",
+    "open formation interior",
+    "all13 icon paths/pairings",
+    "89 approved hashes"
+  ],
+  "warnings": [],
+  "productionArtApproved": true,
+  "approvedSkillFilesChecked": 1441
+}
+[check] scripts/verify-vo-dang-skills.py: 2.40s
+
+[check] scripts/verify-thieu-lam-skills.py
+{
+  "status": "PASS",
+  "scope": "Source/export/metadata validation only; no gameplay or final director approval.",
+  "componentCount": 26,
+  "icons": 14,
+  "animationTags": 182,
+  "exportedCels": 728,
+  "distinctCharacterRasters": 204,
+  "distinctVfxRastersIncludingCardinalTransforms": 520,
+  "approvedCharacterFilesUnchanged": 3330,
+  "checks": [
+    "editable source hashes",
+    "PNG/JSON/frame equality",
+    "binary alpha",
+    "no clipping",
+    "distinct motion",
+    "pivots/durations",
+    "all14 icon paths/pairings",
+    "all approved hashes"
+  ],
+  "warnings": [],
+  "productionArtApproved": false,
+  "approvalGate": "approval gate waived by user"
+}
+[check] scripts/verify-thieu-lam-skills.py: 4.06s
+
+[check] scripts/verify-bamboo-forest.py
+PASS: 19 transparent sprites, 344 opaque 32px tiles, 6 periodic materials, 70 map props; concept, hero and Bamboo production locks unchanged; public/shared-map bytes match
+[check] scripts/verify-bamboo-forest.py: 0.58s
+
+[check] scripts/verify-desert.py
+PASS: 380 frames / 120 tags, original source hashes, atlas pixels/timings, runtime copies and desert map; director approval pending
+[check] scripts/verify-desert.py: 4.49s
+
+[check] scripts/verify-forest-creeps.py
+{"status": "PASS", "scope": "Static files and explicit approval lock only; no gameplay acceptance", "actors": [{"id": "forest_truc_xa", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/truc_xa/source/truc_xa_v01.aseprite", "scale": {"down": 0.22140221402214022, "left": 0.21660649819494585, "right": 0.21428571428571427, "up": 0.22988505747126436}}, {"id": "forest_doc_chu", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/doc_chu/source/doc_chu_v01.aseprite", "scale": {"down": 0.20216606498194944, "left": 0.2003577817531306, "right": 0.2007168458781362, "up": 0.20475319926873858}}, {"id": "forest_son_vien", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/son_vien/source/son_vien_v01.aseprite", "scale": {"down": 0.22857142857142856, "left": 0.2191780821917808, "right": 0.1955193482688391, "up": 0.2206896551724138}}, {"id": "forest_truc_lam_kiem_khach", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/source/truc_lam_kiem_khach_v01.aseprite", "scale": {"down": 0.176, "left": 0.166351606805293, "right": 0.1752988047808765, "up": 0.18032786885245902}}, {"id": "forest_moc_linh", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/moc_linh/source/moc_linh_v01.aseprite", "scale": {"down": 0.22271714922049, "left": 0.22779043280182232, "right": 0.2070393374741201, "up": 0.22779043280182232}}, {"id": "forest_truc_yeu", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/truc_yeu/source/truc_yeu_v01.aseprite", "scale": {"down": 0.2445414847161572, "left": 0.24615384615384617, "right": 0.23728813559322035, "up": 0.23829787234042554}}], "characterFrames": 384, "effectFrames": 112, "protectedInputs": {"approved_bamboo_forest.lock.json": 60, "approved_cai_bang.lock.json": 8, "approved_forest_creeps.lock.json": 565}, "runtimeAdapter": {"actors": 6, "effects": 28, "normalForestRosterIntegrated": true, "archetypeIds": ["truc_xa", "doc_chu", "son_vien", "truc_lam_kiem_khach", "moc_linh", "truc_yeu"], "directorApproved": true}}
+[check] scripts/verify-forest-creeps.py: 2.84s
+
+[check] scripts/verify-beach.py
+PASS: 384 nonempty actor cels / 136 tags, corrected editable source, 512 tiles, 25 props, 64 VFX cels, provenance and map parity; runtime approval pending
+[check] scripts/verify-beach.py: 1.77s
+
+[check] browser verification
+
+   ___      _                                   ___   _  ___
+  / __\___ | |_   _ ___  ___ _   _ ___  __   __/ _ \ / |( _ )
+ / /  / _ \| | | | / __|/ _ \ | | / __| \ \ / / | | || |/ _ \
+/ /__| (_) | | |_| \__ \  __/ |_| \__ \  \ V /| |_| || | (_) |
+\____/\___/|_|\__, |___/\___|\__,_|___/   \_/  \___(_)_|\___/
+              |___/
+
+             · Multiplayer Framework for Node.js ·
+
+💖 Consider becoming a Sponsor on GitHub → https://github.com/sponsors/endel
+🌟 Give us a star on GitHub → https://github.com/colyseus/colyseus
+☁️  Deploy and scale your project on Colyseus Cloud → https://cloud.colyseus.io
+
+
+Running 2 tests using 1 worker
+
+(node:8540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 [edge] › tests\e2e\hong-liet.spec.ts:174:1 › two clients: natural boss AI, authority, selected v04 frames and all nine actions (50.3s)
+  ok 2 [edge] › tests\e2e\hong-liet.spec.ts:315:1 › six real clients fight the shared boss at normal gameplay zoom (1.3m)
+
+  2 passed (2.2m)
+[check] browser verification: 134.03s
+[check] timings: C:\Users\ADMIN\.codex\worktrees\hoan-nhan-hong-liet\volam-hero-defense\.cache\check-workflow\final-timings.json
+
+[check] final passed in 238.61s

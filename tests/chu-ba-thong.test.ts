@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   createWorld,
+  blocked,
   addHero,
   stepWorld,
   DungeonMatch,
@@ -19,6 +20,7 @@ import {
   creepDungeon,
   chuBaThongDungeon,
   chuBaThongTuning,
+  hongLietDungeon,
 } from '@volam/game-data';
 import { hurt } from '../packages/game-core/src/combat.js';
 import { applyStatus } from '../packages/game-core/src/status.js';
@@ -99,6 +101,64 @@ describe('Chu Bá Thông authoritative encounter', () => {
     expect(a.world.creeps.get(CHU_BOSS_ID)!.maxHp).toBe(
       b.world.creeps.get(CHU_BOSS_ID)!.maxHp,
     );
+  });
+  it('keeps both boss controllers and ordinary dungeon waves independent in one match', () => {
+    const m = new DungeonMatch(config(), creepDungeon, 42, undefined, [
+      chuBaThongDungeon,
+      hongLietDungeon,
+    ]);
+    for (const id of ['chu', 'hong', 'forest']) m.add(id, id);
+    expect(m.enter('chu', 'private', 'chu_ba_thong')).toBeUndefined();
+    expect(m.enter('hong', 'private', 'hong_liet')).toBeUndefined();
+    expect(m.enter('forest', 'shared', 'forest')).toBeUndefined();
+    const chu = m.zoneOf('chu')!,
+      hong = m.zoneOf('hong')!,
+      forest = m.zoneOf('forest')!;
+    expect(chu.world.chu).toBeDefined();
+    expect(chu.encounter).toBeUndefined();
+    expect(hong.encounter).toBeDefined();
+    expect(hong.world.chu).toBeUndefined();
+    expect(forest.encounter).toBeUndefined();
+    expect(forest.world.chu).toBeUndefined();
+    chu.world.creeps.get(CHU_BOSS_ID)!.hp = 123;
+    hong.world.creeps.get(hong.encounter!.bossId)!.hp = 456;
+    for (const id of ['chu', 'hong']) {
+      const zone = m.zoneOf(id)!;
+      Object.assign(m.hero(id)!, zone.dungeon!.exit);
+      expect(m.exit(id)).toBeUndefined();
+    }
+    for (let i = 0; i < 902; i++) m.step();
+    expect(chu.world.creeps.size).toBe(1);
+    expect(chu.world.creeps.get(CHU_BOSS_ID)!.hp).toBe(chuBaThongTuning.hp);
+    expect(hong.world.creeps.get(hong.encounter!.bossId)!.hp).toBe(
+      hongLietDungeon.boss!.hp,
+    );
+    expect(chu.nextWaveAt).toBeUndefined();
+    expect(hong.nextWaveAt).toBeUndefined();
+    expect(forest.world.creeps.size).toBeGreaterThan(0);
+    expect(chu.world.chu!.loot).toHaveLength(0);
+  });
+  it('places all six real entrance positions inside the Chu court without wall collisions', () => {
+    const m = new DungeonMatch(config(), creepDungeon, 42, undefined, [
+      chuBaThongDungeon,
+    ]);
+    for (let i = 0; i < 6; i++) {
+      const id = 'entry' + i;
+      m.add(id, id);
+      expect(m.enter(id, 'shared', 'chu_ba_thong')).toBeUndefined();
+      const z = m.zoneOf(id)!;
+      expect(
+        blocked(
+          m.hero(id)!,
+          z.config.radius,
+          z.config.width,
+          z.config.height,
+          z.config.collision,
+        ),
+      ).toBe(false);
+    }
+    const heroes = [...m.zoneOf('entry0')!.world.heroes.values()];
+    expect(new Set(heroes.map((h) => h.x + ',' + h.y)).size).toBe(6);
   });
   it('wind sweep hits directly beneath boss and has no feet blind spot', () => {
     const f = setup();

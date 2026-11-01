@@ -65,7 +65,7 @@ const hero = async (p: Page) => {
   const s = await read(p);
   return s.state.players[s.sessionId]!;
 };
-async function enter(p: Page, access = 'shared') {
+async function enter(p: Page, access = 'shared', livingBoss = true) {
   await p.getByRole('button', { name: 'Phó Bản', exact: true }).click();
   await p.locator('[data-destination=chu_ba_thong]').click();
   await expect(p.locator('#dungeon-kind')).toHaveText('Thủ lĩnh');
@@ -74,9 +74,14 @@ async function enter(p: Page, access = 'shared') {
   await expect
     .poll(async () => (await hero(p)).zoneId)
     .toContain('chu_ba_thong_');
-  await expect
-    .poll(async () => (await view(p)).chu?.state?.bossHp)
-    .toBeGreaterThan(0);
+  if (livingBoss)
+    await expect
+      .poll(async () => (await view(p)).chu?.state?.bossHp)
+      .toBeGreaterThan(0);
+  else
+    await expect
+      .poll(async () => (await view(p)).chu?.state?.bossId)
+      .toBe('chu_ba_thong');
 }
 async function fixture(p: Page, mode: string, phase?: string) {
   const s = await read(p);
@@ -327,17 +332,48 @@ test('Chu Bá Thông real Phaser encounter, party sync, frame coverage and one-d
     await fixture(first, 'combat');
     await expect.poll(async () => (await hero(first)).level).toBe(30);
     const stop = Date.now() + 60000;
+    let defeated = false;
     await Promise.all(
       pages.map(async (p) => {
         await p.locator('#game canvas').focus();
-        while (Date.now() < stop) {
-          const v = (await view(p)).chu.state;
-          if (v.bossHp <= 0) break;
+        while (Date.now() < stop && !defeated) {
+          const v = (await view(p)).chu.state as ChuView | null;
+          const h = await hero(p);
+          if (!v) {
+            if (h.zoneId === 'arena' && h.hp > 0)
+              await enter(p, 'shared', false);
+            else await p.waitForTimeout(150);
+            continue;
+          }
+          if (v.bossHp <= 0) {
+            defeated = true;
+            break;
+          }
+          if (h.hp <= 0) {
+            await p.waitForTimeout(150);
+            continue;
+          }
+          const moving: string[] = [];
+          if (Math.hypot(v.bossX - h.x, v.bossY - h.y) > 65) {
+            if (Math.abs(v.bossX - h.x) > 15)
+              moving.push(v.bossX > h.x ? 'ArrowRight' : 'ArrowLeft');
+            if (Math.abs(v.bossY - h.y) > 15)
+              moving.push(v.bossY > h.y ? 'ArrowDown' : 'ArrowUp');
+          }
+          for (const key of moving) await p.keyboard.down(key);
           await p.keyboard.press('KeyA');
+          await p.keyboard.press('KeyQ');
+          await p.keyboard.press('KeyW');
           await p.waitForTimeout(110);
+          for (const key of moving) await p.keyboard.up(key);
         }
       }),
     );
+    // A recovered participant can return even when its teammate finished the boss.
+    if (!(await view(first)).chu.state) {
+      await expect.poll(async () => (await hero(first)).hp).toBeGreaterThan(0);
+      await enter(first, 'shared', false);
+    }
     await expect
       .poll(async () => (await view(first)).chu.state.bossHp, {
         timeout: 10000,

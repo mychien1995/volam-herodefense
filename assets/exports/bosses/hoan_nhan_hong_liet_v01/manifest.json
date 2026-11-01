@@ -1,0 +1,6435 @@
+{
+  "status": "prototype_pending_director_review",
+  "runtimeIntegrated": false,
+  "assets": [
+    {
+      "id": "boss_locomotion",
+      "file": "boss_locomotion_alpha.png",
+      "rows": 4,
+      "cols": 6,
+      "kind": "character",
+      "bodyHeight": 64,
+      "canvas": 160,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "idle_a",
+        "idle_b",
+        "walk_a",
+        "walk_b",
+        "walk_c",
+        "walk_d"
+      ],
+      "revisions": [
+        {
+          "file": "boss_locomotion.png",
+          "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Hoàn Nhan Hồng Liệt boss locomotion prototype. Match attached boss concept's identity ONLY: stern middle-aged black moustache/beard, black iron lamellar armor with ornate bronze-gold trim and small orange molten cracks, cream fur collar, crimson long cape, helmet with crimson plume, ONE huge curved dark dao with magma fissures held consistently in RIGHT HAND. Compact chibi strong body, not tall realistic proportions. Target body64px relative hero44px after later mechanical export. EXACT 1536x1024 sheet,6columns4rows,24 cels. Row0 DOWN/front, row1 LEFT, row2 RIGHT, row3 UP/back (cape visible, face hidden). ALL six cells in each row stay in that facing. Columns: idle breathA, idle breathB, walk left contact, walk passA, walk right contact, walk passB. Stable feet at80%cellheight, stable center/scale, natural alternating steps, cloth/plume motion and arm articulation. Weapon must fit every cell, NO fiery aura around body. This is a clean animation source sheet, NOT the parchment concept."
+        },
+        {
+          "file": "boss_locomotion_alpha.png",
+          "prompt": "Use case: background-extraction. EDIT TARGET attached 24-cel boss locomotion sprite sheet. Remove ALL brown/parchment/gradient background pixels and make them genuinely alpha=0 transparent, including the spaces around and between each character and between weapon/cape and legs. Preserve ALL 24 boss character silhouettes, poses, costumes, weapons, original arrangement, exact1536x1024 canvas,6columns4rows, pixel details/colors/scale. NO replacement background, checkerboard, floor, gray fringe, gradient, rectangular halo or shadow. Output a clean transparent sprite sheet suitable for compositing directly on an arbitrary dark/bright RPG floor. Background is unwanted; all brown squares must disappear. Every non-character pixel must alpha0.",
+          "note": "Alpha checked on contrasting background; retain initial source too."
+        }
+      ],
+      "completionObservedAt": "2026-11-01T02:04:03.335Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/concepts/bosses/hoan-nhan-hong-liet/master_concept.png",
+          "sha256": "44d6a371584476ecf3c455bd72155fe16296e3cbcd9f6fce4281b456dab38914"
+        },
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/boss_locomotion.png",
+          "sha256": "5b3503efc505e46b4a51400e8f84ed3908f420c49ee4ff4b865971f599b45e15"
+        }
+      ],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/boss_locomotion_alpha.png",
+      "sourceSha256": "b6ffc7b89eed0a66f8c28fa6e6efaa4c70da37379c6ca63209fc4640d36a0582",
+      "sourceDimensions": [
+        1536,
+        1024
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/boss_locomotion.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/boss_locomotion.json",
+      "sheetSha256": "244c8a6231d9031c264f52662ccf6bb6f297cdb1cbe544a30d3d62abf026acfe",
+      "atlasSha256": "0cb2c78fe6319feb207258c826bf9ddc59da6b610358515a5e8635c6fd04048e",
+      "scale": 0.2711864406779661,
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "frames": [
+        {
+          "name": "down_idle_a",
+          "sourceRect": [
+            0,
+            0,
+            256,
+            256
+          ],
+          "opaqueBounds": [
+            11,
+            27,
+            241,
+            242
+          ],
+          "sourceAnchor": [
+            121.0,
+            242.0
+          ],
+          "exportOffset": [
+            47,
+            62
+          ],
+          "sha256": "aef7e49aea4da2858db1cc74964a9279d0d6dc5ce8a839c25008967878768751"
+        },
+        {
+          "name": "down_idle_b",
+          "sourceRect": [
+            256,
+            0,
+            484,
+            256
+          ],
+          "opaqueBounds": [
+            44,
+            27,
+            211,
+            242
+          ],
+          "sourceAnchor": [
+            128.0,
+            242.0
+          ],
+          "exportOffset": [
+            45,
+            62
+          ],
+          "sha256": "ec2d56483f637894c0a1fc8bd59cdc1f33fa4a56c122016165d221c0e6e5f741"
+        },
+        {
+          "name": "down_walk_a",
+          "sourceRect": [
+            484,
+            0,
+            766,
+            256
+          ],
+          "opaqueBounds": [
+            2,
+            30,
+            282,
+            249
+          ],
+          "sourceAnchor": [
+            131.0,
+            249.0
+          ],
+          "exportOffset": [
+            44,
+            60
+          ],
+          "sha256": "9f0e3a38165452213f6422b65e222ef8f754dc2b4c2c156e314aad6d22fd5547"
+        },
+        {
+          "name": "down_walk_b",
+          "sourceRect": [
+            766,
+            0,
+            1025,
+            256
+          ],
+          "opaqueBounds": [
+            0,
+            26,
+            258,
+            253
+          ],
+          "sourceAnchor": [
+            100.0,
+            253.0
+          ],
+          "exportOffset": [
+            53,
+            59
+          ],
+          "sha256": "14f83118df331aadac80615966cd5aa745bb536b49f9c203af3e489ea900e273"
+        },
+        {
+          "name": "down_walk_c",
+          "sourceRect": [
+            1025,
+            0,
+            1272,
+            256
+          ],
+          "opaqueBounds": [
+            15,
+            29,
+            247,
+            253
+          ],
+          "sourceAnchor": [
+            100.0,
+            253.0
+          ],
+          "exportOffset": [
+            53,
+            59
+          ],
+          "sha256": "0dd523c88e63bc4c6434a6911f7ce6cf7404f6c5e93d96e3616f2939a5c12368"
+        },
+        {
+          "name": "down_walk_d",
+          "sourceRect": [
+            1272,
+            0,
+            1536,
+            256
+          ],
+          "opaqueBounds": [
+            0,
+            26,
+            254,
+            253
+          ],
+          "sourceAnchor": [
+            155.0,
+            253.0
+          ],
+          "exportOffset": [
+            38,
+            59
+          ],
+          "sha256": "1e1e78664d28b0a94953025fd31ffea2b7bbaeabe0c33186e8c177e5dd7b4def"
+        },
+        {
+          "name": "left_idle_a",
+          "sourceRect": [
+            0,
+            256,
+            256,
+            507
+          ],
+          "opaqueBounds": [
+            13,
+            10,
+            255,
+            231
+          ],
+          "sourceAnchor": [
+            178.5,
+            231.0
+          ],
+          "exportOffset": [
+            32,
+            65
+          ],
+          "sha256": "dc417237f12cad86bfbff15b7b26d91cccec747b9e8278cc6a59e35235285f40"
+        },
+        {
+          "name": "left_idle_b",
+          "sourceRect": [
+            256,
+            256,
+            512,
+            507
+          ],
+          "opaqueBounds": [
+            9,
+            10,
+            250,
+            231
+          ],
+          "sourceAnchor": [
+            167.0,
+            231.0
+          ],
+          "exportOffset": [
+            35,
+            65
+          ],
+          "sha256": "8c9dae130073111df17f01cfbd817f1304c1077eadac2a97488fa8c7ff5269b1"
+        },
+        {
+          "name": "left_walk_a",
+          "sourceRect": [
+            512,
+            256,
+            780,
+            507
+          ],
+          "opaqueBounds": [
+            11,
+            10,
+            268,
+            231
+          ],
+          "sourceAnchor": [
+            152.0,
+            231.0
+          ],
+          "exportOffset": [
+            39,
+            65
+          ],
+          "sha256": "e0429419f57988c5158696ee554839da1353d1b2c6878dd464581e6a961ac3c0"
+        },
+        {
+          "name": "left_walk_b",
+          "sourceRect": [
+            780,
+            256,
+            1018,
+            507
+          ],
+          "opaqueBounds": [
+            0,
+            11,
+            237,
+            231
+          ],
+          "sourceAnchor": [
+            86.0,
+            231.0
+          ],
+          "exportOffset": [
+            57,
+            65
+          ],
+          "sha256": "5646ab5de6c6880bf2052dc0ebe735164a6e60a0db10b2d05febe2f223406e9f"
+        },
+        {
+          "name": "left_walk_c",
+          "sourceRect": [
+            1018,
+            256,
+            1270,
+            507
+          ],
+          "opaqueBounds": [
+            1,
+            11,
+            247,
+            233
+          ],
+          "sourceAnchor": [
+            126.0,
+            233.0
+          ],
+          "exportOffset": [
+            46,
+            65
+          ],
+          "sha256": "1914b836ceed7a00fa04c81d05bd297ac338bbd4fc0b64098acae027672c18f3"
+        },
+        {
+          "name": "left_walk_d",
+          "sourceRect": [
+            1270,
+            256,
+            1536,
+            507
+          ],
+          "opaqueBounds": [
+            2,
+            11,
+            253,
+            231
+          ],
+          "sourceAnchor": [
+            113.0,
+            231.0
+          ],
+          "exportOffset": [
+            49,
+            65
+          ],
+          "sha256": "452797e2ad772a2433461208a10ef5dbe001aabc50c2b4606dbeb8e12a75e245"
+        },
+        {
+          "name": "right_idle_a",
+          "sourceRect": [
+            0,
+            507,
+            276,
+            751
+          ],
+          "opaqueBounds": [
+            27,
+            3,
+            275,
+            233
+          ],
+          "sourceAnchor": [
+            100.0,
+            233.0
+          ],
+          "exportOffset": [
+            53,
+            65
+          ],
+          "sha256": "995434500605664a7414e18ce3019c31bcbbe411b9df3eedc7c46a509a438a2f"
+        },
+        {
+          "name": "right_idle_b",
+          "sourceRect": [
+            276,
+            507,
+            523,
+            751
+          ],
+          "opaqueBounds": [
+            8,
+            4,
+            246,
+            233
+          ],
+          "sourceAnchor": [
+            83.5,
+            233.0
+          ],
+          "exportOffset": [
+            57,
+            65
+          ],
+          "sha256": "37ffeca93520ff7c7ac4aefb6cc57a8b923694c761d798fc0de6ae6ead9ef288"
+        },
+        {
+          "name": "right_walk_a",
+          "sourceRect": [
+            523,
+            507,
+            780,
+            751
+          ],
+          "opaqueBounds": [
+            5,
+            3,
+            257,
+            232
+          ],
+          "sourceAnchor": [
+            82.0,
+            232.0
+          ],
+          "exportOffset": [
+            58,
+            65
+          ],
+          "sha256": "70b91e7bc94601ecda652403626b756f58716ca117782f26f0fd2c217826e69e"
+        },
+        {
+          "name": "right_walk_b",
+          "sourceRect": [
+            780,
+            507,
+            1038,
+            751
+          ],
+          "opaqueBounds": [
+            0,
+            3,
+            258,
+            230
+          ],
+          "sourceAnchor": [
+            152.5,
+            230.0
+          ],
+          "exportOffset": [
+            39,
+            66
+          ],
+          "sha256": "73acb3a2a6c2cbc52d9b5409700966b776adfd00256dfd79c08ac6d03aba0681"
+        },
+        {
+          "name": "right_walk_c",
+          "sourceRect": [
+            1038,
+            507,
+            1291,
+            751
+          ],
+          "opaqueBounds": [
+            0,
+            2,
+            252,
+            231
+          ],
+          "sourceAnchor": [
+            112.5,
+            231.0
+          ],
+          "exportOffset": [
+            49,
+            65
+          ],
+          "sha256": "6c648255db709bc1612943c4163db721c90464c3ad708c6a8871486b82614f6b"
+        },
+        {
+          "name": "right_walk_d",
+          "sourceRect": [
+            1291,
+            507,
+            1536,
+            751
+          ],
+          "opaqueBounds": [
+            3,
+            3,
+            236,
+            231
+          ],
+          "sourceAnchor": [
+            167.0,
+            231.0
+          ],
+          "exportOffset": [
+            35,
+            65
+          ],
+          "sha256": "e463433d2720d3e8aa3dbf909b67648d44875286048b44c1c5fd6bde7b529973"
+        },
+        {
+          "name": "up_idle_a",
+          "sourceRect": [
+            0,
+            751,
+            309,
+            1024
+          ],
+          "opaqueBounds": [
+            72,
+            3,
+            308,
+            225
+          ],
+          "sourceAnchor": [
+            150.5,
+            225.0
+          ],
+          "exportOffset": [
+            39,
+            67
+          ],
+          "sha256": "8fc073bb55a3523662d983eef4bfd842102969987ac34ea8252c3b48bcf43793"
+        },
+        {
+          "name": "up_idle_b",
+          "sourceRect": [
+            309,
+            751,
+            552,
+            1024
+          ],
+          "opaqueBounds": [
+            10,
+            2,
+            242,
+            226
+          ],
+          "sourceAnchor": [
+            93.0,
+            226.0
+          ],
+          "exportOffset": [
+            55,
+            67
+          ],
+          "sha256": "b7fea696b857c8935e1e31592597de15c393f699f13563388af3df362901d729"
+        },
+        {
+          "name": "up_walk_a",
+          "sourceRect": [
+            552,
+            751,
+            800,
+            1024
+          ],
+          "opaqueBounds": [
+            11,
+            2,
+            247,
+            233
+          ],
+          "sourceAnchor": [
+            88.5,
+            233.0
+          ],
+          "exportOffset": [
+            56,
+            65
+          ],
+          "sha256": "b80b53d879e77797d93b500c8f99a3e7ad72b3a5f0f5f7894aca002bfe851ff7"
+        },
+        {
+          "name": "up_walk_b",
+          "sourceRect": [
+            800,
+            751,
+            1037,
+            1024
+          ],
+          "opaqueBounds": [
+            7,
+            2,
+            236,
+            233
+          ],
+          "sourceAnchor": [
+            127.5,
+            233.0
+          ],
+          "exportOffset": [
+            45,
+            65
+          ],
+          "sha256": "9c0900ec53705c2485ce2fc2c3d3fdc06c6c61dae8f2b7c2c241eb7f468373f3"
+        },
+        {
+          "name": "up_walk_c",
+          "sourceRect": [
+            1037,
+            751,
+            1308,
+            1024
+          ],
+          "opaqueBounds": [
+            12,
+            2,
+            271,
+            238
+          ],
+          "sourceAnchor": [
+            137.5,
+            238.0
+          ],
+          "exportOffset": [
+            43,
+            63
+          ],
+          "sha256": "0bc6ecc0cb946be94f0c30e6ee8de322923639db08e7a9e13c317f04e2850cb8"
+        },
+        {
+          "name": "up_walk_d",
+          "sourceRect": [
+            1308,
+            751,
+            1536,
+            1024
+          ],
+          "opaqueBounds": [
+            0,
+            2,
+            219,
+            234
+          ],
+          "sourceAnchor": [
+            116.5,
+            234.0
+          ],
+          "exportOffset": [
+            48,
+            65
+          ],
+          "sha256": "e724fd90ef1aadb356d16fe7b11ae304d9dcce70596a50cd4e551ef3616a3385"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "vfx_stomp",
+      "nameVi": "Dung Nham Liệt Địa",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 384,
+      "exportScale": 0.65,
+      "groups": [
+        "cast",
+        "impact"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 110,
+      "description": "EIGHT successive cels left-to-right top row then bottom row: 1 thin amber broken circular ground warning perimeter, 2 warning cracks brighten inward,3 first basalt chips lift,4 concentrated stomp shock center,5 HUGE wide outward elliptical lava/stone shockwave with empty readable center,6 shockwave expands into broken rugged rim,7 embers/dust dissipate,8 cooling scattered pebbles. This is an around-boss stomp STUN cue, not a tall volcano. Ground plane at fixed elevated view, flattened broad ellipse, blast low enough to preserve characters. Palette amber warning vs molten orange hit vs cool gray ash expiry.",
+      "file": "vfx_stomp.png",
+      "completionObservedAt": "2026-11-01T02:09:07.745Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/vfx_stomp.png",
+      "sourceSha256": "b622781363ea6623128352187714cada351993851231029e38b5e826862f6050",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_stomp.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_stomp.json",
+      "sheetSha256": "8aec6cb99518ccf035342047195893c1d9f678ee5bfbe9723d9156fc535f0312",
+      "atlasSha256": "9eba637db817938983b5cad0e84cd8835edaf801e30003643f3cccff634938ec",
+      "scale": 0.65,
+      "origin": [
+        0.5,
+        0.65
+      ],
+      "frames": [
+        {
+          "name": "cast_0",
+          "sourceRect": [
+            0,
+            0,
+            443,
+            443
+          ],
+          "opaqueBounds": [
+            33,
+            162,
+            421,
+            361
+          ],
+          "sourceAnchor": [
+            221.5,
+            287.95
+          ],
+          "exportOffset": [
+            48,
+            62
+          ],
+          "sha256": "945923df9d7c185890a4be82946b97c08f9dc7d23ea8f00b0689fe62e2f9cc9a"
+        },
+        {
+          "name": "cast_1",
+          "sourceRect": [
+            443,
+            0,
+            887,
+            443
+          ],
+          "opaqueBounds": [
+            29,
+            164,
+            417,
+            365
+          ],
+          "sourceAnchor": [
+            222.0,
+            287.95
+          ],
+          "exportOffset": [
+            48,
+            62
+          ],
+          "sha256": "a427778d3113266d6636fd315ae19f8cd95415749885be3913e339da5481029a"
+        },
+        {
+          "name": "cast_2",
+          "sourceRect": [
+            887,
+            0,
+            1330,
+            443
+          ],
+          "opaqueBounds": [
+            32,
+            114,
+            414,
+            377
+          ],
+          "sourceAnchor": [
+            221.5,
+            287.95
+          ],
+          "exportOffset": [
+            48,
+            62
+          ],
+          "sha256": "a9f97c73523266eea86be8cfa32cb66225526bdaef9aab7ba392108d23ee4581"
+        },
+        {
+          "name": "cast_3",
+          "sourceRect": [
+            1330,
+            0,
+            1774,
+            443
+          ],
+          "opaqueBounds": [
+            31,
+            118,
+            411,
+            381
+          ],
+          "sourceAnchor": [
+            222.0,
+            287.95
+          ],
+          "exportOffset": [
+            48,
+            62
+          ],
+          "sha256": "72fc702c854be07c0f842a74a33569843d74943f1383961519a2bef24a231204"
+        },
+        {
+          "name": "impact_0",
+          "sourceRect": [
+            0,
+            443,
+            470,
+            887
+          ],
+          "opaqueBounds": [
+            18,
+            72,
+            469,
+            364
+          ],
+          "sourceAnchor": [
+            235.0,
+            288.6
+          ],
+          "exportOffset": [
+            39,
+            62
+          ],
+          "sha256": "088ae222cac3ff46460628246a5a9edb28547b23ede42ac7a5ba6503a01844f9"
+        },
+        {
+          "name": "impact_1",
+          "sourceRect": [
+            470,
+            443,
+            944,
+            887
+          ],
+          "opaqueBounds": [
+            21,
+            82,
+            473,
+            366
+          ],
+          "sourceAnchor": [
+            237.0,
+            288.6
+          ],
+          "exportOffset": [
+            38,
+            62
+          ],
+          "sha256": "af60aeabf8d05432234ffcd47a73bac0046a0e128be8ed27ff38a901731edc75"
+        },
+        {
+          "name": "impact_2",
+          "sourceRect": [
+            944,
+            443,
+            1329,
+            887
+          ],
+          "opaqueBounds": [
+            17,
+            100,
+            381,
+            349
+          ],
+          "sourceAnchor": [
+            192.5,
+            288.6
+          ],
+          "exportOffset": [
+            67,
+            62
+          ],
+          "sha256": "064bda58f88275d36cb8080a75e0fd6cdcae2afd3d8e262f22a5b3ceec42f54b"
+        },
+        {
+          "name": "impact_3",
+          "sourceRect": [
+            1329,
+            443,
+            1774,
+            887
+          ],
+          "opaqueBounds": [
+            2,
+            135,
+            418,
+            337
+          ],
+          "sourceAnchor": [
+            222.5,
+            288.6
+          ],
+          "exportOffset": [
+            47,
+            62
+          ],
+          "sha256": "308b863d343b288d0926d540899fad22e6003ea603c7cda1bf05f785caa3313f"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "vfx_volcano",
+      "nameVi": "Hỏa Sơn Bạo Phát",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 256,
+      "exportScale": 0.5,
+      "groups": [
+        "cast",
+        "impact"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 140,
+      "description": "EIGHT chronological cels:1 broken amber ellipse ground warning with central X,2 bright warning cracks contained inside same marker,3 obsidian rock cone begins pushing UP from ground,4 jagged volcano half-height with molten mouth,5 fully erupted narrow lava fountain/volcanic spire,6 explosive short orange burst/debris,7 collapsing cone and darkening crater,8 cooled crater rim with few embers. ONE volcano in each cell, consistent ground anchor at65% cellheight; flame may rise above. Volcanic rock physically rises from ground, NOT meteor falling, not generic fireball. Empty ground around each asset for scene compositing.",
+      "file": "vfx_volcano.png",
+      "completionObservedAt": "2026-11-01T02:09:07.749Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/vfx_volcano.png",
+      "sourceSha256": "94ae5b192a5d6cc686394bb938f09220db2f7940bbfa6420b528e2ca7c0c257a",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_volcano.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_volcano.json",
+      "sheetSha256": "84fa7c16761f804dcd4881dc769174050afd8d5f1a0846bd6cd5cae53941b534",
+      "atlasSha256": "6fafe369a74401a9a7a7510da34617aca5c732a16ecf8be4e98bdcad84e4bc93",
+      "scale": 0.5,
+      "origin": [
+        0.5,
+        0.65
+      ],
+      "frames": [
+        {
+          "name": "cast_0",
+          "sourceRect": [
+            0,
+            0,
+            443,
+            434
+          ],
+          "opaqueBounds": [
+            48,
+            210,
+            404,
+            379
+          ],
+          "sourceAnchor": [
+            221.5,
+            282.1
+          ],
+          "exportOffset": [
+            17,
+            25
+          ],
+          "sha256": "de7b6b9184e7bc76a9849bd1c4f306974be265f05d49a4f0e99aab918e642f40"
+        },
+        {
+          "name": "cast_1",
+          "sourceRect": [
+            443,
+            0,
+            887,
+            434
+          ],
+          "opaqueBounds": [
+            44,
+            203,
+            405,
+            388
+          ],
+          "sourceAnchor": [
+            222.0,
+            282.1
+          ],
+          "exportOffset": [
+            17,
+            25
+          ],
+          "sha256": "5b47a6f996b6da144552d15f6e55179079883489f796db5fe5d2001f66f741df"
+        },
+        {
+          "name": "cast_2",
+          "sourceRect": [
+            887,
+            0,
+            1330,
+            434
+          ],
+          "opaqueBounds": [
+            48,
+            110,
+            393,
+            391
+          ],
+          "sourceAnchor": [
+            221.5,
+            282.1
+          ],
+          "exportOffset": [
+            17,
+            25
+          ],
+          "sha256": "e8122b5eeb2d084a82cc8abc1fc23750804199afed8579babe79ac80f2b632ea"
+        },
+        {
+          "name": "cast_3",
+          "sourceRect": [
+            1330,
+            0,
+            1774,
+            434
+          ],
+          "opaqueBounds": [
+            37,
+            86,
+            404,
+            394
+          ],
+          "sourceAnchor": [
+            222.0,
+            282.1
+          ],
+          "exportOffset": [
+            17,
+            25
+          ],
+          "sha256": "1eae50952caa9ccde39f901493309bf7a2b4d6511fe6d11e55222f7de06eb3a6"
+        },
+        {
+          "name": "impact_0",
+          "sourceRect": [
+            0,
+            434,
+            443,
+            887
+          ],
+          "opaqueBounds": [
+            49,
+            2,
+            396,
+            396
+          ],
+          "sourceAnchor": [
+            221.5,
+            294.45
+          ],
+          "exportOffset": [
+            17,
+            19
+          ],
+          "sha256": "f6aacec3818f5f7e1c1450fb89b199b9b25d0b4175b82630d66fc1bd756ba74c"
+        },
+        {
+          "name": "impact_1",
+          "sourceRect": [
+            443,
+            434,
+            887,
+            887
+          ],
+          "opaqueBounds": [
+            40,
+            94,
+            399,
+            397
+          ],
+          "sourceAnchor": [
+            222.0,
+            294.45
+          ],
+          "exportOffset": [
+            17,
+            19
+          ],
+          "sha256": "ae42f51cdb4dd12ba922b2d9e0bd145c7b670a585d4e269a486de49bcd3dff90"
+        },
+        {
+          "name": "impact_2",
+          "sourceRect": [
+            887,
+            434,
+            1330,
+            887
+          ],
+          "opaqueBounds": [
+            45,
+            124,
+            393,
+            393
+          ],
+          "sourceAnchor": [
+            221.5,
+            294.45
+          ],
+          "exportOffset": [
+            17,
+            19
+          ],
+          "sha256": "f8b70295049dc7eaa000e2827bc1686b6f10800ff71189972633861c765c310b"
+        },
+        {
+          "name": "impact_3",
+          "sourceRect": [
+            1330,
+            434,
+            1774,
+            887
+          ],
+          "opaqueBounds": [
+            38,
+            218,
+            403,
+            398
+          ],
+          "sourceAnchor": [
+            222.0,
+            294.45
+          ],
+          "exportOffset": [
+            17,
+            19
+          ],
+          "sha256": "3a20575aafb4e5a07fe70cadd64e729fb4fd1ebc19681a0c9d74c47cf295bf39"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "vfx_lava_lane",
+      "nameVi": "Liệt Diễm Phong Tỏa",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 512,
+      "exportScale": 0.8,
+      "groups": [
+        "cast",
+        "impact"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 150,
+      "description": "EIGHT chronological cels of ONE VERY LONG wide horizontal ground lava fissure pointing RIGHT, no boss:1 amber dashed lane warning rectangle 4:1 long with chevron at end,2 ground splits along lane,3 moving leading wave of lava appears at left,4 lava wave sweeps right,5 entire lane now a jagged wide persistent molten river with black basalt outer banks,6 persistent river surface flow shimmerA,7 persistent river flow shimmerB same footprint,8 cooled black scar visibly no active orange hazard. Must be a STRAIGHT broad rectangular-ish ground lane, NOT circular fire ring, not crescent slash, not isolated explosions. All cels same footprint4:1 ground length/width; maintain constant cool ash outer edge to read against brown ground. The looping sustained hazard is frames5-7.",
+      "file": "vfx_lava_lane.png",
+      "completionObservedAt": "2026-11-01T02:09:07.751Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/vfx_lava_lane.png",
+      "sourceSha256": "82117d8120ad33e5be332302970eb332a21613f1f4829cdd5f8c1cdc243a997b",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_lava_lane.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_lava_lane.json",
+      "sheetSha256": "f735edd6c0f2f48ed7272eb587716e60635230285e514b14ac2eee231cf38bf7",
+      "atlasSha256": "9e4ab233fd07f62018b514cf512d4d9e5dcd28c7cb62d20b47c446963b41fbf8",
+      "scale": 0.8,
+      "origin": [
+        0.5,
+        0.65
+      ],
+      "frames": [
+        {
+          "name": "cast_0",
+          "sourceRect": [
+            0,
+            0,
+            443,
+            443
+          ],
+          "opaqueBounds": [
+            35,
+            253,
+            421,
+            322
+          ],
+          "sourceAnchor": [
+            221.5,
+            287.95
+          ],
+          "exportOffset": [
+            79,
+            102
+          ],
+          "sha256": "5ea25f4ec703ca5cf0c87144b0937eda801dfd1aef16ce8a2b3b362e7a8ff91c"
+        },
+        {
+          "name": "cast_1",
+          "sourceRect": [
+            443,
+            0,
+            887,
+            443
+          ],
+          "opaqueBounds": [
+            22,
+            221,
+            425,
+            336
+          ],
+          "sourceAnchor": [
+            222.0,
+            287.95
+          ],
+          "exportOffset": [
+            78,
+            102
+          ],
+          "sha256": "93296de6605a62e009d427d4c244c3afca4d2e3dc9aa2ebef2607e8d8fa06495"
+        },
+        {
+          "name": "cast_2",
+          "sourceRect": [
+            887,
+            0,
+            1330,
+            443
+          ],
+          "opaqueBounds": [
+            19,
+            202,
+            421,
+            337
+          ],
+          "sourceAnchor": [
+            221.5,
+            287.95
+          ],
+          "exportOffset": [
+            79,
+            102
+          ],
+          "sha256": "531a65a17dad0349c30b18e228657947912c3e6a042d8d8f4c842ae88ff3017e"
+        },
+        {
+          "name": "cast_3",
+          "sourceRect": [
+            1330,
+            0,
+            1774,
+            443
+          ],
+          "opaqueBounds": [
+            20,
+            202,
+            419,
+            338
+          ],
+          "sourceAnchor": [
+            222.0,
+            287.95
+          ],
+          "exportOffset": [
+            78,
+            102
+          ],
+          "sha256": "7d396b53e6c49c1133a768ea0d453d455eca0550c99fb2de144b3298cea0ff34"
+        },
+        {
+          "name": "impact_0",
+          "sourceRect": [
+            0,
+            443,
+            443,
+            887
+          ],
+          "opaqueBounds": [
+            26,
+            158,
+            429,
+            282
+          ],
+          "sourceAnchor": [
+            221.5,
+            288.6
+          ],
+          "exportOffset": [
+            79,
+            102
+          ],
+          "sha256": "4683040d13ce56c32ee4007908b9e5bcaf92179877e8f4d1027a2717d7e62d36"
+        },
+        {
+          "name": "impact_1",
+          "sourceRect": [
+            443,
+            443,
+            887,
+            887
+          ],
+          "opaqueBounds": [
+            23,
+            154,
+            426,
+            283
+          ],
+          "sourceAnchor": [
+            222.0,
+            288.6
+          ],
+          "exportOffset": [
+            78,
+            102
+          ],
+          "sha256": "e4395f79eae448ee1e09e00d089d3fe80c5513b2d0c240b81df26685b96124bf"
+        },
+        {
+          "name": "impact_2",
+          "sourceRect": [
+            887,
+            443,
+            1330,
+            887
+          ],
+          "opaqueBounds": [
+            18,
+            154,
+            422,
+            283
+          ],
+          "sourceAnchor": [
+            221.5,
+            288.6
+          ],
+          "exportOffset": [
+            79,
+            102
+          ],
+          "sha256": "bb1cdf74a2cd9274afe8046edc48127686048c6855f524479a708c5ef3c2f3fb"
+        },
+        {
+          "name": "impact_3",
+          "sourceRect": [
+            1330,
+            443,
+            1774,
+            887
+          ],
+          "opaqueBounds": [
+            20,
+            161,
+            419,
+            283
+          ],
+          "sourceAnchor": [
+            222.0,
+            288.6
+          ],
+          "exportOffset": [
+            78,
+            102
+          ],
+          "sha256": "5b964709175c62000c240607b1328ed31936801bc23c77bfb94c44d530726189"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "boss_basics",
+      "nameVi": "Đánh thường: chọc đao / chém 180°",
+      "rows": 4,
+      "cols": 8,
+      "kind": "character",
+      "bodyHeight": 64,
+      "canvas": 224,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "thrust_0",
+        "thrust_1",
+        "thrust_2",
+        "thrust_3",
+        "sweep_0",
+        "sweep_1",
+        "sweep_2",
+        "sweep_3"
+      ],
+      "description": "EXACT2048x1024,8columns4rows. Rows DOWN/front,LEFT,RIGHT,UP/back. Per row c0..3 LONG THRUST: pull curved dao back, lunge anticipation, full arm/torso extended dao THRUST far in front with planted rear foot, recover. c4..7 180degree frontal SWEEP: blade backswing at one side, heavy horizontal front semicircle sweep beginning, blade at other end after180deg sweep, recover. No attack behind boss, no full360spin. All poses same body size and right-hand weapon. Do NOT draw VFX rings/glow/slash, only boss with articulated blade poses, blade entirely fits each cell. Large empty space around blade. Feet stable80%cellheight. Distinguish thrust forward extension and broad sweep torso rotation. Same strong chibi general and SINGLE magma dao from transparent reference.",
+      "file": "boss_basics.png",
+      "completionObservedAt": "2026-11-01T02:09:07.756Z",
+      "durationMeasured": false,
+      "wholeComponents": true,
+      "fixedScale": 0.2922,
+      "note": "Whole connected-raster extraction preserves the long blade across inferred cell gutters; fixed common source scale retained.",
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/boss_locomotion_alpha.png",
+          "sha256": "b6ffc7b89eed0a66f8c28fa6e6efaa4c70da37379c6ca63209fc4640d36a0582"
+        }
+      ],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/boss_basics.png",
+      "sourceSha256": "c240a2ec2d583a4a5dacb437e39586be699e626aa2e352953d2706185f803d9f",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/boss_basics.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/boss_basics.json",
+      "sheetSha256": "f988455e1967d36bbf2e8ac34f26a45881529d8da9cebe26a6323469784c2c58",
+      "atlasSha256": "052e5d1b02b9cbb6cc206df544af2fb47c5bc71cf5422b5ad1761474fd20a36b",
+      "scale": 0.2922,
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "frames": [
+        {
+          "name": "down_thrust_0",
+          "sourceRect": [
+            11,
+            17,
+            207,
+            212
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            194,
+            193
+          ],
+          "sourceAnchor": [
+            96.0,
+            184.0
+          ],
+          "exportOffset": [
+            84,
+            125
+          ],
+          "sha256": "a19027d618557390958a368cd287b33da8a78159eb48892ac3dd4ef90c680423"
+        },
+        {
+          "name": "down_thrust_1",
+          "sourceRect": [
+            250,
+            17,
+            437,
+            213
+          ],
+          "opaqueBounds": [
+            2,
+            1,
+            186,
+            195
+          ],
+          "sourceAnchor": [
+            107.0,
+            182.0
+          ],
+          "exportOffset": [
+            81,
+            126
+          ],
+          "sha256": "af83267c2d3b2b9fb2e198a8e5d948ba0a572d9f406581cb987a9c1f2109f96f"
+        },
+        {
+          "name": "down_thrust_2",
+          "sourceRect": [
+            478,
+            17,
+            713,
+            213
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            233,
+            195
+          ],
+          "sourceAnchor": [
+            86.0,
+            181.0
+          ],
+          "exportOffset": [
+            87,
+            126
+          ],
+          "sha256": "90b6cf303e91452c7ae52618b4d1b1f35d455a200dfc9fc6a2b46cf2b2b11ea1"
+        },
+        {
+          "name": "down_thrust_3",
+          "sourceRect": [
+            688,
+            17,
+            879,
+            207
+          ],
+          "opaqueBounds": [
+            2,
+            1,
+            190,
+            188
+          ],
+          "sourceAnchor": [
+            93.5,
+            184.0
+          ],
+          "exportOffset": [
+            85,
+            125
+          ],
+          "sha256": "4639f4ad130c26854ae7d14063d20db66efb36920421eee6b391d954df491672"
+        },
+        {
+          "name": "down_sweep_0",
+          "sourceRect": [
+            907,
+            16,
+            1111,
+            217
+          ],
+          "opaqueBounds": [
+            3,
+            1,
+            203,
+            200
+          ],
+          "sourceAnchor": [
+            61.0,
+            198.0
+          ],
+          "exportOffset": [
+            94,
+            121
+          ],
+          "sha256": "7f56594c1e736a1388a61e852dbe9ac38412cdf225a0d89b1cff1173fd863708"
+        },
+        {
+          "name": "down_sweep_1",
+          "sourceRect": [
+            1146,
+            16,
+            1332,
+            216
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            183,
+            199
+          ],
+          "sourceAnchor": [
+            84.5,
+            177.0
+          ],
+          "exportOffset": [
+            87,
+            127
+          ],
+          "sha256": "62b64846a2be3eee80ffc45e9af248bfb9e0a2bd8dbd407f73def55b98e7d713"
+        },
+        {
+          "name": "down_sweep_2",
+          "sourceRect": [
+            1346,
+            16,
+            1510,
+            214
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            162,
+            197
+          ],
+          "sourceAnchor": [
+            96.5,
+            196.0
+          ],
+          "exportOffset": [
+            84,
+            122
+          ],
+          "sha256": "b67bd330e46a1e46699205284aa91906f792674e36ccb00042232718abef1b5d"
+        },
+        {
+          "name": "down_sweep_3",
+          "sourceRect": [
+            1522,
+            16,
+            1732,
+            211
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            207,
+            194
+          ],
+          "sourceAnchor": [
+            98.5,
+            185.0
+          ],
+          "exportOffset": [
+            83,
+            125
+          ],
+          "sha256": "c66eb80c681b533a97f3d40da73b0a458c4890b600c38628b5c22ae391e49a40"
+        },
+        {
+          "name": "left_thrust_0",
+          "sourceRect": [
+            16,
+            233,
+            230,
+            432
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            213,
+            197
+          ],
+          "sourceAnchor": [
+            124.0,
+            187.0
+          ],
+          "exportOffset": [
+            76,
+            125
+          ],
+          "sha256": "bed4ffb96724fce7fc18b07cfa0a02e910f866c6dbcb5213ce6eb723f833d75d"
+        },
+        {
+          "name": "left_thrust_1",
+          "sourceRect": [
+            235,
+            236,
+            465,
+            432
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            229,
+            194
+          ],
+          "sourceAnchor": [
+            125.5,
+            184.0
+          ],
+          "exportOffset": [
+            75,
+            125
+          ],
+          "sha256": "1a60c92b52dc49cd6e3f55c6ca46ef311173b55dc37476aa5b20e2b598b13470"
+        },
+        {
+          "name": "left_thrust_2",
+          "sourceRect": [
+            454,
+            236,
+            722,
+            432
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            264,
+            195
+          ],
+          "sourceAnchor": [
+            167.0,
+            185.0
+          ],
+          "exportOffset": [
+            63,
+            125
+          ],
+          "sha256": "35a93b8d26ef71122564316af467e96d78777de175ae2c2e35659d7203b13742"
+        },
+        {
+          "name": "left_thrust_3",
+          "sourceRect": [
+            733,
+            236,
+            914,
+            433
+          ],
+          "opaqueBounds": [
+            2,
+            1,
+            179,
+            195
+          ],
+          "sourceAnchor": [
+            120.5,
+            195.0
+          ],
+          "exportOffset": [
+            77,
+            122
+          ],
+          "sha256": "07871b6dc0b22891b0347b1dc45fd85fb57d851b505dd7e54dd7f2f7278bd652"
+        },
+        {
+          "name": "left_sweep_0",
+          "sourceRect": [
+            934,
+            233,
+            1129,
+            433
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            194,
+            198
+          ],
+          "sourceAnchor": [
+            74.5,
+            185.0
+          ],
+          "exportOffset": [
+            90,
+            125
+          ],
+          "sha256": "d3f90d17bfc01a0b0ada35974d7a591689aa2a800cb1d645f116860c655932cb"
+        },
+        {
+          "name": "left_sweep_1",
+          "sourceRect": [
+            1143,
+            235,
+            1360,
+            434
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            216,
+            197
+          ],
+          "sourceAnchor": [
+            77.5,
+            186.0
+          ],
+          "exportOffset": [
+            89,
+            125
+          ],
+          "sha256": "6448d5bb44d6440b8d4b2fe2441115efcc1773c90b7f0bdb61d8f228a9e416db"
+        },
+        {
+          "name": "left_sweep_2",
+          "sourceRect": [
+            1369,
+            232,
+            1536,
+            433
+          ],
+          "opaqueBounds": [
+            1,
+            2,
+            165,
+            200
+          ],
+          "sourceAnchor": [
+            85.0,
+            174.0
+          ],
+          "exportOffset": [
+            87,
+            128
+          ],
+          "sha256": "cc46ed6c304117d575879f9a2d02d34674e6400b66513205ec8c8f29da8f14ef"
+        },
+        {
+          "name": "left_sweep_3",
+          "sourceRect": [
+            1542,
+            233,
+            1762,
+            434
+          ],
+          "opaqueBounds": [
+            3,
+            1,
+            219,
+            199
+          ],
+          "sourceAnchor": [
+            158.5,
+            199.0
+          ],
+          "exportOffset": [
+            66,
+            121
+          ],
+          "sha256": "af090464b9224524e3714544d4d2c19c86bd5b6fc27f68ed2932cdcf12a3a1ea"
+        },
+        {
+          "name": "right_thrust_0",
+          "sourceRect": [
+            13,
+            451,
+            242,
+            649
+          ],
+          "opaqueBounds": [
+            1,
+            2,
+            228,
+            196
+          ],
+          "sourceAnchor": [
+            94.5,
+            183.0
+          ],
+          "exportOffset": [
+            84,
+            126
+          ],
+          "sha256": "4bae4464c735815007989effda4c94ca4e56cf8c45f2c63a147b0ea01a6c185d"
+        },
+        {
+          "name": "right_thrust_1",
+          "sourceRect": [
+            244,
+            451,
+            464,
+            649
+          ],
+          "opaqueBounds": [
+            2,
+            1,
+            216,
+            197
+          ],
+          "sourceAnchor": [
+            93.0,
+            184.0
+          ],
+          "exportOffset": [
+            85,
+            125
+          ],
+          "sha256": "d573620c90d049dec91a4e0b574e1f83a022df71a9a4e8668ff8c890df2334b3"
+        },
+        {
+          "name": "right_thrust_2",
+          "sourceRect": [
+            448,
+            451,
+            742,
+            642
+          ],
+          "opaqueBounds": [
+            2,
+            1,
+            293,
+            190
+          ],
+          "sourceAnchor": [
+            109.0,
+            184.0
+          ],
+          "exportOffset": [
+            80,
+            125
+          ],
+          "sha256": "7b908ad90f8c708be70b6a755528568bba759d19ef435c12735d4321265ca51a"
+        },
+        {
+          "name": "right_thrust_3",
+          "sourceRect": [
+            667,
+            452,
+            886,
+            648
+          ],
+          "opaqueBounds": [
+            53,
+            1,
+            218,
+            195
+          ],
+          "sourceAnchor": [
+            107.5,
+            195.0
+          ],
+          "exportOffset": [
+            81,
+            122
+          ],
+          "sha256": "66fa208effaddd48d88eff6196e42ceaaff73895d435e74f8ee88551f2416926"
+        },
+        {
+          "name": "right_sweep_0",
+          "sourceRect": [
+            926,
+            451,
+            1124,
+            649
+          ],
+          "opaqueBounds": [
+            3,
+            1,
+            195,
+            196
+          ],
+          "sourceAnchor": [
+            100.0,
+            189.0
+          ],
+          "exportOffset": [
+            83,
+            124
+          ],
+          "sha256": "9759d16ebeb9d4f14cb31de6853d5aaea76d2d73abe08594bd64b8bbca3f933e"
+        },
+        {
+          "name": "right_sweep_1",
+          "sourceRect": [
+            1126,
+            454,
+            1364,
+            647
+          ],
+          "opaqueBounds": [
+            1,
+            2,
+            235,
+            192
+          ],
+          "sourceAnchor": [
+            143.0,
+            189.0
+          ],
+          "exportOffset": [
+            70,
+            124
+          ],
+          "sha256": "dc479ba989cd7375eded60693186cda3272e11d74570910abe84fc8862b8383f"
+        },
+        {
+          "name": "right_sweep_2",
+          "sourceRect": [
+            1380,
+            455,
+            1575,
+            650
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            192,
+            194
+          ],
+          "sourceAnchor": [
+            69.0,
+            183.0
+          ],
+          "exportOffset": [
+            92,
+            126
+          ],
+          "sha256": "17e85f175697202faf1558d8145ea7b4baff21c1374244a147cfb98d36fed458"
+        },
+        {
+          "name": "right_sweep_3",
+          "sourceRect": [
+            1562,
+            451,
+            1756,
+            650
+          ],
+          "opaqueBounds": [
+            3,
+            1,
+            192,
+            198
+          ],
+          "sourceAnchor": [
+            63.0,
+            198.0
+          ],
+          "exportOffset": [
+            94,
+            121
+          ],
+          "sha256": "6d0e2cfd537375c13117b4c45515bc36802a4d66457fe9548b25f4ba63650aba"
+        },
+        {
+          "name": "up_thrust_0",
+          "sourceRect": [
+            29,
+            664,
+            255,
+            858
+          ],
+          "opaqueBounds": [
+            1,
+            3,
+            224,
+            193
+          ],
+          "sourceAnchor": [
+            99.5,
+            193.0
+          ],
+          "exportOffset": [
+            83,
+            123
+          ],
+          "sha256": "67aaaf2fec19351c1615eb32a6edafd043bc72fab3f5a6abc58a488e747eb78f"
+        },
+        {
+          "name": "up_thrust_1",
+          "sourceRect": [
+            257,
+            667,
+            450,
+            865
+          ],
+          "opaqueBounds": [
+            2,
+            1,
+            191,
+            197
+          ],
+          "sourceAnchor": [
+            139.5,
+            196.0
+          ],
+          "exportOffset": [
+            71,
+            122
+          ],
+          "sha256": "91cffb4a0ad7cd0386fc1142fe461f5d0648c9845aae426c6d95aaf10fcc2937"
+        },
+        {
+          "name": "up_thrust_2",
+          "sourceRect": [
+            490,
+            651,
+            640,
+            872
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            148,
+            220
+          ],
+          "sourceAnchor": [
+            97.0,
+            220.0
+          ],
+          "exportOffset": [
+            84,
+            115
+          ],
+          "sha256": "ae7089b6c1d8c9ed086a562c3d77364ae3f08c6a099e9d4863fe09009d8247ea"
+        },
+        {
+          "name": "up_thrust_3",
+          "sourceRect": [
+            697,
+            670,
+            908,
+            870
+          ],
+          "opaqueBounds": [
+            4,
+            1,
+            209,
+            199
+          ],
+          "sourceAnchor": [
+            125.5,
+            199.0
+          ],
+          "exportOffset": [
+            75,
+            121
+          ],
+          "sha256": "8f6be35b5f6958cf6b9e9dc71863c8a583f7282ea3dd2e11d9d6342d43a26ad8"
+        },
+        {
+          "name": "up_sweep_0",
+          "sourceRect": [
+            922,
+            658,
+            1099,
+            871
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            176,
+            212
+          ],
+          "sourceAnchor": [
+            82.0,
+            207.0
+          ],
+          "exportOffset": [
+            88,
+            119
+          ],
+          "sha256": "93189c32a2335f4a49c70f26767713039939d48a18beefff9165a9b4a8e30e72"
+        },
+        {
+          "name": "up_sweep_1",
+          "sourceRect": [
+            1146,
+            665,
+            1336,
+            859
+          ],
+          "opaqueBounds": [
+            1,
+            3,
+            188,
+            192
+          ],
+          "sourceAnchor": [
+            85.5,
+            178.0
+          ],
+          "exportOffset": [
+            87,
+            127
+          ],
+          "sha256": "02112b88efd9da8280e65ead7c2f8b165b5d8f088487451d1b9fa790baeeaf1b"
+        },
+        {
+          "name": "up_sweep_2",
+          "sourceRect": [
+            1357,
+            667,
+            1561,
+            865
+          ],
+          "opaqueBounds": [
+            2,
+            1,
+            201,
+            196
+          ],
+          "sourceAnchor": [
+            90.0,
+            196.0
+          ],
+          "exportOffset": [
+            86,
+            122
+          ],
+          "sha256": "18827922a595e9de5882f0d9c6388ef9dc180b0dcbbb3a7f6499027a56fed2b6"
+        },
+        {
+          "name": "up_sweep_3",
+          "sourceRect": [
+            1584,
+            666,
+            1770,
+            871
+          ],
+          "opaqueBounds": [
+            3,
+            1,
+            183,
+            204
+          ],
+          "sourceAnchor": [
+            48.0,
+            203.0
+          ],
+          "exportOffset": [
+            98,
+            120
+          ],
+          "sha256": "85e55eba54f5bd5c453c5437f57c86d1f1bd86999db70048457586f8f0f1fe96"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "boss_casts",
+      "nameVi": "Dẫm đất / hiệu lệnh triệu quân",
+      "rows": 4,
+      "cols": 6,
+      "kind": "character",
+      "bodyHeight": 64,
+      "canvas": 192,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "stomp_0",
+        "stomp_1",
+        "stomp_2",
+        "command_0",
+        "command_1",
+        "command_2"
+      ],
+      "description": "EXACT1536x1024,6columns4rows. Rows DOWN/front,LEFT,RIGHT,UP/back. Within each row c0 stomp anticipation raised knee, c1 forceful foot stamps onto ground body weight down/shoulders compressed, c2 recovering to standing; c3 COMMAND preparation dao lowered and left hand rises, c4 firm LEFT arm points orders outward and dao stays RIGHT hand, c5 command recovery. Full-body discrete articulated poses, no background, no lava/particles or flags. This is same boss design and ONE right-hand curved dao from transparent reference. Body height consistent and planted ground baseline80% cellheight, leave clearance for knee and arms.",
+      "file": "boss_casts.png",
+      "completionObservedAt": "2026-11-01T02:09:07.763Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/boss_locomotion_alpha.png",
+          "sha256": "b6ffc7b89eed0a66f8c28fa6e6efaa4c70da37379c6ca63209fc4640d36a0582"
+        }
+      ],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/boss_casts.png",
+      "sourceSha256": "60d746d7dc9aa7b68960548a7f7c090b6fe962e46bc6b65e8864f2e88dbfdac5",
+      "sourceDimensions": [
+        1536,
+        1024
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/boss_casts.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/boss_casts.json",
+      "sheetSha256": "357fad5f03c75ae4c0a8e1e0c15d6f7bdca05e8d1b704c514b161122e2201202",
+      "atlasSha256": "155312647361ed82ed5f4d100a3649dfc363310adc3d9353f173c6f30e1539cb",
+      "scale": 0.2723404255319149,
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "frames": [
+        {
+          "name": "down_stomp_0",
+          "sourceRect": [
+            0,
+            0,
+            240,
+            258
+          ],
+          "opaqueBounds": [
+            12,
+            28,
+            239,
+            255
+          ],
+          "sourceAnchor": [
+            116.5,
+            250.0
+          ],
+          "exportOffset": [
+            64,
+            86
+          ],
+          "sha256": "e53834ce98f2a9f833fcbcf723231fd467c41422231c82341b76b5932e68ffec"
+        },
+        {
+          "name": "down_stomp_1",
+          "sourceRect": [
+            240,
+            0,
+            505,
+            258
+          ],
+          "opaqueBounds": [
+            0,
+            80,
+            264,
+            257
+          ],
+          "sourceAnchor": [
+            144.5,
+            257.0
+          ],
+          "exportOffset": [
+            57,
+            84
+          ],
+          "sha256": "26d1c280e69befd7770181a21e4790fcb8d303b63ccf70cf2f23ae1a014e52c2"
+        },
+        {
+          "name": "down_stomp_2",
+          "sourceRect": [
+            505,
+            0,
+            754,
+            258
+          ],
+          "opaqueBounds": [
+            2,
+            28,
+            249,
+            252
+          ],
+          "sourceAnchor": [
+            103.5,
+            252.0
+          ],
+          "exportOffset": [
+            68,
+            85
+          ],
+          "sha256": "91ab07c74003d0451d2d24f500556d9466302776bb5ae5108dc51d29c63ae5c0"
+        },
+        {
+          "name": "down_command_0",
+          "sourceRect": [
+            754,
+            0,
+            1023,
+            258
+          ],
+          "opaqueBounds": [
+            2,
+            26,
+            269,
+            252
+          ],
+          "sourceAnchor": [
+            142.5,
+            252.0
+          ],
+          "exportOffset": [
+            57,
+            85
+          ],
+          "sha256": "384b7fe8d500d02440e4f17f7e90123106e7b59afd14090cf571ef2fefc0ad66"
+        },
+        {
+          "name": "down_command_1",
+          "sourceRect": [
+            1023,
+            0,
+            1274,
+            258
+          ],
+          "opaqueBounds": [
+            0,
+            28,
+            251,
+            252
+          ],
+          "sourceAnchor": [
+            95.5,
+            252.0
+          ],
+          "exportOffset": [
+            70,
+            85
+          ],
+          "sha256": "36343cdc91779a9c2bbbc22d42fed21294b10b67fd7168a4648cf5c9af27969e"
+        },
+        {
+          "name": "down_command_2",
+          "sourceRect": [
+            1274,
+            0,
+            1536,
+            258
+          ],
+          "opaqueBounds": [
+            0,
+            26,
+            248,
+            252
+          ],
+          "sourceAnchor": [
+            95.5,
+            252.0
+          ],
+          "exportOffset": [
+            70,
+            85
+          ],
+          "sha256": "4f8314eff411ecd8c2b17a52100e171aa4fc21f4907e1486f2c818e2ea5a1f02"
+        },
+        {
+          "name": "left_stomp_0",
+          "sourceRect": [
+            0,
+            258,
+            258,
+            509
+          ],
+          "opaqueBounds": [
+            13,
+            11,
+            258,
+            239
+          ],
+          "sourceAnchor": [
+            182.0,
+            239.0
+          ],
+          "exportOffset": [
+            46,
+            89
+          ],
+          "sha256": "290e644addb0fcc4bb09526cbd17d238319c016095d2fffaad1bc6290c9cf3fe"
+        },
+        {
+          "name": "left_stomp_1",
+          "sourceRect": [
+            258,
+            258,
+            524,
+            509
+          ],
+          "opaqueBounds": [
+            0,
+            54,
+            266,
+            238
+          ],
+          "sourceAnchor": [
+            134.0,
+            238.0
+          ],
+          "exportOffset": [
+            60,
+            89
+          ],
+          "sha256": "0c0634450ad4d151de2c458607bd4136fc482152c98f66fb4739b6265d755aea"
+        },
+        {
+          "name": "left_stomp_2",
+          "sourceRect": [
+            524,
+            258,
+            768,
+            509
+          ],
+          "opaqueBounds": [
+            0,
+            8,
+            239,
+            240
+          ],
+          "sourceAnchor": [
+            155.0,
+            240.0
+          ],
+          "exportOffset": [
+            54,
+            88
+          ],
+          "sha256": "6b740811e8d8006eb31d7ce331a18d9c6b978d756883c58ead20aaac6aa07d81"
+        },
+        {
+          "name": "left_command_0",
+          "sourceRect": [
+            768,
+            258,
+            1018,
+            509
+          ],
+          "opaqueBounds": [
+            11,
+            10,
+            248,
+            241
+          ],
+          "sourceAnchor": [
+            168.0,
+            241.0
+          ],
+          "exportOffset": [
+            50,
+            88
+          ],
+          "sha256": "ede0d5c1061dc296defed334146c8a24bcfe42e2ba1bc6fceb0d5fc606ebdbba"
+        },
+        {
+          "name": "left_command_1",
+          "sourceRect": [
+            1018,
+            258,
+            1284,
+            509
+          ],
+          "opaqueBounds": [
+            2,
+            11,
+            265,
+            240
+          ],
+          "sourceAnchor": [
+            178.0,
+            240.0
+          ],
+          "exportOffset": [
+            48,
+            88
+          ],
+          "sha256": "c7d1ef5037b84f2d743433cd865a87ce35f74f146c16a0dd4795b6e685cb1e32"
+        },
+        {
+          "name": "left_command_2",
+          "sourceRect": [
+            1284,
+            258,
+            1536,
+            509
+          ],
+          "opaqueBounds": [
+            7,
+            8,
+            234,
+            241
+          ],
+          "sourceAnchor": [
+            158.5,
+            241.0
+          ],
+          "exportOffset": [
+            53,
+            88
+          ],
+          "sha256": "12bfbe148be87727076999157aa453979c75aee43cdf3cb7d221df49e730e226"
+        },
+        {
+          "name": "right_stomp_0",
+          "sourceRect": [
+            0,
+            509,
+            271,
+            747
+          ],
+          "opaqueBounds": [
+            24,
+            2,
+            271,
+            233
+          ],
+          "sourceAnchor": [
+            124.0,
+            233.0
+          ],
+          "exportOffset": [
+            62,
+            90
+          ],
+          "sha256": "a23d108fe7eddfb04b57b43aef3809a187247a8c2956fee6b5d040a51df58753"
+        },
+        {
+          "name": "right_stomp_1",
+          "sourceRect": [
+            271,
+            509,
+            532,
+            747
+          ],
+          "opaqueBounds": [
+            2,
+            44,
+            260,
+            233
+          ],
+          "sourceAnchor": [
+            124.0,
+            233.0
+          ],
+          "exportOffset": [
+            62,
+            90
+          ],
+          "sha256": "028e554c3a6c36b8085ebd216d88c6067b726a7166d65f0fdbf49a1f0d3617c2"
+        },
+        {
+          "name": "right_stomp_2",
+          "sourceRect": [
+            532,
+            509,
+            774,
+            747
+          ],
+          "opaqueBounds": [
+            4,
+            3,
+            242,
+            233
+          ],
+          "sourceAnchor": [
+            84.0,
+            233.0
+          ],
+          "exportOffset": [
+            73,
+            90
+          ],
+          "sha256": "af3f01dcc713904c5a6c6027f971d098e07e43f98709f06e0b8f5c8ef9426ee7"
+        },
+        {
+          "name": "right_command_0",
+          "sourceRect": [
+            774,
+            509,
+            1037,
+            747
+          ],
+          "opaqueBounds": [
+            0,
+            2,
+            263,
+            233
+          ],
+          "sourceAnchor": [
+            103.0,
+            233.0
+          ],
+          "exportOffset": [
+            68,
+            90
+          ],
+          "sha256": "262a33b7b310543cc20aa5f8ee0447659b777ec9733dc690450945223686e2e5"
+        },
+        {
+          "name": "right_command_1",
+          "sourceRect": [
+            1037,
+            509,
+            1300,
+            747
+          ],
+          "opaqueBounds": [
+            2,
+            2,
+            262,
+            233
+          ],
+          "sourceAnchor": [
+            78.0,
+            233.0
+          ],
+          "exportOffset": [
+            75,
+            90
+          ],
+          "sha256": "89312213a3f309b86b01638295aff4f4b3c361a8e2da9548f90194bacf5388fa"
+        },
+        {
+          "name": "right_command_2",
+          "sourceRect": [
+            1300,
+            509,
+            1536,
+            747
+          ],
+          "opaqueBounds": [
+            5,
+            2,
+            228,
+            233
+          ],
+          "sourceAnchor": [
+            119.5,
+            233.0
+          ],
+          "exportOffset": [
+            63,
+            90
+          ],
+          "sha256": "51fbad446d8bcf1b7c2bcd63f0fccb934a0ca37c2573b16f2161d11f21570b2b"
+        },
+        {
+          "name": "up_stomp_0",
+          "sourceRect": [
+            0,
+            747,
+            288,
+            1024
+          ],
+          "opaqueBounds": [
+            59,
+            2,
+            287,
+            237
+          ],
+          "sourceAnchor": [
+            112.0,
+            237.0
+          ],
+          "exportOffset": [
+            65,
+            89
+          ],
+          "sha256": "693951a097ce16dc9e97069646ee9a9f28e395bcbf23d433e0582f003149abf0"
+        },
+        {
+          "name": "up_stomp_1",
+          "sourceRect": [
+            288,
+            747,
+            544,
+            1024
+          ],
+          "opaqueBounds": [
+            8,
+            45,
+            255,
+            237
+          ],
+          "sourceAnchor": [
+            110.5,
+            237.0
+          ],
+          "exportOffset": [
+            66,
+            89
+          ],
+          "sha256": "89238ce1ff48944ffb06de71096678ef85b0a669994f8b48f01b21e57a40d87f"
+        },
+        {
+          "name": "up_stomp_2",
+          "sourceRect": [
+            544,
+            747,
+            783,
+            1024
+          ],
+          "opaqueBounds": [
+            13,
+            2,
+            238,
+            233
+          ],
+          "sourceAnchor": [
+            114.5,
+            233.0
+          ],
+          "exportOffset": [
+            65,
+            90
+          ],
+          "sha256": "3485d7113dcb17abad282e67d2608e5b895a3111e95bc090f1846bc67afea2c9"
+        },
+        {
+          "name": "up_command_0",
+          "sourceRect": [
+            783,
+            747,
+            1043,
+            1024
+          ],
+          "opaqueBounds": [
+            8,
+            7,
+            260,
+            237
+          ],
+          "sourceAnchor": [
+            136.0,
+            237.0
+          ],
+          "exportOffset": [
+            59,
+            89
+          ],
+          "sha256": "97cbaa415241e2d4ec806718264f7dec3d8c92996af05bbee51eda203acab84c"
+        },
+        {
+          "name": "up_command_1",
+          "sourceRect": [
+            1043,
+            747,
+            1290,
+            1024
+          ],
+          "opaqueBounds": [
+            0,
+            3,
+            246,
+            237
+          ],
+          "sourceAnchor": [
+            127.0,
+            237.0
+          ],
+          "exportOffset": [
+            61,
+            89
+          ],
+          "sha256": "73f8ba27579e32f5f9a7ffe4a9351cacf7380f0606ea501be2830b9ac80a49cc"
+        },
+        {
+          "name": "up_command_2",
+          "sourceRect": [
+            1290,
+            747,
+            1536,
+            1024
+          ],
+          "opaqueBounds": [
+            26,
+            4,
+            238,
+            227
+          ],
+          "sourceAnchor": [
+            127.0,
+            227.0
+          ],
+          "exportOffset": [
+            61,
+            92
+          ],
+          "sha256": "f5073b4747e4062b17c68ced622d9e6a16f049995b579cdb7f9e46a7887718a3"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "minion_infantry",
+      "nameVi": "Mông Cổ Thiết Binh",
+      "rows": 4,
+      "cols": 8,
+      "kind": "character",
+      "bodyHeight": 48,
+      "canvas": 128,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "idle_0",
+        "idle_1",
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "attack_0",
+        "attack_1"
+      ],
+      "description": "EXACT2048x1024,8columns4rows32cels. ONLY elite MONGOLIAN FOOT INFANTRY from attached soldier design: small chibi, black/bronze lamellar, red scarf/skirt, cream fur-trimmed pointed helmet with red plume, round bronze shield LEFT arm, curved SILVER saber RIGHT hand. NO horse, bow, magma armor, boss fur cape or extra weapons. Rows DOWN/front,LEFT,RIGHT,UP/back. Columns idleA,idleB,walk left contact,walk passA,walk right contact,walk passB,attack anticipation shield raised/saber back,attack frontal saber slash extended. Same hand assignments, same size every cel. Feet80%cellheight. Background entirely transparent, discard parchment reference board completely.",
+      "file": "minion_infantry.png",
+      "knownIssues": "Several attack poses rotate away from row heading; pending directional cleanup.",
+      "completionObservedAt": "2026-11-01T02:09:07.767Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/concepts/summons/mongolian-soldiers/combined_concept.png",
+          "sha256": "816d4555948caa9c82b2e258a8a8ecac1ac8b7252c32873403a75235a3bbd65c"
+        }
+      ],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/minion_infantry.png",
+      "sourceSha256": "9918693480faec832a1d9ea885d0839faac203a8a8b3b79ddfe66fa23d4ffb06",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/minion_infantry.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/minion_infantry.json",
+      "sheetSha256": "3743f0d078e8785c3e0bf13a8153ac62cb57bec580da24b6e98b605d739235c0",
+      "atlasSha256": "9b5b6e664aec2b9aadb4e7cd659a45b50a3b9f0e3228fc91e1fa899c6f6a0471",
+      "scale": 0.23300970873786409,
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "frames": [
+        {
+          "name": "down_idle_0",
+          "sourceRect": [
+            0,
+            0,
+            222,
+            224
+          ],
+          "opaqueBounds": [
+            21,
+            23,
+            210,
+            215
+          ],
+          "sourceAnchor": [
+            135.0,
+            213.0
+          ],
+          "exportOffset": [
+            33,
+            53
+          ],
+          "sha256": "e18c6227ec85cfcfa16c00da3247f10bb505b677cdcfe4164d58360400452042"
+        },
+        {
+          "name": "down_idle_1",
+          "sourceRect": [
+            222,
+            0,
+            443,
+            224
+          ],
+          "opaqueBounds": [
+            20,
+            22,
+            198,
+            217
+          ],
+          "sourceAnchor": [
+            93.0,
+            217.0
+          ],
+          "exportOffset": [
+            42,
+            52
+          ],
+          "sha256": "3636e3fb12ea6aeef2714d3af9dee098cc91c8107a2460080b302acd39c70865"
+        },
+        {
+          "name": "down_walk_0",
+          "sourceRect": [
+            443,
+            0,
+            660,
+            224
+          ],
+          "opaqueBounds": [
+            41,
+            19,
+            192,
+            220
+          ],
+          "sourceAnchor": [
+            98.5,
+            220.0
+          ],
+          "exportOffset": [
+            41,
+            51
+          ],
+          "sha256": "bf252ebab235f698c5433894ad6badcab14cb0a1eb13625f368da70e25251ee7"
+        },
+        {
+          "name": "down_walk_1",
+          "sourceRect": [
+            660,
+            0,
+            887,
+            224
+          ],
+          "opaqueBounds": [
+            2,
+            18,
+            193,
+            223
+          ],
+          "sourceAnchor": [
+            135.5,
+            223.0
+          ],
+          "exportOffset": [
+            32,
+            50
+          ],
+          "sha256": "f1391d7784154fbcab0f7eb9fdd37d1dd8bdbdffc4a1d7274a94571ff7835b8d"
+        },
+        {
+          "name": "down_walk_2",
+          "sourceRect": [
+            887,
+            0,
+            1103,
+            224
+          ],
+          "opaqueBounds": [
+            29,
+            19,
+            181,
+            220
+          ],
+          "sourceAnchor": [
+            87.0,
+            220.0
+          ],
+          "exportOffset": [
+            44,
+            51
+          ],
+          "sha256": "ee3e35537f67fd3815ce224deca29d331e20dfa2945b904a5657764f641b7ab8"
+        },
+        {
+          "name": "down_walk_3",
+          "sourceRect": [
+            1103,
+            0,
+            1330,
+            224
+          ],
+          "opaqueBounds": [
+            2,
+            18,
+            185,
+            223
+          ],
+          "sourceAnchor": [
+            113.0,
+            223.0
+          ],
+          "exportOffset": [
+            38,
+            50
+          ],
+          "sha256": "3b9637aeca096635c65b774847292dabbc9acfa995afaa05ca13925aab789c2a"
+        },
+        {
+          "name": "down_attack_0",
+          "sourceRect": [
+            1330,
+            0,
+            1551,
+            224
+          ],
+          "opaqueBounds": [
+            22,
+            27,
+            200,
+            219
+          ],
+          "sourceAnchor": [
+            89.0,
+            216.0
+          ],
+          "exportOffset": [
+            43,
+            52
+          ],
+          "sha256": "afbc68928957244999e8f956a233f9882b9b21412b812c06bc299040d0a3930e"
+        },
+        {
+          "name": "down_attack_1",
+          "sourceRect": [
+            1551,
+            0,
+            1774,
+            224
+          ],
+          "opaqueBounds": [
+            2,
+            35,
+            212,
+            220
+          ],
+          "sourceAnchor": [
+            79.5,
+            217.0
+          ],
+          "exportOffset": [
+            45,
+            52
+          ],
+          "sha256": "9ea4dbcf1e66d95ab2f2fc7b24166296c8a69546cf33b3359b9e31a07d0d5ae0"
+        },
+        {
+          "name": "left_idle_0",
+          "sourceRect": [
+            0,
+            224,
+            222,
+            443
+          ],
+          "opaqueBounds": [
+            13,
+            9,
+            206,
+            211
+          ],
+          "sourceAnchor": [
+            128.0,
+            210.0
+          ],
+          "exportOffset": [
+            34,
+            53
+          ],
+          "sha256": "486d00a4154fcd879c40fab0454f1da7a481797d4828db9fad4f387bdcf100d3"
+        },
+        {
+          "name": "left_idle_1",
+          "sourceRect": [
+            222,
+            224,
+            443,
+            443
+          ],
+          "opaqueBounds": [
+            15,
+            9,
+            201,
+            210
+          ],
+          "sourceAnchor": [
+            126.0,
+            210.0
+          ],
+          "exportOffset": [
+            35,
+            53
+          ],
+          "sha256": "aa644696e2c7d56252c0ac2c69d9b4d6988ccf7f0caf9cf41b1552e57acaba98"
+        },
+        {
+          "name": "left_walk_0",
+          "sourceRect": [
+            443,
+            224,
+            665,
+            443
+          ],
+          "opaqueBounds": [
+            29,
+            10,
+            207,
+            210
+          ],
+          "sourceAnchor": [
+            90.0,
+            210.0
+          ],
+          "exportOffset": [
+            43,
+            53
+          ],
+          "sha256": "51163c0a1d907285a4cbd131e2fbc2dc73c717e6f6b12a8023606c737cd063df"
+        },
+        {
+          "name": "left_walk_1",
+          "sourceRect": [
+            665,
+            224,
+            882,
+            443
+          ],
+          "opaqueBounds": [
+            23,
+            9,
+            194,
+            213
+          ],
+          "sourceAnchor": [
+            143.0,
+            213.0
+          ],
+          "exportOffset": [
+            31,
+            53
+          ],
+          "sha256": "160b2e33a9b236487631789cb24159d077a62b7ae8c499bdd800a0a274db9a9e"
+        },
+        {
+          "name": "left_walk_2",
+          "sourceRect": [
+            882,
+            224,
+            1109,
+            443
+          ],
+          "opaqueBounds": [
+            2,
+            9,
+            188,
+            210
+          ],
+          "sourceAnchor": [
+            66.5,
+            210.0
+          ],
+          "exportOffset": [
+            49,
+            53
+          ],
+          "sha256": "c0ccdaa20c11c95bb00e332ef50142d3f9c3caffa30537d704ea9cd7ffdaaf5f"
+        },
+        {
+          "name": "left_walk_3",
+          "sourceRect": [
+            1109,
+            224,
+            1321,
+            443
+          ],
+          "opaqueBounds": [
+            4,
+            10,
+            185,
+            208
+          ],
+          "sourceAnchor": [
+            101.5,
+            208.0
+          ],
+          "exportOffset": [
+            40,
+            54
+          ],
+          "sha256": "6589a97445f8cacfe43a61867c7d13a3c6123dcbe3f3e32a7ecc7ffaba05f953"
+        },
+        {
+          "name": "left_attack_0",
+          "sourceRect": [
+            1321,
+            224,
+            1541,
+            443
+          ],
+          "opaqueBounds": [
+            2,
+            18,
+            188,
+            210
+          ],
+          "sourceAnchor": [
+            101.5,
+            210.0
+          ],
+          "exportOffset": [
+            40,
+            53
+          ],
+          "sha256": "7bdd214e4a369e2623515cc3cd56bf32e0ad0b0530a4e5e73f8f0b618be479ea"
+        },
+        {
+          "name": "left_attack_1",
+          "sourceRect": [
+            1541,
+            224,
+            1774,
+            443
+          ],
+          "opaqueBounds": [
+            2,
+            18,
+            222,
+            208
+          ],
+          "sourceAnchor": [
+            94.5,
+            199.0
+          ],
+          "exportOffset": [
+            42,
+            56
+          ],
+          "sha256": "8696fe9c37bc6b80ffb3e90d88df7dcff0fa116a887f84d54d7e957d484b60eb"
+        },
+        {
+          "name": "right_idle_0",
+          "sourceRect": [
+            0,
+            443,
+            222,
+            663
+          ],
+          "opaqueBounds": [
+            49,
+            10,
+            206,
+            204
+          ],
+          "sourceAnchor": [
+            128.5,
+            204.0
+          ],
+          "exportOffset": [
+            34,
+            55
+          ],
+          "sha256": "2ba20439c6777999eeef6742a5c213f108434bd96b8da6ef89b6efed38692849"
+        },
+        {
+          "name": "right_idle_1",
+          "sourceRect": [
+            222,
+            443,
+            443,
+            663
+          ],
+          "opaqueBounds": [
+            35,
+            10,
+            205,
+            207
+          ],
+          "sourceAnchor": [
+            116.0,
+            207.0
+          ],
+          "exportOffset": [
+            37,
+            54
+          ],
+          "sha256": "63d6922438ccc0db68684850ba45bae9546e4d7815260a35616ac5180546b2b7"
+        },
+        {
+          "name": "right_walk_0",
+          "sourceRect": [
+            443,
+            443,
+            665,
+            663
+          ],
+          "opaqueBounds": [
+            36,
+            7,
+            220,
+            204
+          ],
+          "sourceAnchor": [
+            114.5,
+            204.0
+          ],
+          "exportOffset": [
+            37,
+            55
+          ],
+          "sha256": "dcfde349505e94515929b096700d1d2b49fde1b3d3220db7226cf43c0ef6b332"
+        },
+        {
+          "name": "right_walk_1",
+          "sourceRect": [
+            665,
+            443,
+            887,
+            663
+          ],
+          "opaqueBounds": [
+            28,
+            7,
+            201,
+            204
+          ],
+          "sourceAnchor": [
+            108.5,
+            204.0
+          ],
+          "exportOffset": [
+            39,
+            55
+          ],
+          "sha256": "504970c1ebea8e4149908c9274d5a3bcaf0f644ead5432585c09a8304a2811f6"
+        },
+        {
+          "name": "right_walk_2",
+          "sourceRect": [
+            887,
+            443,
+            1109,
+            663
+          ],
+          "opaqueBounds": [
+            25,
+            7,
+            205,
+            206
+          ],
+          "sourceAnchor": [
+            103.5,
+            204.0
+          ],
+          "exportOffset": [
+            40,
+            55
+          ],
+          "sha256": "07ea7fee0a339f8285bb6afebf05e18ce5fc2a726de73bf3522f98ee71058b4b"
+        },
+        {
+          "name": "right_walk_3",
+          "sourceRect": [
+            1109,
+            443,
+            1330,
+            663
+          ],
+          "opaqueBounds": [
+            30,
+            8,
+            205,
+            204
+          ],
+          "sourceAnchor": [
+            109.0,
+            204.0
+          ],
+          "exportOffset": [
+            39,
+            55
+          ],
+          "sha256": "5e196fa5a20a393d4076add5f9a381de37b9904541a2829dde25720adad3e928"
+        },
+        {
+          "name": "right_attack_0",
+          "sourceRect": [
+            1330,
+            443,
+            1543,
+            663
+          ],
+          "opaqueBounds": [
+            15,
+            14,
+            207,
+            210
+          ],
+          "sourceAnchor": [
+            111.0,
+            210.0
+          ],
+          "exportOffset": [
+            38,
+            53
+          ],
+          "sha256": "c8c96ae725bff1234b656c35d48215d5c7137aa8bbded13618a3b1375a62bd51"
+        },
+        {
+          "name": "right_attack_1",
+          "sourceRect": [
+            1543,
+            443,
+            1774,
+            663
+          ],
+          "opaqueBounds": [
+            2,
+            14,
+            226,
+            208
+          ],
+          "sourceAnchor": [
+            84.5,
+            206.0
+          ],
+          "exportOffset": [
+            44,
+            54
+          ],
+          "sha256": "7aee343af38c9e7e6f88247afc6ac892a6e171b222f83782f3259f6ee743dc15"
+        },
+        {
+          "name": "up_idle_0",
+          "sourceRect": [
+            0,
+            663,
+            231,
+            887
+          ],
+          "opaqueBounds": [
+            41,
+            3,
+            230,
+            206
+          ],
+          "sourceAnchor": [
+            153.0,
+            206.0
+          ],
+          "exportOffset": [
+            28,
+            54
+          ],
+          "sha256": "1bc6054d68f541e2528effcbc0bc6941d0f90a7a823b50272bf17ba5abf83657"
+        },
+        {
+          "name": "up_idle_1",
+          "sourceRect": [
+            231,
+            663,
+            448,
+            887
+          ],
+          "opaqueBounds": [
+            35,
+            2,
+            216,
+            201
+          ],
+          "sourceAnchor": [
+            117.5,
+            201.0
+          ],
+          "exportOffset": [
+            37,
+            56
+          ],
+          "sha256": "636df3138922cf552b5ef32be7097078c68077e715397b87c23020c54f689ccb"
+        },
+        {
+          "name": "up_walk_0",
+          "sourceRect": [
+            448,
+            663,
+            665,
+            887
+          ],
+          "opaqueBounds": [
+            27,
+            2,
+            216,
+            201
+          ],
+          "sourceAnchor": [
+            104.5,
+            201.0
+          ],
+          "exportOffset": [
+            40,
+            56
+          ],
+          "sha256": "3edda6909a5ef879d79db33369cfba51ed94a2e497cc29227c40496b5e653f34"
+        },
+        {
+          "name": "up_walk_1",
+          "sourceRect": [
+            665,
+            663,
+            887,
+            887
+          ],
+          "opaqueBounds": [
+            31,
+            2,
+            214,
+            205
+          ],
+          "sourceAnchor": [
+            95.5,
+            205.0
+          ],
+          "exportOffset": [
+            42,
+            55
+          ],
+          "sha256": "b139e1b61c9080d87d65e23d6ab507e58350ba20a35530f58638a2eca3b64fc3"
+        },
+        {
+          "name": "up_walk_2",
+          "sourceRect": [
+            887,
+            663,
+            1109,
+            887
+          ],
+          "opaqueBounds": [
+            31,
+            2,
+            215,
+            208
+          ],
+          "sourceAnchor": [
+            107.5,
+            208.0
+          ],
+          "exportOffset": [
+            39,
+            54
+          ],
+          "sha256": "5464548f0932f7a1c1542859283a209a730c5070c58313e7046ceb867c087337"
+        },
+        {
+          "name": "up_walk_3",
+          "sourceRect": [
+            1109,
+            663,
+            1330,
+            887
+          ],
+          "opaqueBounds": [
+            28,
+            3,
+            220,
+            208
+          ],
+          "sourceAnchor": [
+            116.0,
+            208.0
+          ],
+          "exportOffset": [
+            37,
+            54
+          ],
+          "sha256": "8d644c947a67b8b74c52c221eac8e885c7b0a8f927de88a28abc9910d7977ff5"
+        },
+        {
+          "name": "up_attack_0",
+          "sourceRect": [
+            1330,
+            663,
+            1538,
+            887
+          ],
+          "opaqueBounds": [
+            21,
+            11,
+            186,
+            206
+          ],
+          "sourceAnchor": [
+            116.0,
+            206.0
+          ],
+          "exportOffset": [
+            37,
+            54
+          ],
+          "sha256": "dfe8a469f9c30a79226898e80f134b29a431499e2567b88a590b599701946071"
+        },
+        {
+          "name": "up_attack_1",
+          "sourceRect": [
+            1538,
+            663,
+            1774,
+            887
+          ],
+          "opaqueBounds": [
+            2,
+            5,
+            208,
+            206
+          ],
+          "sourceAnchor": [
+            131.0,
+            191.0
+          ],
+          "exportOffset": [
+            33,
+            58
+          ],
+          "sha256": "b364de9608fab084f523dc96eea4369b660d547e00e42d616349850a89301282"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "vfx_meteor",
+      "nameVi": "Vạn Lý Nham Hỏa",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 384,
+      "exportScale": 0.65,
+      "groups": [
+        "cast",
+        "impact"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 90,
+      "description": "EXACT2048x1024,4columns2rows,8chronological cels. ONE meteor strike sequence, same ground anchor65% cellheight. Cels1 amber broken ground warning ellipse with X,2 ominous hot circular ground shadow grows,3 huge burning irregular basalt METEOR ENTERS FROM ABOVE with long diagonal flame trail while ground marker remains visible,4 meteor nearer ground,5 explosive broad AOE impact blast throws stone fragments,6 huge molten crater shock ring spreads wide,7 embers smoke dissipate low,8 cooling black crater. Different from volcano: stone falls from SKY, never grows from floor. The full burning rock and trail must fit generous cell padding. No characters, background or painted rectangles. Original ground sprite VFX with readable pale ash blast rim.",
+      "file": "vfx_meteor.png",
+      "withheldFrames": [
+        "cast_2",
+        "cast_3"
+      ],
+      "note": "Original falling frames have clipped trails; preview uses vfx_meteor_safe instead.",
+      "completionObservedAt": "2026-11-01T02:09:07.771Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/vfx_meteor.png",
+      "sourceSha256": "271f5fd9e3870828513e7d8378b2f88a67dfea6dc7465ecdc8d146b5bd4715f9",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_meteor.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_meteor.json",
+      "sheetSha256": "312d59452d8a8e226b00431bde1acbfbc3c5a5b03dec611b898b072b48eb2cb4",
+      "atlasSha256": "bb52f519670a8a910df09d1c9a496b26bc16361ee115f89ade92f04a07aebc1c",
+      "scale": 0.65,
+      "origin": [
+        0.5,
+        0.65
+      ],
+      "frames": [
+        {
+          "name": "cast_0",
+          "sourceRect": [
+            0,
+            0,
+            443,
+            443
+          ],
+          "opaqueBounds": [
+            54,
+            317,
+            399,
+            420
+          ],
+          "sourceAnchor": [
+            221.5,
+            287.95
+          ],
+          "exportOffset": [
+            48,
+            62
+          ],
+          "sha256": "5af6ff6350375c05489a72d1cd34faf4c80b0a90264e42008017d5a82c4aab83"
+        },
+        {
+          "name": "cast_1",
+          "sourceRect": [
+            443,
+            0,
+            887,
+            443
+          ],
+          "opaqueBounds": [
+            69,
+            299,
+            400,
+            420
+          ],
+          "sourceAnchor": [
+            222.0,
+            287.95
+          ],
+          "exportOffset": [
+            48,
+            62
+          ],
+          "sha256": "4ac18e87c7ffe000f3a9695e29c49af0d5b89f954a8c78474558e55836599044"
+        },
+        {
+          "name": "cast_2",
+          "sourceRect": [
+            887,
+            0,
+            1330,
+            443
+          ],
+          "opaqueBounds": [
+            11,
+            0,
+            355,
+            418
+          ],
+          "sourceAnchor": [
+            221.5,
+            287.95
+          ],
+          "exportOffset": [
+            48,
+            62
+          ],
+          "sha256": "4e97b8563b99b5af364b33fc00644466a9b183176f1f11ad9e7cda8b128f0d94"
+        },
+        {
+          "name": "cast_3",
+          "sourceRect": [
+            1330,
+            0,
+            1774,
+            443
+          ],
+          "opaqueBounds": [
+            55,
+            66,
+            387,
+            421
+          ],
+          "sourceAnchor": [
+            222.0,
+            287.95
+          ],
+          "exportOffset": [
+            48,
+            62
+          ],
+          "sha256": "a59c1d8bb87f3a198b85e77559ecb4783ecb9acba6fd29c477cd28e7b045fe52"
+        },
+        {
+          "name": "impact_0",
+          "sourceRect": [
+            0,
+            443,
+            442,
+            887
+          ],
+          "opaqueBounds": [
+            17,
+            69,
+            431,
+            402
+          ],
+          "sourceAnchor": [
+            221.0,
+            288.6
+          ],
+          "exportOffset": [
+            48,
+            62
+          ],
+          "sha256": "1257d34bfb45fd765a8324966222144846f757e7cf2cb4a2157c5935a9d88c11"
+        },
+        {
+          "name": "impact_1",
+          "sourceRect": [
+            442,
+            443,
+            887,
+            887
+          ],
+          "opaqueBounds": [
+            2,
+            128,
+            444,
+            398
+          ],
+          "sourceAnchor": [
+            222.5,
+            288.6
+          ],
+          "exportOffset": [
+            47,
+            62
+          ],
+          "sha256": "3715af03f13efb2b69031d4a7cbfeab81fa9bd457b2835402f7421926fef73c5"
+        },
+        {
+          "name": "impact_2",
+          "sourceRect": [
+            887,
+            443,
+            1330,
+            887
+          ],
+          "opaqueBounds": [
+            28,
+            175,
+            435,
+            399
+          ],
+          "sourceAnchor": [
+            221.5,
+            288.6
+          ],
+          "exportOffset": [
+            48,
+            62
+          ],
+          "sha256": "180b79795be4e0f4bf5069247655cb5a82d18ce58fd69d36d170cfb069794c6d"
+        },
+        {
+          "name": "impact_3",
+          "sourceRect": [
+            1330,
+            443,
+            1774,
+            887
+          ],
+          "opaqueBounds": [
+            43,
+            227,
+            424,
+            397
+          ],
+          "sourceAnchor": [
+            222.0,
+            288.6
+          ],
+          "exportOffset": [
+            48,
+            62
+          ],
+          "sha256": "74dfdeab8a1f39f5ca27c6d43e395cfe334e50ba2ecc34bf5f43a8dc787a5640"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "cannon",
+      "nameVi": "Hỏa Pháo Thiên La — hỏa pháo",
+      "rows": 4,
+      "cols": 4,
+      "kind": "character",
+      "bodyHeight": 58,
+      "canvas": 160,
+      "groups": [
+        "down",
+        "right",
+        "left",
+        "up"
+      ],
+      "columns": [
+        "idle_0",
+        "charge_0",
+        "fire_0",
+        "recover_0"
+      ],
+      "durationMs": 100,
+      "description": "EXACT1536x1536,4columns4rows,16cels. Original summoned heavy medieval wuxia Mongol FIRE CANNON on stout wooden two-wheel carriage, dark iron barrel with bronze bands and engraved orange flame emblem, red pennant. Not modern artillery, no creature or crew. Elevated top-down3/4 camera fixed. Rows cannon aims DOWN/towardsviewer, LEFT,RIGHT,UP/awayviewer. Columns1 idle wheels planted,2 glowing ember charge at muzzle,3 sharp muzzle flash firing with barrel recoil and carriage stationary,4 thin smoke recovering barrel. Each row keeps same cardinal aim, UP shows rear breech and barrel away, DOWN shows circular muzzle and barrel towardsviewer. No grids/text/floor/background; true clean alpha0. Cannon silhouette coherent across all cels.",
+      "file": "cannon.png",
+      "note": "Source rows visually aim down, RIGHT, LEFT, up; metadata corrects requested order without repainting.",
+      "wholeComponents": false,
+      "fixedScale": 0.205,
+      "knownIssues": "Muzzle flashes overlap adjacent source rows. Superseded in review by clean hardware + separate projectile components.",
+      "completionObservedAt": "2026-11-01T02:09:07.774Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/cannon.png",
+      "sourceSha256": "d23abdda6dbcebbb582bf91daeae990db1f33c65d819cd268da5eadcf7ac76d6",
+      "sourceDimensions": [
+        1254,
+        1254
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/cannon.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/cannon.json",
+      "sheetSha256": "13a3c90a32b3b5ef36965a63a35802bcaddda2100ece06090455b1acbc354f2b",
+      "atlasSha256": "ee9f102505e096854fb8724faa1e2f8ce4b8d5d4c7154c1d1a2a488eba89cd65",
+      "scale": 0.205,
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "frames": [
+        {
+          "name": "down_idle_0",
+          "sourceRect": [
+            0,
+            0,
+            313,
+            359
+          ],
+          "opaqueBounds": [
+            56,
+            26,
+            280,
+            322
+          ],
+          "sourceAnchor": [
+            167.5,
+            322.0
+          ],
+          "exportOffset": [
+            46,
+            62
+          ],
+          "sha256": "7427c7e0d57d63708229854379b75c80b9a770e2caf76120340bf8dc3fedaaf2"
+        },
+        {
+          "name": "down_charge_0",
+          "sourceRect": [
+            313,
+            0,
+            627,
+            359
+          ],
+          "opaqueBounds": [
+            49,
+            26,
+            275,
+            359
+          ],
+          "sourceAnchor": [
+            149.0,
+            322.0
+          ],
+          "exportOffset": [
+            49,
+            62
+          ],
+          "sha256": "fe565cc9b5f1efe4d7145b2742e8ff199af9856b867b6dac011162790b492f5c"
+        },
+        {
+          "name": "down_fire_0",
+          "sourceRect": [
+            627,
+            0,
+            940,
+            359
+          ],
+          "opaqueBounds": [
+            36,
+            26,
+            262,
+            359
+          ],
+          "sourceAnchor": [
+            115.5,
+            359.0
+          ],
+          "exportOffset": [
+            56,
+            54
+          ],
+          "sha256": "06c0e8060310758dc5b6065b43ee206327acd3a08efe2970bfd1f7b04a22ad40"
+        },
+        {
+          "name": "down_recover_0",
+          "sourceRect": [
+            940,
+            0,
+            1254,
+            359
+          ],
+          "opaqueBounds": [
+            40,
+            27,
+            264,
+            359
+          ],
+          "sourceAnchor": [
+            121.5,
+            359.0
+          ],
+          "exportOffset": [
+            55,
+            54
+          ],
+          "sha256": "6e0494a3de2623658b181bf9a27662e78459fbdcdc9c59d39176ec59675b5662"
+        },
+        {
+          "name": "right_idle_0",
+          "sourceRect": [
+            0,
+            359,
+            313,
+            627
+          ],
+          "opaqueBounds": [
+            12,
+            2,
+            297,
+            253
+          ],
+          "sourceAnchor": [
+            159.0,
+            253.0
+          ],
+          "exportOffset": [
+            47,
+            76
+          ],
+          "sha256": "b8bd34d57d1855de96259b05117131f85563ca668f480c807c7053417c1c2dc4"
+        },
+        {
+          "name": "right_charge_0",
+          "sourceRect": [
+            313,
+            359,
+            625,
+            627
+          ],
+          "opaqueBounds": [
+            10,
+            0,
+            294,
+            253
+          ],
+          "sourceAnchor": [
+            159.0,
+            253.0
+          ],
+          "exportOffset": [
+            47,
+            76
+          ],
+          "sha256": "69022d2afaabb7342be29416c0399b3dd2e4343c2af809141ae8bd6b2e2dd9f9"
+        },
+        {
+          "name": "right_fire_0",
+          "sourceRect": [
+            625,
+            359,
+            944,
+            627
+          ],
+          "opaqueBounds": [
+            2,
+            0,
+            319,
+            253
+          ],
+          "sourceAnchor": [
+            134.5,
+            253.0
+          ],
+          "exportOffset": [
+            52,
+            76
+          ],
+          "sha256": "b20cd3715acd74692ba09e8960775ec21a4143390b7f895d778c7bba3ba8dbab"
+        },
+        {
+          "name": "right_recover_0",
+          "sourceRect": [
+            944,
+            359,
+            1254,
+            627
+          ],
+          "opaqueBounds": [
+            0,
+            0,
+            296,
+            254
+          ],
+          "sourceAnchor": [
+            135.5,
+            254.0
+          ],
+          "exportOffset": [
+            52,
+            76
+          ],
+          "sha256": "acd90ff08d8fbf81a008bd2589404838d614acf9b052f1d0cbda98655521149d"
+        },
+        {
+          "name": "left_idle_0",
+          "sourceRect": [
+            0,
+            627,
+            313,
+            888
+          ],
+          "opaqueBounds": [
+            21,
+            12,
+            304,
+            260
+          ],
+          "sourceAnchor": [
+            162.5,
+            260.0
+          ],
+          "exportOffset": [
+            47,
+            75
+          ],
+          "sha256": "29137709e9aced6a01ac55f0c9be9c7f142d47b78df985c9feb75ab6387e069b"
+        },
+        {
+          "name": "left_charge_0",
+          "sourceRect": [
+            313,
+            627,
+            615,
+            888
+          ],
+          "opaqueBounds": [
+            12,
+            14,
+            299,
+            260
+          ],
+          "sourceAnchor": [
+            156.0,
+            260.0
+          ],
+          "exportOffset": [
+            48,
+            75
+          ],
+          "sha256": "71b5e921ffe5fc73a701b0f0edb0e93f9263e56d6c37d8faa924688adcdc349c"
+        },
+        {
+          "name": "left_fire_0",
+          "sourceRect": [
+            615,
+            627,
+            940,
+            888
+          ],
+          "opaqueBounds": [
+            2,
+            15,
+            314,
+            261
+          ],
+          "sourceAnchor": [
+            178.0,
+            261.0
+          ],
+          "exportOffset": [
+            44,
+            74
+          ],
+          "sha256": "cd24ef6e17839c846b387a1c2935d9d07dc42f9e7470d09a66c92cb28979fbf8"
+        },
+        {
+          "name": "left_recover_0",
+          "sourceRect": [
+            940,
+            627,
+            1254,
+            888
+          ],
+          "opaqueBounds": [
+            5,
+            13,
+            300,
+            260
+          ],
+          "sourceAnchor": [
+            166.5,
+            260.0
+          ],
+          "exportOffset": [
+            46,
+            75
+          ],
+          "sha256": "f5918b31f91ff9f6b1e02805d9954d71aa41d631649317bf32a3671f81998124"
+        },
+        {
+          "name": "up_idle_0",
+          "sourceRect": [
+            0,
+            888,
+            313,
+            1254
+          ],
+          "opaqueBounds": [
+            36,
+            44,
+            277,
+            336
+          ],
+          "sourceAnchor": [
+            167.5,
+            336.0
+          ],
+          "exportOffset": [
+            46,
+            59
+          ],
+          "sha256": "6f09080649d3872b7bc765530301a8f42c93ff482b1c085ef9041ae1bd2f8ac5"
+        },
+        {
+          "name": "up_charge_0",
+          "sourceRect": [
+            313,
+            888,
+            627,
+            1254
+          ],
+          "opaqueBounds": [
+            27,
+            25,
+            274,
+            334
+          ],
+          "sourceAnchor": [
+            164.0,
+            334.0
+          ],
+          "exportOffset": [
+            46,
+            60
+          ],
+          "sha256": "0d78e514b2ceafe16cebf3daef8dec946ce74ad6390310c7e1c764d34c196650"
+        },
+        {
+          "name": "up_fire_0",
+          "sourceRect": [
+            627,
+            888,
+            940,
+            1254
+          ],
+          "opaqueBounds": [
+            17,
+            0,
+            263,
+            335
+          ],
+          "sourceAnchor": [
+            154.5,
+            335.0
+          ],
+          "exportOffset": [
+            48,
+            59
+          ],
+          "sha256": "8391f8b730987f83df44ee57338e223c6cee8a848f0427b5bfc338e754353a23"
+        },
+        {
+          "name": "up_recover_0",
+          "sourceRect": [
+            940,
+            888,
+            1254,
+            1254
+          ],
+          "opaqueBounds": [
+            27,
+            6,
+            268,
+            334
+          ],
+          "sourceAnchor": [
+            158.5,
+            334.0
+          ],
+          "exportOffset": [
+            48,
+            60
+          ],
+          "sha256": "0caf0d7b6799a4a2cfddc7dccf799db4d17c76c89f18e0a73b9826b0b1bc3951"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "minion_archer",
+      "nameVi": "Mông Cổ Cung Thủ",
+      "rows": 4,
+      "cols": 8,
+      "kind": "character",
+      "bodyHeight": 46,
+      "canvas": 128,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "idle_0",
+        "idle_1",
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "attack_0",
+        "attack_1"
+      ],
+      "durationMs": 100,
+      "description": "EXACT2048x1024,8columns4rows,32cels. ONLY small MONGOLIAN ARCHER from reference: chibi human black/red light lamellar armor, red scarf and robe, cream fur-trimmed pointed black helmet with red plume, quiver on back, composite curved bow LEFT hand, draws string RIGHT hand. No shield, sword, spear, horse or boss cape. Rows DOWN/front,LEFT,RIGHT,UP/back. Columns idleA,idleB,walk left contact,walk passingA,walk right contact,walk passingB,attack bow fully DRAWN with arrow nocked,attack arrow RELEASE pose string forward. Rows keep cardinal aim, down foreshortens bow/arrow towardviewer and up faces away. Same body/weapon size and handedness, feet80%cellheight. No parchment or concept board background, ALL background alpha0.",
+      "file": "minion_archer.png",
+      "knownIssues": "Down/up attack poses turn sideways; pending cardinal correction, idle/walk directions retained.",
+      "completionObservedAt": "2026-11-01T02:09:07.777Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/concepts/summons/mongolian-soldiers/combined_concept.png",
+          "sha256": "816d4555948caa9c82b2e258a8a8ecac1ac8b7252c32873403a75235a3bbd65c"
+        }
+      ],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/minion_archer.png",
+      "sourceSha256": "a9370163f0150f83887157a25495a016baf3a133651e73e59200ab7b74293456",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/minion_archer.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/minion_archer.json",
+      "sheetSha256": "9b0c46c3947df16ba75f2bec186420c68ac3170eaeef05029e7931b116d16da1",
+      "atlasSha256": "1cbb5d34182b966c0114d0b986d41ecb9899af0db85d34a60c65f7247b72fbd1",
+      "scale": 0.22660098522167488,
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "frames": [
+        {
+          "name": "down_idle_0",
+          "sourceRect": [
+            0,
+            0,
+            222,
+            222
+          ],
+          "opaqueBounds": [
+            65,
+            22,
+            203,
+            221
+          ],
+          "sourceAnchor": [
+            151.5,
+            221.0
+          ],
+          "exportOffset": [
+            30,
+            52
+          ],
+          "sha256": "886fad1c5a06950eb49ced95c2eeea503887254ee6843119726bab525b69f82a"
+        },
+        {
+          "name": "down_idle_1",
+          "sourceRect": [
+            222,
+            0,
+            443,
+            222
+          ],
+          "opaqueBounds": [
+            52,
+            21,
+            201,
+            220
+          ],
+          "sourceAnchor": [
+            145.5,
+            220.0
+          ],
+          "exportOffset": [
+            31,
+            53
+          ],
+          "sha256": "ba2bf513d488ced8f8f298640072e2f729ab1888276e5363e5d1e8560e533ffe"
+        },
+        {
+          "name": "down_walk_0",
+          "sourceRect": [
+            443,
+            0,
+            665,
+            222
+          ],
+          "opaqueBounds": [
+            61,
+            22,
+            183,
+            220
+          ],
+          "sourceAnchor": [
+            117.5,
+            220.0
+          ],
+          "exportOffset": [
+            37,
+            53
+          ],
+          "sha256": "b88fa3866c63118a38fedb5ef90bb3cd02dbea960cbad78aa31e7654a686f280"
+        },
+        {
+          "name": "down_walk_1",
+          "sourceRect": [
+            665,
+            0,
+            887,
+            222
+          ],
+          "opaqueBounds": [
+            35,
+            17,
+            175,
+            220
+          ],
+          "sourceAnchor": [
+            101.5,
+            220.0
+          ],
+          "exportOffset": [
+            41,
+            53
+          ],
+          "sha256": "270a963f0f8ff0733382ab38b0fdd27c51cc1ab1200fe689308664ca505b978f"
+        },
+        {
+          "name": "down_walk_2",
+          "sourceRect": [
+            887,
+            0,
+            1101,
+            222
+          ],
+          "opaqueBounds": [
+            15,
+            18,
+            154,
+            220
+          ],
+          "sourceAnchor": [
+            71.0,
+            220.0
+          ],
+          "exportOffset": [
+            48,
+            53
+          ],
+          "sha256": "36fdb8956eda5aa27d3ed8c958926ac672df63a9b7f2df123fa097828a5dad76"
+        },
+        {
+          "name": "down_walk_3",
+          "sourceRect": [
+            1101,
+            0,
+            1312,
+            222
+          ],
+          "opaqueBounds": [
+            2,
+            20,
+            141,
+            220
+          ],
+          "sourceAnchor": [
+            53.5,
+            220.0
+          ],
+          "exportOffset": [
+            52,
+            53
+          ],
+          "sha256": "2bbcfd7e4657a6311b7da358364013093e89f429492166ed8b47e9ea5d8976c5"
+        },
+        {
+          "name": "down_attack_0",
+          "sourceRect": [
+            1312,
+            0,
+            1537,
+            222
+          ],
+          "opaqueBounds": [
+            2,
+            20,
+            199,
+            219
+          ],
+          "sourceAnchor": [
+            72.5,
+            219.0
+          ],
+          "exportOffset": [
+            48,
+            53
+          ],
+          "sha256": "bcd61166c206e658b6647192c8ba40763f18de0f6db53db6d94cc3227224334d"
+        },
+        {
+          "name": "down_attack_1",
+          "sourceRect": [
+            1537,
+            0,
+            1774,
+            222
+          ],
+          "opaqueBounds": [
+            2,
+            21,
+            193,
+            220
+          ],
+          "sourceAnchor": [
+            76.5,
+            220.0
+          ],
+          "exportOffset": [
+            47,
+            53
+          ],
+          "sha256": "c7f1376a2ed0e0b366516d1ffe928023c93799bc1ce46418c2f238dd65ddd67c"
+        },
+        {
+          "name": "left_idle_0",
+          "sourceRect": [
+            0,
+            222,
+            222,
+            443
+          ],
+          "opaqueBounds": [
+            48,
+            15,
+            196,
+            216
+          ],
+          "sourceAnchor": [
+            131.0,
+            216.0
+          ],
+          "exportOffset": [
+            34,
+            53
+          ],
+          "sha256": "aa51eec0a62b944db543c37143fd98fb7e61f2a6d2753a6fed5cb9eb723262e3"
+        },
+        {
+          "name": "left_idle_1",
+          "sourceRect": [
+            222,
+            222,
+            443,
+            443
+          ],
+          "opaqueBounds": [
+            36,
+            15,
+            185,
+            216
+          ],
+          "sourceAnchor": [
+            122.5,
+            216.0
+          ],
+          "exportOffset": [
+            36,
+            53
+          ],
+          "sha256": "e245a9777a05e7b284e533d1846bebb6d46c31001ef182d503f53fd8273eb45b"
+        },
+        {
+          "name": "left_walk_0",
+          "sourceRect": [
+            443,
+            222,
+            665,
+            443
+          ],
+          "opaqueBounds": [
+            31,
+            15,
+            181,
+            216
+          ],
+          "sourceAnchor": [
+            120.5,
+            209.0
+          ],
+          "exportOffset": [
+            37,
+            55
+          ],
+          "sha256": "1f11070f0d7657d23731ed5486d81b270886fd444ba02a9b711322dbe8d01599"
+        },
+        {
+          "name": "left_walk_1",
+          "sourceRect": [
+            665,
+            222,
+            887,
+            443
+          ],
+          "opaqueBounds": [
+            12,
+            17,
+            164,
+            216
+          ],
+          "sourceAnchor": [
+            92.0,
+            216.0
+          ],
+          "exportOffset": [
+            43,
+            53
+          ],
+          "sha256": "1a3b7417a46e9082b00ca0e2c87fffc268a4d9e9f1d0abbe0c9bf9e5ccb444bf"
+        },
+        {
+          "name": "left_walk_2",
+          "sourceRect": [
+            887,
+            222,
+            1082,
+            443
+          ],
+          "opaqueBounds": [
+            2,
+            16,
+            147,
+            216
+          ],
+          "sourceAnchor": [
+            85.0,
+            210.0
+          ],
+          "exportOffset": [
+            45,
+            55
+          ],
+          "sha256": "0a3ec36d3313cfe4e225817e87567e77dae0b8c833f4bb3343ab90df08cacdcf"
+        },
+        {
+          "name": "left_walk_3",
+          "sourceRect": [
+            1082,
+            222,
+            1269,
+            443
+          ],
+          "opaqueBounds": [
+            2,
+            15,
+            156,
+            216
+          ],
+          "sourceAnchor": [
+            95.0,
+            210.0
+          ],
+          "exportOffset": [
+            42,
+            55
+          ],
+          "sha256": "1d65f8c1f9d895752f548a54508633a531ee1c114e700c7d505897be00587392"
+        },
+        {
+          "name": "left_attack_0",
+          "sourceRect": [
+            1269,
+            222,
+            1482,
+            443
+          ],
+          "opaqueBounds": [
+            2,
+            19,
+            190,
+            212
+          ],
+          "sourceAnchor": [
+            123.5,
+            211.0
+          ],
+          "exportOffset": [
+            36,
+            55
+          ],
+          "sha256": "c37c1ed19dda13e17348079f23dbd24f9cedf775ac2f40b9ca0ab96d467fefeb"
+        },
+        {
+          "name": "left_attack_1",
+          "sourceRect": [
+            1482,
+            222,
+            1774,
+            443
+          ],
+          "opaqueBounds": [
+            2,
+            22,
+            221,
+            212
+          ],
+          "sourceAnchor": [
+            140.5,
+            211.0
+          ],
+          "exportOffset": [
+            32,
+            55
+          ],
+          "sha256": "f95b9613947934d6e5a380abb052eecfa47d202e9b93e32a2c88fe6ccc309218"
+        },
+        {
+          "name": "right_idle_0",
+          "sourceRect": [
+            0,
+            443,
+            222,
+            665
+          ],
+          "opaqueBounds": [
+            56,
+            11,
+            210,
+            212
+          ],
+          "sourceAnchor": [
+            103.5,
+            212.0
+          ],
+          "exportOffset": [
+            41,
+            54
+          ],
+          "sha256": "7588462a26ea4b0faad2c91bdcd72a2802d78d7c502f437c07f06445220f81af"
+        },
+        {
+          "name": "right_idle_1",
+          "sourceRect": [
+            222,
+            443,
+            443,
+            665
+          ],
+          "opaqueBounds": [
+            48,
+            11,
+            200,
+            210
+          ],
+          "sourceAnchor": [
+            84.0,
+            210.0
+          ],
+          "exportOffset": [
+            45,
+            55
+          ],
+          "sha256": "58b28b838fa20aee2cdec5f45f84d8d9459e4b0a9059d2defd892a74b6c5a2b8"
+        },
+        {
+          "name": "right_walk_0",
+          "sourceRect": [
+            443,
+            443,
+            665,
+            665
+          ],
+          "opaqueBounds": [
+            41,
+            11,
+            193,
+            211
+          ],
+          "sourceAnchor": [
+            97.5,
+            202.0
+          ],
+          "exportOffset": [
+            42,
+            57
+          ],
+          "sha256": "87972a121b65850d6460c6e11020906640e3c6f04301db0699a1077703bc086c"
+        },
+        {
+          "name": "right_walk_1",
+          "sourceRect": [
+            665,
+            443,
+            887,
+            665
+          ],
+          "opaqueBounds": [
+            31,
+            11,
+            177,
+            212
+          ],
+          "sourceAnchor": [
+            93.0,
+            212.0
+          ],
+          "exportOffset": [
+            43,
+            54
+          ],
+          "sha256": "5d128d2e970aff8c67c22b413f3227816b31e68a46566bc1092aec76592382dc"
+        },
+        {
+          "name": "right_walk_2",
+          "sourceRect": [
+            887,
+            443,
+            1102,
+            665
+          ],
+          "opaqueBounds": [
+            10,
+            12,
+            160,
+            210
+          ],
+          "sourceAnchor": [
+            72.5,
+            210.0
+          ],
+          "exportOffset": [
+            48,
+            55
+          ],
+          "sha256": "225ee21a790f09813071c38084579b0410c277305a68000478f5119f5d717177"
+        },
+        {
+          "name": "right_walk_3",
+          "sourceRect": [
+            1102,
+            443,
+            1311,
+            665
+          ],
+          "opaqueBounds": [
+            2,
+            12,
+            156,
+            211
+          ],
+          "sourceAnchor": [
+            35.5,
+            211.0
+          ],
+          "exportOffset": [
+            56,
+            55
+          ],
+          "sha256": "719ed5f9e37dc1f415de8bd2d88d3f2f2b9693da448983b48786a60f472a835d"
+        },
+        {
+          "name": "right_attack_0",
+          "sourceRect": [
+            1311,
+            443,
+            1536,
+            665
+          ],
+          "opaqueBounds": [
+            2,
+            13,
+            198,
+            210
+          ],
+          "sourceAnchor": [
+            76.0,
+            208.0
+          ],
+          "exportOffset": [
+            47,
+            55
+          ],
+          "sha256": "82bb6a393e9961a1d2daa778cbbae4ccba55cc19ec798d0238677135b0b1f60b"
+        },
+        {
+          "name": "right_attack_1",
+          "sourceRect": [
+            1536,
+            443,
+            1774,
+            665
+          ],
+          "opaqueBounds": [
+            2,
+            14,
+            222,
+            208
+          ],
+          "sourceAnchor": [
+            74.0,
+            205.0
+          ],
+          "exportOffset": [
+            47,
+            56
+          ],
+          "sha256": "8f0efd98cc83fed14cd2342a4a4de6e5b4894ef4de1d8c4616084f2d5785bdb5"
+        },
+        {
+          "name": "up_idle_0",
+          "sourceRect": [
+            0,
+            665,
+            222,
+            887
+          ],
+          "opaqueBounds": [
+            60,
+            7,
+            193,
+            205
+          ],
+          "sourceAnchor": [
+            158.0,
+            205.0
+          ],
+          "exportOffset": [
+            28,
+            56
+          ],
+          "sha256": "1b900a9aec647959ba6199fcc0d3535d2aa51facd7c80a71c290f85ac3bb4a26"
+        },
+        {
+          "name": "up_idle_1",
+          "sourceRect": [
+            222,
+            665,
+            443,
+            887
+          ],
+          "opaqueBounds": [
+            53,
+            7,
+            187,
+            206
+          ],
+          "sourceAnchor": [
+            145.5,
+            206.0
+          ],
+          "exportOffset": [
+            31,
+            56
+          ],
+          "sha256": "abfc21b4efa701e5f9a86c46b9b8f88da00b853160d9291670156788c5b9bb37"
+        },
+        {
+          "name": "up_walk_0",
+          "sourceRect": [
+            443,
+            665,
+            665,
+            887
+          ],
+          "opaqueBounds": [
+            45,
+            4,
+            185,
+            206
+          ],
+          "sourceAnchor": [
+            118.5,
+            206.0
+          ],
+          "exportOffset": [
+            37,
+            56
+          ],
+          "sha256": "91c82b93bca9c989ed056b73fde08938b8668171df852b790a426f7ea4f3dea7"
+        },
+        {
+          "name": "up_walk_1",
+          "sourceRect": [
+            665,
+            665,
+            887,
+            887
+          ],
+          "opaqueBounds": [
+            28,
+            4,
+            162,
+            206
+          ],
+          "sourceAnchor": [
+            78.5,
+            206.0
+          ],
+          "exportOffset": [
+            46,
+            56
+          ],
+          "sha256": "a0ef28f690dca49e4a2b36f2177f7b39be48ace125d2a3cfabf1bf92957fdf7c"
+        },
+        {
+          "name": "up_walk_2",
+          "sourceRect": [
+            887,
+            665,
+            1100,
+            887
+          ],
+          "opaqueBounds": [
+            7,
+            7,
+            146,
+            206
+          ],
+          "sourceAnchor": [
+            65.5,
+            206.0
+          ],
+          "exportOffset": [
+            49,
+            56
+          ],
+          "sha256": "d15fb82b282beb89de8e40d294577c810b25c26ff1df37f5f0fd8eac7d3b7c5b"
+        },
+        {
+          "name": "up_walk_3",
+          "sourceRect": [
+            1100,
+            665,
+            1297,
+            887
+          ],
+          "opaqueBounds": [
+            2,
+            8,
+            144,
+            206
+          ],
+          "sourceAnchor": [
+            55.0,
+            206.0
+          ],
+          "exportOffset": [
+            52,
+            56
+          ],
+          "sha256": "5cc81fa6c5b5f18bc0a2c3be22cd0dc52f740dc940a89c58727b74116efb1a5b"
+        },
+        {
+          "name": "up_attack_0",
+          "sourceRect": [
+            1297,
+            665,
+            1545,
+            887
+          ],
+          "opaqueBounds": [
+            2,
+            3,
+            175,
+            206
+          ],
+          "sourceAnchor": [
+            121.5,
+            206.0
+          ],
+          "exportOffset": [
+            36,
+            56
+          ],
+          "sha256": "8ef62dc276baee6c37b0e151bd15780182da285299723c5d3f1a2a6767f7210a"
+        },
+        {
+          "name": "up_attack_1",
+          "sourceRect": [
+            1545,
+            665,
+            1774,
+            887
+          ],
+          "opaqueBounds": [
+            2,
+            4,
+            216,
+            206
+          ],
+          "sourceAnchor": [
+            104.5,
+            206.0
+          ],
+          "exportOffset": [
+            40,
+            56
+          ],
+          "sha256": "088735376d165af8aa96b95ca6f895afc5453f283c9dc2457fb739ac1a9e56cb"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "vfx_basics",
+      "nameVi": "Vệt đao thường",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 320,
+      "exportScale": 0.55,
+      "groups": [
+        "thrust",
+        "sweep"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 80,
+      "description": "EXACT2048x1024,4columns2rows,8isolated cels. Row0 four chronological THRUST VFX cels always pointing RIGHT: narrow amber linear warning outline, long bright sharp straight orange sword-point streak, longest streak with taper and tiny sparks, few fading short sparks. Narrow straight ray, no homing, no curved slash. Row1 four chronological SWEEP VFX cels on ground facing DOWN: thin amber dashed semicircle boundary180degree FRONT HALF ONLY, broad molten orange half-moon slash in FRONT lowerhalf of center footpoint, advancing orange blade crescent in same180degree FRONT semicircle, sparse fading crescent sparks. ALL sweep artwork below imaginary center footpoint, upper REAR HALF entirely transparent. NOT a360ring or sphere. No character or weapon model, no rectangular background. Each effect fits its own cell with20%clear padding.",
+      "file": "vfx_basics.png",
+      "completionObservedAt": "2026-11-01T02:09:07.778Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/vfx_basics.png",
+      "sourceSha256": "3bd710bec346a426b250c45cde40ae9b36046b291a2a9b2756feab33c0a327d6",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_basics.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_basics.json",
+      "sheetSha256": "12b3d0a7464154635033bc0fe2a1d2c46653d222f8c096776c8c29664e0d0bf4",
+      "atlasSha256": "43f1329180eb362f661c9663fb1abf388ae074057f922cc29e8d8f74384fb2f2",
+      "scale": 0.55,
+      "origin": [
+        0.5,
+        0.65
+      ],
+      "frames": [
+        {
+          "name": "thrust_0",
+          "sourceRect": [
+            0,
+            0,
+            443,
+            443
+          ],
+          "opaqueBounds": [
+            53,
+            202,
+            391,
+            244
+          ],
+          "sourceAnchor": [
+            221.5,
+            287.95
+          ],
+          "exportOffset": [
+            38,
+            50
+          ],
+          "sha256": "4b4b560f4bbf567df8b24617511ea1aff107d1a1f08cb35148b0a210680fadbb"
+        },
+        {
+          "name": "thrust_1",
+          "sourceRect": [
+            443,
+            0,
+            887,
+            443
+          ],
+          "opaqueBounds": [
+            49,
+            182,
+            401,
+            264
+          ],
+          "sourceAnchor": [
+            222.0,
+            287.95
+          ],
+          "exportOffset": [
+            38,
+            50
+          ],
+          "sha256": "ae719d78da76cda532ac33c7f853bcdd5b453a02df19c2b9b844a2a225337a01"
+        },
+        {
+          "name": "thrust_2",
+          "sourceRect": [
+            887,
+            0,
+            1330,
+            443
+          ],
+          "opaqueBounds": [
+            24,
+            167,
+            435,
+            298
+          ],
+          "sourceAnchor": [
+            221.5,
+            287.95
+          ],
+          "exportOffset": [
+            38,
+            50
+          ],
+          "sha256": "6c89167815d0c1eee34a80f48f0263f12c1dcfcd6beb3d33a81c63925866062b"
+        },
+        {
+          "name": "thrust_3",
+          "sourceRect": [
+            1330,
+            0,
+            1774,
+            443
+          ],
+          "opaqueBounds": [
+            60,
+            191,
+            395,
+            267
+          ],
+          "sourceAnchor": [
+            222.0,
+            287.95
+          ],
+          "exportOffset": [
+            38,
+            50
+          ],
+          "sha256": "65ccb4b90952f2b44a22b857e7db97685e0fd4170cbb86212ef2cd1de07cbc63"
+        },
+        {
+          "name": "sweep_0",
+          "sourceRect": [
+            0,
+            443,
+            443,
+            887
+          ],
+          "opaqueBounds": [
+            43,
+            160,
+            402,
+            314
+          ],
+          "sourceAnchor": [
+            221.5,
+            288.6
+          ],
+          "exportOffset": [
+            38,
+            49
+          ],
+          "sha256": "e8aff88947adb981f7e1ace7a4065fd3d52e1a36a29bec72fd1332891e05a477"
+        },
+        {
+          "name": "sweep_1",
+          "sourceRect": [
+            443,
+            443,
+            887,
+            887
+          ],
+          "opaqueBounds": [
+            30,
+            125,
+            418,
+            316
+          ],
+          "sourceAnchor": [
+            222.0,
+            288.6
+          ],
+          "exportOffset": [
+            38,
+            49
+          ],
+          "sha256": "03084676eb1eb691631eb129db61062f930005f2dad14fdaee06dde35b3c9382"
+        },
+        {
+          "name": "sweep_2",
+          "sourceRect": [
+            887,
+            443,
+            1330,
+            887
+          ],
+          "opaqueBounds": [
+            10,
+            94,
+            434,
+            317
+          ],
+          "sourceAnchor": [
+            221.5,
+            288.6
+          ],
+          "exportOffset": [
+            38,
+            49
+          ],
+          "sha256": "59c86df909e62ddcec4e95d4741c3b2c52e323182aeedf83410e62063b4c1f45"
+        },
+        {
+          "name": "sweep_3",
+          "sourceRect": [
+            1330,
+            443,
+            1774,
+            887
+          ],
+          "opaqueBounds": [
+            28,
+            94,
+            416,
+            303
+          ],
+          "sourceAnchor": [
+            222.0,
+            288.6
+          ],
+          "exportOffset": [
+            38,
+            49
+          ],
+          "sha256": "1f85a9219f1820dc908ff56cd88346185d119f7eb6c7a6a9e1bdd5b0fdec63b5"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "vfx_arrows",
+      "nameVi": "Hỏa Tiễn Tề Phát — tên lửa",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 160,
+      "exportScale": 0.3,
+      "groups": [
+        "right",
+        "down"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 80,
+      "description": "EXACT1536x768,4columns2rows,8isolated cels. Small Mongolian long straight arrow with visible wooden shaft, steel triangular tip, red fletching and restrained orange flame at tip. Top row points RIGHT horizontal; bottomrow points DOWN along screen ground axis (top-down arrow with visible shaft). Columns4flight flame variations only, keep arrow tip and shaft at exact same position/scale within row while flame flickers. NO launcher, archer, floor, shadow, cloud, huge fireball or trajectory arc. True transparent outside precise arrow and small sparks. Generous padding eachcell. Projectile will travel in preview via position, never track targets.",
+      "file": "vfx_arrows.png",
+      "completionObservedAt": "2026-11-01T02:09:07.778Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/vfx_arrows.png",
+      "sourceSha256": "41d3c0a419e41d97e0e0ae069c4a46b74869ac97980d624ab1e0dba8f8bf0560",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_arrows.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_arrows.json",
+      "sheetSha256": "e8ad75a4a0ab5b5344bd2b88cab500b2a6d044991a29766c91afdbc27350360d",
+      "atlasSha256": "438ecfcecb5c62e0e6c4a5d454bdcf3809f7d662e9ba8dc61c337c19f780cb4f",
+      "scale": 0.3,
+      "origin": [
+        0.5,
+        0.65
+      ],
+      "frames": [
+        {
+          "name": "right_0",
+          "sourceRect": [
+            0,
+            0,
+            443,
+            443
+          ],
+          "opaqueBounds": [
+            67,
+            151,
+            409,
+            249
+          ],
+          "sourceAnchor": [
+            221.5,
+            287.95
+          ],
+          "exportOffset": [
+            14,
+            18
+          ],
+          "sha256": "a42af5a83ebab032c1dd56e4655df0e903aecbe799f77865c088a16f141fe9f8"
+        },
+        {
+          "name": "right_1",
+          "sourceRect": [
+            443,
+            0,
+            887,
+            443
+          ],
+          "opaqueBounds": [
+            67,
+            135,
+            409,
+            249
+          ],
+          "sourceAnchor": [
+            222.0,
+            287.95
+          ],
+          "exportOffset": [
+            13,
+            18
+          ],
+          "sha256": "7322c4545ff6b2651d63228665e481d8eea49808247593f4a421a09995632464"
+        },
+        {
+          "name": "right_2",
+          "sourceRect": [
+            887,
+            0,
+            1330,
+            443
+          ],
+          "opaqueBounds": [
+            66,
+            135,
+            408,
+            249
+          ],
+          "sourceAnchor": [
+            221.5,
+            287.95
+          ],
+          "exportOffset": [
+            14,
+            18
+          ],
+          "sha256": "efbdf02496afd269247c3a958896037e2d69c0403f685c171511de9749bf13d1"
+        },
+        {
+          "name": "right_3",
+          "sourceRect": [
+            1330,
+            0,
+            1774,
+            443
+          ],
+          "opaqueBounds": [
+            66,
+            136,
+            406,
+            249
+          ],
+          "sourceAnchor": [
+            222.0,
+            287.95
+          ],
+          "exportOffset": [
+            13,
+            18
+          ],
+          "sha256": "8d2d9936e0e316cfeb750bf3b212ca991e4ed60d618420ae9dc2197bb073e5b9"
+        },
+        {
+          "name": "down_0",
+          "sourceRect": [
+            0,
+            443,
+            443,
+            887
+          ],
+          "opaqueBounds": [
+            165,
+            18,
+            275,
+            331
+          ],
+          "sourceAnchor": [
+            221.5,
+            288.6
+          ],
+          "exportOffset": [
+            14,
+            17
+          ],
+          "sha256": "fb9408012a19df54c81b883d4fc7a124da1b92a24eb00668e2e145c3625c15e1"
+        },
+        {
+          "name": "down_1",
+          "sourceRect": [
+            443,
+            443,
+            887,
+            887
+          ],
+          "opaqueBounds": [
+            166,
+            19,
+            280,
+            331
+          ],
+          "sourceAnchor": [
+            222.0,
+            288.6
+          ],
+          "exportOffset": [
+            13,
+            17
+          ],
+          "sha256": "524af4afc591871936c2b7f34b0fed993689c3b991390da1a9a6c27e230cb298"
+        },
+        {
+          "name": "down_2",
+          "sourceRect": [
+            887,
+            443,
+            1330,
+            887
+          ],
+          "opaqueBounds": [
+            166,
+            18,
+            283,
+            331
+          ],
+          "sourceAnchor": [
+            221.5,
+            288.6
+          ],
+          "exportOffset": [
+            14,
+            17
+          ],
+          "sha256": "8012ee36d33fd1cd916d8979b7d93d38b8cbfb82ca7b972ef9d2fb24de9bbe99"
+        },
+        {
+          "name": "down_3",
+          "sourceRect": [
+            1330,
+            443,
+            1774,
+            887
+          ],
+          "opaqueBounds": [
+            161,
+            19,
+            291,
+            331
+          ],
+          "sourceAnchor": [
+            222.0,
+            288.6
+          ],
+          "exportOffset": [
+            13,
+            17
+          ],
+          "sha256": "4e2eae9ee436343b9e9fb12b6dfd272685cb711b578dc214f5d3d30e8ff76501"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "boss_thrust_vertical",
+      "nameVi": "Chọc đao dọc — hiệu chỉnh",
+      "rows": 2,
+      "cols": 4,
+      "kind": "character",
+      "bodyHeight": 64,
+      "canvas": 224,
+      "groups": [
+        "down",
+        "up"
+      ],
+      "columns": [
+        "thrust_0",
+        "thrust_1",
+        "thrust_2",
+        "thrust_3"
+      ],
+      "description": "EXACT1536x768,4columns2rows,8poses. Match boss identity in attached transparent reference. Row0 faces DOWN/south toward viewer through all4poses: anticipation dao drawn back, small forward lunge, FULL THRUST directed toward BOTTOM center of image, recover. CRITICAL third pose: blade foreshortened pointing DOWN TOWARD VIEWER, NOT to right, boss face stays FRONT. Row1 faces UP/north away fromviewer through all4poses: anticipation, lunge, FULL THRUST directed toward TOP CENTER of image, recover. UP row shows red cape/back helmet only, face hidden throughout, blade goes straight up away fromviewer, NEVER right. ONE curved magma dao in RIGHT hand. Same armor/fur/plume, compact chibi. Feet stable80%cellheight, full sword fits with largepadding. No VFX, backgrounds, floor, shadows or text; true alpha0. Correct fixed camera cardinal attack animations.",
+      "file": "boss_thrust_vertical.png",
+      "wholeComponents": true,
+      "fixedScale": 0.19,
+      "knownIssues": "Raised-windup down_0 touches source edge; preview retains original anticipation and uses corrected contact poses.",
+      "completionObservedAt": "2026-11-01T02:13:38.577Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/boss_locomotion_alpha.png",
+          "sha256": "b6ffc7b89eed0a66f8c28fa6e6efaa4c70da37379c6ca63209fc4640d36a0582"
+        }
+      ],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/boss_thrust_vertical.png",
+      "sourceSha256": "5b33dd9e9ee3e85fa98f5d57a07913b9beb0d8cabcf0ceb1df75bc061c5fddd5",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/boss_thrust_vertical.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/boss_thrust_vertical.json",
+      "sheetSha256": "e65afe679c942cdbd6fc3d566eb6b45ec18bd00a369300b9836470c557b1c17f",
+      "atlasSha256": "9abccfd8518006593d57363fab4d82b97088f1f562a8c4ba65231e525a501008",
+      "scale": 0.19,
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "frames": [
+        {
+          "name": "down_thrust_0",
+          "sourceRect": [
+            17,
+            14,
+            452,
+            407
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            434,
+            391
+          ],
+          "sourceAnchor": [
+            227.0,
+            354.0
+          ],
+          "exportOffset": [
+            69,
+            112
+          ],
+          "sha256": "f1199f65b3d4bb94fb7d6ea01aed1707bf0abd5641d229c430a7427f4f367b66"
+        },
+        {
+          "name": "down_thrust_1",
+          "sourceRect": [
+            482,
+            46,
+            878,
+            400
+          ],
+          "opaqueBounds": [
+            1,
+            1,
+            395,
+            352
+          ],
+          "sourceAnchor": [
+            245.5,
+            352.0
+          ],
+          "exportOffset": [
+            65,
+            112
+          ],
+          "sha256": "de086dc5c6ac3716d3dad0d0774b41d09acb0d79f53d44116340435ce1cb7593"
+        },
+        {
+          "name": "down_thrust_2",
+          "sourceRect": [
+            957,
+            41,
+            1282,
+            410
+          ],
+          "opaqueBounds": [
+            2,
+            1,
+            324,
+            368
+          ],
+          "sourceAnchor": [
+            101.0,
+            368.0
+          ],
+          "exportOffset": [
+            93,
+            109
+          ],
+          "sha256": "b28973c1292827642152af4e4ff78aab60306f4555c4416fc161d117e3b45f48"
+        },
+        {
+          "name": "down_thrust_3",
+          "sourceRect": [
+            1294,
+            46,
+            1759,
+            400
+          ],
+          "opaqueBounds": [
+            3,
+            1,
+            464,
+            352
+          ],
+          "sourceAnchor": [
+            340.0,
+            344.0
+          ],
+          "exportOffset": [
+            47,
+            114
+          ],
+          "sha256": "31b74a5a1e78913ff60d87cacffc4a22cc7247cbfea321a5476a75aca40d3f6b"
+        },
+        {
+          "name": "up_thrust_0",
+          "sourceRect": [
+            18,
+            414,
+            453,
+            851
+          ],
+          "opaqueBounds": [
+            1,
+            2,
+            434,
+            434
+          ],
+          "sourceAnchor": [
+            258.0,
+            416.0
+          ],
+          "exportOffset": [
+            63,
+            100
+          ],
+          "sha256": "f2c123a891e54146401b331ce4cb6a9ebbf76f745e0ffc2ac477fea3a46bfd3f"
+        },
+        {
+          "name": "up_thrust_1",
+          "sourceRect": [
+            525,
+            411,
+            878,
+            857
+          ],
+          "opaqueBounds": [
+            2,
+            1,
+            351,
+            445
+          ],
+          "sourceAnchor": [
+            180.5,
+            445.0
+          ],
+          "exportOffset": [
+            78,
+            95
+          ],
+          "sha256": "3e336865004e9624d233421f4fd37af9623729c0cd1d5ab463d7939bb7a9490d"
+        },
+        {
+          "name": "up_thrust_2",
+          "sourceRect": [
+            921,
+            404,
+            1235,
+            869
+          ],
+          "opaqueBounds": [
+            2,
+            1,
+            313,
+            464
+          ],
+          "sourceAnchor": [
+            167.0,
+            420.0
+          ],
+          "exportOffset": [
+            80,
+            99
+          ],
+          "sha256": "5925e8d37d9e64d7ef42df1c0185823aa719e518878ca601cbbec927a4d16c83"
+        },
+        {
+          "name": "up_thrust_3",
+          "sourceRect": [
+            1343,
+            488,
+            1759,
+            857
+          ],
+          "opaqueBounds": [
+            2,
+            2,
+            415,
+            368
+          ],
+          "sourceAnchor": [
+            281.0,
+            368.0
+          ],
+          "exportOffset": [
+            59,
+            109
+          ],
+          "sha256": "39559d0130430e76393e4a6bb6dad686b9b9899ad120e8e085e8de951c42eede"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "vfx_meteor_safe",
+      "nameVi": "Vạn Lý Nham Hỏa — thiên thạch không cắt đuôi",
+      "rows": 1,
+      "cols": 2,
+      "kind": "vfx",
+      "canvas": 384,
+      "exportScale": 0.325,
+      "groups": [
+        "fall"
+      ],
+      "columns": [
+        "0",
+        "1"
+      ],
+      "durationMs": 90,
+      "description": "EXACT1024x512,2columns1row. TWO cels ONLY of a molten basalt meteor FALLING FROM SKY in a fixed elevated top-down wuxia RPG camera. First cel burning irregular obsidian rock approaching a small ground warning ellipse, secondcel rock closer to SAME groundmarker. Short sharp orange flame trail angles up-left; FULL TRAIL AND ROCK MUST FIT within own512cell with at least64px transparent margin on ALL edges. Absolutely NO part touching top/side/bottom canvas edge. Firstcel meteor center at(260,230), secondcel center at(260,290), shared groundmarkercenter(260,380) local to eachcell; shorttrail ends no higher thanY100. Trail length comparable to rock diameter, NOT long truncated tail. No explosion yet, no volcano. Pale ash outline and dark rock readable. Clean alpha background every non-effect pixel0; no text.",
+      "file": "vfx_meteor_safe.png",
+      "sourceAnchor": [
+        0.5,
+        0.81
+      ],
+      "completionObservedAt": "2026-11-01T02:13:38.578Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/vfx_meteor_safe.png",
+      "sourceSha256": "fc6241d9e0bb8237a8b4773faae9146f6dd74c535cf70b65d92d881ca8fc28a9",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_meteor_safe.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_meteor_safe.json",
+      "sheetSha256": "4d907fe739abfa65fbcdd95ae232c73d9a9d02848610feaeb2a72b1b90ce0af6",
+      "atlasSha256": "6df5bd0325daf9d793d8ea7d930a4ae8a56493ca330f7b99c8af9fbc9aaec3eb",
+      "scale": 0.325,
+      "origin": [
+        0.5,
+        0.65
+      ],
+      "frames": [
+        {
+          "name": "fall_0",
+          "sourceRect": [
+            0,
+            0,
+            887,
+            887
+          ],
+          "opaqueBounds": [
+            190,
+            70,
+            635,
+            788
+          ],
+          "sourceAnchor": [
+            443.5,
+            718.47
+          ],
+          "exportOffset": [
+            48,
+            16
+          ],
+          "sha256": "188bbf4fdc73a694b2f1db4fae7229c718324cc6847f32d639b285b49b751736"
+        },
+        {
+          "name": "fall_1",
+          "sourceRect": [
+            887,
+            0,
+            1774,
+            887
+          ],
+          "opaqueBounds": [
+            205,
+            172,
+            638,
+            788
+          ],
+          "sourceAnchor": [
+            443.5,
+            718.47
+          ],
+          "exportOffset": [
+            48,
+            16
+          ],
+          "sha256": "48784b2780a05da8b1ca0ffb688c50cbf1b3ed6d426827459e6c7a3100286318"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "cannon_clean",
+      "nameVi": "Hỏa pháo — thân pháo và giật lùi",
+      "rows": 2,
+      "cols": 4,
+      "kind": "character",
+      "bodyHeight": 58,
+      "canvas": 160,
+      "groups": [
+        "rest",
+        "recoil"
+      ],
+      "columns": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "durationMs": 100,
+      "file": "cannon_clean.png",
+      "completionObservedAt": "2026-11-01T02:17:19.707Z",
+      "knownIssues": "Side recoil cels face opposite the requested rest columns; preview explicitly selects the observed side facings and holds the side hardware cel during muzzle VFX.",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/cannon.png",
+          "sha256": "d23abdda6dbcebbb582bf91daeae990db1f33c65d819cd268da5eadcf7ac76d6"
+        }
+      ],
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/cannon_clean.png",
+      "sourceSha256": "f47c037b820ae6e8294a773b0aaa8d7a64dc0d98e5505ec926eafb9a01c81f18",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/cannon_clean.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/cannon_clean.json",
+      "sheetSha256": "b72c8ed1c030bed74d5181192776ee0f9215cccf70a458f7e6b110d3f259b4c4",
+      "atlasSha256": "45c92b4cdcacf3fe1e3794a57100fe7be4e0b981a602200f9fb0ead21b67084c",
+      "scale": 0.15343915343915343,
+      "origin": [
+        0.5,
+        0.8
+      ],
+      "frames": [
+        {
+          "name": "rest_down",
+          "sourceRect": [
+            0,
+            0,
+            443,
+            443
+          ],
+          "opaqueBounds": [
+            88,
+            70,
+            390,
+            430
+          ],
+          "sourceAnchor": [
+            239.0,
+            430.0
+          ],
+          "exportOffset": [
+            43,
+            62
+          ],
+          "sha256": "debe5c77fbbba64b01bb62aad58613f186193136d97c11e04c97e084d8986450"
+        },
+        {
+          "name": "rest_left",
+          "sourceRect": [
+            443,
+            0,
+            887,
+            443
+          ],
+          "opaqueBounds": [
+            58,
+            61,
+            397,
+            439
+          ],
+          "sourceAnchor": [
+            221.0,
+            439.0
+          ],
+          "exportOffset": [
+            46,
+            61
+          ],
+          "sha256": "f4feb190aa1e45dd1b699a38e19e2921e06c4b62776548bda83eda8cc18d142a"
+        },
+        {
+          "name": "rest_right",
+          "sourceRect": [
+            887,
+            0,
+            1330,
+            443
+          ],
+          "opaqueBounds": [
+            46,
+            73,
+            425,
+            439
+          ],
+          "sourceAnchor": [
+            222.5,
+            439.0
+          ],
+          "exportOffset": [
+            46,
+            61
+          ],
+          "sha256": "ec5bab0ab11fe6562cee4f560cfe1f6e3185874c885cc594c7b2e125bac70659"
+        },
+        {
+          "name": "rest_up",
+          "sourceRect": [
+            1330,
+            0,
+            1774,
+            443
+          ],
+          "opaqueBounds": [
+            51,
+            74,
+            370,
+            439
+          ],
+          "sourceAnchor": [
+            197.0,
+            439.0
+          ],
+          "exportOffset": [
+            50,
+            61
+          ],
+          "sha256": "96974fd8d7306f93bd61c2a6bd5aca512ee0263385dd8932553d02b61f411017"
+        },
+        {
+          "name": "recoil_down",
+          "sourceRect": [
+            0,
+            443,
+            443,
+            887
+          ],
+          "opaqueBounds": [
+            87,
+            39,
+            391,
+            384
+          ],
+          "sourceAnchor": [
+            239.5,
+            384.0
+          ],
+          "exportOffset": [
+            43,
+            69
+          ],
+          "sha256": "78f163bc3a231bfebe3c3a127b2ee27d712ae6d43841d242cdaae196e0c611cc"
+        },
+        {
+          "name": "recoil_left",
+          "sourceRect": [
+            443,
+            443,
+            887,
+            887
+          ],
+          "opaqueBounds": [
+            23,
+            39,
+            350,
+            391
+          ],
+          "sourceAnchor": [
+            222.0,
+            391.0
+          ],
+          "exportOffset": [
+            46,
+            68
+          ],
+          "sha256": "86dd027274545074b83bac27dbb744132e1286b8258d006eda387d31d16e25a8"
+        },
+        {
+          "name": "recoil_right",
+          "sourceRect": [
+            887,
+            443,
+            1330,
+            887
+          ],
+          "opaqueBounds": [
+            93,
+            53,
+            425,
+            392
+          ],
+          "sourceAnchor": [
+            221.5,
+            392.0
+          ],
+          "exportOffset": [
+            46,
+            68
+          ],
+          "sha256": "f9b00d115a960b6bd9a254e8313487d53fd2806af232349d74dc9355469ba6e6"
+        },
+        {
+          "name": "recoil_up",
+          "sourceRect": [
+            1330,
+            443,
+            1774,
+            887
+          ],
+          "opaqueBounds": [
+            52,
+            61,
+            350,
+            396
+          ],
+          "sourceAnchor": [
+            198.0,
+            396.0
+          ],
+          "exportOffset": [
+            50,
+            67
+          ],
+          "sha256": "1f85cd75ecacb5bcbf79b366cea02534bc5b2a4ec68c69ffa0e81845c936d225"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "runtimeIntegrated": false
+    },
+    {
+      "id": "vfx_lava_lane_v03",
+      "file": "vfx_lava_lane_v03.png",
+      "nameVi": "Liệt Diễm Phong Tỏa — viền đá giảm",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 512,
+      "exportScale": 0.8,
+      "groups": [
+        "cast",
+        "impact"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 150,
+      "completionObservedAt": "2026-11-01T03:06:31.421Z",
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/vfx_lava_lane.png",
+          "sha256": "82117d8120ad33e5be332302970eb332a21613f1f4829cdd5f8c1cdc243a997b"
+        }
+      ],
+      "status": "prototype_pending_director_review",
+      "note": "Targeted edit of lava strip only; reduced rocky bank density and low ripple height. Existing v01 source/export retained unchanged.",
+      "source": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/vfx_lava_lane_v03.png",
+      "sourceSha256": "0636c938bb6b4b8be496d425d9328eb2b3adfb8ddf9845a5378076832357b53d",
+      "sourceDimensions": [
+        1774,
+        887
+      ],
+      "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_lava_lane_v03.png",
+      "atlas": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_lava_lane_v03.json",
+      "sheetSha256": "5f776facd5c798c02088af4a4779a37f6b75132728aaa2a16cfa9b58bab05964",
+      "atlasSha256": "9045f12146be12922a02bbc12fd5cf55bc73dd3673fa7ca4160b44699d9eadee",
+      "scale": 0.8,
+      "origin": [
+        0.5,
+        0.65
+      ],
+      "frames": [
+        {
+          "name": "cast_0",
+          "sourceRect": [
+            0,
+            0,
+            443,
+            443
+          ],
+          "opaqueBounds": [
+            31,
+            250,
+            425,
+            325
+          ],
+          "sourceAnchor": [
+            221.5,
+            287.95
+          ],
+          "exportOffset": [
+            79,
+            102
+          ],
+          "sha256": "20d46b893669867f81590b83fd46b59c65e160f623379b00557ae506fad3e149"
+        },
+        {
+          "name": "cast_1",
+          "sourceRect": [
+            443,
+            0,
+            887,
+            443
+          ],
+          "opaqueBounds": [
+            26,
+            247,
+            424,
+            326
+          ],
+          "sourceAnchor": [
+            222.0,
+            287.95
+          ],
+          "exportOffset": [
+            78,
+            102
+          ],
+          "sha256": "1ed18d905297222b167310622ce3790a78f42a4da9767f56141f93bec5bbc4b2"
+        },
+        {
+          "name": "cast_2",
+          "sourceRect": [
+            887,
+            0,
+            1330,
+            443
+          ],
+          "opaqueBounds": [
+            23,
+            216,
+            420,
+            326
+          ],
+          "sourceAnchor": [
+            221.5,
+            287.95
+          ],
+          "exportOffset": [
+            79,
+            102
+          ],
+          "sha256": "f0abfae2c2265701cec0f077595abd359a212145621d745d78fbdfbfc51f0390"
+        },
+        {
+          "name": "cast_3",
+          "sourceRect": [
+            1330,
+            0,
+            1774,
+            443
+          ],
+          "opaqueBounds": [
+            22,
+            230,
+            420,
+            325
+          ],
+          "sourceAnchor": [
+            222.0,
+            287.95
+          ],
+          "exportOffset": [
+            78,
+            102
+          ],
+          "sha256": "860704bd2831e740f64daf1b190b5d2f8504026e5e4965ebc72c21e6a7af14d8"
+        },
+        {
+          "name": "impact_0",
+          "sourceRect": [
+            0,
+            443,
+            443,
+            887
+          ],
+          "opaqueBounds": [
+            28,
+            163,
+            429,
+            264
+          ],
+          "sourceAnchor": [
+            221.5,
+            288.6
+          ],
+          "exportOffset": [
+            79,
+            102
+          ],
+          "sha256": "52fdf9066dd1abfec99a5468a228048d343759d228d33929e3e721bab4f5c390"
+        },
+        {
+          "name": "impact_1",
+          "sourceRect": [
+            443,
+            443,
+            887,
+            887
+          ],
+          "opaqueBounds": [
+            25,
+            165,
+            425,
+            265
+          ],
+          "sourceAnchor": [
+            222.0,
+            288.6
+          ],
+          "exportOffset": [
+            78,
+            102
+          ],
+          "sha256": "3a24c000ce83061147134cd069ff91f8ee3bc5493affbdaec174ec1abfbf3e50"
+        },
+        {
+          "name": "impact_2",
+          "sourceRect": [
+            887,
+            443,
+            1330,
+            887
+          ],
+          "opaqueBounds": [
+            21,
+            165,
+            421,
+            266
+          ],
+          "sourceAnchor": [
+            221.5,
+            288.6
+          ],
+          "exportOffset": [
+            79,
+            102
+          ],
+          "sha256": "9a118fec90d9e7b9d0e77d65db5ea08784d1260a3cd82ca460a4108b0beb445e"
+        },
+        {
+          "name": "impact_3",
+          "sourceRect": [
+            1330,
+            443,
+            1774,
+            887
+          ],
+          "opaqueBounds": [
+            24,
+            177,
+            420,
+            265
+          ],
+          "sourceAnchor": [
+            222.0,
+            288.6
+          ],
+          "exportOffset": [
+            78,
+            102
+          ],
+          "sha256": "a1e6e7cb603ef64537ba610b77fd73bbd83af2387020afcfe0633d28eb3a1ad7"
+        }
+      ],
+      "runtimeIntegrated": false
+    }
+  ]
+}

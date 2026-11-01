@@ -574,8 +574,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       });
       enemy.burnNext += config.tickRate;
     }
-    if (enemy.hp <= 0) continue;
-    if (enemy.bossEncounter) continue;
+    if (enemy.hp <= 0 || enemy.bossEncounter || enemy.controlled) continue;
     const stats = enemy.stats ?? config.creep;
     const nearest = [...world.heroes.values()]
       .filter(

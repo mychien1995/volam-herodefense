@@ -266,6 +266,7 @@ export interface Actor extends Point {
   castAbilityId?: string;
   /** Future boss adapters can opt out of forced movement without inventing a boss system. */
   forcedMovementImmune?: boolean;
+  crowdControlScale?: number;
 }
 export interface Hero extends Actor {
   bossItems?: string[];
@@ -290,6 +291,8 @@ export interface Hero extends Actor {
 }
 export interface Creep extends Actor {
   bossEncounter?: boolean;
+  controlled?: boolean;
+  encounterAction?: { startedAt: number; activeAt: number; endsAt: number };
   /** Server-selected presentation identity; does not grant extra abilities. */
   archetypeId?: string;
   stats?: SimulationConfig['creep'];

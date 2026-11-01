@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "target": "milestone/m3d",
+  "milestoneBase": "a4a14fe1",
+  "encounterCommit": "b9000780",
+  "mergeResolutions": [
+    "Both independent boss controllers and dungeon destinations retained",
+    "Combined schema protocol15",
+    "Chu definition uses chuBoss; Hong Liet retains boss",
+    "Generic creep AI excludes either controller",
+    "Chu item definitions use chuBoss",
+    "Six Chu entrance positions stay clear of south wall"
+  ],
+  "checks": [
+    {
+      "command": "pnpm check:quick tests/chu-ba-thong.test.ts tests/chu-room.test.ts tests/hong-liet.test.ts tests/dungeons.test.ts tests/dungeon-room.test.ts tests/combat.test.ts tests/protocol.test.ts tests/boundaries.test.ts",
+      "result": "106 PASS; 1 Chu SDK failure exposed old loot-definition lookup; fixed below"
+    },
+    {
+      "command": "pnpm check:quick tests/chu-ba-thong.test.ts tests/chu-room.test.ts",
+      "result": "23 PASS after lookup/spawn fixes; includes two-controller coexistence and six valid entrance positions"
+    },
+    {
+      "command": "pnpm exec vitest run tests/hong-liet.test.ts tests/dungeons.test.ts",
+      "result": "36 PASS after shared lifecycle fix"
+    },
+    {
+      "command": "pnpm exec tsc -b",
+      "result": "PASS"
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit",
+      "result": "PASS including the browser recovery fix"
+    },
+    {
+      "command": "pnpm --filter @volam/game-client exec vite build",
+      "result": "PASS; existing chunk-size warning"
+    },
+    {
+      "command": "python -X utf8 scripts/verify-chu-art.py",
+      "result": "PASS 102 approved inputs/107 clips/428 frames"
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.hong-liet.config.ts --grep \"two clients\"",
+      "result": "PASS 44.3s natural gameplay, all nine actions,16 cannons"
+    },
+    {
+      "command": "VOLAM_CHU_QA_PLAYERS=2 node tools/run-playwright.mjs test --config playwright.chu-ba-thong.config.ts",
+      "result": "PASS after browser loop recovery handling; legal A/Q/W + movement benchmark;107 clips/428 frames, dodge, moving hazards, loot, private/shared",
+      "elapsedMs": 85731
+    },
+    {
+      "command": "git diff --cached --check",
+      "result": "PASS"
+    }
+  ],
+  "distinctFocusedTestsPassed": 108,
+  "notRepeated": [
+    "Full suite/check:final",
+    "Six-client art gate",
+    "Balance probes",
+    "Unchanged school/art suites"
+  ],
+  "browserRetry": "The initial two-client combat loop assumed encounter state always existed. Real death/arena recovery makes it null; loop now handles recovery/reentry and uses legal default A/Q/W plus movement. No boss damage/HP/timing was weakened.",
+  "art": "No approved artwork changed; baseline evidence restored from index and this merge evidence retained separately",
+  "recording": false
+}

@@ -1,0 +1,548 @@
+{
+  "status": "prototype_pending_director_review",
+  "runtimeIntegrated": false,
+  "requests": [
+    {
+      "id": "boss_locomotion",
+      "file": "boss_locomotion_alpha.png",
+      "rows": 4,
+      "cols": 6,
+      "kind": "character",
+      "bodyHeight": 64,
+      "canvas": 160,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "idle_a",
+        "idle_b",
+        "walk_a",
+        "walk_b",
+        "walk_c",
+        "walk_d"
+      ],
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Hoàn Nhan Hồng Liệt boss locomotion prototype. Match attached boss concept's identity ONLY: stern middle-aged black moustache/beard, black iron lamellar armor with ornate bronze-gold trim and small orange molten cracks, cream fur collar, crimson long cape, helmet with crimson plume, ONE huge curved dark dao with magma fissures held consistently in RIGHT HAND. Compact chibi strong body, not tall realistic proportions. Target body64px relative hero44px after later mechanical export. EXACT 1536x1024 sheet,6columns4rows,24 cels. Row0 DOWN/front, row1 LEFT, row2 RIGHT, row3 UP/back (cape visible, face hidden). ALL six cells in each row stay in that facing. Columns: idle breathA, idle breathB, walk left contact, walk passA, walk right contact, walk passB. Stable feet at80%cellheight, stable center/scale, natural alternating steps, cloth/plume motion and arm articulation. Weapon must fit every cell, NO fiery aura around body. This is a clean animation source sheet, NOT the parchment concept.",
+      "started": "2026-11-01T02:02:46.567Z",
+      "revisions": [
+        {
+          "file": "boss_locomotion.png",
+          "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Hoàn Nhan Hồng Liệt boss locomotion prototype. Match attached boss concept's identity ONLY: stern middle-aged black moustache/beard, black iron lamellar armor with ornate bronze-gold trim and small orange molten cracks, cream fur collar, crimson long cape, helmet with crimson plume, ONE huge curved dark dao with magma fissures held consistently in RIGHT HAND. Compact chibi strong body, not tall realistic proportions. Target body64px relative hero44px after later mechanical export. EXACT 1536x1024 sheet,6columns4rows,24 cels. Row0 DOWN/front, row1 LEFT, row2 RIGHT, row3 UP/back (cape visible, face hidden). ALL six cells in each row stay in that facing. Columns: idle breathA, idle breathB, walk left contact, walk passA, walk right contact, walk passB. Stable feet at80%cellheight, stable center/scale, natural alternating steps, cloth/plume motion and arm articulation. Weapon must fit every cell, NO fiery aura around body. This is a clean animation source sheet, NOT the parchment concept."
+        },
+        {
+          "file": "boss_locomotion_alpha.png",
+          "prompt": "Use case: background-extraction. EDIT TARGET attached 24-cel boss locomotion sprite sheet. Remove ALL brown/parchment/gradient background pixels and make them genuinely alpha=0 transparent, including the spaces around and between each character and between weapon/cape and legs. Preserve ALL 24 boss character silhouettes, poses, costumes, weapons, original arrangement, exact1536x1024 canvas,6columns4rows, pixel details/colors/scale. NO replacement background, checkerboard, floor, gray fringe, gradient, rectangular halo or shadow. Output a clean transparent sprite sheet suitable for compositing directly on an arbitrary dark/bright RPG floor. Background is unwanted; all brown squares must disappear. Every non-character pixel must alpha0.",
+          "note": "Alpha checked on contrasting background; retain initial source too."
+        }
+      ],
+      "completionObservedAt": "2026-11-01T02:04:03.335Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/concepts/bosses/hoan-nhan-hong-liet/master_concept.png",
+          "sha256": "44d6a371584476ecf3c455bd72155fe16296e3cbcd9f6fce4281b456dab38914"
+        },
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/boss_locomotion.png",
+          "sha256": "5b3503efc505e46b4a51400e8f84ed3908f420c49ee4ff4b865971f599b45e15"
+        }
+      ]
+    },
+    {
+      "id": "vfx_stomp",
+      "nameVi": "Dung Nham Liệt Địa",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 384,
+      "exportScale": 0.65,
+      "groups": [
+        "cast",
+        "impact"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 110,
+      "description": "EIGHT successive cels left-to-right top row then bottom row: 1 thin amber broken circular ground warning perimeter, 2 warning cracks brighten inward,3 first basalt chips lift,4 concentrated stomp shock center,5 HUGE wide outward elliptical lava/stone shockwave with empty readable center,6 shockwave expands into broken rugged rim,7 embers/dust dissipate,8 cooling scattered pebbles. This is an around-boss stomp STUN cue, not a tall volcano. Ground plane at fixed elevated view, flattened broad ellipse, blast low enough to preserve characters. Palette amber warning vs molten orange hit vs cool gray ash expiry.",
+      "file": "vfx_stomp.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Dung Nham Liệt Địa stand-alone pixel VFX animation sheet. EXACT2048x1024 canvas,4columns2rows,8 evenly spaced cells, NO gutter graphics. EIGHT successive cels left-to-right top row then bottom row: 1 thin amber broken circular ground warning perimeter, 2 warning cracks brighten inward,3 first basalt chips lift,4 concentrated stomp shock center,5 HUGE wide outward elliptical lava/stone shockwave with empty readable center,6 shockwave expands into broken rugged rim,7 embers/dust dissipate,8 cooling scattered pebbles. This is an around-boss stomp STUN cue, not a tall volcano. Ground plane at fixed elevated view, flattened broad ellipse, blast low enough to preserve characters. Palette amber warning vs molten orange hit vs cool gray ash expiry. All eight states independently redrawn, same scale/ground anchor, generous empty transparent padding. Absolutely NO paper/brown/black background, every non-effect pixel alpha0, no rectangular haze. No characters, text or HUD.",
+      "started": "2026-11-01T02:04:56.360Z",
+      "completionObservedAt": "2026-11-01T02:09:07.745Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": []
+    },
+    {
+      "id": "vfx_volcano",
+      "nameVi": "Hỏa Sơn Bạo Phát",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 256,
+      "exportScale": 0.5,
+      "groups": [
+        "cast",
+        "impact"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 140,
+      "description": "EIGHT chronological cels:1 broken amber ellipse ground warning with central X,2 bright warning cracks contained inside same marker,3 obsidian rock cone begins pushing UP from ground,4 jagged volcano half-height with molten mouth,5 fully erupted narrow lava fountain/volcanic spire,6 explosive short orange burst/debris,7 collapsing cone and darkening crater,8 cooled crater rim with few embers. ONE volcano in each cell, consistent ground anchor at65% cellheight; flame may rise above. Volcanic rock physically rises from ground, NOT meteor falling, not generic fireball. Empty ground around each asset for scene compositing.",
+      "file": "vfx_volcano.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Hỏa Sơn Bạo Phát stand-alone pixel VFX animation sheet. EXACT2048x1024 canvas,4columns2rows,8 evenly spaced cells, NO gutter graphics. EIGHT chronological cels:1 broken amber ellipse ground warning with central X,2 bright warning cracks contained inside same marker,3 obsidian rock cone begins pushing UP from ground,4 jagged volcano half-height with molten mouth,5 fully erupted narrow lava fountain/volcanic spire,6 explosive short orange burst/debris,7 collapsing cone and darkening crater,8 cooled crater rim with few embers. ONE volcano in each cell, consistent ground anchor at65% cellheight; flame may rise above. Volcanic rock physically rises from ground, NOT meteor falling, not generic fireball. Empty ground around each asset for scene compositing. All eight states independently redrawn, same scale/ground anchor, generous empty transparent padding. Absolutely NO paper/brown/black background, every non-effect pixel alpha0, no rectangular haze. No characters, text or HUD.",
+      "started": "2026-11-01T02:04:56.360Z",
+      "completionObservedAt": "2026-11-01T02:09:07.749Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": []
+    },
+    {
+      "id": "vfx_lava_lane",
+      "nameVi": "Liệt Diễm Phong Tỏa",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 512,
+      "exportScale": 0.8,
+      "groups": [
+        "cast",
+        "impact"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 150,
+      "description": "EIGHT chronological cels of ONE VERY LONG wide horizontal ground lava fissure pointing RIGHT, no boss:1 amber dashed lane warning rectangle 4:1 long with chevron at end,2 ground splits along lane,3 moving leading wave of lava appears at left,4 lava wave sweeps right,5 entire lane now a jagged wide persistent molten river with black basalt outer banks,6 persistent river surface flow shimmerA,7 persistent river flow shimmerB same footprint,8 cooled black scar visibly no active orange hazard. Must be a STRAIGHT broad rectangular-ish ground lane, NOT circular fire ring, not crescent slash, not isolated explosions. All cels same footprint4:1 ground length/width; maintain constant cool ash outer edge to read against brown ground. The looping sustained hazard is frames5-7.",
+      "file": "vfx_lava_lane.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Liệt Diễm Phong Tỏa stand-alone pixel VFX animation sheet. EXACT2048x1024 canvas,4columns2rows,8 evenly spaced cells, NO gutter graphics. EIGHT chronological cels of ONE VERY LONG wide horizontal ground lava fissure pointing RIGHT, no boss:1 amber dashed lane warning rectangle 4:1 long with chevron at end,2 ground splits along lane,3 moving leading wave of lava appears at left,4 lava wave sweeps right,5 entire lane now a jagged wide persistent molten river with black basalt outer banks,6 persistent river surface flow shimmerA,7 persistent river flow shimmerB same footprint,8 cooled black scar visibly no active orange hazard. Must be a STRAIGHT broad rectangular-ish ground lane, NOT circular fire ring, not crescent slash, not isolated explosions. All cels same footprint4:1 ground length/width; maintain constant cool ash outer edge to read against brown ground. The looping sustained hazard is frames5-7. All eight states independently redrawn, same scale/ground anchor, generous empty transparent padding. Absolutely NO paper/brown/black background, every non-effect pixel alpha0, no rectangular haze. No characters, text or HUD.",
+      "started": "2026-11-01T02:04:56.360Z",
+      "completionObservedAt": "2026-11-01T02:09:07.751Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": []
+    },
+    {
+      "id": "boss_basics",
+      "nameVi": "Đánh thường: chọc đao / chém 180°",
+      "rows": 4,
+      "cols": 8,
+      "kind": "character",
+      "bodyHeight": 64,
+      "canvas": 224,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "thrust_0",
+        "thrust_1",
+        "thrust_2",
+        "thrust_3",
+        "sweep_0",
+        "sweep_1",
+        "sweep_2",
+        "sweep_3"
+      ],
+      "description": "EXACT2048x1024,8columns4rows. Rows DOWN/front,LEFT,RIGHT,UP/back. Per row c0..3 LONG THRUST: pull curved dao back, lunge anticipation, full arm/torso extended dao THRUST far in front with planted rear foot, recover. c4..7 180degree frontal SWEEP: blade backswing at one side, heavy horizontal front semicircle sweep beginning, blade at other end after180deg sweep, recover. No attack behind boss, no full360spin. All poses same body size and right-hand weapon. Do NOT draw VFX rings/glow/slash, only boss with articulated blade poses, blade entirely fits each cell. Large empty space around blade. Feet stable80%cellheight. Distinguish thrust forward extension and broad sweep torso rotation. Same strong chibi general and SINGLE magma dao from transparent reference.",
+      "file": "boss_basics.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Đánh thường: chọc đao / chém 180°. EXACT2048x1024,8columns4rows. Rows DOWN/front,LEFT,RIGHT,UP/back. Per row c0..3 LONG THRUST: pull curved dao back, lunge anticipation, full arm/torso extended dao THRUST far in front with planted rear foot, recover. c4..7 180degree frontal SWEEP: blade backswing at one side, heavy horizontal front semicircle sweep beginning, blade at other end after180deg sweep, recover. No attack behind boss, no full360spin. All poses same body size and right-hand weapon. Do NOT draw VFX rings/glow/slash, only boss with articulated blade poses, blade entirely fits each cell. Large empty space around blade. Feet stable80%cellheight. Distinguish thrust forward extension and broad sweep torso rotation. Same strong chibi general and SINGLE magma dao from transparent reference. Recreate as ORIGINAL gameplay pixel animation source, not a concept board. Absolutely every background pixel alpha0.",
+      "started": "2026-11-01T02:06:09.993Z",
+      "completionObservedAt": "2026-11-01T02:09:07.756Z",
+      "durationMeasured": false,
+      "wholeComponents": true,
+      "fixedScale": 0.2922,
+      "note": "Whole connected-raster extraction preserves the long blade across inferred cell gutters; fixed common source scale retained.",
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/boss_locomotion_alpha.png",
+          "sha256": "b6ffc7b89eed0a66f8c28fa6e6efaa4c70da37379c6ca63209fc4640d36a0582"
+        }
+      ]
+    },
+    {
+      "id": "boss_casts",
+      "nameVi": "Dẫm đất / hiệu lệnh triệu quân",
+      "rows": 4,
+      "cols": 6,
+      "kind": "character",
+      "bodyHeight": 64,
+      "canvas": 192,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "stomp_0",
+        "stomp_1",
+        "stomp_2",
+        "command_0",
+        "command_1",
+        "command_2"
+      ],
+      "description": "EXACT1536x1024,6columns4rows. Rows DOWN/front,LEFT,RIGHT,UP/back. Within each row c0 stomp anticipation raised knee, c1 forceful foot stamps onto ground body weight down/shoulders compressed, c2 recovering to standing; c3 COMMAND preparation dao lowered and left hand rises, c4 firm LEFT arm points orders outward and dao stays RIGHT hand, c5 command recovery. Full-body discrete articulated poses, no background, no lava/particles or flags. This is same boss design and ONE right-hand curved dao from transparent reference. Body height consistent and planted ground baseline80% cellheight, leave clearance for knee and arms.",
+      "file": "boss_casts.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Dẫm đất / hiệu lệnh triệu quân. EXACT1536x1024,6columns4rows. Rows DOWN/front,LEFT,RIGHT,UP/back. Within each row c0 stomp anticipation raised knee, c1 forceful foot stamps onto ground body weight down/shoulders compressed, c2 recovering to standing; c3 COMMAND preparation dao lowered and left hand rises, c4 firm LEFT arm points orders outward and dao stays RIGHT hand, c5 command recovery. Full-body discrete articulated poses, no background, no lava/particles or flags. This is same boss design and ONE right-hand curved dao from transparent reference. Body height consistent and planted ground baseline80% cellheight, leave clearance for knee and arms. Recreate as ORIGINAL gameplay pixel animation source, not a concept board. Absolutely every background pixel alpha0.",
+      "started": "2026-11-01T02:06:09.993Z",
+      "completionObservedAt": "2026-11-01T02:09:07.763Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/boss_locomotion_alpha.png",
+          "sha256": "b6ffc7b89eed0a66f8c28fa6e6efaa4c70da37379c6ca63209fc4640d36a0582"
+        }
+      ]
+    },
+    {
+      "id": "minion_infantry",
+      "nameVi": "Mông Cổ Thiết Binh",
+      "rows": 4,
+      "cols": 8,
+      "kind": "character",
+      "bodyHeight": 48,
+      "canvas": 128,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "idle_0",
+        "idle_1",
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "attack_0",
+        "attack_1"
+      ],
+      "description": "EXACT2048x1024,8columns4rows32cels. ONLY elite MONGOLIAN FOOT INFANTRY from attached soldier design: small chibi, black/bronze lamellar, red scarf/skirt, cream fur-trimmed pointed helmet with red plume, round bronze shield LEFT arm, curved SILVER saber RIGHT hand. NO horse, bow, magma armor, boss fur cape or extra weapons. Rows DOWN/front,LEFT,RIGHT,UP/back. Columns idleA,idleB,walk left contact,walk passA,walk right contact,walk passB,attack anticipation shield raised/saber back,attack frontal saber slash extended. Same hand assignments, same size every cel. Feet80%cellheight. Background entirely transparent, discard parchment reference board completely.",
+      "file": "minion_infantry.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Mông Cổ Thiết Binh. EXACT2048x1024,8columns4rows32cels. ONLY elite MONGOLIAN FOOT INFANTRY from attached soldier design: small chibi, black/bronze lamellar, red scarf/skirt, cream fur-trimmed pointed helmet with red plume, round bronze shield LEFT arm, curved SILVER saber RIGHT hand. NO horse, bow, magma armor, boss fur cape or extra weapons. Rows DOWN/front,LEFT,RIGHT,UP/back. Columns idleA,idleB,walk left contact,walk passA,walk right contact,walk passB,attack anticipation shield raised/saber back,attack frontal saber slash extended. Same hand assignments, same size every cel. Feet80%cellheight. Background entirely transparent, discard parchment reference board completely. Recreate as ORIGINAL gameplay pixel animation source, not a concept board. Absolutely every background pixel alpha0.",
+      "started": "2026-11-01T02:06:09.993Z",
+      "knownIssues": "Several attack poses rotate away from row heading; pending directional cleanup.",
+      "completionObservedAt": "2026-11-01T02:09:07.767Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/concepts/summons/mongolian-soldiers/combined_concept.png",
+          "sha256": "816d4555948caa9c82b2e258a8a8ecac1ac8b7252c32873403a75235a3bbd65c"
+        }
+      ]
+    },
+    {
+      "id": "vfx_meteor",
+      "nameVi": "Vạn Lý Nham Hỏa",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 384,
+      "exportScale": 0.65,
+      "groups": [
+        "cast",
+        "impact"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 90,
+      "description": "EXACT2048x1024,4columns2rows,8chronological cels. ONE meteor strike sequence, same ground anchor65% cellheight. Cels1 amber broken ground warning ellipse with X,2 ominous hot circular ground shadow grows,3 huge burning irregular basalt METEOR ENTERS FROM ABOVE with long diagonal flame trail while ground marker remains visible,4 meteor nearer ground,5 explosive broad AOE impact blast throws stone fragments,6 huge molten crater shock ring spreads wide,7 embers smoke dissipate low,8 cooling black crater. Different from volcano: stone falls from SKY, never grows from floor. The full burning rock and trail must fit generous cell padding. No characters, background or painted rectangles. Original ground sprite VFX with readable pale ash blast rim.",
+      "file": "vfx_meteor.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Vạn Lý Nham Hỏa. EXACT2048x1024,4columns2rows,8chronological cels. ONE meteor strike sequence, same ground anchor65% cellheight. Cels1 amber broken ground warning ellipse with X,2 ominous hot circular ground shadow grows,3 huge burning irregular basalt METEOR ENTERS FROM ABOVE with long diagonal flame trail while ground marker remains visible,4 meteor nearer ground,5 explosive broad AOE impact blast throws stone fragments,6 huge molten crater shock ring spreads wide,7 embers smoke dissipate low,8 cooling black crater. Different from volcano: stone falls from SKY, never grows from floor. The full burning rock and trail must fit generous cell padding. No characters, background or painted rectangles. Original ground sprite VFX with readable pale ash blast rim.",
+      "started": "2026-11-01T02:07:16.476Z",
+      "withheldFrames": [
+        "cast_2",
+        "cast_3"
+      ],
+      "note": "Original falling frames have clipped trails; preview uses vfx_meteor_safe instead.",
+      "completionObservedAt": "2026-11-01T02:09:07.771Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": []
+    },
+    {
+      "id": "cannon",
+      "nameVi": "Hỏa Pháo Thiên La — hỏa pháo",
+      "rows": 4,
+      "cols": 4,
+      "kind": "character",
+      "bodyHeight": 58,
+      "canvas": 160,
+      "groups": [
+        "down",
+        "right",
+        "left",
+        "up"
+      ],
+      "columns": [
+        "idle_0",
+        "charge_0",
+        "fire_0",
+        "recover_0"
+      ],
+      "durationMs": 100,
+      "description": "EXACT1536x1536,4columns4rows,16cels. Original summoned heavy medieval wuxia Mongol FIRE CANNON on stout wooden two-wheel carriage, dark iron barrel with bronze bands and engraved orange flame emblem, red pennant. Not modern artillery, no creature or crew. Elevated top-down3/4 camera fixed. Rows cannon aims DOWN/towardsviewer, LEFT,RIGHT,UP/awayviewer. Columns1 idle wheels planted,2 glowing ember charge at muzzle,3 sharp muzzle flash firing with barrel recoil and carriage stationary,4 thin smoke recovering barrel. Each row keeps same cardinal aim, UP shows rear breech and barrel away, DOWN shows circular muzzle and barrel towardsviewer. No grids/text/floor/background; true clean alpha0. Cannon silhouette coherent across all cels.",
+      "file": "cannon.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Hỏa Pháo Thiên La — hỏa pháo. EXACT1536x1536,4columns4rows,16cels. Original summoned heavy medieval wuxia Mongol FIRE CANNON on stout wooden two-wheel carriage, dark iron barrel with bronze bands and engraved orange flame emblem, red pennant. Not modern artillery, no creature or crew. Elevated top-down3/4 camera fixed. Rows cannon aims DOWN/towardsviewer, LEFT,RIGHT,UP/awayviewer. Columns1 idle wheels planted,2 glowing ember charge at muzzle,3 sharp muzzle flash firing with barrel recoil and carriage stationary,4 thin smoke recovering barrel. Each row keeps same cardinal aim, UP shows rear breech and barrel away, DOWN shows circular muzzle and barrel towardsviewer. No grids/text/floor/background; true clean alpha0. Cannon silhouette coherent across all cels.",
+      "started": "2026-11-01T02:07:16.476Z",
+      "note": "Source rows visually aim down, RIGHT, LEFT, up; metadata corrects requested order without repainting.",
+      "wholeComponents": false,
+      "fixedScale": 0.205,
+      "knownIssues": "Muzzle flashes overlap adjacent source rows. Superseded in review by clean hardware + separate projectile components.",
+      "completionObservedAt": "2026-11-01T02:09:07.774Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": []
+    },
+    {
+      "id": "minion_archer",
+      "nameVi": "Mông Cổ Cung Thủ",
+      "rows": 4,
+      "cols": 8,
+      "kind": "character",
+      "bodyHeight": 46,
+      "canvas": 128,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "idle_0",
+        "idle_1",
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3",
+        "attack_0",
+        "attack_1"
+      ],
+      "durationMs": 100,
+      "description": "EXACT2048x1024,8columns4rows,32cels. ONLY small MONGOLIAN ARCHER from reference: chibi human black/red light lamellar armor, red scarf and robe, cream fur-trimmed pointed black helmet with red plume, quiver on back, composite curved bow LEFT hand, draws string RIGHT hand. No shield, sword, spear, horse or boss cape. Rows DOWN/front,LEFT,RIGHT,UP/back. Columns idleA,idleB,walk left contact,walk passingA,walk right contact,walk passingB,attack bow fully DRAWN with arrow nocked,attack arrow RELEASE pose string forward. Rows keep cardinal aim, down foreshortens bow/arrow towardviewer and up faces away. Same body/weapon size and handedness, feet80%cellheight. No parchment or concept board background, ALL background alpha0.",
+      "file": "minion_archer.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Mông Cổ Cung Thủ. EXACT2048x1024,8columns4rows,32cels. ONLY small MONGOLIAN ARCHER from reference: chibi human black/red light lamellar armor, red scarf and robe, cream fur-trimmed pointed black helmet with red plume, quiver on back, composite curved bow LEFT hand, draws string RIGHT hand. No shield, sword, spear, horse or boss cape. Rows DOWN/front,LEFT,RIGHT,UP/back. Columns idleA,idleB,walk left contact,walk passingA,walk right contact,walk passingB,attack bow fully DRAWN with arrow nocked,attack arrow RELEASE pose string forward. Rows keep cardinal aim, down foreshortens bow/arrow towardviewer and up faces away. Same body/weapon size and handedness, feet80%cellheight. No parchment or concept board background, ALL background alpha0.",
+      "started": "2026-11-01T02:07:16.476Z",
+      "knownIssues": "Down/up attack poses turn sideways; pending cardinal correction, idle/walk directions retained.",
+      "completionObservedAt": "2026-11-01T02:09:07.777Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/concepts/summons/mongolian-soldiers/combined_concept.png",
+          "sha256": "816d4555948caa9c82b2e258a8a8ecac1ac8b7252c32873403a75235a3bbd65c"
+        }
+      ]
+    },
+    {
+      "id": "vfx_basics",
+      "nameVi": "Vệt đao thường",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 320,
+      "exportScale": 0.55,
+      "groups": [
+        "thrust",
+        "sweep"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 80,
+      "description": "EXACT2048x1024,4columns2rows,8isolated cels. Row0 four chronological THRUST VFX cels always pointing RIGHT: narrow amber linear warning outline, long bright sharp straight orange sword-point streak, longest streak with taper and tiny sparks, few fading short sparks. Narrow straight ray, no homing, no curved slash. Row1 four chronological SWEEP VFX cels on ground facing DOWN: thin amber dashed semicircle boundary180degree FRONT HALF ONLY, broad molten orange half-moon slash in FRONT lowerhalf of center footpoint, advancing orange blade crescent in same180degree FRONT semicircle, sparse fading crescent sparks. ALL sweep artwork below imaginary center footpoint, upper REAR HALF entirely transparent. NOT a360ring or sphere. No character or weapon model, no rectangular background. Each effect fits its own cell with20%clear padding.",
+      "file": "vfx_basics.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Vệt đao thường. EXACT2048x1024,4columns2rows,8isolated cels. Row0 four chronological THRUST VFX cels always pointing RIGHT: narrow amber linear warning outline, long bright sharp straight orange sword-point streak, longest streak with taper and tiny sparks, few fading short sparks. Narrow straight ray, no homing, no curved slash. Row1 four chronological SWEEP VFX cels on ground facing DOWN: thin amber dashed semicircle boundary180degree FRONT HALF ONLY, broad molten orange half-moon slash in FRONT lowerhalf of center footpoint, advancing orange blade crescent in same180degree FRONT semicircle, sparse fading crescent sparks. ALL sweep artwork below imaginary center footpoint, upper REAR HALF entirely transparent. NOT a360ring or sphere. No character or weapon model, no rectangular background. Each effect fits its own cell with20%clear padding.",
+      "started": "2026-11-01T02:08:07.288Z",
+      "completionObservedAt": "2026-11-01T02:09:07.778Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": []
+    },
+    {
+      "id": "vfx_arrows",
+      "nameVi": "Hỏa Tiễn Tề Phát — tên lửa",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 160,
+      "exportScale": 0.3,
+      "groups": [
+        "right",
+        "down"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 80,
+      "description": "EXACT1536x768,4columns2rows,8isolated cels. Small Mongolian long straight arrow with visible wooden shaft, steel triangular tip, red fletching and restrained orange flame at tip. Top row points RIGHT horizontal; bottomrow points DOWN along screen ground axis (top-down arrow with visible shaft). Columns4flight flame variations only, keep arrow tip and shaft at exact same position/scale within row while flame flickers. NO launcher, archer, floor, shadow, cloud, huge fireball or trajectory arc. True transparent outside precise arrow and small sparks. Generous padding eachcell. Projectile will travel in preview via position, never track targets.",
+      "file": "vfx_arrows.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Hỏa Tiễn Tề Phát — tên lửa. EXACT1536x768,4columns2rows,8isolated cels. Small Mongolian long straight arrow with visible wooden shaft, steel triangular tip, red fletching and restrained orange flame at tip. Top row points RIGHT horizontal; bottomrow points DOWN along screen ground axis (top-down arrow with visible shaft). Columns4flight flame variations only, keep arrow tip and shaft at exact same position/scale within row while flame flickers. NO launcher, archer, floor, shadow, cloud, huge fireball or trajectory arc. True transparent outside precise arrow and small sparks. Generous padding eachcell. Projectile will travel in preview via position, never track targets.",
+      "started": "2026-11-01T02:08:07.288Z",
+      "completionObservedAt": "2026-11-01T02:09:07.778Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": []
+    },
+    {
+      "id": "boss_thrust_vertical",
+      "nameVi": "Chọc đao dọc — hiệu chỉnh",
+      "rows": 2,
+      "cols": 4,
+      "kind": "character",
+      "bodyHeight": 64,
+      "canvas": 224,
+      "groups": [
+        "down",
+        "up"
+      ],
+      "columns": [
+        "thrust_0",
+        "thrust_1",
+        "thrust_2",
+        "thrust_3"
+      ],
+      "description": "EXACT1536x768,4columns2rows,8poses. Match boss identity in attached transparent reference. Row0 faces DOWN/south toward viewer through all4poses: anticipation dao drawn back, small forward lunge, FULL THRUST directed toward BOTTOM center of image, recover. CRITICAL third pose: blade foreshortened pointing DOWN TOWARD VIEWER, NOT to right, boss face stays FRONT. Row1 faces UP/north away fromviewer through all4poses: anticipation, lunge, FULL THRUST directed toward TOP CENTER of image, recover. UP row shows red cape/back helmet only, face hidden throughout, blade goes straight up away fromviewer, NEVER right. ONE curved magma dao in RIGHT hand. Same armor/fur/plume, compact chibi. Feet stable80%cellheight, full sword fits with largepadding. No VFX, backgrounds, floor, shadows or text; true alpha0. Correct fixed camera cardinal attack animations.",
+      "file": "boss_thrust_vertical.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Chọc đao dọc — hiệu chỉnh. EXACT1536x768,4columns2rows,8poses. Match boss identity in attached transparent reference. Row0 faces DOWN/south toward viewer through all4poses: anticipation dao drawn back, small forward lunge, FULL THRUST directed toward BOTTOM center of image, recover. CRITICAL third pose: blade foreshortened pointing DOWN TOWARD VIEWER, NOT to right, boss face stays FRONT. Row1 faces UP/north away fromviewer through all4poses: anticipation, lunge, FULL THRUST directed toward TOP CENTER of image, recover. UP row shows red cape/back helmet only, face hidden throughout, blade goes straight up away fromviewer, NEVER right. ONE curved magma dao in RIGHT hand. Same armor/fur/plume, compact chibi. Feet stable80%cellheight, full sword fits with largepadding. No VFX, backgrounds, floor, shadows or text; true alpha0. Correct fixed camera cardinal attack animations.",
+      "started": "2026-11-01T02:10:01.061Z",
+      "wholeComponents": true,
+      "fixedScale": 0.19,
+      "knownIssues": "Raised-windup down_0 touches source edge; preview retains original anticipation and uses corrected contact poses.",
+      "completionObservedAt": "2026-11-01T02:13:38.577Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/boss_locomotion_alpha.png",
+          "sha256": "b6ffc7b89eed0a66f8c28fa6e6efaa4c70da37379c6ca63209fc4640d36a0582"
+        }
+      ]
+    },
+    {
+      "id": "vfx_meteor_safe",
+      "nameVi": "Vạn Lý Nham Hỏa — thiên thạch không cắt đuôi",
+      "rows": 1,
+      "cols": 2,
+      "kind": "vfx",
+      "canvas": 384,
+      "exportScale": 0.325,
+      "groups": [
+        "fall"
+      ],
+      "columns": [
+        "0",
+        "1"
+      ],
+      "durationMs": 90,
+      "description": "EXACT1024x512,2columns1row. TWO cels ONLY of a molten basalt meteor FALLING FROM SKY in a fixed elevated top-down wuxia RPG camera. First cel burning irregular obsidian rock approaching a small ground warning ellipse, secondcel rock closer to SAME groundmarker. Short sharp orange flame trail angles up-left; FULL TRAIL AND ROCK MUST FIT within own512cell with at least64px transparent margin on ALL edges. Absolutely NO part touching top/side/bottom canvas edge. Firstcel meteor center at(260,230), secondcel center at(260,290), shared groundmarkercenter(260,380) local to eachcell; shorttrail ends no higher thanY100. Trail length comparable to rock diameter, NOT long truncated tail. No explosion yet, no volcano. Pale ash outline and dark rock readable. Clean alpha background every non-effect pixel0; no text.",
+      "file": "vfx_meteor_safe.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: Vạn Lý Nham Hỏa — thiên thạch không cắt đuôi. EXACT1024x512,2columns1row. TWO cels ONLY of a molten basalt meteor FALLING FROM SKY in a fixed elevated top-down wuxia RPG camera. First cel burning irregular obsidian rock approaching a small ground warning ellipse, secondcel rock closer to SAME groundmarker. Short sharp orange flame trail angles up-left; FULL TRAIL AND ROCK MUST FIT within own512cell with at least64px transparent margin on ALL edges. Absolutely NO part touching top/side/bottom canvas edge. Firstcel meteor center at(260,230), secondcel center at(260,290), shared groundmarkercenter(260,380) local to eachcell; shorttrail ends no higher thanY100. Trail length comparable to rock diameter, NOT long truncated tail. No explosion yet, no volcano. Pale ash outline and dark rock readable. Clean alpha background every non-effect pixel0; no text.",
+      "started": "2026-11-01T02:10:01.061Z",
+      "sourceAnchor": [
+        0.5,
+        0.81
+      ],
+      "completionObservedAt": "2026-11-01T02:13:38.578Z",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": []
+    },
+    {
+      "id": "cannon_clean",
+      "nameVi": "Hỏa pháo — thân pháo và giật lùi",
+      "rows": 2,
+      "cols": 4,
+      "kind": "character",
+      "bodyHeight": 58,
+      "canvas": 160,
+      "groups": [
+        "rest",
+        "recoil"
+      ],
+      "columns": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "durationMs": 100,
+      "file": "cannon_clean.png",
+      "prompt": "Use case: stylized-concept. ORIGINAL detailed chibi wuxia pixel-art GAMEPLAY sprites. Fixed elevated orthographic top-down three-quarter RPG camera, square-aligned ground, NOT isometric, side-scroller, 3D, portrait painting or blurry illustration. Crisp pixel clusters, warm dark outlines, upper-left light. Real differently drawn articulated poses, never translated/scaled duplicates. Transparent alpha, NO checkerboard, shadows, labels, borders, gridlines or text. Evenly spaced invisible cells, ALL artwork inside own cell with generous transparent padding. Camera never rotates. Asset: clean isolated four-direction Mongol wuxia fire CANNON animation components, dark iron barrel bronze bands orange flame engraving, two-wheel wooden carriage red pennant. Match ONLY cannon hardware from attached reference, discard ALL fire smoke glows background. EXACT1536x768,4columns2rows,8cels with massive blank transparent gutters. TOProw four REST poses: c0 DOWN towardviewer muzzlevisible, c1 LEFT muzzle atleft, c2 RIGHT muzzle atright, c3 UP awayviewer breechvisible. BOTTOMrow same four orientations, RECOIL pose: barrel slides backward inside carriage, wheels/frame stay planted and unchanged, flag folds differently. Cannon occupies only center45%width and55%height of eachcell; generous clear padding35px minimum all edges. NO MUZZLE FLASHES, FIREBALLS, SMOKE, SPARKS, FLOOR or background of any kind. Fire effects are separate assets. Crisp chibi detailed pixel art, fixed elevated orthographic camera, no text/labels/grid. Complete separated hardware silhouettes, no neighboring objects touch. Stable wheel groundbaseline at80%cellheight. Every non-cannon pixel alpha0.",
+      "started": "2026-11-01T02:15:10.578Z",
+      "completionObservedAt": "2026-11-01T02:17:19.707Z",
+      "knownIssues": "Side recoil cels face opposite the requested rest columns; preview explicitly selects the observed side facings and holds the side hardware cel during muzzle VFX.",
+      "durationMeasured": false,
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/cannon.png",
+          "sha256": "d23abdda6dbcebbb582bf91daeae990db1f33c65d819cd268da5eadcf7ac76d6"
+        }
+      ]
+    },
+    {
+      "id": "vfx_lava_lane_v03",
+      "file": "vfx_lava_lane_v03.png",
+      "nameVi": "Liệt Diễm Phong Tỏa — viền đá giảm",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 512,
+      "exportScale": 0.8,
+      "groups": [
+        "cast",
+        "impact"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 150,
+      "prompt": "Use case: precise-object-edit. EDIT TARGET: attached original 8-cel Liệt Diễm Phong Tỏa lava-lane VFX spritesheet. Preserve the exact 4columns2rows layout, eight chronological states, horizontal RIGHTWARD direction, common long straight lane footprint, fixed elevated orthographic top-down wuxia pixel-art camera, crisp pixel clusters, transparent alpha and all other identity. Change ONLY the excessive terrain/rocks and heavy effect density: remove about TWO THIRDS of the large jagged boulders/earth piled along BOTH SIDES; replace with a very THIN low CHARRED CRUST edge, small sparse dark chips flush with floor. Absolutely no raised stone wall, mountain ridge, rocky barricade or large debris. Molten surface remains clearly visible orange/red with a few bright yellow flowing veins, but reduce surface flame height/particle density by about20percent, more restrained than original. Each lane is a low ribbon left BEHIND a dashing boss, not an erupting mountain. Keep full LONG 4:1 horizontal footprint and generous transparent padding; do not widen or shorten the strip. Chronological cels: row0c0 thin amber lane-warning outline and rightward chevrons, row0c1 thin ground crack, row0c2 low advancing lava ripple near left, row0c3 low advancing ripple toward right. Row1c0,c1,c2 three loopable persistent lava-flow variations with same footprint and thin charred edge, row1c3 cooled low charcoal scorch scar with NO raised rocks. NO boss/characters, text, grid or background. Preserve true transparent alpha outside the lane. This is an EDIT of the existing effect, not a different spell or camera. Output all8cels separated, no clipped tails or touching neighboring cells.",
+      "started": "2026-11-01T03:06:11.911Z",
+      "completionObservedAt": "2026-11-01T03:06:31.421Z",
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/vfx_lava_lane.png",
+          "sha256": "82117d8120ad33e5be332302970eb332a21613f1f4829cdd5f8c1cdc243a997b"
+        }
+      ],
+      "status": "revision_v03_pending_director_review",
+      "note": "Targeted edit of lava strip only; reduced rocky bank density and low ripple height. Existing v01 source/export retained unchanged."
+    }
+  ]
+}

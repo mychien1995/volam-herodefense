@@ -1,0 +1,36 @@
+{
+  "scope": "v02 standalone art choreography, no Phaser/server/multiplayer",
+  "video": false,
+  "trace": false,
+  "checks": [
+    {
+      "name": "A1 three simultaneous forward fan rays",
+      "facings": 4,
+      "spreadDegrees": [
+        -18,
+        0,
+        18
+      ]
+    },
+    {
+      "name": "A2 increased reach with frontal-only clip",
+      "facings": 4,
+      "multiplier": 1.5
+    },
+    {
+      "name": "Perimeter simultaneous volleys, both axes at 5 active times, full traversal, drain and cleanup",
+      "horizontalSpan": 710,
+      "verticalSpan": 490,
+      "guns": 8,
+      "warningLanes": 4
+    }
+  ],
+  "errors": [],
+  "live": {
+    "observations": 79,
+    "measuredHorizontalTravel": 619.9799999999989,
+    "bothAxesObserved": true
+  },
+  "result": "PASS_V02_STANDALONE_ONLY",
+  "elapsedSeconds": 3.496
+}

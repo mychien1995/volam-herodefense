@@ -1,5 +1,7 @@
 import { spawnChu } from './chu-ba-thong.js';
 import { validateChuDefinition, type ChuDefinition } from './chu-types.js';
+import { HongLietEncounter } from './hong-liet.js';
+import type { HongLietDefinition } from './hong-liet-types.js';
 import { distance } from './geometry.js';
 import { cancelOwnedEffects } from './status.js';
 import { changeBuild, refreshCharacter } from './progression.js';
@@ -25,8 +27,9 @@ import type {
 
 export type DungeonAccess = 'private' | 'shared';
 export interface CreepDungeonDefinition {
+  boss?: HongLietDefinition;
   id: string;
-  boss?: ChuDefinition;
+  chuBoss?: ChuDefinition;
   width: number;
   height: number;
   collision: Rect[];
@@ -48,6 +51,7 @@ export interface CreepDungeonDefinition {
   creepRoster?: string[] | undefined;
 }
 export interface MatchZone {
+  encounter?: HongLietEncounter;
   id: string;
   access: 'arena' | DungeonAccess;
   ownerId: string;
@@ -87,7 +91,7 @@ export class DungeonMatch {
     for (const definition of [dungeon, ...additionalDungeons]) {
       if (this.definitions.has(definition.id))
         throw new Error(`Duplicate dungeon definition: ${definition.id}`);
-      if (definition.boss) validateChuDefinition(definition.boss, base);
+      if (definition.chuBoss) validateChuDefinition(definition.chuBoss, base);
       this.definitions.set(definition.id, definition);
     }
     this.arena = {
@@ -125,6 +129,8 @@ export class DungeonMatch {
     if (zone) removeHero(zone.world, id);
     this.membership.delete(id);
     this.respawns.delete(id);
+    if (zone?.encounter && !zone.world.heroes.size)
+      zone.encounter.clear(zone.world);
   }
   canEnterDungeon(id: string): boolean {
     const hero = this.hero(id);
@@ -174,16 +180,28 @@ export class DungeonMatch {
         dungeon,
       };
       if (dungeon.boss) {
+        zone.encounter = new HongLietEncounter(dungeon.boss);
+        zone.encounter.initialize(zone.world, config);
+      } else if (dungeon.chuBoss) {
         zone.world.creeps.clear();
-        spawnChu(zone.world, config, dungeon.boss);
+        spawnChu(zone.world, config, dungeon.chuBoss);
       } else spawnCreeps(zone.world, config, 'wave_1');
-      this.assignRoster(zone);
+      if (!zone.encounter && !zone.world.chu) this.assignRoster(zone);
       this.zones.set(key, zone);
     }
-    this.transfer(id, zone, {
-      x: dungeon.spawn.x,
-      y: dungeon.spawn.y + zone.world.heroes.size * 24,
-    });
+    const occupant = zone.world.heroes.size;
+    this.transfer(
+      id,
+      zone,
+      dungeon.boss || dungeon.chuBoss
+        ? {
+            x: dungeon.spawn.x + ((occupant % 3) - 1) * 28,
+            y:
+              dungeon.spawn.y +
+              Math.floor(occupant / 3) * 28 * (dungeon.chuBoss ? -1 : 1),
+          }
+        : { x: dungeon.spawn.x, y: dungeon.spawn.y + occupant * 24 },
+    );
     return undefined;
   }
   exit(id: string): string | undefined {
@@ -251,19 +269,24 @@ export class DungeonMatch {
       this.membership.size,
     );
     for (const zone of this.zones.values()) {
-      if (zone.dungeon?.boss && zone.world.chu?.deadAt !== undefined) {
+      if (zone.dungeon?.chuBoss && zone.world.chu?.deadAt !== undefined) {
         zone.bossDiedMatchTick ??= this.tick;
         if (
           this.tick - zone.bossDiedMatchTick >=
-          zone.dungeon.boss.bossRespawnTicks
+          zone.dungeon.chuBoss.bossRespawnTicks
         ) {
-          spawnChu(zone.world, zone.config, zone.dungeon.boss, zone.world.chu);
+          spawnChu(
+            zone.world,
+            zone.config,
+            zone.dungeon.chuBoss,
+            zone.world.chu,
+          );
           delete zone.bossDiedMatchTick;
         }
       }
       if (zone.access !== 'arena' && !zone.world.heroes.size) {
         zone.world.events = [];
-        if (zone.dungeon?.boss) {
+        if (zone.dungeon?.chuBoss) {
           zone.emptySince ??= this.tick;
           const previous = zone.world.chu;
           if (previous)
@@ -271,15 +294,16 @@ export class DungeonMatch {
               if (loot.state === 'rolling') loot.state = 'ground';
           if (
             previous?.deadAt === undefined &&
-            this.tick - zone.emptySince >= zone.dungeon.boss.emptyResetTicks
+            this.tick - zone.emptySince >= zone.dungeon.chuBoss.emptyResetTicks
           ) {
-            spawnChu(zone.world, zone.config, zone.dungeon.boss, previous);
+            spawnChu(zone.world, zone.config, zone.dungeon.chuBoss, previous);
             zone.world.projectiles.clear();
             zone.world.actions = [];
             zone.world.areas = [];
             zone.emptySince = this.tick;
           }
         }
+        zone.encounter?.emptyStep(zone.world, zone.config, this.tick);
         continue;
       }
       delete zone.emptySince;
@@ -287,6 +311,7 @@ export class DungeonMatch {
       stepWorld(zone.world, zone.config);
       if (wasDead === undefined && zone.world.chu?.deadAt !== undefined)
         zone.bossDiedMatchTick = this.tick;
+      zone.encounter?.step(zone.world, zone.config);
       for (const event of zone.world.events)
         this.events.push({ zoneId: zone.id, event });
       if (zone.access === 'arena') {
@@ -303,6 +328,7 @@ export class DungeonMatch {
       if (
         zone.access !== 'arena' &&
         !zone.dungeon?.boss &&
+        !zone.dungeon?.chuBoss &&
         [...zone.world.creeps.values()].every((c) => c.hp <= 0)
       ) {
         const dungeon = zone.dungeon!;
@@ -362,9 +388,12 @@ export class DungeonMatch {
       height: d.height,
       collision: d.collision,
       spawn: d.spawn,
-      creepSpawns: Array.from({ length: d.boss ? 0 : count }, (_, i) => ({
-        ...d.creepSpawns[i % d.creepSpawns.length]!,
-      })),
+      creepSpawns: Array.from(
+        { length: d.boss || d.chuBoss ? 0 : count },
+        (_, i) => ({
+          ...d.creepSpawns[i % d.creepSpawns.length]!,
+        }),
+      ),
       creepRespawn: false,
       creep: {
         ...this.base.creep,
@@ -394,7 +423,9 @@ export class DungeonMatch {
         hero.abilityCooldowns[key] = convert(hero.abilityCooldowns[key]!);
     hero.statuses = [];
     refreshCharacter(hero, destination.config);
-    removeHero(source.world, id); // cancels queued inputs, future shots and owned missiles
+    removeHero(source.world, id);
+    if (source.encounter && !source.world.heroes.size)
+      source.encounter.clear(source.world); // cancels queued inputs, future shots and owned missiles
     hero.x = position.x;
     hero.y = position.y;
     hero.moveX = 0;

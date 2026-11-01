@@ -52,7 +52,7 @@ validateChuDefinition(chuBaThongTuning, m1Config);
 export const chuBaThongDungeon: CreepDungeonDefinition = {
   ...creepDungeon,
   id: 'chu_ba_thong',
-  boss: chuBaThongTuning,
+  chuBoss: chuBaThongTuning,
   width: 1280,
   height: 720,
   collision: map.layers
