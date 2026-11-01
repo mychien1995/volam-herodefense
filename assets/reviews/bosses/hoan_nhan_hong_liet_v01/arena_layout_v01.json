@@ -46,49 +46,89 @@
     "horizontal": [
       [
         249,
-        380,
+        310,
         "right"
       ],
       [
         249,
-        620,
+        410,
+        "right"
+      ],
+      [
+        249,
+        510,
+        "right"
+      ],
+      [
+        249,
+        610,
         "right"
       ],
       [
         1031,
-        380,
+        310,
         "left"
       ],
       [
         1031,
-        620,
+        410,
+        "left"
+      ],
+      [
+        1031,
+        510,
+        "left"
+      ],
+      [
+        1031,
+        610,
         "left"
       ]
     ],
     "vertical": [
       [
-        430,
+        390,
         180,
         "down"
       ],
       [
-        850,
+        550,
         180,
         "down"
       ],
       [
-        430,
+        710,
+        180,
+        "down"
+      ],
+      [
+        870,
+        180,
+        "down"
+      ],
+      [
+        390,
         730,
         "up"
       ],
       [
-        850,
+        550,
+        730,
+        "up"
+      ],
+      [
+        710,
+        730,
+        "up"
+      ],
+      [
+        870,
         730,
         "up"
       ]
     ],
     "firePattern": "both axes warn and fire simultaneously; each projectile travels from perimeter muzzle across full arena to opposite boundary; drain in-flight projectiles before cleanup",
-    "choreography": "choreography_v02.json"
+    "choreography": "choreography_v03.json"
   },
   "volcanoPoints": [
     [
@@ -165,5 +205,47 @@
   "permanentLava": "outside palisade in retained concept only",
   "minionInterpretation": "infantry and archers retained concept; no cavalry/horse art yet",
   "timings": "all proposed in review.js; not combat configuration",
-  "revision": "v02"
+  "revision": "v03",
+  "lavaDashPaths": {
+    "right": [
+      [
+        390,
+        475
+      ],
+      [
+        940,
+        475
+      ]
+    ],
+    "left": [
+      [
+        900,
+        475
+      ],
+      [
+        350,
+        475
+      ]
+    ],
+    "down": [
+      [
+        640,
+        230
+      ],
+      [
+        640,
+        680
+      ]
+    ],
+    "up": [
+      [
+        640,
+        680
+      ],
+      [
+        640,
+        230
+      ]
+    ]
+  }
 }

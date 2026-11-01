@@ -1,12 +1,13 @@
 {
-  "status": "revision_v02_pending_director_review",
+  "status": "revision_v03_pending_director_review",
   "date": "2026-11-01",
   "revisionRequestedBy": "từ từ đã art có vấn đề, A1 chọc đao tầm dài chém 3 đường về phía trước để khó né hơn; A2 tăng tầm xa; Hỏa Pháo Thiên La pháo dọc và ngang cùng lúc ở rìa arena bắn xuyên suốt arena",
   "previousApprovalRecord": "assets/reviews/bosses/hoan_nhan_hong_liet_v01/history/director_approval_22c4b803.json",
   "pendingScopes": [
-    "A1 three forward blade paths",
-    "A2 increased reach",
-    "Hỏa Pháo Thiên La simultaneous perimeter volleys across full arena"
+    "A1 three forward blade paths (retained v02)",
+    "A2 increased reach (retained v02)",
+    "Hỏa Pháo Thiên La denser simultaneous perimeter volleys",
+    "Liệt Diễm Phong Tỏa boss dash and lighter lava border"
   ],
   "retainedApprovalScope": "Unchanged character identities, retained art and unaffected skill preview. Prior approval does not approve the new v02 choreography.",
   "proposedParameters": {
@@ -15,7 +16,10 @@
       0,
       18
     ],
-    "A2reachMultiplier": 1.5
+    "A2reachMultiplier": 1.5,
+    "cannonCount": 16,
+    "lavaDashSeconds": 0.8,
+    "lavaSurfaceScaleY": 1.2
   },
   "runtimeIntegrated": false,
   "phaserVerified": false,
@@ -148,15 +152,27 @@
   "revisionInputs": [
     {
       "path": "assets/reviews/bosses/hoan_nhan_hong_liet_v01/review.js",
-      "sha256": "2cca0f0917b2dbea66140c9a4309bc223382c58903d8ec1ce5946bf8dac8b842"
+      "sha256": "116968821e90c4c5319b72e31c937174690f1629e1c5d8fe7ade9cd0ef00d856"
     },
     {
-      "path": "assets/reviews/bosses/hoan_nhan_hong_liet_v01/choreography_v02.json",
-      "sha256": "dd91ae086ff44228b1a1966753d5c951dfc9e63f704bfe2b9d8fae01f54c78cf"
+      "path": "assets/reviews/bosses/hoan_nhan_hong_liet_v01/choreography_v03.json",
+      "sha256": "ca71c6a3053d3fbc7c16cdbbbd1d90f040e840c4d234490901b1c1b3db7e1a3a"
     },
     {
       "path": "assets/reviews/bosses/hoan_nhan_hong_liet_v01/arena_layout_v01.json",
-      "sha256": "12113c963c052a6a02d626f8d4f36ffd875b4bac7e282cbda344f3791317ae7b"
+      "sha256": "6dee8e2851bc31652854ec151e2808e2638fa37fce4a3f89794a32648d5967d3"
+    }
+  ],
+  "previousRevisionRecord": "assets/reviews/bosses/hoan_nhan_hong_liet_v01/history/director_revision_v02_64dceb0f.json",
+  "latestDirectorStatement": "Hỏa pháo thiên la: tăng số lượng pháo. Liệt Diễm Phong Tỏa: boss lao theo đường nham thạch, hiệu ứng nham thạch giảm đi một chút, đang hơi nhiều đất đá ở viền.",
+  "newUnapprovedArt": [
+    {
+      "path": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_lava_lane_v03.png",
+      "sha256": "5f776facd5c798c02088af4a4779a37f6b75132728aaa2a16cfa9b58bab05964"
+    },
+    {
+      "path": "assets/exports/bosses/hoan_nhan_hong_liet_v01/vfx_lava_lane_v03.json",
+      "sha256": "9045f12146be12922a02bbc12fd5cf55bc73dd3673fa7ca4160b44699d9eadee"
     }
   ]
 }

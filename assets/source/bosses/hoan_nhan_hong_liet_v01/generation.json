@@ -510,6 +510,39 @@
           "sha256": "d23abdda6dbcebbb582bf91daeae990db1f33c65d819cd268da5eadcf7ac76d6"
         }
       ]
+    },
+    {
+      "id": "vfx_lava_lane_v03",
+      "file": "vfx_lava_lane_v03.png",
+      "nameVi": "Liệt Diễm Phong Tỏa — viền đá giảm",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 512,
+      "exportScale": 0.8,
+      "groups": [
+        "cast",
+        "impact"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "durationMs": 150,
+      "prompt": "Use case: precise-object-edit. EDIT TARGET: attached original 8-cel Liệt Diễm Phong Tỏa lava-lane VFX spritesheet. Preserve the exact 4columns2rows layout, eight chronological states, horizontal RIGHTWARD direction, common long straight lane footprint, fixed elevated orthographic top-down wuxia pixel-art camera, crisp pixel clusters, transparent alpha and all other identity. Change ONLY the excessive terrain/rocks and heavy effect density: remove about TWO THIRDS of the large jagged boulders/earth piled along BOTH SIDES; replace with a very THIN low CHARRED CRUST edge, small sparse dark chips flush with floor. Absolutely no raised stone wall, mountain ridge, rocky barricade or large debris. Molten surface remains clearly visible orange/red with a few bright yellow flowing veins, but reduce surface flame height/particle density by about20percent, more restrained than original. Each lane is a low ribbon left BEHIND a dashing boss, not an erupting mountain. Keep full LONG 4:1 horizontal footprint and generous transparent padding; do not widen or shorten the strip. Chronological cels: row0c0 thin amber lane-warning outline and rightward chevrons, row0c1 thin ground crack, row0c2 low advancing lava ripple near left, row0c3 low advancing ripple toward right. Row1c0,c1,c2 three loopable persistent lava-flow variations with same footprint and thin charred edge, row1c3 cooled low charcoal scorch scar with NO raised rocks. NO boss/characters, text, grid or background. Preserve true transparent alpha outside the lane. This is an EDIT of the existing effect, not a different spell or camera. Output all8cels separated, no clipped tails or touching neighboring cells.",
+      "started": "2026-11-01T03:06:11.911Z",
+      "completionObservedAt": "2026-11-01T03:06:31.421Z",
+      "tool": "OpenAI built-in image_gen",
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/hoan_nhan_hong_liet_v01/generated/vfx_lava_lane.png",
+          "sha256": "82117d8120ad33e5be332302970eb332a21613f1f4829cdd5f8c1cdc243a997b"
+        }
+      ],
+      "status": "revision_v03_pending_director_review",
+      "note": "Targeted edit of lava strip only; reduced rocky bank density and low ripple height. Existing v01 source/export retained unchanged."
     }
   ]
 }
