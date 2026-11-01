@@ -1,8 +1,8 @@
 const $=s=>document.querySelector(s),canvas=$('canvas'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;
-const choreography=await fetch('./choreography_v03.json').then(r=>{if(!r.ok)throw Error('Missing v03 choreography');return r.json();});
+const choreography=await fetch('./choreography_v04.json').then(r=>{if(!r.ok)throw Error('Missing v04 choreography');return r.json();});
 const base='/assets/exports/bosses/hoan_nhan_hong_liet_v01/';
 const clips=[
-['idle','Boss · đứng yên',2],['walk','Boss · đi bộ',2.4],['thrust','A1 · ba đường đao phía trước',2],
+['idle','Boss · đứng yên',2],['walk','Boss · đi bộ',2.4],['thrust','A1 · ba đường đao tầm 600px',2],
 ['sweep','A2 · chém 180° tăng tầm 50%',2.2],['stomp','Dung Nham Liệt Địa',3.6],
 ['volcano','Hỏa Sơn Bạo Phát',5],['lava','Liệt Diễm Phong Tỏa',14],
 ['archers','Hỏa Tiễn Tề Phát',6],['infantry','Thiết Kỵ Triệu Binh',5],
@@ -62,9 +62,9 @@ function scene(t){
     const c=choreography.thrust,centerAngle=Math.atan2(dy,dx),x=bx+dx*c.forwardOffset,y=by-c.heightOffset+dy*c.forwardOffset;
     for(const degrees of c.spreadDegrees){
      const angle=centerAngle+degrees*Math.PI/180,o=fx(list,'vfx_basics',fi,x,y,1,by+10,angle);
-     Object.assign(o,{scaleX:c.scaleX,scaleY:c.scaleY,pivot:c.pivot,frontClip:{x:bx,y:by,dir},role:'a1_forward_blade'});
+     Object.assign(o,{scaleX:c.reachPx/(c.opaqueTipX[o.frame]-c.pivot[0]),scaleY:c.scaleY,pivot:c.pivot,frontClip:{x:bx,y:by,dir},role:'a1_forward_blade'});
     }
-    geometry={type:'three_forward_blades',spreadDegrees:[...c.spreadDegrees],simultaneous:true};
+    geometry={type:'three_forward_blades',spreadDegrees:[...c.spreadDegrees],simultaneous:true,reachPx:c.reachPx,previousPeakReachPx:c.previousPeakReachPx};
    }else{
     const c=choreography.sweep,angle=({down:0,left:Math.PI/2,right:-Math.PI/2,up:Math.PI})[dir];
     const o=fx(list,'vfx_basics',4+fi,bx,by,c.previousScale*c.reachMultiplier,by+10,angle);
@@ -72,7 +72,7 @@ function scene(t){
     geometry={type:'front_semicircle',reachMultiplier:c.reachMultiplier,frontOnly:true};
    }
   }
-  note=clip==='thrust'?'Ba đường đao đồng thời phía trước · giữa và ±18° · khóa hướng':'Chém 180° phía trước · tầm xa tăng 50% · giữ nguyên kích thước boss';
+  note=clip==='thrust'?'Ba đường đao tầm 600px · giữa và ±18° · cảnh báo phủ đủ tầm':'Chém 180° phía trước · tầm xa tăng 50% · giữ nguyên kích thước boss';
  }
  if(clip==='stomp'){
   stage=phase(t,1,1.3,2.7);note='Dẫm đất · sóng chấn động rộng · minh họa choáng quanh boss';

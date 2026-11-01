@@ -3,7 +3,11 @@
 Ngày: 2026-11-01. Branch: `wip/m3d/hoan-nhan-hong-liet`.
 Trạng thái: **PROTOTYPE — CHỜ DIRECTOR REVIEW**. Chưa sửa hoặc tích hợp code Phaser, game-core, server, protocol, dữ liệu combat hay package/build configuration.
 
-## Hiện tại: v03 — thêm pháo, boss lao theo nham thạch
+## Hiện tại: v04 — A1 tầm thử 600px
+
+A1 ba đường giữ spread±18° nhưng tăng chiều dài lên600px (khoảng1,76 lần vệt peak v03); warning và ra đòn cùng tầm. Các chiêu khác giữ v03. [Preview, PNG và kiểm tra v04](REVISION_V04.md). Chưa tích hợp Phaser; 600px là tuning thử để director review.
+
+## Lịch sử: v03 — thêm pháo, boss lao theo nham thạch
 
 Hỏa Pháo Thiên La thử 16 khẩu (bốn mỗi rìa), hai trục vẫn bắn đồng thời. Liệt Diễm: boss lao dọc làn, nham thạch để lại phía sau, viền đá và độ dày hiệu ứng đã giảm. [Preview, PNG, nguồn và kiểm tra v03](REVISION_V03.md). A1/A2 v02 giữ nguyên; các phần đang sửa vẫn chờ review. Chưa tích hợp Phaser.
 
