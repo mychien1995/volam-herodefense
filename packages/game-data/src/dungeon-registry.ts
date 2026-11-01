@@ -1,11 +1,13 @@
 import { creepDungeon } from './dungeon.js';
 import { desertDungeon } from './desert.js';
 import { beachDungeon } from './beach.js';
-export type DungeonDestination = 'forest' | 'desert' | 'sea';
+import { coMoDungeon } from './ly-mac-sau.js';
+export type DungeonDestination = 'forest' | 'desert' | 'sea' | 'co_mo';
 export const creepDungeons = [
   creepDungeon,
   desertDungeon,
   beachDungeon,
+  coMoDungeon,
 ] as const;
 export const dungeonForZone = (zone: string) => {
   const dungeon = creepDungeons.find(

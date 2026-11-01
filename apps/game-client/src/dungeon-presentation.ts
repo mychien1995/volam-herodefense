@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { createCoMoArt } from './co-mo-art.js';
 import { creepDungeon, desertDungeon, beachDungeon } from '@volam/game-data';
 import type { DesertManifest } from './desert-art.js';
 
@@ -16,6 +17,7 @@ export function createCreepDungeonArt(
   scene: Phaser.Scene,
   destination = 'forest',
 ): Phaser.GameObjects.Image[] {
+  if (destination === 'co_mo') return createCoMoArt(scene);
   if (destination === 'desert' || destination === 'sea')
     return createAtlasDungeonArt(scene, destination);
   for (const key of ['bamboo_terrain', 'bamboo_scenery'])

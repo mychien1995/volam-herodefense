@@ -1,0 +1,105 @@
+{
+  "date": "2026-11-01",
+  "artPreviewApproved": true,
+  "runtimeIntegrated": true,
+  "runtimeVerified": true,
+  "runtimeDirectorApproved": false,
+  "sourceApproval": "assets/reviews/ly_mac_sau_v02/art_approval_v02.json",
+  "originalRasterBytesUnchanged": true,
+  "finalCommand": "LY_MAC_SAU_QA_PLAYERS=6 pnpm check:final --config playwright.ly-mac-sau.config.ts",
+  "finalResult": {
+    "status": "PASS",
+    "unitIntegrationTests": 376,
+    "workflowChecks": 18,
+    "assetValidators": 14,
+    "browserTests": 3,
+    "totalSeconds": 234.78
+  },
+  "sixClientReport": "docs/evidence/ly-mac-sau-runtime/6-players.json",
+  "comparison": "docs/evidence/ly-mac-sau-runtime/reference-comparison.png",
+  "observations": [
+    "Boss/summon detail, cardinal animation frames, planted logical pivots and feet depth are rendered in Phaser using unchanged reviewed PNGs.",
+    "All six requested actions ran from real server AI; final six-player combat killed the boss and produced one unique six-player roll claim.",
+    "The tiled floor remains visibly more repetitive than the illustration; six-player names/effects overlap in a tight melee cluster.",
+    "Illustration is not used as a fake collision map. Full M4 equipment/selling/drop/crafting and final human balance/art approval remain pending."
+  ],
+  "recordingsCreated": false,
+  "runtimeInputs": [
+    {
+      "path": "maps/boss_co_mo.tmj",
+      "sha256": "03d455ad166cec9588e7fdc7a9790274c855679fd68918e3e77ededf4ef5d155"
+    },
+    {
+      "path": "packages/game-data/src/ly-mac-sau.ts",
+      "sha256": "7fb731fd80c93a2fe4bb6b795e086381436f8af2eb8ae3b9171685a41fd6bb52"
+    },
+    {
+      "path": "packages/game-core/src/boss-encounter.ts",
+      "sha256": "ea34e25e99f44974ef799f78dde4bbee87322763455a7b8e6317e9543da5894d"
+    },
+    {
+      "path": "packages/game-core/src/boss-types.ts",
+      "sha256": "fcdebe5c6077cfe5da2f15c8fd5938dc74bed225f9d76f15e2377d45cf79d411"
+    },
+    {
+      "path": "packages/game-core/src/dungeons.ts",
+      "sha256": "c71d81f4ef7597c46fe427a6c716559dfe4565647f9082a2f7bdaad80b1671d6"
+    },
+    {
+      "path": "packages/game-core/src/simulation.ts",
+      "sha256": "a9abf572f663ba223feceebc6179abdbce4bfe1deaf48ee9e2e50da44011409a"
+    },
+    {
+      "path": "packages/game-core/src/combat.ts",
+      "sha256": "bddbe73c5dbafd974755b18afdea70c98ed2adc67dc7222f0601039ee19f7318"
+    },
+    {
+      "path": "packages/game-core/src/status.ts",
+      "sha256": "f1799efa30e47a6294a70008663e6e85bec55614c5a22fb50be86d2bc2b1077d"
+    },
+    {
+      "path": "packages/game-core/src/types.ts",
+      "sha256": "8d403aa63e46cb6d9202150aed6920ad0cb3da2335aa825efad5810a15943382"
+    },
+    {
+      "path": "packages/game-protocol/src/index.ts",
+      "sha256": "4010a34ae706ced6089db26aacd9c7e8d500e447ecd5f4eba51ee3908615685e"
+    },
+    {
+      "path": "apps/game-server/src/rooms/MatchRoom.ts",
+      "sha256": "c185b25ac1d1877612fd55356136bac9cc77bbca34844dfafa5ba9567c36830b"
+    },
+    {
+      "path": "apps/game-client/src/co-mo-art.ts",
+      "sha256": "c58724d2c45dd663d8b7242605f10e8aa8daaf58d55b79bc4ba1236a7a2e5d9e"
+    },
+    {
+      "path": "apps/game-client/src/arena-scene.ts",
+      "sha256": "85548398c306db18e6c8e77f6140953f9d3af49d2aa1ec199bd269cbe10ca5c6"
+    },
+    {
+      "path": "apps/game-client/src/ui.ts",
+      "sha256": "a3bbd2e5e13abbee380389a894fae97ba1b3bc1fac55da9d6c2645cbb6e5ffe7"
+    },
+    {
+      "path": "apps/game-client/src/menus.ts",
+      "sha256": "ddc6dc34431cf83e265c82efac1a3041c471f97f3e1f7bfefab08581c9ab3c6c"
+    },
+    {
+      "path": "apps/game-client/src/arena-hud.css",
+      "sha256": "4dcd44b6e6a04f4d32c5795993544c5fa9c7d48c3f559a586d8fe775644c889a"
+    },
+    {
+      "path": "scripts/prepare-ly-mac-sau.mjs",
+      "sha256": "02fbdcf58d29ece7e12b443ba3557bc2db4c85e5e9e0a983049a3f577becb113"
+    },
+    {
+      "path": "scripts/compose-ly-mac-sau-map.mjs",
+      "sha256": "8dd3f7cd815e57689bd9646097f5708cb233cffab1d17f948c60e72445fc10df"
+    },
+    {
+      "path": "apps/game-client/public/assets/co_mo/manifest.json",
+      "sha256": "b18f21394032db6b1854f1794fbaf8ba848f2425e6fc8e1b255d404a8e04a673"
+    }
+  ]
+}

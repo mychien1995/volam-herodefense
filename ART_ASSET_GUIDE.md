@@ -1,3 +1,7 @@
+## Lý Mạc Sầu retained runtime integration — 2026-11-01
+
+The approved v02 preview PNGs/atlases are reused without regeneration for Cổ Mộ. `scripts/prepare-ly-mac-sau.mjs` checks 400 approval hashes and copies boss/summon/FX/purple/environment exports; `scripts/verify-ly-mac-sau.py` checks originals, public copies and shared orthogonal Tiled markers. The flattened arena illustration remains a reference, not the runtime map. Authored actor cels, feet pivots and nearest sampling are retained. Runtime director approval remains pending. See `docs/LY_MAC_SAU_INTEGRATION.md`.
+
 # Pixel Art and Animation Pipeline — v1.3
 
 ## Bamboo Forest creep artwork approval — 2026-10-31

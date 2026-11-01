@@ -1,3 +1,7 @@
+## Cổ Mộ encounter / protocol 14 — 2026-11-01
+
+An optional boss definition/runtime composes the existing deterministic World and DungeonMatch. Hostile swept projectiles target same-instance heroes, while ordinary shots retain creep targets. Boss AI owns windups/recovery, one-target release-time aim, eight vectors, bounded summons and twelve world-marker edge lanes. Late DOT kills settle cleanup and unique pending item ownership before snapshot projection. Empty reset and dead-boss respawn use independent match-clock deadlines. Protocol14 projects cast metadata, countdown and pending claims through existing StateViews. The shared retained Tiled map drives authority and Phaser layers; approved PNG/atlas bytes stay pinned. Full M4 inventory is not implemented. Details: `docs/LY_MAC_SAU_INTEGRATION.md`.
+
 ## Forest visual roster — 2026-11-01
 
 `game-data/forest-creep-roster.json` is the authoritative ordered six-ID source consumed by `creepDungeon.creepRoster` and the existing Forest asset adapter. `DungeonMatch.assignRoster()` retains a Forest-only per-instance cursor through actual spawn counts; Desert keeps its previous assignment behavior. Existing `CreepState.archetypeId` and MatchRoom projection carry the type; the client registry still selects solely from that field in Forest zones. No protocol, combat-event or renderer API change is required. Static roster metadata is distinct from natural gameplay verification; the new input-only browser scope disables the old pose endpoint and practice targets. See `docs/FOREST_CREEP_RUNTIME_INTEGRATION.md`.

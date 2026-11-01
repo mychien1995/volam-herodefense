@@ -1,4 +1,6 @@
 import { distance } from './geometry.js';
+import { spawnBossEncounter } from './boss-encounter.js';
+import type { BossEncounterDefinition } from './boss-types.js';
 import { cancelOwnedEffects } from './status.js';
 import { changeBuild, refreshCharacter } from './progression.js';
 import type { BuildChange } from './progression-types.js';
@@ -23,6 +25,7 @@ import type {
 
 export type DungeonAccess = 'private' | 'shared';
 export interface CreepDungeonDefinition {
+  bossEncounter?: BossEncounterDefinition | undefined;
   id: string;
   width: number;
   height: number;
@@ -45,6 +48,8 @@ export interface CreepDungeonDefinition {
   creepRoster?: string[] | undefined;
 }
 export interface MatchZone {
+  emptyBossResetAt?: number | undefined;
+  bossRespawnAt?: number | undefined;
   id: string;
   access: 'arena' | DungeonAccess;
   ownerId: string;
@@ -117,6 +122,9 @@ export class DungeonMatch {
   remove(id: string): void {
     const zone = this.zoneOf(id);
     if (zone) removeHero(zone.world, id);
+    if (zone?.dungeon?.bossEncounter && !zone.world.heroes.size)
+      zone.emptyBossResetAt =
+        this.tick + zone.dungeon.bossEncounter.emptyResetTicks;
     this.membership.delete(id);
     this.respawns.delete(id);
   }
@@ -167,10 +175,12 @@ export class DungeonMatch {
         nextWaveAt: undefined,
         dungeon,
       };
-      spawnCreeps(zone.world, config, 'wave_1');
+      if (dungeon.bossEncounter) spawnBossEncounter(zone.world, config, key);
+      else spawnCreeps(zone.world, config, 'wave_1');
       this.assignRoster(zone);
       this.zones.set(key, zone);
     }
+    zone.emptyBossResetAt = undefined;
     this.transfer(id, zone, {
       x: dungeon.spawn.x,
       y: dungeon.spawn.y + zone.world.heroes.size * 24,
@@ -242,11 +252,35 @@ export class DungeonMatch {
       this.membership.size,
     );
     for (const zone of this.zones.values()) {
+      const encounter = zone.dungeon?.bossEncounter;
+      if (encounter) {
+        const boss = zone.world.creeps.get(zone.world.boss!.actorId)!;
+        if (boss.hp <= 0)
+          zone.bossRespawnAt ??= this.tick + encounter.respawnTicks;
+        if (
+          zone.bossRespawnAt !== undefined &&
+          this.tick >= zone.bossRespawnAt
+        ) {
+          spawnBossEncounter(zone.world, zone.config, zone.id);
+          zone.bossRespawnAt = undefined;
+          zone.emptyBossResetAt = undefined;
+        }
+        if (!zone.world.heroes.size && boss.hp > 0) {
+          zone.emptyBossResetAt ??= this.tick + encounter.emptyResetTicks;
+          if (this.tick >= zone.emptyBossResetAt) {
+            spawnBossEncounter(zone.world, zone.config, zone.id);
+            // A reset is done once per empty period, never every tick.
+            zone.emptyBossResetAt = Infinity;
+          }
+        }
+      }
       if (zone.access !== 'arena' && !zone.world.heroes.size) {
         zone.world.events = [];
         continue;
       }
       stepWorld(zone.world, zone.config);
+      if (encounter && zone.world.creeps.get(zone.world.boss!.actorId)!.hp <= 0)
+        zone.bossRespawnAt ??= this.tick + encounter.respawnTicks;
       for (const event of zone.world.events)
         this.events.push({ zoneId: zone.id, event });
       if (zone.access === 'arena') {
@@ -256,12 +290,15 @@ export class DungeonMatch {
             for (const id of active.world.heroes.keys())
               cancelOwnedEffects(active.world, id);
             active.world.pending = [];
+            active.world.projectiles.clear();
+            if (active.world.boss) active.world.boss.cast = undefined;
           }
           return;
         }
       }
       if (
         zone.access !== 'arena' &&
+        !encounter &&
         [...zone.world.creeps.values()].every((c) => c.hp <= 0)
       ) {
         const dungeon = zone.dungeon!;
@@ -317,6 +354,7 @@ export class DungeonMatch {
     );
     return {
       ...this.base,
+      bossEncounter: d.bossEncounter,
       width: d.width,
       height: d.height,
       collision: d.collision,
@@ -354,6 +392,9 @@ export class DungeonMatch {
     hero.statuses = [];
     refreshCharacter(hero, destination.config);
     removeHero(source.world, id); // cancels queued inputs, future shots and owned missiles
+    if (source.dungeon?.bossEncounter && !source.world.heroes.size)
+      source.emptyBossResetAt =
+        this.tick + source.dungeon.bossEncounter.emptyResetTicks;
     hero.x = position.x;
     hero.y = position.y;
     hero.moveX = 0;

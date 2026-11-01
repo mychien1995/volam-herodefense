@@ -241,7 +241,7 @@ export function hurt(
     );
     target.pose = 'death';
     target.statuses = [];
-    if (world.heroes.has(target.id)) cancelOwnedEffects(world, target.id);
+    cancelOwnedEffects(world, target.id);
     emit(world, {
       kind: 'death',
       sourceId,
@@ -301,7 +301,8 @@ function reward(world: World, creep: Creep, config: SimulationConfig): void {
     .filter(
       (hero) =>
         creep.hits[hero.id] !== undefined &&
-        world.tick - (creep.hits[hero.id] ?? 0) <= stats.assistTicks,
+        (creep.encounterBoss ||
+          world.tick - (creep.hits[hero.id] ?? 0) <= stats.assistTicks),
     )
     .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
   eligible.forEach((hero, i) => {

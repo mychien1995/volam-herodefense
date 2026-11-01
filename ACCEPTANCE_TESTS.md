@@ -1,3 +1,7 @@
+## Lý Mạc Sầu integration scope — 2026-11-01
+
+Enter Cổ Mộ through the normal in-viewport Phó Bản menu in private/shared modes; six clients must share boss HP/positions and private clients must not see another instance's spatial actors. Verify one non-homing needle, eight purple radial palms, frontal-only sweep, four capped real summons and twelve inward projectiles from four world-boundary marker groups. Check windup/damage timing, fixed strength, same-tick DOT kill settlement, one rolled pending claim, no summon reward farming, 29s reentry/30s empty reset, cooldown respawn and cleanup on boss death/travel/defeat. Observe all 192 actor cels/four facings in real Phaser, native feet/pivots/depth, natural combat and normal Space exit. Two-client iteration is reduced coverage; final six-client kill/loot/readability and explicit director runtime approval remain separate. Current commands/evidence/limits: `docs/LY_MAC_SAU_INTEGRATION.md`.
+
 ## Small gameplay changes — 2026-10-31
 
 - New normal clients start Default; Lv1..6 slot ranks are 1/0/0/0,1/1/0/0,1/1/1/0,1/1/1/1,2/1/1/1,2/2/1/1. Both peers observe automatic learning/equipping. Same-branch replacement retains slot allocation; mixed/foreign/duplicate/empty default builds are rejected atomically.

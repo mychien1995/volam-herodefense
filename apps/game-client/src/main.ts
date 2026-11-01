@@ -78,7 +78,8 @@ const fit = (): void => {
   if (!game.isBooted) return;
   const host = element('#game');
   const zoom = animationReview
-    ? reviewScaleOverride ?? (host.clientWidth >= 960 && host.clientHeight >= 600 ? 2 : 1)
+    ? (reviewScaleOverride ??
+      (host.clientWidth >= 960 && host.clientHeight >= 600 ? 2 : 1))
     : artPreview
       ? 2
       : host.clientWidth >= 960 && host.clientHeight >= 600
@@ -147,7 +148,7 @@ function dungeonAction(
     | {
         action: 'enter';
         access: 'private' | 'shared';
-        destination: 'forest' | 'desert' | 'sea';
+        destination: 'forest' | 'desert' | 'sea' | 'co_mo';
       },
 ): void {
   if (

@@ -7,6 +7,7 @@ import {
   creepDungeon,
   desertDungeon,
   beachDungeon,
+  coMoDungeon,
 } from '@volam/game-data';
 import {
   DungeonMatch,
@@ -53,7 +54,7 @@ export class MatchRoom extends Room<{
     creepDungeon,
     this.seed,
     serverInvasionDefinition(),
-    [desertDungeon, beachDungeon],
+    [desertDungeon, beachDungeon, coMoDungeon],
   );
   readonly world = this.simulation.arena.world;
   private readonly checkSequences = new Map<string, number>();
@@ -544,6 +545,7 @@ export class MatchRoom extends Room<{
       const target = this.state.players.get(id);
       if (!target) continue;
       this.syncActor(target, hero, zone.world.tick);
+      target.bossLoot = JSON.stringify(hero.bossLoot ?? []);
       target.zoneId = zone.id;
       target.combos = JSON.stringify(
         (zone.world.combos ?? [])
@@ -634,6 +636,10 @@ export class MatchRoom extends Room<{
           (c) => c.hp > 0,
         ).length;
         dungeon.spawnPlayerCount = zone.spawnPlayerCount;
+        dungeon.respawnTicks = Math.max(
+          0,
+          (zone.bossRespawnAt ?? this.simulation.tick) - this.simulation.tick,
+        );
         dungeon.nextWaveTicks =
           zone.nextWaveAt === undefined
             ? 0
@@ -661,6 +667,14 @@ export class MatchRoom extends Room<{
         target.zoneId = zone.id;
         target.invasionWave = enemy.invasion?.wave ?? 0;
         target.archetypeId = enemy.archetypeId ?? '';
+        const bossCast = enemy.encounterBoss
+          ? zone.world.boss?.cast
+          : undefined;
+        target.castTicks = Math.max(
+          0,
+          (bossCast?.releaseAt ?? zone.world.tick) - zone.world.tick,
+        );
+        target.castTargetId = bossCast?.targetId ?? '';
         target.lane = enemy.invasion?.lane ?? '';
         target.targetId = enemy.invasion?.targetId ?? '';
       }
@@ -694,7 +708,9 @@ export class MatchRoom extends Room<{
         target.y = shot.y;
         target.vx = shot.vx;
         target.vy = shot.vy;
-        target.ownerId = shot.ownerId;
+        target.ownerId = zone.world.creeps.has(shot.ownerId)
+          ? this.entityKey(zone, shot.ownerId)
+          : shot.ownerId;
         target.abilityId = shot.abilityId;
         target.zoneId = zone.id;
         target.radius = shot.effect.radius;

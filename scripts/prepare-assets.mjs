@@ -5,6 +5,7 @@ import { prepareArenaCreeps } from './prepare-arena-creeps.mjs';
 import { prepareForestCreepReview } from './prepare-forest-creep-review.mjs';
 import { prepareDesertAssets } from './prepare-desert-assets.mjs';
 import { prepareBeachAssets } from './prepare-beach-assets.mjs';
+import { prepareLyMacSau } from './prepare-ly-mac-sau.mjs';
 import { prepareFeedbackV2Art } from './prepare-feedback-v2-art.mjs';
 import {
   assetWrites,
@@ -136,6 +137,7 @@ prepareArenaCreeps();
 prepareForestCreepReview();
 prepareDesertAssets();
 prepareBeachAssets();
+prepareLyMacSau();
 console.info(
   `Prepared assets in ${fileURLToPath(dest)} (${assetWrites.changed} written, ${assetWrites.unchanged} unchanged)`,
 );

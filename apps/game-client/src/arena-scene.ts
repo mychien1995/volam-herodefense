@@ -1,4 +1,10 @@
 import Phaser from 'phaser';
+import {
+  CoMoEffects,
+  coMoCreepArt,
+  bossCastStates,
+  isCoMoZone,
+} from './co-mo-art.js';
 import { arena, dungeonForZone } from '@volam/game-data';
 import { desertCreepArt } from './desert-art.js';
 import {
@@ -49,6 +55,7 @@ export class ArenaScene extends Phaser.Scene {
   private sessionId = '';
   protected actors = new Map<string, EntityView>();
   private vfx: SkillVfx | undefined;
+  private coMoEffects: CoMoEffects | undefined;
   protected creepEffects: ArenaCreepEffects | undefined;
   private trees: Phaser.GameObjects.Image[] = [];
   private ready = false;
@@ -78,6 +85,13 @@ export class ArenaScene extends Phaser.Scene {
   }
   create(): void {
     registerArt(this);
+    this.coMoEffects = new CoMoEffects(this);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
+      this.coMoEffects?.clear(),
+    );
+    this.events.once(Phaser.Scenes.Events.DESTROY, () =>
+      this.coMoEffects?.clear(),
+    );
     this.damage = new FloatingDamage(this);
     this.vfx = new SkillVfx(this);
     this.creepEffects = new ArenaCreepEffects(
@@ -111,11 +125,13 @@ export class ArenaScene extends Phaser.Scene {
   }
   setSnapshot(snapshot: LobbyState | undefined, sessionId = ''): void {
     if (this.sessionId !== sessionId) {
+      this.coMoEffects?.clear();
       this.lastEvent = 0;
       this.vfx?.clear();
       this.creepEffects?.clear();
     }
     if (!snapshot) {
+      this.coMoEffects?.clear();
       this.vfx?.clear();
       this.creepEffects?.clear();
       this.damage?.clear();
@@ -126,6 +142,7 @@ export class ArenaScene extends Phaser.Scene {
     if (this.ready && zoneId !== this.zoneId) this.drawZone(zoneId);
   }
   private drawZone(zoneId: string): void {
+    this.coMoEffects?.clear();
     this.cameras.main.stopFollow();
     this.tweens.killAll();
     this.damage?.clear();
@@ -266,7 +283,8 @@ export class ArenaScene extends Phaser.Scene {
     ): void => {
       active.add(id);
       const art = enemy
-        ? (forestCreepArt(
+        ? (coMoCreepArt(this, actor.archetypeId, this.zoneId) ??
+          forestCreepArt(
             this.cache.json.get(
               'forest_creeps_manifest',
             ) as ForestCreepManifest,
@@ -331,8 +349,13 @@ export class ArenaScene extends Phaser.Scene {
       // network pose. This never changes movement, combat or server clocks.
       const authoredMonk =
         !enemy && !cast && texture.startsWith('hero_thieu_lam');
-      const pose =
-        art || authoredMonk
+      const bossPose =
+        actor.archetypeId === 'ly_mac_sau' && actor.hp > 0
+          ? bossCastStates[actor.castAbilityId ?? '']
+          : undefined;
+      const pose = bossPose
+        ? { state: bossPose, direction }
+        : art || authoredMonk
           ? view.playback.resolve(
               actor.hp <= 0 ? 'death' : actor.pose,
               direction,
@@ -431,6 +454,7 @@ export class ArenaScene extends Phaser.Scene {
         }
       }
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
+    this.coMoEffects?.sync(state, this.zoneId);
     this.creepEffects?.sync(
       state,
       this.zoneId,
@@ -475,6 +499,7 @@ export class ArenaScene extends Phaser.Scene {
     if (!this.ready || event.id <= this.lastEvent) return;
     this.lastEvent = event.id;
     if (event.zoneId && event.zoneId !== this.zoneId) return;
+    if (isCoMoZone(this.zoneId)) this.coMoEffects?.event(event);
     if (event.kind === 'attack')
       this.creepAction(event.sourceId, 'basic_attack');
     if (event.kind === 'hit') this.creepAction(event.targetId, 'hurt');
@@ -560,6 +585,21 @@ export class ArenaScene extends Phaser.Scene {
       damage: this.damage?.inspect(),
       skills: this.vfx?.inspect(),
       creepEffects: this.creepEffects?.inspect(),
+      coMoEffects: this.coMoEffects?.inspect(),
+      coMoScenery: this.children.list
+        .filter(
+          (o) => o.name.startsWith('co_mo:') && !o.name.includes(':layer:'),
+        )
+        .map((o) => {
+          const image = o as Phaser.GameObjects.Image;
+          return {
+            name: image.name,
+            x: image.x,
+            y: image.y,
+            depth: image.depth,
+            origin: [image.originX, image.originY],
+          };
+        }),
       interactions: this.children.list
         .filter((o) => o.name === 'dungeon-exit')
         .map((o) => {

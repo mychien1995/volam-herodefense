@@ -1,0 +1,496 @@
+{
+  "status": "prototype_pending_director_review",
+  "date": "2026-11-01",
+  "scope": "Standalone Canvas2D art choreography only. No Phaser, server, AI, collision, damage or networking integration.",
+  "source": "Retained original image_gen v01 boss/summon/environment/effects; two targeted built-in image_gen v02 revisions.",
+  "license": "Original/generated assets retained with their existing provenance. No external pack or exclusive copyright claim.",
+  "newArt": [
+    "assets/effects/bosses/ly-mac-sau/purple_v02/",
+    "assets/concepts/arenas/co-mo-phai/arena_empty_review_v02.png"
+  ],
+  "runtimeIntegrated": false,
+  "runtimeVerified": false,
+  "runtimeApproved": false,
+  "arenaBackdrop": "Flattened empty illustration for art review only; not a production tilemap. Alternate tileset mode uses actual separate exported tiles/props.",
+  "boss": {
+    "canvas": [
+      144,
+      128
+    ],
+    "pivot": [
+      72,
+      104
+    ],
+    "bodyHeightPx": 56,
+    "frames": 128,
+    "directions": [
+      "down",
+      "left",
+      "right",
+      "up"
+    ]
+  },
+  "summon": {
+    "canvas": [
+      112,
+      112
+    ],
+    "pivot": [
+      56,
+      88
+    ],
+    "bodyHeightPx": 44,
+    "frames": 64
+  },
+  "effects": {
+    "canvas": [
+      160,
+      160
+    ],
+    "pivot": [
+      80,
+      80
+    ],
+    "retainedFrames": 92,
+    "newPurpleFrames": 16
+  },
+  "references": [
+    {
+      "path": "assets/references/vo_dang_character_reference.png",
+      "sha256": "a31a5bdebe5afff273f1e68f0741162e17f3a38e9ee98d1a273d0a797f93c6fd"
+    },
+    {
+      "path": "assets/references/in_game_world_reference.png",
+      "sha256": "34dcde54031a4e6fbe565ca3dcbf1c458337fefdb5cb8b06e5967897c51d70e6"
+    },
+    {
+      "path": "assets/references/current_game_2026_10_29_placeholder_anti_reference.png",
+      "sha256": "7650239f6117b3d92ed6e8b1efdafe7213680f258c979808a09a82d2d6c2cdc5"
+    },
+    {
+      "path": "assets/references/current_codex_dashboard_anti_reference.png",
+      "sha256": "a31a5bdebe5afff273f1e68f0741162e17f3a38e9ee98d1a273d0a797f93c6fd"
+    },
+    {
+      "path": "assets/references/central_arena_hub_reference.png",
+      "sha256": "cf20dcdd390d5ad8880bab6d595fd7a5e54024b09cc53f7f1da617b4013ab9d4"
+    },
+    {
+      "path": "assets/references/arena_battle_reference.png",
+      "sha256": "4c5312c75da8ce5e370351218ef25880b4b0056802d562db3a5f1b89682349d5"
+    },
+    {
+      "path": "assets/references/forest_dungeon_reference.png",
+      "sha256": "f7789a37bd47adf937ee9a828a7f2e5a54fb86cc6cc03fd4a91276c4f3be7618"
+    },
+    {
+      "path": "assets/references/desert_dungeon_reference.png",
+      "sha256": "87f09d8422cad1a22bcb7a2734873e6b1389af1739b5bbddc6ea0e3a156c44e9"
+    },
+    {
+      "path": "assets/references/sea_dungeon_reference.png",
+      "sha256": "0c5d201500471be50daca87fd129762ce2326fcb5c7364977125a15c9bcdeb25"
+    },
+    {
+      "path": "assets/references/hell_dungeon_reference.png",
+      "sha256": "a372a829afccc74063aa65d18881a15a6b89f9cfd50fefc5332f9fe2dc99f69c"
+    },
+    {
+      "path": "assets/references/dungeon_selection_menu_reference.png",
+      "sha256": "325ae9e22d833f7ef5d54ffebc9e8a9ba3727089bbff30aa6e6a85771af2ac8a"
+    },
+    {
+      "path": "assets/references/merchant_shop_menu_reference.png",
+      "sha256": "bea6d2f8569903398aebeccad68bb557a84a7292b90ca320e63ca09999083001"
+    },
+    {
+      "path": "assets/references/inventory_menu_reference.png",
+      "sha256": "4774e907e081fd8b53f75a61800d8e5cef00fc1b2cfbe401f49b018a2f503749"
+    }
+  ],
+  "referenceNotes": "The older vo_dang_art_direction_reference.png name is absent; inspected the present vo_dang_character_reference.png. The retained current_codex_dashboard_anti_reference.png visibly contains a Võ Đang sheet, so the current_game placeholder screenshot supplies the actual negative visual benchmark. No reference files were changed.",
+  "inputs": [
+    {
+      "path": "assets/concepts/arenas/co-mo-phai/arena_empty_review_v02.png",
+      "sha256": "340c23418a6829ac477362e8c9b6644453c3d9a4f0e296ca6d0bc615fee4de0b"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/purple_v02/source/palm_sweep_source_v02.png",
+      "sha256": "33967123b620b0142a4577ff638d30964367d95126c592998a6260c2cb93ee8b"
+    },
+    {
+      "path": "assets/reviews/ly_mac_sau_v02/choreography.json",
+      "sha256": "dd4e4926371b141064b78049e98824beaccc7d7cbd4e25c0f530fc3348fe8367"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/spritesheet.png",
+      "sha256": "d9ae8fe3150e4f8226b959af3ee2e1f9aaa6e35e927cc90df66744cf40d8a692"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/atlas.json",
+      "sha256": "126b6ae2821f3471f4493d30c89551fe833b1716b9965575f813e6e654b8a607"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/animations.json",
+      "sha256": "af9fddc75e7e8fe77c72c251cfa3655b281f5cd65f27255b6a467e42e947bb66"
+    },
+    {
+      "path": "assets/sprites/bosses/ly-mac-sau/manifest.json",
+      "sha256": "a776d55f6f51e8d01b9794de7812646a49cad1dd30e50e5ffd904a0d389156f9"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/spritesheet.png",
+      "sha256": "28183184df2b0148a44408c43337ccb0587dc861beeae7d718e58488cf5a0010"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/atlas.json",
+      "sha256": "4d1c7988fd53e0d1412141abc89a6c1d2d59e496305f634c17bce54a9787c872"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/animations.json",
+      "sha256": "a7e7ca3c755119932a0316549d87ab86d6c16f3d4498e72bf445dbf56751b2bc"
+    },
+    {
+      "path": "assets/sprites/summons/co-mo-am-binh/manifest.json",
+      "sha256": "6e5a9905ea778d6204950971301f7c14c3904fa84fff79a45400f52cf2273e9f"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/spritesheet.png",
+      "sha256": "3d41af3f1f4f85cd42cee21c56926ae1b98b00511bbc4da3aa3c21c201009c65"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/atlas.json",
+      "sha256": "623dcc4978f1659a4ef3103e1504c6536d6265f0b2ce1e394864bd1cbad4f6d8"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/animations.json",
+      "sha256": "7c05c6312e77f5879d7ef0b9136140a15407b63a6c68ad9c4a2fee73bfd61dec"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/manifest.json",
+      "sha256": "d4941abda6a910e90f0d9e5356593a64bd6a24aedcb395b24537d9ccd89d5f6e"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/purple_v02/spritesheet.png",
+      "sha256": "8e29bca32066f8fff9a50157c722e8300debbc1f8c016fb0d4b18e772faa2c3d"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/purple_v02/atlas.json",
+      "sha256": "d16d2528165b9f29c9038e8d229fe377334897ba1ebf71c9e879449d01c1a40a"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/purple_v02/animations.json",
+      "sha256": "6989d537736485725e1d3bf469038adab4e4570d2f540f9c5937fb5b4a0b1cb9"
+    },
+    {
+      "path": "assets/effects/bosses/ly-mac-sau/purple_v02/manifest.json",
+      "sha256": "be821044bd97319ca1d6508f7523dc79c10235b0fe0d638e50e77b9ed5ad841b"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_down_0.png",
+      "sha256": "d6e16069ef85d8fd064d8ac683c9fb08d5f86cdf7545856c49746c8cf2246b22"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_down_1.png",
+      "sha256": "d0c6d8fb9935dbed21d9e17712d893b3cbab21bb88d6fb979a81dac4b15f0735"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_down_2.png",
+      "sha256": "dd7dccbb36584325196d56bc946ae9bdf44d82d1810bd0846ef6fb036239d1cd"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_down_3.png",
+      "sha256": "4da084905450f51f818e52d0a0c9cebe5804021886c2394532353ee68d33a654"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_left_0.png",
+      "sha256": "10aa0750d8fa02883460be688debbe7bb24aed7cbb4f246d7bb9a0f9cde509fb"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_left_1.png",
+      "sha256": "7f04db117413d15326b39211dee7d66faa8ba61fb7934d063261e601795fbb3c"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_left_2.png",
+      "sha256": "78ee645cbcadf6c57d26392f2ed36978aadd2306ddec51c6367e71dacc254a82"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_left_3.png",
+      "sha256": "60173d7dcdc91cbae57fc87bbb1f84f0ad6342d23f300ce9bf59592218487468"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_right_0.png",
+      "sha256": "cf4b71c49c3a2a13d8df0ccd435572f2fc818776c9599f72e92e51d81cb180a4"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_right_1.png",
+      "sha256": "22279619e8e761c626c7513b1ee7ced1f14e7215880f0ab27c3ac0522e9b3d14"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_right_2.png",
+      "sha256": "51d9840427ad30e131e9cad6a08778b396fdea3686e1b7dd851b23415910dbfa"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_right_3.png",
+      "sha256": "e76168cc1b5e980186d50b503a4988aca01166598ed7714101b1bc1f4e8053b3"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_up_0.png",
+      "sha256": "bf77b4c0f76860fe9984a78df35a8666133f5f73f847003dda081da2e768b4ea"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_up_1.png",
+      "sha256": "4804653886a03dfebf97674d609eaeed645511eed0bf2f056fb8a9606e4ac0dc"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_up_2.png",
+      "sha256": "4f9720c06e6c0a178c08b2938fccc8058a2873ff23406981809753da345b6453"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/basic_attack_up_3.png",
+      "sha256": "2951755d9a5e242a76891282bd345deccd46fe2d7b1d0b60506d8d800095d0f1"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/idle_down_0.png",
+      "sha256": "2bec46939dc478cd2fa71f3aa2974fc69ee03a097ce18e716dd051a9e266ec29"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/idle_down_1.png",
+      "sha256": "1dadab3c25ea95c2f11fb0bf49288536e63c9de6aef97bc81b43953d78432c51"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/idle_left_0.png",
+      "sha256": "8d3bcadef110d09050302a1609d8ba70ed9ec1bf6d5747470fd3f37d1637ced7"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/idle_left_1.png",
+      "sha256": "ec182aa8153ccaf192de14b69ee059da93aa99efbbf046a9165512b22b7d4966"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/idle_right_0.png",
+      "sha256": "e0b9f4f9a7e66a6fa8b64ae152be22476c7bc0207129b32504caf5d0fc7d4fe0"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/idle_right_1.png",
+      "sha256": "1210059e3961d9b9b66f10d914e3e4b397b5be2d7dc9f189a6902de9f125a42a"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/idle_up_0.png",
+      "sha256": "141e19e0742f342ee990f67a6c2d3dbf367a2ab2be873eea242bde454e79fae1"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/idle_up_1.png",
+      "sha256": "8913eb9843d7e805094bff4872fabe80746caed1ffb3bf60b0159b93547c51d4"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_down_0.png",
+      "sha256": "bb44141138361f57f474ae8dad4e413b918c6bcc23a3412c89da2ec46d3c4b50"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_down_1.png",
+      "sha256": "ea2f0277f23a752a99a9bdb2b0d71dc4713eab48eebc59c8dcb01450e625ac1a"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_down_2.png",
+      "sha256": "efb1d68342b845beade9cdb4d4db77ab5314e6b1ee0835d5228d3a13b6d155b2"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_down_3.png",
+      "sha256": "17c481448c3d9aa0c37d29dfbc816fbecc5cd6133d85c8dd945d709ac8041a71"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_left_0.png",
+      "sha256": "0f94b7a360a4025a128bf0ec43efb1c52235c9160f2d92fb9798d930a37298ae"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_left_1.png",
+      "sha256": "3bda2542436062bf9260282f7d3a49ab15297058ddeaa4e239c8a46ee45e5873"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_left_2.png",
+      "sha256": "2e14b9b5b1fec3c36f232242abcf482a219d774859a490b7777d9ae3d8685273"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_left_3.png",
+      "sha256": "2488ac1de3096f463c034144aed6ea81927f131a957d4db01d26f313701a2482"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_right_0.png",
+      "sha256": "0b28c4bdcb5465353a3fc4346eadbe93a5930dae8d28aa7348b147f702aa82c4"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_right_1.png",
+      "sha256": "1f23a5d7add9dce0d4872b5a7ea95ffa10b820fd13faf2681a35305dcc83deba"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_right_2.png",
+      "sha256": "1a801ff41d333338d346c6d1ffd80a5cbafb0a8390cef95eab20751e5c94dd2f"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_right_3.png",
+      "sha256": "c93d35f163b03029d87131b7c2e44df1a4ce98af757aac82070d1e55e9708150"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_up_0.png",
+      "sha256": "cd9f0cc59c33b642c79ec08aabff6954abbd3b08779578dcfe8836583326a4da"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_up_1.png",
+      "sha256": "e44ea0a54ddea8b5097342f32911b481340f2038737a844d4463c8d3ceee894f"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_up_2.png",
+      "sha256": "c2a4ceb4183060d14a5bd1cefbae1bdc297c617a61f048259d194f7824d44d6b"
+    },
+    {
+      "path": "assets/exports/characters/vo_dang_v01/quyen/frames/walk_up_3.png",
+      "sha256": "07a59d845e3345d33ab47d795adad66d7f9fe6c7d251a0d51b8eb18de08655c4"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/altar.png",
+      "sha256": "9303c9df1c7f4196b36c003a1c9384122388480c6540654debef86172aa4da62"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/cave_corner.png",
+      "sha256": "351108e20bcc1bd8f5f232bb073ee92e47b49abaf33f868c0e4ca66a7c675fb3"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/cave_rubble.png",
+      "sha256": "6290bb89117d01ace75f150f1b90d1d028a5698c27b237139bb213d657e6dd05"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/cave_wall_horizontal.png",
+      "sha256": "d29e37bb50b1cae1638242820a9de5c5ce7aa914a793aadaf994f1e64a254c3b"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/cave_wall_vertical.png",
+      "sha256": "c6645ff8f7397ecb3aab493512e7e2e1754801617539c1990257b9150a248444"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/contact_sheet.png",
+      "sha256": "bdb4b1eeea28f883b468c692d89e78290f8f45a228d34f170b88627a868794a0"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/faded_banner.png",
+      "sha256": "52096aeca72797dc645e7accc30616a7bc4c64e903d67e023bdf580004c1b973"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/female_founder_statue.png",
+      "sha256": "e7d6e76a3ec171326e31ff9c8423ab622066e5bf4ce7d314c7abb8dd77ac3f17"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/funerary_urn.png",
+      "sha256": "b95c23371573b0a2d8c17f8697bf4e8e9dd637c656da36b3507fdf0d4d1ff40e"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/jade_lantern.png",
+      "sha256": "de21b15035a32b01c1a9edbaec483c0755be20ecfc11376b75c7f9eda9f1c5c4"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/lotus_pillar.png",
+      "sha256": "3800aa2592a6f1766c69d3591d194e937b82a09da8e76c07f66b54db8b0eecbd"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/male_founder_statue.png",
+      "sha256": "2cfd214b6f6b85624c119634079dab1efe2b8f6dcd5120f8a18dcd6197f6fb47"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/plum_vase.png",
+      "sha256": "8a65bb85a9e82755c8a4350102c4edf78596c8ec7fc6f869d86e461550a3b078"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/spritesheet.png",
+      "sha256": "0e290fe1682b349c01d8073ca0784781682bc800f384c8607cadffd249c5b8b5"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/stalagmites.png",
+      "sha256": "a4acd226a72d2e1c61354bdecec219ae69fe11776ee1d2b1badcb3d3b870a90b"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/stone_bench.png",
+      "sha256": "14597475ee6fc4a54fd289b69be59754766f3872d757c2ae0cb8c12e42a6aab1"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/sword_rack.png",
+      "sha256": "2e99da7d8ead07bd2c7e4837a6ce621a72f6da0ada810a3d06dd0ef418f21fe0"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/terrain.png",
+      "sha256": "f8d254fe06443cbc63848c0193ffaee1f387203c756b7967cfd5573bdaac55af"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tomb_school_arch.png",
+      "sha256": "3e0a501f3772905c6ddb6c30890f5adbbb5abea5223cdea58431608917510076"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/bedrock_a.png",
+      "sha256": "07d51d3a05a00d35c2b14eaaca703354746e054a49dd71add99f9cf3c76d780e"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/bedrock_b.png",
+      "sha256": "e8a20b76d0e940963c706351b24007daf1b9d7d9d4d2fa8011faf522af1a5f2b"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/bedrock_c.png",
+      "sha256": "cbd8f2998cf38c2ed1c6fff29e3a020efe9412a24d0cabf58546918ed19a6e82"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/bedrock_d.png",
+      "sha256": "ec3308adaa9a3a0a360526446f89736d4f5fd1736c942bfa768388a911785bb6"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/border_corner.png",
+      "sha256": "da55522642d8e3fcd4133b4f054393f2f826776101deaeae1baf7b31c6468b4d"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/border_horizontal.png",
+      "sha256": "1fb0013d8bb0e2da9f5da0697a7f08bdc4c560681f94367467ae68f58c000ee5"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/border_vertical.png",
+      "sha256": "aa64c6ca0a73825b11ca7dadd716f81a337d0fc26f17aac54c849ae842976ada"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/lotus_engraving.png",
+      "sha256": "259d758be984a56cad29f78748c48fe6d00a0fc3f110d66284c85f5a4edde93c"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_clean_a.png",
+      "sha256": "ce6b9fee8f4a8c3eeb4004e68b613762270fea5a9ab6163926f8c2deca1bdc6e"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_clean_b.png",
+      "sha256": "3a4a1e82a428b1cbb4f4a0bc71bcc263ff9548fc14c042e80e323b71af83701b"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_clean_c.png",
+      "sha256": "b65ccaa33caa77726020d98ecdf3b49f565b633e183121f8c5a681154699023d"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_clean_d.png",
+      "sha256": "eb15b292ab65cbe2f47f3f08ff87aa22945af78d313f86f4f1bd7b45098ce6da"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_damp.png",
+      "sha256": "028785c70b383681d48f1be98f7d9bfbb1bae72dcae59f191c01962ee7082756"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_dust.png",
+      "sha256": "7dc1699af74d8e2bf477c12a989f609fccc85bdce5d342dc9e3826a11c34a2d9"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_fractured.png",
+      "sha256": "015b9b69335b1218767b0ab42479815b5a5b0df0faee4a5f5492f6768251aede"
+    },
+    {
+      "path": "assets/sprites/environment/co-mo-phai/tiles/slab_moss.png",
+      "sha256": "8d5c4f0be6f9e6bd702c92ec1900478de4f1c149a6a12eeee248910228cc6a3a"
+    }
+  ],
+  "limitations": [
+    "Retained directional cast gestures sometimes turn toward viewer.",
+    "Artwork motion review in this viewer does not establish Phaser or multiplayer acceptance.",
+    "Illustrated backdrop is more detailed than separable environment exports; exact terrain seams/foreground splits remain pending.",
+    "All ranges, release timings, summon count and edge volleys are review defaults, not approved combat tuning."
+  ]
+}
