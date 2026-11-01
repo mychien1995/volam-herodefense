@@ -18,7 +18,9 @@ export default async function setup() {
   process.env['NODE_ENV'] = 'development';
   for (const k of names.slice(1)) delete process.env[k];
   const server = createGameServer();
-  await server.listen(2794);
+  const serverPort = Number(process.env['KIM_LUAN_QA_SERVER_PORT'] ?? 2794);
+  const clientPort = Number(process.env['KIM_LUAN_QA_CLIENT_PORT'] ?? 5394);
+  await server.listen(serverPort);
   const authority = new ColyseusTestServer(server);
   const client = await createServer({
     root: fileURLToPath(new URL('../../apps/game-client', import.meta.url)),
@@ -26,7 +28,7 @@ export default async function setup() {
     cacheDir: '.cache/kim-luan-vite',
     server: {
       host: '127.0.0.1',
-      port: 5394,
+      port: clientPort,
       strictPort: true,
       hmr: false,
       watch: null,
@@ -34,7 +36,7 @@ export default async function setup() {
     define: {
       'import.meta.env.VITE_KIM_FRAME_TEST': 'true',
       'import.meta.env.VITE_SERVER_URL': JSON.stringify(
-        'http://127.0.0.1:2794',
+        `http://127.0.0.1:${serverPort}`,
       ),
     },
     plugins: [

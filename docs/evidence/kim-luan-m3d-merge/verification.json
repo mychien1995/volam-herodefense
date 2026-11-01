@@ -1,0 +1,93 @@
+{
+  "overallVerification": "PASS",
+  "date": "2026-11-01T14:21:30.917898+00:00",
+  "sourceFeatureCommit": "1d829ac9",
+  "testedRuntimeMergeCommit": "18973f20",
+  "targetBaseline": "f13dc1c9",
+  "targetBranch": "milestone/m3d",
+  "protocolVersion": 17,
+  "workflowTests": 18,
+  "unitIntegrationTests": 471,
+  "unitIntegrationFiles": 41,
+  "assetValidators": 15,
+  "approvedKimPins": 246,
+  "approvedLyPins": 400,
+  "originalPipeline": {
+    "status": "FAIL",
+    "record": "docs/evidence/sessions/kim-luan-m3d-merge/check-workflow/final-timings.json",
+    "browserStartupBlocker": "EADDRINUSE2794: old demo retained; all preceding stages passed"
+  },
+  "browserRetry": {
+    "status": "PASS",
+    "exitCode": 0,
+    "cases": 7,
+    "command": "KIM_LUAN_QA_SERVER_PORT=2804 KIM_LUAN_QA_CLIENT_PORT=5404 LY_MAC_SAU_QA_PLAYERS=6 node tools/run-playwright.mjs test --config playwright.kim-luan-m3d.config.ts",
+    "changedInputs": "Test-service port overrides only; no runtime change after the full unit/build/validator pass"
+  },
+  "kim": {
+    "players": 6,
+    "frames": 184,
+    "clips": 53,
+    "naturalPhases": [
+      "disciples",
+      "boss",
+      "defeated"
+    ],
+    "enraged": true,
+    "defeated": true,
+    "errors": []
+  },
+  "lyMacSau": {
+    "players": 6,
+    "frames": 192,
+    "killAndLootVerified": true,
+    "errors": [],
+    "fixtureScope": "Frame poses plus legal level-15 XP grants and position arrangements; natural combat restores shipped boss tuning, real A input, no HP/damage overrides."
+  },
+  "selector": {
+    "status": "PASS",
+    "entries": [
+      {
+        "destination": "forest",
+        "zone": "forest_private_SW6twj8i3"
+      },
+      {
+        "destination": "desert",
+        "zone": "desert_private_qOGdlqYt1"
+      },
+      {
+        "destination": "sea",
+        "zone": "sea_private_WaC3LFt37"
+      },
+      {
+        "destination": "hong_liet",
+        "zone": "hong_liet_private__A9BAohR3"
+      },
+      {
+        "destination": "chu_ba_thong",
+        "zone": "chu_ba_thong_private_q1kdSNFBd"
+      },
+      {
+        "destination": "kim_luan",
+        "zone": "kim_luan_private_joHCnLuMj"
+      },
+      {
+        "destination": "co_mo",
+        "zone": "co_mo_private_CIr3L9bwV"
+      }
+    ],
+    "bossCardsSameRow": true,
+    "thumbnailLoaded": true,
+    "viewportWidths": [
+      960,
+      1280,
+      1920
+    ],
+    "normalUiOnly": true,
+    "recordingsCreated": false
+  },
+  "retainedArtworkUnchanged": true,
+  "runtimeDirectorApproval": "approved_runtime_for_milestone_m3d",
+  "recordingsCreated": false,
+  "visualReview": "Opened new natural-combat PNGs and960px selector; eight cards remain in-viewport, four boss cards share the same row; original raster/pivots retained. Dense melee label overlap remains the previously disclosed limitation."
+}

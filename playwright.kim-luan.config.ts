@@ -8,7 +8,7 @@ export default defineConfig({
   reporter: 'list',
   outputDir: './artifacts/kim-luan-browser',
   use: {
-    baseURL: 'http://127.0.0.1:5394',
+    baseURL: `http://127.0.0.1:${process.env['KIM_LUAN_QA_CLIENT_PORT'] ?? 5394}`,
     viewport: { width: 1440, height: 1000 },
     video: 'off',
     trace: 'off',
