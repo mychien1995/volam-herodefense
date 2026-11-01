@@ -3,6 +3,11 @@ import type {
   HeroProgression,
   ProgressionDefinition,
 } from './progression-types.js';
+import type {
+  BossEncounterDefinition,
+  BossLootClaim,
+  BossRuntime,
+} from './boss-types.js';
 export interface Point {
   x: number;
   y: number;
@@ -200,6 +205,7 @@ export interface Ability {
     | SupportEffect;
 }
 export interface SimulationConfig {
+  bossEncounter?: BossEncounterDefinition | undefined;
   progression?: ProgressionDefinition | undefined;
   tickRate: number;
   inputTimeoutTicks: number;
@@ -253,6 +259,7 @@ export type Command =
   | { kind: 'dev-loadout'; ids: string[] }
   | { kind: 'select-basic'; id: string };
 export interface Actor extends Point {
+  controlResistance?: number;
   id: string;
   hp: number;
   maxHp: number;
@@ -270,6 +277,7 @@ export interface Actor extends Point {
 }
 export interface Hero extends Actor {
   bossItems?: string[];
+  bossLoot?: BossLootClaim[];
   progression?: HeroProgression | undefined;
   schoolId: string;
   nickname: string;
@@ -293,6 +301,9 @@ export interface Creep extends Actor {
   bossEncounter?: boolean;
   controlled?: boolean;
   encounterAction?: { startedAt: number; activeAt: number; endsAt: number };
+  encounterBoss?: boolean;
+  summonedBy?: string;
+  expiresAt?: number;
   /** Server-selected presentation identity; does not grant extra abilities. */
   archetypeId?: string;
   stats?: SimulationConfig['creep'];
@@ -314,6 +325,8 @@ export interface Creep extends Actor {
   burnDamage: number;
 }
 export interface Projectile extends Point {
+  hostile?: boolean;
+  targetId?: string;
   id: string;
   ownerId: string;
   abilityId: string;
@@ -375,6 +388,7 @@ export interface CombatArea extends Point {
 }
 export interface World {
   chu?: ChuEncounter;
+  boss?: BossRuntime;
   combos?: Array<{
     sourceId: string;
     targetId: string;

@@ -1,6 +1,14 @@
+## Lý Mạc Sầu merge authorization — 2026-11-01
+
+The director explicitly requests committing and merging the existing approved Lý Mạc Sầu integration into `milestone/m3d`, retaining current features and retesting the Cổ Mộ selector. This supersedes the earlier worktree-only delivery scope. Existing Forest/Desert/Beach, Hồng Liệt, Chu Bá Thông, school progression and Chu item transactions remain; Cổ Mộ pending claims stay separate. This merge approves delivery scope, not new artwork, final boss tuning or full M4 inventory. Exact merge/verification: `docs/LY_MAC_SAU_INTEGRATION.md`.
+
 ## Chu Bá Thông encounter authorization — 2026-11-01
 
 The director explicitly approved feedback01 artwork/choreography and requested integration solely in `wip/m3d/chu-ba-thong`. This adds the private/shared Chu Bá Thông dungeon, three normals, five named specials, moving Yin–Yang fields, faster/wider spin, smaller hands and one wine disciple per member, reusing current progression/controls. Server owns all attacks/geometry/status/RNG/loot; wine delivery grants no inferred immunity/buff. Preview approval is pinned separately from pending runtime art approval. Damage/HP/reward coefficients and control policy remain documented trial defaults. Exact mechanics, ownership and limitations: `docs/CHU_BA_THONG_INTEGRATION.md`.
+
+## Lý Mạc Sầu encounter authorization — 2026-11-01
+
+The director explicitly authorizes only Lý Mạc Sầu/Cổ Mộ Phái integration in `codex/m3d/ly-mac-sau`, using the approved v02 preview assets unchanged. The encounter has private/shared instances, six requested attacks, server-owned casts/hostile projectiles/summons, fixed boss strength, 30s empty reset and cooldown respawn. Purple eight-way palms are mandatory; no poison/slow/stun is invented from VFX. Numeric attack/HP/reward/CC values and two loot identities are configurable trial tuning. A narrow single-item auto-roll produces a match-only pending claim; full inventory/equipment/crafting and other bosses are not authorized by this task. Art-preview approval is recorded separately; runtime director approval remains pending. See `docs/LY_MAC_SAU_INTEGRATION.md`.
 
 ## Forest authoritative visual roster — 2026-11-01
 

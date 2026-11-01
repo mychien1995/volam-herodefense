@@ -1,6 +1,14 @@
+## M3D merged Cổ Mộ selector regression — 2026-11-01
+
+`tests/e2e/ly-mac-sau.spec.ts` additionally checks real menu entry into Forest, Desert, Beach, Hồng Liệt, Chu Bá Thông and Cổ Mộ, plus Cổ Mộ overlay bounds at1280×720/1920×1080. The merged final gate includes the existing two dungeon cases and six-client Cổ Mộ frame/action/combat/one-claim/isolation/Space-cleanup acceptance; full unit/room tests and all retained approval guards remain required. Exact executed results: `docs/LY_MAC_SAU_INTEGRATION.md`.
+
 ## Chu Bá Thông focused integration gate — 2026-11-01
 
 Required: exact approved102 input hashes;107 real Phaser clips/428 frames; three normals and five specials; feet coverage/ranged fists; no homing; warning/travel/contact/dissipation with hand capsule bounds; rescue/solo/death/disconnect/timeout30s; swept fast spin; exact nonrecursive reflection; server/client moving fields; disciples equal dungeon members; private/shared isolation; alive empty30s reset versus dead45s respawn; fixed XP pool and one owned/drop item with validated roll/pass/pickup/sell/drop; physical Space return, original controls, in-viewport HUD and six-client readability. Automated results and remaining art/balance scope: `docs/CHU_BA_THONG_INTEGRATION.md`. Passing tests is not final director art approval.
+
+## Lý Mạc Sầu integration scope — 2026-11-01
+
+Enter Cổ Mộ through the normal in-viewport Phó Bản menu in private/shared modes; six clients must share boss HP/positions and private clients must not see another instance's spatial actors. Verify one non-homing needle, eight purple radial palms, frontal-only sweep, four capped real summons and twelve inward projectiles from four world-boundary marker groups. Check windup/damage timing, fixed strength, same-tick DOT kill settlement, one rolled pending claim, no summon reward farming, 29s reentry/30s empty reset, cooldown respawn and cleanup on boss death/travel/defeat. Observe all 192 actor cels/four facings in real Phaser, native feet/pivots/depth, natural combat and normal Space exit. Two-client iteration is reduced coverage; final six-client kill/loot/readability and explicit director runtime approval remain separate. Current commands/evidence/limits: `docs/LY_MAC_SAU_INTEGRATION.md`.
 
 ## Small gameplay changes — 2026-10-31
 

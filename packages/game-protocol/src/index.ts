@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 15;
+export const PROTOCOL_VERSION = 16;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -149,7 +149,7 @@ export const dungeonActionSchema = z.discriminatedUnion('action', [
     action: z.literal('enter'),
     access: z.enum(['private', 'shared']),
     destination: z
-      .enum(['forest', 'desert', 'sea', 'chu_ba_thong', 'hong_liet'])
+      .enum(['forest', 'desert', 'sea', 'chu_ba_thong', 'hong_liet', 'co_mo'])
       .optional(),
   }),
   z.strictObject({
@@ -266,6 +266,7 @@ export const LobbyPlayer = schema(
     wSkill: t.string().default('cuong_long_loan_vu'),
     eSkill: t.string().default(''),
     rSkill: t.string().default(''),
+    bossLoot: t.string().default('[]'),
   },
   'ArenaPlayer',
 );
@@ -273,6 +274,8 @@ export type LobbyPlayer = SchemaType<typeof LobbyPlayer>;
 export const CreepState = schema(
   {
     ...actorFields,
+    castTicks: t.number().default(0),
+    castTargetId: t.string().default(''),
     archetypeId: t.string().default(''),
     actionStartedAt: t.number(),
     actionActiveAt: t.number(),
@@ -337,6 +340,7 @@ export const DungeonState = schema(
     bossHp: t.number(),
     bossMaxHp: t.number(),
     bossRespawnTicks: t.number(),
+    respawnTicks: t.number().default(0),
   },
   'CreepDungeon',
 );

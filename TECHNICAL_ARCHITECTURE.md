@@ -1,6 +1,14 @@
+## M3D combined boss protocol16 — 2026-11-01
+
+The main-checkout Lý Mạc Sầu merge combines all six dungeon destinations and bumps the current protocol15 to16 for Co Mo cast/countdown/pending-claim fields. Existing Hồng Liệt/Chu encounter projection and validated Chu item transactions are retained. Co Mo's `CoMoBossCast` export and World boss runtime remain distinct from Hồng Liệt's encounter object and Chu's world state; their lifecycle/CC adapters compose without replacing one another. Earlier protocol14 sections are historical. Integration and executed regression evidence: `docs/LY_MAC_SAU_INTEGRATION.md`.
+
 ## Chu Bá Thông integration — 2026-11-01
 
 Protocol14 adds the boss destination, scoped encounter projection and validated loot/material requests. Optional boss state in engine-independent World/Creep/DungeonMatch composes with the existing damage/progression and private/shared zone pipeline. A per-zone server state machine supplies phase clocks, swept palms/projectiles/spin, confinement and moving field geometry. Renderer/UI consume that projection inside the current Phaser viewport; no client animation drives hits. Match-clock empty reset/dead respawn deadlines remain distinct. Source/approval guards, legal-build probes and runtime limitations: `docs/CHU_BA_THONG_INTEGRATION.md`.
+
+## Cổ Mộ encounter / protocol 14 — 2026-11-01
+
+An optional boss definition/runtime composes the existing deterministic World and DungeonMatch. Hostile swept projectiles target same-instance heroes, while ordinary shots retain creep targets. Boss AI owns windups/recovery, one-target release-time aim, eight vectors, bounded summons and twelve world-marker edge lanes. Late DOT kills settle cleanup and unique pending item ownership before snapshot projection. Empty reset and dead-boss respawn use independent match-clock deadlines. Protocol14 projects cast metadata, countdown and pending claims through existing StateViews. The shared retained Tiled map drives authority and Phaser layers; approved PNG/atlas bytes stay pinned. Full M4 inventory is not implemented. Details: `docs/LY_MAC_SAU_INTEGRATION.md`.
 
 ## Forest visual roster — 2026-11-01
 

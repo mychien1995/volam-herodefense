@@ -52,6 +52,20 @@ export function applyStatus(
         Math.ceil(spec.durationTicks * actor.crowdControlScale),
       ),
     };
+  else if (
+    actor.controlResistance &&
+    ['stun', 'silence', 'disarm', 'slow', 'attack_slow'].includes(spec.kind)
+  )
+    spec = {
+      ...spec,
+      durationTicks: Math.max(
+        1,
+        Math.round(spec.durationTicks * (1 - actor.controlResistance)),
+      ),
+      magnitude: ['slow', 'attack_slow'].includes(spec.kind)
+        ? spec.magnitude * (1 - actor.controlResistance)
+        : spec.magnitude,
+    };
   actor.statuses ??= [];
   const old = actor.statuses.find(
     (s) =>

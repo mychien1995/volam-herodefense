@@ -1,5 +1,7 @@
 export * from './random.js';
 export * from './types.js';
+export * from './boss-types.js';
+export * from './boss-encounter.js';
 export * from './geometry.js';
 export * from './simulation.js';
 export * from './dungeons.js';

@@ -14,6 +14,7 @@ import {
   beachDungeon,
   chuBaThongDungeon,
   hongLietDungeon,
+  coMoDungeon,
 } from '@volam/game-data';
 import {
   DungeonMatch,
@@ -61,7 +62,13 @@ export class MatchRoom extends Room<{
     creepDungeon,
     this.seed,
     serverInvasionDefinition(),
-    [desertDungeon, beachDungeon, chuBaThongDungeon, hongLietDungeon],
+    [
+      desertDungeon,
+      beachDungeon,
+      chuBaThongDungeon,
+      hongLietDungeon,
+      coMoDungeon,
+    ],
   );
   readonly world = this.simulation.arena.world;
   private readonly checkSequences = new Map<string, number>();
@@ -623,6 +630,7 @@ export class MatchRoom extends Room<{
       if (!target) continue;
       this.syncActor(target, hero, zone.world.tick);
       target.bossItems = JSON.stringify(hero.bossItems ?? []);
+      target.bossLoot = JSON.stringify(hero.bossLoot ?? []);
       target.zoneId = zone.id;
       target.combos = JSON.stringify(
         (zone.world.combos ?? [])
@@ -724,6 +732,10 @@ export class MatchRoom extends Room<{
           (c) => c.hp > 0,
         ).length;
         dungeon.spawnPlayerCount = zone.spawnPlayerCount;
+        dungeon.respawnTicks = Math.max(
+          0,
+          (zone.bossRespawnAt ?? this.simulation.tick) - this.simulation.tick,
+        );
         dungeon.nextWaveTicks =
           zone.nextWaveAt === undefined
             ? 0
@@ -754,6 +766,14 @@ export class MatchRoom extends Room<{
         target.actionStartedAt = enemy.encounterAction?.startedAt ?? 0;
         target.actionActiveAt = enemy.encounterAction?.activeAt ?? 0;
         target.actionEndsAt = enemy.encounterAction?.endsAt ?? 0;
+        const bossCast = enemy.encounterBoss
+          ? zone.world.boss?.cast
+          : undefined;
+        target.castTicks = Math.max(
+          0,
+          (bossCast?.releaseAt ?? zone.world.tick) - zone.world.tick,
+        );
+        target.castTargetId = bossCast?.targetId ?? '';
         target.lane = enemy.invasion?.lane ?? '';
         target.targetId = enemy.invasion?.targetId ?? '';
       }
@@ -814,7 +834,9 @@ export class MatchRoom extends Room<{
         target.y = shot.y;
         target.vx = shot.vx;
         target.vy = shot.vy;
-        target.ownerId = shot.ownerId;
+        target.ownerId = zone.world.creeps.has(shot.ownerId)
+          ? this.entityKey(zone, shot.ownerId)
+          : shot.ownerId;
         target.abilityId = shot.abilityId;
         target.zoneId = zone.id;
         target.radius = shot.effect.radius;

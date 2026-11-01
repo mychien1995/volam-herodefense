@@ -32,8 +32,11 @@ export function desertCreepArt(
     throw new Error(`Unknown authoritative desert creep: ${archetype}`);
   return entry;
 }
-export function registerDesertArt(scene: Phaser.Scene): void {
-  const manifest = scene.cache.json.get('desert_manifest') as DesertManifest;
+export function registerDesertArt(
+  scene: Phaser.Scene,
+  manifestKey = 'desert_manifest',
+): void {
+  const manifest = scene.cache.json.get(manifestKey) as DesertManifest;
   for (const asset of manifest.assets) {
     scene.textures.get(asset.id).setFilter(Phaser.Textures.FilterMode.NEAREST);
     for (const anim of asset.animations) {

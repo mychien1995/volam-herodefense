@@ -168,7 +168,8 @@ function dungeonAction(
     | {
         action: 'enter';
         access: 'private' | 'shared';
-        destination: 'forest' | 'desert' | 'sea' | 'chu_ba_thong' | 'hong_liet';
+        destination:
+          'forest' | 'desert' | 'sea' | 'chu_ba_thong' | 'hong_liet' | 'co_mo';
       },
 ): void {
   if (

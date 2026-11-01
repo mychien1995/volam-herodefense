@@ -1,3 +1,7 @@
+## Explicit single-encounter integration — 2026-11-01
+
+Lý Mạc Sầu and Cổ Mộ Phái are separately authorized only in `codex/m3d/ly-mac-sau`: approved art, private/shared boss lifecycle, server combat, summons, one-item pending claims and focused verification. This does not mark the full M4 loot/inventory/crafting milestone complete or start other bosses. Trial balance and final runtime art approval remain separate. See `docs/LY_MAC_SAU_INTEGRATION.md`.
+
 # Current gameplay milestone — M3C3, 2026-10-31
 
 The separately requested Beach integration is confined to `wip/m3d/beach-dungeon`, reusing retained Beach art and existing M2A mechanics. It adds `sea` private/shared instances, composed map/collision, animation/effect presentation and scoped verification. Specialized enemy mechanics and runtime director approval remain pending. No other dungeon or later milestone is included. See `docs/BEACH_INTEGRATION.md`.
