@@ -24,7 +24,8 @@ export class GameUI {
   private sessionId = '';
   private roomId = '';
   private study = false;
-  private dungeonDestination: 'forest' | 'desert' | 'sea' = 'forest';
+  private dungeonDestination: 'forest' | 'desert' | 'sea' | 'hong_liet' =
+    'forest';
   private ended = false;
   private dead = false;
   private defense: DefenseHud;
@@ -39,7 +40,7 @@ export class GameUI {
   onStudy: (enabled: boolean) => void = () => {};
   onDungeonEnter: (
     access: 'private' | 'shared',
-    destination: 'forest' | 'desert' | 'sea',
+    destination: 'forest' | 'desert' | 'sea' | 'hong_liet',
   ) => void = () => {};
   constructor(artPreview: boolean) {
     element('#app').innerHTML = `
@@ -330,7 +331,8 @@ export class GameUI {
           !unavailable &&
           (destination === 'forest' ||
             destination === 'desert' ||
-            destination === 'sea')
+            destination === 'sea' ||
+            destination === 'hong_liet')
         ) {
           this.dungeonDestination = destination;
           for (const peer of document.querySelectorAll<HTMLButtonElement>(
@@ -483,7 +485,7 @@ export class GameUI {
     const entryNote = document.querySelector('#dungeon-entry-note');
     if (entryNote)
       entryNote.textContent = canEnter
-        ? `Chọn Riêng hoặc Chung để vào ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển' }[this.dungeonDestination]}.`
+        ? `Chọn Riêng hoặc Chung để vào ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển', hong_liet: 'Hoàn Nhan Hồng Liệt' }[this.dungeonDestination]}.`
         : inArena
           ? 'Bạn cần hồi sinh trước khi vào phó bản.'
           : 'Đến gần cửa rồi nhấn Space để về đấu trường.';
@@ -495,6 +497,7 @@ export class GameUI {
     zoneStatus.hidden = inArena && hero.respawnTicks <= 0;
     const desert = hero.zoneId.startsWith('desert_');
     const beach = hero.zoneId.startsWith('sea_');
+    const hongLiet = hero.zoneId.startsWith('hong_liet_');
     const artNotice =
       desert || beach
         ? 'Hình quái đang chờ duyệt'
@@ -503,12 +506,18 @@ export class GameUI {
               .filter((a) => a.zoneId === hero.zoneId)
               .map((a) => a.archetypeId),
           );
-    zoneStatus.title = zone ? artNotice : '';
+    zoneStatus.title = hongLiet
+      ? 'Art preview v04 đã duyệt; môi trường ghép tiles/props. Chưa có backend vật phẩm.'
+      : zone
+        ? artNotice
+        : '';
     zoneStatus.textContent =
       hero.respawnTicks > 0
         ? `Đã gục ngã · Về đấu trường sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`
         : zone
-          ? `${beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
+          ? hongLiet
+            ? `Hoàn Nhan Hồng Liệt · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · HP ${Math.ceil(zone.bossHp)} / ${zone.bossMaxHp}${zone.bossRespawnTicks ? ` · Hồi sinh ${Math.ceil(zone.bossRespawnTicks / 30)}s` : ''}`
+            : `${beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
           : '';
     element('#hero-name').textContent = hero.nickname;
     element('#school-name').textContent =

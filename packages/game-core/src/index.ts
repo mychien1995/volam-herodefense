@@ -8,3 +8,6 @@ export { equippedAbility } from './skills.js';
 export { hasStatus, statusValue } from './status.js';
 export * from './progression-types.js';
 export * from './progression.js';
+
+export * from './hong-liet-types.js';
+export * from './hong-liet.js';

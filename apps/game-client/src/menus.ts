@@ -39,19 +39,19 @@ export function menuContents(menu: Menu, debug = false): string {
         <div class="window-footer"><span>${icon('gold')} <b class="live-gold">0</b> vàng</span><button disabled>Trang bị</button><button disabled>Thả / Bán</button></div>
       </section></div>`;
     case 'dungeons':
-      return `<p class="dungeon-intro"><span class="dungeon-school-avatar" role="img" aria-label="Nhân vật môn phái đang chọn"></span>Bốn vùng đất · Bốn thử thách</p>
+      return `<p class="dungeon-intro"><span class="dungeon-school-avatar" role="img" aria-label="Nhân vật môn phái đang chọn"></span>Ba vùng đất · Đại bản doanh thủ lĩnh</p>
       <div class="destinations">${[
         ['forest', 'Rừng Trúc', 'Rừng trúc · Suối ngọc'],
         ['desert', 'Sa Mạc', 'Cát vàng · Cổ tích'],
         ['sea', 'Biển', 'Đảo xa · Sóng biếc'],
-        ['hell', 'Địa Ngục', 'Dung nham · Hỏa ngục'],
+        ['hong_liet', 'Hoàn Nhan Hồng Liệt', 'Đại bản doanh · Thủ lĩnh'],
       ]
         .map(
           ([id, name, desc]) =>
-            `<button type="button" class="destination ${id}" data-destination="${id}" aria-label="${name}" aria-pressed="${id === 'forest'}" aria-disabled="${!['forest', 'desert', 'sea'].includes(id!)}"><img class="destination-illustration" src="/assets/dungeon_cards/${id}.png" alt="${desc}"/><span class="destination-copy"><strong>${name}</strong><span>${desc}</span></span>${['forest', 'desert', 'sea'].includes(id!) ? `<span class="destination-check" aria-hidden="true" ${id === 'forest' ? '' : 'hidden'}>✓</span>` : '<span class="destination-availability">Chưa mở</span>'}</button>`,
+            `<button type="button" class="destination ${id}" data-destination="${id}" aria-label="${name}" aria-pressed="${id === 'forest'}" aria-disabled="${!['forest', 'desert', 'sea', 'hong_liet'].includes(id!)}"><img class="destination-illustration" src="/assets/dungeon_cards/${id === 'hong_liet' ? 'hell' : id}.png" alt="${desc}"/><span class="destination-copy"><strong>${name}</strong><span>${desc}</span></span>${['forest', 'desert', 'sea', 'hong_liet'].includes(id!) ? `<span class="destination-check" aria-hidden="true" ${id === 'forest' ? '' : 'hidden'}>✓</span>` : '<span class="destination-availability">Chưa mở</span>'}</button>`,
         )
         .join('')}</div>
-      <div class="dungeon-options"><div class="dungeon-choice"><span>Tổ đội</span><div role="radiogroup" aria-label="Tổ đội"><button type="button" role="radio" data-access="private" aria-checked="true">Riêng</button><button type="button" role="radio" data-access="shared" aria-checked="false">Chung</button></div><input id="dungeon-access" type="hidden" value="private"/></div><div class="dungeon-choice"><span>Thử thách</span><div role="radiogroup" aria-label="Thử thách"><button type="button" role="radio" aria-checked="true">Quái thường</button><button type="button" role="radio" aria-checked="false" disabled title="Phó bản thủ lĩnh hiện chưa mở">Thủ lĩnh · Chưa mở</button></div></div></div>
+      <div class="dungeon-options"><div class="dungeon-choice"><span>Tổ đội</span><div role="radiogroup" aria-label="Tổ đội"><button type="button" role="radio" data-access="private" aria-checked="true">Riêng</button><button type="button" role="radio" data-access="shared" aria-checked="false">Chung</button></div><input id="dungeon-access" type="hidden" value="private"/></div><div class="dungeon-choice"><span>Thử thách</span><div role="radiogroup" aria-label="Thử thách"><span>Quái thường / Thủ lĩnh theo điểm đến</span></div></div></div>
       <p id="dungeon-entry-note" role="status"></p><p id="dungeon-availability" aria-live="polite" hidden></p>
       <div class="window-footer"><button id="dungeon-close">Đóng</button><button id="enter-dungeon" class="accent" aria-label="Vào phó bản" disabled>Vào Phó Bản</button></div>`;
     case 'merchant':

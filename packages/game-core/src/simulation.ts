@@ -570,7 +570,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       });
       enemy.burnNext += config.tickRate;
     }
-    if (enemy.hp <= 0) continue;
+    if (enemy.hp <= 0 || enemy.controlled) continue;
     const stats = enemy.stats ?? config.creep;
     const nearest = [...world.heroes.values()]
       .filter(

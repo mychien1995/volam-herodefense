@@ -1,3 +1,5 @@
+import { HongLietEncounter } from './hong-liet.js';
+import type { HongLietDefinition } from './hong-liet-types.js';
 import { distance } from './geometry.js';
 import { cancelOwnedEffects } from './status.js';
 import { changeBuild, refreshCharacter } from './progression.js';
@@ -23,6 +25,7 @@ import type {
 
 export type DungeonAccess = 'private' | 'shared';
 export interface CreepDungeonDefinition {
+  boss?: HongLietDefinition;
   id: string;
   width: number;
   height: number;
@@ -45,6 +48,7 @@ export interface CreepDungeonDefinition {
   creepRoster?: string[] | undefined;
 }
 export interface MatchZone {
+  encounter?: HongLietEncounter;
   id: string;
   access: 'arena' | DungeonAccess;
   ownerId: string;
@@ -119,6 +123,8 @@ export class DungeonMatch {
     if (zone) removeHero(zone.world, id);
     this.membership.delete(id);
     this.respawns.delete(id);
+    if (zone?.encounter && !zone.world.heroes.size)
+      zone.encounter.clear(zone.world);
   }
   canEnterDungeon(id: string): boolean {
     const hero = this.hero(id);
@@ -167,14 +173,24 @@ export class DungeonMatch {
         nextWaveAt: undefined,
         dungeon,
       };
-      spawnCreeps(zone.world, config, 'wave_1');
-      this.assignRoster(zone);
+      if (dungeon.boss) {
+        zone.encounter = new HongLietEncounter(dungeon.boss);
+        zone.encounter.initialize(zone.world, config);
+      } else spawnCreeps(zone.world, config, 'wave_1');
+      if (!zone.encounter) this.assignRoster(zone);
       this.zones.set(key, zone);
     }
-    this.transfer(id, zone, {
-      x: dungeon.spawn.x,
-      y: dungeon.spawn.y + zone.world.heroes.size * 24,
-    });
+    const occupant = zone.world.heroes.size;
+    this.transfer(
+      id,
+      zone,
+      dungeon.boss
+        ? {
+            x: dungeon.spawn.x + ((occupant % 3) - 1) * 28,
+            y: dungeon.spawn.y + Math.floor(occupant / 3) * 28,
+          }
+        : { x: dungeon.spawn.x, y: dungeon.spawn.y + occupant * 24 },
+    );
     return undefined;
   }
   exit(id: string): string | undefined {
@@ -244,9 +260,11 @@ export class DungeonMatch {
     for (const zone of this.zones.values()) {
       if (zone.access !== 'arena' && !zone.world.heroes.size) {
         zone.world.events = [];
+        zone.encounter?.emptyStep(zone.world, zone.config, this.tick);
         continue;
       }
       stepWorld(zone.world, zone.config);
+      zone.encounter?.step(zone.world, zone.config);
       for (const event of zone.world.events)
         this.events.push({ zoneId: zone.id, event });
       if (zone.access === 'arena') {
@@ -262,6 +280,7 @@ export class DungeonMatch {
       }
       if (
         zone.access !== 'arena' &&
+        !zone.encounter &&
         [...zone.world.creeps.values()].every((c) => c.hp <= 0)
       ) {
         const dungeon = zone.dungeon!;
@@ -353,7 +372,9 @@ export class DungeonMatch {
         hero.abilityCooldowns[key] = convert(hero.abilityCooldowns[key]!);
     hero.statuses = [];
     refreshCharacter(hero, destination.config);
-    removeHero(source.world, id); // cancels queued inputs, future shots and owned missiles
+    removeHero(source.world, id);
+    if (source.encounter && !source.world.heroes.size)
+      source.encounter.clear(source.world); // cancels queued inputs, future shots and owned missiles
     hero.x = position.x;
     hero.y = position.y;
     hero.moveX = 0;

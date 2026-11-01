@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 13;
+export const PROTOCOL_VERSION = 14;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -148,7 +148,7 @@ export const dungeonActionSchema = z.discriminatedUnion('action', [
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     action: z.literal('enter'),
     access: z.enum(['private', 'shared']),
-    destination: z.enum(['forest', 'desert', 'sea']).optional(),
+    destination: z.enum(['forest', 'desert', 'sea', 'hong_liet']).optional(),
   }),
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
@@ -258,6 +258,9 @@ export const CreepState = schema(
   {
     ...actorFields,
     archetypeId: t.string().default(''),
+    actionStartedAt: t.number(),
+    actionActiveAt: t.number(),
+    actionEndsAt: t.number(),
     zoneId: t.string().default('arena'),
     invasionWave: t.number().default(0),
     lane: t.string().default(''),
@@ -266,6 +269,27 @@ export const CreepState = schema(
   'ArenaCreep',
 );
 export type CreepState = SchemaType<typeof CreepState>;
+export const BossEffectState = schema(
+  {
+    zoneId: t.string(),
+    kind: t.string(),
+    castId: t.string(),
+    ownerId: t.string(),
+    abilityId: t.string(),
+    x: t.number(),
+    y: t.number(),
+    fx: t.number(),
+    fy: t.number(),
+    length: t.number(),
+    radius: t.number(),
+    startedAt: t.number(),
+    activeAt: t.number(),
+    expiresAt: t.number(),
+    damageUntil: t.number(),
+  },
+  'HongLietEffect',
+);
+export type BossEffectState = SchemaType<typeof BossEffectState>;
 export const ProjectileState = schema(
   {
     x: t.number().default(0),
@@ -293,6 +317,9 @@ export const DungeonState = schema(
     living: t.number(),
     spawnPlayerCount: t.number(),
     nextWaveTicks: t.number(),
+    bossHp: t.number(),
+    bossMaxHp: t.number(),
+    bossRespawnTicks: t.number(),
   },
   'CreepDungeon',
 );
@@ -343,6 +370,7 @@ export const LobbyState = schema(
     creeps: t.map(CreepState).view(),
     projectiles: t.map(ProjectileState).view(),
     areas: t.map(AreaState).view(),
+    bossEffects: t.map(BossEffectState).view(),
     dungeons: t.map(DungeonState).view(),
     defense: t.ref(DefenseState).default(() => new DefenseState()),
   },

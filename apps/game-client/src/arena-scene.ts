@@ -1,3 +1,4 @@
+import { HongLietRenderer, isHongLietActor } from './hong-liet-art.js';
 import Phaser from 'phaser';
 import { arena, dungeonForZone } from '@volam/game-data';
 import { desertCreepArt } from './desert-art.js';
@@ -49,6 +50,7 @@ export class ArenaScene extends Phaser.Scene {
   private sessionId = '';
   protected actors = new Map<string, EntityView>();
   private vfx: SkillVfx | undefined;
+  private hongLiet: HongLietRenderer | undefined;
   protected creepEffects: ArenaCreepEffects | undefined;
   private trees: Phaser.GameObjects.Image[] = [];
   private ready = false;
@@ -78,6 +80,10 @@ export class ArenaScene extends Phaser.Scene {
   }
   create(): void {
     registerArt(this);
+    this.hongLiet = new HongLietRenderer(this);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
+      this.hongLiet?.clear(),
+    );
     this.damage = new FloatingDamage(this);
     this.vfx = new SkillVfx(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.vfx?.clear());
@@ -128,6 +134,7 @@ export class ArenaScene extends Phaser.Scene {
     if (this.ready && zoneId !== this.zoneId) this.drawZone(zoneId);
   }
   private drawZone(zoneId: string): void {
+    this.hongLiet?.clear();
     this.cameras.main.stopFollow();
     this.tweens.killAll();
     this.damage?.clear();
@@ -266,6 +273,7 @@ export class ArenaScene extends Phaser.Scene {
       enemy: boolean,
       name: string,
     ): void => {
+      if (enemy && isHongLietActor(actor.archetypeId ?? '')) return;
       active.add(id);
       const art = enemy
         ? (forestCreepArt(
@@ -432,6 +440,7 @@ export class ArenaScene extends Phaser.Scene {
           this.followed = '';
         }
       }
+    this.hongLiet?.sync(state, this.zoneId);
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
     this.creepEffects?.sync(
       state,
@@ -479,7 +488,10 @@ export class ArenaScene extends Phaser.Scene {
     if (event.zoneId && event.zoneId !== this.zoneId) return;
     if (event.kind === 'attack')
       this.creepAction(event.sourceId, 'basic_attack');
-    if (event.kind === 'hit') this.creepAction(event.targetId, 'hurt');
+    if (event.kind === 'hit') {
+      this.creepAction(event.targetId, 'hurt');
+      this.hongLiet?.flash(event.targetId);
+    }
     if (event.kind === 'death') this.creepAction(event.targetId, 'death');
     const source = this.snapshot?.creeps.get(event.sourceId);
     if (source && isBeachZone(source.zoneId) && source.zoneId === this.zoneId) {
@@ -559,6 +571,7 @@ export class ArenaScene extends Phaser.Scene {
       ready: this.ready,
       sceneTime: this.time.now,
       zoneId: this.zoneId,
+      hongLiet: this.hongLiet?.inspect(),
       damage: this.damage?.inspect(),
       skills: this.vfx?.inspect(),
       creepEffects: this.creepEffects?.inspect(),

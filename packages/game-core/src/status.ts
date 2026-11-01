@@ -36,6 +36,17 @@ export function applyStatus(
 ): void {
   if (spec.kind === 'stun' && hasStatus(actor, 'interrupt_resist', tick))
     return;
+  if (
+    actor.crowdControlScale !== undefined &&
+    ['stun', 'slow', 'attack_slow', 'silence', 'disarm'].includes(spec.kind)
+  )
+    spec = {
+      ...spec,
+      durationTicks: Math.max(
+        1,
+        Math.ceil(spec.durationTicks * actor.crowdControlScale),
+      ),
+    };
   actor.statuses ??= [];
   const old = actor.statuses.find(
     (s) =>

@@ -13,6 +13,7 @@ import {
   copyTreeIfChanged,
   writeIfChanged,
 } from './asset-files.mjs';
+import { prepareHongLietAssets } from './prepare-hong-liet-assets.mjs';
 const root = new URL('../', import.meta.url);
 for (const [name, label] of [
   ['approved_cai_bang.lock.json', 'Cai Bang'],
@@ -137,6 +138,7 @@ prepareArenaCreeps();
 prepareForestCreepReview();
 prepareDesertAssets();
 prepareBeachAssets();
+prepareHongLietAssets();
 // Retained review references include generated public atlases: verify after copies.
 prepareApprovedAnimationArt();
 console.info(
