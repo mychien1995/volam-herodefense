@@ -1,4 +1,5 @@
 import { preloadChu, registerChu } from './chu-presentation.js';
+import { preloadKimArt, registerKimArt } from './kim-luan-art.js';
 import { preloadHongLietArt, registerHongLietArt } from './hong-liet-art.js';
 import Phaser from 'phaser';
 import {
@@ -80,6 +81,7 @@ export { facing } from './facing.js';
 export function preloadArt(scene: Phaser.Scene): void {
   preloadChu(scene);
   preloadHongLietArt(scene);
+  preloadKimArt(scene);
   preloadBeachArt(scene);
   preloadForestCreepArt(scene);
   preloadBambooForestArt(scene);
@@ -183,6 +185,7 @@ export function actorFootPivot(
 export function registerArt(scene: Phaser.Scene): void {
   registerChu(scene);
   registerHongLietArt(scene);
+  registerKimArt(scene);
   registerBeachArt(scene);
   registerForestCreepArt(scene);
   registerDesertArt(scene);

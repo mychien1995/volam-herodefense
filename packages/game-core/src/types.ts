@@ -1,4 +1,5 @@
 import type { ChuEncounter } from './chu-types.js';
+import type { KimLootContext } from './kim-types.js';
 import type {
   HeroProgression,
   ProgressionDefinition,
@@ -290,6 +291,8 @@ export interface Hero extends Actor {
   basicChains?: Record<string, number>;
 }
 export interface Creep extends Actor {
+  /** A rescue cage rejects damage from its own captive, using the common hit pipeline. */
+  rescueTargetId?: string;
   bossEncounter?: boolean;
   controlled?: boolean;
   encounterAction?: { startedAt: number; activeAt: number; endsAt: number };
@@ -374,6 +377,7 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  kim?: { rewards: KimLootContext };
   chu?: ChuEncounter;
   combos?: Array<{
     sourceId: string;

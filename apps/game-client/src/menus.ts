@@ -46,11 +46,16 @@ export function menuContents(menu: Menu, debug = false): string {
         ['sea', 'Biển', 'Đảo xa · Sóng biếc'],
         ['hell', 'Địa Ngục', 'Dung nham · Hỏa ngục'],
         ['hong_liet', 'Hoàn Nhan Hồng Liệt', 'Đại bản doanh · Thủ lĩnh'],
+        [
+          'kim_luan',
+          'Kim Luân Pháp Vương · Tương Dương',
+          'Hai học trò → Pháp Vương',
+        ],
         ['chu_ba_thong', 'Chu Bá Thông', 'Thủ lĩnh · Toàn Chân Trúc Lâm'],
       ]
         .map(
           ([id, name, desc]) =>
-            `<button type="button" class="destination ${id}" data-destination="${id}" aria-label="${name}" aria-pressed="${id === 'forest'}" aria-disabled="${!['forest', 'desert', 'sea', 'chu_ba_thong', 'hong_liet'].includes(id!)}"><img class="destination-illustration" src="${id === 'chu_ba_thong' ? '/assets/chu/boss_idle.png' : '/assets/dungeon_cards/' + (id === 'hong_liet' ? 'hell' : id) + '.png'}" alt="${desc}"/><span class="destination-copy"><strong>${name}</strong><span>${desc}</span></span>${['forest', 'desert', 'sea', 'chu_ba_thong', 'hong_liet'].includes(id!) ? `<span class="destination-check" aria-hidden="true" ${id === 'forest' ? '' : 'hidden'}>✓</span>` : '<span class="destination-availability">Chưa mở</span>'}</button>`,
+            `<button type="button" class="destination ${id}" data-destination="${id}" aria-label="${name}" aria-pressed="${id === 'forest'}" aria-disabled="${!['forest', 'desert', 'sea', 'chu_ba_thong', 'hong_liet', 'kim_luan'].includes(id!)}"><img class="destination-illustration" src="${id === 'chu_ba_thong' ? '/assets/chu/boss_idle.png' : '/assets/dungeon_cards/' + (['hong_liet', 'kim_luan'].includes(id!) ? 'hell' : id) + '.png'}" alt="${desc}"/><span class="destination-copy"><strong>${name}</strong><span>${desc}</span></span>${['forest', 'desert', 'sea', 'chu_ba_thong', 'hong_liet', 'kim_luan'].includes(id!) ? `<span class="destination-check" aria-hidden="true" ${id === 'forest' ? '' : 'hidden'}>✓</span>` : '<span class="destination-availability">Chưa mở</span>'}</button>`,
         )
         .join('')}</div>
       <div class="dungeon-options"><div class="dungeon-choice"><span>Tổ đội</span><div role="radiogroup" aria-label="Tổ đội"><button type="button" role="radio" data-access="private" aria-checked="true">Riêng</button><button type="button" role="radio" data-access="shared" aria-checked="false">Chung</button></div><input id="dungeon-access" type="hidden" value="private"/></div><div class="dungeon-choice"><span>Thử thách</span><strong id="dungeon-kind">Quái thường</strong></div></div>

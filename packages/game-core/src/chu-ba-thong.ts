@@ -220,8 +220,9 @@ function death(w: World, c: SimulationConfig): void {
   if (eligible.length === 1) chuLootAction(w, eligible[0]!.id, loot.id, 'roll');
   if (!eligible.length) loot.state = 'ground';
 }
-function settle(w: World): void {
-  const s = w.chu!;
+export function settleBossLoot(w: World): void {
+  const s = w.chu ?? w.kim?.rewards;
+  if (!s) return;
   for (const loot of s.loot) {
     if (loot.state !== 'rolling') continue;
     const present = loot.eligible.filter((id) => w.heroes.has(id));
@@ -253,7 +254,7 @@ export function chuLootAction(
   lootId: number,
   action: 'roll' | 'pass' | 'pickup',
 ): string | undefined {
-  const s = w.chu,
+  const s = w.chu ?? w.kim?.rewards,
     hero = w.heroes.get(id),
     loot = s?.loot.find((l) => l.id === lootId);
   if (!s || !hero || !loot) return 'Chiến lợi phẩm không còn ở khu vực này.';
@@ -273,7 +274,7 @@ export function chuLootAction(
   )
     return 'Không thể tham gia lượt roll này.';
   loot.rolls[id] = action === 'pass' ? 0 : 1 + Math.floor(w.random() * 100);
-  settle(w);
+  settleBossLoot(w);
   return;
 }
 export function constrainChuTrap(w: World, c: SimulationConfig): void {
@@ -347,7 +348,7 @@ export function chuHandContact(
 export function stepChu(w: World, c: SimulationConfig): void {
   const s = w.chu;
   if (!s) return;
-  settle(w);
+  settleBossLoot(w);
   const boss = w.creeps.get(CHU_BOSS_ID);
   if (!boss) return;
   if (boss.hp <= 0) {
@@ -656,10 +657,11 @@ export function chuItemAction(
     h.gold += item.sellGold;
     return;
   }
-  if (!w.chu) return 'Chỉ thả chiến lợi phẩm trong phó bản thủ lĩnh.';
+  const context = w.chu ?? w.kim?.rewards;
+  if (!context) return 'Chỉ thả chiến lợi phẩm trong phó bản thủ lĩnh.';
   h.bossItems.splice(index, 1);
-  w.chu.loot.push({
-    id: ++w.chu.kill,
+  context.loot.push({
+    id: ++context.kill,
     itemId,
     nameVi: item.nameVi,
     eligible: [],

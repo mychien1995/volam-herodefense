@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 15;
+export const PROTOCOL_VERSION = 16;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -149,7 +149,14 @@ export const dungeonActionSchema = z.discriminatedUnion('action', [
     action: z.literal('enter'),
     access: z.enum(['private', 'shared']),
     destination: z
-      .enum(['forest', 'desert', 'sea', 'chu_ba_thong', 'hong_liet'])
+      .enum([
+        'forest',
+        'desert',
+        'sea',
+        'chu_ba_thong',
+        'hong_liet',
+        'kim_luan',
+      ])
       .optional(),
   }),
   z.strictObject({
@@ -168,7 +175,7 @@ export const bossItemActionSchema = z.strictObject({
   protocolVersion: z.literal(PROTOCOL_VERSION),
   sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
   index: z.number().int().min(0),
-  itemId: z.literal('toan_chan_tien_tuu'),
+  itemId: z.enum(['toan_chan_tien_tuu', 'kim_luan_tan_phien']),
   action: z.enum(['sell', 'drop']),
 });
 export type DungeonAction = z.infer<typeof dungeonActionSchema>;
@@ -287,6 +294,10 @@ export const CreepState = schema(
 export type CreepState = SchemaType<typeof CreepState>;
 export const BossEffectState = schema(
   {
+    speed: t.number().default(0),
+    index: t.number().default(0),
+    maxRadius: t.number().default(0),
+    previousRadius: t.number().default(0),
     zoneId: t.string(),
     kind: t.string(),
     castId: t.string(),

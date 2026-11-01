@@ -1,3 +1,4 @@
+import { KimLuanRenderer, isKimActor } from './kim-luan-art.js';
 import { ChuPresentation } from './chu-presentation.js';
 import { HongLietRenderer, isHongLietActor } from './hong-liet-art.js';
 import Phaser from 'phaser';
@@ -51,6 +52,7 @@ export class ArenaScene extends Phaser.Scene {
   private sessionId = '';
   protected actors = new Map<string, EntityView>();
   private vfx: SkillVfx | undefined;
+  private kim: KimLuanRenderer | undefined;
   private hongLiet: HongLietRenderer | undefined;
   protected creepEffects: ArenaCreepEffects | undefined;
   private trees: Phaser.GameObjects.Image[] = [];
@@ -84,6 +86,7 @@ export class ArenaScene extends Phaser.Scene {
     registerArt(this);
     this.chu = new ChuPresentation(this);
     this.hongLiet = new HongLietRenderer(this);
+    this.kim = new KimLuanRenderer(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
       this.hongLiet?.clear(),
     );
@@ -138,6 +141,7 @@ export class ArenaScene extends Phaser.Scene {
   }
   private drawZone(zoneId: string): void {
     this.hongLiet?.clear();
+    this.kim?.clear();
     this.cameras.main.stopFollow();
     this.tweens.killAll();
     this.damage?.clear();
@@ -277,7 +281,12 @@ export class ArenaScene extends Phaser.Scene {
       enemy: boolean,
       name: string,
     ): void => {
-      if (enemy && isHongLietActor(actor.archetypeId ?? '')) return;
+      if (
+        enemy &&
+        (isHongLietActor(actor.archetypeId ?? '') ||
+          isKimActor(actor.archetypeId ?? ''))
+      )
+        return;
       active.add(id);
       const art = enemy
         ? (forestCreepArt(
@@ -447,6 +456,7 @@ export class ArenaScene extends Phaser.Scene {
       }
     this.chu?.sync(state, this.zoneId);
     this.hongLiet?.sync(state, this.zoneId);
+    this.kim?.sync(state, this.zoneId);
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
     this.creepEffects?.sync(
       state,
@@ -497,6 +507,7 @@ export class ArenaScene extends Phaser.Scene {
     if (event.kind === 'hit') {
       this.creepAction(event.targetId, 'hurt');
       this.hongLiet?.flash(event.targetId);
+      this.kim?.flash(event.targetId);
     }
     if (event.kind === 'death') this.creepAction(event.targetId, 'death');
     const source = this.snapshot?.creeps.get(event.sourceId);
@@ -579,6 +590,9 @@ export class ArenaScene extends Phaser.Scene {
   ) {
     this.chu?.review(bundle, tag, x, y, milliseconds);
   }
+  reviewKim(bundle: string, clip: string) {
+    return this.kim?.review(bundle, clip);
+  }
   inspect() {
     const origin = this.cameras.main.getWorldPoint(0, 0);
     const unit = this.cameras.main.getWorldPoint(1, 0);
@@ -588,6 +602,8 @@ export class ArenaScene extends Phaser.Scene {
       sceneTime: this.time.now,
       zoneId: this.zoneId,
       hongLiet: this.hongLiet?.inspect(),
+      kim: this.kim?.inspect(),
+      kimFrame: this.kim?.reviewState(),
       damage: this.damage?.inspect(),
       skills: this.vfx?.inspect(),
       creepEffects: this.creepEffects?.inspect(),

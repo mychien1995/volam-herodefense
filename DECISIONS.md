@@ -207,3 +207,7 @@ Provisional Liên Hoa rank1 data: radius85, duration180ticks/6s, +8% maxHP/s, co
 ## 2026-11-01 — Hoàn Nhan Hồng Liệt v04 gameplay integration
 
 The user authorized integration on `wip/m3d/hoan-nhan-hong-liet` only, from preview82eaa5ca and approvald62da39e. Retain A1's three simultaneous +/-18/0-degree600-unit server lines, enlarged front-only A2, actual0.8s lava dash/light v03 trail, walking infantry and simultaneous16-cannon grid with full crossings/drain. World marker coordinates replace preview screen fixtures. Existing private/shared dungeon authority, controls and rewards remain; loot items/rolls are unavailable in the backend and are not fabricated. HP/damage/cooldowns are explicitly provisional. Runtime rendering uses pinned retained art, disclosed missing-pose fallbacks and a newly composed modular headquarters map; runtime verification and art approval are separate. See `docs/HOAN_NHAN_HONG_LIET_RUNTIME.md`.
+
+## 2026-11-01 — Kim Luân integration
+
+Director-approved feedback_02 is integrated as destination kim_luan in the real Phaser/Colyseus dungeon system. Confirmed mechanics: both disciples must die before Kim spawns; Thiết Phiến3×4rays; Chấn Thiên280px; Thập Tầng strictly<30%, moving while firing five wheels/1.8s. Artwork remains locked. HP/damage/ward/solo rescue/loot values are explicitly trial tuning, not director balance approval. See docs/KIM_LUAN_RUNTIME.md.

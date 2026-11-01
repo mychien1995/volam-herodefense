@@ -38,6 +38,7 @@ export function hurt(
   },
 ): boolean {
   if (target.hp <= 0 || raw <= 0) return false;
+  if (world.creeps.get(target.id)?.rescueTargetId === sourceId) return false;
   if (ownerProtection(world, target)) return false;
   // DOT remains damage; immunity exists only on actual moving dash ticks.
   if (!snapshot?.periodic && hasStatus(target, 'dash_guard', world.tick))

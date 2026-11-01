@@ -1,0 +1,2345 @@
+{
+  "status": "PASS",
+  "scope": "Standalone Phaser art/choreography; not game combat, multiplayer, server, damage, AI, rewards or final approval.",
+  "phaser": "4.2.1",
+  "partyFigures": 6,
+  "realClients": 1,
+  "serverMechanics": false,
+  "finalArtApproval": false,
+  "checks": [
+    "Installed Phaser 4.2.1 loaded",
+    "All 53 real Phaser clips / 184 selected frames observed",
+    "Every dedicated one-shot cast completes",
+    "Every looping clip completes a full observed cycle",
+    "Fixture frame event intervals match authored cadence",
+    "Both disciples visible; Kim absent",
+    "One disciple remaining still blocks Kim",
+    "Kim appears only after both disciples exit",
+    "Scene hoac_gust renders authored cels",
+    "Scene hoac_gust uses fixed foot origins",
+    "Scene hoac_nails renders authored cels",
+    "Scene hoac_nails uses fixed foot origins",
+    "Scene hoac_spin renders authored cels",
+    "Scene hoac_spin uses fixed foot origins",
+    "Scene dat_basic renders authored cels",
+    "Scene dat_basic uses fixed foot origins",
+    "Scene dat_fissure renders authored cels",
+    "Scene dat_fissure uses fixed foot origins",
+    "Scene dat_ward renders authored cels",
+    "Scene dat_ward uses fixed foot origins",
+    "Scene dat_boulder renders authored cels",
+    "Scene dat_boulder uses fixed foot origins",
+    "Scene dat_triple renders authored cels",
+    "Scene dat_triple uses fixed foot origins",
+    "Scene kim_basic renders authored cels",
+    "Scene kim_basic uses fixed foot origins",
+    "Scene kim_hunt renders authored cels",
+    "Scene kim_hunt uses fixed foot origins",
+    "Scene kim_guard renders authored cels",
+    "Scene kim_guard uses fixed foot origins",
+    "Scene kim_cage renders authored cels",
+    "Scene kim_cage uses fixed foot origins",
+    "Scene kim_stomp renders authored cels",
+    "Scene kim_stomp uses fixed foot origins",
+    "Scene kim_elephants renders authored cels",
+    "Scene kim_elephants uses fixed foot origins",
+    "Scene kim_enrage renders authored cels",
+    "Scene kim_enrage uses fixed foot origins",
+    "Fissure warning before half-second delay",
+    "Fissure explosion after exactly 0.5 seconds",
+    "Exactly 5 fan gusts across 160 degrees",
+    "Five front + five rear poison nails at increased speed",
+    "Exactly 5 forward wheels / ranged reach",
+    "Exactly one circulating ward at 0",
+    "Exactly one circulating ward at 3.5",
+    "Exactly one circulating ward at 4",
+    "Exactly one circulating ward at 7.7",
+    "Exactly one circulating ward at 8",
+    "Five rings orbit before release",
+    "Five rings release after orbit",
+    "Ring paths do not home on moved player",
+    "Long-lived rings expire without stale sprites",
+    "Thrown rock retains captured target",
+    "Illustrative teammate A hits shatter cage",
+    "Below random rock shelters against downward herd",
+    "Same below-rock spot loses shelter against upward herd",
+    "Above random rock shelters against upward herd",
+    "Upward herd uses independently authored back-view animation",
+    "Normal herd has 12 lanes and three close rows",
+    "Rocks randomize per cast instead of moving during a cast",
+    "Rock positions stay stable while elephants charge",
+    "Reduced four-ray slashes leave wide dodge lanes",
+    "Stomp stays within reduced 280px local area",
+    "Dat Nhi Ba visibly walks slowly with a walk animation",
+    "29% HP art state has speed multiplier and seeded lanes",
+    "Enrage throws five wheels while the actor keeps moving",
+    "Released enrage wheels retain their captured origin and heading",
+    "Enrage uses real walk frames between throws",
+    "Enrage lane preview is deterministic",
+    "Arrow movement and facing retained",
+    "Atlas overlay stays within viewport",
+    "Facing selector selects authored back pose",
+    "Single viewport / overlay at 944",
+    "Single viewport / overlay at 1920",
+    "Six hero figures remain readable",
+    "No browser/page/load errors"
+  ],
+  "frames": [
+    {
+      "key": "kim_luan_base",
+      "clip": "idle_down",
+      "frames": [
+        "down_idle_a",
+        "down_idle_b"
+      ],
+      "fps": 2.857142857142857,
+      "repeat": -1,
+      "seen": [
+        "down_idle_a",
+        "down_idle_b"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_luan_base:idle_down",
+          "frame": "down_idle_a",
+          "at": 982.3000000119209
+        },
+        {
+          "key": "kim_luan_base:idle_down",
+          "frame": "down_idle_b",
+          "at": 1381.800000011921
+        },
+        {
+          "key": "kim_luan_base:idle_down",
+          "frame": "down_idle_a",
+          "at": 1731.7000000178814
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_base",
+      "clip": "walk_down",
+      "frames": [
+        "down_walk_a",
+        "down_walk_b",
+        "down_walk_c",
+        "down_walk_d"
+      ],
+      "fps": 8.333333333333334,
+      "repeat": -1,
+      "seen": [
+        "down_walk_a",
+        "down_walk_b",
+        "down_walk_c",
+        "down_walk_d"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_luan_base:walk_down",
+          "frame": "down_walk_a",
+          "at": 1748.6000000238419
+        },
+        {
+          "key": "kim_luan_base:walk_down",
+          "frame": "down_walk_b",
+          "at": 1881.7000000178814
+        },
+        {
+          "key": "kim_luan_base:walk_down",
+          "frame": "down_walk_c",
+          "at": 1998.300000011921
+        },
+        {
+          "key": "kim_luan_base:walk_down",
+          "frame": "down_walk_d",
+          "at": 2115
+        },
+        {
+          "key": "kim_luan_base:walk_down",
+          "frame": "down_walk_a",
+          "at": 2231.7000000178814
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_base",
+      "clip": "idle_left",
+      "frames": [
+        "left_idle_a",
+        "left_idle_b"
+      ],
+      "fps": 2.857142857142857,
+      "repeat": -1,
+      "seen": [
+        "left_idle_a",
+        "left_idle_b"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_luan_base:idle_left",
+          "frame": "left_idle_a",
+          "at": 2248.4000000059605
+        },
+        {
+          "key": "kim_luan_base:idle_left",
+          "frame": "left_idle_b",
+          "at": 2615.100000023842
+        },
+        {
+          "key": "kim_luan_base:idle_left",
+          "frame": "left_idle_a",
+          "at": 2964.9000000059605
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_base",
+      "clip": "walk_left",
+      "frames": [
+        "left_walk_a",
+        "left_walk_b",
+        "left_walk_c",
+        "left_walk_d"
+      ],
+      "fps": 8.333333333333334,
+      "repeat": -1,
+      "seen": [
+        "left_walk_a",
+        "left_walk_b",
+        "left_walk_c",
+        "left_walk_d"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_luan_base:walk_left",
+          "frame": "left_walk_a",
+          "at": 2981.7000000178814
+        },
+        {
+          "key": "kim_luan_base:walk_left",
+          "frame": "left_walk_b",
+          "at": 3114.9000000059605
+        },
+        {
+          "key": "kim_luan_base:walk_left",
+          "frame": "left_walk_c",
+          "at": 3231.600000023842
+        },
+        {
+          "key": "kim_luan_base:walk_left",
+          "frame": "left_walk_d",
+          "at": 3348.300000011921
+        },
+        {
+          "key": "kim_luan_base:walk_left",
+          "frame": "left_walk_a",
+          "at": 3464.9000000059605
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_base",
+      "clip": "idle_right",
+      "frames": [
+        "right_idle_a",
+        "right_idle_b"
+      ],
+      "fps": 2.857142857142857,
+      "repeat": -1,
+      "seen": [
+        "right_idle_a",
+        "right_idle_b"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_luan_base:idle_right",
+          "frame": "right_idle_a",
+          "at": 3481.600000023842
+        },
+        {
+          "key": "kim_luan_base:idle_right",
+          "frame": "right_idle_b",
+          "at": 3848.300000011921
+        },
+        {
+          "key": "kim_luan_base:idle_right",
+          "frame": "right_idle_a",
+          "at": 4198.300000011921
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_base",
+      "clip": "walk_right",
+      "frames": [
+        "right_walk_a",
+        "right_walk_b",
+        "right_walk_c",
+        "right_walk_d"
+      ],
+      "fps": 8.333333333333334,
+      "repeat": -1,
+      "seen": [
+        "right_walk_a",
+        "right_walk_b",
+        "right_walk_c",
+        "right_walk_d"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_luan_base:walk_right",
+          "frame": "right_walk_a",
+          "at": 4215
+        },
+        {
+          "key": "kim_luan_base:walk_right",
+          "frame": "right_walk_b",
+          "at": 4348.200000017881
+        },
+        {
+          "key": "kim_luan_base:walk_right",
+          "frame": "right_walk_c",
+          "at": 4464.9000000059605
+        },
+        {
+          "key": "kim_luan_base:walk_right",
+          "frame": "right_walk_d",
+          "at": 4581.600000023842
+        },
+        {
+          "key": "kim_luan_base:walk_right",
+          "frame": "right_walk_a",
+          "at": 4698.300000011921
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_base",
+      "clip": "idle_up",
+      "frames": [
+        "up_idle_a",
+        "up_idle_b"
+      ],
+      "fps": 2.857142857142857,
+      "repeat": -1,
+      "seen": [
+        "up_idle_a",
+        "up_idle_b"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_luan_base:idle_up",
+          "frame": "up_idle_a",
+          "at": 4715
+        },
+        {
+          "key": "kim_luan_base:idle_up",
+          "frame": "up_idle_b",
+          "at": 5081.600000023842
+        },
+        {
+          "key": "kim_luan_base:idle_up",
+          "frame": "up_idle_a",
+          "at": 5431.5
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_base",
+      "clip": "walk_up",
+      "frames": [
+        "up_walk_a",
+        "up_walk_b",
+        "up_walk_c",
+        "up_walk_d"
+      ],
+      "fps": 8.333333333333334,
+      "repeat": -1,
+      "seen": [
+        "up_walk_a",
+        "up_walk_b",
+        "up_walk_c",
+        "up_walk_d"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_luan_base:walk_up",
+          "frame": "up_walk_a",
+          "at": 5448.300000011921
+        },
+        {
+          "key": "kim_luan_base:walk_up",
+          "frame": "up_walk_b",
+          "at": 5581.600000023842
+        },
+        {
+          "key": "kim_luan_base:walk_up",
+          "frame": "up_walk_c",
+          "at": 5698.200000017881
+        },
+        {
+          "key": "kim_luan_base:walk_up",
+          "frame": "up_walk_d",
+          "at": 5814.9000000059605
+        },
+        {
+          "key": "kim_luan_base:walk_up",
+          "frame": "up_walk_a",
+          "at": 5931.5
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_base",
+      "clip": "idle_down",
+      "frames": [
+        "down_idle_a",
+        "down_idle_b"
+      ],
+      "fps": 2.857142857142857,
+      "repeat": -1,
+      "seen": [
+        "down_idle_a",
+        "down_idle_b"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "hoac_do_base:idle_down",
+          "frame": "down_idle_a",
+          "at": 5948.300000011921
+        },
+        {
+          "key": "hoac_do_base:idle_down",
+          "frame": "down_idle_b",
+          "at": 6314.800000011921
+        },
+        {
+          "key": "hoac_do_base:idle_down",
+          "frame": "down_idle_a",
+          "at": 6664.700000017881
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_base",
+      "clip": "walk_down",
+      "frames": [
+        "down_walk_a",
+        "down_walk_b",
+        "down_walk_c",
+        "down_walk_d"
+      ],
+      "fps": 8.333333333333334,
+      "repeat": -1,
+      "seen": [
+        "down_walk_a",
+        "down_walk_b",
+        "down_walk_c",
+        "down_walk_d"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "hoac_do_base:walk_down",
+          "frame": "down_walk_a",
+          "at": 6681.600000023842
+        },
+        {
+          "key": "hoac_do_base:walk_down",
+          "frame": "down_walk_b",
+          "at": 6814.800000011921
+        },
+        {
+          "key": "hoac_do_base:walk_down",
+          "frame": "down_walk_c",
+          "at": 6931.4000000059605
+        },
+        {
+          "key": "hoac_do_base:walk_down",
+          "frame": "down_walk_d",
+          "at": 7048.100000023842
+        },
+        {
+          "key": "hoac_do_base:walk_down",
+          "frame": "down_walk_a",
+          "at": 7164.700000017881
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_base",
+      "clip": "idle_left",
+      "frames": [
+        "left_idle_a",
+        "left_idle_b"
+      ],
+      "fps": 2.857142857142857,
+      "repeat": -1,
+      "seen": [
+        "left_idle_a",
+        "left_idle_b"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "hoac_do_base:idle_left",
+          "frame": "left_idle_a",
+          "at": 7181.4000000059605
+        },
+        {
+          "key": "hoac_do_base:idle_left",
+          "frame": "left_idle_b",
+          "at": 7548.100000023842
+        },
+        {
+          "key": "hoac_do_base:idle_left",
+          "frame": "left_idle_a",
+          "at": 7881.4000000059605
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_base",
+      "clip": "walk_left",
+      "frames": [
+        "left_walk_a",
+        "left_walk_b",
+        "left_walk_c",
+        "left_walk_d"
+      ],
+      "fps": 8.333333333333334,
+      "repeat": -1,
+      "seen": [
+        "left_walk_a",
+        "left_walk_b",
+        "left_walk_c",
+        "left_walk_d"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "hoac_do_base:walk_left",
+          "frame": "left_walk_a",
+          "at": 7898.100000023842
+        },
+        {
+          "key": "hoac_do_base:walk_left",
+          "frame": "left_walk_b",
+          "at": 8031.300000011921
+        },
+        {
+          "key": "hoac_do_base:walk_left",
+          "frame": "left_walk_c",
+          "at": 8148
+        },
+        {
+          "key": "hoac_do_base:walk_left",
+          "frame": "left_walk_d",
+          "at": 8264.600000023842
+        },
+        {
+          "key": "hoac_do_base:walk_left",
+          "frame": "left_walk_a",
+          "at": 8381.40000000596
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_base",
+      "clip": "idle_right",
+      "frames": [
+        "right_idle_a",
+        "right_idle_b"
+      ],
+      "fps": 2.857142857142857,
+      "repeat": -1,
+      "seen": [
+        "right_idle_a",
+        "right_idle_b"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "hoac_do_base:idle_right",
+          "frame": "right_idle_a",
+          "at": 8398.100000023842
+        },
+        {
+          "key": "hoac_do_base:idle_right",
+          "frame": "right_idle_b",
+          "at": 8764.600000023842
+        },
+        {
+          "key": "hoac_do_base:idle_right",
+          "frame": "right_idle_a",
+          "at": 9098.100000023842
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_base",
+      "clip": "walk_right",
+      "frames": [
+        "right_walk_a",
+        "right_walk_b",
+        "right_walk_c",
+        "right_walk_d"
+      ],
+      "fps": 8.333333333333334,
+      "repeat": -1,
+      "seen": [
+        "right_walk_a",
+        "right_walk_b",
+        "right_walk_c",
+        "right_walk_d"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "hoac_do_base:walk_right",
+          "frame": "right_walk_a",
+          "at": 9114.800000011921
+        },
+        {
+          "key": "hoac_do_base:walk_right",
+          "frame": "right_walk_b",
+          "at": 9248
+        },
+        {
+          "key": "hoac_do_base:walk_right",
+          "frame": "right_walk_c",
+          "at": 9364.800000011921
+        },
+        {
+          "key": "hoac_do_base:walk_right",
+          "frame": "right_walk_d",
+          "at": 9481.300000011921
+        },
+        {
+          "key": "hoac_do_base:walk_right",
+          "frame": "right_walk_a",
+          "at": 9597.90000000596
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_base",
+      "clip": "idle_up",
+      "frames": [
+        "up_idle_a",
+        "up_idle_b"
+      ],
+      "fps": 2.857142857142857,
+      "repeat": -1,
+      "seen": [
+        "up_idle_a",
+        "up_idle_b"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "hoac_do_base:idle_up",
+          "frame": "up_idle_a",
+          "at": 9614.700000017881
+        },
+        {
+          "key": "hoac_do_base:idle_up",
+          "frame": "up_idle_b",
+          "at": 9981.300000011921
+        },
+        {
+          "key": "hoac_do_base:idle_up",
+          "frame": "up_idle_a",
+          "at": 10331.300000011921
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_base",
+      "clip": "walk_up",
+      "frames": [
+        "up_walk_a",
+        "up_walk_b",
+        "up_walk_c",
+        "up_walk_d"
+      ],
+      "fps": 8.333333333333334,
+      "repeat": -1,
+      "seen": [
+        "up_walk_a",
+        "up_walk_b",
+        "up_walk_c",
+        "up_walk_d"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "hoac_do_base:walk_up",
+          "frame": "up_walk_a",
+          "at": 10348
+        },
+        {
+          "key": "hoac_do_base:walk_up",
+          "frame": "up_walk_b",
+          "at": 10481.300000011921
+        },
+        {
+          "key": "hoac_do_base:walk_up",
+          "frame": "up_walk_c",
+          "at": 10597.90000000596
+        },
+        {
+          "key": "hoac_do_base:walk_up",
+          "frame": "up_walk_d",
+          "at": 10714.600000023842
+        },
+        {
+          "key": "hoac_do_base:walk_up",
+          "frame": "up_walk_a",
+          "at": 10831.200000017881
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_base",
+      "clip": "idle_down",
+      "frames": [
+        "down_idle_a",
+        "down_idle_b"
+      ],
+      "fps": 2.857142857142857,
+      "repeat": -1,
+      "seen": [
+        "down_idle_a",
+        "down_idle_b"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "dat_nhi_ba_base:idle_down",
+          "frame": "down_idle_a",
+          "at": 10847.90000000596
+        },
+        {
+          "key": "dat_nhi_ba_base:idle_down",
+          "frame": "down_idle_b",
+          "at": 11214.600000023842
+        },
+        {
+          "key": "dat_nhi_ba_base:idle_down",
+          "frame": "down_idle_a",
+          "at": 11565.600000023842
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_base",
+      "clip": "walk_down",
+      "frames": [
+        "down_walk_a",
+        "down_walk_b",
+        "down_walk_c",
+        "down_walk_d"
+      ],
+      "fps": 8.333333333333334,
+      "repeat": -1,
+      "seen": [
+        "down_walk_a",
+        "down_walk_b",
+        "down_walk_c",
+        "down_walk_d"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "dat_nhi_ba_base:walk_down",
+          "frame": "down_walk_a",
+          "at": 11581.5
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_down",
+          "frame": "down_walk_b",
+          "at": 11714.600000023842
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_down",
+          "frame": "down_walk_c",
+          "at": 11831.200000017881
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_down",
+          "frame": "down_walk_d",
+          "at": 11947.90000000596
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_down",
+          "frame": "down_walk_a",
+          "at": 12064.5
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_base",
+      "clip": "idle_left",
+      "frames": [
+        "left_idle_a",
+        "left_idle_b"
+      ],
+      "fps": 2.857142857142857,
+      "repeat": -1,
+      "seen": [
+        "left_idle_a",
+        "left_idle_b"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "dat_nhi_ba_base:idle_left",
+          "frame": "left_idle_a",
+          "at": 12081.300000011921
+        },
+        {
+          "key": "dat_nhi_ba_base:idle_left",
+          "frame": "left_idle_b",
+          "at": 12431.200000017881
+        },
+        {
+          "key": "dat_nhi_ba_base:idle_left",
+          "frame": "left_idle_a",
+          "at": 12797.800000011921
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_base",
+      "clip": "walk_left",
+      "frames": [
+        "left_walk_a",
+        "left_walk_b",
+        "left_walk_c",
+        "left_walk_d"
+      ],
+      "fps": 8.333333333333334,
+      "repeat": -1,
+      "seen": [
+        "left_walk_a",
+        "left_walk_b",
+        "left_walk_c",
+        "left_walk_d"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "dat_nhi_ba_base:walk_left",
+          "frame": "left_walk_a",
+          "at": 12814.800000011921
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_left",
+          "frame": "left_walk_b",
+          "at": 12947.90000000596
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_left",
+          "frame": "left_walk_c",
+          "at": 13064.5
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_left",
+          "frame": "left_walk_d",
+          "at": 13181.200000017881
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_left",
+          "frame": "left_walk_a",
+          "at": 13297.800000011921
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_base",
+      "clip": "idle_right",
+      "frames": [
+        "right_idle_a",
+        "right_idle_b"
+      ],
+      "fps": 2.857142857142857,
+      "repeat": -1,
+      "seen": [
+        "right_idle_a",
+        "right_idle_b"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "dat_nhi_ba_base:idle_right",
+          "frame": "right_idle_a",
+          "at": 13314.700000017881
+        },
+        {
+          "key": "dat_nhi_ba_base:idle_right",
+          "frame": "right_idle_b",
+          "at": 13681.100000023842
+        },
+        {
+          "key": "dat_nhi_ba_base:idle_right",
+          "frame": "right_idle_a",
+          "at": 14032
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_base",
+      "clip": "walk_right",
+      "frames": [
+        "right_walk_a",
+        "right_walk_b",
+        "right_walk_c",
+        "right_walk_d"
+      ],
+      "fps": 8.333333333333334,
+      "repeat": -1,
+      "seen": [
+        "right_walk_a",
+        "right_walk_b",
+        "right_walk_c",
+        "right_walk_d"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "dat_nhi_ba_base:walk_right",
+          "frame": "right_walk_a",
+          "at": 14048.5
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_right",
+          "frame": "right_walk_b",
+          "at": 14181.100000023842
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_right",
+          "frame": "right_walk_c",
+          "at": 14297.700000017881
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_right",
+          "frame": "right_walk_d",
+          "at": 14414.40000000596
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_right",
+          "frame": "right_walk_a",
+          "at": 14532
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_base",
+      "clip": "idle_up",
+      "frames": [
+        "up_idle_a",
+        "up_idle_b"
+      ],
+      "fps": 2.857142857142857,
+      "repeat": -1,
+      "seen": [
+        "up_idle_a",
+        "up_idle_b"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "dat_nhi_ba_base:idle_up",
+          "frame": "up_idle_a",
+          "at": 14547.90000000596
+        },
+        {
+          "key": "dat_nhi_ba_base:idle_up",
+          "frame": "up_idle_b",
+          "at": 14914.40000000596
+        },
+        {
+          "key": "dat_nhi_ba_base:idle_up",
+          "frame": "up_idle_a",
+          "at": 15264.40000000596
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_base",
+      "clip": "walk_up",
+      "frames": [
+        "up_walk_a",
+        "up_walk_b",
+        "up_walk_c",
+        "up_walk_d"
+      ],
+      "fps": 8.333333333333334,
+      "repeat": -1,
+      "seen": [
+        "up_walk_a",
+        "up_walk_b",
+        "up_walk_c",
+        "up_walk_d"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "dat_nhi_ba_base:walk_up",
+          "frame": "up_walk_a",
+          "at": 15281.300000011921
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_up",
+          "frame": "up_walk_b",
+          "at": 15414.40000000596
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_up",
+          "frame": "up_walk_c",
+          "at": 15531.200000017881
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_up",
+          "frame": "up_walk_d",
+          "at": 15647.700000017881
+        },
+        {
+          "key": "dat_nhi_ba_base:walk_up",
+          "frame": "up_walk_a",
+          "at": 15765.200000017881
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_actions",
+      "clip": "sweep",
+      "frames": [
+        "sweep_0",
+        "sweep_1",
+        "sweep_2",
+        "sweep_3"
+      ],
+      "fps": 10,
+      "repeat": 0,
+      "seen": [
+        "sweep_0",
+        "sweep_1",
+        "sweep_2",
+        "sweep_3"
+      ],
+      "completed": true,
+      "fullCycle": false,
+      "events": [
+        {
+          "key": "kim_luan_actions:sweep",
+          "frame": "sweep_0",
+          "at": 15781.200000017881
+        },
+        {
+          "key": "kim_luan_actions:sweep",
+          "frame": "sweep_1",
+          "at": 15897.700000017881
+        },
+        {
+          "key": "kim_luan_actions:sweep",
+          "frame": "sweep_2",
+          "at": 15997.700000017881
+        },
+        {
+          "key": "kim_luan_actions:sweep",
+          "frame": "sweep_3",
+          "at": 16081.600000023842
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_actions",
+      "clip": "channel",
+      "frames": [
+        "channel_0",
+        "channel_1",
+        "channel_2",
+        "channel_3"
+      ],
+      "fps": 10,
+      "repeat": 0,
+      "seen": [
+        "channel_0",
+        "channel_1",
+        "channel_2",
+        "channel_3"
+      ],
+      "completed": true,
+      "fullCycle": false,
+      "events": [
+        {
+          "key": "kim_luan_actions:channel",
+          "frame": "channel_0",
+          "at": 16214.5
+        },
+        {
+          "key": "kim_luan_actions:channel",
+          "frame": "channel_1",
+          "at": 16331
+        },
+        {
+          "key": "kim_luan_actions:channel",
+          "frame": "channel_2",
+          "at": 16430.90000000596
+        },
+        {
+          "key": "kim_luan_actions:channel",
+          "frame": "channel_3",
+          "at": 16531
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_actions",
+      "clip": "stomp",
+      "frames": [
+        "stomp_0",
+        "stomp_1",
+        "stomp_2",
+        "stomp_3"
+      ],
+      "fps": 10,
+      "repeat": 0,
+      "seen": [
+        "stomp_0",
+        "stomp_1",
+        "stomp_2",
+        "stomp_3"
+      ],
+      "completed": true,
+      "fullCycle": false,
+      "events": [
+        {
+          "key": "kim_luan_actions:stomp",
+          "frame": "stomp_0",
+          "at": 16647.70000001788
+        },
+        {
+          "key": "kim_luan_actions:stomp",
+          "frame": "stomp_1",
+          "at": 16764.30000001192
+        },
+        {
+          "key": "kim_luan_actions:stomp",
+          "frame": "stomp_2",
+          "at": 16864.30000001192
+        },
+        {
+          "key": "kim_luan_actions:stomp",
+          "frame": "stomp_3",
+          "at": 16964.30000001192
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_actions",
+      "clip": "invoke",
+      "frames": [
+        "invoke_0",
+        "invoke_1",
+        "invoke_2",
+        "invoke_3"
+      ],
+      "fps": 10,
+      "repeat": 0,
+      "seen": [
+        "invoke_0",
+        "invoke_1",
+        "invoke_2",
+        "invoke_3"
+      ],
+      "completed": true,
+      "fullCycle": false,
+      "events": [
+        {
+          "key": "kim_luan_actions:invoke",
+          "frame": "invoke_0",
+          "at": 17081.30000001192
+        },
+        {
+          "key": "kim_luan_actions:invoke",
+          "frame": "invoke_1",
+          "at": 17181
+        },
+        {
+          "key": "kim_luan_actions:invoke",
+          "frame": "invoke_2",
+          "at": 17281
+        },
+        {
+          "key": "kim_luan_actions:invoke",
+          "frame": "invoke_3",
+          "at": 17397.600000023842
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_actions",
+      "clip": "triple_fan",
+      "frames": [
+        "triple_fan_0",
+        "triple_fan_1",
+        "triple_fan_2",
+        "triple_fan_3"
+      ],
+      "fps": 10,
+      "repeat": 0,
+      "seen": [
+        "triple_fan_0",
+        "triple_fan_1",
+        "triple_fan_2",
+        "triple_fan_3"
+      ],
+      "completed": true,
+      "fullCycle": false,
+      "events": [
+        {
+          "key": "hoac_do_actions:triple_fan",
+          "frame": "triple_fan_0",
+          "at": 17497.70000001788
+        },
+        {
+          "key": "hoac_do_actions:triple_fan",
+          "frame": "triple_fan_1",
+          "at": 17614.20000001788
+        },
+        {
+          "key": "hoac_do_actions:triple_fan",
+          "frame": "triple_fan_2",
+          "at": 17714.20000001788
+        },
+        {
+          "key": "hoac_do_actions:triple_fan",
+          "frame": "triple_fan_3",
+          "at": 17814.30000001192
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_actions",
+      "clip": "gust",
+      "frames": [
+        "gust_0",
+        "gust_1",
+        "gust_2",
+        "gust_3"
+      ],
+      "fps": 10,
+      "repeat": 0,
+      "seen": [
+        "gust_0",
+        "gust_1",
+        "gust_2",
+        "gust_3"
+      ],
+      "completed": true,
+      "fullCycle": false,
+      "events": [
+        {
+          "key": "hoac_do_actions:gust",
+          "frame": "gust_0",
+          "at": 17931.100000023842
+        },
+        {
+          "key": "hoac_do_actions:gust",
+          "frame": "gust_1",
+          "at": 18047.600000023842
+        },
+        {
+          "key": "hoac_do_actions:gust",
+          "frame": "gust_2",
+          "at": 18147.600000023842
+        },
+        {
+          "key": "hoac_do_actions:gust",
+          "frame": "gust_3",
+          "at": 18248.40000000596
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_actions",
+      "clip": "nails",
+      "frames": [
+        "nails_0",
+        "nails_1",
+        "nails_2",
+        "nails_3"
+      ],
+      "fps": 10,
+      "repeat": 0,
+      "seen": [
+        "nails_0",
+        "nails_1",
+        "nails_2",
+        "nails_3"
+      ],
+      "completed": true,
+      "fullCycle": false,
+      "events": [
+        {
+          "key": "hoac_do_actions:nails",
+          "frame": "nails_0",
+          "at": 18364.30000001192
+        },
+        {
+          "key": "hoac_do_actions:nails",
+          "frame": "nails_1",
+          "at": 18480.90000000596
+        },
+        {
+          "key": "hoac_do_actions:nails",
+          "frame": "nails_2",
+          "at": 18564.30000001192
+        },
+        {
+          "key": "hoac_do_actions:nails",
+          "frame": "nails_3",
+          "at": 18664.30000001192
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_actions",
+      "clip": "spin",
+      "frames": [
+        "spin_0",
+        "spin_1",
+        "spin_2",
+        "spin_3"
+      ],
+      "fps": 10,
+      "repeat": 0,
+      "seen": [
+        "spin_0",
+        "spin_1",
+        "spin_2",
+        "spin_3"
+      ],
+      "completed": true,
+      "fullCycle": false,
+      "events": [
+        {
+          "key": "hoac_do_actions:spin",
+          "frame": "spin_0",
+          "at": 18797.70000001788
+        },
+        {
+          "key": "hoac_do_actions:spin",
+          "frame": "spin_1",
+          "at": 18897.600000023842
+        },
+        {
+          "key": "hoac_do_actions:spin",
+          "frame": "spin_2",
+          "at": 18997.600000023842
+        },
+        {
+          "key": "hoac_do_actions:spin",
+          "frame": "spin_3",
+          "at": 19097.600000023842
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_actions",
+      "clip": "sweep",
+      "frames": [
+        "sweep_0",
+        "sweep_1",
+        "sweep_2",
+        "sweep_3"
+      ],
+      "fps": 10,
+      "repeat": 0,
+      "seen": [
+        "sweep_0",
+        "sweep_1",
+        "sweep_2",
+        "sweep_3"
+      ],
+      "completed": true,
+      "fullCycle": false,
+      "events": [
+        {
+          "key": "dat_nhi_ba_actions:sweep",
+          "frame": "sweep_0",
+          "at": 19214.40000000596
+        },
+        {
+          "key": "dat_nhi_ba_actions:sweep",
+          "frame": "sweep_1",
+          "at": 19330.90000000596
+        },
+        {
+          "key": "dat_nhi_ba_actions:sweep",
+          "frame": "sweep_2",
+          "at": 19430.90000000596
+        },
+        {
+          "key": "dat_nhi_ba_actions:sweep",
+          "frame": "sweep_3",
+          "at": 19530.90000000596
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_actions",
+      "clip": "slam",
+      "frames": [
+        "slam_0",
+        "slam_1",
+        "slam_2",
+        "slam_3"
+      ],
+      "fps": 10,
+      "repeat": 0,
+      "seen": [
+        "slam_0",
+        "slam_1",
+        "slam_2",
+        "slam_3"
+      ],
+      "completed": true,
+      "fullCycle": false,
+      "events": [
+        {
+          "key": "dat_nhi_ba_actions:slam",
+          "frame": "slam_0",
+          "at": 19647.5
+        },
+        {
+          "key": "dat_nhi_ba_actions:slam",
+          "frame": "slam_1",
+          "at": 19748.5
+        },
+        {
+          "key": "dat_nhi_ba_actions:slam",
+          "frame": "slam_2",
+          "at": 19847.40000000596
+        },
+        {
+          "key": "dat_nhi_ba_actions:slam",
+          "frame": "slam_3",
+          "at": 19964.30000001192
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_actions",
+      "clip": "transfer",
+      "frames": [
+        "transfer_0",
+        "transfer_1",
+        "transfer_2",
+        "transfer_3"
+      ],
+      "fps": 10,
+      "repeat": 0,
+      "seen": [
+        "transfer_0",
+        "transfer_1",
+        "transfer_2",
+        "transfer_3"
+      ],
+      "completed": true,
+      "fullCycle": false,
+      "events": [
+        {
+          "key": "dat_nhi_ba_actions:transfer",
+          "frame": "transfer_0",
+          "at": 20081
+        },
+        {
+          "key": "dat_nhi_ba_actions:transfer",
+          "frame": "transfer_1",
+          "at": 20197.5
+        },
+        {
+          "key": "dat_nhi_ba_actions:transfer",
+          "frame": "transfer_2",
+          "at": 20298.5
+        },
+        {
+          "key": "dat_nhi_ba_actions:transfer",
+          "frame": "transfer_3",
+          "at": 20397.5
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_actions",
+      "clip": "boulder",
+      "frames": [
+        "boulder_0",
+        "boulder_1",
+        "boulder_2",
+        "boulder_3"
+      ],
+      "fps": 10,
+      "repeat": 0,
+      "seen": [
+        "boulder_0",
+        "boulder_1",
+        "boulder_2",
+        "boulder_3"
+      ],
+      "completed": true,
+      "fullCycle": false,
+      "events": [
+        {
+          "key": "dat_nhi_ba_actions:boulder",
+          "frame": "boulder_0",
+          "at": 20514.30000001192
+        },
+        {
+          "key": "dat_nhi_ba_actions:boulder",
+          "frame": "boulder_1",
+          "at": 20630.90000000596
+        },
+        {
+          "key": "dat_nhi_ba_actions:boulder",
+          "frame": "boulder_2",
+          "at": 20730.90000000596
+        },
+        {
+          "key": "dat_nhi_ba_actions:boulder",
+          "frame": "boulder_3",
+          "at": 20830.80000001192
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_fx",
+      "clip": "slash",
+      "frames": [
+        "slash_0",
+        "slash_1",
+        "slash_2",
+        "slash_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "slash_0",
+        "slash_1",
+        "slash_2",
+        "slash_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "hoac_do_fx:slash",
+          "frame": "slash_0",
+          "at": 20932.100000023842
+        },
+        {
+          "key": "hoac_do_fx:slash",
+          "frame": "slash_1",
+          "at": 21048.40000000596
+        },
+        {
+          "key": "hoac_do_fx:slash",
+          "frame": "slash_2",
+          "at": 21147.40000000596
+        },
+        {
+          "key": "hoac_do_fx:slash",
+          "frame": "slash_3",
+          "at": 21247.40000000596
+        },
+        {
+          "key": "hoac_do_fx:slash",
+          "frame": "slash_0",
+          "at": 21347.5
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_fx",
+      "clip": "gust",
+      "frames": [
+        "gust_0",
+        "gust_1",
+        "gust_2",
+        "gust_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "gust_0",
+        "gust_1",
+        "gust_2",
+        "gust_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "hoac_do_fx:gust",
+          "frame": "gust_0",
+          "at": 21364.20000001788
+        },
+        {
+          "key": "hoac_do_fx:gust",
+          "frame": "gust_1",
+          "at": 21464.100000023842
+        },
+        {
+          "key": "hoac_do_fx:gust",
+          "frame": "gust_2",
+          "at": 21564.100000023842
+        },
+        {
+          "key": "hoac_do_fx:gust",
+          "frame": "gust_3",
+          "at": 21664.100000023842
+        },
+        {
+          "key": "hoac_do_fx:gust",
+          "frame": "gust_0",
+          "at": 21764.100000023842
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_fx",
+      "clip": "nail",
+      "frames": [
+        "nail_0",
+        "nail_1",
+        "nail_2",
+        "nail_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "nail_0",
+        "nail_1",
+        "nail_2",
+        "nail_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "hoac_do_fx:nail",
+          "frame": "nail_0",
+          "at": 21780.90000000596
+        },
+        {
+          "key": "hoac_do_fx:nail",
+          "frame": "nail_1",
+          "at": 21898.40000000596
+        },
+        {
+          "key": "hoac_do_fx:nail",
+          "frame": "nail_2",
+          "at": 21997.40000000596
+        },
+        {
+          "key": "hoac_do_fx:nail",
+          "frame": "nail_3",
+          "at": 22097.5
+        },
+        {
+          "key": "hoac_do_fx:nail",
+          "frame": "nail_0",
+          "at": 22197.40000000596
+        }
+      ]
+    },
+    {
+      "key": "hoac_do_fx",
+      "clip": "whirlwind",
+      "frames": [
+        "whirlwind_0",
+        "whirlwind_1",
+        "whirlwind_2",
+        "whirlwind_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "whirlwind_0",
+        "whirlwind_1",
+        "whirlwind_2",
+        "whirlwind_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "hoac_do_fx:whirlwind",
+          "frame": "whirlwind_0",
+          "at": 22214.100000023842
+        },
+        {
+          "key": "hoac_do_fx:whirlwind",
+          "frame": "whirlwind_1",
+          "at": 22330.600000023842
+        },
+        {
+          "key": "hoac_do_fx:whirlwind",
+          "frame": "whirlwind_2",
+          "at": 22430.600000023842
+        },
+        {
+          "key": "hoac_do_fx:whirlwind",
+          "frame": "whirlwind_3",
+          "at": 22530.70000001788
+        },
+        {
+          "key": "hoac_do_fx:whirlwind",
+          "frame": "whirlwind_0",
+          "at": 22630.70000001788
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_fx",
+      "clip": "fissure",
+      "frames": [
+        "fissure_0",
+        "fissure_1",
+        "fissure_2",
+        "fissure_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "fissure_0",
+        "fissure_1",
+        "fissure_2",
+        "fissure_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "dat_nhi_ba_fx:fissure",
+          "frame": "fissure_0",
+          "at": 22647.40000000596
+        },
+        {
+          "key": "dat_nhi_ba_fx:fissure",
+          "frame": "fissure_1",
+          "at": 22747.600000023842
+        },
+        {
+          "key": "dat_nhi_ba_fx:fissure",
+          "frame": "fissure_2",
+          "at": 22847.5
+        },
+        {
+          "key": "dat_nhi_ba_fx:fissure",
+          "frame": "fissure_3",
+          "at": 22948.30000001192
+        },
+        {
+          "key": "dat_nhi_ba_fx:fissure",
+          "frame": "fissure_0",
+          "at": 23047.40000000596
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_fx",
+      "clip": "shockwave",
+      "frames": [
+        "shockwave_0",
+        "shockwave_1",
+        "shockwave_2",
+        "shockwave_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "shockwave_0",
+        "shockwave_1",
+        "shockwave_2",
+        "shockwave_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "dat_nhi_ba_fx:shockwave",
+          "frame": "shockwave_0",
+          "at": 23064.100000023842
+        },
+        {
+          "key": "dat_nhi_ba_fx:shockwave",
+          "frame": "shockwave_1",
+          "at": 23180.70000001788
+        },
+        {
+          "key": "dat_nhi_ba_fx:shockwave",
+          "frame": "shockwave_2",
+          "at": 23264.100000023842
+        },
+        {
+          "key": "dat_nhi_ba_fx:shockwave",
+          "frame": "shockwave_3",
+          "at": 23380.70000001788
+        },
+        {
+          "key": "dat_nhi_ba_fx:shockwave",
+          "frame": "shockwave_0",
+          "at": 23480.70000001788
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_fx",
+      "clip": "boulder",
+      "frames": [
+        "boulder_0",
+        "boulder_1",
+        "boulder_2",
+        "boulder_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "boulder_0",
+        "boulder_1",
+        "boulder_2",
+        "boulder_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "dat_nhi_ba_fx:boulder",
+          "frame": "boulder_0",
+          "at": 23497.40000000596
+        },
+        {
+          "key": "dat_nhi_ba_fx:boulder",
+          "frame": "boulder_1",
+          "at": 23614.600000023842
+        },
+        {
+          "key": "dat_nhi_ba_fx:boulder",
+          "frame": "boulder_2",
+          "at": 23697.30000001192
+        },
+        {
+          "key": "dat_nhi_ba_fx:boulder",
+          "frame": "boulder_3",
+          "at": 23797.30000001192
+        },
+        {
+          "key": "dat_nhi_ba_fx:boulder",
+          "frame": "boulder_0",
+          "at": 23897.40000000596
+        }
+      ]
+    },
+    {
+      "key": "dat_nhi_ba_fx",
+      "clip": "ward",
+      "frames": [
+        "ward_0",
+        "ward_1",
+        "ward_2",
+        "ward_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "ward_0",
+        "ward_1",
+        "ward_2",
+        "ward_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "dat_nhi_ba_fx:ward",
+          "frame": "ward_0",
+          "at": 23915.600000023842
+        },
+        {
+          "key": "dat_nhi_ba_fx:ward",
+          "frame": "ward_1",
+          "at": 24031.5
+        },
+        {
+          "key": "dat_nhi_ba_fx:ward",
+          "frame": "ward_2",
+          "at": 24130.70000001788
+        },
+        {
+          "key": "dat_nhi_ba_fx:ward",
+          "frame": "ward_3",
+          "at": 24230.600000023842
+        },
+        {
+          "key": "dat_nhi_ba_fx:ward",
+          "frame": "ward_0",
+          "at": 24330.70000001788
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_fx",
+      "clip": "chakram",
+      "frames": [
+        "chakram_0",
+        "chakram_1",
+        "chakram_2",
+        "chakram_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "chakram_0",
+        "chakram_1",
+        "chakram_2",
+        "chakram_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_luan_fx:chakram",
+          "frame": "chakram_0",
+          "at": 24348.600000023842
+        },
+        {
+          "key": "kim_luan_fx:chakram",
+          "frame": "chakram_1",
+          "at": 24463.90000000596
+        },
+        {
+          "key": "kim_luan_fx:chakram",
+          "frame": "chakram_2",
+          "at": 24547.30000001192
+        },
+        {
+          "key": "kim_luan_fx:chakram",
+          "frame": "chakram_3",
+          "at": 24647.30000001192
+        },
+        {
+          "key": "kim_luan_fx:chakram",
+          "frame": "chakram_0",
+          "at": 24763.90000000596
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_fx",
+      "clip": "shockwave",
+      "frames": [
+        "shockwave_0",
+        "shockwave_1",
+        "shockwave_2",
+        "shockwave_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "shockwave_0",
+        "shockwave_1",
+        "shockwave_2",
+        "shockwave_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_luan_fx:shockwave",
+          "frame": "shockwave_0",
+          "at": 24781.70000001788
+        },
+        {
+          "key": "kim_luan_fx:shockwave",
+          "frame": "shockwave_1",
+          "at": 24897.30000001192
+        },
+        {
+          "key": "kim_luan_fx:shockwave",
+          "frame": "shockwave_2",
+          "at": 24997.30000001192
+        },
+        {
+          "key": "kim_luan_fx:shockwave",
+          "frame": "shockwave_0",
+          "at": 24997.90000000596
+        },
+        {
+          "key": "kim_luan_fx:shockwave",
+          "frame": "shockwave_1",
+          "at": 25113.90000000596
+        },
+        {
+          "key": "kim_luan_fx:shockwave",
+          "frame": "shockwave_2",
+          "at": 25214
+        },
+        {
+          "key": "kim_luan_fx:shockwave",
+          "frame": "shockwave_3",
+          "at": 25314
+        },
+        {
+          "key": "kim_luan_fx:shockwave",
+          "frame": "shockwave_0",
+          "at": 25413.90000000596
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_fx",
+      "clip": "cage",
+      "frames": [
+        "cage_0",
+        "cage_1",
+        "cage_2",
+        "cage_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "cage_0",
+        "cage_1",
+        "cage_2",
+        "cage_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_luan_fx:cage",
+          "frame": "cage_0",
+          "at": 25431.70000001788
+        },
+        {
+          "key": "kim_luan_fx:cage",
+          "frame": "cage_1",
+          "at": 25548.40000000596
+        },
+        {
+          "key": "kim_luan_fx:cage",
+          "frame": "cage_2",
+          "at": 25647.20000001788
+        },
+        {
+          "key": "kim_luan_fx:cage",
+          "frame": "cage_3",
+          "at": 25748.20000001788
+        },
+        {
+          "key": "kim_luan_fx:cage",
+          "frame": "cage_0",
+          "at": 25848.70000001788
+        }
+      ]
+    },
+    {
+      "key": "kim_luan_fx",
+      "clip": "empower",
+      "frames": [
+        "empower_0",
+        "empower_1",
+        "empower_2",
+        "empower_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "empower_0",
+        "empower_1",
+        "empower_2",
+        "empower_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_luan_fx:empower",
+          "frame": "empower_0",
+          "at": 25865.30000001192
+        },
+        {
+          "key": "kim_luan_fx:empower",
+          "frame": "empower_1",
+          "at": 25980.600000023842
+        },
+        {
+          "key": "kim_luan_fx:empower",
+          "frame": "empower_2",
+          "at": 26080.600000023842
+        },
+        {
+          "key": "kim_luan_fx:empower",
+          "frame": "empower_3",
+          "at": 26163.90000000596
+        },
+        {
+          "key": "kim_luan_fx:empower",
+          "frame": "empower_0",
+          "at": 26263.90000000596
+        }
+      ]
+    },
+    {
+      "key": "elephant",
+      "clip": "run_down",
+      "frames": [
+        "run_down_0",
+        "run_down_1",
+        "run_down_2",
+        "run_down_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "run_down_0",
+        "run_down_1",
+        "run_down_2",
+        "run_down_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "elephant:run_down",
+          "frame": "run_down_0",
+          "at": 26280.70000001788
+        },
+        {
+          "key": "elephant:run_down",
+          "frame": "run_down_1",
+          "at": 26397.20000001788
+        },
+        {
+          "key": "elephant:run_down",
+          "frame": "run_down_2",
+          "at": 26497.20000001788
+        },
+        {
+          "key": "elephant:run_down",
+          "frame": "run_down_3",
+          "at": 26598.40000000596
+        },
+        {
+          "key": "elephant:run_down",
+          "frame": "run_down_0",
+          "at": 26699
+        }
+      ]
+    },
+    {
+      "key": "elephant",
+      "clip": "shelter_rise",
+      "frames": [
+        "shelter_rise_0",
+        "shelter_rise_1",
+        "shelter_rise_2",
+        "shelter_rise_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "shelter_rise_0",
+        "shelter_rise_1",
+        "shelter_rise_2",
+        "shelter_rise_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "elephant:shelter_rise",
+          "frame": "shelter_rise_0",
+          "at": 26714
+        },
+        {
+          "key": "elephant:shelter_rise",
+          "frame": "shelter_rise_1",
+          "at": 26831.90000000596
+        },
+        {
+          "key": "elephant:shelter_rise",
+          "frame": "shelter_rise_2",
+          "at": 26914.70000001788
+        },
+        {
+          "key": "elephant:shelter_rise",
+          "frame": "shelter_rise_3",
+          "at": 27031.70000001788
+        },
+        {
+          "key": "elephant:shelter_rise",
+          "frame": "shelter_rise_0",
+          "at": 27131.5
+        }
+      ]
+    },
+    {
+      "key": "elephant_up",
+      "clip": "run_up",
+      "frames": [
+        "run_up_0",
+        "run_up_1",
+        "run_up_2",
+        "run_up_3"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "run_up_0",
+        "run_up_1",
+        "run_up_2",
+        "run_up_3"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "elephant_up:run_up",
+          "frame": "run_up_0",
+          "at": 27148.5
+        },
+        {
+          "key": "elephant_up:run_up",
+          "frame": "run_up_1",
+          "at": 27247.20000001788
+        },
+        {
+          "key": "elephant_up:run_up",
+          "frame": "run_up_2",
+          "at": 27363.80000001192
+        },
+        {
+          "key": "elephant_up:run_up",
+          "frame": "run_up_3",
+          "at": 27447.20000001788
+        },
+        {
+          "key": "elephant_up:run_up",
+          "frame": "run_up_0",
+          "at": 27547.100000023842
+        }
+      ]
+    },
+    {
+      "key": "kim_stomp_fx",
+      "clip": "wave",
+      "frames": [
+        "wave_0",
+        "wave_1"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "wave_0",
+        "wave_1"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_stomp_fx:wave",
+          "frame": "wave_0",
+          "at": 27563.90000000596
+        },
+        {
+          "key": "kim_stomp_fx:wave",
+          "frame": "wave_1",
+          "at": 27680.5
+        },
+        {
+          "key": "kim_stomp_fx:wave",
+          "frame": "wave_0",
+          "at": 27780.40000000596
+        }
+      ]
+    },
+    {
+      "key": "kim_stomp_fx",
+      "clip": "fade",
+      "frames": [
+        "fade_0",
+        "fade_1"
+      ],
+      "fps": 10,
+      "repeat": -1,
+      "seen": [
+        "fade_0",
+        "fade_1"
+      ],
+      "completed": false,
+      "fullCycle": true,
+      "events": [
+        {
+          "key": "kim_stomp_fx:fade",
+          "frame": "fade_0",
+          "at": 27797.30000001192
+        },
+        {
+          "key": "kim_stomp_fx:fade",
+          "frame": "fade_1",
+          "at": 27897.100000023842
+        },
+        {
+          "key": "kim_stomp_fx:fade",
+          "frame": "fade_0",
+          "at": 28013.90000000596
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "timings": {
+    "startupMs": 2216,
+    "framesMs": 27055,
+    "totalMs": 31904
+  }
+}

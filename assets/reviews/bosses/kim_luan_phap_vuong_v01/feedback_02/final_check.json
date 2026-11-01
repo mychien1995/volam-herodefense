@@ -1,0 +1,32 @@
+{
+  "revision": "feedback_02",
+  "status": "SCOPED_PREVIEW_PASS_FULL_PIPELINE_BLOCKED",
+  "unitTests": 8,
+  "browserGroups": 76,
+  "browserStatus": "PASS",
+  "clips": 53,
+  "frames": 184,
+  "artworkHashParity": "PASS: retained source/PNG/atlas hashes unchanged",
+  "newArt": 0,
+  "serverMechanics": false,
+  "directorApproved": false,
+  "fullPipeline": {
+    "command": "pnpm check:final --config assets/reviews/bosses/kim_luan_phap_vuong_v01/playwright.config.mjs",
+    "failedStage": "prepare assets",
+    "error": "Beach retained asset changed without provenance update: assets/tilesets/beach/terrain.tsj",
+    "remainingStagesNotRun": [
+      "project/tool typechecks",
+      "global unit/integration suite",
+      "production build",
+      "remaining global asset validators"
+    ],
+    "guardBypassed": false,
+    "timings": "docs/evidence/sessions/kim-luan-feedback-02/check-workflow/final-timings.json"
+  },
+  "inputs": {
+    "assets/reviews/bosses/kim_luan_phap_vuong_v01/review.js": "a21f2fd2100f2f34ed452f55da4b45c29c03f731ad3fa66bb3922da2898c812d",
+    "assets/reviews/bosses/kim_luan_phap_vuong_v01/choreography.mjs": "360753f3e1dffbb62118fd0a45adda529d320f3f7822394e252bf7d709fce90f",
+    "assets/reviews/bosses/kim_luan_phap_vuong_v01/data.json": "685308bb03aee72d4c24e94ce74e6076b7645771df7a97fcce0967f4e8749607"
+  },
+  "evidence": "feedback_02/revision-overview.png: four actual Phaser captures, opened and inspected"
+}

@@ -1,3 +1,15 @@
+## Kim Luân Pháp Vương — director approval feedback_02
+
+**Approved visual preview for Phaser integration,2026-11-01**, explicit user “duyệt”. [Approval scope/hash record](reviews/bosses/kim_luan_phap_vuong_v01/director_approval.json) and [immutable input lock](approved_kim_luan_phap_vuong.lock.json) pin the selected184frames/53clips, retained source/export/map files and current choreography. Excluded24baseline attack candidates remain excluded. No game-runtime integration, missing-direction artwork or final combat balance is inferred. Prompt: docs/INTEGRATE_KIM_LUAN_PHAP_VUONG_PROMPT.md. Earlier pending statuses below are historical.
+
+## Kim Luân feedback01 — tầm xa và voi hai chiều
+
+Retained262raster/atlas inputs unchanged; added4original back-facing elephant run cels and4thin authored shockwave cels and revised visual trajectories only. Current exports:220cels including12props; playback184frames/53clips. [Feedback, tuning and limits](reviews/bosses/kim_luan_phap_vuong_v01/README.md). Dense12/14-lane herds, random rocks per cast, faster and wider fan/wheel/shockwave patterns and slow Dat Nhi Ba walk remain a Phaser art review, not server integration or director approval. Earlier v01 counts below are historical.
+
+## Kim Luân Pháp Vương / Tương Dương — 2026-11-01
+
+**Prototype, pending director review; standalone Phaser art review only.** [Review and exact coverage](reviews/bosses/kim_luan_phap_vuong_v01/README.md), [retained original PNG sources/prompts](source/bosses/kim_luan_phap_vuong_v01/README.md), [source/export/alpha/pivot hashes](exports/bosses/kim_luan_phap_vuong_v01/manifest.json), [skill bindings](reviews/bosses/kim_luan_phap_vuong_v01/asset_map.json). Three characters, 200 character/VFX/elephant/rock cels plus12props; 256terrain tiles and composed Tiled review map. Real Phaser playback selects176frames/50clips;24 baseline attack candidates excluded for facing quality. Four-direction idle/walk; dedicated actions front/down only except Hoac Do spin. Flattened AI-assisted source PNGs, no third-party game pixel sampling or claimed layered Aseprite source. Approved hero bytes retained. No encounter server/combat/multiplayer/loot integration or final visual approval is claimed.
+
 # ART-01 arena/HUD candidate — 2026-10-30
 
 

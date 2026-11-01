@@ -1,16 +1,18 @@
+import { kimLuanDungeon } from './kim-luan.js';
 import { hongLietDungeon } from './hong-liet.js';
 import { chuBaThongDungeon } from './chu-ba-thong.js';
 import { creepDungeon } from './dungeon.js';
 import { desertDungeon } from './desert.js';
 import { beachDungeon } from './beach.js';
 export type DungeonDestination =
-  'forest' | 'desert' | 'sea' | 'chu_ba_thong' | 'hong_liet';
+  'forest' | 'desert' | 'sea' | 'chu_ba_thong' | 'hong_liet' | 'kim_luan';
 export const creepDungeons = [
   creepDungeon,
   desertDungeon,
   beachDungeon,
   chuBaThongDungeon,
   hongLietDungeon,
+  kimLuanDungeon,
 ] as const;
 export const dungeonForZone = (zone: string) => {
   const dungeon = creepDungeons.find(

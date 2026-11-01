@@ -1,5 +1,5 @@
 import type { LobbyState } from '@volam/game-protocol';
-import type { ChuView } from '@volam/game-core';
+import type { ChuView, KimView } from '@volam/game-core';
 const names: Record<string, string> = {
   idle: 'Chuẩn bị',
   sweep: 'Phong kình',
@@ -13,6 +13,7 @@ const names: Record<string, string> = {
   drink: 'Tiểu đồng đưa rượu',
 };
 const itemNames: Record<string, string> = {
+  kim_luan_tan_phien: 'Kim Luân Tàn Phiến',
   toan_chan_tien_tuu: 'Toàn Chân Tiên Tửu',
 };
 /** Compact overlays live inside the existing viewport and never reserve map space. */
@@ -63,13 +64,20 @@ export class ChuHud {
     if (!state) this.announced.clear();
     const h = state?.players.get(session),
       encoded = h ? state?.dungeons.get(h.zoneId)?.encounter : undefined;
-    const v = encoded ? (JSON.parse(encoded) as ChuView) : null;
+    const decoded = encoded ? (JSON.parse(encoded) as ChuView | KimView) : null;
+    const kim = decoded && 'kind' in decoded ? (decoded as KimView) : null;
+    const v: Pick<
+      ChuView,
+      'bossHp' | 'bossMaxHp' | 'phase' | 'trap' | 'loot'
+    > | null = kim
+      ? { ...kim, phase: 'idle', trap: null }
+      : (decoded as ChuView | null);
     this.root.hidden = !v;
     document.querySelector<HTMLElement>('#viewport')!.dataset['chu'] =
       String(!!v);
     if (v) {
       const percent = Math.max(0, (100 * v.bossHp) / v.bossMaxHp);
-      this.root.innerHTML = `<strong>Chu Bá Thông</strong><div class="chu-health"><i style="width:${percent}%"></i><span>${Math.ceil(v.bossHp)} / ${v.bossMaxHp}</span></div><small>${h?.zoneId.includes('_private_') ? 'Riêng' : 'Chung'} · ${v.bossHp > 0 ? names[v.phase] : 'Đã đánh bại'}${v.phase === 'trap' && v.trap && !v.trap.released ? ' · ' + v.trap.inside + '/' + v.trap.required.length + ' vào trận' : ''}</small>`;
+      this.root.innerHTML = `<strong>${kim ? 'Kim Luân Pháp Vương · Tương Dương' : 'Chu Bá Thông'}</strong><div class="chu-health"><i style="width:${percent}%"></i><span>${Math.ceil(v.bossHp)} / ${v.bossMaxHp}</span></div><small>${h?.zoneId.includes('_private_') ? 'Riêng' : 'Chung'} · ${kim ? (kim.phase === 'disciples' ? 'Đánh bại cả hai học trò' : kim.phase === 'defeated' ? 'Đã đánh bại' : kim.enraged ? 'Long Tượng Bát Nhã Thập Tầng' : 'Pháp Vương xuất trận') : v.bossHp > 0 ? names[v.phase] : 'Đã đánh bại'}${v.phase === 'trap' && v.trap && !v.trap.released ? ' · ' + v.trap.inside + '/' + v.trap.required.length + ' vào trận' : ''}</small>`;
     }
     for (const l of v?.loot ?? []) {
       const token = h!.zoneId + ':' + l.id;
@@ -104,7 +112,7 @@ export class ChuHud {
       (_, i) => {
         const item = items[i];
         return item
-          ? `<div class="chu-bag-item"><img src="/assets/chu/toan_chan_tien_tuu_icon.png" alt=""/><span>${itemNames[item] ?? 'Chiến lợi phẩm'}</span><button data-boss-item="${i}" data-item-id="${item}" data-action="sell">Bán</button><button data-boss-item="${i}" data-item-id="${item}" data-action="drop">Thả</button></div>`
+          ? `<div class="chu-bag-item">${item === 'toan_chan_tien_tuu' ? '<img src="/assets/chu/toan_chan_tien_tuu_icon.png" alt=""/>' : ''}<span>${itemNames[item] ?? 'Chiến lợi phẩm'}</span><button data-boss-item="${i}" data-item-id="${item}" data-action="sell">Bán</button><button data-boss-item="${i}" data-item-id="${item}" data-action="drop">Thả</button></div>`
           : `<button disabled aria-label="Ô hành trang trống ${i + 1}">＋</button>`;
       },
     ).join('');

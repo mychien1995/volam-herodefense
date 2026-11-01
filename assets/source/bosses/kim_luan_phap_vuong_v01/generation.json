@@ -1,0 +1,418 @@
+{
+  "status": "prototype_pending_director_review",
+  "runtimeIntegrated": false,
+  "requests": [
+    {
+      "id": "kim_luan_base",
+      "file": "kim_luan_base.png",
+      "rows": 4,
+      "cols": 8,
+      "kind": "character",
+      "bodyHeight": 60,
+      "canvas": 128,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "idle_a",
+        "idle_b",
+        "walk_a",
+        "walk_b",
+        "walk_c",
+        "walk_d",
+        "palm_ready",
+        "palm_extend"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: production animation SOURCE spritesheet for original 2D detailed chibi wuxia RPG. Create Kim Luân Pháp Vương, Mongolian esoteric martial monk boss: bald head, stern weathered angular face, narrow moustache, large round gold earrings, dark red sleeveless monk robe over ochre-gold layered tunic, wide gold collar, dark boots, prayer beads. Large head, compact strong body, elegant high-detail pixel clusters, dark warm outline, upper-left lighting, readable at approximately60px body after export. He fights BAREHANDED: NO held weapon, NO staff, NO floating rings in this sheet. Fixed elevated orthographic TOP-DOWN THREE-QUARTER overworld view, NOT isometric, NOT side-scroll, NOT realistic portrait. EXACT 1536x1024 transparent alpha source sheet, 8 columns x4 rows,32 isolated full-body cels. Rows in order DOWN/front, LEFT/profile, RIGHT/profile, UP/back; up row shows back of bald head and back of robe, no face. Each row maintains its facing. Columns in order: idle breath A, idle breath B, walk left contact, walk passing A, walk right contact, walk passing B, unarmed palm attack anticipation, unarmed palm attack extension. Deliberately different articulated poses, alternate legs, hands and cloth, no duplicate static translations. Consistent identity, clothing, body size, feet pivot at80%cellheight. At least20px empty transparent padding between every cel; all robe/hands/feet entirely inside its invisible cell. Transparent background alpha0, no checkerboard, no colored background, no floor/shadow, no gridlines, no text, no labels, no decorative frame. This is functional sprite art not a concept board.",
+      "started": "2026-11-01T08:06:29.339Z",
+      "finished": "2026-11-01T08:08:11.231Z",
+      "tool": "OpenAI built-in image_gen",
+      "notes": [
+        "Left-facing palm cels turn toward camera; do not use as left attack. Dedicated action source required."
+      ]
+    },
+    {
+      "id": "hoac_do_base",
+      "rows": 4,
+      "cols": 8,
+      "kind": "character",
+      "bodyHeight": 52,
+      "canvas": 160,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "idle_a",
+        "idle_b",
+        "walk_a",
+        "walk_b",
+        "walk_c",
+        "walk_d",
+        "attack_ready",
+        "attack_extend"
+      ],
+      "prompt": "Use case: stylized-concept. Original production sprite animation SOURCE sheet, detailed chibi WUXIA PIXEL ART, small expressive oversized head, compact2.5head body, crisp pixel clusters and dark outlines, NOT smooth realistic illustration. Character HOẮC ĐÔ: Mongolian prince disguised as dignified Han Chinese scholar, shrewd sly expression, black topknot with small jade crown, elegant ivory robes with deep teal/gold embroidered trim, dark boots, one folding IRON FAN in RIGHT hand. Fan cream leaves and visible dark metal ribs. Four consistent cardinal facings, fixed elevated top-down three-quarter RPG orthographic camera, NOT isometric or side-scroll. EXACT1536x1024 transparent sheet8columns4rows32cels: rows DOWN/front,LEFT,RIGHT,UP/back (hide face); columns idleA,idleB,walk left contact,walk passA,walk right contact,walk passB,fan slash anticipation,fan slash extension. Keep every cel's facing correct INCLUDING leftward fan slash. Quick light agile steps; moving cloth, arms and alternating feet. Consistent height/feet pivot80%cellheight. Full fan/hands/robe inside own cell with generous alpha gutters20px. Actual transparent alpha0 background; no parchment, floor, shadows, gradient, checkerboard, grid, text or labels. NO aura or VFX.",
+      "started": "2026-11-01T08:11:07.842Z",
+      "finished": "2026-11-01T08:11:42.540Z",
+      "file": "hoac_do_base.png",
+      "tool": "OpenAI built-in image_gen"
+    },
+    {
+      "id": "dat_nhi_ba_base",
+      "rows": 4,
+      "cols": 8,
+      "kind": "character",
+      "bodyHeight": 64,
+      "canvas": 160,
+      "groups": [
+        "down",
+        "left",
+        "right",
+        "up"
+      ],
+      "columns": [
+        "idle_a",
+        "idle_b",
+        "walk_a",
+        "walk_b",
+        "walk_c",
+        "walk_d",
+        "attack_ready",
+        "attack_extend"
+      ],
+      "prompt": "Use case: stylized-concept. Original detailed chibi wuxia PIXEL ART production sprite animation SOURCE, bold clean pixel clusters and outline, expressive oversized head, compact massive2.5head body. ĐẠT NHĨ BA: extremely broad fat muscular Mongolian strongman, bald shaved head with tiny rear braid, simple earnest stern face, round gold earrings, ochre/yellow sleeveless monk-warrior wrap tunic, dark brown belt and pants, broad bare forearms, heavy boots. ONE huge heavy bronze HÀNG MA XỬ / long metal mace, thick shaft and heavy lobed blunt head, held consistently with two hands when attacking; no sword. Fixed elevated orthographic top-down three-quarter overworld camera, no isometric/side-scroll. EXACT1536x1024 alpha transparent sheet8columns4rows32cels. Rows DOWN/front,LEFT,RIGHT,UP/back hideface. Columns idleA,idleB,slow weighty walk left contact,walk passA,walk right contact,walk passB,mace180degree sweep anticipation,sweep extension. Different articulated heavy poses, stable body scale/feet pivot80%cellheight, full weapon fits each cell. Wider heavier silhouette than normal hero.20px transparent padding and empty gutters; no text labels, frames, shadows, floor, background, gradient, checkerboard, aura or VFX.",
+      "started": "2026-11-01T08:11:07.842Z",
+      "finished": "2026-11-01T08:12:13.905Z",
+      "file": "dat_nhi_ba_base.png",
+      "tool": "OpenAI built-in image_gen",
+      "fixedScale": 0.3
+    },
+    {
+      "id": "kim_luan_actions",
+      "rows": 4,
+      "cols": 4,
+      "kind": "character",
+      "bodyHeight": 60,
+      "canvas": 160,
+      "groups": [
+        "sweep",
+        "channel",
+        "stomp",
+        "invoke"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "prompt": "Use case: identity-preserve. Supporting identity reference: attached character locomotion source. Create NEW original gameplay ACTION SOURCE poses for the SAME character, outfit, proportions, palette and weapon. Detailed chibi wuxia PIXEL ART with crisp pixel clusters/dark outline, fixed elevated top-down three-quarter overworld camera. No realistic illustration, no isometric. EXACT1024x1024 transparent sheet4columns4rows16fully isolated fullbody cels. All action rows FACE DOWN/FRONT with slightly visible top of head, aimed toward bottom of sheet. Columns show anticipation, release/contact, followthrough, recovery, genuinely articulated different arms/torso/feet. Stable body size and planted feet at80%cellheight, generous alpha gutters30px; full body/weapon fits every cell. No text labels/grid/shadow/floor/backdrop/checkerboard, no embedded VFX or magic rings, separate body animation only. Kim Luân Pháp Vương remains barehanded Mongolian gold/red monk, no held weapons. Row0: sweep both arms forward then flick five unseen rings outward. Row1: spread arms to channel orbiting rings, then thrust both open palms forward. Row2: lift right leg and forcefully stamp ground, lowered center of gravity then recover. Row3: overhead invocation, both hands raise, palms press downward, shouting empowered stance, recovery. NO elephants or rings in body cels; those use separate VFX.",
+      "started": "2026-11-01T08:13:43.471Z",
+      "finished": "2026-11-01T08:14:24.628Z",
+      "file": "kim_luan_actions.png",
+      "tool": "OpenAI built-in image_gen",
+      "fixedScale": 0.215,
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/kim_luan_phap_vuong_v01/generated/kim_luan_base.png",
+          "sha256": "766858eb597354330af89d233a9ca91014eb4124eb6cad535090ebcfac2776ee"
+        }
+      ]
+    },
+    {
+      "id": "hoac_do_actions",
+      "rows": 4,
+      "cols": 4,
+      "kind": "character",
+      "bodyHeight": 52,
+      "canvas": 160,
+      "groups": [
+        "triple_fan",
+        "gust",
+        "nails",
+        "spin"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "prompt": "Use case: identity-preserve. Supporting identity reference: attached character locomotion source. Create NEW original gameplay ACTION SOURCE poses for the SAME character, outfit, proportions, palette and weapon. Detailed chibi wuxia PIXEL ART with crisp pixel clusters/dark outline, fixed elevated top-down three-quarter overworld camera. No realistic illustration, no isometric. EXACT1024x1024 transparent sheet4columns4rows16fully isolated fullbody cels. All action rows FACE DOWN/FRONT with slightly visible top of head, aimed toward bottom of sheet. Columns show anticipation, release/contact, followthrough, recovery, genuinely articulated different arms/torso/feet. Stable body size and planted feet at80%cellheight, generous alpha gutters30px; full body/weapon fits every cell. No text labels/grid/shadow/floor/backdrop/checkerboard, no embedded VFX or magic rings, separate body animation only. Hoắc Đô elegant sly scholar ivory/teal robe, ONE folding iron fan in RIGHT hand. Row0: THREE consecutive fan slashes, slashleft then slashright then forceful forward open-fan slash, finally recover. Row1: fan creates wind, raised fan anticipation then broad forward sweep, extension, recover. Row2: hidden nails cast, closed fan near chest then sharp wrist flick forward, extended fan, recover. Row3 special EXCEPTION to facing rule: a FULL BODY SPIN cycle: front, left profile, back, right profile, fan at full arm extension and flared robes, four distinct cardinal orientations of same spinning pose.",
+      "started": "2026-11-01T08:13:43.471Z",
+      "finished": "2026-11-01T08:15:09.251Z",
+      "file": "hoac_do_actions.png",
+      "tool": "OpenAI built-in image_gen",
+      "fixedScale": 0.188,
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/kim_luan_phap_vuong_v01/generated/hoac_do_base.png",
+          "sha256": "02aa48b1d001be86b5f9d2010c9b4e250103d82ba3a41b8035aa7c3b09ec4031"
+        }
+      ]
+    },
+    {
+      "id": "dat_nhi_ba_actions",
+      "rows": 4,
+      "cols": 4,
+      "kind": "character",
+      "bodyHeight": 64,
+      "canvas": 160,
+      "groups": [
+        "sweep",
+        "slam",
+        "transfer",
+        "boulder"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "prompt": "Use case: identity-preserve. Supporting identity reference: attached character locomotion source. Create NEW original gameplay ACTION SOURCE poses for the SAME character, outfit, proportions, palette and weapon. Detailed chibi wuxia PIXEL ART with crisp pixel clusters/dark outline, fixed elevated top-down three-quarter overworld camera. No realistic illustration, no isometric. EXACT1024x1024 transparent sheet4columns4rows16fully isolated fullbody cels. All action rows FACE DOWN/FRONT with slightly visible top of head, aimed toward bottom of sheet. Columns show anticipation, release/contact, followthrough, recovery, genuinely articulated different arms/torso/feet. Stable body size and planted feet at80%cellheight, generous alpha gutters30px; full body/weapon fits every cell. No text labels/grid/shadow/floor/backdrop/checkerboard, no embedded VFX or magic rings, separate body animation only. Đạt Nhĩ Ba enormous fat muscular bald yellow/ochre warrior with tiny rear braid, ONE massive blunt bronze mace Hàng Ma Xử. Row0: wide180degree forward mace sweep windup, acrossfront contact, extended finish, recover. Row1: twohand mace lift HIGH above head, groundslam contact, crouched followthrough with mace against floor, rise; weapon remains ONE connected mace. Row2: ward transfer gesture, left palm draws power from chest, extends to ally, holds, recovers while right hand rests mace. Row3: set mace aside (do not include mace), lift ONE big gray boulder using both hands, throw forward, empty hands followthrough, recover. No energy effects in body sprites.",
+      "started": "2026-11-01T08:13:43.471Z",
+      "finished": "2026-11-01T08:15:50.458Z",
+      "file": "dat_nhi_ba_actions.png",
+      "tool": "OpenAI built-in image_gen",
+      "fixedScale": 0.235,
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/kim_luan_phap_vuong_v01/generated/dat_nhi_ba_base.png",
+          "sha256": "4f1eae879755c1b14329d8bfb9226060223271f76655f426bd24f7710d47a21c"
+        }
+      ]
+    },
+    {
+      "id": "hoac_do_fx",
+      "file": "hoac_do_fx.png",
+      "rows": 4,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 256,
+      "exportScale": 0.42,
+      "sourceAnchor": [
+        0.5,
+        0.65
+      ],
+      "groups": [
+        "slash",
+        "gust",
+        "nail",
+        "whirlwind"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "tool": "OpenAI built-in image_gen",
+      "status": "prototype_pending_director_review",
+      "prompt": "Use case: stylized-concept. Asset: ORIGINAL detailed wuxia PIXEL ART VFX ANIMATION SOURCE, crisp luminous hand-shaped pixel clusters, no soft blurry vector glow. Fixed elevated orthographic top-down three-quarter RPG camera. EXACT1024x1024 TRANSPARENT alpha sheet4columns4rows16isolated cels, generous empty transparent gutters30px. Every cell same dimensions/scale/pivot, NO text, labels, grid, border, backdrop, floor, checkerboard, character, UI. Rows are4separate sequences; columns4distinct successive animation phases. All artwork fully fits its cell with no cut-off particles. Hoắc Đô's iron fan skills. ROW0 four-phase silver-white crescent fan-shaped SLASH, opens then extends toward bottom, then breaks into thin silver streaks; broad fan cone, visible riblike silver cuts. ROW1 a pale teal-white compact WIND TORNADO projectile moving toward bottom, coils animated four phases, stylized air ribbons and a little grit, NOT big solid smoke cloud. ROW2 ONE clearly pointed dark metal poison NAIL projectile aimed downward, bright sickly emerald tip and segmented green trail, four animated trail phases, NOT five nails together. ROW3 rotating broad silver/teal fan-blade WHIRLWIND around an EMPTY center, projected ground ellipse, distinct four phases with small emerald dart sparks along outer edge, preserve readable open center."
+    },
+    {
+      "id": "dat_nhi_ba_fx",
+      "file": "dat_nhi_ba_fx_safe.png",
+      "rows": 4,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 256,
+      "exportScale": 0.45,
+      "sourceAnchor": [
+        0.5,
+        0.65
+      ],
+      "groups": [
+        "fissure",
+        "shockwave",
+        "boulder",
+        "ward"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "tool": "OpenAI built-in image_gen",
+      "status": "prototype_pending_director_review",
+      "prompt": "Use case: precise-object-edit. Edit supporting Đạt Nhĩ Ba VFX source into a CLEAN isolated16cel animation sheet. Preserve four sequences: straight narrow warningcrack then explosionfissure; expanding stone ground shockwave rings with empty centers; rotating downward thrown gray boulder; hollow golden protective aura. Preserve all4distinct frames eachrow and pixel design/palette. Correct source touching/cut-off edges by REDRAW all16effects SMALLER so each effect occupies ONLY60% of width/height of its own invisible cell, at least60px completely empty alpha gutters on allfour sides. EXACT1536x1536 sheet4columns4rows16fully separatecels. Allrocks/sparks/dustfitinside eachcell; absolutely NO touching neighboring effect, cut-off edge, floor, checkerboard, backdrop, gridline, labels, text or people. Transparent alpha0. Fixed elevated ortho topdown threequarter plane, crisp detailed PIXEL ART, notblurredvector.",
+      "started": "2026-11-01T09:05:38.407Z",
+      "finished": "2026-11-01: completion observed after tool context refresh; precise duration unavailable"
+    },
+    {
+      "id": "kim_luan_fx",
+      "file": "kim_luan_fx_safe.png",
+      "rows": 4,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 256,
+      "exportScale": 0.42,
+      "sourceAnchor": [
+        0.5,
+        0.65
+      ],
+      "groups": [
+        "chakram",
+        "shockwave",
+        "cage",
+        "empower"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "tool": "OpenAI built-in image_gen",
+      "status": "prototype_pending_director_review",
+      "prompt": "Use case: precise-object-edit. Edit supporting original Kim Luân VFX source into a CLEAN isolated16cel animation source. Preserve four sequences: rotating one GOLD5spokechakram; golden downward shockwave; hollow gold wheelprison; red/gold empowerment ellipse. Preserve design palette and all4different frames of eachsequence. Correct the source's touching/oversized cels: REDRAW all16 effects substantially SMALLER so each effect occupies ONLY60% of the width and height of its own invisible cell, leaving at least60px completely empty alpha gutters on allfour sides. EXACT1536x1536,4columns4rows,16separate same-size cells. No cut sparks at canvas/cell boundaries, NO connected effects between cells. Entire effect remains fullyinside owncell. Transparent alpha0, no backdrop/checkerboard/grid/text/shadow. Crisp detailed PIXEL ART, no extra props/characters. Every transparent center remains empty, no full yellow fill.",
+      "started": "2026-11-01T09:05:38.407Z",
+      "finished": "2026-11-01: completion observed after tool context refresh; precise duration unavailable"
+    },
+    {
+      "id": "elephant",
+      "file": "elephant.png",
+      "rows": 2,
+      "cols": 4,
+      "kind": "vfx",
+      "canvas": 256,
+      "exportScale": 0.32,
+      "sourceAnchor": [
+        0.5,
+        0.65
+      ],
+      "groups": [
+        "run_down",
+        "shelter_rise"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "tool": "OpenAI built-in image_gen",
+      "status": "prototype_pending_director_review",
+      "prompt": "Use case: stylized-concept. Original detailed chibi wuxia PIXEL ART game source spritesheet. Fixed elevated TOP-DOWN three-quarter orthographic overworld view, not isometric/sideview. EXACT1536x768 TRANSPARENT alpha sheet4columns2rows,8isolated cels. EACH sprite occupies ONLY central65%of its invisible cell, at least50px transparent margins/gutters. Row0: same large gray battle ELEPHANT facing DOWN toward viewer and bottom of map, four sequential running gait cels left contact/passing/right contact/passing. Small ornate bronze forehead plate, red woven saddlecloth, ivory tusks, distinct articulated legs/trunk/ears. Full whole body and all feet visible, consistent proportions and size, no rider, dust or aura; not profile, not realistic. Row1: same gray ROCK OUTCROP emerging from ground4phases: small rubble, half risen jaggedrock, fully risen shelterrock with broad frontface, cracked shelteredrock; clear same groundbase/pivot. All full objects fit well inside independent cells. Crisp authored pixel clusters warm dark outlines; actual alpha0 background, no brown/gray gradient, no text labels/grid/floor/shadow/checkerboard/UI."
+    },
+    {
+      "id": "tuong_duong_props",
+      "file": "tuong_duong_props.png",
+      "rows": 3,
+      "cols": 4,
+      "kind": "scenery",
+      "canvas": 384,
+      "exportScale": 0.5,
+      "sourceAnchor": [
+        0.5,
+        0.65
+      ],
+      "groups": [
+        "upper",
+        "middle",
+        "lower"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "tool": "OpenAI built-in image_gen",
+      "status": "prototype_pending_director_review",
+      "prompt": "Use case: stylized-concept. Original authored detailed wuxia PIXEL ART ENVIRONMENT PROP atlas for XIANGYANG fortress / thành Tương Dương, Song dynasty gray stone walls, dark slate tiled roofs, aged reddish timber, military darkred banners, upperleft daylight. Fixed elevated orthographic topdown threequarter RPG view, squarealigned ground, NOT isometric, no perspective vanishing point, no screenshot/map/UI. EXACT1536x1024 transparent alpha sheet4columns3rows12SEPARATE isolated full props with generous30px alpha gutters and full silhouettes contained in cells. Row0: column0 grand graystone city GATEHOUSE with arched open gate and slate tiled roof; col1 straight horizontal crenellated stone WALL module; col2 tall square graystone WATCHTOWER dark slate roof; col3 vertical stone WALL module. Row1: col0 small roofed DEFENDER barracks/stall; col1 paired long red military BANNERS on wooden pole; col2 bronze WAR DRUM on stand; col3 detailed bronze BRAZIER with small flame. Row2: col0 large gray jagged ROCK OUTCROP shelter boulder with clear front face; col1 smaller fractured outcrop same family; col2 weathered wooden supply CRATES and arrows rack; col3 damaged stone RUBBLE and broken timber small heap. Materials/pixel density coherent, fronts visible, foot anchor near80%cellheight. NO ground planes/shadows, people, text labels, writing, gridline, background, checkerboard, cast magic or dragons. Source sprites only."
+    },
+    {
+      "id": "elephant_up",
+      "file": "elephant_up.png",
+      "rows": 1,
+      "cols": 4,
+      "kind": "character",
+      "bodyHeight": 124,
+      "canvas": 256,
+      "groups": [
+        "run_up"
+      ],
+      "columns": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "sourceAnchor": [
+        0.5,
+        0.8
+      ],
+      "tool": "OpenAI built-in image_gen",
+      "prompt": "Use case: identity-preserve. Supporting identity reference: the attached ORIGINAL elephant source sheet; use only elephant identity, pixel finish and overhead camera, ignore rock row. Create a NEW FOUR-CEL UP/BACK-FACING running animation for that SAME gray battle elephant with ornate gold/bronze head plate, dark red woven saddlecloth, pale tusks. Fixed elevated orthographic TOP-DOWN THREE-QUARTER RPG overworld view. Elephant faces NORTH / AWAY FROM VIEWER toward TOP of sheet: we see rump, saddlecloth back and back of head/ears; NO forward-facing eyes or trunk-facing viewer. All four cells keep the SAME up-facing orientation. Four distinct articulated run gait poses: rear left contact, passing A, rear right contact, passing B; planted/pushed feet, consistent saddlecloth, tail swing and ear motion. Do not rotate/mirror an existing front drawing; author true back-view body anatomy. Same big compact proportions and pixel texture as reference. EXACT1536x512 transparent alpha source,4columns1row,4separate full-body cels. Body around330px high within each384x512 invisible cell; feet at80%cellheight. At least35px transparent horizontal padding around each complete elephant; no clipped feet/tail/tusks, no cell overlap. Detailed crisp wuxia PIXEL ART clusters and dark outlines, upper-left light, NOT realistic painting/isometric/side view. Transparent alpha0 background; no floor, shadow, dust, rocks, text, labels, borders, grid or checkerboard.",
+      "started": "2026-11-01T09:51:19.924Z",
+      "referenceFiles": [
+        {
+          "path": "assets/source/bosses/kim_luan_phap_vuong_v01/generated/elephant.png",
+          "sha256": "8e52f708345b4de1fa4605c1c0945d8c0b5bcbb4fa1457caa2563950b992fb9a"
+        }
+      ]
+    },
+    {
+      "id": "kim_stomp_fx",
+      "file": "stomp_safe.png",
+      "rows": 2,
+      "cols": 2,
+      "kind": "vfx",
+      "canvas": 768,
+      "exportScale": 0.9,
+      "sourceAnchor": [
+        0.5,
+        0.5
+      ],
+      "groups": [
+        "wave",
+        "fade"
+      ],
+      "columns": [
+        "0",
+        "1"
+      ],
+      "prompt": "Use case: precise-object-edit. EDIT TARGET is the attached FOUR golden ground ripple rings sheet. The rings are currently much too large and cut off at left/right edges and touch adjacent cells. Preserve the four ellipse designs and pixel art phases but SHRINK EACH ENTIRE RING TO 65% OF ITS CURRENT SIZE around its own cell center. Keep exact1254x1254 output canvas with2columns2rows. Each invisiblecell627x627 must have ring ONLY about400pxwide x185pxhigh at CENTER, with at least100px completely empty alpha0 padding left/right and more than180px empty padding above/below. Do not crop any part of a ring. Do not enlarge back to fill cell! The majority of image area should be EMPTY TRANSPARENT SPACE. Four whole unconnected isolated ellipses with complete closed rims, no cut edges, NO ring touches canvas/cell edge. Also make ribbon rim narrow and light; retain genuinely EMPTY transparent centers. No backdrop, checkerboard, gridline, text, floor, people, smoke or boulders. This edit is specifically a substantial reduction in scale with lots of transparent margin.",
+      "started": "2026-11-01T10:06:06.847Z",
+      "tool": "OpenAI built-in image_gen"
+    }
+  ],
+  "materialsSource": {
+    "prompt": "Use case: stylized-concept. Asset: original detailed wuxia RPG ENVIRONMENT MATERIALS TILESET, not finished map, no concept screenshot. Authored crisp PIXEL ART, orthographic elevated top-down three-quarter, square ground projection, consistent upper-left light, muted cool gray Song dynasty Xiangyang fortress stone with warm ochre dust and subtle moss. EXACT1024x1024 image divided into4columns4rows of256x256 FULLY OPAQUE tileable square material patches, no spacing or labels. Row0 four different harmonious seamless gray rectangular flagstone courtyard patterns with weathered individual stones; Row1 four seamless gray fortress paving variations with subtle cracks, edge wear and scant dust, avoid big holes; Row2 four courtyard border materials: top edge mossy stone to earth, bottom edge earth to stone, left edge moss to stone, right edge stone to moss, square axis aligned; Row3 four seamless materials: tamped dusty earth, mossy compact grass, rubble stone ground, worn dark moat-edge paving. Each patch independent, detailed consistent pixel density, natural variation with readable large combat floor. NO characters, buildings, large props, UI, text, lines, perspective vanishing point, isometric diamond tiles, lighting gradients, shadows or large decorations. This is only reusable material tile art.",
+    "started": "2026-11-01T08:11:07.842Z",
+    "finished": "2026-11-01T08:12:56.773Z",
+    "file": "tuong_duong_terrain.png",
+    "tool": "OpenAI built-in image_gen"
+  },
+  "retainedAttempts": [
+    {
+      "file": "kim_luan_alpha_revision.png",
+      "used": false,
+      "note": "Transparent compositing of initial source was already clean; hidden RGB is not an opaque backdrop."
+    },
+    {
+      "file": "kim_luan_fx.png",
+      "used": false,
+      "note": "Replaced by isolated-gutter revision."
+    },
+    {
+      "file": "dat_nhi_ba_fx.png",
+      "used": false,
+      "note": "Replaced by isolated-gutter revision."
+    },
+    {
+      "file": "stomp_initial.png",
+      "used": false,
+      "note": "Initial ellipse touched source borders; retained, replaced with padded source."
+    }
+  ]
+}
