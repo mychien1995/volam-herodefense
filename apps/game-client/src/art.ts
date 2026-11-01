@@ -2,6 +2,7 @@ import { preloadChu, registerChu } from './chu-presentation.js';
 import { preloadKimArt, registerKimArt } from './kim-luan-art.js';
 import { preloadHongLietArt, registerHongLietArt } from './hong-liet-art.js';
 import Phaser from 'phaser';
+import { preloadCoMo, registerCoMoEffects } from './co-mo-art.js';
 import {
   preloadBeachArt,
   registerBeachArt,
@@ -82,6 +83,7 @@ export function preloadArt(scene: Phaser.Scene): void {
   preloadChu(scene);
   preloadHongLietArt(scene);
   preloadKimArt(scene);
+  preloadCoMo(scene);
   preloadBeachArt(scene);
   preloadForestCreepArt(scene);
   preloadBambooForestArt(scene);
@@ -167,6 +169,9 @@ export function actorFootPivot(
   const creeps = scene.cache.json.get('arena_creeps_manifest') as
     ArenaCreepManifest | undefined;
   const entry =
+    (
+      scene.cache.json.get('co_mo_manifest') as DesertManifest | undefined
+    )?.assets.find((a) => a.id === id) ??
     manifest.assets.find((asset) => asset.id === id) ??
     (
       scene.cache.json.get('beach_manifest') as BeachManifest | undefined
@@ -186,6 +191,8 @@ export function registerArt(scene: Phaser.Scene): void {
   registerChu(scene);
   registerHongLietArt(scene);
   registerKimArt(scene);
+  registerDesertArt(scene, 'co_mo_manifest');
+  registerCoMoEffects(scene);
   registerBeachArt(scene);
   registerForestCreepArt(scene);
   registerDesertArt(scene);

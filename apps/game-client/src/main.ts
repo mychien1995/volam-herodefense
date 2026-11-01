@@ -174,7 +174,8 @@ function dungeonAction(
           | 'sea'
           | 'chu_ba_thong'
           | 'hong_liet'
-          | 'kim_luan';
+          | 'kim_luan'
+          | 'co_mo';
       },
 ): void {
   if (

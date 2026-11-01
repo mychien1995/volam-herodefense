@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-01",
+  "status": "PASS",
+  "sourceCommit": "4af604788784fca662ce5e2a7a4fbf9e4ac81f16",
+  "targetBranch": "milestone/m3d",
+  "targetBase": "ac08a6f0",
+  "protocolVersion": 16,
+  "command": "$env:LY_MAC_SAU_QA_PLAYERS='6'; $env:LY_MAC_SAU_QA_EVIDENCE_DIR='docs/evidence/ly-mac-sau-m3d-merge'; pnpm check:final --config playwright.ly-mac-sau.config.ts",
+  "results": {
+    "typecheck": "PASS",
+    "unitIntegrationTests": 445,
+    "workflowChecks": 18,
+    "assetValidators": 15,
+    "browserTests": 4,
+    "totalSeconds": 315.25
+  },
+  "browserScope": [
+    "two-client shared creep combat/rewards/Space exit",
+    "two-client private instance isolation/pause",
+    "six-client Ly Mac Sau: 192 cels, six actions, actual boss kill, one rolled claim, private/shared and cleanup",
+    "normal menu entry into forest/desert/sea/hong_liet/chu_ba_thong/co_mo; overlays at 1280x720 and 1920x1080"
+  ],
+  "preserved": [
+    "existing five dungeon destinations and forest roster",
+    "Hong Liet and Chu encounter adapters/lifecycles/renderers",
+    "Chu manual roll/pass, sell/drop/pickup and item projection",
+    "approved school animations, progression, controls and authority"
+  ],
+  "mergeResolutions": [
+    "union of destinations/preload/registry/preparation and validators",
+    "protocol16 retains existing fields and adds Co Mo cast/claim fields",
+    "CoMoBossCast avoids existing Hong Liet BossCast export collision",
+    "existing crowdControlScale preserved; Co Mo resistance applied separately",
+    "existing bossItems remain separate from Co Mo pending claims",
+    "exact approved LF/CRLF metadata restored only upon matching SHA-256"
+  ],
+  "visualInspection": {
+    "opened": [
+      "arena-design-scale.png",
+      "arena-natural-combat.png",
+      "dungeon-selector-1280.png",
+      "dungeon-selector-1920.png"
+    ],
+    "findings": [
+      "one full viewport and internal overlays",
+      "Co Mo option selected visibly in lower menu controls; existing cards retained",
+      "boss/hero detail and purple VFX bindings retained",
+      "tile repetition and clustered name/effect overlap remain"
+    ],
+    "runtimeDirectorApproval": false
+  },
+  "limits": [
+    "existing boss-specific browser suites and balance probes were not repeated by this merge task",
+    "Co Mo loot remains pending claims, without equip/sell/drop/crafting support; existing Chu item transactions retained",
+    "final art and tuning approval remain pending"
+  ],
+  "recordingsCreated": false,
+  "gitCheckoutApprovedHashesVerified": 400
+}

@@ -1,5 +1,6 @@
 import { stepChu, constrainChuTrap } from './chu-ba-thong.js';
 import { expireCombos } from './combos.js';
+import { stepBossEncounter } from './boss-encounter.js';
 import { nextBasic } from './basic-attacks.js';
 import { captureConfinement, confineMovement } from './confinement.js';
 import {
@@ -31,6 +32,7 @@ import {
 } from './geometry.js';
 import type {
   Command,
+  Actor,
   Creep,
   Hero,
   Point,
@@ -299,19 +301,29 @@ function advanceProjectile(
       wallT,
       segmentRect(shot, end, wall, shot.effect.radius) ?? Infinity,
     );
-  const collisions = [...world.creeps.values()]
-    .filter((enemy) => enemy.hp > 0 && !(shot.hitIds ?? []).includes(enemy.id))
+  const targets: Actor[] = shot.hostile
+    ? [...world.heroes.values()]
+    : [...world.creeps.values()];
+  const collisions = targets
+    .filter(
+      (enemy) =>
+        enemy.hp > 0 &&
+        !(shot.hitIds ?? []).includes(enemy.id) &&
+        (!shot.targetId || enemy.id === shot.targetId),
+    )
     .map((enemy) => ({
       enemy,
       t: segmentCircle(
         shot,
         end,
         enemy,
-        (enemy.stats ?? config.creep).radius + shot.effect.radius,
+        (world.creeps.get(enemy.id)?.stats?.radius ??
+          (shot.hostile ? config.radius : config.creep.radius)) +
+          shot.effect.radius,
       ),
     }))
     .filter(
-      (hit): hit is { enemy: Creep; t: number } =>
+      (hit): hit is { enemy: Actor; t: number } =>
         hit.t !== undefined && hit.t < wallT,
     )
     .sort(
@@ -337,7 +349,7 @@ function advanceProjectile(
         damage: 0,
         critical: false,
       });
-    const victims = [...world.creeps.values()].filter(
+    const victims = targets.filter(
       (enemy) =>
         enemy.hp > 0 &&
         (enemy.id === collision.enemy.id ||
@@ -395,16 +407,17 @@ function advanceProjectile(
           enemy,
           dir.x * shot.effect.knockback,
           dir.y * shot.effect.knockback,
-          (enemy.stats ?? config.creep).radius,
+          (world.creeps.get(enemy.id)?.stats ?? config.creep).radius,
           config,
           world.tick,
         );
       confineMovement(world, enemy, before, config);
-      if (enemy.hp > 0 && shot.effect.burnDamage > 0) {
-        enemy.burnSource = shot.ownerId;
-        enemy.burnDamage = shot.effect.burnDamage;
-        enemy.burnUntil = world.tick + shot.effect.burnTicks;
-        enemy.burnNext = world.tick + config.tickRate;
+      const burned = world.creeps.get(enemy.id);
+      if (burned && burned.hp > 0 && shot.effect.burnDamage > 0) {
+        burned.burnSource = shot.ownerId;
+        burned.burnDamage = shot.effect.burnDamage;
+        burned.burnUntil = world.tick + shot.effect.burnTicks;
+        burned.burnNext = world.tick + config.tickRate;
       }
     }
   }
@@ -549,7 +562,16 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   for (const shot of world.projectiles.values())
     advanceProjectile(world, shot, config);
   constrainChuTrap(world, config);
+  stepBossEncounter(world, config);
   for (const [id, enemy] of world.creeps) {
+    if (
+      enemy.summonedBy &&
+      (world.tick >= (enemy.expiresAt ?? Infinity) ||
+        (enemy.hp <= 0 && world.tick >= enemy.respawnAt))
+    ) {
+      world.creeps.delete(id);
+      continue;
+    }
     if (enemy.hp <= 0) {
       if (enemy.invasion && world.tick >= enemy.respawnAt) {
         world.creeps.delete(id);
@@ -574,7 +596,13 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       });
       enemy.burnNext += config.tickRate;
     }
-    if (enemy.hp <= 0 || enemy.bossEncounter || enemy.controlled) continue;
+    if (
+      enemy.hp <= 0 ||
+      enemy.bossEncounter ||
+      enemy.controlled ||
+      enemy.encounterBoss
+    )
+      continue;
     const stats = enemy.stats ?? config.creep;
     const nearest = [...world.heroes.values()]
       .filter(
@@ -679,6 +707,10 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       enemy.pose =
         !hasStatus(enemy, 'stun', world.tick) && moving ? 'walk' : 'idle';
   }
+  // DOT/counters can finish the boss after its AI phase. Resolve that death and
+  // unique loot in the same tick, before projecting the authoritative snapshot.
+  if (world.boss && (world.creeps.get(world.boss.actorId)?.hp ?? 1) <= 0)
+    stepBossEncounter(world, config);
   for (const actor of [...world.heroes.values(), ...world.creeps.values()]) {
     if (actor.hp <= 0) actor.pose = 'death';
     else if (world.tick < actor.hurtUntil) actor.pose = 'hurt';

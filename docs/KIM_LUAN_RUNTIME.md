@@ -62,3 +62,7 @@ A normal game service is available locally at http://127.0.0.1:5394/ with compil
 ## Director approval for milestone integration
 
 The director approved the implemented encounter with “duyệt, hãy tích hợp nó vào milestone/m3d”. See `assets/reviews/bosses/kim_luan_phap_vuong_v01/runtime_approval_2026_11_01.json`. This supersedes the pending runtime-review status in the historical verification above. The246preview pins remain unchanged. Combat numbers retain their disclosed trial status.
+
+## M3D reconciliation
+
+The integration includes milestone/m3d at f13dc1c9, retaining Lý Mạc Sầu / Cổ Mộ Phái alongside Kim Luân and all existing destinations. Both controllers, cleanup paths and UI remain registered. Wire protocol advances to17 because the two parent branches used incompatible version16 schemas. Approved inputs retain their exact bytes in Git, including explicit newline handling. `playwright.kim-luan-m3d.config.ts` runs both existing boss suites and normal dungeon/selector regressions using their separate owned QA services. New evidence is separated under `docs/evidence/kim-luan-m3d-merge/`; original approval evidence remains unchanged.

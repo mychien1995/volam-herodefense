@@ -28,6 +28,7 @@ export * from './schools.js';
 export * from './dungeon.js';
 export * from './desert.js';
 export * from './beach.js';
+export * from './ly-mac-sau.js';
 export * from './dungeon-registry.js';
 export * from './invasion.js';
 export * from './cai-bang.js';

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Lý Mạc Sầu · Bản thử artwork</title>
+    <link rel="stylesheet" href="review.css" />
+  </head>
+  <body>
+    <main id="viewport" aria-label="Bản thử artwork Lý Mạc Sầu">
+      <canvas id="scene" width="1280" height="854" aria-label="Arena Cổ Mộ và animation của Lý Mạc Sầu"></canvas>
+      <div class="identity glass"><span class="seal">古墓</span><div><strong>Lý Mạc Sầu</strong><small>Cổ Mộ Phái · Bản thử artwork</small></div></div>
+      <div class="top-actions"><button id="settings-toggle" aria-expanded="false" aria-controls="settings">Tuỳ chỉnh</button><button id="fullscreen">Toàn màn hình</button></div>
+      <section id="settings" class="glass" hidden aria-label="Tuỳ chỉnh bản thử">
+        <label>Hướng boss<select id="direction"><option value="down">Xuống</option><option value="left">Trái</option><option value="right" selected>Phải</option><option value="up">Lên</option></select></label>
+        <label>Động tác sprite<select id="character-state"><option value="idle">Đứng yên</option><option value="walk">Đi bộ</option><option value="basic_attack">Đánh thường</option><option value="needle_cast">Phóng châm</option><option value="palm_channel">Vận chưởng</option><option value="fast_sweep">Quạt phất trần</option><option value="summon_cast">Triệu hồi</option><option value="hurt">Trúng đòn</option><option value="death">Gục ngã</option></select></label>
+        <label>Arena<select id="background"><option value="illustration">Nền minh hoạ</option><option value="tiles">Tiles và props</option></select></label>
+        <label>Người chơi<select id="party"><option value="1">1 người</option><option value="6" selected>6 người</option></select></label>
+        <label>Tốc độ<select id="speed"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option></select></label>
+        <label>Camera<select id="zoom"><option value="1" selected>1× · toàn arena</option><option value="2">2× · xem động tác</option></select></label>
+        <label class="check"><input id="tour" type="checkbox" /> Tự chuyển chiêu</label>
+        <p>↑↓←→ di chuyển P1 · A/Q/W/E/R/T thử chiêu<br />Space dừng/chạy · ← frame / frame → bằng các nút dưới.</p>
+      </section>
+      <div id="notice" role="status">Đang nạp artwork…</div>
+      <section id="dock" class="glass" aria-label="Chọn sprite, arena và kỹ năng">
+        <div class="skill-description"><strong id="skill-title"></strong><span id="skill-description"></span></div>
+        <div id="modes" role="group" aria-label="Nội dung review"></div>
+        <div class="transport"><button id="pause" aria-label="Dừng animation">Ⅱ</button><button id="previous-frame" aria-label="Frame trước">‹</button><button id="next-frame" aria-label="Frame sau">›</button><input id="timeline" type="range" min="0" max="4199" value="0" aria-label="Tua animation" /><output id="time">0.00s</output><span id="phase">Chuẩn bị</span></div>
+      </section>
+      <div id="loading-error" class="glass" hidden>Chưa có dữ liệu preview. Chạy <code>open-review.cmd</code> trong thư mục này để dựng và mở.</div>
+    </main>
+    <script src="asset-data.js"></script>
+    <script src="review.js"></script>
+  </body>
+</html>

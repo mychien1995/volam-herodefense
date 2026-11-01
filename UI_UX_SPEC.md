@@ -1,3 +1,7 @@
+## Boss dungeon cards — 2026-11-01
+
+Lý Mạc Sầu / Cổ Mộ Phái is a destination card in the same grid and at the same level as Hoàn Nhan Hồng Liệt and Chu Bá Thông. All share destination selection, the private/shared choice and the existing Enter button. No separate boss-entry button belongs in the options row. Reuse the approved Cổ Mộ illustration only as its menu thumbnail; the playable map remains the retained tilemap.
+
 ## Small gameplay UI amendment — 2026-10-31
 
 Current user changes supersede older English copy and utility order: Vietnamese UI, Quit first at the left edge of the existing utility group, then Settings/Phó Bản/Thương Gia/Lôi Đài. Quit opens an in-viewport confirmation with Stay/Leave actions. P toggles Võ Học without intercepting text/select input or other modal ownership. Dungeon doors use proximity plus Space, with an in-viewport prompt; portal clicks no longer exit. Local death desaturates the world canvas while the respawn message and HUD stay readable.

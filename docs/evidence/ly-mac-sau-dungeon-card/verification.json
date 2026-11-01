@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-01",
+  "status": "PASS",
+  "branch": "milestone/m3d",
+  "command": "$env:LY_MAC_SAU_QA_EVIDENCE_DIR='docs/evidence/ly-mac-sau-dungeon-card'; pnpm check:final --config playwright.ly-mac-sau.config.ts tests/e2e/ly-mac-sau.spec.ts --grep 'M3D selector'",
+  "totalSeconds": 191.57,
+  "unitIntegrationTests": 445,
+  "workflowChecks": 18,
+  "assetValidators": 15,
+  "browserCases": 1,
+  "browserScope": "Normal UI entry into all six supported destinations, Co Mo card thumbnail/selected check/same row and size as Hong Liet and Chu at 960x600,1280x720,1920x1080; no destination in options row",
+  "screenshotsOpened": [
+    "dungeon-selector-960.png",
+    "dungeon-selector-1280.png",
+    "dungeon-selector-1920.png"
+  ],
+  "visualResult": "Three equal boss cards share the second grid row. Co Mo uses the retained cave illustration and the existing selection border/check. Dialog stays inside viewport at all three sizes. Existing title-font accent spacing and the other cards are retained.",
+  "sourceImage": "assets/concepts/arenas/co-mo-phai/arena_empty_review_v02.png",
+  "publicImage": "apps/game-client/public/assets/co_mo/arena_preview.png",
+  "rasterBytesChanged": false,
+  "recordingsCreated": false,
+  "scopeLimit": "Presentation change only; six-client boss frame/combat acceptance from the prior merge is retained and was not rerun for this card-only correction."
+}

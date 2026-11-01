@@ -7,6 +7,7 @@ import {
   schools,
   skillIcon,
   dungeonForZone,
+  lyMacSauEncounter,
 } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
 import { icon, menuContents, menuTitles, type Menu } from './menus.js';
@@ -25,8 +26,13 @@ export class GameUI {
   private roomId = '';
   private study = false;
   private dungeonDestination:
-    'forest' | 'desert' | 'sea' | 'chu_ba_thong' | 'hong_liet' | 'kim_luan' =
-    'forest';
+    | 'forest'
+    | 'desert'
+    | 'sea'
+    | 'chu_ba_thong'
+    | 'hong_liet'
+    | 'kim_luan'
+    | 'co_mo' = 'forest';
   private ended = false;
   private dead = false;
   private defense: DefenseHud;
@@ -42,7 +48,13 @@ export class GameUI {
   onDungeonEnter: (
     access: 'private' | 'shared',
     destination:
-      'forest' | 'desert' | 'sea' | 'chu_ba_thong' | 'hong_liet' | 'kim_luan',
+      | 'forest'
+      | 'desert'
+      | 'sea'
+      | 'chu_ba_thong'
+      | 'hong_liet'
+      | 'kim_luan'
+      | 'co_mo',
   ) => void = () => {};
   constructor(artPreview: boolean) {
     element('#app').innerHTML = `
@@ -75,7 +87,7 @@ export class GameUI {
         <section id="lobby" class="lobby-layer"><div class="lobby-window framed"><p class="eyebrow">VÕ LÂM · ANH HÙNG THỦ THÀNH</p><h1>Tịnh Phong Viện</h1><p>Sân viện thanh bình. Khởi đầu hành trình võ lâm.</p><form id="join-form"><label for="nickname">Biệt danh</label><input id="nickname" maxlength="${lobbyConfig.nicknameMaxLength}" autocomplete="off" required placeholder="Biệt danh của bạn"/><button type="submit" id="create" class="accent">Tạo phòng</button><div class="divider">hoặc tham gia cùng bạn</div><label for="room-id">Mã phòng</label><div class="join-row"><input id="room-id" autocomplete="off" maxlength="64" placeholder="Nhập mã phòng"/><button type="submit" id="join">Vào phòng</button></div></form><p id="status" data-testid="status" role="status" aria-live="polite">Mất kết nối</p><small>Chỉ cần biệt danh · 1–6 người chơi · Không lưu tiến trình<br>Bản thử nghiệm · Hình ảnh đang hoàn thiện</small></div></section>
         <div id="modal-layer" hidden><section id="game-dialog" class="game-window framed" role="dialog" aria-modal="true" aria-labelledby="dialog-title" tabindex="-1"><header class="window-title"><span class="title-flourish">❖</span><h2 id="dialog-title"></h2><button id="close-menu" aria-label="Đóng menu">×</button></header><div id="dialog-content" class="window-body"></div><small class="menu-safety">Trận đấu vẫn tiếp tục · Escape để đóng</small></section></div>
         <div id="study-banner" class="study-banner framed" hidden><strong>RỪNG TRÚC · BẢN MẪU KHUNG CẢNH</strong><span>Chỉ xem hình ảnh. Nhân vật của bạn vẫn ở trong đấu trường.</span><button id="return-study">Về đấu trường</button></div>
-        <p id="dungeon-exit-hint" hidden>Space — Rời phó bản</p><div id="respawn-overlay" hidden role="status" aria-live="polite"><strong>Bạn đã gục ngã</strong><span id="respawn-countdown"></span></div>
+        <section id="boss-hud" hidden aria-label="Lý Mạc Sầu"><strong>Lý Mạc Sầu</strong><progress id="boss-hp" max="1" value="1"></progress><span id="boss-cast"></span></section><p id="boss-loot-notice" role="status"></p><p id="dungeon-exit-hint" hidden>Space — Rời phó bản</p><div id="respawn-overlay" hidden role="status" aria-live="polite"><strong>Bạn đã gục ngã</strong><span id="respawn-countdown"></span></div>
         <div id="announcements" aria-live="polite"><p id="feedback" role="status" hidden></p></div>
         <p id="hero-stats" data-testid="hero-stats" class="sr-only"></p>
       </main>`;
@@ -336,7 +348,8 @@ export class GameUI {
             destination === 'sea' ||
             destination === 'chu_ba_thong' ||
             destination === 'hong_liet' ||
-            destination === 'kim_luan')
+            destination === 'kim_luan' ||
+            destination === 'co_mo')
         ) {
           this.dungeonDestination = destination;
           for (const peer of document.querySelectorAll<HTMLButtonElement>(
@@ -488,15 +501,18 @@ export class GameUI {
     if (enter) enter.disabled = !canEnter;
     const kind = document.querySelector('#dungeon-kind');
     if (kind)
-      kind.textContent = ['chu_ba_thong', 'hong_liet', 'kim_luan'].includes(
-        this.dungeonDestination,
-      )
+      kind.textContent = [
+        'chu_ba_thong',
+        'hong_liet',
+        'kim_luan',
+        'co_mo',
+      ].includes(this.dungeonDestination)
         ? 'Thủ lĩnh'
         : 'Quái thường';
     const entryNote = document.querySelector('#dungeon-entry-note');
     if (entryNote)
       entryNote.textContent = canEnter
-        ? `Chọn Riêng hoặc Chung để vào ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển', chu_ba_thong: 'Chu Bá Thông', hong_liet: 'Hoàn Nhan Hồng Liệt', kim_luan: 'Kim Luân Pháp Vương · Tương Dương' }[this.dungeonDestination]}.`
+        ? `Chọn Riêng hoặc Chung để vào ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển', chu_ba_thong: 'Chu Bá Thông', hong_liet: 'Hoàn Nhan Hồng Liệt', kim_luan: 'Kim Luân Pháp Vương · Tương Dương', co_mo: 'Cổ Mộ Phái' }[this.dungeonDestination]}.`
         : inArena
           ? 'Bạn cần hồi sinh trước khi vào phó bản.'
           : 'Đến gần cửa rồi nhấn Space để về đấu trường.';
@@ -508,6 +524,27 @@ export class GameUI {
     zoneStatus.hidden = inArena && hero.respawnTicks <= 0;
     const desert = hero.zoneId.startsWith('desert_');
     const beach = hero.zoneId.startsWith('sea_');
+    const coMo = hero.zoneId.startsWith('co_mo_');
+    const boss = [...state.creeps.values()].find(
+      (c) =>
+        c.zoneId === hero.zoneId && c.archetypeId === 'ly_mac_sau' && c.hp > 0,
+    );
+    element('#boss-hud').hidden = !coMo || !boss || hero.hp <= 0;
+    if (coMo && boss && hero.hp > 0) zoneStatus.hidden = true;
+    if (boss) {
+      const bar = element<HTMLProgressElement>('#boss-hp');
+      bar.max = boss.maxHp;
+      bar.value = boss.hp;
+      bar.setAttribute(
+        'aria-label',
+        `Sinh lực ${Math.ceil(boss.hp)} / ${boss.maxHp}`,
+      );
+      element('#boss-cast').textContent =
+        boss.castTicks > 0
+          ? (lyMacSauEncounter.attacks.find((a) => a.id === boss.castAbilityId)
+              ?.nameVi ?? '')
+          : `${Math.ceil(boss.hp)} / ${boss.maxHp}`;
+    }
     const hongLiet = hero.zoneId.startsWith('hong_liet_');
     const kim = hero.zoneId.startsWith('kim_luan_');
     const artNotice =
@@ -533,10 +570,32 @@ export class GameUI {
             ? 'Kim Luân Pháp Vương · Tương Dương · ' +
               zone.living +
               ' địch còn sống'
-            : hongLiet
-              ? `Hoàn Nhan Hồng Liệt · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · HP ${Math.ceil(zone.bossHp)} / ${zone.bossMaxHp}${zone.bossRespawnTicks ? ` · Hồi sinh ${Math.ceil(zone.bossRespawnTicks / 30)}s` : ''}`
-              : `${dungeon?.id === 'chu_ba_thong' ? 'Chu Bá Thông' : beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
+            : coMo
+              ? `Cổ Mộ Phái · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · ${zone.respawnTicks > 0 ? `Lý Mạc Sầu hồi sinh sau ${Math.ceil(zone.respawnTicks / m1Config.tickRate)}s` : 'Lý Mạc Sầu'}`
+              : hongLiet
+                ? `Hoàn Nhan Hồng Liệt · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · HP ${Math.ceil(zone.bossHp)} / ${zone.bossMaxHp}${zone.bossRespawnTicks ? ` · Hồi sinh ${Math.ceil(zone.bossRespawnTicks / 30)}s` : ''}`
+                : `${dungeon?.id === 'chu_ba_thong' ? 'Chu Bá Thông' : beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
           : '';
+    const claims = JSON.parse(hero.bossLoot || '[]') as Array<{
+      nameVi: string;
+    }>;
+    const lootNotice = document.querySelector('#boss-loot-notice');
+    if (lootNotice)
+      lootNotice.textContent = claims.length
+        ? `Chiến lợi phẩm: ${claims.at(-1)!.nameVi} · ${claims.length} vật phẩm`
+        : '';
+    const lootList = document.querySelector('#boss-loot-items');
+    if (lootList) {
+      lootList.replaceChildren(
+        ...claims.map((c) => {
+          const li = document.createElement('li');
+          li.textContent = c.nameVi;
+          return li;
+        }),
+      );
+      const title = document.querySelector('#game-dialog .item-description h3');
+      if (title && claims.length) title.textContent = 'Chiến lợi phẩm đang giữ';
+    }
     element('#hero-name').textContent = hero.nickname;
     element('#school-name').textContent =
       schools.find((s) => s.id === hero.schoolId)?.name ?? 'Cái Bang';

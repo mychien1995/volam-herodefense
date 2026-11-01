@@ -3,7 +3,8 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { joinWaiting, startTogether } from './pregame-helper.js';
 import playback from '../../apps/game-client/src/kim-playback.json' with { type: 'json' };
 import { m1Config } from '@volam/game-data';
-const out = 'docs/evidence/kim-luan-runtime';
+const out =
+  process.env['KIM_LUAN_QA_EVIDENCE_DIR'] ?? 'docs/evidence/kim-luan-runtime';
 const snapshot = (p: Page): Promise<any> =>
   p.evaluate('window.__VOLAM__.snapshot()');
 const presentation = (p: Page): Promise<any> =>
