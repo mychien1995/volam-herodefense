@@ -506,6 +506,8 @@ export class MatchRoom extends Room<{
           ticks: s.until - tick,
           magnitude: s.magnitude,
           secondary: s.secondary,
+          receivedDamage: s.receivedDamage,
+          thresholdFraction: s.thresholdFraction,
         })),
     );
     actor.castAbilityId = source.castAbilityId ?? '';

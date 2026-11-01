@@ -414,51 +414,24 @@ describe('M3C2 authoritative Yin–Yang', () => {
     g.steps(40);
     expect(g.hits()).toHaveLength(0);
   });
-  it('Tọa Sát takes a valid incoming hit then counters once; expiry/range/walls/death/reactive attacks cannot trigger', () => {
-    const f = fixture('toa_sat_bac_do');
-    f.cast();
-    const hp = f.hero.hp;
+  it('Tọa Sát mitigates by 70%, retains actual damage, then reflects radially once at five seconds', () => {
+    const f = fixture('toa_sat_bac_do'); f.cast(); const hp = f.hero.hp;
     hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 10, f.config);
-    expect(f.hero.hp).toBe(hp - 10);
-    expect(f.enemies[0]!.hp).toBe(9928);
-    hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 10, f.config);
-    expect(f.enemies[0]!.hp).toBe(9928);
-    for (const mode of ['expired', 'far', 'wall', 'lethal', 'reactive']) {
-      const g = fixture('toa_sat_bac_do');
-      g.cast();
-      if (mode === 'expired') g.steps(45);
-      if (mode === 'far') g.enemies[0]!.x = 700;
-      if (mode === 'wall')
-        g.config.collision = [{ x: 320, y: 200, width: 2, height: 200 }];
-      if (mode === 'lethal') g.hero.hp = 1;
-      hurt(g.world, g.hero, g.enemies[0]!.id, 'strike', 10, g.config, {
-        critChance: 0,
-        critMultiplier: 1,
-        reactive: mode === 'reactive',
-      });
-      expect(g.enemies[0]!.hp).toBe(10000);
-    }
-    const g = fixture('toa_sat_bac_do');
-    g.cast();
-    hurt(g.world, g.hero, 'unknown', 'forged', 10, g.config);
-    expect(hasStatus(g.hero, 'counter', 1)).toBe(true);
+    expect(f.hero.hp).toBe(hp - 3); expect(f.enemies[0]!.hp).toBe(10000);
+    expect(hasStatus(f.hero, 'guard_counter', f.world.tick)).toBe(true);
+    f.steps(150);
+    expect(f.enemies[0]!.hp).toBe(9997); expect(f.enemies[2]!.hp).toBe(9997);
+    expect(f.events.filter((e) => e.stage === 'counter_release')).toHaveLength(1);
+    f.steps(151); expect(f.events.filter((e) => e.stage === 'counter_release')).toHaveLength(1);
   });
-  it('Vạn Kiếm releases five independent fixed frontal waves and deduplicates each target per wave', () => {
-    const f = fixture('van_kiem_quy_tong');
-    f.world.creeps.clear();
-    f.cast();
-    expect(f.world.projectiles.size).toBe(1);
-    f.steps(12);
-    expect(f.world.projectiles.size).toBe(5);
+  it('Vạn Kiếm releases repeated eight-way straight bursts over a five-second channel', () => {
+    const f = fixture('van_kiem_quy_tong'); f.world.creeps.clear(); f.cast();
+    expect(f.world.projectiles.size).toBe(8);
     const shots = [...f.world.projectiles.values()];
-    expect(new Set(shots.map((p) => p.vy)).size).toBe(5);
-    expect(shots.every((p) => p.vx > 0)).toBe(true);
-    const g = fixture('van_kiem_quy_tong');
-    g.enemies[0]!.x = 312;
-    g.cast();
-    g.steps(45);
-    expect(g.hits()).toHaveLength(5);
-    expect(g.enemies[2]!.hp).toBe(10000);
+    expect(new Set(shots.map((p) => Math.atan2(p.vy,p.vx).toFixed(3))).size).toBe(8);
+    expect(shots.some((p) => p.vx < 0)).toBe(true); expect(shots.some((p) => p.vy < 0)).toBe(true);
+    f.steps(12); expect(f.world.projectiles.size).toBe(16);
+    f.steps(138); expect(hasStatus(f.hero,'channel',f.world.tick)).toBe(false);
   });
   it('mana regeneration uses server ticks, innate growth and max caps without regenerating dead players', () => {
     const f = fixture();

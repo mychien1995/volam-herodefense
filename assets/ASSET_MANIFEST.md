@@ -76,3 +76,12 @@ Stock invasion AI remains melee; the blood projectile is authoritative-state ren
 ## M3C2 Võ Đang retained runtime integration
 
 No new artwork. Approved character PNG/hash atlases: `assets/exports/characters/hero_vo_dang*`; approved ten skill character/VFX pairs and thirteen icons: `assets/exports/skills/vo-dang/`. Exact per-ID phases,dimensions,pivots,fps,source/license/reuse/approval locks and unused/missing assets are in `docs/M3C2_SKILL_ASSET_MAP.md`; actual audit is `docs/evidence/m3c2/asset-inventory.json`. Runtime verification is distinct from the retained director art approval.
+
+## Skill animation review v01 — 2026-11-01
+
+DIRECTOR_APPROVED_PREVIEW_PENDING_GAMEPLAY_INTEGRATION. Three new original built-in image_gen source sheets (lotus, golden palm, silver-blue sword), exact prompts/output IDs, PNG alpha and source hashes retained in [source records](source/skills/animation-review-v01/generation.json) and [export manifest](exports/skills/animation-review-v01/manifest.json).24 cels in three PNG/JSON atlases. Additional authored body/VFX cels are retained reuse. Integrated only into an opt-in art-only Phaser scene, never gameplay skill registries. Existing approval locks unchanged; [director approval and exact hashes](reviews/skills/animation-review-v01/director-approval.json) record approval of this preview only. [Review scope and confirmed future counter rule](../docs/ANIMATION_REVIEW_V01.md). All 13 preview selections approved by the director on 2026-11-01. Gameplay integration is explicitly deferred. No recordings or natural-combat approval claimed.
+
+
+## Approved animation runtime integration — 2026-11-01
+
+The subsequent director instruction authorizes gameplay integration on `wip/m3d/animation-change`, superseding the historical preview-only deferral above. The same three PNG/JSON VFX components and retained choreography are consumed under exact115-file hash verification. No artwork regenerated. See `docs/ANIMATION_CHANGE_INTEGRATION.md` for server-driven adapters, real multiplayer evidence and provisional tuning.

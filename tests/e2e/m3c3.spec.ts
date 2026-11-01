@@ -14,11 +14,14 @@ import {
   enter,
   exit,
 } from './m3c1-helpers.js';
-const out = process.env['VOLAM_FEEDBACK_V2_REVIEW']
-  ? 'docs/evidence/m3c3-feedback-v2-runtime'
-  : process.env['VOLAM_FEEDBACK_REVIEW']
-    ? 'docs/evidence/m3c3-feedback'
-    : 'docs/evidence/m3c3';
+const animationChange = !!process.env['VOLAM_ANIMATION_CHANGE'];
+const out = animationChange
+  ? 'docs/evidence/animation-change/natural'
+  : process.env['VOLAM_FEEDBACK_V2_REVIEW']
+    ? 'docs/evidence/m3c3-feedback-v2-runtime'
+    : process.env['VOLAM_FEEDBACK_REVIEW']
+      ? 'docs/evidence/m3c3-feedback'
+      : 'docs/evidence/m3c3';
 test('M3C3 normal four-school progression, shared dungeon farming, read-only builds, mana sustain and arena defense', async ({
   browser,
 }) => {
@@ -250,6 +253,7 @@ test('M3C3 six-player natural combat: four schools keep effects owned, feet/pivo
   browser,
 }) => {
   test.setTimeout(300000);
+  await mkdir(out, { recursive: true });
   const contexts = await Promise.all(
       Array.from({ length: 6 }, (_, i) =>
         browser.newContext({
@@ -273,14 +277,32 @@ test('M3C3 six-player natural combat: four schools keep effects owned, feet/pivo
   try {
     let room = '';
     for (let i = 0; i < 6; i++) {
-      await joinWaiting(pages[i]!, 'Party ' + i, room || undefined);
+      await joinWaiting(
+        pages[i]!,
+        'Party ' + i,
+        room || undefined,
+        '/?debug=1',
+        animationChange ? 45000 : 15000,
+      );
       if (!room) room = (await read(pages[i]!)).roomId;
+      if (animationChange)
+        console.log('[animation-change natural] joined', i + 1);
     }
-    await startTogether(pages, schools);
+    await startTogether(pages, schools, animationChange ? 45000 : 15000);
+    if (animationChange)
+      console.log('[animation-change natural] six confirmed');
     for (let i = 0; i < 6; i++) {
       const p = pages[i]!,
-        skill =
-          schools[i] === 'thieu_lam'
+        skill = animationChange
+          ? [
+              'tam_gioi_quy_thien',
+              'hoa_van_chuong',
+              'lien_hoa_phien',
+              'bat_dong_minh_vuong',
+              'toa_sat_bac_do',
+              'phong_anh_hoan_vi',
+            ][i]!
+          : schools[i] === 'thieu_lam'
             ? process.env['VOLAM_FEEDBACK_V2_REVIEW']
               ? i === 0
                 ? 'la_han_quyen'
@@ -298,6 +320,8 @@ test('M3C3 six-player natural combat: four schools keep effects owned, feet/pivo
       await upgrade(p, skill);
       await close(p);
     }
+    if (animationChange)
+      console.log('[animation-change natural] legal builds equipped');
     await Promise.all(pages.map(enter));
     // Stage safely, then approach together; nobody idles alone in six-player aggro.
     for (const p of pages) await moveTo(p, 240, 320);
@@ -322,7 +346,7 @@ test('M3C3 six-player natural combat: four schools keep effects owned, feet/pivo
           (await read(first)).events.filter((e) => e.kind === 'hit').length,
       )
       .toBeGreaterThan(0);
-    if (process.env['VOLAM_FEEDBACK_V2_REVIEW'])
+    if (animationChange || process.env['VOLAM_FEEDBACK_V2_REVIEW'])
       await first.screenshot({
         path: `${out}/six-player-natural-contact-1920.png`,
       });
@@ -342,6 +366,10 @@ test('M3C3 six-player natural combat: four schools keep effects owned, feet/pivo
       );
       await first.waitForTimeout(180);
     }
+    if (animationChange)
+      console.log(
+        '[animation-change natural] combat/reward observation complete',
+      );
     const heroes = await Promise.all(pages.map(hero));
     await writeFile(
       out + '/six-player-natural-attempt.json',
@@ -385,9 +413,11 @@ test('M3C3 six-player natural combat: four schools keep effects owned, feet/pivo
         .poll(async () => (await hero(p)).hp, { timeout: 10000 })
         .toBeGreaterThan(0);
     }
+    if (animationChange)
+      console.log('[animation-change natural] all six returned alive');
     // Use the same earned/refunded points for the separate aura readability check.
     for (let i = 0; i < 6; i++)
-      if (schools[i] === 'thieu_lam') {
+      if (!animationChange && schools[i] === 'thieu_lam') {
         const p = pages[i]!;
         await menu(p);
         await loadout(p, ['kim_quang_ho_tran', '', '', '']);
@@ -396,13 +426,19 @@ test('M3C3 six-player natural combat: four schools keep effects owned, feet/pivo
       }
     for (let i = 0; i < 6; i++)
       await moveTo(pages[i]!, 740 + (i % 3) * 60, 980 + Math.floor(i / 3) * 60);
-    for (const p of pages) {
-      await expect
-        .poll(async () => (await hero(p)).qCooldown, { timeout: 12000 })
-        .toBe(0);
-      await p.locator('#game canvas').focus();
-      await p.keyboard.press('KeyQ');
-    }
+    await Promise.all(
+      pages.map(async (p) => {
+        await expect
+          .poll(async () => (await hero(p)).qCooldown, { timeout: 20000 })
+          .toBe(0);
+      }),
+    );
+    await Promise.all(
+      pages.map(async (p) => {
+        await p.locator('#game canvas').focus();
+        await p.keyboard.press('KeyQ');
+      }),
+    );
     const awaitedIds = new Set(Object.keys((await read(first)).state.players));
     await expect
       .poll(
@@ -423,9 +459,28 @@ test('M3C3 six-player natural combat: four schools keep effects owned, feet/pivo
       expect(actor.scale).toEqual([1, 1]);
       expect(actor.depth).toBe(actor.y);
     }
-    expect(
-      v.skills.persistent.filter((e) => e.texture === 'kim_quang_ho_tran_vfx'),
-    ).toHaveLength(2);
+    if (animationChange) {
+      const approved = await first.evaluate<{
+        persistent: { phase: string; depth: number }[];
+      }>('window.__VOLAM__.presentation().skills.approved');
+      for (const field of approved.persistent.filter(
+        (e) => e.phase === 'lotus_ground',
+      ))
+        expect(field.depth).toBeLessThan(
+          Math.min(...v.actors.map((a) => a.depth)),
+        );
+      expect(approved.persistent.some((e) => e.phase === 'lotus_ground')).toBe(
+        true,
+      );
+      expect(
+        approved.persistent.some((e) => e.phase === 'guard_70_percent'),
+      ).toBe(true);
+    } else
+      expect(
+        v.skills.persistent.filter(
+          (e) => e.texture === 'kim_quang_ho_tran_vfx',
+        ),
+      ).toHaveLength(2);
     await first.screenshot({ path: `${out}/six-player-combat-1920.png` });
     await first.setViewportSize({ width: 1280, height: 720 });
     await first.screenshot({ path: `${out}/six-player-combat-1280.png` });
@@ -445,6 +500,24 @@ test('M3C3 six-player natural combat: four schools keep effects owned, feet/pivo
       ),
     );
     expect(errors.flat()).toEqual([]);
+  } catch (error) {
+    if (animationChange) {
+      await writeFile(
+        `${out}/six-player-failure.json`,
+        JSON.stringify(
+          {
+            error: String(error),
+            state: await read(pages[0]!),
+            presentation: await view(pages[0]!),
+            errors,
+          },
+          null,
+          2,
+        ),
+      );
+      await pages[0]!.screenshot({ path: `${out}/six-player-failure.png` });
+    }
+    throw error;
   } finally {
     await Promise.all(contexts.map((c) => c.close()));
   }

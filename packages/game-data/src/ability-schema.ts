@@ -19,6 +19,7 @@ const status = z.strictObject({
     'speed_buff',
     'cooldown_buff',
     'counter',
+    'guard_counter',
     'dash',
     'dash_guard',
     'channel',
@@ -74,106 +75,138 @@ const allies = z.strictObject({
   heal: positive.optional(),
   statuses: z.array(status).optional(),
 });
-export const abilitySchema = z.strictObject({
-  id: z.string().regex(/^[a-z_]+$/),
-  nameVi: z.string().min(1),
-  cooldownTicks: count.min(1),
-  manaCost: z.number().nonnegative(),
-  minIntervalTicks: count.min(1).optional(),
-  basicCombo: z
-    .array(
+export const abilitySchema = z
+  .strictObject({
+    id: z.string().regex(/^[a-z_]+$/),
+    nameVi: z.string().min(1),
+    cooldownTicks: count.min(1),
+    manaCost: z.number().nonnegative(),
+    minIntervalTicks: count.min(1).optional(),
+    basicCombo: z
+      .array(
+        z.strictObject({
+          stage: z.string().min(1),
+          damageMultiplier: positive,
+          halfAngle: positive.max(Math.PI).optional(),
+          splashRadius: z.number().finite().nonnegative().optional(),
+        }),
+      )
+      .min(2)
+      .max(8)
+      .optional(),
+    combo: z
+      .strictObject({
+        id: z.enum(['phat_dong_a', 'phat_dong_b']),
+        step: z.union([z.literal(1), z.literal(2), z.literal(3)]),
+        windowTicks: count.min(1),
+        multiplier: positive.min(1),
+      })
+      .optional(),
+    selfStatuses: z.array(status).optional(),
+    allies: allies.optional(),
+    effect: z.discriminatedUnion('mode', [
+      projectile,
+      arc,
       z.strictObject({
-        stage: z.string().min(1),
-        damageMultiplier: positive,
-        halfAngle: positive.max(Math.PI).optional(),
-        splashRadius: z.number().finite().nonnegative().optional(),
+        mode: z.literal('support'),
+        radius: positive,
+        heal: positive.optional(),
+        statuses: z.array(status).optional(),
+        durationTicks: count.min(1),
+        tickInterval: count.min(1),
       }),
+      z.strictObject({
+        mode: z.literal('mana_shield'),
+        durationTicks: count.min(1),
+        absorbFraction: positive.max(1),
+        manaPerDamage: positive,
+        toggle: z.boolean().optional(),
+      }),
+      z.strictObject({
+        mode: z.literal('area'),
+        durationTicks: count.min(1),
+        tickInterval: count.min(1),
+        radius: positive,
+        damage: z.number().finite().nonnegative(),
+        statuses: z.array(status).optional(),
+        confines: z.boolean().optional(),
+        protectOwner: z.boolean().optional(),
+        ownerRegenFraction: z.number().finite().positive().max(1).optional(),
+      }),
+      z.strictObject({
+        mode: z.literal('guard_counter'),
+        durationTicks: count.min(1),
+        reduction: z.number().min(0).max(0.85),
+        thresholdFraction: z.number().positive().max(1),
+        range: positive,
+      }),
+      z.strictObject({
+        mode: z.literal('counter'),
+        durationTicks: count.min(1),
+        damage: positive,
+        range: positive,
+        evade: z.boolean(),
+      }),
+      z.strictObject({
+        mode: z.literal('buff'),
+        durationTicks: count.min(1),
+        critChance: z.number().min(0).max(1),
+        critMultiplier: z.number().nonnegative(),
+        movementSpeed: z.number().min(0).max(1).optional(),
+        attackSpeed: z.number().min(0).max(2).optional(),
+        cooldownReduction: z.number().min(0).max(0.8).optional(),
+      }),
+      z.strictObject({
+        mode: z.literal('dash'),
+        distance: positive,
+        speed: positive,
+        radius: positive,
+        damage: z.number().nonnegative(),
+        stunTicks: count,
+        invulnerable: z.boolean().optional(),
+        backward: z.boolean().optional(),
+        counter: z
+          .strictObject({
+            durationTicks: count.min(1),
+            damage: positive,
+            range: positive,
+          })
+          .optional(),
+      }),
+      z.strictObject({
+        mode: z.literal('multi_hit'),
+        range: positive,
+        damage: z.number().finite().nonnegative(),
+        hits: count.min(1).max(16),
+        spacingTicks: count.min(1),
+        finisherDamage: z.number().nonnegative(),
+        finisherRange: positive,
+        halfAngle: positive.max(Math.PI).optional(),
+        slowedBonus: z.number().nonnegative().optional(),
+        projectileBurst: projectile.optional(),
+        projectileBurstEvery: count.min(1).max(12).optional(),
+        guard: z.number().finite().min(0).max(0.85).optional(),
+        durationTicks: count.min(1).optional(),
+      }),
+    ]),
+  })
+  .superRefine((a, c) => {
+    if (
+      a.effect.mode === 'area' &&
+      a.effect.damage === 0 &&
+      !a.effect.protectOwner
     )
-    .min(2)
-    .max(8)
-    .optional(),
-  combo: z
-    .strictObject({
-      id: z.enum(['phat_dong_a', 'phat_dong_b']),
-      step: z.union([z.literal(1), z.literal(2), z.literal(3)]),
-      windowTicks: count.min(1),
-      multiplier: positive.min(1),
-    })
-    .optional(),
-  selfStatuses: z.array(status).optional(),
-  allies: allies.optional(),
-  effect: z.discriminatedUnion('mode', [
-    projectile,
-    arc,
-    z.strictObject({
-      mode: z.literal('support'),
-      radius: positive,
-      heal: positive.optional(),
-      statuses: z.array(status).optional(),
-      durationTicks: count.min(1),
-      tickInterval: count.min(1),
-    }),
-    z.strictObject({
-      mode: z.literal('mana_shield'),
-      durationTicks: count.min(1),
-      absorbFraction: positive.max(1),
-      manaPerDamage: positive,
-      toggle: z.boolean().optional(),
-    }),
-    z.strictObject({
-      mode: z.literal('area'),
-      durationTicks: count.min(1),
-      tickInterval: count.min(1),
-      radius: positive,
-      damage: positive,
-      statuses: z.array(status).optional(),
-      confines: z.boolean().optional(),
-    }),
-    z.strictObject({
-      mode: z.literal('counter'),
-      durationTicks: count.min(1),
-      damage: positive,
-      range: positive,
-      evade: z.boolean(),
-    }),
-    z.strictObject({
-      mode: z.literal('buff'),
-      durationTicks: count.min(1),
-      critChance: z.number().min(0).max(1),
-      critMultiplier: z.number().nonnegative(),
-      movementSpeed: z.number().min(0).max(1).optional(),
-      attackSpeed: z.number().min(0).max(2).optional(),
-      cooldownReduction: z.number().min(0).max(0.8).optional(),
-    }),
-    z.strictObject({
-      mode: z.literal('dash'),
-      distance: positive,
-      speed: positive,
-      radius: positive,
-      damage: z.number().nonnegative(),
-      stunTicks: count,
-      invulnerable: z.boolean().optional(),
-      counter: z
-        .strictObject({
-          durationTicks: count.min(1),
-          damage: positive,
-          range: positive,
-        })
-        .optional(),
-    }),
-    z.strictObject({
-      mode: z.literal('multi_hit'),
-      range: positive,
-      damage: positive,
-      hits: count.min(1).max(12),
-      spacingTicks: count.min(1),
-      finisherDamage: z.number().nonnegative(),
-      finisherRange: positive,
-      halfAngle: positive.max(Math.PI).optional(),
-      slowedBonus: z.number().nonnegative().optional(),
-      projectileBurst: projectile.optional(),
-      projectileBurstEvery: count.min(1).max(12).optional(),
-      guard: z.number().finite().min(0).max(0.85).optional(),
-    }),
-  ]),
-});
+      c.addIssue({
+        code: 'custom',
+        message: 'A zero-damage area requires owner protection',
+      });
+    if (
+      a.effect.mode === 'multi_hit' &&
+      a.effect.damage === 0 &&
+      !a.effect.projectileBurst
+    )
+      c.addIssue({
+        code: 'custom',
+        message: 'A zero-damage channel requires a projectile burst',
+      });
+  });

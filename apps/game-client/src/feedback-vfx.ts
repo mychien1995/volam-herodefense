@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { approvedSkillIds } from './approved-skill-ids.js';
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
 import { rasterAnimationKey } from './skill-art-registry.js';
@@ -142,7 +143,7 @@ export class FeedbackVfx {
   private serial = 0;
   constructor(private scene: Phaser.Scene) {}
   handles(id: string): boolean {
-    return !!feedbackBindings[id];
+    return !!feedbackBindings[id] && !approvedSkillIds.has(id);
   }
   suppressesCastPose(id: string): boolean {
     return this.manualOff.has(id);
@@ -376,6 +377,7 @@ export class FeedbackVfx {
     });
   }
   event(e: CombatEvent): boolean {
+    if (approvedSkillIds.has(e.abilityId)) return false;
     const b = feedbackBindings[e.abilityId];
     if (!b) return false;
     this.events.push({
@@ -926,6 +928,7 @@ export class FeedbackVfx {
         }
       }
       for (const [skill, b] of Object.entries(feedbackBindings)) {
+        if (approvedSkillIds.has(skill)) continue;
         if (!b.sustain) continue;
         b.sustain.forEach((d, index) => {
           if (
@@ -981,6 +984,7 @@ export class FeedbackVfx {
       }
     });
     state.areas.forEach((a, id) => {
+      if (approvedSkillIds.has(a.abilityId)) return;
       const b = feedbackBindings[a.abilityId];
       if (a.zoneId !== zone || !b?.area) return;
       const owner = this.actor(a.ownerId);
@@ -1032,6 +1036,7 @@ export class FeedbackVfx {
       if (this.scene.time.now - at > 500) this.manualOff.delete(owner);
     const active = new Set<string>();
     state.projectiles.forEach((p, id) => {
+      if (approvedSkillIds.has(p.abilityId)) return;
       const b = feedbackBindings[p.abilityId];
       if (
         !b?.projectile ||

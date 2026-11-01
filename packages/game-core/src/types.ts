@@ -82,6 +82,7 @@ export type StatusKind =
   | 'speed_buff'
   | 'cooldown_buff'
   | 'counter'
+  | 'guard_counter'
   | 'dash'
   | 'dash_guard'
   | 'channel';
@@ -97,6 +98,8 @@ export interface StatusEffect extends StatusSpec {
   sourceId: string;
   abilityId: string;
   until: number;
+  receivedDamage?: number;
+  thresholdFraction?: number;
 }
 export interface BuffEffect {
   mode: 'buff';
@@ -121,6 +124,13 @@ export interface CounterEffect {
   range: number;
   evade: boolean;
 }
+export interface GuardCounterEffect {
+  mode: 'guard_counter';
+  durationTicks: number;
+  reduction: number;
+  thresholdFraction: number;
+  range: number;
+}
 export interface AreaEffect {
   mode: 'area';
   durationTicks: number;
@@ -129,6 +139,8 @@ export interface AreaEffect {
   damage: number;
   statuses?: StatusSpec[] | undefined;
   confines?: boolean | undefined;
+  protectOwner?: boolean | undefined;
+  ownerRegenFraction?: number | undefined;
 }
 export interface DashEffect {
   mode: 'dash';
@@ -138,6 +150,7 @@ export interface DashEffect {
   damage: number;
   stunTicks: number;
   invulnerable?: boolean | undefined;
+  backward?: boolean | undefined;
   counter?:
     { durationTicks: number; damage: number; range: number } | undefined;
 }
@@ -154,6 +167,7 @@ export interface MultiHitEffect {
   projectileBurst?: ProjectileEffect | undefined;
   projectileBurstEvery?: number | undefined;
   guard?: number | undefined;
+  durationTicks?: number | undefined;
 }
 export interface Ability {
   id: string;
@@ -180,6 +194,7 @@ export interface Ability {
     | MultiHitEffect
     | ManaShieldEffect
     | CounterEffect
+    | GuardCounterEffect
     | AreaEffect
     | SupportEffect;
 }

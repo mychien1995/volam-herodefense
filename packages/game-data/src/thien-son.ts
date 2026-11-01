@@ -62,8 +62,16 @@ export const thienSonSkills: Ability[] = [
     id: 'lien_hoa_phien',
     nameVi: 'Liên Hoa Phiến',
     manaCost: 18,
-    cooldownTicks: 90,
-    effect: multi(100, 16, 6, 5, Math.PI / 2),
+    cooldownTicks: 450,
+    effect: {
+      mode: 'area',
+      durationTicks: 180,
+      tickInterval: 30,
+      radius: 85,
+      damage: 0,
+      protectOwner: true,
+      ownerRegenFraction: 0.08,
+    },
   },
   {
     id: 'luc_duong_chuong',
@@ -177,6 +185,7 @@ export const thienSonSkills: Ability[] = [
       damage: 0,
       stunTicks: 0,
       invulnerable: true,
+      backward: true,
       counter: { durationTicks: 30, damage: 60, range: 90 },
     },
   },
@@ -207,14 +216,14 @@ export const thienSonSkills: Ability[] = [
   },
 ];
 const descriptions = [
-  'Sáu nhịp phiến liên tiếp trong cung rộng phía trước.',
+  'Hoa cố định tại chỗ thi triển: người tạo hoa đứng trong vùng được miễn sát thương và hồi sinh lực nhanh; ra ngoài mất bảo hộ.',
   'Xoay sáu nhịp quanh bản thân, giảm mạnh sát thương nhận trong lúc xoay.',
   'Lướt theo hướng nhìn, gây sát thương một lần mỗi địch đi qua; dừng trước địa hình.',
   'Tạm tăng tốc di chuyển, tốc đánh và giảm hồi chiêu có giới hạn; không cộng dồn.',
   'Tuyệt kỹ: mười hai nhịp phong bạo theo người, bốn đợt quạt bay tám hướng.',
   'Lướt chém một lần mỗi địch; miễn sát thương trực tiếp trên các tick đang lướt, không chặn DOT.',
   'Hai luồng đao khí bay thẳng, làm chậm; tăng sát thương lên địch đang chậm.',
-  'Né miễn sát thương trực tiếp lúc di chuyển; cửa sổ phản kích sau đó không miễn sát thương.',
+  'Lướt lùi ngược hướng nhìn, giữ hướng nhìn và để lại quang ảnh; miễn sát thương trực tiếp lúc đang lướt, cửa sổ phản kích sau đó không miễn thương.',
   'Chém mạnh phía trước, xuyên một phần phòng thủ riêng cho đòn này.',
   'Tuyệt kỹ: mười nhát chém cực nhanh phía trước và một nhát kết thúc.',
 ];
@@ -254,6 +263,9 @@ export function addThienSonProgression(d: ProgressionDefinition): void {
         if (e.finisherDamage) e.finisherDamage += 12 * r;
         if (e.slowedBonus) e.slowedBonus += 0.05 * r;
         if (e.projectileBurst) e.projectileBurst.damage += r;
+      } else if (e.mode === 'area' && e.protectOwner) {
+        e.radius += 5 * r;
+        e.ownerRegenFraction = (e.ownerRegenFraction ?? 0) + 0.02 * r;
       } else if (e.mode === 'dash') {
         e.distance += 8 * r;
         if (e.damage) e.damage += 9 * r;

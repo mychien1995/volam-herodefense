@@ -1,0 +1,167 @@
+{
+  "status": "DIRECTOR_APPROVED_PREVIEW_PENDING_GAMEPLAY_INTEGRATION",
+  "date": "2026-11-01",
+  "previewUrl": "http://127.0.0.1:5395/?artPreview=1&animationReview=1",
+  "gameplaySkillChangesApplied": false,
+  "newArtApproved": true,
+  "recordingsCreated": false,
+  "staticStages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 21.5,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 11.71,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 2.31,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.64,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 53.93,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 8.02,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-assets.py",
+      "seconds": 0.46,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-arena-art01.py",
+      "seconds": 0.79,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-arena-v2.py",
+      "seconds": 0.67,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-thien-son.py",
+      "seconds": 0.48,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-vo-dang.py",
+      "seconds": 0.45,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-thieu-lam.py",
+      "seconds": 0.83,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-thien-son-skills.py",
+      "seconds": 1.45,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-vo-dang-skills.py",
+      "seconds": 2.58,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-thieu-lam-skills.py",
+      "seconds": 3.39,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-bamboo-forest.py",
+      "seconds": 0.47,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-desert.py",
+      "seconds": 0.83,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-forest-creeps.py",
+      "seconds": 2.42,
+      "status": "PASS",
+      "exitCode": 0
+    }
+  ],
+  "unitIntegrationTestsPassed": 358,
+  "workflowTestsPassed": 18,
+  "preview": {
+    "status": "PASS",
+    "storyboards": 13,
+    "completeCyclesObservedForEveryStoryboard": true,
+    "observedFrameReferences": 622,
+    "fourFacings": true,
+    "twoIndependentContexts": true,
+    "displayScales": [
+      1,
+      2
+    ],
+    "newVfxCelsObserved": 24,
+    "consoleErrors": [],
+    "roomSockets": [],
+    "naturalSixPlayerCombat": false,
+    "sixCopyReadabilityFixture": true
+  },
+  "browserStageRetry": {
+    "status": "PASS",
+    "expected": 3,
+    "unexpected": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "durationMs": 89519.419,
+    "cases": [
+      {
+        "name": "two-client combat/cadence/skills/progression",
+        "durationMs": 49007
+      },
+      {
+        "name": "fixed-trajectory projectile",
+        "durationMs": 11246
+      },
+      {
+        "name": "two-client room/rejoin/check/leave",
+        "durationMs": 26743
+      }
+    ],
+    "changes": "Test assertions only: compare hit to current authoritative basicId after branch selection; use current Vietnamese acknowledgement/player-check copy.",
+    "command": "node tools/run-playwright.mjs test tests/e2e/gameplay.spec.ts tests/e2e/lobby.spec.ts --grep \"two clients agree|two clients share|ranged projectile\" --reporter=list,json"
+  },
+  "retainedFailures": {
+    "firstRun": "docs/evidence/sessions/animation-review-v01/check-workflow/first-final-timings.json",
+    "finalPipelineRaw": "docs/evidence/sessions/animation-review-v01/check-workflow/final-timings.json",
+    "note": "Raw pipeline reports retain their failed browser status; static/unit/build/asset stages and current animation preview passed. The affected existing fixtures were corrected and their browser stage retried successfully without changing gameplay or repeating successful art playback."
+  },
+  "directorApproval": "assets/reviews/skills/animation-review-v01/director-approval.json"
+}

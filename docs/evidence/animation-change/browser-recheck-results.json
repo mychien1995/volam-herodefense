@@ -1,0 +1,419 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Program Files\\nodejs\\node.exe",
+      "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\node_modules\\.pnpm\\@playwright+test@1.64.1\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.animation-change.config.ts",
+      "--grep",
+      "thien_son|vo_dang|lifecycle|six-player natural"
+    ],
+    "configFile": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\playwright.animation-change.config.ts",
+    "rootDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/tests/e2e",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\animation-change-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/artifacts/animation-change",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "approved-animation-live",
+        "name": "approved-animation-live",
+        "testDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "animation-change.spec.ts"
+        ],
+        "timeout": 300000
+      },
+      {
+        "outputDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/artifacts/animation-change",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "approved-animation-natural",
+        "name": "approved-animation-natural",
+        "testDir": "C:/Users/ADMIN/.codex/worktrees/animation-change/volam-hero-defense/tests/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "m3c3.spec.ts"
+        ],
+        "timeout": 300000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\artifacts\\animation-change",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "approved-animation-live",
+        "testDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": "animation-change.spec.ts",
+        "timeout": 300000,
+        "use": {
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "video": "off",
+          "trace": "off",
+          "actionTimeout": 30000,
+          "baseURL": "http://127.0.0.1:5442"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "approved-animation-live"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\artifacts\\animation-change",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "approved-animation-natural",
+        "testDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e",
+        "snapshotDir": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e",
+        "testIgnore": [],
+        "testMatch": "m3c3.spec.ts",
+        "timeout": 300000,
+        "use": {
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.8078.4 Safari/537.36",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "screen": {
+            "width": 1920,
+            "height": 1080
+          },
+          "deviceScaleFactor": 1,
+          "isMobile": false,
+          "hasTouch": false,
+          "defaultBrowserType": "chromium",
+          "video": "off",
+          "trace": "off",
+          "actionTimeout": 30000,
+          "baseURL": "http://127.0.0.1:5440"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "approved-animation-natural"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "docs/evidence/animation-change/browser-recheck-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "animation-change.spec.ts",
+      "file": "animation-change.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "approved animations thien_son: two real clients, four facings, authoritative lifetime and cleanup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "approved-animation-live",
+              "projectName": "approved-animation-live",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 49238,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T00:01:06.330Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2a36ba61fd220eccbd31-8a7c156b872fef889172",
+          "file": "animation-change.spec.ts",
+          "line": 106,
+          "column": 3
+        },
+        {
+          "title": "approved animations vo_dang: two real clients, four facings, authoritative lifetime and cleanup",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "approved-animation-live",
+              "projectName": "approved-animation-live",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 56086,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T00:01:55.719Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2a36ba61fd220eccbd31-fd1189b8a31ecaeeeeb3",
+          "file": "animation-change.spec.ts",
+          "line": 106,
+          "column": 3
+        },
+        {
+          "title": "approved VFX lifecycle: zone change, owner disconnect and scene shutdown clear planted effects",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "approved-animation-live",
+              "projectName": "approved-animation-live",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18527,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T00:02:51.823Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2a36ba61fd220eccbd31-e82af83e4f0af02327bc",
+          "file": "animation-change.spec.ts",
+          "line": 310,
+          "column": 1
+        },
+        {
+          "title": "approved VFX lifecycle: actual incoming damage, guard owner death and automatic respawn",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "approved-animation-live",
+              "projectName": "approved-animation-live",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 45051,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T00:03:10.363Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2a36ba61fd220eccbd31-7f468627af8ac2b377a4",
+          "file": "animation-change.spec.ts",
+          "line": 366,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "m3c3.spec.ts",
+      "file": "m3c3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "M3C3 six-player natural combat: four schools keep effects owned, feet/pivots readable and rewards authoritative",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 300000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "approved-animation-natural",
+              "projectName": "approved-animation-natural",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 200156,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m47\u001b[39m\nReceived:   \u001b[31m47\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m47\u001b[39m\nReceived:   \u001b[31m47\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n    at moveTo (C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\m3c1-helpers.ts:153:10)\n    at C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:420:7",
+                    "location": {
+                      "file": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\m3c1-helpers.ts",
+                      "column": 10,
+                      "line": 153
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39mm3c1-helpers.ts:153\n\n  151 |       await expect\n  152 |         .poll(async () => (await hero(p)).lastSequence)\n> 153 |         .toBeGreaterThan(h.lastSequence);\n      |          ^\n  154 |       await expect.poll(async () => (await hero(p)).pose).not.toBe('walk');\n  155 |     }\n  156 |     const final = await hero(p);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\m3c1-helpers.ts",
+                        "column": 10,
+                        "line": 153
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m47\u001b[39m\nReceived:   \u001b[31m47\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n   at m3c1-helpers.ts:153\n\n  151 |       await expect\n  152 |         .poll(async () => (await hero(p)).lastSequence)\n> 153 |         .toBeGreaterThan(h.lastSequence);\n      |          ^\n  154 |       await expect.poll(async () => (await hero(p)).pose).not.toBe('walk');\n  155 |     }\n  156 |     const final = await hero(p);\n    at moveTo (C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\m3c1-helpers.ts:153:10)\n    at C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\m3c3.spec.ts:420:7"
+                    }
+                  ],
+                  "stdout": [
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m1\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m2\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m3\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m4\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m5\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] joined \u001b[33m6\u001b[39m\n"
+                    },
+                    {
+                      "text": "[animation-change natural] six confirmed\n"
+                    },
+                    {
+                      "text": "[animation-change natural] legal builds equipped\n"
+                    },
+                    {
+                      "text": "[animation-change natural] combat/reward observation complete\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-01T00:03:56.138Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\artifacts\\animation-change\\m3c3-M3C3-six-player-natur-a25df-e-and-rewards-authoritative-approved-animation-natural\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\ADMIN\\.codex\\worktrees\\animation-change\\volam-hero-defense\\tests\\e2e\\m3c1-helpers.ts",
+                    "column": 10,
+                    "line": 153
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "84ef6c2f8a2a29a37186-ba1be2eb02903230117d",
+          "file": "m3c3.spec.ts",
+          "line": 252,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-01T00:01:02.133Z",
+    "duration": 374517.16500000004,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

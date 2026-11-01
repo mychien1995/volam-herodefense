@@ -186,3 +186,12 @@ CONFIRMED by the director after the M3C1 runtime delivery: “skill artwork appr
 The explicit assignment authorizes Võ Đang as the third playable school: both Quyền/Kiếm basics, all ten canonical actives, Thái Cực Tâm Pháp, M3B ranks/points/surplus/arena-only respec, retained approved sprites/icons/VFX, shared three-school multiplayer and dev preview. Thiếu Lâm and later milestones remain out of scope. Existing approved art bytes are preserved.
 
 PROVISIONAL configurable defaults: timed mana shield (the toggle question remains open), stationary caster-position formations with scheduled ticks, a single counter trigger that takes the incoming hit and requires survival, and the numeric rank/growth/proc/absorption data in `game-data/vo-dang.ts`. These do not finalize balance or replace canonical mechanics. See `docs/M3C2_IMPLEMENTATION.md`.
+
+
+## 2026-11-01 — approved animation integration authorized
+
+The director now explicitly authorizes integration on `wip/m3d/animation-change`, superseding the historical preview-only deferral in the animation-review-v01 register. All 13 approved selections retain exact approved artwork/choreography source hashes; no new artwork approval is requested. The register remains a historical record.
+
+Confirmed mechanical changes: planted owner-only Liên Hoa protection with inside/outside/reentry checks; backward Phong Ảnh movement preserving facing and existing other effects; 5s initial sustained radial Vạn Kiếm; Tọa Sát up to 5s, 70% reduction, cumulative actual post-mitigation HP loss, strictly >20% max-HP trigger or expiry, and one radial reflection of that exact sum. Reflection cannot recursively proc reactive counters. Death, travel and removal cancel without reflection. No gameplay changes to visual-only skills or the three comparison skills.
+
+Provisional Liên Hoa rank1 data: radius85, duration180ticks/6s, +8% maxHP/s, cooldown450ticks/15s (rank radius+5, regeneration+2 percentage points; existing rank cooldown progression retained). Vạn Kiếm duration150ticks/5s, 13 eight-way bursts at12tick/400ms spacing; not final balance. Tọa Sát retains prior base cooldown180ticks/6s and mana14, radius110 with existing +5 rank scaling; active guards reject recasts rather than refreshing/discarding accumulated damage. See `docs/ANIMATION_CHANGE_INTEGRATION.md`.

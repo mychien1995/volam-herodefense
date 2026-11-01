@@ -235,3 +235,8 @@ The existing modal hosts `SkillMenu`, a stable-DOM component that submits reques
 ## M3C2 implementation extension
 
 `World.areas` and shared shield/counter/refund/status/proc handlers remain engine/network independent. Protocol8 adds an `AreaState` map through existing zone-scoped StateViews; the client only renders server position,radius,lifetime and combat events. No new client authority,room capacity change or parallel progression UI is introduced. `vo-dang.ts` contains validated school/rank tuning; `docs/M3C2_IMPLEMENTATION.md` documents formulas/lifecycle/testing.
+
+
+### Approved animation adapter (2026-11-01)
+
+`prepare-approved-animation-art.mjs` checks the15 exact director-approved source/export/choreography files and100 retained reference files before producing the runtime registry. `ApprovedSkillVfx` consumes the immutable review plans, server combat events, area state, real projectile positions and synchronized status ticks/accumulated loss. It samples actual PNG atlas frames and original relative frame durations; it never calls combat or sends hits. Backward ghosts snapshot actual rendered displacement/costume. Actor poses can be interrupted by accepted actions; authoritative persistent fields/statuses continue to their server end. Owner/zone/death/build revision/scene cleanup destroys associated views. No Phaser/DOM/network dependency is added to `game-core`; guard accumulation is carried in the existing status JSON rather than a Schema-layout change.

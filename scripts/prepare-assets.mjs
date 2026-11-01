@@ -5,6 +5,7 @@ import { prepareArenaCreeps } from './prepare-arena-creeps.mjs';
 import { prepareForestCreepReview } from './prepare-forest-creep-review.mjs';
 import { prepareDesertAssets } from './prepare-desert-assets.mjs';
 import { prepareFeedbackV2Art } from './prepare-feedback-v2-art.mjs';
+import { prepareApprovedAnimationArt } from './prepare-approved-animation-art.mjs';
 import {
   assetWrites,
   copyIfChanged,
@@ -134,6 +135,8 @@ copyIfChanged(
 prepareArenaCreeps();
 prepareForestCreepReview();
 prepareDesertAssets();
+// Retained review references include generated public atlases: verify after copies.
+prepareApprovedAnimationArt();
 console.info(
   `Prepared assets in ${fileURLToPath(dest)} (${assetWrites.changed} written, ${assetWrites.unchanged} unchanged)`,
 );

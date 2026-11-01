@@ -185,11 +185,11 @@ export const voDangSkills: Ability[] = [
     manaCost: 14,
     cooldownTicks: 180,
     effect: {
-      mode: 'counter',
-      durationTicks: 45,
-      damage: 72,
+      mode: 'guard_counter',
+      durationTicks: 150,
+      reduction: 0.7,
+      thresholdFraction: 0.2,
       range: 110,
-      evade: false,
     },
   },
   {
@@ -198,15 +198,25 @@ export const voDangSkills: Ability[] = [
     manaCost: 42,
     cooldownTicks: 510,
     effect: {
-      ...swordQi,
-      damage: 54,
-      range: 460,
-      radius: 20,
-      count: 5,
-      spacingTicks: 3,
-      spreadAngle: Math.PI / 3,
-      useFacing: true,
-      piercing: true,
+      mode: 'multi_hit',
+      damage: 0,
+      range: 1,
+      hits: 13,
+      spacingTicks: 12,
+      durationTicks: 150,
+      finisherDamage: 0,
+      finisherRange: 1,
+      projectileBurst: {
+        ...swordQi,
+        damage: 54,
+        range: 460,
+        radius: 20,
+        count: 8,
+        spacingTicks: 0,
+        radial: true,
+        useFacing: true,
+        piercing: true,
+      },
     },
   },
 ];
@@ -219,8 +229,8 @@ const descriptions = [
   'Bốn nhát kiếm mạnh liên tiếp trong cung phía trước.',
   'Kiếm khí bay thẳng theo hướng nhìn, xuyên nhiều địch nhưng mỗi địch chỉ trúng một lần.',
   'Kiếm trận cố định tại chỗ thi triển, gây sát thương theo nhịp lên địch trong trận.',
-  'Thế phản kích ngắn: nhận đòn rồi phản chém một lần khi còn sống và địch trong tầm.',
-  'Tuyệt kỹ: năm luồng kiếm khí xuyên thấu theo hình quạt phía trước, không truy đuổi.',
+  'Thủ tối đa 5 giây, giảm 70% sát thương; tích lũy thực nhận sau giảm. Hết 5 giây hoặc vượt 20% máu tối đa thì phản tổng thực nhận ra xung quanh một lần khi còn sống.',
+  'Tuyệt kỹ: liên tục phóng kiếm thẳng tám hướng quanh người trong 5 giây, không truy đuổi.',
 ];
 export function addVoDangProgression(d: ProgressionDefinition): void {
   d.schools['vo_dang'] = {
@@ -270,13 +280,16 @@ export function addVoDangProgression(d: ProgressionDefinition): void {
         e.radius += r * 8;
         e.durationTicks += r * 30;
         for (const s of e.statuses ?? []) s.magnitude += r * 0.03;
-      } else if (e.mode === 'counter') {
-        e.damage += r * 12;
-        e.durationTicks += r * 5;
+      } else if (e.mode === 'guard_counter') {
         e.range += r * 5;
       } else if (e.mode === 'multi_hit') {
-        e.damage += r * 5;
-        e.range += r * 4;
+        if (base.id === 'van_kiem_quy_tong' && e.projectileBurst) {
+          e.projectileBurst.damage += r * 9;
+          e.projectileBurst.range += r * 5;
+        } else {
+          e.damage += r * 5;
+          e.range += r * 4;
+        }
       }
       return a;
     });

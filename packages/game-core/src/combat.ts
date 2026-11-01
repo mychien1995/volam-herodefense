@@ -9,6 +9,8 @@ import { cancelOwnedEffects, hasStatus, statusValue } from './status.js';
 import { characterStats, gainExperience } from './progression.js';
 import { direction, distance, segmentRect } from './geometry.js';
 import { comboHit } from './combos.js';
+import { ownerProtection } from './protection.js';
+import type { StatusEffect } from './types.js';
 import type { ComboSpec } from './types.js';
 export function emit(world: World, event: Omit<CombatEvent, 'id'>): void {
   world.events.push({ id: world.nextEvent++, ...event });
@@ -28,12 +30,14 @@ export function hurt(
     armorPenetration?: number | undefined;
     slowedBonus?: number | undefined;
     reactive?: boolean | undefined;
+    preserveFraction?: boolean | undefined;
     periodic?: boolean | undefined;
     combo?: ComboSpec | undefined;
     comboTargets?: Record<string, boolean> | undefined;
   },
 ): boolean {
   if (target.hp <= 0 || raw <= 0) return false;
+  if (ownerProtection(world, target)) return false;
   // DOT remains damage; immunity exists only on actual moving dash ticks.
   if (!snapshot?.periodic && hasStatus(target, 'dash_guard', world.tick))
     return false;
@@ -122,6 +126,11 @@ export function hurt(
     }
   }
   const enemy = world.creeps.get(target.id);
+  const guardCounter = world.heroes.has(target.id)
+    ? target.statuses?.find(
+        (s) => s.kind === 'guard_counter' && s.until > world.tick,
+      )
+    : undefined;
   const stats = snapshot ?? offensiveStats(world, sourceId, config);
   const critical = world.random() < stats.critChance;
   const defense =
@@ -146,20 +155,22 @@ export function hurt(
         statusValue(world.creeps.get(sourceId)!, 'attack_break', world.tick),
       )
     : 1;
-  let damage = Math.max(
-    1,
-    Math.round(
-      raw *
-        reduction *
-        condition *
-        (100 / (100 + defense)) *
-        (critical ? stats.critMultiplier : 1),
-    ),
-  );
+  const adjusted =
+    raw *
+    reduction *
+    condition *
+    (100 / (100 + defense)) *
+    (critical ? stats.critMultiplier : 1);
+  // Stored actual HP loss is already fractional after mitigation; reflection must
+  // not invent an extra point through the normal attack rounding/minimum rule.
+  let damage = snapshot?.preserveFraction
+    ? Math.max(0, adjusted)
+    : Math.max(1, Math.round(adjusted));
   const mitigation = Math.min(
     0.85,
     Math.max(
       statusValue(target, 'damage_reduction', world.tick),
+      guardCounter?.magnitude ?? 0,
       ...(world.actions ?? [])
         .filter((a) => a.ownerId === target.id && a.until > world.tick)
         .map((a) =>
@@ -218,7 +229,25 @@ export function hurt(
         critical: false,
       });
   }
+  const beforeHp = target.hp;
   target.hp = Math.max(0, target.hp - damage);
+  if (guardCounter) {
+    const received = beforeHp - target.hp;
+    guardCounter.receivedDamage = (guardCounter.receivedDamage ?? 0) + received;
+    emit(world, {
+      kind: 'pulse',
+      sourceId: target.id,
+      targetId: target.id,
+      abilityId: guardCounter.abilityId,
+      x: target.x,
+      y: target.y,
+      damage: received,
+      fx: target.fx,
+      fy: target.fy,
+      critical: false,
+      stage: 'guard_received',
+    });
+  }
   target.hurtUntil = world.tick + 6;
   if (enemy) enemy.hits[sourceId] = world.tick;
   const heading = world.heroes.get(sourceId) ?? world.creeps.get(sourceId);
@@ -258,7 +287,68 @@ export function hurt(
     }
   }
   if (counter && counter.evade === false) retaliate();
+  if (
+    guardCounter &&
+    target.hp > 0 &&
+    !snapshot?.reactive &&
+    (guardCounter.receivedDamage ?? 0) >
+      target.maxHp * (guardCounter.thresholdFraction ?? 0.2) +
+        Number.EPSILON * Math.max(1, target.maxHp) * 8
+  )
+    releaseGuardCounter(world, target.id, guardCounter, config);
   return true;
+}
+/** Consume before emitting or hurting anything: one radial reflection, never a recursive proc. */
+export function releaseGuardCounter(
+  world: World,
+  ownerId: string,
+  guard: StatusEffect,
+  config: SimulationConfig,
+): void {
+  const owner = world.heroes.get(ownerId);
+  if (!owner || owner.hp <= 0 || !owner.statuses?.includes(guard)) return;
+  owner.statuses = owner.statuses.filter((s) => s !== guard);
+  const damage = guard.receivedDamage ?? 0,
+    range = guard.secondary ?? 0;
+  emit(world, {
+    kind: 'pulse',
+    sourceId: owner.id,
+    targetId: '',
+    abilityId: guard.abilityId,
+    x: owner.x,
+    y: owner.y,
+    fx: owner.fx,
+    fy: owner.fy,
+    radius: range,
+    damage,
+    critical: false,
+    stage: 'counter_release',
+  });
+  for (const enemy of world.creeps.values()) {
+    if (
+      enemy.hp <= 0 ||
+      distance(owner, enemy) > range + (enemy.stats ?? config.creep).radius ||
+      config.collision.some((w) => segmentRect(owner, enemy, w) !== undefined)
+    )
+      continue;
+    hurt(world, enemy, owner.id, guard.abilityId, damage, config, {
+      critChance: 0,
+      critMultiplier: 1,
+      reactive: true,
+      preserveFraction: true,
+      fx: owner.fx,
+      fy: owner.fy,
+    });
+  }
+}
+export function expireGuardCounters(
+  world: World,
+  config: SimulationConfig,
+): void {
+  for (const hero of world.heroes.values())
+    for (const guard of [...(hero.statuses ?? [])])
+      if (guard.kind === 'guard_counter' && guard.until <= world.tick)
+        releaseGuardCounter(world, hero.id, guard, config);
 }
 export function offensiveStats(
   world: World,

@@ -408,6 +408,24 @@ export function perform(
       ability.id,
       world.tick,
     );
+  } else if (effect.mode === 'guard_counter') {
+    applyStatus(
+      hero,
+      {
+        kind: 'guard_counter',
+        durationTicks: effect.durationTicks,
+        magnitude: effect.reduction,
+        secondary: effect.range,
+      },
+      hero.id,
+      ability.id,
+      world.tick,
+    );
+    const guard = hero.statuses!.find(
+      (s) => s.kind === 'guard_counter' && s.abilityId === ability.id,
+    )!;
+    guard.receivedDamage = 0;
+    guard.thresholdFraction = effect.thresholdFraction;
   } else if (effect.mode === 'counter') {
     applyStatus(
       hero,
@@ -497,7 +515,7 @@ export function perform(
     const duration =
       effect.mode === 'dash'
         ? Math.ceil((effect.distance / effect.speed) * config.tickRate)
-        : effect.spacingTicks * effect.hits + 1;
+        : (effect.durationTicks ?? effect.spacingTicks * effect.hits + 1);
     applyStatus(
       hero,
       {
@@ -518,8 +536,8 @@ export function perform(
       until: world.tick + duration,
       nextTick: world.tick,
       remaining: effect.mode === 'dash' ? effect.distance : effect.hits,
-      fx: hero.fx,
-      fy: hero.fy,
+      fx: effect.mode === 'dash' && effect.backward ? -hero.fx : hero.fx,
+      fy: effect.mode === 'dash' && effect.backward ? -hero.fy : hero.fy,
       hitIds: [],
       effect,
       ability,

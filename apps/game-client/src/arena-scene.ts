@@ -74,6 +74,8 @@ export class ArenaScene extends Phaser.Scene {
     registerArt(this);
     this.damage = new FloatingDamage(this);
     this.vfx = new SkillVfx(this);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.vfx?.clear());
+    this.events.once(Phaser.Scenes.Events.DESTROY, () => this.vfx?.clear());
     this.creepEffects = new ArenaCreepEffects(
       this,
       this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest,
