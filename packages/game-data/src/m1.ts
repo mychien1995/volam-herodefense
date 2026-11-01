@@ -30,6 +30,15 @@ const point = z.strictObject({
   y: z.number().finite(),
 });
 export const simulationConfigSchema = z.strictObject({
+  mobility: z
+    .strictObject({
+      charges: count.min(1).max(2),
+      rechargeTicks: count.min(1),
+      distance: positive,
+      speed: positive,
+    })
+    .optional(),
+  dungeonAggro: z.boolean().optional(),
   progression: progressionSchema.optional(),
   tickRate: count.min(10).max(60),
   inputTimeoutTicks: count.min(1),
@@ -89,6 +98,7 @@ const shot = {
 };
 /** M1 playable tuning only. No final school balance, dungeon or invasion recipes. */
 const initialConfig: SimulationConfig = simulationConfigSchema.parse({
+  mobility: { charges: 2, rechargeTicks: 180, distance: 120, speed: 720 },
   tickRate: 30,
   inputTimeoutTicks: 15,
   width: arena.width,

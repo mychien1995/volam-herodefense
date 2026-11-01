@@ -39,6 +39,7 @@ export interface ProjectileEffect {
   slowedBonus?: number | undefined;
   radial?: boolean | undefined;
   attackPowerScale?: number | undefined;
+  blinkWindowTicks?: number | undefined;
 }
 export interface ArcEffect {
   mode: 'arc';
@@ -54,6 +55,8 @@ export interface ArcEffect {
   manaRefund?: number | undefined;
   projectileProc?: { chance: number; effect: ProjectileEffect } | undefined;
   windupTicks?: number | undefined;
+  durationTicks?: number | undefined;
+  originOffset?: number | undefined;
   knockback?: number | undefined;
 }
 export interface ComboSpec {
@@ -109,6 +112,14 @@ export interface StatusEffect extends StatusSpec {
   thresholdFraction?: number;
 }
 export interface BuffEffect {
+  burnAura?:
+    | {
+        radius: number;
+        damage: number;
+        tickInterval: number;
+        attackPowerScale?: number | undefined;
+      }
+    | undefined;
   mode: 'buff';
   durationTicks: number;
   critChance: number;
@@ -147,6 +158,7 @@ export interface AreaEffect {
   statuses?: StatusSpec[] | undefined;
   confines?: boolean | undefined;
   protectOwner?: boolean | undefined;
+  followOwner?: boolean | undefined;
   ownerRegenFraction?: number | undefined;
 }
 export interface DashEffect {
@@ -206,6 +218,15 @@ export interface Ability {
     | SupportEffect;
 }
 export interface SimulationConfig {
+  mobility?:
+    | {
+        charges: number;
+        rechargeTicks: number;
+        distance: number;
+        speed: number;
+      }
+    | undefined;
+  dungeonAggro?: boolean | undefined;
   bossEncounter?: BossEncounterDefinition | undefined;
   progression?: ProgressionDefinition | undefined;
   tickRate: number;
@@ -256,6 +277,7 @@ export interface SimulationConfig {
 export type Command =
   | { kind: 'move'; x: number; y: number }
   | { kind: 'basic' }
+  | { kind: 'dash' }
   | { kind: 'cast'; slot: number }
   | { kind: 'dev-loadout'; ids: string[] }
   | { kind: 'select-basic'; id: string };
@@ -277,6 +299,8 @@ export interface Actor extends Point {
   crowdControlScale?: number;
 }
 export interface Hero extends Actor {
+  dashCharges?: number;
+  dashRechargeAt?: number;
   bossItems?: string[];
   bossLoot?: BossLootClaim[];
   progression?: HeroProgression | undefined;
@@ -299,6 +323,14 @@ export interface Hero extends Actor {
   basicChains?: Record<string, number>;
 }
 export interface Creep extends Actor {
+  navigation?: {
+    targetId: string;
+    gx: number;
+    gy: number;
+    repathAt: number;
+    waypoints: Point[];
+  };
+  aggroTargetId?: string;
   /** A rescue cage rejects damage from its own captive, using the common hit pipeline. */
   rescueTargetId?: string;
   bossEncounter?: boolean;
@@ -328,6 +360,7 @@ export interface Creep extends Actor {
   burnDamage: number;
 }
 export interface Projectile extends Point {
+  lingerUntil?: number;
   hostile?: boolean;
   targetId?: string;
   id: string;

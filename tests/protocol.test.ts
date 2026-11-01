@@ -22,6 +22,7 @@ describe('validated M0 data and protocol', () => {
     expect(inputBindings).toEqual({
       movement: ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'],
       basicAttack: 'KeyA',
+      dash: ['ShiftLeft', 'ShiftRight'],
       activeSkills: ['KeyQ', 'KeyW', 'KeyE', 'KeyR'],
     });
   });

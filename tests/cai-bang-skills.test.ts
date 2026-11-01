@@ -147,7 +147,7 @@ describe('M3A canonical Cái Bang skills', () => {
     expect(f.hero.statuses?.filter((s) => s.kind === 'crit_buff')).toHaveLength(
       1,
     );
-    f.steps(180);
+    f.steps(270);
     expect(hasStatus(f.hero, 'crit_buff', f.world.tick)).toBe(false);
     submitInput(f.world, 'a', f.hero.lastSequence + 1, { kind: 'basic' });
     f.steps(1);
@@ -185,8 +185,11 @@ describe('M3A canonical Cái Bang skills', () => {
     const f = fixture('pha_giap_bong');
     f.config.creep.defense = 50;
     f.cast();
+    expect(f.enemies[0]!.hp).toBe(1000);
+    f.steps(6);
     expect(f.enemies[0]!.hp).toBe(963);
     expect(f.enemies[1]!.hp).toBe(1000);
+    f.steps(24);
     submitInput(f.world, 'a', 2, { kind: 'basic' });
     f.steps(1);
     expect(
@@ -194,7 +197,7 @@ describe('M3A canonical Cái Bang skills', () => {
         .filter((e) => e.kind === 'hit' && e.targetId === f.enemies[0]!.id)
         .at(-1)?.damage,
     ).toBe(22);
-    f.steps(151);
+    f.steps(211);
     submitInput(f.world, 'a', 3, { kind: 'basic' });
     f.steps(1);
     expect(

@@ -133,9 +133,8 @@ describe('M3C2 authoritative Yin–Yang', () => {
     expect(f.hits(f.enemies[1]!.id)[0]!.damage).toBe(4);
     expect(f.enemies[2]!.hp).toBe(10000);
     expect(f.world.projectiles.size).toBe(0);
-    expect(voDangBasics['vo_dang_quyen']!.cooldownTicks).toBeLessThan(
-      voDangBasics['vo_dang_kiem']!.cooldownTicks,
-    );
+    expect(voDangBasics['vo_dang_quyen']!.minIntervalTicks).toBe(6);
+    expect(voDangBasics['vo_dang_kiem']!.minIntervalTicks).toBe(6);
     const g = fixture();
     g.config.collision = [{ x: 320, y: 250, width: 2, height: 100 }];
     g.input({ kind: 'basic' });
@@ -415,23 +414,39 @@ describe('M3C2 authoritative Yin–Yang', () => {
     expect(g.hits()).toHaveLength(0);
   });
   it('Tọa Sát mitigates by 70%, retains actual damage, then reflects radially once at five seconds', () => {
-    const f = fixture('toa_sat_bac_do'); f.cast(); const hp = f.hero.hp;
+    const f = fixture('toa_sat_bac_do');
+    f.cast();
+    const hp = f.hero.hp;
     hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 10, f.config);
-    expect(f.hero.hp).toBe(hp - 3); expect(f.enemies[0]!.hp).toBe(10000);
+    expect(f.hero.hp).toBe(hp - 3);
+    expect(f.enemies[0]!.hp).toBe(10000);
     expect(hasStatus(f.hero, 'guard_counter', f.world.tick)).toBe(true);
     f.steps(150);
-    expect(f.enemies[0]!.hp).toBe(9997); expect(f.enemies[2]!.hp).toBe(9997);
-    expect(f.events.filter((e) => e.stage === 'counter_release')).toHaveLength(1);
-    f.steps(151); expect(f.events.filter((e) => e.stage === 'counter_release')).toHaveLength(1);
+    expect(f.enemies[0]!.hp).toBe(9997);
+    expect(f.enemies[2]!.hp).toBe(9997);
+    expect(f.events.filter((e) => e.stage === 'counter_release')).toHaveLength(
+      1,
+    );
+    f.steps(151);
+    expect(f.events.filter((e) => e.stage === 'counter_release')).toHaveLength(
+      1,
+    );
   });
   it('Vạn Kiếm releases repeated eight-way straight bursts over a five-second channel', () => {
-    const f = fixture('van_kiem_quy_tong'); f.world.creeps.clear(); f.cast();
+    const f = fixture('van_kiem_quy_tong');
+    f.world.creeps.clear();
+    f.cast();
     expect(f.world.projectiles.size).toBe(8);
     const shots = [...f.world.projectiles.values()];
-    expect(new Set(shots.map((p) => Math.atan2(p.vy,p.vx).toFixed(3))).size).toBe(8);
-    expect(shots.some((p) => p.vx < 0)).toBe(true); expect(shots.some((p) => p.vy < 0)).toBe(true);
-    f.steps(12); expect(f.world.projectiles.size).toBe(16);
-    f.steps(138); expect(hasStatus(f.hero,'channel',f.world.tick)).toBe(false);
+    expect(
+      new Set(shots.map((p) => Math.atan2(p.vy, p.vx).toFixed(3))).size,
+    ).toBe(8);
+    expect(shots.some((p) => p.vx < 0)).toBe(true);
+    expect(shots.some((p) => p.vy < 0)).toBe(true);
+    f.steps(12);
+    expect(f.world.projectiles.size).toBe(16);
+    f.steps(138);
+    expect(hasStatus(f.hero, 'channel', f.world.tick)).toBe(false);
   });
   it('mana regeneration uses server ticks, innate growth and max caps without regenerating dead players', () => {
     const f = fixture();

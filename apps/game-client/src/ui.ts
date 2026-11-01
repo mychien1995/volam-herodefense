@@ -79,6 +79,7 @@ export class GameUI {
                   `<div id="slot-${key}" class="hotbar-slot ${key === 'e' || key === 'r' ? 'unequipped' : ''}" title="${title}">${icon(art!)}<kbd>${key!.toUpperCase()}</kbd><b id="timer-${key}" class="cooldown-number"></b><small id="cooldown-${key}">${key === 'q' ? '18 NL' : key === 'w' ? '25 NL' : key === 'a' ? 'Bổng' : 'Trống'}</small><div class="cooldown-shade"></div></div>`,
               )
               .join('')}
+            <div id="dash-status" class="dash-status" role="status" aria-label="Lướt · Shift"><span aria-hidden="true">»</span><b id="dash-charges">2</b><kbd>Shift</kbd><small id="dash-timer"></small><progress id="dash-progress" max="180" value="180" aria-label="Hồi lượt lướt"></progress></div>
             <button class="loadout-toggle" data-menu="skills" title="Võ Học · P" aria-label="Võ Học · P">◇<span id="available-points"></span></button>
           </section>
           <p id="scene-status" class="scene-ready" aria-hidden="true">${artPreview ? 'XEM TRƯỚC HÌNH ẢNH' : ''}</p>
@@ -678,6 +679,19 @@ export class GameUI {
           `${c.id === 'phat_dong_a' ? 'A' : 'B'} · ${c.targetId} · ${c.step}/3`,
       )
       .join('\n');
+    element('#dash-charges').textContent = String(hero.dashCharges);
+    element('#dash-timer').textContent =
+      hero.dashRechargeTicks > 0
+        ? `${(hero.dashRechargeTicks / m1Config.tickRate).toFixed(1)}s`
+        : '';
+    const dashProgress = element<HTMLProgressElement>('#dash-progress');
+    dashProgress.max = m1Config.mobility!.rechargeTicks;
+    dashProgress.value =
+      m1Config.mobility!.rechargeTicks - hero.dashRechargeTicks;
+    element('#dash-status').classList.toggle(
+      'unavailable',
+      hero.hp <= 0 || hero.dashCharges === 0,
+    );
     const slots = [
       {
         key: 'a' as const,
@@ -702,9 +716,15 @@ export class GameUI {
           : hero.build.enabled
             ? (hero.build.ranks.get(hero[`${key}Skill`]) ?? 0)
             : 1;
+      const recast =
+        ability?.effect.mode === 'projectile' &&
+        ability.effect.blinkWindowTicks !== undefined &&
+        hero.blinkTicks > 0;
       const slot = element(`#slot-${key}`),
-        cooling = remaining > 0,
-        cost = ability?.manaCost ?? 0;
+        cooling = remaining > 0 && !recast,
+        cost = recast ? 0 : (ability?.manaCost ?? 0);
+      slot.classList.toggle('recast-ready', recast);
+      slot.dataset['recastReady'] = String(recast);
       slot.classList.toggle('cooling', cooling);
       const controlled = activeStatuses.some((s) =>
         [
@@ -751,11 +771,13 @@ export class GameUI {
         art.style.background = `url("${skillIcon(hero.basicId)}") center / contain no-repeat`;
       } else if (key === 'a')
         slot.querySelector<HTMLElement>('.pixel-icon')!.style.background = '';
-      element(`#timer-${key}`).textContent = cooling
-        ? (remaining / m1Config.tickRate).toFixed(1)
-        : '';
+      element(`#timer-${key}`).textContent = recast
+        ? (hero.blinkTicks / m1Config.tickRate).toFixed(1)
+        : cooling
+          ? (remaining / m1Config.tickRate).toFixed(1)
+          : '';
       slot.querySelector<HTMLElement>('.cooldown-shade')!.style.height =
-        `${Math.min(100, (remaining / (ability?.cooldownTicks || 1)) * 100)}%`;
+        `${recast ? 0 : Math.min(100, (remaining / (ability?.cooldownTicks || 1)) * 100)}%`;
       element(`#cooldown-${key}`).textContent =
         key === 'a'
           ? hero.schoolId === 'thieu_lam'
@@ -773,9 +795,11 @@ export class GameUI {
                 : hero.basicId === 'cai_bang_bong'
                   ? 'Bổng'
                   : 'Chưởng'
-          : ability
-            ? `${cost} NL`
-            : 'Trống';
+          : recast
+            ? 'Hiện thân'
+            : ability
+              ? `${cost} NL`
+              : 'Trống';
       slot.title = `${ability?.nameVi ?? 'Chưa trang bị'}${key !== 'a' && hero.build.enabled ? ' · Bậc ' + rank : ''} · ${!ability ? 'Chưa mở' : rank === 0 ? 'Chưa học' : controlled ? 'Đang bị khống chế' : cooling ? 'Đang hồi chiêu' : hero.mana < cost ? 'Thiếu nội lực' : 'Sẵn sàng'}`;
       slot.dataset['skillId'] = ability?.id ?? '';
     }

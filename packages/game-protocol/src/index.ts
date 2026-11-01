@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 17;
+export const PROTOCOL_VERSION = 18;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -55,6 +55,11 @@ export const inputSchema = z.discriminatedUnion('kind', [
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     kind: z.literal('basic'),
+  }),
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    kind: z.literal('dash'),
   }),
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
@@ -266,6 +271,9 @@ export const LobbyPlayer = schema(
     basicId: t.string().default('cai_bang_bong'),
     lastSequence: t.number().default(0),
     basicCooldown: t.number().default(0),
+    dashCharges: t.number().default(2),
+    dashRechargeTicks: t.number().default(0),
+    blinkTicks: t.number().default(0),
     qCooldown: t.number().default(0),
     wCooldown: t.number().default(0),
     eCooldown: t.number().default(0),
@@ -333,6 +341,7 @@ export const ProjectileState = schema(
     radius: t.number().default(0),
     stage: t.string().default(''),
     leg: t.string().default(''),
+    lingerTicks: t.number().default(0),
   },
   'ArenaProjectile',
 );

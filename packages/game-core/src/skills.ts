@@ -164,6 +164,10 @@ function strikeArc(
 ): void {
   const effect = ability.effect;
   if (effect.mode !== 'arc') return;
+  const origin = {
+    x: hero.x + heading.fx * (effect.originOffset ?? 0),
+    y: hero.y + heading.fy * (effect.originOffset ?? 0),
+  };
   if (effect.windupTicks)
     for (const spec of ability.selfStatuses ?? [])
       applyStatus(hero, spec, hero.id, ability.id, world.tick);
@@ -172,7 +176,7 @@ function strikeArc(
       const d = direction(enemy.x - hero.x, enemy.y - hero.y);
       return (
         clearLine(world, hero, enemy, config) &&
-        distance(enemy, hero) <=
+        distance(enemy, origin) <=
           effect.range + (enemy.stats ?? config.creep).radius &&
         d.x * heading.fx + d.y * heading.fy >= Math.cos(effect.halfAngle)
       );
@@ -328,7 +332,7 @@ export function perform(
     );
   } else if (effect.mode === 'arc') {
     if (effect.windupTicks) {
-      const duration = effect.windupTicks + 1;
+      const duration = effect.durationTicks ?? effect.windupTicks + 1;
       applyStatus(
         hero,
         { kind: 'channel', durationTicks: duration, magnitude: 1 },
@@ -458,6 +462,37 @@ export function perform(
     });
     captureConfinement(world, config);
   } else if (effect.mode === 'buff') {
+    if (effect.burnAura) {
+      world.areas ??= [];
+      world.areas = world.areas.filter(
+        (a) => a.ownerId !== hero.id || a.abilityId !== ability.id,
+      );
+      world.areas.push({
+        id: `area_${world.nextId++}`,
+        ownerId: hero.id,
+        abilityId: ability.id,
+        x: hero.x,
+        y: hero.y,
+        until: world.tick + effect.durationTicks,
+        nextTick: world.tick,
+        effect: {
+          mode: 'area',
+          durationTicks: effect.durationTicks,
+          tickInterval: effect.burnAura.tickInterval,
+          radius: effect.burnAura.radius,
+          damage: effect.burnAura.damage,
+          followOwner: true,
+        },
+        rawDamage: damageFor(
+          hero,
+          effect.burnAura.damage,
+          config,
+          world.tick,
+          effect.burnAura.attackPowerScale ?? 1,
+        ),
+        ...crit,
+      });
+    }
     if (effect.cooldownReduction)
       applyStatus(
         hero,
@@ -557,6 +592,11 @@ export function stepAreas(world: World, config: SimulationConfig): void {
     (a) => a.until > world.tick && (world.heroes.get(a.ownerId)?.hp ?? 0) > 0,
   );
   for (const area of world.areas) {
+    if (area.effect.followOwner) {
+      const owner = world.heroes.get(area.ownerId)!;
+      area.x = owner.x;
+      area.y = owner.y;
+    }
     if (world.tick < area.nextTick) continue;
     area.nextTick += area.effect.tickInterval;
     emit(world, {
@@ -607,7 +647,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
       continue;
     }
     if (action.effect.mode === 'arc') {
-      if (world.tick >= action.nextTick) {
+      if (world.tick >= action.nextTick && action.remaining > 0) {
         strikeArc(
           world,
           hero,
@@ -625,7 +665,9 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           action.effect.range,
           action,
         );
-        action.until = world.tick;
+        action.remaining = 0;
+        if (action.effect.durationTicks === undefined)
+          action.until = world.tick;
       }
     } else if (action.effect.mode === 'dash') {
       const e = action.effect,

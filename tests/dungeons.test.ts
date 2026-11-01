@@ -54,7 +54,7 @@ const steps = (match: DungeonMatch, n: number) => {
 };
 
 describe('M2A deterministic creep instances', () => {
-  it('uses the authorized Forest roster across three-creep private waves and keeps private cursors independent', () => {
+  it('uses the authorized Forest roster across six-creep private waves and keeps private cursors independent', () => {
     expect(forestRoster).toEqual([
       'truc_xa',
       'doc_chu',
@@ -70,17 +70,17 @@ describe('M2A deterministic creep instances', () => {
       b = ready(match, 'b');
     const types = (z: MatchZone) =>
       [...z.world.creeps.values()].map((c) => c.archetypeId);
-    expect(types(a.zone)).toEqual(forestRoster.slice(0, 3));
+    expect(types(a.zone)).toEqual(forestRoster);
     clear(match, a.zone, a.hero);
     steps(match, creepDungeon.restTicks);
     expect(a.zone.wave).toBe(2);
-    expect(a.zone.world.creeps.size).toBe(3);
-    expect(types(a.zone)).toEqual(forestRoster.slice(3));
+    expect(a.zone.world.creeps.size).toBe(6);
+    expect(types(a.zone)).toEqual(forestRoster);
     expect(b.zone.wave).toBe(1);
-    expect(types(b.zone)).toEqual(forestRoster.slice(0, 3));
+    expect(types(b.zone)).toEqual(forestRoster);
     clear(match, a.zone, a.hero);
     steps(match, creepDungeon.restTicks);
-    expect(types(a.zone)).toEqual(forestRoster.slice(0, 3));
+    expect(types(a.zone)).toEqual(forestRoster);
   });
   it.each([1, 2, 6])(
     'changes only Forest appearance IDs, retaining the existing %i-player wave scaling, RNG and rewards',
@@ -150,7 +150,7 @@ describe('M2A deterministic creep instances', () => {
       expect(ready(match, id, 'shared').zone).toBe(first.zone);
     expect(first.zone.world.heroes.size).toBe(6);
     expect(first.zone.spawnPlayerCount).toBe(1);
-    expect(first.zone.world.creeps.size).toBe(3);
+    expect(first.zone.world.creeps.size).toBe(6);
     expect(first.zone.world.creeps.values().next().value!.maxHp).toBe(hp);
     match.add('g', 'Seventh');
     expect(match.enter('g', 'shared')).toContain('đầy');
@@ -300,7 +300,7 @@ describe('M2A deterministic creep instances', () => {
     match.step();
     expect(zone.wave).toBe(2);
     expect(zone.spawnPlayerCount).toBe(2);
-    expect(zone.world.creeps.size).toBe(5);
+    expect(zone.world.creeps.size).toBe(8);
     expect(
       [...zone.world.creeps.values()].every((c) => c.maxHp > m1Config.creep.hp),
     ).toBe(true);

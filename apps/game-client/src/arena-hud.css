@@ -46,7 +46,7 @@
   align-items: baseline;
 }
 .hero-name strong {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
   font-size: clamp(12px, 0.9vw, 15px);
   max-width: 70%;
   color: #fff0cd;
@@ -505,4 +505,52 @@
 }
 #boss-loot-items:empty {
   display: none;
+}
+
+/* Technical HUD placeholder; final dash icon belongs to the separate visual batch. */
+.dash-status {
+  position: relative;
+  width: 44px;
+  min-width: 44px;
+  height: 51px;
+  align-self: center;
+  border: 1px solid #a58951;
+  background: #152c2ae8;
+  text-align: center;
+  padding: 1px 2px;
+  line-height: 1.1;
+}
+.dash-status > span {
+  font-size: 23px;
+  color: #dce9bc;
+}
+.dash-status b {
+  position: absolute;
+  right: 3px;
+  top: 1px;
+  font-size: 12px;
+}
+.dash-status kbd {
+  display: block;
+  font:
+    10px 'Segoe UI',
+    Tahoma,
+    sans-serif;
+}
+.dash-status small {
+  font-size: 9px;
+}
+.dash-status progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  accent-color: #c6a464;
+}
+.dash-status.unavailable {
+  opacity: 0.55;
+}
+.hotbar-slot.recast-ready {
+  outline: 2px solid #a9e1ec;
 }

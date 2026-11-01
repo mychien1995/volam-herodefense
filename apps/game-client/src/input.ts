@@ -32,6 +32,11 @@ export function bindGameplayInput(
       return;
     }
     if (event.repeat) return;
+    if (inputBindings.dash.some((key) => key === event.code)) {
+      event.preventDefault();
+      send({ kind: 'dash' });
+      return;
+    }
     if (event.code === 'Space') {
       event.preventDefault();
       interact();

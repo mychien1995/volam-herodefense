@@ -361,9 +361,10 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     const f = fixture();
     f.cast('tru_ta');
     f.cast('tam_gioi_quy_thien');
+    f.steps(6);
     expect(hasStatus(f.enemies[0]!, 'slow', f.world.tick)).toBe(true);
     expect(hasStatus(f.enemies[0]!, 'defense_break', f.world.tick)).toBe(true);
-    f.steps(136);
+    f.steps(181);
     expect(f.enemies[0]!.statuses).toHaveLength(0);
   });
   it('Kim Quang aura follows caster, supports entering allies, expires on exit and never stacks or repairs statue', () => {

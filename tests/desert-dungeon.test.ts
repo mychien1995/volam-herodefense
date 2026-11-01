@@ -59,7 +59,8 @@ describe('desert map and authoritative destination contract', () => {
     };
     expect(dungeonActionSchema.parse(payload)).toMatchObject(payload);
     expect(
-      dungeonActionSchema.safeParse({ ...payload, destination: 'hell' }).success,
+      dungeonActionSchema.safeParse({ ...payload, destination: 'hell' })
+        .success,
     ).toBe(false);
     expect(
       dungeonActionSchema.safeParse({
@@ -110,7 +111,7 @@ describe('desert map and authoritative destination contract', () => {
     m.enter('a', 'shared', 'desert');
     const z = m.zoneOf('a')!;
     const first = [...z.world.creeps.values()];
-    expect(first.map((c) => c.archetypeId)).toEqual(desertRoster.slice(0, 3));
+    expect(first.map((c) => c.archetypeId)).toEqual(desertRoster);
     expect(z.config.creep).toEqual(m.base.creep);
     step(m, d.restTicks + 2);
     expect(z.wave).toBe(1);
@@ -118,7 +119,7 @@ describe('desert map and authoritative destination contract', () => {
     step(m, d.restTicks + 1);
     expect(z.wave).toBe(2);
     expect([...z.world.creeps.values()].map((c) => c.archetypeId)).toEqual(
-      desertRoster.slice(3),
+      desertRoster,
     );
     expect(z.config.creep.hp).toBe(
       Math.round(m.base.creep.hp * (1 + d.hpPerWave)),

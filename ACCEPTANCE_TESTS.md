@@ -1,3 +1,10 @@
+## M3D technical feedback acceptance — 2026-11-01
+
+- `tests/m3d-feedback-tech.test.ts`: exact sequential charge boundaries/single-charge refill, no terrain tunneling or immunity, rejection/replay, travel/death debt, same-slot cooldown-bypassing blink, piercing dedup,45-tick damage-free linger, unsafe/stunned recast and cleanup, four accepted monk stages, finite fresh-press A cadence, owner-following rank4 aura, windup/single-hit preservation, forward Vi Đà origin, six-creep dungeon aggro/retargeting and scenery navigation.
+- Existing school, dungeon roster/scaling, room and protocol regressions must reflect the explicitly changed tuning while retaining authority/isolation/rewards/combo assertions.
+- `playwright.m3d-feedback.config.ts` uses test-owned isolated services, two actual Phaser clients, keyboard Shift/A, Vietnamese DOM text, HUD charge/recast, six-creep aggro, nearest sampling, and explicit legal-build fixtures for advanced skills. Fixture XP/position/immortal targets are disclosed; they do not prove natural progression or final artwork.
+- No recordings or new visual asset approval. Run `pnpm check:final --config playwright.m3d-feedback.config.ts` with an isolated QA session/ports after the final implementation change. Actual results are recorded in the handoff.
+
 ## M3D merged Cổ Mộ selector regression — 2026-11-01
 
 `tests/e2e/ly-mac-sau.spec.ts` additionally checks real menu entry into Forest, Desert, Beach, Hồng Liệt, Chu Bá Thông and Cổ Mộ, plus Cổ Mộ overlay bounds at1280×720/1920×1080. The merged final gate includes the existing two dungeon cases and six-client Cổ Mộ frame/action/combat/one-claim/isolation/Space-cleanup acceptance; full unit/room tests and all retained approval guards remain required. Exact executed results: `docs/LY_MAC_SAU_INTEGRATION.md`.

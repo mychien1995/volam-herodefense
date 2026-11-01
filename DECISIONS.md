@@ -1,3 +1,17 @@
+## M3D approved tech commit authorization — 2026-11-02
+
+The director explicitly requests: “commit phần tech đã duyệt và tài liệu bàn giao.” Commit the approved technical/gameplay changes, their tests and verification evidence, and the handoff on `wip/m3d/feeback-tech`. This does not authorize merging, deployment or integration of the separate visual worktree. The previously recorded successful final checks remain applicable because this step changes delivery/approval metadata only.
+
+## M3D technical feedback approval — 2026-11-02
+
+The director explicitly approves the delivered technical/gameplay changes in `wip/m3d/feeback-tech`: “Duyệt tech change”. This approves the implementation and documented trial tuning described in `docs/m3d-feedback-tech-handoff.md`, with the recorded final verification. It does not approve new sprite/VFX artwork, visual-worktree integration, a commit, or a merge. The separate visual batch and later integration remain distinct tasks.
+
+## M3D technical feedback — 2026-11-01
+
+The director authorizes only `wip/m3d/feeback-tech`, without visual-worktree integration. Confirmed: Shift has two charges, sequential six-second recharge; each A is a distinct key press (no held autoattack); Võ Đang has no additional basic cooldown beyond a finite animation cadence; Thiếu Lâm Quyền cycles left fist/right fist/front kick/roundhouse. Nhân Kiếm Hợp Nhất is a slow piercing damaging sword, one hit per enemy, same-slot recast blinks to its server-owned position; it lingers 1.5s at maximum range. Kháng Long rank4 gains a small owner-following fire aura. Requested reaches and skill lifetimes increase; ordinary extended attacks retain their prior per-cast damage, while the new aura adds damage. Dungeon creep waves grow and all living in-instance heroes are immediately eligible aggro targets.
+
+Configurable trial numbers, authority/cleanup details, temporary retained-art adaptations and actual verification belong to `docs/m3d-feedback-tech-handoff.md`. No PNG/source/atlas generation, new-art approval, boss avatar, other milestone or merge is authorized here.
+
 ## Lý Mạc Sầu selector correction — 2026-11-01
 
 The director explicitly requests Lý Mạc Sầu as a peer dungeon card alongside Hồng Liệt and Chu Bá Thông, replacing the separate options-row button. Keep destination `co_mo`, private/shared access, server authority and the existing encounter unchanged. The retained approved Cổ Mộ arena illustration supplies the menu thumbnail without new art generation.

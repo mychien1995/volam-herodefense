@@ -118,9 +118,9 @@ describe('M2A real Colyseus zone authority and views', () => {
     await expect
       .poll(() => b!.state.players.get(b!.sessionId)?.zoneId)
       .toBe(`desert_private_${b!.sessionId}`);
-    await expect.poll(() => [...a!.state.creeps.values()].length).toBe(3);
+    await expect.poll(() => [...a!.state.creeps.values()].length).toBe(6);
     expect([...a!.state.creeps.values()].map((c) => c.archetypeId)).toEqual(
-      desertRoster.slice(0, 3),
+      desertRoster,
     );
     expect(
       [...a!.state.creeps.values()].every((c) => c.zoneId === 'desert_shared'),
@@ -229,8 +229,8 @@ describe('M2A real Colyseus zone authority and views', () => {
     await enter(b!, authority, 'shared');
     const zone = authority.simulation.zoneOf(a!.sessionId)!;
     expect(authority.simulation.zoneOf(b!.sessionId)).toBe(zone);
-    await expect.poll(() => a!.state.creeps.size).toBe(3);
-    const firstForestTypes = forestRoster.slice(0, 3);
+    await expect.poll(() => a!.state.creeps.size).toBe(6);
+    const firstForestTypes = forestRoster;
     await expect
       .poll(() => [...a!.state.creeps.values()].map((c) => c.archetypeId))
       .toEqual(firstForestTypes);

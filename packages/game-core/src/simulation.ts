@@ -1,3 +1,5 @@
+import { dungeonWaypoint } from './dungeon-navigation.js';
+import { dash, blink, rechargeDash } from './mobility.js';
 import { stepChu, constrainChuTrap } from './chu-ba-thong.js';
 import { expireCombos } from './combos.js';
 import { stepBossEncounter } from './boss-encounter.js';
@@ -108,6 +110,7 @@ export function addHero(
   config: SimulationConfig,
 ): Hero {
   const hero: Hero = {
+    dashCharges: config.mobility?.charges ?? 0,
     schoolId: 'cai_bang',
     id,
     nickname,
@@ -218,6 +221,10 @@ function runCommand(
     }
     return;
   }
+  if (command.kind === 'dash') {
+    dash(world, hero, config);
+    return;
+  }
   if (command.kind === 'basic') {
     if (
       hasStatus(hero, 'stun', world.tick) ||
@@ -234,6 +241,8 @@ function runCommand(
     }
   }
   if (command.kind === 'cast') {
+    if (!Number.isInteger(command.slot) || command.slot < 0 || command.slot > 3)
+      return;
     if (
       hasStatus(hero, 'stun', world.tick) ||
       hasStatus(hero, 'silence', world.tick) ||
@@ -241,6 +250,7 @@ function runCommand(
     )
       return;
     const ability = equippedAbility(hero, command.slot, config);
+    if (ability && blink(world, hero, ability.id, config)) return;
     const togglingOff =
       ability?.effect.mode === 'mana_shield' &&
       ability.effect.toggle &&
@@ -287,6 +297,10 @@ function advanceProjectile(
   shot: Projectile,
   config: SimulationConfig,
 ): void {
+  if (shot.lingerUntil !== undefined) {
+    if (world.tick >= shot.lingerUntil) world.projectiles.delete(shot.id);
+    return;
+  }
   const length = Math.min(
     shot.remaining,
     Math.hypot(shot.vx, shot.vy) / config.tickRate,
@@ -426,9 +440,19 @@ function advanceProjectile(
     wallT < Infinity ||
     (shot.remaining <= length &&
       (!shot.effect.boomerang || shot.leg === 'return'))
-  )
-    world.projectiles.delete(shot.id);
-  else {
+  ) {
+    if (
+      shot.effect.blinkWindowTicks &&
+      wallT === Infinity &&
+      shot.remaining <= length
+    ) {
+      shot.x = end.x;
+      shot.y = end.y;
+      shot.remaining = 0;
+      shot.lingerUntil = world.tick + shot.effect.blinkWindowTicks;
+      shot.stage = 'sword_linger';
+    } else world.projectiles.delete(shot.id);
+  } else {
     shot.x = end.x;
     shot.y = end.y;
     shot.remaining -= length;
@@ -467,6 +491,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   expireStatuses(world);
   expireCombos(world);
   for (const hero of world.heroes.values()) {
+    rechargeDash(hero, world.tick, config);
     if (hero.hp <= 0) {
       hero.pose = 'death';
       cancelOwnedEffects(world, hero.id);
@@ -607,7 +632,9 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     const nearest = [...world.heroes.values()]
       .filter(
         (player) =>
-          player.hp > 0 && distance(player, enemy) < stats.detectionRange,
+          player.hp > 0 &&
+          (config.dungeonAggro ||
+            distance(player, enemy) < stats.detectionRange),
       )
       .sort(
         (a, b) =>
@@ -641,14 +668,27 @@ export function stepWorld(world: World, config: SimulationConfig): void {
         x: enemy.spawn.x,
         y: enemy.spawn.y + (Math.floor(world.tick / 90) % 2 ? 32 : -32),
       };
-    const delta = direction(target.x - enemy.x, target.y - enemy.y);
+    if (config.dungeonAggro) enemy.aggroTargetId = hero?.id ?? '';
+    const waypoint =
+      config.dungeonAggro && hero
+        ? dungeonWaypoint(enemy, hero, world.tick, config)
+        : target;
+    const delta = direction(waypoint.x - enemy.x, waypoint.y - enemy.y);
     const moving =
-      distance(enemy, target) >
-      (hero
-        ? stats.attackRange
-        : objective
-          ? stats.attackRange + objective.radius
-          : 2);
+      !(config.dungeonAggro && !hero && !objective) &&
+      (distance(enemy, target) >
+        (hero
+          ? stats.attackRange
+          : objective
+            ? stats.attackRange + objective.radius
+            : 2) ||
+        !!(
+          config.dungeonAggro &&
+          hero &&
+          config.collision.some(
+            (w) => segmentRect(enemy, hero, w) !== undefined,
+          )
+        ));
     if (moving && !hasStatus(enemy, 'stun', world.tick)) {
       const before = { x: enemy.x, y: enemy.y };
       enemy.fx = delta.x;
@@ -680,7 +720,13 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       !moving &&
       world.tick >= enemy.cooldown &&
       !hasStatus(enemy, 'stun', world.tick) &&
-      !hasStatus(enemy, 'disarm', world.tick)
+      !hasStatus(enemy, 'disarm', world.tick) &&
+      !(
+        config.dungeonAggro &&
+        config.collision.some(
+          (w) => segmentRect(enemy, victim, w) !== undefined,
+        )
+      )
     ) {
       enemy.cooldown =
         world.tick +

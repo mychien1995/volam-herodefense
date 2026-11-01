@@ -1,3 +1,7 @@
+## M3D feedback / protocol18 — 2026-11-01
+
+`game-core/mobility.ts` owns sequential charge debt and server-owned projectile recast, composed with existing swept dash actions, collision and confinement. Optional data-defined arc lifetimes/origins, projectile blink windows and buff fire auras extend shared effect handlers. Dungeon-only deterministic grid waypoints route aggro around static scenery without altering invasion/boss AI. Protocol18 accepts a payload-free `dash` input and projects remaining dash/recast/linger ticks, retaining the existing per-zone StateViews. DOM HUD and retained raster adaptations consume those projections; animation never determines damage. See `docs/m3d-feedback-tech-handoff.md` for tuning, fixtures and integration points.
+
 ## M3D combined boss protocol16 — 2026-11-01
 
 The main-checkout Lý Mạc Sầu merge combines all six dungeon destinations and bumps the current protocol15 to16 for Co Mo cast/countdown/pending-claim fields. Existing Hồng Liệt/Chu encounter projection and validated Chu item transactions are retained. Co Mo's `CoMoBossCast` export and World boss runtime remain distinct from Hồng Liệt's encounter object and Chu's world state; their lifecycle/CC adapters compose without replacing one another. Earlier protocol14 sections are historical. Integration and executed regression evidence: `docs/LY_MAC_SAU_INTEGRATION.md`.

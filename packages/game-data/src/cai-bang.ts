@@ -29,7 +29,7 @@ export const caiBangExtraSkills: Ability[] = [
     cooldownTicks: 360,
     effect: {
       mode: 'buff',
-      durationTicks: 180,
+      durationTicks: 270,
       critChance: 0.3,
       critMultiplier: 0.75,
     },
@@ -76,11 +76,13 @@ export const caiBangExtraSkills: Ability[] = [
     effect: {
       mode: 'arc',
       damage: 55,
-      range: 78,
+      range: 110,
+      windupTicks: 6,
+      durationTicks: 30,
       halfAngle: Math.PI / 4,
       cleave: 1,
       singleTarget: true,
-      statuses: [{ kind: 'defense_break', durationTicks: 150, magnitude: 20 }],
+      statuses: [{ kind: 'defense_break', durationTicks: 210, magnitude: 20 }],
     },
   },
   {

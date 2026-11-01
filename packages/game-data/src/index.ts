@@ -19,6 +19,7 @@ export const lobbyConfig = Object.freeze(
 export const inputBindings = Object.freeze({
   movement: ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'] as const,
   basicAttack: 'KeyA',
+  dash: ['ShiftLeft', 'ShiftRight'] as const,
   activeSkills: ['KeyQ', 'KeyW', 'KeyE', 'KeyR'] as const,
 });
 

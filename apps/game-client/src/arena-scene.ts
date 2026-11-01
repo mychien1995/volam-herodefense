@@ -698,6 +698,7 @@ export class ArenaScene extends Phaser.Scene {
         animation: view.sprite.anims.currentAnim?.key,
         frame: view.sprite.frame.name,
         texture: view.sprite.texture.key,
+        filterMode: view.sprite.texture.source[0]?.scaleMode,
         artStatus:
           view.sprite.texture.key === creepPlaceholderTexture
             ? 'placeholder'

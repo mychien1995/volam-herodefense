@@ -233,10 +233,12 @@ export class ApprovedSkillVfx {
         duration = 1050;
         for (const c of clips) if (!c.body && c.to) c.to = [e.radius ?? 78, 0];
       }
-      if (id === 'tam_gioi_quy_thien')
-        clips = clips.filter(
-          (c) => !['armor_hit', 'armor_break_seal'].includes(c.phase),
-        );
+      if (id === 'tam_gioi_quy_thien') {
+        clips = clips
+          .filter((c) => !['armor_hit', 'armor_break_seal'].includes(c.phase))
+          .map((c) => ({ ...c, at: c.at * 1.5, end: c.end * 1.5 }));
+        duration *= 1.5;
+      }
       if (id === 'bat_dong_minh_vuong')
         clips = clips.filter((c) => c.phase !== 'healing_pulse');
       if (id === 'nhu_lai_thien_diep') {
@@ -244,7 +246,9 @@ export class ApprovedSkillVfx {
         duration = 440;
       }
       if (id === 'thieu_lam_dao') {
-        clips = clips.filter((c) => c.at < 770);
+        clips = clips
+          .filter((c) => c.at < 770)
+          .map((c) => (c.body ? c : { ...c, scale: (c.scale ?? 1) * 1.2 }));
         duration = 400;
         const a = this.actor(e.sourceId),
           cadence =

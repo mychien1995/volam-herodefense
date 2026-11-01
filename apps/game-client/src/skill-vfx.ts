@@ -135,6 +135,7 @@ export class SkillVfx {
     prefix: string,
     event: CombatEvent,
     ownerId = event.sourceId,
+    durationMs?: number,
   ): void {
     const placement = this.tag(
       asset,
@@ -175,6 +176,14 @@ export class SkillVfx {
         event.stage === 'support_tick')
     )
       view.sprite.setScale((event.radius * 2) / view.tag.frameDimensions[0]);
+    if (event.abilityId === 'liet_phong_dao' && event.kind === 'cast')
+      view.sprite
+        .setOrigin(0.5, 0.5)
+        .setPosition(event.x, event.y - 54)
+        .setScale(1.8);
+    if (durationMs)
+      view.sprite.anims.timeScale =
+        ((view.tag.frames.length / view.tag.frameRate) * 1000) / durationMs;
     view.impact = event.kind === 'hit';
     this.transient.add(view);
     const remove = () => {
@@ -184,7 +193,11 @@ export class SkillVfx {
     view.sprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, remove);
     // An incorrectly looped optional source tag must not become an immortal impact.
     this.scene.time.delayedCall(
-      Math.max(200, (view.tag.frames.length / view.tag.frameRate) * 1000 + 100),
+      Math.max(
+        200,
+        durationMs ??
+          (view.tag.frames.length / view.tag.frameRate) * 1000 + 100,
+      ),
       () => {
         if (this.transient.has(view)) remove();
       },
@@ -194,6 +207,13 @@ export class SkillVfx {
     if (this.approved.event(e)) return;
     if (e.kind === 'attack') this.casts.delete(e.sourceId);
     if (this.feedback.event(e)) return;
+    if (e.abilityId === 'liet_phong_dao') {
+      if (e.kind === 'cast')
+        this.burst('nhan_kiem_hop_nhat_vfx', 'travel', e, e.sourceId, 600);
+      if (e.kind === 'pulse' && e.stage === 'strike')
+        this.burst('liet_phong_dao_vfx', 'strike', e);
+      return;
+    }
     const skill =
       e.abilityId === 'thien_son_phien'
         ? 'lien_hoa_phien'
@@ -469,13 +489,18 @@ export class SkillVfx {
       if (this.feedback.areaHandled(a.abilityId)) return;
       if (a.zoneId !== zoneId) return;
       const key = 'area:' + id,
-        prefix = skillVisualStages[a.abilityId]?.area;
+        prefix =
+          a.abilityId === 'khang_long_huu_hoi'
+            ? 'burn_flecks'
+            : skillVisualStages[a.abilityId]?.area;
       if (!prefix) return;
       active.add(key);
       let v = this.persistent.get(key);
       if (!v) {
         v = this.make(
-          `${a.abilityId}_vfx`,
+          a.abilityId === 'khang_long_huu_hoi'
+            ? 'shared_fire_vfx'
+            : `${a.abilityId}_vfx`,
           prefix,
           a.x,
           a.y,
@@ -545,6 +570,11 @@ export class SkillVfx {
               .setOrigin(0.5, 0.5)
               .setPosition(Math.round(p.x), Math.round(p.y - 20))
               .setDepth(p.y + 0.4);
+        } else if (
+          p.abilityId === 'vo_dang_kiem' ||
+          p.abilityId === 'nhan_kiem_hop_nhat'
+        ) {
+          v.sprite.setPosition(Math.round(p.x), Math.round(p.y - 22));
         } else if (
           p.abilityId === 'huyen_am_chuong' ||
           p.abilityId === 'hang_long_hoa_vu'

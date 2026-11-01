@@ -46,15 +46,21 @@ export const thieuLamBasics: Record<string, Ability> = {
     basicCombo: [
       { stage: 'left_fist', damageMultiplier: 1 },
       { stage: 'right_fist', damageMultiplier: 1 },
+      { stage: 'front_kick', damageMultiplier: 1 },
+      {
+        stage: 'roundhouse_kick',
+        damageMultiplier: 1,
+        halfAngle: Math.PI * 0.75,
+      },
     ],
-    effect: arc(38, 48, 0.25, Math.PI / 4),
+    effect: arc(38, 70, 0.25, Math.PI / 4),
   },
   thieu_lam_dao: {
     id: 'thieu_lam_dao',
     nameVi: 'Thiếu Lâm Đao',
     manaCost: 0,
     cooldownTicks: 23,
-    effect: arc(38, 80, 0.55, Math.PI / 2.5),
+    effect: arc(38, 96, 0.55, Math.PI / 2.5),
   },
 };
 export const thieuLamSkills: Ability[] = [
@@ -63,7 +69,7 @@ export const thieuLamSkills: Ability[] = [
     nameVi: 'La Hán Quyền',
     manaCost: 10,
     cooldownTicks: 75,
-    effect: arc(40, 58),
+    effect: arc(40, 85),
     selfStatuses: [guard(0.15, 45)],
     combo: chain('phat_dong_a', 1),
   },
@@ -73,7 +79,8 @@ export const thieuLamSkills: Ability[] = [
     manaCost: 12,
     cooldownTicks: 90,
     effect: {
-      ...arc(44, 62),
+      ...arc(44, 68),
+      originOffset: 42,
       statuses: [{ kind: 'defense_break', magnitude: 12, durationTicks: 120 }],
     },
     combo: chain('phat_dong_a', 2),
@@ -140,7 +147,7 @@ export const thieuLamSkills: Ability[] = [
     nameVi: 'Như Lai Niết Bàn',
     manaCost: 40,
     cooldownTicks: 540,
-    effect: { ...arc(120, 140, 1, Math.PI), windupTicks: 15 },
+    effect: { ...arc(120, 180, 1, Math.PI), windupTicks: 15 },
     selfStatuses: [guard(0.25, 150)],
   },
   {
@@ -173,7 +180,9 @@ export const thieuLamSkills: Ability[] = [
     cooldownTicks: 135,
     effect: {
       ...arc(62, 88, 0.65),
-      statuses: [{ kind: 'defense_break', magnitude: 20, durationTicks: 135 }],
+      windupTicks: 6,
+      durationTicks: 30,
+      statuses: [{ kind: 'defense_break', magnitude: 20, durationTicks: 180 }],
     },
   },
   {

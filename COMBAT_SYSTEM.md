@@ -1,3 +1,11 @@
+## M3D feedback override — 2026-11-01
+
+Shift is a separate zero-mana, zero-damage, non-invulnerable mobility command: two charges, sequential 180-tick recharge at 30Hz. Server owns direction from current movement/facing, terrain-safe swept motion, debt and lifecycle; travel converts remaining debt between zone clocks. Dead heroes retain/recharge debt. Stun or another active action rejects a dash without consuming a charge.
+
+Võ Đang basics use a 6-tick animation cadence and no separate recovery cooldown; every attack requires a fresh A press. Thiếu Lâm Quyền emits four authoritative presentation stages. Vi Đà range is measured from a 42-unit forward ground origin while frontal eligibility and line-of-sight remain caster-relative, preserving close same-target Phát Động hits.
+
+The blink sword flies straight at 180 units/s to rank1 range540, pierces each enemy once and then lingers damage-free for45 ticks. Valid same-slot recast bypasses its existing cooldown/mana cost; destination, terrain path and confinement are checked on server. Unsafe recast retains the sword. Cooldown begins on initial cast; cleanup uses the existing death/travel/build/disconnect path. Delayed arcs capture heading/offense, strike once after windup and may retain an explicit active/recovery duration. The rank4 owner-following fire area updates position every simulation tick and damages on its own fixed pulse schedule.
+
 # Combat System Specification v1.0
 
 ## Current M3C3 feedback override — 2026-10-31

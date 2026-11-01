@@ -457,6 +457,7 @@ export class DungeonMatch {
         }),
       ),
       creepRespawn: false,
+      dungeonAggro: !(d.boss || d.chuBoss || d.kimBoss || d.bossEncounter),
       creep: {
         ...this.base.creep,
         hp: Math.round(
@@ -479,6 +480,8 @@ export class DungeonMatch {
     const convert = (until: number) =>
       destination.world.tick + Math.max(0, until - source.world.tick);
     hero.cooldown = convert(hero.cooldown);
+    if (hero.dashRechargeAt !== undefined)
+      hero.dashRechargeAt = convert(hero.dashRechargeAt);
     hero.skillCooldowns = hero.skillCooldowns.map(convert);
     if (hero.abilityCooldowns)
       for (const key of Object.keys(hero.abilityCooldowns))

@@ -687,6 +687,22 @@ export class MatchRoom extends Room<{
       target.basicId = hero.basicId;
       target.lastSequence = hero.lastSequence;
       target.basicCooldown = Math.max(0, hero.cooldown - zone.world.tick);
+      target.dashCharges = hero.dashCharges ?? 0;
+      target.dashRechargeTicks = Math.max(
+        0,
+        (hero.dashRechargeAt ?? 0) - zone.world.tick,
+      );
+      const blinkShot = [...zone.world.projectiles.values()].find(
+        (p) => p.ownerId === id && p.effect.blinkWindowTicks,
+      );
+      target.blinkTicks = blinkShot
+        ? blinkShot.lingerUntil === undefined
+          ? Math.ceil(
+              (blinkShot.remaining / blinkShot.effect.speed) *
+                zone.config.tickRate,
+            ) + blinkShot.effect.blinkWindowTicks!
+          : Math.max(0, blinkShot.lingerUntil - zone.world.tick)
+        : 0;
       target.qCooldown = Math.max(
         0,
         (hero.skillCooldowns[0] ?? 0) - zone.world.tick,
@@ -786,7 +802,7 @@ export class MatchRoom extends Room<{
         );
         target.castTargetId = bossCast?.targetId ?? '';
         target.lane = enemy.invasion?.lane ?? '';
-        target.targetId = enemy.invasion?.targetId ?? '';
+        target.targetId = enemy.invasion?.targetId ?? enemy.aggroTargetId ?? '';
       }
       for (const effect of [
         ...(zone.encounter?.effects.values() ?? []),
@@ -864,6 +880,10 @@ export class MatchRoom extends Room<{
         target.radius = shot.effect.radius;
         target.stage = shot.stage ?? '';
         target.leg = shot.leg ?? '';
+        target.lingerTicks = Math.max(
+          0,
+          (shot.lingerUntil ?? 0) - zone.world.tick,
+        );
       }
     }
     for (const [id, target] of this.state.bossEffects)
