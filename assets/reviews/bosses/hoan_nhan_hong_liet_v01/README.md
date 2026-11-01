@@ -1,9 +1,13 @@
 # Hoàn Nhan Hồng Liệt — bản thử mỹ thuật v01
 
 Ngày: 2026-11-01. Branch: `wip/m3d/hoan-nhan-hong-liet`.
-Trạng thái: **PROTOTYPE — CHỜ DIRECTOR REVIEW**. Chưa sửa hoặc tích hợp code Phaser, game-core, server, protocol, dữ liệu combat hay package/build configuration.
+Trạng thái hiện tại: **APPROVED VISUAL PREVIEW V04 FOR PHASER INTEGRATION**. Chưa sửa hoặc tích hợp code Phaser, game-core, server, protocol, dữ liệu combat hay package/build configuration.
 
-## Hiện tại: v04 — A1 tầm thử 600px
+## Director duyệt v04 — 2026-11-01
+
+Anh xác nhận: “ok duyệt, tôi xem prompt để integrate vào phaser”. **APPROVED VISUAL PREVIEW V04 FOR PHASER INTEGRATION**, reviewed commit `82eaa5ca`. A1 ba đường 600px/±18°, A2 tăng tầm, 16 pháo đồng thời từ bốn rìa, lava dash/viền nhẹ và các art được chọn trong preview là baseline tích hợp. [Approval record](director_approval.json) ghim input và phạm vi; không duyệt cels lỗi/unused. Chưa tích hợp Phaser, chưa chứng minh combat hoặc balance. Các mục “chờ review” phía dưới là lịch sử.
+
+## Bản duyệt: v04 — A1 tầm 600px
 
 A1 ba đường giữ spread±18° nhưng tăng chiều dài lên600px (khoảng1,76 lần vệt peak v03); warning và ra đòn cùng tầm. Các chiêu khác giữ v03. [Preview, PNG và kiểm tra v04](REVISION_V04.md). Chưa tích hợp Phaser; 600px là tuning thử để director review.
 
