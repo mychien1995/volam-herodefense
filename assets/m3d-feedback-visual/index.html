@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi"><meta charset="utf-8"><title>M3D isolated sprite/VFX review</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#11171c;color:#e8dcc4;font:14px system-ui}header{padding:12px 20px}p{margin:6px 0;color:#aab8c2}button,select{font:inherit;margin:4px;padding:7px;background:#28333c;color:#eee;border:1px solid #66757a}canvas{image-rendering:pixelated;display:block;width:1280px;height:720px;margin:0 auto;background:#263a30}#readout{padding:10px 20px;white-space:pre-wrap}
+</style>
+<header><strong>M3D • VISUAL R2 ĐÃ DUYỆT • CHỜ TÍCH HỢP PHASER</strong>
+<p><a href="performance.html" style="display:inline-block;padding:8px 12px;color:#f3deb0;border:1px solid #8a9b79;border-radius:4px;text-decoration:none">▶ Xem nhân vật thi triển skill / đánh thường</a></p>
+<p>Canvas 640×360 logical, display 2×. Không phải Phaser production/game capture. A = phát đúng một clip; giữ A không lặp.</p>
+<select id="asset"></select><select id="clip"></select><button id="play">Phát một lần</button><button id="light">Nền sáng/tối</button><button id="pause">Tạm dừng</button>
+</header><canvas id="stage" width="640" height="360"></canvas><div id="readout"></div>
+<script type="module">
+const canvas=document.querySelector('#stage'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;
+const manifest=await fetch('manifest.json').then(r=>r.json()),assets=new Map(),observations=[],errors=[];
+const local=p=>p.replace(/^assets\/m3d-feedback-visual\//,'');
+for(const c of manifest.components){
+ const atlas=await fetch(local(c.atlas)).then(r=>r.json()),im=new Image();
+ im.src=local(c.sheet);await im.decode();assets.set(c.id,{...c,atlas,im});
+}
+const sel=document.querySelector('#asset'),clipSel=document.querySelector('#clip');
+for(const c of assets.values())sel.add(new Option(c.id,c.id));
+let active=null,playing=false,light=false,composed=null,resolver=null;
+function fill(){clipSel.replaceChildren();for(const a of assets.get(sel.value).animations)clipSel.add(new Option(a.name,a.name));}
+fill();sel.onchange=()=>{fill();choose(sel.value,clipSel.value,1);};clipSel.onchange=()=>choose(sel.value,clipSel.value,1);
+function choose(id,name,cycles=1){
+ if(resolver){resolver({cancelled:true});resolver=null;}
+ const c=assets.get(id),a=c.animations.find(a=>a.name===name);if(!a)throw Error(id+'/'+name);
+ sel.value=id;fill();clipSel.value=name;composed=null;
+ active={c,a,index:0,cycles,finishedCycles:0,seen:[],started:performance.now(),frameStart:performance.now(),lastRecorded:-1};playing=true;
+ return new Promise(resolve=>{resolver=resolve;});
+}
+function draw(c,a,i,x=320,y=230,offset=true){
+ const r=c.atlas.frames[a.frames[i]].frame,off=offset?a.placementOffsetFromFeet:[0,0];
+ ctx.drawImage(c.im,r.x,r.y,r.w,r.h,Math.round(x-c.pivot[0]+off[0]),Math.round(y-c.pivot[1]+off[1]),r.w,r.h);
+}
+function tick(now){
+ ctx.fillStyle=light?'#c4c6b0':'#263a30';ctx.fillRect(0,0,640,360);
+ ctx.fillStyle=light?'#38453d':'#dac99c';ctx.font='11px sans-serif';
+ ctx.fillText('EXACT EXPORTED PIXELS • NO GAMEPLAY • 1× LOGICAL',14,20);
+ ctx.fillText('Foot/local origin: +',14,338);
+ ctx.fillRect(317,230,7,1);ctx.fillRect(320,227,1,7);
+ if(composed){for(const item of composed){const c=assets.get(item.id),a=c.animations.find(a=>a.name===item.tag);draw(c,a,item.frame??0,item.x??320,item.y??230);}}
+ else if(active){
+  const s=active;draw(s.c,s.a,s.index);
+  if(playing){
+   if(s.lastRecorded!==s.index){s.seen.push(s.a.frames[s.index]);s.lastRecorded=s.index;}
+   if(now-s.frameStart>=s.a.frameDurationsMs[s.index]){
+    if(s.index+1<s.a.frames.length){s.index++;s.frameStart=now;}
+    else{
+     s.finishedCycles++;
+     if(s.finishedCycles>=s.cycles){
+      playing=false;const result={id:s.c.id,clip:s.a.name,frameOrder:[...s.seen],expectedFrames:s.a.frames,cycles:s.finishedCycles,suggestedCycleMs:s.a.durationMsTotal,observedMs:now-s.started,pivot:s.c.pivot,origin:s.c.origin,scale:1,loop:s.a.loop};
+      observations.push(result);if(resolver){resolver(result);resolver=null;}
+     }else{s.index=0;s.lastRecorded=-1;s.frameStart=now;}
+    }
+   }
+  }
+ }
+ document.querySelector('#readout').textContent=active?active.c.id+' / '+active.a.name+'\nframe '+active.index+' • '+(playing?'playing':'stopped')+' • origin '+active.c.origin.join(',')+' • scale1':'Ready';
+ requestAnimationFrame(tick);
+}
+document.querySelector('#play').onclick=()=>choose(sel.value,clipSel.value,1);
+document.querySelector('#pause').onclick=()=>{playing=!playing;if(active)active.frameStart=performance.now();};
+document.querySelector('#light').onclick=()=>{light=!light;};
+window.addEventListener('keydown',e=>{if(e.code==='KeyA'&&!e.repeat){e.preventDefault();choose(sel.value,clipSel.value,1);}});
+window.addEventListener('error',e=>errors.push(e.message));
+window.reviewApi={assets:[...assets.values()].map(({im,atlas,...c})=>c),observations,errors,choose,
+compose(items){playing=false;composed=items;},
+background(value){light=value;},
+freeze(id,tag,index=0){sel.value=id;fill();clipSel.value=tag;const c=assets.get(id),a=c.animations.find(a=>a.name===tag);active={c,a,index};playing=false;composed=null;},
+nativePng(){return canvas.toDataURL('image/png');}
+};
+requestAnimationFrame(tick);window.reviewReady=true;
+</script></html>

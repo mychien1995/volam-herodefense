@@ -1,0 +1,383 @@
+{
+  "revision": 2,
+  "date": "2026-11-02",
+  "scope": "Art/choreography only. No production integration or authoritative gameplay values.",
+  "directorApproved": false,
+  "productionIntegrated": false,
+  "phaserProductionVerified": false,
+  "tuning": {
+    "shaolinBasicTravel": 32,
+    "viDaOffsetMultiplier": 1.3,
+    "shaolinDaoReachMultiplier": 1.2,
+    "palmCount": 8,
+    "palmIntervalMs": 220,
+    "palmTravel": 105,
+    "palmLifetimeMs": 650,
+    "sonicTravel": 55,
+    "sonicTravelMs": 360,
+    "fistTips": {
+      "left_fist": {
+        "right": [
+          19,
+          -24
+        ],
+        "left": [
+          -19,
+          -24
+        ],
+        "down": [
+          -9,
+          -19
+        ],
+        "up": [
+          6,
+          -30
+        ]
+      },
+      "right_fist": {
+        "right": [
+          23,
+          -24
+        ],
+        "left": [
+          -22,
+          -24
+        ],
+        "down": [
+          9,
+          -19
+        ],
+        "up": [
+          -6,
+          -30
+        ]
+      }
+    },
+    "blink": {
+      "departure": 2290,
+      "vanishAt": 2370,
+      "arrival": 2455,
+      "fadeInEnd": 2620,
+      "distance": 175
+    },
+    "lietPhongReachMultiplier": 1.4,
+    "groundContact": 1350,
+    "groundOffset": 28,
+    "bladeCount": 9,
+    "bladeIntervalMs": 200,
+    "bladeTravel": 100,
+    "bladeLifetimeMs": 520,
+    "dragonDistance": 200,
+    "dragonTravelMs": 850
+  },
+  "components": [
+    {
+      "id": "m3d_vo_dang_sonic_vfx_r2",
+      "mapping": [
+        "vo_dang_quyen"
+      ],
+      "source": "assets/m3d-feedback-visual/source/m3d_vo_dang_sonic_vfx_r2.aseprite",
+      "sheet": "assets/m3d-feedback-visual/exported/m3d_vo_dang_sonic_vfx_r2/m3d_vo_dang_sonic_vfx_r2.png",
+      "atlas": "assets/m3d-feedback-visual/exported/m3d_vo_dang_sonic_vfx_r2/m3d_vo_dang_sonic_vfx_r2.json",
+      "dimensions": [
+        384,
+        384
+      ],
+      "pivot": [
+        192,
+        192
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "left_fist_wave_right",
+          "frames": [
+            "left_fist_wave_right_0",
+            "left_fist_wave_right_1",
+            "left_fist_wave_right_2",
+            "left_fist_wave_right_3",
+            "left_fist_wave_right_4",
+            "left_fist_wave_right_5"
+          ],
+          "durationsMs": [
+            55,
+            55,
+            55,
+            55,
+            55,
+            55
+          ],
+          "direction": "right",
+          "phase": "release",
+          "loop": false
+        },
+        {
+          "name": "left_fist_wave_down",
+          "frames": [
+            "left_fist_wave_down_0",
+            "left_fist_wave_down_1",
+            "left_fist_wave_down_2",
+            "left_fist_wave_down_3",
+            "left_fist_wave_down_4",
+            "left_fist_wave_down_5"
+          ],
+          "durationsMs": [
+            55,
+            55,
+            55,
+            55,
+            55,
+            55
+          ],
+          "direction": "down",
+          "phase": "release",
+          "loop": false
+        },
+        {
+          "name": "left_fist_wave_left",
+          "frames": [
+            "left_fist_wave_left_0",
+            "left_fist_wave_left_1",
+            "left_fist_wave_left_2",
+            "left_fist_wave_left_3",
+            "left_fist_wave_left_4",
+            "left_fist_wave_left_5"
+          ],
+          "durationsMs": [
+            55,
+            55,
+            55,
+            55,
+            55,
+            55
+          ],
+          "direction": "left",
+          "phase": "release",
+          "loop": false
+        },
+        {
+          "name": "left_fist_wave_up",
+          "frames": [
+            "left_fist_wave_up_0",
+            "left_fist_wave_up_1",
+            "left_fist_wave_up_2",
+            "left_fist_wave_up_3",
+            "left_fist_wave_up_4",
+            "left_fist_wave_up_5"
+          ],
+          "durationsMs": [
+            55,
+            55,
+            55,
+            55,
+            55,
+            55
+          ],
+          "direction": "up",
+          "phase": "release",
+          "loop": false
+        },
+        {
+          "name": "right_fist_wave_right",
+          "frames": [
+            "right_fist_wave_right_0",
+            "right_fist_wave_right_1",
+            "right_fist_wave_right_2",
+            "right_fist_wave_right_3",
+            "right_fist_wave_right_4"
+          ],
+          "durationsMs": [
+            55,
+            55,
+            55,
+            55,
+            55
+          ],
+          "direction": "right",
+          "phase": "release",
+          "loop": false
+        },
+        {
+          "name": "right_fist_wave_down",
+          "frames": [
+            "right_fist_wave_down_0",
+            "right_fist_wave_down_1",
+            "right_fist_wave_down_2",
+            "right_fist_wave_down_3",
+            "right_fist_wave_down_4"
+          ],
+          "durationsMs": [
+            55,
+            55,
+            55,
+            55,
+            55
+          ],
+          "direction": "down",
+          "phase": "release",
+          "loop": false
+        },
+        {
+          "name": "right_fist_wave_left",
+          "frames": [
+            "right_fist_wave_left_0",
+            "right_fist_wave_left_1",
+            "right_fist_wave_left_2",
+            "right_fist_wave_left_3",
+            "right_fist_wave_left_4"
+          ],
+          "durationsMs": [
+            55,
+            55,
+            55,
+            55,
+            55
+          ],
+          "direction": "left",
+          "phase": "release",
+          "loop": false
+        },
+        {
+          "name": "right_fist_wave_up",
+          "frames": [
+            "right_fist_wave_up_0",
+            "right_fist_wave_up_1",
+            "right_fist_wave_up_2",
+            "right_fist_wave_up_3",
+            "right_fist_wave_up_4"
+          ],
+          "durationsMs": [
+            55,
+            55,
+            55,
+            55,
+            55
+          ],
+          "direction": "up",
+          "phase": "release",
+          "loop": false
+        }
+      ]
+    },
+    {
+      "id": "m3d_liet_phong_ground_vfx_r2",
+      "mapping": [
+        "liet_phong_dao"
+      ],
+      "source": "assets/m3d-feedback-visual/source/m3d_liet_phong_ground_vfx_r2.aseprite",
+      "sheet": "assets/m3d-feedback-visual/exported/m3d_liet_phong_ground_vfx_r2/m3d_liet_phong_ground_vfx_r2.png",
+      "atlas": "assets/m3d-feedback-visual/exported/m3d_liet_phong_ground_vfx_r2/m3d_liet_phong_ground_vfx_r2.json",
+      "dimensions": [
+        512,
+        384
+      ],
+      "pivot": [
+        256,
+        192
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "animations": [
+        {
+          "name": "ground_break_right",
+          "frames": [
+            "ground_break_right_0",
+            "ground_break_right_1",
+            "ground_break_right_2",
+            "ground_break_right_3",
+            "ground_break_right_4"
+          ],
+          "durationsMs": [
+            55,
+            65,
+            85,
+            100,
+            160
+          ],
+          "direction": "right",
+          "phase": "ground_impact",
+          "loop": false
+        },
+        {
+          "name": "ground_break_down",
+          "frames": [
+            "ground_break_down_0",
+            "ground_break_down_1",
+            "ground_break_down_2",
+            "ground_break_down_3",
+            "ground_break_down_4"
+          ],
+          "durationsMs": [
+            55,
+            65,
+            85,
+            100,
+            160
+          ],
+          "direction": "down",
+          "phase": "ground_impact",
+          "loop": false
+        },
+        {
+          "name": "ground_break_left",
+          "frames": [
+            "ground_break_left_0",
+            "ground_break_left_1",
+            "ground_break_left_2",
+            "ground_break_left_3",
+            "ground_break_left_4"
+          ],
+          "durationsMs": [
+            55,
+            65,
+            85,
+            100,
+            160
+          ],
+          "direction": "left",
+          "phase": "ground_impact",
+          "loop": false
+        },
+        {
+          "name": "ground_break_up",
+          "frames": [
+            "ground_break_up_0",
+            "ground_break_up_1",
+            "ground_break_up_2",
+            "ground_break_up_3",
+            "ground_break_up_4"
+          ],
+          "durationsMs": [
+            55,
+            65,
+            85,
+            100,
+            160
+          ],
+          "direction": "up",
+          "phase": "ground_impact",
+          "loop": false
+        }
+      ]
+    }
+  ],
+  "bindings": {
+    "shaolinBasic": "First three beats only: outbound local translation32; fourth roundhouse unchanged.",
+    "viDa": "Preserve canonical vi_da_quyen identity. Multiply original feet-to-eruption offset by1.3; no skill-branch change.",
+    "shaolinDao": "Move authored qi so its peak forward visible reach is1.2 times measured original bounds; never enlarge a hitbox.",
+    "nhuLai": "Eight visual emissions,220ms apart, each independent intro/glide/impact/outro; repeat retained cast pose with visual timing fit.",
+    "sonic": "Use r2 wave tags. Attach local root to fistTips per hand/direction; convex edge faces heading.360ms outward translation, no homing.",
+    "nhanKiem": "Preview actor fades at departure, vanishes, appears175 units along facing at arrival. Sword stays fixed at its endpoint through the1.5s hold. This demonstrates requested blink, not server teleport timing/authority.",
+    "lietPhong": "Longer slash plus separately authored ground-break at1350ms preview time, root28 ahead of feet. Ground layer remains below actors; ending fades over160ms.",
+    "bachLiet": "Nine distinct moving blade bursts,200ms apart; flurry extended. Phase durations remain suggestions.",
+    "khangLong": "Travel200 instead of125 in850ms instead of1050ms:1.6x distance and about1.98x apparent speed."
+  },
+  "originalAssets": "All previous source/export bytes retained; hash snapshot in source/revisions/before_feedback_r2/artifact_hashes.json",
+  "historicalEvidence": "previews/history/before_feedback_r2",
+  "validation": "previews/performance_validation.json"
+}
