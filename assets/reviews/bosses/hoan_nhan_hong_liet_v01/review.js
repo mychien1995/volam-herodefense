@@ -1,8 +1,9 @@
 const $=s=>document.querySelector(s),canvas=$('canvas'),ctx=canvas.getContext('2d');ctx.imageSmoothingEnabled=false;
+const choreography=await fetch('./choreography_v02.json').then(r=>{if(!r.ok)throw Error('Missing v02 choreography');return r.json();});
 const base='/assets/exports/bosses/hoan_nhan_hong_liet_v01/';
 const clips=[
-['idle','Boss · đứng yên',2],['walk','Boss · đi bộ',2.4],['thrust','A1 · chọc đao tầm dài',2],
-['sweep','A2 · chém 180° phía trước',2.2],['stomp','Dung Nham Liệt Địa',3.6],
+['idle','Boss · đứng yên',2],['walk','Boss · đi bộ',2.4],['thrust','A1 · ba đường đao phía trước',2],
+['sweep','A2 · chém 180° tăng tầm 50%',2.2],['stomp','Dung Nham Liệt Địa',3.6],
 ['volcano','Hỏa Sơn Bạo Phát',5],['lava','Liệt Diễm Phong Tỏa',14],
 ['archers','Hỏa Tiễn Tề Phát',6],['infantry','Thiết Kỵ Triệu Binh',5],
 ['meteors','Vạn Lý Nham Hỏa',8.4],['cannons','Hỏa Pháo Thiên La',8],['overview','Arena · tổng quan',2]];
@@ -14,15 +15,24 @@ function img(src){return new Promise((resolve,reject)=>{const im=new Image();im.
 function label(text,x,y,color='#f9dfaa'){ctx.font='12px system-ui';ctx.textAlign='center';ctx.lineWidth=3;ctx.strokeStyle='#17100be8';ctx.strokeText(text,Math.round(x),Math.round(y));ctx.fillStyle=color;ctx.fillText(text,Math.round(x),Math.round(y));}
 function command(list,id,frame,x,y,scale=1,depth=y,angle=0,alpha=1){
  const a=assets.get(id);if(!a||!a.frames[frame])throw Error('Thiếu frame '+id+':'+frame);
- list.push({a,id,frame,x,y,scale,depth,angle,alpha});
+ const item={a,id,frame,x,y,scale,depth,angle,alpha};list.push(item);return item;
 }
-function drawCommand(o){const f=o.a.frames[o.frame].frame,s=o.scale,origin=o.a.origin;
- ctx.save();ctx.translate(Math.round(o.x),Math.round(o.y));ctx.rotate(o.angle);ctx.globalAlpha=o.alpha;
- ctx.drawImage(o.a.image,f.x,f.y,f.w,f.h,Math.round(-f.w*origin[0]*s),Math.round(-f.h*origin[1]*s),Math.round(f.w*s),Math.round(f.h*s));ctx.restore();
+function drawCommand(o){const f=o.a.frames[o.frame].frame,s=o.scale,origin=o.a.origin,sx=o.scaleX??s,sy=o.scaleY??s,pivot=o.pivot??[f.w*origin[0],f.h*origin[1]];
+ ctx.save();
+ if(o.frontClip){
+  const {x,y,dir}=o.frontClip;ctx.beginPath();
+  if(dir==='down')ctx.rect(x-3000,y,6000,3000);
+  if(dir==='up')ctx.rect(x-3000,y-3000,6000,3000);
+  if(dir==='right')ctx.rect(x,y-3000,3000,6000);
+  if(dir==='left')ctx.rect(x-3000,y-3000,3000,6000);
+  ctx.clip();
+ }
+ ctx.translate(Math.round(o.x),Math.round(o.y));ctx.rotate(o.angle);ctx.globalAlpha=o.alpha;
+ ctx.drawImage(o.a.image,f.x,f.y,f.w,f.h,Math.round(-pivot[0]*sx),Math.round(-pivot[1]*sy),Math.round(f.w*sx),Math.round(f.h*sy));ctx.restore();
  if(!seen.has(o.id))seen.set(o.id,new Set());seen.get(o.id).add(o.frame);
 }
 const flat=(id,i)=>{const a=assets.get(id);return Object.keys(a.frames)[Math.min(Object.keys(a.frames).length-1,Math.max(0,i))];};
-function fx(list,id,i,x,y,s=1,depth=0,angle=0,alpha=1){command(list,id,flat(id,i),x,y,s,depth,angle,alpha);}
+function fx(list,id,i,x,y,s=1,depth=0,angle=0,alpha=1){return command(list,id,flat(id,i),x,y,s,depth,angle,alpha);}
 function boss(list,id,tag,x,y){command(list,id,tag,x,y);}
 function lerp(a,b,t){return a+(b-a)*Math.max(0,Math.min(1,t));}
 function phase(t,warn,active,end){return t<warn?'CẢNH BÁO':t<active?'RA ĐÒN':t<end?'TỒN TẠI / HỒI PHỤC':'KẾT THÚC';}
@@ -33,7 +43,7 @@ function eruption(list,id,t,x,y,scale=1,meteor=false){
  else fx(list,id,n,x,y,scale,n<2||n===7?0:y+140);
 }
 function scene(t){
- const list=[],dir=state.dir,[dx,dy]=directions[dir],clip=state.clip;
+ const list=[],dir=state.dir,[dx,dy]=directions[dir],clip=state.clip;let geometry={};
  let bx=640,by=430,stage='NGHỈ',note='Mỹ thuật thử nghiệm · chưa có hitbox/damage thật';
  let poseId='boss_locomotion',pose=dir+'_idle_'+(Math.floor(t/.4)%2?'b':'a');
  if(clip==='walk'){const n=Math.floor(t/.12)%4;pose=dir+'_walk_'+['a','b','c','d'][n];bx+=Math.round(Math.sin(t*Math.PI/1.2)*65);by+=Math.round(Math.cos(t*Math.PI/1.2)*22);stage='ĐI BỘ';note='4 hướng · chân trụ cố định · plume / áo choàng chuyển động';}
@@ -42,9 +52,23 @@ function scene(t){
   poseId=clip==='thrust'&&['up','down'].includes(dir)&&assets.has('boss_thrust_vertical')?'boss_thrust_vertical':'boss_basics';
   pose=dir+'_'+clip+'_'+n;
   if(poseId==='boss_thrust_vertical'&&(n===0||n===3))poseId='boss_basics';
-  if(t<1.4){const fi=t<.7?0:Math.min(3,1+Math.floor((t-.7)/.13));const angle=clip==='thrust'?Math.atan2(dy,dx):({down:0,left:Math.PI/2,right:-Math.PI/2,up:Math.PI})[dir];
-   fx(list,'vfx_basics',(clip==='sweep'?4:0)+fi,bx+dx*(clip==='thrust'?110:0),by+dy*(clip==='thrust'?110:0),clip==='thrust'?1.15:1.05,by+10,angle);}
-  note=clip==='thrust'?'Chọc đao: vươn xa, làn hẹp · khóa hướng khi lấy đà':'Chém: 180° trước mặt · phía sau không có vệt sát thương';
+  if(t<1.4){
+   const fi=t<.7?0:Math.min(3,1+Math.floor((t-.7)/.13));
+   if(clip==='thrust'){
+    const c=choreography.thrust,centerAngle=Math.atan2(dy,dx),x=bx+dx*c.forwardOffset,y=by-c.heightOffset+dy*c.forwardOffset;
+    for(const degrees of c.spreadDegrees){
+     const angle=centerAngle+degrees*Math.PI/180,o=fx(list,'vfx_basics',fi,x,y,1,by+10,angle);
+     Object.assign(o,{scaleX:c.scaleX,scaleY:c.scaleY,pivot:c.pivot,frontClip:{x:bx,y:by,dir},role:'a1_forward_blade'});
+    }
+    geometry={type:'three_forward_blades',spreadDegrees:[...c.spreadDegrees],simultaneous:true};
+   }else{
+    const c=choreography.sweep,angle=({down:0,left:Math.PI/2,right:-Math.PI/2,up:Math.PI})[dir];
+    const o=fx(list,'vfx_basics',4+fi,bx,by,c.previousScale*c.reachMultiplier,by+10,angle);
+    Object.assign(o,{pivot:c.pivot,frontClip:{x:bx,y:by,dir},role:'a2_front_semicircle'});
+    geometry={type:'front_semicircle',reachMultiplier:c.reachMultiplier,frontOnly:true};
+   }
+  }
+  note=clip==='thrust'?'Ba đường đao đồng thời phía trước · giữa và ±18° · khóa hướng':'Chém 180° phía trước · tầm xa tăng 50% · giữ nguyên kích thước boss';
  }
  if(clip==='stomp'){
   stage=phase(t,1,1.3,2.7);note='Dẫm đất · sóng chấn động rộng · minh họa choáng quanh boss';
@@ -83,25 +107,44 @@ function scene(t){
   pts.forEach(([x,y],i)=>eruption(list,'vfx_meteor',t-.3-i*.38,x,y,1.1,true));
  }
  if(clip==='cannons'){
-  stage=t<1.6?'CẢNH BÁO HAI LÀN NGANG':t<3.3?'PHÁO BẮN NGANG':t<4.5?'CẢNH BÁO HAI LÀN DỌC':t<6.2?'PHÁO BẮN DỌC':'THU PHÁO';
-  note='Hỏa Pháo Thiên La · 2 ngang + 2 dọc = ô cửa sổ · bắn so le';
-  const activeH=t>=1.6&&t<3.3,activeV=t>=4.5&&t<6.2;
-  if(t<6.8){
-   const cannonPose=active=>active?'fire_0':t>6.2?'recover_0':'charge_0';
-   function hardware(direction,active,x,y){
-    if(assets.has('cannon_clean')){
-     // Select observed side direction. Side rest/recoil source rows disagree;
-     // retain the valid side pose while separately animated VFX fire.
-     const col=direction==='left'?'right':direction==='right'?'left':direction;
-     const tag=['left','right'].includes(direction)?'recoil_'+col:(active&&Math.floor(t/.12)%2?'recoil_':'rest_')+direction;
-     command(list,'cannon_clean',tag,x,y);
-     if(active)fx(list,'vfx_basics',1,x+directions[direction][0]*36,y-20+directions[direction][1]*30,.20,y+6,Math.atan2(directions[direction][1],directions[direction][0]));
-    }else command(list,'cannon',direction+'_'+cannonPose(active),x,y);
+  const c=choreography.cannons,b=c.muzzleBounds,active=t>=c.warningUntil&&t<c.fireUntil;
+  stage=t<c.warningUntil?'CẢNH BÁO CẢ HAI TRỤC':t<c.fireUntil?'PHÁO NGANG + DỌC ĐỒNG THỜI':t<c.cleanupAt?'ĐẠN ĐI HẾT ARENA':'THU PHÁO';
+  note='Pháo ở bốn rìa · hai ngang + hai dọc · bắn xuyên toàn sân';
+  const routes=[];
+  for(const y of c.horizontalLanes){routes.push({axis:'horizontal',dir:'right',from:[b.left,y],to:[b.right,y]},{axis:'horizontal',dir:'left',from:[b.right,y],to:[b.left,y]});}
+  for(const x of c.verticalLanes){routes.push({axis:'vertical',dir:'down',from:[x,b.top],to:[x,b.bottom]},{axis:'vertical',dir:'up',from:[x,b.bottom],to:[x,b.top]});}
+  geometry={type:'simultaneous_perimeter_cannons',bounds:b,routes,bolts:[],simultaneous:true};
+  if(t<c.cleanupAt){
+   for(const route of routes){
+    const [vx,vy]=directions[route.dir],[mx,my]=route.from;
+    const x=mx-vx*36,y=my+20-vy*30;
+    const col=route.dir==='left'?'right':route.dir==='right'?'left':route.dir;
+    const tag=['left','right'].includes(route.dir)?'recoil_'+col:(active&&Math.floor(t/.12)%2?'recoil_':'rest_')+route.dir;
+    Object.assign(command(list,'cannon_clean',tag,x,y),{role:'perimeter_cannon',axis:route.axis,muzzle:route.from});
+    if(active){
+     const o=fx(list,'vfx_basics',1,mx,my,.20,y+6,Math.atan2(vy,vx));
+     Object.assign(o,{pivot:[65,175],role:'cannon_muzzle_flash',axis:route.axis});
+    }
+    const distance=Math.hypot(route.to[0]-mx,route.to[1]-my),travel=distance/c.projectileSpeed;
+    for(let volley=0;;volley++){
+     const spawnAt=c.warningUntil+volley*c.volleyInterval;if(spawnAt>=c.fireUntil)break;
+     const age=t-spawnAt;if(age<0||age>travel)continue;
+     const u=age/travel,px=lerp(mx,route.to[0],u),py=lerp(my,route.to[1],u),o=fx(list,'vfx_basics',1,px,py,1,py+10,Math.atan2(vy,vx));
+     Object.assign(o,{scaleX:c.boltScaleX,scaleY:c.boltScaleY,pivot:[258,175],role:'cannon_bolt',axis:route.axis,from:route.from,to:route.to,volley});
+     geometry.bolts.push({axis:route.axis,from:route.from,to:route.to,position:[px,py],spawnAt,travelSeconds:travel,volley});
+    }
    }
-   [450,650].forEach(y=>{hardware('right',activeH,340,y);hardware('left',activeH,940,y);});
-   [500,780].forEach(x=>{hardware('down',activeV,x,330);hardware('up',activeV,x,735);});
-   if(t<3.3){[450,650].forEach(y=>{if(t<1.6)fx(list,'vfx_lava_lane',0,640,y,1.48,0);else for(let j=0;j<4;j++){let u=((t-1.6)*1.1+j*.25)%1;fx(list,'vfx_basics',1,lerp(370,910,u),y-12,.35,y+5);}});}
-   if(t>=3.3&&t<6.2){[500,780].forEach(x=>{if(t<4.5)fx(list,'vfx_lava_lane',0,x,535,1.1,0,Math.PI/2);else for(let j=0;j<4;j++){let u=((t-4.5)*1.3+j*.25)%1;fx(list,'vfx_basics',1,x,lerp(360,705,u),.35,740,Math.PI/2);}});}
+   if(t<c.warningUntil){
+    const [x0,y0,x1,y1]=c.warningOpaqueBounds,pivot=[(x0+x1)/2,(y0+y1)/2],width=x1-x0;
+    for(const y of c.horizontalLanes){
+     const o=fx(list,'vfx_lava_lane',0,(b.left+b.right)/2,y,1,0);
+     Object.assign(o,{scaleX:(b.right-b.left)/width,scaleY:c.warningThicknessScale,pivot,role:'full_arena_warning',axis:'horizontal'});
+    }
+    for(const x of c.verticalLanes){
+     const o=fx(list,'vfx_lava_lane',0,x,(b.top+b.bottom)/2,1,0,Math.PI/2);
+     Object.assign(o,{scaleX:(b.bottom-b.top)/width,scaleY:c.warningThicknessScale,pivot,role:'full_arena_warning',axis:'vertical'});
+    }
+   }
   }
  }
  if(clip==='overview'){stage='ĐẠI BẢN DOANH MÔNG CỔ';note='Concept arena có sẵn · sân giữa thoáng · dung nham ngoài hàng rào';}
@@ -113,7 +156,7 @@ function scene(t){
  list.sort((a,b)=>a.depth-b.depth).forEach(drawCommand);
  if(clip!=='overview'){label('Hoàn Nhan Hồng Liệt',bx,by-80);if(state.heroes){label('Hero 44px',545,521,'#deecdd');if(clip==='stomp'&&t>=1&&t<2){label('CHOÁNG · minh họa',545,470,'#ffdc79');label('CHOÁNG · minh họa',755,465,'#ffdc79');}}}
  $('#stage strong').textContent=stage;$('#stage small').textContent=note;
- return {stage,note,boss:[bx,by],draws:list.map(o=>({asset:o.id,frame:o.frame,x:Math.round(o.x),y:Math.round(o.y)}))};
+ return {stage,note,boss:[bx,by],geometry,draws:list.map(o=>({asset:o.id,frame:o.frame,x:Math.round(o.x),y:Math.round(o.y),angle:o.angle,scaleX:o.scaleX??o.scale,scaleY:o.scaleY??o.scale,pivot:o.pivot,frontClip:o.frontClip,role:o.role,axis:o.axis,muzzle:o.muzzle,from:o.from,to:o.to,volley:o.volley}))};
 }
 let lastRender={};
 function render(){

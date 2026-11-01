@@ -37,51 +37,58 @@
     ]
   ],
   "cannons": {
+    "muzzleBounds": {
+      "left": 285,
+      "top": 190,
+      "right": 995,
+      "bottom": 680
+    },
     "horizontal": [
       [
-        340,
-        450,
+        249,
+        380,
         "right"
       ],
       [
-        940,
-        450,
+        249,
+        620,
+        "right"
+      ],
+      [
+        1031,
+        380,
         "left"
       ],
       [
-        340,
-        650,
-        "right"
-      ],
-      [
-        940,
-        650,
+        1031,
+        620,
         "left"
       ]
     ],
     "vertical": [
       [
-        500,
-        330,
+        430,
+        180,
         "down"
       ],
       [
-        780,
-        330,
+        850,
+        180,
         "down"
       ],
       [
-        500,
-        735,
+        430,
+        730,
         "up"
       ],
       [
-        780,
-        735,
+        850,
+        730,
         "up"
       ]
     ],
-    "firePattern": "horizontal first, vertical second; two crossing lanes per axis; no live damage"
+    "firePattern": "both axes warn and fire simultaneously; each projectile travels from perimeter muzzle across full arena to opposite boundary; drain in-flight projectiles before cleanup",
+    "choreography": "choreography_v02.json"
   },
   "volcanoPoints": [
     [
@@ -157,5 +164,6 @@
   ],
   "permanentLava": "outside palisade in retained concept only",
   "minionInterpretation": "infantry and archers retained concept; no cavalry/horse art yet",
-  "timings": "all proposed in review.js; not combat configuration"
+  "timings": "all proposed in review.js; not combat configuration",
+  "revision": "v02"
 }

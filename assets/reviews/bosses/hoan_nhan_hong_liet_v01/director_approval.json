@@ -1,29 +1,25 @@
 {
-  "status": "approved_visual_preview_for_phaser_integration",
+  "status": "revision_v02_pending_director_review",
   "date": "2026-11-01",
-  "directorStatement": "approve, gửi tôi prompt để integrate vào phaser, worktree wip/m3d/hoan-nhan-hong-liet",
-  "reviewedCommit": "f5f389a1",
-  "branch": "wip/m3d/hoan-nhan-hong-liet",
-  "scope": "The presented boss/arena/minion/ability visual preview and Hỏa Pháo Thiên La name. Pins identify retained inputs; excluded/rejected source cels are not promoted by being in a pinned atlas.",
+  "revisionRequestedBy": "từ từ đã art có vấn đề, A1 chọc đao tầm dài chém 3 đường về phía trước để khó né hơn; A2 tăng tầm xa; Hỏa Pháo Thiên La pháo dọc và ngang cùng lúc ở rìa arena bắn xuyên suốt arena",
+  "previousApprovalRecord": "assets/reviews/bosses/hoan_nhan_hong_liet_v01/history/director_approval_22c4b803.json",
+  "pendingScopes": [
+    "A1 three forward blade paths",
+    "A2 increased reach",
+    "Hỏa Pháo Thiên La simultaneous perimeter volleys across full arena"
+  ],
+  "retainedApprovalScope": "Unchanged character identities, retained art and unaffected skill preview. Prior approval does not approve the new v02 choreography.",
+  "proposedParameters": {
+    "A1spreadDegrees": [
+      -18,
+      0,
+      18
+    ],
+    "A2reachMultiplier": 1.5
+  },
   "runtimeIntegrated": false,
   "phaserVerified": false,
-  "multiplayerVerified": false,
-  "selectionContract": "Use reviewed choreography and selected corrected frames in review.js. vfx_meteor_safe replaces clipped fall cels; cannon_clean plus separate muzzle/projectile VFX replaces overlapping cannon source; vertical thrust uses corrected contact with original anticipation/recovery.",
-  "knownLimitations": [
-    "Arena is a retained concept composition, not a layered runtime tilemap/collision asset.",
-    "Minion cardinal attack cleanup remains necessary.",
-    "Side cannon hardware uses the observed valid pose while VFX animate; inconsistent recoil cels are not production approved.",
-    "Thiết Kỵ uses the reviewed infantry appearance; no horse/cavalry asset approved."
-  ],
-  "artifacts": [
-    {
-      "path": "assets/reviews/bosses/hoan_nhan_hong_liet_v01/review.js",
-      "sha256": "82eb480e48f53052bcce2e3bab5bea1a99d8278acfbabeb5f1e58d6f7f5362de"
-    },
-    {
-      "path": "assets/reviews/bosses/hoan_nhan_hong_liet_v01/arena_layout_v01.json",
-      "sha256": "562d40866b91ac830c5f98634246d2f9357c183964bab2d383ea4a095fdd0bda"
-    },
+  "retainedArtArtifacts": [
     {
       "path": "assets/concepts/arenas/mongolian-headquarters/arena_overview.png",
       "sha256": "2b3c14144ba141b550cf5d4ee85089b8772a7271ece78b959e7ebc7c29864d07"
@@ -147,6 +143,20 @@
     {
       "path": "assets/exports/bosses/hoan_nhan_hong_liet_v01/cannon_clean.json",
       "sha256": "45c92b4cdcacf3fe1e3794a57100fe7be4e0b981a602200f9fb0ead21b67084c"
+    }
+  ],
+  "revisionInputs": [
+    {
+      "path": "assets/reviews/bosses/hoan_nhan_hong_liet_v01/review.js",
+      "sha256": "2cca0f0917b2dbea66140c9a4309bc223382c58903d8ec1ce5946bf8dac8b842"
+    },
+    {
+      "path": "assets/reviews/bosses/hoan_nhan_hong_liet_v01/choreography_v02.json",
+      "sha256": "dd91ae086ff44228b1a1966753d5c951dfc9e63f704bfe2b9d8fae01f54c78cf"
+    },
+    {
+      "path": "assets/reviews/bosses/hoan_nhan_hong_liet_v01/arena_layout_v01.json",
+      "sha256": "12113c963c052a6a02d626f8d4f36ffd875b4bac7e282cbda344f3791317ae7b"
     }
   ]
 }

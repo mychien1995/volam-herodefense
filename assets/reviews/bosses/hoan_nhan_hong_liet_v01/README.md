@@ -3,7 +3,11 @@
 Ngày: 2026-11-01. Branch: `wip/m3d/hoan-nhan-hong-liet`.
 Trạng thái: **PROTOTYPE — CHỜ DIRECTOR REVIEW**. Chưa sửa hoặc tích hợp code Phaser, game-core, server, protocol, dữ liệu combat hay package/build configuration.
 
-## Director approval — 2026-11-01
+## Hiện tại: v02 — đang review lại A1/A2/pháo
+
+Director yêu cầu sửa sau approval v01: A1 ba đường đao phía trước; A2 tăng tầm; pháo ở rìa bắn ngang/dọc đồng thời xuyên toàn sân. Preview v02 dùng góc ±18° và A2 tăng 50% để xem thử. [Xem thay đổi, PNG và kiểm tra v02](REVISION_V02.md). Ba phần này đang chờ duyệt lại; bản ghi duyệt v01 được giữ trong history. Chưa tích hợp Phaser. Nội dung và số đo v01 bên dưới là lịch sử nơi chưa được ghi đè bởi v02.
+
+## Director approval v01 — lịch sử 2026-11-01
 
 Anh đã xác nhận “approve” cho bản preview hiện tại và yêu cầu prompt tích hợp trên cùng worktree. Trạng thái hiện tại: **APPROVED VISUAL PREVIEW FOR PHASER INTEGRATION**. [Approval record](director_approval.json) ghim SHA-256 các input; không sửa pixel/atlas, không tự duyệt cels lỗi đã loại. Phaser/combat/multiplayer chưa được tích hợp hoặc xác minh. Các mục “chờ review” bên dưới là trạng thái lịch sử tại lần giao prototype.
 
@@ -24,15 +28,15 @@ Chọn animation ở góc dưới trái; bốn nút hướng ở góc trên ph�
 | --- | --- |
 | Sprite boss | 4 hướng idle/walk; đại đao phải, giáp đen–đồng, cổ lông sáng, plume/áo choàng đỏ |
 | Arena | Tái sử dụng concept đại bản doanh đã có; bố trí boss, cửa quân, điểm phun/rơi và trận pháo riêng trong `arena_layout_v01.json` |
-| A1 | Lấy đà → chọc đao tầm dài → hồi; VFX thẳng hẹp, khóa hướng |
-| A2 | Lấy đà → chém 180° phía trước → hồi; vệt bán nguyệt, không vòng 360° |
+| A1 v02 | Lấy đà → ba đường đao hình quạt đồng thời về trước → hồi; khóa hướng |
+| A2 v02 | Chém 180° phía trước, tăng tầm 50% trong bản thử; không vòng 360° |
 | Dung Nham Liệt Địa | Nhấc chân → dẫm → chấn động rộng → nguội; chữ choáng chỉ minh họa |
 | Hỏa Sơn Bạo Phát | 5 điểm báo trước bằng dấu X → núi dung nham trồi lên → phun → nguội |
 | Liệt Diễm Phong Tỏa | Cảnh báo làn → vẩy nham thạch → đường dài/rộng tồn tại khoảng 10 giây → sẹo đá nguội |
 | Hỏa Tiễn Tề Phát | Hiệu lệnh → cung thủ đi vào từ hai cánh → kéo cung/bắn loạt; tên bay thẳng |
 | Thiết Kỵ Triệu Binh | Hiệu lệnh → thiết binh đi bộ từ hai cánh → áp sát/đánh đao |
 | Vạn Lý Nham Hỏa | 12 điểm, 3 đợt rơi so le; từng điểm cảnh báo → thiên thạch từ trời → nổ AOE rộng hơn Hỏa Sơn → nguội |
-| **Hỏa Pháo Thiên La** (tên đề xuất) | 8 pháo, 2 làn ngang + 2 làn dọc thành ô cửa sổ; cảnh báo từng trục, bắn so le, có khe né |
+| **Hỏa Pháo Thiên La** (tên đề xuất) | 8 pháo ở bốn rìa, 2 ngang + 2 dọc thành ô cửa sổ; warning và khai hỏa đồng thời, viên bay xuyên toàn sân |
 | Minion | Cung thủ và thiết binh: 4 hướng idle/walk, tư thế đánh; sprite pháo riêng |
 
 Mọi số lượng, kích thước và thời gian là **choreography đề xuất cho review**, không phải tuning đã duyệt hay luật combat. Pattern cố định giúp so sánh ảnh; chưa có RNG/server simulation, sát thương, stun thật, pathfinding hoặc loot.
@@ -41,7 +45,7 @@ Mọi số lượng, kích thước và thời gian là **choreography đề xu�
 
 1. **Nên giữ** silhouette boss và doanh trại: áo choàng đỏ/cổ lông sáng phân biệt boss với quân; sân giữa trống cho né AOE, dung nham thường trực ở ngoài hàng rào. Boss dùng mục tiêu cao khoảng 64px, hero giữ sprite đã có khoảng 44px; canvas lớn hơn chỉ để chứa vũ khí.
 2. **Cần giảm chồng hiệu ứng cam**: nên tách nhịp Hỏa Sơn, Vạn Lý và làn nham thạch, giữ viền đá/ash sáng. Cảnh báo hiện còn khá giống màu sát thương; trước production nên làm warning mảnh và khác độ sáng/pattern hơn, giữ lối thoát.
-3. **Hỏa Pháo Thiên La hợp arena**: ô cửa sổ dễ đọc; bắn so le hai trục giúp kiểm tra cảm giác né trước khi thử biến thể bắn đồng thời. Chưa đo tốc độ chạy/khả năng né bằng server nên chưa thể kết luận pattern công bằng.
+3. **Hỏa Pháo Thiên La hợp arena**: ô cửa sổ dễ đọc. Yêu cầu v02 đã thay bắn so le bằng khai hỏa hai trục đồng thời từ rìa arena. Chưa đo tốc độ chạy/khả năng né bằng server nên chưa thể kết luận pattern công bằng.
 4. **Thiết Kỵ đang dùng bộ binh** theo concept quân Mông Cổ đã có và mô tả “gọi quân lính”. Nếu cần đúng kỵ binh, phải bổ sung ngựa và animation cưỡi/phi/đánh; bản này không giả nhận có ngựa.
 5. **Cleanup còn cần**: hướng đánh dọc của cung thủ/thiết binh còn xoay ngang ở một số cels; thân pháo ngang giữ cel đúng hướng khi phát VFX vì rest/recoil của nguồn không nhất quán. Đây là các candidate chưa đạt chuẩn production, không được coi bốn hướng attack đã duyệt.
 6. **Arena hiện là ảnh concept**, không phải môi trường đã tách lớp hoặc tilemap/collision. Chưa kiểm tra Y-sort/occlusion, camera follow, sáu người đánh thật hoặc performance trong Phaser. Hurt/death và audio chưa thuộc bộ thử được yêu cầu.
