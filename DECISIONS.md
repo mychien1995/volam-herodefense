@@ -1,3 +1,7 @@
+## Lý Mạc Sầu selector correction — 2026-11-01
+
+The director explicitly requests Lý Mạc Sầu as a peer dungeon card alongside Hồng Liệt and Chu Bá Thông, replacing the separate options-row button. Keep destination `co_mo`, private/shared access, server authority and the existing encounter unchanged. The retained approved Cổ Mộ arena illustration supplies the menu thumbnail without new art generation.
+
 ## Lý Mạc Sầu merge authorization — 2026-11-01
 
 The director explicitly requests committing and merging the existing approved Lý Mạc Sầu integration into `milestone/m3d`, retaining current features and retesting the Cổ Mộ selector. This supersedes the earlier worktree-only delivery scope. Existing Forest/Desert/Beach, Hồng Liệt, Chu Bá Thông, school progression and Chu item transactions remain; Cổ Mộ pending claims stay separate. This merge approves delivery scope, not new artwork, final boss tuning or full M4 inventory. Exact merge/verification: `docs/LY_MAC_SAU_INTEGRATION.md`.

@@ -90,6 +90,11 @@ export function prepareLyMacSau() {
       });
     }
   }
+  // Retained approved illustration is a menu thumbnail, separate from the runtime tilemap.
+  copy(
+    'assets/concepts/arenas/co-mo-phai/arena_empty_review_v02.png',
+    'arena_preview.png',
+  );
   const env = 'assets/sprites/environment/co-mo-phai';
   copy(env + '/terrain.png', 'terrain.png');
   copy(env + '/spritesheet.png', 'scenery.png');

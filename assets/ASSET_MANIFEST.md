@@ -85,3 +85,7 @@ DIRECTOR_APPROVED_PREVIEW_PENDING_GAMEPLAY_INTEGRATION. Three new original built
 ## Approved animation runtime integration — 2026-11-01
 
 The subsequent director instruction authorizes gameplay integration on `wip/m3d/animation-change`, superseding the historical preview-only deferral above. The same three PNG/JSON VFX components and retained choreography are consumed under exact115-file hash verification. No artwork regenerated. See `docs/ANIMATION_CHANGE_INTEGRATION.md` for server-driven adapters, real multiplayer evidence and provisional tuning.
+
+## Cổ Mộ dungeon card — 2026-11-01
+
+The Lý Mạc Sầu selector card reuses `assets/concepts/arenas/co-mo-phai/arena_empty_review_v02.png` byte-for-byte as `/assets/co_mo/arena_preview.png`. This is an original image_gen illustration with retained provenance/prompts and explicit preview approval in `assets/reviews/ly_mac_sau_v02/art_approval_v02.json`; preparation verifies that lock and the validator checks public-copy equality. Usage is a menu thumbnail, not playable-map artwork or a new art generation/approval. Runtime environment still uses the existing Tiled map, tiles and props.

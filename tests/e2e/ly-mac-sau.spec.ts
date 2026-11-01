@@ -76,7 +76,7 @@ async function fixture(
 }
 async function enter(p: Page, access = 'shared') {
   await p.getByRole('button', { name: 'Phó Bản', exact: true }).click();
-  await p.getByRole('button', { name: 'Cổ Mộ Phái', exact: true }).click();
+  await p.getByRole('button', { name: 'Lý Mạc Sầu', exact: true }).click();
   await p
     .getByRole('radio', {
       name: access === 'shared' ? 'Chung' : 'Riêng',
@@ -459,7 +459,7 @@ test('M3D selector retains existing dungeons and enters Cổ Mộ through normal
     ['sea', 'Biển'],
     ['hong_liet', 'Hoàn Nhan Hồng Liệt'],
     ['chu_ba_thong', 'Chu Bá Thông'],
-    ['co_mo', 'Cổ Mộ Phái'],
+    ['co_mo', 'Lý Mạc Sầu'],
   ] as const;
   const entries: Array<{ destination: string; zone: string }> = [];
   for (const [destination, label] of destinations) {
@@ -484,15 +484,51 @@ test('M3D selector retains existing dungeons and enters Cổ Mộ through normal
           p.getByRole('button', { name, exact: true }),
         ).toHaveAttribute('aria-disabled', 'false');
       await p.getByRole('button', { name: label, exact: true }).click();
-      await expect(p.locator('#dungeon-entry-note')).toContainText(label);
+      await expect(p.locator('#dungeon-entry-note')).toContainText(
+        destination === 'co_mo' ? 'Cổ Mộ Phái' : label,
+      );
       if (destination === 'co_mo') {
-        for (const width of [1280, 1920]) {
+        for (const width of [960, 1280, 1920]) {
           await p.setViewportSize({
             width,
-            height: width === 1920 ? 1080 : 720,
+            height: width === 1920 ? 1080 : width === 960 ? 600 : 720,
           });
+          const card = p.locator('.destinations > [data-destination="co_mo"]');
+          await expect(card).toHaveCount(1);
+          await expect(
+            p.locator('.dungeon-options [data-destination]'),
+          ).toHaveCount(0);
+          await expect(card).toHaveAttribute('aria-pressed', 'true');
+          await expect(card.locator('.destination-check')).toBeVisible();
+          await expect
+            .poll(() =>
+              card
+                .locator('img')
+                .evaluate(
+                  (n: HTMLImageElement) => n.complete && n.naturalWidth > 0,
+                ),
+            )
+            .toBe(true);
+          const bounds = (await card.boundingBox())!;
+          expect(
+            (await card.locator('img').boundingBox())!.height,
+          ).toBeGreaterThan(30);
+          for (const boss of ['hong_liet', 'chu_ba_thong']) {
+            const peer = (await p
+              .locator(`.destinations > [data-destination="${boss}"]`)
+              .boundingBox())!;
+            expect(Math.abs(bounds.y - peer.y)).toBeLessThanOrEqual(1);
+            expect(Math.abs(bounds.width - peer.width)).toBeLessThanOrEqual(1);
+            expect(Math.abs(bounds.height - peer.height)).toBeLessThanOrEqual(
+              1,
+            );
+          }
           const viewport = (await p.locator('#viewport').boundingBox())!;
           const dialog = (await p.getByRole('dialog').boundingBox())!;
+          expect(bounds.y).toBeGreaterThanOrEqual(dialog.y);
+          expect(bounds.y + bounds.height).toBeLessThanOrEqual(
+            dialog.y + dialog.height,
+          );
           expect(dialog.x).toBeGreaterThanOrEqual(viewport.x);
           expect(dialog.y).toBeGreaterThanOrEqual(viewport.y);
           expect(dialog.x + dialog.width).toBeLessThanOrEqual(
@@ -530,7 +566,15 @@ test('M3D selector retains existing dungeons and enters Cổ Mộ through normal
   writeFileSync(
     `${out}/selector-regression.json`,
     JSON.stringify(
-      { status: 'PASS', entries, normalUiOnly: true, recordingsCreated: false },
+      {
+        status: 'PASS',
+        entries,
+        bossCardsSameRow: true,
+        thumbnailLoaded: true,
+        viewportWidths: [960, 1280, 1920],
+        normalUiOnly: true,
+        recordingsCreated: false,
+      },
       null,
       2,
     ),

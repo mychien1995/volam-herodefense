@@ -1,12 +1,20 @@
 # Lý Mạc Sầu / Cổ Mộ Phái — runtime integration
 
+## Peer dungeon card correction — 2026-11-01
+
+The director requests Lý Mạc Sầu as a peer dungeon room in the same destination grid as Hồng Liệt and Chu Bá Thông. It now has a full equal-sized card titled **Lý Mạc Sầu**, subtitle **Cổ Mộ Phái · Thủ lĩnh**, and the retained approved cave illustration. The old options-row button and its CSS are removed; select the card, choose Riêng/Chung, then use the common **Vào Phó Bản** action. Destination `co_mo`, protocol and encounter mechanics remain unchanged. The illustration is copied byte-for-byte for the menu only; the asset validator checks equality with its approved source.
+
+Executed `$env:LY_MAC_SAU_QA_EVIDENCE_DIR='docs/evidence/ly-mac-sau-dungeon-card'; pnpm check:final --config playwright.ly-mac-sau.config.ts tests/e2e/ly-mac-sau.spec.ts --grep 'M3D selector'`: **PASS in191.57s**, project/tool typechecks,18 workflow checks,445 unit/integration tests, production build,15 asset validators and the relevant live browser selector case. It entered all six supported destinations via normal UI; checked the three boss cards share a row and dimensions, thumbnail loaded, selection/check state, no options-row destination, and in-viewport overlay bounds at960×600,1280×720 and1920×1080. All three PNGs were opened: peer cards and selection are visible; retained title-font accent spacing remains. No boss gameplay/artwork/recording changes or new six-client combat claim.
+
+New [verification](evidence/ly-mac-sau-dungeon-card/verification.json), [pipeline](evidence/ly-mac-sau-dungeon-card/check-final-stages.json), [browser report](evidence/ly-mac-sau-dungeon-card/selector-regression.json), [1280 menu](evidence/ly-mac-sau-dungeon-card/dungeon-selector-1280.png), [960 menu](evidence/ly-mac-sau-dungeon-card/dungeon-selector-960.png), [1920 menu](evidence/ly-mac-sau-dungeon-card/dungeon-selector-1920.png). Previous merge evidence below is historical and preserved.
+
 ## Follow-up: merged into milestone/m3d — 2026-11-01
 
 The director explicitly requested committing and merging this integration into `milestone/m3d`, preserving existing features and retesting selection. Source worktree changes are committed as `4af60478`; the merge target is `D:/Projects/volam-hero-defense`, base `ac08a6f0`. Earlier isolated-worktree descriptions and protocol14 details below are historical; the combined schema is **protocol16**.
 
 The merge retains Forest/Desert/Beach, Hoàn Nhan Hồng Liệt and Chu Bá Thông. Their registry entries, loaders/renderers, encounter clocks, Chu roll/pass and pickup/sell/drop requests, owned items and school/progression features remain. Cổ Mộ uses its separate adapter, countdown and pending loot claims. A `CoMoBossCast` type avoids the existing Hồng Liệt export name; existing crowd-control scaling is preserved separately from Cổ Mộ resistance. Approved raster bytes are unchanged; exact approved metadata line endings are pinned for checkout reproducibility.
 
-**Play from the main checkout:** restart any older dev processes, run `start-game.cmd` (or `pnpm dev`) in `D:/Projects/volam-hero-defense`, reload the client, join/start a normal match and open **Phó Bản**. Click **Cổ Mộ Phái · Lý Mạc Sầu** in the lower options row, choose **Riêng/Chung**, then **Vào Phó Bản**. Use Space at the south exit. Both client and server must use the merged protocol.
+**Play from the main checkout:** restart any older dev processes, run `start-game.cmd` (or `pnpm dev`) in `D:/Projects/volam-hero-defense`, reload the client, join/start a normal match and open **Phó Bản**. Select the **Lý Mạc Sầu** destination card (subtitle **Cổ Mộ Phái · Thủ lĩnh**) alongside Hồng Liệt and Chu Bá Thông, choose **Riêng/Chung**, then **Vào Phó Bản**. Use Space at the south exit. Both client and server must use the merged protocol.
 
 Final executed command (PowerShell):
 

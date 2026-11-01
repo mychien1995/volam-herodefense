@@ -12,6 +12,7 @@ approval=read('assets/reviews/ly_mac_sau_v02/art_approval_v02.json')
 assert approval['status']=='art_preview_approved'
 for f in approval['files']: assert sha(f['path'])==f['sha256'],f['path']
 subprocess.run([sys.executable,'-X','utf8','assets/reviews/ly_mac_sau_v02/verify_assets.py'],cwd=ROOT,check=True,stdout=subprocess.PIPE)
+assert sha('apps/game-client/public/assets/co_mo/arena_preview.png')==sha('assets/concepts/arenas/co-mo-phai/arena_empty_review_v02.png')
 manifest=read('apps/game-client/public/assets/co_mo/manifest.json')
 assert sum(len(a['frames']) for p in manifest['assets'] for a in p['animations'])==192
 for actor,folder in [('boss_ly_mac_sau','assets/sprites/bosses/ly-mac-sau'),('summon_co_mo_am_binh','assets/sprites/summons/co-mo-am-binh'),('co_mo_fx','assets/effects/bosses/ly-mac-sau'),('co_mo_purple','assets/effects/bosses/ly-mac-sau/purple_v02')]:
