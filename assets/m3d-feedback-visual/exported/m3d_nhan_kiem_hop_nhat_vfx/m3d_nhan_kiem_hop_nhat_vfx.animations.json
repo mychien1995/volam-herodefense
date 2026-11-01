@@ -1,0 +1,649 @@
+{
+  "id": "m3d_nhan_kiem_hop_nhat_vfx",
+  "role": "vfx",
+  "canvas": [
+    384,
+    384
+  ],
+  "pivot": [
+    192,
+    192
+  ],
+  "mapping": [
+    "nhan_kiem_hop_nhat"
+  ],
+  "sourceFile": "assets/m3d-feedback-visual/source/m3d_nhan_kiem_hop_nhat_vfx.aseprite",
+  "individualDirectory": "assets/m3d-feedback-visual/exported/m3d_nhan_kiem_hop_nhat_vfx/frames",
+  "frameDimensions": [
+    384,
+    384
+  ],
+  "displayScale": 1,
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "animations": [
+    {
+      "name": "launch_right",
+      "phase": "launch",
+      "direction": "right",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -24
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "launch_right_0",
+        "launch_right_1",
+        "launch_right_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 240,
+      "frameDurationsMs": [
+        80,
+        80,
+        80
+      ],
+      "frameRate": 12.5,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 12.5
+    },
+    {
+      "name": "flight_loop_right",
+      "phase": "travel",
+      "direction": "right",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "frames": [
+        "flight_loop_right_0",
+        "flight_loop_right_1",
+        "flight_loop_right_2",
+        "flight_loop_right_3",
+        "flight_loop_right_4",
+        "flight_loop_right_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 600,
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "hold_right",
+      "phase": "hold",
+      "direction": "right",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "holdDurationSuggestionMs": 1500,
+      "nonDamagingVisual": true,
+      "frames": [
+        "hold_right_0"
+      ],
+      "frameCount": 1,
+      "durationMsTotal": 1500,
+      "frameDurationsMs": [
+        1500
+      ],
+      "frameRate": 0.6666666666666666,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 0.6666666666666666
+    },
+    {
+      "name": "recall_outro_right",
+      "phase": "outro",
+      "direction": "right",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "recall_outro_right_0",
+        "recall_outro_right_1",
+        "recall_outro_right_2",
+        "recall_outro_right_3",
+        "recall_outro_right_4"
+      ],
+      "frameCount": 5,
+      "durationMsTotal": 350,
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "frameRate": 14.285714285714286,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 14.285714285714286
+    },
+    {
+      "name": "launch_down",
+      "phase": "launch",
+      "direction": "down",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -24
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "launch_down_0",
+        "launch_down_1",
+        "launch_down_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 240,
+      "frameDurationsMs": [
+        80,
+        80,
+        80
+      ],
+      "frameRate": 12.5,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 12.5
+    },
+    {
+      "name": "flight_loop_down",
+      "phase": "travel",
+      "direction": "down",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "frames": [
+        "flight_loop_down_0",
+        "flight_loop_down_1",
+        "flight_loop_down_2",
+        "flight_loop_down_3",
+        "flight_loop_down_4",
+        "flight_loop_down_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 600,
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "hold_down",
+      "phase": "hold",
+      "direction": "down",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "holdDurationSuggestionMs": 1500,
+      "nonDamagingVisual": true,
+      "frames": [
+        "hold_down_0"
+      ],
+      "frameCount": 1,
+      "durationMsTotal": 1500,
+      "frameDurationsMs": [
+        1500
+      ],
+      "frameRate": 0.6666666666666666,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 0.6666666666666666
+    },
+    {
+      "name": "recall_outro_down",
+      "phase": "outro",
+      "direction": "down",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "recall_outro_down_0",
+        "recall_outro_down_1",
+        "recall_outro_down_2",
+        "recall_outro_down_3",
+        "recall_outro_down_4"
+      ],
+      "frameCount": 5,
+      "durationMsTotal": 350,
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "frameRate": 14.285714285714286,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 14.285714285714286
+    },
+    {
+      "name": "launch_left",
+      "phase": "launch",
+      "direction": "left",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -24
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "launch_left_0",
+        "launch_left_1",
+        "launch_left_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 240,
+      "frameDurationsMs": [
+        80,
+        80,
+        80
+      ],
+      "frameRate": 12.5,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 12.5
+    },
+    {
+      "name": "flight_loop_left",
+      "phase": "travel",
+      "direction": "left",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "frames": [
+        "flight_loop_left_0",
+        "flight_loop_left_1",
+        "flight_loop_left_2",
+        "flight_loop_left_3",
+        "flight_loop_left_4",
+        "flight_loop_left_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 600,
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "hold_left",
+      "phase": "hold",
+      "direction": "left",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "holdDurationSuggestionMs": 1500,
+      "nonDamagingVisual": true,
+      "frames": [
+        "hold_left_0"
+      ],
+      "frameCount": 1,
+      "durationMsTotal": 1500,
+      "frameDurationsMs": [
+        1500
+      ],
+      "frameRate": 0.6666666666666666,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 0.6666666666666666
+    },
+    {
+      "name": "recall_outro_left",
+      "phase": "outro",
+      "direction": "left",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "recall_outro_left_0",
+        "recall_outro_left_1",
+        "recall_outro_left_2",
+        "recall_outro_left_3",
+        "recall_outro_left_4"
+      ],
+      "frameCount": 5,
+      "durationMsTotal": 350,
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "frameRate": 14.285714285714286,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 14.285714285714286
+    },
+    {
+      "name": "launch_up",
+      "phase": "launch",
+      "direction": "up",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -24
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "launch_up_0",
+        "launch_up_1",
+        "launch_up_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 240,
+      "frameDurationsMs": [
+        80,
+        80,
+        80
+      ],
+      "frameRate": 12.5,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 12.5
+    },
+    {
+      "name": "flight_loop_up",
+      "phase": "travel",
+      "direction": "up",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "frames": [
+        "flight_loop_up_0",
+        "flight_loop_up_1",
+        "flight_loop_up_2",
+        "flight_loop_up_3",
+        "flight_loop_up_4",
+        "flight_loop_up_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 600,
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "hold_up",
+      "phase": "hold",
+      "direction": "up",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "holdDurationSuggestionMs": 1500,
+      "nonDamagingVisual": true,
+      "frames": [
+        "hold_up_0"
+      ],
+      "frameCount": 1,
+      "durationMsTotal": 1500,
+      "frameDurationsMs": [
+        1500
+      ],
+      "frameRate": 0.6666666666666666,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 0.6666666666666666
+    },
+    {
+      "name": "recall_outro_up",
+      "phase": "outro",
+      "direction": "up",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        0
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "recall_outro_up_0",
+        "recall_outro_up_1",
+        "recall_outro_up_2",
+        "recall_outro_up_3",
+        "recall_outro_up_4"
+      ],
+      "frameCount": 5,
+      "durationMsTotal": 350,
+      "frameDurationsMs": [
+        70,
+        70,
+        70,
+        70,
+        70
+      ],
+      "frameRate": 14.285714285714286,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 14.285714285714286
+    },
+    {
+      "name": "blink_departure",
+      "phase": "departure",
+      "direction": "nondirectional",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -24
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "blink_departure_0",
+        "blink_departure_1",
+        "blink_departure_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 165,
+      "frameDurationsMs": [
+        55,
+        55,
+        55
+      ],
+      "frameRate": 18.181818181818183,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 18.181818181818183
+    },
+    {
+      "name": "blink_arrival",
+      "phase": "arrival",
+      "direction": "nondirectional",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -24
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "blink_arrival_0",
+        "blink_arrival_1",
+        "blink_arrival_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 165,
+      "frameDurationsMs": [
+        55,
+        55,
+        55
+      ],
+      "frameRate": 18.181818181818183,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 18.181818181818183
+    }
+  ],
+  "sheet": "assets/m3d-feedback-visual/exported/m3d_nhan_kiem_hop_nhat_vfx/m3d_nhan_kiem_hop_nhat_vfx.png",
+  "atlas": "assets/m3d-feedback-visual/exported/m3d_nhan_kiem_hop_nhat_vfx/m3d_nhan_kiem_hop_nhat_vfx.json",
+  "status": "preview-validated",
+  "directorApproved": false,
+  "timingAuthority": "All duration/FPS and anchors are visual suggestions. Never infer damage, hitboxes or cooldowns from frames.",
+  "productionIntegrated": false,
+  "phaserProductionVerified": false,
+  "opaqueWorldBoundsUnion": [
+    -43,
+    -28,
+    44,
+    29
+  ]
+}
