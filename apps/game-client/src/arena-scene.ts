@@ -2,6 +2,7 @@ import { KimLuanRenderer, isKimActor } from './kim-luan-art.js';
 import { ChuPresentation } from './chu-presentation.js';
 import { HongLietRenderer, isHongLietActor } from './hong-liet-art.js';
 import Phaser from 'phaser';
+import { m3dBambooPose } from './m3d-feedback.js';
 import {
   CoMoEffects,
   coMoCreepArt,
@@ -331,7 +332,12 @@ export class ArenaScene extends Phaser.Scene {
             actor.fy,
             actor.hp,
           )
-        : undefined;
+        : m3dBambooPose(
+            actor.archetypeId,
+            actor.hp <= 0 ? 'death' : actor.pose,
+            actor.fx,
+            actor.fy,
+          );
       const texture =
         cast?.texture ??
         (enemy
@@ -344,12 +350,17 @@ export class ArenaScene extends Phaser.Scene {
           actor.x,
           actor.y,
           enemy,
-          enemy ? texture : heroTexture(actor.basicId, actor.schoolId),
+          enemy
+            ? (art?.id ?? texture)
+            : heroTexture(actor.basicId, actor.schoolId),
         );
       view.creepArt = art;
       if (actor.hp > 0 && view.lastHp <= 0) view.playback = new CreepPlayback();
       view.lastHp = actor.hp;
-      const weight = Math.min(1, delta / 45);
+      const blinkAlpha = !enemy ? (this.vfx?.actorAlpha(id) ?? 1) : 1;
+      // A confirmed blink snaps the rendered feet to replicated position before
+      // fading in. It must not look like ordinary interpolated movement.
+      const weight = blinkAlpha < 1 ? 1 : Math.min(1, delta / 45);
       view.sprite
         .setPosition(
           Math.round(Phaser.Math.Linear(view.sprite.x, actor.x, weight)),
@@ -389,7 +400,7 @@ export class ArenaScene extends Phaser.Scene {
       const key =
         cast?.animation ??
         `${texture}:${pose.state === 'cast' && this.vfx?.suppressesCastPose(id) ? 'idle' : pose.state}:${pose.direction}`;
-      if (!enemy) view.sprite.setScale(cast?.scale ?? 1);
+      if (!enemy) view.sprite.setScale(cast?.scale ?? 1).setAlpha(blinkAlpha);
       if (art) {
         const alpha = view.playback.alpha(this.time.now, art.wave === 10);
         view.sprite.setAlpha(alpha);

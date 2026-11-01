@@ -79,7 +79,7 @@ export class GameUI {
                   `<div id="slot-${key}" class="hotbar-slot ${key === 'e' || key === 'r' ? 'unequipped' : ''}" title="${title}">${icon(art!)}<kbd>${key!.toUpperCase()}</kbd><b id="timer-${key}" class="cooldown-number"></b><small id="cooldown-${key}">${key === 'q' ? '18 NL' : key === 'w' ? '25 NL' : key === 'a' ? 'Bổng' : 'Trống'}</small><div class="cooldown-shade"></div></div>`,
               )
               .join('')}
-            <div id="dash-status" class="dash-status" role="status" aria-label="Lướt · Shift"><span aria-hidden="true">»</span><b id="dash-charges">2</b><kbd>Shift</kbd><small id="dash-timer"></small><progress id="dash-progress" max="180" value="180" aria-label="Hồi lượt lướt"></progress></div>
+            <div id="dash-status" class="dash-status" role="status" aria-label="Lướt · Shift"><img src="/assets/m3d_feedback/dash_icon_frame.png" alt="" width="32" height="32"><b id="dash-charges">2</b><kbd>Shift</kbd><small id="dash-timer"></small><progress id="dash-progress" max="180" value="180" aria-label="Hồi lượt lướt"></progress></div>
             <button class="loadout-toggle" data-menu="skills" title="Võ Học · P" aria-label="Võ Học · P">◇<span id="available-points"></span></button>
           </section>
           <p id="scene-status" class="scene-ready" aria-hidden="true">${artPreview ? 'XEM TRƯỚC HÌNH ẢNH' : ''}</p>

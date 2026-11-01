@@ -1,4 +1,5 @@
 import { prepareKimAssets } from './prepare-kim-assets.mjs';
+import { prepareM3dFeedbackArt } from './prepare-m3d-feedback-art.mjs';
 import { prepareChuAssets } from './prepare-chu-assets.mjs';
 import { mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -46,6 +47,7 @@ for (const [name, label] of [
 }
 const dest = new URL('apps/game-client/public/assets/', root);
 prepareKimAssets();
+prepareM3dFeedbackArt();
 prepareChuAssets();
 prepareFeedbackV2Art();
 const skills = JSON.parse(

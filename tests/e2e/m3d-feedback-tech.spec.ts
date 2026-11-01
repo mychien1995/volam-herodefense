@@ -49,14 +49,17 @@ const hero = async (p: Page) => {
 const evidence = qaEvidenceDirectory('docs/evidence/m3d-feedback-tech');
 async function fixture(p: Page, data: Record<string, unknown>) {
   const s = await read(p),
-    r = await fetch('http://127.0.0.1:2878/fixture', {
-      method: 'POST',
-      body: JSON.stringify({
-        roomId: s.roomId,
-        sessionId: s.sessionId,
-        ...data,
-      }),
-    });
+    r = await fetch(
+      `http://127.0.0.1:${process.env['VOLAM_QA_FIXTURE_PORT'] ?? 2878}/fixture`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          roomId: s.roomId,
+          sessionId: s.sessionId,
+          ...data,
+        }),
+      },
+    );
   expect(r.ok, await r.text()).toBe(true);
 }
 async function focus(p: Page) {
@@ -361,10 +364,11 @@ test('legal-build fixture: Cái Bang moving rank4 burn and foot-aligned armor sl
   const slam = await page.evaluate<
     { x: number; y: number; origin: number[] } | undefined
   >(
-    "window.__VOLAM__.presentation().skills.feedback.transient.find(v => v.texture === 'bong_controls_v2_ground')",
+    "window.__VOLAM__.presentation().skills.m3d.clips.find(v => v.texture === 'm3d_pha_giap_bong_vfx' && v.tag === 'foot_explosion')",
   );
   expect(slam).toBeDefined();
-  expect(slam!.origin).toEqual([0.5, 0.625]);
+  expect(slam!.origin).toEqual([0.5, 0.5]);
+  expect(Math.abs(slam!.x - (await hero(page)).x)).toBeLessThan(1);
   expect(Math.abs(slam!.y - (await hero(page)).y)).toBeLessThan(1);
   await writeFile(
     evidence + '/cai-bang-observation.json',

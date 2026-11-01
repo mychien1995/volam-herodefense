@@ -3,6 +3,10 @@ import baseSetup from './global-setup.js';
 import { createServer } from 'node:http';
 import { matchMaker } from '@colyseus/core';
 import { gainExperience, changeBuild, addCreep } from '@volam/game-core';
+import {
+  cancelOwnedEffects,
+  applyStatus,
+} from '../../packages/game-core/src/status.js';
 import { m1Config } from '@volam/game-data';
 import type { MatchRoom } from '../../apps/game-server/src/rooms/MatchRoom.js';
 export default async function setup() {
@@ -41,6 +45,26 @@ export default async function setup() {
           for (const skillId of input.ids.filter(Boolean))
             if (r < m1Config.progression!.skills[skillId]!.ranks.length)
               change({ action: 'upgrade', skillId });
+      } else if (input.action === 'restore') {
+        cancelOwnedEffects(z.world, h.id);
+        h.hp = h.maxHp;
+        h.mana = h.maxMana;
+        h.skillCooldowns.fill(0);
+        h.abilityCooldowns = {};
+        h.cooldown = z.world.tick;
+        h.actionUntil = z.world.tick;
+        h.pose = 'idle';
+        h.castAbilityId = '';
+      } else if (input.action === 'stun') {
+        applyStatus(
+          h,
+          { kind: 'stun', durationTicks: 60, magnitude: 1 },
+          'fixture',
+          'fixture_stun',
+          z.world.tick,
+        );
+      } else if (input.action === 'kill') {
+        h.hp = 0;
       } else if (input.action === 'position') {
         h.x = input.x;
         h.y = input.y;
@@ -78,7 +102,11 @@ export default async function setup() {
   try {
     await new Promise<void>((resolve, reject) => {
       fixture.once('error', reject);
-      fixture.listen(2878, '127.0.0.1', resolve);
+      fixture.listen(
+        Number(process.env['VOLAM_QA_FIXTURE_PORT'] ?? 2878),
+        '127.0.0.1',
+        resolve,
+      );
     });
   } catch (e) {
     await cleanup();

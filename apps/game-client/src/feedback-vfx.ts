@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { m3dSkillIds } from './m3d-feedback-policy.js';
 import { approvedSkillIds } from './approved-skill-ids.js';
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
@@ -937,7 +938,7 @@ export class FeedbackVfx {
         }
       }
       for (const [skill, b] of Object.entries(feedbackBindings)) {
-        if (approvedSkillIds.has(skill)) continue;
+        if (approvedSkillIds.has(skill) || m3dSkillIds.has(skill)) continue;
         if (!b.sustain) continue;
         b.sustain.forEach((d, index) => {
           if (
