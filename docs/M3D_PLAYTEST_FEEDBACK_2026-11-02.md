@@ -2,7 +2,7 @@
 
 ## Milestone integration authorization — 2026-11-03
 
-Sau approval và retrospective, director yêu cầu rõ: “ok hãy integrate vào milestone/m3d”. Chỉ thị này supersede các câu chưa merge/không merge ở lịch sử bên dưới. Kết hợp feedback với milestone3b0c1ebc (Hell, inventory/merchant/potions); cập nhật canonical skill MD và bộ nhớ repository. Trạng thái, commit và kiểm chứng cuối: [M3D_MILESTONE_INTEGRATION_2026-11-03.md](M3D_MILESTONE_INTEGRATION_2026-11-03.md).
+Sau approval và retrospective, director yêu cầu rõ: “ok hãy integrate vào milestone/m3d”. Chỉ thị này supersede các câu chưa merge/không merge ở lịch sử bên dưới. Đã kết hợp feedback với milestone3b0c1ebc (Hell, inventory/merchant/potions), merge e69dc456 vào milestone/m3d; canonical skill MD và bộ nhớ repository đã cập nhật. Trạng thái, commit và kiểm chứng cuối: [M3D_MILESTONE_INTEGRATION_2026-11-03.md](M3D_MILESTONE_INTEGRATION_2026-11-03.md).
 
 ## Director approval — 2026-11-03
 
