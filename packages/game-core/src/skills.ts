@@ -353,7 +353,13 @@ export function perform(
             dy = e.y - hero.y;
           return (
             dx * hero.fx + dy * hero.fy >= 0 &&
-            Math.abs(dx * hero.fy - dy * hero.fx) <= 50 &&
+            Math.abs(dx * hero.fy - dy * hero.fx) <=
+              Math.max(
+                0,
+                ...(original.projectileBurst?.laneOffsets ?? []).map(Math.abs),
+              ) +
+                (original.projectileBurst?.radius ?? 0) +
+                (e.stats ?? config.creep).radius &&
             distance(e, hero) <=
               original.range + (e.stats ?? config.creep).radius
           );

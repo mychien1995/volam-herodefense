@@ -2,6 +2,7 @@ import { dungeonWaypoint } from './dungeon-navigation.js';
 import { dash, blink, rechargeDash } from './mobility.js';
 import { stepChu, constrainChuTrap } from './chu-ba-thong.js';
 import { expireCombos } from './combos.js';
+import { bufferComboFinisher, takeComboFinisher } from './combo-finisher.js';
 import { stepBossEncounter } from './boss-encounter.js';
 import { nextBasic, expireBasicChain } from './basic-attacks.js';
 import { separateDungeonCreeps } from './creep-spacing.js';
@@ -570,10 +571,20 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   stepChu(world, config);
   for (const input of world.pending.splice(0)) {
     const hero = world.heroes.get(input.heroId);
-    if (hero) runCommand(world, hero, input.command, config);
+    if (hero) {
+      if (bufferComboFinisher(world, hero, input.command, config)) continue;
+      if (input.command.kind !== 'move') delete hero.comboFinisher;
+      runCommand(world, hero, input.command, config);
+    }
   }
   constrainChuTrap(world, config);
   captureConfinement(world, config);
+  // Resolve from the previous collision tick before stepping the new action,
+  // preserving the original 18-tick spacing between finisher volleys.
+  for (const hero of world.heroes.values()) {
+    const command = takeComboFinisher(world, hero, config);
+    if (command) runCommand(world, hero, command, config);
+  }
   stepSkillActions(world, config);
   stepAreas(world, config);
   stepSupports(world, config);

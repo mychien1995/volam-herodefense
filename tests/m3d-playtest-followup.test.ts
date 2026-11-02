@@ -95,12 +95,12 @@ describe('M3D next playtest feedback', () => {
       bossCadence.ly_mac_sau.attacks['bang_phach_ngan_cham']!.cooldownSeconds,
     ).toBe(4);
   });
-  it('uses72% owner speed, not another absolute20 percentage-point subtraction', () => {
+  it('uses64.8% owner speed after the additional10% reduction', () => {
     const m = new DungeonMatch(m1Config, creepDungeon);
     const h = m.add('a', 'a');
     const speed = characterStats(h, m.base, 0).total.movementSpeed;
     m.enter('a', 'shared', 'forest');
-    expect(m.zoneOf('a')!.config.creep.speed).toBeCloseTo(speed * 0.72);
+    expect(m.zoneOf('a')!.config.creep.speed).toBeCloseTo(speed * 0.648);
   });
   it('separates identical pursuing footprints deterministically without consuming RNG', () => {
     const run = () => {

@@ -110,7 +110,7 @@ describe('Beach shared map and authoritative integration', () => {
     const z = m.zoneOf('a')!;
     expect(z.config.creep).toEqual({
       ...m.base.creep,
-      speed: m.base.speed * 0.72,
+      speed: m.base.speed * 0.648,
     });
     expect([...z.world.creeps.values()].map((c) => c.archetypeId)).toEqual(
       Array(d.baseCount).fill(beachRoster[0]),

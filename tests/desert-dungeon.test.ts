@@ -116,7 +116,7 @@ describe('desert map and authoritative destination contract', () => {
     );
     expect(z.config.creep).toEqual({
       ...m.base.creep,
-      speed: m.base.speed * 0.72,
+      speed: m.base.speed * 0.648,
     });
     step(m, d.restTicks + 2);
     expect(z.wave).toBe(1);

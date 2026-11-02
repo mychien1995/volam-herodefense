@@ -315,6 +315,14 @@ export interface Actor extends Point {
   crowdControlScale?: number;
 }
 export interface Hero extends Actor {
+  comboFinisher?: {
+    slot: number;
+    abilityId: string;
+    chain: ComboSpec['id'];
+    fx: number;
+    fy: number;
+    until: number;
+  };
   actionStartedAt?: number;
   basicStage?: string | undefined;
   basicChainDeadline?: { abilityId: string; until: number };

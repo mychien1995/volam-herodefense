@@ -256,7 +256,7 @@ export class DungeonMatch {
           this.hero(id)!,
           this.zoneOf(id)!.config,
           this.zoneOf(id)!.world.tick,
-        ).total.movementSpeed * 0.72;
+        ).total.movementSpeed * 0.648;
     const key =
       access === 'shared'
         ? `${dungeon.id}_shared`

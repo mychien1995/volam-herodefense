@@ -3,7 +3,11 @@ import { qaSession } from './tools/qa-session.mjs';
 const s = qaSession();
 export default defineConfig({
   testDir: './tests/e2e',
-  testMatch: ['m3d-followup.spec.ts', 'm3d-r3-integration.spec.ts'],
+  testMatch: [
+    'm3d-followup.spec.ts',
+    'm3d-r3-integration.spec.ts',
+    'm3d-vo-anh.spec.ts',
+  ],
   globalSetup: './tests/e2e/m3d-r3-setup.ts',
   outputDir: s.outputDir,
   workers: 1,

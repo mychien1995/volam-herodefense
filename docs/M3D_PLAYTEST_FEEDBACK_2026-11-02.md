@@ -1,5 +1,14 @@
 # M3D — feedback playtest ngày 2026-11-02 và prompt VFX r3
 
+## Bổ sung 2026-11-03 — tốc creep và Phát Động B
+
+- Director yêu cầu giảm tiếp10% tốc quái phó bản: 72%×90%=**64,8% actual buffed entry speed**. Supersede con số72% ở phần lịch sử dưới; giữ soft separation.
+- Vô Ảnh không phát động: một chân tại giữa thân. Phát Động thành công: ba chân trên/giữa/dưới song song, lặp hai lần (sáu projectile). Thứ tự Toàn Phong Thoái → Ca Diệp Thoái → Vô Ảnh Cước vẫn phải trúng cùng target; không đổi thành chỉ bấm phím là được buff.
+- Đã tái hiện bằng actual Q/W/E: E cách W10tick bị bỏ khi action Ca Diệp đang active; E cách W17tick chọn nhánh một chân trước khi ụ đất trúng; E cách W32tick hoạt động. Sửa bằng một input finisher chờ action/hit của projectile step2 thật kết thúc, giữ hướng bấm và kiểm cooldown/mana khi cast thực; không tạo combo giả. Miss/hết projectile → một chân. Duplicate input không xếp nhiều cast; A/skill khác/Shift, stun/silence, chết/đổi vùng/respec dọn lệnh chờ. Thời hạn hữu hạn lấy từ lifetime projectile/action, không dùng timing preview.
+- Giữ nguyên asset khóa, damage/mana/cooldown và phase/facing/pivot r3. Canonical MD/bộ nhớ chỉ cập nhật sau merge thật như quyết định trước.
+
+Bàn giao: [M3D_VO_ANH_FIX_2026-11-03.md](M3D_VO_ANH_FIX_2026-11-03.md). Final PASS547 unit/integration,18 workflow,15 validators,2 browser; game review ở5597 với server3097. Không merge milestone.
+
 ## Feedback sau integration r3 — đã triển khai, chờ duyệt trong game; supersede tương ứng
 
 1. Creep private: giảm20% tốc hiện tại (90%×80%=72% actual buffed entry speed); sửa pack overlap bằng giãn footprint deterministic trên server, không coi đó là giới hạn bắt buộc của2D.
