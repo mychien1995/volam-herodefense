@@ -1,0 +1,46 @@
+{
+  "runId": "7292f2b7-525e-4db9-a227-cdd9b85d9173",
+  "mode": "final",
+  "args": [
+    "tests/e2e/merchant.spec.ts",
+    "tests/e2e/ui.spec.ts",
+    "tests/e2e/gameplay.spec.ts",
+    "--grep",
+    "1 and 2 consume|farms real gold|two clients agree|fit 944"
+  ],
+  "startedAt": "2026-11-02T11:32:36.634Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 8.85,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.72,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.29,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.58,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 87.87,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 99.32
+}

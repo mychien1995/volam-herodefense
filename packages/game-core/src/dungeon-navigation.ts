@@ -1,0 +1,108 @@
+import { blocked, distance, segmentRect } from './geometry.js';
+import type { Creep, Hero, Point, SimulationConfig } from './types.js';
+const cell = 32;
+/** Small deterministic grid search only for dungeon creeps blocked by scenery. */
+export function dungeonWaypoint(
+  enemy: Creep,
+  hero: Hero,
+  tick: number,
+  config: SimulationConfig,
+): Point {
+  const radius = (enemy.stats ?? config.creep).radius;
+  const clear = (a: Point, b: Point) =>
+    !config.collision.some((w) => segmentRect(a, b, w, radius) !== undefined);
+  if (clear(enemy, hero)) {
+    delete enemy.navigation;
+    return hero;
+  }
+  const gx = Math.floor(hero.x / cell),
+    gy = Math.floor(hero.y / cell);
+  let nav = enemy.navigation;
+  if (
+    !nav ||
+    nav.targetId !== hero.id ||
+    nav.gx !== gx ||
+    nav.gy !== gy ||
+    tick >= nav.repathAt
+  ) {
+    const cols = Math.ceil(config.width / cell),
+      rows = Math.ceil(config.height / cell);
+    const point = (n: number) => ({
+      x: ((n % cols) + 0.5) * cell,
+      y: (Math.floor(n / cols) + 0.5) * cell,
+    });
+    const valid = (n: number) =>
+      n >= 0 &&
+      n < cols * rows &&
+      !blocked(point(n), radius, config.width, config.height, config.collision);
+    const near = (p: Point) => {
+      const choices: number[] = [];
+      for (
+        let y = Math.max(0, Math.floor(p.y / cell) - 2);
+        y <= Math.min(rows - 1, Math.floor(p.y / cell) + 2);
+        y++
+      )
+        for (
+          let x = Math.max(0, Math.floor(p.x / cell) - 2);
+          x <= Math.min(cols - 1, Math.floor(p.x / cell) + 2);
+          x++
+        ) {
+          const n = y * cols + x;
+          if (valid(n) && clear(p, point(n))) choices.push(n);
+        }
+      return choices.sort(
+        (a, b) => distance(point(a), p) - distance(point(b), p) || a - b,
+      )[0];
+    };
+    const start = near(enemy),
+      goal = near(hero),
+      waypoints: Point[] = [];
+    if (start !== undefined && goal !== undefined) {
+      const previous = new Int32Array(cols * rows).fill(-1),
+        queue = [start];
+      previous[start] = start;
+      for (let head = 0; head < queue.length && previous[goal] === -1; head++) {
+        const n = queue[head]!;
+        for (const [dx, dy] of [
+          [1, 0],
+          [0, 1],
+          [-1, 0],
+          [0, -1],
+        ]) {
+          const x = (n % cols) + dx!,
+            y = Math.floor(n / cols) + dy!,
+            next = y * cols + x;
+          if (
+            x < 0 ||
+            x >= cols ||
+            y < 0 ||
+            y >= rows ||
+            previous[next] !== -1 ||
+            !valid(next) ||
+            !clear(point(n), point(next))
+          )
+            continue;
+          previous[next] = n;
+          queue.push(next);
+        }
+      }
+      if (previous[goal] !== -1) {
+        for (let n = goal; n !== start; n = previous[n]!)
+          waypoints.unshift(point(n));
+        waypoints.unshift(point(start));
+        waypoints.push({ x: hero.x, y: hero.y });
+      }
+    }
+    nav = {
+      targetId: hero.id,
+      gx,
+      gy,
+      repathAt: tick + config.tickRate,
+      waypoints,
+    };
+    enemy.navigation = nav;
+  }
+  while (nav.waypoints.length && distance(enemy, nav.waypoints[0]!) < 5)
+    nav.waypoints.shift();
+  return nav.waypoints[0] ?? hero;
+}

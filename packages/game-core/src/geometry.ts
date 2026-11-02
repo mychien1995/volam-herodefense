@@ -1,4 +1,29 @@
 import type { Point, Rect } from './types.js';
+import type { EllipseBounds } from './dong-ta-types.js';
+
+export function insideEllipse(
+  p: Point,
+  b: EllipseBounds,
+  padding = 0,
+): boolean {
+  return (
+    Math.hypot(
+      (p.x - b.x) / (b.radiusX - padding),
+      (p.y - b.y) / (b.radiusY - padding),
+    ) <=
+    1 + 1e-9
+  );
+}
+/** A convex court boundary also clips diagonal and swept forced movement. */
+export function clampEllipse(p: Point, b: EllipseBounds, padding = 0): void {
+  const x = (p.x - b.x) / (b.radiusX - padding),
+    y = (p.y - b.y) / (b.radiusY - padding),
+    n = Math.hypot(x, y);
+  if (n > 1) {
+    p.x = b.x + (x / n) * (b.radiusX - padding);
+    p.y = b.y + (y / n) * (b.radiusY - padding);
+  }
+}
 export const distance = (a: Point, b: Point): number =>
   Math.hypot(a.x - b.x, a.y - b.y);
 export function direction(x: number, y: number): Point {

@@ -18,6 +18,7 @@ import type { Creep, Hero, Point, SimulationConfig, World } from './types.js';
 
 const zeroCrit = { critChance: 0, critMultiplier: 1 };
 export class HongLietEncounter {
+  generation = 0;
   readonly effects = new Map<string, BossCue>();
   cast: BossCast | undefined;
   bossId = 'hong_liet_boss';
@@ -29,8 +30,10 @@ export class HongLietEncounter {
   private actionIndex = 0;
   private cooldowns = new Map<HongLietAbility, number>();
   private summons = new Map<string, number>();
+  private artillery: BossCast[] = [];
   constructor(readonly definition: HongLietDefinition) {}
   initialize(world: World, config: SimulationConfig): void {
+    this.generation++;
     this.clear(world);
     world.creeps.clear();
     const d = this.definition,
@@ -56,6 +59,7 @@ export class HongLietEncounter {
     this.respawnAt = 0;
   }
   clear(world: World): void {
+    this.artillery = [];
     this.effects.clear();
     this.cast = undefined;
     const boss = world.creeps.get(this.bossId);
@@ -97,6 +101,21 @@ export class HongLietEncounter {
       return;
     }
     this.stepSummons(world, config, heroes);
+    for (const c of this.artillery) {
+      const a = this.definition.abilities.hoa_phao_thien_la;
+      if (
+        world.tick >= c.nextVolley &&
+        world.tick < c.activeAt + a.durationTicks
+      ) {
+        this.cannonVolley(world, config, c);
+        c.nextVolley += a.intervalTicks;
+      }
+    }
+    this.artillery = this.artillery.filter(
+      (c) =>
+        world.tick <
+        c.activeAt + this.definition.abilities.hoa_phao_thien_la.durationTicks,
+    );
     if (boss.hp <= 0) return;
     if (this.cast) {
       const c = this.cast,
@@ -110,6 +129,15 @@ export class HongLietEncounter {
       if (world.tick >= c.activeAt && !c.fired) {
         c.fired = true;
         this.release(world, config, boss, c);
+        if (c.abilityId === 'hoa_phao_thien_la') {
+          this.cannonVolley(world, config, c);
+          c.nextVolley += a.intervalTicks;
+          this.artillery.push(c);
+          this.cast = undefined;
+          boss.castAbilityId = '';
+          boss.pose = 'idle';
+          this.nextActionAt = world.tick + this.definition.restTicks;
+        }
       }
       if (c.abilityId === 'liet_diem_phong_toa' && c.fired) {
         const elapsed = Math.min(
@@ -141,6 +169,7 @@ export class HongLietEncounter {
       }
       if (
         c.abilityId === 'hoa_phao_thien_la' &&
+        !this.artillery.includes(c) &&
         c.fired &&
         world.tick >= c.nextVolley &&
         world.tick < c.activeAt + a.durationTicks
@@ -167,17 +196,24 @@ export class HongLietEncounter {
         distance(boss!, a) - distance(boss!, b) || a.id.localeCompare(b.id),
     )[0]!;
     if (world.tick >= this.nextActionAt) {
-      const order: HongLietAbility[] = [
-        'hong_liet_a1',
-        'hong_liet_a2',
-        'dung_nham_liet_dia',
-        'hoa_son_bao_phat',
-        'liet_diem_phong_toa',
-        'hoa_tien_te_phat',
-        'thiet_ky_trieu_binh',
-        'van_ly_nham_hoa',
-        'hoa_phao_thien_la',
-      ];
+      const order: HongLietAbility[] = this.artillery.length
+        ? ['hong_liet_a1', 'hong_liet_a2']
+        : [
+            'hong_liet_a1',
+            'dung_nham_liet_dia',
+            'hong_liet_a2',
+            'hoa_son_bao_phat',
+            'hong_liet_a1',
+            'liet_diem_phong_toa',
+            'hong_liet_a2',
+            'hoa_tien_te_phat',
+            'hong_liet_a1',
+            'thiet_ky_trieu_binh',
+            'hong_liet_a2',
+            'van_ly_nham_hoa',
+            'hong_liet_a1',
+            'hoa_phao_thien_la',
+          ];
       for (let i = 0; i < order.length; i++) {
         const ability = order[this.actionIndex++ % order.length]!;
         if (world.tick < (this.cooldowns.get(ability) ?? 0)) continue;
@@ -284,15 +320,17 @@ export class HongLietEncounter {
     if (abilityId === 'hong_liet_a1') {
       const shared = new Set<string>();
       for (const offset of [
+        -2 * this.definition.a1Spread,
         -this.definition.a1Spread,
         0,
         this.definition.a1Spread,
+        2 * this.definition.a1Spread,
       ]) {
         const angle = Math.atan2(fy, fx) + offset;
-        this.cue(
+        const blade = this.cue(
           world,
           cast,
-          'line',
+          'projectile',
           {
             x: boss.x + fx * this.definition.a1ForwardOffset,
             y: boss.y + fy * this.definition.a1ForwardOffset,
@@ -302,11 +340,16 @@ export class HongLietEncounter {
           a.range,
           a.radius,
           cast.activeAt,
-          cast.activeAt + 1,
+          cast.activeAt +
+            Math.ceil(
+              (a.range / this.definition.projectileSpeed) * config.tickRate,
+            ) +
+            1,
           a.damage,
           0,
           shared,
         );
+        blade.speed = this.definition.projectileSpeed;
       }
     } else if (abilityId === 'hong_liet_a2')
       this.cue(

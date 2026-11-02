@@ -53,12 +53,12 @@ it('real SDK filters encounter instances and rejects forged/replayed loot owners
       sequence: next(r),
       action: 'enter',
       access: r === c ? 'private' : 'shared',
-      destination: 'kim_luan',
+      destination: r === c ? 'forest' : 'kim_luan',
     });
   for (const r of rooms)
     await expect
       .poll(() => r.state.players.get(r.sessionId)?.zoneId)
-      .toContain('kim_luan_');
+      .toContain(r === c ? 'forest_' : 'kim_luan_');
   await expect
     .poll(() => a.state.dungeons.get('kim_luan_shared')?.encounter.length ?? 0)
     .toBeGreaterThan(0);

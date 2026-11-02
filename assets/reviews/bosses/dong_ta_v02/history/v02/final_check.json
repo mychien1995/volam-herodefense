@@ -1,0 +1,193 @@
+{
+  "status": "PASS",
+  "worktreeBranch": "wip/m3d/dong-ta",
+  "artApproval": "pending_director_review",
+  "command": "pnpm check:final --config assets/reviews/bosses/dong_ta_v02/playwright.config.mjs",
+  "workflow": {
+    "runId": "20795fd0-fc40-47e1-91d1-d360a93f05c3",
+    "mode": "final",
+    "args": [
+      "--config",
+      "assets/reviews/bosses/dong_ta_v02/playwright.config.mjs"
+    ],
+    "startedAt": "2026-11-01T16:28:23.301Z",
+    "status": "PASS",
+    "stages": [
+      {
+        "label": "prepare assets (once)",
+        "seconds": 9.1,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "compile TypeScript",
+        "seconds": 1.78,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "typecheck tests and tools",
+        "seconds": 1.21,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "workflow regression checks",
+        "seconds": 0.46,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "all unit/integration tests",
+        "seconds": 89.79,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "production client build",
+        "seconds": 8.33,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-assets.py",
+        "seconds": 0.38,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-arena-art01.py",
+        "seconds": 0.6,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-arena-v2.py",
+        "seconds": 0.49,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-thien-son.py",
+        "seconds": 0.42,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-vo-dang.py",
+        "seconds": 0.44,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-thieu-lam.py",
+        "seconds": 0.5,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-thien-son-skills.py",
+        "seconds": 1.23,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-vo-dang-skills.py",
+        "seconds": 1.87,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-thieu-lam-skills.py",
+        "seconds": 3.7,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-bamboo-forest.py",
+        "seconds": 0.5,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-desert.py",
+        "seconds": 0.91,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-forest-creeps.py",
+        "seconds": 2.71,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-beach.py",
+        "seconds": 1.61,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-chu-art.py",
+        "seconds": 0.49,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "scripts/verify-ly-mac-sau.py",
+        "seconds": 2.06,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "browser verification",
+        "seconds": 30.14,
+        "status": "PASS",
+        "exitCode": 0
+      }
+    ],
+    "totalSeconds": 158.76
+  },
+  "unitIntegrationTests": 471,
+  "workflowRegressionTests": 18,
+  "browserChecks": 30,
+  "observedClips": 159,
+  "observedFrames": 628,
+  "newCharacterFrames": 32,
+  "newVfxFrames": 48,
+  "serverMechanics": false,
+  "multiplayerVerified": false,
+  "recordings": false,
+  "checkoutRepair": "Four unrelated Hong Liet JSON files had CRLF checkout bytes while existing runtime pins require LF. Restored exact already-pinned bytes from main after proving newline-only differences and source hashes, then set four path-specific eol=lf attributes. No guard or approved hash changed. Full pipeline passed after byte repair; focused guard check covers subsequent metadata-only eol attributes.",
+  "reviewArtifacts": [
+    {
+      "path": "assets/reviews/bosses/dong_ta_v02/sprite_vfx_overview.png",
+      "sha256": "6b72c6a4c468a74e839f798401e0cce715fdeba1561cdf79f80ca46a3782d88d"
+    },
+    {
+      "path": "assets/reviews/bosses/dong_ta_v02/reference_comparison.png",
+      "sha256": "615255df6c316c28a1748c59faf7d8425eefaf8397820ec12850bc0e28fda689"
+    },
+    {
+      "path": "assets/reviews/bosses/dong_ta_v02/evidence/arena-flute-petals.png",
+      "sha256": "e9ce377e32ae9232dab4cbf82044f26ad0b64fc54e4f083a4068d72875a99760"
+    },
+    {
+      "path": "assets/reviews/bosses/dong_ta_v02/evidence/arena-hoang-healing.png",
+      "sha256": "5372a84cecb18889cbc2ec21f164ba27679732564bd0bcb7831382a84a16b6e7"
+    },
+    {
+      "path": "assets/reviews/bosses/dong_ta_v02/evidence/arena-mai-poison.png",
+      "sha256": "209fd945c092b64a00620a94f36c3bc587f8fd72df7a51637b6bf631b7877686"
+    },
+    {
+      "path": "assets/reviews/bosses/dong_ta_v02/evidence/arena-six-player-visual.png",
+      "sha256": "55a82bcffadd885b5939dc8b234606d24ecadf7dde2fec7ba2b58eebf80c7c36"
+    },
+    {
+      "path": "assets/reviews/bosses/dong_ta_v02/evidence/arena-sprites-native.png",
+      "sha256": "d4c76487fd15280470a229cf07e14ae305569cdbbe2fb94980c4b761ebfd4762"
+    }
+  ],
+  "metadataGuardAfterAttributeChange": "PASS: 40 exact existing Hong Liet pins / 16 atlases. No staged or semantic changes to its assets."
+}

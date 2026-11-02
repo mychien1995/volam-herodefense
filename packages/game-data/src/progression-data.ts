@@ -115,7 +115,7 @@ const descriptions: Record<string, string> = {
   cuong_long_loan_vu: 'Cầu lửa phát nổ, gây sát thương diện rộng và thiêu đốt.',
   phi_long_tai_thien: 'Sóng lửa xuyên thấu phía trước, đẩy lùi đối thủ.',
   khang_long_huu_hoi:
-    'Tạm tăng tỉ lệ và sát thương bạo kích; không gây sát thương trực tiếp.',
+    'Tăng bạo kích trong thời gian dài hơn; cấp 4 có vùng lửa nhỏ theo người gây sát thương mỗi giây.',
   hang_long_hoa_vu: 'Tuyệt kỹ: hỏa long lớn xuyên qua đội hình phía trước.',
   hoanh_tao_bong: 'Quét bổng diện rộng, gây sát thương và làm chậm di chuyển.',
   pha_giap_bong: 'Đánh mạnh một mục tiêu phía trước và giảm phòng thủ.',
@@ -157,6 +157,13 @@ export function createProgression(
         e.critChance += 0.04 * r;
         e.critMultiplier += 0.1 * r;
         e.durationTicks += 15 * r;
+        if (r === 3)
+          e.burnAura = {
+            radius: 62,
+            damage: 6,
+            tickInterval: 30,
+            attackPowerScale: 0.15,
+          };
       }
       if (id === 'hang_long_hoa_vu' && e.mode === 'projectile') {
         e.damage += 25 * r;

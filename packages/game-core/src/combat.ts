@@ -10,10 +10,11 @@ import { characterStats, gainExperience } from './progression.js';
 import { direction, distance, segmentRect } from './geometry.js';
 import { comboHit } from './combos.js';
 import { ownerProtection } from './protection.js';
+import { CHU_BOSS_ID } from './chu-types.js';
 import type { StatusEffect } from './types.js';
 import type { ComboSpec } from './types.js';
 export function emit(world: World, event: Omit<CombatEvent, 'id'>): void {
-  world.events.push({ id: world.nextEvent++, ...event });
+  world.events.push({ id: world.nextEvent++, tick: world.tick, ...event });
 }
 export function hurt(
   world: World,
@@ -33,13 +34,18 @@ export function hurt(
     preserveFraction?: boolean | undefined;
     periodic?: boolean | undefined;
     resolvedReflection?: boolean | undefined;
-    /** Server-owned curse settlement: exact HP loss, no mitigation/evasion/reflection. */
+    /** Exact, server-owned curse HP settlement. */
     unavoidableHpLoss?: boolean | undefined;
     combo?: ComboSpec | undefined;
     comboTargets?: Record<string, boolean> | undefined;
   },
 ): boolean {
-  if (target.hp <= 0 || raw <= 0) return false;
+  if (
+    target.hp <= 0 ||
+    (!snapshot?.unavoidableHpLoss && target.invulnerable) ||
+    raw <= 0
+  )
+    return false;
   if (world.creeps.get(target.id)?.rescueTargetId === sourceId) return false;
   if (!snapshot?.unavoidableHpLoss && ownerProtection(world, target))
     return false;
@@ -145,6 +151,12 @@ export function hurt(
   const stats = snapshot ?? offensiveStats(world, sourceId, config);
   const critical =
     !snapshot?.unavoidableHpLoss && world.random() < stats.critChance;
+  const winePenetration =
+    target.id === CHU_BOSS_ID &&
+    world.heroes.has(sourceId) &&
+    (world.chu?.wineDrinkers?.[sourceId] ?? 0) > world.tick
+      ? (world.chu!.definition.wineArmorPenetration ?? 0.7)
+      : 0;
   const defense =
     Math.max(
       0,
@@ -155,7 +167,11 @@ export function hurt(
             statusValue(target, 'defense_buff', world.tick) -
             statusValue(target, 'defense_break', world.tick),
     ) *
-    (1 - Math.max(0, Math.min(1, snapshot?.armorPenetration ?? 0)));
+    (1 -
+      Math.max(
+        0,
+        Math.min(1, Math.max(snapshot?.armorPenetration ?? 0, winePenetration)),
+      ));
   const condition =
     statusValue(target, 'slow', world.tick) > 0
       ? 1 + (snapshot?.slowedBonus ?? 0)

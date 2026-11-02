@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 18;
+export const PROTOCOL_VERSION = 23;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -55,6 +55,11 @@ export const inputSchema = z.discriminatedUnion('kind', [
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     kind: z.literal('basic'),
+  }),
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    kind: z.literal('dash'),
   }),
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
@@ -121,6 +126,7 @@ export const skillPreviewActionSchema = z.strictObject({
   action: z.enum(['targets', 'attacker', 'clear']),
 });
 export const combatEventSchema = z.strictObject({
+  tick: z.number().int().nonnegative().optional(),
   protocolVersion: z.literal(PROTOCOL_VERSION),
   id: z.number().int().positive(),
   kind: z.enum(['attack', 'hit', 'death', 'cast', 'effect', 'pulse']),
@@ -147,12 +153,14 @@ export const dungeonActionSchema = z.discriminatedUnion('action', [
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     action: z.literal('enter'),
-    access: z.enum(['private', 'shared']),
+    access: z.enum(['private', 'shared']).optional(),
+    summonHelp: z.boolean().optional(),
     destination: z
       .enum([
         'forest',
         'desert',
         'sea',
+        'hell',
         'chu_ba_thong',
         'hong_liet',
         'kim_luan',
@@ -163,7 +171,19 @@ export const dungeonActionSchema = z.discriminatedUnion('action', [
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
-    action: z.literal('exit'),
+    action: z.enum(['exit', 'interact']),
+  }),
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    action: z.literal('summon-help'),
+  }),
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    action: z.literal('reply-invitation'),
+    invitationId: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    accept: z.boolean(),
   }),
 ]);
 export const bossLootActionSchema = z.strictObject({
@@ -180,12 +200,47 @@ export const bossItemActionSchema = z.strictObject({
   action: z.enum(['sell', 'drop']),
 });
 export type DungeonAction = z.infer<typeof dungeonActionSchema>;
+const merchantBase = z.strictObject({
+  protocolVersion: z.literal(PROTOCOL_VERSION),
+  sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+  revision: z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER),
+});
+const potionIdSchema = z.enum([
+  'hp_small',
+  'hp_medium',
+  'hp_large',
+  'mp_small',
+  'mp_medium',
+  'mp_large',
+]);
+export const merchantActionSchema = z.discriminatedUnion('action', [
+  merchantBase.extend({
+    action: z.literal('buy-basic'),
+    slot: z.enum(['weapon', 'armor', 'hat', 'boots']),
+  }),
+  merchantBase.extend({
+    action: z.literal('buy-potion'),
+    potionId: potionIdSchema,
+    quantity: z.number().int().min(1).max(20),
+  }),
+  merchantBase.extend({
+    action: z.literal('use-potion'),
+    potionId: potionIdSchema,
+  }),
+]);
+export const merchantResultSchema = z.strictObject({
+  protocolVersion: z.literal(PROTOCOL_VERSION),
+  sequence: z.number().int().positive(),
+  revision: z.number().int().nonnegative(),
+  message: z.string(),
+});
 export const rejectionSchema = z.strictObject({
   protocolVersion: z.literal(PROTOCOL_VERSION),
   sequence: z.number().int().positive(),
   reason: z.string(),
 });
 export type ServerMessages = {
+  'merchant-result': z.infer<typeof merchantResultSchema>;
   'connection-ack': z.infer<typeof connectionAckSchema>;
   'combat-event': z.infer<typeof combatEventSchema>;
   'command-rejected': z.infer<typeof rejectionSchema>;
@@ -237,9 +292,21 @@ export const BuildState = schema(
   },
   'CharacterBuild',
 );
+export const MerchantInventoryState = schema(
+  {
+    levels: t.map('number'),
+    potions: t.map('number'),
+    revision: t.number().default(0),
+    potionCooldownTicks: t.number().default(0),
+  },
+  'MerchantInventory',
+);
 export const LobbyPlayer = schema(
   {
     build: t.ref(BuildState).default(() => new BuildState()),
+    inventory: t
+      .ref(MerchantInventoryState)
+      .default(() => new MerchantInventoryState()),
     ...actorFields,
     x: t.number().default(0).view(),
     y: t.number().default(0).view(),
@@ -251,6 +318,14 @@ export const LobbyPlayer = schema(
     combos: t.string().default('[]').view(),
     zoneId: t.string().default('arena'),
     respawnTicks: t.number().default(0),
+    bossSpectator: t.boolean().default(false),
+    bossRevivalUsed: t.boolean().default(false),
+    bossAttempt: t.number().default(0),
+    bossInvitation: t.string().default(''),
+    actionState: t.string().default('').view(),
+    actionUntil: t.number().default(0).view(),
+    actionStartedAt: t.number().default(0).view(),
+    basicStage: t.string().default('').view(),
     bossItems: t.string().default('[]'),
     nickname: t.string(),
     schoolId: t.string().default(''),
@@ -266,6 +341,9 @@ export const LobbyPlayer = schema(
     basicId: t.string().default('cai_bang_bong'),
     lastSequence: t.number().default(0),
     basicCooldown: t.number().default(0),
+    dashCharges: t.number().default(2),
+    dashRechargeTicks: t.number().default(0),
+    blinkTicks: t.number().default(0),
     qCooldown: t.number().default(0),
     wCooldown: t.number().default(0),
     eCooldown: t.number().default(0),
@@ -298,6 +376,9 @@ export const CreepState = schema(
 export type CreepState = SchemaType<typeof CreepState>;
 export const BossEffectState = schema(
   {
+    originX: t.number().default(0),
+    originY: t.number().default(0),
+    targetId: t.string().default(''),
     speed: t.number().default(0),
     index: t.number().default(0),
     maxRadius: t.number().default(0),
@@ -323,6 +404,7 @@ export const BossEffectState = schema(
 export type BossEffectState = SchemaType<typeof BossEffectState>;
 export const ProjectileState = schema(
   {
+    startedAt: t.number().default(0),
     x: t.number().default(0),
     y: t.number().default(0),
     vx: t.number().default(0),
@@ -333,6 +415,7 @@ export const ProjectileState = schema(
     radius: t.number().default(0),
     stage: t.string().default(''),
     leg: t.string().default(''),
+    lingerTicks: t.number().default(0),
   },
   'ArenaProjectile',
 );
@@ -358,6 +441,7 @@ export const DungeonState = schema(
 );
 export const AreaState = schema(
   {
+    startedAt: t.number().default(0),
     x: t.number(),
     y: t.number(),
     radius: t.number(),
@@ -371,6 +455,9 @@ export const AreaState = schema(
 export type DungeonState = SchemaType<typeof DungeonState>;
 export const DefenseState = schema(
   {
+    dongTa: t.string().default(''),
+
+    paused: t.boolean().default(false),
     enabled: t.boolean().default(false),
     statueHp: t.number().default(0),
     statueMaxHp: t.number().default(0),

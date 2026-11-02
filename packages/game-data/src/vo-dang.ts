@@ -5,6 +5,7 @@ import type {
 } from '@volam/game-core';
 import { abilitySchema } from './ability-schema.js';
 import { skillRankGates } from './progression-data.js';
+import { m3dFeedbackTuning } from './m3d-feedback-tuning.js';
 
 /** M3C2 provisional tuning at 30Hz; all targeting uses facing/self/nearest at release. */
 const swordQi: ProjectileEffect = {
@@ -24,8 +25,8 @@ export const voDangBasics: Record<string, Ability> = {
     id: 'vo_dang_quyen',
     nameVi: 'Võ Đang Quyền',
     manaCost: 0,
-    cooldownTicks: 9,
-    minIntervalTicks: 5,
+    cooldownTicks: 1,
+    minIntervalTicks: 6,
     basicCombo: [
       { stage: 'left_palm', damageMultiplier: 1 },
       { stage: 'right_palm', damageMultiplier: 1 },
@@ -33,25 +34,33 @@ export const voDangBasics: Record<string, Ability> = {
     effect: {
       mode: 'arc',
       damage: 19,
-      range: 65,
+      range: 80,
       halfAngle: Math.PI / 3,
       cleave: 0.2,
       knockback: 10,
+      knockbackChance: m3dFeedbackTuning.basicKnockbackChance,
     },
   },
   vo_dang_kiem: {
     id: 'vo_dang_kiem',
     nameVi: 'Võ Đang Kiếm',
     manaCost: 0,
-    cooldownTicks: 12,
-    minIntervalTicks: 5,
+    cooldownTicks: 1,
+    minIntervalTicks: 6,
     effect: {
       mode: 'arc',
       damage: 27,
-      range: 78,
+      range: 94,
       halfAngle: Math.PI / 3,
       cleave: 0.35,
-      projectileProc: { chance: 0.25, effect: swordQi },
+      projectileProc: {
+        chance: 0.25,
+        effect: {
+          ...swordQi,
+          knockback: 10,
+          knockbackChance: m3dFeedbackTuning.basicKnockbackChance,
+        },
+      },
     },
   },
 };
@@ -160,7 +169,9 @@ export const voDangSkills: Ability[] = [
     effect: {
       ...swordQi,
       damage: 55,
-      range: 420,
+      range: 540,
+      speed: 180,
+      blinkWindowTicks: 45,
       radius: 12,
       piercing: true,
       useFacing: true,
@@ -227,7 +238,7 @@ const descriptions = [
   'Bật/tắt khiên dùng nội lực chịu sát thương; không phí bật và không hồi chiêu phụ. Thiếu nội lực nhận phần còn lại.',
   'Tuyệt kỹ: trận âm dương cố định, sát thương theo nhịp; địch không vượt biên, vẫn di chuyển và đánh bên trong; địch miễn cưỡng chế được thoát.',
   'Bốn nhát kiếm mạnh liên tiếp trong cung phía trước.',
-  'Kiếm khí bay thẳng theo hướng nhìn, xuyên nhiều địch nhưng mỗi địch chỉ trúng một lần.',
+  'Kiếm bay chậm và xuyên địch, mỗi địch trúng một lần. Bấm lại cùng ô để hiện thân tại kiếm; kiếm lưu cuối tầm 1,5 giây.',
   'Kiếm trận cố định tại chỗ thi triển, gây sát thương theo nhịp lên địch trong trận.',
   'Thủ tối đa 5 giây, giảm 70% sát thương; tích lũy thực nhận sau giảm. Hết 5 giây hoặc vượt 20% máu tối đa thì phản tổng thực nhận ra xung quanh một lần khi còn sống.',
   'Tuyệt kỹ: liên tục phóng kiếm thẳng tám hướng quanh người trong 5 giây, không truy đuổi.',

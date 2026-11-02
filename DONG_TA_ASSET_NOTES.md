@@ -1,3 +1,5 @@
+> Historical v01 package. The director final skill brief on 2026-11-01 supersedes its skill/color mapping for the new demo. Existing character/concept files remain intact. See [v02 review](assets/reviews/bosses/dong_ta_v02/README.md); runtime integration and director art approval remain pending.
+
 # Đông Tà — Hoàng Dược Sư asset package v01
 
 Produced 2026-10-31. **Asset production only.** No Phaser launch/integration, gameplay/AI/summon changes, maps, portals, other main bosses, or recordings.
@@ -90,3 +92,7 @@ Inspected required guides: AGENTS.md, ART_ASSET_GUIDE.md, GAME_DESIGN.md, CONTEN
 Production preparation uses real source cels, whole-actor component crops, shared source scale, nearest resampling, binary alpha and fixed canvases. Near-zero-alpha RGB matte artifacts and soft haze are excluded from exports; original source bytes and earlier cleanup attempts are retained.
 
 No requested asset category is blocked or omitted. Asset-only checks cover file existence, PNG decoding, alpha/content, atlas/clip references and folder organization. Live motion continuity, transitions, six-player readability, normal-gameplay zoom approval and Phaser loading remain deliberately untested, per this task's scope. Fixed export anchors are not a claim of runtime motion approval.
+
+## V04 runtime integration — 2026-11-02
+
+The user subsequently authorized implementing the approved preview in `wip/m3d/dong-ta`. Retained source bytes/preview approval remain unchanged; runtime selection has109 clips/436 frames. Current implementation, authoritative behavior, evidence and pending final runtime art/balance approval are documented in `docs/DONG_TA_INTEGRATION.md`.

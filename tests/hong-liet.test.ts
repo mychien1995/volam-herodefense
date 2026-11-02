@@ -29,6 +29,8 @@ function setup(seed = 42) {
   };
   const world = createWorld(config, seed),
     encounter = new HongLietEncounter(structuredClone(definition));
+  // Isolated mechanic fixture; production scaled map markers are tested separately.
+  encounter.definition.spawn = { x: 640, y: 480 };
   encounter.initialize(world, config);
   const hero = addHero(world, 'hero', 'hero', config);
   hero.hp = hero.maxHp = 10000;
@@ -57,17 +59,22 @@ function setup(seed = 42) {
   };
 }
 describe('Hong Liet authoritative v04', () => {
-  it('A1 emits three simultaneous locked rays of 600 from the emission point; overlap dedups once per cast', () => {
+  it('A1 emits five simultaneous straight720-range blades from one centre; overlap dedups once per cast', () => {
     const s = setup(),
       c = s.begin('hong_liet_a1'),
       lines = [...s.encounter.effects.values()];
-    expect(lines).toHaveLength(3);
+    expect(lines).toHaveLength(5);
     expect(
       lines.map((e) => Math.round((Math.atan2(e.fy, e.fx) * 180) / Math.PI)),
-    ).toEqual([-18, 0, 18]);
+    ).toEqual([-36, -18, 0, 18, 36]);
     expect(
       lines.every(
-        (e) => e.length === 600 && e.x === 664 && e.activeAt === c.activeAt,
+        (e) =>
+          e.length === 720 &&
+          e.x === 640 &&
+          e.activeAt === c.activeAt &&
+          e.kind === 'projectile' &&
+          e.speed === 600,
       ),
     ).toBe(true);
     Object.assign(s.hero, { x: 680, y: 480 });
@@ -84,10 +91,12 @@ describe('Hong Liet authoritative v04', () => {
     expect(s.boss.fy).toBe(0);
   });
   it.each([
-    [-18, 599, true],
-    [0, 600, true],
-    [18, 600, true],
-    [0, 640, false],
+    [-36, 719, true],
+    [-18, 720, true],
+    [0, 720, true],
+    [18, 720, true],
+    [36, 720, true],
+    [0, 760, false],
     [0, -70, false],
   ] as const)(
     'A1 server boundary angle %s distance %s',
@@ -96,10 +105,10 @@ describe('Hong Liet authoritative v04', () => {
         angle = (degrees * Math.PI) / 180;
       s.begin('hong_liet_a1');
       Object.assign(s.hero, {
-        x: 664 + Math.cos(angle) * length,
+        x: 640 + Math.cos(angle) * length,
         y: 480 + Math.sin(angle) * length,
       });
-      s.advance(21);
+      s.advance(60);
       expect(s.hero.hp < 10000).toBe(hit);
     },
   );
@@ -108,7 +117,8 @@ describe('Hong Liet authoritative v04', () => {
     [0, 180, true],
     [0, -180, true],
     [-10, 0, false],
-    [230, 0, false],
+    [230, 0, true],
+    [270, 0, false],
   ] as const)('A2 frontal 180 degrees offset %s,%s', (dx, dy, hit) => {
     const s = setup();
     s.begin('hong_liet_a2');

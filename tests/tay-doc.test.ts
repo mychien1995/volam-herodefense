@@ -347,6 +347,7 @@ describe('Tay Doc authoritative arena encounter', () => {
       42,
       createInvasionDefinition(),
       [],
+      undefined,
       tayDocDefinition,
     );
     expect(m.invasion?.definition.intervalTicks).toBe(5400);
@@ -433,6 +434,7 @@ describe('Tay Doc authoritative arena encounter', () => {
         42,
         undefined,
         [],
+        undefined,
         tayDocDefinition,
       ),
       h = m.add('travel', 'Travel');
@@ -485,6 +487,7 @@ describe('Tay Doc authoritative arena encounter', () => {
         42,
         createInvasionDefinition(),
         [],
+        undefined,
         tayDocDefinition,
       ),
       h = m.add('h', 'H'),

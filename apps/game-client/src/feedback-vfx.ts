@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { m3dSkillIds } from './m3d-feedback-policy.js';
 import { approvedSkillIds } from './approved-skill-ids.js';
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
@@ -179,7 +180,10 @@ export class FeedbackVfx {
     }
   }
   private place(v: Fx, p: Point): void {
-    const offset = v.tag.effectPlacementOffset;
+    const offset: [number, number] =
+      v.skill === 'pha_giap_bong' && !v.impact
+        ? [0, 0]
+        : v.tag.effectPlacementOffset;
     v.sprite
       .setPosition(
         Math.round(p.x + offset[0] + v.offset[0]),
@@ -204,6 +208,9 @@ export class FeedbackVfx {
       .setTexture(ref.asset, tag.frames[0]!)
       .setOrigin(...tag.origin)
       .setScale(feedbackComponents.get(ref.asset)?.displayScale ?? 1);
+    // Retained slam contact is at source pixel (128,160), below its old center pivot.
+    if (v.skill === 'pha_giap_bong' && ref.asset === 'bong_controls_v2_ground')
+      v.sprite.setOrigin(0.5, 160 / 256);
     v.sprite.play({
       key: rasterAnimationKey(ref.asset, tag.name),
       ...(repeat === undefined ? {} : { repeat }),
@@ -263,6 +270,9 @@ export class FeedbackVfx {
     offset: [number, number] = [0, 0],
     duration?: number,
   ): Fx | undefined {
+    if (!impact && e.abilityId === 'pha_giap_bong') duration ??= 1000;
+    if (!impact && e.abilityId === 'vi_da_quyen')
+      offset = [offset[0] + (e.fx ?? 1) * 42, offset[1] + (e.fy ?? 0) * 42];
     const [first, ...rest] = refs;
     if (!first) return;
     const v = this.make(
@@ -928,7 +938,7 @@ export class FeedbackVfx {
         }
       }
       for (const [skill, b] of Object.entries(feedbackBindings)) {
-        if (approvedSkillIds.has(skill)) continue;
+        if (approvedSkillIds.has(skill) || m3dSkillIds.has(skill)) continue;
         if (!b.sustain) continue;
         b.sustain.forEach((d, index) => {
           if (

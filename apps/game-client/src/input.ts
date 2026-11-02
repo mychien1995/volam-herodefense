@@ -5,14 +5,21 @@ export function bindGameplayInput(
   connected: () => boolean,
   blocked: () => boolean = () => false,
   interact: () => void = () => {},
+  usePotion: (resource: 'hp' | 'mp') => void = () => {},
+  spectator?: { active: () => boolean; pan: (x: number, y: number) => void },
 ): () => void {
   const held = new Set<string>();
   const move = (): void =>
-    send({
-      kind: 'move',
-      x: Number(held.has('ArrowRight')) - Number(held.has('ArrowLeft')),
-      y: Number(held.has('ArrowDown')) - Number(held.has('ArrowUp')),
-    });
+    spectator?.active()
+      ? spectator.pan(
+          Number(held.has('ArrowRight')) - Number(held.has('ArrowLeft')),
+          Number(held.has('ArrowDown')) - Number(held.has('ArrowUp')),
+        )
+      : send({
+          kind: 'move',
+          x: Number(held.has('ArrowRight')) - Number(held.has('ArrowLeft')),
+          y: Number(held.has('ArrowDown')) - Number(held.has('ArrowUp')),
+        });
   const stop = (): void => {
     held.clear();
     if (connected()) move();
@@ -32,6 +39,30 @@ export function bindGameplayInput(
       return;
     }
     if (event.repeat) return;
+    if (spectator?.active()) {
+      if (event.code === 'Space') {
+        event.preventDefault();
+        interact();
+      }
+      return;
+    }
+    const potion = inputBindings.healthPotion.some((key) => key === event.code)
+      ? 'hp'
+      : inputBindings.manaPotion.some((key) => key === event.code)
+        ? 'mp'
+        : undefined;
+    if (potion) {
+      if (event.ctrlKey || event.altKey || event.metaKey || event.shiftKey)
+        return;
+      event.preventDefault();
+      usePotion(potion);
+      return;
+    }
+    if (inputBindings.dash.some((key) => key === event.code)) {
+      event.preventDefault();
+      send({ kind: 'dash' });
+      return;
+    }
     if (event.code === 'Space') {
       event.preventDefault();
       interact();

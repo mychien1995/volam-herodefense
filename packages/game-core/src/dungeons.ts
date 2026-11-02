@@ -1,16 +1,24 @@
-import { KimLuanEncounter } from './kim-luan.js';
 import { TayDocEncounter, TayDocGate } from './tay-doc.js';
 import type { TayDocDefinition } from './tay-doc-types.js';
+import { KimLuanEncounter } from './kim-luan.js';
+import { DongTaEncounter } from './dong-ta.js';
+import type { DongDefinition } from './dong-ta-types.js';
+
+import { BossPartyState, isBossDungeon } from './boss-party.js';
 import type { KimDefinition } from './kim-types.js';
-import { spawnChu } from './chu-ba-thong.js';
+import { spawnChu, drinkChuWine } from './chu-ba-thong.js';
 import { validateChuDefinition, type ChuDefinition } from './chu-types.js';
 import { HongLietEncounter } from './hong-liet.js';
 import type { HongLietDefinition } from './hong-liet-types.js';
-import { distance } from './geometry.js';
+import { distance, blocked } from './geometry.js';
 import { spawnBossEncounter } from './boss-encounter.js';
 import type { BossEncounterDefinition } from './boss-types.js';
 import { cancelOwnedEffects } from './status.js';
-import { changeBuild, refreshCharacter } from './progression.js';
+import {
+  changeBuild,
+  refreshCharacter,
+  characterStats,
+} from './progression.js';
 import type { BuildChange } from './progression-types.js';
 import { InvasionDirector, type InvasionDefinition } from './invasions.js';
 import {
@@ -76,6 +84,7 @@ export interface MatchZone {
   emptySince?: number;
   bossDiedMatchTick?: number;
   dungeon?: CreepDungeonDefinition;
+  creepSpeed?: number;
 }
 export interface ZoneCombatEvent {
   zoneId: string;
@@ -89,9 +98,39 @@ export class DungeonMatch {
   readonly zones = new Map<string, MatchZone>();
   readonly membership = new Map<string, string>();
   readonly respawns = new Map<string, number>();
+  readonly party = new BossPartyState();
+  private readonly offline = new Map<string, Hero>();
   readonly arena: MatchZone;
   readonly invasion: InvasionDirector | undefined;
+  readonly dongTa: DongTaEncounter | undefined;
   tick = 0;
+  arenaTick = 0;
+  nowMs = 0;
+  get arenaPaused(): boolean {
+    // The approved wave encounter must reach the court and recall the party even
+    // when everyone has entered a dungeon. Its own wave clock never pauses.
+    const dong = this.dongTa;
+    if (
+      dong &&
+      dong.phase !== 'cleared' &&
+      (dong.phase !== 'waiting' ||
+        ((this.invasion?.wave ?? 0) >= dong.definition.gateWave &&
+          ![...this.arena.world.creeps.values()].some(
+            (c) => c.invasion?.wave === dong.definition.gateWave && c.hp > 0,
+          )))
+    )
+      return false;
+    const connected = [...this.membership.keys()].filter(
+      (id) => !this.party.disconnected.has(id),
+    );
+    if (!connected.length) return false;
+    const zone = this.zoneOf(connected[0]!);
+    return (
+      !!zone &&
+      isBossDungeon(zone.dungeon) &&
+      connected.every((id) => this.zoneOf(id) === zone)
+    );
+  }
   events: ZoneCombatEvent[] = [];
   readonly definitions = new Map<string, CreepDungeonDefinition>();
   constructor(
@@ -100,6 +139,7 @@ export class DungeonMatch {
     private readonly seed = 42,
     invasion?: InvasionDefinition,
     additionalDungeons: CreepDungeonDefinition[] = [],
+    dongTa?: DongDefinition,
     tayDoc?: TayDocDefinition,
   ) {
     for (const definition of [dungeon, ...additionalDungeons]) {
@@ -127,10 +167,30 @@ export class DungeonMatch {
       };
       this.invasion = new InvasionDirector(invasion, this.arena.world);
     }
+    if (dongTa && invasion)
+      this.dongTa = new DongTaEncounter(dongTa, {
+        lock: (locked) => {
+          this.arena.config = {
+            ...this.base,
+            collision: locked
+              ? [...this.base.collision]
+              : [...this.base.collision, invasion.statue.collision],
+            heroBounds: locked ? dongTa.bounds : undefined,
+          };
+          if (this.arena.world.statue)
+            this.arena.world.statue.invulnerable = locked;
+          if (!locked) this.releaseStatueOccupants();
+        },
+        recall: () => {
+          this.party.invitations.clear();
+          for (const id of [...this.membership.keys()]) this.recallForBoss(id);
+        },
+      });
   }
   add(id: string, nickname: string): Hero {
     const hero = addHero(this.arena.world, id, nickname, this.base);
     this.membership.set(id, 'arena');
+    if (this.dongTa?.locked) this.recallForBoss(id);
     return hero;
   }
   zoneOf(id: string): MatchZone | undefined {
@@ -150,13 +210,78 @@ export class DungeonMatch {
         this.tick + zone.dungeon.bossEncounter.emptyResetTicks;
     this.membership.delete(id);
     this.respawns.delete(id);
+    this.offline.delete(id);
+    this.party.remove(id);
     if (zone?.encounter && !zone.world.heroes.size)
       zone.encounter.clear(zone.world);
+  }
+  disconnect(id: string): void {
+    const hero = this.hero(id);
+    if (!hero) return;
+    // Settle an observed lethal hit before leaving the instance.
+    this.observeDeath(id);
+    this.transfer(id, this.arena, this.base.spawn);
+    removeHero(this.arena.world, id);
+    this.offline.set(id, hero);
+    this.party.disconnected.add(id);
+    this.respawns.delete(id);
+  }
+  reconnect(id: string): void {
+    const hero = this.offline.get(id);
+    if (!hero) return;
+    hero.hp = hero.maxHp;
+    hero.mana = hero.maxMana;
+    hero.bossSpectator = false;
+    hero.pose = 'idle';
+    this.arena.world.heroes.set(id, hero);
+    this.membership.set(id, 'arena');
+    this.party.disconnected.delete(id);
+    this.offline.delete(id);
+    if (this.dongTa?.locked) this.recallForBoss(id);
+  }
+  summonHelp(id: string, nowMs = this.nowMs): string | undefined {
+    const zone = this.zoneOf(id);
+    if (
+      !zone ||
+      !isBossDungeon(zone.dungeon) ||
+      !this.hero(id) ||
+      this.party.disconnected.has(id)
+    )
+      return 'Chưa ở trong phó bản boss.';
+    for (const peer of this.membership.keys())
+      if (
+        peer !== id &&
+        !this.party.disconnected.has(peer) &&
+        this.zoneOf(peer) !== zone
+      )
+        this.party.invite(id, peer, zone, nowMs);
+    return undefined;
+  }
+  replyInvitation(
+    id: string,
+    invitationId: number,
+    accept: boolean,
+    nowMs = this.nowMs,
+  ): string | undefined {
+    this.party.expire(nowMs);
+    const invitation = this.party.invitations.get(id);
+    if (!invitation || invitation.id !== invitationId)
+      return 'Lời mời đã hết hạn.';
+    this.party.invitations.delete(id);
+    if (!accept) return undefined;
+    const hero = this.hero(id),
+      source = this.zoneOf(id);
+    if (!hero || hero.hp <= 0 || !source || this.party.disconnected.has(id))
+      return 'Không thể vào phó bản lúc này.';
+    if (source.access !== 'arena')
+      this.transfer(id, this.arena, this.base.spawn);
+    return this.enter(id, 'shared', invitation.destination);
   }
   canEnterDungeon(id: string): boolean {
     const hero = this.hero(id);
     return (
       !this.invasion?.defeated &&
+      !this.dongTa?.locked &&
       !!hero &&
       hero.hp > 0 &&
       this.zoneOf(id)?.access === 'arena'
@@ -170,8 +295,16 @@ export class DungeonMatch {
     const dungeon = this.definitions.get(destination);
     if (!dungeon || !['private', 'shared'].includes(access))
       return 'Phó bản này chưa mở.';
+    access = isBossDungeon(dungeon) ? 'shared' : 'private';
     if (!this.canEnterDungeon(id))
       return 'Chỉ vào phó bản khi còn sống tại đấu trường.';
+    const entrySpeed = isBossDungeon(dungeon)
+      ? undefined
+      : characterStats(
+          this.hero(id)!,
+          this.zoneOf(id)!.config,
+          this.zoneOf(id)!.world.tick,
+        ).total.movementSpeed * 0.648;
     const key =
       access === 'shared'
         ? `${dungeon.id}_shared`
@@ -188,7 +321,8 @@ export class DungeonMatch {
       let seed = this.seed;
       for (const c of key)
         seed = Math.imul(seed ^ c.charCodeAt(0), 16777619) >>> 0;
-      const config = this.waveConfig(1, 1, dungeon);
+      const creepSpeed = entrySpeed;
+      const config = this.waveConfig(1, 1, dungeon, creepSpeed);
       zone = {
         id: key,
         access,
@@ -199,6 +333,7 @@ export class DungeonMatch {
         spawnPlayerCount: 1,
         nextWaveAt: undefined,
         dungeon,
+        ...(creepSpeed === undefined ? {} : { creepSpeed }),
       };
       if (dungeon.kimBoss) {
         zone.kim = new KimLuanEncounter(dungeon.kimBoss);
@@ -216,7 +351,19 @@ export class DungeonMatch {
         this.assignRoster(zone);
       this.zones.set(key, zone);
     }
-    // Settle the unavoidable mark before travel; a lethal settlement stays in arena.
+    this.party.observe(zone);
+    if (
+      this.membership.size === 1 &&
+      isBossDungeon(dungeon) &&
+      this.party.life(zone, id).eliminated
+    )
+      return 'Đã hết lượt hồi sinh. Hãy chờ boss reset.';
+    if (entrySpeed !== undefined) {
+      zone.creepSpeed = entrySpeed;
+      zone.config.creep.speed = entrySpeed;
+      for (const creep of zone.world.creeps.values())
+        if (creep.stats) creep.stats.speed = entrySpeed;
+    }
     this.tayDoc?.depart(this.arena.world, this.arena.config, id, true);
     if ((this.hero(id)?.hp ?? 0) <= 0)
       return 'Độc nổ đã hạ gục bạn trước khi rời đấu trường.';
@@ -234,6 +381,13 @@ export class DungeonMatch {
           }
         : { x: dungeon.spawn.x, y: dungeon.spawn.y + occupant * 24 },
     );
+    if (isBossDungeon(dungeon) && this.party.life(zone, id).eliminated) {
+      const hero = this.hero(id)!;
+      hero.hp = 0;
+      hero.bossSpectator = true;
+      hero.pose = 'death';
+    }
+    this.party.invitations.delete(id);
     return undefined;
   }
   exit(id: string): string | undefined {
@@ -244,18 +398,32 @@ export class DungeonMatch {
       !zone ||
       zone.access === 'arena' ||
       !hero ||
-      hero.hp <= 0 ||
+      (hero.hp <= 0 && !hero.bossSpectator) ||
       !zone.dungeon ||
-      distance(hero, zone.dungeon.exit) > zone.dungeon.exitRange
+      (!hero.bossSpectator &&
+        distance(hero, zone.dungeon.exit) > zone.dungeon.exitRange)
     )
       return 'Hãy đến gần cửa và nhấn Space để rời phó bản.';
     this.transfer(id, this.arena, zone.dungeon.arenaReturn);
+    if (hero.bossSpectator) {
+      hero.bossSpectator = false;
+      hero.hp = hero.maxHp;
+      hero.mana = hero.maxMana;
+      hero.pose = 'idle';
+    }
     return undefined;
+  }
+  interact(id: string): string | undefined {
+    const zone = this.zoneOf(id);
+    if (zone && drinkChuWine(zone.world, id)) return;
+    return this.exit(id);
   }
   input(id: string, sequence: number, command: Command): string | undefined {
     if (this.invasion?.defeated) return 'Trận đấu đã kết thúc.';
     const zone = this.zoneOf(id);
     if (!zone) return 'Người chơi chưa ở trong khu vực hoạt động.';
+    if (this.party.disconnected.has(id) || this.hero(id)?.bossSpectator)
+      return 'Đang quan chiến.';
     if (
       this.hero(id)?.progression &&
       ['select-basic', 'dev-loadout'].includes(command.kind)
@@ -286,21 +454,37 @@ export class DungeonMatch {
       return 'Chỉ được đổi võ học tại đấu trường. Trong phó bản hoặc PvP chỉ có thể xem.';
     return changeBuild(zone.world, hero, zone.config, revision, change);
   }
-  step(): void {
+  step(nowMs = ((this.tick + 1) * 1000) / this.base.tickRate): void {
     if (this.invasion?.defeated) {
       this.events = [];
       this.invasion.events = [];
       return;
     }
     this.tick++;
+    this.nowMs = nowMs;
+    this.party.expire(nowMs);
     this.events = [];
-    this.invasion?.beforeStep(
-      this.arena.world,
-      this.arena.config,
-      this.tick,
-      this.membership.size,
-    );
+    const paused = this.arenaPaused;
+    if (!paused) this.arenaTick++;
+    if (!paused)
+      this.invasion?.beforeStep(
+        this.arena.world,
+        this.arena.config,
+        this.arenaTick,
+        this.membership.size - this.party.disconnected.size,
+      );
+    if (!paused)
+      this.dongTa?.beforeStep(
+        this.arena.world,
+        this.arena.config,
+        this.invasion?.wave ?? 0,
+      );
     for (const zone of this.zones.values()) {
+      if (zone === this.arena && paused) {
+        zone.world.events = [];
+        if (this.invasion) this.invasion.events = [];
+        continue;
+      }
       if (zone.kim?.phase === 'defeated') {
         zone.bossDiedMatchTick ??= this.tick;
         if (
@@ -369,16 +553,21 @@ export class DungeonMatch {
         }
         zone.kim?.emptyStep(zone.world, zone.config, this.tick);
         zone.encounter?.emptyStep(zone.world, zone.config, this.tick);
+        this.observeAttempt(zone);
         continue;
       }
       delete zone.emptySince;
       const wasDead = zone.world.chu?.deadAt;
       stepWorld(zone.world, zone.config);
+      if (zone.access === 'arena')
+        this.dongTa?.afterStep(zone.world, zone.config);
       if (wasDead === undefined && zone.world.chu?.deadAt !== undefined)
         zone.bossDiedMatchTick = this.tick;
       zone.kim?.step(zone.world, zone.config);
       zone.encounter?.step(zone.world, zone.config);
       if (zone.access === 'arena' && this.tayDoc) {
+        if (this.dongTa?.phase === 'cleared')
+          this.tayDocGate.completeChapter('dong_ta');
         if (this.invasion)
           this.tayDocGate.step(
             zone.world,
@@ -388,12 +577,13 @@ export class DungeonMatch {
           );
         this.tayDoc.step(zone.world, zone.config);
       }
+      this.observeAttempt(zone);
       if (encounter && zone.world.creeps.get(zone.world.boss!.actorId)!.hp <= 0)
         zone.bossRespawnAt ??= this.tick + encounter.respawnTicks;
       for (const event of zone.world.events)
         this.events.push({ zoneId: zone.id, event });
       if (zone.access === 'arena') {
-        this.invasion?.afterStep(zone.world, this.tick);
+        this.invasion?.afterStep(zone.world, this.arenaTick);
         if (this.invasion?.defeated) {
           this.tayDoc?.dispose(this.arena.world);
           for (const active of this.zones.values()) {
@@ -424,6 +614,7 @@ export class DungeonMatch {
             zone.wave,
             zone.spawnPlayerCount,
             dungeon,
+            zone.creepSpeed,
           );
           spawnCreeps(zone.world, zone.config, `wave_${zone.wave}`);
           this.assignRoster(zone);
@@ -435,11 +626,25 @@ export class DungeonMatch {
     for (const id of this.membership.keys()) {
       const hero = this.hero(id);
       if (!hero || hero.hp > 0) continue;
-      const dungeon = this.zoneOf(id)?.dungeon ?? this.dungeon;
+      if (this.dongTa?.phase === 'retry') continue;
+      if (this.party.disconnected.has(id) || hero.bossSpectator) continue;
+      const zone = this.zoneOf(id)!;
+      const dungeon = zone.dungeon ?? this.dungeon;
+      this.observeDeath(id);
+      if (hero.hp > 0 || hero.bossSpectator) continue;
       if (!this.respawns.has(id))
         this.respawns.set(id, this.tick + dungeon.respawnTicks);
       if (this.tick >= this.respawns.get(id)!) {
-        this.transfer(id, this.arena, this.base.spawn);
+        if (isBossDungeon(zone.dungeon)) {
+          hero.x = dungeon.spawn.x;
+          hero.y = dungeon.spawn.y;
+          hero.moveX = hero.moveY = 0;
+        } else
+          this.transfer(
+            id,
+            this.arena,
+            this.dongTa?.locked ? this.bossFormation(id) : this.base.spawn,
+          );
         hero.hp = hero.maxHp;
         hero.mana = hero.maxMana;
         hero.pose = 'idle';
@@ -447,21 +652,123 @@ export class DungeonMatch {
       }
     }
   }
+  private observeAttempt(zone: MatchZone): void {
+    if (!this.party.observe(zone)) return;
+    for (const hero of zone.world.heroes.values()) {
+      this.respawns.delete(hero.id);
+      hero.bossSpectator = false;
+      if (hero.hp <= 0) {
+        hero.hp = hero.maxHp;
+        hero.mana = hero.maxMana;
+        hero.x = zone.dungeon!.spawn.x;
+        hero.y = zone.dungeon!.spawn.y;
+        hero.pose = 'idle';
+      }
+    }
+  }
+  private observeDeath(id: string): void {
+    const zone = this.zoneOf(id),
+      hero = this.hero(id);
+    if (
+      !zone ||
+      !hero ||
+      hero.hp > 0 ||
+      !isBossDungeon(zone.dungeon) ||
+      hero.bossSpectator ||
+      this.respawns.has(id)
+    )
+      return;
+    const life = this.party.life(zone, id);
+    cancelOwnedEffects(zone.world, id);
+    if (life.revivalUsed) {
+      life.eliminated = true;
+      hero.bossSpectator = true;
+      hero.moveX = hero.moveY = 0;
+      if (this.membership.size === 1) {
+        this.transfer(id, this.arena, this.base.spawn);
+        hero.hp = hero.maxHp;
+        hero.mana = hero.maxMana;
+        hero.pose = 'idle';
+        hero.bossSpectator = false;
+      }
+    } else {
+      life.revivalUsed = true;
+      this.respawns.set(id, this.tick + this.base.tickRate * 5);
+    }
+  }
   private assignRoster(zone: MatchZone): void {
     const roster = zone.dungeon?.creepRoster;
     if (!roster?.length) return;
-    const forest = zone.dungeon?.id === 'forest';
-    let i = forest
-      ? (zone.forestRosterCursor ?? 0)
-      : (zone.wave - 1) * zone.config.creepSpawns.length;
     for (const creep of zone.world.creeps.values())
-      creep.archetypeId = roster[i++ % roster.length]!;
-    if (forest) zone.forestRosterCursor = i % roster.length;
+      creep.archetypeId = roster[(zone.wave - 1) % roster.length]!;
+  }
+  private bossFormation(id: string): Point {
+    const d = this.dongTa!.definition,
+      index = [...this.membership.keys()].indexOf(id);
+    for (let offset = 0; offset < 24; offset++) {
+      const a = (index * Math.PI) / 3 + (offset * Math.PI) / 12;
+      const point = {
+        x: d.center.x + Math.cos(a) * 190,
+        y: d.center.y + Math.sin(a) * 170,
+      };
+      if (
+        !blocked(
+          point,
+          this.base.radius,
+          this.arena.config.width,
+          this.arena.config.height,
+          this.arena.config.collision,
+        )
+      )
+        return point;
+    }
+    throw Error('No legal boss recall point');
+  }
+  /** Restore solid statue scenery without trapping feet that occupied its hidden base. */
+  private releaseStatueOccupants(): void {
+    const c = this.arena.config;
+    const legal = (p: Point) =>
+      !blocked(p, c.radius, c.width, c.height, c.collision);
+    for (const hero of this.arena.world.heroes.values()) {
+      if (legal(hero)) continue;
+      const from = { x: hero.x, y: hero.y };
+      let destination: Point | undefined;
+      for (let radius = 8; radius <= 128 && !destination; radius += 8)
+        for (let i = 0; i < 16; i++) {
+          const a = Math.PI / 2 + (i * Math.PI) / 8,
+            point = {
+              x: from.x + Math.cos(a) * radius,
+              y: from.y + Math.sin(a) * radius,
+            };
+          if (legal(point)) {
+            destination = point;
+            break;
+          }
+        }
+      destination ??= this.base.spawn;
+      if (!legal(destination)) throw Error('No legal statue release position');
+      hero.x = destination.x;
+      hero.y = destination.y;
+    }
+  }
+  private recallForBoss(id: string): void {
+    const hero = this.hero(id);
+    if (!hero) return;
+    const dead = hero.hp <= 0;
+    this.transfer(id, this.arena, this.bossFormation(id));
+    hero.bossSpectator = false;
+    if (dead) {
+      hero.hp = hero.maxHp;
+      hero.mana = hero.maxMana;
+      hero.pose = 'idle';
+    }
+    this.respawns.delete(id);
   }
   private waveConfig(
     wave: number,
     players: number,
     d: CreepDungeonDefinition,
+    creepSpeed?: number,
   ): SimulationConfig {
     const count = Math.ceil(
       d.baseCount * (1 + d.countPerAdditionalPlayer * (players - 1)),
@@ -480,8 +787,10 @@ export class DungeonMatch {
         }),
       ),
       creepRespawn: false,
+      dungeonAggro: !(d.boss || d.chuBoss || d.kimBoss || d.bossEncounter),
       creep: {
         ...this.base.creep,
+        ...(creepSpeed === undefined ? {} : { speed: creepSpeed }),
         hp: Math.round(
           this.base.creep.hp *
             (1 + d.hpPerWave * (wave - 1)) *
@@ -504,6 +813,10 @@ export class DungeonMatch {
     const convert = (until: number) =>
       destination.world.tick + Math.max(0, until - source.world.tick);
     hero.cooldown = convert(hero.cooldown);
+    if (hero.basicChainDeadline)
+      hero.basicChainDeadline.until = convert(hero.basicChainDeadline.until);
+    if (hero.dashRechargeAt !== undefined)
+      hero.dashRechargeAt = convert(hero.dashRechargeAt);
     hero.skillCooldowns = hero.skillCooldowns.map(convert);
     if (hero.abilityCooldowns)
       for (const key of Object.keys(hero.abilityCooldowns))

@@ -8,6 +8,8 @@ import {
 import map from './hong-liet-map.json' with { type: 'json' };
 import { creepDungeon } from './dungeon.js';
 import { m1Config } from './m1.js';
+import { enlargeBossArena } from './boss-arena-geometry.js';
+import { bossCadence, cadenceTicks } from './boss-cadence.js';
 const marker = (name: string) => {
   const p = map.layers
     .find((l) => l.name === 'markers')!
@@ -50,12 +52,12 @@ export const hongLietDefinition: HongLietDefinition = {
   hp: 3600,
   defense: 18,
   radius: 22,
-  speed: 85,
+  speed: 130,
   xp: 900,
   gold: 240,
   emptyResetTicks: ticks(30),
   respawnTicks: ticks(30),
-  restTicks: ticks(0.8),
+  restTicks: ticks(0.35),
   initialRestTicks: ticks(2),
   stunScale: 0.2,
   summonLimit: 8,
@@ -77,15 +79,15 @@ export const hongLietDefinition: HongLietDefinition = {
   projectileSpeed: 600,
   projectileRadius: 8,
   a1Spread: Math.PI / 10,
-  a1ForwardOffset: 24,
+  a1ForwardOffset: 0,
   lavaDistance: 550,
   lavaDashTicks: ticks(0.8),
   lavaFadeTicks: ticks(1.6),
   cannonRows: [430, 590, 750, 910],
   cannonColumns: [350, 550, 750, 950],
   abilities: {
-    hong_liet_a1: profile('Tam Lộ Đao Khí', 22, 600, 13, 0.7, 0.35, 0.35, 3),
-    hong_liet_a2: profile('Hoành Tảo Đại Đao', 26, 217, 0, 0.7, 0.35, 0.4, 3),
+    hong_liet_a1: profile('Ngũ Lộ Đao Khí', 22, 720, 13, 0.4, 0.35, 0.2, 1.4),
+    hong_liet_a2: profile('Hoành Tảo Đại Đao', 26, 242, 0, 0.4, 0.35, 0.2, 1.4),
     dung_nham_liet_dia: profile(
       'Dung Nham Liệt Địa',
       24,
@@ -133,6 +135,18 @@ export const hongLietDefinition: HongLietDefinition = {
     ),
   },
 };
+hongLietDefinition.restTicks = cadenceTicks(bossCadence.hong_liet.restSeconds);
+hongLietDefinition.initialRestTicks = cadenceTicks(
+  bossCadence.hong_liet.initialRestSeconds,
+);
+for (const [id, a] of Object.entries(hongLietDefinition.abilities)) {
+  const t = bossCadence.hong_liet.abilities[id];
+  if (!t) throw Error('Missing HHL cadence ' + id);
+  a.windupTicks = cadenceTicks(t.windupSeconds);
+  a.recoveryTicks = cadenceTicks(t.recoverySeconds);
+  a.cooldownTicks = cadenceTicks(t.cooldownSeconds);
+  a.intervalTicks = cadenceTicks(t.intervalSeconds);
+}
 const positive = z.number().finite().positive(),
   nonnegative = z.number().finite().nonnegative();
 const ability = z.object({
@@ -191,10 +205,10 @@ export function validateHongLietDefinition(d: HongLietDefinition): void {
   }).parse(d);
   for (const key of hongLietAbilities) ability.parse(d.abilities[key]);
   if (
-    d.abilities.hong_liet_a1.range !== 600 ||
+    d.abilities.hong_liet_a1.range !== 720 ||
     Math.abs(d.a1Spread - Math.PI / 10) > 1e-9
   )
-    throw Error('Approved boss A1 geometry changed.');
+    throw Error('Approved M3D feedback A1 geometry changed.');
   if (
     d.summonCount > d.summonLimit ||
     new Set(d.cannonRows).size !== 4 ||
@@ -216,7 +230,7 @@ export const hongLietMap = map;
 const collision = map.layers
   .find((l) => l.name === 'collision')!
   .objects!.map(({ x, y, width, height }) => ({ x, y, width, height }));
-export const hongLietDungeon: CreepDungeonDefinition = {
+export const hongLietDungeon: CreepDungeonDefinition = enlargeBossArena({
   ...creepDungeon,
   id: 'hong_liet',
   width: map.width * 32,
@@ -232,11 +246,19 @@ export const hongLietDungeon: CreepDungeonDefinition = {
   damagePerWave: 0,
   hpPerAdditionalPlayer: 0,
   damagePerAdditionalPlayer: 0,
-};
+});
 for (const p of [
   hongLietDungeon.spawn,
   hongLietDungeon.exit,
   hongLietDefinition.spawn,
 ])
-  if (blocked(p, 22, hongLietDungeon.width, hongLietDungeon.height, collision))
+  if (
+    blocked(
+      p,
+      22,
+      hongLietDungeon.width,
+      hongLietDungeon.height,
+      hongLietDungeon.collision,
+    )
+  )
     throw Error('Boss map marker blocked.');

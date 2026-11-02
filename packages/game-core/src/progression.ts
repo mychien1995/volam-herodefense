@@ -100,6 +100,13 @@ export function characterStats(
     temporary: zero(),
   };
   sources.temporary.critChance = statusValue(hero, 'crit_buff', tick);
+  if (hero.inventory && config.economy)
+    for (const [slot, item] of Object.entries(config.economy.basics)) {
+      const level =
+        hero.inventory.levels[slot as keyof typeof hero.inventory.levels];
+      for (const key of statKeys)
+        sources.equipment[key] += (item.perLevel[key] ?? 0) * level;
+    }
   sources.temporary.critMultiplier = Math.max(
     0,
     ...(hero.statuses ?? [])

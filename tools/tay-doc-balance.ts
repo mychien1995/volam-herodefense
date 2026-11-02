@@ -26,6 +26,7 @@ for (const seed of [42, 1337, 9001])
           seed,
           createInvasionDefinition(),
           [],
+          undefined,
           tayDocDefinition,
         );
         const bots = Array.from({ length: players }, (_, i) => {

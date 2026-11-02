@@ -1,0 +1,43 @@
+{
+  "revision": "review5",
+  "authority": "Latest director feedback in docs/M3D_PLAYTEST_FEEDBACK_2026-11-02.md",
+  "inherits": "source/review4-render-corrections.json",
+  "newRasterGeneration": false,
+  "productionIntegrated": false,
+  "corrections": {
+    "hoac_do_darts": "Revert enlarged/rearranged review darts. Retain exact runtime hoac_do_fx/nail PNG, origin, rotation, scale0.25, source animation and emission pattern; brightness only1->1.6, no saturation filter. Phien Trung: two opposing five-shot fans. Van Nhan: original spin body and whirlwind0.9, eight radial shots every0.3s for3s. No new hit count or tuning implied.",
+    "kim_luan_truy_hon": "Original description: Ban ra nam kim luan dap quanh arena rat lau. Only five->seven. Runtime radial emission, speed260, life20s, wall reflections retained as handoff contract; no parallel lanes or homing. Preview demonstrates repeated wall ricochets in its illustrative bounds; real integration must consume authoritative effects, not preview coordinates.",
+    "ngu_luan_ho_the": "Original description: luan xoay quanh nguoi, aoe lon, khi xoay xong1 thoi gian5 luan ban ra nam huong khac nhau. Only five->seven. Boss-centred orbit radius145/angularSpeed6 for3s, then continuous radial release at speed680 for existing2s. Seven stable wheel IDs through orbit and release, headings separated2pi/7. Source wheels remain round billboards; visual orbit Y projection0.45 is not gameplay ellipse.",
+    "arena": "Replace previous shrink proposal. Increase both width and height10% from CURRENT IN-GAME arenas: each axis1.1, area1.21. Do not multiply the unimplemented0.8 proposal by1.1. Preview overlays only; no new raster, tilemap or authoritative geometry edited."
+  },
+  "runtimeSources": [
+    "packages/game-core/src/kim-luan.ts: fan/release/advance effects",
+    "packages/game-data/src/kim-luan.ts: nails/orbit and existing profiles",
+    "apps/game-client/src/kim-luan-art.ts: hoac nail scale0.25/whirlwind0.9"
+  ],
+  "directorApproved": false,
+  "history": "history/review4/",
+  "kimChannelDisplayPivot": {
+    "source": "retained kim_luan_actions/channel_*",
+    "method": "alpha>=220, dark sole pixels max(RGB)<110 in final6 opaque rows; midpoint of left/right sole extrema; no raster changes",
+    "framePivots": {
+      "channel_0": [
+        79.5,
+        133
+      ],
+      "channel_1": [
+        89.5,
+        128
+      ],
+      "channel_2": [
+        94.5,
+        128
+      ],
+      "channel_3": [
+        97,
+        128
+      ]
+    },
+    "reason": "Global source pivot followed one foot and shifted visible body17px from logical owner centre; align body mid-stance to the same owner used by orbit."
+  }
+}

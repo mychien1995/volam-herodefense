@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>M3D · Nhân vật thi triển skill</title><link rel="icon" href="data:,">
+  <link rel="stylesheet" href="performance.css">
+</head>
+<body>
+<main id="viewport" aria-label="Preview nhân vật và VFX độc lập">
+  <canvas id="scene" width="960" height="540" aria-label="Nhân vật thi triển đòn đánh và VFX"></canvas>
+  <div class="top overlay">
+    <div><strong>M3D · VÕ LÂM</strong><small>VISUAL R2 ĐÃ DUYỆT · CHỜ TÍCH HỢP PHASER</small></div>
+    <div class="row"><a href="index.html">Xem từng frame</a><button id="hide">Ẩn công cụ · H</button></div>
+  </div>
+  <div id="caption" class="overlay" role="status">Đang tải sprite…</div>
+  <section id="controls" class="overlay" aria-label="Điều khiển preview">
+    <div class="row">
+      <select id="school" aria-label="Môn phái"></select><select id="ability" aria-label="Đòn đánh hoặc skill"></select>
+      <select id="direction" aria-label="Hướng"><option value="right">→ Phải</option><option value="down">↓ Xuống</option><option value="left">← Trái</option><option value="up">↑ Lên</option></select>
+      <button id="play">Thi triển · A</button><button id="pause">Dừng · Space</button>
+    </div>
+    <div class="row options">
+      <label><input id="repeat" type="checkbox" checked>Tự lặp bản diễn</label>
+      <select id="zoom" aria-label="Độ phóng"><option value="1">1× pixel gameplay</option><option value="2" selected>2× xem chi tiết</option></select>
+      <select id="speed" aria-label="Tốc độ"><option value=".25">Chậm 0,25×</option><option value=".5">Chậm 0,5×</option><option value="1" selected>Tốc độ 1×</option></select>
+      <label><input id="targets" type="checkbox" checked>Quái tham chiếu</label>
+      <label><input id="move" type="checkbox">Di chuyển vùng đốt</label>
+      <button id="background">Nền sáng / tối</button>
+    </div>
+    <div class="row"><input id="timeline" aria-label="Timeline" type="range" min="0" max="1" step="1" value="0"><output id="clock">0.00s</output></div>
+    <small id="note">A: một lần thi triển · ←↑↓→ đổi hướng · Không có damage/server; timing và quãng bay chỉ minh hoạ.</small>
+  </section>
+  <div id="error" hidden role="alert"></div>
+</main>
+<script type="module" src="performance.js"></script>
+</body></html>

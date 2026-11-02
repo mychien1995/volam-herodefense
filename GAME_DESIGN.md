@@ -1,5 +1,17 @@
 # Game Design Document (GDD) v1.0
 
+## M3D approved dungeon and party runtime — 2026-11-03
+
+All creep destinations (forest/desert/sea/Hell) are private per player; all four boss destinations are shared. The server normalizes legacy access payloads, and UI has no private/shared selector. Each creep wave has one identity; following waves rotate it. Creep speed is64.8% of actual owner movement speed including entry buffs, held fixed for the wave; soft server separation reduces coincident packs without hard-blocking paths.
+
+Boss card order is Lý Mạc Sầu → Hoàn Nhan Hồng Liệt → Chu Bá Thông → Kim Luân; cards show arena backgrounds and I opens mechanism details. Arenas width and height are1.1× the pre-feedback dimensions. Inviter enters immediately, optionally summons others; accept enters immediately, decline/timeout stays outside. Invites last30 real seconds and only target connected peers outside that boss. Solo has no summon popup.
+
+When all connected players occupy the same boss, freeze exterior arena combat including live creeps/invasion bosses, projectiles, statue damage and wave clock. Boss simulation continues; any player outside resumes arena combat. First boss death auto-revives after5s at entry full HP/MP. Second death spectates gray with arrow camera and optional exit; solo automatically exits to arena. Revival exhaustion survives leave/re-enter/reconnect until boss reset; reconnect returns to main arena, not boss. Boss empty-reset remains30s. O opens Võ Công, P dungeons, Escape closes overlay or asks quit;1/2 retain health/mana potion use. No Đồng Đội Kết Nối menu.
+
+Boss combat/VFX and Chu wine follow current data and `docs/M3D_R3_GAMEPLAY_HANDOFF.md` plus the newer followup/fix handoffs. Inventory-v2 personal material/Long Châu design elsewhere remains a future migration; current retained encounter rolls/rewards are not silently replaced by this integration. Trial merchant purchases and potion behavior from ECONOMY_TRIAL remain active.
+
+**Inventory/merchant design revision — 2026-11-02:** [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) v2.0 is the detailed design for potions, four fixed equipment slots, personal boss rewards/Long Châu and crafting. This documentation does not implement or migrate the existing boss loot backend; confirmed/open choices are distinguished there and in [DECISIONS.md](DECISIONS.md).
+
 ## 1. Pitch & pillars
 
 **Genre:** multiplayer cooperative action RPG + periodic hero defense; 2D orthographic top-down / three-quarter Pokémon-style overworld perspective (not isometric, platformer or 3D third-person), with colorful original wuxia-inspired pixel art; browser-first; 1–6 players in temporary match-based rooms. References to Warcraft III custom maps / Pokémon relate only to broad gameplay and visual perspective, not assets or proprietary designs.
@@ -67,7 +79,7 @@ The first final boss eligibility after chapter four: only once Bắc Cái is def
 - Exit via **physical portal** inside dungeon; mouse to interact, return to arena NPC. Dungeon entry, transitions and teleports validated server-side.
 - Creep dungeons: spawn next wave **only after all living creeps from current wave are defeated**; wave difficulty increases; dungeon pauses when last participant leaves and resumes from same wave when someone returns. Define which enemies' HP/position are paused via snapshot, not erased.
 - Boss dungeons: fixed boss strength, can be killed repeatedly; after kill, wait a tunable respawn cooldown. If dungeon becomes empty with boss alive, start **30-second reset timer**; at expiry, restore HP and spawn position. If reentered before expiry, cancel reset. If boss already dead, use respawn cooldown logic instead; avoid resurrecting prematurely due to empty state.
-- No boss scaling on repeated kills. Boss rewards: shared XP for eligible participants who have landed at least one real hit (presence when killed proposed to avoid hit-and-leave exploit), one item via boss loot table and player roll.
+- No boss scaling on repeated kills. Boss item rewards go to every participant who damaged the boss and remains in its instance at death: a personal boss material each kill, plus Long Châu once per character/boss/match. No rolls. XP/gold keep their fixed-pool rules; see [inventory rewards](ITEMS_AND_CRAFTING.md#4-thưởng-boss-và-long-châu--confirmed).
 - Enemy counts and power of creep dungeons scale to participating player count **at each wave spawn**, while boss dungeon's configured static boss power does not depend on repeated attempts; private/shared difficulty variants may use separately authored configs.
 
 ## 7. EXP, levels, skills and death
@@ -90,10 +102,12 @@ The first final boss eligibility after chapter four: only once Bắc Cái is def
 
 ## 9. Items, shop, loot and optional PvP
 
-- Four equipment slots (slot restrictions open), separate backpack (size open). Items may be dropped or sold; duplicates can be kept for crafting.
-- Buying duplicate basic item levels up a copy until its max. Maxed basic item + designated boss item + gold crafts stronger equipment; crafting should succeed deterministically initially.
-- Each dungeon boss drops **one item total**, selected by weighted loot table and awarded via roll to eligible party members (if only one, automatic). Invasion bosses never drop an item.
+- Four fixed equipment slots: **weapon, armor, hat, boots**; no necklace. Weapon adds damage, armor defense/HP, hat HP/MP regen, boots speed/minor crit. Backpack capacity remains open. No resale, trading or transferable drops.
+- Buying the same basic item upgrades it to **level 5**. Max basic + designated boss material + gold selects one of three crafted branches. Deterministic crafting remains proposed; exact recipes/effects and open values are in [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md).
+- Merchant sells HP/MP potions with **5s use cooldown**, limit 20 (total/per-type open), larger healing sizes with higher prices. Potions cannot be purchased inside dungeons; shared/separate cooldown and exact amounts/prices remain open.
+- Every eligible boss participant receives personal materials and first-clear Long Châu as specified in section 6. Invasion bosses never grant items or Long Châu.
 - Optional PvP via NPC; create/join a duel, players stand on opposing sides and mark ready, then start; 1v1 or uneven team configurations totaling <= 6. No loadout editing inside PvP arena; do not make PvP a dependency for co-op progression. PvP time/raid overlap and reward rules are still open.
+- **PvP proposal, not confirmed:** ignore equipment and allow skills only; ban potions. Whether that excludes shoe Z and Long Châu or normalizes level/ranks/passives is unresolved; see [inventory PvP notes](ITEMS_AND_CRAFTING.md#10-pvp--proposed-chưa-chốt).
 
 ## 10. Difficulty philosophy & win condition
 
@@ -115,3 +129,7 @@ The existing Colyseus room owns WAITING_LOBBY, SCHOOL_SELECTION and IN_GAME, hos
 Disconnect safety: during selection retain a disconnected/unconfirmed participant and hold the barrier. Never auto-pick, expire, or silently start without that participant. Current clients can leave/recreate the room. Host migration, reconnect/rejoin grace, removal of absent participants and any timeout/auto-selection policy remain OPEN; no such policy is implemented. Waiting-lobby host loss disables starting; no silent host promotion.
 
 School descriptions, passives and basic styles come from CONTENT_DATA.md. School-specific numeric starting values and starting skill assignments beyond the Cái Bang M1 prototype are not finalized; show that explicitly instead of inventing mockup statistics. Phase 1 stores/validates selections but does not implement M3 school combat or bulk school gameplay art: the existing M1 combat tuning and approved Cái Bang runtime visual fallback remain in the arena. Distinct school card portraits are concept illustrations only.
+
+## Đông Tà V04 encounter exception — 2026-11-02
+
+The director-approved first wave boss targets players, not the statue. It enters the existing arena from the east after wave5 clear/rest; at court center all match players are recalled and dead players immediately revived. The statue is temporarily hidden and invulnerable without repair, including unlimited full-party-wipe retries. Players are confined to the court plus rim; the180-second invasion clock continues. Đông Tà alone dying clears this encounter and removes Mai/Hoàng; no items drop. This exception supersedes the general chapter-boss/statue and no-automatic-teleport descriptions for this encounter only. Exact final skill selection, implementation and trial tuning: `docs/DONG_TA_INTEGRATION.md`.

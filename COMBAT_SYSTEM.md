@@ -1,4 +1,26 @@
+## M3D approved combat and action lifecycle — 2026-11-03
+
+Newest M3D feedback overrides historical reach/timing statements below. Every A is a fresh press; monk A has four stages, minimum6tick cadence, finisher30tick cooldown;60tick inactivity begins30tick cooldown. Shift has2 charges with sequential240tick/8s recharge. Võ Đang basic knockback probability0.1.
+
+Toàn Phong and Ca Diệp are straight piercing projectiles with per-target/cast dedup; Ca Diệp's caster remains stationary during windup9/recovery6tick and all targets on the earth path take damage+36tick stun, subject to existing boss resistance. Vô Ảnh's one-foot/six-foot branch uses real same-attacker/same-target B progress. Buffer at most one early finisher while the actual step2 action/projectile is unresolved, preserving the input facing; consume mana/cooldown once at execution, clear on A/other skill/Shift, stun/silence,death/travel/respec/disconnect. It never fabricates hits. Full branch lanes[-18,0,18], release ticks[0,3,6,18,21,24], projectile speed390/range260. Same-target empowerment remains checked at hit and cached per target/cast.
+
+Vi Đà offset189. Như Lai's Sanskrit field damages on first entry once/target/cast, not standing or repeated re-entry. Owner-following Kháng Long burn remains separate. Hồng Liệt artillery schedules continue independently of A1/A2 and cancel through encounter cleanup. Chu wine12s grants70% defense penetration against Chu only (defense180), strongest penetration rather than additive stacking; no healing or immunity. Reflection still returns actual HP loss once. Càn Khôn pull120px/s blocks Shift without spending a charge. All effects are server-owned; atlas frames/preview timings never authorize hits or resource changes.
+
+## M3D feedback override — 2026-11-01
+
+Shift is a separate zero-mana, zero-damage, non-invulnerable mobility command: two charges, sequential 180-tick recharge at 30Hz. Server owns direction from current movement/facing, terrain-safe swept motion, debt and lifecycle; travel converts remaining debt between zone clocks. Dead heroes retain/recharge debt. Stun or another active action rejects a dash without consuming a charge.
+
+Võ Đang basics use a 6-tick animation cadence and no separate recovery cooldown; every attack requires a fresh A press. Thiếu Lâm Quyền emits four authoritative presentation stages. Vi Đà range is measured from a 42-unit forward ground origin while frontal eligibility and line-of-sight remain caster-relative, preserving close same-target Phát Động hits.
+
+The blink sword flies straight at 180 units/s to rank1 range540, pierces each enemy once and then lingers damage-free for45 ticks. Valid same-slot recast bypasses its existing cooldown/mana cost; destination, terrain path and confinement are checked on server. Unsafe recast retains the sword. Cooldown begins on initial cast; cleanup uses the existing death/travel/build/disconnect path. Delayed arcs capture heading/offense, strike once after windup and may retain an explicit active/recovery duration. The rank4 owner-following fire area updates position every simulation tick and damages on its own fixed pulse schedule.
+
 # Combat System Specification v1.0
+
+## Inventory combat design — 2026-11-02 (not implemented by this documentation update)
+
+See [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) for the confirmed inventory design and open formulas. Basics add weapon damage, armor defense/HP, hat HP/MP regen and boot speed/minor crit. Crafted weapon branches are A spread, lifesteal based on one A's emitted damage (not creep count), and **A armor penetration replacing stun**. Exact penetration/stacking and lifesteal crit/mitigation/multi-hit timing remain open; existing skill penetration does not imply that equipment is implemented.
+
+Crafted boots add one **Z** item action independently of QWER: **Thanh Tâm** clears existing slow/poison/burn (replacing 10% healing), forward collision-respecting blink, or facing-directed straight slow/poison needle without auto-targeting. No implicit stun cleanse, immunity or boss-mechanic removal. Potions have **5s use cooldown**; shared/per-type policy is open. Server owns all effects, cooldowns and validation; equipment changes must not reset cooldown debt or duplicate resources/stats. Numeric armor reflect/aura behavior and Long Châu stat growth require explicit formulas before implementation. PvP excluding equipment/potions remains proposed, including the treatment of Z and Long Châu.
 
 ## Current M3C3 feedback override — 2026-10-31
 
@@ -89,7 +111,7 @@ Design effects as composable, data-driven operations with optional specialized h
 ## 6. Thiếu Lâm Phát Động combo — confirmed same-target rule
 
 **Combo A:** `La Hán Quyền` → `Vi Đà Quyền` → `Đại Lực Kim Cương Chưởng`.
-**Combo B:** `Toàn Phong Thoái` → `Hoành Tảo Cước` → `Vô Ảnh Cước`.
+**Combo B:** `Toàn Phong Thoái` → `Ca Diệp Thoái` (`hoanh_tao_cuoc`) → `Vô Ảnh Cước`.
 
 Algorithm (logical spec):
 
@@ -139,6 +161,11 @@ Shared deterministic core now supports timed resource shields (post-armor fracti
 - Tọa Sát Bác Đồ uses a guard status for150ticks. Its70% reduction participates in the existing strongest-reduction rule. Accumulate exact actual HP decrement after defense, reduction and mana absorption, capped by HP available. At expiry or accumulated loss strictly greater than20% of current maximum HP, consume the status before emitting one radial `counter_release` event and resolving damage. Exactly20% does not trigger early. A small machine-precision tolerance prevents binary floating point from treating mathematical equality as greater. Reflection uses the stored sum without caster growth/crit, another70% reduction or integer minimum/rounding; target defenses/shields remain applicable. Reactive damage does not recursively trigger counters. Dead/cancelled/removed/travelling owners do not release. Active guard inputs cannot extend the5s window or erase stored loss.
 
 These rules live in deterministic `game-core`; client animation frames/contact markers have no authority. Presentation adapts approved cels to accepted casts, actual areas/projectiles/status ticks and confirmed hit/release events. Bất Động's four-second afterglow is cosmetic: its existing heal remains one instant pulse. Như Lai retains one real projectile and existing ally-defense status; seven authored palm echoes add no hits. Đại Lực retains its authoritative delayed arc; the flying hand adds no projectile/hit. Thất Tinh retains four real hits under seven visual swords.
+
+## Tây Độc authoritative arena encounter
+
+See `docs/TAY_DOC_INTEGRATION.md` for the implemented feedback03 kit and trial tuning. The boss and six destructible pillars are controlled hostile actors in the existing arena. Hits, swept shots, circular/arc geometry, poison ticks, mark settlement and phases run in deterministic game-core. Curse’s25%maximum HP loss is a narrowly scoped unavoidable-HP-loss path through existing death/event handling; normal damage retains its existing mitigation/evasion/crit behavior. Phase2 starts once below50%, retains released hazards and uses only its new rotation. No statue targeting, item drops or dungeon respawn is added.
+
 
 ## Tây Độc authoritative arena encounter
 

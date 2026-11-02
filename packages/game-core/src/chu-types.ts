@@ -11,6 +11,10 @@ export type ChuPhase =
   | 'ultimate'
   | 'drink';
 export interface ChuDefinition {
+  wineBuffTicks?: number;
+  wineArmorPenetration?: number;
+  movementSpeed?: number;
+  basicPalmIntervalTicks?: number;
   spawn: Point;
   hp: number;
   defense: number;
@@ -72,6 +76,9 @@ export interface ChuLoot {
   y: number;
 }
 export interface ChuEncounter {
+  wine?: Array<Point & { id: string; until: number }>;
+  wineDrinkers?: Record<string, number>;
+  nextBasicAt?: number;
   definition: ChuDefinition;
   phase: ChuPhase;
   phaseIndex: number;
@@ -100,6 +107,10 @@ export interface ChuEncounter {
   nextAction: number;
 }
 export interface ChuView {
+  wine?: Array<Point & { id: string; until: number }>;
+  wineDrinkers?: Array<
+    Point & { id: string; remainingTicks: number; durationTicks: number }
+  >;
   phase: ChuPhase;
   elapsed: number;
   duration: number;
@@ -115,6 +126,8 @@ export interface ChuView {
   missiles: ChuMissile[];
   trap: ChuEncounter['trap'] | null;
   disciples: Array<{
+    hp?: number;
+    maxHp?: number;
     id: number;
     x: number;
     y: number;
@@ -139,6 +152,18 @@ export function validateChuDefinition(
   d: ChuDefinition,
   c: SimulationConfig,
 ): void {
+  if (
+    d.wineBuffTicks !== undefined &&
+    (!Number.isInteger(d.wineBuffTicks) || d.wineBuffTicks <= 0)
+  )
+    throw Error('Invalid wine duration');
+  if (
+    d.wineArmorPenetration !== undefined &&
+    (!Number.isFinite(d.wineArmorPenetration) ||
+      d.wineArmorPenetration < 0 ||
+      d.wineArmorPenetration > 1)
+  )
+    throw Error('Invalid wine penetration');
   for (const n of [
     d.hp,
     d.defense,

@@ -1,3 +1,32 @@
+## Combined approved M3D integration acceptance — 2026-11-03
+
+Current acceptance includes real Q/W/E same-target success/miss/early-input/cancel/duplicate/cost across four facings; creep0.648 entry speed, one identity/wave and pack separation including Hell; private creeps/shared bosses;30s invitations; arena freeze/resume; per-attempt revival/reconnect/solo exit; actual r3 normal-zoom rendering; retained inventory/merchant purchases and potion1/2/modal ownership; Hell animation fallback and existing boss worlds remain independent. Protocol21 accepts the composed strict messages and rejects both old branch versions.
+
+Use `tests/m3d-vo-anh-regression.test.ts`, `tests/m3d-feedback-party.test.ts`, `tests/m3d-feedback-room.test.ts`, `tests/hell-dungeon.test.ts`, economy tests and relevant actual Phaser browser profiles. Preserve the required final six-player integration/readability coverage. Exact combined-tree results belong to `docs/M3D_MILESTONE_INTEGRATION_2026-11-03.md`; do not label unrun cases passed.
+
+## M3D technical feedback acceptance — 2026-11-01
+
+- `tests/m3d-feedback-tech.test.ts`: exact sequential charge boundaries/single-charge refill, no terrain tunneling or immunity, rejection/replay, travel/death debt, same-slot cooldown-bypassing blink, piercing dedup,45-tick damage-free linger, unsafe/stunned recast and cleanup, four accepted monk stages, finite fresh-press A cadence, owner-following rank4 aura, windup/single-hit preservation, forward Vi Đà origin, six-creep dungeon aggro/retargeting and scenery navigation.
+- Existing school, dungeon roster/scaling, room and protocol regressions must reflect the explicitly changed tuning while retaining authority/isolation/rewards/combo assertions.
+- `playwright.m3d-feedback.config.ts` uses test-owned isolated services, two actual Phaser clients, keyboard Shift/A, Vietnamese DOM text, HUD charge/recast, six-creep aggro, nearest sampling, and explicit legal-build fixtures for advanced skills. Fixture XP/position/immortal targets are disclosed; they do not prove natural progression or final artwork.
+- No recordings or new visual asset approval. Run `pnpm check:final --config playwright.m3d-feedback.config.ts` with an isolated QA session/ports after the final implementation change. Actual results are recorded in the handoff.
+
+## Potion hotkey acceptance — 2026-11-02
+
+`tests/e2e/merchant.spec.ts` adds real-combat purchases followed by **1 for HP / 2 for mana**, validates server resource/count changes and shared cooldown, and confirms keys do not consume while merchant owns input. HUD labels show1/2; settings documents both shortcuts. Existing mouse-potion purchase case stays covered.
+
+## Trial merchant purchase acceptance — 2026-11-02
+
+The director authorizes temporary prices and real basic/potion transactions after runtime UI approval. `tests/economy.test.ts` and `tests/economy-room.test.ts` cover atomic spending, level5,20 total potions, shared5s cooldown, no free resource refill, stale/replay rejection, peer synchronization and zone/death persistence. `tests/e2e/merchant.spec.ts` farms real gold with combat in Phaser, buys owned gear/potions, asserts server stats/gold/counts and uses the HUD potion. UI bounds/input/crafting-preview checks remain. Actual commands, measured results and PNGs: [ECONOMY_TRIAL.md](docs/ECONOMY_TRIAL.md). Boss/Long Châu/crafting/Z/PvP portions of Section H remain future acceptance; historical unavailable-purchase notes below predate this scope.
+
+## Approved inventory/merchant presentation integration — 2026-11-02
+
+The scoped UI slice has real Phaser browser coverage for four typed equipment slots, live server stats/gold, three merchant tabs, twelve branch previews, unavailable purchase/equip/Z states, loaded modular PNG icons, full viewport bounds at four desktop sizes, modal input ownership, keyboard tab navigation and six-client combat/peer movement while menus are open. No inventory v2 backend or reward migration is claimed by these UI results. Exact passing/failing run accounting, retained PNGs and runtime art approval status: [INVENTORY_HUD_INTEGRATION.md](docs/INVENTORY_HUD_INTEGRATION.md). Section H below remains future gameplay acceptance.
+
+## Inventory/merchant design acceptance baseline — 2026-11-02
+
+Section H defines **future acceptance, not passed tests**, for [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) v2.0. It replaces the old one-item/roll/resale/transfer requirements. Historical boss integration evidence below still describes retained runtime behavior; updating documentation does not migrate that backend or mark M4 complete. Cases depending on open potion, Long Châu, eligibility, crafting or capacity policies must use an explicitly selected policy before implementation/testing. PvP ignoring equipment/banning potions is still proposed.
+
 ## M3D merged Cổ Mộ selector regression — 2026-11-01
 
 `tests/e2e/ly-mac-sau.spec.ts` additionally checks real menu entry into Forest, Desert, Beach, Hồng Liệt, Chu Bá Thông and Cổ Mộ, plus Cổ Mộ overlay bounds at1280×720/1920×1080. The merged final gate includes the existing two dungeon cases and six-client Cổ Mộ frame/action/combat/one-claim/isolation/Space-cleanup acceptance; full unit/room tests and all retained approval guards remain required. Exact executed results: `docs/LY_MAC_SAU_INTEGRATION.md`.
@@ -9,6 +38,11 @@ Required: exact approved102 input hashes;107 real Phaser clips/428 frames; three
 ## Lý Mạc Sầu integration scope — 2026-11-01
 
 Enter Cổ Mộ through the normal in-viewport Phó Bản menu in private/shared modes; six clients must share boss HP/positions and private clients must not see another instance's spatial actors. Verify one non-homing needle, eight purple radial palms, frontal-only sweep, four capped real summons and twelve inward projectiles from four world-boundary marker groups. Check windup/damage timing, fixed strength, same-tick DOT kill settlement, one rolled pending claim, no summon reward farming, 29s reentry/30s empty reset, cooldown respawn and cleanup on boss death/travel/defeat. Observe all 192 actor cels/four facings in real Phaser, native feet/pivots/depth, natural combat and normal Space exit. Two-client iteration is reduced coverage; final six-client kill/loot/readability and explicit director runtime approval remain separate. Current commands/evidence/limits: `docs/LY_MAC_SAU_INTEGRATION.md`.
+## Hell integration — 2026-11-01
+
+- `tests/hell-dungeon.test.ts`: reachable markers/six seats, lava/prop collision, bridge route, validated selector, private/shared/forest/desert isolation, pause/resume, physical return and unchanged generic tuning/roster rotation.
+- `scripts/verify-hell.py`: exact source inventory, 276 nonempty cels/92 tags, shared hurt/death, native pivots/dimensions/timing, all prop/VFX atlas bounds/alpha and runtime/map parity.
+- `playwright.hell.config.ts`: two-browser actual-frame/one-shot/terrain review, six participants (two browser contexts plus four SDK clients) in real-stat combat, rewards/wave progression, collision/return/disconnect cleanup, private isolation and existing forest/desert/Beach regressions. PNG evidence only; director approval remains pending.
 
 ## Small gameplay changes — 2026-10-31
 
@@ -109,7 +143,7 @@ These are behavioral requirements, not already implemented tests. Codex should c
 
 - Given creep with 60 XP, killed by eligible A/B/C, then A/B/C each get 20 XP. No double reward for last hitter.
 - Given player does not assist that particular creep, then they get zero XP from its kill even if elsewhere in shared dungeon.
-- Given boss killed with two eligible players who each landed >=1 successful hit, then one fixed boss XP reward is shared; only one loot item is generated.
+- Given boss killed with two eligible players who each landed >=1 successful hit and remain in its instance, then one fixed boss XP pool is shared; each receives personal item rewards under section H, without multiplying the XP pool.
 
 ## F. Dungeons
 
@@ -131,14 +165,24 @@ These are behavioral requirements, not already implemented tests. Codex should c
 - Given statue HP reaches 0 before final kill, then match loses; given final boss defeated while statue alive, match wins.
 - Given chapter boss death, then gold/XP can be given but zero item drops occur.
 
-## H. Items and loot
+## H. Inventory, merchant, items and personal boss rewards (future acceptance)
 
-- Given boss is killed, then exactly one item selected from its configured loot table is produced regardless of eligible count (1, 2 or 6 players).
-- Given one eligible player, then that player wins item automatically; given multiple, a unique roll winner; ties resolved without duplicated items.
-- Given duplicate shop basic items, then upgrade exactly one eligible basic item until cap (proposed level 5).
-- Given max-level basic item, required boss item and gold, then crafting consumes them once and awards one stronger item; replay of same request cannot duplicate.
-- Given 4 equipment slots full, then fifth equip action is denied or requires explicit swap; other backpack items remain available.
-- Given owner drops an item and another player picks it up, ownership and state update exactly once, never two copies.
+Design source: [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md). These cases are requirements, not results from this documentation task.
+
+- Given 1, 2 or 6 players damaged the boss and remain in its instance at death, then each receives one corresponding material without roll or last-hit ownership. Undamaged spectators, players elsewhere in the room/central arena and departed participants receive none. Dead/disconnected edge cases await the explicit policy in the inventory spec.
+- Given an eligible character has not received that boss's Long Châu this match, then first clear grants it once; repeat kills, private/shared switches and duplicate death callbacks do not grant another. Another boss has a separate entitlement; a new match starts fresh.
+- Given a Long Châu is consumed, then its configured in-match stats apply once, persist through death and cannot be duplicated by replay, rebuild or equip changes. Actual stat formula/use policy is not yet chosen.
+- Given four equipment slots, then they are weapon/armor/hat/boots, one of each, with no necklace; wrong-slot equipment is rejected. All schools can use all four categories without changing A style.
+- Given a matching basic purchase, then exactly one selected eligible item upgrades by one level to a maximum of **5**; ambiguous duplicate targets and maxed-item purchases need the explicit merchant policy. Reject insufficient gold and replayed/concurrent spends.
+- Given a selected recipe, basic5, its designated material and enough gold, then consume exactly those inputs and award one chosen branch atomically. Invalid/missing inputs do not consume anything. Success/failure and branch-switch policies remain open, not implied by this case.
+- Given Lý Mạc Sầu/Hoàn Nhan Hồng Liệt/Chu Bá Thông/Kim Luân Pháp Vương rewards, then material identities and eligible slot match the four confirmed recipes, with three branches each.
+- Given crafted boots, then exactly one Z action is available independently of QWER: Thanh Tâm clears slow/poison/burn, blink respects facing/collision, or a straight facing-directed non-tracking needle applies slow/poison. No 10% healing branch or inferred stun cleanse/immunity. Open cooldown/geometry values require explicit fixtures; gear changes cannot erase cooldown debt.
+- Given armor/hat branches, then their configured reflect/slow aura/burn aura or regen/pools+defense/damage+crit effects are server-owned. Choose and test open reflect/stacking formulas before claiming numerical acceptance.
+- Given crafted weapons, then branches are spread/lifesteal/**A armor penetration**, with no weapon stun proc. A style determines spread behavior. Lifesteal budget for the same emitted A damage does not multiply with creep count; multi-hit/crit/mitigation policy must be chosen explicitly.
+- Given potion use, then the selected cooldown policy enforces **5s** before the same use channel is available again; quantity/resource changes occur once. Test total/per-type limit **20** only after that interpretation is selected. Dungeon purchase attempts are rejected; larger sizes have greater healing and higher prices per catalogue.
+- Given a resale/trade/transfer request, then it cannot sell to merchant or transfer ownership; shop purchasing still works. Do not revive public drop/pickup as a transfer workaround.
+- Given inventory is full when reward is earned, then no reward is silently deleted or duplicated; pending-claim/capacity policy must be selected and tested, without public transferable drops.
+- Given retained legacy encounter reward paths, then migration cannot issue both a legacy roll/claim reward and the v2 personal reward for the same entitlement. Protocol/runtime migration requires its own tests; none ran in this documentation update.
 
 ## I. Presentation / pixel art camera (M0–M1)
 
@@ -291,6 +335,17 @@ On `wip/m3d/hoan-nhan-hong-liet`, the existing Phó Bản flow must offer a priv
 ## Kim Luân feedback_02 runtime
 
 Run tests/kim-luan.test.ts, tests/kim-luan-room.test.ts, tests/kim-assets.test.ts and playwright.kim-luan.config.ts. Require a true two-disciple server gate, unique transferable ward, all16ability IDs, swept/ellipse geometry, actual elephant cover in both directions, solo/ally cage release, moving enrage firing, fixed single-item reward, private/shared isolation, replay rejection and empty/final-death deadlines. Observe all184selected frames/53clips in Phaser; keep frame fixtures distinct from six-client natural combat. Preserve all246approval pins and prohibit routine recordings. See docs/KIM_LUAN_RUNTIME.md for trial policies and evidence.
+
+## Đông Tà V04 integration acceptance
+
+- Clear wave5 itself, wait the configured rest and observe a single east-road entry; later wave survivors never block the gate. Invasion intervals remain180 seconds throughout combat/retries.
+- Recall every room hero from any zone; revive dead heroes without duplicating progression/items or clearing cooldown debt. Preserve dungeon empty-reset lifecycle.
+- Statue hides, takes no damage and receives no repair; server enforces court bounds for movement/dash/pull/respawn/travel. Quit remains possible.
+- Verify180-degree long thrusts, separate fan normal,8–14 straight radial beads, four stationary +/X slashes,40 random delayed flower explosions, frontal opposite claws, sticky Mai targeting, ranged claws/pull/poison and only Hoàng heal/sprint. Summon both once strictly below40% per attempt.
+- Full-party wipe resets full boss state/effects and immediately revives at the next attempt; repeated retries never reward/rewind economy. A late join is inside bounds and disconnected heroes cannot hold a target lock.
+- Đông Tà alone dying removes summons/fields, unlocks the court, restores the unchanged statue and pays a unique gold/XP pool with no item/roll. Match continues.
+- Verify actual PNG/atlas pivots, four-facing frames, hurt/death, timestamps and all VFX in running Phaser; iterate with two clients, finish with six-client natural combat/keyboard/reward synchronization and PNG/error/frame evidence. Final balance/runtime-art director approval stays distinct. See `docs/DONG_TA_INTEGRATION.md`.
+
 
 ## TAY-R01 — Tây Độc feedback03 runtime
 

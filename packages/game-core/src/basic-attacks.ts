@@ -14,7 +14,28 @@ export function nextBasic(
   if ('damage' in effect) effect.damage *= step.damageMultiplier;
   if (effect.mode === 'arc' && step.halfAngle !== undefined)
     effect.halfAngle = step.halfAngle;
+  if (
+    effect.mode === 'arc' &&
+    base.manualChain &&
+    index === base.basicCombo.length - 1
+  )
+    effect.projectileProc = {
+      chance: 1,
+      effect: base.manualChain.finisherProjectile,
+    };
   if (effect.mode === 'projectile' && step.splashRadius !== undefined)
     effect.splashRadius = step.splashRadius;
   return { ability: { ...base, effect }, stage: step.stage };
+}
+
+export function expireBasicChain(
+  hero: Hero,
+  tick: number,
+  cooldownTicks: number,
+): void {
+  const deadline = hero.basicChainDeadline;
+  if (!deadline || tick < deadline.until) return;
+  if (hero.basicChains) hero.basicChains[deadline.abilityId] = 0;
+  hero.cooldown = Math.max(hero.cooldown, deadline.until + cooldownTicks);
+  delete hero.basicChainDeadline;
 }

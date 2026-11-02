@@ -33,6 +33,7 @@ function step(match: DungeonMatch, n: number) {
 function cast(f: ReturnType<typeof setup>, id: BossAbilityId) {
   const runtime = f.zone.world.boss!;
   runtime.cast = undefined;
+  runtime.cooldowns = {}; // Isolate geometry/summon tests from real configured cadence.
   runtime.nextActionAt = f.zone.world.tick;
   runtime.rotation = lyMacSauEncounter.rotation.indexOf(id);
   if (id === 'ly_mac_sau_basic') {
@@ -66,13 +67,13 @@ describe('Lý Mạc Sầu deterministic encounter', () => {
     f.match.step();
     expect(f.match.hero('p0')!.bossLoot).toHaveLength(1);
   });
-  it('keeps boss strength fixed for one/six players and separates private instances', () => {
+  it('keeps boss strength fixed for one/six players and normalizes every boss entry to shared', () => {
     const solo = setup(),
       party = setup(6),
       privateParty = setup(2, 'private');
     expect(solo.boss.maxHp).toBe(party.boss.maxHp);
     expect(party.zone.world.heroes.size).toBe(6);
-    expect(privateParty.match.zoneOf('p1')!.world).not.toBe(
+    expect(privateParty.match.zoneOf('p1')!.world).toBe(
       privateParty.zone.world,
     );
     expect(privateParty.match.enter('p1', 'shared', 'unknown')).toBeTruthy();
@@ -135,35 +136,46 @@ describe('Lý Mạc Sầu deterministic encounter', () => {
     expect(outside.hp).toBe(10000);
     expect(a.statuses).toEqual([]);
   });
-  it('summons four real attacking actors, caps them and expires them without rewards', () => {
-    const f = setup();
-    const c = cast(f, 'co_mo_kiem_phap');
-    step(f.match, c.releaseAt - f.zone.world.tick);
-    const summons = () =>
-      [...f.zone.world.creeps.values()].filter((c) => c.summonedBy);
-    expect(summons()).toHaveLength(4);
-    expect(
-      summons().every(
-        (c) => c.archetypeId === 'co_mo_am_binh' && c.stats!.xp === 0,
-      ),
-    ).toBe(true);
-    const summon = summons()[0]!,
-      hero = f.match.hero('p0')!;
-    hero.x = summon.x + 10;
-    hero.y = summon.y;
-    f.match.step();
-    expect(hero.hp).toBeLessThan(10000);
-    expect(summon.pose).toBe('basic_attack');
-    hero.x = 1000;
-    hero.y = 700;
-    const second = cast(f, 'co_mo_kiem_phap');
-    step(f.match, second.releaseAt - f.zone.world.tick);
-    expect(summons()).toHaveLength(4);
-    f.zone.world.boss!.nextActionAt = Infinity;
-    f.zone.world.boss!.cast = undefined;
-    step(f.match, lyMacSauEncounter.summonLifetimeTicks + 1);
-    expect(summons()).toHaveLength(0);
-  });
+  it.each([
+    [0, 4],
+    [0.5, 6],
+    [0.99, 8],
+  ])(
+    'draws ranged summons with RNG %s, caps/replaces and expires without rewards',
+    (rng, count) => {
+      const f = setup();
+      f.zone.world.random = () => rng!;
+      const c = cast(f, 'co_mo_kiem_phap');
+      step(f.match, c.releaseAt - f.zone.world.tick);
+      const summons = () =>
+        [...f.zone.world.creeps.values()].filter((c) => c.summonedBy);
+      expect(summons()).toHaveLength(count!);
+      expect(
+        summons().every(
+          (c) =>
+            c.archetypeId === 'co_mo_am_binh' &&
+            c.stats!.xp === 0 &&
+            !!c.rangedAttack,
+        ),
+      ).toBe(true);
+      const summon = summons()[0]!,
+        hero = f.match.hero('p0')!;
+      hero.x = summon.x + 10;
+      hero.y = summon.y;
+      f.match.step();
+      expect(hero.hp).toBeLessThan(10000);
+      expect(summon.pose).toBe('basic_attack');
+      hero.x = 1000;
+      hero.y = 700;
+      const second = cast(f, 'co_mo_kiem_phap');
+      step(f.match, second.releaseAt - f.zone.world.tick);
+      expect(summons()).toHaveLength(count!);
+      f.zone.world.boss!.nextActionAt = Infinity;
+      f.zone.world.boss!.cast = undefined;
+      step(f.match, lyMacSauEncounter.summonLifetimeTicks + 1);
+      expect(summons()).toHaveLength(0);
+    },
+  );
   it('fires three inward lanes from each of four authoritative arena boundaries', () => {
     const f = setup();
     const c = cast(f, 'ngu_doc_chuong');

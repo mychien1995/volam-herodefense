@@ -10,7 +10,7 @@ import {
   type LobbyState,
 } from '@volam/game-protocol';
 import { gainExperience, addCreep, type BuildChange } from '@volam/game-core';
-import { m1Config, creepDungeon } from '@volam/game-data';
+import { m1Config } from '@volam/game-data';
 let server: ColyseusTestServer;
 const client = new Client('http://localhost:2637');
 const saved = process.env['VOLAM_DEV_LEGACY_SKILLS'];
@@ -103,6 +103,7 @@ it('synchronizes mixed-school shared combat, independent builds/rewards, dash po
     p.send('dungeon-action', {
       action: 'enter',
       access: 'shared',
+      destination: 'hong_liet',
       sequence: ++seq,
       protocolVersion: PROTOCOL_VERSION,
     });
@@ -181,7 +182,7 @@ it('synchronizes mixed-school shared combat, independent builds/rewards, dash po
   });
   await expect.poll(() => b.state.players.get(b.sessionId)!.xp).toBe(90);
   await expect.poll(() => a.state.players.get(a.sessionId)!.xp).toBe(30);
-  Object.assign(h, creepDungeon.exit);
+  Object.assign(h, zone.dungeon!.exit);
   b.send('dungeon-action', {
     action: 'exit',
     sequence: ++seq,

@@ -16,7 +16,9 @@ import {
   hongLietDungeon,
   kimLuanDungeon,
   coMoDungeon,
+  dongTaDefinition,
   tayDocDefinition,
+  hellDungeon,
 } from '@volam/game-data';
 import {
   DungeonMatch,
@@ -24,9 +26,11 @@ import {
   characterStats,
   pointAccounting,
   equippedAbility,
+  transactMerchant,
   addCreep,
   blocked,
   type Actor,
+  type PotionId,
   type MatchZone,
 } from '@volam/game-core';
 import {
@@ -49,6 +53,7 @@ import {
   AreaState,
   BossEffectState,
   skillPreviewActionSchema,
+  merchantActionSchema,
 } from '@volam/game-protocol';
 
 type MatchClient = Client<{ auth: JoinOptions; messages: ServerMessages }>;
@@ -72,8 +77,10 @@ export class MatchRoom extends Room<{
       hongLietDungeon,
       kimLuanDungeon,
       coMoDungeon,
+      hellDungeon,
     ],
-    tayDocDefinition,
+    structuredClone(dongTaDefinition),
+    structuredClone(tayDocDefinition),
   );
   readonly world = this.simulation.arena.world;
   readonly devTayDoc =
@@ -88,6 +95,50 @@ export class MatchRoom extends Room<{
   readonly devSkillLoadout =
     this.legacySkills && process.env['VOLAM_DEV_SKILLS'] === '1';
   override messages = {
+    'merchant-action': validate(
+      merchantActionSchema,
+      (client: MatchClient, input) => {
+        const hero = this.simulation.hero(client.sessionId),
+          zone = this.simulation.zoneOf(client.sessionId);
+        if (
+          this.state.phase !== 'IN_GAME' ||
+          !hero ||
+          !zone ||
+          !this.state.players.get(client.sessionId)?.confirmed
+        )
+          return;
+        if (input.sequence <= hero.lastSequence) return;
+        hero.lastSequence = input.sequence;
+        const reason = transactMerchant(
+          hero,
+          m1Config,
+          {
+            inArena: zone.access === 'arena',
+            matchTick: this.simulation.tick,
+            worldTick: zone.world.tick,
+          },
+          input.revision,
+          input,
+        );
+        if (reason)
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason,
+          });
+        else
+          client.send('merchant-result', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            revision: hero.inventory!.revision,
+            message:
+              input.action === 'use-potion'
+                ? 'Đã dùng bình.'
+                : 'Đã mua và cập nhật hành trang.',
+          });
+        this.syncState();
+      },
+    ),
     'skill-preview-action': validate(
       skillPreviewActionSchema,
       (client: MatchClient, input) => {
@@ -354,14 +405,27 @@ export class MatchRoom extends Room<{
           );
           return;
         }
-        const reason =
+        let reason =
           input.action === 'enter'
             ? this.simulation.enter(
                 client.sessionId,
-                input.access,
+                input.access ?? 'private',
                 input.destination,
               )
-            : this.simulation.exit(client.sessionId);
+            : input.action === 'summon-help'
+              ? this.simulation.summonHelp(client.sessionId, Date.now())
+              : input.action === 'reply-invitation'
+                ? this.simulation.replyInvitation(
+                    client.sessionId,
+                    input.invitationId,
+                    input.accept,
+                    Date.now(),
+                  )
+                : input.action === 'interact'
+                  ? this.simulation.interact(client.sessionId)
+                  : this.simulation.exit(client.sessionId);
+        if (!reason && input.action === 'enter' && input.summonHelp)
+          reason = this.simulation.summonHelp(client.sessionId, Date.now());
         if (reason) return reject(reason);
         const hero = this.simulation.hero(client.sessionId);
         if (hero)
@@ -492,7 +556,7 @@ export class MatchRoom extends Room<{
       }
       if (this.devTayDoc && this.simulation.tayDoc?.phase === 'waiting')
         this.simulation.tayDoc.spawn(this.world, this.simulation.arena.config);
-      this.simulation.step();
+      this.simulation.step(Date.now());
       if (this.simulation.invasion?.defeated) {
         this.state.phase = 'DEFEAT';
         void this.lock();
@@ -554,6 +618,20 @@ export class MatchRoom extends Room<{
       client.sessionId,
       new LobbyPlayer({ nickname: client.auth.nickname }),
     );
+    this.syncState();
+  }
+  override onDrop(client: MatchClient): void {
+    const player = this.state.players.get(client.sessionId);
+    if (player) player.connected = false;
+    this.simulation.disconnect(client.sessionId);
+    this.syncState();
+    this.allowReconnection(client, 30);
+  }
+  override onReconnect(client: MatchClient): void {
+    const player = this.state.players.get(client.sessionId);
+    if (player) player.connected = true;
+    client.view = new StateView();
+    this.simulation.reconnect(client.sessionId);
     this.syncState();
   }
   override onLeave(client: MatchClient): void {
@@ -630,7 +708,14 @@ export class MatchRoom extends Room<{
     const invasion = this.simulation.invasion,
       defense = this.state.defense,
       statue = this.world.statue;
+    defense.dongTa = this.simulation.dongTa
+      ? JSON.stringify({
+          ...this.simulation.dongTa.view(this.world),
+          effects: [],
+        })
+      : '';
     if (invasion && statue) {
+      defense.paused = this.simulation.arenaPaused;
       defense.enabled = true;
       defense.statueHp = statue.hp;
       defense.statueMaxHp = statue.maxHp;
@@ -656,6 +741,43 @@ export class MatchRoom extends Room<{
       const hero = this.simulation.hero(id)!;
       const target = this.state.players.get(id);
       if (!target) continue;
+      target.bossInvitation = JSON.stringify(
+        this.simulation.party.invitations.get(id) ?? null,
+      );
+      if (!hero) {
+        target.zoneId = 'arena';
+        continue;
+      }
+      target.bossSpectator = !!hero.bossSpectator;
+      target.actionUntil = hero.actionUntil;
+      target.actionStartedAt = hero.actionStartedAt ?? 0;
+      target.basicStage = hero.basicStage ?? '';
+      const action = zone.world.actions?.find((a) => a.ownerId === id);
+      target.actionState = action
+        ? JSON.stringify({
+            id: action.id,
+            abilityId: action.abilityId,
+            kind: action.kind,
+            startedAt: action.startedAt,
+            nextTick: action.nextTick,
+            until: action.until,
+            remaining: action.remaining,
+            fx: action.fx,
+            fy: action.fy,
+            range: 'range' in action.effect ? action.effect.range : 0,
+            windupTicks:
+              'windupTicks' in action.effect ? action.effect.windupTicks : 0,
+          })
+        : '';
+      const bossZone = !!(
+        zone.dungeon?.boss ||
+        zone.dungeon?.kimBoss ||
+        zone.dungeon?.chuBoss ||
+        zone.dungeon?.bossEncounter
+      );
+      target.bossAttempt = bossZone ? this.simulation.party.attempt(zone) : 0;
+      target.bossRevivalUsed =
+        bossZone && this.simulation.party.life(zone, id).revivalUsed;
       this.syncActor(target, hero, zone.world.tick);
       target.bossItems = JSON.stringify(hero.bossItems ?? []);
       target.bossLoot = JSON.stringify(hero.bossLoot ?? []);
@@ -683,6 +805,18 @@ export class MatchRoom extends Room<{
       target.maxMana = hero.maxMana;
       target.xp = hero.xp;
       target.gold = hero.gold;
+      target.inventory.revision = hero.inventory?.revision ?? 0;
+      target.inventory.potionCooldownTicks = Math.max(
+        0,
+        (hero.inventory?.potionReadyAt ?? 0) - this.simulation.tick,
+      );
+      for (const slot of ['weapon', 'armor', 'hat', 'boots'] as const)
+        target.inventory.levels.set(slot, hero.inventory?.levels[slot] ?? 0);
+      for (const potion of Object.keys(m1Config.economy!.potions))
+        target.inventory.potions.set(
+          potion,
+          hero.inventory?.potions[potion as PotionId] ?? 0,
+        );
       target.level = hero.level;
       target.skillPoints = hero.skillPoints;
       target.build.enabled = !!hero.progression;
@@ -706,6 +840,22 @@ export class MatchRoom extends Room<{
       target.basicId = hero.basicId;
       target.lastSequence = hero.lastSequence;
       target.basicCooldown = Math.max(0, hero.cooldown - zone.world.tick);
+      target.dashCharges = hero.dashCharges ?? 0;
+      target.dashRechargeTicks = Math.max(
+        0,
+        (hero.dashRechargeAt ?? 0) - zone.world.tick,
+      );
+      const blinkShot = [...zone.world.projectiles.values()].find(
+        (p) => p.ownerId === id && p.effect.blinkWindowTicks,
+      );
+      target.blinkTicks = blinkShot
+        ? blinkShot.lingerUntil === undefined
+          ? Math.ceil(
+              (blinkShot.remaining / blinkShot.effect.speed) *
+                zone.config.tickRate,
+            ) + blinkShot.effect.blinkWindowTicks!
+          : Math.max(0, blinkShot.lingerUntil - zone.world.tick)
+        : 0;
       target.qCooldown = Math.max(
         0,
         (hero.skillCooldowns[0] ?? 0) - zone.world.tick,
@@ -805,11 +955,18 @@ export class MatchRoom extends Room<{
         );
         target.castTargetId = bossCast?.targetId ?? '';
         target.lane = enemy.invasion?.lane ?? '';
-        target.targetId = enemy.invasion?.targetId ?? '';
+        target.targetId = enemy.invasion?.targetId ?? enemy.aggroTargetId ?? '';
       }
       for (const effect of [
         ...(zone.encounter?.effects.values() ?? []),
         ...(zone.kim?.effects.values() ?? []),
+        ...(zone.access === 'arena'
+          ? (this.simulation.dongTa?.effects.map((e) => ({
+              ...e,
+              castId: e.id,
+              damageUntil: e.expiresAt,
+            })) ?? [])
+          : []),
       ]) {
         const id = this.entityKey(zone, effect.id);
         bossEffectKeys.add(id);
@@ -839,6 +996,9 @@ export class MatchRoom extends Room<{
               ? (effect as unknown as Record<string, unknown>)[key]
               : effect.expiresAt;
         target.speed = effect.speed;
+        target.originX = 'origin' in effect ? effect.origin.x : 0;
+        target.originY = 'origin' in effect ? effect.origin.y : 0;
+        target.targetId = 'targetId' in effect ? effect.targetId : '';
         target.index = 'index' in effect ? (effect.index ?? 0) : 0;
         target.maxRadius = 'maxRadius' in effect ? (effect.maxRadius ?? 0) : 0;
         target.previousRadius =
@@ -854,6 +1014,7 @@ export class MatchRoom extends Room<{
           this.state.areas.set(id, target);
         }
         Object.assign(target, {
+          startedAt: area.until - area.effect.durationTicks,
           x: area.x,
           y: area.y,
           radius: area.effect.radius,
@@ -871,6 +1032,8 @@ export class MatchRoom extends Room<{
           target = new ProjectileState();
           this.state.projectiles.set(id, target);
         }
+        shot.spawnedAt ??= zone.world.tick;
+        target.startedAt = shot.spawnedAt;
         target.x = shot.x;
         target.y = shot.y;
         target.vx = shot.vx;
@@ -883,6 +1046,10 @@ export class MatchRoom extends Room<{
         target.radius = shot.effect.radius;
         target.stage = shot.stage ?? '';
         target.leg = shot.leg ?? '';
+        target.lingerTicks = Math.max(
+          0,
+          (shot.lingerUntil ?? 0) - zone.world.tick,
+        );
       }
     }
     for (const [id, target] of this.state.bossEffects)

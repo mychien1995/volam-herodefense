@@ -1,4 +1,6 @@
 * text=auto eol=lf
+# r3 director locks hash original bytes, including retained CRLF source metadata.
+assets/m3d-feedback-review-r3/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 *.png binary
 assets/tilesets/beach/terrain.tsj text eol=crlf
 
@@ -7,6 +9,12 @@ assets/source/bosses/kim_luan_phap_vuong_v01/** -text -eol whitespace=blank-at-e
 assets/exports/bosses/kim_luan_phap_vuong_v01/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 assets/reviews/bosses/kim_luan_phap_vuong_v01/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/evidence/kim-luan-runtime/verification.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Retained Hell provenance records exact mixed/CRLF text bytes, not normalized JSON.
+assets/**/hell/**/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/**/hell/**/*.tmj -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/**/hell/**/*.tsj -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/**/hell/**/*.py -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 
 # The retained Beach provenance hashes this manifest's original CRLF bytes.
 assets/sprites/creeps/dungeons/beach/thuy_quy/manifest.json text eol=crlf
@@ -521,6 +529,34 @@ assets/sprites/bosses/ly-mac-sau/manifest.json text eol=lf
 assets/sprites/summons/co-mo-am-binh/animations.json text eol=lf
 assets/sprites/summons/co-mo-am-binh/atlas.json text eol=lf
 assets/sprites/summons/co-mo-am-binh/manifest.json text eol=lf
+
+# Preserve exact existing Hong Liet runtime pins after fresh worktree checkout.
+assets/sprites/environment/mongolian-headquarters/atlas.json text eol=lf
+assets/sprites/environment/mongolian-headquarters/manifest.json text eol=lf
+assets/sprites/environment/mongolian-headquarters/props_metadata.json text eol=lf
+assets/tilesets/boss-arenas/mongolian-headquarters/terrain.json text eol=lf
+
+# Preserve byte-exact Dong Ta approval inputs in fresh Windows checkouts.
+assets/effects/bosses/main/dong-ta/rework_v02/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/effects/summons/mai-sieu-phong/rework_v02/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/sprites/bosses/main/dong-ta/rework_v02/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/reviews/bosses/dong_ta_v02/** -text -eol whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+
+# Retained Dong Ta V01 metadata is approved as LF, including existing Windows checkouts.
+assets/effects/bosses/main/dong-ta/lac_anh_kiem_phap/vfx_lac_anh_kiem_phap.animations.json text eol=lf
+assets/effects/bosses/main/dong-ta/lac_anh_kiem_phap/vfx_lac_anh_kiem_phap.json text eol=lf
+assets/effects/bosses/main/dong-ta/trieu_hon_dong_hai/vfx_trieu_hon_dong_hai.animations.json text eol=lf
+assets/effects/bosses/main/dong-ta/trieu_hon_dong_hai/vfx_trieu_hon_dong_hai.json text eol=lf
+assets/effects/summons/hoang-dung/vfx_hoang_dung.animations.json text eol=lf
+assets/effects/summons/hoang-dung/vfx_hoang_dung.json text eol=lf
+assets/sprites/bosses/main/dong-ta/asset_verification_v01.json text eol=lf
+assets/sprites/bosses/main/dong-ta/boss_dong_ta.animations.json text eol=lf
+assets/sprites/bosses/main/dong-ta/boss_dong_ta.json text eol=lf
+assets/sprites/bosses/main/dong-ta/package_manifest_v01.json text eol=lf
+assets/sprites/summons/hoang-dung/summon_hoang_dung.animations.json text eol=lf
+assets/sprites/summons/hoang-dung/summon_hoang_dung.json text eol=lf
+assets/sprites/summons/mai-sieu-phong/summon_mai_sieu_phong.animations.json text eol=lf
+assets/sprites/summons/mai-sieu-phong/summon_mai_sieu_phong.json text eol=lf
 
 # Preserve approved Tay Doc inputs and candidate provenance byte-for-byte.
 assets/reviews/tay_doc_v02/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

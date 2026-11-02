@@ -1,6 +1,11 @@
-import { prepareKimAssets } from './prepare-kim-assets.mjs';
 import { prepareTayDocAssets } from './prepare-tay-doc-assets.mjs';
+import { prepareKimAssets } from './prepare-kim-assets.mjs';
+import { prepareDongTa } from './prepare-dong-ta.mjs';
+
+import { prepareM3dFeedbackArt } from './prepare-m3d-feedback-art.mjs';
+import { prepareM3dR3Art } from './prepare-m3d-r3-art.mjs';
 import { prepareChuAssets } from './prepare-chu-assets.mjs';
+import { prepareM3dFollowup } from './prepare-m3d-followup.mjs';
 import { mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
@@ -9,6 +14,7 @@ import { prepareForestCreepReview } from './prepare-forest-creep-review.mjs';
 import { prepareDesertAssets } from './prepare-desert-assets.mjs';
 import { prepareBeachAssets } from './prepare-beach-assets.mjs';
 import { prepareLyMacSau } from './prepare-ly-mac-sau.mjs';
+import { prepareHellAssets } from './prepare-hell-assets.mjs';
 import { prepareFeedbackV2Art } from './prepare-feedback-v2-art.mjs';
 import { prepareApprovedAnimationArt } from './prepare-approved-animation-art.mjs';
 import {
@@ -47,7 +53,12 @@ for (const [name, label] of [
 }
 const dest = new URL('apps/game-client/public/assets/', root);
 prepareKimAssets();
+prepareDongTa();
+
+prepareM3dFeedbackArt();
+prepareM3dR3Art();
 prepareChuAssets();
+prepareM3dFollowup();
 prepareFeedbackV2Art();
 const skills = JSON.parse(
   readFileSync(
@@ -149,6 +160,7 @@ prepareHongLietAssets();
 // Retained review references include generated public atlases: verify after copies.
 prepareApprovedAnimationArt();
 prepareLyMacSau();
+prepareHellAssets();
 prepareTayDocAssets();
 console.info(
   `Prepared assets in ${fileURLToPath(dest)} (${assetWrites.changed} written, ${assetWrites.unchanged} unchanged)`,

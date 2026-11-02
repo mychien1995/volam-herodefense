@@ -50,6 +50,8 @@ export type SkillAnimation = SkillArtComponent['animations'][number];
 export const skillAnimationKey = (asset: string, tag: string) =>
   `skill:${asset}:${tag}`;
 export function skillIcon(id: string): string {
+  if (id === 'tam_gioi_quy_thien')
+    return '/assets/m3d_followup/su_tu_hong-icon.png';
   if (id === 'thieu_lam_quyen')
     return '/assets/skills/thieu-lam/la_han_quyen/icon.png';
   if (id === 'thieu_lam_dao') return '/assets/skills/thieu-lam/tru_ta/icon.png';

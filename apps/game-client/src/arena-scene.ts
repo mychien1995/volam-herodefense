@@ -1,14 +1,17 @@
 import { TayDocRenderer, isTayDocActor } from './tay-doc-art.js';
 import { KimLuanRenderer, isKimActor } from './kim-luan-art.js';
+import { DongTaRenderer, isDongArtActor } from './dong-ta-art.js';
 import { ChuPresentation } from './chu-presentation.js';
 import { HongLietRenderer, isHongLietActor } from './hong-liet-art.js';
 import Phaser from 'phaser';
+import { m3dBambooPose } from './m3d-feedback.js';
 import {
   CoMoEffects,
   coMoCreepArt,
   bossCastStates,
   isCoMoZone,
 } from './co-mo-art.js';
+import { hellCreepArt, hellStrikeEffect, isHellZone } from './hell-art.js';
 import { arena, dungeonForZone } from '@volam/game-data';
 import { desertCreepArt } from './desert-art.js';
 import {
@@ -60,6 +63,7 @@ export class ArenaScene extends Phaser.Scene {
   protected actors = new Map<string, EntityView>();
   private vfx: SkillVfx | undefined;
   private kim: KimLuanRenderer | undefined;
+  private dong: DongTaRenderer | undefined;
   private tayDoc: TayDocRenderer | undefined;
   private hongLiet: HongLietRenderer | undefined;
   private coMoEffects: CoMoEffects | undefined;
@@ -88,6 +92,12 @@ export class ArenaScene extends Phaser.Scene {
   constructor() {
     super('Arena');
   }
+  panSpectator(x: number, y: number): void {
+    if (!this.snapshot?.players.get(this.sessionId)?.bossSpectator) return;
+    this.cameras.main.stopFollow();
+    this.cameras.main.scrollX += x * 24;
+    this.cameras.main.scrollY += y * 24;
+  }
   preload(): void {
     preloadArt(this);
   }
@@ -97,11 +107,13 @@ export class ArenaScene extends Phaser.Scene {
     this.hongLiet = new HongLietRenderer(this);
     this.tayDoc = new TayDocRenderer(this);
     this.kim = new KimLuanRenderer(this);
+    this.dong = new DongTaRenderer(this);
     this.coMoEffects = new CoMoEffects(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.hongLiet?.clear();
       this.tayDoc?.clear();
       this.kim?.clear();
+      this.dong?.clear();
       this.coMoEffects?.clear();
     });
     this.events.once(Phaser.Scenes.Events.DESTROY, () => {
@@ -121,6 +133,7 @@ export class ArenaScene extends Phaser.Scene {
             this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest
           ).effects,
           ...(this.cache.json.get('beach_manifest') as BeachManifest).effects,
+          ...(this.cache.json.get('hell_manifest') as BeachManifest).effects,
         ],
       },
       this.cache.json.get('forest_creeps_manifest') as ForestCreepManifest,
@@ -163,6 +176,7 @@ export class ArenaScene extends Phaser.Scene {
     this.hongLiet?.clear();
     this.tayDoc?.clear();
     this.kim?.clear();
+    this.dong?.clear();
     this.coMoEffects?.clear();
     this.cameras.main.stopFollow();
     this.tweens.killAll();
@@ -306,7 +320,9 @@ export class ArenaScene extends Phaser.Scene {
       if (
         enemy &&
         (isTayDocActor(actor.archetypeId ?? '') ||
+          actor.archetypeId === 'chu_wine_disciple' ||
           isHongLietActor(actor.archetypeId ?? '') ||
+          isDongArtActor(actor.archetypeId ?? '') ||
           isKimActor(actor.archetypeId ?? ''))
       )
         return;
@@ -321,6 +337,7 @@ export class ArenaScene extends Phaser.Scene {
             this.zoneId,
           ) ??
           beachCreepArt(this, actor.archetypeId, this.zoneId) ??
+          hellCreepArt(this, actor.archetypeId, this.zoneId) ??
           desertCreepArt(this, actor.archetypeId, this.zoneId) ??
           arenaCreepArt(
             this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest,
@@ -337,7 +354,12 @@ export class ArenaScene extends Phaser.Scene {
             actor.fy,
             actor.hp,
           )
-        : undefined;
+        : m3dBambooPose(
+            actor.archetypeId,
+            actor.hp <= 0 ? 'death' : actor.pose,
+            actor.fx,
+            actor.fy,
+          );
       const texture =
         cast?.texture ??
         (enemy
@@ -350,12 +372,17 @@ export class ArenaScene extends Phaser.Scene {
           actor.x,
           actor.y,
           enemy,
-          enemy ? texture : heroTexture(actor.basicId, actor.schoolId),
+          enemy
+            ? (art?.id ?? texture)
+            : heroTexture(actor.basicId, actor.schoolId),
         );
       view.creepArt = art;
       if (actor.hp > 0 && view.lastHp <= 0) view.playback = new CreepPlayback();
       view.lastHp = actor.hp;
-      const weight = Math.min(1, delta / 45);
+      const blinkAlpha = !enemy ? (this.vfx?.actorAlpha(id) ?? 1) : 1;
+      // A confirmed blink snaps the rendered feet to replicated position before
+      // fading in. It must not look like ordinary interpolated movement.
+      const weight = blinkAlpha < 1 ? 1 : Math.min(1, delta / 45);
       view.sprite
         .setPosition(
           Math.round(Phaser.Math.Linear(view.sprite.x, actor.x, weight)),
@@ -394,8 +421,14 @@ export class ArenaScene extends Phaser.Scene {
           : { state: actor.pose, direction };
       const key =
         cast?.animation ??
-        `${texture}:${pose.state === 'cast' && this.vfx?.suppressesCastPose(id) ? 'idle' : pose.state}:${pose.direction}`;
-      if (!enemy) view.sprite.setScale(cast?.scale ?? 1);
+        this.creepAnimationKey(
+          texture,
+          pose.state === 'cast' && this.vfx?.suppressesCastPose(id)
+            ? 'idle'
+            : pose.state,
+          pose.direction,
+        );
+      if (!enemy) view.sprite.setScale(cast?.scale ?? 1).setAlpha(blinkAlpha);
       if (art) {
         const alpha = view.playback.alpha(this.time.now, art.wave === 10);
         view.sprite.setAlpha(alpha);
@@ -447,7 +480,10 @@ export class ArenaScene extends Phaser.Scene {
           Math.round((28 * actor.hp) / actor.maxHp),
           3,
         );
-      if (id === this.sessionId && this.followed !== id) {
+      if (id === this.sessionId && state?.players.get(id)?.bossSpectator) {
+        if (this.followed) this.cameras.main.stopFollow();
+        this.followed = '';
+      } else if (id === this.sessionId && this.followed !== id) {
         this.cameras.main.startFollow(view.sprite, true, 1, 1, 0, 48);
         this.followed = id;
       }
@@ -487,6 +523,7 @@ export class ArenaScene extends Phaser.Scene {
     this.hongLiet?.sync(state, this.zoneId);
     this.tayDoc?.sync(state, this.zoneId);
     this.kim?.sync(state, this.zoneId);
+    this.dong?.sync(state, this.zoneId);
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
     this.coMoEffects?.sync(state, this.zoneId);
     this.creepEffects?.sync(
@@ -496,12 +533,23 @@ export class ArenaScene extends Phaser.Scene {
     );
   }
 
+  private creepAnimationKey(
+    texture: string,
+    state: string,
+    direction: string,
+  ): string {
+    const key = `${texture}:${state}:${direction}`;
+    const shared = `${texture}:${state}:shared`;
+    return !this.anims.exists(key) && this.anims.exists(shared) ? shared : key;
+  }
   private creepDuration(
     texture: string,
     state: string,
     direction: string,
   ): number {
-    const anim = this.anims.get(`${texture}:${state}:${direction}`);
+    const anim = this.anims.get(
+      this.creepAnimationKey(texture, state, direction),
+    );
     return anim
       ? anim.frames.reduce(
           (total, frame) => total + (frame.duration || 1000 / anim.frameRate),
@@ -527,12 +575,15 @@ export class ArenaScene extends Phaser.Scene {
         this.creepDuration(view.creepArt.id, state, direction),
       )
     )
-      view.sprite.play(`${view.creepArt.id}:${state}:${direction}`);
+      view.sprite.play(
+        this.creepAnimationKey(view.creepArt.id, state, direction),
+      );
   }
   combat(event: CombatEvent & { zoneId?: string }): void {
     if (!this.ready || event.id <= this.lastEvent) return;
     this.lastEvent = event.id;
     if (event.zoneId && event.zoneId !== this.zoneId) return;
+    if (this.zoneId === 'arena') this.dong?.event(event);
     if (isCoMoZone(this.zoneId)) this.coMoEffects?.event(event);
     if (event.kind === 'attack')
       this.creepAction(event.sourceId, 'basic_attack');
@@ -543,6 +594,15 @@ export class ArenaScene extends Phaser.Scene {
     }
     if (event.kind === 'death') this.creepAction(event.targetId, 'death');
     const source = this.snapshot?.creeps.get(event.sourceId);
+    if (source && isHellZone(source.zoneId) && source.zoneId === this.zoneId) {
+      const effect = hellStrikeEffect(
+        source.archetypeId,
+        event.kind,
+        event.abilityId,
+      );
+      if (effect)
+        this.creepEffects?.contact(effect, event.x, event.y, event.sourceId);
+    }
     if (source && isBeachZone(source.zoneId) && source.zoneId === this.zoneId) {
       const effect = beachStrikeEffect(
         source.archetypeId,
@@ -632,10 +692,26 @@ export class ArenaScene extends Phaser.Scene {
       chu: this.chu?.inspect(),
       ready: this.ready,
       sceneTime: this.time.now,
+      r3Scenery: this.children.list
+        .filter((o) => o.name.endsWith(':r3'))
+        .map((o) => {
+          const p = o as Phaser.GameObjects.Image;
+          return {
+            name: p.name,
+            frame: p.frame.name,
+            texture: p.texture.key,
+            x: p.x,
+            y: p.y,
+            depth: p.depth,
+            origin: [p.originX, p.originY],
+            scale: [p.scaleX, p.scaleY],
+          };
+        }),
       zoneId: this.zoneId,
       hongLiet: this.hongLiet?.inspect(),
       tayDoc: this.tayDoc?.inspect(),
       kim: this.kim?.inspect(),
+      dong: this.dong?.inspect(),
       kimFrame: this.kim?.reviewState(),
       damage: this.damage?.inspect(),
       skills: this.vfx?.inspect(),
@@ -706,6 +782,7 @@ export class ArenaScene extends Phaser.Scene {
         animation: view.sprite.anims.currentAnim?.key,
         frame: view.sprite.frame.name,
         texture: view.sprite.texture.key,
+        filterMode: view.sprite.texture.source[0]?.scaleMode,
         artStatus:
           view.sprite.texture.key === creepPlaceholderTexture
             ? 'placeholder'
@@ -760,6 +837,31 @@ export class ArenaScene extends Phaser.Scene {
       beachWaterPhases: this.zoneId.startsWith('sea_')
         ? this.registry.get('beachWaterPhases')
         : [],
+      hellLavaPhases: isHellZone(this.zoneId)
+        ? this.registry.get('hellLavaPhases')
+        : [],
+      hellLavaTile: isHellZone(this.zoneId)
+        ? (
+            this.children.list.find((o) => o.name === 'hell:layer:ground') as
+              Phaser.Tilemaps.TilemapLayer | undefined
+          )?.getTileAt(0, 0)?.index
+        : undefined,
+      hellScenery: this.children.list
+        .filter(
+          (o) =>
+            o.name.startsWith('hell:') && !o.name.startsWith('hell:layer:'),
+        )
+        .map((o) => {
+          const image = o as Phaser.GameObjects.Image;
+          return {
+            name: image.frame.name,
+            x: image.x,
+            y: image.y,
+            depth: image.depth,
+            origin: [image.originX, image.originY],
+            scale: [image.scaleX, image.scaleY],
+          };
+        }),
       beachWaterTile: this.zoneId.startsWith('sea_')
         ? (
             this.children.list.find((o) => o.name === 'beach:layer:ground') as

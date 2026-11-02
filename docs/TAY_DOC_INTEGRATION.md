@@ -1,12 +1,14 @@
+> Integrated with the current `milestone/m3d` on2026-11-03. Protocol23 retains protocol22’s Đông Tà and all prior M3D fields. Latest merge details are in `TAY_DOC_M3D_MERGE_2026-11-03.md` at the repository root. Historical validation reports below describe the original implementation run.
+
 # Tây Độc feedback03 — Phaser / authoritative encounter
 
-Worktree/branch: `wip/m3d/tay-doc`. No merge, push or deployment.
+Source worktree/branch: `wip/m3d/tay-doc`; integration into `milestone/m3d` is now explicitly authorized. No push or deployment.
 
 ## Play the encounter
 
 Run `pnpm dev:tay-doc`, then open http://127.0.0.1:5398/?debug=1 in one to six clients. Create/join the same room, select schools and confirm. Arrow keys move, A attacks, QWER use unlocked skills. The dedicated helper uses server2795/client5398; it only enables the real DEV encounter spawn. It has no HP, position, phase or cast mutation endpoints. The normal invasion clock remains180seconds. Stop the helper with Ctrl+C; it closes only its own services.
 
-The production gate waits for wave10 and all living invasion enemies through that wave to clear, followed by8seconds of rest and actual `tayDocGate.completeChapter('dong_ta')`. The repository does not yet have the complete ordered chapter boss director/Dong Tà completion flow. The hook is implemented and tested; it deliberately does not invent that predecessor victory. The DEV helper makes this encounter immediately playable without bypassing that production rule.
+The production gate waits for wave10 and all living invasion enemies through that wave to clear, followed by8seconds of rest and actual `tayDocGate.completeChapter('dong_ta')`. The current milestone’s real Đông Tà encounter now supplies this hook only after its phase becomes `cleared`. A focused integration test defeats Đông Tà using accepted basic-attack input, clears the last wave10invader and verifies the rest/west-entry sequence. The DEV helper makes this encounter immediately playable without bypassing that production rule.
 
 ## Retained art and directional audit
 
@@ -29,7 +31,7 @@ Shared cast poses are explicit: phase1 skills reuse the new staff sweep; phase2 
 
 ## Authority and confirmed behavior
 
-`game-data/src/tay-doc.ts` contains validated tuning; `game-core/src/tay-doc.ts` owns the deterministic encounter. The server publishes one arena-scoped MapSchema projection with monotonic world ticks/cast/entity IDs. Removing the projection on zone transfer also deletes the client map entry. No new client combat/phase/damage/summon messages exist. Protocol is18.
+`game-data/src/tay-doc.ts` contains validated tuning; `game-core/src/tay-doc.ts` owns the deterministic encounter. The server publishes one arena-scoped MapSchema projection with monotonic world ticks/cast/entity IDs. Removing the projection on zone transfer also deletes the client map entry. No new client combat/phase/damage/summon messages exist. Protocol is23.
 
 Boss enters from west at world(80,616) along the brick road, then fights living arena heroes. Every hazard and pillar shot uses this target class; the statue is never a fallback. Cast aim is captured, shots fly straight with swept hero/wall tests and first-hit deduplication. Server collision owns placement and movement.
 
@@ -44,7 +46,7 @@ Boss enters from west at world(80,616) along the brick road, then fights living 
 
 ## Lifecycle and provisional choices
 
-Death removes a hero’s mark/poison before respawn. Disconnect cancels that departing hero’s mark without an explosion: this game removes the hero and all unsaved progression, with no reconnect continuation. A living marked hero who tries dungeon travel pays the25% loss **before** transfer, without a cross-zone ally explosion; a lethal settlement stays dead in arena. Ordinary travel resets statuses through the existing transfer path. No stale mark detonates on a respawned hero.
+Death removes a hero’s mark/poison before respawn. Consented removal cancels that hero’s mark. A transient disconnect follows the current M3D arena-transfer/reconnect path: the mark settles before transfer without an ally explosion, and the existing reconnect full-heal rule remains unchanged. No mark is restored or detonated again on reconnect. A living marked hero who tries dungeon travel pays the25% loss **before** transfer, without a cross-zone ally explosion; a lethal settlement stays dead in arena. Ordinary travel resets statuses through the existing transfer path. No stale mark detonates on a respawned hero.
 
 Boss death cleans owned hazards, summons, statuses and cast immediately, retaining a short death presentation before removing the corpse. Existing kill/assist XP/gold sharing executes once. No item, loot roll, dungeon reset or boss respawn is added. Match defeat/room disposal also removes the boss actor. With no living arena target, casts stop and pillars stop firing; released hazards expire normally, and the boss never attacks the statue.
 

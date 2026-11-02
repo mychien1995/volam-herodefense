@@ -1,3 +1,15 @@
+## M3D approved runtime catalogue override — 2026-11-03
+
+This section and the revised rows below supersede earlier skill descriptions for the approved M3D integration. Stable IDs,43 actives,8 basics,4 passives,free school mixing and4 slots remain. `hoanh_tao_cuoc` now displays **Ca Diệp Thoái**; `tam_gioi_quy_thien` displays **Sư Tử Hống**. Exact data remain in `packages/game-data/src/thieu-lam.ts` and `m3d-feedback-tuning.ts`.
+
+Thiếu Lâm Quyền A requires four presses (punch/punch/kick/roundhouse+travelling crescent), then1s cooldown; after2s idle the1s cooldown starts. Vi Đà ground explosion offset189. Toàn Phong is a golden piercing travelling tornado, range234, one hit/target. Ca Diệp is a stationary foot slam launching a travelling earth mound, range273; damage+stun to every crossed target once/cast, no caster dash. Vô Ảnh alone/failure emits one centered foot; valid Toàn Phong→Ca Diệp hits on the same enemy enable three parallel upper/middle/lower feet twice. Early finisher input buffers one cast until the real predecessor resolves, never creates combo progress. Như Lai uses the doubled Buddha, sky palm and a stationary Sanskrit field damaging each target on first entry only. Tru Tà is one enlarged attached slash without a crescent projectile. Kim Quang remains centered with a readable interior. Sư Tử Hống is a wide lion-roar AoE with damage, defense reduction and slow; its new original icon replaces the previous skill icon.
+
+Cái Bang Phá Giáp raises/extends then slams the staff along the true facing vector, including diagonals; no spin. Thiên Hạ Vô Cẩu retains four fire dogs, larger whirl/final footprint, duration×1.3 and aligned ground impact. Thiên Sơn Liệt Phong retains the above-head hilt and correct blade-edge orientation when slashing left. Võ Đang Quyền and Kiếm basic knockback chances are10%. Shift8s/charge. Unlisted skills/effects and Phất Trần Công retain approved behavior. Numbers are current director-reviewed playtest tuning, not a claim of campaign/PvP balance.
+
+## M3D technical feedback override — 2026-11-01
+
+Canonical IDs/names remain unchanged. Thiếu Lâm Quyền A now cycles left fist, right fist, front kick and roundhouse kick. Both Võ Đang basics require individual A presses with a finite animation cadence and no additional cooldown. Liệt Phong Đao gathers a large overhead blade before one frontal downward strike. Nhân Kiếm Hợp Nhất is a slow piercing damaging sword with same-slot blink recast and a1.5s end-of-range linger. Kháng Long Hữu Hối rank4 adds a small fire area following its owner. Requested basic/skill reaches and active/status/visual lifetimes increase; see the exact trial table in `docs/m3d-feedback-tech-handoff.md`. Retained artwork is temporary for changed poses/effects; no new art is delivered in this technical worktree.
+
 # Content Catalogue v1.0 — Canonical Vietnamese names
 
 **Current M3C3 feedback override (2026-10-31):** The director authorizes the feedback trial described in `docs/M3C3_FEEDBACK_IMPLEMENTATION.md`. Cái Bang A gains sixth-palm/four-stage-staff chains; Hỏa Vân fires a three-direction fan; Hoành Tảo is radial. Thiên Sơn Phiến A becomes a two-leg ranged fan, both A profiles use 0.3s base cadence, Lưu Phong damages crossed enemies, Lục Dương mitigates while spinning, Chiết Mai adds bounded CDR, Bách Phiến adds eight-way fan bursts, Truy Hồn emits two slowing blades and the two evasive dashes protect only moving ticks from direct damage. Võ Đang Lưỡng Nghi/Dương Khí become straight projectiles, Quyền A knocks back lightly, shield is toggle and Thái Cực Trận confines without stun. Thiếu Lâm Dịch Cân's existing regen remains single-source; Đao/Tru Tà gain reach/cleave. Exact Vietnamese names, IDs, school mixing, four slots, 43 actives and eight basics remain unchanged. Historical descriptions below are superseded where they conflict with this override; numeric changes are proposals, not final balance.
@@ -72,7 +84,7 @@
 **Identity:** highest natural HP/Defense, slower deliberate hits, devastating complete combos; Đao versatile defensive support. **Innate passive:** `dich_can_kinh` — **Dịch Cân Kinh** (auto Max HP, Defense, HP Regen).
 
 **Normal attacks (A):**
-- `thieu_lam_quyen`: **Thiếu Lâm Quyền** — heavy, slow, short frontal punch.
+- `thieu_lam_quyen`: **Thiếu Lâm Quyền** — four manual punch/punch/kick/roundhouse stages; finisher emits a travelling crescent.
 - `thieu_lam_dao`: **Thiếu Lâm Đao** — broader, moderately fast melee slash.
 
 **Phát Động A:** `la_han_quyen` → `vi_da_quyen` → `dai_luc_kim_cuong_chuong` on **same target** (cleaved hits count). Final skill empowered only if target has the two preceding hits in order. **Phát Động B:** `toan_phong_thoai` → `hoanh_tao_cuoc` → `vo_anh_cuoc`, same mechanics. Exact window/rank scaling adjustable.
@@ -82,14 +94,14 @@
 | `la_han_quyen` | **La Hán Quyền** | Quyền | Heavy punch, brief guard, combo A step 1; setup and survival. |
 | `vi_da_quyen` | **Vi Đà Quyền** | Quyền | Strike reduces target defense, combo A step 2; setup heavy finisher. |
 | `dai_luc_kim_cuong_chuong` | **Đại Lực Kim Cương Chưởng** | Quyền | Slow large palm hit, empowered for same target after A1+A2; heavy finisher. |
-| `toan_phong_thoai` | **Toàn Phong Thoái** | Quyền | Spinning kick, combo B step 1; opening AoE. |
-| `hoanh_tao_cuoc` | **Hoành Tảo Cước** | Quyền | Wide sweep, combo B step 2; area setup. |
-| `vo_anh_cuoc` | **Vô Ảnh Cước** | Quyền | Rapid kicks, stronger after B1+B2 on target; multi-hit finisher. |
+| `toan_phong_thoai` | **Toàn Phong Thoái** | Quyền | Golden travelling piercing tornado, one hit/target; combo B step 1. |
+| `hoanh_tao_cuoc` | **Ca Diệp Thoái** | Quyền | Stationary foot slam; piercing earth mound damages/stuns every crossed target once; combo B step 2. |
+| `vo_anh_cuoc` | **Vô Ảnh Cước** | Quyền | One centered foot normally; valid same-target B1+B2 enables three parallel lanes twice. |
 | `kim_cang_bat_hoai` | **Kim Cang Bất Hoại** | Quyền | Short damage reduction and interrupt resistance; survive slow commitment. |
-| `nhu_lai_niet_ban` | **Như Lai Niết Bàn** | Quyền U | Huge golden ground strike plus temporary defensive aftereffect; signature attack. |
+| `nhu_lai_niet_ban` | **Như Lai Niết Bàn** | Quyền U | Buddha and sky palm, then a Sanskrit field hitting each target on first entry once/cast; retained defensive buff. |
 | `tru_ta` | **Tru Tà** | Đao | Wide frontal slash that slows; consistent melee wave control. |
 | `kim_quang_ho_tran` | **Kim Quang Hộ Trận** | Đao | Area defense aura for allies; team protection. |
-| `tam_gioi_quy_thien` | **Tam Giới Quy Thiền** | Đao | Powerful slash with defense reduction; helps party damage. |
+| `tam_gioi_quy_thien` | **Sư Tử Hống** | Đao | Wide lion-roar AoE damage, defense reduction and slow. |
 | `bat_dong_minh_vuong` | **Bất Động Minh Vương** | Đao | Area healing pulse (retained from previous proposal); **OPEN** whether changed to mitigation/protection due to name. |
 | `nhu_lai_thien_diep` | **Như Lai Thiên Diệp** | Đao U | Golden wide wave damaging foes and boosting allied defense; support+offense. |
 

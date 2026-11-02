@@ -8,6 +8,8 @@ import {
 import raw from './boss-co-mo-map.json' with { type: 'json' };
 import { creepDungeon } from './dungeon.js';
 import { m1Config } from './m1.js';
+import { enlargeBossArena } from './boss-arena-geometry.js';
+import { bossCadence, cadenceTicks } from './boss-cadence.js';
 const hz = m1Config.tickRate;
 const markers = raw.layers.find((l) => l.name === 'markers')!
   .objects! as Array<{
@@ -25,12 +27,12 @@ const stats = {
   ...m1Config.creep,
   hp: 1800,
   defense: 12,
-  speed: 48,
+  speed: 115,
   radius: 18,
   damage: 12,
   attackRange: 70,
   detectionRange: 1600,
-  attackCooldownTicks: hz * 2,
+  attackCooldownTicks: hz,
   xp: 600,
   gold: 120,
 };
@@ -59,12 +61,15 @@ export const lyMacSauEncounter: BossEncounterDefinition = {
   stats,
   controlResistance: 0.8,
   openingTicks: hz * 2,
-  intervalTicks: Math.ceil(hz * 1.3),
+  intervalTicks: Math.ceil(hz * 0.65),
   emptyResetTicks: hz * 30,
   respawnTicks: hz * 30,
   attacks: [
-    attack('ly_mac_sau_basic', 'Đánh thường', 0.3, 12, 70),
-    attack('bang_phach_ngan_cham', 'Băng Phách Ngân Châm', 0.6, 14, 720, 480),
+    {
+      ...attack('ly_mac_sau_basic', 'Phất trần', 0.3, 12, 144),
+      halfAngle: Math.PI,
+    },
+    attack('bang_phach_ngan_cham', 'Băng Phách Ngân Châm', 0.6, 14, 864, 480),
     attack('xich_luyen_chuong', 'Xích Luyện Chưởng', 0.9, 18, 620, 300),
     attack('phat_tran_cong', 'Phất Trần Công', 0.4, 18, 120),
     attack('co_mo_kiem_phap', 'Cổ Mộ Kiếm Pháp', 0.75, 0, 0),
@@ -78,13 +83,28 @@ export const lyMacSauEncounter: BossEncounterDefinition = {
     'phat_tran_cong',
   ],
   summonCount: 4,
-  summonLimit: 4,
+  summonLimit: 8,
+  summonCountChoices: [4, 6, 8],
+  summonProjectile: {
+    mode: 'projectile',
+    damage: 5,
+    speed: 300,
+    range: 500,
+    radius: 6,
+    count: 1,
+    spacingTicks: 0,
+    splashRadius: 0,
+    burnDamage: 0,
+    burnTicks: 0,
+  },
   summonLifetimeTicks: hz * 16,
   summonStats: {
     ...m1Config.creep,
     hp: 60,
     damage: 5,
     speed: 70,
+    attackRange: 360,
+    attackCooldownTicks: hz,
     detectionRange: 1600,
     xp: 0,
     gold: 0,
@@ -123,6 +143,19 @@ const statsSchema = z.object({
   gold: nonnegative.int(),
   assistTicks: positive.int(),
 });
+lyMacSauEncounter.intervalTicks = cadenceTicks(
+  bossCadence.ly_mac_sau.restSeconds,
+);
+lyMacSauEncounter.stats.attackCooldownTicks = cadenceTicks(
+  bossCadence.ly_mac_sau.basicCooldownSeconds,
+);
+for (const a of lyMacSauEncounter.attacks) {
+  const t = bossCadence.ly_mac_sau.attacks[a.id];
+  if (!t) throw Error('Missing LMS cadence ' + a.id);
+  a.windupTicks = cadenceTicks(t.windupSeconds);
+  a.recoveryTicks = cadenceTicks(t.recoverySeconds);
+  a.cooldownTicks = cadenceTicks(t.cooldownSeconds);
+}
 z.object({
   stats: statsSchema,
   summonStats: statsSchema,
@@ -141,7 +174,7 @@ z.object({
   respawnTicks: positive.int(),
   controlResistance: nonnegative.max(0.95),
   summonCount: positive.int().max(4),
-  summonLimit: positive.int().max(4),
+  summonLimit: positive.int().max(8),
   summonLifetimeTicks: positive.int(),
   attacks: z
     .array(
@@ -168,7 +201,7 @@ if (
   lyMacSauEncounter.summonCount > lyMacSauEncounter.summonLimit
 )
   throw Error('Invalid Lý Mạc Sầu rotation/summon tuning');
-export const coMoDungeon: CreepDungeonDefinition = {
+export const coMoDungeon: CreepDungeonDefinition = enlargeBossArena({
   ...creepDungeon,
   id: 'co_mo',
   width: raw.width * 32,
@@ -187,7 +220,7 @@ export const coMoDungeon: CreepDungeonDefinition = {
   damagePerWave: 0,
   creepRoster: undefined,
   bossEncounter: lyMacSauEncounter,
-};
+});
 for (const p of [
   ...Array.from({ length: 6 }, (_, i) => ({
     x: coMoDungeon.spawn.x,

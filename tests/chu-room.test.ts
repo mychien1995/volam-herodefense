@@ -64,7 +64,7 @@ it('real SDK filters encounter instances and rejects forged/replayed loot owners
       () => a.state.dungeons.get('chu_ba_thong_shared')?.encounter.length ?? 0,
     )
     .toBeGreaterThan(0);
-  expect(c.state.dungeons.has('chu_ba_thong_shared')).toBe(false);
+  expect(c.state.dungeons.has('chu_ba_thong_shared')).toBe(true);
   expect(a.state.dungeons.has('chu_ba_thong_private_' + c.sessionId)).toBe(
     false,
   );
@@ -85,6 +85,10 @@ it('real SDK filters encounter instances and rejects forged/replayed loot owners
   });
   await expect.poll(() => z.world.chu!.loot.length).toBe(1);
   const loot = z.world.chu!.loot[0]!;
+  const cHero = authority.simulation.hero(c.sessionId)!;
+  Object.assign(cHero, z.dungeon!.exit);
+  authority.simulation.exit(c.sessionId);
+  authority.simulation.enter(c.sessionId, 'private', 'forest');
   const rejected = c.waitForMessage('command-rejected');
   c.send('boss-loot-action', {
     protocolVersion: PROTOCOL_VERSION,

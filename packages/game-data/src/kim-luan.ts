@@ -6,6 +6,8 @@ import {
 } from '@volam/game-core';
 import { creepDungeon } from './dungeon.js';
 import { m1Config } from './m1.js';
+import { enlargeBossArena } from './boss-arena-geometry.js';
+import { bossCadence } from './boss-cadence.js';
 import map from './kim-map.json' with { type: 'json' };
 const hz = m1Config.tickRate,
   t = (s: number) => Math.round(s * hz);
@@ -25,19 +27,23 @@ const p = (
 ) => ({ nameVi, damage, warning, duration, cooldown });
 /** Trial combat tuning. Approved geometry stays separate from HP/damage/economy. */
 export const kimLuanDefinition: KimDefinition = {
+  wheelCount: 7,
+  basicWheelSpeed: 620,
+  actionRestSeconds: 0.2,
+  crescent: { speed: 760, radius: 30, lifetime: 2 },
   actors: {
-    hoac_do: { ...marker('hoac_do_spawn'), hp: 1100, defense: 10, speed: 155 },
+    hoac_do: { ...marker('hoac_do_spawn'), hp: 1100, defense: 10, speed: 180 },
     dat_nhi_ba: {
       ...marker('dat_nhi_ba_spawn'),
       hp: 1600,
       defense: 16,
-      speed: 38,
+      speed: 105,
     },
     kim_luan_phap_vuong: {
       ...marker('boss_spawn'),
       hp: 4200,
       defense: 18,
-      speed: 100,
+      speed: 145,
     },
   },
   bounds: { x: 150, y: 270, width: 980, height: 400 },
@@ -74,7 +80,7 @@ export const kimLuanDefinition: KimDefinition = {
     threshold: 0.3,
     speedMultiplier: 1.6,
     interval: 1.8,
-    wheelSpeed: 430,
+    wheelSpeed: 620,
   },
   elephants: {
     rocks: 5,
@@ -91,12 +97,13 @@ export const kimLuanDefinition: KimDefinition = {
     cuong_phong_tan_loi_cong: p('Cuồng Phong Tấn Lôi Công', 16, 0.5, 0.4, 5),
     phien_trung_doc_dinh: p('Phiến Trung Độc Đinh', 8, 0.5, 0.4, 6),
     cuong_phong_van_nhan: p('Cuồng Phong Vạn Nhận', 6, 0.7, 3.1, 9),
-    dat_sweep: p('Quét chùy', 20, 0.65, 0.3, 3.2),
-    dai_luc_pha_son: p('Đại Lực Phá Sơn', 28, 0.7, 0.9, 7),
-    bat_dong_kim_cang: p('Bất Động Kim Cang', 0, 0.5, 0.4, 4),
-    dai_luc_pha_son_boulder: p('Đại Lực Phá Sơn', 25, 0.7, 0.4, 6),
-    hang_ma_tam_lien_chan: p('Hàng Ma Tam Liên Chấn', 18, 0.8, 2.3, 9),
-    kim_sweep: p('Ngũ Luân', 15, 0.55, 0.4, 2.6),
+    dat_sweep: p('Quét chùy', 20, 0.35, 0.3, 1.5),
+    dai_luc_pha_son: p('Đại Lực Phá Sơn', 28, 0.4, 0.9, 4),
+    bat_dong_kim_cang: p('Bất Động Kim Cang', 0, 0.3, 0.4, 4),
+    dai_luc_pha_son_boulder: p('Đại Lực Phá Sơn', 25, 0.35, 0.4, 3.2),
+    hang_ma_tam_lien_chan: p('Hàng Ma Tam Liên Chấn', 18, 0.4, 2.3, 5),
+    kim_sweep: p('Ngũ Luân', 15, 0.35, 0.4, 1.5),
+    kim_hand_chop: p('Bán Nguyệt Đao Khí', 18, 0.35, 0.4, 1.8),
     kim_luan_truy_hon: p('Kim Luân Truy Hồn', 11, 0.7, 0.5, 24),
     ngu_luan_ho_the: p('Ngũ Luân Hộ Thể', 18, 0.6, 3.1, 9),
     ngu_luan_phong_toa: p('Ngũ Luân Phong Tỏa', 32, 0.8, 4.1, 12),
@@ -111,7 +118,14 @@ export const kimLuanDefinition: KimDefinition = {
     ),
   },
 };
-export const kimLuanDungeon: CreepDungeonDefinition = {
+kimLuanDefinition.actionRestSeconds = bossCadence.kim_luan.restSeconds;
+for (const [id, a] of Object.entries(kimLuanDefinition.abilities)) {
+  const t = bossCadence.kim_luan.abilities[id];
+  if (!t) throw Error('Missing Kim cadence ' + id);
+  a.warning = t.warningSeconds;
+  a.cooldown = t.cooldownSeconds;
+}
+export const kimLuanDungeon: CreepDungeonDefinition = enlargeBossArena({
   ...creepDungeon,
   id: 'kim_luan',
   kimBoss: kimLuanDefinition,
@@ -131,7 +145,7 @@ export const kimLuanDungeon: CreepDungeonDefinition = {
   creepRoster: [],
   hpPerAdditionalPlayer: 0,
   damagePerAdditionalPlayer: 0,
-};
+});
 export function validateKimDefinition(d = kimLuanDefinition) {
   const visit = (value: unknown) => {
     if (typeof value === 'number' && (!Number.isFinite(value) || value < 0))

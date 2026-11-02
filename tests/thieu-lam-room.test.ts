@@ -10,7 +10,7 @@ import {
   type LobbyState,
 } from '@volam/game-protocol';
 import { gainExperience, addCreep, type BuildChange } from '@volam/game-core';
-import { m1Config, creepDungeon } from '@volam/game-data';
+import { m1Config } from '@volam/game-data';
 let server: ColyseusTestServer;
 const client = new Client('http://localhost:2640');
 const saved = process.env['VOLAM_DEV_LEGACY_SKILLS'];
@@ -123,6 +123,7 @@ it('four schools share authoritative combos, support, damage and rewards; zones/
     p.send('dungeon-action', {
       action: 'enter',
       access: 'shared',
+      destination: 'hong_liet',
       sequence: ++seq,
       protocolVersion: PROTOCOL_VERSION,
     });
@@ -176,12 +177,15 @@ it('four schools share authoritative combos, support, damage and rewards; zones/
       () => JSON.parse(gold.state.players.get(gold.sessionId)!.combos)[0]?.step,
     )
     .toBe(1);
+  // Vi Đà now detonates 189px ahead; keep the same target inside that footprint.
+  h.x -= 126;
   cast(gold, 1);
   await expect
     .poll(
       () => JSON.parse(fire.state.players.get(gold.sessionId)!.combos)[0]?.step,
     )
     .toBe(2);
+  h.x += 126;
   cast(gold, 2);
   await expect
     .poll(
@@ -237,7 +241,7 @@ it('four schools share authoritative combos, support, damage and rewards; zones/
   });
   await expect.poll(() => refusals.length).toBe(count + 1);
   // Leaving a zone cancels the caster-owned aura, including allied defensive linger.
-  Object.assign(h, creepDungeon.exit);
+  Object.assign(h, zone.dungeon!.exit);
   gold.send('dungeon-action', {
     action: 'exit',
     sequence: ++seq,

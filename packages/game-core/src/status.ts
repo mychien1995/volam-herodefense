@@ -1,4 +1,4 @@
-import { moveCircle } from './geometry.js';
+import { moveCircle, clampEllipse } from './geometry.js';
 import type {
   Actor,
   SimulationConfig,
@@ -91,7 +91,9 @@ export function expireStatuses(world: World): void {
     );
 }
 export function cancelOwnedEffects(world: World, id: string): void {
+  if (world.chu?.wineDrinkers) delete world.chu.wineDrinkers[id];
   const owner = world.heroes.get(id);
+  if (owner) delete owner.comboFinisher;
   if (owner) owner.basicChains = {};
   world.combos = (world.combos ?? []).filter(
     (c) => c.sourceId !== id && c.targetId !== id,
@@ -131,7 +133,7 @@ export function displace(
   )
     return;
   const steps = Math.max(1, Math.ceil(Math.hypot(dx, dy) / 4));
-  for (let i = 0; i < steps; i++)
+  for (let i = 0; i < steps; i++) {
     moveCircle(
       actor,
       { x: dx / steps, y: dy / steps },
@@ -140,4 +142,7 @@ export function displace(
       config.height,
       config.collision,
     );
+    if (config.heroBounds && 'nickname' in actor)
+      clampEllipse(actor, config.heroBounds, radius);
+  }
 }

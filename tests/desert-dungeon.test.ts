@@ -59,7 +59,8 @@ describe('desert map and authoritative destination contract', () => {
     };
     expect(dungeonActionSchema.parse(payload)).toMatchObject(payload);
     expect(
-      dungeonActionSchema.safeParse({ ...payload, destination: 'hell' }).success,
+      dungeonActionSchema.safeParse({ ...payload, destination: 'forged' })
+        .success,
     ).toBe(false);
     expect(
       dungeonActionSchema.safeParse({
@@ -73,7 +74,7 @@ describe('desert map and authoritative destination contract', () => {
     expect(m.enter('a', 'shared', 'sea')).toContain('chưa mở');
     expect(m.zones.size).toBe(1);
     expect(m.enter('a', 'shared')).toBeUndefined();
-    expect(m.zoneOf('a')!.id).toBe('forest_shared');
+    expect(m.zoneOf('a')!.id).toBe('forest_private_a');
   });
   it('isolates desert private/shared and forest populations, exits and paused clocks', () => {
     const m = setup();
@@ -85,7 +86,7 @@ describe('desert map and authoritative destination contract', () => {
     const z = m.zoneOf('a')!,
       privateZone = m.zoneOf('c')!,
       forest = m.zoneOf('f')!;
-    expect(m.zoneOf('b')).toBe(z);
+    expect(m.zoneOf('b')).not.toBe(z);
     expect(z.config.collision).toEqual(d.collision);
     expect(privateZone).not.toBe(z);
     expect(forest).not.toBe(z);
@@ -110,15 +111,20 @@ describe('desert map and authoritative destination contract', () => {
     m.enter('a', 'shared', 'desert');
     const z = m.zoneOf('a')!;
     const first = [...z.world.creeps.values()];
-    expect(first.map((c) => c.archetypeId)).toEqual(desertRoster.slice(0, 3));
-    expect(z.config.creep).toEqual(m.base.creep);
+    expect(first.map((c) => c.archetypeId)).toEqual(
+      Array(d.baseCount).fill(desertRoster[0]),
+    );
+    expect(z.config.creep).toEqual({
+      ...m.base.creep,
+      speed: m.base.speed * 0.648,
+    });
     step(m, d.restTicks + 2);
     expect(z.wave).toBe(1);
     for (const c of first) c.hp = 0;
     step(m, d.restTicks + 1);
     expect(z.wave).toBe(2);
     expect([...z.world.creeps.values()].map((c) => c.archetypeId)).toEqual(
-      desertRoster.slice(3),
+      Array(d.baseCount).fill(desertRoster[1]),
     );
     expect(z.config.creep.hp).toBe(
       Math.round(m.base.creep.hp * (1 + d.hpPerWave)),

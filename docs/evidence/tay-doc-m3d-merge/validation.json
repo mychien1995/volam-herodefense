@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-03",
+  "base": "acfded8270e8c397d1781b9c8956adab2c42e0f3",
+  "feature": "d8b7d5a3",
+  "protocol": 23,
+  "focusedUnitIntegration": {
+    "files": 9,
+    "passed": 66
+  },
+  "projectTypecheck": "PASS",
+  "toolsTypecheck": "PASS",
+  "productionBuild": "PASS",
+  "browser": {
+    "command": "node tools/run-playwright.mjs test --config playwright.tay-doc.config.ts --grep 'two real'",
+    "passed": 1,
+    "twoActualClients": true
+  },
+  "art": {
+    "approvedHashes": 593,
+    "candidateCels": 60,
+    "runtimeApproval": "pending",
+    "unchangedArtwork": true
+  },
+  "omitted": "No full suite, six-client repeat or balance rerun; explicitly scoped merge checks requested by user."
+}
