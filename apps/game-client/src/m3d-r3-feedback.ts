@@ -206,6 +206,9 @@ export class M3dR3Feedback {
         this.flash(e.sourceId, 'b3_pha_giap_vfx', 'impact', d, e, {
           depth: e.y - 10,
           placement: true,
+          rotation:
+            Math.atan2(e.fy ?? 0, e.fx ?? 1) -
+            { right: 0, down: Math.PI / 2, left: Math.PI, up: -Math.PI / 2 }[d],
         });
       if (e.abilityId === 'liet_phong_dao')
         this.flash(
@@ -448,7 +451,7 @@ export class M3dR3Feedback {
           p.x,
           p.y - 10,
           elapsed,
-          { depth: p.y - 5, alpha: Math.min(1, elapsed / 100) },
+          { scale: 2, depth: p.y - 5, alpha: Math.min(1, elapsed / 100) },
         );
         this.painter.draw(
           'sky:' + id,

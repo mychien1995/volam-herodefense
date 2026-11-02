@@ -1,7 +1,7 @@
 import { KimLuanEncounter } from './kim-luan.js';
 import { BossPartyState, isBossDungeon } from './boss-party.js';
 import type { KimDefinition } from './kim-types.js';
-import { spawnChu } from './chu-ba-thong.js';
+import { spawnChu, drinkChuWine } from './chu-ba-thong.js';
 import { validateChuDefinition, type ChuDefinition } from './chu-types.js';
 import { HongLietEncounter } from './hong-liet.js';
 import type { HongLietDefinition } from './hong-liet-types.js';
@@ -256,7 +256,7 @@ export class DungeonMatch {
           this.hero(id)!,
           this.zoneOf(id)!.config,
           this.zoneOf(id)!.world.tick,
-        ).total.movementSpeed * 0.9;
+        ).total.movementSpeed * 0.72;
     const key =
       access === 'shared'
         ? `${dungeon.id}_shared`
@@ -304,6 +304,12 @@ export class DungeonMatch {
       this.zones.set(key, zone);
     }
     this.party.observe(zone);
+    if (
+      this.membership.size === 1 &&
+      isBossDungeon(dungeon) &&
+      this.party.life(zone, id).eliminated
+    )
+      return 'Đã hết lượt hồi sinh. Hãy chờ boss reset.';
     if (entrySpeed !== undefined) {
       zone.creepSpeed = entrySpeed;
       zone.config.creep.speed = entrySpeed;
@@ -355,6 +361,11 @@ export class DungeonMatch {
       hero.pose = 'idle';
     }
     return undefined;
+  }
+  interact(id: string): string | undefined {
+    const zone = this.zoneOf(id);
+    if (zone && drinkChuWine(zone.world, id)) return;
+    return this.exit(id);
   }
   input(id: string, sequence: number, command: Command): string | undefined {
     if (this.invasion?.defeated) return 'Trận đấu đã kết thúc.';
@@ -547,7 +558,7 @@ export class DungeonMatch {
       const zone = this.zoneOf(id)!;
       const dungeon = zone.dungeon ?? this.dungeon;
       this.observeDeath(id);
-      if (hero.bossSpectator) continue;
+      if (hero.hp > 0 || hero.bossSpectator) continue;
       if (!this.respawns.has(id))
         this.respawns.set(id, this.tick + dungeon.respawnTicks);
       if (this.tick >= this.respawns.get(id)!) {
@@ -595,6 +606,13 @@ export class DungeonMatch {
       life.eliminated = true;
       hero.bossSpectator = true;
       hero.moveX = hero.moveY = 0;
+      if (this.membership.size === 1) {
+        this.transfer(id, this.arena, this.base.spawn);
+        hero.hp = hero.maxHp;
+        hero.mana = hero.maxMana;
+        hero.pose = 'idle';
+        hero.bossSpectator = false;
+      }
     } else {
       life.revivalUsed = true;
       this.respawns.set(id, this.tick + this.base.tickRate * 5);

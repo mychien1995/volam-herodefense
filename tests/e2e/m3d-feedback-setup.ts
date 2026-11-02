@@ -119,15 +119,21 @@ export async function createM3dFixture(
           z.kim.begin(z.world, z.config, input.actor, input.ability, h);
         } else if (z.world.chu) {
           const c = z.world.chu;
-          c.phase = input.ability;
-          c.started = z.world.tick;
-          c.until = z.world.tick + 300;
-          c.nextAction = z.world.tick;
-          c.nextBasicAt = z.world.tick;
-          c.fx = 1;
-          c.fy = 0;
-          const b = z.world.creeps.get('chu_ba_thong')!;
-          c.spinOrigin = { x: b.x, y: b.y };
+          if (input.ability === 'drink') {
+            c.phaseIndex =
+              c.definition.phases.findIndex((p) => p.id === 'drink') - 1;
+            c.until = z.world.tick;
+          } else {
+            c.phase = input.ability;
+            c.started = z.world.tick;
+            c.until = z.world.tick + 300;
+            c.nextAction = z.world.tick;
+            c.nextBasicAt = z.world.tick;
+            c.fx = 1;
+            c.fy = 0;
+            const b = z.world.creeps.get('chu_ba_thong')!;
+            c.spinOrigin = { x: b.x, y: b.y };
+          }
         } else if (z.world.boss) {
           const runtime = z.world.boss,
             b = z.world.creeps.get(runtime.actorId)!;
@@ -162,6 +168,9 @@ export async function createM3dFixture(
         h.fx = input.fx ?? 1;
         h.fy = input.fy ?? 0;
       } else if (input.action === 'targets') {
+        const archetype = [...z.world.creeps.values()].find(
+          (e) => e.hp > 0,
+        )?.archetypeId;
         z.world.creeps.clear();
         z.world.random = () => 0.99;
         for (let i = 0; i < input.points.length; i++) {
@@ -175,11 +184,12 @@ export async function createM3dFixture(
           c.stats = {
             ...z.config.creep,
             hp: 100000,
-            speed: 0,
+            speed: input.mobile ? z.config.creep.speed : 0,
             damage: 0,
             defense: 0,
             detectionRange: 1,
           };
+          if (input.mobile && archetype) c.archetypeId = archetype;
         }
       } else throw Error('Unknown fixture action');
       res

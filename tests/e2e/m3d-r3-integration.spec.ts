@@ -792,14 +792,11 @@ test('r3 production multiplayer: six-player natural combat, rewards and normal-z
       'Combat ' + i,
       i ? (await snap(a)).roomId : undefined,
     );
-  await startTogether(pages, [
-    'thieu_lam',
-    'cai_bang',
-    'thien_son',
-    'vo_dang',
-    'thieu_lam',
-    'vo_dang',
-  ]);
+  await startTogether(
+    pages,
+    ['thieu_lam', 'cai_bang', 'thien_son', 'vo_dang', 'thieu_lam', 'vo_dang'],
+    60000,
+  );
   const schoolBuilds = [
     ['hoanh_tao_cuoc', 'toan_phong_thoai', 'vo_anh_cuoc', 'nhu_lai_niet_ban'],
     ['pha_giap_bong', 'thien_ha_vo_cau', '', ''],

@@ -30,6 +30,7 @@ export function dash(world: World, hero: Hero, config: SimulationConfig): void {
   const t = config.mobility;
   if (
     !t ||
+    world.chu?.phase === 'reflect' ||
     !hero.dashCharges ||
     hasStatus(hero, 'stun', world.tick) ||
     (world.actions ?? []).some((a) => a.ownerId === hero.id)

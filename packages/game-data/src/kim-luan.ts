@@ -7,6 +7,7 @@ import {
 import { creepDungeon } from './dungeon.js';
 import { m1Config } from './m1.js';
 import { enlargeBossArena } from './boss-arena-geometry.js';
+import { bossCadence } from './boss-cadence.js';
 import map from './kim-map.json' with { type: 'json' };
 const hz = m1Config.tickRate,
   t = (s: number) => Math.round(s * hz);
@@ -117,6 +118,13 @@ export const kimLuanDefinition: KimDefinition = {
     ),
   },
 };
+kimLuanDefinition.actionRestSeconds = bossCadence.kim_luan.restSeconds;
+for (const [id, a] of Object.entries(kimLuanDefinition.abilities)) {
+  const t = bossCadence.kim_luan.abilities[id];
+  if (!t) throw Error('Missing Kim cadence ' + id);
+  a.warning = t.warningSeconds;
+  a.cooldown = t.cooldownSeconds;
+}
 export const kimLuanDungeon: CreepDungeonDefinition = enlargeBossArena({
   ...creepDungeon,
   id: 'kim_luan',

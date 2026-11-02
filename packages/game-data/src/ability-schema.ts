@@ -213,6 +213,7 @@ export const abilitySchema = z
         slowedBonus: z.number().nonnegative().optional(),
         projectileBurst: projectile.optional(),
         projectileBurstEvery: count.min(1).max(12).optional(),
+        comboBurstOnly: z.boolean().optional(),
         guard: z.number().finite().min(0).max(0.85).optional(),
         durationTicks: count.min(1).optional(),
       }),

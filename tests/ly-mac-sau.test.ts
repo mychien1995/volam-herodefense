@@ -33,6 +33,7 @@ function step(match: DungeonMatch, n: number) {
 function cast(f: ReturnType<typeof setup>, id: BossAbilityId) {
   const runtime = f.zone.world.boss!;
   runtime.cast = undefined;
+  runtime.cooldowns = {}; // Isolate geometry/summon tests from real configured cadence.
   runtime.nextActionAt = f.zone.world.tick;
   runtime.rotation = lyMacSauEncounter.rotation.indexOf(id);
   if (id === 'ly_mac_sau_basic') {

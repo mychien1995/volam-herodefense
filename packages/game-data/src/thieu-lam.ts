@@ -106,7 +106,7 @@ export const thieuLamSkills: Ability[] = [
     cooldownTicks: 90,
     effect: {
       ...arc(44, 68),
-      originOffset: 63,
+      originOffset: 189,
       statuses: [{ kind: 'defense_break', magnitude: 12, durationTicks: 120 }],
     },
     combo: chain('phat_dong_a', 2),
@@ -153,6 +153,7 @@ export const thieuLamSkills: Ability[] = [
     cooldownTicks: 180,
     effect: {
       mode: 'multi_hit',
+      comboBurstOnly: true,
       damage: 0,
       range: tuning.footForce.range,
       hits: tuning.footForce.volleys,

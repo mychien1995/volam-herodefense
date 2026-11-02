@@ -8,6 +8,7 @@ export type BossAbilityId =
   | 'co_mo_kiem_phap'
   | 'ngu_doc_chuong';
 export interface BossAttackDefinition {
+  cooldownTicks?: number;
   id: BossAbilityId;
   nameVi: string;
   windupTicks: number;
@@ -51,6 +52,7 @@ export interface CoMoBossCast {
   released: boolean;
 }
 export interface BossRuntime {
+  cooldowns?: Record<string, number>;
   actorId: string;
   instanceId: string;
   killSerial: number;

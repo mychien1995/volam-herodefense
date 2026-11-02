@@ -165,7 +165,7 @@ const form = element<HTMLFormElement>('#join-form');
 const status = element('#status');
 function dungeonAction(
   action:
-    | { action: 'open' | 'exit' | 'summon-help' }
+    | { action: 'open' | 'exit' | 'summon-help' | 'interact' }
     | { action: 'reply-invitation'; invitationId: number; accept: boolean }
     | {
         action: 'enter';
@@ -234,6 +234,7 @@ const unbindInput = bindGameplayInput(
       Math.hypot(hero.x - d.exit.x, hero.y - d.exit.y) <= d.exitRange
     )
       dungeonAction({ action: 'exit' });
+    else if (d.id === 'chu_ba_thong') dungeonAction({ action: 'interact' });
   },
   {
     active: () => !!room?.state?.players?.get(room.sessionId)?.bossSpectator,

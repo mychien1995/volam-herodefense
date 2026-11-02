@@ -65,6 +65,8 @@ function begin(
   target: Hero,
 ) {
   const runtime = world.boss!;
+  (runtime.cooldowns ??= {})[attack.id] =
+    world.tick + (attack.cooldownTicks ?? 0);
   const aim = direction(target.x - boss.x, target.y - boss.y);
   boss.fx = aim.x;
   boss.fy = aim.y;
@@ -338,6 +340,7 @@ export function stepBossEncounter(
   const attack = d.attacks.find((a) => a.id === next)!;
   if (
     world.tick >= runtime.nextActionAt &&
+    world.tick >= (runtime.cooldowns?.[next] ?? 0) &&
     !hasStatus(boss, 'silence', world.tick) &&
     (next !== 'phat_tran_cong' || distance(target, boss) <= attack.range + 30)
   ) {
@@ -353,6 +356,8 @@ export function stepBossEncounter(
   if (
     distance(target, boss) <= basic.range + config.radius &&
     world.tick >= boss.cooldown &&
+    world.tick >= (runtime.cooldowns?.[basic.id] ?? 0) &&
+    !hasStatus(boss, 'silence', world.tick) &&
     !hasStatus(boss, 'disarm', world.tick)
   ) {
     boss.cooldown = world.tick + d.stats.attackCooldownTicks;

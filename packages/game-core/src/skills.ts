@@ -334,7 +334,46 @@ export function perform(
   kind: 'attack' | 'cast',
   stage?: string,
 ): void {
-  const effect = ability.effect,
+  const original = ability.effect;
+  const ready =
+    original.mode === 'multi_hit' &&
+    original.comboBurstOnly &&
+    ability.combo &&
+    (world.combos ?? []).some(
+      (c) =>
+        c.sourceId === hero.id &&
+        c.id === ability.combo!.id &&
+        c.step === 2 &&
+        c.until > world.tick &&
+        (() => {
+          const e = world.creeps.get(c.targetId);
+          if (!e || e.hp <= 0 || !clearLine(world, hero, e, config))
+            return false;
+          const dx = e.x - hero.x,
+            dy = e.y - hero.y;
+          return (
+            dx * hero.fx + dy * hero.fy >= 0 &&
+            Math.abs(dx * hero.fy - dy * hero.fx) <= 50 &&
+            distance(e, hero) <=
+              original.range + (e.stats ?? config.creep).radius
+          );
+        })(),
+    );
+  const effect =
+      original.mode === 'multi_hit' &&
+      original.comboBurstOnly &&
+      !ready &&
+      original.projectileBurst
+        ? {
+            ...original,
+            hits: 1,
+            projectileBurst: {
+              ...original.projectileBurst,
+              count: 1,
+              laneOffsets: [0],
+            },
+          }
+        : original,
     crit = offensiveStats(world, hero.id, config);
   if (effect.mode === 'projectile' && !effect.useFacing) {
     const aim = targetDirection(world, hero, effect.range, config);

@@ -307,7 +307,8 @@ export class ArenaScene extends Phaser.Scene {
     ): void => {
       if (
         enemy &&
-        (isHongLietActor(actor.archetypeId ?? '') ||
+        (actor.archetypeId === 'chu_wine_disciple' ||
+          isHongLietActor(actor.archetypeId ?? '') ||
           isKimActor(actor.archetypeId ?? ''))
       )
         return;

@@ -93,7 +93,11 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     for (const a of [...thieuLamSkills, ...Object.values(thieuLamBasics)])
       expect(abilitySchema.parse(a)).toEqual(a);
     for (const a of thieuLamSkills) {
-      expect(skillIcon(a.id)).toContain('/thieu-lam/');
+      if (a.id === 'tam_gioi_quy_thien')
+        expect(skillIcon(a.id)).toBe(
+          '/assets/m3d_followup/su_tu_hong-icon.png',
+        );
+      else expect(skillIcon(a.id)).toContain('/thieu-lam/');
       expect(skillArt.assets.some((v) => v.id === a.id + '_character')).toBe(
         true,
       );
@@ -176,7 +180,9 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
       f.cast(first);
       expect(f.world.combos).toHaveLength(2);
       a!.y = 450;
+      if (second === 'vi_da_quyen') f.hero.x -= 126; // Keep the explosion on the same target after the new189px offset.
       f.cast(second);
+      if (second === 'vi_da_quyen') f.hero.x += 126;
       if (second === 'hoanh_tao_cuoc') f.steps(16);
       a!.y = 300;
       f.cast(finish);
@@ -264,7 +270,9 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     const f = fixture();
     f.cast('la_han_quyen');
     f.cast('toan_phong_thoai');
+    f.hero.x -= 126;
     f.cast('vi_da_quyen');
+    f.hero.x += 126;
     const records = (f.world.combos ?? []).filter(
       (c) => c.targetId === f.enemies[0]!.id,
     );
@@ -338,7 +346,7 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     expect(f.hero.x).toBe(300);
     f.cast('vo_anh_cuoc');
     f.steps(26);
-    expect(f.hits('vo_anh_cuoc')).toHaveLength(6);
+    expect(f.hits('vo_anh_cuoc')).toHaveLength(1);
     f.steps(120);
     const before = f.hero.hp;
     hurt(f.world, f.hero, 'creep_0', 'test', 100, f.config);

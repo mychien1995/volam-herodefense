@@ -91,6 +91,7 @@ export function expireStatuses(world: World): void {
     );
 }
 export function cancelOwnedEffects(world: World, id: string): void {
+  if (world.chu?.wineDrinkers) delete world.chu.wineDrinkers[id];
   const owner = world.heroes.get(id);
   if (owner) owner.basicChains = {};
   world.combos = (world.combos ?? []).filter(

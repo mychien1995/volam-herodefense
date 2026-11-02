@@ -118,6 +118,9 @@ export class R3Painter {
     ];
     const offset = o.placement ? tag.effectPlacementOffset : [0, 0];
     const scale = o.scale ?? 1;
+    const ox = offset[0]! * (o.mirrorX ? -1 : 1),
+      oy = offset[1]!,
+      a = o.rotation ?? 0;
     view
       .setTexture(c.id, frame)
       .setOrigin(
@@ -125,8 +128,8 @@ export class R3Painter {
         pivot[1]! / c.frameDimensions[1],
       )
       .setPosition(
-        Math.round(x + offset[0]! * (o.mirrorX ? -1 : 1)),
-        Math.round(y + offset[1]!),
+        Math.round(x + ox * Math.cos(a) - oy * Math.sin(a)),
+        Math.round(y + ox * Math.sin(a) + oy * Math.cos(a)),
       )
       .setScale(o.scaleX ?? scale, o.scaleY ?? scale)
       .setFlipX(!!o.mirrorX)

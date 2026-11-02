@@ -9,6 +9,7 @@ import raw from './boss-co-mo-map.json' with { type: 'json' };
 import { creepDungeon } from './dungeon.js';
 import { m1Config } from './m1.js';
 import { enlargeBossArena } from './boss-arena-geometry.js';
+import { bossCadence, cadenceTicks } from './boss-cadence.js';
 const hz = m1Config.tickRate;
 const markers = raw.layers.find((l) => l.name === 'markers')!
   .objects! as Array<{
@@ -142,6 +143,19 @@ const statsSchema = z.object({
   gold: nonnegative.int(),
   assistTicks: positive.int(),
 });
+lyMacSauEncounter.intervalTicks = cadenceTicks(
+  bossCadence.ly_mac_sau.restSeconds,
+);
+lyMacSauEncounter.stats.attackCooldownTicks = cadenceTicks(
+  bossCadence.ly_mac_sau.basicCooldownSeconds,
+);
+for (const a of lyMacSauEncounter.attacks) {
+  const t = bossCadence.ly_mac_sau.attacks[a.id];
+  if (!t) throw Error('Missing LMS cadence ' + a.id);
+  a.windupTicks = cadenceTicks(t.windupSeconds);
+  a.recoveryTicks = cadenceTicks(t.recoverySeconds);
+  a.cooldownTicks = cadenceTicks(t.cooldownSeconds);
+}
 z.object({
   stats: statsSchema,
   summonStats: statsSchema,

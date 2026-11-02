@@ -182,6 +182,7 @@ export interface DashEffect {
     { durationTicks: number; damage: number; range: number } | undefined;
 }
 export interface MultiHitEffect {
+  comboBurstOnly?: boolean | undefined;
   mode: 'multi_hit';
   range: number;
   damage: number;

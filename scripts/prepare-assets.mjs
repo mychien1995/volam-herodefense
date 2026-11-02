@@ -2,6 +2,7 @@ import { prepareKimAssets } from './prepare-kim-assets.mjs';
 import { prepareM3dFeedbackArt } from './prepare-m3d-feedback-art.mjs';
 import { prepareM3dR3Art } from './prepare-m3d-r3-art.mjs';
 import { prepareChuAssets } from './prepare-chu-assets.mjs';
+import { prepareM3dFollowup } from './prepare-m3d-followup.mjs';
 import { mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
@@ -51,6 +52,7 @@ prepareKimAssets();
 prepareM3dFeedbackArt();
 prepareM3dR3Art();
 prepareChuAssets();
+prepareM3dFollowup();
 prepareFeedbackV2Art();
 const skills = JSON.parse(
   readFileSync(

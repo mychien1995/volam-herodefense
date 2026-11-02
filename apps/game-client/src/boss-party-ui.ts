@@ -21,7 +21,7 @@ const mechanisms: Record<string, [string, string[]]> = {
     'Chu Bá Thông',
     [
       'Túy Tiên Bộ di chuyển đồng thời bắn chưởng về vị trí người chơi.',
-      'Càn Khôn Phản Chấn hút trên toàn arena.',
+      'Càn Khôn Phản Chấn hút trên toàn arena và khóa Shift. Giết tiểu đồng, đến gần bình bấm Space uống: Tửu lực 12s xuyên 70% phòng thủ Chu Bá Thông. Uống lại làm mới, không cộng dồn.',
       'Các vòng Âm Dương liên tục di chuyển; tránh đứng trong vùng nguy hiểm.',
     ],
   ],

@@ -1,5 +1,18 @@
 # M3D — feedback playtest ngày 2026-11-02 và prompt VFX r3
 
+## Feedback sau integration r3 — đã triển khai, chờ duyệt trong game; supersede tương ứng
+
+1. Creep private: giảm20% tốc hiện tại (90%×80%=72% actual buffed entry speed); sửa pack overlap bằng giãn footprint deterministic trên server, không coi đó là giới hạn bắt buộc của2D.
+2. JSON chỉnh tần suất boss, giãn nhịp Lý Mạc Sầu. Solo không popup mời, chết lần2 tự về arena; ledger chỉ reset theo boss vẫn giữ.
+3. Hỏa Pháo Thiên La tự chạy, Hồng Liệt tiếp tục A1/A2; chỉnh vị trí I. Chu card dùng nền arena, tiểu đồng phải đánh/giết được và rơi rượu, uống có VFX. Director bổ sung: boss phòng thủ cao, rượu buff sát thương bằng xuyên một phần phòng thủ. Bộ số thử: defense180, Tửu lực12s bỏ qua70% defense Chu, uống lại refresh không stack; không tác dụng target khác, chết/đổi vùng/reset mất buff. Càn Khôn hút×2 và cấm Shift trong reflect.
+4. Phá Giáp: hit và ground VFX theo cả hướng chéo; body vẫn dùng facing gần nhất của atlas khóa.
+5. Vi Đà offset63→189; Toàn Phong range360→234, Ca Diệp420→273; Vô Ảnh giữ6 feet khi có đúng chuỗi Phát Động trên cùng target phía trước, thiếu chuỗi thì1 foot giữa thân; empowerment damage vẫn xác nhận trên hit đúng target. Buddha Như Lai scale×2.
+6. Icon Sư Tử Hống mới, art gốc, giữ ID tam_gioi_quy_thien và toàn bộ asset khóa.
+
+Quyết định rượu mới nhất thay đề xuất hồi25%HP/MP/visual-only: buff xuyên phòng thủ boss kèm effect, không heal/immunity. Canonical MD và bộ nhớ sau merge vẫn theo quy tắc đã chốt; không merge milestone/m3d.
+
+Bàn giao runtime, số tuning và kiểm chứng: [M3D_PLAYTEST_FOLLOWUP_HANDOFF.md](M3D_PLAYTEST_FOLLOWUP_HANDOFF.md). JSON nhịp boss: `packages/game-data/src/boss-cadence.json`, hướng dẫn [M3D_BOSS_CADENCE.md](M3D_BOSS_CADENCE.md). 533 unit/integration,18 workflow,15 validators và4 browser đã PASS qua final pipeline + browser-stage retry sau sửa test acknowledgement; không tự đổi report FAIL lịch sử thành PASS.
+
 ## Trạng thái và cách tiếp tục
 
 - Nguồn: feedback trực tiếp của director sau khi chạy bản tích hợp r2 trên branch `wip/m3d/feedback-integration`.

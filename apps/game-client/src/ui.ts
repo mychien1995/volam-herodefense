@@ -429,7 +429,7 @@ export class GameUI {
       const boss = isBossDestination(this.dungeonDestination);
       this.onDungeonEnter(boss ? 'shared' : 'private', this.dungeonDestination);
       this.close();
-      if (boss) this.bossParty.help();
+      if (boss && (this.state?.players.size ?? 0) > 1) this.bossParty.help();
     });
     for (const button of document.querySelectorAll<HTMLButtonElement>(
       '[data-shop-tab]',
@@ -544,6 +544,7 @@ export class GameUI {
     help.hidden =
       hero.zoneId === 'arena' ||
       !isBossDestination(dungeonForZone(hero.zoneId).id) ||
+      state.players.size <= 1 ||
       hero.hp <= 0;
     help.disabled = this.blocked;
     const dead = hero.hp <= 0 && state.phase === 'IN_GAME';

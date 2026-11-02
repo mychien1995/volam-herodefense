@@ -9,6 +9,7 @@ import map from './hong-liet-map.json' with { type: 'json' };
 import { creepDungeon } from './dungeon.js';
 import { m1Config } from './m1.js';
 import { enlargeBossArena } from './boss-arena-geometry.js';
+import { bossCadence, cadenceTicks } from './boss-cadence.js';
 const marker = (name: string) => {
   const p = map.layers
     .find((l) => l.name === 'markers')!
@@ -134,6 +135,18 @@ export const hongLietDefinition: HongLietDefinition = {
     ),
   },
 };
+hongLietDefinition.restTicks = cadenceTicks(bossCadence.hong_liet.restSeconds);
+hongLietDefinition.initialRestTicks = cadenceTicks(
+  bossCadence.hong_liet.initialRestSeconds,
+);
+for (const [id, a] of Object.entries(hongLietDefinition.abilities)) {
+  const t = bossCadence.hong_liet.abilities[id];
+  if (!t) throw Error('Missing HHL cadence ' + id);
+  a.windupTicks = cadenceTicks(t.windupSeconds);
+  a.recoveryTicks = cadenceTicks(t.recoverySeconds);
+  a.cooldownTicks = cadenceTicks(t.cooldownSeconds);
+  a.intervalTicks = cadenceTicks(t.intervalSeconds);
+}
 const positive = z.number().finite().positive(),
   nonnegative = z.number().finite().nonnegative();
 const ability = z.object({

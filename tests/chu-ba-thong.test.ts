@@ -311,7 +311,9 @@ describe('Chu Bá Thông authoritative encounter', () => {
       critMultiplier: 1,
     });
     const loss = hp - f.b.hp;
-    expect(loss).toBe(100);
+    expect(loss).toBe(
+      Math.round((130 * 100) / (100 + chuBaThongTuning.defense)),
+    );
     expect(10000 - f.h.hp).toBe(loss);
     expect(
       f.w.events.filter(
@@ -343,7 +345,9 @@ describe('Chu Bá Thông authoritative encounter', () => {
       critMultiplier: 1,
     });
     expect(f.h.hp).toBe(hp);
-    expect(f.h.mana).toBe(100);
+    expect(f.h.mana).toBe(
+      200 - Math.round((130 * 100) / (100 + chuBaThongTuning.defense)),
+    );
     f.h.x = f.b.x + 120;
     f.h.y = f.b.y;
     f.h.moveX = 1;

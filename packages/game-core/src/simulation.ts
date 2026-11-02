@@ -4,6 +4,7 @@ import { stepChu, constrainChuTrap } from './chu-ba-thong.js';
 import { expireCombos } from './combos.js';
 import { stepBossEncounter } from './boss-encounter.js';
 import { nextBasic, expireBasicChain } from './basic-attacks.js';
+import { separateDungeonCreeps } from './creep-spacing.js';
 import { captureConfinement, confineMovement } from './confinement.js';
 import {
   equippedAbility,
@@ -618,6 +619,9 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     advanceProjectile(world, shot, config);
   constrainChuTrap(world, config);
   stepBossEncounter(world, config);
+  const creepStarts = config.dungeonAggro
+    ? new Map([...world.creeps].map(([id, e]) => [id, { x: e.x, y: e.y }]))
+    : undefined;
   for (const [id, enemy] of world.creeps) {
     if (
       enemy.summonedBy &&
@@ -807,6 +811,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   // unique loot in the same tick, before projecting the authoritative snapshot.
   if (world.boss && (world.creeps.get(world.boss.actorId)?.hp ?? 1) <= 0)
     stepBossEncounter(world, config);
+  separateDungeonCreeps(world, config, creepStarts);
   for (const actor of [...world.heroes.values(), ...world.creeps.values()]) {
     if (actor.hp <= 0) actor.pose = 'death';
     else if (world.tick < actor.hurtUntil) actor.pose = 'hurt';

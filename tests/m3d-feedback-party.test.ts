@@ -60,7 +60,7 @@ describe('M3D approved boss party lifecycle', () => {
     const z = m.zoneOf('a')!;
     expect(z.access).toBe('private');
     expect(z).not.toBe(m.zoneOf('b'));
-    expect(z.config.creep.speed).toBeCloseTo(speed * 0.9);
+    expect(z.config.creep.speed).toBeCloseTo(speed * 0.72);
     const types = () =>
       new Set([...z.world.creeps.values()].map((c) => c.archetypeId));
     expect(types().size).toBe(1);
@@ -69,7 +69,7 @@ describe('M3D approved boss party lifecycle', () => {
     steps(m, z.dungeon!.restTicks + 1);
     expect(types().size).toBe(1);
     expect([...types()][0]).not.toBe(first);
-    expect(z.config.creep.speed).toBeCloseTo(speed * 0.9);
+    expect(z.config.creep.speed).toBeCloseTo(speed * 0.72);
     exit(m, 'a');
     exit(m, 'b');
     m.enter('a', 'private', 'hong_liet');

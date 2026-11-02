@@ -3,6 +3,7 @@ import { bossArenaScale as S, chuBaThongDungeon } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
 import type { ChuView } from '@volam/game-core';
 import raw from './chu-art.generated.json' with { type: 'json' };
+import wine from './chu-wine-art.generated.json' with { type: 'json' };
 import { facing } from './facing.js';
 interface Bundle {
   image: string;
@@ -30,7 +31,9 @@ const art = raw as unknown as {
   bundles: Record<string, Bundle>;
   scenery: MapObject[];
 };
+art.bundles['wine'] = wine as Bundle;
 export function preloadChu(scene: Phaser.Scene): void {
+  scene.load.image('chu_wine_bottle', '/assets/m3d_followup/wine_bottle.png');
   for (const [key, b] of Object.entries(art.bundles))
     scene.load.atlas('chu_' + key, b.url, {
       frames: b.frames,
@@ -515,9 +518,60 @@ export class ChuPresentation {
           );
           this.text(
             'disciple:' + d.id,
-            'Tiểu đồng ' + (d.id + 1),
+            'Tiểu đồng ' +
+              (d.id + 1) +
+              (d.hp !== undefined
+                ? ' · ' + Math.ceil(d.hp) + '/' + d.maxHp
+                : ''),
             d.x,
             d.y - 55,
+          );
+        }
+        for (const bottle of v.wine ?? []) {
+          const id = 'wine:' + bottle.id;
+          let image = this.views.get(id);
+          if (!image || !image.scene) {
+            image = this.scene.add.sprite(
+              bottle.x,
+              bottle.y,
+              'chu_wine_bottle',
+            );
+            this.views.set(id, image);
+          }
+          image
+            .setPosition(bottle.x, bottle.y)
+            .setOrigin(0.5, 0.85)
+            .setScale(0.5)
+            .setDepth(bottle.y)
+            .setVisible(true)
+            .setData('chuActive', true);
+          this.draw(
+            id + ':glow',
+            'wine',
+            'pickup_glow',
+            bottle.x,
+            bottle.y,
+            t,
+            0.5,
+          );
+          this.text(id, 'Space · Uống rượu', bottle.x, bottle.y + 18);
+        }
+        for (const h of v.wineDrinkers ?? []) {
+          const age = (h.durationTicks - h.remainingTicks) / 30;
+          this.draw(
+            'wine-drink:' + h.id,
+            'wine',
+            age < 0.33 ? 'consume' : 'player_buff',
+            h.x,
+            h.y - 12,
+            age,
+            0.6,
+          );
+          this.text(
+            'wine-buff:' + h.id,
+            'Tửu lực · ' + Math.ceil(h.remainingTicks / 30) + 's',
+            h.x,
+            h.y - 54,
           );
         }
       }

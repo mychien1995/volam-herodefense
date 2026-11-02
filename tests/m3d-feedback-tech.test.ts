@@ -308,7 +308,7 @@ describe('M3D feedback tech', () => {
   });
   it('Vi Đà ground origin is forward and does not hit enemies behind its explosion', () => {
     const f = fixture('vi_da_quyen');
-    f.enemy('front', 405);
+    f.enemy('front', 505);
     f.enemy('behind', 280);
     f.cast();
     expect(

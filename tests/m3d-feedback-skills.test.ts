@@ -57,8 +57,8 @@ describe('M3D school gameplay reworks', () => {
     const s = setup();
     const targets = [
       s.target('near', 600),
-      s.target('middle', 740),
-      s.target('far', 880),
+      s.target('middle', 680),
+      s.target('far', 750),
     ];
     const outside = s.target('off-lane', 700, 480);
     s.cast();
@@ -170,6 +170,16 @@ describe('M3D school gameplay reworks', () => {
   });
   it('Vô Ảnh emits two sets of three staggered parallel lanes, with longer reach', () => {
     const s = setup('vo_anh_cuoc');
+    s.target('combo_target', 600);
+    s.w.combos = [
+      {
+        sourceId: s.h.id,
+        targetId: 'combo_target',
+        id: 'phat_dong_b',
+        step: 2,
+        until: 100,
+      },
+    ];
     s.cast();
     expect(
       s.w.shots.map((p) => ({ at: p.tick, y: p.y, dx: p.dx, dy: p.dy })),

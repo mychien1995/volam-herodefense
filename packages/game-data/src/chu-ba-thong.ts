@@ -3,6 +3,7 @@ import { validateChuDefinition } from '@volam/game-core';
 import { m1Config } from './m1.js';
 import { creepDungeon } from './dungeon.js';
 import { enlargeBossArena } from './boss-arena-geometry.js';
+import { bossCadence, cadenceTicks } from './boss-cadence.js';
 import map from './chu-ba-thong-map.json' with { type: 'json' };
 const hz = m1Config.tickRate;
 /** Director-approved choreography; damage/economy numbers remain provisional trial tuning. */
@@ -11,7 +12,9 @@ export const chuBaThongTuning: ChuDefinition = {
   basicPalmIntervalTicks: 33,
   spawn: { x: 640, y: 300 },
   hp: 6000,
-  defense: 30,
+  defense: 180,
+  wineBuffTicks: hz * 12,
+  wineArmorPenetration: 0.7,
   xp: 900,
   gold: 600,
   phases: [
@@ -39,7 +42,7 @@ export const chuBaThongTuning: ChuDefinition = {
   spinSpeedY: 400,
   spinRadius: 112,
   pullRadius: 210,
-  pullSpeed: 60,
+  pullSpeed: 120,
   handsScale: 1.2,
   trapRadius: 62,
   trapTicks: 30 * hz,
@@ -51,6 +54,14 @@ export const chuBaThongTuning: ChuDefinition = {
     { id: 'toan_chan_tien_tuu', nameVi: 'Toàn Chân Tiên Tửu', sellGold: 120 },
   ],
 };
+chuBaThongTuning.basicPalmIntervalTicks = cadenceTicks(
+  bossCadence.chu_ba_thong.basicPalmSeconds,
+);
+for (const p of chuBaThongTuning.phases) {
+  const t = bossCadence.chu_ba_thong.phasesSeconds[p.id];
+  if (t === undefined) throw Error('Missing Chu cadence ' + p.id);
+  p.ticks = cadenceTicks(t);
+}
 validateChuDefinition(chuBaThongTuning, m1Config);
 export const chuBaThongDungeon: CreepDungeonDefinition = enlargeBossArena({
   ...creepDungeon,

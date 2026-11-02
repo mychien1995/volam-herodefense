@@ -364,7 +364,9 @@ export class MatchRoom extends Room<{
                     input.accept,
                     Date.now(),
                   )
-                : this.simulation.exit(client.sessionId);
+                : input.action === 'interact'
+                  ? this.simulation.interact(client.sessionId)
+                  : this.simulation.exit(client.sessionId);
         if (!reason && input.action === 'enter' && input.summonHelp)
           reason = this.simulation.summonHelp(client.sessionId, Date.now());
         if (reason) return reject(reason);
