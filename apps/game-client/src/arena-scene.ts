@@ -1,4 +1,5 @@
 import { KimLuanRenderer, isKimActor } from './kim-luan-art.js';
+import { DongTaRenderer, isDongArtActor } from './dong-ta-art.js';
 import { ChuPresentation } from './chu-presentation.js';
 import { HongLietRenderer, isHongLietActor } from './hong-liet-art.js';
 import Phaser from 'phaser';
@@ -59,6 +60,7 @@ export class ArenaScene extends Phaser.Scene {
   protected actors = new Map<string, EntityView>();
   private vfx: SkillVfx | undefined;
   private kim: KimLuanRenderer | undefined;
+  private dong: DongTaRenderer | undefined;
   private hongLiet: HongLietRenderer | undefined;
   private coMoEffects: CoMoEffects | undefined;
   protected creepEffects: ArenaCreepEffects | undefined;
@@ -94,10 +96,12 @@ export class ArenaScene extends Phaser.Scene {
     this.chu = new ChuPresentation(this);
     this.hongLiet = new HongLietRenderer(this);
     this.kim = new KimLuanRenderer(this);
+    this.dong = new DongTaRenderer(this);
     this.coMoEffects = new CoMoEffects(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.hongLiet?.clear();
       this.kim?.clear();
+      this.dong?.clear();
       this.coMoEffects?.clear();
     });
     this.events.once(Phaser.Scenes.Events.DESTROY, () => {
@@ -158,6 +162,7 @@ export class ArenaScene extends Phaser.Scene {
   private drawZone(zoneId: string): void {
     this.hongLiet?.clear();
     this.kim?.clear();
+    this.dong?.clear();
     this.coMoEffects?.clear();
     this.cameras.main.stopFollow();
     this.tweens.killAll();
@@ -301,6 +306,7 @@ export class ArenaScene extends Phaser.Scene {
       if (
         enemy &&
         (isHongLietActor(actor.archetypeId ?? '') ||
+          isDongArtActor(actor.archetypeId ?? '') ||
           isKimActor(actor.archetypeId ?? ''))
       )
         return;
@@ -480,6 +486,7 @@ export class ArenaScene extends Phaser.Scene {
     this.chu?.sync(state, this.zoneId);
     this.hongLiet?.sync(state, this.zoneId);
     this.kim?.sync(state, this.zoneId);
+    this.dong?.sync(state, this.zoneId);
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
     this.coMoEffects?.sync(state, this.zoneId);
     this.creepEffects?.sync(
@@ -526,6 +533,7 @@ export class ArenaScene extends Phaser.Scene {
     if (!this.ready || event.id <= this.lastEvent) return;
     this.lastEvent = event.id;
     if (event.zoneId && event.zoneId !== this.zoneId) return;
+    if (this.zoneId === 'arena') this.dong?.event(event);
     if (isCoMoZone(this.zoneId)) this.coMoEffects?.event(event);
     if (event.kind === 'attack')
       this.creepAction(event.sourceId, 'basic_attack');
@@ -628,6 +636,7 @@ export class ArenaScene extends Phaser.Scene {
       zoneId: this.zoneId,
       hongLiet: this.hongLiet?.inspect(),
       kim: this.kim?.inspect(),
+      dong: this.dong?.inspect(),
       kimFrame: this.kim?.reviewState(),
       damage: this.damage?.inspect(),
       skills: this.vfx?.inspect(),

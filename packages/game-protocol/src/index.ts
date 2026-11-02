@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 17;
+export const PROTOCOL_VERSION = 18;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -298,6 +298,9 @@ export const CreepState = schema(
 export type CreepState = SchemaType<typeof CreepState>;
 export const BossEffectState = schema(
   {
+    originX: t.number().default(0),
+    originY: t.number().default(0),
+    targetId: t.string().default(''),
     speed: t.number().default(0),
     index: t.number().default(0),
     maxRadius: t.number().default(0),
@@ -371,6 +374,7 @@ export const AreaState = schema(
 export type DungeonState = SchemaType<typeof DungeonState>;
 export const DefenseState = schema(
   {
+    dongTa: t.string().default(''),
     enabled: t.boolean().default(false),
     statueHp: t.number().default(0),
     statueMaxHp: t.number().default(0),

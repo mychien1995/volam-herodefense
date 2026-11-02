@@ -1,0 +1,43 @@
+{
+  "runId": "8922978a-af11-4e46-9e87-2f77e36535a7",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.dong-ta.config.ts"
+  ],
+  "startedAt": "2026-11-01T18:12:25.934Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 16.12,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.54,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.92,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.79,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 146.66,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 166.06
+}

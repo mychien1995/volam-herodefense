@@ -1,0 +1,262 @@
+{
+  "schemaVersion": 1,
+  "status": "approved_visual_design_v04_feedback_02_for_game_integration",
+  "approvedDate": "2026-11-02",
+  "branch": "wip/m3d/dong-ta",
+  "approvalSource": {
+    "design": "Tôi duyệt thiết kế này, hãy cho tôi prompt để integrate vào phaser, bạn có câu hỏi gì không",
+    "statue": "Tạm bất tử trong trận boss",
+    "recall": "Gom và hồi sinh ngay toàn bộ người chơi",
+    "clearAndWipe": "Không cần. Cả đội chết thì reset boss đến khi nào qua thì thôi. Không qua thì quit"
+  },
+  "scope": "Existing character sprites and V04 feedback_02 sprite/VFX choreography approved as integration inputs. No gameplay implementation is performed by this approval record.",
+  "gameRuntimeIntegrated": false,
+  "finalGameRuntimeArtApproved": false,
+  "finalCombatBalanceApproved": false,
+  "confirmedPolicies": {
+    "statueHiddenDuringFight": true,
+    "statueInvulnerableDuringFightAndRetries": true,
+    "statueRepair": false,
+    "invasionIntervalSeconds": 180,
+    "invasionClockContinues": true,
+    "recallAllRoomPlayersIncludingDungeonAndPvp": true,
+    "reviveAllDeadOnRecall": true,
+    "clearOnDongTaDeath": true,
+    "requireSummonKillsForClear": false,
+    "wipeResetsBossAndAttemptState": true,
+    "retryLimit": null,
+    "quitAllowed": true,
+    "newArena": false,
+    "bossTargetsStatue": false,
+    "taKiemForwardArcDegrees": 180,
+    "danChiDirectionCount": [
+      8,
+      14
+    ],
+    "lacAnhActivePatterns": [
+      "plus",
+      "x"
+    ],
+    "lacAnhActiveSlashCount": 4,
+    "lacAnhActivePolygonDash": false,
+    "ngocTieuRandomFlowerClusters": 40,
+    "maiClawsFrontOnly": true,
+    "maiFocusSinglePlayerUntilDeadOrInvalid": true,
+    "maiTargetLockAnimation": false,
+    "dualSummonBelowHpFraction": 0.4,
+    "dualSummonOncePerAttempt": true,
+    "hoangAbilities": [
+      "thanh_am_ho_tro",
+      "linh_xa_bo"
+    ]
+  },
+  "selectedBundles": {
+    "dong": {
+      "image": "assets/sprites/bosses/main/dong-ta/boss_dong_ta.png",
+      "clips": [
+        "idle_down",
+        "walk_down",
+        "finger_cast_down",
+        "sword_flurry_cast_down",
+        "summon_cast_down",
+        "hurt_down",
+        "death_down",
+        "idle_up",
+        "walk_up",
+        "finger_cast_up",
+        "sword_flurry_cast_up",
+        "summon_cast_up",
+        "hurt_up",
+        "death_up",
+        "idle_left",
+        "walk_left",
+        "finger_cast_left",
+        "sword_flurry_cast_left",
+        "summon_cast_left",
+        "hurt_left",
+        "death_left",
+        "idle_right",
+        "walk_right",
+        "finger_cast_right",
+        "sword_flurry_cast_right",
+        "summon_cast_right",
+        "hurt_right",
+        "death_right"
+      ],
+      "origin": [
+        0.5,
+        0.7857142857142857
+      ]
+    },
+    "mai": {
+      "image": "assets/sprites/summons/mai-sieu-phong/summon_mai_sieu_phong.png",
+      "clips": [
+        "idle_down",
+        "walk_down",
+        "claw_attack_down",
+        "pull_cast_down",
+        "poison_skull_throw_down",
+        "hurt_down",
+        "death_down",
+        "idle_up",
+        "walk_up",
+        "claw_attack_up",
+        "pull_cast_up",
+        "poison_skull_throw_up",
+        "hurt_up",
+        "death_up",
+        "idle_left",
+        "walk_left",
+        "claw_attack_left",
+        "pull_cast_left",
+        "poison_skull_throw_left",
+        "hurt_left",
+        "death_left",
+        "idle_right",
+        "walk_right",
+        "claw_attack_right",
+        "pull_cast_right",
+        "poison_skull_throw_right",
+        "hurt_right",
+        "death_right"
+      ],
+      "origin": [
+        0.5,
+        0.75
+      ]
+    },
+    "hoang": {
+      "image": "assets/sprites/summons/hoang-dung/summon_hoang_dung.png",
+      "clips": [
+        "idle_down",
+        "walk_down",
+        "support_cast_down",
+        "evade_down",
+        "hurt_down",
+        "death_down",
+        "idle_up",
+        "walk_up",
+        "support_cast_up",
+        "evade_up",
+        "hurt_up",
+        "death_up",
+        "idle_left",
+        "walk_left",
+        "support_cast_left",
+        "evade_left",
+        "hurt_left",
+        "death_left",
+        "idle_right",
+        "walk_right",
+        "support_cast_right",
+        "evade_right",
+        "hurt_right",
+        "death_right"
+      ],
+      "origin": [
+        0.5,
+        0.75
+      ]
+    },
+    "actions": {
+      "image": "assets/sprites/bosses/main/dong-ta/rework_v02/spritesheet.png",
+      "clips": [
+        "thrust_down",
+        "thrust_left",
+        "thrust_right",
+        "thrust_up",
+        "flute_down",
+        "flute_left",
+        "flute_right",
+        "flute_up"
+      ],
+      "origin": [
+        0.5,
+        0.7857142857142857
+      ]
+    },
+    "fx": {
+      "image": "assets/effects/bosses/main/dong-ta/rework_v02/spritesheet.png",
+      "clips": [
+        "thrust_streak",
+        "pebble",
+        "petal_patch",
+        "petal_burst",
+        "heal_palm"
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "maifx": {
+      "image": "assets/effects/summons/mai-sieu-phong/rework_v02/spritesheet.png",
+      "clips": [
+        "claw_left",
+        "claw_right",
+        "ranged_claw",
+        "suction",
+        "poison_pouch",
+        "poison_burst",
+        "poison_pool"
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "fan": {
+      "image": "assets/effects/bosses/main/dong-ta/lac_anh_kiem_phap/vfx_lac_anh_kiem_phap.png",
+      "clips": [
+        "blossom_slash_wave",
+        "sword_fan_wave",
+        "blossom_impact"
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "summon": {
+      "image": "assets/effects/bosses/main/dong-ta/trieu_hon_dong_hai/vfx_trieu_hon_dong_hai.png",
+      "clips": [
+        "summon_circle",
+        "summon_column",
+        "mai_spawn",
+        "hoang_spawn"
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ]
+    },
+    "hoangfx": {
+      "image": "assets/effects/summons/hoang-dung/vfx_hoang_dung.png",
+      "clips": [
+        "heal_aura",
+        "movement_trail"
+      ],
+      "origin": [
+        0.5,
+        0.5
+      ]
+    }
+  },
+  "excludedLegacyBundles": [
+    "dash"
+  ],
+  "referenceOnlyBundles": [
+    "hero",
+    "cai",
+    "thien"
+  ],
+  "unusedAtlasClips": "Physical atlases retain historical tags; only selectedBundles clips are approved bindings. Unselected tags do not authorize additional abilities.",
+  "proposedTuning": "HP, damage, cooldowns, rewards, scaling, retry delay and preview distances/timings remain configurable trial values.",
+  "integrationPrompt": "docs/INTEGRATE_DONG_TA_PROMPT.md",
+  "assetLock": "assets/approved_dong_ta.lock.json",
+  "verification": {
+    "browser": "assets/reviews/bosses/dong_ta_v02/feedback_02/browser_verification.json",
+    "finalCheck": "assets/reviews/bosses/dong_ta_v02/feedback_02/final_check.json",
+    "note": "Historical validation-time statuses are preserved; this record is the subsequent visual approval."
+  }
+}

@@ -1,5 +1,6 @@
 import { preloadChu, registerChu } from './chu-presentation.js';
 import { preloadKimArt, registerKimArt } from './kim-luan-art.js';
+import { preloadDongArt, registerDongArt } from './dong-ta-art.js';
 import { preloadHongLietArt, registerHongLietArt } from './hong-liet-art.js';
 import Phaser from 'phaser';
 import { preloadCoMo, registerCoMoEffects } from './co-mo-art.js';
@@ -83,6 +84,7 @@ export function preloadArt(scene: Phaser.Scene): void {
   preloadChu(scene);
   preloadHongLietArt(scene);
   preloadKimArt(scene);
+  preloadDongArt(scene);
   preloadCoMo(scene);
   preloadBeachArt(scene);
   preloadForestCreepArt(scene);
@@ -191,6 +193,7 @@ export function registerArt(scene: Phaser.Scene): void {
   registerChu(scene);
   registerHongLietArt(scene);
   registerKimArt(scene);
+  registerDongArt(scene);
   registerDesertArt(scene, 'co_mo_manifest');
   registerCoMoEffects(scene);
   registerBeachArt(scene);

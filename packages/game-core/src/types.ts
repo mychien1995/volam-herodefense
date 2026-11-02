@@ -1,4 +1,5 @@
 import type { ChuEncounter } from './chu-types.js';
+import type { EllipseBounds } from './dong-ta-types.js';
 import type { KimLootContext } from './kim-types.js';
 import type {
   HeroProgression,
@@ -206,6 +207,8 @@ export interface Ability {
     | SupportEffect;
 }
 export interface SimulationConfig {
+  /** Temporary server-owned arena confinement, independent of status immunity. */
+  heroBounds?: EllipseBounds | undefined;
   bossEncounter?: BossEncounterDefinition | undefined;
   progression?: ProgressionDefinition | undefined;
   tickRate: number;
@@ -260,6 +263,7 @@ export type Command =
   | { kind: 'dev-loadout'; ids: string[] }
   | { kind: 'select-basic'; id: string };
 export interface Actor extends Point {
+  invulnerable?: boolean;
   controlResistance?: number;
   id: string;
   hp: number;
@@ -299,6 +303,7 @@ export interface Hero extends Actor {
   basicChains?: Record<string, number>;
 }
 export interface Creep extends Actor {
+  waveBossActor?: boolean;
   /** A rescue cage rejects damage from its own captive, using the common hit pipeline. */
   rescueTargetId?: string;
   bossEncounter?: boolean;
