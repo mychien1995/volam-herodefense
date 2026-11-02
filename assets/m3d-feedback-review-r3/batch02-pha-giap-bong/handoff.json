@@ -1,0 +1,111 @@
+{
+  "skillId": "pha_giap_bong",
+  "revision": "r3-batch02-pha-giap-bong-review3",
+  "status": "visual-approved-production-pending",
+  "directorApproved": true,
+  "productionIntegrated": false,
+  "phaserProductionVerified": false,
+  "selectedTags": {
+    "b3_pha_giap_body": [
+      "raise_right",
+      "strike_right",
+      "recovery_right",
+      "raise_down",
+      "strike_down",
+      "recovery_down",
+      "raise_left",
+      "strike_left",
+      "recovery_left",
+      "raise_up",
+      "strike_up",
+      "recovery_up"
+    ],
+    "b3_pha_giap_vfx": [
+      "impact_right",
+      "outro_right",
+      "impact_down",
+      "outro_down",
+      "impact_left",
+      "outro_left",
+      "impact_up",
+      "outro_up"
+    ]
+  },
+  "facingAxes": {
+    "right": [
+      1,
+      0
+    ],
+    "down": [
+      0,
+      1
+    ],
+    "left": [
+      -1,
+      0
+    ],
+    "up": [
+      0,
+      -1
+    ]
+  },
+  "phaseOrder": [
+    "raise",
+    "strike",
+    "recovery"
+  ],
+  "spinRemoved": true,
+  "removedPhases": [
+    "body spin",
+    "VFX spin ring",
+    "charge",
+    "separate elongate hold"
+  ],
+  "body": {
+    "component": "b3_pha_giap_body",
+    "feetPivot": [
+      128,
+      148
+    ],
+    "canvas": [
+      256,
+      192
+    ],
+    "placement": "caster feet; no locomotion"
+  },
+  "effects": {
+    "component": "b3_pha_giap_vfx",
+    "effectAnchor": [
+      256,
+      256
+    ],
+    "canvas": [
+      512,
+      512
+    ],
+    "placement": "Per-clip placementOffsetFromFeet: impact/outro near-end ground seam relative to feet",
+    "groundRegistration": "Measured near-end bright seam; do not use bbox height percentage as ground anchor. Horizontal seam lies6px below feet in this review fixture.",
+    "lifecycle": "intro/loop/impact/outro are cosmetic phases; bind actual action/cancel state after approval"
+  },
+  "previewOnlyReachMultiplier": 1.5,
+  "gameplayRangeChanged": false,
+  "timing": {
+    "raiseMs": 280,
+    "strikeMs": 220,
+    "recoveryMs": 240,
+    "authority": "cosmetic review fixture only"
+  },
+  "excludes": [
+    "r2 foot_explosion for this rework",
+    "projectile travel",
+    "animation-derived damage/range/cooldown"
+  ],
+  "cleanup": [
+    "cancel",
+    "death",
+    "travel",
+    "facing-change",
+    "new cast",
+    "complete"
+  ]
+}

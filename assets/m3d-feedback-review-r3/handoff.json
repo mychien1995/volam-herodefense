@@ -1,0 +1,160 @@
+{
+  "status": "visual-approved-production-pending",
+  "abilityDisplayName": "Ca Diệp Thoái",
+  "existingAbilityId": "hoanh_tao_cuoc",
+  "stableIdChanged": false,
+  "supersedes": "Ca Diep alternating sweeping forward lunge",
+  "facingAxes": {
+    "right": [
+      1,
+      0
+    ],
+    "down": [
+      0,
+      1
+    ],
+    "left": [
+      -1,
+      0
+    ],
+    "up": [
+      0,
+      -1
+    ]
+  },
+  "body": {
+    "component": "r3_ca_diep_body_keyposes",
+    "feetPivot": [
+      80,
+      96
+    ],
+    "canvas": [
+      160,
+      120
+    ],
+    "worldPlacement": "caster feet; stationary in this revised presentation",
+    "phaseOrder": [
+      "anticipation",
+      "raise",
+      "contact",
+      "recovery"
+    ]
+  },
+  "ground": {
+    "component": "r3_ca_diep_ground_keyposes",
+    "effectAnchor": [
+      64,
+      72
+    ],
+    "canvas": [
+      128,
+      96
+    ],
+    "birthPlacement": "at foot contact; viewer uses 12px forward presentation offset",
+    "travelPlacement": "independent world position along straight heading; no path baked in atlas",
+    "impactPlacement": "target feet in presentation fixture",
+    "outroPlacement": "last effect world position",
+    "phaseOrder": [
+      "birth",
+      "travel",
+      "impact",
+      "outro"
+    ],
+    "hitBehavior": "Server must resolve damage+stun for every eligible target along the swept path; mound continues beyond each target. Pending implementation."
+  },
+  "stun": {
+    "component": "r3_ca_diep_stun_keyposes",
+    "effectAnchor": [
+      32,
+      24
+    ],
+    "canvas": [
+      64,
+      48
+    ],
+    "facing": "billboard",
+    "placementOffsetFromTargetFeet": [
+      0,
+      -52
+    ],
+    "phaseOrder": [
+      "stun_loop"
+    ],
+    "lifecycle": "fixture window only; production later must follow real server stun state"
+  },
+  "selectedTags": {
+    "r3_ca_diep_body_keyposes": [
+      "anticipation_right",
+      "raise_right",
+      "contact_right",
+      "recovery_right",
+      "anticipation_down",
+      "raise_down",
+      "contact_down",
+      "recovery_down",
+      "anticipation_left",
+      "raise_left",
+      "contact_left",
+      "recovery_left",
+      "anticipation_up",
+      "raise_up",
+      "contact_up",
+      "recovery_up"
+    ],
+    "r3_ca_diep_ground_keyposes": [
+      "birth_right",
+      "travel_right",
+      "impact_right",
+      "outro_right",
+      "birth_down",
+      "travel_down",
+      "impact_down",
+      "outro_down",
+      "birth_left",
+      "travel_left",
+      "impact_left",
+      "outro_left",
+      "birth_up",
+      "travel_up",
+      "impact_up",
+      "outro_up"
+    ],
+    "r3_ca_diep_stun_keyposes": [
+      "stun_loop"
+    ]
+  },
+  "cleanup": [
+    "cancel",
+    "death",
+    "travel",
+    "facing-change",
+    "new cast",
+    "complete"
+  ],
+  "gameplayConfirmed": [
+    "damage",
+    "stun",
+    "pierces all eligible targets along the travel path",
+    "each eligible target on the path receives damage and stun",
+    "does not stop at the first target"
+  ],
+  "gameplayPending": [
+    "damage value",
+    "stun duration",
+    "range",
+    "width",
+    "travel speed",
+    "cooldown",
+    "hit count per target"
+  ],
+  "productionIntegrated": false,
+  "phaserProductionVerified": false,
+  "directorApproved": true,
+  "approvalRecord": "director_approval_ca_diep_batch01.json",
+  "productionVerificationPending": [
+    "multiple aligned targets all receive damage+stun",
+    "mound continues past first target",
+    "multiplayer synchronized stun and damage",
+    "per-target repeat-hit policy once specified"
+  ]
+}

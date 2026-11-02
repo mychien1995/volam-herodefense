@@ -1,0 +1,25 @@
+{
+  "revision": "review4",
+  "authority": "Latest director feedback in docs/M3D_PLAYTEST_FEEDBACK_2026-11-02.md",
+  "newRasterGeneration": false,
+  "lockedRasterBytesChanged": false,
+  "history": "history/review3/",
+  "corrections": {
+    "liet_phong_dao": "Retain overhead hilt placement offsets -44px and authored ground_break. For left, horizontally reflect the right blade about its pivot; never rotate it180 degrees or reflect vertically. The bright cutting edge faces down on the descending left slash; spine stays above.",
+    "thien_ha_vo_cau": "Restore exact runtime dog_run sprites, four tangent-facing dogs. Preview orbit radius90->120 and aura scale1.35 illustrate larger AOE, pending final tuning. Final-smash ground contact is pixel[128,174], not canvas centre[128,128].",
+    "vo_anh_cuoc": "Three parallel lanes emitted in upper/middle/lower order, middle origin at feet+[0,-22]. Preview lane offsets[-18,0,18]px and release times[200,510,820]ms make a staircase. Vertical facings use transverse horizontal lanes. Timing/width/speed/damage tuning remain pending.",
+    "tru_ta": "One stationary enlarged authored slash, attached to draw-and-cut body action. No traveling crescent or projectile trajectory. Preview scale2.4 and near-end pivots describe cosmetic reach only.",
+    "kim_quang_ho_tran": "Preserve accepted VFX style. Ground ring centre[128,120], shared caster/aura motion1200..2200ms. Return caster to approved idle/walk after activation; do not loop an off-centre cast pose while buff persists. School Dao atlas112x80, feet slice[56,64] read from actual atlas; do not reuse80px-canvas pivot40 from another school.",
+    "ly_mac_sau": "Poison needle origin is torso centre feet+[0,-28], demo reach350->400px. Whisk360 scale1.2 is the requested +20% AOE radius illustration. Phat Tran Cong changes withdrawn entirely from this art review; keep current game.",
+    "hong_liet": "A1 five single blades share one torso-centre origin feet+[0,-28]; captured fan directions split from that centre. A2 is a stationary front-facing180-degree melee sweep centred on boss, radius contract A Thien Son Phien220+10%=242; never a flying arc.",
+    "tuy_tien_bo": "Reject review3 airborne/dash replacement. Reuse current-runtime boss_review_actions_v02 spin, ghost history, shockwave ring and wind trail. Preserve spin body during added palms; each palm captures a player's position once on release. Demo bounce coordinates are presentation only.",
+    "am_duong_nghich_chuyen": "Reject review3 fixed four-pattern grid. Retain runtime rotating_ring ground art and four rotating_waves. Only large_formation/ultimate:core is removed. All15 ground-ring centres continuously move across arena without fixed lattice. Current tech chuFields has cell bases+jitter; future implementation must honour the director's no-fixed-grid contract, not copy preview timing or trajectories into server blindly.",
+    "kim_luan_normal": "Both circular wheel and crescent begin at boss torso centre feet+[0,-30], independent of atlas margins and action frame. Seven-wheel skills keep their separate instances."
+  },
+  "approvalScope": {
+    "kim_quang_vfx_styleAccepted": true,
+    "kim_quang_positionApproved": false,
+    "wholeReviewApproved": false,
+    "productionIntegrated": false
+  }
+}

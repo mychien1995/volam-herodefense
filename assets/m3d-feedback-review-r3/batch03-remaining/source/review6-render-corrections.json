@@ -1,0 +1,15 @@
+{
+  "revision": "review6",
+  "authority": "Latest director feedback in docs/M3D_PLAYTEST_FEEDBACK_2026-11-02.md",
+  "inherits": "source/review5-render-corrections.json",
+  "newRasterGeneration": false,
+  "productionIntegrated": false,
+  "corrections": {
+    "hoac_do_darts": "The source steel nail points down/right at approximately60-63 degrees, not canonical right. Subtract measured source angle per frame from desired flight heading. Rotate around per-frame steel centre so the long axis passes through the travel line. Preserve original PNG, scale0.25, brightness1.6, timing and runtime emission patterns. This is visual orientation/anchor only, no gameplay change.",
+    "am_duong_nghich_chuyen": "Remove the remaining four rotating_waves that flicker/expand across the screen, in addition to the already excluded large_formation core. Keep all15 moving rotating_ring ground layers byte-for-byte in the recipe, including positions, alpha, scale and timing. Baseline only may show the rejected waves for comparison."
+  },
+  "axisMeasurements": "source/review6-nail-axis.json",
+  "selectedExcluded": ["large_formation", "rotating_waves"],
+  "history": "history/review5/",
+  "directorApproved": false
+}
