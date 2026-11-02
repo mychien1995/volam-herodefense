@@ -1,3 +1,15 @@
+## Bắc Cái visual approval and integration handoff — 2026-11-02
+
+The director explicitly approved visual v03 and requested an integration prompt, not immediate integration in this turn. Final mechanic answers: hitting a clone still causes the explosion even if the same AoE/tick also hits the real body; tied/zero preference votes fail immediately; either tether endpoint dying/leaving the arena/disconnecting breaks the tether and stops drain immediately. Artwork/choreography hashes are pinned in `assets/approved_bac_cai.lock.json`; scope/known facing gaps are recorded in `assets/reviews/bosses/bac_cai_v03/director_approval.json`. This is not final live-runtime or combat-balance approval. Handoff: `docs/BAC_CAI_PHASER_INTEGRATION_PROMPT.md`.
+
+## Bắc Cái director feedback v03 — 2026-11-02
+
+Mục Hạ Vô Nhân swaps slowly along crossing pair paths. Đả Cẩu Bổng Kích needs a clean jab/beam animation. Kiến Long's ground explosion must not cover Hồng Thất Công. Preference speech is concurrent with normal combat/other skills. Phi Long releases a detached dragon and immediately permits subsequent skills while the dragon continues its own expanding spiral. The art preview implements these channels independently; no authoritative combat integration or final art approval is implied. Detail: `docs/BAC_CAI_FEEDBACK_V03.md`.
+
+## Bắc Cái final boss brief and art-preview scope — 2026-11-02
+
+The director's current Bắc Cái description is final and supersedes conflicting old boss-asset mappings. Reuse the existing character/concepts; preview sprite/VFX first in `wip/m3d/bac-cai`. North-entry wave boss in the main arena, player-only aggression, flexible staff/palms, four attackable black dogs, eight-body/five-shuffle trick, map-wide pull/slam, two-player breakable draining tether (disabled solo), broad 田 impact, expanding fire-dragon spiral and changing-preference majority floor vote with ten-second sleep or 10% healing. Exact wording, reuse audit and unresolved numeric/tie policies: `docs/BAC_CAI_FINAL_DESIGN.md`. This authorizes art choreography and a dedicated preview, not combat/server integration or final artwork approval. Playable Cái Bang school mechanics are unchanged.
+
 ## Lý Mạc Sầu selector correction — 2026-11-01
 
 The director explicitly requests Lý Mạc Sầu as a peer dungeon card alongside Hồng Liệt and Chu Bá Thông, replacing the separate options-row button. Keep destination `co_mo`, private/shared access, server authority and the existing encounter unchanged. The retained approved Cổ Mộ arena illustration supplies the menu thumbnail without new art generation.
@@ -223,3 +235,6 @@ The user authorized integration on `wip/m3d/hoan-nhan-hong-liet` only, from prev
 ## 2026-11-01 — Kim Luân integration
 
 Director-approved feedback_02 is integrated as destination kim_luan in the real Phaser/Colyseus dungeon system. Confirmed mechanics: both disciples must die before Kim spawns; Thiết Phiến3×4rays; Chấn Thiên280px; Thập Tầng strictly<30%, moving while firing five wheels/1.8s. Artwork remains locked. HP/damage/ward/solo rescue/loot values are explicitly trial tuning, not director balance approval. See docs/KIM_LUAN_RUNTIME.md.
+# Bắc Cái gameplay integration — 2026-11-02
+
+Requested implementation uses the director-approved v03 visual with pure authoritative arena runtime, independent body/hazards/dialogue-vote channels and protocol18 zone-filtered public projection. The three final decisions (AoE clone still explodes, tie/zero wrong, tether endpoint death/leave/disconnect breaks) are implemented. Numeric tuning remains trial; final runtime/balance art approval is separate. Main-boss progression has only the minimal Bắc Cái gate/hook: earlier wave-boss adapters are absent, so natural campaign arrival remains a dependency, not a fabricated completed prerequisite. No other bosses, arena, item drops or invasion cadence change. See `docs/BAC_CAI_RUNTIME.md`.

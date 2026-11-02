@@ -1,4 +1,5 @@
 import { chuView, chuLootAction, chuItemAction } from '@volam/game-core';
+import { isBacCaiActor } from '@volam/game-core';
 import {
   bossLootActionSchema,
   bossItemActionSchema,
@@ -16,6 +17,7 @@ import {
   hongLietDungeon,
   kimLuanDungeon,
   coMoDungeon,
+  bacCaiDefinition,
 } from '@volam/game-data';
 import {
   DungeonMatch,
@@ -46,6 +48,7 @@ import {
   StateView,
   AreaState,
   BossEffectState,
+  BacCaiState,
   skillPreviewActionSchema,
 } from '@volam/game-protocol';
 
@@ -71,6 +74,7 @@ export class MatchRoom extends Room<{
       kimLuanDungeon,
       coMoDungeon,
     ],
+    bacCaiDefinition,
   );
   readonly world = this.simulation.arena.world;
   private readonly checkSequences = new Map<string, number>();
@@ -606,6 +610,17 @@ export class MatchRoom extends Room<{
     actor.castAbilityId = source.castAbilityId ?? '';
   }
   private syncState(): void {
+    const bacCai = this.world.bacCai;
+    if (bacCai) {
+      let projection = this.state.bacCai.get('arena');
+      if (!projection) {
+        projection = new BacCaiState();
+        this.state.bacCai.set('arena', projection);
+      }
+      projection.snapshot = JSON.stringify(
+        bacCai.view(this.world, this.simulation.arena.config),
+      );
+    }
     this.state.tick = this.world.tick;
     this.state.matchElapsedMs = (this.world.tick * 1000) / m1Config.tickRate;
     const invasion = this.simulation.invasion,
@@ -753,6 +768,8 @@ export class MatchRoom extends Room<{
             : Math.max(0, zone.nextWaveAt - zone.world.tick);
       }
       for (const [localId, enemy] of zone.world.creeps) {
+        // The public encounter projection anonymizes all eight forms and never leaks the real actor coordinate.
+        if (zone.access === 'arena' && isBacCaiActor(localId)) continue;
         const id = this.entityKey(zone, localId);
         creepKeys.add(id);
         let target = this.state.creeps.get(id);
@@ -894,6 +911,11 @@ export class MatchRoom extends Room<{
       const view = client.view;
       if (!view) continue;
       const zoneId = this.simulation.zoneOf(client.sessionId)?.id ?? 'arena';
+      for (const projection of this.state.bacCai.values()) {
+        if (zoneId === 'arena' && !view.has(projection)) view.add(projection);
+        else if (zoneId !== 'arena' && view.has(projection))
+          view.remove(projection);
+      }
       for (const player of this.state.players.values()) {
         const visible =
           this.state.phase === 'WAITING_LOBBY' ||
@@ -926,5 +948,8 @@ export class MatchRoom extends Room<{
   }
   private entityKey(zone: MatchZone, id: string): string {
     return zone.access === 'arena' ? id : `${zone.id}:${id}`;
+  }
+  override onDispose(): void {
+    this.world.bacCai?.clear(this.world);
   }
 }

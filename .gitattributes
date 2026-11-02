@@ -521,3 +521,20 @@ assets/sprites/bosses/ly-mac-sau/manifest.json text eol=lf
 assets/sprites/summons/co-mo-am-binh/animations.json text eol=lf
 assets/sprites/summons/co-mo-am-binh/atlas.json text eol=lf
 assets/sprites/summons/co-mo-am-binh/manifest.json text eol=lf
+
+# The Hong Liet runtime manifest pins these four files as LF, not CRLF.
+assets/sprites/environment/mongolian-headquarters/atlas.json text eol=lf
+assets/sprites/environment/mongolian-headquarters/manifest.json text eol=lf
+assets/sprites/environment/mongolian-headquarters/props_metadata.json text eol=lf
+assets/tilesets/boss-arenas/mongolian-headquarters/terrain.json text eol=lf
+
+# Preserve director-approved Bac Cai raster/provenance/choreography bytes on checkout.
+assets/sprites/bosses/main/bac-cai/rework-v02/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/sprites/bosses/main/bac-cai/rework-v03/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/reviews/bosses/bac_cai_v03/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+docs/evidence/bac-cai-preview-v03/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+apps/game-client/src/bac-cai-preview-model.ts -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+apps/game-client/src/bac-cai-preview-tuning.ts -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Generated historical failure excerpts retain their exact quoted source whitespace.
+docs/evidence/bac-cai-runtime/failed-browser-contexts/** -whitespace

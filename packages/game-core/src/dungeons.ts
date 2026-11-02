@@ -1,4 +1,6 @@
 import { KimLuanEncounter } from './kim-luan.js';
+import { MainBossDirector } from './main-bosses.js';
+import { validateBacCai, type BacCaiDefinition } from './bac-cai-types.js';
 import type { KimDefinition } from './kim-types.js';
 import { spawnChu } from './chu-ba-thong.js';
 import { validateChuDefinition, type ChuDefinition } from './chu-types.js';
@@ -87,6 +89,7 @@ export class DungeonMatch {
   readonly respawns = new Map<string, number>();
   readonly arena: MatchZone;
   readonly invasion: InvasionDirector | undefined;
+  readonly mainBosses: MainBossDirector | undefined;
   tick = 0;
   events: ZoneCombatEvent[] = [];
   readonly definitions = new Map<string, CreepDungeonDefinition>();
@@ -96,6 +99,7 @@ export class DungeonMatch {
     private readonly seed = 42,
     invasion?: InvasionDefinition,
     additionalDungeons: CreepDungeonDefinition[] = [],
+    bacCai?: BacCaiDefinition,
   ) {
     for (const definition of [dungeon, ...additionalDungeons]) {
       if (this.definitions.has(definition.id))
@@ -114,6 +118,10 @@ export class DungeonMatch {
       nextWaveAt: undefined,
     };
     this.zones.set('arena', this.arena);
+    if (bacCai) {
+      validateBacCai(bacCai, base);
+      this.mainBosses = new MainBossDirector(bacCai);
+    }
     if (invasion) {
       this.arena.config = {
         ...base,
@@ -135,6 +143,7 @@ export class DungeonMatch {
   }
   remove(id: string): void {
     const zone = this.zoneOf(id);
+    zone?.world.bacCai?.participantLeft(id);
     if (zone) removeHero(zone.world, id);
     if (zone?.kim && !zone.world.heroes.size) zone.kim.clear(zone.world);
     if (zone?.dungeon?.bossEncounter && !zone.world.heroes.size)
@@ -372,8 +381,10 @@ export class DungeonMatch {
         this.events.push({ zoneId: zone.id, event });
       if (zone.access === 'arena') {
         this.invasion?.afterStep(zone.world, this.tick);
+        this.mainBosses?.step(zone.world, zone.config, this.invasion);
         if (this.invasion?.defeated) {
           for (const active of this.zones.values()) {
+            active.world.bacCai?.clear(active.world);
             active.kim?.clear(active.world);
             for (const id of active.world.heroes.keys())
               cancelOwnedEffects(active.world, id);
@@ -484,6 +495,7 @@ export class DungeonMatch {
       for (const key of Object.keys(hero.abilityCooldowns))
         hero.abilityCooldowns[key] = convert(hero.abilityCooldowns[key]!);
     hero.statuses = [];
+    source.world.bacCai?.participantLeft(id);
     refreshCharacter(hero, destination.config);
     removeHero(source.world, id);
     if (source.kim && !source.world.heroes.size) source.kim.clear(source.world);

@@ -1,0 +1,29 @@
+{
+  "status": "PASS_WITH_FAILED_BROWSER_STAGE_RESOLVED_BY_ISOLATED_RETRY",
+  "scope": "Art preview only; no boss combat/server integration or director approval",
+  "branch": "wip/m3d/bac-cai",
+  "typechecks": "PASS",
+  "workflowTests": 18,
+  "unitIntegrationTests": 478,
+  "unitIntegrationFiles": 42,
+  "assetValidators": 16,
+  "productionBuild": "PASS",
+  "previewBrowser": {
+    "status": "PASS",
+    "cels": 404,
+    "clips": 101,
+    "viewports": [
+      1280,
+      1920
+    ],
+    "errors": [],
+    "websockets": []
+  },
+  "straightProjectileBrowser": "PASS (17.2s)",
+  "twoClientGameplayBrowser": "PASS isolated retry (26.6s; 29.3s including setup)",
+  "retainedCombinedRunStatus": "FAIL",
+  "combinedRunId": "41db96e2-9c36-476a-946a-b90f1bf9f221",
+  "retryCommand": "node tools/run-playwright.mjs test tests/e2e/gameplay.spec.ts --grep 'two clients agree' --trace off",
+  "recordingsCreated": false,
+  "reviewStatus": "PROTOTYPE_PENDING_DIRECTOR_REVIEW"
+}

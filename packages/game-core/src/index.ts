@@ -17,3 +17,6 @@ export * from './hong-liet-types.js';
 export * from './hong-liet.js';
 export * from './kim-types.js';
 export * from './kim-luan.js';
+export * from './bac-cai-types.js';
+export * from './bac-cai.js';
+export * from './main-bosses.js';

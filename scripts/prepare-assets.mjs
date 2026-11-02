@@ -1,4 +1,5 @@
 import { prepareKimAssets } from './prepare-kim-assets.mjs';
+import { prepareBacCaiPreview } from './prepare-bac-cai-preview.mjs';
 import { prepareChuAssets } from './prepare-chu-assets.mjs';
 import { mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -20,6 +21,7 @@ import { prepareHongLietAssets } from './prepare-hong-liet-assets.mjs';
 const root = new URL('../', import.meta.url);
 for (const [name, label] of [
   ['approved_chu_ba_thong.lock.json', 'Chu Bá Thông'],
+  ['approved_bac_cai.lock.json', 'Bắc Cái visual v03'],
   ['approved_cai_bang.lock.json', 'Cai Bang'],
   ['approved_thien_son.lock.json', 'Thien Son'],
   ['approved_vo_dang.lock.json', 'Vo Dang'],
@@ -148,6 +150,7 @@ prepareHongLietAssets();
 // Retained review references include generated public atlases: verify after copies.
 prepareApprovedAnimationArt();
 prepareLyMacSau();
+prepareBacCaiPreview();
 console.info(
   `Prepared assets in ${fileURLToPath(dest)} (${assetWrites.changed} written, ${assetWrites.unchanged} unchanged)`,
 );

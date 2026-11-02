@@ -1,4 +1,5 @@
 import type { ChuEncounter } from './chu-types.js';
+import type { BacCaiEncounter } from './bac-cai.js';
 import type { KimLootContext } from './kim-types.js';
 import type {
   HeroProgression,
@@ -390,6 +391,7 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  bacCai?: Pick<BacCaiEncounter, keyof BacCaiEncounter>;
   kim?: { rewards: KimLootContext };
   chu?: ChuEncounter;
   boss?: BossRuntime;

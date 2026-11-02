@@ -1,4 +1,5 @@
 import { KimLuanRenderer, isKimActor } from './kim-luan-art.js';
+import { BacCaiRenderer } from './bac-cai-art.js';
 import { ChuPresentation } from './chu-presentation.js';
 import { HongLietRenderer, isHongLietActor } from './hong-liet-art.js';
 import Phaser from 'phaser';
@@ -59,6 +60,7 @@ export class ArenaScene extends Phaser.Scene {
   protected actors = new Map<string, EntityView>();
   private vfx: SkillVfx | undefined;
   private kim: KimLuanRenderer | undefined;
+  private bacCai: BacCaiRenderer | undefined;
   private hongLiet: HongLietRenderer | undefined;
   private coMoEffects: CoMoEffects | undefined;
   protected creepEffects: ArenaCreepEffects | undefined;
@@ -94,6 +96,9 @@ export class ArenaScene extends Phaser.Scene {
     this.chu = new ChuPresentation(this);
     this.hongLiet = new HongLietRenderer(this);
     this.kim = new KimLuanRenderer(this);
+    this.bacCai = new BacCaiRenderer(this);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.bacCai?.clear());
+    this.events.once(Phaser.Scenes.Events.DESTROY, () => this.bacCai?.clear());
     this.coMoEffects = new CoMoEffects(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.hongLiet?.clear();
@@ -156,6 +161,7 @@ export class ArenaScene extends Phaser.Scene {
     if (this.ready && zoneId !== this.zoneId) this.drawZone(zoneId);
   }
   private drawZone(zoneId: string): void {
+    this.bacCai?.clear();
     this.hongLiet?.clear();
     this.kim?.clear();
     this.coMoEffects?.clear();
@@ -480,6 +486,7 @@ export class ArenaScene extends Phaser.Scene {
     this.chu?.sync(state, this.zoneId);
     this.hongLiet?.sync(state, this.zoneId);
     this.kim?.sync(state, this.zoneId);
+    this.bacCai?.sync(state, this.zoneId);
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
     this.coMoEffects?.sync(state, this.zoneId);
     this.creepEffects?.sync(
@@ -628,6 +635,7 @@ export class ArenaScene extends Phaser.Scene {
       zoneId: this.zoneId,
       hongLiet: this.hongLiet?.inspect(),
       kim: this.kim?.inspect(),
+      bacCai: this.bacCai?.inspect(),
       kimFrame: this.kim?.reviewState(),
       damage: this.damage?.inspect(),
       skills: this.vfx?.inspect(),

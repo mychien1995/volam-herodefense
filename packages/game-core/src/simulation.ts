@@ -463,6 +463,7 @@ function advanceProjectile(
 export function stepWorld(world: World, config: SimulationConfig): void {
   world.tick++;
   world.events = [];
+  world.bacCai?.prepare(world, config);
   expireGuardCounters(world, config);
   expireStatuses(world);
   expireCombos(world);
@@ -579,6 +580,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       }
       if (
         !enemy.invasion &&
+        enemy.archetypeId !== 'bac_cai' &&
         config.creepRespawn !== false &&
         world.tick >= enemy.respawnAt
       )
@@ -715,4 +717,5 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     if (actor.hp <= 0) actor.pose = 'death';
     else if (world.tick < actor.hurtUntil) actor.pose = 'hurt';
   }
+  world.bacCai?.step(world, config);
 }

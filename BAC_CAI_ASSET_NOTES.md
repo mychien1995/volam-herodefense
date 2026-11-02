@@ -1,5 +1,9 @@
 # Bắc Cái — Hồng Thất Công asset package v01
 
+**Current approval,2026-11-02:** visual/choreography v03 is explicitly director-approved for Phaser integration. Current approval scope and retained facing gaps: `assets/reviews/bosses/bac_cai_v03/director_approval.json`. Historical v01/v02 status/mappings below remain delivery history. Live combat integration and final runtime/balance approval have not occurred. Prompt: `docs/BAC_CAI_PHASER_INTEGRATION_PROMPT.md`.
+
+**Superseded mapping, 2026-11-02:** The director's final boss brief in `docs/BAC_CAI_FINAL_DESIGN.md` overrides the historical skill-to-art mapping below. The v01 artwork stays intact and is reused by the isolated `bac-cai-preview.html` scene. The v02 supplement is under `assets/sprites/bosses/main/bac-cai/rework-v02/`; new art and final runtime approval remain pending. Historical delivery details below describe the original asset-only task, not the current preview verification.
+
 Produced 2026-10-31. Stable boss ID: `bac_cai`; character texture key: `boss_bac_cai`.
 **Asset production only.** Concepts automatically approved under the explicit task instruction. Production files are staged assets; runtime playback/approval is not claimed. No game, loader, AI, balance, boss progression, map or other-boss files are changed. No servers, Phaser, screenshots, recordings or test suites were started/generated.
 

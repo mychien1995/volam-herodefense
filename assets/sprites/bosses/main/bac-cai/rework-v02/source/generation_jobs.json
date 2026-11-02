@@ -1,0 +1,39 @@
+[
+  {
+    "id": "poses_initial",
+    "tool": "built-in image_gen",
+    "generatorOutputFile": "exec-697326c4-989e-4b12-bc97-8a082967d2fc.png",
+    "retainedSource": "poses_initial.png",
+    "status": "superseded by targeted duplicate-gourd correction",
+    "references": ["assets/sprites/bosses/main/bac-cai/frames/idle_down_0.png", "assets/sprites/bosses/main/bac-cai/frames/staff_combo_right_1.png", "assets/concepts/main-bosses/bac-cai/master_concept_v01.png"],
+    "timing": "asynchronous initial generation; request start/end timestamps were not retained",
+    "prompt": "Use case: identity-preserve. Create an original production sprite animation source sheet supplement for the EXISTING Bac Cai / Hong That Cong character in references. Preserve EXACT white messy topknot, white beard, ragged dark olive patched robes, rope belt, brown wine gourd, black cloth shoes, slender jade bamboo staff, detailed chibi wuxia pixel-art elevated orthographic 3/4 RPG view. Do NOT redesign character. Transparent background. Uniform 4 columns x 3 rows, 12 whole separated character cels, generous empty gutters; no text, no lines, no shadows or VFX outside body. Every cel at identical body scale, approximately 120 px standing body height in source; pixel crisp hand-authored style. Sheet around 1536x1024. Row1 FOUR temporal frames all facing RIGHT: billiards-style bamboo STAFF THRUST: crouched deep windup staff held level with BOTH hands behind hip, forward two-hand jab, full straight horizontal extension as if striking a billiard ball, recovery. Staff never turns into sword, one staff only. Row2 FOUR frames facing DOWN/front: reaches for wine gourd at left hip, raises to lips, head back drinking, lowers gourd and wipes mouth. Staff stowed on back. Row3 FOUR frames facing DOWN/front: sits then reclines to sleep leaning to right, two distinct relaxed sleeping breathing cels, starts waking. Sleeping is peaceful with closed eyes and smile NOT hurt or dead. Keep each whole figure and complete staff inside its own cell. Real animation poses, not rotations or re-sized copies. No checkerboard painting."
+  },
+  {
+    "id": "vfx",
+    "tool": "built-in image_gen",
+    "generatorOutputFile": "exec-abfca741-29b5-4df8-ae75-d83ed96b4dee.png",
+    "retainedSource": "vfx_source.png",
+    "observedToolSeconds": 42.8,
+    "references": ["assets/sprites/bosses/main/bac-cai/frames/idle_down_0.png"],
+    "prompt": "Use case: stylized-concept. Asset type: production game VFX animation source PNG. For detailed chibi wuxia pixel-art elevated 3/4 orthographic overworld game. Draw exactly 4 columns and 5 rows of separate VFX cels on actual transparent alpha, equal cells and large empty gutters, no text, no numbers, no panels, no characters, no ground backdrop. 1536x1536 preferred. Same native pixel density as the reference sprite, crisp hard pixel clusters, hand-drawn energy not smooth vector. Four temporal frames per row. ROW 1: jade/ivory staff qi lance, a LONG HORIZONTAL STRAIGHT needle beam facing right with narrow bright core, crackling mint borders, a sharp spear-like tip; charge, discharge, sustained beam, dissipate. Thin and fast, not a slash crescent. ROW 2: magical crimson and gold braided ENERGY ROPE, straight horizontal linked tether segment between two players; four pulsing woven frames, no hands. ROW 3: ground impact zone in unmistakable SQUARE 田 Chinese field shape, OUTER SQUARE plus CENTRAL CROSS, all nine line segments connected, four quadrants; gold hot core orange/red fire cracks, expanding impact then lingering cracked embers then dissipate; top-down ground plane, not isometric. ROW 4: one eastern Chinese FIRE DRAGON HEAD WITH SHORT CURVING FLAME BODY aimed RIGHT, four temporal flame-motion frames, orange/red flames and yellow-white core, distinct horns, whiskers, open jaw; suitable for moving along widening spiral, not whole circular ring, no gold-only qi. ROW 5: small gray-green magical SMOKE PUFF for clone splitting/vanishing; 4 chronological frames gathering, burst, curling dispersal, tiny fading flecks. Effects kept wholly in their own cell; generous margins, transparency, no text."
+  },
+  {
+    "id": "black_dog",
+    "tool": "built-in image_gen",
+    "generatorOutputFile": "exec-5ecf5289-1338-445a-9cd8-180c974decb0.png",
+    "retainedSource": "dog_source.png",
+    "observedToolSeconds": 30.8,
+    "references": [],
+    "prompt": "Use case: stylized-concept. Asset type: original production sprite animation source sheet for Bac Cai's four summoned BLACK DOGS, detailed chibi wuxia pixel-art elevated top-down three-quarter orthographic RPG view. Draw ONE same ordinary fierce black Chinese village hound repeated across animation frames. Charcoal black fur with muted blue-gray highlights, pointed ears, lean muscular body, curled tail, white fangs, natural dark eyes, NO flames, NO horns, NO armor, NO red hellhound skin, NO human clothing. Actual transparent background, no checkerboard, no ground shadows. EXACT grid FOUR equal columns x FIVE rows =20 full separated dog cels. ALL face RIGHT consistently, full body in cell, generous gutters, same scale, crisp deliberate pixel clusters. Row1 idle: four subtly different alert breathing poses. Row2 run: four clear different leg strides with correct four legs each. Row3 bite: anticipate crouch, lunge mouth open, jaws biting forward, recoil. Row4 hurt: flinch four temporal cels. Row5 death: buckles, falls on side, lies still, final still body. Keep dog silhouette identity and proportion identical. Do not create multiple dogs per cell. No text, lines, labels, decorative frames. Designed to be exported at around 42px body length and 30px body height, source may be higher resolution for clean preparation."
+  },
+  {
+    "id": "poses_corrected",
+    "tool": "built-in image_gen",
+    "generatorOutputFile": "exec-7b96e750-61d5-4c39-9cb4-117a44226f1d.png",
+    "retainedSource": "poses_source.png",
+    "observedToolSeconds": 33.8,
+    "references": ["poses_initial.png"],
+    "prompt": "Precise sprite sheet correction. Preserve EXACT same 4 columns x3 rows and character, poses, body scale, bamboo staff, palette and cell alignment. Correct ONLY two defects: In ROW2 COL2 and ROW2 COL3 (drinking cels), REMOVE the EXTRA spare orange gourd from the waist, replacing it with underlying patched robe/rope belt; the ONE wine gourd is already raised in the hand at mouth and must be retained. Each character has only ONE gourd total, never two. Also clean background to true fully transparent alpha with no smoky colored semi-transparent backdrop; retain crisp whole pixel-art character cels. Keep all other cels/poses unchanged. No added text. No painted checkerboard. Output original source-sheet format."
+  }
+]
