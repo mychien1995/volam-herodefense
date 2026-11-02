@@ -1,0 +1,65 @@
+#nam-de-hud {
+  position: absolute;
+  top: 122px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 270px;
+  text-align: center;
+  pointer-events: none;
+  background: #18271eee;
+  color: #fff0c4;
+  border: 1px solid #b59954;
+  padding: 5px;
+  z-index: 12;
+}
+#nam-de-hud progress {
+  display: block;
+  width: 100%;
+  height: 10px;
+  accent-color: #d99b42;
+}
+#nam-de-hud small {
+  font-size: 11px;
+}
+#nam-de-qte {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 95%;
+  padding: 16px;
+  background: #15251af2;
+  border: 2px solid #d2b766;
+  color: #fff0c4;
+  text-align: center;
+  z-index: 35;
+  pointer-events: none;
+}
+#nam-de-qte p {
+  margin: 6px;
+}
+#nam-de-qte div {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  margin: 10px 0;
+}
+#nam-de-qte span {
+  font-size: 24px;
+  padding: 3px;
+  border: 1px solid #91845d;
+}
+#nam-de-qte .done {
+  color: #8edf7c;
+  opacity: 0.55;
+}
+#nam-de-qte .next {
+  background: #8a6c30;
+}
+#nam-de-qte small {
+  font-size: 11px;
+}
+#nam-de-hud[hidden],
+#nam-de-qte[hidden] {
+  display: none;
+}

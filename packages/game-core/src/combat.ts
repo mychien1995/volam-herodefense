@@ -31,6 +31,8 @@ export function hurt(
     slowedBonus?: number | undefined;
     reactive?: boolean | undefined;
     preserveFraction?: boolean | undefined;
+    directHp?: boolean;
+    forceHpLoss?: boolean;
     periodic?: boolean | undefined;
     resolvedReflection?: boolean | undefined;
     combo?: ComboSpec | undefined;
@@ -38,8 +40,9 @@ export function hurt(
   },
 ): boolean {
   if (target.hp <= 0 || raw <= 0) return false;
+  if (target.namDeLocked) return false;
   if (world.creeps.get(target.id)?.rescueTargetId === sourceId) return false;
-  if (ownerProtection(world, target)) return false;
+  if (!snapshot?.forceHpLoss && ownerProtection(world, target)) return false;
   // DOT remains damage; immunity exists only on actual moving dash ticks.
   if (!snapshot?.periodic && hasStatus(target, 'dash_guard', world.tick))
     return false;
@@ -134,7 +137,7 @@ export function hurt(
       )
     : undefined;
   const stats = snapshot ?? offensiveStats(world, sourceId, config);
-  const critical = world.random() < stats.critChance;
+  const critical = !snapshot?.directHp && world.random() < stats.critChance;
   const defense =
     Math.max(
       0,
@@ -157,13 +160,14 @@ export function hurt(
         statusValue(world.creeps.get(sourceId)!, 'attack_break', world.tick),
       )
     : 1;
-  const adjusted = snapshot?.resolvedReflection
-    ? raw
-    : raw *
-      reduction *
-      condition *
-      (100 / (100 + defense)) *
-      (critical ? stats.critMultiplier : 1);
+  const adjusted =
+    snapshot?.resolvedReflection || snapshot?.directHp
+      ? raw
+      : raw *
+        reduction *
+        condition *
+        (100 / (100 + defense)) *
+        (critical ? stats.critMultiplier : 1);
   // Stored actual HP loss is already fractional after mitigation; reflection must
   // not invent an extra point through the normal attack rounding/minimum rule.
   let damage = snapshot?.preserveFraction
@@ -181,7 +185,7 @@ export function hurt(
         ),
     ),
   );
-  if (mitigation > 0 && !snapshot?.resolvedReflection) {
+  if (mitigation > 0 && !snapshot?.resolvedReflection && !snapshot?.directHp) {
     const before = damage;
     damage *= 1 - mitigation;
     const guard = target.statuses?.find(
@@ -211,7 +215,7 @@ export function hurt(
       (a, b) =>
         b.magnitude - a.magnitude || (a.secondary ?? 1) - (b.secondary ?? 1),
     )[0];
-  if (hero && shield && hero.mana > 0) {
+  if (hero && shield && hero.mana > 0 && !snapshot?.directHp) {
     const rate = shield.secondary ?? 1;
     const absorbed = Math.min(
       damage * Math.min(1, shield.magnitude),

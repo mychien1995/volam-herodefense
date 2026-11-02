@@ -5,6 +5,12 @@ export function bindGameplayInput(
   connected: () => boolean,
   blocked: () => boolean = () => false,
   interact: () => void = () => {},
+  capture: (
+    key: string,
+  ) =>
+    | Omit<Extract<Command, { kind: 'nam-de-key' }>, 'kind'>
+    | null
+    | undefined = () => undefined,
 ): () => void {
   const held = new Set<string>();
   const move = (): void =>
@@ -22,7 +28,14 @@ export function bindGameplayInput(
     (['INPUT', 'SELECT', 'TEXTAREA'].includes(target.tagName) ||
       target.isContentEditable);
   const keydown = (event: KeyboardEvent): void => {
-    if (!connected() || blocked() || typing(event.target)) return;
+    if (!connected()) return;
+    const qte = capture(event.repeat ? '' : event.code);
+    if (qte !== undefined) {
+      event.preventDefault();
+      if (qte) send({ kind: 'nam-de-key', ...qte });
+      return;
+    }
+    if (blocked() || typing(event.target)) return;
     if (inputBindings.movement.some((key) => key === event.code)) {
       event.preventDefault();
       if (!held.has(event.code)) {

@@ -1,3 +1,4 @@
+import { NamDeHud } from './nam-de-hud.js';
 import { ChuHud } from './chu-hud.js';
 import './chu-hud.css';
 import Phaser from 'phaser';
@@ -42,6 +43,7 @@ const thieuLamReview = new URLSearchParams(location.search).has(
   'thieuLamReview',
 );
 const ui = new GameUI(artPreview);
+const namDeHud = new NamDeHud();
 const chuHud = new ChuHud((action, id, itemId) => {
   if (itemId && (action === 'sell' || action === 'drop'))
     room?.send('boss-item-action', {
@@ -220,6 +222,7 @@ const unbindInput = bindGameplayInput(
     if (Math.hypot(hero.x - d.exit.x, hero.y - d.exit.y) <= d.exitRange)
       dungeonAction({ action: 'exit' });
   },
+  (key) => namDeHud.capture(key),
 );
 function controls(connected: boolean, busy = false): void {
   for (const field of form.querySelectorAll<
@@ -264,6 +267,7 @@ async function connect(existing: boolean): Promise<void> {
     joined.onStateChange((state) => {
       if (room === joined) {
         chuHud.sync(state, joined.sessionId);
+        namDeHud.sync(state, joined.sessionId);
         const zone = state.players.get(joined.sessionId)?.zoneId ?? 'arena';
         if (zone !== previousZone) {
           previousZone = zone;
@@ -320,6 +324,7 @@ async function connect(existing: boolean): Promise<void> {
     joined.onLeave((code) => {
       if (room !== joined) return;
       chuHud.sync(undefined, '');
+      namDeHud.sync(undefined, '');
       room = undefined;
       pregame.disconnected(
         `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`,

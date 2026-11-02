@@ -1,3 +1,6 @@
+import { namDeView } from '@volam/game-core';
+import { namDeDefinition } from '@volam/game-data';
+import { NamDeControlState } from '@volam/game-protocol';
 import { chuView, chuLootAction, chuItemAction } from '@volam/game-core';
 import {
   bossLootActionSchema,
@@ -71,6 +74,7 @@ export class MatchRoom extends Room<{
       kimLuanDungeon,
       coMoDungeon,
     ],
+    namDeDefinition,
   );
   readonly world = this.simulation.arena.world;
   private readonly checkSequences = new Map<string, number>();
@@ -612,6 +616,7 @@ export class MatchRoom extends Room<{
       defense = this.state.defense,
       statue = this.world.statue;
     if (invasion && statue) {
+      defense.namDe = JSON.stringify(namDeView(this.world));
       defense.enabled = true;
       defense.statueHp = statue.hp;
       defense.statueMaxHp = statue.maxHp;
@@ -791,6 +796,9 @@ export class MatchRoom extends Room<{
       for (const effect of [
         ...(zone.encounter?.effects.values() ?? []),
         ...(zone.kim?.effects.values() ?? []),
+        ...[...(zone.world.namDe?.effects.values() ?? [])].filter(
+          (e) => e.startedAt <= zone.world.tick,
+        ),
       ]) {
         const id = this.entityKey(zone, effect.id);
         bossEffectKeys.add(id);
@@ -866,6 +874,22 @@ export class MatchRoom extends Room<{
         target.leg = shot.leg ?? '';
       }
     }
+    const controls = this.world.namDe?.controls;
+    for (const [id, entry] of this.state.namDeControls)
+      if (!controls?.has(id)) {
+        for (const client of this.clients)
+          if (client.view?.has(entry)) client.view.remove(entry);
+        this.state.namDeControls.delete(id);
+      }
+    for (const [id, control] of controls ?? []) {
+      let entry = this.state.namDeControls.get(id);
+      if (!entry) {
+        entry = new NamDeControlState();
+        entry.heroId = id;
+        this.state.namDeControls.set(id, entry);
+      }
+      entry.payload = JSON.stringify(control);
+    }
     for (const [id, target] of this.state.bossEffects)
       if (!bossEffectKeys.has(id)) {
         for (const client of this.clients)
@@ -901,6 +925,11 @@ export class MatchRoom extends Room<{
           player.zoneId === zoneId;
         if (visible && !view.has(player)) view.add(player);
         else if (!visible && view.has(player)) view.remove(player);
+      }
+      for (const entry of this.state.namDeControls.values()) {
+        const visible = zoneId === 'arena' && entry.heroId === client.sessionId;
+        if (visible && !view.has(entry)) view.add(entry);
+        else if (!visible && view.has(entry)) view.remove(entry);
       }
       for (const entity of [
         ...this.state.creeps.values(),

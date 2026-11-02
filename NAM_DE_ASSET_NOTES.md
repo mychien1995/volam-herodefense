@@ -103,3 +103,7 @@ One lightweight final check verifies requested-category existence, PNG decoding/
 
 **Missing requested production asset categories: none.** Live animation/transition/readability validation and integration remain outside this task's scope; production candidates are not falsely labeled runtime-approved.
 
+
+## Final-brief v02 preview — 2026-11-01
+
+The director's current final brief supersedes the v01 skill-to-VFX semantics above. Character/concept files are reused unchanged. A separate Phaser preview reworks the contact pressure-point challenge, one-target dizziness/control reversal and upward-then-downward finger rain, while reusing suitable gold VFX. Existing files remain historical sources. See `assets/reviews/nam_de_v02/README.md` for the comparison, exact paths, generation prompt, preview-only tuning and verification scope. No production boss encounter integration or new director approval is claimed.

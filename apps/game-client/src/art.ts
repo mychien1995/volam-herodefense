@@ -1,3 +1,4 @@
+import { preloadNamDe, registerNamDe } from './nam-de-presentation.js';
 import { preloadChu, registerChu } from './chu-presentation.js';
 import { preloadKimArt, registerKimArt } from './kim-luan-art.js';
 import { preloadHongLietArt, registerHongLietArt } from './hong-liet-art.js';
@@ -81,6 +82,7 @@ export function heroTexture(
 export { facing } from './facing.js';
 export function preloadArt(scene: Phaser.Scene): void {
   preloadChu(scene);
+  preloadNamDe(scene);
   preloadHongLietArt(scene);
   preloadKimArt(scene);
   preloadCoMo(scene);
@@ -189,6 +191,7 @@ export function actorFootPivot(
 }
 export function registerArt(scene: Phaser.Scene): void {
   registerChu(scene);
+  registerNamDe(scene);
   registerHongLietArt(scene);
   registerKimArt(scene);
   registerDesertArt(scene, 'co_mo_manifest');

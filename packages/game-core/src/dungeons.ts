@@ -1,3 +1,10 @@
+import {
+  clearNamDe,
+  gateNamDe,
+  initializeNamDe,
+  spawnNamDeIfReady,
+} from './nam-de.js';
+import type { NamDeDefinition } from './nam-de-types.js';
 import { KimLuanEncounter } from './kim-luan.js';
 import type { KimDefinition } from './kim-types.js';
 import { spawnChu } from './chu-ba-thong.js';
@@ -96,6 +103,7 @@ export class DungeonMatch {
     private readonly seed = 42,
     invasion?: InvasionDefinition,
     additionalDungeons: CreepDungeonDefinition[] = [],
+    namDe?: NamDeDefinition,
   ) {
     for (const definition of [dungeon, ...additionalDungeons]) {
       if (this.definitions.has(definition.id))
@@ -121,6 +129,7 @@ export class DungeonMatch {
       };
       this.invasion = new InvasionDirector(invasion, this.arena.world);
     }
+    if (namDe) initializeNamDe(this.arena.world, this.arena.config, namDe);
   }
   add(id: string, nickname: string): Hero {
     const hero = addHero(this.arena.world, id, nickname, this.base);
@@ -289,6 +298,8 @@ export class DungeonMatch {
       this.membership.size,
     );
     for (const zone of this.zones.values()) {
+      if (zone.access === 'arena')
+        spawnNamDeIfReady(zone.world, zone.config, this.tick);
       if (zone.kim?.phase === 'defeated') {
         zone.bossDiedMatchTick ??= this.tick;
         if (
@@ -372,8 +383,10 @@ export class DungeonMatch {
         this.events.push({ zoneId: zone.id, event });
       if (zone.access === 'arena') {
         this.invasion?.afterStep(zone.world, this.tick);
+        gateNamDe(zone.world, this.invasion?.wave ?? 0, this.tick);
         if (this.invasion?.defeated) {
           for (const active of this.zones.values()) {
+            clearNamDe(active.world);
             active.kim?.clear(active.world);
             for (const id of active.world.heroes.keys())
               cancelOwnedEffects(active.world, id);

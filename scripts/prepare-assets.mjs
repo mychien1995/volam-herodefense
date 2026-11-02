@@ -1,3 +1,4 @@
+import './prepare-nam-de.mjs';
 import { prepareKimAssets } from './prepare-kim-assets.mjs';
 import { prepareChuAssets } from './prepare-chu-assets.mjs';
 import { mkdirSync, readFileSync, existsSync } from 'node:fs';

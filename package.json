@@ -34,7 +34,7 @@
     "test:balance:m3a": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/m3a-balance.ts",
     "assets:export:skills": "node assets/source/skills/cai-bang/build.mjs",
     "assets:icons:skills": "python scripts/prepare-skill-assets.py",
-    "verify:assets": "python scripts/verify-assets.py && python scripts/verify-arena-art01.py && python scripts/verify-arena-v2.py && python scripts/verify-thien-son.py && python scripts/verify-vo-dang.py && python scripts/verify-thieu-lam.py && python scripts/verify-thien-son-skills.py && python scripts/verify-vo-dang-skills.py && python scripts/verify-thieu-lam-skills.py && python scripts/verify-bamboo-forest.py && python scripts/verify-desert.py && python scripts/verify-forest-creeps.py && python scripts/verify-beach.py && python scripts/verify-chu-art.py && python scripts/verify-ly-mac-sau.py",
+    "verify:assets": "python scripts/verify-assets.py && python scripts/verify-arena-art01.py && python scripts/verify-arena-v2.py && python scripts/verify-thien-son.py && python scripts/verify-vo-dang.py && python scripts/verify-thieu-lam.py && python scripts/verify-thien-son-skills.py && python scripts/verify-vo-dang-skills.py && python scripts/verify-thieu-lam-skills.py && python scripts/verify-bamboo-forest.py && python scripts/verify-desert.py && python scripts/verify-forest-creeps.py && python scripts/verify-beach.py && python scripts/verify-chu-art.py && python scripts/verify-ly-mac-sau.py && python scripts/verify-nam-de.py",
     "assets:export:arena": "node scripts/export-arena-art01.mjs",
     "assets:export:visual": "node scripts/export-arena-v2.mjs",
     "assets:export:thien-son": "node scripts/export-thien-son.mjs",
@@ -45,7 +45,8 @@
     "assets:export:thien-son-skills": "node assets/source/skills/thien-son/build_v01.mjs && node assets/source/skills/thien-son/build_icons_v01.mjs",
     "assets:export:thieu-lam-skills": "python assets/source/skills/thieu-lam/prepare.py && node assets/source/skills/thieu-lam/build.mjs --assemble",
     "assets:export:bamboo": "node scripts/export-bamboo-forest.mjs",
-    "assets:verify:bamboo": "python scripts/verify-bamboo-forest.py"
+    "assets:verify:bamboo": "python scripts/verify-bamboo-forest.py",
+    "test:balance:nam-de": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/nam-de-balance.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",

@@ -1,3 +1,4 @@
+import { NamDePresentation } from './nam-de-presentation.js';
 import { KimLuanRenderer, isKimActor } from './kim-luan-art.js';
 import { ChuPresentation } from './chu-presentation.js';
 import { HongLietRenderer, isHongLietActor } from './hong-liet-art.js';
@@ -63,6 +64,7 @@ export class ArenaScene extends Phaser.Scene {
   private coMoEffects: CoMoEffects | undefined;
   protected creepEffects: ArenaCreepEffects | undefined;
   private trees: Phaser.GameObjects.Image[] = [];
+  private namDe: NamDePresentation | undefined;
   private chu: ChuPresentation | undefined;
   private ready = false;
   private followed = '';
@@ -92,6 +94,7 @@ export class ArenaScene extends Phaser.Scene {
   create(): void {
     registerArt(this);
     this.chu = new ChuPresentation(this);
+    this.namDe = new NamDePresentation(this);
     this.hongLiet = new HongLietRenderer(this);
     this.kim = new KimLuanRenderer(this);
     this.coMoEffects = new CoMoEffects(this);
@@ -167,6 +170,7 @@ export class ArenaScene extends Phaser.Scene {
     this.time.removeAllEvents();
     for (const object of [...this.children.list]) object.destroy();
     this.chu?.clear();
+    this.namDe?.clear();
     this.actors.clear();
     this.completedAnimations.length = 0;
     this.impacts.length = 0;
@@ -451,7 +455,7 @@ export class ArenaScene extends Phaser.Scene {
         render(id, hero, false, hero.nickname);
     });
     state?.creeps?.forEach((enemy, id) => {
-      if (enemy.archetypeId === 'chu_ba_thong') return;
+      if (['chu_ba_thong', 'nam_de'].includes(enemy.archetypeId)) return;
       if (enemy.zoneId === this.zoneId) render(id, enemy, true, 'Sơn tặc');
     });
     for (const [id, view] of this.actors)
@@ -478,6 +482,7 @@ export class ArenaScene extends Phaser.Scene {
         }
       }
     this.chu?.sync(state, this.zoneId);
+    this.namDe?.sync(state, this.zoneId);
     this.hongLiet?.sync(state, this.zoneId);
     this.kim?.sync(state, this.zoneId);
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
@@ -622,6 +627,7 @@ export class ArenaScene extends Phaser.Scene {
     const origin = this.cameras.main.getWorldPoint(0, 0);
     const unit = this.cameras.main.getWorldPoint(1, 0);
     return {
+      namDe: this.namDe?.inspect(),
       chu: this.chu?.inspect(),
       ready: this.ready,
       sceneTime: this.time.now,

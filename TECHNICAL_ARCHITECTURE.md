@@ -264,3 +264,6 @@ A boss-only optional `HongLietEncounter` hangs off `MatchZone`; it runs after `s
 ## Kim Luân encounter adapter (2026-11-01)
 
 DungeonMatch owns an optional deterministic KimLuanEncounter per zone, alongside existing Chu/Hong adapters. Controlled creep actors reuse common targeting/damage/status/death; the common boss loot backend accepts either encounter context. Protocol16 extends BossEffectState for delta-synchronized Kim hazards; the existing dungeon summary carries phase/casts/loot. StateViews restrict both to the active zone. Retained art is guarded/prepared separately; Phaser projects server geometry with authored PNGs. Test fixtures are confined to dedicated QA services. See docs/KIM_LUAN_RUNTIME.md.
+
+## Nam Đế arena encounter (2026-11-02)
+Protocol18 adds owner-filtered NamDeControlState and strict per-key challenge input. Arena World optionally owns deterministic NamDeRuntime; DungeonMatch latches wave15 clear/rest without replacing InvasionDirector scheduling. Its controlled/never-respawning actor uses common kill/assist goldXP, with no dungeon loot context. NamDeEffect projects through existing BossEffectState; geometry remains in world units. Only authoritative snapshots/ticks choose Phaser raster frames. See docs/NAM_DE_INTEGRATION.md.
