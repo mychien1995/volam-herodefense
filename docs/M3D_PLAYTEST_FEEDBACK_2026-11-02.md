@@ -1,5 +1,9 @@
 # M3D — feedback playtest ngày 2026-11-02 và prompt VFX r3
 
+## Director approval — 2026-11-03
+
+Director xác nhận: “ok tôi duyệt tất cả các thay đổi này”, sau bản bàn giao commit `521f73cd` (bao gồm integration r3, feedback followup và fix Vô Ảnh/tốc creep). Runtime được duyệt trong game. Đây không phải lệnh merge: vẫn giữ riêng `wip/m3d/feedback-integration`, chưa merge `milestone/m3d`. Canonical skill MD/bộ nhớ sau merge vẫn chờ merge thật; không thay byte hoặc tự viết lại các asset lock lịch sử.
+
 ## Bổ sung 2026-11-03 — tốc creep và Phát Động B
 
 - Director yêu cầu giảm tiếp10% tốc quái phó bản: 72%×90%=**64,8% actual buffed entry speed**. Supersede con số72% ở phần lịch sử dưới; giữ soft separation.

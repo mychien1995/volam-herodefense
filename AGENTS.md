@@ -41,6 +41,8 @@ This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D
 
 ## Working method
 
+- Before planning validation, read `docs/SESSION_EXECUTION_LESSONS.md`. Apply its reproduce-first tests, focused iteration, server-acknowledged browser controls, scoped reference reuse and stage-retry rules. Tooling proposals in that document are not implemented commands or permission to skip required gates.
+
 - Follow `docs/DEVELOPMENT_WORKFLOW.md` for validation scope. During iteration use focused test/asset/browser checks. After the final implementation change, use `pnpm check:final [relevant Playwright arguments]` once instead of separately chaining preparation, typecheck, full tests and build. It retains all final typechecks, unit/integration tests, build, asset validators and relevant browser checks. Do not rerun a successful full suite solely for summary/report/approval metadata edits; validate affected metadata/guards and rerun checks whose inputs changed. All existing live Phaser, reference comparison, PNG evidence and explicit director art-approval requirements remain mandatory.
 
 - Implement **only the requested roadmap milestone**. Start with M0. Do not implement M1+ unasked.
