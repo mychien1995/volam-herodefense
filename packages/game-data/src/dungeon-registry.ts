@@ -5,10 +5,12 @@ import { creepDungeon } from './dungeon.js';
 import { desertDungeon } from './desert.js';
 import { beachDungeon } from './beach.js';
 import { coMoDungeon } from './ly-mac-sau.js';
+import { hellDungeon } from './hell.js';
 export type DungeonDestination =
   | 'forest'
   | 'desert'
   | 'sea'
+  | 'hell'
   | 'chu_ba_thong'
   | 'hong_liet'
   | 'kim_luan'
@@ -17,6 +19,7 @@ export const creepDungeons = [
   creepDungeon,
   desertDungeon,
   beachDungeon,
+  hellDungeon,
   chuBaThongDungeon,
   hongLietDungeon,
   kimLuanDungeon,

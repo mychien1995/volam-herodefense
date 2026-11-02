@@ -203,7 +203,7 @@ describe('Kim Luân authoritative feedback_02', () => {
       b = s.w.creeps.get('dat_nhi_ba')!;
     s.e.begin(s.w, s.c, b.id, 'dai_luc_pha_son', s.h);
     const origin = { x: b.x, y: b.y };
-    s.step(21);
+    s.step(Math.round(definition.abilities.dai_luc_pha_son.warning * 30));
     const fissure = [...s.e.effects.values()].find(
       (e) => e.abilityId === 'dai_luc_pha_son' && e.damage > 0,
     )!;
@@ -218,13 +218,15 @@ describe('Kim Luân authoritative feedback_02', () => {
     ).toHaveLength(0);
     expect(fissure.x).toBe(origin.x);
   });
-  it('Dat moves slowly on server, and frontal sweep does not hit behind', () => {
+  it('Dat uses increased configured server movement, and frontal sweep does not hit behind', () => {
     const s = setup(),
       b = s.w.creeps.get('dat_nhi_ba')!,
       start = { x: b.x, y: b.y };
     s.step(20);
     expect(distance(start, b)).toBeGreaterThan(5);
-    expect(distance(start, b)).toBeLessThanOrEqual((38 * 20) / 30 + 0.01);
+    expect(distance(start, b)).toBeLessThanOrEqual(
+      (definition.actors.dat_nhi_ba.speed * 20) / 30 + 0.01,
+    );
     s.e.begin(s.w, s.c, b.id, 'dat_sweep', { x: b.x + 100, y: b.y });
     s.h.x = b.x - 100;
     s.h.y = b.y;
@@ -232,16 +234,16 @@ describe('Kim Luân authoritative feedback_02', () => {
     s.step(26);
     expect(s.h.hp).toBe(hp);
   });
-  it('orbit releases exactly five at 680; persistent wheels bounce and obey per-target cadence', () => {
+  it('orbit releases exactly seven at 680; persistent wheels bounce and obey per-target cadence', () => {
     const s = setup(),
       b = s.boss();
     s.e.begin(s.w, s.c, b.id, 'ngu_luan_ho_the', s.h);
     s.step(18);
     expect(
       [...s.e.effects.values()].filter((e) => e.kind === 'orbit'),
-    ).toHaveLength(5);
+    ).toHaveLength(7);
     s.step(90);
-    expect(shots(s, 'ngu_luan_ho_the')).toHaveLength(5);
+    expect(shots(s, 'ngu_luan_ho_the')).toHaveLength(7);
     expect(shots(s, 'ngu_luan_ho_the').every((e) => e.speed === 680)).toBe(
       true,
     );
@@ -350,7 +352,7 @@ describe('Kim Luân authoritative feedback_02', () => {
     ).toHaveLength(168);
     let f = shots(s, 'kim_sweep');
     expect(f).toHaveLength(5);
-    expect(f.every((e) => e.speed === 430)).toBe(true);
+    expect(f.every((e) => e.speed === definition.enrage.wheelSpeed)).toBe(true);
     const first = f[0]!.activeAt;
     s.step(54);
     f = shots(s, 'kim_sweep');
@@ -371,7 +373,7 @@ describe('Kim Luân authoritative feedback_02', () => {
     expect(s.h.gold - gold).toBe(600);
     expect(chuLootAction(s.w, s.h.id, 1, 'roll')).toBeTruthy();
   });
-  it('empty30s resets the entire gate, private/shared isolated; final respawn uses independent match deadline', () => {
+  it('empty30s resets the entire shared gate; legacy private requests do not create another boss', () => {
     const m = new DungeonMatch(m1Config, creepDungeon, 42, undefined, [
       dungeon,
     ]);
@@ -381,8 +383,10 @@ describe('Kim Luân authoritative feedback_02', () => {
     m.enter('b', 'private', 'kim_luan');
     const z = m.zoneOf('a')!,
       other = m.zoneOf('b')!;
+    expect(other).toBe(z);
     z.world.creeps.get('hoac_do')!.hp = 0;
     m.remove('a');
+    m.remove('b');
     for (let i = 0; i <= 900; i++) m.step();
     expect(z.kim!.phase).toBe('disciples');
     expect(z.world.creeps.get('hoac_do')!.hp).toBe(1100);
@@ -427,7 +431,9 @@ describe('Kim Luân authoritative feedback_02', () => {
     expect(shots(s, 'cuong_phong_van_nhan').length).toBeGreaterThanOrEqual(24);
     s.e.clear(s.w);
     s.e.begin(s.w, s.c, 'dat_nhi_ba', 'dai_luc_pha_son_boulder', s.h);
-    s.step(21);
+    s.step(
+      Math.round(definition.abilities.dai_luc_pha_son_boulder.warning * 30),
+    );
     const shot = shots(s, 'dai_luc_pha_son_boulder')[0]!;
     shot.x = s.h.x - 20;
     shot.y = s.h.y;
@@ -446,10 +452,10 @@ describe('Kim Luân authoritative feedback_02', () => {
     s.e.begin(s.w, s.c, b.id, 'kim_luan_truy_hon', s.h);
     s.step(21);
     const f = shots(s, 'kim_luan_truy_hon');
-    expect(f).toHaveLength(5);
+    expect(f).toHaveLength(7);
     const e = f[0]!;
     expect(e.expiresAt - e.activeAt).toBe(600);
-    e.x = 1129;
+    e.x = definition.bounds.x + definition.bounds.width - 1;
     e.y = 400;
     e.fx = 1;
     e.fy = 0;

@@ -32,14 +32,18 @@ const sequences: Record<string, KimAbility[]> = {
   kim_luan_phap_vuong: [
     'kim_sweep',
     'kim_luan_truy_hon',
+    'kim_hand_chop',
     'ngu_luan_ho_the',
+    'kim_sweep',
     'ngu_luan_phong_toa',
+    'kim_hand_chop',
     'long_tuong_chan_thien',
     'long_tuong_bat_nha_cong',
   ],
 };
 /** All trajectories, gate transitions, hits and RNG live in this deterministic adapter. */
 export class KimLuanEncounter {
+  generation = 0;
   phase: KimView['phase'] = 'disciples';
   enraged = false;
   wardId = 'dat_nhi_ba';
@@ -50,6 +54,7 @@ export class KimLuanEncounter {
   emptySince: number | undefined;
   resetCount = 0;
   private next = new Map<string, number>();
+  private cooldowns = new Map<string, number>();
   private order = new Map<string, number>();
   private poison = new Map<string, number>();
   private previous = new Map<string, Point>();
@@ -67,6 +72,7 @@ export class KimLuanEncounter {
     return Math.max(1, Math.round(s * c.tickRate));
   }
   initialize(w: World, c: SimulationConfig) {
+    this.generation++;
     this.clear(w);
     w.creeps.clear();
     w.projectiles.clear();
@@ -79,6 +85,7 @@ export class KimLuanEncounter {
     this.emptySince = undefined;
     this.order.clear();
     this.next.clear();
+    this.cooldowns.clear();
     this.elephantCast = 0;
     this.wardId = 'dat_nhi_ba';
     this.spawn(w, c, 'hoac_do');
@@ -250,10 +257,17 @@ export class KimLuanEncounter {
           w.tick >= (this.next.get(id) ?? 0) &&
           !hasStatus(b, 'stun', w.tick)
         ) {
-          const list = sequences[id]!,
-            n = this.order.get(id) ?? 0;
-          this.order.set(id, n + 1);
-          this.begin(w, c, id, list[n % list.length]!, target);
+          const list = sequences[id]!;
+          for (let i = 0; i < list.length; i++) {
+            const n = this.order.get(id) ?? 0,
+              ability = list[n % list.length]!;
+            this.order.set(id, n + 1);
+            if (w.tick < (this.cooldowns.get(`${id}:${ability}`) ?? 0))
+              continue;
+            if (ability === 'dat_sweep' && distance(b, target) > 230) continue;
+            this.begin(w, c, id, ability, target);
+            break;
+          }
         }
         if (!cast || id === 'hoac_do') this.move(w, c, b, target, false);
       }
@@ -271,7 +285,7 @@ export class KimLuanEncounter {
           cast.actorId,
           Math.max(
             this.next.get(cast.actorId) ?? 0,
-            w.tick + this.ticks(0.6, c),
+            w.tick + this.ticks(d.actionRestSeconds, c),
           ),
         );
       }
@@ -294,7 +308,13 @@ export class KimLuanEncounter {
       const angle = (w.tick / c.tickRate) * 1.7;
       const p = {
         x: target.x + Math.cos(angle) * 230,
-        y: Math.max(290, Math.min(620, target.y + Math.sin(angle) * 150)),
+        y: Math.max(
+          this.definition.bounds.y + 20,
+          Math.min(
+            this.definition.bounds.y + this.definition.bounds.height - 50,
+            target.y + Math.sin(angle) * 150,
+          ),
+        ),
       };
       aim = direction(p.x - b.x, p.y - b.y);
     } else if (b.id === 'dat_nhi_ba') {
@@ -333,7 +353,14 @@ export class KimLuanEncounter {
     const p = this.definition.abilities[abilityId],
       cast = this.newCast(w, c, b, abilityId, target, p.warning, p.duration);
     this.casts.set(actorId, cast);
-    this.next.set(actorId, w.tick + this.ticks(p.cooldown, c));
+    this.cooldowns.set(
+      `${actorId}:${abilityId}`,
+      w.tick + this.ticks(p.cooldown, c),
+    );
+    this.next.set(
+      actorId,
+      cast.endsAt + this.ticks(this.definition.actionRestSeconds, c),
+    );
     emit(w, {
       kind: 'cast',
       sourceId: actorId,
@@ -579,16 +606,40 @@ export class KimLuanEncounter {
         }
         break;
       case 'kim_sweep':
-        this.fan(w, c, k, 5, 0.34, 430, 2, 15);
+        this.fan(w, c, k, 5, 0.34, d.basicWheelSpeed, 2, 15);
+        once();
+        break;
+      case 'kim_hand_chop':
+        this.fan(
+          w,
+          c,
+          k,
+          1,
+          0,
+          d.crescent.speed,
+          d.crescent.lifetime,
+          d.crescent.radius,
+        );
         once();
         break;
       case 'kim_luan_truy_hon':
-        this.fan(w, c, k, 5, (Math.PI * 2) / 5, 260, 20, 13, 0, true);
+        this.fan(
+          w,
+          c,
+          k,
+          d.wheelCount,
+          (Math.PI * 2) / d.wheelCount,
+          260,
+          20,
+          13,
+          0,
+          true,
+        );
         once();
         break;
       case 'ngu_luan_ho_the':
-        for (let i = 0; i < 5; i++) {
-          const angle = (i * Math.PI * 2) / 5,
+        for (let i = 0; i < d.wheelCount; i++) {
+          const angle = (i * Math.PI * 2) / d.wheelCount,
             e = this.effect(
               w,
               c,
@@ -675,9 +726,12 @@ export class KimLuanEncounter {
     const d = this.definition.elephants,
       p = this.enraged ? d.enrage : d.normal,
       castIndex = this.elephantCast++;
+    const bounds = this.definition.bounds;
     const rocks = Array.from({ length: d.rocks }, (_, i) => ({
-      x: 240 + i * 195 + (w.random() - 0.5) * 75,
-      y: 320 + w.random() * 225,
+      x:
+        bounds.x +
+        ((90 + i * 195 + (w.random() - 0.5) * 75) * bounds.width) / 980,
+      y: bounds.y + ((50 + w.random() * 225) * bounds.height) / 400,
     }));
     const duration =
       p.warning +
@@ -691,7 +745,11 @@ export class KimLuanEncounter {
     }
     const lanes = Array.from(
       { length: p.lanes },
-      (_, i) => 160 + (i * 960) / (p.lanes - 1) + (w.random() - 0.5) * 14,
+      (_, i) =>
+        bounds.x +
+        ((10 + (i * 960) / (p.lanes - 1) + (w.random() - 0.5) * 14) *
+          bounds.width) /
+          980,
     );
     for (let volley = 0; volley < 3; volley++)
       for (let row = 0; row < p.rows; row++)
@@ -745,7 +803,9 @@ export class KimLuanEncounter {
           continue;
         }
         const age = (w.tick - e.activeAt) * dt,
-          a = age * d.orbit.angularSpeed + ((e.index ?? 0) * Math.PI * 2) / 5;
+          a =
+            age * d.orbit.angularSpeed +
+            ((e.index ?? 0) * Math.PI * 2) / d.wheelCount;
         if (age < d.orbit.seconds) {
           e.x = b.x + Math.cos(a) * d.orbit.radius;
           e.y = b.y + Math.sin(a) * d.orbit.radius;

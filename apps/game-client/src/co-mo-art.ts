@@ -1,9 +1,12 @@
 import Phaser from 'phaser';
+import { replaceR3ArenaProp } from './m3d-r3-arena.js';
+import { bossArenaScale as S } from '@volam/game-data';
 import { coMoDungeon, lyMacSauEncounter } from '@volam/game-data';
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
 import type { DesertManifest } from './desert-art.js';
 import type { ArenaCreepArt } from './arena-creeps.js';
+import { R3Painter, r3Tag } from './m3d-r3-art.js';
 
 export const isCoMoZone = (zone: string) =>
   zone === 'co_mo_shared' || zone.startsWith('co_mo_private_');
@@ -72,15 +75,20 @@ export function createCoMoArt(scene: Phaser.Scene): Phaser.GameObjects.Image[] {
   for (const [i, name] of ['ground', 'details'].entries()) {
     const layer = map.createLayer(name, tiles);
     if (!layer) throw Error('Missing Cổ Mộ layer: ' + name);
-    layer.setDepth(-10000 + i).setName(`co_mo:layer:${name}`);
+    layer
+      .setScale(S)
+      .setDepth(-10000 + i)
+      .setName(`co_mo:layer:${name}`);
   }
   const foreground: Phaser.GameObjects.Image[] = [];
   for (const p of map.getObjectLayer('scenery')?.objects ?? []) {
     const image = scene.add
-      .image(p.x!, p.y!, 'co_mo_scenery', p.name)
+      .image(p.x! * S, p.y! * S, 'co_mo_scenery', p.name)
+      .setScale(S)
       .setOrigin(0.5, 168 / 192)
-      .setDepth(p.y!)
+      .setDepth(p.y! * S)
       .setName(`co_mo:${p.name}`);
+    replaceR3ArenaProp(image, 'co_mo', p.name, S);
     if (
       [
         'male_founder_statue',
@@ -107,13 +115,20 @@ export function createCoMoArt(scene: Phaser.Scene): Phaser.GameObjects.Image[] {
 
 /** The server owns warnings, releases and missiles. No local damage or trajectory simulation. */
 export class CoMoEffects {
+  private readonly r3: R3Painter;
+  private readonly whisk = new Map<
+    number,
+    { owner: string; start: number; x: number; y: number }
+  >();
   private warnings = new Map<string, Phaser.GameObjects.Sprite[]>();
   private shots = new Map<string, Phaser.GameObjects.Sprite>();
   private contacts = new Set<Phaser.GameObjects.Sprite>();
   private observed = new Set<string>();
   private played = new Set<string>();
   private completed = new Set<string>();
-  constructor(private scene: Phaser.Scene) {}
+  constructor(private scene: Phaser.Scene) {
+    this.r3 = new R3Painter(scene);
+  }
   private edgeCue(x: number, y: number) {
     const view = this.scene.cameras.main.worldView;
     return {
@@ -179,6 +194,13 @@ export class CoMoEffects {
       if (effect) this.contact(effect, event.x, event.y - 16);
     }
     if (event.stage === 'release') {
+      if (event.abilityId === 'ly_mac_sau_basic')
+        this.whisk.set(event.id, {
+          owner: event.sourceId,
+          start: this.scene.time.now,
+          x: event.x,
+          y: event.y,
+        });
       if (event.abilityId === 'phat_tran_cong')
         this.contact(
           'duster_sweep_trail',
@@ -198,6 +220,29 @@ export class CoMoEffects {
     }
     const liveWarnings = new Set<string>(),
       liveShots = new Set<string>();
+    this.r3.begin();
+    const sweepMs = r3Tag('r3_whisk_ring', 'sweep_billboard').tag
+      .durationMsTotal;
+    const outroMs = r3Tag('r3_whisk_ring', 'outro_billboard').tag
+      .durationMsTotal;
+    for (const [id, cast] of this.whisk) {
+      const owner = state.creeps.get(cast.owner),
+        age = this.scene.time.now - cast.start;
+      if (!owner || owner.hp <= 0 || age >= sweepMs + outroMs) {
+        this.whisk.delete(id);
+        continue;
+      }
+      this.r3.draw(
+        'whisk:' + id,
+        'r3_whisk_ring',
+        age < sweepMs ? 'sweep_billboard' : 'outro_billboard',
+        undefined,
+        cast.x,
+        cast.y,
+        age < sweepMs ? age : age - sweepMs,
+        { scale: 1.2, depth: cast.y - 5 },
+      );
+    }
     state.creeps.forEach((actor, id) => {
       if (
         actor.zoneId !== zone ||
@@ -244,10 +289,7 @@ export class CoMoEffects {
           const cue = this.edgeCue(p.x, p.y - 16);
           add('edge_warning', cue.x, cue.y, Math.atan2(p.fy, p.fx));
         }
-      else if (
-        actor.castAbilityId === 'phat_tran_cong' ||
-        actor.castAbilityId === 'ly_mac_sau_basic'
-      )
+      else if (actor.castAbilityId === 'phat_tran_cong')
         add(
           'sweep_cone_warning',
           actor.x + actor.fx * 60,
@@ -273,6 +315,7 @@ export class CoMoEffects {
       if (shot.zoneId !== zone) return;
       const tag = (
         {
+          co_mo_minion_needle: 'needle_projectile',
           bang_phach_ngan_cham: 'needle_projectile',
           xich_luyen_chuong: 'palm_projectile',
           ngu_doc_chuong: 'ngu_doc_projectile',
@@ -282,12 +325,28 @@ export class CoMoEffects {
       liveShots.add(id);
       let sprite = this.shots.get(id);
       if (!sprite) {
-        sprite = this.make(tag, shot.x, shot.y - 16);
-        sprite.setScale(tag === 'needle_projectile' ? 0.65 : 0.85);
+        sprite = this.make(tag, shot.x, shot.y - 28);
+        sprite.setScale(
+          tag === 'needle_projectile'
+            ? shot.abilityId === 'co_mo_minion_needle'
+              ? 0.85
+              : 1.2
+            : 0.85,
+        );
         this.shots.set(id, sprite);
       }
       sprite
-        .setPosition(Math.round(shot.x), Math.round(shot.y - 16))
+        .setPosition(
+          Math.round(shot.x),
+          Math.round(
+            shot.y -
+              (shot.abilityId === 'co_mo_minion_needle'
+                ? 16
+                : tag === 'needle_projectile'
+                  ? 28
+                  : 16),
+          ),
+        )
         .setRotation(Math.atan2(shot.vy, shot.vx))
         .setDepth(shot.y + 0.3);
     });
@@ -296,8 +355,11 @@ export class CoMoEffects {
         sprite.destroy();
         this.shots.delete(id);
       }
+    this.r3.end();
   }
   clear() {
+    this.r3.clear();
+    this.whisk.clear();
     for (const sprites of this.warnings.values())
       for (const s of sprites) s.destroy();
     for (const s of this.shots.values()) s.destroy();
@@ -314,6 +376,7 @@ export class CoMoEffects {
       warnings: this.warnings.size,
       shots: this.shots.size,
       contacts: this.contacts.size,
+      r3: this.r3.inspect(),
     };
   }
 }

@@ -301,6 +301,7 @@ export function basicFeedbackArt(
       ref: ['left_fist', 'right_fist'].includes(stage)
         ? r(monk, 'character', stage)
         : undefined,
+      effect: r(monk, 'aura', 'la_han_quyen_normal_release'),
       baseMs: 28000 / 30,
       floorMs: 200,
     };
@@ -331,16 +332,17 @@ export function basicFeedbackArt(
       ref: ['left_palm', 'right_palm'].includes(stage)
         ? r(hands, 'character', stage)
         : undefined,
-      baseMs: 300,
-      floorMs: 1000 / 6,
+      effect: r(hands, 'aura', 'luong_nghi_release'),
+      baseMs: 200,
+      floorMs: 200,
     };
   if (id === 'vo_dang_kiem') {
     const prefix = 'sword_cut_' + (cut % 2 ? 1 : 2);
     return {
       ref: r(hands, 'character', prefix),
       effect: r(hands, 'aura', prefix),
-      baseMs: 400,
-      floorMs: 1000 / 6,
+      baseMs: 200,
+      floorMs: 200,
     };
   }
   if (id === 'cai_bang_bong') {

@@ -75,3 +75,7 @@ Compared inputs: approved `assets/reviews/bosses/dong_ta_v02/feedback_02/overvie
 ## Subsequent director approval — 2026-11-03
 
 The user explicitly approved this delivered runtime and authorized integration into `milestone/m3d`. `docs/evidence/dong-ta-runtime/director-approval.json` pins the exact reviewed source/evidence and leaves numerical balance provisional. Earlier pending-runtime-art/no-merge statements above describe the original delivery, not the latest approval. Merge reconciliation and validation on the newer milestone baseline are recorded in `docs/DONG_TA_M3D_MERGE_2026-11-03.md`.
+
+## Milestone reconciliation
+
+The approved runtime was reconciled with milestone3e09dcde (latest M3D feedback, Hell and trial inventory/potions), preserving all newer controls and dungeon policies. Protocol22 and wave-specific pause/spectator/reconnect/blink integration are detailed in `DONG_TA_M3D_MERGE_2026-11-03.md`; the current merge verification/evidence is under `docs/evidence/dong-ta-m3d-merge/`. The earlier original-branch verification and its flags remain historical.

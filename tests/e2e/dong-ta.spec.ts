@@ -2,7 +2,7 @@ import { test, expect, type Page } from '@playwright/test';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { joinWaiting, startTogether } from './pregame-helper.js';
 import type { DongView } from '@volam/game-core';
-const out = 'docs/evidence/dong-ta-runtime';
+const out = process.env['DONG_TA_QA_EVIDENCE_DIR'] ?? 'docs/evidence/dong-ta-runtime';
 interface Actor {
   x: number;
   y: number;

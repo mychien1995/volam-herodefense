@@ -35,7 +35,7 @@ export const thienSonBasics: Record<string, Ability> = {
     effect: {
       mode: 'arc',
       damage: 30,
-      range: 72,
+      range: 86,
       halfAngle: Math.PI / 4,
       cleave: 0.3,
     },
@@ -197,7 +197,9 @@ export const thienSonSkills: Ability[] = [
     effect: {
       mode: 'arc',
       damage: 75,
-      range: 72,
+      range: 125,
+      windupTicks: 18,
+      durationTicks: 30,
       halfAngle: Math.PI / 3,
       cleave: 0.5,
       armorPenetration: 0.5,
@@ -209,9 +211,9 @@ export const thienSonSkills: Ability[] = [
     manaCost: 45,
     cooldownTicks: 540,
     effect: {
-      ...multi(110, 13, 10, 2, Math.PI / 4),
+      ...multi(145, 13, 10, 4, Math.PI / 4),
       finisherDamage: 45,
-      finisherRange: 125,
+      finisherRange: 165,
     } as Ability['effect'],
   },
 ];
@@ -224,7 +226,7 @@ const descriptions = [
   'Lướt chém một lần mỗi địch; miễn sát thương trực tiếp trên các tick đang lướt, không chặn DOT.',
   'Hai luồng đao khí bay thẳng, làm chậm; tăng sát thương lên địch đang chậm.',
   'Lướt lùi ngược hướng nhìn, giữ hướng nhìn và để lại quang ảnh; miễn sát thương trực tiếp lúc đang lướt, cửa sổ phản kích sau đó không miễn thương.',
-  'Chém mạnh phía trước, xuyên một phần phòng thủ riêng cho đòn này.',
+  'Tụ đại đao trên đầu rồi chém xuống phía trước, xuyên một phần phòng thủ riêng cho đòn này.',
   'Tuyệt kỹ: mười nhát chém cực nhanh phía trước và một nhát kết thúc.',
 ];
 export function addThienSonProgression(d: ProgressionDefinition): void {

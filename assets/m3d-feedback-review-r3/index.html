@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>M3D r3 — Ca Diệp Thoái: duyệt key-pose</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#0c1116;color:#f1e4c7;font:14px system-ui;display:grid;min-height:100vh;place-items:center}
+#viewport{position:relative;width:min(1280px,100vw);aspect-ratio:16/9;overflow:hidden;background:#26312e;border:1px solid #8b754d}
+canvas{display:block;width:100%;height:100%;image-rendering:pixelated}header,footer,#status,#note{position:absolute;z-index:2;background:#151e24ec;border:1px solid #776846;padding:9px}
+header{top:10px;left:10px;right:10px}strong{color:#f0cf7b}small{display:block;color:#b8c7c6;margin-top:4px}footer{bottom:10px;left:10px;right:10px;display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+button,select{font:inherit;color:inherit;background:#2b383d;border:1px solid #8a7a53;padding:5px 8px;cursor:pointer}button:hover{background:#43535a}label{display:flex;align-items:center;gap:5px}input[type=range]{width:145px}#status{left:10px;bottom:108px;font-size:12px}#note{right:10px;top:85px;max-width:270px;font-size:12px;color:#c4d2cd}
+dialog{position:absolute;inset:80px 16px 120px;width:calc(100% - 32px);height:calc(100% - 200px);margin:0;background:#182025;color:inherit;border:1px solid #bba471;z-index:5;overflow:auto}dialog img{max-width:100%;display:block;margin:auto}dialog nav{position:sticky;top:0;background:#182025;padding:6px;display:flex;gap:6px}a{color:#f4d996}
+@media(max-width:800px){body{font-size:11px}header{padding:5px;top:3px;left:3px;right:3px}footer{padding:3px;gap:2px;bottom:3px;left:3px;right:3px}button,select{padding:2px}#note{display:none}#status{bottom:85px;left:3px}input[type=range]{width:80px}}
+</style>
+<main id="viewport">
+<canvas id="stage" width="640" height="360" aria-label="Viewer độc lập Ca Diệp Thoái"></canvas>
+<header><strong>CA DIỆP THOÁI · R3 · CHỜ DUYỆT KEY-POSE</strong><small>Dậm chân → ụ đất chạy thẳng → impact / stun. Canvas2D độc lập · zoom logic 1×, display tối đa 2× · chưa phải Phaser.</small></header>
+<aside id="note">Batch 01: 16 body key-poses, 20 ground cels, 4 stun cels.<br>Chưa có in-between hoàn chỉnh.<br>Thời gian/quãng đi/stun trong demo là fixture; gameplay stats pending.</aside>
+<output id="status" aria-live="polite"></output>
+<footer>
+<button id="play">A · Thi triển</button><button id="pause">Space · Dừng hình</button><button id="cancel">C · Hủy</button>
+<select id="facing" aria-label="Hướng"><option value="right">→ Phải</option><option value="down">↓ Xuống</option><option value="left">← Trái</option><option value="up">↑ Lên</option></select>
+<select id="speed" aria-label="Tốc preview"><option value="1">1×</option><option value="0.25">0.25×</option><option value="0.5">0.5×</option></select>
+<label>Frame/time <input id="scrub" type="range" min="0" max="1900" value="0"></label>
+<label><input id="loop" type="checkbox">Loop thủ công</label>
+<button id="death">Giả lập chết</button><button id="travel">Đổi vùng</button><button id="compare">R2 baseline</button><button id="boards">Xem pose</button>
+</footer>
+<dialog id="board"><nav><button data-board="body">Body</button><button data-board="ground">Ụ đất</button><button data-board="stun">Stun</button><button id="close">Đóng / ESC</button></nav><p>Raster nguồn key-pose — chưa phải animation hoàn chỉnh hoặc asset approved.</p><img alt="Key-pose source" id="board-image"></dialog>
+</main>
+<script type="module" src="viewer.js"></script>
+</html>

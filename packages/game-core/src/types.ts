@@ -1,6 +1,7 @@
 import type { ChuEncounter } from './chu-types.js';
 import type { EllipseBounds } from './dong-ta-types.js';
 import type { KimLootContext } from './kim-types.js';
+import type { EconomyDefinition, HeroInventory } from './economy-types.js';
 import type {
   HeroProgression,
   ProgressionDefinition,
@@ -20,6 +21,10 @@ export interface Rect extends Point {
 }
 export type Pose = 'idle' | 'walk' | 'basic_attack' | 'cast' | 'hurt' | 'death';
 export interface ProjectileEffect {
+  windupTicks?: number | undefined;
+  recoveryTicks?: number | undefined;
+  laneOffsets?: number[] | undefined;
+  knockbackChance?: number | undefined;
   mode: 'projectile';
   damage: number;
   speed: number;
@@ -40,8 +45,12 @@ export interface ProjectileEffect {
   slowedBonus?: number | undefined;
   radial?: boolean | undefined;
   attackPowerScale?: number | undefined;
+  blinkWindowTicks?: number | undefined;
 }
 export interface ArcEffect {
+  lineWidth?: number | undefined;
+  knockbackChance?: number | undefined;
+  residualArea?: AreaEffect | undefined;
   mode: 'arc';
   damage: number;
   range: number;
@@ -55,6 +64,8 @@ export interface ArcEffect {
   manaRefund?: number | undefined;
   projectileProc?: { chance: number; effect: ProjectileEffect } | undefined;
   windupTicks?: number | undefined;
+  durationTicks?: number | undefined;
+  originOffset?: number | undefined;
   knockback?: number | undefined;
 }
 export interface ComboSpec {
@@ -110,6 +121,14 @@ export interface StatusEffect extends StatusSpec {
   thresholdFraction?: number;
 }
 export interface BuffEffect {
+  burnAura?:
+    | {
+        radius: number;
+        damage: number;
+        tickInterval: number;
+        attackPowerScale?: number | undefined;
+      }
+    | undefined;
   mode: 'buff';
   durationTicks: number;
   critChance: number;
@@ -140,6 +159,7 @@ export interface GuardCounterEffect {
   range: number;
 }
 export interface AreaEffect {
+  oncePerTarget?: boolean | undefined;
   mode: 'area';
   durationTicks: number;
   tickInterval: number;
@@ -148,6 +168,7 @@ export interface AreaEffect {
   statuses?: StatusSpec[] | undefined;
   confines?: boolean | undefined;
   protectOwner?: boolean | undefined;
+  followOwner?: boolean | undefined;
   ownerRegenFraction?: number | undefined;
 }
 export interface DashEffect {
@@ -163,6 +184,7 @@ export interface DashEffect {
     { durationTicks: number; damage: number; range: number } | undefined;
 }
 export interface MultiHitEffect {
+  comboBurstOnly?: boolean | undefined;
   mode: 'multi_hit';
   range: number;
   damage: number;
@@ -178,6 +200,13 @@ export interface MultiHitEffect {
   durationTicks?: number | undefined;
 }
 export interface Ability {
+  manualChain?:
+    | {
+        idleTicks: number;
+        cooldownTicks: number;
+        finisherProjectile: ProjectileEffect;
+      }
+    | undefined;
   id: string;
   nameVi: string;
   cooldownTicks: number;
@@ -209,7 +238,18 @@ export interface Ability {
 export interface SimulationConfig {
   /** Temporary server-owned arena confinement, independent of status immunity. */
   heroBounds?: EllipseBounds | undefined;
+
+  mobility?:
+    | {
+        charges: number;
+        rechargeTicks: number;
+        distance: number;
+        speed: number;
+      }
+    | undefined;
+  dungeonAggro?: boolean | undefined;
   bossEncounter?: BossEncounterDefinition | undefined;
+  economy?: EconomyDefinition | undefined;
   progression?: ProgressionDefinition | undefined;
   tickRate: number;
   inputTimeoutTicks: number;
@@ -259,6 +299,7 @@ export interface SimulationConfig {
 export type Command =
   | { kind: 'move'; x: number; y: number }
   | { kind: 'basic' }
+  | { kind: 'dash' }
   | { kind: 'cast'; slot: number }
   | { kind: 'dev-loadout'; ids: string[] }
   | { kind: 'select-basic'; id: string };
@@ -281,6 +322,22 @@ export interface Actor extends Point {
   crowdControlScale?: number;
 }
 export interface Hero extends Actor {
+  comboFinisher?: {
+    slot: number;
+    abilityId: string;
+    chain: ComboSpec['id'];
+    fx: number;
+    fy: number;
+    until: number;
+  };
+  actionStartedAt?: number;
+  basicStage?: string | undefined;
+  basicChainDeadline?: { abilityId: string; until: number };
+  bossSpectator?: boolean;
+  dashCharges?: number;
+  dashRechargeAt?: number;
+
+  inventory?: HeroInventory;
   bossItems?: string[];
   bossLoot?: BossLootClaim[];
   progression?: HeroProgression | undefined;
@@ -304,6 +361,16 @@ export interface Hero extends Actor {
 }
 export interface Creep extends Actor {
   waveBossActor?: boolean;
+
+  rangedAttack?: ProjectileEffect;
+  navigation?: {
+    targetId: string;
+    gx: number;
+    gy: number;
+    repathAt: number;
+    waypoints: Point[];
+  };
+  aggroTargetId?: string;
   /** A rescue cage rejects damage from its own captive, using the common hit pipeline. */
   rescueTargetId?: string;
   bossEncounter?: boolean;
@@ -333,6 +400,10 @@ export interface Creep extends Actor {
   burnDamage: number;
 }
 export interface Projectile extends Point {
+  spawnedAt?: number;
+  combo?: ComboSpec;
+  comboTargets?: Record<string, boolean>;
+  lingerUntil?: number;
   hostile?: boolean;
   targetId?: string;
   id: string;
@@ -351,6 +422,7 @@ export interface Projectile extends Point {
   stage?: string;
 }
 export interface CombatEvent extends Point {
+  tick?: number | undefined;
   id: number;
   kind: 'attack' | 'hit' | 'death' | 'cast' | 'effect' | 'pulse';
   sourceId: string;
@@ -364,17 +436,18 @@ export interface CombatEvent extends Point {
   stage?: string | undefined;
 }
 export interface SkillAction {
+  startedAt?: number;
   id: string;
   ownerId: string;
   abilityId: string;
-  kind: 'dash' | 'multi_hit' | 'arc';
+  kind: 'dash' | 'multi_hit' | 'arc' | 'projectile';
   until: number;
   nextTick: number;
   remaining: number;
   fx: number;
   fy: number;
   hitIds: string[];
-  effect: DashEffect | MultiHitEffect | ArcEffect;
+  effect: DashEffect | MultiHitEffect | ArcEffect | ProjectileEffect;
   ability?: Ability | undefined;
   comboTargets?: Record<string, boolean> | undefined;
   rawDamage: number;
@@ -383,6 +456,7 @@ export interface SkillAction {
   critMultiplier: number;
 }
 export interface CombatArea extends Point {
+  hitIds?: string[];
   id: string;
   ownerId: string;
   abilityId: string;
@@ -423,6 +497,7 @@ export interface World {
   random: () => number;
   pending: Array<{ heroId: string; command: Command }>;
   shots: Array<{
+    comboTargets?: Record<string, boolean>;
     tick: number;
     ownerId: string;
     ability: Ability;

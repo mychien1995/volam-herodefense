@@ -4,6 +4,7 @@ import { preloadDongArt, registerDongArt } from './dong-ta-art.js';
 import { preloadHongLietArt, registerHongLietArt } from './hong-liet-art.js';
 import Phaser from 'phaser';
 import { preloadCoMo, registerCoMoEffects } from './co-mo-art.js';
+import { preloadHellArt, registerHellArt } from './hell-art.js';
 import {
   preloadBeachArt,
   registerBeachArt,
@@ -87,6 +88,7 @@ export function preloadArt(scene: Phaser.Scene): void {
   preloadDongArt(scene);
   preloadCoMo(scene);
   preloadBeachArt(scene);
+  preloadHellArt(scene);
   preloadForestCreepArt(scene);
   preloadBambooForestArt(scene);
   preloadDesertArt(scene);
@@ -178,6 +180,9 @@ export function actorFootPivot(
     (
       scene.cache.json.get('beach_manifest') as BeachManifest | undefined
     )?.assets.find((a) => a.id === id) ??
+    (
+      scene.cache.json.get('hell_manifest') as DesertManifest | undefined
+    )?.assets.find((a) => a.id === id) ??
     creeps?.assets.find((asset) => asset.id === id) ??
     (
       scene.cache.json.get('desert_manifest') as DesertManifest | undefined
@@ -197,6 +202,7 @@ export function registerArt(scene: Phaser.Scene): void {
   registerDesertArt(scene, 'co_mo_manifest');
   registerCoMoEffects(scene);
   registerBeachArt(scene);
+  registerHellArt(scene);
   registerForestCreepArt(scene);
   registerDesertArt(scene);
   registerSkillArt(scene);

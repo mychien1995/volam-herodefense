@@ -1,0 +1,121 @@
+{
+  "skillId": "pha_giap_bong",
+  "revision": "r3-batch02-pha-giap-bong-review2",
+  "status": "keypose-draft-awaiting-director",
+  "directorApproved": false,
+  "productionIntegrated": false,
+  "phaserProductionVerified": false,
+  "selectedTags": {
+    "b2_pha_giap_body": [
+      "spin_right",
+      "raise_right",
+      "elongate_right",
+      "strike_right",
+      "recovery_right",
+      "spin_down",
+      "raise_down",
+      "elongate_down",
+      "strike_down",
+      "recovery_down",
+      "spin_left",
+      "raise_left",
+      "elongate_left",
+      "strike_left",
+      "recovery_left",
+      "spin_up",
+      "raise_up",
+      "elongate_up",
+      "strike_up",
+      "recovery_up"
+    ],
+    "b2_pha_giap_vfx": [
+      "spin_right",
+      "charge_right",
+      "impact_right",
+      "outro_right",
+      "spin_down",
+      "charge_down",
+      "impact_down",
+      "outro_down",
+      "spin_left",
+      "charge_left",
+      "impact_left",
+      "outro_left",
+      "spin_up",
+      "charge_up",
+      "impact_up",
+      "outro_up"
+    ]
+  },
+  "facingAxes": {
+    "right": [
+      1,
+      0
+    ],
+    "down": [
+      0,
+      1
+    ],
+    "left": [
+      -1,
+      0
+    ],
+    "up": [
+      0,
+      -1
+    ]
+  },
+  "phaseOrder": [
+    "spin",
+    "raise",
+    "elongate",
+    "strike",
+    "recovery"
+  ],
+  "body": {
+    "component": "b2_pha_giap_body",
+    "feetPivot": [
+      128,
+      148
+    ],
+    "canvas": [
+      256,
+      192
+    ],
+    "placement": "caster feet; no locomotion"
+  },
+  "effects": {
+    "component": "b2_pha_giap_vfx",
+    "effectAnchor": [
+      192,
+      192
+    ],
+    "canvas": [
+      384,
+      384
+    ],
+    "placement": "Per-clip placementOffsetFromFeet: spin hands, charge staff tip, impact/outro near-end ground seam relative to feet",
+    "groundRegistration": "Measured near-end bright seam; do not use bbox height percentage as ground anchor. Horizontal seam lies6px below feet in this review fixture.",
+    "lifecycle": "intro/loop/impact/outro are cosmetic phases; bind actual action/cancel state after approval"
+  },
+  "physicalSpin": {
+    "framesPerFacing": 8,
+    "sourceCels": 24,
+    "sourceSelection": "source/spin-selection.json",
+    "durationMs": 320,
+    "authority": "cosmetic review fixture only"
+  },
+  "excludes": [
+    "r2 foot_explosion for this rework",
+    "projectile travel",
+    "animation-derived damage/range/cooldown"
+  ],
+  "cleanup": [
+    "cancel",
+    "death",
+    "travel",
+    "facing-change",
+    "new cast",
+    "complete"
+  ]
+}

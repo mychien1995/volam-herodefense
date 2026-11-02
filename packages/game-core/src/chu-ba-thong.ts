@@ -10,7 +10,7 @@ import { addCreep } from './simulation.js';
 import { hurt, emit } from './combat.js';
 import { direction, distance, moveCircle, segmentCircle } from './geometry.js';
 import { gainExperience } from './progression.js';
-import { cancelOwnedEffects, displace } from './status.js';
+import { cancelOwnedEffects, displace, hasStatus } from './status.js';
 import type { World, SimulationConfig, Point, Hero } from './types.js';
 export function spawnChu(
   world: World,
@@ -86,17 +86,19 @@ function damage(
 }
 export function chuFields(
   elapsed: number,
+  width = 1280,
+  height = 720,
 ): Array<Point & { id: number; radius: number; active: boolean }> {
   return Array.from({ length: 15 }, (_, i) => ({
     id: i,
     x:
-      240 +
-      (i % 5) * 200 +
-      60 * Math.sin(elapsed * (0.8 + i * 0.017) + i * 1.9),
+      ((640 + 420 * Math.sin(elapsed * (0.37 + i * 0.007) + i * 2.39996)) *
+        width) /
+      1280,
     y:
-      250 +
-      Math.floor(i / 5) * 160 +
-      40 * Math.sin(elapsed * (0.93 + i * 0.011) + i * 1.2),
+      ((410 + 155 * Math.sin(elapsed * (0.53 + i * 0.009) + i * 3.11995)) *
+        height) /
+      720,
     radius: 54,
     active: elapsed % 1.4 >= 0.7,
   }));
@@ -121,12 +123,28 @@ function nearest(w: World) {
     (a, z) => distance(a, b) - distance(z, b) || a.id.localeCompare(z.id),
   )[0];
 }
-function begin(w: World, phase: ChuPhase, index: number): void {
+function begin(
+  w: World,
+  c: SimulationConfig,
+  phase: ChuPhase,
+  index: number,
+): void {
   const s = w.chu!,
     b = w.creeps.get(CHU_BOSS_ID)!,
     d = s.definition,
     target = nearest(w);
   s.phase = phase;
+  for (const [id, e] of w.creeps)
+    if (e.archetypeId === 'chu_wine_disciple') {
+      if (e.hp <= 0)
+        (s.wine ??= []).push({
+          id,
+          x: e.x,
+          y: e.y,
+          until: w.tick + c.tickRate * 30,
+        });
+      w.creeps.delete(id);
+    }
   s.phaseIndex = index;
   s.started = w.tick;
   s.until = w.tick + d.phases[index]!.ticks;
@@ -148,13 +166,38 @@ function begin(w: World, phase: ChuPhase, index: number): void {
       : 'cast';
   b.actionUntil = s.until;
   signal(w, phase, b, 'warning');
+  if (phase === 'drink') {
+    for (const [i, h] of alive(w).entries()) {
+      const p = {
+        x: c.width * (i % 2 ? 0.8 : 0.2),
+        y: c.height * (0.38 + Math.floor(i / 2) * 0.12),
+      };
+      const e = addCreep(w, 'chu_wine_' + w.nextId++, p, c);
+      e.archetypeId = 'chu_wine_disciple';
+      e.controlled = true;
+      e.bossEncounter = true;
+      e.summonedBy = CHU_BOSS_ID;
+      e.hp = e.maxHp = 40;
+      e.stats = {
+        ...c.creep,
+        hp: 40,
+        speed: 80,
+        damage: 0,
+        radius: 12,
+        defense: 0,
+        xp: 0,
+        gold: 0,
+      };
+      e.aggroTargetId = h.id;
+    }
+  }
   if (phase === 'hands' && target) {
     const p = { x: target.x, y: target.y };
     const starts = [
       { x: -140, y: p.y },
-      { x: 1420, y: p.y },
+      { x: c.width + 140, y: p.y },
       { x: p.x, y: -140 },
-      { x: p.x, y: 860 },
+      { x: p.x, y: c.height + 140 },
     ];
     s.hands = starts.map((from, id) => {
       const v = direction(p.x - from.x, p.y - from.y);
@@ -186,6 +229,10 @@ function death(w: World, c: SimulationConfig): void {
     b = w.creeps.get(CHU_BOSS_ID)!,
     d = s.definition;
   s.deadAt = w.tick;
+  s.wine = [];
+  s.wineDrinkers = {};
+  for (const [id, e] of w.creeps)
+    if (e.archetypeId === 'chu_wine_disciple') w.creeps.delete(id);
   s.missiles = [];
   s.hands = [];
   delete s.trap;
@@ -366,11 +413,43 @@ export function stepChu(w: World, c: SimulationConfig): void {
   if (w.tick >= s.until) {
     let i = (s.phaseIndex + 1) % s.definition.phases.length;
     if (i === 0) s.cycle++;
-    begin(w, s.definition.phases[i]!.id, i);
+    begin(w, c, s.definition.phases[i]!.id, i);
   }
   const d = s.definition,
     elapsed = w.tick - s.started,
     seconds = elapsed / c.tickRate;
+  s.wine = (s.wine ?? []).filter((a) => a.until > w.tick);
+  for (const [id, e] of w.creeps)
+    if (e.archetypeId === 'chu_wine_disciple') {
+      if (e.hp <= 0) {
+        (s.wine ??= []).push({
+          id,
+          x: e.x,
+          y: e.y,
+          until: w.tick + c.tickRate * 30,
+        });
+        w.creeps.delete(id);
+        continue;
+      }
+      if (hasStatus(e, 'stun', w.tick)) continue;
+      const aim = direction(boss.x - e.x, boss.y - e.y);
+      e.fx = aim.x;
+      e.fy = aim.y;
+      e.pose = 'walk';
+      if (distance(e, boss) > 55)
+        moveCircle(
+          e,
+          { x: (aim.x * 80) / c.tickRate, y: (aim.y * 80) / c.tickRate },
+          12,
+          c.width,
+          c.height,
+          c.collision,
+        );
+      else {
+        e.pose = 'cast';
+        e.castAbilityId = 'wine_delivery';
+      }
+    }
   boss.pose =
     s.phase === 'idle'
       ? 'idle'
@@ -384,7 +463,10 @@ export function stepChu(w: World, c: SimulationConfig): void {
       const v = direction(target.x - boss.x, target.y - boss.y);
       moveCircle(
         boss,
-        { x: (v.x * 70) / c.tickRate, y: (v.y * 70) / c.tickRate },
+        {
+          x: (v.x * (d.movementSpeed ?? 70)) / c.tickRate,
+          y: (v.y * (d.movementSpeed ?? 70)) / c.tickRate,
+        },
         30,
         c.width,
         c.height,
@@ -431,25 +513,38 @@ export function stepChu(w: World, c: SimulationConfig): void {
           damage(w, h, 'chu_song_quyen', d.damage.fist, c);
       }
     });
-  if (s.phase === 'palm')
-    hitEvery(Math.round(2.2 * c.tickRate), () => {
-      const target = nearest(w);
-      if (!target) return;
-      const v = direction(target.x - boss.x, target.y - boss.y);
-      s.fx = boss.fx = v.x;
-      s.fy = boss.fy = v.y;
-      s.missiles.push({
-        id: w.nextId++,
-        x: boss.x,
-        y: boss.y,
-        vx: v.x * 300,
-        vy: v.y * 300,
-        radius: 15,
-        remaining: 1000,
-        hitIds: [],
-      });
-      signal(w, 'palm', boss, 'release');
-    });
+  if (s.phase === 'palm' || w.tick >= (s.nextBasicAt ?? 0)) {
+    if (
+      s.phase === 'palm' ||
+      s.phase === 'spin' ||
+      s.phase === 'idle' ||
+      s.phase === 'reflect' ||
+      s.phase === 'ultimate'
+    ) {
+      if (w.tick >= (s.nextBasicAt ?? 0)) {
+        const target = nearest(w);
+        if (!target) return;
+        const v = direction(target.x - boss.x, target.y - boss.y);
+        if (s.phase === 'palm') {
+          s.fx = boss.fx = v.x;
+          s.fy = boss.fy = v.y;
+        }
+        s.missiles.push({
+          id: w.nextId++,
+          x: boss.x,
+          y: boss.y,
+          vx: v.x * 300,
+          vy: v.y * 300,
+          radius: 15,
+          remaining: 1000,
+          hitIds: [],
+        });
+        signal(w, 'palm', boss, 'release');
+        s.nextBasicAt =
+          w.tick + (d.basicPalmIntervalTicks ?? Math.round(2.2 * c.tickRate));
+      }
+    }
+  }
   for (const shot of s.missiles) {
     const from = { x: shot.x, y: shot.y };
     shot.x += shot.vx / c.tickRate;
@@ -466,7 +561,12 @@ export function stepChu(w: World, c: SimulationConfig): void {
       }
   }
   s.missiles = s.missiles.filter(
-    (p) => p.remaining > 0 && p.x > 128 && p.x < 1152 && p.y > 190 && p.y < 640,
+    (p) =>
+      p.remaining > 0 &&
+      p.x > c.width * 0.1 &&
+      p.x < c.width * 0.9 &&
+      p.y > (c.height * 190) / 720 &&
+      p.y < (c.height * 640) / 720,
   );
   if (s.phase === 'hands')
     for (const hand of s.hands) {
@@ -502,14 +602,18 @@ export function stepChu(w: World, c: SimulationConfig): void {
       return a + (n < span ? n : 2 * span - n);
     };
     boss.x = tri(
-      (s.spinOrigin ?? d.spawn).x - 205 + seconds * d.spinSpeedX,
-      205,
-      1075,
+      (s.spinOrigin ?? d.spawn).x -
+        (205 * c.width) / 1280 +
+        seconds * d.spinSpeedX,
+      (205 * c.width) / 1280,
+      (1075 * c.width) / 1280,
     );
     boss.y = tri(
-      (s.spinOrigin ?? d.spawn).y - 235 + seconds * d.spinSpeedY,
-      235,
-      570,
+      (s.spinOrigin ?? d.spawn).y -
+        (235 * c.height) / 720 +
+        seconds * d.spinSpeedY,
+      (235 * c.height) / 720,
+      (570 * c.height) / 720,
     );
     s.spinHits ??= {};
     for (const h of alive(w))
@@ -524,7 +628,7 @@ export function stepChu(w: World, c: SimulationConfig): void {
   if (s.phase === 'reflect')
     for (const h of alive(w)) {
       const dist = distance(h, boss);
-      if (dist < d.pullRadius && dist > 35) {
+      if (dist > 35) {
         const v = direction(boss.x - h.x, boss.y - h.y);
         displace(
           h,
@@ -542,14 +646,9 @@ export function stepChu(w: World, c: SimulationConfig): void {
     w.tick >= s.nextAction
   ) {
     s.nextAction = w.tick + Math.round(0.35 * c.tickRate);
-    const fields = chuFields(seconds);
+    const fields = chuFields(seconds, c.width, c.height);
     for (const h of alive(w))
-      if (
-        fields.some((f) => f.active && distance(h, f) <= f.radius + c.radius) ||
-        chuWaves(seconds).some(
-          (f) => Math.abs(distance(h, f) - f.radius) <= f.thickness + c.radius,
-        )
-      )
+      if (fields.some((f) => f.active && distance(h, f) <= f.radius + c.radius))
         damage(w, h, 'am_duong_nghich_chuyen', d.damage.ultimate, c);
   }
 }
@@ -559,49 +658,6 @@ export function chuView(w: World, c: SimulationConfig): ChuView | null {
   if (!s || !b) return null;
   const d = s.definition,
     elapsed = (w.tick - s.started) / c.tickRate;
-  const starts = [
-      [170, 260],
-      [1110, 260],
-      [1000, 220],
-      [200, 540],
-      [1110, 540],
-      [400, 220],
-    ],
-    ends = [
-      [-80, 0],
-      [80, 0],
-      [46, -45],
-      [-55, 55],
-      [55, 55],
-      [-46, -45],
-    ];
-  const participants = [...w.heroes.values()];
-  const disciples =
-    s.phase === 'drink' && b.hp > 0
-      ? participants.map((_, id) => {
-          const from = starts[id]!,
-            offset = ends[id]!,
-            ex = b.x + offset[0]!,
-            ey = b.y + offset[1]!,
-            u = Math.min(1, elapsed / 6.5),
-            dx = ex - from[0]!,
-            dy = ey - from[1]!;
-          return {
-            id,
-            x: from[0]! + dx * u,
-            y: from[1]! + dy * u,
-            direction:
-              Math.abs(dx) > Math.abs(dy)
-                ? dx > 0
-                  ? 'right'
-                  : 'left'
-                : dy > 0
-                  ? 'down'
-                  : 'up',
-            tag: u < 1 ? 'carry_walk' : elapsed < 8 ? 'drop_wine' : 'idle',
-          };
-        })
-      : [];
   return {
     phase: s.phase,
     elapsed,
@@ -627,9 +683,43 @@ export function chuView(w: World, c: SimulationConfig): ChuView | null {
     })),
     missiles: s.missiles,
     trap: s.trap ?? null,
-    disciples,
-    fields: s.phase === 'ultimate' ? chuFields(elapsed) : [],
-    waves: s.phase === 'ultimate' ? chuWaves(elapsed) : [],
+    disciples: [...w.creeps.values()]
+      .filter((e) => e.archetypeId === 'chu_wine_disciple' && e.hp > 0)
+      .map((e, id) => ({
+        id,
+        x: e.x,
+        y: e.y,
+        hp: e.hp,
+        maxHp: e.maxHp,
+        direction:
+          Math.abs(e.fx) > Math.abs(e.fy)
+            ? e.fx < 0
+              ? 'left'
+              : 'right'
+            : e.fy < 0
+              ? 'up'
+              : 'down',
+        tag: e.pose === 'walk' ? 'carry_walk' : 'drop_wine',
+      })),
+    wine: s.wine ?? [],
+    wineDrinkers: Object.entries(s.wineDrinkers ?? {}).flatMap(
+      ([id, until]) => {
+        const h = w.heroes.get(id);
+        return h && h.hp > 0 && until > w.tick
+          ? [
+              {
+                id,
+                x: h.x,
+                y: h.y,
+                remainingTicks: until - w.tick,
+                durationTicks: s.definition.wineBuffTicks ?? 360,
+              },
+            ]
+          : [];
+      },
+    ),
+    fields: s.phase === 'ultimate' ? chuFields(elapsed, c.width, c.height) : [],
+    waves: [],
     loot: s.loot,
     spinRadius: d.spinRadius,
     sweepFootRadius: d.sweepFootRadius,
@@ -641,6 +731,30 @@ export function chuView(w: World, c: SimulationConfig): ChuView | null {
   };
 }
 
+/** Atomic proximity interaction: one bottle, one server event, never boss loot rolls. */
+export function drinkChuWine(w: World, id: string): boolean {
+  const h = w.heroes.get(id),
+    s = w.chu;
+  if (!h || h.hp <= 0 || !s) return false;
+  const bottle = (s.wine ?? [])
+    .filter((a) => a.until > w.tick && distance(a, h) <= 64)
+    .sort((a, b) => distance(a, h) - distance(b, h))[0];
+  if (!bottle) return false;
+  s.wine = s.wine!.filter((a) => a.id !== bottle.id);
+  (s.wineDrinkers ??= {})[id] = w.tick + (s.definition.wineBuffTicks ?? 360);
+  emit(w, {
+    kind: 'pulse',
+    abilityId: 'chu_wine',
+    sourceId: id,
+    targetId: id,
+    x: h.x,
+    y: h.y,
+    damage: 0,
+    critical: false,
+    stage: 'wine_drink',
+  });
+  return true;
+}
 export function chuItemAction(
   w: World,
   id: string,

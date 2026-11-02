@@ -150,7 +150,8 @@ describe('M3C1 authoritative wind mechanics', () => {
     expect(g.world.projectiles.size).toBe(0);
   });
   it('Liên Hoa plants a non-damaging owner protection field and expires on server ticks', () => {
-    const f = fixture(); f.cast();
+    const f = fixture();
+    f.cast();
     expect(f.world.areas).toHaveLength(1);
     expect(f.world.areas![0]).toMatchObject({ x: 300, y: 300, rawDamage: 0 });
     expect(f.hits()).toHaveLength(0);
@@ -161,7 +162,8 @@ describe('M3C1 authoritative wind mechanics', () => {
     hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 10, f.config);
     expect(f.hero.hp).toBe(hp - 10);
     expect(f.world.areas![0]!.x).toBe(300);
-    f.steps(180); expect(f.world.areas).toHaveLength(0);
+    f.steps(180);
+    expect(f.world.areas).toHaveLength(0);
     expect(f.enemies.every((e) => e.hp === 10000)).toBe(true);
   });
   it('Lục Dương pulses around the current moving owner, with exactly six hits per stationary overlap', () => {
@@ -294,6 +296,7 @@ describe('M3C1 authoritative wind mechanics', () => {
     const f = fixture('liet_phong_dao');
     f.config.creep.defense = 100;
     f.cast();
+    f.steps(18);
     expect(f.hits()[0]!.damage).toBe(50);
     expect(f.enemies[0]!.statuses ?? []).toHaveLength(0);
     f.steps(15);
@@ -305,7 +308,7 @@ describe('M3C1 authoritative wind mechanics', () => {
   it('Bách Liệt is ten fast forward hits plus a finisher, with no rear damage or network-driven extra hits', () => {
     const f = fixture('bach_liet_thien_kich');
     f.cast();
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 45; i++) {
       f.input({ kind: 'cast', slot: 0 });
       f.steps(1);
     }

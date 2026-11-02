@@ -1,0 +1,45 @@
+{
+  "runId": "074fe574-472d-49a8-b58e-493d600d8399",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.m3d-followup.config.ts",
+    "--grep",
+    "vo anh actual|private creep pack"
+  ],
+  "startedAt": "2026-11-02T17:11:50.226Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 11.87,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.41,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.5,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.47,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 90.58,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 105.83
+}

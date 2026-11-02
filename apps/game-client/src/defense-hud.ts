@@ -70,9 +70,11 @@ export class DefenseHud {
     );
     this.panel.querySelector('#invasion-countdown')!.textContent = d.defeated
       ? 'Trận đấu kết thúc'
-      : `Đợt ${d.wave} · Đợt ${d.wave + 1} sau ${Math.floor(seconds / 60)
-          .toString()
-          .padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`;
+      : d.paused
+        ? `Đợt ${d.wave} · Tạm dừng — toàn đội đang trong phó bản boss`
+        : `Đợt ${d.wave} · Đợt ${d.wave + 1} sau ${Math.floor(seconds / 60)
+            .toString()
+            .padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`;
     const nextName = invasionCreepName(d.wave + 1);
     const roster = this.panel.querySelector<HTMLElement>(
       '#next-invasion-creep',

@@ -31,6 +31,10 @@ const status = z.strictObject({
   toggle: z.boolean().optional(),
 });
 const projectile = z.strictObject({
+  windupTicks: count.min(1).optional(),
+  recoveryTicks: count.optional(),
+  laneOffsets: z.array(z.number().finite()).min(1).max(8).optional(),
+  knockbackChance: z.number().min(0).max(1).optional(),
   mode: z.literal('projectile'),
   damage: positive,
   speed: positive,
@@ -48,11 +52,28 @@ const projectile = z.strictObject({
   spreadAngle: z.number().finite().min(0).max(Math.PI).optional(),
   radial: z.boolean().optional(),
   attackPowerScale: z.number().finite().min(0).max(1).optional(),
+  blinkWindowTicks: count.min(1).optional(),
   boomerang: z.boolean().optional(),
   manaRefund: z.number().finite().nonnegative().optional(),
   slowedBonus: z.number().finite().nonnegative().optional(),
 });
+const area = z.strictObject({
+  mode: z.literal('area'),
+  durationTicks: count.min(1),
+  tickInterval: count.min(1),
+  radius: positive,
+  damage: z.number().finite().nonnegative(),
+  statuses: z.array(status).optional(),
+  confines: z.boolean().optional(),
+  protectOwner: z.boolean().optional(),
+  followOwner: z.boolean().optional(),
+  ownerRegenFraction: z.number().finite().positive().max(1).optional(),
+  oncePerTarget: z.boolean().optional(),
+});
 const arc = z.strictObject({
+  lineWidth: positive.optional(),
+  knockbackChance: z.number().min(0).max(1).optional(),
+  residualArea: area.optional(),
   mode: z.literal('arc'),
   damage: z.number().nonnegative(),
   range: positive,
@@ -68,6 +89,8 @@ const arc = z.strictObject({
     .strictObject({ chance: z.number().min(0).max(1), effect: projectile })
     .optional(),
   windupTicks: count.min(1).optional(),
+  durationTicks: count.min(1).optional(),
+  originOffset: z.number().finite().nonnegative().optional(),
   knockback: z.number().finite().nonnegative().optional(),
 });
 const allies = z.strictObject({
@@ -81,6 +104,13 @@ export const abilitySchema = z
     nameVi: z.string().min(1),
     cooldownTicks: count.min(1),
     manaCost: z.number().nonnegative(),
+    manualChain: z
+      .strictObject({
+        idleTicks: count.min(1),
+        cooldownTicks: count.min(1),
+        finisherProjectile: projectile,
+      })
+      .optional(),
     minIntervalTicks: count.min(1).optional(),
     basicCombo: z
       .array(
@@ -122,17 +152,7 @@ export const abilitySchema = z
         manaPerDamage: positive,
         toggle: z.boolean().optional(),
       }),
-      z.strictObject({
-        mode: z.literal('area'),
-        durationTicks: count.min(1),
-        tickInterval: count.min(1),
-        radius: positive,
-        damage: z.number().finite().nonnegative(),
-        statuses: z.array(status).optional(),
-        confines: z.boolean().optional(),
-        protectOwner: z.boolean().optional(),
-        ownerRegenFraction: z.number().finite().positive().max(1).optional(),
-      }),
+      area,
       z.strictObject({
         mode: z.literal('guard_counter'),
         durationTicks: count.min(1),
@@ -149,6 +169,14 @@ export const abilitySchema = z
       }),
       z.strictObject({
         mode: z.literal('buff'),
+        burnAura: z
+          .strictObject({
+            radius: positive,
+            damage: positive,
+            tickInterval: count.min(1),
+            attackPowerScale: z.number().finite().min(0).max(1).optional(),
+          })
+          .optional(),
         durationTicks: count.min(1),
         critChance: z.number().min(0).max(1),
         critMultiplier: z.number().nonnegative(),
@@ -185,12 +213,31 @@ export const abilitySchema = z
         slowedBonus: z.number().nonnegative().optional(),
         projectileBurst: projectile.optional(),
         projectileBurstEvery: count.min(1).max(12).optional(),
+        comboBurstOnly: z.boolean().optional(),
         guard: z.number().finite().min(0).max(0.85).optional(),
         durationTicks: count.min(1).optional(),
       }),
     ]),
   })
   .superRefine((a, c) => {
+    if (
+      a.effect.mode === 'arc' &&
+      a.effect.durationTicks !== undefined &&
+      a.effect.durationTicks <= (a.effect.windupTicks ?? 0)
+    )
+      c.addIssue({
+        code: 'custom',
+        message: 'Arc duration must exceed windup',
+      });
+    if (
+      a.effect.mode === 'projectile' &&
+      a.effect.blinkWindowTicks &&
+      (!a.effect.piercing || a.effect.count !== 1 || a.effect.boomerang)
+    )
+      c.addIssue({
+        code: 'custom',
+        message: 'Blink requires one piercing non-returning projectile',
+      });
     if (
       a.effect.mode === 'area' &&
       a.effect.damage === 0 &&

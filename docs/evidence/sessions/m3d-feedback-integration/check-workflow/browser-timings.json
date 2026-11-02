@@ -1,0 +1,37 @@
+{
+  "runId": "95720b37-3c6f-44d2-965b-3951bab6b04c",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.m3d-integration.config.ts"
+  ],
+  "startedAt": "2026-11-01T19:07:14.735Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 62.34,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.94,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 11.86,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "browser verification",
+      "seconds": 432.08,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 507.22
+}

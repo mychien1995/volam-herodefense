@@ -1,4 +1,6 @@
 import type { Ability } from '@volam/game-core';
+import { m3dFeedbackTuning } from './m3d-feedback-tuning.js';
+const feedback = m3dFeedbackTuning.caiBang;
 /** M3A rank-1 test tuning. Mechanics/names canonical; numeric balance remains provisional. */
 export const caiBangExtraSkills: Ability[] = [
   {
@@ -29,7 +31,7 @@ export const caiBangExtraSkills: Ability[] = [
     cooldownTicks: 360,
     effect: {
       mode: 'buff',
-      durationTicks: 180,
+      durationTicks: 270,
       critChance: 0.3,
       critMultiplier: 0.75,
     },
@@ -76,11 +78,13 @@ export const caiBangExtraSkills: Ability[] = [
     effect: {
       mode: 'arc',
       damage: 55,
-      range: 78,
+      range: feedback.groundSlamRange,
+      lineWidth: feedback.groundSlamWidth,
+      windupTicks: 6,
+      durationTicks: 30,
       halfAngle: Math.PI / 4,
       cleave: 1,
-      singleTarget: true,
-      statuses: [{ kind: 'defense_break', durationTicks: 150, magnitude: 20 }],
+      statuses: [{ kind: 'defense_break', durationTicks: 210, magnitude: 20 }],
     },
   },
   {
@@ -122,12 +126,13 @@ export const caiBangExtraSkills: Ability[] = [
     cooldownTicks: 540,
     effect: {
       mode: 'multi_hit',
-      range: 135,
+      range: feedback.whirlRange,
       damage: 18,
       hits: 4,
       spacingTicks: 7,
+      durationTicks: Math.round(29 * feedback.whirlDurationMultiplier),
       finisherDamage: 75,
-      finisherRange: 160,
+      finisherRange: feedback.finalSmashRange,
     },
   },
 ];

@@ -1,7 +1,7 @@
 import { defineConfig } from '@playwright/test';
 export default defineConfig({
   testDir: './tests/e2e',
-  testMatch: ['dong-ta.spec.ts', 'dungeons.spec.ts'],
+  testMatch: ['dong-ta.spec.ts'],
   workers: 1,
   fullyParallel: false,
   timeout: 240000,

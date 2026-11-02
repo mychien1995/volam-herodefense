@@ -1,0 +1,18 @@
+{
+  "source": "Recorded from first final-run tool stdout; the workflow timing path was reused by the subsequent invocation.",
+  "status": "FAIL",
+  "workflowTestsPassed": 18,
+  "unitIntegrationTestsPassed": 476,
+  "assetValidatorsPassed": 17,
+  "typecheck": "PASS",
+  "productionBuild": "PASS",
+  "browserSeconds": 447.65,
+  "browserPassed": 7,
+  "browserFailed": [
+    "two-client UI scenario: 30s test timeout, truncated trace archive",
+    "merchant keyboard navigation: calculated from selected tab instead of focused tab",
+    "six-client UI scenario: assertions/screenshots completed, context-close timeout at 180s"
+  ],
+  "originalBrowserArtifacts": "artifacts/inventory-hud/gameplay",
+  "correction": "Use focused tab as keyboard origin; disable DOM trace archives for UI tests; two-client scenario gets 60s budget without changing assertions."
+}

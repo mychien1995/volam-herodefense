@@ -11,6 +11,10 @@ import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
 import { facing } from './facing.js';
 import { FeedbackVfx } from './feedback-vfx.js';
+import { M3dFeedback, m3dAssets } from './m3d-feedback.js';
+import { M3dR3Feedback } from './m3d-r3-feedback.js';
+import { r3Assets } from './m3d-r3-art.js';
+import { preloadR3Arena } from './m3d-r3-arena.js';
 import { feedbackArt } from './feedback-art.js';
 import { ApprovedSkillVfx, approvedSkillAssets } from './approved-skill-vfx.js';
 import { feedbackProjectile, feedbackScale } from './feedback-visuals.js';
@@ -21,14 +25,19 @@ import {
 
 const components = new Map(skillArt.assets.map((a) => [a.id, a]));
 export function preloadSkillArt(scene: Phaser.Scene): void {
+  preloadR3Arena(scene);
   preloadRasterAnimations(scene, skillArt.assets);
   preloadRasterAnimations(scene, feedbackArt);
   preloadRasterAnimations(scene, approvedSkillAssets);
+  preloadRasterAnimations(scene, m3dAssets);
+  preloadRasterAnimations(scene, r3Assets);
 }
 export function registerSkillArt(scene: Phaser.Scene): void {
   registerRasterAnimations(scene, skillArt.assets);
   registerRasterAnimations(scene, feedbackArt);
   registerRasterAnimations(scene, approvedSkillAssets);
+  registerRasterAnimations(scene, m3dAssets);
+  registerRasterAnimations(scene, r3Assets);
 }
 interface EffectView {
   sprite: Phaser.GameObjects.Sprite;
@@ -46,6 +55,8 @@ interface VfxActor {
   zoneId: string;
 }
 export class SkillVfx {
+  private r3: M3dR3Feedback;
+  private m3d: M3dFeedback;
   private feedback: FeedbackVfx;
   private approved: ApprovedSkillVfx;
   private transient = new Set<EffectView>();
@@ -66,6 +77,8 @@ export class SkillVfx {
   >();
   private state: LobbyState | undefined;
   constructor(private scene: Phaser.Scene) {
+    this.r3 = new M3dR3Feedback(scene);
+    this.m3d = new M3dFeedback(scene);
     this.feedback = new FeedbackVfx(scene);
     this.approved = new ApprovedSkillVfx(scene);
   }
@@ -135,6 +148,7 @@ export class SkillVfx {
     prefix: string,
     event: CombatEvent,
     ownerId = event.sourceId,
+    durationMs?: number,
   ): void {
     const placement = this.tag(
       asset,
@@ -175,6 +189,14 @@ export class SkillVfx {
         event.stage === 'support_tick')
     )
       view.sprite.setScale((event.radius * 2) / view.tag.frameDimensions[0]);
+    if (event.abilityId === 'liet_phong_dao' && event.kind === 'cast')
+      view.sprite
+        .setOrigin(0.5, 0.5)
+        .setPosition(event.x, event.y - 54)
+        .setScale(1.8);
+    if (durationMs)
+      view.sprite.anims.timeScale =
+        ((view.tag.frames.length / view.tag.frameRate) * 1000) / durationMs;
     view.impact = event.kind === 'hit';
     this.transient.add(view);
     const remove = () => {
@@ -184,16 +206,29 @@ export class SkillVfx {
     view.sprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, remove);
     // An incorrectly looped optional source tag must not become an immortal impact.
     this.scene.time.delayedCall(
-      Math.max(200, (view.tag.frames.length / view.tag.frameRate) * 1000 + 100),
+      Math.max(
+        200,
+        durationMs ??
+          (view.tag.frames.length / view.tag.frameRate) * 1000 + 100,
+      ),
       () => {
         if (this.transient.has(view)) remove();
       },
     );
   }
   event(e: CombatEvent): void {
+    if (this.r3.event(e)) return;
+    if (this.m3d.event(e)) return;
     if (this.approved.event(e)) return;
     if (e.kind === 'attack') this.casts.delete(e.sourceId);
     if (this.feedback.event(e)) return;
+    if (e.abilityId === 'liet_phong_dao') {
+      if (e.kind === 'cast')
+        this.burst('nhan_kiem_hop_nhat_vfx', 'travel', e, e.sourceId, 600);
+      if (e.kind === 'pulse' && e.stage === 'strike')
+        this.burst('liet_phong_dao_vfx', 'strike', e);
+      return;
+    }
     const skill =
       e.abilityId === 'thien_son_phien'
         ? 'lien_hoa_phien'
@@ -348,6 +383,8 @@ export class SkillVfx {
     renderPosition?: (id: string) => { x: number; y: number } | undefined,
   ): void {
     this.state = state;
+    this.r3.sync(state, zoneId, renderPosition);
+    this.m3d.sync(state, zoneId, renderPosition);
     this.approved.sync(state, zoneId, renderPosition);
     this.feedback.sync(state, zoneId, renderPosition);
     if (state?.phase === 'DEFEAT') {
@@ -387,6 +424,12 @@ export class SkillVfx {
         magnitude: number;
       }>;
       for (const s of statuses) {
+        if (this.r3.handles(s.abilityId)) continue;
+        if (
+          this.m3d.handles(s.abilityId) &&
+          ['channel', 'dash', 'crit_buff'].includes(s.kind)
+        )
+          continue;
         if (this.approved.handles(s.abilityId)) continue;
         if (this.feedback.suppressesStatus(s.abilityId, s.kind)) continue;
         const stage = skillVisualStages[s.abilityId];
@@ -465,17 +508,24 @@ export class SkillVfx {
     state?.players.forEach((a, id) => syncActor(id, a));
     state?.creeps.forEach((a, id) => syncActor(id, a));
     state?.areas.forEach((a, id) => {
+      if (this.r3.areaHandled(a.abilityId)) return;
+      if (this.m3d.areaHandled(a.abilityId)) return;
       if (this.approved.handles(a.abilityId)) return;
       if (this.feedback.areaHandled(a.abilityId)) return;
       if (a.zoneId !== zoneId) return;
       const key = 'area:' + id,
-        prefix = skillVisualStages[a.abilityId]?.area;
+        prefix =
+          a.abilityId === 'khang_long_huu_hoi'
+            ? 'burn_flecks'
+            : skillVisualStages[a.abilityId]?.area;
       if (!prefix) return;
       active.add(key);
       let v = this.persistent.get(key);
       if (!v) {
         v = this.make(
-          `${a.abilityId}_vfx`,
+          a.abilityId === 'khang_long_huu_hoi'
+            ? 'shared_fire_vfx'
+            : `${a.abilityId}_vfx`,
           prefix,
           a.x,
           a.y,
@@ -522,6 +572,8 @@ export class SkillVfx {
       }
     const shots = new Set<string>();
     state?.projectiles.forEach((p, id) => {
+      if (this.r3.projectileHandled(p.abilityId)) return;
+      if (this.m3d.projectileHandled(p.abilityId)) return;
       if (this.approved.handles(p.abilityId)) return;
       if (this.feedback.projectileHandled(p.abilityId, p.stage)) return;
       if (p.zoneId !== zoneId) return;
@@ -545,6 +597,11 @@ export class SkillVfx {
               .setOrigin(0.5, 0.5)
               .setPosition(Math.round(p.x), Math.round(p.y - 20))
               .setDepth(p.y + 0.4);
+        } else if (
+          p.abilityId === 'vo_dang_kiem' ||
+          p.abilityId === 'nhan_kiem_hop_nhat'
+        ) {
+          v.sprite.setPosition(Math.round(p.x), Math.round(p.y - 22));
         } else if (
           p.abilityId === 'huyen_am_chuong' ||
           p.abilityId === 'hang_long_hoa_vu'
@@ -601,6 +658,8 @@ export class SkillVfx {
     };
   }
   clear(): void {
+    this.r3.clear();
+    this.m3d.clear();
     this.approved.clear();
     this.feedback.clear();
     this.casts.clear();
@@ -615,6 +674,8 @@ export class SkillVfx {
     this.projectiles.clear();
   }
   observeCharacter(texture: string, frame: string) {
+    this.r3.observeCharacter(texture, frame);
+    this.m3d.observe(texture, frame);
     this.approved.observe(texture, frame);
     this.feedback.observeCharacter(texture, frame);
     if (components.has(texture)) {
@@ -630,6 +691,12 @@ export class SkillVfx {
     fy: number,
     hp: number,
   ) {
+    const r3 = this.r3.actorCast(id);
+    if (r3) return r3;
+    if (this.r3.handles(abilityId)) return undefined;
+    const m3d = this.m3d.actorCast(id);
+    if (m3d) return m3d;
+    if (this.m3d.handles(abilityId)) return undefined;
     const approved = this.approved.actorCast(id, pose, fx, fy, hp);
     if (approved) return approved;
     if (this.approved.handles(abilityId)) return undefined;
@@ -683,6 +750,8 @@ export class SkillVfx {
   }
   inspect() {
     return {
+      m3d: this.m3d.inspect(),
+      r3: this.r3.inspect(),
       approved: this.approved.inspect(),
       feedback: this.feedback.inspect(),
       loadedComponents: skillArt.assets.filter((a) =>
@@ -720,9 +789,14 @@ export class SkillVfx {
     };
   }
   reviewFeedback(asset: string, tag: string, x: number, y: number) {
+    if (asset.startsWith('m3d_') || asset.startsWith('r2_'))
+      return this.m3d.review(asset, tag, x, y);
     return this.feedback.review(asset, tag, x, y);
   }
   suppressesCastPose(id: string) {
     return this.feedback.suppressesCastPose(id);
+  }
+  actorAlpha(id: string) {
+    return this.m3d.alpha(id);
   }
 }

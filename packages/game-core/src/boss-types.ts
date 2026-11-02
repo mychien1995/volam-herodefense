@@ -1,4 +1,4 @@
-import type { Point, SimulationConfig } from './types.js';
+import type { Point, SimulationConfig, ProjectileEffect } from './types.js';
 
 export type BossAbilityId =
   | 'ly_mac_sau_basic'
@@ -8,6 +8,7 @@ export type BossAbilityId =
   | 'co_mo_kiem_phap'
   | 'ngu_doc_chuong';
 export interface BossAttackDefinition {
+  cooldownTicks?: number;
   id: BossAbilityId;
   nameVi: string;
   windupTicks: number;
@@ -30,6 +31,8 @@ export interface BossEncounterDefinition {
   attacks: BossAttackDefinition[];
   rotation: BossAbilityId[];
   summonCount: number;
+  summonCountChoices?: number[];
+  summonProjectile?: ProjectileEffect;
   summonLimit: number;
   summonLifetimeTicks: number;
   summonStats: SimulationConfig['creep'];
@@ -49,6 +52,7 @@ export interface CoMoBossCast {
   released: boolean;
 }
 export interface BossRuntime {
+  cooldowns?: Record<string, number>;
   actorId: string;
   instanceId: string;
   killSerial: number;

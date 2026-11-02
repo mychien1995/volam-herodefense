@@ -1,3 +1,7 @@
+## Inventory/merchant UI exports — 2026-11-02
+
+Director-approved concepts supply eleven static icon backplates in `assets/exports/inventory_ui/`, exported by `scripts/export-inventory-ui.py` with source regions/hashes in the manifest. Retained ART-01 nine-slice frames and hero art remain unchanged; copy/numbers/selections stay live DOM inside the Phaser viewport. No whole-screen concept is used as a menu, no animation/authority comes from icons, and runtime approval remains separate. See [integration/checks](docs/INVENTORY_HUD_INTEGRATION.md).
+
 ## Lý Mạc Sầu retained runtime integration — 2026-11-01
 
 The approved v02 preview PNGs/atlases are reused without regeneration for Cổ Mộ. `scripts/prepare-ly-mac-sau.mjs` checks 400 approval hashes and copies boss/summon/FX/purple/environment exports; `scripts/verify-ly-mac-sau.py` checks originals, public copies and shared orthogonal Tiled markers. The flattened arena illustration remains a reference, not the runtime map. Authored actor cels, feet pivots and nearest sampling are retained. Runtime director approval remains pending. See `docs/LY_MAC_SAU_INTEGRATION.md`.

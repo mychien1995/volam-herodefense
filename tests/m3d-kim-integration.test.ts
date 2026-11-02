@@ -10,7 +10,7 @@ import {
 import { dungeonActionSchema, PROTOCOL_VERSION } from '@volam/game-protocol';
 
 it('M3D retains both boss destinations, separate clocks, gates and state owners', () => {
-  expect(PROTOCOL_VERSION).toBe(18);
+  expect(PROTOCOL_VERSION).toBe(22);
   expect(
     dungeonActionSchema.safeParse({
       protocolVersion: 17,
@@ -25,6 +25,7 @@ it('M3D retains both boss destinations, separate clocks, gates and state owners'
       'forest',
       'desert',
       'sea',
+      'hell',
       'chu_ba_thong',
       'hong_liet',
       'co_mo',

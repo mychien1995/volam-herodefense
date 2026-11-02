@@ -1,0 +1,1131 @@
+{
+  "id": "m3d_thien_son_dao_vfx",
+  "role": "vfx",
+  "canvas": [
+    384,
+    384
+  ],
+  "pivot": [
+    192,
+    192
+  ],
+  "mapping": [
+    "thien_son_dao",
+    "liet_phong_dao",
+    "bach_liet_thien_kich"
+  ],
+  "sourceFile": "assets/m3d-feedback-visual/source/m3d_thien_son_dao_vfx.aseprite",
+  "individualDirectory": "assets/m3d-feedback-visual/exported/m3d_thien_son_dao_vfx/frames",
+  "frameDimensions": [
+    384,
+    384
+  ],
+  "displayScale": 1,
+  "origin": [
+    0.5,
+    0.5
+  ],
+  "animations": [
+    {
+      "name": "liet_phong_gather_right",
+      "phase": "gather",
+      "direction": "right",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -44
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "liet_phong_gather_right_0",
+        "liet_phong_gather_right_1",
+        "liet_phong_gather_right_2",
+        "liet_phong_gather_right_3",
+        "liet_phong_gather_right_4",
+        "liet_phong_gather_right_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 600,
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "liet_phong_gather_loop_right",
+      "phase": "gather_hold",
+      "direction": "right",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        -44
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "frames": [
+        "liet_phong_gather_loop_right_0",
+        "liet_phong_gather_loop_right_1",
+        "liet_phong_gather_loop_right_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 300,
+      "frameDurationsMs": [
+        100,
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "liet_phong_slash_right",
+      "phase": "slash",
+      "direction": "right",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "liet_phong_slash_right_0",
+        "liet_phong_slash_right_1",
+        "liet_phong_slash_right_2",
+        "liet_phong_slash_right_3",
+        "liet_phong_slash_right_4",
+        "liet_phong_slash_right_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 450,
+      "frameDurationsMs": [
+        75,
+        75,
+        75,
+        75,
+        75,
+        75
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 13.333333333333334
+    },
+    {
+      "name": "liet_phong_outro_right",
+      "phase": "outro",
+      "direction": "right",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -44
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "liet_phong_outro_right_0",
+        "liet_phong_outro_right_1",
+        "liet_phong_outro_right_2",
+        "liet_phong_outro_right_3",
+        "liet_phong_outro_right_4",
+        "liet_phong_outro_right_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 480,
+      "frameDurationsMs": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "frameRate": 12.5,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 12.5
+    },
+    {
+      "name": "basic_slash_right",
+      "phase": "attack",
+      "direction": "right",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "basic_slash_right_0",
+        "basic_slash_right_1",
+        "basic_slash_right_2",
+        "basic_slash_right_3"
+      ],
+      "frameCount": 4,
+      "durationMsTotal": 260,
+      "frameDurationsMs": [
+        65,
+        65,
+        65,
+        65
+      ],
+      "frameRate": 15.384615384615385,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 15.384615384615385
+    },
+    {
+      "name": "bach_liet_intro_right",
+      "phase": "intro",
+      "direction": "right",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "bach_liet_intro_right_0",
+        "bach_liet_intro_right_1"
+      ],
+      "frameCount": 2,
+      "durationMsTotal": 180,
+      "frameDurationsMs": [
+        90,
+        90
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 11.11111111111111
+    },
+    {
+      "name": "bach_liet_loop_right",
+      "phase": "loop",
+      "direction": "right",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "frames": [
+        "bach_liet_loop_right_0",
+        "bach_liet_loop_right_1",
+        "bach_liet_loop_right_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 255,
+      "frameDurationsMs": [
+        85,
+        85,
+        85
+      ],
+      "frameRate": 11.764705882352942,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 11.764705882352942
+    },
+    {
+      "name": "bach_liet_outro_right",
+      "phase": "outro",
+      "direction": "right",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "bach_liet_outro_right_0",
+        "bach_liet_outro_right_1"
+      ],
+      "frameCount": 2,
+      "durationMsTotal": 200,
+      "frameDurationsMs": [
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "liet_phong_gather_down",
+      "phase": "gather",
+      "direction": "down",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -44
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "liet_phong_gather_down_0",
+        "liet_phong_gather_down_1",
+        "liet_phong_gather_down_2",
+        "liet_phong_gather_down_3",
+        "liet_phong_gather_down_4",
+        "liet_phong_gather_down_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 600,
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "liet_phong_gather_loop_down",
+      "phase": "gather_hold",
+      "direction": "down",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        -44
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "frames": [
+        "liet_phong_gather_loop_down_0",
+        "liet_phong_gather_loop_down_1",
+        "liet_phong_gather_loop_down_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 300,
+      "frameDurationsMs": [
+        100,
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "liet_phong_slash_down",
+      "phase": "slash",
+      "direction": "down",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "liet_phong_slash_down_0",
+        "liet_phong_slash_down_1",
+        "liet_phong_slash_down_2",
+        "liet_phong_slash_down_3",
+        "liet_phong_slash_down_4",
+        "liet_phong_slash_down_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 450,
+      "frameDurationsMs": [
+        75,
+        75,
+        75,
+        75,
+        75,
+        75
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 13.333333333333334
+    },
+    {
+      "name": "liet_phong_outro_down",
+      "phase": "outro",
+      "direction": "down",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -44
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "liet_phong_outro_down_0",
+        "liet_phong_outro_down_1",
+        "liet_phong_outro_down_2",
+        "liet_phong_outro_down_3",
+        "liet_phong_outro_down_4",
+        "liet_phong_outro_down_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 480,
+      "frameDurationsMs": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "frameRate": 12.5,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 12.5
+    },
+    {
+      "name": "basic_slash_down",
+      "phase": "attack",
+      "direction": "down",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "basic_slash_down_0",
+        "basic_slash_down_1",
+        "basic_slash_down_2",
+        "basic_slash_down_3"
+      ],
+      "frameCount": 4,
+      "durationMsTotal": 260,
+      "frameDurationsMs": [
+        65,
+        65,
+        65,
+        65
+      ],
+      "frameRate": 15.384615384615385,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 15.384615384615385
+    },
+    {
+      "name": "bach_liet_intro_down",
+      "phase": "intro",
+      "direction": "down",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "bach_liet_intro_down_0",
+        "bach_liet_intro_down_1"
+      ],
+      "frameCount": 2,
+      "durationMsTotal": 180,
+      "frameDurationsMs": [
+        90,
+        90
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 11.11111111111111
+    },
+    {
+      "name": "bach_liet_loop_down",
+      "phase": "loop",
+      "direction": "down",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "frames": [
+        "bach_liet_loop_down_0",
+        "bach_liet_loop_down_1",
+        "bach_liet_loop_down_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 255,
+      "frameDurationsMs": [
+        85,
+        85,
+        85
+      ],
+      "frameRate": 11.764705882352942,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 11.764705882352942
+    },
+    {
+      "name": "bach_liet_outro_down",
+      "phase": "outro",
+      "direction": "down",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "bach_liet_outro_down_0",
+        "bach_liet_outro_down_1"
+      ],
+      "frameCount": 2,
+      "durationMsTotal": 200,
+      "frameDurationsMs": [
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "liet_phong_gather_left",
+      "phase": "gather",
+      "direction": "left",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -44
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "liet_phong_gather_left_0",
+        "liet_phong_gather_left_1",
+        "liet_phong_gather_left_2",
+        "liet_phong_gather_left_3",
+        "liet_phong_gather_left_4",
+        "liet_phong_gather_left_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 600,
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "liet_phong_gather_loop_left",
+      "phase": "gather_hold",
+      "direction": "left",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        -44
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "frames": [
+        "liet_phong_gather_loop_left_0",
+        "liet_phong_gather_loop_left_1",
+        "liet_phong_gather_loop_left_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 300,
+      "frameDurationsMs": [
+        100,
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "liet_phong_slash_left",
+      "phase": "slash",
+      "direction": "left",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "liet_phong_slash_left_0",
+        "liet_phong_slash_left_1",
+        "liet_phong_slash_left_2",
+        "liet_phong_slash_left_3",
+        "liet_phong_slash_left_4",
+        "liet_phong_slash_left_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 450,
+      "frameDurationsMs": [
+        75,
+        75,
+        75,
+        75,
+        75,
+        75
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 13.333333333333334
+    },
+    {
+      "name": "liet_phong_outro_left",
+      "phase": "outro",
+      "direction": "left",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -44
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "liet_phong_outro_left_0",
+        "liet_phong_outro_left_1",
+        "liet_phong_outro_left_2",
+        "liet_phong_outro_left_3",
+        "liet_phong_outro_left_4",
+        "liet_phong_outro_left_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 480,
+      "frameDurationsMs": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "frameRate": 12.5,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 12.5
+    },
+    {
+      "name": "basic_slash_left",
+      "phase": "attack",
+      "direction": "left",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "basic_slash_left_0",
+        "basic_slash_left_1",
+        "basic_slash_left_2",
+        "basic_slash_left_3"
+      ],
+      "frameCount": 4,
+      "durationMsTotal": 260,
+      "frameDurationsMs": [
+        65,
+        65,
+        65,
+        65
+      ],
+      "frameRate": 15.384615384615385,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 15.384615384615385
+    },
+    {
+      "name": "bach_liet_intro_left",
+      "phase": "intro",
+      "direction": "left",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "bach_liet_intro_left_0",
+        "bach_liet_intro_left_1"
+      ],
+      "frameCount": 2,
+      "durationMsTotal": 180,
+      "frameDurationsMs": [
+        90,
+        90
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 11.11111111111111
+    },
+    {
+      "name": "bach_liet_loop_left",
+      "phase": "loop",
+      "direction": "left",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "frames": [
+        "bach_liet_loop_left_0",
+        "bach_liet_loop_left_1",
+        "bach_liet_loop_left_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 255,
+      "frameDurationsMs": [
+        85,
+        85,
+        85
+      ],
+      "frameRate": 11.764705882352942,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 11.764705882352942
+    },
+    {
+      "name": "bach_liet_outro_left",
+      "phase": "outro",
+      "direction": "left",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "bach_liet_outro_left_0",
+        "bach_liet_outro_left_1"
+      ],
+      "frameCount": 2,
+      "durationMsTotal": 200,
+      "frameDurationsMs": [
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "liet_phong_gather_up",
+      "phase": "gather",
+      "direction": "up",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -44
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "liet_phong_gather_up_0",
+        "liet_phong_gather_up_1",
+        "liet_phong_gather_up_2",
+        "liet_phong_gather_up_3",
+        "liet_phong_gather_up_4",
+        "liet_phong_gather_up_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 600,
+      "frameDurationsMs": [
+        100,
+        100,
+        100,
+        100,
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "liet_phong_gather_loop_up",
+      "phase": "gather_hold",
+      "direction": "up",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        -44
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "frames": [
+        "liet_phong_gather_loop_up_0",
+        "liet_phong_gather_loop_up_1",
+        "liet_phong_gather_loop_up_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 300,
+      "frameDurationsMs": [
+        100,
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    },
+    {
+      "name": "liet_phong_slash_up",
+      "phase": "slash",
+      "direction": "up",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "liet_phong_slash_up_0",
+        "liet_phong_slash_up_1",
+        "liet_phong_slash_up_2",
+        "liet_phong_slash_up_3",
+        "liet_phong_slash_up_4",
+        "liet_phong_slash_up_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 450,
+      "frameDurationsMs": [
+        75,
+        75,
+        75,
+        75,
+        75,
+        75
+      ],
+      "frameRate": 13.333333333333334,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 13.333333333333334
+    },
+    {
+      "name": "liet_phong_outro_up",
+      "phase": "outro",
+      "direction": "up",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -44
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "liet_phong_outro_up_0",
+        "liet_phong_outro_up_1",
+        "liet_phong_outro_up_2",
+        "liet_phong_outro_up_3",
+        "liet_phong_outro_up_4",
+        "liet_phong_outro_up_5"
+      ],
+      "frameCount": 6,
+      "durationMsTotal": 480,
+      "frameDurationsMs": [
+        80,
+        80,
+        80,
+        80,
+        80,
+        80
+      ],
+      "frameRate": 12.5,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 12.5
+    },
+    {
+      "name": "basic_slash_up",
+      "phase": "attack",
+      "direction": "up",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "basic_slash_up_0",
+        "basic_slash_up_1",
+        "basic_slash_up_2",
+        "basic_slash_up_3"
+      ],
+      "frameCount": 4,
+      "durationMsTotal": 260,
+      "frameDurationsMs": [
+        65,
+        65,
+        65,
+        65
+      ],
+      "frameRate": 15.384615384615385,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 15.384615384615385
+    },
+    {
+      "name": "bach_liet_intro_up",
+      "phase": "intro",
+      "direction": "up",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "bach_liet_intro_up_0",
+        "bach_liet_intro_up_1"
+      ],
+      "frameCount": 2,
+      "durationMsTotal": 180,
+      "frameDurationsMs": [
+        90,
+        90
+      ],
+      "frameRate": 11.11111111111111,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 11.11111111111111
+    },
+    {
+      "name": "bach_liet_loop_up",
+      "phase": "loop",
+      "direction": "up",
+      "loop": true,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "Stop explicitly on end/cancel/death/zone cleanup",
+      "frames": [
+        "bach_liet_loop_up_0",
+        "bach_liet_loop_up_1",
+        "bach_liet_loop_up_2"
+      ],
+      "frameCount": 3,
+      "durationMsTotal": 255,
+      "frameDurationsMs": [
+        85,
+        85,
+        85
+      ],
+      "frameRate": 11.764705882352942,
+      "repeat": -1,
+      "oneShot": false,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 11.764705882352942
+    },
+    {
+      "name": "bach_liet_outro_up",
+      "phase": "outro",
+      "direction": "up",
+      "loop": false,
+      "placementOffsetFromFeet": [
+        0,
+        -22
+      ],
+      "lifetimeAuthority": "visual_only; integration uses authoritative event/state",
+      "phaseControl": "One-shot; does not create a hit",
+      "frames": [
+        "bach_liet_outro_up_0",
+        "bach_liet_outro_up_1"
+      ],
+      "frameCount": 2,
+      "durationMsTotal": 200,
+      "frameDurationsMs": [
+        100,
+        100
+      ],
+      "frameRate": 10.0,
+      "repeat": 0,
+      "oneShot": true,
+      "origin": [
+        0.5,
+        0.5
+      ],
+      "suggestedFps": 10.0
+    }
+  ],
+  "sheet": "assets/m3d-feedback-visual/exported/m3d_thien_son_dao_vfx/m3d_thien_son_dao_vfx.png",
+  "atlas": "assets/m3d-feedback-visual/exported/m3d_thien_son_dao_vfx/m3d_thien_son_dao_vfx.json",
+  "status": "preview-validated",
+  "directorApproved": false,
+  "timingAuthority": "All duration/FPS and anchors are visual suggestions. Never infer damage, hitboxes or cooldowns from frames.",
+  "productionIntegrated": false,
+  "phaserProductionVerified": false,
+  "opaqueWorldBoundsUnion": [
+    -119,
+    -97,
+    120,
+    78
+  ]
+}

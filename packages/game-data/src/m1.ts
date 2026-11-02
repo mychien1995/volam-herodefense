@@ -4,6 +4,7 @@ import {
   addThieuLamProgression,
 } from './thieu-lam.js';
 import { z } from 'zod';
+import { economySchema, economyTrial } from './economy.js';
 import { defaultBranches } from './default-builds.js';
 import type { SimulationConfig } from '@volam/game-core';
 import { arena } from './arena.js';
@@ -30,6 +31,15 @@ const point = z.strictObject({
   y: z.number().finite(),
 });
 export const simulationConfigSchema = z.strictObject({
+  mobility: z
+    .strictObject({
+      charges: count.min(1).max(2),
+      rechargeTicks: count.min(1),
+      distance: positive,
+      speed: positive,
+    })
+    .optional(),
+  dungeonAggro: z.boolean().optional(),
   progression: progressionSchema.optional(),
   tickRate: count.min(10).max(60),
   inputTimeoutTicks: count.min(1),
@@ -60,6 +70,7 @@ export const simulationConfigSchema = z.strictObject({
     })
     .optional(),
   creepRespawn: z.boolean().default(true),
+  economy: economySchema.optional(),
   creep: z.strictObject({
     hp: positive,
     defense: z.number().nonnegative(),
@@ -89,6 +100,7 @@ const shot = {
 };
 /** M1 playable tuning only. No final school balance, dungeon or invasion recipes. */
 const initialConfig: SimulationConfig = simulationConfigSchema.parse({
+  mobility: { charges: 2, rechargeTicks: 240, distance: 120, speed: 720 },
   tickRate: 30,
   inputTimeoutTicks: 15,
   width: arena.width,
@@ -188,6 +200,7 @@ const initialConfig: SimulationConfig = simulationConfigSchema.parse({
 });
 
 export const m1Config: SimulationConfig = simulationConfigSchema.parse({
+  economy: economyTrial,
   ...initialConfig,
   basics: {
     ...initialConfig.basics,

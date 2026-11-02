@@ -1,7 +1,11 @@
+import { dungeonWaypoint } from './dungeon-navigation.js';
+import { dash, blink, rechargeDash } from './mobility.js';
 import { stepChu, constrainChuTrap } from './chu-ba-thong.js';
 import { expireCombos } from './combos.js';
+import { bufferComboFinisher, takeComboFinisher } from './combo-finisher.js';
 import { stepBossEncounter } from './boss-encounter.js';
-import { nextBasic } from './basic-attacks.js';
+import { nextBasic, expireBasicChain } from './basic-attacks.js';
+import { separateDungeonCreeps } from './creep-spacing.js';
 import { captureConfinement, confineMovement } from './confinement.js';
 import {
   equippedAbility,
@@ -109,6 +113,7 @@ export function addHero(
   config: SimulationConfig,
 ): Hero {
   const hero: Hero = {
+    dashCharges: config.mobility?.charges ?? 0,
     schoolId: 'cai_bang',
     id,
     nickname,
@@ -219,6 +224,10 @@ function runCommand(
     }
     return;
   }
+  if (command.kind === 'dash') {
+    dash(world, hero, config);
+    return;
+  }
   if (command.kind === 'basic') {
     if (
       hasStatus(hero, 'stun', world.tick) ||
@@ -231,10 +240,22 @@ function runCommand(
       hero.cooldown =
         world.tick + abilityCooldown(hero, ability, config, world.tick, true);
       const next = nextBasic(hero, ability);
+      if (ability.manualChain) {
+        if (hero.basicChains?.[ability.id] === 0) {
+          hero.cooldown = world.tick + ability.manualChain.cooldownTicks;
+          delete hero.basicChainDeadline;
+        } else
+          hero.basicChainDeadline = {
+            abilityId: ability.id,
+            until: world.tick + ability.manualChain.idleTicks,
+          };
+      }
       perform(world, hero, next.ability, config, 'attack', next.stage);
     }
   }
   if (command.kind === 'cast') {
+    if (!Number.isInteger(command.slot) || command.slot < 0 || command.slot > 3)
+      return;
     if (
       hasStatus(hero, 'stun', world.tick) ||
       hasStatus(hero, 'silence', world.tick) ||
@@ -242,6 +263,7 @@ function runCommand(
     )
       return;
     const ability = equippedAbility(hero, command.slot, config);
+    if (ability && blink(world, hero, ability.id, config)) return;
     const togglingOff =
       ability?.effect.mode === 'mana_shield' &&
       ability.effect.toggle &&
@@ -288,6 +310,10 @@ function advanceProjectile(
   shot: Projectile,
   config: SimulationConfig,
 ): void {
+  if (shot.lingerUntil !== undefined) {
+    if (world.tick >= shot.lingerUntil) world.projectiles.delete(shot.id);
+    return;
+  }
   const length = Math.min(
     shot.remaining,
     Math.hypot(shot.vx, shot.vy) / config.tickRate,
@@ -377,6 +403,8 @@ function advanceProjectile(
           fx: dir.x,
           fy: dir.y,
           slowedBonus: shot.effect.slowedBonus,
+          combo: shot.combo,
+          comboTargets: shot.comboTargets,
         },
       );
       if (hit && shot.refund && !shot.refund.used) {
@@ -403,7 +431,12 @@ function advanceProjectile(
         for (const status of shot.effect.statuses ?? [])
           applyStatus(enemy, status, shot.ownerId, shot.abilityId, world.tick);
       const before = { x: enemy.x, y: enemy.y };
-      if (enemy.hp > 0 && shot.effect.knockback)
+      if (
+        enemy.hp > 0 &&
+        shot.effect.knockback &&
+        (shot.effect.knockbackChance === undefined ||
+          world.random() < shot.effect.knockbackChance)
+      )
         displace(
           enemy,
           dir.x * shot.effect.knockback,
@@ -427,9 +460,19 @@ function advanceProjectile(
     wallT < Infinity ||
     (shot.remaining <= length &&
       (!shot.effect.boomerang || shot.leg === 'return'))
-  )
-    world.projectiles.delete(shot.id);
-  else {
+  ) {
+    if (
+      shot.effect.blinkWindowTicks &&
+      wallT === Infinity &&
+      shot.remaining <= length
+    ) {
+      shot.x = end.x;
+      shot.y = end.y;
+      shot.remaining = 0;
+      shot.lingerUntil = world.tick + shot.effect.blinkWindowTicks;
+      shot.stage = 'sword_linger';
+    } else world.projectiles.delete(shot.id);
+  } else {
     shot.x = end.x;
     shot.y = end.y;
     shot.remaining -= length;
@@ -468,6 +511,13 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   expireStatuses(world);
   expireCombos(world);
   for (const hero of world.heroes.values()) {
+    expireBasicChain(
+      hero,
+      world.tick,
+      config.basics[hero.basicChainDeadline?.abilityId ?? '']?.manualChain
+        ?.cooldownTicks ?? 0,
+    );
+    rechargeDash(hero, world.tick, config);
     if (hero.hp <= 0) {
       hero.pose = 'death';
       cancelOwnedEffects(world, hero.id);
@@ -483,7 +533,10 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     if (
       (movement.x || movement.y) &&
       !hasStatus(hero, 'stun', world.tick) &&
-      !hasStatus(hero, 'dash', world.tick)
+      !hasStatus(hero, 'dash', world.tick) &&
+      !(world.actions ?? []).some(
+        (a) => a.ownerId === hero.id && a.effect.mode === 'projectile',
+      )
     ) {
       hero.fx = movement.x;
       hero.fy = movement.y;
@@ -520,10 +573,20 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   stepChu(world, config);
   for (const input of world.pending.splice(0)) {
     const hero = world.heroes.get(input.heroId);
-    if (hero) runCommand(world, hero, input.command, config);
+    if (hero) {
+      if (bufferComboFinisher(world, hero, input.command, config)) continue;
+      if (input.command.kind !== 'move') delete hero.comboFinisher;
+      runCommand(world, hero, input.command, config);
+    }
   }
   constrainChuTrap(world, config);
   captureConfinement(world, config);
+  // Resolve from the previous collision tick before stepping the new action,
+  // preserving the original 18-tick spacing between finisher volleys.
+  for (const hero of world.heroes.values()) {
+    const command = takeComboFinisher(world, hero, config);
+    if (command) runCommand(world, hero, command, config);
+  }
   stepSkillActions(world, config);
   stepAreas(world, config);
   stepSupports(world, config);
@@ -553,6 +616,10 @@ export function stepWorld(world: World, config: SimulationConfig): void {
             critMultiplier: scheduled.critMultiplier ?? config.critMultiplier,
           }),
       effect: scheduled.ability.effect,
+      ...(scheduled.ability.combo ? { combo: scheduled.ability.combo } : {}),
+      ...(scheduled.comboTargets
+        ? { comboTargets: scheduled.comboTargets }
+        : {}),
       ...(scheduled.ability.effect.boomerang
         ? { leg: 'outbound' as const }
         : {}),
@@ -565,6 +632,9 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     advanceProjectile(world, shot, config);
   constrainChuTrap(world, config);
   stepBossEncounter(world, config);
+  const creepStarts = config.dungeonAggro
+    ? new Map([...world.creeps].map(([id, e]) => [id, { x: e.x, y: e.y }]))
+    : undefined;
   for (const [id, enemy] of world.creeps) {
     if (
       enemy.summonedBy &&
@@ -610,7 +680,9 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     const nearest = [...world.heroes.values()]
       .filter(
         (player) =>
-          player.hp > 0 && distance(player, enemy) < stats.detectionRange,
+          player.hp > 0 &&
+          (config.dungeonAggro ||
+            distance(player, enemy) < stats.detectionRange),
       )
       .sort(
         (a, b) =>
@@ -644,14 +716,27 @@ export function stepWorld(world: World, config: SimulationConfig): void {
         x: enemy.spawn.x,
         y: enemy.spawn.y + (Math.floor(world.tick / 90) % 2 ? 32 : -32),
       };
-    const delta = direction(target.x - enemy.x, target.y - enemy.y);
+    if (config.dungeonAggro) enemy.aggroTargetId = hero?.id ?? '';
+    const waypoint =
+      config.dungeonAggro && hero
+        ? dungeonWaypoint(enemy, hero, world.tick, config)
+        : target;
+    const delta = direction(waypoint.x - enemy.x, waypoint.y - enemy.y);
     const moving =
-      distance(enemy, target) >
-      (hero
-        ? stats.attackRange
-        : objective
-          ? stats.attackRange + objective.radius
-          : 2);
+      !(config.dungeonAggro && !hero && !objective) &&
+      (distance(enemy, target) >
+        (hero
+          ? stats.attackRange
+          : objective
+            ? stats.attackRange + objective.radius
+            : 2) ||
+        !!(
+          config.dungeonAggro &&
+          hero &&
+          config.collision.some(
+            (w) => segmentRect(enemy, hero, w) !== undefined,
+          )
+        ));
     if (moving && !hasStatus(enemy, 'stun', world.tick)) {
       const before = { x: enemy.x, y: enemy.y };
       enemy.fx = delta.x;
@@ -683,7 +768,13 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       !moving &&
       world.tick >= enemy.cooldown &&
       !hasStatus(enemy, 'stun', world.tick) &&
-      !hasStatus(enemy, 'disarm', world.tick)
+      !hasStatus(enemy, 'disarm', world.tick) &&
+      !(
+        config.dungeonAggro &&
+        config.collision.some(
+          (w) => segmentRect(enemy, victim, w) !== undefined,
+        )
+      )
     ) {
       enemy.cooldown =
         world.tick +
@@ -703,7 +794,27 @@ export function stepWorld(world: World, config: SimulationConfig): void {
         x: enemy.x,
         y: enemy.y,
       });
-      hurt(world, victim, enemy.id, 'creep_strike', stats.damage, config);
+      if (enemy.rangedAttack && hero) {
+        const effect = enemy.rangedAttack,
+          aim = direction(hero.x - enemy.x, hero.y - enemy.y);
+        const id = `creep_projectile_${world.nextId++}`;
+        world.projectiles.set(id, {
+          id,
+          ownerId: enemy.id,
+          abilityId: 'co_mo_minion_needle',
+          x: enemy.x,
+          y: enemy.y,
+          vx: aim.x * effect.speed,
+          vy: aim.y * effect.speed,
+          remaining: effect.range,
+          rawDamage: effect.damage,
+          hostile: true,
+          effect,
+          critChance: 0,
+          critMultiplier: 1,
+        });
+      } else
+        hurt(world, victim, enemy.id, 'creep_strike', stats.damage, config);
       if (world.statue?.hp === 0) break;
     }
     if (world.tick >= enemy.actionUntil)
@@ -714,6 +825,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   // unique loot in the same tick, before projecting the authoritative snapshot.
   if (world.boss && (world.creeps.get(world.boss.actorId)?.hp ?? 1) <= 0)
     stepBossEncounter(world, config);
+  separateDungeonCreeps(world, config, creepStarts);
   for (const actor of [...world.heroes.values(), ...world.creeps.values()]) {
     if (actor.hp <= 0) actor.pose = 'death';
     else if (world.tick < actor.hurtUntil) actor.pose = 'hurt';

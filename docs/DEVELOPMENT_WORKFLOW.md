@@ -2,6 +2,8 @@
 
 Use focused checks while iterating. After the last implementation change, run the final pipeline once with the relevant browser scope. Do not separately run typecheck, test, build and asset preparation before or after that successful pipeline unless a new change or failure requires them.
 
+Read [session execution lessons](SESSION_EXECUTION_LESSONS.md) before choosing the scope. They record the M3D Q/W/E regression, browser acknowledgement failures, reference reuse and measured costs. Apply the current-practice section now; treat the tooling backlog as proposals until implemented and validated.
+
 | Work | Command |
 | --- | --- |
 | One unit/integration area | `pnpm check:quick tests/skill-assets.test.ts` (accepts more files and Vitest filters) |

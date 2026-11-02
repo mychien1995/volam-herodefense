@@ -1,7 +1,15 @@
 import Phaser from 'phaser';
+import { replaceR3ArenaProp } from './m3d-r3-arena.js';
 import type { LobbyState } from '@volam/game-protocol';
 import type { KimAbility, KimView } from '@volam/game-core';
 import playback from './kim-playback.json';
+import { bossArenaScale as S, kimLuanDungeon } from '@volam/game-data';
+import {
+  R3Painter,
+  r3NailAxis,
+  r3Tag,
+  type R3Direction,
+} from './m3d-r3-art.js';
 const bundles = playback.bundles as Record<
   string,
   {
@@ -59,16 +67,29 @@ export function createKimArena(
   scene.textures
     .get('kl_terrain')
     .setFilter(Phaser.Textures.FilterMode.NEAREST);
-  map.createLayer('ground', tiles)!.setDepth(-10000).setName('kim_luan:ground');
+  map
+    .createLayer('ground', tiles)!
+    .setScale(S)
+    .setDepth(-10000)
+    .setName('kim_luan:ground');
   const props = (map.getObjectLayer('scenery')?.objects ?? []).map((o) =>
     scene.add
-      .image(o.x ?? 0, o.y ?? 0, key(o.name))
+      .image((o.x ?? 0) * S, (o.y ?? 0) * S, key(o.name))
+      .setScale(S)
       .setOrigin(0.5, 1)
-      .setDepth(o.y ?? 0)
+      .setDepth((o.y ?? 0) * S)
       .setName('kim_luan:prop:' + o.name),
   );
+  props.forEach((image, i) =>
+    replaceR3ArenaProp(
+      image,
+      'kim_luan',
+      map.getObjectLayer('scenery')!.objects[i]!.name,
+      S,
+    ),
+  );
   scene.add
-    .text(640, 685, 'Lối ra · Space', {
+    .text(kimLuanDungeon.exit.x, kimLuanDungeon.exit.y + 12, 'Lối ra · Space', {
       fontSize: '11px',
       color: '#ffe4af',
       backgroundColor: '#24180f',
@@ -97,6 +118,7 @@ const body: Record<KimAbility, string> = {
   dai_luc_pha_son_boulder: 'boulder',
   hang_ma_tam_lien_chan: 'slam',
   kim_sweep: 'sweep',
+  kim_hand_chop: 'hand_chop',
   kim_luan_truy_hon: 'channel',
   ngu_luan_ho_the: 'channel',
   ngu_luan_phong_toa: 'channel',
@@ -106,6 +128,7 @@ const body: Record<KimAbility, string> = {
 };
 /** State projection only. It never predicts hits, target changes, RNG, or rewards. */
 export class KimLuanRenderer {
+  private readonly r3: R3Painter;
   private views = new Map<string, Phaser.GameObjects.Image>();
   private labels = new Map<string, Phaser.GameObjects.Text>();
   private used = new Set<string>();
@@ -119,9 +142,11 @@ export class KimLuanRenderer {
   private reviewSprite: Phaser.GameObjects.Sprite | undefined;
   private flashes = new Map<string, number>();
   constructor(private scene: Phaser.Scene) {
+    this.r3 = new R3Painter(scene);
     this.warnings = scene.add.graphics().setDepth(200);
   }
   clear() {
+    this.r3.clear();
     for (const v of this.views.values()) v.destroy();
     this.views.clear();
     for (const l of this.labels.values()) l.destroy();
@@ -223,6 +248,7 @@ export class KimLuanRenderer {
       v.tick + Math.min(1, ((this.scene.time.now - this.received) * 30) / 1000);
     const seconds = this.tick / 30;
     this.used.clear();
+    this.r3.begin();
     this.warnings.clear();
     for (const l of this.labels.values()) l.setVisible(false);
     for (const [id, a] of state.creeps) {
@@ -260,7 +286,55 @@ export class KimLuanRenderer {
         )
           age %= cast.abilityId === 'thiet_phien_lien_hoan' ? 0.5 : 0.75;
       }
-      const sprite = this.cel(id, bundle, clip, a.x, a.y, age);
+      let sprite: Phaser.GameObjects.Image;
+      if (cast?.abilityId === 'kim_hand_chop') {
+        const windup = cast.activeAt - cast.startedAt,
+          since = this.tick - cast.startedAt,
+          after = this.tick - cast.activeAt;
+        const phase =
+          since < windup * 0.5
+            ? 'anticipation'
+            : since < windup
+              ? 'raise'
+              : after < 4
+                ? 'chop'
+                : 'recovery';
+        const phaseStart =
+          phase === 'anticipation'
+            ? cast.startedAt
+            : phase === 'raise'
+              ? cast.startedAt + windup * 0.5
+              : phase === 'chop'
+                ? cast.activeAt
+                : cast.activeAt + 4;
+        const duration =
+          phase === 'anticipation' || phase === 'raise'
+            ? windup * 0.5
+            : phase === 'chop'
+              ? 4
+              : Math.max(1, cast.endsAt - phaseStart);
+        sprite = this.r3.draw(
+          id,
+          'r3_kim_hand_chop',
+          phase,
+          facing(cast.fx, cast.fy) as R3Direction,
+          a.x,
+          a.y,
+          ((this.tick - phaseStart) * 1000) / 30,
+          { duration: (duration * 1000) / 30 },
+        );
+      } else sprite = this.cel(id, bundle, clip, a.x, a.y, age);
+      if (bundle === 'kim_luan_actions' && clip === 'channel') {
+        const pivots: Record<string, number[]> = {
+          channel_0: [79.5, 133],
+          channel_1: [89.5, 128],
+          channel_2: [94.5, 128],
+          channel_3: [97, 128],
+        };
+        const pivot = pivots[String(sprite.frame.name)],
+          size = r3Tag('kim_luan_actions', 'channel').asset.frameDimensions;
+        if (pivot) sprite.setOrigin(pivot[0]! / size[0], pivot[1]! / size[1]);
+      }
       if (this.scene.time.now - (this.flashes.get(id) ?? -1000) < 100)
         sprite.setTint(0xffe8c3);
       else sprite.clearTint();
@@ -301,9 +375,9 @@ export class KimLuanRenderer {
             this.warnings.lineStyle(2, 0xffc35a, 0.45);
             this.warnings.lineBetween(
               e.x,
-              e.fy > 0 ? 270 : 690,
+              (e.fy > 0 ? 270 : 690) * S,
               e.x,
-              e.fy > 0 ? 295 : 665,
+              (e.fy > 0 ? 295 : 665) * S,
             );
           }
           continue;
@@ -416,6 +490,45 @@ export class KimLuanRenderer {
         continue;
       }
       if (warning) continue;
+      if (
+        e.ownerId === 'kim_luan_phap_vuong' &&
+        (e.kind === 'shot' || e.kind === 'orbit')
+      ) {
+        if (e.abilityId === 'kim_hand_chop') {
+          const d = facing(e.fx, e.fy) as R3Direction,
+            cardinal = {
+              right: 0,
+              down: Math.PI / 2,
+              left: Math.PI,
+              up: -Math.PI / 2,
+            }[d];
+          this.r3.draw(
+            e.id,
+            'r3_crescent_' + d,
+            age < 0.1 ? 'birth' : 'travel',
+            d,
+            e.x,
+            e.y - 30,
+            Math.max(0, age) * 1000,
+            {
+              scale: 1.35,
+              rotation: Math.atan2(e.fy, e.fx) - cardinal,
+              loop: age >= 0.1,
+            },
+          );
+        } else
+          this.r3.draw(
+            e.id,
+            'r3_round_wheel',
+            'spin_billboard',
+            undefined,
+            e.x,
+            e.y - 30,
+            Math.max(0, age) * 1000,
+            { scale: 0.7, loop: true },
+          );
+        continue;
+      }
       const hoac = e.ownerId === 'hoac_do',
         dat = e.ownerId === 'dat_nhi_ba';
       let bundle = hoac ? 'hoac_do_fx' : dat ? 'dat_nhi_ba_fx' : 'kim_luan_fx',
@@ -437,7 +550,30 @@ export class KimLuanRenderer {
         : dat
           ? 0.6
           : 0.45;
-      this.cel(e.id, bundle, clip, e.x, e.y, Math.max(0, age), scale, angle);
+      const image = this.cel(
+        e.id,
+        bundle,
+        clip,
+        e.x,
+        e.y - (hoac ? 28 : 0),
+        Math.max(0, age),
+        scale,
+        angle,
+      );
+      if (hoac && clip === 'nail') {
+        const axis =
+          r3NailAxis[String(image.frame.name) as keyof typeof r3NailAxis];
+        if (!axis)
+          throw Error('Unmeasured approved nail cel ' + image.frame.name);
+        image
+          .setOrigin(axis.pivot[0]! / 256, axis.pivot[1]! / 256)
+          .setRotation(Math.atan2(e.fy, e.fx) + axis.rotationOffsetRadians);
+        if (!image.getData('r3-brightness')) {
+          image.enableFilters();
+          image.filters!.internal.addColorMatrix().colorMatrix.brightness(1.6);
+          image.setData('r3-brightness', true);
+        }
+      }
     }
     for (const cast of v.casts)
       if (cast.abilityId === 'cuong_phong_van_nhan') {
@@ -458,6 +594,7 @@ export class KimLuanRenderer {
         image.destroy();
         this.views.delete(id);
       }
+    this.r3.end();
   }
   inspect() {
     return {
@@ -465,6 +602,7 @@ export class KimLuanRenderer {
       clips: [...this.clips],
       phase: this.latest?.phase,
       enraged: this.latest?.enraged,
+      r3: this.r3.inspect(),
       entities: [...this.views].map(([id, i]) => ({
         id,
         asset: i.texture.key,

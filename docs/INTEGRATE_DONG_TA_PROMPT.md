@@ -85,4 +85,3 @@ Không đăng ký Đảo Ảnh Di Hình, Đào Hoa Loạn Ảnh Trận hoặc c�
 5. Dùng QA session/ports riêng; không mượn hay dừng service của chat khác. Giữ video/trace playback tắt; chỉ PNG, frame observations và logs. Capture actual match 1×/normal zoom, không chỉ standalone viewer.
 6. Sau thay đổi implementation cuối, chạy pnpm check:final với browser config/scope mới phù hợp một lần, ví dụ --config playwright.dong-ta.config.ts nếu tạo fixture đó. Không dùng một gallery-only pass làm final acceptance. Nếu chỉ sửa fixture/metadata sau kết quả thành công, rerun đúng stage bị ảnh hưởng theo docs/DEVELOPMENT_WORKFLOW.md.
 7. Cập nhật docs/DONG_TA_INTEGRATION.md, spec/acceptance/architecture khi behavior thật đổi; ghi rõ rule confirmed, số thử, approval và limitation. Báo file thay đổi, commands/results thực chạy, PNG thực tế, state/rewards test và pending final runtime/balance approval. Không tuyên bố complete khi mới có visuals hoặc chưa có multiplayer authoritative combat.
-
