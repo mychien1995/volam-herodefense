@@ -1,4 +1,4 @@
-import type { Point, SimulationConfig } from './types.js';
+import type { Point, SimulationConfig, ProjectileEffect } from './types.js';
 
 export type BossAbilityId =
   | 'ly_mac_sau_basic'
@@ -30,6 +30,8 @@ export interface BossEncounterDefinition {
   attacks: BossAttackDefinition[];
   rotation: BossAbilityId[];
   summonCount: number;
+  summonCountChoices?: number[];
+  summonProjectile?: ProjectileEffect;
   summonLimit: number;
   summonLifetimeTicks: number;
   summonStats: SimulationConfig['creep'];

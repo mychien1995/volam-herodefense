@@ -87,6 +87,12 @@ export class ArenaScene extends Phaser.Scene {
   constructor() {
     super('Arena');
   }
+  panSpectator(x: number, y: number): void {
+    if (!this.snapshot?.players.get(this.sessionId)?.bossSpectator) return;
+    this.cameras.main.stopFollow();
+    this.cameras.main.scrollX += x * 24;
+    this.cameras.main.scrollY += y * 24;
+  }
   preload(): void {
     preloadArt(this);
   }
@@ -452,7 +458,10 @@ export class ArenaScene extends Phaser.Scene {
           Math.round((28 * actor.hp) / actor.maxHp),
           3,
         );
-      if (id === this.sessionId && this.followed !== id) {
+      if (id === this.sessionId && state?.players.get(id)?.bossSpectator) {
+        if (this.followed) this.cameras.main.stopFollow();
+        this.followed = '';
+      } else if (id === this.sessionId && this.followed !== id) {
         this.cameras.main.startFollow(view.sprite, true, 1, 1, 0, 48);
         this.followed = id;
       }
@@ -636,6 +645,21 @@ export class ArenaScene extends Phaser.Scene {
       chu: this.chu?.inspect(),
       ready: this.ready,
       sceneTime: this.time.now,
+      r3Scenery: this.children.list
+        .filter((o) => o.name.endsWith(':r3'))
+        .map((o) => {
+          const p = o as Phaser.GameObjects.Image;
+          return {
+            name: p.name,
+            frame: p.frame.name,
+            texture: p.texture.key,
+            x: p.x,
+            y: p.y,
+            depth: p.depth,
+            origin: [p.originX, p.originY],
+            scale: [p.scaleX, p.scaleY],
+          };
+        }),
       zoneId: this.zoneId,
       hongLiet: this.hongLiet?.inspect(),
       kim: this.kim?.inspect(),

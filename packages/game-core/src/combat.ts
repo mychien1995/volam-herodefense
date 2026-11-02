@@ -13,7 +13,7 @@ import { ownerProtection } from './protection.js';
 import type { StatusEffect } from './types.js';
 import type { ComboSpec } from './types.js';
 export function emit(world: World, event: Omit<CombatEvent, 'id'>): void {
-  world.events.push({ id: world.nextEvent++, ...event });
+  world.events.push({ id: world.nextEvent++, tick: world.tick, ...event });
 }
 export function hurt(
   world: World,

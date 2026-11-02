@@ -27,6 +27,7 @@ export * from './arena.js';
 export * from './m1.js';
 export * from './schools.js';
 export * from './dungeon.js';
+export { bossArenaScale } from './boss-arena-geometry.js';
 export * from './desert.js';
 export * from './beach.js';
 export * from './ly-mac-sau.js';

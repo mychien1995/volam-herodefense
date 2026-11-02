@@ -2,10 +2,13 @@ import type { CreepDungeonDefinition, ChuDefinition } from '@volam/game-core';
 import { validateChuDefinition } from '@volam/game-core';
 import { m1Config } from './m1.js';
 import { creepDungeon } from './dungeon.js';
+import { enlargeBossArena } from './boss-arena-geometry.js';
 import map from './chu-ba-thong-map.json' with { type: 'json' };
 const hz = m1Config.tickRate;
 /** Director-approved choreography; damage/economy numbers remain provisional trial tuning. */
 export const chuBaThongTuning: ChuDefinition = {
+  movementSpeed: 110,
+  basicPalmIntervalTicks: 33,
   spawn: { x: 640, y: 300 },
   hp: 6000,
   defense: 30,
@@ -32,8 +35,8 @@ export const chuBaThongTuning: ChuDefinition = {
   sweepFrontOffset: 80,
   fistReach: 340,
   fistHalfWidth: 65,
-  spinSpeedX: 560,
-  spinSpeedY: 350,
+  spinSpeedX: 640,
+  spinSpeedY: 400,
   spinRadius: 112,
   pullRadius: 210,
   pullSpeed: 60,
@@ -49,7 +52,7 @@ export const chuBaThongTuning: ChuDefinition = {
   ],
 };
 validateChuDefinition(chuBaThongTuning, m1Config);
-export const chuBaThongDungeon: CreepDungeonDefinition = {
+export const chuBaThongDungeon: CreepDungeonDefinition = enlargeBossArena({
   ...creepDungeon,
   id: 'chu_ba_thong',
   chuBoss: chuBaThongTuning,
@@ -69,4 +72,4 @@ export const chuBaThongDungeon: CreepDungeonDefinition = {
   creepRoster: [],
   hpPerAdditionalPlayer: 0,
   damagePerAdditionalPlayer: 0,
-};
+});

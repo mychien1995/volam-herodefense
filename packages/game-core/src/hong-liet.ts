@@ -18,6 +18,7 @@ import type { Creep, Hero, Point, SimulationConfig, World } from './types.js';
 
 const zeroCrit = { critChance: 0, critMultiplier: 1 };
 export class HongLietEncounter {
+  generation = 0;
   readonly effects = new Map<string, BossCue>();
   cast: BossCast | undefined;
   bossId = 'hong_liet_boss';
@@ -31,6 +32,7 @@ export class HongLietEncounter {
   private summons = new Map<string, number>();
   constructor(readonly definition: HongLietDefinition) {}
   initialize(world: World, config: SimulationConfig): void {
+    this.generation++;
     this.clear(world);
     world.creeps.clear();
     const d = this.definition,
@@ -169,13 +171,18 @@ export class HongLietEncounter {
     if (world.tick >= this.nextActionAt) {
       const order: HongLietAbility[] = [
         'hong_liet_a1',
-        'hong_liet_a2',
         'dung_nham_liet_dia',
+        'hong_liet_a2',
         'hoa_son_bao_phat',
+        'hong_liet_a1',
         'liet_diem_phong_toa',
+        'hong_liet_a2',
         'hoa_tien_te_phat',
+        'hong_liet_a1',
         'thiet_ky_trieu_binh',
+        'hong_liet_a2',
         'van_ly_nham_hoa',
+        'hong_liet_a1',
         'hoa_phao_thien_la',
       ];
       for (let i = 0; i < order.length; i++) {
@@ -284,15 +291,17 @@ export class HongLietEncounter {
     if (abilityId === 'hong_liet_a1') {
       const shared = new Set<string>();
       for (const offset of [
+        -2 * this.definition.a1Spread,
         -this.definition.a1Spread,
         0,
         this.definition.a1Spread,
+        2 * this.definition.a1Spread,
       ]) {
         const angle = Math.atan2(fy, fx) + offset;
-        this.cue(
+        const blade = this.cue(
           world,
           cast,
-          'line',
+          'projectile',
           {
             x: boss.x + fx * this.definition.a1ForwardOffset,
             y: boss.y + fy * this.definition.a1ForwardOffset,
@@ -302,11 +311,16 @@ export class HongLietEncounter {
           a.range,
           a.radius,
           cast.activeAt,
-          cast.activeAt + 1,
+          cast.activeAt +
+            Math.ceil(
+              (a.range / this.definition.projectileSpeed) * config.tickRate,
+            ) +
+            1,
           a.damage,
           0,
           shared,
         );
+        blade.speed = this.definition.projectileSpeed;
       }
     } else if (abilityId === 'hong_liet_a2')
       this.cue(

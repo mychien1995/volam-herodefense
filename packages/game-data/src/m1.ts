@@ -98,7 +98,7 @@ const shot = {
 };
 /** M1 playable tuning only. No final school balance, dungeon or invasion recipes. */
 const initialConfig: SimulationConfig = simulationConfigSchema.parse({
-  mobility: { charges: 2, rechargeTicks: 180, distance: 120, speed: 720 },
+  mobility: { charges: 2, rechargeTicks: 240, distance: 120, speed: 720 },
   tickRate: 30,
   inputTimeoutTicks: 15,
   width: arena.width,

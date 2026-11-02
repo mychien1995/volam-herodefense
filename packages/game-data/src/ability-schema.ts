@@ -31,6 +31,10 @@ const status = z.strictObject({
   toggle: z.boolean().optional(),
 });
 const projectile = z.strictObject({
+  windupTicks: count.min(1).optional(),
+  recoveryTicks: count.optional(),
+  laneOffsets: z.array(z.number().finite()).min(1).max(8).optional(),
+  knockbackChance: z.number().min(0).max(1).optional(),
   mode: z.literal('projectile'),
   damage: positive,
   speed: positive,
@@ -53,7 +57,23 @@ const projectile = z.strictObject({
   manaRefund: z.number().finite().nonnegative().optional(),
   slowedBonus: z.number().finite().nonnegative().optional(),
 });
+const area = z.strictObject({
+  mode: z.literal('area'),
+  durationTicks: count.min(1),
+  tickInterval: count.min(1),
+  radius: positive,
+  damage: z.number().finite().nonnegative(),
+  statuses: z.array(status).optional(),
+  confines: z.boolean().optional(),
+  protectOwner: z.boolean().optional(),
+  followOwner: z.boolean().optional(),
+  ownerRegenFraction: z.number().finite().positive().max(1).optional(),
+  oncePerTarget: z.boolean().optional(),
+});
 const arc = z.strictObject({
+  lineWidth: positive.optional(),
+  knockbackChance: z.number().min(0).max(1).optional(),
+  residualArea: area.optional(),
   mode: z.literal('arc'),
   damage: z.number().nonnegative(),
   range: positive,
@@ -84,6 +104,13 @@ export const abilitySchema = z
     nameVi: z.string().min(1),
     cooldownTicks: count.min(1),
     manaCost: z.number().nonnegative(),
+    manualChain: z
+      .strictObject({
+        idleTicks: count.min(1),
+        cooldownTicks: count.min(1),
+        finisherProjectile: projectile,
+      })
+      .optional(),
     minIntervalTicks: count.min(1).optional(),
     basicCombo: z
       .array(
@@ -125,18 +152,7 @@ export const abilitySchema = z
         manaPerDamage: positive,
         toggle: z.boolean().optional(),
       }),
-      z.strictObject({
-        mode: z.literal('area'),
-        durationTicks: count.min(1),
-        tickInterval: count.min(1),
-        radius: positive,
-        damage: z.number().finite().nonnegative(),
-        statuses: z.array(status).optional(),
-        confines: z.boolean().optional(),
-        protectOwner: z.boolean().optional(),
-        followOwner: z.boolean().optional(),
-        ownerRegenFraction: z.number().finite().positive().max(1).optional(),
-      }),
+      area,
       z.strictObject({
         mode: z.literal('guard_counter'),
         durationTicks: count.min(1),

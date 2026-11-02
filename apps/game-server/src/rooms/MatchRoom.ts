@@ -348,14 +348,25 @@ export class MatchRoom extends Room<{
           );
           return;
         }
-        const reason =
+        let reason =
           input.action === 'enter'
             ? this.simulation.enter(
                 client.sessionId,
-                input.access,
+                input.access ?? 'private',
                 input.destination,
               )
-            : this.simulation.exit(client.sessionId);
+            : input.action === 'summon-help'
+              ? this.simulation.summonHelp(client.sessionId, Date.now())
+              : input.action === 'reply-invitation'
+                ? this.simulation.replyInvitation(
+                    client.sessionId,
+                    input.invitationId,
+                    input.accept,
+                    Date.now(),
+                  )
+                : this.simulation.exit(client.sessionId);
+        if (!reason && input.action === 'enter' && input.summonHelp)
+          reason = this.simulation.summonHelp(client.sessionId, Date.now());
         if (reason) return reject(reason);
         const hero = this.simulation.hero(client.sessionId);
         if (hero)
@@ -484,7 +495,7 @@ export class MatchRoom extends Room<{
         this.syncState();
         return;
       }
-      this.simulation.step();
+      this.simulation.step(Date.now());
       if (this.simulation.invasion?.defeated) {
         this.state.phase = 'DEFEAT';
         void this.lock();
@@ -546,6 +557,20 @@ export class MatchRoom extends Room<{
       client.sessionId,
       new LobbyPlayer({ nickname: client.auth.nickname }),
     );
+    this.syncState();
+  }
+  override onDrop(client: MatchClient): void {
+    const player = this.state.players.get(client.sessionId);
+    if (player) player.connected = false;
+    this.simulation.disconnect(client.sessionId);
+    this.syncState();
+    this.allowReconnection(client, 30);
+  }
+  override onReconnect(client: MatchClient): void {
+    const player = this.state.players.get(client.sessionId);
+    if (player) player.connected = true;
+    client.view = new StateView();
+    this.simulation.reconnect(client.sessionId);
     this.syncState();
   }
   override onLeave(client: MatchClient): void {
@@ -612,6 +637,7 @@ export class MatchRoom extends Room<{
       defense = this.state.defense,
       statue = this.world.statue;
     if (invasion && statue) {
+      defense.paused = this.simulation.arenaPaused;
       defense.enabled = true;
       defense.statueHp = statue.hp;
       defense.statueMaxHp = statue.maxHp;
@@ -637,6 +663,43 @@ export class MatchRoom extends Room<{
       const hero = this.simulation.hero(id)!;
       const target = this.state.players.get(id);
       if (!target) continue;
+      target.bossInvitation = JSON.stringify(
+        this.simulation.party.invitations.get(id) ?? null,
+      );
+      if (!hero) {
+        target.zoneId = 'arena';
+        continue;
+      }
+      target.bossSpectator = !!hero.bossSpectator;
+      target.actionUntil = hero.actionUntil;
+      target.actionStartedAt = hero.actionStartedAt ?? 0;
+      target.basicStage = hero.basicStage ?? '';
+      const action = zone.world.actions?.find((a) => a.ownerId === id);
+      target.actionState = action
+        ? JSON.stringify({
+            id: action.id,
+            abilityId: action.abilityId,
+            kind: action.kind,
+            startedAt: action.startedAt,
+            nextTick: action.nextTick,
+            until: action.until,
+            remaining: action.remaining,
+            fx: action.fx,
+            fy: action.fy,
+            range: 'range' in action.effect ? action.effect.range : 0,
+            windupTicks:
+              'windupTicks' in action.effect ? action.effect.windupTicks : 0,
+          })
+        : '';
+      const bossZone = !!(
+        zone.dungeon?.boss ||
+        zone.dungeon?.kimBoss ||
+        zone.dungeon?.chuBoss ||
+        zone.dungeon?.bossEncounter
+      );
+      target.bossAttempt = bossZone ? this.simulation.party.attempt(zone) : 0;
+      target.bossRevivalUsed =
+        bossZone && this.simulation.party.life(zone, id).revivalUsed;
       this.syncActor(target, hero, zone.world.tick);
       target.bossItems = JSON.stringify(hero.bossItems ?? []);
       target.bossLoot = JSON.stringify(hero.bossLoot ?? []);
@@ -851,6 +914,7 @@ export class MatchRoom extends Room<{
           this.state.areas.set(id, target);
         }
         Object.assign(target, {
+          startedAt: area.until - area.effect.durationTicks,
           x: area.x,
           y: area.y,
           radius: area.effect.radius,
@@ -868,6 +932,8 @@ export class MatchRoom extends Room<{
           target = new ProjectileState();
           this.state.projectiles.set(id, target);
         }
+        shot.spawnedAt ??= zone.world.tick;
+        target.startedAt = shot.spawnedAt;
         target.x = shot.x;
         target.y = shot.y;
         target.vx = shot.vx;

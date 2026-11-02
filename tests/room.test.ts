@@ -144,7 +144,13 @@ describe('real Colyseus room + SDK clients', () => {
       },
     ]);
     expect(await left).toBe(CloseCode.WITH_ERROR);
-    await expect.poll(() => a.state.players.size).toBe(1);
+    await expect
+      .poll(() => a.state.players.get(b.sessionId)?.connected)
+      .toBe(false);
+    expect(
+      server.getRoomById<MatchRoom>(a.roomId).simulation.hero(b.sessionId),
+    ).toBeUndefined();
+    expect(a.state.players.get(b.sessionId)?.checks).toBe(0);
     expect(a.state.players.get(a.sessionId)?.checks).toBe(0);
   });
   it('disposes an empty room and rejects its expired ID', async () => {

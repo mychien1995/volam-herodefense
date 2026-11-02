@@ -59,7 +59,7 @@ function fixture(skill = 'nhan_kiem_hop_nhat', slot = 0) {
   return { config, world, hero, events, steps, input, cast, enemy };
 }
 describe('M3D feedback tech', () => {
-  it('recharges two dash charges sequentially at exact six-second boundaries', () => {
+  it('recharges two dash charges sequentially at exact eight-second boundaries', () => {
     const f = fixture();
     f.input({ kind: 'dash' });
     const deadline = f.hero.dashRechargeAt!;
@@ -75,12 +75,12 @@ describe('M3D feedback tech', () => {
     expect(f.hero.dashCharges).toBe(0);
     f.steps();
     expect(f.hero.dashCharges).toBe(1);
-    expect(f.hero.dashRechargeAt).toBe(deadline + 180);
-    f.steps(180);
+    expect(f.hero.dashRechargeAt).toBe(deadline + 240);
+    f.steps(240);
     expect(f.hero.dashCharges).toBe(2);
     expect(f.hero.dashRechargeAt).toBeUndefined();
     f.input({ kind: 'dash' });
-    expect(f.hero.dashRechargeAt).toBe(f.world.tick + 180);
+    expect(f.hero.dashRechargeAt).toBe(f.world.tick + 240);
   });
   it('refills a single used charge; replay, stun, active skill and a third dash do not spend charges', () => {
     const f = fixture('liet_phong_dao');
@@ -105,7 +105,7 @@ describe('M3D feedback tech', () => {
     expect(
       submitInput(f.world, 'a', f.hero.lastSequence, { kind: 'dash' }),
     ).toBe(false);
-    f.steps(180);
+    f.steps(240);
     expect(f.hero.dashCharges).toBe(2);
   });
   it('uses movement or facing, cannot tunnel through thin terrain, and grants no immunity', () => {
@@ -145,7 +145,7 @@ describe('M3D feedback tech', () => {
     h.hp = 0;
     match.step();
     expect(h.dashCharges).toBe(1);
-    for (let i = 0; i < 181; i++) match.step();
+    for (let i = 0; i < 241; i++) match.step();
     expect(h.dashCharges).toBe(2);
   });
   it.each([0, 1, 2, 3])(
@@ -243,7 +243,7 @@ describe('M3D feedback tech', () => {
     for (let n = 0; n < 5; n++) {
       for (let i = 0; i < 8; i++)
         submitInput(f.world, 'a', f.hero.lastSequence + 1, { kind: 'basic' });
-      f.steps(28);
+      f.steps(n === 3 ? 30 : 28);
     }
     expect(
       f.events.filter((e) => e.kind === 'attack').map((e) => e.stage),
@@ -316,7 +316,7 @@ describe('M3D feedback tech', () => {
     ).toEqual(['front']);
   });
   it.each([creepDungeon, desertDungeon, beachDungeon])(
-    'spawns more $id creeps with global instance aggro and retargets living members',
+    'uses global private $id aggro without retargeting a player in another instance',
     (d) => {
       const config = structuredClone(m1Config);
       config.creepSpawns = [];
@@ -329,11 +329,16 @@ describe('M3D feedback tech', () => {
       const z = match.zoneOf('a')!;
       expect(z.world.creeps.size).toBe(6);
       expect(z.config.dungeonAggro).toBe(true);
-      a.hp = 0;
+      z.config.collision = []; // Isolate aggro here; the next test covers solid scenery routing.
       const e = [...z.world.creeps.values()][0]!;
-      Object.assign(e, { x: b.x + 100, y: b.y });
+      Object.assign(e, { x: a.x + 100, y: a.y });
       match.step();
-      expect(e.x).toBeLessThan(b.x + 100);
+      expect(e.x).toBeLessThan(a.x + 100);
+      const stopped = { x: e.x, y: e.y };
+      a.hp = 0;
+      match.step();
+      expect({ x: e.x, y: e.y }).toEqual(stopped);
+      expect(match.zoneOf('b')).not.toBe(z);
       expect(b.hp).toBeGreaterThan(0);
     },
   );

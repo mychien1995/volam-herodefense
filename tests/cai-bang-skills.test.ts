@@ -181,14 +181,14 @@ describe('M3A canonical Cái Bang skills', () => {
     f.steps(90);
     expect(hasStatus(f.enemies[0]!, 'slow', f.world.tick)).toBe(false);
   });
-  it('Phá Giáp hits one frontal target, reduces defense for later hits, then restores it', () => {
+  it('Phá Giáp hits targets along the long frontal slam, reduces defense then restores it', () => {
     const f = fixture('pha_giap_bong');
     f.config.creep.defense = 50;
     f.cast();
     expect(f.enemies[0]!.hp).toBe(1000);
     f.steps(6);
     expect(f.enemies[0]!.hp).toBe(963);
-    expect(f.enemies[1]!.hp).toBe(1000);
+    expect(f.enemies[1]!.hp).toBe(963);
     f.steps(24);
     submitInput(f.world, 'a', 2, { kind: 'basic' });
     f.steps(1);

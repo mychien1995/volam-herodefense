@@ -11,6 +11,8 @@ export type ChuPhase =
   | 'ultimate'
   | 'drink';
 export interface ChuDefinition {
+  movementSpeed?: number;
+  basicPalmIntervalTicks?: number;
   spawn: Point;
   hp: number;
   defense: number;
@@ -72,6 +74,7 @@ export interface ChuLoot {
   y: number;
 }
 export interface ChuEncounter {
+  nextBasicAt?: number;
   definition: ChuDefinition;
   phase: ChuPhase;
   phaseIndex: number;

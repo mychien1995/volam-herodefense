@@ -144,7 +144,7 @@ function release(
     const target = world.heroes.get(cast.targetId);
     if (!target || target.hp <= 0) return;
     const aim = direction(target.x - boss.x, target.y - boss.y);
-    missile(boss.x + aim.x * 24, boss.y + aim.y * 24, aim.x, aim.y, target.id);
+    missile(boss.x, boss.y, aim.x, aim.y, target.id);
   } else if (cast.id === 'xich_luyen_chuong') {
     for (let i = 0; i < 8; i++) {
       const angle = (i * Math.PI) / 4;
@@ -153,13 +153,22 @@ function release(
   } else if (cast.id === 'ngu_doc_chuong') {
     for (const p of d.edgeEmitters) missile(p.x, p.y, p.fx, p.fy);
   } else if (cast.id === 'co_mo_kiem_phap') {
+    if (d.summonCountChoices)
+      for (const [id, c] of world.creeps)
+        if (c.summonedBy === boss.id) {
+          cancelOwnedEffects(world, id);
+          world.creeps.delete(id);
+        }
     const living = [...world.creeps.values()].filter(
       (c) => c.summonedBy === boss.id && c.hp > 0,
     ).length;
-    for (const p of d.summonSpawns.slice(
-      0,
-      Math.min(d.summonCount, d.summonLimit - living),
-    )) {
+    const count =
+      d.summonCountChoices?.[
+        Math.floor(world.random() * d.summonCountChoices.length)
+      ] ?? d.summonCount;
+    for (let i = 0; i < Math.min(count, d.summonLimit - living); i++) {
+      const base = d.summonSpawns[i % d.summonSpawns.length]!;
+      const p = { x: base.x + (count > 4 ? (i < 4 ? -18 : 18) : 0), y: base.y };
       if (
         blocked(
           p,
@@ -175,6 +184,7 @@ function release(
       summon.summonedBy = boss.id;
       summon.expiresAt = world.tick + d.summonLifetimeTicks;
       summon.stats = { ...d.summonStats };
+      if (d.summonProjectile) summon.rangedAttack = { ...d.summonProjectile };
       summon.hp = summon.maxHp = d.summonStats.hp;
       emit(world, {
         kind: 'effect',
@@ -335,7 +345,11 @@ export function stepBossEncounter(
     begin(world, config, boss, attack, target);
     return;
   }
-  const basic = d.attacks.find((a) => a.id === 'ly_mac_sau_basic')!;
+  const melee = d.attacks.find((a) => a.id === 'ly_mac_sau_basic')!;
+  const basic =
+    distance(target, boss) <= melee.range + config.radius
+      ? melee
+      : d.attacks.find((a) => a.id === 'bang_phach_ngan_cham')!;
   if (
     distance(target, boss) <= basic.range + config.radius &&
     world.tick >= boss.cooldown &&
@@ -347,7 +361,7 @@ export function stepBossEncounter(
     runtime.nextActionAt = Math.max(nextAt, runtime.cast!.until);
     return;
   }
-  if (distance(target, boss) > basic.range) {
+  if (distance(target, boss) > melee.range) {
     const aim = direction(target.x - boss.x, target.y - boss.y);
     boss.fx = aim.x;
     boss.fy = aim.y;

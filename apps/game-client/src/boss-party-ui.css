@@ -1,0 +1,68 @@
+#boss-party-dialog {
+  position: absolute;
+  inset: 0;
+  z-index: 130;
+  display: grid;
+  place-items: center;
+  background: #061612a8;
+  padding: 24px;
+}
+#boss-party-dialog[hidden] {
+  display: none;
+}
+#boss-party-dialog > section {
+  width: min(560px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  padding: 20px;
+  background: #122a25f5;
+}
+.destination-slot {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+.destination-slot > .destination {
+  width: 100%;
+}
+.boss-information {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 30px;
+  height: 30px;
+  z-index: 1;
+  border-radius: 50%;
+  color: #ffe8a2;
+  background: #13231ee8;
+  border: 1px solid #a58b53;
+}
+.system-buttons button kbd {
+  display: block;
+  font-size: 10px;
+  line-height: 14px;
+  margin-top: 2px;
+  color: #f3d294;
+}
+.loadout-toggle kbd {
+  display: block;
+  font-size: 10px;
+}
+#respawn-overlay button {
+  pointer-events: auto;
+  margin-top: 8px;
+}
+#boss-help-button {
+  position: absolute;
+  right: 16px;
+  top: 116px;
+  z-index: 35;
+  background: #142b26e8;
+  color: #f3d294;
+  border: 1px solid #9b814d;
+  padding: 7px 10px;
+}
+#boss-help-button[hidden] {
+  display: none;
+}

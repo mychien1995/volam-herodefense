@@ -4,9 +4,30 @@ import type {
   ComboSpec,
   ProgressionDefinition,
   StatusSpec,
+  ProjectileEffect,
 } from '@volam/game-core';
 import { abilitySchema } from './ability-schema.js';
 import { skillRankGates } from './progression-data.js';
+import { m3dFeedbackTuning } from './m3d-feedback-tuning.js';
+const tuning = m3dFeedbackTuning.shaolin;
+const projectile = (p: {
+  damage: number;
+  range: number;
+  radius: number;
+  speed: number;
+}): ProjectileEffect => ({
+  mode: 'projectile',
+  damage: p.damage,
+  range: p.range,
+  radius: p.radius,
+  speed: p.speed,
+  count: 1,
+  spacingTicks: 0,
+  splashRadius: 0,
+  burnDamage: 0,
+  burnTicks: 0,
+  piercing: true,
+});
 
 /** M3C3 proposals at 30Hz. These are explicit tuning inputs, not final M3D balance. */
 export const thieuLamComboWindowTicks = 180;
@@ -41,8 +62,13 @@ export const thieuLamBasics: Record<string, Ability> = {
     id: 'thieu_lam_quyen',
     nameVi: 'Thiếu Lâm Quyền',
     manaCost: 0,
-    cooldownTicks: 28,
+    cooldownTicks: 1,
     minIntervalTicks: 6,
+    manualChain: {
+      idleTicks: tuning.chainIdleTicks,
+      cooldownTicks: tuning.chainCooldownTicks,
+      finisherProjectile: projectile(tuning.finisher),
+    },
     basicCombo: [
       { stage: 'left_fist', damageMultiplier: 1 },
       { stage: 'right_fist', damageMultiplier: 1 },
@@ -80,7 +106,7 @@ export const thieuLamSkills: Ability[] = [
     cooldownTicks: 90,
     effect: {
       ...arc(44, 68),
-      originOffset: 42,
+      originOffset: 63,
       statuses: [{ kind: 'defense_break', magnitude: 12, durationTicks: 120 }],
     },
     combo: chain('phat_dong_a', 2),
@@ -98,15 +124,26 @@ export const thieuLamSkills: Ability[] = [
     nameVi: 'Toàn Phong Thoái',
     manaCost: 12,
     cooldownTicks: 90,
-    effect: arc(34, 70, 1, Math.PI),
+    effect: projectile(tuning.tornado),
     combo: chain('phat_dong_b', 1, 2),
   },
   {
     id: 'hoanh_tao_cuoc',
-    nameVi: 'Hoành Tảo Cước',
+    nameVi: 'Ca Diệp Thoái',
     manaCost: 14,
     cooldownTicks: 105,
-    effect: arc(42, 80, 0.8, Math.PI / 2),
+    effect: {
+      ...projectile(tuning.earthSpike),
+      windupTicks: tuning.earthSpike.windupTicks,
+      recoveryTicks: tuning.earthSpike.recoveryTicks,
+      statuses: [
+        {
+          kind: 'stun',
+          magnitude: 1,
+          durationTicks: tuning.earthSpike.stunTicks,
+        },
+      ],
+    },
     combo: chain('phat_dong_b', 2, 2),
   },
   {
@@ -116,10 +153,17 @@ export const thieuLamSkills: Ability[] = [
     cooldownTicks: 180,
     effect: {
       mode: 'multi_hit',
-      damage: 17,
-      range: 76,
-      hits: 6,
-      spacingTicks: 4,
+      damage: 0,
+      range: tuning.footForce.range,
+      hits: tuning.footForce.volleys,
+      spacingTicks: tuning.footForce.volleySpacingTicks,
+      projectileBurst: {
+        ...projectile(tuning.footForce),
+        count: 3,
+        spacingTicks: tuning.footForce.laneDelayTicks,
+        laneOffsets: [...tuning.footForce.lanes],
+        useFacing: true,
+      },
       finisherDamage: 0,
       finisherRange: 76,
       halfAngle: Math.PI / 2.5,
@@ -147,7 +191,18 @@ export const thieuLamSkills: Ability[] = [
     nameVi: 'Như Lai Niết Bàn',
     manaCost: 40,
     cooldownTicks: 540,
-    effect: { ...arc(120, 180, 1, Math.PI), windupTicks: 15 },
+    effect: {
+      ...arc(120, tuning.skyPalm.range, 1, Math.PI),
+      windupTicks: 15,
+      residualArea: {
+        mode: 'area',
+        radius: tuning.skyPalm.fieldRadius,
+        damage: tuning.skyPalm.fieldDamage,
+        durationTicks: tuning.skyPalm.fieldDurationTicks,
+        tickInterval: 1,
+        oncePerTarget: true,
+      },
+    },
     selfStatuses: [guard(0.25, 150)],
   },
   {
@@ -156,7 +211,7 @@ export const thieuLamSkills: Ability[] = [
     manaCost: 12,
     cooldownTicks: 90,
     effect: {
-      ...arc(42, 115, 0.85, Math.PI * 0.65),
+      ...arc(42, tuning.exorcismRange, 0.85, Math.PI * 0.65),
       statuses: [{ kind: 'slow', magnitude: 0.3, durationTicks: 90 }],
     },
   },
@@ -175,14 +230,17 @@ export const thieuLamSkills: Ability[] = [
   },
   {
     id: 'tam_gioi_quy_thien',
-    nameVi: 'Tam Giới Quy Thiền',
+    nameVi: 'Sư Tử Hống',
     manaCost: 18,
     cooldownTicks: 135,
     effect: {
-      ...arc(62, 88, 0.65),
+      ...arc(62, tuning.roar.range, 1, Math.PI),
       windupTicks: 6,
       durationTicks: 30,
-      statuses: [{ kind: 'defense_break', magnitude: 20, durationTicks: 180 }],
+      statuses: [
+        { kind: 'defense_break', magnitude: 20, durationTicks: 180 },
+        { kind: 'slow', magnitude: tuning.roar.slow, durationTicks: 90 },
+      ],
     },
   },
   {
@@ -224,14 +282,14 @@ const descriptions = [
   'Đấm mạnh, thủ thế ngắn. Phát Động A bước 1 trên từng địch trúng đòn, kể cả đòn lan.',
   'Đấm phá thủ. Phát Động A bước 2 chỉ tiếp nối La Hán Quyền trên cùng địch.',
   'Chưởng chậm mạnh. Phát Động A: La Hán → Vi Đà → Đại Lực trên cùng địch trong 6s để cường hóa.',
-  'Xoay cước quanh người. Phát Động B bước 1, theo dõi riêng từng địch.',
-  'Quét cước rộng. Phát Động B bước 2 sau Toàn Phong trên cùng địch.',
-  'Sáu cước liên tiếp. Phát Động B: Toàn Phong → Hoành Tảo → Vô Ảnh trong 6s. Tiêu thụ chuỗi một lần mỗi địch.',
+  'Lốc vàng bay thẳng xuyên địch, mỗi địch một lần. Phát Động B bước 1.',
+  'Dậm chân tại chỗ, ụ đất chạy thẳng gây sát thương và choáng mọi địch trên đường. Phát Động B bước 2.',
+  'Hai đợt ba cước kình song song phát lần lượt trên/giữa/dưới. Phát Động B: Toàn Phong → Ca Diệp → Vô Ảnh trong 6s; tiêu thụ một lần mỗi địch.',
   'Tạm giảm sát thương, kháng choáng và cưỡng bức di chuyển; vẫn nhận sát thương.',
-  'Tuyệt kỹ: giáng đất ánh kim diện rộng, lưu lại thủ thế cho bản thân.',
+  'Tuyệt kỹ: Phật sau lưng, thiên chưởng diện rộng, lưu chữ Phạn gây sát thương một lần mỗi địch bước vào. Bản thân giữ thủ thế.',
   'Chém rộng phía trước và làm chậm địch trúng đòn.',
   'Hào quang đi theo người thi triển, tăng phòng thủ cho đồng đội sống trong tầm; không cộng dồn.',
-  'Chém mạnh, tạm giảm phòng thủ địch trúng đòn.',
+  'Sư tử hống quanh người gây sát thương, giảm giáp và làm chậm diện rộng.',
   'Một nhịp hồi sinh lực cho bản thân và đồng đội sống trong tầm. Không hồi tượng, không hồi sinh.',
   'Tuyệt kỹ: sóng kim sắc rộng bay thẳng, tăng phòng thủ cho đồng đội gần lúc thi triển.',
 ];
@@ -269,13 +327,17 @@ export function addThieuLamProgression(d: ProgressionDefinition): void {
         e.mode === 'projectile' ||
         e.mode === 'multi_hit'
       ) {
-        e.damage += r * (ultimate ? 20 : e.mode === 'multi_hit' ? 3 : 8);
+        if (e.mode === 'multi_hit' && e.projectileBurst && e.damage === 0) {
+          e.projectileBurst.damage += r * 3;
+          e.projectileBurst.range += r * 4;
+        } else e.damage += r * (ultimate ? 20 : e.mode === 'multi_hit' ? 3 : 8);
         e.range += r * (ultimate ? 10 : 4);
       }
-      if (e.mode === 'arc')
+      if (e.mode === 'arc' || e.mode === 'projectile')
         for (const s of e.statuses ?? []) {
           s.durationTicks += r * 15;
-          s.magnitude += r * (s.kind === 'slow' ? 0.04 : 4);
+          if (s.kind !== 'stun')
+            s.magnitude += r * (s.kind === 'slow' ? 0.04 : 4);
         }
       if (a.combo?.step === 3) a.combo.multiplier += r * 0.15;
       for (const s of a.selfStatuses ?? []) {

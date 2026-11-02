@@ -85,7 +85,7 @@ describe('Chu Bá Thông authoritative encounter', () => {
       }).success,
     ).toBe(false);
   });
-  it('keeps boss power fixed, isolates private/shared worlds and creates one boss only', () => {
+  it('keeps boss power fixed and enforces one shared boss even for legacy private requests', () => {
     const m = new DungeonMatch(config(), creepDungeon, 42, undefined, [
       chuBaThongDungeon,
     ]);
@@ -95,7 +95,7 @@ describe('Chu Bá Thông authoritative encounter', () => {
     expect(m.enter('c', 'shared', 'chu_ba_thong')).toBeUndefined();
     const a = m.zoneOf('a')!,
       b = m.zoneOf('b')!;
-    expect(a).not.toBe(b);
+    expect(a).toBe(b);
     expect(b).toBe(m.zoneOf('c'));
     expect(a.world.creeps.size).toBe(1);
     expect(a.world.creeps.get(CHU_BOSS_ID)!.maxHp).toBe(
@@ -429,9 +429,8 @@ describe('Chu Bá Thông authoritative encounter', () => {
     const z = m.zoneOf('a')!,
       boss = z.world.creeps.get(CHU_BOSS_ID)!;
     boss.hp = 123;
-    m.hero('a')!.x = 640;
-    m.hero('a')!.y = 610;
-    m.exit('a');
+    Object.assign(m.hero('a')!, chuBaThongDungeon.exit);
+    expect(m.exit('a')).toBeUndefined();
     for (let i = 0; i < 900; i++) m.step();
     expect(boss.hp).toBe(123);
     m.step();

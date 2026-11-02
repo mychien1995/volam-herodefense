@@ -28,6 +28,7 @@ import './style.css';
 import './arena-hud.css';
 import './dungeon.css';
 import './dungeon-selector.css';
+import './boss-party-ui.css';
 import './defense-hud.css';
 import { PreGame } from './pregame.js';
 
@@ -164,7 +165,8 @@ const form = element<HTMLFormElement>('#join-form');
 const status = element('#status');
 function dungeonAction(
   action:
-    | { action: 'open' | 'exit' }
+    | { action: 'open' | 'exit' | 'summon-help' }
+    | { action: 'reply-invitation'; invitationId: number; accept: boolean }
     | {
         action: 'enter';
         access: 'private' | 'shared';
@@ -180,6 +182,7 @@ function dungeonAction(
 ): void {
   if (
     !room ||
+    ui.reconnecting ||
     room.state.phase !== 'IN_GAME' ||
     !room.state.players.get(room.sessionId)?.confirmed
   )
@@ -193,6 +196,7 @@ function dungeonAction(
 function send(command: Command): void {
   if (
     !room ||
+    ui.reconnecting ||
     room.state.phase !== 'IN_GAME' ||
     !room.state.players.get(room.sessionId)?.confirmed ||
     artPreview
@@ -212,13 +216,28 @@ const unbindInput = bindGameplayInput(
     room.state.phase === 'IN_GAME' &&
     !!room.state.players.get(room.sessionId)?.confirmed &&
     !artPreview,
-  () => ui.blocked || (room?.state?.players?.get(room.sessionId)?.hp ?? 0) <= 0,
+  () =>
+    ui.blocked ||
+    ((room?.state?.players?.get(room.sessionId)?.hp ?? 0) <= 0 &&
+      !room?.state?.players?.get(room.sessionId)?.bossSpectator),
   () => {
     const hero = room?.state.players.get(room.sessionId);
-    if (!hero || hero.zoneId === 'arena' || hero.hp <= 0) return;
+    if (
+      !hero ||
+      hero.zoneId === 'arena' ||
+      (hero.hp <= 0 && !hero.bossSpectator)
+    )
+      return;
     const d = dungeonForZone(hero.zoneId);
-    if (Math.hypot(hero.x - d.exit.x, hero.y - d.exit.y) <= d.exitRange)
+    if (
+      hero.bossSpectator ||
+      Math.hypot(hero.x - d.exit.x, hero.y - d.exit.y) <= d.exitRange
+    )
       dungeonAction({ action: 'exit' });
+  },
+  {
+    active: () => !!room?.state?.players?.get(room.sessionId)?.bossSpectator,
+    pan: (x, y) => arenaScene.panSpectator(x, y),
   },
 );
 function controls(connected: boolean, busy = false): void {
@@ -253,7 +272,7 @@ async function connect(existing: boolean): Promise<void> {
     const joined = existing
       ? await client.joinById<MatchRoom>(roomId, parsed.data)
       : await client.create<MatchRoom>(MATCH_ROOM, parsed.data);
-    joined.reconnection.enabled = false;
+    joined.reconnection.enabled = true;
     room = joined;
     sequence = 0;
     events.length = 0;
@@ -316,6 +335,18 @@ async function connect(existing: boolean): Promise<void> {
       pregame.fail(status.textContent);
       element('#hud-connection').textContent = `Lỗi ${code}`;
       ui.notify(status.textContent);
+    });
+    joined.onDrop(() => {
+      if (room !== joined) return;
+      ui.reconnecting = true;
+      window.dispatchEvent(new Event('volam:controls-blocked'));
+      arenaScene.setSnapshot(undefined);
+      ui.notify('Mất kết nối · Đang kết nối lại…');
+    });
+    joined.onReconnect(() => {
+      if (room !== joined) return;
+      ui.reconnecting = false;
+      ui.notify('Đã kết nối lại · Trở về đấu trường chính.');
     });
     joined.onLeave((code) => {
       if (room !== joined) return;
@@ -380,6 +411,9 @@ ui.onLoadout = (ids) => send({ kind: 'dev-loadout', ids });
 window.addEventListener('click', () => chuHud.inventory());
 ui.onDungeonEnter = (access, destination) =>
   dungeonAction({ action: 'enter', access, destination });
+ui.bossParty.onSummon = () => dungeonAction({ action: 'summon-help' });
+ui.bossParty.onReply = (invitationId, accept) =>
+  dungeonAction({ action: 'reply-invitation', invitationId, accept });
 // Read-only browser evidence bridge, enabled explicitly for automated playtesting.
 if (new URLSearchParams(location.search).has('debug') || artPreview) {
   Object.defineProperty(window, '__VOLAM__', {

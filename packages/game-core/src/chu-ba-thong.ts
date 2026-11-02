@@ -86,17 +86,19 @@ function damage(
 }
 export function chuFields(
   elapsed: number,
+  width = 1280,
+  height = 720,
 ): Array<Point & { id: number; radius: number; active: boolean }> {
   return Array.from({ length: 15 }, (_, i) => ({
     id: i,
     x:
-      240 +
-      (i % 5) * 200 +
-      60 * Math.sin(elapsed * (0.8 + i * 0.017) + i * 1.9),
+      ((640 + 420 * Math.sin(elapsed * (0.37 + i * 0.007) + i * 2.39996)) *
+        width) /
+      1280,
     y:
-      250 +
-      Math.floor(i / 5) * 160 +
-      40 * Math.sin(elapsed * (0.93 + i * 0.011) + i * 1.2),
+      ((410 + 155 * Math.sin(elapsed * (0.53 + i * 0.009) + i * 3.11995)) *
+        height) /
+      720,
     radius: 54,
     active: elapsed % 1.4 >= 0.7,
   }));
@@ -121,7 +123,12 @@ function nearest(w: World) {
     (a, z) => distance(a, b) - distance(z, b) || a.id.localeCompare(z.id),
   )[0];
 }
-function begin(w: World, phase: ChuPhase, index: number): void {
+function begin(
+  w: World,
+  c: SimulationConfig,
+  phase: ChuPhase,
+  index: number,
+): void {
   const s = w.chu!,
     b = w.creeps.get(CHU_BOSS_ID)!,
     d = s.definition,
@@ -152,9 +159,9 @@ function begin(w: World, phase: ChuPhase, index: number): void {
     const p = { x: target.x, y: target.y };
     const starts = [
       { x: -140, y: p.y },
-      { x: 1420, y: p.y },
+      { x: c.width + 140, y: p.y },
       { x: p.x, y: -140 },
-      { x: p.x, y: 860 },
+      { x: p.x, y: c.height + 140 },
     ];
     s.hands = starts.map((from, id) => {
       const v = direction(p.x - from.x, p.y - from.y);
@@ -366,7 +373,7 @@ export function stepChu(w: World, c: SimulationConfig): void {
   if (w.tick >= s.until) {
     let i = (s.phaseIndex + 1) % s.definition.phases.length;
     if (i === 0) s.cycle++;
-    begin(w, s.definition.phases[i]!.id, i);
+    begin(w, c, s.definition.phases[i]!.id, i);
   }
   const d = s.definition,
     elapsed = w.tick - s.started,
@@ -384,7 +391,10 @@ export function stepChu(w: World, c: SimulationConfig): void {
       const v = direction(target.x - boss.x, target.y - boss.y);
       moveCircle(
         boss,
-        { x: (v.x * 70) / c.tickRate, y: (v.y * 70) / c.tickRate },
+        {
+          x: (v.x * (d.movementSpeed ?? 70)) / c.tickRate,
+          y: (v.y * (d.movementSpeed ?? 70)) / c.tickRate,
+        },
         30,
         c.width,
         c.height,
@@ -431,25 +441,38 @@ export function stepChu(w: World, c: SimulationConfig): void {
           damage(w, h, 'chu_song_quyen', d.damage.fist, c);
       }
     });
-  if (s.phase === 'palm')
-    hitEvery(Math.round(2.2 * c.tickRate), () => {
-      const target = nearest(w);
-      if (!target) return;
-      const v = direction(target.x - boss.x, target.y - boss.y);
-      s.fx = boss.fx = v.x;
-      s.fy = boss.fy = v.y;
-      s.missiles.push({
-        id: w.nextId++,
-        x: boss.x,
-        y: boss.y,
-        vx: v.x * 300,
-        vy: v.y * 300,
-        radius: 15,
-        remaining: 1000,
-        hitIds: [],
-      });
-      signal(w, 'palm', boss, 'release');
-    });
+  if (s.phase === 'palm' || w.tick >= (s.nextBasicAt ?? 0)) {
+    if (
+      s.phase === 'palm' ||
+      s.phase === 'spin' ||
+      s.phase === 'idle' ||
+      s.phase === 'reflect' ||
+      s.phase === 'ultimate'
+    ) {
+      if (w.tick >= (s.nextBasicAt ?? 0)) {
+        const target = nearest(w);
+        if (!target) return;
+        const v = direction(target.x - boss.x, target.y - boss.y);
+        if (s.phase === 'palm') {
+          s.fx = boss.fx = v.x;
+          s.fy = boss.fy = v.y;
+        }
+        s.missiles.push({
+          id: w.nextId++,
+          x: boss.x,
+          y: boss.y,
+          vx: v.x * 300,
+          vy: v.y * 300,
+          radius: 15,
+          remaining: 1000,
+          hitIds: [],
+        });
+        signal(w, 'palm', boss, 'release');
+        s.nextBasicAt =
+          w.tick + (d.basicPalmIntervalTicks ?? Math.round(2.2 * c.tickRate));
+      }
+    }
+  }
   for (const shot of s.missiles) {
     const from = { x: shot.x, y: shot.y };
     shot.x += shot.vx / c.tickRate;
@@ -466,7 +489,12 @@ export function stepChu(w: World, c: SimulationConfig): void {
       }
   }
   s.missiles = s.missiles.filter(
-    (p) => p.remaining > 0 && p.x > 128 && p.x < 1152 && p.y > 190 && p.y < 640,
+    (p) =>
+      p.remaining > 0 &&
+      p.x > c.width * 0.1 &&
+      p.x < c.width * 0.9 &&
+      p.y > (c.height * 190) / 720 &&
+      p.y < (c.height * 640) / 720,
   );
   if (s.phase === 'hands')
     for (const hand of s.hands) {
@@ -502,14 +530,18 @@ export function stepChu(w: World, c: SimulationConfig): void {
       return a + (n < span ? n : 2 * span - n);
     };
     boss.x = tri(
-      (s.spinOrigin ?? d.spawn).x - 205 + seconds * d.spinSpeedX,
-      205,
-      1075,
+      (s.spinOrigin ?? d.spawn).x -
+        (205 * c.width) / 1280 +
+        seconds * d.spinSpeedX,
+      (205 * c.width) / 1280,
+      (1075 * c.width) / 1280,
     );
     boss.y = tri(
-      (s.spinOrigin ?? d.spawn).y - 235 + seconds * d.spinSpeedY,
-      235,
-      570,
+      (s.spinOrigin ?? d.spawn).y -
+        (235 * c.height) / 720 +
+        seconds * d.spinSpeedY,
+      (235 * c.height) / 720,
+      (570 * c.height) / 720,
     );
     s.spinHits ??= {};
     for (const h of alive(w))
@@ -524,7 +556,7 @@ export function stepChu(w: World, c: SimulationConfig): void {
   if (s.phase === 'reflect')
     for (const h of alive(w)) {
       const dist = distance(h, boss);
-      if (dist < d.pullRadius && dist > 35) {
+      if (dist > 35) {
         const v = direction(boss.x - h.x, boss.y - h.y);
         displace(
           h,
@@ -542,14 +574,9 @@ export function stepChu(w: World, c: SimulationConfig): void {
     w.tick >= s.nextAction
   ) {
     s.nextAction = w.tick + Math.round(0.35 * c.tickRate);
-    const fields = chuFields(seconds);
+    const fields = chuFields(seconds, c.width, c.height);
     for (const h of alive(w))
-      if (
-        fields.some((f) => f.active && distance(h, f) <= f.radius + c.radius) ||
-        chuWaves(seconds).some(
-          (f) => Math.abs(distance(h, f) - f.radius) <= f.thickness + c.radius,
-        )
-      )
+      if (fields.some((f) => f.active && distance(h, f) <= f.radius + c.radius))
         damage(w, h, 'am_duong_nghich_chuyen', d.damage.ultimate, c);
   }
 }
@@ -566,7 +593,7 @@ export function chuView(w: World, c: SimulationConfig): ChuView | null {
       [200, 540],
       [1110, 540],
       [400, 220],
-    ],
+    ].map(([x, y]) => [(x! * c.width) / 1280, (y! * c.height) / 720]),
     ends = [
       [-80, 0],
       [80, 0],
@@ -628,8 +655,8 @@ export function chuView(w: World, c: SimulationConfig): ChuView | null {
     missiles: s.missiles,
     trap: s.trap ?? null,
     disciples,
-    fields: s.phase === 'ultimate' ? chuFields(elapsed) : [],
-    waves: s.phase === 'ultimate' ? chuWaves(elapsed) : [],
+    fields: s.phase === 'ultimate' ? chuFields(elapsed, c.width, c.height) : [],
+    waves: [],
     loot: s.loot,
     spinRadius: d.spinRadius,
     sweepFootRadius: d.sweepFootRadius,

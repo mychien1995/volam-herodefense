@@ -11,6 +11,7 @@ export const kimAbilities = [
   'dai_luc_pha_son_boulder',
   'hang_ma_tam_lien_chan',
   'kim_sweep',
+  'kim_hand_chop',
   'kim_luan_truy_hon',
   'ngu_luan_ho_the',
   'ngu_luan_phong_toa',
@@ -27,6 +28,10 @@ export interface KimProfile {
   cooldown: number;
 }
 export interface KimDefinition {
+  wheelCount: number;
+  basicWheelSpeed: number;
+  actionRestSeconds: number;
+  crescent: { speed: number; radius: number; lifetime: number };
   actors: Record<
     'hoac_do' | 'dat_nhi_ba' | 'kim_luan_phap_vuong',
     Point & { hp: number; defense: number; speed: number }

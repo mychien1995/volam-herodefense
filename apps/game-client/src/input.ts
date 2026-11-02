@@ -5,14 +5,20 @@ export function bindGameplayInput(
   connected: () => boolean,
   blocked: () => boolean = () => false,
   interact: () => void = () => {},
+  spectator?: { active: () => boolean; pan: (x: number, y: number) => void },
 ): () => void {
   const held = new Set<string>();
   const move = (): void =>
-    send({
-      kind: 'move',
-      x: Number(held.has('ArrowRight')) - Number(held.has('ArrowLeft')),
-      y: Number(held.has('ArrowDown')) - Number(held.has('ArrowUp')),
-    });
+    spectator?.active()
+      ? spectator.pan(
+          Number(held.has('ArrowRight')) - Number(held.has('ArrowLeft')),
+          Number(held.has('ArrowDown')) - Number(held.has('ArrowUp')),
+        )
+      : send({
+          kind: 'move',
+          x: Number(held.has('ArrowRight')) - Number(held.has('ArrowLeft')),
+          y: Number(held.has('ArrowDown')) - Number(held.has('ArrowUp')),
+        });
   const stop = (): void => {
     held.clear();
     if (connected()) move();
@@ -32,6 +38,13 @@ export function bindGameplayInput(
       return;
     }
     if (event.repeat) return;
+    if (spectator?.active()) {
+      if (event.code === 'Space') {
+        event.preventDefault();
+        interact();
+      }
+      return;
+    }
     if (inputBindings.dash.some((key) => key === event.code)) {
       event.preventDefault();
       send({ kind: 'dash' });

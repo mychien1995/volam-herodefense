@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { bossArenaScale as S, chuBaThongDungeon } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
 import type { ChuView } from '@volam/game-core';
 import raw from './chu-art.generated.json' with { type: 'json' };
@@ -70,12 +71,14 @@ export function createChuArena(
 ): Phaser.GameObjects.Image[] {
   scene.add
     .tileSprite(0, 0, 1280, 720, 'chu_prop_ancient_path_material.png')
+    .setScale(S)
     .setOrigin(0)
     .setDepth(-10000)
     .setName('chu:ground');
   for (const x of [0, 1152])
     scene.add
-      .tileSprite(x, 0, 128, 720, 'chu_prop_bamboo_ground_material.png')
+      .tileSprite(x * S, 0, 128, 720, 'chu_prop_bamboo_ground_material.png')
+      .setScale(S)
       .setOrigin(0)
       .setDepth(-9999);
   const trees: Phaser.GameObjects.Image[] = [];
@@ -84,28 +87,40 @@ export function createChuArena(
       .find((p) => p.name === 'asset')!
       .value.split('/')
       .at(-1)!;
-    const image = scene.add.image(o.x, o.y, 'chu_prop_' + name);
+    const image = scene.add
+      .image(o.x * S, o.y * S, 'chu_prop_' + name)
+      .setScale(S);
     image
       .setOrigin(0.5, o.type === 'ground' ? 0.5 : 1)
-      .setDepth(o.type === 'ground' ? -9000 : o.y)
+      .setDepth(o.type === 'ground' ? -9000 : o.y * S)
       .setName('chu:prop:' + o.name);
     if (o.name === 'bamboo_cluster') trees.push(image);
   }
   scene.add
-    .image(640, 610, 'chu_prop_entrance_gate.png')
+    .image(
+      chuBaThongDungeon.exit.x,
+      chuBaThongDungeon.exit.y,
+      'chu_prop_entrance_gate.png',
+    )
+    .setScale(S)
     .setOrigin(0.5, 0.8)
-    .setDepth(610)
+    .setDepth(chuBaThongDungeon.exit.y)
     .setAlpha(0.85)
     .setName('dungeon-exit');
   scene.add
-    .text(640, 625, 'Lối ra · Space', {
-      fontFamily: 'Segoe UI',
-      fontSize: '11px',
-      backgroundColor: '#152a24',
-      color: '#f5ebc7',
-    })
+    .text(
+      chuBaThongDungeon.exit.x,
+      chuBaThongDungeon.exit.y + 15,
+      'Lối ra · Space',
+      {
+        fontFamily: 'Segoe UI',
+        fontSize: '11px',
+        backgroundColor: '#152a24',
+        color: '#f5ebc7',
+      },
+    )
     .setOrigin(0.5)
-    .setDepth(611);
+    .setDepth(chuBaThongDungeon.exit.y + 1);
   return trees;
 }
 /** Displays authoritative zone state. No targeting/damage/movement calculations run here. */
@@ -463,33 +478,6 @@ export class ChuPresentation {
           this.text('guard', 'Phản toàn bộ sát thương · chạy ra xa', x, y + 50);
         }
         if (v.phase === 'ultimate') {
-          const cx = 640 + 220 * Math.sin(t * 0.73),
-            cy = 410 + 90 * Math.sin(t * 0.65);
-          this.draw(
-            'ultimate:core',
-            'ultimate',
-            'large_formation',
-            cx,
-            cy,
-            t,
-            4,
-            0.48,
-            0,
-            true,
-          );
-          for (const [i, w] of v.waves.entries())
-            this.draw(
-              'ultimate:wave:' + i,
-              'ultimate',
-              'rotating_waves',
-              w.x,
-              w.y,
-              t,
-              w.scale,
-              w.alpha,
-              0,
-              true,
-            );
           for (const f of v.fields) {
             this.draw(
               'field:' + f.id,

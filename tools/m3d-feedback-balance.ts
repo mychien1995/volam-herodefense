@@ -158,7 +158,7 @@ for (const school of Object.keys(builds))
 const output = fileURLToPath(new URL('../artifacts/', import.meta.url));
 mkdirSync(output, { recursive: true });
 writeFileSync(
-  output + 'm3d-feedback-balance.json',
+  output + 'm3d-feedback-balance-r3.json',
   JSON.stringify(
     {
       scope:

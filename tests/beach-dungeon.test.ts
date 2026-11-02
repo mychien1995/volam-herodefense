@@ -86,7 +86,7 @@ describe('Beach shared map and authoritative integration', () => {
     m.enter('d', 'shared', 'desert');
     const z = m.zoneOf('a')!,
       privateZone = m.zoneOf('c')!;
-    expect(m.zoneOf('b')).toBe(z);
+    expect(m.zoneOf('b')).not.toBe(z);
     expect(privateZone).not.toBe(z);
     expect(m.zoneOf('f')).not.toBe(z);
     expect(m.zoneOf('d')).not.toBe(z);
@@ -108,9 +108,12 @@ describe('Beach shared map and authoritative integration', () => {
     m.add('a', 'A');
     m.enter('a', 'shared', 'sea');
     const z = m.zoneOf('a')!;
-    expect(z.config.creep).toEqual(m.base.creep);
+    expect(z.config.creep).toEqual({
+      ...m.base.creep,
+      speed: m.base.speed * 0.9,
+    });
     expect([...z.world.creeps.values()].map((c) => c.archetypeId)).toEqual(
-      beachRoster,
+      Array(d.baseCount).fill(beachRoster[0]),
     );
     steps(m, d.restTicks + 2);
     expect(z.wave).toBe(1);
@@ -118,7 +121,7 @@ describe('Beach shared map and authoritative integration', () => {
     steps(m, d.restTicks + 1);
     expect(z.wave).toBe(2);
     expect([...z.world.creeps.values()].map((c) => c.archetypeId)).toEqual(
-      beachRoster,
+      Array(d.baseCount).fill(beachRoster[1]),
     );
   });
 });

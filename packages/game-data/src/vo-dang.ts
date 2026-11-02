@@ -5,6 +5,7 @@ import type {
 } from '@volam/game-core';
 import { abilitySchema } from './ability-schema.js';
 import { skillRankGates } from './progression-data.js';
+import { m3dFeedbackTuning } from './m3d-feedback-tuning.js';
 
 /** M3C2 provisional tuning at 30Hz; all targeting uses facing/self/nearest at release. */
 const swordQi: ProjectileEffect = {
@@ -37,6 +38,7 @@ export const voDangBasics: Record<string, Ability> = {
       halfAngle: Math.PI / 3,
       cleave: 0.2,
       knockback: 10,
+      knockbackChance: m3dFeedbackTuning.basicKnockbackChance,
     },
   },
   vo_dang_kiem: {
@@ -51,7 +53,14 @@ export const voDangBasics: Record<string, Ability> = {
       range: 94,
       halfAngle: Math.PI / 3,
       cleave: 0.35,
-      projectileProc: { chance: 0.25, effect: swordQi },
+      projectileProc: {
+        chance: 0.25,
+        effect: {
+          ...swordQi,
+          knockback: 10,
+          knockbackChance: m3dFeedbackTuning.basicKnockbackChance,
+        },
+      },
     },
   },
 };

@@ -5,12 +5,7 @@ import { CloseCode } from '@colyseus/core';
 import { createGameServer } from '../apps/game-server/src/app.config.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
-import {
-  creepDungeon,
-  desertDungeon,
-  desertRoster,
-  forestRoster,
-} from '@volam/game-data';
+import { creepDungeon, desertDungeon, desertRoster } from '@volam/game-data';
 
 let server: ColyseusTestServer;
 const previousLegacy = process.env['VOLAM_DEV_LEGACY_SKILLS'];
@@ -68,6 +63,7 @@ async function enter(
   room: Room<MatchRoom>,
   authority: MatchRoom,
   access: 'private' | 'shared',
+  destination: 'forest' | 'hong_liet' = 'forest',
 ) {
   expect(authority.simulation.zoneOf(room.sessionId)?.access).toBe('arena');
   room.send('dungeon-action', {
@@ -75,6 +71,7 @@ async function enter(
     sequence: next(room),
     action: 'enter',
     access,
+    destination,
   });
   await expect
     .poll(() => room.state.players.get(room.sessionId)?.zoneId)
@@ -114,16 +111,18 @@ describe('M2A real Colyseus zone authority and views', () => {
     });
     await expect
       .poll(() => a!.state.players.get(a!.sessionId)?.zoneId)
-      .toBe('desert_shared');
+      .toBe(`desert_private_${a!.sessionId}`);
     await expect
       .poll(() => b!.state.players.get(b!.sessionId)?.zoneId)
       .toBe(`desert_private_${b!.sessionId}`);
     await expect.poll(() => [...a!.state.creeps.values()].length).toBe(6);
     expect([...a!.state.creeps.values()].map((c) => c.archetypeId)).toEqual(
-      desertRoster,
+      Array(6).fill(desertRoster[0]),
     );
     expect(
-      [...a!.state.creeps.values()].every((c) => c.zoneId === 'desert_shared'),
+      [...a!.state.creeps.values()].every(
+        (c) => c.zoneId === `desert_private_${a!.sessionId}`,
+      ),
     ).toBe(true);
     expect(
       [...b!.state.creeps.values()].every(
@@ -225,12 +224,12 @@ describe('M2A real Colyseus zone authority and views', () => {
       rooms: [a, b, c],
       authority,
     } = await join(3);
-    await enter(a!, authority, 'shared');
-    await enter(b!, authority, 'shared');
+    await enter(a!, authority, 'shared', 'hong_liet');
+    await enter(b!, authority, 'shared', 'hong_liet');
     const zone = authority.simulation.zoneOf(a!.sessionId)!;
     expect(authority.simulation.zoneOf(b!.sessionId)).toBe(zone);
-    await expect.poll(() => a!.state.creeps.size).toBe(6);
-    const firstForestTypes = forestRoster;
+    await expect.poll(() => a!.state.creeps.size).toBe(1);
+    const firstForestTypes = ['hoan_nhan_hong_liet'];
     await expect
       .poll(() => [...a!.state.creeps.values()].map((c) => c.archetypeId))
       .toEqual(firstForestTypes);
@@ -465,15 +464,15 @@ describe('M2A real Colyseus zone authority and views', () => {
     });
     await expect
       .poll(() => c!.state.players.get(c!.sessionId)?.zoneId)
-      .toBe(`hong_liet_private_${c!.sessionId}`);
+      .toBe('hong_liet_shared');
     expect(
       [...c!.state.creeps.values()].every(
-        (enemy) => enemy.zoneId === `hong_liet_private_${c!.sessionId}`,
+        (enemy) => enemy.zoneId === 'hong_liet_shared',
       ),
     ).toBe(true);
     expect(
       [...c!.state.bossEffects.values()].every(
-        (cue) => cue.zoneId === `hong_liet_private_${c!.sessionId}`,
+        (cue) => cue.zoneId === 'hong_liet_shared',
       ),
     ).toBe(true);
     e.clear(z.world);
@@ -516,7 +515,9 @@ describe('M2A real Colyseus zone authority and views', () => {
         { timeout: 2000 },
       )
       .toBe(true);
-    // Start another long-lived grid to verify the final disconnect cancels it.
+    // All boss requests now share one instance; remove the third occupant first.
+    await c!.leave();
+    // Start another long-lived grid to verify the final departure cancels it.
     e.clear(z.world);
     e.begin(
       z.world,
@@ -526,8 +527,8 @@ describe('M2A real Colyseus zone authority and views', () => {
     );
     b!.connection.close();
     await expect
-      .poll(() => authority.simulation.zoneOf(b!.sessionId))
-      .toBeUndefined();
+      .poll(() => authority.simulation.zoneOf(b!.sessionId)?.id)
+      .toBe('arena');
     expect(z.world.heroes.size).toBe(1);
     expect(e.effects.size).toBeGreaterThan(0);
     await a!.leave();

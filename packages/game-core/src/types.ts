@@ -19,6 +19,10 @@ export interface Rect extends Point {
 }
 export type Pose = 'idle' | 'walk' | 'basic_attack' | 'cast' | 'hurt' | 'death';
 export interface ProjectileEffect {
+  windupTicks?: number | undefined;
+  recoveryTicks?: number | undefined;
+  laneOffsets?: number[] | undefined;
+  knockbackChance?: number | undefined;
   mode: 'projectile';
   damage: number;
   speed: number;
@@ -42,6 +46,9 @@ export interface ProjectileEffect {
   blinkWindowTicks?: number | undefined;
 }
 export interface ArcEffect {
+  lineWidth?: number | undefined;
+  knockbackChance?: number | undefined;
+  residualArea?: AreaEffect | undefined;
   mode: 'arc';
   damage: number;
   range: number;
@@ -150,6 +157,7 @@ export interface GuardCounterEffect {
   range: number;
 }
 export interface AreaEffect {
+  oncePerTarget?: boolean | undefined;
   mode: 'area';
   durationTicks: number;
   tickInterval: number;
@@ -189,6 +197,13 @@ export interface MultiHitEffect {
   durationTicks?: number | undefined;
 }
 export interface Ability {
+  manualChain?:
+    | {
+        idleTicks: number;
+        cooldownTicks: number;
+        finisherProjectile: ProjectileEffect;
+      }
+    | undefined;
   id: string;
   nameVi: string;
   cooldownTicks: number;
@@ -299,6 +314,10 @@ export interface Actor extends Point {
   crowdControlScale?: number;
 }
 export interface Hero extends Actor {
+  actionStartedAt?: number;
+  basicStage?: string | undefined;
+  basicChainDeadline?: { abilityId: string; until: number };
+  bossSpectator?: boolean;
   dashCharges?: number;
   dashRechargeAt?: number;
   bossItems?: string[];
@@ -323,6 +342,7 @@ export interface Hero extends Actor {
   basicChains?: Record<string, number>;
 }
 export interface Creep extends Actor {
+  rangedAttack?: ProjectileEffect;
   navigation?: {
     targetId: string;
     gx: number;
@@ -360,6 +380,9 @@ export interface Creep extends Actor {
   burnDamage: number;
 }
 export interface Projectile extends Point {
+  spawnedAt?: number;
+  combo?: ComboSpec;
+  comboTargets?: Record<string, boolean>;
   lingerUntil?: number;
   hostile?: boolean;
   targetId?: string;
@@ -379,6 +402,7 @@ export interface Projectile extends Point {
   stage?: string;
 }
 export interface CombatEvent extends Point {
+  tick?: number | undefined;
   id: number;
   kind: 'attack' | 'hit' | 'death' | 'cast' | 'effect' | 'pulse';
   sourceId: string;
@@ -392,17 +416,18 @@ export interface CombatEvent extends Point {
   stage?: string | undefined;
 }
 export interface SkillAction {
+  startedAt?: number;
   id: string;
   ownerId: string;
   abilityId: string;
-  kind: 'dash' | 'multi_hit' | 'arc';
+  kind: 'dash' | 'multi_hit' | 'arc' | 'projectile';
   until: number;
   nextTick: number;
   remaining: number;
   fx: number;
   fy: number;
   hitIds: string[];
-  effect: DashEffect | MultiHitEffect | ArcEffect;
+  effect: DashEffect | MultiHitEffect | ArcEffect | ProjectileEffect;
   ability?: Ability | undefined;
   comboTargets?: Record<string, boolean> | undefined;
   rawDamage: number;
@@ -411,6 +436,7 @@ export interface SkillAction {
   critMultiplier: number;
 }
 export interface CombatArea extends Point {
+  hitIds?: string[];
   id: string;
   ownerId: string;
   abilityId: string;
@@ -451,6 +477,7 @@ export interface World {
   random: () => number;
   pending: Array<{ heroId: string; command: Command }>;
   shots: Array<{
+    comboTargets?: Record<string, boolean>;
     tick: number;
     ownerId: string;
     ability: Ability;

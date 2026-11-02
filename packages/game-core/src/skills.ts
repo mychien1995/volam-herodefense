@@ -97,8 +97,15 @@ function queueProjectiles(
   dx: number,
   dy: number,
   stage?: string,
+  comboTargets: Record<string, boolean> = {},
+  snapshot?: { rawDamage: number; critChance: number; critMultiplier: number },
 ): void {
-  const crit = offensiveStats(world, hero.id, config);
+  const crit = snapshot
+    ? {
+        critChance: snapshot.critChance,
+        critMultiplier: snapshot.critMultiplier,
+      }
+    : offensiveStats(world, hero.id, config);
   const refund = effect.manaRefund
     ? { amount: effect.manaRefund, used: false }
     : undefined;
@@ -112,18 +119,21 @@ function queueProjectiles(
     world.shots.push({
       tick: world.tick + i * effect.spacingTicks,
       ownerId: hero.id,
+      comboTargets,
       ability: { ...ability, effect },
-      x: hero.x,
-      y: hero.y,
+      x: hero.x - dy * (effect.laneOffsets?.[i] ?? 0),
+      y: hero.y + dx * (effect.laneOffsets?.[i] ?? 0),
       dx: dx * Math.cos(angle) - dy * Math.sin(angle),
       dy: dx * Math.sin(angle) + dy * Math.cos(angle),
-      rawDamage: damageFor(
-        hero,
-        effect.damage,
-        config,
-        world.tick,
-        effect.attackPowerScale ?? 1,
-      ),
+      rawDamage:
+        snapshot?.rawDamage ??
+        damageFor(
+          hero,
+          effect.damage,
+          config,
+          world.tick,
+          effect.attackPowerScale ?? 1,
+        ),
       ...crit,
       ...(refund ? { refund } : {}),
       ...(stage ? { stage } : {}),
@@ -174,6 +184,18 @@ function strikeArc(
   let targets = [...world.creeps.values()]
     .filter((enemy) => {
       const d = direction(enemy.x - hero.x, enemy.y - hero.y);
+      if (effect.lineWidth !== undefined) {
+        const dx = enemy.x - origin.x,
+          dy = enemy.y - origin.y;
+        const along = dx * heading.fx + dy * heading.fy;
+        const across = Math.abs(dx * heading.fy - dy * heading.fx);
+        return (
+          clearLine(world, hero, enemy, config) &&
+          along >= 0 &&
+          along <= effect.range &&
+          across <= effect.lineWidth / 2 + (enemy.stats ?? config.creep).radius
+        );
+      }
       return (
         clearLine(world, hero, enemy, config) &&
         distance(enemy, origin) <=
@@ -231,7 +253,11 @@ function strikeArc(
         world.tick,
       );
     }
-    if (effect.knockback)
+    if (
+      effect.knockback &&
+      (effect.knockbackChance === undefined ||
+        world.random() < effect.knockbackChance)
+    )
       displace(
         enemy,
         heading.fx * effect.knockback,
@@ -258,6 +284,24 @@ function strikeArc(
       });
     }
   });
+  if (effect.residualArea) {
+    const field = effect.residualArea;
+    world.areas ??= [];
+    world.areas.push({
+      id: `area_${world.nextId++}`,
+      ownerId: hero.id,
+      abilityId: ability.id,
+      x: hero.x,
+      y: hero.y,
+      until: world.tick + field.durationTicks,
+      nextTick: world.tick,
+      effect: field,
+      rawDamage: damageFor(hero, field.damage, config, world.tick),
+      critChance: crit.critChance,
+      critMultiplier: crit.critMultiplier,
+    });
+    cue(world, hero, ability.id, 'field_birth', field.radius, heading);
+  }
   if (hit && effect.manaRefund) {
     const refund = Math.min(effect.manaRefund, hero.maxMana - hero.mana);
     hero.mana += refund;
@@ -300,6 +344,8 @@ export function perform(
   hero.pose = kind === 'cast' ? 'cast' : 'basic_attack';
   hero.actionUntil = kind === 'attack' ? hero.cooldown : world.tick + 12;
   hero.castAbilityId = ability.id;
+  hero.actionStartedAt = world.tick;
+  if (kind === 'attack') hero.basicStage = stage;
   emit(world, {
     kind,
     sourceId: hero.id,
@@ -320,16 +366,46 @@ export function perform(
   if (ability.allies)
     supportAllies(world, hero, ability.id, ability.allies, config);
   if (effect.mode === 'projectile') {
-    queueProjectiles(
-      world,
-      hero,
-      ability,
-      effect,
-      config,
-      hero.fx,
-      hero.fy,
-      stage,
-    );
+    if (effect.windupTicks) {
+      const duration = effect.windupTicks + (effect.recoveryTicks ?? 0) + 1;
+      applyStatus(
+        hero,
+        { kind: 'channel', durationTicks: duration, magnitude: 1 },
+        hero.id,
+        ability.id,
+        world.tick,
+      );
+      hero.actionUntil = world.tick + duration;
+      world.actions ??= [];
+      world.actions.push({
+        id: `action_${world.nextId++}`,
+        startedAt: world.tick,
+        ownerId: hero.id,
+        abilityId: ability.id,
+        kind: 'projectile',
+        until: world.tick + duration,
+        nextTick: world.tick + effect.windupTicks,
+        remaining: 1,
+        fx: hero.fx,
+        fy: hero.fy,
+        hitIds: [],
+        effect,
+        ability,
+        rawDamage: damageFor(hero, effect.damage, config, world.tick),
+        finisherDamage: 0,
+        ...crit,
+      });
+    } else
+      queueProjectiles(
+        world,
+        hero,
+        ability,
+        effect,
+        config,
+        hero.fx,
+        hero.fy,
+        stage,
+      );
   } else if (effect.mode === 'arc') {
     if (effect.windupTicks) {
       const duration = effect.durationTicks ?? effect.windupTicks + 1;
@@ -343,6 +419,7 @@ export function perform(
       hero.actionUntil = world.tick + duration;
       world.actions ??= [];
       world.actions.push({
+        startedAt: world.tick,
         id: `action_${world.nextId++}`,
         ownerId: hero.id,
         abilityId: ability.id,
@@ -564,6 +641,7 @@ export function perform(
     );
     hero.actionUntil = world.tick + Math.max(12, duration);
     world.actions.push({
+      startedAt: world.tick,
       id: `action_${world.nextId++}`,
       ownerId: hero.id,
       abilityId: ability.id,
@@ -599,26 +677,29 @@ export function stepAreas(world: World, config: SimulationConfig): void {
     }
     if (world.tick < area.nextTick) continue;
     area.nextTick += area.effect.tickInterval;
-    emit(world, {
-      kind: 'pulse',
-      sourceId: area.ownerId,
-      targetId: '',
-      abilityId: area.abilityId,
-      x: area.x,
-      y: area.y,
-      radius: area.effect.radius,
-      stage: 'area_tick',
-      damage: 0,
-      critical: false,
-    });
+    if (!area.effect.oncePerTarget)
+      emit(world, {
+        kind: 'pulse',
+        sourceId: area.ownerId,
+        targetId: '',
+        abilityId: area.abilityId,
+        x: area.x,
+        y: area.y,
+        radius: area.effect.radius,
+        stage: 'area_tick',
+        damage: 0,
+        critical: false,
+      });
     for (const enemy of world.creeps.values()) {
       if (
         enemy.hp <= 0 ||
+        (area.effect.oncePerTarget && area.hitIds?.includes(enemy.id)) ||
         distance(area, enemy) >
           area.effect.radius + (enemy.stats ?? config.creep).radius ||
         config.collision.some((w) => segmentRect(area, enemy, w) !== undefined)
       )
         continue;
+      if (area.effect.oncePerTarget) (area.hitIds ??= []).push(enemy.id);
       hurt(
         world,
         enemy,
@@ -640,13 +721,51 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
     const hero = world.heroes.get(action.ownerId);
     if (!hero || hero.hp <= 0 || hasStatus(hero, 'stun', world.tick)) {
       action.until = world.tick;
+      world.shots = world.shots.filter(
+        (s) =>
+          s.ownerId !== action.ownerId || s.ability.id !== action.abilityId,
+      );
+      for (const [id, projectile] of world.projectiles)
+        if (
+          projectile.ownerId === action.ownerId &&
+          projectile.abilityId === action.abilityId
+        )
+          world.projectiles.delete(id);
+      world.areas = (world.areas ?? []).filter(
+        (a) => a.ownerId !== action.ownerId || a.abilityId !== action.abilityId,
+      );
+      if (hero) cue(world, hero, action.abilityId, 'cancel');
       if (hero && hero.hp > 0) {
         hero.actionUntil = world.tick;
         hero.pose = 'idle';
       }
       continue;
     }
-    if (action.effect.mode === 'arc') {
+    if (action.effect.mode === 'projectile') {
+      if (world.tick >= action.nextTick && action.remaining > 0) {
+        queueProjectiles(
+          world,
+          hero,
+          action.ability!,
+          action.effect,
+          config,
+          action.fx,
+          action.fy,
+          'travel',
+          {},
+          action,
+        );
+        cue(
+          world,
+          hero,
+          action.abilityId,
+          'release',
+          action.effect.range,
+          action,
+        );
+        action.remaining = 0;
+      }
+    } else if (action.effect.mode === 'arc') {
       if (world.tick >= action.nextTick && action.remaining > 0) {
         strikeArc(
           world,
@@ -739,6 +858,8 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           config,
           action.fx,
           action.fy,
+          undefined,
+          action.comboTargets,
         );
       for (const enemy of world.creeps.values())
         if (
@@ -766,7 +887,10 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
             },
           );
       action.remaining--;
-      action.nextTick += e.spacingTicks;
+      action.nextTick +=
+        e.durationTicks && e.finisherDamage > 0
+          ? (e.durationTicks - 1) / e.hits
+          : e.spacingTicks;
       if (finish) action.until = world.tick;
     }
   }

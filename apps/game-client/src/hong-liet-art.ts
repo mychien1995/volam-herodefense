@@ -1,5 +1,11 @@
 import Phaser from 'phaser';
-import { hongLietDefinition, hongLietDungeon } from '@volam/game-data';
+import { replaceR3ArenaProp } from './m3d-r3-arena.js';
+import {
+  hongLietDefinition,
+  hongLietDungeon,
+  bossArenaScale as S,
+} from '@volam/game-data';
+import { r3Tag, r3Frame, type R3Direction } from './m3d-r3-art.js';
 import type {
   BossEffectState,
   CreepState,
@@ -91,6 +97,7 @@ export function createHongLietArena(
   if (!tiles) throw Error('Missing headquarters tiles');
   map
     .createLayer('ground', tiles)!
+    .setScale(S)
     .setDepth(-10000)
     .setName('hong_liet:ground');
   const props: Phaser.GameObjects.Image[] = [];
@@ -102,11 +109,13 @@ export function createHongLietArena(
       o.name,
     );
     const image = scene.add
-      .image(o.x ?? 0, o.y ?? 0, 'hl_scenery', frame)
+      .image((o.x ?? 0) * S, (o.y ?? 0) * S, 'hl_scenery', frame)
+      .setScale(S)
       .setOrigin(0.5, 368 / 384)
-      .setDepth(ground ? -9500 : (o.y ?? 0))
+      .setDepth(ground ? -9500 : (o.y ?? 0) * S)
       .setName('hong_liet:' + o.name);
     props.push(image);
+    replaceR3ArenaProp(image, 'hong_liet', o.name, S);
   }
   scene.add
     .text(
@@ -156,18 +165,19 @@ export class HongLietRenderer {
     frame: string,
     x: number,
     y: number,
+    texture = key(asset),
   ): View {
     let v = this.views.get(id);
     if (!v) {
       v = {
         image: this.scene.add
-          .image(x, y, key(asset), frame)
+          .image(x, y, texture, frame)
           .setName('hong_liet:' + id),
       };
       this.views.set(id, v);
     }
     v.image
-      .setTexture(key(asset), frame)
+      .setTexture(texture, frame)
       .setPosition(x, y)
       .setVisible(true)
       .setAlpha(1)
@@ -336,28 +346,36 @@ export class HongLietRenderer {
       frame = 'thrust_0',
       x = e.x,
       y = e.y;
-    if (e.kind === 'line' && e.abilityId === 'hong_liet_a1') {
-      const n = warning ? 0 : Math.min(3, 1 + Math.floor(age / 3.9));
-      frame = 'thrust_' + n;
-      const v = this.image(id, asset, frame, x, y);
+    if (e.abilityId === 'hong_liet_a1') {
+      const d = dir(e.fx, e.fy) as R3Direction;
+      if (warning) return; // Authoritative line telegraphs are drawn above; selected atlas has travel only.
+      const { asset: c, tag } = r3Tag('r3_hhl_blade_' + d, 'travel', d);
+      const frame = r3Frame(tag, (age * 1000) / 30, undefined, !warning);
+      const v = this.image(id, c.id, frame, x, y - 28, c.id);
+      const cardinal = {
+        right: 0,
+        down: Math.PI / 2,
+        left: Math.PI,
+        up: -Math.PI / 2,
+      }[d];
       v.image
-        .setOrigin(58 / 320, 175 / 320)
-        .setScale(e.length / ([253, 258, 278, 255][n]! - 58), 1.15)
-        .setRotation(angle)
-        .setDepth(-25)
-        .setAlpha(warning ? 0.5 : 1)
-        .setCrop(58, 0, 262, 320);
+        .setOrigin(...tag.origin)
+        .setScale(0.7)
+        .setRotation(angle - cardinal)
+        .setDepth(y + 2)
+        .setAlpha(warning ? 0.3 : 1);
     } else if (e.kind === 'arc') {
       const n = warning ? 0 : Math.min(3, 1 + Math.floor(age / 3.9));
       frame = 'sweep_' + n;
       const v = this.image(id, asset, frame, x, y);
       v.image
-        .setOrigin(0.5, 120 / 320)
-        .setScale(1.575)
+        .setPosition(x, y - 28)
+        .setOrigin(0.5, 140 / 320)
+        .setScale(e.length / 112, (e.length / 82) * 0.6)
         .setRotation(angle - Math.PI / 2)
         .setDepth(-25)
         .setAlpha(warning ? 0.45 : 1)
-        .setCrop(0, 120, 320, 200);
+        .setCrop(0, 140, 320, 180);
     } else if (e.kind === 'lava' || e.kind === 'line') {
       const lane = e.kind === 'lava';
       asset = lane ? 'vfx_lava_lane_v03' : 'vfx_lava_lane';
@@ -472,9 +490,17 @@ export class HongLietRenderer {
     v.bar ??= this.scene.add.graphics();
     const g = v.bar;
     g.clear().setDepth(-20);
-    if (warning && e.kind !== 'cannon' && e.kind !== 'projectile') {
+    if (
+      warning &&
+      e.kind !== 'cannon' &&
+      (e.kind !== 'projectile' || e.abilityId === 'hong_liet_a1')
+    ) {
       g.lineStyle(2, 0xffca58, 0.85);
-      if (e.kind === 'line' || e.kind === 'lava') {
+      if (
+        e.kind === 'line' ||
+        e.kind === 'lava' ||
+        e.abilityId === 'hong_liet_a1'
+      ) {
         const r = e.radius || 12,
           nx = -e.fy * r,
           ny = e.fx * r;

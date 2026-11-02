@@ -12,6 +12,9 @@ import type { LobbyState } from '@volam/game-protocol';
 import { facing } from './facing.js';
 import { FeedbackVfx } from './feedback-vfx.js';
 import { M3dFeedback, m3dAssets } from './m3d-feedback.js';
+import { M3dR3Feedback } from './m3d-r3-feedback.js';
+import { r3Assets } from './m3d-r3-art.js';
+import { preloadR3Arena } from './m3d-r3-arena.js';
 import { feedbackArt } from './feedback-art.js';
 import { ApprovedSkillVfx, approvedSkillAssets } from './approved-skill-vfx.js';
 import { feedbackProjectile, feedbackScale } from './feedback-visuals.js';
@@ -22,16 +25,19 @@ import {
 
 const components = new Map(skillArt.assets.map((a) => [a.id, a]));
 export function preloadSkillArt(scene: Phaser.Scene): void {
+  preloadR3Arena(scene);
   preloadRasterAnimations(scene, skillArt.assets);
   preloadRasterAnimations(scene, feedbackArt);
   preloadRasterAnimations(scene, approvedSkillAssets);
   preloadRasterAnimations(scene, m3dAssets);
+  preloadRasterAnimations(scene, r3Assets);
 }
 export function registerSkillArt(scene: Phaser.Scene): void {
   registerRasterAnimations(scene, skillArt.assets);
   registerRasterAnimations(scene, feedbackArt);
   registerRasterAnimations(scene, approvedSkillAssets);
   registerRasterAnimations(scene, m3dAssets);
+  registerRasterAnimations(scene, r3Assets);
 }
 interface EffectView {
   sprite: Phaser.GameObjects.Sprite;
@@ -49,6 +55,7 @@ interface VfxActor {
   zoneId: string;
 }
 export class SkillVfx {
+  private r3: M3dR3Feedback;
   private m3d: M3dFeedback;
   private feedback: FeedbackVfx;
   private approved: ApprovedSkillVfx;
@@ -70,6 +77,7 @@ export class SkillVfx {
   >();
   private state: LobbyState | undefined;
   constructor(private scene: Phaser.Scene) {
+    this.r3 = new M3dR3Feedback(scene);
     this.m3d = new M3dFeedback(scene);
     this.feedback = new FeedbackVfx(scene);
     this.approved = new ApprovedSkillVfx(scene);
@@ -209,6 +217,7 @@ export class SkillVfx {
     );
   }
   event(e: CombatEvent): void {
+    if (this.r3.event(e)) return;
     if (this.m3d.event(e)) return;
     if (this.approved.event(e)) return;
     if (e.kind === 'attack') this.casts.delete(e.sourceId);
@@ -374,6 +383,7 @@ export class SkillVfx {
     renderPosition?: (id: string) => { x: number; y: number } | undefined,
   ): void {
     this.state = state;
+    this.r3.sync(state, zoneId, renderPosition);
     this.m3d.sync(state, zoneId, renderPosition);
     this.approved.sync(state, zoneId, renderPosition);
     this.feedback.sync(state, zoneId, renderPosition);
@@ -414,6 +424,7 @@ export class SkillVfx {
         magnitude: number;
       }>;
       for (const s of statuses) {
+        if (this.r3.handles(s.abilityId)) continue;
         if (
           this.m3d.handles(s.abilityId) &&
           ['channel', 'dash', 'crit_buff'].includes(s.kind)
@@ -497,6 +508,7 @@ export class SkillVfx {
     state?.players.forEach((a, id) => syncActor(id, a));
     state?.creeps.forEach((a, id) => syncActor(id, a));
     state?.areas.forEach((a, id) => {
+      if (this.r3.areaHandled(a.abilityId)) return;
       if (this.m3d.areaHandled(a.abilityId)) return;
       if (this.approved.handles(a.abilityId)) return;
       if (this.feedback.areaHandled(a.abilityId)) return;
@@ -560,6 +572,7 @@ export class SkillVfx {
       }
     const shots = new Set<string>();
     state?.projectiles.forEach((p, id) => {
+      if (this.r3.projectileHandled(p.abilityId)) return;
       if (this.m3d.projectileHandled(p.abilityId)) return;
       if (this.approved.handles(p.abilityId)) return;
       if (this.feedback.projectileHandled(p.abilityId, p.stage)) return;
@@ -645,6 +658,7 @@ export class SkillVfx {
     };
   }
   clear(): void {
+    this.r3.clear();
     this.m3d.clear();
     this.approved.clear();
     this.feedback.clear();
@@ -660,6 +674,7 @@ export class SkillVfx {
     this.projectiles.clear();
   }
   observeCharacter(texture: string, frame: string) {
+    this.r3.observeCharacter(texture, frame);
     this.m3d.observe(texture, frame);
     this.approved.observe(texture, frame);
     this.feedback.observeCharacter(texture, frame);
@@ -676,6 +691,9 @@ export class SkillVfx {
     fy: number,
     hp: number,
   ) {
+    const r3 = this.r3.actorCast(id);
+    if (r3) return r3;
+    if (this.r3.handles(abilityId)) return undefined;
     const m3d = this.m3d.actorCast(id);
     if (m3d) return m3d;
     if (this.m3d.handles(abilityId)) return undefined;
@@ -733,6 +751,7 @@ export class SkillVfx {
   inspect() {
     return {
       m3d: this.m3d.inspect(),
+      r3: this.r3.inspect(),
       approved: this.approved.inspect(),
       feedback: this.feedback.inspect(),
       loadedComponents: skillArt.assets.filter((a) =>

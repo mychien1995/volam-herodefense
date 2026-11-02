@@ -1,0 +1,45 @@
+/** Director-delegated playtest values. Preview choreography is never a tuning input. */
+export const m3dFeedbackTuning = {
+  dashRechargeTicks: 240,
+  basicKnockbackChance: 0.1,
+  shaolin: {
+    chainIdleTicks: 60,
+    chainCooldownTicks: 30,
+    finisher: { damage: 38, range: 300, radius: 28, speed: 480 },
+    tornado: { damage: 34, range: 360, radius: 28, speed: 330 },
+    earthSpike: {
+      damage: 42,
+      range: 420,
+      radius: 24,
+      speed: 360,
+      stunTicks: 36,
+      windupTicks: 9,
+      recoveryTicks: 6,
+    },
+    footForce: {
+      damage: 17,
+      range: 260,
+      radius: 14,
+      speed: 390,
+      lanes: [-18, 0, 18],
+      laneDelayTicks: 3,
+      volleys: 2,
+      volleySpacingTicks: 18,
+    },
+    skyPalm: {
+      range: 210,
+      fieldRadius: 150,
+      fieldDamage: 36,
+      fieldDurationTicks: 90,
+    },
+    exorcismRange: 180,
+    roar: { range: 210, slow: 0.35 },
+  },
+  caiBang: {
+    groundSlamRange: 240,
+    groundSlamWidth: 50,
+    whirlRange: 175,
+    finalSmashRange: 215,
+    whirlDurationMultiplier: 1.3,
+  },
+} as const;

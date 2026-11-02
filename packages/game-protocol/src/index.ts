@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 18;
+export const PROTOCOL_VERSION = 19;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -126,6 +126,7 @@ export const skillPreviewActionSchema = z.strictObject({
   action: z.enum(['targets', 'attacker', 'clear']),
 });
 export const combatEventSchema = z.strictObject({
+  tick: z.number().int().nonnegative().optional(),
   protocolVersion: z.literal(PROTOCOL_VERSION),
   id: z.number().int().positive(),
   kind: z.enum(['attack', 'hit', 'death', 'cast', 'effect', 'pulse']),
@@ -152,7 +153,8 @@ export const dungeonActionSchema = z.discriminatedUnion('action', [
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     action: z.literal('enter'),
-    access: z.enum(['private', 'shared']),
+    access: z.enum(['private', 'shared']).optional(),
+    summonHelp: z.boolean().optional(),
     destination: z
       .enum([
         'forest',
@@ -169,6 +171,18 @@ export const dungeonActionSchema = z.discriminatedUnion('action', [
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     action: z.literal('exit'),
+  }),
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    action: z.literal('summon-help'),
+  }),
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    action: z.literal('reply-invitation'),
+    invitationId: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    accept: z.boolean(),
   }),
 ]);
 export const bossLootActionSchema = z.strictObject({
@@ -256,6 +270,14 @@ export const LobbyPlayer = schema(
     combos: t.string().default('[]').view(),
     zoneId: t.string().default('arena'),
     respawnTicks: t.number().default(0),
+    bossSpectator: t.boolean().default(false),
+    bossRevivalUsed: t.boolean().default(false),
+    bossAttempt: t.number().default(0),
+    bossInvitation: t.string().default(''),
+    actionState: t.string().default('').view(),
+    actionUntil: t.number().default(0).view(),
+    actionStartedAt: t.number().default(0).view(),
+    basicStage: t.string().default('').view(),
     bossItems: t.string().default('[]'),
     nickname: t.string(),
     schoolId: t.string().default(''),
@@ -331,6 +353,7 @@ export const BossEffectState = schema(
 export type BossEffectState = SchemaType<typeof BossEffectState>;
 export const ProjectileState = schema(
   {
+    startedAt: t.number().default(0),
     x: t.number().default(0),
     y: t.number().default(0),
     vx: t.number().default(0),
@@ -367,6 +390,7 @@ export const DungeonState = schema(
 );
 export const AreaState = schema(
   {
+    startedAt: t.number().default(0),
     x: t.number(),
     y: t.number(),
     radius: t.number(),
@@ -380,6 +404,7 @@ export const AreaState = schema(
 export type DungeonState = SchemaType<typeof DungeonState>;
 export const DefenseState = schema(
   {
+    paused: t.boolean().default(false),
     enabled: t.boolean().default(false),
     statueHp: t.number().default(0),
     statueMaxHp: t.number().default(0),

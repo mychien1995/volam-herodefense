@@ -153,7 +153,11 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     }
     const punch = thieuLamBasics.thieu_lam_quyen!,
       dao = thieuLamBasics.thieu_lam_dao!;
-    expect(punch.cooldownTicks).toBeGreaterThan(dao.cooldownTicks);
+    expect(punch.manualChain).toMatchObject({
+      idleTicks: 60,
+      cooldownTicks: 30,
+    });
+    expect(punch.cooldownTicks).toBe(1);
     if (punch.effect.mode === 'arc' && dao.effect.mode === 'arc') {
       expect(punch.effect.damage).toBeGreaterThanOrEqual(dao.effect.damage);
       expect(punch.effect.range).toBeLessThan(dao.effect.range);
@@ -168,10 +172,12 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     (first, second, finish) => {
       const f = fixture(),
         [a, b] = f.enemies;
+      if (first === 'toan_phong_thoai') f.enemies[2]!.x = 100;
       f.cast(first);
-      expect(f.world.combos).toHaveLength(first === 'toan_phong_thoai' ? 3 : 2);
+      expect(f.world.combos).toHaveLength(2);
       a!.y = 450;
       f.cast(second);
+      if (second === 'hoanh_tao_cuoc') f.steps(16);
       a!.y = 300;
       f.cast(finish);
       f.steps(30);
@@ -348,7 +354,7 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     f.cast('nhu_lai_niet_ban');
     f.steps(15);
     for (const e of f.enemies)
-      expect(f.hits('nhu_lai_niet_ban', e.id)).toHaveLength(1);
+      expect(f.hits('nhu_lai_niet_ban', e.id)).toHaveLength(2);
     expect(hasStatus(f.hero, 'damage_reduction', f.world.tick)).toBe(true);
     const r = m1Config.progression!.skills.nhu_lai_niet_ban!.ranks;
     expect(r[2]!.selfStatuses![0]!.durationTicks).toBeGreaterThan(
