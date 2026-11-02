@@ -59,7 +59,7 @@ describe('desert map and authoritative destination contract', () => {
     };
     expect(dungeonActionSchema.parse(payload)).toMatchObject(payload);
     expect(
-      dungeonActionSchema.safeParse({ ...payload, destination: 'hell' })
+      dungeonActionSchema.safeParse({ ...payload, destination: 'forged' })
         .success,
     ).toBe(false);
     expect(

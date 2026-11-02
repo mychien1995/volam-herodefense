@@ -4,6 +4,7 @@ import {
   addThieuLamProgression,
 } from './thieu-lam.js';
 import { z } from 'zod';
+import { economySchema, economyTrial } from './economy.js';
 import { defaultBranches } from './default-builds.js';
 import type { SimulationConfig } from '@volam/game-core';
 import { arena } from './arena.js';
@@ -69,6 +70,7 @@ export const simulationConfigSchema = z.strictObject({
     })
     .optional(),
   creepRespawn: z.boolean().default(true),
+  economy: economySchema.optional(),
   creep: z.strictObject({
     hp: positive,
     defense: z.number().nonnegative(),
@@ -198,6 +200,7 @@ const initialConfig: SimulationConfig = simulationConfigSchema.parse({
 });
 
 export const m1Config: SimulationConfig = simulationConfigSchema.parse({
+  economy: economyTrial,
   ...initialConfig,
   basics: {
     ...initialConfig.basics,

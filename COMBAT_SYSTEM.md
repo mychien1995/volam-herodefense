@@ -1,3 +1,11 @@
+## M3D approved combat and action lifecycle — 2026-11-03
+
+Newest M3D feedback overrides historical reach/timing statements below. Every A is a fresh press; monk A has four stages, minimum6tick cadence, finisher30tick cooldown;60tick inactivity begins30tick cooldown. Shift has2 charges with sequential240tick/8s recharge. Võ Đang basic knockback probability0.1.
+
+Toàn Phong and Ca Diệp are straight piercing projectiles with per-target/cast dedup; Ca Diệp's caster remains stationary during windup9/recovery6tick and all targets on the earth path take damage+36tick stun, subject to existing boss resistance. Vô Ảnh's one-foot/six-foot branch uses real same-attacker/same-target B progress. Buffer at most one early finisher while the actual step2 action/projectile is unresolved, preserving the input facing; consume mana/cooldown once at execution, clear on A/other skill/Shift, stun/silence,death/travel/respec/disconnect. It never fabricates hits. Full branch lanes[-18,0,18], release ticks[0,3,6,18,21,24], projectile speed390/range260. Same-target empowerment remains checked at hit and cached per target/cast.
+
+Vi Đà offset189. Như Lai's Sanskrit field damages on first entry once/target/cast, not standing or repeated re-entry. Owner-following Kháng Long burn remains separate. Hồng Liệt artillery schedules continue independently of A1/A2 and cancel through encounter cleanup. Chu wine12s grants70% defense penetration against Chu only (defense180), strongest penetration rather than additive stacking; no healing or immunity. Reflection still returns actual HP loss once. Càn Khôn pull120px/s blocks Shift without spending a charge. All effects are server-owned; atlas frames/preview timings never authorize hits or resource changes.
+
 ## M3D feedback override — 2026-11-01
 
 Shift is a separate zero-mana, zero-damage, non-invulnerable mobility command: two charges, sequential 180-tick recharge at 30Hz. Server owns direction from current movement/facing, terrain-safe swept motion, debt and lifecycle; travel converts remaining debt between zone clocks. Dead heroes retain/recharge debt. Stun or another active action rejects a dash without consuming a charge.
@@ -7,6 +15,12 @@ Võ Đang basics use a 6-tick animation cadence and no separate recovery cooldow
 The blink sword flies straight at 180 units/s to rank1 range540, pierces each enemy once and then lingers damage-free for45 ticks. Valid same-slot recast bypasses its existing cooldown/mana cost; destination, terrain path and confinement are checked on server. Unsafe recast retains the sword. Cooldown begins on initial cast; cleanup uses the existing death/travel/build/disconnect path. Delayed arcs capture heading/offense, strike once after windup and may retain an explicit active/recovery duration. The rank4 owner-following fire area updates position every simulation tick and damages on its own fixed pulse schedule.
 
 # Combat System Specification v1.0
+
+## Inventory combat design — 2026-11-02 (not implemented by this documentation update)
+
+See [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) for the confirmed inventory design and open formulas. Basics add weapon damage, armor defense/HP, hat HP/MP regen and boot speed/minor crit. Crafted weapon branches are A spread, lifesteal based on one A's emitted damage (not creep count), and **A armor penetration replacing stun**. Exact penetration/stacking and lifesteal crit/mitigation/multi-hit timing remain open; existing skill penetration does not imply that equipment is implemented.
+
+Crafted boots add one **Z** item action independently of QWER: **Thanh Tâm** clears existing slow/poison/burn (replacing 10% healing), forward collision-respecting blink, or facing-directed straight slow/poison needle without auto-targeting. No implicit stun cleanse, immunity or boss-mechanic removal. Potions have **5s use cooldown**; shared/per-type policy is open. Server owns all effects, cooldowns and validation; equipment changes must not reset cooldown debt or duplicate resources/stats. Numeric armor reflect/aura behavior and Long Châu stat growth require explicit formulas before implementation. PvP excluding equipment/potions remains proposed, including the treatment of Z and Long Châu.
 
 ## Current M3C3 feedback override — 2026-10-31
 
@@ -97,7 +111,7 @@ Design effects as composable, data-driven operations with optional specialized h
 ## 6. Thiếu Lâm Phát Động combo — confirmed same-target rule
 
 **Combo A:** `La Hán Quyền` → `Vi Đà Quyền` → `Đại Lực Kim Cương Chưởng`.
-**Combo B:** `Toàn Phong Thoái` → `Hoành Tảo Cước` → `Vô Ảnh Cước`.
+**Combo B:** `Toàn Phong Thoái` → `Ca Diệp Thoái` (`hoanh_tao_cuoc`) → `Vô Ảnh Cước`.
 
 Algorithm (logical spec):
 

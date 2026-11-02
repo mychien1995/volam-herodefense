@@ -24,6 +24,8 @@ describe('validated M0 data and protocol', () => {
       basicAttack: 'KeyA',
       dash: ['ShiftLeft', 'ShiftRight'],
       activeSkills: ['KeyQ', 'KeyW', 'KeyE', 'KeyR'],
+      healthPotion: ['Digit1', 'Numpad1'],
+      manaPotion: ['Digit2', 'Numpad2'],
     });
   });
   it('normalizes Vietnamese nicknames to NFC and trims whitespace', () => {
@@ -85,6 +87,15 @@ describe('validated M0 data and protocol', () => {
       }).success,
     ).toBe(false);
   });
+  it.each([19, 20])(
+    'rejects previous uncombined branch protocol%s',
+    (protocolVersion) => {
+      expect(
+        joinOptionsSchema.safeParse({ nickname: 'Hero', protocolVersion })
+          .success,
+      ).toBe(false);
+    },
+  );
   it('allocates independent synchronized collections per room', () => {
     const a = new LobbyState();
     const b = new LobbyState();

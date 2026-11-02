@@ -457,6 +457,7 @@ test('M3D selector retains existing dungeons and enters Cổ Mộ through normal
     ['forest', 'Rừng Trúc'],
     ['desert', 'Sa Mạc'],
     ['sea', 'Biển'],
+    ['hell', 'Địa Ngục'],
     ['hong_liet', 'Hoàn Nhan Hồng Liệt'],
     ['chu_ba_thong', 'Chu Bá Thông'],
     ['kim_luan', 'Kim Luân Pháp Vương · Tương Dương'],

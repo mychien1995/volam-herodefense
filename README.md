@@ -1,6 +1,6 @@
 # Run the current playable prototype
 
-Current gameplay checkpoint: **M3C3 — Thiếu Lâm implemented and verified**, alongside Cái Bang, Thiên Sơn and Võ Đang. All43 actives,eight basics and four automatic passives are registered. See [implementation/results](docs/M3C3_IMPLEMENTATION.md),[skill/asset mapping](docs/M3C3_SKILL_ASSET_MAP.md) and [roadmap](ROADMAP.md). Normal heroes start with one point and empty active slots; learn skills in the arena. Thiếu Lâm skill candidates retain their existing art-approval waiver; independent baseline hurt/death remain missing. M3D is not started automatically.
+Current playable baseline: **milestone/m3d — approved feedback integration**, retaining four schools,43 actives,eight basics,four passives,eight dungeon destinations including Hell, inventory/merchant UI and trial basic/potion transactions. Default builds allocate points automatically; Custom supports manual learning/loadout in the arena. Ca Diệp Thoái and Sư Tử Hống keep their stable IDs. Current rules, checks and delivery: [M3D integration](docs/M3D_MILESTONE_INTEGRATION_2026-11-03.md), [project memory](docs/M3D_INTEGRATION_MEMORY.md), [roadmap](ROADMAP.md). This integration does not complete future inventory-v2 rewards/crafting/Z/PvP or other unfinished milestones.
 
 For focused iteration and a single complete final verification run, see [Development workflow](docs/DEVELOPMENT_WORKFLOW.md). Use `pnpm check:quick <test file>` while iterating and `pnpm check:final [relevant Playwright arguments]` after the final changes; asset preparation and full tests are shared within the final run.
 
@@ -14,6 +14,8 @@ cd D:\Projects\volam-hero-defense
 ```
 
 The launcher finds `pnpm.cmd` on PATH or in the existing bundled tools directory; it does not change your global PATH or install packages. Keep the terminal open and visit the URL printed by Vite, normally <http://127.0.0.1:5173>. Enter a nickname, create a room, start, select a school and confirm. Open Võ Học to equip and learn skills with earned points. Arrow keys move; A uses the independent basic style; Q/W/E/R cast learned equipped skills. Escape closes menus. Ctrl+C stops the local services (confirm Y if Windows asks).
+
+**Merchant thử nghiệm:** farm vàng, mở **Thương Gia** để mua/nâng Vũ khí/Giáp/Mũ/Giày tới cấp5 hoặc mua bình ba cỡ. Giá cấp1 lần lượt30/30/20/25 vàng; bình4/10/22 vàng. Mua đồ tự trang bị, chỉ mua tại đấu trường trung tâm. Nhấn **1 dùng bình máu**, **2 dùng bình mana** (cả numpad), hoặc bấm bình trên HUD để dùng cỡ nhỏ nhất. Chọn stack trong Túi đồ để dùng đúng cỡ; mang20 bình tổng, hồi chung5s. [Bảng giá/chỉ số tạm](docs/ECONOMY_TRIAL.md) có thể chỉnh sau; chế tạo/Z chưa mở.
 
 The repository dependencies are already installed in the current workspace. The historical handoff below describes the broader design; it does not mean every later gameplay milestone is implemented.
 
@@ -49,7 +51,8 @@ No source code or finished art is included yet; this is the *build handoff*, not
 | [`CONTENT_DATA.md`](CONTENT_DATA.md) | Canonical named skill catalogue, schools, and content structure |
 | [`COMBAT_SYSTEM.md`](COMBAT_SYSTEM.md) | Input, movement, targeting, combat, crit, cleave, conditions and Phát Động |
 | [`BALANCING.md`](BALANCING.md) | Balance philosophy, XP, enemy scaling, simulation and telemetry |
-| [`ITEMS_AND_CRAFTING.md`](ITEMS_AND_CRAFTING.md) | Item upgrades, 4 slots, boss loot rolls, crafting and inventory |
+| [`ITEMS_AND_CRAFTING.md`](ITEMS_AND_CRAFTING.md) | Inventory/merchant v2.0 design (2026-11-02): potions, four fixed slots, personal boss rewards/Long Châu and three-branch crafting; runtime migration pending |
+| [`docs/INVENTORY_MERCHANT_HUD_DESIGN.md`](docs/INVENTORY_MERCHANT_HUD_DESIGN.md) | Approved merchant/inventory/auxiliary-Z concept v01: five PNGs, interactions and provenance; [runtime UI integration/limits](docs/INVENTORY_HUD_INTEGRATION.md) |
 | [`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md) | Engine/server decision, package boundaries, netcode and testing |
 | [`ART_ASSET_GUIDE.md`](ART_ASSET_GUIDE.md) | **Confirmed camera/perspective**, sprite size proposals, layering/occlusion, art sourcing, exports and animation quality gates |
 | [`ROADMAP.md`](ROADMAP.md) | Milestones, acceptance criteria and incremental delivery sequence |

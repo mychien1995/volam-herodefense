@@ -1,3 +1,15 @@
+## Approved M3D feedback integration — 2026-11-03
+
+Director approves all feedback/runtime through `521f73cd` and now explicitly authorizes integration into `milestone/m3d`, superseding earlier no-merge instructions for this work. Merge retains the milestone's Hell, approved inventory/merchant UI, trial purchases and potion1/2 controls. Full approved behavior and trial numbers: `docs/M3D_R3_GAMEPLAY_HANDOFF.md`, `docs/M3D_PLAYTEST_FOLLOWUP_HANDOFF.md`, `docs/M3D_VO_ANH_FIX_2026-11-03.md`; newest ledger entries override historical values.
+
+Confirmed runtime: O Võ Công, P Phó Bản, Escape close/quit; remove Đồng Đội Kết Nối. Creep dungeons including Hell are private; boss dungeons shared, no access selector. Invitations30s real time, only to connected peers outside the selected boss; no solo summon prompt. Everyone connected inside the same boss freezes exterior arena actors/projectiles/statue damage/wave clock. First boss death auto-revives5s full HP/MP at entry; second becomes spectator (solo automatically returns to main arena). One revival per character/boss attempt, not refreshed by travel/reconnect; only boss reset refreshes. Reconnect returns to main arena.
+
+Latest creep speed is64.8% of owner's actual buffed entry speed (90%×80%×90%), fixed for the wave. One sprite identity/wave, next wave changes identity; deterministic soft footprint separation. Boss arenas use width/height×1.1 from pre-feedback geometry. Ca Diệp and Sanskrit field each hit once per target/cast. Ca Diệp hits/stuns every target on the path. Vô Ảnh is one centered foot without valid same-target B chain, three parallel lanes twice with it; early finisher input waits for the real Ca Diệp action/hit. Shift recharge8s/charge; four fresh-press monk A stages with1s cooldown after finisher or after2s inactivity. Võ Đang basic knockback chance10%.
+
+Chu wine is a real damageable-disciple/drop/proximity Space interaction; trial boss defense180, wine12s ignoring70% of Chu defense for the drinker only, refresh/nonstack, no heal/immunity, cleanup on death/travel/reset. Càn Khôn pulls120px/s arena-wide and blocks Shift. Hồng Liệt artillery is autonomous while boss continues A1/A2. Boss cadence is validated in `packages/game-data/src/boss-cadence.json`.
+
+Do not silently implement the inventory-v2 boss reward/material/Long Châu/crafting/Z/PvP migration: those remain future work under the newer inventory design. This integration preserves the retained encounter reward backend and the milestone's current basic/potion economy. Approval of this integration is not approval of unrelated unfinished milestones.
+
 ## M3D approved tech commit authorization — 2026-11-02
 
 The director explicitly requests: “commit phần tech đã duyệt và tài liệu bàn giao.” Commit the approved technical/gameplay changes, their tests and verification evidence, and the handoff on `wip/m3d/feeback-tech`. This does not authorize merging, deployment or integration of the separate visual worktree. The previously recorded successful final checks remain applicable because this step changes delivery/approval metadata only.
@@ -11,6 +23,28 @@ The director explicitly approves the delivered technical/gameplay changes in `wi
 The director authorizes only `wip/m3d/feeback-tech`, without visual-worktree integration. Confirmed: Shift has two charges, sequential six-second recharge; each A is a distinct key press (no held autoattack); Võ Đang has no additional basic cooldown beyond a finite animation cadence; Thiếu Lâm Quyền cycles left fist/right fist/front kick/roundhouse. Nhân Kiếm Hợp Nhất is a slow piercing damaging sword, one hit per enemy, same-slot recast blinks to its server-owned position; it lingers 1.5s at maximum range. Kháng Long rank4 gains a small owner-following fire aura. Requested reaches and skill lifetimes increase; ordinary extended attacks retain their prior per-cast damage, while the new aura adds damage. Dungeon creep waves grow and all living in-instance heroes are immediately eligible aggro targets.
 
 Configurable trial numbers, authority/cleanup details, temporary retained-art adaptations and actual verification belong to `docs/m3d-feedback-tech-handoff.md`. No PNG/source/atlas generation, new-art approval, boss avatar, other milestone or merge is authorized here.
+
+## Potion hotkeys — 2026-11-02
+
+Director requests **1 = use health potion, 2 = use mana potion**. Top-row/numpad keys use the existing smallest-first HUD transaction with server-owned quantities/recovery/shared5s cooldown. Modal/text input, key-repeat and modified shortcuts cannot trigger potion consumption. Show1/2 badges and settings help inside the viewport; no new game effect or tuning.
+
+## Runtime UI approval and delegated trial economics — 2026-11-02
+
+Director: “Duyệt giao diện, hay commit. Về economics, bạn hãy tự gắn giá cho sản phẩm để tôi mua. Sau này tôi sẽ revise lại”. The reviewed runtime UI is approved and committed (`60498c09`); prior concept-only/unavailable-purchase notes below are historical. This authorizes provisional configurable prices and working server-owned basic purchases/upgrades and potion purchases/use. Four-slot level5 limits remain; select trial policy20 potions total, shared5s cooldown, instant fixed recovery, no consumption at full resource, alive-arena purchases only. No starting-gold/reward changes. Exact prices/stats and scope: [ECONOMY_TRIAL.md](docs/ECONOMY_TRIAL.md). Values are director-delegated trial defaults, subject to revision, not final balance approval. Craft fees are previews; crafted effects/Z, personal boss/Long Châu migration and PvP remain future work.
+
+## Inventory HUD concept approval and UI integration — 2026-11-02
+
+The director approves the five inventory/merchant/auxiliary-Z concepts and requests Phaser integration. Scope: in-viewport UI with modular retained/derived PNG art, live server gold/stats/held rewards, working inspection/selection and honest unavailable transaction/Z states where inventory v2 backend is absent. Do not invent prices/stats, client-only transactions/effects, PvP normalization or silently migrate retained boss rewards. Concept approval is separate from actual runtime approval. Details/checks: [INVENTORY_HUD_INTEGRATION.md](docs/INVENTORY_HUD_INTEGRATION.md).
+
+## Inventory and merchant design revision — 2026-11-02
+
+**CONFIRMED, design only:** [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) v2.0 records the director's inventory brainstorm. Four fixed equipment slots are weapon (damage), armor (defense/HP), hat (HP/MP regen), boots (movement speed/minor crit); necklace is removed. Buy matching basics to upgrade through level 5; max basic + designated boss material + gold selects one of three crafted branches. Potions have 5s use cooldown, limit 20 with total/per-type interpretation still open, larger sizes cost more, and cannot be bought inside dungeons.
+
+Boss rewards replace the former one-random-item/roll rule: every character who damaged the boss and is still in that boss instance at death receives its material. Each character also receives Long Châu once per boss per match for in-match stat growth. No item resale, trading or transferable drops; merchant purchases remain. Existing fixed XP/gold pools and invasion no-item rules remain. Repeated private/shared kills cannot duplicate first-clear rewards.
+
+Recipes: Lý Mạc Sầu → Ngọc Uyên Ương + boots5 (Thanh Tâm cleanse / forward blink / straight slow-poison needle); Hoàn Nhan Hồng Liệt → Đại Kim Chiến Giáp + armor5 (reflect / slow aura / burn aura); Chu Bá Thông → Đại Hồ Lô + hat5 (regen / HP+MP+defense / damage+crit); Kim Luân Pháp Vương → Kim Luân + weapon5 (spread / lifesteal / armor penetration). **Thanh Tâm replaces 10% healing Z; armor penetration replaces weapon stun.** Lifesteal is based on one A's emitted damage, not the number of creeps hit. All exact values not explicitly chosen remain open.
+
+**PROPOSED/OPEN:** shared vs separate potion cooldown, total vs per-type cap, potion size/price/healing tables, Long Châu stat formula, equipment coefficients, inventory capacity, edge-case eligibility and merchant/crafting policies. **PvP ignoring equipment and banning potions is an idea, not a confirmed rule**; scope of shoe Z, Long Châu, level/passive/rank normalization remains open. No code/protocol migration or M4 completion is authorized by this documentation request; earlier encounter implementation reports describe retained runtime behavior.
 
 ## Lý Mạc Sầu selector correction — 2026-11-01
 
@@ -39,6 +73,10 @@ The user explicitly requests Vietnamese product UI, compact school selection wit
 The user explicitly confirms retaining current regular4/ultimate3 caps, level gates and the existing surplus mechanism. Each slot's quota is floor((min(level,30)+3-slotIndex)/4); learned rank is bounded by quota, unlocked ranks and cap. Unallocated gated points remain pending; surplus applies only when all four skills are maxed. Four regular starters follow catalogue order (Thiếu Lâm Quyền uses combo A plus Toàn Phong Thoái). Mode/branch changes recalculate and preserve cooldown debt without resource refill. Normal dungeon exits retain their return marker; only death respawn now uses the arena hero-spawn marker, with the existing five-second delay and no gold/XP penalty. No new artwork or broader M3D balancing is authorized. Details: docs/SMALL_GAMEPLAY_CHANGES.md.
 
 # Approved decisions & assumptions register
+
+## Hell integration request — 2026-11-01
+
+The user authorizes integrating retained Địa Ngục environment and six supplied creep identities in worktree/branch `wip/m3d/hell`, using destination `hell`, separate private/shared instances and the existing physical Space return. Generic M2A creep tuning, rewards and authoritative wave behavior are reused because species profiles are absent. Lava is an impassable boundary without damage/status/traversal additions; Dung Nham Cự Nhân remains a regular creep. Shared hurt/death clips are not four authored facings. No artwork is generated and runtime director approval remains pending. See `docs/HELL_INTEGRATION.md`.
 
 ## Beach integration request — 2026-11-01
 
@@ -111,8 +149,8 @@ The current implementation request authorizes replacing the arena environment an
 - **Private dungeon permits only one player**; shared permits up to six. **Creep dungeon** advances only after current wave eliminated, gets stronger with wave progression; pauses when empty. **Boss dungeon** contains fixed-power boss that may be farmed repeatedly; if dungeon is empty for 30 seconds, boss health and position reset. Boss respawns after a configurable cooldown when killed.
 - Dungeon creeps and statue creeps scale in count and strength according to active player count. Snapshot player count for wave creation to avoid live HP jumps. Dungeon bosses have fixed difficulty within their configured dungeon, **not** endless per-clear scaling.
 - Killing/meaningfully assisting on creeps grants eligibility; a **single fixed creep EXP pool is divided among eligible participants**. Boss dungeon: player who landed at least one valid hit qualifies for shared boss EXP, subject to presence at completion as a proposed implementation safeguard.
-- **Exactly one randomly selected loot item per dungeon boss kill**; eligible players **roll for ownership**; solo qualifying player automatically wins. Item may be kept, dropped to ground, or sold; duplicates permitted. Repeated kills are for gold/EXP/items and crafting.
-- Shop sells basic items. Purchasing duplicates upgrades an existing basic item to its max level. **Max-level basic item + boss drop + gold → stronger crafted item**. Any school can equip any item; **4 equipment slots**. Backpack size OPEN.
+- Dungeon boss materials are personal rewards for every player who damaged the boss and remains in its instance at death, without rolls. Long Châu is granted once per character/boss/match. No resale/trading/transferable drops; see [inventory v2.0](ITEMS_AND_CRAFTING.md). Earlier single-item/roll encounter records are historical runtime contracts, not the future inventory design.
+- Shop sells potions and basics; matching purchases upgrade basics to **level 5**. **Max basic + designated boss material + gold → one of three crafted branches**. Any school can equip any item; **4 fixed slots: weapon/armor/hat/boots**, no necklace. Backpack size OPEN.
 - Hero death: short respawn at arena, no EXP or gold penalty.
 - **20 regular invasions from west/east (two directions)** on exact 3-minute intervals, at 03:00 through 60:00. Waves spawn even with prior waves alive. Warnings 60s and 15s before each; players must travel back themselves. **Statue cannot be repaired**.
 - Invasion creeps detect nearby players and **prioritize the closest player inside detection range**; when no players in range, move to/attack statue. If player leaves detection range, resume statue path. Detection and attack radii separate.
@@ -129,7 +167,7 @@ The current implementation request authorizes replacing the arena environment an
 - Regular skill max rank 4; ultimate max 3; ult unlock at character levels 6/10/14; regular rank gating at 1/3/5/7.
 - Melee basic primary target 100%, cleave target 50% by default, school-specific overrides, independent crit rolls.
 - Invasion boss rest 10s after fifth wave fully clears; warnings at T-60 and T-15; raid clock never pauses.
-- Starter backpack 12 slots, equipment slots example weapon/armor/2 accessories; gear slots types are **not** approved.
+- Starter backpack 12 slots remains a proposal; weapon/armor/hat/boots categories are confirmed by the 2026-11-02 inventory revision, superseding the old accessory examples.
 - No PvP gold/EXP reward; PvP duels should have clear win/end behavior and no item loss.
 - No elemental-counter chart initially; elements provide visual/school identity.
 - Suggested 6-second Phát Động window, configurable; crowd-control reduction for bosses not yet numerically specified.

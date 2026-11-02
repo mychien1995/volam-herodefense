@@ -1,5 +1,9 @@
 # M3D — feedback playtest ngày 2026-11-02 và prompt VFX r3
 
+## Milestone integration authorization — 2026-11-03
+
+Sau approval và retrospective, director yêu cầu rõ: “ok hãy integrate vào milestone/m3d”. Chỉ thị này supersede các câu chưa merge/không merge ở lịch sử bên dưới. Kết hợp feedback với milestone3b0c1ebc (Hell, inventory/merchant/potions); cập nhật canonical skill MD và bộ nhớ repository. Trạng thái, commit và kiểm chứng cuối: [M3D_MILESTONE_INTEGRATION_2026-11-03.md](M3D_MILESTONE_INTEGRATION_2026-11-03.md).
+
 ## Director approval — 2026-11-03
 
 Director xác nhận: “ok tôi duyệt tất cả các thay đổi này”, sau bản bàn giao commit `521f73cd` (bao gồm integration r3, feedback followup và fix Vô Ảnh/tốc creep). Runtime được duyệt trong game. Đây không phải lệnh merge: vẫn giữ riêng `wip/m3d/feedback-integration`, chưa merge `milestone/m3d`. Canonical skill MD/bộ nhớ sau merge vẫn chờ merge thật; không thay byte hoặc tự viết lại các asset lock lịch sử.

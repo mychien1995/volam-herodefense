@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 20;
+export const PROTOCOL_VERSION = 21;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -160,6 +160,7 @@ export const dungeonActionSchema = z.discriminatedUnion('action', [
         'forest',
         'desert',
         'sea',
+        'hell',
         'chu_ba_thong',
         'hong_liet',
         'kim_luan',
@@ -199,12 +200,47 @@ export const bossItemActionSchema = z.strictObject({
   action: z.enum(['sell', 'drop']),
 });
 export type DungeonAction = z.infer<typeof dungeonActionSchema>;
+const merchantBase = z.strictObject({
+  protocolVersion: z.literal(PROTOCOL_VERSION),
+  sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+  revision: z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER),
+});
+const potionIdSchema = z.enum([
+  'hp_small',
+  'hp_medium',
+  'hp_large',
+  'mp_small',
+  'mp_medium',
+  'mp_large',
+]);
+export const merchantActionSchema = z.discriminatedUnion('action', [
+  merchantBase.extend({
+    action: z.literal('buy-basic'),
+    slot: z.enum(['weapon', 'armor', 'hat', 'boots']),
+  }),
+  merchantBase.extend({
+    action: z.literal('buy-potion'),
+    potionId: potionIdSchema,
+    quantity: z.number().int().min(1).max(20),
+  }),
+  merchantBase.extend({
+    action: z.literal('use-potion'),
+    potionId: potionIdSchema,
+  }),
+]);
+export const merchantResultSchema = z.strictObject({
+  protocolVersion: z.literal(PROTOCOL_VERSION),
+  sequence: z.number().int().positive(),
+  revision: z.number().int().nonnegative(),
+  message: z.string(),
+});
 export const rejectionSchema = z.strictObject({
   protocolVersion: z.literal(PROTOCOL_VERSION),
   sequence: z.number().int().positive(),
   reason: z.string(),
 });
 export type ServerMessages = {
+  'merchant-result': z.infer<typeof merchantResultSchema>;
   'connection-ack': z.infer<typeof connectionAckSchema>;
   'combat-event': z.infer<typeof combatEventSchema>;
   'command-rejected': z.infer<typeof rejectionSchema>;
@@ -256,9 +292,21 @@ export const BuildState = schema(
   },
   'CharacterBuild',
 );
+export const MerchantInventoryState = schema(
+  {
+    levels: t.map('number'),
+    potions: t.map('number'),
+    revision: t.number().default(0),
+    potionCooldownTicks: t.number().default(0),
+  },
+  'MerchantInventory',
+);
 export const LobbyPlayer = schema(
   {
     build: t.ref(BuildState).default(() => new BuildState()),
+    inventory: t
+      .ref(MerchantInventoryState)
+      .default(() => new MerchantInventoryState()),
     ...actorFields,
     x: t.number().default(0).view(),
     y: t.number().default(0).view(),

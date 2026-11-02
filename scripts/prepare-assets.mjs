@@ -11,6 +11,7 @@ import { prepareForestCreepReview } from './prepare-forest-creep-review.mjs';
 import { prepareDesertAssets } from './prepare-desert-assets.mjs';
 import { prepareBeachAssets } from './prepare-beach-assets.mjs';
 import { prepareLyMacSau } from './prepare-ly-mac-sau.mjs';
+import { prepareHellAssets } from './prepare-hell-assets.mjs';
 import { prepareFeedbackV2Art } from './prepare-feedback-v2-art.mjs';
 import { prepareApprovedAnimationArt } from './prepare-approved-animation-art.mjs';
 import {
@@ -154,6 +155,7 @@ prepareHongLietAssets();
 // Retained review references include generated public atlases: verify after copies.
 prepareApprovedAnimationArt();
 prepareLyMacSau();
+prepareHellAssets();
 console.info(
   `Prepared assets in ${fileURLToPath(dest)} (${assetWrites.changed} written, ${assetWrites.unchanged} unchanged)`,
 );

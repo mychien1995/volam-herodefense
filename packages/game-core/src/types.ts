@@ -1,5 +1,6 @@
 import type { ChuEncounter } from './chu-types.js';
 import type { KimLootContext } from './kim-types.js';
+import type { EconomyDefinition, HeroInventory } from './economy-types.js';
 import type {
   HeroProgression,
   ProgressionDefinition,
@@ -244,6 +245,7 @@ export interface SimulationConfig {
     | undefined;
   dungeonAggro?: boolean | undefined;
   bossEncounter?: BossEncounterDefinition | undefined;
+  economy?: EconomyDefinition | undefined;
   progression?: ProgressionDefinition | undefined;
   tickRate: number;
   inputTimeoutTicks: number;
@@ -329,6 +331,8 @@ export interface Hero extends Actor {
   bossSpectator?: boolean;
   dashCharges?: number;
   dashRechargeAt?: number;
+
+  inventory?: HeroInventory;
   bossItems?: string[];
   bossLoot?: BossLootClaim[];
   progression?: HeroProgression | undefined;

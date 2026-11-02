@@ -1,7 +1,7 @@
 import { fileURLToPath } from 'node:url';
 import { createServer } from 'vite';
 import { ColyseusTestServer } from '@colyseus/testing';
-import { addCreep, type Pose } from '@volam/game-core';
+import { addCreep, blocked, type Pose } from '@volam/game-core';
 import { desertRoster } from '@volam/game-data';
 import { createGameServer } from '../../apps/game-server/dist/app.config.js';
 import type { MatchRoom } from '../../apps/game-server/src/rooms/MatchRoom.js';
@@ -67,6 +67,7 @@ export async function setupDungeonArt(options: DungeonArtQaOptions) {
                     'fire',
                     'cast',
                     'water_attack',
+                    'projectile_release',
                   ].includes(pose)
                 )
                   throw Error('Invalid pose');
@@ -79,7 +80,7 @@ export async function setupDungeonArt(options: DungeonArtQaOptions) {
                 const dir = dirs[q.get('direction') as keyof typeof dirs];
                 if (!dir) throw Error('Invalid direction');
                 z.world.creeps.clear();
-                if (prefix === 'beach')
+                if (prefix === 'beach' || prefix === 'hell')
                   for (const [i, h] of [...z.world.heroes.values()].entries()) {
                     h.x = 768;
                     h.y = 552 + i * 24;
@@ -96,7 +97,10 @@ export async function setupDungeonArt(options: DungeonArtQaOptions) {
                     `review_${pose}_${q.get('direction')}_${archetype}`,
                     {
                       x: 576 + (i % 3) * 192,
-                      y: 512 + Math.floor(i / 3) * (prefix === 'beach' ? 96 : 128),
+                      y:
+                        512 +
+                        Math.floor(i / 3) *
+                          (prefix === 'beach' || prefix === 'hell' ? 96 : 128),
                     },
                     z.config,
                   );
@@ -121,24 +125,47 @@ export async function setupDungeonArt(options: DungeonArtQaOptions) {
               } else if (mode === 'combat') {
                 z.world.creeps.clear();
                 z.nextWaveAt = undefined;
+                const originX = prefix === 'hell' ? 960 : 640;
                 for (const [i, id] of [...z.world.heroes.keys()].entries()) {
                   const h = z.world.heroes.get(id)!;
                   // Use real stats and inputs; only arrange an unobstructed encounter.
-                  h.x = 640 + (i % 3) * (prefix === 'beach' ? 64 : 48);
+                  h.x =
+                    originX +
+                    (i % 3) *
+                      (prefix === 'beach' || prefix === 'hell' ? 64 : 48);
                   h.y =
-                    720 + Math.floor(i / 3) * (prefix === 'beach' ? 64 : 48);
+                    720 +
+                    Math.floor(i / 3) *
+                      (prefix === 'beach' || prefix === 'hell' ? 64 : 48);
                   h.fx = 0;
                   h.fy = -1;
                   h.moveX = h.moveY = 0;
                 }
                 for (const [i, archetype] of roster.entries()) {
+                  const position = {
+                    x:
+                      originX +
+                      (i % 3) *
+                        (prefix === 'beach' || prefix === 'hell' ? 64 : 48),
+                    y: 624 + Math.floor(i / 3) * 32,
+                  };
+                  if (
+                    prefix === 'hell' &&
+                    blocked(
+                      position,
+                      z.config.radius,
+                      z.config.width,
+                      z.config.height,
+                      z.config.collision,
+                    )
+                  )
+                    throw Error(
+                      `Combat fixture intersects authoritative terrain: ${JSON.stringify(position)}`,
+                    );
                   const c = addCreep(
                     z.world,
                     'combat_' + archetype,
-                    {
-                      x: 640 + (i % 3) * (prefix === 'beach' ? 64 : 48),
-                      y: 624 + Math.floor(i / 3) * 32,
-                    },
+                    position,
                     z.config,
                   );
                   c.archetypeId = archetype;

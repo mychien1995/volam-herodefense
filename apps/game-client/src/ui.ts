@@ -8,6 +8,7 @@ import {
   skillIcon,
   dungeonForZone,
   lyMacSauEncounter,
+  economyTrial,
 } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
 import { icon, menuContents, menuTitles, type Menu } from './menus.js';
@@ -15,6 +16,8 @@ import { DefenseHud } from './defense-hud.js';
 import { SkillMenu } from './skill-menu.js';
 import { BossPartyUI, isBossDestination } from './boss-party-ui.js';
 import type { BuildChange } from '@volam/game-core';
+import type { MerchantAction, PotionId } from '@volam/game-core';
+import { ItemMenu, auxiliarySlot } from './item-menu.js';
 export function element<T extends HTMLElement>(selector: string): T {
   const found = document.querySelector<T>(selector);
   if (!found) throw new Error(`Missing element: ${selector}`);
@@ -32,6 +35,7 @@ export class GameUI {
     | 'forest'
     | 'desert'
     | 'sea'
+    | 'hell'
     | 'chu_ba_thong'
     | 'hong_liet'
     | 'kim_luan'
@@ -40,7 +44,9 @@ export class GameUI {
   private dead = false;
   private defense: DefenseHud;
   private skillMenu: SkillMenu | undefined;
+  private itemMenu: ItemMenu | undefined;
   onBuild: (change: BuildChange) => void = () => {};
+  onMerchant: (action: MerchantAction) => void = () => {};
   private ack = 'Chia sẻ mã phòng với bạn bè.';
   private toastTimer: number | undefined;
   onBasic: (id: string) => void = () => {};
@@ -54,6 +60,7 @@ export class GameUI {
       | 'forest'
       | 'desert'
       | 'sea'
+      | 'hell'
       | 'chu_ba_thong'
       | 'hong_liet'
       | 'kim_luan'
@@ -68,7 +75,7 @@ export class GameUI {
             <div class="meter hp" role="meter" aria-label="Sinh lực" aria-valuemin="0"><i></i><span id="hp-text">—</span></div><div class="meter mp" role="meter" aria-label="Nội lực" aria-valuemin="0"><i></i><span id="mp-text">—</span></div><div class="meter xp" role="meter" aria-label="Kinh nghiệm" aria-valuemin="0"><i></i><span id="xp-text">—</span></div></div></section>
           <nav class="system-buttons" aria-label="Menu trò chơi"><button data-action="quit" title="Thoát" aria-label="Thoát">${icon('quit')}<span>Thoát</span></button><button data-menu="settings" title="Cài đặt" aria-label="Cài đặt">${icon('settings')}<span>Cài đặt</span></button><button data-menu="dungeons" title="Phó Bản" aria-label="Phó Bản">${icon('portal')}<span>Phó Bản</span></button><button data-menu="merchant" title="Thương Gia" aria-label="Thương Gia">${icon('shop')}<span>Thương Gia</span></button><button data-menu="pvp" title="Lôi Đài" aria-label="Lôi Đài">${icon('swords')}<span>Lôi Đài</span></button></nav>
           <span class="sr-only"><span id="hud-connection">Connected</span> · <span id="current-room" data-testid="room-id">—</span> · <span id="player-count" data-testid="player-count">0 / 6</span></span>
-          <section class="bag-cluster framed"><button data-menu="inventory" title="Túi đồ">${icon('bag')}<span>Túi đồ</span></button><div>${icon('gold')}<strong class="live-gold">0</strong><small>Vàng</small></div></section>
+          <section class="bag-cluster framed"><button data-menu="inventory" title="Túi đồ">${icon('bag')}<span>Túi đồ</span></button><div>${icon('gold')}<strong class="live-gold">0</strong><small>Vàng</small></div><section class="quick-potions" aria-label="Bình mang theo"><button type="button" data-potion-resource="hp" aria-keyshortcuts="1" title="Bình máu" aria-label="Bình máu" disabled><img src="/assets/inventory_ui/potion_hp.png" alt=""/><kbd>1</kbd><em>—</em><b></b></button><button type="button" data-potion-resource="mp" aria-keyshortcuts="2" title="Bình mana" aria-label="Bình mana" disabled><img src="/assets/inventory_ui/potion_mp.png" alt=""/><kbd>2</kbd><em>—</em><b></b></button></section></section>
           <section class="hotbar framed" aria-label="Thanh kỹ năng chiến đấu">
             ${[
               ['a', 'staff', 'Đánh thường · A'],
@@ -83,6 +90,7 @@ export class GameUI {
               )
               .join('')}
             <div id="dash-status" class="dash-status" role="status" aria-label="Lướt · Shift"><img src="/assets/m3d_feedback/dash_icon_frame.png" alt="" width="32" height="32"><b id="dash-charges">2</b><kbd>Shift</kbd><small id="dash-timer"></small><progress id="dash-progress" max="180" value="180" aria-label="Hồi lượt lướt"></progress></div>
+            ${auxiliarySlot()}
             <button class="loadout-toggle" data-menu="skills" title="Võ Công · O" aria-label="Võ Công · O">◇<span id="available-points"></span></button>
           </section>
           <p id="scene-status" class="scene-ready" aria-hidden="true">${artPreview ? 'XEM TRƯỚC HÌNH ẢNH' : ''}</p>
@@ -124,10 +132,15 @@ export class GameUI {
       const target =
         event.target instanceof Element
           ? event.target.closest<HTMLElement>(
-              'button[data-menu],button[data-action]',
+              'button[data-menu],button[data-action],button[data-potion-resource]',
             )
           : null;
       if (target && this.roomId && !this.study) {
+        const resource = target.dataset['potionResource'];
+        if (resource === 'hp' || resource === 'mp') {
+          this.usePotion(resource);
+          return;
+        }
         if (target.dataset['action'] === 'quit') this.open('quit');
         else this.open(target.dataset['menu'] as Menu);
       }
@@ -277,6 +290,11 @@ export class GameUI {
     element('#modal-layer').hidden = false;
     element('#close-menu').focus({ preventScroll: true });
     this.skillMenu = undefined;
+    this.itemMenu = undefined;
+    if (menu === 'inventory' || menu === 'merchant')
+      this.itemMenu = new ItemMenu(element('#item-menu'), menu, (action) =>
+        this.onMerchant(action),
+      );
     const select = document.querySelector<HTMLSelectElement>('#basic-style');
     document.querySelector('#fullscreen')?.addEventListener('click', () => {
       const request = document.fullscreenElement
@@ -409,6 +427,7 @@ export class GameUI {
           (destination === 'forest' ||
             destination === 'desert' ||
             destination === 'sea' ||
+            destination === 'hell' ||
             destination === 'chu_ba_thong' ||
             destination === 'hong_liet' ||
             destination === 'kim_luan' ||
@@ -431,21 +450,12 @@ export class GameUI {
       this.close();
       if (boss && (this.state?.players.size ?? 0) > 1) this.bossParty.help();
     });
-    for (const button of document.querySelectorAll<HTMLButtonElement>(
-      '[data-shop-tab]',
-    ))
-      button.addEventListener('click', () => {
-        const craft = button.dataset['shopTab'] === 'craft';
-        element('#craft-content').hidden = !craft;
-        element('#shop-content').hidden = craft;
-        for (const tab of document.querySelectorAll('[data-shop-tab]'))
-          tab.setAttribute('aria-selected', String(tab === button));
-      });
     if (this.state) this.refresh(this.state);
   }
   close(focus = true): void {
     this.menu = undefined;
     this.skillMenu = undefined;
+    this.itemMenu = undefined;
     element('#modal-layer').hidden = true;
     delete element('#modal-layer').dataset['activeMenu'];
     delete element('#game-dialog').dataset['menu'];
@@ -471,6 +481,29 @@ export class GameUI {
     this.ack = message;
     const ack = document.querySelector('#ack');
     if (ack) ack.textContent = message;
+  }
+  resolveMerchant(): void {
+    this.itemMenu?.resolve();
+  }
+  usePotion(resource: 'hp' | 'mp'): void {
+    const hero = this.state?.players.get(this.sessionId);
+    const id = this.quickPotion(resource);
+    if (
+      !hero ||
+      !id ||
+      this.blocked ||
+      hero.hp <= 0 ||
+      hero.inventory.potionCooldownTicks > 0 ||
+      (resource === 'hp' ? hero.hp >= hero.maxHp : hero.mana >= hero.maxMana)
+    )
+      return;
+    this.onMerchant({ action: 'use-potion', potionId: id });
+  }
+  private quickPotion(resource: 'hp' | 'mp'): PotionId | undefined {
+    const hero = this.state?.players.get(this.sessionId);
+    return (['small', 'medium', 'large'] as const)
+      .map((size) => `${resource}_${size}` as PotionId)
+      .find((id) => (hero?.inventory.potions.get(id) ?? 0) > 0);
   }
   notify(message: string): void {
     const target = element('#feedback');
@@ -565,6 +598,33 @@ export class GameUI {
       Math.hypot(hero.x - dungeon.exit.x, hero.y - dungeon.exit.y) >
         dungeon.exitRange;
     this.skillMenu?.update(hero);
+    this.itemMenu?.update(hero);
+    for (const resource of ['hp', 'mp'] as const) {
+      const button = document.querySelector<HTMLButtonElement>(
+        `[data-potion-resource="${resource}"]`,
+      );
+      if (!button) continue;
+      const id = this.quickPotion(resource);
+      const count = [...hero.inventory.potions]
+        .filter(([key]) => key.startsWith(resource + '_'))
+        .reduce((sum, [, amount]) => sum + amount, 0);
+      const seconds = Math.ceil(
+        hero.inventory.potionCooldownTicks / m1Config.tickRate,
+      );
+      button.disabled =
+        dead ||
+        !id ||
+        seconds > 0 ||
+        (resource === 'hp' ? hero.hp >= hero.maxHp : hero.mana >= hero.maxMana);
+      button.querySelector('em')!.textContent = String(count);
+      button.querySelector('b')!.textContent = seconds ? `${seconds}` : '';
+      const label = id
+        ? `${economyTrial.potions[id].nameVi} · Hồi ${economyTrial.potions[id].amount} · Dùng cỡ nhỏ trước`
+        : `Không còn bình ${resource === 'hp' ? 'máu' : 'mana'}`;
+      const hotkey = resource === 'hp' ? '1' : '2';
+      button.title = `${hotkey} · ${seconds ? `Đang hồi · ${seconds}s` : label}`;
+      button.setAttribute('aria-label', `${label} · Phím ${hotkey}`);
+    }
     element('#available-points').textContent = hero.build.enabled
       ? String(hero.build.available)
       : '';
@@ -585,7 +645,7 @@ export class GameUI {
     const entryNote = document.querySelector('#dungeon-entry-note');
     if (entryNote)
       entryNote.textContent = canEnter
-        ? `${isBossDestination(this.dungeonDestination) ? 'Phó bản chung' : 'Phó bản riêng'} · ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển', chu_ba_thong: 'Chu Bá Thông', hong_liet: 'Hoàn Nhan Hồng Liệt', kim_luan: 'Kim Luân Pháp Vương · Tương Dương', co_mo: 'Cổ Mộ Phái' }[this.dungeonDestination]}.`
+        ? `${isBossDestination(this.dungeonDestination) ? 'Phó bản chung' : 'Phó bản riêng'} · ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển', hell: 'Địa Ngục', chu_ba_thong: 'Chu Bá Thông', hong_liet: 'Hoàn Nhan Hồng Liệt', kim_luan: 'Kim Luân Pháp Vương · Tương Dương', co_mo: 'Cổ Mộ Phái' }[this.dungeonDestination]}.`
         : inArena
           ? 'Bạn cần hồi sinh trước khi vào phó bản.'
           : 'Đến gần cửa rồi nhấn Space để về đấu trường.';
@@ -597,6 +657,7 @@ export class GameUI {
     zoneStatus.hidden = inArena && hero.respawnTicks <= 0;
     const desert = hero.zoneId.startsWith('desert_');
     const beach = hero.zoneId.startsWith('sea_');
+    const hell = hero.zoneId.startsWith('hell_');
     const coMo = hero.zoneId.startsWith('co_mo_');
     const boss = [...state.creeps.values()].find(
       (c) =>
@@ -623,7 +684,7 @@ export class GameUI {
     const artNotice =
       dungeon?.id === 'chu_ba_thong'
         ? 'Art đã duyệt · gameplay thử nghiệm'
-        : desert || beach
+        : desert || beach || hell
           ? 'Hình quái đang chờ duyệt'
           : forestArtNotice(
               [...state.creeps.values()]
@@ -647,7 +708,7 @@ export class GameUI {
               ? `Cổ Mộ Phái · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · ${zone.respawnTicks > 0 ? `Lý Mạc Sầu hồi sinh sau ${Math.ceil(zone.respawnTicks / m1Config.tickRate)}s` : 'Lý Mạc Sầu'}`
               : hongLiet
                 ? `Hoàn Nhan Hồng Liệt · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · HP ${Math.ceil(zone.bossHp)} / ${zone.bossMaxHp}${zone.bossRespawnTicks ? ` · Hồi sinh ${Math.ceil(zone.bossRespawnTicks / 30)}s` : ''}`
-                : `${dungeon?.id === 'chu_ba_thong' ? 'Chu Bá Thông' : beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
+                : `${dungeon?.id === 'chu_ba_thong' ? 'Chu Bá Thông' : hell ? 'Địa Ngục' : beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
           : '';
     const claims = JSON.parse(hero.bossLoot || '[]') as Array<{
       nameVi: string;
