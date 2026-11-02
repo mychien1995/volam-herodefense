@@ -1,5 +1,7 @@
 # Balancing Plan v1.0 — hard but fair
 
+**Delegated trial economics — 2026-11-02:** purchase testing uses [validated economy data](packages/game-data/src/economy.ts):105 gold first four-slot set,2,035 full basic level5 set, potions4/10/22. Selected trial policies are20 total/shared5s/instant recovery. `tools/economy-trial.ts` ran288 controlled legal-build probes (four schools,both basics,levels1/6/15/30,three seeds,gear0/1/5). Full-gear DPS ratios range1.534–1.966 atlevel1 and1.172–1.280 atlevel30. These stationary-target probes are not farm-rate/campaign/boss/party/PvP acceptance. Exact coefficients, per-level comparisons and limits: [ECONOMY_TRIAL.md](docs/ECONOMY_TRIAL.md). Earlier open pricing/potion-policy notes below now have provisional choices; personal rewards/crafted effects remain future.
+
 **Inventory design baseline — 2026-11-02:** [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) v2.0 replaces shared loot rolls with personal materials and once-per-boss/character/match Long Châu. Four basics cap at level 5; potion cooldown is 5s; weapon stun is replaced by penetration and healing-Z boots by Thanh Tâm. This is a plan for future measurements, not measured balance or implementation approval. Potion cap interpretation/shared cooldown and Long Châu/stat/price coefficients remain open.
 
 ## M3C3 provisional Gold tuning — 2026-10-31

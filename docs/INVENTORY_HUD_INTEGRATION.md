@@ -2,6 +2,8 @@
 
 Date: **2026-11-02**. Director approved [concept v01](INVENTORY_MERCHANT_HUD_DESIGN.md) and requested Phaser integration. Concept approval is separate from actual runtime visual approval and balance.
 
+Subsequent runtime UI approval is recorded below; UI commit `60498c09`. The separately authorized [trial economy](ECONOMY_TRIAL.md) now activates basic/potion transactions and live quantities. The disabled-price/potion statements in this report describe the original presentation-only commit; crafting/Z and boss reward migration remain unavailable.
+
 ## Scope and behavior
 
 Integrated into the existing Phaser 4.2.1 viewport through its permitted DOM overlay. No new Phaser/Colyseus API, server mechanics, protocol, camera, map, retained hero/VFX animation or loot migration is introduced.

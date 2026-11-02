@@ -1,3 +1,7 @@
+## Trial merchant purchase acceptance — 2026-11-02
+
+The director authorizes temporary prices and real basic/potion transactions after runtime UI approval. `tests/economy.test.ts` and `tests/economy-room.test.ts` cover atomic spending, level5,20 total potions, shared5s cooldown, no free resource refill, stale/replay rejection, peer synchronization and zone/death persistence. `tests/e2e/merchant.spec.ts` farms real gold with combat in Phaser, buys owned gear/potions, asserts server stats/gold/counts and uses the HUD potion. UI bounds/input/crafting-preview checks remain. Actual commands, measured results and PNGs: [ECONOMY_TRIAL.md](docs/ECONOMY_TRIAL.md). Boss/Long Châu/crafting/Z/PvP portions of Section H remain future acceptance; historical unavailable-purchase notes below predate this scope.
+
 ## Approved inventory/merchant presentation integration — 2026-11-02
 
 The scoped UI slice has real Phaser browser coverage for four typed equipment slots, live server stats/gold, three merchant tabs, twelve branch previews, unavailable purchase/equip/Z states, loaded modular PNG icons, full viewport bounds at four desktop sizes, modal input ownership, keyboard tab navigation and six-client combat/peer movement while menus are open. No inventory v2 backend or reward migration is claimed by these UI results. Exact passing/failing run accounting, retained PNGs and runtime art approval status: [INVENTORY_HUD_INTEGRATION.md](docs/INVENTORY_HUD_INTEGRATION.md). Section H below remains future gameplay acceptance.

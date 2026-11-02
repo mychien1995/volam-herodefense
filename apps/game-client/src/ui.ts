@@ -8,12 +8,14 @@ import {
   skillIcon,
   dungeonForZone,
   lyMacSauEncounter,
+  economyTrial,
 } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
 import { icon, menuContents, menuTitles, type Menu } from './menus.js';
 import { DefenseHud } from './defense-hud.js';
 import { SkillMenu } from './skill-menu.js';
 import type { BuildChange } from '@volam/game-core';
+import type { MerchantAction, PotionId } from '@volam/game-core';
 import { ItemMenu, auxiliarySlot } from './item-menu.js';
 export function element<T extends HTMLElement>(selector: string): T {
   const found = document.querySelector<T>(selector);
@@ -41,6 +43,7 @@ export class GameUI {
   private skillMenu: SkillMenu | undefined;
   private itemMenu: ItemMenu | undefined;
   onBuild: (change: BuildChange) => void = () => {};
+  onMerchant: (action: MerchantAction) => void = () => {};
   private ack = 'Chia sẻ mã phòng với bạn bè.';
   private toastTimer: number | undefined;
   onBasic: (id: string) => void = () => {};
@@ -69,7 +72,7 @@ export class GameUI {
             <div class="meter hp" role="meter" aria-label="Sinh lực" aria-valuemin="0"><i></i><span id="hp-text">—</span></div><div class="meter mp" role="meter" aria-label="Nội lực" aria-valuemin="0"><i></i><span id="mp-text">—</span></div><div class="meter xp" role="meter" aria-label="Kinh nghiệm" aria-valuemin="0"><i></i><span id="xp-text">—</span></div></div></section>
           <nav class="system-buttons" aria-label="Menu trò chơi"><button data-action="quit" title="Thoát" aria-label="Thoát">${icon('quit')}<span>Thoát</span></button><button data-menu="settings" title="Cài đặt" aria-label="Cài đặt">${icon('settings')}<span>Cài đặt</span></button><button data-menu="dungeons" title="Phó Bản" aria-label="Phó Bản">${icon('portal')}<span>Phó Bản</span></button><button data-menu="merchant" title="Thương Gia" aria-label="Thương Gia">${icon('shop')}<span>Thương Gia</span></button><button data-menu="pvp" title="Lôi Đài" aria-label="Lôi Đài">${icon('swords')}<span>Lôi Đài</span></button></nav>
           <span class="sr-only"><span id="hud-connection">Connected</span> · <span id="current-room" data-testid="room-id">—</span> · <span id="player-count" data-testid="player-count">0 / 6</span></span>
-          <section class="bag-cluster framed"><button data-menu="inventory" title="Túi đồ">${icon('bag')}<span>Túi đồ</span></button><div>${icon('gold')}<strong class="live-gold">0</strong><small>Vàng</small></div><section class="quick-potions" aria-label="Bình chưa mở"><span title="Bình máu · Chưa mở"><img src="/assets/inventory_ui/potion_hp.png" alt="Bình máu"/><em>—</em></span><span title="Bình mana · Chưa mở"><img src="/assets/inventory_ui/potion_mp.png" alt="Bình mana"/><em>—</em></span></section></section>
+          <section class="bag-cluster framed"><button data-menu="inventory" title="Túi đồ">${icon('bag')}<span>Túi đồ</span></button><div>${icon('gold')}<strong class="live-gold">0</strong><small>Vàng</small></div><section class="quick-potions" aria-label="Bình mang theo"><button type="button" data-potion-resource="hp" title="Bình máu" aria-label="Bình máu" disabled><img src="/assets/inventory_ui/potion_hp.png" alt=""/><em>—</em><b></b></button><button type="button" data-potion-resource="mp" title="Bình mana" aria-label="Bình mana" disabled><img src="/assets/inventory_ui/potion_mp.png" alt=""/><em>—</em><b></b></button></section></section>
           <section class="hotbar framed" aria-label="Thanh kỹ năng chiến đấu">
             ${[
               ['a', 'staff', 'Đánh thường · A'],
@@ -102,10 +105,16 @@ export class GameUI {
       const target =
         event.target instanceof Element
           ? event.target.closest<HTMLElement>(
-              'button[data-menu],button[data-action]',
+              'button[data-menu],button[data-action],button[data-potion-resource]',
             )
           : null;
       if (target && this.roomId && !this.study) {
+        const resource = target.dataset['potionResource'];
+        if (resource === 'hp' || resource === 'mp') {
+          const id = this.quickPotion(resource);
+          if (id) this.onMerchant({ action: 'use-potion', potionId: id });
+          return;
+        }
         if (target.dataset['action'] === 'quit') this.open('quit');
         else this.open(target.dataset['menu'] as Menu);
       }
@@ -233,7 +242,9 @@ export class GameUI {
     this.skillMenu = undefined;
     this.itemMenu = undefined;
     if (menu === 'inventory' || menu === 'merchant')
-      this.itemMenu = new ItemMenu(element('#item-menu'), menu);
+      this.itemMenu = new ItemMenu(element('#item-menu'), menu, (action) =>
+        this.onMerchant(action),
+      );
     const select = document.querySelector<HTMLSelectElement>('#basic-style');
     document.querySelector('#fullscreen')?.addEventListener('click', () => {
       const request = document.fullscreenElement
@@ -408,6 +419,15 @@ export class GameUI {
     const ack = document.querySelector('#ack');
     if (ack) ack.textContent = message;
   }
+  resolveMerchant(): void {
+    this.itemMenu?.resolve();
+  }
+  private quickPotion(resource: 'hp' | 'mp'): PotionId | undefined {
+    const hero = this.state?.players.get(this.sessionId);
+    return (['small', 'medium', 'large'] as const)
+      .map((size) => `${resource}_${size}` as PotionId)
+      .find((id) => (hero?.inventory.potions.get(id) ?? 0) > 0);
+  }
   notify(message: string): void {
     const target = element('#feedback');
     target.textContent = message;
@@ -493,6 +513,31 @@ export class GameUI {
         dungeon.exitRange;
     this.skillMenu?.update(hero);
     this.itemMenu?.update(hero);
+    for (const resource of ['hp', 'mp'] as const) {
+      const button = document.querySelector<HTMLButtonElement>(
+        `[data-potion-resource="${resource}"]`,
+      );
+      if (!button) continue;
+      const id = this.quickPotion(resource);
+      const count = [...hero.inventory.potions]
+        .filter(([key]) => key.startsWith(resource + '_'))
+        .reduce((sum, [, amount]) => sum + amount, 0);
+      const seconds = Math.ceil(
+        hero.inventory.potionCooldownTicks / m1Config.tickRate,
+      );
+      button.disabled =
+        dead ||
+        !id ||
+        seconds > 0 ||
+        (resource === 'hp' ? hero.hp >= hero.maxHp : hero.mana >= hero.maxMana);
+      button.querySelector('em')!.textContent = String(count);
+      button.querySelector('b')!.textContent = seconds ? `${seconds}` : '';
+      const label = id
+        ? `${economyTrial.potions[id].nameVi} · Hồi ${economyTrial.potions[id].amount} · Dùng cỡ nhỏ trước`
+        : `Không còn bình ${resource === 'hp' ? 'máu' : 'mana'}`;
+      button.title = seconds ? `Đang hồi · ${seconds}s` : label;
+      button.setAttribute('aria-label', label);
+    }
     element('#available-points').textContent = hero.build.enabled
       ? String(hero.build.available)
       : '';

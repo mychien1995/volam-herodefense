@@ -1,4 +1,6 @@
 import type { LobbyState } from '@volam/game-protocol';
+import { economyTrial, m1Config } from '@volam/game-data';
+import type { MerchantAction, PotionId } from '@volam/game-core';
 
 type Hero = NonNullable<ReturnType<LobbyState['players']['get']>>;
 type Slot = 'weapon' | 'armor' | 'hat' | 'boots';
@@ -86,9 +88,10 @@ interface HeldItem {
   name: string;
   description: string;
   image?: string | undefined;
+  potionId?: PotionId;
 }
 
-/** Presentation-only catalogue. No price, stat modifiers, ownership or commands are invented. */
+/** Catalogue view and server-confirmed transactions; no speculative inventory mutation. */
 export class ItemMenu {
   private tab: Tab = 'equipment';
   private slot: Slot = 'weapon';
@@ -97,12 +100,17 @@ export class ItemMenu {
   private potion: 'potion_hp' | 'potion_mp' = 'potion_hp';
   private hero: Hero | undefined;
   private selectedItem = -1;
+  private size: 'small' | 'medium' | 'large' = 'small';
+  private quantity = 1;
+  private pending = false;
+  private sentRevision = -1;
   private signature = '';
   private items: HeldItem[] = [];
 
   constructor(
     private root: HTMLElement,
     private kind: 'merchant' | 'inventory',
+    private send: (action: MerchantAction) => void = () => {},
   ) {
     root.addEventListener('click', this.click);
     root.addEventListener('keydown', (event) => {
@@ -141,6 +149,23 @@ export class ItemMenu {
     if (!button || button.disabled) return;
     const action = button.dataset['uiAction'],
       value = button.dataset['value'] ?? '';
+    if (action === 'buy' && slots.includes(value as Slot)) {
+      this.request({ action: 'buy-basic', slot: value as Slot });
+      return;
+    }
+    if (action === 'buy-potion') {
+      this.request({
+        action: 'buy-potion',
+        potionId: this.potionId(),
+        quantity: this.quantity,
+      });
+      return;
+    }
+    if (action === 'use-held') {
+      const potionId = this.items[this.selectedItem]?.potionId;
+      if (potionId) this.request({ action: 'use-potion', potionId });
+      return;
+    }
     if (action === 'tab' && ['equipment', 'potions', 'craft'].includes(value))
       this.tab = value as Tab;
     else if (action === 'gear' && slots.includes(value as Slot))
@@ -154,6 +179,13 @@ export class ItemMenu {
       this.potion = value as typeof this.potion;
     else if (action === 'held' && /^\d+$/.test(value))
       this.selectedItem = Number(value);
+    else if (action === 'size' && ['small', 'medium', 'large'].includes(value))
+      this.size = value as typeof this.size;
+    else if (action === 'quantity' && ['more', 'less'].includes(value))
+      this.quantity = Math.min(
+        20,
+        Math.max(1, this.quantity + (value === 'more' ? 1 : -1)),
+      );
     else return;
     event.stopPropagation();
     this.render();
@@ -166,16 +198,25 @@ export class ItemMenu {
 
   update(hero: Hero): void {
     this.hero = hero;
+    if (hero.inventory.revision > this.sentRevision) this.pending = false;
     // Only redraw on authoritative changes that affect this menu. Preserve focus/scroll otherwise.
     const signature = JSON.stringify([
       hero.zoneId,
       hero.hp <= 0,
       hero.bossItems,
       hero.bossLoot,
+      hero.inventory.revision,
+      Math.ceil(hero.inventory.potionCooldownTicks / m1Config.tickRate),
+      hero.gold,
+      hero.hp >= hero.maxHp,
+      hero.mana >= hero.maxMana,
     ]);
     if (signature !== this.signature) {
       this.signature = signature;
+      const selectedName = this.items[this.selectedItem]?.name;
       this.items = this.readItems(hero);
+      if (selectedName !== this.items[this.selectedItem]?.name)
+        this.selectedItem = -1;
       this.render();
     }
     for (const value of this.root.querySelectorAll<HTMLElement>(
@@ -195,6 +236,16 @@ export class ItemMenu {
 
   private readItems(hero: Hero): HeldItem[] {
     const items: HeldItem[] = [];
+    for (const [id, definition] of Object.entries(economyTrial.potions)) {
+      const count = hero.inventory.potions.get(id) ?? 0;
+      if (count > 0)
+        items.push({
+          name: `${definition.nameVi} ×${count}`,
+          description: `Hồi ${definition.amount} ${definition.resource === 'hp' ? 'sinh lực' : 'nội lực'} · Dùng chung thời gian chờ 5 giây.`,
+          image: `/assets/inventory_ui/potion_${definition.resource === 'hp' ? 'hp' : 'mp'}.png`,
+          potionId: id as PotionId,
+        });
+    }
     // Retained boss materials and Cổ Mộ claims remain separate server fields.
     try {
       for (const id of JSON.parse(hero.bossItems || '[]') as string[]) {
@@ -226,6 +277,53 @@ export class ItemMenu {
       /* Wait for a valid synchronized payload rather than fabricating contents. */
     }
     return items;
+  }
+
+  resolve(): void {
+    this.pending = false;
+    this.render();
+  }
+  private request(action: MerchantAction): void {
+    if (!this.hero || this.pending) return;
+    this.pending = true;
+    this.sentRevision = this.hero.inventory.revision;
+    this.send(action);
+    this.render();
+  }
+  private potionId(): PotionId {
+    return `${this.potion === 'potion_hp' ? 'hp' : 'mp'}_${this.size}`;
+  }
+  private level(slot: Slot): number {
+    return this.hero?.inventory.levels.get(slot) ?? 0;
+  }
+  private totalPotions(): number {
+    return [...(this.hero?.inventory.potions.values() ?? [])].reduce(
+      (a, b) => a + b,
+      0,
+    );
+  }
+  private canBuy(price: number | undefined): boolean {
+    return (
+      !!this.hero &&
+      this.hero.hp > 0 &&
+      this.hero.zoneId === 'arena' &&
+      price !== undefined &&
+      this.hero.gold >= price &&
+      !this.pending
+    );
+  }
+  private potionDisabled(id: PotionId): boolean {
+    if (
+      !this.hero ||
+      this.pending ||
+      this.hero.hp <= 0 ||
+      this.hero.inventory.potionCooldownTicks > 0
+    )
+      return true;
+    const resource = economyTrial.potions[id].resource;
+    return resource === 'hp'
+      ? this.hero.hp >= this.hero.maxHp
+      : this.hero.mana >= this.hero.maxMana;
   }
 
   private choice(
@@ -261,6 +359,9 @@ export class ItemMenu {
   private merchant(): string {
     const selected = gear[this.slot],
       recipe = gear[this.craftSlot];
+    const definition = economyTrial.basics[this.slot],
+      level = this.level(this.slot);
+    const price = definition.prices[level];
     const tabs = `<div class="item-tabs" role="tablist" aria-label="Các mục thương gia">${(
       [
         ['equipment', 'Trang bị'],
@@ -275,19 +376,56 @@ export class ItemMenu {
       .join(
         '',
       )}<span class="item-gold"><span class="pixel-icon icon-gold" aria-hidden="true"></span><b class="live-gold">${this.hero?.gold ?? '—'}</b></span></div>`;
+    const canShop = this.hero?.zoneId === 'arena' && (this.hero?.hp ?? 0) > 0;
     let body: string;
-    if (this.tab === 'equipment')
-      body = `<div class="item-shop-layout"><div class="item-catalogue">${slots.map((slot) => this.choice('gear', slot, gear[slot].name, slot === this.slot, `${art(slot)}<small>Chưa sở hữu</small>`)).join('')}</div><section class="item-detail">${art(this.slot, 'item-large')}<h3>${selected.name}</h3><p>${selected.stats}</p><div class="item-levels" aria-label="Năm cấp trang bị cơ bản">${'<i></i>'.repeat(5)}</div><p>Mua lại để tăng 1 cấp · Tối đa cấp 5</p><small>Giá và chỉ số chưa mở</small><button class="item-primary" disabled>Mua · Chưa mở</button></section></div>`;
-    else if (this.tab === 'potions')
-      body = `<div class="item-potion-layout"><div class="item-potion-choices">${this.choice('potion', 'potion_hp', 'Bình máu', this.potion === 'potion_hp', art('potion_hp'))}${this.choice('potion', 'potion_mp', 'Bình mana', this.potion === 'potion_mp', art('potion_mp'))}</div><section class="item-detail">${art(this.potion, 'item-large')}<h3>${this.potion === 'potion_hp' ? 'Bình máu' : 'Bình mana'}</h3><p>${this.potion === 'potion_hp' ? 'Hồi sinh lực' : 'Hồi nội lực'}</p><p>Thời gian chờ: <b>5 giây</b></p><p class="item-muted">Cỡ bình, lượng hồi và giá chưa mở.</p><button class="item-primary" disabled>Mua bình · Chưa mở</button><p data-testid="potion-restriction">${this.hero && this.hero.zoneId !== 'arena' ? 'Không mua bình trong phó bản.' : 'Chuẩn bị bình trước khi vào phó bản.'}</p></section></div>`;
-    else
-      body = `<div class="item-recipe-slots" aria-label="Chọn ô chế tạo">${slots.map((slot) => this.choice('recipe', slot, gear[slot].name, slot === this.craftSlot)).join('')}</div><div class="item-recipe">${art(this.craftSlot)}<span>${recipe.name} cấp 5</span><b>+</b>${art(recipe.materialArt)}<span>${recipe.material}<small>Từ ${recipe.boss}</small></span><b>+</b><span>Vàng<small>Chưa định giá</small></span></div><h3 class="item-branch-title">Chọn một nhánh</h3><div class="item-branches">${recipe.branches.map(([image, name, text], i) => this.choice('branch', String(i), name, i === this.branch, `${art(image)}${this.craftSlot === 'boots' ? '<kbd>Z</kbd>' : ''}<p>${text}</p>`)).join('')}</div><div class="item-craft-action"><p>Cần ${recipe.name.toLowerCase()} cấp 5 và ${recipe.material}.</p><button class="item-primary" disabled>Chế tạo · Chưa mở</button></div>`;
-    return `${tabs}<section id="item-panel" role="tabpanel" aria-labelledby="item-tab-${this.tab}">${body}</section><p class="item-availability" role="status">Xem trước trang bị · Mua, nâng cấp và chế tạo chưa mở.</p>`;
+    if (this.tab === 'equipment') {
+      const labels: Record<string, string> = {
+        attackPower: 'Sát thương',
+        maxHp: 'Máu tối đa',
+        defense: 'Phòng thủ',
+        hpRegen: 'Hồi máu/s',
+        manaRegen: 'Hồi mana/s',
+        movementSpeed: 'Tốc chạy',
+        critChance: 'Chí mạng',
+      };
+      const stats = Object.entries(definition.perLevel)
+        .map(
+          ([key, amount]) =>
+            `<div><dt>${labels[key] ?? key}</dt><dd>${key === 'critChance' ? `${(amount! * level * 100).toFixed(1)}% → ${(amount! * Math.min(5, level + 1) * 100).toFixed(1)}%` : `${amount! * level} → ${amount! * Math.min(5, level + 1)}`}</dd></div>`,
+        )
+        .join('');
+      body = `<div class="item-shop-layout"><div class="item-catalogue">${slots.map((slot) => this.choice('gear', slot, gear[slot].name, slot === this.slot, `${art(slot)}<small>${this.level(slot) ? `Cấp ${this.level(slot)}/5` : 'Chưa sở hữu'}</small><span class="item-price">${economyTrial.basics[slot].prices[this.level(slot)] ?? 'Tối đa'}${this.level(slot) < 5 ? ' vàng' : ''}</span>`)).join('')}</div><section class="item-detail">${art(this.slot, 'item-large')}<h3>${selected.name}</h3><p>${selected.stats}</p><p>${level ? `Cấp ${level}${level < 5 ? ` → Cấp ${level + 1}` : ' · Tối đa'}` : 'Mua cấp 1 · Tự trang bị'}</p><dl class="item-stats item-purchase-stats">${stats}</dl><div class="item-levels" aria-label="Năm cấp trang bị cơ bản">${Array.from({ length: 5 }, (_, i) => `<i class="${i < level ? 'owned' : ''}"></i>`).join('')}</div><p>Mua lại để tăng 1 cấp · Tối đa cấp 5</p><button data-ui-action="buy" data-value="${this.slot}" class="item-primary" ${this.canBuy(price) ? '' : 'disabled'}>${this.pending ? 'Đang xử lý…' : price === undefined ? 'Đã tối đa' : `${level ? 'Nâng cấp' : 'Mua'} · ${price} vàng`}</button><small>${!canShop ? 'Chỉ mua khi còn sống ở đấu trường trung tâm.' : price !== undefined && (this.hero?.gold ?? 0) < price ? 'Không đủ vàng.' : 'Giá thử nghiệm · Mua xong áp dụng chỉ số ngay.'}</small></section></div>`;
+    } else if (this.tab === 'potions') {
+      const id = this.potionId(),
+        potion = economyTrial.potions[id];
+      const cost = potion.price * this.quantity;
+      const capacity =
+        this.totalPotions() + this.quantity <= economyTrial.potionLimit;
+      body = `<div class="item-potion-layout"><div class="item-potion-choices">${this.choice('potion', 'potion_hp', 'Bình máu', this.potion === 'potion_hp', art('potion_hp'))}${this.choice('potion', 'potion_mp', 'Bình mana', this.potion === 'potion_mp', art('potion_mp'))}</div><section class="item-detail">${art(this.potion, 'item-large')}<h3>${potion.nameVi}</h3><p>Hồi ngay ${potion.amount} ${potion.resource === 'hp' ? 'sinh lực' : 'nội lực'}</p><div class="item-sizes">${(
+        [
+          ['small', 'Nhỏ'],
+          ['medium', 'Vừa'],
+          ['large', 'Lớn'],
+        ] as const
+      )
+        .map(([value, label]) =>
+          this.choice('size', value, label, this.size === value),
+        )
+        .join(
+          '',
+        )}</div><p>Thời gian chờ chung: <b>5 giây</b></p><p>Đang mang: ${this.totalPotions()}/${economyTrial.potionLimit} bình · Loại này: ${this.hero?.inventory.potions.get(id) ?? 0}</p><div class="item-quantity"><button data-ui-action="quantity" data-value="less" aria-label="Giảm số lượng" ${this.quantity <= 1 ? 'disabled' : ''}>−</button><output aria-label="Số lượng mua">${this.quantity}</output><button data-ui-action="quantity" data-value="more" aria-label="Tăng số lượng" ${this.quantity >= 20 ? 'disabled' : ''}>+</button></div><button data-ui-action="buy-potion" data-value="${id}" class="item-primary" ${this.canBuy(cost) && capacity ? '' : 'disabled'}>${this.pending ? 'Đang xử lý…' : `Mua bình · ${cost} vàng`}</button><p data-testid="potion-restriction">${!canShop ? 'Không mua bình trong phó bản hoặc khi đã gục ngã.' : !capacity ? 'Đã vượt giới hạn mang bình.' : (this.hero?.gold ?? 0) < cost ? 'Không đủ vàng.' : 'Chuẩn bị bình trước khi vào phó bản.'}</p></section></div>`;
+    } else {
+      body = `<div class="item-recipe-slots" aria-label="Chọn ô chế tạo">${slots.map((slot) => this.choice('recipe', slot, gear[slot].name, slot === this.craftSlot)).join('')}</div><div class="item-recipe">${art(this.craftSlot)}<span>${recipe.name} cấp 5</span><b>+</b>${art(recipe.materialArt)}<span>${recipe.material}<small>Từ ${recipe.boss}</small></span><b>+</b><span>${economyTrial.basics[this.craftSlot].craftGold} vàng<small>Giá thử nghiệm</small></span></div><h3 class="item-branch-title">Chọn một nhánh</h3><div class="item-branches">${recipe.branches.map(([image, name, text], i) => this.choice('branch', String(i), name, i === this.branch, `${art(image)}${this.craftSlot === 'boots' ? '<kbd>Z</kbd>' : ''}<p>${text}</p>`)).join('')}</div><div class="item-craft-action"><p>Cần ${recipe.name.toLowerCase()} cấp 5 và ${recipe.material}. Luồng nguyên liệu/đồ ghép chưa mở.</p><button class="item-primary" disabled>Chế tạo · Chưa mở</button></div>`;
+    }
+    return `${tabs}<section id="item-panel" role="tabpanel" aria-labelledby="item-tab-${this.tab}">${body}</section><p class="item-availability" role="status">Giá thử nghiệm · Chọn món để xem giá và nâng cấp.</p>`;
   }
 
   private inventory(): string {
     const selected = this.items[this.selectedItem];
-    return `<div class="item-inventory-layout"><section class="item-equipment-pane"><h3>Trang bị <small>4 ô</small></h3><div class="item-paper-doll"><div class="paper-hero" aria-label="Nhân vật hiện tại"></div>${slots.map((slot, i) => `<button type="button" class="equipment-slot item-equip-${i}" disabled aria-label="${gear[slot].name} · Chưa trang bị">${art(slot)}<strong>${gear[slot].name}</strong><small>Trống</small></button>`).join('')}</div><dl class="item-stats">${(
+    const cooldown = Math.ceil(
+      (this.hero?.inventory.potionCooldownTicks ?? 0) / m1Config.tickRate,
+    );
+    return `<div class="item-inventory-layout"><section class="item-equipment-pane"><h3>Trang bị <small>4 ô · Mua đồ sẽ tự trang bị</small></h3><div class="item-paper-doll"><div class="paper-hero" aria-label="Nhân vật hiện tại"></div>${slots.map((slot, i) => `<button type="button" class="equipment-slot item-equip-${i} ${this.level(slot) ? 'owned' : ''}" disabled aria-label="${gear[slot].name} · ${this.level(slot) ? `Cấp ${this.level(slot)}` : 'Chưa trang bị'}">${art(slot)}<strong>${gear[slot].name}</strong><small>${this.level(slot) ? `Cấp ${this.level(slot)}/5` : 'Trống'}</small></button>`).join('')}</div><dl class="item-stats">${(
       [
         ['attackPower', 'Sát thương'],
         ['defense', 'Phòng thủ'],
@@ -303,7 +441,7 @@ export class ItemMenu {
       )
       .join(
         '',
-      )}</dl><p class="item-muted">Trang bị chưa mở. Chỉ số hiện tại của nhân vật.</p></section><section class="item-backpack"><h3>Hành trang <small>${this.items.length} chiến lợi phẩm trong trận</small></h3><div class="bag-grid" data-inventory-v2="true">${Array.from(
+      )}</dl><p class="item-muted">Chỉ số nhân vật đã gồm trang bị.</p></section><section class="item-backpack"><h3>Hành trang <small>${this.totalPotions()}/20 bình · ${this.items.length} loại vật phẩm</small></h3><div class="bag-grid" data-inventory-v2="true">${Array.from(
       { length: Math.max(12, this.items.length) },
       (_, i) => {
         const item = this.items[i];
@@ -321,7 +459,7 @@ export class ItemMenu {
       },
     ).join(
       '',
-    )}</div><section class="item-held-detail" aria-live="polite"><h3>${selected ? escape(selected.name) : 'Chọn một vật phẩm'}</h3><p>${selected ? selected.description : this.items.length ? 'Xem thông tin chiến lợi phẩm đang giữ trong trận.' : 'Chưa có chiến lợi phẩm. Hạ thủ lĩnh để nhận thưởng.'}</p><button disabled>Trang bị</button></section><div class="item-auxiliary-detail">${art('thanh_tam')}<div><h3>Kỹ năng từ giày <kbd>Z</kbd></h3><p>Cần giày chế tạo · Chưa mở</p></div></div><div class="item-gold"><span class="pixel-icon icon-gold" aria-hidden="true"></span><b class="live-gold">${this.hero?.gold ?? '—'}</b><span>vàng</span></div></section></div>`;
+    )}</div><section class="item-held-detail" aria-live="polite"><h3>${selected ? escape(selected.name) : 'Chọn một vật phẩm'}</h3><p>${selected ? selected.description : 'Chọn bình để sử dụng hoặc xem chiến lợi phẩm đang giữ.'}</p>${selected?.potionId ? `<button data-ui-action="use-held" data-value="${selected.potionId}" ${this.potionDisabled(selected.potionId) ? 'disabled' : ''}>${cooldown ? `Đang hồi · ${cooldown}s` : 'Dùng bình'}</button>` : '<button disabled>Trang bị</button>'}</section><div class="item-auxiliary-detail">${art('thanh_tam')}<div><h3>Kỹ năng từ giày <kbd>Z</kbd></h3><p>Cần giày chế tạo · Chưa mở</p></div></div><div class="item-gold"><span class="pixel-icon icon-gold" aria-hidden="true"></span><b class="live-gold">${this.hero?.gold ?? '—'}</b><span>vàng</span></div></section></div>`;
   }
 }
 

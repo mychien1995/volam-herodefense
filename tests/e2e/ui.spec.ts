@@ -123,12 +123,7 @@ for (const size of [
           ).toBeDisabled();
         }
         if (menu === 'merchant') {
-          await expect(
-            page.getByRole('button', {
-              name: 'Mua · Chưa mở',
-              exact: true,
-            }),
-          ).toBeDisabled();
+          await expect(page.locator('[data-ui-action=buy]')).toBeDisabled();
           await page.getByRole('tab', { name: 'Chế tạo' }).click();
           await expect(
             page.getByRole('button', {
@@ -143,10 +138,7 @@ for (const size of [
           await expect(page.locator('.item-detail')).toContainText('Bình mana');
           await expect(page.locator('.item-detail')).toContainText('5 giây');
           await expect(
-            page.getByRole('button', {
-              name: 'Mua bình · Chưa mở',
-              exact: true,
-            }),
+            page.locator('[data-ui-action=buy-potion]'),
           ).toBeDisabled();
           await page
             .getByRole('tab', { name: 'Trang bị', exact: true })

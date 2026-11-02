@@ -24,9 +24,11 @@ import {
   characterStats,
   pointAccounting,
   equippedAbility,
+  transactMerchant,
   addCreep,
   blocked,
   type Actor,
+  type PotionId,
   type MatchZone,
 } from '@volam/game-core';
 import {
@@ -48,6 +50,7 @@ import {
   AreaState,
   BossEffectState,
   skillPreviewActionSchema,
+  merchantActionSchema,
 } from '@volam/game-protocol';
 
 type MatchClient = Client<{ auth: JoinOptions; messages: ServerMessages }>;
@@ -84,6 +87,50 @@ export class MatchRoom extends Room<{
   readonly devSkillLoadout =
     this.legacySkills && process.env['VOLAM_DEV_SKILLS'] === '1';
   override messages = {
+    'merchant-action': validate(
+      merchantActionSchema,
+      (client: MatchClient, input) => {
+        const hero = this.simulation.hero(client.sessionId),
+          zone = this.simulation.zoneOf(client.sessionId);
+        if (
+          this.state.phase !== 'IN_GAME' ||
+          !hero ||
+          !zone ||
+          !this.state.players.get(client.sessionId)?.confirmed
+        )
+          return;
+        if (input.sequence <= hero.lastSequence) return;
+        hero.lastSequence = input.sequence;
+        const reason = transactMerchant(
+          hero,
+          m1Config,
+          {
+            inArena: zone.access === 'arena',
+            matchTick: this.simulation.tick,
+            worldTick: zone.world.tick,
+          },
+          input.revision,
+          input,
+        );
+        if (reason)
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason,
+          });
+        else
+          client.send('merchant-result', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            revision: hero.inventory!.revision,
+            message:
+              input.action === 'use-potion'
+                ? 'Đã dùng bình.'
+                : 'Đã mua và cập nhật hành trang.',
+          });
+        this.syncState();
+      },
+    ),
     'skill-preview-action': validate(
       skillPreviewActionSchema,
       (client: MatchClient, input) => {
@@ -666,6 +713,18 @@ export class MatchRoom extends Room<{
       target.maxMana = hero.maxMana;
       target.xp = hero.xp;
       target.gold = hero.gold;
+      target.inventory.revision = hero.inventory?.revision ?? 0;
+      target.inventory.potionCooldownTicks = Math.max(
+        0,
+        (hero.inventory?.potionReadyAt ?? 0) - this.simulation.tick,
+      );
+      for (const slot of ['weapon', 'armor', 'hat', 'boots'] as const)
+        target.inventory.levels.set(slot, hero.inventory?.levels[slot] ?? 0);
+      for (const potion of Object.keys(m1Config.economy!.potions))
+        target.inventory.potions.set(
+          potion,
+          hero.inventory?.potions[potion as PotionId] ?? 0,
+        );
       target.level = hero.level;
       target.skillPoints = hero.skillPoints;
       target.build.enabled = !!hero.progression;

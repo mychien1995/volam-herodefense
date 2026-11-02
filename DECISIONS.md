@@ -1,3 +1,7 @@
+## Runtime UI approval and delegated trial economics — 2026-11-02
+
+Director: “Duyệt giao diện, hay commit. Về economics, bạn hãy tự gắn giá cho sản phẩm để tôi mua. Sau này tôi sẽ revise lại”. The reviewed runtime UI is approved and committed (`60498c09`); prior concept-only/unavailable-purchase notes below are historical. This authorizes provisional configurable prices and working server-owned basic purchases/upgrades and potion purchases/use. Four-slot level5 limits remain; select trial policy20 potions total, shared5s cooldown, instant fixed recovery, no consumption at full resource, alive-arena purchases only. No starting-gold/reward changes. Exact prices/stats and scope: [ECONOMY_TRIAL.md](docs/ECONOMY_TRIAL.md). Values are director-delegated trial defaults, subject to revision, not final balance approval. Craft fees are previews; crafted effects/Z, personal boss/Long Châu migration and PvP remain future work.
+
 ## Inventory HUD concept approval and UI integration — 2026-11-02
 
 The director approves the five inventory/merchant/auxiliary-Z concepts and requests Phaser integration. Scope: in-viewport UI with modular retained/derived PNG art, live server gold/stats/held rewards, working inspection/selection and honest unavailable transaction/Z states where inventory v2 backend is absent. Do not invent prices/stats, client-only transactions/effects, PvP normalization or silently migrate retained boss rewards. Concept approval is separate from actual runtime approval. Details/checks: [INVENTORY_HUD_INTEGRATION.md](docs/INVENTORY_HUD_INTEGRATION.md).

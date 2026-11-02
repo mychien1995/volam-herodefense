@@ -1,5 +1,6 @@
 import type { ChuEncounter } from './chu-types.js';
 import type { KimLootContext } from './kim-types.js';
+import type { EconomyDefinition, HeroInventory } from './economy-types.js';
 import type {
   HeroProgression,
   ProgressionDefinition,
@@ -207,6 +208,7 @@ export interface Ability {
 }
 export interface SimulationConfig {
   bossEncounter?: BossEncounterDefinition | undefined;
+  economy?: EconomyDefinition | undefined;
   progression?: ProgressionDefinition | undefined;
   tickRate: number;
   inputTimeoutTicks: number;
@@ -277,6 +279,7 @@ export interface Actor extends Point {
   crowdControlScale?: number;
 }
 export interface Hero extends Actor {
+  inventory?: HeroInventory;
   bossItems?: string[];
   bossLoot?: BossLootClaim[];
   progression?: HeroProgression | undefined;

@@ -13,6 +13,7 @@ import {
   connectionAckSchema,
   combatEventSchema,
   rejectionSchema,
+  merchantResultSchema,
   type InputMessage,
   type DungeonAction,
 } from '@volam/game-protocol';
@@ -309,8 +310,16 @@ async function connect(existing: boolean): Promise<void> {
     joined.onMessage('command-rejected', (payload: unknown) => {
       const rejected = rejectionSchema.safeParse(payload);
       if (rejected.success) {
+        ui.resolveMerchant();
         ui.notify(rejected.data.reason);
         pregame.fail(rejected.data.reason);
+      }
+    });
+    joined.onMessage('merchant-result', (payload: unknown) => {
+      const result = merchantResultSchema.safeParse(payload);
+      if (result.success && room === joined) {
+        ui.resolveMerchant();
+        ui.notify(result.data.message);
       }
     });
     joined.onError((code, message) => {
@@ -367,6 +376,16 @@ ui.onBuild = (change) => {
     protocolVersion: PROTOCOL_VERSION,
     sequence: ++sequence,
     revision: hero.build.revision,
+  });
+};
+ui.onMerchant = (action) => {
+  const hero = room?.state.players.get(room.sessionId);
+  if (!room || !hero || room.state.phase !== 'IN_GAME') return;
+  room.send('merchant-action', {
+    ...action,
+    protocolVersion: PROTOCOL_VERSION,
+    sequence: ++sequence,
+    revision: hero.inventory.revision,
   });
 };
 ui.onCheck = () =>

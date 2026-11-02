@@ -1,6 +1,6 @@
 # Inventory, Merchant, Items & Crafting Specification v2.0
 
-Cập nhật **2026-11-02**, từ các quyết định brainstorm inventory/merchant của người dùng. Đây là **thiết kế cho lần triển khai tiếp theo**, không phải báo cáo tính năng đã chạy. Yêu cầu hiện tại chỉ ghi tài liệu; không tự triển khai M4 hoặc PvP. Backend boss/roll/pending claim hiện tại chưa được chuyển sang thiết kế này.
+Cập nhật **2026-11-02**, từ các quyết định brainstorm inventory/merchant của người dùng. **Checkpoint mới:** người dùng đã duyệt runtime UI và ủy quyền tự gắn giá mua thử. Mua/nâng bốn đồ cơ bản và mua/dùng bình được triển khai theo [ECONOMY_TRIAL.md](docs/ECONOMY_TRIAL.md): 20 bình tổng, cooldown chung5s, hồi tức thì, giá/chỉ số tạm ở game-data. Các câu hỏi ở mục2–3 bên dưới đã có lựa chọn thử nghiệm trong phạm vi này, vẫn có thể revise. Phần đồ ghép/Z, thưởng boss/Long Châu và PvP còn là thiết kế; backend boss/roll/pending claim chưa được chuyển sang v2. Không coi checkpoint này là hoàn tất M4.
 
 Quyết định đã chốt đăng ký tại [DECISIONS.md](DECISIONS.md). Bản này thay thế thiết kế loot ngẫu nhiên một món cho cả đội, roll, bán lại và chuyển đồ trong v1.0; hồ sơ triển khai cũ giữ làm lịch sử. **CONFIRMED** = đã chốt; **PROPOSED/OPEN** = chưa được duyệt hoặc còn thiếu chi tiết.
 

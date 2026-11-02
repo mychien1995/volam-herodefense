@@ -1,3 +1,7 @@
+## Explicit trial merchant economy slice — 2026-11-02
+
+Runtime UI is director-approved/committed. The director separately delegates temporary economics for purchase testing: four basic gear slots, duplicate upgrades to5, six potion SKUs, real gold transactions and5s shared consumption. [Economy report](docs/ECONOMY_TRIAL.md) defines numbers, selected temporary policies and executed checks. Crafting/Z, personal boss materials/Long Châu and PvP remain pending; this does not complete M4. Older UI-only statements below predate this authorization.
+
 ## Inventory/merchant UI integration — 2026-11-02
 
 Explicit concept approval authorizes the reviewed merchant/inventory/auxiliary-Z presentation in the existing Phaser viewport. Live gold/stats/rewards are used; unavailable v2 transactions/equipment/Z stay disabled. This is a scoped client UI slice, not M4 completion or reward/PvP migration. See [runtime UI report](docs/INVENTORY_HUD_INTEGRATION.md).

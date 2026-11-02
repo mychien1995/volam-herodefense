@@ -459,6 +459,66 @@
   position: relative;
   display: block;
 }
+.quick-potions > button {
+  position: relative;
+  padding: 0;
+  min-width: 30px;
+}
+.quick-potions button:not(:disabled) img {
+  opacity: 1;
+}
+.quick-potions b {
+  position: absolute;
+  inset: 4px 0 auto;
+  color: #fff4d5;
+  font:
+    bold 15px 'Segoe UI',
+    sans-serif;
+  text-shadow: 1px 1px #000;
+}
+.item-sizes {
+  display: flex;
+  gap: 6px;
+  margin: 10px 0;
+}
+#item-menu .item-sizes .item-choice {
+  padding: 7px 10px;
+}
+#item-menu .item-sizes .item-choice strong {
+  font-size: 13px;
+}
+.item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+}
+.item-quantity button {
+  min-width: 36px;
+}
+.item-price {
+  order: 3;
+  color: #e6c973;
+  font-size: 12px;
+}
+.item-levels i.owned {
+  background: #ceae50;
+  border-color: #ffe6a0;
+}
+#item-menu .equipment-slot.owned .item-art {
+  opacity: 1;
+}
+.item-purchase-stats {
+  width: 100%;
+  grid-template-columns: 1fr;
+  margin: 12px 0 0;
+}
+#item-menu .item-primary:not(:disabled) {
+  background: #83682c;
+  color: #fff2c6;
+  border-color: #e7c570;
+  cursor: pointer;
+}
 .quick-potions img {
   width: 30px;
   height: 32px;
