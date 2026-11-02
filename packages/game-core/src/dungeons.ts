@@ -1,4 +1,6 @@
 import { KimLuanEncounter } from './kim-luan.js';
+import { TayDocEncounter, TayDocGate } from './tay-doc.js';
+import type { TayDocDefinition } from './tay-doc-types.js';
 import type { KimDefinition } from './kim-types.js';
 import { spawnChu } from './chu-ba-thong.js';
 import { validateChuDefinition, type ChuDefinition } from './chu-types.js';
@@ -82,6 +84,8 @@ export interface ZoneCombatEvent {
 
 /** Engine/transport independent zone ownership. No client-submitted membership. */
 export class DungeonMatch {
+  readonly tayDoc: TayDocEncounter | undefined;
+  readonly tayDocGate = new TayDocGate();
   readonly zones = new Map<string, MatchZone>();
   readonly membership = new Map<string, string>();
   readonly respawns = new Map<string, number>();
@@ -96,6 +100,7 @@ export class DungeonMatch {
     private readonly seed = 42,
     invasion?: InvasionDefinition,
     additionalDungeons: CreepDungeonDefinition[] = [],
+    tayDoc?: TayDocDefinition,
   ) {
     for (const definition of [dungeon, ...additionalDungeons]) {
       if (this.definitions.has(definition.id))
@@ -114,6 +119,7 @@ export class DungeonMatch {
       nextWaveAt: undefined,
     };
     this.zones.set('arena', this.arena);
+    if (tayDoc) this.tayDoc = new TayDocEncounter(tayDoc);
     if (invasion) {
       this.arena.config = {
         ...base,
@@ -135,6 +141,8 @@ export class DungeonMatch {
   }
   remove(id: string): void {
     const zone = this.zoneOf(id);
+    if (zone?.access === 'arena')
+      this.tayDoc?.depart(zone.world, zone.config, id, false);
     if (zone) removeHero(zone.world, id);
     if (zone?.kim && !zone.world.heroes.size) zone.kim.clear(zone.world);
     if (zone?.dungeon?.bossEncounter && !zone.world.heroes.size)
@@ -208,6 +216,10 @@ export class DungeonMatch {
         this.assignRoster(zone);
       this.zones.set(key, zone);
     }
+    // Settle the unavoidable mark before travel; a lethal settlement stays in arena.
+    this.tayDoc?.depart(this.arena.world, this.arena.config, id, true);
+    if ((this.hero(id)?.hp ?? 0) <= 0)
+      return 'Độc nổ đã hạ gục bạn trước khi rời đấu trường.';
     zone.emptyBossResetAt = undefined;
     const occupant = zone.world.heroes.size;
     this.transfer(
@@ -366,6 +378,16 @@ export class DungeonMatch {
         zone.bossDiedMatchTick = this.tick;
       zone.kim?.step(zone.world, zone.config);
       zone.encounter?.step(zone.world, zone.config);
+      if (zone.access === 'arena' && this.tayDoc) {
+        if (this.invasion)
+          this.tayDocGate.step(
+            zone.world,
+            zone.config,
+            this.invasion.wave,
+            this.tayDoc,
+          );
+        this.tayDoc.step(zone.world, zone.config);
+      }
       if (encounter && zone.world.creeps.get(zone.world.boss!.actorId)!.hp <= 0)
         zone.bossRespawnAt ??= this.tick + encounter.respawnTicks;
       for (const event of zone.world.events)
@@ -373,6 +395,7 @@ export class DungeonMatch {
       if (zone.access === 'arena') {
         this.invasion?.afterStep(zone.world, this.tick);
         if (this.invasion?.defeated) {
+          this.tayDoc?.dispose(this.arena.world);
           for (const active of this.zones.values()) {
             active.kim?.clear(active.world);
             for (const id of active.world.heroes.keys())
@@ -476,6 +499,8 @@ export class DungeonMatch {
     const source = this.zoneOf(id),
       hero = this.hero(id);
     if (!source || !hero) throw new Error('Cannot transfer an unknown hero.');
+    if (source.access === 'arena')
+      this.tayDoc?.depart(source.world, source.config, id, true);
     const convert = (until: number) =>
       destination.world.tick + Math.max(0, until - source.world.tick);
     hero.cooldown = convert(hero.cooldown);

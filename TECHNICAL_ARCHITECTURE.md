@@ -264,3 +264,7 @@ A boss-only optional `HongLietEncounter` hangs off `MatchZone`; it runs after `s
 ## Kim Luân encounter adapter (2026-11-01)
 
 DungeonMatch owns an optional deterministic KimLuanEncounter per zone, alongside existing Chu/Hong adapters. Controlled creep actors reuse common targeting/damage/status/death; the common boss loot backend accepts either encounter context. Protocol16 extends BossEffectState for delta-synchronized Kim hazards; the existing dungeon summary carries phase/casts/loot. StateViews restrict both to the active zone. Retained art is guarded/prepared separately; Phaser projects server geometry with authored PNGs. Test fixtures are confined to dedicated QA services. See docs/KIM_LUAN_RUNTIME.md.
+
+## Tây Độc feedback03 integration
+
+`TayDocEncounter` and `TayDocGate` in game-core consume the validated game-data definition. DungeonMatch calls the encounter after the arena world tick, disposes it on defeat, and settles marked travel before moving heroes. MatchRoom publishes an arena-only MapSchema entry (`tayDoc['arena'].json`, protocol18) through StateView. Map entry deletion clears scoped client state on zone transfer. Clients cannot submit encounter state, hits or phases. A seekable Phaser raster renderer projects IDs/timestamps and preserves feet depth and captured projectile vectors. Art preparation guards593approved hashes and copies separate candidate direction atlases. Dedicated DEV gameplay helper has spawn-only authorization; mutable pose fixtures exist exclusively in the Playwright setup process.

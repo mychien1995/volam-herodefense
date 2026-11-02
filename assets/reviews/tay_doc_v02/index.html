@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="vi">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><link rel="icon" href="data:," /><title>Tây Độc · Sprite & VFX v02</title
+  ><link rel="stylesheet" href="review.css" />
+  <body>
+    <main id="viewport">
+      <div id="game"></div>
+      <div class="identity">
+        <b>TÂY ĐỘC <small>Âu Dương Phong</small></b>
+        <div class="hp"><i id="boss-hp"></i></div>
+        <span id="phase-label">Độc Trượng · bản duyệt sprite/VFX</span>
+      </div>
+      <div class="tools">
+        <button id="settings">Tùy chỉnh</button
+        ><button id="pause">Tạm dừng</button
+        ><button id="restart">Phát lại</button>
+      </div>
+      <div id="options" hidden>
+        <label
+          >Hướng
+          <select id="facing">
+            <option value="right">Đông →</option>
+            <option value="down">Nam ↓</option>
+            <option value="left">Tây ←</option>
+            <option value="up">Bắc ↑</option>
+          </select></label
+        ><label
+          >Tốc độ
+          <select id="speed">
+            <option value=".5">0.5×</option>
+            <option value="1" selected>1×</option>
+            <option value="2">2×</option>
+          </select></label
+        ><label
+          >Nhóm
+          <select id="party">
+            <option value="6">6 người mẫu</option>
+            <option value="2">2 người mẫu</option>
+            <option value="1">1 người mẫu</option>
+          </select></label
+        ><label
+          ><input id="isolate" type="checkbox" checked />Tự đưa người mang độc
+          ra góc</label
+        ><label
+          >Sprite gốc
+          <select id="bundle">
+            <option value="p1">Phase 1</option>
+            <option value="p2">Phase 2</option>
+            <option value="transition">Chuyển phase</option>
+            <option value="newactor">Cáp Mô v02 · hướng phải</option></select
+          ><select id="clip"></select
+          ><button id="gallery">Xem sprite</button></label
+        >
+        <p>
+          ←↑↓→ di chuyển P1 · A đánh cọc gần nhất<br />Demo mỹ thuật cục bộ ·
+          chưa nối server.
+        </p>
+      </div>
+      <div class="caption">
+        <strong id="skill-title"></strong><span id="skill-note"></span
+        ><em id="cue"></em>
+      </div>
+      <div class="transport">
+        <span id="clock">0.0s</span
+        ><input
+          id="timeline"
+          type="range"
+          min="0"
+          max="7000"
+          value="0"
+          step="10"
+        /><span id="readout"></span>
+      </div>
+      <nav id="dock" aria-label="Chọn animation"></nav>
+    </main>
+    <script src="/vendor/phaser.js"></script>
+    <script type="module" src="review.js"></script>
+  </body>
+</html>

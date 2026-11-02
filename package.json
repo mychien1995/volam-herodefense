@@ -10,6 +10,7 @@
   },
   "scripts": {
     "dev": "pnpm build:shared && concurrently --kill-others --names shared,server,client \"tsc -b packages/game-core packages/game-data packages/game-protocol --watch --preserveWatchOutput\" \"pnpm --filter @volam/game-server dev\" \"pnpm --filter @volam/game-client dev\"",
+    "dev:tay-doc": "pnpm assets:prepare && tsc -b apps/game-server && pnpm --filter @volam/game-server exec tsx ../../tools/tay-doc-dev.ts",
     "build:shared": "pnpm assets:prepare && tsc -b packages/game-core packages/game-data packages/game-protocol",
     "build": "pnpm assets:prepare && tsc -b && pnpm --filter @volam/game-client build",
     "typecheck": "pnpm assets:prepare && tsc -b && tsc -p tsconfig.tools.json --noEmit",
@@ -34,7 +35,7 @@
     "test:balance:m3a": "pnpm build:shared && pnpm --filter @volam/game-server exec tsx ../../tools/m3a-balance.ts",
     "assets:export:skills": "node assets/source/skills/cai-bang/build.mjs",
     "assets:icons:skills": "python scripts/prepare-skill-assets.py",
-    "verify:assets": "python scripts/verify-assets.py && python scripts/verify-arena-art01.py && python scripts/verify-arena-v2.py && python scripts/verify-thien-son.py && python scripts/verify-vo-dang.py && python scripts/verify-thieu-lam.py && python scripts/verify-thien-son-skills.py && python scripts/verify-vo-dang-skills.py && python scripts/verify-thieu-lam-skills.py && python scripts/verify-bamboo-forest.py && python scripts/verify-desert.py && python scripts/verify-forest-creeps.py && python scripts/verify-beach.py && python scripts/verify-chu-art.py && python scripts/verify-ly-mac-sau.py",
+    "verify:assets": "python scripts/verify-assets.py && python scripts/verify-arena-art01.py && python scripts/verify-arena-v2.py && python scripts/verify-thien-son.py && python scripts/verify-vo-dang.py && python scripts/verify-thieu-lam.py && python scripts/verify-thien-son-skills.py && python scripts/verify-vo-dang-skills.py && python scripts/verify-thieu-lam-skills.py && python scripts/verify-bamboo-forest.py && python scripts/verify-desert.py && python scripts/verify-forest-creeps.py && python scripts/verify-beach.py && python scripts/verify-chu-art.py && python scripts/verify-ly-mac-sau.py && python scripts/verify-tay-doc.py",
     "assets:export:arena": "node scripts/export-arena-art01.mjs",
     "assets:export:visual": "node scripts/export-arena-v2.mjs",
     "assets:export:thien-son": "node scripts/export-thien-son.mjs",

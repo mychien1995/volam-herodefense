@@ -44,3 +44,4 @@ export * from './wave-presentation.js';
 export * from './chu-ba-thong.js';
 export * from './hong-liet.js';
 export * from './kim-luan.js';
+export * from './tay-doc.js';

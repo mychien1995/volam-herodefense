@@ -33,15 +33,22 @@ export function hurt(
     preserveFraction?: boolean | undefined;
     periodic?: boolean | undefined;
     resolvedReflection?: boolean | undefined;
+    /** Server-owned curse settlement: exact HP loss, no mitigation/evasion/reflection. */
+    unavoidableHpLoss?: boolean | undefined;
     combo?: ComboSpec | undefined;
     comboTargets?: Record<string, boolean> | undefined;
   },
 ): boolean {
   if (target.hp <= 0 || raw <= 0) return false;
   if (world.creeps.get(target.id)?.rescueTargetId === sourceId) return false;
-  if (ownerProtection(world, target)) return false;
+  if (!snapshot?.unavoidableHpLoss && ownerProtection(world, target))
+    return false;
   // DOT remains damage; immunity exists only on actual moving dash ticks.
-  if (!snapshot?.periodic && hasStatus(target, 'dash_guard', world.tick))
+  if (
+    !snapshot?.unavoidableHpLoss &&
+    !snapshot?.periodic &&
+    hasStatus(target, 'dash_guard', world.tick)
+  )
     return false;
   let empowered = false;
   if (
@@ -76,6 +83,7 @@ export function hurt(
   // A timed stance evades one incoming enemy hit. Consume before retaliation,
   // so counters cannot recursively trigger each other or fire twice in a tick.
   const counter =
+    !snapshot?.unavoidableHpLoss &&
     !snapshot?.reactive &&
     !snapshot?.periodic &&
     world.heroes.has(target.id) &&
@@ -128,13 +136,15 @@ export function hurt(
     }
   }
   const enemy = world.creeps.get(target.id);
-  const guardCounter = world.heroes.has(target.id)
-    ? target.statuses?.find(
-        (s) => s.kind === 'guard_counter' && s.until > world.tick,
-      )
-    : undefined;
+  const guardCounter =
+    !snapshot?.unavoidableHpLoss && world.heroes.has(target.id)
+      ? target.statuses?.find(
+          (s) => s.kind === 'guard_counter' && s.until > world.tick,
+        )
+      : undefined;
   const stats = snapshot ?? offensiveStats(world, sourceId, config);
-  const critical = world.random() < stats.critChance;
+  const critical =
+    !snapshot?.unavoidableHpLoss && world.random() < stats.critChance;
   const defense =
     Math.max(
       0,
@@ -157,30 +167,33 @@ export function hurt(
         statusValue(world.creeps.get(sourceId)!, 'attack_break', world.tick),
       )
     : 1;
-  const adjusted = snapshot?.resolvedReflection
-    ? raw
-    : raw *
-      reduction *
-      condition *
-      (100 / (100 + defense)) *
-      (critical ? stats.critMultiplier : 1);
+  const adjusted =
+    snapshot?.unavoidableHpLoss || snapshot?.resolvedReflection
+      ? raw
+      : raw *
+        reduction *
+        condition *
+        (100 / (100 + defense)) *
+        (critical ? stats.critMultiplier : 1);
   // Stored actual HP loss is already fractional after mitigation; reflection must
   // not invent an extra point through the normal attack rounding/minimum rule.
   let damage = snapshot?.preserveFraction
     ? Math.max(0, adjusted)
     : Math.max(1, Math.round(adjusted));
-  const mitigation = Math.min(
-    0.85,
-    Math.max(
-      statusValue(target, 'damage_reduction', world.tick),
-      guardCounter?.magnitude ?? 0,
-      ...(world.actions ?? [])
-        .filter((a) => a.ownerId === target.id && a.until > world.tick)
-        .map((a) =>
-          a.effect.mode === 'multi_hit' ? (a.effect.guard ?? 0) : 0,
+  const mitigation = snapshot?.unavoidableHpLoss
+    ? 0
+    : Math.min(
+        0.85,
+        Math.max(
+          statusValue(target, 'damage_reduction', world.tick),
+          guardCounter?.magnitude ?? 0,
+          ...(world.actions ?? [])
+            .filter((a) => a.ownerId === target.id && a.until > world.tick)
+            .map((a) =>
+              a.effect.mode === 'multi_hit' ? (a.effect.guard ?? 0) : 0,
+            ),
         ),
-    ),
-  );
+      );
   if (mitigation > 0 && !snapshot?.resolvedReflection) {
     const before = damage;
     damage *= 1 - mitigation;
@@ -205,7 +218,7 @@ export function hurt(
   }
   const hero = world.heroes.get(target.id);
   // Strongest shield only; no additive absorption or duplicate resource spend.
-  const shield = (hero?.statuses ?? [])
+  const shield = (snapshot?.unavoidableHpLoss ? [] : (hero?.statuses ?? []))
     .filter((s) => s.kind === 'mana_shield' && s.until > world.tick)
     .sort(
       (a, b) =>

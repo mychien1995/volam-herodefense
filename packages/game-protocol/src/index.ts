@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 17;
+export const PROTOCOL_VERSION = 18;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -390,6 +390,10 @@ export const DefenseState = schema(
   },
   'StatueDefense',
 );
+export const TayDocState = schema(
+  { json: t.string().default('') },
+  'TayDocArenaProjection',
+);
 export const LobbyState = schema(
   {
     protocolVersion: t.number().default(PROTOCOL_VERSION),
@@ -406,6 +410,7 @@ export const LobbyState = schema(
     bossEffects: t.map(BossEffectState).view(),
     dungeons: t.map(DungeonState).view(),
     defense: t.ref(DefenseState).default(() => new DefenseState()),
+    tayDoc: t.map(TayDocState).view(),
   },
   'ArenaState',
 );

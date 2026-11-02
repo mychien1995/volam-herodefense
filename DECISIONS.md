@@ -1,3 +1,9 @@
+## Tây Độc design approval / integration prompt — 2026-11-02
+
+The director explicitly approves the Tây Độc feedback03 design, animation/VFX and choreography and requests an integration prompt, not runtime implementation in this turn. The approved preview is frozen in assets/reviews/tay_doc_v02/director_approval.json. Production gameplay, multiplayer acceptance, final HP/damage balance and runtime art approval remain separate.
+
+Confirmed clarifications: Cổ Độc Khoan Tâm takes25% of maximum HP from the selected player; nearby allies receive only area damage/poison and never a new exploding mark. Phase2 uses only the new Cáp Mô kit. Previously created snake pillars and poison pools persist until destroyed/expired. Retain6pillars/8headings/1.35s shot cadence,8pools,180-degree frontal staff sweep,405stomp radius,feedback03 projectile speeds130.05/218.025 and484.5range. Scope and implementation handoff: CODEX_TAY_DOC_INTEGRATION_TASK.md. This approval does not approve every historical cel, missing directional art or hypothetical gameplay defaults.
+
 ## Lý Mạc Sầu selector correction — 2026-11-01
 
 The director explicitly requests Lý Mạc Sầu as a peer dungeon card alongside Hồng Liệt and Chu Bá Thông, replacing the separate options-row button. Keep destination `co_mo`, private/shared access, server authority and the existing encounter unchanged. The retained approved Cổ Mộ arena illustration supplies the menu thumbnail without new art generation.
@@ -223,3 +229,11 @@ The user authorized integration on `wip/m3d/hoan-nhan-hong-liet` only, from prev
 ## 2026-11-01 — Kim Luân integration
 
 Director-approved feedback_02 is integrated as destination kim_luan in the real Phaser/Colyseus dungeon system. Confirmed mechanics: both disciples must die before Kim spawns; Thiết Phiến3×4rays; Chấn Thiên280px; Thập Tầng strictly<30%, moving while firing five wheels/1.8s. Artwork remains locked. HP/damage/ward/solo rescue/loot values are explicitly trial tuning, not director balance approval. See docs/KIM_LUAN_RUNTIME.md.
+
+## Tây Độc feedback03 — integration authorization (2026-11-02)
+
+The director explicitly requested execution of `CODEX_TAY_DOC_INTEGRATION_TASK.md` on `wip/m3d/tay-doc`, superseding the historical prompt-only scope for this encounter. Retain the593locked art inputs; new missing directional cels remain candidates. Implement server authority and Phaser projection with no merge/push/deploy.
+
+Confirmed: curse loses25%maximum HP, allies receive normal damage/poison without new marks, phase2 selects only the Cáp Mô kit and retains existing pools/pillars. Settlements sample maxHP at detonation/travel, bypass mitigation/shields/evasion/counters, preserve fractional HP and can kill. Death/disconnect cancel stale marks; travel settles before transfer without a cross-zone blast and refuses a lethal transfer. Full lifecycle and provisional numerical defaults are documented in `docs/TAY_DOC_INTEGRATION.md`; these do not replace the approved geometry/speeds or constitute final balance approval.
+
+Production uses the minimal ordered wave10+clear+rest hook and waits for actual Đông Tà completion. The DEV spawn fixture leaves the180second invasion clock intact. No predecessor completion or other chapter boss was invented.

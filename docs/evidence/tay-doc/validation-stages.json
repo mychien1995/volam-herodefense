@@ -1,0 +1,176 @@
+{
+  "initialFinalAttempt": {
+    "runId": "40b64cd5-d7ff-4d8d-b1c6-e173328d8079",
+    "mode": "final",
+    "args": [
+      "--config",
+      "playwright.tay-doc.config.ts"
+    ],
+    "startedAt": "2026-11-01T18:34:39.372Z",
+    "status": "FAIL",
+    "stages": [
+      {
+        "label": "prepare assets (once)",
+        "seconds": 21.71,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "compile TypeScript",
+        "seconds": 0.33,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "typecheck tests and tools",
+        "seconds": 1.17,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "workflow regression checks",
+        "seconds": 0.46,
+        "status": "PASS",
+        "exitCode": 0
+      },
+      {
+        "label": "all unit/integration tests",
+        "seconds": 84.11,
+        "status": "FAIL",
+        "exitCode": 1
+      }
+    ],
+    "totalSeconds": 107.79
+  },
+  "recoveryReason": "Protocol migrated 17 to18 for arena-scoped Tay Doc projection; updated retained Kim integration version assertion. Retry failed/remaining stages per DEVELOPMENT_WORKFLOW.",
+  "stages": [
+    {
+      "label": "typecheck affected tests/tools",
+      "status": "PASS",
+      "seconds": 1.53,
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "status": "FAIL",
+      "seconds": 101.74,
+      "exitCode": 1
+    },
+    {
+      "label": "retry five tests after transient fixed-port conflicts",
+      "status": "PASS",
+      "seconds": 25.03,
+      "exitCode": 0
+    },
+    {
+      "label": "production client build",
+      "status": "PASS",
+      "seconds": 41.83,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-assets.py",
+      "status": "PASS",
+      "seconds": 1.41,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-arena-art01.py",
+      "status": "PASS",
+      "seconds": 3.62,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-arena-v2.py",
+      "status": "PASS",
+      "seconds": 1.92,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-thien-son.py",
+      "status": "PASS",
+      "seconds": 0.86,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-vo-dang.py",
+      "status": "PASS",
+      "seconds": 1.23,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-thieu-lam.py",
+      "status": "PASS",
+      "seconds": 1.94,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-thien-son-skills.py",
+      "status": "PASS",
+      "seconds": 8.64,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-vo-dang-skills.py",
+      "status": "PASS",
+      "seconds": 4.32,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-thieu-lam-skills.py",
+      "status": "PASS",
+      "seconds": 4.68,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-bamboo-forest.py",
+      "status": "PASS",
+      "seconds": 0.48,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-desert.py",
+      "status": "PASS",
+      "seconds": 1.01,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-forest-creeps.py",
+      "status": "PASS",
+      "seconds": 2.29,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-beach.py",
+      "status": "PASS",
+      "seconds": 1.51,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-chu-art.py",
+      "status": "PASS",
+      "seconds": 0.42,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-ly-mac-sau.py",
+      "status": "PASS",
+      "seconds": 1.92,
+      "exitCode": 0
+    },
+    {
+      "label": "scripts/verify-tay-doc.py",
+      "status": "PASS",
+      "seconds": 0.86,
+      "exitCode": 0
+    },
+    {
+      "label": "browser verification",
+      "status": "PASS",
+      "seconds": 163.14,
+      "exitCode": 0
+    }
+  ],
+  "status": "PASS",
+  "transientRetry": "Two retained suites encountered EADDRINUSE on fixed ports2638/2626. Ports were free on inspection; no foreign service was stopped. Retrying only those five tests; remaining485already passed."
+}

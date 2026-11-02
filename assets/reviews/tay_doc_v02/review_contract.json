@@ -1,0 +1,107 @@
+{
+  "status": "director_final_description_for_art_preview",
+  "date": "2026-11-01",
+  "encounter": {
+    "kind": "wave_boss",
+    "arena": "existing_main_arena",
+    "entry": "west_along_paved_road_center",
+    "targets": "players_only",
+    "attacksStatue": false
+  },
+  "phaseThreshold": {
+    "comparison": "strictly_below",
+    "hpPercent": 50
+  },
+  "phase2": {
+    "identity": "same_human_in_toad_like_crawling_stance",
+    "faster": true,
+    "harderHits": true
+  },
+  "skills": {
+    "basics": [
+      "frontal_staff_fan_sweep",
+      "straight_staff_poison_gas"
+    ],
+    "phase1": [
+      {
+        "id": "van_doc_phi_cham",
+        "nameVi": "Vạn Độc Phi Châm",
+        "description": "warning, cone needle volley, slow and poison DOT"
+      },
+      {
+        "id": "doc_vu_me_hon",
+        "nameVi": "Độc Vụ Mê Hồn",
+        "description": "warning, multiple large ground poison clouds, slow and poison DOT"
+      },
+      {
+        "id": "co_doc_khoan_tam",
+        "nameVi": "Cổ Độc Khoan Tâm",
+        "description": "one marked player, uncurable, delayed area damage/poison to allies without transmitting a new mark; selected player inevitably loses25%maximumHP"
+      },
+      {
+        "id": "hon_thien_phuc_long_chan",
+        "nameVi": "Hỗn Thiên Phục Long Chấn",
+        "description": "six destructible snake pillars with HP, eight independently turning head directions, slower single poison ray per shot"
+      }
+    ],
+    "phase2": [
+      {
+        "id": "doc_chuong",
+        "nameVi": "Bắn độc chưởng"
+      },
+      {
+        "id": "cap_mo_chan_kich",
+        "nameVi": "Cáp Mô Chấn Kích",
+        "description": "large spreading stomp, poison and stun"
+      },
+      {
+        "id": "ngu_doc_than_chuong",
+        "nameVi": "Ngũ Độc Thần Chưởng",
+        "description": "stationary continuous 360 degree poison emission"
+      },
+      {
+        "id": "van_doc_bao_phat",
+        "nameVi": "Vạn Độc Bạo Phát",
+        "description": "jump around map, each landing emits poison 360 degrees"
+      }
+    ]
+  },
+  "scope": "art_preview_only",
+  "productionGameplayImplemented": false,
+  "numericDefaults": "README.md; illustrative only",
+  "directorApproval": true,
+  "revision": "feedback03",
+  "staffArcDegrees": 180,
+  "feedback01": {
+    "snakeHeadings": 8,
+    "entry": "west_paved_road_center",
+    "staffArcDegrees": 180,
+    "morePoisonClouds": true,
+    "muchWiderStomp": true,
+    "slowerChannelProjectiles": true,
+    "numericDemoDefaults": "feedback01/tuning.json"
+  },
+  "feedback02": {
+    "stompRadiusMultiplier": 0.9,
+    "channelProjectileSpeedMultiplier": 0.9,
+    "eruptionProjectileSpeedMultiplier": 0.9,
+    "numericDemoDefaults": "feedback02/tuning.json",
+    "productionGameplayImplemented": false
+  },
+  "feedback03": {
+    "channelProjectileSpeedMultiplier": 0.85,
+    "eruptionProjectileSpeedMultiplier": 0.85,
+    "relativeTo": "feedback02",
+    "numericDemoDefaults": "feedback03/tuning.json",
+    "productionGameplayImplemented": false
+  },
+  "approvalRecord": "assets/reviews/tay_doc_v02/director_approval.json",
+  "approvalScope": "feedback03_design_and_preview_choreography_only",
+  "confirmedClarifications": {
+    "curseSelectedHpLossFractionOfMaximum": 0.25,
+    "curseExplosionSpreadsMark": false,
+    "curseNearbyEffect": "area_damage_and_poison_only",
+    "phase2SkillSet": "cap_mo_only",
+    "phase1PillarsAndPoolsPersistIntoPhase2": true
+  }
+}

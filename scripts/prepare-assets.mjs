@@ -1,4 +1,5 @@
 import { prepareKimAssets } from './prepare-kim-assets.mjs';
+import { prepareTayDocAssets } from './prepare-tay-doc-assets.mjs';
 import { prepareChuAssets } from './prepare-chu-assets.mjs';
 import { mkdirSync, readFileSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
@@ -148,6 +149,7 @@ prepareHongLietAssets();
 // Retained review references include generated public atlases: verify after copies.
 prepareApprovedAnimationArt();
 prepareLyMacSau();
+prepareTayDocAssets();
 console.info(
   `Prepared assets in ${fileURLToPath(dest)} (${assetWrites.changed} written, ${assetWrites.unchanged} unchanged)`,
 );
