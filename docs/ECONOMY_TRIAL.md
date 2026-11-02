@@ -23,7 +23,7 @@ Bộ cấp 1 tốn **105 vàng**; nâng cả bốn món từ trống lên cấp 
 
 Chọn thử nghiệm **20 bình tổng cộng**, sáu stack loại/cỡ, hồi tức thì và **cooldown chung 5s**. Bình lớn giữ hiệu suất tài nguyên/vàng, tăng lượng hồi mỗi lần dùng và tiết kiệm chỗ. Đây là lựa chọn tạm cho các câu hỏi còn mở trong thiết kế, không phải số đã chốt vĩnh viễn.
 
-Chỉ mua/nâng khi còn sống tại đấu trường trung tâm. Dùng bình được trong dungeon, không dùng khi chết/choáng; đầy tài nguyên thì không mất bình. Cooldown theo đồng hồ trận nên không reset khi chuyển khu vực/chết. Bấm bình trên HUD dùng cỡ nhỏ nhất đang có; chọn stack trong Túi đồ rồi bấm dùng để chọn chính xác cỡ. Không thêm phím mới.
+Chỉ mua/nâng khi còn sống tại đấu trường trung tâm. Dùng bình được trong dungeon, không dùng khi chết/choáng; đầy tài nguyên thì không mất bình. Cooldown theo đồng hồ trận nên không reset khi chuyển khu vực/chết. **Phím1 dùng máu, phím2 dùng mana** (cả numpad), dùng cỡ nhỏ nhất đang có như bấm bình trên HUD; chọn stack trong Túi đồ rồi bấm dùng để chọn chính xác cỡ. Menu/nhập liệu giữ quyền bàn phím; giữ phím không tự uống liên tục. Hotkey không thay đổi giá, cooldown hoặc thẩm quyền server.
 
 Phí chế tạo xem trước: vũ khí/giáp **600**, mũ **500**, giày **450** vàng. Chế tạo, Z, Long Châu và chuyển thưởng boss sang v2 vẫn chưa mở. Phí xem trước không trừ vàng hoặc tạo đồ; boss/claim cũ không bị đổi ngầm. PvP chuẩn hóa chưa triển khai.
 
@@ -44,6 +44,16 @@ Final gate, session `economy-final`, server2794/client5394:
 **PASS**: project/test/tool typechecks,18 workflow tests,483 unit/integration tests trong45 file, production build,17 asset validators và9 Chromium cases. Tổng357,93s; browser230,54s. Browser gồm mua/uống bình, bốn viewport1280×720/1920×1080/900×640/944×466, input/focus menu,12 nhánh xem trước, combat hai client và projectile bay thẳng. [Timings thực tế](evidence/sessions/economy-final/check-workflow/final-timings.json). Một lần gate đầu dừng ở kiểu mảng kết quả của tool probe; đã thêm kiểu rõ ràng trước lượt final pass này. Build còn cảnh báo bundle lớn đã có từ trước.
 
 Đã mở và đối chiếu PNG runtime: [vũ khí cấp1 và bình đã mua](evidence/economy-trial/purchased-inventory.png), [sau khi uống bình](evidence/economy-trial/potion-used.png), cùng merchant ở viewport thấp944×466. Menu giữ trong viewport, map không thu nhỏ; merchant cuộn nội dung khi chiều cao thấp. Ảnh sau uống hiển thị hồi HP lên max, count0 và cooldown5; assertions riêng kiểm chứng state server. Creep tập luyện của QA dùng luồng damage/reward thật, không cấp vàng/items qua browser; hình creep placeholder cũ không thuộc artwork mới. Không video/animation mới hoặc ghi hình. Lần này không lặp sáu-client art gate vì không thay asset/camera/animation; sáu-client UI pass đã lưu trong [báo cáo UI](INVENTORY_HUD_INTEGRATION.md).
+
+## Hotkey follow-up — 2026-11-02
+
+Theo yêu cầu mới: **1 = máu, 2 = mana**, cả hàng số và numpad. Hai phím gọi đúng luồng dùng bình nhỏ nhất của HUD; giữ phím, tổ hợp modifier, menu và nhập liệu không tự tiêu hao bình. HUD thêm badge1/2, tooltip/accessibility và hướng dẫn trong Cài đặt. Không thay giá/chỉ số/cooldown/protocol hay asset.
+
+Iteration: `pnpm check:browser tests/e2e/merchant.spec.ts --grep '1 and 2 consume'` **1/1 pass**,46,33s toàn pipeline. Test farm tiền/mua2 bình máu+1 mana qua UI, xác nhận menu không ăn phím,1 hồi HP,2 hồi mana, giảm đúng stack và chặn uống tiếp trong cooldown. Screenshot chỉ là bằng chứng hiển thị; kết quả tài nguyên kiểm tra bằng snapshot server.
+
+Final attempt: `pnpm check:final tests/e2e/merchant.spec.ts tests/e2e/ui.spec.ts tests/e2e/gameplay.spec.ts --grep '1 and 2 consume|farms real gold|two clients agree|fit 944'` pass typechecks/18 workflow checks, **481 tests pass,2 skipped** do `vo-dang-room.test.ts` không bind được cổng2638 (`EADDRINUSE`, hook timeout). [Log timing giữ nguyên](evidence/sessions/potion-hotkeys-final/check-workflow/final-timings.json). Không dừng dịch vụ của phiên khác. Sau khi cổng trống, `pnpm check:quick tests/vo-dang-room.test.ts` **2/2 pass** ([timings](evidence/sessions/potion-hotkeys-recovery/check-workflow/quick-timings.json));483 tests đều có kết quả pass trên code hiện tại qua hai lượt. `pnpm verify:assets` **17 validators pass**. Tiếp tục build/browser còn lại thay vì lặp full suite đã pass; đây không phải một lượt `check:final` xanh toàn bộ.
+
+Continuation: `pnpm check:browser tests/e2e/merchant.spec.ts tests/e2e/ui.spec.ts tests/e2e/gameplay.spec.ts --grep '1 and 2 consume|farms real gold|two clients agree|fit 944'` **4/4 pass**, production build/typecheck pass,148,87s toàn pipeline ([timings](evidence/sessions/potion-hotkeys-browser-final/check-workflow/browser-timings.json)). Đã mở [PNG hotkey trong Phaser](evidence/economy-trial/potion-hotkeys.png): nhãn1/2 hiện trên hai bình, giữ toàn bộ viewport và HUD. Không tạo artwork/animation hay video mới; không thay authoritative combat hoặc economy.
 
 ## Probe chỉ số, không phải cân bằng chiến dịch
 

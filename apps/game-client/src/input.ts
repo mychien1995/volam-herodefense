@@ -5,6 +5,7 @@ export function bindGameplayInput(
   connected: () => boolean,
   blocked: () => boolean = () => false,
   interact: () => void = () => {},
+  usePotion: (resource: 'hp' | 'mp') => void = () => {},
 ): () => void {
   const held = new Set<string>();
   const move = (): void =>
@@ -32,6 +33,18 @@ export function bindGameplayInput(
       return;
     }
     if (event.repeat) return;
+    const potion = inputBindings.healthPotion.some((key) => key === event.code)
+      ? 'hp'
+      : inputBindings.manaPotion.some((key) => key === event.code)
+        ? 'mp'
+        : undefined;
+    if (potion) {
+      if (event.ctrlKey || event.altKey || event.metaKey || event.shiftKey)
+        return;
+      event.preventDefault();
+      usePotion(potion);
+      return;
+    }
     if (event.code === 'Space') {
       event.preventDefault();
       interact();

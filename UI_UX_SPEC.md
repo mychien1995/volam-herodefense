@@ -1,3 +1,7 @@
+## Potion hotkeys — 2026-11-02
+
+Confirmed: **1 uses a health potion, 2 uses a mana potion**, also on numpad. Bottom-left potion buttons show their key badges and accessible tooltip/help. Both keys follow the same smallest-size-first action as mouse HUD use. Gameplay keys release ownership to open menus and text inputs; holding a key does not auto-drink. Existing full-viewport layout and shared5s cooldown remain.
+
 ## Inventory/merchant/Z concept approval and integration — 2026-11-02
 
 The director approved v01 and requested integration. [Runtime UI report](docs/INVENTORY_HUD_INTEGRATION.md) records the in-viewport DOM overlay in the Phaser client, modular icons/frames, live gold/stats/rewards and backend limitations. Tabs/selection work; unavailable purchases/equipment/Z cannot fabricate state. Earlier concept-only notes below describe the original delivery stage, not runtime evidence or another approval gate.

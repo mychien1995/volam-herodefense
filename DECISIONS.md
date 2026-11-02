@@ -1,3 +1,7 @@
+## Potion hotkeys — 2026-11-02
+
+Director requests **1 = use health potion, 2 = use mana potion**. Top-row/numpad keys use the existing smallest-first HUD transaction with server-owned quantities/recovery/shared5s cooldown. Modal/text input, key-repeat and modified shortcuts cannot trigger potion consumption. Show1/2 badges and settings help inside the viewport; no new game effect or tuning.
+
 ## Runtime UI approval and delegated trial economics — 2026-11-02
 
 Director: “Duyệt giao diện, hay commit. Về economics, bạn hãy tự gắn giá cho sản phẩm để tôi mua. Sau này tôi sẽ revise lại”. The reviewed runtime UI is approved and committed (`60498c09`); prior concept-only/unavailable-purchase notes below are historical. This authorizes provisional configurable prices and working server-owned basic purchases/upgrades and potion purchases/use. Four-slot level5 limits remain; select trial policy20 potions total, shared5s cooldown, instant fixed recovery, no consumption at full resource, alive-arena purchases only. No starting-gold/reward changes. Exact prices/stats and scope: [ECONOMY_TRIAL.md](docs/ECONOMY_TRIAL.md). Values are director-delegated trial defaults, subject to revision, not final balance approval. Craft fees are previews; crafted effects/Z, personal boss/Long Châu migration and PvP remain future work.

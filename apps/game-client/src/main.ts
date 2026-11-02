@@ -223,6 +223,7 @@ const unbindInput = bindGameplayInput(
     if (Math.hypot(hero.x - d.exit.x, hero.y - d.exit.y) <= d.exitRange)
       dungeonAction({ action: 'exit' });
   },
+  (resource) => ui.usePotion(resource),
 );
 function controls(connected: boolean, busy = false): void {
   for (const field of form.querySelectorAll<

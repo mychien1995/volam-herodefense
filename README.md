@@ -15,7 +15,7 @@ cd D:\Projects\volam-hero-defense
 
 The launcher finds `pnpm.cmd` on PATH or in the existing bundled tools directory; it does not change your global PATH or install packages. Keep the terminal open and visit the URL printed by Vite, normally <http://127.0.0.1:5173>. Enter a nickname, create a room, start, select a school and confirm. Open Võ Học to equip and learn skills with earned points. Arrow keys move; A uses the independent basic style; Q/W/E/R cast learned equipped skills. Escape closes menus. Ctrl+C stops the local services (confirm Y if Windows asks).
 
-**Merchant thử nghiệm:** farm vàng, mở **Thương Gia** để mua/nâng Vũ khí/Giáp/Mũ/Giày tới cấp5 hoặc mua bình ba cỡ. Giá cấp1 lần lượt30/30/20/25 vàng; bình4/10/22 vàng. Mua đồ tự trang bị, chỉ mua tại đấu trường trung tâm. Bấm bình trên HUD để dùng cỡ nhỏ nhất, hoặc chọn stack trong Túi đồ để dùng đúng cỡ; mang20 bình tổng, hồi chung5s. [Bảng giá/chỉ số tạm](docs/ECONOMY_TRIAL.md) có thể chỉnh sau; chế tạo/Z chưa mở.
+**Merchant thử nghiệm:** farm vàng, mở **Thương Gia** để mua/nâng Vũ khí/Giáp/Mũ/Giày tới cấp5 hoặc mua bình ba cỡ. Giá cấp1 lần lượt30/30/20/25 vàng; bình4/10/22 vàng. Mua đồ tự trang bị, chỉ mua tại đấu trường trung tâm. Nhấn **1 dùng bình máu**, **2 dùng bình mana** (cả numpad), hoặc bấm bình trên HUD để dùng cỡ nhỏ nhất. Chọn stack trong Túi đồ để dùng đúng cỡ; mang20 bình tổng, hồi chung5s. [Bảng giá/chỉ số tạm](docs/ECONOMY_TRIAL.md) có thể chỉnh sau; chế tạo/Z chưa mở.
 
 The repository dependencies are already installed in the current workspace. The historical handoff below describes the broader design; it does not mean every later gameplay milestone is implemented.
 

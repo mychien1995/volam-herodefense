@@ -70,3 +70,79 @@ test('farms real gold, buys auto-equipped gear and uses a purchased potion', asy
   await page.screenshot({ path: info.outputPath('potion-used.png') });
   expect(errors).toEqual([]);
 });
+
+test('1 and 2 consume purchased potions with modal ownership and shared cooldown', async ({
+  page,
+}, info) => {
+  test.setTimeout(90000);
+  await joinWaiting(page, 'Dược Khách');
+  await startTogether([page]);
+  await page.getByRole('button', { name: 'Võ Học · P', exact: true }).click();
+  await page.locator('#skill-branch').selectOption('cai_bang_chuong');
+  await page.keyboard.press('Escape');
+  const deadline = Date.now() + 40000;
+  while ((await hero(page)).gold < 12 && Date.now() < deadline) {
+    await page.keyboard.press('KeyA');
+    await page.keyboard.press('KeyQ');
+    await page.waitForTimeout(450);
+  }
+  expect((await hero(page)).gold).toBeGreaterThanOrEqual(12);
+  await page.getByRole('button', { name: 'Thương Gia', exact: true }).click();
+  await page.getByRole('tab', { name: 'Bình dược', exact: true }).click();
+  await page.locator('[data-ui-action=quantity][data-value=more]').click();
+  await page.locator('[data-ui-action=buy-potion]').click();
+  await expect
+    .poll(async () => (await hero(page)).inventory.potions.hp_small)
+    .toBe(2);
+  await page.locator('[data-ui-action=potion][data-value=potion_mp]').click();
+  await page.locator('[data-ui-action=quantity][data-value=less]').click();
+  await page.locator('[data-ui-action=buy-potion]').click();
+  await expect
+    .poll(async () => (await hero(page)).inventory.potions.mp_small)
+    .toBe(1);
+  const revision = (await hero(page)).inventory.revision;
+  await page.keyboard.press('Digit1');
+  await page.keyboard.press('Digit2');
+  await page.waitForTimeout(200);
+  expect((await hero(page)).inventory.revision).toBe(revision);
+  await page.keyboard.press('Escape');
+  await expect(page.locator('[data-potion-resource=hp] kbd')).toHaveText('1');
+  await expect(page.locator('[data-potion-resource=mp] kbd')).toHaveText('2');
+  await expect
+    .poll(async () => (await hero(page)).hp)
+    .toBeLessThan((await hero(page)).maxHp);
+  const injured = await hero(page);
+  await page.keyboard.press('Digit1');
+  await expect
+    .poll(async () => (await hero(page)).inventory.potions.hp_small)
+    .toBe(1);
+  expect((await hero(page)).hp).toBeGreaterThan(injured.hp);
+  await page.keyboard.press('Digit1');
+  await page.keyboard.press('Digit2');
+  await page.waitForTimeout(200);
+  expect((await hero(page)).inventory.potions.hp_small).toBe(1);
+  expect((await hero(page)).inventory.potions.mp_small).toBe(1);
+  await expect
+    .poll(async () => (await hero(page)).inventory.potionCooldownTicks, {
+      timeout: 8000,
+    })
+    .toBe(0);
+  // Spend mana through an actual skill, then consume with the requested key.
+  const castDeadline = Date.now() + 10000;
+  while (
+    (await hero(page)).mana >= (await hero(page)).maxMana - 1 &&
+    Date.now() < castDeadline
+  ) {
+    await page.keyboard.press('KeyQ');
+    await page.waitForTimeout(100);
+  }
+  const depleted = await hero(page);
+  expect(depleted.mana).toBeLessThan(depleted.maxMana);
+  await page.keyboard.press('Digit2');
+  await expect
+    .poll(async () => (await hero(page)).inventory.potions.mp_small)
+    .toBe(0);
+  expect((await hero(page)).mana).toBeGreaterThan(depleted.mana);
+  expect((await hero(page)).inventory.potionCooldownTicks).toBeGreaterThan(0);
+  await page.screenshot({ path: info.outputPath('potion-hotkeys.png') });
+});

@@ -72,7 +72,7 @@ export class GameUI {
             <div class="meter hp" role="meter" aria-label="Sinh lực" aria-valuemin="0"><i></i><span id="hp-text">—</span></div><div class="meter mp" role="meter" aria-label="Nội lực" aria-valuemin="0"><i></i><span id="mp-text">—</span></div><div class="meter xp" role="meter" aria-label="Kinh nghiệm" aria-valuemin="0"><i></i><span id="xp-text">—</span></div></div></section>
           <nav class="system-buttons" aria-label="Menu trò chơi"><button data-action="quit" title="Thoát" aria-label="Thoát">${icon('quit')}<span>Thoát</span></button><button data-menu="settings" title="Cài đặt" aria-label="Cài đặt">${icon('settings')}<span>Cài đặt</span></button><button data-menu="dungeons" title="Phó Bản" aria-label="Phó Bản">${icon('portal')}<span>Phó Bản</span></button><button data-menu="merchant" title="Thương Gia" aria-label="Thương Gia">${icon('shop')}<span>Thương Gia</span></button><button data-menu="pvp" title="Lôi Đài" aria-label="Lôi Đài">${icon('swords')}<span>Lôi Đài</span></button></nav>
           <span class="sr-only"><span id="hud-connection">Connected</span> · <span id="current-room" data-testid="room-id">—</span> · <span id="player-count" data-testid="player-count">0 / 6</span></span>
-          <section class="bag-cluster framed"><button data-menu="inventory" title="Túi đồ">${icon('bag')}<span>Túi đồ</span></button><div>${icon('gold')}<strong class="live-gold">0</strong><small>Vàng</small></div><section class="quick-potions" aria-label="Bình mang theo"><button type="button" data-potion-resource="hp" title="Bình máu" aria-label="Bình máu" disabled><img src="/assets/inventory_ui/potion_hp.png" alt=""/><em>—</em><b></b></button><button type="button" data-potion-resource="mp" title="Bình mana" aria-label="Bình mana" disabled><img src="/assets/inventory_ui/potion_mp.png" alt=""/><em>—</em><b></b></button></section></section>
+          <section class="bag-cluster framed"><button data-menu="inventory" title="Túi đồ">${icon('bag')}<span>Túi đồ</span></button><div>${icon('gold')}<strong class="live-gold">0</strong><small>Vàng</small></div><section class="quick-potions" aria-label="Bình mang theo"><button type="button" data-potion-resource="hp" aria-keyshortcuts="1" title="Bình máu" aria-label="Bình máu" disabled><img src="/assets/inventory_ui/potion_hp.png" alt=""/><kbd>1</kbd><em>—</em><b></b></button><button type="button" data-potion-resource="mp" aria-keyshortcuts="2" title="Bình mana" aria-label="Bình mana" disabled><img src="/assets/inventory_ui/potion_mp.png" alt=""/><kbd>2</kbd><em>—</em><b></b></button></section></section>
           <section class="hotbar framed" aria-label="Thanh kỹ năng chiến đấu">
             ${[
               ['a', 'staff', 'Đánh thường · A'],
@@ -111,8 +111,7 @@ export class GameUI {
       if (target && this.roomId && !this.study) {
         const resource = target.dataset['potionResource'];
         if (resource === 'hp' || resource === 'mp') {
-          const id = this.quickPotion(resource);
-          if (id) this.onMerchant({ action: 'use-potion', potionId: id });
+          this.usePotion(resource);
           return;
         }
         if (target.dataset['action'] === 'quit') this.open('quit');
@@ -422,6 +421,20 @@ export class GameUI {
   resolveMerchant(): void {
     this.itemMenu?.resolve();
   }
+  usePotion(resource: 'hp' | 'mp'): void {
+    const hero = this.state?.players.get(this.sessionId);
+    const id = this.quickPotion(resource);
+    if (
+      !hero ||
+      !id ||
+      this.blocked ||
+      hero.hp <= 0 ||
+      hero.inventory.potionCooldownTicks > 0 ||
+      (resource === 'hp' ? hero.hp >= hero.maxHp : hero.mana >= hero.maxMana)
+    )
+      return;
+    this.onMerchant({ action: 'use-potion', potionId: id });
+  }
   private quickPotion(resource: 'hp' | 'mp'): PotionId | undefined {
     const hero = this.state?.players.get(this.sessionId);
     return (['small', 'medium', 'large'] as const)
@@ -535,8 +548,9 @@ export class GameUI {
       const label = id
         ? `${economyTrial.potions[id].nameVi} · Hồi ${economyTrial.potions[id].amount} · Dùng cỡ nhỏ trước`
         : `Không còn bình ${resource === 'hp' ? 'máu' : 'mana'}`;
-      button.title = seconds ? `Đang hồi · ${seconds}s` : label;
-      button.setAttribute('aria-label', label);
+      const hotkey = resource === 'hp' ? '1' : '2';
+      button.title = `${hotkey} · ${seconds ? `Đang hồi · ${seconds}s` : label}`;
+      button.setAttribute('aria-label', `${label} · Phím ${hotkey}`);
     }
     element('#available-points').textContent = hero.build.enabled
       ? String(hero.build.available)

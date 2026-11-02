@@ -26,7 +26,7 @@ export function menuContents(menu: Menu, debug = false): string {
     case 'quit':
       return '<p>Bạn có muốn rời trận? Tiến trình trong trận sẽ không được lưu.</p><div class="window-footer"><button id="cancel-quit">Ở lại</button><button id="confirm-quit" class="danger">Rời trận</button></div>';
     case 'settings':
-      return `<div class="settings-controls"><p>↑ ↓ ← → · Di chuyển<br>A · Đánh thường<br>Q W E R · Kỹ năng<br>P · Võ Học<br>Space · Rời phó bản khi gần cửa<br>Escape · Đóng cửa sổ</p><button data-menu="skills">${icon('scroll')} Võ học / đổi đòn đánh</button><button data-menu="party">${icon('party')} Đồng đội / kết nối</button><button id="fullscreen">Toàn màn hình</button>${debug ? '<button id="forest-study">Xem bản mẫu rừng</button>' : ''}</div>`;
+      return `<div class="settings-controls"><p>↑ ↓ ← → · Di chuyển<br>A · Đánh thường<br>Q W E R · Kỹ năng<br>1 · Dùng bình máu<br>2 · Dùng bình mana<br>P · Võ Học<br>Space · Rời phó bản khi gần cửa<br>Escape · Đóng cửa sổ</p><button data-menu="skills">${icon('scroll')} Võ học / đổi đòn đánh</button><button data-menu="party">${icon('party')} Đồng đội / kết nối</button><button id="fullscreen">Toàn màn hình</button>${debug ? '<button id="forest-study">Xem bản mẫu rừng</button>' : ''}</div>`;
     case 'inventory':
       return '<div id="item-menu"></div>';
     case 'dungeons':

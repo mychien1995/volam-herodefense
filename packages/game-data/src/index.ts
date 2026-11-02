@@ -20,6 +20,8 @@ export const inputBindings = Object.freeze({
   movement: ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'] as const,
   basicAttack: 'KeyA',
   activeSkills: ['KeyQ', 'KeyW', 'KeyE', 'KeyR'] as const,
+  healthPotion: ['Digit1', 'Numpad1'] as const,
+  manaPotion: ['Digit2', 'Numpad2'] as const,
 });
 
 export * from './arena.js';

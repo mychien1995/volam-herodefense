@@ -23,6 +23,8 @@ describe('validated M0 data and protocol', () => {
       movement: ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'],
       basicAttack: 'KeyA',
       activeSkills: ['KeyQ', 'KeyW', 'KeyE', 'KeyR'],
+      healthPotion: ['Digit1', 'Numpad1'],
+      manaPotion: ['Digit2', 'Numpad2'],
     });
   });
   it('normalizes Vietnamese nicknames to NFC and trims whitespace', () => {

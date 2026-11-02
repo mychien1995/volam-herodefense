@@ -1,3 +1,7 @@
+## Potion hotkey acceptance — 2026-11-02
+
+`tests/e2e/merchant.spec.ts` adds real-combat purchases followed by **1 for HP / 2 for mana**, validates server resource/count changes and shared cooldown, and confirms keys do not consume while merchant owns input. HUD labels show1/2; settings documents both shortcuts. Existing mouse-potion purchase case stays covered.
+
 ## Trial merchant purchase acceptance — 2026-11-02
 
 The director authorizes temporary prices and real basic/potion transactions after runtime UI approval. `tests/economy.test.ts` and `tests/economy-room.test.ts` cover atomic spending, level5,20 total potions, shared5s cooldown, no free resource refill, stale/replay rejection, peer synchronization and zone/death persistence. `tests/e2e/merchant.spec.ts` farms real gold with combat in Phaser, buys owned gear/potions, asserts server stats/gold/counts and uses the HUD potion. UI bounds/input/crafting-preview checks remain. Actual commands, measured results and PNGs: [ECONOMY_TRIAL.md](docs/ECONOMY_TRIAL.md). Boss/Long Châu/crafting/Z/PvP portions of Section H remain future acceptance; historical unavailable-purchase notes below predate this scope.
