@@ -1,0 +1,82 @@
+{
+  "status": "PASS_WITH_DOCUMENTED_LIMITS",
+  "date": "2026-11-02",
+  "branch": "wip/m3d/bac-cai",
+  "runtimeIntegrated": true,
+  "finalRuntimeDirectorApproved": false,
+  "finalBalanceApproved": false,
+  "recordingsCreated": false,
+  "checks": {
+    "typechecks": "PASS",
+    "workflowTests": 18,
+    "fullUnitIntegration": {
+      "passed": 505,
+      "files": 44,
+      "seconds": 101.18
+    },
+    "latestVoteFocused": {
+      "passed": 22,
+      "files": 2,
+      "seconds": 5.73
+    },
+    "productionBuild": {
+      "status": "PASS",
+      "seconds": 11.2,
+      "endpoint": "http://127.0.0.1:2797"
+    },
+    "assetValidators": {
+      "passed": 16,
+      "pinnedFiles": 514,
+      "originalBacCaiFiles": 425
+    },
+    "productionBrowser": {
+      "passedCases": 3,
+      "reportedMinutes": 4.6,
+      "galleryFrames": 408,
+      "galleryClips": 102,
+      "actualClients": [
+        2,
+        6
+      ],
+      "latestVoteTwoClientRetry": "PASS, 1.4min"
+    },
+    "balanceProbes": {
+      "scenarios": 288,
+      "seconds": 24.1708119
+    }
+  },
+  "sixClientNaturalCombat": {
+    "elapsedMs": 48321,
+    "initialBossHp": 76500,
+    "finalBossHp": 74888,
+    "bossKillObserved": false,
+    "pageErrors": []
+  },
+  "limitations": [
+    "Earlier three wave-boss adapters absent; ordered wave20 gate exists but natural campaign arrival is unavailable. Server-only fixtures do not fake prior defeats.",
+    "Trial numbers: no kills within60s in288 probes; bots do not model human dodge/equipment/respawn. Natural six-client pass did not kill boss.",
+    "New thrust native right only; drink/sleep down only; dogs right/mirrored left; retained approved fallbacks.",
+    "JSON snapshot is zone filtered but not production bandwidth/FPS certified."
+  ],
+  "recoveryNotes": [
+    "Initial final run failed one hardcoded protocol17 assertion; corrected to18, then full505 unit/integration cases passed after the wrong-guess retention fix.",
+    "First dev-server browser run saw Vite HMR sockets and a six-client join disconnect1006. Retained failure evidence. Reran all3 cases against the production build: PASS.",
+    "Last asset validator needed Python UTF-8 because cp1252 stdout could not print Vietnamese; all hash/pixel checks passed on UTF-8 retry.",
+    "Final dialogue-only vote adjustment: reran22 relevant tests, typechecks/build and the two-client browser case. Retained successful gallery/six-client checks; numeric combat, geometry and artwork unchanged.",
+    "Balance tool now resolves evidence output against its source URL, independent of pnpm filtered working directory; tool typechecked and288 probes rerun."
+  ],
+  "sourceSha256": {
+    "packages/game-core/src/bac-cai.ts": "241a6d5590097afa92525a3beb7ef4d0883f6f8cd855868c9268b6b6a11a46f6",
+    "packages/game-core/src/bac-cai-types.ts": "3e21ec22be7222b2453dc181f34f53d06a8444c884e76a71a614796052a9ea1e",
+    "packages/game-core/src/main-bosses.ts": "61091466db9584becf4ca8e5e5db7d32c225fc2508600f631692798e67e88b11",
+    "packages/game-data/src/bac-cai.ts": "b96b3dfc431b575d81cd313bea3dd4b12dc61df6d9bb32f1ccb139fcca906a67",
+    "apps/game-client/src/bac-cai-art.ts": "46f9181a775bd728d539d79eb6648e87b68cbf1e363dfba73d84a186424b4a0c",
+    "apps/game-server/src/rooms/MatchRoom.ts": "7589f4a4057f8fe34bdea3ca322d170e0ab0f725250607d2cecdf246c7841b61",
+    "packages/game-protocol/src/index.ts": "96ad7ee1aec2baf14db650552844a76b683e4a89972a335acec5379c854b29e1",
+    "tests/bac-cai-runtime.test.ts": "2ea0fb0e87ddfa10bac229fdd84f87a1b421da5aea0d59d396e0b7210ef4d074",
+    "tests/bac-cai-room.test.ts": "8c4b062f5f4e149a265b7ccd569c622232943e762b925252192f9ac7747c1b84",
+    "tests/e2e/bac-cai-runtime.spec.ts": "0c2c859125545042367c4076fa40f94e54bbf50932b71c1c0c3995966494f478",
+    "tests/e2e/bac-cai-setup.ts": "1396ade471171196feacd66970232d399148550ae4e0d2c9b8c8af5b976c2541",
+    "tools/bac-cai-balance.ts": "5e4a767b40197b4b9bc04dafa1396c899f638dc2e67b4c90afdadccf78ed949d"
+  }
+}

@@ -82,6 +82,17 @@ The director's final Nam Đế description supersedes the v01 skill-art concepts
 Final specials: Nhất Dương Chỉ charges at a fingertip and fires a warned screen-crossing ray, 90% HP lost on hit; Liên Hoàn Nhất Dương Chỉ is a longer random-direction barrage favoring player directions; Đại Lý Phong Huyệt dashes into contact and locks a protected victim into ten arrow inputs over five seconds, one wrong input causes 70% HP backlash, boss heals 10%; Phật Quang Phổ Chiếu shines on one victim, causes dizziness and random arrow remapping for about ten seconds; Nhất Dương Quy Tông fires upward then rains dozens of quickly warned finger rays from the sky. Do not retain healing Phật Quang, sealing missiles or extra shield/passive skills as encounter mechanics from the old art package.
 
 The current authorization is art-preview work, not authoritative encounter integration or final art approval. The standalone Phaser demo's actors/HP are illustrative. Unspecified numeric tuning, percent-health base, timeout behavior and precise heal trigger are documented as preview assumptions in `assets/reviews/nam_de_v02/README.md`, not new confirmed combat rules. Original sources and historical v01 notes remain intact.
+## Bắc Cái visual approval and integration handoff — 2026-11-02
+
+The director explicitly approved visual v03 and requested an integration prompt, not immediate integration in this turn. Final mechanic answers: hitting a clone still causes the explosion even if the same AoE/tick also hits the real body; tied/zero preference votes fail immediately; either tether endpoint dying/leaving the arena/disconnecting breaks the tether and stops drain immediately. Artwork/choreography hashes are pinned in `assets/approved_bac_cai.lock.json`; scope/known facing gaps are recorded in `assets/reviews/bosses/bac_cai_v03/director_approval.json`. This is not final live-runtime or combat-balance approval. Handoff: `docs/BAC_CAI_PHASER_INTEGRATION_PROMPT.md`.
+
+## Bắc Cái director feedback v03 — 2026-11-02
+
+Mục Hạ Vô Nhân swaps slowly along crossing pair paths. Đả Cẩu Bổng Kích needs a clean jab/beam animation. Kiến Long's ground explosion must not cover Hồng Thất Công. Preference speech is concurrent with normal combat/other skills. Phi Long releases a detached dragon and immediately permits subsequent skills while the dragon continues its own expanding spiral. The art preview implements these channels independently; no authoritative combat integration or final art approval is implied. Detail: `docs/BAC_CAI_FEEDBACK_V03.md`.
+
+## Bắc Cái final boss brief and art-preview scope — 2026-11-02
+
+The director's current Bắc Cái description is final and supersedes conflicting old boss-asset mappings. Reuse the existing character/concepts; preview sprite/VFX first in `wip/m3d/bac-cai`. North-entry wave boss in the main arena, player-only aggression, flexible staff/palms, four attackable black dogs, eight-body/five-shuffle trick, map-wide pull/slam, two-player breakable draining tether (disabled solo), broad 田 impact, expanding fire-dragon spiral and changing-preference majority floor vote with ten-second sleep or 10% healing. Exact wording, reuse audit and unresolved numeric/tie policies: `docs/BAC_CAI_FINAL_DESIGN.md`. This authorizes art choreography and a dedicated preview, not combat/server integration or final artwork approval. Playable Cái Bang school mechanics are unchanged.
 
 ## Lý Mạc Sầu selector correction — 2026-11-01
 
@@ -335,3 +346,6 @@ Production uses the minimal ordered wave10+clear+rest hook and waits for actual 
 
 ## Nam Đế milestone integration authorization — 2026-11-03
 The user explicitly requests integration into milestone/m3d with only necessary tests, superseding the previous no-merge/worktree-only restriction. Retain the latest M3D controls, party/reconnect/economy and Đông Tà/Tây Độc rules. Nam Đế is gated after actual Tây Độc defeat plus wave15clear/rest, using the arena clock under the existing pause policy. Protocol24 retains prior fields. No new artwork, M4 migration or runtime art-approval claim is added. Exact merge scope/checks: docs/NAM_DE_M3D_MERGE_2026-11-03.md.
+# Bắc Cái gameplay integration — 2026-11-02
+
+Requested implementation uses the director-approved v03 visual with pure authoritative arena runtime, independent body/hazards/dialogue-vote channels and protocol18 zone-filtered public projection. The three final decisions (AoE clone still explodes, tie/zero wrong, tether endpoint death/leave/disconnect breaks) are implemented. Numeric tuning remains trial; final runtime/balance art approval is separate. Main-boss progression has only the minimal Bắc Cái gate/hook: earlier wave-boss adapters are absent, so natural campaign arrival remains a dependency, not a fabricated completed prerequisite. No other bosses, arena, item drops or invasion cadence change. See `docs/BAC_CAI_RUNTIME.md`.

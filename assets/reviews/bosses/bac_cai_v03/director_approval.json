@@ -1,0 +1,27 @@
+{
+  "status": "approved_visual_preview_v03_for_phaser_integration",
+  "approvalDate": "2026-11-02",
+  "approvedBy": "director / current user",
+  "userMessage": "duyệt visual, gửi tôi prompt để tích hợp vào phaser, bạn có câu hỏi gì không",
+  "revision": "v03",
+  "branch": "wip/m3d/bac-cai",
+  "scope": "Reviewed raster artwork and standalone v03 choreography, including disclosed existing facing fallbacks. This turn records approval and supplies a handoff prompt; no live integration performed.",
+  "gameRuntimeIntegrated": false,
+  "standalonePhaserPreviewVerified": true,
+  "finalGameRuntimeArtApproved": false,
+  "finalCombatBalanceApproved": false,
+  "observedPlaybackFrames": 408,
+  "observedClips": 102,
+  "hashLock": "assets/approved_bac_cai.lock.json",
+  "knownArtworkGaps": [
+    "New thrust authored right only; other facings use disclosed retained fallback.",
+    "Drinking/sleeping authored down only.",
+    "Dog authored right; left mirrors; native up/down remain absent.",
+    "Dedicated sleeping breathing cels remain absent."
+  ],
+  "finalMechanicAnswers": {
+    "aoeHitsRealAndClone": "Clone hit still explodes, even when the same attack/tick hits the real body.",
+    "tieOrNoPreferenceVotes": "Fail immediately, no extension.",
+    "tetherDeathLeaveDisconnect": "Break immediately and stop HP drain on the remaining player."
+  }
+}

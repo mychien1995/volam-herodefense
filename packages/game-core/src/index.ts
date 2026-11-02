@@ -27,3 +27,6 @@ export * from './tay-doc-types.js';
 export * from './tay-doc.js';
 export * from './nam-de-types.js';
 export * from './nam-de.js';
+export * from './bac-cai-types.js';
+export * from './bac-cai.js';
+export * from './main-bosses.js';

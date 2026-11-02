@@ -58,6 +58,11 @@ export function hurt(
     hasStatus(target, 'dash_guard', world.tick)
   )
     return false;
+  if (
+    world.bacCai &&
+    !world.bacCai.interceptDamage(world, config, target.id, sourceId, abilityId)
+  )
+    return false;
   let empowered = false;
   if (
     snapshot?.combo &&
@@ -269,6 +274,8 @@ export function hurt(
   }
   const beforeHp = target.hp;
   target.hp = Math.max(0, target.hp - damage);
+  if (target.hp < beforeHp)
+    world.bacCai?.damaged(world, config, target.id, sourceId);
   if (guardCounter) {
     const received = beforeHp - target.hp;
     guardCounter.receivedDamage = (guardCounter.receivedDamage ?? 0) + received;

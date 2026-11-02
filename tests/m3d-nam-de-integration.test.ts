@@ -173,8 +173,8 @@ describe('M3D Dong Ta -> Tay Doc -> Nam De reconciliation', () => {
     expect(h.hp).toBe(h.maxHp);
     expect(answerNamDe(w, m.arena.config, h, q.id, 0, q.keys[0]!)).toBe(false);
   });
-  it('protocol24 retains dash/move and owner-key commands without trusting success/HP', () => {
-    expect(PROTOCOL_VERSION).toBe(24);
+  it('protocol25 retains dash/move and owner-key commands without trusting success/HP', () => {
+    expect(PROTOCOL_VERSION).toBe(25);
     const s = new LobbyState();
     expect(s.tayDoc.size).toBe(0);
     expect(s.namDeControls.size).toBe(0);
@@ -186,12 +186,12 @@ describe('M3D Dong Ta -> Tay Doc -> Nam De reconciliation', () => {
       { kind: 'nam-de-key', castId: 'nam_de_1', index: 0, key: 'up' },
     ])
       expect(
-        inputSchema.safeParse({ protocolVersion: 24, sequence: 1, ...cmd })
+        inputSchema.safeParse({ protocolVersion: PROTOCOL_VERSION, sequence: 1, ...cmd })
           .success,
       ).toBe(true);
     expect(
       inputSchema.safeParse({
-        protocolVersion: 24,
+        protocolVersion: PROTOCOL_VERSION,
         sequence: 1,
         kind: 'nam-de-key',
         castId: 'nam_de_1',

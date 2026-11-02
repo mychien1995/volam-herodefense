@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 24;
+export const PROTOCOL_VERSION = 25;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -497,6 +497,10 @@ export const NamDeControlState = schema(
   { heroId: t.string(), payload: t.string() },
   'NamDeControl',
 );
+export const BacCaiState = schema(
+  { snapshot: t.string().default('') },
+  'BacCaiArenaEncounter',
+);
 export const LobbyState = schema(
   {
     protocolVersion: t.number().default(PROTOCOL_VERSION),
@@ -515,6 +519,7 @@ export const LobbyState = schema(
     dungeons: t.map(DungeonState).view(),
     defense: t.ref(DefenseState).default(() => new DefenseState()),
     tayDoc: t.map(TayDocState).view(),
+    bacCai: t.map(BacCaiState).view(),
   },
   'ArenaState',
 );

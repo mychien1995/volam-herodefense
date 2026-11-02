@@ -1,6 +1,7 @@
 import type { ChuEncounter } from './chu-types.js';
 import type { EllipseBounds } from './dong-ta-types.js';
 import type { NamDeKey, NamDeRuntime } from './nam-de-types.js';
+import type { BacCaiEncounter } from './bac-cai.js';
 import type { KimLootContext } from './kim-types.js';
 import type { EconomyDefinition, HeroInventory } from './economy-types.js';
 import type {
@@ -474,6 +475,7 @@ export interface CombatArea extends Point {
 }
 export interface World {
   namDe?: NamDeRuntime;
+  bacCai?: Pick<BacCaiEncounter, keyof BacCaiEncounter>;
   kim?: { rewards: KimLootContext };
   chu?: ChuEncounter;
   boss?: BossRuntime;

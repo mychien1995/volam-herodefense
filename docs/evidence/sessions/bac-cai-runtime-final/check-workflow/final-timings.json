@@ -1,0 +1,45 @@
+{
+  "runId": "92fa6284-96af-4046-8220-29bd3f1ad08f",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.bac-cai.config.ts",
+    "--trace",
+    "off"
+  ],
+  "startedAt": "2026-11-02T01:01:20.140Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 12.57,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.8,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.59,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.51,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 96.55,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 112.04
+}

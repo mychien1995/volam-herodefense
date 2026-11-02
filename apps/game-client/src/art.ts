@@ -84,6 +84,7 @@ export function heroTexture(
 }
 export { facing } from './facing.js';
 export function preloadArt(scene: Phaser.Scene): void {
+  preloadBacCaiArt(scene);
   preloadChu(scene);
   preloadNamDe(scene);
   preloadHongLietArt(scene);
@@ -326,3 +327,4 @@ export function registerArt(scene: Phaser.Scene): void {
     repeat: 0,
   });
 }
+import { preloadBacCaiArt } from './bac-cai-art.js';

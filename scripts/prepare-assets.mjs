@@ -5,6 +5,7 @@ import { prepareDongTa } from './prepare-dong-ta.mjs';
 
 import { prepareM3dFeedbackArt } from './prepare-m3d-feedback-art.mjs';
 import { prepareM3dR3Art } from './prepare-m3d-r3-art.mjs';
+import { prepareBacCaiPreview } from './prepare-bac-cai-preview.mjs';
 import { prepareChuAssets } from './prepare-chu-assets.mjs';
 import { prepareM3dFollowup } from './prepare-m3d-followup.mjs';
 import { mkdirSync, readFileSync, existsSync } from 'node:fs';
@@ -28,6 +29,7 @@ import { prepareHongLietAssets } from './prepare-hong-liet-assets.mjs';
 const root = new URL('../', import.meta.url);
 for (const [name, label] of [
   ['approved_chu_ba_thong.lock.json', 'Chu Bá Thông'],
+  ['approved_bac_cai.lock.json', 'Bắc Cái visual v03'],
   ['approved_cai_bang.lock.json', 'Cai Bang'],
   ['approved_thien_son.lock.json', 'Thien Son'],
   ['approved_vo_dang.lock.json', 'Vo Dang'],
@@ -163,6 +165,7 @@ prepareApprovedAnimationArt();
 prepareLyMacSau();
 prepareHellAssets();
 prepareTayDocAssets();
+prepareBacCaiPreview();
 console.info(
   `Prepared assets in ${fileURLToPath(dest)} (${assetWrites.changed} written, ${assetWrites.unchanged} unchanged)`,
 );

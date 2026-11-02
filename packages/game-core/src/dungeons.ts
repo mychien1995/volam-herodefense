@@ -12,6 +12,8 @@ import { DongTaEncounter } from './dong-ta.js';
 import type { DongDefinition } from './dong-ta-types.js';
 
 import { BossPartyState, isBossDungeon } from './boss-party.js';
+import { MainBossDirector } from './main-bosses.js';
+import { validateBacCai, type BacCaiDefinition } from './bac-cai-types.js';
 import type { KimDefinition } from './kim-types.js';
 import { spawnChu, drinkChuWine } from './chu-ba-thong.js';
 import { validateChuDefinition, type ChuDefinition } from './chu-types.js';
@@ -110,6 +112,7 @@ export class DungeonMatch {
   readonly arena: MatchZone;
   readonly invasion: InvasionDirector | undefined;
   readonly dongTa: DongTaEncounter | undefined;
+  readonly mainBosses: MainBossDirector | undefined;
   tick = 0;
   arenaTick = 0;
   nowMs = 0;
@@ -149,6 +152,7 @@ export class DungeonMatch {
     dongTa?: DongDefinition,
     tayDoc?: TayDocDefinition,
     namDe?: NamDeDefinition,
+    bacCai?: BacCaiDefinition,
   ) {
     for (const definition of [dungeon, ...additionalDungeons]) {
       if (this.definitions.has(definition.id))
@@ -168,6 +172,10 @@ export class DungeonMatch {
     };
     this.zones.set('arena', this.arena);
     if (tayDoc) this.tayDoc = new TayDocEncounter(tayDoc);
+    if (bacCai) {
+      validateBacCai(bacCai, base);
+      this.mainBosses = new MainBossDirector(bacCai);
+    }
     if (invasion) {
       this.arena.config = {
         ...base,
@@ -212,6 +220,7 @@ export class DungeonMatch {
     const zone = this.zoneOf(id);
     if (zone?.access === 'arena')
       this.tayDoc?.depart(zone.world, zone.config, id, false);
+    zone?.world.bacCai?.participantLeft(id);
     if (zone) removeHero(zone.world, id);
     if (zone?.kim && !zone.world.heroes.size) zone.kim.clear(zone.world);
     if (zone?.dungeon?.bossEncounter && !zone.world.heroes.size)
@@ -597,10 +606,15 @@ export class DungeonMatch {
         this.invasion?.afterStep(zone.world, this.arenaTick);
         if (!this.tayDoc || this.tayDoc.phase === 'dead')
           gateNamDe(zone.world, this.invasion?.wave ?? 0, zone.world.tick);
+        if (this.dongTa?.phase === 'cleared') this.mainBosses?.recordDefeat('dong_ta');
+        if (this.tayDoc?.phase === 'dead') this.mainBosses?.recordDefeat('tay_doc');
+        if (zone.world.namDe?.phase === 'defeated') this.mainBosses?.recordDefeat('nam_de');
+        this.mainBosses?.step(zone.world, zone.config, this.invasion);
         if (this.invasion?.defeated) {
           this.tayDoc?.dispose(this.arena.world);
           for (const active of this.zones.values()) {
             clearNamDe(active.world);
+            active.world.bacCai?.clear(active.world);
             active.kim?.clear(active.world);
             for (const id of active.world.heroes.keys())
               cancelOwnedEffects(active.world, id);
@@ -836,6 +850,7 @@ export class DungeonMatch {
       for (const key of Object.keys(hero.abilityCooldowns))
         hero.abilityCooldowns[key] = convert(hero.abilityCooldowns[key]!);
     hero.statuses = [];
+    source.world.bacCai?.participantLeft(id);
     refreshCharacter(hero, destination.config);
     removeHero(source.world, id);
     if (source.kim && !source.world.heroes.size) source.kim.clear(source.world);

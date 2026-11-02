@@ -2,6 +2,7 @@ import { namDeView } from '@volam/game-core';
 import { namDeDefinition } from '@volam/game-data';
 import { NamDeControlState } from '@volam/game-protocol';
 import { chuView, chuLootAction, chuItemAction } from '@volam/game-core';
+import { isBacCaiActor } from '@volam/game-core';
 import {
   bossLootActionSchema,
   bossItemActionSchema,
@@ -22,6 +23,7 @@ import {
   dongTaDefinition,
   tayDocDefinition,
   hellDungeon,
+  bacCaiDefinition,
 } from '@volam/game-data';
 import {
   DungeonMatch,
@@ -55,6 +57,7 @@ import {
   TayDocState,
   AreaState,
   BossEffectState,
+  BacCaiState,
   skillPreviewActionSchema,
   merchantActionSchema,
 } from '@volam/game-protocol';
@@ -85,6 +88,7 @@ export class MatchRoom extends Room<{
     structuredClone(dongTaDefinition),
     structuredClone(tayDocDefinition),
     namDeDefinition,
+    bacCaiDefinition,
   );
   readonly world = this.simulation.arena.world;
   readonly devTayDoc =
@@ -696,6 +700,7 @@ export class MatchRoom extends Room<{
     actor.castAbilityId = source.castAbilityId ?? '';
   }
   override onDispose(): void {
+    this.world.bacCai?.clear(this.world);
     this.simulation.tayDoc?.dispose(this.world);
   }
   private syncState(): void {
@@ -707,6 +712,17 @@ export class MatchRoom extends Room<{
     tayDoc.json = JSON.stringify(
       this.simulation.tayDoc?.view(this.world) ?? null,
     );
+    const bacCai = this.world.bacCai;
+    if (bacCai) {
+      let projection = this.state.bacCai.get('arena');
+      if (!projection) {
+        projection = new BacCaiState();
+        this.state.bacCai.set('arena', projection);
+      }
+      projection.snapshot = JSON.stringify(
+        bacCai.view(this.world, this.simulation.arena.config),
+      );
+    }
     this.state.tick = this.world.tick;
     this.state.matchElapsedMs = (this.world.tick * 1000) / m1Config.tickRate;
     const invasion = this.simulation.invasion,
@@ -927,6 +943,8 @@ export class MatchRoom extends Room<{
             : Math.max(0, zone.nextWaveAt - zone.world.tick);
       }
       for (const [localId, enemy] of zone.world.creeps) {
+        // The public encounter projection anonymizes all eight forms and never leaks the real actor coordinate.
+        if (zone.access === 'arena' && isBacCaiActor(localId)) continue;
         const id = this.entityKey(zone, localId);
         creepKeys.add(id);
         let target = this.state.creeps.get(id);
@@ -1107,6 +1125,11 @@ export class MatchRoom extends Room<{
       for (const entity of this.state.tayDoc.values()) {
         if (zoneId === 'arena' && !view.has(entity)) view.add(entity);
         else if (zoneId !== 'arena' && view.has(entity)) view.remove(entity);
+      }
+      for (const projection of this.state.bacCai.values()) {
+        if (zoneId === 'arena' && !view.has(projection)) view.add(projection);
+        else if (zoneId !== 'arena' && view.has(projection))
+          view.remove(projection);
       }
       for (const player of this.state.players.values()) {
         const visible =
