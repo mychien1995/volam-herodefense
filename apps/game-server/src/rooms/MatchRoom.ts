@@ -17,6 +17,7 @@ import {
   kimLuanDungeon,
   coMoDungeon,
   dongTaDefinition,
+  tayDocDefinition,
   hellDungeon,
 } from '@volam/game-data';
 import {
@@ -48,6 +49,7 @@ import {
   dungeonActionSchema,
   DungeonState,
   StateView,
+  TayDocState,
   AreaState,
   BossEffectState,
   skillPreviewActionSchema,
@@ -78,8 +80,12 @@ export class MatchRoom extends Room<{
       hellDungeon,
     ],
     structuredClone(dongTaDefinition),
+    structuredClone(tayDocDefinition),
   );
   readonly world = this.simulation.arena.world;
+  readonly devTayDoc =
+    process.env['NODE_ENV'] !== 'production' &&
+    process.env['VOLAM_DEV_TAY_DOC'] === '1';
   private readonly checkSequences = new Map<string, number>();
   private readonly dungeonSequences = new Map<string, number>();
   private eventSequence = 0;
@@ -548,6 +554,8 @@ export class MatchRoom extends Room<{
         this.syncState();
         return;
       }
+      if (this.devTayDoc && this.simulation.tayDoc?.phase === 'waiting')
+        this.simulation.tayDoc.spawn(this.world, this.simulation.arena.config);
       this.simulation.step(Date.now());
       if (this.simulation.invasion?.defeated) {
         this.state.phase = 'DEFEAT';
@@ -683,7 +691,18 @@ export class MatchRoom extends Room<{
     );
     actor.castAbilityId = source.castAbilityId ?? '';
   }
+  override onDispose(): void {
+    this.simulation.tayDoc?.dispose(this.world);
+  }
   private syncState(): void {
+    let tayDoc = this.state.tayDoc.get('arena');
+    if (!tayDoc) {
+      tayDoc = new TayDocState();
+      this.state.tayDoc.set('arena', tayDoc);
+    }
+    tayDoc.json = JSON.stringify(
+      this.simulation.tayDoc?.view(this.world) ?? null,
+    );
     this.state.tick = this.world.tick;
     this.state.matchElapsedMs = (this.world.tick * 1000) / m1Config.tickRate;
     const invasion = this.simulation.invasion,
@@ -1061,6 +1080,10 @@ export class MatchRoom extends Room<{
       const view = client.view;
       if (!view) continue;
       const zoneId = this.simulation.zoneOf(client.sessionId)?.id ?? 'arena';
+      for (const entity of this.state.tayDoc.values()) {
+        if (zoneId === 'arena' && !view.has(entity)) view.add(entity);
+        else if (zoneId !== 'arena' && view.has(entity)) view.remove(entity);
+      }
       for (const player of this.state.players.values()) {
         const visible =
           this.state.phase === 'WAITING_LOBBY' ||

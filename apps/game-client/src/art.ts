@@ -1,3 +1,4 @@
+import { preloadTayDocArt, registerTayDocArt } from './tay-doc-art.js';
 import { preloadChu, registerChu } from './chu-presentation.js';
 import { preloadKimArt, registerKimArt } from './kim-luan-art.js';
 import { preloadDongArt, registerDongArt } from './dong-ta-art.js';
@@ -84,6 +85,7 @@ export { facing } from './facing.js';
 export function preloadArt(scene: Phaser.Scene): void {
   preloadChu(scene);
   preloadHongLietArt(scene);
+  preloadTayDocArt(scene);
   preloadKimArt(scene);
   preloadDongArt(scene);
   preloadCoMo(scene);
@@ -197,6 +199,7 @@ export function actorFootPivot(
 export function registerArt(scene: Phaser.Scene): void {
   registerChu(scene);
   registerHongLietArt(scene);
+  registerTayDocArt(scene);
   registerKimArt(scene);
   registerDongArt(scene);
   registerDesertArt(scene, 'co_mo_manifest');

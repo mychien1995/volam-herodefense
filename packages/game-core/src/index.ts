@@ -22,3 +22,6 @@ export * from './kim-types.js';
 export * from './kim-luan.js';
 export * from './dong-ta-types.js';
 export * from './dong-ta.js';
+
+export * from './tay-doc-types.js';
+export * from './tay-doc.js';

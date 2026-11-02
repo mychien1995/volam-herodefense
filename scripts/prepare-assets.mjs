@@ -1,3 +1,4 @@
+import { prepareTayDocAssets } from './prepare-tay-doc-assets.mjs';
 import { prepareKimAssets } from './prepare-kim-assets.mjs';
 import { prepareDongTa } from './prepare-dong-ta.mjs';
 
@@ -160,6 +161,7 @@ prepareHongLietAssets();
 prepareApprovedAnimationArt();
 prepareLyMacSau();
 prepareHellAssets();
+prepareTayDocAssets();
 console.info(
   `Prepared assets in ${fileURLToPath(dest)} (${assetWrites.changed} written, ${assetWrites.unchanged} unchanged)`,
 );

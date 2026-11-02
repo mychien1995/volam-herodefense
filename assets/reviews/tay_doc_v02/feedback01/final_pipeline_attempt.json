@@ -1,0 +1,43 @@
+{
+  "runId": "cfbd45bb-d914-450e-a1c7-931c7070a9c8",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.tay-doc-preview.config.ts"
+  ],
+  "startedAt": "2026-11-01T16:57:42.521Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 10.25,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.79,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.12,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.42,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 82.61,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 95.22
+}

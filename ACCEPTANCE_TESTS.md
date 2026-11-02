@@ -345,3 +345,8 @@ Run tests/kim-luan.test.ts, tests/kim-luan-room.test.ts, tests/kim-assets.test.t
 - Full-party wipe resets full boss state/effects and immediately revives at the next attempt; repeated retries never reward/rewind economy. A late join is inside bounds and disconnected heroes cannot hold a target lock.
 - Đông Tà alone dying removes summons/fields, unlocks the court, restores the unchanged statue and pays a unique gold/XP pool with no item/roll. Match continues.
 - Verify actual PNG/atlas pivots, four-facing frames, hurt/death, timestamps and all VFX in running Phaser; iterate with two clients, finish with six-client natural combat/keyboard/reward synchronization and PNG/error/frame evidence. Final balance/runtime-art director approval stays distinct. See `docs/DONG_TA_INTEGRATION.md`.
+
+
+## TAY-R01 — Tây Độc feedback03 runtime
+
+Run `pnpm check:final --config playwright.tay-doc.config.ts`. Mechanics/SDK tests must cover ordered gate/180second clock, west entry, no statue targeting, frontal180°staff dedup, swept straight projectiles, warning-before-damage, poison/slow/stun expiry, one unavoidable25%maxHP mark/no chain, six destructible eight-direction pillars, strict50%threshold, preserved phase1 hazards, phase2-only rotation, exact radial speeds/ranges and three actual landing bursts, single XP/gold/no-item rewards and death/travel/disconnect/defeat/dispose cleanup. Browser checks use two real peers for every new cel/transition/pillar heading and six real peers for natural A/QWER combat at zoom1. PNG/log evidence only; fixture and natural profiles are labeled separately. Approved byte guards and candidate provenance must pass; director runtime art approval remains separate.

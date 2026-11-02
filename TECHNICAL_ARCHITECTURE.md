@@ -300,3 +300,8 @@ DungeonMatch owns an optional deterministic KimLuanEncounter per zone, alongside
 ## Đông Tà wave encounter — protocol18
 
 `DungeonMatch` owns an optional engine-independent `DongTaEncounter`; it gates only wave5, then coordinates authoritative recall, temporary statue immunity/collision, ellipse bounds and retry/clear. Existing per-zone dungeon adapters remain independent. Pure geometry and the common damage/status pipeline enforce combat; no animation authorizes hits. `DefenseState.dongTa` carries lifecycle/cast metadata; zone-filtered `BossEffectState` delta entities carry VFX origins/targets/positions/timestamps. Retained approved PNGs are checked and selectively prepared by `scripts/prepare-dong-ta.mjs`; the Phaser renderer samples real cels from authoritative state. Exact behavior and limits: `docs/DONG_TA_INTEGRATION.md`.
+
+
+## Tây Độc feedback03 integration
+
+`TayDocEncounter` and `TayDocGate` in game-core consume the validated game-data definition. DungeonMatch calls the encounter after the arena world tick, disposes it on defeat, and settles marked travel before moving heroes. MatchRoom publishes an arena-only MapSchema entry (`tayDoc['arena'].json`, protocol18) through StateView. Map entry deletion clears scoped client state on zone transfer. Clients cannot submit encounter state, hits or phases. A seekable Phaser raster renderer projects IDs/timestamps and preserves feet depth and captured projectile vectors. Art preparation guards593approved hashes and copies separate candidate direction atlases. Dedicated DEV gameplay helper has spawn-only authorization; mutable pose fixtures exist exclusively in the Playwright setup process.
