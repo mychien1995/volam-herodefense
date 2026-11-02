@@ -206,7 +206,8 @@ test('r3 iteration: two clients, in-viewport O/P/Esc UI and actual Ca Diệp cas
     points: [
       { x: 850, y: 700 },
       { x: 980, y: 700 },
-      { x: 1100, y: 700 },
+      // The current earth-spike base reach is273px; keep every target on its legal path.
+      { x: 1020, y: 700 },
     ],
   });
   await a.waitForTimeout(180);

@@ -28,6 +28,7 @@ import { createSeededRandom } from './random.js';
 import { abilityCooldown, characterStats } from './progression.js';
 import {
   blocked,
+  clampEllipse,
   direction,
   distance,
   moveCircle,
@@ -555,6 +556,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       hero.maxMana,
       hero.mana + stats.manaRegen / config.tickRate,
     );
+    if (config.heroBounds) clampEllipse(hero, config.heroBounds, config.radius);
     const fieldRegen =
       (ownerProtection(world, hero)?.effect.ownerRegenFraction ?? 0) *
       hero.maxHp;
@@ -643,6 +645,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       continue;
     }
     if (enemy.hp <= 0) {
+      if (enemy.waveBossActor) continue;
       if (enemy.invasion && world.tick >= enemy.respawnAt) {
         world.creeps.delete(id);
         continue;

@@ -20,3 +20,5 @@ export * from './hong-liet-types.js';
 export * from './hong-liet.js';
 export * from './kim-types.js';
 export * from './kim-luan.js';
+export * from './dong-ta-types.js';
+export * from './dong-ta.js';

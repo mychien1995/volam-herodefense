@@ -1,4 +1,4 @@
-import { moveCircle } from './geometry.js';
+import { moveCircle, clampEllipse } from './geometry.js';
 import type {
   Actor,
   SimulationConfig,
@@ -133,7 +133,7 @@ export function displace(
   )
     return;
   const steps = Math.max(1, Math.ceil(Math.hypot(dx, dy) / 4));
-  for (let i = 0; i < steps; i++)
+  for (let i = 0; i < steps; i++) {
     moveCircle(
       actor,
       { x: dx / steps, y: dy / steps },
@@ -142,4 +142,7 @@ export function displace(
       config.height,
       config.collision,
     );
+    if (config.heroBounds && 'nickname' in actor)
+      clampEllipse(actor, config.heroBounds, radius);
+  }
 }

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Đông Tà · Sprite & VFX demo</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="review.css" />
+  </head>
+  <body>
+    <main
+      id="viewport"
+      aria-label="Demo sprite và VFX Đông Tà trên arena chính"
+    >
+      <div id="game"></div>
+      <div id="tools">
+        <div class="top">
+          <div class="badge">
+            <strong>ĐÔNG TÀ</strong
+            ><small>SPRITE + VFX · V02 · CHỜ DUYỆT</small>
+          </div>
+          <div class="buttons">
+            <button id="settings-toggle" aria-expanded="false">Tuỳ chỉnh</button
+            ><button id="fullscreen">Toàn màn hình</button>
+          </div>
+        </div>
+        <section id="settings" hidden>
+          <button id="close-settings">Đóng ×</button
+          ><label
+            >Hướng sprite<select id="facing">
+              <option value="right">→ Phải</option>
+              <option value="down">↓ Xuống</option>
+              <option value="left">← Trái</option>
+              <option value="up">↑ Lên</option>
+            </select></label
+          ><label
+            >Nhân vật mẫu<select id="party">
+              <option>1</option>
+              <option selected>2</option>
+              <option>3</option>
+              <option>6</option>
+            </select></label
+          ><label
+            >Đường lướt<select id="path">
+              <option value="random">Ngẫu nhiên</option>
+              <option value="triangle">Tam giác</option>
+              <option value="square">Hình vuông</option>
+              <option value="diamond">Hình thoi</option>
+              <option value="z">Chữ Z</option>
+            </select></label
+          ><label
+            >Nhịp demo<select id="speed">
+              <option value=".25">0,25×</option>
+              <option value=".5">0,5×</option>
+              <option selected value="1">1×</option>
+            </select></label
+          ><label
+            >Zoom<select id="zoom">
+              <option selected value="1">1× · gameplay</option>
+              <option value="2">2× · xem pixel</option>
+            </select></label
+          ><label class="inline"
+            ><input id="auto" type="checkbox" /> Tự chuyển chiêu</label
+          >
+          <p>
+            ↑↓←→ di chuyển người chơi mẫu · A/Q/W/E/R thử chiêu Đông Tà · Space
+            dừng/chạy · H ẩn công cụ.
+          </p>
+          <p>
+            Đây là bản thử chuyển động. Thời gian, tầm và tốc độ đang là thông
+            số demo để duyệt.
+          </p>
+        </section>
+        <div id="notice">Đang nạp PNG…</div>
+        <div id="target-label"></div>
+        <div class="bottom">
+          <div class="caption">
+            <strong id="title"></strong><span id="description"></span>
+          </div>
+          <div class="controls">
+            <select id="mode" aria-label="Chọn chiêu hoặc sprite"></select
+            ><button id="restart">Từ đầu</button><button id="pause">Dừng</button
+            ><button id="prev" aria-label="Frame trước">‹</button
+            ><button id="next" aria-label="Frame sau">›</button>
+          </div>
+          <div class="transport">
+            <input
+              id="timeline"
+              type="range"
+              min="0"
+              max="6"
+              step=".01"
+              value="0"
+              aria-label="Tua animation"
+            /><output id="time">0,00s</output><span id="phase"></span>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="/__phaser.js"></script>
+    <script type="module" src="review.js"></script>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-import { blocked, direction, segmentRect } from './geometry.js';
+import { blocked, direction, segmentRect, insideEllipse } from './geometry.js';
 import { emit } from './combat.js';
 import { hasStatus } from './status.js';
 import { perform } from './skills.js';
@@ -80,6 +80,11 @@ export function blink(
       (p.lingerUntil === undefined || world.tick < p.lingerUntil),
   );
   if (!shot) return false;
+  if (
+    config.heroBounds &&
+    !insideEllipse(shot, config.heroBounds, config.radius)
+  )
+    return true;
   if (
     blocked(
       shot,

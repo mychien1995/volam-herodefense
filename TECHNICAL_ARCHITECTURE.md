@@ -296,3 +296,7 @@ A boss-only optional `HongLietEncounter` hangs off `MatchZone`; it runs after `s
 ## Kim Luân encounter adapter (2026-11-01)
 
 DungeonMatch owns an optional deterministic KimLuanEncounter per zone, alongside existing Chu/Hong adapters. Controlled creep actors reuse common targeting/damage/status/death; the common boss loot backend accepts either encounter context. Protocol16 extends BossEffectState for delta-synchronized Kim hazards; the existing dungeon summary carries phase/casts/loot. StateViews restrict both to the active zone. Retained art is guarded/prepared separately; Phaser projects server geometry with authored PNGs. Test fixtures are confined to dedicated QA services. See docs/KIM_LUAN_RUNTIME.md.
+
+## Đông Tà wave encounter — protocol18
+
+`DungeonMatch` owns an optional engine-independent `DongTaEncounter`; it gates only wave5, then coordinates authoritative recall, temporary statue immunity/collision, ellipse bounds and retry/clear. Existing per-zone dungeon adapters remain independent. Pure geometry and the common damage/status pipeline enforce combat; no animation authorizes hits. `DefenseState.dongTa` carries lifecycle/cast metadata; zone-filtered `BossEffectState` delta entities carry VFX origins/targets/positions/timestamps. Retained approved PNGs are checked and selectively prepared by `scripts/prepare-dong-ta.mjs`; the Phaser renderer samples real cels from authoritative state. Exact behavior and limits: `docs/DONG_TA_INTEGRATION.md`.

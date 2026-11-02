@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "dateLocal": "2026-11-03",
+  "scope": "Validated merge candidate for milestone/m3d",
+  "featureCommit": "38518ba6",
+  "targetBefore": "3e09dcde",
+  "protocolVersion": 22,
+  "unitIntegrationTests": 587,
+  "unitTestFiles": 57,
+  "workflowRegressions": 18,
+  "assetValidators": 17,
+  "approvedInputFiles": 630,
+  "observedClips": 109,
+  "observedFrames": 436,
+  "sixClientFullHpClear": true,
+  "sixClientSeconds": 150.640175,
+  "clientErrors": [],
+  "checks": [
+    {
+      "command": "pnpm check:quick tests/dong-ta-m3d-merge.test.ts tests/dong-ta.test.ts tests/dong-ta-room.test.ts tests/m3d-feedback-party.test.ts tests/m3d-feedback-tech.test.ts tests/m3d-kim-integration.test.ts tests/m3d-hell-integration.test.ts",
+      "result": "PASS60tests after reproduce-first pause/spectator/blink fixes; no old dungeon life-ledger reset."
+    },
+    {
+      "command": "pnpm check:browser --config playwright.dong-ta.config.ts tests/e2e/dong-ta.spec.ts (DONG_TA_QA_PLAYERS=2)",
+      "result": "PASS;109clips/436frames,0errors."
+    },
+    {
+      "command": "pnpm check:final --config playwright.dong-ta.config.ts",
+      "result": "Preparation, all typechecks,18workflow tests,587unit/integration tests, production build and17asset validators PASS. Six-client full-HP DongTa PASS. The old profile also selected two obsolete M2A access-radio tests, which failed against the canonical private-only creep UI. Original FAIL report preserved in final-pipeline-stages.json; never relabeled PASS."
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.dong-ta.config.ts --list",
+      "result": "Corrected default DongTa profile selects its one actual six-client encounter test, whose unchanged body/runtime already passed in the final invocation."
+    },
+    {
+      "command": "node tools/run-playwright.mjs test --config playwright.dong-ta-m3d-regression.config.ts --grep r3 iteration:|r3 retained r2 gameplay:|r3 production bosses:",
+      "result": "Uses current M3D fixture/assertions and installed Edge. Retained sword/hold/blink/owner-burn and boss invitations/pause/revival/spectator tests PASS. CaDiep initially found a stale350px target outside current273px base reach; fixture moved target to270px without changing production math or expected three hits."
+    },
+    {
+      "command": "pnpm exec tsc -p tsconfig.tools.json --noEmit; node tools/run-playwright.mjs test --config playwright.dong-ta-m3d-regression.config.ts --grep r3 iteration:",
+      "result": "PASS tools typecheck and corrected real O/P/Esc, three-target CaDiep/stun/cleanup test."
+    },
+    {
+      "command": "Git index batch hash verification; verify_approval.py; git diff --check",
+      "result": "PASS; all630 approved bytes match index and worktree, including original CRLF data."
+    }
+  ],
+  "validationMethod": "Aggregate final stages and focused browser-stage retries per DEVELOPMENT_WORKFLOW.md; not a claim of one uninterrupted all-green pipeline. Existing large-client-bundle warning retained.",
+  "preserved": "Latest milestone mechanics/controls, Hell, merchant/inventory, potions1/2, dungeon party/life rules and all approved art. Wave-boss-specific overrides remain explicit. No numeric rebalance, extra chapter bosses, push or deployment.",
+  "runtimeInputSha256": {
+    "packages/game-core/src/dungeons.ts": "d9cbd6bde9b39bc1c4621042a8abff8bb3939214ab897d451bf78aad4b6cb170",
+    "packages/game-core/src/mobility.ts": "40672b0a6203af8ae2ef5c33982e493a21d54d21078743666d7d9a3d9d5a3b62",
+    "packages/game-core/src/dong-ta.ts": "6623401064aa92b09d650cf5d6e4e933f72fc7e3b459f505eb792ae55974f4d3",
+    "packages/game-core/src/simulation.ts": "5bd687928375190b7bd1fba22aef0343a5deccf8340cdcde75a3dbbe8e2f98a5",
+    "packages/game-core/src/combat.ts": "baa979c83992d4f6552499e52e76e178bd740dbeb2f8d57915d104b23ef64c3e",
+    "packages/game-core/src/status.ts": "1bf461af30d065a7a892f23753e3275ba3946aca9b92b3f613dab5ed5396cb55",
+    "packages/game-protocol/src/index.ts": "3ed57095606cb5cb71bb6ffc0d1d616662334d78b939007bd5bdcc98a7b45edb",
+    "apps/game-server/src/rooms/MatchRoom.ts": "aecca41acbab261aa6b3b368d64b26dc82a8795c679c516c407ec36e1bdc8ee1",
+    "apps/game-client/src/arena-scene.ts": "970a825e21639086383560261a235438e37bae71ba31ddb6e2fb1779dabf6840",
+    "apps/game-client/src/dong-ta-art.ts": "e7020699b0ab3cbae4b78baaa3c7d829630b14d497ef1bb7137bb8a56a5e8883",
+    "scripts/prepare-assets.mjs": "4b9b709efab4d50342f6b840e8ba4381f32a253b98285d2d3de41fc52de0a52c",
+    "scripts/prepare-dong-ta.mjs": "20701dcb9a62d9d0aab378f02c20fc85e82ce15e5641028f053b01afaaf4258f",
+    "playwright.dong-ta.config.ts": "22331cc08f85bbba90120424c2498c225764bd152f16881972c66d6b58f468e0",
+    "playwright.dong-ta-m3d-regression.config.ts": "331d3e3bbf770f7d08d6148caf1516cfb8c4b9dd682257c9171323b94ab9ae90",
+    "tests/e2e/m3d-r3-integration.spec.ts": "538e00a20d56022932920d35c97b858dd32b65f2fc6cd33080eb4a10012fc4fc"
+  }
+}

@@ -335,3 +335,13 @@ On `wip/m3d/hoan-nhan-hong-liet`, the existing Phó Bản flow must offer a priv
 ## Kim Luân feedback_02 runtime
 
 Run tests/kim-luan.test.ts, tests/kim-luan-room.test.ts, tests/kim-assets.test.ts and playwright.kim-luan.config.ts. Require a true two-disciple server gate, unique transferable ward, all16ability IDs, swept/ellipse geometry, actual elephant cover in both directions, solo/ally cage release, moving enrage firing, fixed single-item reward, private/shared isolation, replay rejection and empty/final-death deadlines. Observe all184selected frames/53clips in Phaser; keep frame fixtures distinct from six-client natural combat. Preserve all246approval pins and prohibit routine recordings. See docs/KIM_LUAN_RUNTIME.md for trial policies and evidence.
+
+## Đông Tà V04 integration acceptance
+
+- Clear wave5 itself, wait the configured rest and observe a single east-road entry; later wave survivors never block the gate. Invasion intervals remain180 seconds throughout combat/retries.
+- Recall every room hero from any zone; revive dead heroes without duplicating progression/items or clearing cooldown debt. Preserve dungeon empty-reset lifecycle.
+- Statue hides, takes no damage and receives no repair; server enforces court bounds for movement/dash/pull/respawn/travel. Quit remains possible.
+- Verify180-degree long thrusts, separate fan normal,8–14 straight radial beads, four stationary +/X slashes,40 random delayed flower explosions, frontal opposite claws, sticky Mai targeting, ranged claws/pull/poison and only Hoàng heal/sprint. Summon both once strictly below40% per attempt.
+- Full-party wipe resets full boss state/effects and immediately revives at the next attempt; repeated retries never reward/rewind economy. A late join is inside bounds and disconnected heroes cannot hold a target lock.
+- Đông Tà alone dying removes summons/fields, unlocks the court, restores the unchanged statue and pays a unique gold/XP pool with no item/roll. Match continues.
+- Verify actual PNG/atlas pivots, four-facing frames, hurt/death, timestamps and all VFX in running Phaser; iterate with two clients, finish with six-client natural combat/keyboard/reward synchronization and PNG/error/frame evidence. Final balance/runtime-art director approval stays distinct. See `docs/DONG_TA_INTEGRATION.md`.

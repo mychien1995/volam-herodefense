@@ -38,7 +38,7 @@ export function hurt(
     comboTargets?: Record<string, boolean> | undefined;
   },
 ): boolean {
-  if (target.hp <= 0 || raw <= 0) return false;
+  if (target.hp <= 0 || target.invulnerable || raw <= 0) return false;
   if (world.creeps.get(target.id)?.rescueTargetId === sourceId) return false;
   if (ownerProtection(world, target)) return false;
   // DOT remains damage; immunity exists only on actual moving dash ticks.

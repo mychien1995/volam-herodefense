@@ -1,4 +1,6 @@
 import { prepareKimAssets } from './prepare-kim-assets.mjs';
+import { prepareDongTa } from './prepare-dong-ta.mjs';
+
 import { prepareM3dFeedbackArt } from './prepare-m3d-feedback-art.mjs';
 import { prepareM3dR3Art } from './prepare-m3d-r3-art.mjs';
 import { prepareChuAssets } from './prepare-chu-assets.mjs';
@@ -50,6 +52,8 @@ for (const [name, label] of [
 }
 const dest = new URL('apps/game-client/public/assets/', root);
 prepareKimAssets();
+prepareDongTa();
+
 prepareM3dFeedbackArt();
 prepareM3dR3Art();
 prepareChuAssets();

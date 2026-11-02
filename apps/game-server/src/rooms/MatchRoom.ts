@@ -16,6 +16,7 @@ import {
   hongLietDungeon,
   kimLuanDungeon,
   coMoDungeon,
+  dongTaDefinition,
   hellDungeon,
 } from '@volam/game-data';
 import {
@@ -76,6 +77,7 @@ export class MatchRoom extends Room<{
       coMoDungeon,
       hellDungeon,
     ],
+    structuredClone(dongTaDefinition),
   );
   readonly world = this.simulation.arena.world;
   private readonly checkSequences = new Map<string, number>();
@@ -687,6 +689,12 @@ export class MatchRoom extends Room<{
     const invasion = this.simulation.invasion,
       defense = this.state.defense,
       statue = this.world.statue;
+    defense.dongTa = this.simulation.dongTa
+      ? JSON.stringify({
+          ...this.simulation.dongTa.view(this.world),
+          effects: [],
+        })
+      : '';
     if (invasion && statue) {
       defense.paused = this.simulation.arenaPaused;
       defense.enabled = true;
@@ -933,6 +941,13 @@ export class MatchRoom extends Room<{
       for (const effect of [
         ...(zone.encounter?.effects.values() ?? []),
         ...(zone.kim?.effects.values() ?? []),
+        ...(zone.access === 'arena'
+          ? (this.simulation.dongTa?.effects.map((e) => ({
+              ...e,
+              castId: e.id,
+              damageUntil: e.expiresAt,
+            })) ?? [])
+          : []),
       ]) {
         const id = this.entityKey(zone, effect.id);
         bossEffectKeys.add(id);
@@ -962,6 +977,9 @@ export class MatchRoom extends Room<{
               ? (effect as unknown as Record<string, unknown>)[key]
               : effect.expiresAt;
         target.speed = effect.speed;
+        target.originX = 'origin' in effect ? effect.origin.x : 0;
+        target.originY = 'origin' in effect ? effect.origin.y : 0;
+        target.targetId = 'targetId' in effect ? effect.targetId : '';
         target.index = 'index' in effect ? (effect.index ?? 0) : 0;
         target.maxRadius = 'maxRadius' in effect ? (effect.maxRadius ?? 0) : 0;
         target.previousRadius =

@@ -1,5 +1,6 @@
 import type { LobbyState } from '@volam/game-protocol';
 import { m1Config, invasionCreepName } from '@volam/game-data';
+import type { DongView } from '@volam/game-core';
 
 export class DefenseHud {
   private readonly panel = document.createElement('section');
@@ -11,7 +12,7 @@ export class DefenseHud {
     this.panel.className = 'framed';
     this.panel.hidden = true;
     this.panel.innerHTML =
-      '<strong>Tượng trấn phái</strong><div id="statue-meter" role="meter" aria-label="Sinh lực tượng" aria-valuemin="0"><i></i><span></span></div><span id="invasion-countdown"></span><span id="next-invasion-creep"></span>';
+      '<strong>Tượng trấn phái</strong><div id="statue-meter" role="meter" aria-label="Sinh lực tượng" aria-valuemin="0"><i></i><span></span></div><span id="dong-ta-status" hidden></span><span id="invasion-countdown"></span><span id="next-invasion-creep"></span>';
     this.warning.id = 'invasion-warning';
     this.warning.hidden = true;
     this.warning.setAttribute('role', 'status');
@@ -41,12 +42,28 @@ export class DefenseHud {
       return;
     }
     const meter = this.panel.querySelector<HTMLElement>('#statue-meter')!;
+    const boss = d.dongTa ? (JSON.parse(d.dongTa) as DongView) : undefined;
+    this.panel.querySelector('strong')!.textContent = boss?.locked
+      ? boss.phase === 'retry'
+        ? 'Đông Tà · Chuẩn bị đánh lại'
+        : `Đông Tà · Lần ${boss.attempt}`
+      : 'Tượng trấn phái';
+    meter.title = boss?.locked ? 'Tượng tạm bất tử trong trận Đông Tà' : '';
+    const encounterStatus =
+      this.panel.querySelector<HTMLElement>('#dong-ta-status')!;
+    encounterStatus.hidden = !boss?.locked;
+    encounterStatus.textContent =
+      boss?.phase === 'retry'
+        ? `Cả đội thất bại · Đánh lại sau ${Math.max(0, Math.ceil((boss.phaseUntil - boss.tick) / m1Config.tickRate))}s`
+        : boss?.locked
+          ? `Sinh lực Đông Tà: ${Math.ceil(boss.bossHp)} / ${boss.bossMaxHp}`
+          : '';
     meter.setAttribute('aria-valuenow', String(d.statueHp));
     meter.setAttribute('aria-valuemax', String(d.statueMaxHp));
     meter.querySelector<HTMLElement>('i')!.style.width =
       `${Math.max(0, (d.statueHp / d.statueMaxHp) * 100)}%`;
     meter.querySelector('span')!.textContent =
-      `${Math.ceil(d.statueHp)} / ${d.statueMaxHp}`;
+      `${boss?.locked ? 'Tượng bất tử · ' : ''}${Math.ceil(d.statueHp)} / ${d.statueMaxHp}`;
     const seconds = Math.max(
       0,
       Math.ceil((d.nextWaveTick - state.tick) / m1Config.tickRate),
