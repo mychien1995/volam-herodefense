@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>Nam Đế · Sprite và VFX v02</title><link rel="stylesheet" href="review.css"></head>
+<body><main id="viewport" aria-label="Demo art Nam Đế trong arena chính">
+<div id="world"></div>
+<div class="hud identity"><img src="/assets/icons/bosses/nam-de/portrait_nam_de.png" alt="Nam Đế"><div><strong>NAM ĐẾ</strong><small>NHẤT ĐĂNG ĐẠI SƯ · ART DEMO v02</small><div class="bar"><i id="bossHp"></i></div></div></div>
+<div class="hud tools"><button id="pause">Tạm dừng</button><button id="replay">Phát lại</button><select id="speed" aria-label="Tốc độ"><option value="0.5">0.5×</option><option selected value="1">1×</option><option value="2">2×</option></select><button id="sprite">Sprite</button></div>
+<div id="phase" aria-live="polite"></div>
+<div id="qte" class="hud" hidden><strong>ĐẠI LÝ PHONG HUYỆT</strong><p>10 phím · 5 giây · Được bảo hộ khi bị khóa</p><div id="arrows"></div><div class="bar"><i id="qteTime"></i></div><p id="qteResult"></p></div>
+<div id="mapping" class="hud" hidden></div>
+<div class="hud help">← ↑ ↓ → Di chuyển · A thử đánh · Space dừng · H ẩn UI<br><span id="playerStatus">HP minh họa 100% · Chưa tích hợp combat/server</span></div>
+<div class="hud options"><label>Hướng <select id="facing" aria-label="Hướng boss"><option value="right">→</option><option value="down">↓</option><option value="left">←</option><option value="up">↑</option></select></label><label>Đội <select id="party" aria-label="Nhân vật minh họa"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label><label>Zoom <select id="zoom" aria-label="Zoom"><option value="1">1×</option><option selected value="2">2×</option></select></label></div>
+<div class="hud dock"><nav id="clips" aria-label="Animation Nam Đế"></nav><div class="timeline"><span id="time">0.0s</span><input id="timeline" aria-label="Thời gian" type="range" min="0" max="7" step="0.01" value="0"><span id="duration"></span><label><input id="loop" type="checkbox" checked> Lặp</label></div></div>
+<section id="sheets" class="hud" hidden><button id="closeSheets">Đóng</button><h2>Sprite nhân vật được giữ nguyên</h2><p>208 frame · 52 clip · bốn hướng · chân (80,88) / canvas 160×112. VFX mới là prototype chờ duyệt.</p><button id="gallery">Phát toàn bộ pose trong Phaser</button><img src="/assets/sprites/bosses/main/nam-de/boss_nam_de.png" alt="Atlas Nam Đế giữ nguyên"><h3>16 frame VFX bổ sung</h3><img src="vfx_rework_v02.png" alt="Lướt, điểm huyệt, hoa mắt và tia giáng xuống"></section>
+<div id="loading">Đang nạp sprite và arena…</div>
+</main><script src="/vendor/phaser.js"></script><script type="module" src="review.js"></script></body></html>

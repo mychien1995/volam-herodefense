@@ -1,5 +1,6 @@
 import type { ChuEncounter } from './chu-types.js';
 import type { EllipseBounds } from './dong-ta-types.js';
+import type { NamDeKey, NamDeRuntime } from './nam-de-types.js';
 import type { KimLootContext } from './kim-types.js';
 import type { EconomyDefinition, HeroInventory } from './economy-types.js';
 import type {
@@ -297,6 +298,7 @@ export interface SimulationConfig {
   };
 }
 export type Command =
+  | { kind: 'nam-de-key'; castId: string; index: number; key: NamDeKey }
   | { kind: 'move'; x: number; y: number }
   | { kind: 'basic' }
   | { kind: 'dash' }
@@ -305,6 +307,7 @@ export type Command =
   | { kind: 'select-basic'; id: string };
 export interface Actor extends Point {
   invulnerable?: boolean;
+  namDeLocked?: boolean;
   controlResistance?: number;
   id: string;
   hp: number;
@@ -371,6 +374,7 @@ export interface Creep extends Actor {
     waypoints: Point[];
   };
   aggroTargetId?: string;
+  neverRespawn?: boolean;
   /** A rescue cage rejects damage from its own captive, using the common hit pipeline. */
   rescueTargetId?: string;
   bossEncounter?: boolean;
@@ -469,6 +473,7 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  namDe?: NamDeRuntime;
   kim?: { rewards: KimLootContext };
   chu?: ChuEncounter;
   boss?: BossRuntime;

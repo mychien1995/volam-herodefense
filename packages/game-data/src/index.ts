@@ -55,3 +55,5 @@ export * from './dong-ta.js';
 export * from './boss-cadence.js';
 
 export * from './tay-doc.js';
+
+export * from './nam-de.js';

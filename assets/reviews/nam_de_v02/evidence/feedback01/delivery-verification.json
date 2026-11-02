@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "scope": "Feedback01 standalone art-preview validation only",
+  "staticAssets": "python -X utf8 assets/reviews/nam_de_v02/verify_assets.py: PASS",
+  "projectChecks": {
+    "typecheck": "PASS",
+    "workflowTests": 18,
+    "unitIntegrationTests": 471,
+    "build": "PASS",
+    "allConfiguredAssetValidators": "PASS"
+  },
+  "finalCommand": "pnpm check:final --config playwright.nam-de.config.ts",
+  "finalCommandCompletedNormally": false,
+  "finalCommandNote": "All earlier stages and browser assertions passed. Sandboxed Playwright did not exit during helper/browser teardown, so that runner was interrupted. Raw completed-stage timings are preserved in final-stages.json.",
+  "browserRetry": {
+    "command": "node tools/run-playwright.mjs test --config playwright.nam-de.config.ts",
+    "execution": "require_escalated for child-process lifecycle",
+    "exitCode": 0,
+    "testsPassed": 1,
+    "seconds": 53.9,
+    "report": "verification.json"
+  },
+  "recording": false,
+  "productionEncounterIntegrated": false,
+  "directorApproved": false
+}

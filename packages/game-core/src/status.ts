@@ -127,6 +127,7 @@ export function displace(
   config: SimulationConfig,
   tick?: number,
 ): void {
+  if (actor.namDeLocked) return;
   if (
     tick !== undefined &&
     (actor.forcedMovementImmune || hasStatus(actor, 'interrupt_resist', tick))

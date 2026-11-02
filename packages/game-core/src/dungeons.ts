@@ -1,5 +1,12 @@
 import { TayDocEncounter, TayDocGate } from './tay-doc.js';
 import type { TayDocDefinition } from './tay-doc-types.js';
+import {
+  clearNamDe,
+  gateNamDe,
+  initializeNamDe,
+  spawnNamDeIfReady,
+} from './nam-de.js';
+import type { NamDeDefinition } from './nam-de-types.js';
 import { KimLuanEncounter } from './kim-luan.js';
 import { DongTaEncounter } from './dong-ta.js';
 import type { DongDefinition } from './dong-ta-types.js';
@@ -141,6 +148,7 @@ export class DungeonMatch {
     additionalDungeons: CreepDungeonDefinition[] = [],
     dongTa?: DongDefinition,
     tayDoc?: TayDocDefinition,
+    namDe?: NamDeDefinition,
   ) {
     for (const definition of [dungeon, ...additionalDungeons]) {
       if (this.definitions.has(definition.id))
@@ -186,6 +194,7 @@ export class DungeonMatch {
           for (const id of [...this.membership.keys()]) this.recallForBoss(id);
         },
       });
+    if (namDe) initializeNamDe(this.arena.world, this.arena.config, namDe);
   }
   add(id: string, nickname: string): Hero {
     const hero = addHero(this.arena.world, id, nickname, this.base);
@@ -485,6 +494,8 @@ export class DungeonMatch {
         if (this.invasion) this.invasion.events = [];
         continue;
       }
+      if (zone.access === 'arena')
+        spawnNamDeIfReady(zone.world, zone.config, zone.world.tick + 1);
       if (zone.kim?.phase === 'defeated') {
         zone.bossDiedMatchTick ??= this.tick;
         if (
@@ -584,9 +595,12 @@ export class DungeonMatch {
         this.events.push({ zoneId: zone.id, event });
       if (zone.access === 'arena') {
         this.invasion?.afterStep(zone.world, this.arenaTick);
+        if (!this.tayDoc || this.tayDoc.phase === 'dead')
+          gateNamDe(zone.world, this.invasion?.wave ?? 0, zone.world.tick);
         if (this.invasion?.defeated) {
           this.tayDoc?.dispose(this.arena.world);
           for (const active of this.zones.values()) {
+            clearNamDe(active.world);
             active.kim?.clear(active.world);
             for (const id of active.world.heroes.keys())
               cancelOwnedEffects(active.world, id);

@@ -1,6 +1,14 @@
 import { dungeonWaypoint } from './dungeon-navigation.js';
 import { dash, blink, rechargeDash } from './mobility.js';
 import { stepChu, constrainChuTrap } from './chu-ba-thong.js';
+import {
+  answerNamDe,
+  clearNamDeHero,
+  clearNamDeIfEmpty,
+  finishNamDeTick,
+  namDeMovement,
+  stepNamDe,
+} from './nam-de.js';
 import { expireCombos } from './combos.js';
 import { bufferComboFinisher, takeComboFinisher } from './combo-finisher.js';
 import { stepBossEncounter } from './boss-encounter.js';
@@ -147,8 +155,10 @@ export function addHero(
   return hero;
 }
 export function removeHero(world: World, id: string): void {
+  clearNamDeHero(world, id);
   cancelOwnedEffects(world, id);
   world.heroes.delete(id);
+  clearNamDeIfEmpty(world);
   for (const [key, shot] of world.projectiles)
     if (shot.ownerId === id) world.projectiles.delete(key);
   world.shots = world.shots.filter((shot) => shot.ownerId !== id);
@@ -176,7 +186,10 @@ export function submitInput(
     hero.moveX = command.x;
     hero.moveY = command.y;
     hero.lastMoveTick = world.tick;
-  } else if (world.pending.filter((item) => item.heroId === heroId).length < 8)
+  } else if (
+    world.pending.filter((item) => item.heroId === heroId).length <
+    (command.kind === 'nam-de-key' ? 16 : 8)
+  )
     world.pending.push({ heroId, command });
   return true;
 }
@@ -187,6 +200,18 @@ function runCommand(
   config: SimulationConfig,
 ): void {
   if (hero.hp <= 0) return;
+  if (command.kind === 'nam-de-key') {
+    answerNamDe(
+      world,
+      config,
+      hero,
+      command.castId,
+      command.index,
+      command.key,
+    );
+    return;
+  }
+  if (hero.namDeLocked) return;
   if (command.kind === 'dev-loadout') {
     if (hero.progression) return;
     if (
@@ -528,10 +553,11 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       hero.moveX = 0;
       hero.moveY = 0;
     }
-    const movement = direction(hero.moveX, hero.moveY);
+    const movement = namDeMovement(world, hero);
     const stats = characterStats(hero, config, world.tick).total;
     if (
       (movement.x || movement.y) &&
+      !hero.namDeLocked &&
       !hasStatus(hero, 'stun', world.tick) &&
       !hasStatus(hero, 'dash', world.tick) &&
       !(world.actions ?? []).some(
@@ -571,6 +597,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
           : 'idle';
   }
   stepChu(world, config);
+  stepNamDe(world, config);
   for (const input of world.pending.splice(0)) {
     const hero = world.heroes.get(input.heroId);
     if (hero) {
@@ -652,6 +679,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       }
       if (
         !enemy.invasion &&
+        !enemy.neverRespawn &&
         config.creepRespawn !== false &&
         world.tick >= enemy.respawnAt
       )
@@ -830,4 +858,5 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     if (actor.hp <= 0) actor.pose = 'death';
     else if (world.tick < actor.hurtUntil) actor.pose = 'hurt';
   }
+  finishNamDeTick(world);
 }

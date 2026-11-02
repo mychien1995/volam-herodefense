@@ -25,3 +25,5 @@ export * from './dong-ta.js';
 
 export * from './tay-doc-types.js';
 export * from './tay-doc.js';
+export * from './nam-de-types.js';
+export * from './nam-de.js';

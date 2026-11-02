@@ -1,0 +1,43 @@
+{
+  "runId": "fd11da9c-157c-47a2-acdc-b25308c2a262",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.nam-de-gameplay.config.ts"
+  ],
+  "startedAt": "2026-11-01T18:38:20.843Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 22.54,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.23,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.47,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.5,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 89.84,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 115.59
+}

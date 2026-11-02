@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 23;
+export const PROTOCOL_VERSION = 24;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -38,6 +38,17 @@ export const connectionAckSchema = z.strictObject({
   checks: z.number().int().positive(),
 });
 export const inputSchema = z.discriminatedUnion('kind', [
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    kind: z.literal('nam-de-key'),
+    castId: z
+      .string()
+      .regex(/^nam_de_[0-9]+$/)
+      .max(64),
+    index: z.number().int().min(0).max(9),
+    key: z.enum(['up', 'right', 'down', 'left']),
+  }),
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
@@ -458,6 +469,7 @@ export const DefenseState = schema(
     dongTa: t.string().default(''),
 
     paused: t.boolean().default(false),
+    namDe: t.string().default(''),
     enabled: t.boolean().default(false),
     statueHp: t.number().default(0),
     statueMaxHp: t.number().default(0),
@@ -481,6 +493,10 @@ export const TayDocState = schema(
   { json: t.string().default('') },
   'TayDocArenaProjection',
 );
+export const NamDeControlState = schema(
+  { heroId: t.string(), payload: t.string() },
+  'NamDeControl',
+);
 export const LobbyState = schema(
   {
     protocolVersion: t.number().default(PROTOCOL_VERSION),
@@ -495,6 +511,7 @@ export const LobbyState = schema(
     projectiles: t.map(ProjectileState).view(),
     areas: t.map(AreaState).view(),
     bossEffects: t.map(BossEffectState).view(),
+    namDeControls: t.map(NamDeControlState).view(),
     dungeons: t.map(DungeonState).view(),
     defense: t.ref(DefenseState).default(() => new DefenseState()),
     tayDoc: t.map(TayDocState).view(),

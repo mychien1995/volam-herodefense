@@ -63,6 +63,25 @@ Boss rewards replace the former one-random-item/roll rule: every character who d
 Recipes: Lý Mạc Sầu → Ngọc Uyên Ương + boots5 (Thanh Tâm cleanse / forward blink / straight slow-poison needle); Hoàn Nhan Hồng Liệt → Đại Kim Chiến Giáp + armor5 (reflect / slow aura / burn aura); Chu Bá Thông → Đại Hồ Lô + hat5 (regen / HP+MP+defense / damage+crit); Kim Luân Pháp Vương → Kim Luân + weapon5 (spread / lifesteal / armor penetration). **Thanh Tâm replaces 10% healing Z; armor penetration replaces weapon stun.** Lifesteal is based on one A's emitted damage, not the number of creeps hit. All exact values not explicitly chosen remain open.
 
 **PROPOSED/OPEN:** shared vs separate potion cooldown, total vs per-type cap, potion size/price/healing tables, Long Châu stat formula, equipment coefficients, inventory capacity, edge-case eligibility and merchant/crafting policies. **PvP ignoring equipment and banning potions is an idea, not a confirmed rule**; scope of shoe Z, Long Châu, level/passive/rank normalization remains open. No code/protocol migration or M4 completion is authorized by this documentation request; earlier encounter implementation reports describe retained runtime behavior.
+## Nam Đế art feedback03 — 2026-11-02
+
+The director accepts feedback02's rotation/firing speed and requests multiple directions at once. The standalone preview now emits four simultaneous rays 90 degrees apart per volley. Every direction has its own fixed 0.9s warning; volleys retain the accepted 0.8s cadence, 12.8s full rotation and 16s preview. Four directions per volley (sixteen volleys, sixty-four rays total) is a configurable visual default. The pressure-point dialog still closes immediately on success/wrong input, and existing world effects continue. No original raster changes, production encounter integration or final art approval are implied.
+
+## Nam Đế art feedback02 — 2026-11-02
+
+The director requests a slower Liên Hoàn Nhất Dương Chỉ with warning before each ray and a slowly turning boss. This supersedes the prior near-simultaneous full-circle volleys: the preview now rotates continuously through one circle, emits sixteen straight rays sequentially, warns each fixed lane for 0.9s and spaces releases 0.8s apart; 12.8s rotation and 16s total preview are configurable presentation defaults. Four authored facings advance in order; the sprite is not rotated out of the fixed overworld perspective. Đại Lý Phong Huyệt closes its dialog immediately after the complete correct sequence or the first wrong input. Wrong-input explosion, 70% backlash, 10% boss heal and the existing 2s preview stun continue in the world after dismissal. No encounter/server integration or final art approval is implied.
+
+## Nam Đế art feedback01 — 2026-11-02
+
+The director revises only the standalone sprite/VFX preview: Phật Quang is one simple light ring emitted from Nam Đế's center; an incorrect Đại Lý Phong Huyệt input must visibly explode and stun the victim; Liên Hoàn Nhất Dương Chỉ fires through all 360 degrees including front and back; Tiểu nhất dương chỉ is an immediate hand-flick shot without charging. The preview uses a configurable 2s backlash stun and nine randomized eight-direction volleys as presentation defaults. The original 70% backlash, 10% boss heal and five-second/ten-arrow challenge remain. These clarifications supersede conflicting v02 notes; no production encounter integration or final art approval is implied.
+
+## Nam Đế final art/choreography brief — 2026-11-01
+
+The director's final Nam Đế description supersedes the v01 skill-art concepts. Reuse the existing character/concept art, compare/rework skill VFX, and deliver a sprite/VFX preview first, exclusively in `wip/m3d/nam-de`. Nam Đế is a wave boss entering the main arena from the south, focuses players and never attacks the statue; no separate arena. Normals: long/wide forward palm shockwave, surrounding Phật Quang, one small finger ray at the farthest player. Slow movement with a random chance to dash behind a player.
+
+Final specials: Nhất Dương Chỉ charges at a fingertip and fires a warned screen-crossing ray, 90% HP lost on hit; Liên Hoàn Nhất Dương Chỉ is a longer random-direction barrage favoring player directions; Đại Lý Phong Huyệt dashes into contact and locks a protected victim into ten arrow inputs over five seconds, one wrong input causes 70% HP backlash, boss heals 10%; Phật Quang Phổ Chiếu shines on one victim, causes dizziness and random arrow remapping for about ten seconds; Nhất Dương Quy Tông fires upward then rains dozens of quickly warned finger rays from the sky. Do not retain healing Phật Quang, sealing missiles or extra shield/passive skills as encounter mechanics from the old art package.
+
+The current authorization is art-preview work, not authoritative encounter integration or final art approval. The standalone Phaser demo's actors/HP are illustrative. Unspecified numeric tuning, percent-health base, timeout behavior and precise heal trigger are documented as preview assumptions in `assets/reviews/nam_de_v02/README.md`, not new confirmed combat rules. Original sources and historical v01 notes remain intact.
 
 ## Lý Mạc Sầu selector correction — 2026-11-01
 
@@ -308,3 +327,11 @@ The director explicitly requested execution of `CODEX_TAY_DOC_INTEGRATION_TASK.m
 Confirmed: curse loses25%maximum HP, allies receive normal damage/poison without new marks, phase2 selects only the Cáp Mô kit and retains existing pools/pillars. Settlements sample maxHP at detonation/travel, bypass mitigation/shields/evasion/counters, preserve fractional HP and can kill. Death/disconnect cancel stale marks; travel settles before transfer without a cross-zone blast and refuses a lethal transfer. Full lifecycle and provisional numerical defaults are documented in `docs/TAY_DOC_INTEGRATION.md`; these do not replace the approved geometry/speeds or constitute final balance approval.
 
 Production uses the minimal ordered wave10+clear+rest hook and waits for actual Đông Tà completion. The DEV spawn fixture leaves the180second invasion clock intact. No predecessor completion or other chapter boss was invented.
+## Nam Đế gameplay confirmation — 2026-11-02
+- Nhất Dương Chỉ loses 90% max HP; failed seal loses 70% max HP directly, bypassing armor/shields.
+- QTE timeout: failure explosion + 70% max HP + 2s stun.
+- Boss heals 10% max HP only on wrong key or timeout, capped at max.
+- Runtime scope and provisional tuning: docs/NAM_DE_INTEGRATION.md. Final runtime art approval is still pending.
+
+## Nam Đế milestone integration authorization — 2026-11-03
+The user explicitly requests integration into milestone/m3d with only necessary tests, superseding the previous no-merge/worktree-only restriction. Retain the latest M3D controls, party/reconnect/economy and Đông Tà/Tây Độc rules. Nam Đế is gated after actual Tây Độc defeat plus wave15clear/rest, using the arena clock under the existing pause policy. Protocol24 retains prior fields. No new artwork, M4 migration or runtime art-approval claim is added. Exact merge scope/checks: docs/NAM_DE_M3D_MERGE_2026-11-03.md.

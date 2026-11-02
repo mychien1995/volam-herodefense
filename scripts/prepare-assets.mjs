@@ -1,4 +1,5 @@
 import { prepareTayDocAssets } from './prepare-tay-doc-assets.mjs';
+import './prepare-nam-de.mjs';
 import { prepareKimAssets } from './prepare-kim-assets.mjs';
 import { prepareDongTa } from './prepare-dong-ta.mjs';
 

@@ -32,6 +32,7 @@ export function hurt(
     slowedBonus?: number | undefined;
     reactive?: boolean | undefined;
     preserveFraction?: boolean | undefined;
+    directHp?: boolean;
     periodic?: boolean | undefined;
     resolvedReflection?: boolean | undefined;
     /** Exact, server-owned curse HP settlement. */
@@ -46,6 +47,7 @@ export function hurt(
     raw <= 0
   )
     return false;
+  if (target.namDeLocked) return false;
   if (world.creeps.get(target.id)?.rescueTargetId === sourceId) return false;
   if (!snapshot?.unavoidableHpLoss && ownerProtection(world, target))
     return false;
@@ -150,7 +152,9 @@ export function hurt(
       : undefined;
   const stats = snapshot ?? offensiveStats(world, sourceId, config);
   const critical =
-    !snapshot?.unavoidableHpLoss && world.random() < stats.critChance;
+    !snapshot?.unavoidableHpLoss &&
+    !snapshot?.directHp &&
+    world.random() < stats.critChance;
   const winePenetration =
     target.id === CHU_BOSS_ID &&
     world.heroes.has(sourceId) &&
@@ -184,7 +188,9 @@ export function hurt(
       )
     : 1;
   const adjusted =
-    snapshot?.unavoidableHpLoss || snapshot?.resolvedReflection
+    snapshot?.unavoidableHpLoss ||
+    snapshot?.resolvedReflection ||
+    snapshot?.directHp
       ? raw
       : raw *
         reduction *
@@ -210,7 +216,7 @@ export function hurt(
             ),
         ),
       );
-  if (mitigation > 0 && !snapshot?.resolvedReflection) {
+  if (mitigation > 0 && !snapshot?.resolvedReflection && !snapshot?.directHp) {
     const before = damage;
     damage *= 1 - mitigation;
     const guard = target.statuses?.find(
@@ -240,7 +246,7 @@ export function hurt(
       (a, b) =>
         b.magnitude - a.magnitude || (a.secondary ?? 1) - (b.secondary ?? 1),
     )[0];
-  if (hero && shield && hero.mana > 0) {
+  if (hero && shield && hero.mana > 0 && !snapshot?.directHp) {
     const rate = shield.secondary ?? 1;
     const absorbed = Math.min(
       damage * Math.min(1, shield.magnitude),
