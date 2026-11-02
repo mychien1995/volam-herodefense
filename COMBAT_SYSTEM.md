@@ -1,5 +1,11 @@
 # Combat System Specification v1.0
 
+## Inventory combat design — 2026-11-02 (not implemented by this documentation update)
+
+See [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) for the confirmed inventory design and open formulas. Basics add weapon damage, armor defense/HP, hat HP/MP regen and boot speed/minor crit. Crafted weapon branches are A spread, lifesteal based on one A's emitted damage (not creep count), and **A armor penetration replacing stun**. Exact penetration/stacking and lifesteal crit/mitigation/multi-hit timing remain open; existing skill penetration does not imply that equipment is implemented.
+
+Crafted boots add one **Z** item action independently of QWER: **Thanh Tâm** clears existing slow/poison/burn (replacing 10% healing), forward collision-respecting blink, or facing-directed straight slow/poison needle without auto-targeting. No implicit stun cleanse, immunity or boss-mechanic removal. Potions have **5s use cooldown**; shared/per-type policy is open. Server owns all effects, cooldowns and validation; equipment changes must not reset cooldown debt or duplicate resources/stats. Numeric armor reflect/aura behavior and Long Châu stat growth require explicit formulas before implementation. PvP excluding equipment/potions remains proposed, including the treatment of Z and Long Châu.
+
 ## Current M3C3 feedback override — 2026-10-31
 
 The approved feedback trial supersedes historical behavior below. Basic chains advance once after server A eligibility/cadence checks; primary/secondary hits never advance them. Skill/data-defined minimum intervals bound Attack Speed; no second basic animation lock is added. Fan A uses a straight outbound leg then a straight return toward the owner's position sampled at turnaround, with independent hit deduplication and no further tracking. New travelling palms refund once per cast on a confirmed hit; multi-projectile casts share refund state. Radial bursts capture each burst's origin and eight fixed directions.

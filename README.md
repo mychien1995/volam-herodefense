@@ -49,7 +49,8 @@ No source code or finished art is included yet; this is the *build handoff*, not
 | [`CONTENT_DATA.md`](CONTENT_DATA.md) | Canonical named skill catalogue, schools, and content structure |
 | [`COMBAT_SYSTEM.md`](COMBAT_SYSTEM.md) | Input, movement, targeting, combat, crit, cleave, conditions and Phát Động |
 | [`BALANCING.md`](BALANCING.md) | Balance philosophy, XP, enemy scaling, simulation and telemetry |
-| [`ITEMS_AND_CRAFTING.md`](ITEMS_AND_CRAFTING.md) | Item upgrades, 4 slots, boss loot rolls, crafting and inventory |
+| [`ITEMS_AND_CRAFTING.md`](ITEMS_AND_CRAFTING.md) | Inventory/merchant v2.0 design (2026-11-02): potions, four fixed slots, personal boss rewards/Long Châu and three-branch crafting; runtime migration pending |
+| [`docs/INVENTORY_MERCHANT_HUD_DESIGN.md`](docs/INVENTORY_MERCHANT_HUD_DESIGN.md) | Approved merchant/inventory/auxiliary-Z concept v01: five PNGs, interactions and provenance; [runtime UI integration/limits](docs/INVENTORY_HUD_INTEGRATION.md) |
 | [`TECHNICAL_ARCHITECTURE.md`](TECHNICAL_ARCHITECTURE.md) | Engine/server decision, package boundaries, netcode and testing |
 | [`ART_ASSET_GUIDE.md`](ART_ASSET_GUIDE.md) | **Confirmed camera/perspective**, sprite size proposals, layering/occlusion, art sourcing, exports and animation quality gates |
 | [`ROADMAP.md`](ROADMAP.md) | Milestones, acceptance criteria and incremental delivery sequence |

@@ -1,3 +1,13 @@
+## Inventory/merchant/Z concept approval and integration — 2026-11-02
+
+The director approved v01 and requested integration. [Runtime UI report](docs/INVENTORY_HUD_INTEGRATION.md) records the in-viewport DOM overlay in the Phaser client, modular icons/frames, live gold/stats/rewards and backend limitations. Tabs/selection work; unavailable purchases/equipment/Z cannot fabricate state. Earlier concept-only notes below describe the original delivery stage, not runtime evidence or another approval gate.
+
+## Inventory/merchant/Z design proposal — 2026-11-02
+
+[HUD concept v01](docs/INVENTORY_MERCHANT_HUD_DESIGN.md) proposes five in-viewport mockups and interaction/state/responsive specifications for merchant, inventory and auxiliary Z from crafted boots. It is a static imagegen concept set awaiting director review, not runtime screenshots or implemented functionality. The existing global HUD is shown for context; no retained game art or backend is changed. Values in images are illustrative, not approved tuning.
+
+Mechanics follow [inventory v2.0](ITEMS_AND_CRAFTING.md): four typed slots (weapon/armor/hat/boots), no necklace, no resale/trade/transfer or boss rolls; personal materials and first-clear Long Châu. Z is separate from QWER, with Thanh Tâm replacing healing boots. Potion cap/sharing, inventory capacity, numerical values and PvP normalization remain open. Older menu rows below are updated to this target design; retained encounter implementations require a separate migration.
+
 ## Boss dungeon cards — 2026-11-01
 
 Lý Mạc Sầu / Cổ Mộ Phái is a destination card in the same grid and at the same level as Hoàn Nhan Hồng Liệt and Chu Bá Thông. All share destination selection, the private/shared choice and the existing Enter button. No separate boss-entry button belongs in the options row. Reuse the approved Cổ Mộ illustration only as its menu thumbnail; the playable map remains the retained tilemap.
@@ -65,12 +75,12 @@ All menus and modals appear *within* the fixed game viewport or as full-viewport
 | Trigger | UI | Actions | Important restrictions |
 |---|---|---|---|
 | Click Phó Bản utility button | Dungeon selection window | Choose private/shared and supported encounter, enter | Server validates alive/arena membership and availability; no NPC/proximity requirement; modal stays inside viewport |
-| Click Merchant NPC | Shop window | Buy basic items, sell items | Show gold, prices, disabled unavailable purchases |
+| Click Thương Gia utility button | Shop window | Buy/upgrade four basics, buy potions; proposed tabs Trang bị/Bình dược/Chế tạo | Show server gold/prices and unavailable reasons; no resale/trade; no potion purchases inside dungeons |
 | Click Crafting NPC or merchant crafting tab | Crafting window | Preview recipe, materials, gold cost, craft | Server validates ownership and crafting; no dupes |
-| Click inventory icon (or configurable key) | Inventory modal | 4 equipment slots, backpack, item details, equip/drop/sell | No duplicate rewards or client authority |
+| Click inventory icon (or future configurable key) | Inventory modal | Weapon/armor/hat/boots, backpack, item details and permitted equipment actions | No necklace, resale/trade/transfer; capacity/equip-location policies open; server authority |
 | Click skill icon (or configurable key) | Skill loadout menu | Select A normal attack, equip QWER, allocate/reset skill points | Server permits change **only in arena**; dungeon/PvP read-only |
 | Click PvP NPC | PvP setup / waiting overlay | Join team A/B, ready/start | No persistent web sidebar |
-| Boss killed, eligible | Loot roll dialog | Roll or pass; result toast | One drop per dungeon boss, authoritative tie-break and timeout |
+| Boss killed, eligible | Personal reward notification / claim view | Show personal material and once-per-boss Long Châu when earned | Damaged + present in boss instance at death; no rolls; capacity/claim edge cases open |
 | Personal death | Respawn/countdown overlay | View countdown, return to arena | Shared match clock and statue invasion continue |
 
 Modal rules:

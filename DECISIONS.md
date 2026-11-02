@@ -1,3 +1,17 @@
+## Inventory HUD concept approval and UI integration — 2026-11-02
+
+The director approves the five inventory/merchant/auxiliary-Z concepts and requests Phaser integration. Scope: in-viewport UI with modular retained/derived PNG art, live server gold/stats/held rewards, working inspection/selection and honest unavailable transaction/Z states where inventory v2 backend is absent. Do not invent prices/stats, client-only transactions/effects, PvP normalization or silently migrate retained boss rewards. Concept approval is separate from actual runtime approval. Details/checks: [INVENTORY_HUD_INTEGRATION.md](docs/INVENTORY_HUD_INTEGRATION.md).
+
+## Inventory and merchant design revision — 2026-11-02
+
+**CONFIRMED, design only:** [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) v2.0 records the director's inventory brainstorm. Four fixed equipment slots are weapon (damage), armor (defense/HP), hat (HP/MP regen), boots (movement speed/minor crit); necklace is removed. Buy matching basics to upgrade through level 5; max basic + designated boss material + gold selects one of three crafted branches. Potions have 5s use cooldown, limit 20 with total/per-type interpretation still open, larger sizes cost more, and cannot be bought inside dungeons.
+
+Boss rewards replace the former one-random-item/roll rule: every character who damaged the boss and is still in that boss instance at death receives its material. Each character also receives Long Châu once per boss per match for in-match stat growth. No item resale, trading or transferable drops; merchant purchases remain. Existing fixed XP/gold pools and invasion no-item rules remain. Repeated private/shared kills cannot duplicate first-clear rewards.
+
+Recipes: Lý Mạc Sầu → Ngọc Uyên Ương + boots5 (Thanh Tâm cleanse / forward blink / straight slow-poison needle); Hoàn Nhan Hồng Liệt → Đại Kim Chiến Giáp + armor5 (reflect / slow aura / burn aura); Chu Bá Thông → Đại Hồ Lô + hat5 (regen / HP+MP+defense / damage+crit); Kim Luân Pháp Vương → Kim Luân + weapon5 (spread / lifesteal / armor penetration). **Thanh Tâm replaces 10% healing Z; armor penetration replaces weapon stun.** Lifesteal is based on one A's emitted damage, not the number of creeps hit. All exact values not explicitly chosen remain open.
+
+**PROPOSED/OPEN:** shared vs separate potion cooldown, total vs per-type cap, potion size/price/healing tables, Long Châu stat formula, equipment coefficients, inventory capacity, edge-case eligibility and merchant/crafting policies. **PvP ignoring equipment and banning potions is an idea, not a confirmed rule**; scope of shoe Z, Long Châu, level/passive/rank normalization remains open. No code/protocol migration or M4 completion is authorized by this documentation request; earlier encounter implementation reports describe retained runtime behavior.
+
 ## Lý Mạc Sầu selector correction — 2026-11-01
 
 The director explicitly requests Lý Mạc Sầu as a peer dungeon card alongside Hồng Liệt and Chu Bá Thông, replacing the separate options-row button. Keep destination `co_mo`, private/shared access, server authority and the existing encounter unchanged. The retained approved Cổ Mộ arena illustration supplies the menu thumbnail without new art generation.
@@ -101,8 +115,8 @@ The current implementation request authorizes replacing the arena environment an
 - **Private dungeon permits only one player**; shared permits up to six. **Creep dungeon** advances only after current wave eliminated, gets stronger with wave progression; pauses when empty. **Boss dungeon** contains fixed-power boss that may be farmed repeatedly; if dungeon is empty for 30 seconds, boss health and position reset. Boss respawns after a configurable cooldown when killed.
 - Dungeon creeps and statue creeps scale in count and strength according to active player count. Snapshot player count for wave creation to avoid live HP jumps. Dungeon bosses have fixed difficulty within their configured dungeon, **not** endless per-clear scaling.
 - Killing/meaningfully assisting on creeps grants eligibility; a **single fixed creep EXP pool is divided among eligible participants**. Boss dungeon: player who landed at least one valid hit qualifies for shared boss EXP, subject to presence at completion as a proposed implementation safeguard.
-- **Exactly one randomly selected loot item per dungeon boss kill**; eligible players **roll for ownership**; solo qualifying player automatically wins. Item may be kept, dropped to ground, or sold; duplicates permitted. Repeated kills are for gold/EXP/items and crafting.
-- Shop sells basic items. Purchasing duplicates upgrades an existing basic item to its max level. **Max-level basic item + boss drop + gold → stronger crafted item**. Any school can equip any item; **4 equipment slots**. Backpack size OPEN.
+- Dungeon boss materials are personal rewards for every player who damaged the boss and remains in its instance at death, without rolls. Long Châu is granted once per character/boss/match. No resale/trading/transferable drops; see [inventory v2.0](ITEMS_AND_CRAFTING.md). Earlier single-item/roll encounter records are historical runtime contracts, not the future inventory design.
+- Shop sells potions and basics; matching purchases upgrade basics to **level 5**. **Max basic + designated boss material + gold → one of three crafted branches**. Any school can equip any item; **4 fixed slots: weapon/armor/hat/boots**, no necklace. Backpack size OPEN.
 - Hero death: short respawn at arena, no EXP or gold penalty.
 - **20 regular invasions from west/east (two directions)** on exact 3-minute intervals, at 03:00 through 60:00. Waves spawn even with prior waves alive. Warnings 60s and 15s before each; players must travel back themselves. **Statue cannot be repaired**.
 - Invasion creeps detect nearby players and **prioritize the closest player inside detection range**; when no players in range, move to/attack statue. If player leaves detection range, resume statue path. Detection and attack radii separate.
@@ -119,7 +133,7 @@ The current implementation request authorizes replacing the arena environment an
 - Regular skill max rank 4; ultimate max 3; ult unlock at character levels 6/10/14; regular rank gating at 1/3/5/7.
 - Melee basic primary target 100%, cleave target 50% by default, school-specific overrides, independent crit rolls.
 - Invasion boss rest 10s after fifth wave fully clears; warnings at T-60 and T-15; raid clock never pauses.
-- Starter backpack 12 slots, equipment slots example weapon/armor/2 accessories; gear slots types are **not** approved.
+- Starter backpack 12 slots remains a proposal; weapon/armor/hat/boots categories are confirmed by the 2026-11-02 inventory revision, superseding the old accessory examples.
 - No PvP gold/EXP reward; PvP duels should have clear win/end behavior and no item loss.
 - No elemental-counter chart initially; elements provide visual/school identity.
 - Suggested 6-second Phát Động window, configurable; crowd-control reduction for bosses not yet numerically specified.

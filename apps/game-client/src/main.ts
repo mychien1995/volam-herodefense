@@ -29,6 +29,7 @@ import './arena-hud.css';
 import './dungeon.css';
 import './dungeon-selector.css';
 import './defense-hud.css';
+import './item-menu.css';
 import { PreGame } from './pregame.js';
 
 const artPreview = new URLSearchParams(location.search).has('artPreview');

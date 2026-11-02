@@ -1,3 +1,13 @@
+## Inventory/merchant presentation integration — 2026-11-02
+
+`game-client/item-menu.ts` renders the approved merchant/inventory selection and previews over the existing Phaser viewport. `GameUI` passes the authoritative local player state; the menu projects live gold, derived stats and both retained reward fields, without new commands or client-side item ownership. `ChuHud` leaves the new read-only inventory grid to this renderer. Shoe Z and potion counts remain explicitly unavailable until backend support exists; tabs/cards do not mutate progression or protocol. See [integration report](docs/INVENTORY_HUD_INTEGRATION.md). Future v2 reward migration below remains pending.
+
+## Inventory/merchant target design — 2026-11-02 (migration pending)
+
+[ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) v2.0 defines future typed equipment, level-5 duplicate upgrades, potions, Z item actions, personal boss materials and first-clear Long Châu. This documentation does **not** alter current protocol/runtime. Earlier encounter sections describe historical implemented roll/drop/sell/claim paths; migrate those explicitly when M4 is authorized, avoiding old and new award paths firing together.
+
+Target server state needs typed equipment/inventory, potion quantities/use expiry, item cooldown debt, per-kill eligibility/reward records and a character+boss+match first-clear/Long Châu use ledger. Snapshot eligibility at boss death; grant one personal material per eligible player and Long Châu only once. Use atomic/idempotent purchase/upgrade/craft/consume/claim operations; do not expose resale/trade/transfer or roll commands in the target design. Pure core owns effects/stat derivation; data owns prices/recipes/tuning; protocol evolves with versioned validation. Capacity/reconnect and exact consumable/stat policies remain open. No client-provided reward amount, ownership, penetration, cleanse result or blink position is trusted. Equipment-free PvP is proposed, not an implemented stat layer.
+
 ## M3D combined boss protocol16 — 2026-11-01
 
 The main-checkout Lý Mạc Sầu merge combines all six dungeon destinations and bumps the current protocol15 to16 for Co Mo cast/countdown/pending-claim fields. Existing Hồng Liệt/Chu encounter projection and validated Chu item transactions are retained. Co Mo's `CoMoBossCast` export and World boss runtime remain distinct from Hồng Liệt's encounter object and Chu's world state; their lifecycle/CC adapters compose without replacing one another. Earlier protocol14 sections are historical. Integration and executed regression evidence: `docs/LY_MAC_SAU_INTEGRATION.md`.
@@ -137,8 +147,8 @@ Do not scaffold every directory in Milestone 0 unless it helps initial toolchain
 
 - `game-core` **must not import Phaser, Colyseus, browser globals, wall-clock time, or filesystem**. Accept time steps, inputs, state and injected RNG.
 - `game-data` contains content authored as validated data, stable IDs and localization. Some advanced effect handlers may live in core, but skills mostly compose reusable effects.
-- `game-protocol` defines network input commands (`move`, `basicAttack`, `cast(slot)`, `enterDungeon`, `leavePortal`, `equipSkill`, `respec`, `shopBuy`, `craft`, `roll`, `pvpReady`, etc.) and snapshot/event messages. Version and validate.
-- `game-server` is the **only authority** for positions, collision/damage results, RNG, enemy AI, cooldowns, spend/award gold, XP, loot, loot rolls, wave clock, victory/defeat. Room lifecycle/isolation stays here.
+- `game-protocol` defines versioned/validated input and snapshot/event messages. Target inventory intents include purchase, upgrade, craft, potion/Long Châu use and item Z; legacy roll/drop/sell requests require migration rather than carrying into inventory v2.0. These are design-level intents, not declarations of existing API names.
+- `game-server` is the **only authority** for positions, collision/damage results, RNG, enemy AI, cooldowns, spend/award gold, XP, personal loot/first-clear eligibility, wave clock, victory/defeat. Room lifecycle/isolation stays here.
 - `game-client` takes keyboard/mouse input, renders snapshots and effects, interpolates other players, shows HUD and NPC UI. Client-side prediction may improve responsiveness but **must reconcile** to server truth and never determine authoritative hits or rewards.
 - Room match state owns player entities, XP/level, inventory, map-zone/instance membership, shared statue health, current raid schedule, boss statuses, and ephemeral PvP sub-rooms/arenas.
 - No database for v1 (the entire room is disposable). Store only anonymous nickname and temporary connection/session ID; avoid storing real identifiers or secrets.
@@ -176,7 +186,7 @@ Match { roomId, serverTime, phase, invasionIndex, raidSchedule,
 Proposed high-level server APIs/events, not concrete Colyseus APIs:
 
 - Input -> server: validated button state / discrete actions with seq numbers, not client damage.
-- Server -> client: player state deltas, entity movement/state, combat event (hit/miss/damage/crit), XP/gold, inventory mutation, timed warnings, dungeon transitions, roll offers/results, match end.
+- Server -> client: player state deltas, entity movement/state, combat event (hit/miss/damage/crit), XP/gold, inventory mutation/personal rewards/first-clear and claim state, timed warnings, dungeon transitions, match end. Legacy roll events are not part of the target inventory v2.0 design.
 - Include match/zone identifiers and reliable event IDs so UI does not misapply stale/out-of-order messages.
 - Rate-limit client actions and prevent repeated purchase/craft command retries from duplicating items.
 
@@ -184,7 +194,7 @@ Proposed high-level server APIs/events, not concrete Colyseus APIs:
 
 - CONFIRMED original 2D Pokémon-like elevated overhead/three-quarter **orthographic** perspective across arena/dungeon/PvP; no rotating camera, 3D chase camera, diamond isometric map or side view. Render scene depth by feet position/Y-sorting and layered foreground roofs/trees. PROPOSED initial terrain tiles 32×32, simple placeholder hero/enemy shapes acceptable through vertical slice. `ART_ASSET_GUIDE.md` defines the asset pipeline, authoring sources, export/atlas metadata, asset provenance and M0/M1 visual proof checkpoints. No final game sprites are supplied by this handoff.
 - Tiled tile layer for ground/obstacles, object layers for statue/NPC/spawns/exit portals/collision; enforce stable object IDs.
-- Core HUD: hero HP/mana/level/XP, gold, four skills and cooldowns, A attack state, visible next-invasion countdown, statue HP, current zone, invasion alerts, item/skill and boss-roll dialogs, combo cue for Thiếu Lâm.
+- Core HUD: hero HP/mana/level/XP, gold, four skills and cooldowns, A attack state, visible next-invasion countdown, statue HP, current zone, invasion alerts, item/skill and personal-reward dialogs, combo cue for Thiếu Lâm. Future potion and shoe-Z state follow inventory v2.0; no new layout is authorized here.
 - Explicitly show affected hitboxes and telegraphed boss attacks. Animations must be readable before being beautiful.
 - Keep original editable sources outside the deployable client bundle, and load exported PNG/atlas JSON via a data-driven animation registry; never tie authority for damage/hits to visual frames.
 - Verify Phaser 4 pixel-art renderer settings (`pixelArt`, filtering, pixel rounding) against the installed version and visually inspect at the intended browser zoom.

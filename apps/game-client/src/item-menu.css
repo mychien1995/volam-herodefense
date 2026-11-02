@@ -1,0 +1,603 @@
+/* Approved concept v01: live DOM over retained nine-slice frames and exported PNG icons. */
+.game-window[data-menu='merchant'],
+.game-window[data-menu='inventory'] {
+  width: min(1040px, 84vw);
+  max-width: 1040px;
+  border-width: 18px;
+  border-image: url('/assets/arena_art01/panel_frame.png') 34 fill / 18px;
+  max-height: calc(100dvh - 184px);
+}
+.game-window[data-menu='merchant'] .window-title,
+.game-window[data-menu='inventory'] .window-title {
+  background: #151713;
+  padding: 6px 45px 12px;
+  border-color: #77603b;
+}
+.game-window[data-menu='merchant'] .window-title h2,
+.game-window[data-menu='inventory'] .window-title h2 {
+  font-size: clamp(21px, 2vw, 29px);
+  color: #ffe7b0;
+  letter-spacing: 0;
+}
+.game-window[data-menu='merchant'] .window-body,
+.game-window[data-menu='inventory'] .window-body {
+  padding: 14px 16px;
+  background: #111612ed;
+}
+.game-window[data-menu='merchant'] .menu-safety,
+.game-window[data-menu='inventory'] .menu-safety {
+  flex: none;
+  color: #bdb49a;
+  padding: 7px;
+}
+.game-window[data-menu='merchant'] .title-flourish,
+.game-window[data-menu='inventory'] .title-flourish {
+  display: none;
+}
+#item-menu {
+  color: #eee1bd;
+  font-size: 14px;
+}
+#item-menu .item-art {
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  flex: none;
+}
+#item-menu .item-large {
+  width: 140px;
+  height: 120px;
+}
+#item-menu h3 {
+  font:
+    600 21px Georgia,
+    'Times New Roman',
+    serif;
+  color: #ffe7ae;
+}
+#item-menu h3 small {
+  font:
+    12px 'Segoe UI',
+    sans-serif;
+  color: #b3b3a2;
+  margin-top: 5px;
+}
+#item-menu p {
+  margin: 8px 0;
+}
+#item-menu small,
+#item-menu .item-muted {
+  color: #b8b9a5;
+  font-size: 12px;
+}
+#item-menu button {
+  border-radius: 0;
+}
+#item-menu button:focus-visible,
+.auxiliary-slot:focus-visible {
+  outline: 2px solid #fff0ad;
+  outline-offset: 3px;
+}
+.item-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #111612;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  padding-bottom: 14px;
+}
+.item-tabs [role='tab'] {
+  min-width: 128px;
+  font:
+    600 17px Georgia,
+    serif;
+  padding: 10px 18px;
+}
+.item-tabs [aria-selected='true'] {
+  background: #35422a;
+  border-color: #efd18b;
+  color: #fff2cb;
+}
+.item-gold {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-left: auto;
+  color: #efcf69;
+}
+.item-gold .pixel-icon {
+  width: 26px;
+  height: 26px;
+}
+.item-gold b {
+  font-size: 20px;
+}
+.item-shop-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 18px;
+}
+.item-catalogue {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+#item-menu .item-choice {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #151b16;
+  border: 6px solid transparent;
+  border-image: url('/assets/arena_art01/panel_frame.png') 22 fill / 6px;
+  padding: 12px;
+  min-width: 0;
+}
+#item-menu .item-choice:hover {
+  background: #263020;
+}
+#item-menu .item-choice[aria-pressed='true'] {
+  outline: 1px solid #9cddaa;
+  box-shadow: inset 0 0 0 2px #5a9f78;
+  background: #182c22;
+}
+#item-menu .item-choice strong {
+  order: 1;
+  font:
+    600 18px Georgia,
+    serif;
+  color: #f5e4b8;
+}
+#item-menu .item-choice small {
+  order: 2;
+}
+#item-menu .item-choice p {
+  order: 3;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+.item-check {
+  position: absolute;
+  right: 7px;
+  top: 5px;
+  color: #c6f2c4;
+  font-weight: 700;
+}
+.item-detail {
+  border: 1px solid #72613e;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  background: #121814;
+  min-width: 0;
+}
+.item-detail h3 {
+  margin: 10px 0 4px;
+}
+.item-levels {
+  display: flex;
+  gap: 16px;
+  margin: 18px 0 8px;
+}
+.item-levels i {
+  display: block;
+  width: 14px;
+  height: 14px;
+  transform: rotate(45deg);
+  border: 1px solid #ad9d75;
+  background: #2d3229;
+}
+#item-menu .item-primary {
+  display: block;
+  min-width: 210px;
+  padding: 11px 22px;
+  margin-top: 16px;
+  border: 2px solid #b99c61;
+  background: #51452c;
+  color: #d7cba9;
+  font-size: 16px;
+}
+#item-menu .item-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.item-availability {
+  text-align: center;
+  color: #baae87;
+  font-size: 12px;
+  padding: 9px 0 0;
+}
+.item-potion-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 18px;
+}
+.item-potion-choices {
+  display: grid;
+  gap: 12px;
+}
+#item-menu .item-potion-choices .item-choice {
+  flex-direction: row;
+  min-height: 128px;
+  gap: 24px;
+}
+.item-recipe-slots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 14px;
+}
+#item-menu .item-recipe-slots .item-choice {
+  padding: 9px;
+}
+.item-recipe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #78603b;
+  background: #141b16;
+}
+#item-menu .item-recipe .item-art {
+  width: 48px;
+  height: 48px;
+}
+.item-recipe span {
+  font-size: 14px;
+  max-width: 170px;
+}
+.item-recipe small {
+  display: block;
+  margin-top: 3px;
+}
+.item-recipe b {
+  color: #ddc48e;
+  padding: 0 4px;
+}
+#item-menu .item-branch-title {
+  text-align: center;
+  font-size: 19px;
+  margin: 15px 0;
+}
+.item-branches {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+#item-menu .item-branches .item-choice {
+  justify-content: flex-start;
+  text-align: center;
+  padding: 15px 12px;
+}
+#item-menu .item-branches .item-art {
+  width: 72px;
+  height: 60px;
+}
+#item-menu .item-branches kbd {
+  order: 2;
+  background: #292b20;
+  border: 1px solid #be9f5b;
+  padding: 1px 10px;
+  color: #f4e9b9;
+}
+.item-craft-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 10px;
+  font-size: 12px;
+}
+.item-inventory-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 22px;
+}
+.item-equipment-pane {
+  padding-right: 18px;
+  border-right: 1px solid #6f613d;
+}
+.item-paper-doll {
+  position: relative;
+  height: 255px;
+  margin-top: 12px;
+}
+.item-paper-doll .paper-hero {
+  background-image: var(--hero-idle);
+  width: 144px;
+  height: 144px;
+  background-size: 144px 144px;
+  top: 46px;
+}
+#item-menu .equipment-slot {
+  width: 78px;
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 6px;
+  background: #18201a;
+  opacity: 1 !important;
+}
+#item-menu .equipment-slot .item-art {
+  width: 52px;
+  height: 56px;
+  opacity: 0.38;
+}
+#item-menu .equipment-slot strong {
+  font-size: 12px;
+  font-weight: 400;
+}
+#item-menu .equipment-slot small {
+  position: static;
+  color: #a4ab9c;
+  font-size: 11px;
+}
+.item-equip-0 {
+  left: 0;
+  top: 0;
+}
+.item-equip-1 {
+  left: 0;
+  bottom: 0;
+}
+.item-equip-2 {
+  right: 0;
+  top: 0;
+}
+.item-equip-3 {
+  right: 0;
+  bottom: 0;
+}
+.item-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px 14px;
+  border-top: 1px solid #6f613d;
+  padding-top: 13px;
+  font-size: 12px;
+}
+.item-stats div {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+.item-stats dt {
+  color: #b9bea6;
+}
+.item-stats dd {
+  margin: 0;
+  color: #f1ddb0;
+}
+#item-menu .bag-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+#item-menu .bag-grid button {
+  height: 54px;
+  padding: 6px;
+  background: #151b16;
+  box-shadow: inset 0 0 0 2px #20271e;
+  opacity: 1;
+}
+#item-menu .bag-grid .item-art,
+#item-menu .bag-grid .pixel-icon {
+  width: 38px;
+  height: 34px;
+  object-fit: contain;
+}
+#item-menu .bag-grid .item-choice {
+  gap: 2px;
+}
+#item-menu .bag-grid .item-choice strong {
+  font:
+    11px 'Segoe UI',
+    sans-serif;
+  line-height: 1.2;
+}
+.item-held-detail {
+  border-top: 1px solid #76603b;
+  margin-top: 14px;
+  padding-top: 8px;
+}
+#item-menu .item-held-detail h3 {
+  font-size: 17px;
+  margin: 0;
+}
+.item-held-detail p {
+  font-size: 12px;
+}
+.item-held-detail button {
+  font-size: 12px;
+}
+.item-auxiliary-detail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0;
+  border-top: 1px solid #4c503b;
+  margin-top: 6px;
+}
+#item-menu .item-auxiliary-detail .item-art {
+  width: 48px;
+  height: 42px;
+  filter: grayscale(1);
+  opacity: 0.6;
+}
+#item-menu .item-auxiliary-detail h3 {
+  font-size: 15px;
+  margin: 0;
+}
+.item-auxiliary-detail p {
+  font-size: 12px;
+}
+.hotbar {
+  width: clamp(340px, 30vw, 510px);
+}
+.bag-cluster {
+  width: clamp(228px, 20vw, 310px);
+}
+.quick-potions {
+  display: flex;
+  gap: 7px;
+  margin-left: auto;
+  align-items: center;
+}
+.quick-potions > span {
+  position: relative;
+  display: block;
+}
+.quick-potions img {
+  width: 30px;
+  height: 32px;
+  object-fit: contain;
+  opacity: 0.55;
+}
+.quick-potions em {
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  font:
+    10px 'Segoe UI',
+    sans-serif;
+  color: #b9b9a5;
+}
+.auxiliary-slot {
+  position: relative;
+  margin-left: 9px;
+  border-left: 1px solid #a7a373;
+  padding-left: 6px;
+}
+.auxiliary-slot .item-art {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.35;
+  filter: grayscale(1);
+}
+.auxiliary-tooltip {
+  position: absolute;
+  bottom: calc(100% + 18px);
+  right: -10px;
+  width: 220px;
+  padding: 13px;
+  border: 10px solid transparent;
+  border-image: url('/assets/arena_art01/panel_frame.png') 22 fill / 10px;
+  display: none;
+  text-align: left;
+  color: #e9e2c8;
+  pointer-events: none;
+}
+.auxiliary-tooltip strong,
+.auxiliary-tooltip span {
+  display: block;
+  font:
+    12px/1.6 'Segoe UI',
+    sans-serif;
+}
+.auxiliary-tooltip strong {
+  color: #e9d08e;
+  margin-bottom: 5px;
+}
+.auxiliary-slot:hover .auxiliary-tooltip,
+.auxiliary-slot:focus-visible .auxiliary-tooltip {
+  display: block;
+}
+@media (max-width: 1000px) {
+  .hotbar {
+    width: 340px;
+  }
+  .game-window[data-menu='merchant'],
+  .game-window[data-menu='inventory'] {
+    width: 92vw;
+  }
+  .item-inventory-layout {
+    grid-template-columns: 270px minmax(0, 1fr);
+    gap: 14px;
+  }
+  #item-menu .item-art {
+    width: 62px;
+    height: 62px;
+  }
+  .item-tabs [role='tab'] {
+    min-width: 100px;
+    padding: 8px 12px;
+  }
+  .item-recipe span {
+    font-size: 12px;
+  }
+}
+@media (max-height: 600px) {
+  .game-window[data-menu='merchant'],
+  .game-window[data-menu='inventory'] {
+    max-height: calc(100dvh - 160px);
+    border-width: 12px;
+  }
+  .game-window[data-menu='merchant'] .window-title,
+  .game-window[data-menu='inventory'] .window-title {
+    padding: 4px 38px 9px;
+  }
+  .game-window[data-menu='merchant'] .window-title h2,
+  .game-window[data-menu='inventory'] .window-title h2 {
+    font-size: 20px;
+  }
+  .game-window[data-menu='merchant'] .window-body,
+  .game-window[data-menu='inventory'] .window-body {
+    padding: 8px 12px;
+  }
+  #item-menu {
+    font-size: 12px;
+  }
+  #item-menu .item-large {
+    width: 85px;
+    height: 70px;
+  }
+  .item-detail {
+    padding: 10px;
+  }
+  #item-menu .item-art {
+    width: 54px;
+    height: 54px;
+  }
+  .item-paper-doll {
+    height: 210px;
+  }
+  #item-menu .equipment-slot {
+    height: 98px;
+  }
+  .item-tabs {
+    padding-bottom: 8px;
+  }
+}
+@media (max-width: 680px) {
+  .item-inventory-layout,
+  .item-shop-layout,
+  .item-potion-layout {
+    grid-template-columns: 1fr;
+  }
+  .item-equipment-pane {
+    border-right: 0;
+    padding-right: 0;
+  }
+  .item-branches {
+    grid-template-columns: 1fr;
+  }
+  .item-tabs {
+    flex-wrap: wrap;
+  }
+  .item-craft-action {
+    flex-wrap: wrap;
+  }
+}

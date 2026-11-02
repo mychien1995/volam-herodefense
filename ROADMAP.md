@@ -1,3 +1,11 @@
+## Inventory/merchant UI integration — 2026-11-02
+
+Explicit concept approval authorizes the reviewed merchant/inventory/auxiliary-Z presentation in the existing Phaser viewport. Live gold/stats/rewards are used; unavailable v2 transactions/equipment/Z stay disabled. This is a scoped client UI slice, not M4 completion or reward/PvP migration. See [runtime UI report](docs/INVENTORY_HUD_INTEGRATION.md).
+
+## Inventory/merchant design checkpoint — 2026-11-02
+
+[ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) v2.0 records the confirmed four-slot inventory, level-5 upgrades, potions, personal boss materials/first-clear Long Châu and twelve crafted branches. M4 scope below uses that design instead of shared random loot/roll/sale/transfer. **This request writes documentation only; it does not start M4, migrate existing encounter rewards or mark tests complete.** Historic encounter records below retain their actual runtime contracts. Equipment-free/potion-free PvP remains an open M6 proposal.
+
 ## Explicit single-encounter integration — 2026-11-01
 
 Lý Mạc Sầu and Cổ Mộ Phái are separately authorized only in `codex/m3d/ly-mac-sau`: approved art, private/shared boss lifecycle, server combat, summons, one-item pending claims and focused verification. This does not mark the full M4 loot/inventory/crafting milestone complete or start other bosses. Trial balance and final runtime art approval remain separate. See `docs/LY_MAC_SAU_INTEGRATION.md`.
@@ -147,9 +155,9 @@ The gameplay milestones below remain unchanged; implementing this pre-game flow 
 
 ## M4 — Boss dungeons, loot, items and crafting
 
-**Scope:** shared/private fixed-strength boss dungeons, 30s empty boss HP/position reset, cooldown respawn after kill, one-item weighted drop, eligible player roll, 4 equipped slots, basic shop items upgraded through duplicate buying, deterministic crafting from max basic + boss item + gold, ground drop/pickup/sell, capacity handling.
+**Scope:** shared/private fixed-strength boss dungeons, 30s empty reset and kill respawn cooldown; migrate retained encounter claims/rolls to personal boss materials for every damaging participant present at death, plus once-per-character/boss/match Long Châu. Four typed slots (weapon/armor/hat/boots), no necklace; basics upgrade via duplicate buying to level 5; three crafted branches per slot from max basic + designated material + gold. Merchant sells HP/MP potions (5s use cooldown, limit 20 with total/per-type still open), no potion purchases in dungeons. No resale, trade or transferable drops. Capacity/claim handling and open formulas/policies must follow [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md); deterministic crafting remains proposed.
 
-**Acceptance:** boss only produces one item per kill; roll winner unique, solo winner automatic; duplicate items retained; empty 29s reentry cancels reset, empty 30s resets; multiple buying requests cannot duplicate level/item/gold; all schools can equip any item; crafting consumes exactly one recipe's ingredients and gold.
+**Acceptance:** 1/2/6 eligible players each receive a material, without rolls; first-clear Long Châu cannot repeat via private/shared farming, retries or duplicate death callbacks. No damage/no presence means no reward. Empty 29s reentry cancels reset, empty 30s resets; dead-boss respawn is separate. Purchase/upgrade/craft/use requests cannot duplicate level/item/gold/stats. Validate potion 5s cooldown and dungeon purchase rejection, typed slots, all-school use, twelve branches including Thanh Tâm and penetration, non-multiplying lifesteal, no resale/transfer and safe full-inventory rewards. Existing runtime and protocol must migrate without double-awarding. Detailed future cases: [ACCEPTANCE_TESTS.md](ACCEPTANCE_TESTS.md).
 
 ## M5 — Full 20-wave defense and five boss encounters
 

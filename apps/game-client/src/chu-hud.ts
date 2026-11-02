@@ -105,7 +105,7 @@ export class ChuHud {
   inventory() {
     const h = this.state?.players.get(this.session),
       grid = document.querySelector('.bag-grid');
-    if (!h || !grid) return;
+    if (!h || !grid || grid.hasAttribute('data-inventory-v2')) return;
     const items = JSON.parse(h.bossItems || '[]') as string[];
     const content = Array.from(
       { length: Math.max(12, items.length) },

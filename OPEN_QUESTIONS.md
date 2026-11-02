@@ -1,5 +1,13 @@
 # Open Decisions and Safe Provisional Defaults
 
+## Inventory/merchant revision — 2026-11-02
+
+[ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) v2.0 resolves slot categories (weapon/armor/hat/boots, no necklace), basic cap 5, potion cooldown 5s/no dungeon purchases, personal boss materials without rolls, first-clear Long Châu, no resale/trading/transfer, Thanh Tâm replacing healing Z and penetration replacing weapon stun. These are design decisions; existing encounter loot backend migration has not been performed.
+
+Still open: potion cap 20 total vs per type and shared vs separate 5s cooldown; size/price/heal tables and hotkeys; inventory/stack/pending-claim capacity and discard; Long Châu stats/formula/use; dead/disconnected eligibility and encounter reset attribution; crafting success/branch-switch/upgrade policies; all numeric equipment effects and stacking; where equip/merchant/crafting actions are legal. Do not promote previous chat examples into approved numbers.
+
+**PvP proposal only:** ignore equipment and permit skills only, with no potions. Whether shoe Z, Long Châu, levels, ranks, innate/surplus and base stats are excluded/normalized remains unresolved. Record this intent without implementing PvP or assuming its final rules.
+
 ## Resolved by M3C3 feedback — 2026-10-31
 
 Thái Cực Thần Công is now explicitly a toggle, superseding the earlier timed-shield open question/prototype. The director also authorizes ranged boomerang Phiến, moving-dash-only direct immunity with continuing DOT, bounded Chiết Mai CDR and confinement without stun. Numeric conversion/floors/ranges/damage/durations remain trial tuning in data. See `docs/M3C3_FEEDBACK_IMPLEMENTATION.md`. New concept approval does not approve production sprites or actual Phaser visuals; retained raster stand-ins remain explicitly temporary.
@@ -13,9 +21,9 @@ Bất Động Minh Vương retains the canonical proposed one-pulse healing; mit
 
 | Priority | Open choice | Suggested *temporary* choice | First affects |
 |---|---|---|---|
-| High | Number of backpack slots and item-type-specific equip slots | 12 backpack; four unrestricted equipped slots initially; eventual weapon/armor/accessory categories | M4 |
-| High | Boss loot roll UI (Need/Greed/Pass vs uniform roll), timeout, disconnect handling | Every eligible player gets equal auto-roll at timeout; UI offers Roll/Pass when built | M4 |
-| High | What happens if inventory full when player wins loot | Safe pending claim or owner-protected ground drop; never delete item | M4 |
+| High | Backpack/stack capacity, safe claim and discard policy | 12 backpack slots and material stacks are proposals; four typed equip slots are confirmed | M4 |
+| High | Dead/disconnected boss participants, encounter reset attribution and reconnect/claim policy | Preserve the confirmed damaged + present-in-instance eligibility; no rolls | M4 |
+| High | What happens if inventory full when personal reward is earned | Personal pending claim proposed; never silently delete or make a transferable ground item | M4 |
 | High | Does dungeon boss XP require player still present at death? | Must be present in boss instance and have landed >=1 hit | M4 |
 | High | What exactly qualifies as 'meaningful assist' (damage, CC, healing) and expiration window? | Damage/CC within short recent window; add heal support only with clear attribution | M2/M3 |
 | Medium | Regular rank caps / ultimate level gating | Normal max4 at levels 1/3/5/7, ultimate max3 ranks at 6/10/14, max one ultimate | M3 |
@@ -25,7 +33,10 @@ Bất Động Minh Vương retains the canonical proposed one-pulse healing; mit
 | Medium | Shield: is Thái Cực Thần Công a toggle or timed buff? | Timed shield for simplest M3; reconsider toggle when balancing mana | M3 |
 | Medium | Bất Động Minh Vương: pulse heal versus mitigation/protection stance? | Healing pulse retained from earlier proposal | M3 |
 | Medium | Arena boss rest timer and boss spawn route | 10-second delay after fifth wave cleared; dedicated boss lane entry | M5 |
-| Medium | Initial shop basic item max level and exact crafting recipes | Level 5 and 1 required boss drop; exact costs TBD | M4 |
+| Medium | Recipe gold/stats, success policy, branch switching and upgrades after crafting | Basic cap 5 and four boss-material/slot mappings confirmed; deterministic crafting proposed, exact costs TBD | M4 |
+| Medium | Potion cap interpretation and cooldown sharing | 20 total and shared 5s proposed; 5s duration/no dungeon purchase confirmed | M4 |
+| Medium | Long Châu stat formula, stacking and use/inventory policy | Once per character/boss/match confirmed; no approved numeric bonus | M4 |
+| Medium | PvP excluding equipment and potions | Proposal only; resolve Z, Long Châu and level/rank/passive normalization | M6 |
 | Medium | Level XP curve and numerical school growth | Tunable config and balance simulator; no invented final numbers | M1/M3 |
 | Medium | Player death cooldown length and exact respawn positioning | 5–10 seconds and a safe spawn near statue | M2 |
 | Medium | Host/ready behavior in match lobby; can players join ongoing matches? | Only join before match start; host starts | M0 |
@@ -33,7 +44,6 @@ Bất Động Minh Vương retains the canonical proposed one-pulse healing; mit
 | Medium | What happens to ongoing PvP duel when statue raid begins? | Make PvP optional and defer entirely to M6; no silent teleport | M6 |
 | Medium | PvP exact winning rule / round limit / rewards | Last team standing; no gold/XP; return to arena | M6 |
 | Medium | If existing invasion creeps still alive when final boss becomes eligible, does final wait for complete cleanup? | Final begins after four bosses die, independent of non-boss survivors; announce danger | M5 |
-| Low | Trade items directly between players? | No trading initially, only dropped-item pickup | M4 |
 | Low | Can basic attack be held down for repeated attacking? | Manual key-down with cooldown, no auto-repeat first | M1 |
 | Low | How much cleave, exact enemy detection radius, animation timing? | Data-driven weapon-specific values; test feel | M1/M2 |
 | Low | Exact viewport resolution, pixel tile scale, camera zoom and camera smoothing | Confirmed 2D Pokémon-like elevated top-down/three-quarter projection; propose 32px square tiles, integer zoom, test jitter in M1 | M1 |
@@ -41,10 +51,10 @@ Bất Động Minh Vương retains the canonical proposed one-pulse healing; mit
 
 ## Proposed future discussion queue
 
-1. Inventory slot categories vs free-for-all four slots; loot roll interaction.
+1. Inventory capacity/claims, potion interpretation, Long Châu formula and remaining merchant/equipment policies in inventory v2.0; slot categories/no-roll rewards are resolved.
 2. EXP/level numerical curves and first dungeon catalogue.
 3. Statue, chapter boss and final boss detailed abilities/telegraphs.
-4. Distinct recipes and what dungeon drops feed them.
+4. Exact costs/stats of the four confirmed boss-material/slot recipes and twelve crafted branches; no necklace or weapon stun branch.
 5. Skill-tuning values, animation commitment, precise PvP time policy.
 6. Visual asset style guide and original/appropriately licensed art pipeline.
 

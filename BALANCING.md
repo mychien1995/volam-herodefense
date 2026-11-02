@@ -1,5 +1,7 @@
 # Balancing Plan v1.0 — hard but fair
 
+**Inventory design baseline — 2026-11-02:** [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) v2.0 replaces shared loot rolls with personal materials and once-per-boss/character/match Long Châu. Four basics cap at level 5; potion cooldown is 5s; weapon stun is replaced by penetration and healing-Z boots by Thanh Tâm. This is a plan for future measurements, not measured balance or implementation approval. Potion cap interpretation/shared cooldown and Long Châu/stat/price coefficients remain open.
+
 ## M3C3 provisional Gold tuning — 2026-10-31
 
 `game-data/thieu-lam.ts` contains all explicit rank/base/growth/innate/surplus/sequence values. `tools/m3c3-balance.ts` measures legal four-school builds at1/6/15/30,both basics,three fixed seeds,and compares valid A/B versus wrong-order Gold sequences with identical targets and pressure. Output:`artifacts/m3c3-balance.json`. It is a controlled implementation probe,not final M3D balance,economy,PvP,boss or campaign acceptance. No other school's numeric tuning is changed.
@@ -74,9 +76,9 @@ Remaining waves should introduce threat patterns rather than only multiplying HP
 ## 6. Economy and pacing
 
 - Regular raids arrive every **180 seconds**, 20 waves = hour schedule. **No statue repair**, so one weak defense creates long-term consequences.
-- Intended loop: between raids, choose XP-focused dungeon vs fixed-boss equipment material vs shopping/crafting. Boss loot is scarce (one rolled item per kill), which can produce farming time pressure.
+- Intended loop: between raids, choose XP-focused dungeon vs fixed-boss materials vs shopping/crafting. Every eligible boss participant receives a material; tune time pressure through boss difficulty, travel/respawn and gold costs rather than competition for one rolled item. First-clear Long Châu adds bounded in-match progression; its coefficients are not yet chosen.
 - Monitor a party's level, XP/min, gold/min, item progress at 15/30/45/60 minutes. Starting illustrative *targets*, not commitments: 1–8 by ~15min, 9–16 by ~30min, 17–24 by ~45min, 25–30 by ~60min.
-- Proposed base shop item upgrade cap 5; crafting deterministic for v1. Never silently make loot guaranteed to each party member; item roll is shared.
+- Basic shop upgrade cap **5 is confirmed**. Deterministic crafting remains proposed. Personal boss material rewards replace shared rolls explicitly by the 2026-11-02 decision; measure recipe completion at 1/2/6 players without retaining old roll scarcity assumptions.
 
 ## 7. Boss and CC balancing
 
@@ -93,8 +95,9 @@ Simulation uses `game-core` directly, without Phaser or Colyseus, with seeded RN
 2. Each school's two normal attack styles, standard 4-skill and mixed-style loadouts, Phát Động sequence on same/different targets.
 3. Boss damage received by stuns/control resistant rules; mana shield resource budget; Thiên Sơn attack-speed/crit breakpoints.
 4. Solo, 2-player and 6-player defense of early/late raids with controlled bot strategies; XP rates per role.
-5. Boss gear progression and time to finish a recipe with 1 random item per kill rolled among 1/2/6 eligible players.
+5. Boss gear progression and recipe completion for 1/2/6 eligible players receiving personal materials, including first-clear Long Châu, repeat clears, boss cooldowns and gold availability.
 6. Item combination exploits, reset/refund/surplus point exploits, overlapping wave clocks, duplicate drops and cooldowns.
+7. Potion sustain at 5s cooldown, hat regen/mana-shield synergy, multiple-player aura stacking, reflect recursion, spread/penetration vs bosses, and lifesteal that does not multiply with creep count or fan legs. Compare three choices per crafted slot once open coefficients are authored. PvP equipment normalization is still a proposal, not a benchmark assumption.
 
 Report: DPS on single target, effective AoE DPS, survival time, hit probability, kill contribution, raid clear time, statue HP remaining, gold/XP per minute, levels at raid times, crafting completion time, PvP win rate/time-to-kill when PvP exists. Sample bots must differ (kiting, tanking, AoE farming), not only stationary attacks. Output machine-readable JSON/CSV and a short Markdown analysis. Do not silently retune confirmed mechanics to fit target win rates.
 
