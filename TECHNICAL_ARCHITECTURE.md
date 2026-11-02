@@ -20,6 +20,14 @@ BuildState adds mode, branchId and planned slotSkills. Validated mode/branch mes
 
 # Technical Architecture Decision Record v1.0
 
+## Combined Hell/M3D protocol18 — 2026-11-02
+
+The user-requested Hell merge retains Forest, Desert, Beach, Chu Bá Thông, Hồng Liệt, Kim Luân and Cổ Mộ while adding `hell`. Protocol18 preserves the existing boss/item/effect state and requests; only the destination contract expands. The client retains all boss renderers, cast/HUD/loot paths, loaders and preparation guards alongside Hell's shared clips and atlas map. No game-core mechanics or retained raster artwork change. Merge verification: `docs/HELL_M3D_INTEGRATION.md`.
+
+## Hell integration / protocol14 — 2026-11-01
+
+The existing destination registry and validated selector add `hell`; `DungeonMatch` still owns zone geometry, membership, clocks, combat and rewards. A reconciled copy of the retained Hell Tiled layout supplies server solids/markers and Phaser terrain/scenery. Existing atlas rendering, eight-phase authored terrain playback, feet depth, generic contact effects and one-shot cleanup are reused. Animation-key lookup can select an actual `shared` clip when no directional clip exists. No spell/projectile mechanics are inferred from assets. Exact retained byte guards and Hell text checkout attributes preserve independent provenance. See `docs/HELL_INTEGRATION.md`.
+
 ## Beach integration — 2026-11-01
 
 Protocol 13 extends the validated destination selector to forest/desert/sea. `game-data/dungeon-registry.ts` resolves all three definitions; Beach uses the existing server-selected creep identity and per-zone authoritative world/geometry/clock. One composed Tiled map supplies collision/markers and Phaser layers. Retained actor/prop/effect atlases and water metadata feed the existing loaders, playback, feet depth and effect cleanup; no specialized enemy gameplay is inferred. The desert atlas-map renderer and isolated art QA service are parameterized rather than replaced. Worktree scope, source correction, provenance, tests and limitations: `docs/BEACH_INTEGRATION.md`.

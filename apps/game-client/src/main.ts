@@ -172,6 +172,7 @@ function dungeonAction(
           | 'forest'
           | 'desert'
           | 'sea'
+          | 'hell'
           | 'chu_ba_thong'
           | 'hong_liet'
           | 'kim_luan'

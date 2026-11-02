@@ -8,6 +8,12 @@ assets/exports/bosses/kim_luan_phap_vuong_v01/** -text -eol whitespace=blank-at-
 assets/reviews/bosses/kim_luan_phap_vuong_v01/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/evidence/kim-luan-runtime/verification.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 
+# Retained Hell provenance records exact mixed/CRLF text bytes, not normalized JSON.
+assets/**/hell/**/*.json -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/**/hell/**/*.tmj -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/**/hell/**/*.tsj -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/**/hell/**/*.py -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
 # The retained Beach provenance hashes this manifest's original CRLF bytes.
 assets/sprites/creeps/dungeons/beach/thuy_quy/manifest.json text eol=crlf
 

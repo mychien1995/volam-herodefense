@@ -16,6 +16,7 @@ import {
   hongLietDungeon,
   kimLuanDungeon,
   coMoDungeon,
+  hellDungeon,
 } from '@volam/game-data';
 import {
   DungeonMatch,
@@ -70,6 +71,7 @@ export class MatchRoom extends Room<{
       hongLietDungeon,
       kimLuanDungeon,
       coMoDungeon,
+      hellDungeon,
     ],
   );
   readonly world = this.simulation.arena.world;

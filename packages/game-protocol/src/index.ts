@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 17;
+export const PROTOCOL_VERSION = 18;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -153,6 +153,7 @@ export const dungeonActionSchema = z.discriminatedUnion('action', [
         'forest',
         'desert',
         'sea',
+        'hell',
         'chu_ba_thong',
         'hong_liet',
         'kim_luan',

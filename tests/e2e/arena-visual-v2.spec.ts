@@ -174,13 +174,10 @@ for (const size of [
         'aria-pressed',
         'true',
       );
-      await expect(page.locator('[data-destination=hell]')).toBeDisabled();
+      await expect(page.locator('[data-destination=hell]')).toBeEnabled();
       await page.locator('[data-destination=hell]').focus();
       await page.keyboard.press('Enter');
-      await expect(page.locator('#dungeon-availability')).toContainText(
-        'Địa Ngục hiện chưa mở',
-      );
-      await expect(page.locator('[data-destination=forest]')).toHaveAttribute(
+      await expect(page.locator('[data-destination=hell]')).toHaveAttribute(
         'aria-pressed',
         'true',
       );

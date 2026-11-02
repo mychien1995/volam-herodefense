@@ -9,6 +9,11 @@ Required: exact approved102 input hashes;107 real Phaser clips/428 frames; three
 ## Lý Mạc Sầu integration scope — 2026-11-01
 
 Enter Cổ Mộ through the normal in-viewport Phó Bản menu in private/shared modes; six clients must share boss HP/positions and private clients must not see another instance's spatial actors. Verify one non-homing needle, eight purple radial palms, frontal-only sweep, four capped real summons and twelve inward projectiles from four world-boundary marker groups. Check windup/damage timing, fixed strength, same-tick DOT kill settlement, one rolled pending claim, no summon reward farming, 29s reentry/30s empty reset, cooldown respawn and cleanup on boss death/travel/defeat. Observe all 192 actor cels/four facings in real Phaser, native feet/pivots/depth, natural combat and normal Space exit. Two-client iteration is reduced coverage; final six-client kill/loot/readability and explicit director runtime approval remain separate. Current commands/evidence/limits: `docs/LY_MAC_SAU_INTEGRATION.md`.
+## Hell integration — 2026-11-01
+
+- `tests/hell-dungeon.test.ts`: reachable markers/six seats, lava/prop collision, bridge route, validated selector, private/shared/forest/desert isolation, pause/resume, physical return and unchanged generic tuning/roster rotation.
+- `scripts/verify-hell.py`: exact source inventory, 276 nonempty cels/92 tags, shared hurt/death, native pivots/dimensions/timing, all prop/VFX atlas bounds/alpha and runtime/map parity.
+- `playwright.hell.config.ts`: two-browser actual-frame/one-shot/terrain review, six participants (two browser contexts plus four SDK clients) in real-stat combat, rewards/wave progression, collision/return/disconnect cleanup, private isolation and existing forest/desert/Beach regressions. PNG evidence only; director approval remains pending.
 
 ## Small gameplay changes — 2026-10-31
 

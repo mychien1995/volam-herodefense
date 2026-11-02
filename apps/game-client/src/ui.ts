@@ -29,6 +29,7 @@ export class GameUI {
     | 'forest'
     | 'desert'
     | 'sea'
+    | 'hell'
     | 'chu_ba_thong'
     | 'hong_liet'
     | 'kim_luan'
@@ -51,6 +52,7 @@ export class GameUI {
       | 'forest'
       | 'desert'
       | 'sea'
+      | 'hell'
       | 'chu_ba_thong'
       | 'hong_liet'
       | 'kim_luan'
@@ -346,6 +348,7 @@ export class GameUI {
           (destination === 'forest' ||
             destination === 'desert' ||
             destination === 'sea' ||
+            destination === 'hell' ||
             destination === 'chu_ba_thong' ||
             destination === 'hong_liet' ||
             destination === 'kim_luan' ||
@@ -512,7 +515,7 @@ export class GameUI {
     const entryNote = document.querySelector('#dungeon-entry-note');
     if (entryNote)
       entryNote.textContent = canEnter
-        ? `Chọn Riêng hoặc Chung để vào ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển', chu_ba_thong: 'Chu Bá Thông', hong_liet: 'Hoàn Nhan Hồng Liệt', kim_luan: 'Kim Luân Pháp Vương · Tương Dương', co_mo: 'Cổ Mộ Phái' }[this.dungeonDestination]}.`
+        ? `Chọn Riêng hoặc Chung để vào ${{ forest: 'Rừng Trúc', desert: 'Sa Mạc', sea: 'Biển', hell: 'Địa Ngục', chu_ba_thong: 'Chu Bá Thông', hong_liet: 'Hoàn Nhan Hồng Liệt', kim_luan: 'Kim Luân Pháp Vương · Tương Dương', co_mo: 'Cổ Mộ Phái' }[this.dungeonDestination]}.`
         : inArena
           ? 'Bạn cần hồi sinh trước khi vào phó bản.'
           : 'Đến gần cửa rồi nhấn Space để về đấu trường.';
@@ -524,6 +527,7 @@ export class GameUI {
     zoneStatus.hidden = inArena && hero.respawnTicks <= 0;
     const desert = hero.zoneId.startsWith('desert_');
     const beach = hero.zoneId.startsWith('sea_');
+    const hell = hero.zoneId.startsWith('hell_');
     const coMo = hero.zoneId.startsWith('co_mo_');
     const boss = [...state.creeps.values()].find(
       (c) =>
@@ -550,7 +554,7 @@ export class GameUI {
     const artNotice =
       dungeon?.id === 'chu_ba_thong'
         ? 'Art đã duyệt · gameplay thử nghiệm'
-        : desert || beach
+        : desert || beach || hell
           ? 'Hình quái đang chờ duyệt'
           : forestArtNotice(
               [...state.creeps.values()]
@@ -574,7 +578,7 @@ export class GameUI {
               ? `Cổ Mộ Phái · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · ${zone.respawnTicks > 0 ? `Lý Mạc Sầu hồi sinh sau ${Math.ceil(zone.respawnTicks / m1Config.tickRate)}s` : 'Lý Mạc Sầu'}`
               : hongLiet
                 ? `Hoàn Nhan Hồng Liệt · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · HP ${Math.ceil(zone.bossHp)} / ${zone.bossMaxHp}${zone.bossRespawnTicks ? ` · Hồi sinh ${Math.ceil(zone.bossRespawnTicks / 30)}s` : ''}`
-                : `${dungeon?.id === 'chu_ba_thong' ? 'Chu Bá Thông' : beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
+                : `${dungeon?.id === 'chu_ba_thong' ? 'Chu Bá Thông' : hell ? 'Địa Ngục' : beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
           : '';
     const claims = JSON.parse(hero.bossLoot || '[]') as Array<{
       nameVi: string;
