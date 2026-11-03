@@ -1,3 +1,4 @@
+import { announceBossSkill } from './boss-skill-announcement.js';
 import { emit, hurt } from './combat.js';
 import { addCreep } from './simulation.js';
 import { gainExperience } from './progression.js';
@@ -6,6 +7,7 @@ import {
   displace,
   hasStatus,
   statusValue,
+  applyStatus,
 } from './status.js';
 import {
   clampEllipse,
@@ -179,8 +181,36 @@ export class DongTaEncounter {
         this.release(world, config, c);
       }
       if (c.released) this.pulses(world, config, c);
-      if (world.tick >= c.endsAt)
+      if (world.tick >= c.endsAt) {
         this.casts = this.casts.filter((v) => v !== c);
+        if (c.abilityId === 'am_phong_hap_luc') {
+          const target = world.heroes.get(c.targetId);
+          if (
+            target &&
+            target.hp > 0 &&
+            this.beginCast(
+              world,
+              config,
+              c.actorId,
+              'ma_anh_troc_hon',
+              target.id,
+            )
+          ) {
+            const follow = this.casts.find((v) => v.actorId === c.actorId)!;
+            follow.activeAt = world.tick + this.definition.pull.followupTicks;
+            follow.nextPulse = follow.activeAt;
+            follow.endsAt =
+              follow.activeAt +
+              this.definition.abilities.ma_anh_troc_hon.duration;
+            follow.released = false;
+            const aim = direction(target.x - owner.x, target.y - owner.y);
+            follow.fx = aim.x;
+            follow.fy = aim.y;
+            owner.actionUntil = follow.endsAt;
+            owner.cooldown = follow.endsAt + Math.round(0.35 * config.tickRate);
+          }
+        }
+      }
     }
     this.stepEffects(world, config);
     // Counter/retaliation can kill Đông Tà during an effect impact.
@@ -393,6 +423,36 @@ export class DongTaEncounter {
       pattern: world.random() < 0.5 ? 'plus' : 'x',
     };
     this.casts.push(cast);
+    announceBossSkill(world, actorId, abilityId);
+    if (abilityId === 'lac_anh_normal') {
+      const d = this.definition,
+        shape =
+          d.normalDash.paths[Math.min(3, Math.floor(world.random() * 4))]!;
+      const angle =
+        Math.abs(a.fx) > Math.abs(a.fy)
+          ? a.fx < 0
+            ? Math.PI
+            : 0
+          : a.fy < 0
+            ? -Math.PI / 2
+            : Math.PI / 2;
+      cast.path = [
+        { x: a.x, y: a.y },
+        ...shape.map(([x, y]) => {
+          const p = {
+            x: d.center.x + x! * Math.cos(angle) - y! * Math.sin(angle),
+            y: d.center.y + x! * Math.sin(angle) + y! * Math.cos(angle),
+          };
+          clampEllipse(p, d.bounds, a.stats!.radius);
+          return p;
+        }),
+      ];
+      cast.endsAt =
+        cast.activeAt +
+        d.normalDash.approachTicks +
+        (shape.length - 1) * d.normalDash.segmentTicks;
+      cast.hitIds = [];
+    }
     a.pose = 'cast';
     a.castAbilityId = abilityId;
     a.actionUntil = cast.endsAt;
@@ -451,11 +511,6 @@ export class DongTaEncounter {
       t = world.tick;
     switch (c.abilityId) {
       case 'lac_anh_normal':
-        this.effect(world, c, 'fan', {
-          length: d.fan.range,
-          radius: d.fan.halfAngle,
-          expiresAt: c.endsAt,
-        });
         break;
       case 'dan_chi_than_cong': {
         const count =
@@ -586,6 +641,61 @@ export class DongTaEncounter {
   }
   private pulses(world: World, config: SimulationConfig, c: DongCast): void {
     const d = this.definition;
+    if (c.abilityId === 'lac_anh_normal' && c.path) {
+      const b = world.creeps.get(c.actorId)!;
+      let at = world.tick - c.activeAt;
+      for (let i = 0; i < c.path.length - 1; i++) {
+        const duration =
+          i === 0 ? d.normalDash.approachTicks : d.normalDash.segmentTicks;
+        if (at <= duration || i === c.path.length - 2) {
+          const from = c.path[i]!,
+            to = c.path[i + 1]!,
+            p = Math.max(0, Math.min(1, at / duration));
+          const old = { x: b.x, y: b.y },
+            target = {
+              x: from.x + (to.x - from.x) * p,
+              y: from.y + (to.y - from.y) * p,
+            },
+            v = direction(to.x - from.x, to.y - from.y);
+          moveCircle(
+            b,
+            { x: target.x - b.x, y: target.y - b.y },
+            b.stats!.radius,
+            config.width,
+            config.height,
+            config.collision,
+          );
+          clampEllipse(b, d.bounds, b.stats!.radius);
+          b.fx = v.x;
+          b.fy = v.y;
+          for (const h of world.heroes.values())
+            if (
+              h.hp > 0 &&
+              !c.hitIds!.includes(h.id) &&
+              segmentCircle(
+                old,
+                b,
+                h,
+                d.normalDash.halfWidth + config.radius,
+              ) !== undefined
+            ) {
+              c.hitIds!.push(h.id);
+              hurt(
+                world,
+                h,
+                c.actorId,
+                c.abilityId,
+                d.abilities.lac_anh_normal.damage,
+                config,
+                { ...noCrit, fx: v.x, fy: v.y },
+              );
+            }
+          break;
+        }
+        at -= duration;
+      }
+      return;
+    }
     if (world.tick < c.nextPulse) return;
     if (c.abilityId === 'ta_kiem_lien_kich' && c.pulse < d.thrust.hits) {
       const a =
@@ -614,8 +724,7 @@ export class DongTaEncounter {
       c.pulse++;
       c.nextPulse += d.claws.gapTicks;
     } else if (c.abilityId === 'ma_anh_troc_hon' && c.pulse < 5) {
-      const h = world.heroes.get(c.targetId),
-        v = h ? direction(h.x - c.x, h.y - c.y) : { x: c.fx, y: c.fy };
+      const v = { x: c.fx, y: c.fy };
       this.effect(world, c, 'claw', {
         fx: v.x,
         fy: v.y,
@@ -702,11 +811,33 @@ export class DongTaEncounter {
         if (hero.hp <= 0) continue;
         if (e.kind === 'pull') {
           if (hero.id === e.targetId && distance(hero, e) < e.radius) {
+            applyStatus(
+              hero,
+              {
+                kind: 'dash_lock',
+                magnitude: 1,
+                durationTicks: e.startedAt + d.pull.lockTicks - world.tick,
+              },
+              e.ownerId,
+              e.abilityId,
+              world.tick,
+            );
+            world.actions = (world.actions ?? []).filter(
+              (a) => a.ownerId !== hero.id || a.abilityId !== 'universal_dash',
+            );
             const v = direction(e.x - hero.x, e.y - hero.y);
+            const amount = Math.min(
+              Math.max(0, distance(hero, e) - d.pull.stopDistance),
+              Math.max(
+                d.pull.speed / config.tickRate,
+                (distance(hero, e) - d.pull.stopDistance) /
+                  Math.max(1, e.expiresAt - world.tick),
+              ),
+            );
             displace(
               hero,
-              (v.x * d.pull.speed) / config.tickRate,
-              (v.y * d.pull.speed) / config.tickRate,
+              v.x * amount,
+              v.y * amount,
               config.radius,
               config,
               world.tick,

@@ -1,4 +1,9 @@
 import { TayDocEncounter, TayDocGate } from './tay-doc.js';
+import {
+  stepWaveBossTest,
+  validateWaveBossTest,
+  type WaveBossTestOptions,
+} from './wave-boss-test.js';
 import type { TayDocDefinition } from './tay-doc-types.js';
 import {
   clearNamDe,
@@ -9,6 +14,9 @@ import {
 import type { NamDeDefinition } from './nam-de-types.js';
 import { KimLuanEncounter } from './kim-luan.js';
 import { DongTaEncounter } from './dong-ta.js';
+import { BacCaiEncounter } from './bac-cai.js';
+import type { WaveArenaView, WaveArenaBoss } from './wave-arena-types.js';
+import { NAM_DE_ID } from './nam-de-types.js';
 import type { DongDefinition } from './dong-ta-types.js';
 
 import { BossPartyState, isBossDungeon } from './boss-party.js';
@@ -19,7 +27,7 @@ import { spawnChu, drinkChuWine } from './chu-ba-thong.js';
 import { validateChuDefinition, type ChuDefinition } from './chu-types.js';
 import { HongLietEncounter } from './hong-liet.js';
 import type { HongLietDefinition } from './hong-liet-types.js';
-import { distance, blocked } from './geometry.js';
+import { distance, blocked, clampEllipse } from './geometry.js';
 import { spawnBossEncounter } from './boss-encounter.js';
 import type { BossEncounterDefinition } from './boss-types.js';
 import { cancelOwnedEffects } from './status.js';
@@ -113,10 +121,75 @@ export class DungeonMatch {
   readonly invasion: InvasionDirector | undefined;
   readonly dongTa: DongTaEncounter | undefined;
   readonly mainBosses: MainBossDirector | undefined;
+  waveArena: WaveArenaView | undefined;
+  private readonly waveField: SimulationConfig['waveArena'];
+  get waveBossLocked(): boolean {
+    return !!this.dongTa?.locked || !!this.waveArena?.locked;
+  }
+  get waveBossRetry(): boolean {
+    return this.dongTa?.phase === 'retry' || this.waveArena?.phase === 'retry';
+  }
+  waveArenaView(): WaveArenaView | undefined {
+    if (
+      this.dongTa &&
+      this.dongTa.phase !== 'cleared' &&
+      this.dongTa.phase !== 'waiting' &&
+      this.dongTa.phase !== 'rest'
+    ) {
+      const v = this.dongTa.view(this.arena.world);
+      return {
+        bossId: 'dong_ta',
+        phase: v.phase as WaveArenaView['phase'],
+        locked: v.locked,
+        attempt: v.attempt,
+        phaseUntil: v.phaseUntil,
+        tick: v.tick,
+        bossHp: v.bossHp,
+        bossMaxHp: v.bossMaxHp,
+        bounds: v.bounds,
+      };
+    }
+    if (!this.waveArena) return;
+    const b = this.arena.world.creeps.get(
+      this.waveActorId(this.waveArena.bossId),
+    );
+    return {
+      ...this.waveArena,
+      tick: this.arena.world.tick,
+      bossHp: b?.hp ?? 0,
+      bossMaxHp: b?.maxHp ?? 0,
+    };
+  }
   tick = 0;
   arenaTick = 0;
   nowMs = 0;
   get arenaPaused(): boolean {
+    if (
+      this.waveArena ||
+      (this.tayDoc && !['waiting', 'dead'].includes(this.tayDoc.phase)) ||
+      (this.arena.world.namDe &&
+        !['waiting', 'defeated'].includes(this.arena.world.namDe.phase)) ||
+      (this.arena.world.bacCai &&
+        !['cleared', 'defeated'].includes(this.arena.world.bacCai.phase))
+    )
+      return false;
+    const wave = this.invasion?.wave ?? 0;
+    const next =
+      this.dongTa && this.dongTa.phase !== 'cleared'
+        ? 5
+        : this.tayDoc && this.tayDoc.phase !== 'dead'
+          ? 10
+          : this.arena.world.namDe?.phase !== 'defeated'
+            ? 15
+            : 20;
+    if (
+      this.waveField &&
+      wave >= next &&
+      ![...this.arena.world.creeps.values()].some(
+        (c) => c.hp > 0 && c.invasion && c.invasion.wave <= next,
+      )
+    )
+      return false;
     // The approved wave encounter must reach the court and recall the party even
     // when everyone has entered a dungeon. Its own wave clock never pauses.
     const dong = this.dongTa;
@@ -153,7 +226,23 @@ export class DungeonMatch {
     tayDoc?: TayDocDefinition,
     namDe?: NamDeDefinition,
     bacCai?: BacCaiDefinition,
+    waveBossTest?: WaveBossTestOptions,
   ) {
+    this.waveField = dongTa ?? base.waveArena;
+    if (waveBossTest) {
+      validateWaveBossTest(waveBossTest);
+      if (!invasion || !dongTa || !tayDoc || !namDe || !bacCai)
+        throw Error(
+          'Wave boss test requires all four real encounter definitions',
+        );
+      dongTa = { ...dongTa, restTicks: waveBossTest.firstRestTicks };
+      tayDoc = { ...tayDoc, gateRest: waveBossTest.restTicks };
+      namDe = { ...namDe, restTicks: waveBossTest.restTicks };
+      bacCai = {
+        ...bacCai,
+        restMs: (waveBossTest.restTicks * 1000) / base.tickRate,
+      };
+    }
     for (const definition of [dungeon, ...additionalDungeons]) {
       if (this.definitions.has(definition.id))
         throw new Error(`Duplicate dungeon definition: ${definition.id}`);
@@ -164,13 +253,18 @@ export class DungeonMatch {
       id: 'arena',
       access: 'arena',
       ownerId: '',
-      world: createWorld(base, seed),
+      world: createWorld(
+        waveBossTest ? { ...base, creepSpawns: [] } : base,
+        seed,
+      ),
       config: base,
       wave: 0,
       spawnPlayerCount: 0,
       nextWaveAt: undefined,
     };
     this.zones.set('arena', this.arena);
+    if (waveBossTest)
+      this.arena.world.waveBossTest = { ...waveBossTest, stage: 'dong_ta' };
     if (tayDoc) this.tayDoc = new TayDocEncounter(tayDoc);
     if (bacCai) {
       validateBacCai(bacCai, base);
@@ -185,18 +279,7 @@ export class DungeonMatch {
     }
     if (dongTa && invasion)
       this.dongTa = new DongTaEncounter(dongTa, {
-        lock: (locked) => {
-          this.arena.config = {
-            ...this.base,
-            collision: locked
-              ? [...this.base.collision]
-              : [...this.base.collision, invasion.statue.collision],
-            heroBounds: locked ? dongTa.bounds : undefined,
-          };
-          if (this.arena.world.statue)
-            this.arena.world.statue.invulnerable = locked;
-          if (!locked) this.releaseStatueOccupants();
-        },
+        lock: (locked) => this.lockWaveArena(locked),
         recall: () => {
           this.party.invitations.clear();
           for (const id of [...this.membership.keys()]) this.recallForBoss(id);
@@ -207,7 +290,7 @@ export class DungeonMatch {
   add(id: string, nickname: string): Hero {
     const hero = addHero(this.arena.world, id, nickname, this.base);
     this.membership.set(id, 'arena');
-    if (this.dongTa?.locked) this.recallForBoss(id);
+    if (this.waveBossLocked) this.recallForBoss(id);
     return hero;
   }
   zoneOf(id: string): MatchZone | undefined {
@@ -255,7 +338,7 @@ export class DungeonMatch {
     this.membership.set(id, 'arena');
     this.party.disconnected.delete(id);
     this.offline.delete(id);
-    if (this.dongTa?.locked) this.recallForBoss(id);
+    if (this.waveBossLocked) this.recallForBoss(id);
   }
   summonHelp(id: string, nowMs = this.nowMs): string | undefined {
     const zone = this.zoneOf(id);
@@ -299,7 +382,7 @@ export class DungeonMatch {
     const hero = this.hero(id);
     return (
       !this.invasion?.defeated &&
-      !this.dongTa?.locked &&
+      !this.waveBossLocked &&
       !!hero &&
       hero.hp > 0 &&
       this.zoneOf(id)?.access === 'arena'
@@ -353,6 +436,8 @@ export class DungeonMatch {
         dungeon,
         ...(creepSpeed === undefined ? {} : { creepSpeed }),
       };
+      if (this.arena.world.waveBossTest)
+        zone.world.waveBossTest = this.arena.world.waveBossTest;
       if (dungeon.kimBoss) {
         zone.kim = new KimLuanEncounter(dungeon.kimBoss);
         zone.kim.initialize(zone.world, config);
@@ -484,7 +569,15 @@ export class DungeonMatch {
     this.events = [];
     const paused = this.arenaPaused;
     if (!paused) this.arenaTick++;
-    if (!paused)
+    if (!paused && this.arena.world.waveBossTest && this.invasion) {
+      stepWaveBossTest(this.arena.world, this.invasion, {
+        dongTa: this.dongTa?.phase === 'cleared',
+        tayDoc: this.tayDoc?.phase === 'dead',
+        namDe: this.arena.world.namDe?.phase === 'defeated',
+        bacCai: this.arena.world.bacCai?.phase === 'defeated',
+      });
+    }
+    if (!paused && !this.arena.world.waveBossTest)
       this.invasion?.beforeStep(
         this.arena.world,
         this.arena.config,
@@ -497,14 +590,22 @@ export class DungeonMatch {
         this.arena.config,
         this.invasion?.wave ?? 0,
       );
+    if (!paused) this.restartWaveArena();
     for (const zone of this.zones.values()) {
       if (zone === this.arena && paused) {
         zone.world.events = [];
         if (this.invasion) this.invasion.events = [];
         continue;
       }
-      if (zone.access === 'arena')
+      if (
+        zone.access === 'arena' &&
+        !(
+          this.waveArena?.phase === 'retry' &&
+          this.waveArena.bossId === 'nam_de'
+        )
+      )
         spawnNamDeIfReady(zone.world, zone.config, zone.world.tick + 1);
+      if (zone.access === 'arena') this.syncWaveArena();
       if (zone.kim?.phase === 'defeated') {
         zone.bossDiedMatchTick ??= this.tick;
         if (
@@ -604,12 +705,22 @@ export class DungeonMatch {
         this.events.push({ zoneId: zone.id, event });
       if (zone.access === 'arena') {
         this.invasion?.afterStep(zone.world, this.arenaTick);
-        if (!this.tayDoc || this.tayDoc.phase === 'dead')
+        if (
+          (!this.tayDoc || this.tayDoc.phase === 'dead') &&
+          !(
+            this.waveArena?.phase === 'retry' &&
+            this.waveArena.bossId === 'nam_de'
+          )
+        )
           gateNamDe(zone.world, this.invasion?.wave ?? 0, zone.world.tick);
-        if (this.dongTa?.phase === 'cleared') this.mainBosses?.recordDefeat('dong_ta');
-        if (this.tayDoc?.phase === 'dead') this.mainBosses?.recordDefeat('tay_doc');
-        if (zone.world.namDe?.phase === 'defeated') this.mainBosses?.recordDefeat('nam_de');
+        if (this.dongTa?.phase === 'cleared')
+          this.mainBosses?.recordDefeat('dong_ta');
+        if (this.tayDoc?.phase === 'dead')
+          this.mainBosses?.recordDefeat('tay_doc');
+        if (zone.world.namDe?.phase === 'defeated')
+          this.mainBosses?.recordDefeat('nam_de');
         this.mainBosses?.step(zone.world, zone.config, this.invasion);
+        this.syncWaveArena();
         if (this.invasion?.defeated) {
           this.tayDoc?.dispose(this.arena.world);
           for (const active of this.zones.values()) {
@@ -654,7 +765,7 @@ export class DungeonMatch {
     for (const id of this.membership.keys()) {
       const hero = this.hero(id);
       if (!hero || hero.hp > 0) continue;
-      if (this.dongTa?.phase === 'retry') continue;
+      if (this.waveBossRetry) continue;
       if (this.party.disconnected.has(id) || hero.bossSpectator) continue;
       const zone = this.zoneOf(id)!;
       const dungeon = zone.dungeon ?? this.dungeon;
@@ -671,7 +782,7 @@ export class DungeonMatch {
           this.transfer(
             id,
             this.arena,
-            this.dongTa?.locked ? this.bossFormation(id) : this.base.spawn,
+            this.waveBossLocked ? this.bossFormation(id) : this.base.spawn,
           );
         hero.hp = hero.maxHp;
         hero.mana = hero.maxMana;
@@ -730,8 +841,155 @@ export class DungeonMatch {
     for (const creep of zone.world.creeps.values())
       creep.archetypeId = roster[(zone.wave - 1) % roster.length]!;
   }
+  private waveActorId(id: WaveArenaBoss): string {
+    return id === 'nam_de'
+      ? NAM_DE_ID
+      : id === 'tay_doc'
+        ? this.tayDoc!.bossId
+        : id === 'bac_cai'
+          ? this.arena.world.bacCai!.bossId
+          : 'dong_ta';
+  }
+  private lockWaveArena(locked: boolean): void {
+    const d = this.waveField;
+    if (!d || !this.invasion) return;
+    this.arena.config = {
+      ...this.base,
+      collision: locked
+        ? [...this.base.collision]
+        : [...this.base.collision, this.invasion.definition.statue.collision],
+      heroBounds: locked ? d.bounds : undefined,
+    };
+    if (this.arena.world.statue) this.arena.world.statue.invulnerable = locked;
+    if (!locked) this.releaseStatueOccupants();
+  }
+  private recallWaveParty(): void {
+    this.party.invitations.clear();
+    for (const id of this.membership.keys())
+      if (!this.party.disconnected.has(id)) this.recallForBoss(id);
+  }
+  /** Shared field policy; encounter-specific AI/rewards remain owned by their engines. */
+  private syncWaveArena(): void {
+    if (!this.waveField || !this.invasion) return;
+    const w = this.arena.world;
+    if (!this.waveArena) {
+      const id: WaveArenaBoss | undefined =
+        this.tayDoc && !['waiting', 'dead'].includes(this.tayDoc.phase)
+          ? 'tay_doc'
+          : w.namDe && !['waiting', 'rest', 'defeated'].includes(w.namDe.phase)
+            ? 'nam_de'
+            : w.bacCai && !['cleared', 'defeated'].includes(w.bacCai.phase)
+              ? 'bac_cai'
+              : undefined;
+      if (!id) return;
+      this.waveArena = {
+        bossId: id,
+        phase: 'entry',
+        locked: true,
+        attempt: 1,
+        phaseUntil: 0,
+        tick: w.tick,
+        bossHp: 0,
+        bossMaxHp: 0,
+        bounds: this.waveField.bounds,
+      };
+      this.lockWaveArena(true);
+      this.recallWaveParty();
+      if (id === 'bac_cai') {
+        const b = w.creeps.get(w.bacCai!.bossId)!;
+        const d = w.bacCai!.definition;
+        b.hp = b.maxHp = Math.round(
+          d.hp * (1 + d.hpPerAdditionalPlayer * Math.max(0, w.heroes.size - 1)),
+        );
+        if (b.stats) b.stats.hp = b.maxHp;
+      }
+    }
+    const a = this.waveArena;
+    if (a.phase === 'retry') return;
+    const b = w.creeps.get(this.waveActorId(a.bossId));
+    const defeated =
+      a.bossId === 'tay_doc'
+        ? this.tayDoc!.phase === 'dead'
+        : a.bossId === 'nam_de'
+          ? w.namDe!.phase === 'defeated'
+          : w.bacCai!.phase === 'defeated';
+    if (defeated || (b && b.hp <= 0)) {
+      this.waveArena = undefined;
+      this.lockWaveArena(false);
+      return;
+    }
+    const entering =
+      a.bossId === 'tay_doc'
+        ? this.tayDoc!.phase === 'enter'
+        : a.bossId === 'nam_de'
+          ? w.namDe!.phase === 'enter'
+          : w.bacCai!.phase === 'entering';
+    if (b) {
+      b.invulnerable = entering;
+      if (!entering) {
+        a.phase = 'fighting';
+        clampEllipse(b, a.bounds, b.stats?.radius ?? 20);
+      }
+    }
+    if (w.heroes.size && [...w.heroes.values()].every((h) => h.hp <= 0)) {
+      if (a.bossId === 'tay_doc') this.tayDoc!.reset(w);
+      else if (a.bossId === 'nam_de') {
+        const d = w.namDe!.definition;
+        clearNamDe(w);
+        w.creeps.delete(NAM_DE_ID);
+        initializeNamDe(w, this.arena.config, d);
+      } else {
+        w.bacCai!.clear(w);
+        w.creeps.delete(w.bacCai!.bossId);
+      }
+      for (const h of w.heroes.values()) {
+        cancelOwnedEffects(w, h.id);
+        h.moveX = h.moveY = 0;
+        this.respawns.delete(h.id);
+      }
+      w.pending = [];
+      a.phase = 'retry';
+      a.phaseUntil = w.tick + this.waveField.retryTicks;
+    }
+  }
+  private restartWaveArena(): void {
+    const a = this.waveArena,
+      w = this.arena.world;
+    if (
+      !a ||
+      a.phase !== 'retry' ||
+      w.tick + 1 < a.phaseUntil ||
+      !w.heroes.size
+    )
+      return;
+    this.recallWaveParty();
+    if (a.bossId === 'tay_doc') {
+      this.tayDoc!.spawn(w, this.arena.config);
+      this.tayDoc!.phase = 'phase1';
+      this.tayDoc!.nextActionAt = w.tick + this.waveField!.openingTicks;
+    } else if (a.bossId === 'nam_de') {
+      w.namDe!.phase = 'rest';
+      w.namDe!.spawnAt = w.tick;
+      spawnNamDeIfReady(w, this.arena.config, w.tick);
+      w.namDe!.phase = 'idle';
+      w.namDe!.nextActionAt = w.tick + this.waveField!.openingTicks;
+    } else {
+      const e = new BacCaiEncounter(w.bacCai!.definition);
+      delete w.bacCai;
+      e.initialize(w, this.arena.config);
+      e.phase = 'combat';
+      if (this.mainBosses) this.mainBosses.encounter = e;
+    }
+    const b = w.creeps.get(this.waveActorId(a.bossId))!;
+    b.x = this.waveField!.center.x;
+    b.y = this.waveField!.center.y;
+    b.invulnerable = false;
+    a.phase = 'fighting';
+    a.phaseUntil = 0;
+    a.attempt++;
+  }
   private bossFormation(id: string): Point {
-    const d = this.dongTa!.definition,
+    const d = this.waveField!,
       index = [...this.membership.keys()].indexOf(id);
     for (let offset = 0; offset < 24; offset++) {
       const a = (index * Math.PI) / 3 + (offset * Math.PI) / 12;

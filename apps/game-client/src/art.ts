@@ -1,3 +1,4 @@
+import { preloadWaveBossFeedback } from './wave-boss-feedback-art.js';
 import { preloadTayDocArt, registerTayDocArt } from './tay-doc-art.js';
 import { preloadNamDe, registerNamDe } from './nam-de-presentation.js';
 import { preloadChu, registerChu } from './chu-presentation.js';
@@ -84,6 +85,7 @@ export function heroTexture(
 }
 export { facing } from './facing.js';
 export function preloadArt(scene: Phaser.Scene): void {
+  preloadWaveBossFeedback(scene);
   preloadBacCaiArt(scene);
   preloadChu(scene);
   preloadNamDe(scene);

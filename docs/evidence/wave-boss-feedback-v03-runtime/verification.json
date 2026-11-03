@@ -1,0 +1,57 @@
+{
+  "status": "PASS_WITH_STAGE_RETRIES",
+  "protocolVersion": 29,
+  "unitIntegration": {
+    "files": 75,
+    "passed": 724,
+    "log": "unit-retry.log"
+  },
+  "workflowPassed": 18,
+  "assetValidatorsPassed": 20,
+  "approvedV02InputsLocked": 127,
+  "browserUniqueCasesPassed": 4,
+  "browserReports": [
+    "two-client.json",
+    "six-client.json",
+    "dungeon-shouts.json",
+    "latest-feedback.json"
+  ],
+  "browserRetries": [
+    "Original four-case run passed three cases; latest feedback case accessed clonePhase before the client received its Bac snapshot. Added acknowledged combat phase and optional polling; focused latest-feedback retry passed. Original latest-feedback-failure.json retained."
+  ],
+  "originalFinalFailure": "../sessions/wave-banter-final/check-workflow/final-timings.json",
+  "otherStageRetries": [
+    "Tether fixture now arranges and asserts B is a real victim before disconnecting B. Banter uses independent world-seeded RNG with no combat RNG consumption. Full final-state 724-test retry passed.",
+    "Last asset validator failed only printing Vietnamese under Windows cp1252; python -X utf8 passed all assertions and print. First19 validators passed unchanged."
+  ],
+  "latestBacOutcomes": [
+    {
+      "boss": "bac_cai",
+      "mode": "hit",
+      "elapsed": 763,
+      "peerHpBefore": 100000,
+      "peerHpAfter": 99922
+    },
+    {
+      "boss": "bac_cai",
+      "mode": "timeout",
+      "elapsed": 5063,
+      "peerHpBefore": 99922,
+      "peerHpAfter": 99844
+    }
+  ],
+  "balance": {
+    "runs": 768,
+    "seconds": 30.8715884,
+    "allStatuesProtected": true,
+    "items": 0,
+    "scope": "20-second bot exposure probes, not final balance approval"
+  },
+  "playableUrl": "http://127.0.0.1:5515",
+  "serverUrl": "http://127.0.0.1:2915",
+  "playableLaunch": "playable-launch.json",
+  "playtestMode": "DEV god mode, run x3, valid boss hit 5%; create a new room",
+  "recordingsCreated": false,
+  "newArtGenerated": false,
+  "visualReview": "Nam De banter and skill shout inspected in live-banter-nam_de.png at normal gameplay zoom, separate readable lanes. Existing native VFX retained and observed in two-client/six-peer phases. Text follows boss feet/camera; no global offscreen chat banner."
+}

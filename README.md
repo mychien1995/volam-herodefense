@@ -96,3 +96,19 @@ The existing game screenshot `assets/references/current_game_2026_10_29_placehol
 Restart the server and refresh clients for protocol7. Run `.\start-game.cmd` from the repository root; no development skill flag is needed. Choose Cái Bang, open the diamond/point badge beside the hotbar (or Settings → Võ Học), choose Q/W/E/R skills, apply, then spend the initial point to learn a rank. A is independent. Earn EXP in arena/dungeons, upgrade at rank gates, and return to the arena for free changes/reset. Outside arena the menu is read-only.
 
 Rules, proposed tuning and actual174-test/16-browser results: [M3B implementation](docs/M3B_IMPLEMENTATION.md). Screenshots and state/frame evidence: [M3B evidence](docs/evidence/m3b/README.md). Reproduce focused browsers with `pnpm test:e2e:progression`, deterministic legal-build probes with `pnpm test:balance:m3b`, or the complete final scope with `pnpm check:final --config playwright.progression.config.ts`. M3C has not started.
+## Test four wave bosses locally
+
+PowerShell, before starting the game:
+
+```powershell
+$env:VOLAM_DEV_WAVE_BOSSES = '1'
+.\start-game.cmd
+```
+
+CMD equivalent: `set "VOLAM_DEV_WAVE_BOSSES=1" && start-game.cmd`.
+
+Restart the local server and create a **new room**. After school confirmation, Đông Tà enters after a 3-second rest; actual boss kills advance Đông Tà → Tây Độc → Nam Đế → Bắc Cái, with a 5-second rest plus each encounter's retained entrance animation. The chain stops after Bắc Cái. Ordinary invasion creeps are suspended in this mode.
+
+Players take no HP damage and run at 3× speed. Each valid damage hit from a player removes 5% of a main wave boss's max HP, ignoring defense/crit. Invulnerable phases still reject hits; multi-hit/DOT skills count each damage hit, and boss healing/CC/minigames remain active. The existing in-viewport defense HUD identifies the DEV mode. No client command can enable it, and `NODE_ENV=production` ignores the flag.
+
+To return to normal, stop the server, run `Remove-Item Env:VOLAM_DEV_WAVE_BOSSES` in PowerShell (or `set VOLAM_DEV_WAVE_BOSSES=` in CMD), restart and create a new room. Normal 180-second waves and canonical boss gating remain unchanged without the flag. See `docs/WAVE_BOSS_TEST_MODE.md`.

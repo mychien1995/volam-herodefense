@@ -1,3 +1,5 @@
+import { BossSkillAnnouncements } from './boss-skill-announcements.js';
+import { WaveArenaPresentation } from './wave-boss-feedback-art.js';
 import { TayDocRenderer, isTayDocActor } from './tay-doc-art.js';
 import { NamDePresentation } from './nam-de-presentation.js';
 import { KimLuanRenderer, isKimActor } from './kim-luan-art.js';
@@ -66,6 +68,8 @@ export class ArenaScene extends Phaser.Scene {
   private vfx: SkillVfx | undefined;
   private kim: KimLuanRenderer | undefined;
   private dong: DongTaRenderer | undefined;
+  private waveArena: WaveArenaPresentation | undefined;
+  private bossShouts: BossSkillAnnouncements | undefined;
   private tayDoc: TayDocRenderer | undefined;
   private bacCai: BacCaiRenderer | undefined;
   private hongLiet: HongLietRenderer | undefined;
@@ -109,6 +113,9 @@ export class ArenaScene extends Phaser.Scene {
     registerArt(this);
     this.chu = new ChuPresentation(this);
     this.namDe = new NamDePresentation(this);
+    this.waveArena = new WaveArenaPresentation(this);
+    this.bossShouts = new BossSkillAnnouncements(this);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN,()=>this.bossShouts?.clear());
     this.hongLiet = new HongLietRenderer(this);
     this.tayDoc = new TayDocRenderer(this);
     this.kim = new KimLuanRenderer(this);
@@ -182,6 +189,7 @@ export class ArenaScene extends Phaser.Scene {
   }
   private drawZone(zoneId: string): void {
     this.bacCai?.clear();
+    this.waveArena?.clear();
     this.hongLiet?.clear();
     this.tayDoc?.clear();
     this.kim?.clear();
@@ -536,6 +544,8 @@ export class ArenaScene extends Phaser.Scene {
     this.kim?.sync(state, this.zoneId);
     this.dong?.sync(state, this.zoneId);
     this.bacCai?.sync(state, this.zoneId);
+    this.waveArena?.sync(state, this.zoneId);
+    this.bossShouts?.sync(state,this.zoneId);
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
     this.coMoEffects?.sync(state, this.zoneId);
     this.creepEffects?.sync(
@@ -595,6 +605,7 @@ export class ArenaScene extends Phaser.Scene {
     if (!this.ready || event.id <= this.lastEvent) return;
     this.lastEvent = event.id;
     if (event.zoneId && event.zoneId !== this.zoneId) return;
+    if (this.bossShouts?.event(event)) return;
     if (this.zoneId === 'arena') this.dong?.event(event);
     if (isCoMoZone(this.zoneId)) this.coMoEffects?.event(event);
     if (event.kind === 'attack')
@@ -702,6 +713,8 @@ export class ArenaScene extends Phaser.Scene {
     const unit = this.cameras.main.getWorldPoint(1, 0);
     return {
       namDe: this.namDe?.inspect(),
+      bossShouts: this.bossShouts?.inspect(),
+      waveArena: this.waveArena?.inspect(),
       chu: this.chu?.inspect(),
       ready: this.ready,
       sceneTime: this.time.now,

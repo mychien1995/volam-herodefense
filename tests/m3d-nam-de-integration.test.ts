@@ -56,6 +56,7 @@ function setup(chapters = true) {
   const kill = (id: string) => {
     const b = w.creeps.get(id)!;
     expect(b).toBeDefined();
+    for (let i = 0; i < 900 && b.invulnerable; i++) step();
     b.hp = 1;
     h.x = b.x - 35;
     h.y = b.y;
@@ -120,7 +121,7 @@ describe('M3D Dong Ta -> Tay Doc -> Nam De reconciliation', () => {
     step();
     expect(m.invasion!.wave).toBe(16);
     expect(m.invasion!.nextWaveTick - m.arenaTick).toBe(5400);
-    expect(w.statue!.invulnerable).toBe(false);
+    expect(w.statue!.invulnerable).toBe(true);
     expect(w.statue!.hp).toBe(1000000);
     kill(NAM_DE_ID);
     step(20);
@@ -128,32 +129,25 @@ describe('M3D Dong Ta -> Tay Doc -> Nam De reconciliation', () => {
     expect(w.namDe!.spawnCount).toBe(1);
     expect(h.bossItems ?? []).toHaveLength(0);
   });
-  it('uses the arena clock for Nam De rest across the existing all-in-boss pause', () => {
+  it('continues Nam De rest and recalls all dungeon occupants when the wave boss enters', () => {
     const { m, w, h, step } = setup(false);
     m.invasion!.wave = 15;
     step();
     expect(w.namDe!.phase).toBe('rest');
-    const at = w.namDe!.spawnAt,
-      clock = w.tick;
+    const clock = w.tick;
     expect(m.enter(h.id, 'shared', 'chu_ba_thong')).toBeUndefined();
-    expect(m.arenaPaused).toBe(true);
+    expect(m.arenaPaused).toBe(false);
     step(40);
-    expect(w.tick).toBe(clock);
-    expect(w.namDe!.spawnCount).toBe(0);
-    expect(w.namDe!.spawnAt).toBe(at);
-    const z = m.zoneOf(h.id)!;
-    h.x = z.dungeon!.exit.x;
-    h.y = z.dungeon!.exit.y;
-    expect(m.exit(h.id)).toBeUndefined();
-    step(2);
-    expect(w.namDe!.spawnCount).toBe(0);
-    step();
+    expect(w.tick).toBeGreaterThan(clock);
     expect(w.namDe!.spawnCount).toBe(1);
+    expect(m.zoneOf(h.id)?.id).toBe('arena');
+    expect(w.statue!.invulnerable).toBe(true);
   });
   it('cleans pending QTE through current transient disconnect/reconnect without stale input', () => {
     const { m, w, h, step } = setup(false);
     w.namDe!.phase = 'rest';
     spawnNamDeIfReady(w, m.arena.config, 0);
+    m.step(); // Shared entry policy recalls before arranging the cast target.
     const b = w.creeps.get(NAM_DE_ID)!;
     b.x = 800;
     b.y = 790;
@@ -174,7 +168,7 @@ describe('M3D Dong Ta -> Tay Doc -> Nam De reconciliation', () => {
     expect(answerNamDe(w, m.arena.config, h, q.id, 0, q.keys[0]!)).toBe(false);
   });
   it('protocol25 retains dash/move and owner-key commands without trusting success/HP', () => {
-    expect(PROTOCOL_VERSION).toBe(25);
+    expect(PROTOCOL_VERSION).toBe(29);
     const s = new LobbyState();
     expect(s.tayDoc.size).toBe(0);
     expect(s.namDeControls.size).toBe(0);
@@ -186,8 +180,11 @@ describe('M3D Dong Ta -> Tay Doc -> Nam De reconciliation', () => {
       { kind: 'nam-de-key', castId: 'nam_de_1', index: 0, key: 'up' },
     ])
       expect(
-        inputSchema.safeParse({ protocolVersion: PROTOCOL_VERSION, sequence: 1, ...cmd })
-          .success,
+        inputSchema.safeParse({
+          protocolVersion: PROTOCOL_VERSION,
+          sequence: 1,
+          ...cmd,
+        }).success,
       ).toBe(true);
     expect(
       inputSchema.safeParse({

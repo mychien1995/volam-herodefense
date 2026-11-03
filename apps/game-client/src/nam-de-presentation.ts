@@ -1,3 +1,7 @@
+import {
+  WaveBossFeedbackArt,
+  WaveBossHealth,
+} from './wave-boss-feedback-art.js';
 import Phaser from 'phaser';
 import type { LobbyState } from '@volam/game-protocol';
 import type { NamDeView } from '@volam/game-core';
@@ -32,10 +36,17 @@ export class NamDePresentation {
   private active = new Set<string>();
   private observedRays = new Map<string, unknown>();
   private pose = { key: '', at: 0 };
-  constructor(private scene: Phaser.Scene) {}
+  private feedback: WaveBossFeedbackArt;
+  private health: WaveBossHealth;
+  constructor(private scene: Phaser.Scene) {
+    this.feedback = new WaveBossFeedbackArt(scene);
+    this.health = new WaveBossHealth(scene);
+  }
   clear() {
     for (const s of this.sprites.values()) s.destroy();
     this.sprites.clear();
+    this.feedback.clear();
+    this.health.clear();
   }
   private draw(
     id: string,
@@ -87,50 +98,33 @@ export class NamDePresentation {
     this.observed.set(key, seen);
     return sprite;
   }
-  private ring(id: string, x: number, y: number, radius: number, age: number) {
-    // Measured alpha bounds of the retained 192x128 cels. Transparent canvas
-    // padding must not shrink the visual world radius (especially short warnings).
-    const bounds = [
-      [58, 45, 76, 37],
-      [11, 39, 170, 50],
-      [6, 33, 180, 62],
-      [11, 29, 169, 69],
-    ];
-    // The retained later cels contain cropped neighbour arcs. Reuse the intact
-    // first cel as one expanding pulse; keep the source rasters/atlas unchanged.
-    const sprite = this.draw(id, 'feedback01', 'plain_ring', x, y, 0).setAlpha(
-      1 - Math.max(0, age - 0.3) * 5,
-    );
-    const bound = bounds[Number(String(sprite.frame.name).split('_').at(-1))]!;
-    return sprite
-      .setOrigin(
-        (bound[0]! + bound[2]! / 2) / 192,
-        (bound[1]! + bound[3]! / 2) / 128,
-      )
-      .setDisplaySize(
-        (radius * 2 * 192) / bound[2]!,
-        (radius * 2 * 128) / bound[3]!,
-      )
-      .setDepth(y + 0.2);
-  }
   sync(state: LobbyState | undefined, zone: string) {
     this.active.clear();
+    this.feedback.begin();
+    this.health.begin();
     const v =
       zone === 'arena' && state?.defense.namDe
         ? (JSON.parse(state.defense.namDe) as NamDeView)
         : null;
     const b = state?.creeps.get('boss_nam_de'),
       tick = state?.tick ?? 0,
-      c = v?.cast;
-    if (v && b && zone === 'arena') {
+      c = v?.cast ?? v?.smallCast;
+    if (
+      v &&
+      b &&
+      zone === 'arena' &&
+      !(b.hp <= 0 && state?.bacCai.get('arena')?.snapshot)
+    ) {
       let action =
-        b.pose === 'walk'
-          ? 'walk'
-          : b.pose === 'death'
-            ? 'death'
-            : b.pose === 'hurt'
-              ? 'hurt'
-              : 'idle';
+        b.hp <= 0
+          ? 'death'
+          : b.pose === 'walk'
+            ? 'walk'
+            : b.pose === 'death'
+              ? 'death'
+              : b.pose === 'hurt'
+                ? 'hurt'
+                : 'idle';
       if (c && b.hp > 0) {
         action =
           c.ability === 'nam_de_palm'
@@ -140,11 +134,15 @@ export class NamDePresentation {
               : c.ability === 'dai_ly_phong_huyet'
                 ? 'pressure_point'
                 : c.ability === 'phat_quang_pho_chieu'
-                  ? 'healing_meditation'
+                  ? tick < c.releaseAt
+                    ? 'palm_attack'
+                    : 'idle'
                   : c.ability === 'nhat_duong_quy_tong'
-                    ? tick < c.releaseAt
-                      ? 'ultimate_charge'
-                      : 'ultimate_release'
+                    ? tick < c.startedAt + 9
+                      ? 'walk'
+                      : tick < c.releaseAt
+                        ? 'ultimate_charge'
+                        : 'ultimate_release'
                     : c.ability === 'nam_de_dash'
                       ? 'walk'
                       : c.ability === 'lien_hoan_nhat_duong_chi'
@@ -152,11 +150,12 @@ export class NamDePresentation {
                           ? 'finger_charge'
                           : 'rapid_fingers'
                         : c.ability === 'nam_de_small_finger'
-                          ? 'finger_release'
+                          ? 'rapid_fingers'
                           : tick < c.releaseAt
                             ? 'finger_charge'
                             : 'finger_release';
       }
+      this.health.draw('nam_de', 'Nam Đế', b.x, b.y - 65, b.hp, b.maxHp);
       const pose = action + '_' + facing(b.fx, b.fy),
         token = (c?.id ?? '') + ':' + action;
       if (token !== this.pose.key) this.pose = { key: token, at: tick };
@@ -165,7 +164,16 @@ export class NamDePresentation {
           ? c.releaseAt
           : c.startedAt
         : this.pose.at;
-      this.draw('boss', 'boss', pose, b.x, b.y, (tick - at) / 30).setDepth(b.y);
+      this.draw('boss', 'boss', pose, b.x, b.y, (tick - at) / 30)
+        .setDepth(b.y)
+        .setAlpha(
+          b.hp <= 0
+            ? Math.max(
+                0,
+                1 - Math.max(0, (tick - v.defeatedAt) / 30 - 0.7) / 0.7,
+              )
+            : 1,
+        );
       if (
         c &&
         tick < c.releaseAt &&
@@ -192,17 +200,19 @@ export class NamDePresentation {
           0.6,
           Math.atan2(b.fy, b.fx),
         );
-      if (c?.ability === 'nhat_duong_quy_tong' && tick < c.releaseAt)
-        this.draw(
-          'up-ray',
-          'rework',
-          'sky_ray',
-          b.x,
-          b.y - 45,
-          (tick - c.startedAt) / 30,
-          0.43,
-          1.65,
-        ).setOrigin(0.5, 0.94);
+      if (c?.ability === 'phat_quang_pho_chieu' && tick >= c.releaseAt) {
+        const target = state!.players.get(c.targetId);
+        if (target && target.hp > 0 && target.zoneId === zone)
+          this.feedback.cel(
+            'spotlight:' + c.id,
+            'spotlight',
+            'loop',
+            target.x,
+            target.y,
+            (tick - c.releaseAt) / 30,
+            { alpha: 0.7, depth: target.y - 0.1 },
+          );
+      }
       for (const target of v.targets) {
         const h = state!.players.get(target.id);
         if (!h || h.zoneId !== 'arena') continue;
@@ -247,73 +257,35 @@ export class NamDePresentation {
             if (this.observedRays.size > 256)
               this.observedRays.delete(this.observedRays.keys().next().value!);
           }
-          const sprite = this.draw(
+          this.feedback.ray(
             id,
-            warning ? 'feedback02' : 'feedback01',
-            warning ? 'line_warning' : 'thin_beam',
             e.x,
             e.y,
-            warning
-              ? Math.max(0, (tick - e.startedAt) / 30)
-              : (Math.max(
-                  0,
-                  (tick - e.activeAt) / Math.max(1, e.expiresAt - e.activeAt),
-                ) *
-                  bundles['feedback01']!.clips.find(
-                    (c) => c.name === 'thin_beam',
-                  )!.durationMs *
-                  4) /
-                  1000,
-            1,
-            1,
             Math.atan2(e.fy, e.fx),
-            warning ? 0.75 : 1,
+            e.length,
+            warning ? Math.max(0, (tick - e.startedAt) / 30) : age,
+            warning,
           );
-          sprite
-            .setOrigin(0, 0.5)
-            .setDisplaySize(e.length, e.radius * 2)
-            .setDepth(e.y + 0.4);
         } else if (e.kind === 'finger')
-          this.draw(
-            id,
-            'feedback01',
-            'thin_beam',
-            e.x,
-            e.y,
-            age,
-            1,
-            1,
-            Math.atan2(e.fy, e.fx),
-          ).setDisplaySize(80, e.radius * 2);
+          this.feedback.cel(id, 'gold_bolt', 'loop', e.x, e.y, age, {
+            angle: Math.atan2(e.fy, e.fx),
+          });
         else if (e.kind === 'palm')
-          this.draw(
-            id,
-            'palm',
-            'palm_shockwave',
-            e.x,
-            e.y,
-            age,
-            0.7,
-            0.7,
-            Math.atan2(e.fy, e.fx),
-          ).setDisplaySize(90, e.radius * 2);
+          this.feedback.cel(id, 'nd_palm', 'palm_trail', e.x, e.y, age, {
+            sx: 1.25,
+            sy: 0.85,
+            angle: Math.atan2(e.fy, e.fx),
+          });
         else if (e.kind === 'ring') {
-          const r =
-            e.radius *
-            Math.min(
-              1,
-              (tick - e.activeAt + 1) /
-                Math.max(1, (e.expiresAt - e.activeAt) * 0.8),
-            );
-          this.ring(
-            id,
-            e.x,
-            e.y,
-            r,
-            (age * 0.4) / ((e.expiresAt - e.activeAt) / 30),
-          );
+          this.feedback.ring(id, e.x, e.y, age);
         } else if (e.kind === 'sky') {
-          if (warning) this.ring(id, e.x, e.y, e.radius, 0);
+          if (warning)
+            this.feedback.cel(id, 'nam_de_ring', 'pulse', e.x, e.y, 0, {
+              sx: 0.14,
+              sy: 0.14,
+              alpha: 0.65,
+              depth: 10,
+            });
           else
             this.draw(
               id,
@@ -329,6 +301,8 @@ export class NamDePresentation {
           this.draw(id, 'rework', 'pressure_contact', e.x, e.y - 27, age, 0.8);
       });
     }
+    this.feedback.end();
+    this.health.end();
     for (const [id, sprite] of this.sprites)
       if (!this.active.has(id)) {
         sprite.destroy();
@@ -337,6 +311,7 @@ export class NamDePresentation {
   }
   inspect() {
     return {
+      feedback: this.feedback.inspect(),
       rays: Object.fromEntries(this.observedRays),
       sprites: [...this.sprites].map(([id, s]) => ({
         id,

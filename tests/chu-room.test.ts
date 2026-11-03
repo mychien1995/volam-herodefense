@@ -5,7 +5,10 @@ import { createGameServer } from '../apps/game-server/src/app.config.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 let server: ColyseusTestServer;
-const client = new Client('http://127.0.0.1:2798');
+const port = Number(process.env['VOLAM_QA_CHU_ROOM_PORT'] ?? 2798);
+if (!Number.isInteger(port) || port < 1 || port > 65535)
+  throw Error('Invalid isolated Chu room test port');
+const client = new Client(`http://127.0.0.1:${port}`);
 const seq = new Map<string, number>();
 const next = (r: Room<MatchRoom>) => {
   const n = (seq.get(r.sessionId) ?? 0) + 1;
@@ -14,7 +17,7 @@ const next = (r: Room<MatchRoom>) => {
 };
 beforeAll(async () => {
   const game = createGameServer();
-  await game.listen(2798);
+  await game.listen(port);
   server = new ColyseusTestServer(game);
 });
 afterEach(async () => {

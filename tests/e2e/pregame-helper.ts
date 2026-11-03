@@ -43,6 +43,7 @@ export async function startTogether(
   pages: Page[],
   ids: string[] = [],
   timeout = 15000,
+  alreadyStarted = false,
 ) {
   for (const page of pages) {
     await page.bringToFront();
@@ -52,7 +53,10 @@ export async function startTogether(
       })
       .toBeGreaterThanOrEqual(pages.length);
   }
-  await pages[0]!.getByRole('button', { name: 'Bắt đầu', exact: true }).click();
+  if (!alreadyStarted)
+    await pages[0]!
+      .getByRole('button', { name: 'Bắt đầu', exact: true })
+      .click();
   for (let i = 0; i < pages.length; i++) {
     const page = pages[i]!;
     await page.bringToFront();

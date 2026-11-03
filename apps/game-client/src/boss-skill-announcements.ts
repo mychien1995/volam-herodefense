@@ -1,0 +1,118 @@
+import Phaser from 'phaser';
+import { bossSkillNames, bossBanterLines } from '@volam/game-data';
+import type { CombatEvent, BacCaiView } from '@volam/game-core';
+import type { LobbyState } from '@volam/game-protocol';
+
+/** One server-authored announcement per special cast, shared by arena and dungeons. */
+export class BossSkillAnnouncements {
+  private labels = new Map<
+    string,
+    {
+      text: Phaser.GameObjects.Text;
+      tick: number;
+      name: string;
+      at: number;
+      anchor: { x: number; y: number };
+      sourceId: string;
+      banter: boolean;
+    }
+  >();
+  private observed: Array<{
+    sourceId: string;
+    abilityId: string;
+    name: string;
+    tick: number;
+  }> = [];
+  constructor(private scene: Phaser.Scene) {}
+  event(event: CombatEvent): boolean {
+    const banter = event.stage === 'boss_banter';
+    if (!banter && event.stage !== 'boss_shout') return false;
+    const name = (banter ? bossBanterLines : bossSkillNames)[event.abilityId];
+    if (!name) return true;
+    const key = event.sourceId + (banter ? ':banter' : '');
+    const old = this.labels.get(key);
+    const text =
+      old?.text ??
+      this.scene.add
+        .text(0, 0, '', {
+          fontFamily: 'Segoe UI, sans-serif',
+          fontSize: '12px',
+          color: '#fff1bc',
+          stroke: '#151b14',
+          strokeThickness: 3,
+          align: 'center',
+          wordWrap: { width: 300, useAdvancedWrap: true },
+        })
+        .setOrigin(0.5, 1)
+        .setName((banter ? 'boss-banter:' : 'boss-shout:') + event.sourceId);
+    text.setText(name);
+    this.labels.set(key, {
+      sourceId: event.sourceId,
+      banter,
+      text,
+      tick: event.tick ?? 0,
+      name,
+      at: this.scene.time.now,
+      anchor: { x: event.x, y: event.y },
+    });
+    this.observed.push({
+      sourceId: event.sourceId,
+      abilityId: event.abilityId,
+      name,
+      tick: event.tick ?? 0,
+    });
+    if (this.observed.length > 128) this.observed.shift();
+    return true;
+  }
+  sync(state: LobbyState | undefined, zone: string) {
+    const raw = zone === 'arena' ? state?.bacCai.get('arena')?.snapshot : '';
+    const bc = raw ? (JSON.parse(raw) as BacCaiView) : null;
+    for (const [key, v] of this.labels) {
+      const id = v.sourceId;
+      const lifetime = v.banter ? 4 : 1.25;
+      const actor =
+          id === 'bac_cai' &&
+          bc &&
+          bc.phase !== 'cleared' &&
+          bc.phase !== 'defeated'
+            ? { ...(bc.boss ?? v.anchor), zoneId: 'arena', hp: bc.hp }
+            : state?.creeps.get(id),
+        age = (this.scene.time.now - v.at) / 1000;
+      if (!actor || actor.zoneId !== zone || actor.hp <= 0 || age >= lifetime) {
+        v.text.destroy();
+        this.labels.delete(key);
+        continue;
+      }
+      v.text
+        .setPosition(
+          Math.round(actor.x),
+          Math.round(
+            actor.y -
+              (v.banter ? 116 : 85) -
+              10 * Math.min(1, Math.max(0, age / 0.35)),
+          ),
+        )
+        .setDepth(actor.y + 220)
+        .setAlpha(
+          1 - Math.max(0, Math.min(1, (age - (lifetime - 0.35)) / 0.35)),
+        );
+    }
+  }
+  clear() {
+    for (const v of this.labels.values()) v.text.destroy();
+    this.labels.clear();
+  }
+  inspect() {
+    return {
+      active: [...this.labels].map(([, v]) => ({
+        sourceId: v.sourceId,
+        banter: v.banter,
+        name: v.name,
+        x: v.text.x,
+        y: v.text.y,
+        alpha: v.text.alpha,
+      })),
+      observed: this.observed,
+    };
+  }
+}

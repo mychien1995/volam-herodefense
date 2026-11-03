@@ -1,4 +1,6 @@
+import type { BossBanterClock, BossBanterDefinition } from './boss-banter.js';
 import type { ChuEncounter } from './chu-types.js';
+import type { WaveBossTestRuntime } from './wave-boss-test.js';
 import type { EllipseBounds } from './dong-ta-types.js';
 import type { NamDeKey, NamDeRuntime } from './nam-de-types.js';
 import type { BacCaiEncounter } from './bac-cai.js';
@@ -106,6 +108,7 @@ export type StatusKind =
   | 'guard_counter'
   | 'dash'
   | 'dash_guard'
+  | 'dash_lock'
   | 'channel';
 export interface StatusSpec {
   kind: StatusKind;
@@ -238,8 +241,17 @@ export interface Ability {
     | SupportEffect;
 }
 export interface SimulationConfig {
+  bossBanter?: BossBanterDefinition | undefined;
   /** Temporary server-owned arena confinement, independent of status immunity. */
   heroBounds?: EllipseBounds | undefined;
+  waveArena?:
+    | {
+        center: Point;
+        bounds: EllipseBounds;
+        retryTicks: number;
+        openingTicks: number;
+      }
+    | undefined;
 
   mobility?:
     | {
@@ -474,6 +486,10 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  /** Cosmetic randomness must never advance the authoritative combat RNG. */
+  banterSeed?: number;
+  bossBanter?: Map<string, BossBanterClock>;
+  waveBossTest?: WaveBossTestRuntime;
   namDe?: NamDeRuntime;
   bacCai?: Pick<BacCaiEncounter, keyof BacCaiEncounter>;
   kim?: { rewards: KimLootContext };

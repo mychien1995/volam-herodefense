@@ -1,3 +1,4 @@
+import { announceBossSkill } from './boss-skill-announcement.js';
 import { addCreep } from './simulation.js';
 import { emit, hurt } from './combat.js';
 import {
@@ -31,6 +32,8 @@ export function validateNamDe(d: NamDeDefinition, c: SimulationConfig): void {
     'restTicks',
     'actionRestTicks',
     'openingTicks',
+    'auraDurationTicks',
+    'dashTicks',
     'beamWarningTicks',
     'beamActiveTicks',
     'barrageWarningTicks',
@@ -45,7 +48,12 @@ export function validateNamDe(d: NamDeDefinition, c: SimulationConfig): void {
     'confusionTicks',
     'skyCount',
     'skyWarningTicks',
-    'skySpacingTicks',
+    'smallBurstMax',
+    'smallWindupTicks',
+    'smallRecoveryTicks',
+    'smallCooldownTicks',
+    'skyDashTicks',
+    'corpseTicks',
   ] as const)
     if (!Number.isInteger(d[k]) || d[k] < 1)
       throw Error('Invalid Nam Đế ticks/count: ' + k);
@@ -54,7 +62,7 @@ export function validateNamDe(d: NamDeDefinition, c: SimulationConfig): void {
     d.qteLength !== 10 ||
     d.barrageDirections !== 4 ||
     d.barrageVolleys !== 16 ||
-    d.skyCount !== 32 ||
+    d.skyCount !== 96 ||
     !d.rotation.length ||
     d.rotation.some((id) => !namDeAbilities.includes(id))
   )
@@ -64,8 +72,12 @@ export function validateNamDe(d: NamDeDefinition, c: SimulationConfig): void {
     d.backlashFraction !== 0.7 ||
     d.healFraction !== 0.1 ||
     d.dashChance > 1 ||
+    d.dashAuraChance > 1 ||
     d.controlResistance >= 1 ||
     d.stats.hp <= 0 ||
+    d.smallBurstMax !== 5 ||
+    d.smallBurstIntervalTicks <= 0 ||
+    d.skySpacingTicks <= 0 ||
     d.rayRange <= 0 ||
     d.rayRadius <= 0
   )
@@ -109,6 +121,7 @@ export function initializeNamDe(
     serial: 0,
     rotationIndex: 0,
     nextActionAt: 0,
+    nextSmallAt: world.tick + definition.openingTicks,
     effects: new Map(),
     controls: new Map(),
   };
@@ -134,11 +147,19 @@ export function namDeView(world: World): NamDeView | null {
     phase: s.phase,
     spawnAt: s.spawnAt,
     spawnCount: s.spawnCount,
+    defeatedAt: s.defeatedAt ?? 0,
     cast: s.cast
       ? {
           ...s.cast,
           origin: { ...s.cast.origin },
           target: { ...s.cast.target },
+        }
+      : null,
+    smallCast: s.smallCast
+      ? {
+          ...s.smallCast,
+          origin: { ...s.smallCast.origin },
+          target: { ...s.smallCast.target },
         }
       : null,
     nextActionAt: s.nextActionAt,
@@ -164,6 +185,8 @@ export function clearNamDe(world: World): void {
   if (!s) return;
   s.effects.clear();
   delete s.cast;
+  delete s.smallCast;
+  s.nextSmallAt = world.tick + s.definition.openingTicks;
   for (const id of [...s.controls.keys()]) clearNamDeHero(world, id);
 }
 /** Empty rooms may stop ticking; do not defer cast cleanup to the next tick. */
@@ -444,6 +467,7 @@ export function beginNamDeCast(
   c: SimulationConfig,
   ability: NamDeAbility,
   targetId?: string,
+  instant = false,
 ): boolean {
   const s = w.namDe,
     b = boss(w);
@@ -457,7 +481,7 @@ export function beginNamDeCast(
   if (!h) return false;
   const d = s.definition,
     aim = direction(h.x - b.x, h.y - b.y);
-  s.phase = ability;
+  if (ability === 'nam_de_small_finger' && s.smallCast) return false;
   const cast: NamDeCast = {
     id: `nam_de_${++s.serial}`,
     ability,
@@ -473,7 +497,24 @@ export function beginNamDeCast(
     nextVolley: 0,
     released: false,
   };
+  if (ability === 'nam_de_small_finger') {
+    cast.burstCount = d.smallBurstMax;
+    cast.releaseAt = w.tick + (instant ? 0 : d.smallWindupTicks);
+    cast.until =
+      cast.releaseAt +
+      Math.round((cast.burstCount - 1) * d.smallBurstIntervalTicks) +
+      d.smallRecoveryTicks;
+    s.smallCast = cast;
+    s.nextSmallAt = w.tick + d.smallCooldownTicks;
+    if (!s.cast)
+      s.nextActionAt = Math.max(s.nextActionAt, w.tick + d.actionRestTicks);
+    announceBossSkill(w, NAM_DE_ID, ability);
+    cue(w, ability, 'warning', h.id, b);
+    return true;
+  }
+  s.phase = ability;
   s.cast = cast;
+  announceBossSkill(w, NAM_DE_ID, ability);
   b.fx = aim.x;
   b.fy = aim.y;
   b.pose = 'cast';
@@ -496,7 +537,8 @@ export function beginNamDeCast(
     cast.rotation = w.random() * Math.PI * 2;
   }
   if (ability === 'dai_ly_phong_huyet' || ability === 'nam_de_dash') {
-    cast.releaseAt = w.tick + d.pressureDashTicks;
+    cast.releaseAt =
+      w.tick + (ability === 'nam_de_dash' ? d.dashTicks : d.pressureDashTicks);
     cast.until = cast.releaseAt + Math.ceil(0.5 * c.tickRate);
     if (ability === 'nam_de_dash') {
       const v = direction(h.fx, h.fy);
@@ -516,7 +558,7 @@ export function beginNamDeCast(
   }
   if (ability === 'phat_quang_pho_chieu') {
     cast.releaseAt = w.tick + Math.ceil(0.4 * c.tickRate);
-    cast.until = cast.releaseAt + Math.ceil(0.4 * c.tickRate);
+    cast.until = cast.releaseAt + Math.ceil(2.3 * c.tickRate);
   }
   if (ability === 'nhat_duong_quy_tong') {
     cast.releaseAt = w.tick + d.skyStartupTicks;
@@ -525,22 +567,13 @@ export function beginNamDeCast(
       d.skyCount * d.skySpacingTicks +
       Math.ceil(0.7 * c.tickRate);
     for (let i = 0; i < d.skyCount; i++) {
-      // A region anchored to the current player cohort, then fixed once warned.
-      const p = choices[i % choices.length]!,
-        r = d.auraRadius * 1.5,
-        a = w.random() * Math.PI * 2,
-        dist = w.random() * r;
+      const a = w.random() * Math.PI * 2,
+        r = Math.sqrt(w.random()) * 0.88;
       const point = {
-        x: Math.max(
-          d.skyRadius,
-          Math.min(c.width - d.skyRadius, p.x + Math.cos(a) * dist),
-        ),
-        y: Math.max(
-          d.skyRadius,
-          Math.min(c.height - d.skyRadius, p.y + Math.sin(a) * dist),
-        ),
+        x: d.arenaBounds.x + Math.cos(a) * r * (d.arenaBounds.radiusX - 28),
+        y: d.arenaBounds.y + Math.sin(a) * r * (d.arenaBounds.radiusY - 28),
       };
-      const activeAt = cast.releaseAt + i * d.skySpacingTicks;
+      const activeAt = cast.releaseAt + Math.round(i * d.skySpacingTicks);
       const e = addEffect(
         w,
         'sky',
@@ -570,6 +603,20 @@ function release(w: World, c: SimulationConfig, cast: NamDeCast): void {
   const h = w.heroes.get(cast.targetId);
   cast.released = true;
   cue(w, cast.ability, 'release', cast.targetId, b);
+  if (cast.ability === 'nam_de_dash') {
+    delete s.cast;
+    s.phase = 'idle';
+    b.castAbilityId = '';
+    s.nextActionAt = w.tick + d.actionRestTicks;
+    beginNamDeCast(
+      w,
+      c,
+      w.random() < d.dashAuraChance ? 'nam_de_aura' : 'nam_de_small_finger',
+      h && h.hp > 0 ? h.id : undefined,
+      true,
+    );
+    return;
+  }
   if (cast.ability === 'nam_de_palm')
     addEffect(
       w,
@@ -595,37 +642,9 @@ function release(w: World, c: SimulationConfig, cast: NamDeCast): void {
       0,
       d.auraRadius,
       w.tick,
-      Math.ceil(1.4 * c.tickRate),
+      d.auraDurationTicks,
       d.damage.aura,
     );
-  if (cast.ability === 'nam_de_small_finger') {
-    const far = alive(w).sort(
-      (a, z) => distance(z, b) - distance(a, b) || a.id.localeCompare(z.id),
-    )[0];
-    if (far) {
-      const p = socket(b, direction(far.x - b.x, far.y - b.y)),
-        v = direction(far.x - p.x, far.y - p.y);
-      cast.targetId = far.id;
-      cast.fx = v.x;
-      cast.fy = v.y;
-      b.fx = v.x;
-      b.fy = v.y;
-      addEffect(
-        w,
-        'finger',
-        cast.ability,
-        p,
-        v,
-        d.rayRange,
-        d.smallRadius,
-        w.tick,
-        Math.ceil((d.rayRange / d.smallSpeed) * c.tickRate),
-        d.damage.small,
-        undefined,
-        d.smallSpeed,
-      );
-    }
-  }
   if (
     cast.ability === 'dai_ly_phong_huyet' &&
     h &&
@@ -712,6 +731,52 @@ function stepEffects(w: World, c: SimulationConfig): void {
     if (e.speed && e.traveled >= e.length) s.effects.delete(id);
   }
 }
+/** Independent five-shot channel; main movement, QTE and special cast clocks continue. */
+function stepSmallBurst(w: World, c: SimulationConfig): void {
+  const s = w.namDe!,
+    d = s.definition,
+    b = boss(w)!;
+  const cast = s.smallCast;
+  if (cast) {
+    while (
+      cast.nextVolley < (cast.burstCount ?? 1) &&
+      w.tick >=
+        cast.releaseAt + Math.round(cast.nextVolley * d.smallBurstIntervalTicks)
+    ) {
+      const target = w.heroes.get(cast.targetId);
+      if (!target || target.hp <= 0) {
+        cast.nextVolley = cast.burstCount ?? 1;
+        break;
+      }
+      const p = socket(b, direction(target.x - b.x, target.y - b.y)),
+        v = direction(target.x - p.x, target.y - p.y);
+      cast.fx = v.x;
+      cast.fy = v.y;
+      if (!s.cast) {
+        b.fx = v.x;
+        b.fy = v.y;
+      }
+      const effect = addEffect(
+        w,
+        'finger',
+        cast.ability,
+        p,
+        v,
+        d.rayRange,
+        d.smallRadius,
+        w.tick,
+        Math.ceil((d.rayRange / d.smallSpeed) * c.tickRate),
+        d.damage.small,
+        undefined,
+        d.smallSpeed,
+        cast.nextVolley++,
+      );
+      effect.castId = cast.id;
+      cast.released = true;
+    }
+  }
+  if (cast && w.tick >= cast.until) delete s.smallCast;
+}
 export function stepNamDe(w: World, c: SimulationConfig): void {
   const s = w.namDe;
   if (!s) return;
@@ -733,11 +798,16 @@ export function stepNamDe(w: World, c: SimulationConfig): void {
       delete v.qte;
     if (!v.qte && !v.confusion && v.stunUntil <= w.tick) s.controls.delete(id);
   }
-  if (s.phase === 'waiting' || s.phase === 'rest' || s.phase === 'defeated')
+  if (s.phase === 'defeated') {
+    if (s.defeatedAt !== undefined && w.tick >= s.defeatedAt + d.corpseTicks)
+      w.creeps.delete(NAM_DE_ID);
     return;
+  }
+  if (s.phase === 'waiting' || s.phase === 'rest') return;
   const b = boss(w);
   if (!b || b.hp <= 0) {
     s.phase = 'defeated';
+    s.defeatedAt ??= w.tick;
     clearNamDe(w);
     return;
   }
@@ -745,11 +815,22 @@ export function stepNamDe(w: World, c: SimulationConfig): void {
   if (!targets.length) {
     b.pose = 'idle';
     delete s.cast;
+    delete s.smallCast;
+    s.nextSmallAt = w.tick + d.openingTicks;
     s.effects.clear();
     if (s.phase !== 'enter') s.phase = 'idle';
     s.nextActionAt = w.tick + d.openingTicks;
     return;
   }
+  if (
+    s.phase !== 'enter' &&
+    !s.smallCast &&
+    w.tick >= s.nextSmallAt &&
+    !hasStatus(b, 'stun', w.tick) &&
+    !hasStatus(b, 'silence', w.tick) &&
+    !hasStatus(b, 'disarm', w.tick)
+  )
+    beginNamDeCast(w, c, 'nam_de_small_finger');
   if (s.phase === 'enter') {
     const v = direction(d.entrance.x - b.x, d.entrance.y - b.y);
     b.fx = v.x;
@@ -797,6 +878,15 @@ export function stepNamDe(w: World, c: SimulationConfig): void {
         );
       }
     }
+    if (
+      cast.ability === 'nhat_duong_quy_tong' &&
+      w.tick <= cast.startedAt + d.skyDashTicks
+    ) {
+      const p = Math.min(1, (w.tick - cast.startedAt) / d.skyDashTicks);
+      b.x = cast.origin.x + (d.arenaBounds.x - cast.origin.x) * p;
+      b.y = cast.origin.y + (d.arenaBounds.y - cast.origin.y) * p;
+      b.pose = 'walk';
+    }
     if (cast.ability === 'lien_hoan_nhat_duong_chi') {
       const turn =
         cast.rotation +
@@ -828,7 +918,12 @@ export function stepNamDe(w: World, c: SimulationConfig): void {
             i * d.barrageDirections + j,
           );
       }
-    } else if (!cast.released && w.tick >= cast.releaseAt) release(w, c, cast);
+    } else if (
+      cast.ability !== 'nam_de_small_finger' &&
+      !cast.released &&
+      w.tick >= cast.releaseAt
+    )
+      release(w, c, cast);
     if (w.tick >= cast.until) {
       delete s.cast;
       s.phase = 'idle';
@@ -876,6 +971,7 @@ export function stepNamDe(w: World, c: SimulationConfig): void {
       beginNamDeCast(w, c, ability, target.id);
     }
   } else if (!targets.length) b.pose = 'idle';
+  stepSmallBurst(w, c);
   stepEffects(w, c);
 }
 export function spawnNamDeIfReady(
@@ -905,6 +1001,7 @@ export function finishNamDeTick(w: World): void {
   if (!s) return;
   if (s.spawnCount && (boss(w)?.hp ?? 0) <= 0) {
     s.phase = 'defeated';
+    s.defeatedAt ??= w.tick;
     clearNamDe(w);
     return;
   }

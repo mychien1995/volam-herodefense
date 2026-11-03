@@ -93,7 +93,8 @@ describe('M3D Dong Ta -> Tay Doc integration', () => {
     expect(boss.y).toBe(616);
     expect(m.invasion!.definition.intervalTicks).toBe(5400);
     expect(w.statue!.hp).toBe(1000000);
-    expect(w.statue!.invulnerable).toBe(false);
+    expect(w.statue!.invulnerable).toBe(true);
+    expect(m.waveArenaView()?.bossId).toBe('tay_doc');
     expect(m.dongTa!.phase).toBe('cleared');
     expect(m.tayDocGate.spawned).toBe(true);
   });

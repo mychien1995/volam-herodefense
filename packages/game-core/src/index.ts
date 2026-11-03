@@ -30,3 +30,9 @@ export * from './nam-de.js';
 export * from './bac-cai-types.js';
 export * from './bac-cai.js';
 export * from './main-bosses.js';
+export * from './wave-boss-test.js';
+export type { WaveArenaView, WaveArenaBoss } from './wave-arena-types.js';
+
+export { bacCaiWander } from './bac-cai-wander.js';
+
+export { announceBossSkill, bossNormalAbilities } from './boss-skill-announcement.js';

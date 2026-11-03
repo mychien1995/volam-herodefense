@@ -43,6 +43,12 @@ export interface DongDefinition {
   openingTicks: number;
   thrust: { range: number; hits: number; halfWidth: number };
   fan: { range: number; halfAngle: number };
+  normalDash: {
+    approachTicks: number;
+    segmentTicks: number;
+    halfWidth: number;
+    paths: number[][][];
+  };
   beads: {
     min: number;
     max: number;
@@ -64,7 +70,7 @@ export interface DongDefinition {
     speed: number;
     radius: number;
   };
-  pull: { range: number; speed: number };
+  pull: { range: number; speed: number; stopDistance: number; lockTicks: number; followupTicks: number };
   poison: {
     radius: number;
     flightTicks: number;
@@ -89,6 +95,8 @@ export interface DongCast extends Point {
   nextPulse: number;
   pulse: number;
   pattern: 'plus' | 'x';
+  path?: Point[];
+  hitIds?: string[];
 }
 export interface DongEffect extends Point {
   id: string;

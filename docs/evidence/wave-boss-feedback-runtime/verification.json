@@ -1,0 +1,127 @@
+{
+  "status": "PASS_WITH_STAGE_RETRIES",
+  "date": "2026-11-03",
+  "protocol": 27,
+  "scope": "Approved wave boss VFX plus all original feedback; actual production Phaser and authoritative simulation. Final in-game director approval is separate.",
+  "validation": {
+    "finalEntry": {
+      "command": "pnpm check:final --config playwright.wave-boss-feedback.config.ts",
+      "result": "Stopped at unit stage:690 passed,3 stale historical expectations failed; original failure timings retained in docs/evidence/sessions/wave-boss-feedback-final/check-workflow/final-timings.json. No claim that this invocation exited0."
+    },
+    "focusedRetry": {
+      "command": "pnpm check:quick tests/tay-doc-room.test.ts tests/bac-cai-room.test.ts tests/m3d-tay-doc-integration.test.ts tests/nam-de-room.test.ts",
+      "result": "6/6passed. Tests now assert active field blocks exit, real victory permits exit and zone projections are removed. Forged/replayed input checks retained. Combined unique coverage693/693."
+    },
+    "typechecks": "pnpm exec tsc -b; pnpm exec tsc -p tsconfig.tools.json --noEmit:PASS, including final removal of duplicate Nam HUD.",
+    "workflowRegressionTests": 18,
+    "productionBuild": "pnpm --filter @volam/game-client build:PASS. Final browser workflow rebuilds the final UI state.",
+    "assetValidators": {
+      "command": "$env:PYTHONUTF8='1'; pnpm verify:assets",
+      "passed": 20,
+      "newVfxGuard": "Exact approved hashes/frame rectangles/durations/pivots and16additional Dong dash cels also passed unit guards; sources did not change afterward."
+    },
+    "remainingBrowserFirst": "node tools/run-playwright.mjs test --config playwright.wave-boss-feedback.config.ts:2/2PASS. PNG inspection then found duplicate legacy Nam HP HUD.",
+    "finalClientRecheck": {
+      "command": "pnpm check:browser --config playwright.wave-boss-feedback.config.ts",
+      "passed": 2,
+      "timings": {
+        "runId": "cb765d83-ed57-4b9c-8b8b-4b6bbc2ebdfb",
+        "mode": "browser",
+        "args": [
+          "--config",
+          "playwright.wave-boss-feedback.config.ts"
+        ],
+        "startedAt": "2026-11-03T02:56:28.150Z",
+        "status": "PASS",
+        "stages": [
+          {
+            "label": "prepare assets (once)",
+            "seconds": 23.84,
+            "status": "PASS",
+            "exitCode": 0
+          },
+          {
+            "label": "compile TypeScript",
+            "seconds": 0.21,
+            "status": "PASS",
+            "exitCode": 0
+          },
+          {
+            "label": "production client build",
+            "seconds": 13.61,
+            "status": "PASS",
+            "exitCode": 0
+          },
+          {
+            "label": "browser verification",
+            "seconds": 204.81,
+            "status": "PASS",
+            "exitCode": 0
+          }
+        ],
+        "totalSeconds": 242.48
+      },
+      "notes": "After removing duplicate Nam HP panel, retained QTE; production client rebuilt. Two Phaser cast/pull/Shift/retry cases and six-peer full-HP natural combat both passed again."
+    },
+    "balance": {
+      "command": "pnpm --filter @volam/game-server exec tsx ../../tools/wave-boss-feedback-balance.ts",
+      "probes": 768,
+      "seconds": 43.49420430000001,
+      "allStatuesProtected": true,
+      "items": 0
+    },
+    "diffWhitespace": "git diff --check:PASS"
+  },
+  "naturalCombat": {
+    "scope": "Six real network clients (two production Phaser/keyboard plus four SDK/input peers), level30 legal builds and phase/spawn prerequisites. Full boss HP and natural AI; no god mode, injected hits or damage/HP reduction. Six same-machine renderer load was not accepted.",
+    "bosses": [
+      {
+        "boss": "dong_ta",
+        "fullMaxHp": 20150,
+        "seconds": 17.272,
+        "samples": 36,
+        "statueHp": 2000
+      },
+      {
+        "boss": "tay_doc",
+        "fullMaxHp": 2600,
+        "seconds": 3.027,
+        "samples": 7,
+        "statueHp": 2000
+      },
+      {
+        "boss": "nam_de",
+        "fullMaxHp": 30000,
+        "seconds": 25.451,
+        "samples": 82,
+        "statueHp": 2000
+      },
+      {
+        "boss": "bac_cai",
+        "fullMaxHp": 76500,
+        "seconds": 58.136,
+        "samples": 211,
+        "statueHp": 2000
+      }
+    ],
+    "status": "PASS",
+    "errors": []
+  },
+  "screenshotsVisuallyInspected": {
+    "live-poison-pools.png": "ca3815872dba00f45dd0dac2feafcf8edc977098de90e206d4afd0a451b9b49b",
+    "live-stomp-rim.png": "1e716ae12fd8d80f9fa7a6cecf514fb9c2c76b8edfd37c990962ba108eea78f5",
+    "live-phat-quang.png": "b12baa785260d0cde63bda8bf99e124dd0698acdcc7d39ae6a9edea0f174aaaf",
+    "six-player-natural-combat.png": "3a4d30b4719797d3be55067eb570df148bfdcbac4a3d784b5c3f74389ef7692b",
+    "six-player-arena-restored.png": "14b03f6e30b4a8a5cf962a019775f8c66523228ff13a3167b1481833fdea9633"
+  },
+  "referenceComparison": "reference-comparison.json",
+  "limitations": [
+    "Boss phase/spawn/cast prerequisites were arranged only in the dedicated test setup; not a sixty-minute natural campaign gate run.",
+    "Six network peers use two full production Phaser/keyboard clients plus four SDK/input peers. Six simultaneous same-machine Phaser renderers produced automation/roster timeouts and were not accepted performance evidence.",
+    "Balance numbers remain trial. Bots do not establish human dodge/readability/clear-time balance.",
+    "Stomp combines an existing four-cel core, native moving fragments and a single new large fading rim; not four new explosion drawings.",
+    "Original preview art approval is recorded. No final director in-game approval is invented."
+  ],
+  "recordingsCreated": false,
+  "services": "Owned QA2904/5504 shut down after tests. Other services/worktrees were not restarted or killed. New protocol27 requires a matching server/client and a new match."
+}

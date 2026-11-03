@@ -39,6 +39,7 @@ it('real SDK reveals only owner QTE; rejects forged owner/order/replay, closes a
   s.phase = 'rest';
   s.spawnAt = 0;
   spawnNamDeIfReady(w, room.simulation.arena.config, room.simulation.tick);
+  room.simulation.step(); // Complete the shared recall before arranging QTE geometry.
   s.phase = 'idle';
   s.nextActionAt = 1e9;
   const boss = w.creeps.get('boss_nam_de')!;

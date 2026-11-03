@@ -16,6 +16,7 @@ if errorlevel 1 (
 )
 
 echo Starting Vo Lam Hero Defense. Keep this terminal open.
+if "%VOLAM_DEV_WAVE_BOSSES%"=="1" echo DEV wave boss test requested. Non-production only: god mode, run x3, 5-percent boss hits. Create a new room.
 echo Open the local URL printed by Vite, normally http://127.0.0.1:5173
 echo Press Ctrl+C to stop.
 call pnpm.cmd dev

@@ -1,4 +1,5 @@
 import { namDeView } from '@volam/game-core';
+import { serverWaveBossTestOptions } from '../wave-boss-test-config.js';
 import { namDeDefinition } from '@volam/game-data';
 import { NamDeControlState } from '@volam/game-protocol';
 import { chuView, chuLootAction, chuItemAction } from '@volam/game-core';
@@ -71,6 +72,7 @@ export class MatchRoom extends Room<{
   override maxMessagesPerSecond = lobbyConfig.maxMessagesPerSecond;
   override state = new LobbyState();
   readonly seed = randomInt(1, 0x1_0000_0000);
+  readonly waveBossTestOptions = serverWaveBossTestOptions(m1Config.tickRate);
   readonly simulation = new DungeonMatch(
     m1Config,
     creepDungeon,
@@ -89,6 +91,7 @@ export class MatchRoom extends Room<{
     structuredClone(tayDocDefinition),
     namDeDefinition,
     bacCaiDefinition,
+    this.waveBossTestOptions,
   );
   readonly world = this.simulation.arena.world;
   readonly devTayDoc =
@@ -538,6 +541,10 @@ export class MatchRoom extends Room<{
     }),
   };
   override onCreate(): void {
+    if (this.waveBossTestOptions)
+      console.info(
+        '[DEV] VOLAM_DEV_WAVE_BOSSES=1: four live wave bosses, god mode, run x3, valid boss hits -5% max HP. New rooms only.',
+      );
     // Historical combat targets are explicit development fixtures, never match spawns.
     if (!(
       process.env['NODE_ENV'] !== 'production' &&
@@ -713,7 +720,7 @@ export class MatchRoom extends Room<{
       this.simulation.tayDoc?.view(this.world) ?? null,
     );
     const bacCai = this.world.bacCai;
-    if (bacCai) {
+    if (bacCai && this.world.creeps.has(bacCai.bossId)) {
       let projection = this.state.bacCai.get('arena');
       if (!projection) {
         projection = new BacCaiState();
@@ -723,11 +730,19 @@ export class MatchRoom extends Room<{
         bacCai.view(this.world, this.simulation.arena.config),
       );
     }
+    if (!bacCai || !this.world.creeps.has(bacCai.bossId)) {
+      const projection = this.state.bacCai.get('arena');
+      if (projection) {
+        for (const client of this.clients) client.view?.remove(projection);
+        this.state.bacCai.delete('arena');
+      }
+    }
     this.state.tick = this.world.tick;
     this.state.matchElapsedMs = (this.world.tick * 1000) / m1Config.tickRate;
     const invasion = this.simulation.invasion,
       defense = this.state.defense,
       statue = this.world.statue;
+    defense.waveArena = JSON.stringify(this.simulation.waveArenaView() ?? null);
     defense.dongTa = this.simulation.dongTa
       ? JSON.stringify({
           ...this.simulation.dongTa.view(this.world),
@@ -736,6 +751,8 @@ export class MatchRoom extends Room<{
       : '';
     if (invasion && statue) {
       defense.paused = this.simulation.arenaPaused;
+      defense.devWaveBosses = !!this.world.waveBossTest;
+      defense.devWaveBossStage = this.world.waveBossTest?.stage ?? '';
       defense.namDe = JSON.stringify(namDeView(this.world));
       defense.enabled = true;
       defense.statueHp = statue.hp;

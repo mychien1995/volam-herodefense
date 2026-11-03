@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 25;
+export const PROTOCOL_VERSION = 29;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -466,7 +466,10 @@ export const AreaState = schema(
 export type DungeonState = SchemaType<typeof DungeonState>;
 export const DefenseState = schema(
   {
+    devWaveBosses: t.boolean().default(false),
+    devWaveBossStage: t.string().default(''),
     dongTa: t.string().default(''),
+    waveArena: t.string().default(''),
 
     paused: t.boolean().default(false),
     namDe: t.string().default(''),

@@ -1,3 +1,4 @@
+import { announceBossSkill } from './boss-skill-announcement.js';
 const compareId = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
 import { addCreep } from './simulation.js';
 import { emit, hurt } from './combat.js';
@@ -87,6 +88,7 @@ function begin(
   runtime.nextActionAt =
     runtime.cast.until + config.bossEncounter!.intervalTicks;
   cue(world, boss, runtime.cast, 'warning');
+  announceBossSkill(world,boss.id,attack.id);
 }
 function release(
   world: World,

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>M3D · Duyệt VFX wave boss</title>
+    <link rel="stylesheet" href="review.css" />
+  </head>
+  <body>
+    <main id="viewport" tabindex="0" aria-label="Sân duyệt VFX wave boss">
+      <div id="game"></div>
+      <div id="top-controls" class="overlay">
+        <label
+          >Wave boss<select id="boss" aria-label="Wave boss"></select
+        ></label>
+        <label>Chiêu<select id="mode" aria-label="Chiêu"></select></label>
+        <button id="settings-open" title="Hướng, camera, người mẫu, đối chiếu">
+          Tùy chỉnh
+        </button>
+        <button id="hide-controls" title="H: Ẩn/hiện điều khiển">Ẩn HUD</button>
+      </div>
+      <div id="preview-badge">BẢN DUYỆT VFX · CHƯA TÍCH HỢP TRẬN</div>
+      <div id="status" class="overlay" aria-live="polite"></div>
+      <section id="playback" class="overlay" aria-label="Phát và tua animation">
+        <div class="caption">
+          <strong id="phase"></strong
+          ><span id="revision-label">Bản sửa đề xuất</span>
+        </div>
+        <p id="note"></p>
+        <div class="transport">
+          <button id="restart" title="R: Chạy lại / đổi random">
+            ↻ Chạy lại
+          </button>
+          <button id="pause" title="Space: Dừng / phát">Dừng</button>
+          <button id="prev" aria-label="Lùi một frame">− frame</button>
+          <button id="next" aria-label="Tiến một frame">+ frame</button>
+          <input
+            id="timeline"
+            type="range"
+            min="0"
+            max="5"
+            value="0"
+            step="0.01"
+            aria-label="Tua animation"
+          />
+          <output id="readout">0.00 / 5.00s</output>
+        </div>
+        <small
+          >↑↓←→ đi bộ · Shift lướt thử · A thử thanh HP · Space dừng · R chạy
+          lại · H ẩn HUD · Người mẫu và HP chỉ minh họa</small
+        >
+      </section>
+      <dialog id="settings" aria-label="Tùy chỉnh preview">
+        <h2>Tùy chỉnh bản duyệt</h2>
+        <label
+          >Hướng<select id="facing">
+            <option value="right">Phải</option>
+            <option value="down">Xuống</option>
+            <option value="left">Trái</option>
+            <option value="up">Lên</option>
+          </select></label
+        >
+        <label
+          >Người mẫu<select id="players">
+            <option value="2">2 người</option>
+            <option value="6">6 người · độ rõ khi chồng VFX</option>
+            <option value="1">1 người</option>
+          </select></label
+        >
+        <label
+          >Camera<select id="camera">
+            <option value="player">Bám P1 · như gameplay</option>
+            <option value="boss">Bám boss</option>
+            <option value="center">Cố định tâm sân</option>
+          </select></label
+        >
+        <label
+          >Đối chiếu<select id="revision">
+            <option value="candidate">Bản sửa đề xuất</option>
+            <option value="original">Preview gốc · chỉ để đối chiếu</option>
+          </select></label
+        >
+        <label
+          >Nhịp phát<select id="speed">
+            <option value="0.5">½×</option>
+            <option value="1" selected>1× thực</option>
+            <option value="2">2×</option>
+          </select></label
+        >
+        <label
+          >Hình lướt Lạc Anh<select id="shape">
+            <option value="random">Ngẫu nhiên</option>
+            <option value="triangle">Tam giác</option>
+            <option value="square">Vuông</option>
+            <option value="diamond">Con thoi</option>
+            <option value="z">Chữ Z</option>
+          </select></label
+        >
+        <label
+          >Sau lướt Nam Đế<select id="branch">
+            <option value="random">Ngẫu nhiên 50/50 · mẫu</option>
+            <option value="aura">Phật Quang</option>
+            <option value="small">Tiểu nhất dương chỉ</option>
+          </select></label
+        >
+        <p>
+          Camera zoom 1. Canvas theo cửa sổ, hiển thị ×2 như game. Sân giữ kích
+          thước world, không thu nhỏ để vừa HUD. “Preview gốc” tái hiện
+          choreography tham chiếu, không phải ảnh chụp runtime.
+        </p>
+        <button id="settings-close">Trở lại sân</button>
+      </dialog>
+    </main>
+    <script src="/vendor/phaser.js"></script>
+    <script type="module" src="review.mjs"></script>
+  </body>
+</html>

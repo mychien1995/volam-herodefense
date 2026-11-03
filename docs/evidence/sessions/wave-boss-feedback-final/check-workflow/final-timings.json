@@ -1,0 +1,43 @@
+{
+  "runId": "f5526794-e4de-43c4-9d53-6cc477c10ead",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.wave-boss-feedback.config.ts"
+  ],
+  "startedAt": "2026-11-03T02:47:03.036Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 15.36,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.06,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.45,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.5,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 119.45,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 137.84
+}

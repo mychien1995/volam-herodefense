@@ -1,3 +1,4 @@
+import type { EllipseBounds } from './dong-ta-types.js';
 import type { Point, SimulationConfig } from './types.js';
 
 export const NAM_DE_ID = 'boss_nam_de';
@@ -26,6 +27,7 @@ export interface NamDeDefinition {
   dashSpeed: number;
   behindDistance: number;
   dashChance: number;
+  dashTicks: number;
   actionRestTicks: number;
   openingTicks: number;
   rotation: NamDeAbility[];
@@ -40,7 +42,17 @@ export interface NamDeDefinition {
   palmRadius: number;
   palmSpeed: number;
   auraRadius: number;
+  auraDurationTicks: number;
+  dashAuraChance: number;
   smallSpeed: number;
+  smallBurstMax: number;
+  smallBurstIntervalTicks: number;
+  smallWindupTicks: number;
+  smallRecoveryTicks: number;
+  smallCooldownTicks: number;
+  arenaBounds: EllipseBounds;
+  skyDashTicks: number;
+  corpseTicks: number;
   smallRadius: number;
   rayRange: number;
   rayRadius: number;
@@ -114,6 +126,7 @@ export interface NamDeCast {
   target: Point;
   rotation: number;
   nextVolley: number;
+  burstCount?: number;
 }
 export interface NamDeRuntime {
   definition: NamDeDefinition;
@@ -121,9 +134,12 @@ export interface NamDeRuntime {
   spawnAt: number;
   spawnCount: number;
   serial: number;
+  defeatedAt?: number;
   rotationIndex: number;
   nextActionAt: number;
   cast?: NamDeCast;
+  smallCast?: NamDeCast;
+  nextSmallAt: number;
   effects: Map<string, NamDeEffect>;
   controls: Map<string, NamDeControl>;
 }
@@ -132,7 +148,9 @@ export interface NamDeView {
   phase: NamDeRuntime['phase'];
   spawnAt: number;
   spawnCount: number;
+  defeatedAt: number;
   cast: NamDeCast | null;
+  smallCast: NamDeCast | null;
   nextActionAt: number;
   targets: Array<{
     id: string;

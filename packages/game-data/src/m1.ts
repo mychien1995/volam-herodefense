@@ -1,3 +1,4 @@
+import { bossBanterDefinition } from './boss-banter.js';
 import {
   thieuLamBasics,
   thieuLamSkills,
@@ -31,6 +32,30 @@ const point = z.strictObject({
   y: z.number().finite(),
 });
 export const simulationConfigSchema = z.strictObject({
+  bossBanter: z
+    .strictObject({
+      openingTicks: positive.int(),
+      intervalTicks: positive.int(),
+      jitterTicks: count,
+      pools: z.record(z.string(), z.array(z.string().min(1)).min(1)),
+    })
+    .optional(),
+  waveArena: z
+    .strictObject({
+      center: z.strictObject({
+        x: z.number().finite(),
+        y: z.number().finite(),
+      }),
+      bounds: z.strictObject({
+        x: z.number().finite(),
+        y: z.number().finite(),
+        radiusX: positive,
+        radiusY: positive,
+      }),
+      retryTicks: positive,
+      openingTicks: positive,
+    })
+    .optional(),
   mobility: z
     .strictObject({
       charges: count.min(1).max(2),
@@ -201,6 +226,13 @@ const initialConfig: SimulationConfig = simulationConfigSchema.parse({
 
 export const m1Config: SimulationConfig = simulationConfigSchema.parse({
   economy: economyTrial,
+  bossBanter: bossBanterDefinition,
+  waveArena: {
+    center: { x: 800, y: 616 },
+    bounds: { x: 800, y: 616, radiusX: 324, radiusY: 294 },
+    retryTicks: 90,
+    openingTicks: 30,
+  },
   ...initialConfig,
   basics: {
     ...initialConfig.basics,

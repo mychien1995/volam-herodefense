@@ -1,3 +1,4 @@
+import { WaveBossFeedbackArt } from './wave-boss-feedback-art.js';
 import Phaser from 'phaser';
 import type { LobbyState } from '@volam/game-protocol';
 import type { TayDocView } from '@volam/game-core';
@@ -64,7 +65,10 @@ export class TayDocRenderer {
   private patchTime = 0;
   private tick = 0;
   private current: TayDocView | undefined;
-  constructor(private scene: Phaser.Scene) {}
+  private feedback: WaveBossFeedbackArt;
+  constructor(private scene: Phaser.Scene) {
+    this.feedback = new WaveBossFeedbackArt(scene);
+  }
   clear(): void {
     for (const v of this.views.values()) {
       v.image.destroy();
@@ -72,6 +76,7 @@ export class TayDocRenderer {
       v.bar?.destroy();
     }
     this.views.clear();
+    this.feedback.clear();
     this.current = undefined;
   }
   private cel(
@@ -205,6 +210,7 @@ export class TayDocRenderer {
       data.tick +
       Math.min(2, ((this.scene.time.now - this.patchTime) * 30) / 1000);
     this.active.clear();
+    this.feedback.begin();
     const boss = state!.creeps.get(data.bossId),
       c = data.cast;
     if (boss) {
@@ -328,30 +334,14 @@ export class TayDocRenderer {
         52,
       );
     }
-    for (const p of data.pools) {
-      this.circle(
-        p.id + ':floor',
-        'fx1',
-        'cloud_warning',
-        this.tick - p.activeAt,
+    for (const [i, p] of data.pools.entries())
+      this.feedback.pool(
+        p.id,
         p.x,
         p.y,
-        p.radius,
-        0.65,
+        (this.tick - p.activeAt) / 30,
+        i * 0.12,
       );
-      const v = this.cel(
-        p.id,
-        'fx1',
-        'cloud_loop',
-        this.tick - p.activeAt,
-        p.x,
-        p.y - 15,
-      );
-      v.image
-        .setScale(0.75)
-        .setAlpha(0.65)
-        .setDepth(p.y - 1);
-    }
     for (const m of data.marks) {
       const h = state!.players.get(m.targetId);
       if (!h || h.zoneId !== zoneId || h.hp <= 0) continue;
@@ -417,6 +407,23 @@ export class TayDocRenderer {
           'ngu_doc_than_chuong',
           'van_doc_bao_phat',
         ].includes(s.ability);
+      if (
+        s.ability === 'hon_thien_phuc_long_chan' ||
+        s.ability === 'tay_doc_gas'
+      ) {
+        this.feedback.cel(
+          s.id,
+          s.ability === 'hon_thien_phuc_long_chan'
+            ? 'snake_bolt'
+            : 'poison_bolt',
+          'loop',
+          x,
+          y - 20,
+          age / 30,
+          { angle: Math.atan2(s.vy, s.vx), depth: y + 5 },
+        );
+        continue;
+      }
       const v = this.cel(
         s.id,
         palm ? 'fx2' : 'fx1',
@@ -430,29 +437,22 @@ export class TayDocRenderer {
         y,
       );
       v.image
-        .setScale(palm ? 0.32 : needle ? 0.22 : 0.3)
+        .setScale(palm ? 0.32 : needle ? 1.5 : 0.3)
+        .setBlendMode(needle ? Phaser.BlendModes.ADD : Phaser.BlendModes.NORMAL)
         .setRotation(Math.atan2(s.vy, s.vx))
         .setDepth(y + 5);
     }
     for (const e of data.impacts) {
       const age = this.tick - e.at;
-      if (age > 18) continue;
+      if (age > (e.ability === 'cap_mo_chan_kich' ? 27 : 18)) continue;
       if (e.ability === 'cap_mo_chan_kich')
-        this.circle(
-          e.id,
-          'fxt',
-          'transition_shockwave',
-          age,
-          e.x,
-          e.y,
-          e.radius,
-          0.85,
-        );
+        this.feedback.stomp(e.id, e.x, e.y, age / 30);
       else if (e.ability === 'co_doc_khoan_tam')
         this.circle(e.id, 'newfx', 'curse_burst', age, e.x, e.y, e.radius);
       else if (e.ability === 'van_doc_bao_phat')
         this.circle(e.id, 'fx2', 'circular_eruption', age, e.x, e.y, e.radius);
     }
+    this.feedback.end();
     for (const [id, v] of this.views)
       if (!this.active.has(id)) {
         v.image.destroy();
@@ -541,6 +541,7 @@ export class TayDocRenderer {
   }
   inspect() {
     return {
+      feedback: this.feedback.inspect(),
       phase: this.current?.phase,
       tick: this.current?.tick,
       actions: [...this.actions],

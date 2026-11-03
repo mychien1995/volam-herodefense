@@ -19,6 +19,14 @@ it('retains every approved input byte and ships only selected atlas frames/clips
   for (const [id, s] of Object.entries(approval.selectedBundles) as Array<
     [string, { image: string; clips: string[]; origin: number[] }]
   >) {
+    const extra =
+      id === 'dong'
+        ? read('assets/approved_wave_boss_feedback_v01.lock.json')
+            .additionalDongClips
+        : [];
+    const expectedClips = source.bundles[id].clips
+      .filter((c: { name: string }) => [...s.clips, ...extra].includes(c.name))
+      .map((c: { name: string }) => c.name);
     const b = source.bundles[id],
       p = playback.bundles[id],
       atlas = read(`apps/game-client/public/assets/dong_ta/${id}.json`),
@@ -29,7 +37,7 @@ it('retains every approved input byte and ships only selected atlas frames/clips
       hash(s.image),
     );
     expect(p.origin).toEqual(s.origin);
-    expect(p.clips.map((c: { name: string }) => c.name)).toEqual(s.clips);
+    expect(p.clips.map((c: { name: string }) => c.name)).toEqual(expectedClips);
     const selected = new Set<string>();
     for (const c of p.clips) {
       clips++;
@@ -46,8 +54,8 @@ it('retains every approved input byte and ships only selected atlas frames/clips
     expect(Object.keys(atlas.frames).sort()).toEqual([...selected].sort());
     frames += selected.size;
   }
-  expect(clips).toBe(109);
-  expect(frames).toBe(436);
+  expect(clips).toBe(113);
+  expect(frames).toBe(452);
   for (const excluded of ['dash', 'hero', 'cai', 'thien'])
     expect(playback.bundles[excluded]).toBeUndefined();
 });

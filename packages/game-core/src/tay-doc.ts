@@ -1,3 +1,4 @@
+import { announceBossSkill } from './boss-skill-announcement.js';
 import { addCreep } from './simulation.js';
 import { hurt, emit } from './combat.js';
 import { applyStatus, hasStatus, statusValue, displace } from './status.js';
@@ -306,8 +307,24 @@ export class TayDocEncounter {
         this.definition.cloudRadius,
         this.definition.cloudCount,
       );
-    if (ability === 'hon_thien_phuc_long_chan')
-      points = this.legal(world, config, { x: 800, y: 690 }, 26, 6);
+    if (ability === 'hon_thien_phuc_long_chan') {
+      const field = config.heroBounds ?? {
+        x: 800,
+        y: 616,
+        radiusX: 324,
+        radiusY: 294,
+      };
+      points = Array.from({ length: 6 }, (_, i) => ({
+        x: field.x + Math.cos((i * Math.PI) / 3) * (field.radiusX - 39),
+        y: field.y + Math.sin((i * Math.PI) / 3) * (field.radiusY - 39),
+      }));
+      if (
+        points.some((p) =>
+          blocked(p, 26, config.width, config.height, config.collision),
+        )
+      )
+        return false;
+    }
     if (
       (ability === 'doc_vu_me_hon' &&
         points.length !== this.definition.cloudCount) ||
@@ -366,6 +383,7 @@ export class TayDocEncounter {
       endsAt: this.cast.endsAt,
     };
     this.cooldowns.set(ability, now + a.cooldown);
+    announceBossSkill(world, b.id, ability);
     return true;
   }
   private release(world: World, config: SimulationConfig, c: TayDocCast) {
@@ -439,7 +457,10 @@ export class TayDocEncounter {
           id,
           ...p,
           at: world.tick,
-          heading: 0,
+          heading: Math.atan2(
+            (config.heroBounds?.y ?? 616) - p.y,
+            (config.heroBounds?.x ?? 800) - p.x,
+          ),
           nextShot: world.tick + 15,
         });
       }
@@ -486,6 +507,16 @@ export class TayDocEncounter {
       h.statuses = (h.statuses ?? []).filter((s) => s.sourceId !== this.bossId);
   }
   /** Match defeat/room disposal terminates the actor as well as its hazards. */
+  reset(world: World): void {
+    this.clear(world);
+    world.creeps.delete(this.bossId);
+    this.phase = 'waiting';
+    this.rotation = 0;
+    this.cooldowns.clear();
+    this.transitionAt = 0;
+    this.deathAt = 0;
+    this.nextActionAt = 0;
+  }
   dispose(world: World): void {
     this.clear(world);
     world.creeps.delete(this.bossId);
@@ -508,9 +539,14 @@ export class TayDocEncounter {
     }
     this.impacts.splice(
       0,
-      this.impacts.findIndex((p) => world.tick - p.at < 18) === -1
+      this.impacts.findIndex(
+        (p) => world.tick - p.at < (p.ability === 'cap_mo_chan_kich' ? 27 : 18),
+      ) === -1
         ? this.impacts.length
-        : this.impacts.findIndex((p) => world.tick - p.at < 18),
+        : this.impacts.findIndex(
+            (p) =>
+              world.tick - p.at < (p.ability === 'cap_mo_chan_kich' ? 27 : 18),
+          ),
     );
     for (const [id, p] of this.poisons) {
       const h = world.heroes.get(id);
@@ -605,19 +641,19 @@ export class TayDocEncounter {
         !hasStatus(actor, 'stun', world.tick) &&
         !hasStatus(actor, 'disarm', world.tick)
       ) {
-        const a = (p.heading * Math.PI) / 4;
+        const a = p.heading;
         actor.fx = Math.cos(a);
         actor.fy = Math.sin(a);
-        this.shoot(
-          world,
-          'hon_thien_phuc_long_chan',
-          { x: p.x + actor.fx * 24, y: p.y + actor.fy * 24 },
-          a,
-          id,
-          d.pillarRange,
-          d.pillarSpeed,
-        );
-        p.heading = (p.heading + 1) % 8;
+        for (const offset of [-0.4, 0, 0.4])
+          this.shoot(
+            world,
+            'hon_thien_phuc_long_chan',
+            { x: p.x + actor.fx * 24, y: p.y + actor.fy * 24 },
+            a + offset,
+            id,
+            d.pillarRange,
+            d.pillarSpeed,
+          );
         p.nextShot =
           (world.tick - p.nextShot > d.pillarInterval
             ? world.tick
@@ -632,6 +668,7 @@ export class TayDocEncounter {
       this.transitionAt = world.tick;
       this.cast = undefined;
       b.castAbilityId = 'cap_mo_cong';
+      announceBossSkill(world, b.id, 'cap_mo_cong');
       b.pose = 'cast';
       this.rotation = 0;
       this.cooldowns.clear();

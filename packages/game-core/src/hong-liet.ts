@@ -1,3 +1,4 @@
+import { announceBossSkill } from './boss-skill-announcement.js';
 import { addCreep } from './simulation.js';
 import { emit, hurt } from './combat.js';
 import { applyStatus, displace, hasStatus } from './status.js';
@@ -303,6 +304,7 @@ export class HongLietEncounter {
       activeAt: cast.activeAt,
       endsAt: cast.endsAt,
     };
+    announceBossSkill(world,boss.id,abilityId);
     emit(world, {
       kind: 'cast',
       sourceId: boss.id,

@@ -1,3 +1,4 @@
+import { announceBossSkill } from './boss-skill-announcement.js';
 import { addCreep } from './simulation.js';
 import { hurt, emit } from './combat.js';
 import { applyStatus, displace, hasStatus } from './status.js';
@@ -361,6 +362,7 @@ export class KimLuanEncounter {
       actorId,
       cast.endsAt + this.ticks(this.definition.actionRestSeconds, c),
     );
+    announceBossSkill(w,actorId,abilityId);
     emit(w, {
       kind: 'cast',
       sourceId: actorId,

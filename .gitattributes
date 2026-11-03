@@ -1,4 +1,7 @@
 * text=auto eol=lf
+# Preserve approved wave-boss review hashes across fresh checkouts.
+assets/reviews/wave_boss_feedback_v01/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+assets/reviews/wave_boss_feedback_v02/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # r3 director locks hash original bytes, including retained CRLF source metadata.
 assets/m3d-feedback-review-r3/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 *.png binary
@@ -584,3 +587,7 @@ apps/game-client/src/bac-cai-preview-tuning.ts -text -eol whitespace=blank-at-eo
 
 # Generated historical failure excerpts retain their exact quoted source whitespace.
 docs/evidence/bac-cai-runtime/failed-browser-contexts/** -whitespace
+
+# Retain literal CLI/source excerpts, including captured blank-line whitespace.
+docs/evidence/wave-boss-feedback-v02-runtime/six-client-join-failure.md -whitespace
+docs/evidence/wave-boss-feedback-v03-runtime/unit-retry.log -whitespace

@@ -1,6 +1,6 @@
 import type { LobbyState } from '@volam/game-protocol';
 import { m1Config, invasionCreepName } from '@volam/game-data';
-import type { DongView } from '@volam/game-core';
+import type { WaveArenaView } from '@volam/game-core';
 
 export class DefenseHud {
   private readonly panel = document.createElement('section');
@@ -42,13 +42,25 @@ export class DefenseHud {
       return;
     }
     const meter = this.panel.querySelector<HTMLElement>('#statue-meter')!;
-    const boss = d.dongTa ? (JSON.parse(d.dongTa) as DongView) : undefined;
+    const boss = d.waveArena
+      ? (JSON.parse(d.waveArena) as WaveArenaView | null)
+      : undefined;
+    const testBossNames: Record<string, string> = {
+      dong_ta: 'Đông Tà',
+      tay_doc: 'Tây Độc',
+      nam_de: 'Nam Đế',
+      bac_cai: 'Bắc Cái',
+      complete: 'Đã xong 4 boss',
+    };
+    const bossName = boss
+      ? (testBossNames[boss.bossId] ?? 'Boss wave')
+      : 'Boss wave';
     this.panel.querySelector('strong')!.textContent = boss?.locked
       ? boss.phase === 'retry'
-        ? 'Đông Tà · Chuẩn bị đánh lại'
-        : `Đông Tà · Lần ${boss.attempt}`
+        ? `${bossName} · Chuẩn bị đánh lại`
+        : `${bossName} · Lần ${boss.attempt}`
       : 'Tượng trấn phái';
-    meter.title = boss?.locked ? 'Tượng tạm bất tử trong trận Đông Tà' : '';
+    meter.title = boss?.locked ? `Tượng tạm bất tử trong trận ${bossName}` : '';
     const encounterStatus =
       this.panel.querySelector<HTMLElement>('#dong-ta-status')!;
     encounterStatus.hidden = !boss?.locked;
@@ -56,7 +68,7 @@ export class DefenseHud {
       boss?.phase === 'retry'
         ? `Cả đội thất bại · Đánh lại sau ${Math.max(0, Math.ceil((boss.phaseUntil - boss.tick) / m1Config.tickRate))}s`
         : boss?.locked
-          ? `Sinh lực Đông Tà: ${Math.ceil(boss.bossHp)} / ${boss.bossMaxHp}`
+          ? `Sinh lực ${bossName}: ${Math.ceil(boss.bossHp)} / ${boss.bossMaxHp}`
           : '';
     meter.setAttribute('aria-valuenow', String(d.statueHp));
     meter.setAttribute('aria-valuemax', String(d.statueMaxHp));
@@ -81,6 +93,15 @@ export class DefenseHud {
     )!;
     roster.hidden = d.defeated || !nextName;
     roster.textContent = nextName ? `Sắp tới: ${nextName}` : '';
+    if (d.devWaveBosses) {
+      this.panel.querySelector('strong')!.textContent =
+        'DEV · ' + (testBossNames[d.devWaveBossStage] ?? 'Boss wave');
+      this.panel.querySelector('#invasion-countdown')!.textContent = d.paused
+        ? 'Tạm dừng — toàn đội đang trong phó bản boss'
+        : 'Đông Tà → Tây Độc → Nam Đế → Bắc Cái';
+      roster.hidden = false;
+      roster.textContent = 'Bất tử · Chạy ×3 · Mỗi hit boss −5% HP';
+    }
     const noticeName = invasionCreepName(d.noticeWave);
     const rosterNotice = noticeName ? ` · ${noticeName}` : '';
     const showNotice =

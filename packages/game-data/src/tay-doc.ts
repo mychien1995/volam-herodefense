@@ -28,7 +28,7 @@ const attack = (
 /** Trial HP/damage/CC tuning. Approved feedback03 geometry and velocities are retained. */
 export const tayDocDefinition: TayDocDefinition = {
   spawn: { x: 80, y: 616 },
-  entryEndX: 550,
+  entryEndX: 800,
   bounds: { x: 90, y: 340, width: 1360, height: 640 },
   hp: 2600,
   defense: 12,
@@ -66,7 +66,7 @@ export const tayDocDefinition: TayDocDefinition = {
   attacks: {
     tay_doc_staff: attack('Quẹt trượng', 0.65, 20, 160),
     tay_doc_gas: attack('Bắn độc khí', 0.65, 16, 560, 330),
-    van_doc_phi_cham: attack('Vạn Độc Phi Châm', 1, 8, 600, 360, 0.36, 0.18),
+    van_doc_phi_cham: attack('Vạn Độc Phi Châm', 1, 8, 600, 288, 0.36, 0.18),
     doc_vu_me_hon: attack('Độc Vụ Mê Hồn', 1.1, 8, 85),
     co_doc_khoan_tam: attack('Cổ Độc Khoan Tâm', 0.4, 22, 145),
     hon_thien_phuc_long_chan: attack(
@@ -77,7 +77,7 @@ export const tayDocDefinition: TayDocDefinition = {
       390,
     ),
     doc_chuong: attack('Bắn độc chưởng', 0.45, 20, 600, 310),
-    cap_mo_chan_kich: attack('Cáp Mô Chấn Kích', 1.1, 24, 405),
+    cap_mo_chan_kich: attack('Cáp Mô Chấn Kích', 1.1, 24, 364.5),
     ngu_doc_than_chuong: attack(
       'Ngũ Độc Thần Chưởng',
       0.9,
@@ -173,7 +173,7 @@ export function validateTayDocDefinition(d: TayDocDefinition): void {
     d.cloudCount !== 8 ||
     d.radialCount !== 16 ||
     d.attacks.tay_doc_staff.range !== 160 ||
-    d.attacks.cap_mo_chan_kich.range !== 405
+    d.attacks.cap_mo_chan_kich.range !== 364.5
   )
     throw Error('Tay Doc approved geometry changed');
   const expected: Partial<Record<TayDocAbility, number>> = {

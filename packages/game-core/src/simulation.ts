@@ -1,3 +1,4 @@
+import { stepBossBanter } from './boss-banter.js';
 import { dungeonWaypoint } from './dungeon-navigation.js';
 import { dash, blink, rechargeDash } from './mobility.js';
 import { stepChu, constrainChuTrap } from './chu-ba-thong.js';
@@ -56,6 +57,7 @@ import type {
 
 export function createWorld(config: SimulationConfig, seed = 42): World {
   const world: World = {
+    banterSeed: seed,
     tick: 0,
     heroes: new Map(),
     creeps: new Map(),
@@ -556,6 +558,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     }
     const movement = namDeMovement(world, hero);
     const stats = characterStats(hero, config, world.tick).total;
+    const runSpeedMultiplier = world.waveBossTest?.runSpeedMultiplier ?? 1;
     if (
       (movement.x || movement.y) &&
       !hero.namDeLocked &&
@@ -570,8 +573,12 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       moveCircle(
         hero,
         {
-          x: (movement.x * stats.movementSpeed) / config.tickRate,
-          y: (movement.y * stats.movementSpeed) / config.tickRate,
+          x:
+            (movement.x * stats.movementSpeed * runSpeedMultiplier) /
+            config.tickRate,
+          y:
+            (movement.y * stats.movementSpeed * runSpeedMultiplier) /
+            config.tickRate,
         },
         config.radius,
         config.width,
@@ -862,4 +869,5 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   }
   finishNamDeTick(world);
   world.bacCai?.step(world, config);
+  stepBossBanter(world, config);
 }

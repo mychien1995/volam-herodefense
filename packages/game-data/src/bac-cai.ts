@@ -2,7 +2,7 @@ import type { BacCaiDefinition } from '@volam/game-core';
 /** Trial combat numbers. Director-approved v03 timing/art stays separate from balance approval. */
 export const bacCaiDefinition: BacCaiDefinition = {
   entry: { x: 1120, y: 340 },
-  center: { x: 800, y: 780 },
+  center: { x: 800, y: 616 },
   cloneRadius: { x: 265, y: 165 },
   hp: 18000,
   hpPerAdditionalPlayer: 0.65,
@@ -59,6 +59,7 @@ export const bacCaiDefinition: BacCaiDefinition = {
   },
   clones: {
     splitMs: 1500,
+    guessMs: 5000,
     moveMs: 1400,
     staggerMs: 120,
     settleMs: 340,
@@ -96,11 +97,14 @@ export const bacCaiDefinition: BacCaiDefinition = {
     ],
   },
   vortex: {
-    channelMs: 3000,
-    pullSpeed: 150,
-    slamRadius: 190,
-    stunMs: 1000,
-    recoveryMs: 800,
+    windupMs: 850,
+    activeMs: 3900,
+    recoveryMs: 1050,
+    cloneCount: 8,
+    radius: 72,
+    moveSpeed: 145,
+    minLeg: 120,
+    cadenceMs: 500,
   },
   tether: {
     pullDistance: 80,
@@ -119,11 +123,12 @@ export const bacCaiDefinition: BacCaiDefinition = {
     activeMs: 750,
   },
   spiral: {
+    dashMs: 280,
     releaseMs: 400,
     recoveryMs: 650,
-    flightMs: 5600,
-    radius: 325,
-    startRadius: 35,
+    flightMs: 5600 / 1.3,
+    radius: 310,
+    startRadius: 20,
     yScale: 0.7,
     turns: 3,
     hitRadius: 26,

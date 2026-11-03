@@ -213,7 +213,7 @@ describe('Tay Doc authoritative arena encounter', () => {
     f.encounter.depart(f.world, f.config, 'h', false);
     expect(f.encounter.marks.size).toBe(0);
   });
-  it('six destructible pillars rotate8headings, shoot one ray, stop on death without redirecting old rays', () => {
+  it('six destructible pillars keep inward heading, stop on death without redirecting released rays', () => {
     const f = fixture();
     f.hero.x = 100;
     f.hero.y = 100;
@@ -226,7 +226,7 @@ describe('Tay Doc authoritative arena encounter', () => {
       f.step(42);
       observed.add(pillar.heading);
     }
-    expect(observed.size).toBe(8);
+    expect(observed.size).toBe(1);
     const actor = f.world.creeps.get(pillar.id)!;
     const shots = [...f.encounter.projectiles.values()].filter(
       (s) => s.ownerId === pillar.id,
@@ -265,7 +265,7 @@ describe('Tay Doc authoritative arena encounter', () => {
     f.step(1);
     expect(f.encounter.transitionAt).toBe(at);
   });
-  it('P2 radial speed/range, stationary channel, stomp405 and3landing bursts exactly16each', () => {
+  it('P2 radial speed/range, stationary channel, stomp364.5 and3landing bursts exactly16each', () => {
     for (const ability of [
       'ngu_doc_than_chuong',
       'van_doc_bao_phat',
@@ -298,7 +298,7 @@ describe('Tay Doc authoritative arena encounter', () => {
     }
     const f = fixture();
     f.encounter.phase = 'phase2';
-    f.hero.x = 1005;
+    f.hero.x = 950;
     f.encounter.begin(f.world, f.config, 'cap_mo_chan_kich', f.hero);
     const hp = f.hero.hp;
     f.step(34);

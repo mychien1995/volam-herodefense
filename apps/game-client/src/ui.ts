@@ -823,7 +823,7 @@ export class GameUI {
       m1Config.mobility!.rechargeTicks - hero.dashRechargeTicks;
     element('#dash-status').classList.toggle(
       'unavailable',
-      hero.hp <= 0 || hero.dashCharges === 0,
+      hero.hp <= 0 || hero.dashCharges === 0 || hero.statuses.includes('"dash_lock"'),
     );
     const slots = [
       {

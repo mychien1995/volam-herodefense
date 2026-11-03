@@ -72,6 +72,10 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
   await expect
     .poll(() => late.state.players.get(late.sessionId)?.confirmed)
     .toBe(true);
+  let rejected = '';
+  late.onMessage('command-rejected', (m) => {
+    rejected = m.reason;
+  });
   late.send('dungeon-action', {
     protocolVersion: PROTOCOL_VERSION,
     sequence: 1,
@@ -79,12 +83,9 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
     access: 'private',
     destination: 'forest',
   });
-  await expect
-    .poll(() => late.state.players.get(late.sessionId)?.zoneId)
-    .toContain('forest_');
-  await expect
-    .poll(() => late.state.bacCai.get('arena')?.snapshot ?? '')
-    .toBe('');
+  await expect.poll(() => rejected).not.toBe('');
+  expect(late.state.players.get(late.sessionId)?.zoneId).toBe('arena');
+  expect(view(late)).not.toBeNull();
   e.cast = undefined;
   e.begin(w, c, 'clones');
   await expect.poll(() => view(a)?.forms.length).toBe(8);
@@ -106,10 +107,25 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
   const target = w.creeps.get('bac_cai')!;
   target.x = 800;
   target.y = 780;
-  pair.begin(w, c, 'tether');
-  await expect
-    .poll(() => [...pair.effects.values()].some((x) => x.kind === 'tether'))
-    .toBe(true);
+  // Three players are alive: arrange B as an actual tether victim before testing B's leave.
+  // Room seeds and random session IDs must not decide whether this fixture tests cleanup at all.
+  const combatRandom = w.random;
+  const livingIds = [...w.heroes.values()]
+    .filter((h) => h.hp > 0)
+    .map((h) => h.id)
+    .sort((x, y) => x.localeCompare(y));
+  w.random = () => (livingIds.indexOf(b.sessionId) + 0.5) / livingIds.length;
+  try {
+    pair.begin(w, c, 'tether');
+    await expect
+      .poll(() => [...pair.effects.values()].some((x) => x.kind === 'tether'))
+      .toBe(true);
+    expect(
+      [...pair.effects.values()].find((x) => x.kind === 'tether')!.targetIds,
+    ).toContain(b.sessionId);
+  } finally {
+    w.random = combatRandom;
+  }
   await b.leave();
   await expect.poll(() => w.heroes.has(b.sessionId)).toBe(false);
   expect(
@@ -138,6 +154,19 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
   expect(w.statue!.hp).toBe(w.statue!.maxHp);
   expect(h.gold).toBe(d.reward.gold);
   expect(h.bossLoot ?? []).toHaveLength(0);
+  late.send('dungeon-action', {
+    protocolVersion: PROTOCOL_VERSION,
+    sequence: 2,
+    action: 'enter',
+    access: 'private',
+    destination: 'forest',
+  });
+  await expect
+    .poll(() => late.state.players.get(late.sessionId)?.zoneId)
+    .toContain('forest_');
+  await expect
+    .poll(() => late.state.bacCai.get('arena')?.snapshot ?? '')
+    .toBe('');
   await a.leave();
   await late.leave();
 }, 15000);

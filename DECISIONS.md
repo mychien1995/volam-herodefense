@@ -349,3 +349,24 @@ The user explicitly requests integration into milestone/m3d with only necessary 
 # Bắc Cái gameplay integration — 2026-11-02
 
 Requested implementation uses the director-approved v03 visual with pure authoritative arena runtime, independent body/hazards/dialogue-vote channels and protocol18 zone-filtered public projection. The three final decisions (AoE clone still explodes, tie/zero wrong, tether endpoint death/leave/disconnect breaks) are implemented. Numeric tuning remains trial; final runtime/balance art approval is separate. Main-boss progression has only the minimal Bắc Cái gate/hook: earlier wave-boss adapters are absent, so natural campaign arrival remains a dependency, not a fabricated completed prerequisite. No other bosses, arena, item drops or invasion cadence change. See `docs/BAC_CAI_RUNTIME.md`.
+
+
+## Confirmed wave boss feedback and VFX approval — 2026-11-03
+
+Director approved `wave_boss_feedback_v01` and requested runtime integration plus the original feedback. All four wave bosses inherit the complete Đông Tà arena/recall/revive/statue protection/unlimited retry policy and Tây Độc overhead HP style. Bắc Cái’s pull is a quick visible tug followed by sustained pull+slow, with walking allowed and Shift locked. Mai also locks Shift while pulling and fires Ma Ảnh immediately afterward. Skill details and trial preview numbers: `docs/WAVE_BOSS_FEEDBACK_RUNTIME.md`. This supersedes historical Tây/Nam/Bắc no-recall/no-immunity/no-retry restrictions; dungeon rules, inventory-v2 and gold/XP-only wave rewards remain unchanged. Preview approval does not fabricate final in-game director approval.
+
+
+## Approved cumulative wave boss feedback v02 — 2026-11-03
+
+Latest preview approval explicitly authorizes Phaser/server integration of every remaining feedback item. The canonical complete ledger is `docs/WAVE_BOSS_FEEDBACK_V02_RUNTIME.md`; reviewed inputs are frozen in `assets/approved_wave_boss_feedback_v02.lock.json`. The latest Thiên Hạ has all9actors independently moving at random while spinning and damaging, replacing pull/slow/slam and stationary-center/orbit variants. Mai provides0.8s after a quick tug before Ma Ảnh and locks Shift5s. Nam sky density triples to96impacts inside arena; Phật Quang Phổ Chiếu uses one hand wave with target light and no connecting beam. All bosses, including dungeon bosses, shout special names as overhead text; normal attacks stay silent. Existing arena/retry/rewards/control rules persist. Numeric defaults remain trial; final in-game visual approval remains separate.
+
+
+## Latest boss playtest feedback — 2026-11-03 (protocol 29)
+
+This canonical override supersedes V02 random burst counts and the old repeated wrong-clone punishment. Đông Tà, Tây Độc and Nam Đế each have twenty original Vietnamese combat lines, selected server-side from seeded shuffled decks without repetition until the pool is exhausted. First line after 6 seconds of combat, then every 8–10 seconds when an action gap permits; overhead chat lasts 4 seconds in its own lane alongside the retained skill shouts. Bắc Cái keeps his separate preference/dialogue mechanic and stays silent during Mục Hạ Vô Nhân.
+
+Mục Hạ Vô Nhân keeps its approved split and five pair swaps. At reveal, players have exactly 5 seconds to land a valid guess. A clone hit causes one arena-wide explosion and ends the skill in that simulation tick; all simultaneous clone/real hits settle as one failure, regardless of target iteration order. A real-body-only hit ends it without explosion and cancels the deadline, including on the deadline tick. No valid hit by the deadline causes one explosion and immediate cleanup. No extra explosions after cleanup.
+
+Tiểu Nhất Dương Chỉ always releases five straight golden projectiles, spaced 0.16 seconds, re-aiming at the selected player's current position at each release. Each shot flies straight afterward. Its independent server channel can run with all main skills, QTE and movement without replacing their cast or clocks. Trial repeat interval is 90 ticks / 3 seconds, first windup remains 17 ticks; repeated starts cannot duplicate an active burst. Death, no living players, wipe and encounter cleanup cancel pending shots. The main special animation retains priority while concurrent native gold projectiles render normally.
+
+Approved V01/V02 PNGs, JSONs and preview source remain byte-exact. This update changes runtime behavior and text, not the frozen preview. The common arenas, rewards, dungeon life ledgers, controls and separate inventory-v2 scope remain as in V02. Matching protocol 29 services and a new room are required. Current implementation/validation: `docs/WAVE_BOSS_FEEDBACK_V03_RUNTIME.md`.

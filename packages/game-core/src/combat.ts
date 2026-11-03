@@ -11,6 +11,7 @@ import { direction, distance, segmentRect } from './geometry.js';
 import { comboHit } from './combos.js';
 import { ownerProtection } from './protection.js';
 import { CHU_BOSS_ID } from './chu-types.js';
+import { waveBossTestArchetypes } from './wave-boss-test.js';
 import type { StatusEffect } from './types.js';
 import type { ComboSpec } from './types.js';
 export function emit(world: World, event: Omit<CombatEvent, 'id'>): void {
@@ -41,6 +42,7 @@ export function hurt(
     comboTargets?: Record<string, boolean> | undefined;
   },
 ): boolean {
+  if (world.waveBossTest && world.heroes.has(target.id)) return false;
   if (
     target.hp <= 0 ||
     (!snapshot?.unavoidableHpLoss && target.invulnerable) ||
@@ -156,7 +158,7 @@ export function hurt(
         )
       : undefined;
   const stats = snapshot ?? offensiveStats(world, sourceId, config);
-  const critical =
+  let critical =
     !snapshot?.unavoidableHpLoss &&
     !snapshot?.directHp &&
     world.random() < stats.critChance;
@@ -273,7 +275,18 @@ export function hurt(
       });
   }
   const beforeHp = target.hp;
+  const testBossHit =
+    world.waveBossTest &&
+    world.heroes.has(sourceId) &&
+    waveBossTestArchetypes.has(enemy?.archetypeId ?? '');
+  if (testBossHit && world.waveBossTest) {
+    damage = target.maxHp * world.waveBossTest.bossHitFraction;
+    critical = false;
+  }
   target.hp = Math.max(0, target.hp - damage);
+  // Fractional five-percent hits must not leave a floating-point sliver after hit20.
+  if (testBossHit && target.hp <= Number.EPSILON * target.maxHp * 32)
+    target.hp = 0;
   if (target.hp < beforeHp)
     world.bacCai?.damaged(world, config, target.id, sourceId);
   if (guardCounter) {

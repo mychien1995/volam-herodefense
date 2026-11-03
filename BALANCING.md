@@ -126,3 +126,18 @@ Actual48 legal mixed-build probes (eight seconds, three seeds, both A choices, l
 ## M3C2 Võ Đang tuning proposals — 2026-10-31
 
 Configured mana/regen/CDR identity and shield/counter/formation ranks are in `packages/game-data/src/vo-dang.ts`; all remain provisional. The legal48-probe workload in `tools/m3c2-balance.ts` measured aggregate stationary three-target DPS ranges77.25–116.875 atLv1,293.375–361 atLv6,627.625–743.125 atLv15,916.25–1065 atLv30 (eight seconds,seeds42/1337/9001,both basics,mixed styles,optional ultimate). Costs/cooldowns/earned budgets remain real. See `artifacts/m3c2-balance.json`. This is not survival,economy,optimal-human,PvP,boss or campaign balance. Shield affordability/partial depletion and regen caps have deterministic tests; no other-school tuning changed.
+
+
+## Wave boss feedback trial — 2026-11-03
+
+Director-approved preview defaults are now runtime tuning: Tây needles288instead360; Mai pull285/s; Nam large finger charge23instead45ticks and dash8ticks with50/50ring/small finger; Bắc dragon flight5600/1.3ms and vortex250msquick tug then48/s pull with35%slow. These are trial values, not final balance approval. The768case deterministic20-second exposure report in `docs/evidence/wave-boss-feedback-runtime/balance.json` covers both normal branches, four schools, legal mixed builds, levels1/6/15/30, solo/six and three seeds. Statue protection and zero wave item drops hold throughout; bots lack human dodge/clone voting behavior. See `docs/WAVE_BOSS_FEEDBACK_RUNTIME.md`.
+
+
+## Wave feedback v02 trial defaults — 2026-11-03
+
+Supersedes corresponding v01values: Mai quick tug≈0.15s,5s Shift lock and0.8s dodge delay;200px frontal claws; Cáp Mô radius364.5; Nam burst1–5shots/0.16s, Liên Hoàn256ticks/turn and16ticks/volley,96sky impacts across the former32impact window. Thiên Hạ uses9independent radius72sources moving145px/s for3.9s, per-source/victim0.5s cadence and prior65damage. Damage numbers remain trial. New768exposure probes are at docs/evidence/wave-boss-feedback-v02-runtime/balance.json/csv; they do not model human dodge, clone guesses or votes and do not establish final balance. See the canonical cumulative ledger for unchanged gates, rewards and authority.
+
+
+## Latest boss playtest feedback — 2026-11-03 (protocol 29)
+
+Nam Đế always releases five small fingers on a separate 90-tick repeat channel, including during main skills. Mục Hạ failure is now one arena-wide 80-base explosion followed by termination; no-guess timeout is 5 seconds after reveal. These user-requested changes supersede random1–5 and repeated clone explosions. Damage remains trial. Re-run the fixed-seed exposure probe matrix; bots do not model human dodging/clone guesses, so it cannot establish final balance. Results: `docs/evidence/wave-boss-feedback-v03-runtime/`.

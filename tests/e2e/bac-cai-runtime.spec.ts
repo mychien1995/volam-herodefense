@@ -198,7 +198,7 @@ test('two real clients: all attacks, five slow swaps, dialogue concurrency, vote
       await expect
         .poll(async () => (await view(a))?.vote?.options.length)
         .toBe(3);
-      expect((await view(a))?.dialogue).toBe('Chọn điều lão phu vừa nói!');
+      expect((await view(a))?.dialogue).toBe('Ai còn nhớ lời lão phu?');
       if (answer === 'correct')
         await a.screenshot({ path: out + '/vote-open.png' });
       await fixture(a, 'stand', '&answer=' + answer);

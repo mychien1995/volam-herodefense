@@ -1,0 +1,11 @@
+# Local wave-boss test mode
+
+Enable `VOLAM_DEV_WAVE_BOSSES=1` before `start-game.cmd`. It is sampled server-side per new room and ignored in production. It does not accept join/message overrides. Protocol 26 adds two display-only defense state fields so all peers see the DEV banner/current stage.
+
+The pure engine options default to 3× arrow movement, zero incoming player HP loss (including periodic/unavoidable HP settlement), and 5% max-HP damage for each valid player damage hit against archetypes `dong_ta`, `tay_doc`, `nam_de`, `bac_cai`. Fractions clamp only floating-point residue so hit 20 can finish an otherwise unhealed boss. Companion/minion damage stays normal. Normal invulnerability, targeting, windups, collisions, boss AI, CC, heals and puzzles remain active. God mode/speed follow heroes into other zones; the chapter driver still uses the existing arena pause policy.
+
+The driver opens wave 5/10/15/20 only after actual predecessor completion. It never writes boss HP, skips phases or marks kills/chapters complete. Existing native gates do the spawn/rest/entry and reward/cleanup. First rest is 3s; subsequent rests are 5s. Ordinary creep invasions are suspended. After actual Bắc Cái defeat the stage is `complete`, with no Vương Trùng Dương spawn or further waves. New room/restart resets the sequence. Immutable production definitions are shallow-copied for the rest overrides; absent env preserves the production recipe/clock.
+
+Implementation: `apps/game-server/src/wave-boss-test-config.ts`, `game-core/wave-boss-test.ts`, the optional DungeonMatch constructor argument, the existing common hurt/movement pipelines, and defense HUD text inside the existing viewport. No artwork regeneration or exterior panel.
+
+Focused verification: `tests/wave-boss-test.test.ts` covers the real accepted-A sequence, exact 5% after mitigation,20-hit floating-point residue, god mode including unavoidable loss, 3× movement, zone transitions, flag defaults/production refusal and forged payload refusal. `tests/wave-boss-test-room.test.ts` uses real SDK peers. `playwright.wave-boss-test.config.ts` uses only the env flag and arrows/A on two production clients; no fixture endpoints or injected kill/HP outcomes. Test evidence is under `docs/evidence/wave-boss-test/`.

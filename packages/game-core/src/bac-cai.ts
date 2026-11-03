@@ -1,7 +1,9 @@
+import { announceBossSkill } from './boss-skill-announcement.js';
+import { bacCaiWander } from './bac-cai-wander.js';
 import { addCreep } from './simulation.js';
 import { emit, hurt } from './combat.js';
 import { gainExperience } from './progression.js';
-import { applyStatus, hasStatus } from './status.js';
+import { hasStatus } from './status.js';
 import {
   blocked,
   direction,
@@ -77,8 +79,10 @@ export class BacCaiEncounter {
   outcomeUntil = 0;
   private nextAction = 0;
   private nextSpecial = 0;
+  private summonedDogs = false;
   private cooldowns = new Map<BacCaiAbility, number>();
   private forms: string[] = [];
+  private spinHits = new Map<string, number>();
   private slots: number[] = [];
   private splitOrigin: Point = { x: 0, y: 0 };
   private cloneStart = 0;
@@ -130,6 +134,8 @@ export class BacCaiEncounter {
       xp: 0,
       gold: 0,
     };
+    if ((w.creeps.get('boss_nam_de')?.hp ?? 1) <= 0)
+      w.creeps.delete('boss_nam_de');
     w.bacCai = this;
     this.nextPreference = w.tick;
     this.nextVote = w.tick + this.ticks(d.preferences.voteEveryMs, c);
@@ -281,7 +287,7 @@ export class BacCaiEncounter {
     target ??= heroes[0];
     if (!target) return false;
     const heading = direction(target.x - b.x, target.y - b.y);
-    if (ability === 'vortex' || ability === 'clones') {
+    if (ability === 'vortex') {
       b.x = d.center.x;
       b.y = d.center.y;
     }
@@ -313,8 +319,8 @@ export class BacCaiEncounter {
         end = d.clones.splitMs + this.roundMs() * 5;
         break;
       case 'vortex':
-        release = d.vortex.channelMs;
-        end = release + d.vortex.recoveryMs;
+        release = d.vortex.windupMs;
+        end = release + d.vortex.activeMs + d.vortex.recoveryMs;
         break;
       case 'tether':
         release = d.tether.releaseMs;
@@ -325,8 +331,8 @@ export class BacCaiEncounter {
         end = d.field.recoveryMs;
         break;
       case 'spiral':
-        release = d.spiral.releaseMs;
-        end = d.spiral.recoveryMs;
+        release = d.spiral.dashMs + d.spiral.releaseMs;
+        end = d.spiral.dashMs + d.spiral.recoveryMs;
         break;
     }
     this.cast = {
@@ -352,7 +358,13 @@ export class BacCaiEncounter {
       this.cast.y = b.y;
     }
     b.actionUntil = this.cast.end;
+    if (ability === 'vortex') {
+      this.cast.wanderSeed = Math.floor(w.random() * 4294967296);
+      this.spinHits.clear();
+    }
     if (ability === 'clones') this.split(w, c);
+    if (ability === 'dogs') this.summonedDogs = true;
+    announceBossSkill(w, b.id, 'bc_' + ability);
     emit(w, {
       kind: 'cast',
       sourceId: b.id,
@@ -493,23 +505,6 @@ export class BacCaiEncounter {
         }
         break;
       case 'vortex':
-        for (const h of this.living(w))
-          if (distance(h, b) <= d.vortex.slamRadius + c.radius) {
-            this.damage(w, c, h, 'vortex', d.damage.vortex);
-            if (h.hp > 0)
-              applyStatus(
-                h,
-                {
-                  kind: 'stun',
-                  magnitude: 1,
-                  durationTicks: this.ticks(d.vortex.stunMs, c),
-                },
-                b.id,
-                'bc_vortex',
-                w.tick,
-              );
-          }
-        this.addEffect(w, 'explosion', b, heading, 600, c);
         break;
       case 'tether': {
         const pool = this.living(w);
@@ -585,10 +580,52 @@ export class BacCaiEncounter {
         cast.nextHit = w.tick + this.ticks(d.staff.cadenceMs, c);
       }
     }
-    if (cast.ability === 'vortex' && w.tick < cast.release)
-      for (const h of this.living(w))
-        if (distance(h, b) > 36)
-          this.move(h, b, d.vortex.pullSpeed, c, c.radius);
+    if (
+      cast.ability === 'spiral' &&
+      w.tick <= cast.start + this.ticks(d.spiral.dashMs, c)
+    ) {
+      const progress = Math.min(
+        1,
+        (w.tick - cast.start) / this.ticks(d.spiral.dashMs, c),
+      );
+      const to = {
+        x: cast.origin.x + (d.center.x - cast.origin.x) * progress,
+        y: cast.origin.y + (d.center.y - cast.origin.y) * progress,
+      };
+      this.move(b, to, distance(b, to) * c.tickRate, c);
+      b.pose = 'walk';
+    }
+    if (cast.ability === 'vortex') {
+      const activeEnd = cast.release + this.ticks(d.vortex.activeMs, c);
+      const points = bacCaiWander(
+        cast.wanderSeed ?? 0,
+        Math.max(0, (w.tick - cast.release) / c.tickRate),
+        c.heroBounds ?? {
+          x: d.center.x,
+          y: d.center.y,
+          radiusX: 324,
+          radiusY: 294,
+        },
+        d.vortex,
+      );
+      Object.assign(b, points[0]);
+      if (w.tick >= cast.release && w.tick < activeEnd) {
+        for (const [i, p] of points.entries())
+          for (const h of this.living(w)) {
+            const key = i + ':' + h.id;
+            if (
+              distance(h, p) <= d.vortex.radius + c.radius &&
+              w.tick >= (this.spinHits.get(key) ?? 0)
+            ) {
+              this.damage(w, c, h, 'vortex', d.damage.vortex);
+              this.spinHits.set(
+                key,
+                w.tick + this.ticks(d.vortex.cadenceMs, c),
+              );
+            }
+          }
+      }
+    }
     if (w.tick >= cast.release && !cast.released) {
       cast.released = true;
       this.release(w, c, cast);
@@ -765,7 +802,7 @@ export class BacCaiEncounter {
         answer: this.preference,
         outcome: '',
       };
-      this.dialogue = 'Chọn điều lão phu vừa nói!';
+      this.dialogue = 'Ai còn nhớ lời lão phu?';
     }
     const vote = this.vote;
     if (!vote || vote.outcome) return;
@@ -802,8 +839,15 @@ export class BacCaiEncounter {
     const b = w.creeps.get(this.bossId);
     if (!b || this.phase === 'cleared' || this.phase === 'defeated') return;
     // Resolve the complete tick hit set, including simultaneous real and clone hits.
-    const cloneHitCount = this.cloneHits.size;
-    for (let hit = 0; hit < cloneHitCount; hit++) {
+    const timeout =
+      this.forms.length > 0 &&
+      !this.realHit &&
+      this.cloneAge(w, c) >=
+        this.definition.clones.splitMs +
+          5 * this.roundMs() +
+          this.definition.clones.guessMs;
+    const explode = this.cloneHits.size > 0 || timeout;
+    if (explode) {
       for (const h of this.living(w))
         this.damage(
           w,
@@ -821,11 +865,11 @@ export class BacCaiEncounter {
         c,
       );
     }
-    // A wrong guess punishes the team but does not solve the puzzle.
-    // Keep all forms until a genuine real-body hit, matching the approved failure choreography.
+    // A single outcome per tick, including an AoE touching both real body and copies.
     this.cloneHits.clear();
-    if (this.realHit) {
+    if (explode || this.realHit) {
       this.removeForms(w);
+      b.pose = 'idle';
       this.nextAction = w.tick + this.ticks(this.definition.actionGapMs, c);
     }
     if (b.hp <= 0) {
@@ -852,7 +896,8 @@ export class BacCaiEncounter {
       this.nextPreference = w.tick;
       this.nextAction = w.tick + this.ticks(this.definition.actionGapMs, c);
     }
-    this.stepPreferences(w, c);
+    if (!this.forms.length && this.cast?.ability !== 'clones')
+      this.stepPreferences(w, c);
     this.stepDogs(w, c);
     if (this.phase !== 'sleep' && this.phase !== 'drink') this.stepCast(w, c);
     this.stepEffects(w, c);
@@ -879,7 +924,10 @@ export class BacCaiEncounter {
           w.tick >= (this.cooldowns.get(a) ?? 0),
       );
       if (available.length) {
-        const ability = this.random(w, available);
+        const ability =
+          !this.summonedDogs && available.includes('dogs')
+            ? 'dogs'
+            : this.random(w, available);
         this.begin(w, c, ability, this.random(w, heroes));
         this.cooldowns.set(
           ability,
@@ -958,6 +1006,7 @@ export class BacCaiEncounter {
     const action = this.cast
       ? { ...this.cast, targetId: '', nextHit: 0 }
       : null;
+    if (action) delete action.wanderSeed;
     return {
       tick: w.tick,
       tickRate: c.tickRate,
@@ -984,6 +1033,28 @@ export class BacCaiEncounter {
         const a = w.creeps.get(id)!;
         return { key: 'form_' + i, x: a.x, y: a.y, fx: a.fx, fy: a.fy };
       }),
+      spinners:
+        this.cast?.ability === 'vortex' &&
+        w.tick >= this.cast.start + this.ticks(300, c) &&
+        w.tick <
+          this.cast.release + this.ticks(this.definition.vortex.activeMs, c)
+          ? bacCaiWander(
+              this.cast.wanderSeed ?? 0,
+              Math.max(0, (w.tick - this.cast.release) / c.tickRate),
+              c.heroBounds ?? {
+                x: this.definition.center.x,
+                y: this.definition.center.y,
+                radiusX: 324,
+                radiusY: 294,
+              },
+              this.definition.vortex,
+            ).map((p, i) => ({
+              key: 'spinner_' + i,
+              ...p,
+              fx: this.cast!.fx,
+              fy: this.cast!.fy,
+            }))
+          : [],
       clonePhase: clones ? this.cloneStage(w, c) : '',
       swaps: clones
         ? Math.max(
@@ -1029,7 +1100,7 @@ export class BacCaiEncounter {
             ]
           : [];
       }),
-      dialogue: this.dialogue,
+      dialogue: clones ? '' : this.dialogue,
       preference: this.preference,
       vote: this.vote
         ? {

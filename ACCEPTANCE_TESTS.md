@@ -367,3 +367,30 @@ Run tests/nam-de.test.ts, tests/nam-de-room.test.ts, scripts/verify-nam-de.py, t
 # Bắc Cái live integration acceptance — 2026-11-02
 
 Use `tests/bac-cai-runtime.test.ts`, `tests/bac-cai-room.test.ts` and `playwright.bac-cai.config.ts`. Require authoritative A/QWER hits on boss/dogs, exact-four summons, all nine attack paths, five slow crossing swaps, shuffle-only immunity, order-independent real+clone AoE punishment, server-position vote with tie/zero wrong and sleep10s/heal10% max once, solo/pair/death/zone/disconnect tether, detached dragon concurrent with cast/dialogue, no statue damage/items, idempotent reward and cleanup. Verify late public snapshots and zone removal without leaking the real form. Retain live408-frame/102-clip gallery regression without modifying approval-locked historical evidence; two real clients for phases and six for natural keyboard combat. Do not claim natural campaign arrival until the three earlier wave bosses have real adapters; no final runtime/balance approval is implied. Details: `docs/BAC_CAI_RUNTIME.md`.
+
+
+## Wave boss feedback runtime — 2026-11-03
+
+- Four real boss entries recall dungeon/dead players, hide/protect the statue, confine movement/dash/blink to the same court and retry full-party wipes without items; victory restores the statue/collision. The180-second invasion clock continues.
+- Đông Tà normal attack traverses a seeded polygon with petals; active four-way Lạc Anh stays separate. Approved four-facing dash cels load.
+- Mai stronger pull blocks Shift charge spending and immediately fires Ma Ảnh at completion; frontal two-claw VFX oppose vertically.
+- Tây needles are visible and20%slower; approved pool frames loop; stomp shows native core/fragments/new rim without oversized small-raster scaling.
+- Nam ring and tiled large beam remain crisp at gameplay zoom; charge halves; rear dash picks ring/small finger; normal palm uses approved travel cels.
+- Bắc clones and dragon use arena center; detached dragon is faster; natural AI shows dogs; quick tug transitions into pull+slow that permits walking escape and blocks Shift.
+- Exact preview bytes/frame timings/pivots are verified, then actual production Phaser motion is observed with two clients and six-client natural combat/rewards. PNGs only; final visual approval belongs to director. Detailed scope: `docs/WAVE_BOSS_FEEDBACK_RUNTIME.md`.
+
+
+## Wave boss feedback v02 acceptance — 2026-11-03
+
+Require exact127review-input hashes and shipped native PNG/frame/pivot/duration equality. Test quick tug +24tick first-shot delay +150tick Shift lock;200px opposing claws; six border pillars/three inward rays with straight old shots; stomp364.5;1–5individually re-aimed gold shots; four-direction16volley barrage at256ticks/turn;96fixed sky footprints and actual center dash; hand wave/target light without beam; original boss and eight independent moving spinners with moving authoritative damage, no obsolete controls/slam, seed privacy and cleanup; localized one-per-special announcements on all wave/dungeon bosses, silent normals and no Mục Hạ chatter; expired Nam corpse before Bắc Cái. Preserve shared arena/retry/180s/reward/dungeon-life policies. Run focused regressions, production two-client visual/control checks, dungeon callouts, six-network-peer natural combat and deterministic exposure probes. No recordings or inferred director in-game approval. See docs/WAVE_BOSS_FEEDBACK_V02_RUNTIME.md.
+
+
+## Latest boss playtest feedback — 2026-11-03 (protocol 29)
+
+This canonical override supersedes V02 random burst counts and the old repeated wrong-clone punishment. Đông Tà, Tây Độc and Nam Đế each have twenty original Vietnamese combat lines, selected server-side from seeded shuffled decks without repetition until the pool is exhausted. First line after 6 seconds of combat, then every 8–10 seconds when an action gap permits; overhead chat lasts 4 seconds in its own lane alongside the retained skill shouts. Bắc Cái keeps his separate preference/dialogue mechanic and stays silent during Mục Hạ Vô Nhân.
+
+Mục Hạ Vô Nhân keeps its approved split and five pair swaps. At reveal, players have exactly 5 seconds to land a valid guess. A clone hit causes one arena-wide explosion and ends the skill in that simulation tick; all simultaneous clone/real hits settle as one failure, regardless of target iteration order. A real-body-only hit ends it without explosion and cancels the deadline, including on the deadline tick. No valid hit by the deadline causes one explosion and immediate cleanup. No extra explosions after cleanup.
+
+Tiểu Nhất Dương Chỉ always releases five straight golden projectiles, spaced 0.16 seconds, re-aiming at the selected player's current position at each release. Each shot flies straight afterward. Its independent server channel can run with all main skills, QTE and movement without replacing their cast or clocks. Trial repeat interval is 90 ticks / 3 seconds, first windup remains 17 ticks; repeated starts cannot duplicate an active burst. Death, no living players, wipe and encounter cleanup cancel pending shots. The main special animation retains priority while concurrent native gold projectiles render normally.
+
+Approved V01/V02 PNGs, JSONs and preview source remain byte-exact. This update changes runtime behavior and text, not the frozen preview. The common arenas, rewards, dungeon life ledgers, controls and separate inventory-v2 scope remain as in V02. Matching protocol 29 services and a new room are required. Current implementation/validation: `docs/WAVE_BOSS_FEEDBACK_V03_RUNTIME.md`.

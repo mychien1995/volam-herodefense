@@ -1,3 +1,4 @@
+import { WaveBossHealth } from './wave-boss-feedback-art.js';
 import Phaser from 'phaser';
 import type { LobbyState } from '@volam/game-protocol';
 import type { CombatEvent, DongAbility, DongView } from '@volam/game-core';
@@ -84,10 +85,16 @@ export class DongTaRenderer {
     number,
     { bundle: string; clip: string; x: number; y: number; at: number }
   >();
-  constructor(private scene: Phaser.Scene) {}
+  private health: WaveBossHealth;
+  private trail: Array<{ x: number; y: number; tick: number }> = [];
+  constructor(private scene: Phaser.Scene) {
+    this.health = new WaveBossHealth(scene);
+  }
   clear() {
     for (const v of this.images.values()) v.destroy();
     this.images.clear();
+    this.health.clear();
+    this.trail = [];
     for (const v of this.labels.values()) v.destroy();
     this.labels.clear();
     this.boundary?.destroy();
@@ -165,7 +172,8 @@ export class DongTaRenderer {
       .setScale(scale)
       .setRotation(angle)
       .setDepth(depth)
-      .setVisible(true);
+      .setVisible(true)
+      .setAlpha(1);
     this.used.add(id);
     const observed = this.frames.get(bundle + ':' + clip) ?? new Set<string>();
     observed.add(frame);
@@ -193,25 +201,9 @@ export class DongTaRenderer {
     }
     this.latest = view;
     this.used.clear();
+    this.health.begin();
     const tick =
       view.tick + Math.min(2, (this.scene.time.now - this.received) * 0.03);
-    const statue = this.scene.children.getByName('art01:statue_male') as
-      Phaser.GameObjects.Image | undefined;
-    statue?.setVisible(!view.locked);
-    if (view.locked) {
-      if (!this.boundary)
-        this.boundary = this.scene.add
-          .ellipse(
-            view.bounds.x,
-            view.bounds.y,
-            view.bounds.radiusX * 2,
-            view.bounds.radiusY * 2,
-          )
-          .setStrokeStyle(2, 0xe6bb84, 0.65)
-          .setDepth(95)
-          .setName('dong_ta:boundary');
-      this.boundary.setVisible(true);
-    } else this.boundary?.setVisible(false);
     for (const actor of state.creeps.values()) {
       const bundle = actors[actor.archetypeId];
       if (!bundle || actor.zoneId !== zone) continue;
@@ -226,6 +218,8 @@ export class DongTaRenderer {
               : actor.pose === 'hurt'
                 ? 'hurt'
                 : 'idle';
+      if (cast?.abilityId === 'lac_anh_normal' && tick >= cast.activeAt)
+        pose = 'dash';
       const useActions = pose === 'thrust' || pose === 'flute';
       const b = useActions ? 'actions' : bundle;
       if (
@@ -239,7 +233,10 @@ export class DongTaRenderer {
       if (this.poses.get(actor.archetypeId)?.token !== token)
         this.poses.set(actor.archetypeId, { token, start: tick });
       const age =
-        (tick - (cast?.startedAt ?? this.poses.get(actor.archetypeId)!.start)) /
+        (tick -
+          (pose === 'dash'
+            ? cast!.activeAt
+            : (cast?.startedAt ?? this.poses.get(actor.archetypeId)!.start))) /
         30;
       this.cel(
         actor.archetypeId,
@@ -252,24 +249,53 @@ export class DongTaRenderer {
         0,
         actor.y + 0.5,
       );
-      let label = this.labels.get(actor.archetypeId);
-      if (!label) {
-        label = this.scene.add
-          .text(0, 0, '', {
-            fontFamily: 'Segoe UI',
-            fontSize: '11px',
-            color: '#ffebc5',
-            backgroundColor: '#20180cba',
-          })
-          .setOrigin(0.5, 1);
-        this.labels.set(actor.archetypeId, label);
-      }
-      label
-        .setPosition(actor.x, actor.y - 65)
-        .setDepth(actor.y + 1)
-        .setText(
-          `${bundle === 'dong' ? 'Đông Tà' : bundle === 'mai' ? 'Mai Siêu Phong' : 'Hoàng Dung'} ${Math.ceil(actor.hp)}/${actor.maxHp}`,
+      const name =
+        bundle === 'dong'
+          ? 'Đông Tà'
+          : bundle === 'mai'
+            ? 'Mai Siêu Phong'
+            : 'Hoàng Dung';
+      this.health.draw(
+        actor.archetypeId,
+        name,
+        actor.x,
+        actor.y - 65,
+        actor.hp,
+        actor.maxHp,
+      );
+      if (
+        cast?.abilityId === 'lac_anh_normal' &&
+        tick >= cast.activeAt &&
+        actor.hp > 0
+      ) {
+        const heading = Math.atan2(actor.fy, actor.fx);
+        this.cel(
+          'lac-anh-normal:slash',
+          'fan',
+          'blossom_slash_wave',
+          actor.x,
+          actor.y - 22,
+          ((tick - cast.activeAt) / 30) % 0.4,
+          0.9,
+          heading,
         );
+        if (!this.trail.length || tick - this.trail.at(-1)!.tick > 2)
+          this.trail.push({ x: actor.x, y: actor.y, tick });
+        this.trail = this.trail.filter((p) => tick - p.tick < 13);
+        this.trail.forEach((p, i) =>
+          this.cel(
+            'lac-anh-normal:petal:' + i,
+            'fx',
+            'petal_patch',
+            p.x,
+            p.y - 10,
+            tick / 30,
+            0.35,
+            0,
+            p.y - 0.1,
+          ).setAlpha(1 - (tick - p.tick) / 14),
+        );
+      } else if (actor.archetypeId === 'dong_ta') this.trail = [];
     }
     for (const [id, c] of this.corpses) {
       const age = (this.scene.time.now - c.at) / 1000;
@@ -338,7 +364,7 @@ export class DongTaRenderer {
         case 'slash':
           bundle = 'fan';
           clip = 'blossom_slash_wave';
-          scale = 2;
+          scale = 1;
           break;
         case 'petal':
           clip = tick < e.activeAt ? 'petal_patch' : 'petal_burst';
@@ -354,21 +380,24 @@ export class DongTaRenderer {
               ? 'claw_left'
               : 'claw_right';
           if (!e.speed) {
-            x += e.fx * 58;
-            y += e.fy * 58;
-            rotation =
-              angle + (e.targetId === '0' ? Math.PI / 2 : -Math.PI / 2);
-            scale = 1.3;
-            depth = 100;
-          }
+            const p = Math.min(1, age / 0.4),
+              index = e.targetId === '0' ? 0 : 1;
+            const side = (index === 0 ? 1 : -1) * (-92 + 184 * p),
+              forward = 32 + 168 * p;
+            x = e.x + e.fx * forward - e.fy * side;
+            y = e.y - 20 + e.fy * forward + e.fx * side;
+            rotation = angle + (index === 0 ? 0 : Math.PI);
+            scale = 0.9;
+            depth = e.y + 0.1;
+          } else scale = 0.75;
           break;
         case 'pull':
           bundle = 'maifx';
           clip = 'suction';
-          scale = 2;
+          scale = 1;
           rotation = 0;
-          depth = 100;
-          y = e.y;
+          depth = e.y - 0.1;
+          y = e.y - 20;
           break;
         case 'pouch': {
           bundle = 'maifx';
@@ -451,6 +480,7 @@ export class DongTaRenderer {
           depth,
         );
     }
+    this.health.end();
     for (const [id, v] of this.images)
       if (!this.used.has(id)) {
         v.destroy();
@@ -484,7 +514,11 @@ export class DongTaRenderer {
           frame: v.frame.name,
         })),
       effects: this.images.size,
-      boundaryVisible: this.boundary?.visible ?? false,
+      boundaryVisible:
+        (
+          this.scene.children.getByName('wave-boss:boundary') as
+            Phaser.GameObjects.Graphics | undefined
+        )?.visible ?? false,
     };
   }
 }

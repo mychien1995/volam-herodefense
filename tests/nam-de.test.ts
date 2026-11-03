@@ -118,14 +118,14 @@ describe('Nam Đế authoritative encounter', () => {
     expect(m.invasion!.nextWaveTick - m.tick).toBe(5400);
     expect(m.arena.world.namDe!.spawnCount).toBe(1);
   });
-  it('chooses farthest at release and locks straight finger travel', () => {
+  it('keeps the selected target and locks each released finger travel', () => {
     const s = setup();
     beginNamDeCast(s.w, s.c, 'nam_de_small_finger', 'a');
     s.h.x = 1400;
-    steps(s, 1);
+    steps(s, s.d.smallWindupTicks);
     const e = [...s.w.namDe!.effects.values()][0]!;
     expect(e.kind).toBe('finger');
-    expect(s.w.namDe!.cast!.targetId).toBe('a');
+    expect(s.w.namDe!.smallCast!.targetId).toBe('a');
     const v = [e.fx, e.fy];
     s.h.y = 300;
     steps(s, 2);
@@ -166,6 +166,8 @@ describe('Nam Đế authoritative encounter', () => {
   });
   it('emits16 volleys of4 rays with27tick warnings,90deg spacing and no tracking', () => {
     const s = setup();
+    // Keep both targets alive while the independent small-finger channel also runs.
+    for (const h of [s.h, s.other]) h.hp = h.maxHp = 100000;
     beginNamDeCast(s.w, s.c, 'lien_hoan_nhat_duong_chi');
     const all = new Map<string, number[]>();
     for (let i = 0; i < 500; i++) {
@@ -199,7 +201,7 @@ describe('Nam Đế authoritative encounter', () => {
         expect(
           group[0]![4]! -
             [...all.values()].find((v) => v[6] === (i - 1) * 4)![4]!,
-        ).toBe(24);
+        ).toBe(16);
     }
   });
   it('QTE locks movement, incoming damage and attacks;10 physical correct keys resolve immediately', () => {
@@ -329,11 +331,11 @@ describe('Nam Đế authoritative encounter', () => {
     steps(s, 300);
     expect(s.w.namDe!.controls.get('a')?.confusion).toBeUndefined();
   });
-  it('schedules32 fixed warned sky strikes, keeps a single expanding centered ring', () => {
+  it('schedules96 fixed warned sky strikes, keeps a single expanding centered ring', () => {
     const s = setup();
     beginNamDeCast(s.w, s.c, 'nhat_duong_quy_tong');
     const rays = [...s.w.namDe!.effects.values()];
-    expect(rays).toHaveLength(32);
+    expect(rays).toHaveLength(96);
     expect(rays.every((e) => e.activeAt - e.startedAt === 9)).toBe(true);
     s.h.x = 50;
     expect(rays.every((e) => e.x !== 50)).toBe(true);
@@ -400,7 +402,7 @@ describe('Nam Đế authoritative encounter', () => {
       ...b.w.namDe!.effects.values(),
     ]);
   });
-  it('leaving arena cancels own challenge; boss death cancels pending immunity and statuses', () => {
+  it('arena lock blocks leaving; disconnect and boss death cancel pending challenges', () => {
     const c = structuredClone(m1Config);
     c.creepSpawns = [];
     const m = new DungeonMatch(
@@ -428,7 +430,9 @@ describe('Nam Đế authoritative encounter', () => {
     beginNamDeCast(w, m.arena.config, 'dai_ly_phong_huyet', 'a');
     for (let i = 0; i < 25; i++) m.step();
     expect(h.namDeLocked).toBe(true);
-    expect(m.enter('a', 'private')).toBeUndefined();
+    expect(m.enter('a', 'private')).toBeDefined();
+    expect(m.zoneOf('a')?.id).toBe('arena');
+    m.disconnect('a');
     expect(w.namDe!.controls.has('a')).toBe(false);
     expect(h.namDeLocked).toBe(false);
     const target = w.heroes.get('b')!;
@@ -487,7 +491,7 @@ describe('Nam Đế authoritative encounter', () => {
     d.h.fx = 1;
     d.h.fy = 0;
     expect(beginNamDeCast(d.w, d.c, 'nam_de_dash', 'a')).toBe(true);
-    steps(d, d.d.pressureDashTicks);
+    steps(d, d.d.dashTicks);
     expect(d.b.x).toBeCloseTo(836);
     expect(d.b.y).toBeCloseTo(800);
   });

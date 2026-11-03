@@ -51,7 +51,31 @@ function setup(n = 2, configure?: (d: BacCaiDefinition) => void) {
   return { w, c, e, b, d, step, ms };
 }
 describe('Bắc Cái authoritative encounter', () => {
-  it('a wrong guess alone explodes once and retains all forms; distinct clones still punish independently', () => {
+  it('an accepted manual basic against a revealed copy explodes and removes all forms in the same simulation tick', () => {
+    const { w, c, e, d, step, ms } = setup();
+    e.begin(w, c, 'clones');
+    step(ms(d.clones.splitMs + 5 * 2100));
+    const copy = [...w.creeps.values()].find(
+      (a) => a.archetypeId === 'bc_form',
+    )!;
+    const h = w.heroes.get('hero_0')!;
+    h.x = copy.x - 40;
+    h.y = copy.y;
+    h.fx = 1;
+    h.fy = 0;
+    submitInput(w, h.id, 1, { kind: 'basic' });
+    step();
+    expect(e.view(w, c).forms).toHaveLength(0);
+    expect(
+      w.events.some((x) => x.kind === 'attack' && x.sourceId === h.id),
+    ).toBe(true);
+    expect(
+      w.events.filter(
+        (x) => x.kind === 'hit' && x.abilityId === 'bc_clone_explosion',
+      ),
+    ).toHaveLength(2);
+  });
+  it('a wrong guess ends Mục Hạ immediately and one same-tick AoE explosion punishes the whole party once', () => {
     const { w, c, e, b, d, step, ms } = setup();
     e.begin(w, c, 'clones');
     step(ms(d.clones.splitMs + 5 * 2100));
@@ -63,7 +87,7 @@ describe('Bắc Cái authoritative encounter', () => {
     hurt(w, copies[0]!, h.id, 'aoe', 10, c);
     hurt(w, copies[1]!, h.id, 'aoe', 10, c);
     step();
-    expect(e.view(w, c).forms).toHaveLength(8);
+    expect(e.view(w, c).forms).toHaveLength(0);
     expect(
       w.events.filter(
         (x) =>
@@ -71,7 +95,13 @@ describe('Bắc Cái authoritative encounter', () => {
           x.abilityId === 'bc_clone_explosion' &&
           x.targetId === h.id,
       ),
+    ).toHaveLength(1);
+    expect(
+      w.events.filter(
+        (x) => x.kind === 'hit' && x.abilityId === 'bc_clone_explosion',
+      ),
     ).toHaveLength(2);
+    expect(e.cast).toBeUndefined();
     step();
     expect(
       w.events.filter((x) => x.abilityId === 'bc_clone_explosion'),
@@ -79,6 +109,28 @@ describe('Bắc Cái authoritative encounter', () => {
     hurt(w, b, h.id, 'a', 10, c);
     step();
     expect(e.view(w, c).forms).toHaveLength(0);
+  });
+  it('five seconds without a valid guess after swapping explodes once and ends Mục Hạ; a real hit cancels the deadline', () => {
+    for (const hitReal of [false, true]) {
+      const { w, c, e, b, d, step, ms } = setup();
+      e.begin(w, c, 'clones');
+      step(ms(d.clones.splitMs + 5 * 2100));
+      expect(e.view(w, c).clonePhase).toBe('reveal');
+      step(ms(5000) - 1);
+      expect(e.view(w, c).forms).toHaveLength(8);
+      if (hitReal) hurt(w, b, 'hero_0', 'a', 10, c);
+      step();
+      expect(e.view(w, c).forms).toHaveLength(0);
+      expect(
+        w.events.filter(
+          (x) => x.kind === 'hit' && x.abilityId === 'bc_clone_explosion',
+        ),
+      ).toHaveLength(hitReal ? 0 : 2);
+      step();
+      expect(w.events.some((x) => x.abilityId === 'bc_clone_explosion')).toBe(
+        false,
+      );
+    }
   });
   it('preserves waves, statue and independent dungeon boss; entry markers/corners are legal', () => {
     const { w, c, d } = setup();
@@ -315,10 +367,15 @@ describe('Bắc Cái authoritative encounter', () => {
     ).toHaveLength(0);
     e.cast = undefined;
     e.begin(w, c, 'vortex', b);
-    const crossZoneHits=[];
+    const crossZoneHits = [];
     for (let i = 0; i < 100; i++) {
       match.step();
-      crossZoneHits.push(...match.events.filter(({event})=>event.targetId===a.id&&event.abilityId.startsWith('bc_')));
+      crossZoneHits.push(
+        ...match.events.filter(
+          ({ event }) =>
+            event.targetId === a.id && event.abilityId.startsWith('bc_'),
+        ),
+      );
     }
     expect(crossZoneHits).toHaveLength(0);
     match.remove('b');
@@ -360,7 +417,7 @@ describe('Bắc Cái authoritative encounter', () => {
   it('spiral fixed origin survives release/recovery while another cast runs; simultaneous dialogue', () => {
     const { w, c, e, b, d, step, ms } = setup();
     e.begin(w, c, 'spiral');
-    step(ms(d.spiral.recoveryMs));
+    step(ms(d.spiral.dashMs + d.spiral.recoveryMs));
     const dragon = [...e.effects.values()].find((x) => x.kind === 'spiral')!,
       origin = { ...dragon.origin };
     expect(e.cast).toBeUndefined();
@@ -378,26 +435,34 @@ describe('Bắc Cái authoritative encounter', () => {
         (w.tick - dragon.start) / (dragon.end - dragon.start),
         d.spiral.radius,
         d.spiral.turns,
+        d.spiral.startRadius,
+        d.spiral.yScale,
       ),
     );
   });
-  it('whole-arena vortex pulls and slams with stun, never snaps actors back after recovery', () => {
-    const { w, c, e, b, d, step, ms } = setup(),
+  it('vortex replaces pull/slam with nine wandering damage sources and cleans up on recovery', () => {
+    const { w, c, e, b, step, ms } = setup(),
       h = w.heroes.get('hero_0')!;
     h.x = b.x + 300;
     h.y = b.y;
-    const start = h.x;
+    const start = { x: h.x, y: h.y };
     e.begin(w, c, 'vortex', h);
-    step(ms(1000));
-    expect(h.x).toBeLessThan(start);
-    step(ms(2000));
-    expect(h.statuses?.some((s) => s.kind === 'stun')).toBe(true);
-    const pulled = { x: h.x, y: h.y };
-    step(ms(800));
-    expect({ x: h.x, y: h.y }).toEqual(pulled);
-    expect(h.hp).toBeLessThan(h.maxHp);
+    step(ms(1100));
+    const a = e.view(w, c);
+    expect(a.spinners).toHaveLength(9);
+    step(12);
+    const z = e.view(w, c);
+    expect(z.boss).not.toEqual(a.boss);
+    expect({ x: h.x, y: h.y }).toEqual(start);
+    expect(
+      (h.statuses ?? []).some((s) =>
+        ['stun', 'slow', 'dash_lock'].includes(s.kind),
+      ),
+    ).toBe(false);
+    expect(z.action?.wanderSeed).toBeUndefined();
+    step(e.cast!.end - w.tick);
     expect(e.cast).toBeUndefined();
-    expect(d.vortex.slamRadius).toBeGreaterThan(100);
+    expect(e.view(w, c).spinners).toHaveLength(0);
   });
   it('field warning/landing/geometry share one legal center; broad 田 ground damage does not hit a quadrant gap', () => {
     const { w, c, e, b, d, step, ms } = setup(),
@@ -427,7 +492,7 @@ describe('Bắc Cái authoritative encounter', () => {
     step(ms(900));
     e.cast = undefined;
     e.begin(w, c, 'spiral');
-    step(ms(650));
+    step(ms(650 + bacCaiDefinition.spiral.dashMs));
     const dragon = [...e.effects.values()].find((x) => x.kind === 'spiral')!;
     e.begin(w, c, 'vortex');
     const phrase = e.view(w, c).dialogue;
@@ -478,7 +543,7 @@ describe('Bắc Cái authoritative encounter', () => {
       step(ms(100) + 1);
       const v = e.view(w, c),
         vote = v.vote!;
-      expect(v.dialogue).toBe('Chọn điều lão phu vừa nói!');
+      expect(v.dialogue).toBe('Ai còn nhớ lời lão phu?');
       expect(vote.options).toHaveLength(3);
       const right = vote.options.find((o) => o.preference === v.preference)!,
         wrong = vote.options.find((o) => o !== right)!;

@@ -1,3 +1,4 @@
+import { announceBossSkill } from './boss-skill-announcement.js';
 import type {
   ChuDefinition,
   ChuEncounter,
@@ -166,6 +167,7 @@ function begin(
       : 'cast';
   b.actionUntil = s.until;
   signal(w, phase, b, 'warning');
+  announceBossSkill(w,b.id,phase);
   if (phase === 'drink') {
     for (const [i, h] of alive(w).entries()) {
       const p = {

@@ -48,6 +48,14 @@ export const dongTaDefinitionSchema = z
       range: positive,
       halfAngle: z.number().positive().max(Math.PI),
     }),
+    normalDash: z.strictObject({
+      approachTicks: ticks,
+      segmentTicks: ticks,
+      halfWidth: positive,
+      paths: z
+        .array(z.array(z.array(z.number().finite()).length(2)).min(4))
+        .length(4),
+    }),
     beads: z.strictObject({
       min: z.literal(8),
       max: z.literal(14),
@@ -73,7 +81,13 @@ export const dongTaDefinitionSchema = z
       speed: positive,
       radius: positive,
     }),
-    pull: z.strictObject({ range: positive, speed: positive }),
+    pull: z.strictObject({
+      range: positive,
+      speed: positive,
+      stopDistance: positive,
+      lockTicks: ticks,
+      followupTicks: ticks,
+    }),
     poison: z.strictObject({
       radius: positive,
       flightTicks: ticks,
@@ -160,6 +174,39 @@ export const dongTaDefinition = dongTaDefinitionSchema.parse({
   gold: 360,
   thrust: { range: 380, hits: 13, halfWidth: 24 },
   fan: { range: 180, halfAngle: Math.PI / 3 },
+  normalDash: {
+    approachTicks: 6,
+    segmentTicks: 10,
+    halfWidth: 68,
+    paths: [
+      [
+        [-230, -150],
+        [230, -130],
+        [0, 215],
+        [-230, -150],
+      ],
+      [
+        [-195, -170],
+        [195, -170],
+        [195, 170],
+        [-195, 170],
+        [-195, -170],
+      ],
+      [
+        [-275, 0],
+        [0, -230],
+        [275, 0],
+        [0, 230],
+        [-275, 0],
+      ],
+      [
+        [-235, -160],
+        [235, -160],
+        [-235, 160],
+        [235, 160],
+      ],
+    ],
+  },
   beads: { min: 8, max: 14, speed: 680, range: 700, radius: 9 },
   slash: { range: 280, halfWidth: 68, travelTicks: Math.round(0.5 * rate) },
   petals: {
@@ -168,8 +215,14 @@ export const dongTaDefinition = dongTaDefinitionSchema.parse({
     delayTicks: Math.round(2.8 * rate),
     radius: 32,
   },
-  claws: { range: 112, halfWidth: 56, gapTicks: 8, speed: 560, radius: 20 },
-  pull: { range: 400, speed: 160 },
+  claws: { range: 200, halfWidth: 56, gapTicks: 2, speed: 520, radius: 20 },
+  pull: {
+    range: 700,
+    speed: 1600,
+    stopDistance: 58,
+    lockTicks: 5 * rate,
+    followupTicks: 0.8 * rate,
+  },
   poison: {
     radius: 86,
     flightTicks: rate,
@@ -180,14 +233,14 @@ export const dongTaDefinition = dongTaDefinitionSchema.parse({
   sprintMultiplier: 3,
   abilities: {
     ta_kiem_lien_kich: p('Tà Kiếm Liên Kích', 12, 0.45, 0.9, 2.6),
-    lac_anh_normal: p('Lạc Anh Kiếm Pháp', 26, 0.45, 0.5, 2.2),
+    lac_anh_normal: p('Lạc Anh Kiếm Pháp', 26, 0.45, 46 / rate, 2.2),
     dan_chi_than_cong: p('Đàn Chỉ Thần Công', 28, 0.6, 0.5, 9),
     lac_anh_kiem_phap: p('Lạc Anh Kiếm Pháp', 35, 0.7, 0.7, 11),
     ngoc_tieu_hoi_phong: p('Ngọc Tiêu Hồi Phong', 40, 1.1, 0.8, 17),
     trieu_hon_dong_hai: p('Triệu Hồn Đông Hải', 0, 0.8, 0.6, 1),
     bach_cot_trao: p('Bạch Cốt Trảo', 16, 0.35, 0.55, 1.7),
     ma_anh_troc_hon: p('Ma Ảnh Tróc Hồn', 18, 0.55, 1, 8),
-    am_phong_hap_luc: p('Âm Phong Hấp Lực', 0, 0.7, 1.2, 12),
+    am_phong_hap_luc: p('Âm Phong Hấp Lực', 0, 0.4, 0.15, 12),
     doc_cot_bao: p('Độc Cốt Bạo', 27, 0.6, 0.5, 13),
     thanh_am_ho_tro: p('Thanh Âm Hộ Trợ', 0, 0.25, 0.35, 1.8),
     linh_xa_bo: p('Linh Xà Bộ', 0, 0.15, 0.8, 7),

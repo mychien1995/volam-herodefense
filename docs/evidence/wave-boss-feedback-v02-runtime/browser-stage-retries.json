@@ -1,0 +1,7 @@
+{
+  "originalFinalBrowser": "2passed,1failed before gameplay",
+  "cause": "Unawaited SDK school-selection promise timed out while host was still WAITING_LOBBY. No six-player combat ran.",
+  "evidence": "docs/evidence/wave-boss-feedback-v02-runtime/six-client-join-failure.md",
+  "fix": "Host start acknowledged first, then SDK selection/confirmation acknowledged, then browser school controls; retry only six-client stage",
+  "priorEndpointFailure": "Build used ws while QA identity requires http; rebuilt with http before original three-case run. No endpoint guard bypassed."
+}

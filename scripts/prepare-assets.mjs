@@ -1,3 +1,4 @@
+import { prepareWaveBossFeedback } from './prepare-wave-boss-feedback.mjs';
 import { prepareTayDocAssets } from './prepare-tay-doc-assets.mjs';
 import './prepare-nam-de.mjs';
 import { prepareKimAssets } from './prepare-kim-assets.mjs';
@@ -55,6 +56,7 @@ for (const [name, label] of [
   }
 }
 const dest = new URL('apps/game-client/public/assets/', root);
+prepareWaveBossFeedback();
 prepareKimAssets();
 prepareDongTa();
 

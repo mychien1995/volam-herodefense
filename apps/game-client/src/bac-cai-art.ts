@@ -1,3 +1,7 @@
+import {
+  WaveBossHealth,
+  WaveBossFeedbackArt,
+} from './wave-boss-feedback-art.js';
 import Phaser from 'phaser';
 import type { LobbyState } from '@volam/game-protocol';
 import type { BacCaiView } from '@volam/game-core';
@@ -47,7 +51,11 @@ export class BacCaiRenderer {
   private received = 0;
   private clock = 0;
   private latest: BacCaiView | undefined;
+  private health: WaveBossHealth;
+  private feedback: WaveBossFeedbackArt;
   constructor(private scene: Phaser.Scene) {
+    this.health = new WaveBossHealth(scene);
+    this.feedback = new WaveBossFeedbackArt(scene);
     const manifest = scene.cache.json.get('bc_manifest') as {
       assets: Bundle[];
     };
@@ -59,6 +67,8 @@ export class BacCaiRenderer {
     for (const v of this.images.values()) v.destroy();
     for (const v of this.labels.values()) v.destroy();
     this.images.clear();
+    this.health.clear();
+    this.feedback.clear();
     this.labels.clear();
     this.latest = undefined;
     this.lastTick = -1;
@@ -173,6 +183,8 @@ export class BacCaiRenderer {
       Math.min(1, ((this.scene.time.now - this.received) * v.tickRate) / 1000);
     this.latest = v;
     this.seen.clear();
+    this.health.begin();
+    this.feedback.begin();
     const age = (start: number) => ((this.clock - start) * 1000) / v.tickRate,
       cast = v.action,
       b = v.boss;
@@ -213,8 +225,16 @@ export class BacCaiRenderer {
           case 'staff':
             tag = 'staff_combo_' + dir;
             break;
-          case 'palms':
           case 'spiral':
+            if (clock < v.tuning.spiral.dashMs) {
+              tag = 'walk_' + dir;
+              break;
+            }
+            clock -= v.tuning.spiral.dashMs;
+            tag = 'dragon_release_' + dir;
+            frame = Math.min(3, Math.floor(clock / 120));
+            break;
+          case 'palms':
             tag = 'dragon_release_' + dir;
             frame = Math.min(3, Math.floor(clock / 120));
             break;
@@ -226,10 +246,15 @@ export class BacCaiRenderer {
             } else tag = 'staff_combo_' + dir;
             break;
           case 'vortex':
-            tag = cast.released
-              ? 'staff_basic_down'
-              : 'staff_spin_' +
-                ['down', 'left', 'up', 'right'][Math.floor(clock / 120) % 4];
+            tag =
+              this.clock < cast.release
+                ? 'ultimate_charge_' + dir
+                : this.clock <
+                    cast.release +
+                      (v.tuning.vortex.activeMs * v.tickRate) / 1000
+                  ? 'staff_spin_' + dir
+                  : 'idle_' + dir;
+            clock = age(this.clock < cast.release ? cast.start : cast.release);
             break;
           case 'field':
             tag = 'jumping_palm_' + dir;
@@ -253,24 +278,24 @@ export class BacCaiRenderer {
         x = cast.origin.x + (cast.x - cast.origin.x) * p;
         y = cast.origin.y + (cast.y - cast.origin.y) * p;
       }
-      this.cel('boss', asset, tag, x, y, clock, {
-        ...(frame === undefined ? {} : { frame }),
-        depth: y + (cast?.ability === 'field' ? 1 : 0),
-        loop:
-          cast?.ability === 'staff' ||
-          (cast?.ability === 'vortex' && !cast.released) ||
-          (!cast &&
-            b.pose !== 'death' &&
-            v.phase !== 'drink' &&
-            v.phase !== 'sleep'),
-      });
+      if (cast?.ability === 'vortex')
+        this.feedback.cel('spinner:0', 'bc_boss', tag, x, y, clock / 1000, {
+          depth: y,
+          loop: true,
+        });
+      else
+        this.cel('boss', asset, tag, x, y, clock, {
+          ...(frame === undefined ? {} : { frame }),
+          depth: y + (cast?.ability === 'field' ? 1 : 0),
+          loop:
+            cast?.ability === 'staff' ||
+            (!cast &&
+              b.pose !== 'death' &&
+              v.phase !== 'drink' &&
+              v.phase !== 'sleep'),
+        });
       if (v.phase !== 'defeated')
-        this.text(
-          'boss_hp',
-          `Bắc Cái · ${Math.ceil(v.hp)} / ${v.maxHp}`,
-          x,
-          y - 83,
-        );
+        this.health.draw('bac_cai', 'Bắc Cái', x, y - 65, v.hp, v.maxHp);
       if (v.dialogue && v.phase !== 'defeated')
         this.text('dialogue', v.dialogue, x, y - 110);
     } else if (v.forms.length) {
@@ -351,16 +376,45 @@ export class BacCaiRenderer {
           age(cast.start) % 350,
           { angle, alpha: 0.85, loop: true },
         );
-      if (cast.ability === 'vortex')
-        this.cel(
-          'vortex',
-          'bac_cai_staff',
-          cast.released ? 'ground_smash' : 'staff_whirlwind',
-          cast.origin.x,
-          cast.origin.y,
-          age(cast.released ? cast.release : cast.start),
-          { sx: 2.1, sy: 1.5, depth: 15, alpha: 0.8, loop: !cast.released },
-        );
+      if (cast.ability === 'vortex') {
+        const active =
+          this.clock >= cast.release &&
+          this.clock <
+            cast.release + (v.tuning.vortex.activeMs * v.tickRate) / 1000;
+        for (const [i, p] of v.spinners.entries()) {
+          const clock = age(cast.release) / 1000;
+          if (i > 0)
+            this.feedback.cel(
+              'spinner:' + i,
+              'bc_boss',
+              (active ? 'staff_spin_' : 'idle_') + facing(cast.fx, cast.fy),
+              p.x,
+              p.y,
+              Math.max(0, clock),
+              { depth: p.y, loop: active },
+            );
+          if (active)
+            this.feedback.cel(
+              'spin-fx:' + i,
+              'bc_staff',
+              'staff_whirlwind',
+              p.x,
+              p.y,
+              clock,
+              { sx: 1, sy: 0.65, depth: p.y + 0.2, loop: true },
+            );
+          else if (i > 0)
+            this.feedback.cel(
+              'spin-smoke:' + i,
+              'bc_fx',
+              'clone_smoke',
+              p.x,
+              p.y,
+              age(cast.start) / 1000 - 0.3,
+              { sx: 0.7, sy: 0.7, alpha: 0.7 },
+            );
+        }
+      }
     }
     for (const e of v.effects) {
       const angle = (Math.atan2(e.fy, e.fx) * 180) / Math.PI,
@@ -490,6 +544,8 @@ export class BacCaiRenderer {
           o.y + 55,
         );
       }
+    this.feedback.end();
+    this.health.end();
     for (const [key, image] of this.images)
       if (!this.seen.has(key)) {
         image.destroy();
@@ -503,6 +559,8 @@ export class BacCaiRenderer {
   }
   inspect() {
     return {
+      view: this.latest,
+      feedback: this.feedback.inspect(),
       phase: this.latest?.phase,
       action: this.latest?.action?.ability,
       tick: this.latest?.tick,

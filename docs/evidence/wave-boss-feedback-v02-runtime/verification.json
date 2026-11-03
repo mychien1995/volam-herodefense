@@ -1,0 +1,142 @@
+{
+  "status": "PASS_WITH_STAGE_RETRIES",
+  "date": "2026-11-03",
+  "scope": "Approved cumulative v02 feedback integrated into authoritative game-core/server and production Phaser; final in-game director approval remains separate",
+  "protocolVersion": 28,
+  "approvalLock": "assets/approved_wave_boss_feedback_v02.lock.json",
+  "frozenReviewInputs": 127,
+  "newCels": 16,
+  "newAtlases": 4,
+  "commands": {
+    "final": "pnpm check:final --config playwright.wave-boss-feedback.config.ts",
+    "unitRetry": "pnpm check:quick tests/_wave_vfx_v02_chu_room_retry.test.ts",
+    "build": "VITE_SERVER_URL=http://127.0.0.1:2914 pnpm --filter @volam/game-client build",
+    "assets": "pnpm verify:assets",
+    "browser": "node tools/run-playwright.mjs test --config playwright.wave-boss-feedback.config.ts",
+    "sixRetry": "node tools/run-playwright.mjs test --config playwright.wave-boss-feedback.config.ts --grep 'six clients'",
+    "dungeonVisible": "node tools/run-playwright.mjs test --config playwright.wave-boss-feedback.config.ts --grep 'dungeon bosses'",
+    "balance": "pnpm --filter @volam/game-server exec tsx ../../tools/wave-boss-feedback-balance.ts"
+  },
+  "originalFinalFailure": "714passed/1skipped; Chu room port2798 occupied. Original report remains FAIL.",
+  "originalFinalReport": "docs/evidence/sessions/wave-boss-feedback-v02-final/check-workflow/final-timings.json",
+  "isolatedPortRetry": {
+    "status": "PASS",
+    "originalSha256": "986d913b00080e208d7e71eebe46ef64dafdded4c270d8cb6bc390d3627c7279",
+    "temporarySha256": "d9aa67bf9143594a32028833e67f33ca4a8d931c0a0806e3dc57164c596e967a",
+    "originalPort": 2798,
+    "retryPort": 2938,
+    "onlyPortSubstitution": true,
+    "occupiedServiceUntouched": true,
+    "testCount": 1,
+    "originalTestUnchanged": true,
+    "temporaryCopyRemovedAfterRun": true,
+    "command": "pnpm check:quick tests/_wave_vfx_v02_chu_room_retry.test.ts"
+  },
+  "combinedUniqueUnitCases": 715,
+  "newRuntimeCases": 9,
+  "workflowChecks": 18,
+  "typechecks": "PASS: projects and tests/tools; tools rechecked after browser-helper refinements",
+  "productionBuild": "PASS,10.75s; http endpoint matches owned QA server; prior ws endpoint rejected, no guard bypass",
+  "canonicalAssetValidatorsPassed": 20,
+  "previewAssetValidator": "PASS:43bundles/1977frame references/127locked inputs",
+  "newCelsObservedInProduction": {
+    "snake_bolt": [
+      "snake_bolt:snake_bolt_0",
+      "snake_bolt:snake_bolt_1",
+      "snake_bolt:snake_bolt_2",
+      "snake_bolt:snake_bolt_3"
+    ],
+    "poison_bolt": [
+      "poison_bolt:poison_bolt_0",
+      "poison_bolt:poison_bolt_1",
+      "poison_bolt:poison_bolt_2",
+      "poison_bolt:poison_bolt_3"
+    ],
+    "gold_bolt": [
+      "gold_bolt:gold_bolt_0",
+      "gold_bolt:gold_bolt_1",
+      "gold_bolt:gold_bolt_2",
+      "gold_bolt:gold_bolt_3"
+    ],
+    "spotlight": [
+      "spotlight:spotlight_0",
+      "spotlight:spotlight_1",
+      "spotlight:spotlight_2",
+      "spotlight:spotlight_3"
+    ]
+  },
+  "browser": {
+    "combinedUniqueCases": 3,
+    "twoProductionClients": "PASS,1.5m rounded; includes all9moving spinners, natural Muc Ha opening shout, quiet shuffle, exact timing metadata, real Shift/walk, corpse cleanup, dense sky and native projectiles",
+    "sixNetworkPeers": "PASS,2.5m rounded;2Phaser+4real SDK peers. Full HP, legal level30builds, natural AI and real inputs/rewards. Arranged high-HP VFX-only phase is separate.",
+    "dungeonShouts": "PASS final strengthened onscreen case32.3s; four dungeons/two real clients; anchors must lie in viewport below HUD band",
+    "initialBrowserJoinFailure": "Original three-case run2passed/1failed before combat; awaited host-start then SDK school/confirm acknowledgements fixed test orchestration; evidence preserved in six-client-join-failure.md",
+    "allClientErrors": [],
+    "ownedServices": "Closed by global teardown; occupied2798 service untouched; temporary retry test removed"
+  },
+  "naturalBossClears": [
+    {
+      "boss": "dong_ta",
+      "fullMaxHp": 20150,
+      "seconds": 19.23,
+      "samples": 49,
+      "statueHp": 2000
+    },
+    {
+      "boss": "tay_doc",
+      "fullMaxHp": 2600,
+      "seconds": 2.286,
+      "samples": 6,
+      "statueHp": 2000
+    },
+    {
+      "boss": "nam_de",
+      "fullMaxHp": 30000,
+      "seconds": 26.809,
+      "samples": 86,
+      "statueHp": 2000
+    },
+    {
+      "boss": "bac_cai",
+      "fullMaxHp": 76500,
+      "seconds": 64.616,
+      "samples": 183,
+      "statueHp": 2000
+    }
+  ],
+  "balance": {
+    "runs": 768,
+    "seconds": 46.4460974,
+    "allStatuesProtected": true,
+    "items": 0,
+    "limits": "Bots do not model human dodge, clone guesses or votes; not final balance."
+  },
+  "visualInspection": [
+    "Opened actual production PNGs for gold sky, target spotlight, all-nine moving spinners, dungeon overhead name and six-peer Bac/Nam VFX.",
+    "Exact source PNG/frame/pivot/duration hashes preserved; newly approved projectiles are native-sized and nearest-filtered; no enlarged old projectile.",
+    "Normal integer gameplay display scale and nonrotating camera; viewport overlays preserved. Motion is verified by live frame/position/keyboard assertions, not a screenshot alone."
+  ],
+  "screenshots": {
+    "live-dense-sky.png": "901410c4292d6f48cba2c4148073693ceda0d1cc0237a65ec1f88d0a74040229",
+    "live-dungeon-skill-shout.png": "db02bd1d7a97f5a712fdc210b9fafee83f72e33959c3fff70345778ca495bfa0",
+    "live-nine-moving-spinners.png": "3b9106d127b8acc0f5b9061a58ce4286f7ab71f2399363853d0595e3bb8109bd",
+    "live-phat-quang.png": "b5721c69b366ecfaf15449b8097189939dcc99dc3fc2930a7f0261408fc38842",
+    "live-poison-pools.png": "51b395bdfb45f7721db3e6f2f163ce7c73e5e910f1b10b1a593ccdaed330d53c",
+    "live-poison_bolt.png": "9d2fce126b5cb30bb90923dd7e1f414e3ef82ac19fcc769e248eee29f84aaa6f",
+    "live-snake_bolt.png": "b74db358fc1f8a6656e51dce74374d635da12fbd0a12f04ab6705d2f9779c28b",
+    "live-spotlight.png": "c746acf96eb069f057fc7509761b155606455eed0f74d874d70bde9275bc49d3",
+    "live-stomp-rim.png": "fabc221fa2819041632788607e876bbab72186175556300a579f93500826ea49",
+    "six-player-arena-restored.png": "2d08cee6c073c7a74bd3afbfea3a3a67a50749d14a9a608421448efd11226109",
+    "six-player-bac_cai-vfx.png": "0f907d9795c14f895f4192a56876a22b7640ddcba8af55d677749b14fceb3fba",
+    "six-player-nam_de-vfx.png": "31c6d39e667b91c575714511b983a6a35761dcb6a674ac2ac6532bb4bd78ed66",
+    "six-player-natural-combat.png": "46738adb3c4b1cff8bb97d697c5aaf1f6a58309e38efb9559d1366a65f423364"
+  },
+  "recordingsCreated": false,
+  "limits": [
+    "No natural sixty-minute campaign test claimed; spawn/phase prerequisites are isolated QA middleware.",
+    "Six network peers include two renderers; no six-renderer performance claim.",
+    "Final in-game visual judgment and numeric balance remain with director.",
+    "No M4/inventory-v2 migration, push, merge or deployment performed."
+  ],
+  "startup": "Restart matching client/server through start-game.cmd and create a new room for protocol28."
+}

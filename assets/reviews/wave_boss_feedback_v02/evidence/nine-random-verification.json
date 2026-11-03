@@ -1,0 +1,73 @@
+{
+  "status": "PASS_WITH_ISOLATED_PORT_RETRY",
+  "scope": "VISUAL_PREVIEW_ONLY",
+  "requestedBehavior": "Original Bac Cai and eight clones all spin and move independently to random arena destinations; no fixed center actor or circular orbit",
+  "reproduceFirst": "Updated three regressions failed on original stationary boss/eight-orbit model;13/13cases passed after implementation",
+  "focusedCommand": "pnpm check:quick tests/wave-boss-vfx-preview-v02.test.ts",
+  "finalCommand": "pnpm check:final --config playwright.wave-vfx-preview-v02.config.ts",
+  "originalFinalResult": "705passed,1skipped;port2798 occupied, Chu room hook failed",
+  "originalFailureReport": "docs/evidence/sessions/wave-vfx-v02-nine-random-final/check-workflow/final-timings.json",
+  "isolatedRetry": {
+    "status": "PASS",
+    "originalSha256": "986d913b00080e208d7e71eebe46ef64dafdded4c270d8cb6bc390d3627c7279",
+    "temporarySha256": "d9aa67bf9143594a32028833e67f33ca4a8d931c0a0806e3dc57164c596e967a",
+    "originalPort": 2798,
+    "retryPort": 2938,
+    "onlyPortSubstitution": true,
+    "occupiedServiceUntouched": true,
+    "testCount": 1,
+    "originalTestUnchanged": true,
+    "temporaryCopyRemovedAfterRun": true,
+    "command": "pnpm check:quick tests/_wave_vfx_v02_chu_room_retry.test.ts"
+  },
+  "combinedUniqueUnitCases": 706,
+  "workflowChecks": 18,
+  "typechecks": "PASS:projects and tests/tools",
+  "remainingFinalStages": {
+    "productionBuild": "pnpm --filter @volam/game-client build:PASS,23.39s",
+    "canonicalValidators": "pnpm verify:assets:20passed",
+    "browser": "node tools/run-playwright.mjs test --config playwright.wave-vfx-preview-v02.config.ts:1passed,19.3s"
+  },
+  "observedPhaserDisplacementWorldPixels": {
+    "boss": 72.201,
+    "spinning-clone:0": 73.171,
+    "spinning-clone:1": 72.069,
+    "spinning-clone:2": 72.567,
+    "spinning-clone:3": 73.11,
+    "spinning-clone:4": 72.007,
+    "spinning-clone:5": 72.25,
+    "spinning-clone:6": 71.805,
+    "spinning-clone:7": 72.125
+  },
+  "allNineSpinDuringMotion": true,
+  "damageZones": 9,
+  "modelChecks": "Five seeds,25ms samples:continuous bounded movement, no hit-circle outside arena; exact seeded seek/replay; radial variation for every actor; actor and damage-zone coordinates match",
+  "staticAssets": {
+    "status": "PASS",
+    "scope": "Static assets/preview only; no gameplay or director approval",
+    "bundles": 43,
+    "frameReferences": 1977,
+    "newCels": 16,
+    "retainedAndProductionFiles": 270,
+    "recordingsCreated": false
+  },
+  "errors": [],
+  "webSockets": [],
+  "sixLocalModels": 6,
+  "networkClients": 0,
+  "screenshot": "nine-spinners-six-models.png",
+  "screenshotSha256": "24499ce70adde5006a72e3094b3e70e1f6a92a64b0b60f83924a2c3ec2add5a4",
+  "visualInspection": "Actual PNG opened at normal gameplay display scale; original boss is visibly away from center and clones dispersed independently. Live in-app preview opened with center camera.",
+  "productionSourceUnchanged": 177,
+  "retainedArtAndMetadataUnchanged": 93,
+  "newArtGenerated": false,
+  "recordingsCreated": false,
+  "reviewUrl": "http://127.0.0.1:5461/",
+  "reviewServerPid": 61244,
+  "approval": "CANDIDATE_PENDING_DIRECTOR_REVIEW",
+  "limits": [
+    "Gameplay not integrated",
+    "Six local models, not six network clients",
+    "No director approval inferred from automated checks"
+  ]
+}

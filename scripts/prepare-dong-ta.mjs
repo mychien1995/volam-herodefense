@@ -26,8 +26,18 @@ export function prepareDongTa() {
     clips = 0;
   for (const [id, selection] of Object.entries(approval.selectedBundles)) {
     const b = data.bundles[id],
-      chosen = b.clips.filter((c) => selection.clips.includes(c.name));
-    if (chosen.length !== selection.clips.length || b.image !== selection.image)
+      extra =
+        id === 'dong'
+          ? read('assets/approved_wave_boss_feedback_v01.lock.json')
+              .additionalDongClips
+          : [],
+      chosen = b.clips.filter((c) =>
+        [...selection.clips, ...extra].includes(c.name),
+      );
+    if (
+      chosen.length !== selection.clips.length + extra.length ||
+      b.image !== selection.image
+    )
       throw Error('Invalid Đông Tà selection: ' + id);
     const names = [...new Set(chosen.flatMap((c) => c.frames))];
     for (const name of names)

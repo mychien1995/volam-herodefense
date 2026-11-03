@@ -60,17 +60,21 @@ export interface BacCaiDefinition {
   };
   clones: {
     splitMs: number;
+    guessMs: number;
     moveMs: number;
     staggerMs: number;
     settleMs: number;
     pairs: number[][][];
   };
   vortex: {
-    channelMs: number;
-    pullSpeed: number;
-    slamRadius: number;
-    stunMs: number;
+    windupMs: number;
+    activeMs: number;
     recoveryMs: number;
+    cloneCount: number;
+    radius: number;
+    moveSpeed: number;
+    minLeg: number;
+    cadenceMs: number;
   };
   tether: {
     pullDistance: number;
@@ -89,6 +93,7 @@ export interface BacCaiDefinition {
     activeMs: number;
   };
   spiral: {
+    dashMs: number;
     releaseMs: number;
     recoveryMs: number;
     flightMs: number;
@@ -125,6 +130,7 @@ export interface BacCaiCast extends Point {
   nextHit: number;
   targetId: string;
   origin: Point;
+  wanderSeed?: number;
 }
 export interface BacCaiEffect extends Point {
   id: string;
@@ -154,6 +160,7 @@ export interface BacCaiView {
     | null;
   action: BacCaiCast | null;
   forms: BacCaiForm[];
+  spinners: BacCaiForm[];
   clonePhase: string;
   swaps: number;
   immune: boolean;
@@ -192,6 +199,8 @@ export function validateBacCai(d: BacCaiDefinition, c: SimulationConfig): void {
   };
   visit(d, 'bacCai');
   if (
+    d.vortex.cloneCount !== 8 ||
+    d.vortex.minLeg >= 200 ||
     d.hp <= 0 ||
     d.radius <= 0 ||
     d.speed <= 0 ||
@@ -199,6 +208,7 @@ export function validateBacCai(d: BacCaiDefinition, c: SimulationConfig): void {
     d.tether.cadenceMs <= 0 ||
     d.spiral.cadenceMs <= 0 ||
     d.preferences.changeMs <= 0 ||
+    d.clones.guessMs !== 5000 ||
     d.clones.moveMs <= 0 ||
     d.beam.length !== 768 ||
     d.preferences.sleepMs !== 10000 ||

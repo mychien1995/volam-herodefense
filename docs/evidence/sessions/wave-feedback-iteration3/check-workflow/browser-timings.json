@@ -1,0 +1,39 @@
+{
+  "runId": "6b7ebd93-a4ef-400c-a159-5ae9bfb6c0db",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.wave-boss-feedback.config.ts",
+    "--grep",
+    "two production"
+  ],
+  "startedAt": "2026-11-03T02:19:30.182Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 14.23,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.85,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 18.3,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "browser verification",
+      "seconds": 61.79,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 95.18
+}

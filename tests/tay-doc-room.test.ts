@@ -72,18 +72,19 @@ it('two SDK clients share authority; forged/replayed inputs cannot create damage
   expect(a.state.creeps.get(e.bossId)?.hp).toBe(
     b.state.creeps.get(e.bossId)?.hp,
   );
+  let rejected = '';
+  b.onMessage('command-rejected', (m) => {
+    rejected = m.reason;
+  });
   b.send('dungeon-action', {
     protocolVersion: PROTOCOL_VERSION,
     sequence: 1,
     action: 'enter',
     access: 'private',
   });
-  await expect
-    .poll(() => b.state.players.get(b.sessionId)?.zoneId)
-    .not.toBe('arena');
-  await expect.poll(() => projection(b)).toBeNull();
-  expect(b.state.creeps.has(e.bossId)).toBe(false);
-  expect(projection(a)?.bossId).toBe(e.bossId);
+  await expect.poll(() => rejected).not.toBe('');
+  expect(b.state.players.get(b.sessionId)?.zoneId).toBe('arena');
+  expect(projection(b)?.bossId).toBe(e.bossId);
   a.send('input', {
     protocolVersion: PROTOCOL_VERSION,
     sequence: 101,
@@ -97,6 +98,39 @@ it('two SDK clients share authority; forged/replayed inputs cannot create damage
   await expect.poll(() => room.world.heroes.has(a.sessionId)).toBe(false);
   expect(boss.hp).toBe(hp);
   expect(e.pillars.size).toBe(0);
+  // A real victory releases the common field before testing zone filtering.
+  const h = room.world.heroes.get(b.sessionId)!;
+  e.phase = 'phase1';
+  e.cast = undefined;
+  e.nextActionAt = Infinity;
+  boss.x = 800;
+  boss.y = 616;
+  boss.hp = 1;
+  boss.invulnerable = false;
+  h.x = 770;
+  h.y = 616;
+  h.fx = 1;
+  h.fy = 0;
+  h.cooldown = 0;
+  h.actionUntil = room.world.tick;
+  h.statuses = [];
+  b.send('input', {
+    protocolVersion: PROTOCOL_VERSION,
+    sequence: 2,
+    kind: 'basic',
+  });
+  await expect.poll(() => e.phase).toBe('dead');
+  b.send('dungeon-action', {
+    protocolVersion: PROTOCOL_VERSION,
+    sequence: 3,
+    action: 'enter',
+    access: 'private',
+  });
+  await expect
+    .poll(() => b.state.players.get(b.sessionId)?.zoneId)
+    .not.toBe('arena');
+  await expect.poll(() => projection(b)).toBeNull();
+  expect(b.state.creeps.has(e.bossId)).toBe(false);
 });
 it('A through SDK damages/destructs pillars; disconnect and dispose clear owned hazards and marks', async () => {
   const a = await create(),

@@ -1,0 +1,82 @@
+{
+  "status": "PASS_WITH_ISOLATED_PORT_RETRY",
+  "scope": "VISUAL_PREVIEW_ONLY; production behavior remains unchanged",
+  "finalCommand": "pnpm check:final --config playwright.wave-vfx-preview-v02.config.ts",
+  "finalInvocationResult": "Stopped at one Chu room hook:port2798 occupied;701tests passed,1skipped. Original failure report remains unchanged.",
+  "originalFailureReport": "docs/evidence/sessions/wave-vfx-v02-final/check-workflow/final-timings.json",
+  "isolatedRetry": {
+    "status": "PASS",
+    "scope": "Same original Chu room test, temporary isolated port only",
+    "originalPort": 2798,
+    "retryPort": 2938,
+    "testCount": 1,
+    "command": "pnpm check:quick tests/_wave_vfx_v02_chu_room_retry.test.ts",
+    "originalSha256": "986d913b00080e208d7e71eebe46ef64dafdded4c270d8cb6bc390d3627c7279",
+    "temporarySha256": "85a3b6f29912f7ed6fb6340a289a3e82874ee70fc5a5e9b37fcb96053bf9ed1b",
+    "originalTestUnchanged": true,
+    "occupiedServiceUntouched": true,
+    "temporaryCopyRemovedAfterRun": true
+  },
+  "combinedUniqueUnitCases": 702,
+  "newPreviewCases": 9,
+  "typechecks": "Project and tests/tools typechecks PASS; tools checked again after final preview-target cadence/test edit",
+  "workflowChecks": 18,
+  "productionBuild": {
+    "command": "pnpm --filter @volam/game-client build",
+    "result": "PASS;13.31s"
+  },
+  "canonicalValidators": {
+    "command": "$env:PYTHONUTF8='1'; pnpm verify:assets",
+    "passed": 20
+  },
+  "previewValidator": {
+    "status": "PASS",
+    "scope": "Static assets/preview only; no gameplay or director approval",
+    "bundles": 43,
+    "frameReferences": 1977,
+    "newCels": 16,
+    "retainedAndProductionFiles": 270,
+    "recordingsCreated": false
+  },
+  "finalBrowser": {
+    "command": "node tools/run-playwright.mjs test --config playwright.wave-vfx-preview-v02.config.ts",
+    "status": "PASS",
+    "seconds": 12.3,
+    "cases": 1,
+    "newCelsObserved": 16,
+    "localModels": 6,
+    "networkClients": 0,
+    "noWebsockets": true,
+    "testsVideoAndTrace": "off"
+  },
+  "visualObservations": [
+    "Inspected actual normal-scale PNGs of long opposing claws, inward snake darts, gold retargeted pulses, spotlight, falling sky rays, dungeon name shouts and9staff-spinning actors with6local hero models.",
+    "All projectile raster dimensions are exported native sizes. No enlarged old poison projectile; the16new cels come from four new source images.",
+    "Same elevated orthographic camera and integer desktop display scale as production; no external dashboard panel or map shrink."
+  ],
+  "screenshots": {
+    "dungeon-shout.png": "eb3953ef85d28d5f423b77cc75a015d4042efaa62166f0336f2309cbbf90ecee",
+    "gold-burst.png": "da50469605280a2c5f40b933b659fd05b1763687c68ee024924af330309a6855",
+    "inward-snakes.png": "48bbd8e2de9c1e7f00b1944496a92e22b9d500b6abbb09fdaa6b16435fcd7f33",
+    "mai-claws.png": "be2b77582bea990f3922d0f04c86ca8be52e54c5f2ae41bea765db2ac52500f4",
+    "nine-spinners-six-models.png": "611a79e652a5717f97cd9ca2b28de4ba7b0b63d5054c83d038d940c68e8cd50d",
+    "sky-arena.png": "aaab887bf1af2812cbee91989ed6debd416902f0c7419a4287274309b819b5bd",
+    "spotlight.png": "b77388b282e83b8236ef9a047dc3c463dc6948a45697fb99c0b54a5959dca599"
+  },
+  "references": "Prior unchanged inspected references:assets/reviews/wave_boss_feedback_v01/evidence/reference-readout.json; immediate v01 approved/runtime screenshots reused as baseline.",
+  "sourcePrompts": "assets/reviews/wave_boss_feedback_v02/source/prompts.json",
+  "generator": "built-in image_gen; no CLI/API fallback",
+  "sourceFormat": "Retained generated RGBA strips and deterministic atlas exports; no layered Aseprite-source claim.",
+  "approval": "CANDIDATE_PENDING_DIRECTOR_REVIEW",
+  "productionFilesUnchanged": 177,
+  "retainedArtAndMetadataUnchanged": 93,
+  "recordingsCreated": false,
+  "reviewUrl": "http://127.0.0.1:5461/",
+  "reviewServer": "Owned read-only preview, PID54336, retained for director review; test server5462 closed. Occupied2798 service untouched.",
+  "limits": [
+    "No new authoritative mechanics or damage implemented.",
+    "Dungeon gallery demonstrates shout presentation with actual retained actor art, not a natural dungeon campaign.",
+    "Nam corpse cleanup is a desired transition demo; actual runtime bug remains for integration after VFX approval.",
+    "No six-player network/performance or final director art approval is claimed for this standalone preview."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "status": "PASS",
+  "command": "pnpm check:final --config playwright.wave-vfx-preview.config.ts",
+  "durationSeconds": 309.85,
+  "typecheck": "PASS",
+  "workflowTests": 18,
+  "unitIntegrationTests": 685,
+  "unitIntegrationFiles": 70,
+  "productionBuild": "PASS",
+  "existingAssetValidators": 20,
+  "candidateStaticValidation": {
+    "bundles": 30,
+    "frames": 1521,
+    "protectedFiles": 56,
+    "newAssets": 3,
+    "status": "PASS"
+  },
+  "browserCases": 1,
+  "browserSeconds": 19.14,
+  "scope": "VISUAL_PREVIEW_ONLY",
+  "networkClients": 0,
+  "localReadabilityModels": [
+    2,
+    6
+  ],
+  "runtimeIntegrated": false,
+  "directorApproval": "PENDING",
+  "recordingsCreated": false,
+  "previousFailure": "initial-typecheck-failure.json; new test-only tuple typings corrected before successful final. Initial isolated browser passed but shell-wrapped server teardown required stopping the owned server; final fixture uses a directly owned child process with PID identity and explicit cleanup.",
+  "validatedInputs": {
+    "assets/reviews/wave_boss_feedback_v01/model.mjs": "468658f02e8839e0d9666ab3610870d0cca9dbc2506b249b763d081660455531",
+    "assets/reviews/wave_boss_feedback_v01/tuning.mjs": "89c3c48082ff5626cdcc20fb72fab5ee0d3ed24000b345d73b86cd7ddd5459e7",
+    "assets/reviews/wave_boss_feedback_v01/review.mjs": "12897cc7bba12ed6df3afc133ef6b31a306de90bbacd310d15ca149ad272405d",
+    "assets/reviews/wave_boss_feedback_v01/server.mjs": "b7f668a189df63cfe5b737e0b0622954a6cac21d7f1020c0013376fe5f0588c1",
+    "assets/reviews/wave_boss_feedback_v01/index.html": "354b509bf68d80b4e51bbf7a51fea2fc868958795864958e3bd901bb54263e36",
+    "assets/reviews/wave_boss_feedback_v01/review.css": "77b07248d3217cc462d4a57adbb524671a686bcbd2bf1bcc1d93f40bd815ed12",
+    "assets/reviews/wave_boss_feedback_v01/data.json": "4b32e1b12318cb445a8637ebe7521527aae90abde1440e84de03ef9602ba48c9",
+    "tests/wave-boss-vfx-preview.test.ts": "f5680ec26a7b853377739d04b7a9706713e7a4aaf3ff062ad706a3278e873b25",
+    "tests/e2e/wave-vfx-preview.spec.ts": "e179d88d5fc41ceda557d9faaba0ea785d5dd56b4060f855c0b4c879ce78c3dd",
+    "playwright.wave-vfx-preview.config.ts": "bd0e6a9751a49fcbc10220a1f6f70734900f43ed877724b6983dfae704fa558c"
+  },
+  "visualInspection": [
+    "mai-claws-gameplay-scale.png",
+    "poison-cloud-gameplay-scale.png",
+    "phat-quang-gameplay-scale.png",
+    "finger-beam-gameplay-scale.png",
+    "toad-impact-gameplay-scale.png",
+    "needles-gameplay-scale.png",
+    "dragon-1920.png"
+  ],
+  "cleanup": "Restored unrelated generated Thieu Lam validation count report to its original tracked bytes; retained actual final results separately."
+}

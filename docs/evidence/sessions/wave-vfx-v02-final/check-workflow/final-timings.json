@@ -1,0 +1,43 @@
+{
+  "runId": "00e98981-73b7-48d0-ac25-77659fea8c6a",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.wave-vfx-preview-v02.config.ts"
+  ],
+  "startedAt": "2026-11-03T06:27:18.330Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 9.81,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.85,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.56,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.48,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 141.74,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 154.45
+}

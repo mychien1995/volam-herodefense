@@ -58,3 +58,7 @@ export * from './tay-doc.js';
 
 export * from './nam-de.js';
 export * from './bac-cai.js';
+
+export { bossSkillNames } from './boss-skill-names.js';
+
+export * from './boss-banter.js';

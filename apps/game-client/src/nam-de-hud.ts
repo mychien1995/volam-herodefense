@@ -1,6 +1,5 @@
-import { namDeAbilityNames } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
-import type { NamDeControl, NamDeKey, NamDeView } from '@volam/game-core';
+import type { NamDeControl, NamDeKey } from '@volam/game-core';
 import './nam-de-hud.css';
 const symbols: Record<NamDeKey, string> = {
   up: '↑',
@@ -9,16 +8,14 @@ const symbols: Record<NamDeKey, string> = {
   left: '←',
 };
 export class NamDeHud {
-  private root = document.createElement('section');
   private dialog = document.createElement('section');
   private pending: { id: string; index: number } | undefined;
   constructor() {
-    this.root.id = 'nam-de-hud';
     this.dialog.id = 'nam-de-qte';
     this.dialog.setAttribute('role', 'dialog');
     this.dialog.setAttribute('aria-label', 'Đại Lý Phong Huyệt');
-    this.root.hidden = this.dialog.hidden = true;
-    document.querySelector('#viewport')!.append(this.root, this.dialog);
+    this.dialog.hidden = true;
+    document.querySelector('#viewport')!.append(this.dialog);
   }
   capture(
     key: string,
@@ -38,15 +35,7 @@ export class NamDeHud {
     };
   }
   sync(state: LobbyState | undefined, id: string) {
-    const h = state?.players.get(id),
-      v =
-        h?.zoneId === 'arena' && state?.defense.namDe
-          ? (JSON.parse(state.defense.namDe) as NamDeView)
-          : null,
-      b = state?.creeps.get('boss_nam_de');
-    this.root.hidden = !v || !b || v.phase === 'waiting' || v.phase === 'rest';
-    if (v && b)
-      this.root.innerHTML = `<strong>Nam Đế</strong><small>${v.cast ? ' · ' + namDeAbilityNames[v.cast.ability] : ''}</small><progress value="${b.hp}" max="${b.maxHp}"></progress><small>${Math.ceil(b.hp)} / ${b.maxHp}</small>`;
+    const h = state?.players.get(id);
     const control =
         h?.zoneId === 'arena' && state?.namDeControls.get(id)?.payload
           ? (JSON.parse(state.namDeControls.get(id)!.payload) as NamDeControl)

@@ -1,0 +1,84 @@
+{
+  "status": "PASS_WITH_ISOLATED_PORT_RETRY",
+  "scope": "VISUAL_PREVIEW_ONLY",
+  "feedback": {
+    "sky": {
+      "count": 96,
+      "densityMultiplier": 3,
+      "raysPerSecond": 18,
+      "durationUnchanged": true,
+      "allFootprintsInsideArena": true
+    },
+    "spotlight": "One palm wave; no connecting beam or hand charge; target illumination retained",
+    "vortex": "Eight clones orbit and spin, damage zones follow; root boss stays centered"
+  },
+  "reproduceFirst": "Three new assertions failed on the prior model, then all12passed after edits",
+  "focusedCommand": "pnpm check:quick tests/wave-boss-vfx-preview-v02.test.ts",
+  "focusedTestsPassed": 12,
+  "finalCommand": "pnpm check:final --config playwright.wave-vfx-preview-v02.config.ts",
+  "originalFinalResult": "704passed,1skipped; Chu room hook failed because port2798 was occupied",
+  "originalFinalReport": "docs/evidence/sessions/wave-vfx-v02-motion-final/check-workflow/final-timings.json",
+  "isolatedRetry": {
+    "status": "PASS",
+    "originalSha256": "986d913b00080e208d7e71eebe46ef64dafdded4c270d8cb6bc390d3627c7279",
+    "temporarySha256": "d9aa67bf9143594a32028833e67f33ca4a8d931c0a0806e3dc57164c596e967a",
+    "originalPort": 2798,
+    "retryPort": 2938,
+    "onlyPortSubstitution": true,
+    "occupiedServiceUntouched": true,
+    "testCount": 1,
+    "originalTestUnchanged": true,
+    "temporaryCopyRemovedAfterRun": true,
+    "command": "pnpm check:quick tests/_wave_vfx_v02_chu_room_retry.test.ts"
+  },
+  "combinedUniqueUnitCases": 705,
+  "workflowChecks": 18,
+  "typechecks": "PASS: projects and tests/tools",
+  "remainingStages": {
+    "productionBuild": "pnpm --filter @volam/game-client build: PASS,14.44s",
+    "canonicalAssets": "pnpm verify:assets:20validators PASS",
+    "previewAssets": {
+      "status": "PASS",
+      "scope": "Static assets/preview only; no gameplay or director approval",
+      "bundles": 43,
+      "frameReferences": 1977,
+      "newCels": 16,
+      "retainedAndProductionFiles": 270,
+      "recordingsCreated": false
+    },
+    "browser": "node tools/run-playwright.mjs test --config playwright.wave-vfx-preview-v02.config.ts:1passed,15.8s"
+  },
+  "actualPhaserChecks": [
+    "96planned sky impacts and at least7simultaneous falling layers",
+    "Palm attack gesture at0.2s, no connecting projectile or hand-charge layer",
+    "Live rendered clone moves more than35world pixels while playing and keeps nine damage zones",
+    "All16new cels observed;18modes; real keyboard walking/dash checks;6local models at gameplay zoom;zero WebSockets/errors"
+  ],
+  "visualInspection": [
+    "Opened current sky-arena.png, spotlight.png and nine-spinners-six-models.png at actual output sizes",
+    "Inspected live in-app Phaser preview; prior screenshots preserved in before-moving-clones/"
+  ],
+  "screenshots": {
+    "sky-arena.png": "09eba5bce1028c00301d63075e4ad8cd52c46bae03438b90620295728758e13e",
+    "spotlight.png": "e2d358ba7915e828e5b091381562738aabbf764aa5f2d816c4abcbbacf9b76af",
+    "nine-spinners-six-models.png": "141b3399711aef9589bc2968efec73f385b2fd0ab7c2dcc135a8a99f7eaf6758"
+  },
+  "changedInputHashes": {
+    "model.mjs": "1551010bc52d003a4bc03a6590f3dd22469ad289da08cb0220489988759be99f",
+    "tuning.mjs": "8296a89e4271beeb42fd21490f8353e362b1a0e7e3a4cce92ff8de2af3226eab",
+    "review.mjs": "56981c78a8a363fd0d9d4fd875e1a5e91d6e731284b6e056ec64e4bd3866d623"
+  },
+  "productionSourceUnchanged": 177,
+  "retainedArtAndMetadataUnchanged": 93,
+  "newArtGeneratedThisRevision": false,
+  "recordingsCreated": false,
+  "networkClients": 0,
+  "localModels": 6,
+  "approval": "CANDIDATE_PENDING_DIRECTOR_REVIEW",
+  "reviewUrl": "http://127.0.0.1:5461/",
+  "limits": [
+    "Authoritative gameplay not changed.",
+    "No six-client multiplayer claim.",
+    "Successful tests do not constitute director art approval."
+  ]
+}
