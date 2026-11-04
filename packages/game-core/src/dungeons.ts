@@ -553,7 +553,12 @@ export class DungeonMatch {
       return 'Yêu cầu đã được xử lý.';
     hero.lastSequence = sequence;
     if (this.invasion?.defeated) return 'Trận đấu đã kết thúc.';
-    if (zone.id !== 'arena' || zone.access !== 'arena')
+    if (this.party.disconnected.has(id) || hero.bossSpectator)
+      return 'Đang quan chiến.';
+    if (
+      hero.progression?.mode !== 'fixed' &&
+      (zone.id !== 'arena' || zone.access !== 'arena')
+    )
       return 'Chỉ được đổi võ học tại đấu trường. Trong phó bản hoặc PvP chỉ có thể xem.';
     return changeBuild(zone.world, hero, zone.config, revision, change);
   }
@@ -687,6 +692,9 @@ export class DungeonMatch {
       zone.kim?.step(zone.world, zone.config);
       zone.encounter?.step(zone.world, zone.config);
       if (zone.access === 'arena' && this.tayDoc) {
+        for (const event of zone.world.events)
+          if (event.abilityId === 'gear_cleanse')
+            this.tayDoc.poisons.delete(event.sourceId);
         if (this.dongTa?.phase === 'cleared')
           this.tayDocGate.completeChapter('dong_ta');
         if (this.invasion)
@@ -1104,6 +1112,10 @@ export class DungeonMatch {
     if (hero.dashRechargeAt !== undefined)
       hero.dashRechargeAt = convert(hero.dashRechargeAt);
     hero.skillCooldowns = hero.skillCooldowns.map(convert);
+    if (hero.inventory?.auxiliaryReadyAt !== undefined)
+      hero.inventory.auxiliaryReadyAt = convert(
+        hero.inventory.auxiliaryReadyAt,
+      );
     if (hero.abilityCooldowns)
       for (const key of Object.keys(hero.abilityCooldowns))
         hero.abilityCooldowns[key] = convert(hero.abilityCooldowns[key]!);

@@ -1,12 +1,18 @@
 import type { LobbyState } from '@volam/game-protocol';
 import { economyTrial, m1Config } from '@volam/game-data';
-import type { MerchantAction, PotionId } from '@volam/game-core';
+import {
+  equipmentSlots as slots,
+  type EquipmentSlot as Slot,
+  type MerchantAction,
+  type PotionId,
+} from '@volam/game-core';
 
 type Hero = NonNullable<ReturnType<LobbyState['players']['get']>>;
-type Slot = 'weapon' | 'armor' | 'hat' | 'boots';
 type Tab = 'equipment' | 'potions' | 'craft';
+const itemUrl = (id: string) =>
+  id.startsWith('/assets/') ? id : '/assets/inventory_ui/' + id + '.png';
 const art = (id: string, extra = '') =>
-  `<img class="item-art ${extra}" src="${id.startsWith('/assets/') ? id : `/assets/inventory_ui/${id}.png`}" alt="" draggable="false"/>`;
+  `<img class="item-art ${extra}" src="${itemUrl(id)}" alt="" draggable="false"/>`;
 const escape = (text: string) =>
   text.replace(
     /[&<>"']/g,
@@ -15,75 +21,12 @@ const escape = (text: string) =>
         c
       ]!,
   );
-const gear: Record<
-  Slot,
-  {
-    name: string;
-    stats: string;
-    material: string;
-    materialArt: string;
-    boss: string;
-    branches: Array<[string, string, string]>;
-  }
-> = {
-  weapon: {
-    name: 'Vũ khí',
-    stats: 'Tăng sát thương',
-    material: 'Kim Luân',
-    materialArt: 'wheel',
-    boss: 'Kim Luân Pháp Vương',
-    branches: [
-      ['weapon', 'Đánh lan', 'Đánh xa bắn ba tia; đánh gần tăng phạm vi lan.'],
-      [
-        'weapon',
-        'Hút máu',
-        'Hồi theo sát thương một đòn A, không nhân theo số địch.',
-      ],
-      ['weapon', 'Xuyên giáp', 'Đòn A bỏ qua một phần phòng thủ mục tiêu.'],
-    ],
-  },
-  armor: {
-    name: 'Giáp',
-    stats: 'Phòng thủ · Máu tối đa',
-    material: 'Đại Kim Chiến Giáp',
-    materialArt: 'armor',
-    boss: 'Hoàn Nhan Hồng Liệt',
-    branches: [
-      [
-        'armor',
-        'Phản đòn',
-        'Có cơ hội phản đòn; khi kích hoạt chỉ nhận 50% sát thương.',
-      ],
-      ['armor', 'Aura làm chậm', 'Làm chậm kẻ địch quanh người.'],
-      ['armor', 'Aura đốt', 'Gây sát thương đốt quanh người.'],
-    ],
-  },
-  hat: {
-    name: 'Mũ',
-    stats: 'Hồi máu · Hồi mana',
-    material: 'Đại Hồ Lô',
-    materialArt: '/assets/chu/toan_chan_tien_tuu_icon.png',
-    boss: 'Chu Bá Thông',
-    branches: [
-      ['hat', 'Hồi phục', 'Tăng hồi máu và hồi mana.'],
-      ['hat', 'Bền bỉ', 'Tăng máu, mana tối đa và phòng thủ.'],
-      ['hat', 'Tấn công', 'Tăng nhẹ sát thương và tỉ lệ chí mạng.'],
-    ],
-  },
-  boots: {
-    name: 'Giày',
-    stats: 'Tốc chạy · Một ít chí mạng',
-    material: 'Ngọc Uyên Ương',
-    materialArt: 'jade_pair',
-    boss: 'Lý Mạc Sầu',
-    branches: [
-      ['thanh_tam', 'Thanh Tâm', 'Giải làm chậm, độc và đốt.'],
-      ['blink', 'Blink', 'Dịch chuyển về phía trước.'],
-      ['needle', 'Phi châm', 'Một phi châm bay thẳng, gây làm chậm và độc.'],
-    ],
-  },
+const gear = {
+  weapon: 'Tăng sát thương',
+  armor: 'Phòng thủ · Máu tối đa',
+  hat: 'Hồi máu · Hồi mana',
+  boots: 'Tốc chạy · Một ít chí mạng',
 };
-const slots = Object.keys(gear) as Slot[];
 interface HeldItem {
   name: string;
   description: string;
@@ -151,6 +94,16 @@ export class ItemMenu {
       value = button.dataset['value'] ?? '';
     if (action === 'buy' && slots.includes(value as Slot)) {
       this.request({ action: 'buy-basic', slot: value as Slot });
+      return;
+    }
+    if (action === 'craft') {
+      const branch = economyTrial.recipes[this.craftSlot].branches[this.branch];
+      if (branch)
+        this.request({
+          action: 'craft',
+          slot: this.craftSlot,
+          branch: branch.id,
+        });
       return;
     }
     if (action === 'buy-potion') {
@@ -246,7 +199,20 @@ export class ItemMenu {
           potionId: id as PotionId,
         });
     }
-    // Retained boss materials and Cổ Mộ claims remain separate server fields.
+    for (const slot of slots) {
+      const count = hero.inventory.materials.get(slot) ?? 0;
+      if (count < 1) continue;
+      const recipe = economyTrial.recipes[slot];
+      items.push({
+        name: recipe.materialNameVi + ' ×' + count,
+        description:
+          'Nguyên liệu từ ' +
+          recipe.bossNameVi +
+          '. Dùng trong tab Chế tạo của Thương Gia.',
+        image: itemUrl(recipe.materialArt),
+      });
+    }
+    // Historical encounter fixtures still project their original reward fields.
     try {
       for (const id of JSON.parse(hero.bossItems || '[]') as string[]) {
         items.push({
@@ -357,8 +323,7 @@ export class ItemMenu {
   }
 
   private merchant(): string {
-    const selected = gear[this.slot],
-      recipe = gear[this.craftSlot];
+    const recipe = economyTrial.recipes[this.craftSlot];
     const definition = economyTrial.basics[this.slot],
       level = this.level(this.slot);
     const price = definition.prices[level];
@@ -394,7 +359,7 @@ export class ItemMenu {
             `<div><dt>${labels[key] ?? key}</dt><dd>${key === 'critChance' ? `${(amount! * level * 100).toFixed(1)}% → ${(amount! * Math.min(5, level + 1) * 100).toFixed(1)}%` : `${amount! * level} → ${amount! * Math.min(5, level + 1)}`}</dd></div>`,
         )
         .join('');
-      body = `<div class="item-shop-layout"><div class="item-catalogue">${slots.map((slot) => this.choice('gear', slot, gear[slot].name, slot === this.slot, `${art(slot)}<small>${this.level(slot) ? `Cấp ${this.level(slot)}/5` : 'Chưa sở hữu'}</small><span class="item-price">${economyTrial.basics[slot].prices[this.level(slot)] ?? 'Tối đa'}${this.level(slot) < 5 ? ' vàng' : ''}</span>`)).join('')}</div><section class="item-detail">${art(this.slot, 'item-large')}<h3>${selected.name}</h3><p>${selected.stats}</p><p>${level ? `Cấp ${level}${level < 5 ? ` → Cấp ${level + 1}` : ' · Tối đa'}` : 'Mua cấp 1 · Tự trang bị'}</p><dl class="item-stats item-purchase-stats">${stats}</dl><div class="item-levels" aria-label="Năm cấp trang bị cơ bản">${Array.from({ length: 5 }, (_, i) => `<i class="${i < level ? 'owned' : ''}"></i>`).join('')}</div><p>Mua lại để tăng 1 cấp · Tối đa cấp 5</p><button data-ui-action="buy" data-value="${this.slot}" class="item-primary" ${this.canBuy(price) ? '' : 'disabled'}>${this.pending ? 'Đang xử lý…' : price === undefined ? 'Đã tối đa' : `${level ? 'Nâng cấp' : 'Mua'} · ${price} vàng`}</button><small>${!canShop ? 'Chỉ mua khi còn sống ở đấu trường trung tâm.' : price !== undefined && (this.hero?.gold ?? 0) < price ? 'Không đủ vàng.' : 'Giá thử nghiệm · Mua xong áp dụng chỉ số ngay.'}</small></section></div>`;
+      body = `<div class="item-shop-layout"><div class="item-catalogue">${slots.map((slot) => this.choice('gear', slot, economyTrial.basics[slot].nameVi, slot === this.slot, `${art(slot)}<small>${this.level(slot) ? `Cấp ${this.level(slot)}/5` : 'Chưa sở hữu'}</small><span class="item-price">${economyTrial.basics[slot].prices[this.level(slot)] ?? 'Tối đa'}${this.level(slot) < 5 ? ' vàng' : ''}</span>`)).join('')}</div><section class="item-detail">${art(this.slot, 'item-large')}<h3>${definition.nameVi}</h3><p>${gear[this.slot]}</p><p>${level ? `Cấp ${level}${level < 5 ? ` → Cấp ${level + 1}` : ' · Tối đa'}` : 'Mua cấp 1 · Tự trang bị'}</p><dl class="item-stats item-purchase-stats">${stats}</dl><div class="item-levels" aria-label="Năm cấp trang bị cơ bản">${Array.from({ length: 5 }, (_, i) => `<i class="${i < level ? 'owned' : ''}"></i>`).join('')}</div><p>Mua lại để tăng 1 cấp · Tối đa cấp 5</p><button data-ui-action="buy" data-value="${this.slot}" class="item-primary" ${this.canBuy(price) ? '' : 'disabled'}>${this.pending ? 'Đang xử lý…' : price === undefined ? 'Đã tối đa' : `${level ? 'Nâng cấp' : 'Mua'} · ${price} vàng`}</button><small>${!canShop ? 'Chỉ mua khi còn sống ở đấu trường trung tâm.' : price !== undefined && (this.hero?.gold ?? 0) < price ? 'Không đủ vàng.' : 'Giá thử nghiệm · Mua xong áp dụng chỉ số ngay.'}</small></section></div>`;
     } else if (this.tab === 'potions') {
       const id = this.potionId(),
         potion = economyTrial.potions[id];
@@ -415,17 +380,49 @@ export class ItemMenu {
           '',
         )}</div><p>Thời gian chờ chung: <b>5 giây</b></p><p>Đang mang: ${this.totalPotions()}/${economyTrial.potionLimit} bình · Loại này: ${this.hero?.inventory.potions.get(id) ?? 0}</p><div class="item-quantity"><button data-ui-action="quantity" data-value="less" aria-label="Giảm số lượng" ${this.quantity <= 1 ? 'disabled' : ''}>−</button><output aria-label="Số lượng mua">${this.quantity}</output><button data-ui-action="quantity" data-value="more" aria-label="Tăng số lượng" ${this.quantity >= 20 ? 'disabled' : ''}>+</button></div><button data-ui-action="buy-potion" data-value="${id}" class="item-primary" ${this.canBuy(cost) && capacity ? '' : 'disabled'}>${this.pending ? 'Đang xử lý…' : `Mua bình · ${cost} vàng`}</button><p data-testid="potion-restriction">${!canShop ? 'Không mua bình trong phó bản hoặc khi đã gục ngã.' : !capacity ? 'Đã vượt giới hạn mang bình.' : (this.hero?.gold ?? 0) < cost ? 'Không đủ vàng.' : 'Chuẩn bị bình trước khi vào phó bản.'}</p></section></div>`;
     } else {
-      body = `<div class="item-recipe-slots" aria-label="Chọn ô chế tạo">${slots.map((slot) => this.choice('recipe', slot, gear[slot].name, slot === this.craftSlot)).join('')}</div><div class="item-recipe">${art(this.craftSlot)}<span>${recipe.name} cấp 5</span><b>+</b>${art(recipe.materialArt)}<span>${recipe.material}<small>Từ ${recipe.boss}</small></span><b>+</b><span>${economyTrial.basics[this.craftSlot].craftGold} vàng<small>Giá thử nghiệm</small></span></div><h3 class="item-branch-title">Chọn một nhánh</h3><div class="item-branches">${recipe.branches.map(([image, name, text], i) => this.choice('branch', String(i), name, i === this.branch, `${art(image)}${this.craftSlot === 'boots' ? '<kbd>Z</kbd>' : ''}<p>${text}</p>`)).join('')}</div><div class="item-craft-action"><p>Cần ${recipe.name.toLowerCase()} cấp 5 và ${recipe.material}. Luồng nguyên liệu/đồ ghép chưa mở.</p><button class="item-primary" disabled>Chế tạo · Chưa mở</button></div>`;
+      const slot = this.craftSlot;
+      const basic = economyTrial.basics[slot];
+      const count = this.hero?.inventory.materials.get(slot) ?? 0;
+      const crafted = this.hero?.inventory.crafted.get(slot);
+      const status = crafted
+        ? 'Đã chế tạo nhánh ' +
+          recipe.branches.find((branch) => branch.id === crafted)?.nameVi +
+          '.'
+        : !canShop
+          ? 'Chỉ chế tạo khi còn sống ở đấu trường trung tâm.'
+          : this.level(slot) !== 5
+            ? 'Cần ' + basic.nameVi.toLowerCase() + ' cấp 5.'
+            : count < 1
+              ? 'Thiếu ' + recipe.materialNameVi + '.'
+              : (this.hero?.gold ?? 0) < basic.craftGold
+                ? 'Không đủ vàng.'
+                : 'Thành phẩm sẽ tự trang bị.';
+      const enabled =
+        !crafted &&
+        this.level(slot) === 5 &&
+        count > 0 &&
+        this.canBuy(basic.craftGold);
+      body = `<div class="item-recipe-slots" aria-label="Chọn ô chế tạo">${slots.map((option) => this.choice('recipe', option, economyTrial.basics[option].nameVi, option === slot)).join('')}</div>
+        <div class="item-recipe">${art(slot)}<span>${basic.nameVi} cấp 5<small>Đang có cấp ${this.level(slot)}</small></span><b>+</b>${art(recipe.materialArt)}<span>${recipe.materialNameVi}<small>Đang có ${count} · Từ ${recipe.bossNameVi}</small></span><b>+</b><span>${basic.craftGold} vàng<small>Giá thử nghiệm</small></span></div>
+        <h3 class="item-branch-title">Chọn một nhánh</h3><div class="item-branches">${recipe.branches.map((branch, i) => this.choice('branch', String(i), branch.nameVi, crafted ? crafted === branch.id : i === this.branch, `${art(branch.art)}${slot === 'boots' ? '<kbd>Z</kbd>' : ''}<p>${branch.descriptionVi}</p>`)).join('')}</div>
+        <div class="item-craft-action"><p>${status}</p><button type="button" data-ui-action="craft" data-value="${slot}" class="item-primary" ${enabled ? '' : 'disabled'}>${this.pending ? 'Đang xử lý…' : crafted ? 'Đã chế tạo' : 'Chế tạo · ' + basic.craftGold + ' vàng'}</button></div>`;
     }
     return `${tabs}<section id="item-panel" role="tabpanel" aria-labelledby="item-tab-${this.tab}">${body}</section><p class="item-availability" role="status">Giá thử nghiệm · Chọn món để xem giá và nâng cấp.</p>`;
   }
 
+  private branchFor(slot: Slot) {
+    const id = this.hero?.inventory.crafted.get(slot);
+    return economyTrial.recipes[slot].branches.find(
+      (branch) => branch.id === id,
+    );
+  }
   private inventory(): string {
+    const boots = this.branchFor('boots');
     const selected = this.items[this.selectedItem];
     const cooldown = Math.ceil(
       (this.hero?.inventory.potionCooldownTicks ?? 0) / m1Config.tickRate,
     );
-    return `<div class="item-inventory-layout"><section class="item-equipment-pane"><h3>Trang bị <small>4 ô · Mua đồ sẽ tự trang bị</small></h3><div class="item-paper-doll"><div class="paper-hero" aria-label="Nhân vật hiện tại"></div>${slots.map((slot, i) => `<button type="button" class="equipment-slot item-equip-${i} ${this.level(slot) ? 'owned' : ''}" disabled aria-label="${gear[slot].name} · ${this.level(slot) ? `Cấp ${this.level(slot)}` : 'Chưa trang bị'}">${art(slot)}<strong>${gear[slot].name}</strong><small>${this.level(slot) ? `Cấp ${this.level(slot)}/5` : 'Trống'}</small></button>`).join('')}</div><dl class="item-stats">${(
+    return `<div class="item-inventory-layout"><section class="item-equipment-pane"><h3>Trang bị <small>4 ô · Mua đồ sẽ tự trang bị</small></h3><div class="item-paper-doll"><div class="paper-hero" aria-label="Nhân vật hiện tại"></div>${slots.map((slot, i) => `<button type="button" class="equipment-slot item-equip-${i} ${this.level(slot) ? 'owned' : ''}" disabled aria-label="${economyTrial.basics[slot].nameVi} · ${this.level(slot) ? `Cấp ${this.level(slot)}` : 'Chưa trang bị'}">${art(this.branchFor(slot)?.art ?? slot)}<strong>${economyTrial.basics[slot].nameVi}</strong><small>${this.branchFor(slot)?.nameVi ?? (this.level(slot) ? `Cấp ${this.level(slot)}/5` : 'Trống')}</small></button>`).join('')}</div><dl class="item-stats">${(
       [
         ['attackPower', 'Sát thương'],
         ['defense', 'Phòng thủ'],
@@ -459,10 +456,36 @@ export class ItemMenu {
       },
     ).join(
       '',
-    )}</div><section class="item-held-detail" aria-live="polite"><h3>${selected ? escape(selected.name) : 'Chọn một vật phẩm'}</h3><p>${selected ? selected.description : 'Chọn bình để sử dụng hoặc xem chiến lợi phẩm đang giữ.'}</p>${selected?.potionId ? `<button data-ui-action="use-held" data-value="${selected.potionId}" ${this.potionDisabled(selected.potionId) ? 'disabled' : ''}>${cooldown ? `Đang hồi · ${cooldown}s` : 'Dùng bình'}</button>` : '<button disabled>Trang bị</button>'}</section><div class="item-auxiliary-detail">${art('thanh_tam')}<div><h3>Kỹ năng từ giày <kbd>Z</kbd></h3><p>Cần giày chế tạo · Chưa mở</p></div></div><div class="item-gold"><span class="pixel-icon icon-gold" aria-hidden="true"></span><b class="live-gold">${this.hero?.gold ?? '—'}</b><span>vàng</span></div></section></div>`;
+    )}</div><section class="item-held-detail" aria-live="polite"><h3>${selected ? escape(selected.name) : 'Chọn một vật phẩm'}</h3><p>${selected ? selected.description : 'Chọn bình để sử dụng hoặc xem chiến lợi phẩm đang giữ.'}</p>${selected?.potionId ? `<button data-ui-action="use-held" data-value="${selected.potionId}" ${this.potionDisabled(selected.potionId) ? 'disabled' : ''}>${cooldown ? `Đang hồi · ${cooldown}s` : 'Dùng bình'}</button>` : '<button disabled>Trang bị</button>'}</section><div class="item-auxiliary-detail">${art(boots?.art ?? 'thanh_tam')}<div><h3>Kỹ năng từ giày <kbd>Z</kbd></h3><p>${boots ? boots.nameVi + ' · ' + boots.descriptionVi : 'Cần giày chế tạo.'}</p></div></div><div class="item-gold"><span class="pixel-icon icon-gold" aria-hidden="true"></span><b class="live-gold">${this.hero?.gold ?? '—'}</b><span>vàng</span></div></section></div>`;
   }
 }
 
 export function auxiliarySlot(): string {
-  return `<div id="slot-z" class="hotbar-slot auxiliary-slot unequipped" tabindex="0" role="img" aria-label="Z · Kỹ năng từ giày chưa mở" aria-describedby="auxiliary-tip">${art('boots')}<kbd>Z</kbd><span id="auxiliary-tip" class="auxiliary-tooltip" role="tooltip"><strong>Kỹ năng từ giày · Z</strong><span>Cần giày chế tạo. Kỹ năng trang bị chưa mở.</span></span></div>`;
+  return `<div id="slot-z" class="hotbar-slot auxiliary-slot unequipped" tabindex="0" role="img" aria-label="Z · Kỹ năng từ giày chưa mở" aria-describedby="auxiliary-tip">${art('boots')}<kbd>Z</kbd><b class="cooldown-number" aria-hidden="true"></b><span id="auxiliary-tip" class="auxiliary-tooltip" role="tooltip"><strong>Kỹ năng từ giày · Z</strong><span>Cần giày chế tạo.</span></span></div>`;
+}
+
+export function updateAuxiliarySlot(hero: Hero): void {
+  const slot = document.querySelector<HTMLElement>('#slot-z');
+  if (!slot) return;
+  const boots = economyTrial.recipes.boots.branches.find(
+    (branch) => branch.id === hero.inventory.crafted.get('boots'),
+  );
+  const cooldown = Math.ceil(
+    hero.inventory.auxiliaryCooldownTicks / m1Config.tickRate,
+  );
+  slot.classList.toggle('unequipped', !boots);
+  slot.classList.toggle('cooling', cooldown > 0);
+  const label = boots
+    ? 'Z · ' + boots.nameVi + (cooldown ? ' · ' + cooldown + ' giây' : '')
+    : 'Z · Cần giày chế tạo';
+  slot.setAttribute('aria-label', label);
+  const image = slot.querySelector('img')!;
+  const src = itemUrl(boots?.art ?? 'boots');
+  if (image.getAttribute('src') !== src) image.setAttribute('src', src);
+  slot.querySelector('.cooldown-number')!.textContent = cooldown
+    ? String(cooldown)
+    : '';
+  slot.querySelector('strong')!.textContent = label;
+  slot.querySelector('#auxiliary-tip span')!.textContent =
+    boots?.descriptionVi ?? 'Cần giày chế tạo.';
 }

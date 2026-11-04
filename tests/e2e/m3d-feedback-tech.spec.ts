@@ -116,6 +116,8 @@ test('two clients: Vietnamese UI, Shift charges, A press-only and instance-wide 
     [b, 'thieu_lam'],
   ] as const) {
     await p.locator(`#pregame button[data-school=${school}]`).click();
+    const branch = p.locator('[data-branch=' + school + '_quyen]');
+    if (await branch.count()) await branch.click();
     await p.getByRole('button', { name: 'Xác nhận', exact: true }).click();
   }
   await expect(page.locator('#pregame')).toBeHidden();

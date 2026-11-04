@@ -1,3 +1,7 @@
+## Fixed branch catalogue override — 2026-11-04
+
+Use catalogue order within each selected branch for Q/W/E/R, with its ultimate on T. Thiếu Lâm Quyền uses Q/W/E for La Hán Quyền, Vi Đà Quyền and Đại Lực Kim Cương Chưởng. F changes those slots to Toàn Phong Thoái, Ca Diệp Thoái and Vô Ảnh Cước. R and T are Kim Cang Bất Hoại and Như Lai Niết Bàn in both stances. All 43 active definitions retain their stable IDs. Every active has four ranks.
+
 ## M3D approved runtime catalogue override — 2026-11-03
 
 This section and the revised rows below supersede earlier skill descriptions for the approved M3D integration. Stable IDs,43 actives,8 basics,4 passives,free school mixing and4 slots remain. `hoanh_tao_cuoc` now displays **Ca Diệp Thoái**; `tam_gioi_quy_thien` displays **Sư Tử Hống**. Exact data remain in `packages/game-data/src/thieu-lam.ts` and `m3d-feedback-tuning.ts`.

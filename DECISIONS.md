@@ -1,3 +1,19 @@
+## Nhạc nền trận đấu — 2026-11-05
+
+File game-ost.mp3 của người dùng phát lặp từ lúc vào trận và dừng khi trận kết thúc hoặc người chơi rời phòng. Nhạc chạy cục bộ ở client.
+
+## Chế tạo và icon Cái Bang — 2026-11-05
+
+Yêu cầu mở Chế tạo cho phép triển khai bốn công thức, 12 nhánh, Z từ giày và nguyên liệu cá nhân cần cho công thức. Giữ giới hạn một thành phẩm mỗi ô và mức phí thử đang có. Quy tắc đủ điều kiện và thông số thử ghi trong [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md). Long Châu và PvP thuộc phạm vi riêng.
+
+## M3D gameplay update — 2026-11-04
+
+Each player confirms one school and one of its two branches before spawning. Branch and A are locked for the match. Q/W/E/R/T are fixed to the branch, with T as the ultimate. Learn and rank up from the in-viewport hotbar. There is one point per level. Levels 1–20 fund skills, while levels 21–30 reserve ten points for a future stat allocation system. Unspent skill points carry forward. Standard ranks open at levels 1/3/5/7 and ultimate ranks at 6/12/18/24. There is no in-match respec.
+
+Thiếu Lâm Quyền uses F to switch Quyền and Cước. Q/W/E share ranks by slot and keep cooldowns by ability. R (Kim Cang Bất Hoại) and T (Như Lai Niết Bàn) share their rank, cooldown and effects between stances. The existing basic-attack chain still uses A.
+
+The statue is now **Tượng Võ Thần**, containing **Long Hồn Thần Thạch**. Player teams guard it from rival martial artists and the five masters. Hoàng Thường and the future post-Vương Trùng Dương reveal are reserved for a separate update.
+
 ## Đông Tà runtime approval and milestone integration — 2026-11-03
 
 The director approves the delivered Đông Tà V04 runtime and explicitly requests integration into `milestone/m3d`. This supersedes prior worktree-only/no-merge delivery restrictions. Approval and exact reviewed runtime/evidence hashes: `docs/evidence/dong-ta-runtime/director-approval.json`. Retain the current milestone's newer school mechanics, controls, dungeon policies, Hell and merchant/inventory work. Đông Tà remains the specific wave-encounter exception: all-player recall/revival, protected statue, continued180-second invasions, unlimited wipe retries, boss-only clear and no items. Final numeric balance remains configurable trial tuning; no M4 or other chapter-boss expansion is inferred.

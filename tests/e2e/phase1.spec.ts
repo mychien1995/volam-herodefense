@@ -57,6 +57,7 @@ test('dedicated selection after host start synchronizes different schools', asyn
       a.locator('#pregame button[data-school=cai_bang]'),
     ).toHaveAttribute('aria-pressed', 'true');
     await a.locator('#pregame button[data-school=vo_dang]').click();
+    await a.locator('[data-branch=vo_dang_quyen]').click();
     await a.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     await expect(b.getByTestId('selection-ready')).toHaveText(
       '1/2 đã sẵn sàng',
@@ -68,6 +69,7 @@ test('dedicated selection after host start synchronizes different schools', asyn
     ).toHaveAttribute('aria-pressed', 'true');
     await a.screenshot({ path: resolve(out, '04-school-selection-1280.png') });
     await b.screenshot({ path: resolve(out, '04-school-selection-1920.png') });
+    await b.locator('[data-branch=thieu_lam_quyen]').click();
     await b.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     for (const p of [a, b]) await expect(p.locator('#pregame')).toBeHidden();
     const sa = await snapshot(a),
@@ -155,6 +157,7 @@ test('selection disconnect visibly holds the room without automatic choice', asy
     await expect(
       a.locator('#pregame button[data-school=thien_son]'),
     ).toHaveAttribute('aria-pressed', 'true');
+    await a.locator('[data-branch=thien_son_phien]').click();
     await a.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     await expect(a.getByTestId('selection-ready')).toHaveText(
       '1/2 đã sẵn sàng',

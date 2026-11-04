@@ -328,6 +328,15 @@ test('six players fight desert creeps, share authority, keep full viewport and p
             ['vo_dang', 'thien_son', 'thieu_lam', 'cai_bang'] as const
           )[i]!,
         });
+        bot.send('lobby-action', {
+          action: 'branch',
+          basicId: [
+            'vo_dang_quyen',
+            'thien_son_phien',
+            'thieu_lam_quyen',
+            'cai_bang_bong',
+          ][i]!,
+        });
         bot.send('lobby-action', { action: 'confirm' });
       }),
     ]);

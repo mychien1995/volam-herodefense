@@ -1,4 +1,4 @@
-import { schools } from '@volam/game-data';
+import { m1Config, schools } from '@volam/game-data';
 import type { LobbyState, LobbyAction } from '@volam/game-protocol';
 import './pregame.css';
 
@@ -60,6 +60,8 @@ export class PreGame {
         const school = schools.find((s) => s.id === button.dataset['school']);
         if (school) this.onAction({ action: 'select', schoolId: school.id });
       }
+      if (action === 'branch' && button.dataset['branch'])
+        this.onAction({ action: 'branch', basicId: button.dataset['branch'] });
       if (action === 'confirm') this.onAction({ action: 'confirm' });
     });
     this.node.addEventListener('submit', (e) => {
@@ -107,12 +109,14 @@ export class PreGame {
     // Live match ticks must not replace focused school controls every 33 ms.
     const rosterKey = JSON.stringify([
       state.phase,
+      state.requiresBranch,
       id,
       session,
       [...state.players].map(([playerId, p]) => [
         playerId,
         p.nickname,
         p.schoolId,
+        p.selectedBranch,
         p.confirmed,
         p.connected,
       ]),
@@ -184,7 +188,29 @@ export class PreGame {
         content = `<p class="pre-room">Phòng ${escape(this.roomId)} · ${players.length}/6 người chơi</p><div class="parchment">${list}</div><p>${hostHere ? 'Host bắt đầu để mọi người chọn phái.' : 'Host đã mất kết nối. Hãy rời và tạo phòng mới.'}</p><div class="pre-actions">${button('Bắt đầu', 'start', this.session !== state.hostId || !hostHere)}${button('Rời phòng', 'leave')}</div>`;
       } else {
         title = 'Chọn môn phái';
-        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <strong data-testid="selection-ready">${players.filter(([, p]) => p.connected && p.confirmed).length}/${players.length} đã sẵn sàng</strong></p><div class="school-grid">${schools.map((s) => `<button type="button" class="school-card ${self?.schoolId === s.id ? 'selected' : ''}" data-action="school" data-school="${s.id}" aria-pressed="${self?.schoolId === s.id}" ${self?.confirmed ? 'disabled' : ''}><h3>${s.name}</h3><div role="img" aria-label="${s.name} — chân dung" class="school-portrait ${s.portrait}"></div><span class="element">${s.element}</span><p>${s.description}</p><small>${s.basics}</small></button>`).join('')}</div><p class="pre-note">Cấp 1 · Tự học kỹ năng theo Q → W → E → R · Có thể chọn trùng phái.</p>${list}<div class="pre-actions">${button('Rời phòng', 'leave')}${button(self?.confirmed ? 'Đã xác nhận' : 'Xác nhận', 'confirm', !self?.schoolId || !!self?.confirmed)}</div>${players.some(([, p]) => !p.connected) ? '<p class="pre-warning">Đang chờ người chơi mất kết nối. Không tự chọn phái hoặc bắt đầu trận. Bạn có thể rời và tạo phòng mới.</p>' : ''}`;
+        const branches =
+          self && state.requiresBranch
+            ? (m1Config.progression?.schools[self.schoolId]?.basicIds ?? [])
+            : [];
+        const branchButtons = branches.length
+          ? '<div class="pre-actions pre-branches" role="group" aria-label="Nhánh võ học">' +
+            branches
+              .map(
+                (id) =>
+                  '<button type="button" data-action="branch" data-branch="' +
+                  id +
+                  '" aria-pressed="' +
+                  (self?.selectedBranch === id) +
+                  '"' +
+                  (self?.confirmed ? ' disabled' : '') +
+                  '>' +
+                  m1Config.progression!.defaultBranches![id]!.style +
+                  '</button>',
+              )
+              .join('') +
+            '</div>'
+          : '';
+        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <strong data-testid="selection-ready">${players.filter(([, p]) => p.connected && p.confirmed).length}/${players.length} đã sẵn sàng</strong></p><div class="school-grid">${schools.map((s) => `<button type="button" class="school-card ${self?.schoolId === s.id ? 'selected' : ''}" data-action="school" data-school="${s.id}" aria-pressed="${self?.schoolId === s.id}" ${self?.confirmed ? 'disabled' : ''}><h3>${s.name}</h3><div role="img" aria-label="${s.name} — chân dung" class="school-portrait ${s.portrait}"></div><span class="element">${s.element}</span><p>${s.description}</p><small>${s.basics}</small></button>`).join('')}</div>${branchButtons}<p class="pre-note">${state.requiresBranch ? 'Chọn một môn phái và một nhánh. Dùng dấu + trên thanh Q W E R T để học chiêu.' : 'Cấp 1 · Có thể chọn trùng phái.'}</p>${list}<div class="pre-actions">${button('Rời phòng', 'leave')}${button(self?.confirmed ? 'Đã xác nhận' : 'Xác nhận', 'confirm', !self?.schoolId || (state.requiresBranch && !self.selectedBranch) || !!self?.confirmed)}</div>${players.some(([, p]) => !p.connected) ? '<p class="pre-warning">Đang chờ người chơi mất kết nối. Không tự chọn phái hoặc bắt đầu trận. Bạn có thể rời và tạo phòng mới.</p>' : ''}`;
       }
     }
     this.node.innerHTML = `<section class="pre-window ${this.screen === 'SCHOOL_SELECTION' ? 'school-window' : ''}"><h1 class="pre-title">${title}</h1>${content}<p class="pre-error" role="status" aria-live="polite">${escape(this.notice)}</p></section>`;

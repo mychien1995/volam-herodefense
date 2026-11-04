@@ -34,6 +34,8 @@ test('approved monk avatar, clean spawn, unnamed creeps and synchronized next-wa
     await a.screenshot({ path: out + '/school-selection.png' });
     await a.locator('[data-school=thieu_lam]').click();
     await b.locator('[data-school=cai_bang]').click();
+    await a.locator('[data-branch=thieu_lam_quyen]').click();
+    await b.locator('[data-branch=cai_bang_bong]').click();
     for (const p of pages)
       await p.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     for (const p of pages) await expect(p.locator('#pregame')).toBeHidden();

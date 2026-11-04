@@ -1,3 +1,4 @@
+import { grantCraftMaterial } from './economy.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { addCreep } from './simulation.js';
 import { emit, hurt } from './combat.js';
@@ -89,6 +90,7 @@ export class HongLietEncounter {
     if (boss.hp <= 0) {
       if (!this.respawnAt) {
         this.kills++;
+        grantCraftMaterial(world, config, boss, 'armor');
         this.clear(world);
         this.respawnAt = world.tick + this.definition.respawnTicks;
       }
@@ -304,7 +306,7 @@ export class HongLietEncounter {
       activeAt: cast.activeAt,
       endsAt: cast.endsAt,
     };
-    announceBossSkill(world,boss.id,abilityId);
+    announceBossSkill(world, boss.id, abilityId);
     emit(world, {
       kind: 'cast',
       sourceId: boss.id,

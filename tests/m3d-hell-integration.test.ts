@@ -11,7 +11,7 @@ import {
 import { dungeonActionSchema, PROTOCOL_VERSION } from '@volam/game-protocol';
 
 it('M3D combines Hell with every existing destination and keeps encounter worlds independent', () => {
-  expect(PROTOCOL_VERSION).toBe(29);
+  expect(PROTOCOL_VERSION).toBe(31);
   const destinations = [
     'forest',
     'desert',

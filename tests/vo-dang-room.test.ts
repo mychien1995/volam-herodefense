@@ -14,7 +14,9 @@ import { m1Config } from '@volam/game-data';
 let server: ColyseusTestServer;
 const client = new Client('http://localhost:2638');
 const saved = process.env['VOLAM_DEV_LEGACY_SKILLS'];
+const previousProgression = process.env['VOLAM_TEST_LEGACY_PROGRESSION'];
 beforeAll(async () => {
+  process.env['VOLAM_TEST_LEGACY_PROGRESSION'] = '1';
   delete process.env['VOLAM_DEV_LEGACY_SKILLS'];
   const app = createGameServer();
   await app.listen(2638);
@@ -24,6 +26,9 @@ afterEach(async () => {
   await server.cleanup();
 });
 afterAll(async () => {
+  if (previousProgression === undefined)
+    delete process.env['VOLAM_TEST_LEGACY_PROGRESSION'];
+  else process.env['VOLAM_TEST_LEGACY_PROGRESSION'] = previousProgression;
   await server?.shutdown();
   if (saved === undefined) delete process.env['VOLAM_DEV_LEGACY_SKILLS'];
   else process.env['VOLAM_DEV_LEGACY_SKILLS'] = saved;

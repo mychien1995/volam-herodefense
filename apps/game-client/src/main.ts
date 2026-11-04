@@ -34,6 +34,7 @@ import './boss-party-ui.css';
 import './defense-hud.css';
 import './item-menu.css';
 import { PreGame } from './pregame.js';
+import gameOstUrl from '../../../assets/sounds/game-ost.mp3?url';
 
 const artPreview = new URLSearchParams(location.search).has('artPreview');
 const runtimeArtGallery =
@@ -72,6 +73,34 @@ chuHud.onNotify = (message) => ui.notify(message);
 const endpoint = import.meta.env['VITE_SERVER_URL'] ?? 'http://localhost:2567';
 const pregame = new PreGame(endpoint);
 if (artPreview) pregame.node.hidden = true;
+const matchMusic = artPreview ? undefined : new Audio(gameOstUrl);
+if (matchMusic) {
+  matchMusic.id = 'match-music';
+  matchMusic.loop = true;
+  matchMusic.volume = 0.45;
+  document.body.append(matchMusic);
+}
+let matchMusicActive = false;
+function playMatchMusic(): void {
+  if (matchMusicActive && matchMusic?.paused)
+    void matchMusic.play().catch(() => {
+      // If autoplay is blocked, retry on the next in-game gesture.
+    });
+}
+function syncMatchMusic(active: boolean): void {
+  if (!matchMusic || active === matchMusicActive) return;
+  matchMusicActive = active;
+  if (active) {
+    window.addEventListener('click', playMatchMusic, true);
+    window.addEventListener('keydown', playMatchMusic, true);
+    playMatchMusic();
+  } else {
+    window.removeEventListener('click', playMatchMusic, true);
+    window.removeEventListener('keydown', playMatchMusic, true);
+    matchMusic.pause();
+    matchMusic.currentTime = 0;
+  }
+}
 const arenaScene = new ArenaScene();
 const gallery = new ArtPreviewScene();
 const thienSonSkillGallery = new ThienSonSkillPreviewScene();
@@ -253,6 +282,11 @@ const unbindInput = bindGameplayInput(
     pan: (x, y) => arenaScene.panSpectator(x, y),
   },
   (key) => namDeHud.capture(key),
+  () => {
+    const hero = room?.state.players.get(room.sessionId);
+    if (hero?.build.mode === 'fixed' && hero.basicId === 'thieu_lam_quyen')
+      ui.onBuild({ action: 'stance' });
+  },
 );
 function controls(connected: boolean, busy = false): void {
   for (const field of form.querySelectorAll<
@@ -296,6 +330,7 @@ async function connect(existing: boolean): Promise<void> {
     let previousZone = 'arena';
     joined.onStateChange((state) => {
       if (room === joined) {
+        syncMatchMusic(state.phase === 'IN_GAME');
         chuHud.sync(state, joined.sessionId);
         namDeHud.sync(state, joined.sessionId);
         const zone = state.players.get(joined.sessionId)?.zoneId ?? 'arena';
@@ -374,6 +409,7 @@ async function connect(existing: boolean): Promise<void> {
     });
     joined.onLeave((code) => {
       if (room !== joined) return;
+      syncMatchMusic(false);
       chuHud.sync(undefined, '');
       namDeHud.sync(undefined, '');
       room = undefined;
@@ -387,6 +423,7 @@ async function connect(existing: boolean): Promise<void> {
       status.textContent = `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`;
     });
     if (joined.state?.players && joined.state.phase) {
+      syncMatchMusic(joined.state.phase === 'IN_GAME');
       pregame.update(joined.state, joined.roomId, joined.sessionId);
       arenaScene.setSnapshot(
         joined.state.phase === 'IN_GAME' || joined.state.phase === 'DEFEAT'
@@ -508,6 +545,12 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
                   room?.state.players.get(room.sessionId)?.schoolId ===
                   'cai_bang',
               );
+              pregame.onAction({ action: 'branch', basicId: 'cai_bang_bong' });
+              await wait(
+                () =>
+                  room?.state.players.get(room.sessionId)?.selectedBranch ===
+                  'cai_bang_bong',
+              );
               pregame.onAction({ action: 'confirm' });
               await wait(
                 () =>
@@ -520,6 +563,7 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
             galleryClearEffects: () => arenaScene.reviewClearTransientEffects(),
           }
         : {}),
+      progressionPresentation: () => arenaScene.inspectProgression(),
       presentation: () =>
         animationReview
           ? animationReviewGallery.inspect()
@@ -544,6 +588,8 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
 }
 if (import.meta.hot)
   import.meta.hot.dispose(() => {
+    syncMatchMusic(false);
+    matchMusic?.remove();
     void room?.leave();
     unbindInput();
     pregame.destroy();

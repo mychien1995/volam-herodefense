@@ -1,3 +1,7 @@
+## Fixed branch progression — 2026-11-04
+
+The rank cap is four for all five active skills. The fourth ultimate rank uses the existing per-rank progression for its school and opens at level 24. Characters can spend 20 skill points and reserve up to 10 future stat points. Earlier mixed-build and automatic surplus measurements below describe the historical rules.
+
 # Balancing Plan v1.0 — hard but fair
 
 ## M3D director-reviewed playtest tuning — 2026-11-03

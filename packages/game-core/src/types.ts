@@ -1,3 +1,4 @@
+import type { EquipmentAttack } from './economy-types.js';
 import type { BossBanterClock, BossBanterDefinition } from './boss-banter.js';
 import type { ChuEncounter } from './chu-types.js';
 import type { WaveBossTestRuntime } from './wave-boss-test.js';
@@ -89,6 +90,8 @@ export interface SupportEffect extends AllyEffect {
   tickInterval: number;
 }
 export type StatusKind =
+  | 'burn'
+  | 'poison'
   | 'slow'
   | 'attack_slow'
   | 'attack_break'
@@ -206,6 +209,7 @@ export interface MultiHitEffect {
   durationTicks?: number | undefined;
 }
 export interface Ability {
+  equipmentAttack?: EquipmentAttack | undefined;
   manualChain?:
     | {
         idleTicks: number;
@@ -242,6 +246,7 @@ export interface Ability {
     | SupportEffect;
 }
 export interface SimulationConfig {
+  personalCraftLoot?: boolean;
   bossBanter?: BossBanterDefinition | undefined;
   /** Temporary server-owned arena confinement, independent of status immunity. */
   heroBounds?: EllipseBounds | undefined;
@@ -316,6 +321,7 @@ export type Command =
   | { kind: 'move'; x: number; y: number }
   | { kind: 'basic' }
   | { kind: 'dash' }
+  | { kind: 'gear-skill' }
   | { kind: 'cast'; slot: number }
   | { kind: 'dev-loadout'; ids: string[] }
   | { kind: 'select-basic'; id: string };
@@ -377,6 +383,8 @@ export interface Hero extends Actor {
   basicChains?: Record<string, number>;
 }
 export interface Creep extends Actor {
+  damagedBy?: Set<string>;
+  needlePoison?: { sourceId: string; until: number; next: number };
   waveBossActor?: boolean;
 
   rangedAttack?: ProjectileEffect;
@@ -418,6 +426,7 @@ export interface Creep extends Actor {
   burnDamage: number;
 }
 export interface Projectile extends Point {
+  equipmentAttack?: EquipmentAttack | undefined;
   spawnedAt?: number;
   combo?: ComboSpec;
   comboTargets?: Record<string, boolean>;

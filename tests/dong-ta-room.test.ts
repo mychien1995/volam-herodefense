@@ -32,6 +32,7 @@ it('two SDK clients observe authoritative recall, bounds, attacks, retry and cle
   await expect.poll(() => a.state.phase).toBe('SCHOOL_SELECTION');
   for (const peer of [a, b]) {
     peer.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    peer.send('lobby-action', { action: 'branch', basicId: 'cai_bang_bong' });
     peer.send('lobby-action', { action: 'confirm' });
   }
   await expect.poll(() => a.state.phase).toBe('IN_GAME');

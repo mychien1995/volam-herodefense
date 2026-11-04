@@ -276,6 +276,27 @@ export async function startWaveFeedback(extraPlugins: Plugin[] = []) {
                     actor.x = Number(q.get('x'));
                     actor.y = Number(q.get('y'));
                   }
+                } else if (op === 'craft_gold') {
+                  for (const h of w.heroes.values()) h.gold = 1000;
+                } else if (op === 'craft_target' || op === 'craft_exit') {
+                  const id = q.get('player') ?? '';
+                  const h = m.hero(id);
+                  if (!h) throw Error('Invalid crafting fixture player');
+                  if (op === 'craft_target') {
+                    const error = m.enter(id, 'shared', 'co_mo');
+                    if (error) throw Error(error);
+                    const zone = m.zoneOf(id)!;
+                    const boss = zone.world.creeps.get(
+                      zone.world.boss!.actorId,
+                    )!;
+                    boss.hp = 1;
+                    Object.assign(h, {
+                      x: boss.x - 24,
+                      y: boss.y,
+                      fx: 1,
+                      fy: 0,
+                    });
+                  } else Object.assign(h, m.zoneOf(id)!.dungeon!.exit);
                 } else if (op === 'dungeon_shout') {
                   const destination = q.get('destination') as
                     'co_mo' | 'chu_ba_thong' | 'hong_liet' | 'kim_luan';

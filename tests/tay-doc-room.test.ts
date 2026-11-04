@@ -37,6 +37,7 @@ async function start(a: SDKRoom, b: SDKRoom) {
   await expect.poll(() => a.state.phase).toBe('SCHOOL_SELECTION');
   for (const c of [a, b]) {
     c.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    c.send('lobby-action', { action: 'branch', basicId: 'cai_bang_bong' });
     c.send('lobby-action', { action: 'confirm' });
   }
   await expect.poll(() => projection(a)?.phase).toBe('enter');

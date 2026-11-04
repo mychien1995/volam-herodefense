@@ -36,9 +36,14 @@ export interface DefaultBranch {
   style: string;
   skillIds: string[];
 }
-export type SkillMode = 'default' | 'custom';
+export interface FixedBranch {
+  skillIds: string[];
+  alternateSkillIds?: string[] | undefined;
+}
+export type SkillMode = 'default' | 'custom' | 'fixed';
 export interface ProgressionDefinition {
   defaultBranches?: Record<string, DefaultBranch> | undefined;
+  fixedBranches?: Record<string, FixedBranch> | undefined;
   skills: Record<string, RankedSkill>;
   schools: Record<string, SchoolStatProfile>;
   maxUltimates: number;
@@ -53,10 +58,12 @@ export interface HeroProgression {
   ranks: Record<string, number>;
 }
 export type BuildChange =
-  | { action: 'mode'; mode: SkillMode }
+  | { action: 'mode'; mode: Exclude<SkillMode, 'fixed'> }
   | { action: 'branch'; basicId: string }
   | { action: 'loadout'; ids: string[] }
   | { action: 'upgrade'; skillId: string }
+  | { action: 'upgrade-slot'; slot: number }
+  | { action: 'stance' }
   | { action: 'reset' }
   | { action: 'basic'; basicId: string };
 export interface PointAccounting {

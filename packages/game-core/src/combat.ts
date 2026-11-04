@@ -8,6 +8,7 @@ import type {
 import { cancelOwnedEffects, hasStatus, statusValue } from './status.js';
 import { characterStats, gainExperience } from './progression.js';
 import { direction, distance, segmentRect } from './geometry.js';
+import { recordsCraftDamage } from './economy.js';
 import { comboHit } from './combos.js';
 import { ownerProtection } from './protection.js';
 import { CHU_BOSS_ID } from './chu-types.js';
@@ -31,6 +32,7 @@ export function hurt(
     fy?: number;
     armorPenetration?: number | undefined;
     slowedBonus?: number | undefined;
+    lifesteal?: { fraction: number; used: boolean } | undefined;
     reactive?: boolean | undefined;
     preserveFraction?: boolean | undefined;
     directHp?: boolean;
@@ -209,6 +211,20 @@ export function hurt(
   let damage = snapshot?.preserveFraction
     ? Math.max(0, adjusted)
     : Math.max(1, Math.round(adjusted));
+  const craftedDefender = world.heroes.get(target.id);
+  const reflectAttacker = world.creeps.get(sourceId);
+  const reflectChance = config.economy?.craftedCombat.reflectChance ?? 0;
+  const reflected =
+    craftedDefender?.inventory?.crafted?.armor === 'reflect' &&
+    reflectAttacker &&
+    !snapshot?.reactive &&
+    !snapshot?.resolvedReflection &&
+    !snapshot?.periodic &&
+    !snapshot?.directHp &&
+    !snapshot?.unavoidableHpLoss &&
+    world.random() < reflectChance
+      ? damage
+      : 0;
   const mitigation = snapshot?.unavoidableHpLoss
     ? 0
     : Math.min(
@@ -245,7 +261,8 @@ export function hurt(
         stage: 'mitigate',
       });
   }
-  const hero = world.heroes.get(target.id);
+  if (reflected) damage *= 0.5;
+  const hero = craftedDefender;
   // Strongest shield only; no additive absorption or duplicate resource spend.
   const shield = (snapshot?.unavoidableHpLoss ? [] : (hero?.statuses ?? []))
     .filter((s) => s.kind === 'mana_shield' && s.until > world.tick)
@@ -307,7 +324,15 @@ export function hurt(
     });
   }
   target.hurtUntil = world.tick + 6;
-  if (enemy) enemy.hits[sourceId] = world.tick;
+  if (enemy) {
+    enemy.hits[sourceId] = world.tick;
+    if (
+      target.hp < beforeHp &&
+      world.heroes.has(sourceId) &&
+      recordsCraftDamage(config, enemy.id)
+    )
+      (enemy.damagedBy ??= new Set()).add(sourceId);
+  }
   const heading = world.heroes.get(sourceId) ?? world.creeps.get(sourceId);
   emit(world, {
     kind: 'hit',
@@ -368,6 +393,29 @@ export function hurt(
       if (!enemy.bossEncounter) reward(world, enemy, config);
     }
   }
+  const leech = snapshot?.lifesteal;
+  const owner = leech ? world.heroes.get(sourceId) : undefined;
+  if (
+    enemy &&
+    target.hp < beforeHp &&
+    leech &&
+    !leech.used &&
+    owner &&
+    owner.hp > 0
+  ) {
+    leech.used = true;
+    owner.hp = Math.min(
+      owner.maxHp,
+      owner.hp + raw * (critical ? stats.critMultiplier : 1) * leech.fraction,
+    );
+  }
+  if (reflected && reflectAttacker)
+    hurt(world, reflectAttacker, target.id, 'gear_reflect', reflected, config, {
+      critChance: 0,
+      critMultiplier: 1,
+      reactive: true,
+      preserveFraction: true,
+    });
   if (counter && counter.evade === false) retaliate();
   if (
     guardCounter &&

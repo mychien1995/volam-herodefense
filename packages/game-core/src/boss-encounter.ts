@@ -1,3 +1,4 @@
+import { grantCraftMaterial } from './economy.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 const compareId = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
 import { addCreep } from './simulation.js';
@@ -88,7 +89,7 @@ function begin(
   runtime.nextActionAt =
     runtime.cast.until + config.bossEncounter!.intervalTicks;
   cue(world, boss, runtime.cast, 'warning');
-  announceBossSkill(world,boss.id,attack.id);
+  announceBossSkill(world, boss.id, attack.id);
 }
 function release(
   world: World,
@@ -256,6 +257,10 @@ export function stepBossEncounter(
       const eligible = [...world.heroes.values()]
         .filter((h) => Object.hasOwn(boss.hits, h.id))
         .sort((a, b) => compareId(a.id, b.id));
+      if (config.personalCraftLoot) {
+        grantCraftMaterial(world, config, boss, 'boots');
+        return;
+      }
       // Exactly one item per kill; preserve it as a match-only pending claim until M4 inventory exists.
       const item =
         d.loot[

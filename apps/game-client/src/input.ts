@@ -13,6 +13,7 @@ export function bindGameplayInput(
     | Omit<Extract<Command, { kind: 'nam-de-key' }>, 'kind'>
     | null
     | undefined = () => undefined,
+  switchStance: () => void = () => {},
 ): () => void {
   const held = new Set<string>();
   const move = (): void =>
@@ -79,6 +80,26 @@ export function bindGameplayInput(
     if (event.code === 'Space') {
       event.preventDefault();
       interact();
+      return;
+    }
+    if (
+      event.code === 'KeyZ' &&
+      !event.ctrlKey &&
+      !event.altKey &&
+      !event.metaKey
+    ) {
+      event.preventDefault();
+      send({ kind: 'gear-skill' });
+      return;
+    }
+    if (
+      event.code === inputBindings.stance &&
+      !event.ctrlKey &&
+      !event.altKey &&
+      !event.metaKey
+    ) {
+      event.preventDefault();
+      switchStance();
       return;
     }
     if (event.code === inputBindings.basicAttack) {

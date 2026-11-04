@@ -233,12 +233,13 @@ export class CoMoEffects {
     }
   }
   sync(state: LobbyState | undefined, zone: string) {
-    if (!state || state.phase === 'DEFEAT' || !isCoMoZone(zone)) {
+    if (!state || state.phase === 'DEFEAT') {
       this.clear();
       return;
     }
-    const liveWarnings = new Set<string>(),
-      liveShots = new Set<string>();
+    this.syncShots(state, zone);
+    if (!isCoMoZone(zone)) return;
+    const liveWarnings = new Set<string>();
     this.r3.begin();
     const sweepMs = r3Tag('r3_whisk_ring', 'sweep_billboard').tag
       .durationMsTotal;
@@ -330,11 +331,20 @@ export class CoMoEffects {
         for (const sprite of sprites) sprite.destroy();
         this.warnings.delete(token);
       }
+    this.r3.end();
+  }
+  private syncShots(state: LobbyState, zone: string): void {
+    const liveShots = new Set<string>();
     state.projectiles.forEach((shot, id) => {
-      if (shot.zoneId !== zone) return;
+      if (
+        shot.zoneId !== zone ||
+        (!isCoMoZone(zone) && shot.abilityId !== 'gear_needle')
+      )
+        return;
       const tag = (
         {
           co_mo_minion_needle: 'needle_projectile',
+          gear_needle: 'needle_projectile',
           bang_phach_ngan_cham: 'needle_projectile',
           xich_luyen_chuong: 'palm_projectile',
           ngu_doc_chuong: 'ngu_doc_projectile',
@@ -354,11 +364,13 @@ export class CoMoEffects {
             0.45,
           );
         sprite.setScale(
-          tag === 'needle_projectile'
-            ? shot.abilityId === 'co_mo_minion_needle'
-              ? 0.85
-              : 1.2
-            : 0.85,
+          shot.abilityId === 'gear_needle'
+            ? 0.55
+            : tag === 'needle_projectile'
+              ? shot.abilityId === 'co_mo_minion_needle'
+                ? 0.85
+                : 1.2
+              : 0.85,
         );
         this.shots.set(id, sprite);
       }
@@ -367,7 +379,7 @@ export class CoMoEffects {
           Math.round(shot.x),
           Math.round(
             shot.y -
-              (shot.abilityId === 'co_mo_minion_needle'
+              (['co_mo_minion_needle', 'gear_needle'].includes(shot.abilityId)
                 ? 16
                 : tag === 'needle_projectile'
                   ? 28
@@ -382,7 +394,6 @@ export class CoMoEffects {
         sprite.destroy();
         this.shots.delete(id);
       }
-    this.r3.end();
   }
   clear() {
     this.r3.clear();

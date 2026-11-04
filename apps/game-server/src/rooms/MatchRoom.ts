@@ -2,7 +2,7 @@ import { namDeView } from '@volam/game-core';
 import { serverWaveBossTestOptions } from '../wave-boss-test-config.js';
 import { namDeDefinition } from '@volam/game-data';
 import { NamDeControlState } from '@volam/game-protocol';
-import { chuView, chuLootAction, chuItemAction } from '@volam/game-core';
+import { chuView } from '@volam/game-core';
 import { isBacCaiActor } from '@volam/game-core';
 import {
   bossLootActionSchema,
@@ -29,6 +29,7 @@ import {
 import {
   DungeonMatch,
   initializeProgression,
+  skillRank,
   characterStats,
   pointAccounting,
   equippedAbility,
@@ -74,7 +75,7 @@ export class MatchRoom extends Room<{
   readonly seed = randomInt(1, 0x1_0000_0000);
   readonly waveBossTestOptions = serverWaveBossTestOptions(m1Config.tickRate);
   readonly simulation = new DungeonMatch(
-    m1Config,
+    { ...m1Config, personalCraftLoot: true },
     creepDungeon,
     this.seed,
     serverInvasionDefinition(),
@@ -105,6 +106,30 @@ export class MatchRoom extends Room<{
     process.env['VOLAM_DEV_LEGACY_SKILLS'] === '1';
   readonly devSkillLoadout =
     this.legacySkills && process.env['VOLAM_DEV_SKILLS'] === '1';
+  // Historical room fixtures can exercise the earlier progression contract.
+  private readonly legacyProgression =
+    process.env['NODE_ENV'] === 'test' &&
+    process.env['VOLAM_TEST_LEGACY_PROGRESSION'] === '1';
+
+  private spawnPlayer(id: string, player: LobbyPlayer): void {
+    const hero = this.simulation.add(id, player.nickname);
+    hero.schoolId = player.schoolId;
+    const first = m1Config.progression!.schools[hero.schoolId]!.basicIds[0]!;
+    if (this.legacySkills) {
+      if (hero.schoolId !== 'cai_bang') {
+        hero.basicId = first;
+        hero.skillIds = ['', '', '', ''];
+      }
+    } else {
+      initializeProgression(
+        hero,
+        m1Config,
+        this.legacyProgression ? 'default' : 'fixed',
+        player.selectedBranch || first,
+      );
+    }
+  }
+
   override messages = {
     'merchant-action': validate(
       merchantActionSchema,
@@ -145,7 +170,9 @@ export class MatchRoom extends Room<{
             message:
               input.action === 'use-potion'
                 ? 'Đã dùng bình.'
-                : 'Đã mua và cập nhật hành trang.',
+                : input.action === 'craft'
+                  ? 'Đã chế tạo và trang bị.'
+                  : 'Đã mua và cập nhật hành trang.',
           });
         this.syncState();
       },
@@ -254,56 +281,31 @@ export class MatchRoom extends Room<{
             player.confirmed
           )
             return reject('Không thể đổi lựa chọn ở giai đoạn này.');
-          if (action.action === 'select') player.schoolId = action.schoolId;
-          else {
+          if (action.action === 'select') {
+            if (player.schoolId !== action.schoolId) player.selectedBranch = '';
+            player.schoolId = action.schoolId;
+          } else if (action.action === 'branch') {
+            if (
+              !m1Config.progression?.schools[
+                player.schoolId
+              ]?.basicIds.includes(action.basicId)
+            )
+              return reject('Nhánh võ học không thuộc môn phái đã chọn.');
+            player.selectedBranch = action.basicId;
+          } else {
             if (!player.schoolId) return reject('Hãy chọn môn phái trước.');
+            if (this.state.requiresBranch && !player.selectedBranch)
+              return reject('Hãy chọn nhánh võ học trước khi xác nhận.');
             player.confirmed = true;
             if (this.state.phase === 'IN_GAME') {
-              const hero = this.simulation.add(
-                client.sessionId,
-                player.nickname,
-              );
-              hero.schoolId = player.schoolId;
-              if (
-                this.legacySkills &&
-                ['thien_son', 'vo_dang', 'thieu_lam'].includes(hero.schoolId)
-              ) {
-                hero.basicId =
-                  m1Config.progression!.schools[hero.schoolId]!.basicIds[0]!;
-                hero.skillIds = ['', '', '', ''];
-              }
-              if (
-                !this.legacySkills &&
-                !initializeProgression(hero, m1Config, 'default')
-              ) {
-                hero.skillIds = ['', '', '', ''];
-                hero.skillCooldowns = [0, 0, 0, 0];
-              }
+              this.spawnPlayer(client.sessionId, player);
               this.syncState();
             } else if (
               [...this.state.players.values()].every(
                 (p) => p.connected && p.confirmed,
               )
             ) {
-              for (const [id, p] of this.state.players) {
-                const hero = this.simulation.add(id, p.nickname);
-                hero.schoolId = p.schoolId;
-                if (
-                  this.legacySkills &&
-                  ['thien_son', 'vo_dang', 'thieu_lam'].includes(hero.schoolId)
-                ) {
-                  hero.basicId =
-                    m1Config.progression!.schools[hero.schoolId]!.basicIds[0]!;
-                  hero.skillIds = ['', '', '', ''];
-                }
-                if (
-                  !this.legacySkills &&
-                  !initializeProgression(hero, m1Config, 'default')
-                ) {
-                  hero.skillIds = ['', '', '', ''];
-                  hero.skillCooldowns = [0, 0, 0, 0];
-                }
-              }
+              for (const [id, p] of this.state.players) this.spawnPlayer(id, p);
               this.state.phase = 'IN_GAME';
               void this.setMetadata({ phase: this.state.phase });
               this.syncState();
@@ -341,27 +343,11 @@ export class MatchRoom extends Room<{
         )
           return;
         hero.lastSequence = input.sequence;
-        const error = chuItemAction(
-          zone.world,
-          client.sessionId,
-          input.index,
-          input.itemId,
-          input.action,
-          [
-            ...chuBaThongDungeon.chuBoss!.loot,
-            ...kimLuanDungeon.kimBoss!.loot,
-          ].find((i) => i.id === input.itemId) ?? {
-            id: '',
-            nameVi: '',
-            sellGold: 0,
-          },
-        );
-        if (error)
-          client.send('command-rejected', {
-            protocolVersion: PROTOCOL_VERSION,
-            sequence: input.sequence,
-            reason: error,
-          });
+        client.send('command-rejected', {
+          protocolVersion: PROTOCOL_VERSION,
+          sequence: input.sequence,
+          reason: 'Nguyên liệu cá nhân không thể bán hoặc thả.',
+        });
         this.syncState();
       },
     ),
@@ -373,18 +359,12 @@ export class MatchRoom extends Room<{
           zone = this.simulation.zoneOf(client.sessionId);
         if (!hero || !zone || input.sequence <= hero.lastSequence) return;
         hero.lastSequence = input.sequence;
-        const error = chuLootAction(
-          zone.world,
-          client.sessionId,
-          input.lootId,
-          input.action,
-        );
-        if (error)
-          client.send('command-rejected', {
-            protocolVersion: PROTOCOL_VERSION,
-            sequence: input.sequence,
-            reason: error,
-          });
+        client.send('command-rejected', {
+          protocolVersion: PROTOCOL_VERSION,
+          sequence: input.sequence,
+          reason:
+            'Nguyên liệu cá nhân được cấp tự động, không cần nhận hoặc quay thưởng.',
+        });
         this.syncState();
       },
     ),
@@ -463,18 +443,15 @@ export class MatchRoom extends Room<{
       }
       if (
         input.kind === 'select-basic' &&
-        ((!this.legacySkills &&
-          this.simulation.hero(client.sessionId)?.schoolId !== 'cai_bang') ||
-          (this.legacySkills &&
-            !m1Config.progression?.schools[
-              this.simulation.hero(client.sessionId)?.schoolId ?? ''
-            ]?.basicIds.includes(input.id)))
+        (!this.legacySkills ||
+          !m1Config.progression?.schools[
+            this.simulation.hero(client.sessionId)?.schoolId ?? ''
+          ]?.basicIds.includes(input.id))
       ) {
         client.send('command-rejected', {
           protocolVersion: PROTOCOL_VERSION,
           sequence: input.sequence,
-          reason:
-            'Đòn đánh môn phái này chưa mở. Không thể dùng võ học môn phái khác.',
+          reason: 'Đòn đánh đã được khóa theo nhánh khi vào trận.',
         });
         return;
       }
@@ -522,7 +499,7 @@ export class MatchRoom extends Room<{
           protocolVersion: PROTOCOL_VERSION,
           sequence: input.sequence,
           reason: this.simulation.hero(client.sessionId)?.progression
-            ? 'Kỹ năng chưa trang bị hoặc chưa học. Dùng điểm tại Võ Học trong đấu trường.'
+            ? 'Kỹ năng chưa trang bị hoặc chưa học. Dùng dấu cộng trên thanh kỹ năng để học.'
             : 'Ô này chưa được trang bị.',
         });
         return;
@@ -552,6 +529,7 @@ export class MatchRoom extends Room<{
     ))
       this.world.creeps.clear();
     this.state.devSkillLoadout = this.devSkillLoadout;
+    this.state.requiresBranch = !this.legacySkills && !this.legacyProgression;
     this.metadata = { phase: this.state.phase };
     this.patchRate = 1000 / m1Config.tickRate;
     this.syncState();
@@ -848,8 +826,21 @@ export class MatchRoom extends Room<{
         0,
         (hero.inventory?.potionReadyAt ?? 0) - this.simulation.tick,
       );
-      for (const slot of ['weapon', 'armor', 'hat', 'boots'] as const)
+      target.inventory.auxiliaryCooldownTicks = Math.max(
+        0,
+        (hero.inventory?.auxiliaryReadyAt ?? 0) - zone.world.tick,
+      );
+      for (const slot of ['weapon', 'armor', 'hat', 'boots'] as const) {
         target.inventory.levels.set(slot, hero.inventory?.levels[slot] ?? 0);
+        target.inventory.materials.set(
+          slot,
+          hero.inventory?.materials?.[slot] ?? 0,
+        );
+        target.inventory.crafted.set(
+          slot,
+          hero.inventory?.crafted?.[slot] ?? '',
+        );
+      }
       for (const potion of Object.keys(m1Config.economy!.potions))
         target.inventory.potions.set(
           potion,
@@ -869,10 +860,18 @@ export class MatchRoom extends Room<{
         const stats = characterStats(hero, m1Config, zone.world.tick);
         Object.assign(target.build.stats, stats.total);
         target.build.sources = JSON.stringify(stats.sources);
+        const ranks =
+          hero.progression.mode === 'fixed'
+            ? Object.fromEntries(
+                hero.progression.defaultSkills.map((id) => [
+                  id,
+                  skillRank(hero, id, m1Config),
+                ]),
+              )
+            : hero.progression.ranks;
         for (const key of target.build.ranks.keys())
-          if (!Object.hasOwn(hero.progression.ranks, key))
-            target.build.ranks.delete(key);
-        for (const [key, rank] of Object.entries(hero.progression.ranks))
+          if (!Object.hasOwn(ranks, key)) target.build.ranks.delete(key);
+        for (const [key, rank] of Object.entries(ranks))
           target.build.ranks.set(key, rank);
       }
       target.basicId = hero.basicId;
@@ -910,11 +909,16 @@ export class MatchRoom extends Room<{
         0,
         (hero.skillCooldowns[3] ?? 0) - zone.world.tick,
       );
+      target.tCooldown = Math.max(
+        0,
+        (hero.skillCooldowns[4] ?? 0) - zone.world.tick,
+      );
       const ids = hero.skillIds ?? m1Config.skills.map((s) => s.id);
       target.qSkill = ids[0] ?? '';
       target.wSkill = ids[1] ?? '';
       target.eSkill = ids[2] ?? '';
       target.rSkill = ids[3] ?? '';
+      target.tSkill = ids[4] ?? '';
     }
     const creepKeys = new Set<string>(),
       shotKeys = new Set<string>(),

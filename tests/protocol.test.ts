@@ -23,7 +23,8 @@ describe('validated M0 data and protocol', () => {
       movement: ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'],
       basicAttack: 'KeyA',
       dash: ['ShiftLeft', 'ShiftRight'],
-      activeSkills: ['KeyQ', 'KeyW', 'KeyE', 'KeyR'],
+      stance: 'KeyF',
+      activeSkills: ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT'],
       healthPotion: ['Digit1', 'Numpad1'],
       manaPotion: ['Digit2', 'Numpad2'],
     });

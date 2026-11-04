@@ -1,3 +1,4 @@
+import { waveBossFarewell } from './boss-banter.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { addCreep } from './simulation.js';
 import { emit, hurt } from './combat.js';
@@ -799,7 +800,11 @@ export function stepNamDe(w: World, c: SimulationConfig): void {
     if (!v.qte && !v.confusion && v.stunUntil <= w.tick) s.controls.delete(id);
   }
   if (s.phase === 'defeated') {
-    if (s.defeatedAt !== undefined && w.tick >= s.defeatedAt + d.corpseTicks)
+    if (
+      s.defeatedAt !== undefined &&
+      w.tick >=
+        s.defeatedAt + Math.max(d.corpseTicks, c.bossBanter?.farewellTicks ?? 0)
+    )
       w.creeps.delete(NAM_DE_ID);
     return;
   }
@@ -807,7 +812,10 @@ export function stepNamDe(w: World, c: SimulationConfig): void {
   const b = boss(w);
   if (!b || b.hp <= 0) {
     s.phase = 'defeated';
-    s.defeatedAt ??= w.tick;
+    if (s.defeatedAt === undefined) {
+      s.defeatedAt = w.tick;
+      if (b) waveBossFarewell(w, c, b);
+    }
     clearNamDe(w);
     return;
   }
@@ -996,12 +1004,16 @@ export function spawnNamDeIfReady(
   b.fx = 0;
   b.fy = -1;
 }
-export function finishNamDeTick(w: World): void {
+export function finishNamDeTick(w: World, c: SimulationConfig): void {
   const s = w.namDe;
   if (!s) return;
-  if (s.spawnCount && (boss(w)?.hp ?? 0) <= 0) {
+  const b = boss(w);
+  if (s.spawnCount && (b?.hp ?? 0) <= 0) {
     s.phase = 'defeated';
-    s.defeatedAt ??= w.tick;
+    if (s.defeatedAt === undefined) {
+      s.defeatedAt = w.tick;
+      if (b) waveBossFarewell(w, c, b);
+    }
     clearNamDe(w);
     return;
   }

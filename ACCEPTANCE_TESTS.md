@@ -1,3 +1,20 @@
+## Nhạc nền trận đấu — 2026-11-05
+
+- Phòng chờ im lặng. Hai client vào trận phát nhạc, đến cuối bài tự lặp và khi rời phòng thì dừng, trở về đầu bài.
+
+## Chế tạo — 2026-11-05
+
+- Bốn boss hầm ngục cấp đúng nguyên liệu cho từng người đã đánh và còn trong instance. Replay, last hit, hỗ trợ và hành động roll cũ không cấp thêm.
+- Bốn ô và 12 nhánh dùng đúng cấp 5, một nguyên liệu và phí. Yêu cầu stale, thiếu nguyên liệu, nhánh sai hoặc ngoài arena bị từ chối nguyên tử.
+- Hai nhánh Cái Bang tải icon mới trong Phaser. Chế tạo từ nguyên liệu thật cập nhật túi đồ, ô Z và bản sao trạng thái ở client thứ hai.
+
+## Fixed branch and match story acceptance — 2026-11-04
+
+- Both branch choices are shown after school selection. Confirmation requires a matching branch, including for late joiners. The server rejects attempts to change it during a match.
+- The hotbar renders A, five skills, legal upgrade buttons, rank and cooldown. T is locked through level 5. Server tests cover all eight branches, replay rejection, gates through level 24 and the twenty-point cap.
+- F switches Thiếu Lâm Quyền Q/W/E and preserves each slot's learned rank. R/T and their cooldowns persist. A level gained from actual combat raises and removes the four-frame ring in Phaser.
+- Tượng Võ Thần introduces the stone above the actual statue at match entry. Seeded boss dialogue stays local to its instance. Wave boss death publishes one farewell and retains its corpse through the read window.
+
 ## Combined approved M3D integration acceptance — 2026-11-03
 
 Current acceptance includes real Q/W/E same-target success/miss/early-input/cancel/duplicate/cost across four facings; creep0.648 entry speed, one identity/wave and pack separation including Hell; private creeps/shared bosses;30s invitations; arena freeze/resume; per-attempt revival/reconnect/solo exit; actual r3 normal-zoom rendering; retained inventory/merchant purchases and potion1/2/modal ownership; Hell animation fallback and existing boss worlds remain independent. Protocol21 accepts the composed strict messages and rejects both old branch versions.

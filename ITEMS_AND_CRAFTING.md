@@ -1,6 +1,14 @@
+## Chế tạo trong trận — 2026-11-05
+
+Thương Gia mở bốn công thức và 12 nhánh trong tab Chế tạo. Khi còn sống ở đấu trường trung tâm, người chơi có thể dùng đúng món cơ bản cấp 5, một nguyên liệu tương ứng và 450–600 vàng để chế tạo chắc chắn thành công. Thành phẩm tự trang bị, giữ nền cấp 5 và cộng phần thưởng nhánh. Mỗi ô chọn một nhánh cho phần còn lại của trận. Kho nguyên liệu cá nhân xếp chồng riêng với bình.
+
+Boss hầm ngục cấp một nguyên liệu cho từng người đã gây mất HP lên boss chính và còn trong instance lúc chết, kể cả người đã gục nhưng còn hiện diện. Quyền nhận thưởng được chốt lúc boss chết. Người đã rời instance hoặc bị gỡ khỏi instance do mất kết nối không nhận nguyên liệu. Hỗ trợ hoặc đánh riêng đệ tử Kim Luân không cấp nguyên liệu. Long Châu vẫn chờ tính năng riêng.
+
+Thông số nhánh và giá thử nằm trong packages/game-data/src/economy.ts. Đánh lan xa bắn ba tia, tia phụ 45%, tối đa một tia trúng mỗi mục tiêu mỗi chặng. Phiến giữ chặng về. Hút máu tính 10% sức mạnh đòn trước phòng thủ trên lần A gây mất HP đầu tiên. Xuyên giáp A 25%. Phản đòn thử 7% trên đòn trực tiếp, giảm nửa sát thương đòn đó sau giảm sát thương thông thường và trước khiên mana. Aura đốt tối đa một lần mỗi địch mỗi giây. Z hồi 36 giây và giữ hồi chiêu khi chuyển khu vực.
+
 # Inventory, Merchant, Items & Crafting Specification v2.0
 
-Cập nhật **2026-11-02**, từ các quyết định brainstorm inventory/merchant của người dùng. **Checkpoint mới:** người dùng đã duyệt runtime UI và ủy quyền tự gắn giá mua thử. Mua/nâng bốn đồ cơ bản và mua/dùng bình được triển khai theo [ECONOMY_TRIAL.md](docs/ECONOMY_TRIAL.md): 20 bình tổng, cooldown chung5s, hồi tức thì, giá/chỉ số tạm ở game-data. Các câu hỏi ở mục2–3 bên dưới đã có lựa chọn thử nghiệm trong phạm vi này, vẫn có thể revise. Phần đồ ghép/Z, thưởng boss/Long Châu và PvP còn là thiết kế; backend boss/roll/pending claim chưa được chuyển sang v2. Không coi checkpoint này là hoàn tất M4.
+Checkpoint lịch sử **2026-11-02**, từ các quyết định inventory/merchant của người dùng. người dùng đã duyệt runtime UI và ủy quyền tự gắn giá mua thử. Mua/nâng bốn đồ cơ bản và mua/dùng bình được triển khai theo [ECONOMY_TRIAL.md](docs/ECONOMY_TRIAL.md): 20 bình tổng, cooldown chung5s, hồi tức thì, giá/chỉ số tạm ở game-data. Các câu hỏi ở mục2–3 bên dưới đã có lựa chọn thử nghiệm trong phạm vi này, vẫn có thể revise. Phần đồ ghép/Z, thưởng boss/Long Châu và PvP còn là thiết kế; backend boss/roll/pending claim chưa được chuyển sang v2. Không coi checkpoint này là hoàn tất M4.
 
 Quyết định đã chốt đăng ký tại [DECISIONS.md](DECISIONS.md). Bản này thay thế thiết kế loot ngẫu nhiên một món cho cả đội, roll, bán lại và chuyển đồ trong v1.0; hồ sơ triển khai cũ giữ làm lịch sử. **CONFIRMED** = đã chốt; **PROPOSED/OPEN** = chưa được duyệt hoặc còn thiếu chi tiết.
 
