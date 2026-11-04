@@ -555,3 +555,20 @@
 .hotbar-slot.recast-ready {
   outline: 2px solid #a9e1ec;
 }
+
+/* Keep the existing HUD geometry; give small utility labels a quiet backing. */
+#viewport:not([data-visual-review='original'])
+  .system-buttons
+  button
+  > span:not(.pixel-icon) {
+  background: #14211feb;
+  text-shadow: 1px 1px #000;
+  font-size: clamp(8px, 0.65vw, 11px);
+  white-space: nowrap;
+  color: #fff1ce;
+  margin-top: -1px;
+}
+#viewport:not([data-visual-review='original']) .game-window :is(h2, h3),
+#viewport:not([data-visual-review='original']) #item-menu :is(h3, h4) {
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+}

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="gallery.css" />
+    <title>Duyệt VFX · Võ Lâm Hero Defense</title>
+  </head>
+  <body>
+    <header>
+      <div>
+        <span class="eyebrow">VÕ LÂM HERO DEFENSE · ARTWORK REVIEW</span>
+        <h1>Skill & boss</h1>
+      </div>
+      <p>Chọn một đòn để xem ngay bản hiện hành và bản mới.</p>
+    </header>
+    <main id="local-file-help" hidden>
+      <p>Trang duyệt cần chạy qua máy chủ preview trên máy bạn.</p>
+      <a id="preview-link" href="http://127.0.0.1:5558/art-review/"
+        >Mở preview VFX</a
+      >
+    </main>
+    <div class="layout">
+      <aside aria-label="Danh sách kỹ năng">
+        <label for="search">Tìm kỹ năng</label
+        ><input
+          id="search"
+          type="search"
+          placeholder="Tên skill, phái hoặc boss…"
+        />
+        <label for="group">Hệ phái / boss</label
+        ><select id="group">
+          <option value="">Tất cả</option>
+        </select>
+        <div class="filters">
+          <button data-kind="" aria-pressed="true">Tất cả</button
+          ><button data-kind="hero" aria-pressed="false">Hero</button
+          ><button data-kind="boss" aria-pressed="false">Boss</button>
+        </div>
+        <p id="count" class="muted"></p>
+        <nav id="cases" aria-label="Chọn skill"></nav>
+      </aside>
+      <main>
+        <div class="selection">
+          <span id="school" class="eyebrow">ĐANG TẢI</span>
+          <h2 id="name">Chuẩn bị preview…</h2>
+          <p id="description"></p>
+        </div>
+        <div class="controls">
+          <button id="replay" class="primary" disabled>↻ Phát lại</button
+          ><button id="pause" disabled>Dừng hình</button>
+          <label class="loop"><input type="checkbox" id="loop" /> Tự lặp</label>
+          <label id="proc-control" hidden>
+            <input type="checkbox" id="proc" /> Phát Động
+          </label>
+          <span class="spacer"></span
+          ><label for="zoom" class="zoom-label">Kích thước</label
+          ><select id="zoom">
+            <option value="0.5">0,5× · xem rộng</option>
+            <option value="1" selected>1×</option>
+            <option value="2">2×</option>
+          </select>
+          <button id="fullscreen">Toàn màn hình</button>
+        </div>
+        <section id="stage" aria-label="So sánh artwork">
+          <div class="compare-labels">
+            <span>ATLAS GỐC <small>milestone/m3d</small></span
+            ><span>BẢN TÍCH HỢP <small>milestone/m3d · đã duyệt</small></span>
+          </div>
+          <iframe
+            id="engine"
+            title="Preview VFX hiện hành và artwork mới"
+          ></iframe>
+          <div class="divider"></div>
+          <div id="loading">Đang tải sprite và hiệu ứng…</div>
+        </section>
+        <div class="status-row">
+          <p id="status" role="status" aria-live="polite">Đang khởi động…</p>
+          <span class="muted"
+            >Hai bên dùng chung mốc chân, tay và nhịp đánh của preview.</span
+          >
+        </div>
+        <p class="footnote">
+          Bấm skill để tự phát. Dừng hình để so chi tiết; Phát lại để xem lại từ
+          đầu. Một số đòn có nhiều giai đoạn, hãy để chạy hết. Mô tả bên trên
+          theo dữ liệu game hiện hành.
+        </p>
+      </main>
+    </div>
+    <script>
+      if (location.protocol === 'file:') {
+        const link = document.querySelector('#preview-link');
+        link.hash = location.hash;
+        document.querySelector('.layout').style.display = 'none';
+        document.querySelector('#local-file-help').hidden = false;
+      } else {
+        document.querySelector('#engine').src =
+          '/?debug=1&runtimeArtReview=1&artGallery=1';
+        import('./gallery.js');
+      }
+    </script>
+  </body>
+</html>

@@ -62,6 +62,7 @@ const facing = (x: number, y: number): ReviewDirection =>
 
 /** Presentation only: server casts/status/areas/projectiles/hits own every trigger and lifetime. */
 export class ApprovedSkillVfx {
+  private readonly leafHalos = new Map<string, Phaser.GameObjects.Image>();
   private heroes = new Map<string, string>();
   private assets = new Map<string, RasterComponent>(
     [...skillArt.assets, ...feedbackArt, ...approvedSkillAssets].map((a) => [
@@ -71,17 +72,7 @@ export class ApprovedSkillVfx {
   );
   private runs: Run[] = [];
   private loops = new Map<string, Loop>();
-  private shots = new Map<string, ClipView[]>();
-  private shotMeta = new Map<
-    string,
-    {
-      owner: string;
-      skill: string;
-      born: number;
-      point: Point;
-      direction: ReviewDirection;
-    }
-  >();
+  private shots = new Map<string, { view: ClipView; born: number }>();
   private channels = new Set<string>();
   private trails = new Map<
     string,
@@ -302,12 +293,12 @@ export class ApprovedSkillVfx {
           ],
           300,
         );
-      if (id === 'dai_luc_kim_cuong_chuong' || id === 'nhu_lai_thien_diep')
+      if (id === 'dai_luc_kim_cuong_chuong')
         this.start(
           e,
           [
             this.single('review_palm', 'impact', 500, 'confirmed_palm_impact', {
-              scale: id === 'nhu_lai_thien_diep' ? 1.25 : 1,
+              scale: 1,
               fade: true,
             }),
           ],
@@ -616,7 +607,13 @@ export class ApprovedSkillVfx {
             'ally_defense',
             1e9,
             'ally_defense',
-            { loop: true },
+            {
+              loop: true,
+              ground: true,
+              scale: 0.65,
+              alpha: 0.55,
+              elevation: -16,
+            },
           ),
           p,
           facing(a.fx, a.fy),
@@ -682,6 +679,30 @@ export class ApprovedSkillVfx {
         entry.view.sprite.destroy();
         this.loops.delete(key);
       }
+    const activeHalos = new Set<string>();
+    state.areas.forEach((area) => {
+      if (area.abilityId !== 'nhu_lai_thien_diep' || area.zoneId !== zone)
+        return;
+      const p = this.point(area.ownerId);
+      if (!p) return;
+      activeHalos.add(area.ownerId);
+      let halo = this.leafHalos.get(area.ownerId);
+      if (!halo) {
+        halo = this.scene.add.image(p.x, p.y, 'leaf-halo').setName('leaf-halo');
+        halo.setScale(0.32);
+        this.leafHalos.set(area.ownerId, halo);
+      }
+      halo
+        .setPosition(Math.round(p.x), Math.round(p.y - 29))
+        .setDepth(p.y - 2)
+        .setRotation(now / 2800)
+        .setAlpha(0.8 + Math.sin(now / 190) * 0.13);
+    });
+    for (const [id, halo] of this.leafHalos) {
+      if (activeHalos.has(id)) continue;
+      halo.destroy();
+      this.leafHalos.delete(id);
+    }
     const shotKeys = new Set<string>();
     state.projectiles.forEach((p, id) => {
       if (
@@ -691,99 +712,38 @@ export class ApprovedSkillVfx {
       )
         return;
       shotKeys.add(id);
-      let views = this.shots.get(id);
-      const count = p.abilityId === 'nhu_lai_thien_diep' ? 7 : 1;
-      if (!views) {
-        views = Array.from({ length: count }, (_, i) =>
-          this.make(
+      let shot = this.shots.get(id);
+      const leafBlade = p.abilityId === 'nhu_lai_thien_diep';
+      if (!shot) {
+        shot = {
+          view: this.make(
             this.single(
-              count === 1 ? 'review_sword' : 'review_palm',
+              leafBlade ? 'nhu_lai_thien_diep_vfx' : 'review_sword',
               'travel',
               1e9,
               'authoritative_projectile',
               {
-                at: count === 1 ? 0 : i * 120,
                 loop: true,
-                scale: count === 1 ? 0.7 : 0.65 + i * 0.04,
-                alpha: count === 1 ? 1 : 0.8,
+                scale: leafBlade ? 0.85 : 0.7,
                 facingSpace: true,
                 elevation: 24,
-                from:
-                  count === 1 ? [0, 0] : [-(i % 3) * 18, ((i % 3) - 1) * 26],
               },
             ),
             'right',
           ),
-        );
-        this.shots.set(id, views);
-        this.shotMeta.set(id, {
-          owner: p.ownerId,
-          skill: p.abilityId,
           born: now,
-          point: { x: p.x, y: p.y },
-          direction: facing(p.vx, p.vy),
-        });
+        };
+        this.shots.set(id, shot);
       }
-      const meta = this.shotMeta.get(id)!;
-      meta.point = { x: p.x, y: p.y };
-      for (const v of views) {
-        this.draw(v, now - meta.born, p, 'right');
-        v.sprite.setRotation(Math.atan2(p.vy, p.vx));
-        // Offset the echoes along the received heading without changing the authoritative point.
-        const theta = Math.atan2(p.vy, p.vx),
-          [x, y] = v.cue.from ?? [0, 0];
-        v.sprite.setPosition(
-          Math.round(p.x + Math.cos(theta) * x - Math.sin(theta) * y),
-          Math.round(p.y + Math.sin(theta) * x + Math.cos(theta) * y - 24),
-        );
-      }
+      this.draw(shot.view, now - shot.born, p, 'right');
+      shot.view.sprite
+        .setPosition(Math.round(p.x), Math.round(p.y - 24))
+        .setRotation(Math.atan2(p.vy, p.vx));
     });
-    for (const [id, views] of this.shots)
+    for (const [id, shot] of this.shots)
       if (!shotKeys.has(id)) {
-        const meta = this.shotMeta.get(id),
-          owner = meta && this.actor(meta.owner);
-        if (
-          meta?.skill === 'nhu_lai_thien_diep' &&
-          owner &&
-          owner.hp > 0 &&
-          owner.zoneId === zone
-        ) {
-          const [fx, fy] = vector[meta.direction];
-          this.start(
-            {
-              id: 0,
-              kind: 'pulse',
-              sourceId: meta.owner,
-              targetId: '',
-              abilityId: meta.skill,
-              ...meta.point,
-              fx,
-              fy,
-              damage: 0,
-              critical: false,
-            },
-            [
-              this.single(
-                'review_palm',
-                'travel',
-                400,
-                'thousand_leaf_ending',
-                {
-                  loop: true,
-                  fade: true,
-                  scale: 0.8,
-                  elevation: 24,
-                  facingSpace: true,
-                },
-              ),
-            ],
-            400,
-            { follow: false },
-          );
-        }
-        for (const v of views) v.sprite.destroy();
+        shot.view.sprite.destroy();
         this.shots.delete(id);
-        this.shotMeta.delete(id);
       }
     for (const id of this.channels) {
       const a = this.actor(id);
@@ -969,14 +929,14 @@ export class ApprovedSkillVfx {
     this.observed.add(asset + ':' + frame);
   }
   clear() {
+    for (const halo of this.leafHalos.values()) halo.destroy();
+    this.leafHalos.clear();
     for (const run of this.runs) for (const v of run.views) v.sprite.destroy();
     this.runs = [];
     for (const v of this.loops.values()) v.view.sprite.destroy();
     this.loops.clear();
-    for (const views of this.shots.values())
-      for (const v of views) v.sprite.destroy();
+    for (const shot of this.shots.values()) shot.view.sprite.destroy();
     this.shots.clear();
-    this.shotMeta.clear();
     this.channels.clear();
     this.trails.clear();
   }

@@ -1,4 +1,6 @@
 import Phaser from 'phaser';
+import { spinFacing } from './hero-vfx-review.js';
+import { facing } from './facing.js';
 import { m3dSkillIds } from './m3d-feedback-policy.js';
 import { approvedSkillIds } from './approved-skill-ids.js';
 import type { CombatEvent } from '@volam/game-core';
@@ -180,8 +182,9 @@ export class FeedbackVfx {
     }
   }
   private place(v: Fx, p: Point): void {
+    const atFeet = ['chiet_mai_thu', 'luu_phong_bo'].includes(v.skill);
     const offset: [number, number] =
-      v.skill === 'pha_giap_bong' && !v.impact
+      atFeet || (v.skill === 'pha_giap_bong' && !v.impact)
         ? [0, 0]
         : v.tag.effectPlacementOffset;
     v.sprite
@@ -190,7 +193,11 @@ export class FeedbackVfx {
         Math.round(p.y + offset[1] + v.offset[1]),
       )
       .setDepth(
-        v.sprite.texture.key.endsWith('_ground') ? p.y - 0.3 : p.y + 0.4,
+        atFeet
+          ? p.y - 1
+          : v.sprite.texture.key.endsWith('_ground')
+            ? p.y - 0.3
+            : p.y + 0.4,
       );
   }
   private play(
@@ -215,7 +222,7 @@ export class FeedbackVfx {
       key: rasterAnimationKey(ref.asset, tag.name),
       ...(repeat === undefined ? {} : { repeat }),
     });
-    v.sprite.anims.timeScale = 1;
+    v.sprite.anims.timeScale = tag.name === 'plum_loop' ? 0.55 : 1;
     this.played.add(rasterAnimationKey(ref.asset, tag.name));
     this.record(v);
     return true;
@@ -623,6 +630,7 @@ export class FeedbackVfx {
       this.state?.phase === 'DEFEAT' ||
       pose === 'death' ||
       (['hurt', 'walk'].includes(pose) &&
+        !(pending?.skill === 'bach_phien_phong_bao' && pending.looping) &&
         (!pending || this.scene.time.now - pending.started > 100))
     ) {
       this.poses.delete(id);
@@ -703,7 +711,20 @@ export class FeedbackVfx {
       this.poses.delete(id);
       return;
     }
-    const tag = pending.tag;
+    const turn =
+      pending.looping && skill === 'bach_phien_phong_bao'
+        ? Math.floor((this.scene.time.now - pending.started) / 90)
+        : undefined;
+    const direction =
+      turn === undefined
+        ? undefined
+        : spinFacing(facing(pending.fx, pending.fy), turn);
+    const angle = direction ? headings[direction]! : undefined;
+    const tag =
+      angle === undefined
+        ? pending.tag
+        : (feedbackTag(pending.ref, Math.cos(angle), Math.sin(angle)) ??
+          pending.tag);
     return {
       texture: pending.ref.asset,
       animation:
@@ -713,11 +734,12 @@ export class FeedbackVfx {
       firstFrame: tag.frames[pending.startFrame] ?? tag.frames[0]!,
       scale: feedbackComponents.get(pending.ref.asset)?.displayScale ?? 1,
       durationMs: pending.duration,
-      token: pending.token,
+      token: turn === undefined ? pending.token : pending.token + ':' + turn,
       timeScale:
         tag.frameDurationsMs
           .slice(pending.startFrame)
-          .reduce((n, t) => n + t, 0) / pending.duration,
+          .reduce((n, t) => n + t, 0) /
+        (turn === undefined ? pending.duration : 90),
       startFrame: pending.startFrame,
     };
   }
@@ -957,9 +979,11 @@ export class FeedbackVfx {
             fx = action?.skill === skill ? action.fx : a.fx,
             fy = action?.skill === skill ? action.fy : a.fy;
           const definition =
-            feedbackComponents.get(d.loop.asset)?.role === 'afterimage'
-              ? { ...d, offset: [-fx * 14, -fy * 14 - 3] as [number, number] }
-              : d;
+            skill === 'luu_phong_bo'
+              ? { ...d, offset: [fx * 20, fy * 20] as [number, number] }
+              : feedbackComponents.get(d.loop.asset)?.role === 'afterimage'
+                ? { ...d, offset: [-fx * 14, -fy * 14 - 3] as [number, number] }
+                : d;
           this.ensure(key, id, skill, definition, point, fx, fy);
         });
         if (

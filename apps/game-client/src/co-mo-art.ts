@@ -32,6 +32,11 @@ export function coMoCreepArt(
 }
 export function preloadCoMo(scene: Phaser.Scene) {
   scene.load.pack('co_mo_pack', '/assets/co_mo/pack.json');
+  scene.load.atlas(
+    'co_mo_original_fx',
+    '/assets/co_mo/co_mo_fx.png',
+    '/assets/co_mo/co_mo_fx.json',
+  );
   scene.load.image('co_mo_terrain', '/assets/co_mo/terrain.png');
   scene.load.atlas(
     'co_mo_scenery',
@@ -46,17 +51,23 @@ export function registerCoMoEffects(scene: Phaser.Scene) {
   ).effects) {
     const texture = effect.texture!;
     scene.textures.get(texture).setFilter(Phaser.Textures.FilterMode.NEAREST);
-    if (!scene.anims.exists(effect.id))
+    for (const key of effect.id === 'co_mo:basic_hit'
+      ? [texture, 'co_mo_original_fx']
+      : [texture]) {
+      scene.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
+      const id = key === texture ? effect.id : effect.id + ':original';
+      if (scene.anims.exists(id)) continue;
       scene.anims.create({
-        key: effect.id,
+        key: id,
         frames: effect.frames.map((frame, i) => ({
-          key: texture,
+          key,
           frame,
           duration: effect.durations![i]!,
         })),
         frameRate: 1000,
         repeat: effect.repeat ?? 0,
       });
+    }
   }
 }
 export function createCoMoArt(scene: Phaser.Scene): Phaser.GameObjects.Image[] {
@@ -166,8 +177,8 @@ export class CoMoEffects {
     this.played.add(name);
     return sprite;
   }
-  private contact(name: string, x: number, y: number, rotation = 0) {
-    const sprite = this.make(name, x, y, rotation, false);
+  private contact(name: string, x: number, y: number, rotation = 0, scale = 1) {
+    const sprite = this.make(name, x, y, rotation, false).setScale(scale);
     this.contacts.add(sprite);
     sprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () =>
       sprite.destroy(),
@@ -188,10 +199,18 @@ export class CoMoEffects {
           ngu_doc_chuong: 'ngu_doc_impact',
           phat_tran_cong: 'melee_impact',
           ly_mac_sau_basic: 'basic_hit',
+          co_mo_minion_needle: 'needle_poison_impact',
           creep_strike: 'melee_impact',
         } as Record<string, string>
       )[event.abilityId];
-      if (effect) this.contact(effect, event.x, event.y - 16);
+      if (effect)
+        this.contact(
+          event.abilityId === 'ly_mac_sau_basic'
+            ? effect + ':original'
+            : effect,
+          event.x,
+          event.y - 16,
+        );
     }
     if (event.stage === 'release') {
       if (event.abilityId === 'ly_mac_sau_basic')
@@ -326,6 +345,14 @@ export class CoMoEffects {
       let sprite = this.shots.get(id);
       if (!sprite) {
         sprite = this.make(tag, shot.x, shot.y - 28);
+        if (shot.abilityId === 'co_mo_minion_needle')
+          this.contact(
+            'needle_spread',
+            shot.x,
+            shot.y - 16,
+            Math.atan2(shot.vy, shot.vx),
+            0.45,
+          );
         sprite.setScale(
           tag === 'needle_projectile'
             ? shot.abilityId === 'co_mo_minion_needle'

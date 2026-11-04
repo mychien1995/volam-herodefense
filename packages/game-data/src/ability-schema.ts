@@ -67,6 +67,9 @@ const area = z.strictObject({
   confines: z.boolean().optional(),
   protectOwner: z.boolean().optional(),
   followOwner: z.boolean().optional(),
+  volley: z
+    .strictObject({ speed: positive, projectileRadius: positive })
+    .optional(),
   ownerRegenFraction: z.number().finite().positive().max(1).optional(),
   oncePerTarget: z.boolean().optional(),
 });

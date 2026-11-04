@@ -6,6 +6,7 @@ import { preloadKimArt, registerKimArt } from './kim-luan-art.js';
 import { preloadDongArt, registerDongArt } from './dong-ta-art.js';
 import { preloadHongLietArt, registerHongLietArt } from './hong-liet-art.js';
 import Phaser from 'phaser';
+import { characterFolder } from './character-revision.js';
 import { preloadCoMo, registerCoMoEffects } from './co-mo-art.js';
 import { preloadHellArt, registerHellArt } from './hell-art.js';
 import {
@@ -130,8 +131,8 @@ export function preloadArt(scene: Phaser.Scene): void {
   for (const asset of actorSheets)
     scene.load.atlas(
       asset.id,
-      `/assets/${asset.folder}/${asset.id}.png`,
-      `/assets/${asset.folder}/${asset.id}.json`,
+      `/assets/${asset.folder === 'characters' ? characterFolder(asset.id) : asset.folder}/${asset.id}.png`,
+      `/assets/${asset.folder === 'characters' ? characterFolder(asset.id) : asset.folder}/${asset.id}.json`,
     );
   for (const id of [
     'blossom',

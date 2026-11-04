@@ -135,6 +135,7 @@ export class BacCaiRenderer {
     if (!t) {
       t = this.scene.add
         .text(x, y, value, {
+          resolution: 2,
           fontFamily: 'Segoe UI, sans-serif',
           fontSize: '12px',
           color,

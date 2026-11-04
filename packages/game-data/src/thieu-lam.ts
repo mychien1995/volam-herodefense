@@ -263,18 +263,13 @@ export const thieuLamSkills: Ability[] = [
     manaCost: 42,
     cooldownTicks: 540,
     effect: {
-      mode: 'projectile',
+      mode: 'area',
       damage: 100,
-      speed: 300,
-      range: 360,
-      radius: 48,
-      count: 1,
-      spacingTicks: 0,
-      splashRadius: 0,
-      burnDamage: 0,
-      burnTicks: 0,
-      piercing: true,
-      useFacing: true,
+      durationTicks: 450,
+      tickInterval: 30,
+      radius: 360,
+      followOwner: true,
+      volley: { speed: 300, projectileRadius: 12 },
     },
     allies: { radius: 170, statuses: [armor(30, 180)] },
   },
@@ -292,7 +287,7 @@ const descriptions = [
   'Hào quang đi theo người thi triển, tăng phòng thủ cho đồng đội sống trong tầm; không cộng dồn.',
   'Sư tử hống quanh người gây sát thương, giảm giáp và làm chậm diện rộng.',
   'Một nhịp hồi sinh lực cho bản thân và đồng đội sống trong tầm. Không hồi tượng, không hồi sinh.',
-  'Tuyệt kỹ: sóng kim sắc rộng bay thẳng, tăng phòng thủ cho đồng đội gần lúc thi triển.',
+  'Tuyệt kỹ: hiện Phật quang sau lưng trong 15 giây, liên tục phóng đao khí về phía mọi kẻ địch trong tầm. Tăng phòng thủ cho đồng đội gần lúc thi triển.',
 ];
 export function addThieuLamProgression(d: ProgressionDefinition): void {
   d.schools['thieu_lam'] = {
@@ -350,6 +345,10 @@ export function addThieuLamProgression(d: ProgressionDefinition): void {
         if (e.heal) e.heal += r * 12;
         else e.durationTicks += r * 30;
         for (const s of e.statuses ?? []) s.magnitude += r * 5;
+      }
+      if (e.mode === 'area' && e.volley) {
+        e.damage += r * 20;
+        e.radius += r * 10;
       }
       if (a.allies) {
         a.allies.radius += r * 10;

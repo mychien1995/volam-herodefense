@@ -174,6 +174,7 @@ export interface AreaEffect {
   confines?: boolean | undefined;
   protectOwner?: boolean | undefined;
   followOwner?: boolean | undefined;
+  volley?: { speed: number; projectileRadius: number } | undefined;
   ownerRegenFraction?: number | undefined;
 }
 export interface DashEffect {

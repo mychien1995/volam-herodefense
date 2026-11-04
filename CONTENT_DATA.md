@@ -103,7 +103,7 @@ Canonical IDs/names remain unchanged. Thiếu Lâm Quyền A now cycles left fis
 | `kim_quang_ho_tran` | **Kim Quang Hộ Trận** | Đao | Area defense aura for allies; team protection. |
 | `tam_gioi_quy_thien` | **Sư Tử Hống** | Đao | Wide lion-roar AoE damage, defense reduction and slow. |
 | `bat_dong_minh_vuong` | **Bất Động Minh Vương** | Đao | Area healing pulse (retained from previous proposal); **OPEN** whether changed to mitigation/protection due to name. |
-| `nhu_lai_thien_diep` | **Như Lai Thiên Diệp** | Đao U | Golden wide wave damaging foes and boosting allied defense; support+offense. |
+| `nhu_lai_thien_diep` | **Như Lai Thiên Diệp** | Đao U | Phật quang follows the caster for 15 seconds. Once per second, a straight blade launches toward each nearby enemy with line of sight. Nearby allies receive defense on cast. |
 
 ## Data model direction
 

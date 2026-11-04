@@ -208,6 +208,7 @@ export class KimLuanRenderer {
     if (!l) {
       l = this.scene.add
         .text(x, y, text, {
+          resolution: 2,
           fontFamily: 'Segoe UI',
           fontSize: '11px',
           color: '#fff2cf',

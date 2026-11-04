@@ -1,4 +1,5 @@
 import { heroTexture } from './art.js';
+import { heroIdleUrl } from './character-revision.js';
 import { forestArtNotice } from './forest-creeps.js';
 import {
   arena,
@@ -736,12 +737,14 @@ export class GameUI {
     element('#viewport').dataset['heroSchool'] = hero.schoolId;
     element('#viewport').style.setProperty(
       '--hero-idle',
-      'url("/assets/characters/' +
-        // Both monk weapon presentations share one square portrait source.
-        (hero.schoolId === 'thieu_lam'
-          ? 'hero_thieu_lam'
-          : heroTexture(hero.basicId, hero.schoolId)) +
-        '_idle.png")',
+      'url("' +
+        heroIdleUrl(
+          // Both monk weapon presentations share one square portrait source.
+          hero.schoolId === 'thieu_lam'
+            ? 'hero_thieu_lam'
+            : heroTexture(hero.basicId, hero.schoolId),
+        ) +
+        '")',
     );
     element('.portrait').title =
       hero.schoolId === 'thieu_lam'

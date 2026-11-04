@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'node:url';
-import { preview } from 'vite';
+import { preview, type Plugin } from 'vite';
 import { ColyseusTestServer } from '@colyseus/testing';
 import {
   BacCaiEncounter,
@@ -25,6 +25,9 @@ import {
   ownedQaServices,
 } from '../../tools/qa-session.mjs';
 export default async function setup() {
+  return startWaveFeedback();
+}
+export async function startWaveFeedback(extraPlugins: Plugin[] = []) {
   const session = qaSession({
     serverPort: 2904,
     clientPort: 5504,
@@ -59,6 +62,7 @@ export default async function setup() {
         strictPort: true,
       },
       plugins: [
+        ...extraPlugins,
         qaIdentityPlugin(session),
         {
           name: 'wave-feedback-authority-fixtures',
@@ -153,7 +157,11 @@ export default async function setup() {
                 } else if (op === 'cast') {
                   const ability = q.get('ability') ?? '',
                     target = [...w.heroes.values()][0]!;
-                  if (boss === 'dong_ta' || boss === 'mai_sieu_phong') {
+                  if (
+                    boss === 'dong_ta' ||
+                    boss === 'mai_sieu_phong' ||
+                    boss === 'hoang_dung'
+                  ) {
                     const e = m.dongTa!;
                     e.casts = [];
                     e.effects = [];
@@ -177,10 +185,14 @@ export default async function setup() {
                     e.clear(w);
                     e.nextActionAt = Infinity;
                     const b = w.creeps.get(e.bossId)!;
-                    e.phase =
-                      ability === 'cap_mo_chan_kich' ? 'phase2' : 'phase1';
-                    b.hp =
-                      ability === 'cap_mo_chan_kich' ? b.maxHp * 0.49 : b.maxHp;
+                    const phase2 = [
+                      'doc_chuong',
+                      'cap_mo_chan_kich',
+                      'ngu_doc_than_chuong',
+                      'van_doc_bao_phat',
+                    ].includes(ability);
+                    e.phase = phase2 ? 'phase2' : 'phase1';
+                    b.hp = phase2 ? b.maxHp * 0.49 : b.maxHp;
                     b.fx = 1;
                     b.fy = 0;
                     if (

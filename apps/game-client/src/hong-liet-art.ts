@@ -307,6 +307,7 @@ export class HongLietRenderer {
               ? 'Cung thủ'
               : 'Thiết binh',
           {
+            resolution: 2,
             fontSize: boss ? '12px' : '10px',
             color: '#ffe1a0',
             stroke: '#20110c',

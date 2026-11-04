@@ -202,6 +202,7 @@ export class ChuPresentation {
     if (!label || !label.scene) {
       label = this.scene.add
         .text(x, y, value, {
+          resolution: 2,
           fontFamily: 'Segoe UI',
           fontSize: '11px',
           color: '#fff0cc',

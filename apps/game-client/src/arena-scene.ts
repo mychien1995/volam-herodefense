@@ -1,6 +1,13 @@
 import { BossSkillAnnouncements } from './boss-skill-announcements.js';
+import {
+  preloadRuntimeArtReview,
+  createRuntimeArtReview,
+  productionArtBindings,
+  runtimeArtReviewPaused,
+} from './runtime-art-review.js';
 import { WaveArenaPresentation } from './wave-boss-feedback-art.js';
 import { TayDocRenderer, isTayDocActor } from './tay-doc-art.js';
+import { revisedBasicBody, isRevisedHero } from './character-revision.js';
 import { NamDePresentation } from './nam-de-presentation.js';
 import { KimLuanRenderer, isKimActor } from './kim-luan-art.js';
 import { DongTaRenderer, isDongArtActor } from './dong-ta-art.js';
@@ -8,6 +15,7 @@ import { BacCaiRenderer } from './bac-cai-art.js';
 import { ChuPresentation } from './chu-presentation.js';
 import { HongLietRenderer, isHongLietActor } from './hong-liet-art.js';
 import Phaser from 'phaser';
+import { applyArenaPalette, applyNameLabel } from './visual-presentation.js';
 import { m3dBambooPose } from './m3d-feedback.js';
 import {
   CoMoEffects,
@@ -51,6 +59,8 @@ import {
   registerArt,
 } from './art.js';
 interface EntityView {
+  smoothX: number;
+  smoothY: number;
   sprite: Phaser.GameObjects.Sprite;
   label: Phaser.GameObjects.Text;
   shadow: Phaser.GameObjects.Ellipse;
@@ -60,6 +70,7 @@ interface EntityView {
   lastHp: number;
 }
 export class ArenaScene extends Phaser.Scene {
+  private polished = true;
   onNpc: (menu: 'merchant' | 'pvp') => void = () => {};
   private zoneId = 'arena';
   private snapshot: LobbyState | undefined;
@@ -107,6 +118,7 @@ export class ArenaScene extends Phaser.Scene {
     this.cameras.main.scrollY += y * 24;
   }
   preload(): void {
+    preloadRuntimeArtReview(this);
     preloadArt(this);
   }
   create(): void {
@@ -115,7 +127,9 @@ export class ArenaScene extends Phaser.Scene {
     this.namDe = new NamDePresentation(this);
     this.waveArena = new WaveArenaPresentation(this);
     this.bossShouts = new BossSkillAnnouncements(this);
-    this.events.once(Phaser.Scenes.Events.SHUTDOWN,()=>this.bossShouts?.clear());
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
+      this.bossShouts?.clear(),
+    );
     this.hongLiet = new HongLietRenderer(this);
     this.tayDoc = new TayDocRenderer(this);
     this.kim = new KimLuanRenderer(this);
@@ -167,9 +181,11 @@ export class ArenaScene extends Phaser.Scene {
     this.cameras.main.roundPixels = true;
     this.cameras.main.centerOn(arena.spawn.x, arena.spawn.y);
     this.ready = true;
+    createRuntimeArtReview(this);
     document.querySelector('#scene-status')?.setAttribute('data-ready', 'true');
   }
   setSnapshot(snapshot: LobbyState | undefined, sessionId = ''): void {
+    if (runtimeArtReviewPaused(this)) return;
     if (this.sessionId !== sessionId) {
       this.coMoEffects?.clear();
       this.lastEvent = 0;
@@ -215,6 +231,7 @@ export class ArenaScene extends Phaser.Scene {
     this.zoneId = zoneId;
     if (zoneId === 'arena') {
       this.trees = createArenaArt(this);
+      applyArenaPalette(this, this.polished);
       this.cameras.main
         .setBounds(0, 0, arena.width, arena.height)
         .centerOn(arena.spawn.x, arena.spawn.y);
@@ -253,7 +270,10 @@ export class ArenaScene extends Phaser.Scene {
         padding: { x: 2, y: 1 },
       })
       .setOrigin(0.5, 0);
+    applyNameLabel(label, this.polished);
     const view: EntityView = {
+      smoothX: x,
+      smoothY: y,
       sprite,
       label,
       shadow,
@@ -265,7 +285,6 @@ export class ArenaScene extends Phaser.Scene {
     const observeFrame = () => {
       const creep =
         !!view.creepArt || sprite.texture.key === creepPlaceholderTexture;
-      if (!creep && !sprite.texture.key.startsWith('hero_thieu_lam')) return;
       const key = sprite.anims.currentAnim?.key;
       if (!key) return;
       const observed = creep
@@ -364,13 +383,16 @@ export class ArenaScene extends Phaser.Scene {
           ))
         : undefined;
       const cast = !enemy
-        ? this.vfx?.actorCast(
-            id,
-            actor.castAbilityId ?? '',
-            actor.pose,
-            actor.fx,
-            actor.fy,
-            actor.hp,
+        ? revisedBasicBody(
+            this,
+            this.vfx?.actorCast(
+              id,
+              actor.castAbilityId ?? '',
+              actor.pose,
+              actor.fx,
+              actor.fy,
+              actor.hp,
+            ),
           )
         : m3dBambooPose(
             actor.archetypeId,
@@ -401,11 +423,12 @@ export class ArenaScene extends Phaser.Scene {
       // A confirmed blink snaps the rendered feet to replicated position before
       // fading in. It must not look like ordinary interpolated movement.
       const weight = blinkAlpha < 1 ? 1 : Math.min(1, delta / 45);
+      // Preserve interpolation precision; feeding rounded pixels back into lerp
+      // otherwise leaves a stationary actor permanently one pixel off its feet.
+      view.smoothX = Phaser.Math.Linear(view.smoothX, actor.x, weight);
+      view.smoothY = Phaser.Math.Linear(view.smoothY, actor.y, weight);
       view.sprite
-        .setPosition(
-          Math.round(Phaser.Math.Linear(view.sprite.x, actor.x, weight)),
-          Math.round(Phaser.Math.Linear(view.sprite.y, actor.y, weight)),
-        )
+        .setPosition(Math.round(view.smoothX), Math.round(view.smoothY))
         .setDepth(view.sprite.y);
       if (view.sprite.texture.key !== texture)
         view.sprite
@@ -545,7 +568,7 @@ export class ArenaScene extends Phaser.Scene {
     this.dong?.sync(state, this.zoneId);
     this.bacCai?.sync(state, this.zoneId);
     this.waveArena?.sync(state, this.zoneId);
-    this.bossShouts?.sync(state,this.zoneId);
+    this.bossShouts?.sync(state, this.zoneId);
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
     this.coMoEffects?.sync(state, this.zoneId);
     this.creepEffects?.sync(
@@ -602,6 +625,7 @@ export class ArenaScene extends Phaser.Scene {
       );
   }
   combat(event: CombatEvent & { zoneId?: string }): void {
+    if (runtimeArtReviewPaused(this)) return;
     if (!this.ready || event.id <= this.lastEvent) return;
     this.lastEvent = event.id;
     if (event.zoneId && event.zoneId !== this.zoneId) return;
@@ -696,6 +720,11 @@ export class ArenaScene extends Phaser.Scene {
       }
     }
   }
+  reviewClearTransientEffects(): void {
+    this.vfx?.clear();
+    this.coMoEffects?.clear();
+    this.damage?.clear();
+  }
   reviewChu(
     bundle: string,
     tag: string,
@@ -708,6 +737,15 @@ export class ArenaScene extends Phaser.Scene {
   reviewKim(bundle: string, clip: string) {
     return this.kim?.review(bundle, clip);
   }
+  reviewVisualStyle(polished: boolean): void {
+    this.polished = polished;
+    applyArenaPalette(this, polished);
+    for (const actor of this.actors.values())
+      applyNameLabel(actor.label, polished);
+    document
+      .querySelector<HTMLElement>('#viewport')
+      ?.setAttribute('data-visual-review', polished ? 'polished' : 'original');
+  }
   inspect() {
     const origin = this.cameras.main.getWorldPoint(0, 0);
     const unit = this.cameras.main.getWorldPoint(1, 0);
@@ -717,6 +755,13 @@ export class ArenaScene extends Phaser.Scene {
       waveArena: this.waveArena?.inspect(),
       chu: this.chu?.inspect(),
       ready: this.ready,
+      polished: this.polished,
+      artwork: productionArtBindings(this),
+      animationTimings: {
+        tayDocIdle: this.anims
+          .get('tay:p1:idle_down')
+          ?.frames.map((f) => f.duration),
+      },
       sceneTime: this.time.now,
       r3Scenery: this.children.list
         .filter((o) => o.name.endsWith(':r3'))
@@ -810,8 +855,9 @@ export class ArenaScene extends Phaser.Scene {
         frame: view.sprite.frame.name,
         texture: view.sprite.texture.key,
         filterMode: view.sprite.texture.source[0]?.scaleMode,
-        artStatus:
-          view.sprite.texture.key === creepPlaceholderTexture
+        artStatus: isRevisedHero(view.sprite.texture.key)
+          ? 'approved'
+          : view.sprite.texture.key === creepPlaceholderTexture
             ? 'placeholder'
             : view.creepArt?.status,
         origin: [view.sprite.originX, view.sprite.originY],
@@ -820,7 +866,12 @@ export class ArenaScene extends Phaser.Scene {
         playing: view.sprite.anims.isPlaying,
         wave: view.creepArt?.wave,
         hp: view.lastHp,
-        label: { text: view.label.text, visible: view.label.visible },
+        label: {
+          text: view.label.text,
+          visible: view.label.visible,
+          resolution: view.label.style.resolution,
+          fontFamily: view.label.style.fontFamily,
+        },
         healthBarVisible: view.bar.visible,
       })),
       trees: this.trees.map((tree) => ({

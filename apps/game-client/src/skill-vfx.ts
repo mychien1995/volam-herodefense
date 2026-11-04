@@ -25,6 +25,10 @@ import {
 
 const components = new Map(skillArt.assets.map((a) => [a.id, a]));
 export function preloadSkillArt(scene: Phaser.Scene): void {
+  scene.load.svg(
+    'leaf-halo',
+    '/assets/visual-improvement-approved/leaf-halo.svg',
+  );
   preloadR3Arena(scene);
   preloadRasterAnimations(scene, skillArt.assets);
   preloadRasterAnimations(scene, feedbackArt);
@@ -126,6 +130,18 @@ export class SkillVfx {
     return view;
   }
   private place(view: EffectView, x: number, y: number): void {
+    if (
+      view.sprite.texture.key === 'kim_cang_bat_hoai_vfx' ||
+      (view.sprite.texture.key === 'la_han_quyen_vfx' &&
+        /^(guard|ending)/.test(view.tag.name))
+    ) {
+      view.sprite
+        .setOrigin(0.5)
+        .setPosition(Math.round(x), Math.round(y))
+        .setScale(1, 0.35)
+        .setDepth(y - 1);
+      return;
+    }
     view.sprite
       .setPosition(
         Math.round(x + view.tag.effectPlacementOffset[0]),

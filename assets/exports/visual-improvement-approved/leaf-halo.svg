@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 128 128">
+  <defs>
+    <path id="flame" d="M64 5c-1 11-12 14-10 24 1 5 6 6 10 11 4-5 9-6 10-11 2-10-9-13-10-24z"/>
+    <path id="ray" d="M64 8l2 9-2 7-2-7z"/>
+    <radialGradient id="light"><stop stop-color="#ffdb71" stop-opacity=".3"/><stop offset="1" stop-color="#ffbb41" stop-opacity="0"/></radialGradient>
+  </defs>
+  <circle cx="64" cy="64" r="54" fill="url(#light)"/>
+  <g fill="#dd902c" stroke="#ffc355" stroke-width="1" opacity=".81">
+    <use href="#flame"/><use href="#flame" transform="rotate(45 64 64)"/><use href="#flame" transform="rotate(90 64 64)"/><use href="#flame" transform="rotate(135 64 64)"/>
+    <use href="#flame" transform="rotate(180 64 64)"/><use href="#flame" transform="rotate(225 64 64)"/><use href="#flame" transform="rotate(270 64 64)"/><use href="#flame" transform="rotate(315 64 64)"/>
+  </g>
+  <g fill="#fff0ae">
+    <use href="#ray"/><use href="#ray" transform="rotate(45 64 64)"/><use href="#ray" transform="rotate(90 64 64)"/><use href="#ray" transform="rotate(135 64 64)"/>
+    <use href="#ray" transform="rotate(180 64 64)"/><use href="#ray" transform="rotate(225 64 64)"/><use href="#ray" transform="rotate(270 64 64)"/><use href="#ray" transform="rotate(315 64 64)"/>
+  </g>
+  <circle cx="64" cy="64" r="37" fill="none" stroke="#90531c" stroke-width="5"/>
+  <circle cx="64" cy="64" r="37" fill="none" stroke="#ffc14e" stroke-width="2.6"/>
+  <circle cx="64" cy="64" r="33.5" fill="none" stroke="#fff2b6" stroke-width=".9"/>
+  <circle cx="64" cy="64" r="30" fill="none" stroke="#ffc669" stroke-width="1" stroke-dasharray="1 5"/>
+</svg>

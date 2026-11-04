@@ -53,10 +53,22 @@ export async function startTogether(
       })
       .toBeGreaterThanOrEqual(pages.length);
   }
-  if (!alreadyStarted)
-    await pages[0]!
-      .getByRole('button', { name: 'Bắt đầu', exact: true })
-      .click();
+  if (!alreadyStarted) {
+    // Roster patches can replace the host button during pointer-down/click.
+    // Retry only while the server still acknowledges WAITING_LOBBY.
+    const phase = () =>
+      pages[0]!.evaluate(
+        () =>
+          (window as any).__VOLAM__.snapshot()?.state?.phase ?? 'WAITING_LOBBY',
+      );
+    await expect(async () => {
+      if ((await phase()) !== 'WAITING_LOBBY') return;
+      await pages[0]!
+        .getByRole('button', { name: 'Bắt đầu', exact: true })
+        .click({ timeout: 1000 });
+      await expect.poll(phase, { timeout: 1000 }).not.toBe('WAITING_LOBBY');
+    }).toPass({ timeout, intervals: [100, 250] });
+  }
   for (let i = 0; i < pages.length; i++) {
     const page = pages[i]!;
     await page.bringToFront();

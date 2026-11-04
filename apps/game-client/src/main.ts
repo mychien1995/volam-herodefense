@@ -36,6 +36,10 @@ import './item-menu.css';
 import { PreGame } from './pregame.js';
 
 const artPreview = new URLSearchParams(location.search).has('artPreview');
+const runtimeArtGallery =
+  new URLSearchParams(location.search).has('debug') &&
+  new URLSearchParams(location.search).get('runtimeArtReview') === '1' &&
+  new URLSearchParams(location.search).get('artGallery') === '1';
 const animationReview =
   artPreview &&
   new URLSearchParams(location.search).get('animationReview') === '1';
@@ -102,14 +106,16 @@ let reviewScaleOverride: number | undefined;
 const fit = (): void => {
   if (!game.isBooted) return;
   const host = element('#game');
-  const zoom = animationReview
-    ? (reviewScaleOverride ??
-      (host.clientWidth >= 960 && host.clientHeight >= 600 ? 2 : 1))
-    : artPreview
-      ? 2
-      : host.clientWidth >= 960 && host.clientHeight >= 600
+  const zoom = runtimeArtGallery
+    ? 1
+    : animationReview
+      ? (reviewScaleOverride ??
+        (host.clientWidth >= 960 && host.clientHeight >= 600 ? 2 : 1))
+      : artPreview
         ? 2
-        : 1;
+        : host.clientWidth >= 960 && host.clientHeight >= 600
+          ? 2
+          : 1;
   game.scale.resize(
     thienSonSkillReview || animationReview
       ? Math.ceil(host.clientWidth / zoom)
@@ -443,11 +449,17 @@ ui.onDungeonEnter = (access, destination) =>
 ui.bossParty.onSummon = () => dungeonAction({ action: 'summon-help' });
 ui.bossParty.onReply = (invitationId, accept) =>
   dungeonAction({ action: 'reply-invitation', invitationId, accept });
-// Read-only browser evidence bridge, enabled explicitly for automated playtesting.
+// Explicit evidence and presentation review only; no authoritative mutation bridge.
 if (new URLSearchParams(location.search).has('debug') || artPreview) {
   Object.defineProperty(window, '__VOLAM__', {
     configurable: true,
     value: Object.freeze({
+      ...(new URLSearchParams(location.search).get('visualReview') === '1'
+        ? {
+            reviewVisualStyle: (polished: boolean) =>
+              arenaScene.reviewVisualStyle(polished),
+          }
+        : {}),
       ...(import.meta.env.VITE_KIM_FRAME_TEST
         ? {
             reviewKim: (bundle: string, clip: string) =>
@@ -467,6 +479,47 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
         state: room?.state?.toJSON(),
         events: events.map((event) => ({ ...event })),
       }),
+      ...(runtimeArtGallery
+        ? {
+            // Explicit standalone QA surface: use the existing validated client
+            // commands and lobby actions; never submit damage or positions.
+            galleryStart: async () => {
+              if (room) return;
+              element<HTMLInputElement>('#nickname').value = 'ArtworkReview';
+              await connect(false);
+              const wait = async (ready: () => boolean) => {
+                const deadline = performance.now() + 20000;
+                while (!ready()) {
+                  if (performance.now() > deadline)
+                    throw Error('Không khởi động được preview');
+                  await new Promise((resolve) => setTimeout(resolve, 50));
+                }
+              };
+              await wait(() => room?.state.phase === 'WAITING_LOBBY');
+              pregame.onAction({ action: 'start' });
+              await wait(
+                () =>
+                  room?.state.phase === 'SCHOOL_SELECTION' ||
+                  room?.state.phase === 'IN_GAME',
+              );
+              pregame.onAction({ action: 'select', schoolId: 'cai_bang' });
+              await wait(
+                () =>
+                  room?.state.players.get(room.sessionId)?.schoolId ===
+                  'cai_bang',
+              );
+              pregame.onAction({ action: 'confirm' });
+              await wait(
+                () =>
+                  room?.state.phase === 'IN_GAME' &&
+                  !!room.state.players.get(room.sessionId)?.confirmed,
+              );
+            },
+            galleryCast: (active: boolean, slot = 0) =>
+              send(active ? { kind: 'cast', slot } : { kind: 'basic' }),
+            galleryClearEffects: () => arenaScene.reviewClearTransientEffects(),
+          }
+        : {}),
       presentation: () =>
         animationReview
           ? animationReviewGallery.inspect()

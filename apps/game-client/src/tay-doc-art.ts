@@ -35,14 +35,14 @@ export function registerTayDocArt(scene: Phaser.Scene): void {
   for (const [id, bundle] of Object.entries(bundles)) {
     scene.textures.get(key(id)).setFilter(Phaser.Textures.FilterMode.NEAREST);
     for (const [tag, clip] of Object.entries(bundle.animations)) {
-      // Phaser adds each frame's duration to its base frame duration (1ms here).
+      // Phaser4.2.1 uses an authored frame duration as an absolute delay.
       if (!scene.anims.exists(key(id) + ':' + tag))
         scene.anims.create({
           key: key(id) + ':' + tag,
           frames: clip.frames.map((frame, i) => ({
             key: key(id),
             frame,
-            duration: clip.durationsMs[i]! - 1,
+            duration: clip.durationsMs[i]!,
           })),
           frameRate: 1000,
           repeat: clip.repeat,
@@ -164,6 +164,7 @@ export class TayDocRenderer {
   ): void {
     v.label ??= this.scene.add
       .text(0, 0, '', {
+        resolution: 2,
         fontSize: '11px',
         color: '#fff1bc',
         stroke: '#151b14',

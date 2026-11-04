@@ -1,5 +1,6 @@
 import { prepareWaveBossFeedback } from './prepare-wave-boss-feedback.mjs';
 import { prepareTayDocAssets } from './prepare-tay-doc-assets.mjs';
+import { validateCharacterRevision } from './prepare-character-revision.mjs';
 import './prepare-nam-de.mjs';
 import { prepareKimAssets } from './prepare-kim-assets.mjs';
 import { prepareDongTa } from './prepare-dong-ta.mjs';
@@ -28,6 +29,26 @@ import {
 } from './asset-files.mjs';
 import { prepareHongLietAssets } from './prepare-hong-liet-assets.mjs';
 const root = new URL('../', import.meta.url);
+validateCharacterRevision();
+const approvedArt = JSON.parse(
+  readFileSync(
+    new URL('apps/game-client/src/approved-art.generated.json', root),
+  ),
+);
+const approvedUrls = new Set();
+for (const entry of approvedArt.assets) {
+  if (approvedUrls.has(entry.url))
+    throw Error('Duplicate approved artwork URL: ' + entry.url);
+  approvedUrls.add(entry.url);
+  if (!entry.candidateUrl.startsWith('/assets/visual-improvement-approved/'))
+    throw Error('Invalid approved artwork URL: ' + entry.candidateUrl);
+  const path = entry.candidateUrl.replace(/^\/assets\//, 'assets/exports/');
+  const actual = createHash('sha256')
+    .update(readFileSync(new URL(path, root)))
+    .digest('hex');
+  if (actual !== entry.sha256)
+    throw Error('Approved artwork hash mismatch: ' + path);
+}
 for (const [name, label] of [
   ['approved_chu_ba_thong.lock.json', 'Chu Bá Thông'],
   ['approved_bac_cai.lock.json', 'Bắc Cái visual v03'],

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { spinFacing } from './hero-vfx-review.js';
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
 import { m1Config } from '@volam/game-data';
@@ -183,12 +184,16 @@ export class M3dR3Feedback {
       if (e.abilityId === 'vi_da_quyen') {
         const effect = m1Config.skillCatalogue![e.abilityId]!.effect;
         const offset = effect.mode === 'arc' ? (effect.originOffset ?? 0) : 0;
+        const impact = {
+          x: e.x + (e.fx ?? 1) * offset,
+          y: e.y + (e.fy ?? 0) * offset,
+        };
         this.flash(
           e.sourceId,
           'shaolin_skill_fx',
           'vi_da_quyen_impact',
           d,
-          { x: e.x + (e.fx ?? 1) * offset, y: e.y + (e.fy ?? 0) * offset },
+          impact,
           { depth: e.y - 20 },
         );
       }
@@ -219,12 +224,21 @@ export class M3dR3Feedback {
           { x: e.x + (e.fx ?? 1) * 28, y: e.y + (e.fy ?? 0) * 28 },
           { placement: true, depth: e.y - 10 },
         );
-      if (e.abilityId === 'thien_ha_vo_cau' && e.stage === 'finisher')
-        this.flash(e.sourceId, 'vo_cau_ground', 'final_smash', undefined, e, {
-          scale: 1.45,
-          pivot: [128, 174],
-          depth: e.y - 10,
-        });
+      if (e.abilityId === 'thien_ha_vo_cau' && e.stage === 'finisher') {
+        const feet = this.point(e.sourceId) ?? e;
+        this.flash(
+          e.sourceId,
+          'vo_cau_ground',
+          'final_smash',
+          undefined,
+          feet,
+          {
+            scale: 1.45,
+            pivot: [128, 194],
+            depth: feet.y - 10,
+          },
+        );
+      }
       if (e.abilityId === 'nhu_lai_niet_ban' && e.stage === 'strike')
         this.flash(
           e.sourceId,
@@ -232,7 +246,7 @@ export class M3dR3Feedback {
           'loop_billboard',
           undefined,
           e,
-          { depth: e.y - 10, placement: true },
+          { depth: e.y + 1, pivot: [128, 181] },
         );
       if (e.abilityId === 'tam_gioi_quy_thien' && e.stage === 'strike') {
         this.flash(
@@ -459,7 +473,7 @@ export class M3dR3Feedback {
           'intro_billboard',
           undefined,
           p.x,
-          p.y - 90 * (1 - Math.min(1, elapsed / 500)),
+          p.y - 142 * (1 - Math.min(1, elapsed / 500)),
           elapsed,
           { depth: p.y + 3 },
         );
@@ -765,16 +779,25 @@ export class M3dR3Feedback {
         phaseDuration,
         r3Tag(asset, phase, d).tag.durationMsTotal,
       );
-    return r3Body(
-      this.scene,
-      asset,
+    const roundhouse = phase === 'roundhouse_kick';
+    const quarter = roundhouse
+      ? Math.min(4, Math.floor((phaseElapsed / Math.max(1, phaseDuration)) * 5))
+      : 0;
+    return {
+      ...r3Body(
+        this.scene,
+        asset,
+        phase,
+        spinFacing(d, quarter),
+        phaseElapsed,
+        phaseDuration,
+        cast.token + ':' + phase + (roundhouse ? ':' + quarter : ''),
+        loop,
+      ),
+      abilityId: cast.skill,
       phase,
-      d,
-      phaseElapsed,
-      phaseDuration,
-      cast.token + ':' + phase,
-      loop,
-    );
+      progress: phaseDuration > 0 ? phaseElapsed / phaseDuration : 1,
+    };
   }
   observeCharacter(texture: string, frame: string): void {
     this.painter.observe(texture, frame);

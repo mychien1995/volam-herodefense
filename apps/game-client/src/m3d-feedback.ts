@@ -96,7 +96,7 @@ type Options = Partial<
     | 'motionStart'
     | 'motionMs'
   >
-> & { delay?: number };
+> & { delay?: number; scale?: number };
 type Status = { kind: string; abilityId: string };
 const ss = (a: { statuses: string }) =>
   JSON.parse(a.statuses || '[]') as Status[];
@@ -228,7 +228,7 @@ export class M3dFeedback {
       sprite: this.scene.add
         .sprite(point.x, point.y, asset, tag.frames[0]!)
         .setOrigin(...tag.origin)
-        .setScale(1)
+        .setScale(options.scale ?? 1)
         .setName('m3d-r2:' + e.abilityId),
       asset,
       tag,
@@ -420,20 +420,28 @@ export class M3dFeedback {
           e,
         );
         const offset = tagFor(C.gold, id + '_intro', d).effectPlacementOffset;
-        this.sequence(
-          C.gold,
-          id,
-          e,
-          id === 'vi_da_quyen'
-            ? {
-                offset: [
-                  offset[0] * P.viDaMultiplier,
-                  offset[1] * P.viDaMultiplier,
-                ],
-                ground: true,
-              }
-            : {},
-        );
+        if (id === 'la_han_quyen') {
+          const [handX, handY] = P.fistTips.left_fist[d];
+          this.sequence(C.gold, id, e, {
+            offset: [handX, handY],
+            scale: 0.67,
+            follow: true,
+          });
+        } else
+          this.sequence(
+            C.gold,
+            id,
+            e,
+            id === 'vi_da_quyen'
+              ? {
+                  offset: [
+                    offset[0] * P.viDaMultiplier,
+                    offset[1] * P.viDaMultiplier,
+                  ],
+                  ground: true,
+                }
+              : {},
+          );
       }
       if (id === 'nhu_lai_niet_ban') {
         this.trackAction(e);
@@ -441,21 +449,6 @@ export class M3dFeedback {
       }
       if (id === 'khang_long_huu_hoi') {
         this.body('r2_retained_khang_long', 'cast', e);
-        const intro = tagFor(C.dragon, 'dragon_intro', d).durationMsTotal;
-        this.emit(C.dragon, 'dragon_intro', e);
-        this.emit(C.dragon, 'dragon_loop', e, {
-          delay: intro,
-          duration: P.dragonMs,
-          loop: true,
-          travel: P.dragonTravel,
-        });
-        const c = this.emit(C.dragon, 'dragon_outro', e, {
-          delay: intro + P.dragonMs,
-        });
-        c.offset = [
-          c.offset[0] + vectors[d][0] * P.dragonTravel,
-          c.offset[1] + vectors[d][1] * P.dragonTravel,
-        ];
       }
     }
     if (e.kind === 'pulse') {
@@ -891,6 +884,9 @@ export class M3dFeedback {
     }
     return {
       texture: b.asset,
+      abilityId: b.skill,
+      phase: b.tag.name,
+      progress: b.duration > 0 ? elapsed / b.duration : 1,
       animation: key,
       origin: b.tag.origin,
       firstFrame: b.tag.frames[index]!,

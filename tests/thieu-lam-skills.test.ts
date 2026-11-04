@@ -423,19 +423,29 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     f.steps(60);
     expect(f.hero.hp).toBe(82);
   });
-  it('Như Lai Thiên Diệp travels straight once per target and boosts nearby allies without friendly damage', () => {
+  it('Như Lai Thiên Diệp sends 15 straight volleys to each nearby enemy and buffs allies', () => {
     const f = fixture(),
       ally = addHero(f.world, 'b', 'Ally', f.config);
     Object.assign(ally, { x: 330, y: 300 });
     f.enemies[2]!.x = 200;
+    f.enemies[1]!.x = 750;
     f.cast('nhu_lai_thien_diep');
     const hp = ally.hp;
-    f.hero.fx = -1;
-    f.steps(40);
-    expect(f.hits('nhu_lai_thien_diep')).toHaveLength(1);
-    expect(f.hits('nhu_lai_thien_diep', f.enemies[2]!.id)).toHaveLength(0);
-    expect(ally.hp).toBe(hp);
     expect(characterStats(ally, f.config, f.world.tick).total.defense).toBe(30);
+    const shot = [...f.world.projectiles.values()].find(
+      (p) => p.targetId === f.enemies[2]!.id,
+    )!;
+    expect(shot.vx).toBeLessThan(0);
+    f.hero.x += 10;
+    f.hero.fx = -1;
+    f.steps(450);
+    expect(f.hits('nhu_lai_thien_diep')).toHaveLength(15);
+    expect(f.hits('nhu_lai_thien_diep', f.enemies[2]!.id)).toHaveLength(15);
+    expect(f.hits('nhu_lai_thien_diep', f.enemies[1]!.id)).toHaveLength(0);
+    expect(ally.hp).toBe(hp);
+    expect(f.world.areas).toHaveLength(0);
+    f.steps(60);
+    expect(f.hits('nhu_lai_thien_diep')).toHaveLength(15);
   });
   it('Dịch Cân grows HP/defense/regen automatically and surplus recalculates without respec stacking', () => {
     const f = fixture();

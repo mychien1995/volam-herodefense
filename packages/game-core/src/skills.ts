@@ -722,6 +722,52 @@ export function stepAreas(world: World, config: SimulationConfig): void {
     }
     if (world.tick < area.nextTick) continue;
     area.nextTick += area.effect.tickInterval;
+    const { volley } = area.effect;
+    if (volley) {
+      const { radius, durationTicks, tickInterval } = area.effect;
+      const damage = area.rawDamage / Math.ceil(durationTicks / tickInterval);
+      const effect: ProjectileEffect = {
+        mode: 'projectile',
+        damage,
+        radius: volley.projectileRadius,
+        speed: volley.speed,
+        range: radius,
+        count: 1,
+        spacingTicks: 0,
+        splashRadius: 0,
+        burnDamage: 0,
+        burnTicks: 0,
+      };
+      for (const enemy of world.creeps.values()) {
+        if (
+          enemy.hp <= 0 ||
+          distance(area, enemy) > radius ||
+          config.collision.some(
+            (w) => segmentRect(area, enemy, w) !== undefined,
+          )
+        )
+          continue;
+        const aim = direction(enemy.x - area.x, enemy.y - area.y);
+        const id = `projectile_${world.nextId++}`;
+        world.projectiles.set(id, {
+          id,
+          abilityId: area.abilityId,
+          ownerId: area.ownerId,
+          targetId: enemy.id,
+          x: area.x,
+          y: area.y,
+          vx: aim.x * effect.speed,
+          vy: aim.y * effect.speed,
+          remaining: radius,
+          effect,
+          rawDamage: damage,
+          critChance: area.critChance,
+          critMultiplier: area.critMultiplier,
+          stage: 'volley',
+        });
+      }
+      continue;
+    }
     if (!area.effect.oncePerTarget)
       emit(world, {
         kind: 'pulse',
