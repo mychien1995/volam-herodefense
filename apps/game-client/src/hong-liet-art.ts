@@ -312,6 +312,7 @@ export class HongLietRenderer {
           : 'action',
       a.fx,
       a.fy,
+      a.castAbilityId,
     );
     if (!v.label) {
       v.label = this.scene.add

@@ -266,6 +266,7 @@ export class ChuPresentation {
         /^(idle|walk)_/.test(tag) ? tag.split('_')[0]! : 'action',
         enemy?.fx ?? v.fx,
         enemy?.fy ?? v.fy,
+        v.phase,
       );
       if (v.bossHp < this.previousHp && v.bossHp > 0)
         this.hitFlashUntil = this.scene.time.now + 150;

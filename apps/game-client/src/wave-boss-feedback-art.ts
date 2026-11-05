@@ -99,7 +99,14 @@ export class WaveBossFeedbackArt {
     if (!this.filtered.has(b.texture)) {
       this.scene.textures
         .get(b.texture)
-        .setFilter(Phaser.Textures.FilterMode.NEAREST);
+        .setFilter(
+          (
+            this.scene.registry.get('renovated-skill-sources') as
+              Map<string, string> | undefined
+          )?.has(b.texture)
+            ? Phaser.Textures.FilterMode.LINEAR
+            : Phaser.Textures.FilterMode.NEAREST,
+        );
       this.filtered.add(b.texture);
     }
     s.setTexture(b.texture, frame)

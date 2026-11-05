@@ -310,6 +310,7 @@ export class TayDocRenderer {
         boss.hp <= 0 ? 'death' : c ? 'action' : boss.pose,
         boss.fx,
         boss.fy,
+        c?.ability ?? boss.castAbilityId,
       );
       this.health(
         actor,

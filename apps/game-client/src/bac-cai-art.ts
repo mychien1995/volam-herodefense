@@ -138,6 +138,7 @@ export class BacCaiRenderer {
         /^(idle|walk)_/.test(tag) ? tag.split('_')[0]! : 'action',
         vector[0],
         vector[1],
+        this.latest?.action?.ability ?? tag,
       );
     }
     return v;

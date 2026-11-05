@@ -1,0 +1,5549 @@
+{
+  "skills": [
+    {
+      "id": "hoa_van_chuong",
+      "nameVi": "Hỏa Vân Chưởng",
+      "cooldownTicks": 90,
+      "manaCost": 18,
+      "effect": {
+        "mode": "projectile",
+        "damage": 18,
+        "speed": 360,
+        "range": 320,
+        "radius": 4,
+        "count": 3,
+        "spacingTicks": 0,
+        "splashRadius": 0,
+        "burnDamage": 0,
+        "burnTicks": 0,
+        "spreadAngle": 1.0471975511965976
+      }
+    },
+    {
+      "id": "cuong_long_loan_vu",
+      "nameVi": "Cuồng Long Loạn Vũ",
+      "cooldownTicks": 150,
+      "manaCost": 25,
+      "effect": {
+        "mode": "projectile",
+        "damage": 32,
+        "speed": 300,
+        "range": 320,
+        "radius": 4,
+        "count": 1,
+        "spacingTicks": 0,
+        "splashRadius": 58,
+        "burnDamage": 4,
+        "burnTicks": 90
+      }
+    },
+    {
+      "id": "phi_long_tai_thien",
+      "nameVi": "Phi Long Tại Thiên",
+      "cooldownTicks": 180,
+      "manaCost": 22,
+      "effect": {
+        "mode": "projectile",
+        "damage": 36,
+        "speed": 260,
+        "range": 240,
+        "radius": 28,
+        "count": 1,
+        "spacingTicks": 0,
+        "splashRadius": 0,
+        "burnDamage": 0,
+        "burnTicks": 0,
+        "piercing": true,
+        "useFacing": true,
+        "knockback": 64
+      }
+    },
+    {
+      "id": "khang_long_huu_hoi",
+      "nameVi": "Kháng Long Hữu Hối",
+      "cooldownTicks": 360,
+      "manaCost": 20,
+      "effect": {
+        "mode": "buff",
+        "durationTicks": 270,
+        "critChance": 0.3,
+        "critMultiplier": 0.75
+      }
+    },
+    {
+      "id": "hang_long_hoa_vu",
+      "nameVi": "Hàng Long Hỏa Vũ",
+      "cooldownTicks": 600,
+      "manaCost": 45,
+      "effect": {
+        "mode": "projectile",
+        "damage": 90,
+        "speed": 240,
+        "range": 440,
+        "radius": 48,
+        "count": 1,
+        "spacingTicks": 0,
+        "splashRadius": 0,
+        "burnDamage": 0,
+        "burnTicks": 0,
+        "piercing": true,
+        "useFacing": true
+      }
+    },
+    {
+      "id": "hoanh_tao_bong",
+      "nameVi": "Hoành Tảo Bổng",
+      "cooldownTicks": 150,
+      "manaCost": 18,
+      "effect": {
+        "mode": "arc",
+        "damage": 40,
+        "range": 110,
+        "halfAngle": 3.141592653589793,
+        "cleave": 1,
+        "statuses": [
+          {
+            "kind": "slow",
+            "durationTicks": 90,
+            "magnitude": 0.4
+          }
+        ]
+      }
+    },
+    {
+      "id": "pha_giap_bong",
+      "nameVi": "Phá Giáp Bổng",
+      "cooldownTicks": 180,
+      "manaCost": 20,
+      "effect": {
+        "lineWidth": 50,
+        "mode": "arc",
+        "damage": 55,
+        "range": 240,
+        "halfAngle": 0.7853981633974483,
+        "cleave": 1,
+        "statuses": [
+          {
+            "kind": "defense_break",
+            "durationTicks": 210,
+            "magnitude": 20
+          }
+        ],
+        "windupTicks": 6,
+        "durationTicks": 30
+      }
+    },
+    {
+      "id": "cam_long_cong",
+      "nameVi": "Cầm Long Công",
+      "cooldownTicks": 240,
+      "manaCost": 22,
+      "effect": {
+        "mode": "arc",
+        "damage": 0,
+        "range": 220,
+        "halfAngle": 1.0471975511965976,
+        "cleave": 1,
+        "statuses": [
+          {
+            "kind": "silence",
+            "durationTicks": 60,
+            "magnitude": 1
+          },
+          {
+            "kind": "disarm",
+            "durationTicks": 60,
+            "magnitude": 1
+          }
+        ],
+        "pull": 120
+      }
+    },
+    {
+      "id": "truy_phong_bong",
+      "nameVi": "Truy Phong Bổng",
+      "cooldownTicks": 210,
+      "manaCost": 24,
+      "effect": {
+        "mode": "dash",
+        "distance": 140,
+        "speed": 700,
+        "radius": 24,
+        "damage": 66,
+        "stunTicks": 30
+      }
+    },
+    {
+      "id": "thien_ha_vo_cau",
+      "nameVi": "Thiên Hạ Vô Cẩu",
+      "cooldownTicks": 540,
+      "manaCost": 40,
+      "effect": {
+        "mode": "multi_hit",
+        "range": 175,
+        "damage": 18,
+        "hits": 4,
+        "spacingTicks": 7,
+        "finisherDamage": 75,
+        "finisherRange": 215,
+        "durationTicks": 38
+      }
+    },
+    {
+      "id": "lien_hoa_phien",
+      "nameVi": "Liên Hoa Phiến",
+      "cooldownTicks": 450,
+      "manaCost": 18,
+      "effect": {
+        "mode": "area",
+        "durationTicks": 180,
+        "tickInterval": 30,
+        "radius": 85,
+        "damage": 0,
+        "protectOwner": true,
+        "ownerRegenFraction": 0.08
+      }
+    },
+    {
+      "id": "luc_duong_chuong",
+      "nameVi": "Lục Dương Chưởng",
+      "cooldownTicks": 180,
+      "manaCost": 24,
+      "effect": {
+        "mode": "multi_hit",
+        "range": 100,
+        "damage": 15,
+        "hits": 6,
+        "spacingTicks": 8,
+        "finisherDamage": 0,
+        "finisherRange": 100,
+        "guard": 0.65
+      }
+    },
+    {
+      "id": "luu_phong_bo",
+      "nameVi": "Lưu Phong Bộ",
+      "cooldownTicks": 120,
+      "manaCost": 12,
+      "effect": {
+        "mode": "dash",
+        "distance": 140,
+        "speed": 700,
+        "radius": 18,
+        "damage": 30,
+        "stunTicks": 0
+      }
+    },
+    {
+      "id": "chiet_mai_thu",
+      "nameVi": "Chiết Mai Thủ",
+      "cooldownTicks": 360,
+      "manaCost": 20,
+      "effect": {
+        "mode": "buff",
+        "durationTicks": 180,
+        "critChance": 0,
+        "critMultiplier": 0,
+        "movementSpeed": 0.3,
+        "attackSpeed": 0.35,
+        "cooldownReduction": 0.2
+      }
+    },
+    {
+      "id": "bach_phien_phong_bao",
+      "nameVi": "Bách Phiến Phong Bạo",
+      "cooldownTicks": 540,
+      "manaCost": 42,
+      "effect": {
+        "mode": "multi_hit",
+        "range": 150,
+        "damage": 22,
+        "hits": 12,
+        "spacingTicks": 8,
+        "finisherDamage": 0,
+        "finisherRange": 150,
+        "projectileBurst": {
+          "mode": "projectile",
+          "damage": 6,
+          "speed": 340,
+          "range": 210,
+          "radius": 8,
+          "count": 8,
+          "spacingTicks": 0,
+          "splashRadius": 0,
+          "burnDamage": 0,
+          "burnTicks": 0,
+          "piercing": true,
+          "useFacing": true,
+          "radial": true,
+          "attackPowerScale": 0.2
+        },
+        "projectileBurstEvery": 3
+      }
+    },
+    {
+      "id": "phi_anh_tram",
+      "nameVi": "Phi Ảnh Trảm",
+      "cooldownTicks": 180,
+      "manaCost": 22,
+      "effect": {
+        "mode": "dash",
+        "distance": 150,
+        "speed": 750,
+        "radius": 24,
+        "damage": 58,
+        "stunTicks": 0,
+        "invulnerable": true
+      }
+    },
+    {
+      "id": "truy_hon_dao",
+      "nameVi": "Truy Hồn Đao",
+      "cooldownTicks": 120,
+      "manaCost": 18,
+      "effect": {
+        "mode": "projectile",
+        "damage": 30,
+        "speed": 420,
+        "range": 240,
+        "radius": 14,
+        "count": 2,
+        "spacingTicks": 3,
+        "splashRadius": 0,
+        "burnDamage": 0,
+        "burnTicks": 0,
+        "piercing": true,
+        "useFacing": true,
+        "statuses": [
+          {
+            "kind": "slow",
+            "durationTicks": 75,
+            "magnitude": 0.25
+          }
+        ],
+        "slowedBonus": 0.4
+      }
+    },
+    {
+      "id": "phong_anh_hoan_vi",
+      "nameVi": "Phong Ảnh Hoán Vị",
+      "cooldownTicks": 240,
+      "manaCost": 20,
+      "effect": {
+        "mode": "dash",
+        "distance": 65,
+        "speed": 650,
+        "radius": 18,
+        "damage": 0,
+        "stunTicks": 0,
+        "invulnerable": true,
+        "backward": true,
+        "counter": {
+          "durationTicks": 30,
+          "damage": 60,
+          "range": 90
+        }
+      }
+    },
+    {
+      "id": "liet_phong_dao",
+      "nameVi": "Liệt Phong Đao",
+      "cooldownTicks": 180,
+      "manaCost": 25,
+      "effect": {
+        "mode": "arc",
+        "damage": 75,
+        "range": 125,
+        "halfAngle": 1.0471975511965976,
+        "cleave": 0.5,
+        "armorPenetration": 0.5,
+        "windupTicks": 18,
+        "durationTicks": 30
+      }
+    },
+    {
+      "id": "bach_liet_thien_kich",
+      "nameVi": "Bách Liệt Thiên Kích",
+      "cooldownTicks": 540,
+      "manaCost": 45,
+      "effect": {
+        "mode": "multi_hit",
+        "range": 145,
+        "damage": 13,
+        "hits": 10,
+        "spacingTicks": 4,
+        "finisherDamage": 45,
+        "finisherRange": 165,
+        "halfAngle": 0.7853981633974483
+      }
+    },
+    {
+      "id": "luong_nghi_thu",
+      "nameVi": "Lưỡng Nghi Thủ",
+      "cooldownTicks": 42,
+      "manaCost": 8,
+      "effect": {
+        "mode": "projectile",
+        "damage": 28,
+        "speed": 390,
+        "range": 240,
+        "radius": 14,
+        "count": 1,
+        "spacingTicks": 0,
+        "splashRadius": 0,
+        "burnDamage": 0,
+        "burnTicks": 0,
+        "piercing": true,
+        "useFacing": true,
+        "statuses": [
+          {
+            "kind": "attack_break",
+            "durationTicks": 90,
+            "magnitude": 0.2
+          }
+        ]
+      }
+    },
+    {
+      "id": "huyen_am_chuong",
+      "nameVi": "Huyền Âm Chưởng",
+      "cooldownTicks": 105,
+      "manaCost": 12,
+      "effect": {
+        "mode": "projectile",
+        "damage": 30,
+        "speed": 300,
+        "range": 260,
+        "radius": 30,
+        "count": 1,
+        "spacingTicks": 0,
+        "splashRadius": 0,
+        "burnDamage": 0,
+        "burnTicks": 0,
+        "piercing": true,
+        "useFacing": true,
+        "statuses": [
+          {
+            "kind": "slow",
+            "durationTicks": 90,
+            "magnitude": 0.3
+          },
+          {
+            "kind": "attack_slow",
+            "durationTicks": 90,
+            "magnitude": 0.25
+          }
+        ]
+      }
+    },
+    {
+      "id": "duong_khi_kich",
+      "nameVi": "Dương Khí Kích",
+      "cooldownTicks": 48,
+      "manaCost": 10,
+      "effect": {
+        "mode": "projectile",
+        "damage": 34,
+        "speed": 390,
+        "range": 220,
+        "radius": 16,
+        "count": 1,
+        "spacingTicks": 0,
+        "splashRadius": 0,
+        "burnDamage": 0,
+        "burnTicks": 0,
+        "piercing": true,
+        "useFacing": true,
+        "manaRefund": 7
+      }
+    },
+    {
+      "id": "thai_cuc_than_cong",
+      "nameVi": "Thái Cực Thần Công",
+      "cooldownTicks": 1,
+      "manaCost": 0,
+      "effect": {
+        "mode": "mana_shield",
+        "durationTicks": 180,
+        "absorbFraction": 1,
+        "manaPerDamage": 1.25,
+        "toggle": true
+      }
+    },
+    {
+      "id": "thai_cuc_tran",
+      "nameVi": "Thái Cực Trận",
+      "cooldownTicks": 480,
+      "manaCost": 38,
+      "effect": {
+        "mode": "area",
+        "durationTicks": 180,
+        "tickInterval": 30,
+        "radius": 125,
+        "damage": 24,
+        "statuses": [
+          {
+            "kind": "slow",
+            "durationTicks": 35,
+            "magnitude": 0.35
+          },
+          {
+            "kind": "attack_slow",
+            "durationTicks": 35,
+            "magnitude": 0.2
+          }
+        ],
+        "confines": true
+      }
+    },
+    {
+      "id": "that_tinh_kiem",
+      "nameVi": "Thất Tinh Kiếm",
+      "cooldownTicks": 135,
+      "manaCost": 18,
+      "effect": {
+        "mode": "multi_hit",
+        "range": 80,
+        "damage": 25,
+        "hits": 4,
+        "spacingTicks": 5,
+        "finisherDamage": 0,
+        "finisherRange": 80,
+        "halfAngle": 1.0471975511965976
+      }
+    },
+    {
+      "id": "nhan_kiem_hop_nhat",
+      "nameVi": "Nhân Kiếm Hợp Nhất",
+      "cooldownTicks": 120,
+      "manaCost": 18,
+      "effect": {
+        "mode": "projectile",
+        "damage": 55,
+        "speed": 180,
+        "range": 540,
+        "radius": 12,
+        "count": 1,
+        "spacingTicks": 0,
+        "splashRadius": 0,
+        "burnDamage": 0,
+        "burnTicks": 0,
+        "piercing": true,
+        "useFacing": true,
+        "blinkWindowTicks": 45
+      }
+    },
+    {
+      "id": "bat_quai_kiem_tran",
+      "nameVi": "Bát Quái Kiếm Trận",
+      "cooldownTicks": 300,
+      "manaCost": 26,
+      "effect": {
+        "mode": "area",
+        "durationTicks": 150,
+        "tickInterval": 25,
+        "radius": 105,
+        "damage": 22
+      }
+    },
+    {
+      "id": "toa_sat_bac_do",
+      "nameVi": "Tọa Sát Bác Đồ",
+      "cooldownTicks": 180,
+      "manaCost": 14,
+      "effect": {
+        "mode": "guard_counter",
+        "durationTicks": 150,
+        "reduction": 0.7,
+        "thresholdFraction": 0.2,
+        "range": 110
+      }
+    },
+    {
+      "id": "van_kiem_quy_tong",
+      "nameVi": "Vạn Kiếm Quy Tông",
+      "cooldownTicks": 510,
+      "manaCost": 42,
+      "effect": {
+        "mode": "multi_hit",
+        "range": 1,
+        "damage": 0,
+        "hits": 13,
+        "spacingTicks": 12,
+        "finisherDamage": 0,
+        "finisherRange": 1,
+        "projectileBurst": {
+          "mode": "projectile",
+          "damage": 54,
+          "speed": 390,
+          "range": 460,
+          "radius": 20,
+          "count": 8,
+          "spacingTicks": 0,
+          "splashRadius": 0,
+          "burnDamage": 0,
+          "burnTicks": 0,
+          "piercing": true,
+          "useFacing": true,
+          "radial": true
+        },
+        "durationTicks": 150
+      }
+    },
+    {
+      "id": "la_han_quyen",
+      "nameVi": "La Hán Quyền",
+      "cooldownTicks": 75,
+      "manaCost": 10,
+      "combo": {
+        "id": "phat_dong_a",
+        "step": 1,
+        "windowTicks": 180,
+        "multiplier": 2.4
+      },
+      "selfStatuses": [
+        {
+          "kind": "damage_reduction",
+          "durationTicks": 45,
+          "magnitude": 0.15
+        }
+      ],
+      "effect": {
+        "mode": "arc",
+        "damage": 40,
+        "range": 85,
+        "halfAngle": 1.0471975511965976,
+        "cleave": 0.5
+      }
+    },
+    {
+      "id": "vi_da_quyen",
+      "nameVi": "Vi Đà Quyền",
+      "cooldownTicks": 90,
+      "manaCost": 12,
+      "combo": {
+        "id": "phat_dong_a",
+        "step": 2,
+        "windowTicks": 180,
+        "multiplier": 2.4
+      },
+      "effect": {
+        "mode": "arc",
+        "damage": 44,
+        "range": 68,
+        "halfAngle": 1.0471975511965976,
+        "cleave": 0.5,
+        "statuses": [
+          {
+            "kind": "defense_break",
+            "durationTicks": 120,
+            "magnitude": 12
+          }
+        ],
+        "originOffset": 189
+      }
+    },
+    {
+      "id": "dai_luc_kim_cuong_chuong",
+      "nameVi": "Đại Lực Kim Cương Chưởng",
+      "cooldownTicks": 150,
+      "manaCost": 20,
+      "combo": {
+        "id": "phat_dong_a",
+        "step": 3,
+        "windowTicks": 180,
+        "multiplier": 2.4
+      },
+      "effect": {
+        "mode": "arc",
+        "damage": 65,
+        "range": 78,
+        "halfAngle": 1.0471975511965976,
+        "cleave": 0.6,
+        "windupTicks": 12
+      }
+    },
+    {
+      "id": "toan_phong_thoai",
+      "nameVi": "Toàn Phong Thoái",
+      "cooldownTicks": 90,
+      "manaCost": 12,
+      "combo": {
+        "id": "phat_dong_b",
+        "step": 1,
+        "windowTicks": 180,
+        "multiplier": 2
+      },
+      "effect": {
+        "mode": "projectile",
+        "damage": 34,
+        "speed": 330,
+        "range": 234,
+        "radius": 28,
+        "count": 1,
+        "spacingTicks": 0,
+        "splashRadius": 0,
+        "burnDamage": 0,
+        "burnTicks": 0,
+        "piercing": true
+      }
+    },
+    {
+      "id": "hoanh_tao_cuoc",
+      "nameVi": "Ca Diệp Thoái",
+      "cooldownTicks": 105,
+      "manaCost": 14,
+      "combo": {
+        "id": "phat_dong_b",
+        "step": 2,
+        "windowTicks": 180,
+        "multiplier": 2
+      },
+      "effect": {
+        "windupTicks": 9,
+        "recoveryTicks": 6,
+        "mode": "projectile",
+        "damage": 42,
+        "speed": 360,
+        "range": 273,
+        "radius": 24,
+        "count": 1,
+        "spacingTicks": 0,
+        "splashRadius": 0,
+        "burnDamage": 0,
+        "burnTicks": 0,
+        "piercing": true,
+        "statuses": [
+          {
+            "kind": "stun",
+            "durationTicks": 36,
+            "magnitude": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "vo_anh_cuoc",
+      "nameVi": "Vô Ảnh Cước",
+      "cooldownTicks": 180,
+      "manaCost": 24,
+      "combo": {
+        "id": "phat_dong_b",
+        "step": 3,
+        "windowTicks": 180,
+        "multiplier": 2
+      },
+      "effect": {
+        "mode": "multi_hit",
+        "range": 260,
+        "damage": 0,
+        "hits": 2,
+        "spacingTicks": 18,
+        "finisherDamage": 0,
+        "finisherRange": 76,
+        "halfAngle": 1.2566370614359172,
+        "projectileBurst": {
+          "laneOffsets": [
+            -18,
+            0,
+            18
+          ],
+          "mode": "projectile",
+          "damage": 17,
+          "speed": 390,
+          "range": 260,
+          "radius": 14,
+          "count": 3,
+          "spacingTicks": 3,
+          "splashRadius": 0,
+          "burnDamage": 0,
+          "burnTicks": 0,
+          "piercing": true,
+          "useFacing": true
+        },
+        "comboBurstOnly": true
+      }
+    },
+    {
+      "id": "kim_cang_bat_hoai",
+      "nameVi": "Kim Cang Bất Hoại",
+      "cooldownTicks": 300,
+      "manaCost": 20,
+      "selfStatuses": [
+        {
+          "kind": "damage_reduction",
+          "durationTicks": 120,
+          "magnitude": 0.4
+        },
+        {
+          "kind": "interrupt_resist",
+          "durationTicks": 120,
+          "magnitude": 1
+        }
+      ],
+      "effect": {
+        "mode": "buff",
+        "durationTicks": 120,
+        "critChance": 0,
+        "critMultiplier": 0
+      }
+    },
+    {
+      "id": "nhu_lai_niet_ban",
+      "nameVi": "Như Lai Niết Bàn",
+      "cooldownTicks": 540,
+      "manaCost": 40,
+      "selfStatuses": [
+        {
+          "kind": "damage_reduction",
+          "durationTicks": 150,
+          "magnitude": 0.25
+        }
+      ],
+      "effect": {
+        "residualArea": {
+          "mode": "area",
+          "durationTicks": 90,
+          "tickInterval": 1,
+          "radius": 150,
+          "damage": 36,
+          "oncePerTarget": true
+        },
+        "mode": "arc",
+        "damage": 120,
+        "range": 210,
+        "halfAngle": 3.141592653589793,
+        "cleave": 1,
+        "windupTicks": 15
+      }
+    },
+    {
+      "id": "tru_ta",
+      "nameVi": "Tru Tà",
+      "cooldownTicks": 90,
+      "manaCost": 12,
+      "effect": {
+        "mode": "arc",
+        "damage": 42,
+        "range": 180,
+        "halfAngle": 2.0420352248333655,
+        "cleave": 0.85,
+        "statuses": [
+          {
+            "kind": "slow",
+            "durationTicks": 90,
+            "magnitude": 0.3
+          }
+        ]
+      }
+    },
+    {
+      "id": "kim_quang_ho_tran",
+      "nameVi": "Kim Quang Hộ Trận",
+      "cooldownTicks": 330,
+      "manaCost": 24,
+      "effect": {
+        "mode": "support",
+        "radius": 145,
+        "statuses": [
+          {
+            "kind": "defense_buff",
+            "durationTicks": 16,
+            "magnitude": 22
+          }
+        ],
+        "durationTicks": 180,
+        "tickInterval": 15
+      }
+    },
+    {
+      "id": "tam_gioi_quy_thien",
+      "nameVi": "Sư Tử Hống",
+      "cooldownTicks": 135,
+      "manaCost": 18,
+      "effect": {
+        "mode": "arc",
+        "damage": 62,
+        "range": 210,
+        "halfAngle": 3.141592653589793,
+        "cleave": 1,
+        "statuses": [
+          {
+            "kind": "defense_break",
+            "durationTicks": 180,
+            "magnitude": 20
+          },
+          {
+            "kind": "slow",
+            "durationTicks": 90,
+            "magnitude": 0.35
+          }
+        ],
+        "windupTicks": 6,
+        "durationTicks": 30
+      }
+    },
+    {
+      "id": "bat_dong_minh_vuong",
+      "nameVi": "Bất Động Minh Vương",
+      "cooldownTicks": 300,
+      "manaCost": 26,
+      "effect": {
+        "mode": "support",
+        "radius": 140,
+        "heal": 42,
+        "durationTicks": 1,
+        "tickInterval": 1
+      }
+    },
+    {
+      "id": "nhu_lai_thien_diep",
+      "nameVi": "Như Lai Thiên Diệp",
+      "cooldownTicks": 540,
+      "manaCost": 42,
+      "allies": {
+        "radius": 170,
+        "statuses": [
+          {
+            "kind": "defense_buff",
+            "durationTicks": 180,
+            "magnitude": 30
+          }
+        ]
+      },
+      "effect": {
+        "mode": "area",
+        "durationTicks": 450,
+        "tickInterval": 30,
+        "radius": 360,
+        "damage": 100,
+        "followOwner": true,
+        "volley": {
+          "speed": 300,
+          "projectileRadius": 12
+        }
+      }
+    }
+  ],
+  "basics": {
+    "cai_bang_bong": {
+      "id": "cai_bang_bong",
+      "nameVi": "Cái Bang Bổng",
+      "cooldownTicks": 18,
+      "manaCost": 0,
+      "minIntervalTicks": 5,
+      "basicCombo": [
+        {
+          "stage": "thrust",
+          "damageMultiplier": 1,
+          "halfAngle": 0.6283185307179586
+        },
+        {
+          "stage": "sweep",
+          "damageMultiplier": 1,
+          "halfAngle": 1.5707963267948966
+        },
+        {
+          "stage": "lift",
+          "damageMultiplier": 1.05,
+          "halfAngle": 1.0471975511965976
+        },
+        {
+          "stage": "smash",
+          "damageMultiplier": 1.2,
+          "halfAngle": 0.7853981633974483
+        }
+      ],
+      "effect": {
+        "mode": "arc",
+        "damage": 28,
+        "range": 70,
+        "halfAngle": 1.0471975511965976,
+        "cleave": 0.5
+      }
+    },
+    "cai_bang_chuong": {
+      "id": "cai_bang_chuong",
+      "nameVi": "Cái Bang Chưởng",
+      "cooldownTicks": 18,
+      "manaCost": 0,
+      "minIntervalTicks": 5,
+      "basicCombo": [
+        {
+          "stage": "palm",
+          "damageMultiplier": 1,
+          "splashRadius": 0
+        },
+        {
+          "stage": "palm",
+          "damageMultiplier": 1,
+          "splashRadius": 0
+        },
+        {
+          "stage": "palm",
+          "damageMultiplier": 1,
+          "splashRadius": 0
+        },
+        {
+          "stage": "palm",
+          "damageMultiplier": 1,
+          "splashRadius": 0
+        },
+        {
+          "stage": "palm",
+          "damageMultiplier": 1,
+          "splashRadius": 0
+        },
+        {
+          "stage": "dragon",
+          "damageMultiplier": 1.25,
+          "splashRadius": 48
+        }
+      ],
+      "effect": {
+        "mode": "projectile",
+        "damage": 22,
+        "speed": 360,
+        "range": 320,
+        "radius": 4,
+        "count": 1,
+        "spacingTicks": 0,
+        "splashRadius": 0,
+        "burnDamage": 0,
+        "burnTicks": 0
+      }
+    },
+    "thien_son_phien": {
+      "id": "thien_son_phien",
+      "nameVi": "Thiên Sơn Phiến",
+      "cooldownTicks": 9,
+      "manaCost": 0,
+      "minIntervalTicks": 5,
+      "effect": {
+        "mode": "projectile",
+        "damage": 12,
+        "speed": 400,
+        "range": 220,
+        "radius": 10,
+        "count": 1,
+        "spacingTicks": 0,
+        "splashRadius": 0,
+        "burnDamage": 0,
+        "burnTicks": 0,
+        "piercing": true,
+        "attackPowerScale": 0.5,
+        "boomerang": true
+      }
+    },
+    "thien_son_dao": {
+      "id": "thien_son_dao",
+      "nameVi": "Thiên Sơn Đao",
+      "cooldownTicks": 9,
+      "manaCost": 0,
+      "minIntervalTicks": 5,
+      "effect": {
+        "mode": "arc",
+        "damage": 30,
+        "range": 86,
+        "halfAngle": 0.7853981633974483,
+        "cleave": 0.3
+      }
+    },
+    "vo_dang_quyen": {
+      "id": "vo_dang_quyen",
+      "nameVi": "Võ Đang Quyền",
+      "cooldownTicks": 1,
+      "manaCost": 0,
+      "minIntervalTicks": 6,
+      "basicCombo": [
+        {
+          "stage": "left_palm",
+          "damageMultiplier": 1
+        },
+        {
+          "stage": "right_palm",
+          "damageMultiplier": 1
+        }
+      ],
+      "effect": {
+        "knockbackChance": 0.1,
+        "mode": "arc",
+        "damage": 19,
+        "range": 80,
+        "halfAngle": 1.0471975511965976,
+        "cleave": 0.2,
+        "knockback": 10
+      }
+    },
+    "vo_dang_kiem": {
+      "id": "vo_dang_kiem",
+      "nameVi": "Võ Đang Kiếm",
+      "cooldownTicks": 1,
+      "manaCost": 0,
+      "minIntervalTicks": 6,
+      "effect": {
+        "mode": "arc",
+        "damage": 27,
+        "range": 94,
+        "halfAngle": 1.0471975511965976,
+        "cleave": 0.35,
+        "projectileProc": {
+          "chance": 0.25,
+          "effect": {
+            "knockbackChance": 0.1,
+            "mode": "projectile",
+            "damage": 20,
+            "speed": 390,
+            "range": 320,
+            "radius": 7,
+            "count": 1,
+            "spacingTicks": 0,
+            "splashRadius": 0,
+            "burnDamage": 0,
+            "burnTicks": 0,
+            "knockback": 10
+          }
+        }
+      }
+    },
+    "thieu_lam_quyen": {
+      "id": "thieu_lam_quyen",
+      "nameVi": "Thiếu Lâm Quyền",
+      "cooldownTicks": 1,
+      "manaCost": 0,
+      "manualChain": {
+        "idleTicks": 60,
+        "cooldownTicks": 30,
+        "finisherProjectile": {
+          "mode": "projectile",
+          "damage": 38,
+          "speed": 480,
+          "range": 300,
+          "radius": 28,
+          "count": 1,
+          "spacingTicks": 0,
+          "splashRadius": 0,
+          "burnDamage": 0,
+          "burnTicks": 0,
+          "piercing": true
+        }
+      },
+      "minIntervalTicks": 6,
+      "basicCombo": [
+        {
+          "stage": "left_fist",
+          "damageMultiplier": 1
+        },
+        {
+          "stage": "right_fist",
+          "damageMultiplier": 1
+        },
+        {
+          "stage": "front_kick",
+          "damageMultiplier": 1
+        },
+        {
+          "stage": "roundhouse_kick",
+          "damageMultiplier": 1,
+          "halfAngle": 2.356194490192345
+        }
+      ],
+      "effect": {
+        "mode": "arc",
+        "damage": 38,
+        "range": 70,
+        "halfAngle": 0.7853981633974483,
+        "cleave": 0.25
+      }
+    },
+    "thieu_lam_dao": {
+      "id": "thieu_lam_dao",
+      "nameVi": "Thiếu Lâm Đao",
+      "cooldownTicks": 23,
+      "manaCost": 0,
+      "effect": {
+        "mode": "arc",
+        "damage": 38,
+        "range": 96,
+        "halfAngle": 1.2566370614359172,
+        "cleave": 0.55
+      }
+    }
+  },
+  "progression": {
+    "skills": {
+      "hoa_van_chuong": {
+        "id": "hoa_van_chuong",
+        "schoolId": "cai_bang",
+        "style": "Chưởng",
+        "ultimate": false,
+        "descriptionVi": "Ba chưởng lửa bay thẳng về hướng địch gần nhất; không truy đuổi.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "hoa_van_chuong",
+            "nameVi": "Hỏa Vân Chưởng",
+            "cooldownTicks": 90,
+            "manaCost": 18,
+            "effect": {
+              "mode": "projectile",
+              "damage": 18,
+              "speed": 360,
+              "range": 320,
+              "radius": 4,
+              "count": 3,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "spreadAngle": 1.0471975511965976
+            }
+          },
+          {
+            "id": "hoa_van_chuong",
+            "nameVi": "Hỏa Vân Chưởng",
+            "cooldownTicks": 87,
+            "manaCost": 20,
+            "effect": {
+              "mode": "projectile",
+              "damage": 22,
+              "speed": 360,
+              "range": 320,
+              "radius": 4,
+              "count": 3,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "spreadAngle": 1.0471975511965976
+            }
+          },
+          {
+            "id": "hoa_van_chuong",
+            "nameVi": "Hỏa Vân Chưởng",
+            "cooldownTicks": 84,
+            "manaCost": 22,
+            "effect": {
+              "mode": "projectile",
+              "damage": 26,
+              "speed": 360,
+              "range": 320,
+              "radius": 4,
+              "count": 3,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "spreadAngle": 1.0471975511965976
+            }
+          },
+          {
+            "id": "hoa_van_chuong",
+            "nameVi": "Hỏa Vân Chưởng",
+            "cooldownTicks": 81,
+            "manaCost": 24,
+            "effect": {
+              "mode": "projectile",
+              "damage": 30,
+              "speed": 360,
+              "range": 320,
+              "radius": 4,
+              "count": 3,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "spreadAngle": 1.0471975511965976
+            }
+          }
+        ]
+      },
+      "cuong_long_loan_vu": {
+        "id": "cuong_long_loan_vu",
+        "schoolId": "cai_bang",
+        "style": "Chưởng",
+        "ultimate": false,
+        "descriptionVi": "Cầu lửa phát nổ, gây sát thương diện rộng và thiêu đốt.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "cuong_long_loan_vu",
+            "nameVi": "Cuồng Long Loạn Vũ",
+            "cooldownTicks": 150,
+            "manaCost": 25,
+            "effect": {
+              "mode": "projectile",
+              "damage": 32,
+              "speed": 300,
+              "range": 320,
+              "radius": 4,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 58,
+              "burnDamage": 4,
+              "burnTicks": 90
+            }
+          },
+          {
+            "id": "cuong_long_loan_vu",
+            "nameVi": "Cuồng Long Loạn Vũ",
+            "cooldownTicks": 150,
+            "manaCost": 27,
+            "effect": {
+              "mode": "projectile",
+              "damage": 40,
+              "speed": 300,
+              "range": 320,
+              "radius": 4,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 62,
+              "burnDamage": 5,
+              "burnTicks": 105
+            }
+          },
+          {
+            "id": "cuong_long_loan_vu",
+            "nameVi": "Cuồng Long Loạn Vũ",
+            "cooldownTicks": 150,
+            "manaCost": 29,
+            "effect": {
+              "mode": "projectile",
+              "damage": 48,
+              "speed": 300,
+              "range": 320,
+              "radius": 4,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 66,
+              "burnDamage": 6,
+              "burnTicks": 120
+            }
+          },
+          {
+            "id": "cuong_long_loan_vu",
+            "nameVi": "Cuồng Long Loạn Vũ",
+            "cooldownTicks": 150,
+            "manaCost": 31,
+            "effect": {
+              "mode": "projectile",
+              "damage": 56,
+              "speed": 300,
+              "range": 320,
+              "radius": 4,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 70,
+              "burnDamage": 7,
+              "burnTicks": 135
+            }
+          }
+        ]
+      },
+      "phi_long_tai_thien": {
+        "id": "phi_long_tai_thien",
+        "schoolId": "cai_bang",
+        "style": "Chưởng",
+        "ultimate": false,
+        "descriptionVi": "Sóng lửa xuyên thấu phía trước, đẩy lùi đối thủ.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "phi_long_tai_thien",
+            "nameVi": "Phi Long Tại Thiên",
+            "cooldownTicks": 180,
+            "manaCost": 22,
+            "effect": {
+              "mode": "projectile",
+              "damage": 36,
+              "speed": 260,
+              "range": 240,
+              "radius": 28,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "knockback": 64
+            }
+          },
+          {
+            "id": "phi_long_tai_thien",
+            "nameVi": "Phi Long Tại Thiên",
+            "cooldownTicks": 180,
+            "manaCost": 22,
+            "effect": {
+              "mode": "projectile",
+              "damage": 43,
+              "speed": 260,
+              "range": 252,
+              "radius": 28,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "knockback": 72
+            }
+          },
+          {
+            "id": "phi_long_tai_thien",
+            "nameVi": "Phi Long Tại Thiên",
+            "cooldownTicks": 180,
+            "manaCost": 22,
+            "effect": {
+              "mode": "projectile",
+              "damage": 50,
+              "speed": 260,
+              "range": 264,
+              "radius": 28,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "knockback": 80
+            }
+          },
+          {
+            "id": "phi_long_tai_thien",
+            "nameVi": "Phi Long Tại Thiên",
+            "cooldownTicks": 180,
+            "manaCost": 22,
+            "effect": {
+              "mode": "projectile",
+              "damage": 57,
+              "speed": 260,
+              "range": 276,
+              "radius": 28,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "knockback": 88
+            }
+          }
+        ]
+      },
+      "khang_long_huu_hoi": {
+        "id": "khang_long_huu_hoi",
+        "schoolId": "cai_bang",
+        "style": "Chưởng",
+        "ultimate": false,
+        "descriptionVi": "Tăng bạo kích trong thời gian dài hơn; cấp 4 có vùng lửa nhỏ theo người gây sát thương mỗi giây.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "khang_long_huu_hoi",
+            "nameVi": "Kháng Long Hữu Hối",
+            "cooldownTicks": 360,
+            "manaCost": 20,
+            "effect": {
+              "mode": "buff",
+              "durationTicks": 270,
+              "critChance": 0.3,
+              "critMultiplier": 0.75
+            }
+          },
+          {
+            "id": "khang_long_huu_hoi",
+            "nameVi": "Kháng Long Hữu Hối",
+            "cooldownTicks": 360,
+            "manaCost": 20,
+            "effect": {
+              "mode": "buff",
+              "durationTicks": 285,
+              "critChance": 0.33999999999999997,
+              "critMultiplier": 0.85
+            }
+          },
+          {
+            "id": "khang_long_huu_hoi",
+            "nameVi": "Kháng Long Hữu Hối",
+            "cooldownTicks": 360,
+            "manaCost": 20,
+            "effect": {
+              "mode": "buff",
+              "durationTicks": 300,
+              "critChance": 0.38,
+              "critMultiplier": 0.95
+            }
+          },
+          {
+            "id": "khang_long_huu_hoi",
+            "nameVi": "Kháng Long Hữu Hối",
+            "cooldownTicks": 360,
+            "manaCost": 20,
+            "effect": {
+              "mode": "buff",
+              "burnAura": {
+                "radius": 62,
+                "damage": 6,
+                "tickInterval": 30,
+                "attackPowerScale": 0.15
+              },
+              "durationTicks": 315,
+              "critChance": 0.42,
+              "critMultiplier": 1.05
+            }
+          }
+        ]
+      },
+      "hang_long_hoa_vu": {
+        "id": "hang_long_hoa_vu",
+        "schoolId": "cai_bang",
+        "style": "Chưởng",
+        "ultimate": true,
+        "descriptionVi": "Tuyệt kỹ: hỏa long lớn xuyên qua đội hình phía trước.",
+        "levelGates": [
+          6,
+          10,
+          14
+        ],
+        "ranks": [
+          {
+            "id": "hang_long_hoa_vu",
+            "nameVi": "Hàng Long Hỏa Vũ",
+            "cooldownTicks": 600,
+            "manaCost": 45,
+            "effect": {
+              "mode": "projectile",
+              "damage": 90,
+              "speed": 240,
+              "range": 440,
+              "radius": 48,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true
+            }
+          },
+          {
+            "id": "hang_long_hoa_vu",
+            "nameVi": "Hàng Long Hỏa Vũ",
+            "cooldownTicks": 585,
+            "manaCost": 50,
+            "effect": {
+              "mode": "projectile",
+              "damage": 115,
+              "speed": 240,
+              "range": 470,
+              "radius": 52,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true
+            }
+          },
+          {
+            "id": "hang_long_hoa_vu",
+            "nameVi": "Hàng Long Hỏa Vũ",
+            "cooldownTicks": 570,
+            "manaCost": 55,
+            "effect": {
+              "mode": "projectile",
+              "damage": 140,
+              "speed": 240,
+              "range": 500,
+              "radius": 56,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true
+            }
+          }
+        ]
+      },
+      "hoanh_tao_bong": {
+        "id": "hoanh_tao_bong",
+        "schoolId": "cai_bang",
+        "style": "Bổng",
+        "ultimate": false,
+        "descriptionVi": "Quét bổng diện rộng, gây sát thương và làm chậm di chuyển.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "hoanh_tao_bong",
+            "nameVi": "Hoành Tảo Bổng",
+            "cooldownTicks": 150,
+            "manaCost": 18,
+            "effect": {
+              "mode": "arc",
+              "damage": 40,
+              "range": 110,
+              "halfAngle": 3.141592653589793,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 90,
+                  "magnitude": 0.4
+                }
+              ]
+            }
+          },
+          {
+            "id": "hoanh_tao_bong",
+            "nameVi": "Hoành Tảo Bổng",
+            "cooldownTicks": 150,
+            "manaCost": 18,
+            "effect": {
+              "mode": "arc",
+              "damage": 46,
+              "range": 110,
+              "halfAngle": 3.141592653589793,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 105,
+                  "magnitude": 0.43000000000000005
+                }
+              ]
+            }
+          },
+          {
+            "id": "hoanh_tao_bong",
+            "nameVi": "Hoành Tảo Bổng",
+            "cooldownTicks": 150,
+            "manaCost": 18,
+            "effect": {
+              "mode": "arc",
+              "damage": 52,
+              "range": 110,
+              "halfAngle": 3.141592653589793,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 120,
+                  "magnitude": 0.46
+                }
+              ]
+            }
+          },
+          {
+            "id": "hoanh_tao_bong",
+            "nameVi": "Hoành Tảo Bổng",
+            "cooldownTicks": 150,
+            "manaCost": 18,
+            "effect": {
+              "mode": "arc",
+              "damage": 58,
+              "range": 110,
+              "halfAngle": 3.141592653589793,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 135,
+                  "magnitude": 0.49
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "pha_giap_bong": {
+        "id": "pha_giap_bong",
+        "schoolId": "cai_bang",
+        "style": "Bổng",
+        "ultimate": false,
+        "descriptionVi": "Đánh mạnh một mục tiêu phía trước và giảm phòng thủ.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "pha_giap_bong",
+            "nameVi": "Phá Giáp Bổng",
+            "cooldownTicks": 180,
+            "manaCost": 20,
+            "effect": {
+              "lineWidth": 50,
+              "mode": "arc",
+              "damage": 55,
+              "range": 240,
+              "halfAngle": 0.7853981633974483,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "defense_break",
+                  "durationTicks": 210,
+                  "magnitude": 20
+                }
+              ],
+              "windupTicks": 6,
+              "durationTicks": 30
+            }
+          },
+          {
+            "id": "pha_giap_bong",
+            "nameVi": "Phá Giáp Bổng",
+            "cooldownTicks": 180,
+            "manaCost": 20,
+            "effect": {
+              "lineWidth": 50,
+              "mode": "arc",
+              "damage": 63,
+              "range": 240,
+              "halfAngle": 0.7853981633974483,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "defense_break",
+                  "durationTicks": 225,
+                  "magnitude": 25
+                }
+              ],
+              "windupTicks": 6,
+              "durationTicks": 30
+            }
+          },
+          {
+            "id": "pha_giap_bong",
+            "nameVi": "Phá Giáp Bổng",
+            "cooldownTicks": 180,
+            "manaCost": 20,
+            "effect": {
+              "lineWidth": 50,
+              "mode": "arc",
+              "damage": 71,
+              "range": 240,
+              "halfAngle": 0.7853981633974483,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "defense_break",
+                  "durationTicks": 240,
+                  "magnitude": 30
+                }
+              ],
+              "windupTicks": 6,
+              "durationTicks": 30
+            }
+          },
+          {
+            "id": "pha_giap_bong",
+            "nameVi": "Phá Giáp Bổng",
+            "cooldownTicks": 180,
+            "manaCost": 20,
+            "effect": {
+              "lineWidth": 50,
+              "mode": "arc",
+              "damage": 79,
+              "range": 240,
+              "halfAngle": 0.7853981633974483,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "defense_break",
+                  "durationTicks": 255,
+                  "magnitude": 35
+                }
+              ],
+              "windupTicks": 6,
+              "durationTicks": 30
+            }
+          }
+        ]
+      },
+      "cam_long_cong": {
+        "id": "cam_long_cong",
+        "schoolId": "cai_bang",
+        "style": "Bổng",
+        "ultimate": false,
+        "descriptionVi": "Kéo địch phía trước, câm lặng và tước vũ khí. Địch vẫn di chuyển; không choáng, không sát thương.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "cam_long_cong",
+            "nameVi": "Cầm Long Công",
+            "cooldownTicks": 240,
+            "manaCost": 22,
+            "effect": {
+              "mode": "arc",
+              "damage": 0,
+              "range": 220,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "silence",
+                  "durationTicks": 60,
+                  "magnitude": 1
+                },
+                {
+                  "kind": "disarm",
+                  "durationTicks": 60,
+                  "magnitude": 1
+                }
+              ],
+              "pull": 120
+            }
+          },
+          {
+            "id": "cam_long_cong",
+            "nameVi": "Cầm Long Công",
+            "cooldownTicks": 240,
+            "manaCost": 24,
+            "effect": {
+              "mode": "arc",
+              "damage": 0,
+              "range": 232,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "silence",
+                  "durationTicks": 66,
+                  "magnitude": 1
+                },
+                {
+                  "kind": "disarm",
+                  "durationTicks": 66,
+                  "magnitude": 1
+                }
+              ],
+              "pull": 130
+            }
+          },
+          {
+            "id": "cam_long_cong",
+            "nameVi": "Cầm Long Công",
+            "cooldownTicks": 240,
+            "manaCost": 26,
+            "effect": {
+              "mode": "arc",
+              "damage": 0,
+              "range": 244,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "silence",
+                  "durationTicks": 72,
+                  "magnitude": 1
+                },
+                {
+                  "kind": "disarm",
+                  "durationTicks": 72,
+                  "magnitude": 1
+                }
+              ],
+              "pull": 140
+            }
+          },
+          {
+            "id": "cam_long_cong",
+            "nameVi": "Cầm Long Công",
+            "cooldownTicks": 240,
+            "manaCost": 28,
+            "effect": {
+              "mode": "arc",
+              "damage": 0,
+              "range": 256,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "silence",
+                  "durationTicks": 78,
+                  "magnitude": 1
+                },
+                {
+                  "kind": "disarm",
+                  "durationTicks": 78,
+                  "magnitude": 1
+                }
+              ],
+              "pull": 150
+            }
+          }
+        ]
+      },
+      "truy_phong_bong": {
+        "id": "truy_phong_bong",
+        "schoolId": "cai_bang",
+        "style": "Bổng",
+        "ultimate": false,
+        "descriptionVi": "Lướt theo hướng nhìn, gây sát thương một lần mỗi mục tiêu và làm choáng.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "truy_phong_bong",
+            "nameVi": "Truy Phong Bổng",
+            "cooldownTicks": 210,
+            "manaCost": 24,
+            "effect": {
+              "mode": "dash",
+              "distance": 140,
+              "speed": 700,
+              "radius": 24,
+              "damage": 66,
+              "stunTicks": 30
+            }
+          },
+          {
+            "id": "truy_phong_bong",
+            "nameVi": "Truy Phong Bổng",
+            "cooldownTicks": 210,
+            "manaCost": 24,
+            "effect": {
+              "mode": "dash",
+              "distance": 150,
+              "speed": 700,
+              "radius": 24,
+              "damage": 72,
+              "stunTicks": 33
+            }
+          },
+          {
+            "id": "truy_phong_bong",
+            "nameVi": "Truy Phong Bổng",
+            "cooldownTicks": 210,
+            "manaCost": 24,
+            "effect": {
+              "mode": "dash",
+              "distance": 160,
+              "speed": 700,
+              "radius": 24,
+              "damage": 78,
+              "stunTicks": 36
+            }
+          },
+          {
+            "id": "truy_phong_bong",
+            "nameVi": "Truy Phong Bổng",
+            "cooldownTicks": 210,
+            "manaCost": 24,
+            "effect": {
+              "mode": "dash",
+              "distance": 170,
+              "speed": 700,
+              "radius": 24,
+              "damage": 84,
+              "stunTicks": 39
+            }
+          }
+        ]
+      },
+      "thien_ha_vo_cau": {
+        "id": "thien_ha_vo_cau",
+        "schoolId": "cai_bang",
+        "style": "Bổng",
+        "ultimate": true,
+        "descriptionVi": "Tuyệt kỹ: bốn nhịp xoay bổng, kết thúc bằng cú đập mạnh.",
+        "levelGates": [
+          6,
+          10,
+          14
+        ],
+        "ranks": [
+          {
+            "id": "thien_ha_vo_cau",
+            "nameVi": "Thiên Hạ Vô Cẩu",
+            "cooldownTicks": 540,
+            "manaCost": 40,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 175,
+              "damage": 18,
+              "hits": 4,
+              "spacingTicks": 7,
+              "finisherDamage": 75,
+              "finisherRange": 215,
+              "durationTicks": 38
+            }
+          },
+          {
+            "id": "thien_ha_vo_cau",
+            "nameVi": "Thiên Hạ Vô Cẩu",
+            "cooldownTicks": 540,
+            "manaCost": 40,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 181,
+              "damage": 22,
+              "hits": 4,
+              "spacingTicks": 7,
+              "finisherDamage": 95,
+              "finisherRange": 221,
+              "durationTicks": 38
+            }
+          },
+          {
+            "id": "thien_ha_vo_cau",
+            "nameVi": "Thiên Hạ Vô Cẩu",
+            "cooldownTicks": 540,
+            "manaCost": 40,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 187,
+              "damage": 26,
+              "hits": 4,
+              "spacingTicks": 7,
+              "finisherDamage": 115,
+              "finisherRange": 227,
+              "durationTicks": 38
+            }
+          }
+        ]
+      },
+      "lien_hoa_phien": {
+        "id": "lien_hoa_phien",
+        "schoolId": "thien_son",
+        "style": "Phiến",
+        "ultimate": false,
+        "descriptionVi": "Hoa cố định tại chỗ thi triển: người tạo hoa đứng trong vùng được miễn sát thương và hồi sinh lực nhanh; ra ngoài mất bảo hộ.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "lien_hoa_phien",
+            "nameVi": "Liên Hoa Phiến",
+            "cooldownTicks": 450,
+            "manaCost": 18,
+            "effect": {
+              "mode": "area",
+              "durationTicks": 180,
+              "tickInterval": 30,
+              "radius": 85,
+              "damage": 0,
+              "protectOwner": true,
+              "ownerRegenFraction": 0.08
+            }
+          },
+          {
+            "id": "lien_hoa_phien",
+            "nameVi": "Liên Hoa Phiến",
+            "cooldownTicks": 447,
+            "manaCost": 19,
+            "effect": {
+              "mode": "area",
+              "durationTicks": 180,
+              "tickInterval": 30,
+              "radius": 90,
+              "damage": 0,
+              "protectOwner": true,
+              "ownerRegenFraction": 0.1
+            }
+          },
+          {
+            "id": "lien_hoa_phien",
+            "nameVi": "Liên Hoa Phiến",
+            "cooldownTicks": 444,
+            "manaCost": 20,
+            "effect": {
+              "mode": "area",
+              "durationTicks": 180,
+              "tickInterval": 30,
+              "radius": 95,
+              "damage": 0,
+              "protectOwner": true,
+              "ownerRegenFraction": 0.12
+            }
+          },
+          {
+            "id": "lien_hoa_phien",
+            "nameVi": "Liên Hoa Phiến",
+            "cooldownTicks": 441,
+            "manaCost": 21,
+            "effect": {
+              "mode": "area",
+              "durationTicks": 180,
+              "tickInterval": 30,
+              "radius": 100,
+              "damage": 0,
+              "protectOwner": true,
+              "ownerRegenFraction": 0.14
+            }
+          }
+        ]
+      },
+      "luc_duong_chuong": {
+        "id": "luc_duong_chuong",
+        "schoolId": "thien_son",
+        "style": "Phiến",
+        "ultimate": false,
+        "descriptionVi": "Xoay sáu nhịp quanh bản thân, giảm mạnh sát thương nhận trong lúc xoay.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "luc_duong_chuong",
+            "nameVi": "Lục Dương Chưởng",
+            "cooldownTicks": 180,
+            "manaCost": 24,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 100,
+              "damage": 15,
+              "hits": 6,
+              "spacingTicks": 8,
+              "finisherDamage": 0,
+              "finisherRange": 100,
+              "guard": 0.65
+            }
+          },
+          {
+            "id": "luc_duong_chuong",
+            "nameVi": "Lục Dương Chưởng",
+            "cooldownTicks": 177,
+            "manaCost": 25,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 104,
+              "damage": 18,
+              "hits": 6,
+              "spacingTicks": 8,
+              "finisherDamage": 0,
+              "finisherRange": 104,
+              "guard": 0.65
+            }
+          },
+          {
+            "id": "luc_duong_chuong",
+            "nameVi": "Lục Dương Chưởng",
+            "cooldownTicks": 174,
+            "manaCost": 26,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 108,
+              "damage": 21,
+              "hits": 6,
+              "spacingTicks": 8,
+              "finisherDamage": 0,
+              "finisherRange": 108,
+              "guard": 0.65
+            }
+          },
+          {
+            "id": "luc_duong_chuong",
+            "nameVi": "Lục Dương Chưởng",
+            "cooldownTicks": 171,
+            "manaCost": 27,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 112,
+              "damage": 24,
+              "hits": 6,
+              "spacingTicks": 8,
+              "finisherDamage": 0,
+              "finisherRange": 112,
+              "guard": 0.65
+            }
+          }
+        ]
+      },
+      "luu_phong_bo": {
+        "id": "luu_phong_bo",
+        "schoolId": "thien_son",
+        "style": "Phiến",
+        "ultimate": false,
+        "descriptionVi": "Lướt theo hướng nhìn, gây sát thương một lần mỗi địch đi qua; dừng trước địa hình.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "luu_phong_bo",
+            "nameVi": "Lưu Phong Bộ",
+            "cooldownTicks": 120,
+            "manaCost": 12,
+            "effect": {
+              "mode": "dash",
+              "distance": 140,
+              "speed": 700,
+              "radius": 18,
+              "damage": 30,
+              "stunTicks": 0
+            }
+          },
+          {
+            "id": "luu_phong_bo",
+            "nameVi": "Lưu Phong Bộ",
+            "cooldownTicks": 117,
+            "manaCost": 13,
+            "effect": {
+              "mode": "dash",
+              "distance": 148,
+              "speed": 700,
+              "radius": 18,
+              "damage": 39,
+              "stunTicks": 0
+            }
+          },
+          {
+            "id": "luu_phong_bo",
+            "nameVi": "Lưu Phong Bộ",
+            "cooldownTicks": 114,
+            "manaCost": 14,
+            "effect": {
+              "mode": "dash",
+              "distance": 156,
+              "speed": 700,
+              "radius": 18,
+              "damage": 48,
+              "stunTicks": 0
+            }
+          },
+          {
+            "id": "luu_phong_bo",
+            "nameVi": "Lưu Phong Bộ",
+            "cooldownTicks": 111,
+            "manaCost": 15,
+            "effect": {
+              "mode": "dash",
+              "distance": 164,
+              "speed": 700,
+              "radius": 18,
+              "damage": 57,
+              "stunTicks": 0
+            }
+          }
+        ]
+      },
+      "chiet_mai_thu": {
+        "id": "chiet_mai_thu",
+        "schoolId": "thien_son",
+        "style": "Phiến",
+        "ultimate": false,
+        "descriptionVi": "Tạm tăng tốc di chuyển, tốc đánh và giảm hồi chiêu có giới hạn; không cộng dồn.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "chiet_mai_thu",
+            "nameVi": "Chiết Mai Thủ",
+            "cooldownTicks": 360,
+            "manaCost": 20,
+            "effect": {
+              "mode": "buff",
+              "durationTicks": 180,
+              "critChance": 0,
+              "critMultiplier": 0,
+              "movementSpeed": 0.3,
+              "attackSpeed": 0.35,
+              "cooldownReduction": 0.2
+            }
+          },
+          {
+            "id": "chiet_mai_thu",
+            "nameVi": "Chiết Mai Thủ",
+            "cooldownTicks": 357,
+            "manaCost": 21,
+            "effect": {
+              "mode": "buff",
+              "durationTicks": 195,
+              "critChance": 0,
+              "critMultiplier": 0,
+              "movementSpeed": 0.33999999999999997,
+              "attackSpeed": 0.39999999999999997,
+              "cooldownReduction": 0.23
+            }
+          },
+          {
+            "id": "chiet_mai_thu",
+            "nameVi": "Chiết Mai Thủ",
+            "cooldownTicks": 354,
+            "manaCost": 22,
+            "effect": {
+              "mode": "buff",
+              "durationTicks": 210,
+              "critChance": 0,
+              "critMultiplier": 0,
+              "movementSpeed": 0.38,
+              "attackSpeed": 0.44999999999999996,
+              "cooldownReduction": 0.26
+            }
+          },
+          {
+            "id": "chiet_mai_thu",
+            "nameVi": "Chiết Mai Thủ",
+            "cooldownTicks": 351,
+            "manaCost": 23,
+            "effect": {
+              "mode": "buff",
+              "durationTicks": 225,
+              "critChance": 0,
+              "critMultiplier": 0,
+              "movementSpeed": 0.42,
+              "attackSpeed": 0.5,
+              "cooldownReduction": 0.29000000000000004
+            }
+          }
+        ]
+      },
+      "bach_phien_phong_bao": {
+        "id": "bach_phien_phong_bao",
+        "schoolId": "thien_son",
+        "style": "Phiến",
+        "ultimate": true,
+        "descriptionVi": "Tuyệt kỹ: mười hai nhịp phong bạo theo người, bốn đợt quạt bay tám hướng.",
+        "levelGates": [
+          6,
+          10,
+          14
+        ],
+        "ranks": [
+          {
+            "id": "bach_phien_phong_bao",
+            "nameVi": "Bách Phiến Phong Bạo",
+            "cooldownTicks": 540,
+            "manaCost": 42,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 150,
+              "damage": 22,
+              "hits": 12,
+              "spacingTicks": 8,
+              "finisherDamage": 0,
+              "finisherRange": 150,
+              "projectileBurst": {
+                "mode": "projectile",
+                "damage": 6,
+                "speed": 340,
+                "range": 210,
+                "radius": 8,
+                "count": 8,
+                "spacingTicks": 0,
+                "splashRadius": 0,
+                "burnDamage": 0,
+                "burnTicks": 0,
+                "piercing": true,
+                "useFacing": true,
+                "radial": true,
+                "attackPowerScale": 0.2
+              },
+              "projectileBurstEvery": 3
+            }
+          },
+          {
+            "id": "bach_phien_phong_bao",
+            "nameVi": "Bách Phiến Phong Bạo",
+            "cooldownTicks": 525,
+            "manaCost": 45,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 154,
+              "damage": 26,
+              "hits": 12,
+              "spacingTicks": 8,
+              "finisherDamage": 0,
+              "finisherRange": 154,
+              "projectileBurst": {
+                "mode": "projectile",
+                "damage": 7,
+                "speed": 340,
+                "range": 210,
+                "radius": 8,
+                "count": 8,
+                "spacingTicks": 0,
+                "splashRadius": 0,
+                "burnDamage": 0,
+                "burnTicks": 0,
+                "piercing": true,
+                "useFacing": true,
+                "radial": true,
+                "attackPowerScale": 0.2
+              },
+              "projectileBurstEvery": 3
+            }
+          },
+          {
+            "id": "bach_phien_phong_bao",
+            "nameVi": "Bách Phiến Phong Bạo",
+            "cooldownTicks": 510,
+            "manaCost": 48,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 158,
+              "damage": 30,
+              "hits": 12,
+              "spacingTicks": 8,
+              "finisherDamage": 0,
+              "finisherRange": 158,
+              "projectileBurst": {
+                "mode": "projectile",
+                "damage": 8,
+                "speed": 340,
+                "range": 210,
+                "radius": 8,
+                "count": 8,
+                "spacingTicks": 0,
+                "splashRadius": 0,
+                "burnDamage": 0,
+                "burnTicks": 0,
+                "piercing": true,
+                "useFacing": true,
+                "radial": true,
+                "attackPowerScale": 0.2
+              },
+              "projectileBurstEvery": 3
+            }
+          }
+        ]
+      },
+      "phi_anh_tram": {
+        "id": "phi_anh_tram",
+        "schoolId": "thien_son",
+        "style": "Đao",
+        "ultimate": false,
+        "descriptionVi": "Lướt chém một lần mỗi địch; miễn sát thương trực tiếp trên các tick đang lướt, không chặn DOT.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "phi_anh_tram",
+            "nameVi": "Phi Ảnh Trảm",
+            "cooldownTicks": 180,
+            "manaCost": 22,
+            "effect": {
+              "mode": "dash",
+              "distance": 150,
+              "speed": 750,
+              "radius": 24,
+              "damage": 58,
+              "stunTicks": 0,
+              "invulnerable": true
+            }
+          },
+          {
+            "id": "phi_anh_tram",
+            "nameVi": "Phi Ảnh Trảm",
+            "cooldownTicks": 177,
+            "manaCost": 23,
+            "effect": {
+              "mode": "dash",
+              "distance": 158,
+              "speed": 750,
+              "radius": 24,
+              "damage": 67,
+              "stunTicks": 0,
+              "invulnerable": true
+            }
+          },
+          {
+            "id": "phi_anh_tram",
+            "nameVi": "Phi Ảnh Trảm",
+            "cooldownTicks": 174,
+            "manaCost": 24,
+            "effect": {
+              "mode": "dash",
+              "distance": 166,
+              "speed": 750,
+              "radius": 24,
+              "damage": 76,
+              "stunTicks": 0,
+              "invulnerable": true
+            }
+          },
+          {
+            "id": "phi_anh_tram",
+            "nameVi": "Phi Ảnh Trảm",
+            "cooldownTicks": 171,
+            "manaCost": 25,
+            "effect": {
+              "mode": "dash",
+              "distance": 174,
+              "speed": 750,
+              "radius": 24,
+              "damage": 85,
+              "stunTicks": 0,
+              "invulnerable": true
+            }
+          }
+        ]
+      },
+      "truy_hon_dao": {
+        "id": "truy_hon_dao",
+        "schoolId": "thien_son",
+        "style": "Đao",
+        "ultimate": false,
+        "descriptionVi": "Hai luồng đao khí bay thẳng, làm chậm; tăng sát thương lên địch đang chậm.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "truy_hon_dao",
+            "nameVi": "Truy Hồn Đao",
+            "cooldownTicks": 120,
+            "manaCost": 18,
+            "effect": {
+              "mode": "projectile",
+              "damage": 30,
+              "speed": 420,
+              "range": 240,
+              "radius": 14,
+              "count": 2,
+              "spacingTicks": 3,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 75,
+                  "magnitude": 0.25
+                }
+              ],
+              "slowedBonus": 0.4
+            }
+          },
+          {
+            "id": "truy_hon_dao",
+            "nameVi": "Truy Hồn Đao",
+            "cooldownTicks": 117,
+            "manaCost": 19,
+            "effect": {
+              "mode": "projectile",
+              "damage": 35,
+              "speed": 420,
+              "range": 250,
+              "radius": 14,
+              "count": 2,
+              "spacingTicks": 3,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 75,
+                  "magnitude": 0.25
+                }
+              ],
+              "slowedBonus": 0.45
+            }
+          },
+          {
+            "id": "truy_hon_dao",
+            "nameVi": "Truy Hồn Đao",
+            "cooldownTicks": 114,
+            "manaCost": 20,
+            "effect": {
+              "mode": "projectile",
+              "damage": 40,
+              "speed": 420,
+              "range": 260,
+              "radius": 14,
+              "count": 2,
+              "spacingTicks": 3,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 75,
+                  "magnitude": 0.25
+                }
+              ],
+              "slowedBonus": 0.5
+            }
+          },
+          {
+            "id": "truy_hon_dao",
+            "nameVi": "Truy Hồn Đao",
+            "cooldownTicks": 111,
+            "manaCost": 21,
+            "effect": {
+              "mode": "projectile",
+              "damage": 45,
+              "speed": 420,
+              "range": 270,
+              "radius": 14,
+              "count": 2,
+              "spacingTicks": 3,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 75,
+                  "magnitude": 0.25
+                }
+              ],
+              "slowedBonus": 0.55
+            }
+          }
+        ]
+      },
+      "phong_anh_hoan_vi": {
+        "id": "phong_anh_hoan_vi",
+        "schoolId": "thien_son",
+        "style": "Đao",
+        "ultimate": false,
+        "descriptionVi": "Lướt lùi ngược hướng nhìn, giữ hướng nhìn và để lại quang ảnh; miễn sát thương trực tiếp lúc đang lướt, cửa sổ phản kích sau đó không miễn thương.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "phong_anh_hoan_vi",
+            "nameVi": "Phong Ảnh Hoán Vị",
+            "cooldownTicks": 240,
+            "manaCost": 20,
+            "effect": {
+              "mode": "dash",
+              "distance": 65,
+              "speed": 650,
+              "radius": 18,
+              "damage": 0,
+              "stunTicks": 0,
+              "invulnerable": true,
+              "backward": true,
+              "counter": {
+                "durationTicks": 30,
+                "damage": 60,
+                "range": 90
+              }
+            }
+          },
+          {
+            "id": "phong_anh_hoan_vi",
+            "nameVi": "Phong Ảnh Hoán Vị",
+            "cooldownTicks": 237,
+            "manaCost": 21,
+            "effect": {
+              "mode": "dash",
+              "distance": 73,
+              "speed": 650,
+              "radius": 18,
+              "damage": 0,
+              "stunTicks": 0,
+              "invulnerable": true,
+              "backward": true,
+              "counter": {
+                "durationTicks": 33,
+                "damage": 70,
+                "range": 90
+              }
+            }
+          },
+          {
+            "id": "phong_anh_hoan_vi",
+            "nameVi": "Phong Ảnh Hoán Vị",
+            "cooldownTicks": 234,
+            "manaCost": 22,
+            "effect": {
+              "mode": "dash",
+              "distance": 81,
+              "speed": 650,
+              "radius": 18,
+              "damage": 0,
+              "stunTicks": 0,
+              "invulnerable": true,
+              "backward": true,
+              "counter": {
+                "durationTicks": 36,
+                "damage": 80,
+                "range": 90
+              }
+            }
+          },
+          {
+            "id": "phong_anh_hoan_vi",
+            "nameVi": "Phong Ảnh Hoán Vị",
+            "cooldownTicks": 231,
+            "manaCost": 23,
+            "effect": {
+              "mode": "dash",
+              "distance": 89,
+              "speed": 650,
+              "radius": 18,
+              "damage": 0,
+              "stunTicks": 0,
+              "invulnerable": true,
+              "backward": true,
+              "counter": {
+                "durationTicks": 39,
+                "damage": 90,
+                "range": 90
+              }
+            }
+          }
+        ]
+      },
+      "liet_phong_dao": {
+        "id": "liet_phong_dao",
+        "schoolId": "thien_son",
+        "style": "Đao",
+        "ultimate": false,
+        "descriptionVi": "Tụ đại đao trên đầu rồi chém xuống phía trước, xuyên một phần phòng thủ riêng cho đòn này.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "liet_phong_dao",
+            "nameVi": "Liệt Phong Đao",
+            "cooldownTicks": 180,
+            "manaCost": 25,
+            "effect": {
+              "mode": "arc",
+              "damage": 75,
+              "range": 125,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.5,
+              "armorPenetration": 0.5,
+              "windupTicks": 18,
+              "durationTicks": 30
+            }
+          },
+          {
+            "id": "liet_phong_dao",
+            "nameVi": "Liệt Phong Đao",
+            "cooldownTicks": 177,
+            "manaCost": 26,
+            "effect": {
+              "mode": "arc",
+              "damage": 85,
+              "range": 125,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.5,
+              "armorPenetration": 0.55,
+              "windupTicks": 18,
+              "durationTicks": 30
+            }
+          },
+          {
+            "id": "liet_phong_dao",
+            "nameVi": "Liệt Phong Đao",
+            "cooldownTicks": 174,
+            "manaCost": 27,
+            "effect": {
+              "mode": "arc",
+              "damage": 95,
+              "range": 125,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.5,
+              "armorPenetration": 0.6,
+              "windupTicks": 18,
+              "durationTicks": 30
+            }
+          },
+          {
+            "id": "liet_phong_dao",
+            "nameVi": "Liệt Phong Đao",
+            "cooldownTicks": 171,
+            "manaCost": 28,
+            "effect": {
+              "mode": "arc",
+              "damage": 105,
+              "range": 125,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.5,
+              "armorPenetration": 0.65,
+              "windupTicks": 18,
+              "durationTicks": 30
+            }
+          }
+        ]
+      },
+      "bach_liet_thien_kich": {
+        "id": "bach_liet_thien_kich",
+        "schoolId": "thien_son",
+        "style": "Đao",
+        "ultimate": true,
+        "descriptionVi": "Tuyệt kỹ: mười nhát chém cực nhanh phía trước và một nhát kết thúc.",
+        "levelGates": [
+          6,
+          10,
+          14
+        ],
+        "ranks": [
+          {
+            "id": "bach_liet_thien_kich",
+            "nameVi": "Bách Liệt Thiên Kích",
+            "cooldownTicks": 540,
+            "manaCost": 45,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 145,
+              "damage": 13,
+              "hits": 10,
+              "spacingTicks": 4,
+              "finisherDamage": 45,
+              "finisherRange": 165,
+              "halfAngle": 0.7853981633974483
+            }
+          },
+          {
+            "id": "bach_liet_thien_kich",
+            "nameVi": "Bách Liệt Thiên Kích",
+            "cooldownTicks": 525,
+            "manaCost": 48,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 149,
+              "damage": 17,
+              "hits": 10,
+              "spacingTicks": 4,
+              "finisherDamage": 57,
+              "finisherRange": 169,
+              "halfAngle": 0.7853981633974483
+            }
+          },
+          {
+            "id": "bach_liet_thien_kich",
+            "nameVi": "Bách Liệt Thiên Kích",
+            "cooldownTicks": 510,
+            "manaCost": 51,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 153,
+              "damage": 21,
+              "hits": 10,
+              "spacingTicks": 4,
+              "finisherDamage": 69,
+              "finisherRange": 173,
+              "halfAngle": 0.7853981633974483
+            }
+          }
+        ]
+      },
+      "luong_nghi_thu": {
+        "id": "luong_nghi_thu",
+        "schoolId": "vo_dang",
+        "style": "Quyền",
+        "ultimate": false,
+        "descriptionVi": "Âm dương bay thẳng, tạm giảm lực công kích của địch trúng đòn.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "luong_nghi_thu",
+            "nameVi": "Lưỡng Nghi Thủ",
+            "cooldownTicks": 42,
+            "manaCost": 8,
+            "effect": {
+              "mode": "projectile",
+              "damage": 28,
+              "speed": 390,
+              "range": 240,
+              "radius": 14,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "statuses": [
+                {
+                  "kind": "attack_break",
+                  "durationTicks": 90,
+                  "magnitude": 0.2
+                }
+              ]
+            }
+          },
+          {
+            "id": "luong_nghi_thu",
+            "nameVi": "Lưỡng Nghi Thủ",
+            "cooldownTicks": 39,
+            "manaCost": 9,
+            "effect": {
+              "mode": "projectile",
+              "damage": 34,
+              "speed": 390,
+              "range": 245,
+              "radius": 14,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "statuses": [
+                {
+                  "kind": "attack_break",
+                  "durationTicks": 100,
+                  "magnitude": 0.23
+                }
+              ]
+            }
+          },
+          {
+            "id": "luong_nghi_thu",
+            "nameVi": "Lưỡng Nghi Thủ",
+            "cooldownTicks": 36,
+            "manaCost": 10,
+            "effect": {
+              "mode": "projectile",
+              "damage": 40,
+              "speed": 390,
+              "range": 250,
+              "radius": 14,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "statuses": [
+                {
+                  "kind": "attack_break",
+                  "durationTicks": 110,
+                  "magnitude": 0.26
+                }
+              ]
+            }
+          },
+          {
+            "id": "luong_nghi_thu",
+            "nameVi": "Lưỡng Nghi Thủ",
+            "cooldownTicks": 33,
+            "manaCost": 11,
+            "effect": {
+              "mode": "projectile",
+              "damage": 46,
+              "speed": 390,
+              "range": 255,
+              "radius": 14,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "statuses": [
+                {
+                  "kind": "attack_break",
+                  "durationTicks": 120,
+                  "magnitude": 0.29000000000000004
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "huyen_am_chuong": {
+        "id": "huyen_am_chuong",
+        "schoolId": "vo_dang",
+        "style": "Quyền",
+        "ultimate": false,
+        "descriptionVi": "Sóng âm lớn bay thẳng; giảm riêng tốc độ di chuyển và tốc độ đánh.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "huyen_am_chuong",
+            "nameVi": "Huyền Âm Chưởng",
+            "cooldownTicks": 105,
+            "manaCost": 12,
+            "effect": {
+              "mode": "projectile",
+              "damage": 30,
+              "speed": 300,
+              "range": 260,
+              "radius": 30,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 90,
+                  "magnitude": 0.3
+                },
+                {
+                  "kind": "attack_slow",
+                  "durationTicks": 90,
+                  "magnitude": 0.25
+                }
+              ]
+            }
+          },
+          {
+            "id": "huyen_am_chuong",
+            "nameVi": "Huyền Âm Chưởng",
+            "cooldownTicks": 102,
+            "manaCost": 13,
+            "effect": {
+              "mode": "projectile",
+              "damage": 36,
+              "speed": 300,
+              "range": 265,
+              "radius": 30,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 100,
+                  "magnitude": 0.32999999999999996
+                },
+                {
+                  "kind": "attack_slow",
+                  "durationTicks": 100,
+                  "magnitude": 0.28
+                }
+              ]
+            }
+          },
+          {
+            "id": "huyen_am_chuong",
+            "nameVi": "Huyền Âm Chưởng",
+            "cooldownTicks": 99,
+            "manaCost": 14,
+            "effect": {
+              "mode": "projectile",
+              "damage": 42,
+              "speed": 300,
+              "range": 270,
+              "radius": 30,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 110,
+                  "magnitude": 0.36
+                },
+                {
+                  "kind": "attack_slow",
+                  "durationTicks": 110,
+                  "magnitude": 0.31
+                }
+              ]
+            }
+          },
+          {
+            "id": "huyen_am_chuong",
+            "nameVi": "Huyền Âm Chưởng",
+            "cooldownTicks": 96,
+            "manaCost": 15,
+            "effect": {
+              "mode": "projectile",
+              "damage": 48,
+              "speed": 300,
+              "range": 275,
+              "radius": 30,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 120,
+                  "magnitude": 0.39
+                },
+                {
+                  "kind": "attack_slow",
+                  "durationTicks": 120,
+                  "magnitude": 0.33999999999999997
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "duong_khi_kich": {
+        "id": "duong_khi_kich",
+        "schoolId": "vo_dang",
+        "style": "Quyền",
+        "ultimate": false,
+        "descriptionVi": "Khí chưởng bay thẳng; hoàn nội lực một lần khi trúng, không hoàn khi hụt.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "duong_khi_kich",
+            "nameVi": "Dương Khí Kích",
+            "cooldownTicks": 48,
+            "manaCost": 10,
+            "effect": {
+              "mode": "projectile",
+              "damage": 34,
+              "speed": 390,
+              "range": 220,
+              "radius": 16,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "manaRefund": 7
+            }
+          },
+          {
+            "id": "duong_khi_kich",
+            "nameVi": "Dương Khí Kích",
+            "cooldownTicks": 45,
+            "manaCost": 11,
+            "effect": {
+              "mode": "projectile",
+              "damage": 40,
+              "speed": 390,
+              "range": 225,
+              "radius": 16,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "manaRefund": 9
+            }
+          },
+          {
+            "id": "duong_khi_kich",
+            "nameVi": "Dương Khí Kích",
+            "cooldownTicks": 42,
+            "manaCost": 12,
+            "effect": {
+              "mode": "projectile",
+              "damage": 46,
+              "speed": 390,
+              "range": 230,
+              "radius": 16,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "manaRefund": 11
+            }
+          },
+          {
+            "id": "duong_khi_kich",
+            "nameVi": "Dương Khí Kích",
+            "cooldownTicks": 39,
+            "manaCost": 13,
+            "effect": {
+              "mode": "projectile",
+              "damage": 52,
+              "speed": 390,
+              "range": 235,
+              "radius": 16,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "manaRefund": 13
+            }
+          }
+        ]
+      },
+      "thai_cuc_than_cong": {
+        "id": "thai_cuc_than_cong",
+        "schoolId": "vo_dang",
+        "style": "Quyền",
+        "ultimate": false,
+        "descriptionVi": "Bật/tắt khiên dùng nội lực chịu sát thương; không phí bật và không hồi chiêu phụ. Thiếu nội lực nhận phần còn lại.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "thai_cuc_than_cong",
+            "nameVi": "Thái Cực Thần Công",
+            "cooldownTicks": 1,
+            "manaCost": 0,
+            "effect": {
+              "mode": "mana_shield",
+              "durationTicks": 180,
+              "absorbFraction": 1,
+              "manaPerDamage": 1.25,
+              "toggle": true
+            }
+          },
+          {
+            "id": "thai_cuc_than_cong",
+            "nameVi": "Thái Cực Thần Công",
+            "cooldownTicks": 1,
+            "manaCost": 0,
+            "effect": {
+              "mode": "mana_shield",
+              "durationTicks": 195,
+              "absorbFraction": 1,
+              "manaPerDamage": 1.15,
+              "toggle": true
+            }
+          },
+          {
+            "id": "thai_cuc_than_cong",
+            "nameVi": "Thái Cực Thần Công",
+            "cooldownTicks": 1,
+            "manaCost": 0,
+            "effect": {
+              "mode": "mana_shield",
+              "durationTicks": 210,
+              "absorbFraction": 1,
+              "manaPerDamage": 1.05,
+              "toggle": true
+            }
+          },
+          {
+            "id": "thai_cuc_than_cong",
+            "nameVi": "Thái Cực Thần Công",
+            "cooldownTicks": 1,
+            "manaCost": 0,
+            "effect": {
+              "mode": "mana_shield",
+              "durationTicks": 225,
+              "absorbFraction": 1,
+              "manaPerDamage": 0.95,
+              "toggle": true
+            }
+          }
+        ]
+      },
+      "thai_cuc_tran": {
+        "id": "thai_cuc_tran",
+        "schoolId": "vo_dang",
+        "style": "Quyền",
+        "ultimate": true,
+        "descriptionVi": "Tuyệt kỹ: trận âm dương cố định, sát thương theo nhịp; địch không vượt biên, vẫn di chuyển và đánh bên trong; địch miễn cưỡng chế được thoát.",
+        "levelGates": [
+          6,
+          10,
+          14
+        ],
+        "ranks": [
+          {
+            "id": "thai_cuc_tran",
+            "nameVi": "Thái Cực Trận",
+            "cooldownTicks": 480,
+            "manaCost": 38,
+            "effect": {
+              "mode": "area",
+              "durationTicks": 180,
+              "tickInterval": 30,
+              "radius": 125,
+              "damage": 24,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 35,
+                  "magnitude": 0.35
+                },
+                {
+                  "kind": "attack_slow",
+                  "durationTicks": 35,
+                  "magnitude": 0.2
+                }
+              ],
+              "confines": true
+            }
+          },
+          {
+            "id": "thai_cuc_tran",
+            "nameVi": "Thái Cực Trận",
+            "cooldownTicks": 468,
+            "manaCost": 40,
+            "effect": {
+              "mode": "area",
+              "durationTicks": 210,
+              "tickInterval": 30,
+              "radius": 133,
+              "damage": 29,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 35,
+                  "magnitude": 0.38
+                },
+                {
+                  "kind": "attack_slow",
+                  "durationTicks": 35,
+                  "magnitude": 0.23
+                }
+              ],
+              "confines": true
+            }
+          },
+          {
+            "id": "thai_cuc_tran",
+            "nameVi": "Thái Cực Trận",
+            "cooldownTicks": 456,
+            "manaCost": 42,
+            "effect": {
+              "mode": "area",
+              "durationTicks": 240,
+              "tickInterval": 30,
+              "radius": 141,
+              "damage": 34,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 35,
+                  "magnitude": 0.41
+                },
+                {
+                  "kind": "attack_slow",
+                  "durationTicks": 35,
+                  "magnitude": 0.26
+                }
+              ],
+              "confines": true
+            }
+          }
+        ]
+      },
+      "that_tinh_kiem": {
+        "id": "that_tinh_kiem",
+        "schoolId": "vo_dang",
+        "style": "Kiếm",
+        "ultimate": false,
+        "descriptionVi": "Bốn nhát kiếm mạnh liên tiếp trong cung phía trước.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "that_tinh_kiem",
+            "nameVi": "Thất Tinh Kiếm",
+            "cooldownTicks": 135,
+            "manaCost": 18,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 80,
+              "damage": 25,
+              "hits": 4,
+              "spacingTicks": 5,
+              "finisherDamage": 0,
+              "finisherRange": 80,
+              "halfAngle": 1.0471975511965976
+            }
+          },
+          {
+            "id": "that_tinh_kiem",
+            "nameVi": "Thất Tinh Kiếm",
+            "cooldownTicks": 132,
+            "manaCost": 19,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 84,
+              "damage": 30,
+              "hits": 4,
+              "spacingTicks": 5,
+              "finisherDamage": 0,
+              "finisherRange": 80,
+              "halfAngle": 1.0471975511965976
+            }
+          },
+          {
+            "id": "that_tinh_kiem",
+            "nameVi": "Thất Tinh Kiếm",
+            "cooldownTicks": 129,
+            "manaCost": 20,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 88,
+              "damage": 35,
+              "hits": 4,
+              "spacingTicks": 5,
+              "finisherDamage": 0,
+              "finisherRange": 80,
+              "halfAngle": 1.0471975511965976
+            }
+          },
+          {
+            "id": "that_tinh_kiem",
+            "nameVi": "Thất Tinh Kiếm",
+            "cooldownTicks": 126,
+            "manaCost": 21,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 92,
+              "damage": 40,
+              "hits": 4,
+              "spacingTicks": 5,
+              "finisherDamage": 0,
+              "finisherRange": 80,
+              "halfAngle": 1.0471975511965976
+            }
+          }
+        ]
+      },
+      "nhan_kiem_hop_nhat": {
+        "id": "nhan_kiem_hop_nhat",
+        "schoolId": "vo_dang",
+        "style": "Kiếm",
+        "ultimate": false,
+        "descriptionVi": "Kiếm bay chậm và xuyên địch, mỗi địch trúng một lần. Bấm lại cùng ô để hiện thân tại kiếm; kiếm lưu cuối tầm 1,5 giây.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "nhan_kiem_hop_nhat",
+            "nameVi": "Nhân Kiếm Hợp Nhất",
+            "cooldownTicks": 120,
+            "manaCost": 18,
+            "effect": {
+              "mode": "projectile",
+              "damage": 55,
+              "speed": 180,
+              "range": 540,
+              "radius": 12,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "blinkWindowTicks": 45
+            }
+          },
+          {
+            "id": "nhan_kiem_hop_nhat",
+            "nameVi": "Nhân Kiếm Hợp Nhất",
+            "cooldownTicks": 117,
+            "manaCost": 19,
+            "effect": {
+              "mode": "projectile",
+              "damage": 61,
+              "speed": 180,
+              "range": 545,
+              "radius": 12,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "blinkWindowTicks": 45
+            }
+          },
+          {
+            "id": "nhan_kiem_hop_nhat",
+            "nameVi": "Nhân Kiếm Hợp Nhất",
+            "cooldownTicks": 114,
+            "manaCost": 20,
+            "effect": {
+              "mode": "projectile",
+              "damage": 67,
+              "speed": 180,
+              "range": 550,
+              "radius": 12,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "blinkWindowTicks": 45
+            }
+          },
+          {
+            "id": "nhan_kiem_hop_nhat",
+            "nameVi": "Nhân Kiếm Hợp Nhất",
+            "cooldownTicks": 111,
+            "manaCost": 21,
+            "effect": {
+              "mode": "projectile",
+              "damage": 73,
+              "speed": 180,
+              "range": 555,
+              "radius": 12,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "useFacing": true,
+              "blinkWindowTicks": 45
+            }
+          }
+        ]
+      },
+      "bat_quai_kiem_tran": {
+        "id": "bat_quai_kiem_tran",
+        "schoolId": "vo_dang",
+        "style": "Kiếm",
+        "ultimate": false,
+        "descriptionVi": "Kiếm trận cố định tại chỗ thi triển, gây sát thương theo nhịp lên địch trong trận.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "bat_quai_kiem_tran",
+            "nameVi": "Bát Quái Kiếm Trận",
+            "cooldownTicks": 300,
+            "manaCost": 26,
+            "effect": {
+              "mode": "area",
+              "durationTicks": 150,
+              "tickInterval": 25,
+              "radius": 105,
+              "damage": 22
+            }
+          },
+          {
+            "id": "bat_quai_kiem_tran",
+            "nameVi": "Bát Quái Kiếm Trận",
+            "cooldownTicks": 297,
+            "manaCost": 27,
+            "effect": {
+              "mode": "area",
+              "durationTicks": 180,
+              "tickInterval": 25,
+              "radius": 113,
+              "damage": 27
+            }
+          },
+          {
+            "id": "bat_quai_kiem_tran",
+            "nameVi": "Bát Quái Kiếm Trận",
+            "cooldownTicks": 294,
+            "manaCost": 28,
+            "effect": {
+              "mode": "area",
+              "durationTicks": 210,
+              "tickInterval": 25,
+              "radius": 121,
+              "damage": 32
+            }
+          },
+          {
+            "id": "bat_quai_kiem_tran",
+            "nameVi": "Bát Quái Kiếm Trận",
+            "cooldownTicks": 291,
+            "manaCost": 29,
+            "effect": {
+              "mode": "area",
+              "durationTicks": 240,
+              "tickInterval": 25,
+              "radius": 129,
+              "damage": 37
+            }
+          }
+        ]
+      },
+      "toa_sat_bac_do": {
+        "id": "toa_sat_bac_do",
+        "schoolId": "vo_dang",
+        "style": "Kiếm",
+        "ultimate": false,
+        "descriptionVi": "Thủ tối đa 5 giây, giảm 70% sát thương; tích lũy thực nhận sau giảm. Hết 5 giây hoặc vượt 20% máu tối đa thì phản tổng thực nhận ra xung quanh một lần khi còn sống.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "toa_sat_bac_do",
+            "nameVi": "Tọa Sát Bác Đồ",
+            "cooldownTicks": 180,
+            "manaCost": 14,
+            "effect": {
+              "mode": "guard_counter",
+              "durationTicks": 150,
+              "reduction": 0.7,
+              "thresholdFraction": 0.2,
+              "range": 110
+            }
+          },
+          {
+            "id": "toa_sat_bac_do",
+            "nameVi": "Tọa Sát Bác Đồ",
+            "cooldownTicks": 177,
+            "manaCost": 15,
+            "effect": {
+              "mode": "guard_counter",
+              "durationTicks": 150,
+              "reduction": 0.7,
+              "thresholdFraction": 0.2,
+              "range": 115
+            }
+          },
+          {
+            "id": "toa_sat_bac_do",
+            "nameVi": "Tọa Sát Bác Đồ",
+            "cooldownTicks": 174,
+            "manaCost": 16,
+            "effect": {
+              "mode": "guard_counter",
+              "durationTicks": 150,
+              "reduction": 0.7,
+              "thresholdFraction": 0.2,
+              "range": 120
+            }
+          },
+          {
+            "id": "toa_sat_bac_do",
+            "nameVi": "Tọa Sát Bác Đồ",
+            "cooldownTicks": 171,
+            "manaCost": 17,
+            "effect": {
+              "mode": "guard_counter",
+              "durationTicks": 150,
+              "reduction": 0.7,
+              "thresholdFraction": 0.2,
+              "range": 125
+            }
+          }
+        ]
+      },
+      "van_kiem_quy_tong": {
+        "id": "van_kiem_quy_tong",
+        "schoolId": "vo_dang",
+        "style": "Kiếm",
+        "ultimate": true,
+        "descriptionVi": "Tuyệt kỹ: liên tục phóng kiếm thẳng tám hướng quanh người trong 5 giây, không truy đuổi.",
+        "levelGates": [
+          6,
+          10,
+          14
+        ],
+        "ranks": [
+          {
+            "id": "van_kiem_quy_tong",
+            "nameVi": "Vạn Kiếm Quy Tông",
+            "cooldownTicks": 510,
+            "manaCost": 42,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 1,
+              "damage": 0,
+              "hits": 13,
+              "spacingTicks": 12,
+              "finisherDamage": 0,
+              "finisherRange": 1,
+              "projectileBurst": {
+                "mode": "projectile",
+                "damage": 54,
+                "speed": 390,
+                "range": 460,
+                "radius": 20,
+                "count": 8,
+                "spacingTicks": 0,
+                "splashRadius": 0,
+                "burnDamage": 0,
+                "burnTicks": 0,
+                "piercing": true,
+                "useFacing": true,
+                "radial": true
+              },
+              "durationTicks": 150
+            }
+          },
+          {
+            "id": "van_kiem_quy_tong",
+            "nameVi": "Vạn Kiếm Quy Tông",
+            "cooldownTicks": 498,
+            "manaCost": 44,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 1,
+              "damage": 0,
+              "hits": 13,
+              "spacingTicks": 12,
+              "finisherDamage": 0,
+              "finisherRange": 1,
+              "projectileBurst": {
+                "mode": "projectile",
+                "damage": 63,
+                "speed": 390,
+                "range": 465,
+                "radius": 20,
+                "count": 8,
+                "spacingTicks": 0,
+                "splashRadius": 0,
+                "burnDamage": 0,
+                "burnTicks": 0,
+                "piercing": true,
+                "useFacing": true,
+                "radial": true
+              },
+              "durationTicks": 150
+            }
+          },
+          {
+            "id": "van_kiem_quy_tong",
+            "nameVi": "Vạn Kiếm Quy Tông",
+            "cooldownTicks": 486,
+            "manaCost": 46,
+            "effect": {
+              "mode": "multi_hit",
+              "range": 1,
+              "damage": 0,
+              "hits": 13,
+              "spacingTicks": 12,
+              "finisherDamage": 0,
+              "finisherRange": 1,
+              "projectileBurst": {
+                "mode": "projectile",
+                "damage": 72,
+                "speed": 390,
+                "range": 470,
+                "radius": 20,
+                "count": 8,
+                "spacingTicks": 0,
+                "splashRadius": 0,
+                "burnDamage": 0,
+                "burnTicks": 0,
+                "piercing": true,
+                "useFacing": true,
+                "radial": true
+              },
+              "durationTicks": 150
+            }
+          }
+        ]
+      },
+      "la_han_quyen": {
+        "id": "la_han_quyen",
+        "schoolId": "thieu_lam",
+        "style": "Quyền",
+        "ultimate": false,
+        "descriptionVi": "Đấm mạnh, thủ thế ngắn. Phát Động A bước 1 trên từng địch trúng đòn, kể cả đòn lan.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "la_han_quyen",
+            "nameVi": "La Hán Quyền",
+            "cooldownTicks": 75,
+            "manaCost": 10,
+            "combo": {
+              "id": "phat_dong_a",
+              "step": 1,
+              "windowTicks": 180,
+              "multiplier": 2.4
+            },
+            "selfStatuses": [
+              {
+                "kind": "damage_reduction",
+                "durationTicks": 45,
+                "magnitude": 0.15
+              }
+            ],
+            "effect": {
+              "mode": "arc",
+              "damage": 40,
+              "range": 85,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.5
+            }
+          },
+          {
+            "id": "la_han_quyen",
+            "nameVi": "La Hán Quyền",
+            "cooldownTicks": 72,
+            "manaCost": 11,
+            "combo": {
+              "id": "phat_dong_a",
+              "step": 1,
+              "windowTicks": 180,
+              "multiplier": 2.4
+            },
+            "selfStatuses": [
+              {
+                "kind": "damage_reduction",
+                "durationTicks": 60,
+                "magnitude": 0.19
+              }
+            ],
+            "effect": {
+              "mode": "arc",
+              "damage": 48,
+              "range": 89,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.5
+            }
+          },
+          {
+            "id": "la_han_quyen",
+            "nameVi": "La Hán Quyền",
+            "cooldownTicks": 69,
+            "manaCost": 12,
+            "combo": {
+              "id": "phat_dong_a",
+              "step": 1,
+              "windowTicks": 180,
+              "multiplier": 2.4
+            },
+            "selfStatuses": [
+              {
+                "kind": "damage_reduction",
+                "durationTicks": 75,
+                "magnitude": 0.22999999999999998
+              }
+            ],
+            "effect": {
+              "mode": "arc",
+              "damage": 56,
+              "range": 93,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.5
+            }
+          },
+          {
+            "id": "la_han_quyen",
+            "nameVi": "La Hán Quyền",
+            "cooldownTicks": 66,
+            "manaCost": 13,
+            "combo": {
+              "id": "phat_dong_a",
+              "step": 1,
+              "windowTicks": 180,
+              "multiplier": 2.4
+            },
+            "selfStatuses": [
+              {
+                "kind": "damage_reduction",
+                "durationTicks": 90,
+                "magnitude": 0.27
+              }
+            ],
+            "effect": {
+              "mode": "arc",
+              "damage": 64,
+              "range": 97,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.5
+            }
+          }
+        ]
+      },
+      "vi_da_quyen": {
+        "id": "vi_da_quyen",
+        "schoolId": "thieu_lam",
+        "style": "Quyền",
+        "ultimate": false,
+        "descriptionVi": "Đấm phá thủ. Phát Động A bước 2 chỉ tiếp nối La Hán Quyền trên cùng địch.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "vi_da_quyen",
+            "nameVi": "Vi Đà Quyền",
+            "cooldownTicks": 90,
+            "manaCost": 12,
+            "combo": {
+              "id": "phat_dong_a",
+              "step": 2,
+              "windowTicks": 180,
+              "multiplier": 2.4
+            },
+            "effect": {
+              "mode": "arc",
+              "damage": 44,
+              "range": 68,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.5,
+              "statuses": [
+                {
+                  "kind": "defense_break",
+                  "durationTicks": 120,
+                  "magnitude": 12
+                }
+              ],
+              "originOffset": 189
+            }
+          },
+          {
+            "id": "vi_da_quyen",
+            "nameVi": "Vi Đà Quyền",
+            "cooldownTicks": 87,
+            "manaCost": 13,
+            "combo": {
+              "id": "phat_dong_a",
+              "step": 2,
+              "windowTicks": 180,
+              "multiplier": 2.4
+            },
+            "effect": {
+              "mode": "arc",
+              "damage": 52,
+              "range": 72,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.5,
+              "statuses": [
+                {
+                  "kind": "defense_break",
+                  "durationTicks": 135,
+                  "magnitude": 16
+                }
+              ],
+              "originOffset": 189
+            }
+          },
+          {
+            "id": "vi_da_quyen",
+            "nameVi": "Vi Đà Quyền",
+            "cooldownTicks": 84,
+            "manaCost": 14,
+            "combo": {
+              "id": "phat_dong_a",
+              "step": 2,
+              "windowTicks": 180,
+              "multiplier": 2.4
+            },
+            "effect": {
+              "mode": "arc",
+              "damage": 60,
+              "range": 76,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.5,
+              "statuses": [
+                {
+                  "kind": "defense_break",
+                  "durationTicks": 150,
+                  "magnitude": 20
+                }
+              ],
+              "originOffset": 189
+            }
+          },
+          {
+            "id": "vi_da_quyen",
+            "nameVi": "Vi Đà Quyền",
+            "cooldownTicks": 81,
+            "manaCost": 15,
+            "combo": {
+              "id": "phat_dong_a",
+              "step": 2,
+              "windowTicks": 180,
+              "multiplier": 2.4
+            },
+            "effect": {
+              "mode": "arc",
+              "damage": 68,
+              "range": 80,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.5,
+              "statuses": [
+                {
+                  "kind": "defense_break",
+                  "durationTicks": 165,
+                  "magnitude": 24
+                }
+              ],
+              "originOffset": 189
+            }
+          }
+        ]
+      },
+      "dai_luc_kim_cuong_chuong": {
+        "id": "dai_luc_kim_cuong_chuong",
+        "schoolId": "thieu_lam",
+        "style": "Quyền",
+        "ultimate": false,
+        "descriptionVi": "Chưởng chậm mạnh. Phát Động A: La Hán → Vi Đà → Đại Lực trên cùng địch trong 6s để cường hóa.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "dai_luc_kim_cuong_chuong",
+            "nameVi": "Đại Lực Kim Cương Chưởng",
+            "cooldownTicks": 150,
+            "manaCost": 20,
+            "combo": {
+              "id": "phat_dong_a",
+              "step": 3,
+              "windowTicks": 180,
+              "multiplier": 2.4
+            },
+            "effect": {
+              "mode": "arc",
+              "damage": 65,
+              "range": 78,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.6,
+              "windupTicks": 12
+            }
+          },
+          {
+            "id": "dai_luc_kim_cuong_chuong",
+            "nameVi": "Đại Lực Kim Cương Chưởng",
+            "cooldownTicks": 147,
+            "manaCost": 21,
+            "combo": {
+              "id": "phat_dong_a",
+              "step": 3,
+              "windowTicks": 180,
+              "multiplier": 2.55
+            },
+            "effect": {
+              "mode": "arc",
+              "damage": 73,
+              "range": 82,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.6,
+              "windupTicks": 12
+            }
+          },
+          {
+            "id": "dai_luc_kim_cuong_chuong",
+            "nameVi": "Đại Lực Kim Cương Chưởng",
+            "cooldownTicks": 144,
+            "manaCost": 22,
+            "combo": {
+              "id": "phat_dong_a",
+              "step": 3,
+              "windowTicks": 180,
+              "multiplier": 2.6999999999999997
+            },
+            "effect": {
+              "mode": "arc",
+              "damage": 81,
+              "range": 86,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.6,
+              "windupTicks": 12
+            }
+          },
+          {
+            "id": "dai_luc_kim_cuong_chuong",
+            "nameVi": "Đại Lực Kim Cương Chưởng",
+            "cooldownTicks": 141,
+            "manaCost": 23,
+            "combo": {
+              "id": "phat_dong_a",
+              "step": 3,
+              "windowTicks": 180,
+              "multiplier": 2.8499999999999996
+            },
+            "effect": {
+              "mode": "arc",
+              "damage": 89,
+              "range": 90,
+              "halfAngle": 1.0471975511965976,
+              "cleave": 0.6,
+              "windupTicks": 12
+            }
+          }
+        ]
+      },
+      "toan_phong_thoai": {
+        "id": "toan_phong_thoai",
+        "schoolId": "thieu_lam",
+        "style": "Quyền",
+        "ultimate": false,
+        "descriptionVi": "Lốc vàng bay thẳng xuyên địch, mỗi địch một lần. Phát Động B bước 1.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "toan_phong_thoai",
+            "nameVi": "Toàn Phong Thoái",
+            "cooldownTicks": 90,
+            "manaCost": 12,
+            "combo": {
+              "id": "phat_dong_b",
+              "step": 1,
+              "windowTicks": 180,
+              "multiplier": 2
+            },
+            "effect": {
+              "mode": "projectile",
+              "damage": 34,
+              "speed": 330,
+              "range": 234,
+              "radius": 28,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true
+            }
+          },
+          {
+            "id": "toan_phong_thoai",
+            "nameVi": "Toàn Phong Thoái",
+            "cooldownTicks": 87,
+            "manaCost": 13,
+            "combo": {
+              "id": "phat_dong_b",
+              "step": 1,
+              "windowTicks": 180,
+              "multiplier": 2
+            },
+            "effect": {
+              "mode": "projectile",
+              "damage": 42,
+              "speed": 330,
+              "range": 238,
+              "radius": 28,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true
+            }
+          },
+          {
+            "id": "toan_phong_thoai",
+            "nameVi": "Toàn Phong Thoái",
+            "cooldownTicks": 84,
+            "manaCost": 14,
+            "combo": {
+              "id": "phat_dong_b",
+              "step": 1,
+              "windowTicks": 180,
+              "multiplier": 2
+            },
+            "effect": {
+              "mode": "projectile",
+              "damage": 50,
+              "speed": 330,
+              "range": 242,
+              "radius": 28,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true
+            }
+          },
+          {
+            "id": "toan_phong_thoai",
+            "nameVi": "Toàn Phong Thoái",
+            "cooldownTicks": 81,
+            "manaCost": 15,
+            "combo": {
+              "id": "phat_dong_b",
+              "step": 1,
+              "windowTicks": 180,
+              "multiplier": 2
+            },
+            "effect": {
+              "mode": "projectile",
+              "damage": 58,
+              "speed": 330,
+              "range": 246,
+              "radius": 28,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true
+            }
+          }
+        ]
+      },
+      "hoanh_tao_cuoc": {
+        "id": "hoanh_tao_cuoc",
+        "schoolId": "thieu_lam",
+        "style": "Quyền",
+        "ultimate": false,
+        "descriptionVi": "Dậm chân tại chỗ, ụ đất chạy thẳng gây sát thương và choáng mọi địch trên đường. Phát Động B bước 2.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "hoanh_tao_cuoc",
+            "nameVi": "Ca Diệp Thoái",
+            "cooldownTicks": 105,
+            "manaCost": 14,
+            "combo": {
+              "id": "phat_dong_b",
+              "step": 2,
+              "windowTicks": 180,
+              "multiplier": 2
+            },
+            "effect": {
+              "windupTicks": 9,
+              "recoveryTicks": 6,
+              "mode": "projectile",
+              "damage": 42,
+              "speed": 360,
+              "range": 273,
+              "radius": 24,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "statuses": [
+                {
+                  "kind": "stun",
+                  "durationTicks": 36,
+                  "magnitude": 1
+                }
+              ]
+            }
+          },
+          {
+            "id": "hoanh_tao_cuoc",
+            "nameVi": "Ca Diệp Thoái",
+            "cooldownTicks": 102,
+            "manaCost": 15,
+            "combo": {
+              "id": "phat_dong_b",
+              "step": 2,
+              "windowTicks": 180,
+              "multiplier": 2
+            },
+            "effect": {
+              "windupTicks": 9,
+              "recoveryTicks": 6,
+              "mode": "projectile",
+              "damage": 50,
+              "speed": 360,
+              "range": 277,
+              "radius": 24,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "statuses": [
+                {
+                  "kind": "stun",
+                  "durationTicks": 51,
+                  "magnitude": 1
+                }
+              ]
+            }
+          },
+          {
+            "id": "hoanh_tao_cuoc",
+            "nameVi": "Ca Diệp Thoái",
+            "cooldownTicks": 99,
+            "manaCost": 16,
+            "combo": {
+              "id": "phat_dong_b",
+              "step": 2,
+              "windowTicks": 180,
+              "multiplier": 2
+            },
+            "effect": {
+              "windupTicks": 9,
+              "recoveryTicks": 6,
+              "mode": "projectile",
+              "damage": 58,
+              "speed": 360,
+              "range": 281,
+              "radius": 24,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "statuses": [
+                {
+                  "kind": "stun",
+                  "durationTicks": 66,
+                  "magnitude": 1
+                }
+              ]
+            }
+          },
+          {
+            "id": "hoanh_tao_cuoc",
+            "nameVi": "Ca Diệp Thoái",
+            "cooldownTicks": 96,
+            "manaCost": 17,
+            "combo": {
+              "id": "phat_dong_b",
+              "step": 2,
+              "windowTicks": 180,
+              "multiplier": 2
+            },
+            "effect": {
+              "windupTicks": 9,
+              "recoveryTicks": 6,
+              "mode": "projectile",
+              "damage": 66,
+              "speed": 360,
+              "range": 285,
+              "radius": 24,
+              "count": 1,
+              "spacingTicks": 0,
+              "splashRadius": 0,
+              "burnDamage": 0,
+              "burnTicks": 0,
+              "piercing": true,
+              "statuses": [
+                {
+                  "kind": "stun",
+                  "durationTicks": 81,
+                  "magnitude": 1
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "vo_anh_cuoc": {
+        "id": "vo_anh_cuoc",
+        "schoolId": "thieu_lam",
+        "style": "Quyền",
+        "ultimate": false,
+        "descriptionVi": "Hai đợt ba cước kình song song phát lần lượt trên/giữa/dưới. Phát Động B: Toàn Phong → Ca Diệp → Vô Ảnh trong 6s; tiêu thụ một lần mỗi địch.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "vo_anh_cuoc",
+            "nameVi": "Vô Ảnh Cước",
+            "cooldownTicks": 180,
+            "manaCost": 24,
+            "combo": {
+              "id": "phat_dong_b",
+              "step": 3,
+              "windowTicks": 180,
+              "multiplier": 2
+            },
+            "effect": {
+              "mode": "multi_hit",
+              "range": 260,
+              "damage": 0,
+              "hits": 2,
+              "spacingTicks": 18,
+              "finisherDamage": 0,
+              "finisherRange": 76,
+              "halfAngle": 1.2566370614359172,
+              "projectileBurst": {
+                "laneOffsets": [
+                  -18,
+                  0,
+                  18
+                ],
+                "mode": "projectile",
+                "damage": 17,
+                "speed": 390,
+                "range": 260,
+                "radius": 14,
+                "count": 3,
+                "spacingTicks": 3,
+                "splashRadius": 0,
+                "burnDamage": 0,
+                "burnTicks": 0,
+                "piercing": true,
+                "useFacing": true
+              },
+              "comboBurstOnly": true
+            }
+          },
+          {
+            "id": "vo_anh_cuoc",
+            "nameVi": "Vô Ảnh Cước",
+            "cooldownTicks": 177,
+            "manaCost": 25,
+            "combo": {
+              "id": "phat_dong_b",
+              "step": 3,
+              "windowTicks": 180,
+              "multiplier": 2.15
+            },
+            "effect": {
+              "mode": "multi_hit",
+              "range": 264,
+              "damage": 0,
+              "hits": 2,
+              "spacingTicks": 18,
+              "finisherDamage": 0,
+              "finisherRange": 76,
+              "halfAngle": 1.2566370614359172,
+              "projectileBurst": {
+                "laneOffsets": [
+                  -18,
+                  0,
+                  18
+                ],
+                "mode": "projectile",
+                "damage": 20,
+                "speed": 390,
+                "range": 264,
+                "radius": 14,
+                "count": 3,
+                "spacingTicks": 3,
+                "splashRadius": 0,
+                "burnDamage": 0,
+                "burnTicks": 0,
+                "piercing": true,
+                "useFacing": true
+              },
+              "comboBurstOnly": true
+            }
+          },
+          {
+            "id": "vo_anh_cuoc",
+            "nameVi": "Vô Ảnh Cước",
+            "cooldownTicks": 174,
+            "manaCost": 26,
+            "combo": {
+              "id": "phat_dong_b",
+              "step": 3,
+              "windowTicks": 180,
+              "multiplier": 2.3
+            },
+            "effect": {
+              "mode": "multi_hit",
+              "range": 268,
+              "damage": 0,
+              "hits": 2,
+              "spacingTicks": 18,
+              "finisherDamage": 0,
+              "finisherRange": 76,
+              "halfAngle": 1.2566370614359172,
+              "projectileBurst": {
+                "laneOffsets": [
+                  -18,
+                  0,
+                  18
+                ],
+                "mode": "projectile",
+                "damage": 23,
+                "speed": 390,
+                "range": 268,
+                "radius": 14,
+                "count": 3,
+                "spacingTicks": 3,
+                "splashRadius": 0,
+                "burnDamage": 0,
+                "burnTicks": 0,
+                "piercing": true,
+                "useFacing": true
+              },
+              "comboBurstOnly": true
+            }
+          },
+          {
+            "id": "vo_anh_cuoc",
+            "nameVi": "Vô Ảnh Cước",
+            "cooldownTicks": 171,
+            "manaCost": 27,
+            "combo": {
+              "id": "phat_dong_b",
+              "step": 3,
+              "windowTicks": 180,
+              "multiplier": 2.45
+            },
+            "effect": {
+              "mode": "multi_hit",
+              "range": 272,
+              "damage": 0,
+              "hits": 2,
+              "spacingTicks": 18,
+              "finisherDamage": 0,
+              "finisherRange": 76,
+              "halfAngle": 1.2566370614359172,
+              "projectileBurst": {
+                "laneOffsets": [
+                  -18,
+                  0,
+                  18
+                ],
+                "mode": "projectile",
+                "damage": 26,
+                "speed": 390,
+                "range": 272,
+                "radius": 14,
+                "count": 3,
+                "spacingTicks": 3,
+                "splashRadius": 0,
+                "burnDamage": 0,
+                "burnTicks": 0,
+                "piercing": true,
+                "useFacing": true
+              },
+              "comboBurstOnly": true
+            }
+          }
+        ]
+      },
+      "kim_cang_bat_hoai": {
+        "id": "kim_cang_bat_hoai",
+        "schoolId": "thieu_lam",
+        "style": "Quyền",
+        "ultimate": false,
+        "descriptionVi": "Tạm giảm sát thương, kháng choáng và cưỡng bức di chuyển; vẫn nhận sát thương.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "kim_cang_bat_hoai",
+            "nameVi": "Kim Cang Bất Hoại",
+            "cooldownTicks": 300,
+            "manaCost": 20,
+            "selfStatuses": [
+              {
+                "kind": "damage_reduction",
+                "durationTicks": 120,
+                "magnitude": 0.4
+              },
+              {
+                "kind": "interrupt_resist",
+                "durationTicks": 120,
+                "magnitude": 1
+              }
+            ],
+            "effect": {
+              "mode": "buff",
+              "durationTicks": 120,
+              "critChance": 0,
+              "critMultiplier": 0
+            }
+          },
+          {
+            "id": "kim_cang_bat_hoai",
+            "nameVi": "Kim Cang Bất Hoại",
+            "cooldownTicks": 297,
+            "manaCost": 21,
+            "selfStatuses": [
+              {
+                "kind": "damage_reduction",
+                "durationTicks": 135,
+                "magnitude": 0.44
+              },
+              {
+                "kind": "interrupt_resist",
+                "durationTicks": 135,
+                "magnitude": 1
+              }
+            ],
+            "effect": {
+              "mode": "buff",
+              "durationTicks": 120,
+              "critChance": 0,
+              "critMultiplier": 0
+            }
+          },
+          {
+            "id": "kim_cang_bat_hoai",
+            "nameVi": "Kim Cang Bất Hoại",
+            "cooldownTicks": 294,
+            "manaCost": 22,
+            "selfStatuses": [
+              {
+                "kind": "damage_reduction",
+                "durationTicks": 150,
+                "magnitude": 0.48000000000000004
+              },
+              {
+                "kind": "interrupt_resist",
+                "durationTicks": 150,
+                "magnitude": 1
+              }
+            ],
+            "effect": {
+              "mode": "buff",
+              "durationTicks": 120,
+              "critChance": 0,
+              "critMultiplier": 0
+            }
+          },
+          {
+            "id": "kim_cang_bat_hoai",
+            "nameVi": "Kim Cang Bất Hoại",
+            "cooldownTicks": 291,
+            "manaCost": 23,
+            "selfStatuses": [
+              {
+                "kind": "damage_reduction",
+                "durationTicks": 165,
+                "magnitude": 0.52
+              },
+              {
+                "kind": "interrupt_resist",
+                "durationTicks": 165,
+                "magnitude": 1
+              }
+            ],
+            "effect": {
+              "mode": "buff",
+              "durationTicks": 120,
+              "critChance": 0,
+              "critMultiplier": 0
+            }
+          }
+        ]
+      },
+      "nhu_lai_niet_ban": {
+        "id": "nhu_lai_niet_ban",
+        "schoolId": "thieu_lam",
+        "style": "Quyền",
+        "ultimate": true,
+        "descriptionVi": "Tuyệt kỹ: Phật sau lưng, thiên chưởng diện rộng, lưu chữ Phạn gây sát thương một lần mỗi địch bước vào. Bản thân giữ thủ thế.",
+        "levelGates": [
+          6,
+          10,
+          14
+        ],
+        "ranks": [
+          {
+            "id": "nhu_lai_niet_ban",
+            "nameVi": "Như Lai Niết Bàn",
+            "cooldownTicks": 540,
+            "manaCost": 40,
+            "selfStatuses": [
+              {
+                "kind": "damage_reduction",
+                "durationTicks": 150,
+                "magnitude": 0.25
+              }
+            ],
+            "effect": {
+              "residualArea": {
+                "mode": "area",
+                "durationTicks": 90,
+                "tickInterval": 1,
+                "radius": 150,
+                "damage": 36,
+                "oncePerTarget": true
+              },
+              "mode": "arc",
+              "damage": 120,
+              "range": 210,
+              "halfAngle": 3.141592653589793,
+              "cleave": 1,
+              "windupTicks": 15
+            }
+          },
+          {
+            "id": "nhu_lai_niet_ban",
+            "nameVi": "Như Lai Niết Bàn",
+            "cooldownTicks": 528,
+            "manaCost": 43,
+            "selfStatuses": [
+              {
+                "kind": "damage_reduction",
+                "durationTicks": 165,
+                "magnitude": 0.29
+              }
+            ],
+            "effect": {
+              "residualArea": {
+                "mode": "area",
+                "durationTicks": 90,
+                "tickInterval": 1,
+                "radius": 150,
+                "damage": 36,
+                "oncePerTarget": true
+              },
+              "mode": "arc",
+              "damage": 140,
+              "range": 220,
+              "halfAngle": 3.141592653589793,
+              "cleave": 1,
+              "windupTicks": 15
+            }
+          },
+          {
+            "id": "nhu_lai_niet_ban",
+            "nameVi": "Như Lai Niết Bàn",
+            "cooldownTicks": 516,
+            "manaCost": 46,
+            "selfStatuses": [
+              {
+                "kind": "damage_reduction",
+                "durationTicks": 180,
+                "magnitude": 0.33
+              }
+            ],
+            "effect": {
+              "residualArea": {
+                "mode": "area",
+                "durationTicks": 90,
+                "tickInterval": 1,
+                "radius": 150,
+                "damage": 36,
+                "oncePerTarget": true
+              },
+              "mode": "arc",
+              "damage": 160,
+              "range": 230,
+              "halfAngle": 3.141592653589793,
+              "cleave": 1,
+              "windupTicks": 15
+            }
+          }
+        ]
+      },
+      "tru_ta": {
+        "id": "tru_ta",
+        "schoolId": "thieu_lam",
+        "style": "Đao",
+        "ultimate": false,
+        "descriptionVi": "Chém rộng phía trước và làm chậm địch trúng đòn.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "tru_ta",
+            "nameVi": "Tru Tà",
+            "cooldownTicks": 90,
+            "manaCost": 12,
+            "effect": {
+              "mode": "arc",
+              "damage": 42,
+              "range": 180,
+              "halfAngle": 2.0420352248333655,
+              "cleave": 0.85,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 90,
+                  "magnitude": 0.3
+                }
+              ]
+            }
+          },
+          {
+            "id": "tru_ta",
+            "nameVi": "Tru Tà",
+            "cooldownTicks": 87,
+            "manaCost": 13,
+            "effect": {
+              "mode": "arc",
+              "damage": 50,
+              "range": 184,
+              "halfAngle": 2.0420352248333655,
+              "cleave": 0.85,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 105,
+                  "magnitude": 0.33999999999999997
+                }
+              ]
+            }
+          },
+          {
+            "id": "tru_ta",
+            "nameVi": "Tru Tà",
+            "cooldownTicks": 84,
+            "manaCost": 14,
+            "effect": {
+              "mode": "arc",
+              "damage": 58,
+              "range": 188,
+              "halfAngle": 2.0420352248333655,
+              "cleave": 0.85,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 120,
+                  "magnitude": 0.38
+                }
+              ]
+            }
+          },
+          {
+            "id": "tru_ta",
+            "nameVi": "Tru Tà",
+            "cooldownTicks": 81,
+            "manaCost": 15,
+            "effect": {
+              "mode": "arc",
+              "damage": 66,
+              "range": 192,
+              "halfAngle": 2.0420352248333655,
+              "cleave": 0.85,
+              "statuses": [
+                {
+                  "kind": "slow",
+                  "durationTicks": 135,
+                  "magnitude": 0.42
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "kim_quang_ho_tran": {
+        "id": "kim_quang_ho_tran",
+        "schoolId": "thieu_lam",
+        "style": "Đao",
+        "ultimate": false,
+        "descriptionVi": "Hào quang đi theo người thi triển, tăng phòng thủ cho đồng đội sống trong tầm; không cộng dồn.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "kim_quang_ho_tran",
+            "nameVi": "Kim Quang Hộ Trận",
+            "cooldownTicks": 330,
+            "manaCost": 24,
+            "effect": {
+              "mode": "support",
+              "radius": 145,
+              "statuses": [
+                {
+                  "kind": "defense_buff",
+                  "durationTicks": 16,
+                  "magnitude": 22
+                }
+              ],
+              "durationTicks": 180,
+              "tickInterval": 15
+            }
+          },
+          {
+            "id": "kim_quang_ho_tran",
+            "nameVi": "Kim Quang Hộ Trận",
+            "cooldownTicks": 327,
+            "manaCost": 25,
+            "effect": {
+              "mode": "support",
+              "radius": 155,
+              "statuses": [
+                {
+                  "kind": "defense_buff",
+                  "durationTicks": 16,
+                  "magnitude": 27
+                }
+              ],
+              "durationTicks": 210,
+              "tickInterval": 15
+            }
+          },
+          {
+            "id": "kim_quang_ho_tran",
+            "nameVi": "Kim Quang Hộ Trận",
+            "cooldownTicks": 324,
+            "manaCost": 26,
+            "effect": {
+              "mode": "support",
+              "radius": 165,
+              "statuses": [
+                {
+                  "kind": "defense_buff",
+                  "durationTicks": 16,
+                  "magnitude": 32
+                }
+              ],
+              "durationTicks": 240,
+              "tickInterval": 15
+            }
+          },
+          {
+            "id": "kim_quang_ho_tran",
+            "nameVi": "Kim Quang Hộ Trận",
+            "cooldownTicks": 321,
+            "manaCost": 27,
+            "effect": {
+              "mode": "support",
+              "radius": 175,
+              "statuses": [
+                {
+                  "kind": "defense_buff",
+                  "durationTicks": 16,
+                  "magnitude": 37
+                }
+              ],
+              "durationTicks": 270,
+              "tickInterval": 15
+            }
+          }
+        ]
+      },
+      "tam_gioi_quy_thien": {
+        "id": "tam_gioi_quy_thien",
+        "schoolId": "thieu_lam",
+        "style": "Đao",
+        "ultimate": false,
+        "descriptionVi": "Sư tử hống quanh người gây sát thương, giảm giáp và làm chậm diện rộng.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "tam_gioi_quy_thien",
+            "nameVi": "Sư Tử Hống",
+            "cooldownTicks": 135,
+            "manaCost": 18,
+            "effect": {
+              "mode": "arc",
+              "damage": 62,
+              "range": 210,
+              "halfAngle": 3.141592653589793,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "defense_break",
+                  "durationTicks": 180,
+                  "magnitude": 20
+                },
+                {
+                  "kind": "slow",
+                  "durationTicks": 90,
+                  "magnitude": 0.35
+                }
+              ],
+              "windupTicks": 6,
+              "durationTicks": 30
+            }
+          },
+          {
+            "id": "tam_gioi_quy_thien",
+            "nameVi": "Sư Tử Hống",
+            "cooldownTicks": 132,
+            "manaCost": 19,
+            "effect": {
+              "mode": "arc",
+              "damage": 70,
+              "range": 214,
+              "halfAngle": 3.141592653589793,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "defense_break",
+                  "durationTicks": 195,
+                  "magnitude": 24
+                },
+                {
+                  "kind": "slow",
+                  "durationTicks": 105,
+                  "magnitude": 0.38999999999999996
+                }
+              ],
+              "windupTicks": 6,
+              "durationTicks": 30
+            }
+          },
+          {
+            "id": "tam_gioi_quy_thien",
+            "nameVi": "Sư Tử Hống",
+            "cooldownTicks": 129,
+            "manaCost": 20,
+            "effect": {
+              "mode": "arc",
+              "damage": 78,
+              "range": 218,
+              "halfAngle": 3.141592653589793,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "defense_break",
+                  "durationTicks": 210,
+                  "magnitude": 28
+                },
+                {
+                  "kind": "slow",
+                  "durationTicks": 120,
+                  "magnitude": 0.43
+                }
+              ],
+              "windupTicks": 6,
+              "durationTicks": 30
+            }
+          },
+          {
+            "id": "tam_gioi_quy_thien",
+            "nameVi": "Sư Tử Hống",
+            "cooldownTicks": 126,
+            "manaCost": 21,
+            "effect": {
+              "mode": "arc",
+              "damage": 86,
+              "range": 222,
+              "halfAngle": 3.141592653589793,
+              "cleave": 1,
+              "statuses": [
+                {
+                  "kind": "defense_break",
+                  "durationTicks": 225,
+                  "magnitude": 32
+                },
+                {
+                  "kind": "slow",
+                  "durationTicks": 135,
+                  "magnitude": 0.47
+                }
+              ],
+              "windupTicks": 6,
+              "durationTicks": 30
+            }
+          }
+        ]
+      },
+      "bat_dong_minh_vuong": {
+        "id": "bat_dong_minh_vuong",
+        "schoolId": "thieu_lam",
+        "style": "Đao",
+        "ultimate": false,
+        "descriptionVi": "Một nhịp hồi sinh lực cho bản thân và đồng đội sống trong tầm. Không hồi tượng, không hồi sinh.",
+        "levelGates": [
+          1,
+          3,
+          5,
+          7
+        ],
+        "ranks": [
+          {
+            "id": "bat_dong_minh_vuong",
+            "nameVi": "Bất Động Minh Vương",
+            "cooldownTicks": 300,
+            "manaCost": 26,
+            "effect": {
+              "mode": "support",
+              "radius": 140,
+              "heal": 42,
+              "durationTicks": 1,
+              "tickInterval": 1
+            }
+          },
+          {
+            "id": "bat_dong_minh_vuong",
+            "nameVi": "Bất Động Minh Vương",
+            "cooldownTicks": 297,
+            "manaCost": 27,
+            "effect": {
+              "mode": "support",
+              "radius": 150,
+              "heal": 54,
+              "durationTicks": 1,
+              "tickInterval": 1
+            }
+          },
+          {
+            "id": "bat_dong_minh_vuong",
+            "nameVi": "Bất Động Minh Vương",
+            "cooldownTicks": 294,
+            "manaCost": 28,
+            "effect": {
+              "mode": "support",
+              "radius": 160,
+              "heal": 66,
+              "durationTicks": 1,
+              "tickInterval": 1
+            }
+          },
+          {
+            "id": "bat_dong_minh_vuong",
+            "nameVi": "Bất Động Minh Vương",
+            "cooldownTicks": 291,
+            "manaCost": 29,
+            "effect": {
+              "mode": "support",
+              "radius": 170,
+              "heal": 78,
+              "durationTicks": 1,
+              "tickInterval": 1
+            }
+          }
+        ]
+      },
+      "nhu_lai_thien_diep": {
+        "id": "nhu_lai_thien_diep",
+        "schoolId": "thieu_lam",
+        "style": "Đao",
+        "ultimate": true,
+        "descriptionVi": "Tuyệt kỹ: hiện Phật quang sau lưng trong 15 giây, liên tục phóng đao khí về phía mọi kẻ địch trong tầm. Tăng phòng thủ cho đồng đội gần lúc thi triển.",
+        "levelGates": [
+          6,
+          10,
+          14
+        ],
+        "ranks": [
+          {
+            "id": "nhu_lai_thien_diep",
+            "nameVi": "Như Lai Thiên Diệp",
+            "cooldownTicks": 540,
+            "manaCost": 42,
+            "allies": {
+              "radius": 170,
+              "statuses": [
+                {
+                  "kind": "defense_buff",
+                  "durationTicks": 180,
+                  "magnitude": 30
+                }
+              ]
+            },
+            "effect": {
+              "mode": "area",
+              "durationTicks": 450,
+              "tickInterval": 30,
+              "radius": 360,
+              "damage": 100,
+              "followOwner": true,
+              "volley": {
+                "speed": 300,
+                "projectileRadius": 12
+              }
+            }
+          },
+          {
+            "id": "nhu_lai_thien_diep",
+            "nameVi": "Như Lai Thiên Diệp",
+            "cooldownTicks": 528,
+            "manaCost": 45,
+            "allies": {
+              "radius": 180,
+              "statuses": [
+                {
+                  "kind": "defense_buff",
+                  "durationTicks": 210,
+                  "magnitude": 36
+                }
+              ]
+            },
+            "effect": {
+              "mode": "area",
+              "durationTicks": 450,
+              "tickInterval": 30,
+              "radius": 370,
+              "damage": 120,
+              "followOwner": true,
+              "volley": {
+                "speed": 300,
+                "projectileRadius": 12
+              }
+            }
+          },
+          {
+            "id": "nhu_lai_thien_diep",
+            "nameVi": "Như Lai Thiên Diệp",
+            "cooldownTicks": 516,
+            "manaCost": 48,
+            "allies": {
+              "radius": 190,
+              "statuses": [
+                {
+                  "kind": "defense_buff",
+                  "durationTicks": 240,
+                  "magnitude": 42
+                }
+              ]
+            },
+            "effect": {
+              "mode": "area",
+              "durationTicks": 450,
+              "tickInterval": 30,
+              "radius": 380,
+              "damage": 140,
+              "followOwner": true,
+              "volley": {
+                "speed": 300,
+                "projectileRadius": 12
+              }
+            }
+          }
+        ]
+      }
+    },
+    "schools": {
+      "cai_bang": {
+        "passiveId": "tieu_dieu_cong",
+        "base": {
+          "maxHp": 160,
+          "maxMana": 100,
+          "attackPower": 28,
+          "defense": 0,
+          "attackSpeed": 1,
+          "movementSpeed": 160,
+          "critChance": 0.1,
+          "critMultiplier": 1.5,
+          "manaRegen": 6,
+          "cooldownReduction": 0,
+          "hpRegen": 0
+        },
+        "growth": {
+          "maxHp": 8,
+          "maxMana": 2,
+          "attackPower": 2,
+          "defense": 0.15
+        },
+        "innate": {
+          "attackPower": 0.3,
+          "critChance": 0.002,
+          "critMultiplier": 0.005
+        },
+        "surplus": {
+          "attackPower": 1.2,
+          "critChance": 0.003,
+          "critMultiplier": 0.01
+        },
+        "basicIds": [
+          "cai_bang_bong",
+          "cai_bang_chuong"
+        ]
+      },
+      "thien_son": {
+        "passiveId": "bac_minh_than_cong",
+        "basicIds": [
+          "thien_son_phien",
+          "thien_son_dao"
+        ],
+        "base": {
+          "maxHp": 135,
+          "maxMana": 100,
+          "attackPower": 24,
+          "defense": 0,
+          "attackSpeed": 1.1,
+          "movementSpeed": 180,
+          "critChance": 0.14,
+          "critMultiplier": 1.5,
+          "manaRegen": 6,
+          "cooldownReduction": 0,
+          "hpRegen": 0
+        },
+        "growth": {
+          "maxHp": 6,
+          "maxMana": 2,
+          "attackPower": 1.6,
+          "defense": 0.1
+        },
+        "innate": {
+          "movementSpeed": 1.1,
+          "attackSpeed": 0.012,
+          "critChance": 0.003
+        },
+        "surplus": {
+          "movementSpeed": 1.3,
+          "attackSpeed": 0.012,
+          "critChance": 0.003
+        }
+      },
+      "vo_dang": {
+        "passiveId": "thai_cuc_tam_phap",
+        "basicIds": [
+          "vo_dang_quyen",
+          "vo_dang_kiem"
+        ],
+        "base": {
+          "maxHp": 150,
+          "maxMana": 180,
+          "attackPower": 25,
+          "defense": 4,
+          "attackSpeed": 1,
+          "movementSpeed": 160,
+          "critChance": 0.08,
+          "critMultiplier": 1.5,
+          "manaRegen": 9,
+          "cooldownReduction": 0.08,
+          "hpRegen": 0
+        },
+        "growth": {
+          "maxHp": 7,
+          "maxMana": 3,
+          "attackPower": 1.7,
+          "defense": 0.2
+        },
+        "innate": {
+          "maxMana": 3,
+          "manaRegen": 0.15,
+          "cooldownReduction": 0.004
+        },
+        "surplus": {
+          "maxMana": 4,
+          "manaRegen": 0.25,
+          "cooldownReduction": 0.003
+        }
+      },
+      "thieu_lam": {
+        "passiveId": "dich_can_kinh",
+        "basicIds": [
+          "thieu_lam_quyen",
+          "thieu_lam_dao"
+        ],
+        "base": {
+          "maxHp": 220,
+          "maxMana": 110,
+          "attackPower": 30,
+          "defense": 14,
+          "attackSpeed": 1,
+          "movementSpeed": 148,
+          "critChance": 0.06,
+          "critMultiplier": 1.5,
+          "manaRegen": 6,
+          "cooldownReduction": 0,
+          "hpRegen": 1.2
+        },
+        "growth": {
+          "maxHp": 10,
+          "maxMana": 2,
+          "attackPower": 1.6,
+          "defense": 0.4
+        },
+        "innate": {
+          "maxHp": 4,
+          "defense": 0.5,
+          "hpRegen": 0.12
+        },
+        "surplus": {
+          "maxHp": 6,
+          "defense": 0.6,
+          "hpRegen": 0.08
+        }
+      }
+    },
+    "maxUltimates": 1,
+    "maxCritChance": 0.75,
+    "maxCooldownReduction": 0.4,
+    "defaultBranches": {
+      "cai_bang_bong": {
+        "schoolId": "cai_bang",
+        "style": "Bổng",
+        "skillIds": [
+          "hoanh_tao_bong",
+          "pha_giap_bong",
+          "cam_long_cong",
+          "truy_phong_bong"
+        ]
+      },
+      "cai_bang_chuong": {
+        "schoolId": "cai_bang",
+        "style": "Chưởng",
+        "skillIds": [
+          "hoa_van_chuong",
+          "cuong_long_loan_vu",
+          "phi_long_tai_thien",
+          "khang_long_huu_hoi"
+        ]
+      },
+      "thien_son_phien": {
+        "schoolId": "thien_son",
+        "style": "Phiến",
+        "skillIds": [
+          "lien_hoa_phien",
+          "luc_duong_chuong",
+          "luu_phong_bo",
+          "chiet_mai_thu"
+        ]
+      },
+      "thien_son_dao": {
+        "schoolId": "thien_son",
+        "style": "Đao",
+        "skillIds": [
+          "phi_anh_tram",
+          "truy_hon_dao",
+          "phong_anh_hoan_vi",
+          "liet_phong_dao"
+        ]
+      },
+      "vo_dang_quyen": {
+        "schoolId": "vo_dang",
+        "style": "Quyền",
+        "skillIds": [
+          "luong_nghi_thu",
+          "huyen_am_chuong",
+          "duong_khi_kich",
+          "thai_cuc_than_cong"
+        ]
+      },
+      "vo_dang_kiem": {
+        "schoolId": "vo_dang",
+        "style": "Kiếm",
+        "skillIds": [
+          "that_tinh_kiem",
+          "nhan_kiem_hop_nhat",
+          "bat_quai_kiem_tran",
+          "toa_sat_bac_do"
+        ]
+      },
+      "thieu_lam_quyen": {
+        "schoolId": "thieu_lam",
+        "style": "Quyền",
+        "skillIds": [
+          "la_han_quyen",
+          "vi_da_quyen",
+          "dai_luc_kim_cuong_chuong",
+          "toan_phong_thoai"
+        ]
+      },
+      "thieu_lam_dao": {
+        "schoolId": "thieu_lam",
+        "style": "Đao",
+        "skillIds": [
+          "tru_ta",
+          "kim_quang_ho_tran",
+          "tam_gioi_quy_thien",
+          "bat_dong_minh_vuong"
+        ]
+      }
+    }
+  }
+}

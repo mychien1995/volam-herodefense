@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 import manifest from './approved-art.generated.json';
 import renovatedSkills from './renovation-skills.generated.json';
+import allSkills from './renovation-actions.generated.json';
+import { renovationActionsEnabled } from './renovation-actions.js';
 import { createRuntimeArtGallery } from './runtime-art-gallery.js';
 
 type Mode = 'current' | 'candidate';
@@ -10,6 +12,7 @@ type ReviewAsset = {
   candidateUrl: string;
   density: number;
   renovated?: boolean;
+  atlasCandidateUrl?: string;
 };
 interface Binding {
   key: string;
@@ -30,6 +33,9 @@ const enabled = () => {
 };
 const byUrl = new Map(manifest.assets.map((a) => [a.url, a]));
 const renovatedByUrl = new Map(renovatedSkills.assets.map((a) => [a.url, a]));
+const allByUrl = new Map(
+  (allSkills.assets as ReviewAsset[]).map((a) => [a.url, a]),
+);
 
 function resampleFrame(frame: Phaser.Textures.Frame, density: number) {
   frame.cutX *= density;
@@ -56,10 +62,11 @@ export function productionArtBindings(scene: Phaser.Scene) {
   }));
 }
 
-/** The normal client requests only the approved PNG for each replaced sheet.
+/** The normal client requests only the selected PNG for each replaced sheet.
  * The comparison loads both sources while sharing the same atlas metadata. */
 export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
   const review = enabled();
+  const complete = renovationActionsEnabled();
   const renovate =
     !review &&
     new URLSearchParams(location.search).get('renovationSkills') !== 'old';
@@ -73,21 +80,38 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
     _loader: unknown,
     file: Phaser.Loader.File,
   ) => {
-    if (renovate && type === 'json' && typeof file.url === 'string') {
-      const path = new URL(file.url, location.href).pathname;
-      const next = (renovatedSkills.atlases as Record<string, string>)[path];
-      if (next) file.url = next;
+    if (renovate && type === 'json') {
+      const path =
+        typeof file.url === 'string'
+          ? new URL(file.url, location.href).pathname
+          : '';
+      const next =
+        (complete
+          ? ((allSkills.inlineAtlases as Record<string, string>)[key] ??
+            selected.get(key)?.atlasCandidateUrl ??
+            (allSkills.atlases as Record<string, string>)[path])
+          : undefined) ??
+        (renovatedSkills.atlases as Record<string, string>)[path];
+      if (next) {
+        file.url = next;
+        if (file.state === Phaser.Loader.FILE_POPULATED) {
+          file.data = undefined;
+          file.state = Phaser.Loader.FILE_PENDING;
+        }
+      }
     }
     if (
       type !== 'image' ||
       key.startsWith('review-candidate:') ||
-      key.startsWith('co_mo_original_fx')
+      (key.startsWith('co_mo_original_fx') && !complete)
     )
       return;
     if (typeof file.url !== 'string') return;
     const path = new URL(file.url, location.href).pathname;
     const entry =
-      (renovate ? renovatedByUrl.get(path) : undefined) ?? byUrl.get(path);
+      (complete ? allByUrl.get(path) : undefined) ??
+      (renovate ? renovatedByUrl.get(path) : undefined) ??
+      byUrl.get(path);
     if (!entry) return;
     if (!review) {
       file.url = entry.candidateUrl;

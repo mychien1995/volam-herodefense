@@ -149,6 +149,7 @@ export class VuongArt {
         'action',
         v.fx,
         v.fy,
+        a?.skill,
       );
       return;
     } else if (v.pose === 'hurt') pose = 'hurt';
@@ -187,6 +188,7 @@ export class VuongArt {
       pose === 'idle' ? 'idle' : pose.startsWith('walk_') ? 'walk' : 'action',
       v.fx,
       v.fy,
+      a?.skill,
     );
   }
   private cue(v: VuongView, e: VuongView['cues'][number], now: number) {

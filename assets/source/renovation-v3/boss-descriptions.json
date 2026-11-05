@@ -1,0 +1,1458 @@
+{
+  "bacCaiDefinition": {
+    "entry": {
+      "x": 1120,
+      "y": 340
+    },
+    "center": {
+      "x": 800,
+      "y": 616
+    },
+    "cloneRadius": {
+      "x": 265,
+      "y": 165
+    },
+    "hp": 18000,
+    "hpPerAdditionalPlayer": 0.65,
+    "defense": 35,
+    "speed": 125,
+    "radius": 20,
+    "actionGapMs": 650,
+    "basicGapMs": 850,
+    "specialCooldownMs": 9000,
+    "restMs": 10000,
+    "damage": {
+      "staff": 32,
+      "palms": 38,
+      "beam": 60,
+      "dogs": 18,
+      "clones": 0,
+      "vortex": 65,
+      "tether": 8,
+      "field": 70,
+      "spiral": 32,
+      "cloneExplosion": 80
+    },
+    "staff": {
+      "range": 86,
+      "dash": 90,
+      "durationMs": 1050,
+      "cadenceMs": 350,
+      "halfAngle": 1.4
+    },
+    "palms": {
+      "speed": 420,
+      "range": 720,
+      "radius": 20,
+      "releaseMs": 250,
+      "recoveryMs": 700
+    },
+    "beam": {
+      "length": 768,
+      "radius": 22,
+      "warningMs": 350,
+      "activeMs": 440,
+      "recoveryMs": 700
+    },
+    "dogs": {
+      "hp": 260,
+      "speed": 135,
+      "radius": 14,
+      "range": 30,
+      "cadenceMs": 1000,
+      "lifetimeMs": 45000,
+      "corpseMs": 900,
+      "releaseMs": 400,
+      "recoveryMs": 850
+    },
+    "clones": {
+      "splitMs": 1500,
+      "guessMs": 5000,
+      "moveMs": 1400,
+      "staggerMs": 120,
+      "settleMs": 340,
+      "pairs": [
+        [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            4,
+            7
+          ]
+        ],
+        [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            6
+          ]
+        ],
+        [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ]
+        ],
+        [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            4,
+            7
+          ]
+        ]
+      ]
+    },
+    "vortex": {
+      "windupMs": 850,
+      "activeMs": 3900,
+      "recoveryMs": 1050,
+      "cloneCount": 8,
+      "radius": 72,
+      "moveSpeed": 145,
+      "minLeg": 120,
+      "cadenceMs": 500
+    },
+    "tether": {
+      "pullDistance": 80,
+      "breakDistance": 340,
+      "cadenceMs": 500,
+      "lifetimeMs": 12000,
+      "releaseMs": 350,
+      "recoveryMs": 750
+    },
+    "field": {
+      "halfSize": 180,
+      "halfHeight": 110,
+      "lineWidth": 28,
+      "impactMs": 360,
+      "recoveryMs": 780,
+      "activeMs": 750
+    },
+    "spiral": {
+      "dashMs": 280,
+      "releaseMs": 400,
+      "recoveryMs": 650,
+      "flightMs": 4307.692307692308,
+      "radius": 310,
+      "startRadius": 20,
+      "yScale": 0.7,
+      "turns": 3,
+      "hitRadius": 26,
+      "cadenceMs": 500
+    },
+    "preferences": {
+      "changeMs": 4000,
+      "voteEveryMs": 28000,
+      "voteMs": 6000,
+      "zoneSize": 100,
+      "zoneHeight": 50,
+      "sleepMs": 10000,
+      "drinkMs": 1800,
+      "healFraction": 0.1,
+      "names": [
+        "Rượu ngon",
+        "Mỹ nhân",
+        "Thịt gà",
+        "Thịt lợn",
+        "Đánh cờ",
+        "Tỉ võ"
+      ],
+      "quotes": [
+        "Có bầu rượu ngon, lão ăn mày chẳng cần gì nữa!",
+        "Hoa đẹp đến đâu cũng thua một nụ cười mỹ nhân!",
+        "Gà nướng thơm thế này, mau mang lại đây!",
+        "Một đĩa thịt lợn quay, nhớ để phần da giòn!",
+        "Mang bàn cờ ra, xem ai thắng được lão phu!",
+        "Ăn uống đủ rồi, có ai dám tỉ võ với ta?"
+      ]
+    },
+    "reward": {
+      "xp": 1800,
+      "gold": 1200,
+      "assistMs": 30000
+    }
+  },
+  "dongTaDefinition": {
+    "center": {
+      "x": 800,
+      "y": 616
+    },
+    "entry": {
+      "x": 1420,
+      "y": 616
+    },
+    "bounds": {
+      "x": 800,
+      "y": 616,
+      "radiusX": 324,
+      "radiusY": 294
+    },
+    "gateWave": 5,
+    "restTicks": 300,
+    "entryTicks": 90,
+    "retryTicks": 90,
+    "actors": {
+      "dong_ta": {
+        "hp": 6200,
+        "defense": 30,
+        "speed": 105
+      },
+      "mai_sieu_phong": {
+        "hp": 1800,
+        "defense": 18,
+        "speed": 135
+      },
+      "hoang_dung": {
+        "hp": 1200,
+        "defense": 12,
+        "speed": 90
+      }
+    },
+    "hpPerAdditionalPlayer": 0.45,
+    "controlResistance": 0.75,
+    "xp": 650,
+    "gold": 360,
+    "openingTicks": 30,
+    "thrust": {
+      "range": 380,
+      "hits": 13,
+      "halfWidth": 24
+    },
+    "fan": {
+      "range": 180,
+      "halfAngle": 1.0471975511965976
+    },
+    "normalDash": {
+      "approachTicks": 6,
+      "segmentTicks": 10,
+      "halfWidth": 68,
+      "paths": [
+        [
+          [
+            -230,
+            -150
+          ],
+          [
+            230,
+            -130
+          ],
+          [
+            0,
+            215
+          ],
+          [
+            -230,
+            -150
+          ]
+        ],
+        [
+          [
+            -195,
+            -170
+          ],
+          [
+            195,
+            -170
+          ],
+          [
+            195,
+            170
+          ],
+          [
+            -195,
+            170
+          ],
+          [
+            -195,
+            -170
+          ]
+        ],
+        [
+          [
+            -275,
+            0
+          ],
+          [
+            0,
+            -230
+          ],
+          [
+            275,
+            0
+          ],
+          [
+            0,
+            230
+          ],
+          [
+            -275,
+            0
+          ]
+        ],
+        [
+          [
+            -235,
+            -160
+          ],
+          [
+            235,
+            -160
+          ],
+          [
+            -235,
+            160
+          ],
+          [
+            235,
+            160
+          ]
+        ]
+      ]
+    },
+    "beads": {
+      "min": 8,
+      "max": 14,
+      "speed": 680,
+      "range": 700,
+      "radius": 9
+    },
+    "slash": {
+      "range": 280,
+      "halfWidth": 68,
+      "travelTicks": 15
+    },
+    "petals": {
+      "count": 40,
+      "separation": 48,
+      "delayTicks": 84,
+      "radius": 32
+    },
+    "claws": {
+      "range": 200,
+      "halfWidth": 56,
+      "gapTicks": 2,
+      "speed": 520,
+      "radius": 20
+    },
+    "pull": {
+      "range": 700,
+      "speed": 1600,
+      "stopDistance": 58,
+      "lockTicks": 150,
+      "followupTicks": 24
+    },
+    "poison": {
+      "radius": 86,
+      "flightTicks": 30,
+      "poolTicks": 180,
+      "intervalTicks": 30
+    },
+    "heal": {
+      "amount": 48,
+      "speed": 380,
+      "radius": 12,
+      "range": 700
+    },
+    "sprintMultiplier": 3,
+    "abilities": {
+      "ta_kiem_lien_kich": {
+        "nameVi": "Tà Kiếm Liên Kích",
+        "damage": 12,
+        "windup": 14,
+        "duration": 27,
+        "cooldown": 78
+      },
+      "lac_anh_normal": {
+        "nameVi": "Lạc Anh Kiếm Pháp",
+        "damage": 26,
+        "windup": 14,
+        "duration": 46,
+        "cooldown": 66
+      },
+      "dan_chi_than_cong": {
+        "nameVi": "Đàn Chỉ Thần Công",
+        "damage": 28,
+        "windup": 18,
+        "duration": 15,
+        "cooldown": 270
+      },
+      "lac_anh_kiem_phap": {
+        "nameVi": "Lạc Anh Kiếm Pháp",
+        "damage": 35,
+        "windup": 21,
+        "duration": 21,
+        "cooldown": 330
+      },
+      "ngoc_tieu_hoi_phong": {
+        "nameVi": "Ngọc Tiêu Hồi Phong",
+        "damage": 40,
+        "windup": 33,
+        "duration": 24,
+        "cooldown": 510
+      },
+      "trieu_hon_dong_hai": {
+        "nameVi": "Triệu Hồn Đông Hải",
+        "damage": 0,
+        "windup": 24,
+        "duration": 18,
+        "cooldown": 30
+      },
+      "bach_cot_trao": {
+        "nameVi": "Bạch Cốt Trảo",
+        "damage": 16,
+        "windup": 11,
+        "duration": 17,
+        "cooldown": 51
+      },
+      "ma_anh_troc_hon": {
+        "nameVi": "Ma Ảnh Tróc Hồn",
+        "damage": 18,
+        "windup": 17,
+        "duration": 30,
+        "cooldown": 240
+      },
+      "am_phong_hap_luc": {
+        "nameVi": "Âm Phong Hấp Lực",
+        "damage": 0,
+        "windup": 12,
+        "duration": 5,
+        "cooldown": 360
+      },
+      "doc_cot_bao": {
+        "nameVi": "Độc Cốt Bạo",
+        "damage": 27,
+        "windup": 18,
+        "duration": 15,
+        "cooldown": 390
+      },
+      "thanh_am_ho_tro": {
+        "nameVi": "Thanh Âm Hộ Trợ",
+        "damage": 0,
+        "windup": 8,
+        "duration": 11,
+        "cooldown": 54
+      },
+      "linh_xa_bo": {
+        "nameVi": "Linh Xà Bộ",
+        "damage": 0,
+        "windup": 5,
+        "duration": 24,
+        "cooldown": 210
+      }
+    }
+  },
+  "hongLietDefinition": {
+    "id": "hoan_nhan_hong_liet",
+    "spawn": {
+      "x": 704,
+      "y": 528
+    },
+    "bounds": {
+      "x": 228.8,
+      "y": 334.40000000000003,
+      "width": 950.4000000000001,
+      "height": 774.4000000000001
+    },
+    "hp": 3600,
+    "defense": 18,
+    "radius": 22,
+    "speed": 130,
+    "xp": 900,
+    "gold": 240,
+    "emptyResetTicks": 900,
+    "respawnTicks": 900,
+    "restTicks": 11,
+    "initialRestTicks": 60,
+    "stunScale": 0.2,
+    "summonLimit": 8,
+    "summonCount": 4,
+    "summonLifetimeTicks": 750,
+    "minion": {
+      "hp": 95,
+      "defense": 5,
+      "speed": 100,
+      "radius": 12,
+      "damage": 9,
+      "attackRange": 42,
+      "detectionRange": 1500,
+      "attackCooldownTicks": 45,
+      "respawnTicks": 240,
+      "xp": 0,
+      "gold": 0,
+      "assistTicks": 300
+    },
+    "projectileSpeed": 600,
+    "projectileRadius": 8,
+    "a1Spread": 0.3141592653589793,
+    "a1ForwardOffset": 0,
+    "lavaDistance": 550,
+    "lavaDashTicks": 24,
+    "lavaFadeTicks": 48,
+    "cannonRows": [
+      473.00000000000006,
+      649,
+      825.0000000000001,
+      1001.0000000000001
+    ],
+    "cannonColumns": [
+      385.00000000000006,
+      605,
+      825.0000000000001,
+      1045
+    ],
+    "abilities": {
+      "hong_liet_a1": {
+        "nameVi": "Ngũ Lộ Đao Khí",
+        "damage": 22,
+        "range": 720,
+        "radius": 13,
+        "windupTicks": 12,
+        "durationTicks": 11,
+        "recoveryTicks": 6,
+        "cooldownTicks": 42,
+        "intervalTicks": 15
+      },
+      "hong_liet_a2": {
+        "nameVi": "Hoành Tảo Đại Đao",
+        "damage": 26,
+        "range": 242,
+        "radius": 0,
+        "windupTicks": 12,
+        "durationTicks": 11,
+        "recoveryTicks": 6,
+        "cooldownTicks": 42,
+        "intervalTicks": 15
+      },
+      "dung_nham_liet_dia": {
+        "nameVi": "Dung Nham Liệt Địa",
+        "damage": 24,
+        "range": 0,
+        "radius": 220,
+        "windupTicks": 30,
+        "durationTicks": 8,
+        "recoveryTicks": 18,
+        "cooldownTicks": 270,
+        "intervalTicks": 15
+      },
+      "hoa_son_bao_phat": {
+        "nameVi": "Hỏa Sơn Bạo Phát",
+        "damage": 27,
+        "range": 0,
+        "radius": 80,
+        "windupTicks": 33,
+        "durationTicks": 24,
+        "recoveryTicks": 18,
+        "cooldownTicks": 300,
+        "intervalTicks": 15
+      },
+      "liet_diem_phong_toa": {
+        "nameVi": "Liệt Diễm Phong Tỏa",
+        "damage": 9,
+        "range": 550,
+        "radius": 45,
+        "windupTicks": 30,
+        "durationTicks": 330,
+        "recoveryTicks": 8,
+        "cooldownTicks": 390,
+        "intervalTicks": 15
+      },
+      "hoa_tien_te_phat": {
+        "nameVi": "Hỏa Tiễn Tề Phát",
+        "damage": 0,
+        "range": 0,
+        "radius": 0,
+        "windupTicks": 30,
+        "durationTicks": 3,
+        "recoveryTicks": 12,
+        "cooldownTicks": 450,
+        "intervalTicks": 15
+      },
+      "thiet_ky_trieu_binh": {
+        "nameVi": "Thiết Kỵ Triệu Binh",
+        "damage": 0,
+        "range": 0,
+        "radius": 0,
+        "windupTicks": 30,
+        "durationTicks": 3,
+        "recoveryTicks": 12,
+        "cooldownTicks": 450,
+        "intervalTicks": 15
+      },
+      "van_ly_nham_hoa": {
+        "nameVi": "Vạn Lý Nham Hỏa",
+        "damage": 32,
+        "range": 0,
+        "radius": 110,
+        "windupTicks": 36,
+        "durationTicks": 144,
+        "recoveryTicks": 21,
+        "cooldownTicks": 540,
+        "intervalTicks": 15
+      },
+      "hoa_phao_thien_la": {
+        "nameVi": "Hỏa Pháo Thiên La",
+        "damage": 17,
+        "range": 0,
+        "radius": 8,
+        "windupTicks": 48,
+        "durationTicks": 126,
+        "recoveryTicks": 15,
+        "cooldownTicks": 540,
+        "intervalTicks": 20
+      }
+    }
+  },
+  "kimLuanDefinition": {
+    "wheelCount": 7,
+    "basicWheelSpeed": 620,
+    "actionRestSeconds": 0.2,
+    "crescent": {
+      "speed": 760,
+      "radius": 30,
+      "lifetime": 2
+    },
+    "actors": {
+      "hoac_do": {
+        "x": 594,
+        "y": 385.00000000000006,
+        "hp": 1100,
+        "defense": 10,
+        "speed": 180
+      },
+      "dat_nhi_ba": {
+        "x": 808.5000000000001,
+        "y": 407.00000000000006,
+        "hp": 1600,
+        "defense": 16,
+        "speed": 105
+      },
+      "kim_luan_phap_vuong": {
+        "x": 704,
+        "y": 451.00000000000006,
+        "hp": 4200,
+        "defense": 18,
+        "speed": 145
+      }
+    },
+    "bounds": {
+      "x": 165,
+      "y": 297,
+      "width": 1078,
+      "height": 440.00000000000006
+    },
+    "emptyResetTicks": 900,
+    "respawnTicks": 1350,
+    "xp": 1200,
+    "gold": 600,
+    "rollTicks": 450,
+    "loot": [
+      {
+        "id": "kim_luan_tan_phien",
+        "nameVi": "Kim Luân Tàn Phiến",
+        "sellGold": 120
+      }
+    ],
+    "wardReduction": 0.6,
+    "wardSeconds": 4,
+    "cageHp": 90,
+    "cageSeconds": 4,
+    "soloReleaseSeconds": 2.2,
+    "stunSeconds": 0.35,
+    "slowSeconds": 1.4,
+    "slowFraction": 0.3,
+    "knockback": 50,
+    "triple": {
+      "rays": 4,
+      "gap": 0.5,
+      "speed": 440,
+      "lifetime": 2,
+      "radius": 10,
+      "halfWidth": 48
+    },
+    "gust": {
+      "rays": 5,
+      "spread": 2.792526803190927,
+      "speed": 280,
+      "radius": 17
+    },
+    "nails": {
+      "speed": 620,
+      "radius": 5
+    },
+    "orbit": {
+      "radius": 145,
+      "angularSpeed": 6,
+      "seconds": 3,
+      "releaseSpeed": 680
+    },
+    "stomp": {
+      "radius": 280,
+      "speed": 900,
+      "gap": 0.28,
+      "thickness": 10,
+      "ellipseY": 0.4
+    },
+    "enrage": {
+      "threshold": 0.3,
+      "speedMultiplier": 1.6,
+      "interval": 1.8,
+      "wheelSpeed": 620
+    },
+    "elephants": {
+      "rocks": 5,
+      "speed": 480,
+      "halfWidth": 31,
+      "rockHalfWidth": 51,
+      "top": 176,
+      "bottom": 825.0000000000001,
+      "normal": {
+        "lanes": 12,
+        "rows": 3,
+        "rowGap": 0.45,
+        "volleyGap": 3.8,
+        "warning": 1.6
+      },
+      "enrage": {
+        "lanes": 14,
+        "rows": 4,
+        "rowGap": 0.32,
+        "volleyGap": 3.3,
+        "warning": 1.4
+      }
+    },
+    "abilities": {
+      "thiet_phien_lien_hoan": {
+        "nameVi": "Thiết Phiến Liên Hoàn",
+        "damage": 12,
+        "warning": 0.6,
+        "duration": 1.1,
+        "cooldown": 3.6
+      },
+      "cuong_phong_tan_loi_cong": {
+        "nameVi": "Cuồng Phong Tấn Lôi Công",
+        "damage": 16,
+        "warning": 0.5,
+        "duration": 0.4,
+        "cooldown": 5
+      },
+      "phien_trung_doc_dinh": {
+        "nameVi": "Phiến Trung Độc Đinh",
+        "damage": 8,
+        "warning": 0.5,
+        "duration": 0.4,
+        "cooldown": 6
+      },
+      "cuong_phong_van_nhan": {
+        "nameVi": "Cuồng Phong Vạn Nhận",
+        "damage": 6,
+        "warning": 0.7,
+        "duration": 3.1,
+        "cooldown": 9
+      },
+      "dat_sweep": {
+        "nameVi": "Quét chùy",
+        "damage": 20,
+        "warning": 0.35,
+        "duration": 0.3,
+        "cooldown": 1.5
+      },
+      "dai_luc_pha_son": {
+        "nameVi": "Đại Lực Phá Sơn",
+        "damage": 28,
+        "warning": 0.4,
+        "duration": 0.9,
+        "cooldown": 4
+      },
+      "bat_dong_kim_cang": {
+        "nameVi": "Bất Động Kim Cang",
+        "damage": 0,
+        "warning": 0.3,
+        "duration": 0.4,
+        "cooldown": 4
+      },
+      "dai_luc_pha_son_boulder": {
+        "nameVi": "Đại Lực Phá Sơn",
+        "damage": 25,
+        "warning": 0.35,
+        "duration": 0.4,
+        "cooldown": 3.2
+      },
+      "hang_ma_tam_lien_chan": {
+        "nameVi": "Hàng Ma Tam Liên Chấn",
+        "damage": 18,
+        "warning": 0.4,
+        "duration": 2.3,
+        "cooldown": 5
+      },
+      "kim_sweep": {
+        "nameVi": "Ngũ Luân",
+        "damage": 15,
+        "warning": 0.35,
+        "duration": 0.4,
+        "cooldown": 1.5
+      },
+      "kim_hand_chop": {
+        "nameVi": "Bán Nguyệt Đao Khí",
+        "damage": 18,
+        "warning": 0.35,
+        "duration": 0.4,
+        "cooldown": 1.8
+      },
+      "kim_luan_truy_hon": {
+        "nameVi": "Kim Luân Truy Hồn",
+        "damage": 11,
+        "warning": 0.7,
+        "duration": 0.5,
+        "cooldown": 24
+      },
+      "ngu_luan_ho_the": {
+        "nameVi": "Ngũ Luân Hộ Thể",
+        "damage": 18,
+        "warning": 0.6,
+        "duration": 3.1,
+        "cooldown": 9
+      },
+      "ngu_luan_phong_toa": {
+        "nameVi": "Ngũ Luân Phong Tỏa",
+        "damage": 32,
+        "warning": 0.8,
+        "duration": 4.1,
+        "cooldown": 12
+      },
+      "long_tuong_chan_thien": {
+        "nameVi": "Long Tượng Chấn Thiên",
+        "damage": 18,
+        "warning": 0.45,
+        "duration": 1,
+        "cooldown": 6
+      },
+      "long_tuong_bat_nha_cong": {
+        "nameVi": "Long Tượng Bát Nhã Công",
+        "damage": 20,
+        "warning": 0.8,
+        "duration": 11.5,
+        "cooldown": 18
+      },
+      "long_tuong_bat_nha_thap_tang": {
+        "nameVi": "Long Tượng Bát Nhã Thập Tầng",
+        "damage": 20,
+        "warning": 0,
+        "duration": 11.5,
+        "cooldown": 12
+      }
+    }
+  },
+  "lyMacSauEncounter": {
+    "id": "ly_mac_sau",
+    "spawn": {
+      "x": 704,
+      "y": 492.80000000000007
+    },
+    "stats": {
+      "hp": 1800,
+      "defense": 12,
+      "speed": 115,
+      "radius": 18,
+      "damage": 12,
+      "attackRange": 70,
+      "detectionRange": 1600,
+      "attackCooldownTicks": 54,
+      "respawnTicks": 240,
+      "xp": 600,
+      "gold": 120,
+      "assistTicks": 300
+    },
+    "controlResistance": 0.8,
+    "openingTicks": 60,
+    "intervalTicks": 36,
+    "emptyResetTicks": 900,
+    "respawnTicks": 900,
+    "attacks": [
+      {
+        "id": "ly_mac_sau_basic",
+        "nameVi": "Phất trần",
+        "windupTicks": 9,
+        "recoveryTicks": 12,
+        "damage": 12,
+        "range": 144,
+        "speed": 0,
+        "radius": 16,
+        "halfAngle": 3.141592653589793,
+        "cooldownTicks": 60
+      },
+      {
+        "id": "bang_phach_ngan_cham",
+        "nameVi": "Băng Phách Ngân Châm",
+        "windupTicks": 18,
+        "recoveryTicks": 12,
+        "damage": 14,
+        "range": 864,
+        "speed": 480,
+        "radius": 7,
+        "halfAngle": 0.7853981633974483,
+        "cooldownTicks": 120
+      },
+      {
+        "id": "xich_luyen_chuong",
+        "nameVi": "Xích Luyện Chưởng",
+        "windupTicks": 27,
+        "recoveryTicks": 12,
+        "damage": 18,
+        "range": 620,
+        "speed": 300,
+        "radius": 16,
+        "halfAngle": 0.7853981633974483,
+        "cooldownTicks": 60
+      },
+      {
+        "id": "phat_tran_cong",
+        "nameVi": "Phất Trần Công",
+        "windupTicks": 12,
+        "recoveryTicks": 12,
+        "damage": 18,
+        "range": 120,
+        "speed": 0,
+        "radius": 16,
+        "halfAngle": 1.0471975511965976,
+        "cooldownTicks": 60
+      },
+      {
+        "id": "co_mo_kiem_phap",
+        "nameVi": "Cổ Mộ Kiếm Pháp",
+        "windupTicks": 23,
+        "recoveryTicks": 12,
+        "damage": 0,
+        "range": 0,
+        "speed": 0,
+        "radius": 16,
+        "halfAngle": 0.7853981633974483,
+        "cooldownTicks": 60
+      },
+      {
+        "id": "ngu_doc_chuong",
+        "nameVi": "Ngũ Độc Chưởng",
+        "windupTicks": 30,
+        "recoveryTicks": 12,
+        "damage": 16,
+        "range": 1100,
+        "speed": 250,
+        "radius": 16,
+        "halfAngle": 0.7853981633974483,
+        "cooldownTicks": 60
+      }
+    ],
+    "rotation": [
+      "bang_phach_ngan_cham",
+      "xich_luyen_chuong",
+      "co_mo_kiem_phap",
+      "ngu_doc_chuong",
+      "phat_tran_cong"
+    ],
+    "summonCount": 4,
+    "summonLimit": 8,
+    "summonCountChoices": [
+      4,
+      6,
+      8
+    ],
+    "summonProjectile": {
+      "mode": "projectile",
+      "damage": 5,
+      "speed": 300,
+      "range": 500,
+      "radius": 6,
+      "count": 1,
+      "spacingTicks": 0,
+      "splashRadius": 0,
+      "burnDamage": 0,
+      "burnTicks": 0
+    },
+    "summonLifetimeTicks": 480,
+    "summonStats": {
+      "hp": 60,
+      "defense": 5,
+      "speed": 70,
+      "radius": 10,
+      "damage": 5,
+      "attackRange": 360,
+      "detectionRange": 1600,
+      "attackCooldownTicks": 30,
+      "respawnTicks": 240,
+      "xp": 0,
+      "gold": 0,
+      "assistTicks": 300
+    },
+    "summonSpawns": [
+      {
+        "x": 563.2,
+        "y": 422.40000000000003
+      },
+      {
+        "x": 844.8000000000001,
+        "y": 422.40000000000003
+      },
+      {
+        "x": 563.2,
+        "y": 633.6
+      },
+      {
+        "x": 844.8000000000001,
+        "y": 633.6
+      }
+    ],
+    "edgeEmitters": [
+      {
+        "x": 140.8,
+        "y": 352,
+        "fx": 1,
+        "fy": 0
+      },
+      {
+        "x": 1267.2,
+        "y": 352,
+        "fx": -1,
+        "fy": 0
+      },
+      {
+        "x": 422.40000000000003,
+        "y": 422.40000000000003,
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "x": 422.40000000000003,
+        "y": 950.4000000000001,
+        "fx": 0,
+        "fy": -1
+      },
+      {
+        "x": 140.8,
+        "y": 492.80000000000007,
+        "fx": 1,
+        "fy": 0
+      },
+      {
+        "x": 1267.2,
+        "y": 492.80000000000007,
+        "fx": -1,
+        "fy": 0
+      },
+      {
+        "x": 704,
+        "y": 422.40000000000003,
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "x": 704,
+        "y": 950.4000000000001,
+        "fx": 0,
+        "fy": -1
+      },
+      {
+        "x": 140.8,
+        "y": 633.6,
+        "fx": 1,
+        "fy": 0
+      },
+      {
+        "x": 1267.2,
+        "y": 633.6,
+        "fx": -1,
+        "fy": 0
+      },
+      {
+        "x": 985.6000000000001,
+        "y": 422.40000000000003,
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "x": 985.6000000000001,
+        "y": 950.4000000000001,
+        "fx": 0,
+        "fy": -1
+      }
+    ],
+    "loot": [
+      {
+        "id": "co_mo_ngoc_boi",
+        "nameVi": "Cổ Mộ Ngọc Bội"
+      },
+      {
+        "id": "ngan_cham_nang",
+        "nameVi": "Ngân Châm Nang"
+      }
+    ]
+  },
+  "namDeDefinition": {
+    "wave": 15,
+    "restTicks": 300,
+    "spawn": {
+      "x": 800,
+      "y": 1088
+    },
+    "entrance": {
+      "x": 800,
+      "y": 616
+    },
+    "stats": {
+      "hp": 30000,
+      "defense": 60,
+      "speed": 30,
+      "radius": 22,
+      "damage": 45,
+      "attackRange": 26,
+      "detectionRange": 160,
+      "attackCooldownTicks": 45,
+      "respawnTicks": 240,
+      "xp": 3000,
+      "gold": 1800,
+      "assistTicks": 300
+    },
+    "controlResistance": 0.65,
+    "moveSpeed": 30,
+    "dashSpeed": 1000,
+    "behindDistance": 64,
+    "dashChance": 0.12,
+    "dashTicks": 8,
+    "actionRestTicks": 36,
+    "openingTicks": 60,
+    "rotation": [
+      "nam_de_palm",
+      "nam_de_aura",
+      "nam_de_small_finger",
+      "nhat_duong_chi",
+      "nam_de_palm",
+      "lien_hoan_nhat_duong_chi",
+      "dai_ly_phong_huyet",
+      "phat_quang_pho_chieu",
+      "nhat_duong_quy_tong"
+    ],
+    "damage": {
+      "palm": 65,
+      "aura": 50,
+      "small": 45,
+      "barrage": 55,
+      "sky": 60
+    },
+    "palmRange": 720,
+    "palmRadius": 44,
+    "palmSpeed": 400,
+    "auraRadius": 180,
+    "auraDurationTicks": 21,
+    "dashAuraChance": 0.5,
+    "smallSpeed": 900,
+    "smallBurstMax": 5,
+    "smallBurstIntervalTicks": 4.8,
+    "smallWindupTicks": 17,
+    "smallRecoveryTicks": 8,
+    "smallCooldownTicks": 90,
+    "arenaBounds": {
+      "x": 800,
+      "y": 616,
+      "radiusX": 324,
+      "radiusY": 294
+    },
+    "skyDashTicks": 9,
+    "corpseTicks": 42,
+    "smallRadius": 7,
+    "rayRange": 2000,
+    "rayRadius": 10,
+    "beamWarningTicks": 23,
+    "beamActiveTicks": 8,
+    "beamHpFraction": 0.9,
+    "barrageWarningTicks": 27,
+    "barrageIntervalTicks": 16,
+    "barrageVolleys": 16,
+    "barrageDirections": 4,
+    "barrageTurnTicks": 256,
+    "barrageStartupTicks": 63,
+    "qteTicks": 150,
+    "qteLength": 10,
+    "backlashFraction": 0.7,
+    "healFraction": 0.1,
+    "stunTicks": 60,
+    "pressureDashTicks": 24,
+    "confusionTicks": 300,
+    "skyCount": 96,
+    "skyWarningTicks": 9,
+    "skySpacingTicks": 1.6666666666666667,
+    "skyRadius": 24,
+    "skyStartupTicks": 45
+  },
+  "tayDocDefinition": {
+    "spawn": {
+      "x": 80,
+      "y": 616
+    },
+    "entryEndX": 800,
+    "bounds": {
+      "x": 90,
+      "y": 340,
+      "width": 1360,
+      "height": 640
+    },
+    "hp": 2600,
+    "defense": 12,
+    "speed": 92,
+    "phase2Speed": 145,
+    "phase2Damage": 1.25,
+    "radius": 24,
+    "xp": 800,
+    "gold": 240,
+    "rest": 24,
+    "transition": 69,
+    "controlScale": 0.2,
+    "gateRest": 240,
+    "poisonDamage": 6,
+    "poisonDuration": 90,
+    "poisonInterval": 30,
+    "slow": 0.25,
+    "slowDuration": 60,
+    "stunDuration": 36,
+    "cloudCount": 8,
+    "cloudRadius": 85,
+    "cloudDuration": 240,
+    "curseDelay": 135,
+    "curseRadius": 145,
+    "pillarHp": 100,
+    "pillarInterval": 40.5,
+    "pillarSpeed": 390,
+    "pillarRange": 663,
+    "radialCount": 16,
+    "needleCount": 9,
+    "needleVolleys": 3,
+    "needleSpread": 1.0471975511965976,
+    "jumpTicks": 20,
+    "jumpRest": 18,
+    "attacks": {
+      "tay_doc_staff": {
+        "nameVi": "Quẹt trượng",
+        "windup": 20,
+        "recovery": 15,
+        "cooldown": 180,
+        "damage": 20,
+        "range": 160,
+        "radius": 8,
+        "speed": 0,
+        "duration": 0,
+        "interval": 0
+      },
+      "tay_doc_gas": {
+        "nameVi": "Bắn độc khí",
+        "windup": 20,
+        "recovery": 15,
+        "cooldown": 180,
+        "damage": 16,
+        "range": 560,
+        "radius": 8,
+        "speed": 330,
+        "duration": 0,
+        "interval": 0
+      },
+      "van_doc_phi_cham": {
+        "nameVi": "Vạn Độc Phi Châm",
+        "windup": 30,
+        "recovery": 15,
+        "cooldown": 180,
+        "damage": 8,
+        "range": 600,
+        "radius": 8,
+        "speed": 288,
+        "duration": 11,
+        "interval": 5.3999999999999995
+      },
+      "doc_vu_me_hon": {
+        "nameVi": "Độc Vụ Mê Hồn",
+        "windup": 33,
+        "recovery": 15,
+        "cooldown": 180,
+        "damage": 8,
+        "range": 85,
+        "radius": 8,
+        "speed": 0,
+        "duration": 0,
+        "interval": 0
+      },
+      "co_doc_khoan_tam": {
+        "nameVi": "Cổ Độc Khoan Tâm",
+        "windup": 12,
+        "recovery": 15,
+        "cooldown": 180,
+        "damage": 22,
+        "range": 145,
+        "radius": 8,
+        "speed": 0,
+        "duration": 0,
+        "interval": 0
+      },
+      "hon_thien_phuc_long_chan": {
+        "nameVi": "Hỗn Thiên Phục Long Chấn",
+        "windup": 27,
+        "recovery": 15,
+        "cooldown": 180,
+        "damage": 12,
+        "range": 663,
+        "radius": 8,
+        "speed": 390,
+        "duration": 0,
+        "interval": 0
+      },
+      "doc_chuong": {
+        "nameVi": "Bắn độc chưởng",
+        "windup": 14,
+        "recovery": 15,
+        "cooldown": 180,
+        "damage": 20,
+        "range": 600,
+        "radius": 8,
+        "speed": 310,
+        "duration": 0,
+        "interval": 0
+      },
+      "cap_mo_chan_kich": {
+        "nameVi": "Cáp Mô Chấn Kích",
+        "windup": 33,
+        "recovery": 15,
+        "cooldown": 180,
+        "damage": 24,
+        "range": 364.5,
+        "radius": 8,
+        "speed": 0,
+        "duration": 0,
+        "interval": 0
+      },
+      "ngu_doc_than_chuong": {
+        "nameVi": "Ngũ Độc Thần Chưởng",
+        "windup": 27,
+        "recovery": 15,
+        "cooldown": 180,
+        "damage": 10,
+        "range": 484.5,
+        "radius": 8,
+        "speed": 130.05,
+        "duration": 105,
+        "interval": 10.5
+      },
+      "van_doc_bao_phat": {
+        "nameVi": "Vạn Độc Bạo Phát",
+        "windup": 21,
+        "recovery": 15,
+        "cooldown": 180,
+        "damage": 14,
+        "range": 484.5,
+        "radius": 8,
+        "speed": 218.025,
+        "duration": 95,
+        "interval": 0
+      }
+    }
+  },
+  "vuongDefinition": {
+    "center": {
+      "x": 800,
+      "y": 616
+    },
+    "restMs": 8500,
+    "hp": 7900,
+    "hpPerPlayer": 0.52,
+    "radius": 22,
+    "speed": 166,
+    "defense": 58,
+    "phase2Hp": 0.55,
+    "notesHp": 0.24,
+    "recoveryMs": 740,
+    "openingMs": 1100,
+    "exposedMs": 4000,
+    "shieldMultiplier": 0.14,
+    "starMultiplier": 0.55,
+    "lightningMs": 1350,
+    "lightningGapMs": 3300,
+    "rainMs": 880,
+    "rainGapMs": 1020,
+    "notesReadMs": 4100,
+    "beatMs": 2600,
+    "qteMs": 3900,
+    "qteFraction": 0.72,
+    "swordsCount": 3,
+    "drainPerSword": 0.016,
+    "damage": {
+      "thrust": 100,
+      "slash": 120,
+      "crescent": 128,
+      "tam": 150,
+      "lightning": 120,
+      "elements": 168,
+      "stars": 116,
+      "break": 186,
+      "pulse": 145,
+      "finger": 136,
+      "rain": 108
+    },
+    "gold": 1250,
+    "xp": 350
+  }
+}

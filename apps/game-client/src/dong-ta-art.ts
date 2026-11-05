@@ -257,6 +257,7 @@ export class DongTaRenderer {
         actor.hp <= 0 ? 'death' : cast ? 'action' : actor.pose,
         actor.fx,
         actor.fy,
+        cast?.abilityId ?? actor.castAbilityId,
       );
       const name =
         bundle === 'dong'

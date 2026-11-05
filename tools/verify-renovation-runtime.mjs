@@ -31,7 +31,7 @@ import { verifyRenovationSkills } from './verify-renovation-skills.mjs';
 /** Normal entry point, real Colyseus room. Fixtures are server-side and labelled. */
 export async function verifyRenovationRuntime(
   browser,
-  { players = 6, development = false } = {},
+  { players = 6, development = false, onReady, evidenceDir } = {},
 ) {
   const session = qaSession({
     profile: 'renovation-runtime',
@@ -51,7 +51,7 @@ export async function verifyRenovationRuntime(
       fixtures:
         'Server-owned wave placement/zone entry for coverage; natural keyboard combat and movement checked separately.',
     };
-  const out = resolve('docs/evidence/renovation-v2');
+  const out = resolve(evidenceDir ?? 'docs/evidence/renovation-v2');
   mkdirSync(out, { recursive: true });
   let last = performance.now();
   const mark = (phase) => {
@@ -199,6 +199,11 @@ export async function verifyRenovationRuntime(
       peer = pages[1];
     assert.equal(heroes.length, players);
     mark(players + ' real clients ready');
+    if (onReady) {
+      const result = await onReady({ room, pages, out, report });
+      assert.deepEqual(errors, []);
+      return result;
+    }
     // Server-acknowledged keyboard movement, four authored cels per direction, peer sync.
     room.world.creeps.clear();
     room.simulation.invasion.nextWaveTick = room.world.tick + 100000;

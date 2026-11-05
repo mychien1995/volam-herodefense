@@ -189,6 +189,7 @@ export class NamDePresentation {
         action,
         b.fx,
         b.fy,
+        c?.ability ?? b.castAbilityId,
       );
       if (
         c &&

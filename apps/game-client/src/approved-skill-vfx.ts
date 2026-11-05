@@ -1,4 +1,6 @@
 import Phaser from 'phaser';
+import { renovationActionsEnabled } from './renovation-actions.js';
+import { renovatedSevenStarCues } from './renovation-sword-layout.js';
 import {
   renovatedSkillComponents,
   renovationSkillsEnabled,
@@ -203,11 +205,22 @@ export class ApprovedSkillVfx {
       }
       if (id === 'that_tinh_kiem') {
         const effect = m1Config.skillCatalogue![id]!.effect;
-        if (effect.mode === 'multi_hit')
+        if (effect.mode === 'multi_hit') {
           rate =
             plan.duration /
             (((effect.hits * effect.spacingTicks + 1) * 1000) /
               m1Config.tickRate);
+          if (renovationActionsEnabled()) {
+            clips = renovatedSevenStarCues(
+              effect.hits,
+              effect.spacingTicks,
+              m1Config.tickRate,
+            );
+            duration =
+              (effect.hits * effect.spacingTicks * 1000) / m1Config.tickRate;
+            rate = 1;
+          }
+        }
       }
       if (id === 'van_kiem_quy_tong') {
         clips = clips.filter((c) => c.body || c.phase === 'sword_gather');
@@ -875,6 +888,27 @@ export class ApprovedSkillVfx {
       return undefined;
     const a = this.actor(id),
       now = this.scene.time.now;
+    if (
+      renovationActionsEnabled() &&
+      a?.schoolId === 'vo_dang' &&
+      JSON.parse(a.statuses || '[]').some(
+        (s: { kind: string; abilityId: string }) =>
+          s.kind === 'channel' && s.abilityId === 'van_kiem_quy_tong',
+      )
+    )
+      return this.pose(
+        this.single(
+          'van_kiem_quy_tong_character',
+          'cast',
+          1000,
+          'sustained_sword_channel',
+          { loop: true },
+        ),
+        facing(fx, fy),
+        1000,
+        'feedback:approved:van-channel:' + id,
+        1,
+      );
     for (const run of [...this.runs].reverse()) {
       if (!run.body || run.owner !== id || run.impact) continue;
       const t = (now - run.started) * run.rate,

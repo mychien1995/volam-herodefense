@@ -1,0 +1,591 @@
+$ node scripts/check-workflow.mjs final "--config" "playwright.renovation-v3.config.ts"
+
+[check] prepare assets (once)
+Nam De: retained feedback03 raster bytes / 208 actor cels / 4 facings
+Wave boss approved feedback: exact PNGs / native-scale presentation contract
+Kim Luân: 246 exact approved inputs; 184 selected frames / 53 clips
+Đông Tà: 630 approved input hashes; 113 clips / 452 frames
+M3D r3: 71 approved components / 346 selected tags; three immutable locks verified
+Hoan Nhan Hong Liet v04: 40 pinned inputs; 16 atlases validated.
+Tay Doc: 593 approved input hashes;60 new candidate directional cels retained.
+Bắc Cái preview: 13 retained atlases → C:\Users\ADMIN\.codex\worktrees\visual-upgrade-2\volam-hero-defense\apps\game-client\public\assets\bac-cai-preview\
+Prepared assets in C:\Users\ADMIN\.codex\worktrees\visual-upgrade-2\volam-hero-defense\apps\game-client\public\assets\ (0 written, 6820 unchanged)
+[check] prepare assets (once): 14.92s
+
+[check] compile TypeScript
+[check] compile TypeScript: 0.70s
+
+[check] typecheck tests and tools
+[check] typecheck tests and tools: 1.32s
+
+[check] workflow regression checks
+✔ keeps final six-client coverage and separates fast evidence from approved history (1.9674ms)
+✔ rejects invalid profiles instead of reporting reduced coverage as final (0.4292ms)
+✔ minimal capture saves no success PNGs in iteration and exactly two final views (0.2424ms)
+✔ review capture remains opt-in and preserves the detailed frame report (0.2175ms)
+✔ final command rejects a reduced browser profile before preparing assets (97.8846ms)
+✔ a development-client shortcut cannot skip the final production build (85.2736ms)
+✔ unchanged assets keep their timestamps; changed, corrupt and missing outputs are repaired (21.8158ms)
+✔ generated UTF-8 metadata is written only when its bytes change (11.1042ms)
+✔ defaults and independent session overrides preserve profile contracts (1.7469ms)
+✔ invalid ports and contradictory or remote endpoints fail before preparation (0.3624ms)
+✔ a healthy occupied service is never borrowed or stopped (49.6908ms)
+✔ identity rejects wrong run, endpoint, HTTP failures and non-JSON health pages (14.7099ms)
+✔ client middleware identifies the actual owned run and cleanup attempts all owners once (9.0135ms)
+✔ workflow selects the managed profile rather than forcing every run to gameplay ports (0.8974ms)
+✔ observation waits finish on acknowledgement without spending the deadline (7.2978ms)
+✔ impossible prerequisites and read errors fail on their first observation (0.9097ms)
+✔ missing acknowledgements retain the failed label and compact authoritative diagnostics (28.7455ms)
+✔ core worlds supply zone membership separately from actor data (0.3474ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 330.8599
+[check] workflow regression checks: 0.41s
+
+[check] all unit/integration tests
+
+ RUN  v5.0.5 C:/Users/ADMIN/.codex/worktrees/visual-upgrade-2/volam-hero-defense
+
+
+ Test Files  80 passed (80)
+      Tests  750 passed (750)
+   Start at  01:28:43
+   Duration  124.29s (tests 58%, import 40%, transform 2%, worker 1%)
+
+    Isolate  80 workers spawned · ~212ms startup each (spawn + environment, per file)
+             at least ~16.73s faster with isolate: false — reuses workers across files instead of one per file
+
+[check] all unit/integration tests: 124.89s
+
+[check] production client build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 345 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/volam-build-endpoint.json                  0.03 kB │ gzip:   0.05 kB
+dist/index.html                                 0.58 kB │ gzip:   0.36 kB
+dist/visual-upgrade-2.html                      1.76 kB │ gzip:   0.83 kB
+dist/renovation-preview.html                    2.95 kB │ gzip:   1.17 kB
+dist/bac-cai-preview.html                       3.13 kB │ gzip:   1.12 kB
+dist/assets/renovationPreview-CMx6C-oa.css      2.26 kB │ gzip:   0.94 kB
+dist/assets/bacCaiPreview-Bkh2p5lz.css          2.34 kB │ gzip:   0.97 kB
+dist/assets/visualUpgrade-B8-piUG8.css          2.63 kB │ gzip:   1.07 kB
+dist/assets/game-DOvuK55j.css                  63.74 kB │ gzip:  14.71 kB
+dist/assets/visualUpgrade-CcRzptOi.js           8.43 kB │ gzip:   3.46 kB
+dist/assets/renovationPreview-CVmv0tlK.js      10.95 kB │ gzip:   4.00 kB
+dist/assets/bacCaiPreview-BNv_0imz.js          18.98 kB │ gzip:   8.67 kB
+dist/assets/phaser.esm-Caj5Dkpq.js          1,367.75 kB │ gzip: 357.35 kB
+dist/assets/game-CR3qZLgi.js                3,609.34 kB │ gzip: 463.22 kB
+
+✓ built in 12.19s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[PLUGIN_TIMINGS] JavaScript callbacks ran for 11.7s of this 12.2s build (96%).
+The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - plugin vite:prepare-out-dir renderStart (88%, 10.7s, 1 call)
+Additional callback time came from the callbacks below and from callbacks under 1s.
+2 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - plugin vite:build-html transform (4 calls)
+  - plugin vite:css transform (17 calls)
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+
+[check] production client build: 12.84s
+
+[check] scripts/verify-assets.py
+PASS: 23 runtime PNG entries, 680 frame references, bounds/provenance valid; approved Bong 44 / Chuong 40 source poses, tags, binary alpha and pivots verified
+[check] scripts/verify-assets.py: 0.35s
+
+[check] scripts/verify-arena-art01.py
+PASS: 9 Aseprite sources, 6 padded atlases, 59 RGBA exports; bounds, tags, timing, stable loop alpha and approved Cái Bang hashes
+[check] scripts/verify-arena-art01.py: 0.63s
+
+[check] scripts/verify-arena-v2.py
+PASS: 6 editable Aseprite sources, 1600x1152 opaque ground, 4 separate 512x768 cards/atlases, 32px paving, protected character hashes
+[check] scripts/verify-arena-v2.py: 0.48s
+
+[check] scripts/verify-thien-son.py
+PASS: approved character lock and concept hash; 80 distinct authored PNG cels, 24 tags, binary alpha, bounds/no clipping, fixed foot baseline64, durations, individual PNG/atlas equality and source paths.
+[check] scripts/verify-thien-son.py: 0.41s
+
+[check] scripts/verify-vo-dang.py
+PASS: approved character lock and concept hash; 80 distinct authored PNG cels, 24 tags, binary alpha, bounds/no clipping, foot baseline64 with <=1px raster edge tolerance, durations, individual PNG/atlas equality and source paths.
+[check] scripts/verify-vo-dang.py: 0.41s
+
+[check] scripts/verify-thieu-lam.py
+PASS: approved concept and 275 protected files; 80 distinct transparent PNG cels, 24 authored tags, bounds, pivots, timings, source headers, individual/atlas equality and explicit fallback metadata.
+[check] scripts/verify-thieu-lam.py: 0.49s
+
+[check] scripts/verify-thieu-lam-skills.py
+{
+  "status": "PASS",
+  "scope": "Source/export/metadata validation only; no gameplay or final director approval.",
+  "componentCount": 26,
+  "icons": 14,
+  "animationTags": 182,
+  "exportedCels": 728,
+  "distinctCharacterRasters": 204,
+  "distinctVfxRastersIncludingCardinalTransforms": 520,
+  "approvedCharacterFilesUnchanged": 5440,
+  "checks": [
+    "editable source hashes",
+    "PNG/JSON/frame equality",
+    "binary alpha",
+    "no clipping",
+    "distinct motion",
+    "pivots/durations",
+    "all14 icon paths/pairings",
+    "all approved hashes"
+  ],
+  "warnings": [],
+  "productionArtApproved": false,
+  "approvalGate": "approval gate waived by user"
+}
+[check] scripts/verify-thieu-lam-skills.py: 6.09s
+
+[check] scripts/verify-thien-son-skills.py
+{"status": "PASS", "scope": "Actual editable sources, individual cels, PNG/hash-JSON atlases and presentation metadata; Phaser verification recorded separately", "components": 20, "animationTags": 146, "exportedCels": 534, "icons": 13, "iconAtlasFrames": 13, "approvedFrameReuseCels": 17, "protectedAndConceptFilesUnchanged": 213, "characterBodyHeightTarget": 44, "characterHeight": 80, "feetY": 64, "alpha": "character/VFX binary transparent; approved icon ground intentionally opaque", "productionArtApproved": false}
+[check] scripts/verify-thien-son-skills.py: 1.23s
+
+[check] scripts/verify-vo-dang-skills.py
+{
+  "status": "PASS",
+  "scope": "Source/export/metadata validation only; director approval is recorded separately; no gameplay integration.",
+  "componentCount": 20,
+  "icons": 13,
+  "animationTags": 163,
+  "exportedCels": 636,
+  "distinctCharacterRasters": 157,
+  "distinctVfxRastersIncludingCardinalTransforms": 460,
+  "approvedCharacterFilesUnchanged": 89,
+  "checks": [
+    "editable source hashes",
+    "PNG/JSON/frame equality",
+    "binary alpha",
+    "no clipping",
+    "distinct motion",
+    "pivots/durations",
+    "open formation interior",
+    "all13 icon paths/pairings",
+    "89 approved hashes"
+  ],
+  "warnings": [],
+  "productionArtApproved": true,
+  "approvedSkillFilesChecked": 1441
+}
+[check] scripts/verify-vo-dang-skills.py: 1.98s
+
+[check] scripts/verify-bamboo-forest.py
+PASS: 19 transparent sprites, 344 opaque 32px tiles, 6 periodic materials, 70 map props; concept, hero and Bamboo production locks unchanged; public/shared-map bytes match
+[check] scripts/verify-bamboo-forest.py: 0.46s
+
+[check] scripts/verify-desert.py
+PASS: 380 frames / 120 tags, original source hashes, atlas pixels/timings, runtime copies and desert map; director approval pending
+[check] scripts/verify-desert.py: 0.97s
+
+[check] scripts/verify-forest-creeps.py
+{"status": "PASS", "scope": "Static files and explicit approval lock only; no gameplay acceptance", "actors": [{"id": "forest_truc_xa", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/truc_xa/source/truc_xa_v01.aseprite", "scale": {"down": 0.22140221402214022, "left": 0.21660649819494585, "right": 0.21428571428571427, "up": 0.22988505747126436}}, {"id": "forest_doc_chu", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/doc_chu/source/doc_chu_v01.aseprite", "scale": {"down": 0.20216606498194944, "left": 0.2003577817531306, "right": 0.2007168458781362, "up": 0.20475319926873858}}, {"id": "forest_son_vien", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/son_vien/source/son_vien_v01.aseprite", "scale": {"down": 0.22857142857142856, "left": 0.2191780821917808, "right": 0.1955193482688391, "up": 0.2206896551724138}}, {"id": "forest_truc_lam_kiem_khach", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/source/truc_lam_kiem_khach_v01.aseprite", "scale": {"down": 0.176, "left": 0.166351606805293, "right": 0.1752988047808765, "up": 0.18032786885245902}}, {"id": "forest_moc_linh", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/moc_linh/source/moc_linh_v01.aseprite", "scale": {"down": 0.22271714922049, "left": 0.22779043280182232, "right": 0.2070393374741201, "up": 0.22779043280182232}}, {"id": "forest_truc_yeu", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/truc_yeu/source/truc_yeu_v01.aseprite", "scale": {"down": 0.2445414847161572, "left": 0.24615384615384617, "right": 0.23728813559322035, "up": 0.23829787234042554}}], "characterFrames": 384, "effectFrames": 112, "protectedInputs": {"approved_bamboo_forest.lock.json": 60, "approved_cai_bang.lock.json": 8, "approved_forest_creeps.lock.json": 565}, "runtimeAdapter": {"actors": 6, "effects": 28, "normalForestRosterIntegrated": true, "archetypeIds": ["truc_xa", "doc_chu", "son_vien", "truc_lam_kiem_khach", "moc_linh", "truc_yeu"], "directorApproved": true}}
+[check] scripts/verify-forest-creeps.py: 2.34s
+
+[check] scripts/verify-beach.py
+PASS: 384 nonempty actor cels / 136 tags, corrected editable source, 512 tiles, 25 props, 64 VFX cels, provenance and map parity; runtime approval pending
+[check] scripts/verify-beach.py: 1.55s
+
+[check] scripts/verify-hell.py
+PASS: 276 nonempty Hell cels, 92 authored tags (shared hurt/death), 272 tiles, 20 props, 64 effect cels; bounds, alpha, pivots, timings, exact provenance and runtime parity. Director approval pending.
+[check] scripts/verify-hell.py: 1.01s
+
+[check] scripts/verify-chu-art.py
+{"approvedInputs": 102, "nonemptyFrameReferences": 428, "clips": 107, "status": "PASS"}
+[check] scripts/verify-chu-art.py: 0.39s
+
+[check] scripts/verify-ly-mac-sau.py
+{"status": "PASS", "approvedHashes": 400, "actorFrames": 192, "retainedRasterBytesUnchanged": true, "purpleBinding": true, "serverClientMapIdentical": true, "projection": "orthogonal", "emitters": 12}
+[check] scripts/verify-ly-mac-sau.py: 1.96s
+
+[check] scripts/verify-inventory-ui.py
+Inventory UI: 5 exact concept sources, 11 static PNG icon backplates and source regions verified; no baked menu screen.
+[check] scripts/verify-inventory-ui.py: 0.76s
+
+[check] scripts/verify-tay-doc.py
+{"status": "PASS", "frozenInputs": 593, "candidateCels": 60, "candidateClips": 15, "copiesAndRegistryExact": true, "runtimeArtApproval": "pending"}
+[check] scripts/verify-tay-doc.py: 0.82s
+
+[check] scripts/verify-nam-de.py
+Nam De: pinned feedback03 source bytes, 208 cels, pivot, runtime copies PASS
+Nam De: measured ring alpha bounds match runtime placement
+[check] scripts/verify-nam-de.py: 0.32s
+
+[check] scripts/verify-bac-cai-preview.py
+Bắc Cái preview PASS: 56 supplementary frames / 14 clips; native-width beam; 425 old files unchanged; source hashes, alpha, pivots and atlas pixels verified.
+[check] scripts/verify-bac-cai-preview.py: 1.02s
+
+[check] scripts/verify-vuong-trung-duong.py
+Vuong Trung Duong body: 48 verified RGBA cels
+Vuong Trung Duong effects: 36 verified RGBA cels
+[check] scripts/verify-vuong-trung-duong.py: 0.66s
+
+[check] scripts/verify-renovation.py
+PASS 74 actor forms; Counter({'dungeon_creeps': 24, 'wave_creeps': 20, 'minions': 11, 'heroes': 8, 'wave_bosses': 7, 'dungeon_bosses': 4}) ; 8 new scenes + accepted hub; all original skills unchanged
+[check] scripts/verify-renovation.py: 6.33s
+
+[check] scripts/verify-renovation-runtime.py
+{"status": "PASS", "actors": 74, "pixelIdenticalCels": 1480, "previewPixels": 120340480, "runtimePixels": 16897660, "runtimeGpuMiB": 64.46}
+[check] scripts/verify-renovation-runtime.py: 1.47s
+
+[check] scripts/verify-renovation-v2.py
+{"status": "PASS", "atlases": 36, "replacedFrames": 1236, "authoredBodyKeyposes": 64, "authoredEffectCels": 44, "bodyEdges": "All replaced body/weapon cels clear their virtual frame edges; native foot pivot maps to unchanged runtime origin", "arenaGroundPixels": [3200, 2304], "nativePixelMiB": 66.58, "contract": "Exact legacy frame names/virtual dimensions; unchanged animator/placement/timing/server routes; 2x native raster density"}
+[check] scripts/verify-renovation-v2.py: 0.51s
+
+[check] scripts/verify-renovation-v3.py
+{"status": "PASS", "nativeBodyAtlases": 33, "actorForms": 30, "newBodyCels": 464, "retainedBodyCels": 64, "fxAtlases": 174, "newFxFrameReferences": 4396, "bodyPixelMiB": 47.99, "fxPixelMiB": 494.68, "alphaChecks": [{"id": "hoa_van_chuong", "cornerCoverage": 0.0}, {"id": "cuong_long_loan_vu", "cornerCoverage": 0.0}, {"id": "phi_long_tai_thien", "cornerCoverage": 0.0}, {"id": "khang_long_huu_hoi", "cornerCoverage": 0.0}, {"id": "hang_long_hoa_vu", "cornerCoverage": 0.0}, {"id": "hoanh_tao_bong", "cornerCoverage": 0.0}, {"id": "pha_giap_bong", "cornerCoverage": 0.0}, {"id": "cam_long_cong", "cornerCoverage": 0.0}, {"id": "truy_phong_bong", "cornerCoverage": 0.0}, {"id": "thien_ha_vo_cau", "cornerCoverage": 0.0}, {"id": "phi_anh_tram", "cornerCoverage": 0.0}, {"id": "truy_hon_dao", "cornerCoverage": 0.0}, {"id": "phong_anh_hoan_vi", "cornerCoverage": 0.0}, {"id": "liet_phong_dao", "cornerCoverage": 0.0}, {"id": "bach_liet_thien_kich", "cornerCoverage": 0.0}, {"id": "luong_nghi_thu", "cornerCoverage": 0.0}, {"id": "huyen_am_chuong", "cornerCoverage": 0.0}, {"id": "duong_khi_kich", "cornerCoverage": 0.0}, {"id": "thai_cuc_than_cong", "cornerCoverage": 0.0}, {"id": "thai_cuc_tran", "cornerCoverage": 0.0}, {"id": "la_han_quyen", "cornerCoverage": 0.0}, {"id": "vi_da_quyen", "cornerCoverage": 0.0}, {"id": "dai_luc_kim_cuong_chuong", "cornerCoverage": 0.0}, {"id": "toan_phong_thoai", "cornerCoverage": 0.0}, {"id": "hoanh_tao_cuoc", "cornerCoverage": 0.0}, {"id": "vo_anh_cuoc", "cornerCoverage": 0.0}, {"id": "kim_cang_bat_hoai", "cornerCoverage": 0.0}, {"id": "nhu_lai_niet_ban", "cornerCoverage": 0.0}, {"id": "tru_ta", "cornerCoverage": 0.0}, {"id": "kim_quang_ho_tran", "cornerCoverage": 0.0}, {"id": "tam_gioi_quy_thien", "cornerCoverage": 0.1875}, {"id": "bat_dong_minh_vuong", "cornerCoverage": 0.0}, {"id": "nhu_lai_thien_diep", "cornerCoverage": 0.0}, {"id": "dong_ta_effects", "cornerCoverage": 0.0}, {"id": "mai_sieu_phong_effects", "cornerCoverage": 0.0}, {"id": "hoang_dung_effects", "cornerCoverage": 0.0}, {"id": "tay_doc_effects", "cornerCoverage": 0.0}, {"id": "tay_doc_cap_mo_effects", "cornerCoverage": 0.0}, {"id": "nam_de_effects", "cornerCoverage": 0.0}, {"id": "bac_cai_effects", "cornerCoverage": 0.0}, {"id": "vuong_trung_duong_p1_effects", "cornerCoverage": 0.0}, {"id": "vuong_trung_duong_p2_effects", "cornerCoverage": 0.0}, {"id": "chu_ba_thong_effects", "cornerCoverage": 0.0}, {"id": "hoan_nhan_hong_liet_effects", "cornerCoverage": 0.0}, {"id": "kim_luan_effects", "cornerCoverage": 0.0}, {"id": "ly_mac_sau_effects", "cornerCoverage": 0.0}, {"id": "fire_dog", "cornerCoverage": 0.0}, {"id": "staff_extension", "cornerCoverage": 0.0}, {"id": "vuong_elements", "cornerCoverage": 0.002}, {"id": "chiet_mai_clean", "cornerCoverage": 0.0}], "contract": "Old virtual frame dimensions/names/durations/origins; body feet fixed; animation clocks and authoritative projectiles/areas unchanged"}
+[check] scripts/verify-renovation-v3.py: 2.87s
+
+[check] browser verification
+ℹ️  optional .env file not found: .env.development, .env
+
+Running 1 test using 1 worker
+
+(node:68820) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ℹ️  optional .env file not found: .env.development, .env
+
+   ___      _                                   ___   _  ___  
+  / __\___ | |_   _ ___  ___ _   _ ___  __   __/ _ \ / |( _ ) 
+ / /  / _ \| | | | / __|/ _ \ | | / __| \ \ / / | | || |/ _ \ 
+/ /__| (_) | | |_| \__ \  __/ |_| \__ \  \ V /| |_| || | (_) |
+\____/\___/|_|\__, |___/\___|\__,_|___/   \_/  \___(_)_|\___/ 
+              |___/                                           
+
+             · Multiplayer Framework for Node.js ·
+
+💖 Consider becoming a Sponsor on GitHub → https://github.com/sponsors/endel
+🌟 Give us a star on GitHub → https://github.com/colyseus/colyseus
+☁️  Deploy and scale your project on Colyseus Cloud → https://cloud.colyseus.io
+
+[renovation] 6 real clients ready
+[v3] hoanh_tao_bong/right PASS
+[v3] pha_giap_bong/right PASS
+[v3] cam_long_cong/right PASS
+[v3] truy_phong_bong/right PASS
+[v3] thien_ha_vo_cau/right PASS
+[v3] hoanh_tao_bong/down PASS
+[v3] pha_giap_bong/down PASS
+[v3] cam_long_cong/down PASS
+[v3] truy_phong_bong/down PASS
+[v3] thien_ha_vo_cau/down PASS
+[v3] hoanh_tao_bong/left PASS
+[v3] pha_giap_bong/left PASS
+[v3] cam_long_cong/left PASS
+[v3] truy_phong_bong/left PASS
+[v3] thien_ha_vo_cau/left PASS
+[v3] hoanh_tao_bong/up PASS
+[v3] pha_giap_bong/up PASS
+[v3] cam_long_cong/up PASS
+[v3] truy_phong_bong/up PASS
+[v3] thien_ha_vo_cau/up PASS
+[v3] hoa_van_chuong/right PASS
+[v3] cuong_long_loan_vu/right PASS
+[v3] phi_long_tai_thien/right PASS
+[v3] khang_long_huu_hoi/right PASS
+[v3] hang_long_hoa_vu/right PASS
+[v3] hoa_van_chuong/down PASS
+[v3] cuong_long_loan_vu/down PASS
+[v3] phi_long_tai_thien/down PASS
+[v3] khang_long_huu_hoi/down PASS
+[v3] hang_long_hoa_vu/down PASS
+[v3] hoa_van_chuong/left PASS
+[v3] cuong_long_loan_vu/left PASS
+[v3] phi_long_tai_thien/left PASS
+[v3] khang_long_huu_hoi/left PASS
+[v3] hang_long_hoa_vu/left PASS
+[v3] hoa_van_chuong/up PASS
+[v3] cuong_long_loan_vu/up PASS
+[v3] phi_long_tai_thien/up PASS
+[v3] khang_long_huu_hoi/up PASS
+[v3] hang_long_hoa_vu/up PASS
+[v3] lien_hoa_phien/right PASS
+[v3] luc_duong_chuong/right PASS
+[v3] luu_phong_bo/right PASS
+[v3] chiet_mai_thu/right PASS
+[v3] bach_phien_phong_bao/right PASS
+[v3] lien_hoa_phien/down PASS
+[v3] luc_duong_chuong/down PASS
+[v3] luu_phong_bo/down PASS
+[v3] chiet_mai_thu/down PASS
+[v3] bach_phien_phong_bao/down PASS
+[v3] lien_hoa_phien/left PASS
+[v3] luc_duong_chuong/left PASS
+[v3] luu_phong_bo/left PASS
+[v3] chiet_mai_thu/left PASS
+[v3] bach_phien_phong_bao/left PASS
+[v3] lien_hoa_phien/up PASS
+[v3] luc_duong_chuong/up PASS
+[v3] luu_phong_bo/up PASS
+[v3] chiet_mai_thu/up PASS
+[v3] bach_phien_phong_bao/up PASS
+[v3] phi_anh_tram/right PASS
+[v3] truy_hon_dao/right PASS
+[v3] phong_anh_hoan_vi/right PASS
+[v3] liet_phong_dao/right PASS
+[v3] bach_liet_thien_kich/right PASS
+[v3] phi_anh_tram/down PASS
+[v3] truy_hon_dao/down PASS
+[v3] phong_anh_hoan_vi/down PASS
+[v3] liet_phong_dao/down PASS
+[v3] bach_liet_thien_kich/down PASS
+[v3] phi_anh_tram/left PASS
+[v3] truy_hon_dao/left PASS
+[v3] phong_anh_hoan_vi/left PASS
+[v3] liet_phong_dao/left PASS
+[v3] bach_liet_thien_kich/left PASS
+[v3] phi_anh_tram/up PASS
+[v3] truy_hon_dao/up PASS
+[v3] phong_anh_hoan_vi/up PASS
+[v3] liet_phong_dao/up PASS
+[v3] bach_liet_thien_kich/up PASS
+[v3] luong_nghi_thu/right PASS
+[v3] huyen_am_chuong/right PASS
+[v3] duong_khi_kich/right PASS
+[v3] thai_cuc_than_cong/right PASS
+[v3] thai_cuc_tran/right PASS
+[v3] luong_nghi_thu/down PASS
+[v3] huyen_am_chuong/down PASS
+[v3] duong_khi_kich/down PASS
+[v3] thai_cuc_than_cong/down PASS
+[v3] thai_cuc_tran/down PASS
+[v3] luong_nghi_thu/left PASS
+[v3] huyen_am_chuong/left PASS
+[v3] duong_khi_kich/left PASS
+[v3] thai_cuc_than_cong/left PASS
+[v3] thai_cuc_tran/left PASS
+[v3] luong_nghi_thu/up PASS
+[v3] huyen_am_chuong/up PASS
+[v3] duong_khi_kich/up PASS
+[v3] thai_cuc_than_cong/up PASS
+[v3] thai_cuc_tran/up PASS
+[v3] that_tinh_kiem/right PASS
+[v3] nhan_kiem_hop_nhat/right PASS
+[v3] bat_quai_kiem_tran/right PASS
+[v3] toa_sat_bac_do/right PASS
+[v3] van_kiem_quy_tong/right PASS
+[v3] that_tinh_kiem/down PASS
+[v3] nhan_kiem_hop_nhat/down PASS
+[v3] bat_quai_kiem_tran/down PASS
+[v3] toa_sat_bac_do/down PASS
+[v3] van_kiem_quy_tong/down PASS
+[v3] that_tinh_kiem/left PASS
+[v3] nhan_kiem_hop_nhat/left PASS
+[v3] bat_quai_kiem_tran/left PASS
+[v3] toa_sat_bac_do/left PASS
+[v3] van_kiem_quy_tong/left PASS
+[v3] that_tinh_kiem/up PASS
+[v3] nhan_kiem_hop_nhat/up PASS
+[v3] bat_quai_kiem_tran/up PASS
+[v3] toa_sat_bac_do/up PASS
+[v3] van_kiem_quy_tong/up PASS
+[v3] la_han_quyen/right PASS
+[v3] vi_da_quyen/right PASS
+[v3] dai_luc_kim_cuong_chuong/right PASS
+[v3] toan_phong_thoai/right PASS
+[v3] hoanh_tao_cuoc/right PASS
+[v3] vo_anh_cuoc/right PASS
+[v3] kim_cang_bat_hoai/right PASS
+[v3] nhu_lai_niet_ban/right PASS
+[v3] la_han_quyen/down PASS
+[v3] vi_da_quyen/down PASS
+[v3] dai_luc_kim_cuong_chuong/down PASS
+[v3] toan_phong_thoai/down PASS
+[v3] hoanh_tao_cuoc/down PASS
+[v3] vo_anh_cuoc/down PASS
+[v3] kim_cang_bat_hoai/down PASS
+[v3] nhu_lai_niet_ban/down PASS
+[v3] la_han_quyen/left PASS
+[v3] vi_da_quyen/left PASS
+[v3] dai_luc_kim_cuong_chuong/left PASS
+[v3] toan_phong_thoai/left PASS
+[v3] hoanh_tao_cuoc/left PASS
+[v3] vo_anh_cuoc/left PASS
+[v3] kim_cang_bat_hoai/left PASS
+[v3] nhu_lai_niet_ban/left PASS
+[v3] la_han_quyen/up PASS
+[v3] vi_da_quyen/up PASS
+[v3] dai_luc_kim_cuong_chuong/up PASS
+[v3] toan_phong_thoai/up PASS
+[v3] hoanh_tao_cuoc/up PASS
+[v3] vo_anh_cuoc/up PASS
+[v3] kim_cang_bat_hoai/up PASS
+[v3] nhu_lai_niet_ban/up PASS
+[v3] tru_ta/right PASS
+[v3] kim_quang_ho_tran/right PASS
+[v3] tam_gioi_quy_thien/right PASS
+[v3] bat_dong_minh_vuong/right PASS
+[v3] nhu_lai_thien_diep/right PASS
+[v3] tru_ta/down PASS
+[v3] kim_quang_ho_tran/down PASS
+[v3] tam_gioi_quy_thien/down PASS
+[v3] bat_dong_minh_vuong/down PASS
+[v3] nhu_lai_thien_diep/down PASS
+[v3] tru_ta/left PASS
+[v3] kim_quang_ho_tran/left PASS
+[v3] tam_gioi_quy_thien/left PASS
+[v3] bat_dong_minh_vuong/left PASS
+[v3] nhu_lai_thien_diep/left PASS
+[v3] tru_ta/up PASS
+[v3] kim_quang_ho_tran/up PASS
+[v3] tam_gioi_quy_thien/up PASS
+[v3] bat_dong_minh_vuong/up PASS
+[v3] nhu_lai_thien_diep/up PASS
+[v3 boss] dong-ta/ta_kiem_lien_kich PASS
+[v3 boss] dong-ta/lac_anh_normal PASS
+[v3 boss] dong-ta/dan_chi_than_cong PASS
+[v3 boss] dong-ta/lac_anh_kiem_phap PASS
+[v3 boss] dong-ta/ngoc_tieu_hoi_phong PASS
+[v3 boss] dong-ta/trieu_hon_dong_hai PASS
+[v3 boss] dong-ta/bach_cot_trao PASS
+[v3 boss] dong-ta/ma_anh_troc_hon PASS
+[v3 boss] dong-ta/am_phong_hap_luc PASS
+[v3 boss] dong-ta/doc_cot_bao PASS
+[v3 boss] dong-ta/thanh_am_ho_tro PASS
+[v3 boss] dong-ta/linh_xa_bo PASS
+[v3 boss] dong_ta/dan_chi_than_cong-down PASS
+[v3 boss] dong_ta/dan_chi_than_cong-left PASS
+[v3 boss] dong_ta/dan_chi_than_cong-up PASS
+[v3 boss] mai_sieu_phong/bach_cot_trao-down PASS
+[v3 boss] mai_sieu_phong/bach_cot_trao-left PASS
+[v3 boss] mai_sieu_phong/bach_cot_trao-up PASS
+[v3 boss] hoang_dung/thanh_am_ho_tro-down PASS
+[v3 boss] hoang_dung/thanh_am_ho_tro-left PASS
+[v3 boss] hoang_dung/thanh_am_ho_tro-up PASS
+[v3 boss] tay-doc/tay_doc_staff PASS
+[v3 boss] tay-doc/tay_doc_gas PASS
+[v3 boss] tay-doc/van_doc_phi_cham PASS
+[v3 boss] tay-doc/doc_vu_me_hon PASS
+[v3 boss] tay-doc/co_doc_khoan_tam PASS
+[v3 boss] tay-doc/hon_thien_phuc_long_chan PASS
+[v3 boss] tay-doc/doc_chuong PASS
+[v3 boss] tay-doc/cap_mo_chan_kich PASS
+[v3 boss] tay-doc/ngu_doc_than_chuong PASS
+[v3 boss] tay-doc/van_doc_bao_phat PASS
+[v3 boss] tay-doc/tay_doc_staff-down PASS
+[v3 boss] tay-doc/tay_doc_staff-left PASS
+[v3 boss] tay-doc/tay_doc_staff-up PASS
+[v3 boss] tay-doc/doc_chuong-down PASS
+[v3 boss] tay-doc/doc_chuong-left PASS
+[v3 boss] tay-doc/doc_chuong-up PASS
+[v3 boss] nam-de/nam_de_palm PASS
+[v3 boss] nam-de/nam_de_aura PASS
+[v3 boss] nam-de/nam_de_small_finger PASS
+[v3 boss] nam-de/nhat_duong_chi PASS
+[v3 boss] nam-de/lien_hoan_nhat_duong_chi PASS
+[v3 boss] nam-de/dai_ly_phong_huyet PASS
+[v3 boss] nam-de/phat_quang_pho_chieu PASS
+[v3 boss] nam-de/nhat_duong_quy_tong PASS
+[v3 boss] nam-de/nam_de_dash PASS
+[v3 boss] nam-de/nhat_duong_chi-down PASS
+[v3 boss] nam-de/nhat_duong_chi-left PASS
+[v3 boss] nam-de/nhat_duong_chi-up PASS
+[v3 boss] bac-cai/staff PASS
+[v3 boss] bac-cai/palms PASS
+[v3 boss] bac-cai/beam PASS
+[v3 boss] bac-cai/dogs PASS
+[v3 boss] bac-cai/clones PASS
+[v3 boss] bac-cai/vortex PASS
+[v3 boss] bac-cai/tether PASS
+[v3 boss] bac-cai/field PASS
+[v3 boss] bac-cai/spiral PASS
+[v3 boss] bac-cai/palms-down PASS
+[v3 boss] bac-cai/palms-left PASS
+[v3 boss] bac-cai/palms-up PASS
+[v3 boss] vuong/thrust PASS
+[v3 boss] vuong/slash PASS
+[v3 boss] vuong/crescent PASS
+[v3 boss] vuong/tam PASS
+[v3 boss] vuong/counter PASS
+[v3 boss] vuong/elements PASS
+[v3 boss] vuong/stars PASS
+[v3 boss] vuong/pulse PASS
+[v3 boss] vuong/swords PASS
+[v3 boss] vuong/notes PASS
+[v3 boss] vuong/tam-down PASS
+[v3 boss] vuong/tam-left PASS
+[v3 boss] vuong/tam-up PASS
+[v3 boss] vuong/pulse-down PASS
+[v3 boss] vuong/pulse-left PASS
+[v3 boss] vuong/pulse-up PASS
+[v3 boss] chu/sweep PASS
+[v3 boss] chu/fists PASS
+[v3 boss] chu/palm PASS
+[v3 boss] chu/hands PASS
+[v3 boss] chu/trap PASS
+[v3 boss] chu/spin PASS
+[v3 boss] chu/reflect PASS
+[v3 boss] chu/ultimate PASS
+[v3 boss] chu/drink PASS
+[v3 boss] chu/palm-down PASS
+[v3 boss] chu/palm-left PASS
+[v3 boss] chu/palm-up PASS
+[v3 boss] hong-liet/hong_liet_a1 PASS
+[v3 boss] hong-liet/hong_liet_a2 PASS
+[v3 boss] hong-liet/dung_nham_liet_dia PASS
+[v3 boss] hong-liet/hoa_son_bao_phat PASS
+[v3 boss] hong-liet/liet_diem_phong_toa PASS
+[v3 boss] hong-liet/hoa_tien_te_phat PASS
+[v3 boss] hong-liet/thiet_ky_trieu_binh PASS
+[v3 boss] hong-liet/van_ly_nham_hoa PASS
+[v3 boss] hong-liet/hoa_phao_thien_la PASS
+[v3 boss] hong-liet/hong_liet_a1-down PASS
+[v3 boss] hong-liet/hong_liet_a1-left PASS
+[v3 boss] hong-liet/hong_liet_a1-up PASS
+[v3 boss] kim/thiet_phien_lien_hoan PASS
+[v3 boss] kim/cuong_phong_tan_loi_cong PASS
+[v3 boss] kim/phien_trung_doc_dinh PASS
+[v3 boss] kim/cuong_phong_van_nhan PASS
+[v3 boss] kim/dat_sweep PASS
+[v3 boss] kim/dai_luc_pha_son PASS
+[v3 boss] kim/bat_dong_kim_cang PASS
+[v3 boss] kim/dai_luc_pha_son_boulder PASS
+[v3 boss] kim/hang_ma_tam_lien_chan PASS
+[v3 boss] kim/kim_sweep PASS
+[v3 boss] kim/kim_hand_chop PASS
+[v3 boss] kim/kim_luan_truy_hon PASS
+[v3 boss] kim/ngu_luan_ho_the PASS
+[v3 boss] kim/ngu_luan_phong_toa PASS
+[v3 boss] kim/long_tuong_chan_thien PASS
+[v3 boss] kim/long_tuong_bat_nha_cong PASS
+[v3 boss] kim/long_tuong_bat_nha_thap_tang PASS
+[v3 boss] kim/thiet_phien_lien_hoan-down PASS
+[v3 boss] kim/thiet_phien_lien_hoan-left PASS
+[v3 boss] kim/thiet_phien_lien_hoan-up PASS
+[v3 boss] kim/dat_sweep-down PASS
+[v3 boss] kim/dat_sweep-left PASS
+[v3 boss] kim/dat_sweep-up PASS
+[v3 boss] kim/kim_hand_chop-down PASS
+[v3 boss] kim/kim_hand_chop-left PASS
+[v3 boss] kim/kim_hand_chop-up PASS
+[v3 boss] ly-mac-sau/ly_mac_sau_basic PASS
+[v3 boss] ly-mac-sau/bang_phach_ngan_cham PASS
+[v3 boss] ly-mac-sau/xich_luyen_chuong PASS
+[v3 boss] ly-mac-sau/phat_tran_cong PASS
+[v3 boss] ly-mac-sau/co_mo_kiem_phap PASS
+[v3 boss] ly-mac-sau/ngu_doc_chuong PASS
+[v3 boss] ly-mac-sau/phat_tran_cong-down PASS
+[v3 boss] ly-mac-sau/phat_tran_cong-left PASS
+[v3 boss] ly-mac-sau/phat_tran_cong-up PASS
+  ok 1 tests\e2e\renovation-v3.spec.ts:3:1 › all school skills and boss casts use renovated art in a real six-client match (12.4m)
+
+  Slow test file: tests\e2e\renovation-v3.spec.ts (12.4m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  1 passed (12.5m)
+[check] browser verification: 753.06s
+[check] timings: C:\Users\ADMIN\.codex\worktrees\visual-upgrade-2\volam-hero-defense\docs\evidence\sessions\renovation-v3-final\check-workflow\final-timings.json
+
+[check] final passed in 943.70s

@@ -1,6 +1,12 @@
 import Phaser from 'phaser';
 import raw from './renovation-art.generated.json';
 import skillOverrides from './renovation-skills.generated.json';
+import allOverrides from './renovation-actions.generated.json';
+import {
+  preloadRenovationActions,
+  presentRenovationAction,
+  renovationActionSources,
+} from './renovation-actions.js';
 
 type BodyImage = Phaser.GameObjects.Image | Phaser.GameObjects.Sprite;
 import { renovatedActors } from './renovation-model.js';
@@ -10,6 +16,7 @@ export const renovationEnabled = (scene: Phaser.Scene) =>
   scene.registry.get('renovation-enabled') === true;
 export function preloadRenovation(scene: Phaser.Scene): void {
   if (scene.sys.settings.key !== 'Arena') return;
+  preloadRenovationActions(scene);
   scene.load.image(
     'renovated-arena-layout',
     '/assets/renovation-v2/arena-ground.png',
@@ -47,6 +54,7 @@ export function presentRenovatedBody(
   pose: string,
   fx = 0,
   fy = 1,
+  ability = '',
 ): void {
   if (!image || !id || !renovationEnabled(scene)) return;
   const definition = definitions.get(id);
@@ -72,6 +80,9 @@ export function presentRenovatedBody(
       .setScale(0.5)
       .setFlip(false, false)
       .setRotation(0);
+    image.setData('renovation-action', undefined);
+  } else {
+    presentRenovationAction(scene, image, id, pose, fx, fy, ability);
   }
   image.setData('renovation', { id, pose, direction, locomotion });
   const seen = scene.registry.get('renovation-observed') as Map<
@@ -85,7 +96,14 @@ export function presentRenovatedBody(
 export function inspectRenovation(scene: Phaser.Scene) {
   const skillSources = scene.registry.get('renovated-skill-sources') as
     Map<string, string> | undefined;
-  const skillKeys = new Set(skillOverrides.assets.map((a) => a.id));
+  const skillKeys = new Set(
+    (
+      [...skillOverrides.assets, ...allOverrides.assets] as Array<{
+        id: string;
+        textureKeys?: string[];
+      }>
+    ).flatMap((a) => a.textureKeys ?? [a.id]),
+  );
   const seen = scene.registry.get('renovation-observed') as
     Map<string, Set<string>> | undefined;
   return {
@@ -121,10 +139,14 @@ export function inspectRenovation(scene: Phaser.Scene) {
           name: body.name,
           texture: body.texture.key,
           source:
+            renovationActionSources.get(body.texture.key) ??
             skillSources?.get(body.texture.key) ??
             (body.texture.getSourceImage() as { src?: string }).src ??
             '',
           density: body.texture.source[0]?.resolution,
+          effectiveDensity:
+            (body.texture.source[0]?.resolution ?? 1) / Math.abs(body.scaleX),
+          action: body.getData('renovation-action'),
           screen: [
             (body.x - scene.cameras.main.worldView.x) * scene.cameras.main.zoom,
             (body.y - scene.cameras.main.worldView.y) * scene.cameras.main.zoom,

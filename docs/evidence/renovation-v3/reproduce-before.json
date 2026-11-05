@@ -1,0 +1,1118 @@
+{
+  "skill": "van_kiem_quy_tong",
+  "states": [
+    {
+      "hero": {
+        "build": {
+          "enabled": true,
+          "mode": "custom",
+          "branchId": "vo_dang_quyen",
+          "slotSkills": [
+            "luong_nghi_thu",
+            "huyen_am_chuong",
+            "duong_khi_kich",
+            "thai_cuc_than_cong"
+          ],
+          "revision": 1,
+          "earned": 30,
+          "allocated": 1,
+          "available": 29,
+          "surplus": 0,
+          "ranks": {
+            "van_kiem_quy_tong": 1
+          },
+          "stats": {
+            "maxHp": 353,
+            "maxMana": 354,
+            "attackPower": 74.30000305175781,
+            "defense": 9.800000190734863,
+            "attackSpeed": 1,
+            "movementSpeed": 160,
+            "critChance": 0.07999999821186066,
+            "critMultiplier": 1.5,
+            "manaRegen": 13.350000381469727,
+            "cooldownReduction": 0.19599999487400055,
+            "hpRegen": 0
+          },
+          "sources": "{\"base\":{\"maxHp\":150,\"maxMana\":180,\"attackPower\":25,\"defense\":4,\"attackSpeed\":1,\"movementSpeed\":160,\"critChance\":0.08,\"critMultiplier\":1.5,\"manaRegen\":9,\"cooldownReduction\":0.08,\"hpRegen\":0},\"growth\":{\"maxHp\":203,\"maxMana\":87,\"attackPower\":49.3,\"defense\":5.800000000000001,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"innate\":{\"maxHp\":0,\"maxMana\":87,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":4.35,\"cooldownReduction\":0.116,\"hpRegen\":0},\"surplus\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"equipment\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"temporary\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0}}"
+        },
+        "inventory": {
+          "levels": {
+            "weapon": 0,
+            "armor": 0,
+            "hat": 0,
+            "boots": 0
+          },
+          "potions": {
+            "hp_small": 0,
+            "hp_medium": 0,
+            "hp_large": 0,
+            "mp_small": 0,
+            "mp_medium": 0,
+            "mp_large": 0
+          },
+          "revision": 0,
+          "potionCooldownTicks": 0
+        },
+        "x": 800,
+        "y": 760,
+        "hp": 353,
+        "maxHp": 353,
+        "fx": 1,
+        "fy": 0,
+        "pose": "cast",
+        "statuses": "[{\"kind\":\"channel\",\"abilityId\":\"van_kiem_quy_tong\",\"sourceId\":\"OMcKIqUEQ\",\"ticks\":147,\"magnitude\":1}]",
+        "castAbilityId": "van_kiem_quy_tong",
+        "combos": "[]",
+        "zoneId": "arena",
+        "respawnTicks": 0,
+        "bossSpectator": false,
+        "bossRevivalUsed": false,
+        "bossAttempt": 0,
+        "bossInvitation": "null",
+        "actionState": "{\"id\":\"action_1\",\"abilityId\":\"van_kiem_quy_tong\",\"kind\":\"multi_hit\",\"startedAt\":9,\"nextTick\":21,\"until\":159,\"remaining\":12,\"fx\":1,\"fy\":0,\"range\":1,\"windupTicks\":0}",
+        "actionUntil": 159,
+        "actionStartedAt": 9,
+        "basicStage": "",
+        "bossItems": "[]",
+        "nickname": "Renovation 1",
+        "schoolId": "vo_dang",
+        "confirmed": true,
+        "connected": true,
+        "checks": 0,
+        "mana": 313.3349914550781,
+        "maxMana": 354,
+        "level": 30,
+        "xp": 1740,
+        "gold": 0,
+        "skillPoints": 29,
+        "basicId": "vo_dang_kiem",
+        "lastSequence": 1,
+        "basicCooldown": 0,
+        "dashCharges": 2,
+        "dashRechargeTicks": 0,
+        "blinkTicks": 0,
+        "qCooldown": 408,
+        "wCooldown": 0,
+        "eCooldown": 0,
+        "rCooldown": 0,
+        "qSkill": "van_kiem_quy_tong",
+        "wSkill": "",
+        "eSkill": "",
+        "rSkill": "",
+        "bossLoot": "[]"
+      },
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:OMcKIqUEQ",
+        "texture": "van_kiem_quy_tong_character",
+        "source": "/assets/renovation-v2/overrides/van_kiem_quy_tong_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_right_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "effects": [
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 800,
+          "y": 684,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 763,
+          "y": 699,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 837,
+          "y": 699,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "van_kiem_quy_tong_character",
+          "frame": "cast_right_0",
+          "x": 800,
+          "y": 760,
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "source": "/assets/renovation-v2/overrides/van_kiem_quy_tong_character.png"
+        },
+        {
+          "texture": "van_kiem_quy_tong_vfx",
+          "frame": "preparation_0",
+          "x": 800,
+          "y": 738,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            2,
+            2
+          ],
+          "source": "/assets/renovation-v2/overrides/van_kiem_quy_tong_vfx.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 852,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 748,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 837,
+          "y": 773,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 763,
+          "y": 773,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 800,
+          "y": 788,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        }
+      ]
+    },
+    {
+      "hero": {
+        "build": {
+          "enabled": true,
+          "mode": "custom",
+          "branchId": "vo_dang_quyen",
+          "slotSkills": [
+            "luong_nghi_thu",
+            "huyen_am_chuong",
+            "duong_khi_kich",
+            "thai_cuc_than_cong"
+          ],
+          "revision": 1,
+          "earned": 30,
+          "allocated": 1,
+          "available": 29,
+          "surplus": 0,
+          "ranks": {
+            "van_kiem_quy_tong": 1
+          },
+          "stats": {
+            "maxHp": 353,
+            "maxMana": 354,
+            "attackPower": 74.30000305175781,
+            "defense": 9.800000190734863,
+            "attackSpeed": 1,
+            "movementSpeed": 160,
+            "critChance": 0.07999999821186066,
+            "critMultiplier": 1.5,
+            "manaRegen": 13.350000381469727,
+            "cooldownReduction": 0.19599999487400055,
+            "hpRegen": 0
+          },
+          "sources": "{\"base\":{\"maxHp\":150,\"maxMana\":180,\"attackPower\":25,\"defense\":4,\"attackSpeed\":1,\"movementSpeed\":160,\"critChance\":0.08,\"critMultiplier\":1.5,\"manaRegen\":9,\"cooldownReduction\":0.08,\"hpRegen\":0},\"growth\":{\"maxHp\":203,\"maxMana\":87,\"attackPower\":49.3,\"defense\":5.800000000000001,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"innate\":{\"maxHp\":0,\"maxMana\":87,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":4.35,\"cooldownReduction\":0.116,\"hpRegen\":0},\"surplus\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"equipment\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"temporary\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0}}"
+        },
+        "inventory": {
+          "levels": {
+            "weapon": 0,
+            "armor": 0,
+            "hat": 0,
+            "boots": 0
+          },
+          "potions": {
+            "hp_small": 0,
+            "hp_medium": 0,
+            "hp_large": 0,
+            "mp_small": 0,
+            "mp_medium": 0,
+            "mp_large": 0
+          },
+          "revision": 0,
+          "potionCooldownTicks": 0
+        },
+        "x": 800,
+        "y": 760,
+        "hp": 353,
+        "maxHp": 353,
+        "fx": 1,
+        "fy": 0,
+        "pose": "cast",
+        "statuses": "[{\"kind\":\"channel\",\"abilityId\":\"van_kiem_quy_tong\",\"sourceId\":\"OMcKIqUEQ\",\"ticks\":132,\"magnitude\":1}]",
+        "castAbilityId": "van_kiem_quy_tong",
+        "combos": "[]",
+        "zoneId": "arena",
+        "respawnTicks": 0,
+        "bossSpectator": false,
+        "bossRevivalUsed": false,
+        "bossAttempt": 0,
+        "bossInvitation": "null",
+        "actionState": "{\"id\":\"action_1\",\"abilityId\":\"van_kiem_quy_tong\",\"kind\":\"multi_hit\",\"startedAt\":9,\"nextTick\":33,\"until\":159,\"remaining\":11,\"fx\":1,\"fy\":0,\"range\":1,\"windupTicks\":0}",
+        "actionUntil": 159,
+        "actionStartedAt": 9,
+        "basicStage": "",
+        "bossItems": "[]",
+        "nickname": "Renovation 1",
+        "schoolId": "vo_dang",
+        "confirmed": true,
+        "connected": true,
+        "checks": 0,
+        "mana": 320.010009765625,
+        "maxMana": 354,
+        "level": 30,
+        "xp": 1740,
+        "gold": 0,
+        "skillPoints": 29,
+        "basicId": "vo_dang_kiem",
+        "lastSequence": 1,
+        "basicCooldown": 0,
+        "dashCharges": 2,
+        "dashRechargeTicks": 0,
+        "blinkTicks": 0,
+        "qCooldown": 393,
+        "wCooldown": 0,
+        "eCooldown": 0,
+        "rCooldown": 0,
+        "qSkill": "van_kiem_quy_tong",
+        "wSkill": "",
+        "eSkill": "",
+        "rSkill": "",
+        "bossLoot": "[]"
+      },
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "cast",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:OMcKIqUEQ",
+        "texture": "hero_vo_dang_kiem",
+        "source": "/assets/renovation-v2/overrides/hero_vo_dang_kiem.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "basic_attack_right_3",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "effects": [
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 625,
+          "y": 561,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 975,
+          "y": 561,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 800,
+          "y": 645,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 736,
+          "y": 672,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 864,
+          "y": 672,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "hero_vo_dang_kiem",
+          "frame": "basic_attack_right_3",
+          "x": 800,
+          "y": 760,
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "source": "/assets/renovation-v2/overrides/hero_vo_dang_kiem.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 1047,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 553,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 891,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 709,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 864,
+          "y": 800,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 736,
+          "y": 800,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 800,
+          "y": 827,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 975,
+          "y": 911,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 625,
+          "y": 911,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 800,
+          "y": 983,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        }
+      ]
+    },
+    {
+      "hero": {
+        "build": {
+          "enabled": true,
+          "mode": "custom",
+          "branchId": "vo_dang_quyen",
+          "slotSkills": [
+            "luong_nghi_thu",
+            "huyen_am_chuong",
+            "duong_khi_kich",
+            "thai_cuc_than_cong"
+          ],
+          "revision": 1,
+          "earned": 30,
+          "allocated": 1,
+          "available": 29,
+          "surplus": 0,
+          "ranks": {
+            "van_kiem_quy_tong": 1
+          },
+          "stats": {
+            "maxHp": 353,
+            "maxMana": 354,
+            "attackPower": 74.30000305175781,
+            "defense": 9.800000190734863,
+            "attackSpeed": 1,
+            "movementSpeed": 160,
+            "critChance": 0.07999999821186066,
+            "critMultiplier": 1.5,
+            "manaRegen": 13.350000381469727,
+            "cooldownReduction": 0.19599999487400055,
+            "hpRegen": 0
+          },
+          "sources": "{\"base\":{\"maxHp\":150,\"maxMana\":180,\"attackPower\":25,\"defense\":4,\"attackSpeed\":1,\"movementSpeed\":160,\"critChance\":0.08,\"critMultiplier\":1.5,\"manaRegen\":9,\"cooldownReduction\":0.08,\"hpRegen\":0},\"growth\":{\"maxHp\":203,\"maxMana\":87,\"attackPower\":49.3,\"defense\":5.800000000000001,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"innate\":{\"maxHp\":0,\"maxMana\":87,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":4.35,\"cooldownReduction\":0.116,\"hpRegen\":0},\"surplus\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"equipment\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0},\"temporary\":{\"maxHp\":0,\"maxMana\":0,\"attackPower\":0,\"defense\":0,\"attackSpeed\":0,\"movementSpeed\":0,\"critChance\":0,\"critMultiplier\":0,\"manaRegen\":0,\"cooldownReduction\":0,\"hpRegen\":0}}"
+        },
+        "inventory": {
+          "levels": {
+            "weapon": 0,
+            "armor": 0,
+            "hat": 0,
+            "boots": 0
+          },
+          "potions": {
+            "hp_small": 0,
+            "hp_medium": 0,
+            "hp_large": 0,
+            "mp_small": 0,
+            "mp_medium": 0,
+            "mp_large": 0
+          },
+          "revision": 0,
+          "potionCooldownTicks": 0
+        },
+        "x": 800,
+        "y": 760,
+        "hp": 353,
+        "maxHp": 353,
+        "fx": 1,
+        "fy": 0,
+        "pose": "cast",
+        "statuses": "[{\"kind\":\"channel\",\"abilityId\":\"van_kiem_quy_tong\",\"sourceId\":\"OMcKIqUEQ\",\"ticks\":94,\"magnitude\":1}]",
+        "castAbilityId": "van_kiem_quy_tong",
+        "combos": "[]",
+        "zoneId": "arena",
+        "respawnTicks": 0,
+        "bossSpectator": false,
+        "bossRevivalUsed": false,
+        "bossAttempt": 0,
+        "bossInvitation": "null",
+        "actionState": "{\"id\":\"action_1\",\"abilityId\":\"van_kiem_quy_tong\",\"kind\":\"multi_hit\",\"startedAt\":9,\"nextTick\":69,\"until\":159,\"remaining\":8,\"fx\":1,\"fy\":0,\"range\":1,\"windupTicks\":0}",
+        "actionUntil": 159,
+        "actionStartedAt": 9,
+        "basicStage": "",
+        "bossItems": "[]",
+        "nickname": "Renovation 1",
+        "schoolId": "vo_dang",
+        "confirmed": true,
+        "connected": true,
+        "checks": 0,
+        "mana": 336.9200134277344,
+        "maxMana": 354,
+        "level": 30,
+        "xp": 1740,
+        "gold": 0,
+        "skillPoints": 29,
+        "basicId": "vo_dang_kiem",
+        "lastSequence": 1,
+        "basicCooldown": 0,
+        "dashCharges": 2,
+        "dashRechargeTicks": 0,
+        "blinkTicks": 0,
+        "qCooldown": 355,
+        "wCooldown": 0,
+        "eCooldown": 0,
+        "rCooldown": 0,
+        "qSkill": "van_kiem_quy_tong",
+        "wSkill": "",
+        "eSkill": "",
+        "rSkill": "",
+        "bossLoot": "[]"
+      },
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "cast",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:OMcKIqUEQ",
+        "texture": "hero_vo_dang_kiem",
+        "source": "/assets/renovation-v2/overrides/hero_vo_dang_kiem.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "basic_attack_right_3",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "effects": [
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 515,
+          "y": 451,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 1085,
+          "y": 451,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 625,
+          "y": 561,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 975,
+          "y": 561,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 800,
+          "y": 645,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 736,
+          "y": 672,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 864,
+          "y": 672,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "hero_vo_dang_kiem",
+          "frame": "basic_attack_right_3",
+          "x": 800,
+          "y": 760,
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "source": "/assets/renovation-v2/overrides/hero_vo_dang_kiem.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 1203,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 397,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 1047,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 553,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 891,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 709,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 864,
+          "y": 800,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 736,
+          "y": 800,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 800,
+          "y": 827,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 975,
+          "y": 911,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 625,
+          "y": 911,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 800,
+          "y": 983,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 1085,
+          "y": 1021,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 515,
+          "y": 1021,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        }
+      ]
+    }
+  ]
+}

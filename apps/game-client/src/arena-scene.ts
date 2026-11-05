@@ -518,9 +518,14 @@ export class ArenaScene extends Phaser.Scene {
         actor.hp <= 0 ? 'death' : !enemy && cast ? 'action' : pose.state,
         actor.fx,
         actor.fy,
+        actor.castAbilityId ?? '',
       );
       if (cast)
-        this.vfx?.observeCharacter(texture, String(view.sprite.frame.name));
+        this.vfx?.observeCharacter(
+          texture,
+          view.sprite.getData('renovation-action')?.sourceFrame ??
+            String(view.sprite.frame.name),
+        );
       const states = JSON.parse(actor.statuses ?? '[]') as Array<{
         kind: string;
       }>;

@@ -337,6 +337,7 @@ export class KimLuanRenderer {
         /^(idle|walk)_/.test(clip) && !cast && !movingShot ? a.pose : 'action',
         a.fx,
         a.fy,
+        cast?.abilityId ?? a.castAbilityId,
       );
       if (bundle === 'kim_luan_actions' && clip === 'channel') {
         const pivots: Record<string, number[]> = {
