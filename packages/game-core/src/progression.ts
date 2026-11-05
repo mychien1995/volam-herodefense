@@ -6,6 +6,7 @@ import type {
   StatBonuses,
   StatCalculation,
   SkillMode,
+  RankedSkill,
 } from './progression-types.js';
 import { cancelOwnedEffects, statusValue } from './status.js';
 
@@ -28,6 +29,11 @@ const scale = (values: StatBonuses, n: number): CharacterStats =>
   Object.fromEntries(
     statKeys.map((k) => [k, (values[k] ?? 0) * n]),
   ) as unknown as CharacterStats;
+const SKILL_POINT_CAP = 20;
+
+function legacyLevelGates(skill: RankedSkill): number[] {
+  return skill.ultimate ? [6, 10, 14] : skill.levelGates;
+}
 export function pointAccounting(
   hero: Hero,
   config: SimulationConfig,
@@ -37,12 +43,23 @@ export function pointAccounting(
   const allocated = hero.progression
     ? Object.values(hero.progression.ranks).reduce((a, b) => a + b, 0)
     : 0;
+  if (hero.progression?.mode === 'fixed')
+    return {
+      earned,
+      allocated,
+      available: Math.max(0, Math.min(SKILL_POINT_CAP, earned) - allocated),
+      surplus: Math.max(0, earned - SKILL_POINT_CAP),
+    };
   const remaining = Math.max(0, earned - allocated);
   const maxed =
     ids.length === 4 &&
     ids.every((id) => {
       const d = config.progression?.skills[id];
-      return !!id && !!d && hero.progression?.ranks[id] === d.ranks.length;
+      return (
+        !!id &&
+        !!d &&
+        hero.progression?.ranks[id] === legacyLevelGates(d).length
+      );
     });
   return {
     earned,
@@ -94,7 +111,9 @@ export function characterStats(
     ),
     surplus: scale(
       profile?.surplus ?? {},
-      profile ? pointAccounting(hero, config).surplus : 0,
+      profile && hero.progression?.mode !== 'fixed'
+        ? pointAccounting(hero, config).surplus
+        : 0,
     ),
     equipment: zero(),
     temporary: zero(),
@@ -104,8 +123,14 @@ export function characterStats(
     for (const [slot, item] of Object.entries(config.economy.basics)) {
       const level =
         hero.inventory.levels[slot as keyof typeof hero.inventory.levels];
+      const branchId =
+        hero.inventory.crafted?.[slot as keyof typeof hero.inventory.levels];
+      const branch = config.economy.recipes[
+        slot as keyof typeof hero.inventory.levels
+      ].branches.find((candidate) => candidate.id === branchId);
       for (const key of statKeys)
-        sources.equipment[key] += (item.perLevel[key] ?? 0) * level;
+        sources.equipment[key] +=
+          (item.perLevel[key] ?? 0) * level + (branch?.stats[key] ?? 0);
     }
   sources.temporary.critMultiplier = Math.max(
     0,
@@ -189,7 +214,9 @@ export function automaticRanks(
       0,
       Math.floor((Math.min(config.maxLevel, level) + 3 - slot) / 4),
     );
-    const unlocked = skill.levelGates.filter((gate) => level >= gate).length;
+    const unlocked = legacyLevelGates(skill).filter(
+      (gate) => level >= gate,
+    ).length;
     const rank = Math.min(quota, unlocked, skill.ranks.length);
     if (rank > 0) ranks[id] = rank;
   });
@@ -213,21 +240,30 @@ export function initializeProgression(
   hero: Hero,
   config: SimulationConfig,
   mode: SkillMode = 'custom',
+  selectedBranchId?: string,
 ): boolean {
   if (!config.progression?.schools[hero.schoolId]) return false;
-  const branchId = config.progression.schools[hero.schoolId]!.basicIds[0]!;
+  const profile = config.progression.schools[hero.schoolId]!;
+  const branchId = selectedBranchId ?? profile.basicIds[0]!;
   const branch = config.progression.defaultBranches?.[branchId];
-  if (mode === 'default' && !branch) return false;
+  const fixed =
+    mode === 'fixed' ? config.progression.fixedBranches?.[branchId] : undefined;
+  if (
+    !profile.basicIds.includes(branchId) ||
+    (mode === 'default' && !branch) ||
+    (mode === 'fixed' && !fixed)
+  )
+    return false;
   hero.progression = {
     revision: 0,
     ranks: {},
     mode,
     branchId,
-    defaultSkills: [...(branch?.skillIds ?? [])],
+    defaultSkills: [...(fixed?.skillIds ?? branch?.skillIds ?? [])],
   };
-  hero.skillIds = ['', '', '', ''];
-  hero.skillCooldowns = [0, 0, 0, 0];
-  hero.basicId = config.progression.schools[hero.schoolId]!.basicIds[0]!;
+  hero.skillIds = Array<string>(fixed ? 5 : 4).fill('');
+  hero.skillCooldowns = hero.skillIds.map(() => 0);
+  hero.basicId = branchId;
   if (mode === 'default') applyAutomaticProgression(hero, config);
   refreshCharacter(hero, config);
   hero.hp = hero.maxHp;
@@ -270,6 +306,69 @@ export function gainExperience(
     );
   }
 }
+/** Fixed branches account for each slot once, even when two moves share its rank. */
+export function skillRank(
+  hero: Hero,
+  id: string,
+  config: SimulationConfig,
+): number {
+  const p = hero.progression;
+  if (!p) return 0;
+  if (p.mode !== 'fixed') return p.ranks[id] ?? 0;
+  const slot = p.defaultSkills.indexOf(id);
+  const key = config.progression?.fixedBranches?.[p.branchId]?.skillIds[slot];
+  return key ? (p.ranks[key] ?? 0) : 0;
+}
+function updateFixedSlots(hero: Hero, config: SimulationConfig): void {
+  hero.skillIds = hero.progression!.defaultSkills.map((id) =>
+    skillRank(hero, id, config) ? id : '',
+  );
+  hero.skillCooldowns = hero.skillIds.map(
+    (id) => hero.abilityCooldowns?.[id] ?? 0,
+  );
+}
+function changeFixedBuild(
+  world: World,
+  hero: Hero,
+  config: SimulationConfig,
+  change: BuildChange,
+): string | undefined {
+  const p = hero.progression!;
+  const branch = config.progression?.fixedBranches?.[p.branchId];
+  if (!branch) return 'Nhánh võ học chưa mở.';
+  if (change.action === 'upgrade-slot') {
+    const id = branch.skillIds[change.slot];
+    const skill = id ? config.progression?.skills[id] : undefined;
+    if (!id || !skill) return 'Ô kỹ năng không hợp lệ.';
+    const next = (p.ranks[id] ?? 0) + 1;
+    if (next > skill.ranks.length) return 'Kỹ năng đã đạt bậc tối đa.';
+    const level = skill.levelGates[next - 1]!;
+    if (hero.level < level) return 'Bậc tiếp theo cần cấp ' + level + '.';
+    if (pointAccounting(hero, config).available < 1)
+      return 'Không đủ điểm kỹ năng.';
+    p.ranks[id] = next;
+  } else if (change.action === 'stance' && branch.alternateSkillIds) {
+    if (
+      hero.namDeLocked ||
+      hero.comboFinisher ||
+      hero.actionUntil > world.tick ||
+      world.actions?.some((action) => action.ownerId === hero.id) ||
+      world.pending.some(
+        (input) => input.heroId === hero.id && input.command.kind === 'cast',
+      )
+    )
+      return 'Chờ thi triển xong để đổi thế.';
+    p.defaultSkills = [
+      ...(p.defaultSkills[0] === branch.skillIds[0]
+        ? branch.alternateSkillIds
+        : branch.skillIds),
+    ];
+  } else return 'Nhánh võ học đã được khóa khi vào trận.';
+  updateFixedSlots(hero, config);
+  p.revision++;
+  refreshCharacter(hero, config);
+  return undefined;
+}
 export function rankedAbility(
   hero: Hero,
   id: string,
@@ -280,7 +379,7 @@ export function rankedAbility(
       ? config.skillCatalogue?.[id]
       : undefined;
   const skill = config.progression?.skills[id],
-    rank = hero.progression.ranks[id] ?? 0;
+    rank = skillRank(hero, id, config);
   return skill?.schoolId === hero.schoolId && rank > 0
     ? skill.ranks[rank - 1]
     : undefined;
@@ -318,6 +417,9 @@ export function changeBuild(
   if (hero.hp <= 0) return 'Cần hồi sinh trước khi đổi võ học.';
   if (expectedRevision !== p.revision)
     return 'Võ học đã thay đổi. Hãy thử lại với trạng thái mới.';
+  if (p.mode === 'fixed') return changeFixedBuild(world, hero, config, change);
+  if (change.action === 'upgrade-slot' || change.action === 'stance')
+    return 'Nhánh võ học chưa mở.';
   let ids = [...(hero.skillIds ?? ['', '', '', ''])],
     ranks = { ...p.ranks },
     basic = hero.basicId,
@@ -387,9 +489,10 @@ export function changeBuild(
     )
       return 'Trang bị kỹ năng trước khi tăng bậc.';
     const next = (ranks[change.skillId] ?? 0) + 1;
-    if (next > skill.ranks.length) return 'Kỹ năng đã đạt bậc tối đa.';
-    if (hero.level < skill.levelGates[next - 1]!)
-      return `Bậc tiếp theo cần cấp ${skill.levelGates[next - 1]}.`;
+    const gates = legacyLevelGates(skill);
+    if (next > gates.length) return 'Kỹ năng đã đạt bậc tối đa.';
+    if (hero.level < gates[next - 1]!)
+      return `Bậc tiếp theo cần cấp ${gates[next - 1]}.`;
     if (pointAccounting(hero, config).available < 1)
       return 'Không đủ điểm kỹ năng.';
     ranks[change.skillId] = next;

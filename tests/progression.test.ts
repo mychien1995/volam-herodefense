@@ -31,9 +31,12 @@ const normals = [
 ];
 function maxBuild(f: ReturnType<typeof fixture>, ids = normals) {
   expect(f.change({ action: 'loadout', ids })).toBeUndefined();
-  for (const id of ids)
-    for (let i = 0; i < f.config.progression!.skills[id]!.ranks.length; i++)
+  for (const id of ids) {
+    const skill = f.config.progression!.skills[id]!;
+    const rankCap = skill.ultimate ? 3 : skill.ranks.length;
+    for (let i = 0; i < rankCap; i++)
       expect(f.change({ action: 'upgrade', skillId: id })).toBeUndefined();
+  }
 }
 describe('M3B deterministic progression and builds', () => {
   it('starts at level1 with exactly one available point and no free learned actives', () => {

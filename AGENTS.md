@@ -27,8 +27,8 @@ This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D
 
 - Server authoritative for movement, collision, targeting, hit/damage, RNG, skills, XP, gold, items, loot, wave clock, boss and match state. **Never trust client-submitted damage, location, inventory, XP or loot result.**
 - `game-core` independent of Phaser, Colyseus, DOM and UI; deterministic seeded simulation with tests.
-- Arrow keys movement, A basic manual attack, QWER skills; mouse only NPC/menu/inventory. No targeted spells. Ranged shots aim once at nearest enemy's position, then fly straight; **no tracking**. Melee frontal arc with reduced cleave on secondary targets.
-- School styles/skills freely mixed; innate passive levels automatically; max level 30; 1 skill point per level including level 1; 4 active slots; respec only in central arena; no reset-based stat duplication.
+- Arrow keys movement, A basic manual attack, QWERT skills, F to switch Thiếu Lâm Quyền stance. Mouse for NPC/menu/inventory and hotbar rank upgrades. No targeted spells. Ranged shots aim once at nearest enemy's position, then fly straight; **no tracking**. Melee frontal arc with reduced cleave on secondary targets.
+- Confirm one school and branch before entering a match. Innate passive levels automatically. Max level 30. Five fixed active slots with four ranks each. Levels 1–20 grant skill points, levels 21–30 reserve future stat points. Standard rank gates 1/3/5/7, ultimate 6/12/18/24. No in-match respec.
 - Thiếu Lâm Phát Động same-target hits only; secondary cleave hits count. Cầm Long Công = pull+silence+disarm without stun and without preventing movement.
 - Match room 1–6 players, nicknames only, no saved progress. Private/shared dungeons, boss dungeon empty reset at 30s. Creep XP fixed pool divided among eligible kill/assists.
 - 20 statue creep invasions **every 180 seconds** from **2 sides**, regardless of previous wave status; no statue repair. Fifth-wave bosses only after corresponding fifth wave cleared + short rest, in order Đông Tà/Tây Độc/Nam Đế/Bắc Cái; final Vương Trùng Dương. Gold/XP only for invasion, **no item drops**.

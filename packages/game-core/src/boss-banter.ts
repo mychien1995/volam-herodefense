@@ -7,6 +7,30 @@ export interface BossBanterDefinition {
   intervalTicks: number;
   jitterTicks: number;
   pools: Record<string, string[]>;
+  farewells: Record<string, string>;
+  farewellTicks: number;
+}
+/** Called once by the encounter's defeat transition. Returns the corpse's expiry tick. */
+export function waveBossFarewell(
+  w: World,
+  c: SimulationConfig,
+  actor: Creep,
+): number {
+  const d = c.bossBanter;
+  if (!d || !Object.hasOwn(d.farewells, actor.id)) return w.tick;
+  actor.pose = 'death';
+  emit(w, {
+    kind: 'effect',
+    sourceId: actor.id,
+    targetId: '',
+    abilityId: actor.id,
+    stage: 'boss_farewell',
+    x: actor.x,
+    y: actor.y,
+    damage: 0,
+    critical: false,
+  });
+  return w.tick + d.farewellTicks;
 }
 export interface BossBanterClock {
   actor: Creep;
@@ -22,12 +46,12 @@ export function stepBossBanter(w: World, c: SimulationConfig): void {
   const clocks = (w.bossBanter ??= new Map());
   for (const id of clocks.keys())
     if (!w.creeps.has(id) || w.creeps.get(id)!.hp <= 0) clocks.delete(id);
-  for (const id of ['dong_ta', 'tay_doc_boss', 'boss_nam_de']) {
-    const actor = w.creeps.get(id),
-      pool = d.pools[id];
+  const living = [...w.heroes.values()].some((h) => h.hp > 0);
+  for (const [id, pool] of Object.entries(d.pools)) {
+    const actor = w.creeps.get(id);
     if (!actor || actor.hp <= 0 || !pool?.length) continue;
     const fighting =
-      [...w.heroes.values()].some((h) => h.hp > 0) &&
+      living &&
       !actor.invulnerable &&
       (id !== 'boss_nam_de' ||
         !['enter', 'waiting', 'rest', 'defeated'].includes(
@@ -55,10 +79,11 @@ export function stepBossBanter(w: World, c: SimulationConfig): void {
       continue;
     }
     if (w.tick < clock.nextAt) continue;
-    // Give each skill name its full readable lifetime before emitting a chat line.
+    // Wave bosses speak between attacks. Dungeon bosses can chain actions for
+    // a whole phase, so their dialogue uses its separate lane during combat.
     if (
-      actor.pose === 'cast' ||
-      actor.actionUntil > w.tick ||
+      (Object.hasOwn(d.farewells, id) &&
+        (actor.pose === 'cast' || actor.actionUntil > w.tick)) ||
       w.events.some((e) => e.sourceId === id && e.stage === 'boss_shout')
     )
       continue;

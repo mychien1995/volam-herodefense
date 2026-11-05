@@ -1,3 +1,8 @@
+import {
+  stepEquipmentCombat,
+  useEquipmentSkill,
+  withBasicEquipment,
+} from './equipment-combat.js';
 import { stepBossBanter } from './boss-banter.js';
 import { dungeonWaypoint } from './dungeon-navigation.js';
 import { dash, blink, rechargeDash } from './mobility.js';
@@ -214,6 +219,10 @@ function runCommand(
     return;
   }
   if (hero.namDeLocked) return;
+  if (command.kind === 'gear-skill') {
+    useEquipmentSkill(world, hero, config);
+    return;
+  }
   if (command.kind === 'dev-loadout') {
     if (hero.progression) return;
     if (
@@ -277,11 +286,18 @@ function runCommand(
             until: world.tick + ability.manualChain.idleTicks,
           };
       }
-      perform(world, hero, next.ability, config, 'attack', next.stage);
+      perform(
+        world,
+        hero,
+        withBasicEquipment(next.ability, hero, config),
+        config,
+        'attack',
+        next.stage,
+      );
     }
   }
   if (command.kind === 'cast') {
-    if (!Number.isInteger(command.slot) || command.slot < 0 || command.slot > 3)
+    if (!Number.isInteger(command.slot) || command.slot < 0 || command.slot > 4)
       return;
     if (
       hasStatus(hero, 'stun', world.tick) ||
@@ -309,9 +325,6 @@ function runCommand(
             s.abilityId === ability.id &&
             s.until > world.tick,
         )) ||
-      !Number.isInteger(command.slot) ||
-      command.slot < 0 ||
-      command.slot > 3 ||
       world.tick < (hero.skillCooldowns[command.slot] ?? Infinity) ||
       world.tick < (hero.abilityCooldowns?.[ability.id] ?? 0) ||
       (!togglingOff && hero.mana < ability.manaCost)
@@ -413,6 +426,9 @@ function advanceProjectile(
     for (const enemy of victims) {
       if (shot.hitIds.includes(enemy.id)) continue;
       shot.hitIds.push(enemy.id);
+      const spreadKey = (shot.leg ?? 'outbound') + ':' + enemy.id;
+      const spread = shot.equipmentAttack?.spread;
+      if (spread?.hitTargets.has(spreadKey)) continue;
       const hit = hurt(
         world,
         enemy,
@@ -430,10 +446,26 @@ function advanceProjectile(
           fx: dir.x,
           fy: dir.y,
           slowedBonus: shot.effect.slowedBonus,
+          armorPenetration: shot.equipmentAttack?.penetration,
+          lifesteal: shot.equipmentAttack?.lifesteal,
           combo: shot.combo,
           comboTargets: shot.comboTargets,
         },
       );
+      if (hit) {
+        spread?.hitTargets.add(spreadKey);
+        if (shot.abilityId === 'gear_needle' && enemy.hp > 0) {
+          const target = world.creeps.get(enemy.id);
+          const tuning = config.economy?.craftedCombat;
+          if (target && tuning)
+            target.needlePoison = {
+              sourceId: shot.ownerId,
+              until: world.tick + tuning.needlePoisonSeconds * config.tickRate,
+              next: world.tick + config.tickRate,
+            };
+        }
+      }
+      if (shot.abilityId === 'gear_needle' && !hit) continue;
       if (hit && shot.refund && !shot.refund.used) {
         shot.refund.used = true;
         const hero = world.heroes.get(shot.ownerId);
@@ -644,6 +676,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       vy: scheduled.dy * scheduled.ability.effect.speed,
       remaining: scheduled.ability.effect.range,
       rawDamage: scheduled.rawDamage,
+      equipmentAttack: scheduled.ability.equipmentAttack,
       ...(scheduled.critChance === undefined
         ? {}
         : {
@@ -665,6 +698,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   world.shots = world.shots.filter((item) => item.tick > world.tick);
   for (const shot of world.projectiles.values())
     advanceProjectile(world, shot, config);
+  stepEquipmentCombat(world, config);
   constrainChuTrap(world, config);
   stepBossEncounter(world, config);
   const creepStarts = config.dungeonAggro
@@ -867,7 +901,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     if (actor.hp <= 0) actor.pose = 'death';
     else if (world.tick < actor.hurtUntil) actor.pose = 'hurt';
   }
-  finishNamDeTick(world);
+  finishNamDeTick(world, config);
   world.bacCai?.step(world, config);
   stepBossBanter(world, config);
 }

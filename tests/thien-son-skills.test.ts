@@ -370,9 +370,12 @@ describe('M3C1 authoritative wind mechanics', () => {
       'bach_liet_thien_kich',
     ];
     expect(change({ action: 'loadout', ids })).toBeUndefined();
-    for (const id of ids)
-      for (let i = 0; i < f.config.progression!.skills[id]!.ranks.length; i++)
+    for (const id of ids) {
+      const skill = f.config.progression!.skills[id]!;
+      const rankCap = skill.ultimate ? 3 : skill.ranks.length;
+      for (let i = 0; i < rankCap; i++)
         expect(change({ action: 'upgrade', skillId: id })).toBeUndefined();
+    }
     expect(pointAccounting(f.hero, f.config)).toEqual({
       earned: 30,
       allocated: 15,
@@ -388,9 +391,12 @@ describe('M3C1 authoritative wind mechanics', () => {
     ).toBeUndefined();
     const snapshot = characterStats(f.hero, f.config).total;
     expect(change({ action: 'reset' })).toBeUndefined();
-    for (const id of ids)
-      for (let i = 0; i < f.config.progression!.skills[id]!.ranks.length; i++)
+    for (const id of ids) {
+      const skill = f.config.progression!.skills[id]!;
+      const rankCap = skill.ultimate ? 3 : skill.ranks.length;
+      for (let i = 0; i < rankCap; i++)
         change({ action: 'upgrade', skillId: id });
+    }
     expect(characterStats(f.hero, f.config).total).toEqual(snapshot);
   });
 });

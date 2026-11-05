@@ -148,6 +148,7 @@ test('six players share authored forest; server collision, depth and physical re
       ...bots.map(async (b) => {
         await expect.poll(() => b.state.phase).toBe('SCHOOL_SELECTION');
         b.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+        b.send('lobby-action', { action: 'branch', basicId: 'cai_bang_bong' });
         b.send('lobby-action', { action: 'confirm' });
       }),
     ]);

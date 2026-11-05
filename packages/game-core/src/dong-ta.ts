@@ -1,3 +1,4 @@
+import { waveBossFarewell } from './boss-banter.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { emit, hurt } from './combat.js';
 import { addCreep } from './simulation.js';
@@ -46,6 +47,7 @@ export class DongTaEncounter {
   private serial = 0;
   private normal = 0;
   private paid = false;
+  private corpseUntil = 0;
   constructor(
     readonly definition: DongDefinition,
     private hooks: DongHooks,
@@ -55,6 +57,8 @@ export class DongTaEncounter {
   }
 
   beforeStep(world: World, config: SimulationConfig, wave: number): void {
+    if (this.phase === 'cleared' && world.tick + 1 >= this.corpseUntil)
+      world.creeps.delete(bossId);
     const t = world.tick + 1,
       d = this.definition;
     if (
@@ -138,12 +142,12 @@ export class DongTaEncounter {
     });
     return actor;
   }
-  private cleanup(world: World): void {
+  private cleanup(world: World, keepCorpse = false): void {
     this.casts = [];
     this.effects = [];
     for (const id of actorIds) {
       cancelOwnedEffects(world, id);
-      world.creeps.delete(id);
+      if (!keepCorpse || id !== bossId) world.creeps.delete(id);
     }
     for (const h of world.heroes.values())
       h.statuses = (h.statuses ?? []).filter((s) => !isDongActor(s.sourceId));
@@ -270,7 +274,10 @@ export class DongTaEncounter {
     }
     this.phase = 'cleared';
     this.phaseUntil = 0;
-    this.cleanup(world);
+    this.corpseUntil = boss
+      ? waveBossFarewell(world, config, boss)
+      : world.tick;
+    this.cleanup(world, this.corpseUntil > world.tick);
     this.hooks.lock(false);
     emit(world, {
       kind: 'effect',

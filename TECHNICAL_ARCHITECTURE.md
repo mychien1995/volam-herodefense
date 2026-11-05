@@ -1,3 +1,13 @@
+## Chế tạo — protocol 31
+
+Boss dungeon ghi nhận mất HP thật theo từng người và cấp vật liệu theo instance khi kết thúc. Merchant nhận ý định ghép theo ô, nhánh và revision. Bước trừ vàng, tiêu hao vật liệu và cấp thành phẩm diễn ra trong một giao dịch. Trạng thái trang bị ghép, số nguyên liệu và hồi chiêu Z đến client qua Inventory State.
+
+## Fixed builds and dialogue — protocol 30
+
+Lobby players synchronize the selected branch before confirmation. The match schema retains separate T skill and cooldown fields. Core progression accounts for the fixed slot ranks once, maps them to the current stance and projects only those skills in the HUD. The existing revision and input sequence guard slot upgrades and stance changes. The five synchronized slots and 20-point budget are derived from authoritative runtime data. Levels 21–30 accrue reserved points without applying stat bonuses.
+
+Boss chatter uses its own seeded deck per actor and instance. Death transitions publish zone-scoped farewell events. Phaser presents those events, the per-client statue introduction and a cosmetic effect on a synchronized level increase.
+
 ## Combined M3D feedback / economy / Hell — protocol21 — 2026-11-03
 
 Protocol21 combines feedback20's dash,party/life/spectator/pause/interact projections with the milestone19 merchant transactions and nested inventory/potion state. Reject old versions; no new client-supplied position, damage, price or item authority. Core remains Phaser/DOM/Colyseus-independent. One internal per-hero finisher input can await its real predecessor projectile without new network payloads; lifecycle cancellation clears it.

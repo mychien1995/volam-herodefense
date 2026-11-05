@@ -1,3 +1,9 @@
+## M3D match opening — 2026-11-04
+
+The opening lines above **Tượng Võ Thần** reveal that the ancients sealed **Long Hồn Thần Thạch** inside it. Martial artists converge in waves and the five masters come to claim its power. The players form the team defending the stone to avert turmoil in the jianghu.
+
+Existing dungeon and wave boss encounters use server-seeded original Vietnamese dialogue with twenty lines per actor. Bắc Cái keeps his bespoke preference dialogue. Each implemented wave boss gets one farewell and about five seconds of corpse visibility. Vương Trùng Dương has dialogue authored for his future encounter. After that encounter, the intended future reveal is that the statue holds the spirit of Hoàng Thường, master of Cửu Âm Chân Kinh. He emerges after absorbing the five masters' souls. The opening dialogue keeps that reveal out of the story told to players.
+
 # Game Design Document (GDD) v1.0
 
 ## M3D approved dungeon and party runtime — 2026-11-03

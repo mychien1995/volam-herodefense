@@ -167,6 +167,10 @@ test('two clients synchronize automatic QWER, slot replacement and custom mixing
         (async () => {
           await expect.poll(() => bot.state.phase).toBe('SCHOOL_SELECTION');
           bot.send('lobby-action', { action: 'select', schoolId: 'thieu_lam' });
+          bot.send('lobby-action', {
+            action: 'branch',
+            basicId: 'thieu_lam_quyen',
+          });
           bot.send('lobby-action', { action: 'confirm' });
         })(),
       ]);

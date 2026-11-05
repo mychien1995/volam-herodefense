@@ -127,7 +127,7 @@ for (const size of [
           await page.getByRole('tab', { name: 'Chế tạo' }).click();
           await expect(
             page.getByRole('button', {
-              name: 'Chế tạo · Chưa mở',
+              name: /^Chế tạo · \d+ vàng$/,
               exact: true,
             }),
           ).toBeDisabled();
@@ -362,7 +362,7 @@ test('merchant exposes the twelve approved branches without inventing transactio
       page.locator('[data-ui-action="branch"][data-value="2"]'),
     ).toHaveAttribute('aria-pressed', 'true');
     await expect(
-      page.getByRole('button', { name: 'Chế tạo · Chưa mở', exact: true }),
+      page.getByRole('button', { name: /^Chế tạo · \d+ vàng$/, exact: true }),
     ).toBeDisabled();
   }
   await expect(page.locator('.item-branches')).toContainText('Xuyên giáp');

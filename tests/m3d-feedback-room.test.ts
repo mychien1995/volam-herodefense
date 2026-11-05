@@ -50,6 +50,7 @@ async function join() {
   for (const r of [a, b]) {
     await expect.poll(() => r.state.phase).toBe('SCHOOL_SELECTION');
     r.send('lobby-action', { action: 'select', schoolId: 'thieu_lam' });
+    r.send('lobby-action', { action: 'branch', basicId: 'thieu_lam_quyen' });
     r.send('lobby-action', { action: 'confirm' });
   }
   await expect.poll(() => b.state.phase).toBe('IN_GAME');

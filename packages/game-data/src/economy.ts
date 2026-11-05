@@ -4,6 +4,7 @@ const positiveInt = z.number().int().positive().max(1_000_000);
 const bonuses = z.strictObject({
   attackPower: z.number().finite().nonnegative().optional(),
   maxHp: z.number().finite().nonnegative().optional(),
+  maxMana: z.number().finite().nonnegative().optional(),
   defense: z.number().finite().nonnegative().optional(),
   hpRegen: z.number().finite().nonnegative().optional(),
   manaRegen: z.number().finite().nonnegative().optional(),
@@ -22,7 +23,53 @@ const potion = z.strictObject({
   amount: positiveInt,
   price: positiveInt,
 });
+const branch = <T extends string>(id: T) =>
+  z.strictObject({
+    id: z.literal(id),
+    nameVi: z.string().min(1),
+    descriptionVi: z.string().min(1),
+    art: z.string().min(1),
+    stats: bonuses,
+  });
+const recipe = <A extends string, B extends string, C extends string>(
+  ids: [A, B, C],
+) =>
+  z.strictObject({
+    bossId: z.string().regex(/^[a-z_]+$/),
+    bossNameVi: z.string().min(1),
+    materialNameVi: z.string().min(1),
+    materialArt: z.string().min(1),
+    branches: z.tuple([branch(ids[0]), branch(ids[1]), branch(ids[2])]),
+  });
+const ratio = z.number().finite().positive().max(1);
+const positive = z.number().finite().positive();
 export const economySchema = z.strictObject({
+  recipes: z.strictObject({
+    weapon: recipe(['cleave', 'lifesteal', 'penetration']),
+    armor: recipe(['reflect', 'slow_aura', 'burn_aura']),
+    hat: recipe(['recovery', 'fortitude', 'assault']),
+    boots: recipe(['cleanse', 'blink', 'needle']),
+  }),
+  craftedCombat: z.strictObject({
+    sideShotDamage: ratio,
+    spreadRadians: positive.max(1),
+    meleeRangeMultiplier: positive.min(1).max(2),
+    meleeAngleBonus: positive.max(1),
+    lifesteal: ratio,
+    penetration: ratio,
+    reflectChance: ratio,
+    auraRadius: positive,
+    auraSlow: ratio,
+    auraDamage: positive,
+    auxiliaryCooldownSeconds: positiveInt,
+    blinkRange: positive,
+    needleDamage: positive,
+    needleRange: positive,
+    needleSpeed: positive,
+    needleSlow: ratio,
+    needlePoisonDamage: positive,
+    needlePoisonSeconds: positiveInt,
+  }),
   potionLimit: z.literal(20),
   potionCooldownSeconds: z.literal(5),
   basics: z.strictObject({
@@ -44,6 +91,146 @@ export const economySchema = z.strictObject({
 export const economyTrial: EconomyDefinition = economySchema.parse({
   potionLimit: 20,
   potionCooldownSeconds: 5,
+  craftedCombat: {
+    sideShotDamage: 0.45,
+    spreadRadians: 0.4,
+    meleeRangeMultiplier: 1.18,
+    meleeAngleBonus: 0.2,
+    lifesteal: 0.1,
+    penetration: 0.25,
+    reflectChance: 0.07,
+    auraRadius: 90,
+    auraSlow: 0.18,
+    auraDamage: 8,
+    auxiliaryCooldownSeconds: 36,
+    blinkRange: 96,
+    needleDamage: 18,
+    needleRange: 245,
+    needleSpeed: 390,
+    needleSlow: 0.28,
+    needlePoisonDamage: 6,
+    needlePoisonSeconds: 3,
+  },
+  recipes: {
+    weapon: {
+      bossId: 'kim_luan_phap_vuong',
+      bossNameVi: 'Kim Luân Pháp Vương',
+      materialNameVi: 'Kim Luân',
+      materialArt: 'wheel',
+      branches: [
+        {
+          id: 'cleave',
+          nameVi: 'Đánh lan',
+          descriptionVi:
+            'A đánh xa bắn ba tia, A cận chiến mở rộng tầm và góc lan.',
+          art: 'weapon',
+          stats: { attackPower: 6 },
+        },
+        {
+          id: 'lifesteal',
+          nameVi: 'Hút máu',
+          descriptionVi: 'Một lần hồi trên mỗi đòn A trúng.',
+          art: 'weapon',
+          stats: { attackPower: 6 },
+        },
+        {
+          id: 'penetration',
+          nameVi: 'Xuyên giáp',
+          descriptionVi: 'Đòn A bỏ qua một phần phòng thủ mục tiêu.',
+          art: 'weapon',
+          stats: { attackPower: 6 },
+        },
+      ],
+    },
+    armor: {
+      bossId: 'hong_liet_boss',
+      bossNameVi: 'Hoàn Nhan Hồng Liệt',
+      materialNameVi: 'Đại Kim Chiến Giáp',
+      materialArt: 'armor',
+      branches: [
+        {
+          id: 'reflect',
+          nameVi: 'Phản đòn',
+          descriptionVi:
+            'Có cơ hội phản đòn và chỉ nhận nửa sát thương đòn đó.',
+          art: 'armor',
+          stats: { maxHp: 45, defense: 4 },
+        },
+        {
+          id: 'slow_aura',
+          nameVi: 'Aura làm chậm',
+          descriptionVi: 'Làm chậm địch xung quanh.',
+          art: 'armor',
+          stats: { maxHp: 45, defense: 4 },
+        },
+        {
+          id: 'burn_aura',
+          nameVi: 'Aura đốt',
+          descriptionVi: 'Đốt địch xung quanh mỗi giây.',
+          art: 'armor',
+          stats: { maxHp: 45, defense: 4 },
+        },
+      ],
+    },
+    hat: {
+      bossId: 'chu_ba_thong',
+      bossNameVi: 'Chu Bá Thông',
+      materialNameVi: 'Đại Hồ Lô',
+      materialArt: '/assets/chu/toan_chan_tien_tuu_icon.png',
+      branches: [
+        {
+          id: 'recovery',
+          nameVi: 'Hồi phục',
+          descriptionVi: 'Tăng hồi máu và hồi mana.',
+          art: 'hat',
+          stats: { hpRegen: 2, manaRegen: 3 },
+        },
+        {
+          id: 'fortitude',
+          nameVi: 'Bền bỉ',
+          descriptionVi: 'Tăng máu, mana tối đa và phòng thủ.',
+          art: 'hat',
+          stats: { maxHp: 55, maxMana: 25, defense: 4 },
+        },
+        {
+          id: 'assault',
+          nameVi: 'Tấn công',
+          descriptionVi: 'Tăng sát thương và tỉ lệ chí mạng.',
+          art: 'hat',
+          stats: { attackPower: 5, critChance: 0.025 },
+        },
+      ],
+    },
+    boots: {
+      bossId: 'boss_ly_mac_sau',
+      bossNameVi: 'Lý Mạc Sầu',
+      materialNameVi: 'Ngọc Uyên Ương',
+      materialArt: 'jade_pair',
+      branches: [
+        {
+          id: 'cleanse',
+          nameVi: 'Thanh Tâm',
+          descriptionVi: 'Z giải làm chậm, độc và đốt trên bản thân.',
+          art: 'thanh_tam',
+          stats: { movementSpeed: 5, critChance: 0.005 },
+        },
+        {
+          id: 'blink',
+          nameVi: 'Blink',
+          descriptionVi: 'Z dịch chuyển về trước, dừng trước vật cản.',
+          art: 'blink',
+          stats: { movementSpeed: 5, critChance: 0.005 },
+        },
+        {
+          id: 'needle',
+          nameVi: 'Phi châm',
+          descriptionVi: 'Z bắn thẳng theo hướng mặt, gây làm chậm và độc.',
+          art: 'needle',
+          stats: { movementSpeed: 5, critChance: 0.005 },
+        },
+      ],
+    },
+  },
   basics: {
     weapon: {
       nameVi: 'Vũ khí',

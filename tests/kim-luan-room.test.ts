@@ -24,7 +24,7 @@ afterEach(async () => {
 afterAll(async () => {
   await server.shutdown();
 });
-it('real SDK filters encounter instances and rejects forged/replayed loot ownership', async () => {
+it('real SDK filters encounters and awards only personal materials to eligible participants', async () => {
   const a = await client.create<MatchRoom>(MATCH_ROOM, {
     nickname: 'Boss A',
     protocolVersion: PROTOCOL_VERSION,
@@ -44,6 +44,7 @@ it('real SDK filters encounter instances and rejects forged/replayed loot owners
   for (const r of rooms) {
     await expect.poll(() => r.state.phase).toBe('SCHOOL_SELECTION');
     r.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    r.send('lobby-action', { action: 'branch', basicId: 'cai_bang_bong' });
     r.send('lobby-action', { action: 'confirm' });
   }
   for (const r of rooms) await expect.poll(() => r.state.phase).toBe('IN_GAME');
@@ -84,58 +85,20 @@ it('real SDK filters encounter instances and rejects forged/replayed loot owners
     sequence: next(a),
     kind: 'basic',
   });
-  await expect.poll(() => z.kim!.rewards.loot.length).toBe(1);
-  const loot = z.kim!.rewards.loot[0]!;
+  const materials = (peer: typeof a) =>
+    peer.state.players.get(peer.sessionId)!.inventory.materials.get('weapon');
+  await expect.poll(() => materials(a)).toBe(1);
+  expect(materials(b)).toBe(0);
+  expect(materials(c)).toBe(0);
+  expect(z.kim!.rewards.loot).toHaveLength(0);
+  expect(h.inventory?.materials?.weapon).toBe(1);
+  expect(h.bossItems ?? []).toHaveLength(0);
   const rejected = c.waitForMessage('command-rejected');
   c.send('boss-loot-action', {
     protocolVersion: PROTOCOL_VERSION,
     sequence: next(c),
-    lootId: loot.id,
+    lootId: 1,
     action: 'roll',
   });
-  expect((await rejected).reason).toContain('khu vực');
-  const sequence = next(a);
-  a.send('boss-loot-action', {
-    protocolVersion: PROTOCOL_VERSION,
-    sequence,
-    lootId: loot.id,
-    action: 'roll',
-  });
-  a.send('boss-loot-action', {
-    protocolVersion: PROTOCOL_VERSION,
-    sequence,
-    lootId: loot.id,
-    action: 'roll',
-  });
-  b.send('boss-loot-action', {
-    protocolVersion: PROTOCOL_VERSION,
-    sequence: next(b),
-    lootId: loot.id,
-    action: 'pass',
-  });
-  await expect
-    .poll(() => JSON.parse(a.state.players.get(a.sessionId)!.bossItems).length)
-    .toBe(1);
-  expect(loot.state).toBe('claimed');
-  expect(h.bossItems).toHaveLength(1);
-  const gold = h.gold;
-  a.send('boss-item-action', {
-    protocolVersion: PROTOCOL_VERSION,
-    sequence: next(a),
-    index: 0,
-    itemId: 'kim_luan_tan_phien',
-    action: 'sell',
-  });
-  await expect.poll(() => h.gold).toBe(gold + 120);
-  expect(h.bossItems).toHaveLength(0);
-  const bad = a.waitForMessage('command-rejected');
-  a.send('boss-item-action', {
-    protocolVersion: PROTOCOL_VERSION,
-    sequence: next(a),
-    index: 0,
-    itemId: 'kim_luan_tan_phien',
-    action: 'sell',
-  });
-  await bad;
-  expect(h.gold).toBe(gold + 120);
+  expect((await rejected).reason).toContain('cá nhân');
 }, 30000);

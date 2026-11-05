@@ -278,7 +278,7 @@ it('Nam corpse expires, cancel/death clears pending gold pulses and spotlight co
   s.b.hp = 0;
   s.step();
   expect(s.w.namDe!.effects.size).toBe(0);
-  s.step(namDeDefinition.corpseTicks);
+  s.step(m1Config.bossBanter!.farewellTicks);
   expect(s.w.creeps.has(NAM_DE_ID)).toBe(false);
 });
 it('each dungeon boss emits one localized special announcement at actual cast entry', () => {

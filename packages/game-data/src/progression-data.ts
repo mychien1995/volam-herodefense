@@ -1,7 +1,10 @@
 import { z } from 'zod';
 import type { Ability, ProgressionDefinition } from '@volam/game-core';
 import { abilitySchema } from './ability-schema.js';
-export const skillRankGates = { standard: [1, 3, 5, 7], ultimate: [6, 10, 14] };
+export const skillRankGates = {
+  standard: [1, 3, 5, 7],
+  ultimate: [6, 12, 18, 24],
+};
 const n = z.number().finite().nonnegative();
 const statShape = {
   maxHp: n,
@@ -26,6 +29,15 @@ export const progressionSchema = z
           schoolId: z.string(),
           style: z.string(),
           skillIds: z.array(z.string()).length(4),
+        }),
+      )
+      .optional(),
+    fixedBranches: z
+      .record(
+        z.string(),
+        z.strictObject({
+          skillIds: z.array(z.string()).length(5),
+          alternateSkillIds: z.array(z.string()).length(5).optional(),
         }),
       )
       .optional(),
@@ -71,6 +83,41 @@ export const progressionSchema = z
         c.addIssue({
           code: 'custom',
           message: `Invalid default branch ${basicId}`,
+        });
+    }
+    if (
+      d.fixedBranches &&
+      Object.values(d.schools).some((school) =>
+        school.basicIds.some((id) => !Object.hasOwn(d.fixedBranches!, id)),
+      )
+    )
+      c.addIssue({ code: 'custom', message: 'Missing fixed branch' });
+    for (const [basicId, branch] of Object.entries(d.fixedBranches ?? {})) {
+      const base = d.defaultBranches?.[basicId];
+      const valid = (ids: string[]) =>
+        new Set(ids).size === 5 &&
+        ids.every((id, slot) => {
+          const skill = d.skills[id];
+          return (
+            !!base &&
+            !!skill &&
+            skill.schoolId === base.schoolId &&
+            skill.style === base.style &&
+            skill.ranks.length === 4 &&
+            skill.ultimate === (slot === 4)
+          );
+        });
+      if (
+        !valid(branch.skillIds) ||
+        (branch.alternateSkillIds &&
+          (!valid(branch.alternateSkillIds) ||
+            branch.alternateSkillIds
+              .slice(3)
+              .some((id, i) => id !== branch.skillIds[i + 3])))
+      )
+        c.addIssue({
+          code: 'custom',
+          message: 'Invalid fixed branch ' + basicId,
         });
     }
     for (const [id, s] of Object.entries(d.skills)) {

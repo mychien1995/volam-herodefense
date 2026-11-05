@@ -1,5 +1,8 @@
 import { joinWaiting, startTogether } from './pregame-helper.js';
 import { expect, test, type Page } from '@playwright/test';
+import { Client } from '@colyseus/sdk';
+import { PROTOCOL_VERSION, type LobbyState } from '@volam/game-protocol';
+import { qaSession } from '../../tools/qa-session.mjs';
 test.use({ viewport: { width: 1440, height: 1100 } });
 interface Hero {
   basicId: string;
@@ -70,23 +73,6 @@ async function enter(
   if (!defer) await startTogether([page]);
 }
 
-async function selectRanged(page: Page): Promise<void> {
-  await page.locator('[data-menu=skills]').first().click();
-  if (await page.locator('#skill-branch').isVisible())
-    await page.locator('#skill-branch').selectOption('cai_bang_chuong');
-  else
-    await page
-      .getByLabel('Đánh thường · A', { exact: true })
-      .selectOption('cai_bang_chuong');
-  await page.getByRole('button', { name: 'Đóng menu', exact: true }).click();
-  await expect
-    .poll(async () => {
-      const s = await snapshot(page);
-      return (s.state.players[s.sessionId] as Hero & { basicId: string })
-        .basicId;
-    })
-    .toBe('cai_bang_chuong');
-}
 async function moveTo(page: Page, x: number, y: number): Promise<void> {
   await page.locator('#game canvas').focus();
   for (const [axis, target, negative, positive] of [
@@ -210,12 +196,12 @@ test('fixed follow camera, eight-way movement and foreground occlusion', async (
 test('two clients agree on combat, manual cadence, skills and progression', async ({
   browser,
 }, info) => {
-  test.setTimeout(60000);
+  test.setTimeout(90000);
   const aContext = await browser.newContext({
-    viewport: { width: 1440, height: 1100 },
+    viewport: { width: 1280, height: 720 },
   });
   const bContext = await browser.newContext({
-    viewport: { width: 1440, height: 1100 },
+    viewport: { width: 1280, height: 720 },
   });
   const a = await aContext.newPage();
   const b = await bContext.newPage();
@@ -225,20 +211,54 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
     await enter(a, 'Cái Bang', undefined, true);
     const id = (await snapshot(a)).roomId;
     await enter(b, 'Đồng đội', id, true);
-    await startTogether([a, b]);
-    const progressed = await a.evaluate<boolean>(
-      'window.__VOLAM__.snapshot().state.players[window.__VOLAM__.snapshot().sessionId].build.enabled',
+    await startTogether([a, b], ['cai_bang_chuong', 'thieu_lam_quyen']);
+    await expect
+      .poll(
+        async () =>
+          await a.evaluate(
+            'window.__VOLAM__.progressionPresentation().statueIntroduction',
+          ),
+      )
+      .toContain('Long Hồn Thần Thạch');
+    await expect(a.locator('#slot-t')).toBeVisible();
+    await expect(a.locator('#slot-t button')).toBeDisabled();
+    await expect(a.locator('.loadout-toggle')).toBeHidden();
+    await a.keyboard.press('KeyO');
+    await expect(a.locator('#modal-layer')).toBeHidden();
+    await a.screenshot({ path: info.outputPath('tuong-vo-than.png') });
+    await b.bringToFront();
+    await b.locator('#slot-q button').click();
+    await expect(b.locator('#slot-q .skill-rank')).toHaveText('1');
+    await b.keyboard.press('KeyF');
+    await expect(b.locator('#shaolin-stance')).toHaveText('Cước · F');
+    await expect(b.locator('#slot-q')).toHaveAttribute(
+      'data-skill-id',
+      'toan_phong_thoai',
     );
-    if (progressed) {
-      await a.locator('[data-menu=skills]').first().click();
-      await a.locator('#skill-branch').selectOption('cai_bang_chuong');
-      await expect(a.locator('#slot-q')).toHaveAttribute(
-        'data-skill-id',
-        'hoa_van_chuong',
-      );
-      await expect(a.locator('#available-points')).toHaveText('0');
-      await a.keyboard.press('Escape');
-    }
+    await expect(b.locator('#slot-q .skill-rank')).toHaveText('1');
+    await b.keyboard.press('KeyF');
+    await expect(b.locator('#shaolin-stance')).toHaveText('Quyền · F');
+    await a.bringToFront();
+    await a.locator('#slot-q button').click();
+    await expect(a.locator('#slot-q .skill-rank')).toHaveText('1');
+    await a.locator('#game canvas').focus();
+    const ringSamples = a.evaluate(async () => {
+      const frames = new Map<string, number>();
+      const deadline = performance.now() + 14000;
+      const debug = (window as any).__VOLAM__;
+      const owner = debug.snapshot().sessionId;
+      while (performance.now() < deadline) {
+        await new Promise(requestAnimationFrame);
+        const ring = debug
+          .progressionPresentation()
+          .levelUpRings.find(
+            (entry: { name: string }) => entry.name === 'level-up:' + owner,
+          );
+        if (ring && !frames.has(ring.frame)) frames.set(ring.frame, ring.y);
+        if (frames.size >= 4) break;
+      }
+      return [...frames];
+    }) as Promise<Array<[string, number]>>;
     const aId = (await snapshot(a)).sessionId;
     // Let the real AI approach. Do not walk toward an old target position:
     // movement/patch latency can carry the hero past it before the attack.
@@ -320,7 +340,6 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
       ).length,
     ).toBe(count + 1);
     await a.keyboard.press('KeyQ');
-    await a.keyboard.press('KeyW');
     await expect.poll(async () => (await hero(a)).mana).toBeLessThan(90);
     await expect
       .poll(
@@ -329,13 +348,12 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
             (e) => e.kind === 'cast' && e.sourceId === aId,
           ).length,
       )
-      .toBe(progressed ? 1 : 2);
-    await a.keyboard.press('KeyE');
+      .toBe(1);
+    await a.keyboard.press('KeyT');
     await expect(a.locator('#feedback')).toContainText(
       /not equipped|chưa trang bị/,
     );
     // Finish through real manual inputs; no assumption that all projectiles hit one specific creep.
-    await selectRanged(a);
     await expect
       .poll(
         async () =>
@@ -365,13 +383,31 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
       .poll(async () => (await hero(a)).xp)
       .toBeGreaterThanOrEqual(60);
     expect((await hero(a)).level).toBeGreaterThanOrEqual(2);
+    const frames = await ringSamples;
+    await info.attach('level-up-frames', {
+      body: JSON.stringify(frames),
+      contentType: 'application/json',
+    });
+    expect(frames.map(([frame]) => frame)).toEqual([
+      'nam_de_ring_0',
+      'nam_de_ring_1',
+      'nam_de_ring_2',
+      'nam_de_ring_3',
+    ]);
+    expect(frames[3]![1]).toBeLessThan(frames[0]![1] - 20);
+    await expect
+      .poll(
+        async () =>
+          await a.evaluate(
+            'window.__VOLAM__.progressionPresentation().levelUpRings.length',
+          ),
+      )
+      .toBe(0);
+    await expect(a.locator('#slot-w button')).toBeEnabled();
     await a.screenshot({
       path: info.outputPath('combat-a.png'),
       fullPage: true,
     });
-    await a
-      .locator('#viewport')
-      .screenshot({ path: info.outputPath('arena-panel.png') });
     await b.screenshot({
       path: info.outputPath('combat-b.png'),
       fullPage: true,
@@ -386,8 +422,8 @@ test('ranged projectile uses a fixed trajectory and original effect frames', asy
   page,
 }, info) => {
   const errors = monitor(page);
-  await enter(page, 'Hỏa Khách');
-  await selectRanged(page);
+  await enter(page, 'Hỏa Khách', undefined, true);
+  await startTogether([page], ['cai_bang_chuong']);
   await expect
     .poll(
       async () =>
@@ -463,4 +499,78 @@ test('real PNG animation registry covers two actors, six states and four directi
     fullPage: true,
   });
   expect(errors).toEqual([]);
+});
+
+test('six players keep a full arena viewport and synchronize a learned skill', async ({
+  page,
+}, info) => {
+  test.setTimeout(60_000);
+  await page.setViewportSize({ width: 1280, height: 720 });
+  const errors = monitor(page);
+  await joinWaiting(page, 'Hộ Thạch');
+  const { roomId } = await snapshot(page);
+  const client = new Client(qaSession().serverUrl);
+  const peers = await Promise.all(
+    ['Bổng', 'Phiến', 'Đao', 'Kiếm', 'Quyền'].map((nickname) =>
+      client.joinById<LobbyState>(roomId, {
+        protocolVersion: PROTOCOL_VERSION,
+        nickname,
+      }),
+    ),
+  );
+  try {
+    for (const peer of peers) peer.onMessage('combat-event', () => {});
+    await expect(page.locator('#pregame .pre-players li')).toHaveCount(6);
+    await page.getByRole('button', { name: 'Bắt đầu', exact: true }).click();
+    const branches = [
+      ['cai_bang', 'cai_bang_bong'],
+      ['thien_son', 'thien_son_phien'],
+      ['thieu_lam', 'thieu_lam_dao'],
+      ['vo_dang', 'vo_dang_kiem'],
+      ['vo_dang', 'vo_dang_quyen'],
+    ] as const;
+    await Promise.all(
+      peers.map(async (peer, i) => {
+        await expect.poll(() => peer.state.phase).toBe('SCHOOL_SELECTION');
+        const [schoolId, basicId] = branches[i]!;
+        peer.send('lobby-action', { action: 'select', schoolId });
+        peer.send('lobby-action', { action: 'branch', basicId });
+        await expect
+          .poll(() => peer.state.players.get(peer.sessionId)?.selectedBranch)
+          .toBe(basicId);
+        peer.send('lobby-action', { action: 'confirm' });
+      }),
+    );
+    await startTogether([page], ['cai_bang_chuong'], 15_000, true);
+    const { sessionId } = await snapshot(page);
+    await expect
+      .poll(
+        async () => Object.keys((await snapshot(page)).state.players).length,
+      )
+      .toBe(6);
+    await page.locator('#slot-q button').click();
+    await expect
+      .poll(() =>
+        peers.every(
+          (peer) =>
+            peer.state.players.get(sessionId)?.qSkill === 'hoa_van_chuong',
+        ),
+      )
+      .toBe(true);
+    const viewport = await page.locator('#viewport').boundingBox();
+    expect(viewport).toMatchObject({ x: 0, y: 0, width: 1280, height: 720 });
+    await page.locator('#game canvas').focus();
+    await page.keyboard.press('KeyA');
+    await expect
+      .poll(async () =>
+        (await snapshot(page)).events.some(
+          (event) => event.kind === 'hit' && event.sourceId === sessionId,
+        ),
+      )
+      .toBe(true);
+    await page.screenshot({ path: info.outputPath('six-player-arena.png') });
+    expect(errors).toEqual([]);
+  } finally {
+    await Promise.all(peers.map((peer) => peer.leave()));
+  }
 });

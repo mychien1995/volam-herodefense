@@ -1,4 +1,4 @@
-import type { DefaultBranch } from '@volam/game-core';
+import type { DefaultBranch, FixedBranch } from '@volam/game-core';
 /** Canonical catalogue order, four regular actives per branch. Thiếu Lâm Quyền starts with combo A. */
 export const defaultBranches: Record<string, DefaultBranch> = {
   cai_bang_bong: {
@@ -82,3 +82,35 @@ export const defaultBranches: Record<string, DefaultBranch> = {
     ],
   },
 };
+
+const ultimates: Record<string, string> = {
+  cai_bang_bong: 'thien_ha_vo_cau',
+  cai_bang_chuong: 'hang_long_hoa_vu',
+  thien_son_phien: 'bach_phien_phong_bao',
+  thien_son_dao: 'bach_liet_thien_kich',
+  vo_dang_quyen: 'thai_cuc_tran',
+  vo_dang_kiem: 'van_kiem_quy_tong',
+  thieu_lam_quyen: 'nhu_lai_niet_ban',
+  thieu_lam_dao: 'nhu_lai_thien_diep',
+};
+export const fixedBranches: Record<string, FixedBranch> = Object.fromEntries(
+  Object.entries(defaultBranches).map(([id, branch]) => [
+    id,
+    id === 'thieu_lam_quyen'
+      ? {
+          skillIds: [
+            ...branch.skillIds.slice(0, 3),
+            'kim_cang_bat_hoai',
+            ultimates[id]!,
+          ],
+          alternateSkillIds: [
+            'toan_phong_thoai',
+            'hoanh_tao_cuoc',
+            'vo_anh_cuoc',
+            'kim_cang_bat_hoai',
+            ultimates[id]!,
+          ],
+        }
+      : { skillIds: [...branch.skillIds, ultimates[id]!] },
+  ]),
+);

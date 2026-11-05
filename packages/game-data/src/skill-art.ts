@@ -49,7 +49,24 @@ export type SkillArtComponent = (typeof skillArt.assets)[number];
 export type SkillAnimation = SkillArtComponent['animations'][number];
 export const skillAnimationKey = (asset: string, tag: string) =>
   `skill:${asset}:${tag}`;
+const caiBangIcons = new Set([
+  'cai_bang_bong',
+  'cai_bang_chuong',
+  'hoa_van_chuong',
+  'cuong_long_loan_vu',
+  'phi_long_tai_thien',
+  'khang_long_huu_hoi',
+  'hang_long_hoa_vu',
+  'hoanh_tao_bong',
+  'pha_giap_bong',
+  'cam_long_cong',
+  'truy_phong_bong',
+  'thien_ha_vo_cau',
+  'tieu_dieu_cong',
+]);
 export function skillIcon(id: string): string {
+  if (caiBangIcons.has(id))
+    return '/assets/skills/cai-bang-icons-v2/' + id + '.png';
   if (id === 'tam_gioi_quy_thien')
     return '/assets/m3d_followup/su_tu_hong-icon.png';
   if (id === 'thieu_lam_quyen')

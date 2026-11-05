@@ -494,9 +494,12 @@ describe('M3C2 authoritative Yin–Yang', () => {
       'van_kiem_quy_tong',
     ];
     expect(change({ action: 'loadout', ids })).toBeUndefined();
-    for (const id of ids)
-      for (let r = 0; r < f.config.progression!.skills[id]!.ranks.length; r++)
+    for (const id of ids) {
+      const skill = f.config.progression!.skills[id]!;
+      const rankCap = skill.ultimate ? 3 : skill.ranks.length;
+      for (let r = 0; r < rankCap; r++)
         expect(change({ action: 'upgrade', skillId: id })).toBeUndefined();
+    }
     expect(pointAccounting(f.hero, f.config).surplus).toBe(15);
     const stats = characterStats(f.hero, f.config);
     expect(stats.sources.innate.maxMana).toBe(87);
@@ -505,9 +508,12 @@ describe('M3C2 authoritative Yin–Yang', () => {
     f.cast();
     const cooldown = f.hero.skillCooldowns[0]!;
     change({ action: 'reset' });
-    for (const id of ids)
-      for (let r = 0; r < f.config.progression!.skills[id]!.ranks.length; r++)
+    for (const id of ids) {
+      const skill = f.config.progression!.skills[id]!;
+      const rankCap = skill.ultimate ? 3 : skill.ranks.length;
+      for (let r = 0; r < rankCap; r++)
         change({ action: 'upgrade', skillId: id });
+    }
     expect(characterStats(f.hero, f.config).total).toEqual(stats.total);
     expect(f.hero.skillCooldowns[0]).toBe(cooldown);
   });
@@ -586,9 +592,7 @@ describe('M3C2 authoritative Yin–Yang', () => {
   it('rank variants improve intended mechanics and reject invalid shield/tick metadata at load', () => {
     for (const base of voDangSkills) {
       const ranks = m1Config.progression!.skills[base.id]!.ranks;
-      expect(ranks).toHaveLength(
-        ['thai_cuc_tran', 'van_kiem_quy_tong'].includes(base.id) ? 3 : 4,
-      );
+      expect(ranks).toHaveLength(4);
       if (base.id === 'thai_cuc_than_cong')
         expect(ranks.at(-1)!.cooldownTicks).toBe(1);
       else expect(ranks.at(-1)!.cooldownTicks).toBeLessThan(base.cooldownTicks);

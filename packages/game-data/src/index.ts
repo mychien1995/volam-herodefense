@@ -20,7 +20,8 @@ export const inputBindings = Object.freeze({
   movement: ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'] as const,
   basicAttack: 'KeyA',
   dash: ['ShiftLeft', 'ShiftRight'] as const,
-  activeSkills: ['KeyQ', 'KeyW', 'KeyE', 'KeyR'] as const,
+  stance: 'KeyF',
+  activeSkills: ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT'] as const,
   healthPotion: ['Digit1', 'Numpad1'] as const,
   manaPotion: ['Digit2', 'Numpad2'] as const,
 });
@@ -62,3 +63,5 @@ export * from './bac-cai.js';
 export { bossSkillNames } from './boss-skill-names.js';
 
 export * from './boss-banter.js';
+
+export * from './match-story.js';

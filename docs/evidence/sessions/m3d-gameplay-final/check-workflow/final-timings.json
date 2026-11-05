@@ -1,0 +1,44 @@
+{
+  "runId": "f934b34d-1ad8-489d-89e7-f77d32ebb072",
+  "mode": "final",
+  "args": [
+    "tests/e2e/gameplay.spec.ts",
+    "--grep",
+    "two clients agree|ranged projectile|six players"
+  ],
+  "startedAt": "2026-11-04T16:25:48.865Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 13.09,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.14,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.6,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.52,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 143.36,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 159.71
+}

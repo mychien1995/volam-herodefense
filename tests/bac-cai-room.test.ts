@@ -29,6 +29,7 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
   for (const r of [a, b]) {
     await expect.poll(() => r.state.phase).toBe('SCHOOL_SELECTION');
     r.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    r.send('lobby-action', { action: 'branch', basicId: 'cai_bang_bong' });
     r.send('lobby-action', { action: 'confirm' });
   }
   for (const r of [a, b])
@@ -68,6 +69,7 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
     .poll(() => view(late)?.effects.some((x) => x.kind === 'spiral'))
     .toBe(true);
   late.send('lobby-action', { action: 'select', schoolId: 'vo_dang' });
+  late.send('lobby-action', { action: 'branch', basicId: 'vo_dang_quyen' });
   late.send('lobby-action', { action: 'confirm' });
   await expect
     .poll(() => late.state.players.get(late.sessionId)?.confirmed)

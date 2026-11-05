@@ -1,5 +1,9 @@
 import Phaser from 'phaser';
-import { bossSkillNames, bossBanterLines } from '@volam/game-data';
+import {
+  bossSkillNames,
+  bossBanterLines,
+  waveBossFarewells,
+} from '@volam/game-data';
 import type { CombatEvent, BacCaiView } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
 
@@ -15,6 +19,7 @@ export class BossSkillAnnouncements {
       anchor: { x: number; y: number };
       sourceId: string;
       banter: boolean;
+      farewell: boolean;
     }
   >();
   private observed: Array<{
@@ -26,10 +31,13 @@ export class BossSkillAnnouncements {
   constructor(private scene: Phaser.Scene) {}
   event(event: CombatEvent): boolean {
     const banter = event.stage === 'boss_banter';
-    if (!banter && event.stage !== 'boss_shout') return false;
-    const name = (banter ? bossBanterLines : bossSkillNames)[event.abilityId];
+    const farewell = event.stage === 'boss_farewell';
+    if (!banter && !farewell && event.stage !== 'boss_shout') return false;
+    const name = farewell
+      ? (waveBossFarewells as Readonly<Record<string, string>>)[event.abilityId]
+      : (banter ? bossBanterLines : bossSkillNames)[event.abilityId];
     if (!name) return true;
-    const key = event.sourceId + (banter ? ':banter' : '');
+    const key = event.sourceId + (banter || farewell ? ':banter' : '');
     const old = this.labels.get(key);
     const text =
       old?.text ??
@@ -44,11 +52,22 @@ export class BossSkillAnnouncements {
           wordWrap: { width: 300, useAdvancedWrap: true },
         })
         .setOrigin(0.5, 1)
-        .setName((banter ? 'boss-banter:' : 'boss-shout:') + event.sourceId);
+        .setName(
+          (banter
+            ? 'boss-banter:'
+            : farewell
+              ? 'boss-farewell:'
+              : 'boss-shout:') + event.sourceId,
+        );
+    text.setName(
+      (banter ? 'boss-banter:' : farewell ? 'boss-farewell:' : 'boss-shout:') +
+        event.sourceId,
+    );
     text.setText(name);
     this.labels.set(key, {
       sourceId: event.sourceId,
       banter,
+      farewell,
       text,
       tick: event.tick ?? 0,
       name,
@@ -69,7 +88,7 @@ export class BossSkillAnnouncements {
     const bc = raw ? (JSON.parse(raw) as BacCaiView) : null;
     for (const [key, v] of this.labels) {
       const id = v.sourceId;
-      const lifetime = v.banter ? 4 : 1.25;
+      const lifetime = v.farewell ? 4.7 : v.banter ? 4 : 1.25;
       const actor =
           id === 'bac_cai' &&
           bc &&
@@ -78,21 +97,32 @@ export class BossSkillAnnouncements {
             ? { ...(bc.boss ?? v.anchor), zoneId: 'arena', hp: bc.hp }
             : state?.creeps.get(id),
         age = (this.scene.time.now - v.at) / 1000;
-      if (!actor || actor.zoneId !== zone || actor.hp <= 0 || age >= lifetime) {
+      if (
+        (!v.farewell && (!actor || actor.zoneId !== zone || actor.hp <= 0)) ||
+        (v.farewell && zone !== 'arena') ||
+        age >= lifetime
+      ) {
         v.text.destroy();
         this.labels.delete(key);
         continue;
       }
+      const position = v.farewell ? v.anchor : actor!;
+      const dialogue = v.banter || v.farewell;
+      let x = position.x;
+      let y =
+        position.y -
+        (dialogue ? 116 : 85) -
+        10 * Math.min(1, Math.max(0, age / 0.35));
+      if (dialogue) {
+        const camera = this.scene.cameras.main.worldView;
+        v.text.setVisible(camera.contains(position.x, position.y));
+        const inset = Math.min(v.text.width / 2 + 8, camera.width / 2);
+        x = Phaser.Math.Clamp(x, camera.left + inset, camera.right - inset);
+        y = Math.max(y, camera.top + v.text.height + 12);
+      }
       v.text
-        .setPosition(
-          Math.round(actor.x),
-          Math.round(
-            actor.y -
-              (v.banter ? 116 : 85) -
-              10 * Math.min(1, Math.max(0, age / 0.35)),
-          ),
-        )
-        .setDepth(actor.y + 220)
+        .setPosition(Math.round(x), Math.round(y))
+        .setDepth(position.y + 220)
         .setAlpha(
           1 - Math.max(0, Math.min(1, (age - (lifetime - 0.35)) / 0.35)),
         );
@@ -107,10 +137,12 @@ export class BossSkillAnnouncements {
       active: [...this.labels].map(([, v]) => ({
         sourceId: v.sourceId,
         banter: v.banter,
+        farewell: v.farewell,
         name: v.name,
         x: v.text.x,
         y: v.text.y,
         alpha: v.text.alpha,
+        visible: v.text.visible,
       })),
       observed: this.observed,
     };

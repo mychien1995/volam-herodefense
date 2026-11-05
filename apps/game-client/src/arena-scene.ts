@@ -24,7 +24,12 @@ import {
   isCoMoZone,
 } from './co-mo-art.js';
 import { hellCreepArt, hellStrikeEffect, isHellZone } from './hell-art.js';
-import { arena, dungeonForZone } from '@volam/game-data';
+import {
+  arena,
+  dungeonForZone,
+  statueIntroduction,
+  statueName,
+} from '@volam/game-data';
 import { desertCreepArt } from './desert-art.js';
 import {
   beachCreepArt,
@@ -68,6 +73,7 @@ interface EntityView {
   creepArt: ArenaCreepArt | undefined;
   playback: CreepPlayback;
   lastHp: number;
+  lastLevel?: number;
 }
 export class ArenaScene extends Phaser.Scene {
   private polished = true;
@@ -92,6 +98,108 @@ export class ArenaScene extends Phaser.Scene {
   private ready = false;
   private followed = '';
   private lastEvent = 0;
+  private introducedSession = '';
+  private story: Phaser.GameObjects.Text | undefined;
+  private storyStartedAt = 0;
+  private followOffsetY = 48;
+
+  private presentStatueStory(): void {
+    const player = this.snapshot?.players.get(this.sessionId);
+    if (
+      this.snapshot?.phase !== 'IN_GAME' ||
+      !player?.confirmed ||
+      this.zoneId !== 'arena'
+    ) {
+      this.story?.destroy();
+      this.story = undefined;
+      return;
+    }
+    const statue = this.children.getByName(
+      'art01:statue_male',
+    ) as Phaser.GameObjects.Image | null;
+    if (!statue) return;
+    if (this.introducedSession !== this.sessionId) {
+      this.introducedSession = this.sessionId;
+      this.storyStartedAt = this.time.now;
+      const at = statue.getTopCenter();
+      this.story = this.add
+        .text(at.x, at.y + 62, '', {
+          fontFamily: 'Segoe UI, sans-serif',
+          fontSize: '10px',
+          color: '#fff1c5',
+          backgroundColor: '#192117',
+          align: 'center',
+          padding: { x: 7, y: 4 },
+          wordWrap: { width: 290, useAdvancedWrap: true },
+        })
+        .setOrigin(0.5, 1)
+        .setDepth(statue.y + 240)
+        .setName('statue-introduction');
+    }
+    if (!this.story) return;
+    const line =
+      statueIntroduction[
+        Math.floor((this.time.now - this.storyStartedAt) / 6500)
+      ];
+    if (line)
+      this.story
+        .setText(statueName + '\n' + line)
+        .setVisible(
+          statue.visible &&
+            Math.hypot(player.x - arena.spawn.x, player.y - arena.spawn.y) <
+              110,
+        );
+    else {
+      this.story.destroy();
+      this.story = undefined;
+    }
+  }
+
+  inspectProgression() {
+    const story = this.story;
+    const view = this.cameras.main.worldView;
+    return {
+      statueIntroduction:
+        story?.visible && view.contains(story.x, story.y - story.height)
+          ? story.text
+          : '',
+      levelUpRings: this.children.list
+        .filter((child) => child.name.startsWith('level-up:'))
+        .map((child) => {
+          const ring = child as Phaser.GameObjects.Image;
+          return { name: ring.name, frame: ring.frame.name, y: ring.y };
+        }),
+    };
+  }
+
+  private levelUp(id: string, view: EntityView): void {
+    const ring = this.add
+      .image(
+        view.sprite.x,
+        view.sprite.y,
+        'wave_feedback:nam_de_ring',
+        'nam_de_ring_0',
+      )
+      .setName('level-up:' + id)
+      .setScale(0.38)
+      .setDepth(view.sprite.y + 0.4);
+    const progress = { age: 0 };
+    this.tweens.add({
+      targets: progress,
+      age: 1,
+      duration: 850,
+      onUpdate: () => {
+        const age = progress.age;
+        ring
+          .setFrame('nam_de_ring_' + Math.min(3, Math.floor(age * 4)))
+          .setPosition(view.sprite.x, view.sprite.y - 46 * age)
+          .setDepth(view.sprite.y + 0.4)
+          .setScale(0.38 - age * 0.14)
+          .setAlpha(Math.min(1, (1 - age) * 3));
+      },
+      onComplete: () => ring.destroy(),
+    });
+  }
   private damage: FloatingDamage | undefined;
   protected completedAnimations: Array<{
     id: string;
@@ -193,6 +301,8 @@ export class ArenaScene extends Phaser.Scene {
       this.creepEffects?.clear();
     }
     if (!snapshot) {
+      this.story?.destroy();
+      this.story = undefined;
       this.coMoEffects?.clear();
       this.vfx?.clear();
       this.creepEffects?.clear();
@@ -204,6 +314,9 @@ export class ArenaScene extends Phaser.Scene {
     if (this.ready && zoneId !== this.zoneId) this.drawZone(zoneId);
   }
   private drawZone(zoneId: string): void {
+    this.story?.destroy();
+    this.story = undefined;
+    this.bossShouts?.clear();
     this.bacCai?.clear();
     this.waveArena?.clear();
     this.hongLiet?.clear();
@@ -530,8 +643,17 @@ export class ArenaScene extends Phaser.Scene {
       }
     };
     state?.players?.forEach((hero, id) => {
-      if (hero.confirmed && hero.zoneId === this.zoneId)
-        render(id, hero, false, hero.nickname);
+      if (!hero.confirmed || hero.zoneId !== this.zoneId) return;
+      render(id, hero, false, hero.nickname);
+      const view = this.actors.get(id);
+      if (!view) return;
+      if (
+        view.lastLevel !== undefined &&
+        hero.level > view.lastLevel &&
+        hero.hp > 0
+      )
+        this.levelUp(id, view);
+      view.lastLevel = hero.level;
     });
     state?.creeps?.forEach((enemy, id) => {
       if (['chu_ba_thong', 'nam_de'].includes(enemy.archetypeId)) return;
@@ -569,6 +691,25 @@ export class ArenaScene extends Phaser.Scene {
     this.bacCai?.sync(state, this.zoneId);
     this.waveArena?.sync(state, this.zoneId);
     this.bossShouts?.sync(state, this.zoneId);
+    this.presentStatueStory();
+    this.game.canvas
+      .closest('#viewport')
+      ?.toggleAttribute('data-statue-intro', !!this.story?.visible);
+    const self = this.actors.get(this.sessionId)?.sprite;
+    const camera = this.cameras.main;
+    const introOffset =
+      this.story?.visible && self
+        ? Phaser.Math.Clamp(
+            self.y -
+              camera.height / 2 -
+              (this.story.y - this.story.height - 46),
+            48,
+            150,
+          )
+        : 48;
+    this.followOffsetY +=
+      (introOffset - this.followOffsetY) * Math.min(1, delta / 85);
+    camera.setFollowOffset(0, this.followOffsetY);
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
     this.coMoEffects?.sync(state, this.zoneId);
     this.creepEffects?.sync(

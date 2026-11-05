@@ -58,12 +58,14 @@ test('Join remains enabled after host starts school selection', async ({
     await a.getByRole('button', { name: 'Bắt đầu', exact: true }).click();
     await a.locator('#pregame button[data-school=cai_bang]').click();
     await joinListed(b, id);
+    await a.locator('[data-branch=cai_bang_bong]').click();
     await a.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     await expect(b.getByTestId('selection-ready')).toHaveText(
       '1/2 đã sẵn sàng',
     );
     expect((await read(a)).state.tick).toBe(0);
     await b.locator('#pregame button[data-school=vo_dang]').click();
+    await b.locator('[data-branch=vo_dang_quyen]').click();
     await b.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     await expect(a.locator('#pregame')).toBeHidden();
     await expect(b.locator('#pregame')).toBeHidden();
@@ -114,6 +116,7 @@ test('Join active match, choose school with stable focus, spawn without resettin
     await b.screenshot({
       path: 'docs/evidence/late-join/active-school-selection.png',
     });
+    await b.locator('[data-branch=thien_son_phien]').click();
     await b.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     await expect(b.locator('#pregame')).toBeHidden();
     await expect

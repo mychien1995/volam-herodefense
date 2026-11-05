@@ -6,7 +6,7 @@ import {
 } from './thieu-lam.js';
 import { z } from 'zod';
 import { economySchema, economyTrial } from './economy.js';
-import { defaultBranches } from './default-builds.js';
+import { defaultBranches, fixedBranches } from './default-builds.js';
 import type { SimulationConfig } from '@volam/game-core';
 import { arena } from './arena.js';
 import { caiBangExtraSkills, caiBangPassive } from './cai-bang.js';
@@ -37,7 +37,9 @@ export const simulationConfigSchema = z.strictObject({
       openingTicks: positive.int(),
       intervalTicks: positive.int(),
       jitterTicks: count,
-      pools: z.record(z.string(), z.array(z.string().min(1)).min(1)),
+      pools: z.record(z.string(), z.array(z.string().min(1)).length(20)),
+      farewells: z.record(z.string(), z.string().min(1)),
+      farewellTicks: positive.int(),
     })
     .optional(),
   waveArena: z
@@ -262,4 +264,5 @@ addThienSonProgression(m1Config.progression);
 addVoDangProgression(m1Config.progression);
 addThieuLamProgression(m1Config.progression);
 m1Config.progression.defaultBranches = defaultBranches;
+m1Config.progression.fixedBranches = fixedBranches;
 progressionSchema.parse(m1Config.progression);
