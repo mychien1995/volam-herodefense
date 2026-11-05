@@ -745,6 +745,8 @@ export class BacCaiEncounter {
         (a, b) => distance(a, dog) - distance(b, dog),
       )[0];
       if (!target) continue;
+      if (dog.stats) dog.stats.damage = d.damage.dogs;
+      if (stepControlledCreepSpecial(w, dog, target, c)) continue;
       if (hasStatus(dog, 'stun', w.tick)) {
         dog.pose = 'idle';
         continue;
@@ -1127,3 +1129,4 @@ export class BacCaiEncounter {
     };
   }
 }
+import { stepControlledCreepSpecial } from './creep-abilities.js';

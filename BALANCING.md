@@ -145,3 +145,6 @@ Supersedes corresponding v01values: Mai quick tug≈0.15s,5s Shift lock and0.8s 
 ## Latest boss playtest feedback — 2026-11-03 (protocol 29)
 
 Nam Đế always releases five small fingers on a separate 90-tick repeat channel, including during main skills. Mục Hạ failure is now one arena-wide 80-base explosion followed by termination; no-guess timeout is 5 seconds after reveal. These user-requested changes supersede random1–5 and repeated clone explosions. Damage remains trial. Re-run the fixed-seed exposure probe matrix; bots do not model human dodging/clone guesses, so it cannot establish final balance. Results: `docs/evidence/wave-boss-feedback-v03-runtime/`.
+## Creep upgrade trial — 2026-11-06
+
+All 49 profiles, damage ratios, cadences, windups, DOT limits and signature geometry live in validated `game-data/creep-abilities.ts`. Production invasions stream for 60 seconds at 0.5 creeps/second/gate before existing player scaling; 2/3/4 gates produce solo 60/90/120, six-player 240/360/480. Per-creep XP/gold remain unchanged, so increased spawn volume also increases available rewards and must be assessed in playtest. No final numeric balance approval is claimed. Fixed-seed exposure and dense-stream measurements: `tools/creep-upgrade-balance.ts`, [CREEP_UPGRADE.md](docs/CREEP_UPGRADE.md).

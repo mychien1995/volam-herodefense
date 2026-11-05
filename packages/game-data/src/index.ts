@@ -65,3 +65,4 @@ export { bossSkillNames } from './boss-skill-names.js';
 export * from './boss-banter.js';
 
 export * from './match-story.js';
+export * from './creep-abilities.js';

@@ -566,6 +566,7 @@ function advanceProjectile(
 export function stepWorld(world: World, config: SimulationConfig): void {
   world.tick++;
   world.events = [];
+  stepCreepHazards(world, config);
   world.bacCai?.prepare(world, config);
   expireGuardCounters(world, config);
   expireStatuses(world);
@@ -782,6 +783,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       }
     }
     const objective = enemy.invasion ? world.statue : undefined;
+    if (stepCreepActor(world, enemy, hero, objective, config)) continue;
     const target = hero ??
       objective ?? {
         x: enemy.spawn.x,
@@ -905,3 +907,4 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   world.bacCai?.step(world, config);
   stepBossBanter(world, config);
 }
+import { stepCreepActor, stepCreepHazards } from './creep-abilities.js';

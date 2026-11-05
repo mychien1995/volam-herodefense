@@ -411,3 +411,11 @@ Mục Hạ Vô Nhân keeps its approved split and five pair swaps. At reveal, pl
 Tiểu Nhất Dương Chỉ always releases five straight golden projectiles, spaced 0.16 seconds, re-aiming at the selected player's current position at each release. Each shot flies straight afterward. Its independent server channel can run with all main skills, QTE and movement without replacing their cast or clocks. Trial repeat interval is 90 ticks / 3 seconds, first windup remains 17 ticks; repeated starts cannot duplicate an active burst. Death, no living players, wipe and encounter cleanup cancel pending shots. The main special animation retains priority while concurrent native gold projectiles render normally.
 
 Approved V01/V02 PNGs, JSONs and preview source remain byte-exact. This update changes runtime behavior and text, not the frozen preview. The common arenas, rewards, dungeon life ledgers, controls and separate inventory-v2 scope remain as in V02. Matching protocol 29 services and a new room are required. Current implementation/validation: `docs/WAVE_BOSS_FEEDBACK_V03_RUNTIME.md`.
+## Creep upgrade acceptance — 2026-11-06
+
+- Catalogue preserves all 44 regular identities and five boss-support roles; each requested normal/signature/death behavior executes in authoritative core and is visible in Phaser.
+- Creator chooses 2/3/4 gates; invalid options are rejected and joining peers cannot change them. Gate footprints are walkable.
+- Normal waves start every 180 seconds, stream for exactly 60 seconds at a configurable rate, retain prior survivors and snapshot players/stats. Boss gates cannot clear before stream completion.
+- Test real non-homing projectile misses, terrain, front/rear attacks, multi-hit cadence, dash travel, DOT bounds, guard/counter, interrupt, death effects, cast budget, cleanup and normal-only statue pressure.
+- Observe all 44 regular identities in the normal Phaser renderer, six-player readability, two-client state, private-zone filtering and PNG evidence. No recordings.
+- Production ignores DEV creep-test settings. Matching protocol 32 is required. Detailed commands and evidence: [CREEP_UPGRADE.md](docs/CREEP_UPGRADE.md).

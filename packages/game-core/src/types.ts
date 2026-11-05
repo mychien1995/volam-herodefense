@@ -1,4 +1,8 @@
 import type { EquipmentAttack } from './economy-types.js';
+import type {
+  CreepCombatDefinition,
+  CreepCombatRuntime,
+} from './creep-abilities-types.js';
 import type { BossBanterClock, BossBanterDefinition } from './boss-banter.js';
 import type { ChuEncounter } from './chu-types.js';
 import type { WaveBossTestRuntime } from './wave-boss-test.js';
@@ -246,6 +250,7 @@ export interface Ability {
     | SupportEffect;
 }
 export interface SimulationConfig {
+  creepCombat?: CreepCombatDefinition;
   personalCraftLoot?: boolean;
   bossBanter?: BossBanterDefinition | undefined;
   /** Temporary server-owned arena confinement, independent of status immunity. */
@@ -410,7 +415,7 @@ export interface Creep extends Actor {
   stats?: SimulationConfig['creep'];
   invasion?: {
     wave: number;
-    lane: 'west' | 'east';
+    lane: 'west' | 'east' | 'north' | 'south';
     targetId: string;
     chaseOrigin: Point;
     reacquireAt: number;
@@ -496,6 +501,8 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  invasionPending?: Set<number>;
+  creepCombat?: CreepCombatRuntime;
   /** Cosmetic randomness must never advance the authoritative combat RNG. */
   banterSeed?: number;
   bossBanter?: Map<string, BossBanterClock>;
@@ -519,7 +526,7 @@ export interface World {
     nextTick: number;
     effect: SupportEffect;
   }>;
-  statue?: Actor & { radius: number };
+  statue?: Actor & { radius: number; collision?: Rect };
   tick: number;
   heroes: Map<string, Hero>;
   creeps: Map<string, Creep>;

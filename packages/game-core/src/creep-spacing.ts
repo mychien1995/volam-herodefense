@@ -7,9 +7,27 @@ export function separateDungeonCreeps(
   c: SimulationConfig,
   starts?: Map<string, Point>,
 ): void {
-  if (!c.dungeonAggro) return;
+  if (!c.dungeonAggro && !c.creepCombat) return;
+  const dashing = new Set(
+    [...(w.creepCombat?.effects.values() ?? [])]
+      .filter(
+        (e) =>
+          e.kind === 'creep_dash' &&
+          w.tick >= e.activeAt &&
+          w.tick < e.damageUntil,
+      )
+      .map((e) => e.ownerId),
+  );
   const units = [...w.creeps.values()]
-    .filter((e) => e.hp > 0 && !e.controlled && !e.bossEncounter)
+    .filter(
+      (e) =>
+        e.hp > 0 &&
+        !e.controlled &&
+        !e.bossEncounter &&
+        !e.encounterBoss &&
+        !dashing.has(e.id) &&
+        (c.dungeonAggro || !!e.invasion),
+    )
     .sort((a, b) => (a.id < b.id ? -1 : 1));
   const cell = 40;
   const speeds = new Map(

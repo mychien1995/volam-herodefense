@@ -97,6 +97,16 @@ export class DefenseHud {
     )!;
     roster.hidden = d.defeated || !nextName;
     roster.textContent = nextName ? `Sắp tới: ${nextName}` : '';
+    if (d.streamUntilTick > state.tick) {
+      roster.hidden = false;
+      roster.textContent = `${invasionCreepName(d.wave)} · ${d.portalCount} cổng · Còn tràn ${Math.ceil((d.streamUntilTick - state.tick) / m1Config.tickRate)}s`;
+    }
+    if (d.devCreepTest)
+      this.panel.querySelector('strong')!.textContent =
+        'DEV · Test 20 loại creep';
+    if (d.wave >= 20 && d.streamUntilTick <= state.tick && !d.defeated)
+      this.panel.querySelector('#invasion-countdown')!.textContent =
+        'Đã mở đủ 20 đợt xâm lăng';
     if (d.devWaveBosses) {
       this.panel.querySelector('strong')!.textContent =
         'DEV · ' + (testBossNames[d.devWaveBossStage] ?? 'Boss wave');

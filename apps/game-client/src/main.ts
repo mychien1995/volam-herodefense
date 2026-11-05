@@ -319,7 +319,10 @@ async function connect(existing: boolean): Promise<void> {
   try {
     const joined = existing
       ? await client.joinById<MatchRoom>(roomId, parsed.data)
-      : await client.create<MatchRoom>(MATCH_ROOM, parsed.data);
+      : await client.create<MatchRoom>(MATCH_ROOM, {
+          ...parsed.data,
+          portalCount: pregame.portalCount,
+        });
     joined.reconnection.enabled = true;
     room = joined;
     sequence = 0;
@@ -328,7 +331,7 @@ async function connect(existing: boolean): Promise<void> {
     ui.connected(joined.roomId, joined.sessionId);
     controls(true);
     let previousZone = 'arena';
-    joined.onStateChange((state) => {
+    const syncJoinedState = (state: typeof joined.state) => {
       if (room === joined) {
         syncMatchMusic(state.phase === 'IN_GAME');
         chuHud.sync(state, joined.sessionId);
@@ -349,7 +352,10 @@ async function connect(existing: boolean): Promise<void> {
         ui.refresh(state);
         skillPreview.update(state, joined.sessionId);
       }
-    });
+    };
+    joined.onStateChange(syncJoinedState);
+    // The SDK may already have decoded the initial snapshot before this callback is attached.
+    if (joined.state?.hostId) syncJoinedState(joined.state);
     joined.onMessage('dungeon-menu', () => {
       if (room === joined) ui.open('dungeons');
     });

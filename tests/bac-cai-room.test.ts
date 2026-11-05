@@ -20,8 +20,8 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
   const client = new Client('http://127.0.0.1:2807'),
     opts = (nickname: string) =>
       ({ nickname, protocolVersion: PROTOCOL_VERSION }) as const;
-  const a = await client.create<MatchRoom>(MATCH_ROOM, opts('Bắc A')),
-    b = await client.joinById<MatchRoom>(a.roomId, opts('Bắc B'));
+  const a = await client.create<MatchRoom['state']>(MATCH_ROOM, opts('Bắc A')),
+    b = await client.joinById<MatchRoom['state']>(a.roomId, opts('Bắc B'));
   for (const r of [a, b]) r.onMessage('combat-event', () => {});
   for (const r of [a, b])
     await expect.poll(() => r.state?.players.has(r.sessionId)).toBe(true);
@@ -63,7 +63,10 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
   await expect
     .poll(() => view(b)?.effects.some((x) => x.kind === 'spiral'))
     .toBe(true);
-  const late = await client.joinById<MatchRoom>(a.roomId, opts('Bắc Late'));
+  const late = await client.joinById<MatchRoom['state']>(
+    a.roomId,
+    opts('Bắc Late'),
+  );
   late.onMessage('combat-event', () => {});
   await expect
     .poll(() => view(late)?.effects.some((x) => x.kind === 'spiral'))

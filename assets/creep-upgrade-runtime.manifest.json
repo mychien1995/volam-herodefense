@@ -1,0 +1,33 @@
+{
+  "id": "creep-upgrade-runtime-v1",
+  "status": "runtime-review-candidate",
+  "newBitmapArtwork": false,
+  "directorApprovedRuntimeComposition": false,
+  "renderer": "apps/game-client/src/creep-combat-art.ts",
+  "authority": "All timings, targeting, positions, statuses and damage come from deterministic server state.",
+  "sources": [
+    {"manifest":"assets/effects/bosses/ly-mac-sau/manifest.json","use":"retained Cổ Mộ needle projectiles and impacts; unchanged source/export bytes"},
+    {
+      "manifest": "assets/arena_creeps.manifest.json",
+      "use": "metal, stone, spectral, fire, blood, shadow contacts and projectiles; original provenance retained"
+    },
+    {
+      "manifest": "assets/effects/dungeons/forest/manifest.json",
+      "use": "original venom, web, roots and thorn animations"
+    },
+    {
+      "file": "assets/effects/dungeons/desert/arrow_right.png",
+      "manifest": "assets/desert_dungeon.manifest.json",
+      "use": "original non-homing arrow raster"
+    },
+    {
+      "manifest": "assets/beach_dungeon.manifest.json",
+      "use": "original water, cannon, splash and impact animations"
+    },
+    {
+      "manifest": "assets/hell_dungeon.manifest.json",
+      "use": "original fire, lava, sigil and weapon-trail animations"
+    }
+  ],
+  "notes": "No approved PNG/JSON bytes are regenerated or replaced. Resizing, frame sampling and warning composition are presentation-only. Final in-game director judgment remains separate."
+}

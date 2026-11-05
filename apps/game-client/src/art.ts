@@ -86,6 +86,7 @@ export function heroTexture(
 }
 export { facing } from './facing.js';
 export function preloadArt(scene: Phaser.Scene): void {
+  preloadCreepCombat(scene);
   preloadWaveBossFeedback(scene);
   preloadBacCaiArt(scene);
   preloadChu(scene);
@@ -331,3 +332,4 @@ export function registerArt(scene: Phaser.Scene): void {
   });
 }
 import { preloadBacCaiArt } from './bac-cai-art.js';
+import { preloadCreepCombat } from './creep-combat-art.js';

@@ -918,6 +918,7 @@ export class TayDocGate {
     encounter: TayDocEncounter,
   ) {
     if (this.spawned || !this.dongTaDefeated || wave < 10) return;
+    if ([...(world.invasionPending ?? [])].some((w) => w <= 10)) return;
     if (
       [...world.creeps.values()].some(
         (c) => c.hp > 0 && c.invasion && c.invasion.wave <= 10,

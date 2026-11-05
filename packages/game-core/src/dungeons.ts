@@ -185,6 +185,7 @@ export class DungeonMatch {
     if (
       this.waveField &&
       wave >= next &&
+      ![...(this.arena.world.invasionPending ?? [])].some((w) => w <= next) &&
       ![...this.arena.world.creeps.values()].some(
         (c) => c.hp > 0 && c.invasion && c.invasion.wave <= next,
       )
@@ -198,6 +199,7 @@ export class DungeonMatch {
       dong.phase !== 'cleared' &&
       (dong.phase !== 'waiting' ||
         ((this.invasion?.wave ?? 0) >= dong.definition.gateWave &&
+          !this.arena.world.invasionPending?.has(dong.definition.gateWave) &&
           ![...this.arena.world.creeps.values()].some(
             (c) => c.invasion?.wave === dong.definition.gateWave && c.hp > 0,
           )))

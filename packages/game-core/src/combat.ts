@@ -52,6 +52,14 @@ export function hurt(
   )
     return false;
   if (target.namDeLocked) return false;
+  raw = creepGuardDamage(
+    world,
+    target,
+    sourceId,
+    raw,
+    config,
+    snapshot?.periodic,
+  );
   if (world.creeps.get(target.id)?.rescueTargetId === sourceId) return false;
   if (!snapshot?.unavoidableHpLoss && ownerProtection(world, target))
     return false;
@@ -537,3 +545,4 @@ function reward(world: World, creep: Creep, config: SimulationConfig): void {
       (i < stats.gold % eligible.length ? 1 : 0);
   });
 }
+import { creepGuardDamage } from './creep-abilities.js';

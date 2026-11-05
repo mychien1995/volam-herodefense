@@ -64,6 +64,7 @@ export class DongTaEncounter {
     if (
       this.phase === 'waiting' &&
       wave >= d.gateWave &&
+      !world.invasionPending?.has(d.gateWave) &&
       ![...world.creeps.values()].some(
         (c) => c.invasion?.wave === d.gateWave && c.hp > 0,
       )

@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 31;
+export const PROTOCOL_VERSION = 32;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -20,7 +20,13 @@ export const nicknameSchema = z
       ),
   );
 
+export const portalCountSchema = z.union([
+  z.literal(2),
+  z.literal(3),
+  z.literal(4),
+]);
 export const joinOptionsSchema = z.strictObject({
+  portalCount: portalCountSchema.optional(),
   nickname: nicknameSchema,
   protocolVersion: z.literal(PROTOCOL_VERSION),
 });
@@ -501,6 +507,9 @@ export const AreaState = schema(
 export type DungeonState = SchemaType<typeof DungeonState>;
 export const DefenseState = schema(
   {
+    portalCount: t.number().default(2),
+    streamUntilTick: t.number().default(0),
+    devCreepTest: t.boolean().default(false),
     devWaveBosses: t.boolean().default(false),
     devWaveBossStage: t.string().default(''),
     dongTa: t.string().default(''),

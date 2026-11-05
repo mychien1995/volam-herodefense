@@ -35,4 +35,9 @@ export type { WaveArenaView, WaveArenaBoss } from './wave-arena-types.js';
 
 export { bacCaiWander } from './bac-cai-wander.js';
 
-export { announceBossSkill, bossNormalAbilities } from './boss-skill-announcement.js';
+export {
+  announceBossSkill,
+  bossNormalAbilities,
+} from './boss-skill-announcement.js';
+export * from './creep-abilities-types.js';
+export * from './creep-abilities.js';

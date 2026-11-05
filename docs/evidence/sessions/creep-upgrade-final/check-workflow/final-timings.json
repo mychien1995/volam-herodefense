@@ -1,0 +1,43 @@
+{
+  "runId": "c5399338-1d9c-44be-87ae-88c20e582424",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.creep-upgrade.config.ts"
+  ],
+  "startedAt": "2026-11-05T17:26:58.630Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 13.42,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.9,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.58,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.48,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 131.9,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 149.3
+}

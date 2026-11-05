@@ -131,6 +131,7 @@ export function initializeNamDe(
 export function gateNamDe(world: World, wave: number, matchTick: number): void {
   const s = world.namDe;
   if (!s || s.phase !== 'waiting' || wave < s.definition.wave) return;
+  if (world.invasionPending?.has(s.definition.wave)) return;
   if (
     [...world.creeps.values()].some(
       (c) => c.invasion?.wave === s.definition.wave && c.hp > 0,

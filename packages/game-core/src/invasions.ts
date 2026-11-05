@@ -3,10 +3,19 @@ import type { Point, Rect, SimulationConfig, World } from './types.js';
 
 export interface InvasionDefinition {
   intervalTicks: number;
+  streamTicks?: number | undefined;
+  spawnEveryTicks?: number | undefined;
+  portalCount?: 2 | 3 | 4 | undefined;
+  maxWaves?: number | undefined;
   warningTicks: number[];
   noticeTicks: number;
   statue: { position: Point; radius: number; maxHp: number; collision: Rect };
-  lanes: { west: Point; east: Point };
+  lanes: {
+    west: Point;
+    east: Point;
+    north?: Point | undefined;
+    south?: Point | undefined;
+  };
   chaseRange: number;
   aggroRestTicks: number;
   countPerAdditionalPlayer: number;
@@ -38,6 +47,20 @@ export class InvasionDirector {
   notice: InvasionNotice | undefined;
   events: InvasionNotice[] = [];
   private sequence = 0;
+  private streams: Array<{
+    wave: number;
+    until: number;
+    next: number;
+    every: number;
+    index: number;
+    stats: SimulationConfig['creep'];
+  }> = [];
+  get streaming(): boolean {
+    return this.streams.length > 0;
+  }
+  get streamUntilTick(): number {
+    return Math.max(0, ...this.streams.map((s) => s.until));
+  }
   constructor(
     readonly definition: InvasionDefinition,
     world: World,
@@ -47,6 +70,7 @@ export class InvasionDirector {
       id: 'statue',
       ...definition.statue.position,
       radius: definition.statue.radius,
+      collision: definition.statue.collision,
       hp: definition.statue.maxHp,
       maxHp: definition.statue.maxHp,
       fx: 0,
@@ -66,9 +90,15 @@ export class InvasionDirector {
     this.events = [];
     if (this.defeated) return;
     const remaining = this.nextWaveTick - tick;
-    if (this.definition.warningTicks.includes(remaining))
+    if (
+      this.wave < (this.definition.maxWaves ?? Infinity) &&
+      this.definition.warningTicks.includes(remaining)
+    )
       this.publish('warning', this.wave + 1, remaining, tick);
-    if (tick >= this.nextWaveTick) {
+    if (
+      tick >= this.nextWaveTick &&
+      this.wave < (this.definition.maxWaves ?? Infinity)
+    ) {
       this.wave++;
       this.spawnPlayerCount = players;
       const recipe =
@@ -91,22 +121,76 @@ export class InvasionDirector {
         ),
         speed: recipe.speed,
       };
-      for (const lane of ['west', 'east'] as const)
-        for (let i = 0; i < count; i++) {
+      if (this.definition.streamTicks) {
+        const every = Math.max(
+          1,
+          Math.round(
+            (this.definition.spawnEveryTicks ?? config.tickRate * 2) /
+              (1 + this.definition.countPerAdditionalPlayer * (players - 1)),
+          ),
+        );
+        this.streams.push({
+          wave: this.wave,
+          until: tick + this.definition.streamTicks,
+          next: tick,
+          every,
+          index: 0,
+          stats,
+        });
+        (world.invasionPending ??= new Set()).add(this.wave);
+      } else
+        for (const lane of ['west', 'east'] as const)
+          for (let i = 0; i < count; i++) {
+            const start = this.definition.lanes[lane];
+            const spawn = {
+              x: start.x + (lane === 'west' ? 1 : -1) * Math.floor(i / 3) * 28,
+              y: start.y + ((i % 3) - 1) * 24,
+            };
+            const enemy = addCreep(
+              world,
+              `invasion_${this.wave}_${lane}_${i}`,
+              spawn,
+              { ...config, creep: stats },
+            );
+            enemy.stats = { ...stats };
+            enemy.invasion = {
+              wave: this.wave,
+              lane,
+              targetId: '',
+              chaseOrigin: { ...spawn },
+              reacquireAt: 0,
+              chaseRange: this.definition.chaseRange,
+              aggroRestTicks: this.definition.aggroRestTicks,
+            };
+          }
+      this.publish('wave', this.wave, 0, tick);
+      this.nextWaveTick += this.definition.intervalTicks;
+    }
+    const lanes = (['west', 'east', 'north', 'south'] as const).slice(
+      0,
+      this.definition.portalCount ?? 2,
+    );
+    for (const stream of this.streams) {
+      while (stream.next <= tick && stream.next < stream.until) {
+        for (const lane of lanes) {
           const start = this.definition.lanes[lane];
+          if (!start) throw Error(`Missing invasion gate ${lane}`);
+          const offset = ((stream.index % 3) - 1) * 20;
           const spawn = {
-            x: start.x + (lane === 'west' ? 1 : -1) * Math.floor(i / 3) * 28,
-            y: start.y + ((i % 3) - 1) * 24,
+            x: start.x + (lane === 'north' || lane === 'south' ? offset : 0),
+            y: start.y + (lane === 'west' || lane === 'east' ? offset : 0),
           };
           const enemy = addCreep(
             world,
-            `invasion_${this.wave}_${lane}_${i}`,
+            `invasion_${stream.wave}_${lane}_${stream.index}`,
             spawn,
-            { ...config, creep: stats },
+            { ...config, creep: stream.stats },
           );
-          enemy.stats = { ...stats };
+          enemy.stats = { ...stream.stats };
+          const archetype = config.creepCombat?.waveIds[stream.wave - 1];
+          if (archetype) enemy.archetypeId = archetype;
           enemy.invasion = {
-            wave: this.wave,
+            wave: stream.wave,
             lane,
             targetId: '',
             chaseOrigin: { ...spawn },
@@ -115,9 +199,12 @@ export class InvasionDirector {
             aggroRestTicks: this.definition.aggroRestTicks,
           };
         }
-      this.publish('wave', this.wave, 0, tick);
-      this.nextWaveTick += this.definition.intervalTicks;
+        stream.index++;
+        stream.next += stream.every;
+      }
+      if (tick >= stream.until) world.invasionPending?.delete(stream.wave);
     }
+    this.streams = this.streams.filter((s) => tick < s.until);
   }
   afterStep(world: World, tick: number): void {
     if (!this.defeated && world.statue?.hp === 0) {

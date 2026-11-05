@@ -92,6 +92,7 @@ export class ArenaScene extends Phaser.Scene {
   private hongLiet: HongLietRenderer | undefined;
   private coMoEffects: CoMoEffects | undefined;
   protected creepEffects: ArenaCreepEffects | undefined;
+  protected creepCombatArt: CreepCombatArt | undefined;
   private trees: Phaser.GameObjects.Image[] = [];
   private namDe: NamDePresentation | undefined;
   private chu: ChuPresentation | undefined;
@@ -230,6 +231,13 @@ export class ArenaScene extends Phaser.Scene {
     preloadArt(this);
   }
   create(): void {
+    this.creepCombatArt = new CreepCombatArt(this);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
+      this.creepCombatArt?.clear(),
+    );
+    this.events.once(Phaser.Scenes.Events.DESTROY, () =>
+      this.creepCombatArt?.clear(),
+    );
     registerArt(this);
     this.chu = new ChuPresentation(this);
     this.namDe = new NamDePresentation(this);
@@ -317,6 +325,7 @@ export class ArenaScene extends Phaser.Scene {
     this.story?.destroy();
     this.story = undefined;
     this.bossShouts?.clear();
+    this.creepCombatArt?.clear();
     this.bacCai?.clear();
     this.waveArena?.clear();
     this.hongLiet?.clear();
@@ -585,7 +594,9 @@ export class ArenaScene extends Phaser.Scene {
       if (!enemy) view.sprite.setScale(cast?.scale ?? 1).setAlpha(blinkAlpha);
       if (art) {
         const alpha = view.playback.alpha(this.time.now, art.wave === 10);
-        view.sprite.setAlpha(alpha);
+        view.sprite.setAlpha(
+          actor.castAbilityId === 'creep_sa_xa_special' ? alpha * 0.25 : alpha,
+        );
         view.shadow.setAlpha(alpha);
         view.label.setVisible(false);
         view.bar.setVisible(actor.hp > 0);
@@ -717,6 +728,7 @@ export class ArenaScene extends Phaser.Scene {
       this.zoneId,
       (id) => this.actors.get(id)?.sprite,
     );
+    this.creepCombatArt?.sync(state, this.zoneId);
   }
 
   private creepAnimationKey(
@@ -726,6 +738,12 @@ export class ArenaScene extends Phaser.Scene {
   ): string {
     const key = `${texture}:${state}:${direction}`;
     const shared = `${texture}:${state}:shared`;
+    if (
+      state === 'cast' &&
+      !this.anims.exists(key) &&
+      !this.anims.exists(shared)
+    )
+      return this.creepAnimationKey(texture, 'basic_attack', direction);
     return !this.anims.exists(key) && this.anims.exists(shared) ? shared : key;
   }
   private creepDuration(
@@ -929,6 +947,7 @@ export class ArenaScene extends Phaser.Scene {
       damage: this.damage?.inspect(),
       skills: this.vfx?.inspect(),
       creepEffects: this.creepEffects?.inspect(),
+      creepCombat: this.creepCombatArt?.inspect(),
       coMoEffects: this.coMoEffects?.inspect(),
       coMoScenery: this.children.list
         .filter(
@@ -1138,3 +1157,4 @@ export class ArenaScene extends Phaser.Scene {
     return this.vfx?.reviewFeedback(asset, tag, x, y);
   }
 }
+import { CreepCombatArt } from './creep-combat-art.js';

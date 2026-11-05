@@ -25,6 +25,7 @@ import {
   tayDocDefinition,
   hellDungeon,
   bacCaiDefinition,
+  creepCombatDefinition,
 } from '@volam/game-data';
 import {
   DungeonMatch,
@@ -62,6 +63,7 @@ import {
   BacCaiState,
   skillPreviewActionSchema,
   merchantActionSchema,
+  portalCountSchema,
 } from '@volam/game-protocol';
 
 type MatchClient = Client<{ auth: JoinOptions; messages: ServerMessages }>;
@@ -73,9 +75,16 @@ export class MatchRoom extends Room<{
   override maxMessagesPerSecond = lobbyConfig.maxMessagesPerSecond;
   override state = new LobbyState();
   readonly seed = randomInt(1, 0x1_0000_0000);
+  readonly devCreepTest =
+    process.env['NODE_ENV'] !== 'production' &&
+    process.env['VOLAM_DEV_CREEP_TEST'] === '1';
   readonly waveBossTestOptions = serverWaveBossTestOptions(m1Config.tickRate);
   readonly simulation = new DungeonMatch(
-    { ...m1Config, personalCraftLoot: true },
+    {
+      ...m1Config,
+      personalCraftLoot: true,
+      creepCombat: creepCombatDefinition,
+    },
     creepDungeon,
     this.seed,
     serverInvasionDefinition(),
@@ -88,10 +97,10 @@ export class MatchRoom extends Room<{
       coMoDungeon,
       hellDungeon,
     ],
-    structuredClone(dongTaDefinition),
-    structuredClone(tayDocDefinition),
-    namDeDefinition,
-    bacCaiDefinition,
+    this.devCreepTest ? undefined : structuredClone(dongTaDefinition),
+    this.devCreepTest ? undefined : structuredClone(tayDocDefinition),
+    this.devCreepTest ? undefined : namDeDefinition,
+    this.devCreepTest ? undefined : bacCaiDefinition,
     this.waveBossTestOptions,
   );
   readonly world = this.simulation.arena.world;
@@ -113,6 +122,7 @@ export class MatchRoom extends Room<{
 
   private spawnPlayer(id: string, player: LobbyPlayer): void {
     const hero = this.simulation.add(id, player.nickname);
+    if (this.devCreepTest) hero.invulnerable = true;
     hero.schoolId = player.schoolId;
     const first = m1Config.progression!.schools[hero.schoolId]!.basicIds[0]!;
     if (this.legacySkills) {
@@ -517,7 +527,21 @@ export class MatchRoom extends Room<{
         });
     }),
   };
-  override onCreate(): void {
+  override onCreate(options: { portalCount?: unknown } = {}): void {
+    const portals = portalCountSchema.safeParse(options.portalCount ?? 2);
+    if (!portals.success)
+      throw new ServerError(400, 'Số cổng phải là 2, 3 hoặc 4.');
+    this.simulation.invasion!.definition.portalCount = portals.data;
+    this.state.defense.portalCount = portals.data;
+    this.state.defense.devCreepTest = this.devCreepTest;
+    if (this.devCreepTest) {
+      if (this.waveBossTestOptions)
+        throw new ServerError(400, 'Chỉ bật một chế độ test creep hoặc boss.');
+      this.world.statue!.invulnerable = true;
+      console.info(
+        '[DEV] VOLAM_DEV_CREEP_TEST=1: all 20 creep waves, 20s interval / 12s streams, invulnerable heroes/statue, chapter bosses disabled.',
+      );
+    }
     if (this.waveBossTestOptions)
       console.info(
         '[DEV] VOLAM_DEV_WAVE_BOSSES=1: four live wave bosses, god mode, run x3, valid boss hits -5% max HP. New rooms only.',
@@ -740,6 +764,7 @@ export class MatchRoom extends Room<{
       defense.wave = invasion.wave;
       defense.nextWaveTick = invasion.nextWaveTick;
       defense.intervalTicks = invasion.definition.intervalTicks;
+      defense.streamUntilTick = invasion.streamUntilTick;
       defense.spawnPlayerCount = invasion.spawnPlayerCount;
       defense.defeated = invasion.defeated;
       defense.defeatTick = invasion.defeatTick;
@@ -1002,6 +1027,7 @@ export class MatchRoom extends Room<{
         target.targetId = enemy.invasion?.targetId ?? enemy.aggroTargetId ?? '';
       }
       for (const effect of [
+        ...(zone.world.creepCombat?.effects.values() ?? []),
         ...(zone.encounter?.effects.values() ?? []),
         ...(zone.kim?.effects.values() ?? []),
         ...(zone.access === 'arena'

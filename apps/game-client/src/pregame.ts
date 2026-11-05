@@ -20,6 +20,7 @@ const escape = (s: string) =>
 export class PreGame {
   readonly node = document.createElement('section');
   nickname = '';
+  portalCount: 2 | 3 | 4 = 2;
   private screen = 'landing';
   private roomId = '';
   private session = '';
@@ -34,6 +35,11 @@ export class PreGame {
   onAction: (action: LobbyAction) => void = () => {};
   constructor(private endpoint: string) {
     this.node.id = 'pregame';
+    this.node.addEventListener('change', (e) => {
+      const select = e.target as HTMLSelectElement;
+      if (select.id === 'pre-portals')
+        this.portalCount = Number(select.value) as 2 | 3 | 4;
+    });
     this.node.setAttribute('aria-label', 'Trước trận');
     document.querySelector('#viewport')!.append(this.node);
     document.querySelector<HTMLElement>('#lobby')!.hidden = true;
@@ -146,6 +152,7 @@ export class PreGame {
     void this.refresh();
   }
   private async refresh() {
+    const before = JSON.stringify([this.rows, this.notice]);
     try {
       const response = await fetch(`${this.endpoint}/rooms`, {
         signal: AbortSignal.timeout(4000),
@@ -158,7 +165,12 @@ export class PreGame {
       this.notice =
         'Không tải được danh sách phòng. Hãy kiểm tra kết nối và thử lại.';
     }
-    if (this.screen === 'browser' && document.activeElement?.id !== 'pre-code')
+    if (
+      this.screen === 'browser' &&
+      !this.busy &&
+      !['pre-code', 'pre-portals'].includes(document.activeElement?.id ?? '') &&
+      before !== JSON.stringify([this.rows, this.notice])
+    )
       this.render();
   }
   private render() {
@@ -176,6 +188,9 @@ export class PreGame {
     if (this.screen === 'browser') {
       title = 'Danh sách phòng';
       content = `<div class="room-scroll"><table><thead><tr><th>Phòng / Mã</th><th>Người chơi</th><th>Trạng thái</th><th></th></tr></thead><tbody>${this.rows.map((r) => `<tr><td>${escape(r.roomId)}</td><td>${r.clients}/${r.maxClients}</td><td>${escape(({ WAITING_LOBBY: 'Đang chờ', SCHOOL_SELECTION: 'Chọn phái', IN_GAME: 'Trong trận', DEFEAT: 'Đã kết thúc' } as Record<string, string>)[r.phase] ?? 'Không khả dụng')}</td><td><button data-action="join" data-room="${escape(r.roomId)}" ${this.busy || r.locked || r.clients >= r.maxClients || !['WAITING_LOBBY', 'SCHOOL_SELECTION', 'IN_GAME'].includes(r.phase) ? 'disabled' : ''}>Vào phòng</button></td></tr>`).join('')}</tbody></table>${this.rows.length ? '' : '<p class="empty">Chưa có phòng. Hãy tạo phòng đầu tiên.</p>'}</div><div class="pre-actions">${button('Quay lại', 'back', this.busy)}${button('Làm mới', 'refresh', this.busy)}${button('Tạo phòng', 'create', this.busy)}</div><form id="code-form"><label class="sr-only" for="pre-code">Mã phòng</label><input id="pre-code" placeholder="MÃ PHÒNG" autocomplete="off"/><button ${this.busy ? 'disabled' : ''}>Vào bằng mã</button></form>`;
+      content =
+        `<label class="pre-gates" for="pre-portals">Cổng xâm lăng khi tạo phòng <select id="pre-portals" ${this.busy ? 'disabled' : ''}>${[2, 3, 4].map((n) => `<option value="${n}" ${n === this.portalCount ? 'selected' : ''}>${n} cổng${n === 2 ? ' · Trái / Phải' : n === 3 ? ' · Thêm Bắc' : ' · Bốn hướng'}</option>`).join('')}</select></label><p class="pre-note">Quái tràn trong 60 giây mỗi đợt · Đợt mới mỗi 3 phút.</p>` +
+        content;
     } else if (this.state) {
       const state = this.state;
       const players = [...state.players.entries()];
@@ -185,7 +200,7 @@ export class PreGame {
       const list = `<ul class="pre-players">${players.map(([id, p]) => `<li><strong>${escape(p.nickname)}</strong><span>${id === state.hostId ? '♛ Host · ' : ''}${!p.connected ? 'Mất kết nối' : p.confirmed ? 'Đã xác nhận' : ['SCHOOL_SELECTION', 'IN_GAME'].includes(state.phase) ? 'Đang chọn…' : 'Connected'}${p.schoolId ? ' · ' + escape(schools.find((s) => s.id === p.schoolId)?.name ?? '') : ''}</span></li>`).join('')}</ul>`;
       if (state.phase === 'WAITING_LOBBY') {
         title = 'Phòng chờ';
-        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · ${players.length}/6 người chơi</p><div class="parchment">${list}</div><p>${hostHere ? 'Host bắt đầu để mọi người chọn phái.' : 'Host đã mất kết nối. Hãy rời và tạo phòng mới.'}</p><div class="pre-actions">${button('Bắt đầu', 'start', this.session !== state.hostId || !hostHere)}${button('Rời phòng', 'leave')}</div>`;
+        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · ${players.length}/6 người chơi · ${state.defense.portalCount} cổng${state.defense.devCreepTest ? ' · TEST CREEP' : ''}</p><div class="parchment">${list}</div><p>${hostHere ? 'Host bắt đầu để mọi người chọn phái.' : 'Host đã mất kết nối. Hãy rời và tạo phòng mới.'}</p><div class="pre-actions">${button('Bắt đầu', 'start', this.session !== state.hostId || !hostHere)}${button('Rời phòng', 'leave')}</div>`;
       } else {
         title = 'Chọn môn phái';
         const branches =

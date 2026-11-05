@@ -24,6 +24,7 @@ export class MainBossDirector {
     return [...this.completed];
   }
   step(w: World, c: SimulationConfig, invasion: InvasionDirector | undefined) {
+    if ([...(w.invasionPending ?? [])].some((wave) => wave <= 20)) return;
     if (this.encounter?.phase === 'defeated') this.recordDefeat('bac_cai');
     if (
       this.encounter ||
