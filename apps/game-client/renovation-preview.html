@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Võ Lâm · Duyệt bộ sprite Renovation</title>
+  </head>
+  <body>
+    <main id="renovation-viewport" aria-label="Phòng duyệt hình ảnh Võ Lâm">
+      <div id="renovation-game"></div>
+      <section class="review-identity overlay">
+        <strong id="actor-name">Đang nạp hình ảnh…</strong>
+        <span id="scene-name">Bộ Renovation · Chưa duyệt</span>
+      </section>
+      <nav class="review-tools overlay" aria-label="Duyệt hình ảnh">
+        <button id="choose-art">Chọn bộ hình</button>
+        <button id="toggle-group" aria-pressed="true">Xem cả nhóm</button>
+        <button id="toggle-compare" aria-pressed="false">So với bản cũ</button>
+      </nav>
+      <section
+        id="art-menu"
+        class="overlay"
+        aria-label="Danh mục hình ảnh"
+        hidden
+      >
+        <div class="menu-heading">
+          <strong>Chọn hình để duyệt</strong
+          ><button id="close-art">Đóng · Esc</button>
+        </div>
+        <label
+          >Địa điểm
+          <select id="scene-select"></select
+        ></label>
+        <label
+          >Nhóm
+          <select id="group-select"></select
+        ></label>
+        <label
+          >Nhân vật / quái
+          <select id="actor-select"></select
+        ></label>
+        <p>
+          8 nhánh vũ khí của 4 môn phái · 8 phó bản · 5 wave boss và 4 dungeon
+          boss.
+        </p>
+        <p>
+          Preview hình ảnh và chuyển động. Skill và trận multiplayer giữ nguyên.
+        </p>
+        <div id="asset-links"></div>
+      </section>
+      <section class="review-controls overlay" aria-label="Điều khiển duyệt">
+        <div class="pose-controls">
+          <button id="previous-page" aria-label="Trang trước">‹</button>
+          <button id="face-left" aria-label="Hướng trái">←</button>
+          <button id="face-up" aria-label="Hướng lên">↑</button>
+          <button id="face-down" aria-label="Hướng xuống">↓</button>
+          <button id="face-right" aria-label="Hướng phải">→</button>
+          <button id="toggle-walk" aria-pressed="false">Đi tại chỗ</button>
+          <button id="next-page" aria-label="Trang sau">›</button>
+        </div>
+        <small
+          >Phím mũi tên để đi · Chọn nhân vật bằng menu · Bản mới ở tỉ lệ
+          gốc</small
+        >
+      </section>
+      <output id="review-status" class="overlay" aria-live="polite"></output>
+    </main>
+    <script type="module" src="/src/renovation-preview.ts"></script>
+  </body>
+</html>

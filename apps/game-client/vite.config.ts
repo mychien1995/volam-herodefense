@@ -35,6 +35,7 @@ export default defineConfig({
         game: 'index.html',
         bacCaiPreview: 'bac-cai-preview.html',
         visualUpgrade: 'visual-upgrade-2.html',
+        renovationPreview: 'renovation-preview.html',
       },
     },
   },

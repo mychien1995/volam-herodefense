@@ -108,3 +108,9 @@ The Lý Mạc Sầu selector card reuses `assets/concepts/arenas/co-mo-phai/aren
 ## Vương Trùng Dương
 
 The final boss runtime candidate uses two generated raster atlases with 48 character cels and 36 effect cels. [Production sources, exact prompts and hashes](source/bosses/vuong-trung-duong/provenance.json), [atlas origins and animation timing](exports/vuong-trung-duong/animation.json), and [Phaser review evidence](../docs/VUONG_TRUNG_DUONG_RUNTIME.md). The three concept v01 images are approved inputs. Runtime review is pending.
+
+## Renovation v1 — complete roster preview, 2026-11-05
+
+Candidate awaiting director review. [Production recipe and scope](source/renovation-v1/README.md), [exact generation prompts](source/renovation-v1/generation-jobs.json), [provenance](source/renovation-v1/PROVENANCE.json).73 original twenty-cel body sheets plus accepted Võ Đang Kiếm reuse cover74 forms:8 hero styles,20 invasion creeps,24 dungeon creeps,7 forms of5 wave bosses,11 helpers/minions,4 dungeon bosses. Eight new original grounds with48 independent props, plus the accepted central arena. Aseprite editable files and PNG/JSON atlases are versioned under `source/renovation-v1/` and `exports/renovation-v1/`.
+
+The full-viewport interactive `/renovation-preview.html` reviews body idle/walk in four facings at native gameplay scale, equal-height original comparisons and all nine scene choices. This is an art preview; normal multiplayer art registries and all skills remain unchanged. Existing approved originals and locks are retained. New art has no director approval yet. PNG evidence and live frame observations are recorded under `reviews/renovation-v1/`; no routine videos or animated recordings.

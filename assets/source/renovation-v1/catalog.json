@@ -1,0 +1,1814 @@
+{
+  "status": "candidate-awaiting-director-review",
+  "baselineCommit": "c823a4a5",
+  "scope": {
+    "heroStyles": 8,
+    "dungeonArenas": 8,
+    "waveCreeps": 20,
+    "dungeonCreeps": 24,
+    "waveBossIdentities": 5,
+    "waveBossForms": 7,
+    "dungeonBosses": 4
+  },
+  "actors": [
+    {
+      "id": "hero_cai_bang",
+      "name": "Cái Bang Bổng",
+      "group": "heroes",
+      "biome": "arena",
+      "height": 88,
+      "description": "A young male martial artist in red and brown travel robes, dark ponytail tied with red cloth, holding one long plain wooden staff.",
+      "reference": {
+        "sheet": "assets/exports/characters/hero_cai_bang.png",
+        "sha256": "96764db1e1985a50976366df7f8495612ee0657b057a63c595b0cb7de74eb365",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 80
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hero_cai_bang.png",
+      "raw": "assets/source/renovation-v1/raw/hero_cai_bang.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "school": "cai_bang"
+    },
+    {
+      "id": "hero_cai_bang_chuong",
+      "name": "Cái Bang Chưởng",
+      "group": "heroes",
+      "biome": "arena",
+      "height": 88,
+      "description": "The same red-and-brown-robed young Cái Bang martial artist, empty hands in a relaxed palm-ready pose.",
+      "reference": {
+        "sheet": "assets/exports/characters/hero_cai_bang_chuong.png",
+        "sha256": "ee61122b40899484ac1d8aafbba656575c42950cf86edb808d24e2528b044c69",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 80
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hero_cai_bang_chuong.png",
+      "raw": "assets/source/renovation-v1/raw/hero_cai_bang_chuong.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "school": "cai_bang"
+    },
+    {
+      "id": "hero_thien_son",
+      "name": "Thiên Sơn Phiến",
+      "group": "heroes",
+      "biome": "arena",
+      "height": 88,
+      "description": "A refined young male martial artist in ivory robes with pale cyan embroidery, jade ornaments and a white ribbon, holding one open pale jade folding fan.",
+      "reference": {
+        "sheet": "assets/exports/characters/visual_improvement_v02/hero_thien_son.png",
+        "sha256": "9c085703561040748fe5740664b5c184a8b5b5e369f4b6814176b91ee0f69b3d",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "h": 80,
+          "w": 80,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hero_thien_son.png",
+      "raw": "assets/source/renovation-v1/raw/hero_thien_son.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "school": "thien_son"
+    },
+    {
+      "id": "hero_thien_son_dao",
+      "name": "Thiên Sơn Đao",
+      "group": "heroes",
+      "biome": "arena",
+      "height": 88,
+      "description": "The same ivory and pale cyan Thiên Sơn martial artist, holding one curved single-edged dao instead of a fan.",
+      "reference": {
+        "sheet": "assets/exports/characters/visual_improvement_v02/hero_thien_son_dao.png",
+        "sha256": "e5e628428f9499df390a255a6eeb6d29ef2320c6bcc531d5d01db0580149f55b",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "h": 80,
+          "w": 80,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hero_thien_son_dao.png",
+      "raw": "assets/source/renovation-v1/raw/hero_thien_son_dao.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "school": "thien_son"
+    },
+    {
+      "id": "hero_vo_dang",
+      "name": "Võ Đang Quyền",
+      "group": "heroes",
+      "biome": "arena",
+      "height": 88,
+      "description": "A young topknotted male with white ribbon, layered ivory and charcoal robes and silver yin-yang waist ornament, empty hands in relaxed martial readiness.",
+      "reference": {
+        "sheet": "assets/exports/characters/visual_improvement_v02/hero_vo_dang.png",
+        "sha256": "14559ee2625b422da3867a833da9ded40316ac40284fed91fad7a357a76144bd",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "h": 80,
+          "w": 80,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hero_vo_dang.png",
+      "raw": "assets/source/renovation-v1/raw/hero_vo_dang.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "school": "vo_dang"
+    },
+    {
+      "id": "hero_vo_dang_kiem",
+      "name": "Võ Đang Kiếm",
+      "group": "heroes",
+      "biome": "arena",
+      "height": 88,
+      "description": "The accepted ivory-and-charcoal Võ Đang swordsman holding a straight silver jian.",
+      "reference": {
+        "sheet": "assets/exports/characters/visual_improvement_v02/hero_vo_dang_kiem.png",
+        "sha256": "f9b74060e7f6f84152fe16ade32f4b0b4c478816d3a7a2593e70c63d300429c6",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "h": 80,
+          "w": 96,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hero_vo_dang_kiem.png",
+      "raw": "assets/source/renovation-v1/raw/hero_vo_dang_kiem.png",
+      "reuse": {
+        "sheet": "assets/exports/visual-upgrade-2/hero.png",
+        "atlas": "assets/exports/visual-upgrade-2/hero.json",
+        "canvas": [
+          192,
+          160
+        ],
+        "pivot": [
+          96,
+          128
+        ]
+      },
+      "status": "reused-approved-preview",
+      "school": "vo_dang"
+    },
+    {
+      "id": "hero_thieu_lam",
+      "name": "Thiếu Lâm Quyền",
+      "group": "heroes",
+      "biome": "arena",
+      "height": 88,
+      "description": "A sturdy young bald monk in saffron gold and brown robes, dark prayer beads, wrapped wrists and calves, empty fists.",
+      "reference": {
+        "sheet": "assets/exports/characters/visual_improvement_v02/hero_thieu_lam.png",
+        "sha256": "979afc4569fb42655a208a5e9d20baa1eb42954547c45cb7818ef1af9311a1eb",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "h": 80,
+          "w": 80,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hero_thieu_lam.png",
+      "raw": "assets/source/renovation-v1/raw/hero_thieu_lam.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "school": "thieu_lam"
+    },
+    {
+      "id": "hero_thieu_lam_dao",
+      "name": "Thiếu Lâm Đao",
+      "group": "heroes",
+      "biome": "arena",
+      "height": 88,
+      "description": "The same saffron and brown young bald Thiếu Lâm monk with prayer beads and white wraps, holding one broad curved silver dao.",
+      "reference": {
+        "sheet": "assets/exports/characters/visual_improvement_v02/hero_thieu_lam_dao.png",
+        "sha256": "ebba0799ff583add9d7b928871bb60683104b6456190b80e3cc36c5ba04937b0",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "h": 80,
+          "w": 112,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hero_thieu_lam_dao.png",
+      "raw": "assets/source/renovation-v1/raw/hero_thieu_lam_dao.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "school": "thieu_lam"
+    },
+    {
+      "id": "creep_wild_dog",
+      "name": "Chó Hoang",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 56,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_wild_dog.png",
+        "sha256": "2170e1962481b900d84ff4340f5d86b46539c2fb344d86afe35137b56dcf1863",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 80
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_wild_dog.png",
+      "raw": "assets/source/renovation-v1/raw/creep_wild_dog.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 1
+    },
+    {
+      "id": "creep_bandit_grunt",
+      "name": "Thổ Phỉ",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 84,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_bandit_grunt.png",
+        "sha256": "d78297df65ce8635c275896ea6c0da0a9985aabe3097d48e6500756abaf5b79b",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 80
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_bandit_grunt.png",
+      "raw": "assets/source/renovation-v1/raw/creep_bandit_grunt.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 2
+    },
+    {
+      "id": "creep_bandit_swordsman",
+      "name": "Sơn Tặc Đao",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 86,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_bandit_swordsman.png",
+        "sha256": "6ed57f54f7a0228744532f296d8ed3ca5b8b9b94c8d1697f694f1cc7b671ce52",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_bandit_swordsman.png",
+      "raw": "assets/source/renovation-v1/raw/creep_bandit_swordsman.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 3
+    },
+    {
+      "id": "creep_bandit_archer",
+      "name": "Cung Thủ Sơn Tặc",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 86,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_bandit_archer.png",
+        "sha256": "5803357f9e3b9f03b72203bf9e31f1e966b93d8567b2e4b70074a15585b46e0c",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 80
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_bandit_archer.png",
+      "raw": "assets/source/renovation-v1/raw/creep_bandit_archer.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 4
+    },
+    {
+      "id": "creep_black_clad_assassin",
+      "name": "Hắc Y Sát Thủ",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 80,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_black_clad_assassin.png",
+        "sha256": "df5e660c1ab575dfeb3f6efcffebdaecbfad61d01b053900ad61e8c7db2ae09d",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 96,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_black_clad_assassin.png",
+      "raw": "assets/source/renovation-v1/raw/creep_black_clad_assassin.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 5
+    },
+    {
+      "id": "creep_corrupted_monk",
+      "name": "Tà Tăng",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 90,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_corrupted_monk.png",
+        "sha256": "708043a253192c0c7b66f59862effab98ff4bd254c9d4038fe3bed9687124603",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_corrupted_monk.png",
+      "raw": "assets/source/renovation-v1/raw/creep_corrupted_monk.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 6
+    },
+    {
+      "id": "creep_skeleton_swordsman",
+      "name": "Khô Lâu Kiếm Sĩ",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 84,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_skeleton_swordsman.png",
+        "sha256": "bceb40aaf5746d86e92c36496f52c019836c8b7cb47680c908858064a39442ba",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_skeleton_swordsman.png",
+      "raw": "assets/source/renovation-v1/raw/creep_skeleton_swordsman.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 7
+    },
+    {
+      "id": "creep_skeleton_archer",
+      "name": "Khô Lâu Cung Thủ",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 84,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_skeleton_archer.png",
+        "sha256": "54c6a4ac7d481c98ef3b9c3feda2ae75bbaf982617286684ea3eea12215349ed",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 96,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_skeleton_archer.png",
+      "raw": "assets/source/renovation-v1/raw/creep_skeleton_archer.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 8
+    },
+    {
+      "id": "creep_jiangshi_zombie",
+      "name": "Cương Thi",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 88,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_jiangshi_zombie.png",
+        "sha256": "9b3e95d859c3a5a67e6bb28c47088986391f8ecccc0ecdee0d217bbba8d3a8e3",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 96,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_jiangshi_zombie.png",
+      "raw": "assets/source/renovation-v1/raw/creep_jiangshi_zombie.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 9
+    },
+    {
+      "id": "creep_vengeful_spirit",
+      "name": "Oán Linh",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 102,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_vengeful_spirit.png",
+        "sha256": "87c6d89315629bd84cc55f0d8853a636140f664b14b65fbac132cfedfc04d0a7",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 112
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_vengeful_spirit.png",
+      "raw": "assets/source/renovation-v1/raw/creep_vengeful_spirit.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 10
+    },
+    {
+      "id": "creep_armored_skeleton",
+      "name": "Thiết Giáp Khô Lâu",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 106,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_armored_skeleton.png",
+        "sha256": "3bebd128d3c706e7f5773995dbe49bf28fcdf755df6855fd575336d6685ca4b8",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 160,
+          "h": 112
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_armored_skeleton.png",
+      "raw": "assets/source/renovation-v1/raw/creep_armored_skeleton.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 11
+    },
+    {
+      "id": "creep_stone_golem",
+      "name": "Thạch Nhân",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 130,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_stone_golem.png",
+        "sha256": "daf569cff0bc8694538b2e8b6b8c0dfd20c48a2f68fea5b4b06000f922d5a9ba",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 176,
+          "h": 144
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_stone_golem.png",
+      "raw": "assets/source/renovation-v1/raw/creep_stone_golem.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 12
+    },
+    {
+      "id": "creep_demon_hound",
+      "name": "Ma Khuyển",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 68,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_demon_hound.png",
+        "sha256": "be86fd6ba96016924c9222da98f1bb4107b403c25c36816129ff71affdf2a75b",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_demon_hound.png",
+      "raw": "assets/source/renovation-v1/raw/creep_demon_hound.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 13
+    },
+    {
+      "id": "creep_fire_imp",
+      "name": "Tiểu Hỏa Quỷ",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 64,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_fire_imp.png",
+        "sha256": "b6777b23578a3b267bf5335c18a682af23e1c0531c8cf766f7df6337b473980c",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 96,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_fire_imp.png",
+      "raw": "assets/source/renovation-v1/raw/creep_fire_imp.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 14
+    },
+    {
+      "id": "creep_fire_cultist",
+      "name": "Hỏa Pháp Sư",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 104,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_fire_cultist.png",
+        "sha256": "38d649e4090c67f88d10b7cbba5436de4439b8fb6dc9f249bff950dd52561a6a",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_fire_cultist.png",
+      "raw": "assets/source/renovation-v1/raw/creep_fire_cultist.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 15
+    },
+    {
+      "id": "creep_horned_demon_brute",
+      "name": "Ngưu Ma",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 132,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_horned_demon_brute.png",
+        "sha256": "f29838602163341334b31773a12f91f2524deb36b2ce7af72ada6fafd7b8faf5",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 192,
+          "h": 160
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_horned_demon_brute.png",
+      "raw": "assets/source/renovation-v1/raw/creep_horned_demon_brute.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 16
+    },
+    {
+      "id": "creep_shadow_assassin",
+      "name": "Ảnh Ma",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 96,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_shadow_assassin.png",
+        "sha256": "15ad24e30def88843b777b66c502e17e025a27c695c3a13c301f9b161ad69268",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 112
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_shadow_assassin.png",
+      "raw": "assets/source/renovation-v1/raw/creep_shadow_assassin.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 17
+    },
+    {
+      "id": "creep_armored_demon_general",
+      "name": "Ma Tướng Thiết Giáp",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 146,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_armored_demon_general.png",
+        "sha256": "960e0f59ff3019779dce06943544bb72dbff659930395c3220d8c8a4ebb1e529",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 160,
+          "h": 144
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_armored_demon_general.png",
+      "raw": "assets/source/renovation-v1/raw/creep_armored_demon_general.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 18
+    },
+    {
+      "id": "creep_blood_demon_warlock",
+      "name": "Huyết Ma Pháp Sư",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 106,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_blood_demon_warlock.png",
+        "sha256": "56cd76f0ac33a66fdb6aceabcdfaba2311c526cda7382a01c3e3c50db4c64bc2",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_blood_demon_warlock.png",
+      "raw": "assets/source/renovation-v1/raw/creep_blood_demon_warlock.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 19
+    },
+    {
+      "id": "creep_demon_vanguard",
+      "name": "Ma Vương Tiên Phong",
+      "group": "wave_creeps",
+      "biome": "arena",
+      "height": 132,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__creep_demon_vanguard.png",
+        "sha256": "aa8c759e3d2a36c227262dd5c69f1e2cbd3e5f59eb46f010a5644719c8d7a4d2",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 160,
+          "h": 144
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/creep_demon_vanguard.png",
+      "raw": "assets/source/renovation-v1/raw/creep_demon_vanguard.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported",
+      "wave": 20
+    },
+    {
+      "id": "forest_truc_xa",
+      "name": "Trúc Xà",
+      "group": "dungeon_creeps",
+      "biome": "forest",
+      "height": 112,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__forest_truc_xa.png",
+        "sha256": "13a69e84821c96e63406d7d506e1cc1d1cf29fa69dde5a00cae8287c672eb47b",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/forest_truc_xa.png",
+      "raw": "assets/source/renovation-v1/raw/forest_truc_xa.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "forest_doc_chu",
+      "name": "Độc Chu",
+      "group": "dungeon_creeps",
+      "biome": "forest",
+      "height": 92,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__forest_doc_chu.png",
+        "sha256": "b1738ecbc7f05ecf49f156e83bc809620502e33834cc96c9e7ee7458780f011a",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/forest_doc_chu.png",
+      "raw": "assets/source/renovation-v1/raw/forest_doc_chu.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "forest_son_vien",
+      "name": "Sơn Viên",
+      "group": "dungeon_creeps",
+      "biome": "forest",
+      "height": 98,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__forest_son_vien.png",
+        "sha256": "27a6a6025944c0cf7f3443ea63a0ccbf65c4cdf7ed6a12a58004b785048b84f6",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/forest_son_vien.png",
+      "raw": "assets/source/renovation-v1/raw/forest_son_vien.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "forest_truc_lam_kiem_khach",
+      "name": "Trúc Lâm Kiếm Khách",
+      "group": "dungeon_creeps",
+      "biome": "forest",
+      "height": 88,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__forest_truc_lam_kiem_khach.png",
+        "sha256": "72a28d7c347cc8be7711bf5c91fb72e8a6dfab096c444d5b60dbb310a2cb27f7",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/forest_truc_lam_kiem_khach.png",
+      "raw": "assets/source/renovation-v1/raw/forest_truc_lam_kiem_khach.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "forest_moc_linh",
+      "name": "Mộc Linh",
+      "group": "dungeon_creeps",
+      "biome": "forest",
+      "height": 100,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__forest_moc_linh.png",
+        "sha256": "3f2ea16ea141f5f187cc9551735483b9a1773d5a5844dd52471710f9ea1cfaf7",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/forest_moc_linh.png",
+      "raw": "assets/source/renovation-v1/raw/forest_moc_linh.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "forest_truc_yeu",
+      "name": "Trúc Yêu",
+      "group": "dungeon_creeps",
+      "biome": "forest",
+      "height": 112,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__forest_truc_yeu.png",
+        "sha256": "e1af88f10ff623a689666207a8eb61b3671220a40eb7f2d620ee82e09eab761f",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 192,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/forest_truc_yeu.png",
+      "raw": "assets/source/renovation-v1/raw/forest_truc_yeu.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "beach_cua_khong_lo",
+      "name": "Cua Khổng Lồ",
+      "group": "dungeon_creeps",
+      "biome": "sea",
+      "height": 72,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__beach_cua_khong_lo.png",
+        "sha256": "0811f96a7725beb7c0b49dc01b550ea8f7b96140ac3bf3f36e8cb0b7d077f499",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/beach_cua_khong_lo.png",
+      "raw": "assets/source/renovation-v1/raw/beach_cua_khong_lo.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "beach_hai_xa",
+      "name": "Hải Xà",
+      "group": "dungeon_creeps",
+      "biome": "sea",
+      "height": 100,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__beach_hai_xa.png",
+        "sha256": "d5bd2867d4ab6256ce3cc1e99e9945d50bc8e8b3a84820d79d21c4d2f8f78637",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/beach_hai_xa.png",
+      "raw": "assets/source/renovation-v1/raw/beach_hai_xa.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "beach_hai_tac",
+      "name": "Hải Tặc",
+      "group": "dungeon_creeps",
+      "biome": "sea",
+      "height": 96,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__beach_hai_tac.png",
+        "sha256": "8f5195235b8fd8345e7664ba7859795716f2c758da6ac19d6baf8de665bb7463",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/beach_hai_tac.png",
+      "raw": "assets/source/renovation-v1/raw/beach_hai_tac.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "beach_hai_tac_hoa_phao",
+      "name": "Hải Tặc Hỏa Pháo",
+      "group": "dungeon_creeps",
+      "biome": "sea",
+      "height": 96,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__beach_hai_tac_hoa_phao.png",
+        "sha256": "735d013d75f1062934e9cb1c1a21ddf4f01b2b88647afad19ba4026b5d185fe8",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/beach_hai_tac_hoa_phao.png",
+      "raw": "assets/source/renovation-v1/raw/beach_hai_tac_hoa_phao.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "beach_thuy_quy",
+      "name": "Thủy Quỷ",
+      "group": "dungeon_creeps",
+      "biome": "sea",
+      "height": 96,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__beach_thuy_quy.png",
+        "sha256": "74464f9c4219c993a4b21e8441991149b7c798d0ed77810e4cc1a7b5cc1672b5",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/beach_thuy_quy.png",
+      "raw": "assets/source/renovation-v1/raw/beach_thuy_quy.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "beach_hai_vu",
+      "name": "Hải Vu",
+      "group": "dungeon_creeps",
+      "biome": "sea",
+      "height": 96,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__beach_hai_vu.png",
+        "sha256": "7dc1e4f61294558f0e5404704759208622fba8b5394ec6f0d340bcf5c56727f8",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/beach_hai_vu.png",
+      "raw": "assets/source/renovation-v1/raw/beach_hai_vu.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "hell_xich_quy",
+      "name": "Xích Quỷ",
+      "group": "dungeon_creeps",
+      "biome": "hell",
+      "height": 70,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__hell_xich_quy.png",
+        "sha256": "a9af7edd30082bd499a3e0f8e1ff108e5a82831db5774e19d63aa1aee19b15e2",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 80
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hell_xich_quy.png",
+      "raw": "assets/source/renovation-v1/raw/hell_xich_quy.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "hell_dia_nguc_khuyen",
+      "name": "Địa Ngục Khuyển",
+      "group": "dungeon_creeps",
+      "biome": "hell",
+      "height": 88,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__hell_dia_nguc_khuyen.png",
+        "sha256": "61eab9b8c024fd5fb5f1ed9e562db2c0f316ce57aba40a7f528554c628f45a33",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hell_dia_nguc_khuyen.png",
+      "raw": "assets/source/renovation-v1/raw/hell_dia_nguc_khuyen.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "hell_dung_nham_linh",
+      "name": "Dung Nham Linh",
+      "group": "dungeon_creeps",
+      "biome": "hell",
+      "height": 100,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__hell_dung_nham_linh.png",
+        "sha256": "3b1108eec5b30786a8caf295ecf937b2a4ae3c74a140b59f915c99037006f3fd",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 112
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hell_dung_nham_linh.png",
+      "raw": "assets/source/renovation-v1/raw/hell_dung_nham_linh.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "hell_hac_viem_phap_su",
+      "name": "Hắc Viêm Pháp Sư",
+      "group": "dungeon_creeps",
+      "biome": "hell",
+      "height": 104,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__hell_hac_viem_phap_su.png",
+        "sha256": "4b45530cd458053f0a26eda09dd99cad9a4e6e99896970f373a9658ee433c5d2",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 112
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hell_hac_viem_phap_su.png",
+      "raw": "assets/source/renovation-v1/raw/hell_hac_viem_phap_su.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "hell_hac_dien_nguu_ma",
+      "name": "Hắc Diện Ngưu Ma",
+      "group": "dungeon_creeps",
+      "biome": "hell",
+      "height": 146,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__hell_hac_dien_nguu_ma.png",
+        "sha256": "d179108f25374b26964a6b88e96c635a1ba689124282d803683b5e551fc66867",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 192,
+          "h": 160
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hell_hac_dien_nguu_ma.png",
+      "raw": "assets/source/renovation-v1/raw/hell_hac_dien_nguu_ma.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "hell_dung_nham_cu_nhan",
+      "name": "Dung Nham Cự Nhân",
+      "group": "dungeon_creeps",
+      "biome": "hell",
+      "height": 178,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__hell_dung_nham_cu_nhan.png",
+        "sha256": "6a8ee6d98ca56381489ed8bca17bbcaa9625a8ca228d077f6e24857a76490860",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 224,
+          "h": 192
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hell_dung_nham_cu_nhan.png",
+      "raw": "assets/source/renovation-v1/raw/hell_dung_nham_cu_nhan.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "desert_bo_cap_cat",
+      "name": "Bọ Cạp Cát",
+      "group": "dungeon_creeps",
+      "biome": "desert",
+      "height": 112,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__desert_bo_cap_cat.png",
+        "sha256": "76fa5b6ada3d1b82599bab8abfd9c03753cd2636ff758f93144e035f4b0860c3",
+        "frame": "idle_down_0.png",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 112
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/desert_bo_cap_cat.png",
+      "raw": "assets/source/renovation-v1/raw/desert_bo_cap_cat.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "desert_sa_xa",
+      "name": "Sa Xà",
+      "group": "dungeon_creeps",
+      "biome": "desert",
+      "height": 72,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__desert_sa_xa.png",
+        "sha256": "4618d4a128b9f2b0e2caeaebbd4ed9c2c5a0ece1772a80c53d05523a2e9ca0c3",
+        "frame": "idle_down_0.png",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/desert_sa_xa.png",
+      "raw": "assets/source/renovation-v1/raw/desert_sa_xa.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "desert_sa_tac",
+      "name": "Sa Tặc",
+      "group": "dungeon_creeps",
+      "biome": "desert",
+      "height": 88,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__desert_sa_tac.png",
+        "sha256": "04d169bcf67469bbcf7bd3ed8c1d9fb88de897a07d55b2aac5bbc9625c68c5b0",
+        "frame": "idle_down_0.png",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/desert_sa_tac.png",
+      "raw": "assets/source/renovation-v1/raw/desert_sa_tac.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "desert_cung_thu_sa_mac",
+      "name": "Cung Thủ Sa Mạc",
+      "group": "dungeon_creeps",
+      "biome": "desert",
+      "height": 88,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__desert_cung_thu_sa_mac.png",
+        "sha256": "3c67c8084c273cac7302c4b47ac7e62911d82caf21049244d17227cb3b3a7ab6",
+        "frame": "idle_down_0.png",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/desert_cung_thu_sa_mac.png",
+      "raw": "assets/source/renovation-v1/raw/desert_cung_thu_sa_mac.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "desert_xac_uop",
+      "name": "Xác Ướp",
+      "group": "dungeon_creeps",
+      "biome": "desert",
+      "height": 90,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__desert_xac_uop.png",
+        "sha256": "b8ef7b1e3b1dbd3deb99e6e8ee607f78e7427f78a618d00c503370c842681f05",
+        "frame": "idle_down_0.png",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/desert_xac_uop.png",
+      "raw": "assets/source/renovation-v1/raw/desert_xac_uop.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "desert_cu_nhan_sa_thach",
+      "name": "Cự Nhân Sa Thạch",
+      "group": "dungeon_creeps",
+      "biome": "desert",
+      "height": 144,
+      "description": "Retain the exact creature species, anatomy, costume, armor and equipment shown in its identity reference. Animate the natural gait of that species.",
+      "reference": {
+        "sheet": "assets/exports/visual-improvement-approved/creep_motion_v08__desert_cu_nhan_sa_thach.png",
+        "sha256": "b66c442507553b1f676d64347d8dc15604fffda12bd4241ffe840525cd55ba60",
+        "frame": "idle_down_0.png",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/desert_cu_nhan_sa_thach.png",
+      "raw": "assets/source/renovation-v1/raw/desert_cu_nhan_sa_thach.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "dong_ta",
+      "name": "Đông Tà",
+      "group": "wave_bosses",
+      "biome": "arena",
+      "height": 124,
+      "description": "",
+      "reference": {
+        "sheet": "assets/sprites/bosses/main/dong-ta/boss_dong_ta.png",
+        "sha256": "bc259cee438b475228c48ac6b23e1dcabd11cf088c115e3023c4ed65224edddb",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 160,
+          "h": 112
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/dong_ta.png",
+      "raw": "assets/source/renovation-v1/raw/dong_ta.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "mai_sieu_phong",
+      "name": "Mai Siêu Phong",
+      "group": "minions",
+      "biome": "arena",
+      "height": 96,
+      "description": "",
+      "reference": {
+        "sheet": "assets/sprites/summons/mai-sieu-phong/summon_mai_sieu_phong.png",
+        "sha256": "4d8b9e24d1d0a8f7b8a78942c254d905be32c7a3fad5fefe1e901f37fb2165fb",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/mai_sieu_phong.png",
+      "raw": "assets/source/renovation-v1/raw/mai_sieu_phong.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "hoang_dung",
+      "name": "Hoàng Dung",
+      "group": "minions",
+      "biome": "arena",
+      "height": 96,
+      "description": "",
+      "reference": {
+        "sheet": "assets/sprites/summons/hoang-dung/summon_hoang_dung.png",
+        "sha256": "037c87eda50145d5402e44be7d1284588a7472929855ab7e5ff4ea2b6f4b72b5",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hoang_dung.png",
+      "raw": "assets/source/renovation-v1/raw/hoang_dung.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "tay_doc",
+      "name": "Tây Độc",
+      "group": "wave_bosses",
+      "biome": "arena",
+      "height": 124,
+      "description": "",
+      "reference": {
+        "sheet": "assets/sprites/bosses/main/tay-doc/phase-1/spritesheet.png",
+        "sha256": "6c16b609204039665fdf3ab24efa70a77e9193735a197f8e242299c506c8e513",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 160,
+          "h": 144
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/tay_doc.png",
+      "raw": "assets/source/renovation-v1/raw/tay_doc.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "tay_doc_cap_mo",
+      "name": "Tây Độc · Cáp Mô",
+      "group": "wave_bosses",
+      "biome": "arena",
+      "height": 124,
+      "description": "",
+      "reference": {
+        "sheet": "assets/sprites/bosses/main/tay-doc/phase-2/spritesheet.png",
+        "sha256": "b20c2cf82e9110be3a9189bdd2822e1da2d38759e19ab5354254ffff9452708c",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 160,
+          "h": 144
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/tay_doc_cap_mo.png",
+      "raw": "assets/source/renovation-v1/raw/tay_doc_cap_mo.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "tay_doc_snake",
+      "name": "Linh Xà · Tây Độc",
+      "group": "minions",
+      "biome": "arena",
+      "height": 90,
+      "description": "",
+      "reference": {
+        "sheet": "assets/reviews/tay_doc_v02/feedback01/snakes_8/spritesheet.png",
+        "sha256": "56afea94b4f6684bc4ffa937e36e05e0f40dc6a45739d0f4a283ffd7bb9f28ed",
+        "frame": "snake_facing_8_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/tay_doc_snake.png",
+      "raw": "assets/source/renovation-v1/raw/tay_doc_snake.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "nam_de",
+      "name": "Nam Đế",
+      "group": "wave_bosses",
+      "biome": "arena",
+      "height": 124,
+      "description": "",
+      "reference": {
+        "sheet": "assets/sprites/bosses/main/nam-de/boss_nam_de.png",
+        "sha256": "aab77501e3be7534fa1c9a8e980cd4015d9f1b8df5cdfcd6ba4c52823c80b7cf",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 160,
+          "h": 112
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/nam_de.png",
+      "raw": "assets/source/renovation-v1/raw/nam_de.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "bac_cai",
+      "name": "Bắc Cái",
+      "group": "wave_bosses",
+      "biome": "arena",
+      "height": 124,
+      "description": "",
+      "reference": {
+        "sheet": "assets/sprites/bosses/main/bac-cai/boss_bac_cai.png",
+        "sha256": "5ef248b614112455e4be64c94307073c4d12d0c2c1a4dd98ff3f3d08cda63c38",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 160,
+          "h": 112
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/bac_cai.png",
+      "raw": "assets/source/renovation-v1/raw/bac_cai.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "vuong_trung_duong_p1",
+      "name": "Vương Trùng Dương",
+      "group": "wave_bosses",
+      "biome": "arena",
+      "height": 132,
+      "description": "",
+      "reference": {
+        "sheet": "assets/exports/vuong-trung-duong/body.png",
+        "sha256": "ed47305a465e3e59d2bfd85bfe2c19ade22a7c2e0b703a50c7b8fa36123b118f",
+        "frame": "p1_down_idle",
+        "rectangle": {
+          "x": 0,
+          "y": 112,
+          "w": 128,
+          "h": 112
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/vuong_trung_duong_p1.png",
+      "raw": "assets/source/renovation-v1/raw/vuong_trung_duong_p1.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "vuong_trung_duong_p2",
+      "name": "Vương Trùng Dương · bỏ kiếm",
+      "group": "wave_bosses",
+      "biome": "arena",
+      "height": 132,
+      "description": "",
+      "reference": {
+        "sheet": "assets/exports/vuong-trung-duong/body.png",
+        "sha256": "ed47305a465e3e59d2bfd85bfe2c19ade22a7c2e0b703a50c7b8fa36123b118f",
+        "frame": "p2_down_idle",
+        "rectangle": {
+          "x": 0,
+          "y": 336,
+          "w": 128,
+          "h": 112
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/vuong_trung_duong_p2.png",
+      "raw": "assets/source/renovation-v1/raw/vuong_trung_duong_p2.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "bac_cai_black_dog",
+      "name": "Hắc Khuyển · Bắc Cái",
+      "group": "minions",
+      "biome": "arena",
+      "height": 70,
+      "description": "",
+      "reference": {
+        "sheet": "assets/sprites/bosses/main/bac-cai/rework-v02/dog/bac_cai_black_dog.png",
+        "sha256": "d8b7d3355e376292e222805ecc9451e6aaefa5bd99b4d20b12b6f7793786ad51",
+        "frame": "idle_right_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 96,
+          "h": 80
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/bac_cai_black_dog.png",
+      "raw": "assets/source/renovation-v1/raw/bac_cai_black_dog.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "chu_ba_thong",
+      "name": "Chu Bá Thông",
+      "group": "dungeon_bosses",
+      "biome": "chu_ba_thong",
+      "height": 120,
+      "description": "",
+      "reference": {
+        "sheet": "assets/sprites/bosses/chu-ba-thong/boss_chu_ba_thong.png",
+        "sha256": "719ec4f668e1696c20842e913aff8b79c85868de07cb14504830fa0026c289e5",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 96
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/chu_ba_thong.png",
+      "raw": "assets/source/renovation-v1/raw/chu_ba_thong.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "toan_chan_disciple",
+      "name": "Toàn Chân Đệ Tử",
+      "group": "minions",
+      "biome": "chu_ba_thong",
+      "height": 90,
+      "description": "",
+      "reference": {
+        "sheet": "assets/sprites/summons/toan-chan-disciples/toan_chan_disciple.png",
+        "sha256": "9bc902067774f77b63d0e527d463a6d7a9eba65f0dc31abe56290e137eef48ee",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 80,
+          "h": 80
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/toan_chan_disciple.png",
+      "raw": "assets/source/renovation-v1/raw/toan_chan_disciple.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "hoan_nhan_hong_liet",
+      "name": "Hoàn Nhan Hồng Liệt",
+      "group": "dungeon_bosses",
+      "biome": "hong_liet",
+      "height": 144,
+      "description": "",
+      "reference": {
+        "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/boss_locomotion.png",
+        "sha256": "244c8a6231d9031c264f52662ccf6bb6f297cdb1cbe544a30d3d62abf026acfe",
+        "frame": "down_idle_a",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 160,
+          "h": 160
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hoan_nhan_hong_liet.png",
+      "raw": "assets/source/renovation-v1/raw/hoan_nhan_hong_liet.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "mongol_infantry",
+      "name": "Bộ Binh Mông Cổ",
+      "group": "minions",
+      "biome": "hong_liet",
+      "height": 92,
+      "description": "",
+      "reference": {
+        "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/minion_infantry.png",
+        "sha256": "3743f0d078e8785c3e0bf13a8153ac62cb57bec580da24b6e98b605d739235c0",
+        "frame": "down_idle_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/mongol_infantry.png",
+      "raw": "assets/source/renovation-v1/raw/mongol_infantry.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "mongol_archer",
+      "name": "Cung Thủ Mông Cổ",
+      "group": "minions",
+      "biome": "hong_liet",
+      "height": 92,
+      "description": "",
+      "reference": {
+        "sheet": "assets/exports/bosses/hoan_nhan_hong_liet_v01/minion_archer.png",
+        "sha256": "9b0c46c3947df16ba75f2bec186420c68ac3170eaeef05029e7931b116d16da1",
+        "frame": "down_idle_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/mongol_archer.png",
+      "raw": "assets/source/renovation-v1/raw/mongol_archer.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "kim_luan",
+      "name": "Kim Luân Pháp Vương",
+      "group": "dungeon_bosses",
+      "biome": "kim_luan",
+      "height": 132,
+      "description": "",
+      "reference": {
+        "sheet": "assets/exports/bosses/kim_luan_phap_vuong_v01/kim_luan_base.png",
+        "sha256": "8773a0e82d5d2da9f61585b8e1a9e50a35922a544f4b5d3a3f78439b7eeb2c15",
+        "frame": "down_idle_a",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 128,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/kim_luan.png",
+      "raw": "assets/source/renovation-v1/raw/kim_luan.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "hoac_do",
+      "name": "Hoắc Đô",
+      "group": "minions",
+      "biome": "kim_luan",
+      "height": 104,
+      "description": "",
+      "reference": {
+        "sheet": "assets/exports/bosses/kim_luan_phap_vuong_v01/hoac_do_base.png",
+        "sha256": "176315e7e2e261ef8e4ae85bde32de2d4fc0d6a38cceefc752e352b77a76a37f",
+        "frame": "down_idle_a",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 160,
+          "h": 160
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/hoac_do.png",
+      "raw": "assets/source/renovation-v1/raw/hoac_do.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "dat_nhi_ba",
+      "name": "Đạt Nhĩ Ba",
+      "group": "minions",
+      "biome": "kim_luan",
+      "height": 116,
+      "description": "",
+      "reference": {
+        "sheet": "assets/exports/bosses/kim_luan_phap_vuong_v01/dat_nhi_ba_base.png",
+        "sha256": "29c35634238cb88c351e7d7a967f19807a476d1d17c251ae64f87db00fdbd82d",
+        "frame": "down_idle_a",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 160,
+          "h": 160
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/dat_nhi_ba.png",
+      "raw": "assets/source/renovation-v1/raw/dat_nhi_ba.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "kim_elephant",
+      "name": "Voi · Kim Luân",
+      "group": "minions",
+      "biome": "kim_luan",
+      "height": 156,
+      "description": "",
+      "reference": {
+        "sheet": "assets/exports/bosses/kim_luan_phap_vuong_v01/elephant.png",
+        "sha256": "ec80556969cc26905852d8dfcd38f1b4ab26cf8a63e2e66dab6062d80b91594d",
+        "frame": "run_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 256,
+          "h": 256
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/kim_elephant.png",
+      "raw": "assets/source/renovation-v1/raw/kim_elephant.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "ly_mac_sau",
+      "name": "Lý Mạc Sầu",
+      "group": "dungeon_bosses",
+      "biome": "co_mo",
+      "height": 112,
+      "description": "",
+      "reference": {
+        "sheet": "assets/sprites/bosses/ly-mac-sau/spritesheet.png",
+        "sha256": "d9ae8fe3150e4f8226b959af3ee2e1f9aaa6e35e927cc90df66744cf40d8a692",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 144,
+          "h": 128
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/ly_mac_sau.png",
+      "raw": "assets/source/renovation-v1/raw/ly_mac_sau.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    },
+    {
+      "id": "co_mo_am_binh",
+      "name": "Cổ Mộ Âm Binh",
+      "group": "minions",
+      "biome": "co_mo",
+      "height": 88,
+      "description": "",
+      "reference": {
+        "sheet": "assets/sprites/summons/co-mo-am-binh/spritesheet.png",
+        "sha256": "28183184df2b0148a44408c43337ccb0587dc861beeae7d718e58488cf5a0010",
+        "frame": "idle_down_0",
+        "rectangle": {
+          "x": 0,
+          "y": 0,
+          "w": 112,
+          "h": 112
+        }
+      },
+      "identity": "assets/source/renovation-v1/references/co_mo_am_binh.png",
+      "raw": "assets/source/renovation-v1/raw/co_mo_am_binh.png",
+      "reuse": null,
+      "status": "candidate-generated-and-exported"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "forest",
+      "name": "Rừng Trúc",
+      "theme": "A jade bamboo forest clearing with organic earth and small worn stone path patches, rich mossy banks and ferns. Keep the broad central clearing open for combat. Surrounding bamboo, bridge and shrine belong to separate props.",
+      "reference": "assets/references/forest_dungeon_reference.png",
+      "props": "one tall jade bamboo clump, one massive mossy tree, one mossy stone lantern, one old timber footbridge with no stream attached, one small East Asian roofed wooden shrine, one cluster of ferns and mossy rocks"
+    },
+    {
+      "id": "desert",
+      "name": "Sa Mạc",
+      "theme": "A sunlit ochre desert ruin clearing with natural sand and softly varied warm sandstone pavement fragments, worn footpaths and small scattered stone chips. Broad open combat center. Ruin walls, broken columns and tents belong to separate props.",
+      "reference": "assets/references/desert_dungeon_reference.png",
+      "props": "one broken sandstone gateway, one pair of eroded ruin pillars on one base, one oasis palm tree, one scarlet merchant tent, one low old sandstone barricade, one cluster of small cactus and bones"
+    },
+    {
+      "id": "sea",
+      "name": "Bãi Biển",
+      "theme": "An East Asian tropical coastal beach clearing, warm pale sand, gentle turquoise shallow surf and small foam detail along the right and bottom borders, a few dark stone outcrops. Keep broad center and left side dry and open for combat. Pier, boats and palms belong to separate props.",
+      "reference": "assets/references/sea_dungeon_reference.png",
+      "props": "one tall coconut palm, one short roofed wooden pier segment, one moored traditional wooden boat with folded cream sail, one thatched merchant hut, one cluster of coral and dark rocks, one blue maritime banner on carved post"
+    },
+    {
+      "id": "hell",
+      "name": "Địa Ngục",
+      "theme": "A dark infernal stone stronghold clearing, varied charcoal basalt slabs with narrow red seams, restrained molten lava outside the left and right borders and visible stone ledge edges. Keep the central broad stone platform cool dark and open. Chains, gates, demonic statues and braziers belong to separate props.",
+      "reference": "assets/references/hell_dungeon_reference.png",
+      "props": "one enormous black-and-red infernal gate, one carved demonic stone statue, one heavy iron brazier with orange fire, one pillar holding a hanging heavy chain, one scarlet torn banner, one cluster of obsidian and old skulls"
+    },
+    {
+      "id": "chu_ba_thong",
+      "name": "Sân Chu Bá Thông",
+      "theme": "A quiet Taoist mountain monastery training court with warm grey small stone slabs, subtle circular yin-yang engraving, jade lawn and moss at the edge. Open broad training center, soft afternoon light. Trees, temple entrance and statues belong to separate props.",
+      "reference": "assets/references/central_arena_hub_reference.png",
+      "props": "one grey-tiled Taoist monastery gate, one old gnarled pine tree, one small stone yin-yang stele, one tall amber lantern post, one low carved stone bench, one wine table with two ceramic jars"
+    },
+    {
+      "id": "hong_liet",
+      "name": "Trại Hoàn Nhan",
+      "theme": "A fortified martial army camp training ground, warm reddish stone and packed ochre earth, small worn paving slabs and darker wheel tracks. Sparse faded circular crest in the broad open center. Military tents, cannons, posts and walls belong to separate props.",
+      "reference": "assets/references/arena_battle_reference.png",
+      "props": "one dark red military command tent, one short brick fortification with wooden spikes, one old bronze cannon on a sturdy wooden carriage, one tall scarlet army banner, one wooden supply cart with crates, one iron torch brazier"
+    },
+    {
+      "id": "kim_luan",
+      "name": "Sân Kim Luân",
+      "theme": "A mountain Buddhist monastery combat courtyard with subtly warm gold sandstone slabs, an engraved simple wheel motif in the broad open center, old pale stone border and a little sparse alpine grass. Golden accents restrained, distant cold mountain color. Monastery stairs, statues and drums belong to separate props.",
+      "reference": "assets/references/arena_battle_reference.png",
+      "props": "one red-and-gold monastery entrance stair and door, one dignified golden Buddhist statue on stone plinth, one large ceremonial drum on a red wood stand, one red prayer banner post, one short pale stone balustrade, one ancient pine and rock cluster"
+    },
+    {
+      "id": "co_mo",
+      "name": "Cổ Mộ",
+      "theme": "An ancient secluded tomb grove courtyard, desaturated lavender-grey small flagstones, sparse moss, faint pale purple flowers and jade vegetation on the border, soft cool moonlit atmosphere. Keep the broad central clearing open and readable, restrained shallow mist only at far edges. Tomb gate, trees and lanterns belong to separate props.",
+      "reference": "assets/references/forest_dungeon_reference.png",
+      "props": "one ancient carved tomb entrance with dark doorway, one pale purple blossom tree, one grey funerary stele, one cold-blue stone lantern, one jade willow tree, one mossy fallen carved stone slab with violet flowers"
+    }
+  ]
+}
