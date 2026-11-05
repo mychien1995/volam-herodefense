@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate_pending_director_review",
+  "date": "2026-11-05",
+  "scope": "Interactive single-screen arena art preview with one Wudang swordsman, four authored walks and five visual sword techniques",
+  "entry": "apps/game-client/visual-upgrade-2.html",
+  "provenance": {
+    "tool": "OpenAI built-in image_gen",
+    "ownership": "Original generated project artwork using the project's references. Retained source outputs and Aseprite exports.",
+    "editor": "Aseprite 1.3.18.6",
+    "recipe": "assets/source/visual-upgrade-2/export.lua",
+    "sampling": "Bilinear downsampling with retained partial alpha, source alpha noise below 12 removed for character cels, output alpha below 4 removed; scene renders natively with antialiasing.",
+    "references": [
+      "assets/references/central_arena_hub_reference.png",
+      "assets/references/arena_battle_reference.png",
+      "assets/references/vo_dang_character_reference.png",
+      "assets/concepts/heroes/vo-dang/vo-dang-concept-v01.png",
+      "assets/references/in_game_world_reference.png",
+      "assets/references/current_game_2026_10_29_placeholder_anti_reference.png"
+    ],
+    "referenceNote": "Historical vo_dang_art_direction_reference.png is absent. Existing vo_dang_character_reference.png was inspected. current_codex_dashboard_anti_reference.png contains a character sheet, so the dated rejected runtime screenshot defines the negative visual-quality baseline."
+  },
+  "hero": {
+    "canvas": [
+      192,
+      160
+    ],
+    "feetPivot": [
+      96,
+      128
+    ],
+    "idleHeightTarget": 88,
+    "walkFrameMs": 110,
+    "facings": [
+      "down",
+      "up",
+      "left",
+      "right"
+    ],
+    "authoredCels": 24,
+    "idleCelsPerFacing": 1,
+    "walkCelsPerFacing": 4,
+    "castPosesPerFacing": 1,
+    "castChoreography": "Idle anticipation, one authored sword pose, idle recovery. Reused across the five visual clips.",
+    "rearCorrection": "Up-facing source cels mirrored during export to put the sword in the physical right hand.",
+    "selection": "Uses idle, four walking poses and one intact sword pose from each original sheet. Other generated attack poses are retained in raw sheets but omitted where the sword touched a cell boundary."
+  },
+  "effects": {
+    "canvas": [
+      320,
+      240
+    ],
+    "cels": {
+      "that_tinh_kiem": 8,
+      "nhan_kiem_hop_nhat": 4,
+      "bat_quai_kiem_tran": 4,
+      "toa_sat_bac_do": 4,
+      "van_kiem_quy_tong": 4
+    },
+    "lifecycle": "Preview clips use scene animation time. Straight sword keeps the selected direction, ring is ground-layered, guard follows the actor and all effect objects expire."
+  },
+  "environment": {
+    "groundNativeSize": [
+      1478,
+      1064
+    ],
+    "components": [
+      "ground",
+      "statue",
+      "tree-jade",
+      "tree-blossom",
+      "banner",
+      "bamboo",
+      "merchant",
+      "portal",
+      "lantern"
+    ],
+    "propCanvas": [
+      384,
+      384
+    ],
+    "propFootPivot": [
+      192,
+      368
+    ],
+    "depth": "Foot Y, with explicit ground depth for formation"
+  },
+  "acceptance": {
+    "interactiveArtPreview": true,
+    "productionMatchIntegrated": false,
+    "serverCombatValidation": false,
+    "networkSixClientAcceptance": false,
+    "directorApproved": false
+  },
+  "prompts": {
+    "ground": "Create a production 2D wuxia RPG environment GROUND LAYER for Võ Lâm Hero Defense, following the first reference's central hub art quality and the second reference's stone arena material. Camera is a fixed ELEVATED ORTHOGRAPHIC TOP-DOWN three-quarter RPG overworld. Render a continuous playable courtyard ground with rich hand-painted crisp miniature detail, clean coherent edges, natural warm pale limestone, subtle warm-grey slabs, sparse aged moss in joints, cool jade grasses outside. Image should be 3200 by 2304 pixels, one seamless continuous authored environment substrate, no UI. Composition keyed to normalized coordinates: center of a broad circular paved court at x50%, y56%; circular courtyard extends radius29% of image width, above and below center slightly compressed in topdown perspective. Four wide gently irregular worn stone paths extend to the four image edges. Small detailed stone slabs about 20-30 image pixels across, individual shapes varied, clearly visible subtly dark joints, broad quiet midtones, restrained fine texture and a few veins. At circle center a subtle engraved stone eight-trigram/yin-yang mosaic, radius5% of width. Outer ring has ornate thin concentric carved band. Surrounding ground is jade-green lawn with richly grouped foliage, patches of wild flowers, worn dirt and smooth transitions. Keep the entire broad court and paths open and walkable. This is ONLY the flat walkable floor layer, leave the center unobstructed. Trees, statue, buildings, NPCs, stone walls, waterfalls, enemies, people, skill effects, captions and HUD belong to separate layers and are absent. Use reference for palette, readable material, skillful coherent small-scale shape design. Clean high-definition edges with subtle natural anti-aliasing at native resolution, not chunky giant pixels, not noisy dithering, not uniform repetitive square tile grid. Generate original art, never paste reference characters or UI. Lighting from upper-left, no strong long cast shadows in ground.",
+    "props": "Original production transparent 2D wuxia RPG environment PROP SHEET, exactly eight separate complete props in a strict 4 columns by 2 rows grid, preferably 2048 by 1024, one complete object per evenly sized cell with generous clear transparent padding. Fixed orthographic elevated top-down three-quarter view, like a detailed East-Asian RPG overworld, same lighting and miniature hand-painted crisp edge style as the attached hub reference. Reading order: row1 a dignified MALE martial grandmaster stone statue in flowing robes on a square carved stone plinth with three shallow steps, one mature jade-green broadleaf tree with substantial brown trunk and a fully shaped dense canopy, one mature pink blossom tree with a visible rooted trunk and a fully shaped canopy, one tall red martial banner on a carved dark wooden post and heavy square stone foot. Row2 one tall clump of jade bamboo with rooted base, one exquisite compact East Asian wood merchant stall with curved tiled roof and crimson canopy displaying pottery, one upright circular blue swirling portal held in a thick carved grey stone gate with visible base/threshold, one amber lantern on a dark wood and bronze carved post with stone foot. Each tree entirely contained including its upper foliage. Texture richness at moderate scale, grouped leaves with broad shadow masses and small restrained highlights; continuous coherent contours, clean shallow stone bevels and subtle material weathering, warm light from upper left. Props should be consistent with human sprites about 88 screen pixels tall: statue ~250px tall, trees ~320px, stall ~260px and portal ~220px when exported. Leave all props cleanly isolated on true transparent alpha. No characters, captions, labels, numbers, floor plane, scenery background, HUD or effects around the props. Preserve distinct readable silhouettes and fine continuous edges.",
+    "hero": {
+      "down": "Create an original production gameplay ANIMATION CONTACT SHEET of exactly EIGHT full-body drawings of the SAME Võ Đang swordsman in DOWN facing. Use the first approved character portrait for identity and the second clean down-facing sprite for the simpler compact gameplay proportions and the white robes, charcoal panels, dark structural belt, silver yin-yang buckle, black topknot, white hair ribbon and single straight silver jian. Elevated fixed orthographic three-quarter TOP-DOWN 2D wuxia RPG camera, showing crown/shoulder/boot tops, front facing the BOTTOM of the screen. Output a strict evenly spaced FOUR COLUMNS by TWO ROWS grid, preferably 2048x1024. Exactly one whole figure per equal rectangular cell, all feet at equal baseline within each cell and identical body height/proportions across ALL eight cells. Each figure occupies about 70 percent of cell height. Both sword and full silhouette contained with clear padding inside each cell, separate true transparent alpha between all drawings. Row1 left-to-right: 1 neutral ready idle pose, sword low at side; 2 walk stride left leg forward/right leg back, opposing natural arm swing, sword held firmly; 3 walk passing pose legs near middle, heel lifting; 4 opposite walk stride right leg forward/left leg back. Row2 left-to-right: 5 opposite passing step, visibly distinct knee/foot positions; 6 sword attack anticipation raised or drawn back jian; 7 strong sword attack extended forward slash/contact pose, pronounced shoulder/arm/leg motion; 8 attack followthrough/recovery with blade held across the body. These are DISTINCT hand-drawn anatomical poses with stable garment design, head proportions, ribbon, jian. Both feet visibly grounded and separate. Sword remains rigid and straight in every cel. No motion blur, no energy effects, no cast shadows. Render as crisp high-density small-game 2D painted sprites with continuous dark outlines and clear connected steel edges, broad intentional light/shadow clusters, restrained ivory/slate palette and minimal silver trim. Avoid dither noise, broken sketch lines, see-through holes, tiny stipple details, or chunky retro 8-bit pixelation. Opaque body pixels and a clean narrow anti-aliased silhouette blending to alpha are desired. True transparent background, without text, numbers, labels, grids, frames, scenery or extra people.",
+      "up": "Create an original production gameplay ANIMATION CONTACT SHEET of exactly EIGHT full-body drawings of the SAME Võ Đang swordsman in UP facing. Use the first approved character portrait for identity and the second clean down-facing sprite for the simpler compact gameplay proportions and the white robes, charcoal panels, dark structural belt, silver yin-yang buckle, black topknot, white hair ribbon and single straight silver jian. Elevated fixed orthographic three-quarter TOP-DOWN 2D wuxia RPG camera, showing crown/shoulder/boot tops, view of his BACK, face hidden. Output a strict evenly spaced FOUR COLUMNS by TWO ROWS grid, preferably 2048x1024. Exactly one whole figure per equal rectangular cell, all feet at equal baseline within each cell and identical body height/proportions across ALL eight cells. Each figure occupies about 70 percent of cell height. Both sword and full silhouette contained with clear padding inside each cell, separate true transparent alpha between all drawings. Row1 left-to-right: 1 neutral ready idle pose, sword low at side; 2 walk stride left leg forward/right leg back, opposing natural arm swing, sword held firmly; 3 walk passing pose legs near middle, heel lifting; 4 opposite walk stride right leg forward/left leg back. Row2 left-to-right: 5 opposite passing step, visibly distinct knee/foot positions; 6 sword attack anticipation raised or drawn back jian; 7 strong sword attack extended forward slash/contact pose, pronounced shoulder/arm/leg motion; 8 attack followthrough/recovery with blade held across the body. These are DISTINCT hand-drawn anatomical poses with stable garment design, head proportions, ribbon, jian. Both feet visibly grounded and separate. Sword remains rigid and straight in every cel. No motion blur, no energy effects, no cast shadows. Render as crisp high-density small-game 2D painted sprites with continuous dark outlines and clear connected steel edges, broad intentional light/shadow clusters, restrained ivory/slate palette and minimal silver trim. Avoid dither noise, broken sketch lines, see-through holes, tiny stipple details, or chunky retro 8-bit pixelation. Opaque body pixels and a clean narrow anti-aliased silhouette blending to alpha are desired. True transparent background, without text, numbers, labels, grids, frames, scenery or extra people.",
+      "left": "Create an original production gameplay ANIMATION CONTACT SHEET of exactly EIGHT full-body drawings of the SAME Võ Đang swordsman in LEFT facing. Use the first approved character portrait for identity and the second clean down-facing sprite for the simpler compact gameplay proportions and the white robes, charcoal panels, dark structural belt, silver yin-yang buckle, black topknot, white hair ribbon and single straight silver jian. Elevated fixed orthographic three-quarter TOP-DOWN 2D wuxia RPG camera, showing crown/shoulder/boot tops, side view looking LEFT, weapon pointing into LEFT side. Output a strict evenly spaced FOUR COLUMNS by TWO ROWS grid, preferably 2048x1024. Exactly one whole figure per equal rectangular cell, all feet at equal baseline within each cell and identical body height/proportions across ALL eight cells. Each figure occupies about 70 percent of cell height. Both sword and full silhouette contained with clear padding inside each cell, separate true transparent alpha between all drawings. Row1 left-to-right: 1 neutral ready idle pose, sword low at side; 2 walk stride left leg forward/right leg back, opposing natural arm swing, sword held firmly; 3 walk passing pose legs near middle, heel lifting; 4 opposite walk stride right leg forward/left leg back. Row2 left-to-right: 5 opposite passing step, visibly distinct knee/foot positions; 6 sword attack anticipation raised or drawn back jian; 7 strong sword attack extended forward slash/contact pose, pronounced shoulder/arm/leg motion; 8 attack followthrough/recovery with blade held across the body. These are DISTINCT hand-drawn anatomical poses with stable garment design, head proportions, ribbon, jian. Both feet visibly grounded and separate. Sword remains rigid and straight in every cel. No motion blur, no energy effects, no cast shadows. Render as crisp high-density small-game 2D painted sprites with continuous dark outlines and clear connected steel edges, broad intentional light/shadow clusters, restrained ivory/slate palette and minimal silver trim. Avoid dither noise, broken sketch lines, see-through holes, tiny stipple details, or chunky retro 8-bit pixelation. Opaque body pixels and a clean narrow anti-aliased silhouette blending to alpha are desired. True transparent background, without text, numbers, labels, grids, frames, scenery or extra people.",
+      "right": "Create an original production gameplay ANIMATION CONTACT SHEET of exactly EIGHT full-body drawings of the SAME Võ Đang swordsman in RIGHT facing. Use the first approved character portrait for identity and the second clean down-facing sprite for the simpler compact gameplay proportions and the white robes, charcoal panels, dark structural belt, silver yin-yang buckle, black topknot, white hair ribbon and single straight silver jian. Elevated fixed orthographic three-quarter TOP-DOWN 2D wuxia RPG camera, showing crown/shoulder/boot tops, side view looking RIGHT, weapon pointing into RIGHT side. Output a strict evenly spaced FOUR COLUMNS by TWO ROWS grid, preferably 2048x1024. Exactly one whole figure per equal rectangular cell, all feet at equal baseline within each cell and identical body height/proportions across ALL eight cells. Each figure occupies about 70 percent of cell height. Both sword and full silhouette contained with clear padding inside each cell, separate true transparent alpha between all drawings. Row1 left-to-right: 1 neutral ready idle pose, sword low at side; 2 walk stride left leg forward/right leg back, opposing natural arm swing, sword held firmly; 3 walk passing pose legs near middle, heel lifting; 4 opposite walk stride right leg forward/left leg back. Row2 left-to-right: 5 opposite passing step, visibly distinct knee/foot positions; 6 sword attack anticipation raised or drawn back jian; 7 strong sword attack extended forward slash/contact pose, pronounced shoulder/arm/leg motion; 8 attack followthrough/recovery with blade held across the body. These are DISTINCT hand-drawn anatomical poses with stable garment design, head proportions, ribbon, jian. Both feet visibly grounded and separate. Sword remains rigid and straight in every cel. No motion blur, no energy effects, no cast shadows. Render as crisp high-density small-game 2D painted sprites with continuous dark outlines and clear connected steel edges, broad intentional light/shadow clusters, restrained ivory/slate palette and minimal silver trim. Avoid dither noise, broken sketch lines, see-through holes, tiny stipple details, or chunky retro 8-bit pixelation. Opaque body pixels and a clean narrow anti-aliased silhouette blending to alpha are desired. True transparent background, without text, numbers, labels, grids, frames, scenery or extra people."
+    },
+    "effects": {
+      "that_tinh_kiem": "Create ONE transparent production 2D wuxia gameplay VFX animation sheet for THẤT TINH KIẾM (Seven Star Sword), a white-silver and icy pale-blue sword technique. Exactly EIGHT separate effect cels in a strict FOUR-COLUMN TWO-ROW equal-cell grid, one full effect per cell, same anchor and scale, ample true-transparent padding. Effects are authored for a sword swing pointing RIGHT from a source anchor at left-middle. Row1 shows anticipation curved silver arc, expanding forward crescent blade arc, bright crescent contact with a few seven-point starlights, followthrough crescent fading toward upper-right. Row2 shows a second stronger silver-blue sweep, its bright connected sharp edge plus subtle trailing twin line, small sharp white star impact, sparse dissolving silver star motes. Broad clear luminous white core, thin continuous blue rim, restrained smooth transparent glow. Rendered polished 2D fantasy RPG raster effects matching the reference, clean curves at native screen density, not noisy pixel fragments. No hero, weapon handle, outline boxes, letters, labels, dark matte or ground. Each effect belongs to one cell and stays separate from neighbors.",
+      "nhan_kiem_hop_nhat": "Original production 2D wuxia GAME VFX spritesheet, crisp high-density raster. Nhân Kiếm Hợp Nhất. A horizontal long straight silver spectral jian pointing RIGHT. Frame1 energy gathering into one clear straight blade silhouette, frame2 rigid long spectral sword with bright central ridge and blue edge released rightward, frame3 complete flying sword with two very narrow trailing silver filaments, frame4 small clean converging sword-shaped flash dissolving. The spectral sword has a distinct straight pointed tip and rigid symmetric blade, with luminous crossguard and no physical handle. Exactly FOUR separate cels in a strict TWO COLUMN by TWO ROW equal-cell grid, one complete effect per cell. Use identical anchoring/scale and large truly TRANSPARENT empty gutters around all cels. The four cels are drawn separately with visibly changing shapes. Thin continuous clear icy-blue borders around strong luminous ivory-white cores, restrained narrow glow only just beside the strokes. All surfaces between the thin energy lines are FULLY transparent. Very clean cutout effect silhouettes, no smoke, no large cloudy glow, no background light haze, no atmosphere, no white matte, no grey matte. Empty space between effects has alpha zero. No text, numbers, labels, grid lines, environment, ground or characters. Style matches sword energy around the white-robed swordsman in the attached reference, especially crisp well-defined connected blade edges, legible at final sprite size 160-256 screen pixels.",
+      "bat_quai_kiem_tran": "Original production 2D wuxia GAME VFX spritesheet, crisp high-density raster. Bát Quái Kiếm Trận. A ground-level ELIPTICAL eight-trigram sword formation seen from elevated topdown camera, around a clear hollow center. Frame1 thin icy silver oval ring and eight small emerging standing spectral swords, frame2 full crisp eight-trigram ring with eight luminous silver swords spaced around the perimeter, frame3 active ring with clear small runic slash marks and a restrained burst on one edge, frame4 dissolving ring and shrinking standing swords. Ground ellipse axis ratio width:height=2:1, oblique standing blades. Center stays fully transparent. Exactly FOUR separate cels in a strict TWO COLUMN by TWO ROW equal-cell grid, one complete effect per cell. Use identical anchoring/scale and large truly TRANSPARENT empty gutters around all cels. The four cels are drawn separately with visibly changing shapes. Thin continuous clear icy-blue borders around strong luminous ivory-white cores, restrained narrow glow only just beside the strokes. All surfaces between the thin energy lines are FULLY transparent. Very clean cutout effect silhouettes, no smoke, no large cloudy glow, no background light haze, no atmosphere, no white matte, no grey matte. Empty space between effects has alpha zero. No text, numbers, labels, grid lines, environment, ground or characters. Style matches sword energy around the white-robed swordsman in the attached reference, especially crisp well-defined connected blade edges, legible at final sprite size 160-256 screen pixels.",
+      "toa_sat_bac_do": "Original production 2D wuxia GAME VFX spritesheet, crisp high-density raster. Tọa Sát Bác Đồ. A protective white-blue sword guard around a hypothetical hero, with EMPTY TRANSPARENT CENTER. Frame1 two thin silver-blue curving guard strips rise around sides, frame2 a delicate oval domed protective shield with only narrow luminous outer boundary and a small yin-yang emblem overhead, frame3 strong guard boundary with four clear spectral blade ornaments pointing outward, frame4 a crisp radial eight-direction silver blade pulse released around a central fully transparent hole. No humanoid shape. Exactly FOUR separate cels in a strict TWO COLUMN by TWO ROW equal-cell grid, one complete effect per cell. Use identical anchoring/scale and large truly TRANSPARENT empty gutters around all cels. The four cels are drawn separately with visibly changing shapes. Thin continuous clear icy-blue borders around strong luminous ivory-white cores, restrained narrow glow only just beside the strokes. All surfaces between the thin energy lines are FULLY transparent. Very clean cutout effect silhouettes, no smoke, no large cloudy glow, no background light haze, no atmosphere, no white matte, no grey matte. Empty space between effects has alpha zero. No text, numbers, labels, grid lines, environment, ground or characters. Style matches sword energy around the white-robed swordsman in the attached reference, especially crisp well-defined connected blade edges, legible at final sprite size 160-256 screen pixels.",
+      "van_kiem_quy_tong": "Original production 2D wuxia GAME VFX spritesheet, crisp high-density raster. Vạn Kiếm Quy Tông. A radiant silver and pale-blue eight-direction spectral-sword burst, fully transparent center hole for the caster. Frame1 eight separate short spectral swords begin fanning radially from a small empty center, frame2 eight long straight sharp swords fly outward in a symmetric radial pattern, frame3 eight slightly farther swords with a few thin silver trail lines and a delicate circular energy rim at launch center, frame4 eight small farther sword glints fade. Each sword has a coherent straight blade edge and sharp point. Exactly FOUR separate cels in a strict TWO COLUMN by TWO ROW equal-cell grid, one complete effect per cell. Use identical anchoring/scale and large truly TRANSPARENT empty gutters around all cels. The four cels are drawn separately with visibly changing shapes. Thin continuous clear icy-blue borders around strong luminous ivory-white cores, restrained narrow glow only just beside the strokes. All surfaces between the thin energy lines are FULLY transparent. Very clean cutout effect silhouettes, no smoke, no large cloudy glow, no background light haze, no atmosphere, no white matte, no grey matte. Empty space between effects has alpha zero. No text, numbers, labels, grid lines, environment, ground or characters. Style matches sword energy around the white-robed swordsman in the attached reference, especially crisp well-defined connected blade edges, legible at final sprite size 160-256 screen pixels."
+    }
+  },
+  "sha256": {
+    ".\\assets\\source\\visual-upgrade-2\\raw\\bat_quai_kiem_tran.png": "7d01011988bb9e41b96b10b084c05a7d338dbe5e428a509e87f7cb4586987754",
+    ".\\assets\\source\\visual-upgrade-2\\raw\\down.png": "25d1e093093f4764aedd7ed8c87fe986abbc534263d3cb5704995c86b92c46fe",
+    ".\\assets\\source\\visual-upgrade-2\\raw\\ground.png": "772abf752748fc6d80fc82d162a9671ed04037b9aae560d1b2a37c47bed1060a",
+    ".\\assets\\source\\visual-upgrade-2\\raw\\left.png": "9c66266a65c0ab8411a7121a91f77921d21f5b9e9405e01ae1f1c7efe9dbb1ae",
+    ".\\assets\\source\\visual-upgrade-2\\raw\\nhan_kiem_hop_nhat.png": "7f81b2ee529f96db17850d754a9114dff103bd8f67cc71b289474a66e6350a6f",
+    ".\\assets\\source\\visual-upgrade-2\\raw\\props.png": "0a56206f38566dfe9aa0f1bd73d333c473526878fc334b6770184361f7916aa2",
+    ".\\assets\\source\\visual-upgrade-2\\raw\\right.png": "29b2cb2b537a94311e789ea3c0f878fd8deb6922c57e1fb315923e6691bc6bdc",
+    ".\\assets\\source\\visual-upgrade-2\\raw\\that_tinh_kiem.png": "481306d74b8c774793ab6fe455ffee5fae3e4138099294fe216502a920d2fcc4",
+    ".\\assets\\source\\visual-upgrade-2\\raw\\toa_sat_bac_do.png": "8c08181967a603dfafdb9424df681d077dce3c128970d059921a78e5d3e621e2",
+    ".\\assets\\source\\visual-upgrade-2\\raw\\up.png": "feabe97d69bdf34be85912720af586ed5ed8cfd0281f7de1749e9388e44e4c3e",
+    ".\\assets\\source\\visual-upgrade-2\\raw\\van_kiem_quy_tong.png": "96d7b7bf5bab37cd76be5a4150401c736ffd30446467d8ee6cac37a0301afe92",
+    ".\\assets\\exports\\visual-upgrade-2\\bamboo.png": "a023c3bdc21283314f1f3c6b7a08dfd6dcefdea2292b0fcaa407fa22d61e922f",
+    ".\\assets\\exports\\visual-upgrade-2\\banner.png": "e47e27caccfe94a5d96abe5ea87db9f55a4eced362c37a272d0cedf617b9a82e",
+    ".\\assets\\exports\\visual-upgrade-2\\bat_quai_kiem_tran.json": "4814fc0b397c9744295a33ca95dacfab3d6348bb79ef3c72f36933d0617d1cbc",
+    ".\\assets\\exports\\visual-upgrade-2\\bat_quai_kiem_tran.png": "e6f0e04ba8ab66bd3aefce87673bbfcd8c97172bcdf96f719b12e02705fe6ab1",
+    ".\\assets\\exports\\visual-upgrade-2\\ground.png": "40910157b17b3559459484236c8c09912fb3f62d4c4c961006b65102478047ee",
+    ".\\assets\\exports\\visual-upgrade-2\\hero-idle-down.png": "c9e352423f06156d42a4643312a5752cd40d1939cbf2368cd3a671a07c6c1e7a",
+    ".\\assets\\exports\\visual-upgrade-2\\hero-idle-left.png": "d766edb918bb02e9c2c66ad19cb157565c4b89810ba1be25e7f9f1c8d2156646",
+    ".\\assets\\exports\\visual-upgrade-2\\hero-idle-right.png": "0fbb5c4a40785d558ad78e6759d31406200739e6c97d1d13eb0898ea4442ee7e",
+    ".\\assets\\exports\\visual-upgrade-2\\hero-idle-up.png": "baf51d5c7a90b4463cbe8e12bd698dbccd73b02c19863c77e43da7307f3927f9",
+    ".\\assets\\exports\\visual-upgrade-2\\hero.json": "663b5b27f37b3ab5e3c10326800dc7c0947831c4b907c20187244e867b6bdf71",
+    ".\\assets\\exports\\visual-upgrade-2\\hero.png": "b52e3cfb2c076ca378c4ecaad04678c87ffc90d858a6395f6fa156d6f9374ab4",
+    ".\\assets\\exports\\visual-upgrade-2\\lantern.png": "6a34b13271d0a95895801c22925f3e00eef5053148a231fb9d3cb095e29d3170",
+    ".\\assets\\exports\\visual-upgrade-2\\merchant.png": "b8172d378dedc192999f35aa57d95fa6ffab94f717c92c1bc8f5c0c55441593d",
+    ".\\assets\\exports\\visual-upgrade-2\\nhan_kiem_hop_nhat.json": "82a6d3c8a8d8eb76772930660c4cf62428196a001f4bee702600cf7775303611",
+    ".\\assets\\exports\\visual-upgrade-2\\nhan_kiem_hop_nhat.png": "851cb478bdb46f7c37aa3633bdbc9533659e27f7739e0dfa2a9dc238efd4e57f",
+    ".\\assets\\exports\\visual-upgrade-2\\portal.png": "d3a5c905c5995507cfa03505a78be7be0134263362491fa2ada504aee97fb2c9",
+    ".\\assets\\exports\\visual-upgrade-2\\statue.png": "1902fb8def95c3210b451fc253cb3f2a481778ab52d0a1f12f668d210407d038",
+    ".\\assets\\exports\\visual-upgrade-2\\that_tinh_kiem.json": "dafb7d3f74e935fd83efc43547bbe0232337bdf3756ec25bd671c7b8bd325bc8",
+    ".\\assets\\exports\\visual-upgrade-2\\that_tinh_kiem.png": "f84e047018a934d64d23d11d816ee0e3d827772879f5bee622f40f50a7fa52fd",
+    ".\\assets\\exports\\visual-upgrade-2\\toa_sat_bac_do.json": "90f5523bc1a2c8d1d0908576c319879fb7650638e9794dc3e21aa9bdcffe29ce",
+    ".\\assets\\exports\\visual-upgrade-2\\toa_sat_bac_do.png": "c2b3001c5b3882d9f7bc12f37e4648587fcd2cc055c9945ad4ac0186574be3cf",
+    ".\\assets\\exports\\visual-upgrade-2\\tree-blossom.png": "9192b5a5387837eb96c177021f551ceee88ea51cfc731e37052a03933cbd55e9",
+    ".\\assets\\exports\\visual-upgrade-2\\tree-jade.png": "0e780de8e7bcb09abc7315280277938e4856a7c9c2d18c09d35de60cbfd2acf1",
+    ".\\assets\\exports\\visual-upgrade-2\\van_kiem_quy_tong.json": "435af62198958e94590de97e057137ca50ef872cf75843b5fb4ffdf423683b59",
+    ".\\assets\\exports\\visual-upgrade-2\\van_kiem_quy_tong.png": "cbe69cc6da24ef4f18f379283b944fce41a7d9f2ebd0d929682bee0c1b29feb6",
+    ".\\assets\\source\\visual-upgrade-2\\bamboo.aseprite": "a74d448726eca97aed540b8e3b09a01119cef60f743572be88f00ec3c37c3916",
+    ".\\assets\\source\\visual-upgrade-2\\banner.aseprite": "c419e5db26c1d7388f981f28e6879208b727daa5545ed378c750cf8a010bb892",
+    ".\\assets\\source\\visual-upgrade-2\\bat_quai_kiem_tran.aseprite": "aeaa131cfc244cf1a6ff63c76220ad78cbeb967f8b6bb98e22fbc8e7a7cd7ea4",
+    ".\\assets\\source\\visual-upgrade-2\\ground.aseprite": "94f2c216ed48c021348ecf31e68ae609e34d44fb8915d02bfb1d6565383d0cb5",
+    ".\\assets\\source\\visual-upgrade-2\\hero.aseprite": "e74769e332696259c5934581187a7c2379afa87978c912f813ca2d740939a149",
+    ".\\assets\\source\\visual-upgrade-2\\lantern.aseprite": "442eddf64755d6790bf73eae12bd277e23340809669eff7709fbc1668f777940",
+    ".\\assets\\source\\visual-upgrade-2\\merchant.aseprite": "89b71d284c3b36c34625ac272cace539a2953d32e893662002a98bcc3ac10add",
+    ".\\assets\\source\\visual-upgrade-2\\nhan_kiem_hop_nhat.aseprite": "c785b1485101bf35db563c2cad4f86659b831a49da31e24f77e3ac49b195c67a",
+    ".\\assets\\source\\visual-upgrade-2\\portal.aseprite": "2676770950ffde6c63f34f5e674659cc497fd9b5443e5dd776a9da12f78c8d6a",
+    ".\\assets\\source\\visual-upgrade-2\\statue.aseprite": "7306974ae2429986bb011b039068bc7e71540b9c178937b3751c0e2f38f2adf7",
+    ".\\assets\\source\\visual-upgrade-2\\that_tinh_kiem.aseprite": "f4ecfb1c32d1e077426664d2d0c891d7f523de348fd7836d12859eda9478a29c",
+    ".\\assets\\source\\visual-upgrade-2\\toa_sat_bac_do.aseprite": "3b6ba0e308b49e087fa801a01c16489f70245d5687b37e1edfbc6276f6235ff9",
+    ".\\assets\\source\\visual-upgrade-2\\tree-blossom.aseprite": "70c0a16190fc971f53e564f5401eb4480eb9506471e3b1b731f6ba62a8007cce",
+    ".\\assets\\source\\visual-upgrade-2\\tree-jade.aseprite": "ab1fdbbbaf6a807a54217723cd9a56a948b4a6d7432cd4dc5ca87f0bf684bbe5",
+    ".\\assets\\source\\visual-upgrade-2\\van_kiem_quy_tong.aseprite": "310e0d843af725717ba32f015c149f370416d41fd67fc21f3af7c5950e2b0c60"
+  }
+}

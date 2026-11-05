@@ -1,0 +1,87 @@
+{
+  "status": "candidate_pending_director_review",
+  "created": "2026-11-05",
+  "assetScope": "One down-facing sword idle cel and one independent right-facing sword qi sample",
+  "source": {
+    "generator": "OpenAI built-in ImageGen",
+    "provenance": "Original generated artwork for Võ Lâm Hero Defense using project-owned visual references. Source PNGs retained.",
+    "references": [
+      "assets/concepts/heroes/vo-dang/vo-dang-concept-v01.png",
+      "assets/references/vo_dang_character_reference.png",
+      "assets/references/arena_battle_reference.png",
+      "assets/exports/characters/vo_dang_v01/kiem/frames/idle_down_0.png"
+    ],
+    "editor": "Aseprite 1.3.18.6",
+    "exportRecipe": "export.lua"
+  },
+  "frames": [
+    {
+      "id": "vo_dang_kiem_idle_down",
+      "tag": "vo-dang-kiem-idle-down",
+      "facing": "down",
+      "file": "vo-dang-kiem-idle-down.png",
+      "editable": "vo-dang-kiem-idle-down.aseprite",
+      "source": "imagegen-vo-dang.png",
+      "canvas": [
+        192,
+        160
+      ],
+      "feetPivot": [
+        96,
+        128
+      ],
+      "visibleBounds": [
+        54,
+        40,
+        126,
+        128
+      ],
+      "bodyHeight": 88
+    },
+    {
+      "id": "vo_dang_kiem_khi_right",
+      "tag": "kiem-khi-right",
+      "facing": "right",
+      "file": "kiem-khi-right.png",
+      "editable": "kiem-khi-right.aseprite",
+      "source": "imagegen-kiem-khi.png",
+      "canvas": [
+        160,
+        48
+      ],
+      "pivot": [
+        8,
+        24
+      ],
+      "visibleBounds": [
+        10,
+        10,
+        150,
+        37
+      ]
+    }
+  ],
+  "prompts": {
+    "sprite": "Use case: stylized-concept. Draw ONE original gameplay-ready 2D wuxia chibi sprite, idle facing DOWN/south straight toward the viewer, for Võ Lâm Hero Defense. First reference (approved Võ Đang portrait) defines character identity, haircut, white ribbon, silver yin-yang fastening, black-over-ivory costume, sword hilt. Second reference (Võ Đang character direction sheet) defines the elevated fixed orthographic three-quarter TOP-DOWN gameplay camera and down-facing pose, see the crown of the head, shoulders and boot tops. Third reference (Lôi Đài) defines lighting contrast and high-detail 2D pixel art clarity, especially the silver-and-white hero in the upper center; use its rendering quality, not its pose or arena composition. Fourth reference is the current transparent idle-down gameplay frame for relative silhouette and facing. Create a single isolated full body standing figure, exactly one pose, feet planted apart, shoulders squared toward camera, slightly oversized head with black topknot and flowing white hair ribbon, ivory and cool slate gray folded robes with charcoal outer panels, dark structural waist belt beneath ivory wrap, tiny silver yin-yang buckle, dark boots. His RIGHT hand at the LEFT side of the image clearly grips one straight silver jian; hold it in a natural low ready position angled outward diagonally left, tip clear of the clothes and above ground; free hand visible. Preserve all anatomy and the entire sword inside generous transparent padding. Distinct interlocking ivory/slate/charcoal pixel clusters, broad light and shade groups, sharp silhouette, thin dark contact outlines, subtle top-left highlights, clean opaque steel highlight, simplified hems with a little deliberate silver trim. Draw visually on an ~88-pixel-tall gameplay body grid at target detail, with readable large pixel clusters and intentional sparse fine details at the scale of that 88-pixel body; output one clean large reference raster suitable for downsampling to that dense gameplay pixel grid. Avoid tiny busy embellishments, blurry watercolor texture and soft edge haze. This is an idle game sprite only, alpha-transparent background around the whole figure, without cast shadow, environment, lettering, UI, gradient backdrop, magical glow or energy trails.",
+    "effect": "Generate ONE isolated original transparent raster VFX sprite for the Võ Đang sword school in Võ Lâm Hero Defense, one static accent frame of a straight horizontal white and ice-blue sword qi strike pointing to the right, following the fine clear blue blade energy around the upper middle white-robed hero in the reference Lôi Đài scene. Three-quarter top-down 2D wuxia gameplay style. Thin, very bright silver-white central spear-like slash, defined pale-blue edge, tapering double filament, just a few spaced cyan sparks. Pixel-art-inspired hand-finished clusters, crisp inner silhouette, narrow restrained glow that fades cleanly to alpha. Frame contains the complete horizontal strike with generous true-transparent padding. VFX only, without character, weapon handle, UI, dark matte, watermark, or text. Its final visible width will be roughly 144 gameplay display pixels; make the shape readable at that scale."
+  },
+  "review": {
+    "screenshot": "so-sanh-loi-dai.png",
+    "browserReport": "phaser-review.json",
+    "mode": "Isolated Phaser WebGL visual review using the reference background",
+    "bodyDisplayHeight": [
+      88,
+      88
+    ],
+    "background": "Same unscaled 640×420 crop on both sides",
+    "vfxIncludedInComparison": false
+  },
+  "sha256": {
+    "imagegen-vo-dang.png": "abb9e31ec50e4eed648a929597021806b2b93d75a0be03cb3dda626504d9c4d9",
+    "imagegen-kiem-khi.png": "9f68a9e2bd60ceb6ef2914fea737d274b80b6bd996e6304fbdb7ff0ebc899b21",
+    "vo-dang-kiem-idle-down.aseprite": "798d49d722342babcabd518e5ddf63015bf68d58b1c83ee1244c3af9a5fbb55e",
+    "kiem-khi-right.aseprite": "1deddb63e7e0fca4f2ffdafcb25d53d076f434868a2c03a608e78ac7b20471bb",
+    "vo-dang-kiem-idle-down.png": "460a7ca20b892acd78263eb9db99575546ce702ed7b903108a16b5a63443c22b",
+    "kiem-khi-right.png": "5899725be13bd6edc2c8839a5c8a1b28ac9851fff6e7d53aac9075f64e4f6ebc"
+  }
+}

@@ -31,7 +31,11 @@ export default defineConfig({
   build: {
     target: 'es2022',
     rollupOptions: {
-      input: { game: 'index.html', bacCaiPreview: 'bac-cai-preview.html' },
+      input: {
+        game: 'index.html',
+        bacCaiPreview: 'bac-cai-preview.html',
+        visualUpgrade: 'visual-upgrade-2.html',
+      },
     },
   },
 });

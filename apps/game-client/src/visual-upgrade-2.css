@@ -1,0 +1,206 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#visual-viewport {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+body {
+  background: #22271d;
+  color: #f3e6c9;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+#visual-viewport {
+  position: relative;
+}
+#visual-game,
+#visual-game canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.overlay {
+  position: absolute;
+  z-index: 2;
+}
+button {
+  color: #f3e6c9;
+  background: linear-gradient(#34352e, #171b19);
+  border: 1px solid #b79a5b;
+  border-radius: 5px;
+  padding: 9px 13px;
+  font: inherit;
+  cursor: pointer;
+}
+button:hover,
+button:focus-visible {
+  border-color: #ffe09a;
+  background: #424534;
+  outline: 2px solid #dfcb8e;
+  outline-offset: 2px;
+}
+.identity {
+  top: 18px;
+  left: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 2px;
+  border: 2px solid #b49a60;
+  border-radius: 7px;
+  background: #171e1be8;
+  box-shadow: 0 2px 8px #0008;
+}
+.identity img {
+  width: 80px;
+  height: 68px;
+  object-fit: cover;
+  object-position: 50% 32%;
+}
+.identity strong {
+  display: block;
+  color: #f5d993;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+}
+.identity span {
+  display: block;
+  margin-top: 7px;
+  font-size: 13px;
+}
+.tools {
+  display: flex;
+  gap: 8px;
+  top: 18px;
+  right: 18px;
+}
+.hotbar {
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  border: 2px solid #ad8c46;
+  border-radius: 12px;
+  padding: 9px 13px;
+  background: #161b18ed;
+  box-shadow: 0 2px 10px #0009;
+  text-align: center;
+}
+#hotbar-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+}
+#hotbar-buttons button {
+  width: 94px;
+  min-height: 62px;
+  padding: 7px 4px;
+  font-size: 12px;
+}
+#hotbar-buttons b {
+  display: block;
+  color: #f4dc9f;
+  font:
+    bold 17px system-ui,
+    sans-serif;
+  margin-bottom: 5px;
+}
+.hotbar small {
+  display: block;
+  margin-top: 8px;
+  font:
+    12px system-ui,
+    sans-serif;
+  color: #d0c7ae;
+  white-space: nowrap;
+}
+#skill-name {
+  position: absolute;
+  top: 17%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: #fff5d3;
+  background: #182325c9;
+  border-radius: 4px;
+  padding: 7px 18px;
+  font-size: 20px;
+  text-shadow: 1px 2px 2px #000;
+  pointer-events: none;
+}
+#skill-name:empty {
+  display: none;
+}
+#skills-menu {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: calc(100% - 28px);
+  width: 410px;
+  padding: 22px;
+  background: #18201bf2;
+  border: 2px solid #b79a5b;
+  border-radius: 9px;
+  box-shadow: 0 5px 35px #000a;
+}
+#skills-menu > strong {
+  color: #eacd88;
+  font-size: 24px;
+}
+#skills-menu p {
+  line-height: 1.5;
+}
+#skill-list {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+#skills-menu > button {
+  margin: 4px 4px 0 0;
+}
+@media (max-width: 620px) {
+  .identity {
+    left: 8px;
+    top: 8px;
+    padding-right: 8px;
+  }
+  .identity img {
+    width: 45px;
+    height: 48px;
+  }
+  .identity strong {
+    font-size: 15px;
+  }
+  .identity span {
+    max-width: 130px;
+    font-size: 11px;
+  }
+  .tools {
+    right: 8px;
+    top: 8px;
+    gap: 4px;
+  }
+  .tools button {
+    padding: 7px;
+    font-size: 12px;
+  }
+  .hotbar {
+    bottom: 8px;
+    padding: 7px;
+    max-width: calc(100% - 12px);
+  }
+  #hotbar-buttons {
+    gap: 4px;
+  }
+  #hotbar-buttons button {
+    width: 62px;
+    min-height: 59px;
+    font-size: 10px;
+  }
+  .hotbar small {
+    font-size: 9px;
+  }
+}

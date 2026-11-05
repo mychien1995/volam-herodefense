@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Võ Đang · Arena</title>
+  </head>
+  <body>
+    <main id="visual-viewport" aria-label="Arena duyệt hình ảnh Võ Đang">
+      <div id="visual-game"></div>
+      <section class="identity overlay">
+        <img src="/assets/visual-upgrade-2/hero-idle-down.png" alt="Võ Đang" />
+        <div>
+          <strong>VÕ ĐANG</strong><span>Kiếm · Arena duyệt hình ảnh</span>
+        </div>
+      </section>
+      <nav class="tools overlay" aria-label="Tùy chọn cảnh">
+        <button id="party">6 nhân vật</button>
+        <button id="skills-toggle">Bộ chiêu</button>
+      </nav>
+      <section
+        id="skills-menu"
+        class="overlay"
+        aria-label="Năm chiêu Kiếm"
+        hidden
+      >
+        <strong>Võ Đang Kiếm</strong>
+        <p>Chọn một chiêu để xem. Chiêu thứ năm có thể thay vào ô R.</p>
+        <div id="skill-list"></div>
+        <button id="swap-r">Đổi chiêu ô R</button>
+        <button id="skills-close">Đóng · Esc</button>
+      </section>
+      <output id="skill-name" aria-live="polite"></output>
+      <section class="hotbar overlay" aria-label="Đánh thường và bốn ô kỹ năng">
+        <div id="hotbar-buttons"></div>
+        <small>Phím mũi tên để đi · A đánh thường · Q W E R xuất chiêu</small>
+      </section>
+    </main>
+    <script type="module" src="/src/visual-upgrade-2.ts"></script>
+  </body>
+</html>

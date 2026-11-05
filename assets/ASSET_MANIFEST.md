@@ -1,3 +1,7 @@
+## Võ Đang Kiếm và arena · ứng viên 2026-11-05
+
+Một cảnh duyệt tương tác gồm 24 cel Võ Đang, 24 cel cho năm hiệu ứng Kiếm và chín thành phần môi trường mới. Nguồn ImageGen gốc, Aseprite 1.3.18.6, điểm neo, frame và SHA-256 nằm trong [manifest](source/visual-upgrade-2/manifest.json). [Ảnh chạy thực tế, phạm vi và kết quả kiểm tra](reviews/visual-upgrade-2/README.md) ghi trạng thái chờ director duyệt. Mở client tại `/visual-upgrade-2.html` để đi bốn hướng và xem năm chiêu ở độ phân giải màn hình.
+
 ## Kim Luân Pháp Vương — director approval feedback_02
 
 **Approved visual preview for Phaser integration,2026-11-01**, explicit user “duyệt”. [Approval scope/hash record](reviews/bosses/kim_luan_phap_vuong_v01/director_approval.json) and [immutable input lock](approved_kim_luan_phap_vuong.lock.json) pin the selected184frames/53clips, retained source/export/map files and current choreography. Excluded24baseline attack candidates remain excluded. No game-runtime integration, missing-direction artwork or final combat balance is inferred. Prompt: docs/INTEGRATE_KIM_LUAN_PHAP_VUONG_PROMPT.md. Earlier pending statuses below are historical.
