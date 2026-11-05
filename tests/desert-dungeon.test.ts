@@ -48,7 +48,8 @@ describe('desert map and authoritative destination contract', () => {
       })),
     ])
       expect(seen.has(`${p.x},${p.y}`), JSON.stringify(p)).toBe(true);
-    expect(free(352, 448)).toBe(false);
+    expect(free(352, 448)).toBe(true); // Removed ruin cannot leave an invisible wall.
+    expect(free(308, 551)).toBe(false); // Shared sparse rock footprint.
   });
   it('validates destinations and preserves the existing forest default', () => {
     const payload = {

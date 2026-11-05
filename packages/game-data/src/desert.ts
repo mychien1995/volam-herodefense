@@ -2,6 +2,7 @@ import { blocked, type CreepDungeonDefinition } from '@volam/game-core';
 import raw from './creep-desert-map.json' with { type: 'json' };
 import { creepDungeon, creepDungeonSchema } from './dungeon.js';
 import { m1Config } from './m1.js';
+import { renovationCollision } from './renovation-navigation.js';
 
 export const desertRoster = [
   'bo_cap_cat',
@@ -25,9 +26,14 @@ export const desertDungeon: CreepDungeonDefinition = creepDungeonSchema.parse({
   id: 'desert',
   width: raw.width * raw.tilewidth,
   height: raw.height * raw.tileheight,
-  collision: raw.layers
-    .find((l) => l.name === 'collision')!
-    .objects!.map(({ x, y, width, height }) => ({ x, y, width, height })),
+  collision: renovationCollision(
+    'desert',
+    raw.width * raw.tilewidth,
+    raw.height * raw.tileheight,
+    raw.layers
+      .find((l) => l.name === 'collision')!
+      .objects!.map(({ x, y, width, height }) => ({ x, y, width, height })),
+  ),
   spawn: marker('hero_spawn'),
   exit: marker('exit_portal'),
   creepSpawns: desertMapObjects

@@ -118,9 +118,6 @@ it('uses an orthogonal square-tile map and the same collision objects on the ser
   };
   expect(raw.orientation).toBe('orthogonal');
   expect(raw.tilewidth).toBe(raw.tileheight);
-  expect(arena.collision).toEqual(
-    raw.layers
-      .find((layer) => layer.name === 'collision')
-      ?.objects?.map(({ x, y, width, height }) => ({ x, y, width, height })),
-  );
+  // Historical map objects are retained as sources; removed scenery no longer blocks.
+  expect(arena.collision).toEqual([]);
 });

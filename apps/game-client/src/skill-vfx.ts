@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { renovatedSkillComponents } from './renovation-skill-components.js';
 import {
   skillArt,
   skillAnimationKey,
@@ -30,6 +31,7 @@ export function preloadSkillArt(scene: Phaser.Scene): void {
     '/assets/visual-improvement-approved/leaf-halo.svg',
   );
   preloadR3Arena(scene);
+  preloadRasterAnimations(scene, renovatedSkillComponents);
   preloadRasterAnimations(scene, skillArt.assets);
   preloadRasterAnimations(scene, feedbackArt);
   preloadRasterAnimations(scene, approvedSkillAssets);
@@ -37,6 +39,7 @@ export function preloadSkillArt(scene: Phaser.Scene): void {
   preloadRasterAnimations(scene, r3Assets);
 }
 export function registerSkillArt(scene: Phaser.Scene): void {
+  registerRasterAnimations(scene, renovatedSkillComponents);
   registerRasterAnimations(scene, skillArt.assets);
   registerRasterAnimations(scene, feedbackArt);
   registerRasterAnimations(scene, approvedSkillAssets);

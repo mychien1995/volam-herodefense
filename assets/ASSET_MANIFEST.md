@@ -1,3 +1,7 @@
+## Renovation v2 · sửa layout và thử hành động/VFX hai nhánh — 2026-11-05
+
+**CANDIDATE, chưa có phê duyệt art mới.** Nền arena3200×2304 giữ bố cục tượng + hai đèn;48 keypose hành động mới,16 pose Kiếm đã duyệt được tái sử dụng,44 cel VFX gốc cho Võ Đang Kiếm/Thiên Sơn Phiến.36 atlas density2 thay1.236 tham chiếu frame trong animators cũ. PNG/JSON: `exports/renovation-v2/`; editable Aseprite/raw/prompt/hash: [provenance](source/renovation-v2/provenance.json). [Báo cáo chạy Phaser và giới hạn phạm vi](../docs/evidence/renovation-v2/README.md). Hành động boss và các nhánh còn lại vẫn giữ tranh cũ.
+
 ## Võ Đang Kiếm và arena · ứng viên 2026-11-05
 
 Một cảnh duyệt tương tác gồm 24 cel Võ Đang, 24 cel cho năm hiệu ứng Kiếm và chín thành phần môi trường mới. Nguồn ImageGen gốc, Aseprite 1.3.18.6, điểm neo, frame và SHA-256 nằm trong [manifest](source/visual-upgrade-2/manifest.json). [Ảnh chạy thực tế, phạm vi và kết quả kiểm tra](reviews/visual-upgrade-2/README.md) ghi trạng thái chờ director duyệt. Mở client tại `/visual-upgrade-2.html` để đi bốn hướng và xem năm chiêu ở độ phân giải màn hình.

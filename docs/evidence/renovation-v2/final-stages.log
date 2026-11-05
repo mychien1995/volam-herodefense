@@ -1,0 +1,113 @@
+$ vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 341 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/volam-build-endpoint.json                  0.03 kB │ gzip:   0.05 kB
+dist/index.html                                 0.58 kB │ gzip:   0.36 kB
+dist/visual-upgrade-2.html                      1.76 kB │ gzip:   0.83 kB
+dist/renovation-preview.html                    2.95 kB │ gzip:   1.17 kB
+dist/bac-cai-preview.html                       3.13 kB │ gzip:   1.12 kB
+dist/assets/renovationPreview-CMx6C-oa.css      2.26 kB │ gzip:   0.94 kB
+dist/assets/bacCaiPreview-Bkh2p5lz.css          2.34 kB │ gzip:   0.97 kB
+dist/assets/visualUpgrade-B8-piUG8.css          2.63 kB │ gzip:   1.07 kB
+dist/assets/game-DOvuK55j.css                  63.74 kB │ gzip:  14.71 kB
+dist/assets/visualUpgrade-CcRzptOi.js           8.43 kB │ gzip:   3.46 kB
+dist/assets/renovationPreview-CVmv0tlK.js      10.95 kB │ gzip:   4.00 kB
+dist/assets/bacCaiPreview-BNv_0imz.js          18.98 kB │ gzip:   8.67 kB
+dist/assets/phaser.esm-Caj5Dkpq.js          1,367.75 kB │ gzip: 357.35 kB
+dist/assets/game-CKvsGnn5.js                2,864.09 kB │ gzip: 392.80 kB
+
+✓ built in 17.46s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[PLUGIN_TIMINGS] JavaScript callbacks ran for 17.0s of this 17.4s build (97%).
+The slowest callbacks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - plugin vite:prepare-out-dir renderStart (90%, 15.6s, 1 call)
+Additional callback time came from the callbacks below and from callbacks under 1s.
+2 callbacks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - plugin vite:css transform (17 calls)
+  - plugin vite:build-html transform (4 calls)
+See https://rolldown.rs/reference/InputOptions.checks#bundlertimings for more details.
+
+$ python scripts/verify-assets.py && python scripts/verify-arena-art01.py && python scripts/verify-arena-v2.py && python scripts/verify-thien-son.py && python scripts/verify-vo-dang.py && python scripts/verify-thieu-lam.py && python scripts/verify-thieu-lam-skills.py && python scripts/verify-thien-son-skills.py && python scripts/verify-vo-dang-skills.py && python scripts/verify-bamboo-forest.py && python scripts/verify-desert.py && python scripts/verify-forest-creeps.py && python scripts/verify-beach.py && python scripts/verify-hell.py && python scripts/verify-chu-art.py && python scripts/verify-ly-mac-sau.py && python scripts/verify-inventory-ui.py && python scripts/verify-tay-doc.py && python scripts/verify-nam-de.py && python scripts/verify-bac-cai-preview.py && python scripts/verify-vuong-trung-duong.py && python scripts/verify-renovation.py && python scripts/verify-renovation-runtime.py && python scripts/verify-renovation-v2.py
+PASS: 23 runtime PNG entries, 680 frame references, bounds/provenance valid; approved Bong 44 / Chuong 40 source poses, tags, binary alpha and pivots verified
+PASS: 9 Aseprite sources, 6 padded atlases, 59 RGBA exports; bounds, tags, timing, stable loop alpha and approved C�i Bang hashes
+PASS: 6 editable Aseprite sources, 1600x1152 opaque ground, 4 separate 512x768 cards/atlases, 32px paving, protected character hashes
+PASS: approved character lock and concept hash; 80 distinct authored PNG cels, 24 tags, binary alpha, bounds/no clipping, fixed foot baseline64, durations, individual PNG/atlas equality and source paths.
+PASS: approved character lock and concept hash; 80 distinct authored PNG cels, 24 tags, binary alpha, bounds/no clipping, foot baseline64 with <=1px raster edge tolerance, durations, individual PNG/atlas equality and source paths.
+PASS: approved concept and 275 protected files; 80 distinct transparent PNG cels, 24 authored tags, bounds, pivots, timings, source headers, individual/atlas equality and explicit fallback metadata.
+{
+  "status": "PASS",
+  "scope": "Source/export/metadata validation only; no gameplay or final director approval.",
+  "componentCount": 26,
+  "icons": 14,
+  "animationTags": 182,
+  "exportedCels": 728,
+  "distinctCharacterRasters": 204,
+  "distinctVfxRastersIncludingCardinalTransforms": 520,
+  "approvedCharacterFilesUnchanged": 5440,
+  "checks": [
+    "editable source hashes",
+    "PNG/JSON/frame equality",
+    "binary alpha",
+    "no clipping",
+    "distinct motion",
+    "pivots/durations",
+    "all14 icon paths/pairings",
+    "all approved hashes"
+  ],
+  "warnings": [],
+  "productionArtApproved": false,
+  "approvalGate": "approval gate waived by user"
+}
+{"status": "PASS", "scope": "Actual editable sources, individual cels, PNG/hash-JSON atlases and presentation metadata; Phaser verification recorded separately", "components": 20, "animationTags": 146, "exportedCels": 534, "icons": 13, "iconAtlasFrames": 13, "approvedFrameReuseCels": 17, "protectedAndConceptFilesUnchanged": 213, "characterBodyHeightTarget": 44, "characterHeight": 80, "feetY": 64, "alpha": "character/VFX binary transparent; approved icon ground intentionally opaque", "productionArtApproved": false}
+{
+  "status": "PASS",
+  "scope": "Source/export/metadata validation only; director approval is recorded separately; no gameplay integration.",
+  "componentCount": 20,
+  "icons": 13,
+  "animationTags": 163,
+  "exportedCels": 636,
+  "distinctCharacterRasters": 157,
+  "distinctVfxRastersIncludingCardinalTransforms": 460,
+  "approvedCharacterFilesUnchanged": 89,
+  "checks": [
+    "editable source hashes",
+    "PNG/JSON/frame equality",
+    "binary alpha",
+    "no clipping",
+    "distinct motion",
+    "pivots/durations",
+    "open formation interior",
+    "all13 icon paths/pairings",
+    "89 approved hashes"
+  ],
+  "warnings": [],
+  "productionArtApproved": true,
+  "approvedSkillFilesChecked": 1441
+}
+PASS: 19 transparent sprites, 344 opaque 32px tiles, 6 periodic materials, 70 map props; concept, hero and Bamboo production locks unchanged; public/shared-map bytes match
+PASS: 380 frames / 120 tags, original source hashes, atlas pixels/timings, runtime copies and desert map; director approval pending
+{"status": "PASS", "scope": "Static files and explicit approval lock only; no gameplay acceptance", "actors": [{"id": "forest_truc_xa", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/truc_xa/source/truc_xa_v01.aseprite", "scale": {"down": 0.22140221402214022, "left": 0.21660649819494585, "right": 0.21428571428571427, "up": 0.22988505747126436}}, {"id": "forest_doc_chu", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/doc_chu/source/doc_chu_v01.aseprite", "scale": {"down": 0.20216606498194944, "left": 0.2003577817531306, "right": 0.2007168458781362, "up": 0.20475319926873858}}, {"id": "forest_son_vien", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/son_vien/source/son_vien_v01.aseprite", "scale": {"down": 0.22857142857142856, "left": 0.2191780821917808, "right": 0.1955193482688391, "up": 0.2206896551724138}}, {"id": "forest_truc_lam_kiem_khach", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/truc_lam_kiem_khach/source/truc_lam_kiem_khach_v01.aseprite", "scale": {"down": 0.176, "left": 0.166351606805293, "right": 0.1752988047808765, "up": 0.18032786885245902}}, {"id": "forest_moc_linh", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/moc_linh/source/moc_linh_v01.aseprite", "scale": {"down": 0.22271714922049, "left": 0.22779043280182232, "right": 0.2070393374741201, "up": 0.22779043280182232}}, {"id": "forest_truc_yeu", "frames": 64, "distinctCels": 64, "tags": 20, "source": "assets/sprites/creeps/dungeons/forest/truc_yeu/source/truc_yeu_v01.aseprite", "scale": {"down": 0.2445414847161572, "left": 0.24615384615384617, "right": 0.23728813559322035, "up": 0.23829787234042554}}], "characterFrames": 384, "effectFrames": 112, "protectedInputs": {"approved_bamboo_forest.lock.json": 60, "approved_cai_bang.lock.json": 8, "approved_forest_creeps.lock.json": 565}, "runtimeAdapter": {"actors": 6, "effects": 28, "normalForestRosterIntegrated": true, "archetypeIds": ["truc_xa", "doc_chu", "son_vien", "truc_lam_kiem_khach", "moc_linh", "truc_yeu"], "directorApproved": true}}
+PASS: 384 nonempty actor cels / 136 tags, corrected editable source, 512 tiles, 25 props, 64 VFX cels, provenance and map parity; runtime approval pending
+PASS: 276 nonempty Hell cels, 92 authored tags (shared hurt/death), 272 tiles, 20 props, 64 effect cels; bounds, alpha, pivots, timings, exact provenance and runtime parity. Director approval pending.
+{"approvedInputs": 102, "nonemptyFrameReferences": 428, "clips": 107, "status": "PASS"}
+{"status": "PASS", "approvedHashes": 400, "actorFrames": 192, "retainedRasterBytesUnchanged": true, "purpleBinding": true, "serverClientMapIdentical": true, "projection": "orthogonal", "emitters": 12}
+Inventory UI: 5 exact concept sources, 11 static PNG icon backplates and source regions verified; no baked menu screen.
+{"status": "PASS", "frozenInputs": 593, "candidateCels": 60, "candidateClips": 15, "copiesAndRegistryExact": true, "runtimeArtApproval": "pending"}
+Nam De: pinned feedback03 source bytes, 208 cels, pivot, runtime copies PASS
+Nam De: measured ring alpha bounds match runtime placement
+Traceback (most recent call last):
+  File "C:\Users\ADMIN\.codex\worktrees\visual-upgrade-2\volam-hero-defense\scripts\verify-bac-cai-preview.py", line 56, in <module>
+    print(f'B\u1eafc C�i preview PASS: {count+4} supplementary frames / 14 clips; native-width beam; 425 old files unchanged; source hashes, alpha, pivots and atlas pixels verified.')
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Programs\Python313\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u1eaf' in position 1: character maps to <undefined>
+[ELIFECYCLE] Command failed with exit code 1.

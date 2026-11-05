@@ -189,9 +189,17 @@ export class ArenaScene extends Phaser.Scene {
     this.drawZone('arena');
     this.cameras.main
       .setBounds(0, 0, arena.width, arena.height)
-      .setZoom(1)
+      .setZoom(this.scale.width >= 960 && this.scale.height >= 600 ? 2 : 1)
       .setRotation(0);
     this.cameras.main.roundPixels = false;
+    const fitCamera = () =>
+      this.cameras.main.setZoom(
+        this.scale.width >= 960 && this.scale.height >= 600 ? 2 : 1,
+      );
+    this.scale.on('resize', fitCamera);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
+      this.scale.off('resize', fitCamera),
+    );
     this.cameras.main.centerOn(arena.spawn.x, arena.spawn.y);
     this.ready = true;
     createRuntimeArtReview(this);

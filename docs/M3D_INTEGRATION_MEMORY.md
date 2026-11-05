@@ -1,5 +1,13 @@
 # Current M3D integration memory
 
+## Renovation v2 correction and two-branch skill pilot — 2026-11-05
+
+This override supersedes v1 camera/prop/collision presentation below. Main arena has exactly the original statue plus two lamps, no invented scenery. Native canvas remains CSS1; desktop camera2 plus new locomotion scale0.5 restores original world FOV/body size. Ground maps exactly to authoritative bounds. Bamboo no longer retains invisible river/fence walls; sparse shared rock footprints apply to four creep dungeons, Cổ Mộ loses obsolete interior plinths, and coast/lava boundaries remain.
+
+Ten skill/action pilots (Võ Đang Kiếm and Thiên Sơn Phiến) use sibling density2 PNG/JSON atlases under `renovation-v2`, with exact old frame names, virtual dimensions and phase timing. Existing renderers retain their origins/paths; Toa gets a separate guard aura so shared Quyền art stays intact. All original raster inputs and approval locks remain unchanged. New drawings are candidates, not approved. Other branches and boss action/VFX drawings remain retained. Read `evidence/renovation-v2/README.md` for actual coverage and limits.
+
+Fresh normal game uses client5536/server2936 (build endpoint2936). Separate `pnpm dev:renovation:skills` uses client5537/server2937 with existing development skill-loadout/practice commands. URL `/?debug=1&skillPreview=1`; append `&renovationSkills=old` for original combat art. These flags belong only to the review process, never the normal-match launcher. Do not assume an older5529 service has this correction.
+
 ## Renovation v1 — approved art and normal-match integration, 2026-11-05
 
 In `wip/m3d/visual-upgrade-2`, the director approved the complete renovation preview and requested: **“quá đẹp, hãy integrate vào phaser”**. `assets/approved_renovation_v1.lock.json` pins the approved 74 idle/walk body forms, arena/eight dungeon grounds and props, and exact compact atlas derivatives. The normal `ArenaScene` consumes these assets, including the bespoke wave/chapter boss renderers and minions. This approval supersedes preview-only/candidate restrictions for this selected artwork; it does not approve newly drawn combat/skill frames or unrelated gameplay changes.

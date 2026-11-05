@@ -2,6 +2,7 @@ import { blocked, type CreepDungeonDefinition } from '@volam/game-core';
 import raw from './creep-hell-map.json' with { type: 'json' };
 import { creepDungeon, creepDungeonSchema } from './dungeon.js';
 import { m1Config } from './m1.js';
+import { renovationCollision } from './renovation-navigation.js';
 export const hellRoster = [
   'hell_xich_quy',
   'hell_dia_nguc_khuyen',
@@ -24,9 +25,14 @@ export const hellDungeon: CreepDungeonDefinition = creepDungeonSchema.parse({
   id: 'hell',
   width: raw.width * raw.tilewidth,
   height: raw.height * raw.tileheight,
-  collision: raw.layers
-    .find((l) => l.name === 'collision')!
-    .objects!.map(({ x, y, width, height }) => ({ x, y, width, height })),
+  collision: renovationCollision(
+    'hell',
+    raw.width * raw.tilewidth,
+    raw.height * raw.tileheight,
+    raw.layers
+      .find((l) => l.name === 'collision')!
+      .objects!.map(({ x, y, width, height }) => ({ x, y, width, height })),
+  ),
   spawn: marker('hero_spawn'),
   exit: marker('exit_portal'),
   creepSpawns: hellMapObjects

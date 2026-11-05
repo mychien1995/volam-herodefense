@@ -1,9 +1,16 @@
 import Phaser from 'phaser';
 import manifest from './approved-art.generated.json';
+import renovatedSkills from './renovation-skills.generated.json';
 import { createRuntimeArtGallery } from './runtime-art-gallery.js';
 
 type Mode = 'current' | 'candidate';
-type ReviewAsset = (typeof manifest.assets)[number];
+type ReviewAsset = {
+  id: string;
+  url: string;
+  candidateUrl: string;
+  density: number;
+  renovated?: boolean;
+};
 interface Binding {
   key: string;
   candidateKey: string;
@@ -22,6 +29,7 @@ const enabled = () => {
   return q.has('debug') && q.get('runtimeArtReview') === '1';
 };
 const byUrl = new Map(manifest.assets.map((a) => [a.url, a]));
+const renovatedByUrl = new Map(renovatedSkills.assets.map((a) => [a.url, a]));
 
 function resampleFrame(frame: Phaser.Textures.Frame, density: number) {
   frame.cutX *= density;
@@ -52,6 +60,9 @@ export function productionArtBindings(scene: Phaser.Scene) {
  * The comparison loads both sources while sharing the same atlas metadata. */
 export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
   const review = enabled();
+  const renovate =
+    !review &&
+    new URLSearchParams(location.search).get('renovationSkills') !== 'old';
   const items: Binding[] = [];
   const selected = new Map<string, ReviewAsset>();
   bindings.set(scene, items);
@@ -62,6 +73,11 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
     _loader: unknown,
     file: Phaser.Loader.File,
   ) => {
+    if (renovate && type === 'json' && typeof file.url === 'string') {
+      const path = new URL(file.url, location.href).pathname;
+      const next = (renovatedSkills.atlases as Record<string, string>)[path];
+      if (next) file.url = next;
+    }
     if (
       type !== 'image' ||
       key.startsWith('review-candidate:') ||
@@ -70,7 +86,8 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
       return;
     if (typeof file.url !== 'string') return;
     const path = new URL(file.url, location.href).pathname;
-    const entry = byUrl.get(path);
+    const entry =
+      (renovate ? renovatedByUrl.get(path) : undefined) ?? byUrl.get(path);
     if (!entry) return;
     if (!review) {
       file.url = entry.candidateUrl;
@@ -89,9 +106,19 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
 
 export function createRuntimeArtReview(scene: Phaser.Scene): void {
   if (!enabled()) {
+    scene.registry.set(
+      'renovated-skill-sources',
+      new Map(
+        [...(production.get(scene) ?? [])]
+          .filter(([, entry]) => entry.renovated)
+          .map(([key, entry]) => [key, entry.candidateUrl]),
+      ),
+    );
     for (const [key, { density }] of production.get(scene) ?? []) {
       if (density === 1) continue;
       const texture = scene.textures.get(key);
+      if (production.get(scene)?.get(key)?.renovated)
+        texture.setFilter(Phaser.Textures.FilterMode.LINEAR);
       texture.source[0]!.resolution *= density;
       for (const frame of Object.values(texture.frames)) {
         if (frame.name === '__BASE') continue;

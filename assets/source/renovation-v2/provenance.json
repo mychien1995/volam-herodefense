@@ -1,0 +1,101 @@
+{
+  "revision": "renovation-v2-candidate",
+  "status": "CANDIDATE — director review pending for action/VFX and floor correction",
+  "date": "2026-11-05",
+  "generator": "OpenAI built-in image_gen; original generated raster artwork guided by user-supplied/project-approved references",
+  "rights": "Project-generated artwork; no external stock or proprietary game sprites copied. Retained approved attack poses retain their existing provenance.",
+  "references": [
+    {
+      "file": "assets/references/arena_battle_reference.png",
+      "sha256": "4c5312c75da8ce5e370351218ef25880b4b0056802d562db3a5f1b89682349d5"
+    },
+    {
+      "file": "assets/references/vo_dang_character_reference.png",
+      "sha256": "a31a5bdebe5afff273f1e68f0741162e17f3a38e9ee98d1a273d0a797f93c6fd"
+    },
+    {
+      "file": "assets/references/thien_son_thieu_lam_character_reference.png",
+      "sha256": "34dcde54031a4e6fbe565ca3dcbf1c458337fefdb5cb8b06e5967897c51d70e6"
+    },
+    {
+      "file": "assets/references/current_game_2026_10_29_placeholder_anti_reference.png",
+      "sha256": "7650239f6117b3d92ed6e8b1efdafe7213680f258c979808a09a82d2d6c2cdc5"
+    },
+    {
+      "file": "assets/source/renovation-v1/raw/hero_thien_son.png",
+      "sha256": "ed9844532fdd6eb9551616551293a2f12c3e922ffee4d17993b34a43078395c6"
+    }
+  ],
+  "raw": [
+    {
+      "file": "assets/source/renovation-v2/raw/arena-materials.png",
+      "sha256": "16378c3a3ee80ba31d6dd2fc61bd5489468e07d842d2bd9a1ff579290f87f4ad"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/bach_phien_phong_bao.png",
+      "sha256": "d2fd8e8e0c019db5990da645f4cbc3b3f67287c3ffb13924cff0d73dd5a8c470"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/bat_quai_kiem_tran.png",
+      "sha256": "828b3e1b6f8cc07cb3cef01f570c64134494ce83eabc41a7e1ca36b815365e4f"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/chiet_mai_thu.png",
+      "sha256": "026ec741babdf42f9685d2094a320fb5df68bfc21be530da5fa7ab3ffaf51eac"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/fan_projectile.png",
+      "sha256": "e44cdf94f877bb3aad3ce83d3b5428789ca0ff07a160e2bec5d5b40dc5d49979"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/lien_hoa_phien.png",
+      "sha256": "a47307970a3ff4a0103152864087548eb42db28d5650da133b863b9929bb8beb"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/luc_duong_chuong.png",
+      "sha256": "0bc6e0d449ef2d17d1ee2d69e5da9ec84a65ee51c6a52e3fd3524e046bd91e6a"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/luu_phong_bo.png",
+      "sha256": "09c07538ae9e630b968d7d7a01640f20fe5066302e24849f8c7703890742af8a"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/nhan_kiem_hop_nhat.png",
+      "sha256": "b1dee2fb3791815ff0285bc10acf2e074db8fdc4631a8127271561e8cf1e16d1"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/that_tinh_kiem.png",
+      "sha256": "4179f24b4d9ea57cc28dc92f855538cd8b0597461af6ff9e88b722e3fa033ac8"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/thien_son_cast.png",
+      "sha256": "ad8acc2bb1b2cce5f4311e77727e639286a17a60b7131e139563f6947ca657fd"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/thien_son_throw.png",
+      "sha256": "694fb4c3f803904fb5acb888c3594d925f0fa33ab251786ede4544fdfe05f571"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/toa_sat_bac_do.png",
+      "sha256": "f45ffd86860ab1e08f34bb8a4918f38abb885ad524ef137c2a38f3aff41a6896"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/van_kiem_quy_tong.png",
+      "sha256": "51ff2a6e1e972859eaf7f7227ae304fd21d3f600592b7343d85152f3b2dfe6a7"
+    },
+    {
+      "file": "assets/source/renovation-v2/raw/vo_dang_cast.png",
+      "sha256": "9085fcfbcc2cce327fd0299980d15f7afa46898e80f71d0f9d6a6c57c5c67ecc"
+    }
+  ],
+  "process": "Aseprite Lua: alpha cleanup, one scale per body group, foot alignment, density2 virtual-atlas packing. Python only measures/validates, never edits images.",
+  "bodySources": {
+    "vo_dang_cast": "Generated 16 keyposes",
+    "thien_son_throw": "Generated 16 keyposes",
+    "thien_son_cast": "Generated 16 keyposes",
+    "vo_dang_attack": "16 retained reviewed Võ Đang poses from visual-upgrade-2/raw, re-exported with continuous edge alpha"
+  },
+  "effects": "11 generated four-cel effects, mapped/reused into existing phase clocks; 1236 replacements are frame references, not 1236 unique paintings.",
+  "frozenSources": "All prior source/export PNGs remain unchanged; new exports are siblings.",
+  "scope": "Arena layout correction, sparse dungeon collision/props, five Võ Đang Kiếm and five Thiên Sơn Phiến skill/body pilots plus their normal attacks. Other branches and boss action art remain retained."
+}

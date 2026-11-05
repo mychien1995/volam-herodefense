@@ -1,3 +1,11 @@
+## Renovation v2 · sửa bố cục, đường đi và thử hai nhánh skill — 2026-11-05
+
+Director yêu cầu tăng độ nét nhưng giữ layout arena cũ: chỉ tượng Võ Thần tại (800,576) và hai đèn tại (744,578)/(856,578). Không thêm cây, cờ, cửa hay công trình vào arena. Nền dùng đúng mặt nạ vòng tròn và hai đường cắt nhau cũ. Canvas giữ mật độ màn hình gốc; camera desktop trở lại 2× và sprite 88px gốc hiển thị ở scale thế giới0.5, giữ kích thước/world FOV cũ.
+
+Sửa Bamboo bằng cách khớp nền với kích thước map server và bỏ collision sông/hàng rào cũ không còn trong hình. Bốn dungeon creep chỉ còn hai mỏm đá có footprint dùng chung cho server và renderer; biển/lava vẫn có biên ngoài. Bỏ bệ đá vô hình bên trong Cổ Mộ; ba dungeon boss còn lại giữ biên cũ và không thêm đá nội thất. Không đổi tốc độ, sát thương, tài nguyên, hồi chiêu hay luật boss.
+
+Bản thử mới thay cả thân hành động và VFX của đòn Kiếm/Phiến cùng năm skill Võ Đang Kiếm và năm skill Thiên Sơn Phiến. Giữ tên frame, kích thước thế giới, origin, điểm phát, thời gian và đường bay cũ. Nguồn mới là candidate để director xem; không ghi là đã duyệt. Các nhánh còn lại và hành động/skill boss vẫn dùng nguồn cũ, không coi idle/walk mới là đã hoàn thành hành động. Xem `docs/evidence/renovation-v2/README.md`.
+
 ## Renovation v1 · duyệt hình và yêu cầu tích hợp Phaser — 2026-11-05
 
 Director duyệt bản preview đầy đủ với yêu cầu **“quá đẹp, hãy integrate vào phaser”** trong worktree `wip/m3d/visual-upgrade-2`. Phạm vi hình được duyệt: idle/walk bốn hướng của8 nhánh vũ khí,20 wave creep,24 dungeon creep,5 wave boss với7 dạng,11 minion/trợ thủ,4 dungeon boss; arena và8 sân phó bản. Khóa art tại `assets/approved_renovation_v1.lock.json`. Tích hợp vào trận Phaser thường ở mật độ màn hình gốc; giữ tranh attack/cast/hurt/death, skill/VFX và toàn bộ luật server hiện có. Phê duyệt preview không tự động trở thành phê duyệt ngoại hình trong trận sau tích hợp. Báo cáo và ảnh thật: `docs/evidence/renovation-runtime/README.md`.

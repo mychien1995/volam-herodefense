@@ -1,3 +1,11 @@
+## Renovation v2 layout/navigation/skill pilot acceptance — 2026-11-05
+
+Main arena: exactly statue + two lamps at original anchors; original circle/cross floor mask; no invisible removed scenery barriers. Native CSS1 canvas with camera2/locomotion world scale0.5 preserves original gameplay scale. Forest real arrow-key route reaches the south, east and north clearing, returns to its exit and exits with Space. Four creep dungeons have at most two solid interior rock footprints; spawn, exit and creep spawn points remain free.
+
+Võ Đang Kiếm and Thiên Sơn Phiến: five skills each plus their basic attacks load new body art at density2. Verify four facings, real A/Q casts/hits, feet/Y-sort, immutable legacy origins/timing, Nhân Kiếm same-Q blink, fixed Liên Hoa while leaving/reentering, and eight authoritative projectile directions for Vạn Kiếm/Bách Phiến. Compare old/new on two actual clients. Retain six-client normal-match coverage for all74 actor forms/eight dungeons; held boss coverage does not prove naturally defeating encounters or upgrading their action drawings. PNG evidence only; source/art approval stays separate from test success.
+
+Use `tests/renovation-navigation.test.ts`, `tests/bamboo-map.test.ts`, `scripts/verify-renovation-v2.py` and `pnpm check:final --config playwright.renovation-runtime.config.ts`. Evidence: `docs/evidence/renovation-v2/README.md`.
+
 ## Combined approved M3D integration acceptance — 2026-11-03
 
 Current acceptance includes real Q/W/E same-target success/miss/early-input/cancel/duplicate/cost across four facings; creep0.648 entry speed, one identity/wave and pack separation including Hell; private creeps/shared bosses;30s invitations; arena freeze/resume; per-attempt revival/reconnect/solo exit; actual r3 normal-zoom rendering; retained inventory/merchant purchases and potion1/2/modal ownership; Hell animation fallback and existing boss worlds remain independent. Protocol21 accepts the composed strict messages and rejects both old branch versions.

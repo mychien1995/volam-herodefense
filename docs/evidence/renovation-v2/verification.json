@@ -1,0 +1,35 @@
+{
+  "status": "PASS after scoped stage retries",
+  "pipeline": "Single final pipeline stopped at 3 old collision expectations; original FAIL timing report retained",
+  "tests": {
+    "total": 746,
+    "files": 79,
+    "fullPass": 743,
+    "oldCollisionFailures": 3,
+    "affectedRetryPass": 14,
+    "affectedFiles": 4
+  },
+  "workflowChecks": 18,
+  "typecheck": "PASS including affected tests/tools rerun",
+  "productionBuild": "PASS",
+  "assetValidators": 24,
+  "validatorRetry": "Bac Cai console print needed Python UTF-8; failed and subsequent validators rerun, no art change",
+  "browser": {
+    "status": "PASS",
+    "players": 6,
+    "skills": 40,
+    "basics": 8,
+    "actorForms": 74,
+    "dungeons": 8,
+    "errors": []
+  },
+  "evidence": [
+    "final-console.log",
+    "focused-retry.log",
+    "final-stages.log",
+    "validator-retry.log",
+    "browser-final.log",
+    "live-integration.json",
+    "skill-comparison.json"
+  ]
+}

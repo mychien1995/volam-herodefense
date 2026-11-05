@@ -26,6 +26,7 @@ import { waitForQa } from './qa-wait.mjs';
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
+import { verifyRenovationSkills } from './verify-renovation-skills.mjs';
 
 /** Normal entry point, real Colyseus room. Fixtures are server-side and labelled. */
 export async function verifyRenovationRuntime(
@@ -50,7 +51,7 @@ export async function verifyRenovationRuntime(
       fixtures:
         'Server-owned wave placement/zone entry for coverage; natural keyboard combat and movement checked separately.',
     };
-  const out = resolve('docs/evidence/renovation-runtime');
+  const out = resolve('docs/evidence/renovation-v2');
   mkdirSync(out, { recursive: true });
   let last = performance.now();
   const mark = (phase) => {
@@ -148,7 +149,11 @@ export async function verifyRenovationRuntime(
       page.on('response', (r) => {
         if (r.status() >= 400) errors.push(r.status() + ' ' + r.url());
       });
-      await page.goto(session.clientUrl + '/?debug=1');
+      await page.goto(
+        session.clientUrl +
+          '/?debug=1' +
+          (i === 1 ? '&renovationSkills=old' : ''),
+      );
       await page.locator('#pre-nickname').fill('Renovation ' + (i + 1));
       await page.getByRole('button', { name: 'Vào game', exact: true }).click();
       if (roomId) {
@@ -255,6 +260,16 @@ export async function verifyRenovationRuntime(
     }));
     assert.equal(pixels.width, pixels.display);
     report.nativeCanvas = pixels;
+    const layout = (await inspect(page)).renovation.environment;
+    assert.deepEqual(
+      layout
+        .filter((o) => o.name !== 'arena:ground')
+        .map((o) => o.name)
+        .sort(),
+      ['art01:lantern:left', 'art01:lantern:right', 'art01:statue_male'],
+    );
+    assert.equal((await inspect(page)).zoom, 2);
+    report.arenaLayout = layout;
     await page.screenshot({ path: resolve(out, 'normal-arena.png') });
     mark('four-direction keyboard movement and peer sync');
     // Real wave director generates each original stat block. Only positions/pose held for art review.
@@ -426,6 +441,12 @@ export async function verifyRenovationRuntime(
     mark('natural A combat, death and rewards');
     room.world.creeps.clear();
     // Static server fixture for exhaustive identity/pose coverage after natural combat.
+    report.skills = await verifyRenovationSkills({
+      room,
+      pages,
+      out,
+      full: players === 6,
+    });
     // Normal syncState continues; no browser can arrange these actors or submit damage.
     room.simulation.step = () => {
       room.simulation.tick++;
@@ -449,7 +470,7 @@ export async function verifyRenovationRuntime(
                 b.visible &&
                 b.locomotion &&
                 b.texture === 'renovated-' + id &&
-                b.scale.every((s) => s === 1),
+                b.scale.every((s) => s === 0.5),
             ),
           );
         },
@@ -712,30 +733,28 @@ export async function verifyRenovationRuntime(
     // Actual Y sorting across an authored foreground tree, with replicated feet.
     clean();
     const h = heroes[0];
-    Object.assign(h, { x: 1220, y: 840, pose: 'idle' });
+    Object.assign(h, { x: 800, y: 540, pose: 'idle' });
     await wait(async () => {
       const v = (await inspect(page)).renovation;
-      return v.bodies.some((b) => b.name === 'actor:' + h.id && b.y === 840);
+      return v.bodies.some((b) => b.name === 'actor:' + h.id && b.y === 540);
     }, 'feet behind tree');
     const behind = (await inspect(page)).renovation;
-    const tree = behind.environment.find(
-      (e) => e.name === 'renovation:tree:tree_east',
-    );
+    const tree = behind.environment.find((e) => e.name === 'art01:statue_male');
     assert(tree);
     assert(
       behind.bodies.find((b) => b.name === 'actor:' + h.id).depth < tree.depth,
     );
-    h.y = 920;
+    h.y = 620;
     await wait(async () => {
       const v = (await inspect(page)).renovation;
-      return v.bodies.some((b) => b.name === 'actor:' + h.id && b.y === 920);
+      return v.bodies.some((b) => b.name === 'actor:' + h.id && b.y === 620);
     }, 'feet in front of tree');
     assert(
       (await inspect(page)).renovation.bodies.find(
         (b) => b.name === 'actor:' + h.id,
       ).depth > tree.depth,
     );
-    report.depth = { tree, behind: 840, front: 920 };
+    report.depth = { statue: tree, behind: 540, front: 620 };
     assert.deepEqual(errors, []);
     report.errors = errors;
     report.status = 'PASS';

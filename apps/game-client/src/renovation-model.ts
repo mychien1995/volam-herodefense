@@ -13,7 +13,7 @@ export const renovatedActors = raw.actors as RenovationActor[];
 const definitions = new Map(renovatedActors.map((actor) => [actor.id, actor]));
 const waves = renovatedActors.filter((actor) => actor.group === 'wave_creeps');
 export const renovationHeight = (id: string, fallback: number) =>
-  definitions.get(id)?.height ?? fallback;
+  definitions.has(id) ? definitions.get(id)!.height / 2 : fallback;
 export function renovationActorId(
   archetype: string | undefined,
   wave: number | undefined,

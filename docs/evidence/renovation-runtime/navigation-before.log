@@ -1,0 +1,46 @@
+
+ RUN  v5.0.5 C:/Users/ADMIN/.codex/worktrees/visual-upgrade-2/volam-hero-defense
+
+ ❯ tests/renovation-navigation.test.ts (2 tests | 2 failed) 13ms
+   × lets real movement cross the clearing and reach the south of Bamboo Forest 8ms
+   × keeps sparse visible rocks and removes obsolete arena barriers 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/renovation-navigation.test.ts > lets real movement cross the clearing and reach the south of Bamboo Forest
+AssertionError: expected 500 to be close to 616, received difference is 116, but expected 0.005
+ ❯ tests/renovation-navigation.test.ts:11:51
+      9|       moveCircle(p,{x:dx/d*Math.min(8,d),y:dy/d*Math.min(8,d)},m1Confi…
+     10|     }
+     11|     expect(p.x).toBeCloseTo(target.x);expect(p.y).toBeCloseTo(target.y…
+       |                                                   ^
+     12|   }
+     13| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/renovation-navigation.test.ts > keeps sparse visible rocks and removes obsolete arena barriers
+AssertionError: expected [ { x: 1208, y: 852, …(2) }, …(2) ] to have a length of +0 but got 3
+
+- Expected
++ Received
+
+- 0
++ 3
+
+ ❯ tests/renovation-navigation.test.ts:15:27
+     13| });
+     14| it('keeps sparse visible rocks and removes obsolete arena barriers',()…
+     15|   expect(arena.collision).toHaveLength(0);
+       |                           ^
+     16|   for(const d of creepDungeons.filter(d=>['forest','desert','sea','hel…
+     17|     const interior=d.collision.filter(b=>b.x>0&&b.y>0&&b.x+b.width<d.w…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  21:07:14
+   Duration  2.33s (transform 72%, import 25%, worker 2%, tests 1%)
+

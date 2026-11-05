@@ -1,4 +1,8 @@
 import Phaser from 'phaser';
+import {
+  renovatedSkillComponents,
+  renovationSkillsEnabled,
+} from './renovation-skill-components.js';
 import { m1Config, skillArt } from '@volam/game-data';
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
@@ -65,10 +69,12 @@ export class ApprovedSkillVfx {
   private readonly leafHalos = new Map<string, Phaser.GameObjects.Image>();
   private heroes = new Map<string, string>();
   private assets = new Map<string, RasterComponent>(
-    [...skillArt.assets, ...feedbackArt, ...approvedSkillAssets].map((a) => [
-      a.id,
-      a,
-    ]),
+    [
+      ...skillArt.assets,
+      ...feedbackArt,
+      ...approvedSkillAssets,
+      ...renovatedSkillComponents,
+    ].map((a) => [a.id, a]),
   );
   private runs: Run[] = [];
   private loops = new Map<string, Loop>();
@@ -545,7 +551,9 @@ export class ApprovedSkillVfx {
           id,
           'toa_sat_bac_do',
           this.single(
-            'vo_dang_shield_formation_v2_aura',
+            renovationSkillsEnabled()
+              ? 'renovated_toa_guard'
+              : 'vo_dang_shield_formation_v2_aura',
             'mana_loop',
             1e9,
             'guard_70_percent',

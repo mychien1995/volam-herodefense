@@ -1,0 +1,261 @@
+{
+  "players": 2,
+  "development": true,
+  "protocol": 30,
+  "timings": [
+    {
+      "phase": "2 real clients ready",
+      "seconds": 20.08
+    },
+    {
+      "phase": "four-direction keyboard movement and peer sync",
+      "seconds": 2.47
+    },
+    {
+      "phase": "20 wave identities in normal renderer",
+      "seconds": 1.95
+    },
+    {
+      "phase": "natural A combat, death and rewards",
+      "seconds": 2.69
+    }
+  ],
+  "directions": [
+    {
+      "direction": "down",
+      "from": 700,
+      "to": 758.6666870117188
+    },
+    {
+      "direction": "left",
+      "from": 700,
+      "to": 620
+    },
+    {
+      "direction": "right",
+      "from": 620,
+      "to": 700
+    },
+    {
+      "direction": "up",
+      "from": 758.6666870117188,
+      "to": 694.6666870117188
+    }
+  ],
+  "scenes": [],
+  "fixtures": "Server-owned wave placement/zone entry for coverage; natural keyboard combat and movement checked separately.",
+  "nativeCanvas": {
+    "width": 1366,
+    "height": 768,
+    "display": 1366
+  },
+  "arenaLayout": [
+    {
+      "name": "arena:ground",
+      "texture": "renovated-arena-layout",
+      "x": 800,
+      "y": 576,
+      "depth": -10000
+    },
+    {
+      "name": "art01:statue_male",
+      "texture": "renovated-prop-arena-4",
+      "x": 800,
+      "y": 576,
+      "depth": 576
+    },
+    {
+      "name": "art01:lantern:left",
+      "texture": "renovated-prop-arena-2",
+      "x": 744,
+      "y": 578,
+      "depth": 578
+    },
+    {
+      "name": "art01:lantern:right",
+      "texture": "renovated-prop-arena-2",
+      "x": 856,
+      "y": 578,
+      "depth": 578
+    }
+  ],
+  "waveCoverage": [
+    "creep_wild_dog",
+    "creep_bandit_grunt",
+    "creep_bandit_swordsman",
+    "creep_bandit_archer",
+    "creep_black_clad_assassin",
+    "creep_corrupted_monk",
+    "creep_skeleton_swordsman",
+    "creep_skeleton_archer",
+    "creep_jiangshi_zombie",
+    "creep_vengeful_spirit",
+    "creep_armored_skeleton",
+    "creep_stone_golem",
+    "creep_demon_hound",
+    "creep_fire_imp",
+    "creep_fire_cultist",
+    "creep_horned_demon_brute",
+    "creep_shadow_assassin",
+    "creep_armored_demon_general",
+    "creep_blood_demon_warlock",
+    "creep_demon_vanguard"
+  ],
+  "retainedSkill": [
+    {
+      "tick": 159,
+      "protocolVersion": 30,
+      "id": 1,
+      "kind": "cast",
+      "sourceId": "btskUnHLS",
+      "targetId": "",
+      "abilityId": "luong_nghi_thu",
+      "x": 700,
+      "y": 694.6666666666667,
+      "damage": 0,
+      "critical": false,
+      "zoneId": "arena",
+      "fx": 0,
+      "fy": 1,
+      "radius": 240
+    }
+  ],
+  "combat": {
+    "enemyHp": 0,
+    "events": [
+      {
+        "tick": 159,
+        "protocolVersion": 30,
+        "id": 2,
+        "kind": "hit",
+        "sourceId": "btskUnHLS",
+        "targetId": "invasion_1_west_0",
+        "abilityId": "luong_nghi_thu",
+        "x": 700,
+        "y": 730.6666666666667,
+        "damage": 27,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "tick": 173,
+        "protocolVersion": 30,
+        "id": 4,
+        "kind": "hit",
+        "sourceId": "btskUnHLS",
+        "targetId": "invasion_1_west_0",
+        "abilityId": "vo_dang_quyen",
+        "x": 700,
+        "y": 730.6666666666667,
+        "damage": 18,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "tick": 173,
+        "protocolVersion": 30,
+        "id": 6,
+        "kind": "hit",
+        "sourceId": "FiFaYvryY",
+        "targetId": "invasion_1_west_0",
+        "abilityId": "cai_bang_bong",
+        "x": 700,
+        "y": 730.6666666666667,
+        "damage": 27,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "tick": 193,
+        "protocolVersion": 30,
+        "id": 8,
+        "kind": "hit",
+        "sourceId": "btskUnHLS",
+        "targetId": "invasion_1_west_0",
+        "abilityId": "vo_dang_quyen",
+        "x": 700,
+        "y": 730.6666666666667,
+        "damage": 18,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "tick": 193,
+        "protocolVersion": 30,
+        "id": 10,
+        "kind": "hit",
+        "sourceId": "FiFaYvryY",
+        "targetId": "invasion_1_west_0",
+        "abilityId": "cai_bang_bong",
+        "x": 700,
+        "y": 730.6666666666667,
+        "damage": 40,
+        "critical": true,
+        "zoneId": "arena",
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "tick": 212,
+        "protocolVersion": 30,
+        "id": 12,
+        "kind": "hit",
+        "sourceId": "btskUnHLS",
+        "targetId": "invasion_1_west_0",
+        "abilityId": "vo_dang_quyen",
+        "x": 700,
+        "y": 730.6666666666667,
+        "damage": 18,
+        "critical": false,
+        "zoneId": "arena",
+        "fx": 0,
+        "fy": 1
+      },
+      {
+        "tick": 212,
+        "protocolVersion": 30,
+        "id": 13,
+        "kind": "death",
+        "sourceId": "btskUnHLS",
+        "targetId": "invasion_1_west_0",
+        "abilityId": "vo_dang_quyen",
+        "x": 700,
+        "y": 730.6666666666667,
+        "damage": 0,
+        "critical": false,
+        "zoneId": "arena"
+      }
+    ],
+    "before": [
+      {
+        "xp": 0,
+        "gold": 0
+      },
+      {
+        "xp": 0,
+        "gold": 0
+      }
+    ],
+    "after": [
+      {
+        "xp": 30,
+        "gold": 6
+      },
+      {
+        "xp": 30,
+        "gold": 6
+      }
+    ]
+  },
+  "status": "FAIL",
+  "failure": "AssertionError [ERR_ASSERTION]: bach_phien_phong_bao eight authoritative directions\n\n7 !== 8\n",
+  "errors": []
+}

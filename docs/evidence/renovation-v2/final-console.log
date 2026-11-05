@@ -1,0 +1,134 @@
+$ node scripts/check-workflow.mjs final "--config" "playwright.renovation-runtime.config.ts"
+
+[check] prepare assets (once)
+Nam De: retained feedback03 raster bytes / 208 actor cels / 4 facings
+Wave boss approved feedback: exact PNGs / native-scale presentation contract
+Kim Luân: 246 exact approved inputs; 184 selected frames / 53 clips
+Đông Tà: 630 approved input hashes; 113 clips / 452 frames
+M3D r3: 71 approved components / 346 selected tags; three immutable locks verified
+Hoan Nhan Hong Liet v04: 40 pinned inputs; 16 atlases validated.
+Tay Doc: 593 approved input hashes;60 new candidate directional cels retained.
+Bắc Cái preview: 13 retained atlases → C:\Users\ADMIN\.codex\worktrees\visual-upgrade-2\volam-hero-defense\apps\game-client\public\assets\bac-cai-preview\
+Prepared assets in C:\Users\ADMIN\.codex\worktrees\visual-upgrade-2\volam-hero-defense\apps\game-client\public\assets\ (21 written, 6391 unchanged)
+[check] prepare assets (once): 19.18s
+
+[check] compile TypeScript
+[check] compile TypeScript: 1.00s
+
+[check] typecheck tests and tools
+[check] typecheck tests and tools: 2.83s
+
+[check] workflow regression checks
+✔ keeps final six-client coverage and separates fast evidence from approved history (3.2199ms)
+✔ rejects invalid profiles instead of reporting reduced coverage as final (1.3168ms)
+✔ minimal capture saves no success PNGs in iteration and exactly two final views (0.5341ms)
+✔ review capture remains opt-in and preserves the detailed frame report (0.4341ms)
+✔ final command rejects a reduced browser profile before preparing assets (178.0554ms)
+✔ a development-client shortcut cannot skip the final production build (169.315ms)
+✔ unchanged assets keep their timestamps; changed, corrupt and missing outputs are repaired (33.2772ms)
+✔ generated UTF-8 metadata is written only when its bytes change (17.1148ms)
+✔ defaults and independent session overrides preserve profile contracts (4.827ms)
+✔ invalid ports and contradictory or remote endpoints fail before preparation (0.8033ms)
+✔ a healthy occupied service is never borrowed or stopped (102.286ms)
+✔ identity rejects wrong run, endpoint, HTTP failures and non-JSON health pages (34.2206ms)
+✔ client middleware identifies the actual owned run and cleanup attempts all owners once (3.6424ms)
+✔ workflow selects the managed profile rather than forcing every run to gameplay ports (2.4043ms)
+✔ observation waits finish on acknowledgement without spending the deadline (21.9949ms)
+✔ impossible prerequisites and read errors fail on their first observation (1.5421ms)
+✔ missing acknowledgements retain the failed label and compact authoritative diagnostics (28.7438ms)
+✔ core worlds supply zone membership separately from actor data (0.6583ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 586.8427
+[check] workflow regression checks: 0.75s
+
+[check] all unit/integration tests
+
+ RUN  v5.0.5 C:/Users/ADMIN/.codex/worktrees/visual-upgrade-2/volam-hero-defense
+
+ ❯ tests/beach-dungeon.test.ts (4 tests | 1 failed) 46ms
+   ❯ Beach shared map and authoritative integration (4)
+     × keeps water/shore solid, bridge and dock walkable, and connects every gameplay marker 11ms
+ ❯ tests/hell-dungeon.test.ts (4 tests | 1 failed) 46ms
+   ❯ Hell shared map and authoritative integration (4)
+     × keeps lava impassable, the bridge route walkable, and connects every gameplay marker 13ms
+ ❯ tests/desert-dungeon.test.ts (4 tests | 1 failed) 178ms
+   ❯ desert map and authoritative destination contract (4)
+     × connects every spawn and exit through walkable space with six clear entry seats 89ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/beach-dungeon.test.ts > Beach shared map and authoritative integration > keeps water/shore solid, bridge and dock walkable, and connects every gameplay marker
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/beach-dungeon.test.ts:24:28
+     22|     const free = (x: number, y: number) =>
+     23|       !blocked({ x, y }, m1Config.radius, d.width, d.height, d.collisi…
+     24|     expect(free(480, 800)).toBe(false);
+       |                            ^
+     25|     expect(free(480, 864)).toBe(true);
+     26|     expect(free(1408, 704)).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/desert-dungeon.test.ts > desert map and authoritative destination contract > connects every spawn and exit through walkable space with six clear entry seats
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/desert-dungeon.test.ts:51:28
+     49|     ])
+     50|       expect(seen.has(`${p.x},${p.y}`), JSON.stringify(p)).toBe(true);
+     51|     expect(free(352, 448)).toBe(false);
+       |                            ^
+     52|   });
+     53|   it('validates destinations and preserves the existing forest default…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/hell-dungeon.test.ts > Hell shared map and authoritative integration > keeps lava impassable, the bridge route walkable, and connects every gameplay marker
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/hell-dungeon.test.ts:29:28
+     27|     const free = (x: number, y: number) =>
+     28|       !blocked({ x, y }, m1Config.radius, d.width, d.height, d.collisi…
+     29|     expect(free(704, 576)).toBe(false);
+       |                            ^
+     30|     expect(free(704, 720)).toBe(true);
+     31|     expect(free(640, 640)).toBe(false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  3 failed | 76 passed (79)
+      Tests  3 failed | 743 passed (746)
+   Start at  22:41:31
+   Duration  143.65s (tests 54%, import 44%, transform 2%, worker 1%)
+
+    Isolate  79 workers spawned · ~260ms startup each (spawn + environment, per file)
+             at least ~20.27s faster with isolate: false — reuses workers across files instead of one per file
+
+[check] all unit/integration tests: 144.79s
+[check] failure timings: C:\Users\ADMIN\.codex\worktrees\visual-upgrade-2\volam-hero-defense\docs\evidence\sessions\renovation-v2-final\check-workflow\final-timings.json
+[ELIFECYCLE] Command failed with exit code 1.

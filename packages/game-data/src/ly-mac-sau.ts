@@ -8,6 +8,7 @@ import {
 import raw from './boss-co-mo-map.json' with { type: 'json' };
 import { creepDungeon } from './dungeon.js';
 import { m1Config } from './m1.js';
+import { renovationCollision } from './renovation-navigation.js';
 import { enlargeBossArena } from './boss-arena-geometry.js';
 import { bossCadence, cadenceTicks } from './boss-cadence.js';
 const hz = m1Config.tickRate;
@@ -206,9 +207,14 @@ export const coMoDungeon: CreepDungeonDefinition = enlargeBossArena({
   id: 'co_mo',
   width: raw.width * 32,
   height: raw.height * 32,
-  collision: raw.layers
-    .find((l) => l.name === 'collision')!
-    .objects!.map(({ x, y, width, height }) => ({ x, y, width, height })),
+  collision: renovationCollision(
+    'co_mo',
+    raw.width * 32,
+    raw.height * 32,
+    raw.layers
+      .find((l) => l.name === 'collision')!
+      .objects!.map(({ x, y, width, height }) => ({ x, y, width, height })),
+  ),
   spawn: marker('hero_spawn'),
   exit: marker('exit_portal'),
   creepSpawns: [marker('boss_spawn')],

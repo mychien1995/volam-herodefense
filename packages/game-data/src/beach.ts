@@ -2,6 +2,7 @@ import { blocked, type CreepDungeonDefinition } from '@volam/game-core';
 import raw from './creep-beach-map.json' with { type: 'json' };
 import { creepDungeon, creepDungeonSchema } from './dungeon.js';
 import { m1Config } from './m1.js';
+import { renovationCollision } from './renovation-navigation.js';
 export const beachRoster = [
   'cua_khong_lo',
   'hai_xa',
@@ -24,9 +25,14 @@ export const beachDungeon: CreepDungeonDefinition = creepDungeonSchema.parse({
   id: 'sea',
   width: raw.width * raw.tilewidth,
   height: raw.height * raw.tileheight,
-  collision: raw.layers
-    .find((l) => l.name === 'collision')!
-    .objects!.map(({ x, y, width, height }) => ({ x, y, width, height })),
+  collision: renovationCollision(
+    'sea',
+    raw.width * raw.tilewidth,
+    raw.height * raw.tileheight,
+    raw.layers
+      .find((l) => l.name === 'collision')!
+      .objects!.map(({ x, y, width, height }) => ({ x, y, width, height })),
+  ),
   spawn: marker('hero_spawn'),
   exit: marker('exit_portal'),
   creepSpawns: beachMapObjects

@@ -1,0 +1,6757 @@
+{
+  "fixture": "Server-owned legal level30/rank1 loadout and durable targets; no injected cast/damage/reward outcomes",
+  "directions": 4,
+  "basics": [
+    {
+      "basic": "vo_dang_kiem",
+      "direction": "right",
+      "observedFrames": [
+        "hero_vo_dang_kiem:basic_attack_right_0",
+        "hero_vo_dang_kiem:basic_attack_right_3"
+      ]
+    },
+    {
+      "basic": "vo_dang_kiem",
+      "direction": "down",
+      "observedFrames": [
+        "hero_vo_dang_kiem:basic_attack_down_2"
+      ]
+    },
+    {
+      "basic": "vo_dang_kiem",
+      "direction": "left",
+      "observedFrames": [
+        "hero_vo_dang_kiem:basic_attack_left_0",
+        "hero_vo_dang_kiem:basic_attack_left_3"
+      ]
+    },
+    {
+      "basic": "vo_dang_kiem",
+      "direction": "up",
+      "observedFrames": [
+        "hero_vo_dang_kiem:basic_attack_up_0",
+        "hero_vo_dang_kiem:basic_attack_up_2"
+      ]
+    },
+    {
+      "basic": "thien_son_phien",
+      "direction": "right",
+      "observedFrames": [
+        "thien_son_fan_v2_character:throw_right_0",
+        "thien_son_fan_v2_character:throw_right_3"
+      ]
+    },
+    {
+      "basic": "thien_son_phien",
+      "direction": "down",
+      "observedFrames": [
+        "thien_son_fan_v2_character:throw_down_1",
+        "thien_son_fan_v2_character:throw_down_3"
+      ]
+    },
+    {
+      "basic": "thien_son_phien",
+      "direction": "left",
+      "observedFrames": [
+        "thien_son_fan_v2_character:throw_left_2"
+      ]
+    },
+    {
+      "basic": "thien_son_phien",
+      "direction": "up",
+      "observedFrames": [
+        "thien_son_fan_v2_character:throw_up_0",
+        "thien_son_fan_v2_character:throw_up_3"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "skill": "that_tinh_kiem",
+      "direction": "right",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "cast",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "hero_vo_dang_kiem",
+        "source": "/assets/renovation-v2/overrides/hero_vo_dang_kiem.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "basic_attack_right_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "cast",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "hero_vo_dang_kiem",
+        "source": "blob:http://127.0.0.1:5536/a925da85-654b-4f5b-8579-9728b2829c13",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "basic_attack_right_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "nhan_kiem_hop_nhat",
+      "direction": "right",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "m3d_vo_dang_kiem_character",
+        "source": "/assets/renovation-v2/overrides/m3d_vo_dang_kiem_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "nhan_kiem_launch_right_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "m3d_vo_dang_kiem_character",
+        "source": "blob:http://127.0.0.1:5536/65f39e63-6b8b-4546-a46f-583f6646e72d",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "nhan_kiem_launch_right_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "blink": {
+        "from": [
+          800,
+          760
+        ],
+        "to": [
+          962,
+          760
+        ],
+        "velocity": [
+          180,
+          0
+        ]
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 104,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 962,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "bat_quai_kiem_tran",
+      "direction": "right",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "bat_quai_kiem_tran_character",
+        "source": "/assets/renovation-v2/overrides/bat_quai_kiem_tran_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_right_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "bat_quai_kiem_tran_character",
+        "source": "blob:http://127.0.0.1:5536/dcd15309-d7ce-453f-af97-08488b99b969",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_right_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 107,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "toa_sat_bac_do",
+      "direction": "right",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "toa_sat_bac_do_character",
+        "source": "/assets/renovation-v2/overrides/toa_sat_bac_do_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_right_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "toa_sat_bac_do_character",
+        "source": "blob:http://127.0.0.1:5536/eee37e9a-6f6c-4e29-bc60-d16b06cb5798",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_right_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 4.800000000000011,
+          "x": 800,
+          "y": 760,
+          "target": "RgHXJ_be1"
+        },
+        {
+          "kind": "pulse",
+          "damage": 4.800000000000011,
+          "x": 800,
+          "y": 760,
+          "target": "RgHXJ_be1"
+        },
+        {
+          "kind": "pulse",
+          "damage": 4.800000000000011,
+          "x": 800,
+          "y": 760,
+          "target": "RgHXJ_be1"
+        },
+        {
+          "kind": "pulse",
+          "damage": 14.400000000000034,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 14.400000000000034,
+          "x": 825.0666666666683,
+          "y": 760,
+          "target": "renovation_dummy"
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "van_kiem_quy_tong",
+      "direction": "right",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "van_kiem_quy_tong_character",
+        "source": "/assets/renovation-v2/overrides/van_kiem_quy_tong_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_right_2",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "van_kiem_quy_tong_character",
+        "source": "blob:http://127.0.0.1:5536/67b684d2-5de2-42df-8f68-70f331ade798",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_right_2",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": [
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 497,
+          "y": 433,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 1103,
+          "y": 433,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 1229,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 371,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 1103,
+          "y": 1039,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_2",
+          "x": 497,
+          "y": 1039,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        }
+      ]
+    },
+    {
+      "skill": "that_tinh_kiem",
+      "direction": "down",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "cast",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "hero_vo_dang_kiem",
+        "source": "/assets/renovation-v2/overrides/hero_vo_dang_kiem.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "basic_attack_down_3",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "cast",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "hero_vo_dang_kiem",
+        "source": "blob:http://127.0.0.1:5536/a925da85-654b-4f5b-8579-9728b2829c13",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "basic_attack_down_3",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "nhan_kiem_hop_nhat",
+      "direction": "down",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "m3d_vo_dang_kiem_character",
+        "source": "/assets/renovation-v2/overrides/m3d_vo_dang_kiem_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "nhan_kiem_launch_down_2",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "m3d_vo_dang_kiem_character",
+        "source": "blob:http://127.0.0.1:5536/65f39e63-6b8b-4546-a46f-583f6646e72d",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "nhan_kiem_launch_down_2",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "blink": {
+        "from": [
+          800,
+          760
+        ],
+        "to": [
+          800,
+          934
+        ],
+        "velocity": [
+          0,
+          180
+        ]
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 104,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 934,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "bat_quai_kiem_tran",
+      "direction": "down",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "bat_quai_kiem_tran_character",
+        "source": "/assets/renovation-v2/overrides/bat_quai_kiem_tran_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_down_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "bat_quai_kiem_tran_character",
+        "source": "blob:http://127.0.0.1:5536/dcd15309-d7ce-453f-af97-08488b99b969",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_down_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "toa_sat_bac_do",
+      "direction": "down",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "toa_sat_bac_do_character",
+        "source": "/assets/renovation-v2/overrides/toa_sat_bac_do_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_down_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "toa_sat_bac_do_character",
+        "source": "blob:http://127.0.0.1:5536/eee37e9a-6f6c-4e29-bc60-d16b06cb5798",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_down_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 4.800000000000011,
+          "x": 800,
+          "y": 760,
+          "target": "RgHXJ_be1"
+        },
+        {
+          "kind": "pulse",
+          "damage": 7.5,
+          "x": 800,
+          "y": 760,
+          "target": "RgHXJ_be1"
+        },
+        {
+          "kind": "pulse",
+          "damage": 4.800000000000011,
+          "x": 800,
+          "y": 760,
+          "target": "RgHXJ_be1"
+        },
+        {
+          "kind": "pulse",
+          "damage": 17.100000000000023,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 17.100000000000023,
+          "x": 800,
+          "y": 785.0666666666683,
+          "target": "renovation_dummy"
+        }
+      ],
+      "fx": [
+        {
+          "texture": "hero_vo_dang_kiem",
+          "frame": "idle_down_0",
+          "x": 800,
+          "y": 760,
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "source": "/assets/renovation-v2/overrides/hero_vo_dang_kiem.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 886,
+          "y": 748,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 874,
+          "y": 791,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 843,
+          "y": 822,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 800,
+          "y": 834,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 757,
+          "y": 822,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 726,
+          "y": 791,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 714,
+          "y": 748,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 726,
+          "y": 705,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 757,
+          "y": 673,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 800,
+          "y": 662,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 843,
+          "y": 673,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 874,
+          "y": 705,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "impact_3",
+          "x": 800,
+          "y": 760,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            1.8,
+            1.8
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        }
+      ]
+    },
+    {
+      "skill": "van_kiem_quy_tong",
+      "direction": "down",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "van_kiem_quy_tong_character",
+        "source": "/assets/renovation-v2/overrides/van_kiem_quy_tong_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_down_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "van_kiem_quy_tong_character",
+        "source": "blob:http://127.0.0.1:5536/67b684d2-5de2-42df-8f68-70f331ade798",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_down_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": [
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 579,
+          "y": 515,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 1021,
+          "y": 515,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 800,
+          "y": 580,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 690,
+          "y": 626,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 910,
+          "y": 626,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 488,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 1112,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 644,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 956,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "impact_1",
+          "x": 800,
+          "y": 760,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            1.6,
+            1.6
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 690,
+          "y": 846,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 910,
+          "y": 846,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 800,
+          "y": 892,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 579,
+          "y": 957,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 1021,
+          "y": 957,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 800,
+          "y": 1048,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        }
+      ]
+    },
+    {
+      "skill": "that_tinh_kiem",
+      "direction": "left",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "that_tinh_kiem_character",
+        "source": "/assets/renovation-v2/overrides/that_tinh_kiem_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_left_3",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "that_tinh_kiem_character",
+        "source": "blob:http://127.0.0.1:5536/a850007b-fd7a-49ff-874a-e84036e0c9a4",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_left_3",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "nhan_kiem_hop_nhat",
+      "direction": "left",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "m3d_vo_dang_kiem_character",
+        "source": "/assets/renovation-v2/overrides/m3d_vo_dang_kiem_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "nhan_kiem_launch_left_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "m3d_vo_dang_kiem_character",
+        "source": "blob:http://127.0.0.1:5536/65f39e63-6b8b-4546-a46f-583f6646e72d",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "nhan_kiem_launch_left_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "blink": {
+        "from": [
+          800,
+          760
+        ],
+        "to": [
+          668,
+          760
+        ],
+        "velocity": [
+          -180,
+          0
+        ]
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 156,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 668,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "bat_quai_kiem_tran",
+      "direction": "left",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "bat_quai_kiem_tran_character",
+        "source": "/assets/renovation-v2/overrides/bat_quai_kiem_tran_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_left_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "bat_quai_kiem_tran_character",
+        "source": "blob:http://127.0.0.1:5536/dcd15309-d7ce-453f-af97-08488b99b969",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_left_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "toa_sat_bac_do",
+      "direction": "left",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "toa_sat_bac_do_character",
+        "source": "/assets/renovation-v2/overrides/toa_sat_bac_do_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_left_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "toa_sat_bac_do_character",
+        "source": "blob:http://127.0.0.1:5536/eee37e9a-6f6c-4e29-bc60-d16b06cb5798",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_left_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 4.800000000000011,
+          "x": 800,
+          "y": 760,
+          "target": "RgHXJ_be1"
+        },
+        {
+          "kind": "pulse",
+          "damage": 4.800000000000011,
+          "x": 800,
+          "y": 760,
+          "target": "RgHXJ_be1"
+        },
+        {
+          "kind": "pulse",
+          "damage": 4.800000000000011,
+          "x": 800,
+          "y": 760,
+          "target": "RgHXJ_be1"
+        },
+        {
+          "kind": "pulse",
+          "damage": 14.400000000000034,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 14.400000000000034,
+          "x": 774.9333333333317,
+          "y": 760,
+          "target": "renovation_dummy"
+        }
+      ],
+      "fx": [
+        {
+          "texture": "hero_vo_dang_kiem",
+          "frame": "idle_left_0",
+          "x": 800,
+          "y": 760,
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "source": "/assets/renovation-v2/overrides/hero_vo_dang_kiem.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_1",
+          "x": 896,
+          "y": 748,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_1",
+          "x": 883,
+          "y": 796,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_1",
+          "x": 848,
+          "y": 831,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_1",
+          "x": 800,
+          "y": 844,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_1",
+          "x": 752,
+          "y": 831,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_1",
+          "x": 717,
+          "y": 796,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_1",
+          "x": 704,
+          "y": 748,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_1",
+          "x": 717,
+          "y": 700,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_1",
+          "x": 752,
+          "y": 665,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_1",
+          "x": 800,
+          "y": 652,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_1",
+          "x": 848,
+          "y": 665,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_1",
+          "x": 883,
+          "y": 700,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        }
+      ]
+    },
+    {
+      "skill": "van_kiem_quy_tong",
+      "direction": "left",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "van_kiem_quy_tong_character",
+        "source": "/assets/renovation-v2/overrides/van_kiem_quy_tong_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_left_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "van_kiem_quy_tong_character",
+        "source": "blob:http://127.0.0.1:5536/67b684d2-5de2-42df-8f68-70f331ade798",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_left_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": [
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 570,
+          "y": 506,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 1030,
+          "y": 506,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 680,
+          "y": 616,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 920,
+          "y": 616,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 475,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 1125,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 631,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 969,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "impact_1",
+          "x": 800,
+          "y": 760,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            1.6,
+            1.6
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 920,
+          "y": 856,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 680,
+          "y": 856,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 800,
+          "y": 905,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 1030,
+          "y": 966,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 570,
+          "y": 966,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 800,
+          "y": 1061,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        }
+      ]
+    },
+    {
+      "skill": "that_tinh_kiem",
+      "direction": "up",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "that_tinh_kiem_character",
+        "source": "/assets/renovation-v2/overrides/that_tinh_kiem_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_up_3",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "that_tinh_kiem_character",
+        "source": "blob:http://127.0.0.1:5536/a850007b-fd7a-49ff-874a-e84036e0c9a4",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_up_3",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 74,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "nhan_kiem_hop_nhat",
+      "direction": "up",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "m3d_vo_dang_kiem_character",
+        "source": "/assets/renovation-v2/overrides/m3d_vo_dang_kiem_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "nhan_kiem_launch_up_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "m3d_vo_dang_kiem_character",
+        "source": "blob:http://127.0.0.1:5536/65f39e63-6b8b-4546-a46f-583f6646e72d",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "nhan_kiem_launch_up_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "blink": {
+        "from": [
+          800,
+          760
+        ],
+        "to": [
+          800,
+          622
+        ],
+        "velocity": [
+          0,
+          -180
+        ]
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 104,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 622,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "bat_quai_kiem_tran",
+      "direction": "up",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "bat_quai_kiem_tran_character",
+        "source": "/assets/renovation-v2/overrides/bat_quai_kiem_tran_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_up_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "bat_quai_kiem_tran_character",
+        "source": "blob:http://127.0.0.1:5536/dcd15309-d7ce-453f-af97-08488b99b969",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_up_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 107,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 71,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "toa_sat_bac_do",
+      "direction": "up",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "toa_sat_bac_do_character",
+        "source": "/assets/renovation-v2/overrides/toa_sat_bac_do_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_up_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "toa_sat_bac_do_character",
+        "source": "blob:http://127.0.0.1:5536/eee37e9a-6f6c-4e29-bc60-d16b06cb5798",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_up_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 7.5,
+          "x": 800,
+          "y": 760,
+          "target": "RgHXJ_be1"
+        },
+        {
+          "kind": "pulse",
+          "damage": 7.5,
+          "x": 800,
+          "y": 760,
+          "target": "RgHXJ_be1"
+        },
+        {
+          "kind": "pulse",
+          "damage": 4.800000000000011,
+          "x": 800,
+          "y": 760,
+          "target": "RgHXJ_be1"
+        },
+        {
+          "kind": "pulse",
+          "damage": 19.80000000000001,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 19.80000000000001,
+          "x": 800,
+          "y": 734.9333333333317,
+          "target": "renovation_dummy"
+        }
+      ],
+      "fx": [
+        {
+          "texture": "toa_sat_bac_do_character",
+          "frame": "counter_up_2",
+          "x": 800,
+          "y": 760,
+          "origin": [
+            0.5,
+            0.8
+          ],
+          "scale": [
+            1,
+            1
+          ],
+          "source": "/assets/renovation-v2/overrides/toa_sat_bac_do_character.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 872,
+          "y": 748,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 862,
+          "y": 784,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 836,
+          "y": 810,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 800,
+          "y": 820,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 764,
+          "y": 810,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 738,
+          "y": 784,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 728,
+          "y": 748,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 738,
+          "y": 712,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 764,
+          "y": 686,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 800,
+          "y": 676,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 836,
+          "y": 686,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 862,
+          "y": 712,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.85,
+            0.85
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "impact_3",
+          "x": 800,
+          "y": 760,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            1.8,
+            1.8
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        }
+      ]
+    },
+    {
+      "skill": "van_kiem_quy_tong",
+      "direction": "up",
+      "body": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "van_kiem_quy_tong_character",
+        "source": "/assets/renovation-v2/overrides/van_kiem_quy_tong_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "cast_up_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_vo_dang_kiem",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "van_kiem_quy_tong_character",
+        "source": "blob:http://127.0.0.1:5536/67b684d2-5de2-42df-8f68-70f331ade798",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "cast_up_0",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": [
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 1030,
+          "y": 506,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 570,
+          "y": 506,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 920,
+          "y": 616,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 680,
+          "y": 616,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 1125,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 475,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 969,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 631,
+          "y": 736,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "impact_1",
+          "x": 800,
+          "y": 760,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            1.6,
+            1.6
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 920,
+          "y": 856,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 680,
+          "y": 856,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_0",
+          "x": 800,
+          "y": 905,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 1030,
+          "y": 966,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 570,
+          "y": 966,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        },
+        {
+          "texture": "review_sword",
+          "frame": "travel_3",
+          "x": 800,
+          "y": 1061,
+          "origin": [
+            0.5,
+            0.5
+          ],
+          "scale": [
+            0.7,
+            0.7
+          ],
+          "source": "/assets/renovation-v2/overrides/review_sword.png"
+        }
+      ]
+    },
+    {
+      "skill": "lien_hoa_phien",
+      "direction": "right",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "lien_hoa_phien_cast_right_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "lien_hoa_phien_cast_right_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "field": {
+        "anchor": [
+          800,
+          760
+        ],
+        "after": [
+          800,
+          760
+        ]
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "luc_duong_chuong",
+      "direction": "right",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "luc_duong_chuong_cast_right_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "luc_duong_chuong_cast_right_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 92,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "luu_phong_bo",
+      "direction": "right",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "luu_phong_bo_cast_right_1",
+        "x": 858,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          399,
+          480
+        ],
+        "frame": "luu_phong_bo_cast_right_1",
+        "x": 858,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 115,
+          "x": 854,
+          "y": 760,
+          "target": "renovation_dummy"
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "chiet_mai_thu",
+      "direction": "right",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "chiet_mai_thu_cast_right_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "chiet_mai_thu_cast_right_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "bach_phien_phong_bao",
+      "direction": "right",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_fan_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_fan_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "bach_phien_phong_bao_cast_right_2",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "right",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_fan_v2_character",
+        "source": "blob:http://127.0.0.1:5536/1355a36b-a76b-4055-a96b-52416e27aa26",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "bach_phien_phong_bao_cast_right_2",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 883.1491579260158,
+          "y": 794.4415089128581,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 103,
+          "x": 883.1491579260158,
+          "y": 794.4415089128581,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 883.1491579260158,
+          "y": 794.4415089128581,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 883.1491579260158,
+          "y": 794.4415089128581,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 883.1491579260158,
+          "y": 794.4415089128581,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 103,
+          "x": 883.1491579260158,
+          "y": 794.4415089128581,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 883.1491579260158,
+          "y": 794.4415089128581,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 103,
+          "x": 883.1491579260158,
+          "y": 794.4415089128581,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 883.1491579260158,
+          "y": 794.4415089128581,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 883.1491579260158,
+          "y": 794.4415089128581,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 883.1491579260158,
+          "y": 794.4415089128581,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 103,
+          "x": 883.1491579260158,
+          "y": 794.4415089128581,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "lien_hoa_phien",
+      "direction": "down",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "lien_hoa_phien_cast_down_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "lien_hoa_phien_cast_down_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "field": {
+        "anchor": [
+          800,
+          760
+        ],
+        "after": [
+          800,
+          760
+        ]
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "luc_duong_chuong",
+      "direction": "down",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "luc_duong_chuong_cast_down_3",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "luc_duong_chuong_cast_down_3",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 92,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "luu_phong_bo",
+      "direction": "down",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "luu_phong_bo_cast_down_1",
+        "x": 800,
+        "y": 835,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 835,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          630
+        ],
+        "frame": "luu_phong_bo_cast_down_1",
+        "x": 800,
+        "y": 835,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 835,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 76,
+          "x": 800,
+          "y": 814,
+          "target": "renovation_dummy"
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "chiet_mai_thu",
+      "direction": "down",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "chiet_mai_thu_cast_down_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "chiet_mai_thu_cast_down_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "bach_phien_phong_bao",
+      "direction": "down",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_fan_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_fan_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "bach_phien_phong_bao_cast_down_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "down",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_fan_v2_character",
+        "source": "blob:http://127.0.0.1:5536/1355a36b-a76b-4055-a96b-52416e27aa26",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "bach_phien_phong_bao_cast_down_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 765.5584910871419,
+          "y": 843.1491579260158,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 765.5584910871419,
+          "y": 843.1491579260158,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 765.5584910871419,
+          "y": 843.1491579260158,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 103,
+          "x": 765.5584910871419,
+          "y": 843.1491579260158,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 765.5584910871419,
+          "y": 843.1491579260158,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 765.5584910871419,
+          "y": 843.1491579260158,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 765.5584910871419,
+          "y": 843.1491579260158,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 103,
+          "x": 765.5584910871419,
+          "y": 843.1491579260158,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 765.5584910871419,
+          "y": 843.1491579260158,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 765.5584910871419,
+          "y": 843.1491579260158,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 765.5584910871419,
+          "y": 843.1491579260158,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 765.5584910871419,
+          "y": 843.1491579260158,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "lien_hoa_phien",
+      "direction": "left",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "lien_hoa_phien_cast_left_3",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "lien_hoa_phien_cast_left_3",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "field": {
+        "anchor": [
+          800,
+          760
+        ],
+        "after": [
+          800,
+          760
+        ]
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "luc_duong_chuong",
+      "direction": "left",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "luc_duong_chuong_cast_left_2",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "luc_duong_chuong_cast_left_2",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 92,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 92,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "luu_phong_bo",
+      "direction": "left",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "luu_phong_bo_cast_left_3",
+        "x": 666,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          19,
+          480
+        ],
+        "frame": "luu_phong_bo_cast_left_3",
+        "x": 668,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 76,
+          "x": 746,
+          "y": 760,
+          "target": "renovation_dummy"
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "chiet_mai_thu",
+      "direction": "left",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "chiet_mai_thu_cast_left_2",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "chiet_mai_thu_cast_left_2",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "bach_phien_phong_bao",
+      "direction": "left",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_fan_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_fan_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "bach_phien_phong_bao_cast_left_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "left",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_fan_v2_character",
+        "source": "blob:http://127.0.0.1:5536/1355a36b-a76b-4055-a96b-52416e27aa26",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "bach_phien_phong_bao_cast_left_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 716.8508420739842,
+          "y": 725.5584910871419,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 716.8508420739842,
+          "y": 725.5584910871419,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 716.8508420739842,
+          "y": 725.5584910871419,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 716.8508420739842,
+          "y": 725.5584910871419,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 716.8508420739842,
+          "y": 725.5584910871419,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 716.8508420739842,
+          "y": 725.5584910871419,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 716.8508420739842,
+          "y": 725.5584910871419,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 716.8508420739842,
+          "y": 725.5584910871419,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 716.8508420739842,
+          "y": 725.5584910871419,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 103,
+          "x": 716.8508420739842,
+          "y": 725.5584910871419,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 103,
+          "x": 716.8508420739842,
+          "y": 725.5584910871419,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 103,
+          "x": 716.8508420739842,
+          "y": 725.5584910871419,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "lien_hoa_phien",
+      "direction": "up",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "lien_hoa_phien_cast_up_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "lien_hoa_phien_cast_up_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "field": {
+        "anchor": [
+          800,
+          760
+        ],
+        "after": [
+          800,
+          760
+        ]
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "luc_duong_chuong",
+      "direction": "up",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "luc_duong_chuong_cast_up_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "luc_duong_chuong_cast_up_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 92,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 92,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 61,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "luu_phong_bo",
+      "direction": "up",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "luu_phong_bo_cast_up_1",
+        "x": 800,
+        "y": 703,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 703,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          366
+        ],
+        "frame": "luu_phong_bo_cast_up_1",
+        "x": 800,
+        "y": 703,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 703,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 76,
+          "x": 800,
+          "y": 706,
+          "target": "renovation_dummy"
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "chiet_mai_thu",
+      "direction": "up",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_wind_actions_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "chiet_mai_thu_cast_up_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_wind_actions_v2_character",
+        "source": "blob:http://127.0.0.1:5536/e5f0cac5-101e-4d8e-89af-895cf6af4885",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "chiet_mai_thu_cast_up_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    },
+    {
+      "skill": "bach_phien_phong_bao",
+      "direction": "up",
+      "body": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_fan_v2_character",
+        "source": "/assets/renovation-v2/overrides/thien_son_fan_v2_character.png",
+        "density": 2,
+        "screen": [
+          683,
+          480
+        ],
+        "frame": "bach_phien_phong_bao_cast_up_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "baseline": {
+        "id": "hero_thien_son",
+        "pose": "action",
+        "direction": "up",
+        "locomotion": false,
+        "name": "actor:RgHXJ_be1",
+        "texture": "thien_son_fan_v2_character",
+        "source": "blob:http://127.0.0.1:5536/1355a36b-a76b-4055-a96b-52416e27aa26",
+        "density": 1,
+        "screen": [
+          283,
+          480
+        ],
+        "frame": "bach_phien_phong_bao_cast_up_1",
+        "x": 800,
+        "y": 760,
+        "origin": [
+          0.5,
+          0.8
+        ],
+        "scale": [
+          1,
+          1
+        ],
+        "depth": 760,
+        "visible": true
+      },
+      "events": [
+        {
+          "kind": "cast",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 834.4415089128581,
+          "y": 676.8508420739842,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 103,
+          "x": 834.4415089128581,
+          "y": 676.8508420739842,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 834.4415089128581,
+          "y": 676.8508420739842,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 103,
+          "x": 834.4415089128581,
+          "y": 676.8508420739842,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 834.4415089128581,
+          "y": 676.8508420739842,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 834.4415089128581,
+          "y": 676.8508420739842,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 834.4415089128581,
+          "y": 676.8508420739842,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 834.4415089128581,
+          "y": 676.8508420739842,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 834.4415089128581,
+          "y": 676.8508420739842,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 103,
+          "x": 834.4415089128581,
+          "y": 676.8508420739842,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 834.4415089128581,
+          "y": 676.8508420739842,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        },
+        {
+          "kind": "hit",
+          "damage": 68,
+          "x": 834.4415089128581,
+          "y": 676.8508420739842,
+          "target": "renovation_dummy"
+        },
+        {
+          "kind": "pulse",
+          "damage": 0,
+          "x": 800,
+          "y": 760,
+          "target": ""
+        }
+      ],
+      "fx": []
+    }
+  ],
+  "navigation": [
+    {
+      "axis": "x",
+      "target": 480,
+      "actual": 501.3433333333353
+    },
+    {
+      "axis": "y",
+      "target": 604,
+      "actual": 616.6600000000007
+    },
+    {
+      "axis": "x",
+      "target": 912,
+      "actual": 918.0799999999988
+    },
+    {
+      "axis": "y",
+      "target": 176,
+      "actual": 164.60666666666611
+    },
+    {
+      "axis": "x",
+      "target": 160,
+      "actual": 148.1766666666667
+    },
+    {
+      "axis": "y",
+      "target": 320,
+      "actual": 341.1900000000001
+    }
+  ],
+  "status": "PASS"
+}

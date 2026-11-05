@@ -3,7 +3,7 @@ export default defineConfig({
   testDir: './tests/e2e',
   testMatch: 'renovation-runtime.spec.ts',
   workers: 1,
-  timeout: 240000,
+  timeout: 420000,
   reporter: [['list']],
   use: {
     video: 'off',

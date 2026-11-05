@@ -4,6 +4,7 @@ import raw from './creep-forest-map.json' with { type: 'json' };
 import forestRosterData from './forest-creep-roster.json' with { type: 'json' };
 import { mapObjects } from './arena.js';
 import { m1Config } from './m1.js';
+import { renovationCollision } from './renovation-navigation.js';
 
 const point = z.strictObject({
   x: z.number().finite(),
@@ -91,9 +92,14 @@ export const creepDungeon: CreepDungeonDefinition = creepDungeonSchema.parse({
   creepRoster: [...forestRoster],
   width: map.width * 32,
   height: map.height * 32,
-  collision: map.layers
-    .find((l) => l.name === 'collision')!
-    .objects!.map(({ x, y, width, height }) => ({ x, y, width, height })),
+  collision: renovationCollision(
+    'forest',
+    map.width * 32,
+    map.height * 32,
+    map.layers
+      .find((l) => l.name === 'collision')!
+      .objects!.map(({ x, y, width, height }) => ({ x, y, width, height })),
+  ),
   spawn: marker('hero_spawn'),
   creepSpawns: dungeonMapObjects
     .filter((o) => o.name.startsWith('creep_spawn_'))

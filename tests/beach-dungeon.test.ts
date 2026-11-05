@@ -18,14 +18,16 @@ const steps = (m: DungeonMatch, n: number) => {
   for (let i = 0; i < n; i++) m.step();
 };
 describe('Beach shared map and authoritative integration', () => {
-  it('keeps water/shore solid, bridge and dock walkable, and connects every gameplay marker', () => {
+  it('keeps the renovated outer coast solid, sparse rocks blocked and gameplay markers connected', () => {
     const free = (x: number, y: number) =>
       !blocked({ x, y }, m1Config.radius, d.width, d.height, d.collision);
-    expect(free(480, 800)).toBe(false);
+    expect(free(480, 800)).toBe(true);
     expect(free(480, 864)).toBe(true);
-    expect(free(1408, 704)).toBe(true);
+    expect(free(1328, 704)).toBe(true);
+    expect(free(1408, 704)).toBe(false);
     expect(free(1472, 800)).toBe(false);
-    expect(free(416, 352)).toBe(false);
+    expect(free(416, 352)).toBe(true);
+    expect(free(302, 359)).toBe(false);
     const queue = [d.spawn],
       seen = new Set([`${d.spawn.x},${d.spawn.y}`]);
     for (let i = 0; i < queue.length; i++) {
@@ -49,7 +51,7 @@ describe('Beach shared map and authoritative integration', () => {
       d.exit,
       ...d.creepSpawns,
       { x: 480, y: 864 },
-      { x: 1408, y: 704 },
+      { x: 1328, y: 704 },
       ...Array.from({ length: 6 }, (_, i) => ({
         x: d.spawn.x,
         y: d.spawn.y + i * 24,

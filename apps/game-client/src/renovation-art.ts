@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import raw from './renovation-art.generated.json';
+import skillOverrides from './renovation-skills.generated.json';
 
 type BodyImage = Phaser.GameObjects.Image | Phaser.GameObjects.Sprite;
 import { renovatedActors } from './renovation-model.js';
@@ -9,6 +10,10 @@ export const renovationEnabled = (scene: Phaser.Scene) =>
   scene.registry.get('renovation-enabled') === true;
 export function preloadRenovation(scene: Phaser.Scene): void {
   if (scene.sys.settings.key !== 'Arena') return;
+  scene.load.image(
+    'renovated-arena-layout',
+    '/assets/renovation-v2/arena-ground.png',
+  );
   for (const actor of renovatedActors) {
     const path = '/assets/renovation-v1/runtime/' + actor.id;
     scene.load.atlas('renovated-' + actor.id, path + '.png', path + '.json');
@@ -64,14 +69,9 @@ export function presentRenovatedBody(
         definition.pivot[0]! / definition.canvas[0]!,
         definition.pivot[1]! / definition.canvas[1]!,
       )
-      .setScale(1)
+      .setScale(0.5)
       .setFlip(false, false)
       .setRotation(0);
-  } else {
-    image.setScale(
-      image.scaleX * definition.legacyRatio,
-      image.scaleY * definition.legacyRatio,
-    );
   }
   image.setData('renovation', { id, pose, direction, locomotion });
   const seen = scene.registry.get('renovation-observed') as Map<
@@ -83,9 +83,34 @@ export function presentRenovatedBody(
   seen.set(id, frames);
 }
 export function inspectRenovation(scene: Phaser.Scene) {
+  const skillSources = scene.registry.get('renovated-skill-sources') as
+    Map<string, string> | undefined;
+  const skillKeys = new Set(skillOverrides.assets.map((a) => a.id));
   const seen = scene.registry.get('renovation-observed') as
     Map<string, Set<string>> | undefined;
   return {
+    skillEffects: scene.children.list
+      .filter((o) => {
+        const b = o as BodyImage;
+        return (
+          b.texture && skillKeys.has(b.texture.key) && b.visible && b.alpha > 0
+        );
+      })
+      .map((o) => {
+        const b = o as BodyImage;
+        return {
+          texture: b.texture.key,
+          frame: b.frame.name,
+          x: b.x,
+          y: b.y,
+          origin: [b.originX, b.originY],
+          scale: [b.scaleX, b.scaleY],
+          source:
+            skillSources?.get(b.texture.key) ??
+            (b.texture.getSourceImage() as { src?: string }).src ??
+            '',
+        };
+      }),
     enabled: renovationEnabled(scene),
     bodies: scene.children.list
       .filter((object) => object.getData('renovation'))
@@ -95,6 +120,15 @@ export function inspectRenovation(scene: Phaser.Scene) {
           ...body.getData('renovation'),
           name: body.name,
           texture: body.texture.key,
+          source:
+            skillSources?.get(body.texture.key) ??
+            (body.texture.getSourceImage() as { src?: string }).src ??
+            '',
+          density: body.texture.source[0]?.resolution,
+          screen: [
+            (body.x - scene.cameras.main.worldView.x) * scene.cameras.main.zoom,
+            (body.y - scene.cameras.main.worldView.y) * scene.cameras.main.zoom,
+          ],
           frame: body.frame.name,
           x: body.x,
           y: body.y,

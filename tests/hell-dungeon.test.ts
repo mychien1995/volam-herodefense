@@ -23,16 +23,18 @@ const steps = (m: DungeonMatch, n: number) => {
   for (let i = 0; i < n; i++) m.step();
 };
 describe('Hell shared map and authoritative integration', () => {
-  it('keeps lava impassable, the bridge route walkable, and connects every gameplay marker', () => {
+  it('keeps outer lava impassable, the renovated clearing walkable and gameplay markers connected', () => {
     const free = (x: number, y: number) =>
       !blocked({ x, y }, m1Config.radius, d.width, d.height, d.collision);
-    expect(free(704, 576)).toBe(false);
+    expect(free(704, 576)).toBe(true);
     expect(free(704, 720)).toBe(true);
-    expect(free(640, 640)).toBe(false);
+    expect(free(640, 640)).toBe(true);
+    expect(free(80, 640)).toBe(false);
+    expect(free(332, 521)).toBe(false);
     for (let x = 256; x <= 1664; x += 8)
       expect(free(x, 720), `bridge route ${x},720`).toBe(true);
     expect(free(1664, 704)).toBe(true);
-    expect(free(960, 128)).toBe(false);
+    expect(free(960, 128)).toBe(true);
     const queue = [d.spawn],
       seen = new Set([`${d.spawn.x},${d.spawn.y}`]);
     for (let i = 0; i < queue.length; i++) {

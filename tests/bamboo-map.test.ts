@@ -47,13 +47,13 @@ describe('Bamboo Forest authored map contract', () => {
         true,
       );
   });
-  it('enforces solid bamboo footprints and stream banks but allows bridge decks', () => {
+  it('removes obsolete invisible banks and retains the two sparse visible rocks', () => {
     for (const [x, y] of [
       [440, 228],
-      [840, 432],
+      [800, 432],
       [400, 576],
     ])
-      expect(free(x!, y!)).toBe(false);
+      expect(free(x!, y!)).toBe(true);
     for (const x of [224, 800]) expect(free(x, 576)).toBe(true);
     const p = { x: 440, y: 280 };
     moveCircle(
@@ -64,7 +64,9 @@ describe('Bamboo Forest authored map contract', () => {
       d.height,
       d.collision,
     );
-    expect(p.y).toBeGreaterThanOrEqual(240 + m1Config.radius);
+    expect(p.y).toBeCloseTo(180);
+    expect(free(96, 200)).toBe(false);
+    expect(free(864, 448)).toBe(false);
     expect(map.orientation).toBe('orthogonal');
     for (const name of ['ground', 'paving', 'details']) {
       const l = map.layers.find((v: { name: string }) => v.name === name);

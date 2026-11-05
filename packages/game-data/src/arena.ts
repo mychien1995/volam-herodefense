@@ -38,11 +38,13 @@ export const arena = Object.freeze({
   creepSpawns: spawns
     .filter((item) => item.name.startsWith('creep_'))
     .map(({ x, y }) => ({ x, y })),
-  collision: mapObjects('collision').map(({ x, y, width, height }) => ({
-    x,
-    y,
-    width,
-    height,
-  })),
+  // The current arena has only the statue and two decorative lamps. The
+  // invasion owns the statue pedestal; removed trees/wall cannot stay solid.
+  collision: [] as Array<{
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  }>,
   scenery: mapObjects('scenery'),
 });
