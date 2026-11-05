@@ -517,7 +517,7 @@ export class GameUI {
   }
   refresh(state: LobbyState): void {
     this.state = state;
-    if (state.phase === 'DEFEAT' && !this.ended) {
+    if (['DEFEAT', 'VICTORY'].includes(state.phase) && !this.ended) {
       this.ended = true;
       window.dispatchEvent(new Event('volam:controls-blocked'));
       this.close(false);

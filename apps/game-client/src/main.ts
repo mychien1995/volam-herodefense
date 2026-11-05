@@ -306,7 +306,7 @@ async function connect(existing: boolean): Promise<void> {
         }
         pregame.update(state, joined.roomId, joined.sessionId);
         arenaScene.setSnapshot(
-          state.phase === 'IN_GAME' || state.phase === 'DEFEAT'
+          ['IN_GAME', 'DEFEAT', 'VICTORY'].includes(state.phase)
             ? state
             : undefined,
           joined.sessionId,
@@ -389,7 +389,7 @@ async function connect(existing: boolean): Promise<void> {
     if (joined.state?.players && joined.state.phase) {
       pregame.update(joined.state, joined.roomId, joined.sessionId);
       arenaScene.setSnapshot(
-        joined.state.phase === 'IN_GAME' || joined.state.phase === 'DEFEAT'
+        ['IN_GAME', 'DEFEAT', 'VICTORY'].includes(joined.state.phase)
           ? joined.state
           : undefined,
         joined.sessionId,

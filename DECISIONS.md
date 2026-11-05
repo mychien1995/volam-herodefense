@@ -1,3 +1,7 @@
+## Vương Trùng Dương · chốt thiết kế và duyệt concept v01 — 2026-11-05
+
+Boss cuối có hai phase, Toàn Chân Kiếm Pháp và Tiên Thiên Công. Cửu Âm Hộ Thể vỡ khi boss trúng sét ba lần. Toàn Chân Phản Kiếm chém mạnh cả đội một lần nếu bất kỳ người nào trượt QTE, với mức sàn 1 HP cho người còn sống. Phase 2 bỏ kiếm, dứt sấm và duy trì Phá Thể Vô Hình Kiếm cho đến khi boss chết. Thất Tuyệt Lôi Âm dùng sáu vòng nhạc, sai chuỗi khiến cả đội thua lượt đánh boss. Director đã duyệt tạo hình hai phase và hai bảng VFX concept v01. [Thiết kế boss cuối](docs/VUONG_TRUNG_DUONG_FINAL_DESIGN.md) và [prompt sản xuất sprite, tích hợp Phaser](docs/INTEGRATE_VUONG_TRUNG_DUONG_PROMPT.md).
+
 ## Đông Tà runtime approval and milestone integration — 2026-11-03
 
 The director approves the delivered Đông Tà V04 runtime and explicitly requests integration into `milestone/m3d`. This supersedes prior worktree-only/no-merge delivery restrictions. Approval and exact reviewed runtime/evidence hashes: `docs/evidence/dong-ta-runtime/director-approval.json`. Retain the current milestone's newer school mechanics, controls, dungeon policies, Hell and merchant/inventory work. Đông Tà remains the specific wave-encounter exception: all-player recall/revival, protected statue, continued180-second invasions, unlimited wipe retries, boss-only clear and no items. Final numeric balance remains configurable trial tuning; no M4 or other chapter-boss expansion is inferred.

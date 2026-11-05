@@ -32,11 +32,19 @@ export class DefenseHud {
     document.body.classList.remove('invasion-notice');
   }
   update(state: LobbyState): void {
+    const won = state.phase === 'VICTORY';
     const d = state.defense,
       active =
-        d.enabled && (state.phase === 'IN_GAME' || state.phase === 'DEFEAT');
+        d.enabled && ['IN_GAME', 'DEFEAT', 'VICTORY'].includes(state.phase);
     this.panel.hidden = !active;
-    this.defeat.hidden = !active || !d.defeated;
+    this.defeat.hidden = !active || !(d.defeated || won);
+    this.defeat.toggleAttribute('data-victory', won);
+    this.defeat.querySelector('h2')!.textContent = won
+      ? 'Chiến Thắng'
+      : 'Thất Bại';
+    this.defeat.querySelector('p')!.textContent = won
+      ? 'Vương Trùng Dương đã bại trận. Tượng trấn phái vẫn còn.'
+      : 'Tượng trấn phái đã bị phá hủy.';
     if (!active) {
       this.warning.hidden = true;
       return;
@@ -50,7 +58,8 @@ export class DefenseHud {
       tay_doc: 'Tây Độc',
       nam_de: 'Nam Đế',
       bac_cai: 'Bắc Cái',
-      complete: 'Đã xong 4 boss',
+      vuong_trung_duong: 'Vương Trùng Dương',
+      complete: 'Đã xong chuỗi boss',
     };
     const bossName = boss
       ? (testBossNames[boss.bossId] ?? 'Boss wave')
@@ -80,13 +89,19 @@ export class DefenseHud {
       0,
       Math.ceil((d.nextWaveTick - state.tick) / m1Config.tickRate),
     );
-    this.panel.querySelector('#invasion-countdown')!.textContent = d.defeated
-      ? 'Trận đấu kết thúc'
-      : d.paused
-        ? `Đợt ${d.wave} · Tạm dừng — toàn đội đang trong phó bản boss`
-        : `Đợt ${d.wave} · Đợt ${d.wave + 1} sau ${Math.floor(seconds / 60)
-            .toString()
-            .padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`;
+    this.panel.querySelector('#invasion-countdown')!.textContent =
+      d.defeated || won
+        ? 'Trận đấu kết thúc'
+        : d.wave >= 20
+          ? 'Đợt 20 · Đã hết đợt xâm lăng'
+          : d.paused
+            ? `Đợt ${d.wave} · Tạm dừng — toàn đội đang trong phó bản boss`
+            : `Đợt ${d.wave} · Đợt ${d.wave + 1} sau ${Math.floor(seconds / 60)
+                .toString()
+                .padStart(
+                  2,
+                  '0',
+                )}:${(seconds % 60).toString().padStart(2, '0')}`;
     const nextName = invasionCreepName(d.wave + 1);
     const roster = this.panel.querySelector<HTMLElement>(
       '#next-invasion-creep',
@@ -98,14 +113,15 @@ export class DefenseHud {
         'DEV · ' + (testBossNames[d.devWaveBossStage] ?? 'Boss wave');
       this.panel.querySelector('#invasion-countdown')!.textContent = d.paused
         ? 'Tạm dừng — toàn đội đang trong phó bản boss'
-        : 'Đông Tà → Tây Độc → Nam Đế → Bắc Cái';
+        : 'Đông Tà → Tây Độc → Nam Đế → Bắc Cái' +
+          (d.devFinalBoss ? ' → Vương Trùng Dương' : '');
       roster.hidden = false;
       roster.textContent = 'Bất tử · Chạy ×3 · Mỗi hit boss −5% HP';
     }
     const noticeName = invasionCreepName(d.noticeWave);
     const rosterNotice = noticeName ? ` · ${noticeName}` : '';
     const showNotice =
-      !d.defeated && d.noticeId > 0 && state.tick < d.noticeUntilTick;
+      !d.defeated && !won && d.noticeId > 0 && state.tick < d.noticeUntilTick;
     this.warning.hidden = !showNotice;
     document.body.classList.toggle('invasion-notice', showNotice);
     if (showNotice)
@@ -114,10 +130,10 @@ export class DefenseHud {
           ? `Đợt ${d.noticeWave} đã đến từ hai hướng Tây và Đông!${rosterNotice}`
           : `Đợt ${d.noticeWave} sẽ đến sau ${d.noticeLeadTicks / m1Config.tickRate} giây!${rosterNotice}`;
     this.warning.dataset['noticeId'] = String(d.noticeId);
-    if (d.defeated && !this.wasDefeated)
+    if ((d.defeated || won) && !this.wasDefeated)
       this.defeat
         .querySelector<HTMLButtonElement>('button')!
         .focus({ preventScroll: true });
-    this.wasDefeated = d.defeated;
+    this.wasDefeated = d.defeated || won;
   }
 }

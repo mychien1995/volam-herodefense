@@ -1,7 +1,7 @@
 import type { InvasionDirector } from './invasions.js';
 import type { World } from './types.js';
 export type WaveBossTestStage =
-  'dong_ta' | 'tay_doc' | 'nam_de' | 'bac_cai' | 'complete';
+  'dong_ta' | 'tay_doc' | 'nam_de' | 'bac_cai' | 'vuong_trung_duong' | 'complete';
 export interface WaveBossTestOptions {
   readonly bossHitFraction: number;
   readonly runSpeedMultiplier: number;
@@ -35,6 +35,7 @@ export function stepWaveBossTest(
     tayDoc: boolean;
     namDe: boolean;
     bacCai: boolean;
+    final?: boolean;
   },
 ): void {
   const test = w.waveBossTest;
@@ -47,12 +48,13 @@ export function stepWaveBossTest(
         ? 'nam_de'
         : !completed.bacCai
           ? 'bac_cai'
-          : 'complete';
+          : completed.final === false ? 'vuong_trung_duong' : 'complete';
   invasion.wave = {
     dong_ta: 5,
     tay_doc: 10,
     nam_de: 15,
     bac_cai: 20,
+    vuong_trung_duong: 20,
     complete: 20,
   }[test.stage];
   invasion.events = [];
@@ -64,4 +66,5 @@ export const waveBossTestArchetypes = new Set([
   'tay_doc',
   'nam_de',
   'bac_cai',
+  'vuong_trung_duong',
 ]);

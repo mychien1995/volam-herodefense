@@ -33,6 +33,7 @@ export function dash(world: World, hero: Hero, config: SimulationConfig): void {
     world.chu?.phase === 'reflect' ||
     !hero.dashCharges ||
     hasStatus(hero, 'dash_lock', world.tick) ||
+    hasStatus(hero, 'root', world.tick) ||
     hasStatus(hero, 'stun', world.tick) ||
     (world.actions ?? []).some((a) => a.ownerId === hero.id)
   )

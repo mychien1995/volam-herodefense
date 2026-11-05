@@ -11,6 +11,7 @@ import { revisedBasicBody, isRevisedHero } from './character-revision.js';
 import { NamDePresentation } from './nam-de-presentation.js';
 import { KimLuanRenderer, isKimActor } from './kim-luan-art.js';
 import { DongTaRenderer, isDongArtActor } from './dong-ta-art.js';
+import { VuongArt } from './vuong-art.js';
 import { BacCaiRenderer } from './bac-cai-art.js';
 import { ChuPresentation } from './chu-presentation.js';
 import { HongLietRenderer, isHongLietActor } from './hong-liet-art.js';
@@ -82,6 +83,7 @@ export class ArenaScene extends Phaser.Scene {
   private waveArena: WaveArenaPresentation | undefined;
   private bossShouts: BossSkillAnnouncements | undefined;
   private tayDoc: TayDocRenderer | undefined;
+  private vuong: VuongArt | undefined;
   private bacCai: BacCaiRenderer | undefined;
   private hongLiet: HongLietRenderer | undefined;
   private coMoEffects: CoMoEffects | undefined;
@@ -135,6 +137,8 @@ export class ArenaScene extends Phaser.Scene {
     this.kim = new KimLuanRenderer(this);
     this.dong = new DongTaRenderer(this);
     this.bacCai = new BacCaiRenderer(this);
+    this.vuong = new VuongArt(this, () => applyArenaPalette(this, this.polished));
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.vuong?.clear());
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.bacCai?.clear());
     this.events.once(Phaser.Scenes.Events.DESTROY, () => this.bacCai?.clear());
     this.coMoEffects = new CoMoEffects(this);
@@ -205,6 +209,7 @@ export class ArenaScene extends Phaser.Scene {
   }
   private drawZone(zoneId: string): void {
     this.bacCai?.clear();
+    this.vuong?.clear();
     this.waveArena?.clear();
     this.hongLiet?.clear();
     this.tayDoc?.clear();
@@ -567,6 +572,7 @@ export class ArenaScene extends Phaser.Scene {
     this.kim?.sync(state, this.zoneId);
     this.dong?.sync(state, this.zoneId);
     this.bacCai?.sync(state, this.zoneId);
+    this.vuong?.sync(state, this.zoneId);
     this.waveArena?.sync(state, this.zoneId);
     this.bossShouts?.sync(state, this.zoneId);
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
@@ -784,6 +790,7 @@ export class ArenaScene extends Phaser.Scene {
       kim: this.kim?.inspect(),
       dong: this.dong?.inspect(),
       bacCai: this.bacCai?.inspect(),
+      vuong: this.vuong?.inspect(),
       kimFrame: this.kim?.reviewState(),
       damage: this.damage?.inspect(),
       skills: this.vfx?.inspect(),

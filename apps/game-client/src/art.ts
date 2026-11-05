@@ -88,6 +88,7 @@ export { facing } from './facing.js';
 export function preloadArt(scene: Phaser.Scene): void {
   preloadWaveBossFeedback(scene);
   preloadBacCaiArt(scene);
+  preloadVuongArt(scene);
   preloadChu(scene);
   preloadNamDe(scene);
   preloadHongLietArt(scene);
@@ -330,4 +331,5 @@ export function registerArt(scene: Phaser.Scene): void {
     repeat: 0,
   });
 }
+import { preloadVuongArt } from './vuong-art.js';
 import { preloadBacCaiArt } from './bac-cai-art.js';

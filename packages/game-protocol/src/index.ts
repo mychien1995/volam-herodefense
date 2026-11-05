@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 29;
+export const PROTOCOL_VERSION = 30;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -44,7 +44,7 @@ export const inputSchema = z.discriminatedUnion('kind', [
     kind: z.literal('nam-de-key'),
     castId: z
       .string()
-      .regex(/^nam_de_[0-9]+$/)
+      .regex(/^(nam_de_|vtd:)[0-9]+$/)
       .max(64),
     index: z.number().int().min(0).max(9),
     key: z.enum(['up', 'right', 'down', 'left']),
@@ -467,6 +467,7 @@ export type DungeonState = SchemaType<typeof DungeonState>;
 export const DefenseState = schema(
   {
     devWaveBosses: t.boolean().default(false),
+    devFinalBoss: t.boolean().default(false),
     devWaveBossStage: t.string().default(''),
     dongTa: t.string().default(''),
     waveArena: t.string().default(''),
@@ -504,6 +505,10 @@ export const BacCaiState = schema(
   { snapshot: t.string().default('') },
   'BacCaiArenaEncounter',
 );
+export const VuongState = schema(
+  { snapshot: t.string().default('') },
+  'VuongArenaEncounter',
+);
 export const LobbyState = schema(
   {
     protocolVersion: t.number().default(PROTOCOL_VERSION),
@@ -523,6 +528,7 @@ export const LobbyState = schema(
     defense: t.ref(DefenseState).default(() => new DefenseState()),
     tayDoc: t.map(TayDocState).view(),
     bacCai: t.map(BacCaiState).view(),
+    vuong: t.map(VuongState).view(),
   },
   'ArenaState',
 );

@@ -47,7 +47,11 @@ export class NamDeHud {
         this.pending = { id: q.id, index: q.index };
         window.dispatchEvent(new Event('volam:controls-blocked'));
       } else this.pending.index = Math.max(this.pending.index, q.index);
-      this.dialog.innerHTML = `<strong>Đại Lý Phong Huyệt</strong><p>Gõ phím mũi tên vật lý · ${Math.max(0, (q.until - state!.tick) / 30).toFixed(1)}s</p><div>${q.keys.map((key, i) => `<span class="${i < q.index ? 'done' : i === q.index ? 'next' : ''}">${symbols[key]}</span>`).join('')}</div><small>Sai: phản phệ 70% máu tối đa · choáng 2s</small>`;
+      const final = q.id.startsWith('vtd:');
+      const name = final ? 'Toàn Chân Phản Kiếm' : 'Đại Lý Phong Huyệt';
+      const penalty = final ? 'Một người sai · Cả đội chịu một nhát chém, còn ít nhất 1 HP' : 'Sai: phản phệ 70% máu tối đa · choáng 2s';
+      this.dialog.setAttribute('aria-label', name);
+      this.dialog.innerHTML = `<strong>${name}</strong><p>Gõ phím mũi tên vật lý · ${Math.max(0, (q.until - state!.tick) / 30).toFixed(1)}s</p><div>${q.keys.map((key, i) => `<span class="${i < q.index ? 'done' : i === q.index ? 'next' : ''}">${symbols[key]}</span>`).join('')}</div><small>${penalty}</small>`;
     } else this.pending = undefined;
     this.dialog.hidden = !open;
   }

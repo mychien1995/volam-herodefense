@@ -62,3 +62,4 @@ export * from './bac-cai.js';
 export { bossSkillNames } from './boss-skill-names.js';
 
 export * from './boss-banter.js';
+export * from './vuong-trung-duong.js';

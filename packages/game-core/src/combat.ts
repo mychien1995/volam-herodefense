@@ -283,6 +283,8 @@ export function hurt(
     damage = target.maxHp * world.waveBossTest.bossHitFraction;
     critical = false;
   }
+  if (enemy && world.vuong?.bossId === enemy.id)
+    damage = world.vuong.limitIncoming(enemy, damage);
   target.hp = Math.max(0, target.hp - damage);
   // Fractional five-percent hits must not leave a floating-point sliver after hit20.
   if (testBossHit && target.hp <= Number.EPSILON * target.maxHp * 32)

@@ -7,6 +7,17 @@ import { kimLuanDefinition } from './kim-luan.js';
 
 /** Exact localized names; ASCII cast IDs remain unchanged. */
 export const bossSkillNames: Record<string, string> = {
+  vtd_nhat_khi_hoa_tam_thanh: 'Nhất Khí Hóa Tam Thanh',
+  vtd_cuu_am_ho_the: 'Cửu Âm Hộ Thể',
+  vtd_toan_chan_phan_kiem: 'Toàn Chân Phản Kiếm',
+  vtd_ngu_hanh_kiem_tran: 'Ngũ Hành Kiếm Trận',
+  vtd_bac_dau_kiem_tran: 'Bắc Đẩu Kiếm Trận',
+  vtd_tam_thanh_pha_tran: 'Tam Thanh Phá Trận',
+  vtd_tien_thien_chan_mach: 'Tiên Thiên Chấn Mạch',
+  vtd_huyen_vu_kiem_tran: 'Huyền Vũ Kiếm Trận',
+  vtd_nhat_duong_chi: 'Nhất Dương Chỉ',
+  vtd_pha_the_vo_hinh_kiem: 'Phá Thể Vô Hình Kiếm',
+  vtd_that_tuyet_loi_am: 'Thất Tuyệt Lôi Âm',
   ...Object.fromEntries(
     Object.entries(dongTaDefinition.abilities).map(([id, p]) => [id, p.nameVi]),
   ),

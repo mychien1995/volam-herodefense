@@ -5,7 +5,7 @@ import { arena } from '@volam/game-data';
 export function createArenaArt(
   scene: Phaser.Scene,
 ): Phaser.GameObjects.Image[] {
-  scene.add.image(0, 0, 'arena_ground_art01').setOrigin(0).setDepth(-10000);
+  scene.add.image(0, 0, 'arena_ground_art01').setOrigin(0).setDepth(-10000).setName('arena:ground');
   const prop = (id: string, x: number, y: number) =>
     scene.add
       .image(x, y, 'arena_world_art01', id)

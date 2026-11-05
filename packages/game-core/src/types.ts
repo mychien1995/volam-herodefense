@@ -98,6 +98,7 @@ export type StatusKind =
   | 'interrupt_resist'
   | 'support_aura'
   | 'stun'
+  | 'root'
   | 'silence'
   | 'disarm'
   | 'defense_break'
@@ -493,6 +494,7 @@ export interface World {
   waveBossTest?: WaveBossTestRuntime;
   namDe?: NamDeRuntime;
   bacCai?: Pick<BacCaiEncounter, keyof BacCaiEncounter>;
+  vuong?: Pick<VuongEncounter, keyof VuongEncounter>;
   kim?: { rewards: KimLootContext };
   chu?: ChuEncounter;
   boss?: BossRuntime;
@@ -538,3 +540,4 @@ export interface World {
   actions?: SkillAction[];
   areas?: CombatArea[];
 }
+import type { VuongEncounter } from './vuong-trung-duong.js';

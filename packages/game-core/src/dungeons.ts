@@ -15,6 +15,7 @@ import type { NamDeDefinition } from './nam-de-types.js';
 import { KimLuanEncounter } from './kim-luan.js';
 import { DongTaEncounter } from './dong-ta.js';
 import { BacCaiEncounter } from './bac-cai.js';
+import { VuongEncounter, validateVuong, VUONG_ID, type VuongDefinition } from './vuong-trung-duong.js';
 import type { WaveArenaView, WaveArenaBoss } from './wave-arena-types.js';
 import { NAM_DE_ID } from './nam-de-types.js';
 import type { DongDefinition } from './dong-ta-types.js';
@@ -123,6 +124,7 @@ export class DungeonMatch {
   readonly mainBosses: MainBossDirector | undefined;
   waveArena: WaveArenaView | undefined;
   private readonly waveField: SimulationConfig['waveArena'];
+  victory = false;
   get waveBossLocked(): boolean {
     return !!this.dongTa?.locked || !!this.waveArena?.locked;
   }
@@ -166,6 +168,7 @@ export class DungeonMatch {
   get arenaPaused(): boolean {
     if (
       this.waveArena ||
+      (this.mainBosses?.final && this.mainBosses.defeatedBosses.length >= 4) ||
       (this.tayDoc && !['waiting', 'dead'].includes(this.tayDoc.phase)) ||
       (this.arena.world.namDe &&
         !['waiting', 'defeated'].includes(this.arena.world.namDe.phase)) ||
@@ -227,6 +230,7 @@ export class DungeonMatch {
     namDe?: NamDeDefinition,
     bacCai?: BacCaiDefinition,
     waveBossTest?: WaveBossTestOptions,
+    vuong?: VuongDefinition,
   ) {
     this.waveField = dongTa ?? base.waveArena;
     if (waveBossTest) {
@@ -242,6 +246,7 @@ export class DungeonMatch {
         ...bacCai,
         restMs: (waveBossTest.restTicks * 1000) / base.tickRate,
       };
+      if (vuong) vuong = { ...vuong, restMs: waveBossTest.restTicks * 1000 / base.tickRate };
     }
     for (const definition of [dungeon, ...additionalDungeons]) {
       if (this.definitions.has(definition.id))
@@ -268,7 +273,8 @@ export class DungeonMatch {
     if (tayDoc) this.tayDoc = new TayDocEncounter(tayDoc);
     if (bacCai) {
       validateBacCai(bacCai, base);
-      this.mainBosses = new MainBossDirector(bacCai);
+      if (vuong) validateVuong(vuong, base);
+      this.mainBosses = new MainBossDirector(bacCai, vuong);
     }
     if (invasion) {
       this.arena.config = {
@@ -558,6 +564,10 @@ export class DungeonMatch {
     return changeBuild(zone.world, hero, zone.config, revision, change);
   }
   step(nowMs = ((this.tick + 1) * 1000) / this.base.tickRate): void {
+    if (this.victory) {
+      this.events = [];
+      return;
+    }
     if (this.invasion?.defeated) {
       this.events = [];
       this.invasion.events = [];
@@ -574,7 +584,9 @@ export class DungeonMatch {
         dongTa: this.dongTa?.phase === 'cleared',
         tayDoc: this.tayDoc?.phase === 'dead',
         namDe: this.arena.world.namDe?.phase === 'defeated',
-        bacCai: this.arena.world.bacCai?.phase === 'defeated',
+        bacCai: this.arena.world.bacCai?.phase === 'defeated' ||
+          !!this.mainBosses?.defeatedBosses.includes('bac_cai'),
+        ...(this.mainBosses?.final ? { final: this.victory } : {}),
       });
     }
     if (!paused && !this.arena.world.waveBossTest)
@@ -721,11 +733,22 @@ export class DungeonMatch {
           this.mainBosses?.recordDefeat('nam_de');
         this.mainBosses?.step(zone.world, zone.config, this.invasion);
         this.syncWaveArena();
+        if (zone.world.vuong?.state === 'defeated') {
+          this.victory = true;
+          if (zone.world.waveBossTest) zone.world.waveBossTest.stage = 'complete';
+          for (const active of this.zones.values()) {
+            active.world.projectiles.clear();
+            active.world.pending = [];
+            for (const id of active.world.heroes.keys()) cancelOwnedEffects(active.world, id);
+          }
+          return;
+        }
         if (this.invasion?.defeated) {
           this.tayDoc?.dispose(this.arena.world);
           for (const active of this.zones.values()) {
             clearNamDe(active.world);
             active.world.bacCai?.clear(active.world);
+            active.world.vuong?.clear(active.world);
             active.kim?.clear(active.world);
             for (const id of active.world.heroes.keys())
               cancelOwnedEffects(active.world, id);
@@ -842,6 +865,7 @@ export class DungeonMatch {
       creep.archetypeId = roster[(zone.wave - 1) % roster.length]!;
   }
   private waveActorId(id: WaveArenaBoss): string {
+    if (id === VUONG_ID) return VUONG_ID;
     return id === 'nam_de'
       ? NAM_DE_ID
       : id === 'tay_doc'
@@ -880,7 +904,7 @@ export class DungeonMatch {
             ? 'nam_de'
             : w.bacCai && !['cleared', 'defeated'].includes(w.bacCai.phase)
               ? 'bac_cai'
-              : undefined;
+              : w.vuong?.state === 'fighting' ? VUONG_ID : undefined;
       if (!id) return;
       this.waveArena = {
         bossId: id,
@@ -895,6 +919,7 @@ export class DungeonMatch {
       };
       this.lockWaveArena(true);
       this.recallWaveParty();
+      if (id === VUONG_ID) w.vuong!.scaleParty(w);
       if (id === 'bac_cai') {
         const b = w.creeps.get(w.bacCai!.bossId)!;
         const d = w.bacCai!.definition;
@@ -912,7 +937,9 @@ export class DungeonMatch {
         ? this.tayDoc!.phase === 'dead'
         : a.bossId === 'nam_de'
           ? w.namDe!.phase === 'defeated'
-          : w.bacCai!.phase === 'defeated';
+          : a.bossId === VUONG_ID
+            ? w.vuong!.state === 'defeated'
+            : w.bacCai!.phase === 'defeated';
     if (defeated || (b && b.hp <= 0)) {
       this.waveArena = undefined;
       this.lockWaveArena(false);
@@ -923,7 +950,7 @@ export class DungeonMatch {
         ? this.tayDoc!.phase === 'enter'
         : a.bossId === 'nam_de'
           ? w.namDe!.phase === 'enter'
-          : w.bacCai!.phase === 'entering';
+          : a.bossId !== VUONG_ID && w.bacCai!.phase === 'entering';
     if (b) {
       b.invulnerable = entering;
       if (!entering) {
@@ -931,18 +958,25 @@ export class DungeonMatch {
         clampEllipse(b, a.bounds, b.stats?.radius ?? 20);
       }
     }
-    if (w.heroes.size && [...w.heroes.values()].every((h) => h.hp <= 0)) {
+    const notesWipe = a.bossId === VUONG_ID && w.vuong!.wipeRequested;
+    if (notesWipe || (w.heroes.size && [...w.heroes.values()].every((h) => h.hp <= 0))) {
       if (a.bossId === 'tay_doc') this.tayDoc!.reset(w);
       else if (a.bossId === 'nam_de') {
         const d = w.namDe!.definition;
         clearNamDe(w);
         w.creeps.delete(NAM_DE_ID);
         initializeNamDe(w, this.arena.config, d);
+      } else if (a.bossId === VUONG_ID) {
+        w.vuong!.clear(w);
       } else {
         w.bacCai!.clear(w);
         w.creeps.delete(w.bacCai!.bossId);
       }
       for (const h of w.heroes.values()) {
+        if (notesWipe) {
+          h.hp = 0;
+          h.pose = 'death';
+        }
         cancelOwnedEffects(w, h.id);
         h.moveX = h.moveY = 0;
         this.respawns.delete(h.id);
@@ -973,6 +1007,9 @@ export class DungeonMatch {
       spawnNamDeIfReady(w, this.arena.config, w.tick);
       w.namDe!.phase = 'idle';
       w.namDe!.nextActionAt = w.tick + this.waveField!.openingTicks;
+    } else if (a.bossId === VUONG_ID) {
+      const e = new VuongEncounter(w.vuong!.definition);
+      e.initialize(w, this.arena.config);
     } else {
       const e = new BacCaiEncounter(w.bacCai!.definition);
       delete w.bacCai;
