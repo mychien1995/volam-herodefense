@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { presentRenovatedBody } from './renovation-art.js';
 import type { LobbyState } from '@volam/game-protocol';
 import { vuongElements, vuongNotes, type VuongView } from '@volam/game-core';
 import { WaveBossHealth } from './wave-boss-feedback-art.js';
@@ -130,7 +131,7 @@ export class VuongArt {
         0,
         Math.min(3, Math.floor((1 - (end - now) / duration) * 4)),
       );
-      this.sprite(
+      const retainedBody = this.sprite(
         'actor',
         body,
         (dead ? 'defeat_' : 'transition_') + index,
@@ -141,6 +142,14 @@ export class VuongArt {
         ?.setOrigin(0.5, 90 / 112)
         .setFlipX(v.fx < 0)
         .setScale(1);
+      presentRenovatedBody(
+        this.scene,
+        retainedBody,
+        'vuong_trung_duong_p' + phase,
+        'action',
+        v.fx,
+        v.fy,
+      );
       return;
     } else if (v.pose === 'hurt') pose = 'hurt';
     else if (a?.skill === 'counter' && v.qteOutcome !== 'failed')
@@ -167,10 +176,18 @@ export class VuongArt {
     const frame = candidates.find((name) =>
       this.scene.textures.get(body).has(name),
     )!;
-    this.sprite('actor', body, frame, v.x, v.y, v.y)
+    const renovatedBody = this.sprite('actor', body, frame, v.x, v.y, v.y)
       ?.setOrigin(0.5, 90 / 112)
       .setFlipX(side && v.fx < 0)
       .setScale(1);
+    presentRenovatedBody(
+      this.scene,
+      renovatedBody,
+      'vuong_trung_duong_p' + phase,
+      pose === 'idle' ? 'idle' : pose.startsWith('walk_') ? 'walk' : 'action',
+      v.fx,
+      v.fy,
+    );
   }
   private cue(v: VuongView, e: VuongView['cues'][number], now: number) {
     const id = String(e.id);

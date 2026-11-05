@@ -40,7 +40,14 @@ import {
 } from './forest-creeps.js';
 import type { LobbyState } from '@volam/game-protocol';
 import type { CombatEvent } from '@volam/game-core';
-import { createArenaArt } from './arena-art01.js';
+import { createRenovationWorld } from './renovation-world.js';
+import {
+  registerRenovation,
+  presentRenovatedBody,
+  renovationActorId,
+  renovationHeight,
+  inspectRenovation,
+} from './renovation-art.js';
 import {
   arenaCreepArt,
   CreepPlayback,
@@ -50,7 +57,6 @@ import {
 import { FloatingDamage } from './floating-damage.js';
 import { SkillVfx } from './skill-vfx.js';
 import { ArenaCreepEffects } from './arena-creep-effects.js';
-import { createCreepDungeonArt } from './dungeon-presentation.js';
 import {
   actorFootPivot,
   creepPlaceholderTexture,
@@ -125,6 +131,7 @@ export class ArenaScene extends Phaser.Scene {
   }
   create(): void {
     registerArt(this);
+    registerRenovation(this);
     this.chu = new ChuPresentation(this);
     this.namDe = new NamDePresentation(this);
     this.waveArena = new WaveArenaPresentation(this);
@@ -137,7 +144,9 @@ export class ArenaScene extends Phaser.Scene {
     this.kim = new KimLuanRenderer(this);
     this.dong = new DongTaRenderer(this);
     this.bacCai = new BacCaiRenderer(this);
-    this.vuong = new VuongArt(this, () => applyArenaPalette(this, this.polished));
+    this.vuong = new VuongArt(this, () =>
+      applyArenaPalette(this, this.polished),
+    );
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.vuong?.clear());
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.bacCai?.clear());
     this.events.once(Phaser.Scenes.Events.DESTROY, () => this.bacCai?.clear());
@@ -182,7 +191,7 @@ export class ArenaScene extends Phaser.Scene {
       .setBounds(0, 0, arena.width, arena.height)
       .setZoom(1)
       .setRotation(0);
-    this.cameras.main.roundPixels = true;
+    this.cameras.main.roundPixels = false;
     this.cameras.main.centerOn(arena.spawn.x, arena.spawn.y);
     this.ready = true;
     createRuntimeArtReview(this);
@@ -235,14 +244,14 @@ export class ArenaScene extends Phaser.Scene {
     this.followed = '';
     this.zoneId = zoneId;
     if (zoneId === 'arena') {
-      this.trees = createArenaArt(this);
+      this.trees = createRenovationWorld(this, zoneId);
       applyArenaPalette(this, this.polished);
       this.cameras.main
         .setBounds(0, 0, arena.width, arena.height)
         .centerOn(arena.spawn.x, arena.spawn.y);
     } else {
       const dungeon = dungeonForZone(zoneId);
-      this.trees = createCreepDungeonArt(this, dungeon.id);
+      this.trees = createRenovationWorld(this, zoneId);
       this.cameras.main
         .setBounds(0, 0, dungeon.width, dungeon.height)
         .centerOn(dungeon.spawn.x, dungeon.spawn.y);
@@ -265,7 +274,8 @@ export class ArenaScene extends Phaser.Scene {
         texture,
         texture.startsWith('desert_') ? 'idle_down_0.png' : 'idle_down_0',
       )
-      .setOrigin(...actorFootPivot(this, texture));
+      .setOrigin(...actorFootPivot(this, texture))
+      .setName('actor:' + id);
     const label = this.add
       .text(x, y + 5, '', {
         fontFamily: 'monospace',
@@ -474,7 +484,8 @@ export class ArenaScene extends Phaser.Scene {
             : pose.state,
           pose.direction,
         );
-      if (!enemy) view.sprite.setScale(cast?.scale ?? 1).setAlpha(blinkAlpha);
+      view.sprite.setScale(cast?.scale ?? 1);
+      if (!enemy) view.sprite.setAlpha(blinkAlpha);
       if (art) {
         const alpha = view.playback.alpha(this.time.now, art.wave === 10);
         view.sprite.setAlpha(alpha);
@@ -489,6 +500,17 @@ export class ArenaScene extends Phaser.Scene {
         view.sprite.play({ key, startFrame: cast?.startFrame ?? 0 });
       view.sprite.anims.timeScale = cast?.timeScale ?? 1;
       view.sprite.setData('feedbackToken', cast?.token ?? '');
+      const renovatedId = enemy
+        ? renovationActorId(actor.archetypeId, actor.invasionWave, this.zoneId)
+        : heroTexture(actor.basicId, actor.schoolId);
+      presentRenovatedBody(
+        this,
+        view.sprite,
+        renovatedId,
+        actor.hp <= 0 ? 'death' : !enemy && cast ? 'action' : pose.state,
+        actor.fx,
+        actor.fy,
+      );
       if (cast)
         this.vfx?.observeCharacter(texture, String(view.sprite.frame.name));
       const states = JSON.parse(actor.statuses ?? '[]') as Array<{
@@ -513,7 +535,11 @@ export class ArenaScene extends Phaser.Scene {
           Math.max(18, Math.round(art.bodyHeight * 0.6)),
           8,
         );
-      const barOffset = art ? art.bodyHeight + 5 : enemy ? 43 : 48;
+      const barOffset =
+        renovationHeight(
+          renovatedId ?? '',
+          art?.bodyHeight ?? (enemy ? 43 : 48),
+        ) + 5;
       view.bar.clear().setDepth(view.sprite.y + 0.1);
       view.bar
         .fillStyle(0x293c37)
@@ -756,6 +782,7 @@ export class ArenaScene extends Phaser.Scene {
     const origin = this.cameras.main.getWorldPoint(0, 0);
     const unit = this.cameras.main.getWorldPoint(1, 0);
     return {
+      renovation: inspectRenovation(this),
       namDe: this.namDe?.inspect(),
       bossShouts: this.bossShouts?.inspect(),
       waveArena: this.waveArena?.inspect(),

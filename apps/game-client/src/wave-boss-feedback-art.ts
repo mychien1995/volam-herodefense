@@ -1,4 +1,9 @@
 import Phaser from 'phaser';
+import {
+  renovationEnabled,
+  renovationHeight,
+  presentRenovatedBody,
+} from './renovation-art.js';
 import type { LobbyState } from '@volam/game-protocol';
 import type { WaveArenaView } from '@volam/game-core';
 import raw from './wave-boss-feedback-art.generated.json';
@@ -107,6 +112,8 @@ export class WaveBossFeedbackArt {
       .setDepth(o.depth ?? y + 0.2);
     this.used.add(id);
     this.observed.add(asset + ':' + frame);
+    if (asset === 'bc_boss')
+      presentRenovatedBody(this.scene, s, 'bac_cai', 'action');
     return s;
   }
   ring(id: string, x: number, y: number, age: number) {
@@ -238,6 +245,14 @@ export class WaveBossHealth {
     maxHp: number,
     width = 96,
   ) {
+    if (renovationEnabled(this.scene))
+      y -= Math.max(
+        0,
+        renovationHeight(
+          id === 'vuong_trung_duong' ? 'vuong_trung_duong_p1' : id,
+          60,
+        ) - 60,
+      );
     let v = this.views.get(id);
     if (!v) {
       v = {

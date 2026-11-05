@@ -3,6 +3,7 @@ import {
   WaveBossFeedbackArt,
 } from './wave-boss-feedback-art.js';
 import Phaser from 'phaser';
+import { presentRenovatedBody } from './renovation-art.js';
 import type { LobbyState } from '@volam/game-protocol';
 import type { BacCaiView } from '@volam/game-core';
 const ids = [
@@ -122,6 +123,23 @@ export class BacCaiRenderer {
     const observed = this.observed.get(asset + ':' + tag) ?? new Set<string>();
     observed.add(frame);
     this.observed.set(asset + ':' + tag, observed);
+    if (key === 'boss' || asset === 'boss_bac_cai') {
+      const direction = tag.match(/_(down|up|left|right)$/)?.[1] ?? 'down';
+      const vector = {
+        down: [0, 1],
+        up: [0, -1],
+        left: [-1, 0],
+        right: [1, 0],
+      }[direction]!;
+      presentRenovatedBody(
+        this.scene,
+        v,
+        'bac_cai',
+        /^(idle|walk)_/.test(tag) ? tag.split('_')[0]! : 'action',
+        vector[0],
+        vector[1],
+      );
+    }
     return v;
   }
   private text(
@@ -328,7 +346,7 @@ export class BacCaiRenderer {
               : dog.pose === 'hurt'
                 ? 'hurt'
                 : 'idle') + '_right';
-      this.cel(
+      const dogBody = this.cel(
         dog.id,
         'bac_cai_black_dog',
         tag,
@@ -337,6 +355,26 @@ export class BacCaiRenderer {
         (dog.age * 1000) / v.tickRate,
         { flip: dog.fx < 0, loop: dog.hp > 0 },
       );
+      const previousDog = dogBody.getData('renovation-dog-position') as
+        { x: number; y: number; fx: number; fy: number } | undefined;
+      const dx = dog.x - (previousDog?.x ?? dog.x),
+        dy = dog.y - (previousDog?.y ?? dog.y);
+      const vector =
+        dx || dy ? { fx: dx, fy: dy } : (previousDog ?? { fx: dog.fx, fy: 0 });
+      presentRenovatedBody(
+        this.scene,
+        dogBody,
+        'bac_cai_black_dog',
+        dog.hp <= 0 ? 'death' : dog.pose,
+        vector.fx,
+        vector.fy,
+      );
+      dogBody.setData('renovation-dog-position', {
+        x: dog.x,
+        y: dog.y,
+        fx: vector.fx,
+        fy: vector.fy,
+      });
       if (dog.hp > 0 && dog.hp < dog.maxHp)
         this.text(
           'hp_' + dog.id,

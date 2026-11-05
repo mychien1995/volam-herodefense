@@ -1,5 +1,10 @@
 import { WaveBossFeedbackArt } from './wave-boss-feedback-art.js';
 import Phaser from 'phaser';
+import {
+  presentRenovatedBody,
+  renovationEnabled,
+  renovationHeight,
+} from './renovation-art.js';
 import type { LobbyState } from '@volam/game-protocol';
 import type { TayDocView } from '@volam/game-core';
 import { tayDocDefinition as tuning } from '@volam/game-data';
@@ -298,10 +303,22 @@ export class TayDocRenderer {
         index,
       );
       actor.image.setDepth(boss.y);
+      presentRenovatedBody(
+        this.scene,
+        actor.image,
+        p2 ? 'tay_doc_cap_mo' : 'tay_doc',
+        boss.hp <= 0 ? 'death' : c ? 'action' : boss.pose,
+        boss.fx,
+        boss.fy,
+      );
       this.health(
         actor,
         boss.x,
-        boss.y - 75 - lift,
+        boss.y -
+          (renovationEnabled(this.scene)
+            ? renovationHeight(p2 ? 'tay_doc_cap_mo' : 'tay_doc', 65) + 10
+            : 75) -
+          lift,
         boss.hp,
         boss.maxHp,
         `Tây Độc · ${data.phase === 'phase2' ? 'Cáp Mô · ' : ''}${Math.ceil((100 * boss.hp) / boss.maxHp)}%`,
@@ -325,6 +342,14 @@ export class TayDocRenderer {
         dead || age < 15 ? undefined : i,
       );
       v.image.setOrigin(0.5, 178 / 256).setDepth(p.y);
+      presentRenovatedBody(
+        this.scene,
+        v.image,
+        'tay_doc_snake',
+        dead || age < 15 ? 'action' : 'idle',
+        heading?.fx ?? 0,
+        heading?.fy ?? 1,
+      );
       this.health(
         v,
         p.x,

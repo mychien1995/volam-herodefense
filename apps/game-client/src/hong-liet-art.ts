@@ -1,4 +1,9 @@
 import Phaser from 'phaser';
+import {
+  presentRenovatedBody,
+  renovationEnabled,
+  renovationHeight,
+} from './renovation-art.js';
 import { replaceR3ArenaProp } from './m3d-r3-arena.js';
 import {
   hongLietDefinition,
@@ -296,6 +301,18 @@ export class HongLietRenderer {
     }
     const v = this.image(id, asset, frame, a.x, a.y);
     v.image.setDepth(a.y);
+    presentRenovatedBody(
+      this.scene,
+      v.image,
+      a.archetypeId,
+      a.hp <= 0
+        ? 'death'
+        : asset === 'boss_locomotion' || (!boss && a.pose !== 'basic_attack')
+          ? a.pose
+          : 'action',
+      a.fx,
+      a.fy,
+    );
     if (!v.label) {
       v.label = this.scene.add
         .text(
@@ -326,7 +343,15 @@ export class HongLietRenderer {
             : 0xffffff,
       )
       .setAlpha(a.hp <= 0 ? 0.3 : 1);
-    v.label!.setPosition(a.x, a.y - (boss ? 78 : 52))
+    v.label!.setPosition(
+      a.x,
+      a.y -
+        (renovationEnabled(this.scene)
+          ? renovationHeight(a.archetypeId, 78) + 10
+          : boss
+            ? 78
+            : 52),
+    )
       .setDepth(a.y + 0.5)
       .setVisible(a.hp > 0);
     v.bar!.clear().setDepth(a.y + 0.4);

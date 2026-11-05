@@ -1,4 +1,9 @@
 import Phaser from 'phaser';
+import {
+  presentRenovatedBody,
+  renovationEnabled,
+  renovationHeight,
+} from './renovation-art.js';
 import { replaceR3ArenaProp } from './m3d-r3-arena.js';
 import type { LobbyState } from '@volam/game-protocol';
 import type { KimAbility, KimView } from '@volam/game-core';
@@ -325,6 +330,14 @@ export class KimLuanRenderer {
           { duration: (duration * 1000) / 30 },
         );
       } else sprite = this.cel(id, bundle, clip, a.x, a.y, age);
+      presentRenovatedBody(
+        this.scene,
+        sprite,
+        who,
+        /^(idle|walk)_/.test(clip) && !cast && !movingShot ? a.pose : 'action',
+        a.fx,
+        a.fy,
+      );
       if (bundle === 'kim_luan_actions' && clip === 'channel') {
         const pivots: Record<string, number[]> = {
           channel_0: [79.5, 133],
@@ -342,7 +355,8 @@ export class KimLuanRenderer {
       this.label(
         id,
         a.x,
-        a.y - 58,
+        a.y -
+          (renovationEnabled(this.scene) ? renovationHeight(who, 48) + 10 : 58),
         `${actor === 'hoac_do' ? 'Hoắc Đô' : actor === 'dat_nhi_ba' ? 'Đạt Nhĩ Ba' : 'Kim Luân Pháp Vương'} · ${Math.ceil(a.hp)}/${a.maxHp}`,
       );
       if (v.wardId === actor)
@@ -383,7 +397,7 @@ export class KimLuanRenderer {
           }
           continue;
         }
-        this.cel(
+        const elephantBody = this.cel(
           e.id,
           e.fy > 0 ? 'elephant' : 'elephant_up',
           e.fy > 0 ? 'run_down' : 'run_up',
@@ -391,6 +405,14 @@ export class KimLuanRenderer {
           e.y,
           age,
           0.55,
+        );
+        presentRenovatedBody(
+          this.scene,
+          elephantBody,
+          'kim_elephant',
+          'walk',
+          0,
+          e.fy,
         );
         continue;
       }

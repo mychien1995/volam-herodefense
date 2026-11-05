@@ -1,4 +1,5 @@
 import { WaveBossHealth } from './wave-boss-feedback-art.js';
+import { presentRenovatedBody } from './renovation-art.js';
 import Phaser from 'phaser';
 import type { LobbyState } from '@volam/game-protocol';
 import type { CombatEvent, DongAbility, DongView } from '@volam/game-core';
@@ -238,7 +239,7 @@ export class DongTaRenderer {
             ? cast!.activeAt
             : (cast?.startedAt ?? this.poses.get(actor.archetypeId)!.start))) /
         30;
-      this.cel(
+      const renovatedBody = this.cel(
         actor.archetypeId,
         b,
         pose + '_' + direction,
@@ -248,6 +249,14 @@ export class DongTaRenderer {
         1,
         0,
         actor.y + 0.5,
+      );
+      presentRenovatedBody(
+        this.scene,
+        renovatedBody,
+        actor.archetypeId,
+        actor.hp <= 0 ? 'death' : cast ? 'action' : actor.pose,
+        actor.fx,
+        actor.fy,
       );
       const name =
         bundle === 'dong'

@@ -1,3 +1,7 @@
+## Renovation v1 · duyệt hình và yêu cầu tích hợp Phaser — 2026-11-05
+
+Director duyệt bản preview đầy đủ với yêu cầu **“quá đẹp, hãy integrate vào phaser”** trong worktree `wip/m3d/visual-upgrade-2`. Phạm vi hình được duyệt: idle/walk bốn hướng của8 nhánh vũ khí,20 wave creep,24 dungeon creep,5 wave boss với7 dạng,11 minion/trợ thủ,4 dungeon boss; arena và8 sân phó bản. Khóa art tại `assets/approved_renovation_v1.lock.json`. Tích hợp vào trận Phaser thường ở mật độ màn hình gốc; giữ tranh attack/cast/hurt/death, skill/VFX và toàn bộ luật server hiện có. Phê duyệt preview không tự động trở thành phê duyệt ngoại hình trong trận sau tích hợp. Báo cáo và ảnh thật: `docs/evidence/renovation-runtime/README.md`.
+
 ## Vương Trùng Dương · chốt thiết kế và duyệt concept v01 — 2026-11-05
 
 Boss cuối có hai phase, Toàn Chân Kiếm Pháp và Tiên Thiên Công. Cửu Âm Hộ Thể vỡ khi boss trúng sét ba lần. Toàn Chân Phản Kiếm chém mạnh cả đội một lần nếu bất kỳ người nào trượt QTE, với mức sàn 1 HP cho người còn sống. Phase 2 bỏ kiếm, dứt sấm và duy trì Phá Thể Vô Hình Kiếm cho đến khi boss chết. Thất Tuyệt Lôi Âm dùng sáu vòng nhạc, sai chuỗi khiến cả đội thua lượt đánh boss. Director đã duyệt tạo hình hai phase và hai bảng VFX concept v01. [Thiết kế boss cuối](docs/VUONG_TRUNG_DUONG_FINAL_DESIGN.md) và [prompt sản xuất sprite, tích hợp Phaser](docs/INTEGRATE_VUONG_TRUNG_DUONG_PROMPT.md).

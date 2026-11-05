@@ -1,6 +1,5 @@
 import { heroTexture } from './art.js';
 import { heroIdleUrl } from './character-revision.js';
-import { forestArtNotice } from './forest-creeps.js';
 import {
   arena,
   lobbyConfig,
@@ -682,21 +681,7 @@ export class GameUI {
     }
     const hongLiet = hero.zoneId.startsWith('hong_liet_');
     const kim = hero.zoneId.startsWith('kim_luan_');
-    const artNotice =
-      dungeon?.id === 'chu_ba_thong'
-        ? 'Art đã duyệt · gameplay thử nghiệm'
-        : desert || beach || hell
-          ? 'Hình quái đang chờ duyệt'
-          : forestArtNotice(
-              [...state.creeps.values()]
-                .filter((a) => a.zoneId === hero.zoneId)
-                .map((a) => a.archetypeId),
-            );
-    zoneStatus.title = hongLiet
-      ? 'Art preview v04 đã duyệt; môi trường ghép tiles/props. Chưa có backend vật phẩm.'
-      : zone
-        ? artNotice
-        : '';
+    zoneStatus.title = '';
     zoneStatus.textContent =
       hero.respawnTicks > 0
         ? `Đã gục ngã · Về đấu trường sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`
@@ -709,7 +694,7 @@ export class GameUI {
               ? `Cổ Mộ Phái · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · ${zone.respawnTicks > 0 ? `Lý Mạc Sầu hồi sinh sau ${Math.ceil(zone.respawnTicks / m1Config.tickRate)}s` : 'Lý Mạc Sầu'}`
               : hongLiet
                 ? `Hoàn Nhan Hồng Liệt · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · HP ${Math.ceil(zone.bossHp)} / ${zone.bossMaxHp}${zone.bossRespawnTicks ? ` · Hồi sinh ${Math.ceil(zone.bossRespawnTicks / 30)}s` : ''}`
-                : `${dungeon?.id === 'chu_ba_thong' ? 'Chu Bá Thông' : hell ? 'Địa Ngục' : beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''} · ${artNotice}`
+                : `${dungeon?.id === 'chu_ba_thong' ? 'Chu Bá Thông' : hell ? 'Địa Ngục' : beach ? 'Biển' : desert ? 'Sa Mạc' : 'Rừng Trúc'} · ${zone.access === 'private' ? 'Riêng' : 'Chung'} · Đợt ${zone.wave} · ${zone.living} còn lại${zone.nextWaveTicks > 0 ? ` · Đợt tiếp sau ${Math.ceil(zone.nextWaveTicks / m1Config.tickRate)}s` : ''}`
           : '';
     const claims = JSON.parse(hero.bossLoot || '[]') as Array<{
       nameVi: string;
@@ -826,7 +811,9 @@ export class GameUI {
       m1Config.mobility!.rechargeTicks - hero.dashRechargeTicks;
     element('#dash-status').classList.toggle(
       'unavailable',
-      hero.hp <= 0 || hero.dashCharges === 0 || hero.statuses.includes('"dash_lock"'),
+      hero.hp <= 0 ||
+        hero.dashCharges === 0 ||
+        hero.statuses.includes('"dash_lock"'),
     );
     const slots = [
       {

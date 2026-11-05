@@ -10,6 +10,10 @@ export function applyArenaPalette(
     const image = object as Phaser.GameObjects.Image;
     if (!image.texture || !image.setTint) continue;
     const texture = image.texture.key;
+    if (texture === 'renovated-ground-arena') {
+      image.clearTint();
+      continue;
+    }
     const frame = String(image.frame.name);
     const tint =
       texture === 'arena_ground_art01'

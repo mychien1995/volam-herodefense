@@ -5,6 +5,11 @@ import type { ChuView } from '@volam/game-core';
 import raw from './chu-art.generated.json' with { type: 'json' };
 import wine from './chu-wine-art.generated.json' with { type: 'json' };
 import { facing } from './facing.js';
+import {
+  presentRenovatedBody,
+  renovationEnabled,
+  renovationHeight,
+} from './renovation-art.js';
 interface Bundle {
   image: string;
   url: string;
@@ -254,6 +259,14 @@ export class ChuPresentation {
       else if (v.phase === 'drink' && t > 6.5) tag = 'drink_' + dir;
       else if (enemy?.pose === 'walk') tag = 'walk_' + dir;
       const body = this.draw('boss', bundle, tag, x, y, v.bossHp <= 0 ? 0 : t);
+      presentRenovatedBody(
+        this.scene,
+        body,
+        'chu_ba_thong',
+        /^(idle|walk)_/.test(tag) ? tag.split('_')[0]! : 'action',
+        enemy?.fx ?? v.fx,
+        enemy?.fy ?? v.fy,
+      );
       if (v.bossHp < this.previousHp && v.bossHp > 0)
         this.hitFlashUntil = this.scene.time.now + 150;
       this.previousHp = v.bossHp;
@@ -264,7 +277,10 @@ export class ChuPresentation {
         'boss',
         'Chu Bá Thông · ' + Math.ceil(v.bossHp) + ' / ' + v.bossMaxHp,
         x,
-        y - 76,
+        y -
+          (renovationEnabled(this.scene)
+            ? renovationHeight('chu_ba_thong', 76) + 10
+            : 76),
       );
       if (v.bossHp > 0) {
         const angle = Math.atan2(v.fy, v.fx),
@@ -509,13 +525,27 @@ export class ChuPresentation {
           }
         }
         for (const d of v.disciples) {
-          this.draw(
+          const discipleBody = this.draw(
             'disciple:' + d.id,
             'disciple',
             d.tag + '_' + d.direction,
             d.x,
             d.y,
             t,
+          );
+          const vector = {
+            down: [0, 1],
+            up: [0, -1],
+            left: [-1, 0],
+            right: [1, 0],
+          }[d.direction] ?? [0, 1];
+          presentRenovatedBody(
+            this.scene,
+            discipleBody,
+            'toan_chan_disciple',
+            d.tag === 'carry_walk' ? 'walk' : 'action',
+            vector[0],
+            vector[1],
           );
           this.text(
             'disciple:' + d.id,
@@ -525,7 +555,10 @@ export class ChuPresentation {
                 ? ' · ' + Math.ceil(d.hp) + '/' + d.maxHp
                 : ''),
             d.x,
-            d.y - 55,
+            d.y -
+              (renovationEnabled(this.scene)
+                ? renovationHeight('toan_chan_disciple', 45) + 10
+                : 55),
           );
         }
         for (const bottle of v.wine ?? []) {

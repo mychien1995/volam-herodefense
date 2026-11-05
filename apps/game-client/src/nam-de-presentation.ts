@@ -7,6 +7,7 @@ import type { LobbyState } from '@volam/game-protocol';
 import type { NamDeView } from '@volam/game-core';
 import raw from './nam-de-art.generated.json' with { type: 'json' };
 import { facing } from './facing.js';
+import { presentRenovatedBody } from './renovation-art.js';
 interface Bundle {
   origin: number[];
   frames: Record<string, unknown>;
@@ -164,7 +165,14 @@ export class NamDePresentation {
           ? c.releaseAt
           : c.startedAt
         : this.pose.at;
-      this.draw('boss', 'boss', pose, b.x, b.y, (tick - at) / 30)
+      const renovatedBody = this.draw(
+        'boss',
+        'boss',
+        pose,
+        b.x,
+        b.y,
+        (tick - at) / 30,
+      )
         .setDepth(b.y)
         .setAlpha(
           b.hp <= 0
@@ -174,6 +182,14 @@ export class NamDePresentation {
               )
             : 1,
         );
+      presentRenovatedBody(
+        this.scene,
+        renovatedBody,
+        'nam_de',
+        action,
+        b.fx,
+        b.fy,
+      );
       if (
         c &&
         tick < c.releaseAt &&

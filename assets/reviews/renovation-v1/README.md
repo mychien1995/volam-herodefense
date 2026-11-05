@@ -2,7 +2,7 @@
 
 Mở **http://127.0.0.1:5526/renovation-preview.html** trong dịch vụ dev của worktree `wip/m3d/visual-upgrade-2`. Chọn **Chọn bộ hình** để đổi địa điểm, nhóm và nhân vật. Mũi tên điều khiển nhân vật đang chọn; nút hướng và **Đi tại chỗ** duyệt frame; **So với bản cũ** đặt hai bản ở cùng chiều cao nhìn thấy. Nhóm đông chia trang, tối đa8 sprite để giữ nguyên kích thước và tránh che hình. Menu, điều khiển và toàn bộ cảnh nằm trong một viewport.
 
-Đây là bản duyệt hình ảnh **idle/walk bốn hướng**. Những skill, clip tấn công/cast/death của game và tích hợp multiplayer hiện có được giữ nguyên. Chưa có phê duyệt art cho bộ mới và chưa thay atlas của trận multiplayer.
+**Cập nhật 2026-11-05:** chủ game đã duyệt bộ hình với yêu cầu “quá đẹp, hãy integrate vào phaser”. Bộ **idle/walk bốn hướng** và môi trường được tích hợp vào trận Phaser thường; xem [ghi chú tích hợp](../../../docs/evidence/renovation-runtime/README.md). Những skill và clip tấn công/cast/hurt/death vẫn dùng tranh đã có. Bản preview này tiếp tục dùng để đối chiếu art gốc; phê duyệt ngoại hình trong trận sau tích hợp là bước review riêng.
 
 ## Phạm vi đã có
 

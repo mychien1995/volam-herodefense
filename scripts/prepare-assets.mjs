@@ -51,6 +51,7 @@ for (const entry of approvedArt.assets) {
 }
 for (const [name, label] of [
   ['approved_chu_ba_thong.lock.json', 'Chu Bá Thông'],
+  ['approved_renovation_v1.lock.json', 'Renovation v1 idle/walk and scene artwork'],
   ['approved_bac_cai.lock.json', 'Bắc Cái visual v03'],
   ['approved_cai_bang.lock.json', 'Cai Bang'],
   ['approved_thien_son.lock.json', 'Thien Son'],

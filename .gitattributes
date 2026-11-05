@@ -1,4 +1,6 @@
 * text=auto eol=lf
+# Renovation approval pins the original atlas/catalog bytes, including retained CRLF.
+assets/exports/renovation-v1/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # Preserve approved wave-boss review hashes across fresh checkouts.
 assets/reviews/wave_boss_feedback_v01/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 assets/reviews/wave_boss_feedback_v02/** -text -eol whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

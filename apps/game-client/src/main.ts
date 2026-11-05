@@ -84,10 +84,10 @@ const game = new Phaser.Game({
   height: 360,
   backgroundColor: '#304b37',
   render: {
-    pixelArt: true,
-    roundPixels: true,
-    antialias: false,
-    antialiasGL: false,
+    pixelArt: artPreview,
+    roundPixels: artPreview,
+    antialias: !artPreview,
+    antialiasGL: !artPreview,
   },
   scale: { mode: Phaser.Scale.NONE, zoom: 1 },
   scene: animationReview
@@ -100,22 +100,23 @@ const game = new Phaser.Game({
   input: { keyboard: false, mouse: true, touch: false },
   audio: { noAudio: true },
 });
-// A fixed integer display scale preserves square pixels. Resize the world view,
-// rather than reserving page space for HUD or stretching a fixed aspect ratio.
+// Approved renovation art renders at native screen density in the normal match.
+// Resize the world viewport with its HUD overlays inside it.
 let reviewScaleOverride: number | undefined;
 const fit = (): void => {
   if (!game.isBooted) return;
   const host = element('#game');
-  const zoom = runtimeArtGallery
-    ? 1
-    : animationReview
-      ? (reviewScaleOverride ??
-        (host.clientWidth >= 960 && host.clientHeight >= 600 ? 2 : 1))
-      : artPreview
-        ? 2
-        : host.clientWidth >= 960 && host.clientHeight >= 600
+  const zoom =
+    !artPreview || runtimeArtGallery
+      ? 1
+      : animationReview
+        ? (reviewScaleOverride ??
+          (host.clientWidth >= 960 && host.clientHeight >= 600 ? 2 : 1))
+        : artPreview
           ? 2
-          : 1;
+          : host.clientWidth >= 960 && host.clientHeight >= 600
+            ? 2
+            : 1;
   game.scale.resize(
     thienSonSkillReview || animationReview
       ? Math.ceil(host.clientWidth / zoom)
