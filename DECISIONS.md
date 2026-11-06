@@ -1,3 +1,7 @@
+## Renovation v9 · hoàn tác đánh thường Chưởng và bỏ bàn tay Phi Long — 2026-11-07
+
+Director yêu cầu đánh thường Cái Bang Chưởng trở lại bản M3D trước renovation: động tác thường, đạn chưởng, động tác/đạn rồng đòn thứ sáu, release và impact. Giữ idle/walk đã duyệt và luật mỗi sáu lần A. Phi Long Tại Thiên giữ đầu rồng mới, bỏ toàn bộ lớp sóng/impact cũ có hình bàn tay chạy chồng phía trước. Không sửa sát thương, tầm, mana, cooldown, knockback hay cơ chế server. Mọi chỉnh sửa v8 còn lại giữ nguyên.
+
 ## Renovation v8 · khôi phục độ vươn Phá Giáp và sửa impact rồng — 2026-11-06
 
 Director xác nhận Phá Giáp v7 bị thu ngắn so với M3D. Đối chiếu cast thật và atlas M3D r3: giữ footprint đánh xa khoảng200world px ngang /128world px dọc, thay cho điểm chạm sát chân v7. Bổng phải dài ra lúc giơ và giữ chiều dài khi vụt/chạm đất; thân/điểm neo chân giữ nguyên kích thước. Vệt vụt đi tới đầu bổng dài; đường nứt bắt đầu từ chân và chạy tới điểm đánh xa, không chỉ là một vết nứt tròn ở đó. Không đổi combat range240, damage, mana, cooldown hay thời điểm strike.

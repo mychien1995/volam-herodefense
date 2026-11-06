@@ -1,5 +1,9 @@
 # Current M3D integration memory
 
+## Latest override: renovation v9 — 2026-11-07
+
+Restore Cái Bang Chưởng A to original M3D body, normal palm travel, sixth-dragon body/travel, release and impact via isolated original aliases; retain approved renovated idle/walk. Phi Long retains the new dragon head; suppress its legacy wave/impact atlas because its pixels include a hand. Server basics, six-hit cadence, skill damage/range/costs and knockback stay unchanged. Compare against the actual `renovationSkills=old` source paths and verify six real A presses plus Q in all four facings. Evidence and final profile: `docs/evidence/renovation-v9`, `playwright.renovation-v9.config.ts`.
+
 ## Latest override: renovation v8 — 2026-11-06
 
 V7 Phá Giáp was rejected for shrinking the old footprint while aligning its short staff. Real M3D r3 cast/atlas comparison establishes about200world px sideways and128vertical reach. New native88px bodies hold a shaft that extends on raise and remains long through strike/recovery. The drawn cap and swing end share the far contact; the fissure starts at feet and runs there. Aseprite resamples only the outboard authored shaft, preserving its cap and protected body/hand/boot pixels. Keep range240, damage/costs and server clocks. Hàng Long keeps the provisionally accepted v7 red flight/coil/rise/dive; skip per-target headed legacy impact/ending because the single server landing pulse already draws a head-free explosion. Two-target/four-facing coverage is mandatory. New sources under`assets/source/renovation-v8`, runtime review under`docs/evidence/renovation-v8`, final profile`playwright.renovation-v8.config.ts`; staff art review pending.

@@ -215,7 +215,7 @@ export class FeedbackVfx {
     repeat?: number,
   ): boolean {
     if (
-      v.skill === 'hoa_van_chuong' &&
+      ['hoa_van_chuong', 'cai_bang_chuong'].includes(v.skill) &&
       renovationFollowupEnabled() &&
       /^cai_bang_chuong_dragon_v2_(aura|impact|projectile)$/.test(ref.asset)
     )
@@ -280,7 +280,7 @@ export class FeedbackVfx {
     review = false,
   ): Fx | undefined {
     if (
-      skill === 'hoa_van_chuong' &&
+      ['hoa_van_chuong', 'cai_bang_chuong'].includes(skill) &&
       renovationFollowupEnabled() &&
       /^cai_bang_chuong_dragon_v2_(aura|impact|projectile)$/.test(ref.asset)
     )

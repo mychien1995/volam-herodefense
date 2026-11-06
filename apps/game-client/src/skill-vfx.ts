@@ -11,7 +11,10 @@ import {
   RenovationFeedback,
   preloadRenovationFeedback,
 } from './renovation-feedback.js';
-import { renovatedSkillComponents } from './renovation-skill-components.js';
+import {
+  renovatedSkillComponents,
+  retainedBasicPalm,
+} from './renovation-skill-components.js';
 import {
   skillArt,
   skillAnimationKey,
@@ -32,11 +35,17 @@ import { feedbackArt } from './feedback-art.js';
 import { ApprovedSkillVfx, approvedSkillAssets } from './approved-skill-vfx.js';
 import { feedbackProjectile, feedbackScale } from './feedback-visuals.js';
 import {
+  renovationRevisionEnabled,
+  renovationFollowupEnabled,
+} from './renovation-policy.js';
+import {
   preloadRasterAnimations,
   registerRasterAnimations,
 } from './skill-art-registry.js';
 
-const components = new Map(skillArt.assets.map((a) => [a.id, a]));
+const components = new Map(
+  [...skillArt.assets, retainedBasicPalm].map((a) => [a.id, a]),
+);
 export function preloadSkillArt(scene: Phaser.Scene): void {
   preloadRenovationFollowup(scene);
   preloadRenovationRevision(scene);
@@ -132,6 +141,10 @@ export class SkillVfx {
     ownerId: string,
     loop = false,
   ): EffectView | undefined {
+    // The new dragon head owns Phi Long's projectile. Its retained wave/impact
+    // atlas contains a palm silhouette, so never layer it over the new head.
+    if (renovationRevisionEnabled() && asset === 'phi_long_tai_thien_vfx')
+      return;
     const tag = this.tag(asset, prefix, fx, fy);
     if (!tag) return;
     const sprite = this.scene.add
@@ -625,7 +638,10 @@ export class SkillVfx {
       const temporary = feedbackProjectile(p.abilityId, p.stage);
       const prefix =
           temporary?.prefix ?? skillVisualStages[skill]?.travel ?? 'projectile',
-        asset = temporary?.asset ?? `${skill}_vfx`;
+        asset =
+          renovationFollowupEnabled() && p.abilityId === 'cai_bang_chuong'
+            ? 'retained_m3d_hoa_van_chuong_vfx'
+            : (temporary?.asset ?? `${skill}_vfx`);
       let v = this.projectiles.get(id);
       if (!v) {
         v = this.make(asset, prefix, p.x, p.y, p.vx, p.vy, p.ownerId, true);

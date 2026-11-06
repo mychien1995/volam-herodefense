@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "date": "2026-11-07",
+  "branch": "wip/m3d/visual-upgrade-2",
+  "scope": [
+    "Restore Cai Bang Chuong basic M3D action and VFX, including the real sixth dragon",
+    "Remove the legacy hand-wave/impact layer from Phi Long while keeping the new dragon head"
+  ],
+  "assetStatus": "Existing original/approved M3D PNG and JSON bytes reused; no new artwork",
+  "serverGameplayChanged": false,
+  "baseline": {
+    "status": "REPRODUCED",
+    "violations": 20,
+    "originalSources": [
+      "/assets/visual-improvement-approved/cai_bang_chuong_dragon_v2_aura_5ef93d8b.png",
+      "/assets/visual-improvement-approved/hoa_van_chuong_vfx_6851144d.png",
+      "/assets/visual-improvement-approved/cai_bang_chuong_dragon_v2_impact_d982b9b5.png",
+      "/assets/visual-improvement-approved/cai_bang_chuong_dragon_v2_projectile_3ff6062b.png"
+    ],
+    "initialFixtureFailure": "initial-fixture-timeout.json"
+  },
+  "verification": {
+    "command": "pnpm check:final --config playwright.renovation-v9.config.ts",
+    "pipeline": "docs/evidence/sessions/renovation-v9-final/check-workflow/final-timings.json",
+    "seconds": 353.85,
+    "workflowChecks": 18,
+    "unitIntegrationTests": 779,
+    "assetValidators": 30,
+    "browserTests": 1,
+    "browserSeconds": 109.98,
+    "players": 6,
+    "cases": 9,
+    "realBasicPresses": 30,
+    "realPhiLongCasts": 4,
+    "facings": [
+      "right",
+      "left",
+      "down",
+      "up"
+    ],
+    "currentSourceMismatches": [],
+    "naturalCombat": {
+      "clients": 6,
+      "hitEvents": 18,
+      "peerDamageAgreement": true
+    },
+    "recordings": false
+  },
+  "live": [
+    {
+      "mode": "normal",
+      "client": 5546,
+      "server": 2946,
+      "level": 1,
+      "runId": "85b7c273-27a8-47a0-b665-93db102a7f36",
+      "errors": []
+    },
+    {
+      "mode": "skills",
+      "client": 5547,
+      "server": 2947,
+      "level": 30,
+      "runId": "a73fd631-0d89-4cdf-bd0f-ecb808b085f1",
+      "errors": []
+    },
+    {
+      "mode": "bosses",
+      "client": 5548,
+      "server": 2948,
+      "level": 30,
+      "runId": "9fa0bc1b-706b-44b5-b1cf-e1343010bd61",
+      "errors": []
+    }
+  ],
+  "notes": [
+    "Normal production endpoint restored from the isolated test port2955 to2946 by an endpoint-only build after the successful final gate. No runtime or art inputs changed.",
+    "All three review services restarted and smoke-tested through normal entry with matching server/client identities and zero page errors. Use fresh rooms.",
+    "All baseline/final PNGs and the literal hand in the V4 wave atlas were inspected. Still screenshots supplement actual frames, six A acceptance, real hits, source comparisons and peer HP checks."
+  ]
+}
