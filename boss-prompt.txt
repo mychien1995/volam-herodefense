@@ -1,0 +1,99 @@
+Bắt đầu thiết kế sprite và animation cho Đông Tà. Có thể design skill này của tôi khác với concept art và sprite của skill đã tạo, cần rework. Concept art và sprite nhân vật đã có rồi, nên dùng lại, skill thì compare với mô tả của tôi dưới đây xem dùng lại được gì không. Mô tả của tôi ở dưới là final
+- Không cần arena vì đây là wave boss. Sẽ spawn ở arena chính
+- Boss đi từ hướng đông vào. Không đánh statue, focus đánh người.
+Boss Đông Tà:
+- Đánh thường:
+  - Tà Kiếm Liên Kích, chọc liên tục nhiều phát nhiều hướng trước mặt boss, đủ xa để trúng tay dài
+  - Lạc Anh Kiếm Pháp: Chém thành hình cone/quạt trước mặt, có hơi hướng hoa đào.
+- Animation Đàn Chỉ Thần Công. Bắn 5 viên bi trước mặt rất nhanh và đuổi tới vị trí hiện tại của nhân vật
+- Animation Lạc Anh Kiếm Pháp. Xuất kiếm chém, di chuyển nhanh theo hình tam giác, hoặc hình vuông, hoặc hình con thoi, hoặc hình chữ Z random. Có hơi hướng hoa đào
+- Animation Ngọc Tiêu Hồi Phong. Thổi sáo, thả cánh hoa đào chi chít dưới arena. Sau vài giây sẽ nổ
+- Animation Triệu Hồn Đông Hải. Triệu hồi cả Mai Siêu Phong lẫn Hoàng Dung, chỉ triệu hồi 1 lần khi dưới 40% máu
+Boss Mai Siêu Phong:
+- Mai Siêu Phong có đặc điểm là sẽ focus 1 người chơi duy nhất đến chết thì thôi. Các chiêu của mai siêu phong đều có hơi hướng màu đỏ đô, đỏ đậm
+- Đánh thường: Bạch Cốt Trảo, 2 vuốt trái phải xé không khí theo hướng trước mặt.
+- Ma Ảnh Tróc Hồn: Vuốt xa liên tục
+- Âm Phong Hấp Lực: Hút người chơi lại gần
+- Độc cốt bạo: Ném 1 bọc độc, nổ to khi chạm đất và giữ khoảng độc 1 thời gian. Đi vào mất máu
+Boss Hoàng Dung:
+- Chỉ có 2 skill:
+- Thanh Âm Hộ Trợ: Liên tục bắn chưởng buff máu cho Mai Siêu Phong và Đông Tà
+- Linh Xà Bộ: Tăng tốc chạy đột biến
+Cho tôi xem sprite và VFX demo trước. Làm việc trên worktree wip/m3d/dong-ta
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Bắt đầu thiết kế sprite và animation cho Tây Độc. Có thể design skill này của tôi khác với concept art và sprite của skill đã tạo, cần rework. Concept art và sprite nhân vật đã có rồi, nên dùng lại, skill thì compare với mô tả của tôi dưới đây xem dùng lại được gì không. Mô tả của tôi ở dưới là final
+
+- Không cần arena vì đây là wave boss. Sẽ spawn ở arena chính
+- Boss đi từ hướng tây vào. Không đánh statue, focus đánh người.
+
+Boss Tây Độc:
+- Đánh thường:
+	+ Quẹt 1 được hình quạt bằng trượng trước mặt
+	+ Bắn độc khí bằng trượng
+- Animation Vạn Độc Phi Châm. Bắn 1 loạt kim châm độc hình cone trước mặt, có warning. Dính châm thì slow và độc đốt
+- Animation Độc Vụ Mê Hồn. Thả nhiều đám độc to dưới đất. Đi vào bị slow và độc đốt. Có warning
+- Animation Cổ Độc Khoan Tâm. Chỉ định 1 người choi bị trúng độc nổ. Người chơi này phải đi ra xa 1 góc, nếu không sau vài giây sẽ nổ độc lan ảnh hưởng đến người chơi khác trong phạm vi. Không cách nào chữa độc này khi bị chọn, auto mất 25% máu.
+- Animation Hỗn Thiên Phục Long Chấn. Triệu hồi 6 cọc rắn bắn độc. Bắn 1 tia độc một nhưng cọc rắn có thể quay đầu bắn các hướng liên tục. Cọc rắn cũng có máu, và phải phá cọc rắn
+- Phase 2: Dưới 50% máu thi triển cáp mô công, chuyển thành dạng bò như cóc, di chuyển nhanh hơn đánh đau hơn
+- Skill:
+	Bắn độc chưởng
+	Cáp mô chấn kích: Dậm lan lớn gây độc và stun
+	Ngũ độc thần chưởng: đứng 1 chỗ liên tục nhả độc 360 độ
+	Vạn Độc Bạo Phát: cóc nhảy quanh bản đồ, dậm đến đâu nhả độc 360 độ đến đấy.
+
+
+Cho tôi xem sprite và VFX demo trước. Làm việc trên worktree wip/m3d/tay-doc
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Bắt đầu thiết kế sprite và animation cho Nam Đế. Có thể design skill này của tôi khác với concept art và sprite của skill đã tạo, cần rework. Concept art và sprite nhân vật đã có rồi, nên dùng lại, skill thì compare với mô tả của tôi dưới đây xem dùng lại được gì không. Mô tả của tôi ở dưới là final
+
+- Không cần arena vì đây là wave boss. Sẽ spawn ở arena chính
+- Boss đi từ hướng nam vào. Không đánh statue, focus đánh người.
+
+Boss Nam Đế:
+- Đánh thường:
+	+ Đánh chưởng kiểu shockwave thẳng trước mặt. Phạm vi lớn và xa, đủ để bắt tay dài
+	+ Phật Quang: Gây dmg lan xung quanh bằng ánh sáng phật pháp, đủ rộng để bao hết tay ngắn
+	+ Tiểu nhất dương chỉ: Bắn 1 tia chỉ nhỏ vào vị trí player ở xa nhất
+	+ Nam Đế di chuyển chậm, nhưng có tỉ lê random lướt đến ngay sau lưng player.
+
+- Animation Nhất Dương Chỉ. Tụ chưởng ở ngón tay, bắn 1 chỉ xuyên màn hình, mặc định mất 90% máu nếu trúng. Có warning
+- Animation Liên Hoàn Nhất Dương Chỉ. Tụ chỉ ở ngón tay, bắn nhiều nhất dương chỉ random các hướng, ưu tiên hướng người chơi đang đứng. Thời gian lâu 1 chút.
+- Animation Đại Lý Phong Huyệt. Lao nhanh đến người chơi và điểm huyệt. Người chơi bị đứng yên, cần phải bấm theo các nút mũi tên trên màn hình để được giải. Có 10 nút, thời gian 5s, bấm sai 1 nút phản phệ mất 70% máu. Boss được hồi 10% máu. Trong lúc đứng yên không nhận dmg. Mechanism kiểu như audition.
+- Animation Phật Quang Phổ Chiếu. Nam đế chiếu phật quang lên 1 người chơi. Nút di chuyển bị đảo lộn random. Nút lên có thể là trái phải dưới đảo cho nhau kiểu thế. Tác dụng 1 thời gian tầm 10s. Người bị chiếu có hiệu ứng hoa mắt.
+- Animation Nhất Dương Quy Tông. Nam đế bắn 1 tia lên trời, hàng chục tia nhất dương chỉ trên trời bắn xuống, có cảnh báo nhưng rất nhanh
+
+
+Cho tôi xem sprite và VFX demo trước. Làm việc trên worktree wip/m3d/nam-de
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Bắt đầu thiết kế sprite và animation cho Bắc Cái. Có thể design skill này của tôi khác với concept art và sprite của skill đã tạo, cần rework. Concept art và sprite nhân vật đã có rồi, nên dùng lại, skill thì compare với mô tả của tôi dưới đây xem dùng lại được gì không. Mô tả của tôi ở dưới là final
+
+- Không cần arena vì đây là wave boss. Sẽ spawn ở arena chính
+- Boss đi từ hướng bắc vào. Không đánh statue, focus đánh người.
+- Bắc cái chuyển đổi linh hoạt giữa chưởng và gậy
+
+Boss Bắc Cái:
+- Đánh thường:
+	+ Đả cẩu bổng pháp. Dùng gậy tre quét liên tục và lướt về phía trước
+	+ Hàng Long 18 Chưởng. Bắn đầu rồng từ tay
+
+- Animation Đả Cẩu Bổng Kích. Chọc như chọc bi-a bắn 1 tia kình khí trên đường thẳng về phía trước. Tia kình khí rất dài. Warning ngắn
+- Animation Bổng Đả Ác Khuyển. Triệu hồi 4 con chó đen cắn người chơi, con chó có thể bị đánh mất máu và chết.
+- Animation Mục Hạ Vô Nhân. Phân thân ra làm 8 Hồng Thất Công đứng 8 góc. Hồng thất công xịn sẽ từ từ bay về 1 góc trong quá trình phân thân. Sau đấy tráo đổi liên tục 5 lần. Trong lúc tráo đổi không nhận dmg. Tráo đổi xong nếu người chơi đánh trúng chân thân thì các phân thân biến mất. Ngược lại đánh trúng phân thân gây nổ mất máu toàn bản đồ.
+- Animation Thiên Hạ Vô Cẩu. Hồng thất công đứng chính giữa xoay liên tục, hút người chơi toàn map vào. Xoay 1 lúc thì đập gây xuống đất gây dmg lan và stun
+- Animation Kháng Long Hữu Hối. Hồng Thất Công hút 2 người chơi bất kì, nối dây, phải chạy đủ xa nhau để đứt dây, nếu không máu rút từ từ. Nếu 1 người vào boss thì không có skill này.
+- Animation Kiến Long Tại Điền. Nhảy đến chỗ người chơi bất kì, cực nhanh bắn chưởng xuống đất tạo vùng dmg lan hình chữ điền, rộng.
+- Animation Phi Long Tại Thiên. Bắn 1 con rồng lửa xoay hình xoắn ốc, bán kính vòng tròn tăng dần.
+- Mech: Hồng Thất Công thay đổi sở thích liên tục. Rượu ngon, mỹ nhân, thịt gà, thịt lợn, đánh cờ, tỉ võ. Bắc Cái sẽ nói sở thích của mình bằng 1 câu nói hiện ở dialog trên đầu. Sở thích thay đổi sau vài giây. Đến 1 thời điểm trên arena sẽ hiện ra 3 ô lựa chọn. Số đông người chơi đi vào sở thích nào thì đó được tính là lựa chọn của team. Nếu chọn đúng sở thích cuối cùng của bắc cái. Bác cái sẽ ngủ khoảng 10s cho người chơi free dmg. Nếu không bắc cái thất vọng, uống rượu hồi 10% máu.
+
+Cho tôi xem sprite và VFX demo trước. Làm việc trên worktree wip/m3d/bac-cai

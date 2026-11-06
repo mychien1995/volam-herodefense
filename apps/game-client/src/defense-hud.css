@@ -64,6 +64,13 @@
   place-items: center;
   padding: 24px;
 }
+#defeat-layer[data-victory]:not([hidden]) {
+  animation: victory-reveal 200ms 680ms both;
+}
+@keyframes victory-reveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 #defeat-layer section {
   width: min(480px, 100%);
   padding: 30px;

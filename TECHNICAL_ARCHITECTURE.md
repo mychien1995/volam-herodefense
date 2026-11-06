@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+CampaignDefinition được schema-validate trong game-data; game-core giữ ledger first-clear, fractional farm rewards và BossRetries theo encounter generation. Protocol35 truyền projection chiến dịch trong MerchantInventoryState.campaign để tránh vượt giới hạn63 field của player schema; client chỉ gửi vote/call intentions. Các override backend tương ứng bên dưới là lịch sử. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 ## Chế tạo — protocol 31
 
 Boss dungeon ghi nhận mất HP thật theo từng người và cấp vật liệu theo instance khi kết thúc. Merchant nhận ý định ghép theo ô, nhánh và revision. Bước trừ vàng, tiêu hao vật liệu và cấp thành phẩm diễn ra trong một giao dịch. Trạng thái trang bị ghép, số nguyên liệu và hồi chiêu Z đến client qua Inventory State.

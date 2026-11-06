@@ -21,7 +21,7 @@ const escape = (s: string) =>
 export class PreGame {
   readonly node = document.createElement('section');
   nickname = '';
-  portalCount: 2 | 3 | 4 = 2;
+  portalCount: 2 | 3 | 4 = 4;
   private screen = 'landing';
   private roomId = '';
   private session = '';

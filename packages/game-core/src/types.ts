@@ -251,6 +251,7 @@ export interface Ability {
     | SupportEffect;
 }
 export interface SimulationConfig {
+  campaign?: import('./campaign.js').CampaignDefinition;
   creepCombat?: CreepCombatDefinition;
   personalCraftLoot?: boolean;
   bossBanter?: BossBanterDefinition | undefined;
@@ -351,6 +352,10 @@ export interface Actor extends Point {
   crowdControlScale?: number;
 }
 export interface Hero extends Actor {
+  campaignClears?: string[];
+  dragonBonus?: number;
+  farmXpRemainder?: number;
+  farmGoldRemainder?: number;
   comboFinisher?: {
     slot: number;
     abilityId: string;
@@ -389,6 +394,7 @@ export interface Hero extends Actor {
   basicChains?: Record<string, number>;
 }
 export interface Creep extends Actor {
+  campaignPlayers?: number;
   damagedBy?: Set<string>;
   needlePoison?: { sourceId: string; until: number; next: number };
   waveBossActor?: boolean;
@@ -502,6 +508,7 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  campaign?: import('./campaign.js').CampaignRuntime;
   invasionPending?: Set<number>;
   creepCombat?: CreepCombatRuntime;
   /** Cosmetic randomness must never advance the authoritative combat RNG. */
@@ -510,6 +517,7 @@ export interface World {
   waveBossTest?: WaveBossTestRuntime;
   namDe?: NamDeRuntime;
   bacCai?: Pick<BacCaiEncounter, keyof BacCaiEncounter>;
+  vuong?: Pick<VuongEncounter, keyof VuongEncounter>;
   kim?: { rewards: KimLootContext };
   chu?: ChuEncounter;
   boss?: BossRuntime;
@@ -555,3 +563,4 @@ export interface World {
   actions?: SkillAction[];
   areas?: CombatArea[];
 }
+import type { VuongEncounter } from './vuong-trung-duong.js';

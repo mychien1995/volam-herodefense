@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 33;
+export const PROTOCOL_VERSION = 35;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -32,6 +32,21 @@ export const joinOptionsSchema = z.strictObject({
   protocolVersion: z.literal(PROTOCOL_VERSION),
 });
 export type JoinOptions = z.infer<typeof joinOptionsSchema>;
+export const bossRetryActionSchema = z.discriminatedUnion('action', [
+  z.strictObject({
+    action: z.literal('vote'),
+    id: z.number().int().positive(),
+    accept: z.boolean(),
+    sequence: z.number().int().positive(),
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+  }),
+  z.strictObject({
+    action: z.literal('call'),
+    id: z.number().int().positive(),
+    sequence: z.number().int().positive(),
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+  }),
+]);
 
 export const creepPreviewActionSchema = z.discriminatedUnion('action', [
   z.strictObject({
@@ -78,7 +93,7 @@ export const inputSchema = z.discriminatedUnion('kind', [
     kind: z.literal('nam-de-key'),
     castId: z
       .string()
-      .regex(/^nam_de_[0-9]+$/)
+      .regex(/^(nam_de_|vtd:)[0-9]+$/)
       .max(64),
     index: z.number().int().min(0).max(9),
     key: z.enum(['up', 'right', 'down', 'left']),
@@ -368,6 +383,7 @@ export const BuildState = schema(
 );
 export const MerchantInventoryState = schema(
   {
+    campaign: t.string().default(''),
     levels: t.map('number'),
     potions: t.map('number'),
     materials: t.map('number'),
@@ -540,6 +556,7 @@ export const DefenseState = schema(
     streamUntilTick: t.number().default(0),
     devCreepTest: t.boolean().default(false),
     devWaveBosses: t.boolean().default(false),
+    devFinalBoss: t.boolean().default(false),
     devWaveBossStage: t.string().default(''),
     dongTa: t.string().default(''),
     waveArena: t.string().default(''),
@@ -577,6 +594,10 @@ export const BacCaiState = schema(
   { snapshot: t.string().default('') },
   'BacCaiArenaEncounter',
 );
+export const VuongState = schema(
+  { snapshot: t.string().default('') },
+  'VuongArenaEncounter',
+);
 export const LobbyState = schema(
   {
     protocolVersion: t.number().default(PROTOCOL_VERSION),
@@ -597,6 +618,7 @@ export const LobbyState = schema(
     defense: t.ref(DefenseState).default(() => new DefenseState()),
     tayDoc: t.map(TayDocState).view(),
     bacCai: t.map(BacCaiState).view(),
+    vuong: t.map(VuongState).view(),
   },
   'ArenaState',
 );

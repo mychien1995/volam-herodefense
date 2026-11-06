@@ -972,6 +972,7 @@ export class BacCaiEncounter {
               this.ticks(this.definition.reward.assistMs, c),
         );
       eligible.forEach((h, i) => {
+      if (c.campaign) return;
         const split = (n: number) =>
           Math.floor(n / eligible.length) + (i < n % eligible.length ? 1 : 0);
         gainExperience(h, split(this.definition.reward.xp), c);

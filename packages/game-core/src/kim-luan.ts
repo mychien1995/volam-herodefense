@@ -1004,6 +1004,7 @@ export class KimLuanEncounter {
       .sort((a, b) => a.id.localeCompare(b.id));
     const d = this.definition;
     eligible.forEach((h, i) => {
+      if (c.campaign) return;
       gainExperience(
         h,
         Math.floor(d.xp / eligible.length) +

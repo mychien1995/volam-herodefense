@@ -104,3 +104,7 @@ The Lý Mạc Sầu selector card reuses `assets/concepts/arenas/co-mo-phai/aren
 ## Creep combat runtime reuse — 2026-11-06
 
 `apps/game-client/src/creep-combat-art.ts` reuses the original arena creep, forest, desert-arrow, beach and Hell PNG/JSON assets; no new bitmap or approved-byte replacement. Source provenance remains in their retained manifests. This adapter adds server-timed warnings, missiles and field composition for the authorized creep abilities. New compositions are runtime review candidates, not new director-approved artwork. Sources and inspected reference-path corrections: [CREEP_UPGRADE.md](../docs/CREEP_UPGRADE.md).
+
+## Vương Trùng Dương
+
+The final boss runtime candidate uses two generated raster atlases with 48 character cels and 36 effect cels. [Production sources, exact prompts and hashes](source/bosses/vuong-trung-duong/provenance.json), [atlas origins and animation timing](exports/vuong-trung-duong/animation.json), and [Phaser review evidence](../docs/VUONG_TRUNG_DUONG_RUNTIME.md). The three concept v01 images are approved inputs. Runtime review is pending.

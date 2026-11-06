@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Long Châu đã được triển khai: mỗi tứ tuyệt8%, mỗi dungeon boss4% vào HP/MP/công/thủ nền, cộng dồn tối đa48% từ tám boss. Tự áp dụng một lần/nhân vật/boss/trận, cần gây mất HP và còn hiện diện. Boss đánh lại không thưởng thêm EXP/vàng; nguyên liệu vẫn theo luật riêng. Bình dùng ở lượt thất bại được hoàn đúng lượng đã tiêu. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 ## Chế tạo trong trận — 2026-11-05
 
 Thương Gia mở bốn công thức và 12 nhánh trong tab Chế tạo. Khi còn sống ở đấu trường trung tâm, người chơi có thể dùng đúng món cơ bản cấp 5, một nguyên liệu tương ứng và 450–600 vàng để chế tạo chắc chắn thành công. Thành phẩm tự trang bị, giữ nền cấp 5 và cộng phần thưởng nhánh. Mỗi ô chọn một nhánh cho phần còn lại của trận. Kho nguyên liệu cá nhân xếp chồng riêng với bình.

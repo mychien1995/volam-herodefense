@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Popup đánh lại và số lượt hồi sinh nằm trong viewport, tái sử dụng khung UI hiện tại. Server xác nhận electorate/countdown/phiếu và giao dịch; modal chặn input gameplay. Ballot boss là ngoại lệ server pause được director duyệt; inventory/shop thông thường vẫn không pause. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 ## Tab Chế tạo và icon Cái Bang — 2026-11-05
 
 Tab Chế tạo của Thương Gia hiển thị cấp trang bị, số nguyên liệu đang có, boss nguồn, phí và ba lựa chọn nhánh. Thành phẩm hiện trên búp bê trang bị, nguyên liệu hiện trong Túi Đồ và Z hiển thị kỹ năng giày cùng thời gian hồi. Bộ icon raster Cái Bang thay hai đòn A, mười chiêu và Tiêu Diêu Công. Bản icon mới chờ duyệt hình ảnh trong Phaser.

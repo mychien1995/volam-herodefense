@@ -66,3 +66,6 @@ export * from './boss-banter.js';
 
 export * from './match-story.js';
 export * from './creep-abilities.js';
+
+export * from './vuong-trung-duong.js';
+export * from './campaign.js';

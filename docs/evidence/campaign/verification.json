@@ -1,0 +1,113 @@
+{
+  "status": "PASS_WITH_DISCLOSED_SCOPE",
+  "completedAtUtc": "2026-11-06T17:05:12.820867+00:00",
+  "protocol": 35,
+  "scope": "Director-approved campaign v1; preserves pre-existing uncommitted Vuong integration. No merge, commit, deploy, recordings or new artwork.",
+  "checks": {
+    "typecheck": {
+      "commands": [
+        "pnpm exec tsc -b",
+        "pnpm exec tsc -p tsconfig.tools.json --noEmit"
+      ],
+      "status": "PASS"
+    },
+    "finalFocusedUnit": {
+      "command": "pnpm exec vitest run tests/campaign.test.ts tests/protocol.test.ts tests/m3d-bac-cai-integration.test.ts tests/m3d-hell-integration.test.ts tests/m3d-kim-integration.test.ts tests/m3d-nam-de-integration.test.ts --reporter=json --outputFile=artifacts/campaign-final-unit.json",
+      "passed": 52,
+      "failed": 0,
+      "report": "artifacts/campaign-final-unit.json"
+    },
+    "otherFocusedRegression": {
+      "commands": [
+        "pnpm exec vitest run tests/campaign.test.ts tests/progression.test.ts tests/economy.test.ts tests/invasions.test.ts tests/dungeons.test.ts",
+        "pnpm exec vitest run tests/campaign.test.ts tests/progression.test.ts tests/economy.test.ts tests/dungeons.test.ts tests/invasions.test.ts tests/vuong-trung-duong.test.ts tests/wave-boss-feedback-runtime.test.ts tests/m3d-kim-integration.test.ts tests/m3d-nam-de-integration.test.ts tests/m3d-bac-cai-integration.test.ts",
+        "pnpm exec vitest run tests/campaign.test.ts tests/protocol.test.ts tests/m3d-bac-cai-integration.test.ts tests/m3d-hell-integration.test.ts tests/m3d-kim-integration.test.ts tests/m3d-nam-de-integration.test.ts tests/economy-room.test.ts tests/dungeon-room.test.ts tests/invasion-room.test.ts tests/progression-room.test.ts"
+      ],
+      "results": [
+        "119 passed",
+        "151 passed / 3 fixed-version assertions failed; assertions updated to protocol35 and rerun in final focused suite",
+        "68 passed"
+      ],
+      "note": "Overlapping selected runs; counts are not additive. No successful full-suite check:final is claimed."
+    },
+    "assetPreparation": {
+      "command": "pnpm check:browser --config playwright.campaign.config.ts",
+      "result": "Retained approved-byte guards passed; 0 written / 5869 unchanged. Browser stage then failed on occupied QA port. No full asset validator rerun for unchanged art."
+    },
+    "productionBuild": {
+      "command": "pnpm --filter @volam/game-client build",
+      "status": "PASS",
+      "serverPort": 30157,
+      "clientPort": 55157,
+      "note": "Existing large-chunk warning remains."
+    },
+    "browserFlows": {
+      "command": "node tools/run-playwright.mjs test --config playwright.campaign.config.ts",
+      "passed": 2,
+      "failed": 0,
+      "coverage": [
+        "two Phaser contexts in one room",
+        "four real deaths per participant from actual server boss attacks",
+        "three delayed revivals, fourth death spectator",
+        "dungeon and Dong Ta retry ballots",
+        "two-player 1 yes / 1 no satisfies >=50%",
+        "same room/attempt2, dungeon dissenter exits, wave dissenter spectates",
+        "physical A boss kill settles personal first-clear/material/pearl",
+        "ballot bounds at1280 and944; P/Escape blocked",
+        "no page errors"
+      ],
+      "note": "Both full flows passed twice. Later offline-only core changes covered by final focused regressions; display-only changes covered by HUD retry below."
+    },
+    "browserFinalHud": {
+      "command": "node tools/run-playwright.mjs test --config playwright.campaign.config.ts --grep 'campaign HUD formats'",
+      "passed": 1,
+      "failed": 0,
+      "coverage": [
+        "latest compiled core + production client",
+        "real UI entry and physical A killing blow",
+        "Long Chau1/8 +4% displayed",
+        "HP/MP labels formatted as integers",
+        "life counter does not overlap defense HUD",
+        "inventory fits944x720"
+      ]
+    },
+    "balance": {
+      "command": "pnpm --filter @volam/game-server exec tsx ../../tools/campaign-balance.ts",
+      "dpsProbes": 144,
+      "farmProbes": 24,
+      "summary": "docs/evidence/campaign/balance-summary.json"
+    },
+    "visualReview": {
+      "references": [
+        "assets/references/in_game_world_reference.png",
+        "assets/references/current_codex_dashboard_anti_reference.png",
+        "assets/references/vo_dang_art_direction_reference.png",
+        "assets/references/current_game_2026_10_29_placeholder_anti_reference.png"
+      ],
+      "png": [
+        "docs/evidence/campaign/dungeon-retry.png",
+        "docs/evidence/campaign/wave-retry.png",
+        "docs/evidence/campaign/pearl-inventory.png"
+      ],
+      "observations": [
+        "one dominant viewport with centered in-viewport ballot",
+        "retained original raster world/hero/UI assets",
+        "readable Vietnamese labels and explicit votes/countdown",
+        "latest inventory PNG reviewed at944x720; normal HUD labels rounded",
+        "final HUD assertion places life counter above hotbar, clear of defense header"
+      ],
+      "approval": "Functional UI verification; no new artwork or director art approval claimed.",
+      "referenceNote": "The file named current_codex_dashboard_anti_reference.png actually contains the Vo Dang character sheet. It was inspected as its actual content, not treated as a dashboard screenshot. Negative art-quality comparison uses current_game_2026_10_29_placeholder_anti_reference.png; dashboard-layout rejection follows UI_UX_SPEC.md."
+    }
+  },
+  "retries": [
+    "Occupied ports5546/2946 were not reused or killed. Owned services switched to30157/55157 and endpoint rebuilt. Original failure report remains under docs/evidence/sessions/campaign-final/check-workflow/browser-timings.json.",
+    "Three legacy protocol34 assertions were corrected and verified at35."
+  ],
+  "limits": [
+    "User requested only necessary missing checks; did not run the entire check:final/full test suite again.",
+    "No completed60-minute human campaign, PvP, optimal bot play or victory-rate balance claim.",
+    "Farm bots are invulnerable and have limited pathfinding/positioning; their wide throughput/DPS spread is not evidence to retune approved school mechanics.",
+    "New server/client and a fresh room are needed for protocol35."
+  ]
+}

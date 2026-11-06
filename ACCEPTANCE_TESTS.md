@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Bổ sung acceptance cho đường EXP, budget thưởng2/4 cửa và phòng1/2/6, pearl once/dead-present ownership, sáu sprite lặp, floor theo thời gian, gate Kim→Vương, ba hồi sinh của cả chín boss, voteN1..6, timeout/decline/reconnect/refund và failed-music override. Kết quả thực tế nằm ở verification, không suy diễn từ spec. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 ## Nhạc nền trận đấu — 2026-11-05
 
 - Phòng chờ im lặng. Hai client vào trận phát nhạc, đến cuối bài tự lặp và khi rời phòng thì dừng, trở về đầu bài.

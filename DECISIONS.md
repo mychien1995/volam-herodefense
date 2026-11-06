@@ -1,3 +1,11 @@
+## Commit toàn bộ M3D — 2026-11-07
+
+Director yêu cầu commit tất cả thay đổi hiện có, bao gồm cân bằng chiến dịch, ba lượt hồi sinh/vote và toàn bộ code/artwork/tài liệu Vương Trùng Dương. Đây là ủy quyền commit trên checkout hiện tại, không tự xác nhận duyệt art runtime hoặc triển khai mạng. [Phạm vi và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
+## Campaign balance và thử lại boss — 2026-11-06
+
+Director duyệt và yêu cầu triển khai toàn bộ cân bằng chiến dịch, Long Châu từ tứ tuyệt, chuỗi boss và ba lần hồi sinh + vote ≥50%. Quy tắc và hệ số mới thay các giới hạn lịch sử tương ứng bên dưới. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 ## Nhạc nền trận đấu — 2026-11-05
 
 File game-ost.mp3 của người dùng phát lặp từ lúc vào trận và dừng khi trận kết thúc hoặc người chơi rời phòng. Nhạc chạy cục bộ ở client.
@@ -13,6 +21,10 @@ Each player confirms one school and one of its two branches before spawning. Bra
 Thiếu Lâm Quyền uses F to switch Quyền and Cước. Q/W/E share ranks by slot and keep cooldowns by ability. R (Kim Cang Bất Hoại) and T (Như Lai Niết Bàn) share their rank, cooldown and effects between stances. The existing basic-attack chain still uses A.
 
 The statue is now **Tượng Võ Thần**, containing **Long Hồn Thần Thạch**. Player teams guard it from rival martial artists and the five masters. Hoàng Thường and the future post-Vương Trùng Dương reveal are reserved for a separate update.
+
+## Vương Trùng Dương · chốt thiết kế và duyệt concept v01 — 2026-11-05
+
+Boss cuối có hai phase, Toàn Chân Kiếm Pháp và Tiên Thiên Công. Cửu Âm Hộ Thể vỡ khi boss trúng sét ba lần. Toàn Chân Phản Kiếm chém mạnh cả đội một lần nếu bất kỳ người nào trượt QTE, với mức sàn 1 HP cho người còn sống. Phase 2 bỏ kiếm, dứt sấm và duy trì Phá Thể Vô Hình Kiếm cho đến khi boss chết. Thất Tuyệt Lôi Âm dùng sáu vòng nhạc, sai chuỗi khiến cả đội thua lượt đánh boss. Director đã duyệt tạo hình hai phase và hai bảng VFX concept v01. [Thiết kế boss cuối](docs/VUONG_TRUNG_DUONG_FINAL_DESIGN.md) và [prompt sản xuất sprite, tích hợp Phaser](docs/INTEGRATE_VUONG_TRUNG_DUONG_PROMPT.md).
 
 ## Đông Tà runtime approval and milestone integration — 2026-11-03
 

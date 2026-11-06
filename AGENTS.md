@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Canonical override được người dùng duyệt2026-11-06: production EXP curve/budget/scaling mới, mặc định4 cửa, Long Châu từ tứ tuyệt và dungeon, ba hồi sinh + ballot≥50%, Kim clear +60s trước Vương. Các hard constraints lịch sử về hai cửa/không Long Châu invasion/một hồi sinh bị thay thế đúng phạm vi này. Các yêu cầu authority, art, controls và no-recording vẫn giữ. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 > **NEW mandatory v1.4 in-game UI rule:** Before any UI/UX work, read `UI_UX_SPEC.md` and visually inspect `assets/references/in_game_world_reference.png` (**positive**) and `assets/references/current_codex_dashboard_anti_reference.png` (**anti-reference**). After joining a match, render **one dominant game viewport** with all HUD, inventory, shop, skill tree/loadout, dungeon, crafting, PvP and loot-roll UI as in-viewport overlays. **Never** use persistent exterior right-side panels, page title, footer or dashboard status column. An HTML/React/DOM overlay absolutely positioned inside the game viewport is acceptable; game overlays do not have to be Phaser Graphics. Do not shrink the map to make room for UI. Keep a separate pre-match lobby if needed. Preserve server authority and keyboard/mouse controls. Details/acceptance: `UI_UX_SPEC.md` and `CODEX_UI_REFACTOR_TASK.md`.
 
 # Repository instructions for Codex and other coding agents

@@ -89,6 +89,7 @@ export function preloadArt(scene: Phaser.Scene): void {
   preloadCreepCombat(scene);
   preloadWaveBossFeedback(scene);
   preloadBacCaiArt(scene);
+  preloadVuongArt(scene);
   preloadChu(scene);
   preloadNamDe(scene);
   preloadHongLietArt(scene);
@@ -331,5 +332,6 @@ export function registerArt(scene: Phaser.Scene): void {
     repeat: 0,
   });
 }
+import { preloadVuongArt } from './vuong-art.js';
 import { preloadBacCaiArt } from './bac-cai-art.js';
 import { preloadCreepCombat } from './creep-combat-art.js';

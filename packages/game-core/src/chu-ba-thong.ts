@@ -244,6 +244,7 @@ function death(w: World, c: SimulationConfig): void {
     .filter((h) => Object.hasOwn(b.hits, h.id))
     .sort((a, z) => a.id.localeCompare(z.id));
   eligible.forEach((h, i) => {
+      if (c.campaign) return;
     gainExperience(
       h,
       Math.floor(d.xp / eligible.length) + (i < d.xp % eligible.length ? 1 : 0),

@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Tiến trình mới nhắm cấp6/12/18/24 ở tứ tuyệt; Long Châu dẫn sang Lý Mạc Sầu/Hồng Liệt/Chu Bá Thông/Kim Luân. Vương Trùng Dương chờ Kim Luân thực sự bị hạ rồi chuẩn bị60s. Cả hai loại boss có ba hồi sinh và biểu quyết đánh lại. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 ## M3D match opening — 2026-11-04
 
 The opening lines above **Tượng Võ Thần** reveal that the ancients sealed **Long Hồn Thần Thạch** inside it. Martial artists converge in waves and the five masters come to claim its power. The players form the team defending the stone to avert turmoil in the jianghu.

@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Các tên, nhánh và rank gate giữ nguyên. Long Châu của tứ tuyệt và dungeon boss dùng stable boss IDs, cộng4 chỉ số nền theo hệ số cấu hình. Level6/12/18/24 tương ứng bốn lần mở rank ulti trong tiến trình mới. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 ## Fixed branch catalogue override — 2026-11-04
 
 Use catalogue order within each selected branch for Q/W/E/R, with its ultimate on T. Thiếu Lâm Quyền uses Q/W/E for La Hán Quyền, Vi Đà Quyền and Đại Lực Kim Cương Chưởng. F changes those slots to Toàn Phong Thoái, Ca Diệp Thoái and Vô Ảnh Cước. R and T are Kim Cang Bất Hoại and Như Lai Niết Bàn in both stances. All 43 active definitions retain their stable IDs. Every active has four ranks.

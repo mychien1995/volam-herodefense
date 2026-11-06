@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Director yêu cầu một batch cân bằng/progression/retry trên baseline M3D hiện tại, bao gồm Long Châu và gate cuối. Đây là phạm vi được yêu cầu rõ ràng; không tự mở rộng PvP hoặc milestone khác. Chỉ đánh dấu kiểm chứng theo báo cáo thực tế. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 ## Explicit trial merchant economy slice — 2026-11-02
 
 Runtime UI is director-approved/committed. The director separately delegates temporary economics for purchase testing: four basic gear slots, duplicate upgrades to5, six potion SKUs, real gold transactions and5s shared consumption. [Economy report](docs/ECONOMY_TRIAL.md) defines numbers, selected temporary policies and executed checks. Crafting/Z, personal boss materials/Long Châu and PvP remain pending; this does not complete M4. Older UI-only statements below predate this authorization.

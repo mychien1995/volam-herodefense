@@ -1,0 +1,169 @@
+{
+  "status": "runtime candidate",
+  "date": "2026-11-05",
+  "generator": "Built-in OpenAI ImageGen",
+  "ownership": "Original generated art for this project. Concept assets served as direction; this record does not establish third-party rights.",
+  "assembly": "Isolated generated cels extracted by export_atlas.py. Low alpha debris removed during export; native-scale output uses nearest-neighbor.",
+  "references": {
+    "assets/concepts/main-bosses/vuong-trung-duong/boss-two-phases-v01.png": "c43df7537b712cf79f1b8d71c799cf11c9a10267a237b9b9c2a1a0ed0da1f395",
+    "assets/concepts/main-bosses/vuong-trung-duong/phase-1-vfx-v01.png": "2de6de89f181a9c64488b42eeb54ca8f72606b6747b43b393da0b06fcbf378d7",
+    "assets/concepts/main-bosses/vuong-trung-duong/phase-2-vfx-v01.png": "4652a5b5d1c8f168b56220d58f7a92e74609fdc07058ab2a3cb6c4d5db5869be"
+  },
+  "sources": [
+    {
+      "file": "side-attack-source.png",
+      "prompt": "Use case: stylized-concept. Produce SOURCE PIXEL ART ANIMATION CELS for a 2D overhead wuxia RPG. Input images are visual references. Identity and palette exactly from image 1, gameplay sprite proportions and camera from image 2. A single transparent sprite contact sheet in strict 4 columns × 2 rows with eight equal cells; wide landscape, no borders, no guides, no shadow, no text, no effects. Each cell contains exactly one entire matching chibi man facing screen RIGHT in the same elevated top-down three-quarter view; all foot positions registered on a consistent ground line inside cells, no camera changes. 8 images, centered in separate equally spaced cells, generous empty alpha gutters so limbs and swords never cross cell borders. Draw crisp detailed hand-pixelled compact bodies like the small bodies in image 2 (approximately 2.6 heads tall) with limited palette and deliberate pixel clusters. Top row: plum-robe grey-bearded master with real thin straight jian, exact trinkets from image 1. Four distinct animation poses in reading order: standing idle, drawing sword arm back with legs bent, strong right-facing sword thrust with hand extended and legs split, withdrawing sword with planted rear foot. Bottom row: same exact man with bare muscular torso, same head, topknot, red ribbons, sash, graphite trousers, boots, no weapon whatsoever. Four distinct animation poses in reading order: relaxed idle empty hands, lean back preparing two-finger gesture, strong forward thrust with two fingers, recovering with one hand at chest. No VFX, no glitter, no sword qi, no props, no text, no display stand. Require true alpha, no baked checkerboard. Large subjects occupy about 65% of cell height and maintain equal scale across rows. Intent is authored isolated sprite frames, not a concept illustration.",
+      "refs": [
+        "assets/concepts/main-bosses/vuong-trung-duong/boss-two-phases-v01.png",
+        "assets/concepts/main-bosses/vuong-trung-duong/phase-1-vfx-v01.png"
+      ],
+      "sha256": "655cabce6a099b94a4f00399bc6a6c3f16c0ced22769c1ceb12def3b8ec9b9ca",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "blades-source.png",
+      "prompt": "Create a SOURCE VFX sprite contact sheet with true transparent alpha, exactly 4 wide equal cells in a strict 2 columns and 2 rows, large empty gutters. Use the attached boards only as visual reference. Hard edge crafted hand-clustered pixel art, no ground no characters no black outline background no checkerboard. Top-left isolated cool silver-lavender horizontal needle blade projectile shooting to the RIGHT with a long fine lavender tail and sharp point. Top-right isolated cool lavender-white tall curved crescent facing RIGHT, bright thin leading edge and a few hard square glints only. Bottom-left same shape warm ivory antique gold horizontal needle blade projectile shooting RIGHT. Bottom-right same shape warm ivory-gold tall curved crescent facing RIGHT, crisp stepped edges, sparse shards. All assets spaced independently with matching scale and center anchors, no labels, no cell borders.",
+      "refs": [
+        "assets/concepts/main-bosses/vuong-trung-duong/phase-1-vfx-v01.png",
+        "assets/concepts/main-bosses/vuong-trung-duong/phase-2-vfx-v01.png"
+      ],
+      "sha256": "49280e84be3f33aec4374e18d65258890cb38890c257ba6f803d86c88f5b2c00",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "p1-vertical-source.png",
+      "refs": [
+        "assets/source/bosses/vuong-trung-duong/side-attack-source.png",
+        "assets/concepts/main-bosses/vuong-trung-duong/boss-two-phases-v01.png"
+      ],
+      "prompt": "Create SOURCE ANIMATION CELS, exactly 4 equal columns by 2 equal rows, 8 full body poses total. Image one is identity and sprite drawing technique, image two is costume reference. True alpha transparent background, no checkerboard, no text, no frames, no grid lines or cast shadows. Equal cells and deliberate wide alpha gutters, independent figures/effects. Orthographic elevated three-quarter gameplay camera, high quality crisp clustered 2D wuxia chibi pixel art, coherent palette. No environment or floor texture. In all 8 cells draw exactly the same elderly silver-haired Taoist master phase one clothed in plum-black embroidered Taoist robe, ivory lapels and exactly one thin straight jian with gold crossguard, matching trinkets, raked white eyebrows and short forked white beard, with body 2.6 heads tall, topknot bronze crown and two burgundy ribbons. TOP row faces down toward screen, head and both eyes visible, four poses left to right idle, anticipate, release, recover. BOTTOM row faces up away from screen, back of head and back of costume or bare back clearly visible and no face, same four poses left to right idle, anticipate, release, recover. Keep feet grounded at matched cell positions and identical head size. Each pose readable at 60px body height in game. No duplicates, no VFX and no overlapping cells.",
+      "sha256": "cc0e1a13d0968968af4eeaccbcd29fe1cf6687d5644ce26c441d1ea841478402",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "p1-walk-source.png",
+      "refs": [
+        "assets/source/bosses/vuong-trung-duong/side-attack-source.png",
+        "assets/concepts/main-bosses/vuong-trung-duong/boss-two-phases-v01.png"
+      ],
+      "prompt": "Create SOURCE ANIMATION CELS, exactly 4 equal columns by 2 equal rows, 8 full body poses total. True alpha transparent background, no checkerboard, no text, no frames, no grid lines or cast shadows. Equal cells and deliberate wide alpha gutters, independent figures/effects. Orthographic elevated three-quarter gameplay camera, high quality crisp clustered 2D wuxia chibi pixel art, coherent palette. No environment or floor texture. Match the silver-bearded Taoist master of both references, phase one clothed in plum-black embroidered Taoist robe, ivory lapels and exactly one thin straight jian with gold crossguard. TOP row left to right: (1) right-facing walking left foot forward, (2) right-facing walking right foot forward, (3) down/front-facing walking left foot forward, (4) down/front-facing walking right foot forward. BOTTOM row left to right: (1) up/back-facing walk left foot forward with back of head visible, (2) up/back-facing walk right foot forward, (3) right-facing struck/hurt recoil with bent back and one hand over chest, (4) right-facing raising his real sword straight above his head in a strong two-foot stance before striking down. Ground feet consistently, make opposite steps visibly different and keep all eight head sizes identical. Keep frames fully inside their cells. No particles or detached objects.",
+      "sha256": "0c07711746001bd509ef877ad227bdbd4a88b7a81f67a7550628797c744e51b4",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "p2-vertical-source.png",
+      "refs": [
+        "assets/source/bosses/vuong-trung-duong/side-attack-source.png",
+        "assets/concepts/main-bosses/vuong-trung-duong/boss-two-phases-v01.png"
+      ],
+      "prompt": "Create SOURCE ANIMATION CELS, exactly 4 equal columns by 2 equal rows, 8 full body poses total. Image one is identity and sprite drawing technique, image two is costume reference. True alpha transparent background, no checkerboard, no text, no frames, no grid lines or cast shadows. Equal cells and deliberate wide alpha gutters, independent figures/effects. Orthographic elevated three-quarter gameplay camera, high quality crisp clustered 2D wuxia chibi pixel art, coherent palette. No environment or floor texture. In all 8 cells draw exactly the same elderly silver-haired Taoist master phase two completely shirtless torso, same trousers and wine-red sash, hands empty using a two-finger sword gesture, absolutely no weapon, matching trinkets, raked white eyebrows and short forked white beard, with body 2.6 heads tall, topknot bronze crown and two burgundy ribbons. TOP row faces down toward screen, head and both eyes visible, four poses left to right idle, anticipate, release, recover. BOTTOM row faces up away from screen, back of head and back of costume or bare back clearly visible and no face, same four poses left to right idle, anticipate, release, recover. Keep feet grounded at matched cell positions and identical head size. Each pose readable at 60px body height in game. No duplicates, no VFX and no overlapping cells.",
+      "sha256": "80fdb72749e114fee05f75166edaf0e9a785db64e16f2a5ecf12574748eab17f",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "p2-walk-source.png",
+      "refs": [
+        "assets/source/bosses/vuong-trung-duong/side-attack-source.png",
+        "assets/concepts/main-bosses/vuong-trung-duong/boss-two-phases-v01.png"
+      ],
+      "prompt": "Create SOURCE ANIMATION CELS, exactly 4 equal columns by 2 equal rows, 8 full body poses total. True alpha transparent background, no checkerboard, no text, no frames, no grid lines or cast shadows. Equal cells and deliberate wide alpha gutters, independent figures/effects. Orthographic elevated three-quarter gameplay camera, high quality crisp clustered 2D wuxia chibi pixel art, coherent palette. No environment or floor texture. Match the silver-bearded Taoist master of both references, phase two completely shirtless torso, same trousers and wine-red sash, hands empty using a two-finger sword gesture, absolutely no weapon. TOP row left to right: (1) right-facing walking left foot forward, (2) right-facing walking right foot forward, (3) down/front-facing walking left foot forward, (4) down/front-facing walking right foot forward. BOTTOM row left to right: (1) up/back-facing walk left foot forward with back of head visible, (2) up/back-facing walk right foot forward, (3) right-facing struck/hurt recoil with bent back and one hand over chest, (4) right-facing collapse on one knee with head down, one empty palm on the ground, body defeated. Ground feet consistently, make opposite steps visibly different and keep all eight head sizes identical. Keep frames fully inside their cells. No particles or detached objects.",
+      "sha256": "27fbaeed2373bbd1af65d2f3ad6329856bfb30d02da6211d133ce19e830388bd",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "storm-source.png",
+      "refs": [
+        "assets/concepts/main-bosses/vuong-trung-duong/phase-1-vfx-v01.png"
+      ],
+      "prompt": "Generate a transparent SOURCE VFX sheet for the supplied pixel art game. Reference boards are a style and effects guide only. True alpha transparent background, no checkerboard, no text, no frames, no grid lines or cast shadows. Equal cells and deliberate wide alpha gutters, independent figures/effects. Orthographic elevated three-quarter gameplay camera, high quality crisp clustered 2D wuxia chibi pixel art, coherent palette. No environment or floor texture. Exactly 4 columns × 2 rows. TOP left to right: (1) transparent violet faceted bell-shaped shield dome with bare interior and violet edge, (2) isolated single lavender crack shaped like a lightning fracture, (3) isolated web of two major lavender fractures, (4) one vertical forked violet lightning strike with a white-hot base spark. BOTTOM left to right: (1) circular low-profile violet ground warning ring with subtle sparks and open center, (2) complete black-ivory yin-yang floor seal with lilac rim, (3) isolated spray of violet-white crystal fragments on shield break, (4) one very wide, thin horizontal lavender dotted ground warning stroke, clearly extends LEFT to RIGHT with bright endpoints. Keep effects separated. Only draw isolated effects on true alpha, omit all people and weapons other than the explicitly requested sword-shaped effects.",
+      "sha256": "306b3f5b8d57636836d1fe85a66b185817bd712cfda67a2eb0d0a0496627ade0",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "elements-source.png",
+      "refs": [
+        "assets/concepts/main-bosses/vuong-trung-duong/phase-1-vfx-v01.png"
+      ],
+      "prompt": "Generate a transparent SOURCE VFX sheet for the supplied pixel art game. Reference boards are a style and effects guide only. True alpha transparent background, no checkerboard, no text, no frames, no grid lines or cast shadows. Equal cells and deliberate wide alpha gutters, independent figures/effects. Orthographic elevated three-quarter gameplay camera, high quality crisp clustered 2D wuxia chibi pixel art, coherent palette. No environment or floor texture. Exactly 5 equal columns × 2 rows, 10 separate assets. TOP from left to right: five small ornate flat ground seals viewed overhead, with center sigils exactly gold metal blade, green wood sprout, blue water droplet, orange fire flame, ochre earth mountain. BOTTOM from left to right: five bolder impact sprites aligned by same column, spiky gold metal fragments, emerald binding roots, a crest of blue water, bright orange ground flame, ochre stone erupting in jagged chunks. No other effects. Separate cells, room around each asset. Only draw isolated effects on true alpha, omit all people and weapons other than the explicitly requested sword-shaped effects.",
+      "sha256": "c1e7c1157c9d7763d76458fc99f20b2a87dade9617c08da04ed061c9a21fc968",
+      "size": [
+        1983,
+        793
+      ]
+    },
+    {
+      "file": "formations-source.png",
+      "refs": [
+        "assets/concepts/main-bosses/vuong-trung-duong/phase-2-vfx-v01.png"
+      ],
+      "prompt": "Generate a transparent SOURCE VFX sheet for the supplied pixel art game. Reference boards are a style and effects guide only. True alpha transparent background, no checkerboard, no text, no frames, no grid lines or cast shadows. Equal cells and deliberate wide alpha gutters, independent figures/effects. Orthographic elevated three-quarter gameplay camera, high quality crisp clustered 2D wuxia chibi pixel art, coherent palette. No environment or floor texture. Exactly 4 equal columns × 2 rows. TOP left to right: (1) one small four-point ivory gold star, (2) one distinctly larger hollow diamond eye seal with a centered ivory spark, (3) one long thin horizontal dashed warm-gold warning stroke with bright endpoints, (4) one empty circular ivory-gold saw-toothed shockwave ring seen from overhead. BOTTOM left to right: (1) one vertical antique-gold spirit sword stuck point down into a tiny ring, (2) narrow horizontal hiltless amber beam of light with a thin white center and bright endpoint facing RIGHT, (3) one ivory energy sword falling straight down, long vertical light trail and compact white impact flecks at the foot, (4) one thin circular ivory warning ring around a small crossed center. Crisp pixels and separated cels. Only draw isolated effects on true alpha, omit all people and weapons other than the explicitly requested sword-shaped effects.",
+      "sha256": "233620ce6335536bc2b21ba5c4e0b5bc858d957146b0826b9fa702838b29a5b5",
+      "size": [
+        1774,
+        887
+      ]
+    },
+    {
+      "file": "notes-source.png",
+      "refs": [
+        "assets/source/bosses/vuong-trung-duong/formations-source.png"
+      ],
+      "prompt": "Create a NEW source spritesheet of SIX delicately outlined gold magic note circles, real transparent background, EXACTLY 3 columns by 2 rows. Match the true-alpha sparse line-art style of the input VFX atlas, specifically its thin circular shockwave and warning circle. Draw only golden pixels: the thin circular outlines, four little radial brackets and one bright distinct glyph inside each. There must be absolutely NO fill color, no black or brown disk, no shadows, no outer glow behind the lines, and no backdrop of any color. The transparent spaces between outlines, inside the circles around the glyph, and in the corners must all be true alpha 0. Top row in order a wind curl, a bird, a sun spiral. Bottom row in order a lotus, twin peaks, three waves. Same size, separate with broad blank gutters, centered in their own cells. Crisp detailed square pixel clusters with ivory highlights, suited to a flat ground warning. No text or panel lines.",
+      "followup": "Precise background extraction ONLY. The six ornate gold discs are the foreground, including the deep brown interiors of the discs and the rims and four exterior points. Remove ALL beige paper and outside glow around the six discs, giving transparent alpha between the discs and at all four canvas edges. Preserve the exact 3 × 2 arrangement, disc positions, sizes, detailed crisp pixel lines, gold and dark brown palette, order and existing six glyphs: wind, bird, sun, lotus, mountains, waves. Each disc must have an isolated hard alpha edge and ample transparent margin. Do not add a floor, glow background, checkerboard or text. Output isolated sprites on actual transparency.",
+      "sha256": "8cfd82ca030a94ef26136084558606c7cc907b055af9e50c4443a59f834e0fed",
+      "size": [
+        1536,
+        1024
+      ],
+      "priorPrompt": "Generate a transparent SOURCE VFX sheet for the supplied pixel art game. Reference boards are a style and effects guide only. True alpha transparent background, no checkerboard, no text, no frames, no grid lines or cast shadows. Equal cells and deliberate wide alpha gutters, independent figures/effects. Orthographic elevated three-quarter gameplay camera, high quality crisp clustered 2D wuxia chibi pixel art, coherent palette. No environment or floor texture. Exactly 3 equal columns × 2 rows. Six equally sized flat round ornate warm antique gold music seals, each separated. Each open dark-transparent circular seal has a unique glowing emblem. TOP left to right cloud curl, flying bird, sun spiral. BOTTOM left to right lotus, double mountain, three waves. Overhead circular appearance so they can be positioned flat on game ground. No panels, ground, letters, or text. Only draw isolated effects on true alpha, omit all people and weapons other than the explicitly requested sword-shaped effects.",
+      "alphaCutoff": 160
+    },
+    {
+      "file": "vertical-release-source.png",
+      "prompt": "Draw exactly four individual transparent sprite cels on a strict 2 columns by 2 rows SOURCE contact sheet for a top-down three-quarter RPG. Read direction literally relative to the frame, not character anatomy. Match this exact Taoist master: silver topknot with small bronze crown, two red ribbons, white beard, wine sash, charcoal trousers and boots. Top left is robed plum Vương Trùng Dương doing a strong forward/downscreen sword thrust toward the bottom center of its own cell, both eyes and chest directly facing viewer, foreshortened short sword pointed down, no silhouette extension sideways. Top right is the same man turned fully away, back of head and back of robe visible, sword thrust upward toward the top center of its own cell, seen in foreshortening behind and above shoulder, no extension sideways. Bottom left repeats the same front camera bearing and direct downscreen forward attack with shirtless costume and empty hands using two fingers. Bottom right repeats the back-facing upscreen attack with shirtless costume and empty hands using two fingers. For front and back, hips and feet are aligned vertically in the direction of action, head and body symmetrical to the camera. Do not copy any right-facing pose from the reference. Crisp chibi game pixel art, exactly one figure per cell, true alpha, no text, no border, no effects, no ground, generous alpha gutters.",
+      "refs": [
+        "assets/source/bosses/vuong-trung-duong/p1-walk-source.png",
+        "assets/source/bosses/vuong-trung-duong/p2-walk-source.png"
+      ],
+      "sha256": "b4e956409fbf4fe91d3cc16f7607fb830170127f9ffb48cadb627ecd304733f8",
+      "size": [
+        1247,
+        1261
+      ]
+    },
+    {
+      "file": "transition-source.png",
+      "prompt": "Exactly 4 columns by 2 rows, 8 isolated true-alpha source animation cels. Each cel has one full-body exact same elderly wuxia Taoist master as both references, original chibi pixel art hard square pixel clusters. Match face, silver topknot, crown and burgundy ribbons, deep plum and ivory robe, straight jian, wine sash, dark trousers, dark boots. In all eight poses face screen right at the same three-quarter overhead camera, maintain a similar head size and align feet. TOP 1 raises jian momentarily, fully clothed. TOP 2 lowers and lets go of his one jian, holding his empty fingers apart as it falls down to right. TOP 3 shirtless torso clearly visible as plum robe slips from one arm downward, no sword held. TOP 4 completely shirtless with two open empty hands in forward sword-finger gesture and same sash. BOTTOM 1 same shirtless man staggers back clutching chest. BOTTOM 2 left knee buckles as he braces himself with his empty right hand. BOTTOM 3 one knee grounded with right palm touching floor and head bowed. BOTTOM 4 same lower compact kneeling defeat pose, breathing with head down. No blood, no wounds, no VFX, no shadows, no floor, no typography, no gridlines, thick alpha gutters.",
+      "refs": [
+        "assets/source/bosses/vuong-trung-duong/side-attack-source.png",
+        "assets/concepts/main-bosses/vuong-trung-duong/boss-two-phases-v01.png"
+      ],
+      "sha256": "7bda26d9422db3b460ec6ec69300d0173e213547293463578157b4b152455328",
+      "size": [
+        1774,
+        887
+      ]
+    }
+  ]
+}

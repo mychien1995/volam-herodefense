@@ -7,6 +7,7 @@ import type {
 } from './types.js';
 import { cancelOwnedEffects, hasStatus, statusValue } from './status.js';
 import { characterStats, gainExperience } from './progression.js';
+import { awardCampaignBoss, grantFarmReward } from './campaign.js';
 import { direction, distance, segmentRect } from './geometry.js';
 import { recordsCraftDamage } from './economy.js';
 import { comboHit } from './combos.js';
@@ -52,6 +53,17 @@ export function hurt(
   )
     return false;
   if (target.namDeLocked) return false;
+  const campaignAttacker = world.creeps.get(sourceId);
+  if (
+    config.campaign?.bosses[sourceId] &&
+    world.heroes.has(target.id) &&
+    !snapshot?.directHp &&
+    !snapshot?.reactive
+  )
+    raw *=
+      1 +
+      config.campaign.damagePerPlayer *
+        ((campaignAttacker?.campaignPlayers ?? 1) - 1);
   raw = creepGuardDamage(
     world,
     target,
@@ -308,6 +320,8 @@ export function hurt(
     damage = target.maxHp * world.waveBossTest.bossHitFraction;
     critical = false;
   }
+  if (enemy && world.vuong?.bossId === enemy.id)
+    damage = world.vuong.limitIncoming(enemy, damage);
   target.hp = Math.max(0, target.hp - damage);
   reflectCreepDamage(
     world,
@@ -349,7 +363,8 @@ export function hurt(
     if (
       target.hp < beforeHp &&
       world.heroes.has(sourceId) &&
-      recordsCraftDamage(config, enemy.id)
+      (recordsCraftDamage(config, enemy.id) ||
+        !!config.campaign?.bosses[enemy.id])
     )
       (enemy.damagedBy ??= new Set()).add(sourceId);
   }
@@ -410,7 +425,8 @@ export function hurt(
     });
     if (enemy) {
       enemy.respawnAt = world.tick + config.creep.respawnTicks;
-      if (!enemy.bossEncounter) reward(world, enemy, config);
+      if (!awardCampaignBoss(world, config, enemy) && !enemy.bossEncounter)
+        reward(world, enemy, config);
     }
   }
   const leech = snapshot?.lifesteal;
@@ -536,6 +552,7 @@ export function offensiveStats(
   };
 }
 function reward(world: World, creep: Creep, config: SimulationConfig): void {
+  if (config.campaign && (creep.controlled || creep.summonedBy)) return;
   const stats = creep.stats ?? config.creep;
   const eligible = [...world.heroes.values()]
     .filter(
@@ -546,6 +563,16 @@ function reward(world: World, creep: Creep, config: SimulationConfig): void {
     )
     .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
   eligible.forEach((hero, i) => {
+    if (config.campaign) {
+      grantFarmReward(
+        hero,
+        stats.xp / eligible.length,
+        stats.gold / eligible.length,
+        config,
+        world.campaign?.chapter ?? 0,
+      );
+      return;
+    }
     gainExperience(
       hero,
       Math.floor(stats.xp / eligible.length) +

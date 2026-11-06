@@ -162,6 +162,7 @@ export function addHero(
   return hero;
 }
 export function removeHero(world: World, id: string): void {
+  world.vuong?.participantLeft(id);
   clearNamDeHero(world, id);
   cancelOwnedEffects(world, id);
   world.heroes.delete(id);
@@ -208,6 +209,10 @@ function runCommand(
 ): void {
   if (hero.hp <= 0) return;
   if (command.kind === 'nam-de-key') {
+    if (command.castId.startsWith('vtd:')) {
+      world.vuong?.submitKey(world, hero.id, command.castId, command.index, command.key);
+      return;
+    }
     answerNamDe(
       world,
       config,
@@ -218,7 +223,7 @@ function runCommand(
     );
     return;
   }
-  if (hero.namDeLocked) return;
+  if (hero.namDeLocked || world.vuong?.locked(hero.id)) return;
   if (command.kind === 'gear-skill') {
     useEquipmentSkill(world, hero, config);
     return;
@@ -597,6 +602,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     if (
       (movement.x || movement.y) &&
       !hero.namDeLocked &&
+      !world.vuong?.locked(hero.id) &&
       !hasStatus(hero, 'stun', world.tick) &&
       !hasStatus(hero, 'root', world.tick) &&
       !hasStatus(hero, 'dash', world.tick) &&
@@ -910,6 +916,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   }
   finishNamDeTick(world, config);
   world.bacCai?.step(world, config);
+  world.vuong?.step(world, config);
   stepBossBanter(world, config);
 }
 import { stepCreepActor, stepCreepHazards } from './creep-abilities.js';

@@ -119,6 +119,10 @@ export function characterStats(
     temporary: zero(),
   };
   sources.temporary.critChance = statusValue(hero, 'crit_buff', tick);
+  for (const key of ['maxHp', 'maxMana', 'attackPower', 'defense'] as const)
+    sources.innate[key] +=
+      (sources.base[key] + sources.growth[key] + sources.innate[key]) *
+      (hero.dragonBonus ?? 0);
   if (hero.inventory && config.economy)
     for (const [slot, item] of Object.entries(config.economy.basics)) {
       const level =
@@ -280,13 +284,15 @@ export function gainExperience(
     oldHp = hero.maxHp,
     oldMana = hero.maxMana;
   hero.xp = Math.min(
-    (config.maxLevel - 1) * config.xpPerLevel,
+    experienceAtLevel(config.maxLevel, config),
     hero.xp + amount,
   );
-  hero.level = Math.min(
-    config.maxLevel,
-    Math.floor(hero.xp / config.xpPerLevel) + 1,
-  );
+  hero.level = 1;
+  while (
+    hero.level < config.maxLevel &&
+    hero.xp >= experienceAtLevel(hero.level + 1, config)
+  )
+    hero.level++;
   if (hero.progression) {
     if (hero.level !== oldLevel) {
       hero.progression.revision++;
@@ -542,3 +548,4 @@ export function changeBuild(
   refreshCharacter(hero, config);
   return undefined;
 }
+import { experienceAtLevel } from './campaign.js';

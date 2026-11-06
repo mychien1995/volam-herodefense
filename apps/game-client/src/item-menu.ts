@@ -417,12 +417,21 @@ export class ItemMenu {
     );
   }
   private inventory(): string {
+    const campaign = this.hero?.inventory.campaign
+      ? (JSON.parse(this.hero.inventory.campaign) as {
+          pearls: number;
+          dragonBonus: number;
+        })
+      : null;
+    const pearlNotice = campaign
+      ? `<p data-testid="dragon-pearls">Long Châu ${campaign.pearls}/8 · +${Math.round(campaign.dragonBonus * 100)}% sinh lực, nội lực, công và thủ nền</p>`
+      : '';
     const boots = this.branchFor('boots');
     const selected = this.items[this.selectedItem];
     const cooldown = Math.ceil(
       (this.hero?.inventory.potionCooldownTicks ?? 0) / m1Config.tickRate,
     );
-    return `<div class="item-inventory-layout"><section class="item-equipment-pane"><h3>Trang bị <small>4 ô · Mua đồ sẽ tự trang bị</small></h3><div class="item-paper-doll"><div class="paper-hero" aria-label="Nhân vật hiện tại"></div>${slots.map((slot, i) => `<button type="button" class="equipment-slot item-equip-${i} ${this.level(slot) ? 'owned' : ''}" disabled aria-label="${economyTrial.basics[slot].nameVi} · ${this.level(slot) ? `Cấp ${this.level(slot)}` : 'Chưa trang bị'}">${art(this.branchFor(slot)?.art ?? slot)}<strong>${economyTrial.basics[slot].nameVi}</strong><small>${this.branchFor(slot)?.nameVi ?? (this.level(slot) ? `Cấp ${this.level(slot)}/5` : 'Trống')}</small></button>`).join('')}</div><dl class="item-stats">${(
+    return `<div class="item-inventory-layout"><section class="item-equipment-pane"><h3>Trang bị <small>4 ô · Mua đồ sẽ tự trang bị</small></h3>${pearlNotice}<div class="item-paper-doll"><div class="paper-hero" aria-label="Nhân vật hiện tại"></div>${slots.map((slot, i) => `<button type="button" class="equipment-slot item-equip-${i} ${this.level(slot) ? 'owned' : ''}" disabled aria-label="${economyTrial.basics[slot].nameVi} · ${this.level(slot) ? `Cấp ${this.level(slot)}` : 'Chưa trang bị'}">${art(this.branchFor(slot)?.art ?? slot)}<strong>${economyTrial.basics[slot].nameVi}</strong><small>${this.branchFor(slot)?.nameVi ?? (this.level(slot) ? `Cấp ${this.level(slot)}/5` : 'Trống')}</small></button>`).join('')}</div><dl class="item-stats">${(
       [
         ['attackPower', 'Sát thương'],
         ['defense', 'Phòng thủ'],

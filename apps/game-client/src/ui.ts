@@ -14,6 +14,7 @@ import {
 import type { LobbyState } from '@volam/game-protocol';
 import { icon, menuContents, menuTitles, type Menu } from './menus.js';
 import { DefenseHud } from './defense-hud.js';
+import { BossRetryUI, type RetryAction } from './boss-retry-ui.js';
 import { SkillMenu } from './skill-menu.js';
 import { BossPartyUI, isBossDestination } from './boss-party-ui.js';
 import type { BuildChange } from '@volam/game-core';
@@ -25,6 +26,8 @@ export function element<T extends HTMLElement>(selector: string): T {
   return found;
 }
 export class GameUI {
+  readonly bossRetry: BossRetryUI;
+  onBossRetry: (action: RetryAction) => void = () => {};
   readonly bossParty: BossPartyUI;
   reconnecting = false;
   private menu: Menu | undefined;
@@ -107,6 +110,9 @@ export class GameUI {
         <p id="hero-stats" data-testid="hero-stats" class="sr-only"></p>
       </main>`;
     this.defense = new DefenseHud(element('#viewport'), () => this.onLeave());
+    this.bossRetry = new BossRetryUI(element('#viewport'), (action) =>
+      this.onBossRetry(action),
+    );
     this.bossParty = new BossPartyUI(element('#viewport'));
     const help = document.createElement('button');
     help.id = 'boss-help-button';
@@ -177,6 +183,7 @@ export class GameUI {
   }
   get blocked(): boolean {
     return (
+      this.bossRetry.blocked ||
       !!this.menu ||
       this.study ||
       this.ended ||
@@ -185,6 +192,14 @@ export class GameUI {
     );
   }
   private keydown = (event: KeyboardEvent): void => {
+    if (
+      this.bossRetry.blocked &&
+      !['Tab', 'Enter', 'Space'].includes(event.code)
+    ) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      return;
+    }
     const target = event.target;
     const typing =
       target instanceof HTMLElement &&
@@ -533,7 +548,7 @@ export class GameUI {
   }
   refresh(state: LobbyState): void {
     this.state = state;
-    if (state.phase === 'DEFEAT' && !this.ended) {
+    if (['DEFEAT', 'VICTORY'].includes(state.phase) && !this.ended) {
       this.ended = true;
       window.dispatchEvent(new Event('volam:controls-blocked'));
       this.close(false);
@@ -588,6 +603,7 @@ export class GameUI {
           ),
       ].join('');
     const hero = state.players.get(this.sessionId);
+    this.bossRetry.sync(hero, state.phase === 'IN_GAME');
     if (!hero) return;
     this.bossParty.sync(hero.bossInvitation);
     const help = element<HTMLButtonElement>('#boss-help-button');
@@ -604,7 +620,7 @@ export class GameUI {
     element('#game').classList.toggle('hero-dead', dead);
     element('#respawn-overlay').hidden = !dead;
     element('#respawn-countdown').textContent = hero.bossSpectator
-      ? 'Đã dùng lượt hồi sinh · ↑ ↓ ← → để xem · Space về đấu trường'
+      ? 'Đã hết lượt hồi sinh · ↑ ↓ ← → để quan chiến'
       : `Tự hồi sinh ${hero.zoneId === 'arena' ? 'tại đấu trường' : isBossDestination(dungeonForZone(hero.zoneId).id) ? 'tại cửa phó bản' : 'tại đấu trường'} sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`;
     const dungeon =
       hero.zoneId === 'arena' ? undefined : dungeonForZone(hero.zoneId);
@@ -778,19 +794,37 @@ export class GameUI {
     for (const [name, value, max, label] of [
       ['hp', hero.hp, hero.maxHp, 'SL'],
       ['mp', hero.mana, hero.maxMana, 'NL'],
-      ['xp', hero.xp, m1Config.xpPerLevel, 'KN'],
+      [
+        'xp',
+        hero.xp,
+        hero.inventory.campaign
+          ? Math.max(
+              1,
+              JSON.parse(hero.inventory.campaign).xpNext -
+                JSON.parse(hero.inventory.campaign).xpStart,
+            )
+          : m1Config.xpPerLevel,
+        'KN',
+      ],
     ] as const) {
       const meter = element(`.meter.${name}`);
       // XP is cumulative; only the visual progress within the current level wraps.
       const capped = name === 'xp' && hero.level >= m1Config.maxLevel;
-      const progress = name === 'xp' ? (capped ? max : value % max) : value;
+      const progress =
+        name === 'xp'
+          ? capped
+            ? max
+            : hero.inventory.campaign
+              ? value - JSON.parse(hero.inventory.campaign).xpStart
+              : value % max
+          : value;
       meter.setAttribute('aria-valuenow', String(progress));
       meter.setAttribute('aria-valuemax', String(max));
       meter.querySelector<HTMLElement>('i')!.style.width =
         `${Math.min(100, Math.max(0, (progress / max) * 100))}%`;
       element(`#${name}-text`).textContent = capped
         ? 'Kinh nghiệm tối đa · Cấp 30'
-        : `${label} ${Math.floor(progress)} / ${max}`;
+        : `${label} ${Math.floor(progress)} / ${Math.ceil(max)}`;
     }
     element('#hero-stats').textContent =
       `Cấp ${hero.level} · Sinh lực ${Math.ceil(hero.hp)}/${hero.maxHp} · Nội lực ${Math.floor(hero.mana)}/${hero.maxMana} · Kinh nghiệm ${hero.xp} · Vàng ${hero.gold} · Điểm kỹ năng ${hero.skillPoints}`;

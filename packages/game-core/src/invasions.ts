@@ -121,11 +121,43 @@ export class InvasionDirector {
         ),
         speed: recipe.speed,
       };
+      if (config.campaign) {
+        const chapter = Math.min(4, Math.floor((this.wave - 1) / 5));
+        stats.hp = Math.round(
+          recipe.hp * (1 + config.campaign.creepHpPerPlayer * (players - 1)),
+        );
+        stats.damage = Math.round(
+          recipe.damage * (1 + config.campaign.damagePerPlayer * (players - 1)),
+        );
+        const gates = this.definition.portalCount ?? 2;
+        const every = Math.max(
+          1,
+          Math.round(
+            ((this.definition.spawnEveryTicks ?? config.tickRate * 2) *
+              config.campaign.invasionBaseCount) /
+              (config.campaign.invasionBaseCount +
+                chapter * config.campaign.invasionChapterCount) /
+              (1 + this.definition.countPerAdditionalPlayer * (players - 1)),
+          ),
+        );
+        const total =
+          Math.ceil(
+            (this.definition.streamTicks ?? config.tickRate * 60) / every,
+          ) * gates;
+        stats.xp = (config.campaign.invasionXp[chapter]! * players) / total;
+        stats.gold = (config.campaign.invasionGold[chapter]! * players) / total;
+      }
       if (this.definition.streamTicks) {
         const every = Math.max(
           1,
           Math.round(
-            (this.definition.spawnEveryTicks ?? config.tickRate * 2) /
+            ((this.definition.spawnEveryTicks ?? config.tickRate * 2) *
+              (config.campaign
+                ? config.campaign.invasionBaseCount /
+                  (config.campaign.invasionBaseCount +
+                    Math.min(3, Math.floor((this.wave - 1) / 5)) *
+                      config.campaign.invasionChapterCount)
+                : 1)) /
               (1 + this.definition.countPerAdditionalPlayer * (players - 1)),
           ),
         );

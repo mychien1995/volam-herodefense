@@ -88,7 +88,12 @@ export class DongTaEncounter {
       boss.actionUntil = t + 1;
       if (a >= 1) this.startAttempt(world, config);
     }
-    if (this.phase === 'retry' && t >= this.phaseUntil && world.heroes.size)
+    if (
+      !config.campaign &&
+      this.phase === 'retry' &&
+      t >= this.phaseUntil &&
+      world.heroes.size
+    )
       this.startAttempt(world, config);
   }
   private startAttempt(world: World, config: SimulationConfig): void {
@@ -108,6 +113,12 @@ export class DongTaEncounter {
       ['dan_chi_than_cong', 'lac_anh_kiem_phap', 'ngoc_tieu_hoi_phong'] as const
     ).entries())
       this.ready.set(id, world.tick + (3 + i * 3) * config.tickRate);
+  }
+  restartCampaign(world: World, config: SimulationConfig): void {
+    this.startAttempt(world, config);
+  }
+  suspendCampaign(world: World): void {
+    this.retry(world);
   }
   private spawn(
     world: World,
@@ -161,7 +172,7 @@ export class DongTaEncounter {
       this.clear(world, config, boss);
       return;
     }
-    if (this.wiped(world)) {
+    if (!config.campaign && this.wiped(world)) {
       this.retry(world);
       return;
     }
@@ -223,7 +234,7 @@ export class DongTaEncounter {
       this.clear(world, config, boss);
       return;
     }
-    if (this.wiped(world)) {
+    if (!config.campaign && this.wiped(world)) {
       this.retry(world);
       return;
     }
@@ -262,6 +273,7 @@ export class DongTaEncounter {
         .filter((h) => boss?.hits[h.id] !== undefined)
         .sort((a, b) => a.id.localeCompare(b.id));
       eligible.forEach((h, i) => {
+        if (config.campaign) return;
         gainExperience(
           h,
           Math.floor(this.definition.xp / eligible.length) +

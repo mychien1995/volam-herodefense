@@ -1,3 +1,11 @@
+## Commit toàn bộ M3D — 2026-11-07
+
+Director yêu cầu commit tất cả thay đổi hiện có, bao gồm cân bằng chiến dịch, ba lượt hồi sinh/vote và toàn bộ code/artwork/tài liệu Vương Trùng Dương. Đây là ủy quyền commit trên checkout hiện tại, không tự xác nhận duyệt art runtime hoặc triển khai mạng. [Phạm vi và kiểm chứng](CAMPAIGN_BALANCE_2026_11_06.md).
+
+## Campaign balance và thử lại boss — 2026-11-06
+
+Director-approved campaign update: protocol35; normal rooms use campaign definition, first-clear pearls/rewards and finite-life BossRetries. Existing Vương WIP is retained. This supersedes earlier one-revival/auto-retry/no-wave-pearl/immediate-final notes only; preserve separate PvP scope. [Quy tắc, cấu hình và kiểm chứng](CAMPAIGN_BALANCE_2026_11_06.md).
+
 # Current M3D integration memory
 
 ## Approved creep integration — 2026-11-06
@@ -11,6 +19,8 @@ The milestone combines gameplay commit 2ef38869 with approved creep and environm
 ## Gameplay update worktree — 2026-11-04
 
 On `wip/m3d/gameplay-update`, protocol 31 requires a new room and matching server/client. Use the 2026-11-04 overrides in [DECISIONS.md](../DECISIONS.md), [CONTENT_DATA.md](../CONTENT_DATA.md) and [GAME_DESIGN.md](../GAME_DESIGN.md). Fixed school branches use manual Q/W/E/R/T upgrades and the confirmed F stance for Thiếu Lâm Quyền. Reserved stat points await their own feature. The opening story introduces Tượng Võ Thần and Long Hồn Thần Thạch. Existing boss encounters have seeded dialogue and the four live wave bosses have one farewell each. Vương Trùng Dương has authored lines for his future encounter. Crafting uses personal dungeon boss materials and unlocks Z from crafted boots. Cái Bang has new icons and the supplied OST loops during the match. The final crafting run passed 755 unit and integration tests plus the six-player Chromium case. The OST browser case passed on its isolated retry after the first run timed out. The historical protocol notes below describe the base milestone.
+
+Vương Trùng Dương — 2026-11-05, protocol 32. Use the [final boss design](VUONG_TRUNG_DUONG_FINAL_DESIGN.md) as the canonical source and the [runtime handoff](VUONG_TRUNG_DUONG_RUNTIME.md) for the playtest, tuning and evidence. Director approved the three [concept v01 images](../assets/concepts/main-bosses/vuong-trung-duong/README.md). Runtime sprites and effects are supplied for separate director review. Production reaches the final through four actual defeats. Local DEV can include the final through `VOLAM_DEV_FINAL_BOSS=1` alongside `VOLAM_DEV_WAVE_BOSSES=1`.
 
 Last update2026-11-03. Director approved the complete feedback runtime through521f73cd and explicitly requested integration into `milestone/m3d`. Runtime merge e69dc456 is now on milestone/m3d, combining feedbackf1e90462 with milestone3b0c1ebc, preserving Hell, merchant/inventory UI, basic/potion economy and potion1/2. Earlier no-merge statements in retained handoffs describe previous authorization, not the current request. Final merge identity/checks: `M3D_MILESTONE_INTEGRATION_2026-11-03.md`.
 

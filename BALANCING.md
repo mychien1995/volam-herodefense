@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Production dùng đường EXP80+40L, ngân sách thưởng theo đợt, scaling phòng, Long Châu cộng tuyến tính và hệ số phó bản theo thời gian. Các giá trị là tuning chiến dịch v1 đã được phép triển khai; mốc level/vàng là mục tiêu playtest, không phải kết quả một trận60 phút đã đo. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 ## Fixed branch progression — 2026-11-04
 
 The rank cap is four for all five active skills. The fourth ultimate rank uses the existing per-rank progression for its school and opens at level 24. Characters can spend 20 skill points and reserve up to 10 future stat points. Earlier mixed-build and automatic surplus measurements below describe the historical rules.

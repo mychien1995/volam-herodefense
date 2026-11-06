@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Mỗi lượt boss có ba lần hồi sinh/người sau5s, lần chết thứ tư quan chiến. Toàn đội hết lượt mở ballot30s, cần ceil(N/2) đồng ý. Không reset cooldown khi hồi sinh. Long Châu tăng HP/MP/công/thủ nền; không đổi luật skill/rank/QTE hay Phát Động. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 ## Fixed skill progression override — 2026-11-04
 
 The server validates school/branch confirmation, slot upgrades, stance changes, rank gates, available points and build revision. Players spend their points with the mouse from Q/W/E/R/T. T unlocks at character level 6, then advances at 12/18/24. Q/W/E/R use 1/3/5/7. Thiếu Lâm Quyền retains its same-target combos. F waits for active casts and a buffered Vô Ảnh cast to resolve, preserving cooldowns and running effects.
