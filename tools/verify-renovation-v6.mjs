@@ -141,6 +141,23 @@ export async function verifyRenovationV6(
                   gold: 0,
                 },
               });
+              const secondary =
+                skill === 'hang_long_hoa_vu'
+                  ? addCreep(
+                      w,
+                      'v8_secondary',
+                      { x: e.x - fy * 22, y: e.y + fx * 22 },
+                      c,
+                    )
+                  : undefined;
+              if (secondary)
+                Object.assign(secondary, {
+                  controlled: true,
+                  archetypeId: 'creep_wild_dog',
+                  hp: 100000,
+                  maxHp: 100000,
+                  stats: { ...e.stats },
+                });
               await wait(
                 async () => {
                   const a = (await read(p)).state.players[h.id];
@@ -171,7 +188,9 @@ export async function verifyRenovationV6(
               let captured = false,
                 crackCaptured = false,
                 coilCaptured = false,
-                diveCaptured = false;
+                diveCaptured = false,
+                raisedCaptured = false,
+                landingCaptured = false;
               await p.locator('#game canvas').focus();
               await p.keyboard.press('KeyQ');
               await wait(
@@ -202,7 +221,7 @@ export async function verifyRenovationV6(
                   for (const f of v.observed.hero_cai_bang ?? [])
                     if (
                       f.startsWith(
-                        'renovated-v6-staff_action:' + direction + '_',
+                        'renovated-v8-staff_long_body:' + direction + '_',
                       )
                     )
                       frames.add(f);
@@ -221,6 +240,13 @@ export async function verifyRenovationV6(
                       );
                   }
                 }
+                if (skill === 'hang_long_hoa_vu')
+                  assert(
+                    v.skillEffects.filter(
+                      (a) => a.texture === 'renovated-v5-dragon_impact',
+                    ).length <= 1,
+                    'one landing explosion shared by all hit targets',
+                  );
                 for (const projectile of w.projectiles.values())
                   if (
                     projectile.ownerId === h.id &&
@@ -236,6 +262,19 @@ export async function verifyRenovationV6(
                     );
                   }
                 if (direction === 'right' && skill === 'hang_long_hoa_vu') {
+                  if (
+                    !landingCaptured &&
+                    v.skillEffects.some(
+                      (a) =>
+                        a.texture === 'renovated-v5-dragon_impact' &&
+                        Number(a.frame) >= 1,
+                    )
+                  ) {
+                    await p.screenshot({
+                      path: resolve(out, 'dragon-landing.png'),
+                    });
+                    landingCaptured = true;
+                  }
                   if (
                     !coilCaptured &&
                     v.skillEffects.some(
@@ -260,9 +299,21 @@ export async function verifyRenovationV6(
                 }
                 const contact =
                   skill === 'pha_giap_bong'
-                    ? b?.texture === 'renovated-v6-staff_action' &&
+                    ? b?.texture === 'renovated-v8-staff_long_body' &&
                       Number(String(b.frame).split('_').at(-1)) >= 2
                     : effects.size > 0;
+                if (
+                  !raisedCaptured &&
+                  direction === 'right' &&
+                  skill === 'pha_giap_bong' &&
+                  b?.texture === 'renovated-v8-staff_long_body' &&
+                  String(b.frame).endsWith('_1')
+                ) {
+                  await p.screenshot({
+                    path: resolve(out, 'pha_giap_bong-raised.png'),
+                  });
+                  raisedCaptured = true;
+                }
                 if (!captured && direction === 'right' && contact) {
                   await p.screenshot({ path: resolve(out, skill + '.png') });
                   captured = true;
@@ -273,7 +324,7 @@ export async function verifyRenovationV6(
                   skill === 'pha_giap_bong' &&
                   v.skillEffects.some(
                     (a) =>
-                      a.texture === 'renovated-v6-staff_crack' &&
+                      a.texture === 'renovated-v8-staff_fissure' &&
                       Number(a.frame) >= 2,
                   )
                 ) {
@@ -319,6 +370,12 @@ export async function verifyRenovationV6(
                 );
               }
               if (skill === 'hang_long_hoa_vu') {
+                assert(
+                  !fxs.some(
+                    (a) => a.texture === 'hang_long_hoa_vu_dragon_v2_impact',
+                  ),
+                  'legacy headed impact must not spawn extra dragons on landing',
+                );
                 const dragonFrames = new Set();
                 for (const [key, rendered] of Object.entries(shown))
                   if (key.startsWith('v7:dragon:') && !observedBefore.has(key))
@@ -350,6 +407,14 @@ export async function verifyRenovationV6(
                     .length,
                   1,
                 );
+                if (secondary)
+                  assert.equal(
+                    event.filter(
+                      (a) => a.kind === 'hit' && a.targetId === secondary.id,
+                    ).length,
+                    1,
+                    'second landing target hit once without a second headed impact',
+                  );
               }
               if (skill === 'pha_giap_bong') {
                 // Simulation ticks can finish this sampling window before the
@@ -380,7 +445,7 @@ export async function verifyRenovationV6(
                     [...frames].some(
                       (f) =>
                         f.endsWith('_' + i) &&
-                        f.startsWith('renovated-v6-staff_action'),
+                        f.startsWith('renovated-v8-staff_long_body'),
                     ),
                     'attached staff pose ' + i,
                   );
@@ -398,7 +463,9 @@ export async function verifyRenovationV6(
                   'trail endpoint and ground crack share the drawn staff tip',
                 );
                 assert(
-                  fxs.some((a) => a.texture === 'renovated-v7-staff_sweep'),
+                  fxs.some(
+                    (a) => a.texture === 'renovated-v8-staff_long_sweep',
+                  ),
                   'strong directional downward staff trail',
                 );
                 assert(

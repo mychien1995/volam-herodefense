@@ -1,4 +1,4 @@
-import staffSockets from './renovation-staff-sockets.json' with { type: 'json' };
+import reachArt from './renovation-reach.generated.json' with { type: 'json' };
 const directions = [
   'right',
   'down_right',
@@ -92,6 +92,15 @@ export function staffContact(fx: number, fy: number) {
       : fy < 0
         ? 'up'
         : 'down';
-  const socket = staffSockets[direction];
+  const socket = reachArt.contacts[direction];
   return { direction, x: socket[0]! * 0.5, y: socket[1]! * 0.5 };
+}
+/** A flat ground fissure starts at the feet and ends at the drawn, extended staff. */
+export function staffFissureTransform(fx: number, fy: number) {
+  const tip = staffContact(fx, fy);
+  return {
+    rotation: Math.atan2(tip.y, tip.x),
+    scaleX: Math.hypot(tip.x, tip.y) / 400,
+    scaleY: 0.5,
+  };
 }

@@ -1,5 +1,9 @@
 # Current M3D integration memory
 
+## Latest override: renovation v8 — 2026-11-06
+
+V7 Phá Giáp was rejected for shrinking the old footprint while aligning its short staff. Real M3D r3 cast/atlas comparison establishes about200world px sideways and128vertical reach. New native88px bodies hold a shaft that extends on raise and remains long through strike/recovery. The drawn cap and swing end share the far contact; the fissure starts at feet and runs there. Aseprite resamples only the outboard authored shaft, preserving its cap and protected body/hand/boot pixels. Keep range240, damage/costs and server clocks. Hàng Long keeps the provisionally accepted v7 red flight/coil/rise/dive; skip per-target headed legacy impact/ending because the single server landing pulse already draws a head-free explosion. Two-target/four-facing coverage is mandatory. New sources under`assets/source/renovation-v8`, runtime review under`docs/evidence/renovation-v8`, final profile`playwright.renovation-v8.config.ts`; staff art review pending.
+
 ## Latest override: renovation v7 — 2026-11-06
 
 Hàng Long Hỏa Vũ range is70% of its prior value at each rank:308/329/350. It reaches its cast-locked endpoint, coils the body in place through eight authored cels, rises and dives; no entire-sprite orbit or overshoot. All four flight views and coil/rise/dive art are now scarlet/red-orange fire. Keep original phase durations, one landing hit, radius112, damage, costs and cleanup. `orbitTicks` remains the serialized duration field; emitted phase is`dragon_coil`. Phá Giáp uses a bright directional vertical swing PNG aligned to the native body foot anchor; its ground crack shares the measured staff-tip socket, never a hit-enemy position. Existing v6 reversions remain. Sources/provenance under`assets/source/renovation-v7`, runtime review/tests under`docs/evidence/renovation-v7` and`playwright.renovation-v7.config.ts`; art approval pending.

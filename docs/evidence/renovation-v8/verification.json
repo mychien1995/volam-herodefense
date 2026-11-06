@@ -1,0 +1,105 @@
+{
+  "status": "PASS",
+  "date": "2026-11-07",
+  "branch": "wip/m3d/visual-upgrade-2",
+  "artStatus": "Candidate; director review pending",
+  "scope": [
+    "Restore original M3D long held-staff swing and full forward fissure",
+    "Remove legacy headed per-target dragon landing impact from renovated mode"
+  ],
+  "reproducedBeforeFix": {
+    "staff": "Four reach assertions failed against V7; actual normal-entry original M3D and V7 Q casts captured at matching camera/body size",
+    "dragon": "Right-facing real Q landing with two durable targets failed the no-legacy-headed-impact assertion; failure evidence retained"
+  },
+  "staff": {
+    "nativeBodyHeight": 88,
+    "worldReach": {
+      "horizontal": 200,
+      "vertical": 128
+    },
+    "poses": [
+      "normal raise",
+      "extended raise",
+      "long strike",
+      "long recovery"
+    ],
+    "bodyHandsBootsProtected": true,
+    "heldCapSwingAndFissureEndpointAligned": true,
+    "combatRangeUnchanged": 240
+  },
+  "dragon": {
+    "redV7ArtUnchanged": true,
+    "flightCoilRiseDiveUnchanged": true,
+    "maximumFlightRangeFraction": 0.7,
+    "landingTicks": 87,
+    "landingRadius": 112,
+    "targetsActuallyHitOnce": 2,
+    "sharedHeadFreeExplosion": true,
+    "legacyHeadedImpactRemoved": true,
+    "serverRulesUnchanged": true
+  },
+  "verification": {
+    "command": "pnpm check:final --config playwright.renovation-v8.config.ts",
+    "pipeline": "docs/evidence/sessions/renovation-v8-final/check-workflow/final-timings.json",
+    "pipelineSeconds": 393.53,
+    "workflowChecks": 18,
+    "unitIntegrationTests": 779,
+    "assetValidators": 30,
+    "uniqueArtCels": 36,
+    "browserTests": 1,
+    "facingCases": 8,
+    "clients": 6,
+    "naturalCombat": {
+      "clients": 6,
+      "hitEvents": 23,
+      "peerDamageAgreement": true
+    },
+    "liveServiceSmoke": "docs/evidence/renovation-v8/live-services.json",
+    "screenshotsOnly": true,
+    "recordings": false
+  },
+  "live": [
+    {
+      "mode": "normal",
+      "client": 5546,
+      "server": 2946,
+      "level": 1,
+      "runId": "60d5f49d-f642-43fb-b9ee-0d10f93a7a11",
+      "errors": []
+    },
+    {
+      "mode": "skills",
+      "client": 5547,
+      "server": 2947,
+      "level": 30,
+      "runId": "711e6a49-2537-4b3e-8585-d906ec1bffea",
+      "errors": []
+    },
+    {
+      "mode": "bosses",
+      "client": 5548,
+      "server": 2948,
+      "level": 30,
+      "runId": "02239148-5cfd-4bee-85e3-c12a001504a5",
+      "errors": []
+    }
+  ],
+  "evidence": [
+    "baseline-m3d.png",
+    "baseline-v7.png",
+    "baseline-v7-dragon.png",
+    "pha_giap_bong-raised.png",
+    "pha_giap_bong.png",
+    "pha_giap_bong-crack.png",
+    "dragon-coil.png",
+    "dragon-dive.png",
+    "dragon-landing.png",
+    "six-player-combat.png",
+    "normal-live-entry.png"
+  ],
+  "notes": [
+    "Per-render frame histories and server hit assertions validate motion and alignment; screenshot timing alone is not used as proof of animation phase.",
+    "Normal production endpoint was rebuilt for port2946 after the final pipeline and smoke-tested through normal entry. Runtime code and art were unchanged after the successful final pipeline.",
+    "Fresh rooms use V8 services; normal mode starts level1 and review modes start level30."
+  ]
+}

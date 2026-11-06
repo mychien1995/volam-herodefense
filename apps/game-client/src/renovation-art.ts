@@ -122,6 +122,7 @@ export function inspectRenovation(scene: Phaser.Scene) {
             b.texture.key.startsWith('renovated-v5-') ||
             b.texture.key.startsWith('renovated-v6-') ||
             b.texture.key.startsWith('renovated-v7-') ||
+            b.texture.key.startsWith('renovated-v8-') ||
             b.texture.key.startsWith('v6_') ||
             b.texture.key.startsWith('retained_m3d_')) &&
           !b.getData('renovation') &&

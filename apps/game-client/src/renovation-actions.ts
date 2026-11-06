@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import raw from './renovation-actions.generated.json';
 import revision from './renovation-revision.generated.json';
 import followup from './renovation-followup.generated.json';
+import reach from './renovation-reach.generated.json';
 import { renovationFollowupEnabled } from './renovation-policy.js';
 import { staffSlamCel } from './renovation-followup-model.js';
 import { renovationRevisionEnabled } from './renovation-policy.js';
@@ -34,8 +35,14 @@ const bodies = raw.bodies as Definition[],
       actor: 'hero_cai_bang',
       pivot: [200, 320],
     })),
+  reachBodies = reach.assets
+    .filter((a) => a.type === 'body')
+    .map((a) => ({ ...a, id: 'v8:' + a.id, actor: 'hero_cai_bang' })),
   byId = new Map(
-    [...bodies, ...extraBodies, ...followupBodies].map((b) => [b.id, b]),
+    [...bodies, ...extraBodies, ...followupBodies, ...reachBodies].map((b) => [
+      b.id,
+      b,
+    ]),
   );
 export const renovationActionsEnabled = () => {
   const q = new URLSearchParams(location.search);
@@ -45,7 +52,10 @@ export const renovationActionsEnabled = () => {
   );
 };
 export const renovationActionSources = new Map(
-  [...bodies, ...extraBodies, ...followupBodies].map((b) => [b.key, b.url]),
+  [...bodies, ...extraBodies, ...followupBodies, ...reachBodies].map((b) => [
+    b.key,
+    b.url,
+  ]),
 );
 export function preloadRenovationActions(scene: Phaser.Scene) {
   if (!renovationActionsEnabled()) return;
@@ -53,7 +63,8 @@ export function preloadRenovationActions(scene: Phaser.Scene) {
   if (renovationRevisionEnabled())
     for (const b of extraBodies) scene.load.atlas(b.key, b.url, b.atlas);
   if (renovationFollowupEnabled())
-    for (const b of followupBodies) scene.load.atlas(b.key, b.url, b.atlas);
+    for (const b of [...followupBodies, ...reachBodies])
+      scene.load.atlas(b.key, b.url, b.atlas);
 }
 /** Redraw only the sampled legacy action pose. The retained animator/server owns its clock. */
 export function presentRenovationAction(
@@ -86,7 +97,8 @@ export function presentRenovationAction(
   const native =
     image.texture.key.startsWith('renovated-action-') ||
     image.texture.key.startsWith('renovated-v5-') ||
-    image.texture.key.startsWith('renovated-v6-');
+    image.texture.key.startsWith('renovated-v6-') ||
+    image.texture.key.startsWith('renovated-v8-');
   const texture =
     native && previous ? previous.sourceTexture : image.texture.key;
   const renderedFrame =
@@ -124,7 +136,7 @@ export function presentRenovationAction(
   const cel =
       renovationFollowupEnabled() && ability === 'pha_giap_bong'
         ? {
-            sheet: 'v6:staff_action',
+            sheet: 'v8:staff_long_body',
             index: staffSlamCel(clip, progress),
             phase: 'staff-slam',
           }

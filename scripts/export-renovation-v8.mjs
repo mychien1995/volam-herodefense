@@ -1,0 +1,133 @@
+import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+const src = 'assets/source/renovation-v8',
+  out = 'assets/exports/renovation-v8';
+mkdirSync(out, { recursive: true });
+const plan = {
+  canvas: [1024, 1280],
+  pivot: [512, 819],
+  bodyHeight: 88,
+  shaftCut: 60,
+  capLength: 12,
+  shaftRadius: 12,
+  bodies: [
+    {
+      direction: 'right',
+      source: 'staff_long_right',
+      head: 200,
+      feet: [
+        [143, 426],
+        [143, 426],
+        [140, 416],
+        [158, 416],
+      ],
+      grips: [null, [171, 221], [231, 346], [223, 357]],
+      tips: [null, [846, 87], [832, 408], [838, 408]],
+      targetAxis: 'x',
+      target: 400,
+    },
+    {
+      direction: 'down',
+      source: 'staff_long_down',
+      head: 397,
+      feet: [
+        [220, 599],
+        [222, 599],
+        [223, 541],
+        [227, 541],
+      ],
+      grips: [null, [157, 413], [222, 503], [211, 503]],
+      tips: [null, [406, 166], [223, 806], [267, 806]],
+      targetAxis: 'y',
+      target: 256,
+    },
+    {
+      direction: 'up',
+      source: 'staff_long_up',
+      head: 570,
+      feet: [
+        [213, 777],
+        [207, 777],
+        [202, 782],
+        [207, 783],
+      ],
+      grips: [null, [197, 548], [177, 543], [192, 543]],
+      tips: [null, [336, 103], [222, 40], [221, 40]],
+      targetAxis: 'y',
+      target: -256,
+    },
+  ],
+  sweep: {
+    source: 'assets/source/renovation-v7/raw/staff_sweep.png',
+    rows: [0, 340, 680, 1086],
+    columns: [0, 300, 700, 1080, 1448],
+    directions: ['right', 'down', 'up'],
+    sourceContact: [
+      [292, 292],
+      [177, 302],
+      [170, 48],
+    ],
+    scales: [
+      [1.48, 1.47],
+      [0.8, 2.14],
+      [0.55, 0.25],
+    ],
+  },
+  fissure: {
+    source: 'staff_fissure',
+    root: [
+      [230, 265],
+      [230, 265],
+      [230, 272],
+      [230, 272],
+    ],
+    tip: [
+      [686, 257],
+      [686, 257],
+      [686, 257],
+      [686, 257],
+    ],
+    nativeLength: 400,
+    widthScale: 0.5,
+  },
+};
+writeFileSync(src + '/export-plan.json', JSON.stringify(plan, null, 2) + '\n');
+const r = spawnSync(
+  process.env.ASEPRITE ?? 'C:/Program Files/Aseprite/Aseprite.exe',
+  [
+    '-b',
+    '--script-param',
+    'root=' + process.cwd().replaceAll('\\', '/'),
+    '--script',
+    src + '/export.lua',
+  ],
+  { encoding: 'utf8', windowsHide: true },
+);
+process.stdout.write(r.stdout ?? '');
+process.stderr.write(r.stderr ?? '');
+if (r.status !== 0 || !r.stdout.includes('V8 EXPORT COMPLETE'))
+  throw Error('Incomplete V8 export');
+const contacts = JSON.parse(
+  readFileSync(out + '/staff_long_body.json', 'utf8'),
+).contacts;
+const assets = [
+  ['staff_long_body', 'body'],
+  ['staff_long_sweep', 'effect'],
+  ['staff_fissure', 'effect'],
+].map(([id, type]) => ({
+  id,
+  type,
+  key: 'renovated-v8-' + id,
+  url: '/assets/renovation-v8/' + id + '.png',
+  atlas: '/assets/renovation-v8/' + id + '.json',
+  canvas: plan.canvas,
+  pivot: plan.pivot,
+  sha256: createHash('sha256')
+    .update(readFileSync(out + '/' + id + '.png'))
+    .digest('hex'),
+}));
+writeFileSync(
+  'apps/game-client/src/renovation-reach.generated.json',
+  JSON.stringify({ contacts, assets }, null, 2) + '\n',
+);

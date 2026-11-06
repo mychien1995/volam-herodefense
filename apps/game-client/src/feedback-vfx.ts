@@ -530,7 +530,11 @@ export class FeedbackVfx {
             : [0, 0],
         );
     }
-    if (e.kind === 'hit' && b.impact) {
+    if (
+      e.kind === 'hit' &&
+      b.impact &&
+      !(renovationFollowupEnabled() && e.abilityId === 'hang_long_hoa_vu')
+    ) {
       let refs =
         e.stage === 'empowered' && b.empowered ? b.empowered.impact : b.impact;
       if (e.abilityId === 'thien_son_phien') {

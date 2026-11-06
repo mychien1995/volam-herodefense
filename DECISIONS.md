@@ -1,3 +1,9 @@
+## Renovation v8 · khôi phục độ vươn Phá Giáp và sửa impact rồng — 2026-11-06
+
+Director xác nhận Phá Giáp v7 bị thu ngắn so với M3D. Đối chiếu cast thật và atlas M3D r3: giữ footprint đánh xa khoảng200world px ngang /128world px dọc, thay cho điểm chạm sát chân v7. Bổng phải dài ra lúc giơ và giữ chiều dài khi vụt/chạm đất; thân/điểm neo chân giữ nguyên kích thước. Vệt vụt đi tới đầu bổng dài; đường nứt bắt đầu từ chân và chạy tới điểm đánh xa, không chỉ là một vết nứt tròn ở đó. Không đổi combat range240, damage, mana, cooldown hay thời điểm strike.
+
+Hàng Long v7 tạm được chấp nhận: giữ nguyên rồng đỏ, đường bay, cuộn/rise/dive, tầm70% và một landing hit. Chỉ ngừng phát bộ impact/ending cũ có hình đầu rồng trên từng mục tiêu; dùng một cú nổ tiếp đất mới cho cả nhóm mục tiêu. Kiểm tra hai mục tiêu cùng trúng và bốn hướng, đặc biệt hướng phải. Nguồn/PNG/Aseprite và so sánh cũ-mới ở`assets/source/renovation-v8` /`docs/evidence/renovation-v8`; art bổng mới chờ duyệt.
+
 ## Renovation v7 · rồng lửa cuộn thân và điểm chạm bổng — 2026-11-06
 
 Director giảm tầm bắn tối đa Hàng Long Hỏa Vũ 30% ở mọi rank: 440/470/500 → 308/329/350. Rồng bay tới đúng điểm khóa lúc cast, cuộn chính thân thành một vòng tại chỗ, bay lên rồi đâm xuống; không đưa cả sprite chạy vòng quanh điểm rơi. Giữ 24+36+15+12 tick, bán kính nổ112, một lần sát thương khi chạm đất, mana/CD/damage và hủy khi chết/chuyển zone. Tên trường duration `orbitTicks` được giữ tương thích; phase hiện là `dragon_coil`. Rồng chuyển sang vảy đỏ lửa/bờm đỏ cam, giữ nhận diện và góc camera cũ. Hai ảnh mới của director chỉ là khái niệm chuyển động, không phải art cần chép vào game.

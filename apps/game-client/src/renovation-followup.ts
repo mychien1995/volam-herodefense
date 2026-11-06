@@ -4,17 +4,20 @@ import type { LobbyState } from '@volam/game-protocol';
 import { m1Config } from '@volam/game-data';
 import raw from './renovation-followup.generated.json';
 import coilArt from './renovation-coil.generated.json';
+import reachArt from './renovation-reach.generated.json';
 import { renovationFollowupEnabled } from './renovation-policy.js';
 import {
   dragonTurnFrame,
   dragonCoilFrame,
   staffContact,
+  staffFissureTransform,
 } from './renovation-followup-model.js';
 export function preloadRenovationFollowup(scene: Phaser.Scene) {
   if (renovationFollowupEnabled())
     for (const a of [
       ...raw.assets.filter((a) => a.type !== 'body'),
       ...coilArt.assets,
+      ...reachArt.assets.filter((a) => a.type !== 'body'),
     ])
       scene.load.atlas(a.key, a.url, a.atlas);
 }
@@ -89,13 +92,13 @@ export class RenovationFollowup {
       .image(
         x,
         y,
-        arc ? 'renovated-v7-staff_sweep' : 'renovated-v6-staff_crack',
+        arc ? 'renovated-v8-staff_long_sweep' : 'renovated-v8-staff_fissure',
         arc ? contact.direction + '_0' : '0',
       )
       .setName('renovation-v6:' + e.abilityId)
       .setData('v6-effect', effect)
-      .setOrigin(0.5, arc ? 0.8 : 0.5)
-      .setScale(arc ? 0.5 : 0.65)
+      .setOrigin(512 / 1024, 819 / 1280)
+      .setScale(0.5)
       .setDepth(effect === 'staff_crack' ? -2 : e.y + 0.8);
     const f = {
       image,
@@ -130,7 +133,6 @@ export class RenovationFollowup {
       f.windup = (windup * 1000) / m1Config.tickRate;
     }
     if (e.kind === 'pulse' && e.stage === 'strike') {
-      const contact = staffContact(e.fx ?? 1, e.fy ?? 0);
       for (const f of this.flashes)
         if (
           f.owner === e.sourceId &&
@@ -142,7 +144,7 @@ export class RenovationFollowup {
           f.x = e.x;
           f.y = e.y;
         }
-      this.flash(e, 'staff_crack', 700, e.x + contact.x, e.y + contact.y);
+      this.flash(e, 'staff_crack', 700, e.x, e.y);
     }
   }
   sync(
@@ -163,8 +165,9 @@ export class RenovationFollowup {
         this.flashes.delete(f);
         continue;
       }
-      f.image.setVisible(age >= 0);
-      if (age < 0) continue;
+      const visibleAt = f.effect === 'staff_arc' ? f.windup * 0.5 : 0;
+      f.image.setVisible(age >= visibleAt);
+      if (age < visibleAt) continue;
       if (f.follow) {
         const p = position?.(f.owner) ?? owner;
         f.x = p.x;
@@ -186,9 +189,13 @@ export class RenovationFollowup {
           .setDepth(f.y + (contact.direction === 'up' ? -0.3 : 0.8))
           .setData('staff-contact', [f.x + contact.x, f.y + contact.y]);
       } else {
+        const contact = staffContact(f.fx, f.fy),
+          transform = staffFissureTransform(f.fx, f.fy);
         f.image
           .setFrame(String(Math.min(3, Math.floor((age / f.life) * 4))))
-          .setData('staff-contact', [f.x, f.y]);
+          .setScale(transform.scaleX, transform.scaleY)
+          .setRotation(transform.rotation)
+          .setData('staff-contact', [f.x + contact.x, f.y + contact.y]);
       }
       f.image.setPosition(f.x, f.y).setAlpha(Math.min(1, remaining / 120));
       const observed = this.scene.registry.get('renovation-observed') as
