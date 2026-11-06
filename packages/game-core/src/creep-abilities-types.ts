@@ -1,6 +1,8 @@
 import type { Point, StatusSpec } from './types.js';
 
 export interface CreepAttack {
+  extentScale?: number | undefined;
+  statusChance?: number | undefined;
   mode: 'arc' | 'projectile' | 'area' | 'dash' | 'guard' | 'counter' | 'buff';
   nameVi: string;
   range: number;
@@ -28,6 +30,8 @@ export interface CreepAttack {
   graphic: string;
 }
 export interface CreepProfile {
+  reflectChance?: number | undefined;
+  reflectFraction?: number | undefined;
   id: string;
   nameVi: string;
   basic: CreepAttack;

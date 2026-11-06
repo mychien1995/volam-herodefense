@@ -571,13 +571,89 @@ add(
   dash('Vồ', { range: 85, damage: 1.1, windup: 24, graphic: 'bite' }),
 );
 
+// Director feedback r2: scale geometry once before catalogue validation.
+const rootStatus: StatusSpec[] = [
+  { kind: 'root', magnitude: 1, durationTicks: 30 },
+];
+const stunStatus: StatusSpec[] = [
+  { kind: 'stun', magnitude: 1, durationTicks: 24 },
+];
+const profile = (id: string) => rows.find((p) => p.id === id)!;
+for (const p of rows) {
+  if (p.basic.mode === 'arc') p.basic.range *= 2;
+  if (
+    ['wave_04', 'wave_08', 'cung_thu_sa_mac', 'mongol_archer'].includes(p.id)
+  ) {
+    p.basic.range *= 0.85;
+    if (p.special?.mode === 'projectile') p.special.range *= 0.85;
+  }
+  const enlarge = (a: CreepAttack, scale: number) => {
+    if (a.mode === 'arc') {
+      a.range *= scale;
+      a.radius = Math.max(24, a.range * 0.28);
+    } else if (
+      a.mode === 'area' ||
+      a.mode === 'dash' ||
+      a.mode === 'projectile'
+    )
+      a.radius *= scale;
+    a.extentScale = scale;
+    if (a.field) enlarge(a.field, scale);
+    if (a.trail) enlarge(a.trail, scale);
+  };
+  if (p.special) enlarge(p.special, p.special.nameVi === 'Đập mạnh' ? 1.5 : 2);
+  if (p.death) enlarge(p.death, 2);
+}
+profile('truc_xa').basic = shot('Phun độc', {
+  statuses: [...poison, ...slow(0.25)],
+  graphic: 'poison',
+});
+profile('truc_xa').special!.statuses = [...poison, ...slow(0.25)];
+profile('doc_chu').special!.statuses = rootStatus;
+profile('doc_chu').special!.statusChance = 0.25;
+profile('son_vien').special = pool('Dậm địa', 'stone', {
+  range: 0,
+  radius: 100,
+  windup: 24,
+  duration: 1,
+  damage: 1.5,
+  statuses: stunStatus,
+});
+profile('truc_lam_kiem_khach').reflectChance = 0.25;
+profile('truc_lam_kiem_khach').reflectFraction = 0.5;
+profile('moc_linh').basic = shot('Mộc đạn', { graphic: 'wood' });
+profile('sa_xa').basic = shot('Sa độc', {
+  statuses: slow(0.25),
+  graphic: 'sand',
+});
+profile('xac_uop').basic.cooldown = 36;
+profile('xac_uop').basic.statuses = rootStatus;
+profile('xac_uop').basic.statusChance = 0.25;
+profile('cu_nhan_sa_thach').basic = {
+  ...profile('cu_nhan_sa_thach').basic,
+  halfAngle: Math.PI,
+  statuses: stunStatus,
+};
+profile('hai_xa').basic = shot('Thủy đạn', { graphic: 'water' });
+profile('hai_xa').special!.statuses = [...poison, ...slow(0.25)];
+
 const status = z.strictObject({
-  kind: z.enum(['slow', 'attack_slow', 'defense_break', 'poison', 'burn']),
+  kind: z.enum([
+    'slow',
+    'root',
+    'stun',
+    'attack_slow',
+    'defense_break',
+    'poison',
+    'burn',
+  ]),
   magnitude: z.number().finite().nonnegative(),
   durationTicks: z.number().int().positive(),
 });
 const attack: z.ZodType<CreepAttack> = z.lazy(() =>
   z.strictObject({
+    extentScale: z.number().positive().optional(),
+    statusChance: z.number().min(0).max(1).optional(),
     mode: z.enum([
       'arc',
       'projectile',
@@ -614,6 +690,8 @@ const attack: z.ZodType<CreepAttack> = z.lazy(() =>
   }),
 );
 export const creepProfileSchema = z.strictObject({
+  reflectChance: z.number().min(0).max(1).optional(),
+  reflectFraction: z.number().min(0).max(1).optional(),
   id: z.string().regex(/^[a-z0-9_]+$/),
   nameVi: z.string().min(1),
   basic: attack,

@@ -1,0 +1,152 @@
+{
+  "status": "PASS",
+  "date": "2026-11-06",
+  "branch": "wip/m3d/creep-upgrade",
+  "base": "a49c7ab6",
+  "protocol": 32,
+  "final": {
+    "command": "pnpm check:final --config playwright.creep-upgrade.config.ts",
+    "session": "creep-upgrade-r2-final",
+    "seconds": 432.58,
+    "unitIntegrationTests": 830,
+    "testFiles": 81,
+    "workflowTests": 18,
+    "assetValidators": 20,
+    "browserCases": 1,
+    "browserSeconds": 160.42,
+    "players": 6,
+    "browserClients": 2,
+    "sdkClients": 4,
+    "regularIdentitiesObserved": 44,
+    "controlledCrowdActors": 120,
+    "clientErrors": []
+  },
+  "balance": {
+    "cases": 9216,
+    "seconds": 36.4298991,
+    "scope": "48 attacking profiles; 4 schools, both basics, levels 1/6/15/30, solo/six, 3 seeds, legal mixed four-slot builds; static exposure bots, no human dodge model",
+    "streams": [
+      {
+        "portals": 2,
+        "players": 1,
+        "count": 60,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.0010000000002037268,
+        "maxMs": 0.9799999999995634,
+        "xpPool": 3600,
+        "goldPool": 720
+      },
+      {
+        "portals": 2,
+        "players": 6,
+        "count": 240,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.0076999999982945155,
+        "maxMs": 0.044799999999668216,
+        "xpPool": 14400,
+        "goldPool": 2880
+      },
+      {
+        "portals": 3,
+        "players": 1,
+        "count": 90,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.0007000000005064066,
+        "maxMs": 0.08170000000245636,
+        "xpPool": 5400,
+        "goldPool": 1080
+      },
+      {
+        "portals": 3,
+        "players": 6,
+        "count": 360,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.022700000001350418,
+        "maxMs": 0.13139999999839347,
+        "xpPool": 21600,
+        "goldPool": 4320
+      },
+      {
+        "portals": 4,
+        "players": 1,
+        "count": 120,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.0004000000008090865,
+        "maxMs": 0.024099999998725252,
+        "xpPool": 7200,
+        "goldPool": 1440
+      },
+      {
+        "portals": 4,
+        "players": 6,
+        "count": 480,
+        "streaming": false,
+        "simulatedWorld": true,
+        "p95Ms": 6.6216999999960535,
+        "maxMs": 29.738100000002305,
+        "xpPool": 28800,
+        "goldPool": 5760
+      }
+    ]
+  },
+  "trialDefaults": {
+    "rootChance": 0.25,
+    "rootSeconds": 1,
+    "stunSeconds": 0.8,
+    "reflectChance": 0.25,
+    "reflectFractionOfActualDirectDamage": 0.5,
+    "lavaDeathRadius": 144
+  },
+  "review": {
+    "client": "http://127.0.0.1:5627/",
+    "server": "http://127.0.0.1:3427",
+    "runId": "creep-upgrade-r2-review-p32-20261106",
+    "flag": "VOLAM_DEV_CREEP_TEST=1",
+    "healthAndClientEndpointVerified": true,
+    "newRoomRequired": true
+  },
+  "visualReview": {
+    "openedPNGs": [
+      "arena-six-player.png",
+      "arena-skill.png",
+      "forest-web.png"
+    ],
+    "observations": [
+      "One dominant game viewport with compact in-viewport HUD; no exterior dashboard.",
+      "Authored retained creep sprites and released effects visible; forward strips extend into the arena.",
+      "120-creep fixture is deliberately crowded and overlaps sprites/health bars; not a guarantee of readability in arbitrary piles."
+    ],
+    "newBitmapArt": false,
+    "directorApproval": "No new approval inferred"
+  },
+  "sourceSha256": {
+    "packages/game-core/src/combat.ts": "6728c5b78e0770e0a5fa65162dc3a6c3d3cabbd17206d0c11bdb710a0440e314",
+    "packages/game-core/src/creep-abilities.ts": "3f6a784b0dc939d6ed8af3814f5484202fdc7083e735b887b7833c41ba52c6db",
+    "packages/game-core/src/creep-abilities-types.ts": "1911d3905ef8c09a4eccaee24d94d2f940ff833148bc98774ad0eb7e389bab36",
+    "packages/game-core/src/equipment-combat.ts": "bbb920d7aed4059a8429faec9a62465102f601e216be23f625686af7dc2a8604",
+    "packages/game-core/src/mobility.ts": "a9576febb814a5f5a9a7b4adfb24debf1ee3bed4e30cd02d551c174494b77622",
+    "packages/game-core/src/simulation.ts": "a31b47d65b12309dddc2b332c7724908ef2ed9fe92ff072779a22523cbb2d1bc",
+    "packages/game-core/src/skills.ts": "8b04e09340f40daa63ae90c10a7d05ff47f9834aca97988c9c675ae07fb113f4",
+    "packages/game-core/src/status.ts": "641e4534879487328bb2e8c8ffff2674078119c04900a9cc813b07011ae00f3e",
+    "packages/game-core/src/types.ts": "ec4bf4f32c762c82b0bf7968457af4a64a42dc0d0c8f0a49244ee527a7c52196",
+    "packages/game-data/src/creep-abilities.ts": "1fe24ce453839a7cb6d5031e11518500da2ecba3f76f36ea3ee85da84ea54fce",
+    "packages/game-data/src/invasion.ts": "63c8e4097c3bbb4251efc98521265ba59032ac7ad5a5e2f17634ba697fdd4ac2",
+    "apps/game-client/src/creep-combat-art.ts": "8d240a343fd924b00907ec515c496d6fc13f204bd88c6b4dcd70bf3332f28728",
+    "tests/creep-feedback-r2.test.ts": "1151709b975fa2cca24ea21de4226473825b70bf3dbefe2129d7e8935aa1e9d5"
+  },
+  "limitations": [
+    "Static exposure bots do not model human dodging; proc rates and durations remain trial tuning.",
+    "480-actor CPU timing excludes network/GPU load.",
+    "Controlled browser fixture HUD countdowns are not production wave intervals.",
+    "Historical r1 evidence is preserved separately."
+  ],
+  "recordingsCreated": false,
+  "merged": false,
+  "pushed": false,
+  "deployed": false
+}

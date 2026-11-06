@@ -34,6 +34,7 @@ export function dash(world: World, hero: Hero, config: SimulationConfig): void {
     !hero.dashCharges ||
     hasStatus(hero, 'dash_lock', world.tick) ||
     hasStatus(hero, 'stun', world.tick) ||
+    hasStatus(hero, 'root', world.tick) ||
     (world.actions ?? []).some((a) => a.ownerId === hero.id)
   )
     return;
@@ -81,6 +82,7 @@ export function blink(
       (p.lingerUntil === undefined || world.tick < p.lingerUntil),
   );
   if (!shot) return false;
+  if (hasStatus(hero, 'root', world.tick)) return true;
   if (
     config.heroBounds &&
     !insideEllipse(shot, config.heroBounds, config.radius)

@@ -96,6 +96,7 @@ export interface SupportEffect extends AllyEffect {
 export type StatusKind =
   | 'burn'
   | 'poison'
+  | 'root'
   | 'slow'
   | 'attack_slow'
   | 'attack_break'

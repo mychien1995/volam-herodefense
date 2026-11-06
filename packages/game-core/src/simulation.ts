@@ -306,6 +306,8 @@ function runCommand(
     )
       return;
     const ability = equippedAbility(hero, command.slot, config);
+    if (ability?.effect.mode === 'dash' && hasStatus(hero, 'root', world.tick))
+      return;
     if (ability && blink(world, hero, ability.id, config)) return;
     const togglingOff =
       ability?.effect.mode === 'mana_shield' &&
@@ -596,6 +598,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       (movement.x || movement.y) &&
       !hero.namDeLocked &&
       !hasStatus(hero, 'stun', world.tick) &&
+      !hasStatus(hero, 'root', world.tick) &&
       !hasStatus(hero, 'dash', world.tick) &&
       !(world.actions ?? []).some(
         (a) => a.ownerId === hero.id && a.effect.mode === 'projectile',
@@ -633,7 +636,9 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     );
     if (world.tick >= hero.actionUntil)
       hero.pose =
-        !hasStatus(hero, 'stun', world.tick) && (movement.x || movement.y)
+        !hasStatus(hero, 'stun', world.tick) &&
+        !hasStatus(hero, 'root', world.tick) &&
+        (movement.x || movement.y)
           ? 'walk'
           : 'idle';
   }

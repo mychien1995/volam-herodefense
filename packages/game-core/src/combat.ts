@@ -309,6 +309,18 @@ export function hurt(
     critical = false;
   }
   target.hp = Math.max(0, target.hp - damage);
+  reflectCreepDamage(
+    world,
+    target,
+    sourceId,
+    beforeHp - target.hp,
+    config,
+    !!(
+      snapshot?.reactive ||
+      snapshot?.periodic ||
+      snapshot?.resolvedReflection
+    ),
+  );
   // Fractional five-percent hits must not leave a floating-point sliver after hit20.
   if (testBossHit && target.hp <= Number.EPSILON * target.maxHp * 32)
     target.hp = 0;
@@ -545,4 +557,4 @@ function reward(world: World, creep: Creep, config: SimulationConfig): void {
       (i < stats.gold % eligible.length ? 1 : 0);
   });
 }
-import { creepGuardDamage } from './creep-abilities.js';
+import { creepGuardDamage, reflectCreepDamage } from './creep-abilities.js';

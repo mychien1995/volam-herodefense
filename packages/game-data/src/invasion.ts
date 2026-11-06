@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import type { InvasionDefinition } from '@volam/game-core';
 import { mapObjects, arena } from './arena.js';
-import { blocked } from '@volam/game-core';
+import { blocked, segmentRect } from '@volam/game-core';
 import { m1Config } from './m1.js';
 const point = z.strictObject({
   x: z.number().finite(),
@@ -114,14 +114,24 @@ export function createInvasionDefinition(
           y: south ? arena.height - depth : depth,
         };
         if (
-          ![-20, 0, 20].some((o) =>
-            blocked(
-              { x: p.x + o, y: p.y },
-              m1Config.creep.radius,
-              arena.width,
-              arena.height,
-              arena.collision,
-            ),
+          ![-20, 0, 20].some(
+            (o) =>
+              blocked(
+                { x: p.x + o, y: p.y },
+                m1Config.creep.radius,
+                arena.width,
+                arena.height,
+                arena.collision,
+              ) ||
+              arena.collision.some(
+                (w) =>
+                  segmentRect(
+                    { x: p.x + o, y: p.y },
+                    position,
+                    w,
+                    m1Config.creep.radius,
+                  ) !== undefined,
+              ),
           )
         )
           return p;

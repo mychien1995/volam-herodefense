@@ -43,7 +43,9 @@ export function applyStatus(
     return;
   if (
     actor.crowdControlScale !== undefined &&
-    ['stun', 'slow', 'attack_slow', 'silence', 'disarm'].includes(spec.kind)
+    ['root', 'stun', 'slow', 'attack_slow', 'silence', 'disarm'].includes(
+      spec.kind,
+    )
   )
     spec = {
       ...spec,
@@ -54,7 +56,9 @@ export function applyStatus(
     };
   else if (
     actor.controlResistance &&
-    ['stun', 'silence', 'disarm', 'slow', 'attack_slow'].includes(spec.kind)
+    ['root', 'stun', 'silence', 'disarm', 'slow', 'attack_slow'].includes(
+      spec.kind,
+    )
   )
     spec = {
       ...spec,

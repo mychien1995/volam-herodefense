@@ -21,7 +21,7 @@ const snapshot = (p: Page): Promise<any> =>
   p.evaluate('window.__VOLAM__.snapshot()');
 const presentation = (p: Page): Promise<any> =>
   p.evaluate('window.__VOLAM__.presentation()');
-const out = 'docs/evidence/creep-upgrade';
+const out = 'docs/evidence/creep-upgrade-r2';
 
 test('4 gates stream naturally; 44 regular identities cast in live Phaser with six players and private-zone filtering', async ({
   browser,

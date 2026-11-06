@@ -342,6 +342,7 @@ export function perform(
   stage?: string,
 ): void {
   const original = ability.effect;
+  if (original.mode === 'dash' && hasStatus(hero, 'root', world.tick)) return;
   const ready =
     original.mode === 'multi_hit' &&
     original.comboBurstOnly &&
@@ -817,7 +818,12 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
   for (const action of world.actions ?? []) {
     if (action.until <= world.tick) continue;
     const hero = world.heroes.get(action.ownerId);
-    if (!hero || hero.hp <= 0 || hasStatus(hero, 'stun', world.tick)) {
+    if (
+      !hero ||
+      hero.hp <= 0 ||
+      hasStatus(hero, 'stun', world.tick) ||
+      (action.effect.mode === 'dash' && hasStatus(hero, 'root', world.tick))
+    ) {
       action.until = world.tick;
       world.shots = world.shots.filter(
         (s) =>

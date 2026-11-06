@@ -419,3 +419,10 @@ Approved V01/V02 PNGs, JSONs and preview source remain byte-exact. This update c
 - Test real non-homing projectile misses, terrain, front/rear attacks, multi-hit cadence, dash travel, DOT bounds, guard/counter, interrupt, death effects, cast budget, cleanup and normal-only statue pressure.
 - Observe all 44 regular identities in the normal Phaser renderer, six-player readability, two-client state, private-zone filtering and PNG evidence. No recordings.
 - Production ignores DEV creep-test settings. Matching protocol 32 is required. Detailed commands and evidence: [CREEP_UPGRADE.md](docs/CREEP_UPGRADE.md).
+
+### Director feedback r2
+
+- Every north/south spawn offset has a clear corridor to the statue. A real north invader must traverse the authoritative arena collision map and damage the statue.
+- Heavy smash extends 50% farther; forward smash/slash/claw specials originate at the caster and cannot hit behind it. Other spreading skill radii and pattern extents double. Archer shot range is 85% of the previous value; melee normal reach doubles.
+- Trúc Xà, Mộc Linh, Sa Xà and Hải Xà use ranged normals. Verify poison/slow, spider web root, ape stomp stun, swordmaster seeded passive reflection, faster mummy claws with root, sandstone giant AoE stun and the enlarged lava death explosion.
+- Root blocks walking, dash and blink while allowing normal attacks and nonmovement skills, expires correctly and respects control resistance. Reflection cannot recurse. Deterministic regression coverage: `tests/creep-feedback-r2.test.ts`; refreshed Phaser and balance evidence: `docs/evidence/creep-upgrade-r2/`.

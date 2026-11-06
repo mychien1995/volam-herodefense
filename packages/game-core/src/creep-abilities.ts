@@ -93,7 +93,7 @@ function cue(
     castId: id,
     ownerId: enemy.id,
     abilityId,
-    kind: `creep_${spec.mode}`,
+    kind: special && spec.mode === 'arc' ? 'creep_line' : `creep_${spec.mode}`,
     x: origin.x,
     y: origin.y,
     fx: aim.x,
@@ -185,7 +185,10 @@ function attack(
     for (let i = 1; i <= 4; i++)
       make(
         spec,
-        { x: origin.x + aim.x * i * 45, y: origin.y + aim.y * i * 45 },
+        {
+          x: origin.x + aim.x * i * 45 * (spec.extentScale ?? 1),
+          y: origin.y + aim.y * i * 45 * (spec.extentScale ?? 1),
+        },
         aim,
         delay + (i - 1) * 7,
       );
@@ -196,8 +199,8 @@ function attack(
         make(
           spec,
           {
-            x: origin.x + Math.cos(t) * i * 46,
-            y: origin.y + Math.sin(t) * i * 46,
+            x: origin.x + Math.cos(t) * i * 46 * (spec.extentScale ?? 1),
+            y: origin.y + Math.sin(t) * i * 46 * (spec.extentScale ?? 1),
           },
           aim,
           delay + (i - 1) * 9,
@@ -208,8 +211,16 @@ function attack(
       const t = Math.atan2(aim.y, aim.x) + (i === 0 ? 0.55 : -0.55);
       const v = { x: Math.cos(t), y: Math.sin(t) };
       make(
-        { ...spec, range: 180, pattern: undefined, hits: 1 },
-        { x: target.x - v.x * 90, y: target.y - v.y * 90 },
+        {
+          ...spec,
+          range: 180 * (spec.extentScale ?? 1),
+          pattern: undefined,
+          hits: 1,
+        },
+        {
+          x: target.x - v.x * 90 * (spec.extentScale ?? 1),
+          y: target.y - v.y * 90 * (spec.extentScale ?? 1),
+        },
         v,
         delay + i * (spec.spacing ?? 18),
       ).kind = 'creep_line';
@@ -246,7 +257,10 @@ function hit(
       fy: e.fy,
     });
   if (!valid || (e.damage > 0 && h.hp === hp)) return;
-  if (world.heroes.has(h.id))
+  if (
+    world.heroes.has(h.id) &&
+    (e.spec.statusChance === undefined || world.random() < e.spec.statusChance)
+  )
     for (const s of e.spec.statuses ?? []) {
       // The strongest DOT per element ticks once per second. More attackers cannot multiply its budget.
       applyStatus(h, s, e.ownerId, e.abilityId, world.tick);
@@ -294,6 +308,7 @@ function inside(e: CreepCue, h: Actor, config: SimulationConfig) {
   const d = distance(e, h),
     r = worldRadius(h, config);
   if (e.kind === 'creep_line') {
+    if ((h.x - e.x) * e.fx + (h.y - e.y) * e.fy < 0) return false;
     const end = { x: e.x + e.fx * e.length, y: e.y + e.fy * e.length };
     return segmentCircle(e, end, h, e.radius + r) !== undefined;
   }
@@ -573,7 +588,7 @@ export function stepCreepActor(
   const range =
     hero || p.basic.mode === 'projectile'
       ? p.basic.range
-      : stats.attackRange + ('radius' in target ? Number(target.radius) : 0);
+      : p.basic.range + ('radius' in target ? Number(target.radius) : 0);
   const inRange =
     distance(enemy, target) <= range + (hero ? config.radius : 0) &&
     clear(
@@ -769,4 +784,42 @@ export function creepGuardDamage(
     return raw * 0.5;
   }
   return a.guardUntil > world.tick ? raw * 0.5 : raw;
+}
+
+/** One seeded passive roll per real direct hit; reflected damage never reflects again. */
+export function reflectCreepDamage(
+  world: World,
+  target: Actor,
+  sourceId: string,
+  loss: number,
+  config: SimulationConfig,
+  reactive = false,
+): void {
+  const enemy = world.creeps.get(target.id),
+    source = world.heroes.get(sourceId);
+  if (
+    reactive ||
+    !enemy ||
+    enemy.hp <= 0 ||
+    !source ||
+    source.hp <= 0 ||
+    loss <= 0
+  )
+    return;
+  const p = creepProfile(enemy, config);
+  if (p?.reflectChance && world.random() < p.reflectChance)
+    hurt(
+      world,
+      source,
+      enemy.id,
+      'creep_reflect',
+      loss * (p.reflectFraction ?? 0.5),
+      config,
+      {
+        critChance: 0,
+        critMultiplier: 1,
+        reactive: true,
+        resolvedReflection: true,
+      },
+    );
 }

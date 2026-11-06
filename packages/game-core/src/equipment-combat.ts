@@ -66,6 +66,7 @@ export function useEquipmentSkill(
     world.tick < (inventory.auxiliaryReadyAt ?? 0) ||
     hero.namDeLocked ||
     hasStatus(hero, 'stun', world.tick) ||
+    (branch === 'blink' && hasStatus(hero, 'root', world.tick)) ||
     hasStatus(hero, 'silence', world.tick) ||
     hasStatus(hero, 'dash', world.tick) ||
     world.actions?.some((action) => action.ownerId === hero.id)
