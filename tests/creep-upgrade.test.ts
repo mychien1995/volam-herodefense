@@ -134,7 +134,7 @@ describe('49 authored creep combat profiles', () => {
     expect(hp - s.hero.hp).toBe(2);
   });
   it('melee heavy attacks hit the captured front, miss a rear dodge, and do not hit late entrants', () => {
-    const s = fixture('wave_03');
+    const s = fixture('cua_khong_lo');
     special(s);
     s.hero.x = 370;
     advance(s, 25);

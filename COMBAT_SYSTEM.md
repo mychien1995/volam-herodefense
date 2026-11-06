@@ -209,3 +209,7 @@ Selected specials now distinguish captured target areas, captured180° frontal s
 ## Thi độc direct target field — 2026-11-06
 
 Latest r4 override: Thi độc schedules its 88-radius poison area at the server-captured target feet, activates after 24 ticks and lasts 90 ticks; no delivery projectile or caster-foot/death pool. Caster movement cannot relocate it. Generic purple pre-cast circles are removed from creep presentation, while real released effects and windup timing remain. See `docs/CREEP_FEEDBACK_R4.md`.
+
+## Creep feedback r5 — 2026-11-06
+
+Sơn Tặc Đao uses normal attacks only. Its r3 Hoành trảm sector is no longer active content. Shared contact rasters are no longer drawn at creep attack/cast origins; actual hit feedback remains at the victim. Stomp/charge/control mechanics of other creeps retain server timing, damage and statuses without generic caster burst stamps. See `docs/CREEP_FEEDBACK_R5.md`.

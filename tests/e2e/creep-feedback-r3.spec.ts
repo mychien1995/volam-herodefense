@@ -6,7 +6,7 @@ const snapshot = (p: Page): Promise<any> =>
   p.evaluate('window.__VOLAM__.snapshot()');
 const presentation = (p: Page): Promise<any> =>
   p.evaluate('window.__VOLAM__.presentation()');
-test('director r3 effects: target circles/pools, front sweep, torso arrows and no unwanted red strips', async ({
+test('director r3 effects: target circles/pools, normal-only swordsman, torso arrows and no unwanted red strips', async ({
   browser,
 }) => {
   const contexts = await Promise.all([
@@ -152,16 +152,6 @@ test('director r3 effects: target circles/pools, front sweep, torso arrows and n
     expect(burst.v.x).toBe(burst.e.x);
     expect(burst.v.y).toBe(burst.e.y);
     coverage.wave_02 = burst;
-    const sweep = await skill('wave_03', {
-      frame: 'duster_sweep_trail',
-      name: 'front-180-sweep',
-    });
-    expect(sweep.e.kind).toBe('creep_arc');
-    expect(sweep.e.maxRadius).toBeCloseTo(Math.PI / 2);
-    expect(
-      Math.cos(sweep.v.rotation - Math.atan2(sweep.e.fy, sweep.e.fx)),
-    ).toBeCloseTo(-1);
-    coverage.wave_03 = sweep;
     await choose('wave_06');
     await host.locator('#game canvas').focus();
     await host.keyboard.press('a');
@@ -187,7 +177,7 @@ test('director r3 effects: target circles/pools, front sweep, torso arrows and n
     expect(drain.v.x).toBe(drain.e.x);
     expect(drain.v.y).toBe(drain.e.y);
     coverage.wave_06 = drain;
-    for (const id of ['wave_07', 'mongol_infantry', 'bc_dog']) {
+    for (const id of ['wave_03', 'wave_07', 'mongol_infantry', 'bc_dog']) {
       await choose(id);
       await expect(
         host.locator('#creep-preview button[data-action="special"]'),
@@ -243,7 +233,8 @@ test('director r3 effects: target circles/pools, front sweep, torso arrows and n
           async () =>
             ((await presentation(host)).creepCombat.releases ?? []).some(
               (v: any) =>
-                v.abilityId === `creep_${id}_special` && v.frames.length,
+                v.abilityId === `creep_${id}_special` &&
+                (v.frames.length || v.suppressed),
             ),
           { timeout: 5000 },
         )

@@ -438,3 +438,7 @@ Require captured target-point Thổ burst/poison/water fields;180° frontal Hoà
 ## Creep feedback r4 acceptance — 2026-11-06
 
 All 49 creep profiles must have no visible generic purple windup circle/semicircle. Actual released burst/drain effects remain. A real invasion-type Cương Thi creates Thi độc directly at a distant target's captured feet; no caster-origin delivery projectile, no caster-foot pool, no damage before activation. Verify target damage, caster movement independence, dodge before activation, two-client normal-match replication and all 49 live preview observations. See `docs/CREEP_FEEDBACK_R4.md`.
+
+## Creep feedback r5 acceptance — 2026-11-06
+
+Sơn Tặc Đao must damage targets with its normal attack and never cast Hoành trảm; preview skill controls must be disabled for it. Observe all 49 profiles with no generic melee/line/dash/defensive caster contact bursts, and no instant self stomp/ring contact stamps. Real projectile/target/persistent/death effects remain. Preserve two-client state and six-peer dungeon/arena coverage. See `docs/CREEP_FEEDBACK_R5.md`.

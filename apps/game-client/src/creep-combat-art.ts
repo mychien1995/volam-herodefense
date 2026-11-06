@@ -3,6 +3,7 @@ import { creepProfiles } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
 import type { CreepAttack } from '@volam/game-core';
 import arrowUrl from '../../../assets/effects/dungeons/desert/arrow_right.png?url';
+import { creepBodyVisible } from './creep-combat-visual.js';
 
 export const preloadCreepCombat = (scene: Phaser.Scene) =>
   scene.load.image('creep_upgrade_arrow', arrowUrl);
@@ -55,7 +56,7 @@ export class CreepCombatArt {
   private observed = new Set<string>();
   private releases = new Map<
     string,
-    { abilityId: string; frames: Set<string> }
+    { abilityId: string; frames: Set<string>; suppressed: boolean }
   >();
   constructor(private scene: Phaser.Scene) {
     for (const key of [
@@ -181,8 +182,21 @@ export class CreepCombatArt {
         .setPosition(e.x, e.y - 36)
         .setDepth(e.y + 100);
       labels.add(labelKey);
-      v.body.setVisible(!pending);
+      const showBody = creepBodyVisible(e.kind, match?.[2] ?? '', spec);
+      v.body.setVisible(!pending && showBody);
       if (pending) return;
+      let record = this.releases.get(id);
+      if (!record) {
+        record = {
+          abilityId: e.abilityId,
+          frames: new Set(),
+          suppressed: !showBody,
+        };
+        this.releases.set(id, record);
+        if (this.releases.size > 200)
+          this.releases.delete(this.releases.keys().next().value!);
+      }
+      if (!showBody) return;
       const [projectile, impact] = graphics[spec.graphic] ?? graphics['metal']!;
       const graphic =
         e.kind === 'creep_projectile'
@@ -260,13 +274,6 @@ export class CreepCombatArt {
         v.body.setDisplaySize(Math.max(24, footprint), Math.max(24, footprint));
       const key = `${v.body.texture.key}:${v.body.frame.name}`;
       v.frames.add(key);
-      let record = this.releases.get(id);
-      if (!record) {
-        record = { abilityId: e.abilityId, frames: new Set() };
-        this.releases.set(id, record);
-        if (this.releases.size > 200)
-          this.releases.delete(this.releases.keys().next().value!);
-      }
       record.frames.add(key);
     });
     for (const [id, v] of this.views)
@@ -284,6 +291,7 @@ export class CreepCombatArt {
       releases: [...this.releases].map(([id, r]) => ({
         id,
         abilityId: r.abilityId,
+        suppressed: r.suppressed,
         frames: [...r.frames],
       })),
       views: [...this.views].map(([id, v]) => ({

@@ -21,7 +21,7 @@ const snapshot = (p: Page): Promise<any> =>
   p.evaluate('window.__VOLAM__.snapshot()');
 const presentation = (p: Page): Promise<any> =>
   p.evaluate('window.__VOLAM__.presentation()');
-const out = 'docs/evidence/creep-feedback-r3/arena';
+const out = 'docs/evidence/creep-feedback-r5/arena';
 
 test('4 gates stream naturally; 44 regular identities cast in live Phaser with six players and private-zone filtering', async ({
   browser,
@@ -150,7 +150,7 @@ test('4 gates stream naturally; 44 regular identities cast in live Phaser with s
                 (v: any) =>
                   v.abilityId ===
                     `creep_${id}_${death ? 'death' : 'special'}` &&
-                  v.frames.length > 0,
+                  (v.frames.length > 0 || v.suppressed),
               ),
             { timeout: 5000, intervals: [50, 100, 200] },
           )

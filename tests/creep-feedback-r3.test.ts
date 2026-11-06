@@ -55,14 +55,30 @@ it('bandit basic has no sigil; heavy burst is captured at the target feet and ca
   hit.advance(25);
   expect(hit.h.hp).toBeLessThan(1000);
 });
+function sectorFixture() {
+  const s = setup('wave_03');
+  s.c.creepCombat!.profiles.wave_03!.special = {
+    ...s.c.creepCombat!.profiles.wave_03!.basic,
+    range: 192,
+    radius: 53.76,
+    windup: 24,
+    cooldown: 195,
+    geometry: 'sector',
+    halfAngle: Math.PI / 2,
+    damage: 2.4,
+    visualTicks: 12,
+    presentation: { warning: 'sector', style: 'sector' },
+  };
+  return s;
+}
 for (const [fx, fy] of [
   [1, 0],
   [0, 1],
   [-1, 0],
   [0, -1],
 ])
-  it(`Hoanh Tram covers exactly the captured front 180 degrees at facing ${fx}/${fy}`, () => {
-    const s = setup('wave_03');
+  it(`generic sector covers exactly the captured front 180 degrees at facing ${fx}/${fy}`, () => {
+    const s = sectorFixture();
     Object.assign(s.h, { x: 400 + fx! * 100, y: 400 + fy! * 100 });
     const side = addHero(s.w, 'side', 'Side', s.c),
       back = addHero(s.w, 'back', 'Back', s.c);
@@ -89,9 +105,9 @@ for (const [fx, fy] of [
     expect(back.hp).toBe(1000);
   });
 it('reproduces the old narrow strip missing a side target, while the new sector hits it', () => {
-  const old = setup('wave_03');
+  const old = sectorFixture();
   delete old.c.creepCombat!.profiles.wave_03!.special!.geometry;
-  const next = setup('wave_03');
+  const next = sectorFixture();
   for (const s of [old, next]) {
     s.cast();
     s.h.x = 400;
@@ -118,7 +134,7 @@ it('blood palm drains actual player HP and heals only the actual loss, with a ri
   miss.advance(25);
   expect(miss.e.hp).toBe(500);
 });
-for (const id of ['wave_07', 'mongol_infantry', 'bc_dog'])
+for (const id of ['wave_03', 'wave_07', 'mongol_infantry', 'bc_dog'])
   it(`${id} only uses normal attacks`, () => {
     const s = setup(id);
     s.e.cooldown = 0;

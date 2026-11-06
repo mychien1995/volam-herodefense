@@ -28,7 +28,7 @@ test('preview selects all 49 creeps one at a time in live Phaser, with host auth
         errors.push(m.text());
     });
   }
-  const out = 'docs/evidence/creep-feedback-r4/preview';
+  const out = 'docs/evidence/creep-feedback-r5/preview';
   mkdirSync(out, { recursive: true });
   try {
     await joinWaiting(
@@ -42,16 +42,42 @@ test('preview selects all 49 creeps one at a time in live Phaser, with host auth
     await startTogether(pages, ['vo_dang_kiem', 'thieu_lam_dao']);
     await host.evaluate(() => {
       const w = window as any;
-      w.__creepWarnings = { seen: [] as string[], circles: [] as string[] };
+      w.__creepWarnings = {
+        seen: [] as string[],
+        circles: [] as string[],
+        casterBursts: [] as string[],
+      };
       const observe = () => {
         const s = w.__VOLAM__.snapshot(),
           p = w.__VOLAM__.presentation();
         for (const e of Object.values(s.state.creeps) as any[])
           if (!w.__creepWarnings.seen.includes(e.archetypeId))
             w.__creepWarnings.seen.push(e.archetypeId);
-        for (const v of p.creepCombat?.views ?? [])
+        for (const v of p.creepCombat?.views ?? []) {
+          const e = s.state.bossEffects[v.id];
           if (v.warning && v.warningFrame === 'dark_sigil_0')
             w.__creepWarnings.circles.push(v.id);
+          if (
+            v.bodyVisible &&
+            [
+              'creep_arc',
+              'creep_line',
+              'creep_dash',
+              'creep_guard',
+              'creep_counter',
+              'creep_buff',
+            ].includes(e?.kind)
+          )
+            w.__creepWarnings.casterBursts.push(v.id);
+          if (
+            v.bodyVisible &&
+            e?.kind === 'creep_area' &&
+            ['creep_son_vien_special', 'creep_wave_12_special'].includes(
+              e.abilityId,
+            )
+          )
+            w.__creepWarnings.casterBursts.push(v.id);
+        }
         w.__VOLAM__.afterRender(observe);
       };
       w.__VOLAM__.afterRender(observe);
@@ -102,7 +128,8 @@ test('preview selects all 49 creeps one at a time in live Phaser, with host auth
             async () =>
               ((await presentation(host)).creepCombat?.releases ?? []).some(
                 (e: any) =>
-                  e.abilityId === `creep_${id}_special` && e.frames.length,
+                  e.abilityId === `creep_${id}_special` &&
+                  (e.frames.length || e.suppressed),
               ),
             { timeout: 6000 },
           )
@@ -131,6 +158,13 @@ test('preview selects all 49 creeps one at a time in live Phaser, with host auth
         ),
       };
     }
+    await choose('wave_03');
+    await expect(
+      host.locator('#creep-preview button[data-action="special"]'),
+    ).toBeDisabled();
+    await expect(host.locator('#creep-preview-status')).not.toContainText(
+      'Hoành',
+    );
     await choose('wave_02');
     await host.locator('#creep-preview-basic').check();
     await expect
@@ -202,6 +236,7 @@ test('preview selects all 49 creeps one at a time in live Phaser, with host auth
     const warnings = await host.evaluate<any>('window.__creepWarnings');
     expect(warnings.seen).toHaveLength(49);
     expect(warnings.circles).toEqual([]);
+    expect(warnings.casterBursts).toEqual([]);
     writeFileSync(
       `${out}/browser.json`,
       JSON.stringify({

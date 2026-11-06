@@ -95,12 +95,7 @@ add(
   arc('Đập'),
   skill('Đập mạnh', { range: 64, halfAngle: 0.5, graphic: 'stone' }),
 );
-add(
-  'wave_03',
-  'Sơn Tặc Đao',
-  arc('Chém đao'),
-  skill('Hoành trảm', { range: 96, halfAngle: 1.5, graphic: 'slash' }),
-);
+add('wave_03', 'Sơn Tặc Đao', arc('Chém đao'));
 add(
   'wave_04',
   'Cung Thủ Sơn Tặc',
@@ -635,13 +630,6 @@ profile('wave_02').special = pool('Đập mạnh', 'stone', {
   damage: 1.5,
   visualTicks: 18,
   presentation: { warning: 'circle', style: 'purple_burst' },
-});
-Object.assign(profile('wave_03').special!, {
-  geometry: 'sector',
-  halfAngle: Math.PI / 2,
-  damage: 2.4,
-  visualTicks: 12,
-  presentation: { warning: 'sector', style: 'sector' },
 });
 profile('wave_06').special = pool('Hấp huyết chưởng', 'blood', {
   range: 180,

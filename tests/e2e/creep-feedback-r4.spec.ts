@@ -15,7 +15,7 @@ test('normal match Thi Doc lands at distant target feet and creep windups have n
     [host, peer] = pages as [Page, Page];
   const errors: string[] = [];
   for (const p of pages) p.on('pageerror', (e) => errors.push(e.message));
-  const out = 'docs/evidence/creep-feedback-r4';
+  const out = 'docs/evidence/creep-feedback-r5';
   mkdirSync(out, { recursive: true });
   try {
     await joinWaiting(host, 'R4 Target');
@@ -120,7 +120,6 @@ test('normal match Thi Doc lands at distant target feet and creep windups have n
     });
     for (const id of [
       'wave_02',
-      'wave_03',
       'wave_10',
       'wave_11',
       'wave_15',

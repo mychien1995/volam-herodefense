@@ -403,3 +403,7 @@ Latest director override: target-point purple burst for Thổ Phỉ,180° fronta
 ## Creep feedback r4 — 2026-11-06
 
 Director removes generic purple pre-cast circles/semicircles for every creep. Released purple effects remain skill effects. Thi độc becomes a delayed area placed directly at captured target feet, replacing the r3 projectile/landing delivery and obsolete death pool; coefficients/radius/duration remain unchanged. This supersedes earlier purple telegraphs and Thi độc lob rules. See `docs/CREEP_FEEDBACK_R4.md`.
+
+## Creep feedback r5 — 2026-11-06
+
+Sơn Tặc Đao has normal Chém đao only; Hoành trảm is removed. Remove the shared caster-origin contact explosions for all creep melee/skill presentation, including instant self stomp/ring stamps. Real target-point effects, projectiles, persistent fields and deliberate self-destruction/death explosions remain. Other skill geometry and damage do not change. See `docs/CREEP_FEEDBACK_R5.md`.

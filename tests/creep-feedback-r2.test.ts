@@ -91,19 +91,6 @@ it('web root and ape stun are applied by real authoritative hits', () => {
     expect(hasStatus(h, kind, w.tick)).toBe(true);
   }
 });
-it('forward sword sweep starts at caster and reaches a distant front target', () => {
-  const { w, c, h, e } = setup('wave_03');
-  stepCreepActor(w, e, h, undefined, c);
-  const effect = [...w.creepCombat!.effects.values()][0]!;
-  expect(effect.kind).toBe('creep_arc');
-  expect(effect.x).toBe(e.x);
-  expect(effect.length).toBe(192);
-  for (let i = 0; i < 26; i++) {
-    w.tick++;
-    stepCreepHazards(w, c);
-  }
-  expect(h.hp).toBeLessThan(1000);
-});
 it('applies requested range and radius multipliers exactly once', () => {
   expect(creepProfiles.wave_04!.basic.range).toBe(255);
   expect(creepProfiles.wave_01!.basic.range).toBe(60);
