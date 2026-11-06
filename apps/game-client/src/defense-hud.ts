@@ -104,6 +104,13 @@ export class DefenseHud {
     if (d.devCreepTest)
       this.panel.querySelector('strong')!.textContent =
         'DEV · Test 20 loại creep';
+    if (d.creepPreview) {
+      this.panel.querySelector('strong')!.textContent =
+        'DEV · Preview từng creep';
+      this.panel.querySelector('#invasion-countdown')!.textContent =
+        'Sân test riêng · Không có wave';
+      roster.hidden = true;
+    }
     if (d.wave >= 20 && d.streamUntilTick <= state.tick && !d.defeated)
       this.panel.querySelector('#invasion-countdown')!.textContent =
         'Đã mở đủ 20 đợt xâm lăng';

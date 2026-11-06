@@ -347,3 +347,6 @@ Approved V01/V02 PNGs, JSONs and preview source remain byte-exact. This update c
 ## Creep upgrade — protocol 32, 2026-11-06
 
 Validated game-data profiles feed an optional engine-independent `SimulationConfig.creepCombat`; MatchRoom enables it for every live zone. Pure-core runtime owns attacks and hazards; existing zone-filtered BossEffectState carries public geometry/timestamps to a raster-only Phaser adapter. Room creation validates immutable 2/3/4 gates. InvasionDirector owns tick-based stream schedules and player snapshots, and explicit pending-wave state prevents premature chapter gates. DEV test behavior is server-environment-only. See [CREEP_UPGRADE.md](docs/CREEP_UPGRADE.md).
+## Development creep preview — 2026-11-06
+
+Protocol33 carries a strict creator preview flag, strict host-only action messages and `DefenseState.creepPreview` projection. `apps/game-server/src/creep-preview.ts` owns sandbox selection/cleanup/options; it uses the existing core stepping and effect handlers, with no client-authoritative hits or production balance changes. The in-viewport `creep-preview.ts` controller and preview-only retained-art adapter reuse the main Phaser scene. Development `VOLAM_DEV_CREEP_TEST=1` is required; production rejects preview creation. See `docs/CREEP_PREVIEW.md`.

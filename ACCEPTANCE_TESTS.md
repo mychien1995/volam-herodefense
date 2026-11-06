@@ -426,3 +426,8 @@ Approved V01/V02 PNGs, JSONs and preview source remain byte-exact. This update c
 - Heavy smash extends 50% farther; forward smash/slash/claw specials originate at the caster and cannot hit behind it. Other spreading skill radii and pattern extents double. Archer shot range is 85% of the previous value; melee normal reach doubles.
 - Trúc Xà, Mộc Linh, Sa Xà and Hải Xà use ranged normals. Verify poison/slow, spider web root, ape stomp stun, swordmaster seeded passive reflection, faster mummy claws with root, sandstone giant AoE stun and the enlarged lava death explosion.
 - Root blocks walking, dash and blink while allowing normal attacks and nonmovement skills, expires correctly and respects control resistance. Reflection cannot recurse. Deterministic regression coverage: `tests/creep-feedback-r2.test.ts`; refreshed Phaser and balance evidence: `docs/evidence/creep-upgrade-r2/`.
+## Individual creep preview — 2026-11-06
+
+- Development-only creator flag selects an isolated preview room; production and ordinary rooms cannot acquire preview powers through messages. Only the confirmed host can select or configure it; replayed actions have no effect.
+- All49 current profiles render one at a time, using retained authored assets. Switching/reset clears old actors/projectiles/areas/actions and restores legal test positions. Canonical profile data and separate rooms remain untouched.
+- Observe real normal/signature/death effect frames, damage/statuses, keyboard controls and two-client replication. Basic-only, stationary, recovery, previous/next and viewport containment must work; no timed invasions enter this room. PNG evidence only, no final art approval implied. See `docs/CREEP_PREVIEW.md`.

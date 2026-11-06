@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 32;
+export const PROTOCOL_VERSION = 33;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -26,11 +26,39 @@ export const portalCountSchema = z.union([
   z.literal(4),
 ]);
 export const joinOptionsSchema = z.strictObject({
+  creepPreview: z.boolean().optional(),
   portalCount: portalCountSchema.optional(),
   nickname: nicknameSchema,
   protocolVersion: z.literal(PROTOCOL_VERSION),
 });
 export type JoinOptions = z.infer<typeof joinOptionsSchema>;
+
+export const creepPreviewActionSchema = z.discriminatedUnion('action', [
+  z.strictObject({
+    action: z.literal('select'),
+    id: z.string().min(1).max(64),
+    sequence: z.number().int().positive(),
+  }),
+  z.strictObject({
+    action: z.enum(['reset', 'special', 'death', 'heal']),
+    sequence: z.number().int().positive(),
+  }),
+  z.strictObject({
+    action: z.literal('options'),
+    basicOnly: z.boolean(),
+    stationary: z.boolean(),
+    autoHeal: z.boolean(),
+    sequence: z.number().int().positive(),
+  }),
+]);
+export type CreepPreviewAction = z.infer<typeof creepPreviewActionSchema>;
+export const creepPreviewViewSchema = z.strictObject({
+  id: z.string(),
+  basicOnly: z.boolean(),
+  stationary: z.boolean(),
+  autoHeal: z.boolean(),
+});
+export type CreepPreviewView = z.infer<typeof creepPreviewViewSchema>;
 
 export const connectionCheckSchema = z.strictObject({
   protocolVersion: z.literal(PROTOCOL_VERSION),
@@ -507,6 +535,7 @@ export const AreaState = schema(
 export type DungeonState = SchemaType<typeof DungeonState>;
 export const DefenseState = schema(
   {
+    creepPreview: t.string().default(''),
     portalCount: t.number().default(2),
     streamUntilTick: t.number().default(0),
     devCreepTest: t.boolean().default(false),

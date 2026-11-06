@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "date": "2026-11-06",
+  "branch": "wip/m3d/creep-upgrade",
+  "base": "6ad49e26",
+  "protocol": 33,
+  "final": {
+    "command": "pnpm check:final --config playwright.creep-upgrade.config.ts tests/e2e/creep-preview.spec.ts",
+    "session": "creep-preview-final",
+    "seconds": 450.51,
+    "unitIntegrationTests": 837,
+    "testFiles": 82,
+    "workflowTests": 18,
+    "assetValidators": 20,
+    "browserCases": 1,
+    "browserSeconds": 231.61,
+    "browserClients": 2,
+    "profilesObserved": 49,
+    "clientErrors": []
+  },
+  "runtimeChecks": [
+    "Host-only and confirmed-player control, strict messages and replay rejection.",
+    "Production refuses preview; normal rooms retain timed streams.",
+    "All49 identities render individually, using retained rasters; all present signatures/death effects release actual frames.",
+    "Real A damages the selected creep; ArrowRight moves the hero; Truc Xa applies real slow.",
+    "Basic-only checkbox survives in-flight snapshots and suppresses special cues.",
+    "Previous/next selection, two-client state, and compact viewport containment."
+  ],
+  "visualReview": {
+    "openedPNGs": [
+      "preview-forest.png",
+      "preview-forward.png"
+    ],
+    "observations": [
+      "One dominant arena viewport and compact existing HUD.",
+      "Collapsible developer controls remain inside the viewport.",
+      "Truc Xa, heroes, damage number and slow status are visible; forward smash warning originates at the creep."
+    ],
+    "newRasterAssets": false,
+    "approvedArtBytesChanged": false,
+    "directorApproval": "No new art approval inferred"
+  },
+  "iterationFailure": {
+    "session": "creep-preview-iteration",
+    "cause": "Old tick snapshots reset a checkbox before its server acknowledgement.",
+    "fix": "Apply form control values only when the authoritative preview projection changes; reset projection on reconnect."
+  },
+  "review": {
+    "client": "http://127.0.0.1:5627/?creepPreview=1",
+    "server": "http://127.0.0.1:3427",
+    "runId": "creep-preview-review-p33-20261106",
+    "healthAndEndpointVerified": true,
+    "flag": "VOLAM_DEV_CREEP_TEST=1",
+    "newRoomRequired": true
+  },
+  "limitations": [
+    "Sandbox starts with10000 HP, damage20 and zero creep rewards; this is not a balance benchmark.",
+    "Mongol support hurt/death use retained idle fallback; the dog retains right-facing source art and mirrored left.",
+    "The ordinary timed-wave browser case was not rerun for this preview-only scope; existing historical evidence is preserved."
+  ],
+  "sourceSha256": {
+    "apps/game-server/src/creep-preview.ts": "1ee7c4370578ffa217b892d77a3e60f83f954ac165b87325b843db71bfb2ccae",
+    "apps/game-server/src/rooms/MatchRoom.ts": "14a1aa441a65c515097dfb7ddc7e76204e4547109f67bbe2e4f043d7d30945ae",
+    "packages/game-protocol/src/index.ts": "2beba0f62a12565b968836e71c13e7a639416783616f18ade611133ed0a6028e",
+    "apps/game-client/src/creep-preview.ts": "30dad826cb1acd5493d8114f4eacc45b90b14e7b439c881956732c83a1e9e872",
+    "apps/game-client/src/creep-preview.css": "621293f2048681ea81ab6a240e866900bdd1ad20e33a04bb842f11cde2701e74",
+    "apps/game-client/src/creep-preview-art.ts": "6325924644f8f5af4cae638a6630d89b402123198c2900807f033e366c0dfc51",
+    "apps/game-client/src/main.ts": "9cf36a7684690c1042a5bf4b7dfd1fac80e1445ed75062a96f86b53fa8340331",
+    "apps/game-client/src/pregame.ts": "c47ca97ab951796a6078ce05b9b0933cb5c72d2d4a300f3be96b07033d103928",
+    "apps/game-client/src/arena-scene.ts": "3c3b8264e99d33a108cf336b643394e0de009845d9f62a2150cc001017df3316",
+    "apps/game-client/src/defense-hud.ts": "9e42a5486fcd1d0fb9dfd32bf73b88b1d7d8fe999d7cccc993c22282f9ad30eb",
+    "tests/creep-preview.test.ts": "d52431cc88e8f764d1635c9e9e505a471c74228d8eee7e4133fac0edd22bb16d",
+    "tests/e2e/creep-preview.spec.ts": "3fa631091d17490a3819a3aea06faa983468f9394865741a972d8bb94867450f"
+  },
+  "recordingsCreated": false,
+  "merged": false,
+  "pushed": false,
+  "deployed": false
+}

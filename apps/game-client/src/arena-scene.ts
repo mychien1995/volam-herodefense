@@ -15,6 +15,7 @@ import { BacCaiRenderer } from './bac-cai-art.js';
 import { ChuPresentation } from './chu-presentation.js';
 import { HongLietRenderer, isHongLietActor } from './hong-liet-art.js';
 import Phaser from 'phaser';
+import { previewCreepArt } from './creep-preview-art.js';
 import { applyArenaPalette, applyNameLabel } from './visual-presentation.js';
 import { m3dBambooPose } from './m3d-feedback.js';
 import {
@@ -371,6 +372,7 @@ export class ArenaScene extends Phaser.Scene {
     y: number,
     enemy: boolean,
     texture: string,
+    art?: ArenaCreepArt,
   ): EntityView {
     const shadow = this.add
       .ellipse(x, y - 3, 22, 8, 0x233e34, 0.35)
@@ -380,9 +382,10 @@ export class ArenaScene extends Phaser.Scene {
         x,
         y,
         texture,
-        texture.startsWith('desert_') ? 'idle_down_0.png' : 'idle_down_0',
+        art?.animations.find((a) => a.state === 'idle')?.frames[0] ??
+          (texture.startsWith('desert_') ? 'idle_down_0.png' : 'idle_down_0'),
       )
-      .setOrigin(...actorFootPivot(this, texture));
+      .setOrigin(...(art?.footPivot ?? actorFootPivot(this, texture)));
     const label = this.add
       .text(x, y + 5, '', {
         fontFamily: 'monospace',
@@ -478,6 +481,7 @@ export class ArenaScene extends Phaser.Scene {
     ): void => {
       if (
         enemy &&
+        !state?.defense.creepPreview &&
         (isTayDocActor(actor.archetypeId ?? '') ||
           actor.archetypeId === 'chu_wine_disciple' ||
           isHongLietActor(actor.archetypeId ?? '') ||
@@ -486,8 +490,13 @@ export class ArenaScene extends Phaser.Scene {
       )
         return;
       active.add(id);
+      const previewArt =
+        enemy && state?.defense.creepPreview
+          ? previewCreepArt(this, actor.archetypeId)
+          : undefined;
       const art = enemy
-        ? (coMoCreepArt(this, actor.archetypeId, this.zoneId) ??
+        ? (previewArt ??
+          coMoCreepArt(this, actor.archetypeId, this.zoneId) ??
           forestCreepArt(
             this.cache.json.get(
               'forest_creeps_manifest',
@@ -537,6 +546,7 @@ export class ArenaScene extends Phaser.Scene {
           enemy
             ? (art?.id ?? texture)
             : heroTexture(actor.basicId, actor.schoolId),
+          art,
         );
       view.creepArt = art;
       if (actor.hp > 0 && view.lastHp <= 0) view.playback = new CreepPlayback();
@@ -558,11 +568,16 @@ export class ArenaScene extends Phaser.Scene {
             texture,
             cast
               ? cast.firstFrame
-              : texture.startsWith('desert_')
-                ? 'idle_down_0.png'
-                : 'idle_down_0',
+              : (art?.animations.find((a) => a.state === 'idle')?.frames[0] ??
+                  (texture.startsWith('desert_')
+                    ? 'idle_down_0.png'
+                    : 'idle_down_0')),
           )
-          .setOrigin(...(cast?.origin ?? actorFootPivot(this, texture)));
+          .setOrigin(
+            ...(cast?.origin ??
+              art?.footPivot ??
+              actorFootPivot(this, texture)),
+          );
       const direction = facing(actor.fx, actor.fy);
       // Keep this prototype's authored one-shots complete across a short/late
       // network pose. This never changes movement, combat or server clocks.
@@ -592,6 +607,10 @@ export class ArenaScene extends Phaser.Scene {
           pose.direction,
         );
       if (!enemy) view.sprite.setScale(cast?.scale ?? 1).setAlpha(blinkAlpha);
+      if (previewArt?.previewScale)
+        view.sprite
+          .setScale(previewArt.previewScale)
+          .setFlipX(!!previewArt.mirrorFacing && actor.fx < 0);
       if (art) {
         const alpha = view.playback.alpha(this.time.now, art.wave === 10);
         view.sprite.setAlpha(

@@ -34,6 +34,7 @@ import './boss-party-ui.css';
 import './defense-hud.css';
 import './item-menu.css';
 import { PreGame } from './pregame.js';
+import { CreepPreview, creepPreviewRequested } from './creep-preview.js';
 import gameOstUrl from '../../../assets/sounds/game-ost.mp3?url';
 
 const artPreview = new URLSearchParams(location.search).has('artPreview');
@@ -200,6 +201,9 @@ const skillPreview = new SkillPreview(
   send,
   (action) => room?.send('skill-preview-action', { action }),
 );
+const creepPreview = new CreepPreview(element('#viewport'), (action) =>
+  room?.send('creep-preview-action', { ...action, sequence: ++sequence }),
+);
 const form = element<HTMLFormElement>('#join-form');
 const status = element('#status');
 function dungeonAction(
@@ -322,6 +326,7 @@ async function connect(existing: boolean): Promise<void> {
       : await client.create<MatchRoom>(MATCH_ROOM, {
           ...parsed.data,
           portalCount: pregame.portalCount,
+          creepPreview: creepPreviewRequested,
         });
     joined.reconnection.enabled = true;
     room = joined;
@@ -351,6 +356,7 @@ async function connect(existing: boolean): Promise<void> {
         );
         ui.refresh(state);
         skillPreview.update(state, joined.sessionId);
+        creepPreview.update(state, joined.sessionId);
       }
     };
     joined.onStateChange(syncJoinedState);
@@ -402,6 +408,7 @@ async function connect(existing: boolean): Promise<void> {
     });
     joined.onDrop(() => {
       if (room !== joined) return;
+      creepPreview.hide();
       namDeHud.sync(undefined, '');
       ui.reconnecting = true;
       window.dispatchEvent(new Event('volam:controls-blocked'));
@@ -426,6 +433,7 @@ async function connect(existing: boolean): Promise<void> {
       controls(false);
       ui.connected('', '');
       skillPreview.hide();
+      creepPreview.hide();
       status.textContent = `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`;
     });
     if (joined.state?.players && joined.state.phase) {
@@ -439,6 +447,7 @@ async function connect(existing: boolean): Promise<void> {
       );
       ui.refresh(joined.state);
       skillPreview.update(joined.state, joined.sessionId);
+      creepPreview.update(joined.state, joined.sessionId);
     }
     const canvas = element<HTMLCanvasElement>('#game canvas');
     canvas.tabIndex = 0;
@@ -599,6 +608,7 @@ if (import.meta.hot)
     void room?.leave();
     unbindInput();
     pregame.destroy();
+    creepPreview.destroy();
     ui.destroy();
     skillPreview.destroy();
     observer.disconnect();

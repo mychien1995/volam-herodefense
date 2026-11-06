@@ -1,6 +1,7 @@
 import { m1Config, schools } from '@volam/game-data';
 import type { LobbyState, LobbyAction } from '@volam/game-protocol';
 import './pregame.css';
+import { creepPreviewRequested } from './creep-preview.js';
 
 interface RoomListing {
   roomId: string;
@@ -34,6 +35,7 @@ export class PreGame {
   onLeave: () => void = () => {};
   onAction: (action: LobbyAction) => void = () => {};
   constructor(private endpoint: string) {
+    if (creepPreviewRequested) this.nickname = 'Preview Creep';
     this.node.id = 'pregame';
     this.node.addEventListener('change', (e) => {
       const select = e.target as HTMLSelectElement;
@@ -182,6 +184,10 @@ export class PreGame {
     if (this.screen === 'landing') {
       this.node.classList.add('landing');
       this.node.innerHTML = `<div class="brand"><h1>Võ Lâm</h1><h2>ANH HÙNG THỦ THÀNH</h2></div><section class="pre-window landing-window"><form id="landing-form"><label class="sr-only" for="pre-nickname">Biệt danh</label><input id="pre-nickname" name="nickname" maxlength="20" autocomplete="off" required placeholder="BIỆT DANH" value="${escape(this.nickname)}"/><button>Vào game</button></form><p role="status">${escape(this.notice)}</p></section>`;
+      if (creepPreviewRequested)
+        this.node.querySelector('[role="status"]')!.textContent =
+          this.notice ||
+          'Preview từng creep · Tạo phòng, chọn phái rồi dùng bộ chọn trong sân test.';
       return;
     }
     this.node.classList.remove('landing');

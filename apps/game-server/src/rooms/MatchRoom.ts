@@ -11,6 +11,7 @@ import {
 import { randomInt } from 'node:crypto';
 import { Room, ServerError, validate, type Client } from '@colyseus/core';
 import { serverInvasionDefinition } from '../invasion-config.js';
+import { CreepPreviewSession } from '../creep-preview.js';
 import {
   lobbyConfig,
   m1Config,
@@ -64,6 +65,7 @@ import {
   skillPreviewActionSchema,
   merchantActionSchema,
   portalCountSchema,
+  creepPreviewActionSchema,
 } from '@volam/game-protocol';
 
 type MatchClient = Client<{ auth: JoinOptions; messages: ServerMessages }>;
@@ -104,6 +106,7 @@ export class MatchRoom extends Room<{
     this.waveBossTestOptions,
   );
   readonly world = this.simulation.arena.world;
+  private creepPreview: CreepPreviewSession | undefined;
   readonly devTayDoc =
     process.env['NODE_ENV'] !== 'production' &&
     process.env['VOLAM_DEV_TAY_DOC'] === '1';
@@ -141,6 +144,27 @@ export class MatchRoom extends Room<{
   }
 
   override messages = {
+    'creep-preview-action': validate(
+      creepPreviewActionSchema,
+      (client: MatchClient, input) => {
+        const reason =
+          !this.creepPreview || !this.devCreepTest
+            ? 'Preview creep chỉ dùng trong phòng test riêng.'
+            : client.sessionId !== this.state.hostId
+              ? 'Chỉ host điều khiển preview creep.'
+              : this.state.phase !== 'IN_GAME' ||
+                  !this.state.players.get(client.sessionId)?.confirmed
+                ? 'Hãy chọn và xác nhận môn phái trước.'
+                : this.creepPreview.action(input);
+        if (reason)
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason,
+          });
+        this.syncState();
+      },
+    ),
     'merchant-action': validate(
       merchantActionSchema,
       (client: MatchClient, input) => {
@@ -389,6 +413,10 @@ export class MatchRoom extends Room<{
           });
         if (this.state.phase !== 'IN_GAME')
           return reject('Trận đấu chưa bắt đầu.');
+        if (this.creepPreview)
+          return reject(
+            'Phòng preview dùng bộ chọn creep ngay trong sân test.',
+          );
         if (!this.state.players.get(client.sessionId)?.confirmed)
           return reject('Hãy chọn và xác nhận môn phái trước khi chơi.');
         if (
@@ -527,7 +555,22 @@ export class MatchRoom extends Room<{
         });
     }),
   };
-  override onCreate(options: { portalCount?: unknown } = {}): void {
+  override onCreate(
+    options: { portalCount?: unknown; creepPreview?: unknown } = {},
+  ): void {
+    if (
+      options.creepPreview !== undefined &&
+      typeof options.creepPreview !== 'boolean'
+    )
+      throw new ServerError(400, 'Chế độ preview không hợp lệ.');
+    if (options.creepPreview) {
+      if (!this.devCreepTest)
+        throw new ServerError(
+          403,
+          'Bật VOLAM_DEV_CREEP_TEST=1 trên server development để preview creep.',
+        );
+      this.creepPreview = new CreepPreviewSession(this.simulation);
+    }
     const portals = portalCountSchema.safeParse(options.portalCount ?? 2);
     if (!portals.success)
       throw new ServerError(400, 'Số cổng phải là 2, 3 hoặc 4.');
@@ -573,6 +616,7 @@ export class MatchRoom extends Room<{
       }
       if (this.devTayDoc && this.simulation.tayDoc?.phase === 'waiting')
         this.simulation.tayDoc.spawn(this.world, this.simulation.arena.config);
+      this.creepPreview?.beforeStep();
       this.simulation.step(Date.now());
       if (this.simulation.invasion?.defeated) {
         this.state.phase = 'DEFEAT';
@@ -741,6 +785,9 @@ export class MatchRoom extends Room<{
     }
     this.state.tick = this.world.tick;
     this.state.matchElapsedMs = (this.world.tick * 1000) / m1Config.tickRate;
+    this.state.defense.creepPreview = this.creepPreview
+      ? JSON.stringify(this.creepPreview.view)
+      : '';
     const invasion = this.simulation.invasion,
       defense = this.state.defense,
       statue = this.world.statue;
