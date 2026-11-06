@@ -1,6 +1,9 @@
 import Phaser from 'phaser';
 import raw from './renovation-actions.generated.json';
 import revision from './renovation-revision.generated.json';
+import followup from './renovation-followup.generated.json';
+import { renovationFollowupEnabled } from './renovation-policy.js';
+import { staffSlamCel } from './renovation-followup-model.js';
 import { renovationRevisionEnabled } from './renovation-policy.js';
 import { retainM3dBody } from './renovation-policy.js';
 import { renovationActionCel } from './renovation-action-model.js';
@@ -23,7 +26,17 @@ const bodies = raw.bodies as Definition[],
       actor: a.id === 'vi_da_body' ? 'hero_thieu_lam' : 'hero_thien_son_dao',
       pivot: [200, 320],
     })),
-  byId = new Map([...bodies, ...extraBodies].map((b) => [b.id, b]));
+  followupBodies = followup.assets
+    .filter((a) => a.type === 'body')
+    .map((a) => ({
+      ...a,
+      id: 'v6:' + a.id,
+      actor: 'hero_cai_bang',
+      pivot: [200, 320],
+    })),
+  byId = new Map(
+    [...bodies, ...extraBodies, ...followupBodies].map((b) => [b.id, b]),
+  );
 export const renovationActionsEnabled = () => {
   const q = new URLSearchParams(location.search);
   return (
@@ -32,13 +45,15 @@ export const renovationActionsEnabled = () => {
   );
 };
 export const renovationActionSources = new Map(
-  [...bodies, ...extraBodies].map((b) => [b.key, b.url]),
+  [...bodies, ...extraBodies, ...followupBodies].map((b) => [b.key, b.url]),
 );
 export function preloadRenovationActions(scene: Phaser.Scene) {
   if (!renovationActionsEnabled()) return;
   for (const b of bodies) scene.load.atlas(b.key, b.url, b.atlas);
   if (renovationRevisionEnabled())
     for (const b of extraBodies) scene.load.atlas(b.key, b.url, b.atlas);
+  if (renovationFollowupEnabled())
+    for (const b of followupBodies) scene.load.atlas(b.key, b.url, b.atlas);
 }
 /** Redraw only the sampled legacy action pose. The retained animator/server owns its clock. */
 export function presentRenovationAction(
@@ -70,7 +85,8 @@ export function presentRenovationAction(
     | undefined;
   const native =
     image.texture.key.startsWith('renovated-action-') ||
-    image.texture.key.startsWith('renovated-v5-');
+    image.texture.key.startsWith('renovated-v5-') ||
+    image.texture.key.startsWith('renovated-v6-');
   const texture =
     native && previous ? previous.sourceTexture : image.texture.key;
   const renderedFrame =
@@ -106,19 +122,25 @@ export function presentRenovationAction(
         frame));
   if (/death|die_|hurt|hit_reaction/.test(clip)) return false;
   const cel =
-      renovationRevisionEnabled() && ability === 'bach_liet_thien_kich'
+      renovationFollowupEnabled() && ability === 'pha_giap_bong'
         ? {
-            sheet: 'v5:bach_liet_body',
-            index: Math.floor(scene.time.now / 70) % 4,
-            phase: 'flurry',
+            sheet: 'v6:staff_action',
+            index: staffSlamCel(clip, progress),
+            phase: 'staff-slam',
           }
-        : renovationRevisionEnabled() && ability === 'vi_da_quyen'
+        : renovationRevisionEnabled() && ability === 'bach_liet_thien_kich'
           ? {
-              sheet: 'v5:vi_da_body',
-              index: Math.min(3, Math.floor(progress * 4)),
-              phase: 'ground-punch',
+              sheet: 'v5:bach_liet_body',
+              index: Math.floor(scene.time.now / 70) % 4,
+              phase: 'flurry',
             }
-          : renovationActionCel(id, ability, clip, progress),
+          : renovationRevisionEnabled() && ability === 'vi_da_quyen'
+            ? {
+                sheet: 'v5:vi_da_body',
+                index: Math.min(3, Math.floor(progress * 4)),
+                phase: 'ground-punch',
+              }
+            : renovationActionCel(id, ability, clip, progress),
     definition = byId.get(cel.sheet);
   if (!definition) return false;
   let direction =

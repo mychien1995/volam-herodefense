@@ -56,6 +56,7 @@ export async function verifyRenovationV5(
       players,
       development,
       evidenceDir: out,
+      clientQuery: '&renovationSkills=v5',
       onSelection: async ({ page }) => {
         await wait(
           async () =>

@@ -16,6 +16,7 @@ import {
   namDeDefinition,
 } from '@volam/game-data';
 import { waitForQa } from './qa-wait.mjs';
+import { followupRestoresBody } from '../apps/game-client/src/renovation-policy.ts';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 export async function verifyRenovationBosses({
   room,
@@ -23,6 +24,7 @@ export async function verifyRenovationBosses({
   out,
   full,
   allowM3d = false,
+  followup = false,
 }) {
   const [page, peer] = pages,
     sim = room.simulation,
@@ -93,11 +95,13 @@ export async function verifyRenovationBosses({
       captured = false;
     const canonicalSkill = skill.replace(/-(left|right|up|down)$/, '');
     const restored =
-      allowM3d &&
-      (['chu', 'kim'].includes(group) ||
-        (group === 'ly-mac-sau' && canonicalSkill !== 'bang_phach_ngan_cham') ||
-        (group === 'hong-liet' &&
-          ['hong_liet_a2', 'liet_diem_phong_toa'].includes(canonicalSkill)));
+      (followup && followupRestoresBody(form, canonicalSkill)) ||
+      (allowM3d &&
+        (['chu', 'kim'].includes(group) ||
+          (group === 'ly-mac-sau' &&
+            canonicalSkill !== 'bang_phach_ngan_cham') ||
+          (group === 'hong-liet' &&
+            ['hong_liet_a2', 'liet_diem_phong_toa'].includes(canonicalSkill))));
     if (
       process.env.VOLAM_V3_BOSS_GROUP &&
       !process.env.VOLAM_V3_BOSS_GROUP.split(',').includes(group)
@@ -106,6 +110,44 @@ export async function verifyRenovationBosses({
     while (performance.now() - start < ms) {
       const v = await present(page);
       for (const b of v.renovation.bodies.filter((b) => b.visible)) {
+        // M3D split/shuffle deliberately uses idle/walk rather than a cast pose.
+        // Keep the approved locomotion and verify the real eight-form phase below.
+        if (
+          followup &&
+          group === 'bac-cai' &&
+          canonicalSkill === 'clones' &&
+          b.id === form &&
+          performance.now() - start > 200
+        ) {
+          assert(
+            b.locomotion && !b.action,
+            'M3D clones use locomotion without a new cast override: ' +
+              JSON.stringify(b),
+          );
+          active++;
+          poses.add(b.pose);
+          frames.add(b.texture + ':' + b.frame);
+          continue;
+        }
+        // The real dash automatically opens a small Phật Quang follow-up.
+        // Its deliberately retained new pose can overlap restored dash art.
+        if (
+          followup &&
+          group === 'nam-de' &&
+          canonicalSkill === 'nam_de_dash' &&
+          b.id === form
+        ) {
+          assert(
+            b.locomotion ||
+              !b.texture.startsWith('renovated-action-') ||
+              b.action?.ability === 'nam_de_aura',
+            'only the named Phat Quang overlap stays new',
+          );
+          active++;
+          poses.add(b.pose);
+          frames.add(b.texture + ':' + b.frame);
+          continue;
+        }
         if (
           restored &&
           b.id === form &&
@@ -151,11 +193,28 @@ export async function verifyRenovationBosses({
         fx.set(e.texture + ':' + e.frame, e);
       if (
         primary &&
+        (!followup ||
+          [
+            'dan_chi_than_cong',
+            'doc_cot_bao',
+            'van_doc_phi_cham',
+            'phat_quang_pho_chieu',
+            'clones',
+            'elements',
+          ].includes(canonicalSkill)) &&
         !captured &&
         performance.now() - start > Math.min(600, ms / 2)
       ) {
         await page.screenshot({
-          path: resolve(out, 'boss-' + group + '-' + skill + '.png'),
+          path: resolve(
+            out,
+            'boss-' +
+              group +
+              '-' +
+              skill +
+              (followup ? '-review' : '') +
+              '.png',
+          ),
         });
         captured = true;
       }
@@ -191,6 +250,47 @@ export async function verifyRenovationBosses({
       liveB = projected(b);
     assert(liveA && liveB, group + ' actor peer');
     assert(Math.abs(liveA.x - liveB.x) < 90, group + ' peer position');
+    if (followup && group === 'bac-cai' && canonicalSkill === 'clones') {
+      for (const s of [a, b]) {
+        const state = JSON.parse(s.state.bacCai.arena.snapshot);
+        assert.equal(state.forms.length, 8, 'replicated M3D eight-form split');
+        assert(
+          ['split', 'shuffle', 'reveal'].includes(state.clonePhase),
+          'real clone phase',
+        );
+      }
+    }
+    if (followup) {
+      const effects = [...fx.values()];
+      if (
+        form === 'dong_ta' ||
+        (form === 'mai_sieu_phong' && canonicalSkill === 'doc_cot_bao')
+      )
+        assert(
+          effects.some((e) => e.texture.startsWith('retained_m3d_dt_')),
+          'M3D selective Dong/Mai effect ' + skill,
+        );
+      if (group === 'tay-doc' && canonicalSkill === 'van_doc_phi_cham')
+        assert(
+          effects.some(
+            (e) =>
+              e.texture === 'v6_tay_needle' &&
+              e.source.includes('/renovation-v3/'),
+          ),
+          'new poison needles retained',
+        );
+      for (const e of effects)
+        if (
+          (group === 'tay-doc' && e.texture.startsWith('tay:')) ||
+          (group === 'nam-de' && e.texture.startsWith('nd_')) ||
+          (group === 'bac-cai' && /bac_cai/.test(e.texture)) ||
+          (group === 'vuong' && e.texture === 'vtd-effects')
+        )
+          assert(
+            !e.source.includes('/renovation-v3/overrides/'),
+            'M3D effect source ' + group + '/' + skill + ' ' + e.texture,
+          );
+    }
     report.cases.push({
       group,
       skill,

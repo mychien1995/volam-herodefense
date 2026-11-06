@@ -5,6 +5,7 @@ import allSkills from './renovation-actions.generated.json';
 import {
   retainM3dRaster,
   renovationRevisionEnabled,
+  renovationFollowupEnabled,
 } from './renovation-policy.js';
 import feedbackV4 from './renovation-feedback.generated.json';
 import { renovationFeedbackEnabled } from './renovation-feedback.js';
@@ -51,6 +52,12 @@ const feedbackByUrl = new Map(
 );
 const retainedNeedle = (allSkills.assets as ReviewAsset[]).find(
   (a) => a.id === 'co_mo_fx',
+)!;
+const retainedNeedleV6 = (allSkills.assets as ReviewAsset[]).find(
+  (a) => a.id === 'tay_fx1',
+)!;
+const retainedPhatV6 = (allSkills.assets as ReviewAsset[]).find(
+  (a) => a.id === 'nd_rework',
 )!;
 
 function resampleFrame(frame: Phaser.Textures.Frame, density: number) {
@@ -112,20 +119,27 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
             ?.replace(/\.json$/, '') ?? '',
         );
       const next =
-        key === 'co_mo_needle_v3' && renovationRevisionEnabled()
-          ? retainedNeedle.atlasCandidateUrl
-          : !retain
-            ? ((renovationFeedbackEnabled()
-                ? ((feedbackV4.inlineAtlases as Record<string, string>)[key] ??
-                  (feedbackV4.atlases as Record<string, string>)[path])
-                : undefined) ??
-              (complete
-                ? ((allSkills.inlineAtlases as Record<string, string>)[key] ??
-                  selected.get(key)?.atlasCandidateUrl ??
-                  (allSkills.atlases as Record<string, string>)[path])
-                : undefined) ??
-              (renovatedSkills.atlases as Record<string, string>)[path])
-            : undefined;
+        key === 'v6_nd_phat' && renovationFollowupEnabled()
+          ? retainedPhatV6.atlasCandidateUrl
+          : key === 'v6_tay_needle' && renovationFollowupEnabled()
+            ? retainedNeedleV6.atlasCandidateUrl
+            : key === 'co_mo_needle_v3' && renovationRevisionEnabled()
+              ? retainedNeedle.atlasCandidateUrl
+              : !retain
+                ? ((renovationFeedbackEnabled()
+                    ? ((feedbackV4.inlineAtlases as Record<string, string>)[
+                        key
+                      ] ?? (feedbackV4.atlases as Record<string, string>)[path])
+                    : undefined) ??
+                  (complete
+                    ? ((allSkills.inlineAtlases as Record<string, string>)[
+                        key
+                      ] ??
+                      selected.get(key)?.atlasCandidateUrl ??
+                      (allSkills.atlases as Record<string, string>)[path])
+                    : undefined) ??
+                  (renovatedSkills.atlases as Record<string, string>)[path])
+                : undefined;
       if (next) {
         file.url = next;
         if (file.state === Phaser.Loader.FILE_POPULATED) {
@@ -144,16 +158,20 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
     const path = new URL(file.url, location.href).pathname;
     sourceUrls.set(key, path);
     const entry =
-      key === 'co_mo_needle_v3' && renovationRevisionEnabled()
-        ? retainedNeedle
-        : retainM3dRaster(key)
-          ? byUrl.get(path)
-          : ((renovationFeedbackEnabled()
-              ? feedbackByUrl.get(path)
-              : undefined) ??
-            (complete ? allByUrl.get(path) : undefined) ??
-            (renovate ? renovatedByUrl.get(path) : undefined) ??
-            byUrl.get(path));
+      key === 'v6_nd_phat' && renovationFollowupEnabled()
+        ? retainedPhatV6
+        : key === 'v6_tay_needle' && renovationFollowupEnabled()
+          ? retainedNeedleV6
+          : key === 'co_mo_needle_v3' && renovationRevisionEnabled()
+            ? retainedNeedle
+            : retainM3dRaster(key)
+              ? byUrl.get(path)
+              : ((renovationFeedbackEnabled()
+                  ? feedbackByUrl.get(path)
+                  : undefined) ??
+                (complete ? allByUrl.get(path) : undefined) ??
+                (renovate ? renovatedByUrl.get(path) : undefined) ??
+                byUrl.get(path));
     if (!entry) return;
     if (!review) {
       file.url = entry.candidateUrl;

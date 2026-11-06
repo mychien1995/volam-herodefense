@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { renovationRevisionEnabled } from './renovation-policy.js';
+import { renovationFollowupEnabled } from './renovation-policy.js';
 import { spinFacing } from './hero-vfx-review.js';
 import { facing } from './facing.js';
 import { m3dSkillIds } from './m3d-feedback-policy.js';
@@ -214,6 +215,12 @@ export class FeedbackVfx {
     repeat?: number,
   ): boolean {
     if (
+      v.skill === 'hoa_van_chuong' &&
+      renovationFollowupEnabled() &&
+      /^cai_bang_chuong_dragon_v2_(aura|impact|projectile)$/.test(ref.asset)
+    )
+      ref = { ...ref, asset: 'retained_m3d_' + ref.asset };
+    if (
       v.skill === 'luong_nghi_thu' &&
       renovationRevisionEnabled() &&
       ref.asset.startsWith('vo_dang_hands_v2_')
@@ -272,6 +279,12 @@ export class FeedbackVfx {
     offset: [number, number] = [0, 0],
     review = false,
   ): Fx | undefined {
+    if (
+      skill === 'hoa_van_chuong' &&
+      renovationFollowupEnabled() &&
+      /^cai_bang_chuong_dragon_v2_(aura|impact|projectile)$/.test(ref.asset)
+    )
+      ref = { ...ref, asset: 'retained_m3d_' + ref.asset };
     if (
       skill === 'luong_nghi_thu' &&
       renovationRevisionEnabled() &&

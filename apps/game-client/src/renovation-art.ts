@@ -120,6 +120,8 @@ export function inspectRenovation(scene: Phaser.Scene) {
           (skillKeys.has(b.texture.key) ||
             b.texture.key.startsWith('renovated-v4-') ||
             b.texture.key.startsWith('renovated-v5-') ||
+            b.texture.key.startsWith('renovated-v6-') ||
+            b.texture.key.startsWith('v6_') ||
             b.texture.key.startsWith('retained_m3d_')) &&
           !b.getData('renovation') &&
           b.visible &&
@@ -151,7 +153,8 @@ export function inspectRenovation(scene: Phaser.Scene) {
           velocity: b.getData('velocity'),
           projectileStage: b.getData('projectile-stage'),
           shadow: b.getData('v5-shadow'),
-          effect: b.getData('v5-effect'),
+          effect: b.getData('v6-effect') ?? b.getData('v5-effect'),
+          authoredHeading: b.getData('authored-heading'),
           bounds: { width: b.getBounds().width, height: b.getBounds().height },
           source:
             actualSources?.get(b.texture.key) ??

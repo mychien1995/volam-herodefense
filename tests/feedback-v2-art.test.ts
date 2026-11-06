@@ -19,7 +19,7 @@ describe('supplied M3C3 v2 presentation contract', () => {
       a.id.startsWith('retained_m3d_'),
     );
     expect(supplied).toHaveLength(45);
-    expect(retained).toHaveLength(3);
+    expect(retained).toHaveLength(6);
     for (const alias of retained) {
       const original = supplied.find(
         (a) => a.id === alias.id.replace('retained_m3d_', ''),

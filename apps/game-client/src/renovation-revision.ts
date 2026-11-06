@@ -5,6 +5,8 @@ import type { LobbyState } from '@volam/game-protocol';
 import { m1Config, skillArt } from '@volam/game-data';
 import raw from './renovation-revision.generated.json';
 import { renovationRevisionEnabled } from './renovation-policy.js';
+import { renovationFollowupEnabled } from './renovation-policy.js';
+import { drawTurningDragon } from './renovation-followup.js';
 const definitions = new Map(raw.assets.map((a) => [a.id, a]));
 type Point = { x: number; y: number };
 type Flash = {
@@ -121,7 +123,7 @@ export class RenovationRevision {
           upright: true,
           follow: true,
         });
-      if (e.abilityId === 'pha_giap_bong')
+      if (e.abilityId === 'pha_giap_bong' && !renovationFollowupEnabled())
         this.flash(e, 'staff_slam', 800, fx * 28, fy * 28 - 45, {
           upright: true,
           follow: true,
@@ -179,9 +181,19 @@ export class RenovationRevision {
           e,
           'blossom_slashes',
           e.stage === 'finisher' ? 300 : 170,
-          fx * 48,
-          fy * 48 - 24,
-          { cel: n % 8, scale: e.stage === 'finisher' ? 0.7 : 0.5 },
+          fx * (renovationFollowupEnabled() ? 68 : 48),
+          fy * (renovationFollowupEnabled() ? 68 : 48) - 24,
+          {
+            cel: n % 8,
+            scale:
+              e.stage === 'finisher'
+                ? renovationFollowupEnabled()
+                  ? 1
+                  : 0.7
+                : renovationFollowupEnabled()
+                  ? 0.8
+                  : 0.5,
+          },
         );
       }
     }
@@ -235,6 +247,7 @@ export class RenovationRevision {
     state?.projectiles.forEach((p, id) => {
       if (
         p.zoneId !== zone ||
+        (renovationFollowupEnabled() && p.abilityId === 'hoa_van_chuong') ||
         ![
           'hoa_van_chuong',
           'phi_long_tai_thien',
@@ -292,21 +305,31 @@ export class RenovationRevision {
           : p.abilityId === 'phi_long_tai_thien'
             ? 0.55
             : 0.5;
-      this.aim(
-        v.image,
-        p.vx,
-        p.vy,
-        dragon
-          ? 0.75
-          : p.abilityId === 'hoa_van_chuong' ||
-              p.abilityId === 'phi_long_tai_thien'
+      if (dragon && renovationFollowupEnabled())
+        drawTurningDragon(
+          v.image,
+          p.vx,
+          p.vy,
+          (age * 1000) / m1Config.tickRate,
+          id,
+        );
+      else
+        this.aim(
+          v.image,
+          p.vx,
+          p.vy,
+          dragon
             ? 0.75
-            : 0.5,
-      );
-      v.image
-        .setFrame(
+            : p.abilityId === 'hoa_van_chuong' ||
+                p.abilityId === 'phi_long_tai_thien'
+              ? 0.75
+              : 0.5,
+        );
+      if (!(dragon && renovationFollowupEnabled()))
+        v.image.setFrame(
           String(Math.floor(this.scene.time.now / 75) % (dragon ? 8 : 4)),
-        )
+        );
+      v.image
         .setScale(scale)
         .setPosition(p.x, p.y - elevation)
         .setDepth(p.y + 0.8)
@@ -314,9 +337,10 @@ export class RenovationRevision {
         .setData('projectile-stage', p.stage);
       if (v.shadow) {
         v.shadow
-          .setFrame(v.image.frame.name)
+          .setTexture(v.image.texture.key, v.image.frame.name)
           .setPosition(p.x, p.y)
-          .setOrigin(0.75, 0.5)
+          .setOrigin(v.image.originX, v.image.originY)
+          .setFlipX(v.image.flipX)
           .setScale(scale, 0.1)
           .setDepth(p.y - 0.5)
           .setRotation(0);
@@ -397,7 +421,12 @@ export class RenovationRevision {
       }
     });
     state?.areas.forEach((a, id) => {
-      if (a.zoneId !== zone || a.abilityId !== 'thai_cuc_tran') return;
+      if (
+        renovationFollowupEnabled() ||
+        a.zoneId !== zone ||
+        a.abilityId !== 'thai_cuc_tran'
+      )
+        return;
       field(
         'dome:' + id,
         'tai_chi_dome',
@@ -428,7 +457,10 @@ export class RenovationRevision {
           'phi_long_tai_thien',
           'hang_long_hoa_vu',
           'truy_hon_dao',
-        ].some((s) => name === 'feedback-v2:' + s) && k.endsWith('_projectile');
+        ]
+          .filter((s) => !renovationFollowupEnabled() || s !== 'hoa_van_chuong')
+          .some((s) => name === 'feedback-v2:' + s) &&
+        k.endsWith('_projectile');
       if (
         replacedProjectile ||
         /^review3_r3_crescent_/.test(k) ||

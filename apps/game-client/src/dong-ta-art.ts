@@ -4,6 +4,7 @@ import Phaser from 'phaser';
 import type { LobbyState } from '@volam/game-protocol';
 import type { CombatEvent, DongAbility, DongView } from '@volam/game-core';
 import playback from './dong-playback.json';
+import { renovationFollowupEnabled } from './renovation-policy.js';
 const bundles = playback.bundles as Record<
   string,
   {
@@ -52,6 +53,13 @@ export function preloadDongArt(scene: Phaser.Scene) {
       `/assets/dong_ta/${id}.png`,
       `/assets/dong_ta/${id}.json`,
     );
+  if (renovationFollowupEnabled())
+    for (const id of ['fx', 'fan', 'maifx', 'summon'])
+      scene.load.atlas(
+        'retained_m3d_dt_' + id,
+        `/assets/dong_ta/${id}.png`,
+        `/assets/dong_ta/${id}.json`,
+      );
 }
 export function registerDongArt(scene: Phaser.Scene) {
   for (const [id, b] of Object.entries(bundles)) {
@@ -149,6 +157,7 @@ export class DongTaRenderer {
     scale = 1,
     angle = 0,
     depth = y + 0.1,
+    original = false,
   ) {
     const b = bundles[bundle]!,
       c = b.clips.find((c) => c.name === clip);
@@ -160,14 +169,16 @@ export class DongTaRenderer {
             ? n % c.frames.length
             : Math.min(c.frames.length - 1, n)
         ]!;
+    const texture =
+      original && renovationFollowupEnabled()
+        ? 'retained_m3d_' + key(bundle)
+        : key(bundle);
     let v = this.images.get(id);
     if (!v) {
-      v = this.scene.add
-        .image(x, y, key(bundle), frame)
-        .setName('dong_ta:' + id);
+      v = this.scene.add.image(x, y, texture, frame).setName('dong_ta:' + id);
       this.images.set(id, v);
     }
-    v.setTexture(key(bundle), frame)
+    v.setTexture(texture, frame)
       .setOrigin(b.origin[0]!, b.origin[1]!)
       .setPosition(x, y)
       .setScale(scale)
@@ -288,6 +299,8 @@ export class DongTaRenderer {
           ((tick - cast.activeAt) / 30) % 0.4,
           0.9,
           heading,
+          actor.y + 0.2,
+          true,
         );
         if (!this.trail.length || tick - this.trail.at(-1)!.tick > 2)
           this.trail.push({ x: actor.x, y: actor.y, tick });
@@ -303,6 +316,7 @@ export class DongTaRenderer {
             0.35,
             0,
             p.y - 0.1,
+            true,
           ).setAlpha(1 - (tick - p.tick) / 14),
         );
       } else if (actor.archetypeId === 'dong_ta') this.trail = [];
@@ -450,6 +464,7 @@ export class DongTaRenderer {
             1,
             0,
             100,
+            true,
           );
           this.cel(
             e.id + ':spawn',
@@ -461,6 +476,7 @@ export class DongTaRenderer {
             1,
             0,
             e.y + 0.1,
+            true,
           );
           break;
         case 'sprint': {
@@ -488,6 +504,7 @@ export class DongTaRenderer {
           scale,
           rotation,
           depth,
+          e.ownerId === 'dong_ta' || e.abilityId === 'doc_cot_bao',
         );
     }
     this.health.end();

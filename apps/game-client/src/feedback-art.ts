@@ -26,6 +26,13 @@ export const feedbackArt: FeedbackComponent[] = [
     .filter((a) => /^vo_dang_hands_v2_(projectile|impact|aura)$/.test(a.id))
     .map((a) => ({ ...a, id: 'retained_m3d_' + a.id })),
 ];
+feedbackArt.push(
+  ...original
+    .filter((a) =>
+      /^cai_bang_chuong_dragon_v2_(projectile|impact|aura)$/.test(a.id),
+    )
+    .map((a) => ({ ...a, id: 'retained_m3d_' + a.id })),
+);
 export const feedbackComponents = new Map(feedbackArt.map((c) => [c.id, c]));
 export interface ArtRef {
   asset: string;

@@ -9,6 +9,7 @@ import type { LobbyState } from '@volam/game-protocol';
 import type { TayDocView } from '@volam/game-core';
 import { tayDocDefinition as tuning } from '@volam/game-data';
 import playback from './tay-doc-playback.json';
+import { renovationFollowupEnabled } from './renovation-policy.js';
 
 type Clip = { frames: string[]; durationsMs: number[]; repeat: number };
 type Bundle = {
@@ -29,6 +30,12 @@ const facing = (x: number, y: number) =>
 export const isTayDocActor = (id: string) =>
   id === 'tay_doc' || id === 'tay_doc_pillar';
 export function preloadTayDocArt(scene: Phaser.Scene): void {
+  if (renovationFollowupEnabled())
+    scene.load.atlas(
+      'v6_tay_needle',
+      '/assets/tay_doc/fx1.png',
+      '/assets/tay_doc/fx1.json',
+    );
   for (const id of Object.keys(bundles))
     scene.load.atlas(
       key(id),
@@ -107,6 +114,12 @@ export class TayDocRenderer {
       }
       elapsed -= clip.durationsMs[i]!;
     }
+    const texture =
+      renovationFollowupEnabled() &&
+      asset === 'fx1' &&
+      /^(poison_needle|needle_fan_warning)$/.test(tag)
+        ? 'v6_tay_needle'
+        : key(asset);
     const frame =
       clip.frames[
         index === undefined
@@ -117,13 +130,13 @@ export class TayDocRenderer {
     if (!view) {
       view = {
         image: this.scene.add
-          .image(x, y, key(asset), frame)
+          .image(x, y, texture, frame)
           .setName('tay_doc:' + id),
       };
       this.views.set(id, view);
     }
     view.image
-      .setTexture(key(asset), frame)
+      .setTexture(texture, frame)
       .setPosition(x, y)
       .setDepth(y)
       .setOrigin(bundle.origin[0]!, bundle.origin[1]!)

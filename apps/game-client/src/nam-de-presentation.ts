@@ -8,6 +8,7 @@ import type { NamDeView } from '@volam/game-core';
 import raw from './nam-de-art.generated.json' with { type: 'json' };
 import { facing } from './facing.js';
 import { presentRenovatedBody } from './renovation-art.js';
+import { renovationFollowupEnabled } from './renovation-policy.js';
 interface Bundle {
   origin: number[];
   frames: Record<string, unknown>;
@@ -20,6 +21,11 @@ interface Bundle {
 }
 const bundles = raw.bundles as unknown as Record<string, Bundle>;
 export function preloadNamDe(s: Phaser.Scene) {
+  if (renovationFollowupEnabled())
+    s.load.atlas('v6_nd_phat', '/assets/nam_de/rework.png', {
+      frames: bundles.rework!.frames,
+      meta: { image: 'rework.png' },
+    });
   for (const [key, b] of Object.entries(bundles))
     s.load.atlas('nd_' + key, '/assets/nam_de/' + key + '.png', {
       frames: b.frames,
@@ -85,7 +91,14 @@ export class NamDePresentation {
       this.sprites.set(id, sprite);
     }
     sprite
-      .setTexture('nd_' + bundle, frame)
+      .setTexture(
+        renovationFollowupEnabled() &&
+          bundle === 'rework' &&
+          clipName === 'sky_ray'
+          ? 'v6_nd_phat'
+          : 'nd_' + bundle,
+        frame,
+      )
       .setOrigin(b.origin[0]!, b.origin[1]!)
       .setPosition(x, y)
       .setScale(sx, sy)

@@ -1,3 +1,9 @@
+## Renovation v6 · chọn lọc art và sửa chuyển động — 2026-11-06
+
+Director yêu cầu hoàn tác **effect** Hỏa Vân Chưởng về M3D, bỏ bàn tay Kháng Long Hữu Hối, bỏ hình vòm Thái Cực. Luật nhốt chỉ quái/boss của v5 vẫn giữ. Rồng Hàng Long dùng góc nhìn được vẽ riêng và thân/đuôi uốn theo hướng bay, không xoay cả ảnh; đường bay và damage v5 giữ nguyên. Phá Giáp dùng thân cầm liền bổng: giơ cao → kéo dài → vụt xuống → nứt đất, giữ điểm phát/strike/hit server. Bách Liệt chỉ phóng đại VFX, không tăng tầm đánh.
+
+Hoàn tác toàn bộ skill Đông Tà, Bắc Cái và Vương Trùng Dương; Mai Siêu Phong chỉ hoàn tác Độc Cốt Bạo; Tây Độc hoàn tác trừ Vạn Độc Phi Châm; Nam Đế hoàn tác trừ nhóm Phật Quang (`nam_de_aura`, `phat_quang_pho_chieu`). Giữ idle/walk mới và các hoàn tác v5. Atlas dùng chung phải có alias riêng cho các ngoại lệ, không thay nhầm skill khác. Hình mới chờ director duyệt; test không thay cho duyệt art. Xem `docs/evidence/renovation-v6/README.md`.
+
 ## Renovation v5 · phản hồi skill — 2026-11-06
 
 Hàng Long Hỏa Vũ được rework theo director: bay tới trước, bay một vòng, vút lên rồi đâm xuống gây sát thương vùng một lần. Server khóa điểm rơi lúc nhận cast, không truy đuổi mục tiêu; 24+36+15+12 tick, bán kính nổ112px, hủy khi chết/chuyển zone. Giữ mana/CD/hệ số sát thương theo rank; thay đường gây sát thương xuyên thẳng cũ.

@@ -1,5 +1,9 @@
 import Phaser from 'phaser';
 import {
+  RenovationFollowup,
+  preloadRenovationFollowup,
+} from './renovation-followup.js';
+import {
   RenovationRevision,
   preloadRenovationRevision,
 } from './renovation-revision.js';
@@ -34,6 +38,7 @@ import {
 
 const components = new Map(skillArt.assets.map((a) => [a.id, a]));
 export function preloadSkillArt(scene: Phaser.Scene): void {
+  preloadRenovationFollowup(scene);
   preloadRenovationRevision(scene);
   preloadRenovationFeedback(scene);
   scene.load.svg(
@@ -72,6 +77,7 @@ interface VfxActor {
   zoneId: string;
 }
 export class SkillVfx {
+  private followup: RenovationFollowup;
   private revision: RenovationRevision;
   private renovated: RenovationFeedback;
   private r3: M3dR3Feedback;
@@ -96,6 +102,7 @@ export class SkillVfx {
   >();
   private state: LobbyState | undefined;
   constructor(private scene: Phaser.Scene) {
+    this.followup = new RenovationFollowup(scene);
     this.revision = new RenovationRevision(scene);
     this.renovated = new RenovationFeedback(scene);
     this.r3 = new M3dR3Feedback(scene);
@@ -250,6 +257,7 @@ export class SkillVfx {
     );
   }
   event(e: CombatEvent): void {
+    this.followup.event(e);
     this.revision.event(e);
     this.renovated.event(e);
     if (this.r3.event(e)) return;
@@ -660,6 +668,7 @@ export class SkillVfx {
       }
     this.renovated.sync(state, zoneId, renderPosition);
     this.revision.sync(state, zoneId, renderPosition);
+    this.followup.sync(state, zoneId, renderPosition);
   }
   castPresentation(
     id: string,
@@ -698,6 +707,7 @@ export class SkillVfx {
     };
   }
   clear(): void {
+    this.followup.clear();
     this.revision.clear();
     this.renovated.clear();
     this.r3.clear();

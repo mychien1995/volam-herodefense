@@ -1,0 +1,80 @@
+{
+  "status": "PASS after scoped browser retries",
+  "artStatus": "candidate; director review pending",
+  "branch": "wip/m3d/visual-upgrade-2",
+  "date": "2026-11-06",
+  "checks": {
+    "unitIntegrationTests": 768,
+    "workflowTests": 18,
+    "assetValidators": 28,
+    "nativeCels": 44,
+    "hero": {
+      "status": "PASS",
+      "clients": 6,
+      "cases": 24,
+      "allDragonCastsShowEightHeadings": true,
+      "party": {
+        "clients": 6,
+        "hitEvents": 19,
+        "peerDamageAgreement": true
+      }
+    },
+    "boss": {
+      "status": "PASS",
+      "clients": 2,
+      "cases": 50
+    }
+  },
+  "initialPipeline": {
+    "status": "FAIL in browser stage; preserved",
+    "path": "docs/evidence/sessions/renovation-v6-final/check-workflow/final-timings.json",
+    "completedStages": [
+      "prepare assets (once)",
+      "compile TypeScript",
+      "typecheck tests and tools",
+      "workflow regression checks",
+      "all unit/integration tests",
+      "production client build",
+      "scripts/verify-assets.py",
+      "scripts/verify-arena-art01.py",
+      "scripts/verify-arena-v2.py",
+      "scripts/verify-thien-son.py",
+      "scripts/verify-vo-dang.py",
+      "scripts/verify-thieu-lam.py",
+      "scripts/verify-thieu-lam-skills.py",
+      "scripts/verify-thien-son-skills.py",
+      "scripts/verify-vo-dang-skills.py",
+      "scripts/verify-bamboo-forest.py",
+      "scripts/verify-desert.py",
+      "scripts/verify-forest-creeps.py",
+      "scripts/verify-beach.py",
+      "scripts/verify-hell.py",
+      "scripts/verify-chu-art.py",
+      "scripts/verify-ly-mac-sau.py",
+      "scripts/verify-inventory-ui.py",
+      "scripts/verify-tay-doc.py",
+      "scripts/verify-nam-de.py",
+      "scripts/verify-bac-cai-preview.py",
+      "scripts/verify-vuong-trung-duong.py",
+      "scripts/verify-renovation.py",
+      "scripts/verify-renovation-runtime.py",
+      "scripts/verify-renovation-v2.py",
+      "scripts/verify-renovation-v3.py",
+      "scripts/verify-renovation-v4.py",
+      "scripts/verify-renovation-v5.py",
+      "scripts/verify-renovation-v6.py"
+    ]
+  },
+  "retries": [
+    "Client/tools TypeScript compilation and production rebuild after per-render heading observation was added.",
+    "Both browser profiles retried: boss 50 cases PASS; hero exposed an early client-effect observation window.",
+    "Tools typecheck and affected four-facing six-client hero profile retried: 24 cases and natural combat PASS."
+  ],
+  "limits": [
+    "Boss fixtures select real encounter abilities/phases server-side; not a natural boss-clear/progression run.",
+    "Earlier encounter effects/QTE can overlap in fixture screenshots.",
+    "V5 combat mechanics, hostile-only confinement, impact point and one landing hit remain unchanged.",
+    "No video/animated recording generated."
+  ],
+  "liveServices": "live-services.json"
+}
