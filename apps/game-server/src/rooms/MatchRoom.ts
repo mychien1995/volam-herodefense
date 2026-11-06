@@ -1,5 +1,10 @@
 import { namDeView } from '@volam/game-core';
 import { serverWaveBossTestOptions } from '../wave-boss-test-config.js';
+import {
+  prepareSkillReviewHero,
+  resetSkillReviewResources,
+  applySkillReviewLoadout,
+} from '../skill-review-mode.js';
 import { namDeDefinition } from '@volam/game-data';
 import { NamDeControlState } from '@volam/game-protocol';
 import { chuView, chuLootAction, chuItemAction } from '@volam/game-core';
@@ -284,6 +289,7 @@ export class MatchRoom extends Room<{
                 hero.skillIds = ['', '', '', ''];
                 hero.skillCooldowns = [0, 0, 0, 0];
               }
+              if (this.devSkillLoadout) prepareSkillReviewHero(hero, m1Config);
               this.syncState();
             } else if (
               [...this.state.players.values()].every(
@@ -308,6 +314,8 @@ export class MatchRoom extends Room<{
                   hero.skillIds = ['', '', '', ''];
                   hero.skillCooldowns = [0, 0, 0, 0];
                 }
+                if (this.devSkillLoadout)
+                  prepareSkillReviewHero(hero, m1Config);
               }
               this.state.phase = 'IN_GAME';
               void this.setMetadata({ phase: this.state.phase });
@@ -532,6 +540,28 @@ export class MatchRoom extends Room<{
         });
         return;
       }
+      if (this.devSkillLoadout) {
+        const h = this.simulation.hero(client.sessionId)!,
+          zone = this.simulation.zoneOf(client.sessionId)!;
+        if (['dev-loadout','select-basic'].includes(input.kind) && zone.access!=='arena') {
+          client.send('command-rejected',{protocolVersion:PROTOCOL_VERSION,sequence:input.sequence,reason:'Chỉ đổi bộ thử nghiệm tại đấu trường.'});
+          return;
+        }
+        resetSkillReviewResources(h);
+        if (
+          zone.access === 'arena' &&
+          applySkillReviewLoadout(
+            zone.world,
+            h,
+            zone.config,
+            input.sequence,
+            input,
+          )
+        ) {
+          this.syncState();
+          return;
+        }
+      }
       const reason = this.simulation.input(
         client.sessionId,
         input.sequence,
@@ -577,6 +607,11 @@ export class MatchRoom extends Room<{
       if (this.devTayDoc && this.simulation.tayDoc?.phase === 'waiting')
         this.simulation.tayDoc.spawn(this.world, this.simulation.arena.config);
       this.simulation.step(Date.now());
+      if (this.devSkillLoadout)
+        for (const id of this.simulation.membership.keys()) {
+          const h = this.simulation.hero(id);
+          if (h) resetSkillReviewResources(h);
+        }
       if (this.simulation.invasion?.defeated || this.simulation.victory) {
         this.state.phase = this.simulation.victory ? 'VICTORY' : 'DEFEAT';
         void this.lock();
@@ -750,7 +785,9 @@ export class MatchRoom extends Room<{
         final = new VuongState();
         this.state.vuong.set('arena', final);
       }
-      final.snapshot = JSON.stringify(vuong.view(this.world, this.simulation.arena.config));
+      final.snapshot = JSON.stringify(
+        vuong.view(this.world, this.simulation.arena.config),
+      );
     } else if (final) {
       for (const client of this.clients) client.view?.remove(final);
       this.state.vuong.delete('arena');
@@ -770,7 +807,8 @@ export class MatchRoom extends Room<{
     if (invasion && statue) {
       defense.paused = this.simulation.arenaPaused;
       defense.devWaveBosses = !!this.world.waveBossTest;
-      defense.devFinalBoss = !!this.world.waveBossTest && !!this.simulation.mainBosses?.final;
+      defense.devFinalBoss =
+        !!this.world.waveBossTest && !!this.simulation.mainBosses?.final;
       defense.devWaveBossStage = this.world.waveBossTest?.stage ?? '';
       defense.namDe = JSON.stringify(namDeView(this.world));
       defense.enabled = true;
@@ -980,7 +1018,11 @@ export class MatchRoom extends Room<{
       }
       for (const [localId, enemy] of zone.world.creeps) {
         // The public encounter projection anonymizes all eight forms and never leaks the real actor coordinate.
-        if (zone.access === 'arena' && (isBacCaiActor(localId) || localId === this.world.vuong?.bossId)) continue;
+        if (
+          zone.access === 'arena' &&
+          (isBacCaiActor(localId) || localId === this.world.vuong?.bossId)
+        )
+          continue;
         const id = this.entityKey(zone, localId);
         creepKeys.add(id);
         let target = this.state.creeps.get(id);
@@ -1171,7 +1213,8 @@ export class MatchRoom extends Room<{
       }
       for (const projection of this.state.vuong.values()) {
         if (zoneId === 'arena' && !view.has(projection)) view.add(projection);
-        else if (zoneId !== 'arena' && view.has(projection)) view.remove(projection);
+        else if (zoneId !== 'arena' && view.has(projection))
+          view.remove(projection);
       }
       for (const player of this.state.players.values()) {
         const visible =

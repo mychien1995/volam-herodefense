@@ -454,7 +454,7 @@ export async function verifyRenovationV3(
     throw error;
   }
 }
-async function naturalParty({ room, pages, out, wait }) {
+export async function naturalParty({ room, pages, out, wait }) {
   const sim = room.simulation,
     w = room.world,
     c = sim.arena.config;

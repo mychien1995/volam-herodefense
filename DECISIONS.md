@@ -390,3 +390,7 @@ Approved V01/V02 PNGs, JSONs and preview source remain byte-exact. This update c
 ## Skill renovation v3 — 2026-11-06
 
 The director accepted the v2 visual style, reported the Chiết Mai matte, Vạn Kiếm sustained-body fallback and Thất Tinh registration defects, and explicitly authorized the same graphical treatment for every other school and boss skill. This is presentation work: preserve actual skill descriptions, authoritative mechanics, captured aim, hit clocks, emission sockets and arena layouts. Replace cast bodies as well as VFX. New v3 raster outputs remain candidates for director review; authorization to produce/integrate is not final art approval. See `docs/RENOVATION_ALL_SKILLS.md`. Inventory-v2 remains a separate future migration.
+
+### Confirmed 2026-11-06 — isolated skill review
+
+The development skill-test room provides level 30, all own-school skills at maximum rank, and no skill cooldown. This is a server-only review exception; preserve normal-game progression, cooldowns, four active slots and authoritative combat. Requested VFX revisions preserve the old skill descriptions, hit counts and points of origin. See docs/RENOVATION_V4_SKILL_REVIEW.md.

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import {RenovationFeedback,preloadRenovationFeedback} from './renovation-feedback.js';
 import { renovatedSkillComponents } from './renovation-skill-components.js';
 import {
   skillArt,
@@ -26,6 +27,7 @@ import {
 
 const components = new Map(skillArt.assets.map((a) => [a.id, a]));
 export function preloadSkillArt(scene: Phaser.Scene): void {
+  preloadRenovationFeedback(scene);
   scene.load.svg(
     'leaf-halo',
     '/assets/visual-improvement-approved/leaf-halo.svg',
@@ -62,6 +64,7 @@ interface VfxActor {
   zoneId: string;
 }
 export class SkillVfx {
+  private renovated: RenovationFeedback;
   private r3: M3dR3Feedback;
   private m3d: M3dFeedback;
   private feedback: FeedbackVfx;
@@ -84,6 +87,7 @@ export class SkillVfx {
   >();
   private state: LobbyState | undefined;
   constructor(private scene: Phaser.Scene) {
+    this.renovated=new RenovationFeedback(scene);
     this.r3 = new M3dR3Feedback(scene);
     this.m3d = new M3dFeedback(scene);
     this.feedback = new FeedbackVfx(scene);
@@ -236,6 +240,7 @@ export class SkillVfx {
     );
   }
   event(e: CombatEvent): void {
+    this.renovated.event(e);
     if (this.r3.event(e)) return;
     if (this.m3d.event(e)) return;
     if (this.approved.event(e)) return;
@@ -642,6 +647,7 @@ export class SkillVfx {
         v.sprite.destroy();
         this.projectiles.delete(key);
       }
+    this.renovated.sync(state,zoneId,renderPosition);
   }
   castPresentation(
     id: string,
@@ -677,6 +683,7 @@ export class SkillVfx {
     };
   }
   clear(): void {
+    this.renovated.clear();
     this.r3.clear();
     this.m3d.clear();
     this.approved.clear();

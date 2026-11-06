@@ -409,3 +409,8 @@ Approved V01/V02 PNGs, JSONs and preview source remain byte-exact. This update c
 - Chiết Mai has no pale rectangular matte over the actual game floor. Vạn Kiếm keeps the new body after startup until its real channel ends. Thất Tinh uses four frontal slashes registered to the retained directional hand sockets and unchanged hit intervals.
 - Exercise every boss ability through real fixed-tick encounter execution and public normal-match renderers, with server-side ability-selection fixtures labelled as coverage. Check representative casts of every boss form in remaining facings. Do not claim a natural full boss progression from these fixtures.
 - Compare real old/new screenshots at native gameplay zoom, validate source alpha and frame contracts, preserve all earlier approved hashes, and check six actual clients' natural keyboard combat and replicated damage. PNGs and state/frame observations only. Automated PASS does not approve the new artwork.
+
+### Skill review / VFX v4 regression
+
+- Server-gated test rooms give initial and late heroes level30/max own-school ranks; real repeated casts have zero skill cooldown. Missing flags and production rooms retain ordinary levels/cooldowns and reject test loadouts.
+- La Han left/right raster direction is correct; selected eight VFX retain native ratio, caster alignment, fixed earth origin, real projectile velocity and unchanged 10+1 / four-strike clocks. Audit actual pixels, then real Phaser casts in both horizontal directions and four facings for the eight revised skills, followed by six-client authoritative hit agreement. PNG evidence only. See docs/RENOVATION_V4_SKILL_REVIEW.md.

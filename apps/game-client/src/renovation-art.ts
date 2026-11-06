@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 import raw from './renovation-art.generated.json';
 import skillOverrides from './renovation-skills.generated.json';
 import allOverrides from './renovation-actions.generated.json';
+import feedbackV4 from './renovation-feedback.generated.json';
+import { renovationFeedbackEnabled } from './renovation-feedback.js';
 import {
   preloadRenovationActions,
   presentRenovationAction,
@@ -111,7 +113,11 @@ export function inspectRenovation(scene: Phaser.Scene) {
       .filter((o) => {
         const b = o as BodyImage;
         return (
-          b.texture && skillKeys.has(b.texture.key) && b.visible && b.alpha > 0
+          b.texture &&
+          (skillKeys.has(b.texture.key) ||
+            b.texture.key.startsWith('renovated-v4-')) &&
+          b.visible &&
+          b.alpha > 0
         );
       })
       .map((o) => {
@@ -123,7 +129,23 @@ export function inspectRenovation(scene: Phaser.Scene) {
           y: b.y,
           origin: [b.originX, b.originY],
           scale: [b.scaleX, b.scaleY],
+          rotation: b.rotation,
+          flipX: b.flipX,
+          name: b.name,
+          sourceHeading:
+            b.getData('source-heading') ??
+            (renovationFeedbackEnabled()
+              ? (
+                  feedbackV4.frameAxes as Record<
+                    string,
+                    Record<string, number[]>
+                  >
+                )[b.texture.key]?.[String(b.frame.name)]
+              : undefined),
+          velocity: b.getData('velocity'),
+          bounds: { width: b.getBounds().width, height: b.getBounds().height },
           source:
+            feedbackV4.effects.find((e) => e.key === b.texture.key)?.url ??
             skillSources?.get(b.texture.key) ??
             (b.texture.getSourceImage() as { src?: string }).src ??
             '',

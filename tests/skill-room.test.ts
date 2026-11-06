@@ -63,18 +63,34 @@ async function equip(p: Peer, ids: string[], sequence = 1) {
     .poll(() => p.state.players.get(p.sessionId)?.qSkill)
     .toBe(ids[0]);
 }
-it('synchronizes four equipped skills and resource-safe simultaneous projectile casts', async () => {
-  const a = await create('A'),
+it('outside review mode synchronizes four equipped skills and resource-safe simultaneous projectile casts', async () => {
+  const a = await (async () => {
+      process.env['VOLAM_DEV_SKILLS'] = '0';
+      try {
+        return await create('A');
+      } finally {
+        process.env['VOLAM_DEV_SKILLS'] = '1';
+      }
+    })(),
     b = await client.joinById<LobbyState>(a.roomId, opts('B'));
   await start(a, b);
   const room = server.getRoomById<MatchRoom>(a.roomId);
-  await equip(a, [
+  expect(room.devSkillLoadout).toBe(false);
+  // Server-owned legacy loadout fixture. The SDK casts below exercise ordinary
+  // resource/cooldown rules, independently of the now cooldown-free review room.
+  const fixtureEquip = async (p: Peer, ids: string[]) => {
+    room.simulation.hero(p.sessionId)!.skillIds = ids;
+    await expect
+      .poll(() => p.state.players.get(p.sessionId)?.qSkill)
+      .toBe(ids[0]);
+  };
+  await fixtureEquip(a, [
     'hoa_van_chuong',
     'phi_long_tai_thien',
     'khang_long_huu_hoi',
     'cam_long_cong',
   ]);
-  await equip(b, [
+  await fixtureEquip(b, [
     'hoa_van_chuong',
     'hoanh_tao_bong',
     'truy_phong_bong',

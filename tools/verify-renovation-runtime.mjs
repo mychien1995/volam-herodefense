@@ -31,7 +31,7 @@ import { verifyRenovationSkills } from './verify-renovation-skills.mjs';
 /** Normal entry point, real Colyseus room. Fixtures are server-side and labelled. */
 export async function verifyRenovationRuntime(
   browser,
-  { players = 6, development = false, onReady, evidenceDir } = {},
+  { players = 6, development = false, onReady, evidenceDir, clientQuery = '' } = {},
 ) {
   const session = qaSession({
     profile: 'renovation-runtime',
@@ -152,6 +152,7 @@ export async function verifyRenovationRuntime(
       await page.goto(
         session.clientUrl +
           '/?debug=1' +
+          clientQuery +
           (i === 1 ? '&renovationSkills=old' : ''),
       );
       await page.locator('#pre-nickname').fill('Renovation ' + (i + 1));

@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 import manifest from './approved-art.generated.json';
 import renovatedSkills from './renovation-skills.generated.json';
 import allSkills from './renovation-actions.generated.json';
+import feedbackV4 from './renovation-feedback.generated.json';
+import { renovationFeedbackEnabled } from './renovation-feedback.js';
 import { renovationActionsEnabled } from './renovation-actions.js';
 import { createRuntimeArtGallery } from './runtime-art-gallery.js';
 
@@ -35,6 +37,9 @@ const byUrl = new Map(manifest.assets.map((a) => [a.url, a]));
 const renovatedByUrl = new Map(renovatedSkills.assets.map((a) => [a.url, a]));
 const allByUrl = new Map(
   (allSkills.assets as ReviewAsset[]).map((a) => [a.url, a]),
+);
+const feedbackByUrl = new Map(
+  (feedbackV4.assets as ReviewAsset[]).map((a) => [a.url, a]),
 );
 
 function resampleFrame(frame: Phaser.Textures.Frame, density: number) {
@@ -86,6 +91,10 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
           ? new URL(file.url, location.href).pathname
           : '';
       const next =
+        (renovationFeedbackEnabled()
+          ? ((feedbackV4.inlineAtlases as Record<string, string>)[key] ??
+            (feedbackV4.atlases as Record<string, string>)[path])
+          : undefined) ??
         (complete
           ? ((allSkills.inlineAtlases as Record<string, string>)[key] ??
             selected.get(key)?.atlasCandidateUrl ??
@@ -109,6 +118,7 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
     if (typeof file.url !== 'string') return;
     const path = new URL(file.url, location.href).pathname;
     const entry =
+      (renovationFeedbackEnabled() ? feedbackByUrl.get(path) : undefined) ??
       (complete ? allByUrl.get(path) : undefined) ??
       (renovate ? renovatedByUrl.get(path) : undefined) ??
       byUrl.get(path);
