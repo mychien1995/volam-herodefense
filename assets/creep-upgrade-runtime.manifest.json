@@ -1,12 +1,15 @@
 {
   "id": "creep-upgrade-runtime-v1",
-  "status": "runtime-review-candidate",
+  "status": "director-approved-runtime",
   "newBitmapArtwork": false,
-  "directorApprovedRuntimeComposition": false,
+  "directorApprovedRuntimeComposition": true,
   "renderer": "apps/game-client/src/creep-combat-art.ts",
   "authority": "All timings, targeting, positions, statuses and damage come from deterministic server state.",
   "sources": [
-    {"manifest":"assets/effects/bosses/ly-mac-sau/manifest.json","use":"retained Cổ Mộ needle projectiles and impacts; unchanged source/export bytes"},
+    {
+      "manifest": "assets/effects/bosses/ly-mac-sau/manifest.json",
+      "use": "retained Cổ Mộ needle projectiles and impacts; unchanged source/export bytes"
+    },
     {
       "manifest": "assets/arena_creeps.manifest.json",
       "use": "metal, stone, spectral, fire, blood, shadow contacts and projectiles; original provenance retained"
@@ -29,5 +32,7 @@
       "use": "original fire, lava, sigil and weapon-trail animations"
     }
   ],
-  "notes": "No approved PNG/JSON bytes are regenerated or replaced. Resizing, frame sampling and warning composition are presentation-only. Final in-game director judgment remains separate."
+  "notes": "Director approved the final r5 runtime composition and requested milestone/m3d integration on 2026-11-06. No approved PNG/JSON bytes are regenerated or replaced; original source provenance is retained.",
+  "approvedAt": "2026-11-06",
+  "approvedRuntimeCommit": "1f5b9e7727d07c1afd805dc43afde5b773df272a"
 }

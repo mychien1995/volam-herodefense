@@ -1,5 +1,9 @@
 # Current M3D integration memory
 
+## Approved creep integration — 2026-11-06
+
+Director approved the final r5 creep runtime and explicitly requested integration into `milestone/m3d`. The milestone fast-forwarded from `d54382a1` through all six creep commits to the tested runtime `1f5b9e77`; committed protocol 33. The primary checkout's existing uncommitted Vương Trùng Dương work was restored separately, with local WIP protocol 34 and no WIP committed. This supersedes earlier no-merge/candidate statements for the creep composition only. Recovery, exact checks and evidence: [CREEP_M3D_INTEGRATION_2026-11-06.md](CREEP_M3D_INTEGRATION_2026-11-06.md).
+
 ## Gameplay integration into milestone/m3d - 2026-11-05
 
 The milestone combines gameplay commit 2ef38869 with approved creep and environment release 5bca353c. The committed runtime uses protocol 31. The combined tree passed all 755 unit/integration tests, TypeScript, production build and asset validators. Three Chromium cases passed across the final run and scoped retries, covering boss farewells/corpses/dungeon chatter, six-player crafting with both new icon sets, and soundtrack playback/loop/leave. The crafting retry uses explicit branch scrolling and server-acknowledged waits. The original failed browser stage remains in its timing report. See [integration verification](evidence/sessions/m3d-gameplay-merge-final/integration-verification.json).

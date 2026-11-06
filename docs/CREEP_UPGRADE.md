@@ -62,3 +62,5 @@ Director feedback r3 supersedes the earlier heavy-line/zombie-death-pool/three-s
 Director feedback r4 removes purple pre-cast circles for all 49 creep profiles and places Thi độc directly at captured target feet. Current implementation, validation and review service identity: [CREEP_FEEDBACK_R4.md](CREEP_FEEDBACK_R4.md).
 
 Director feedback r5 removes Hoành trảm from Sơn Tặc Đao and suppresses generic caster-origin contact bursts across creep attacks/skills. Current behavior and verification: [CREEP_FEEDBACK_R5.md](CREEP_FEEDBACK_R5.md).
+
+Director approved the final r5 composition and requested milestone/m3d integration on 2026-11-06. All six creep commits are integrated by fast-forward; earlier candidate/no-merge statements above are historical. See [integration record](CREEP_M3D_INTEGRATION_2026-11-06.md).
