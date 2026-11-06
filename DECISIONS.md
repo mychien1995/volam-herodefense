@@ -1,3 +1,11 @@
+## Renovation v5 · phản hồi skill — 2026-11-06
+
+Hàng Long Hỏa Vũ được rework theo director: bay tới trước, bay một vòng, vút lên rồi đâm xuống gây sát thương vùng một lần. Server khóa điểm rơi lúc nhận cast, không truy đuổi mục tiêu; 24+36+15+12 tick, bán kính nổ112px, hủy khi chết/chuyển zone. Giữ mana/CD/hệ số sát thương theo rank; thay đường gây sát thương xuyên thẳng cũ.
+
+Thất Tinh Kiếm có bảy nhát chém thật, cách nhau3tick, không thêm finisher gây damage thứ tám. Chia ngân sách sát thương/AP của bốn nhát cũ cho bảy nhát (4/7), chấp nhận khác biệt làm tròn theo hit và thời gian chuỗi dài hơn. Thái Cực Trận chỉ nhốt quái/boss, kể cả boss kháng khống chế; mọi đồng đội đi xuyên. Chặn cả di chuyển thường và lướt theo script tại mép trận; vẫn di chuyển/đánh/cast bên trong, giải phóng khi hết trận hoặc chủ chết.
+
+Hoàn tác hình skill Thiên Hạ Vô Cẩu, Lưỡng Nghi Thủ, Sư Tử Hống, toàn bộ Chu Bá Thông/Kim Luân và Lý Mạc Sầu trừ Băng Phách Ngân Châm về M3D; giữ idle/walk mới. Lưỡng Nghi chỉ hoàn tác VFX, vẫn dùng thân mới. Khôi phục cặp tượng Cổ Mộ tại marker cũ. Thêm mode development thử đủ năm wave boss, tướng30/max skill/không hồi chiêu; launcher game thường giữ luật thường. Hình v5 chờ director xem, test không thay cho duyệt art. Chi tiết: `docs/evidence/renovation-v5/README.md`.
+
 ## Renovation v2 · sửa bố cục, đường đi và thử hai nhánh skill — 2026-11-05
 
 Director yêu cầu tăng độ nét nhưng giữ layout arena cũ: chỉ tượng Võ Thần tại (800,576) và hai đèn tại (744,578)/(856,578). Không thêm cây, cờ, cửa hay công trình vào arena. Nền dùng đúng mặt nạ vòng tròn và hai đường cắt nhau cũ. Canvas giữ mật độ màn hình gốc; camera desktop trở lại 2× và sprite 88px gốc hiển thị ở scale thế giới0.5, giữ kích thước/world FOV cũ.

@@ -19,7 +19,13 @@ export interface FeedbackComponent extends RasterComponent {
   displayScale: number;
   animations: FeedbackAnimation[];
 }
-export const feedbackArt = raw.assets as unknown as FeedbackComponent[];
+const original = raw.assets as unknown as FeedbackComponent[];
+export const feedbackArt: FeedbackComponent[] = [
+  ...original,
+  ...original
+    .filter((a) => /^vo_dang_hands_v2_(projectile|impact|aura)$/.test(a.id))
+    .map((a) => ({ ...a, id: 'retained_m3d_' + a.id })),
+];
 export const feedbackComponents = new Map(feedbackArt.map((c) => [c.id, c]));
 export interface ArtRef {
   asset: string;

@@ -31,7 +31,14 @@ import { verifyRenovationSkills } from './verify-renovation-skills.mjs';
 /** Normal entry point, real Colyseus room. Fixtures are server-side and labelled. */
 export async function verifyRenovationRuntime(
   browser,
-  { players = 6, development = false, onReady, evidenceDir, clientQuery = '' } = {},
+  {
+    players = 6,
+    development = false,
+    onReady,
+    onSelection,
+    evidenceDir,
+    clientQuery = '',
+  } = {},
 ) {
   const session = qaSession({
     profile: 'renovation-runtime',
@@ -183,6 +190,7 @@ export async function verifyRenovationRuntime(
       'vo_dang',
       'cai_bang',
     ];
+    if (onSelection) await onSelection({ page: pages[0], pages, out });
     for (let i = 0; i < players; i++) {
       await pages[i].locator('[data-school=' + schools[i] + ']').click();
       await pages[i]

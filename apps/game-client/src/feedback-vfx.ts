@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { renovationRevisionEnabled } from './renovation-policy.js';
 import { spinFacing } from './hero-vfx-review.js';
 import { facing } from './facing.js';
 import { m3dSkillIds } from './m3d-feedback-policy.js';
@@ -89,6 +90,9 @@ interface Pose {
   waitingStrike: boolean;
 }
 export interface FeedbackPose {
+  abilityId?: string;
+  phase?: string;
+  progress?: number;
   texture: string;
   animation: string;
   origin: [number, number];
@@ -182,7 +186,9 @@ export class FeedbackVfx {
     }
   }
   private place(v: Fx, p: Point): void {
-    const atFeet = ['chiet_mai_thu', 'luu_phong_bo'].includes(v.skill);
+    const atFeet =
+      ['chiet_mai_thu', 'luu_phong_bo', 'cam_long_cong'].includes(v.skill) ||
+      (renovationRevisionEnabled() && v.skill === 'hoanh_tao_bong');
     const offset: [number, number] =
       atFeet || (v.skill === 'pha_giap_bong' && !v.impact)
         ? [0, 0]
@@ -207,6 +213,12 @@ export class FeedbackVfx {
     fy: number,
     repeat?: number,
   ): boolean {
+    if (
+      v.skill === 'luong_nghi_thu' &&
+      renovationRevisionEnabled() &&
+      ref.asset.startsWith('vo_dang_hands_v2_')
+    )
+      ref = { ...ref, asset: 'retained_m3d_' + ref.asset };
     const tag = feedbackTag(ref, fx, fy);
     if (!tag) return false;
     v.ref = ref;
@@ -218,6 +230,28 @@ export class FeedbackVfx {
     // Retained slam contact is at source pixel (128,160), below its old center pivot.
     if (v.skill === 'pha_giap_bong' && ref.asset === 'bong_controls_v2_ground')
       v.sprite.setOrigin(0.5, 160 / 256);
+    if (
+      renovationRevisionEnabled() &&
+      v.skill === 'hoanh_tao_bong' &&
+      ref.asset === 'bong_controls_v2_ground'
+    )
+      v.sprite.setOrigin(0.5, 160 / 256);
+    if (
+      renovationRevisionEnabled() &&
+      v.skill === 'cam_long_cong' &&
+      ref.asset === 'bong_controls_v2_projectile'
+    ) {
+      // V3's claw includes its own ground emission ring. Register that ring,
+      // rather than the centre of the transparent canvas, at the caster feet.
+      const anchors: Record<string, [number, number]> = {
+        right: [95, 170],
+        left: [161, 170],
+        down: [86, 95],
+        up: [170, 161],
+      };
+      const anchor = anchors[tag.direction];
+      if (anchor) v.sprite.setOrigin(anchor[0] / 256, anchor[1] / 256);
+    }
     v.sprite.play({
       key: rasterAnimationKey(ref.asset, tag.name),
       ...(repeat === undefined ? {} : { repeat }),
@@ -238,6 +272,12 @@ export class FeedbackVfx {
     offset: [number, number] = [0, 0],
     review = false,
   ): Fx | undefined {
+    if (
+      skill === 'luong_nghi_thu' &&
+      renovationRevisionEnabled() &&
+      ref.asset.startsWith('vo_dang_hands_v2_')
+    )
+      ref = { ...ref, asset: 'retained_m3d_' + ref.asset };
     const tag = feedbackTag(ref, fx, fy);
     if (!tag) return;
     const sprite = this.scene.add
@@ -472,7 +512,7 @@ export class FeedbackVfx {
           e,
           at,
           false,
-          e.abilityId === 'cam_long_cong'
+          e.abilityId === 'cam_long_cong' && !renovationRevisionEnabled()
             ? [(e.fx ?? 1) * 75, (e.fy ?? 0) * 75 - 20]
             : [0, 0],
         );

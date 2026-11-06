@@ -116,7 +116,8 @@ const descriptions: Record<string, string> = {
   phi_long_tai_thien: 'Sóng lửa xuyên thấu phía trước, đẩy lùi đối thủ.',
   khang_long_huu_hoi:
     'Tăng bạo kích trong thời gian dài hơn; cấp 4 có vùng lửa nhỏ theo người gây sát thương mỗi giây.',
-  hang_long_hoa_vu: 'Tuyệt kỹ: hỏa long lớn xuyên qua đội hình phía trước.',
+  hang_long_hoa_vu:
+    'Phóng hỏa long đến điểm địch đã khóa, bay một vòng, vút lên trời rồi lao xuống gây sát thương vùng. Điểm rơi không truy đuổi mục tiêu.',
   hoanh_tao_bong: 'Quét bổng diện rộng, gây sát thương và làm chậm di chuyển.',
   pha_giap_bong: 'Đánh mạnh một mục tiêu phía trước và giảm phòng thủ.',
   cam_long_cong:

@@ -1,5 +1,5 @@
 import type { ReviewClip } from './animation-review-plans.js';
-/** Four actual frontal strikes, registered to the retained directional hand offsets. */
+/** Actual frontal strikes, registered to the retained directional hand offsets. */
 export function renovatedSevenStarCues(
   hits: number,
   spacingTicks: number,

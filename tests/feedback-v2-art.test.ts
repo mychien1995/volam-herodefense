@@ -12,11 +12,24 @@ import {
 } from '../apps/game-client/src/feedback-bindings.js';
 describe('supplied M3C3 v2 presentation contract', () => {
   it('resolves every supplied ordered frame, absolute duration, trim offset and source canvas', () => {
-    expect(feedbackArt).toHaveLength(45);
+    const supplied = feedbackArt.filter(
+      (a) => !a.id.startsWith('retained_m3d_'),
+    );
+    const retained = feedbackArt.filter((a) =>
+      a.id.startsWith('retained_m3d_'),
+    );
+    expect(supplied).toHaveLength(45);
+    expect(retained).toHaveLength(3);
+    for (const alias of retained) {
+      const original = supplied.find(
+        (a) => a.id === alias.id.replace('retained_m3d_', ''),
+      );
+      expect(alias).toEqual({ ...original, id: alias.id });
+    }
     let frames = 0,
       tags = 0;
     const keys = new Set<string>();
-    for (const c of feedbackArt) {
+    for (const c of supplied) {
       const file = 'apps/game-client/public/' + c.atlas;
       const atlas = JSON.parse(readFileSync(file, 'utf8')) as {
         frames: Record<

@@ -17,7 +17,13 @@ import {
 } from '@volam/game-data';
 import { waitForQa } from './qa-wait.mjs';
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-export async function verifyRenovationBosses({ room, pages, out, full }) {
+export async function verifyRenovationBosses({
+  room,
+  pages,
+  out,
+  full,
+  allowM3d = false,
+}) {
   const [page, peer] = pages,
     sim = room.simulation,
     report = {
@@ -85,6 +91,13 @@ export async function verifyRenovationBosses({ room, pages, out, full }) {
       start = performance.now();
     let active = 0,
       captured = false;
+    const canonicalSkill = skill.replace(/-(left|right|up|down)$/, '');
+    const restored =
+      allowM3d &&
+      (['chu', 'kim'].includes(group) ||
+        (group === 'ly-mac-sau' && canonicalSkill !== 'bang_phach_ngan_cham') ||
+        (group === 'hong-liet' &&
+          ['hong_liet_a2', 'liet_diem_phong_toa'].includes(canonicalSkill)));
     if (
       process.env.VOLAM_V3_BOSS_GROUP &&
       !process.env.VOLAM_V3_BOSS_GROUP.split(',').includes(group)
@@ -93,6 +106,25 @@ export async function verifyRenovationBosses({ room, pages, out, full }) {
     while (performance.now() - start < ms) {
       const v = await present(page);
       for (const b of v.renovation.bodies.filter((b) => b.visible)) {
+        if (
+          restored &&
+          b.id === form &&
+          !b.locomotion &&
+          !['hurt', 'death'].includes(b.pose) &&
+          performance.now() - start > 200
+        ) {
+          assert(
+            !b.texture.startsWith('renovated-action-'),
+            'expected M3D ' + group + '/' + skill + ' ' + JSON.stringify(b),
+          );
+          assert(
+            !b.source.includes('/renovation-v3/actors/'),
+            'old cast source ' + group,
+          );
+          frames.add(b.id + ':' + b.texture + ':' + b.frame);
+          active++;
+          seen.add(b.id);
+        }
         if (b.action) {
           assert(
             b.source.includes('/renovation-v3/') ||
@@ -133,7 +165,13 @@ export async function verifyRenovationBosses({ room, pages, out, full }) {
     }
     assert(
       active > 0,
-      group + '/' + skill + ' new cast body ' + form + '; seen ' + [...poses],
+      group +
+        '/' +
+        skill +
+        (restored ? ' restored M3D body ' : ' new cast body ') +
+        form +
+        '; seen ' +
+        [...poses],
     );
     const a = await snapshot(page),
       b = await snapshot(peer);
@@ -159,6 +197,7 @@ export async function verifyRenovationBosses({ room, pages, out, full }) {
       form,
       observedMs: ms,
       fullLifetime: false,
+      restoredM3d: restored,
       frames: [...frames],
       poses: [...poses],
       fx: [...fx.values()],
@@ -457,6 +496,18 @@ export async function verifyRenovationBosses({ room, pages, out, full }) {
       async () => (await present(page)).zoneId === zone.id,
       'boss map ' + destination,
     );
+    if (allowM3d && destination === 'co_mo') {
+      const statues = (await present(page)).renovation.environment.filter((o) =>
+        /^co_mo:(male|female)_founder_statue:r3$/.test(o.name),
+      );
+      assert.equal(statues.length, 2, 'restored original founder pair');
+      report.founderPair = statues;
+      const hero = [...w.heroes.values()][0];
+      hero.x = statues.reduce((n, s) => n + s.x, 0) / 2;
+      hero.y = statues.reduce((n, s) => n + s.y, 0) / 2 + 80;
+      await sleep(650);
+      await page.screenshot({ path: resolve(out, 'co-mo-founder-pair.png') });
+    }
     if (destination === 'chu_ba_thong') {
       for (const [index, phase] of w.chu.definition.phases.entries()) {
         if (phase.id === 'idle') continue;

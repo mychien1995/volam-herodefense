@@ -273,10 +273,8 @@ export class HongLietRenderer {
             : 'boss_basics';
         frame = `${d}_${a.castAbilityId === 'hong_liet_a1' ? 'thrust' : 'sweep'}_${n}`;
       } else if (a.castAbilityId === 'liet_diem_phong_toa') {
-        if (warning || age >= hongLietDefinition.lavaDashTicks) {
-          asset = 'boss_basics';
-          frame = `${d}_thrust_${warning ? 0 : 3}`;
-        }
+        asset = 'boss_basics';
+        frame = `${d}_thrust_${warning ? 0 : age >= hongLietDefinition.lavaDashTicks ? 3 : 1 + (Math.floor(age / 3) % 2)}`;
       } else {
         asset = 'boss_casts';
         const n = warning
@@ -307,9 +305,13 @@ export class HongLietRenderer {
       a.archetypeId,
       a.hp <= 0
         ? 'death'
-        : asset === 'boss_locomotion' || (!boss && a.pose !== 'basic_attack')
-          ? a.pose
-          : 'action',
+        : boss &&
+            this.tick < a.actionEndsAt &&
+            ['hong_liet_a2', 'liet_diem_phong_toa'].includes(a.castAbilityId)
+          ? 'action'
+          : asset === 'boss_locomotion' || (!boss && a.pose !== 'basic_attack')
+            ? a.pose
+            : 'action',
       a.fx,
       a.fy,
       a.castAbilityId,

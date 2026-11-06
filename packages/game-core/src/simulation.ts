@@ -1,4 +1,5 @@
 import { stepBossBanter } from './boss-banter.js';
+import { advanceDragonDive } from './dragon-dive.js';
 import { dungeonWaypoint } from './dungeon-navigation.js';
 import { dash, blink, rechargeDash } from './mobility.js';
 import { stepChu, constrainChuTrap } from './chu-ba-thong.js';
@@ -15,7 +16,11 @@ import { bufferComboFinisher, takeComboFinisher } from './combo-finisher.js';
 import { stepBossEncounter } from './boss-encounter.js';
 import { nextBasic, expireBasicChain } from './basic-attacks.js';
 import { separateDungeonCreeps } from './creep-spacing.js';
-import { captureConfinement, confineMovement } from './confinement.js';
+import {
+  captureConfinement,
+  confineMovement,
+  enforceConfinement,
+} from './confinement.js';
 import {
   equippedAbility,
   perform,
@@ -205,7 +210,13 @@ function runCommand(
   if (hero.hp <= 0) return;
   if (command.kind === 'nam-de-key') {
     if (command.castId.startsWith('vtd:')) {
-      world.vuong?.submitKey(world, hero.id, command.castId, command.index, command.key);
+      world.vuong?.submitKey(
+        world,
+        hero.id,
+        command.castId,
+        command.index,
+        command.key,
+      );
       return;
     }
     answerNamDe(
@@ -342,6 +353,10 @@ function advanceProjectile(
   shot: Projectile,
   config: SimulationConfig,
 ): void {
+  if (shot.effect.dragonDive) {
+    advanceDragonDive(world, shot, config);
+    return;
+  }
   if (shot.lingerUntil !== undefined) {
     if (world.tick >= shot.lingerUntil) world.projectiles.delete(shot.id);
     return;
@@ -537,6 +552,9 @@ function advanceProjectile(
   }
 }
 export function stepWorld(world: World, config: SimulationConfig): void {
+  const confinementStarts = new Map(
+    [...world.creeps].map(([id, e]) => [id, { x: e.x, y: e.y }]),
+  );
   world.tick++;
   world.events = [];
   world.bacCai?.prepare(world, config);
@@ -644,6 +662,17 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     world.projectiles.set(id, {
       id,
       ownerId: scheduled.ownerId,
+      spawnedAt: world.tick,
+      ...(scheduled.dragonTarget
+        ? {
+            dragonFlight: {
+              origin: { x: scheduled.x, y: scheduled.y },
+              target: scheduled.dragonTarget,
+              fx: scheduled.dx,
+              fy: scheduled.dy,
+            },
+          }
+        : {}),
       abilityId: scheduled.ability.id,
       x: scheduled.x,
       y: scheduled.y,
@@ -877,5 +906,6 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   finishNamDeTick(world);
   world.bacCai?.step(world, config);
   world.vuong?.step(world, config);
+  enforceConfinement(world, config, confinementStarts);
   stepBossBanter(world, config);
 }

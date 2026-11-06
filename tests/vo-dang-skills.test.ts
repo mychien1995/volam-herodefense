@@ -384,20 +384,20 @@ describe('M3C2 authoritative Yin–Yang', () => {
     expect(b.hp).toBe(160);
     expect(f.enemies[0]!.hp).toBe(10000 - 12 * 22);
   });
-  it('Thất Tinh has four timed frontal cuts regardless of cast spam, rear targets excluded', () => {
+  it('Thất Tinh has seven timed frontal cuts regardless of cast spam, rear targets excluded', () => {
     const f = fixture('that_tinh_kiem');
     f.cast();
-    f.steps(3);
+    f.steps(2);
     expect(f.hits()).toHaveLength(1);
     f.steps(1);
-    expect(f.hits()).toHaveLength(1);
+    expect(f.hits()).toHaveLength(2);
     f.steps(1);
     expect(f.hits()).toHaveLength(2);
     for (let i = 0; i < 25; i++) {
       f.input({ kind: 'cast', slot: 0 });
       f.steps(1);
     }
-    expect(f.hits().map((e) => e.damage)).toEqual([25, 25, 25, 25]);
+    expect(f.hits().map((e) => e.damage)).toEqual(Array(7).fill(14));
     expect(f.enemies[2]!.hp).toBe(10000);
   });
   it('Nhân Kiếm pierces each target once along its original direction; walls stop travel', () => {

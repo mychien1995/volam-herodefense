@@ -1,12 +1,5 @@
 import { blocked, distance, segmentRect } from './geometry.js';
-import { hasStatus } from './status.js';
 import type { Actor, Point, SimulationConfig, World } from './types.js';
-
-function immune(actor: Actor, tick: number): boolean {
-  return (
-    !!actor.forcedMovementImmune || hasStatus(actor, 'interrupt_resist', tick)
-  );
-}
 
 /** Entry is sampled every simulation tick, independently of the area's damage pulse. */
 export function captureConfinement(
@@ -24,7 +17,6 @@ export function captureConfinement(
     for (const enemy of world.creeps.values()) {
       if (
         enemy.hp > 0 &&
-        !immune(enemy, world.tick) &&
         distance(area, enemy) <= area.effect.radius &&
         !config.collision.some(
           (w) => segmentRect(area, enemy, w) !== undefined,
@@ -44,7 +36,8 @@ export function confineMovement(
   from: Point,
   config: SimulationConfig,
 ): void {
-  if (immune(actor, world.tick)) return;
+  // A geometric dome is not knockback or stun. Boss control resistance does
+  // not grant wall traversal; allies are never captured in trappedIds.
   const areas = (world.areas ?? []).filter(
     (a) =>
       a.effect.confines &&
@@ -78,4 +71,18 @@ export function confineMovement(
     actor.x = from.x;
     actor.y = from.y;
   }
+}
+
+/** Also enforce scripted boss dashes/teleports that bypass ordinary creep AI. */
+export function enforceConfinement(
+  world: World,
+  config: SimulationConfig,
+  starts: Map<string, Point>,
+) {
+  captureConfinement(world, config);
+  for (const [id, actor] of world.creeps)
+    if (actor.hp > 0) {
+      const before = starts.get(id);
+      if (before) confineMovement(world, actor, before, config);
+    }
 }

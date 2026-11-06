@@ -1,6 +1,7 @@
 import type { BossBanterClock, BossBanterDefinition } from './boss-banter.js';
 import type { ChuEncounter } from './chu-types.js';
 import type { WaveBossTestRuntime } from './wave-boss-test.js';
+import type { DragonDiveDefinition } from './dragon-dive.js';
 import type { EllipseBounds } from './dong-ta-types.js';
 import type { NamDeKey, NamDeRuntime } from './nam-de-types.js';
 import type { BacCaiEncounter } from './bac-cai.js';
@@ -25,6 +26,7 @@ export interface Rect extends Point {
 }
 export type Pose = 'idle' | 'walk' | 'basic_attack' | 'cast' | 'hurt' | 'death';
 export interface ProjectileEffect {
+  dragonDive?: DragonDiveDefinition | undefined;
   windupTicks?: number | undefined;
   recoveryTicks?: number | undefined;
   laneOffsets?: number[] | undefined;
@@ -191,6 +193,7 @@ export interface DashEffect {
     { durationTicks: number; damage: number; range: number } | undefined;
 }
 export interface MultiHitEffect {
+  attackPowerScale?: number | undefined;
   comboBurstOnly?: boolean | undefined;
   mode: 'multi_hit';
   range: number;
@@ -419,6 +422,7 @@ export interface Creep extends Actor {
   burnDamage: number;
 }
 export interface Projectile extends Point {
+  dragonFlight?: { origin: Point; target: Point; fx: number; fy: number };
   spawnedAt?: number;
   combo?: ComboSpec;
   comboTargets?: Record<string, boolean>;
@@ -523,6 +527,7 @@ export interface World {
   random: () => number;
   pending: Array<{ heroId: string; command: Command }>;
   shots: Array<{
+    dragonTarget?: Point | undefined;
     comboTargets?: Record<string, boolean>;
     tick: number;
     ownerId: string;

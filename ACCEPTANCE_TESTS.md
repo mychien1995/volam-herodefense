@@ -1,3 +1,7 @@
+## Renovation v5 skill feedback acceptance — 2026-11-06
+
+Use `pnpm check:final --config playwright.renovation-v5.config.ts`. Observe17 revised school skills in four facings, the four distinct Shaolin A poses and travelling finisher, original M3D cast bodies/VFX for the requested reversions, renovated needle exception, both restored Cổ Mộ statues, and six real Phaser clients with identical replicated hit events. Verify body/FX frame sources, fixed pivots, actual cast/phase/hit clocks, projectile headings and seven real Thất Tinh pulses. The wave mode must acknowledge level30/full skills/zero cooldown and load actual first/fifth encounters; prerequisite fixtures are labelled rather than claimed natural victories. Unit tests cover fixed dragon landing, cancellation, one AoE hit, ally passage, resistant bosses and an actual Hồng Liệt scripted dash clipped by DungeonMatch. Validate native PNG/JSON/Aseprite/provenance with `scripts/verify-renovation-v5.py`; inspect PNGs at gameplay zoom. Director art approval remains pending.
+
 ## Renovation v2 layout/navigation/skill pilot acceptance — 2026-11-05
 
 Main arena: exactly statue + two lamps at original anchors; original circle/cross floor mask; no invisible removed scenery barriers. Native CSS1 canvas with camera2/locomotion world scale0.5 preserves original gameplay scale. Forest real arrow-key route reaches the south, east and north clearing, returns to its exit and exits with Space. Four creep dungeons have at most two solid interior rock footprints; spawn, exit and creep spawn points remain free.

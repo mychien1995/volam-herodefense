@@ -3,6 +3,7 @@ import { emit, hurt, offensiveStats } from './combat.js';
 import { applyStatus, displace, hasStatus } from './status.js';
 import { rankedAbility, characterStats } from './progression.js';
 import { captureConfinement, confineMovement } from './confinement.js';
+import { dragonDiveTarget } from './dragon-dive.js';
 import type {
   Ability,
   AllyEffect,
@@ -117,6 +118,11 @@ function queueProjectiles(
           (effect.spreadAngle * i) / (effect.count - 1)
         : 0;
     world.shots.push({
+      ...(effect.dragonDive
+        ? {
+            dragonTarget: dragonDiveTarget(world, hero, dx, dy, effect, config),
+          }
+        : {}),
       tick: world.tick + i * effect.spacingTicks,
       ownerId: hero.id,
       comboTargets,
@@ -700,7 +706,13 @@ export function perform(
       effect,
       ability,
       comboTargets: {},
-      rawDamage: damageFor(hero, effect.damage, config, world.tick),
+      rawDamage: damageFor(
+        hero,
+        effect.damage,
+        config,
+        world.tick,
+        effect.mode === 'multi_hit' ? (effect.attackPowerScale ?? 1) : 1,
+      ),
       finisherDamage:
         effect.mode === 'multi_hit'
           ? damageFor(hero, effect.finisherDamage, config, world.tick)

@@ -160,10 +160,10 @@ describe('M3A canonical Cái Bang skills', () => {
       damage: 28,
     });
   });
-  it('Hàng Long travels forward and hits multiple enemies without retriggering overlaps', () => {
+  it('Hàng Long circles and dives, hitting the locked landing area once', () => {
     const f = fixture('hang_long_hoa_vu');
     f.cast();
-    f.steps(60);
+    f.steps(90);
     expect(f.enemies.slice(0, 3).map((e) => e.hp)).toEqual([910, 910, 910]);
     expect(f.enemies[3]!.hp).toBe(1000);
     expect(f.events.filter((e) => e.kind === 'hit')).toHaveLength(3);

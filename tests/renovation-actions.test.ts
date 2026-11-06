@@ -61,7 +61,7 @@ describe('renovated actions retain semantic phases and registrations', () => {
       ),
     ).toBe(true);
   });
-  it('registers four real Seven Star impacts to existing hand sockets without the distant decorative orbit', () => {
+  it('registers seven real Seven Star impacts to existing hand sockets without the distant decorative orbit', () => {
     const e = m1Config.skillCatalogue!.that_tinh_kiem!.effect;
     if (e.mode !== 'multi_hit') throw Error('multi_hit required');
     const clips = renovatedSevenStarCues(
@@ -70,9 +70,11 @@ describe('renovated actions retain semantic phases and registrations', () => {
         m1Config.tickRate,
       ),
       fx = clips.filter((c) => !c.body);
-    expect(fx).toHaveLength(4);
+    expect(fx).toHaveLength(7);
     expect(fx.map((c) => c.at)).toEqual(
-      [0, 1, 2, 3].map((i) => (i * e.spacingTicks * 1000) / m1Config.tickRate),
+      [0, 1, 2, 3, 4, 5, 6].map(
+        (i) => (i * e.spacingTicks * 1000) / m1Config.tickRate,
+      ),
     );
     for (const cue of fx) {
       expect(cue.from).toEqual([0, 0]);

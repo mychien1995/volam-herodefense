@@ -153,9 +153,10 @@ export const voDangSkills: Ability[] = [
     effect: {
       mode: 'multi_hit',
       range: 80,
-      damage: 25,
-      hits: 4,
-      spacingTicks: 5,
+      damage: 100 / 7,
+      attackPowerScale: 4 / 7,
+      hits: 7,
+      spacingTicks: 3,
       finisherDamage: 0,
       finisherRange: 80,
       halfAngle: Math.PI / 3,
@@ -236,8 +237,8 @@ const descriptions = [
   'Sóng âm lớn bay thẳng; giảm riêng tốc độ di chuyển và tốc độ đánh.',
   'Khí chưởng bay thẳng; hoàn nội lực một lần khi trúng, không hoàn khi hụt.',
   'Bật/tắt khiên dùng nội lực chịu sát thương; không phí bật và không hồi chiêu phụ. Thiếu nội lực nhận phần còn lại.',
-  'Tuyệt kỹ: trận âm dương cố định, sát thương theo nhịp; địch không vượt biên, vẫn di chuyển và đánh bên trong; địch miễn cưỡng chế được thoát.',
-  'Bốn nhát kiếm mạnh liên tiếp trong cung phía trước.',
+  'Tuyệt kỹ: vòm âm dương cố định nhốt quái và boss đã vào trận; địch vẫn di chuyển, đánh bên trong, đồng đội đi xuyên.',
+  'Bảy nhát kiếm liên tiếp trong cung phía trước; tổng sát thương gốc và hệ số lực công giữ ngân sách cũ.',
   'Kiếm bay chậm và xuyên địch, mỗi địch trúng một lần. Bấm lại cùng ô để hiện thân tại kiếm; kiếm lưu cuối tầm 1,5 giây.',
   'Kiếm trận cố định tại chỗ thi triển, gây sát thương theo nhịp lên địch trong trận.',
   'Thủ tối đa 5 giây, giảm 70% sát thương; tích lũy thực nhận sau giảm. Hết 5 giây hoặc vượt 20% máu tối đa thì phản tổng thực nhận ra xung quanh một lần khi còn sống.',
@@ -298,7 +299,7 @@ export function addVoDangProgression(d: ProgressionDefinition): void {
           e.projectileBurst.damage += r * 9;
           e.projectileBurst.range += r * 5;
         } else {
-          e.damage += r * 5;
+          e.damage += r * 5 * (base.id === 'that_tinh_kiem' ? 4 / 7 : 1);
           e.range += r * 4;
         }
       }

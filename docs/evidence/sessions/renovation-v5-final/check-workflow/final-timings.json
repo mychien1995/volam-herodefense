@@ -1,0 +1,43 @@
+{
+  "runId": "3766515f-f9f0-456f-8936-b9d6582f810a",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.renovation-v5.config.ts"
+  ],
+  "startedAt": "2026-11-06T09:15:37.316Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 16.87,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.02,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.55,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.53,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 138.45,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 158.42
+}

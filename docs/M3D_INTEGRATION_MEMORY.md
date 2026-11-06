@@ -1,5 +1,9 @@
 # Current M3D integration memory
 
+## Renovation v5 director feedback — 2026-11-06
+
+Newest override: `DECISIONS.md` v5 and `docs/evidence/renovation-v5/README.md`. Dragon ultimate now locks a cast-time impact point and runs four authoritative flight phases before one AoE hit; Thất Tinh has seven real strokes; Thái Cực confines creeps/bosses including scripted dashes, all allies pass. Requested M3D skill reversions coexist with renovated idle/walk and the new needle exception. Both Cổ Mộ founder statues are restored. Native V5 sources/exports live in `assets/{source,exports}/renovation-v5`, separate from every immutable approved baseline. Shaolin manual attacks use retained semantic phase/progress rather than single-cel animation progress. New avatars derive from approved V1 sprites. `pnpm dev:renovation:bosses` starts the separate development five-boss/max30/zero-CD mode on5548/2948; normal5546/2946 and skill5547/2947 remain separate review services. Verify running ownership/identity before reusing ports. Art is pending director review.
+
 ## Renovation v2 correction and two-branch skill pilot — 2026-11-05
 
 This override supersedes v1 camera/prop/collision presentation below. Main arena has exactly the original statue plus two lamps, no invented scenery. Native canvas remains CSS1; desktop camera2 plus new locomotion scale0.5 restores original world FOV/body size. Ground maps exactly to authoritative bounds. Bamboo no longer retains invisible river/fence walls; sparse shared rock footprints apply to four creep dungeons, Cổ Mộ loses obsolete interior plinths, and coast/lava boundaries remain.

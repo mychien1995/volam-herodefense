@@ -31,6 +31,7 @@ const status = z.strictObject({
   toggle: z.boolean().optional(),
 });
 const projectile = z.strictObject({
+  dragonDive:z.strictObject({forwardTicks:count.min(1),orbitTicks:count.min(1),riseTicks:count.min(1),diveTicks:count.min(1),loopRadius:positive,impactRadius:positive,height:positive}).optional(),
   windupTicks: count.min(1).optional(),
   recoveryTicks: count.optional(),
   laneOffsets: z.array(z.number().finite()).min(1).max(8).optional(),
@@ -206,6 +207,7 @@ export const abilitySchema = z
       }),
       z.strictObject({
         mode: z.literal('multi_hit'),
+        attackPowerScale:z.number().min(0).max(1).optional(),
         range: positive,
         damage: z.number().finite().nonnegative(),
         hits: count.min(1).max(16),

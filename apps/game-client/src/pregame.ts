@@ -187,6 +187,11 @@ export class PreGame {
         content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <strong data-testid="selection-ready">${players.filter(([, p]) => p.connected && p.confirmed).length}/${players.length} đã sẵn sàng</strong></p><div class="school-grid">${schools.map((s) => `<button type="button" class="school-card ${self?.schoolId === s.id ? 'selected' : ''}" data-action="school" data-school="${s.id}" aria-pressed="${self?.schoolId === s.id}" ${self?.confirmed ? 'disabled' : ''}><h3>${s.name}</h3><div role="img" aria-label="${s.name} — chân dung" class="school-portrait ${s.portrait}"></div><span class="element">${s.element}</span><p>${s.description}</p><small>${s.basics}</small></button>`).join('')}</div><p class="pre-note">Cấp 1 · Tự học kỹ năng theo Q → W → E → R · Có thể chọn trùng phái.</p>${list}<div class="pre-actions">${button('Rời phòng', 'leave')}${button(self?.confirmed ? 'Đã xác nhận' : 'Xác nhận', 'confirm', !self?.schoolId || !!self?.confirmed)}</div>${players.some(([, p]) => !p.connected) ? '<p class="pre-warning">Đang chờ người chơi mất kết nối. Không tự chọn phái hoặc bắt đầu trận. Bạn có thể rời và tạo phòng mới.</p>' : ''}`;
       }
     }
+    if (this.state?.devSkillLoadout)
+      content = content.replace(
+        'Cấp 1 · Tự học kỹ năng theo Q → W → E → R',
+        'Test · Cấp 30 · Tối đa kỹ năng · Không hồi chiêu',
+      );
     this.node.innerHTML = `<section class="pre-window ${this.screen === 'SCHOOL_SELECTION' ? 'school-window' : ''}"><h1 class="pre-title">${title}</h1>${content}<p class="pre-error" role="status" aria-live="polite">${escape(this.notice)}</p></section>`;
   }
   destroy() {

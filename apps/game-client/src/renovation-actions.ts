@@ -1,5 +1,8 @@
 import Phaser from 'phaser';
 import raw from './renovation-actions.generated.json';
+import revision from './renovation-revision.generated.json';
+import { renovationRevisionEnabled } from './renovation-policy.js';
+import { retainM3dBody } from './renovation-policy.js';
 import { renovationActionCel } from './renovation-action-model.js';
 type Body = Phaser.GameObjects.Image | Phaser.GameObjects.Sprite;
 type Definition = {
@@ -12,7 +15,15 @@ type Definition = {
   pivot: number[];
 };
 const bodies = raw.bodies as Definition[],
-  byId = new Map(bodies.map((b) => [b.id, b]));
+  extraBodies = revision.assets
+    .filter((a) => a.type === 'body')
+    .map((a) => ({
+      ...a,
+      id: 'v5:' + a.id,
+      actor: a.id === 'vi_da_body' ? 'hero_thieu_lam' : 'hero_thien_son_dao',
+      pivot: [200, 320],
+    })),
+  byId = new Map([...bodies, ...extraBodies].map((b) => [b.id, b]));
 export const renovationActionsEnabled = () => {
   const q = new URLSearchParams(location.search);
   return (
@@ -21,11 +32,13 @@ export const renovationActionsEnabled = () => {
   );
 };
 export const renovationActionSources = new Map(
-  bodies.map((b) => [b.key, b.url]),
+  [...bodies, ...extraBodies].map((b) => [b.key, b.url]),
 );
 export function preloadRenovationActions(scene: Phaser.Scene) {
   if (!renovationActionsEnabled()) return;
   for (const b of bodies) scene.load.atlas(b.key, b.url, b.atlas);
+  if (renovationRevisionEnabled())
+    for (const b of extraBodies) scene.load.atlas(b.key, b.url, b.atlas);
 }
 /** Redraw only the sampled legacy action pose. The retained animator/server owns its clock. */
 export function presentRenovationAction(
@@ -36,7 +49,12 @@ export function presentRenovationAction(
   fx: number,
   fy: number,
   ability = '',
+  clock?: { phase?: string; progress?: number },
 ) {
+  if (retainM3dBody(id, ability)) {
+    image.setData('renovation-action', undefined);
+    return false;
+  }
   if (
     !renovationActionsEnabled() ||
     ['idle', 'walk', 'death', 'hurt', 'stun'].includes(pose)
@@ -50,7 +68,9 @@ export function presentRenovationAction(
         progress: number;
       }
     | undefined;
-  const native = image.texture.key.startsWith('renovated-action-');
+  const native =
+    image.texture.key.startsWith('renovated-action-') ||
+    image.texture.key.startsWith('renovated-v5-');
   const texture =
     native && previous ? previous.sourceTexture : image.texture.key;
   const renderedFrame =
@@ -68,18 +88,37 @@ export function presentRenovationAction(
     anim?.textureKey === texture ? String(anim.textureFrame) : renderedFrame;
   const route = clips?.[texture]?.[frame];
   // Phaser single-cel animations may have NaN progress (index / (length - 1)).
-  const progress =
-    anim?.textureKey === texture && Number.isFinite(anim.progress)
-      ? anim.progress
-      : (route?.progress ?? previous?.progress ?? 0.45);
+  const sampledProgress =
+    renovationRevisionEnabled() && Number.isFinite(clock?.progress)
+      ? clock!.progress!
+      : anim?.textureKey === texture && Number.isFinite(anim.progress)
+        ? anim.progress
+        : (route?.progress ?? previous?.progress ?? 0.45);
+  // Event and state patches can straddle one server tick. Never address a
+  // negative cel while the retained action clock catches up to its start.
+  const progress = Math.max(0, Math.min(0.999, sampledProgress));
   const clip =
+    (renovationRevisionEnabled() ? clock?.phase : undefined) ??
     route?.clip ??
     (native && previous
       ? previous.clip
       : (('anims' in image ? image.anims.currentAnim?.key : undefined) ??
         frame));
   if (/death|die_|hurt|hit_reaction/.test(clip)) return false;
-  const cel = renovationActionCel(id, ability, clip, progress),
+  const cel =
+      renovationRevisionEnabled() && ability === 'bach_liet_thien_kich'
+        ? {
+            sheet: 'v5:bach_liet_body',
+            index: Math.floor(scene.time.now / 70) % 4,
+            phase: 'flurry',
+          }
+        : renovationRevisionEnabled() && ability === 'vi_da_quyen'
+          ? {
+              sheet: 'v5:vi_da_body',
+              index: Math.min(3, Math.floor(progress * 4)),
+              phase: 'ground-punch',
+            }
+          : renovationActionCel(id, ability, clip, progress),
     definition = byId.get(cel.sheet);
   if (!definition) return false;
   let direction =
@@ -91,14 +130,19 @@ export function presentRenovationAction(
         ? 'up'
         : 'down';
   if (
-    /spin|whirl|luc_duong|bach_phien|thien_ha_vo_cau/.test(
-      ability + ' ' + clip,
-    ) &&
+    !(renovationRevisionEnabled() && ability === 'bach_liet_thien_kich') &&
+    ((renovationRevisionEnabled() &&
+      ability === 'thieu_lam_quyen' &&
+      /roundhouse/.test(clip)) ||
+      /spin|whirl|luc_duong|bach_phien|thien_ha_vo_cau/.test(
+        ability + ' ' + clip,
+      )) &&
     [
       'hero_thien_son',
       'hero_thien_son_dao',
       'hero_cai_bang',
       'chu_ba_thong',
+      'hero_thieu_lam',
     ].includes(id) &&
     cel.phase !== 'anticipation'
   ) {

@@ -2,6 +2,10 @@ import Phaser from 'phaser';
 import manifest from './approved-art.generated.json';
 import renovatedSkills from './renovation-skills.generated.json';
 import allSkills from './renovation-actions.generated.json';
+import {
+  retainM3dRaster,
+  renovationRevisionEnabled,
+} from './renovation-policy.js';
 import feedbackV4 from './renovation-feedback.generated.json';
 import { renovationFeedbackEnabled } from './renovation-feedback.js';
 import { renovationActionsEnabled } from './renovation-actions.js';
@@ -36,11 +40,18 @@ const enabled = () => {
 const byUrl = new Map(manifest.assets.map((a) => [a.url, a]));
 const renovatedByUrl = new Map(renovatedSkills.assets.map((a) => [a.url, a]));
 const allByUrl = new Map(
-  (allSkills.assets as ReviewAsset[]).map((a) => [a.url, a]),
+  (allSkills.assets as ReviewAsset[])
+    .filter((a) => !retainM3dRaster(a.id))
+    .map((a) => [a.url, a]),
 );
 const feedbackByUrl = new Map(
-  (feedbackV4.assets as ReviewAsset[]).map((a) => [a.url, a]),
+  (feedbackV4.assets as ReviewAsset[])
+    .filter((a) => !retainM3dRaster(a.id))
+    .map((a) => [a.url, a]),
 );
+const retainedNeedle = (allSkills.assets as ReviewAsset[]).find(
+  (a) => a.id === 'co_mo_fx',
+)!;
 
 function resampleFrame(frame: Phaser.Textures.Frame, density: number) {
   frame.cutX *= density;
@@ -77,6 +88,8 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
     new URLSearchParams(location.search).get('renovationSkills') !== 'old';
   const items: Binding[] = [];
   const selected = new Map<string, ReviewAsset>();
+  const sourceUrls = new Map<string, string>();
+  scene.registry.set('runtime-art-urls', sourceUrls);
   bindings.set(scene, items);
   production.set(scene, selected);
   const select = (
@@ -90,17 +103,29 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
         typeof file.url === 'string'
           ? new URL(file.url, location.href).pathname
           : '';
+      const retain =
+        retainM3dRaster(key) ||
+        retainM3dRaster(
+          path
+            .split('/')
+            .at(-1)
+            ?.replace(/\.json$/, '') ?? '',
+        );
       const next =
-        (renovationFeedbackEnabled()
-          ? ((feedbackV4.inlineAtlases as Record<string, string>)[key] ??
-            (feedbackV4.atlases as Record<string, string>)[path])
-          : undefined) ??
-        (complete
-          ? ((allSkills.inlineAtlases as Record<string, string>)[key] ??
-            selected.get(key)?.atlasCandidateUrl ??
-            (allSkills.atlases as Record<string, string>)[path])
-          : undefined) ??
-        (renovatedSkills.atlases as Record<string, string>)[path];
+        key === 'co_mo_needle_v3' && renovationRevisionEnabled()
+          ? retainedNeedle.atlasCandidateUrl
+          : !retain
+            ? ((renovationFeedbackEnabled()
+                ? ((feedbackV4.inlineAtlases as Record<string, string>)[key] ??
+                  (feedbackV4.atlases as Record<string, string>)[path])
+                : undefined) ??
+              (complete
+                ? ((allSkills.inlineAtlases as Record<string, string>)[key] ??
+                  selected.get(key)?.atlasCandidateUrl ??
+                  (allSkills.atlases as Record<string, string>)[path])
+                : undefined) ??
+              (renovatedSkills.atlases as Record<string, string>)[path])
+            : undefined;
       if (next) {
         file.url = next;
         if (file.state === Phaser.Loader.FILE_POPULATED) {
@@ -117,14 +142,22 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
       return;
     if (typeof file.url !== 'string') return;
     const path = new URL(file.url, location.href).pathname;
+    sourceUrls.set(key, path);
     const entry =
-      (renovationFeedbackEnabled() ? feedbackByUrl.get(path) : undefined) ??
-      (complete ? allByUrl.get(path) : undefined) ??
-      (renovate ? renovatedByUrl.get(path) : undefined) ??
-      byUrl.get(path);
+      key === 'co_mo_needle_v3' && renovationRevisionEnabled()
+        ? retainedNeedle
+        : retainM3dRaster(key)
+          ? byUrl.get(path)
+          : ((renovationFeedbackEnabled()
+              ? feedbackByUrl.get(path)
+              : undefined) ??
+            (complete ? allByUrl.get(path) : undefined) ??
+            (renovate ? renovatedByUrl.get(path) : undefined) ??
+            byUrl.get(path));
     if (!entry) return;
     if (!review) {
       file.url = entry.candidateUrl;
+      sourceUrls.set(key, entry.candidateUrl);
       selected.set(key, entry);
       return;
     }

@@ -481,3 +481,27 @@
     font-size: 14px;
   }
 }
+
+/* Current approved gameplay sprites, matching the in-game school identity. */
+.school-window .school-portrait.cai {
+  background-image: url('/assets/renovation-v5/portrait-hero_cai_bang.png');
+}
+.school-window .school-portrait.thien {
+  background-image: url('/assets/renovation-v5/portrait-hero_thien_son.png');
+}
+.school-window .school-portrait.vo {
+  background-image: url('/assets/renovation-v5/portrait-hero_vo_dang.png');
+}
+.school-window .school-portrait.thieu {
+  background-image: url('/assets/renovation-v5/portrait-hero_thieu_lam.png');
+}
+.school-window .school-portrait {
+  background-size: 128px 128px;
+  background-position: center;
+  image-rendering: auto;
+}
+@media (max-height: 550px) {
+  .school-window .school-portrait {
+    background-size: 80px 80px;
+  }
+}

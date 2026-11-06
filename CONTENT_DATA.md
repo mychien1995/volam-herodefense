@@ -1,3 +1,7 @@
+## Renovation v5 runtime override — 2026-11-06
+
+Hàng Long Hỏa Vũ (`hang_long_hoa_vu`): fixed cast-time landing point; forward flight → one orbit → rise → dive, one112px AoE hit on landing after87ticks. Thất Tinh Kiếm (`that_tinh_kiem`): seven actual frontal strokes,3tick spacing, former four-hit budget divided across seven. Thái Cực Trận: only hostile creeps and bosses are confined, including resistant/scripted movers; all allied heroes pass. These director-requested mechanics supersede the historical rows below; see `DECISIONS.md` and `docs/evidence/renovation-v5/README.md`.
+
 ## M3D approved runtime catalogue override — 2026-11-03
 
 This section and the revised rows below supersede earlier skill descriptions for the approved M3D integration. Stable IDs,43 actives,8 basics,4 passives,free school mixing and4 slots remain. `hoanh_tao_cuoc` now displays **Ca Diệp Thoái**; `tam_gioi_quy_thien` displays **Sư Tử Hống**. Exact data remain in `packages/game-data/src/thieu-lam.ts` and `m3d-feedback-tuning.ts`.

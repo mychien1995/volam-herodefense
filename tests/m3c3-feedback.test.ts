@@ -268,7 +268,7 @@ describe('M3C3 feedback authoritative trial', () => {
     hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 1000, f.config);
     expect(f.hero.hp).toBe(0);
   });
-  it('formation confines movement while allowing attacks inside, releases on expiry/death and respects immunity', () => {
+  it('formation confines movement including resistant bosses, permits attacks inside and releases on expiry/death', () => {
     const f = fixture('thai_cuc_tran');
     f.config.creep.speed = 240;
     f.config.creep.detectionRange = 1000;
@@ -280,7 +280,7 @@ describe('M3C3 feedback authoritative trial', () => {
     expect(e.x).toBeGreaterThan(380);
     e.forcedMovementImmune = true;
     f.steps(20);
-    expect(e.x).toBeGreaterThan(425);
+    expect(e.x).toBeLessThanOrEqual(425.001);
     const g = fixture('thai_cuc_tran');
     g.config.creep.speed = 240;
     g.config.creep.detectionRange = 1000;

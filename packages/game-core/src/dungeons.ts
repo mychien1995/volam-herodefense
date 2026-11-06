@@ -1,4 +1,5 @@
 import { TayDocEncounter, TayDocGate } from './tay-doc.js';
+import { enforceConfinement } from './confinement.js';
 import {
   stepWaveBossTest,
   validateWaveBossTest,
@@ -15,7 +16,12 @@ import type { NamDeDefinition } from './nam-de-types.js';
 import { KimLuanEncounter } from './kim-luan.js';
 import { DongTaEncounter } from './dong-ta.js';
 import { BacCaiEncounter } from './bac-cai.js';
-import { VuongEncounter, validateVuong, VUONG_ID, type VuongDefinition } from './vuong-trung-duong.js';
+import {
+  VuongEncounter,
+  validateVuong,
+  VUONG_ID,
+  type VuongDefinition,
+} from './vuong-trung-duong.js';
 import type { WaveArenaView, WaveArenaBoss } from './wave-arena-types.js';
 import { NAM_DE_ID } from './nam-de-types.js';
 import type { DongDefinition } from './dong-ta-types.js';
@@ -246,7 +252,11 @@ export class DungeonMatch {
         ...bacCai,
         restMs: (waveBossTest.restTicks * 1000) / base.tickRate,
       };
-      if (vuong) vuong = { ...vuong, restMs: waveBossTest.restTicks * 1000 / base.tickRate };
+      if (vuong)
+        vuong = {
+          ...vuong,
+          restMs: (waveBossTest.restTicks * 1000) / base.tickRate,
+        };
     }
     for (const definition of [dungeon, ...additionalDungeons]) {
       if (this.definitions.has(definition.id))
@@ -584,7 +594,8 @@ export class DungeonMatch {
         dongTa: this.dongTa?.phase === 'cleared',
         tayDoc: this.tayDoc?.phase === 'dead',
         namDe: this.arena.world.namDe?.phase === 'defeated',
-        bacCai: this.arena.world.bacCai?.phase === 'defeated' ||
+        bacCai:
+          this.arena.world.bacCai?.phase === 'defeated' ||
           !!this.mainBosses?.defeatedBosses.includes('bac_cai'),
         ...(this.mainBosses?.final ? { final: this.victory } : {}),
       });
@@ -691,6 +702,9 @@ export class DungeonMatch {
       }
       delete zone.emptySince;
       const wasDead = zone.world.chu?.deadAt;
+      const confinementStarts = new Map(
+        [...zone.world.creeps].map(([id, e]) => [id, { x: e.x, y: e.y }]),
+      );
       stepWorld(zone.world, zone.config);
       if (zone.access === 'arena')
         this.dongTa?.afterStep(zone.world, zone.config);
@@ -710,6 +724,7 @@ export class DungeonMatch {
           );
         this.tayDoc.step(zone.world, zone.config);
       }
+      enforceConfinement(zone.world, zone.config, confinementStarts);
       this.observeAttempt(zone);
       if (encounter && zone.world.creeps.get(zone.world.boss!.actorId)!.hp <= 0)
         zone.bossRespawnAt ??= this.tick + encounter.respawnTicks;
@@ -735,11 +750,13 @@ export class DungeonMatch {
         this.syncWaveArena();
         if (zone.world.vuong?.state === 'defeated') {
           this.victory = true;
-          if (zone.world.waveBossTest) zone.world.waveBossTest.stage = 'complete';
+          if (zone.world.waveBossTest)
+            zone.world.waveBossTest.stage = 'complete';
           for (const active of this.zones.values()) {
             active.world.projectiles.clear();
             active.world.pending = [];
-            for (const id of active.world.heroes.keys()) cancelOwnedEffects(active.world, id);
+            for (const id of active.world.heroes.keys())
+              cancelOwnedEffects(active.world, id);
           }
           return;
         }
@@ -904,7 +921,9 @@ export class DungeonMatch {
             ? 'nam_de'
             : w.bacCai && !['cleared', 'defeated'].includes(w.bacCai.phase)
               ? 'bac_cai'
-              : w.vuong?.state === 'fighting' ? VUONG_ID : undefined;
+              : w.vuong?.state === 'fighting'
+                ? VUONG_ID
+                : undefined;
       if (!id) return;
       this.waveArena = {
         bossId: id,
@@ -959,7 +978,10 @@ export class DungeonMatch {
       }
     }
     const notesWipe = a.bossId === VUONG_ID && w.vuong!.wipeRequested;
-    if (notesWipe || (w.heroes.size && [...w.heroes.values()].every((h) => h.hp <= 0))) {
+    if (
+      notesWipe ||
+      (w.heroes.size && [...w.heroes.values()].every((h) => h.hp <= 0))
+    ) {
       if (a.bossId === 'tay_doc') this.tayDoc!.reset(w);
       else if (a.bossId === 'nam_de') {
         const d = w.namDe!.definition;

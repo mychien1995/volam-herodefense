@@ -1,0 +1,96 @@
+{
+  "status": "PASS after scoped fixes/retries",
+  "artApproval": "pending director review",
+  "scope": "Requested V5 skill art, three explicit mechanic changes, reversions, founder pair, portraits and isolated five-boss test launcher",
+  "unitIntegration": {
+    "fullRun": {
+      "total": 764,
+      "passed": 761,
+      "failed": 3
+    },
+    "focusedRetry": {
+      "files": 5,
+      "passed": 18,
+      "includesAllThreeFailures": true
+    },
+    "note": "Updated the old seven-star/alias contract assertions and replaced an inline type-import rejected by the core boundary guard. The other761 cases were unchanged; no claim that the initial check:final command itself exited successfully."
+  },
+  "workflowChecks": 18,
+  "typechecks": "tsc -b and tsc -p tsconfig.tools.json --noEmit PASS; client typecheck repeated after the normalized action progress fix",
+  "assetValidators": {
+    "count": 27,
+    "status": "PASS",
+    "note": "Resumed the remaining8 validators with PYTHONUTF8=1 after the old Bắc Cái validator failed only while printing Vietnamese to cp1252. V5 source/alpha/atlas/provenance check repeated after recording measured generation timings."
+  },
+  "productionBuild": "PASS; rebuilt for normal server2946 after QA2950, fresh browser rooms verified against matching server/client run identities",
+  "phaser": {
+    "schoolCasts": 68,
+    "facings": 4,
+    "shaolinChains": 4,
+    "bossCasts": 59,
+    "founderStatues": 2,
+    "party": {
+      "clients": 6,
+      "hitEvents": 20,
+      "peerDamageAgreement": true
+    },
+    "waveMode": {
+      "status": "PASS",
+      "level": 30,
+      "zeroCooldown": true,
+      "first": "dong_ta",
+      "final": "vuong_trung_duong",
+      "players": 2,
+      "fixture": "Real review flags, lobby and keyboard Q. Observed actual first encounter. Earlier chapter defeat prerequisites then unlock the real fifth encounter; this is an entry/renderer check, not a natural five-boss clear.",
+      "peerFinal": 1
+    },
+    "liveServices": [
+      {
+        "mode": "normal",
+        "client": 5546,
+        "server": 2946,
+        "level": 1,
+        "devSkillLoadout": false,
+        "waveBosses": false,
+        "runId": "7f5c7c08-f099-4956-a7b8-8f6b1e76f89d",
+        "ready": true,
+        "errors": []
+      },
+      {
+        "mode": "skills",
+        "client": 5547,
+        "server": 2947,
+        "level": 30,
+        "devSkillLoadout": true,
+        "waveBosses": false,
+        "runId": "da1dae52-313e-49f3-9090-17458714d9dd",
+        "ready": true,
+        "errors": []
+      },
+      {
+        "mode": "bosses",
+        "client": 5548,
+        "server": 2948,
+        "level": 30,
+        "devSkillLoadout": true,
+        "waveBosses": true,
+        "runId": "2f8831fa-f032-4433-a9cb-d876fe28cdbc",
+        "ready": true,
+        "errors": []
+      }
+    ]
+  },
+  "iterationFixes": [
+    "Clamp a retained action clock crossing a network tick to valid native cel indices.",
+    "Register the actual authored claw emission ring and staff sweep centre at caster feet.",
+    "Compare settled durable-target HP after each observation window instead of racing long-channel patches.",
+    "Use renderer frame history for short Vi Đà cels under six-canvas load, with separate precise two-client Shaolin motion.",
+    "Direction assertions select travelling projectiles, excluding static contact flashes of the same raster."
+  ],
+  "limitations": [
+    "Boss skill/phase and final chapter prerequisites are labelled fixtures, not a claimed natural five-boss victory.",
+    "Artwork remains a candidate; test success does not approve it.",
+    "Dragon landing rework changes AoE coverage and delay. Seven-sword integer rounding differs slightly from four larger hits; measured cast comparisons are in balance.json."
+  ],
+  "recordingsCreated": false
+}

@@ -57,6 +57,7 @@ export function presentRenovatedBody(
   fx = 0,
   fy = 1,
   ability = '',
+  clock?: { phase?: string; progress?: number },
 ): void {
   if (!image || !id || !renovationEnabled(scene)) return;
   const definition = definitions.get(id);
@@ -84,7 +85,7 @@ export function presentRenovatedBody(
       .setRotation(0);
     image.setData('renovation-action', undefined);
   } else {
-    presentRenovationAction(scene, image, id, pose, fx, fy, ability);
+    presentRenovationAction(scene, image, id, pose, fx, fy, ability, clock);
   }
   image.setData('renovation', { id, pose, direction, locomotion });
   const seen = scene.registry.get('renovation-observed') as Map<
@@ -96,6 +97,8 @@ export function presentRenovatedBody(
   seen.set(id, frames);
 }
 export function inspectRenovation(scene: Phaser.Scene) {
+  const actualSources = scene.registry.get('runtime-art-urls') as
+    Map<string, string> | undefined;
   const skillSources = scene.registry.get('renovated-skill-sources') as
     Map<string, string> | undefined;
   const skillKeys = new Set(
@@ -115,7 +118,10 @@ export function inspectRenovation(scene: Phaser.Scene) {
         return (
           b.texture &&
           (skillKeys.has(b.texture.key) ||
-            b.texture.key.startsWith('renovated-v4-')) &&
+            b.texture.key.startsWith('renovated-v4-') ||
+            b.texture.key.startsWith('renovated-v5-') ||
+            b.texture.key.startsWith('retained_m3d_')) &&
+          !b.getData('renovation') &&
           b.visible &&
           b.alpha > 0
         );
@@ -143,8 +149,12 @@ export function inspectRenovation(scene: Phaser.Scene) {
                 )[b.texture.key]?.[String(b.frame.name)]
               : undefined),
           velocity: b.getData('velocity'),
+          projectileStage: b.getData('projectile-stage'),
+          shadow: b.getData('v5-shadow'),
+          effect: b.getData('v5-effect'),
           bounds: { width: b.getBounds().width, height: b.getBounds().height },
           source:
+            actualSources?.get(b.texture.key) ??
             feedbackV4.effects.find((e) => e.key === b.texture.key)?.url ??
             skillSources?.get(b.texture.key) ??
             (b.texture.getSourceImage() as { src?: string }).src ??
@@ -162,6 +172,7 @@ export function inspectRenovation(scene: Phaser.Scene) {
           texture: body.texture.key,
           source:
             renovationActionSources.get(body.texture.key) ??
+            actualSources?.get(body.texture.key) ??
             skillSources?.get(body.texture.key) ??
             (body.texture.getSourceImage() as { src?: string }).src ??
             '',

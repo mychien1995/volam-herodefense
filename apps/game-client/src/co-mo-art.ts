@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { renovationRevisionEnabled } from './renovation-policy.js';
 import { replaceR3ArenaProp } from './m3d-r3-arena.js';
 import { bossArenaScale as S } from '@volam/game-data';
 import { coMoDungeon, lyMacSauEncounter } from '@volam/game-data';
@@ -31,6 +32,11 @@ export function coMoCreepArt(
   return art;
 }
 export function preloadCoMo(scene: Phaser.Scene) {
+  scene.load.atlas(
+    'co_mo_needle_v3',
+    '/assets/co_mo/co_mo_fx.png',
+    '/assets/co_mo/co_mo_fx.json',
+  );
   scene.load.pack('co_mo_pack', '/assets/co_mo/pack.json');
   scene.load.atlas(
     'co_mo_original_fx',
@@ -49,6 +55,20 @@ export function registerCoMoEffects(scene: Phaser.Scene) {
   for (const effect of (
     scene.cache.json.get('co_mo_manifest') as DesertManifest
   ).effects) {
+    if (
+      /^co_mo:(needle_|chilling_slow)/.test(effect.id) &&
+      !scene.anims.exists(effect.id + ':renovated')
+    )
+      scene.anims.create({
+        key: effect.id + ':renovated',
+        frames: effect.frames.map((frame, i) => ({
+          key: 'co_mo_needle_v3',
+          frame,
+          duration: effect.durations![i]!,
+        })),
+        frameRate: 1000,
+        repeat: effect.repeat ?? 0,
+      });
     const texture = effect.texture!;
     scene.textures.get(texture).setFilter(Phaser.Textures.FilterMode.NEAREST);
     for (const key of effect.id === 'co_mo:basic_hit'
@@ -154,7 +174,11 @@ export class CoMoEffects {
     rotation = 0,
     loop?: boolean,
   ) {
-    const key = `co_mo:${name}`;
+    const key =
+      `co_mo:${name}` +
+      (renovationRevisionEnabled() && /^(needle_|chilling_slow)/.test(name)
+        ? ':renovated'
+        : '');
     const anim = this.scene.anims.get(key);
     if (!anim) throw Error('Missing Cổ Mộ effect: ' + name);
     const first = anim.frames[0]!;

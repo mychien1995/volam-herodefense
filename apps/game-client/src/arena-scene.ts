@@ -8,6 +8,7 @@ import {
 import { WaveArenaPresentation } from './wave-boss-feedback-art.js';
 import { TayDocRenderer, isTayDocActor } from './tay-doc-art.js';
 import { revisedBasicBody, isRevisedHero } from './character-revision.js';
+import type { FeedbackPose } from './feedback-vfx.js';
 import { NamDePresentation } from './nam-de-presentation.js';
 import { KimLuanRenderer, isKimActor } from './kim-luan-art.js';
 import { DongTaRenderer, isDongArtActor } from './dong-ta-art.js';
@@ -405,7 +406,7 @@ export class ArenaScene extends Phaser.Scene {
             this.zoneId,
           ))
         : undefined;
-      const cast = !enemy
+      const cast: FeedbackPose | undefined = !enemy
         ? revisedBasicBody(
             this,
             this.vfx?.actorCast(
@@ -518,7 +519,8 @@ export class ArenaScene extends Phaser.Scene {
         actor.hp <= 0 ? 'death' : !enemy && cast ? 'action' : pose.state,
         actor.fx,
         actor.fy,
-        actor.castAbilityId ?? '',
+        cast?.abilityId ?? actor.castAbilityId ?? '',
+        cast,
       );
       if (cast)
         this.vfx?.observeCharacter(

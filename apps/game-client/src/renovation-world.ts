@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { replaceR3ArenaProp } from './m3d-r3-arena.js';
 import { arena, dungeonForZone, renovationRocks } from '@volam/game-data';
 
 /** Fixed original world coordinates. Raster density never changes navigation. */
@@ -70,7 +71,24 @@ export function createRenovationWorld(
           0.65,
           'renovation:rock:' + i,
         );
-    else prop(4, map.width * 0.5, map.height * 0.25, 0.8);
+    else if (id !== 'co_mo') prop(4, map.width * 0.5, map.height * 0.25, 0.8);
+    if (id === 'co_mo') {
+      // Restore the two original founder statues at their retained Tiled markers.
+      const tile = scene.make.tilemap({ key: 'boss_co_mo' });
+      const S = map.width / tile.widthInPixels;
+      for (const p of tile.getObjectLayer('scenery')?.objects ?? [])
+        if (['male_founder_statue', 'female_founder_statue'].includes(p.name)) {
+          const image = scene.add
+            .image(p.x! * S, p.y! * S, 'co_mo_scenery', p.name)
+            .setOrigin(0.5, 168 / 192)
+            .setScale(S)
+            .setDepth(p.y! * S)
+            .setName('co_mo:' + p.name)
+            .setData('renovation-world', true);
+          replaceR3ArenaProp(image, 'co_mo', p.name, S);
+          props.push(image);
+        }
+    }
     if ('exit' in map) {
       const portal = scene.add
         .image(map.exit.x, map.exit.y, 'renovated-hub-portal')

@@ -42,6 +42,15 @@ export const caiBangExtraSkills: Ability[] = [
     manaCost: 45,
     cooldownTicks: 600,
     effect: {
+      dragonDive: {
+        forwardTicks: 24,
+        orbitTicks: 36,
+        riseTicks: 15,
+        diveTicks: 12,
+        loopRadius: 70,
+        impactRadius: 112,
+        height: 125,
+      },
       mode: 'projectile',
       damage: 90,
       speed: 240,

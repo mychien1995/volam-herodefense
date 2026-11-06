@@ -1,3 +1,7 @@
+## Renovation v5 authoritative changes — 2026-11-06
+
+Hàng Long locks an eligible forward enemy position at accepted cast, then follows24/36/15/12tick forward/orbit/rise/dive phases. Only its final112px landing AoE damages once per target; it never homes or damages along the flight. Death/travel clears it. Seven Thất Tinh strokes use3tick spacing, base/AP damage scaled4/7 from the prior four-hit attack; integer rounding remains per hit. Thái Cực confinement captures only creeps/bosses, including resistant bosses, clips scripted dashes as well as normal movement, and ends on expiry/owner death. Allies pass freely. These are explicit director changes; all other renovation-v5 adjustments are presentation. See `DECISIONS.md`.
+
 ## M3D approved combat and action lifecycle — 2026-11-03
 
 Newest M3D feedback overrides historical reach/timing statements below. Every A is a fresh press; monk A has four stages, minimum6tick cadence, finisher30tick cooldown;60tick inactivity begins30tick cooldown. Shift has2 charges with sequential240tick/8s recharge. Võ Đang basic knockback probability0.1.
