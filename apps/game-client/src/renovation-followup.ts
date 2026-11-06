@@ -3,11 +3,19 @@ import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
 import { m1Config } from '@volam/game-data';
 import raw from './renovation-followup.generated.json';
+import coilArt from './renovation-coil.generated.json';
 import { renovationFollowupEnabled } from './renovation-policy.js';
-import { dragonTurnFrame } from './renovation-followup-model.js';
+import {
+  dragonTurnFrame,
+  dragonCoilFrame,
+  staffContact,
+} from './renovation-followup-model.js';
 export function preloadRenovationFollowup(scene: Phaser.Scene) {
   if (renovationFollowupEnabled())
-    for (const a of raw.assets.filter((a) => a.type !== 'body'))
+    for (const a of [
+      ...raw.assets.filter((a) => a.type !== 'body'),
+      ...coilArt.assets,
+    ])
       scene.load.atlas(a.key, a.url, a.atlas);
 }
 export function drawTurningDragon(
@@ -18,21 +26,35 @@ export function drawTurningDragon(
   projectileId: string,
 ) {
   const pose = dragonTurnFrame(fx, fy, ageMs);
+  const effect = m1Config.skillCatalogue!.hang_long_hoa_vu!.effect;
+  const phase =
+    effect.mode === 'projectile' && effect.dragonDive
+      ? dragonCoilFrame((ageMs * m1Config.tickRate) / 1000, effect.dragonDive)
+      : undefined;
+  const origins = coilArt.assets.find((a) => a.id === 'dragon_coil_fire')!
+    .origins as Record<string, number[]>;
+  const origin = phase ? origins[String(phase.index)]! : pose.origin;
   image
-    .setTexture('renovated-v6-dragon_turns', pose.frame)
-    .setOrigin(...pose.origin)
+    .setTexture(
+      phase
+        ? 'renovated-v7-dragon_coil_fire'
+        : 'renovated-v7-dragon_forward_fire',
+      phase ? String(phase.index) : pose.frame,
+    )
+    .setOrigin(origin[0]!, origin[1]!)
     .setRotation(0)
-    .setFlipX(pose.flip)
+    .setFlipX(phase ? false : pose.flip)
     .setData('source-heading', undefined)
-    .setData('authored-heading', pose.direction)
-    .setData('v6-effect', 'dragon_turns');
+    .setData('authored-heading', phase ? undefined : pose.direction)
+    .setData('v7-phase', phase?.phase ?? 'dragon_forward')
+    .setData('v6-effect', phase?.phase ?? 'dragon_forward');
   const observed = image.scene.registry.get('renovation-observed') as
     Map<string, Set<string>> | undefined;
   if (observed) {
-    const key = 'v6:dragon_heading:' + projectileId;
-    const headings = observed.get(key) ?? new Set<string>();
-    headings.add(pose.direction);
-    observed.set(key, headings);
+    const key = 'v7:dragon:' + projectileId;
+    const frames = observed.get(key) ?? new Set<string>();
+    frames.add((phase?.phase ?? 'dragon_forward') + ':' + image.frame.name);
+    observed.set(key, frames);
   }
 }
 type Flash = {
@@ -46,6 +68,8 @@ type Flash = {
   fx: number;
   fy: number;
   follow: boolean;
+  windup: number;
+  strikeAt?: number | undefined;
 };
 /** Cast/strike/impact clocks stay server-owned. This class only samples drawings. */
 export class RenovationFollowup {
@@ -58,25 +82,34 @@ export class RenovationFollowup {
     x: number,
     y: number,
     follow = false,
-    delay = 0,
   ) {
+    const arc = effect === 'staff_arc',
+      contact = staffContact(e.fx ?? 1, e.fy ?? 0);
     const image = this.scene.add
-      .image(x, y, 'renovated-v6-' + effect, '0')
+      .image(
+        x,
+        y,
+        arc ? 'renovated-v7-staff_sweep' : 'renovated-v6-staff_crack',
+        arc ? contact.direction + '_0' : '0',
+      )
       .setName('renovation-v6:' + e.abilityId)
       .setData('v6-effect', effect)
-      .setScale(0.65)
+      .setOrigin(0.5, arc ? 0.8 : 0.5)
+      .setScale(arc ? 0.5 : 0.65)
       .setDepth(effect === 'staff_crack' ? -2 : e.y + 0.8);
     const f = {
       image,
       owner: e.sourceId,
       effect,
-      start: this.scene.time.now + delay,
+      start: this.scene.time.now,
       life,
       x,
       y,
       fx: e.fx ?? 1,
       fy: e.fy ?? 0,
       follow,
+      windup: 200,
+      strikeAt: undefined as number | undefined,
     };
     this.flashes.add(f);
     return f;
@@ -86,34 +119,31 @@ export class RenovationFollowup {
     if (e.kind === 'cast') {
       const effect = m1Config.skillCatalogue!.pha_giap_bong!.effect,
         windup = 'windupTicks' in effect ? (effect.windupTicks ?? 6) : 6;
-      this.flash(
+      const f = this.flash(
         e,
         'staff_arc',
-        300,
+        (windup * 1000) / m1Config.tickRate + 500,
         e.x,
-        e.y - 36,
+        e.y,
         true,
-        Math.max(0, (windup * 1000) / m1Config.tickRate - 90),
       );
+      f.windup = (windup * 1000) / m1Config.tickRate;
     }
-    if (e.kind === 'pulse' && e.stage === 'strike')
-      this.flash(
-        e,
-        'staff_crack',
-        700,
-        e.x + (e.fx ?? 1) * 50,
-        e.y + (e.fy ?? 0) * 50,
-      );
-    if (e.kind === 'hit')
+    if (e.kind === 'pulse' && e.stage === 'strike') {
+      const contact = staffContact(e.fx ?? 1, e.fy ?? 0);
       for (const f of this.flashes)
         if (
           f.owner === e.sourceId &&
-          f.effect === 'staff_crack' &&
-          this.scene.time.now - f.start < 150
+          f.effect === 'staff_arc' &&
+          f.strikeAt === undefined
         ) {
+          f.strikeAt = this.scene.time.now;
+          f.follow = false;
           f.x = e.x;
           f.y = e.y;
         }
+      this.flash(e, 'staff_crack', 700, e.x + contact.x, e.y + contact.y);
+    }
   }
   sync(
     state: LobbyState | undefined,
@@ -123,8 +153,12 @@ export class RenovationFollowup {
     if (!renovationFollowupEnabled()) return;
     for (const f of this.flashes) {
       const owner = state?.players.get(f.owner),
-        age = this.scene.time.now - f.start;
-      if (age >= f.life || !owner || owner.hp <= 0 || owner.zoneId !== zone) {
+        age = this.scene.time.now - f.start,
+        remaining =
+          f.strikeAt === undefined
+            ? f.life - age
+            : 280 - (this.scene.time.now - f.strikeAt);
+      if (remaining <= 0 || !owner || owner.hp <= 0 || owner.zoneId !== zone) {
         f.image.destroy();
         this.flashes.delete(f);
         continue;
@@ -134,20 +168,29 @@ export class RenovationFollowup {
       if (f.follow) {
         const p = position?.(f.owner) ?? owner;
         f.x = p.x;
-        f.y = p.y - 36;
+        f.y = p.y;
       }
       if (f.effect === 'staff_arc') {
-        const angle = Math.atan2(f.fy, f.fx),
-          left = f.fx < 0;
+        const contact = staffContact(f.fx, f.fy),
+          cel =
+            f.strikeAt === undefined
+              ? age < f.windup * 0.65
+                ? 0
+                : 1
+              : this.scene.time.now - f.strikeAt < 120
+                ? 2
+                : 3;
         f.image
-          .setFlipX(left)
-          .setRotation(left ? angle - Math.PI : angle)
-          .setOrigin(left ? 0.7 : 0.3, 0.35);
+          .setFrame(contact.direction + '_' + cel)
+          .setRotation(0)
+          .setDepth(f.y + (contact.direction === 'up' ? -0.3 : 0.8))
+          .setData('staff-contact', [f.x + contact.x, f.y + contact.y]);
+      } else {
+        f.image
+          .setFrame(String(Math.min(3, Math.floor((age / f.life) * 4))))
+          .setData('staff-contact', [f.x, f.y]);
       }
-      f.image
-        .setPosition(f.x, f.y)
-        .setFrame(String(Math.min(3, Math.floor((age / f.life) * 4))))
-        .setAlpha(Math.min(1, (f.life - age) / 160));
+      f.image.setPosition(f.x, f.y).setAlpha(Math.min(1, remaining / 120));
       const observed = this.scene.registry.get('renovation-observed') as
         Map<string, Set<string>> | undefined;
       if (observed) {
@@ -157,6 +200,31 @@ export class RenovationFollowup {
         observed.set(key, frames);
       }
     }
+    const observed = this.scene.registry.get('renovation-observed') as
+      Map<string, Set<string>> | undefined;
+    if (observed)
+      for (const arc of this.flashes)
+        if (
+          arc.effect === 'staff_arc' &&
+          arc.strikeAt !== undefined &&
+          this.scene.time.now - arc.strikeAt < 120
+        ) {
+          const crack = [...this.flashes].find(
+            (f) =>
+              f.effect === 'staff_crack' &&
+              f.owner === arc.owner &&
+              this.scene.time.now - f.start < 150,
+          );
+          const a = arc.image.getData('staff-contact') as number[] | undefined,
+            b = crack?.image.getData('staff-contact') as number[] | undefined;
+          if (a && b) {
+            const key =
+                'v7:staff_alignment:' + arc.owner + ':' + arc.fx + ':' + arc.fy,
+              values = observed.get(key) ?? new Set<string>();
+            values.add(String(Math.hypot(a[0]! - b[0]!, a[1]! - b[1]!)));
+            observed.set(key, values);
+          }
+        }
     for (const o of this.scene.children.list) {
       const im = o as Phaser.GameObjects.Image;
       if (!im.texture) continue;

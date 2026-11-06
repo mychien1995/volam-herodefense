@@ -1,3 +1,7 @@
+## Renovation v7 authoritative override — 2026-11-06
+
+Hàng Long Hỏa Vũ maximum targeting/fallback distance is reduced30% at every rank (308/329/350). Forward flight reaches the captured endpoint without the former loop-radius overshoot. During `dragon_coil`, ground XY stays fixed at that endpoint; authored body poses perform the one wrap. Rise/dive remain above that same point. Server clocks, single landing AoE, damage, costs and cancellation are unchanged. The retained serialized `orbitTicks` field now times the coil. Phá Giáp VFX are anchored to the drawn staff contact and cannot move damage/hit geometry.
+
 ## Renovation v5 authoritative changes — 2026-11-06
 
 Hàng Long locks an eligible forward enemy position at accepted cast, then follows24/36/15/12tick forward/orbit/rise/dive phases. Only its final112px landing AoE damages once per target; it never homes or damages along the flight. Death/travel clears it. Seven Thất Tinh strokes use3tick spacing, base/AP damage scaled4/7 from the prior four-hit attack; integer rounding remains per hit. Thái Cực confinement captures only creeps/bosses, including resistant bosses, clips scripted dashes as well as normal movement, and ends on expiry/owner death. Allies pass freely. These are explicit director changes; all other renovation-v5 adjustments are presentation. See `DECISIONS.md`.

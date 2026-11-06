@@ -121,6 +121,7 @@ export function inspectRenovation(scene: Phaser.Scene) {
             b.texture.key.startsWith('renovated-v4-') ||
             b.texture.key.startsWith('renovated-v5-') ||
             b.texture.key.startsWith('renovated-v6-') ||
+            b.texture.key.startsWith('renovated-v7-') ||
             b.texture.key.startsWith('v6_') ||
             b.texture.key.startsWith('retained_m3d_')) &&
           !b.getData('renovation') &&
@@ -155,6 +156,8 @@ export function inspectRenovation(scene: Phaser.Scene) {
           shadow: b.getData('v5-shadow'),
           effect: b.getData('v6-effect') ?? b.getData('v5-effect'),
           authoredHeading: b.getData('authored-heading'),
+          dragonPhase: b.getData('v7-phase'),
+          staffContact: b.getData('staff-contact'),
           bounds: { width: b.getBounds().width, height: b.getBounds().height },
           source:
             actualSources?.get(b.texture.key) ??

@@ -19,9 +19,15 @@ const wanted = [
 ];
 export async function verifyRenovationV6(
   browser,
-  { players = 2, development = true, scope = 'heroes' } = {},
+  {
+    players = 2,
+    development = true,
+    scope = 'heroes',
+    skills = wanted,
+    evidenceDir = 'docs/evidence/renovation-v6',
+  } = {},
 ) {
-  const out = resolve('docs/evidence/renovation-v6');
+  const out = resolve(evidenceDir);
   mkdirSync(out, { recursive: true });
   const report = {
     status: 'RUNNING',
@@ -59,7 +65,7 @@ export async function verifyRenovationV6(
           });
           delete process.env.VOLAM_V3_BOSS_GROUP;
         } else {
-          for (const skill of wanted.filter(
+          for (const skill of skills.filter(
             (id) =>
               !process.env.VOLAM_V6_SKILLS ||
               process.env.VOLAM_V6_SKILLS.split(',').includes(id),
@@ -163,7 +169,9 @@ export async function verifyRenovationV6(
                 headings = new Set(),
                 phases = new Set();
               let captured = false,
-                crackCaptured = false;
+                crackCaptured = false,
+                coilCaptured = false,
+                diveCaptured = false;
               await p.locator('#game canvas').focus();
               await p.keyboard.press('KeyQ');
               await wait(
@@ -202,13 +210,52 @@ export async function verifyRenovationV6(
                   effects.set(a.texture + ':' + a.frame, a);
                   if (a.authoredHeading) headings.add(a.authoredHeading);
                   if (a.projectileStage) phases.add(a.projectileStage);
-                  if (a.texture === 'renovated-v6-dragon_turns') {
+                  if (a.dragonPhase) phases.add(a.dragonPhase);
+                  if (a.texture.startsWith('renovated-v7-dragon_')) {
                     assert.equal(a.rotation, 0, 'dragon raster rotation');
+                    if (a.dragonPhase === 'dragon_forward')
+                      assert(
+                        /^(right|down_right|down|up_right|up)_\d$/.test(
+                          String(a.frame),
+                        ),
+                      );
+                  }
+                }
+                for (const projectile of w.projectiles.values())
+                  if (
+                    projectile.ownerId === h.id &&
+                    projectile.abilityId === skill &&
+                    projectile.stage === 'dragon_coil'
+                  ) {
                     assert(
-                      /^(right|down_right|down|up_right|up)_\d$/.test(
-                        String(a.frame),
-                      ),
+                      Math.hypot(
+                        projectile.x - projectile.dragonFlight.target.x,
+                        projectile.y - projectile.dragonFlight.target.y,
+                      ) < 0.001,
+                      'body coils at its fixed endpoint',
                     );
+                  }
+                if (direction === 'right' && skill === 'hang_long_hoa_vu') {
+                  if (
+                    !coilCaptured &&
+                    v.skillEffects.some(
+                      (a) =>
+                        a.dragonPhase === 'dragon_coil' && Number(a.frame) >= 3,
+                    )
+                  ) {
+                    await p.screenshot({
+                      path: resolve(out, 'dragon-coil.png'),
+                    });
+                    coilCaptured = true;
+                  }
+                  if (
+                    !diveCaptured &&
+                    v.skillEffects.some((a) => a.dragonPhase === 'dragon_dive')
+                  ) {
+                    await p.screenshot({
+                      path: resolve(out, 'dragon-dive.png'),
+                    });
+                    diveCaptured = true;
                   }
                 }
                 const contact =
@@ -272,16 +319,30 @@ export async function verifyRenovationV6(
                 );
               }
               if (skill === 'hang_long_hoa_vu') {
-                for (const [key, directions] of Object.entries(shown))
-                  if (
-                    key.startsWith('v6:dragon_heading:') &&
-                    !observedBefore.has(key)
-                  )
-                    for (const direction of directions) headings.add(direction);
-                assert.equal(
-                  headings.size,
-                  8,
-                  'authored camera views around full orbit',
+                const dragonFrames = new Set();
+                for (const [key, rendered] of Object.entries(shown))
+                  if (key.startsWith('v7:dragon:') && !observedBefore.has(key))
+                    for (const frame of rendered) dragonFrames.add(frame);
+                for (let i = 0; i < 8; i++)
+                  assert(
+                    dragonFrames.has('dragon_coil:' + i),
+                    'actual coiling cel ' + i,
+                  );
+                for (const [phase, ids] of [
+                  ['dragon_rise', [8, 9]],
+                  ['dragon_dive', [10, 11]],
+                ])
+                  for (const i of ids)
+                    assert(
+                      dragonFrames.has(phase + ':' + i),
+                      'actual ' + phase + ' cel ' + i,
+                    );
+                for (const f of dragonFrames) frames.add(f);
+                assert(
+                  phases.has('dragon_coil') &&
+                    phases.has('dragon_rise') &&
+                    phases.has('dragon_dive'),
+                  'coil, rise, dive phases',
                 );
                 assert(event.some((a) => a.stage === 'dragon_impact'));
                 assert.equal(
@@ -329,6 +390,17 @@ export async function verifyRenovationV6(
                       ?.length ?? 0) >= 3,
                     id + ' distinct displayed cels',
                   );
+                const aligned =
+                  shown['v7:staff_alignment:' + h.id + ':' + fx + ':' + fy] ??
+                  [];
+                assert(
+                  aligned.length > 0 && aligned.every((v) => Number(v) <= 0.01),
+                  'trail endpoint and ground crack share the drawn staff tip',
+                );
+                assert(
+                  fxs.some((a) => a.texture === 'renovated-v7-staff_sweep'),
+                  'strong directional downward staff trail',
+                );
                 assert(
                   !fxs.some((a) => a.effect === 'staff_slam'),
                   'floating prop removed',

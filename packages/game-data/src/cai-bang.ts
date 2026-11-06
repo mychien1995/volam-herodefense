@@ -54,7 +54,7 @@ export const caiBangExtraSkills: Ability[] = [
       mode: 'projectile',
       damage: 90,
       speed: 240,
-      range: 440,
+      range: 308,
       radius: 48,
       count: 1,
       spacingTicks: 0,

@@ -355,7 +355,7 @@ export async function verifyRenovationV5(
                 if (skill === 'hang_long_hoa_vu') {
                   for (const phase of [
                     'dragon_forward',
-                    'dragon_orbit',
+                    'dragon_coil',
                     'dragon_rise',
                     'dragon_dive',
                   ])

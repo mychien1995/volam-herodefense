@@ -1,3 +1,9 @@
+## Renovation v7 · rồng lửa cuộn thân và điểm chạm bổng — 2026-11-06
+
+Director giảm tầm bắn tối đa Hàng Long Hỏa Vũ 30% ở mọi rank: 440/470/500 → 308/329/350. Rồng bay tới đúng điểm khóa lúc cast, cuộn chính thân thành một vòng tại chỗ, bay lên rồi đâm xuống; không đưa cả sprite chạy vòng quanh điểm rơi. Giữ 24+36+15+12 tick, bán kính nổ112, một lần sát thương khi chạm đất, mana/CD/damage và hủy khi chết/chuyển zone. Tên trường duration `orbitTicks` được giữ tương thích; phase hiện là `dragon_coil`. Rồng chuyển sang vảy đỏ lửa/bờm đỏ cam, giữ nhận diện và góc camera cũ. Hai ảnh mới của director chỉ là khái niệm chuyển động, không phải art cần chép vào game.
+
+Phá Giáp giữ thân cầm bổng và luật đánh; vệt vụt trắng-vàng được vẽ rõ hơn, dùng cùng điểm neo chân với thân. Điểm cuối vệt và tâm vết nứt cùng gắn vào đầu bổng vẽ trong frame tiếp đất, không gắn vào tọa độ mục tiêu trúng đòn. Hình mới chờ duyệt; xem `docs/evidence/renovation-v7/README.md`.
+
 ## Renovation v6 · chọn lọc art và sửa chuyển động — 2026-11-06
 
 Director yêu cầu hoàn tác **effect** Hỏa Vân Chưởng về M3D, bỏ bàn tay Kháng Long Hữu Hối, bỏ hình vòm Thái Cực. Luật nhốt chỉ quái/boss của v5 vẫn giữ. Rồng Hàng Long dùng góc nhìn được vẽ riêng và thân/đuôi uốn theo hướng bay, không xoay cả ảnh; đường bay và damage v5 giữ nguyên. Phá Giáp dùng thân cầm liền bổng: giơ cao → kéo dài → vụt xuống → nứt đất, giữ điểm phát/strike/hit server. Bách Liệt chỉ phóng đại VFX, không tăng tầm đánh.

@@ -58,7 +58,7 @@ function setup(skill = 'hang_long_hoa_vu') {
   };
   return { c, w, h, step, events, target, cast };
 }
-it('dragon follows four phases and one full orbit, with one server damage pulse only on landing', () => {
+it('dragon follows four phases and coils at its locked endpoint, with one server damage pulse only on landing', () => {
   const s = setup(),
     e = s.target('target'),
     near = s.target('near', 650),
@@ -78,9 +78,9 @@ it('dragon follows four phases and one full orbit, with one server damage pulse 
   }
   s.step(2);
   expect([...stages].sort()).toEqual([
+    'dragon_coil',
     'dragon_dive',
     'dragon_forward',
-    'dragon_orbit',
     'dragon_rise',
   ]);
   for (const t of [e, near])
@@ -98,7 +98,7 @@ it('dragon follows four phases and one full orbit, with one server damage pulse 
     b = dragonDivePose(o, t, 1, 0, d.forwardTicks + d.orbitTicks, d);
   expect(a.x).toBeCloseTo(b.x);
   expect(a.y).toBeCloseTo(b.y);
-  expect(a.stage).toBe('dragon_orbit');
+  expect(a.stage).toBe('dragon_coil');
   expect(b.stage).toBe('dragon_rise');
 });
 it('dragon locks target at accepted cast; an enemy moving away is not followed', () => {

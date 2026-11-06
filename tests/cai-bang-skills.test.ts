@@ -160,7 +160,7 @@ describe('M3A canonical Cái Bang skills', () => {
       damage: 28,
     });
   });
-  it('Hàng Long circles and dives, hitting the locked landing area once', () => {
+  it('Hàng Long coils and dives, hitting the locked landing area once', () => {
     const f = fixture('hang_long_hoa_vu');
     f.cast();
     f.steps(90);

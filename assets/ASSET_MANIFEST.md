@@ -1,3 +1,7 @@
+## Renovation v7 · fire dragon / staff contact — 2026-11-06
+
+Original built-in imagegen sources and palette edits: `assets/source/renovation-v7/raw/`; Aseprite editable atlases: `editable/`; exported PNG/JSON: `assets/exports/renovation-v7/`. Three atlases /48 unique cels:20 red multi-view forward-flight cels,12 coil/rise/dive cels,16 directional staff trails. Virtual canvases512px (dragon) and400px (staff); trail foot pivot200/320 matches the retained v6 held-staff body. V6 ground-crack PNG is reused at the same measured staff-tip socket. Source prompts, reference roles, generation durations, export plan/Lua and hashes are retained in the v7 source directory. User reference attachments inform motion only; no third-party art copied. Candidate, pending director review.
+
 ## Renovation v2 · sửa layout và thử hành động/VFX hai nhánh — 2026-11-05
 
 **CANDIDATE, chưa có phê duyệt art mới.** Nền arena3200×2304 giữ bố cục tượng + hai đèn;48 keypose hành động mới,16 pose Kiếm đã duyệt được tái sử dụng,44 cel VFX gốc cho Võ Đang Kiếm/Thiên Sơn Phiến.36 atlas density2 thay1.236 tham chiếu frame trong animators cũ. PNG/JSON: `exports/renovation-v2/`; editable Aseprite/raw/prompt/hash: [provenance](source/renovation-v2/provenance.json). [Báo cáo chạy Phaser và giới hạn phạm vi](../docs/evidence/renovation-v2/README.md). Hành động boss và các nhánh còn lại vẫn giữ tranh cũ.

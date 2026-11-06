@@ -18,7 +18,7 @@ export type DragonDiveDefinition = {
 };
 export const dragonDiveDuration = (d: DragonDiveDefinition) =>
   d.forwardTicks + d.orbitTicks + d.riseTicks + d.diveTicks;
-/** Cast-time, server-owned point. The later orbit/dive never follows a moving target. */
+/** Cast-time, server-owned point. Coiling/rise/dive never follows a moving target. */
 export function dragonDiveTarget(
   w: World,
   origin: Point,
@@ -68,10 +68,7 @@ export function dragonDivePose(
     height = 0,
     dx = fx,
     dy = fy;
-  const entry = {
-    x: target.x + fx * d.loopRadius,
-    y: target.y + fy * d.loopRadius,
-  };
+  const entry = target;
   if (age < d.forwardTicks) {
     const t = Math.max(0, age) / d.forwardTicks;
     x = origin.x + (entry.x - origin.x) * t;
@@ -80,14 +77,13 @@ export function dragonDivePose(
     dx = v.x;
     dy = v.y;
   } else if (age < d.forwardTicks + d.orbitTicks) {
-    stage = 'dragon_orbit';
-    const a = (Math.PI * 2 * (age - d.forwardTicks)) / d.orbitTicks,
-      ca = Math.cos(a),
-      sa = Math.sin(a);
-    x = target.x + d.loopRadius * (fx * ca - fy * sa);
-    y = target.y + d.loopRadius * (fy * ca + fx * sa);
-    dx = -fx * sa - fy * ca;
-    dy = -fy * sa + fx * ca;
+    // Keep the existing phase duration; the authored body curls into one ring.
+    // Moving the entire projectile around a circle would recreate the rejected spin.
+    stage = 'dragon_coil';
+    x = target.x;
+    y = target.y;
+    dx = 0;
+    dy = 0;
   } else if (age < d.forwardTicks + d.orbitTicks + d.riseTicks) {
     stage = 'dragon_rise';
     const t = (age - d.forwardTicks - d.orbitTicks) / d.riseTicks;

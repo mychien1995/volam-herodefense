@@ -1,3 +1,7 @@
+## Renovation v7 runtime override — 2026-11-06
+
+Hàng Long Hỏa Vũ (`hang_long_hoa_vu`): range308/329/350 at ranks1/2/3, exactly70% of former440/470/500. Forward flight ends at its cast-time locked landing point; the red fire dragon coils its own body once at that fixed point, rises and dives. No world-space orbit/overshoot. Retain87total ticks, one112px landing AoE, original damage/mana/CD and lifecycle cancellation. Phá Giáp Bổng changes presentation only: held-staff tip, bright downward trail endpoint and crack centre coincide. All v6 selective M3D reversions remain.
+
 ## Renovation v5 runtime override — 2026-11-06
 
 Hàng Long Hỏa Vũ (`hang_long_hoa_vu`): fixed cast-time landing point; forward flight → one orbit → rise → dive, one112px AoE hit on landing after87ticks. Thất Tinh Kiếm (`that_tinh_kiem`): seven actual frontal strokes,3tick spacing, former four-hit budget divided across seven. Thái Cực Trận: only hostile creeps and bosses are confined, including resistant/scripted movers; all allied heroes pass. These director-requested mechanics supersede the historical rows below; see `DECISIONS.md` and `docs/evidence/renovation-v5/README.md`.

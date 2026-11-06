@@ -1,3 +1,4 @@
+import staffSockets from './renovation-staff-sockets.json' with { type: 'json' };
 const directions = [
   'right',
   'down_right',
@@ -52,4 +53,45 @@ export function staffSlamCel(phase: string, progress: number) {
           ? 0
           : 1
         : Math.min(3, Math.floor(p * 4));
+}
+/** A coiling body at one endpoint; these are authored poses, never a rotating billboard. */
+export function dragonCoilFrame(
+  age: number,
+  d: {
+    forwardTicks: number;
+    orbitTicks: number;
+    riseTicks: number;
+    diveTicks: number;
+  },
+) {
+  if (age < d.forwardTicks) return undefined;
+  const coilEnd = d.forwardTicks + d.orbitTicks,
+    riseEnd = coilEnd + d.riseTicks;
+  const [phase, start, duration, first, count] =
+    age < coilEnd
+      ? (['dragon_coil', d.forwardTicks, d.orbitTicks, 0, 8] as const)
+      : age < riseEnd
+        ? (['dragon_rise', coilEnd, d.riseTicks, 8, 2] as const)
+        : (['dragon_dive', riseEnd, d.diveTicks, 10, 2] as const);
+  return {
+    phase,
+    index:
+      first +
+      Math.min(
+        count - 1,
+        Math.floor((Math.max(0, age - start) / duration) * count),
+      ),
+  };
+}
+export function staffContact(fx: number, fy: number) {
+  const direction =
+    Math.abs(fx) > Math.abs(fy)
+      ? fx < 0
+        ? 'left'
+        : 'right'
+      : fy < 0
+        ? 'up'
+        : 'down';
+  const socket = staffSockets[direction];
+  return { direction, x: socket[0]! * 0.5, y: socket[1]! * 0.5 };
 }
