@@ -1,6 +1,23 @@
 import type { Point, StatusSpec } from './types.js';
 
 export interface CreepAttack {
+  geometry?: 'sector' | undefined;
+  groundTarget?: boolean | undefined;
+  visualTicks?: number | undefined;
+  presentation?:
+    | {
+        warning?: 'none' | 'circle' | 'sector' | undefined;
+        style?:
+          | 'contact'
+          | 'purple_burst'
+          | 'drain'
+          | 'poison_pool'
+          | 'ground_pool'
+          | 'sector'
+          | undefined;
+        projectileOffsetY?: number | undefined;
+      }
+    | undefined;
   extentScale?: number | undefined;
   statusChance?: number | undefined;
   mode: 'arc' | 'projectile' | 'area' | 'dash' | 'guard' | 'counter' | 'buff';

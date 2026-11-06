@@ -28,7 +28,7 @@ test('preview selects all 49 creeps one at a time in live Phaser, with host auth
         errors.push(m.text());
     });
   }
-  const out = 'docs/evidence/creep-preview';
+  const out = 'docs/evidence/creep-feedback-r3/preview';
   mkdirSync(out, { recursive: true });
   try {
     await joinWaiting(
@@ -165,7 +165,10 @@ test('preview selects all 49 creeps one at a time in live Phaser, with host auth
     await expect
       .poll(async () =>
         Object.values((await snapshot(host)).state.bossEffects).some(
-          (e: any) => e.kind === 'creep_line' && e.length === 96,
+          (e: any) =>
+            e.kind === 'creep_area' &&
+            e.abilityId === 'creep_wave_02_special' &&
+            e.radius === 64,
         ),
       )
       .toBe(true);

@@ -70,7 +70,12 @@ export class CreepCombatArt {
       for (const fx of manifest?.effects ?? []) this.defs.set(fx.id, fx);
     }
   }
-  private frame(sprite: Phaser.GameObjects.Sprite, id: string, tick: number) {
+  private frame(
+    sprite: Phaser.GameObjects.Sprite,
+    id: string,
+    tick: number,
+    loop = true,
+  ) {
     if (id === 'arrow') {
       sprite.setTexture('creep_upgrade_arrow');
       return;
@@ -78,8 +83,20 @@ export class CreepCombatArt {
     const def = this.defs.get(id);
     if (!def) throw Error(`Missing retained creep raster ${id}`);
     const f =
-      def.frames[Math.floor(Math.max(0, tick) / 3) % def.frames.length]!;
-    const texture = def.texture ?? 'arena_creep_impacts';
+      def.frames[
+        loop
+          ? Math.floor(Math.max(0, tick) / 3) % def.frames.length
+          : Math.min(def.frames.length - 1, Math.floor(Math.max(0, tick) / 3))
+      ]!;
+    // The approved replacement sheet adds a second, opposite-facing purple
+    // shape to these cels. Use the retained original for this requested sweep
+    // and green poison pool without changing the replacement used by bosses.
+    const texture = [
+      'co_mo:duster_sweep_trail',
+      'co_mo:needle_poison_impact',
+    ].includes(id)
+      ? 'co_mo_original_fx'
+      : (def.texture ?? 'arena_creep_impacts');
     if (sprite.texture.key !== texture) sprite.setTexture(texture, f);
     else sprite.setFrame(f);
     this.observed.add(`${texture}:${f}`);
@@ -99,12 +116,16 @@ export class CreepCombatArt {
       if (e.zoneId !== zone || !e.kind.startsWith('creep_')) return;
       const match = /^creep_(.+)_(basic|special|death)$/.exec(e.abilityId);
       const profile = match ? creepProfiles[match[1]!] : undefined;
-      const spec: CreepAttack | undefined =
+      const parent: CreepAttack | undefined =
         match?.[2] === 'basic'
           ? profile?.basic
           : match?.[2] === 'death'
             ? profile?.death
             : profile?.special;
+      const spec =
+        e.kind === 'creep_area'
+          ? (parent?.field ?? parent?.trail ?? parent)
+          : parent;
       if (!spec) return;
       active.add(id);
       let v = this.views.get(id);
@@ -131,17 +152,30 @@ export class CreepCombatArt {
         this.views.set(id, v);
       }
       const pending = tick < e.activeAt;
+      const visual = spec.presentation;
+      const sector = visual?.style === 'sector';
       const line =
         e.kind === 'creep_line' || (pending && e.kind === 'creep_dash');
       const footprint = e.kind === 'creep_arc' ? e.length * 2 : e.radius * 2;
       const x = line ? e.x + (e.fx * e.length) / 2 : e.x,
         y = line ? e.y + (e.fy * e.length) / 2 : e.y;
       v.warning
-        .setVisible(pending)
+        .setVisible(pending && visual?.warning !== 'none')
         .setPosition(x, y)
         .setDepth(y - 0.6)
         .setAlpha(0.55 + 0.2 * Math.sin((tick - e.startedAt) * 0.5));
-      if (line) {
+      v.warning.setCrop();
+      if (visual?.warning === 'none') {
+        // No generic warning strip for these authored attacks/dashes.
+      } else if (sector) {
+        v.warning
+          .setTexture('hell_fx', 'dark_sigil_0')
+          .setPosition(e.x, e.y)
+          .setDisplaySize(e.length * 2, e.length * 2)
+          .setRotation(Math.atan2(e.fy, e.fx));
+        const f = v.warning.frame;
+        v.warning.setCrop(f.realWidth / 2, 0, f.realWidth / 2, f.realHeight);
+      } else if (line) {
         this.frame(v.warning, 'hell_crimson_weapon_trail', tick - e.startedAt);
         v.warning
           .setDisplaySize(Math.max(40, e.length), Math.max(16, e.radius * 2))
@@ -160,16 +194,60 @@ export class CreepCombatArt {
       v.body.setVisible(!pending);
       if (pending) return;
       const [projectile, impact] = graphics[spec.graphic] ?? graphics['metal']!;
-      const graphic = e.kind === 'creep_projectile' ? projectile : impact;
-      this.frame(v.body, graphic, tick - e.activeAt);
+      const graphic =
+        e.kind === 'creep_projectile'
+          ? projectile
+          : sector
+            ? 'co_mo:duster_sweep_trail'
+            : visual?.style === 'purple_burst'
+              ? 'hell_violet_black_impact'
+              : visual?.style === 'drain'
+                ? 'hell_dark_sigil'
+                : visual?.style === 'poison_pool'
+                  ? 'co_mo:needle_poison_impact'
+                  : impact;
+      this.frame(
+        v.body,
+        graphic,
+        tick - e.activeAt,
+        visual?.style !== 'purple_burst',
+      );
       v.body
-        .setPosition(e.x, e.y)
+        .setOrigin(
+          0.5,
+          visual?.style === 'purple_burst' || visual?.style === 'ground_pool'
+            ? 0.85
+            : 0.5,
+        )
+        .setCrop()
+        .setPosition(
+          e.x,
+          e.y +
+            (e.kind === 'creep_projectile'
+              ? (visual?.projectileOffsetY ?? 0)
+              : 0),
+        )
         .setDepth(e.y + (e.kind === 'creep_area' ? -0.5 : 0.5))
         .setRotation(
           e.kind === 'creep_projectile' ? Math.atan2(e.fy, e.fx) : 0,
         );
       if (e.kind === 'creep_projectile')
         v.body.setScale(graphic === 'arrow' ? 1 : 0.55);
+      else if (sector) {
+        // The retained C-shaped sweep opens to the right. Its curved edge is
+        // left-facing in the source PNG, so rotate it into the captured front.
+        v.body
+          .setDisplaySize(e.length * 2, e.length * 2)
+          .setRotation(Math.atan2(e.fy, e.fx) + Math.PI);
+        const f = v.body.frame;
+        v.body.setCrop(0, 0, f.realWidth / 2, f.realHeight);
+      } else if (
+        visual?.style === 'poison_pool' ||
+        visual?.style === 'ground_pool'
+      )
+        v.body.setDisplaySize(e.radius * 2, e.radius);
+      else if (visual?.style === 'contact')
+        v.body.setDisplaySize(48, 48).setPosition(x, y);
       else if (line)
         v.body
           .setDisplaySize(Math.max(32, e.length), Math.max(20, e.radius * 2))
@@ -224,6 +302,16 @@ export class CreepCombatArt {
         texture: v.body.texture.key,
         frame: v.body.frame.name,
         observedFrames: v.frames.size,
+        bodyVisible: v.body.visible,
+        x: v.body.x,
+        y: v.body.y,
+        rotation: v.body.rotation,
+        width: v.body.displayWidth,
+        height: v.body.displayHeight,
+        warningFrame: v.warning.frame.name,
+        warningX: v.warning.x,
+        warningY: v.warning.y,
+        warningRotation: v.warning.rotation,
       })),
     };
   }

@@ -7,7 +7,11 @@ const session = qaSession({
 });
 export default defineConfig({
   testDir: './tests/e2e',
-  testMatch: ['creep-upgrade.spec.ts', 'creep-preview.spec.ts'],
+  testMatch: [
+    'creep-upgrade.spec.ts',
+    'creep-preview.spec.ts',
+    'creep-feedback-r3.spec.ts',
+  ],
   outputDir: session.outputDir,
   workers: 1,
   fullyParallel: false,

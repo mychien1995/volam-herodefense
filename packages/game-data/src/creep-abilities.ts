@@ -637,6 +637,77 @@ profile('cu_nhan_sa_thach').basic = {
 profile('hai_xa').basic = shot('Thủy đạn', { graphic: 'water' });
 profile('hai_xa').special!.statuses = [...poison, ...slow(0.25)];
 
+// Director preview feedback r3. These replace the earlier generic warning strips.
+profile('wave_02').basic.presentation = { warning: 'none' };
+profile('wave_02').special = pool('Đập mạnh', 'stone', {
+  range: 150,
+  radius: 64,
+  duration: 1,
+  damage: 1.5,
+  visualTicks: 18,
+  presentation: { warning: 'circle', style: 'purple_burst' },
+});
+Object.assign(profile('wave_03').special!, {
+  geometry: 'sector',
+  halfAngle: Math.PI / 2,
+  damage: 2.4,
+  visualTicks: 12,
+  presentation: { warning: 'sector', style: 'sector' },
+});
+profile('wave_06').special = pool('Hấp huyết chưởng', 'blood', {
+  range: 180,
+  radius: 40,
+  duration: 1,
+  damage: 1.5,
+  lifesteal: 0.4,
+  visualTicks: 18,
+  presentation: { warning: 'none', style: 'drain' },
+});
+for (const id of ['wave_07', 'mongol_infantry', 'bc_dog'])
+  delete profile(id).special;
+for (const a of [profile('wave_08').basic, profile('wave_08').special!])
+  a.presentation = { warning: 'none', projectileOffsetY: -18 };
+profile('wave_09').basic.presentation = { warning: 'none' };
+profile('wave_09').special = shot('Thi độc', {
+  range: 280,
+  windup: 24,
+  cooldown: 210,
+  speed: 220,
+  damage: 0,
+  graphic: 'poison',
+  groundTarget: true,
+  presentation: { warning: 'none', projectileOffsetY: -12 },
+  field: pool('Thi độc', 'poison', {
+    range: 0,
+    radius: 88,
+    windup: 0,
+    statuses: poison,
+    presentation: { warning: 'none', style: 'poison_pool' },
+  }),
+});
+delete profile('wave_09').death;
+profile('thuy_quy').special!.range = 280;
+profile('thuy_quy').special!.presentation = { style: 'ground_pool' };
+for (const id of [
+  'wave_05',
+  'wave_13',
+  'wave_16',
+  'wave_17',
+  'bo_cap_cat',
+  'sa_xa',
+  'xac_uop',
+  'cua_khong_lo',
+  'hai_tac',
+  'hell_dia_nguc_khuyen',
+  'hell_hac_dien_nguu_ma',
+]) {
+  const a = profile(id).special!;
+  a.presentation = {
+    warning: 'none',
+    ...(a.mode === 'arc' ? { style: 'contact' as const } : {}),
+  };
+}
+
 const status = z.strictObject({
   kind: z.enum([
     'slow',
@@ -652,6 +723,25 @@ const status = z.strictObject({
 });
 const attack: z.ZodType<CreepAttack> = z.lazy(() =>
   z.strictObject({
+    geometry: z.literal('sector').optional(),
+    groundTarget: z.boolean().optional(),
+    visualTicks: z.number().int().positive().optional(),
+    presentation: z
+      .strictObject({
+        warning: z.enum(['none', 'circle', 'sector']).optional(),
+        style: z
+          .enum([
+            'contact',
+            'purple_burst',
+            'drain',
+            'poison_pool',
+            'ground_pool',
+            'sector',
+          ])
+          .optional(),
+        projectileOffsetY: z.number().finite().optional(),
+      })
+      .optional(),
     extentScale: z.number().positive().optional(),
     statusChance: z.number().min(0).max(1).optional(),
     mode: z.enum([

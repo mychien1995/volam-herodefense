@@ -134,7 +134,7 @@ describe('49 authored creep combat profiles', () => {
     expect(hp - s.hero.hp).toBe(2);
   });
   it('melee heavy attacks hit the captured front, miss a rear dodge, and do not hit late entrants', () => {
-    const s = fixture('wave_02');
+    const s = fixture('wave_03');
     special(s);
     s.hero.x = 370;
     advance(s, 25);
@@ -317,14 +317,14 @@ describe('49 authored creep combat profiles', () => {
     expect(s.world.creepCombat!.effects.size).toBe(0);
     expect(s.world.creepCombat!.actors.size).toBe(0);
   });
-  it('keeps boss-support steering but gives the dogs their real special', () => {
+  it('keeps boss-support steering and normal attacks without an extra dog special', () => {
     const s = fixture('bc_dog');
     s.enemy.controlled = true;
     expect(stepControlledCreepSpecial(s.world, s.enemy, s.hero, s.config)).toBe(
-      true,
+      false,
     );
     advance(s, 50);
-    expect(s.hero.hp).toBeLessThan(10000);
+    expect(s.hero.hp).toBe(10000);
   });
   it('is deterministic through the actual world stepping and leaves combat RNG untouched', () => {
     const run = () => {

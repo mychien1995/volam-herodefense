@@ -350,3 +350,5 @@ Validated game-data profiles feed an optional engine-independent `SimulationConf
 ## Development creep preview — 2026-11-06
 
 Protocol33 carries a strict creator preview flag, strict host-only action messages and `DefenseState.creepPreview` projection. `apps/game-server/src/creep-preview.ts` owns sandbox selection/cleanup/options; it uses the existing core stepping and effect handlers, with no client-authoritative hits or production balance changes. The in-viewport `creep-preview.ts` controller and preview-only retained-art adapter reuse the main Phaser scene. Development `VOLAM_DEV_CREEP_TEST=1` is required; production rejects preview creation. See `docs/CREEP_PREVIEW.md`.
+
+Creep feedback r3 adds validated sector/ground-lob/presentation fields to the independent combat catalogue. Core owns captured geometry, swept terrain landing and damage windows; Phaser owns raster selection/anchors and the debug-only read-only postrender capture hook. Network schema remains protocol33. See `docs/CREEP_FEEDBACK_R3.md`.

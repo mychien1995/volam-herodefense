@@ -396,3 +396,6 @@ North/south gates now require a clear footprint-wide corridor toward the statue,
 # Creep preview sandbox — 2026-11-06
 
 Director requested preview/testing one creep type at a time. Development-only `?creepPreview=1` creates an isolated server-authoritative room, gated by `VOLAM_DEV_CREEP_TEST=1`, with one selected profile, no timed invasions, host-only controls, normal/signature/death testing and actual movement/statuses. All 49 current profiles are selectable. Normal room rules and canonical combat tuning remain unchanged. Protocol33; see `docs/CREEP_PREVIEW.md` for fixture defaults and limitations.
+## Creep preview feedback r3 — 2026-11-06
+
+Latest director override: target-point purple burst for Thổ Phỉ,180° frontal high-damage Hoành trảm, target-foot blood drain for Tà Tăng, active target-point poison lob for Cương Thi, target-foot puddle for Thủy Quỷ, torso-origin archer presentation, and removal of the listed generic crimson strips. Khô Lâu Kiếm Sĩ, Mông Cổ infantry and Ác Khuyển retain normals only. This supersedes their earlier generic forward-line/death-pool/signature definitions. Trial coefficients and exact changes: `docs/CREEP_FEEDBACK_R3.md`.

@@ -93,7 +93,10 @@ function cue(
     castId: id,
     ownerId: enemy.id,
     abilityId,
-    kind: special && spec.mode === 'arc' ? 'creep_line' : `creep_${spec.mode}`,
+    kind:
+      special && spec.mode === 'arc' && spec.geometry !== 'sector'
+        ? 'creep_line'
+        : `creep_${spec.mode}`,
     x: origin.x,
     y: origin.y,
     fx: aim.x,
@@ -103,7 +106,7 @@ function cue(
     speed: spec.speed ?? 0,
     startedAt: world.tick,
     activeAt,
-    expiresAt: activeAt + Math.max(6, duration),
+    expiresAt: activeAt + Math.max(spec.visualTicks ?? 6, duration),
     damageUntil: activeAt + duration,
     maxRadius: spec.halfAngle ?? Math.PI,
     previousRadius: 0,
@@ -175,6 +178,10 @@ function attack(
   const make = (s: CreepAttack, p: Point, v = aim, d = delay) =>
     cue(world, enemy, s, id, p, v, special, slot === 'basic', d, persistent);
   if (spec.mode === 'projectile') {
+    // A ground lob lands at the captured point rather than hitting a moving
+    // hero's collision circle early. Walls still stop it normally.
+    if (spec.groundTarget)
+      spec = { ...spec, range: Math.min(spec.range, distance(origin, target)) };
     const count = spec.count ?? 1;
     for (let i = 0; i < count; i++) {
       const angle =
@@ -324,7 +331,7 @@ function inside(e: CreepCue, h: Actor, config: SimulationConfig) {
       d <= e.length + r &&
       (d === 0 ||
         ((h.x - e.x) * e.fx + (h.y - e.y) * e.fy) / d >=
-          Math.cos(e.spec.halfAngle ?? Math.PI / 3))
+          Math.cos(e.spec.halfAngle ?? Math.PI / 3) - 1e-9)
     );
   return d <= e.radius + r;
 }
@@ -472,7 +479,7 @@ export function stepCreepHazards(world: World, config: SimulationConfig): void {
             wall,
             segmentRect(start, end, w, e.radius) ?? Infinity,
           );
-      const crossed = victims(world, e)
+      const crossed = (spec.groundTarget ? [] : victims(world, e))
         .filter((h) => !e.hitIds.has(h.id))
         .map((h) => ({
           h,
@@ -486,8 +493,15 @@ export function stepCreepHazards(world: World, config: SimulationConfig): void {
         e.hitIds.add(h.id);
         hit(world, e, h, config);
       }
-      e.x = end.x;
-      e.y = end.y;
+      const contact =
+        wall === Infinity
+          ? end
+          : {
+              x: start.x + (end.x - start.x) * wall,
+              y: start.y + (end.y - start.y) * wall,
+            };
+      e.x = contact.x;
+      e.y = contact.y;
       e.remaining -= n;
       if (
         wall !== Infinity ||
@@ -495,7 +509,7 @@ export function stepCreepHazards(world: World, config: SimulationConfig): void {
         e.remaining <= 0
       ) {
         if (spec.field)
-          field(world, e, spec.field, crossed[0]?.h ?? end, config);
+          field(world, e, spec.field, crossed[0]?.h ?? contact, config);
         state.effects.delete(id);
       }
       continue;

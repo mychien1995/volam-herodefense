@@ -56,3 +56,5 @@ R2 balance rerun: **9,216 probes**, 36.43s. Streams remain solo60/90/120 and six
 R2 review services restarted at **http://127.0.0.1:5627/** / server3427, protocol32, health identity `creep-upgrade-r2-review-p32-20261106`; verified the client endpoint is3427. Reload the page and create a new room. `VOLAM_DEV_CREEP_TEST=1` remains enabled.
 
 Latest review: protocol33 adds individual-creep preview at **http://127.0.0.1:5627/?creepPreview=1**; normal timed-wave test remains at the ordinary URL. See [CREEP_PREVIEW.md](CREEP_PREVIEW.md) for controls, fixture defaults and validation. Historical protocol32 reports above are retained as executed.
+
+Director feedback r3 supersedes the earlier heavy-line/zombie-death-pool/three-signature definitions and selected warning strips. Final851-test/six-peer/changed-preview validation and current review services: [CREEP_FEEDBACK_R3.md](CREEP_FEEDBACK_R3.md).

@@ -531,6 +531,11 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
         state: room?.state?.toJSON(),
         events: events.map((event) => ({ ...event })),
       }),
+      // Read-only evidence hook: capture after the GPU has drawn the inspected
+      // frame, rather than pairing a new pose with the previous canvas buffer.
+      afterRender: (inspect: () => void) => {
+        game.events.once(Phaser.Core.Events.POST_RENDER, inspect);
+      },
       ...(runtimeArtGallery
         ? {
             // Explicit standalone QA surface: use the existing validated client
