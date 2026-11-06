@@ -145,18 +145,7 @@ add(
     graphic: 'ice',
   }),
 );
-add(
-  'wave_09',
-  'Cương Thi',
-  arc('Cào', { cooldown: 60, graphic: 'poison' }),
-  undefined,
-  pool('Thi độc', 'poison', {
-    range: 0,
-    radius: 44,
-    windup: 18,
-    statuses: poison,
-  }),
-);
+add('wave_09', 'Cương Thi', arc('Cào', { cooldown: 60, graphic: 'poison' }));
 add(
   'wave_10',
   'Oán Linh',
@@ -668,22 +657,14 @@ for (const id of ['wave_07', 'mongol_infantry', 'bc_dog'])
 for (const a of [profile('wave_08').basic, profile('wave_08').special!])
   a.presentation = { warning: 'none', projectileOffsetY: -18 };
 profile('wave_09').basic.presentation = { warning: 'none' };
-profile('wave_09').special = shot('Thi độc', {
+// R4: the field is placed directly at captured target feet after windup.
+profile('wave_09').special = pool('Thi độc', 'poison', {
   range: 280,
+  radius: 88,
   windup: 24,
   cooldown: 210,
-  speed: 220,
-  damage: 0,
-  graphic: 'poison',
-  groundTarget: true,
-  presentation: { warning: 'none', projectileOffsetY: -12 },
-  field: pool('Thi độc', 'poison', {
-    range: 0,
-    radius: 88,
-    windup: 0,
-    statuses: poison,
-    presentation: { warning: 'none', style: 'poison_pool' },
-  }),
+  statuses: poison,
+  presentation: { warning: 'none', style: 'poison_pool' },
 });
 delete profile('wave_09').death;
 profile('thuy_quy').special!.range = 280;

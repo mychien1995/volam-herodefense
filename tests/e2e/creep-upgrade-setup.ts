@@ -150,24 +150,35 @@ export default async function setup() {
                   w.projectiles.clear();
                   w.creepCombat = { actors: new Map(), effects: new Map() };
                   w.events = [];
-                  const origin = zone.dungeon?.creepSpawns[0] ?? {
-                    x: 760,
-                    y: 616,
-                  };
+                  const separated = q.get('placement') === 'separated-target';
+                  const origin = separated
+                    ? { x: 740, y: 740 }
+                    : (zone.dungeon?.creepSpawns[0] ?? {
+                        x: 760,
+                        y: 616,
+                      });
                   let index = 0;
                   for (const h of w.heroes.values()) {
                     const angle = (index++ * Math.PI * 2) / 5;
                     Object.assign(h, {
                       x:
                         origin.x +
-                        (h.id === heroId ? 40 : Math.cos(angle) * 120),
+                        (separated
+                          ? h.id === heroId
+                            ? 240
+                            : 260
+                          : h.id === heroId
+                            ? 40
+                            : Math.cos(angle) * 120),
                       y:
                         origin.y +
-                        (h.id === heroId ? 0 : Math.sin(angle) * 120),
+                        (separated || h.id === heroId
+                          ? 0
+                          : Math.sin(angle) * 120),
                       hp: 10000,
                       maxHp: 10000,
                       mana: h.maxMana,
-                      invulnerable: true,
+                      invulnerable: !separated,
                       fx: -1,
                       fy: 0,
                     });

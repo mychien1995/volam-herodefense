@@ -144,8 +144,22 @@ it('undead archer arrows visually launch from the torso without moving authorita
   ])
     expect(a.presentation!.projectileOffsetY).toBe(-18);
 });
-it('zombie lobs a poison field to the captured target, not early at a player along the flight path', () => {
+function groundLobFixture() {
   const s = setup('wave_09');
+  const field = s.c.creepCombat!.profiles.wave_09!.special!;
+  s.c.creepCombat!.profiles.wave_09!.special = {
+    ...field,
+    mode: 'projectile',
+    groundTarget: true,
+    damage: 0,
+    radius: 5,
+    speed: 220,
+    field: { ...field, range: 0, windup: 0 },
+  };
+  return s;
+}
+it('generic ground lobs land at captured points rather than early on crossing players', () => {
+  const s = groundLobFixture();
   s.h.x = 550;
   const along = addHero(s.w, 'along', 'Along', s.c);
   Object.assign(along, { x: 450, y: 400, hp: 1000, maxHp: 1000 });
@@ -166,8 +180,8 @@ it('zombie lobs a poison field to the captured target, not early at a player alo
   expect(creepProfiles.wave_09!.death).toBeUndefined();
   expect(s.h.hp).toBe(1000);
 });
-it('poison ground lob collides with a wall and lands before it', () => {
-  const s = setup('wave_09');
+it('generic ground lob collides with a wall and lands before it', () => {
+  const s = groundLobFixture();
   s.h.x = 550;
   s.cast();
   s.c.collision = [{ x: 450, y: 350, width: 12, height: 100 }];

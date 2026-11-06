@@ -434,3 +434,7 @@ Approved V01/V02 PNGs, JSONs and preview source remain byte-exact. This update c
 ## Creep feedback r3 acceptance — 2026-11-06
 
 Require captured target-point Thổ burst/poison/water fields;180° frontal Hoành trảm hit/side/rear behavior in all four facings; actual Tà Tăng HP-loss healing; terrain-stopped poison lobs that do not land on crossing heroes; normal-only skeleton swordsman/Mông Cổ infantry/dog; torso-offset archer visuals without collision changes; and no generic crimson strips on all requested attacks/dashes. Observe actual released rasters, placement, facing, two-client state and the retained six-peer main-game profile. No video or inferred art approval. Tests/evidence: `docs/CREEP_FEEDBACK_R3.md`.
+
+## Creep feedback r4 acceptance — 2026-11-06
+
+All 49 creep profiles must have no visible generic purple windup circle/semicircle. Actual released burst/drain effects remain. A real invasion-type Cương Thi creates Thi độc directly at a distant target's captured feet; no caster-origin delivery projectile, no caster-foot pool, no damage before activation. Verify target damage, caster movement independence, dodge before activation, two-client normal-match replication and all 49 live preview observations. See `docs/CREEP_FEEDBACK_R4.md`.

@@ -399,3 +399,7 @@ Director requested preview/testing one creep type at a time. Development-only `?
 ## Creep preview feedback r3 — 2026-11-06
 
 Latest director override: target-point purple burst for Thổ Phỉ,180° frontal high-damage Hoành trảm, target-foot blood drain for Tà Tăng, active target-point poison lob for Cương Thi, target-foot puddle for Thủy Quỷ, torso-origin archer presentation, and removal of the listed generic crimson strips. Khô Lâu Kiếm Sĩ, Mông Cổ infantry and Ác Khuyển retain normals only. This supersedes their earlier generic forward-line/death-pool/signature definitions. Trial coefficients and exact changes: `docs/CREEP_FEEDBACK_R3.md`.
+
+## Creep feedback r4 — 2026-11-06
+
+Director removes generic purple pre-cast circles/semicircles for every creep. Released purple effects remain skill effects. Thi độc becomes a delayed area placed directly at captured target feet, replacing the r3 projectile/landing delivery and obsolete death pool; coefficients/radius/duration remain unchanged. This supersedes earlier purple telegraphs and Thi độc lob rules. See `docs/CREEP_FEEDBACK_R4.md`.

@@ -58,3 +58,5 @@ R2 review services restarted at **http://127.0.0.1:5627/** / server3427, protoco
 Latest review: protocol33 adds individual-creep preview at **http://127.0.0.1:5627/?creepPreview=1**; normal timed-wave test remains at the ordinary URL. See [CREEP_PREVIEW.md](CREEP_PREVIEW.md) for controls, fixture defaults and validation. Historical protocol32 reports above are retained as executed.
 
 Director feedback r3 supersedes the earlier heavy-line/zombie-death-pool/three-signature definitions and selected warning strips. Final851-test/six-peer/changed-preview validation and current review services: [CREEP_FEEDBACK_R3.md](CREEP_FEEDBACK_R3.md).
+
+Director feedback r4 removes purple pre-cast circles for all 49 creep profiles and places Thi độc directly at captured target feet. Current implementation, validation and review service identity: [CREEP_FEEDBACK_R4.md](CREEP_FEEDBACK_R4.md).

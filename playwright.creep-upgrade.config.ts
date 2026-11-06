@@ -11,6 +11,7 @@ export default defineConfig({
     'creep-upgrade.spec.ts',
     'creep-preview.spec.ts',
     'creep-feedback-r3.spec.ts',
+    'creep-feedback-r4.spec.ts',
   ],
   outputDir: session.outputDir,
   workers: 1,

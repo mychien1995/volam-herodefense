@@ -28,7 +28,7 @@ test('preview selects all 49 creeps one at a time in live Phaser, with host auth
         errors.push(m.text());
     });
   }
-  const out = 'docs/evidence/creep-feedback-r3/preview';
+  const out = 'docs/evidence/creep-feedback-r4/preview';
   mkdirSync(out, { recursive: true });
   try {
     await joinWaiting(
@@ -40,6 +40,22 @@ test('preview selects all 49 creeps one at a time in live Phaser, with host auth
     const initial = await snapshot(host);
     await joinWaiting(peer, 'Preview Peer', initial.roomId);
     await startTogether(pages, ['vo_dang_kiem', 'thieu_lam_dao']);
+    await host.evaluate(() => {
+      const w = window as any;
+      w.__creepWarnings = { seen: [] as string[], circles: [] as string[] };
+      const observe = () => {
+        const s = w.__VOLAM__.snapshot(),
+          p = w.__VOLAM__.presentation();
+        for (const e of Object.values(s.state.creeps) as any[])
+          if (!w.__creepWarnings.seen.includes(e.archetypeId))
+            w.__creepWarnings.seen.push(e.archetypeId);
+        for (const v of p.creepCombat?.views ?? [])
+          if (v.warning && v.warningFrame === 'dark_sigil_0')
+            w.__creepWarnings.circles.push(v.id);
+        w.__VOLAM__.afterRender(observe);
+      };
+      w.__VOLAM__.afterRender(observe);
+    });
     await expect(host.locator('#creep-preview')).toBeVisible();
     await expect(peer.locator('#creep-preview')).toBeVisible();
     await expect(peer.locator('#creep-preview-id')).toBeDisabled();
@@ -183,11 +199,15 @@ test('preview selects all 49 creeps one at a time in live Phaser, with host auth
     expect(bounds!.y + bounds!.height).toBeLessThan(720);
     expect((await snapshot(host)).state.defense.wave).toBe(0);
     expect(errors).toEqual([]);
+    const warnings = await host.evaluate<any>('window.__creepWarnings');
+    expect(warnings.seen).toHaveLength(49);
+    expect(warnings.circles).toEqual([]);
     writeFileSync(
       `${out}/browser.json`,
       JSON.stringify({
         players: 2,
         coverage,
+        warnings,
         errors,
         normalControls: true,
         slowObserved: true,

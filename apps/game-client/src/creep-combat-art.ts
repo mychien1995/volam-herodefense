@@ -159,32 +159,22 @@ export class CreepCombatArt {
       const footprint = e.kind === 'creep_arc' ? e.length * 2 : e.radius * 2;
       const x = line ? e.x + (e.fx * e.length) / 2 : e.x,
         y = line ? e.y + (e.fy * e.length) / 2 : e.y;
+      // Universal creep policy: no purple circle/semicircle telegraphs. Actual
+      // released purple bursts/drain rings below remain ability effects.
+      const showWarning =
+        pending && line && !sector && visual?.warning !== 'none';
       v.warning
-        .setVisible(pending && visual?.warning !== 'none')
+        .setVisible(showWarning)
         .setPosition(x, y)
         .setDepth(y - 0.6)
         .setAlpha(0.55 + 0.2 * Math.sin((tick - e.startedAt) * 0.5));
       v.warning.setCrop();
-      if (visual?.warning === 'none') {
-        // No generic warning strip for these authored attacks/dashes.
-      } else if (sector) {
-        v.warning
-          .setTexture('hell_fx', 'dark_sigil_0')
-          .setPosition(e.x, e.y)
-          .setDisplaySize(e.length * 2, e.length * 2)
-          .setRotation(Math.atan2(e.fy, e.fx));
-        const f = v.warning.frame;
-        v.warning.setCrop(f.realWidth / 2, 0, f.realWidth / 2, f.realHeight);
-      } else if (line) {
+      if (showWarning) {
         this.frame(v.warning, 'hell_crimson_weapon_trail', tick - e.startedAt);
         v.warning
           .setDisplaySize(Math.max(40, e.length), Math.max(16, e.radius * 2))
           .setRotation(Math.atan2(e.fy, e.fx));
-      } else
-        v.warning
-          .setTexture('hell_fx', 'dark_sigil_0')
-          .setDisplaySize(Math.max(24, footprint), Math.max(24, footprint))
-          .setRotation(0);
+      }
       const labelKey = `${e.ownerId}:${e.abilityId}:${e.startedAt}`;
       v.label
         .setVisible(pending && match?.[2] !== 'basic' && !labels.has(labelKey))
