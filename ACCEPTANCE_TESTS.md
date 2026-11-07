@@ -1,3 +1,7 @@
+## Renovation v10 acceptance — 2026-11-07
+
+Run `pnpm check:final --config playwright.renovation-v10.config.ts`. Observe the renovated Cái Bang Chưởng body on each of six real A inputs in all four facings. Confirm that the sixth input casts the dragon and that every observed action frame uses the renovated atlas. Compare the projectile, release and impact sources to M3D and check the return to renovated idle, real hits and peer HP. Verify Phi Long's head-only rendering and six-client production combat. Retain PNG evidence.
+
 ## Renovation v9 acceptance — 2026-11-07
 
 Use `pnpm check:final --config playwright.renovation-v9.config.ts`. Reproduce the old/new difference with six genuine A presses and a Phi Long Q in all four facings. Require five ordinary palm attacks followed by one sixth dragon, original M3D action/VFX source paths, animated normal projectile, actual hits and peer HP agreement. Return to approved renovated idle afterward. Phi Long keeps its new dragon head and real hit/knockback with no legacy hand-wave/impact atlas visible. Preserve original assets and all v8 corrections; finish through normal production entry with six clients and natural replicated combat. PNG evidence only.

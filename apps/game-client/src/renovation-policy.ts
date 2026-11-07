@@ -31,7 +31,6 @@ export function followupRestoresBody(actor: string, ability: string) {
       'vuong_trung_duong_p1',
       'vuong_trung_duong_p2',
     ].includes(actor) ||
-    (actor === 'hero_cai_bang_chuong' && ability === 'cai_bang_chuong') ||
     (actor === 'mai_sieu_phong' && ability === 'doc_cot_bao') ||
     (['tay_doc', 'tay_doc_cap_mo', 'tay_doc_snake'].includes(actor) &&
       ability !== 'van_doc_phi_cham') ||

@@ -139,7 +139,8 @@ export async function verifyRenovationV9(
             const before = (await read(page)).events.at(-1)?.id ?? 0;
             const bodies = new Map(),
               effects = new Map(),
-              stages = [];
+              stages = [],
+              attackBodies = [];
             const sample = async () => {
               const v = (await view(page)).renovation;
               const b = v.bodies.find((b) => b.name === 'actor:' + actor.id);
@@ -157,7 +158,7 @@ export async function verifyRenovationV9(
                   source: e.source,
                   effect: e.effect,
                 });
-              return v;
+              return { v, b };
             };
             await page.locator('#game canvas').focus();
             for (let attack = 0; attack < 6; attack++) {
@@ -180,12 +181,16 @@ export async function verifyRenovationV9(
               );
               const end = w.tick + 24;
               let captured = false;
+              const frames = new Set();
               while (w.tick < end) {
-                const v = await sample();
+                const { v, b } = await sample();
+                if (b && !b.locomotion) frames.add(b.texture + ':' + b.frame);
                 if (
                   !captured &&
                   direction === 'right' &&
                   (attack === 0 || attack === 5) &&
+                  b &&
+                  !b.locomotion &&
                   v.skillEffects.length
                 ) {
                   await page.screenshot({
@@ -198,6 +203,7 @@ export async function verifyRenovationV9(
                 }
                 await sleep(20);
               }
+              attackBodies.push([...frames]);
             }
             const events = (await read(page)).events.filter(
               (e) =>
@@ -208,11 +214,10 @@ export async function verifyRenovationV9(
             stages.push(
               ...events.filter((e) => e.kind === 'attack').map((e) => e.stage),
             );
-            assert.equal(stages.length, 6, 'six actual accepted A presses');
-            assert.equal(
-              stages.filter((s) => s === 'dragon').length,
-              1,
-              'one genuine sixth dragon',
+            assert.deepEqual(
+              stages,
+              ['palm', 'palm', 'palm', 'palm', 'palm', 'dragon'],
+              'five accepted palms followed by the genuine sixth dragon',
             );
             assert(
               events.some((e) => e.kind === 'hit'),
@@ -231,9 +236,6 @@ export async function verifyRenovationV9(
             const fxs = [...effects.values()];
             if (mode === 'current') {
               const original = report.cases.find((a) => a.mode === 'm3d');
-              const originalBodies = new Set(
-                original.bodies.map((b) => b.source),
-              );
               const originalEffects = new Set(
                 original.effects.map((e) => e.source),
               );
@@ -241,15 +243,19 @@ export async function verifyRenovationV9(
                 report.violations.push(
                   'basic ' + direction + ' still uses renovated VFX',
                 );
-              if ([...bodies.values()].some((b) => b.action))
-                report.violations.push(
-                  'basic ' + direction + ' still uses renovated body',
-                );
               if (
-                ![...bodies.values()].every((b) => originalBodies.has(b.source))
+                attackBodies.some((frames) => frames.length === 0) ||
+                ![...bodies.values()].every(
+                  (b) =>
+                    b.texture ===
+                      'renovated-action-hero_cai_bang_chuong_actions' &&
+                    b.action?.body === 'hero_cai_bang_chuong_actions',
+                )
               )
                 report.violations.push(
-                  'basic ' + direction + ' body differs from original M3D',
+                  'basic ' +
+                    direction +
+                    ' must keep the renovated character body',
                 );
               if (!fxs.every((e) => originalEffects.has(e.source)))
                 report.violations.push(
@@ -299,6 +305,7 @@ export async function verifyRenovationV9(
               mode,
               direction,
               stages,
+              attackBodies,
               bodies: [...bodies.values()],
               effects: fxs,
               hits: events.filter((e) => e.kind === 'hit').length,
@@ -332,7 +339,7 @@ export async function verifyRenovationV9(
             let captured = false;
             const end = w.tick + 40;
             while (w.tick < end) {
-              const v = await sample();
+              const { v } = await sample();
               if (
                 !captured &&
                 direction === 'right' &&

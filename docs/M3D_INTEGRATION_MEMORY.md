@@ -1,5 +1,9 @@
 # Current M3D integration memory
 
+## Latest override: renovation v10 — 2026-11-07
+
+V9 reverted the Cái Bang Chưởng body along with its effects. V10 uses the renovated action atlas for each of the five normal palms and the sixth dragon. The separate M3D aliases supply projectile, release and impact art. `playwright.renovation-v10.config.ts` verifies each accepted A input in four facings, real hits, peer HP and the M3D effect sources. The frame report and PNGs are in `docs/evidence/renovation-v10`.
+
 ## Latest override: renovation v9 — 2026-11-07
 
 Restore Cái Bang Chưởng A to original M3D body, normal palm travel, sixth-dragon body/travel, release and impact via isolated original aliases; retain approved renovated idle/walk. Phi Long retains the new dragon head; suppress its legacy wave/impact atlas because its pixels include a hand. Server basics, six-hit cadence, skill damage/range/costs and knockback stay unchanged. Compare against the actual `renovationSkills=old` source paths and verify six real A presses plus Q in all four facings. Evidence and final profile: `docs/evidence/renovation-v9`, `playwright.renovation-v9.config.ts`.

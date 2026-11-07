@@ -1,3 +1,7 @@
+## Renovation v10 · giữ thân Cái Bang mới khi đánh thường — 2026-11-07
+
+Đánh thường Cái Bang Chưởng dùng sprite mới trong cả năm đòn chưởng và đòn rồng thứ sáu. Đạn chưởng, đạn rồng, hiệu ứng phát chiêu và va chạm dùng bản M3D.
+
 ## Renovation v9 · hoàn tác đánh thường Chưởng và bỏ bàn tay Phi Long — 2026-11-07
 
 Director yêu cầu đánh thường Cái Bang Chưởng trở lại bản M3D trước renovation: động tác thường, đạn chưởng, động tác/đạn rồng đòn thứ sáu, release và impact. Giữ idle/walk đã duyệt và luật mỗi sáu lần A. Phi Long Tại Thiên giữ đầu rồng mới, bỏ toàn bộ lớp sóng/impact cũ có hình bàn tay chạy chồng phía trước. Không sửa sát thương, tầm, mana, cooldown, knockback hay cơ chế server. Mọi chỉnh sửa v8 còn lại giữ nguyên.
