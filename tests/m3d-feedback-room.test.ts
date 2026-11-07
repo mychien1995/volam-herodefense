@@ -1,4 +1,4 @@
-import { beforeAll, afterAll, afterEach, describe, it, expect } from 'vitest';
+import { beforeAll, afterAll, afterEach, describe, it, expect, vi } from 'vitest';
 import { ColyseusTestServer } from '@colyseus/testing';
 import { Client, type Room } from '@colyseus/sdk';
 import { createGameServer } from '../apps/game-server/src/app.config.js';
@@ -32,6 +32,7 @@ beforeAll(async () => {
 afterEach(async () => {
   await server.cleanup();
   sequence.clear();
+  vi.unstubAllEnvs();
 });
 afterAll(async () => {
   await server.shutdown();
@@ -50,6 +51,7 @@ async function join() {
   for (const r of [a, b]) {
     await expect.poll(() => r.state.phase).toBe('SCHOOL_SELECTION');
     r.send('lobby-action', { action: 'select', schoolId: 'thieu_lam' });
+    r.send('lobby-action', { action: 'branch', basicId: 'thieu_lam_quyen' });
     r.send('lobby-action', { action: 'confirm' });
   }
   await expect.poll(() => b.state.phase).toBe('IN_GAME');
@@ -125,6 +127,7 @@ describe('M3D party SDK/schema integration', () => {
     await expect.poll(() => a.state.tick).toBeGreaterThan(tick);
   });
   it('keeps elimination across real transport reconnect and returns the same hero to the main arena', async () => {
+    vi.stubEnv('VOLAM_TEST_LEGACY_PROGRESSION', '1');
     const { a, b, authority } = await join();
     send(a, { action: 'enter', destination: 'hong_liet' });
     await expect

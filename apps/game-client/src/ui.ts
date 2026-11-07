@@ -13,17 +13,20 @@ import {
 import type { LobbyState } from '@volam/game-protocol';
 import { icon, menuContents, menuTitles, type Menu } from './menus.js';
 import { DefenseHud } from './defense-hud.js';
+import { BossRetryUI, type RetryAction } from './boss-retry-ui.js';
 import { SkillMenu } from './skill-menu.js';
 import { BossPartyUI, isBossDestination } from './boss-party-ui.js';
 import type { BuildChange } from '@volam/game-core';
 import type { MerchantAction, PotionId } from '@volam/game-core';
-import { ItemMenu, auxiliarySlot } from './item-menu.js';
+import { ItemMenu, auxiliarySlot, updateAuxiliarySlot } from './item-menu.js';
 export function element<T extends HTMLElement>(selector: string): T {
   const found = document.querySelector<T>(selector);
   if (!found) throw new Error(`Missing element: ${selector}`);
   return found;
 }
 export class GameUI {
+  readonly bossRetry: BossRetryUI;
+  onBossRetry: (action: RetryAction) => void = () => {};
   readonly bossParty: BossPartyUI;
   reconnecting = false;
   private menu: Menu | undefined;
@@ -83,15 +86,17 @@ export class GameUI {
               ['w', 'dragon', 'Cuồng Long Loạn Vũ · W'],
               ['e', 'lock', 'E · Chưa trang bị'],
               ['r', 'lock', 'R · Chưa trang bị'],
+              ['t', 'lock', 'T · Tuyệt kỹ'],
             ]
               .map(
                 ([key, art, title]) =>
-                  `<div id="slot-${key}" class="hotbar-slot ${key === 'e' || key === 'r' ? 'unequipped' : ''}" title="${title}">${icon(art!)}<kbd>${key!.toUpperCase()}</kbd><b id="timer-${key}" class="cooldown-number"></b><small id="cooldown-${key}">${key === 'q' ? '18 NL' : key === 'w' ? '25 NL' : key === 'a' ? 'Bổng' : 'Trống'}</small><div class="cooldown-shade"></div></div>`,
+                  `<div id="slot-${key}" class="hotbar-slot ${key === 'e' || key === 'r' ? 'unequipped' : ''}" title="${title}">${icon(art!)}<kbd>${key!.toUpperCase()}</kbd><b id="timer-${key}" class="cooldown-number"></b><small id="cooldown-${key}">${key === 'q' ? '18 NL' : key === 'w' ? '25 NL' : key === 'a' ? 'Bổng' : 'Trống'}</small><div class="cooldown-shade"></div>${key !== 'a' ? `<button class="rank-up" type="button" data-rank-slot="${'qwert'.indexOf(key!)}" hidden>+</button>` : ''}</div>`,
               )
               .join('')}
             <div id="dash-status" class="dash-status" role="status" aria-label="Lướt · Shift"><img src="/assets/m3d_feedback/dash_icon_frame.png" alt="" width="32" height="32"><b id="dash-charges">2</b><kbd>Shift</kbd><small id="dash-timer"></small><progress id="dash-progress" max="180" value="180" aria-label="Hồi lượt lướt"></progress></div>
             ${auxiliarySlot()}
-            <button class="loadout-toggle" data-menu="skills" title="Võ Công · O" aria-label="Võ Công · O">◇<span id="available-points"></span></button>
+            <span id="fixed-skill-points" class="skill-points" hidden></span><span id="shaolin-stance" class="stance-indicator" hidden></span>
+            <button hidden class="loadout-toggle" data-menu="skills" title="Võ Công · O" aria-label="Võ Công · O">◇<span id="available-points"></span></button>
           </section>
           <p id="scene-status" class="scene-ready" aria-hidden="true">${artPreview ? 'XEM TRƯỚC HÌNH ẢNH' : ''}</p>
           <p id="zone-status" hidden role="status"></p>
@@ -104,6 +109,9 @@ export class GameUI {
         <p id="hero-stats" data-testid="hero-stats" class="sr-only"></p>
       </main>`;
     this.defense = new DefenseHud(element('#viewport'), () => this.onLeave());
+    this.bossRetry = new BossRetryUI(element('#viewport'), (action) =>
+      this.onBossRetry(action),
+    );
     this.bossParty = new BossPartyUI(element('#viewport'));
     const help = document.createElement('button');
     help.id = 'boss-help-button';
@@ -129,6 +137,18 @@ export class GameUI {
     }
     if (artPreview) document.body.classList.add('art-preview');
     element('#viewport').addEventListener('click', (event) => {
+      const upgrade =
+        event.target instanceof Element
+          ? event.target.closest<HTMLButtonElement>('[data-rank-slot]')
+          : null;
+      if (upgrade) {
+        if (!upgrade.disabled && !this.blocked)
+          this.onBuild({
+            action: 'upgrade-slot',
+            slot: Number(upgrade.dataset['rankSlot']),
+          });
+        return;
+      }
       const target =
         event.target instanceof Element
           ? event.target.closest<HTMLElement>(
@@ -162,6 +182,7 @@ export class GameUI {
   }
   get blocked(): boolean {
     return (
+      this.bossRetry.blocked ||
       !!this.menu ||
       this.study ||
       this.ended ||
@@ -170,6 +191,14 @@ export class GameUI {
     );
   }
   private keydown = (event: KeyboardEvent): void => {
+    if (
+      this.bossRetry.blocked &&
+      !['Tab', 'Enter', 'Space'].includes(event.code)
+    ) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      return;
+    }
     const target = event.target;
     const typing =
       target instanceof HTMLElement &&
@@ -184,7 +213,8 @@ export class GameUI {
     }
     const hotkeyMenu = event.code === 'KeyO' ? 'skills' : 'dungeons';
     if (
-      ['KeyO', 'KeyP'].includes(event.code) &&
+      (event.code === 'KeyP' ||
+        (event.code === 'KeyO' && !this.state?.requiresBranch)) &&
       !typing &&
       !event.repeat &&
       !event.ctrlKey &&
@@ -260,7 +290,7 @@ export class GameUI {
   }
   open(menu: Menu): void {
     if (menu === 'dungeons') this.dungeonDestination = 'forest';
-    if (this.ended) return;
+    if (this.ended || (menu === 'skills' && this.state?.requiresBranch)) return;
     if (this.menu === menu) {
       this.close();
       return;
@@ -273,6 +303,7 @@ export class GameUI {
     element('#dialog-content').innerHTML = menuContents(
       menu,
       new URLSearchParams(location.search).has('debug'),
+      this.state?.requiresBranch === false,
     );
     element('#modal-layer').dataset['activeMenu'] = menu;
     element('.menu-safety').textContent =
@@ -571,6 +602,7 @@ export class GameUI {
           ),
       ].join('');
     const hero = state.players.get(this.sessionId);
+    this.bossRetry.sync(hero, state.phase === 'IN_GAME');
     if (!hero) return;
     this.bossParty.sync(hero.bossInvitation);
     const help = element<HTMLButtonElement>('#boss-help-button');
@@ -587,7 +619,7 @@ export class GameUI {
     element('#game').classList.toggle('hero-dead', dead);
     element('#respawn-overlay').hidden = !dead;
     element('#respawn-countdown').textContent = hero.bossSpectator
-      ? 'Đã dùng lượt hồi sinh · ↑ ↓ ← → để xem · Space về đấu trường'
+      ? 'Đã hết lượt hồi sinh · ↑ ↓ ← → để quan chiến'
       : `Tự hồi sinh ${hero.zoneId === 'arena' ? 'tại đấu trường' : isBossDestination(dungeonForZone(hero.zoneId).id) ? 'tại cửa phó bản' : 'tại đấu trường'} sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`;
     const dungeon =
       hero.zoneId === 'arena' ? undefined : dungeonForZone(hero.zoneId);
@@ -747,19 +779,37 @@ export class GameUI {
     for (const [name, value, max, label] of [
       ['hp', hero.hp, hero.maxHp, 'SL'],
       ['mp', hero.mana, hero.maxMana, 'NL'],
-      ['xp', hero.xp, m1Config.xpPerLevel, 'KN'],
+      [
+        'xp',
+        hero.xp,
+        hero.inventory.campaign
+          ? Math.max(
+              1,
+              JSON.parse(hero.inventory.campaign).xpNext -
+                JSON.parse(hero.inventory.campaign).xpStart,
+            )
+          : m1Config.xpPerLevel,
+        'KN',
+      ],
     ] as const) {
       const meter = element(`.meter.${name}`);
       // XP is cumulative; only the visual progress within the current level wraps.
       const capped = name === 'xp' && hero.level >= m1Config.maxLevel;
-      const progress = name === 'xp' ? (capped ? max : value % max) : value;
+      const progress =
+        name === 'xp'
+          ? capped
+            ? max
+            : hero.inventory.campaign
+              ? value - JSON.parse(hero.inventory.campaign).xpStart
+              : value % max
+          : value;
       meter.setAttribute('aria-valuenow', String(progress));
       meter.setAttribute('aria-valuemax', String(max));
       meter.querySelector<HTMLElement>('i')!.style.width =
         `${Math.min(100, Math.max(0, (progress / max) * 100))}%`;
       element(`#${name}-text`).textContent = capped
         ? 'Kinh nghiệm tối đa · Cấp 30'
-        : `${label} ${Math.floor(progress)} / ${max}`;
+        : `${label} ${Math.floor(progress)} / ${Math.ceil(max)}`;
     }
     element('#hero-stats').textContent =
       `Cấp ${hero.level} · Sinh lực ${Math.ceil(hero.hp)}/${hero.maxHp} · Nội lực ${Math.floor(hero.mana)}/${hero.maxMana} · Kinh nghiệm ${hero.xp} · Vàng ${hero.gold} · Điểm kỹ năng ${hero.skillPoints}`;
@@ -815,21 +865,38 @@ export class GameUI {
         hero.dashCharges === 0 ||
         hero.statuses.includes('"dash_lock"'),
     );
+    const fixed = hero.build.mode === 'fixed';
+    const points = element('#fixed-skill-points');
+    points.hidden = !fixed || hero.build.available === 0;
+    points.textContent = hero.build.available + ' điểm';
+    const stance = element('#shaolin-stance');
+    stance.hidden = !fixed || hero.basicId !== 'thieu_lam_quyen';
+    stance.textContent =
+      (hero.build.slotSkills[0] === 'toan_phong_thoai' ? 'Cước' : 'Quyền') +
+      ' · F';
+    element('.loadout-toggle').hidden = !!this.state?.requiresBranch;
+    element('#slot-t').hidden = !fixed;
+    updateAuxiliarySlot(hero);
     const slots = [
       {
         key: 'a' as const,
         remaining: hero.basicCooldown,
         ability: m1Config.basics[hero.basicId],
       },
-      ...(['q', 'w', 'e', 'r'] as const).map((key) => ({
-        key,
-        remaining: hero[`${key}Cooldown`],
-        ability: hero.build.enabled
-          ? m1Config.progression?.skills[hero[`${key}Skill`]]?.ranks[
-              Math.max(0, (hero.build.ranks.get(hero[`${key}Skill`]) ?? 0) - 1)
-            ]
-          : m1Config.skillCatalogue?.[hero[`${key}Skill`]],
-      })),
+      ...(['q', 'w', 'e', 'r', 't'] as const).map((key, index) => {
+        const id = fixed
+          ? (hero.build.slotSkills[index] ?? '')
+          : hero[`${key}Skill`];
+        return {
+          key,
+          remaining: hero[`${key}Cooldown`],
+          ability: hero.build.enabled
+            ? m1Config.progression?.skills[id]?.ranks[
+                Math.max(0, (hero.build.ranks.get(id) ?? 0) - 1)
+              ]
+            : m1Config.skillCatalogue?.[id],
+        };
+      }),
     ];
     const activeStatuses = JSON.parse(hero.statuses) as Array<{ kind: string }>;
     for (const { key, remaining, ability } of slots) {
@@ -837,7 +904,7 @@ export class GameUI {
         key === 'a'
           ? 1
           : hero.build.enabled
-            ? (hero.build.ranks.get(hero[`${key}Skill`]) ?? 0)
+            ? (hero.build.ranks.get(ability?.id ?? '') ?? 0)
             : 1;
       const recast =
         ability?.effect.mode === 'projectile' &&
@@ -874,6 +941,30 @@ export class GameUI {
           slot.append(badge);
         }
         badge.textContent = hero.build.enabled && ability ? String(rank) : '';
+        const upgrade = slot.querySelector<HTMLButtonElement>('.rank-up')!;
+        const gate = ability
+          ? m1Config.progression?.skills[ability.id]?.levelGates[rank]
+          : undefined;
+        upgrade.hidden =
+          !fixed ||
+          !ability ||
+          gate === undefined ||
+          hero.build.available === 0;
+        upgrade.disabled =
+          hero.hp <= 0 ||
+          this.blocked ||
+          gate === undefined ||
+          hero.level < gate;
+        upgrade.title =
+          ability && gate !== undefined
+            ? 'Tăng ' +
+              ability.nameVi +
+              ' lên bậc ' +
+              (rank + 1) +
+              ' · Cấp ' +
+              gate
+            : '';
+        upgrade.setAttribute('aria-label', upgrade.title);
         const art = slot.querySelector<HTMLElement>('.pixel-icon')!;
         art.className = ability
           ? 'pixel-icon skill-icon'
@@ -887,7 +978,9 @@ export class GameUI {
       }
       if (
         key === 'a' &&
-        ['thien_son', 'vo_dang', 'thieu_lam'].includes(hero.schoolId)
+        ['cai_bang', 'thien_son', 'vo_dang', 'thieu_lam'].includes(
+          hero.schoolId,
+        )
       ) {
         const art = slot.querySelector<HTMLElement>('.pixel-icon')!;
         art.className = 'pixel-icon skill-icon';
@@ -921,7 +1014,10 @@ export class GameUI {
           : recast
             ? 'Hiện thân'
             : ability
-              ? `${cost} NL`
+              ? fixed && !rank
+                ? 'Cấp ' +
+                  m1Config.progression?.skills[ability.id]?.levelGates[0]
+                : `${cost} NL`
               : 'Trống';
       slot.title = `${ability?.nameVi ?? 'Chưa trang bị'}${key !== 'a' && hero.build.enabled ? ' · Bậc ' + rank : ''} · ${!ability ? 'Chưa mở' : rank === 0 ? 'Chưa học' : controlled ? 'Đang bị khống chế' : cooling ? 'Đang hồi chiêu' : hero.mana < cost ? 'Thiếu nội lực' : 'Sẵn sàng'}`;
       slot.dataset['skillId'] = ability?.id ?? '';

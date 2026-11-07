@@ -29,6 +29,7 @@ it('real SDK reveals only owner QTE; rejects forged owner/order/replay, closes a
   for (const r of [a, b]) {
     await expect.poll(() => r.state.phase).toBe('SCHOOL_SELECTION');
     r.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    r.send('lobby-action', { action: 'branch', basicId: 'cai_bang_bong' });
     r.send('lobby-action', { action: 'confirm' });
   }
   await expect.poll(() => a.state.phase).toBe('IN_GAME');

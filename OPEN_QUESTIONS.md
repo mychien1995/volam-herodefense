@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Đã chốt: Long Châu8%/4% bốn chỉ số nền, tự áp dụng; boss EXP/vàng first-clear; ba lần hồi sinh; ballot30s ngưỡng≥50%; hoàn bình khi thất bại; Kim clear +60s trước Vương. Mức độ khó/mốc kinh tế còn cần đánh giá người chơi; PvP vẫn là phạm vi riêng. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 # Open Decisions and Safe Provisional Defaults
 
 ## Inventory/merchant revision — 2026-11-02

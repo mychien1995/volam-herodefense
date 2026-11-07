@@ -31,9 +31,12 @@ import './arena-hud.css';
 import './dungeon.css';
 import './dungeon-selector.css';
 import './boss-party-ui.css';
+import './boss-retry-ui.css';
 import './defense-hud.css';
 import './item-menu.css';
 import { PreGame } from './pregame.js';
+import { CreepPreview, creepPreviewRequested } from './creep-preview.js';
+import gameOstUrl from '../../../assets/sounds/game-ost.mp3?url';
 
 const artPreview = new URLSearchParams(location.search).has('artPreview');
 const runtimeArtGallery =
@@ -50,6 +53,14 @@ const thieuLamReview = new URLSearchParams(location.search).has(
   'thieuLamReview',
 );
 const ui = new GameUI(artPreview);
+ui.onBossRetry = (action) => {
+  if (room && !ui.reconnecting && room.state.phase === 'IN_GAME')
+    room.send('boss-retry-action', {
+      ...action,
+      sequence: ++sequence,
+      protocolVersion: PROTOCOL_VERSION,
+    });
+};
 const namDeHud = new NamDeHud();
 const chuHud = new ChuHud((action, id, itemId) => {
   if (itemId && (action === 'sell' || action === 'drop'))
@@ -72,6 +83,34 @@ chuHud.onNotify = (message) => ui.notify(message);
 const endpoint = import.meta.env['VITE_SERVER_URL'] ?? 'http://localhost:2567';
 const pregame = new PreGame(endpoint);
 if (artPreview) pregame.node.hidden = true;
+const matchMusic = artPreview ? undefined : new Audio(gameOstUrl);
+if (matchMusic) {
+  matchMusic.id = 'match-music';
+  matchMusic.loop = true;
+  matchMusic.volume = 0.45;
+  document.body.append(matchMusic);
+}
+let matchMusicActive = false;
+function playMatchMusic(): void {
+  if (matchMusicActive && matchMusic?.paused)
+    void matchMusic.play().catch(() => {
+      // If autoplay is blocked, retry on the next in-game gesture.
+    });
+}
+function syncMatchMusic(active: boolean): void {
+  if (!matchMusic || active === matchMusicActive) return;
+  matchMusicActive = active;
+  if (active) {
+    window.addEventListener('click', playMatchMusic, true);
+    window.addEventListener('keydown', playMatchMusic, true);
+    playMatchMusic();
+  } else {
+    window.removeEventListener('click', playMatchMusic, true);
+    window.removeEventListener('keydown', playMatchMusic, true);
+    matchMusic.pause();
+    matchMusic.currentTime = 0;
+  }
+}
 const arenaScene = new ArenaScene();
 const gallery = new ArtPreviewScene();
 const thienSonSkillGallery = new ThienSonSkillPreviewScene();
@@ -172,6 +211,9 @@ const skillPreview = new SkillPreview(
   send,
   (action) => room?.send('skill-preview-action', { action }),
 );
+const creepPreview = new CreepPreview(element('#viewport'), (action) =>
+  room?.send('creep-preview-action', { ...action, sequence: ++sequence }),
+);
 const form = element<HTMLFormElement>('#join-form');
 const status = element('#status');
 function dungeonAction(
@@ -254,6 +296,11 @@ const unbindInput = bindGameplayInput(
     pan: (x, y) => arenaScene.panSpectator(x, y),
   },
   (key) => namDeHud.capture(key),
+  () => {
+    const hero = room?.state.players.get(room.sessionId);
+    if (hero?.build.mode === 'fixed' && hero.basicId === 'thieu_lam_quyen')
+      ui.onBuild({ action: 'stance' });
+  },
 );
 function controls(connected: boolean, busy = false): void {
   for (const field of form.querySelectorAll<
@@ -286,7 +333,11 @@ async function connect(existing: boolean): Promise<void> {
   try {
     const joined = existing
       ? await client.joinById<MatchRoom>(roomId, parsed.data)
-      : await client.create<MatchRoom>(MATCH_ROOM, parsed.data);
+      : await client.create<MatchRoom>(MATCH_ROOM, {
+          ...parsed.data,
+          portalCount: pregame.portalCount,
+          creepPreview: creepPreviewRequested,
+        });
     joined.reconnection.enabled = true;
     room = joined;
     sequence = 0;
@@ -295,8 +346,9 @@ async function connect(existing: boolean): Promise<void> {
     ui.connected(joined.roomId, joined.sessionId);
     controls(true);
     let previousZone = 'arena';
-    joined.onStateChange((state) => {
+    const syncJoinedState = (state: typeof joined.state) => {
       if (room === joined) {
+        syncMatchMusic(state.phase === 'IN_GAME');
         chuHud.sync(state, joined.sessionId);
         namDeHud.sync(state, joined.sessionId);
         const zone = state.players.get(joined.sessionId)?.zoneId ?? 'arena';
@@ -314,8 +366,12 @@ async function connect(existing: boolean): Promise<void> {
         );
         ui.refresh(state);
         skillPreview.update(state, joined.sessionId);
+        creepPreview.update(state, joined.sessionId);
       }
-    });
+    };
+    joined.onStateChange(syncJoinedState);
+    // The SDK may already have decoded the initial snapshot before this callback is attached.
+    if (joined.state?.hostId) syncJoinedState(joined.state);
     joined.onMessage('dungeon-menu', () => {
       if (room === joined) ui.open('dungeons');
     });
@@ -362,6 +418,7 @@ async function connect(existing: boolean): Promise<void> {
     });
     joined.onDrop(() => {
       if (room !== joined) return;
+      creepPreview.hide();
       namDeHud.sync(undefined, '');
       ui.reconnecting = true;
       window.dispatchEvent(new Event('volam:controls-blocked'));
@@ -375,6 +432,7 @@ async function connect(existing: boolean): Promise<void> {
     });
     joined.onLeave((code) => {
       if (room !== joined) return;
+      syncMatchMusic(false);
       chuHud.sync(undefined, '');
       namDeHud.sync(undefined, '');
       room = undefined;
@@ -385,9 +443,11 @@ async function connect(existing: boolean): Promise<void> {
       controls(false);
       ui.connected('', '');
       skillPreview.hide();
+      creepPreview.hide();
       status.textContent = `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`;
     });
     if (joined.state?.players && joined.state.phase) {
+      syncMatchMusic(joined.state.phase === 'IN_GAME');
       pregame.update(joined.state, joined.roomId, joined.sessionId);
       arenaScene.setSnapshot(
         ['IN_GAME', 'DEFEAT', 'VICTORY'].includes(joined.state.phase)
@@ -397,6 +457,7 @@ async function connect(existing: boolean): Promise<void> {
       );
       ui.refresh(joined.state);
       skillPreview.update(joined.state, joined.sessionId);
+      creepPreview.update(joined.state, joined.sessionId);
     }
     const canvas = element<HTMLCanvasElement>('#game canvas');
     canvas.tabIndex = 0;
@@ -480,6 +541,11 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
         state: room?.state?.toJSON(),
         events: events.map((event) => ({ ...event })),
       }),
+      // Read-only evidence hook: capture after the GPU has drawn the inspected
+      // frame, rather than pairing a new pose with the previous canvas buffer.
+      afterRender: (inspect: () => void) => {
+        game.events.once(Phaser.Core.Events.POST_RENDER, inspect);
+      },
       ...(runtimeArtGallery
         ? {
             // Explicit standalone QA surface: use the existing validated client
@@ -509,6 +575,12 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
                   room?.state.players.get(room.sessionId)?.schoolId ===
                   'cai_bang',
               );
+              pregame.onAction({ action: 'branch', basicId: 'cai_bang_bong' });
+              await wait(
+                () =>
+                  room?.state.players.get(room.sessionId)?.selectedBranch ===
+                  'cai_bang_bong',
+              );
               pregame.onAction({ action: 'confirm' });
               await wait(
                 () =>
@@ -521,6 +593,7 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
             galleryClearEffects: () => arenaScene.reviewClearTransientEffects(),
           }
         : {}),
+      progressionPresentation: () => arenaScene.inspectProgression(),
       presentation: () =>
         animationReview
           ? animationReviewGallery.inspect()
@@ -545,9 +618,12 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
 }
 if (import.meta.hot)
   import.meta.hot.dispose(() => {
+    syncMatchMusic(false);
+    matchMusic?.remove();
     void room?.leave();
     unbindInput();
     pregame.destroy();
+    creepPreview.destroy();
     ui.destroy();
     skillPreview.destroy();
     observer.disconnect();

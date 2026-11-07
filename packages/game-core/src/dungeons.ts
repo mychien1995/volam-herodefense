@@ -27,6 +27,7 @@ import { NAM_DE_ID } from './nam-de-types.js';
 import type { DongDefinition } from './dong-ta-types.js';
 
 import { BossPartyState, isBossDungeon } from './boss-party.js';
+import { BossRetries } from './boss-retry.js';
 import { MainBossDirector } from './main-bosses.js';
 import { validateBacCai, type BacCaiDefinition } from './bac-cai-types.js';
 import type { KimDefinition } from './kim-types.js';
@@ -117,6 +118,7 @@ export interface ZoneCombatEvent {
 
 /** Engine/transport independent zone ownership. No client-submitted membership. */
 export class DungeonMatch {
+  readonly bossRetries = new BossRetries(this);
   readonly tayDoc: TayDocEncounter | undefined;
   readonly tayDocGate = new TayDocGate();
   readonly zones = new Map<string, MatchZone>();
@@ -132,9 +134,11 @@ export class DungeonMatch {
   private readonly waveField: SimulationConfig['waveArena'];
   victory = false;
   get waveBossLocked(): boolean {
+    if (this.base.campaign && this.bossRetries.isWaitingWave()) return false;
     return !!this.dongTa?.locked || !!this.waveArena?.locked;
   }
   get waveBossRetry(): boolean {
+    if (this.base.campaign && this.bossRetries.isWaitingWave()) return false;
     return this.dongTa?.phase === 'retry' || this.waveArena?.phase === 'retry';
   }
   waveArenaView(): WaveArenaView | undefined {
@@ -148,7 +152,7 @@ export class DungeonMatch {
       return {
         bossId: 'dong_ta',
         phase: v.phase as WaveArenaView['phase'],
-        locked: v.locked,
+        locked: v.locked && !this.bossRetries.isWaitingWave(),
         attempt: v.attempt,
         phaseUntil: v.phaseUntil,
         tick: v.tick,
@@ -172,6 +176,7 @@ export class DungeonMatch {
   arenaTick = 0;
   nowMs = 0;
   get arenaPaused(): boolean {
+    if (this.base.campaign && this.bossRetries.voting) return true;
     if (
       this.waveArena ||
       (this.mainBosses?.final && this.mainBosses.defeatedBosses.length >= 4) ||
@@ -194,6 +199,7 @@ export class DungeonMatch {
     if (
       this.waveField &&
       wave >= next &&
+      ![...(this.arena.world.invasionPending ?? [])].some((w) => w <= next) &&
       ![...this.arena.world.creeps.values()].some(
         (c) => c.hp > 0 && c.invasion && c.invasion.wave <= next,
       )
@@ -207,6 +213,7 @@ export class DungeonMatch {
       dong.phase !== 'cleared' &&
       (dong.phase !== 'waiting' ||
         ((this.invasion?.wave ?? 0) >= dong.definition.gateWave &&
+          !this.arena.world.invasionPending?.has(dong.definition.gateWave) &&
           ![...this.arena.world.creeps.values()].some(
             (c) => c.invasion?.wave === dong.definition.gateWave && c.hp > 0,
           )))
@@ -278,6 +285,13 @@ export class DungeonMatch {
       nextWaveAt: undefined,
     };
     this.zones.set('arena', this.arena);
+    if (base.campaign)
+      this.arena.world.campaign = {
+        chapter: 0,
+        players: 1,
+        elapsedTicks: 0,
+        cleared: new Set(),
+      };
     if (waveBossTest)
       this.arena.world.waveBossTest = { ...waveBossTest, stage: 'dong_ta' };
     if (tayDoc) this.tayDoc = new TayDocEncounter(tayDoc);
@@ -287,6 +301,8 @@ export class DungeonMatch {
       this.mainBosses = new MainBossDirector(bacCai, vuong);
     }
     if (invasion) {
+      if (base.campaign)
+        invasion.countPerAdditionalPlayer = base.campaign.creepCountPerPlayer;
       this.arena.config = {
         ...base,
         collision: [...base.collision, invasion.statue.collision],
@@ -315,6 +331,10 @@ export class DungeonMatch {
   hero(id: string): Hero | undefined {
     return this.zoneOf(id)?.world.heroes.get(id);
   }
+  /** Only encounter recovery/refunds may access a temporarily offline character. */
+  campaignCharacter(id: string): Hero | undefined {
+    return this.hero(id) ?? this.offline.get(id);
+  }
   remove(id: string): void {
     const zone = this.zoneOf(id);
     if (zone?.access === 'arena')
@@ -335,6 +355,10 @@ export class DungeonMatch {
   disconnect(id: string): void {
     const hero = this.hero(id);
     if (!hero) return;
+    if (this.base.campaign) {
+      this.party.disconnected.add(id);
+      this.bossRetries.disconnect(id);
+    }
     // Settle an observed lethal hit before leaving the instance.
     this.observeDeath(id);
     this.transfer(id, this.arena, this.base.spawn);
@@ -355,6 +379,7 @@ export class DungeonMatch {
     this.party.disconnected.delete(id);
     this.offline.delete(id);
     if (this.waveBossLocked) this.recallForBoss(id);
+    if (this.base.campaign) this.bossRetries.reconnect(id);
   }
   summonHelp(id: string, nowMs = this.nowMs): string | undefined {
     const zone = this.zoneOf(id);
@@ -427,6 +452,11 @@ export class DungeonMatch {
         ? `${dungeon.id}_shared`
         : `${dungeon.id}_private_${id}`;
     let zone = this.zones.get(key);
+    const trial = this.base.campaign && this.bossRetries.trials.get(key);
+    if (trial && trial.phase === 'vote')
+      return 'Hãy đợi biểu quyết đánh lại kết thúc.';
+    if (trial && trial.phase === 'waiting')
+      return this.bossRetries.call(id, trial.id);
     if (
       zone &&
       ((zone.ownerId && zone.ownerId !== id) ||
@@ -452,6 +482,8 @@ export class DungeonMatch {
         dungeon,
         ...(creepSpeed === undefined ? {} : { creepSpeed }),
       };
+      if (this.arena.world.campaign)
+        zone.world.campaign = this.arena.world.campaign;
       if (this.arena.world.waveBossTest)
         zone.world.waveBossTest = this.arena.world.waveBossTest;
       if (dungeon.kimBoss) {
@@ -472,6 +504,7 @@ export class DungeonMatch {
     }
     this.party.observe(zone);
     if (
+      !this.base.campaign &&
       this.membership.size === 1 &&
       isBossDungeon(dungeon) &&
       this.party.life(zone, id).eliminated
@@ -507,6 +540,11 @@ export class DungeonMatch {
       hero.pose = 'death';
     }
     this.party.invitations.delete(id);
+    if (this.base.campaign && isBossDungeon(dungeon)) {
+      this.prepareCampaignZone(zone);
+      this.bossRetries.observe(zone, this.campaignBossId(zone));
+      this.bossRetries.reconnect(id);
+    }
     return undefined;
   }
   exit(id: string): string | undefined {
@@ -569,7 +607,12 @@ export class DungeonMatch {
       return 'Yêu cầu đã được xử lý.';
     hero.lastSequence = sequence;
     if (this.invasion?.defeated) return 'Trận đấu đã kết thúc.';
-    if (zone.id !== 'arena' || zone.access !== 'arena')
+    if (this.party.disconnected.has(id) || hero.bossSpectator)
+      return 'Đang quan chiến.';
+    if (
+      hero.progression?.mode !== 'fixed' &&
+      (zone.id !== 'arena' || zone.access !== 'arena')
+    )
       return 'Chỉ được đổi võ học tại đấu trường. Trong phó bản hoặc PvP chỉ có thể xem.';
     return changeBuild(zone.world, hero, zone.config, revision, change);
   }
@@ -585,10 +628,25 @@ export class DungeonMatch {
     }
     this.tick++;
     this.nowMs = nowMs;
+    if (this.base.campaign) this.bossRetries.advance();
     this.party.expire(nowMs);
     this.events = [];
     const paused = this.arenaPaused;
     if (!paused) this.arenaTick++;
+    if (this.arena.world.campaign) {
+      const state = this.arena.world.campaign;
+      state.players = Math.max(
+        1,
+        this.membership.size - this.party.disconnected.size,
+      );
+      state.elapsedTicks = this.arenaTick;
+      state.chapter = [
+        'dong_ta',
+        'tay_doc_boss',
+        'boss_nam_de',
+        'bac_cai',
+      ].filter((id) => state.cleared.has(id)).length;
+    }
     if (!paused && this.arena.world.waveBossTest && this.invasion) {
       stepWaveBossTest(this.arena.world, this.invasion, {
         dongTa: this.dongTa?.phase === 'cleared',
@@ -615,6 +673,10 @@ export class DungeonMatch {
       );
     if (!paused) this.restartWaveArena();
     for (const zone of this.zones.values()) {
+      if (this.base.campaign && this.bossRetries.frozen(zone)) {
+        zone.world.events = [];
+        continue;
+      }
       if (zone === this.arena && paused) {
         zone.world.events = [];
         if (this.invasion) this.invasion.events = [];
@@ -629,6 +691,11 @@ export class DungeonMatch {
       )
         spawnNamDeIfReady(zone.world, zone.config, zone.world.tick + 1);
       if (zone.access === 'arena') this.syncWaveArena();
+      if (this.base.campaign) {
+        this.prepareCampaignZone(zone);
+        this.bossRetries.observe(zone, this.campaignBossId(zone));
+        if (this.bossRetries.frozen(zone)) continue;
+      }
       if (zone.kim?.phase === 'defeated') {
         zone.bossDiedMatchTick ??= this.tick;
         if (
@@ -712,7 +779,14 @@ export class DungeonMatch {
         zone.bossDiedMatchTick = this.tick;
       zone.kim?.step(zone.world, zone.config);
       zone.encounter?.step(zone.world, zone.config);
-      if (zone.access === 'arena' && this.tayDoc) {
+      if (
+        zone.access === 'arena' &&
+        this.tayDoc &&
+        !(this.base.campaign && this.bossRetries.isWaitingWave())
+      ) {
+        for (const event of zone.world.events)
+          if (event.abilityId === 'gear_cleanse')
+            this.tayDoc.poisons.delete(event.sourceId);
         if (this.dongTa?.phase === 'cleared')
           this.tayDocGate.completeChapter('dong_ta');
         if (this.invasion)
@@ -726,6 +800,12 @@ export class DungeonMatch {
       }
       enforceConfinement(zone.world, zone.config, confinementStarts);
       this.observeAttempt(zone);
+      if (this.base.campaign)
+        this.bossRetries.observe(
+          zone,
+          this.campaignBossId(zone),
+          zone.world.vuong?.wipeRequested,
+        );
       if (encounter && zone.world.creeps.get(zone.world.boss!.actorId)!.hp <= 0)
         zone.bossRespawnAt ??= this.tick + encounter.respawnTicks;
       for (const event of zone.world.events)
@@ -809,6 +889,11 @@ export class DungeonMatch {
       if (this.party.disconnected.has(id) || hero.bossSpectator) continue;
       const zone = this.zoneOf(id)!;
       const dungeon = zone.dungeon ?? this.dungeon;
+      if (
+        this.base.campaign &&
+        (isBossDungeon(zone.dungeon) || this.waveBossLocked)
+      )
+        continue;
       this.observeDeath(id);
       if (hero.hp > 0 || hero.bossSpectator) continue;
       if (!this.respawns.has(id))
@@ -832,6 +917,7 @@ export class DungeonMatch {
     }
   }
   private observeAttempt(zone: MatchZone): void {
+    if (this.base.campaign) return;
     if (!this.party.observe(zone)) return;
     for (const hero of zone.world.heroes.values()) {
       this.respawns.delete(hero.id);
@@ -846,6 +932,7 @@ export class DungeonMatch {
     }
   }
   private observeDeath(id: string): void {
+    if (this.base.campaign) return;
     const zone = this.zoneOf(id),
       hero = this.hero(id);
     if (
@@ -978,6 +1065,7 @@ export class DungeonMatch {
       }
     }
     const notesWipe = a.bossId === VUONG_ID && w.vuong!.wipeRequested;
+    if (this.base.campaign) return;
     if (
       notesWipe ||
       (w.heroes.size && [...w.heroes.values()].every((h) => h.hp <= 0))
@@ -1009,6 +1097,7 @@ export class DungeonMatch {
     }
   }
   private restartWaveArena(): void {
+    if (this.base.campaign) return;
     const a = this.waveArena,
       w = this.arena.world;
     if (
@@ -1115,6 +1204,23 @@ export class DungeonMatch {
     d: CreepDungeonDefinition,
     creepSpeed?: number,
   ): SimulationConfig {
+    const campaign = this.base.campaign;
+    const state = this.arena.world.campaign;
+    const chapter = campaign
+      ? Math.min(
+          4,
+          Math.max(
+            state?.chapter ?? 0,
+            Math.floor(
+              this.arenaTick / (campaign.chapterSeconds * this.base.tickRate),
+            ),
+          ),
+        )
+      : 0;
+    const roomPlayers = Math.max(
+      1,
+      this.membership.size - this.party.disconnected.size,
+    );
     const count = Math.ceil(
       d.baseCount * (1 + d.countPerAdditionalPlayer * (players - 1)),
     );
@@ -1126,7 +1232,17 @@ export class DungeonMatch {
       collision: d.collision,
       spawn: d.spawn,
       creepSpawns: Array.from(
-        { length: d.boss || d.chuBoss || d.kimBoss ? 0 : count },
+        {
+          length:
+            d.boss || d.chuBoss || d.kimBoss
+              ? 0
+              : campaign
+                ? Math.ceil(
+                    d.baseCount *
+                      (1 + campaign.privateCountPerPlayer * (roomPlayers - 1)),
+                  )
+                : count,
+        },
         (_, i) => ({
           ...d.creepSpawns[i % d.creepSpawns.length]!,
         }),
@@ -1139,15 +1255,156 @@ export class DungeonMatch {
         hp: Math.round(
           this.base.creep.hp *
             (1 + d.hpPerWave * (wave - 1)) *
-            (1 + d.hpPerAdditionalPlayer * (players - 1)),
+            (campaign
+              ? campaign.dungeonHp[chapter]! *
+                (1 + campaign.privateHpPerPlayer * (roomPlayers - 1))
+              : 1 + d.hpPerAdditionalPlayer * (players - 1)),
         ),
         damage: Math.round(
           this.base.creep.damage *
             (1 + d.damagePerWave * (wave - 1)) *
-            (1 + d.damagePerAdditionalPlayer * (players - 1)),
+            (campaign
+              ? campaign.dungeonDamage[chapter]! *
+                (1 + campaign.privateDamagePerPlayer * (roomPlayers - 1))
+              : 1 + d.damagePerAdditionalPlayer * (players - 1)),
         ),
+        ...(campaign
+          ? {
+              xp: campaign.dungeonXp[chapter]!,
+              gold: campaign.dungeonGold[chapter]!,
+            }
+          : {}),
       },
     };
+  }
+  campaignBossId(zone: MatchZone): string | undefined {
+    if (zone.access === 'arena') {
+      if (this.dongTa && ['fighting', 'retry'].includes(this.dongTa.phase))
+        return 'dong_ta';
+      return this.waveArena
+        ? this.waveActorId(this.waveArena.bossId)
+        : undefined;
+    }
+    return zone.kim
+      ? 'kim_luan_phap_vuong'
+      : (zone.encounter?.bossId ??
+          zone.world.boss?.actorId ??
+          (zone.world.chu ? 'chu_ba_thong' : undefined));
+  }
+  private prepareCampaignZone(zone: MatchZone): void {
+    const c = this.base.campaign!;
+    const key = this.campaignBossId(zone);
+    const boss = key && zone.world.creeps.get(key),
+      rule = key && c.bosses[key];
+    if (!boss || !rule || boss.hp <= 0) return;
+    const players =
+      zone.access === 'arena'
+        ? (this.bossRetries.activeCount(zone) ??
+          Math.max(1, this.membership.size - this.party.disconnected.size))
+        : Math.max(1, this.membership.size - this.party.disconnected.size);
+    if (boss.campaignPlayers !== undefined && boss.campaignPlayers >= players)
+      return;
+    const fraction = boss.hp / boss.maxHp;
+    boss.maxHp = Math.round(rule.hp * (1 + c.bossHpPerPlayer * (players - 1)));
+    boss.hp = Math.max(1, Math.round(boss.maxHp * fraction));
+    boss.campaignPlayers = players;
+    if (boss.stats) boss.stats.hp = boss.maxHp;
+  }
+  suspendCampaignBoss(zone: MatchZone, bossId: string): void {
+    if (zone.access === 'arena') {
+      if (bossId === 'dong_ta') this.dongTa!.suspendCampaign(zone.world);
+      else if (bossId === this.tayDoc?.bossId) this.tayDoc.reset(zone.world);
+      else if (bossId === NAM_DE_ID) {
+        clearNamDe(zone.world);
+        zone.world.creeps.delete(NAM_DE_ID);
+        zone.world.namDe!.phase = 'rest';
+        zone.world.namDe!.spawnAt = Infinity;
+      } else if (bossId === VUONG_ID) {
+        const boss = zone.world.creeps.get(bossId)!;
+        zone.world.vuong!.clear(zone.world);
+        boss.hp = 0;
+        zone.world.creeps.set(bossId, boss);
+      } else {
+        zone.world.bacCai!.clear(zone.world);
+        zone.world.creeps.delete(bossId);
+      }
+      if (this.waveArena) {
+        this.waveArena.phase = 'retry';
+        this.waveArena.locked = false;
+      }
+      this.lockWaveArena(false);
+    } else {
+      zone.kim?.clear(zone.world);
+      zone.encounter?.clear(zone.world);
+      for (const creep of zone.world.creeps.values())
+        cancelOwnedEffects(zone.world, creep.id);
+    }
+    for (const h of zone.world.heroes.values())
+      cancelOwnedEffects(zone.world, h.id);
+    zone.world.projectiles.clear();
+    zone.world.pending = [];
+    zone.world.actions = [];
+    zone.world.areas = [];
+  }
+  resetCampaignDungeon(zone: MatchZone): void {
+    const d = zone.dungeon!;
+    zone.world.creeps.clear();
+    zone.world.projectiles.clear();
+    zone.world.pending = [];
+    zone.world.actions = [];
+    zone.world.areas = [];
+    if (zone.kim) zone.kim.initialize(zone.world, zone.config);
+    else if (zone.encounter) zone.encounter.initialize(zone.world, zone.config);
+    else if (d.chuBoss) spawnChu(zone.world, zone.config, d.chuBoss);
+    else spawnBossEncounter(zone.world, zone.config, zone.id);
+    delete zone.bossDiedMatchTick;
+    delete zone.bossRespawnAt;
+    delete zone.emptyBossResetAt;
+  }
+  restartCampaignBoss(zone: MatchZone, bossId: string): void {
+    const w = zone.world;
+    if (zone.access !== 'arena') this.resetCampaignDungeon(zone);
+    else {
+      if (bossId === 'dong_ta') this.dongTa!.restartCampaign(w, zone.config);
+      else if (bossId === this.tayDoc?.bossId) {
+        this.tayDoc.spawn(w, zone.config);
+        this.tayDoc.phase = 'phase1';
+      } else if (bossId === NAM_DE_ID) {
+        const d = w.namDe!.definition;
+        clearNamDe(w);
+        w.creeps.delete(NAM_DE_ID);
+        initializeNamDe(w, zone.config, d);
+        w.namDe!.phase = 'rest';
+        w.namDe!.spawnAt = w.tick;
+        spawnNamDeIfReady(w, zone.config, w.tick);
+      } else if (bossId === VUONG_ID) {
+        w.creeps.delete(VUONG_ID);
+        new VuongEncounter(w.vuong!.definition).initialize(w, zone.config);
+      } else {
+        const e = new BacCaiEncounter(w.bacCai!.definition);
+        delete w.bacCai;
+        e.initialize(w, zone.config);
+        e.phase = 'combat';
+        if (this.mainBosses) this.mainBosses.encounter = e;
+      }
+      if (this.waveArena) {
+        this.waveArena.phase = 'fighting';
+        this.waveArena.locked = true;
+        this.waveArena.attempt++;
+      }
+      this.lockWaveArena(true);
+    }
+  }
+  leaveCampaignBoss(id: string, zone: MatchZone): void {
+    const h = this.hero(id);
+    if (!h || this.zoneOf(id) !== zone) return;
+    if (zone.access !== 'arena') this.transfer(id, this.arena, this.base.spawn);
+    h.hp = h.maxHp;
+    h.mana = h.maxMana;
+    h.bossSpectator = false;
+    h.pose = 'idle';
+    h.x = this.base.spawn.x;
+    h.y = this.base.spawn.y;
   }
   private transfer(id: string, destination: MatchZone, position: Point): void {
     const source = this.zoneOf(id),
@@ -1163,6 +1420,10 @@ export class DungeonMatch {
     if (hero.dashRechargeAt !== undefined)
       hero.dashRechargeAt = convert(hero.dashRechargeAt);
     hero.skillCooldowns = hero.skillCooldowns.map(convert);
+    if (hero.inventory?.auxiliaryReadyAt !== undefined)
+      hero.inventory.auxiliaryReadyAt = convert(
+        hero.inventory.auxiliaryReadyAt,
+      );
     if (hero.abilityCooldowns)
       for (const key of Object.keys(hero.abilityCooldowns))
         hero.abilityCooldowns[key] = convert(hero.abilityCooldowns[key]!);

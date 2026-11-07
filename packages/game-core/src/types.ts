@@ -1,3 +1,9 @@
+import type { EquipmentAttack } from './economy-types.js';
+import type { CampaignDefinition, CampaignRuntime } from './campaign.js';
+import type {
+  CreepCombatDefinition,
+  CreepCombatRuntime,
+} from './creep-abilities-types.js';
 import type { BossBanterClock, BossBanterDefinition } from './boss-banter.js';
 import type { ChuEncounter } from './chu-types.js';
 import type { WaveBossTestRuntime } from './wave-boss-test.js';
@@ -91,6 +97,9 @@ export interface SupportEffect extends AllyEffect {
   tickInterval: number;
 }
 export type StatusKind =
+  | 'burn'
+  | 'poison'
+  | 'root'
   | 'slow'
   | 'attack_slow'
   | 'attack_break'
@@ -100,7 +109,6 @@ export type StatusKind =
   | 'interrupt_resist'
   | 'support_aura'
   | 'stun'
-  | 'root'
   | 'silence'
   | 'disarm'
   | 'defense_break'
@@ -210,6 +218,7 @@ export interface MultiHitEffect {
   durationTicks?: number | undefined;
 }
 export interface Ability {
+  equipmentAttack?: EquipmentAttack | undefined;
   manualChain?:
     | {
         idleTicks: number;
@@ -246,6 +255,9 @@ export interface Ability {
     | SupportEffect;
 }
 export interface SimulationConfig {
+  campaign?: CampaignDefinition;
+  creepCombat?: CreepCombatDefinition;
+  personalCraftLoot?: boolean;
   bossBanter?: BossBanterDefinition | undefined;
   /** Temporary server-owned arena confinement, independent of status immunity. */
   heroBounds?: EllipseBounds | undefined;
@@ -320,6 +332,7 @@ export type Command =
   | { kind: 'move'; x: number; y: number }
   | { kind: 'basic' }
   | { kind: 'dash' }
+  | { kind: 'gear-skill' }
   | { kind: 'cast'; slot: number }
   | { kind: 'dev-loadout'; ids: string[] }
   | { kind: 'select-basic'; id: string };
@@ -343,6 +356,10 @@ export interface Actor extends Point {
   crowdControlScale?: number;
 }
 export interface Hero extends Actor {
+  campaignClears?: string[];
+  dragonBonus?: number;
+  farmXpRemainder?: number;
+  farmGoldRemainder?: number;
   comboFinisher?: {
     slot: number;
     abilityId: string;
@@ -381,6 +398,9 @@ export interface Hero extends Actor {
   basicChains?: Record<string, number>;
 }
 export interface Creep extends Actor {
+  campaignPlayers?: number;
+  damagedBy?: Set<string>;
+  needlePoison?: { sourceId: string; until: number; next: number };
   waveBossActor?: boolean;
 
   rangedAttack?: ProjectileEffect;
@@ -406,7 +426,7 @@ export interface Creep extends Actor {
   stats?: SimulationConfig['creep'];
   invasion?: {
     wave: number;
-    lane: 'west' | 'east';
+    lane: 'west' | 'east' | 'north' | 'south';
     targetId: string;
     chaseOrigin: Point;
     reacquireAt: number;
@@ -422,6 +442,7 @@ export interface Creep extends Actor {
   burnDamage: number;
 }
 export interface Projectile extends Point {
+  equipmentAttack?: EquipmentAttack | undefined;
   dragonFlight?: { origin: Point; target: Point; fx: number; fy: number };
   spawnedAt?: number;
   combo?: ComboSpec;
@@ -492,6 +513,9 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  campaign?: CampaignRuntime;
+  invasionPending?: Set<number>;
+  creepCombat?: CreepCombatRuntime;
   /** Cosmetic randomness must never advance the authoritative combat RNG. */
   banterSeed?: number;
   bossBanter?: Map<string, BossBanterClock>;
@@ -516,7 +540,7 @@ export interface World {
     nextTick: number;
     effect: SupportEffect;
   }>;
-  statue?: Actor & { radius: number };
+  statue?: Actor & { radius: number; collision?: Rect };
   tick: number;
   heroes: Map<string, Hero>;
   creeps: Map<string, Creep>;

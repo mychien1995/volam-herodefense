@@ -2,6 +2,8 @@ import type { LobbyState } from '@volam/game-protocol';
 import { m1Config, invasionCreepName } from '@volam/game-data';
 import type { WaveArenaView } from '@volam/game-core';
 
+import { statueName } from '@volam/game-data';
+
 export class DefenseHud {
   private readonly panel = document.createElement('section');
   private readonly warning = document.createElement('p');
@@ -12,7 +14,9 @@ export class DefenseHud {
     this.panel.className = 'framed';
     this.panel.hidden = true;
     this.panel.innerHTML =
-      '<strong>Tượng trấn phái</strong><div id="statue-meter" role="meter" aria-label="Sinh lực tượng" aria-valuemin="0"><i></i><span></span></div><span id="dong-ta-status" hidden></span><span id="invasion-countdown"></span><span id="next-invasion-creep"></span>';
+      '<strong>' +
+      statueName +
+      '</strong><div id="statue-meter" role="meter" aria-label="Sinh lực tượng" aria-valuemin="0"><i></i><span></span></div><span id="dong-ta-status" hidden></span><span id="invasion-countdown"></span><span id="next-invasion-creep"></span>';
     this.warning.id = 'invasion-warning';
     this.warning.hidden = true;
     this.warning.setAttribute('role', 'status');
@@ -20,7 +24,7 @@ export class DefenseHud {
     this.defeat.id = 'defeat-layer';
     this.defeat.hidden = true;
     this.defeat.innerHTML =
-      '<section class="framed" role="dialog" aria-modal="true" aria-labelledby="defeat-title"><h2 id="defeat-title">Thất Bại</h2><p>Tượng trấn phái đã bị phá hủy.</p><p>Trận đấu đã kết thúc.</p><button id="defeat-leave">Rời trận</button></section>';
+      '<section class="framed" role="dialog" aria-modal="true" aria-labelledby="defeat-title"><h2 id="defeat-title">Thất Bại</h2><p>Tượng Võ Thần đã bị phá hủy.</p><p>Trận đấu đã kết thúc.</p><button id="defeat-leave">Rời trận</button></section>';
     viewport.append(this.panel, this.warning, this.defeat);
     this.defeat.querySelector('button')!.addEventListener('click', onLeave);
   }
@@ -68,14 +72,24 @@ export class DefenseHud {
       ? boss.phase === 'retry'
         ? `${bossName} · Chuẩn bị đánh lại`
         : `${bossName} · Lần ${boss.attempt}`
-      : 'Tượng trấn phái';
+      : statueName;
     meter.title = boss?.locked ? `Tượng tạm bất tử trong trận ${bossName}` : '';
+    const campaignVote = [...state.players.values()].some(
+      (p) =>
+        p.inventory.campaign &&
+        JSON.parse(p.inventory.campaign).retry?.phase === 'vote',
+    );
+    const campaign = [...state.players.values()].some(
+      (p) => !!p.inventory.campaign,
+    );
     const encounterStatus =
       this.panel.querySelector<HTMLElement>('#dong-ta-status')!;
     encounterStatus.hidden = !boss?.locked;
     encounterStatus.textContent =
       boss?.phase === 'retry'
-        ? `Cả đội thất bại · Đánh lại sau ${Math.max(0, Math.ceil((boss.phaseUntil - boss.tick) / m1Config.tickRate))}s`
+        ? campaign
+          ? 'Cả đội thất bại · Biểu quyết hoặc gọi đánh lại boss'
+          : `Cả đội thất bại · Đánh lại sau ${Math.max(0, Math.ceil((boss.phaseUntil - boss.tick) / m1Config.tickRate))}s`
         : boss?.locked
           ? `Sinh lực ${bossName}: ${Math.ceil(boss.bossHp)} / ${boss.bossMaxHp}`
           : '';
@@ -95,7 +109,9 @@ export class DefenseHud {
         : d.wave >= 20
           ? 'Đợt 20 · Đã hết đợt xâm lăng'
           : d.paused
-            ? `Đợt ${d.wave} · Tạm dừng — toàn đội đang trong phó bản boss`
+            ? campaignVote
+              ? `Đợt ${d.wave} · Tạm dừng — biểu quyết đánh lại boss`
+              : `Đợt ${d.wave} · Tạm dừng — toàn đội đang trong phó bản boss`
             : `Đợt ${d.wave} · Đợt ${d.wave + 1} sau ${Math.floor(seconds / 60)
                 .toString()
                 .padStart(
@@ -108,6 +124,23 @@ export class DefenseHud {
     )!;
     roster.hidden = d.defeated || !nextName;
     roster.textContent = nextName ? `Sắp tới: ${nextName}` : '';
+    if (d.streamUntilTick > state.tick) {
+      roster.hidden = false;
+      roster.textContent = `${invasionCreepName(d.wave)} · ${d.portalCount} cổng · Còn tràn ${Math.ceil((d.streamUntilTick - state.tick) / m1Config.tickRate)}s`;
+    }
+    if (d.devCreepTest)
+      this.panel.querySelector('strong')!.textContent =
+        'DEV · Test 20 loại creep';
+    if (d.creepPreview) {
+      this.panel.querySelector('strong')!.textContent =
+        'DEV · Preview từng creep';
+      this.panel.querySelector('#invasion-countdown')!.textContent =
+        'Sân test riêng · Không có wave';
+      roster.hidden = true;
+    }
+    if (d.wave >= 20 && d.streamUntilTick <= state.tick && !d.defeated)
+      this.panel.querySelector('#invasion-countdown')!.textContent =
+        'Đã mở đủ 20 đợt xâm lăng';
     if (d.devWaveBosses) {
       this.panel.querySelector('strong')!.textContent =
         'DEV · ' + (testBossNames[d.devWaveBossStage] ?? 'Boss wave');
@@ -127,7 +160,7 @@ export class DefenseHud {
     if (showNotice)
       this.warning.textContent =
         d.noticeKind === 'wave'
-          ? `Đợt ${d.noticeWave} đã đến từ hai hướng Tây và Đông!${rosterNotice}`
+          ? `Đợt ${d.noticeWave} đã đến từ ${d.portalCount} hướng!${rosterNotice}`
           : `Đợt ${d.noticeWave} sẽ đến sau ${d.noticeLeadTicks / m1Config.tickRate} giây!${rosterNotice}`;
     this.warning.dataset['noticeId'] = String(d.noticeId);
     if ((d.defeated || won) && !this.wasDefeated)

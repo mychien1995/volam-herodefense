@@ -45,6 +45,7 @@ it('env-enabled real room waits for school confirmation, then synchronizes stage
   for (const r of [a, b]) {
     await expect.poll(() => r.state.phase).toBe('SCHOOL_SELECTION');
     r.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    r.send('lobby-action', { action: 'branch', basicId: 'cai_bang_bong' });
     r.send('lobby-action', { action: 'confirm' });
   }
   for (const r of [a, b])

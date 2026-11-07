@@ -1,0 +1,164 @@
+{
+  "status": "PASS",
+  "date": "2026-11-06",
+  "branch": "wip/m3d/creep-upgrade",
+  "base": "b8d39cf9",
+  "protocol": 33,
+  "final": {
+    "command": "pnpm check:final --config playwright.creep-upgrade.config.ts tests/e2e/creep-feedback-r3.spec.ts tests/e2e/creep-upgrade.spec.ts",
+    "session": "creep-feedback-r3-final",
+    "seconds": 543.29,
+    "unitIntegrationTests": 851,
+    "testFiles": 83,
+    "workflowTests": 18,
+    "assetValidators": 20,
+    "browserCases": 2,
+    "browserSeconds": 288.3,
+    "changedProfilesObserved": 20,
+    "regularIdentitiesObserved": 44,
+    "mainGamePlayers": 6,
+    "browserClients": 2,
+    "sdkClients": 4,
+    "controlledCrowdActors": 120,
+    "clientErrors": []
+  },
+  "balance": {
+    "cases": 9216,
+    "seconds": 64.5310084,
+    "scope": "48 attacking profiles; 4 schools, both basics, levels 1/6/15/30, solo/six, 3 seeds, legal mixed four-slot builds; static exposure bots, no human dodge model",
+    "streams": [
+      {
+        "portals": 2,
+        "players": 1,
+        "count": 60,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.0034999999988940544,
+        "maxMs": 2.1336999999984982,
+        "xpPool": 3600,
+        "goldPool": 720
+      },
+      {
+        "portals": 2,
+        "players": 6,
+        "count": 240,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.017100000004575122,
+        "maxMs": 0.06700000000273576,
+        "xpPool": 14400,
+        "goldPool": 2880
+      },
+      {
+        "portals": 3,
+        "players": 1,
+        "count": 90,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.0014000000010128133,
+        "maxMs": 0.20350000000325963,
+        "xpPool": 5400,
+        "goldPool": 1080
+      },
+      {
+        "portals": 3,
+        "players": 6,
+        "count": 360,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.010999999998603016,
+        "maxMs": 0.09270000000105938,
+        "xpPool": 21600,
+        "goldPool": 4320
+      },
+      {
+        "portals": 4,
+        "players": 1,
+        "count": 120,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.000800000001618173,
+        "maxMs": 0.05949999999575084,
+        "xpPool": 7200,
+        "goldPool": 1440
+      },
+      {
+        "portals": 4,
+        "players": 6,
+        "count": 480,
+        "streaming": false,
+        "simulatedWorld": true,
+        "p95Ms": 12.853799999997136,
+        "maxMs": 51.716499999994994,
+        "xpPool": 28800,
+        "goldPool": 5760
+      }
+    ]
+  },
+  "tuning": {
+    "hoanhTramDamageCoefficient": 2.4,
+    "hoanhTramHalfAngle": 1.5707963267948966,
+    "hoanhTramRange": 192,
+    "banditTargetBurstRadius": 64,
+    "bloodPalmRadius": 40,
+    "actualHpDrainHealingFraction": 0.4,
+    "archerTorsoOffsetY": -18,
+    "zombieFieldRadius": 88,
+    "waterDemonFieldRadius": 92
+  },
+  "visualReview": {
+    "openedPNGs": [
+      "front-180-sweep.png",
+      "target-purple-burst.png",
+      "victim-drain.png",
+      "torso-arrow.png",
+      "target-poison.png",
+      "target-water.png",
+      "arena/arena-six-player.png"
+    ],
+    "observations": [
+      "Hoanh Tram uses the retained original curved raster cropped/rotated into the captured front; no opposite-facing purple overlay.",
+      "Purple burst base and green poison/blue water pools align with target feet.",
+      "Actual drain ring is beneath the affected player.",
+      "Torso offset is measured from the live rendered projectile and server ground position.",
+      "Retained full viewport/HUD and dense120-creep main-game rendering."
+    ],
+    "capture": "One canvas PNG per requested phase from Phaser postrender; no frame/image streams.",
+    "newRasters": false,
+    "approvedRasterBytesChanged": false,
+    "directorApproval": "No new approval inferred"
+  },
+  "iterationNotes": [
+    "The first browser iteration missed a short arrow flight between separate RPC reads. Atomic same-frame inspection and a postrender one-shot PNG observer verified actual render placement.",
+    "Visual inspection exposed the approved replacement sheet adding an opposite-facing purple shape; this requested sweep/poison reuse the retained co_mo_original_fx texture without changing boss bindings."
+  ],
+  "review": {
+    "client": "http://127.0.0.1:5627/?creepPreview=1",
+    "server": "http://127.0.0.1:3427",
+    "runId": "creep-feedback-r3-review-p33-20261106",
+    "flag": "VOLAM_DEV_CREEP_TEST=1",
+    "healthClientAndCurrentEffectSourceVerified": true,
+    "newRoomRequired": true
+  },
+  "sourceSha256": {
+    "packages/game-core/src/creep-abilities-types.ts": "0f30b2b983154ab8731dd3e4dd01a6d72604fdd0b05801ce2ccb82a0ac346c1b",
+    "packages/game-core/src/creep-abilities.ts": "122d88246186deddfe184aec81e60874c9efc5efb44ecf359427147b8d41a885",
+    "packages/game-data/src/creep-abilities.ts": "c271df8aeee1c4ebd8918233f38d7dbb188274a9436d342088bcdead197744c8",
+    "apps/game-client/src/creep-combat-art.ts": "bedda39cf86c9e38aa7440ea4975016a6e2d056084b4f2d5208721145dce09eb",
+    "apps/game-client/src/main.ts": "cf3763a9e63b6bcb77d640ab1627acd1ef5ec8e9f502f6c5ea64d4352e606b98",
+    "tests/creep-feedback-r3.test.ts": "35119c359202db577915c0518c93eb9c69889fe49cca863196ee2b042615a03d",
+    "tests/e2e/creep-feedback-r3.spec.ts": "0543552fe9a39eb5abbdb797ad3e9ac0528b6414568c1688753971b268fdede3",
+    "tests/e2e/creep-upgrade.spec.ts": "6dccfe378af4006a1326c15830ebbe7cbcbf86250c67ff26f440399c77d16f6d",
+    "tools/creep-upgrade-balance.ts": "9eb8221e053c7417aa28064c7db51d2afe48b27c132b335795518321c356561a"
+  },
+  "limitations": [
+    "The9,216 broad probes often kill basic creeps before the opening signature; they are numerical/simulation sanity coverage, not a human-dodge difficulty model. Focused regressions execute the actual changed casts.",
+    "Dense server-world timing excludes network/GPU cost and is not a controlled performance comparison.",
+    "Trial damage/radius values and retained-art combinations still require director gameplay review.",
+    "Standalone all49 preview selection was not repeated; changed-profile preview and six-peer main-game scopes were run. Prior preview evidence remains separate."
+  ],
+  "recordingsCreated": false,
+  "merged": false,
+  "pushed": false,
+  "deployed": false
+}

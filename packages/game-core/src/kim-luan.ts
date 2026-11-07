@@ -1,3 +1,4 @@
+import { grantCraftMaterial } from './economy.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { addCreep } from './simulation.js';
 import { hurt, emit } from './combat.js';
@@ -362,7 +363,7 @@ export class KimLuanEncounter {
       actorId,
       cast.endsAt + this.ticks(this.definition.actionRestSeconds, c),
     );
-    announceBossSkill(w,actorId,abilityId);
+    announceBossSkill(w, actorId, abilityId);
     emit(w, {
       kind: 'cast',
       sourceId: actorId,
@@ -1003,6 +1004,7 @@ export class KimLuanEncounter {
       .sort((a, b) => a.id.localeCompare(b.id));
     const d = this.definition;
     eligible.forEach((h, i) => {
+      if (c.campaign) return;
       gainExperience(
         h,
         Math.floor(d.xp / eligible.length) +
@@ -1013,6 +1015,11 @@ export class KimLuanEncounter {
         Math.floor(d.gold / eligible.length) +
         (i < d.gold % eligible.length ? 1 : 0);
     });
+    if (c.personalCraftLoot) {
+      this.rewards.kill++;
+      grantCraftMaterial(w, c, b, 'weapon');
+      return;
+    }
     const item = d.loot[Math.floor(w.random() * d.loot.length)]!;
     this.rewards.loot.push({
       id: ++this.rewards.kill,

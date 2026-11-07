@@ -1,3 +1,4 @@
+import { waveBossFarewell } from './boss-banter.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { bacCaiWander } from './bac-cai-wander.js';
 import { addCreep } from './simulation.js';
@@ -73,6 +74,7 @@ export function bacCaiSpiral(
 /** Pure deterministic arena adapter. No dungeon reset, transport, animation callback or client RNG. */
 export class BacCaiEncounter {
   readonly bossId = 'bac_cai';
+  private corpseUntil = Infinity;
   phase: BacCaiView['phase'] = 'entering';
   cast: BacCaiCast | undefined;
   readonly effects = new Map<string, BacCaiEffect>();
@@ -743,6 +745,8 @@ export class BacCaiEncounter {
         (a, b) => distance(a, dog) - distance(b, dog),
       )[0];
       if (!target) continue;
+      if (dog.stats) dog.stats.damage = d.damage.dogs;
+      if (stepControlledCreepSpecial(w, dog, target, c)) continue;
       if (hasStatus(dog, 'stun', w.tick)) {
         dog.pose = 'idle';
         continue;
@@ -968,6 +972,7 @@ export class BacCaiEncounter {
               this.ticks(this.definition.reward.assistMs, c),
         );
       eligible.forEach((h, i) => {
+      if (c.campaign) return;
         const split = (n: number) =>
           Math.floor(n / eligible.length) + (i < n % eligible.length ? 1 : 0);
         gainExperience(h, split(this.definition.reward.xp), c);
@@ -976,6 +981,8 @@ export class BacCaiEncounter {
     }
     this.clear(w);
     this.phase = 'defeated';
+    const boss = w.creeps.get(this.bossId)!;
+    this.corpseUntil = waveBossFarewell(w, c, boss);
   }
   clear(w: World) {
     this.effects.clear();
@@ -1013,21 +1020,23 @@ export class BacCaiEncounter {
       phase: this.phase,
       hp: b.hp,
       maxHp: b.maxHp,
-      boss: clones
-        ? null
-        : {
-            x: b.x,
-            y: b.y,
-            fx: b.fx,
-            fy: b.fy,
-            pose: b.hp <= 0 ? 'death' : w.tick < b.hurtUntil ? 'hurt' : b.pose,
-            poseStart:
-              b.hp <= 0
-                ? Math.max(0, b.respawnAt - c.creep.respawnTicks)
-                : w.tick < b.hurtUntil
-                  ? b.hurtUntil - 6
-                  : 0,
-          },
+      boss:
+        clones || (this.phase === 'defeated' && w.tick >= this.corpseUntil)
+          ? null
+          : {
+              x: b.x,
+              y: b.y,
+              fx: b.fx,
+              fy: b.fy,
+              pose:
+                b.hp <= 0 ? 'death' : w.tick < b.hurtUntil ? 'hurt' : b.pose,
+              poseStart:
+                b.hp <= 0
+                  ? Math.max(0, b.respawnAt - c.creep.respawnTicks)
+                  : w.tick < b.hurtUntil
+                    ? b.hurtUntil - 6
+                    : 0,
+            },
       action,
       forms: this.forms.map((id, i) => {
         const a = w.creeps.get(id)!;
@@ -1121,3 +1130,4 @@ export class BacCaiEncounter {
     };
   }
 }
+import { stepControlledCreepSpecial } from './creep-abilities.js';

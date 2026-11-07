@@ -941,6 +941,7 @@ export class VuongEncounter {
     const d = this.definition;
     const eligible = this.living(w).filter((h) => b.hits[h.id] !== undefined);
     eligible.forEach((h, i) => {
+      if (c.campaign) return;
       const share = (n: number) =>
         Math.floor(n / eligible.length) + Number(i < n % eligible.length);
       gainExperience(h, share(d.xp), c);

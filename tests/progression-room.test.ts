@@ -19,7 +19,9 @@ const saved = {
   skills: process.env['VOLAM_DEV_SKILLS'],
 };
 const previousPracticeCreeps = process.env['VOLAM_DEV_PRACTICE_CREEPS'];
+const previousProgression = process.env['VOLAM_TEST_LEGACY_PROGRESSION'];
 beforeAll(async () => {
+  process.env['VOLAM_TEST_LEGACY_PROGRESSION'] = '1';
   process.env['VOLAM_DEV_PRACTICE_CREEPS'] = '1';
   delete process.env['VOLAM_DEV_LEGACY_SKILLS'];
   process.env['VOLAM_DEV_SKILLS'] = '1';
@@ -31,6 +33,9 @@ afterEach(async () => {
   await server.cleanup();
 });
 afterAll(async () => {
+  if (previousProgression === undefined)
+    delete process.env['VOLAM_TEST_LEGACY_PROGRESSION'];
+  else process.env['VOLAM_TEST_LEGACY_PROGRESSION'] = previousProgression;
   if (previousPracticeCreeps === undefined)
     delete process.env['VOLAM_DEV_PRACTICE_CREEPS'];
   else process.env['VOLAM_DEV_PRACTICE_CREEPS'] = previousPracticeCreeps;
@@ -55,6 +60,7 @@ async function start(a: Peer, b?: Peer, custom = true) {
   await expect.poll(() => a.state.phase).toBe('SCHOOL_SELECTION');
   for (const p of b ? [a, b] : [a]) {
     p.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    p.send('lobby-action', { action: 'branch', basicId: 'cai_bang_bong' });
     p.send('lobby-action', { action: 'confirm' });
   }
   await expect.poll(() => a.state.phase).toBe('IN_GAME');
@@ -295,8 +301,10 @@ it('ignores legacy and arbitrary loadout environment flags in production rooms',
   process.env['VOLAM_DEV_LEGACY_SKILLS'] = '1';
   try {
     const a = await create('Production');
-    await start(a);
+    await start(a, undefined, false);
     expect(a.state.devSkillLoadout).toBe(false);
+    expect(a.state.requiresBranch).toBe(true);
+    expect(a.state.players.get(a.sessionId)!.build.mode).toBe('fixed');
     expect(a.state.players.get(a.sessionId)!.build.enabled).toBe(true);
     expect(a.state.players.get(a.sessionId)!.build.available).toBe(1);
     expect(a.state.players.get(a.sessionId)!.qSkill).toBe('');

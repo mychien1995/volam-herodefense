@@ -1,4 +1,4 @@
-import { beforeAll, afterAll, afterEach, it, expect } from 'vitest';
+import { beforeAll, afterAll, afterEach, it, expect, vi } from 'vitest';
 import { ColyseusTestServer } from '@colyseus/testing';
 import { Client } from '@colyseus/sdk';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
@@ -18,11 +18,13 @@ beforeAll(async () => {
 });
 afterEach(async () => {
   await server.cleanup();
+  vi.unstubAllEnvs();
 });
 afterAll(async () => {
   await server.shutdown();
 });
-it('two SDK clients observe authoritative recall, bounds, attacks, retry and clear; forged state is rejected', async () => {
+it('two SDK clients observe authoritative recall, bounds, attacks, legacy auto-retry and clear; forged state is rejected', async () => {
+  vi.stubEnv('VOLAM_TEST_LEGACY_PROGRESSION', '1');
   const a = await client.create<MatchRoom['state']>(
       MATCH_ROOM,
       options('Đông-1'),
@@ -32,6 +34,7 @@ it('two SDK clients observe authoritative recall, bounds, attacks, retry and cle
   await expect.poll(() => a.state.phase).toBe('SCHOOL_SELECTION');
   for (const peer of [a, b]) {
     peer.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    peer.send('lobby-action', { action: 'branch', basicId: 'cai_bang_bong' });
     peer.send('lobby-action', { action: 'confirm' });
   }
   await expect.poll(() => a.state.phase).toBe('IN_GAME');

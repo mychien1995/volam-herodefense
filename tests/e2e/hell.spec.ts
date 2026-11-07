@@ -352,6 +352,15 @@ test('six clients fight Hell creeps with real rewards, contact effects, lava bou
             ['vo_dang', 'thien_son', 'thieu_lam', 'cai_bang'] as const
           )[i]!,
         });
+        b.send('lobby-action', {
+          action: 'branch',
+          basicId: [
+            'vo_dang_quyen',
+            'thien_son_phien',
+            'thieu_lam_quyen',
+            'cai_bang_bong',
+          ][i]!,
+        });
         b.send('lobby-action', { action: 'confirm' });
       }),
     ]);

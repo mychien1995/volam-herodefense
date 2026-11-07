@@ -117,6 +117,10 @@ The subsequent director instruction authorizes gameplay integration on `wip/m3d/
 ## Cổ Mộ dungeon card — 2026-11-01
 
 The Lý Mạc Sầu selector card reuses `assets/concepts/arenas/co-mo-phai/arena_empty_review_v02.png` byte-for-byte as `/assets/co_mo/arena_preview.png`. This is an original image_gen illustration with retained provenance/prompts and explicit preview approval in `assets/reviews/ly_mac_sau_v02/art_approval_v02.json`; preparation verifies that lock and the validator checks public-copy equality. Usage is a menu thumbnail, not playable-map artwork or a new art generation/approval. Runtime environment still uses the existing Tiled map, tiles and props.
+## Creep combat runtime reuse — 2026-11-06
+
+`apps/game-client/src/creep-combat-art.ts` reuses the original arena creep, forest, desert-arrow, beach and Hell PNG/JSON assets; no new bitmap or approved-byte replacement. Source provenance remains in their retained manifests. This adapter adds server-timed warnings, missiles and field composition for the authorized creep abilities. New compositions are runtime review candidates, not new director-approved artwork. Sources and inspected reference-path corrections: [CREEP_UPGRADE.md](../docs/CREEP_UPGRADE.md).
+
 ## Vương Trùng Dương
 
 The final boss runtime candidate uses two generated raster atlases with 48 character cels and 36 effect cels. [Production sources, exact prompts and hashes](source/bosses/vuong-trung-duong/provenance.json), [atlas origins and animation timing](exports/vuong-trung-duong/animation.json), and [Phaser review evidence](../docs/VUONG_TRUNG_DUONG_RUNTIME.md). The three concept v01 images are approved inputs. Runtime review is pending.

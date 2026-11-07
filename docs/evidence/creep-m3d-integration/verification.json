@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "date": "2026-11-06",
+  "integration": {
+    "target": "milestone/m3d",
+    "previousHead": "d54382a1d5dcdce7c99c58e402311dff61f4b31c",
+    "approvedRuntimeCommit": "1f5b9e7727d07c1afd805dc43afde5b773df272a",
+    "method": "fast-forward",
+    "runtimeCommits": 6,
+    "committedProtocol": 33,
+    "runtimeTreeUnchanged": true,
+    "directorApprovedRuntimeComposition": true
+  },
+  "validation": {
+    "checkout": "D:/Projects/volam-hero-defense",
+    "scope": "Primary checkout including its separately retained, uncommitted Vuong WIP; WIP is not part of approved creep history.",
+    "localWipProtocol": 34,
+    "focusedTests": {
+      "tests": 35,
+      "files": 8,
+      "status": "PASS"
+    },
+    "command": "pnpm check:final --config playwright.creep-upgrade.config.ts tests/e2e/creep-upgrade.spec.ts tests/e2e/creep-feedback-r4.spec.ts tests/e2e/creep-preview.spec.ts",
+    "session": "creep-m3d-integration-final",
+    "runId": "1eed6b25-f2ad-4baa-9d82-ddffeab5ec7c",
+    "pipeline": "docs/evidence/sessions/creep-m3d-integration-final/check-workflow/final-timings.json",
+    "totalSeconds": 711.11,
+    "browserSeconds": 396.3,
+    "unitIntegration": {
+      "tests": 871,
+      "files": 86,
+      "failed": 0
+    },
+    "workflowChecks": 18,
+    "assetValidators": 21,
+    "browserCases": 3,
+    "previewProfiles": 49,
+    "purpleWarningViolations": 0,
+    "casterBurstViolations": 0,
+    "mainProfiles": 44,
+    "players": 6,
+    "browserClients": 2,
+    "sdkClients": 4,
+    "clientErrors": []
+  },
+  "preservation": {
+    "initialWipStash": "8d95a8c0f1ca35c66dc98cc70509d2fa0dbed44f",
+    "reconciledWipStash": "a7c595b7bed7436b9224337e45180275b4592a57",
+    "untrackedOriginalFiles": 49,
+    "untrackedHashesUnchanged": true,
+    "historicalEvidenceFilesRestored": 12,
+    "originalIndexEmpty": true
+  },
+  "metadataCheck": {
+    "status": "PASS",
+    "provenanceSources": 6
+  },
+  "screenshotsInspected": [
+    "preview/preview-forest.png",
+    "arena/arena-six-player.png"
+  ],
+  "review": {
+    "url": "http://127.0.0.1:5627/?creepPreview=1",
+    "protocol": 33,
+    "runId": "creep-feedback-r5-review-p33-20261106"
+  },
+  "recordings": false,
+  "pushed": false
+}

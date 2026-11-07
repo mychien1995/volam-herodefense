@@ -1,3 +1,11 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Production dùng đường EXP80+40L, ngân sách thưởng theo đợt, scaling phòng, Long Châu cộng tuyến tính và hệ số phó bản theo thời gian. Các giá trị là tuning chiến dịch v1 đã được phép triển khai; mốc level/vàng là mục tiêu playtest, không phải kết quả một trận60 phút đã đo. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
+## Fixed branch progression — 2026-11-04
+
+The rank cap is four for all five active skills. The fourth ultimate rank uses the existing per-rank progression for its school and opens at level 24. Characters can spend 20 skill points and reserve up to 10 future stat points. Earlier mixed-build and automatic surplus measurements below describe the historical rules.
+
 # Balancing Plan v1.0 — hard but fair
 
 ## M3D director-reviewed playtest tuning — 2026-11-03
@@ -141,3 +149,13 @@ Supersedes corresponding v01values: Mai quick tug≈0.15s,5s Shift lock and0.8s 
 ## Latest boss playtest feedback — 2026-11-03 (protocol 29)
 
 Nam Đế always releases five small fingers on a separate 90-tick repeat channel, including during main skills. Mục Hạ failure is now one arena-wide 80-base explosion followed by termination; no-guess timeout is 5 seconds after reveal. These user-requested changes supersede random1–5 and repeated clone explosions. Damage remains trial. Re-run the fixed-seed exposure probe matrix; bots do not model human dodging/clone guesses, so it cannot establish final balance. Results: `docs/evidence/wave-boss-feedback-v03-runtime/`.
+## Creep upgrade trial — 2026-11-06
+
+All 49 profiles, damage ratios, cadences, windups, DOT limits and signature geometry live in validated `game-data/creep-abilities.ts`. Production invasions stream for 60 seconds at 0.5 creeps/second/gate before existing player scaling; 2/3/4 gates produce solo 60/90/120, six-player 240/360/480. Per-creep XP/gold remain unchanged, so increased spawn volume also increases available rewards and must be assessed in playtest. No final numeric balance approval is claimed. Fixed-seed exposure and dense-stream measurements: `tools/creep-upgrade-balance.ts`, [CREEP_UPGRADE.md](docs/CREEP_UPGRADE.md).
+
+## Director creep feedback r2 — 2026-11-06
+
+North/south gates now require a clear footprint-wide corridor toward the statue, not merely an empty spawn point. Forward smash/slash/claw specials start at their caster and damage a forward capsule; heavy smash geometry increases 50%, other spreading skill radius/width and pattern extent double. Archer basic/special shot range is reduced 15%; melee basic reach doubles. Trúc Xà is fully ranged with poison+slow, Độc Chu keeps melee and web has a 25% one-second root, Sơn Viên stomps with 0.8s stun, Trúc Lâm Kiếm Khách gains 25% chance to reflect 50% of actual direct damage (no recursion), Mộc Linh becomes ranged. Sa Xà becomes ranged with slow; Xác Ướp basic cooldown is 36 ticks and has 25% root; Cự Nhân Sa Thạch basic punch stuns in AoE. Hải Xà becomes ranged and Độc thủy slows. Dung bạo radius is 144 (previously 72). Root blocks movement/dash/blink, permits attacks/casting, and respects expiry/control resistance. Numeric proc chances and durations are trial defaults. Prior r1 verification reports describe the old tuning; r2 evidence is stored separately.
+## Creep feedback r3 tuning — 2026-11-06
+
+Director approved larger frontal damage for Hoành trảm; trial coefficient2.4× (previous1.5×),192 reach and180° sector. Thổ Phỉ's target burst radius64 and Tà Tăng's target drain radius40 retain1.5× damage; drain retains40% actual-loss healing. Cương Thi actively lobs the retained88-radius/3-second poison field on a210-tick cooldown instead of leaving it only on death. Khô Lâu Kiếm Sĩ, Mông Cổ infantry and Ác Khuyển lose signatures. These targeted overrides do not retune per-creep XP/gold, stream density or school/item mechanics. Numerical exposure results are recorded separately in `docs/CREEP_FEEDBACK_R3.md`; no final difficulty claim follows from static bots.

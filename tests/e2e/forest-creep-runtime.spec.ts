@@ -55,6 +55,10 @@ test('controlled server forest types reach the normal renderer; event dedup and 
       ...bots.map(async (peer) => {
         await expect.poll(() => peer.state.phase).toBe('SCHOOL_SELECTION');
         peer.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+        peer.send('lobby-action', {
+          action: 'branch',
+          basicId: 'cai_bang_bong',
+        });
         peer.send('lobby-action', { action: 'confirm' });
       }),
     ]);

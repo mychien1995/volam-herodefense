@@ -7,7 +7,9 @@ import type {
 } from './types.js';
 import { cancelOwnedEffects, hasStatus, statusValue } from './status.js';
 import { characterStats, gainExperience } from './progression.js';
+import { awardCampaignBoss, grantFarmReward } from './campaign.js';
 import { direction, distance, segmentRect } from './geometry.js';
+import { recordsCraftDamage } from './economy.js';
 import { comboHit } from './combos.js';
 import { ownerProtection } from './protection.js';
 import { CHU_BOSS_ID } from './chu-types.js';
@@ -31,6 +33,7 @@ export function hurt(
     fy?: number;
     armorPenetration?: number | undefined;
     slowedBonus?: number | undefined;
+    lifesteal?: { fraction: number; used: boolean } | undefined;
     reactive?: boolean | undefined;
     preserveFraction?: boolean | undefined;
     directHp?: boolean;
@@ -50,6 +53,25 @@ export function hurt(
   )
     return false;
   if (target.namDeLocked) return false;
+  const campaignAttacker = world.creeps.get(sourceId);
+  if (
+    config.campaign?.bosses[sourceId] &&
+    world.heroes.has(target.id) &&
+    !snapshot?.directHp &&
+    !snapshot?.reactive
+  )
+    raw *=
+      1 +
+      config.campaign.damagePerPlayer *
+        ((campaignAttacker?.campaignPlayers ?? 1) - 1);
+  raw = creepGuardDamage(
+    world,
+    target,
+    sourceId,
+    raw,
+    config,
+    snapshot?.periodic,
+  );
   if (world.creeps.get(target.id)?.rescueTargetId === sourceId) return false;
   if (!snapshot?.unavoidableHpLoss && ownerProtection(world, target))
     return false;
@@ -209,6 +231,20 @@ export function hurt(
   let damage = snapshot?.preserveFraction
     ? Math.max(0, adjusted)
     : Math.max(1, Math.round(adjusted));
+  const craftedDefender = world.heroes.get(target.id);
+  const reflectAttacker = world.creeps.get(sourceId);
+  const reflectChance = config.economy?.craftedCombat.reflectChance ?? 0;
+  const reflected =
+    craftedDefender?.inventory?.crafted?.armor === 'reflect' &&
+    reflectAttacker &&
+    !snapshot?.reactive &&
+    !snapshot?.resolvedReflection &&
+    !snapshot?.periodic &&
+    !snapshot?.directHp &&
+    !snapshot?.unavoidableHpLoss &&
+    world.random() < reflectChance
+      ? damage
+      : 0;
   const mitigation = snapshot?.unavoidableHpLoss
     ? 0
     : Math.min(
@@ -245,7 +281,8 @@ export function hurt(
         stage: 'mitigate',
       });
   }
-  const hero = world.heroes.get(target.id);
+  if (reflected) damage *= 0.5;
+  const hero = craftedDefender;
   // Strongest shield only; no additive absorption or duplicate resource spend.
   const shield = (snapshot?.unavoidableHpLoss ? [] : (hero?.statuses ?? []))
     .filter((s) => s.kind === 'mana_shield' && s.until > world.tick)
@@ -286,6 +323,18 @@ export function hurt(
   if (enemy && world.vuong?.bossId === enemy.id)
     damage = world.vuong.limitIncoming(enemy, damage);
   target.hp = Math.max(0, target.hp - damage);
+  reflectCreepDamage(
+    world,
+    target,
+    sourceId,
+    beforeHp - target.hp,
+    config,
+    !!(
+      snapshot?.reactive ||
+      snapshot?.periodic ||
+      snapshot?.resolvedReflection
+    ),
+  );
   // Fractional five-percent hits must not leave a floating-point sliver after hit20.
   if (testBossHit && target.hp <= Number.EPSILON * target.maxHp * 32)
     target.hp = 0;
@@ -309,7 +358,16 @@ export function hurt(
     });
   }
   target.hurtUntil = world.tick + 6;
-  if (enemy) enemy.hits[sourceId] = world.tick;
+  if (enemy) {
+    enemy.hits[sourceId] = world.tick;
+    if (
+      target.hp < beforeHp &&
+      world.heroes.has(sourceId) &&
+      (recordsCraftDamage(config, enemy.id) ||
+        !!config.campaign?.bosses[enemy.id])
+    )
+      (enemy.damagedBy ??= new Set()).add(sourceId);
+  }
   const heading = world.heroes.get(sourceId) ?? world.creeps.get(sourceId);
   emit(world, {
     kind: 'hit',
@@ -367,9 +425,33 @@ export function hurt(
     });
     if (enemy) {
       enemy.respawnAt = world.tick + config.creep.respawnTicks;
-      if (!enemy.bossEncounter) reward(world, enemy, config);
+      if (!awardCampaignBoss(world, config, enemy) && !enemy.bossEncounter)
+        reward(world, enemy, config);
     }
   }
+  const leech = snapshot?.lifesteal;
+  const owner = leech ? world.heroes.get(sourceId) : undefined;
+  if (
+    enemy &&
+    target.hp < beforeHp &&
+    leech &&
+    !leech.used &&
+    owner &&
+    owner.hp > 0
+  ) {
+    leech.used = true;
+    owner.hp = Math.min(
+      owner.maxHp,
+      owner.hp + raw * (critical ? stats.critMultiplier : 1) * leech.fraction,
+    );
+  }
+  if (reflected && reflectAttacker)
+    hurt(world, reflectAttacker, target.id, 'gear_reflect', reflected, config, {
+      critChance: 0,
+      critMultiplier: 1,
+      reactive: true,
+      preserveFraction: true,
+    });
   if (counter && counter.evade === false) retaliate();
   if (
     guardCounter &&
@@ -470,6 +552,7 @@ export function offensiveStats(
   };
 }
 function reward(world: World, creep: Creep, config: SimulationConfig): void {
+  if (config.campaign && (creep.controlled || creep.summonedBy)) return;
   const stats = creep.stats ?? config.creep;
   const eligible = [...world.heroes.values()]
     .filter(
@@ -480,6 +563,16 @@ function reward(world: World, creep: Creep, config: SimulationConfig): void {
     )
     .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
   eligible.forEach((hero, i) => {
+    if (config.campaign) {
+      grantFarmReward(
+        hero,
+        stats.xp / eligible.length,
+        stats.gold / eligible.length,
+        config,
+        world.campaign?.chapter ?? 0,
+      );
+      return;
+    }
     gainExperience(
       hero,
       Math.floor(stats.xp / eligible.length) +
@@ -491,3 +584,4 @@ function reward(world: World, creep: Creep, config: SimulationConfig): void {
       (i < stats.gold % eligible.length ? 1 : 0);
   });
 }
+import { creepGuardDamage, reflectCreepDamage } from './creep-abilities.js';

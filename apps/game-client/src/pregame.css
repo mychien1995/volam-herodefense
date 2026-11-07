@@ -44,6 +44,21 @@
   font-size: 20px;
   min-width: 0;
 }
+.pre-gates {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 12px 0;
+}
+#pregame .pre-gates select {
+  background: #241a18;
+  color: #ffe5ad;
+  border: 2px solid #ac8e5c;
+  padding: 10px;
+  font: inherit;
+}
 .pre-window {
   width: min(930px, 100%);
   padding: 28px 38px 20px;
@@ -480,6 +495,11 @@
     padding: 6px 14px;
     font-size: 14px;
   }
+}
+
+.pre-branches button[aria-pressed='true'] {
+  outline: 2px solid #e6ca79;
+  outline-offset: 2px;
 }
 
 /* Current approved gameplay sprites, matching the in-game school identity. */

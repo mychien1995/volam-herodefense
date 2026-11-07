@@ -15,4 +15,3 @@ Bộ ảnh concept dành cho duyệt tạo hình và hiệu ứng. [Thiết kế
 **Rà soát tĩnh** · Đã xem cả ba ảnh ở kích thước gốc. Đã sửa riêng nhân vật ở ô Ngũ Hành thành đạo bào và kiếm đúng phase 1. Phase 2 có bảy điểm Bắc Đẩu tính cả mắt trận hình thoi, sáu vòng nhạc, kiếm khí rơi dạng lưỡi thẳng và không có sét phân nhánh. Số kiếm Huyền Vũ trong hình dùng để minh họa.
 
 **Trạng thái** · Director duyệt cả ba ảnh concept v01 ngày 2026-11-05 với xác nhận “Tôi duyệt”. Các tấm ghép có nền và dùng để tham chiếu khi vẽ sprite cùng VFX rời. Duyệt art trong game thực hiện sau khi xem bản chạy thật. [Prompt sản xuất sprite và tích hợp Phaser](../../../../docs/INTEGRATE_VUONG_TRUNG_DUONG_PROMPT.md)
-

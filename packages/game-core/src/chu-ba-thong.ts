@@ -1,3 +1,4 @@
+import { grantCraftMaterial } from './economy.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import type {
   ChuDefinition,
@@ -167,7 +168,7 @@ function begin(
       : 'cast';
   b.actionUntil = s.until;
   signal(w, phase, b, 'warning');
-  announceBossSkill(w,b.id,phase);
+  announceBossSkill(w, b.id, phase);
   if (phase === 'drink') {
     for (const [i, h] of alive(w).entries()) {
       const p = {
@@ -243,6 +244,7 @@ function death(w: World, c: SimulationConfig): void {
     .filter((h) => Object.hasOwn(b.hits, h.id))
     .sort((a, z) => a.id.localeCompare(z.id));
   eligible.forEach((h, i) => {
+      if (c.campaign) return;
     gainExperience(
       h,
       Math.floor(d.xp / eligible.length) + (i < d.xp % eligible.length ? 1 : 0),
@@ -252,6 +254,11 @@ function death(w: World, c: SimulationConfig): void {
       Math.floor(d.gold / eligible.length) +
       (i < d.gold % eligible.length ? 1 : 0);
   });
+  if (c.personalCraftLoot) {
+    s.kill++;
+    grantCraftMaterial(w, c, b, 'hat');
+    return;
+  }
   const item = d.loot[Math.floor(w.random() * d.loot.length)]!;
   const loot: ChuLoot = {
     id: ++s.kill,

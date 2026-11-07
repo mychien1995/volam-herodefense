@@ -37,6 +37,7 @@ async function start(a: SDKRoom, b: SDKRoom) {
   await expect.poll(() => a.state.phase).toBe('SCHOOL_SELECTION');
   for (const c of [a, b]) {
     c.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    c.send('lobby-action', { action: 'branch', basicId: 'cai_bang_bong' });
     c.send('lobby-action', { action: 'confirm' });
   }
   await expect.poll(() => projection(a)?.phase).toBe('enter');
@@ -159,6 +160,8 @@ it('A through SDK damages/destructs pillars; disconnect and dispose clear owned 
   h.y = p.y;
   h.fx = 1;
   h.fy = 0;
+  // Let the SDK attacks exercise pillar destruction while other pillars fire.
+  h.invulnerable = true;
   boss.x = 100;
   boss.y = 616;
   const gold = h.gold;

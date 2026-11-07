@@ -1,3 +1,4 @@
+import { m1Config } from '@volam/game-data';
 import { expect, type Page } from '@playwright/test';
 export async function joinWaiting(
   page: Page,
@@ -75,15 +76,35 @@ export async function startTogether(
     await expect(page.locator('#pregame .pre-title')).toHaveText(
       'Chọn môn phái',
     );
+    const selection = ids[i] ?? 'cai_bang';
+    const profile = m1Config.progression!;
+    const school = profile.defaultBranches?.[selection]?.schoolId ?? selection;
     await expect(async () => {
-      const choice = page.locator(
-        `#pregame button[data-school=${ids[i] ?? 'cai_bang'}]`,
-      );
+      const choice = page.locator(`#pregame button[data-school=${school}]`);
       await choice.click();
       await expect(choice).toHaveAttribute('aria-pressed', 'true', {
         timeout: 1000,
       });
     }).toPass({ timeout, intervals: [100, 250] });
+    const needsBranch = await page.evaluate(
+      () => (window as any).__VOLAM__.snapshot().state.requiresBranch,
+    );
+    if (needsBranch) {
+      const branchId = profile.defaultBranches?.[selection]
+        ? selection
+        : profile.schools[school]!.basicIds[0]!;
+      const branch = page.locator(
+        '#pregame button[data-branch=' + branchId + ']',
+      );
+      await expect(async () => {
+        if ((await branch.getAttribute('aria-pressed')) === 'true') return;
+        await branch.scrollIntoViewIfNeeded({ timeout: 5000 });
+        await branch.click({ timeout: 5000 });
+        await expect(branch).toHaveAttribute('aria-pressed', 'true', {
+          timeout: 1000,
+        });
+      }).toPass({ timeout, intervals: [100, 250] });
+    }
     // A roster patch can replace the button between pointer-down and click.
     // Retry the UI action only while the server has not acknowledged this peer.
     await expect(async () => {

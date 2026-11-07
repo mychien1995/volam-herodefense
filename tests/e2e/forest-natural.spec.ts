@@ -335,6 +335,10 @@ for (const count of [2, 6])
         ...peers.map(async ({ room: p }) => {
           await expect.poll(() => p.state.phase).toBe('SCHOOL_SELECTION');
           p.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+          p.send('lobby-action', {
+            action: 'branch',
+            basicId: 'cai_bang_bong',
+          });
           p.send('lobby-action', { action: 'confirm' });
         }),
       ]);
@@ -605,6 +609,8 @@ for (const count of [2, 6])
         'Chọn môn phái',
       );
       await normal.locator('#pregame button[data-school=cai_bang]').click();
+      const branch = normal.locator('[data-branch=cai_bang_bong]');
+      if (await branch.count()) await branch.click();
       await normal
         .getByRole('button', { name: 'Xác nhận', exact: true })
         .click();

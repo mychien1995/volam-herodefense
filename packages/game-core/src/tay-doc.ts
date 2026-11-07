@@ -1,3 +1,4 @@
+import { waveBossFarewell } from './boss-banter.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { addCreep } from './simulation.js';
 import { hurt, emit } from './combat.js';
@@ -52,6 +53,7 @@ export class TayDocEncounter {
   private rotation = 0;
   private cooldowns = new Map<TayDocAbility, number>();
   private deathAt = 0;
+  private corpseUntil = 0;
   constructor(readonly definition: TayDocDefinition) {}
   spawn(world: World, config: SimulationConfig): boolean {
     if (this.phase !== 'waiting') return false;
@@ -532,9 +534,13 @@ export class TayDocEncounter {
         this.phase = 'dead';
         this.deathAt = world.tick;
         this.clear(world);
-        if (b) b.respawnAt = Infinity;
+        if (b) {
+          b.respawnAt = Infinity;
+          this.corpseUntil = waveBossFarewell(world, config, b);
+        }
       }
-      if (world.tick - this.deathAt > 30) world.creeps.delete(this.bossId);
+      if (world.tick >= Math.max(this.corpseUntil, this.deathAt + 31))
+        world.creeps.delete(this.bossId);
       return;
     }
     this.impacts.splice(
@@ -912,6 +918,7 @@ export class TayDocGate {
     encounter: TayDocEncounter,
   ) {
     if (this.spawned || !this.dongTaDefeated || wave < 10) return;
+    if ([...(world.invasionPending ?? [])].some((w) => w <= 10)) return;
     if (
       [...world.creeps.values()].some(
         (c) => c.hp > 0 && c.invasion && c.invasion.wave <= 10,

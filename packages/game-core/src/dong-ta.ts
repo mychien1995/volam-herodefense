@@ -1,3 +1,4 @@
+import { waveBossFarewell } from './boss-banter.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 import { emit, hurt } from './combat.js';
 import { addCreep } from './simulation.js';
@@ -46,6 +47,7 @@ export class DongTaEncounter {
   private serial = 0;
   private normal = 0;
   private paid = false;
+  private corpseUntil = 0;
   constructor(
     readonly definition: DongDefinition,
     private hooks: DongHooks,
@@ -55,11 +57,14 @@ export class DongTaEncounter {
   }
 
   beforeStep(world: World, config: SimulationConfig, wave: number): void {
+    if (this.phase === 'cleared' && world.tick + 1 >= this.corpseUntil)
+      world.creeps.delete(bossId);
     const t = world.tick + 1,
       d = this.definition;
     if (
       this.phase === 'waiting' &&
       wave >= d.gateWave &&
+      !world.invasionPending?.has(d.gateWave) &&
       ![...world.creeps.values()].some(
         (c) => c.invasion?.wave === d.gateWave && c.hp > 0,
       )
@@ -83,7 +88,12 @@ export class DongTaEncounter {
       boss.actionUntil = t + 1;
       if (a >= 1) this.startAttempt(world, config);
     }
-    if (this.phase === 'retry' && t >= this.phaseUntil && world.heroes.size)
+    if (
+      !config.campaign &&
+      this.phase === 'retry' &&
+      t >= this.phaseUntil &&
+      world.heroes.size
+    )
       this.startAttempt(world, config);
   }
   private startAttempt(world: World, config: SimulationConfig): void {
@@ -103,6 +113,12 @@ export class DongTaEncounter {
       ['dan_chi_than_cong', 'lac_anh_kiem_phap', 'ngoc_tieu_hoi_phong'] as const
     ).entries())
       this.ready.set(id, world.tick + (3 + i * 3) * config.tickRate);
+  }
+  restartCampaign(world: World, config: SimulationConfig): void {
+    this.startAttempt(world, config);
+  }
+  suspendCampaign(world: World): void {
+    this.retry(world);
   }
   private spawn(
     world: World,
@@ -138,12 +154,12 @@ export class DongTaEncounter {
     });
     return actor;
   }
-  private cleanup(world: World): void {
+  private cleanup(world: World, keepCorpse = false): void {
     this.casts = [];
     this.effects = [];
     for (const id of actorIds) {
       cancelOwnedEffects(world, id);
-      world.creeps.delete(id);
+      if (!keepCorpse || id !== bossId) world.creeps.delete(id);
     }
     for (const h of world.heroes.values())
       h.statuses = (h.statuses ?? []).filter((s) => !isDongActor(s.sourceId));
@@ -156,7 +172,7 @@ export class DongTaEncounter {
       this.clear(world, config, boss);
       return;
     }
-    if (this.wiped(world)) {
+    if (!config.campaign && this.wiped(world)) {
       this.retry(world);
       return;
     }
@@ -218,7 +234,7 @@ export class DongTaEncounter {
       this.clear(world, config, boss);
       return;
     }
-    if (this.wiped(world)) {
+    if (!config.campaign && this.wiped(world)) {
       this.retry(world);
       return;
     }
@@ -257,6 +273,7 @@ export class DongTaEncounter {
         .filter((h) => boss?.hits[h.id] !== undefined)
         .sort((a, b) => a.id.localeCompare(b.id));
       eligible.forEach((h, i) => {
+        if (config.campaign) return;
         gainExperience(
           h,
           Math.floor(this.definition.xp / eligible.length) +
@@ -270,7 +287,10 @@ export class DongTaEncounter {
     }
     this.phase = 'cleared';
     this.phaseUntil = 0;
-    this.cleanup(world);
+    this.corpseUntil = boss
+      ? waveBossFarewell(world, config, boss)
+      : world.tick;
+    this.cleanup(world, this.corpseUntil > world.tick);
     this.hooks.lock(false);
     emit(world, {
       kind: 'effect',

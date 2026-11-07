@@ -1,3 +1,17 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+CampaignDefinition được schema-validate trong game-data; game-core giữ ledger first-clear, fractional farm rewards và BossRetries theo encounter generation. Protocol35 truyền projection chiến dịch trong MerchantInventoryState.campaign để tránh vượt giới hạn63 field của player schema; client chỉ gửi vote/call intentions. Các override backend tương ứng bên dưới là lịch sử. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
+## Chế tạo — protocol 31
+
+Boss dungeon ghi nhận mất HP thật theo từng người và cấp vật liệu theo instance khi kết thúc. Merchant nhận ý định ghép theo ô, nhánh và revision. Bước trừ vàng, tiêu hao vật liệu và cấp thành phẩm diễn ra trong một giao dịch. Trạng thái trang bị ghép, số nguyên liệu và hồi chiêu Z đến client qua Inventory State.
+
+## Fixed builds and dialogue — protocol 30
+
+Lobby players synchronize the selected branch before confirmation. The match schema retains separate T skill and cooldown fields. Core progression accounts for the fixed slot ranks once, maps them to the current stance and projects only those skills in the HUD. The existing revision and input sequence guard slot upgrades and stance changes. The five synchronized slots and 20-point budget are derived from authoritative runtime data. Levels 21–30 accrue reserved points without applying stat bonuses.
+
+Boss chatter uses its own seeded deck per actor and instance. Death transitions publish zone-scoped farewell events. Phaser presents those events, the per-client statue introduction and a cosmetic effect on a synchronized level increase.
+
 ## Combined M3D feedback / economy / Hell — protocol21 — 2026-11-03
 
 Protocol21 combines feedback20's dash,party/life/spectator/pause/interact projections with the milestone19 merchant transactions and nested inventory/potion state. Reject old versions; no new client-supplied position, damage, price or item authority. Core remains Phaser/DOM/Colyseus-independent. One internal per-hero finisher input can await its real predecessor projectile without new network payloads; lifecycle cancellation clears it.
@@ -334,3 +348,11 @@ Mục Hạ Vô Nhân keeps its approved split and five pair swaps. At reveal, pl
 Tiểu Nhất Dương Chỉ always releases five straight golden projectiles, spaced 0.16 seconds, re-aiming at the selected player's current position at each release. Each shot flies straight afterward. Its independent server channel can run with all main skills, QTE and movement without replacing their cast or clocks. Trial repeat interval is 90 ticks / 3 seconds, first windup remains 17 ticks; repeated starts cannot duplicate an active burst. Death, no living players, wipe and encounter cleanup cancel pending shots. The main special animation retains priority while concurrent native gold projectiles render normally.
 
 Approved V01/V02 PNGs, JSONs and preview source remain byte-exact. This update changes runtime behavior and text, not the frozen preview. The common arenas, rewards, dungeon life ledgers, controls and separate inventory-v2 scope remain as in V02. Matching protocol 29 services and a new room are required. Current implementation/validation: `docs/WAVE_BOSS_FEEDBACK_V03_RUNTIME.md`.
+## Creep upgrade — protocol 32, 2026-11-06
+
+Validated game-data profiles feed an optional engine-independent `SimulationConfig.creepCombat`; MatchRoom enables it for every live zone. Pure-core runtime owns attacks and hazards; existing zone-filtered BossEffectState carries public geometry/timestamps to a raster-only Phaser adapter. Room creation validates immutable 2/3/4 gates. InvasionDirector owns tick-based stream schedules and player snapshots, and explicit pending-wave state prevents premature chapter gates. DEV test behavior is server-environment-only. See [CREEP_UPGRADE.md](docs/CREEP_UPGRADE.md).
+## Development creep preview — 2026-11-06
+
+Protocol33 carries a strict creator preview flag, strict host-only action messages and `DefenseState.creepPreview` projection. `apps/game-server/src/creep-preview.ts` owns sandbox selection/cleanup/options; it uses the existing core stepping and effect handlers, with no client-authoritative hits or production balance changes. The in-viewport `creep-preview.ts` controller and preview-only retained-art adapter reuse the main Phaser scene. Development `VOLAM_DEV_CREEP_TEST=1` is required; production rejects preview creation. See `docs/CREEP_PREVIEW.md`.
+
+Creep feedback r3 adds validated sector/ground-lob/presentation fields to the independent combat catalogue. Core owns captured geometry, swept terrain landing and damage windows; Phaser owns raster selection/anchors and the debug-only read-only postrender capture hook. Network schema remains protocol33. See `docs/CREEP_FEEDBACK_R3.md`.

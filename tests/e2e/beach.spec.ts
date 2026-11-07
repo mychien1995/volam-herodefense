@@ -134,7 +134,10 @@ async function failure(p: Page, name: string, errors: string[]) {
       {
         view: await view(p).catch(() => null),
         snapshot: await read(p).catch(() => null),
-        pregame: await p.locator('#pregame').innerText().catch(() => null),
+        pregame: await p
+          .locator('#pregame')
+          .innerText()
+          .catch(() => null),
         errors,
       },
       null,
@@ -220,7 +223,9 @@ test('two clients observe all Beach frames and phases, exact pivots, timings and
             expect(actor.x - 72).toBeGreaterThanOrEqual(v.camera.x);
             expect(actor.x + 72).toBeLessThanOrEqual(v.camera.x + canvas.width);
             expect(actor.y - 106).toBeGreaterThanOrEqual(v.camera.y);
-            expect(actor.y + 22).toBeLessThanOrEqual(v.camera.y + canvas.height);
+            expect(actor.y + 22).toBeLessThanOrEqual(
+              v.camera.y + canvas.height,
+            );
             expect(new Set(v.observedCreepFrames[key])).toEqual(
               new Set(tag!.frames),
             );
@@ -328,6 +333,15 @@ test('six clients fight Beach creeps with real rewards, contact effects, shoreli
           schoolId: (
             ['vo_dang', 'thien_son', 'thieu_lam', 'cai_bang'] as const
           )[i]!,
+        });
+        b.send('lobby-action', {
+          action: 'branch',
+          basicId: [
+            'vo_dang_quyen',
+            'thien_son_phien',
+            'thieu_lam_quyen',
+            'cai_bang_bong',
+          ][i]!,
         });
         b.send('lobby-action', { action: 'confirm' });
       }),
@@ -458,8 +472,14 @@ test('six clients fight Beach creeps with real rewards, contact effects, shoreli
     const departingId = departing.sessionId;
     await departing.leave();
     for (const p of pages) {
-      await expect.poll(async () => (await read(p)).state.players[departingId]).toBeUndefined();
-      await expect.poll(async () => (await view(p)).actors.some((o) => o.id === departingId)).toBe(false);
+      await expect
+        .poll(async () => (await read(p)).state.players[departingId])
+        .toBeUndefined();
+      await expect
+        .poll(async () =>
+          (await view(p)).actors.some((o) => o.id === departingId),
+        )
+        .toBe(false);
     }
     await moveTo(a, 640, 864);
     await moveTo(a, 480, 864);

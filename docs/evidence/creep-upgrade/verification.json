@@ -1,0 +1,132 @@
+{
+  "status": "PASS",
+  "date": "2026-11-06",
+  "branch": "wip/m3d/creep-upgrade",
+  "base": "d54382a1",
+  "protocol": 32,
+  "catalogue": {
+    "regular": 44,
+    "bossSupport": 5,
+    "total": 49
+  },
+  "final": {
+    "command": "pnpm check:final --config playwright.creep-upgrade.config.ts",
+    "session": "creep-upgrade-final-fixed",
+    "seconds": 374.46,
+    "unitIntegrationTests": 821,
+    "workflowTests": 18,
+    "assetValidators": 20,
+    "browserCases": 1,
+    "players": 6,
+    "browserClients": 2,
+    "sdkClients": 4,
+    "regularIdentitiesObserved": 44,
+    "controlledCrowdActors": 120,
+    "clientErrors": []
+  },
+  "balance": {
+    "cases": 9216,
+    "seconds": 35.6402498,
+    "scope": "48 attacking profiles; 4 schools, both basics, levels 1/6/15/30, solo/six, 3 seeds, legal mixed four-slot builds; static exposure bots, no human dodge model",
+    "streams": [
+      {
+        "portals": 2,
+        "players": 1,
+        "count": 60,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.0006000000030326191,
+        "maxMs": 0.8945000000021537,
+        "xpPool": 3600,
+        "goldPool": 720
+      },
+      {
+        "portals": 2,
+        "players": 6,
+        "count": 240,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.0072000000000116415,
+        "maxMs": 0.04140000000188593,
+        "xpPool": 14400,
+        "goldPool": 2880
+      },
+      {
+        "portals": 3,
+        "players": 1,
+        "count": 90,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.0005000000019208528,
+        "maxMs": 0.0797999999995227,
+        "xpPool": 5400,
+        "goldPool": 1080
+      },
+      {
+        "portals": 3,
+        "players": 6,
+        "count": 360,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.01029999999809661,
+        "maxMs": 0.07430000000022119,
+        "xpPool": 21600,
+        "goldPool": 4320
+      },
+      {
+        "portals": 4,
+        "players": 1,
+        "count": 120,
+        "streaming": false,
+        "simulatedWorld": false,
+        "p95Ms": 0.0005000000019208528,
+        "maxMs": 0.027700000002369052,
+        "xpPool": 7200,
+        "goldPool": 1440
+      },
+      {
+        "portals": 4,
+        "players": 6,
+        "count": 480,
+        "streaming": false,
+        "simulatedWorld": true,
+        "p95Ms": 11.822299999999814,
+        "maxMs": 23.22490000000107,
+        "xpPool": 28800,
+        "goldPool": 5760
+      }
+    ]
+  },
+  "artwork": {
+    "newBitmaps": false,
+    "approvedRasterBytesChanged": false,
+    "runtimeCompositionDirectorApproval": "pending"
+  },
+  "review": {
+    "client": "http://127.0.0.1:5627/",
+    "server": "http://127.0.0.1:3427",
+    "runId": "creep-upgrade-review-p32-20261106",
+    "flag": "VOLAM_DEV_CREEP_TEST=1"
+  },
+  "sourceSha256": {
+    "packages/game-core/src/creep-abilities.ts": "f14e91c87a7af550ee9a73e7b108cd989dac17f94def0a1bbb64f5d6937c1e12",
+    "packages/game-core/src/creep-abilities-types.ts": "c630082d85a79388f913e9ebec710c14fe30ad08c4cf5ef48cf3b779cb2c57ce",
+    "packages/game-core/src/invasions.ts": "056ca35d84e0a62737cb6a1becf6590ef04d9f6aeeba14612bdbaa0fe6c59764",
+    "packages/game-data/src/creep-abilities.ts": "0e7d5a57f712d459a58a92291cadb3669bf3e45a6699260f704968cb6d087b62",
+    "packages/game-data/src/invasion.ts": "9ebf5f0916f228e4da821b2d7c2f483d6034bef7918479424a581314ad959bb5",
+    "packages/game-protocol/src/index.ts": "13c3b246de423331e1a8c17d0bd6a16a43d2a7272a42022f49820487423d3295",
+    "apps/game-server/src/rooms/MatchRoom.ts": "a073a7616c30076b3e85ca5885f179ed94c4e1454d32647ef193e38faf50c017",
+    "apps/game-client/src/creep-combat-art.ts": "8d240a343fd924b00907ec515c496d6fc13f204bd88c6b4dcd70bf3332f28728",
+    "tools/creep-upgrade-dev.ts": "31bb4de18a21d3945e812a02c1cb5e7e72e6bc1dffb0264ff94a8d6bc7e83879"
+  },
+  "limitations": [
+    "Static exposure bots do not model human dodging.",
+    "Dense 480-actor CPU timing excludes network/GPU load.",
+    "Per-creep XP/gold are retained; increased density accelerates progression.",
+    "Controlled browser fixtures are distinct from natural stream-duration assertions."
+  ],
+  "recordingsCreated": false,
+  "merged": false,
+  "pushed": false,
+  "deployed": false
+}

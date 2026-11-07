@@ -30,7 +30,7 @@ Bắt đầu thiết kế sprite và animation cho Tây Độc. Có thể design
 - Boss đi từ hướng tây vào. Không đánh statue, focus đánh người.
 
 Boss Tây Độc:
-- Đánh thường: 
+- Đánh thường:
 	+ Quẹt 1 được hình quạt bằng trượng trước mặt
 	+ Bắn độc khí bằng trượng
 - Animation Vạn Độc Phi Châm. Bắn 1 loạt kim châm độc hình cone trước mặt, có warning. Dính châm thì slow và độc đốt
@@ -38,7 +38,7 @@ Boss Tây Độc:
 - Animation Cổ Độc Khoan Tâm. Chỉ định 1 người choi bị trúng độc nổ. Người chơi này phải đi ra xa 1 góc, nếu không sau vài giây sẽ nổ độc lan ảnh hưởng đến người chơi khác trong phạm vi. Không cách nào chữa độc này khi bị chọn, auto mất 25% máu.
 - Animation Hỗn Thiên Phục Long Chấn. Triệu hồi 6 cọc rắn bắn độc. Bắn 1 tia độc một nhưng cọc rắn có thể quay đầu bắn các hướng liên tục. Cọc rắn cũng có máu, và phải phá cọc rắn
 - Phase 2: Dưới 50% máu thi triển cáp mô công, chuyển thành dạng bò như cóc, di chuyển nhanh hơn đánh đau hơn
-- Skill: 
+- Skill:
 	Bắn độc chưởng
 	Cáp mô chấn kích: Dậm lan lớn gây độc và stun
 	Ngũ độc thần chưởng: đứng 1 chỗ liên tục nhả độc 360 độ
@@ -57,12 +57,12 @@ Bắt đầu thiết kế sprite và animation cho Nam Đế. Có thể design s
 - Boss đi từ hướng nam vào. Không đánh statue, focus đánh người.
 
 Boss Nam Đế:
-- Đánh thường: 
+- Đánh thường:
 	+ Đánh chưởng kiểu shockwave thẳng trước mặt. Phạm vi lớn và xa, đủ để bắt tay dài
 	+ Phật Quang: Gây dmg lan xung quanh bằng ánh sáng phật pháp, đủ rộng để bao hết tay ngắn
 	+ Tiểu nhất dương chỉ: Bắn 1 tia chỉ nhỏ vào vị trí player ở xa nhất
 	+ Nam Đế di chuyển chậm, nhưng có tỉ lê random lướt đến ngay sau lưng player.
-	
+
 - Animation Nhất Dương Chỉ. Tụ chưởng ở ngón tay, bắn 1 chỉ xuyên màn hình, mặc định mất 90% máu nếu trúng. Có warning
 - Animation Liên Hoàn Nhất Dương Chỉ. Tụ chỉ ở ngón tay, bắn nhiều nhất dương chỉ random các hướng, ưu tiên hướng người chơi đang đứng. Thời gian lâu 1 chút.
 - Animation Đại Lý Phong Huyệt. Lao nhanh đến người chơi và điểm huyệt. Người chơi bị đứng yên, cần phải bấm theo các nút mũi tên trên màn hình để được giải. Có 10 nút, thời gian 5s, bấm sai 1 nút phản phệ mất 70% máu. Boss được hồi 10% máu. Trong lúc đứng yên không nhận dmg. Mechanism kiểu như audition.
@@ -83,10 +83,10 @@ Bắt đầu thiết kế sprite và animation cho Bắc Cái. Có thể design 
 - Bắc cái chuyển đổi linh hoạt giữa chưởng và gậy
 
 Boss Bắc Cái:
-- Đánh thường: 
+- Đánh thường:
 	+ Đả cẩu bổng pháp. Dùng gậy tre quét liên tục và lướt về phía trước
 	+ Hàng Long 18 Chưởng. Bắn đầu rồng từ tay
-	
+
 - Animation Đả Cẩu Bổng Kích. Chọc như chọc bi-a bắn 1 tia kình khí trên đường thẳng về phía trước. Tia kình khí rất dài. Warning ngắn
 - Animation Bổng Đả Ác Khuyển. Triệu hồi 4 con chó đen cắn người chơi, con chó có thể bị đánh mất máu và chết.
 - Animation Mục Hạ Vô Nhân. Phân thân ra làm 8 Hồng Thất Công đứng 8 góc. Hồng thất công xịn sẽ từ từ bay về 1 góc trong quá trình phân thân. Sau đấy tráo đổi liên tục 5 lần. Trong lúc tráo đổi không nhận dmg. Tráo đổi xong nếu người chơi đánh trúng chân thân thì các phân thân biến mất. Ngược lại đánh trúng phân thân gây nổ mất máu toàn bản đồ.

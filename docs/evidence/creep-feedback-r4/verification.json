@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "date": "2026-11-06",
+  "branch": "wip/m3d/creep-upgrade",
+  "command": "pnpm check:final --config playwright.creep-upgrade.config.ts tests/e2e/creep-feedback-r4.spec.ts tests/e2e/creep-preview.spec.ts",
+  "session": "creep-feedback-r4-final",
+  "runId": "77bc78b3-1f34-4f5c-9944-f342de849fdb",
+  "pipeline": "docs/evidence/sessions/creep-feedback-r4-final/check-workflow/final-timings.json",
+  "totalSeconds": 514.5,
+  "browserSeconds": 279.8,
+  "unitIntegrationFiles": {
+    "passed": 84,
+    "failed": 0,
+    "source": "current Vitest results cache; pipeline unit stage exit 0"
+  },
+  "assetValidators": 20,
+  "browser": {
+    "cases": 2,
+    "clientsPerCase": 2,
+    "previewProfiles": 49,
+    "purpleWarningViolations": 0,
+    "clientErrors": [],
+    "normalMatch": {
+      "caster": {
+        "x": 740,
+        "y": 740
+      },
+      "target": {
+        "x": 980,
+        "y": 740
+      },
+      "field": {
+        "x": 980,
+        "y": 740,
+        "radius": 88
+      },
+      "actualDamageAsserted": true,
+      "peerReplicationAsserted": true
+    }
+  },
+  "screenshotsInspected": [
+    "thi-doc-distant-target.png",
+    "preview/preview-forest.png",
+    "preview/preview-forward.png"
+  ],
+  "review": {
+    "client": "http://127.0.0.1:5627/",
+    "preview": "http://127.0.0.1:5627/?creepPreview=1",
+    "serverPort": 3427,
+    "protocol": 33,
+    "runId": "creep-feedback-r4-review-p33-20261106",
+    "healthVerified": true,
+    "clientHttp": 200,
+    "servedRendererPolicyVerified": true
+  },
+  "limitations": [
+    "Two-client normal match and all-profile preview scope; prior r3 six-peer stress evidence retained, not rerun.",
+    "No new raster artwork or director art approval.",
+    "No new difficulty/economy balance claim."
+  ],
+  "recordings": false
+}

@@ -30,6 +30,28 @@ Võ Đang Kiếm and Thiên Sơn Phiến: five skills each plus their basic atta
 
 Use `tests/renovation-navigation.test.ts`, `tests/bamboo-map.test.ts`, `scripts/verify-renovation-v2.py` and `pnpm check:final --config playwright.renovation-runtime.config.ts`. Evidence: `docs/evidence/renovation-v2/README.md`.
 
+## Campaign balance và thử lại boss — 2026-11-06
+
+Bổ sung acceptance cho đường EXP, budget thưởng2/4 cửa và phòng1/2/6, pearl once/dead-present ownership, sáu sprite lặp, floor theo thời gian, gate Kim→Vương, ba hồi sinh của cả chín boss, voteN1..6, timeout/decline/reconnect/refund và failed-music override. Kết quả thực tế nằm ở verification, không suy diễn từ spec. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
+## Nhạc nền trận đấu — 2026-11-05
+
+- Phòng chờ im lặng. Hai client vào trận phát nhạc, đến cuối bài tự lặp và khi rời phòng thì dừng, trở về đầu bài.
+
+## Chế tạo — 2026-11-05
+
+- Bốn boss hầm ngục cấp đúng nguyên liệu cho từng người đã đánh và còn trong instance. Replay, last hit, hỗ trợ và hành động roll cũ không cấp thêm.
+- Bốn ô và 12 nhánh dùng đúng cấp 5, một nguyên liệu và phí. Yêu cầu stale, thiếu nguyên liệu, nhánh sai hoặc ngoài arena bị từ chối nguyên tử.
+- Hai nhánh Cái Bang tải icon mới trong Phaser. Chế tạo từ nguyên liệu thật cập nhật túi đồ, ô Z và bản sao trạng thái ở client thứ hai.
+
+## Fixed branch and match story acceptance — 2026-11-04
+
+- Both branch choices are shown after school selection. Confirmation requires a matching branch, including for late joiners. The server rejects attempts to change it during a match.
+- The hotbar renders A, five skills, legal upgrade buttons, rank and cooldown. T is locked through level 5. Server tests cover all eight branches, replay rejection, gates through level 24 and the twenty-point cap.
+- F switches Thiếu Lâm Quyền Q/W/E and preserves each slot's learned rank. R/T and their cooldowns persist. A level gained from actual combat raises and removes the four-frame ring in Phaser.
+- Tượng Võ Thần introduces the stone above the actual statue at match entry. Seeded boss dialogue stays local to its instance. Wave boss death publishes one farewell and retains its corpse through the read window.
+
+
 ## Combined approved M3D integration acceptance — 2026-11-03
 
 Current acceptance includes real Q/W/E same-target success/miss/early-input/cancel/duplicate/cost across four facings; creep0.648 entry speed, one identity/wave and pack separation including Hell; private creeps/shared bosses;30s invitations; arena freeze/resume; per-attempt revival/reconnect/solo exit; actual r3 normal-zoom rendering; retained inventory/merchant purchases and potion1/2/modal ownership; Hell animation fallback and existing boss worlds remain independent. Protocol21 accepts the composed strict messages and rejects both old branch versions.
@@ -438,3 +460,35 @@ Approved V01/V02 PNGs, JSONs and preview source remain byte-exact. This update c
 
 - Server-gated test rooms give initial and late heroes level30/max own-school ranks; real repeated casts have zero skill cooldown. Missing flags and production rooms retain ordinary levels/cooldowns and reject test loadouts.
 - La Han left/right raster direction is correct; selected eight VFX retain native ratio, caster alignment, fixed earth origin, real projectile velocity and unchanged 10+1 / four-strike clocks. Audit actual pixels, then real Phaser casts in both horizontal directions and four facings for the eight revised skills, followed by six-client authoritative hit agreement. PNG evidence only. See docs/RENOVATION_V4_SKILL_REVIEW.md.
+
+## Creep upgrade acceptance — 2026-11-06
+
+- Catalogue preserves all 44 regular identities and five boss-support roles; each requested normal/signature/death behavior executes in authoritative core and is visible in Phaser.
+- Creator chooses 2/3/4 gates; invalid options are rejected and joining peers cannot change them. Gate footprints are walkable.
+- Normal waves start every 180 seconds, stream for exactly 60 seconds at a configurable rate, retain prior survivors and snapshot players/stats. Boss gates cannot clear before stream completion.
+- Test real non-homing projectile misses, terrain, front/rear attacks, multi-hit cadence, dash travel, DOT bounds, guard/counter, interrupt, death effects, cast budget, cleanup and normal-only statue pressure.
+- Observe all 44 regular identities in the normal Phaser renderer, six-player readability, two-client state, private-zone filtering and PNG evidence. No recordings.
+- Production ignores DEV creep-test settings. Matching protocol 32 is required. Detailed commands and evidence: [CREEP_UPGRADE.md](docs/CREEP_UPGRADE.md).
+
+### Director feedback r2
+
+- Every north/south spawn offset has a clear corridor to the statue. A real north invader must traverse the authoritative arena collision map and damage the statue.
+- Heavy smash extends 50% farther; forward smash/slash/claw specials originate at the caster and cannot hit behind it. Other spreading skill radii and pattern extents double. Archer shot range is 85% of the previous value; melee normal reach doubles.
+- Trúc Xà, Mộc Linh, Sa Xà and Hải Xà use ranged normals. Verify poison/slow, spider web root, ape stomp stun, swordmaster seeded passive reflection, faster mummy claws with root, sandstone giant AoE stun and the enlarged lava death explosion.
+- Root blocks walking, dash and blink while allowing normal attacks and nonmovement skills, expires correctly and respects control resistance. Reflection cannot recurse. Deterministic regression coverage: `tests/creep-feedback-r2.test.ts`; refreshed Phaser and balance evidence: `docs/evidence/creep-upgrade-r2/`.
+## Individual creep preview — 2026-11-06
+
+- Development-only creator flag selects an isolated preview room; production and ordinary rooms cannot acquire preview powers through messages. Only the confirmed host can select or configure it; replayed actions have no effect.
+- All49 current profiles render one at a time, using retained authored assets. Switching/reset clears old actors/projectiles/areas/actions and restores legal test positions. Canonical profile data and separate rooms remain untouched.
+- Observe real normal/signature/death effect frames, damage/statuses, keyboard controls and two-client replication. Basic-only, stationary, recovery, previous/next and viewport containment must work; no timed invasions enter this room. PNG evidence only, no final art approval implied. See `docs/CREEP_PREVIEW.md`.
+## Creep feedback r3 acceptance — 2026-11-06
+
+Require captured target-point Thổ burst/poison/water fields;180° frontal Hoành trảm hit/side/rear behavior in all four facings; actual Tà Tăng HP-loss healing; terrain-stopped poison lobs that do not land on crossing heroes; normal-only skeleton swordsman/Mông Cổ infantry/dog; torso-offset archer visuals without collision changes; and no generic crimson strips on all requested attacks/dashes. Observe actual released rasters, placement, facing, two-client state and the retained six-peer main-game profile. No video or inferred art approval. Tests/evidence: `docs/CREEP_FEEDBACK_R3.md`.
+
+## Creep feedback r4 acceptance — 2026-11-06
+
+All 49 creep profiles must have no visible generic purple windup circle/semicircle. Actual released burst/drain effects remain. A real invasion-type Cương Thi creates Thi độc directly at a distant target's captured feet; no caster-origin delivery projectile, no caster-foot pool, no damage before activation. Verify target damage, caster movement independence, dodge before activation, two-client normal-match replication and all 49 live preview observations. See `docs/CREEP_FEEDBACK_R4.md`.
+
+## Creep feedback r5 acceptance — 2026-11-06
+
+Sơn Tặc Đao must damage targets with its normal attack and never cast Hoành trảm; preview skill controls must be disabled for it. Observe all 49 profiles with no generic melee/line/dash/defensive caster contact bursts, and no instant self stomp/ring contact stamps. Real projectile/target/persistent/death effects remain. Preserve two-client state and six-peer dungeon/arena coverage. See `docs/CREEP_FEEDBACK_R5.md`.

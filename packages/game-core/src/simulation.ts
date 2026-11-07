@@ -1,3 +1,8 @@
+import {
+  stepEquipmentCombat,
+  useEquipmentSkill,
+  withBasicEquipment,
+} from './equipment-combat.js';
 import { stepBossBanter } from './boss-banter.js';
 import { advanceDragonDive } from './dragon-dive.js';
 import { dungeonWaypoint } from './dungeon-navigation.js';
@@ -230,6 +235,10 @@ function runCommand(
     return;
   }
   if (hero.namDeLocked || world.vuong?.locked(hero.id)) return;
+  if (command.kind === 'gear-skill') {
+    useEquipmentSkill(world, hero, config);
+    return;
+  }
   if (command.kind === 'dev-loadout') {
     if (hero.progression) return;
     if (
@@ -293,11 +302,18 @@ function runCommand(
             until: world.tick + ability.manualChain.idleTicks,
           };
       }
-      perform(world, hero, next.ability, config, 'attack', next.stage);
+      perform(
+        world,
+        hero,
+        withBasicEquipment(next.ability, hero, config),
+        config,
+        'attack',
+        next.stage,
+      );
     }
   }
   if (command.kind === 'cast') {
-    if (!Number.isInteger(command.slot) || command.slot < 0 || command.slot > 3)
+    if (!Number.isInteger(command.slot) || command.slot < 0 || command.slot > 4)
       return;
     if (
       hasStatus(hero, 'stun', world.tick) ||
@@ -306,6 +322,8 @@ function runCommand(
     )
       return;
     const ability = equippedAbility(hero, command.slot, config);
+    if (ability?.effect.mode === 'dash' && hasStatus(hero, 'root', world.tick))
+      return;
     if (ability && blink(world, hero, ability.id, config)) return;
     const togglingOff =
       ability?.effect.mode === 'mana_shield' &&
@@ -325,9 +343,6 @@ function runCommand(
             s.abilityId === ability.id &&
             s.until > world.tick,
         )) ||
-      !Number.isInteger(command.slot) ||
-      command.slot < 0 ||
-      command.slot > 3 ||
       world.tick < (hero.skillCooldowns[command.slot] ?? Infinity) ||
       world.tick < (hero.abilityCooldowns?.[ability.id] ?? 0) ||
       (!togglingOff && hero.mana < ability.manaCost)
@@ -433,6 +448,9 @@ function advanceProjectile(
     for (const enemy of victims) {
       if (shot.hitIds.includes(enemy.id)) continue;
       shot.hitIds.push(enemy.id);
+      const spreadKey = (shot.leg ?? 'outbound') + ':' + enemy.id;
+      const spread = shot.equipmentAttack?.spread;
+      if (spread?.hitTargets.has(spreadKey)) continue;
       const hit = hurt(
         world,
         enemy,
@@ -450,10 +468,26 @@ function advanceProjectile(
           fx: dir.x,
           fy: dir.y,
           slowedBonus: shot.effect.slowedBonus,
+          armorPenetration: shot.equipmentAttack?.penetration,
+          lifesteal: shot.equipmentAttack?.lifesteal,
           combo: shot.combo,
           comboTargets: shot.comboTargets,
         },
       );
+      if (hit) {
+        spread?.hitTargets.add(spreadKey);
+        if (shot.abilityId === 'gear_needle' && enemy.hp > 0) {
+          const target = world.creeps.get(enemy.id);
+          const tuning = config.economy?.craftedCombat;
+          if (target && tuning)
+            target.needlePoison = {
+              sourceId: shot.ownerId,
+              until: world.tick + tuning.needlePoisonSeconds * config.tickRate,
+              next: world.tick + config.tickRate,
+            };
+        }
+      }
+      if (shot.abilityId === 'gear_needle' && !hit) continue;
       if (hit && shot.refund && !shot.refund.used) {
         shot.refund.used = true;
         const hero = world.heroes.get(shot.ownerId);
@@ -557,6 +591,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   );
   world.tick++;
   world.events = [];
+  stepCreepHazards(world, config);
   world.bacCai?.prepare(world, config);
   expireGuardCounters(world, config);
   expireStatuses(world);
@@ -586,8 +621,8 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       (movement.x || movement.y) &&
       !hero.namDeLocked &&
       !world.vuong?.locked(hero.id) &&
-      !hasStatus(hero, 'root', world.tick) &&
       !hasStatus(hero, 'stun', world.tick) &&
+      !hasStatus(hero, 'root', world.tick) &&
       !hasStatus(hero, 'dash', world.tick) &&
       !(world.actions ?? []).some(
         (a) => a.ownerId === hero.id && a.effect.mode === 'projectile',
@@ -625,7 +660,9 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     );
     if (world.tick >= hero.actionUntil)
       hero.pose =
-        !hasStatus(hero, 'stun', world.tick) && (movement.x || movement.y)
+        !hasStatus(hero, 'stun', world.tick) &&
+        !hasStatus(hero, 'root', world.tick) &&
+        (movement.x || movement.y)
           ? 'walk'
           : 'idle';
   }
@@ -680,6 +717,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       vy: scheduled.dy * scheduled.ability.effect.speed,
       remaining: scheduled.ability.effect.range,
       rawDamage: scheduled.rawDamage,
+      equipmentAttack: scheduled.ability.equipmentAttack,
       ...(scheduled.critChance === undefined
         ? {}
         : {
@@ -701,6 +739,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   world.shots = world.shots.filter((item) => item.tick > world.tick);
   for (const shot of world.projectiles.values())
     advanceProjectile(world, shot, config);
+  stepEquipmentCombat(world, config);
   constrainChuTrap(world, config);
   stepBossEncounter(world, config);
   const creepStarts = config.dungeonAggro
@@ -784,6 +823,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       }
     }
     const objective = enemy.invasion ? world.statue : undefined;
+    if (stepCreepActor(world, enemy, hero, objective, config)) continue;
     const target = hero ??
       objective ?? {
         x: enemy.spawn.x,
@@ -903,9 +943,10 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     if (actor.hp <= 0) actor.pose = 'death';
     else if (world.tick < actor.hurtUntil) actor.pose = 'hurt';
   }
-  finishNamDeTick(world);
+  finishNamDeTick(world, config);
   world.bacCai?.step(world, config);
   world.vuong?.step(world, config);
   enforceConfinement(world, config, confinementStarts);
   stepBossBanter(world, config);
 }
+import { stepCreepActor, stepCreepHazards } from './creep-abilities.js';

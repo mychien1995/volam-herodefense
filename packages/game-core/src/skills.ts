@@ -110,7 +110,10 @@ function queueProjectiles(
   const refund = effect.manaRefund
     ? { amount: effect.manaRefund, used: false }
     : undefined;
-  for (let i = 0; i < effect.count; i++) {
+  const spread = ability.equipmentAttack?.spread;
+  for (let index = 0; index < effect.count; index++) {
+    // Give the central ray first contact if multiple rays overlap at launch.
+    const i = spread && index < 2 ? 1 - index : index;
     const angle = effect.radial
       ? (Math.PI * 2 * i) / effect.count
       : effect.spreadAngle && effect.count > 1
@@ -132,14 +135,14 @@ function queueProjectiles(
       dx: dx * Math.cos(angle) - dy * Math.sin(angle),
       dy: dx * Math.sin(angle) + dy * Math.cos(angle),
       rawDamage:
-        snapshot?.rawDamage ??
-        damageFor(
-          hero,
-          effect.damage,
-          config,
-          world.tick,
-          effect.attackPowerScale ?? 1,
-        ),
+        (snapshot?.rawDamage ??
+          damageFor(
+            hero,
+            effect.damage,
+            config,
+            world.tick,
+            effect.attackPowerScale ?? 1,
+          )) * (spread && i !== 1 ? spread.sideDamage : 1),
       ...crit,
       ...(refund ? { refund } : {}),
       ...(stage ? { stage } : {}),
@@ -238,7 +241,11 @@ function strikeArc(
             fx: heading.fx,
             fy: heading.fy,
             combo: ability.combo,
-            armorPenetration: effect.armorPenetration,
+            armorPenetration: Math.max(
+              effect.armorPenetration ?? 0,
+              ability.equipmentAttack?.penetration ?? 0,
+            ),
+            lifesteal: ability.equipmentAttack?.lifesteal,
             slowedBonus: effect.slowedBonus,
           },
         ) || hit;
@@ -341,6 +348,7 @@ export function perform(
   stage?: string,
 ): void {
   const original = ability.effect;
+  if (original.mode === 'dash' && hasStatus(hero, 'root', world.tick)) return;
   const ready =
     original.mode === 'multi_hit' &&
     original.comboBurstOnly &&
@@ -822,7 +830,12 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
   for (const action of world.actions ?? []) {
     if (action.until <= world.tick) continue;
     const hero = world.heroes.get(action.ownerId);
-    if (!hero || hero.hp <= 0 || hasStatus(hero, 'stun', world.tick)) {
+    if (
+      !hero ||
+      hero.hp <= 0 ||
+      hasStatus(hero, 'stun', world.tick) ||
+      (action.effect.mode === 'dash' && hasStatus(hero, 'root', world.tick))
+    ) {
       action.until = world.tick;
       world.shots = world.shots.filter(
         (s) =>

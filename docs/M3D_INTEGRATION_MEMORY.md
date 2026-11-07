@@ -1,3 +1,11 @@
+## Commit toàn bộ M3D — 2026-11-07
+
+Director yêu cầu commit tất cả thay đổi hiện có, bao gồm cân bằng chiến dịch, ba lượt hồi sinh/vote và toàn bộ code/artwork/tài liệu Vương Trùng Dương. Đây là ủy quyền commit trên checkout hiện tại, không tự xác nhận duyệt art runtime hoặc triển khai mạng. [Phạm vi và kiểm chứng](CAMPAIGN_BALANCE_2026_11_06.md).
+
+## Campaign balance và thử lại boss — 2026-11-06
+
+Director-approved campaign update: protocol35; normal rooms use campaign definition, first-clear pearls/rewards and finite-life BossRetries. Existing Vương WIP is retained. This supersedes earlier one-revival/auto-retry/no-wave-pearl/immediate-final notes only; preserve separate PvP scope. [Quy tắc, cấu hình và kiểm chứng](CAMPAIGN_BALANCE_2026_11_06.md).
+
 # Current M3D integration memory
 
 ## Latest override: renovation v10 — 2026-11-07
@@ -41,6 +49,21 @@ Native screen-density rendering, zoom 1 and retained edge alpha replace normal-m
 Local normal game: `pnpm dev:renovation`, client5529/server2926, after a build targeting that endpoint. No QA encounter fixtures are enabled by this launcher. Keep the separate renovation preview for reference comparison. Do not change the frozen skill sources while extending idle/walk coverage.
 
 Vương Trùng Dương — 2026-11-05, protocol 30. Use the [final boss design](VUONG_TRUNG_DUONG_FINAL_DESIGN.md) as the canonical source and the [runtime handoff](VUONG_TRUNG_DUONG_RUNTIME.md) for the playtest, tuning and evidence. Director approved the three [concept v01 images](../assets/concepts/main-bosses/vuong-trung-duong/README.md). Runtime sprites and effects are supplied for separate director review. Production reaches the final through four actual defeats. Local DEV can include the final through `VOLAM_DEV_FINAL_BOSS=1` alongside `VOLAM_DEV_WAVE_BOSSES=1`.
+
+## Approved creep integration — 2026-11-06
+
+Director approved the final r5 creep runtime and explicitly requested integration into `milestone/m3d`. The milestone fast-forwarded from `d54382a1` through all six creep commits to the tested runtime `1f5b9e77`; committed protocol 33. The primary checkout's existing uncommitted Vương Trùng Dương work was restored separately, with local WIP protocol 34 and no WIP committed. This supersedes earlier no-merge/candidate statements for the creep composition only. Recovery, exact checks and evidence: [CREEP_M3D_INTEGRATION_2026-11-06.md](CREEP_M3D_INTEGRATION_2026-11-06.md).
+
+## Gameplay integration into milestone/m3d - 2026-11-05
+
+The milestone combines gameplay commit 2ef38869 with approved creep and environment release 5bca353c. The committed runtime uses protocol 31. The combined tree passed all 755 unit/integration tests, TypeScript, production build and asset validators. Three Chromium cases passed across the final run and scoped retries, covering boss farewells/corpses/dungeon chatter, six-player crafting with both new icon sets, and soundtrack playback/loop/leave. The crafting retry uses explicit branch scrolling and server-acknowledged waits. The original failed browser stage remains in its timing report. See [integration verification](evidence/sessions/m3d-gameplay-merge-final/integration-verification.json).
+
+## Gameplay update worktree — 2026-11-04
+
+On `wip/m3d/gameplay-update`, protocol 31 requires a new room and matching server/client. Use the 2026-11-04 overrides in [DECISIONS.md](../DECISIONS.md), [CONTENT_DATA.md](../CONTENT_DATA.md) and [GAME_DESIGN.md](../GAME_DESIGN.md). Fixed school branches use manual Q/W/E/R/T upgrades and the confirmed F stance for Thiếu Lâm Quyền. Reserved stat points await their own feature. The opening story introduces Tượng Võ Thần and Long Hồn Thần Thạch. Existing boss encounters have seeded dialogue and the four live wave bosses have one farewell each. Vương Trùng Dương has authored lines for his future encounter. Crafting uses personal dungeon boss materials and unlocks Z from crafted boots. Cái Bang has new icons and the supplied OST loops during the match. The final crafting run passed 755 unit and integration tests plus the six-player Chromium case. The OST browser case passed on its isolated retry after the first run timed out. The historical protocol notes below describe the base milestone.
+
+Vương Trùng Dương — 2026-11-05, protocol 32. Use the [final boss design](VUONG_TRUNG_DUONG_FINAL_DESIGN.md) as the canonical source and the [runtime handoff](VUONG_TRUNG_DUONG_RUNTIME.md) for the playtest, tuning and evidence. Director approved the three [concept v01 images](../assets/concepts/main-bosses/vuong-trung-duong/README.md). Runtime sprites and effects are supplied for separate director review. Production reaches the final through four actual defeats. Local DEV can include the final through `VOLAM_DEV_FINAL_BOSS=1` alongside `VOLAM_DEV_WAVE_BOSSES=1`.
+
 
 Last update2026-11-03. Director approved the complete feedback runtime through521f73cd and explicitly requested integration into `milestone/m3d`. Runtime merge e69dc456 is now on milestone/m3d, combining feedbackf1e90462 with milestone3b0c1ebc, preserving Hell, merchant/inventory UI, basic/potion economy and potion1/2. Earlier no-merge statements in retained handoffs describe previous authorization, not the current request. Final merge identity/checks: `M3D_MILESTONE_INTEGRATION_2026-11-03.md`.
 
@@ -93,3 +116,19 @@ Continue from the accepted visual-upgrade-2 idle/walk, arena layout and v2 pilot
 ## Canonical presentation update — skill review v4, 2026-11-06
 
 The user requests level30/max-rank heroes and zero skill cooldown only in the server-gated skill-review mode. Keep four slots and real cast/action locks; normal rooms retain existing progression/cooldowns. Correct left-facing school/helper rasters by horizontal reflection, preserve pivots/clocks and all older exports. Integrate the eight specific visual corrections in RENOVATION_V4_SKILL_REVIEW.md without changing combat definitions. New files are prototypes awaiting director review; do not treat integration as approval.
+
+## Creep upgrade worktree — 2026-11-06
+
+Director explicitly authorized all 44 regular creep combat suggestions and five support roles, with Phaser integration, creator-selected 2/3/4 invasion gates and 60-second timed streams at configurable rate. Worktree branch `wip/m3d/creep-upgrade`, baseline `d54382a1`, protocol 32; no merge/deploy requested. Actual live room enables the validated profile catalogue; chapter gates include pending spawns. `VOLAM_DEV_CREEP_TEST=1` is development-only and cycles all 20 waves with invulnerability and no chapter bosses. Per-creep XP/gold remain unchanged; density amplifies reward supply. Scope, tests, raster reuse/provenance and measured limitations: [CREEP_UPGRADE.md](CREEP_UPGRADE.md). Source checkout's uncommitted Vương Trùng Dương work remains separate.
+
+## Director creep feedback r2 — 2026-11-06
+
+North/south gates now require a clear footprint-wide corridor toward the statue, not merely an empty spawn point. Forward smash/slash/claw specials start at their caster and damage a forward capsule; heavy smash geometry increases 50%, other spreading skill radius/width and pattern extent double. Archer basic/special shot range is reduced 15%; melee basic reach doubles. Trúc Xà is fully ranged with poison+slow, Độc Chu keeps melee and web has a 25% one-second root, Sơn Viên stomps with 0.8s stun, Trúc Lâm Kiếm Khách gains 25% chance to reflect 50% of actual direct damage (no recursion), Mộc Linh becomes ranged. Sa Xà becomes ranged with slow; Xác Ướp basic cooldown is 36 ticks and has 25% root; Cự Nhân Sa Thạch basic punch stuns in AoE. Hải Xà becomes ranged and Độc thủy slows. Dung bạo radius is 144 (previously 72). Root blocks movement/dash/blink, permits attacks/casting, and respects expiry/control resistance. Numeric proc chances and durations are trial defaults. Prior r1 verification reports describe the old tuning; r2 evidence is stored separately.
+
+Individual creep preview —2026-11-06: protocol33, development-only creator option via `?creepPreview=1`, gated by server `VOLAM_DEV_CREEP_TEST=1`. Host selects one of49 profiles; normal room rules are unaffected. Real server attacks/statuses and existing Phaser scene/raster assets are retained. The new room has no timed waves and no dungeon entry. See `docs/CREEP_PREVIEW.md` for fixture defaults, limitations and837-test/two-client final PASS.
+
+Creep preview feedback r3 —2026-11-06: targeted purple burst/drain/poison/water placements, captured180-degree high-damage Hoanh Tram, torso arrows and requested strip/signature removals supersede prior r2 tuning. Shared protocol33 is retained; restart/reload/new room required. Current code/evidence and original-raster selection rationale: `docs/CREEP_FEEDBACK_R3.md`.
+
+Creep feedback r4 —2026-11-06: no generic purple windup circles/semicircles across all 49 profiles. Thi độc directly schedules its delayed poison field at server-captured target feet, replacing r3 lob delivery. Actual released purple burst/drain effects remain. Protocol 33 retained; current code, evidence and restarted review services: `docs/CREEP_FEEDBACK_R4.md`.
+
+Creep feedback r5 —2026-11-06: Sơn Tặc Đao (`wave_03`) has Chém đao normals only; r3 Hoành trảm is superseded. Remove generic caster contact explosions, including basic melee and self stomp/ring stamps. Actual target fields/projectiles and deliberate self-destruction/death explosions remain. Protocol 33 retained. Current implementation/review/verification: `docs/CREEP_FEEDBACK_R5.md`.

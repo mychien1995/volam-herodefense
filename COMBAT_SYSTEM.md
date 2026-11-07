@@ -6,6 +6,15 @@ Hàng Long Hỏa Vũ maximum targeting/fallback distance is reduced30% at every 
 
 Hàng Long locks an eligible forward enemy position at accepted cast, then follows24/36/15/12tick forward/orbit/rise/dive phases. Only its final112px landing AoE damages once per target; it never homes or damages along the flight. Death/travel clears it. Seven Thất Tinh strokes use3tick spacing, base/AP damage scaled4/7 from the prior four-hit attack; integer rounding remains per hit. Thái Cực confinement captures only creeps/bosses, including resistant bosses, clips scripted dashes as well as normal movement, and ends on expiry/owner death. Allies pass freely. These are explicit director changes; all other renovation-v5 adjustments are presentation. See `DECISIONS.md`.
 
+## Campaign balance và thử lại boss — 2026-11-06
+
+Mỗi lượt boss có ba lần hồi sinh/người sau5s, lần chết thứ tư quan chiến. Toàn đội hết lượt mở ballot30s, cần ceil(N/2) đồng ý. Không reset cooldown khi hồi sinh. Long Châu tăng HP/MP/công/thủ nền; không đổi luật skill/rank/QTE hay Phát Động. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
+## Fixed skill progression override — 2026-11-04
+
+The server validates school/branch confirmation, slot upgrades, stance changes, rank gates, available points and build revision. Players spend their points with the mouse from Q/W/E/R/T. T unlocks at character level 6, then advances at 12/18/24. Q/W/E/R use 1/3/5/7. Thiếu Lâm Quyền retains its same-target combos. F waits for active casts and a buffered Vô Ảnh cast to resolve, preserving cooldowns and running effects.
+
+
 ## M3D approved combat and action lifecycle — 2026-11-03
 
 Newest M3D feedback overrides historical reach/timing statements below. Every A is a fresh press; monk A has four stages, minimum6tick cadence, finisher30tick cooldown;60tick inactivity begins30tick cooldown. Shift has2 charges with sequential240tick/8s recharge. Võ Đang basic knockback probability0.1.
@@ -199,3 +208,21 @@ Mục Hạ Vô Nhân keeps its approved split and five pair swaps. At reveal, pl
 Tiểu Nhất Dương Chỉ always releases five straight golden projectiles, spaced 0.16 seconds, re-aiming at the selected player's current position at each release. Each shot flies straight afterward. Its independent server channel can run with all main skills, QTE and movement without replacing their cast or clocks. Trial repeat interval is 90 ticks / 3 seconds, first windup remains 17 ticks; repeated starts cannot duplicate an active burst. Death, no living players, wipe and encounter cleanup cancel pending shots. The main special animation retains priority while concurrent native gold projectiles render normally.
 
 Approved V01/V02 PNGs, JSONs and preview source remain byte-exact. This update changes runtime behavior and text, not the frozen preview. The common arenas, rewards, dungeon life ledgers, controls and separate inventory-v2 scope remain as in V02. Matching protocol 29 services and a new room are required. Current implementation/validation: `docs/WAVE_BOSS_FEEDBACK_V03_RUNTIME.md`.
+## Creep combat override — 2026-11-06
+
+Data-driven normal attacks, signatures and death effects for all 44 regular creep identities now use server-owned windups, captured aim, swept collision, frontal geometry, cooldowns and cleanup. Five boss-support profiles preserve encounter steering. Three nearby owners may prepare specials; strongest-only slow and one strongest tick per poison/burn element bound pack pressure. Statue receives normal strikes only. Raster warnings and animations never authorize hits. Details and trial values: [CREEP_UPGRADE.md](docs/CREEP_UPGRADE.md).
+
+## Director creep feedback r2 — 2026-11-06
+
+North/south gates now require a clear footprint-wide corridor toward the statue, not merely an empty spawn point. Forward smash/slash/claw specials start at their caster and damage a forward capsule; heavy smash geometry increases 50%, other spreading skill radius/width and pattern extent double. Archer basic/special shot range is reduced 15%; melee basic reach doubles. Trúc Xà is fully ranged with poison+slow, Độc Chu keeps melee and web has a 25% one-second root, Sơn Viên stomps with 0.8s stun, Trúc Lâm Kiếm Khách gains 25% chance to reflect 50% of actual direct damage (no recursion), Mộc Linh becomes ranged. Sa Xà becomes ranged with slow; Xác Ướp basic cooldown is 36 ticks and has 25% root; Cự Nhân Sa Thạch basic punch stuns in AoE. Hải Xà becomes ranged and Độc thủy slows. Dung bạo radius is 144 (previously 72). Root blocks movement/dash/blink, permits attacks/casting, and respects expiry/control resistance. Numeric proc chances and durations are trial defaults. Prior r1 verification reports describe the old tuning; r2 evidence is stored separately.
+## Creep feedback r3 — 2026-11-06
+
+Selected specials now distinguish captured target areas, captured180° frontal sectors and ground-target poison lobs. A ground lob ignores hero collision during its zero-damage flight and lands at its captured point, or at swept terrain contact. Visual linger can exceed a one-tick damage window. Tà Tăng heals40% of actual HP drained; Hoành trảm's trial coefficient is2.4×. Three requested units have no extra signatures. Generic crimson warning removal does not remove dash/status/trail mechanics. See `docs/CREEP_FEEDBACK_R3.md` for exact profiles and regression evidence.
+
+## Thi độc direct target field — 2026-11-06
+
+Latest r4 override: Thi độc schedules its 88-radius poison area at the server-captured target feet, activates after 24 ticks and lasts 90 ticks; no delivery projectile or caster-foot/death pool. Caster movement cannot relocate it. Generic purple pre-cast circles are removed from creep presentation, while real released effects and windup timing remain. See `docs/CREEP_FEEDBACK_R4.md`.
+
+## Creep feedback r5 — 2026-11-06
+
+Sơn Tặc Đao uses normal attacks only. Its r3 Hoành trảm sector is no longer active content. Shared contact rasters are no longer drawn at creep attack/cast origins; actual hit feedback remains at the victim. Stomp/charge/control mechanics of other creeps retain server timing, damage and statuses without generic caster burst stamps. See `docs/CREEP_FEEDBACK_R5.md`.

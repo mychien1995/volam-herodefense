@@ -44,6 +44,31 @@ Bản thử mới thay cả thân hành động và VFX của đòn Kiếm/Phi�
 
 Director duyệt bản preview đầy đủ với yêu cầu **“quá đẹp, hãy integrate vào phaser”** trong worktree `wip/m3d/visual-upgrade-2`. Phạm vi hình được duyệt: idle/walk bốn hướng của8 nhánh vũ khí,20 wave creep,24 dungeon creep,5 wave boss với7 dạng,11 minion/trợ thủ,4 dungeon boss; arena và8 sân phó bản. Khóa art tại `assets/approved_renovation_v1.lock.json`. Tích hợp vào trận Phaser thường ở mật độ màn hình gốc; giữ tranh attack/cast/hurt/death, skill/VFX và toàn bộ luật server hiện có. Phê duyệt preview không tự động trở thành phê duyệt ngoại hình trong trận sau tích hợp. Báo cáo và ảnh thật: `docs/evidence/renovation-runtime/README.md`.
 
+## Commit toàn bộ M3D — 2026-11-07
+
+Director yêu cầu commit tất cả thay đổi hiện có, bao gồm cân bằng chiến dịch, ba lượt hồi sinh/vote và toàn bộ code/artwork/tài liệu Vương Trùng Dương. Đây là ủy quyền commit trên checkout hiện tại, không tự xác nhận duyệt art runtime hoặc triển khai mạng. [Phạm vi và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
+## Campaign balance và thử lại boss — 2026-11-06
+
+Director duyệt và yêu cầu triển khai toàn bộ cân bằng chiến dịch, Long Châu từ tứ tuyệt, chuỗi boss và ba lần hồi sinh + vote ≥50%. Quy tắc và hệ số mới thay các giới hạn lịch sử tương ứng bên dưới. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
+## Nhạc nền trận đấu — 2026-11-05
+
+File game-ost.mp3 của người dùng phát lặp từ lúc vào trận và dừng khi trận kết thúc hoặc người chơi rời phòng. Nhạc chạy cục bộ ở client.
+
+## Chế tạo và icon Cái Bang — 2026-11-05
+
+Yêu cầu mở Chế tạo cho phép triển khai bốn công thức, 12 nhánh, Z từ giày và nguyên liệu cá nhân cần cho công thức. Giữ giới hạn một thành phẩm mỗi ô và mức phí thử đang có. Quy tắc đủ điều kiện và thông số thử ghi trong [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md). Long Châu và PvP thuộc phạm vi riêng.
+
+## M3D gameplay update — 2026-11-04
+
+Each player confirms one school and one of its two branches before spawning. Branch and A are locked for the match. Q/W/E/R/T are fixed to the branch, with T as the ultimate. Learn and rank up from the in-viewport hotbar. There is one point per level. Levels 1–20 fund skills, while levels 21–30 reserve ten points for a future stat allocation system. Unspent skill points carry forward. Standard ranks open at levels 1/3/5/7 and ultimate ranks at 6/12/18/24. There is no in-match respec.
+
+Thiếu Lâm Quyền uses F to switch Quyền and Cước. Q/W/E share ranks by slot and keep cooldowns by ability. R (Kim Cang Bất Hoại) and T (Như Lai Niết Bàn) share their rank, cooldown and effects between stances. The existing basic-attack chain still uses A.
+
+The statue is now **Tượng Võ Thần**, containing **Long Hồn Thần Thạch**. Player teams guard it from rival martial artists and the five masters. Hoàng Thường and the future post-Vương Trùng Dương reveal are reserved for a separate update.
+
+
 ## Vương Trùng Dương · chốt thiết kế và duyệt concept v01 — 2026-11-05
 
 Boss cuối có hai phase, Toàn Chân Kiếm Pháp và Tiên Thiên Công. Cửu Âm Hộ Thể vỡ khi boss trúng sét ba lần. Toàn Chân Phản Kiếm chém mạnh cả đội một lần nếu bất kỳ người nào trượt QTE, với mức sàn 1 HP cho người còn sống. Phase 2 bỏ kiếm, dứt sấm và duy trì Phá Thể Vô Hình Kiếm cho đến khi boss chết. Thất Tuyệt Lôi Âm dùng sáu vòng nhạc, sai chuỗi khiến cả đội thua lượt đánh boss. Director đã duyệt tạo hình hai phase và hai bảng VFX concept v01. [Thiết kế boss cuối](docs/VUONG_TRUNG_DUONG_FINAL_DESIGN.md) và [prompt sản xuất sprite, tích hợp Phaser](docs/INTEGRATE_VUONG_TRUNG_DUONG_PROMPT.md).
@@ -428,3 +453,25 @@ The director accepted the v2 visual style, reported the Chiết Mai matte, Vạn
 ### Confirmed 2026-11-06 — isolated skill review
 
 The development skill-test room provides level 30, all own-school skills at maximum rank, and no skill cooldown. This is a server-only review exception; preserve normal-game progression, cooldowns, four active slots and authoritative combat. Requested VFX revisions preserve the old skill descriptions, hit counts and points of origin. See docs/RENOVATION_V4_SKILL_REVIEW.md.
+
+## Creep abilities and timed invasion streams — 2026-11-06
+
+CONFIRMED by the director: implement all approved creep suggestions (20 wave identities, 24 regular dungeon species, five boss-support types) and integrate into Phaser. Room creator selects 2/3/4 invasion gates; west/east remain, third adds north, fourth south. This supersedes the historical two-side-only count-based invasion rule. Keep 180-second wave starts; each streams for 60 seconds at a configurable rate. Trial defaults: one spawn per two seconds per gate before snapshotted player scaling. Pending stream spawns block chapter-clear gates. Specials target heroes; statue pressure remains normal attacks, with no repair or item drops. The DEV-only `VOLAM_DEV_CREEP_TEST=1` cycles 20 waves with shorter streams and invulnerability, disabling chapter bosses. Full scope, tuning, artwork reuse and verification: [creep upgrade](docs/CREEP_UPGRADE.md). No approval to merge or deploy is inferred.
+
+## Director creep feedback r2 — 2026-11-06
+
+North/south gates now require a clear footprint-wide corridor toward the statue, not merely an empty spawn point. Forward smash/slash/claw specials start at their caster and damage a forward capsule; heavy smash geometry increases 50%, other spreading skill radius/width and pattern extent double. Archer basic/special shot range is reduced 15%; melee basic reach doubles. Trúc Xà is fully ranged with poison+slow, Độc Chu keeps melee and web has a 25% one-second root, Sơn Viên stomps with 0.8s stun, Trúc Lâm Kiếm Khách gains 25% chance to reflect 50% of actual direct damage (no recursion), Mộc Linh becomes ranged. Sa Xà becomes ranged with slow; Xác Ướp basic cooldown is 36 ticks and has 25% root; Cự Nhân Sa Thạch basic punch stuns in AoE. Hải Xà becomes ranged and Độc thủy slows. Dung bạo radius is 144 (previously 72). Root blocks movement/dash/blink, permits attacks/casting, and respects expiry/control resistance. Numeric proc chances and durations are trial defaults. Prior r1 verification reports describe the old tuning; r2 evidence is stored separately.
+# Creep preview sandbox — 2026-11-06
+
+Director requested preview/testing one creep type at a time. Development-only `?creepPreview=1` creates an isolated server-authoritative room, gated by `VOLAM_DEV_CREEP_TEST=1`, with one selected profile, no timed invasions, host-only controls, normal/signature/death testing and actual movement/statuses. All 49 current profiles are selectable. Normal room rules and canonical combat tuning remain unchanged. Protocol33; see `docs/CREEP_PREVIEW.md` for fixture defaults and limitations.
+## Creep preview feedback r3 — 2026-11-06
+
+Latest director override: target-point purple burst for Thổ Phỉ,180° frontal high-damage Hoành trảm, target-foot blood drain for Tà Tăng, active target-point poison lob for Cương Thi, target-foot puddle for Thủy Quỷ, torso-origin archer presentation, and removal of the listed generic crimson strips. Khô Lâu Kiếm Sĩ, Mông Cổ infantry and Ác Khuyển retain normals only. This supersedes their earlier generic forward-line/death-pool/signature definitions. Trial coefficients and exact changes: `docs/CREEP_FEEDBACK_R3.md`.
+
+## Creep feedback r4 — 2026-11-06
+
+Director removes generic purple pre-cast circles/semicircles for every creep. Released purple effects remain skill effects. Thi độc becomes a delayed area placed directly at captured target feet, replacing the r3 projectile/landing delivery and obsolete death pool; coefficients/radius/duration remain unchanged. This supersedes earlier purple telegraphs and Thi độc lob rules. See `docs/CREEP_FEEDBACK_R4.md`.
+
+## Creep feedback r5 — 2026-11-06
+
+Sơn Tặc Đao has normal Chém đao only; Hoành trảm is removed. Remove the shared caster-origin contact explosions for all creep melee/skill presentation, including instant self stomp/ring stamps. Real target-point effects, projectiles, persistent fields and deliberate self-destruction/death explosions remain. Other skill geometry and damage do not change. See `docs/CREEP_FEEDBACK_R5.md`.

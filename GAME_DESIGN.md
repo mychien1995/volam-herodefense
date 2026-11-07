@@ -1,3 +1,13 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Tiến trình mới nhắm cấp6/12/18/24 ở tứ tuyệt; Long Châu dẫn sang Lý Mạc Sầu/Hồng Liệt/Chu Bá Thông/Kim Luân. Vương Trùng Dương chờ Kim Luân thực sự bị hạ rồi chuẩn bị60s. Cả hai loại boss có ba hồi sinh và biểu quyết đánh lại. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
+## M3D match opening — 2026-11-04
+
+The opening lines above **Tượng Võ Thần** reveal that the ancients sealed **Long Hồn Thần Thạch** inside it. Martial artists converge in waves and the five masters come to claim its power. The players form the team defending the stone to avert turmoil in the jianghu.
+
+Existing dungeon and wave boss encounters use server-seeded original Vietnamese dialogue with twenty lines per actor. Bắc Cái keeps his bespoke preference dialogue. Each implemented wave boss gets one farewell and about five seconds of corpse visibility. Vương Trùng Dương has dialogue authored for his future encounter. After that encounter, the intended future reveal is that the statue holds the spirit of Hoàng Thường, master of Cửu Âm Chân Kinh. He emerges after absorbing the five masters' souls. The opening dialogue keeps that reveal out of the story told to players.
+
 # Game Design Document (GDD) v1.0
 
 ## M3D approved dungeon and party runtime — 2026-11-03
@@ -133,3 +143,6 @@ School descriptions, passives and basic styles come from CONTENT_DATA.md. School
 ## Đông Tà V04 encounter exception — 2026-11-02
 
 The director-approved first wave boss targets players, not the statue. It enters the existing arena from the east after wave5 clear/rest; at court center all match players are recalled and dead players immediately revived. The statue is temporarily hidden and invulnerable without repair, including unlimited full-party-wipe retries. Players are confined to the court plus rim; the180-second invasion clock continues. Đông Tà alone dying clears this encounter and removes Mai/Hoàng; no items drop. This exception supersedes the general chapter-boss/statue and no-automatic-teleport descriptions for this encounter only. Exact final skill selection, implementation and trial tuning: `docs/DONG_TA_INTEGRATION.md`.
+## Creep upgrade override — 2026-11-06
+
+The director authorizes 44 distinct regular creep combat profiles and the five listed boss-support roles. Host selects 2/3/4 invasion gates before creating a room. Waves still start every 180 seconds, but spawn continuously for 60 seconds, with configurable cadence and player-count/stat snapshots at opening. Pending spawns count as an uncleared wave for boss gates. This supersedes old two-gate/fixed-count text. Full catalogue and rules: [CREEP_UPGRADE.md](docs/CREEP_UPGRADE.md).

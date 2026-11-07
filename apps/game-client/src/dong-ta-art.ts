@@ -276,14 +276,15 @@ export class DongTaRenderer {
           : bundle === 'mai'
             ? 'Mai Siêu Phong'
             : 'Hoàng Dung';
-      this.health.draw(
-        actor.archetypeId,
-        name,
-        actor.x,
-        actor.y - 65,
-        actor.hp,
-        actor.maxHp,
-      );
+      if (actor.hp > 0)
+        this.health.draw(
+          actor.archetypeId,
+          name,
+          actor.x,
+          actor.y - 65,
+          actor.hp,
+          actor.maxHp,
+        );
       if (
         cast?.abilityId === 'lac_anh_normal' &&
         tick >= cast.activeAt &&

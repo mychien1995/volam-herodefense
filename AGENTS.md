@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Canonical override được người dùng duyệt2026-11-06: production EXP curve/budget/scaling mới, mặc định4 cửa, Long Châu từ tứ tuyệt và dungeon, ba hồi sinh + ballot≥50%, Kim clear +60s trước Vương. Các hard constraints lịch sử về hai cửa/không Long Châu invasion/một hồi sinh bị thay thế đúng phạm vi này. Các yêu cầu authority, art, controls và no-recording vẫn giữ. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
 > **NEW mandatory v1.4 in-game UI rule:** Before any UI/UX work, read `UI_UX_SPEC.md` and visually inspect `assets/references/in_game_world_reference.png` (**positive**) and `assets/references/current_codex_dashboard_anti_reference.png` (**anti-reference**). After joining a match, render **one dominant game viewport** with all HUD, inventory, shop, skill tree/loadout, dungeon, crafting, PvP and loot-roll UI as in-viewport overlays. **Never** use persistent exterior right-side panels, page title, footer or dashboard status column. An HTML/React/DOM overlay absolutely positioned inside the game viewport is acceptable; game overlays do not have to be Phaser Graphics. Do not shrink the map to make room for UI. Keep a separate pre-match lobby if needed. Preserve server authority and keyboard/mouse controls. Details/acceptance: `UI_UX_SPEC.md` and `CODEX_UI_REFACTOR_TASK.md`.
 
 # Repository instructions for Codex and other coding agents
@@ -27,8 +31,8 @@ This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D
 
 - Server authoritative for movement, collision, targeting, hit/damage, RNG, skills, XP, gold, items, loot, wave clock, boss and match state. **Never trust client-submitted damage, location, inventory, XP or loot result.**
 - `game-core` independent of Phaser, Colyseus, DOM and UI; deterministic seeded simulation with tests.
-- Arrow keys movement, A basic manual attack, QWER skills; mouse only NPC/menu/inventory. No targeted spells. Ranged shots aim once at nearest enemy's position, then fly straight; **no tracking**. Melee frontal arc with reduced cleave on secondary targets.
-- School styles/skills freely mixed; innate passive levels automatically; max level 30; 1 skill point per level including level 1; 4 active slots; respec only in central arena; no reset-based stat duplication.
+- Arrow keys movement, A basic manual attack, QWERT skills, F to switch Thiếu Lâm Quyền stance. Mouse for NPC/menu/inventory and hotbar rank upgrades. No targeted spells. Ranged shots aim once at nearest enemy's position, then fly straight; **no tracking**. Melee frontal arc with reduced cleave on secondary targets.
+- Confirm one school and branch before entering a match. Innate passive levels automatically. Max level 30. Five fixed active slots with four ranks each. Levels 1–20 grant skill points, levels 21–30 reserve future stat points. Standard rank gates 1/3/5/7, ultimate 6/12/18/24. No in-match respec.
 - Thiếu Lâm Phát Động same-target hits only; secondary cleave hits count. Cầm Long Công = pull+silence+disarm without stun and without preventing movement.
 - Match room 1–6 players, nicknames only, no saved progress. Private/shared dungeons, boss dungeon empty reset at 30s. Creep XP fixed pool divided among eligible kill/assists.
 - 20 statue creep invasions **every 180 seconds** from **2 sides**, regardless of previous wave status; no statue repair. Fifth-wave bosses only after corresponding fifth wave cleared + short rest, in order Đông Tà/Tây Độc/Nam Đế/Bắc Cái; final Vương Trùng Dương. Gold/XP only for invasion, **no item drops**.

@@ -1,6 +1,12 @@
+## Cập nhật chiến dịch và commit — 2026-11-07
+
+Người dùng yêu cầu commit toàn bộ thay đổi, bao gồm Vương Trùng Dương. Phòng chơi thường hiện dùng **protocol35** và [quy tắc chiến dịch đã duyệt](CAMPAIGN_BALANCE_2026_11_06.md): Vương Trùng Dương có48.000 HP solo, thêm110% HP gốc mỗi người; chỉ mở sau bốn tứ tuyệt và Kim Luân thực sự bị hạ, rồi nghỉ60s. Mỗi người có ba lần hồi sinh/lượt; cả đội hết lượt mở vote30s, cần≥50% đồng ý để đánh lại. Thất bại Thất Tuyệt vẫn kết thúc cả lượt. Thưởng first-clear xét người đã gây mất HP và còn hiện diện, kể cả quan chiến. Các con số7.900 HP/52%/8,5s và tự retry bên dưới mô tả baseline/DEV lịch sử, không thay thế cấu hình campaign hiện hành.
+
+Các kết quả kiểm tra trước đây được giữ nguyên; phần cân bằng và hồi sinh bổ sung có [báo cáo riêng](evidence/campaign/verification.json). Yêu cầu commit không tự thay đổi trạng thái director duyệt artwork runtime.
+
 # Vương Trùng Dương trong Phaser
 
-[Mô tả boss đã chốt](VUONG_TRUNG_DUONG_FINAL_DESIGN.md) là nguồn chuẩn. Protocol 30 thêm boss cuối, trạng thái chiến thắng và sprite/VFX sản xuất theo [concept v01 đã duyệt](../assets/concepts/main-bosses/vuong-trung-duong/README.md).
+[Mô tả boss đã chốt](VUONG_TRUNG_DUONG_FINAL_DESIGN.md) là nguồn chuẩn. Protocol 32 thêm boss cuối, trạng thái chiến thắng và sprite/VFX sản xuất theo [concept v01 đã duyệt](../assets/concepts/main-bosses/vuong-trung-duong/README.md).
 
 ## Cách chơi thử
 

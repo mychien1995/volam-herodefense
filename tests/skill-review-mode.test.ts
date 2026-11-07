@@ -46,6 +46,8 @@ async function start() {
   p.send('lobby-action', { action: 'start' });
   await expect.poll(() => p.state.phase).toBe('SCHOOL_SELECTION');
   p.send('lobby-action', { action: 'select', schoolId: 'thieu_lam' });
+  if (p.state.requiresBranch)
+    p.send('lobby-action', { action: 'branch', basicId: 'thieu_lam_quyen' });
   p.send('lobby-action', { action: 'confirm' });
   await expect.poll(() => p.state.phase).toBe('IN_GAME');
   return p;

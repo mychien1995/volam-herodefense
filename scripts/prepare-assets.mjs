@@ -29,6 +29,31 @@ import {
 } from './asset-files.mjs';
 import { prepareHongLietAssets } from './prepare-hong-liet-assets.mjs';
 const root = new URL('../', import.meta.url);
+const caiBangIcons = new URL('assets/exports/skills/cai-bang-icons-v2/', root);
+const iconManifest = JSON.parse(
+  readFileSync(new URL('manifest.json', caiBangIcons), 'utf8'),
+);
+const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
+const iconSource = readFileSync(new URL(iconManifest.source, root));
+if (
+  hash(iconSource) !== iconManifest.sourceSha256 ||
+  Object.keys(iconManifest.icons).length !== 13
+)
+  throw Error('Invalid Cái Bang icon atlas provenance');
+const iconHashes = new Set();
+for (const [id, icon] of Object.entries(iconManifest.icons)) {
+  if (!/^[a-z_]+$/.test(id)) throw Error('Invalid Cái Bang icon identity');
+  const png = readFileSync(new URL(id + '.png', caiBangIcons));
+  const fingerprint = hash(png);
+  if (
+    png.readUInt32BE(16) !== 64 ||
+    png.readUInt32BE(20) !== 64 ||
+    fingerprint !== icon.sha256 ||
+    iconHashes.has(fingerprint)
+  )
+    throw Error('Invalid Cái Bang icon export ' + id);
+  iconHashes.add(fingerprint);
+}
 validateCharacterRevision();
 const approvedArt = JSON.parse(
   readFileSync(

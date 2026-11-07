@@ -1,3 +1,7 @@
+## Campaign balance và thử lại boss — 2026-11-06
+
+Giá/stat đồ cơ bản và bình thử hiện tại được giữ. Production reward supply và EXP không còn dùng baseline60 EXP/12 vàng mỗi creep; dùng ngân sách chiến dịch mới. Chế tạo đã có; Long Châu và hoàn bình khi thua đã được phép triển khai trong batch này. [Quy tắc, cấu hình và kiểm chứng](CAMPAIGN_BALANCE_2026_11_06.md).
+
 # Merchant economics thử nghiệm — 2026-11-02
 
 Người dùng duyệt giao diện đang chạy, yêu cầu commit và ủy quyền tự đặt giá để mua thử, sẽ chỉnh sau. UI đã commit tại `60498c09`. Lần này mở mua/nâng bốn đồ cơ bản và mua/dùng bình thật; đây là tuning tạm, chưa hoàn tất M4.

@@ -20,8 +20,8 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
   const client = new Client('http://127.0.0.1:2807'),
     opts = (nickname: string) =>
       ({ nickname, protocolVersion: PROTOCOL_VERSION }) as const;
-  const a = await client.create<MatchRoom>(MATCH_ROOM, opts('Bắc A')),
-    b = await client.joinById<MatchRoom>(a.roomId, opts('Bắc B'));
+  const a = await client.create<MatchRoom['state']>(MATCH_ROOM, opts('Bắc A')),
+    b = await client.joinById<MatchRoom['state']>(a.roomId, opts('Bắc B'));
   for (const r of [a, b]) r.onMessage('combat-event', () => {});
   for (const r of [a, b])
     await expect.poll(() => r.state?.players.has(r.sessionId)).toBe(true);
@@ -29,6 +29,7 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
   for (const r of [a, b]) {
     await expect.poll(() => r.state.phase).toBe('SCHOOL_SELECTION');
     r.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+    r.send('lobby-action', { action: 'branch', basicId: 'cai_bang_bong' });
     r.send('lobby-action', { action: 'confirm' });
   }
   for (const r of [a, b])
@@ -62,12 +63,16 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
   await expect
     .poll(() => view(b)?.effects.some((x) => x.kind === 'spiral'))
     .toBe(true);
-  const late = await client.joinById<MatchRoom>(a.roomId, opts('Bắc Late'));
+  const late = await client.joinById<MatchRoom['state']>(
+    a.roomId,
+    opts('Bắc Late'),
+  );
   late.onMessage('combat-event', () => {});
   await expect
     .poll(() => view(late)?.effects.some((x) => x.kind === 'spiral'))
     .toBe(true);
   late.send('lobby-action', { action: 'select', schoolId: 'vo_dang' });
+  late.send('lobby-action', { action: 'branch', basicId: 'vo_dang_quyen' });
   late.send('lobby-action', { action: 'confirm' });
   await expect
     .poll(() => late.state.players.get(late.sessionId)?.confirmed)
@@ -144,6 +149,7 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
   h.fx = 1;
   h.fy = 0;
   h.cooldown = 0;
+  const gold = h.gold;
   a.send('input', {
     protocolVersion: PROTOCOL_VERSION,
     sequence: 1,
@@ -152,7 +158,8 @@ it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative H
   await expect.poll(() => view(a)?.phase).toBe('defeated');
   expect(target.hp).toBe(0);
   expect(w.statue!.hp).toBe(w.statue!.maxHp);
-  expect(h.gold).toBe(d.reward.gold);
+  expect(h.gold - gold).toBe(c.campaign!.bosses.bac_cai!.gold * 3);
+  expect(h.dragonBonus).toBe(c.campaign!.wavePearl);
   expect(h.bossLoot ?? []).toHaveLength(0);
   late.send('dungeon-action', {
     protocolVersion: PROTOCOL_VERSION,

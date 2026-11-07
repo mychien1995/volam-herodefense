@@ -1,6 +1,6 @@
 import { Client } from '@colyseus/sdk';
 import { PROTOCOL_VERSION, type LobbyState } from '@volam/game-protocol';
-import { m1Config } from '@volam/game-data';
+import { coMoDungeon, m1Config, waveBossFarewells } from '@volam/game-data';
 import { test, expect, type Page } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { joinWaiting, startTogether } from './pregame-helper.js';
@@ -476,6 +476,10 @@ test('six clients: two Phaser plus four SDK peers, full boss HP and natural comb
         await expect
           .poll(() => peer.state.players.get(peer.sessionId)?.schoolId)
           .toBe(schoolId);
+        peer.send('lobby-action', {
+          action: 'branch',
+          basicId: m1Config.progression!.schools[schoolId]!.basicIds[0],
+        });
         peer.send('lobby-action', { action: 'confirm' });
         await expect
           .poll(() => peer.state.players.get(peer.sessionId)?.confirmed)
@@ -987,5 +991,264 @@ test('latest feedback: synchronized banter, five concurrent fingers, clone-hit a
     throw error;
   } finally {
     await Promise.all(contexts.map((c) => c.close()));
+  }
+});
+
+test('gameplay update synchronizes boss farewells, corpse expiry and dungeon chatter', async ({
+  browser,
+}, info) => {
+  const contexts = await Promise.all([
+    browser.newContext(),
+    browser.newContext(),
+  ]);
+  const [a, b] = (await Promise.all(
+    contexts.map((context) => context.newPage()),
+  )) as [Page, Page];
+  const errors: string[] = [];
+  for (const page of [a, b])
+    page.on('pageerror', (error) => errors.push(error.message));
+  try {
+    await joinWaiting(a, 'Hộ Thạch');
+    await joinWaiting(b, 'Bằng Hữu', (await snapshot(a)).roomId);
+    await startTogether([a, b], ['vo_dang_kiem', 'thien_son_dao']);
+    await expect
+      .poll(() =>
+        a.evaluate(
+          'window.__VOLAM__.progressionPresentation().statueIntroduction',
+        ),
+      )
+      .toContain('Long Hồn Thần Thạch');
+    for (const [boss, id] of [
+      ['dong_ta', 'dong_ta'],
+      ['tay_doc', 'tay_doc_boss'],
+      ['nam_de', 'boss_nam_de'],
+      ['bac_cai', 'bac_cai'],
+    ] as const) {
+      await fixture(a, 'spawn', { boss });
+      await expect.poll(async () => (await arena(b))?.bossId).toBe(boss);
+      await fixture(a, 'kill_boss', { boss });
+      const line = waveBossFarewells[id];
+      const corpse = async () => {
+        const state = (await snapshot(a)).state;
+        if (boss === 'bac_cai')
+          return !!JSON.parse(state.bacCai.arena?.snapshot ?? 'null')?.boss;
+        return state.creeps[id]?.hp === 0;
+      };
+      for (const page of [a, b])
+        await expect
+          .poll(async () =>
+            (await art(page)).bossShouts.active.some(
+              (entry: any) =>
+                entry.farewell &&
+                entry.visible &&
+                entry.sourceId === id &&
+                entry.name === line,
+            ),
+          )
+          .toBe(true);
+      expect(await corpse()).toBe(true);
+      if (boss === 'bac_cai')
+        await a.screenshot({ path: info.outputPath('bac-cai-farewell.png') });
+      await expect.poll(corpse, { timeout: 8000 }).toBe(false);
+      for (const page of [a, b])
+        expect(
+          (await art(page)).bossShouts.observed.filter(
+            (entry: any) => entry.name === line,
+          ),
+        ).toHaveLength(1);
+    }
+    for (const [destination, id] of [
+      ['co_mo', 'boss_ly_mac_sau'],
+      ['chu_ba_thong', 'chu_ba_thong'],
+      ['hong_liet', 'hong_liet_boss'],
+      ['kim_luan', 'hoac_do'],
+    ] as const) {
+      await fixture(a, 'dungeon_shout', { destination });
+      const zoneId = destination + '_shared';
+      const heard = async (page: Page) =>
+        (await art(page)).bossShouts.observed.find(
+          (entry: any) =>
+            entry.sourceId === zoneId + ':' + id &&
+            entry.abilityId.startsWith('banter_' + id + '_'),
+        );
+      await expect
+        .poll(() => heard(a), {
+          message: 'Banter from ' + id + ' in ' + zoneId,
+          timeout: 22_000,
+        })
+        .toBeTruthy();
+      await expect.poll(() => heard(b)).toEqual(await heard(a));
+    }
+    expect(errors).toEqual([]);
+  } finally {
+    await Promise.all(contexts.map((context) => context.close()));
+  }
+});
+
+test('crafting consumes an earned boss material, equips Z and loads both new Cái Bang icon sets', async ({
+  browser,
+}, info) => {
+  const contexts = await Promise.all([
+    browser.newContext(),
+    browser.newContext(),
+  ]);
+  const [a, b] = (await Promise.all(
+    contexts.map((context) => context.newPage()),
+  )) as [Page, Page];
+  const errors: string[] = [];
+  for (const page of [a, b])
+    page.on('pageerror', (error) => errors.push(error.message));
+  const sdk = new Client(
+    process.env['VITE_SERVER_URL'] ?? 'http://127.0.0.1:2904',
+  );
+  const joinObserver = (roomId: string, nickname: string) =>
+    sdk.joinById<LobbyState>(roomId, {
+      nickname,
+      protocolVersion: PROTOCOL_VERSION,
+    });
+  const peers: Awaited<ReturnType<typeof joinObserver>>[] = [];
+  try {
+    await joinWaiting(a, 'Thử Bổng');
+    const roomId = (await snapshot(a)).roomId;
+    await joinWaiting(b, 'Thử Chưởng', roomId);
+    for (let i = 1; i <= 4; i++) {
+      const peer = await joinObserver(roomId, 'Quan sát ' + i);
+      peer.onMessage('combat-event', () => {});
+      peers.push(peer);
+    }
+    await Promise.all([
+      startTogether([a, b], ['cai_bang_bong', 'cai_bang_chuong'], 60_000),
+      ...peers.map(async (peer) => {
+        await expect
+          .poll(() => peer.state?.phase, { timeout: 60_000 })
+          .toBe('SCHOOL_SELECTION');
+        peer.send('lobby-action', { action: 'select', schoolId: 'cai_bang' });
+        peer.send('lobby-action', {
+          action: 'branch',
+          basicId: 'cai_bang_bong',
+        });
+        peer.send('lobby-action', { action: 'confirm' });
+      }),
+    ]);
+    await expect
+      .poll(async () => Object.keys((await snapshot(a)).state.players).length)
+      .toBe(6);
+    for (const [page, ids] of [
+      [
+        a,
+        [
+          'cai_bang_bong',
+          'hoanh_tao_bong',
+          'pha_giap_bong',
+          'cam_long_cong',
+          'truy_phong_bong',
+          'thien_ha_vo_cau',
+        ],
+      ],
+      [
+        b,
+        [
+          'cai_bang_chuong',
+          'hoa_van_chuong',
+          'cuong_long_loan_vu',
+          'phi_long_tai_thien',
+          'khang_long_huu_hoi',
+          'hang_long_hoa_vu',
+        ],
+      ],
+    ] as const) {
+      for (const [i, id] of ids.entries()) {
+        const url = '/assets/skills/cai-bang-icons-v2/' + id + '.png';
+        await expect(
+          page.locator('#slot-' + 'aqwert'[i] + ' .pixel-icon'),
+        ).toHaveCSS('background-image', new RegExp(url));
+        expect((await page.request.get(url)).ok()).toBe(true);
+      }
+      await page.screenshot({ path: info.outputPath(ids[0] + '.png') });
+    }
+    await fixture(a, 'craft_gold');
+    const player = (await snapshot(a)).sessionId;
+    const hero = async () => (await snapshot(a)).state.players[player];
+    const shop = () =>
+      a.getByRole('button', { name: 'Thương Gia', exact: true }).click();
+    await a.bringToFront();
+    await shop();
+    await a.locator('[data-ui-action=gear][data-value=boots]').click();
+    for (let level = 1; level <= 5; level++) {
+      await a.locator('[data-ui-action=buy][data-value=boots]').click();
+      await expect
+        .poll(async () => (await hero()).inventory.levels.boots)
+        .toBe(level);
+    }
+    await a.getByRole('tab', { name: 'Chế tạo' }).click();
+    await expect(a.locator('[data-ui-action=craft]')).toBeDisabled();
+    await expect(a.locator('.item-craft-action')).toContainText(
+      'Thiếu Ngọc Uyên Ương',
+    );
+    await a.keyboard.press('Escape');
+    await fixture(a, 'craft_target', { player });
+    await expect.poll(async () => (await hero()).zoneId).toBe('co_mo_shared');
+    await a.locator('#game canvas').focus();
+    await a.keyboard.press('KeyA');
+    await expect
+      .poll(async () => (await hero()).inventory.materials.boots)
+      .toBe(1);
+    expect(
+      (await snapshot(b)).state.players[(await snapshot(b)).sessionId].inventory
+        .materials.boots,
+    ).toBe(0);
+    await fixture(a, 'craft_exit', { player });
+    await expect
+      .poll(async () => {
+        const h = await hero();
+        return Math.hypot(h.x - coMoDungeon.exit.x, h.y - coMoDungeon.exit.y);
+      })
+      .toBeLessThan(coMoDungeon.exitRange);
+
+    await a.keyboard.press('Space');
+    await expect.poll(async () => (await hero()).zoneId).toBe('arena');
+    await shop();
+    await a.getByRole('tab', { name: 'Chế tạo' }).click();
+    await a.locator('[data-ui-action=branch][data-value="2"]').click();
+    const gold = (await hero()).gold;
+    await expect(a.locator('[data-ui-action=craft]')).toBeEnabled();
+    await a.screenshot({ path: info.outputPath('craft-ready.png') });
+    await a.locator('[data-ui-action=craft]').click();
+    await expect
+      .poll(async () => (await hero()).inventory.crafted.boots)
+      .toBe('needle');
+    expect((await hero()).inventory.materials.boots).toBe(0);
+    expect((await hero()).gold).toBe(gold - 450);
+    await expect(a.locator('[data-ui-action=craft]')).toBeDisabled();
+    await expect
+      .poll(
+        async () =>
+          (await snapshot(b)).state.players[player].inventory.crafted.boots,
+      )
+      .toBe('needle');
+    await a.keyboard.press('Escape');
+    await expect(a.locator('#slot-z')).toHaveAttribute(
+      'aria-label',
+      'Z · Phi châm',
+    );
+    await a.locator('#game canvas').focus();
+    await a.keyboard.press('KeyZ');
+    await expect
+      .poll(async () => (await hero()).inventory.auxiliaryCooldownTicks)
+      .toBeGreaterThan(0);
+    await expect
+      .poll(async () =>
+        (await snapshot(a)).events.some(
+          (event: any) =>
+            event.abilityId === 'gear_needle' && event.kind === 'cast',
+        ),
+      )
+      .toBe(true);
+    expect(errors).toEqual([]);
+  } finally {
+    await Promise.all([
+      ...contexts.map((context) => context.close()),
+      ...peers.map((peer) => peer.leave()),
+    ]);
   }
 });

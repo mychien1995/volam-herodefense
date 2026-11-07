@@ -7,7 +7,7 @@ import {
 } from '../skill-review-mode.js';
 import { namDeDefinition } from '@volam/game-data';
 import { NamDeControlState } from '@volam/game-protocol';
-import { chuView, chuLootAction, chuItemAction } from '@volam/game-core';
+import { chuView } from '@volam/game-core';
 import { isBacCaiActor } from '@volam/game-core';
 import {
   bossLootActionSchema,
@@ -16,6 +16,7 @@ import {
 import { randomInt } from 'node:crypto';
 import { Room, ServerError, validate, type Client } from '@colyseus/core';
 import { serverInvasionDefinition } from '../invasion-config.js';
+import { CreepPreviewSession } from '../creep-preview.js';
 import {
   lobbyConfig,
   m1Config,
@@ -30,11 +31,14 @@ import {
   tayDocDefinition,
   hellDungeon,
   bacCaiDefinition,
+  creepCombatDefinition,
   vuongDefinition,
+  campaignDefinition,
 } from '@volam/game-data';
 import {
   DungeonMatch,
   initializeProgression,
+  skillRank,
   characterStats,
   pointAccounting,
   equippedAbility,
@@ -68,6 +72,9 @@ import {
   VuongState,
   skillPreviewActionSchema,
   merchantActionSchema,
+  portalCountSchema,
+  creepPreviewActionSchema,
+  bossRetryActionSchema,
 } from '@volam/game-protocol';
 
 type MatchClient = Client<{ auth: JoinOptions; messages: ServerMessages }>;
@@ -79,9 +86,22 @@ export class MatchRoom extends Room<{
   override maxMessagesPerSecond = lobbyConfig.maxMessagesPerSecond;
   override state = new LobbyState();
   readonly seed = randomInt(1, 0x1_0000_0000);
+  readonly devCreepTest =
+    process.env['NODE_ENV'] !== 'production' &&
+    process.env['VOLAM_DEV_CREEP_TEST'] === '1';
   readonly waveBossTestOptions = serverWaveBossTestOptions(m1Config.tickRate);
   readonly simulation = new DungeonMatch(
-    m1Config,
+    {
+      ...m1Config,
+      ...(!this.devCreepTest &&
+      !this.waveBossTestOptions &&
+      process.env['VOLAM_DEV_LEGACY_SKILLS'] !== '1' &&
+      process.env['VOLAM_TEST_LEGACY_PROGRESSION'] !== '1'
+        ? { campaign: structuredClone(campaignDefinition) }
+        : {}),
+      personalCraftLoot: true,
+      creepCombat: creepCombatDefinition,
+    },
     creepDungeon,
     this.seed,
     serverInvasionDefinition(),
@@ -94,16 +114,18 @@ export class MatchRoom extends Room<{
       coMoDungeon,
       hellDungeon,
     ],
-    structuredClone(dongTaDefinition),
-    structuredClone(tayDocDefinition),
-    namDeDefinition,
-    bacCaiDefinition,
+    this.devCreepTest ? undefined : structuredClone(dongTaDefinition),
+    this.devCreepTest ? undefined : structuredClone(tayDocDefinition),
+    this.devCreepTest ? undefined : namDeDefinition,
+    this.devCreepTest ? undefined : bacCaiDefinition,
     this.waveBossTestOptions,
-    !this.waveBossTestOptions || process.env['VOLAM_DEV_FINAL_BOSS'] === '1'
+    !this.devCreepTest &&
+      (!this.waveBossTestOptions || process.env['VOLAM_DEV_FINAL_BOSS'] === '1')
       ? vuongDefinition
       : undefined,
   );
   readonly world = this.simulation.arena.world;
+  private creepPreview: CreepPreviewSession | undefined;
   readonly devTayDoc =
     process.env['NODE_ENV'] !== 'production' &&
     process.env['VOLAM_DEV_TAY_DOC'] === '1';
@@ -115,7 +137,83 @@ export class MatchRoom extends Room<{
     process.env['VOLAM_DEV_LEGACY_SKILLS'] === '1';
   readonly devSkillLoadout =
     this.legacySkills && process.env['VOLAM_DEV_SKILLS'] === '1';
+  // Historical room fixtures can exercise the earlier progression contract.
+  private readonly legacyProgression =
+    process.env['NODE_ENV'] === 'test' &&
+    process.env['VOLAM_TEST_LEGACY_PROGRESSION'] === '1';
+
+  private spawnPlayer(id: string, player: LobbyPlayer): void {
+    const hero = this.simulation.add(id, player.nickname);
+    if (this.devCreepTest) hero.invulnerable = true;
+    hero.schoolId = player.schoolId;
+    const first = m1Config.progression!.schools[hero.schoolId]!.basicIds[0]!;
+    if (this.legacySkills) {
+      if (hero.schoolId !== 'cai_bang') {
+        hero.basicId = first;
+        hero.skillIds = ['', '', '', ''];
+      }
+    } else {
+      initializeProgression(
+        hero,
+        m1Config,
+        this.legacyProgression ? 'default' : 'fixed',
+        player.selectedBranch || first,
+      );
+    }
+    if (this.devSkillLoadout) prepareSkillReviewHero(hero, m1Config);
+  }
+
   override messages = {
+    'boss-retry-action': validate(
+      bossRetryActionSchema,
+      (client: MatchClient, input) => {
+        const hero = this.simulation.hero(client.sessionId);
+        if (
+          !hero ||
+          !this.simulation.base.campaign ||
+          this.state.phase !== 'IN_GAME' ||
+          input.sequence <= hero.lastSequence
+        )
+          return;
+        hero.lastSequence = input.sequence;
+        const reason =
+          input.action === 'vote'
+            ? this.simulation.bossRetries.vote(
+                client.sessionId,
+                input.id,
+                input.accept,
+              )
+            : this.simulation.bossRetries.call(client.sessionId, input.id);
+        if (reason)
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason,
+          });
+        this.syncState();
+      },
+    ),
+    'creep-preview-action': validate(
+      creepPreviewActionSchema,
+      (client: MatchClient, input) => {
+        const reason =
+          !this.creepPreview || !this.devCreepTest
+            ? 'Preview creep chỉ dùng trong phòng test riêng.'
+            : client.sessionId !== this.state.hostId
+              ? 'Chỉ host điều khiển preview creep.'
+              : this.state.phase !== 'IN_GAME' ||
+                  !this.state.players.get(client.sessionId)?.confirmed
+                ? 'Hãy chọn và xác nhận môn phái trước.'
+                : this.creepPreview.action(input);
+        if (reason)
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason,
+          });
+        this.syncState();
+      },
+    ),
     'merchant-action': validate(
       merchantActionSchema,
       (client: MatchClient, input) => {
@@ -130,17 +228,30 @@ export class MatchRoom extends Room<{
           return;
         if (input.sequence <= hero.lastSequence) return;
         hero.lastSequence = input.sequence;
-        const reason = transactMerchant(
-          hero,
-          m1Config,
-          {
-            inArena: zone.access === 'arena',
-            matchTick: this.simulation.tick,
-            worldTick: zone.world.tick,
-          },
-          input.revision,
-          input,
-        );
+        const beforePotions = { ...hero.inventory?.potions };
+        const reason =
+          this.simulation.base.campaign &&
+          input.action !== 'use-potion' &&
+          this.simulation.waveBossLocked
+            ? 'Không thể mua hoặc chế tạo khi đang giao chiến boss.'
+            : transactMerchant(
+                hero,
+                m1Config,
+                {
+                  inArena: zone.access === 'arena',
+                  matchTick: this.simulation.tick,
+                  worldTick: zone.world.tick,
+                },
+                input.revision,
+                input,
+              );
+        if (!reason && input.action === 'use-potion')
+          for (const key of Object.keys(beforePotions) as PotionId[]) {
+            const used =
+              (beforePotions[key] ?? 0) - (hero.inventory?.potions[key] ?? 0);
+            if (used > 0)
+              this.simulation.bossRetries.recordPotion(hero.id, key, used);
+          }
         if (reason)
           client.send('command-rejected', {
             protocolVersion: PROTOCOL_VERSION,
@@ -155,7 +266,9 @@ export class MatchRoom extends Room<{
             message:
               input.action === 'use-potion'
                 ? 'Đã dùng bình.'
-                : 'Đã mua và cập nhật hành trang.',
+                : input.action === 'craft'
+                  ? 'Đã chế tạo và trang bị.'
+                  : 'Đã mua và cập nhật hành trang.',
           });
         this.syncState();
       },
@@ -264,59 +377,31 @@ export class MatchRoom extends Room<{
             player.confirmed
           )
             return reject('Không thể đổi lựa chọn ở giai đoạn này.');
-          if (action.action === 'select') player.schoolId = action.schoolId;
-          else {
+          if (action.action === 'select') {
+            if (player.schoolId !== action.schoolId) player.selectedBranch = '';
+            player.schoolId = action.schoolId;
+          } else if (action.action === 'branch') {
+            if (
+              !m1Config.progression?.schools[
+                player.schoolId
+              ]?.basicIds.includes(action.basicId)
+            )
+              return reject('Nhánh võ học không thuộc môn phái đã chọn.');
+            player.selectedBranch = action.basicId;
+          } else {
             if (!player.schoolId) return reject('Hãy chọn môn phái trước.');
+            if (this.state.requiresBranch && !player.selectedBranch)
+              return reject('Hãy chọn nhánh võ học trước khi xác nhận.');
             player.confirmed = true;
             if (this.state.phase === 'IN_GAME') {
-              const hero = this.simulation.add(
-                client.sessionId,
-                player.nickname,
-              );
-              hero.schoolId = player.schoolId;
-              if (
-                this.legacySkills &&
-                ['thien_son', 'vo_dang', 'thieu_lam'].includes(hero.schoolId)
-              ) {
-                hero.basicId =
-                  m1Config.progression!.schools[hero.schoolId]!.basicIds[0]!;
-                hero.skillIds = ['', '', '', ''];
-              }
-              if (
-                !this.legacySkills &&
-                !initializeProgression(hero, m1Config, 'default')
-              ) {
-                hero.skillIds = ['', '', '', ''];
-                hero.skillCooldowns = [0, 0, 0, 0];
-              }
-              if (this.devSkillLoadout) prepareSkillReviewHero(hero, m1Config);
+              this.spawnPlayer(client.sessionId, player);
               this.syncState();
             } else if (
               [...this.state.players.values()].every(
                 (p) => p.connected && p.confirmed,
               )
             ) {
-              for (const [id, p] of this.state.players) {
-                const hero = this.simulation.add(id, p.nickname);
-                hero.schoolId = p.schoolId;
-                if (
-                  this.legacySkills &&
-                  ['thien_son', 'vo_dang', 'thieu_lam'].includes(hero.schoolId)
-                ) {
-                  hero.basicId =
-                    m1Config.progression!.schools[hero.schoolId]!.basicIds[0]!;
-                  hero.skillIds = ['', '', '', ''];
-                }
-                if (
-                  !this.legacySkills &&
-                  !initializeProgression(hero, m1Config, 'default')
-                ) {
-                  hero.skillIds = ['', '', '', ''];
-                  hero.skillCooldowns = [0, 0, 0, 0];
-                }
-                if (this.devSkillLoadout)
-                  prepareSkillReviewHero(hero, m1Config);
-              }
+              for (const [id, p] of this.state.players) this.spawnPlayer(id, p);
               this.state.phase = 'IN_GAME';
               void this.setMetadata({ phase: this.state.phase });
               this.syncState();
@@ -354,27 +439,11 @@ export class MatchRoom extends Room<{
         )
           return;
         hero.lastSequence = input.sequence;
-        const error = chuItemAction(
-          zone.world,
-          client.sessionId,
-          input.index,
-          input.itemId,
-          input.action,
-          [
-            ...chuBaThongDungeon.chuBoss!.loot,
-            ...kimLuanDungeon.kimBoss!.loot,
-          ].find((i) => i.id === input.itemId) ?? {
-            id: '',
-            nameVi: '',
-            sellGold: 0,
-          },
-        );
-        if (error)
-          client.send('command-rejected', {
-            protocolVersion: PROTOCOL_VERSION,
-            sequence: input.sequence,
-            reason: error,
-          });
+        client.send('command-rejected', {
+          protocolVersion: PROTOCOL_VERSION,
+          sequence: input.sequence,
+          reason: 'Nguyên liệu cá nhân không thể bán hoặc thả.',
+        });
         this.syncState();
       },
     ),
@@ -386,18 +455,12 @@ export class MatchRoom extends Room<{
           zone = this.simulation.zoneOf(client.sessionId);
         if (!hero || !zone || input.sequence <= hero.lastSequence) return;
         hero.lastSequence = input.sequence;
-        const error = chuLootAction(
-          zone.world,
-          client.sessionId,
-          input.lootId,
-          input.action,
-        );
-        if (error)
-          client.send('command-rejected', {
-            protocolVersion: PROTOCOL_VERSION,
-            sequence: input.sequence,
-            reason: error,
-          });
+        client.send('command-rejected', {
+          protocolVersion: PROTOCOL_VERSION,
+          sequence: input.sequence,
+          reason:
+            'Nguyên liệu cá nhân được cấp tự động, không cần nhận hoặc quay thưởng.',
+        });
         this.syncState();
       },
     ),
@@ -412,6 +475,10 @@ export class MatchRoom extends Room<{
           });
         if (this.state.phase !== 'IN_GAME')
           return reject('Trận đấu chưa bắt đầu.');
+        if (this.creepPreview)
+          return reject(
+            'Phòng preview dùng bộ chọn creep ngay trong sân test.',
+          );
         if (!this.state.players.get(client.sessionId)?.confirmed)
           return reject('Hãy chọn và xác nhận môn phái trước khi chơi.');
         if (
@@ -476,18 +543,15 @@ export class MatchRoom extends Room<{
       }
       if (
         input.kind === 'select-basic' &&
-        ((!this.legacySkills &&
-          this.simulation.hero(client.sessionId)?.schoolId !== 'cai_bang') ||
-          (this.legacySkills &&
-            !m1Config.progression?.schools[
-              this.simulation.hero(client.sessionId)?.schoolId ?? ''
-            ]?.basicIds.includes(input.id)))
+        (!this.legacySkills ||
+          !m1Config.progression?.schools[
+            this.simulation.hero(client.sessionId)?.schoolId ?? ''
+          ]?.basicIds.includes(input.id))
       ) {
         client.send('command-rejected', {
           protocolVersion: PROTOCOL_VERSION,
           sequence: input.sequence,
-          reason:
-            'Đòn đánh môn phái này chưa mở. Không thể dùng võ học môn phái khác.',
+          reason: 'Đòn đánh đã được khóa theo nhánh khi vào trận.',
         });
         return;
       }
@@ -535,7 +599,7 @@ export class MatchRoom extends Room<{
           protocolVersion: PROTOCOL_VERSION,
           sequence: input.sequence,
           reason: this.simulation.hero(client.sessionId)?.progression
-            ? 'Kỹ năng chưa trang bị hoặc chưa học. Dùng điểm tại Võ Học trong đấu trường.'
+            ? 'Kỹ năng chưa trang bị hoặc chưa học. Dùng dấu cộng trên thanh kỹ năng để học.'
             : 'Ô này chưa được trang bị.',
         });
         return;
@@ -543,8 +607,15 @@ export class MatchRoom extends Room<{
       if (this.devSkillLoadout) {
         const h = this.simulation.hero(client.sessionId)!,
           zone = this.simulation.zoneOf(client.sessionId)!;
-        if (['dev-loadout','select-basic'].includes(input.kind) && zone.access!=='arena') {
-          client.send('command-rejected',{protocolVersion:PROTOCOL_VERSION,sequence:input.sequence,reason:'Chỉ đổi bộ thử nghiệm tại đấu trường.'});
+        if (
+          ['dev-loadout', 'select-basic'].includes(input.kind) &&
+          zone.access !== 'arena'
+        ) {
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason: 'Chỉ đổi bộ thử nghiệm tại đấu trường.',
+          });
           return;
         }
         resetSkillReviewResources(h);
@@ -575,7 +646,38 @@ export class MatchRoom extends Room<{
         });
     }),
   };
-  override onCreate(): void {
+  override onCreate(
+    options: { portalCount?: unknown; creepPreview?: unknown } = {},
+  ): void {
+    if (
+      options.creepPreview !== undefined &&
+      typeof options.creepPreview !== 'boolean'
+    )
+      throw new ServerError(400, 'Chế độ preview không hợp lệ.');
+    if (options.creepPreview) {
+      if (!this.devCreepTest)
+        throw new ServerError(
+          403,
+          'Bật VOLAM_DEV_CREEP_TEST=1 trên server development để preview creep.',
+        );
+      this.creepPreview = new CreepPreviewSession(this.simulation);
+    }
+    const portals = portalCountSchema.safeParse(
+      options.portalCount ?? (this.simulation.base.campaign ? 4 : 2),
+    );
+    if (!portals.success)
+      throw new ServerError(400, 'Số cổng phải là 2, 3 hoặc 4.');
+    this.simulation.invasion!.definition.portalCount = portals.data;
+    this.state.defense.portalCount = portals.data;
+    this.state.defense.devCreepTest = this.devCreepTest;
+    if (this.devCreepTest) {
+      if (this.waveBossTestOptions)
+        throw new ServerError(400, 'Chỉ bật một chế độ test creep hoặc boss.');
+      this.world.statue!.invulnerable = true;
+      console.info(
+        '[DEV] VOLAM_DEV_CREEP_TEST=1: all 20 creep waves, 20s interval / 12s streams, invulnerable heroes/statue, chapter bosses disabled.',
+      );
+    }
     if (this.waveBossTestOptions)
       console.info(
         '[DEV] VOLAM_DEV_WAVE_BOSSES=1: four live wave bosses, god mode, run x3, valid boss hits -5% max HP. New rooms only.',
@@ -587,6 +689,7 @@ export class MatchRoom extends Room<{
     ))
       this.world.creeps.clear();
     this.state.devSkillLoadout = this.devSkillLoadout;
+    this.state.requiresBranch = !this.legacySkills && !this.legacyProgression;
     this.metadata = { phase: this.state.phase };
     this.patchRate = 1000 / m1Config.tickRate;
     this.syncState();
@@ -606,6 +709,7 @@ export class MatchRoom extends Room<{
       }
       if (this.devTayDoc && this.simulation.tayDoc?.phase === 'waiting')
         this.simulation.tayDoc.spawn(this.world, this.simulation.arena.config);
+      this.creepPreview?.beforeStep();
       this.simulation.step(Date.now());
       if (this.devSkillLoadout)
         for (const id of this.simulation.membership.keys()) {
@@ -794,6 +898,9 @@ export class MatchRoom extends Room<{
     }
     this.state.tick = this.world.tick;
     this.state.matchElapsedMs = (this.world.tick * 1000) / m1Config.tickRate;
+    this.state.defense.creepPreview = this.creepPreview
+      ? JSON.stringify(this.creepPreview.view)
+      : '';
     const invasion = this.simulation.invasion,
       defense = this.state.defense,
       statue = this.world.statue;
@@ -819,6 +926,7 @@ export class MatchRoom extends Room<{
       defense.wave = invasion.wave;
       defense.nextWaveTick = invasion.nextWaveTick;
       defense.intervalTicks = invasion.definition.intervalTicks;
+      defense.streamUntilTick = invasion.streamUntilTick;
       defense.spawnPlayerCount = invasion.spawnPlayerCount;
       defense.defeated = invasion.defeated;
       defense.defeatTick = invasion.defeatTick;
@@ -895,18 +1003,37 @@ export class MatchRoom extends Room<{
       target.respawnTicks = Math.max(
         0,
         (this.simulation.respawns.get(id) ?? 0) - this.simulation.tick,
+        this.simulation.base.campaign
+          ? (this.simulation.bossRetries.view(id).retry?.revivalTicks ?? 0)
+          : 0,
       );
       target.mana = hero.mana;
       target.maxMana = hero.maxMana;
       target.xp = hero.xp;
+      target.inventory.campaign = this.simulation.base.campaign
+        ? JSON.stringify(this.simulation.bossRetries.view(id))
+        : '';
       target.gold = hero.gold;
       target.inventory.revision = hero.inventory?.revision ?? 0;
       target.inventory.potionCooldownTicks = Math.max(
         0,
         (hero.inventory?.potionReadyAt ?? 0) - this.simulation.tick,
       );
-      for (const slot of ['weapon', 'armor', 'hat', 'boots'] as const)
+      target.inventory.auxiliaryCooldownTicks = Math.max(
+        0,
+        (hero.inventory?.auxiliaryReadyAt ?? 0) - zone.world.tick,
+      );
+      for (const slot of ['weapon', 'armor', 'hat', 'boots'] as const) {
         target.inventory.levels.set(slot, hero.inventory?.levels[slot] ?? 0);
+        target.inventory.materials.set(
+          slot,
+          hero.inventory?.materials?.[slot] ?? 0,
+        );
+        target.inventory.crafted.set(
+          slot,
+          hero.inventory?.crafted?.[slot] ?? '',
+        );
+      }
       for (const potion of Object.keys(m1Config.economy!.potions))
         target.inventory.potions.set(
           potion,
@@ -926,10 +1053,18 @@ export class MatchRoom extends Room<{
         const stats = characterStats(hero, m1Config, zone.world.tick);
         Object.assign(target.build.stats, stats.total);
         target.build.sources = JSON.stringify(stats.sources);
+        const ranks =
+          hero.progression.mode === 'fixed'
+            ? Object.fromEntries(
+                hero.progression.defaultSkills.map((id) => [
+                  id,
+                  skillRank(hero, id, m1Config),
+                ]),
+              )
+            : hero.progression.ranks;
         for (const key of target.build.ranks.keys())
-          if (!Object.hasOwn(hero.progression.ranks, key))
-            target.build.ranks.delete(key);
-        for (const [key, rank] of Object.entries(hero.progression.ranks))
+          if (!Object.hasOwn(ranks, key)) target.build.ranks.delete(key);
+        for (const [key, rank] of Object.entries(ranks))
           target.build.ranks.set(key, rank);
       }
       target.basicId = hero.basicId;
@@ -967,11 +1102,16 @@ export class MatchRoom extends Room<{
         0,
         (hero.skillCooldowns[3] ?? 0) - zone.world.tick,
       );
+      target.tCooldown = Math.max(
+        0,
+        (hero.skillCooldowns[4] ?? 0) - zone.world.tick,
+      );
       const ids = hero.skillIds ?? m1Config.skills.map((s) => s.id);
       target.qSkill = ids[0] ?? '';
       target.wSkill = ids[1] ?? '';
       target.eSkill = ids[2] ?? '';
       target.rSkill = ids[3] ?? '';
+      target.tSkill = ids[4] ?? '';
     }
     const creepKeys = new Set<string>(),
       shotKeys = new Set<string>(),
@@ -1059,6 +1199,7 @@ export class MatchRoom extends Room<{
         target.targetId = enemy.invasion?.targetId ?? enemy.aggroTargetId ?? '';
       }
       for (const effect of [
+        ...(zone.world.creepCombat?.effects.values() ?? []),
         ...(zone.encounter?.effects.values() ?? []),
         ...(zone.kim?.effects.values() ?? []),
         ...(zone.access === 'arena'

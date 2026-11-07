@@ -27,6 +27,7 @@ import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
 import { verifyRenovationSkills } from './verify-renovation-skills.mjs';
+import { startTogether } from '../tests/e2e/pregame-helper.ts';
 
 /** Normal entry point, real Colyseus room. Fixtures are server-side and labelled. */
 export async function verifyRenovationRuntime(
@@ -191,12 +192,7 @@ export async function verifyRenovationRuntime(
       'cai_bang',
     ];
     if (onSelection) await onSelection({ page: pages[0], pages, out });
-    for (let i = 0; i < players; i++) {
-      await pages[i].locator('[data-school=' + schools[i] + ']').click();
-      await pages[i]
-        .getByRole('button', { name: 'Xác nhận', exact: true })
-        .click();
-    }
+    await startTogether(pages, schools, 30000, true);
     for (const page of pages)
       await wait(
         async () => (await inspect(page)).ready,

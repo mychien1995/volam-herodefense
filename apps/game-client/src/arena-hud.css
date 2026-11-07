@@ -572,3 +572,47 @@
 #viewport:not([data-visual-review='original']) #item-menu :is(h3, h4) {
   font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
 }
+
+.hotbar .rank-up {
+  position: absolute;
+  z-index: 3;
+  inset: auto auto calc(100% + 3px) 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 23px;
+  padding: 0;
+  color: #fff1bf;
+  background: #324021;
+  border: 1px solid #c6a45b;
+  line-height: 1;
+  font-size: 18px;
+  pointer-events: auto;
+}
+.hotbar .rank-up:disabled {
+  opacity: 0.48;
+}
+.hotbar [hidden] {
+  display: none !important;
+}
+.hotbar .skill-points,
+.hotbar .stance-indicator {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  padding: 2px 5px;
+  background: #172317;
+  border: 1px solid #977c46;
+  color: #f2da99;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.hotbar .skill-points {
+  right: 0;
+}
+.hotbar .stance-indicator {
+  left: 0;
+}
+
+#viewport[data-statue-intro] #announcements {
+  top: auto;
+  bottom: clamp(110px, 28%, 215px);
+}

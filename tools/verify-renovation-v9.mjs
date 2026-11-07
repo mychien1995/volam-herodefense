@@ -151,7 +151,9 @@ export async function verifyRenovationV9(
                   source: b.source,
                   action: b.action,
                 });
-              for (const e of v.skillEffects)
+              for (const e of v.skillEffects.filter(
+                (e) => !e.texture.startsWith('wave_feedback:'),
+              ))
                 effects.set(e.texture + ':' + e.frame, {
                   texture: e.texture,
                   frame: e.frame,

@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 30;
+export const PROTOCOL_VERSION = 35;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -20,11 +20,60 @@ export const nicknameSchema = z
       ),
   );
 
+export const portalCountSchema = z.union([
+  z.literal(2),
+  z.literal(3),
+  z.literal(4),
+]);
 export const joinOptionsSchema = z.strictObject({
+  creepPreview: z.boolean().optional(),
+  portalCount: portalCountSchema.optional(),
   nickname: nicknameSchema,
   protocolVersion: z.literal(PROTOCOL_VERSION),
 });
 export type JoinOptions = z.infer<typeof joinOptionsSchema>;
+export const bossRetryActionSchema = z.discriminatedUnion('action', [
+  z.strictObject({
+    action: z.literal('vote'),
+    id: z.number().int().positive(),
+    accept: z.boolean(),
+    sequence: z.number().int().positive(),
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+  }),
+  z.strictObject({
+    action: z.literal('call'),
+    id: z.number().int().positive(),
+    sequence: z.number().int().positive(),
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+  }),
+]);
+
+export const creepPreviewActionSchema = z.discriminatedUnion('action', [
+  z.strictObject({
+    action: z.literal('select'),
+    id: z.string().min(1).max(64),
+    sequence: z.number().int().positive(),
+  }),
+  z.strictObject({
+    action: z.enum(['reset', 'special', 'death', 'heal']),
+    sequence: z.number().int().positive(),
+  }),
+  z.strictObject({
+    action: z.literal('options'),
+    basicOnly: z.boolean(),
+    stationary: z.boolean(),
+    autoHeal: z.boolean(),
+    sequence: z.number().int().positive(),
+  }),
+]);
+export type CreepPreviewAction = z.infer<typeof creepPreviewActionSchema>;
+export const creepPreviewViewSchema = z.strictObject({
+  id: z.string(),
+  basicOnly: z.boolean(),
+  stationary: z.boolean(),
+  autoHeal: z.boolean(),
+});
+export type CreepPreviewView = z.infer<typeof creepPreviewViewSchema>;
 
 export const connectionCheckSchema = z.strictObject({
   protocolVersion: z.literal(PROTOCOL_VERSION),
@@ -75,8 +124,13 @@ export const inputSchema = z.discriminatedUnion('kind', [
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    kind: z.literal('gear-skill'),
+  }),
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     kind: z.literal('cast'),
-    slot: z.number().int().min(0).max(3),
+    slot: z.number().int().min(0).max(4),
   }),
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
@@ -125,6 +179,12 @@ export const buildActionSchema = z.discriminatedUnion('action', [
     action: z.literal('upgrade'),
     skillId: assetId,
   }),
+  z.strictObject({
+    ...buildBase,
+    action: z.literal('upgrade-slot'),
+    slot: z.number().int().min(0).max(4),
+  }),
+  z.strictObject({ ...buildBase, action: z.literal('stance') }),
   z.strictObject({ ...buildBase, action: z.literal('reset') }),
   z.strictObject({
     ...buildBase,
@@ -230,6 +290,24 @@ export const merchantActionSchema = z.discriminatedUnion('action', [
     slot: z.enum(['weapon', 'armor', 'hat', 'boots']),
   }),
   merchantBase.extend({
+    action: z.literal('craft'),
+    slot: z.enum(['weapon', 'armor', 'hat', 'boots']),
+    branch: z.enum([
+      'cleave',
+      'lifesteal',
+      'penetration',
+      'reflect',
+      'slow_aura',
+      'burn_aura',
+      'recovery',
+      'fortitude',
+      'assault',
+      'cleanse',
+      'blink',
+      'needle',
+    ]),
+  }),
+  merchantBase.extend({
     action: z.literal('buy-potion'),
     potionId: potionIdSchema,
     quantity: z.number().int().min(1).max(20),
@@ -305,8 +383,12 @@ export const BuildState = schema(
 );
 export const MerchantInventoryState = schema(
   {
+    campaign: t.string().default(''),
     levels: t.map('number'),
     potions: t.map('number'),
+    materials: t.map('number'),
+    crafted: t.map('string'),
+    auxiliaryCooldownTicks: t.number().default(0),
     revision: t.number().default(0),
     potionCooldownTicks: t.number().default(0),
   },
@@ -340,6 +422,7 @@ export const LobbyPlayer = schema(
     bossItems: t.string().default('[]'),
     nickname: t.string(),
     schoolId: t.string().default(''),
+    selectedBranch: t.string().default(''),
     confirmed: t.boolean().default(false),
     connected: t.boolean().default(true),
     checks: t.number().default(0),
@@ -359,10 +442,12 @@ export const LobbyPlayer = schema(
     wCooldown: t.number().default(0),
     eCooldown: t.number().default(0),
     rCooldown: t.number().default(0),
+    tCooldown: t.number().default(0),
     qSkill: t.string().default('hoa_van_chuong'),
     wSkill: t.string().default('cuong_long_loan_vu'),
     eSkill: t.string().default(''),
     rSkill: t.string().default(''),
+    tSkill: t.string().default(''),
     bossLoot: t.string().default('[]'),
   },
   'ArenaPlayer',
@@ -466,6 +551,10 @@ export const AreaState = schema(
 export type DungeonState = SchemaType<typeof DungeonState>;
 export const DefenseState = schema(
   {
+    creepPreview: t.string().default(''),
+    portalCount: t.number().default(2),
+    streamUntilTick: t.number().default(0),
+    devCreepTest: t.boolean().default(false),
     devWaveBosses: t.boolean().default(false),
     devFinalBoss: t.boolean().default(false),
     devWaveBossStage: t.string().default(''),
@@ -517,6 +606,7 @@ export const LobbyState = schema(
     matchElapsedMs: t.number().default(0),
     maxPlayers: t.number().default(lobbyConfig.maxPlayers),
     devSkillLoadout: t.boolean().default(false),
+    requiresBranch: t.boolean().default(true),
     tick: t.number().default(0),
     players: t.map(LobbyPlayer),
     creeps: t.map(CreepState).view(),
@@ -543,6 +633,7 @@ export const schoolIdSchema = z.enum([
 export const lobbyActionSchema = z.discriminatedUnion('action', [
   z.strictObject({ action: z.literal('start') }),
   z.strictObject({ action: z.literal('select'), schoolId: schoolIdSchema }),
+  z.strictObject({ action: z.literal('branch'), basicId: assetId }),
   z.strictObject({ action: z.literal('confirm') }),
 ]);
 export type LobbyAction = z.infer<typeof lobbyActionSchema>;

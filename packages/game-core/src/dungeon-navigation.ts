@@ -1,10 +1,10 @@
 import { blocked, distance, segmentRect } from './geometry.js';
-import type { Creep, Hero, Point, SimulationConfig } from './types.js';
+import type { Creep, Actor, Point, SimulationConfig } from './types.js';
 const cell = 32;
 /** Small deterministic grid search only for dungeon creeps blocked by scenery. */
 export function dungeonWaypoint(
   enemy: Creep,
-  hero: Hero,
+  hero: Actor,
   tick: number,
   config: SimulationConfig,
 ): Point {

@@ -1,7 +1,22 @@
 import { expect, it } from 'vitest';
-import { addCreep, addHero, createWorld, stepWorld } from '@volam/game-core';
+import {
+  addCreep,
+  addHero,
+  createWorld,
+  DungeonMatch,
+  stepWorld,
+} from '@volam/game-core';
 import { stepBossBanter } from '../packages/game-core/src/boss-banter.js';
-import { bossBanterLines, bossBanterPools, m1Config } from '@volam/game-data';
+import {
+  bossBanterLines,
+  bossBanterPools,
+  m1Config,
+  creepDungeon,
+  coMoDungeon,
+  chuBaThongDungeon,
+  hongLietDungeon,
+  kimLuanDungeon,
+} from '@volam/game-data';
 
 function setup(seed = 90) {
   const c = {
@@ -17,7 +32,7 @@ function setup(seed = 90) {
   };
   const w = createWorld(c, seed);
   addHero(w, 'p', 'P', c);
-  for (const id of ['dong_ta', 'tay_doc_boss', 'boss_nam_de', 'bac_cai']) {
+  for (const id of [...Object.keys(bossBanterPools), 'bac_cai']) {
     const a = addCreep(w, id, { x: 800, y: 616 }, c);
     a.controlled = true;
   }
@@ -27,14 +42,21 @@ function setup(seed = 90) {
 }
 it('has exactly twenty unique original Vietnamese lines per requested boss and no Bắc Cái pool', () => {
   expect(Object.keys(bossBanterPools).sort()).toEqual([
+    'boss_ly_mac_sau',
     'boss_nam_de',
+    'chu_ba_thong',
+    'dat_nhi_ba',
     'dong_ta',
+    'hoac_do',
+    'hong_liet_boss',
+    'kim_luan_phap_vuong',
     'tay_doc_boss',
+    'vuong_trung_duong',
   ]);
-  expect(Object.keys(bossBanterLines)).toHaveLength(60);
+  expect(Object.keys(bossBanterLines)).toHaveLength(200);
   for (const lines of Object.values(bossBanterPools)) {
     expect(new Set(lines).size).toBe(20);
-    expect(lines.every((s) => s.length > 25 && s.length < 110)).toBe(true);
+    expect(lines.every((s) => s.length > 25 && s.length < 125)).toBe(true);
   }
 });
 it('server-seeded decks exhaust all twenty without repetition, never repeat across decks, and synchronize stable line IDs', () => {
@@ -56,7 +78,9 @@ it('server-seeded decks exhaust all twenty without repetition, never repeat acro
       expect(new Set(pool.slice(20, 40)).size).toBe(20);
       expect(pool[19]).not.toBe(pool[20]);
     }
-    expect(Object.keys(lines)).toHaveLength(3);
+    expect(Object.keys(lines).sort()).toEqual(
+      Object.keys(bossBanterPools).sort(),
+    );
     return lines;
   };
   expect(run()).toEqual(run());
@@ -110,3 +134,40 @@ it('cosmetic banter does not consume or perturb authoritative combat RNG', () =>
     Array.from({ length: 20 }, () => reference.random()),
   );
 });
+
+it.each([
+  [coMoDungeon, 'boss_ly_mac_sau'],
+  [chuBaThongDungeon, 'chu_ba_thong'],
+  [hongLietDungeon, 'hong_liet_boss'],
+  [kimLuanDungeon, 'hoac_do'],
+] as const)(
+  'emits live dungeon chatter in %s despite continuous actions',
+  (dungeon, id) => {
+    const config = structuredClone(m1Config);
+    const match = new DungeonMatch(config, creepDungeon, 271, undefined, [
+      dungeon,
+    ]);
+    const heroes = [match.add('a', 'A'), match.add('b', 'B')];
+    for (const hero of heroes)
+      expect(match.enter(hero.id, 'shared', dungeon.id)).toBeUndefined();
+    const zone = match.zoneOf('a')!;
+    const actor = zone.world.creeps.get(id)!;
+    for (const [i, hero] of heroes.entries()) {
+      hero.hp = hero.maxHp = 100_000;
+      hero.x = actor.x + (dungeon.id === 'co_mo' ? 240 : 100 + i * 20);
+      hero.y = actor.y + 40;
+    }
+    const heard = [];
+    for (let i = 0; i < config.tickRate * 8; i++) {
+      match.step();
+      heard.push(
+        ...match.events.filter(
+          ({ event }) => event.sourceId === id && event.stage === 'boss_banter',
+        ),
+      );
+    }
+    expect(heard).toHaveLength(1);
+    expect(heard[0]!.zoneId).toBe(zone.id);
+    expect(bossBanterLines[heard[0]!.event.abilityId]).toBeTruthy();
+  },
+);

@@ -6,6 +6,15 @@ Hàng Long Hỏa Vũ (`hang_long_hoa_vu`): range308/329/350 at ranks1/2/3, exact
 
 Hàng Long Hỏa Vũ (`hang_long_hoa_vu`): fixed cast-time landing point; forward flight → one orbit → rise → dive, one112px AoE hit on landing after87ticks. Thất Tinh Kiếm (`that_tinh_kiem`): seven actual frontal strokes,3tick spacing, former four-hit budget divided across seven. Thái Cực Trận: only hostile creeps and bosses are confined, including resistant/scripted movers; all allied heroes pass. These director-requested mechanics supersede the historical rows below; see `DECISIONS.md` and `docs/evidence/renovation-v5/README.md`.
 
+## Campaign balance và thử lại boss — 2026-11-06
+
+Các tên, nhánh và rank gate giữ nguyên. Long Châu của tứ tuyệt và dungeon boss dùng stable boss IDs, cộng4 chỉ số nền theo hệ số cấu hình. Level6/12/18/24 tương ứng bốn lần mở rank ulti trong tiến trình mới. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+
+## Fixed branch catalogue override — 2026-11-04
+
+Use catalogue order within each selected branch for Q/W/E/R, with its ultimate on T. Thiếu Lâm Quyền uses Q/W/E for La Hán Quyền, Vi Đà Quyền and Đại Lực Kim Cương Chưởng. F changes those slots to Toàn Phong Thoái, Ca Diệp Thoái and Vô Ảnh Cước. R and T are Kim Cang Bất Hoại and Như Lai Niết Bàn in both stances. All 43 active definitions retain their stable IDs. Every active has four ranks.
+
+
 ## M3D approved runtime catalogue override — 2026-11-03
 
 This section and the revised rows below supersede earlier skill descriptions for the approved M3D integration. Stable IDs,43 actives,8 basics,4 passives,free school mixing and4 slots remain. `hoanh_tao_cuoc` now displays **Ca Diệp Thoái**; `tam_gioi_quy_thien` displays **Sư Tử Hống**. Exact data remain in `packages/game-data/src/thieu-lam.ts` and `m3d-feedback-tuning.ts`.

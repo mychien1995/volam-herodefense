@@ -94,7 +94,7 @@ export class BossPartyUI {
       'info',
       entry[0],
       entry[1].map((text) => `<p>${text}</p>`).join('') +
-        '<p>Mỗi lượt boss: một lần tự hồi sinh sau 5 giây. Chết lần hai sẽ quan chiến cho đến khi boss reset. Khi tất cả đồng đội cùng ở đây, chiến sự ngoài đấu trường tạm dừng.</p>',
+        '<p>Mỗi lượt boss có 3 lần hồi sinh sau 5 giây. Chết lần thứ tư sẽ quan chiến. Khi cả đội hết lượt, biểu quyết ít nhất 50% để đánh lại. Khi tất cả đồng đội cùng ở đây, chiến sự ngoài đấu trường tạm dừng.</p>',
       false,
     );
   }

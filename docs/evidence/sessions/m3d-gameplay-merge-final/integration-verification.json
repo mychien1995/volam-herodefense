@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "targetParent": "5bca353ce0623c8312a51af585e325e9ca553866",
+  "source": "2ef388692689cdc31c6e211cda05e87ccf88073e",
+  "protocol": 31,
+  "unitIntegrationTests": 755,
+  "typechecks": "PASS",
+  "build": "PASS",
+  "assetValidators": "PASS",
+  "pipelineTimings": "check-workflow/final-timings.json",
+  "browserCases": [
+    {
+      "case": "boss farewells, corpse expiry and dungeon chatter",
+      "status": "PASS",
+      "run": "initial final pipeline"
+    },
+    {
+      "case": "six-player crafting and both Cai Bang icon sets",
+      "status": "PASS",
+      "seconds": 37.7,
+      "run": "scoped retry after test-only branch scrolling and acknowledged waits"
+    },
+    {
+      "case": "match OST playback, loop and reset on leaving",
+      "status": "PASS",
+      "seconds": 27.6,
+      "run": "scoped Chromium verification"
+    }
+  ],
+  "limitations": "The initial pipeline browser stage failed during pregame mouse interaction. The timing report retains that failure. Runtime assets and production code were unchanged during the scoped retries."
+}

@@ -1,0 +1,45 @@
+#boss-retry-dialog {
+  position: absolute;
+  inset: 0;
+  z-index: 155;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: #061612b8;
+}
+#boss-retry-dialog[hidden],
+#boss-lives[hidden] {
+  display: none;
+}
+#boss-retry-dialog > section {
+  width: min(520px, 100%);
+  max-height: 100%;
+  overflow: auto;
+  padding: 22px;
+  background: #122a25f5;
+}
+.retry-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
+}
+.retry-actions button {
+  flex: 1;
+  padding: 10px;
+}
+#boss-lives {
+  position: absolute;
+  bottom: 112px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 105;
+  max-width: calc(100% - 32px);
+  padding: 6px 12px;
+  color: #f3d294;
+  background: #122a25ed;
+  font-size: 12px;
+}
+#boss-lives button {
+  margin-left: 10px;
+}
