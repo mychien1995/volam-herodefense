@@ -32,6 +32,8 @@ Farm EXP is multiplied by0.25 at two or more levels above the current defeated-m
 
 Invasions use wave1–5/6–10/11–15/16–20 chapter budgets, independently of delayed boss attempts. Their fixed pool is distributed across the actual scheduled creep count and scales by the room's snapshotted participating population. Each creep still splits its pool among eligible kills/assists. Two versus four gates change density, not total reward. Private dungeon pools remain personal. Their reward chapter follows the same elapsed-time floor as their threat; the over-level EXP penalty still follows actual defeated-master progression. Merely being connected never grants kill EXP.
 
+Each new campaign character starts with five small HP potions and five small mana potions, including late entrants. The initial stock counts toward the 20-potion limit and uses the normal shared five-second cooldown. Travel, respawn and reconnect carry forward the inventory.
+
 Basic shop prices/stat bonuses and potion prices/recovery/cap/shared5s cooldown are retained. The basic5 set costs2,035; all four crafted slots cost4,185 before potions. Full scheduled waves plus all eight first boss rewards supply4,570 gold/person when pools are shared evenly; the remaining farm/travel/potion choices determine actual completion time. No starting-gold grant, trading, resale or transferable drop is added.
 
 ## Boss pools and Long Châu

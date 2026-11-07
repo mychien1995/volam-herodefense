@@ -124,6 +124,39 @@ describe('approved campaign progression and economy', () => {
     expect(h.level).toBe(6);
     expect(h.progression!.ranks['phi_long_tai_thien'] ?? 0).toBe(0);
   });
+  it('stocks new characters once and preserves the remaining potions through travel, respawn and reconnect', () => {
+    const { m, h, c } = fixture();
+    expect(h.inventory?.potions).toEqual({ hp_small: 5, mp_small: 5 });
+    expect(h.gold).toBe(0);
+    expect(m.enter(h.id, 'private', 'forest')).toBeUndefined();
+    h.hp = 1;
+    expect(
+      transactMerchant(
+        h,
+        c,
+        {
+          inArena: false,
+          matchTick: m.tick,
+          worldTick: m.zoneOf(h.id)!.world.tick,
+        },
+        0,
+        { action: 'use-potion', potionId: 'hp_small' },
+      ),
+    ).toBeUndefined();
+    kill(m, h);
+    expect(h.hp).toBe(0);
+    ticks(m, creepDungeon.respawnTicks);
+    expect(h.hp).toBe(h.maxHp);
+    expect(m.zoneOf(h.id)?.access).toBe('arena');
+    m.disconnect(h.id);
+    m.reconnect(h.id);
+    expect(m.hero(h.id)?.inventory?.potions).toEqual({
+      hp_small: 4,
+      mp_small: 5,
+    });
+    const late = m.add('late', 'Late');
+    expect(late.inventory?.potions).toEqual({ hp_small: 5, mp_small: 5 });
+  });
   it.each([1, 2, 6])(
     'budgets the same invasion per player at %i players with two/four gates',
     (players) => {

@@ -39,6 +39,7 @@ import { distance, blocked, clampEllipse } from './geometry.js';
 import { spawnBossEncounter } from './boss-encounter.js';
 import type { BossEncounterDefinition } from './boss-types.js';
 import { cancelOwnedEffects } from './status.js';
+import { emptyInventory } from './economy.js';
 import {
   changeBuild,
   refreshCharacter,
@@ -321,6 +322,9 @@ export class DungeonMatch {
   }
   add(id: string, nickname: string): Hero {
     const hero = addHero(this.arena.world, id, nickname, this.base);
+    const startingPotions = this.base.campaign?.startingPotions;
+    if (this.base.economy && startingPotions)
+      hero.inventory = { ...emptyInventory(), potions: { ...startingPotions } };
     this.membership.set(id, 'arena');
     if (this.waveBossLocked) this.recallForBoss(id);
     return hero;

@@ -32,6 +32,8 @@ Use `tests/renovation-navigation.test.ts`, `tests/bamboo-map.test.ts`, `scripts/
 
 ## Campaign balance và thử lại boss — 2026-11-06
 
+Nhân vật mới nhận 5 bình máu nhỏ và 5 bình mana nhỏ, kể cả khi vào phòng muộn. Kiểm tra dùng bình, đi phó bản, hồi sinh và kết nối lại để xác nhận số bình còn lại.
+
 Bổ sung acceptance cho đường EXP, budget thưởng2/4 cửa và phòng1/2/6, pearl once/dead-present ownership, sáu sprite lặp, floor theo thời gian, gate Kim→Vương, ba hồi sinh của cả chín boss, voteN1..6, timeout/decline/reconnect/refund và failed-music override. Kết quả thực tế nằm ở verification, không suy diễn từ spec. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
 
 ## Nhạc nền trận đấu — 2026-11-05

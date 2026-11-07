@@ -13,10 +13,8 @@ test('farms real gold, buys auto-equipped gear and uses a purchased potion', asy
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   await joinWaiting(page, 'Thương Khách');
-  await startTogether([page]);
-  await page.getByRole('button', { name: 'Võ Công · O', exact: true }).click();
-  await page.locator('#skill-branch').selectOption('cai_bang_chuong');
-  await page.keyboard.press('Escape');
+  await startTogether([page], ['cai_bang_chuong']);
+  await page.locator('[data-rank-slot="0"]').click();
   const deadline = Date.now() + 65000;
   while ((await hero(page)).gold < 34 && Date.now() < deadline) {
     await page.keyboard.press('KeyA');
@@ -47,7 +45,7 @@ test('farms real gold, buys auto-equipped gear and uses a purchased potion', asy
   await page.locator('[data-ui-action=buy-potion]').click();
   await expect
     .poll(async () => (await hero(page)).inventory.potions.hp_small)
-    .toBe(1);
+    .toBe(before.inventory.potions.hp_small + 1);
   await page.keyboard.press('Escape');
   await page.getByRole('button', { name: 'Túi đồ', exact: true }).click();
   await expect(page.locator('.item-equip-0')).toContainText('Cấp 1/5');
@@ -61,7 +59,7 @@ test('farms real gold, buys auto-equipped gear and uses a purchased potion', asy
   await page.locator('[data-potion-resource=hp]').click();
   await expect
     .poll(async () => (await hero(page)).inventory.potions.hp_small)
-    .toBe(0);
+    .toBe(before.inventory.potions.hp_small);
   const healed = await hero(page);
   expect(healed.hp).toBeGreaterThan(injured.hp);
   expect(healed.hp).toBeLessThanOrEqual(healed.maxHp);
@@ -76,10 +74,8 @@ test('1 and 2 consume purchased potions with modal ownership and shared cooldown
 }, info) => {
   test.setTimeout(90000);
   await joinWaiting(page, 'Dược Khách');
-  await startTogether([page]);
-  await page.getByRole('button', { name: 'Võ Công · O', exact: true }).click();
-  await page.locator('#skill-branch').selectOption('cai_bang_chuong');
-  await page.keyboard.press('Escape');
+  await startTogether([page], ['cai_bang_chuong']);
+  await page.locator('[data-rank-slot="0"]').click();
   const deadline = Date.now() + 40000;
   while ((await hero(page)).gold < 12 && Date.now() < deadline) {
     await page.keyboard.press('KeyA');
@@ -87,19 +83,20 @@ test('1 and 2 consume purchased potions with modal ownership and shared cooldown
     await page.waitForTimeout(450);
   }
   expect((await hero(page)).gold).toBeGreaterThanOrEqual(12);
+  const initialPotions = (await hero(page)).inventory.potions;
   await page.getByRole('button', { name: 'Thương Gia', exact: true }).click();
   await page.getByRole('tab', { name: 'Bình dược', exact: true }).click();
   await page.locator('[data-ui-action=quantity][data-value=more]').click();
   await page.locator('[data-ui-action=buy-potion]').click();
   await expect
     .poll(async () => (await hero(page)).inventory.potions.hp_small)
-    .toBe(2);
+    .toBe(initialPotions.hp_small + 2);
   await page.locator('[data-ui-action=potion][data-value=potion_mp]').click();
   await page.locator('[data-ui-action=quantity][data-value=less]').click();
   await page.locator('[data-ui-action=buy-potion]').click();
   await expect
     .poll(async () => (await hero(page)).inventory.potions.mp_small)
-    .toBe(1);
+    .toBe(initialPotions.mp_small + 1);
   const revision = (await hero(page)).inventory.revision;
   await page.keyboard.press('Digit1');
   await page.keyboard.press('Digit2');
@@ -115,13 +112,17 @@ test('1 and 2 consume purchased potions with modal ownership and shared cooldown
   await page.keyboard.press('Digit1');
   await expect
     .poll(async () => (await hero(page)).inventory.potions.hp_small)
-    .toBe(1);
+    .toBe(initialPotions.hp_small + 1);
   expect((await hero(page)).hp).toBeGreaterThan(injured.hp);
   await page.keyboard.press('Digit1');
   await page.keyboard.press('Digit2');
   await page.waitForTimeout(200);
-  expect((await hero(page)).inventory.potions.hp_small).toBe(1);
-  expect((await hero(page)).inventory.potions.mp_small).toBe(1);
+  expect((await hero(page)).inventory.potions.hp_small).toBe(
+    initialPotions.hp_small + 1,
+  );
+  expect((await hero(page)).inventory.potions.mp_small).toBe(
+    initialPotions.mp_small + 1,
+  );
   await expect
     .poll(async () => (await hero(page)).inventory.potionCooldownTicks, {
       timeout: 8000,
@@ -141,7 +142,7 @@ test('1 and 2 consume purchased potions with modal ownership and shared cooldown
   await page.keyboard.press('Digit2');
   await expect
     .poll(async () => (await hero(page)).inventory.potions.mp_small)
-    .toBe(0);
+    .toBe(initialPotions.mp_small);
   expect((await hero(page)).mana).toBeGreaterThan(depleted.mana);
   expect((await hero(page)).inventory.potionCooldownTicks).toBeGreaterThan(0);
   await page.screenshot({ path: info.outputPath('potion-hotkeys.png') });

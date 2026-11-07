@@ -7,6 +7,32 @@ const hero = async (p: Page) => {
   const s = await snap(p);
   return s.state.players[s.sessionId];
 };
+test('fresh campaign heroes see their starter potions', async ({
+  page,
+  browser,
+}) => {
+  const peer = await browser.newContext();
+  const b = await peer.newPage();
+  const errors: string[] = [];
+  for (const p of [page, b]) p.on('pageerror', (e) => errors.push(e.message));
+  try {
+    await joinWaiting(page, 'Cái Bang mới');
+    await joinWaiting(b, 'Võ Đang mới', (await snap(page)).roomId);
+    await startTogether([page, b], ['cai_bang_chuong', 'vo_dang']);
+    for (const p of [page, b]) {
+      await expect(p.locator('[data-potion-resource="hp"] em')).toHaveText('5');
+      await expect(p.locator('[data-potion-resource="mp"] em')).toHaveText('5');
+      expect((await hero(p)).inventory.potions).toMatchObject({
+        hp_small: 5,
+        mp_small: 5,
+      });
+    }
+
+    expect(errors).toEqual([]);
+  } finally {
+    await peer.close();
+  }
+});
 test('campaign HUD formats pearl stats and keeps lives clear of the defense HUD', async ({
   page,
 }) => {

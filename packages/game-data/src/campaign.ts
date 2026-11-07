@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { campaignBossIds, type CampaignDefinition } from '@volam/game-core';
+import { economyTrial } from './economy.js';
 const positive = z.number().finite().positive();
+const count = z.number().int().nonnegative();
 const chapters = z.array(positive).length(5);
 export const campaignSchema = z.strictObject({
   creepCountPerPlayer: positive,
@@ -13,6 +15,13 @@ export const campaignSchema = z.strictObject({
   chapterSeconds: positive,
   xpBase: positive,
   xpGrowth: positive,
+  startingPotions: z
+    .strictObject({ hp_small: count, mp_small: count })
+    .refine(
+      ({ hp_small, mp_small }) =>
+        hp_small + mp_small <= economyTrial.potionLimit,
+      'Starting potions must fit within the inventory limit.',
+    ),
   targets: chapters,
   farmOverflowRatio: positive.max(1),
   invasionXp: chapters,
@@ -51,6 +60,7 @@ export const campaignDefinition: CampaignDefinition = campaignSchema.parse({
   chapterSeconds: 900,
   xpBase: 80,
   xpGrowth: 40,
+  startingPotions: { hp_small: 5, mp_small: 5 },
   targets: [6, 12, 18, 24, 28],
   farmOverflowRatio: 0.25,
   invasionXp: [100, 300, 450, 650, 650],

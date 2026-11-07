@@ -12,6 +12,7 @@ export interface CampaignDefinition {
   chapterSeconds: number;
   xpBase: number;
   xpGrowth: number;
+  startingPotions: { hp_small: number; mp_small: number };
   targets: number[];
   farmOverflowRatio: number;
   invasionXp: number[];

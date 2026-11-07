@@ -40,6 +40,14 @@ it('authorizes purchases, rejects replays/stale spends and replicates gear/resou
   await expect.poll(() => a.state.phase).toBe('IN_GAME');
   const room = server.getRoomById<MatchRoom>(a.roomId),
     h = room.simulation.hero(a.sessionId)!;
+  for (const peer of [a, b])
+    await expect
+      .poll(() => {
+        const potions = peer.state.players.get(peer.sessionId)?.inventory
+          .potions;
+        return [potions?.get('hp_small'), potions?.get('mp_small')];
+      })
+      .toEqual([5, 5]);
   h.gold = 100;
   h.hp = 50;
   await expect.poll(() => a.state.players.get(a.sessionId)!.gold).toBe(100);
@@ -76,7 +84,7 @@ it('authorizes purchases, rejects replays/stale spends and replicates gear/resou
     .poll(() =>
       a.state.players.get(a.sessionId)!.inventory.potions.get('hp_small'),
     )
-    .toBe(2);
+    .toBe(7);
   a.send('merchant-action', {
     protocolVersion: PROTOCOL_VERSION,
     sequence: 4,
@@ -93,7 +101,7 @@ it('authorizes purchases, rejects replays/stale spends and replicates gear/resou
     potionId: 'hp_small',
   });
   await expect.poll(() => h.lastSequence).toBe(5);
-  expect(h.inventory!.potions.hp_small).toBe(1);
+  expect(h.inventory!.potions.hp_small).toBe(6);
   expect(h.gold).toBe(62);
   const zoneError = room.simulation.enter(a.sessionId, 'private');
   expect(zoneError).toBeUndefined();

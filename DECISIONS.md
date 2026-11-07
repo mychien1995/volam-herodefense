@@ -1,3 +1,7 @@
+## Bình khởi đầu — 2026-11-08
+
+Mỗi nhân vật trong trận chiến dịch nhận 5 bình máu nhỏ và 5 bình mana nhỏ khi vào trận lần đầu, kể cả khi vào phòng muộn. [Cấu hình chiến dịch](docs/CAMPAIGN_BALANCE_2026_11_06.md#experience-and-money).
+
 ## Renovation v10 · giữ thân Cái Bang mới khi đánh thường — 2026-11-07
 
 Đánh thường Cái Bang Chưởng dùng sprite mới trong cả năm đòn chưởng và đòn rồng thứ sáu. Đạn chưởng, đạn rồng, hiệu ứng phát chiêu và va chạm dùng bản M3D.
