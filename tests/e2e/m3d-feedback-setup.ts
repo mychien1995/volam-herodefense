@@ -30,7 +30,22 @@ export async function createM3dFixture(
       const h = room?.simulation.hero(input.sessionId),
         z = room?.simulation.zoneOf(input.sessionId);
       if (!h || !z) throw Error('Unknown fixture hero');
-      if (input.action === 'build') {
+      if (input.action === 'fixed-rank') {
+        gainExperience(h, 29 * 60, m1Config);
+        for (let rank = 0; rank < input.rank; rank++) {
+          const error = changeBuild(
+            z.world,
+            h,
+            z.config,
+            h.progression!.revision,
+            {
+              action: 'upgrade-slot',
+              slot: input.slot,
+            },
+          );
+          if (error) throw Error(error);
+        }
+      } else if (input.action === 'build') {
         gainExperience(h, 29 * 60, m1Config);
         const change = (c: Parameters<typeof changeBuild>[4]) => {
           const error = changeBuild(

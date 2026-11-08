@@ -13,8 +13,17 @@ export const campaignSchema = z.strictObject({
   invasionBaseCount: positive,
   invasionChapterCount: positive,
   chapterSeconds: positive,
-  xpBase: positive,
-  xpGrowth: positive,
+  xpThresholds: z
+    .array(count)
+    .length(30)
+    .refine(
+      (xp) =>
+        xp[0] === 0 &&
+        xp
+          .slice(1)
+          .every((total, i) => total - xp[i]! > xp[i]! - (xp[i - 1] ?? 0)),
+      'The XP curve must start at zero and increase the cost of each level.',
+    ),
   startingPotions: z
     .strictObject({ hp_small: count, mp_small: count })
     .refine(
@@ -58,8 +67,12 @@ export const campaignDefinition: CampaignDefinition = campaignSchema.parse({
   invasionBaseCount: 120,
   invasionChapterCount: 20,
   chapterSeconds: 900,
-  xpBase: 80,
-  xpGrowth: 40,
+  // Cumulative thresholds for levels 1–30. The curve rejoins v1 at level 18.
+  xpThresholds: [
+    0, 45, 135, 270, 450, 670, 970, 1330, 1750, 2230, 2750, 3310, 3910, 4550,
+    5230, 5950, 6700, 7480, 8280, 9120, 10000, 10920, 11880, 12880, 13920,
+    15000, 16120, 17280, 18480, 19720,
+  ],
   startingPotions: { hp_small: 5, mp_small: 5 },
   targets: [6, 12, 18, 24, 28],
   farmOverflowRatio: 0.25,

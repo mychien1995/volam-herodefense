@@ -18,7 +18,9 @@ These are playtest targets, not forced level/gear locks or free rewards. Invasio
 
 ## Experience and money
 
-Level L→L+1 costs `80 + 40*L`. Cumulative thresholds: L6=1,000; L12=3,520; L18=7,480; L24=12,880; L30=19,720. The five-slot branch, earned points, standard1/3/5/7 and ultimate6/12/18/24 gates are unchanged. No free ultimate rank is granted.
+The 2026-11-08 trial uses validated cumulative EXP thresholds for levels 1–30. Levels 2–6 require 45/135/270/450/670 EXP. Level 12 requires 3,310. The curve rejoins the original thresholds at level 18 (7,480 EXP), with level 24 at 12,880 and level 30 at 19,720. The cost of each successive level rises across the full curve. The five-slot branch awards skill points at the existing levels, with rank gates at 1/3/5/7 and 6/12/18/24. Players spend their points to learn ranks.
+
+The solo trial targets level 3 around the first invasion and level 6 around Đông Tà. Two early dungeon waves plus a full first invasion give 136 EXP. Five full early invasions plus ten early dungeon waves give 680 EXP. These are reward totals to check against live play.
 
 Farm EXP is multiplied by0.25 at two or more levels above the current defeated-master chapter target6/12/18/24/28. First-clear boss EXP bypasses this farm penalty. Fractional farm EXP/gold is retained in server-owned character remainders, so dense streams do not lose small rewards to integer rounding. EXP cap and HUD progress use the same thresholds.
 
@@ -79,6 +81,14 @@ Dungeon floor chapter is the greater of actual master progression and elapsed in
 - Vương Trùng Dương's failed music mechanic ends the entire attempt even when personal revivals remain, then opens the same ballot.
 
 ## Verification and limits
+
+### 2026-11-08 EXP trial and original three-potion stock per type
+
+`pnpm check:quick tests/campaign.test.ts tests/economy-room.test.ts tests/progression.test.ts` passed 101 tests. `pnpm check:final --config playwright.campaign.config.ts --grep 'fresh campaign heroes'` passed typechecks, 18 workflow checks, 941 unit and integration tests, the production build and asset validation. Its browser assertion initially expected a solo boss pool in a two-player room. The production server awarded 300 EXP as specified. After correcting the test expectation, `pnpm exec tsc -p tsconfig.tools.json --noEmit` and `node tools/run-playwright.mjs test --config playwright.campaign.config.ts --grep 'fresh campaign heroes'` passed against the same build. `node tools/run-playwright.mjs test tests/e2e/merchant.spec.ts` passed both purchasing and potion hotkey cases.
+
+The ignored report `artifacts/m3d-early-levels-balance.json` records three seeds per curve for solo Cái Bang Chưởng in the forest. The new curve reached level 2 in wave 3 and level 3 in wave 8. The bot used actual combat inputs and was invulnerable to isolate EXP pacing.
+
+### 2026-11-06 campaign rollout
 
 Focused regression: `tests/campaign.test.ts` covers thresholds, real damaging rewards, six-sprite cycling/time floor, population budgets, first-clear/material ownership, final gate, all nine encounter life paths, N1..6 ballots, timeout/refund/travel/reconnect, malformed input and the actual failed final-music path. Existing progression/economy/invasion/dungeon tests are retained.
 

@@ -57,6 +57,8 @@ const multi = (
   finisherRange: range,
   ...(halfAngle === undefined ? {} : { halfAngle }),
 });
+const daoDashDistance = 150;
+
 export const thienSonSkills: Ability[] = [
   {
     id: 'lien_hoa_phien',
@@ -142,7 +144,7 @@ export const thienSonSkills: Ability[] = [
     cooldownTicks: 180,
     effect: {
       mode: 'dash',
-      distance: 150,
+      distance: daoDashDistance,
       speed: 750,
       radius: 24,
       damage: 58,
@@ -179,7 +181,7 @@ export const thienSonSkills: Ability[] = [
     cooldownTicks: 240,
     effect: {
       mode: 'dash',
-      distance: 65,
+      distance: daoDashDistance,
       speed: 650,
       radius: 18,
       damage: 0,
@@ -225,7 +227,7 @@ const descriptions = [
   'Tuyệt kỹ: mười hai nhịp phong bạo theo người, bốn đợt quạt bay tám hướng.',
   'Lướt chém một lần mỗi địch; miễn sát thương trực tiếp trên các tick đang lướt, không chặn DOT.',
   'Hai luồng đao khí bay thẳng, làm chậm; tăng sát thương lên địch đang chậm.',
-  'Lướt lùi ngược hướng nhìn, giữ hướng nhìn và để lại quang ảnh; miễn sát thương trực tiếp lúc đang lướt, cửa sổ phản kích sau đó không miễn thương.',
+  'Lướt lùi, giữ hướng nhìn và để lại quang ảnh; tầm lướt bằng Phi Ảnh Trảm cùng bậc. Miễn sát thương trực tiếp khi lướt; cửa sổ phản kích không miễn thương.',
   'Tụ đại đao trên đầu rồi chém xuống phía trước, xuyên một phần phòng thủ riêng cho đòn này.',
   'Tuyệt kỹ: mười nhát chém cực nhanh phía trước và một nhát kết thúc.',
 ];

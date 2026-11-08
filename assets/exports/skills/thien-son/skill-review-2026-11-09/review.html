@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thiên Sơn · Duyệt artwork</title>
+<style>
+  :root { color-scheme: dark; font: 16px system-ui, sans-serif; }
+  body { margin: 24px auto; max-width: 880px; padding: 0 16px; background: #141d27; }
+  main { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  section { padding: 16px; background: #1c2a36; border: 1px solid #3f5c63; border-radius: 8px; }
+  h2 { margin: 0 0 12px; font-size: 20px; }
+  canvas { display: block; width: min(100%, 384px); height: auto; background: #263e40; image-rendering: pixelated; }
+  button { margin: 12px 4px 0 0; padding: 8px 12px; cursor: pointer; }
+</style>
+<h1>Thiên Sơn · Duyệt artwork</h1>
+<p>Bản xem chuyển động ở kích thước sprite 1×. Chưa gắn vào trận đấu.</p>
+<main>
+  <section>
+    <h2>Bạo Vũ Cuồng Phong</h2>
+    <canvas id="fan" width="384" height="256" aria-label="Vòng quạt xoáy tiến ra và thu về"></canvas>
+    <button id="throw" disabled>Phóng quạt</button><button id="recall" disabled>Thu về</button>
+  </section>
+  <section>
+    <h2>Bách Liệt Thiên Kích</h2>
+    <canvas id="shadows" width="384" height="256" aria-label="Bốn bóng chém về giữa"></canvas>
+    <button id="split" disabled>Tách bóng và chém</button>
+  </section>
+</main>
+<p id="load-error" role="alert"></p>
+<script type="module">
+  const $ = (id) => document.getElementById(id);
+  const image = async (name) => {
+    const img = new Image();
+    img.src = name + '.png';
+    await img.decode();
+    return img;
+  };
+  try {
+    const [fan, shadows] = await Promise.all([
+      image('bao-vu-cuong-phong'), image('bach-liet-thien-kich'),
+    ]);
+    const [fanCtx, shadowCtx] = [$('fan'), $('shadows')].map((c) => c.getContext('2d'));
+    let x = 56, fanActive = false, recall = false, splitAt = -Infinity, before;
+    $('throw').disabled = $('split').disabled = false;
+    $('throw').onclick = () => {
+      fanActive = true; recall = false; x = 56;
+      $('throw').disabled = true; $('recall').disabled = false;
+    };
+    $('recall').onclick = () => { recall = true; $('recall').disabled = true; };
+    $('split').onclick = () => { splitAt = performance.now(); };
+    const draw = (ctx, img, size, index, x, y) => {
+      ctx.clearRect(0, 0, 384, 256);
+      ctx.drawImage(img, size * index, 0, size, size, Math.round(x - size / 2), y - size / 2, size, size);
+    };
+    const tick = (now) => {
+      const elapsed = Math.min(50, now - (before ?? now));
+      before = now;
+      if (fanActive) {
+        x = Math.min(328, Math.max(56, x + elapsed * (recall ? -0.48 : 0.36)));
+        if (x === 56 && recall) { fanActive = false; $('throw').disabled = false; }
+      }
+      draw(fanCtx, fan, 88, fanActive ? Math.floor(now / 55) % 4 : 0, x, 128);
+      const age = now - splitAt, cycle = (age - 140) % 200;
+      const frame = age >= 1340 || age < 140 ? 0 : cycle < 70 ? 1 : cycle < 140 ? 2 : 3;
+      draw(shadowCtx, shadows, 256, frame, 192, 128);
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  } catch (error) {
+    $('load-error').textContent = 'Không tải được sprite: ' + error.message;
+  }
+</script>
+</html>

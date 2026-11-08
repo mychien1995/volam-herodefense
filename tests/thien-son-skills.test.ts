@@ -274,7 +274,7 @@ describe('M3C1 authoritative wind mechanics', () => {
   it('Phong Ảnh counters once after its dash without extending dash damage immunity', () => {
     const f = fixture('phong_anh_hoan_vi');
     f.cast();
-    f.steps(4);
+    f.steps(8);
     const hp = f.hero.hp,
       enemy = f.enemies[0]!;
     enemy.x = f.hero.x + 25;

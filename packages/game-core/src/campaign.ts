@@ -10,8 +10,7 @@ export interface CampaignDefinition {
   invasionBaseCount: number;
   invasionChapterCount: number;
   chapterSeconds: number;
-  xpBase: number;
-  xpGrowth: number;
+  xpThresholds: number[];
   startingPotions: { hp_small: number; mp_small: number };
   targets: number[];
   farmOverflowRatio: number;
@@ -46,9 +45,7 @@ export function experienceAtLevel(
 ): number {
   const n = Math.max(0, Math.min(config.maxLevel, level) - 1);
   const c = config.campaign;
-  return c
-    ? c.xpBase * n + (c.xpGrowth * n * (n + 1)) / 2
-    : n * config.xpPerLevel;
+  return c ? c.xpThresholds[n]! : n * config.xpPerLevel;
 }
 export const campaignBossIds = [
   'dong_ta',

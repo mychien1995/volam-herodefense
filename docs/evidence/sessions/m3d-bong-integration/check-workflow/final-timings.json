@@ -1,0 +1,46 @@
+{
+  "runId": "6e5d6183-42fe-4413-a888-1cb09861f8bb",
+  "mode": "final",
+  "args": [
+    "--config",
+    "playwright.skills.config.ts",
+    "tests/e2e/skills.spec.ts",
+    "--grep",
+    "approved Bổng effects"
+  ],
+  "startedAt": "2026-11-08T16:57:18.716Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 19.27,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 1.05,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "typecheck tests and tools",
+      "seconds": 1.44,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "workflow regression checks",
+      "seconds": 0.41,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "all unit/integration tests",
+      "seconds": 147.22,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 169.39
+}

@@ -75,7 +75,7 @@ Canonical IDs/names remain unchanged. Thiếu Lâm Quyền A now cycles left fis
 | `bach_phien_phong_bao` | **Bách Phiến Phong Bạo** | Phiến U | Large moving fan whirlwind; high AoE output. |
 | `phi_anh_tram` | **Phi Ảnh Trảm** | Đao | Forward dash with hard slash; melee engage. |
 | `truy_hon_dao` | **Truy Hồn Đao** | Đao | Two quick hits, bonus vs slowed targets; follow-up pressure. |
-| `phong_anh_hoan_vi` | **Phong Ảnh Hoán Vị** | Đao | Short retreat opposite the facing captured at cast, preserving facing; existing movement-only evasion/counter remain unchanged. |
+| `phong_anh_hoan_vi` | **Phong Ảnh Hoán Vị** | Đao | Retreat opposite the facing captured at cast without turning, matching Phi Ảnh Trảm's distance at the same rank; movement-only evasion and counter remain. |
 | `liet_phong_dao` | **Liệt Phong Đao** | Đao | Hard strike with partial defense penetration; anti-tank. |
 | `bach_liet_thien_kich` | **Bách Liệt Thiên Kích** | Đao U | Extremely fast multi-hit forward melee combo; PvP finisher. |
 

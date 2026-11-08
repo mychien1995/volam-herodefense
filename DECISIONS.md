@@ -12,6 +12,10 @@ Hàng Long Hỏa Vũ cuộn bảy vòng trong 57 tick (1,9 giây), sau đó vút
 
 Mỗi nhân vật trong trận chiến dịch nhận 5 bình máu nhỏ và 5 bình mana nhỏ khi vào trận lần đầu, kể cả khi vào phòng muộn. [Cấu hình chiến dịch](docs/CAMPAIGN_BALANCE_2026_11_06.md#experience-and-money).
 
+## Nhịp lên cấp đầu trận — 2026-11-08
+
+Director duyệt thử đường cong EXP mới trên `milestone/m3d`. Các mốc tích lũy cấp 2–6 là 45/135/270/450/670 EXP. Chi phí mỗi cấp tiếp tục tăng, và đường cong hội tụ về 7.480 EXP ở cấp 18. [Cấu hình và mục tiêu thử](docs/CAMPAIGN_BALANCE_2026_11_06.md#experience-and-money).
+
 ## Renovation v10 · giữ thân Cái Bang mới khi đánh thường — 2026-11-07
 
 Đánh thường Cái Bang Chưởng dùng sprite mới trong cả năm đòn chưởng và đòn rồng thứ sáu. Đạn chưởng, đạn rồng, hiệu ứng phát chiêu và va chạm dùng bản M3D.
@@ -489,3 +493,9 @@ Director removes generic purple pre-cast circles/semicircles for every creep. Re
 ## Creep feedback r5 — 2026-11-06
 
 Sơn Tặc Đao has normal Chém đao only; Hoành trảm is removed. Remove the shared caster-origin contact explosions for all creep melee/skill presentation, including instant self stomp/ring stamps. Real target-point effects, projectiles, persistent fields and deliberate self-destruction/death explosions remain. Other skill geometry and damage do not change. See `docs/CREEP_FEEDBACK_R5.md`.
+
+## Review Thiên Sơn — 2026-11-09
+
+Phong Ảnh Hoán Vị giữ hướng nhìn và lướt lùi bằng đúng tầm tiến của Phi Ảnh Trảm cùng bậc (150/158/166/174 px khi không vướng địa hình). Liệt Phong Đao dùng các pose nâng/chạm/thu đao theo hướng trái của bộ M3D đã duyệt; hiệu ứng đao tụ phản chiếu theo hướng ngang, không đổi nhịp đánh của server.
+
+Hướng art yêu cầu cho lượt duyệt: Lưu Phong Bộ sẽ thành **Bạo Vũ Cuồng Phong**, phóng vòng quạt gió xoay, gây sát thương và làm chậm, tiêu mana và có thể bấm lần nữa để thu; **Bách Liệt Thiên Kích** tách bốn bóng ra bốn hướng rồi cùng chém liên tục vào giữa. Phạm vi lượt này ở hai mục đó là tạo artwork ứng viên; chưa đổi tên/hiệu ứng chiến đấu trong trận hay duyệt art mới.

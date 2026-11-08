@@ -115,14 +115,25 @@ describe('approved campaign progression and economy', () => {
       campaignDefinition,
     );
     const { c, h } = fixture();
-    expect([6, 12, 18, 24, 30].map((l) => experienceAtLevel(l, c))).toEqual([
-      1000, 3520, 7480, 12880, 19720,
-    ]);
-    gainExperience(h, 999, c);
-    expect(h.level).toBe(5);
-    gainExperience(h, 1, c);
-    expect(h.level).toBe(6);
-    expect(h.progression!.ranks['phi_long_tai_thien'] ?? 0).toBe(0);
+    const levels = [1, 2, 3, 4, 5, 6, 12, 18, 24, 30];
+    const thresholds = [0, 45, 135, 270, 450, 670, 3310, 7480, 12880, 19720];
+    expect(levels.map((level) => experienceAtLevel(level, c))).toEqual(
+      thresholds,
+    );
+    let previousCost = 0;
+    for (let level = 2; level <= c.maxLevel; level++) {
+      const threshold = experienceAtLevel(level, c);
+      const cost = threshold - experienceAtLevel(level - 1, c);
+      expect(cost).toBeGreaterThan(previousCost);
+      previousCost = cost;
+      gainExperience(h, threshold - h.xp - 1, c);
+      expect(h.level).toBe(level - 1);
+      gainExperience(h, 1, c);
+      expect(h.level).toBe(level);
+      expect(h.progression!.ranks).toEqual({});
+    }
+    gainExperience(h, 100, c);
+    expect(h.xp).toBe(19720);
   });
   it('stocks new characters once and preserves the remaining potions through travel, respawn and reconnect', () => {
     const { m, h, c } = fixture();

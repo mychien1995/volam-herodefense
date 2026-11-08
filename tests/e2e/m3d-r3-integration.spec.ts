@@ -251,6 +251,125 @@ test('r3 iteration: two clients, in-viewport O/P/Esc UI and actual Ca Diệp cas
   await Promise.all(contexts.map((c) => c.close()));
 });
 
+test('Thiên Sơn review: live Liệt Phong blade and two authoritative dash distances', async ({
+  browser,
+}) => {
+  const contexts = await Promise.all([
+    browser.newContext(),
+    browser.newContext(),
+  ]);
+  const pages = await Promise.all(contexts.map((c) => c.newPage()));
+  activePages = pages;
+  const [a, b] = pages as [Page, Page];
+  await joinWaiting(a, 'Review Dao');
+  await joinWaiting(b, 'Review Peer', (await snap(a)).roomId);
+  await startTogether(pages, ['thien_son_dao', 'thien_son_dao']);
+  for (const slot of [0, 2, 3])
+    await fixture(a, { action: 'fixed-rank', slot, rank: 4 });
+  await fixture(a, { action: 'targets', points: [] });
+  const own = (s: any) => s.state.players[s.sessionId];
+  const cast = async (skill: string, input: string, fx: number) => {
+    await fixture(a, { action: 'restore' });
+    await fixture(a, { action: 'position', x: 1000, y: 700, fx, fy: 0 });
+    await expect.poll(async () => (await hero(a)).x).toBeCloseTo(1000, 2);
+    const s = await snap(a);
+    const last = Math.max(0, ...s.events.map((e: any) => e.id));
+    await key(a, input);
+    await expect
+      .poll(async () =>
+        (await snap(a)).events.some(
+          (e: any) =>
+            e.id > last &&
+            e.sourceId === s.sessionId &&
+            e.kind === 'cast' &&
+            e.abilityId === skill,
+        ),
+      )
+      .toBe(true);
+    return s.sessionId;
+  };
+  for (const side of ['left', 'right']) {
+    await a.evaluate((direction) => {
+      const w = window as any;
+      w.__daoStill = new Promise((resolve) => {
+        const deadline = Date.now() + 5000;
+        const sample = () => {
+          const view = w.__VOLAM__.presentation();
+          const blade = view.skills.r3.entities.find(
+            (e: any) =>
+              e.asset.endsWith('ts_dao_fx') &&
+              /^liet_phong_slash_\w+_[123]$/.test(e.frame),
+          );
+          const id = w.__VOLAM__.snapshot().sessionId;
+          const actor = view.actors.find((e: any) => e.id === id);
+          if ((blade && actor) || Date.now() > deadline) {
+            resolve(
+              blade && actor
+                ? {
+                    blade,
+                    actor,
+                    zoom: view.zoom,
+                    png: document
+                      .querySelector<HTMLCanvasElement>('#game canvas')!
+                      .toDataURL('image/png'),
+                    direction,
+                  }
+                : null,
+            );
+            return;
+          }
+          requestAnimationFrame(sample);
+        };
+        requestAnimationFrame(sample);
+      });
+    }, side);
+    await cast('liet_phong_dao', 'r', side === 'left' ? -1 : 1);
+    const still = await a.evaluate<any>('window.__daoStill');
+    expect(still?.zoom).toBe(2);
+    if (side === 'left') {
+      expect(still.actor.texture).toBe('review3_ts_dao');
+      expect(still.actor.frame).toBe('liet_phong_slash_left_0');
+    }
+    await mkdir(evidence, { recursive: true });
+    await writeFile(
+      evidence + '/dao-' + side + '.png',
+      Buffer.from(still.png.split(',')[1], 'base64'),
+    );
+    console.log(
+      'Liệt Phong',
+      side,
+      still.actor.texture,
+      still.actor.frame,
+      still.blade,
+    );
+    await a.waitForTimeout(750);
+  }
+  const distances: Record<string, number> = {};
+  for (const [skill, input, sign] of [
+    ['phong_anh_hoan_vi', 'e', -1],
+    ['phi_anh_tram', 'q', 1],
+  ] as const) {
+    const id = await cast(skill, input, 1);
+    await expect
+      .poll(async () => Math.sign(own(await snap(a)).x - 1000))
+      .toBe(sign);
+    await a.waitForTimeout(500);
+    const self = own(await snap(a));
+    await expect
+      .poll(async () => (await snap(b)).state.players[id].x)
+      .toBeCloseTo(self.x, 2);
+    distances[skill] = Math.abs(self.x - 1000);
+    expect(self.y).toBeCloseTo(700, 2);
+  }
+  console.log('Observed two-client distances', distances);
+  await writeFile(
+    evidence + '/dash-distances.json',
+    JSON.stringify(distances, null, 2),
+  );
+  expect(distances.phong_anh_hoan_vi).toBeCloseTo(distances.phi_anh_tram!, 2);
+  await Promise.all(contexts.map((c) => c.close()));
+});
+
 test('r3 production schools: four facings, all revised casts, manual A, cancel and death', async ({
   browser,
 }) => {

@@ -7,7 +7,7 @@ const hero = async (p: Page) => {
   const s = await snap(p);
   return s.state.players[s.sessionId];
 };
-test('fresh campaign heroes see their starter potions', async ({
+test('fresh campaign heroes see their starter potions and the new XP curve', async ({
   page,
   browser,
 }) => {
@@ -20,6 +20,7 @@ test('fresh campaign heroes see their starter potions', async ({
     await joinWaiting(b, 'Võ Đang mới', (await snap(page)).roomId);
     await startTogether([page, b], ['cai_bang_chuong', 'vo_dang']);
     for (const p of [page, b]) {
+      await expect(p.locator('#xp-text')).toHaveText('KN 0 / 45');
       await expect(p.locator('[data-potion-resource="hp"] em')).toHaveText('5');
       await expect(p.locator('[data-potion-resource="mp"] em')).toHaveText('5');
       expect((await hero(p)).inventory.potions).toMatchObject({
@@ -28,6 +29,15 @@ test('fresh campaign heroes see their starter potions', async ({
       });
     }
 
+    await enter(page);
+    await fixture(page, 'finisher', { id: (await snap(page)).sessionId });
+    await page.locator('#game canvas').focus();
+    await page.keyboard.press('a');
+    // The first-clear pool scales to two players, but only the attacker qualifies.
+    await expect.poll(async () => (await hero(page)).xp).toBe(300);
+    await expect(page.locator('#hero-level')).toHaveText('4');
+    await expect(page.locator('#xp-text')).toHaveText('KN 30 / 180');
+    expect((await hero(b)).xp).toBe(0);
     expect(errors).toEqual([]);
   } finally {
     await peer.close();

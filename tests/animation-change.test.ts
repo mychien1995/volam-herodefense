@@ -132,22 +132,23 @@ describe('approved animation change authoritative mechanics', () => {
     [-1, 0],
     [0, -1],
   ])(
-    'retreats opposite facing %s/%s without changing facing or Phi Anh',
+    'retreats opposite facing %s/%s as far as Phi Anh without turning',
     (fx, fy) => {
       const f = fixture('phong_anh_hoan_vi');
       f.hero.fx = fx;
       f.hero.fy = fy;
       f.cast();
-      f.step(5);
-      expect(f.hero.x).toBeCloseTo(500 - fx * 65);
-      expect(f.hero.y).toBeCloseTo(500 - fy * 65);
+      f.step(12);
       expect([f.hero.fx, f.hero.fy]).toEqual([fx, fy]);
       const g = fixture('phi_anh_tram');
       g.hero.fx = fx;
       g.hero.fy = fy;
       g.cast();
-      g.step(8);
-      expect((g.hero.x - 500) * fx + (g.hero.y - 500) * fy).toBeGreaterThan(0);
+      g.step(12);
+      expect(g.hero.x).toBeCloseTo(500 + fx * 150);
+      expect(g.hero.y).toBeCloseTo(500 + fy * 150);
+      expect(f.hero.x - 500).toBeCloseTo(500 - g.hero.x);
+      expect(f.hero.y - 500).toBeCloseTo(500 - g.hero.y);
     },
   );
   it('reflects fractional actual loss exactly, without rounding it up to a full damage point', () => {

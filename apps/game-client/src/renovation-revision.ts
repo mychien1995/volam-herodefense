@@ -95,6 +95,8 @@ export class RenovationRevision {
     const fx = e.fx ?? 1,
       fy = e.fy ?? 0;
     if (!options.upright) this.aim(image, fx, fy);
+    else if (effect === 'liet_phong_overhead' && Math.abs(fx) > Math.abs(fy))
+      image.setFlipX(fx < 0);
     image
       .setScale(options.scale ?? 0.5)
       .setPosition(e.x + ox, e.y + oy)
