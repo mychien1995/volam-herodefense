@@ -1,0 +1,8 @@
+# Phá Giáp Bổng · Cú vụt nham thạch
+
+`concept.png` là storyboard được duyệt. Hai raster gốc `poses.png` và `effects.png` do OpenAI ImageGen tạo riêng cho dự án từ storyboard này. Sprite Cái Bang Bổng trong `../bong-combo-review/right.png` là tham chiếu nhận diện. Ảnh chơi thật trong `docs/evidence/renovation-v8/pha_giap_bong.png` là mốc tầm vươn và tỷ lệ hiển thị.
+
+- `poses.png` chứa ba tư thế đứng bằng hai tay theo ba góc camera. Chỉ dẫn tạo ảnh yêu cầu giơ gậy thẳng, thân gậy cong khi vung và đầu gậy chạm đất. Bản xuất lật ngang cel phải để tạo hướng trái và giữ cel chạm đất trong nhịp hồi. `body.aseprite` và atlas `body` chứa 12 cel 544×384 với gốc chân (272, 192), dựng ở mật độ 2×. Phaser hiển thị ở tỷ lệ 0,5 với lọc nearest. Export giữ tay, mặt và mép alpha, làm đặc vùng màu bên trong và lấy lại họa tiết đỏ vàng dọc phần gậy uốn cong. Tầm đầu gậy còn khoảng 120 pixel ngang và 77 pixel dọc trong thế chạm đất.
+- `effects.png` chứa bốn cel đuôi lửa và bốn cel nham thạch. Chỉ dẫn tạo ảnh yêu cầu bổng khí cuộn lên phía sau đầu gậy, và nham đỏ cùng đá nung bật từ cùng một tâm va chạm. `effects.aseprite` và atlas `effects` dùng cel 256×224 với gốc hiệu ứng (152, 170). Hai hướng dọc dùng cùng raster bổng khí thu theo chiều ngang để phù hợp góc nhìn. Cú nổ dài 515 ms, mờ dần ở 170 ms cuối.
+
+Atlas PNG/JSON nằm trong `assets/exports/skills/cai-bang/pha-giap-lava/`. Tái xuất trong Aseprite bằng `-b --script-param root=<checkout> --script-param pack=pha-giap-lava --script assets/source/skills/cai-bang/bong-combo-review/export.lua`. M3D dùng bản này mặc định. Server áp dụng tầm đánh 144 ở cả bốn bậc. Phaser gắn bổng khí theo cel gậy đang vụt và nhận `pulse/strike` từ server để phát vụ nổ.

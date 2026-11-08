@@ -231,6 +231,7 @@ export interface Ability {
   cooldownTicks: number;
   manaCost: number;
   minIntervalTicks?: number | undefined;
+  basicComboEndRecoveryTicks?: number | undefined;
   basicCombo?:
     | Array<{
         stage: string;

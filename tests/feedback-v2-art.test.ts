@@ -13,7 +13,8 @@ import {
 describe('supplied M3C3 v2 presentation contract', () => {
   it('resolves every supplied ordered frame, absolute duration, trim offset and source canvas', () => {
     const supplied = feedbackArt.filter(
-      (a) => !a.id.startsWith('retained_m3d_'),
+      (a) =>
+        !a.id.startsWith('retained_m3d_') && !a.id.startsWith('bong_review_'),
     );
     const retained = feedbackArt.filter((a) =>
       a.id.startsWith('retained_m3d_'),
@@ -171,4 +172,27 @@ describe('supplied M3C3 v2 presentation contract', () => {
       ),
     ).toBe(true);
   });
+});
+
+it('resolves every approved Bổng feedback frame on its fixed canvas', () => {
+  const staff = feedbackArt.filter((asset) =>
+    asset.id.startsWith('bong_review_'),
+  );
+  expect(staff).toHaveLength(6);
+  for (const asset of staff) {
+    const atlas = JSON.parse(readFileSync(asset.atlas, 'utf8')) as {
+      frames: Record<string, { frame: { w: number; h: number } }>;
+    };
+    for (const tag of asset.animations) {
+      expect(tag.frameDurationsMs).toHaveLength(tag.frames.length);
+      expect(tag.frameDurationsMs.reduce((total, ms) => total + ms, 0)).toBe(
+        tag.durationMsTotal,
+      );
+      for (const name of tag.frames) {
+        const frame = atlas.frames[name]?.frame;
+        expect(frame, `${asset.id}:${name}`).toBeDefined();
+        expect([frame?.w, frame?.h]).toEqual(tag.frameDimensions);
+      }
+    }
+  }
 });

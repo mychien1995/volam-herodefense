@@ -166,11 +166,11 @@ const descriptions: Record<string, string> = {
   hang_long_hoa_vu:
     'Phóng hỏa long đến điểm địch đã khóa, bay một vòng, vút lên trời rồi lao xuống gây sát thương vùng. Điểm rơi không truy đuổi mục tiêu.',
   hoanh_tao_bong: 'Quét bổng diện rộng, gây sát thương và làm chậm di chuyển.',
-  pha_giap_bong: 'Đánh mạnh một mục tiêu phía trước và giảm phòng thủ.',
+  pha_giap_bong: 'Vụt bổng xuống phía trước, gây sát thương và giảm phòng thủ.',
   cam_long_cong:
     'Kéo địch phía trước, câm lặng và tước vũ khí. Địch vẫn di chuyển; không choáng, không sát thương.',
   truy_phong_bong:
-    'Lướt theo hướng nhìn, gây sát thương một lần mỗi mục tiêu và làm choáng.',
+    'Hai tay giậm mạnh bổng xuống đất, dồn hỏa khí làm đất đá dưới chân nổ tung và gây choáng kẻ địch trúng đòn.',
   thien_ha_vo_cau: 'Tuyệt kỹ: bốn nhịp xoay bổng, kết thúc bằng cú đập mạnh.',
 };
 /** All numbers are M3B balance proposals. Rank1 preserves the exact M3A ability. */
@@ -235,9 +235,8 @@ export function createProgression(
         for (const s of e.statuses ?? []) s.durationTicks += 6 * r;
         a.manaCost += 2 * r;
       }
-      if (id === 'truy_phong_bong' && e.mode === 'dash') {
-        e.distance += 10 * r;
-        e.stunTicks += 3 * r;
+      if (id === 'truy_phong_bong' && e.mode === 'arc') {
+        e.statuses![0]!.durationTicks += 3 * r;
         e.damage += 6 * r;
       }
       if (id === 'thien_ha_vo_cau' && e.mode === 'multi_hit') {

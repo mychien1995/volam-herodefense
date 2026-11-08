@@ -310,6 +310,8 @@ function runCommand(
         'attack',
         next.stage,
       );
+      if (next.stage && hero.basicChains?.[ability.id] === 0)
+        hero.cooldown += ability.basicComboEndRecoveryTicks ?? 0;
     }
   }
   if (command.kind === 'cast') {

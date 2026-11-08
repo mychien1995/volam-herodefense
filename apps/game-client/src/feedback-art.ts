@@ -1,5 +1,7 @@
 import raw from './feedback-art.generated.json' with { type: 'json' };
 import { facing } from './facing.js';
+import { bongSkillReviewComponents } from './bong-skill-review-art.js';
+import { bongReviewComponents } from './bong-combo-review-art.js';
 import type { RasterAnimation, RasterComponent } from './skill-art-registry.js';
 
 export interface FeedbackAnimation extends RasterAnimation {
@@ -22,6 +24,8 @@ export interface FeedbackComponent extends RasterComponent {
 const original = raw.assets as unknown as FeedbackComponent[];
 export const feedbackArt: FeedbackComponent[] = [
   ...original,
+  ...bongReviewComponents,
+  ...bongSkillReviewComponents,
   ...original
     .filter((a) => /^vo_dang_hands_v2_(projectile|impact|aura)$/.test(a.id))
     .map((a) => ({ ...a, id: 'retained_m3d_' + a.id })),

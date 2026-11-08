@@ -192,14 +192,17 @@ describe('M3A canonical Cái Bang skills', () => {
     f.steps(90);
     expect(hasStatus(f.enemies[0]!, 'slow', f.world.tick)).toBe(false);
   });
-  it('Phá Giáp hits targets along the long frontal slam, reduces defense then restores it', () => {
+  it('Phá Giáp hits within 144 along the frontal slam and reduces defense temporarily', () => {
     const f = fixture('pha_giap_bong');
     f.config.creep.defense = 50;
+    Object.assign(f.enemies[1]!, { x: 444, y: 300 });
+    Object.assign(f.enemies[2]!, { x: 445, y: 300 });
     f.cast();
     expect(f.enemies[0]!.hp).toBe(1000);
     f.steps(6);
     expect(f.enemies[0]!.hp).toBe(963);
     expect(f.enemies[1]!.hp).toBe(963);
+    expect(f.enemies[2]!.hp).toBe(1000);
     f.steps(24);
     submitInput(f.world, 'a', 2, { kind: 'basic' });
     f.steps(1);
@@ -239,12 +242,17 @@ describe('M3A canonical Cái Bang skills', () => {
     expect(enemy.x).not.toBe(x);
     expect(f.hero.hp).toBe(160);
   });
-  it('Truy Phong sweeps its dash path once, stuns hits and cannot pass through walls', () => {
+  it('Truy Phong stomps once after windup and stuns targets around its stationary caster', () => {
     const f = fixture('truy_phong_bong');
+    f.enemies[3]!.x = 205;
     f.cast();
-    f.steps(7);
-    expect(f.hero.x).toBeCloseTo(440);
+    f.steps(5);
+    expect(f.enemies[0]!.hp).toBe(1000);
+    f.steps(1);
+    expect(f.hero.x).toBe(300);
+    expect(f.hero.y).toBe(300);
     expect(f.enemies[0]!.hp).toBe(934);
+    expect(f.enemies[3]!.hp).toBe(934);
     expect(hasStatus(f.enemies[0]!, 'stun', f.world.tick)).toBe(true);
     expect(
       f.events.filter(
@@ -255,7 +263,7 @@ describe('M3A canonical Cái Bang skills', () => {
     g.config.collision = [{ x: 330, y: 240, width: 10, height: 120 }];
     g.cast();
     g.steps(12);
-    expect(g.hero.x).toBeLessThanOrEqual(320);
+    expect(g.hero.x).toBe(300);
     expect(g.enemies[0]!.hp).toBe(1000);
   });
   it('Thiên Hạ lands four timed sweeps plus one heavy finisher, and death cancels later pulses', () => {

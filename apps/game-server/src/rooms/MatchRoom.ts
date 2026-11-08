@@ -1069,7 +1069,14 @@ export class MatchRoom extends Room<{
       }
       target.basicId = hero.basicId;
       target.lastSequence = hero.lastSequence;
-      target.basicCooldown = Math.max(0, hero.cooldown - zone.world.tick);
+      const showBasicRecovery =
+        zone.config.basics[hero.basicId]?.basicComboEndRecoveryTicks ===
+          undefined ||
+        hero.pose !== 'basic_attack' ||
+        zone.world.tick >= hero.actionUntil;
+      target.basicCooldown = showBasicRecovery
+        ? Math.max(0, hero.cooldown - zone.world.tick)
+        : 0;
       target.dashCharges = hero.dashCharges ?? 0;
       target.dashRechargeTicks = Math.max(
         0,

@@ -2,6 +2,14 @@ import Phaser from 'phaser';
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
 import { m1Config } from '@volam/game-data';
+import { caiBangBongArtEnabled } from './bong-combo-review-art.js';
+import {
+  bongPhaGiapBody,
+  bongPhaGiapEffects,
+  bongPhaGiapPath,
+  bongPhaGiapReachScale,
+  bongPhaGiapSwingTip,
+} from './bong-skill-review-art.js';
 import raw from './renovation-followup.generated.json';
 import coilArt from './renovation-coil.generated.json';
 import reachArt from './renovation-reach.generated.json';
@@ -13,6 +21,12 @@ import {
   staffFissureTransform,
 } from './renovation-followup-model.js';
 export function preloadRenovationFollowup(scene: Phaser.Scene) {
+  if (caiBangBongArtEnabled)
+    scene.load.atlas(
+      bongPhaGiapEffects,
+      bongPhaGiapPath + 'effects.png',
+      bongPhaGiapPath + 'effects.json',
+    );
   if (renovationFollowupEnabled())
     for (const a of [
       ...raw.assets.filter((a) => a.type !== 'body'),
@@ -92,14 +106,28 @@ export class RenovationFollowup {
       .image(
         x,
         y,
-        arc ? 'renovated-v8-staff_long_sweep' : 'renovated-v8-staff_fissure',
-        arc ? contact.direction + '_0' : '0',
+        caiBangBongArtEnabled
+          ? bongPhaGiapEffects
+          : arc
+            ? 'renovated-v8-staff_long_sweep'
+            : 'renovated-v8-staff_fissure',
+        caiBangBongArtEnabled
+          ? arc
+            ? 'trail_0'
+            : 'impact_0'
+          : arc
+            ? contact.direction + '_0'
+            : '0',
       )
       .setName('renovation-v6:' + e.abilityId)
       .setData('v6-effect', effect)
-      .setOrigin(512 / 1024, 819 / 1280)
+      .setOrigin(
+        caiBangBongArtEnabled ? 152 / 256 : 0.5,
+        caiBangBongArtEnabled ? 170 / 224 : 819 / 1280,
+      )
       .setScale(0.5)
-      .setDepth(effect === 'staff_crack' ? -2 : e.y + 0.8);
+      .setDepth(arc ? e.y + 0.8 : -2)
+      .setVisible(false);
     const f = {
       image,
       owner: e.sourceId,
@@ -144,13 +172,14 @@ export class RenovationFollowup {
           f.x = e.x;
           f.y = e.y;
         }
-      this.flash(e, 'staff_crack', 700, e.x, e.y);
+      if (caiBangBongArtEnabled) this.flash(e, 'staff_lava', 515, e.x, e.y);
+      else this.flash(e, 'staff_crack', 700, e.x, e.y);
     }
   }
   sync(
     state: LobbyState | undefined,
     zone: string,
-    position?: (id: string) => { x: number; y: number } | undefined,
+    position?: (id: string) => Phaser.GameObjects.Sprite | undefined,
   ) {
     if (!renovationFollowupEnabled()) return;
     for (const f of this.flashes) {
@@ -165,15 +194,60 @@ export class RenovationFollowup {
         this.flashes.delete(f);
         continue;
       }
-      const visibleAt = f.effect === 'staff_arc' ? f.windup * 0.5 : 0;
-      f.image.setVisible(age >= visibleAt);
-      if (age < visibleAt) continue;
+      const sprite = position?.(f.owner);
       if (f.follow) {
-        const p = position?.(f.owner) ?? owner;
+        const p = sprite ?? owner;
         f.x = p.x;
         f.y = p.y;
       }
-      if (f.effect === 'staff_arc') {
+      const arc = f.effect === 'staff_arc';
+      if (caiBangBongArtEnabled) {
+        const contact = staffContact(f.fx, f.fy);
+        const contactX = f.x + contact.x * bongPhaGiapReachScale;
+        const contactY = f.y + contact.y * bongPhaGiapReachScale;
+        if (!arc) {
+          const cel = age < 45 ? 0 : age < 145 ? 1 : age < 270 ? 2 : 3;
+          f.image
+            .setVisible(true)
+            .setFrame('impact_' + cel)
+            .setPosition(contactX, contactY)
+            .setScale(contact.direction === 'left' ? -1 : 1, 1)
+            .setDepth(-2)
+            .setAlpha(Math.min(1, remaining / 170))
+            .setData('staff-contact', [contactX, contactY]);
+          continue;
+        }
+        const strikeAge =
+          f.strikeAt === undefined ? 0 : this.scene.time.now - f.strikeAt;
+        const swinging =
+          sprite?.texture.key === bongPhaGiapBody &&
+          sprite.frame.name === `slam_${contact.direction}_1`;
+        // Use the rendered cel as the gate, so the trail cannot lead the staff.
+        const visible = f.strikeAt === undefined ? swinging : strikeAge < 120;
+        f.image.setVisible(visible);
+        if (!visible) continue;
+        const [tipX, tipY] = bongPhaGiapSwingTip[contact.direction];
+        let cel = age < f.windup * 0.54 ? 0 : 1;
+        if (f.strikeAt !== undefined) cel = strikeAge < 54 ? 2 : 3;
+        const left = contact.direction === 'left';
+        const horizontal =
+          contact.direction === 'left' || contact.direction === 'right';
+        f.image
+          .setFrame('trail_' + cel)
+          .setScale(left ? -1 : horizontal ? 1 : 0.62, 1)
+          .setDepth(f.y - 0.1)
+          .setPosition(
+            swinging ? sprite.x + tipX : contactX,
+            swinging ? sprite.y + tipY : contactY,
+          )
+          .setAlpha(f.strikeAt === undefined ? 1 : (120 - strikeAge) / 120)
+          .setData('staff-contact', [contactX, contactY]);
+        continue;
+      }
+      const visibleAt = arc ? f.windup * 0.5 : 0;
+      f.image.setVisible(age >= visibleAt);
+      if (age < visibleAt) continue;
+      if (arc) {
         const contact = staffContact(f.fx, f.fy),
           cel =
             f.strikeAt === undefined

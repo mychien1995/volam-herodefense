@@ -8,6 +8,15 @@ import {
 import { renovationRevisionEnabled } from './renovation-policy.js';
 import { renovationFollowupEnabled } from './renovation-policy.js';
 import { spinFacing } from './hero-vfx-review.js';
+import { bongContacts, bongNhamChan } from './bong-skill-review-art.js';
+import {
+  caiBangBongArtEnabled,
+  bongContactOffset,
+  bongReviewBody,
+  bongReviewGround,
+  bongReviewMs,
+  bongReviewTrail,
+} from './bong-combo-review-art.js';
 import { facing } from './facing.js';
 import { m3dSkillIds } from './m3d-feedback-policy.js';
 import { approvedSkillIds } from './approved-skill-ids.js';
@@ -49,6 +58,7 @@ type Actor = {
 };
 type Status = { kind: string; abilityId: string; until?: number };
 type Point = { x: number; y: number };
+type RenderPoint = Point & { frame?: { name: string | number } };
 interface Fx {
   sprite: Phaser.GameObjects.Sprite;
   ref: ArtRef;
@@ -95,6 +105,7 @@ interface Pose {
   receivedTick: number;
   cadenceSynced: boolean;
   waitingStrike: boolean;
+  bongImpact?: CombatEvent;
 }
 export interface FeedbackPose {
   abilityId?: string;
@@ -453,6 +464,31 @@ export class FeedbackVfx {
     });
   }
   event(e: CombatEvent): boolean {
+    if (e.abilityId === 'truy_phong_bong') {
+      if (e.kind === 'cast')
+        this.pose(
+          e.sourceId,
+          e.abilityId,
+          { asset: bongReviewBody, prefix: 'combo_overhead' },
+          e,
+          200,
+          false,
+          0,
+          undefined,
+          undefined,
+          true,
+        );
+      if (e.kind === 'pulse' && e.stage === 'strike') {
+        this.pose(
+          e.sourceId,
+          e.abilityId,
+          { asset: bongContacts, prefix: 'stomp' },
+          e,
+        );
+        this.showBongSkillBlast(e, bongNhamChan);
+      }
+      return true;
+    }
     if (approvedSkillIds.has(e.abilityId)) return false;
     const b = feedbackBindings[e.abilityId];
     if (!b) return false;
@@ -485,14 +521,33 @@ export class FeedbackVfx {
       this.cuts.set(e.sourceId, count);
       const basic = basicFeedbackArt(e.abilityId, e.stage ?? '', count);
       if (basic) {
-        const duration = Math.max(
-          basic.floorMs,
-          basic.baseMs / (1 + (a?.build?.stats.attackSpeed ?? 0)),
-        );
-        if (basic.ref)
-          this.pose(e.sourceId, e.abilityId, basic.ref, e, duration, true);
-        if (basic.effect)
-          this.sequence([basic.effect], e, at, false, [0, 0], duration);
+        const newBong =
+          caiBangBongArtEnabled && e.abilityId === 'cai_bang_bong';
+        const duration = newBong
+          ? bongReviewMs
+          : Math.max(
+              basic.floorMs,
+              basic.baseMs / (1 + (a?.build?.stats.attackSpeed ?? 0)),
+            );
+        if (basic.ref) {
+          const ref = newBong
+            ? { ...basic.ref, asset: bongReviewBody }
+            : basic.ref;
+          this.pose(e.sourceId, e.abilityId, ref, e, duration, true);
+          const pose = this.poses.get(e.sourceId);
+          if (newBong && pose) {
+            pose.cadenceSynced = true;
+            if (e.stage === 'smash') pose.bongImpact = e;
+          }
+        }
+        if (basic.effect) {
+          const candidate = { ...basic.effect, asset: bongReviewTrail };
+          const effect =
+            newBong && feedbackTag(candidate, e.fx, e.fy)
+              ? candidate
+              : basic.effect;
+          this.sequence([effect], e, at, false, [0, 0], duration);
+        }
         if (basic.effects)
           this.sequence(basic.effects, e, at, false, [0, 0], duration);
       }
@@ -919,7 +974,7 @@ export class FeedbackVfx {
   sync(
     state: LobbyState | undefined,
     zone: string,
-    renderPosition?: (id: string) => Point | undefined,
+    renderPosition?: (id: string) => RenderPoint | undefined,
   ): void {
     this.state = state;
     this.zone = zone;
@@ -945,6 +1000,17 @@ export class FeedbackVfx {
     }
     for (const [id, p] of this.poses) {
       const a = this.actor(id);
+      if (p.bongImpact && a && a.hp > 0 && a.zoneId === zone) {
+        const point = renderPosition?.(id);
+        if (
+          point &&
+          p.tag.frames.slice(1, 3).includes(String(point.frame?.name))
+        ) {
+          const offset = bongContactOffset[p.tag.direction]!;
+          this.sequence([bongReviewGround], p.bongImpact, point, true, offset);
+          delete p.bongImpact;
+        }
+      }
       // The next projected cooldown is authoritative, including temporary AS.
       // This adjusts playback only; no command/input waits on the animation.
       if (
@@ -1027,6 +1093,7 @@ export class FeedbackVfx {
         }
       }
       for (const [skill, b] of Object.entries(feedbackBindings)) {
+        if (caiBangBongArtEnabled && skill === 'thien_ha_vo_cau') continue;
         if (approvedSkillIds.has(skill) || m3dSkillIds.has(skill)) continue;
         if (!b.sustain) continue;
         b.sustain.forEach((d, index) => {
@@ -1233,6 +1300,19 @@ export class FeedbackVfx {
     this.recentShots = this.recentShots.filter(
       (p) => this.scene.time.now - p.at < 300,
     );
+  }
+  showBongSkillBlast(e: CombatEvent, asset: string): void {
+    const view = this.sequence([{ asset, prefix: 'impact' }], e, e, true);
+    if (!view) return;
+    // The wide blast can overlap actors on either side of its center.
+    view.sprite.setDepth(-4);
+    if (e.radius) view.sprite.setScale((e.radius * 2) / 220);
+    this.scene.tweens.add({
+      targets: view.sprite,
+      delay: view.tag.durationMsTotal - 240,
+      duration: 240,
+      alpha: 0,
+    });
   }
   projectileHandled(id: string, stage: string): boolean {
     const b = feedbackBindings[id];

@@ -1,3 +1,7 @@
+## Cái Bang Bổng · bản được duyệt cho M3D
+
+Đánh thường có bốn thức chọc, quét, hất và vụt xuống, mỗi thức dài 8 tick. Hồi 15 tick sau khi thức cuối kết thúc. Các thức để lại vệt lửa, cú vụt cuối có vòng nổ tại điểm chạm đất. Phá Giáp Bổng vụt bằng gậy rồng cong, bổng khí chạy sau đầu gậy và nham thạch nổ tại điểm chạm. Tầm đánh ở cả bốn bậc là 144. Truy Phong Bổng giậm tại chỗ sau 6 tick lấy đà, gây sát thương và choáng trong bán kính cơ bản 110. Thiên Hạ Vô Cẩu có sáu chó lửa khi xoay và Nham Triều ở cú đập kết thúc. Bản này thay thế các quyết định M3D trước đó về tầm và hình ảnh của ba chiêu.
+
 ## Cái Bang Chưởng · rework VFX được duyệt
 
 Đòn thường dùng chưởng lửa và phượng hoàng ở thức thứ sáu. Cuồng Long Loạn Vũ dùng đầu rồng lửa, vòng nổ tròn và các đốm lửa báo thiêu đốt. Phi Long Tại Thiên dùng sóng mang hai rồng, để lại vệt lửa sát đất và đổ xuống hòa vào vệt khi hết tầm.

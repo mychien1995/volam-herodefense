@@ -9,7 +9,11 @@ import { economySchema, economyTrial } from './economy.js';
 import { defaultBranches, fixedBranches } from './default-builds.js';
 import type { SimulationConfig } from '@volam/game-core';
 import { arena } from './arena.js';
-import { caiBangExtraSkills, caiBangPassive } from './cai-bang.js';
+import {
+  caiBangBongBeatTicks,
+  caiBangExtraSkills,
+  caiBangPassive,
+} from './cai-bang.js';
 import {
   thienSonBasics,
   thienSonSkills,
@@ -150,9 +154,10 @@ const initialConfig: SimulationConfig = simulationConfigSchema.parse({
     cai_bang_bong: {
       id: 'cai_bang_bong',
       nameVi: 'Cái Bang Bổng',
-      cooldownTicks: 18,
+      cooldownTicks: caiBangBongBeatTicks,
       manaCost: 0,
-      minIntervalTicks: 5,
+      minIntervalTicks: caiBangBongBeatTicks,
+      basicComboEndRecoveryTicks: 15,
       basicCombo: [
         { stage: 'thrust', damageMultiplier: 1, halfAngle: Math.PI / 5 },
         { stage: 'sweep', damageMultiplier: 1, halfAngle: Math.PI / 2 },

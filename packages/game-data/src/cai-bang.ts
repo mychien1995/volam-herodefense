@@ -1,6 +1,7 @@
 import type { Ability } from '@volam/game-core';
 import { m3dFeedbackTuning } from './m3d-feedback-tuning.js';
 const feedback = m3dFeedbackTuning.caiBang;
+export const caiBangBongBeatTicks = 8;
 /** M3A rank-1 test tuning. Mechanics/names canonical; numeric balance remains provisional. */
 export const caiBangExtraSkills: Ability[] = [
   {
@@ -123,12 +124,14 @@ export const caiBangExtraSkills: Ability[] = [
     manaCost: 24,
     cooldownTicks: 210,
     effect: {
-      mode: 'dash',
-      distance: 140,
-      speed: 700,
-      radius: 24,
+      mode: 'arc',
+      range: 110,
+      halfAngle: Math.PI,
+      cleave: 1,
+      windupTicks: 6,
+      durationTicks: 16,
       damage: 66,
-      stunTicks: 30,
+      statuses: [{ kind: 'stun', durationTicks: 30, magnitude: 1 }],
     },
   },
   {

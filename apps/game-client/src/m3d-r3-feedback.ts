@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { caiBangBongArtEnabled } from './bong-combo-review-art.js';
 import { spinFacing } from './hero-vfx-review.js';
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
@@ -207,7 +208,7 @@ export class M3dR3Feedback {
         cast.strike = now;
       if (cast && e.stage === 'finisher')
         cast.outroUntilMs = this.scene.time.now + 200;
-      if (e.abilityId === 'pha_giap_bong')
+      if (!caiBangBongArtEnabled && e.abilityId === 'pha_giap_bong')
         this.flash(e.sourceId, 'b3_pha_giap_vfx', 'impact', d, e, {
           depth: e.y - 10,
           placement: true,
@@ -224,7 +225,11 @@ export class M3dR3Feedback {
           { x: e.x + (e.fx ?? 1) * 28, y: e.y + (e.fy ?? 0) * 28 },
           { placement: true, depth: e.y - 10 },
         );
-      if (e.abilityId === 'thien_ha_vo_cau' && e.stage === 'finisher') {
+      if (
+        !caiBangBongArtEnabled &&
+        e.abilityId === 'thien_ha_vo_cau' &&
+        e.stage === 'finisher'
+      ) {
         const feet = this.point(e.sourceId) ?? e;
         this.flash(
           e.sourceId,
@@ -403,8 +408,9 @@ export class M3dR3Feedback {
         );
         const effect = m1Config.skillCatalogue![cast.skill]!.effect;
         const radius = effect.mode === 'multi_hit' ? effect.range * 0.69 : 120;
-        for (let i = 0; i < 4; i++) {
-          const a = elapsed * 0.0018 + (i * Math.PI) / 2;
+        const dogCount = caiBangBongArtEnabled ? 6 : 4;
+        for (let i = 0; i < dogCount; i++) {
+          const a = elapsed * 0.0018 + (i * 2 * Math.PI) / dogCount;
           const face = this.direction(-Math.sin(a), Math.cos(a) * 0.6);
           this.painter.draw(
             `dog:${id}:${i}`,
@@ -413,7 +419,7 @@ export class M3dR3Feedback {
             face,
             p.x + Math.cos(a) * radius,
             p.y + Math.sin(a) * radius * 0.6,
-            elapsed,
+            elapsed + (caiBangBongArtEnabled ? i * 41 : 0),
             { depth: p.y + Math.sin(a) * radius * 0.6, loop: true },
           );
         }
@@ -795,7 +801,13 @@ export class M3dR3Feedback {
         loop,
       ),
       abilityId: cast.skill,
-      phase,
+      phase:
+        caiBangBongArtEnabled &&
+        cast.skill === 'thien_ha_vo_cau' &&
+        !after &&
+        cast.until - this.tick <= 3
+          ? 'bong_finisher_raise'
+          : phase,
       progress: phaseDuration > 0 ? phaseElapsed / phaseDuration : 1,
     };
   }

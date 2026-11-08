@@ -43,7 +43,7 @@ Canonical IDs/names remain unchanged. Thiếu Lâm Quyền A now cycles left fis
 
 **Normal attacks (A):**
 - `cai_bang_chuong`: **Cái Bang Chưởng** — ranged non-homing fire projectile, auto-aim once at closest enemy's present position; dodgeable.
-- `cai_bang_bong`: **Cái Bang Bổng** — forward short-range staff arc; heavy primary, reduced cleave to others.
+- `cai_bang_bong`: **Cái Bang Bổng** — thrust, sweep, lift and overhead strike. Eight ticks per beat, followed by 15 recovery ticks after the fourth. Reduced cleave to secondary targets.
 
 | ID | Vietnamese display name | Style | Proposed effect and reason |
 |---|---|---|---|
@@ -53,10 +53,10 @@ Canonical IDs/names remain unchanged. Thiếu Lâm Quyền A now cycles left fis
 | `khang_long_huu_hoi` | **Kháng Long Hữu Hối** | Chưởng | Temporary Crit Chance + Crit Damage buff; timed burst. |
 | `hang_long_hoa_vu` | **Hàng Long Hỏa Vũ** | Chưởng U | Massive forward-traveling fire wave; late-game AoE burst. |
 | `hoanh_tao_bong` | **Hoành Tảo Bổng** | Bổng | Wide staff sweep causing damage and slow; melee wave control. |
-| `pha_giap_bong` | **Phá Giáp Bổng** | Bổng | Heavy strike inflicting temporary defense reduction; boss/team synergy. |
+| `pha_giap_bong` | **Phá Giáp Bổng** | Bổng | Frontal staff slam, range 144 at every rank, with temporary defense reduction. |
 | `cam_long_cong` | **Cầm Long Công** | Bổng | Pulls all enemies in front closer by a limited distance and prevents **both attacks and skill casting**, but not movement (`Disarm` + `Silence`); iconic PvP setup. Not stun. |
-| `truy_phong_bong` | **Truy Phong Bổng** | Bổng | Directional dash that hits and stuns; gap-close and interrupt. |
-| `thien_ha_vo_cau` | **Thiên Hạ Vô Cẩu** | Bổng U | Multi-hit staff whirlwind finishing in heavy smash; close-range finisher. |
+| `truy_phong_bong` | **Truy Phong Bổng** | Bổng | Stationary two-handed stomp. After six ticks, the blast hits and stuns in a base radius of 110. |
+| `thien_ha_vo_cau` | **Thiên Hạ Vô Cẩu** | Bổng U | Six fire dogs orbit the staff whirlwind. A heavy staff smash ends the skill with a lava burst. |
 
 ## Thiên Sơn — Wind / Phong
 

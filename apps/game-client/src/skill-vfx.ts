@@ -1,4 +1,6 @@
 import Phaser from 'phaser';
+import { caiBangBongArtEnabled } from './bong-combo-review-art.js';
+import { bongNhamTrieu } from './bong-skill-review-art.js';
 import {
   caiBangPalmArt,
   caiBangPalmEnabled,
@@ -393,6 +395,13 @@ export class SkillVfx {
     );
   }
   event(e: CombatEvent): void {
+    if (
+      caiBangBongArtEnabled &&
+      e.abilityId === 'thien_ha_vo_cau' &&
+      e.kind === 'pulse' &&
+      e.stage === 'finisher'
+    )
+      this.feedback.showBongSkillBlast(e, bongNhamTrieu);
     this.followup.event(e);
     this.revision.event(e);
     this.renovated.event(e);
@@ -599,7 +608,7 @@ export class SkillVfx {
   sync(
     state: LobbyState | undefined,
     zoneId: string,
-    renderPosition?: (id: string) => { x: number; y: number } | undefined,
+    renderPosition?: (id: string) => Phaser.GameObjects.Sprite | undefined,
   ): void {
     this.state = state;
     this.r3.sync(state, zoneId, renderPosition);

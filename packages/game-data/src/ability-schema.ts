@@ -128,6 +128,7 @@ export const abilitySchema = z
       })
       .optional(),
     minIntervalTicks: count.min(1).optional(),
+    basicComboEndRecoveryTicks: count.min(1).optional(),
     basicCombo: z
       .array(
         z.strictObject({

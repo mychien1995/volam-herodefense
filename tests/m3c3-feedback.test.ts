@@ -96,7 +96,7 @@ describe('M3C3 feedback authoritative trial', () => {
     f.enemies[0]!.x = 365;
     for (let i = 0; i < 4; i++) {
       f.input('basic');
-      f.steps(19);
+      f.steps(i === 3 ? 1 : 8);
     }
     expect(
       f.events.filter((e) => e.kind === 'attack').map((e) => e.stage),
@@ -104,6 +104,15 @@ describe('M3C3 feedback authoritative trial', () => {
     expect(f.hits('cai_bang_bong').map((e) => e.damage)).toEqual([
       28, 28, 29, 34,
     ]);
+    f.steps(7);
+    f.input('basic');
+    f.steps(15);
+    expect(f.events.filter((e) => e.kind === 'attack')).toHaveLength(4);
+    f.input('basic');
+    f.steps(1);
+    expect(f.events.filter((e) => e.kind === 'attack').at(-1)?.stage).toBe(
+      'thrust',
+    );
   });
   it('Hỏa Vân releases three simultaneous fixed divergent directions', () => {
     const f = fixture();

@@ -5,6 +5,10 @@ import allOverrides from './renovation-actions.generated.json';
 import feedbackV4 from './renovation-feedback.generated.json';
 import { renovationFeedbackEnabled } from './renovation-feedback.js';
 import {
+  bongPhaGiapBody,
+  bongPhaGiapEffects,
+} from './bong-skill-review-art.js';
+import {
   preloadRenovationActions,
   presentRenovationAction,
   renovationActionSources,
@@ -43,6 +47,10 @@ export function registerRenovation(scene: Phaser.Scene): void {
   if (scene.sys.settings.key !== 'Arena') return;
   scene.registry.set('renovation-enabled', true);
   scene.registry.set('renovation-observed', new Map<string, Set<string>>());
+  if (scene.textures.exists(bongPhaGiapBody))
+    scene.textures
+      .get(bongPhaGiapBody)
+      .setFilter(Phaser.Textures.FilterMode.NEAREST);
   for (const key of scene.textures
     .getTextureKeys()
     .filter((key) => key.startsWith('renovated-')))
@@ -118,6 +126,7 @@ export function inspectRenovation(scene: Phaser.Scene) {
         return (
           b.texture &&
           (skillKeys.has(b.texture.key) ||
+            b.texture.key === bongPhaGiapEffects ||
             b.texture.key.startsWith('renovated-v4-') ||
             b.texture.key.startsWith('renovated-v5-') ||
             b.texture.key.startsWith('renovated-v6-') ||

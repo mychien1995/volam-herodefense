@@ -8,6 +8,16 @@ import { staffSlamCel } from './renovation-followup-model.js';
 import { renovationRevisionEnabled } from './renovation-policy.js';
 import { retainM3dBody } from './renovation-policy.js';
 import { renovationActionCel } from './renovation-action-model.js';
+import {
+  caiBangBongArtEnabled,
+  bongReviewBody,
+} from './bong-combo-review-art.js';
+import {
+  bongContacts,
+  bongPhaGiapBody,
+  bongPhaGiapBodyScale,
+  bongPhaGiapPath,
+} from './bong-skill-review-art.js';
 type Body = Phaser.GameObjects.Image | Phaser.GameObjects.Sprite;
 type Definition = {
   id: string;
@@ -17,6 +27,26 @@ type Definition = {
   atlas: string;
   canvas: number[];
   pivot: number[];
+};
+const bongReviewPath = '/assets/skills/cai-bang/bong-combo-review/';
+const bongReviewCastAssets = {
+  pull: {
+    key: 'bong_review_pull',
+    path: bongReviewPath + 'pull',
+    origin: [0.5, 104 / 144],
+  },
+  slam: {
+    key: bongPhaGiapBody,
+    path: bongPhaGiapPath + 'body',
+    origin: [0.5, 0.5],
+  },
+};
+const bongReviewCasts: Record<string, string> = {
+  hoanh_tao_bong: 'combo_sweep',
+  pha_giap_bong: 'slam',
+  cam_long_cong: 'pull',
+  truy_phong_bong: 'combo_thrust',
+  thien_ha_vo_cau: 'combo_sweep',
 };
 const bodies = raw.bodies as Definition[],
   extraBodies = revision.assets
@@ -59,6 +89,9 @@ export const renovationActionSources = new Map(
 );
 export function preloadRenovationActions(scene: Phaser.Scene) {
   if (!renovationActionsEnabled()) return;
+  if (caiBangBongArtEnabled)
+    for (const asset of Object.values(bongReviewCastAssets))
+      scene.load.atlas(asset.key, asset.path + '.png', asset.path + '.json');
   for (const b of bodies) scene.load.atlas(b.key, b.url, b.atlas);
   if (renovationRevisionEnabled())
     for (const b of extraBodies) scene.load.atlas(b.key, b.url, b.atlas);
@@ -77,7 +110,21 @@ export function presentRenovationAction(
   ability = '',
   clock?: { phase?: string; progress?: number },
 ) {
-  if (retainM3dBody(id, ability)) {
+  const previewCast =
+    caiBangBongArtEnabled && id === 'hero_cai_bang'
+      ? bongReviewCasts[ability]
+      : undefined;
+  if (
+    image.texture.key === bongReviewBody ||
+    image.texture.key === bongContacts ||
+    (!previewCast && retainM3dBody(id, ability)) ||
+    // The general Đao attack cel raises the weapon instead of completing the
+    // left overhead strike. Keep the authored left windup, contact and recovery.
+    (ability === 'liet_phong_dao' &&
+      fx < 0 &&
+      Math.abs(fx) > Math.abs(fy) &&
+      image.texture.key === 'review3_ts_dao')
+  ) {
     image.setData('renovation-action', undefined);
     return false;
   }
@@ -95,6 +142,7 @@ export function presentRenovationAction(
       }
     | undefined;
   const native =
+    image.texture.key.startsWith('bong_review_') ||
     image.texture.key.startsWith('renovated-action-') ||
     image.texture.key.startsWith('renovated-v5-') ||
     image.texture.key.startsWith('renovated-v6-') ||
@@ -171,6 +219,11 @@ export function presentRenovationAction(
       /spin|whirl|luc_duong|bach_phien|thien_ha_vo_cau/.test(
         ability + ' ' + clip,
       )) &&
+    !(
+      previewCast &&
+      ability === 'thien_ha_vo_cau' &&
+      /end|finish|raise/.test(clip)
+    ) &&
     [
       'hero_thien_son',
       'hero_thien_son_dao',
@@ -187,6 +240,48 @@ export function presentRenovationAction(
           Math.floor(Math.max(0, Math.min(0.999, progress)) * 4)) %
           4
       ]!;
+  }
+  if (previewCast) {
+    const ultimateRaise = clip === 'bong_finisher_raise';
+    const slam = ability === 'thien_ha_vo_cau' && clip === 'ending';
+    const prefix = slam
+      ? 'stomp'
+      : ultimateRaise
+        ? 'combo_overhead'
+        : previewCast;
+    const asset =
+      prefix === 'slam' || prefix === 'pull'
+        ? bongReviewCastAssets[prefix]
+        : undefined;
+    const index =
+      slam || ultimateRaise
+        ? 0
+        : prefix === 'slam'
+          ? Math.min(2, staffSlamCel(clip, progress))
+          : Math.floor(progress * 4);
+    const [originX, originY] = slam
+      ? [0.5, 0.5]
+      : (asset?.origin ?? [0.5, 104 / 144]);
+    const key = slam ? bongContacts : (asset?.key ?? bongReviewBody);
+    const previewFrame = `${prefix}_${direction}_${index}`;
+    if (scene.textures.get(key).has(previewFrame)) {
+      image
+        .setTexture(key, previewFrame)
+        .setOrigin(originX!, originY!)
+        .setScale(key === bongPhaGiapBody ? bongPhaGiapBodyScale : 1)
+        .setFlip(false, false)
+        .setRotation(0);
+      image.setData('renovation-action', {
+        sourceTexture: texture,
+        sourceFrame: frame,
+        clip,
+        progress,
+        ability,
+        phase: cel.phase,
+        body: key,
+      });
+      return true;
+    }
   }
   const name = direction + '_' + cel.index;
   if (!scene.textures.get(definition.key).has(name))

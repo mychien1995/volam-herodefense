@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { m1Config, skillArt } from '@volam/game-data';
-import { startTogether } from './pregame-helper.js';
+import { joinWaiting, startTogether } from './pregame-helper.js';
 interface Actor {
   x: number;
   y: number;
@@ -17,6 +17,7 @@ interface Actor {
   eCooldown: number;
   rCooldown: number;
   basicCooldown: number;
+  basicId: string;
   statuses: string;
   pose: string;
   lastSequence: number;
@@ -55,6 +56,8 @@ interface Presentation {
   };
   camera: { x: number; y: number };
   skills: {
+    feedback: { played: string[] };
+    r3: { entities: Array<{ asset: string }> };
     loadedComponents: number;
     registeredAnimations: number;
     played: string[];
@@ -110,10 +113,11 @@ async function equip(p: Page, ids: string[]) {
   await p.locator('#dialog-content [data-menu=skills]').click();
   for (let i = 0; i < 4; i++)
     await p
-      .getByLabel(`Test skill ${'QWER'[i]}`, { exact: true })
-      .selectOption(ids[i] ?? '');
-  await p.locator('#apply-test-skills').click();
+      .getByLabel(`Kỹ năng ${'QWER'[i]}`, { exact: true })
+      .selectOption(ids[i] ?? '', { timeout: 5000 });
+  await p.getByRole('button', { name: 'Áp dụng bộ kỹ năng' }).click();
   await expect.poll(async () => (await hero(p)).qSkill).toBe(ids[0]);
+  await p.getByRole('button', { name: 'Đóng menu' }).click();
 }
 async function enter(p: Page, access: 'shared' | 'private') {
   await p.locator('[data-menu=dungeons]').click();
@@ -660,6 +664,73 @@ test('a real enemy kills a player during a skill channel and both clients clean 
   } finally {
     await ca.close();
     await cb.close();
+  }
+});
+
+test('approved Bổng effects replicate to a second client', async ({
+  browser,
+}) => {
+  const a = await browser.newPage({ viewport: { width: 900, height: 680 } });
+  const b = await browser.newPage({ viewport: { width: 900, height: 680 } });
+  try {
+    const entry = '/?debug=1&skillPreview=1';
+    await joinWaiting(a, 'Bổng', undefined, entry, 30_000);
+    await expect.poll(async () => (await read(a)).roomId).toBeTruthy();
+    await joinWaiting(b, 'Quan sát', (await read(a)).roomId, entry, 30_000);
+    await startTogether([a, b], [], 30_000);
+    await a.bringToFront();
+    await equip(a, ['thien_ha_vo_cau', 'pha_giap_bong', '', 'truy_phong_bong']);
+    await a.getByLabel('Preview basic attack').selectOption('cai_bang_bong');
+    await expect
+      .poll(async () => (await hero(a)).basicId)
+      .toBe('cai_bang_bong');
+    await a.getByRole('button', { name: 'Target line' }).click();
+    await a.locator('#game canvas').focus();
+    await a.keyboard.press('KeyA');
+    await expect
+      .poll(async () =>
+        (await view(b)).skills.feedback.played.some((key) =>
+          key.startsWith('skill:bong_review_trail:combo_thrust_'),
+        ),
+      )
+      .toBe(true);
+    await expect.poll(async () => (await hero(a)).pose).toBe('idle');
+    await a.keyboard.press('KeyW');
+    await expect
+      .poll(
+        async () =>
+          (await view(b)).renovation.skillEffects.some(
+            (effect) =>
+              effect.texture === 'bong_review_pha_lava_effects' &&
+              effect.frame.startsWith('impact_'),
+          ),
+        { intervals: [30] },
+      )
+      .toBe(true);
+    await expect.poll(async () => (await hero(a)).pose).toBe('idle');
+    const { x, y } = await hero(a);
+    await a.keyboard.press('KeyR');
+    await expect
+      .poll(async () => (await view(b)).skills.feedback.played)
+      .toContain('skill:bong_review_nham_chan_ground:impact');
+    expect(await hero(a)).toMatchObject({ x, y });
+    await expect.poll(async () => (await hero(a)).pose).toBe('idle');
+    await a.keyboard.press('KeyQ');
+    await expect
+      .poll(
+        async () =>
+          (await view(b)).skills.r3.entities.filter(
+            (effect) => effect.asset === 'review3_vo_cau_projectile',
+          ).length,
+        { intervals: [30] },
+      )
+      .toBe(6);
+    await expect
+      .poll(async () => (await view(b)).skills.feedback.played)
+      .toContain('skill:bong_review_nham_trieu_ground:impact');
+  } finally {
+    await a.close();
+    await b.close();
   }
 });
 

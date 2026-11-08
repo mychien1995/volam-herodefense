@@ -36,7 +36,7 @@ export const m3dFeedbackTuning = {
     roar: { range: 210, slow: 0.35 },
   },
   caiBang: {
-    groundSlamRange: 240,
+    groundSlamRange: 144,
     groundSlamWidth: 50,
     whirlRange: 175,
     finalSmashRange: 215,

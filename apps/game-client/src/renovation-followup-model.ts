@@ -84,7 +84,7 @@ export function dragonCoilFrame(
   };
 }
 export function staffContact(fx: number, fy: number) {
-  const direction =
+  const direction: keyof typeof reachArt.contacts =
     Math.abs(fx) > Math.abs(fy)
       ? fx < 0
         ? 'left'
