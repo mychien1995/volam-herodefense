@@ -31,7 +31,19 @@ const status = z.strictObject({
   toggle: z.boolean().optional(),
 });
 const projectile = z.strictObject({
-  dragonDive:z.strictObject({forwardTicks:count.min(1),orbitTicks:count.min(1),riseTicks:count.min(1),diveTicks:count.min(1),loopRadius:positive,impactRadius:positive,height:positive}).optional(),
+  dragonDive: z
+    .strictObject({
+      forwardTicks: count,
+      orbitTicks: count.min(1),
+      riseTicks: count.min(1),
+      diveTicks: count.min(1),
+      loopRadius: positive,
+      impactRadius: positive,
+      height: positive,
+      coilTurns: count.min(1).optional(),
+      coilDamageScale: z.number().positive().max(1).optional(),
+    })
+    .optional(),
   windupTicks: count.min(1).optional(),
   recoveryTicks: count.optional(),
   laneOffsets: z.array(z.number().finite()).min(1).max(8).optional(),

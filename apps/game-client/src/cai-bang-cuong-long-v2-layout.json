@@ -1,0 +1,37 @@
+{
+  "width": 152,
+  "height": 120,
+  "pivot": [76, 60],
+  "registration": {
+    "dragon_flight": {
+      "divisor": 7,
+      "x": [470, 470, 473, 470, 470, 473],
+      "y": 282
+    },
+    "target_burn": {
+      "input": "assets/source/effects/cai_bang_cuong_long_v1/raw/target_burn.png",
+      "divisor": 7,
+      "x": [266, 257, 248, 266, 257, 248],
+      "y": [378, 378, 378, 365, 365, 365],
+      "accent": { "crop": [82, 45, 12, 17], "position": [73, 34] }
+    }
+  },
+  "clips": [
+    {
+      "name": "dragon_flight",
+      "durations": [46, 42, 42, 46, 46, 42],
+      "stage": "travel",
+      "placement": "projectile",
+      "offsetY": -20,
+      "loop": true
+    },
+    {
+      "name": "target_burn",
+      "durations": [75, 70, 65, 75, 80, 85],
+      "stage": "burn",
+      "placement": "target",
+      "offsetY": -3,
+      "loop": true
+    }
+  ]
+}

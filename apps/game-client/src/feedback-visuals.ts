@@ -1,5 +1,28 @@
+import {
+  cuongLongFlightArt,
+  cuongLongEnabled,
+  cuongLongId,
+  phiLongArt,
+  phiLongEnabled,
+  phiLongId,
+} from './cai-bang-palm-art.js';
+
 /** Temporary reuse of retained raster assets. No new-art or animation approval implied. */
 export function feedbackProjectile(abilityId: string, stage: string) {
+  if (abilityId === phiLongId && phiLongEnabled())
+    return {
+      asset: phiLongArt.id,
+      prefix: 'breaking_wave',
+      scale: 1,
+      centered: false,
+    };
+  if (abilityId === cuongLongId && cuongLongEnabled())
+    return {
+      asset: cuongLongFlightArt().id,
+      prefix: 'dragon_flight',
+      scale: 1,
+      centered: false,
+    };
   if (abilityId === 'cai_bang_chuong' && stage === 'dragon')
     return {
       asset: 'phi_long_tai_thien_vfx',

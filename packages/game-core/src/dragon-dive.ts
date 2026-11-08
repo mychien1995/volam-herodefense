@@ -1,5 +1,6 @@
 import { distance, segmentRect, direction } from './geometry.js';
 import { emit, hurt } from './combat.js';
+import { applyStatus } from './status.js';
 import type {
   Point,
   Projectile,
@@ -15,10 +16,12 @@ export type DragonDiveDefinition = {
   loopRadius: number;
   impactRadius: number;
   height: number;
+  coilTurns?: number | undefined;
+  coilDamageScale?: number | undefined;
 };
 export const dragonDiveDuration = (d: DragonDiveDefinition) =>
   d.forwardTicks + d.orbitTicks + d.riseTicks + d.diveTicks;
-/** Cast-time, server-owned point. Coiling/rise/dive never follows a moving target. */
+/** Initial server-owned ground anchor. A self-centered dive follows its caster. */
 export function dragonDiveTarget(
   w: World,
   origin: Point,
@@ -27,6 +30,7 @@ export function dragonDiveTarget(
   e: ProjectileEffect,
   c: SimulationConfig,
 ): Point {
+  if (e.dragonDive!.forwardTicks === 0) return { x: origin.x, y: origin.y };
   const target = [...w.creeps.values()]
     .filter(
       (t) =>
@@ -68,7 +72,7 @@ export function dragonDivePose(
     height = 0,
     dx = fx,
     dy = fy;
-  const entry = target;
+  const entry = d.forwardTicks > 0 ? target : origin;
   if (age < d.forwardTicks) {
     const t = Math.max(0, age) / d.forwardTicks;
     x = origin.x + (entry.x - origin.x) * t;
@@ -77,13 +81,11 @@ export function dragonDivePose(
     dx = v.x;
     dy = v.y;
   } else if (age < d.forwardTicks + d.orbitTicks) {
-    // Keep the existing phase duration; the authored body curls into one ring.
-    // Moving the entire projectile around a circle would recreate the rejected spin.
     stage = 'dragon_coil';
-    x = target.x;
-    y = target.y;
-    dx = 0;
-    dy = 0;
+    x = entry.x;
+    y = entry.y;
+    dx = d.forwardTicks === 0 ? fx : 0;
+    dy = d.forwardTicks === 0 ? fy : 0;
   } else if (age < d.forwardTicks + d.orbitTicks + d.riseTicks) {
     stage = 'dragon_rise';
     const t = (age - d.forwardTicks - d.orbitTicks) / d.riseTicks;
@@ -101,10 +103,48 @@ export function dragonDivePose(
     x = target.x;
     y = target.y;
     height = d.height * (1 - t);
-    dx = 0;
+    dx = d.forwardTicks === 0 ? fx * 0.15 : 0;
     dy = 1;
   }
   return { x, y, height, dx, dy, stage };
+}
+function hitDragonArea(
+  world: World,
+  shot: Projectile,
+  config: SimulationConfig,
+  center: Point,
+  radius: number,
+  damageScale: number,
+  landing: boolean,
+): void {
+  const { fx, fy } = shot.dragonFlight!;
+  for (const enemy of [...world.creeps.values()]) {
+    if (
+      enemy.hp <= 0 ||
+      distance(enemy, center) > radius + (enemy.stats ?? config.creep).radius ||
+      config.collision.some(
+        (wall) => segmentRect(center, enemy, wall) !== undefined,
+      )
+    )
+      continue;
+    const hit = hurt(
+      world,
+      enemy,
+      shot.ownerId,
+      shot.abilityId,
+      shot.rawDamage * damageScale,
+      config,
+      {
+        critChance: shot.critChance ?? 0,
+        critMultiplier: shot.critMultiplier ?? config.critMultiplier,
+        fx,
+        fy,
+      },
+    );
+    if (landing && hit && enemy.hp > 0)
+      for (const status of shot.effect.statuses ?? [])
+        applyStatus(enemy, status, shot.ownerId, shot.abilityId, world.tick);
+  }
 }
 export function advanceDragonDive(
   w: World,
@@ -114,6 +154,16 @@ export function advanceDragonDive(
   const d = p.effect.dragonDive!,
     flight = p.dragonFlight!;
   const age = w.tick - p.spawnedAt!;
+  const owner = w.heroes.get(p.ownerId);
+  if (!owner || owner.hp <= 0) {
+    w.projectiles.delete(p.id);
+    return;
+  }
+  if (d.forwardTicks === 0) {
+    const center = { x: owner.x, y: owner.y };
+    flight.origin = center;
+    flight.target = center;
+  }
   const pose = dragonDivePose(
     flight.origin,
     flight.target,
@@ -129,7 +179,14 @@ export function advanceDragonDive(
     vy: pose.dy * p.effect.speed,
     stage: pose.stage,
   });
-  if (age < dragonDiveDuration(d)) return;
+  if (age < dragonDiveDuration(d)) {
+    if (
+      d.coilDamageScale &&
+      age === d.forwardTicks + Math.floor(d.orbitTicks / 2)
+    )
+      hitDragonArea(w, p, c, pose, d.loopRadius, d.coilDamageScale, false);
+    return;
+  }
   emit(w, {
     kind: 'pulse',
     sourceId: p.ownerId,
@@ -144,20 +201,6 @@ export function advanceDragonDive(
     damage: 0,
     critical: false,
   });
-  for (const enemy of [...w.creeps.values()])
-    if (
-      enemy.hp > 0 &&
-      distance(enemy, flight.target) <=
-        d.impactRadius + (enemy.stats ?? c.creep).radius &&
-      !c.collision.some(
-        (r) => segmentRect(flight.target, enemy, r) !== undefined,
-      )
-    )
-      hurt(w, enemy, p.ownerId, p.abilityId, p.rawDamage, c, {
-        critChance: p.critChance ?? 0,
-        critMultiplier: p.critMultiplier ?? c.critMultiplier,
-        fx: flight.fx,
-        fy: flight.fy,
-      });
+  hitDragonArea(w, p, c, flight.target, d.impactRadius, 1, true);
   w.projectiles.delete(p.id);
 }

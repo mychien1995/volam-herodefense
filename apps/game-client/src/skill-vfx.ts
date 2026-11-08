@@ -1,5 +1,25 @@
 import Phaser from 'phaser';
 import {
+  caiBangPalmArt,
+  caiBangPalmEnabled,
+  caiBangPalmId,
+  cuongLongArt,
+  cuongLongBlastDiameter,
+  cuongLongDetailArt,
+  cuongLongEnabled,
+  cuongLongId,
+  cuongLongV2Art,
+  cuongLongV3Art,
+  hangLongArt,
+  hangLongEnabled,
+  hangLongId,
+  phiLongArt,
+  phiLongEndingArt,
+  phiLongEndingEnabled,
+  phiLongTrailArt,
+  showOriginalPhiLongTrail,
+} from './cai-bang-palm-art.js';
+import {
   RenovationFollowup,
   preloadRenovationFollowup,
 } from './renovation-followup.js';
@@ -43,8 +63,18 @@ import {
   registerRasterAnimations,
 } from './skill-art-registry.js';
 
+const caiBangFire = [
+  caiBangPalmArt,
+  cuongLongArt,
+  cuongLongV2Art,
+  cuongLongV3Art,
+  phiLongArt,
+  phiLongEndingArt,
+  phiLongTrailArt,
+  hangLongArt,
+];
 const components = new Map(
-  [...skillArt.assets, retainedBasicPalm].map((a) => [a.id, a]),
+  [...skillArt.assets, retainedBasicPalm, ...caiBangFire].map((a) => [a.id, a]),
 );
 export function preloadSkillArt(scene: Phaser.Scene): void {
   preloadRenovationFollowup(scene);
@@ -56,6 +86,7 @@ export function preloadSkillArt(scene: Phaser.Scene): void {
   );
   preloadR3Arena(scene);
   preloadRasterAnimations(scene, renovatedSkillComponents);
+  preloadRasterAnimations(scene, caiBangFire);
   preloadRasterAnimations(scene, skillArt.assets);
   preloadRasterAnimations(scene, feedbackArt);
   preloadRasterAnimations(scene, approvedSkillAssets);
@@ -64,6 +95,15 @@ export function preloadSkillArt(scene: Phaser.Scene): void {
 }
 export function registerSkillArt(scene: Phaser.Scene): void {
   registerRasterAnimations(scene, renovatedSkillComponents);
+  registerRasterAnimations(scene, caiBangFire);
+  scene.textures.get(cuongLongV2Art.id).setSmoothPixelArt(true);
+  scene.textures.get(cuongLongV3Art.id).setSmoothPixelArt(true);
+  scene.textures.get(phiLongArt.id).setSmoothPixelArt(true);
+  scene.textures.get(phiLongEndingArt.id).setSmoothPixelArt(true);
+  scene.textures.get(hangLongArt.id).setSmoothPixelArt(true);
+  if (!showOriginalPhiLongTrail) {
+    scene.textures.get(phiLongTrailArt.id).setSmoothPixelArt(true);
+  }
   registerRasterAnimations(scene, skillArt.assets);
   registerRasterAnimations(scene, feedbackArt);
   registerRasterAnimations(scene, approvedSkillAssets);
@@ -75,7 +115,9 @@ interface EffectView {
   tag: SkillAnimation;
   ownerId: string;
   impact?: boolean;
+  trailPosition?: { x: number; y: number };
 }
+const phiLongTrailSpacing = 24;
 interface VfxActor {
   x: number;
   y: number;
@@ -96,6 +138,7 @@ export class SkillVfx {
   private transient = new Set<EffectView>();
   private persistent = new Map<string, EffectView>();
   private projectiles = new Map<string, EffectView>();
+  private palmBlasts = new Map<string, CombatEvent>();
   private frameObservations = new Set<string>();
   private played = new Set<string>();
   private casts = new Map<
@@ -186,9 +229,11 @@ export class SkillVfx {
       )
       .setDepth(
         view.tag.placement === 'ground' &&
-          skillVisualStages[
-            components.get(view.sprite.texture.key)?.skillId ?? ''
-          ]?.area
+          (view.sprite.texture.key === cuongLongArt.id ||
+            skillVisualStages[
+              components.get(view.sprite.texture.key)?.skillId ?? ''
+            ]?.area ||
+            view.sprite.texture.key === hangLongArt.id)
           ? -10
           : view.tag.placement === 'ground' ||
               view.tag.placement === 'caster_front_ground'
@@ -223,6 +268,10 @@ export class SkillVfx {
       ownerId,
     );
     if (!view) return;
+    if (asset === caiBangPalmArt.id)
+      view.sprite.setRotation(Math.atan2(event.fy ?? 0, event.fx ?? 1));
+    if (asset === cuongLongArt.id && prefix === 'round_blast' && event.radius)
+      view.sprite.setScale((event.radius * 2) / cuongLongBlastDiameter);
     if (
       ['hoanh_tao_bong', 'cam_long_cong'].includes(event.abilityId) &&
       event.radius &&
@@ -251,13 +300,16 @@ export class SkillVfx {
       view.sprite.anims.timeScale =
         ((view.tag.frames.length / view.tag.frameRate) * 1000) / durationMs;
     view.impact = event.kind === 'hit';
+    this.trackTransient(view, durationMs);
+  }
+  private trackTransient(view: EffectView, durationMs?: number): void {
     this.transient.add(view);
     const remove = () => {
       this.transient.delete(view);
       view.sprite.destroy();
     };
     view.sprite.once(Phaser.Animations.Events.ANIMATION_COMPLETE, remove);
-    // An incorrectly looped optional source tag must not become an immortal impact.
+    // An incorrectly looped optional source tag still needs to expire.
     this.scene.time.delayedCall(
       Math.max(
         200,
@@ -269,14 +321,125 @@ export class SkillVfx {
       },
     );
   }
+  private layPhiLongTrail(wave: EffectView, x: number, y: number): void {
+    const start = (wave.trailPosition ??= { x, y });
+    const dx = x - start.x;
+    const dy = y - start.y;
+    const distance = Math.hypot(dx, dy);
+    const segments = Math.floor(distance / phiLongTrailSpacing);
+    if (!segments) return;
+    const stepX = (dx / distance) * phiLongTrailSpacing;
+    const stepY = (dy / distance) * phiLongTrailSpacing;
+    const angle = Math.atan2(dy, dx);
+    for (let i = 0; i < segments; i++) {
+      // Center each flame on a path segment already traversed by the wave.
+      this.addPhiLongGroundFire(
+        start.x + stepX * (i + 0.5),
+        start.y + stepY * (i + 0.5),
+        angle,
+        dx < 0,
+        wave.ownerId,
+      );
+    }
+    start.x += stepX * segments;
+    start.y += stepY * segments;
+  }
+  private addPhiLongGroundFire(
+    x: number,
+    y: number,
+    angle: number,
+    flipY: boolean,
+    ownerId: string,
+  ): void {
+    const trail = this.make(
+      phiLongTrailArt.id,
+      'ground_trail',
+      x,
+      y,
+      Math.cos(angle),
+      Math.sin(angle),
+      ownerId,
+    );
+    if (!trail) return;
+    trail.sprite.setDepth(-10).setRotation(angle).setFlipY(flipY);
+    this.trackTransient(trail);
+  }
+  private collapsePhiLongWave(wave: EffectView): void {
+    const { rotation, flipY, depth } = wave.sprite;
+    const x = wave.sprite.x - wave.tag.effectPlacementOffset[0];
+    const y = wave.sprite.y - wave.tag.effectPlacementOffset[1];
+    const fx = Math.cos(rotation);
+    const fy = Math.sin(rotation);
+    const ending = this.make(
+      phiLongEndingArt.id,
+      'wave_collapse',
+      x,
+      y,
+      fx,
+      fy,
+      wave.ownerId,
+    );
+    if (!ending) return;
+    ending.sprite.setRotation(rotation).setFlipY(flipY).setDepth(depth);
+    this.trackTransient(ending);
+    // Place the final ember patch under the fold, just behind the last wave tip.
+    const inset = phiLongTrailSpacing * 0.75;
+    this.addPhiLongGroundFire(
+      x - fx * inset,
+      y - fy * inset,
+      rotation,
+      flipY,
+      wave.ownerId,
+    );
+  }
   event(e: CombatEvent): void {
     this.followup.event(e);
     this.revision.event(e);
     this.renovated.event(e);
+    if (e.abilityId === hangLongId && hangLongEnabled()) {
+      if (e.kind === 'pulse' && e.stage === 'dragon_impact') {
+        this.burst(hangLongArt.id, 'dragon_impact', e);
+        return;
+      }
+      if (e.kind === 'hit') return;
+    }
     if (this.r3.event(e)) return;
     if (this.m3d.event(e)) return;
     if (this.approved.event(e)) return;
     if (e.kind === 'attack') this.casts.delete(e.sourceId);
+    // Periodic burn already has a status sprite. A generic impact flashes over it.
+    if (
+      e.kind === 'hit' &&
+      e.abilityId === 'burn' &&
+      cuongLongEnabled() &&
+      cuongLongDetailArt() === cuongLongV2Art
+    )
+      return;
+    if (e.abilityId === cuongLongId && cuongLongEnabled()) {
+      if (e.kind === 'pulse' && e.stage === 'explosion') {
+        this.burst(cuongLongArt.id, 'round_blast', e);
+        return;
+      }
+      // The server emits separate damage events for each target in this blast.
+      if (e.kind === 'hit') return;
+    }
+    if (e.abilityId === caiBangPalmId && caiBangPalmEnabled()) {
+      if (e.kind === 'pulse' && e.stage === 'explosion') {
+        // The sixth shot emits one explosion before its per-target hit events.
+        this.palmBlasts.set(e.sourceId, e);
+        this.burst(caiBangPalmArt.id, 'phoenix_hit', e);
+        return;
+      }
+      if (e.kind === 'hit') {
+        const blast = this.palmBlasts.get(e.sourceId);
+        const belongsToBlast =
+          blast &&
+          blast.tick === e.tick &&
+          Math.hypot(blast.x - e.x, blast.y - e.y) <= (blast.radius ?? 0);
+        if (!belongsToBlast) this.burst(caiBangPalmArt.id, 'bolt_hit', e);
+        return;
+      }
+    }
     if (this.feedback.event(e)) return;
     if (e.abilityId === 'liet_phong_dao') {
       if (e.kind === 'cast')
@@ -471,6 +634,8 @@ export class SkillVfx {
       }
     }
     const active = new Set<string>();
+    const showCuongLong = cuongLongEnabled();
+    const cuongLongDetails = cuongLongDetailArt();
     const syncActor = (id: string, a: VfxActor) => {
       if (a.zoneId !== zoneId || a.hp <= 0) return;
       const point = renderPosition?.(id) ?? a;
@@ -490,24 +655,28 @@ export class SkillVfx {
         if (this.feedback.suppressesStatus(s.abilityId, s.kind)) continue;
         const stage = skillVisualStages[s.abilityId];
         const definition =
-          stage?.persistent &&
-          ([
-            'channel',
-            'dash',
-            'speed_buff',
-            'counter',
-            'mana_shield',
-            'damage_reduction',
-            'support_aura',
-          ].includes(s.kind) ||
-            (s.kind === 'defense_break' &&
-              ['vi_da_quyen', 'tam_gioi_quy_thien'].includes(s.abilityId)) ||
-            (s.kind === 'defense_buff' &&
-              s.abilityId === 'nhu_lai_thien_diep') ||
-            (s.kind === 'slow' &&
-              ['huyen_am_chuong', 'tru_ta'].includes(s.abilityId)))
-            ? { asset: `${s.abilityId}_vfx`, prefix: stage.persistent }
-            : statusVisuals[s.kind];
+          showCuongLong && s.abilityId === cuongLongId && s.kind === 'burn'
+            ? { asset: cuongLongDetails.id, prefix: 'target_burn' }
+            : stage?.persistent &&
+                ([
+                  'channel',
+                  'dash',
+                  'speed_buff',
+                  'counter',
+                  'mana_shield',
+                  'damage_reduction',
+                  'support_aura',
+                ].includes(s.kind) ||
+                  (s.kind === 'defense_break' &&
+                    ['vi_da_quyen', 'tam_gioi_quy_thien'].includes(
+                      s.abilityId,
+                    )) ||
+                  (s.kind === 'defense_buff' &&
+                    s.abilityId === 'nhu_lai_thien_diep') ||
+                  (s.kind === 'slow' &&
+                    ['huyen_am_chuong', 'tru_ta'].includes(s.abilityId)))
+              ? { asset: `${s.abilityId}_vfx`, prefix: stage.persistent }
+              : statusVisuals[s.kind];
         if (!definition) continue;
         const cast = this.casts.get(id);
         const fx =
@@ -627,27 +796,40 @@ export class SkillVfx {
         this.persistent.delete(key);
       }
     const shots = new Set<string>();
+    const showNewPalm = caiBangPalmEnabled();
     state?.projectiles.forEach((p, id) => {
+      if (p.abilityId === hangLongId && hangLongEnabled()) return;
       if (this.r3.projectileHandled(p.abilityId)) return;
       if (this.m3d.projectileHandled(p.abilityId)) return;
       if (this.approved.handles(p.abilityId)) return;
-      if (this.feedback.projectileHandled(p.abilityId, p.stage)) return;
+      const newPalm = showNewPalm && p.abilityId === caiBangPalmId;
+      if (!newPalm && this.feedback.projectileHandled(p.abilityId, p.stage))
+        return;
       if (p.zoneId !== zoneId) return;
       shots.add(id);
       const skill = basicSkillVisualAliases[p.abilityId] ?? p.abilityId;
-      const temporary = feedbackProjectile(p.abilityId, p.stage);
-      const prefix =
-          temporary?.prefix ?? skillVisualStages[skill]?.travel ?? 'projectile',
-        asset =
-          renovationFollowupEnabled() && p.abilityId === 'cai_bang_chuong'
-            ? 'retained_m3d_hoa_van_chuong_vfx'
-            : (temporary?.asset ?? `${skill}_vfx`);
+      const temporary = newPalm
+        ? undefined
+        : feedbackProjectile(p.abilityId, p.stage);
+      const prefix = newPalm
+        ? p.stage === 'dragon'
+          ? 'phoenix_flight'
+          : 'bolt_flight'
+        : (temporary?.prefix ??
+          skillVisualStages[skill]?.travel ??
+          'projectile');
+      const asset = newPalm
+        ? caiBangPalmArt.id
+        : renovationFollowupEnabled() && p.abilityId === caiBangPalmId
+          ? 'retained_m3d_hoa_van_chuong_vfx'
+          : (temporary?.asset ?? `${skill}_vfx`);
       let v = this.projectiles.get(id);
       if (!v) {
         v = this.make(asset, prefix, p.x, p.y, p.vx, p.vy, p.ownerId, true);
         if (v) this.projectiles.set(id, v);
       }
       if (v) {
+        if (asset === phiLongArt.id) this.layPhiLongTrail(v, p.x, p.y);
         this.place(v, p.x, p.y);
         if (temporary) {
           v.sprite.setScale(temporary.scale);
@@ -675,10 +857,26 @@ export class SkillVfx {
         v.sprite.setRotation(
           Math.atan2(p.vy, p.vx) - (angle[v.tag.direction] ?? 0),
         );
+        if (
+          asset === cuongLongV2Art.id ||
+          asset === cuongLongV3Art.id ||
+          asset === phiLongArt.id
+        )
+          v.sprite.setFlipY(p.vx < 0);
       }
     });
     for (const [key, v] of this.projectiles)
       if (!shots.has(key)) {
+        if (
+          v.sprite.texture.key === phiLongArt.id &&
+          state &&
+          !state.projectiles.has(key) &&
+          phiLongEndingEnabled()
+        ) {
+          const owner = actor(v.ownerId);
+          if (owner?.zoneId === zoneId && owner.hp > 0)
+            this.collapsePhiLongWave(v);
+        }
         v.sprite.destroy();
         this.projectiles.delete(key);
       }
@@ -740,6 +938,7 @@ export class SkillVfx {
     this.transient.clear();
     this.persistent.clear();
     this.projectiles.clear();
+    this.palmBlasts.clear();
   }
   observeCharacter(texture: string, frame: string) {
     this.r3.observeCharacter(texture, frame);

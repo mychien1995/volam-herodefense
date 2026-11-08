@@ -58,10 +58,10 @@ function setup(skill = 'hang_long_hoa_vu') {
   };
   return { c, w, h, step, events, target, cast };
 }
-it('dragon follows four phases and coils at its locked endpoint, with one server damage pulse only on landing', () => {
+it('dragon uses one landing pulse centered on the caster', () => {
   const s = setup(),
-    e = s.target('target'),
-    near = s.target('near', 650),
+    e = s.target('target', 450),
+    near = s.target('near', 530),
     miss = s.target('outside', 800, 650);
   s.cast();
   const effect = s.c.skillCatalogue!.hang_long_hoa_vu!.effect;
@@ -70,25 +70,29 @@ it('dragon follows four phases and coils at its locked endpoint, with one server
   const duration = dragonDiveDuration(effect.dragonDive),
     stages = new Set<string>();
   const p = [...s.w.projectiles.values()][0]!;
-  expect(p.dragonFlight!.target).toEqual({ x: e.x, y: e.y });
+  expect(p.dragonFlight!.target).toEqual({ x: 400, y: 400 });
   for (let i = 0; i < duration; i++) {
     for (const p of s.w.projectiles.values()) stages.add(p.stage!);
-    expect(e.hp).toBe(10000);
     s.step();
   }
   s.step(2);
   expect([...stages].sort()).toEqual([
     'dragon_coil',
     'dragon_dive',
-    'dragon_forward',
     'dragon_rise',
   ]);
-  for (const t of [e, near])
-    expect(
-      s.events.filter((e) => e.kind === 'hit' && e.targetId === t.id),
-    ).toHaveLength(1);
+  expect(
+    s.events.filter((event) => event.kind === 'hit' && event.targetId === e.id),
+  ).toHaveLength(2);
+  expect(
+    s.events.filter(
+      (event) => event.kind === 'hit' && event.targetId === near.id,
+    ),
+  ).toHaveLength(1);
   expect(miss.hp).toBe(10000);
-  expect(s.events.filter((e) => e.stage === 'dragon_impact')).toHaveLength(1);
+  const impacts = s.events.filter((e) => e.stage === 'dragon_impact');
+  expect(impacts).toHaveLength(1);
+  expect(impacts[0]).toMatchObject({ x: 400, y: 400, radius: 128.8 });
   expect(s.w.projectiles.size).toBe(0);
   expect(s.h.mana).toBe(955);
   const d = effect.dragonDive,
@@ -101,16 +105,20 @@ it('dragon follows four phases and coils at its locked endpoint, with one server
   expect(a.stage).toBe('dragon_coil');
   expect(b.stage).toBe('dragon_rise');
 });
-it('dragon locks target at accepted cast; an enemy moving away is not followed', () => {
+it('dragon lands on its moving caster, independently of enemies', () => {
   const s = setup(),
     e = s.target('moving');
   s.cast();
   e.x = 1000;
   e.y = 700;
-  s.step(100);
+  s.step(83);
+  expect(s.events.some((event) => event.stage === 'dragon_impact')).toBe(false);
+  s.h.x += 24;
+  s.h.y += 12;
+  s.step();
   expect(e.hp).toBe(10000);
   const impact = s.events.find((e) => e.stage === 'dragon_impact')!;
-  expect([impact.x, impact.y]).toEqual([600, 400]);
+  expect([impact.x, impact.y]).toEqual([424, 412]);
 });
 it.each(['death', 'zone'])(
   'dragon cancels without impact on %s cleanup',

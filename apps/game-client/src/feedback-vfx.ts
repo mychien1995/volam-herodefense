@@ -1,4 +1,10 @@
 import Phaser from 'phaser';
+import {
+  caiBangPalmEnabled,
+  caiBangPalmId,
+  hangLongEnabled,
+  hangLongId,
+} from './cai-bang-palm-art.js';
 import { renovationRevisionEnabled } from './renovation-policy.js';
 import { renovationFollowupEnabled } from './renovation-policy.js';
 import { spinFacing } from './hero-vfx-review.js';
@@ -519,7 +525,11 @@ export class FeedbackVfx {
           b.endingCharacter,
           b.releaseOnStrike,
         );
-      if (b.release && !b.releaseOnStrike)
+      if (
+        b.release &&
+        !b.releaseOnStrike &&
+        !(e.abilityId === hangLongId && hangLongEnabled())
+      )
         this.sequence(
           b.release,
           e,
@@ -1128,6 +1138,8 @@ export class FeedbackVfx {
     const active = new Set<string>();
     state.projectiles.forEach((p, id) => {
       if (approvedSkillIds.has(p.abilityId)) return;
+      if (p.abilityId === caiBangPalmId && caiBangPalmEnabled()) return;
+      if (p.abilityId === hangLongId && hangLongEnabled()) return;
       const b = feedbackBindings[p.abilityId];
       if (
         !b?.projectile ||

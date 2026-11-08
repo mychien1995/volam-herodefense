@@ -1,0 +1,40 @@
+{
+  "id": "cai_bang_cuong_long_v2",
+  "category": "effects",
+  "status": "prototype",
+  "skillId": "cuong_long_loan_vu",
+  "source": "cai_bang_cuong_long_v2.aseprite",
+  "sheet": "assets/exports/effects/cai_bang_cuong_long_v2.png",
+  "atlas": "assets/exports/effects/cai_bang_cuong_long_v2.json",
+  "layout": "apps/game-client/src/cai-bang-cuong-long-v2-layout.json",
+  "assembler": "assets/source/effects/cai_bang_palm_v1/assemble.lua",
+  "assemblerParameters": {
+    "id": "cai_bang_cuong_long_v2",
+    "layout": "cai-bang-cuong-long-v2-layout.json"
+  },
+  "frameSize": [
+    152,
+    120
+  ],
+  "pivotPx": [
+    76,
+    60
+  ],
+  "provenance": {
+    "origin": "Original project artwork refined with OpenAI ImageGen and assembled in Aseprite 1.3.18.6.",
+    "dragon": {
+      "raw": "raw/dragon_flight.png",
+      "identityReference": "assets/source/effects/cai_bang_cuong_long_v1/raw/dragon_flight.png",
+      "prompt": "Redraw the existing fiery East Asian dragon head flight loop as a refined game sprite. First reference is the target design identity and luminous fire material, second reference shows the amount of simplification to start from but looks too flat. The final middle ground should look polished, sculpted, immediately readable at 62 pixels wide. SIX cels in exact 3-by-2 grid, equal square cells, 1536×1024 landscape, #000000 backing, no grid lines or labels. Same nose tip at the right in all six cells. Each cel full silhouette inside its own cell. Orthographic overhead 3/4 wuxia action game view, all cels fly right, same head size. Use 7 broad color levels with clear hierarchy: a shadow maroon underside, solid broad vermilion head, red-orange face planes, dark negative space under brow and in open jaw, gold snout and one golden broad flame-ridge, tiny ivory eye highlight. Keep two large horn shapes, one brow, a compact wide muzzle, one very short flame whisker, and only three clean flame tails behind the cheek. Preserve the curved feel of fire, with THREE large interior highlight clusters that shape the volume. Keep the area around eyes and cheek uncluttered. NO curlicue filigree, tiny highlights, detached particles, sparkles, stripes, teeth detail, bloom, or soft shadows. Hard deliberate pixel edges at approximately 64×40 native pixel density. Give solid flame-colored outer edges. Six cels subtly animate the three trailing flame tongues and the open jaw. Strong readable silhouette with moderate surface shading. Make it bold but visually rich enough to sit next to a multi-tone orange circular explosion, not a flat logo."
+    },
+    "burn": {
+      "reference": "assets/source/effects/cai_bang_cuong_long_v1/raw/target_burn.png",
+      "description": "The retained two foot flames plus an extra flame on a separately editable torso layer."
+    },
+    "blast": {
+      "reference": "assets/exports/effects/cai_bang_cuong_long_v1.png",
+      "tag": "round_blast",
+      "description": "The previously approved frames are loaded directly from the v1 atlas."
+    }
+  }
+}

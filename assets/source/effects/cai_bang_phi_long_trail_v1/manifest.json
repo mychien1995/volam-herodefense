@@ -1,0 +1,24 @@
+{
+  "id": "cai_bang_phi_long_trail_v1",
+  "category": "effects",
+  "status": "prototype",
+  "skillId": "phi_long_tai_thien",
+  "source": "cai_bang_phi_long_trail_v1.aseprite",
+  "sheet": "assets/exports/effects/cai_bang_phi_long_trail_v1.png",
+  "atlas": "assets/exports/effects/cai_bang_phi_long_trail_v1.json",
+  "layout": "apps/game-client/src/cai-bang-phi-long-trail-layout.json",
+  "assembler": "assets/source/effects/cai_bang_palm_v1/assemble.lua",
+  "assemblerParameters": {
+    "id": "cai_bang_phi_long_trail_v1",
+    "layout": "cai-bang-phi-long-trail-layout.json"
+  },
+  "frameSize": [64, 24],
+  "pivotPx": [32, 14],
+  "provenance": {
+    "origin": "Original project artwork generated with OpenAI ImageGen and assembled in Aseprite 1.3.18.6.",
+    "trail": {
+      "raw": "raw/ground_trail.png",
+      "prompt": "Create a six-frame 2D pixel-art VFX sprite sheet for the short residual fire wake left ON THE GROUND by a big dragon fire wave. This is a new small separate ground flame asset for a top-down three-quarter wuxia RPG, visually compatible with a bright orange/crimson fire wave. EXACTLY three columns and two rows of equally sized 512 by 512 cells (1536 by 1024 sheet); each cel centered with large black gutters, pure #000000 background everywhere, no text and no grids. Each effect is one LOW NARROW RIBBON of glowing embers and small attached orange flame tips elongated LEFT TO RIGHT, centered, roughly 360px wide by 75px tall inside the cell. Designed to connect with neighboring copies slightly overlapping in a narrow continuous trail at gameplay scale. Softly tapered ends, most visual mass in the center, neither vertical nor a round puff. Flames and ember streaks should lie close to ground, viewed from elevated three-quarter perspective. Crisp large purposeful pixel clusters, dark red coals with tangerine ridges and a few small amber points, no blur, bloom or smoke. Six frames are one coherent dissipation in reading order: (1) short clear bright line of newly deposited fire, (2) longer strong orange line and two small crests, (3) darker orange line, (4) shorter broken clusters of red and orange, (5) 2-3 dark red ember islands, (6) only 2-3 tiny dim cinders. Position the center identically at x=256 y=256 relative to each cell, narrowing and dimming naturally. No dragon, explosion, body, rock, ground plane, actor, shadow, heat distortion, circular aura, particles outside effect bounds, or secondary movement. Make this intended for about 46 px wide by 12 px tall at native runtime. All six cels isolated."
+    }
+  }
+}

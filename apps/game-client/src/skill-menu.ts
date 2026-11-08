@@ -19,7 +19,10 @@ export function abilitySummary(a: Ability): string {
   const e = a.effect;
   let result = '';
   if (e.mode === 'projectile')
-    result = `${e.count > 1 ? e.count + ' × ' : ''}${e.damage} sát thương · tầm ${e.range}${e.splashRadius ? ` · nổ ${e.splashRadius}, đốt ${e.burnDamage}/s × ${seconds(e.burnTicks)}s` : ''}${e.knockback ? ` · đẩy ${e.knockback}` : ''}`;
+    result =
+      e.dragonDive && e.dragonDive.forwardTicks === 0
+        ? `Rồng cuộn quanh người · ${e.damage} sát thương khi đáp · bán kính ${e.dragonDive.impactRadius}`
+        : `${e.count > 1 ? e.count + ' × ' : ''}${e.damage} sát thương · tầm ${e.range}${e.splashRadius ? ` · nổ ${e.splashRadius}, đốt ${e.burnDamage}/s × ${seconds(e.burnTicks)}s` : ''}${e.knockback ? ` · đẩy ${e.knockback}` : ''}`;
   if (e.mode === 'arc')
     result = `${e.damage} sát thương · tầm ${e.range}${e.pull ? ` · kéo ${e.pull}` : ''}${e.armorPenetration ? ' · xuyên thủ ' + Math.round(e.armorPenetration * 100) + '%' : ''}${(e.statuses ?? []).map((s) => ` · ${s.kind === 'slow' ? `chậm ${Math.round(s.magnitude * 100)}%` : s.kind === 'attack_break' ? `giảm công ${Math.round(s.magnitude * 100)}%` : s.kind === 'attack_slow' ? `chậm đánh ${Math.round(s.magnitude * 100)}%` : s.kind === 'defense_break' ? `giảm thủ ${s.magnitude}` : s.kind === 'silence' ? 'câm lặng' : 'tước vũ khí'} ${seconds(s.durationTicks)}s`).join('')}`;
   if (e.mode === 'mana_shield')
@@ -52,7 +55,10 @@ export function abilitySummary(a: Ability): string {
     result = `${e.hits} × ${e.damage} + ${e.finisherDamage} kết thúc · tầm ${e.range}/${e.finisherRange}`;
   if (e.mode === 'projectile')
     for (const s of e.statuses ?? [])
-      result += ` · ${s.kind === 'attack_slow' ? 'chậm đánh' : s.kind === 'attack_break' ? 'giảm công' : 'chậm di chuyển'} ${Math.round(s.magnitude * 100)}% / ${seconds(s.durationTicks)}s`;
+      result +=
+        s.kind === 'stun'
+          ? ` · choáng ${seconds(s.durationTicks)}s`
+          : ` · ${s.kind === 'attack_slow' ? 'chậm đánh' : s.kind === 'attack_break' ? 'giảm công' : 'chậm di chuyển'} ${Math.round(s.magnitude * 100)}% / ${seconds(s.durationTicks)}s`;
   if (e.mode === 'projectile' && e.boomerang)
     result += ' · trúng một lần mỗi lượt đi/về';
   if (e.mode === 'area' && e.confines) result += ' · giữ địch trong biên trận';

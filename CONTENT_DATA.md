@@ -1,3 +1,7 @@
+## Hàng Long Hỏa Vũ · Cái Bang Chưởng, phương án A
+
+Rồng cuộn bảy vòng quanh người thi triển rồi bay lên và đâm xuống tại vị trí của nhân vật lúc chạm đất. Nhịp cuộn giữa pha gây 25% sát thương trong bán kính 89,7. Cú đáp gây sát thương trong bán kính 128,8 và choáng cơ bản 30 tick. Pha cuộn, cất lên và lao xuống lần lượt dài 57, 15 và 12 tick. Mục này thay thế tuning Hàng Long v7 bên dưới.
+
 ## Renovation v7 runtime override — 2026-11-06
 
 Hàng Long Hỏa Vũ (`hang_long_hoa_vu`): range308/329/350 at ranks1/2/3, exactly70% of former440/470/500. Forward flight ends at its cast-time locked landing point; the red fire dragon coils its own body once at that fixed point, rises and dives. No world-space orbit/overshoot. Retain87total ticks, one112px landing AoE, original damage/mana/CD and lifecycle cancellation. Phá Giáp Bổng changes presentation only: held-staff tip, bright downward trail endpoint and crack centre coincide. All v6 selective M3D reversions remain.

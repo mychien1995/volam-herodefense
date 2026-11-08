@@ -1,0 +1,38 @@
+{
+  "id": "cai_bang_hang_long_v2",
+  "category": "effects",
+  "status": "prototype",
+  "skillId": "hang_long_hoa_vu",
+  "source": "cai_bang_hang_long_v2.aseprite",
+  "sheet": "assets/exports/effects/cai_bang_hang_long_v2.png",
+  "atlas": "assets/exports/effects/cai_bang_hang_long_v2.json",
+  "layout": "apps/game-client/src/cai-bang-hang-long-v2-layout.json",
+  "assembler": "assets/source/effects/cai_bang_palm_v1/assemble.lua",
+  "assemblerParameters": {
+    "id": "cai_bang_hang_long_v2",
+    "layout": "cai-bang-hang-long-v2-layout.json"
+  },
+  "frameSize": [288, 240],
+  "pivotPx": [144, 156],
+  "provenance": {
+    "origin": "Original OpenAI ImageGen artwork based on approved option A and version 1. Alpha-preserving Aseprite export.",
+    "phases": {
+      "dragon_coil": {
+        "raw": "raw/dragon_coil.png",
+        "prompt": "Production pixel art game VFX sprite sheet, Hàng Long Hỏa Vũ version two, COIL ONLY. Reference 1 is approved storyboard, top-left panel is identity and arena camera. Reference 2 is previous working sprite sheet, preserve the one long Asian fire dragon and the six-phase ground ellipse but improve clarity at small gameplay scale. Red and orange hỏa nội công energy, NOT physical scales, bones, legs or wings. One recognizably horned and whiskered Chinese dragon head visible in each frame. Simple decisive edges, thick sculpted body of flame with broad continuous rich orange ribbon, stable dark crimson outer contour, a little amber in face/ridge, fewer thin random streaks, no fuzzy particles. At 180 gameplay pixels the face should still read. Elevated fixed 3/4 orthographic view. \nEXACT image 1536x1024, six isolated 512-square cells in 3 columns x 2 rows, reading order. On solid #000000. No other objects, text, dividers, characters, stone, ground shadow, or glow. In EACH cel the ring is a very consistent horizontal ellipse with identical x256 y268 center, about 450 px wide x 200 high, retaining a roomy empty central opening ~270px wide. All art fully inside each square, wide gutters. Single head continuously travels CLOCKWISE around ellipse, oriented tangent to path with appropriate foreshortening; use positions 5 o'clock foreground-right pointing left, 7 o'clock foreground-left pointing left, 9 o'clock left edge looking upstage, 11 o'clock back-left pointing right, 1 o'clock back-right pointing right, 3 o'clock right edge curving toward the viewer. Tail flows behind head around most of the ellipse with far section thinner, no stray second head, no inconsistent scale. Maintain identical perspective and ground registration in all six cels. Keep crisp intentional pixel clusters, no full-cel shift, no blur."
+      },
+      "dragon_impact": {
+        "raw": "raw/dragon_impact.png",
+        "prompt": "Production pixel-art gameplay VFX sprite sheet for Hàng Long Hỏa Vũ IMPACT version 2. Reference 1 approved option A last panel, match low spreading circle of flame. Reference 2 previous atlas, retain the sequence and saturated red-orange martial internal-fire identity. Renew at native game zoom: robust, clean orange-red ribbons, broad purposeful flame shapes, dark scarlet far edge, slight warm amber in core, no microscopic clutter and no soft glow. A compact initial contact flash develops into a low flat circular shockwave seen in fixed elevated three-quarter orthographic camera. The shockwave's OPEN CLEAR CENTER and GROUND ANCHOR stay exactly x256 y266 in all frames, reserved for the hero sprite. Symmetric horizontal spread from this point, silhouette ratio about 2.2:1, never skewed sideways. At peak hold the large ring as it licks outward then break into red embers. There is no drawn dragon, smoke, debris, rocks, person, ground, lettering, panel border, white flash, or vertical pillar. \nStrict source format 1536x1024 PNG with six equal 512x512 cells, 3 columns x 2 rows, pure #000000 background. Margins and gutters. In reading order: (1) compact two-sided ground-contact flash about 120px wide, flame foot centered at x256 y266; (2) newly opened orange-red ring 220px wide; (3) spreading strong orange ring 335px wide; (4) bright 448px wide fully expanded ring, bold and dense enough to read on stone; (5) same 448px spread, darker warm red ring breaking into a few curved flame groups; (6) wide sparse dim ember fragments that trace the original ellipse. Keep the ground plane center exactly identical. Each cel a distinct authored drawing and continuous transition, intended for a final ring roughly 258 pixels wide and 115 high at actual in-game size."
+      },
+      "dragon_rise": {
+        "raw": "../cai_bang_hang_long_v1/raw/dragon_rise.png",
+        "note": "Version 1 drawings with the opening arc registered and sized to meet the wider coil."
+      },
+      "dragon_dive": {
+        "raw": "../cai_bang_hang_long_v1/raw/dragon_dive.png",
+        "note": "Version 1 drawings with the same nose registration at the new shared pivot."
+      }
+    }
+  }
+}

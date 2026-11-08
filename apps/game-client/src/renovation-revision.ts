@@ -7,6 +7,13 @@ import raw from './renovation-revision.generated.json';
 import { renovationRevisionEnabled } from './renovation-policy.js';
 import { renovationFollowupEnabled } from './renovation-policy.js';
 import { drawTurningDragon } from './renovation-followup.js';
+import {
+  hangLongArt,
+  hangLongEnabled,
+  hangLongId,
+  phiLongEnabled,
+  phiLongId,
+} from './cai-bang-palm-art.js';
 const definitions = new Map(raw.assets.map((a) => [a.id, a]));
 type Point = { x: number; y: number };
 type Flash = {
@@ -141,7 +148,11 @@ export class RenovationRevision {
       }
     }
     if (e.kind === 'pulse') {
-      if (e.abilityId === 'hang_long_hoa_vu' && e.stage === 'dragon_impact')
+      if (
+        e.abilityId === hangLongId &&
+        e.stage === 'dragon_impact' &&
+        !hangLongEnabled()
+      )
         this.flash(e, 'dragon_impact', 700, 0, -18, {
           ground: true,
           upright: true,
@@ -244,9 +255,12 @@ export class RenovationRevision {
         .setAlpha(Math.min(1, (f.life - age) / 100));
     }
     const active = new Set<string>();
+    const showPhiLongWave = phiLongEnabled();
+    const showHangLong = hangLongEnabled();
     state?.projectiles.forEach((p, id) => {
       if (
         p.zoneId !== zone ||
+        (showPhiLongWave && p.abilityId === phiLongId) ||
         (renovationFollowupEnabled() && p.abilityId === 'hoa_van_chuong') ||
         ![
           'hoa_van_chuong',
@@ -259,7 +273,58 @@ export class RenovationRevision {
         return;
       active.add(id);
       let v = this.shots.get(id);
-      const dragon = p.abilityId === 'hang_long_hoa_vu';
+      const dragon = p.abilityId === hangLongId;
+      const age =
+        (zone === 'arena'
+          ? (state?.tick ?? 0)
+          : (state?.dungeons.get(zone)?.tick ?? 0)) - p.startedAt;
+      if (dragon && showHangLong) {
+        const effect = m1Config.skillCatalogue![hangLongId]!.effect;
+        if (effect.mode !== 'projectile' || !effect.dragonDive) return;
+        const d = effect.dragonDive;
+        const coilEnd = d.forwardTicks + d.orbitTicks;
+        const riseEnd = coilEnd + d.riseTicks;
+        const coiling = p.stage === 'dragon_coil';
+        const rising = p.stage === 'dragon_rise';
+        const stage = coiling
+          ? 'dragon_coil'
+          : rising
+            ? 'dragon_rise'
+            : 'dragon_dive';
+        const progress = coiling
+          ? (((age - d.forwardTicks) * (d.coilTurns ?? 1)) / d.orbitTicks) % 1
+          : rising
+            ? (age - coilEnd) / d.riseTicks
+            : (age - riseEnd) / d.diveTicks;
+        const clip = hangLongArt.animations.find((tag) => tag.name === stage)!;
+        const index = Math.max(
+          0,
+          Math.min(
+            clip.frames.length - 1,
+            Math.floor(progress * clip.frames.length),
+          ),
+        );
+        const frame = clip.frames[index]!;
+        const point = position?.(p.ownerId) ?? p;
+        const height =
+          coiling || rising
+            ? 0
+            : d.height * (1 - Phaser.Math.Clamp(progress, 0, 1) ** 1.6);
+        if (!v) {
+          v = {
+            image: this.scene.add
+              .image(p.x, p.y, hangLongArt.id, frame)
+              .setOrigin(...hangLongArt.origin),
+          };
+          this.shots.set(id, v);
+        }
+        v.image
+          .setFrame(frame)
+          .setFlipX(p.vx < 0)
+          .setPosition(Math.round(point.x), Math.round(point.y - height))
+          .setDepth(point.y + (coiling ? -0.3 : 0.8));
+        return;
+      }
       if (!v) {
         const effect = dragon
           ? 'dragon_flight'
@@ -275,10 +340,6 @@ export class RenovationRevision {
         this.shots.set(id, v);
       }
       let elevation = 22;
-      const age =
-        (zone === 'arena'
-          ? (state?.tick ?? 0)
-          : (state?.dungeons.get(zone)?.tick ?? 0)) - p.startedAt;
       if (dragon) {
         const d = m1Config.skillCatalogue!.hang_long_hoa_vu!.effect;
         if (d.mode === 'projectile' && d.dragonDive) {

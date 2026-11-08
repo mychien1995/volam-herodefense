@@ -1,0 +1,48 @@
+{
+  "width": 152,
+  "height": 120,
+  "pivot": [76, 60],
+  "registration": {
+    "dragon_flight": {
+      "divisor": 7,
+      "x": [479, 479, 481, 479, 479, 479],
+      "y": [286, 286, 286, 282, 282, 282]
+    },
+    "round_blast": {
+      "divisor": 3.5,
+      "x": [256, 256, 256, 256, 256, 256],
+      "y": [260, 260, 260, 260, 260, 260]
+    },
+    "target_burn": {
+      "divisor": 7,
+      "x": [266, 257, 248, 266, 257, 248],
+      "y": [378, 378, 378, 365, 365, 365]
+    }
+  },
+  "clips": [
+    {
+      "name": "dragon_flight",
+      "durations": [46, 42, 42, 46, 46, 42],
+      "stage": "travel",
+      "placement": "projectile",
+      "offsetY": -20,
+      "loop": true
+    },
+    {
+      "name": "round_blast",
+      "durations": [24, 35, 49, 60, 70, 66],
+      "stage": "impact",
+      "placement": "ground",
+      "offsetY": 0,
+      "loop": false
+    },
+    {
+      "name": "target_burn",
+      "durations": [75, 70, 65, 75, 80, 85],
+      "stage": "burn",
+      "placement": "target",
+      "offsetY": -3,
+      "loop": true
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "width": 256,
+  "height": 224,
+  "pivot": [128, 156],
+  "registration": {
+    "dragon_coil": {
+      "divisor": 2.9,
+      "cells": [6, 2, 3, 4, 5, 1],
+      "x": [256, 256, 256, 256, 256, 256],
+      "y": [263, 267, 267, 262, 262, 267],
+      "edgeAlphaMin": 24
+    },
+    "dragon_rise": {
+      "divisor": 3,
+      "x": [256, 273, 311, 344, 372, 399],
+      "y": [294, 294, 303, 326, 359, 398],
+      "edgeAlphaMin": 24
+    },
+    "dragon_dive": {
+      "divisor": 3.15,
+      "x": [277, 274, 262, 272, 263, 262],
+      "y": [365, 365, 365, 363, 363, 363],
+      "edgeAlphaMin": 24
+    },
+    "dragon_impact": {
+      "divisor": 2.04,
+      "x": [260, 256, 256, 256, 256, 256],
+      "y": [308, 276, 272, 266, 270, 270],
+      "edgeAlphaMin": 24
+    }
+  },
+  "clips": [
+    {
+      "name": "dragon_coil",
+      "durations": [50, 50, 50, 50, 50, 50],
+      "stage": "coil",
+      "placement": "ground",
+      "offsetY": 0,
+      "loop": true
+    },
+    {
+      "name": "dragon_rise",
+      "durations": [80, 80, 85, 85, 85, 85],
+      "stage": "rise",
+      "placement": "projectile",
+      "offsetY": 0,
+      "loop": false
+    },
+    {
+      "name": "dragon_dive",
+      "durations": [66, 67, 67, 67, 67, 66],
+      "stage": "dive",
+      "placement": "projectile",
+      "offsetY": 0,
+      "loop": false
+    },
+    {
+      "name": "dragon_impact",
+      "durations": [50, 65, 75, 90, 125, 130],
+      "stage": "impact",
+      "placement": "ground",
+      "offsetY": 0,
+      "loop": false
+    }
+  ]
+}

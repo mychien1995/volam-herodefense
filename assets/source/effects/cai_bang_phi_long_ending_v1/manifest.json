@@ -1,0 +1,25 @@
+{
+  "id": "cai_bang_phi_long_ending_v1",
+  "category": "effects",
+  "status": "prototype",
+  "skillId": "phi_long_tai_thien",
+  "source": "cai_bang_phi_long_ending_v1.aseprite",
+  "sheet": "assets/exports/effects/cai_bang_phi_long_ending_v1.png",
+  "atlas": "assets/exports/effects/cai_bang_phi_long_ending_v1.json",
+  "layout": "apps/game-client/src/cai-bang-phi-long-ending-layout.json",
+  "assembler": "assets/source/effects/cai_bang_palm_v1/assemble.lua",
+  "assemblerParameters": {
+    "id": "cai_bang_phi_long_ending_v1",
+    "layout": "cai-bang-phi-long-ending-layout.json"
+  },
+  "frameSize": [224, 144],
+  "pivotPx": [158, 72],
+  "provenance": {
+    "origin": "Original project artwork generated with OpenAI ImageGen and assembled in Aseprite 1.3.18.6.",
+    "ending": {
+      "raw": "raw/wave_collapse.png",
+      "reference": "Phi Long Tại Thiên breaking_wave travel atlas and approved Wave Endings option A",
+      "prompt": "Draw an original GAME-READY crisp pixel-art 6-frame VFX sprite sheet for the ENDING of this existing fire dragon wave. Match the palette, silhouettes, East Asian flame dragons, hard-edged native pixel clusters and ground alignment in reference image 1, which is the exact current in-game travel atlas raw art. Use ONLY THE TOP ROW of reference image 2 as the approved motion storyboard: the two dragons tumble forward down into the floor and join a long low directional fire streak. Do not draw any of that reference's arena tiles or use other rows. \nSTRICT FORMAT: one 1536x1024 sprite sheet, exactly 3 equal columns and 2 equal rows, six isolated 512x512 cells, on uniform pure #000000 black. No text, grids, boxes, symbols, lighting spill, shadows, actor, scenery, blur, glow, explosion, round flash, smoke, ascending embers, new separate dragons, or flying debris. All frames facing RIGHT. Draw almost from x=28 to x=492 relative to each cell during frames 1–4; the strike point stays x=468 y=321. Put ground flames along a fixed y=322 baseline in each cell, never cutting at cell edge. Use same current orange-red and dark crimson palette and thin hot orange ridges, without oversaturating yellow. Maintain enough black gaps and negative space to distinguish two flame heads until they meet; use bold 4–9px source clusters to resolve at the 145 x 55px gameplay size.\nREADING ORDER of consecutive action frames:\n1. The same large crest shape as reference 1, tail streaming back, at ~175 px tall. Top head tips forward and slightly lower. Bottom head still skims the floor. Match continuity with the existing travel sprites.\n2. Curl folds rapidly downward like a breaking ocean wave, the top dragon visibly descending forward toward the lower dragon. The dark hollow compresses; upper crest height ~130px and leading ground head stays right.\n3. BOTH dragons side-by-side very low to the floor, two distinct snouts toward the same forward strike point, upper nose almost at ground; tops of long flattened fire manes ~75px off ground. Strong tapered forward/down smear in the continuous tail.\n4. Heads melt into one fiery, wedge-shaped flat floor splash, flames directed right with an amber-orange hot tip and deep red trailing ridges. No dragon faces at this point. Height ~40px.\n5. Low connected directional fire streak, reduced to ~20px above ground, orange-hot ridge with dark red taper at the left. It should look like a direct continuation of the ground trail.\n6. Thin narrow crimson and orange streak flattening to a glowing ground wake, ~10px high, fading, still pointing right. Only a few intentional hot spots along the streak. Do not draw large black gaps in frames 4–5.\nEach image is a separate authored adjacent pose in one smooth dissipating clip, not variants, not six copies with overall resizing, no loop. Anchor and scale consistent with existing sheet. Alpha will be derived from the pure black background; draw only fire on black."
+    }
+  }
+}

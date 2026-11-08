@@ -1,3 +1,9 @@
+## Cái Bang Chưởng · rework VFX được duyệt
+
+Đòn thường dùng chưởng lửa và phượng hoàng ở thức thứ sáu. Cuồng Long Loạn Vũ dùng đầu rồng lửa, vòng nổ tròn và các đốm lửa báo thiêu đốt. Phi Long Tại Thiên dùng sóng mang hai rồng, để lại vệt lửa sát đất và đổ xuống hòa vào vệt khi hết tầm.
+
+Hàng Long Hỏa Vũ cuộn bảy vòng trong 57 tick (1,9 giây), sau đó vút lên rồi giáng xuống vị trí hiện tại của nhân vật. Bán kính cuộn và đáp lần lượt là 89,7 và 128,8 đơn vị. Pha cuộn gây một nhịp sát thương 25%, cú đáp gây sát thương lan và choáng cơ bản 30 tick theo quy tắc kháng khống chế hiện có.
+
 ## Bình khởi đầu — 2026-11-08
 
 Mỗi nhân vật trong trận chiến dịch nhận 5 bình máu nhỏ và 5 bình mana nhỏ khi vào trận lần đầu, kể cả khi vào phòng muộn. [Cấu hình chiến dịch](docs/CAMPAIGN_BALANCE_2026_11_06.md#experience-and-money).

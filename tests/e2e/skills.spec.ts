@@ -36,10 +36,23 @@ interface Snapshot {
     targetId: string;
     abilityId: string;
     damage: number;
+    tick?: number;
+    stage?: string;
+    x: number;
+    y: number;
+    radius?: number;
   }>;
 }
 interface Presentation {
   zoneId: string;
+  renovation: {
+    skillEffects: Array<{
+      texture: string;
+      frame: string;
+      x: number;
+      y: number;
+    }>;
+  };
   camera: { x: number; y: number };
   skills: {
     loadedComponents: number;
@@ -60,8 +73,8 @@ const hero = async (p: Page) => {
   return s.state.players[s.sessionId]!;
 };
 const out = 'docs/evidence/m3a';
-async function join(p: Page, name: string, room?: string) {
-  await p.goto('/?debug=1&skillPreview=1');
+async function join(p: Page, name: string, room?: string, loaded = false) {
+  if (!loaded) await p.goto('/?debug=1&skillPreview=1');
   await p.locator('#pre-nickname').fill(name);
   await p.getByRole('button', { name: 'Vào game', exact: true }).click();
   if (room) {
@@ -174,6 +187,76 @@ async function faceNearest(p: Page) {
       : keys;
   await Promise.all(release.map((k) => p.keyboard.up(k)));
 }
+
+test('Hàng Long rework centers the landing on its moving caster for both clients', async ({
+  browser,
+}, info) => {
+  const viewport = { width: 960, height: 720 };
+  const caster = await browser.newPage({ viewport });
+  const peer = await browser.newPage({ viewport });
+  const skill = 'hang_long_hoa_vu';
+  const effect = async (page: Page, phase: string) =>
+    (await view(page)).renovation.skillEffects.find(
+      (entry) =>
+        entry.texture === 'cai_bang_hang_long_v2' &&
+        entry.frame.startsWith('dragon_' + phase),
+    );
+  try {
+    await Promise.all(
+      [caster, peer].map((page) => page.goto('/?debug=1&skillPreview=1')),
+    );
+    await join(caster, 'Hang Long caster', undefined, true);
+    const { roomId, sessionId } = await read(caster);
+    await join(peer, 'Hang Long observer', roomId, true);
+    await startTogether([caster, peer]);
+    await caster.bringToFront();
+    await caster.locator('#preview-skill').selectOption(skill);
+    await caster.locator('#preview-equip').click();
+    await expect.poll(async () => (await hero(caster)).qSkill).toBe(skill);
+    await caster.locator('#game canvas').focus();
+    const start = await hero(caster);
+    await caster.keyboard.press('KeyQ');
+    const readImpact = async () =>
+      (await read(peer)).events.find(
+        (e) =>
+          e.sourceId === sessionId &&
+          e.abilityId === skill &&
+          e.stage === 'dragon_impact',
+      );
+    await Promise.all([
+      (async () => {
+        await expect
+          .poll(async () => (await effect(caster, 'coil'))?.frame ?? '')
+          .toMatch(/^dragon_coil_/);
+        await walk(caster, 'ArrowDown', 370);
+        expect((await hero(caster)).y).toBeGreaterThan(start.y + 10);
+      })(),
+      (async () => {
+        await expect
+          .poll(async () => (await view(peer)).skills.played)
+          .toContain('skill:cai_bang_hang_long_v2:dragon_impact');
+        await peer.screenshot({
+          path: info.outputPath('hang-long-impact.png'),
+        });
+      })(),
+    ]);
+    await expect.poll(readImpact).toBeDefined();
+    const landed = (await read(peer)).state.players[sessionId]!;
+    const impact = (await readImpact())!;
+    const cast = (await read(peer)).events.find(
+      (e) =>
+        e.sourceId === sessionId && e.abilityId === skill && e.kind === 'cast',
+    )!;
+    expect(impact.tick! - cast.tick!).toBe(57 + 15 + 12);
+    expect(impact.x).toBeCloseTo(landed.x, 3);
+    expect(impact.y).toBeCloseTo(landed.y, 3);
+    expect(impact.radius).toBe(128.8);
+    await expect.poll(() => effect(peer, 'impact')).toBeUndefined();
+  } finally {
+    await caster.close();
+    await peer.close();
+  }
+});
 
 test('all ten supplied skill animations load, animate and are observed by a second player', async ({
   browser,

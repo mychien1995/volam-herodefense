@@ -1,0 +1,38 @@
+{
+  "id": "cai_bang_palm_v1",
+  "category": "effects",
+  "status": "prototype",
+  "source": "cai_bang_palm_v1.aseprite",
+  "sheet": "assets/exports/effects/cai_bang_palm_v1.png",
+  "atlas": "assets/exports/effects/cai_bang_palm_v1.json",
+  "layout": "apps/game-client/src/cai-bang-palm-layout.json",
+  "frameSize": [96, 80],
+  "pivotPx": [72, 40],
+  "directions": ["right"],
+  "provenance": {
+    "origin": "Original artwork generated for Vo Lam Hero Defense with OpenAI ImageGen and assembled in Aseprite 1.3.18.6",
+    "promptDirection": "Isolated six-cel pixel-fire sequences on solid black in a 3 by 2 grid. Sharp vermilion and gold silhouettes, consistent contact pivot, no bloom.",
+    "clips": {
+      "bolt_flight": {
+        "raw": "raw/bolt_flight.png",
+        "concept": "D1",
+        "promptDirection": "Compact right-facing compressed fire bolt with a bright almond tip and short double tail. Cycle the flame tongues around a fixed tip."
+      },
+      "phoenix_flight": {
+        "raw": "raw/phoenix_flight.png",
+        "concept": "P1",
+        "promptDirection": "One fire phoenix with a fixed right-facing beak, broad wings that draw in then reopen, and an undulating flame tail."
+      },
+      "bolt_hit": {
+        "raw": "raw/bolt_hit.png",
+        "concept": "DV1",
+        "promptDirection": "Compact directional flash at contact, followed by a short burst and diminishing copper sparks."
+      },
+      "phoenix_hit": {
+        "raw": "raw/phoenix_hit.png",
+        "concept": "PV1",
+        "promptDirection": "Flash at beak contact, two splayed fans of flame separate and shed feather-shaped embers."
+      }
+    }
+  }
+}

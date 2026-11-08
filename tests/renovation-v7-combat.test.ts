@@ -1,11 +1,5 @@
 import { it, expect } from 'vitest';
-import {
-  createWorld,
-  addHero,
-  submitInput,
-  stepWorld,
-  dragonDivePose,
-} from '@volam/game-core';
+import { createWorld, addHero, submitInput, stepWorld } from '@volam/game-core';
 import { m1Config } from '@volam/game-data';
 import {
   dragonCoilFrame,
@@ -17,11 +11,11 @@ it('keeps diagonal staff FX on the same authored facing as the native body', () 
   expect(staffContact(1, 0).x).toBeGreaterThan(0);
   expect(staffContact(-1, 0).x).toBeLessThan(0);
 });
-it('consumes the eight authored body-coil cels once before rise/dive instead of looping a rotated picture', () => {
+it('maps the legacy timing to its eight authored coil cels and rise/dive frames', () => {
   const effect = m1Config.skillCatalogue!.hang_long_hoa_vu!.effect;
   if (effect.mode !== 'projectile' || !effect.dragonDive)
     throw Error('dragon definition');
-  const d = effect.dragonDive,
+  const d = { ...effect.dragonDive, forwardTicks: 24, orbitTicks: 36 },
     indices = [];
   for (let age = 0; age < 87; age++) {
     const p = dragonCoilFrame(age, d);
@@ -32,11 +26,18 @@ it('consumes the eight authored body-coil cels once before rise/dive instead of 
   expect(dragonCoilFrame(60, d)?.phase).toBe('dragon_rise');
   expect(dragonCoilFrame(75, d)?.phase).toBe('dragon_dive');
 });
-it('reduces every Hàng Long rank maximum flight distance by exactly thirty percent', () => {
+it('uses the enlarged Hàng Long radii and longer coil at every rank', () => {
   const ranks = m1Config.progression!.skills.hang_long_hoa_vu!.ranks;
-  expect(
-    ranks.map((a) => (a.effect.mode === 'projectile' ? a.effect.range : 0)),
-  ).toEqual(ranks.map((_, i) => (440 + 30 * i) * 0.7));
+  for (const { effect } of ranks) {
+    expect(effect.mode).toBe('projectile');
+    if (effect.mode !== 'projectile') throw Error('dragon definition');
+    expect(effect.dragonDive).toMatchObject({
+      orbitTicks: 57,
+      coilTurns: 7,
+      loopRadius: 89.7,
+      impactRadius: 128.8,
+    });
+  }
 });
 it.each([
   [1, 0],
@@ -44,7 +45,7 @@ it.each([
   [0, 1],
   [0, -1],
 ])(
-  'accepted cast ends its forward flight at the shortened locked point (%s,%s), then coils in place',
+  'accepted cast follows the caster through coil and rise (%s,%s)',
   (fx, fy) => {
     const c = structuredClone(m1Config);
     Object.assign(c, {
@@ -69,33 +70,20 @@ it.each([
     stepWorld(w, c);
     const p = [...w.projectiles.values()][0]!,
       e = p.effect,
-      d = e.dragonDive!,
-      target = p.dragonFlight!.target;
-    expect(target.x).toBeCloseTo(h.x + fx * 308);
-    expect(target.y).toBeCloseTo(h.y + fy * 308);
+      d = e.dragonDive!;
     expect(h.mana).toBe(955);
-    for (let age = d.forwardTicks; age < d.forwardTicks + d.orbitTicks; age++) {
-      const pose = dragonDivePose(
-        p.dragonFlight!.origin,
-        target,
-        fx,
-        fy,
-        age,
-        d,
-      );
-      expect(pose.stage).toBe('dragon_coil');
-      expect(pose.x).toBeCloseTo(target.x);
-      expect(pose.y).toBeCloseTo(target.y);
-    }
-    const end = dragonDivePose(
-      p.dragonFlight!.origin,
-      target,
-      fx,
-      fy,
-      d.forwardTicks,
-      d,
-    );
-    expect(end.x).toBeCloseTo(target.x);
-    expect(end.y).toBeCloseTo(target.y);
+    h.x += 12;
+    stepWorld(w, c);
+    expect(p.stage).toBe('dragon_coil');
+    expect(p.x).toBeCloseTo(h.x);
+    expect(p.y).toBeCloseTo(h.y);
+    for (let age = 1; age < d.orbitTicks; age++) stepWorld(w, c);
+    expect(p.stage).toBe('dragon_rise');
+    const { target } = p.dragonFlight!;
+    expect(target.x).toBeCloseTo(h.x);
+    expect(target.y).toBeCloseTo(h.y);
+    h.x += 12;
+    stepWorld(w, c);
+    expect(p.dragonFlight!.target).toEqual({ x: h.x, y: h.y });
   },
 );

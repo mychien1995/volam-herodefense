@@ -160,13 +160,24 @@ describe('M3A canonical Cái Bang skills', () => {
       damage: 28,
     });
   });
-  it('Hàng Long coils and dives, hitting the locked landing area once', () => {
+  it('Hàng Long damages during its coil, then hits and stuns on landing', () => {
     const f = fixture('hang_long_hoa_vu');
+    f.hero.fx = 1;
+    f.hero.fy = 0;
     f.cast();
-    f.steps(90);
-    expect(f.enemies.slice(0, 3).map((e) => e.hp)).toEqual([910, 910, 910]);
+    f.steps(28);
+    const first = f.enemies[0]!;
+    const hpAfterCoil = first.hp;
+    expect(hpAfterCoil).toBeLessThan(1000);
+    expect(hasStatus(first, 'stun', f.world.tick)).toBe(false);
+    f.steps(56);
+    expect(first.hp).toBe(hpAfterCoil - 90);
+    expect(hasStatus(first, 'stun', f.world.tick)).toBe(true);
     expect(f.enemies[3]!.hp).toBe(1000);
-    expect(f.events.filter((e) => e.kind === 'hit')).toHaveLength(3);
+    expect(
+      f.events.filter((e) => e.kind === 'hit' && e.targetId === first.id),
+    ).toHaveLength(2);
+    expect(f.events.filter((e) => e.stage === 'dragon_impact')).toHaveLength(1);
   });
   it('Hoành Tảo uses its wide frontal sweep and a nonstacking movement slow', () => {
     const f = fixture('hoanh_tao_bong');

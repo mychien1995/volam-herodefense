@@ -215,7 +215,6 @@ export function createProgression(
       }
       if (id === 'hang_long_hoa_vu' && e.mode === 'projectile') {
         e.damage += 25 * r;
-        e.range += 21 * r;
         e.radius += 4 * r;
         a.manaCost += 5 * r;
         a.cooldownTicks -= 15 * r;
