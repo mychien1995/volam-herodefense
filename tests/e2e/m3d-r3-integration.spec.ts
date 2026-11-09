@@ -430,7 +430,7 @@ test('r3 production schools: four facings, all revised casts, manual A, cancel a
   const cases = [
     ['hoanh_tao_cuoc', 'r3_ca_diep_ground_keyposes'],
     ['toan_phong_thoai', 'r3_tornado'],
-    ['vo_anh_cuoc', 'r3_foot_force'],
+    ['vo_anh_cuoc', 'shaolin_quyen_ki'],
     ['nhu_lai_niet_ban', 'r3_buddha'],
     ['vi_da_quyen', 'shaolin_skill_fx'],
     ['tru_ta', 'tru_ta_vfx'],

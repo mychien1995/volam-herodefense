@@ -64,10 +64,26 @@ test('v06 gallery plays four basic stages and both Vô Ảnh Cước variants', 
   const footShots = () =>
     engine.locator('body').evaluate(() => (window as any).reviewFootShots.size);
   await page.locator('[data-case="vo_anh_cuoc"]').click();
-  await expect.poll(footShots).toBe(1);
+  await expect.poll(footShots).toBe(3);
   await expect(replay).toBeEnabled();
   await page.locator('#proc').check();
-  await expect.poll(footShots).toBe(7);
+  await expect
+    .poll(() =>
+      engine
+        .locator('body')
+        .evaluate(() =>
+          (window as any).__VOLAM__
+            .snapshot()
+            .events.some(
+              (event: any) =>
+                event.abilityId === 'vo_anh_cuoc' &&
+                event.kind === 'cast' &&
+                event.stage === 'empowered_dash',
+            ),
+        ),
+    )
+    .toBe(true);
+  expect(await footShots()).toBe(3);
   await expect(replay).toBeEnabled();
   await expect(page.locator('#status')).toHaveText('Đang phát · tốc độ gốc');
   expect(errors).toEqual([]);

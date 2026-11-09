@@ -64,14 +64,18 @@ export function bufferComboFinisher(
 ): boolean {
   if (command.kind !== 'cast') return false;
   const a = equippedAbility(h, command.slot, c);
+  const queued = h.comboFinisher;
+  // Repeating Q/W on cooldown must not discard E while the primer travels.
   if (
-    !a ||
-    a.effect.mode !== 'multi_hit' ||
-    !a.effect.comboBurstOnly ||
-    !a.combo
+    queued &&
+    a?.combo?.id === queued.chain &&
+    (a.id === queued.abilityId ||
+      w.tick < (h.skillCooldowns[command.slot] ?? 0) ||
+      w.tick < (h.abilityCooldowns?.[a.id] ?? 0))
   )
+    return true;
+  if (!a || a.effect.mode !== 'projectile' || !a.effect.comboDash || !a.combo)
     return false;
-  if (h.comboFinisher?.abilityId === a.id) return true;
   if (
     h.hp <= 0 ||
     hasStatus(h, 'stun', w.tick) ||

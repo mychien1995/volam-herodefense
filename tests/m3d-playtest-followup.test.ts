@@ -187,16 +187,16 @@ describe('M3D next playtest feedback', () => {
     expect([...attacks].sort()).toEqual(['hong_liet_a1', 'hong_liet_a2']);
     expect(simultaneous).toBe(true);
   });
-  it('Vô Ảnh without same-target chain emits only one centered foot', () => {
+  it('Vô Ảnh without same-target chain emits three feet and does not move', () => {
     const s = setup();
     submitInput(s.w, 'h', 1, { kind: 'cast', slot: 0 });
     s.step();
-    expect(s.w.projectiles.size + s.w.shots.length).toBe(1);
-    expect([...s.w.projectiles.values()][0]!.y).toBe(400);
+    expect(s.w.projectiles.size + s.w.shots.length).toBe(3);
+    expect([...s.w.projectiles.values()][0]!.y).toBe(382);
     s.step(40);
     expect(s.w.shots).toHaveLength(0);
   });
-  it('prepared same-target Phát Động keeps six staggered feet; unrelated/expired chains cannot unlock it', () => {
+  it('prepared same-target Phát Động starts a dash only when the marked target is reachable', () => {
     for (const valid of [true, false]) {
       const s = setup();
       const e = addCreep(s.w, 'target', { x: 500, y: 400 }, s.c);
@@ -213,7 +213,8 @@ describe('M3D next playtest feedback', () => {
       ];
       submitInput(s.w, 'h', 1, { kind: 'cast', slot: 0 });
       s.step();
-      expect(s.w.projectiles.size + s.w.shots.length).toBe(valid ? 3 : 1);
+      expect(s.w.projectiles.size + s.w.shots.length).toBe(valid ? 0 : 3);
+      expect(s.w.actions?.some((a) => a.kind === 'dash') ?? false).toBe(valid);
     }
   });
   it('has real damageable wine disciples; one dropped bottle, proximity/atomic drink and cleanup', () => {

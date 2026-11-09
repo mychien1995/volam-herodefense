@@ -37,6 +37,10 @@ export interface ProjectileEffect {
   windupTicks?: number | undefined;
   recoveryTicks?: number | undefined;
   laneOffsets?: number[] | undefined;
+  /** A same-target combo in this wider center lane replaces the normal volley. */
+  comboEmpoweredRadius?: number | undefined;
+  comboDash?: DashEffect | undefined;
+  oncePerCast?: boolean | undefined;
   knockbackChance?: number | undefined;
   mode: 'projectile';
   damage: number;
@@ -111,6 +115,8 @@ export interface ArcEffect {
   windupTicks?: number | undefined;
   durationTicks?: number | undefined;
   originOffset?: number | undefined;
+  /** Sweep the arc footprint from this forward offset to originOffset. */
+  originStartOffset?: number | undefined;
   knockback?: number | undefined;
 }
 export interface ComboSpec {
@@ -254,7 +260,6 @@ export interface DashEffect {
 }
 export interface MultiHitEffect {
   attackPowerScale?: number | undefined;
-  comboBurstOnly?: boolean | undefined;
   mode: 'multi_hit';
   range: number;
   damage: number;

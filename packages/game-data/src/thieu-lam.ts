@@ -95,7 +95,7 @@ export const thieuLamSkills: Ability[] = [
     nameVi: 'La Hán Quyền',
     manaCost: 10,
     cooldownTicks: 75,
-    effect: arc(40, 85),
+    effect: arc(40, tuning.laHanRange),
     selfStatuses: [guard(0.15, 45)],
     combo: chain('phat_dong_a', 1),
   },
@@ -106,6 +106,7 @@ export const thieuLamSkills: Ability[] = [
     cooldownTicks: 90,
     effect: {
       ...arc(44, 68),
+      originStartOffset: tuning.viDaStartOffset,
       originOffset: 189,
       statuses: [{ kind: 'defense_break', magnitude: 12, durationTicks: 120 }],
     },
@@ -116,7 +117,16 @@ export const thieuLamSkills: Ability[] = [
     nameVi: 'Đại Lực Kim Cương Chưởng',
     manaCost: 20,
     cooldownTicks: 150,
-    effect: { ...arc(65, 78, 0.6), windupTicks: 12 },
+    effect: {
+      ...projectile(tuning.diamondPalm),
+      count: 3,
+      spacingTicks: tuning.diamondPalm.laneDelayTicks,
+      laneOffsets: [...tuning.diamondPalm.lanes],
+      windupTicks: tuning.diamondPalm.windupTicks,
+      comboEmpoweredRadius: tuning.diamondPalm.empoweredRadius,
+      forwardOnly: true,
+      oncePerCast: true,
+    },
     combo: chain('phat_dong_a', 3),
   },
   {
@@ -152,22 +162,14 @@ export const thieuLamSkills: Ability[] = [
     manaCost: 24,
     cooldownTicks: 180,
     effect: {
-      mode: 'multi_hit',
-      comboBurstOnly: true,
-      damage: 0,
-      range: tuning.footForce.range,
-      hits: tuning.footForce.volleys,
-      spacingTicks: tuning.footForce.volleySpacingTicks,
-      projectileBurst: {
-        ...projectile(tuning.footForce),
-        count: 3,
-        spacingTicks: tuning.footForce.laneDelayTicks,
-        laneOffsets: [...tuning.footForce.lanes],
-        useFacing: true,
-      },
-      finisherDamage: 0,
-      finisherRange: 76,
-      halfAngle: Math.PI / 2.5,
+      ...projectile(tuning.footForce),
+      count: 3,
+      spacingTicks: tuning.footForce.laneDelayTicks,
+      laneOffsets: [...tuning.footForce.lanes],
+      useFacing: true,
+      forwardOnly: true,
+      oncePerCast: true,
+      comboDash: { mode: 'dash', ...tuning.footForce.dash, stunTicks: 0 },
     },
     combo: chain('phat_dong_b', 3, 2),
   },
@@ -275,12 +277,12 @@ export const thieuLamSkills: Ability[] = [
   },
 ];
 const descriptions = [
-  'Đấm mạnh, thủ thế ngắn. Phát Động A bước 1 trên từng địch trúng đòn, kể cả đòn lan.',
+  'Đấm xa về phía trước, thủ thế ngắn. Phát Động A bước 1 trên từng địch trúng đòn, kể cả đòn lan.',
   'Đấm phá thủ. Phát Động A bước 2 chỉ tiếp nối La Hán Quyền trên cùng địch.',
-  'Chưởng chậm mạnh. Phát Động A: La Hán → Vi Đà → Đại Lực trên cùng địch trong 6s để cường hóa.',
+  'Phóng ba bàn tay khí lần lượt trên, giữa, dưới. Phát Động A: La Hán → Vi Đà → Đại Lực trên cùng địch trong 6s để phóng một bàn tay lớn.',
   'Lốc vàng bay thẳng xuyên địch, mỗi địch một lần. Phát Động B bước 1.',
   'Dậm chân tại chỗ, ụ đất chạy thẳng gây sát thương và choáng mọi địch trên đường. Phát Động B bước 2.',
-  'Hai đợt ba cước kình song song phát lần lượt trên/giữa/dưới. Phát Động B: Toàn Phong → Ca Diệp → Vô Ảnh trong 6s; tiêu thụ một lần mỗi địch.',
+  'Thường phóng ba bàn chân lần lượt trên, giữa, dưới. Phát Động B: Toàn Phong → Ca Diệp → Vô Ảnh trên cùng mục tiêu trong 6s để lướt đá bay.',
   'Tạm giảm sát thương, kháng choáng và cưỡng bức di chuyển; vẫn nhận sát thương.',
   'Tuyệt kỹ: Phật sau lưng, thiên chưởng diện rộng, lưu chữ Phạn gây sát thương một lần mỗi địch bước vào. Bản thân giữ thủ thế.',
   'Chém rộng phía trước và làm chậm địch trúng đòn.',
@@ -323,9 +325,9 @@ export function addThieuLamProgression(d: ProgressionDefinition): void {
         e.mode === 'projectile' ||
         e.mode === 'multi_hit'
       ) {
-        if (e.mode === 'multi_hit' && e.projectileBurst && e.damage === 0) {
-          e.projectileBurst.damage += r * 3;
-          e.projectileBurst.range += r * 4;
+        if (e.mode === 'projectile' && e.comboDash) {
+          e.damage += r * 3;
+          e.comboDash.damage += r * 18;
         } else e.damage += r * (ultimate ? 20 : e.mode === 'multi_hit' ? 3 : 8);
         e.range += r * (ultimate ? 10 : 4);
       }

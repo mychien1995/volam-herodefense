@@ -1,3 +1,15 @@
+## Tầm La Hán và nhịp Phát Động · 2026-11-09
+
+La Hán Quyền có tầm 140 đơn vị theo cung đánh trước mặt. Đại Lực ưu tiên địch đã trúng cả Q và W nếu địch còn ở trong tầm, trong cung trước mặt và có đường bắn. Hướng chưởng chốt khi bấm E. Ở thế Cước, Q/W đang hồi chiêu giữ nguyên lệnh E đã đệm. Ca Diệp còn 2 tick hồi thế sau khi phóng ụ đất. Vô Ảnh vẫn chờ sát thương thật trên cùng mục tiêu để Phát Động.
+
+## Phát Động B đá lướt · 2026-11-09
+
+E sớm vẫn được đệm đến khi Ca Diệp thật sự chạm hoặc hết hành trình. Nếu mục tiêu có đủ hai bước và nằm trên đường đá, server lướt nhân vật, quét trúng địch một lần và áp dụng hệ số riêng cho địch đủ dấu. Vô Ảnh thường giữ nhân vật tại chỗ và phóng ba đạn. La Hán v02 giữ một hit gameplay dưới ba nhịp hình. [Chi tiết](docs/SHAOLIN_QUYEN_REWORK.md).
+
+## Đại Lực Kim Cương Chưởng v05 · 2026-11-09
+
+Đại Lực sử dụng projectile server, với một lần sát thương tối đa trên mỗi mục tiêu mỗi lượt thi triển. Vi Đà kiểm tra cung trước mặt và đường nhìn từ nhân vật, đồng thời quét vùng trúng từ mốc 42 đến tâm nổ 189. Các mô tả cũ về cung cận chiến Đại Lực hoặc chưởng bay chỉ để trình diễn được thay thế. [Chi tiết](docs/DIAMOND_PALM_V05.md).
+
 ## Renovation v7 authoritative override — 2026-11-06
 
 Hàng Long Hỏa Vũ maximum targeting/fallback distance is reduced30% at every rank (308/329/350). Forward flight reaches the captured endpoint without the former loop-radius overshoot. During `dragon_coil`, ground XY stays fixed at that endpoint; authored body poses perform the one wrap. Rise/dive remain above that same point. Server clocks, single landing AoE, damage, costs and cancellation are unchanged. The retained serialized `orbitTicks` field now times the coil. Phá Giáp VFX are anchored to the drawn staff contact and cannot move damage/hit geometry.

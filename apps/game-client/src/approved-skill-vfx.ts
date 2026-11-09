@@ -9,6 +9,7 @@ import { m1Config, skillArt } from '@volam/game-data';
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
 import raw from './approved-skill-assets.generated.json' with { type: 'json' };
+import diamondPalm from './diamond-palm-v05.json' with { type: 'json' };
 import { feedbackArt } from './feedback-art.js';
 import { facing as rasterFacing } from './facing.js';
 import { approvedSkillIds } from './approved-skill-ids.js';
@@ -24,7 +25,10 @@ import {
   type RasterComponent,
 } from './skill-art-registry.js';
 
-export const approvedSkillAssets = raw.assets as unknown as RasterComponent[];
+export const approvedSkillAssets = [
+  ...raw.assets,
+  diamondPalm,
+] as unknown as RasterComponent[];
 type Point = { x: number; y: number };
 type ClipView = {
   cue: ReviewClip;
@@ -57,6 +61,7 @@ type Loop = {
   point: Point;
   field: boolean;
 };
+const diamondPalmId = 'dai_luc_kim_cuong_chuong';
 const vector = {
   right: [1, 0],
   down: [0, 1],
@@ -229,18 +234,15 @@ export class ApprovedSkillVfx {
         clips = clips.filter((c) => c.body && c.tag === 'cast');
         duration = 320;
       }
-      if (id === 'dai_luc_kim_cuong_chuong') {
-        clips = clips
-          .filter((c) => c.body || c.phase === 'golden_palm_travel')
-          .map((c) => ({ ...c }));
+      if (id === diamondPalmId) {
+        clips = clips.filter((c) => c.body);
         const effect = m1Config.skillCatalogue![id]!.effect;
-        const windup =
-          effect.mode === 'arc'
-            ? ((effect.windupTicks ?? 12) * 1000) / m1Config.tickRate
-            : 400;
-        rate = 1050 / windup;
-        duration = 1050;
-        for (const c of clips) if (!c.body && c.to) c.to = [e.radius ?? 78, 0];
+        if (effect.mode === 'projectile') {
+          const windup =
+            ((effect.windupTicks ?? 12) * 1000) / m1Config.tickRate;
+          duration = 1050;
+          rate = duration / windup;
+        }
       }
       if (id === 'tam_gioi_quy_thien') {
         clips = clips
@@ -311,17 +313,6 @@ export class ApprovedSkillVfx {
           ],
           300,
         );
-      if (id === 'dai_luc_kim_cuong_chuong')
-        this.start(
-          e,
-          [
-            this.single('review_palm', 'impact', 500, 'confirmed_palm_impact', {
-              scale: 1,
-              fade: true,
-            }),
-          ],
-          500,
-        );
       if (id === 'tam_gioi_quy_thien')
         this.start(
           e,
@@ -336,6 +327,50 @@ export class ApprovedSkillVfx {
           ],
           600,
         );
+    }
+    if (
+      id === diamondPalmId &&
+      e.kind === 'pulse' &&
+      e.stage === 'empowered_release'
+    ) {
+      this.start(
+        e,
+        [
+          this.single(
+            diamondPalm.id,
+            'empowered_impact',
+            340,
+            'empowered_release',
+            {
+              hold: 2,
+              scale: 1.24,
+              alpha: 0.78,
+              fade: true,
+              ground: true,
+            },
+          ),
+        ],
+        340,
+        { follow: false },
+      );
+    }
+    if (
+      id === diamondPalmId &&
+      e.kind === 'pulse' &&
+      (e.stage === 'impact' || e.stage === 'empowered_impact')
+    ) {
+      const empowered = e.stage === 'empowered_impact';
+      const duration = empowered ? 460 : 250;
+      this.start(
+        e,
+        [
+          this.single(diamondPalm.id, e.stage, duration, e.stage, {
+            elevation: 11,
+          }),
+        ],
+        duration,
+        { follow: false },
+      );
     }
     if (
       e.kind === 'pulse' &&
@@ -696,7 +731,9 @@ export class ApprovedSkillVfx {
     const shotKeys = new Set<string>();
     state.projectiles.forEach((p, id) => {
       if (
-        !['van_kiem_quy_tong', 'nhu_lai_thien_diep'].includes(p.abilityId) ||
+        !['van_kiem_quy_tong', 'nhu_lai_thien_diep', diamondPalmId].includes(
+          p.abilityId,
+        ) ||
         p.zoneId !== zone ||
         (this.actor(p.ownerId)?.hp ?? 0) <= 0
       )
@@ -704,17 +741,29 @@ export class ApprovedSkillVfx {
       shotKeys.add(id);
       let shot = this.shots.get(id);
       const leafBlade = p.abilityId === 'nhu_lai_thien_diep';
+      const palm = p.abilityId === diamondPalmId;
+      const tag = palm && p.stage === 'empowered_travel' ? p.stage : 'travel';
       if (!shot) {
         shot = {
           view: this.make(
             this.single(
-              leafBlade ? 'nhu_lai_thien_diep_vfx' : 'review_sword',
-              'travel',
+              palm
+                ? diamondPalm.id
+                : leafBlade
+                  ? 'nhu_lai_thien_diep_vfx'
+                  : 'review_sword',
+              tag,
               1e9,
               'authoritative_projectile',
               {
                 loop: true,
-                scale: leafBlade ? 0.85 : 0.7,
+                scale: palm
+                  ? tag === 'empowered_travel'
+                    ? 1.22
+                    : 1
+                  : leafBlade
+                    ? 0.85
+                    : 0.7,
                 facingSpace: true,
                 elevation: 24,
               },
@@ -726,9 +775,13 @@ export class ApprovedSkillVfx {
         this.shots.set(id, shot);
       }
       this.draw(shot.view, now - shot.born, p, 'right');
+      const flipPalm = palm && p.vx < -0.01;
       shot.view.sprite
-        .setPosition(Math.round(p.x), Math.round(p.y - 24))
-        .setRotation(Math.atan2(p.vy, p.vx));
+        .setFlipX(flipPalm)
+        .setPosition(Math.round(p.x), Math.round(p.y - (palm ? 14 : 24)))
+        .setRotation(
+          Math.atan2(p.vy * (flipPalm ? -1 : 1), flipPalm ? -p.vx : p.vx),
+        );
     });
     for (const [id, shot] of this.shots)
       if (!shotKeys.has(id)) {

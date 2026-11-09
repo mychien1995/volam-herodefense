@@ -1,3 +1,14 @@
+## Thiếu Lâm Quyền rework · 2026-11-09
+
+- Q La Hán trúng bia ở 135 đơn vị. Bấm nhanh Q → W → E khi có địch gần hơn ngoài cung vẫn phóng chưởng lớn vào bia đã trúng Q và W. Ở thế Cước, bấm tiếp Q/W khi E đang chờ vẫn đá lướt đúng một lần.
+- Bốn lần A hợp lệ hiện bốn tư thế, với quyền hoặc cước kình tách lớp. Thức cuối dùng đạn bán nguyệt của server.
+- Q thế Quyền hiện La Hán và ba nhịp đấm xuống đất. E thế Cước thường phóng ba đạn mà không dời nhân vật. Q → W → E trên cùng mục tiêu hợp lệ lướt tối đa 210, hai client nhận cùng kết quả và thấy thân đá bay, vệt gót, gió bụi.
+
+## Đại Lực Kim Cương Chưởng v05 · 2026-11-09
+
+- Q → W → E trúng cùng một mục tiêu gần khi nhân vật đứng yên. Server lần lượt ghi nhận hai bước chuẩn bị, một chưởng lớn, một hit Phát Động và va chạm lớn.
+- E độc lập phóng ba chưởng theo thứ tự trên, giữa, dưới. Hai client nhận cùng ID đạn và quan sát chuyển khung va chạm v05. Mỗi địch nhận tối đa một lần sát thương từ lượt thi triển.
+
 ## Võ Đang Kiếm · 2026-11-09
 
 Run `pnpm check:final --config playwright.vo-dang-kiem.config.ts`. Observe server-selected A poses and preserved Kiếm Khí, exactly seven ordered Q sweeps spaced 6 ticks apart, and a charged T cast on two normal Phaser clients. Verify staggered launches from the caster, a quiet phase showing only the marker, and 48 distinct contacts with small blasts around the same mark. The target takes one hit at tick 80, at the centered first contact. Verify charge capacity by rank, serial recharge, and cancellation on death or zone exit. Save still PNGs.

@@ -509,6 +509,21 @@ function advanceProjectile(
   const hits = shot.effect.piercing ? collisions : collisions.slice(0, 1);
   shot.hitIds ??= [];
   for (const collision of hits) {
+    if (shot.effect.comboEmpoweredRadius !== undefined)
+      emit(world, {
+        kind: 'pulse',
+        sourceId: shot.ownerId,
+        targetId: collision.enemy.id,
+        abilityId: shot.abilityId,
+        x: shot.x + (end.x - shot.x) * collision.t + dir.x * shot.effect.radius,
+        y: shot.y + (end.y - shot.y) * collision.t + dir.y * shot.effect.radius,
+        fx: dir.x,
+        fy: dir.y,
+        stage:
+          shot.stage === 'empowered_travel' ? 'empowered_impact' : 'impact',
+        damage: 0,
+        critical: false,
+      });
     if (shot.effect.splashRadius > 0)
       emit(world, {
         kind: 'pulse',
@@ -536,7 +551,12 @@ function advanceProjectile(
       shot.hitIds.push(enemy.id);
       const spreadKey = (shot.leg ?? 'outbound') + ':' + enemy.id;
       const spread = shot.equipmentAttack?.spread;
-      if (spread?.hitTargets.has(spreadKey)) continue;
+      if (
+        spread?.hitTargets.has(spreadKey) ||
+        (shot.effect.oncePerCast &&
+          Object.hasOwn(shot.comboTargets ?? {}, enemy.id))
+      )
+        continue;
       const hit = hurt(
         world,
         enemy,
@@ -562,6 +582,8 @@ function advanceProjectile(
       );
       if (hit) {
         spread?.hitTargets.add(spreadKey);
+        if (shot.effect.oncePerCast && shot.comboTargets)
+          shot.comboTargets[enemy.id] ??= false;
         if (shot.abilityId === 'gear_needle' && enemy.hp > 0) {
           const target = world.creeps.get(enemy.id);
           const tuning = config.economy?.craftedCombat;

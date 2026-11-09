@@ -39,7 +39,7 @@ export function revisedBasicBody<T extends Body>(
   body: T | undefined,
 ): T | undefined {
   const texture = body?.abilityId && revisedBasics[body.abilityId];
-  if (!body || !texture) return body;
+  if (!body || !texture || body.texture === 'shaolin_quyen_body') return body;
   const direction = body.firstFrame.match(
     /_(down|left|right|up)_\d+(?:\.png)?$/,
   )?.[1];

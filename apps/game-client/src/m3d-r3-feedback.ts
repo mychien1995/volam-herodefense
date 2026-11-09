@@ -12,8 +12,11 @@ import {
   type R3Direction,
   type R3PaintOptions,
 } from './m3d-r3-art.js';
+const voAnh = m1Config.skillCatalogue!['vo_anh_cuoc']!.effect;
+const voAnhDash = voAnh.mode === 'projectile' ? voAnh.comboDash : undefined;
 const skills = new Set([
   'thieu_lam_quyen',
+  'la_han_quyen',
   'vi_da_quyen',
   'vo_anh_cuoc',
   'toan_phong_thoai',
@@ -29,6 +32,7 @@ const skills = new Set([
 type Point = { x: number; y: number };
 interface Action {
   id: string;
+  kind: string;
   abilityId: string;
   startedAt: number;
   until: number;
@@ -62,6 +66,7 @@ interface Flash {
   point: Point;
   start: number;
   duration: number;
+  drift?: Point;
   options: R3PaintOptions;
 }
 const parse = <T>(value: string, fallback: T): T => {
@@ -124,6 +129,8 @@ export class M3dR3Feedback {
     d: R3Direction | undefined,
     point: Point,
     options: R3PaintOptions = {},
+    delay = 0,
+    drift?: Point,
   ): void {
     const { tag } = r3Tag(asset, phase, d);
     this.flashes.push({
@@ -133,8 +140,9 @@ export class M3dR3Feedback {
       phase,
       ...(d ? { direction: d } : {}),
       point: { x: point.x, y: point.y },
-      start: this.scene.time.now,
+      start: this.scene.time.now + delay,
       duration: options.duration ?? tag.durationMsTotal,
+      ...(drift ? { drift } : {}),
       options,
     });
   }
@@ -155,7 +163,10 @@ export class M3dR3Feedback {
         owner: e.sourceId,
         skill: e.abilityId,
         start: now,
-        until: Math.max(now + 1, hero?.actionUntil ?? now + 12),
+        until:
+          e.abilityId === 'thieu_lam_quyen'
+            ? now + 6
+            : Math.max(now + 1, hero?.actionUntil ?? now + 12),
         fx: e.fx ?? 1,
         fy: e.fy ?? 0,
         stage: e.stage ?? '',
@@ -182,6 +193,64 @@ export class M3dR3Feedback {
             duration: 400,
           },
         );
+      if (
+        e.kind === 'attack' &&
+        e.abilityId === 'thieu_lam_quyen' &&
+        e.stage !== 'roundhouse_kick'
+      ) {
+        const fx = e.fx ?? 1,
+          fy = e.fy ?? 0;
+        // The rear edge of the qi cel starts outside the monk silhouette.
+        const release = d === 'up' ? 46 : 42;
+        this.flash(
+          e.sourceId,
+          'shaolin_quyen_ki',
+          e.stage || 'left_fist',
+          undefined,
+          {
+            x: e.x + fx * release,
+            y: e.y + fy * release - (d === 'down' ? 0 : 23),
+          },
+          { duration: 205, scale: 0.92, rotation: Math.atan2(fy, fx) },
+          42,
+          { x: fx * 26, y: fy * 26 },
+        );
+      }
+      if (e.abilityId === 'vo_anh_cuoc' && e.stage === 'empowered_dash') {
+        this.flash(e.sourceId, 'shaolin_vo_anh_dust', 'gust', undefined, e, {
+          duration: 340,
+          scale: 1.12,
+          depth: e.y - 3,
+          rotation: Math.atan2(e.fy ?? 0, e.fx ?? 1),
+        });
+      }
+      if (e.abilityId === 'la_han_quyen') {
+        const side = d === 'left' ? 'left' : 'right';
+        const dx = e.fx ?? 1,
+          dy = e.fy ?? 0;
+        const reach = e.radius ?? 0;
+        const advance = reach * 0.24;
+        this.flash(
+          e.sourceId,
+          'shaolin_la_han',
+          'apparition',
+          side,
+          { x: e.x + dx * advance, y: e.y + dy * advance },
+          { depth: e.y - 1, alpha: 0.82 },
+        );
+        for (const [index, delay] of [150, 370, 590].entries()) {
+          const contact = reach * (0.8 + index * 0.09);
+          this.flash(
+            e.sourceId,
+            'shaolin_la_han_ground',
+            'impact',
+            undefined,
+            { x: e.x + dx * contact, y: e.y + dy * contact },
+            { scale: 0.9 + index * 0.14, duration: 165, depth: e.y - 1 },
+            delay,
+          );
+        }
+      }
       if (e.abilityId === 'vi_da_quyen') {
         const effect = m1Config.skillCatalogue![e.abilityId]!.effect;
         const offset = effect.mode === 'arc' ? (effect.originOffset ?? 0) : 0;
@@ -277,15 +346,36 @@ export class M3dR3Feedback {
         this.flash(e.sourceId, 'r3_tornado_' + d, 'impact', d, e, {
           scale: 0.7,
         });
-      if (e.abilityId === 'thieu_lam_quyen' || e.abilityId === 'vo_anh_cuoc')
+      if (e.abilityId === 'vo_anh_cuoc' && e.stage === 'empowered') {
+        const rotation = Math.atan2(e.fy ?? 0, e.fx ?? 1);
+        this.flash(e.sourceId, 'shaolin_vo_anh_dust', 'gust', undefined, e, {
+          duration: 470,
+          scale: 1.35,
+          rotation,
+          depth: e.y - 2,
+        });
         this.flash(
           e.sourceId,
-          'r3_crescent_' + d,
-          'impact',
-          d,
-          { x: e.x, y: e.y - 22 },
-          { scale: 0.6 },
+          'shaolin_quyen_ki',
+          'heel',
+          undefined,
+          { x: e.x, y: e.y - 28 },
+          { duration: 300, scale: 1.25, rotation },
         );
+      } else if (e.abilityId === 'vo_anh_cuoc') {
+        this.flash(
+          e.sourceId,
+          'shaolin_quyen_ki',
+          'heel',
+          undefined,
+          { x: e.x, y: e.y - 21 },
+          {
+            duration: 115,
+            scale: 0.5,
+            rotation: Math.atan2(e.fy ?? 0, e.fx ?? 1),
+          },
+        );
+      }
       if (e.abilityId === 'nhu_lai_niet_ban')
         this.flash(
           e.sourceId,
@@ -325,7 +415,10 @@ export class M3dR3Feedback {
           owner: id,
           skill: h.castAbilityId,
           start: h.actionStartedAt,
-          until: h.actionUntil,
+          until:
+            h.castAbilityId === 'thieu_lam_quyen'
+              ? h.actionStartedAt + 6
+              : h.actionUntil,
           fx: h.fx,
           fy: h.fy,
           stage: h.basicStage,
@@ -343,7 +436,10 @@ export class M3dR3Feedback {
             until: action.until,
             fx: action.fx,
             fy: action.fy,
-            stage: '',
+            stage:
+              action.kind === 'dash' && action.abilityId === 'vo_anh_cuoc'
+                ? 'empowered_dash'
+                : '',
             token: action.id,
             revision: h.build.revision,
           };
@@ -495,17 +591,58 @@ export class M3dR3Feedback {
           elapsed,
           { depth: p.y - 5, duration: ((cast.until - cast.start) * 1000) / 30 },
         );
-      if (cast.skill === 'thieu_lam_quyen')
-        this.painter.draw(
-          'fist:' + id,
-          'shaolin_a_fx',
-          cast.stage || 'left_fist',
-          d,
-          p.x,
-          p.y,
-          elapsed,
-          { duration: ((cast.until - cast.start) * 1000) / 30 },
+      const angle = Math.atan2(cast.fy, cast.fx);
+      if (
+        cast.skill === 'vo_anh_cuoc' &&
+        cast.stage === 'empowered_dash' &&
+        voAnhDash
+      ) {
+        const side = d === 'left' ? 'left' : 'right';
+        const traveled = Math.min(
+          voAnhDash.distance,
+          (Math.max(0, elapsed) * voAnhDash.speed) / 1000,
         );
+        const fade = Math.min(1, 0.4 + traveled / 55);
+        for (const [index, trail] of [22, 45].entries()) {
+          const offset = Math.min(trail, traveled);
+          if (offset <= 5) continue;
+          this.painter.draw(
+            'vo-echo:' + id + ':' + index,
+            'shaolin_vo_anh_body',
+            'fly',
+            side,
+            p.x - cast.fx * offset,
+            p.y - cast.fy * offset,
+            elapsed,
+            { alpha: 0.32 - index * 0.13, depth: p.y - 2 },
+          );
+        }
+        this.painter.draw(
+          'vo-dust:' + id,
+          'shaolin_vo_anh_dust',
+          'gust',
+          undefined,
+          p.x - cast.fx * 8,
+          p.y - cast.fy * 8,
+          elapsed,
+          {
+            rotation: angle,
+            scale: 0.58 + fade * 0.42,
+            alpha: fade,
+            depth: p.y - 3,
+          },
+        );
+        this.painter.draw(
+          'vo-heel:' + id,
+          'shaolin_quyen_ki',
+          'heel',
+          undefined,
+          p.x + cast.fx * 42,
+          p.y - 35 + cast.fy * 28,
+          elapsed,
+          { rotation: angle, alpha: fade, depth: p.y + 1 },
+        );
+      }
     }
     const shots = new Set<string>();
     for (const [id, p] of state.projectiles) {
@@ -535,23 +672,34 @@ export class M3dR3Feedback {
           age,
           { depth: p.y - 5, loop: age >= 100 },
         );
+      } else if (
+        p.abilityId === 'vo_anh_cuoc' ||
+        p.abilityId === 'thieu_lam_quyen'
+      ) {
+        // The fourth strike uses the real projectile, once it clears the body.
+        if (p.abilityId === 'thieu_lam_quyen' && age < 2000 / m1Config.tickRate)
+          continue;
+        this.painter.draw(
+          'shot:' + id,
+          'shaolin_quyen_ki',
+          p.abilityId === 'vo_anh_cuoc' ? 'foot' : 'roundhouse_kick',
+          undefined,
+          p.x,
+          p.y - 22,
+          age,
+          { rotation: Math.atan2(p.vy, p.vx) },
+        );
       } else {
-        const kind =
-          p.abilityId === 'toan_phong_thoai'
-            ? 'tornado'
-            : p.abilityId === 'vo_anh_cuoc'
-              ? 'foot_force'
-              : 'crescent';
+        const kind = 'tornado';
         this.painter.draw(
           'shot:' + id,
           `r3_${kind}_${d}`,
           age < 100 ? 'birth' : 'travel',
           d,
           p.x,
-          p.y - (kind === 'tornado' ? 0 : 22),
+          p.y,
           age,
           {
-            scale: kind === 'foot_force' ? 0.9 : kind === 'crescent' ? 0.8 : 1,
             loop: age >= 100,
           },
         );
@@ -627,14 +775,16 @@ export class M3dR3Feedback {
         f.point,
         f.options,
       );
-    for (const f of this.flashes)
+    for (const f of this.flashes) {
+      if (this.scene.time.now < f.start) continue;
+      const progress = (this.scene.time.now - f.start) / f.duration;
       this.painter.draw(
         f.key,
         f.asset,
         f.phase,
         f.direction,
-        f.point.x,
-        f.point.y,
+        f.point.x + (f.drift?.x ?? 0) * progress,
+        f.point.y + (f.drift?.y ?? 0) * progress,
         this.scene.time.now - f.start,
         {
           ...f.options,
@@ -645,6 +795,7 @@ export class M3dR3Feedback {
           ),
         },
       );
+    }
     this.painter.end();
   }
   actorCast(id: string) {
@@ -683,8 +834,12 @@ export class M3dR3Feedback {
         : 'raise';
     }
     if (cast.skill === 'thieu_lam_quyen') {
-      asset = 'shaolin_a';
+      asset = 'shaolin_quyen_body';
       phase = cast.stage || 'left_fist';
+    }
+    if (cast.skill === 'la_han_quyen') {
+      asset = 'shaolin_quyen_body';
+      phase = 'left_fist';
     }
     if (cast.skill === 'vi_da_quyen') {
       asset = 'shaolin_a';
@@ -695,9 +850,13 @@ export class M3dR3Feedback {
       phase = 'front_kick';
     }
     if (cast.skill === 'vo_anh_cuoc') {
-      asset = 'vo_anh_cuoc_character';
-      phase = 'cast';
-      loop = true;
+      const flying = cast.stage === 'empowered_dash';
+      asset =
+        flying || d === 'left' || d === 'right'
+          ? 'shaolin_vo_anh_body'
+          : 'vo_anh_cuoc_character';
+      phase = flying ? 'fly' : 'cast';
+      loop = !flying;
     }
     if (cast.skill === 'tru_ta') {
       asset = 'tru_ta_character';
@@ -785,7 +944,10 @@ export class M3dR3Feedback {
         phaseDuration,
         r3Tag(asset, phase, d).tag.durationMsTotal,
       );
-    const roundhouse = phase === 'roundhouse_kick';
+    const roundhouse =
+      phase === 'roundhouse_kick' && asset !== 'shaolin_quyen_body';
+    const bodyDirection =
+      asset === 'shaolin_vo_anh_body' && d !== 'left' ? 'right' : d;
     const quarter = roundhouse
       ? Math.min(4, Math.floor((phaseElapsed / Math.max(1, phaseDuration)) * 5))
       : 0;
@@ -794,7 +956,7 @@ export class M3dR3Feedback {
         this.scene,
         asset,
         phase,
-        spinFacing(d, quarter),
+        spinFacing(bodyDirection, quarter),
         phaseElapsed,
         phaseDuration,
         cast.token + ':' + phase + (roundhouse ? ':' + quarter : ''),

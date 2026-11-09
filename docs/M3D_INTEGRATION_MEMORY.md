@@ -1,3 +1,7 @@
+## Thiếu Lâm Quyền đã duyệt — 2026-11-09
+
+Đòn A dùng bốn tư thế cùng mẫu nhân vật với atlas đứng yên và đi bộ. La Hán Quyền đấm xuống đất ba nhịp với tầm cơ bản 140. Đại Lực thường phóng ba khí chưởng bậc thang và ưu tiên mục tiêu đã trúng Q/W để phóng một chưởng lớn. Vô Ảnh thường phóng ba cước kình, khi Phát Động B thì lướt đá 210 đơn vị. Q/W đang hồi chiêu giữ nguyên lệnh E đã đệm. Cả hai Phát Động dựa trên hit thật cùng mục tiêu ở server. [Kiểm chứng](SHAOLIN_QUYEN_REWORK.md).
+
 ## Võ Đang đã duyệt — 2026-11-09
 
 Hai nhánh Quyền và Kiếm đi vào trận thường của `milestone/m3d` với protocol 38. Quyền có đấm luân phiên kèm quyền khí, Lưỡng Nghi Thủ dùng lại đạn tay lam đen, Huyền Âm Chưởng có hai sóng và năm ấn nổ mực sau một giây. Bói Toán Thiên Cơ cho phép chốt tay hoặc tự chốt sau năm giây. Cầu nội lực và Thái Cực Trận Âm Dương Bát Quái dùng art đã duyệt. [Kiểm chứng Võ Đang Quyền](evidence/sessions/vo-dang-quyen-final/README.md).

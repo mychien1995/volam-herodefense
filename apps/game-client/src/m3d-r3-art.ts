@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import raw from './m3d-r3-art.generated.json' with { type: 'json' };
+import shaolin from './shaolin-quyen-art.json' with { type: 'json' };
 import type { RasterComponent, RasterAnimation } from './skill-art-registry.js';
 import { rasterAnimationKey } from './skill-art-registry.js';
 export type R3Direction = 'right' | 'down' | 'left' | 'up';
@@ -11,7 +12,10 @@ type Component = Omit<RasterComponent, 'animations'> & {
   sourceId: string;
   animations: R3Tag[];
 };
-export const r3Assets = raw.assets as unknown as Component[];
+export const r3Assets = [
+  ...raw.assets,
+  ...shaolin.assets,
+] as unknown as Component[];
 const components = new Map(r3Assets.map((c) => [c.sourceId, c]));
 export const r3NailAxis = raw.nailAxis;
 export function r3Tag(

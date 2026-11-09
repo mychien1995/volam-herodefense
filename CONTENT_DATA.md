@@ -1,3 +1,11 @@
+## Vô Ảnh Cước và artwork Thiếu Lâm Quyền · 2026-11-09
+
+E ở thế Cước phóng ba bàn chân theo thứ tự trên, giữa, dưới. Toàn Phong Thoái → Ca Diệp Thoái trên cùng địch mở cú Vô Ảnh đá bay lướt. [Cấu hình](docs/SHAOLIN_QUYEN_REWORK.md).
+
+## Đại Lực Kim Cương Chưởng v05 · 2026-11-09
+
+Đại Lực Kim Cương Chưởng giữ ô E và ID `dai_luc_kim_cuong_chuong`. Thường phóng ba chưởng bậc thang. Phát Động A trên cùng mục tiêu phóng một chưởng lớn, giữ hệ số combo theo bậc. [Chi tiết](docs/DIAMOND_PALM_V05.md).
+
 ## Võ Đang Kiếm · rework 2026-11-09
 
 Đòn A chọn một trong năm thế bằng RNG của server và tiếp tục có 25% xác suất phóng Kiếm Khí. Q giữ bảy nhịp gây sát thương phía trước, mỗi nhịp cách 6 tick. T dùng 2/3/4/5 lượt theo bậc. Tâm rơi chốt lúc bấm T trong góc phía trước, ưu tiên boss đủ điều kiện rồi tới quái gần nhất. Nếu thiếu mục tiêu, chiêu đánh dấu một điểm hợp lệ theo hướng đang nhìn.

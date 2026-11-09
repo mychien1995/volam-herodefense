@@ -210,8 +210,6 @@ export class RenovationRevision {
         );
       }
     }
-    if (e.kind === 'hit' && e.abilityId === 'thieu_lam_quyen')
-      this.flash(e, 'azure_crescent', 150, 0, -20, { scale: 0.25, cel: 2 });
   }
   sync(
     state: LobbyState | undefined,
@@ -269,7 +267,6 @@ export class RenovationRevision {
           'phi_long_tai_thien',
           'hang_long_hoa_vu',
           'truy_hon_dao',
-          'thieu_lam_quyen',
         ].includes(p.abilityId)
       )
         return;

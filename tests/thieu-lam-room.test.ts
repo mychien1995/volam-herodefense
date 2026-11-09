@@ -206,6 +206,9 @@ it('four schools share authoritative combos, support, damage and rewards; zones/
   await expect
     .poll(() => gold.state.players.get(gold.sessionId)!.combos)
     .toBe('[]');
+  await expect
+    .poll(() => gold.state.players.get(gold.sessionId)!.actionState)
+    .toBe('');
   cast(gold, 3);
   await expect
     .poll(() => fire.state.players.get(fire.sessionId)!.build.stats.defense)

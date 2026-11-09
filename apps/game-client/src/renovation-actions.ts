@@ -117,6 +117,9 @@ export function presentRenovationAction(
   if (
     image.texture.key === bongReviewBody ||
     image.texture.key === bongContacts ||
+    (image.texture.key === 'shaolin_quyen_body' &&
+      ability !== 'thieu_lam_quyen') ||
+    image.texture.key === 'shaolin_vo_anh_body' ||
     (!previewCast && retainM3dBody(id, ability)) ||
     // The general Đao attack cel raises the weapon instead of completing the
     // left overhead strike. Keep the authored left windup, contact and recovery.

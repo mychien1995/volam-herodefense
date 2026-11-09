@@ -25,7 +25,7 @@ async function key(p: Page, k: string) {
   await expect.poll(() => p.evaluate(() => document.hasFocus())).toBe(true);
   await p.keyboard.press(k, { delay: 60 });
 }
-test('vo anh actual QWE: normal single foot and same-target six-foot finisher synchronize two clients', async ({
+test('vo anh actual QWE: three ordinary feet and same-target flying kick synchronize two clients', async ({
   browser,
 }) => {
   const contexts = await Promise.all([
@@ -54,32 +54,31 @@ test('vo anh actual QWE: normal single foot and same-target six-foot finisher sy
       const ids = [new Set<string>(), new Set<string>()];
       let still: any;
       // Observe metadata only; export one PNG if the live phase is present.
-      await a.evaluate(
-        (minimum) => {
-          const w = window as any;
-          w.__voAnhStill = undefined;
-          const until = Date.now() + 8000;
-          const inspect = () => {
-            const v = w.__VOLAM__.presentation(),
-              e = v.skills.r3.entities.filter((x: any) =>
-                x.asset.includes('foot_force'),
-              );
-            if (e.length >= minimum) {
-              w.__voAnhStill = {
-                png: document
-                  .querySelector<HTMLCanvasElement>('#game canvas')!
-                  .toDataURL('image/png'),
-                entities: e,
-                zoom: v.zoom,
-              };
-              return;
-            }
-            if (Date.now() < until) requestAnimationFrame(inspect);
-          };
-          requestAnimationFrame(inspect);
-        },
-        success ? 3 : 1,
-      );
+      await a.evaluate((charged) => {
+        const w = window as any;
+        w.__voAnhStill = undefined;
+        const until = Date.now() + 8000;
+        const inspect = () => {
+          const v = w.__VOLAM__.presentation(),
+            e = v.skills.r3.entities.filter((x: any) =>
+              charged
+                ? x.asset === 'shaolin_vo_anh_dust'
+                : x.asset === 'shaolin_quyen_ki' && x.frame.startsWith('foot_'),
+            );
+          if (e.length > 0) {
+            w.__voAnhStill = {
+              png: document
+                .querySelector<HTMLCanvasElement>('#game canvas')!
+                .toDataURL('image/png'),
+              entities: e,
+              zoom: v.zoom,
+            };
+            return;
+          }
+          if (Date.now() < until) requestAnimationFrame(inspect);
+        };
+        requestAnimationFrame(inspect);
+      }, success);
       if (success) {
         await key(a, 'q');
         await expect
@@ -105,7 +104,7 @@ test('vo anh actual QWE: normal single foot and same-target six-foot finisher sy
         });
         await a.waitForTimeout(25);
       }
-      expect(ids.map((x) => x.size)).toEqual(success ? [6, 6] : [1, 1]);
+      expect(ids.map((x) => x.size)).toEqual(success ? [0, 0] : [3, 3]);
       expect([...ids[0]!].sort()).toEqual([...ids[1]!].sort());
       still = await a.evaluate<any>('window.__voAnhStill');
       expect(still).toBeDefined();
@@ -117,6 +116,11 @@ test('vo anh actual QWE: normal single foot and same-target six-foot finisher sy
       );
       delete still.png;
       const state = await snap(a);
+      for (const p of pages)
+        expect((await snap(p)).state.players[owner].x).toBeCloseTo(
+          success ? 1060 : 850,
+          0,
+        );
       if (success)
         expect(
           state.events.some(

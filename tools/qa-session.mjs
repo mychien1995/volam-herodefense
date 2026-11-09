@@ -75,6 +75,7 @@ export function qaWorkflowSession(mode, args = [], env = process.env) {
         'playwright.arena-creeps.config.ts',
         'playwright.vo-dang-quyen.config.ts',
         'playwright.vo-dang-kiem.config.ts',
+        'playwright.diamond-palm.config.ts',
       ].includes(name))
   ) {
     const pathsEnvironment = { ...env };

@@ -1,3 +1,11 @@
+## Thiếu Lâm Quyền · bản duyệt M3D · 2026-11-09
+
+Người dùng duyệt bản Phaser và yêu cầu đưa vào `milestone/m3d`. Bốn thức đánh thường dùng cùng mẫu nhân vật với sprite đứng yên và đi bộ, kèm quyền kình và cước kình vàng. La Hán Quyền có tầm cơ bản 140, với ba nhịp đấm xuống đất. Vô Ảnh thường phóng ba cước kình bậc thang. Phát Động B hợp lệ đổi thành đá bay lướt có va chạm server và hiệu ứng gió cuốn bụi sát đất. [Chi tiết](docs/SHAOLIN_QUYEN_REWORK.md).
+
+## Đại Lực Kim Cương Chưởng v05 · 2026-11-09
+
+Người dùng duyệt artwork khí chưởng và va chạm v05 để tích hợp thử trong Phaser. Đại Lực thường phóng ba bàn tay lần lượt trên, giữa, dưới. Khi có Phát Động A trên mục tiêu hợp lệ, chiêu phóng một bàn tay lớn ở luồng giữa. Vi Đà giữ tâm nổ ở 189 và vùng trúng kéo từ mốc 42 đến 189 để nối combo khi đứng gần. [Cấu hình và kiểm chứng](docs/DIAMOND_PALM_V05.md).
+
 ## Võ Đang Kiếm · artwork được duyệt ngày 2026-11-09
 
 Đánh thường chọn ngẫu nhiên một trong năm thế A2 gồm chọc, chém trái, chém phải, chém xuống và chém lên. Kiếm Khí tiếp tục có xác suất phóng riêng. Thất Tinh Kiếm dùng vệt bạc và mực Q2 trên bảy nhát phía trước, cách nhau 0,2 giây. Vạn Kiếm Quy Tông có 2/3/4/5 lượt ở bậc 1–4. Mỗi lượt chỉ kiếm về một tâm phía trước, ưu tiên boss rồi quái. 48 thanh kiếm bạc chuôi vàng lần lượt vút lên từ sau lưng, khuất một nhịp rồi đâm xuống vùng quanh tâm đã đánh dấu. Mỗi thanh nổ nhỏ tại điểm chạm. [Bộ artwork đã duyệt](assets/reviews/vo-dang-kiem-rework-2026-11-09/README.md).

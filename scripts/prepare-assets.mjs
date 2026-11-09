@@ -85,6 +85,8 @@ for (const [name, label] of [
   ['approved_forest_creeps.lock.json', 'Bamboo Forest creep artwork'],
   ['approved_vo_dang_skills.lock.json', 'Vo Dang skills'],
   ['approved_thieu_lam.lock.json', 'Thieu Lam'],
+  ['approved_diamond_palm_v05.lock.json', 'Đại Lực Kim Cương Chưởng v05'],
+  ['approved_shaolin_quyen_rework.lock.json', 'Thiếu Lâm Quyền rework'],
   ['approved_arena_creeps_13_16.lock.json', 'arena creeps Waves 13–16'],
 ]) {
   // Thiếu Lâm remains a prototype until the separate final director approval.

@@ -1,0 +1,11 @@
+# Đại Lực Kim Cương Chưởng v05
+
+Artwork khí chưởng và hiệu ứng va chạm được người dùng duyệt ngày 2026-11-09. Atlas lấy từ hai PNG gốc trong [manifest v05](../assets/concepts/skills/thieu-lam/m3d-rework-v05/manifest.json), xuất bằng [script](../scripts/export-diamond-palm-v05.py) và được bảo vệ bởi [khóa SHA-256](../assets/approved_diamond_palm_v05.lock.json). Tạo hình nhân vật dùng tư thế thi triển hiện hành. Hướng trái dùng bản lật, hướng dọc xoay hiệu ứng bay theo vận tốc của server.
+
+Ca tái hiện đứng yên cho thấy La Hán ghi bước 1 nhưng Vi Đà nổ quá xa nên bước 2 không xuất hiện. Vi Đà quét vùng trúng từ 42 đến 189 đơn vị phía trước, giữ tâm hiệu ứng ở mốc 189. Kiểm tra góc và vật cản vẫn lấy từ nhân vật. Cùng mục tiêu chỉ được tính một hit Vi Đà.
+
+Đại Lực lấy hướng ngắm một lần khi nhận lệnh. Sau 12 tick lấy đà, server phóng ba chưởng thường ở các luồng −20, 0, +20, cách nhau 4 tick. Nếu một địch đã nhận đủ hai bước hợp lệ nằm trong đường chưởng lớn, server phóng một chưởng giữa thay cho bộ ba. Tầm bậc 1 là 150, tốc độ 450, bán kính 12 hoặc 34. Sát thương gốc, tiêu hao, hồi chiêu và hệ số Phát Động theo bậc được giữ. Hit thực quyết định hệ số cho từng mục tiêu. Một địch nhận tối đa một lần sát thương mỗi lượt thi triển. Phaser lấy vị trí đạn và điểm tiếp xúc từ server.
+
+Kiểm thử trình duyệt dùng một phòng riêng với nhân vật cấp 30 và một bia đứng yên, sau đó thực hiện thao tác thật bằng HUD. Cấu hình [playwright.diamond-palm.config.ts](../playwright.diamond-palm.config.ts) chạy cả hai biến thể trên hai client.
+
+`pnpm check:final --config playwright.diamond-palm.config.ts tests/e2e/diamond-palm.spec.ts` passed asset preparation, both typecheck stages, 18 workflow checks, 961 unit/integration tests, the production build and all asset validators. Its initial browser run timed out in the lobby. After a browser-only adjustment, `node tools/run-playwright.mjs test --config playwright.diamond-palm.config.ts tests/e2e/diamond-palm.spec.ts --trace off` passed both cases against the same production build. Two synchronized clients observed matching projectile IDs, damage mode and distinct contact frames. [Normal](evidence/sessions/diamond-palm-v05-browser-verified/diamond-palm/travel.png) and [Phát Động](evidence/sessions/diamond-palm-v05-browser-verified/diamond-palm/empowered_travel.png) captures were inspected.

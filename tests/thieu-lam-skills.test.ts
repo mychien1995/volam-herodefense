@@ -201,7 +201,7 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
         false,
       );
       if (finish === 'vo_anh_cuoc')
-        expect(f.hits(finish, b!.id)).toHaveLength(6);
+        expect(f.hits(finish, b!.id)).toHaveLength(1);
     },
   );
   it('never empowers misses, wrong order, expired targets, or another attacker; unrelated skills preserve progress', () => {
@@ -242,17 +242,76 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
     h.steps();
     expect(h.world.combos!.some((c) => c.sourceId === 'b')).toBe(false);
   });
+  it('Phát Động A works on one nearby target without repositioning the monk', () => {
+    const f = fixture();
+    const [target] = f.enemies;
+    f.world.creeps.delete(f.enemies[1]!.id);
+    f.world.creeps.delete(f.enemies[2]!.id);
+    f.cast('la_han_quyen');
+    expect(f.world.combos).toMatchObject([{ targetId: target!.id, step: 1 }]);
+    f.cast('vi_da_quyen');
+    expect(f.world.combos).toMatchObject([{ targetId: target!.id, step: 2 }]);
+    f.cast('dai_luc_kim_cuong_chuong');
+    f.steps(12);
+    expect([...f.world.projectiles.values()]).toMatchObject([
+      {
+        abilityId: 'dai_luc_kim_cuong_chuong',
+        stage: 'empowered_travel',
+        y: f.hero.y,
+      },
+    ]);
+    f.steps(30);
+    expect(f.hits('dai_luc_kim_cuong_chuong')).toMatchObject([
+      { stage: 'empowered' },
+    ]);
+    expect(f.events.some((e) => e.stage === 'empowered_impact')).toBe(true);
+  });
+  it('La Hán hits farther along its frontal arc, and rapid QWE prioritizes the primed enemy', () => {
+    const f = fixture();
+    const [target, decoy, outOfRange] = f.enemies;
+    Object.assign(target!, { x: 435, y: 300 });
+    Object.assign(decoy!, { x: 300, y: 345 });
+    Object.assign(outOfRange!, { x: 470, y: 300 });
+    f.hero.skillIds = [
+      'la_han_quyen',
+      'vi_da_quyen',
+      'dai_luc_kim_cuong_chuong',
+    ];
+    for (const slot of [0, 1, 2]) {
+      f.input({ kind: 'cast', slot });
+      f.steps(2);
+    }
+    f.steps(30);
+    expect(f.hits('la_han_quyen')).toHaveLength(1);
+    expect(f.hits('la_han_quyen', outOfRange!.id)).toHaveLength(0);
+    expect(f.hits('dai_luc_kim_cuong_chuong')).toMatchObject([
+      { stage: 'empowered' },
+    ]);
+    expect(f.hits('dai_luc_kim_cuong_chuong', decoy!.id)).toHaveLength(0);
+  });
   it('slow palm snapshots facing/offense, resolves against current positions and can miss/be interrupted', () => {
     const f = fixture();
     f.cast('dai_luc_kim_cuong_chuong');
     expect(f.hits('dai_luc_kim_cuong_chuong')).toHaveLength(0);
     f.hero.fx = -1;
     f.steps(12);
+    const first = [...f.world.projectiles.values()];
+    expect(first).toMatchObject([{ vx: 450, vy: 0, y: 280, stage: 'travel' }]);
+    expect(f.world.shots.map((s) => [s.tick - f.world.tick, s.y])).toEqual([
+      [4, 300],
+      [8, 320],
+    ]);
+    f.steps(30);
     expect(f.hits('dai_luc_kim_cuong_chuong')).toHaveLength(1);
+    expect(
+      f.events.filter(
+        (e) => e.stage === 'impact' && e.targetId === f.enemies[0]!.id,
+      ).length,
+    ).toBeGreaterThan(1);
     const g = fixture();
     g.cast('dai_luc_kim_cuong_chuong');
     g.enemies[0]!.y = 500;
-    g.steps(12);
+    g.steps(30);
     expect(g.hits('dai_luc_kim_cuong_chuong')).toHaveLength(0);
     const h = fixture();
     h.cast('dai_luc_kim_cuong_chuong');

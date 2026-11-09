@@ -30,6 +30,23 @@ const status = z.strictObject({
   evade: z.boolean().optional(),
   toggle: z.boolean().optional(),
 });
+const dash = z.strictObject({
+  mode: z.literal('dash'),
+  distance: positive,
+  speed: positive,
+  radius: positive,
+  damage: z.number().nonnegative(),
+  stunTicks: count,
+  invulnerable: z.boolean().optional(),
+  backward: z.boolean().optional(),
+  counter: z
+    .strictObject({
+      durationTicks: count.min(1),
+      damage: positive,
+      range: positive,
+    })
+    .optional(),
+});
 const projectile = z.strictObject({
   dragonDive: z
     .strictObject({
@@ -63,6 +80,9 @@ const projectile = z.strictObject({
     .optional(),
   recoveryTicks: count.optional(),
   laneOffsets: z.array(z.number().finite()).min(1).max(8).optional(),
+  comboEmpoweredRadius: positive.optional(),
+  comboDash: dash.optional(),
+  oncePerCast: z.boolean().optional(),
   knockbackChance: z.number().min(0).max(1).optional(),
   mode: z.literal('projectile'),
   damage: positive,
@@ -145,6 +165,7 @@ const arc = z.strictObject({
   windupTicks: count.min(1).optional(),
   durationTicks: count.min(1).optional(),
   originOffset: z.number().finite().nonnegative().optional(),
+  originStartOffset: z.number().finite().nonnegative().optional(),
   knockback: z.number().finite().nonnegative().optional(),
 });
 const allies = z.strictObject({
@@ -263,23 +284,7 @@ export const abilitySchema = z
         attackSpeed: z.number().min(0).max(2).optional(),
         cooldownReduction: z.number().min(0).max(0.8).optional(),
       }),
-      z.strictObject({
-        mode: z.literal('dash'),
-        distance: positive,
-        speed: positive,
-        radius: positive,
-        damage: z.number().nonnegative(),
-        stunTicks: count,
-        invulnerable: z.boolean().optional(),
-        backward: z.boolean().optional(),
-        counter: z
-          .strictObject({
-            durationTicks: count.min(1),
-            damage: positive,
-            range: positive,
-          })
-          .optional(),
-      }),
+      dash,
       z.strictObject({
         mode: z.literal('multi_hit'),
         attackPowerScale: z.number().min(0).max(1).optional(),
@@ -303,7 +308,6 @@ export const abilitySchema = z
             intervalTicks: positive,
           })
           .optional(),
-        comboBurstOnly: z.boolean().optional(),
         guard: z.number().finite().min(0).max(0.85).optional(),
         durationTicks: count.min(1).optional(),
       }),

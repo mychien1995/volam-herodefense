@@ -3,6 +3,18 @@ export const m3dFeedbackTuning = {
   dashRechargeTicks: 240,
   basicKnockbackChance: 0.1,
   shaolin: {
+    laHanRange: 140,
+    viDaStartOffset: 42,
+    diamondPalm: {
+      damage: 65,
+      range: 150,
+      radius: 12,
+      speed: 450,
+      windupTicks: 12,
+      laneDelayTicks: 4,
+      lanes: [-20, 0, 20],
+      empoweredRadius: 34,
+    },
     chainIdleTicks: 60,
     chainCooldownTicks: 30,
     finisher: { damage: 38, range: 300, radius: 28, speed: 480 },
@@ -14,7 +26,7 @@ export const m3dFeedbackTuning = {
       speed: 360,
       stunTicks: 36,
       windupTicks: 9,
-      recoveryTicks: 6,
+      recoveryTicks: 2,
     },
     footForce: {
       damage: 17,
@@ -23,8 +35,7 @@ export const m3dFeedbackTuning = {
       speed: 390,
       lanes: [-18, 0, 18],
       laneDelayTicks: 3,
-      volleys: 2,
-      volleySpacingTicks: 18,
+      dash: { distance: 210, speed: 630, radius: 32, damage: 102 },
     },
     skyPalm: {
       range: 210,

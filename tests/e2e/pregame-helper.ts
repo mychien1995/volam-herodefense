@@ -125,3 +125,52 @@ export async function startTogether(
     await expect(page.locator('#pregame')).toBeHidden({ timeout });
   }
 }
+
+/** Retry lobby clicks only while the authoritative lobby still awaits them. */
+export async function startAuditTogether(
+  roster: ReadonlyArray<readonly [Page, string, string]>,
+  timeout = 20_000,
+) {
+  const host = roster[0]![0];
+  const snapshot = (page: Page) =>
+    page.evaluate<any>('window.__VOLAM__.snapshot()');
+  const button = (page: Page, name: string) =>
+    page.getByRole('button', { name, exact: true });
+  const click = (element: HTMLButtonElement) => element.click();
+  const phase = async () => (await snapshot(host)).state.phase;
+  await expect(async () => {
+    if ((await phase()) === 'WAITING_LOBBY')
+      await button(host, 'Bắt đầu').evaluate(click, undefined, {
+        timeout: 1500,
+      });
+    await expect.poll(phase, { timeout: 1500 }).toBe('SCHOOL_SELECTION');
+  }).toPass({ timeout, intervals: [150, 300] });
+  for (const [page, school, branch] of roster) {
+    for (const choice of [
+      page.locator('#pregame button[data-school=' + school + ']'),
+      page.locator('#pregame button[data-branch=' + branch + ']'),
+    ]) {
+      await expect(async () => {
+        if (
+          (await choice.getAttribute('aria-pressed', { timeout: 1500 })) !==
+          'true'
+        )
+          await choice.evaluate(click, undefined, { timeout: 1500 });
+        await expect(choice).toHaveAttribute('aria-pressed', 'true', {
+          timeout: 1500,
+        });
+      }).toPass({ timeout, intervals: [150, 300] });
+    }
+    const confirmed = async () => {
+      const s = await snapshot(page);
+      return s.state.players[s.sessionId]?.confirmed;
+    };
+    await expect(async () => {
+      if (!(await confirmed()))
+        await button(page, 'Xác nhận').evaluate(click, undefined, {
+          timeout: 1500,
+        });
+      await expect.poll(confirmed, { timeout: 1500 }).toBe(true);
+    }).toPass({ timeout, intervals: [150, 300] });
+  }
+}

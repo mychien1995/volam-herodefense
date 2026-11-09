@@ -21,6 +21,7 @@ import type {
   Ability,
   AreaEffect,
   AllyEffect,
+  ComboSpec,
   Creep,
   Hero,
   MultiHitEffect,
@@ -60,7 +61,27 @@ export function targetDirection(
   hero: Hero,
   range: number,
   config?: SimulationConfig,
+  preferredCombo?: ComboSpec['id'],
 ) {
+  const primed =
+    preferredCombo === undefined
+      ? undefined
+      : new Set(
+          (world.combos ?? [])
+            .filter(
+              (step) =>
+                step.sourceId === hero.id &&
+                step.id === preferredCombo &&
+                step.step === 2 &&
+                step.until > world.tick,
+            )
+            .map((step) => step.targetId),
+        );
+  const isPrimedAhead = (enemy: Creep) => {
+    if (!primed?.has(enemy.id)) return false;
+    const heading = direction(enemy.x - hero.x, enemy.y - hero.y);
+    return heading.x * hero.fx + heading.y * hero.fy >= 0.5;
+  };
   const enemy = [...world.creeps.values()]
     .filter(
       (e) =>
@@ -70,6 +91,7 @@ export function targetDirection(
     )
     .sort(
       (a, b) =>
+        Number(isPrimedAhead(b)) - Number(isPrimedAhead(a)) ||
         distance(a, hero) - distance(b, hero) ||
         (a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
     )[0];
@@ -463,6 +485,13 @@ function strikeArc(
     x: hero.x + heading.fx * (effect.originOffset ?? 0),
     y: hero.y + heading.fy * (effect.originOffset ?? 0),
   };
+  const start =
+    effect.originStartOffset === undefined
+      ? origin
+      : {
+          x: hero.x + heading.fx * effect.originStartOffset,
+          y: hero.y + heading.fy * effect.originStartOffset,
+        };
   if (effect.windupTicks)
     for (const spec of ability.selfStatuses ?? [])
       applyStatus(hero, spec, hero.id, ability.id, world.tick);
@@ -483,8 +512,12 @@ function strikeArc(
       }
       return (
         clearLine(world, hero, enemy, config) &&
-        distance(enemy, origin) <=
-          effect.range + (enemy.stats ?? config.creep).radius &&
+        segmentCircle(
+          start,
+          origin,
+          enemy,
+          effect.range + (enemy.stats ?? config.creep).radius,
+        ) !== undefined &&
         d.x * heading.fx + d.y * heading.fy >= Math.cos(effect.halfAngle)
       );
     })
@@ -627,54 +660,46 @@ export function perform(
 ): void {
   const original = ability.effect;
   if (original.mode === 'dash' && hasStatus(hero, 'root', world.tick)) return;
-  const ready =
-    original.mode === 'multi_hit' &&
-    original.comboBurstOnly &&
-    ability.combo &&
-    (world.combos ?? []).some(
-      (c) =>
-        c.sourceId === hero.id &&
-        c.id === ability.combo!.id &&
-        c.step === 2 &&
-        c.until > world.tick &&
-        (() => {
-          const e = world.creeps.get(c.targetId);
-          if (!e || e.hp <= 0 || !clearLine(world, hero, e, config))
-            return false;
-          const dx = e.x - hero.x,
-            dy = e.y - hero.y;
-          return (
-            dx * hero.fx + dy * hero.fy >= 0 &&
-            Math.abs(dx * hero.fy - dy * hero.fx) <=
-              Math.max(
-                0,
-                ...(original.projectileBurst?.laneOffsets ?? []).map(Math.abs),
-              ) +
-                (original.projectileBurst?.radius ?? 0) +
-                (e.stats ?? config.creep).radius &&
-            distance(e, hero) <=
-              original.range + (e.stats ?? config.creep).radius
-          );
-        })(),
-    );
-  const effect =
-      original.mode === 'multi_hit' &&
-      original.comboBurstOnly &&
-      !ready &&
-      original.projectileBurst
-        ? {
-            ...original,
-            hits: 1,
-            projectileBurst: {
-              ...original.projectileBurst,
-              count: 1,
-              laneOffsets: [0],
-            },
-          }
-        : original,
-    crit = offensiveStats(world, hero.id, config);
+  const dash = original.mode === 'projectile' ? original.comboDash : undefined;
+  const empoweredDash =
+    dash &&
+    !hasStatus(hero, 'root', world.tick) &&
+    (world.combos ?? []).some((step) => {
+      if (
+        step.sourceId !== hero.id ||
+        step.id !== ability.combo?.id ||
+        step.step !== 2 ||
+        step.until <= world.tick
+      )
+        return false;
+      const target = world.creeps.get(step.targetId);
+      const end = {
+        x: hero.x + hero.fx * dash.distance,
+        y: hero.y + hero.fy * dash.distance,
+      };
+      return (
+        target !== undefined &&
+        clearLine(world, hero, target, config) &&
+        (target.x - hero.x) * hero.fx + (target.y - hero.y) * hero.fy >= 0 &&
+        segmentCircle(
+          hero,
+          end,
+          target,
+          dash.radius + (target.stats ?? config.creep).radius,
+        ) !== undefined
+      );
+    });
+  const effect = empoweredDash ? dash : original;
+  if (empoweredDash) stage = 'empowered_dash';
+  const crit = offensiveStats(world, hero.id, config);
   if (effect.mode === 'projectile' && !effect.useFacing) {
-    const aim = targetDirection(world, hero, effect.range, config);
+    const aim = targetDirection(
+      world,
+      hero,
+      effect.range,
+      config,
+      effect.comboEmpoweredRadius === undefined ? undefined : ability.combo?.id,
+    );
     hero.fx = aim.x;
     hero.fy = aim.y;
   }
@@ -749,7 +774,7 @@ export function perform(
       queueProjectiles(
         world,
         hero,
-        ability,
+        dash ? { ...ability, combo: undefined } : ability,
         effect,
         config,
         hero.fx,
@@ -1179,15 +1204,50 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
     }
     if (action.effect.mode === 'projectile') {
       if (world.tick >= action.nextTick && action.remaining > 0) {
+        const effect = action.effect;
+        const ability = action.ability!;
+        const radius = effect.comboEmpoweredRadius;
+        const end = {
+          x: hero.x + action.fx * effect.range,
+          y: hero.y + action.fy * effect.range,
+        };
+        const empowered =
+          radius !== undefined &&
+          (world.combos ?? []).some((step) => {
+            if (
+              step.sourceId !== hero.id ||
+              step.id !== ability.combo?.id ||
+              step.step !== 2 ||
+              step.until <= world.tick
+            )
+              return false;
+            const target = world.creeps.get(step.targetId);
+            return (
+              target !== undefined &&
+              clearLine(world, hero, target, config) &&
+              (target.x - hero.x) * action.fx +
+                (target.y - hero.y) * action.fy >=
+                0 &&
+              segmentCircle(
+                hero,
+                end,
+                target,
+                radius + (target.stats ?? config.creep).radius,
+              ) !== undefined
+            );
+          });
+        const released = empowered
+          ? { ...effect, count: 1, laneOffsets: [0], radius }
+          : effect;
         queueProjectiles(
           world,
           hero,
-          action.ability!,
-          action.effect,
+          ability,
+          released,
           config,
           action.fx,
           action.fy,
-          'travel',
+          empowered ? 'empowered_travel' : 'travel',
           {},
           action,
         );
@@ -1195,7 +1255,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           world,
           hero,
           action.abilityId,
-          'release',
+          empowered ? 'empowered_release' : 'release',
           action.effect.range,
           action,
         );
@@ -1275,7 +1335,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           action.abilityId,
           action.rawDamage,
           config,
-          action,
+          { ...action, combo: action.ability?.combo },
         );
         if (
           landed &&
