@@ -285,7 +285,7 @@ const descriptions = [
   'Thường phóng ba bàn chân lần lượt trên, giữa, dưới. Phát Động B: Toàn Phong → Ca Diệp → Vô Ảnh trên cùng mục tiêu trong 6s để lướt đá bay.',
   'Tạm giảm sát thương, kháng choáng và cưỡng bức di chuyển; vẫn nhận sát thương.',
   'Tuyệt kỹ: Phật sau lưng, thiên chưởng diện rộng, lưu chữ Phạn gây sát thương một lần mỗi địch bước vào. Bản thân giữ thủ thế.',
-  'Chém rộng phía trước và làm chậm địch trúng đòn.',
+  'La Hán quét trường đao trong cung trước mặt và làm chậm địch trúng đòn.',
   'Hào quang đi theo người thi triển, tăng phòng thủ cho đồng đội sống trong tầm; không cộng dồn.',
   'Sư tử hống quanh người gây sát thương, giảm giáp và làm chậm diện rộng.',
   'Một nhịp hồi sinh lực cho bản thân và đồng đội sống trong tầm. Không hồi tượng, không hồi sinh.',

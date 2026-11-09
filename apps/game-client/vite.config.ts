@@ -37,6 +37,7 @@ export default defineConfig({
         visualUpgrade: 'visual-upgrade-2.html',
         renovationPreview: 'renovation-preview.html',
         voDangQuyenPreview: 'vo-dang-quyen-preview.html',
+        shaolinDaoPreview: 'shaolin-dao-preview.html',
       },
     },
   },

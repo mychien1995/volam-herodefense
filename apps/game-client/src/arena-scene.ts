@@ -64,6 +64,7 @@ import {
   type ArenaCreepManifest,
 } from './arena-creeps.js';
 import { FloatingDamage } from './floating-damage.js';
+import { preloadShaolinDaoArt, ShaolinDaoMatchArt } from './shaolin-dao-art.js';
 import { SkillVfx } from './skill-vfx.js';
 import { ArenaCreepEffects } from './arena-creep-effects.js';
 import {
@@ -87,6 +88,7 @@ interface EntityView {
   lastLevel?: number;
 }
 export class ArenaScene extends Phaser.Scene {
+  private readonly shaolinDao = new ShaolinDaoMatchArt(this);
   private polished = true;
   onNpc: (menu: 'merchant' | 'pvp') => void = () => {};
   private zoneId = 'arena';
@@ -241,8 +243,13 @@ export class ArenaScene extends Phaser.Scene {
   preload(): void {
     preloadRuntimeArtReview(this);
     preloadArt(this);
+    preloadShaolinDaoArt(this);
   }
   create(): void {
+    this.shaolinDao.register();
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
+      this.shaolinDao.clear(),
+    );
     this.creepCombatArt = new CreepCombatArt(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
       this.creepCombatArt?.clear(),
@@ -328,6 +335,7 @@ export class ArenaScene extends Phaser.Scene {
   setSnapshot(snapshot: LobbyState | undefined, sessionId = ''): void {
     if (runtimeArtReviewPaused(this)) return;
     if (this.sessionId !== sessionId) {
+      this.shaolinDao.clear();
       this.coMoEffects?.clear();
       this.lastEvent = 0;
       this.vfx?.clear();
@@ -347,6 +355,7 @@ export class ArenaScene extends Phaser.Scene {
     if (this.ready && zoneId !== this.zoneId) this.drawZone(zoneId);
   }
   private drawZone(zoneId: string): void {
+    this.shaolinDao.clear();
     this.story?.destroy();
     this.story = undefined;
     this.bossShouts?.clear();
@@ -484,6 +493,7 @@ export class ArenaScene extends Phaser.Scene {
   override update(_time: number, delta: number): void {
     if (!this.ready) return;
     const state = this.snapshot;
+    this.shaolinDao.sync(state, this.zoneId);
     const active = new Set<string>();
     const render = (
       id: string,
@@ -541,24 +551,27 @@ export class ArenaScene extends Phaser.Scene {
             this.zoneId,
           ))
         : undefined;
-      const cast: FeedbackPose | undefined = !enemy
-        ? revisedBasicBody(
-            this,
-            this.vfx?.actorCast(
-              id,
-              actor.castAbilityId ?? '',
-              actor.pose,
+      const daoPose = enemy ? undefined : this.shaolinDao.pose(state, id);
+      const cast: FeedbackPose | undefined =
+        daoPose ??
+        (!enemy
+          ? revisedBasicBody(
+              this,
+              this.vfx?.actorCast(
+                id,
+                actor.castAbilityId ?? '',
+                actor.pose,
+                actor.fx,
+                actor.fy,
+                actor.hp,
+              ),
+            )
+          : m3dBambooPose(
+              actor.archetypeId,
+              actor.hp <= 0 ? 'death' : actor.pose,
               actor.fx,
               actor.fy,
-              actor.hp,
-            ),
-          )
-        : m3dBambooPose(
-            actor.archetypeId,
-            actor.hp <= 0 ? 'death' : actor.pose,
-            actor.fx,
-            actor.fy,
-          );
+            ));
       const texture =
         cast?.texture ??
         (enemy
@@ -590,7 +603,12 @@ export class ArenaScene extends Phaser.Scene {
       view.sprite
         .setPosition(Math.round(view.smoothX), Math.round(view.smoothY))
         .setDepth(view.sprite.y);
-      if (view.sprite.texture.key !== texture)
+      if (view.sprite.texture.key !== texture) {
+        if (daoPose) {
+          view.sprite.setFlip(false, false).setRotation(0);
+          view.sprite.setData('renovation', undefined);
+          view.sprite.setData('renovation-action', undefined);
+        }
         view.sprite
           .setTexture(
             texture,
@@ -606,6 +624,7 @@ export class ArenaScene extends Phaser.Scene {
               art?.footPivot ??
               actorFootPivot(this, texture)),
           );
+      }
       const direction = facing(actor.fx, actor.fy);
       // Keep this prototype's authored one-shots complete across a short/late
       // network pose. This never changes movement, combat or server clocks.
@@ -661,16 +680,17 @@ export class ArenaScene extends Phaser.Scene {
           ? undefined
           : renovationActorId(actor.archetypeId, actor.invasionWave, this.zoneId)
         : heroTexture(actor.basicId, actor.schoolId);
-      presentRenovatedBody(
-        this,
-        view.sprite,
-        renovatedId,
-        actor.hp <= 0 ? 'death' : !enemy && cast ? 'action' : pose.state,
-        actor.fx,
-        actor.fy,
-        cast?.abilityId ?? actor.castAbilityId ?? '',
-        cast,
-      );
+      if (!daoPose)
+        presentRenovatedBody(
+          this,
+          view.sprite,
+          renovatedId,
+          actor.hp <= 0 ? 'death' : !enemy && cast ? 'action' : pose.state,
+          actor.fx,
+          actor.fy,
+          cast?.abilityId ?? actor.castAbilityId ?? '',
+          cast,
+        );
       if (!enemy) {
         const tick = this.zoneId === 'arena'
           ? state?.tick : state?.dungeons.get(this.zoneId)?.tick;
@@ -936,7 +956,15 @@ export class ArenaScene extends Phaser.Scene {
         targetId: event.targetId,
       });
       if (this.impacts.length > 60) this.impacts.shift();
-    } else this.vfx?.event(event);
+    } else if (
+      !this.shaolinDao.event(
+        event,
+        this.snapshot,
+        this.actors.get(event.sourceId)?.sprite,
+      )
+    ) {
+      this.vfx?.event(event);
+    }
     // A fast school can begin another valid A before the old server pose
     // returns to idle. Restart only on a new authoritative attack, never hits.
     if (event.kind === 'attack' && !forest) {
@@ -962,6 +990,7 @@ export class ArenaScene extends Phaser.Scene {
     }
   }
   reviewClearTransientEffects(): void {
+    this.shaolinDao.clear();
     this.vfx?.clear();
     this.coMoEffects?.clear();
     this.damage?.clear();
@@ -1030,6 +1059,14 @@ export class ArenaScene extends Phaser.Scene {
       kimFrame: this.kim?.reviewState(),
       damage: this.damage?.inspect(),
       skills: this.vfx?.inspect(),
+      shaolinDao: {
+        effects: this.shaolinDao.inspect(),
+        lotusRings: this.children.list
+          .filter((node) => node.name === 'leaf-halo')
+          .map((node) => node as Phaser.GameObjects.Image)
+          .filter((node) => node.frame.name === 'lotus_ring')
+          .map(({ x, y, depth }) => ({ x, y, depth })),
+      },
       creepEffects: this.creepEffects?.inspect(),
       creepCombat: this.creepCombatArt?.inspect(),
       coMoEffects: this.coMoEffects?.inspect(),

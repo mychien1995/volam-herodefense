@@ -4,6 +4,134 @@ import { m1Config, skillArt } from '@volam/game-data';
 import { joinWaiting, startTogether } from './pregame-helper.js';
 import { moveTo } from './m3c1-helpers.js';
 
+test('Thiếu Lâm Đao · approved artwork plays on both match clients', async ({
+  browser,
+}) => {
+  const contexts = await Promise.all([
+    browser.newContext(),
+    browser.newContext(),
+  ]);
+  try {
+    const a = await contexts[0]!.newPage();
+    const b = await contexts[1]!.newPage();
+    const errors = [monitor(a), monitor(b)];
+    const url = '/?debug=1&skillPreview=1&shaolinDaoArt=1';
+    await joinWaiting(a, 'Dao Art', undefined, url, 45000);
+    const { roomId, sessionId } = await read(a);
+    await joinWaiting(b, 'Dao Observer', roomId, url, 45000);
+    await startTogether([a, b], ['thieu_lam', 'vo_dang'], 45000);
+
+    const observe = (p: Page) =>
+      p.evaluate<{
+        actors: Array<{
+          id: string;
+          frame: string;
+          texture: string;
+          x: number;
+          depth: number;
+        }>;
+        shaolinDao: {
+          effects: Array<{
+            owner: string;
+            frame: string;
+            x: number;
+            depth: number;
+            scale: number;
+          }>;
+          lotusRings: Array<{ depth: number }>;
+        };
+      }>('window.__VOLAM__.presentation()');
+    const pose = async (p: Page) =>
+      (await observe(p)).actors.find((h) => h.id === sessionId);
+    const expectPeers = async (
+      predicate: (view: Awaited<ReturnType<typeof observe>>) => boolean,
+    ) =>
+      Promise.all(
+        [a, b].map((p) =>
+          expect
+            .poll(async () => predicate(await observe(p)), {
+              intervals: [35, 50],
+            })
+            .toBe(true),
+        ),
+      );
+    const equipQ = async (id: string) => {
+      await a.locator('#preview-skill').selectOption(id);
+      await a.locator('#preview-equip').click();
+      await expect.poll(async () => (await hero(a)).qSkill).toBe(id);
+    };
+    const cast = async (key: string) => {
+      await a.locator('#game canvas').focus();
+      await a.keyboard.press(key);
+    };
+    const accepted = (ability: string, kind: string) =>
+      expect
+        .poll(async () =>
+          (await read(b)).events.some(
+            (event) =>
+              event.sourceId === sessionId &&
+              event.abilityId === ability &&
+              event.kind === kind,
+          ),
+        )
+        .toBe(true);
+
+    await a.locator('#preview-basic').selectOption('thieu_lam_dao');
+    await expect
+      .poll(async () => (await hero(a)).basicId)
+      .toBe('thieu_lam_dao');
+    await expect
+      .poll(async () => (await pose(b))?.texture)
+      .toBe('shaolin-dao-review');
+    await cast('ArrowRight');
+    await expect.poll(async () => (await pose(b))?.frame).toBe('idle_right');
+    await a.getByRole('button', { name: 'Target line' }).click();
+    await expect
+      .poll(async () => Object.keys((await read(a)).state.creeps))
+      .toContain('preview_' + sessionId + '_0');
+    await cast('KeyA');
+    await expectPeers((view) =>
+      view.shaolinDao.effects.some(
+        (e) => e.owner === sessionId && e.frame === 'crescent',
+      ),
+    );
+    await accepted('thieu_lam_dao', 'attack');
+
+    await equipQ('tru_ta');
+    await cast('KeyQ');
+    await expectPeers((view) => {
+      const h = view.actors.find((actor) => actor.id === sessionId);
+      return (
+        !!h &&
+        view.shaolinDao.effects.some(
+          (e) =>
+            e.owner === sessionId && e.frame === 'arhat' && e.depth < h.depth,
+        ) &&
+        view.shaolinDao.effects.some(
+          (e) =>
+            e.owner === sessionId &&
+            e.frame === 'sweep' &&
+            Math.abs(e.x + 84.5 * e.scale - h.x - 202) < 1 &&
+            e.depth > h.depth,
+        )
+      );
+    });
+    await accepted('tru_ta', 'hit');
+    await equipQ('nhu_lai_thien_diep');
+    await cast('KeyQ');
+    await expectPeers(
+      (view) =>
+        view.actors.some(
+          (h) => h.id === sessionId && h.frame === 'lotus_right',
+        ) && view.shaolinDao.lotusRings.length === 1,
+    );
+    await accepted('nhu_lai_thien_diep', 'cast');
+    expect(errors.flat()).toEqual([]);
+  } finally {
+    await Promise.all(contexts.map((context) => context.close()));
+  }
+});
+
 test('Thiên Sơn Đao · Tam Liên Trảm opens above the hotbar and resolves three cuts', async ({ page }) => {
   const errors = monitor(page);
   const preview = '/?debug=1&skillPreview=1';

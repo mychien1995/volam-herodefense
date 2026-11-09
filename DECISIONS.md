@@ -1,3 +1,7 @@
+## Thiếu Lâm Đao · bản tích hợp M3D · 2026-11-09
+
+Trận thường dùng trường đao Kim Cang (1C), đao khí lưỡi liềm (2A), La Hán quét Tru Tà (3A) và đao sen cùng vòng sen Như Lai Thiên Diệp (4A). Tru Tà có tầm cơ bản 190 đơn vị và tăng 4 đơn vị mỗi bậc. Phaser đặt mép lưỡi quét theo bán kính trong sự kiện thi triển từ server. Đao khí của A là phần trình diễn của đòn cận chiến. [Chi tiết](docs/SHAOLIN_DAO_REWORK.md).
+
 ## Thiếu Lâm Quyền · bản duyệt M3D · 2026-11-09
 
 Người dùng duyệt bản Phaser và yêu cầu đưa vào `milestone/m3d`. Bốn thức đánh thường dùng cùng mẫu nhân vật với sprite đứng yên và đi bộ, kèm quyền kình và cước kình vàng. La Hán Quyền có tầm cơ bản 140, với ba nhịp đấm xuống đất. Vô Ảnh thường phóng ba cước kình bậc thang. Phát Động B hợp lệ đổi thành đá bay lướt có va chạm server và hiệu ứng gió cuốn bụi sát đất. [Chi tiết](docs/SHAOLIN_QUYEN_REWORK.md).

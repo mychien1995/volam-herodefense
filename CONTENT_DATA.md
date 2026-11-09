@@ -153,7 +153,7 @@ Canonical IDs/names remain unchanged. Thiếu Lâm Quyền A now cycles left fis
 | `vo_anh_cuoc` | **Vô Ảnh Cước** | Quyền | One centered foot normally; valid same-target B1+B2 enables three parallel lanes twice. |
 | `kim_cang_bat_hoai` | **Kim Cang Bất Hoại** | Quyền | Short damage reduction and interrupt resistance; survive slow commitment. |
 | `nhu_lai_niet_ban` | **Như Lai Niết Bàn** | Quyền U | Buddha and sky palm, then a Sanskrit field hitting each target on first entry once/cast; retained defensive buff. |
-| `tru_ta` | **Tru Tà** | Đao | Wide frontal slash that slows; consistent melee wave control. |
+| `tru_ta` | **Tru Tà** | Đao | La Hán quét trường đao và làm chậm địch trong cung. Tầm bậc 1–4 là 190/194/198/202. |
 | `kim_quang_ho_tran` | **Kim Quang Hộ Trận** | Đao | Area defense aura for allies; team protection. |
 | `tam_gioi_quy_thien` | **Sư Tử Hống** | Đao | Wide lion-roar AoE damage, defense reduction and slow. |
 | `bat_dong_minh_vuong` | **Bất Động Minh Vương** | Đao | Area healing pulse (retained from previous proposal); **OPEN** whether changed to mitigation/protection due to name. |

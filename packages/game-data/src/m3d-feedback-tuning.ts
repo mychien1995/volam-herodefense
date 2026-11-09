@@ -43,7 +43,7 @@ export const m3dFeedbackTuning = {
       fieldDamage: 36,
       fieldDurationTicks: 90,
     },
-    exorcismRange: 180,
+    exorcismRange: 190,
     roar: { range: 210, slow: 0.35 },
   },
   caiBang: {

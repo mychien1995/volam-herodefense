@@ -76,6 +76,7 @@ export function qaWorkflowSession(mode, args = [], env = process.env) {
         'playwright.vo-dang-quyen.config.ts',
         'playwright.vo-dang-kiem.config.ts',
         'playwright.diamond-palm.config.ts',
+        'playwright.shaolin-dao.config.ts',
       ].includes(name))
   ) {
     const pathsEnvironment = { ...env };

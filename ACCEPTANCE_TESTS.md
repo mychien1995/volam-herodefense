@@ -1,3 +1,8 @@
+## Thiếu Lâm Đao · 2026-11-09
+
+- Tru Tà bậc 1 trúng bia có mép ở 189 đơn vị, bỏ qua bia có mép ở 191 và địch ngay sau lưng. Đòn lan làm chậm và gây ít sát thương hơn mục tiêu chính. Tầm bậc 1–4 là 190/194/198/202.
+- Hai client Phaser trong phòng thường sáu người thấy trường đao, đao khí A, La Hán sau nhân vật, mép cung Tru Tà ở bán kính sự kiện server và vòng sen Như Lai Thiên Diệp. Cả phòng nhận cùng kết quả hit.
+
 ## Thiếu Lâm Quyền rework · 2026-11-09
 
 - Q La Hán trúng bia ở 135 đơn vị. Bấm nhanh Q → W → E khi có địch gần hơn ngoài cung vẫn phóng chưởng lớn vào bia đã trúng Q và W. Ở thế Cước, bấm tiếp Q/W khi E đang chờ vẫn đá lướt đúng một lần.

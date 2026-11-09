@@ -8,6 +8,11 @@ import {
 import { m1Config, skillArt } from '@volam/game-data';
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
+import {
+  shaolinDaoAtlas,
+  shaolinDaoScale,
+  usesShaolinDaoArt,
+} from './shaolin-dao-art.js';
 import raw from './approved-skill-assets.generated.json' with { type: 'json' };
 import diamondPalm from './diamond-palm-v05.json' with { type: 'json' };
 import { feedbackArt } from './feedback-art.js';
@@ -711,17 +716,28 @@ export class ApprovedSkillVfx {
       const p = this.point(area.ownerId);
       if (!p) return;
       activeHalos.add(area.ownerId);
+      const lotus = usesShaolinDaoArt(this.scene, state, area.ownerId);
+      const texture = lotus ? shaolinDaoAtlas : 'leaf-halo';
       let halo = this.leafHalos.get(area.ownerId);
+      if (halo && halo.texture.key !== texture) {
+        halo.destroy();
+        halo = undefined;
+      }
       if (!halo) {
-        halo = this.scene.add.image(p.x, p.y, 'leaf-halo').setName('leaf-halo');
-        halo.setScale(0.32);
+        halo = this.scene.add
+          .image(p.x, p.y, texture, lotus ? 'lotus_ring' : undefined)
+          .setName('leaf-halo');
+        halo.setScale(lotus ? shaolinDaoScale : 0.32);
         this.leafHalos.set(area.ownerId, halo);
       }
       halo
-        .setPosition(Math.round(p.x), Math.round(p.y - 29))
+        .setPosition(
+          Math.round(p.x),
+          Math.round(p.y - (lotus ? 72 * shaolinDaoScale : 29)),
+        )
         .setDepth(p.y - 2)
-        .setRotation(now / 2800)
-        .setAlpha(0.8 + Math.sin(now / 190) * 0.13);
+        .setRotation(lotus ? 0 : now / 2800)
+        .setAlpha(lotus ? 1 : 0.8 + Math.sin(now / 190) * 0.13);
     });
     for (const [id, halo] of this.leafHalos) {
       if (activeHalos.has(id)) continue;

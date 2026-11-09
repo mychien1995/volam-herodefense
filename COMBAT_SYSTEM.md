@@ -1,3 +1,7 @@
+## Tầm Tru Tà · 2026-11-09
+
+Server dùng bán kính 190/194/198/202 ở bậc 1–4. Mục tiêu trúng khi tâm nằm trong góc đánh, mép thân chạm vùng quét và có đường nhìn. Sát thương lan và làm chậm dùng quy tắc Tru Tà hiện hành. Client căn mép vệt quét theo bán kính sự kiện cast.
+
 ## Tầm La Hán và nhịp Phát Động · 2026-11-09
 
 La Hán Quyền có tầm 140 đơn vị theo cung đánh trước mặt. Đại Lực ưu tiên địch đã trúng cả Q và W nếu địch còn ở trong tầm, trong cung trước mặt và có đường bắn. Hướng chưởng chốt khi bấm E. Ở thế Cước, Q/W đang hồi chiêu giữ nguyên lệnh E đã đệm. Ca Diệp còn 2 tick hồi thế sau khi phóng ụ đất. Vô Ảnh vẫn chờ sát thương thật trên cùng mục tiêu để Phát Động.

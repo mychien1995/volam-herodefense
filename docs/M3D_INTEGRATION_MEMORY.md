@@ -1,3 +1,7 @@
+## Thiếu Lâm Đao · 2026-11-09
+
+Bộ 1C/2A/3A/4A vào trận thường với nhánh Đao. Tru Tà tăng từ 180 lên 190 đơn vị ở bậc 1, bậc 4 đạt 202. Cung quét lấy bán kính theo sự kiện cast của server. [Chi tiết](SHAOLIN_DAO_REWORK.md).
+
 ## Thiếu Lâm Quyền đã duyệt — 2026-11-09
 
 Đòn A dùng bốn tư thế cùng mẫu nhân vật với atlas đứng yên và đi bộ. La Hán Quyền đấm xuống đất ba nhịp với tầm cơ bản 140. Đại Lực thường phóng ba khí chưởng bậc thang và ưu tiên mục tiêu đã trúng Q/W để phóng một chưởng lớn. Vô Ảnh thường phóng ba cước kình, khi Phát Động B thì lướt đá 210 đơn vị. Q/W đang hồi chiêu giữ nguyên lệnh E đã đệm. Cả hai Phát Động dựa trên hit thật cùng mục tiêu ở server. [Kiểm chứng](SHAOLIN_QUYEN_REWORK.md).

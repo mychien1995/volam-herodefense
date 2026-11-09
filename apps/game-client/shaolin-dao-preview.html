@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Thiếu Lâm Đao · Duyệt hình ảnh</title>
+  </head>
+  <body>
+    <main id="visual-viewport" aria-label="Arena duyệt hình ảnh Thiếu Lâm Đao">
+      <div id="visual-game"></div>
+      <div class="identity overlay" style="padding-left: 14px">
+        <div>
+          <strong>THIẾU LÂM ĐAO</strong>
+          <span>Duyệt hình ảnh · 1C · 2A · 3A · 4A</span>
+        </div>
+      </div>
+      <section class="hotbar overlay" aria-label="Hiệu ứng Thiếu Lâm Đao">
+        <div id="hotbar-buttons">
+          <button data-cast="a" disabled><b>A</b>Đao khí</button>
+          <button data-cast="q" disabled><b>Q</b>Tru Tà</button>
+          <button data-cast="t" disabled aria-pressed="false">
+            <b>T</b>Như Lai Thiên Diệp
+          </button>
+        </div>
+        <small>Phím mũi tên để di chuyển · Bấm lại T để tắt</small>
+      </section>
+      <output id="skill-name" aria-live="polite"></output>
+    </main>
+    <script type="module" src="/src/shaolin-dao-preview.ts"></script>
+  </body>
+</html>

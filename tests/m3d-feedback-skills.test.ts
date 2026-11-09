@@ -10,14 +10,14 @@ import {
 import type { CombatEvent } from '@volam/game-core';
 import { m1Config } from '@volam/game-data';
 
-function setup(skill = 'hoanh_tao_cuoc') {
+function setup(skill = 'hoanh_tao_cuoc', seed = 42) {
   const c = structuredClone(m1Config);
   c.collision = [];
   c.creepSpawns = [];
   c.creepRespawn = false;
   c.critChance = 0;
   c.creep.defense = 0;
-  const w = createWorld(c),
+  const w = createWorld(c, seed),
     h = addHero(w, 'hero', 'hero', c);
   Object.assign(h, {
     x: 500,
@@ -53,6 +53,12 @@ function setup(skill = 'hoanh_tao_cuoc') {
   return { c, w, h, events, step, target, cast, attack };
 }
 describe('M3D school gameplay reworks', () => {
+  it('Tru Tà retains its rank range increments in fixed builds', () => {
+    const ranks = m1Config.progression!.skills['tru_ta']!.ranks;
+    expect(
+      ranks.map(({ effect }) => effect.mode === 'arc' && effect.range),
+    ).toEqual([190, 194, 198, 202]);
+  });
   it('Ca Diệp remains in place, pierces ALL path targets, stuns and damages each once', () => {
     const s = setup();
     const targets = [
@@ -197,4 +203,30 @@ describe('M3D school gameplay reworks', () => {
     expect(e.hp).toBeLessThan(10000);
     expect(t.w.projectiles.size).toBe(0);
   });
+  it.each([17, 42, 113])(
+    'Tru Tà reaches the new edge and retains its arc and cleave (seed %i)',
+    (seed) => {
+      const s = setup('tru_ta', seed);
+      const inside = 189 + s.c.creep.radius;
+      const primary = s.target('edge', s.h.x + inside);
+      const secondary = s.target(
+        'flank',
+        s.h.x + inside * Math.cos(Math.PI / 4),
+        s.h.y + inside * Math.sin(Math.PI / 4),
+      );
+      const outside = s.target('outside', s.h.x + 191 + s.c.creep.radius);
+      const rear = s.target('rear', s.h.x - 50);
+      s.cast();
+      const hits = s.events.filter(
+        (e) => e.kind === 'hit' && e.abilityId === 'tru_ta',
+      );
+      expect(hits.map((e) => e.targetId)).toEqual([primary.id, secondary.id]);
+      expect(hits[1]!.damage).toBeLessThan(hits[0]!.damage);
+      expect(hasStatus(primary, 'slow', s.w.tick)).toBe(true);
+      expect(hasStatus(secondary, 'slow', s.w.tick)).toBe(true);
+      expect(outside.hp).toBe(10000);
+      expect(rear.hp).toBe(10000);
+      expect(s.w.projectiles.size).toBe(0);
+    },
+  );
 });
