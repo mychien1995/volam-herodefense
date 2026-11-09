@@ -177,22 +177,11 @@ export class RenovationFeedback {
     }
     const active = new Set<string>();
     state?.projectiles.forEach((p, id) => {
-      if (renovationRevisionEnabled() && p.abilityId === 'luong_nghi_thu')
-        return;
-      if (
-        !['luong_nghi_thu', 'nhu_lai_thien_diep'].includes(p.abilityId) ||
-        p.zoneId !== zone
-      )
-        return;
+      if (p.abilityId !== 'nhu_lai_thien_diep' || p.zoneId !== zone) return;
       active.add(id);
       let image = this.shots.get(id);
       if (!image) {
-        image = this.image(
-          p.abilityId === 'luong_nghi_thu'
-            ? 'luong_nghi_disc'
-            : 'nhu_lai_blade',
-          p.abilityId,
-        );
+        image = this.image('nhu_lai_blade', p.abilityId);
         this.shots.set(id, image);
       }
       // The authored source travels right. Apply the server velocity exactly once.

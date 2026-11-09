@@ -7,6 +7,9 @@ import {
   submitInput,
   hasStatus,
   removeHero,
+  emptyInventory,
+  transactMerchant,
+  type Command,
 } from '@volam/game-core';
 import { m1Config, abilitySchema } from '@volam/game-data';
 import { hurt } from '../packages/game-core/src/combat.js';
@@ -192,7 +195,16 @@ describe('approved animation change authoritative mechanics', () => {
       expect(hasStatus(f.hero, 'guard_counter', f.world.tick)).toBe(
         raw <= 1000,
       );
-      if (raw > 1000) expect(released[0]!.damage).toBe(received);
+      if (raw > 1000) {
+        expect(released[0]!.damage).toBe(received);
+        submitInput(f.world, f.hero.id, f.hero.lastSequence + 1, {
+          kind: 'move',
+          x: 0,
+          y: 1,
+        });
+        f.step(1);
+        expect(f.hero.y).toBeGreaterThan(500);
+      }
     },
   );
   it('accumulates actual shield/defense/DOT-adjusted HP loss and reflects it radially without crit/growth or a second 70% reduction', () => {
@@ -252,6 +264,72 @@ describe('approved animation change authoritative mechanics', () => {
     expect(guard.receivedDamage).toBeCloseTo(30);
     expect(f.hero.mana).toBe(mana);
   });
+  it.each(['hp_small', 'mp_small'] as const)(
+    'locks movement and combat through guard expiry while allowing %s',
+    (potionId) => {
+      const f = fixture();
+      f.hero.skillIds![1] = 'nhan_kiem_hop_nhat';
+      f.hero.inventory = emptyInventory();
+      f.hero.inventory.potions[potionId] = 1;
+      f.hero.hp -= 100;
+      f.hero.mana -= 100;
+      f.cast();
+      const origin = { x: f.hero.x, y: f.hero.y, fx: f.hero.fx, fy: f.hero.fy };
+      const input = (command: Command) =>
+        submitInput(f.world, f.hero.id, f.hero.lastSequence + 1, command);
+      const attemptCombat = () => {
+        input({ kind: 'move', x: 0, y: 1 });
+        input({ kind: 'basic' });
+        input({ kind: 'dash' });
+        input({ kind: 'cast', slot: 1 });
+        f.step(1);
+      };
+      const potion = f.config.economy!.potions[potionId];
+      const resource = potion.resource === 'hp' ? 'hp' : 'mana';
+      const before = f.hero[resource];
+      expect(
+        transactMerchant(
+          f.hero,
+          f.config,
+          {
+            inArena: false,
+            matchTick: f.world.tick,
+            worldTick: f.world.tick,
+          },
+          0,
+          { action: 'use-potion', potionId },
+        ),
+      ).toBeUndefined();
+      expect(f.hero[resource]).toBe(before + potion.amount);
+      expect(f.hero.inventory.potions[potionId]).toBe(0);
+
+      const mana = f.hero.mana;
+      attemptCombat();
+      expect(f.hero).toMatchObject(origin);
+      expect(f.hero.mana).toBe(mana);
+      expect(f.world.events).toEqual([]);
+      const until = f.hero.statuses!.find(
+        (s) => s.kind === 'guard_counter',
+      )!.until;
+      f.step(until - f.world.tick - 2);
+      attemptCombat();
+      expect(f.hero).toMatchObject(origin);
+      expect(f.world.events).toEqual([]);
+
+      input({ kind: 'cast', slot: 1 });
+      f.step(1);
+      expect(f.hero.y).toBeGreaterThan(origin.y);
+      expect(f.world.events).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ stage: 'counter_release' }),
+          expect.objectContaining({
+            kind: 'cast',
+            abilityId: 'nhan_kiem_hop_nhat',
+          }),
+        ]),
+      );
+    },
+  );
   it('waits exactly five seconds and releases once even with no incoming damage', () => {
     const f = fixture();
     f.cast();
@@ -301,28 +379,23 @@ describe('approved animation change authoritative mechanics', () => {
     f.step(150);
     expect(f.enemy.hp).toBe(10000);
   });
-  it('fires 13 eight-way bursts over 5s, snapshots straight headings and cleans up on death', () => {
+  it('skyfall falls back to facing, keeps the mark on walkable ground and cancels on death', () => {
     const f = fixture('van_kiem_quy_tong');
     f.world.creeps.clear();
+    const origin = { x: f.hero.x, y: f.hero.y };
+    f.config.collision = [
+      { x: origin.x + 100, y: origin.y - 50, width: 8, height: 100 },
+    ];
     f.cast();
-    expect(f.world.projectiles.size).toBe(8);
-    const first = [...f.world.projectiles.values()].map((p) => [p.vx, p.vy]);
-    expect(
-      new Set(first.map(([x, y]) => Math.atan2(y!, x!).toFixed(3))).size,
-    ).toBe(8);
-    const shots = new Set([...f.world.projectiles.keys()]);
-    for (let i = 0; i < 144; i++) {
-      f.step(1);
-      for (const id of f.world.projectiles.keys()) shots.add(id);
-    }
-    expect(shots.size).toBe(104);
-    expect(f.world.actions![0]!.remaining).toBe(0);
-    expect(f.world.projectiles.size).toBeGreaterThan(0);
+    expect(f.world.areas).toHaveLength(1);
+    expect(f.world.areas![0]!.x).toBeGreaterThan(origin.x);
+    expect(f.world.areas![0]!.x).toBeLessThan(origin.x + 100);
     expect(hasStatus(f.hero, 'channel', f.world.tick)).toBe(true);
-    f.step(6);
+    f.step(36);
     expect(hasStatus(f.hero, 'channel', f.world.tick)).toBe(false);
     f.hero.hp = 0;
-    f.step(1);
+    f.step(84);
+    expect(f.world.areas).toEqual([]);
     expect(f.world.projectiles.size).toBe(0);
     expect(f.world.shots).toHaveLength(0);
   });

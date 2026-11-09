@@ -11,6 +11,8 @@ export default defineConfig({
     '**/invasion.spec.ts',
     '**/skills.spec.ts',
     '**/progression.spec.ts',
+    '**/vo-dang-quyen-rework.spec.ts',
+    '**/vo-dang-kiem-rework.spec.ts',
   ],
   fullyParallel: false,
   workers: 1,

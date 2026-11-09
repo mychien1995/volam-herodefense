@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 36;
+export const PROTOCOL_VERSION = 38;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -203,6 +203,7 @@ export const skillPreviewActionSchema = z.strictObject({
 });
 export const combatEventSchema = z.strictObject({
   tick: z.number().int().nonnegative().optional(),
+  hitIndex: z.number().int().nonnegative().optional(),
   protocolVersion: z.literal(PROTOCOL_VERSION),
   id: z.number().int().positive(),
   kind: z.enum(['attack', 'hit', 'death', 'cast', 'effect', 'pulse']),
@@ -369,6 +370,14 @@ export const CharacterStatsState = schema(
   },
   'CharacterStats',
 );
+export const SkillChargeState = schema(
+  {
+    count: t.number(),
+    capacity: t.number(),
+    rechargeTicks: t.number(),
+  },
+  'SkillCharge',
+);
 export const BuildState = schema(
   {
     enabled: t.boolean().default(false),
@@ -381,6 +390,7 @@ export const BuildState = schema(
     available: t.number().default(1),
     surplus: t.number().default(0),
     ranks: t.map('number'),
+    charges: t.map(SkillChargeState),
     stats: t.ref(CharacterStatsState).default(() => new CharacterStatsState()),
     sources: t.string().default('{}'),
   },
@@ -544,6 +554,10 @@ export const DungeonState = schema(
 export const AreaState = schema(
   {
     startedAt: t.number().default(0),
+    launchX: t.number().default(0),
+    launchY: t.number().default(0),
+    launchFx: t.number().default(0),
+    launchFy: t.number().default(0),
     x: t.number(),
     y: t.number(),
     radius: t.number(),
@@ -554,6 +568,7 @@ export const AreaState = schema(
   },
   'CombatArea',
 );
+export type AreaState = SchemaType<typeof AreaState>;
 export type DungeonState = SchemaType<typeof DungeonState>;
 export const DefenseState = schema(
   {

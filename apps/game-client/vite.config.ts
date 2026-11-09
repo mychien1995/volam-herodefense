@@ -36,6 +36,7 @@ export default defineConfig({
         bacCaiPreview: 'bac-cai-preview.html',
         visualUpgrade: 'visual-upgrade-2.html',
         renovationPreview: 'renovation-preview.html',
+        voDangQuyenPreview: 'vo-dang-quyen-preview.html',
       },
     },
   },

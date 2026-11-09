@@ -1,3 +1,7 @@
+## Võ Đang Kiếm — protocol 38
+
+Server giữ số lượt Vạn Kiếm qua các mốc hồi tuần tự, chuyển mốc theo đồng hồ vùng khi chuyển bản đồ. BuildState đồng bộ số lượt, sức chứa và thời gian hồi lượt kế. Vùng chiến đấu giữ tick bắt đầu, tâm đáp, điểm phóng và hướng chỉ kiếm. Phaser dùng cùng bộ trình diễn 48 thanh trong trận và trang preview. Server lập lịch một lần sát thương ở mốc thanh đầu chạm tâm. Sự kiện Q chứa chỉ số nhát để ghép đúng bảy vệt chém với bảy nhịp server.
+
 ## Campaign balance và thử lại boss — 2026-11-06
 
 CampaignDefinition được schema-validate trong game-data; game-core giữ ledger first-clear, fractional farm rewards và BossRetries theo encounter generation. Protocol35 truyền projection chiến dịch trong MerchantInventoryState.campaign để tránh vượt giới hạn63 field của player schema; client chỉ gửi vote/call intentions. Các override backend tương ứng bên dưới là lịch sử. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).

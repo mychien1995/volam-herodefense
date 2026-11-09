@@ -11,7 +11,9 @@ import {
 } from '../../tools/qa-session.mjs';
 
 /** Own both services; never borrow or stop another session's healthy port. */
-export default async function setup(): Promise<() => Promise<void>> {
+export async function startGameQa(
+  startFixture?: () => () => void,
+): Promise<() => Promise<void>> {
   const session = qaSession();
   const owned = ownedQaServices();
   const originalRun = process.env['VOLAM_QA_RUN_ID'];
@@ -42,6 +44,10 @@ export default async function setup(): Promise<() => Promise<void>> {
     const server = createGameServer();
     await server.listen(session.serverPort);
     owned.add(() => server.gracefullyShutdown(false));
+    if (startFixture) {
+      const stop = startFixture();
+      owned.add(async () => stop());
+    }
     await verifyQaIdentity(`${session.serverUrl}/health`, {
       service: 'volam-game-server',
       runId: session.runId,
@@ -74,4 +80,8 @@ export default async function setup(): Promise<() => Promise<void>> {
     await cleanup();
     throw error;
   }
+}
+
+export default async function setup(): Promise<() => Promise<void>> {
+  return startGameQa();
 }

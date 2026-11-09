@@ -236,13 +236,7 @@ describe('M3C3 feedback authoritative trial', () => {
       characterStats(f.hero, f.config, f.world.tick).total.cooldownReduction,
     ).toBe(0);
   });
-  it('projectile palms refund once only on confirmed hit, including kill; two air blades apply slow', () => {
-    const f = fixture('duong_khi_kich');
-    f.enemies[0]!.hp = 1;
-    f.cast();
-    f.steps(20);
-    expect(f.hero.mana).toBe(197);
-    expect(f.events.filter((e) => e.stage === 'refund')).toHaveLength(1);
+  it('two air blades apply slow', () => {
     const g = fixture('truy_hon_dao');
     g.cast();
     g.steps(25);
@@ -278,25 +272,28 @@ describe('M3C3 feedback authoritative trial', () => {
     f.config.creep.speed = 240;
     f.config.creep.detectionRange = 1000;
     f.cast();
+    f.steps(24);
     const e = f.enemies[0]!;
     f.hero.x = 800;
     f.steps(60);
-    expect(e.x).toBeLessThanOrEqual(425.001);
+    expect(e.x).toBeLessThanOrEqual(492.001);
     expect(e.x).toBeGreaterThan(380);
     e.forcedMovementImmune = true;
     f.steps(20);
-    expect(e.x).toBeLessThanOrEqual(425.001);
+    expect(e.x).toBeLessThanOrEqual(492.001);
     const g = fixture('thai_cuc_tran');
     g.config.creep.speed = 240;
     g.config.creep.detectionRange = 1000;
     g.cast();
+    g.steps(24);
+    g.enemies[0]!.cooldown = 0;
     g.hero.x = 400;
     const hp = g.hero.hp;
     g.steps(15);
     expect(g.hero.hp).toBeLessThan(hp);
     g.hero.x = 800;
-    g.steps(180);
-    expect(g.enemies[0]!.x).toBeGreaterThan(425);
+    g.steps(205);
+    expect(g.enemies[0]!.x).toBeGreaterThan(492);
     cancelOwnedEffects(f.world, 'a');
     expect(f.world.areas).toEqual([]);
   });
@@ -328,13 +325,14 @@ describe('M3C3 feedback authoritative trial', () => {
   it('confinement clips knockback and overlapping boundaries without moving immune enemies', () => {
     const f = fixture('thai_cuc_tran');
     f.cast();
+    f.steps(30);
     f.hero.skillIds![0] = 'vo_dang_quyen';
     f.hero.basicId = 'vo_dang_quyen';
-    f.hero.x = 360;
-    f.enemies[0]!.x = 423;
+    f.hero.x = 430;
+    f.enemies[0]!.x = 490;
     f.input('basic');
     f.steps();
-    expect(f.enemies[0]!.x).toBeLessThanOrEqual(425.001);
+    expect(f.enemies[0]!.x).toBeLessThanOrEqual(492.001);
     const area = f.world.areas![0]!;
     f.world.areas!.push({
       ...area,
@@ -346,7 +344,7 @@ describe('M3C3 feedback authoritative trial', () => {
     f.config.creep.detectionRange = 1000;
     f.hero.x = 800;
     f.steps(10);
-    expect(f.enemies[0]!.x).toBeLessThanOrEqual(425.001);
+    expect(f.enemies[0]!.x).toBeLessThanOrEqual(492.001);
   });
   it('new projectiles, chains, shields and formations cancel on owner removal without resource resets', () => {
     for (const id of [

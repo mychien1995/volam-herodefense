@@ -1424,6 +1424,10 @@ export class DungeonMatch {
     if (hero.dashRechargeAt !== undefined)
       hero.dashRechargeAt = convert(hero.dashRechargeAt);
     hero.skillCooldowns = hero.skillCooldowns.map(convert);
+    for (const id of Object.keys(hero.chargeCooldowns ?? {}))
+      hero.chargeCooldowns![id] = hero.chargeCooldowns![id]!
+        .filter((ready) => ready > source.world.tick)
+        .map(convert);
     if (hero.inventory?.auxiliaryReadyAt !== undefined)
       hero.inventory.auxiliaryReadyAt = convert(
         hero.inventory.auxiliaryReadyAt,

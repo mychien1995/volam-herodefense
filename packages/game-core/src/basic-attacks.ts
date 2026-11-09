@@ -4,7 +4,14 @@ import type { Ability, Hero } from './types.js';
 export function nextBasic(
   hero: Hero,
   base: Ability,
+  random: () => number,
 ): { ability: Ability; stage?: string } {
+  if (base.basicVariants)
+    return {
+      ability: base,
+      stage:
+        base.basicVariants[Math.floor(random() * base.basicVariants.length)]!,
+    };
   if (!base.basicCombo) return { ability: base };
   hero.basicChains ??= {};
   const index = hero.basicChains[base.id] ?? 0;

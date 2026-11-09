@@ -2,6 +2,7 @@ import {
   blocked,
   direction,
   distance,
+  insideEllipse,
   segmentCircle,
   segmentRect,
 } from './geometry.js';
@@ -10,9 +11,15 @@ import { applyStatus, displace, hasStatus } from './status.js';
 import { rankedAbility, characterStats } from './progression.js';
 import { captureConfinement, confineMovement } from './confinement.js';
 import { dragonDiveTarget } from './dragon-dive.js';
-import { recordTamLienHit, stepTamLienTram, tamLienTram } from './tam-lien-tram.js';
+import { startFortune } from './fortune.js';
+import {
+  recordTamLienHit,
+  stepTamLienTram,
+  tamLienTram,
+} from './tam-lien-tram.js';
 import type {
   Ability,
+  AreaEffect,
   AllyEffect,
   Creep,
   Hero,
@@ -154,9 +161,211 @@ function queueProjectiles(
           )) * (spread && i !== 1 ? spread.sideDamage : 1),
       ...crit,
       ...(refund ? { refund } : {}),
-      ...(stage ? { stage } : {}),
+      ...(effect.scatter ? { stage: `travel_${i}` } : stage ? { stage } : {}),
     });
   }
+  if (effect.scatter) {
+    const burst = effect.scatter;
+    (world.pendingScatters ??= []).push({
+      tick:
+        world.tick +
+        (effect.count - 1) * effect.spacingTicks +
+        burst.appearanceTicks,
+      ownerId: hero.id,
+      abilityId: ability.id,
+      effect: burst,
+      rawDamage: damageFor(
+        hero,
+        burst.damage,
+        config,
+        world.tick,
+        burst.attackPowerScale,
+      ),
+      ...crit,
+    });
+  }
+}
+
+export function stepScatters(world: World, config: SimulationConfig): void {
+  if (!world.pendingScatters?.length) return;
+  const due = world.pendingScatters.filter((burst) => burst.tick <= world.tick);
+  world.pendingScatters = world.pendingScatters.filter(
+    (burst) => burst.tick > world.tick,
+  );
+  for (const burst of due) {
+    const owner = world.heroes.get(burst.ownerId);
+    if (!owner || owner.hp <= 0) continue;
+    const effect = burst.effect;
+    const turn = world.random() * Math.PI * 2;
+    for (let index = 0; index < effect.count; index++) {
+      const angle =
+        turn +
+        index * ((Math.PI * 2) / effect.count) +
+        (world.random() - 0.5) * 0.26;
+      const spread =
+        effect.innerRadius +
+        world.random() * (effect.outerRadius - effect.innerRadius);
+      let point = { x: owner.x, y: owner.y };
+      // Pull a blocked marker toward the caster so the warning stays on walkable ground.
+      for (let radius = spread; radius > 0; radius -= 12) {
+        const candidate = {
+          x: owner.x + Math.cos(angle) * radius,
+          y: owner.y + Math.sin(angle) * radius,
+        };
+        if (
+          !blocked(
+            candidate,
+            1,
+            config.width,
+            config.height,
+            config.collision,
+          ) &&
+          (!config.heroBounds ||
+            insideEllipse(candidate, config.heroBounds, 1)) &&
+          !config.collision.some(
+            (wall) => segmentRect(owner, candidate, wall) !== undefined,
+          )
+        ) {
+          point = candidate;
+          break;
+        }
+      }
+      const duration = effect.delayTicks + 1;
+      (world.areas ??= []).push({
+        ...point,
+        id: `area_${world.nextId++}`,
+        ownerId: owner.id,
+        abilityId: burst.abilityId,
+        until: world.tick + duration,
+        nextTick: world.tick + effect.delayTicks,
+        effect: {
+          mode: 'area',
+          durationTicks: duration,
+          tickInterval: duration,
+          radius: effect.radius,
+          damage: effect.damage,
+        },
+        rawDamage: burst.rawDamage,
+        critChance: burst.critChance,
+        critMultiplier: burst.critMultiplier,
+      });
+    }
+  }
+}
+
+function openArea(
+  world: World,
+  hero: Hero,
+  abilityId: string,
+  effect: AreaEffect,
+  config: SimulationConfig,
+  rawDamage: number,
+  crit: { critChance: number; critMultiplier: number },
+): void {
+  world.areas = (world.areas ?? []).filter(
+    (a) => a.ownerId !== hero.id || a.abilityId !== abilityId,
+  );
+  world.areas.push({
+    id: `area_${world.nextId++}`,
+    ownerId: hero.id,
+    abilityId,
+    x: hero.x,
+    y: hero.y,
+    until: world.tick + effect.durationTicks,
+    nextTick: world.tick,
+    effect,
+    rawDamage,
+    critChance: crit.critChance,
+    critMultiplier: crit.critMultiplier,
+  });
+  captureConfinement(world, config);
+}
+
+export function skyfallAiming(world: World, ownerId: string): boolean {
+  return (world.areas ?? []).some(
+    (area) =>
+      area.ownerId === ownerId &&
+      area.effect.skyfall &&
+      world.tick <
+        area.until - area.effect.durationTicks + area.effect.skyfall.aimTicks,
+  );
+}
+
+function openSkyfall(
+  world: World,
+  hero: Hero,
+  abilityId: string,
+  effect: AreaEffect,
+  config: SimulationConfig,
+  rawDamage: number,
+  crit: { critChance: number; critMultiplier: number },
+): void {
+  const sky = effect.skyfall!;
+  const boss = (enemy: Creep) =>
+    Number(
+      !!(enemy.encounterBoss || enemy.bossEncounter || enemy.waveBossActor),
+    );
+  const target = [...world.creeps.values()]
+    .filter((enemy) => {
+      const dx = enemy.x - hero.x;
+      const dy = enemy.y - hero.y;
+      const range = Math.hypot(dx, dy);
+      return (
+        range > 0 &&
+        range <= sky.range &&
+        dx * hero.fx + dy * hero.fy >= range * Math.cos(sky.halfAngle) &&
+        clearLine(world, hero, enemy, config)
+      );
+    })
+    .sort(
+      (a, b) =>
+        boss(b) - boss(a) ||
+        distance(a, hero) - distance(b, hero) ||
+        (a.id < b.id ? -1 : a.id > b.id ? 1 : 0),
+    )[0];
+  let point = { x: hero.x, y: hero.y };
+  if (target) {
+    point = { x: target.x, y: target.y };
+    const aim = direction(point.x - hero.x, point.y - hero.y);
+    hero.fx = aim.x;
+    hero.fy = aim.y;
+  } else {
+    for (let range = sky.fallbackDistance; range > 0; range -= 12) {
+      const candidate = {
+        x: hero.x + hero.fx * range,
+        y: hero.y + hero.fy * range,
+      };
+      if (
+        !blocked(candidate, 1, config.width, config.height, config.collision) &&
+        !config.collision.some(
+          (wall) => segmentRect(hero, candidate, wall) !== undefined,
+        )
+      ) {
+        point = candidate;
+        break;
+      }
+    }
+  }
+  hero.actionUntil = world.tick + sky.aimTicks;
+  applyStatus(
+    hero,
+    { kind: 'channel', durationTicks: sky.aimTicks, magnitude: 1 },
+    hero.id,
+    abilityId,
+    world.tick,
+  );
+  (world.areas ??= []).push({
+    ...point,
+    launch: { x: hero.x, y: hero.y, fx: hero.fx, fy: hero.fy },
+    id: `area_${world.nextId++}`,
+    ownerId: hero.id,
+    abilityId,
+    until: world.tick + effect.durationTicks,
+    nextTick: world.tick + sky.riseTicks + sky.quietTicks + sky.firstFallTicks,
+    effect,
+    rawDamage,
+    ...crit,
+  });
 }
 function queueInwardVolley(
   world: World,
@@ -221,6 +430,7 @@ function cue(
   stage: string,
   radius = 0,
   heading: Pick<Hero, 'fx' | 'fy'> = hero,
+  hitIndex?: number,
 ): void {
   emit(world, {
     kind: 'pulse',
@@ -233,6 +443,7 @@ function cue(
     fy: heading.fy,
     radius,
     stage,
+    ...(hitIndex === undefined ? {} : { hitIndex }),
     damage: 0,
     critical: false,
   });
@@ -294,25 +505,25 @@ function strikeArc(
   targets.forEach((enemy, i) => {
     if (effect.damage > 0) {
       const landed = hurt(
-          world,
-          enemy,
-          hero.id,
-          ability.id,
-          rawDamage * (i === 0 ? 1 : effect.cleave),
-          config,
-          {
-            ...crit,
-            fx: heading.fx,
-            fy: heading.fy,
-            combo: ability.combo,
-            armorPenetration: Math.max(
-              effect.armorPenetration ?? 0,
-              ability.equipmentAttack?.penetration ?? 0,
-            ),
-            lifesteal: ability.equipmentAttack?.lifesteal,
-            slowedBonus: effect.slowedBonus,
-          },
-        );
+        world,
+        enemy,
+        hero.id,
+        ability.id,
+        rawDamage * (i === 0 ? 1 : effect.cleave),
+        config,
+        {
+          ...crit,
+          fx: heading.fx,
+          fy: heading.fy,
+          combo: ability.combo,
+          armorPenetration: Math.max(
+            effect.armorPenetration ?? 0,
+            ability.equipmentAttack?.penetration ?? 0,
+          ),
+          lifesteal: ability.equipmentAttack?.lifesteal,
+          slowedBonus: effect.slowedBonus,
+        },
+      );
       if (landed && !hit && ability.id === tamLienTram.basicId)
         recordTamLienHit(world, hero, enemy.id, config);
       hit ||= landed;
@@ -468,9 +679,14 @@ export function perform(
     hero.fy = aim.y;
   }
   hero.pose = kind === 'cast' ? 'cast' : 'basic_attack';
-  hero.actionUntil = kind === 'attack'
-    ? ability.id === tamLienTram.basicId ? world.tick + 8 : hero.cooldown
-    : world.tick + 12;
+  hero.actionUntil =
+    kind === 'attack'
+      ? ability.basicPoseTicks
+        ? world.tick + ability.basicPoseTicks
+        : ability.id === tamLienTram.basicId
+          ? world.tick + 8
+          : hero.cooldown
+      : world.tick + 12;
   hero.castAbilityId = ability.id;
   hero.actionStartedAt = world.tick;
   if (kind === 'attack') hero.basicStage = stage;
@@ -519,7 +735,13 @@ export function perform(
         hitIds: [],
         effect,
         ability,
-        rawDamage: damageFor(hero, effect.damage, config, world.tick),
+        rawDamage: damageFor(
+          hero,
+          effect.damage,
+          config,
+          world.tick,
+          effect.attackPowerScale ?? 1,
+        ),
         finisherDamage: 0,
         ...crit,
       });
@@ -649,23 +871,40 @@ export function perform(
       ability.id,
       world.tick,
     );
+  } else if (effect.mode === 'fortune') {
+    startFortune(world, hero, ability.id, effect);
   } else if (effect.mode === 'area') {
-    world.areas = (world.areas ?? []).filter(
-      (a) => a.ownerId !== hero.id || a.abilityId !== ability.id,
-    );
-    world.areas.push({
-      id: `area_${world.nextId++}`,
-      ownerId: hero.id,
-      abilityId: ability.id,
-      x: hero.x,
-      y: hero.y,
-      until: world.tick + effect.durationTicks,
-      nextTick: world.tick,
-      effect,
-      rawDamage: damageFor(hero, effect.damage, config, world.tick),
-      ...crit,
-    });
-    captureConfinement(world, config);
+    const rawDamage = damageFor(hero, effect.damage, config, world.tick);
+    if (effect.skyfall) {
+      openSkyfall(world, hero, ability.id, effect, config, rawDamage, crit);
+    } else if (effect.windupTicks) {
+      const duration = effect.windupTicks + 6;
+      applyStatus(
+        hero,
+        { kind: 'channel', durationTicks: duration, magnitude: 1 },
+        hero.id,
+        ability.id,
+        world.tick,
+      );
+      hero.actionUntil = world.tick + duration;
+      (world.actions ??= []).push({
+        id: `action_${world.nextId++}`,
+        ownerId: hero.id,
+        abilityId: ability.id,
+        startedAt: world.tick,
+        kind: 'area',
+        until: world.tick + duration,
+        nextTick: world.tick + effect.windupTicks,
+        remaining: 1,
+        fx: hero.fx,
+        fy: hero.fy,
+        hitIds: [],
+        effect,
+        rawDamage,
+        finisherDamage: 0,
+        ...crit,
+      });
+    } else openArea(world, hero, ability.id, effect, config, rawDamage, crit);
   } else if (effect.mode === 'buff') {
     if (effect.burnAura) {
       world.areas ??= [];
@@ -925,6 +1164,12 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
       world.areas = (world.areas ?? []).filter(
         (a) => a.ownerId !== action.ownerId || a.abilityId !== action.abilityId,
       );
+      if (world.pendingScatters)
+        world.pendingScatters = world.pendingScatters.filter(
+          (burst) =>
+            burst.ownerId !== action.ownerId ||
+            burst.abilityId !== action.abilityId,
+        );
       if (hero) cue(world, hero, action.abilityId, 'cancel');
       if (hero && hero.hp > 0) {
         hero.actionUntil = world.tick;
@@ -952,6 +1197,19 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           action.abilityId,
           'release',
           action.effect.range,
+          action,
+        );
+        action.remaining = 0;
+      }
+    } else if (action.effect.mode === 'area') {
+      if (world.tick >= action.nextTick && action.remaining > 0) {
+        openArea(
+          world,
+          hero,
+          action.abilityId,
+          action.effect,
+          config,
+          action.rawDamage,
           action,
         );
         action.remaining = 0;
@@ -1019,7 +1277,11 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           config,
           action,
         );
-        if (landed && action.abilityId === 'phi_anh_tram' && !action.tamLienCharged) {
+        if (
+          landed &&
+          action.abilityId === 'phi_anh_tram' &&
+          !action.tamLienCharged
+        ) {
           recordTamLienHit(world, hero, enemy.id, config);
           action.tamLienCharged = true;
         }
@@ -1049,7 +1311,19 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
         }
         continue;
       }
-      cue(world, hero, action.abilityId, finish ? 'finisher' : 'sweep', radius);
+      const index =
+        action.abilityId === 'that_tinh_kiem' && !finish
+          ? e.hits - action.remaining
+          : undefined;
+      cue(
+        world,
+        hero,
+        action.abilityId,
+        finish ? 'finisher' : 'sweep',
+        radius,
+        index === undefined ? hero : action,
+        index,
+      );
       if (
         !finish &&
         e.projectileBurst &&

@@ -42,6 +42,7 @@ import {
   characterStats,
   pointAccounting,
   equippedAbility,
+  skillCharges,
   transactMerchant,
   addCreep,
   blocked,
@@ -54,6 +55,7 @@ import {
   buildActionSchema,
   LobbyState,
   LobbyPlayer,
+  SkillChargeState,
   CreepState,
   ProjectileState,
   joinOptionsSchema,
@@ -1071,6 +1073,23 @@ export class MatchRoom extends Room<{
           target.build.ranks.set(key, rank);
       }
       target.basicId = hero.basicId;
+      const chargedSkills = new Set<string>();
+      for (let slot = 0; slot < 5; slot++) {
+        const ability = equippedAbility(hero, slot, zone.config);
+        const charges = ability && skillCharges(hero, ability, zone.world.tick);
+        if (!ability || !charges) continue;
+        chargedSkills.add(ability.id);
+        let view = target.build.charges.get(ability.id);
+        if (!view) {
+          view = new SkillChargeState();
+          target.build.charges.set(ability.id, view);
+        }
+        view.count = charges.count;
+        view.capacity = charges.capacity;
+        view.rechargeTicks = charges.rechargeTicks;
+      }
+      for (const id of target.build.charges.keys())
+        if (!chargedSkills.has(id)) target.build.charges.delete(id);
       target.lastSequence = hero.lastSequence;
       const showBasicRecovery =
         zone.config.basics[hero.basicId]?.basicComboEndRecoveryTicks ===
@@ -1270,6 +1289,10 @@ export class MatchRoom extends Room<{
         }
         Object.assign(target, {
           startedAt: area.until - area.effect.durationTicks,
+          launchX: area.launch?.x ?? 0,
+          launchY: area.launch?.y ?? 0,
+          launchFx: area.launch?.fx ?? 0,
+          launchFy: area.launch?.fy ?? 0,
           x: area.x,
           y: area.y,
           radius: area.effect.radius,

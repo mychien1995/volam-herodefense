@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #182219;
+  color: #f6edd2;
+  font:
+    14px system-ui,
+    sans-serif;
+}
+
+.preview {
+  position: relative;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+#preview-game {
+  position: absolute;
+  inset: 0;
+}
+
+.preview-title,
+.preview-controls {
+  position: absolute;
+  display: grid;
+  gap: 6px;
+  padding: 9px 12px;
+  border: 1px solid #aa9164;
+  border-radius: 5px;
+  background: #18221bea;
+  box-shadow: 0 2px 12px #141a14a0;
+}
+
+.preview-title {
+  top: 12px;
+  left: 12px;
+  pointer-events: none;
+}
+
+.preview-title span {
+  color: #dfd1ad;
+}
+
+.preview-controls {
+  bottom: 12px;
+  left: 50%;
+  translate: -50% 0;
+  width: min(420px, calc(100% - 24px));
+}
+
+.preview-progress {
+  display: grid;
+  gap: 4px;
+}
+
+.preview-progress input {
+  width: 100%;
+  margin: 0;
+  accent-color: #ddbd77;
+}
+
+.preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+}
+
+.preview-actions button,
+.preview-actions select {
+  padding: 5px 8px;
+  border: 1px solid #958253;
+  border-radius: 3px;
+  background: #30382c;
+  color: inherit;
+  font: inherit;
+}
+
+.preview-actions button:not(:disabled),
+.preview-actions select:not(:disabled) {
+  cursor: pointer;
+}
+
+.preview-actions :focus-visible {
+  outline: 2px solid #f4d78b;
+  outline-offset: 2px;
+}
+
+kbd {
+  color: #ffdb86;
+}

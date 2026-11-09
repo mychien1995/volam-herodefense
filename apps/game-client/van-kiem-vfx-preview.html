@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Vạn Kiếm Quy Tông · Duyệt VFX</title>
+  </head>
+  <body>
+    <main class="preview" aria-label="Sân duyệt Vạn Kiếm Quy Tông">
+      <div id="preview-game"></div>
+      <header class="preview-title">
+        <strong>Vạn Kiếm Quy Tông</strong>
+        <span>Bản duyệt VFX · 48 thanh kiếm</span>
+      </header>
+      <section class="preview-controls" aria-label="Điều khiển xem thử">
+        <div class="preview-progress">
+          <span id="preview-status" role="status">Đang nạp hình ảnh…</span>
+          <input
+            id="preview-timeline"
+            type="range"
+            min="0"
+            value="0"
+            step="1"
+            aria-label="Tiến độ hiệu ứng"
+            disabled
+          />
+        </div>
+        <div class="preview-actions">
+          <button id="preview-replay" type="button" disabled>
+            <kbd>T</kbd> Phát lại
+          </button>
+          <button id="preview-pause" type="button" disabled>Tạm dừng</button>
+          <label>
+            Tốc độ
+            <select id="preview-speed" disabled>
+              <option value="1">1×</option>
+              <option value="0.5">0,5×</option>
+            </select>
+          </label>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/src/van-kiem-vfx-preview.ts"></script>
+  </body>
+</html>

@@ -1,3 +1,28 @@
+## Võ Đang Kiếm · rework 2026-11-09
+
+Đòn A chọn một trong năm thế bằng RNG của server và tiếp tục có 25% xác suất phóng Kiếm Khí. Q giữ bảy nhịp gây sát thương phía trước, mỗi nhịp cách 6 tick. T dùng 2/3/4/5 lượt theo bậc. Tâm rơi chốt lúc bấm T trong góc phía trước, ưu tiên boss đủ điều kiện rồi tới quái gần nhất. Nếu thiếu mục tiêu, chiêu đánh dấu một điểm hợp lệ theo hướng đang nhìn.
+
+Thông số thử ở bậc 1 gồm 42 nội lực/lượt, 17 giây hồi cơ bản cho mỗi lượt theo thứ tự, 320 đơn vị tầm chọn mục tiêu, 76 đơn vị bán kính và 108 sát thương cơ bản cộng sức công. Nhân vật giữ thế chỉ kiếm 36 tick. Nhịp lên, khuất và rơi của 48 thanh dài lần lượt 51, 15 và 45 tick ở 30 Hz. Mỗi lượt gây một lần sát thương lan ở tick 80, khi thanh đầu chạm tâm. Hình kiếm dài thêm 20% và rộng thêm 10% so với bản 48 thanh đầu tiên. Diện tích mỗi vụ nổ nhỏ tăng 10%.
+
+R Tọa Sát Bác Đồ khóa di chuyển, lướt, đánh thường và dùng kỹ năng trong lúc giữ thế. Có thể dùng bình máu hoặc bình mana theo thời gian hồi chung. Khóa hết khi phản đòn sớm hoặc khi kết thúc thời gian thủ tối đa 5 giây.
+
+## Võ Đang Quyền · rework 2026-11-09
+
+Các giá trị dưới đây là cấu hình thử ở bậc 1. A gây sát thương theo cung đánh cận chiến, với quyền khí Wi-Fi theo tay ra đòn. Q áp dụng giảm 25% tốc chạy và giảm 20% sát thương gây ra trong 3 giây. Mỗi sóng W gây 10 sát thương cơ bản cộng 30% sức công và đẩy lùi 22 đơn vị. Năm ấn W được chọn quanh người thi triển bằng RNG của trận. Mỗi ấn có bán kính nổ 28, báo trước 30 tick và gây 18 sát thương cơ bản cộng 40% sức công. T mở sau 24 tick, bán kính 192 đơn vị, tăng 8 mỗi bậc.
+
+Ô E giữ ID `duong_khi_kich` để tương thích dữ liệu. Giá cast đầu là 10 nội lực, hồi chiêu cơ bản 8 giây và vòng quẻ đổi sau mỗi 5 tick. Khi đang chạy quẻ, nhấn E lần nữa để chốt mà không tốn thêm nội lực. Hết 150 tick tự chốt quẻ lúc đó. Mỗi buff kéo dài 90 tick.
+
+| Quẻ | Hiệu ứng bậc 1 |
+| --- | --- |
+| Càn | Hồi 12% sinh lực tối đa và thêm 6 sinh lực/giây |
+| Khôn | Tăng 15% sát thương và cộng 0,25 vào hệ số sát thương chí mạng |
+| Đoài | Nổ tại chân, 30 sát thương cơ bản trong bán kính 88 |
+| Tốn | Hồi 16% nội lực tối đa và thêm 8 nội lực/giây |
+| Khảm | Tăng 12% tốc chạy |
+| Cấn | Chốt quẻ, không có hiệu ứng chiến đấu |
+| Chấn | Tự choáng 2 giây |
+| Ly | Mất 8% sinh lực tối đa, chừa ít nhất 1 sinh lực |
+
 ## Hàng Long Hỏa Vũ · Cái Bang Chưởng, phương án A
 
 Rồng cuộn bảy vòng quanh người thi triển rồi bay lên và đâm xuống tại vị trí của nhân vật lúc chạm đất. Nhịp cuộn giữa pha gây 25% sát thương trong bán kính 89,7. Cú đáp gây sát thương trong bán kính 128,8 và choáng cơ bản 30 tick. Pha cuộn, cất lên và lao xuống lần lượt dài 57, 15 và 12 tick. Mục này thay thế tuning Hàng Long v7 bên dưới.
@@ -84,21 +109,21 @@ Canonical IDs/names remain unchanged. Thiếu Lâm Quyền A now cycles left fis
 **Identity:** mana capacity/regen, low costs, short cooldowns, balanced offense and defense. Quyền cheap utility; Kiếm stronger melee damage and occasional ranged kiếm khí. **Innate passive:** `thai_cuc_tam_phap` — **Thái Cực Tâm Pháp** (auto Mana, Mana Regen, Cooldown Reduction).
 
 **Normal attacks (A):**
-- `vo_dang_quyen`: **Võ Đang Quyền** — quick, modest melee palm hit.
+- `vo_dang_quyen`: **Võ Đang Quyền** — alternating punches with a visible sonic wave and no basic cooldown.
 - `vo_dang_kiem`: **Võ Đang Kiếm** — melee strike with random chance to emit **non-homing ranged Kiếm Khí**, aimed at nearest eligible enemy at spawn, dodgeable.
 
 | ID | Vietnamese display name | Style | Proposed effect and reason |
 |---|---|---|---|
-| `luong_nghi_thu` | **Lưỡng Nghi Thủ** | Quyền | Quick inexpensive palm that debuffs enemy Attack Power; consistent protection. |
-| `huyen_am_chuong` | **Huyền Âm Chưởng** | Quyền | Short Yin wave slowing movement/attack speed; cheap control. |
-| `duong_khi_kich` | **Dương Khí Kích** | Quyền | Short palm skill refunding some mana on successful hit; sustain. |
+| `luong_nghi_thu` | **Lưỡng Nghi Thủ** | Quyền | Straight piercing palm that slows enemies and reduces their outgoing damage. |
+| `huyen_am_chuong` | **Huyền Âm Chưởng** | Quyền | Two forward knockback waves, then five ink eruptions with a one-second warning. |
+| `duong_khi_kich` | **Bói Toán Thiên Cơ** | Quyền | Cycle eight readings. Cast again to settle the current reading, or wait five seconds for auto-settlement. |
 | `thai_cuc_than_cong` | **Thái Cực Thần Công** | Quyền | Mana shield absorbs damage by spending mana; whether toggle or timed buff still PROPOSED. |
-| `thai_cuc_tran` | **Thái Cực Trận** | Quyền U | Yin–Yang field periodically damages/slows within area; team zone control. |
+| `thai_cuc_tran` | **Thái Cực Trận** | Quyền U | Tai Chi windup opens a larger Bagua field that confines, damages and slows enemies. |
 | `that_tinh_kiem` | **Thất Tinh Kiếm** | Kiếm | Several strong close-range sword slashes; dedicated melee damage. |
 | `nhan_kiem_hop_nhat` | **Nhân Kiếm Hợp Nhất** | Kiếm | Piercing non-homing sword-energy projectile; ranged option. |
 | `bat_quai_kiem_tran` | **Bát Quái Kiếm Trận** | Kiếm | Sword formation damaging enemies in a zone; defensive zone control. |
 | `toa_sat_bac_do` | **Tọa Sát Bác Đồ** | Kiếm | Guard up to 5s with 70% damage reduction; accumulate actual HP loss, release once radially at expiry or strictly above 20% maximum HP, using exactly accumulated loss. |
-| `van_kiem_quy_tong` | **Vạn Kiếm Quy Tông** | Kiếm U | Continuous straight eight-way sword bursts for a configurable initial 5s; provisional tuning, no homing. |
+| `van_kiem_quy_tong` | **Vạn Kiếm Quy Tông** | Kiếm U | Charged skyfall with one delayed frontal landing, prioritized on bosses. |
 
 ## Thiếu Lâm — Gold / Kim
 

@@ -1,3 +1,13 @@
+## Võ Đang Kiếm · artwork được duyệt ngày 2026-11-09
+
+Đánh thường chọn ngẫu nhiên một trong năm thế A2 gồm chọc, chém trái, chém phải, chém xuống và chém lên. Kiếm Khí tiếp tục có xác suất phóng riêng. Thất Tinh Kiếm dùng vệt bạc và mực Q2 trên bảy nhát phía trước, cách nhau 0,2 giây. Vạn Kiếm Quy Tông có 2/3/4/5 lượt ở bậc 1–4. Mỗi lượt chỉ kiếm về một tâm phía trước, ưu tiên boss rồi quái. 48 thanh kiếm bạc chuôi vàng lần lượt vút lên từ sau lưng, khuất một nhịp rồi đâm xuống vùng quanh tâm đã đánh dấu. Mỗi thanh nổ nhỏ tại điểm chạm. [Bộ artwork đã duyệt](assets/reviews/vo-dang-kiem-rework-2026-11-09/README.md).
+
+Trong lượt chỉnh tiếp theo, kiếm T dài thêm 20% và rộng thêm 10%. Diện tích từng vụ nổ tăng 10%. Tọa Sát Bác Đồ khóa di chuyển, lướt, đánh thường và dùng kỹ năng đến khi kết thúc thế thủ. Vẫn dùng được bình máu và bình mana.
+
+## Võ Đang Quyền · rework được duyệt ngày 2026-11-09
+
+A dùng hai cú đấm luân phiên kèm quyền khí hình sóng Wi-Fi, không hồi chiêu. Q dùng thế chưởng đã duyệt và đạn tay lam đen của Huyền Âm Chưởng cũ, làm chậm và giảm sát thương mục tiêu. W đẩy lùi bằng hai sóng thẳng, sau đó tạo năm ấn âm dương quanh người thi triển và nổ mực sau đúng 1 giây. E đổi thành Bói Toán Thiên Cơ, chạy tám quẻ trên đầu và chốt bằng E lần nữa hoặc tự chốt sau 5 giây. R dùng cầu nội lực. T có sáu thế múa trước khi mở trận Âm Dương Bát Quái lớn hơn, với ba điểm sáng chạy quanh viền. Trận tiếp tục giữ quái và boss ở bên trong theo luật hiện hành. Xem mức cấu hình thử ở [CONTENT_DATA.md](CONTENT_DATA.md#võ-đang-quyền--rework-2026-11-09).
+
 ## Cái Bang Bổng · bản được duyệt cho M3D
 
 Đánh thường có bốn thức chọc, quét, hất và vụt xuống, mỗi thức dài 8 tick. Hồi 15 tick sau khi thức cuối kết thúc. Các thức để lại vệt lửa, cú vụt cuối có vòng nổ tại điểm chạm đất. Phá Giáp Bổng vụt bằng gậy rồng cong, bổng khí chạy sau đầu gậy và nham thạch nổ tại điểm chạm. Tầm đánh ở cả bốn bậc là 144. Truy Phong Bổng giậm tại chỗ sau 6 tick lấy đà, gây sát thương và choáng trong bán kính cơ bản 110. Thiên Hạ Vô Cẩu có sáu chó lửa khi xoay và Nham Triều ở cú đập kết thúc. Bản này thay thế các quyết định M3D trước đó về tầm và hình ảnh của ba chiêu.

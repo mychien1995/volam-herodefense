@@ -119,6 +119,8 @@ export function characterStats(
     temporary: zero(),
   };
   sources.temporary.critChance = statusValue(hero, 'crit_buff', tick);
+  sources.temporary.hpRegen = statusValue(hero, 'hp_regen_buff', tick);
+  sources.temporary.manaRegen = statusValue(hero, 'mana_regen_buff', tick);
   for (const key of ['maxHp', 'maxMana', 'attackPower', 'defense'] as const)
     sources.innate[key] +=
       (sources.base[key] + sources.growth[key] + sources.innate[key]) *
@@ -390,6 +392,20 @@ export function rankedAbility(
     ? skill.ranks[rank - 1]
     : undefined;
 }
+export function skillCharges(hero: Hero, ability: Ability, tick: number) {
+  const capacity = ability.charges;
+  if (!capacity) return undefined;
+  const pending = (hero.chargeCooldowns?.[ability.id] ?? []).filter(
+    (ready) => ready > tick,
+  );
+  return {
+    count: Math.max(0, capacity - pending.length),
+    capacity,
+    rechargeTicks: (pending[0] ?? tick) - tick,
+    pending,
+  };
+}
+
 export function abilityCooldown(
   hero: Hero,
   ability: Ability,

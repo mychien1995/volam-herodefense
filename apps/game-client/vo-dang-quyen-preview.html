@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Võ Đang Quyền · Duyệt hiệu ứng</title>
+  </head>
+  <body>
+    <main id="quyen-viewport" aria-label="Sân duyệt Võ Đang Quyền">
+      <div id="quyen-game"></div>
+      <section class="quyen-heading" aria-label="Trạng thái preview">
+        <strong>Võ Đang Quyền · Duyệt hiệu ứng</strong>
+        <span id="quyen-status" aria-live="polite">Đang nạp hình ảnh…</span>
+      </section>
+      <nav class="quyen-controls" aria-label="Kỹ năng Võ Đang Quyền">
+        <button data-skill="KeyA"><kbd>A</kbd> Đánh thường</button>
+        <button data-skill="KeyQ"><kbd>Q</kbd> Lưỡng Nghi Thủ</button>
+        <button data-skill="KeyW"><kbd>W</kbd> Huyền Âm Chưởng</button>
+        <button data-skill="KeyE"><kbd>E</kbd> Bói Toán Thiên Cơ</button>
+        <button data-skill="KeyR" aria-pressed="false">
+          <kbd>R</kbd> Thái Cực Thần Công
+        </button>
+        <button data-skill="KeyT"><kbd>T</kbd> Thái Cực Trận</button>
+        <button id="quyen-doai">Thử nổ Đoài</button>
+        <select id="quyen-buff" aria-label="Thử hiệu ứng buff">
+          <option value="">Thử buff</option>
+          <option value="can">Càn</option>
+          <option value="khon">Khôn</option>
+          <option value="ton">Tốn</option>
+          <option value="kham">Khảm</option>
+        </select>
+        <small>↑ ↓ ← → di chuyển · E lần nữa để chốt quẻ</small>
+      </nav>
+    </main>
+    <script type="module" src="/src/vo-dang-quyen-preview.ts"></script>
+  </body>
+</html>

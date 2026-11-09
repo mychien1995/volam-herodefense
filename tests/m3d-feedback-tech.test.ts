@@ -255,9 +255,9 @@ describe('M3D feedback tech', () => {
       'left_fist',
     ]);
   });
-  it.each(['vo_dang_quyen', 'vo_dang_kiem'])(
-    'bounds %s to animation cadence with no automatic queued attacks',
-    (id) => {
+  it.each([['vo_dang_quyen', 0], ['vo_dang_kiem', 6]] as const)(
+    '%s uses its own manual cadence with no automatic queued attacks',
+    (id, cooldown) => {
       const f = fixture();
       f.hero.basicId = id;
       for (let i = 0; i < 8; i++)
@@ -265,7 +265,7 @@ describe('M3D feedback tech', () => {
       f.steps(30);
       expect(f.events.filter((e) => e.kind === 'attack')).toHaveLength(1);
       f.input({ kind: 'basic' });
-      expect(f.hero.cooldown - f.world.tick).toBe(6);
+      expect(f.hero.cooldown - f.world.tick).toBe(cooldown);
     },
   );
   it('rank4 fire follows the owner every tick, hits only nearby visible enemies and expires', () => {

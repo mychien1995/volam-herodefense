@@ -469,26 +469,6 @@ export class RenovationRevision {
         im.setOrigin(0.5).setScale(1, 0.35);
       }
     });
-    state?.areas.forEach((a, id) => {
-      if (
-        renovationFollowupEnabled() ||
-        a.zoneId !== zone ||
-        a.abilityId !== 'thai_cuc_tran'
-      )
-        return;
-      field(
-        'dome:' + id,
-        'tai_chi_dome',
-        a.abilityId,
-        a.x,
-        a.y,
-        (a.radius * 2) / 480,
-        a.y - 50,
-      )
-        .setOrigin(0.5, 0.84)
-        .setFrame(String(Math.floor(this.scene.time.now / 180) % 4))
-        .setAlpha(0.7);
-    });
     for (const [id, im] of this.fields)
       if (!wanted.has(id)) {
         im.destroy();

@@ -12,6 +12,8 @@ import {
   hasStatus,
   DungeonMatch,
   createSeededRandom,
+  fortuneReadings,
+  skillCharges,
   type CombatEvent,
   type BuildChange,
 } from '@volam/game-core';
@@ -26,7 +28,10 @@ import {
   skillVisualStages,
 } from '@volam/game-data';
 import { hurt } from '../packages/game-core/src/combat.js';
-import { applyStatus } from '../packages/game-core/src/status.js';
+import {
+  applyStatus,
+  cancelOwnedEffects,
+} from '../packages/game-core/src/status.js';
 function fixture(id = 'luong_nghi_thu') {
   const config = structuredClone(m1Config);
   Object.assign(config, {
@@ -116,11 +121,7 @@ describe('M3C2 authoritative Yin–Yang', () => {
       expect(h.events.filter((e) => e.kind === 'cast')).toHaveLength(
         id === 'thai_cuc_than_cong' ? 2 : 1,
       );
-      expect(h.hero.mana).toBe(
-        180 -
-          m1Config.skillCatalogue![id]!.manaCost +
-          (id === 'duong_khi_kich' ? 7 : 0),
-      );
+      expect(h.hero.mana).toBe(180 - m1Config.skillCatalogue![id]!.manaCost);
     },
   );
   it('Quyền is fast modest forward melee with reduced cleave and misses behind/range/terrain', () => {
@@ -133,7 +134,14 @@ describe('M3C2 authoritative Yin–Yang', () => {
     expect(f.hits(f.enemies[1]!.id)[0]!.damage).toBe(4);
     expect(f.enemies[2]!.hp).toBe(10000);
     expect(f.world.projectiles.size).toBe(0);
-    expect(voDangBasics['vo_dang_quyen']!.minIntervalTicks).toBe(6);
+    expect(voDangBasics['vo_dang_quyen']!.cooldownTicks).toBe(0);
+    expect(f.hero.cooldown).toBe(f.world.tick);
+    f.input({ kind: 'basic' });
+    f.input({ kind: 'basic' });
+    f.steps(1);
+    expect(
+      f.events.filter((e) => e.kind === 'attack').map((e) => e.stage),
+    ).toEqual(['left_palm', 'right_palm']);
     expect(voDangBasics['vo_dang_kiem']!.minIntervalTicks).toBe(6);
     const g = fixture();
     g.config.collision = [{ x: 320, y: 250, width: 2, height: 100 }];
@@ -178,12 +186,31 @@ describe('M3C2 authoritative Yin–Yang', () => {
     expect(outcomes(42).length).toBeGreaterThan(0);
     expect(outcomes(42)).not.toEqual(outcomes(99));
   });
+  it('Kiếm chooses one of five independent sword poses per accepted A with unchanged melee damage', () => {
+    const poses = ['thrust', 'cut_left', 'cut_right', 'cut_down', 'cut_up'];
+    for (const [index, pose] of poses.entries()) {
+      const f = fixture();
+      f.hero.basicId = 'vo_dang_kiem';
+      let draws = 0;
+      f.world.random = () => (draws++ === 0 ? (index + 0.5) / 5 : 0.99);
+      f.input({ kind: 'basic' });
+      f.input({ kind: 'basic' });
+      f.steps(1);
+      expect(
+        f.events.filter((e) => e.kind === 'attack').map((e) => e.stage),
+      ).toEqual([pose]);
+      expect(f.hero.basicStage).toBe(pose);
+      expect(f.hits()[0]?.damage).toBe(27);
+      expect(f.world.projectiles.size).toBe(0);
+    }
+  });
   it('Lưỡng Nghi reduces actual enemy attack power, strongest nonstacking refresh and exact expiry', () => {
     const f = fixture();
     f.cast();
-    f.steps(2);
+    f.steps(8);
     const e = f.enemies[0]!;
     expect(hasStatus(e, 'attack_break', f.world.tick)).toBe(true);
+    expect(hasStatus(e, 'slow', f.world.tick)).toBe(true);
     const hp = f.hero.hp;
     hurt(f.world, f.hero, e.id, 'strike', 50, f.config);
     expect(f.hero.hp).toBe(hp - 40);
@@ -204,20 +231,65 @@ describe('M3C2 authoritative Yin–Yang', () => {
       1,
     );
     expect(
-      e.statuses!.filter((s) => s.abilityId === 'luong_nghi_thu'),
+      e.statuses!.filter(
+        (s) => s.kind === 'attack_break' && s.abilityId === 'luong_nghi_thu',
+      ),
     ).toHaveLength(1);
     f.steps(90);
     expect(hasStatus(e, 'attack_break', f.world.tick)).toBe(false);
   });
-  it('Huyền Âm applies independent movement/attack slows, slows authoritative attack cadence, and expires', () => {
+  it('Huyền Âm launches two straight knockbacks before five seals detonate together after 30 ticks', () => {
     const f = fixture('huyen_am_chuong');
-    f.enemies[0]!.x = 324;
-    f.config.creep.detectionRange = 1000;
     f.cast();
-    const e = f.enemies[0]!;
-    expect(e.cooldown).toBe(61);
-    expect(hasStatus(e, 'slow', 1)).toBe(true);
-    expect(hasStatus(e, 'attack_slow', 1)).toBe(true);
+    expect(f.world.projectiles.size).toBe(0);
+    f.steps(4);
+    expect(
+      [...f.world.projectiles.values()].map((p) => [p.stage, p.vx, p.vy]),
+    ).toEqual([['travel_0', 650, 0]]);
+    f.steps(5);
+    expect([...f.world.projectiles.values()].map((p) => p.stage)).toContain(
+      'travel_1',
+    );
+    f.steps(12);
+    const seals = f.world.areas!;
+    expect(f.hits()).toHaveLength(2);
+    expect(f.enemies[0]!.x).toBeCloseTo(384);
+    expect(f.enemies[2]!.hp).toBe(10000);
+    expect(seals).toHaveLength(5);
+    expect(new Set(seals.map(({ x, y }) => x + ',' + y)).size).toBe(5);
+    for (const seal of seals) {
+      expect(
+        Math.hypot(seal.x - f.hero.x, seal.y - f.hero.y),
+      ).toBeGreaterThanOrEqual(63);
+      expect(seal.nextTick - f.world.tick).toBe(30);
+    }
+    Object.assign(f.enemies[0]!, { x: seals[0]!.x, y: seals[0]!.y });
+    f.steps(29);
+    expect(f.hits()).toHaveLength(2);
+    f.steps(1);
+    expect(f.hits()).toHaveLength(3);
+    expect(f.events.filter((e) => e.stage === 'area_tick')).toHaveLength(5);
+    f.steps(1);
+    expect(f.world.areas).toEqual([]);
+  });
+  it('cancels the pending ink scatter and fortune roll when their owner leaves the world', () => {
+    for (const id of ['huyen_am_chuong', 'duong_khi_kich']) {
+      const f = fixture(id);
+      f.cast();
+      f.steps(10);
+      cancelOwnedEffects(f.world, f.hero.id);
+      f.steps(151);
+      expect(f.world.areas).toEqual([]);
+      expect(
+        f.events.some(
+          (e) => e.stage === 'area_tick' || e.stage?.startsWith('fortune:'),
+        ),
+      ).toBe(false);
+      expect(f.hero.fortune).toBeUndefined();
+    }
+  });
+  it('movement slow and attack slow remain independent statuses', () => {
+    const f = fixture();
     initializeProgression(f.hero, f.config);
     const base = characterStats(f.hero, f.config).total;
     applyStatus(
@@ -243,37 +315,95 @@ describe('M3C2 authoritative Yin–Yang', () => {
     expect(characterStats(f.hero, f.config, 6).total.attackSpeed).toBeCloseTo(
       base.attackSpeed * 0.75,
     );
-    f.config.creep.detectionRange = 1;
-    f.steps(100);
-    expect(e.statuses).toEqual([]);
   });
-  it('Dương Khí refunds once per successful cast including a killing hit, never per cleave or replay, capped at max', () => {
+  it.each(fortuneReadings)(
+    'Bói Toán chốt %s through the second cast',
+    (reading) => {
+      const f = fixture('duong_khi_kich');
+      const index = fortuneReadings.indexOf(reading);
+      f.world.random = () => (index + 0.05) / 8;
+      f.hero.hp = 100;
+      f.hero.mana = 80;
+      const ally = addHero(f.world, 'ally', 'Ally', f.config);
+      f.cast();
+      const cooldown = f.hero.skillCooldowns[0];
+      expect(
+        f.hero.statuses?.find((s) => s.kind === 'fortune_roll')?.magnitude,
+      ).toBe(index);
+      f.cast();
+      expect(
+        f.hero.statuses?.find((s) => s.kind === 'fortune_result')?.magnitude,
+      ).toBe(index);
+      expect(f.hero.skillCooldowns[0]).toBe(cooldown);
+      expect(f.hero.mana).toBeCloseTo(reading === 'ton' ? 70 + 180 * 0.16 : 70);
+      expect(f.hero.hp).toBeCloseTo(
+        reading === 'can'
+          ? 100 + 160 * 0.12
+          : reading === 'ly'
+            ? 100 - 160 * 0.08
+            : 100,
+      );
+      expect(ally.hp).toBe(160);
+      expect(f.hits()).toHaveLength(reading === 'doai' ? 1 : 0);
+      if (reading === 'doai') expect(f.hits()[0]?.damage).toBe(30);
+      const status = {
+        can: 'hp_regen_buff',
+        khon: 'attack_buff',
+        ton: 'mana_regen_buff',
+        kham: 'speed_buff',
+        chan: 'stun',
+      } as const;
+      const kind = status[reading as keyof typeof status];
+      if (kind) {
+        const duration = reading === 'chan' ? 60 : 90;
+        const applied = f.hero.statuses?.find((s) => s.kind === kind);
+        expect(applied?.until).toBe(f.world.tick + duration);
+        if (reading === 'khon') {
+          expect(
+            f.hero.statuses?.find((s) => s.kind === 'crit_buff')?.secondary,
+          ).toBe(0.25);
+          hurt(f.world, f.enemies[0]!, f.hero.id, 'strike', 100, f.config, {
+            critChance: 1,
+            critMultiplier: 2.25,
+          });
+          expect(f.world.events.at(-1)?.damage).toBe(259);
+        }
+        f.steps(duration);
+        expect(hasStatus(f.hero, kind, f.world.tick)).toBe(false);
+      }
+      f.cast();
+      expect(
+        f.events.filter((e) => e.stage === 'fortune:' + reading),
+      ).toHaveLength(1);
+    },
+  );
+  it('rotates through all eight quẻ and auto-chốt at the five-second deadline even under silence', () => {
     const f = fixture('duong_khi_kich');
-    f.enemies[1]!.x = 345;
+    f.world.random = () => 0;
     f.cast();
-    f.steps(3);
-    expect(f.hero.mana).toBe(177);
-    expect(f.events.filter((e) => e.stage === 'refund')).toHaveLength(1);
+    for (let index = 0; index < 8; index++) {
+      if (index > 0) f.steps(5);
+      expect(
+        f.hero.statuses?.find((s) => s.kind === 'fortune_roll')?.magnitude,
+      ).toBe(index);
+    }
+    f.steps(113);
+    applyStatus(
+      f.hero,
+      { kind: 'silence', magnitude: 1, durationTicks: 10 },
+      'enemy',
+      'probe',
+      f.world.tick,
+    );
     f.cast();
-    expect(f.hero.mana).toBe(177);
-    const g = fixture('duong_khi_kich');
-    g.hero.fx = -1;
-    g.enemies[2]!.x = 20;
-    g.cast();
-    g.steps(25);
-    expect(g.hero.mana).toBe(170);
-    const h = fixture('duong_khi_kich');
-    h.enemies[0]!.hp = 1;
-    h.cast();
-    h.steps(3);
-    expect(h.hero.mana).toBe(177);
-    const j = fixture('duong_khi_kich');
-    const a = structuredClone(j.config.skillCatalogue!['duong_khi_kich']!);
-    if (a.effect.mode === 'projectile') a.effect.manaRefund = 100;
-    j.config.skillCatalogue![a.id] = a;
-    j.cast();
-    j.steps(3);
-    expect(j.hero.mana).toBe(180);
+    expect(f.hero.fortune).toBeDefined();
+    f.steps(1);
+    expect(f.hero.fortune).toBeUndefined();
+    expect(
+      f.events
+        .filter((e) => e.stage?.startsWith('fortune:'))
+        .map((e) => e.stage),
+    ).toEqual(['fortune:can-nui']);
   });
   it('Thái Cực shield spends mana after armor, partially absorbs depletion and applies lethal remainder', () => {
     const f = fixture('thai_cuc_than_cong');
@@ -345,6 +475,12 @@ describe('M3C2 authoritative Yin–Yang', () => {
     (id) => {
       const f = fixture(id);
       f.cast();
+      if (id === 'thai_cuc_tran') {
+        f.steps(23);
+        expect(f.world.areas).toHaveLength(0);
+        f.steps(1);
+        expect(f.world.areas?.[0]?.effect.radius).toBe(192);
+      }
       expect(f.hits()).toHaveLength(1);
       const area = f.world.areas![0]!;
       const interval = area.effect.tickInterval;
@@ -387,17 +523,24 @@ describe('M3C2 authoritative Yin–Yang', () => {
   it('Thất Tinh has seven timed frontal cuts regardless of cast spam, rear targets excluded', () => {
     const f = fixture('that_tinh_kiem');
     f.cast();
-    f.steps(2);
+    const castAt = f.world.tick;
+    f.steps(5);
     expect(f.hits()).toHaveLength(1);
     f.steps(1);
     expect(f.hits()).toHaveLength(2);
     f.steps(1);
     expect(f.hits()).toHaveLength(2);
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < 35; i++) {
       f.input({ kind: 'cast', slot: 0 });
       f.steps(1);
     }
     expect(f.hits().map((e) => e.damage)).toEqual(Array(7).fill(14));
+    expect(
+      f.events.filter((e) => e.stage === 'sweep').map((e) => e.hitIndex),
+    ).toEqual([0, 1, 2, 3, 4, 5, 6]);
+    expect(
+      f.events.filter((e) => e.stage === 'sweep').map((e) => e.tick! - castAt),
+    ).toEqual([0, 6, 12, 18, 24, 30, 36]);
     expect(f.enemies[2]!.hp).toBe(10000);
   });
   it('Nhân Kiếm pierces each target once along its original direction; walls stop travel', () => {
@@ -432,21 +575,63 @@ describe('M3C2 authoritative Yin–Yang', () => {
       1,
     );
   });
-  it('Vạn Kiếm releases repeated eight-way straight bursts over a five-second channel', () => {
+  it('Vạn Kiếm locks a front boss over a nearer creep and lands once after the rise, quiet beat and drop', () => {
     const f = fixture('van_kiem_quy_tong');
-    f.world.creeps.clear();
+    const boss = f.enemies[1]!;
+    Object.assign(boss, { x: 530, y: 300, encounterBoss: true });
+    f.enemies[2]!.encounterBoss = true;
     f.cast();
-    expect(f.world.projectiles.size).toBe(8);
-    const shots = [...f.world.projectiles.values()];
-    expect(
-      new Set(shots.map((p) => Math.atan2(p.vy, p.vx).toFixed(3))).size,
-    ).toBe(8);
-    expect(shots.some((p) => p.vx < 0)).toBe(true);
-    expect(shots.some((p) => p.vy < 0)).toBe(true);
-    f.steps(12);
-    expect(f.world.projectiles.size).toBe(16);
-    f.steps(138);
+    const area = f.world.areas![0]!;
+    expect(area).toMatchObject({
+      x: 530,
+      y: 300,
+      launch: { x: 300, y: 300, fx: 1, fy: 0 },
+    });
+    expect(area.nextTick - f.world.tick).toBe(80);
+    expect(f.world.projectiles.size).toBe(0);
+    expect(hasStatus(f.hero, 'channel', f.world.tick)).toBe(true);
+    boss.x = 700;
+    f.enemies[0]!.x = 534;
+    f.steps(36);
     expect(hasStatus(f.hero, 'channel', f.world.tick)).toBe(false);
+    f.steps(43);
+    expect(f.hits()).toHaveLength(0);
+    f.steps(1);
+    expect(f.hits().map((e) => e.damage)).toEqual([108]);
+    expect(f.hits(boss.id)).toHaveLength(0);
+    expect(f.events.filter((e) => e.stage === 'area_tick')).toHaveLength(1);
+    expect(f.world.areas).toHaveLength(1);
+    f.steps(40);
+    expect(f.world.areas).toEqual([]);
+    expect(f.events.filter((e) => e.stage === 'area_tick')).toHaveLength(1);
+  });
+  it('Vạn Kiếm spends one charge and mana per accepted cast, restores charges in order, and scales 2–5 by rank', () => {
+    const f = fixture('van_kiem_quy_tong');
+    const ability = f.config.skillCatalogue!['van_kiem_quy_tong']!;
+    const charges = () => skillCharges(f.hero, ability, f.world.tick);
+    expect(
+      f.config.progression!.skills[ability.id]!.ranks.map((a) => a.charges),
+    ).toEqual([2, 3, 4, 5]);
+    expect(charges()?.count).toBe(2);
+    f.cast();
+    f.cast();
+    expect(charges()?.count).toBe(1);
+    expect(f.hero.mana).toBe(138);
+    f.steps(34);
+    f.cast();
+    expect(charges()?.count).toBe(0);
+    expect(f.world.areas).toHaveLength(2);
+    expect(f.hero.mana).toBe(96);
+    f.steps(36);
+    f.cast();
+    expect(f.events.filter((e) => e.kind === 'cast')).toHaveLength(2);
+    const first = charges()!.pending[0]!;
+    const second = charges()!.pending[1]!;
+    expect(second - first).toBe(510);
+    f.steps(first - f.world.tick);
+    expect(charges()?.count).toBe(1);
+    f.steps(second - f.world.tick);
+    expect(charges()?.count).toBe(2);
   });
   it('mana regeneration uses server ticks, innate growth and max caps without regenerating dead players', () => {
     const f = fixture();

@@ -61,7 +61,7 @@ function cast(p: Peer, slot: number) {
     protocolVersion: PROTOCOL_VERSION,
   });
 }
-it('three schools share dungeon/arena combat, authoritative shield/counter/refund/areas and rewards without room/zone leaks', async () => {
+it('three schools share dungeon/arena combat, authoritative shield/counter/fortune/areas and rewards without room/zone leaks', async () => {
   seq = 0;
   const a = await create('Fire'),
     b = await client.joinById<LobbyState>(a.roomId, opts('Wind')),
@@ -174,12 +174,11 @@ it('three schools share dungeon/arena combat, authoritative shield/counter/refun
   await expect
     .poll(() => c.state.players.get(c.sessionId)!.statuses)
     .toContain('mana_shield');
-  cast(c, 1);
   cast(c, 2);
-  cast(c, 3);
+  await expect.poll(() => c.state.areas.size).toBe(1);
+  cast(c, 1);
   cast(a, 0);
   cast(b, 0);
-  await expect.poll(() => c.state.areas.size).toBe(1);
   await expect.poll(() => a.state.areas.size).toBe(1);
   expect(isolate.state.areas.size).toBe(0);
   const attacker = addCreep(
@@ -201,17 +200,22 @@ it('three schools share dungeon/arena combat, authoritative shield/counter/refun
     gold: 0,
   };
   await expect
-    .poll(() => events[0]!.some((e) => e.stage === 'absorb'))
+    .poll(() => events[0]!.some((e) => e.stage === 'absorb' && e.damage > 0))
     .toBe(true);
+  expect(h.hp).toBe(h.maxHp);
+  expect(h.mana).toBeLessThan(h.maxMana);
   await expect
     .poll(() => events[1]!.some((e) => e.stage === 'counter_release'), {
       timeout: 8000,
     })
     .toBe(true);
-  expect(h.hp).toBe(h.maxHp);
-  expect(h.mana).toBeLessThan(h.maxMana);
+  cast(c, 3);
   await expect
-    .poll(() => events[2]!.some((e) => e.stage === 'refund'))
+    .poll(() => c.state.players.get(c.sessionId)!.statuses)
+    .toContain('fortune_roll');
+  cast(c, 3);
+  await expect
+    .poll(() => events[2]!.some((e) => e.stage?.startsWith('fortune:')))
     .toBe(true);
   expect(wind.statuses?.some((s) => s.kind === 'mana_shield')).toBe(false);
   await expect
@@ -292,9 +296,10 @@ it('three schools share dungeon/arena combat, authoritative shield/counter/refun
     aggroRestTicks: 90,
   };
   cast(c, 0);
-  cast(c, 1);
   await expect.poll(() => inv.hp).toBeLessThan(1000);
   await expect.poll(() => c.state.areas.size).toBe(1);
+  await expect.poll(() => c.state.players.get(c.sessionId)!.pose).not.toBe('cast');
+  cast(c, 1);
   expect(a.state.areas.size).toBe(0); // other peers remain in dungeon
   await c.leave();
   await expect.poll(() => room.world.areas?.length ?? 0).toBe(0);

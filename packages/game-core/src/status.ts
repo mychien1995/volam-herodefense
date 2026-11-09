@@ -100,6 +100,7 @@ export function cancelOwnedEffects(world: World, id: string): void {
   if (owner) {
     delete owner.comboFinisher;
     delete owner.tamLien;
+    delete owner.fortune;
     owner.basicChains = {};
   }
   world.combos = (world.combos ?? []).filter(
@@ -109,6 +110,10 @@ export function cancelOwnedEffects(world: World, id: string): void {
   world.actions = (world.actions ?? []).filter((a) => a.ownerId !== id);
   world.areas = (world.areas ?? []).filter((a) => a.ownerId !== id);
   world.shots = world.shots.filter((a) => a.ownerId !== id);
+  if (world.pendingScatters)
+    world.pendingScatters = world.pendingScatters.filter(
+      (a) => a.ownerId !== id,
+    );
   for (const [key, p] of world.projectiles)
     if (p.ownerId === id) world.projectiles.delete(key);
   for (const a of [...world.heroes.values(), ...world.creeps.values()]) {

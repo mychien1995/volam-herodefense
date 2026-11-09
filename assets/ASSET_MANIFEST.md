@@ -1,3 +1,11 @@
+## Võ Đang Kiếm · A2, Q2 và Thiên Kiếm — 2026-11-09
+
+Hai atlas Phaser trong `exports/vo-dang-kiem-rework/` gồm 24 khung thân có điểm đặt chân cố định và 10 hiệu ứng raster. Bộ thân có năm thế A và một thế chỉ kiếm ở ba hướng vẽ riêng, hướng trái phản chiếu từ hướng phải. Q dùng lại bộ thế kiếm và có bảy vệt riêng. Kiếm lam bạc chuôi vàng dùng chung raster cho pha lên và pha rơi, xoay 180 độ khi rơi. Nguồn và cấu hình xuất ở [provenance.json](source/vo-dang-kiem-rework/provenance.json).
+
+## Võ Đang Quyền · bộ art duyệt ngày 2026-11-09
+
+Phaser dùng atlas PNG/JSON đã duyệt trong `exports/vo-dang-quyen-preview/` cho dáng đấm, thế chưởng, sáu thế Thái Cực Quyền, quẻ và buff, cầu nội lực, ấn mực và trận Bát Quái. Q dùng các frame `huyen_am_travel` từ PNG tay lam đen đã có. A dùng atlas sóng quyền khí M3D. Tất cả giữ tỉ lệ ảnh gốc. Pivot chân và socket tay được ghi trong dữ liệu xuất. Nguồn ImageGen, prompt và hash nằm trong [provenance.json](source/vo-dang-quyen-preview/provenance.json).
+
 ## Thiên Sơn · Bạo Vũ Cuồng Phong và Bách Liệt Thiên Kích — 2026-11-09
 
 Bạo Vũ Cuồng Phong **đã duyệt artwork phóng quạt** ngày 2026-11-09. Bốn frame 88×88, tâm (44,44), cùng vòng quạt cho lượt đi và thu về. Exporter kiểm hash của bộ được duyệt.

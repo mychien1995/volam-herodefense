@@ -1,3 +1,13 @@
+## Võ Đang Kiếm · 2026-11-09
+
+Run `pnpm check:final --config playwright.vo-dang-kiem.config.ts`. Observe server-selected A poses and preserved Kiếm Khí, exactly seven ordered Q sweeps spaced 6 ticks apart, and a charged T cast on two normal Phaser clients. Verify staggered launches from the caster, a quiet phase showing only the marker, and 48 distinct contacts with small blasts around the same mark. The target takes one hit at tick 80, at the centered first contact. Verify charge capacity by rank, serial recharge, and cancellation on death or zone exit. Save still PNGs.
+
+Check blade dimensions against the initial 48-blade version (+20% length and +10% width) and the ground blast area (+10%). In a real room, press R and verify that walking, dashing, basic attacks and active skill inputs are blocked. Use each type of potion during a separate stance because they share a cooldown. Verify that movement and skills resume on expiry and that early reflection releases the lock.
+
+## Võ Đang Quyền · 2026-11-09
+
+Run `pnpm check:final --config playwright.vo-dang-quyen.config.ts`. Join a fixed-build match on two clients and learn QWERT through the hotbar. Check alternate A punches and both fist waves, the reused Q hand projectile and uniform scaling, two W waves and five ink bursts exactly 30 ticks after the seals appear, and E glyph cycling with a server-acknowledged second press. Verify the sphere and Bagua field on both peers. Validate the six authored Tai Chi cels and observe changing poses and rim lights in the running client. Deterministic combat tests cover all eight readings, auto-settlement, status timing, damage, knockback and zone cleanup. Capture still PNGs.
+
 ## Renovation v10 acceptance — 2026-11-07
 
 Run `pnpm check:final --config playwright.renovation-v10.config.ts`. Observe the renovated Cái Bang Chưởng body on each of six real A inputs in all four facings. Confirm that the sixth input casts the dragon and that every observed action frame uses the renovated atlas. Compare the projectile, release and impact sources to M3D and check the return to renovated idle, real hits and peer HP. Verify Phi Long's head-only rendering and six-client production combat. Retain PNG evidence.

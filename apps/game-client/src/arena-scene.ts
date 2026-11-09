@@ -48,6 +48,7 @@ import {
 import type { LobbyState } from '@volam/game-protocol';
 import type { CombatEvent } from '@volam/game-core';
 import { presentTamLienBody } from './thien-son-rework.js';
+import { presentVoDangQuyenBody } from './vo-dang-quyen-art.js';
 import { createRenovationWorld } from './renovation-world.js';
 import {
   registerRenovation,
@@ -670,9 +671,16 @@ export class ArenaScene extends Phaser.Scene {
         cast?.abilityId ?? actor.castAbilityId ?? '',
         cast,
       );
-      if (!enemy)
-        presentTamLienBody(view.sprite, actor, this.zoneId === 'arena'
-          ? state?.tick : state?.dungeons.get(this.zoneId)?.tick);
+      if (!enemy) {
+        const tick = this.zoneId === 'arena'
+          ? state?.tick : state?.dungeons.get(this.zoneId)?.tick;
+        presentTamLienBody(view.sprite, actor, tick);
+        const player = state?.players.get(id);
+        if (player) {
+          presentVoDangQuyenBody(view.sprite, player, tick);
+          this.vfx?.voDangKiem.body(view.sprite, player, id, tick);
+        }
+      }
       if (cast)
         this.vfx?.observeCharacter(
           texture,

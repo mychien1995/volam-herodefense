@@ -1,3 +1,11 @@
+## Võ Đang đã duyệt — 2026-11-09
+
+Hai nhánh Quyền và Kiếm đi vào trận thường của `milestone/m3d` với protocol 38. Quyền có đấm luân phiên kèm quyền khí, Lưỡng Nghi Thủ dùng lại đạn tay lam đen, Huyền Âm Chưởng có hai sóng và năm ấn nổ mực sau một giây. Bói Toán Thiên Cơ cho phép chốt tay hoặc tự chốt sau năm giây. Cầu nội lực và Thái Cực Trận Âm Dương Bát Quái dùng art đã duyệt. [Kiểm chứng Võ Đang Quyền](evidence/sessions/vo-dang-quyen-final/README.md).
+
+Kiếm dùng năm thế đánh A2 và bảy nhát Q2 cách nhau 0,2 giây. Vạn Kiếm Quy Tông có 2–5 lượt theo bậc, với 48 thanh và một vụ nổ tại mỗi điểm chạm. Sát thương lan tính một lần khi thanh đầu đáp tâm. So với bản 48 thanh đầu tiên, kiếm dài thêm 20% và rộng thêm 10%, diện tích vụ nổ tăng 10%. Tọa Sát Bác Đồ khóa di chuyển, lướt, đánh thường và dùng chiêu đến khi phản đòn hoặc hết thế thủ. Bình máu và mana vẫn dùng theo hồi chiêu chung. [Kiểm chứng Võ Đang Kiếm](evidence/sessions/vo-dang-kiem-guard-final/README.md).
+
+Bản gộp qua 960 test Vitest, build và các validator asset. Playwright kiểm tra Kiếm với hai client. Lượt kiểm tra tích hợp bổ sung vào một phòng có cả Quyền và Kiếm, xác nhận hai client cùng nhận A/Q/W/E/R/T của Quyền, năm vụ nổ W, chốt quẻ E và hiển thị trận T.
+
 ## Thiên Sơn đã duyệt — 2026-11-09
 
 Protocol 36 thêm lệnh S và thời gian hiện HUD Tam Liên Trảm do server đồng bộ. Thiên Sơn Đao có ba nhát A, một cửa sổ QTE hai giây khi đủ sáu điểm và hồi 10 giây trước khi tích lại. HUD 200 × 46 px nằm trên thanh kỹ năng. Bạo Vũ Cuồng Phong duy trì một vòng quạt gây sát thương và trừ mana cho đến khi thu, rồi hồi hai giây. Bách Liệt Thiên Kích giữ bốn bóng chữ X và tám đợt đao khí xuyên tâm. Hàn Nguyệt dùng mẫu A, với tỉ lệ lưỡi mới ở các khung đứng và đi. Xem [quyết định duyệt](../DECISIONS.md#thiên-sơn--tam-liên-trảm-và-bạo-vũ-cuồng-phong--bản-duyệt-m3d) và [ảnh trong Phaser](evidence/sessions/thien-son-tam-lien-hud-layout/).

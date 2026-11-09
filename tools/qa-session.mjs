@@ -70,9 +70,12 @@ export function qaWorkflowSession(mode, args = [], env = process.env) {
   if (
     mode === 'quick' ||
     (name &&
-      !['playwright.config.ts', 'playwright.arena-creeps.config.ts'].includes(
-        name,
-      ))
+      ![
+        'playwright.config.ts',
+        'playwright.arena-creeps.config.ts',
+        'playwright.vo-dang-quyen.config.ts',
+        'playwright.vo-dang-kiem.config.ts',
+      ].includes(name))
   ) {
     const pathsEnvironment = { ...env };
     delete pathsEnvironment.VITE_SERVER_URL;

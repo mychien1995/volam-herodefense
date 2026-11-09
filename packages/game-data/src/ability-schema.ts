@@ -45,6 +45,22 @@ const projectile = z.strictObject({
     })
     .optional(),
   windupTicks: count.min(1).optional(),
+  scatter: z
+    .strictObject({
+      count: count.min(1).max(8),
+      appearanceTicks: count,
+      delayTicks: count.min(1),
+      innerRadius: positive,
+      outerRadius: positive,
+      radius: positive,
+      damage: positive,
+      attackPowerScale: z.number().min(0).max(1),
+    })
+    .refine(
+      (effect) => effect.outerRadius > effect.innerRadius,
+      'Invalid scatter radii',
+    )
+    .optional(),
   recoveryTicks: count.optional(),
   laneOffsets: z.array(z.number().finite()).min(1).max(8).optional(),
   knockbackChance: z.number().min(0).max(1).optional(),
@@ -60,22 +76,39 @@ const projectile = z.strictObject({
   burnTicks: count,
   piercing: z.boolean().optional(),
   useFacing: z.boolean().optional(),
+  forwardOnly: z.boolean().optional(),
   knockback: z.number().nonnegative().optional(),
   statuses: z.array(status).optional(),
   spreadAngle: z.number().finite().min(0).max(Math.PI).optional(),
   radial: z.boolean().optional(),
   attackPowerScale: z.number().finite().min(0).max(1).optional(),
   blinkWindowTicks: count.min(1).optional(),
-  recallDrain: z.strictObject({
-    intervalTicks: count.min(1),
-    mana: positive,
-    cooldownSeconds: count.min(1),
-  }).optional(),
+  recallDrain: z
+    .strictObject({
+      intervalTicks: count.min(1),
+      mana: positive,
+      cooldownSeconds: count.min(1),
+    })
+    .optional(),
   boomerang: z.boolean().optional(),
   manaRefund: z.number().finite().nonnegative().optional(),
   slowedBonus: z.number().finite().nonnegative().optional(),
 });
 const area = z.strictObject({
+  windupTicks: count.min(1).optional(),
+  skyfall: z
+    .strictObject({
+      range: positive,
+      fallbackDistance: positive,
+      halfAngle: positive.max(Math.PI),
+      blades: count.min(2).max(64),
+      aimTicks: count.min(1),
+      riseTicks: count.min(1),
+      quietTicks: count.min(1),
+      firstFallTicks: count.min(1),
+      fallTicks: count.min(1),
+    })
+    .optional(),
   mode: z.literal('area'),
   durationTicks: count.min(1),
   tickInterval: count.min(1),
@@ -125,14 +158,21 @@ export const abilitySchema = z
     nameVi: z.string().min(1),
     cooldownTicks: count,
     manaCost: z.number().nonnegative(),
+    charges: count.min(2).max(8).optional(),
     manualChain: z
       .strictObject({
         idleTicks: count.min(1),
-    cooldownTicks: count,
+        cooldownTicks: count,
         finisherProjectile: projectile,
       })
       .optional(),
     minIntervalTicks: count.min(1).optional(),
+    basicPoseTicks: count.min(1).optional(),
+    basicVariants: z
+      .array(z.string().regex(/^[a-z_]+$/))
+      .min(2)
+      .max(8)
+      .optional(),
     basicComboEndRecoveryTicks: count.min(1).optional(),
     basicCombo: z
       .array(
@@ -175,6 +215,23 @@ export const abilitySchema = z
         toggle: z.boolean().optional(),
       }),
       area,
+      z.strictObject({
+        mode: z.literal('fortune'),
+        durationTicks: count.min(1),
+        cycleTicks: count.min(1),
+        buffTicks: count.min(1),
+        stunTicks: count.min(1),
+        healFraction: positive.max(1),
+        manaFraction: positive.max(1),
+        hpRegen: positive,
+        manaRegen: positive,
+        damageMultiplier: positive.max(1),
+        critMultiplier: positive.max(1),
+        movementSpeed: positive.max(1),
+        lossFraction: positive.max(1),
+        blastDamage: positive,
+        blastRadius: positive,
+      }),
       z.strictObject({
         mode: z.literal('guard_counter'),
         durationTicks: count.min(1),
@@ -253,6 +310,38 @@ export const abilitySchema = z
     ]),
   })
   .superRefine((a, c) => {
+    if (
+      a.basicVariants &&
+      (a.basicCombo || new Set(a.basicVariants).size !== a.basicVariants.length)
+    )
+      c.addIssue({
+        code: 'custom',
+        message: 'Basic variants must be distinct and independent of a combo',
+      });
+    if (a.charges && a.cooldownTicks === 0)
+      c.addIssue({
+        code: 'custom',
+        message: 'Charged skills require a recharge interval',
+      });
+    if (a.effect.mode === 'area' && a.effect.skyfall) {
+      const sky = a.effect.skyfall;
+      if (
+        sky.fallbackDistance > sky.range ||
+        sky.aimTicks > sky.riseTicks ||
+        sky.firstFallTicks >= sky.fallTicks ||
+        a.effect.durationTicks <=
+          sky.riseTicks + sky.quietTicks + sky.fallTicks ||
+        a.effect.tickInterval < a.effect.durationTicks ||
+        a.effect.windupTicks ||
+        a.effect.followOwner ||
+        a.effect.volley ||
+        a.effect.confines
+      )
+        c.addIssue({
+          code: 'custom',
+          message: 'Skyfall requires one stationary, timed impact',
+        });
+    }
     if (
       a.effect.mode === 'projectile' &&
       a.effect.recallDrain &&

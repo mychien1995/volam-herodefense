@@ -142,7 +142,7 @@ it('seven sword hits retain approximately the four-hit budget after per-hit roun
   const e = s.target('front', 450),
     back = s.target('back', 350);
   s.cast();
-  s.step(35);
+  s.step(38);
   expect(
     s.events.filter((e) => e.kind === 'pulse' && e.stage === 'sweep'),
   ).toHaveLength(7);
@@ -169,6 +169,7 @@ it('dome confines resistant boss movement, allows ally passage, and releases at 
     },
   ];
   s.cast();
+  s.step(24);
   captureConfinement(s.w, s.c);
   const a = s.w.areas![0]!;
   expect(a.trappedIds).toContain(boss.id);
@@ -219,7 +220,7 @@ it('DungeonMatch clips the real Hong Liet scripted dash at the dome boundary', (
   });
   e.nextActionAt = Number.MAX_SAFE_INTEGER;
   submitInput(w, h.id, 1, { kind: 'cast', slot: 0 });
-  m.step();
+  for (let t = 0; t <= 24; t++) m.step();
   const area = w.areas![0]!;
   expect(area.trappedIds).toContain(boss.id);
   e.cast = undefined;

@@ -187,6 +187,8 @@ export function inspectRenovation(scene: Phaser.Scene) {
             b.texture.key.startsWith('renovated-v8-') ||
             /^cai_bang_hang_long_v[12]$/.test(b.texture.key) ||
             b.texture.key.startsWith('v6_') ||
+            b.texture.key.startsWith('vdq-') ||
+            b.texture.key.startsWith('vdk-') ||
             b.texture.key.startsWith('retained_m3d_')) &&
           !b.getData('renovation') &&
           b.visible &&
@@ -217,6 +219,7 @@ export function inspectRenovation(scene: Phaser.Scene) {
               : undefined),
           velocity: b.getData('velocity'),
           projectileStage: b.getData('projectile-stage'),
+          swordPhase: b.getData('vdk-phase'),
           shadow: b.getData('v5-shadow'),
           effect: b.getData('v6-effect') ?? b.getData('v5-effect'),
           authoredHeading: b.getData('authored-heading'),

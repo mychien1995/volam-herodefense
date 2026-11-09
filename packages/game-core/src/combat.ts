@@ -220,12 +220,17 @@ export function hurt(
         statusValue(world.creeps.get(sourceId)!, 'attack_break', world.tick),
       )
     : 1;
+  const heroSource = world.heroes.get(sourceId);
+  const bonus = heroSource
+    ? statusValue(heroSource, 'attack_buff', world.tick)
+    : 0;
   const adjusted =
     snapshot?.unavoidableHpLoss ||
     snapshot?.resolvedReflection ||
     snapshot?.directHp
       ? raw
       : raw *
+        (1 + bonus) *
         reduction *
         condition *
         (100 / (100 + defense)) *

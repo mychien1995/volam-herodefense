@@ -1,0 +1,171 @@
+{
+  "status": "The director approved both the artwork preview and the integrated Phaser match changes on 2026-11-09.",
+  "authoring": "OpenAI ImageGen built-in tool. Original new concept art generated for Võ Lâm Hero Defense, with repository-owned game art as reference. No third-party sprites were imported.",
+  "exporter": "python -X utf8 assets/source/vo-dang-quyen-preview/export.py",
+  "source": "Approved artwork preview from the Codex chat dated 2026-11-09",
+  "inputs": [
+    {
+      "file": "punch-source.png",
+      "concept": "0-danh-thuong.png",
+      "prompt": "Extract and author a transparent game body animation sheet using the approved punch pose strip in reference 1 and the elevated top-down orthographic costume/identity in reference 2. Exact 4 columns by 3 equal rows, 12 full-body figures, isolated on genuine transparent background. Same height, fixed camera and foot placement within all cells. Leave wide completely clear gutters with all feet and ribbons inside their own cell. NO text or ground or borders or shadows or glow. All cells depict the same compact detailed chibi Wudang hero in black vest and ivory sleeves and white hair ribbon, exact body/head proportions. Each row reads left to right: coiled guard, one fully extended clenched fist jab with other hand tightly guarding, torso/hips twist in an opposite-hand cross with one fist extended and other fist at cheek, recoiled compact guard. Row 1 is right facing, follow the approved reference 1 exact poses. Row 2 is down/front toward the viewer from an elevated camera, visible face, use foreshortening and clearly alternate the extended fist; use bent knees and hips turn. Row 3 is up/back facing AWAY from the viewer, show back of head and full back of vest, attack with fists visible to either side of body when foreshortened and chest NEVER visible. Even regular grid with a single corresponding foot point under each full figure. This is high resolution source artwork for a game, retain crisp small details and no doubled/extra limbs.",
+      "refinement": "In this 4-column by 3-row transparent game art sheet, make precisely TWO local pose fixes. Row 2 column 2 (front-facing jab): fully retract the hand currently extended at image right, and instead throw the jab toward the camera with the other clenched hand on image LEFT. Row 3 column 2 (back-facing jab): fully retract the hand currently extended at image right, and instead throw the jab away from the camera with the other clenched hand toward image LEFT, so a visible small fist reads beyond the shoulder. Keep the frontal and rear hair and white ribbons on their current side, proportions, feet, pivot and camera. Keep all other ten drawings exactly as they are. Result is still EXACT same grid, same cells, all 12 complete isolated figures, genuine transparent background and no new shadows. Prevent any cut-off feet, fingers or ribbons. The two jabs should visibly alternate hands against the existing cross in column 3.",
+      "sha256": "963f3c72cfc0dc7d7901274003b2eabe4aae108773f110060aac032b6c52253f"
+    },
+    {
+      "file": "front-jab-source.png",
+      "concept": "punch-source.png",
+      "prompt": "Create one isolated single transparent game character cel, using the exact front-facing Wudang hero from the middle row of this sheet. Use the middle-row third column as the primary pose reference. Keep face, topknot, black hair, white ribbons blown to the LEFT side of the picture, black-and-ivory costume, planted feet and viewing angle. The single punch MUST extend from the SHOULDER ON THE LEFT SIDE OF THE PICTURE. A large foreshortened fist on the LEFT of the viewer, fully extended toward camera with the elbow hidden behind the fist. The viewer's RIGHT SIDE shows the other hand pulled back under the chin, a short bent elbow tight beside the ribs. The hero looks straight at the camera with knees flexed, eye line unchanged. Full body top to bottom, similar compact chibi proportions to the middle row; no visual effects, ground, shadow, words, repeated poses or props. Genuine transparent background. Only one figure. This single cel is the opposite-handed jab to the middle-row third column's right-screen cross, and should read clearly in an 88px-high sprite.",
+      "sha256": "d4f59e657a482178c5c0237061f2a6604972872d5c58cb2e3bdaf3e5d6ce1f0e"
+    },
+    {
+      "file": "effects-source.png",
+      "concept": ["2-huyen-am-chuong.png", "3-doai-bung-no.png"],
+      "prompt": "Separate four isolated raster game FX components from these approved references into an EXACT 2 columns by 2 rows REGULAR square grid, centered in each quadrant with very wide transparent gutters. Truly transparent background, with clean semitransparent texture edges. TOP LEFT: ONE narrow packet of precisely THREE concentric open silver blue curved sonic parentheses arcs, opens left, travels right like a rotated WiFi symbol, exactly the approved wave silhouette, three clean arcs only. TOP RIGHT: ONE small thin black-ivory yin-yang charge disk with faint silver rim, ground projected as an ellipse with visible width twice its height. BOTTOM LEFT: ONE visually exact glossy black ink fountain from approved storyboard, with tall dark watery liquid crown and separated small drops, silver highlights and short outward ground ripples, transparent around the silhouette and between the droplets, on NO floor. BOTTOM RIGHT: ONE flattened wide open vivid rose pink radial shockwave from reference 2, thin jagged rose-white expanding pressure-wave ring with short bright radial sparks and completely transparent middle, without the hero or glyph. Elevated orthographic camera for ground effects. Keep all FOUR assets widely separated with a full clear margin in each equally sized quadrant. No background stone, no characters, no labels, no borders, no layout decorations, no black or white matte. Preserve exact established school color and clean high-density pixel style.",
+      "sha256": "e68be3c4eeb071b74e13adc48873c712d05c30257482bc45ad2c3515fcbceb48"
+    },
+    {
+      "file": "fortune-source.png",
+      "concept": "3-boi-toan-thien-co.png",
+      "operation": "Byte-exact approved icon board, circular medallions isolated during export.",
+      "sha256": "ba790f87d147b3fdc610d297e60a0095310fa9582b371c7fa4df0120fa0dd156"
+    },
+    {
+      "file": "shield-source.png",
+      "concept": "4-thai-cuc-than-cong.png",
+      "prompt": "Extract the protective translucent inner qi sphere from the large left scene in the approved reference. Output just ONE complete game effect as a square standalone PNG over genuine alpha transparency, centered with plenty of padding. Exactly the approved spherical membrane with thin refractive icy blue and silver rim, delicate internal curved meridians and opposed short pale ivory and charcoal qi ribbons. Preserve faint lighting and sparkle details while making the broad interior extremely transparent. Remove the character entirely and remove all stone background and its cast ground shadow. No standing pedestal or human silhouette. No extra frames, no scenery, no text, no baked background. Distinguish far and near edges through line weight and alpha. Game VFX texture should be detailed and crisp with clear alpha edges.",
+      "sha256": "dc405e5111ef06ddd93b7debc0cb031311042bb4c1dfdadb807edb3c4ddb7ff1"
+    },
+    {
+      "file": "formation-source.png",
+      "concept": "5-thai-cuc-tran.png",
+      "prompt": "Make a high-resolution, transparent, standalone PNG raster game effect by precisely isolating the approved large Wudang formation from the reference. Keep the exact center charcoal-black and ivory yin-yang symbol, sweeping luminous ice-blue white outer qi ellipse, and all EIGHT original individual triplet glyph groups in their same dark black-ink plaques at compass positions. Remove stone paving texture everywhere, plus all people, props and scenery. Completely transparent between plaques, between concentric rings, and beyond boundary, so the live game floor is visible. The center yin-yang must be an independently readable painted ink motif with some softly translucent edges. Preserve the original projected wide ground ellipse, detail density and geometry, full perimeter uncropped with clear margins. The exact trigram lines top to bottom, clockwise from 12 o'clock: broken/whole/broken, whole/broken/broken, broken/broken/whole, whole/whole/broken, whole/broken/whole, broken/broken/broken, broken/whole/whole, whole/whole/whole. Treat the attached art as the exact pattern reference and preserve those crisp original three-bar motifs. Only one formation, no inset, no people, no floor, no labels.",
+      "refinement": "Make ONE local opacity correction to reference 1, the transparent Wudang formation texture. The central yin-yang's light upper-left comma-shaped lobe has an accidental transparent hole in its broad left area. Fill only that hole with the same warm off-white ink pigment as the rest of the upper lobe, so the upper half reads as a continuous ivory comma, with its single charcoal circular dot unchanged. The intended full shape is shown by reference 2's center medallion. The entire main yin-yang symbol should read cleanly when laid on top of patterned stone. Keep the boundary of the dark lobe, its one ivory circular dot, the exact ellipse projection, the dark/white motifs, and all Eight Trigrams exactly as they are. Keep all gaps outside the central yin-yang transparent, all eight plaques and blue orbit exactly unchanged. Do not add any backgrounds, ground, text, character, objects, or opaque paint elsewhere. Preserve canvas dimensions and high-resolution raster detail. Transparent PNG.",
+      "sha256": "47e3baba359eb09245bd1a107548075e4a1943ca6e08f8c4f575863ae7b8e778"
+    }
+  ],
+  "reused": [
+    "assets/exports/visual-upgrade-2/ground.png",
+    "assets/exports/renovation-v1/runtime/hero_vo_dang.png",
+    "assets/exports/renovation-v1/runtime/creep_bandit_grunt.png",
+    "assets/exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_character.png",
+    "assets/exports/skills/m3c3_feedback_v2_batches/03_vo_dang/vo_dang_hands_v2/vo_dang_hands_v2_projectile.png"
+  ],
+  "body": {
+    "cell": [192, 160],
+    "feet": [96, 124],
+    "height": 88,
+    "directions": ["down", "left", "right", "up"],
+    "left": "Horizontal reflection of the right-facing punch frames.",
+    "phasesMs": [62, 71, 83, 59]
+  },
+  "effects": {
+    "atlas": "assets/exports/vo-dang-quyen-preview/effects.json",
+    "anchors": "assets/exports/vo-dang-quyen-preview/placement.json",
+    "scale": "Uniform X/Y scale. Texture content is authored above display size and filtered linearly in Phaser."
+  },
+  "outputs": [
+    {
+      "file": "cast-sockets.json",
+      "sha256": "71134d7a681ab0d9481e7d16862cabb6ed306bf9772d94909e50d74b9a2ba6fd"
+    },
+    {
+      "file": "casts.json",
+      "sha256": "13d60b80b9b2bc1f275962a37c4348f081221a2f535e9ace84fc563f9c9ba354"
+    },
+    {
+      "file": "casts.png",
+      "sha256": "469dbb652b7de5a47f4b1d67ee2d340786e5747c20dde0773810fcc831e029f6"
+    },
+    {
+      "file": "effects.json",
+      "sha256": "7151bff9679adbdd41e132e01ed94553fa2e83f8fe1ae05c010fff7565f87680"
+    },
+    {
+      "file": "effects.png",
+      "sha256": "b511c06d6b8e2272d2c5b897db38cbd94c57689b5c020addeb71db24a9b596cb"
+    },
+    {
+      "file": "formation-rim.png",
+      "sha256": "e8c05a147440a206025fc04fe80d2aebd5535dbeda6f6af10be2921e990881a9"
+    },
+    {
+      "file": "legacy-huyen-am.json",
+      "sha256": "b93900c2c1056a7aad1d3691069b98cbec970aeb630664d1fe07d49d87c980de"
+    },
+    {
+      "file": "placement.json",
+      "sha256": "1c24741c7d8373bc012cddb1cdbe03942be566d647f6a0e50f8c711a9d7491e9"
+    },
+    {
+      "file": "punch.json",
+      "sha256": "f0aeabe97938f0ef34c0307cb8531612199ce30313f5ab24eb2ddc1ca8b93533"
+    },
+    {
+      "file": "punch.png",
+      "sha256": "3073cbd51579ff7b40325bce37d7fa6fbce56ab469d0f69181948b240cdac640"
+    }
+  ],
+  "previewRevision2": {
+    "status": "Preview v2 for director review, 2026-11-09",
+    "art_source": "OpenAI ImageGen built-in tool (host_image)",
+    "inputs": [
+      {
+        "file": "palm-source.png",
+        "references": ["punch-source.png", "2-huyen-am-chuong.png"],
+        "prompt": "Create an original transparent isolated game sprite SOURCE sheet for two open-palm Wudang cast animations using the SAME hero and 3/4 elevated orthographic camera as reference 1. Reference 1 is the exact identity and rendering reference, with chibi body, oversized head and black topknot, left-trailing white hair ties, charcoal vest and layered off-white robes, bare skin hands, black boots. Reference 2 is the gameplay idea of open-palm forward sonic casting. Use a precise grid of 3 equally sized rows and 4 equally sized columns on a true alpha background, one complete same-height body inside each cell with clear transparent gutters. Wide landscape 4:3. Exact row order: RIGHT (face right, front and side of face visible), DOWN (front toward the viewer, visible face), UP (away, back of hair and robe visible), never change camera or costume. Exact column order for every row: (1) windup with BOTH open palms gathered close to chest, knees bent and feet rooted, (2) LEFT-HAND OPEN PALM STRIKE, fully extends the left palm along facing, fingers visibly open, other arm recoils toward ribs, (3) RIGHT-HAND OPEN PALM STRIKE, chest twists the other way and the opposite hand is fully extended along the same facing with a broad visible opened palm, other hand back in guard, (4) recovery with BOTH open palms visibly retracting toward body. In front and rear rows make the palm positions clearly switch between opposite sides of the viewer; in right-facing row cast along rightward line with distinctly different near and far arms. Hip and shoulders turn, boots stay grounded. No magic, no gloves, no text, no frame borders, no ground/shadow, no copies outside the twelve cells. Preserve crisp artwork and clearly drawn large hands when reduced to an 88px hero.",
+        "sha256": "8ac6a134b42f1d2ac3554f2c807bc46cd4d65365987b8aeb789c2976fc0e9ed3"
+      },
+      {
+        "file": "taichi-source.png",
+        "references": ["punch-source.png"],
+        "prompt": "Make an original transparent game sprite SOURCE sheet of SIX genuinely different dynamic keyposes for a short Tai Chi martial-arts form that casts a large ground formation. Use the same exact compact chibi Wudang male character, charcoal vest and ivory cloth, black topknot and flowing white ribbons, drawn as the attached approved new punch sheet, orthographic elevated 3/4 overhead game camera. Exact grid 3 columns by 2 rows, read across top then across bottom, true transparency, one full isolated figure per cell, roomy transparent margins, consistent head size and standing character scale. This is an intentional open-hand martial form with solid grounded footwork, not spellcasting gestures floating in place. Frame 1: low upright closed stance facing down, hands open near the lower abdomen, preparing to shift weight. Frame 2: deeply bend one knee, take a wide left side stance and sweep both rounded open hands left, one high one low in cloud hands form. Frame 3: turn through the front with knees bent, palms crossing in a smooth circular block at chest, elbow and robe visibly changing. Frame 4: reverse into a right-facing wide stance with both rounded hands swept to the right, one high one low and trailing ribbon whipping opposite the turn. Frame 5: broad front-facing rooted horse stance, hands spread sideways at shoulder level in a clean open shape with both palms outward, strong release keypose. Frame 6: bend elbows and press both open palms DOWN toward the earth, weight centered in deep grounded stance, then ready to return to neutral. Same feet baseline and same character ground root per cell. Preserve hair/clothing identity throughout. No FX, no words, no floor, no shadows, no duplicates, no swords. The dynamic arm arcs and shifting weight must read at 88px tall.",
+        "sha256": "f18b9598efaa85e4e0b7b8eeede3464dc9c6fc616180d60e9aa0bf223301635a"
+      },
+      {
+        "file": "rim-source.png",
+        "references": ["formation-source.png"],
+        "prompt": "Make one isolated small game VFX texture on fully transparent alpha inspired by the silver-blue flowing brushstroke on the perimeter of the provided Thái Cực Trận formation. A single long slender crescent-shaped streaming blue-white qi highlight or comet, following a shallow arc from a tapered trailing left tail to a clear luminous rounded right head. Elegant cool icy white with small blue edges, thin and airy, a few small sparse dots along the trailing line. Approximately 4:1 wide. Preserve hand-finished 2D game VFX detail and crisp raster edges. This will be animated along the oval rim of the original formation in a top-down game. No background, no central yin-yang, no medallions, no glyphs, no scenery, no character, no complete ring, no gradients covering the whole frame. Single authored effect, generous transparent padding.",
+        "sha256": "b71d66cc322c5165f465d0d4e90835d49a3494e12710e0bc7e4935f5fdfc9a34"
+      }
+    ],
+    "baseline": {
+      "capture": "A and Dương Khí Kích were cast with keyboard in an isolated server-backed room and sampled from window.__VOLAM__.presentation().renovation.",
+      "basic": "Default match resolved to renovation-v4/overrides/m3d_vo_dang_sonic_vfx_r2.png. The preview intentionally uses the original m3d_vo_dang_sonic_vfx_r2 atlas to reproduce the requested Wi-Fi arc silhouette.",
+      "luongNghi": "Preview reuses the exact V4 vo_dang_hands_v2_projectile raster observed on a live Dương Khí Kích cast, with the logical atlas coordinates converted to physical density."
+    },
+    "pivots": {
+      "body": [96, 124],
+      "cell": [192, 160],
+      "handSockets": "Measured against exported contact cels, stored in cast-sockets.json.",
+      "mirrors": "Left palm casts mirror the right. Rear palm one and the first Tai Chi cloud-hand cel are reflected to keep their opposite-side movement."
+    },
+    "timingMs": {
+      "sealToInk": 1000,
+      "formationRelease": 780,
+      "formationPoseCues": [0, 130, 285, 450, 610, 780, 990],
+      "rimOrbit": 2500
+    }
+  },
+  "previewRevision3": {
+    "status": "Preview v3 for director review",
+    "buffSource": {
+      "file": "buff-source.png",
+      "artSource": "OpenAI ImageGen built-in (host_image)",
+      "prompt": "Create a compact, high-quality raster game VFX source sheet for four subtle beneficial fortune outcomes in a Wudang chibi wuxia action RPG. The attached image is COLOR reference only for its jade Càn, gold Khôn, turquoise Tốn, cobalt Khảm. Make exactly FOUR individual isolated decorative effects, exact 2 by 2 grid, one effect centered in each quadrant, clear safety gutters and genuine alpha transparency. No character, icon, lettering, soil or background. Top left: Càn — jade green life energy, three slender rising curling threads with four tiny leaf-like jade motes and a faint low elliptical base, open clear center so a hero can stand inside. Top right: Khôn — warm gold power, short bright sharp angled accents at left and right edges and three restrained golden stars, quiet open middle for hero's torso, no wide radial explosion. Bottom left: Tốn — turquoise cyan mana recharge, one slim transparent elliptical inward winding water-qi spiral with a few small clean luminous droplets and a clear interior, like energy flowing into a player. Bottom right: Khảm — cobalt blue movement buff, two small crisp ankle-height wind wakes curl outward and backward, low and wide with negative space between and above. All accents are light, delicate, understated and distinct from each other, native 2D hand-pixelled VFX with crisp edges and occasional very restrained glow. Each effect should stay readable as a small 70–110 px wide overlay at hero size. Keep each effect well away from other cells. No frame borders, no watermark, no dark blobs or opaque blocks.",
+      "sha256": "1644302b7d1292d0ddc36ca1c0e3a9b11ba762f68955723c77cd0908994a2cc7"
+    },
+    "buffs": {
+      "can": "Rising jade qi",
+      "khon": "Gold sparks",
+      "ton": "Inward cyan spiral",
+      "kham": "Ankle-height blue wind"
+    },
+    "luongNghi": {
+      "source": "assets/exports/visual-improvement-approved/vo_dang_hands_v2_projectile_3657f015.png",
+      "metadata": "legacy-huyen-am.json preserves the 16 huyen_am_travel_* frame records from apps/game-client/public/assets/feedback_v2_runtime/vo_dang_hands_v2_projectile.json.",
+      "validation": "The approved legacy PNG and huyen_am_travel frames were observed in a real Huyền Âm Chưởng cast with renovationSkills=old, in a separately hosted room.",
+      "scale": [0.88, 0.88],
+      "sourceSha256": "e0fbe1ae09516b6a2b4e410e9ea882906e6f20ab55851c6a41b482092d90cb66"
+    }
+  }
+}

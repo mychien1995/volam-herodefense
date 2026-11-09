@@ -1,0 +1,37 @@
+{
+  "runId": "f84a609f-e146-4cd8-8890-9f85a82c251b",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.vo-dang-quyen.config.ts"
+  ],
+  "startedAt": "2026-11-09T06:06:33.747Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 14.43,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.16,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 11.44,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "browser verification",
+      "seconds": 111.23,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 137.28
+}

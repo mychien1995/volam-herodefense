@@ -898,14 +898,20 @@ export class GameUI {
         };
       }),
     ];
-    const activeStatuses = JSON.parse(hero.statuses) as Array<{ kind: string }>;
+    const activeStatuses = JSON.parse(hero.statuses) as Array<{
+      kind: string;
+      ticks: number;
+    }>;
     const recallReady = [...(this.state?.projectiles.values() ?? [])].some(
       (shot) =>
         shot.ownerId === this.sessionId &&
         shot.zoneId === hero.zoneId &&
         (shot.stage === 'fan_outbound' || shot.stage === 'fan_hold'),
     );
-    for (const { key, remaining, ability } of slots) {
+    for (const { key, remaining: cooldownRemaining, ability } of slots) {
+      const charge = hero.build.charges.get(ability?.id ?? '');
+      const remaining =
+        charge && charge.count === 0 ? charge.rechargeTicks : cooldownRemaining;
       const rank =
         key === 'a'
           ? 1
@@ -916,8 +922,13 @@ export class GameUI {
         ability?.effect.mode === 'projectile' &&
         !!ability.effect.recallDrain &&
         recallReady;
+      const fortune =
+        ability?.effect.mode === 'fortune'
+          ? activeStatuses.find((s) => s.kind === 'fortune_roll')
+          : undefined;
       const recast =
         recall ||
+        !!fortune ||
         (ability?.effect.mode === 'projectile' &&
           ability.effect.blinkWindowTicks !== undefined &&
           hero.blinkTicks > 0);
@@ -927,13 +938,11 @@ export class GameUI {
       slot.classList.toggle('recast-ready', recast);
       slot.dataset['recastReady'] = String(recast);
       slot.classList.toggle('cooling', cooling);
-      const controlled = activeStatuses.some((s) =>
-        [
-          'stun',
-          'dash',
-          'channel',
-          key === 'a' ? 'disarm' : 'silence',
-        ].includes(s.kind),
+      const controlled = activeStatuses.some(
+        (s) =>
+          s.kind === 'stun' ||
+          s.kind === (key === 'a' ? 'disarm' : 'silence') ||
+          (!fortune && (s.kind === 'dash' || s.kind === 'channel')),
       );
       slot.classList.toggle(
         'unavailable',
@@ -941,6 +950,7 @@ export class GameUI {
           rank === 0 ||
           hero.hp <= 0 ||
           hero.mana < cost ||
+          charge?.count === 0 ||
           controlled,
       );
       slot.classList.toggle('unequipped', !ability);
@@ -1001,7 +1011,7 @@ export class GameUI {
       element(`#timer-${key}`).textContent = recast
         ? recall
           ? ''
-          : (hero.blinkTicks / m1Config.tickRate).toFixed(1)
+          : ((fortune?.ticks ?? hero.blinkTicks) / m1Config.tickRate).toFixed(1)
         : cooling
           ? (remaining / m1Config.tickRate).toFixed(1)
           : '';
@@ -1027,14 +1037,18 @@ export class GameUI {
           : recast
             ? recall
               ? 'Thu quạt'
-              : 'Hiện thân'
-            : ability
-              ? fixed && !rank
-                ? 'Cấp ' +
-                  m1Config.progression?.skills[ability.id]?.levelGates[0]
-                : `${cost} NL`
-              : 'Trống';
-      slot.title = `${ability?.nameVi ?? 'Chưa trang bị'}${key !== 'a' && hero.build.enabled ? ' · Bậc ' + rank : ''} · ${!ability ? 'Chưa mở' : rank === 0 ? 'Chưa học' : controlled ? 'Đang bị khống chế' : cooling ? 'Đang hồi chiêu' : hero.mana < cost ? 'Thiếu nội lực' : 'Sẵn sàng'}`;
+              : fortune
+                ? 'Chốt quẻ'
+                : 'Hiện thân'
+            : charge
+              ? `${charge.count}/${charge.capacity} lượt`
+              : ability
+                ? fixed && !rank
+                  ? 'Cấp ' +
+                    m1Config.progression?.skills[ability.id]?.levelGates[0]
+                  : `${cost} NL`
+                : 'Trống';
+      slot.title = `${ability?.nameVi ?? 'Chưa trang bị'}${key !== 'a' && hero.build.enabled ? ' · Bậc ' + rank : ''}${charge ? ` · ${charge.count}/${charge.capacity} lượt${charge.rechargeTicks ? ` · Hồi lượt sau ${(charge.rechargeTicks / m1Config.tickRate).toFixed(1)} giây` : ''}` : ''} · ${!ability ? 'Chưa mở' : rank === 0 ? 'Chưa học' : controlled ? 'Đang bị khống chế' : cooling ? 'Đang hồi chiêu' : hero.mana < cost ? 'Thiếu nội lực' : 'Sẵn sàng'}`;
       slot.dataset['skillId'] = ability?.id ?? '';
     }
   }

@@ -32,6 +32,7 @@ export interface Rect extends Point {
 }
 export type Pose = 'idle' | 'walk' | 'basic_attack' | 'cast' | 'hurt' | 'death';
 export interface ProjectileEffect {
+  scatter?: ProjectileScatter | undefined;
   dragonDive?: DragonDiveDefinition | undefined;
   windupTicks?: number | undefined;
   recoveryTicks?: number | undefined;
@@ -49,6 +50,7 @@ export interface ProjectileEffect {
   burnTicks: number;
   piercing?: boolean | undefined;
   useFacing?: boolean | undefined;
+  forwardOnly?: boolean | undefined;
   knockback?: number | undefined;
   statuses?: StatusSpec[] | undefined;
   spreadAngle?: number | undefined;
@@ -59,7 +61,36 @@ export interface ProjectileEffect {
   attackPowerScale?: number | undefined;
   blinkWindowTicks?: number | undefined;
   /** Persistent, mana-draining spin with same-slot recall. */
-  recallDrain?: { intervalTicks: number; mana: number; cooldownSeconds: number } | undefined;
+  recallDrain?:
+    | { intervalTicks: number; mana: number; cooldownSeconds: number }
+    | undefined;
+}
+export interface ProjectileScatter {
+  count: number;
+  appearanceTicks: number;
+  delayTicks: number;
+  innerRadius: number;
+  outerRadius: number;
+  radius: number;
+  damage: number;
+  attackPowerScale: number;
+}
+export interface FortuneEffect {
+  mode: 'fortune';
+  durationTicks: number;
+  cycleTicks: number;
+  buffTicks: number;
+  stunTicks: number;
+  healFraction: number;
+  manaFraction: number;
+  hpRegen: number;
+  manaRegen: number;
+  damageMultiplier: number;
+  critMultiplier: number;
+  movementSpeed: number;
+  lossFraction: number;
+  blastDamage: number;
+  blastRadius: number;
 }
 export interface ArcEffect {
   lineWidth?: number | undefined;
@@ -115,6 +146,11 @@ export type StatusKind =
   | 'disarm'
   | 'defense_break'
   | 'crit_buff'
+  | 'attack_buff'
+  | 'hp_regen_buff'
+  | 'mana_regen_buff'
+  | 'fortune_roll'
+  | 'fortune_result'
   | 'speed_buff'
   | 'cooldown_buff'
   | 'counter'
@@ -177,6 +213,20 @@ export interface GuardCounterEffect {
   range: number;
 }
 export interface AreaEffect {
+  windupTicks?: number | undefined;
+  skyfall?:
+    | {
+        range: number;
+        fallbackDistance: number;
+        halfAngle: number;
+        blades: number;
+        aimTicks: number;
+        riseTicks: number;
+        quietTicks: number;
+        firstFallTicks: number;
+        fallTicks: number;
+      }
+    | undefined;
   oncePerTarget?: boolean | undefined;
   mode: 'area';
   durationTicks: number;
@@ -242,7 +292,10 @@ export interface Ability {
   nameVi: string;
   cooldownTicks: number;
   manaCost: number;
+  charges?: number | undefined;
   minIntervalTicks?: number | undefined;
+  basicPoseTicks?: number | undefined;
+  basicVariants?: string[] | undefined;
   basicComboEndRecoveryTicks?: number | undefined;
   basicCombo?:
     | Array<{
@@ -265,6 +318,7 @@ export interface Ability {
     | CounterEffect
     | GuardCounterEffect
     | AreaEffect
+    | FortuneEffect
     | SupportEffect;
 }
 export interface SimulationConfig {
@@ -370,7 +424,19 @@ export interface Actor extends Point {
   crowdControlScale?: number;
 }
 export interface Hero extends Actor {
-  tamLien?: { group: string; targetId: string; charges: number; readyUntil: number };
+  fortune?: {
+    id: string;
+    start: number;
+    offset: number;
+    effect: FortuneEffect;
+  };
+  lastBasicTick?: number;
+  tamLien?: {
+    group: string;
+    targetId: string;
+    charges: number;
+    readyUntil: number;
+  };
   campaignClears?: string[];
   dragonBonus?: number;
   farmXpRemainder?: number;
@@ -408,6 +474,7 @@ export interface Hero extends Actor {
   lastMoveTick: number;
   lastSequence: number;
   skillCooldowns: number[];
+  chargeCooldowns?: Record<string, number[]>;
   skillIds?: string[];
   abilityCooldowns?: Record<string, number>;
   basicChains?: Record<string, number>;
@@ -491,6 +558,7 @@ export interface Projectile extends Point {
 }
 export interface CombatEvent extends Point {
   tick?: number | undefined;
+  hitIndex?: number | undefined;
   id: number;
   kind: 'attack' | 'hit' | 'death' | 'cast' | 'effect' | 'pulse';
   sourceId: string;
@@ -511,14 +579,15 @@ export interface SkillAction {
   id: string;
   ownerId: string;
   abilityId: string;
-  kind: 'dash' | 'multi_hit' | 'arc' | 'projectile';
+  kind: 'dash' | 'multi_hit' | 'arc' | 'projectile' | 'area';
   until: number;
   nextTick: number;
   remaining: number;
   fx: number;
   fy: number;
   hitIds: string[];
-  effect: DashEffect | MultiHitEffect | ArcEffect | ProjectileEffect;
+  effect:
+    DashEffect | MultiHitEffect | ArcEffect | ProjectileEffect | AreaEffect;
   ability?: Ability | undefined;
   comboTargets?: Record<string, boolean> | undefined;
   rawDamage: number;
@@ -527,6 +596,7 @@ export interface SkillAction {
   critMultiplier: number;
 }
 export interface CombatArea extends Point {
+  launch?: (Point & { fx: number; fy: number }) | undefined;
   hitIds?: string[];
   id: string;
   ownerId: string;
@@ -540,6 +610,15 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  pendingScatters?: Array<{
+    tick: number;
+    ownerId: string;
+    abilityId: string;
+    effect: ProjectileScatter;
+    rawDamage: number;
+    critChance: number;
+    critMultiplier: number;
+  }>;
   campaign?: CampaignRuntime;
   invasionPending?: Set<number>;
   creepCombat?: CreepCombatRuntime;

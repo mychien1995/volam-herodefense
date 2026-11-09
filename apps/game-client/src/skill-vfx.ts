@@ -57,6 +57,19 @@ import { feedbackArt } from './feedback-art.js';
 import { ApprovedSkillVfx, approvedSkillAssets } from './approved-skill-vfx.js';
 import { feedbackProjectile, feedbackScale } from './feedback-visuals.js';
 import {
+  preloadVoDangQuyenArt,
+  registerVoDangQuyenArt,
+  VoDangQuyenArt,
+  voDangQuyenHandled,
+} from './vo-dang-quyen-art.js';
+import {
+  kiem,
+  preloadVoDangKiemArt,
+  registerVoDangKiemArt,
+  VoDangKiemArt,
+  voDangKiemHandled,
+} from './vo-dang-kiem-art.js';
+import {
   fanId,
   flurryId,
   preloadThienSonRework,
@@ -85,6 +98,8 @@ const components = new Map(
   [...skillArt.assets, retainedBasicPalm, ...caiBangFire].map((a) => [a.id, a]),
 );
 export function preloadSkillArt(scene: Phaser.Scene): void {
+  preloadVoDangKiemArt(scene);
+  preloadVoDangQuyenArt(scene);
   preloadThienSonRework(scene);
   preloadRenovationFollowup(scene);
   preloadRenovationRevision(scene);
@@ -103,6 +118,8 @@ export function preloadSkillArt(scene: Phaser.Scene): void {
   preloadRasterAnimations(scene, r3Assets);
 }
 export function registerSkillArt(scene: Phaser.Scene): void {
+  registerVoDangKiemArt(scene);
+  registerVoDangQuyenArt(scene);
   registerRasterAnimations(scene, renovatedSkillComponents);
   registerRasterAnimations(scene, caiBangFire);
   scene.textures.get(cuongLongV2Art.id).setSmoothPixelArt(true);
@@ -137,6 +154,8 @@ interface VfxActor {
   zoneId: string;
 }
 export class SkillVfx {
+  readonly voDangKiem: VoDangKiemArt;
+  private readonly voDangQuyen: VoDangQuyenArt;
   private readonly thienSon: ThienSonRework;
   private followup: RenovationFollowup;
   private revision: RenovationRevision;
@@ -164,6 +183,8 @@ export class SkillVfx {
   >();
   private state: LobbyState | undefined;
   constructor(private scene: Phaser.Scene) {
+    this.voDangKiem = new VoDangKiemArt(scene);
+    this.voDangQuyen = new VoDangQuyenArt(scene);
     this.thienSon = new ThienSonRework(scene);
     this.followup = new RenovationFollowup(scene);
     this.revision = new RenovationRevision(scene);
@@ -404,6 +425,8 @@ export class SkillVfx {
     );
   }
   event(e: CombatEvent): void {
+    if (this.voDangKiem.event(e)) return;
+    if (this.voDangQuyen.event(e)) return;
     if (this.thienSon.event(e)) return;
     if (
       caiBangBongArtEnabled &&
@@ -630,6 +653,8 @@ export class SkillVfx {
       return;
     }
     this.thienSon.sync(state, zoneId);
+    this.voDangQuyen.sync(state, zoneId, renderPosition);
+    this.voDangKiem.sync(state, zoneId, renderPosition);
     const actor = (id: string): VfxActor | undefined =>
       state?.players.get(id) ?? state?.creeps.get(id);
     for (const id of this.casts.keys()) {
@@ -665,6 +690,8 @@ export class SkillVfx {
         magnitude: number;
       }>;
       for (const s of statuses) {
+        if (voDangQuyenHandled(s.abilityId) || voDangKiemHandled(s.abilityId))
+          continue;
         if (this.r3.handles(s.abilityId)) continue;
         if (
           this.m3d.handles(s.abilityId) &&
@@ -753,6 +780,8 @@ export class SkillVfx {
     state?.players.forEach((a, id) => syncActor(id, a));
     state?.creeps.forEach((a, id) => syncActor(id, a));
     state?.areas.forEach((a, id) => {
+      if (voDangQuyenHandled(a.abilityId) || voDangKiemHandled(a.abilityId))
+        return;
       if (this.r3.areaHandled(a.abilityId)) return;
       if (this.m3d.areaHandled(a.abilityId)) return;
       if (this.approved.handles(a.abilityId)) return;
@@ -818,6 +847,7 @@ export class SkillVfx {
     const shots = new Set<string>();
     const showNewPalm = caiBangPalmEnabled();
     state?.projectiles.forEach((p, id) => {
+      if (voDangQuyenHandled(p.abilityId)) return;
       if (p.abilityId === fanId || p.abilityId === flurryId) return;
       if (p.abilityId === hangLongId && hangLongEnabled()) return;
       if (this.r3.projectileHandled(p.abilityId)) return;
@@ -942,6 +972,8 @@ export class SkillVfx {
     };
   }
   clear(): void {
+    this.voDangKiem.clear();
+    this.voDangQuyen.clear();
     this.thienSon.clear();
     this.followup.clear();
     this.revision.clear();
@@ -980,6 +1012,12 @@ export class SkillVfx {
     fy: number,
     hp: number,
   ) {
+    if (
+      voDangQuyenHandled(abilityId) ||
+      voDangKiemHandled(abilityId) ||
+      abilityId === kiem.basic
+    )
+      return undefined;
     const r3 = this.r3.actorCast(id);
     if (r3) return r3;
     if (this.r3.handles(abilityId)) return undefined;

@@ -81,7 +81,6 @@ export class ApprovedSkillVfx {
   private runs: Run[] = [];
   private loops = new Map<string, Loop>();
   private shots = new Map<string, { view: ClipView; born: number }>();
-  private channels = new Set<string>();
   private trails = new Map<
     string,
     { last: Point; count: number; at: number; direction: ReviewDirection }
@@ -525,36 +524,6 @@ export class ApprovedSkillVfx {
         }[];
       if (
         ss.some(
-          (s) => s.kind === 'channel' && s.abilityId === 'van_kiem_quy_tong',
-        )
-      )
-        this.channels.add(id);
-      else if (this.channels.delete(id))
-        this.start(
-          {
-            id: 0,
-            kind: 'pulse',
-            sourceId: id,
-            targetId: '',
-            abilityId: 'van_kiem_quy_tong',
-            x: p.x,
-            y: p.y,
-            fx: a.fx,
-            fy: a.fy,
-            damage: 0,
-            critical: false,
-          },
-          [
-            this.single('review_sword', 'impact', 500, 'sword_dissolve', {
-              alpha: 0.65,
-              scale: 1.6,
-              fade: true,
-            }),
-          ],
-          500,
-        );
-      if (
-        ss.some(
           (s) => s.kind === 'guard_counter' && s.abilityId === 'toa_sat_bac_do',
         )
       ) {
@@ -766,10 +735,6 @@ export class ApprovedSkillVfx {
         shot.view.sprite.destroy();
         this.shots.delete(id);
       }
-    for (const id of this.channels) {
-      const a = this.actor(id);
-      if (!a || a.hp <= 0 || a.zoneId !== zone) this.channels.delete(id);
-    }
     for (const [id, trail] of this.trails) {
       const a = this.actor(id),
         p = this.point(id);
@@ -888,27 +853,6 @@ export class ApprovedSkillVfx {
       return undefined;
     const a = this.actor(id),
       now = this.scene.time.now;
-    if (
-      renovationActionsEnabled() &&
-      a?.schoolId === 'vo_dang' &&
-      JSON.parse(a.statuses || '[]').some(
-        (s: { kind: string; abilityId: string }) =>
-          s.kind === 'channel' && s.abilityId === 'van_kiem_quy_tong',
-      )
-    )
-      return this.pose(
-        this.single(
-          'van_kiem_quy_tong_character',
-          'cast',
-          1000,
-          'sustained_sword_channel',
-          { loop: true },
-        ),
-        facing(fx, fy),
-        1000,
-        'feedback:approved:van-channel:' + id,
-        1,
-      );
     for (const run of [...this.runs].reverse()) {
       if (!run.body || run.owner !== id || run.impact) continue;
       const t = (now - run.started) * run.rate,
@@ -979,7 +923,6 @@ export class ApprovedSkillVfx {
     this.loops.clear();
     for (const shot of this.shots.values()) shot.view.sprite.destroy();
     this.shots.clear();
-    this.channels.clear();
     this.trails.clear();
   }
   inspect() {

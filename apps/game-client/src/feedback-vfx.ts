@@ -1,4 +1,6 @@
 import Phaser from 'phaser';
+import { voDangQuyenHandled } from './vo-dang-quyen-art.js';
+import { voDangKiemHandled } from './vo-dang-kiem-art.js';
 import {
   caiBangPalmEnabled,
   caiBangPalmId,
@@ -1093,6 +1095,7 @@ export class FeedbackVfx {
         }
       }
       for (const [skill, b] of Object.entries(feedbackBindings)) {
+        if (voDangQuyenHandled(skill) || voDangKiemHandled(skill)) continue;
         if (caiBangBongArtEnabled && skill === 'thien_ha_vo_cau') continue;
         if (approvedSkillIds.has(skill) || m3dSkillIds.has(skill)) continue;
         if (!b.sustain) continue;
@@ -1152,6 +1155,7 @@ export class FeedbackVfx {
       }
     });
     state.areas.forEach((a, id) => {
+      if (voDangQuyenHandled(a.abilityId) || voDangKiemHandled(a.abilityId)) return;
       if (approvedSkillIds.has(a.abilityId)) return;
       const b = feedbackBindings[a.abilityId];
       if (a.zoneId !== zone || !b?.area) return;
@@ -1204,6 +1208,7 @@ export class FeedbackVfx {
       if (this.scene.time.now - at > 500) this.manualOff.delete(owner);
     const active = new Set<string>();
     state.projectiles.forEach((p, id) => {
+      if (voDangQuyenHandled(p.abilityId)) return;
       if (approvedSkillIds.has(p.abilityId)) return;
       if (p.abilityId === caiBangPalmId && caiBangPalmEnabled()) return;
       if (p.abilityId === hangLongId && hangLongEnabled()) return;

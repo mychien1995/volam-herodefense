@@ -25,8 +25,8 @@ export const voDangBasics: Record<string, Ability> = {
     id: 'vo_dang_quyen',
     nameVi: 'Võ Đang Quyền',
     manaCost: 0,
-    cooldownTicks: 1,
-    minIntervalTicks: 6,
+    cooldownTicks: 0,
+    basicPoseTicks: 8,
     basicCombo: [
       { stage: 'left_palm', damageMultiplier: 1 },
       { stage: 'right_palm', damageMultiplier: 1 },
@@ -47,6 +47,8 @@ export const voDangBasics: Record<string, Ability> = {
     manaCost: 0,
     cooldownTicks: 1,
     minIntervalTicks: 6,
+    basicVariants: ['thrust', 'cut_left', 'cut_right', 'cut_down', 'cut_up'],
+    basicPoseTicks: 6,
     effect: {
       mode: 'arc',
       damage: 27,
@@ -77,7 +79,12 @@ export const voDangSkills: Ability[] = [
       radius: 14,
       useFacing: true,
       piercing: true,
-      statuses: [{ kind: 'attack_break', durationTicks: 90, magnitude: 0.2 }],
+      windupTicks: 5,
+      recoveryTicks: 6,
+      statuses: [
+        { kind: 'slow', durationTicks: 90, magnitude: 0.25 },
+        { kind: 'attack_break', durationTicks: 90, magnitude: 0.2 },
+      ],
     },
   },
   {
@@ -87,31 +94,52 @@ export const voDangSkills: Ability[] = [
     cooldownTicks: 105,
     effect: {
       ...swordQi,
-      damage: 30,
+      damage: 10,
+      attackPowerScale: 0.3,
       range: 260,
-      speed: 300,
+      speed: 650,
       radius: 30,
+      count: 2,
+      spacingTicks: 5,
+      windupTicks: 4,
+      recoveryTicks: 11,
       useFacing: true,
+      forwardOnly: true,
       piercing: true,
-      statuses: [
-        { kind: 'slow', durationTicks: 90, magnitude: 0.3 },
-        { kind: 'attack_slow', durationTicks: 90, magnitude: 0.25 },
-      ],
+      knockback: 22,
+      scatter: {
+        count: 5,
+        appearanceTicks: 12,
+        delayTicks: 30,
+        innerRadius: 63,
+        outerRadius: 100,
+        radius: 28,
+        damage: 18,
+        attackPowerScale: 0.4,
+      },
     },
   },
   {
     id: 'duong_khi_kich',
-    nameVi: 'Dương Khí Kích',
+    nameVi: 'Bói Toán Thiên Cơ',
     manaCost: 10,
-    cooldownTicks: 48,
+    cooldownTicks: 240,
     effect: {
-      ...swordQi,
-      damage: 34,
-      range: 220,
-      radius: 16,
-      useFacing: true,
-      piercing: true,
-      manaRefund: 7,
+      mode: 'fortune',
+      durationTicks: 150,
+      cycleTicks: 5,
+      buffTicks: 90,
+      stunTicks: 60,
+      healFraction: 0.12,
+      manaFraction: 0.16,
+      hpRegen: 6,
+      manaRegen: 8,
+      damageMultiplier: 0.15,
+      critMultiplier: 0.25,
+      movementSpeed: 0.12,
+      lossFraction: 0.08,
+      blastDamage: 30,
+      blastRadius: 88,
     },
   },
   {
@@ -134,9 +162,10 @@ export const voDangSkills: Ability[] = [
     cooldownTicks: 480,
     effect: {
       mode: 'area',
+      windupTicks: 24,
       durationTicks: 180,
       tickInterval: 30,
-      radius: 125,
+      radius: 192,
       damage: 24,
       confines: true,
       statuses: [
@@ -156,7 +185,7 @@ export const voDangSkills: Ability[] = [
       damage: 100 / 7,
       attackPowerScale: 4 / 7,
       hits: 7,
-      spacingTicks: 3,
+      spacingTicks: 6,
       finisherDamage: 0,
       finisherRange: 80,
       halfAngle: Math.PI / 3,
@@ -209,40 +238,38 @@ export const voDangSkills: Ability[] = [
     nameVi: 'Vạn Kiếm Quy Tông',
     manaCost: 42,
     cooldownTicks: 510,
+    charges: 2,
     effect: {
-      mode: 'multi_hit',
-      damage: 0,
-      range: 1,
-      hits: 13,
-      spacingTicks: 12,
-      durationTicks: 150,
-      finisherDamage: 0,
-      finisherRange: 1,
-      projectileBurst: {
-        ...swordQi,
-        damage: 54,
-        range: 460,
-        radius: 20,
-        count: 8,
-        spacingTicks: 0,
-        radial: true,
-        useFacing: true,
-        piercing: true,
+      mode: 'area',
+      damage: 108,
+      radius: 76,
+      durationTicks: 120,
+      tickInterval: 120,
+      skyfall: {
+        range: 320,
+        fallbackDistance: 210,
+        halfAngle: Math.PI / 3,
+        blades: 48,
+        aimTicks: 36,
+        riseTicks: 51,
+        quietTicks: 15,
+        firstFallTicks: 14,
+        fallTicks: 45,
       },
     },
   },
 ];
 const descriptions = [
-  'Âm dương bay thẳng, tạm giảm lực công kích của địch trúng đòn.',
-  'Sóng âm lớn bay thẳng; giảm riêng tốc độ di chuyển và tốc độ đánh.',
-  'Khí chưởng bay thẳng; hoàn nội lực một lần khi trúng, không hoàn khi hụt.',
+  'Chưởng âm khí bay thẳng, làm chậm và giảm sát thương của địch trúng đòn.',
+  'Hai đợt sóng đẩy lùi. Sau khi bắn, năm ấn âm dương phun mực sau 1 giây.',
+  'Xoay tám quẻ trong 5 giây. Bấm lại để chốt quẻ đang hiện hoặc để hệ thống tự chốt khi hết giờ.',
   'Bật/tắt khiên dùng nội lực chịu sát thương; không phí bật và không hồi chiêu phụ. Thiếu nội lực nhận phần còn lại.',
-  'Tuyệt kỹ: vòm âm dương cố định nhốt quái và boss đã vào trận; địch vẫn di chuyển, đánh bên trong, đồng đội đi xuyên.',
+  'Vận Thái Cực Quyền rồi mở trận Bát Quái tại chân. Quái và boss bị giữ trong trận, đồng đội đi xuyên.',
   'Bảy nhát kiếm liên tiếp trong cung phía trước; tổng sát thương gốc và hệ số lực công giữ ngân sách cũ.',
   'Kiếm bay chậm và xuyên địch, mỗi địch trúng một lần. Bấm lại cùng ô để hiện thân tại kiếm; kiếm lưu cuối tầm 1,5 giây.',
   'Kiếm trận cố định tại chỗ thi triển, gây sát thương theo nhịp lên địch trong trận.',
   'Thủ tối đa 5 giây, giảm 70% sát thương; tích lũy thực nhận sau giảm. Hết 5 giây hoặc vượt 20% máu tối đa thì phản tổng thực nhận ra xung quanh một lần khi còn sống.',
-  'Tuyệt kỹ: liên tục phóng kiếm thẳng tám hướng quanh người trong 5 giây, không truy đuổi.',
+  'Chỉ kiếm về phía trước. Kiếm vút lên sau lưng, khuất một nhịp rồi đâm xuống tâm đã chốt, ưu tiên boss. Tích 2–5 lượt theo bậc.',
 ];
 export function addVoDangProgression(d: ProgressionDefinition): void {
   d.schools['vo_dang'] = {
@@ -276,13 +303,19 @@ export function addVoDangProgression(d: ProgressionDefinition): void {
         a.cooldownTicks -= r * (ultimate ? 12 : 3);
       }
       if (e.mode === 'arc' || e.mode === 'projectile') {
-        e.damage += r * (ultimate ? 9 : 6);
+        e.damage +=
+          r * (e.mode === 'projectile' && e.scatter ? 2 : ultimate ? 9 : 6);
         e.range += r * 5;
         for (const s of e.statuses ?? []) {
           s.magnitude += 0.03 * r;
           s.durationTicks += 10 * r;
         }
         if (e.manaRefund) e.manaRefund += 2 * r;
+        if (e.mode === 'projectile' && e.scatter) e.scatter.damage += 4 * r;
+      } else if (e.mode === 'fortune') {
+        e.healFraction += 0.02 * r;
+        e.manaFraction += 0.02 * r;
+        e.blastDamage += 6 * r;
       } else if (e.mode === 'mana_shield') {
         e.durationTicks += 15 * r;
         e.absorbFraction = Math.min(1, e.absorbFraction + 0.05 * r);
@@ -290,18 +323,16 @@ export function addVoDangProgression(d: ProgressionDefinition): void {
       } else if (e.mode === 'area') {
         e.damage += r * 5;
         e.radius += r * 8;
-        e.durationTicks += r * 30;
+        if (e.skyfall) {
+          a.charges = (base.charges ?? 2) + r;
+          e.skyfall.range += r * 8;
+        } else e.durationTicks += r * 30;
         for (const s of e.statuses ?? []) s.magnitude += r * 0.03;
       } else if (e.mode === 'guard_counter') {
         e.range += r * 5;
       } else if (e.mode === 'multi_hit') {
-        if (base.id === 'van_kiem_quy_tong' && e.projectileBurst) {
-          e.projectileBurst.damage += r * 9;
-          e.projectileBurst.range += r * 5;
-        } else {
-          e.damage += r * 5 * (base.id === 'that_tinh_kiem' ? 4 / 7 : 1);
-          e.range += r * 4;
-        }
+        e.damage += r * 5 * (base.id === 'that_tinh_kiem' ? 4 / 7 : 1);
+        e.range += r * 4;
       }
       return a;
     });

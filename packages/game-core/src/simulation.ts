@@ -21,7 +21,10 @@ import { bufferComboFinisher, takeComboFinisher } from './combo-finisher.js';
 import { stepBossEncounter } from './boss-encounter.js';
 import { nextBasic, expireBasicChain } from './basic-attacks.js';
 import { startTamLienTram, tamLienTram } from './tam-lien-tram.js';
-import { recallSpinningProjectile, stepSpinningProjectile } from './spinning-projectile.js';
+import {
+  recallSpinningProjectile,
+  stepSpinningProjectile,
+} from './spinning-projectile.js';
 import { separateDungeonCreeps } from './creep-spacing.js';
 import {
   captureConfinement,
@@ -34,7 +37,10 @@ import {
   stepSkillActions,
   stepAreas,
   stepSupports,
+  stepScatters,
+  skyfallAiming,
 } from './skills.js';
+import { settleFortune, stepFortune } from './fortune.js';
 import { emit, hurt, offensiveStats, expireGuardCounters } from './combat.js';
 import { ownerProtection } from './protection.js';
 import {
@@ -46,7 +52,11 @@ import {
   displace,
 } from './status.js';
 import { createSeededRandom } from './random.js';
-import { abilityCooldown, characterStats } from './progression.js';
+import {
+  abilityCooldown,
+  characterStats,
+  skillCharges,
+} from './progression.js';
 import {
   blocked,
   clampEllipse,
@@ -236,7 +246,12 @@ function runCommand(
     );
     return;
   }
-  if (hero.namDeLocked || world.vuong?.locked(hero.id)) return;
+  if (
+    hero.namDeLocked ||
+    world.vuong?.locked(hero.id) ||
+    hasStatus(hero, 'guard_counter', world.tick)
+  )
+    return;
   if (command.kind === 'tam-lien-tram') {
     startTamLienTram(world, hero, config);
     return;
@@ -282,7 +297,9 @@ function runCommand(
     }
     return;
   }
+  const raisingSwords = skyfallAiming(world, hero.id);
   if (command.kind === 'dash') {
+    if (raisingSwords) return;
     dash(world, hero, config);
     return;
   }
@@ -290,14 +307,21 @@ function runCommand(
     if (
       hasStatus(hero, 'stun', world.tick) ||
       hasStatus(hero, 'disarm', world.tick) ||
+      raisingSwords ||
       (world.actions ?? []).some((a) => a.ownerId === hero.id)
     )
       return;
     const ability = config.basics[hero.basicId];
-    if (ability && world.tick >= hero.cooldown) {
+    if (
+      ability &&
+      world.tick >= hero.cooldown &&
+      (ability.cooldownTicks !== 0 || hero.lastBasicTick !== world.tick)
+    ) {
       const dao = ability.id === tamLienTram.basicId;
-      hero.cooldown = world.tick + abilityCooldown(hero, ability, config, world.tick, true);
-      const next = nextBasic(hero, ability);
+      hero.lastBasicTick = world.tick;
+      hero.cooldown =
+        world.tick + abilityCooldown(hero, ability, config, world.tick, true);
+      const next = nextBasic(hero, ability, world.random);
       if (ability.manualChain) {
         if (hero.basicChains?.[ability.id] === 0) {
           hero.cooldown = world.tick + ability.manualChain.cooldownTicks;
@@ -325,17 +349,24 @@ function runCommand(
       return;
     if (
       hasStatus(hero, 'stun', world.tick) ||
-      hasStatus(hero, 'silence', world.tick) ||
-      (world.actions ?? []).some((a) => a.ownerId === hero.id)
+      hasStatus(hero, 'silence', world.tick)
     )
       return;
     const ability = equippedAbility(hero, command.slot, config);
-    if (ability?.effect.mode === 'dash' && hasStatus(hero, 'root', world.tick))
+    if (
+      ability?.effect.mode === 'fortune' &&
+      hero.fortune?.id === ability.id &&
+      settleFortune(world, hero, config)
+    )
       return;
     if (
-      ability?.effect.mode === 'projectile' &&
-      ability.effect.recallDrain
-    ) {
+      raisingSwords ||
+      (world.actions ?? []).some((a) => a.ownerId === hero.id)
+    )
+      return;
+    if (ability?.effect.mode === 'dash' && hasStatus(hero, 'root', world.tick))
+      return;
+    if (ability?.effect.mode === 'projectile' && ability.effect.recallDrain) {
       const shot = [...world.projectiles.values()].find(
         (p) => p.ownerId === hero.id && p.abilityId === ability.id,
       );
@@ -343,7 +374,11 @@ function runCommand(
         if (shot.leg !== 'return') recallSpinningProjectile(shot);
         return;
       }
-      if (world.shots.some((s) => s.ownerId === hero.id && s.ability.id === ability.id))
+      if (
+        world.shots.some(
+          (s) => s.ownerId === hero.id && s.ability.id === ability.id,
+        )
+      )
         return;
     }
     if (ability && blink(world, hero, ability.id, config)) return;
@@ -356,24 +391,30 @@ function runCommand(
           s.abilityId === ability.id &&
           s.until > world.tick,
       );
+    const charges = ability && skillCharges(hero, ability, world.tick);
     if (
       !ability ||
-      (ability.effect.mode === 'guard_counter' &&
-        hero.statuses?.some(
-          (s) =>
-            s.kind === 'guard_counter' &&
-            s.abilityId === ability.id &&
-            s.until > world.tick,
-        )) ||
+      charges?.count === 0 ||
       world.tick < (hero.skillCooldowns[command.slot] ?? Infinity) ||
       world.tick < (hero.abilityCooldowns?.[ability.id] ?? 0) ||
       (!togglingOff && hero.mana < ability.manaCost)
     )
       return;
     if (!togglingOff) hero.mana -= ability.manaCost;
-    hero.skillCooldowns[command.slot] = world.tick +
-      (ability.effect.mode === 'projectile' && ability.effect.recallDrain
-        ? 0 : abilityCooldown(hero, ability, config, world.tick));
+    const cooldown = abilityCooldown(hero, ability, config, world.tick);
+    if (charges) {
+      hero.chargeCooldowns ??= {};
+      hero.chargeCooldowns[ability.id] = [
+        ...charges.pending,
+        (charges.pending.at(-1) ?? world.tick) + cooldown,
+      ];
+    }
+    hero.skillCooldowns[command.slot] =
+      world.tick +
+      (charges ||
+      (ability.effect.mode === 'projectile' && ability.effect.recallDrain)
+        ? 0
+        : cooldown);
     hero.abilityCooldowns ??= {};
     hero.abilityCooldowns[ability.id] = hero.skillCooldowns[command.slot]!;
     perform(
@@ -434,11 +475,15 @@ function advanceProjectile(
   const targets: Actor[] = shot.hostile
     ? [...world.heroes.values()]
     : [...world.creeps.values()];
+  const traveled = shot.effect.range - shot.remaining;
+  const launch = { x: shot.x - dir.x * traveled, y: shot.y - dir.y * traveled };
   const collisions = targets
     .filter(
       (enemy) =>
         enemy.hp > 0 &&
         !(shot.hitIds ?? []).includes(enemy.id) &&
+        (!shot.effect.forwardOnly ||
+          (enemy.x - launch.x) * dir.x + (enemy.y - launch.y) * dir.y >= 0) &&
         (!shot.targetId || enemy.id === shot.targetId),
     )
     .map((enemy) => ({
@@ -658,17 +703,22 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       hero.moveY = 0;
     }
     const movement = namDeMovement(world, hero);
+    const guarding = hasStatus(hero, 'guard_counter', world.tick);
     const stats = characterStats(hero, config, world.tick).total;
     const runSpeedMultiplier = world.waveBossTest?.runSpeedMultiplier ?? 1;
     if (
       (movement.x || movement.y) &&
+      !guarding &&
       !hero.namDeLocked &&
       !world.vuong?.locked(hero.id) &&
       !hasStatus(hero, 'stun', world.tick) &&
       !hasStatus(hero, 'root', world.tick) &&
       !hasStatus(hero, 'dash', world.tick) &&
+      !skyfallAiming(world, hero.id) &&
       !(world.actions ?? []).some(
-        (a) => a.ownerId === hero.id && a.effect.mode === 'projectile',
+        (a) =>
+          a.ownerId === hero.id &&
+          (a.effect.mode === 'projectile' || a.effect.mode === 'area'),
       )
     ) {
       hero.fx = movement.x;
@@ -703,6 +753,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     );
     if (world.tick >= hero.actionUntil)
       hero.pose =
+        !guarding &&
         !hasStatus(hero, 'stun', world.tick) &&
         !hasStatus(hero, 'root', world.tick) &&
         (movement.x || movement.y)
@@ -728,6 +779,8 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     if (command) runCommand(world, hero, command, config);
   }
   stepSkillActions(world, config);
+  for (const hero of world.heroes.values()) stepFortune(world, hero, config);
+  stepScatters(world, config);
   stepAreas(world, config);
   stepSupports(world, config);
   for (const scheduled of world.shots.filter(
