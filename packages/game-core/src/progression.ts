@@ -397,6 +397,8 @@ export function abilityCooldown(
   tick: number,
   basic = false,
 ): number {
+  if (basic && ability.cooldownTicks === 0)
+    return ability.minIntervalTicks ?? 0;
   if (!hero.progression)
     return Math.max(ability.minIntervalTicks ?? 1, ability.cooldownTicks);
   const stats = characterStats(hero, config, tick).total;

@@ -57,6 +57,12 @@ import { feedbackArt } from './feedback-art.js';
 import { ApprovedSkillVfx, approvedSkillAssets } from './approved-skill-vfx.js';
 import { feedbackProjectile, feedbackScale } from './feedback-visuals.js';
 import {
+  fanId,
+  flurryId,
+  preloadThienSonRework,
+  ThienSonRework,
+} from './thien-son-rework.js';
+import {
   renovationRevisionEnabled,
   renovationFollowupEnabled,
 } from './renovation-policy.js';
@@ -79,6 +85,7 @@ const components = new Map(
   [...skillArt.assets, retainedBasicPalm, ...caiBangFire].map((a) => [a.id, a]),
 );
 export function preloadSkillArt(scene: Phaser.Scene): void {
+  preloadThienSonRework(scene);
   preloadRenovationFollowup(scene);
   preloadRenovationRevision(scene);
   preloadRenovationFeedback(scene);
@@ -130,6 +137,7 @@ interface VfxActor {
   zoneId: string;
 }
 export class SkillVfx {
+  private readonly thienSon: ThienSonRework;
   private followup: RenovationFollowup;
   private revision: RenovationRevision;
   private renovated: RenovationFeedback;
@@ -156,6 +164,7 @@ export class SkillVfx {
   >();
   private state: LobbyState | undefined;
   constructor(private scene: Phaser.Scene) {
+    this.thienSon = new ThienSonRework(scene);
     this.followup = new RenovationFollowup(scene);
     this.revision = new RenovationRevision(scene);
     this.renovated = new RenovationFeedback(scene);
@@ -395,6 +404,7 @@ export class SkillVfx {
     );
   }
   event(e: CombatEvent): void {
+    if (this.thienSon.event(e)) return;
     if (
       caiBangBongArtEnabled &&
       e.abilityId === 'thien_ha_vo_cau' &&
@@ -619,6 +629,7 @@ export class SkillVfx {
       this.clear();
       return;
     }
+    this.thienSon.sync(state, zoneId);
     const actor = (id: string): VfxActor | undefined =>
       state?.players.get(id) ?? state?.creeps.get(id);
     for (const id of this.casts.keys()) {
@@ -807,6 +818,7 @@ export class SkillVfx {
     const shots = new Set<string>();
     const showNewPalm = caiBangPalmEnabled();
     state?.projectiles.forEach((p, id) => {
+      if (p.abilityId === fanId || p.abilityId === flurryId) return;
       if (p.abilityId === hangLongId && hangLongEnabled()) return;
       if (this.r3.projectileHandled(p.abilityId)) return;
       if (this.m3d.projectileHandled(p.abilityId)) return;
@@ -930,6 +942,7 @@ export class SkillVfx {
     };
   }
   clear(): void {
+    this.thienSon.clear();
     this.followup.clear();
     this.revision.clear();
     this.renovated.clear();
@@ -1073,6 +1086,6 @@ export class SkillVfx {
     return this.feedback.suppressesCastPose(id);
   }
   actorAlpha(id: string) {
-    return this.m3d.alpha(id);
+    return this.m3d.alpha(id) * this.thienSon.opacity(id);
   }
 }

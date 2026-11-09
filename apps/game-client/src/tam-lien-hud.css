@@ -1,0 +1,44 @@
+#tam-lien-qte {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 36px);
+  z-index: 5;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 200px;
+  height: 46px;
+  gap: 7px;
+  padding: 4px 8px 6px;
+  overflow: hidden;
+  border: 1px solid #ae945a;
+  border-radius: 4px;
+  background: #172922f5;
+  color: #f9e2a9;
+  box-shadow: 0 2px 6px #000b;
+  font-size: 17px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+#tam-lien-qte[hidden] {
+  display: none;
+}
+#tam-lien-qte img {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+#tam-lien-qte kbd {
+  color: #fff4cf;
+  font-weight: 700;
+}
+#tam-lien-qte span {
+  position: absolute;
+  inset: auto 0 0;
+  height: 3px;
+  background: #80dfd2;
+  transform-origin: left;
+}

@@ -1,16 +1,25 @@
-import { direction, distance, segmentCircle, segmentRect } from './geometry.js';
+import {
+  blocked,
+  direction,
+  distance,
+  segmentCircle,
+  segmentRect,
+} from './geometry.js';
 import { emit, hurt, offensiveStats } from './combat.js';
 import { applyStatus, displace, hasStatus } from './status.js';
 import { rankedAbility, characterStats } from './progression.js';
 import { captureConfinement, confineMovement } from './confinement.js';
 import { dragonDiveTarget } from './dragon-dive.js';
+import { recordTamLienHit, stepTamLienTram, tamLienTram } from './tam-lien-tram.js';
 import type {
   Ability,
   AllyEffect,
   Creep,
   Hero,
+  MultiHitEffect,
   ProjectileEffect,
   SimulationConfig,
+  SkillAction,
   World,
 } from './types.js';
 
@@ -149,6 +158,62 @@ function queueProjectiles(
     });
   }
 }
+function queueInwardVolley(
+  world: World,
+  action: SkillAction,
+  effect: MultiHitEffect,
+  config: SimulationConfig,
+): void {
+  const pattern = effect.inwardBurst!;
+  const shot = effect.projectileBurst!;
+  const center = action.origin!;
+  const index = effect.hits - action.remaining;
+  const rawDamage = action.rawDamage;
+  for (let row = 0; row < 4; row++) {
+    const dx = row % 2 ? pattern.offsetX : -pattern.offsetX;
+    const dy = row < 2 ? -pattern.offsetY : pattern.offsetY;
+    const radius = Math.hypot(dx, dy);
+    const ux = -dx / radius;
+    const uy = -dy / radius;
+    const x = center.x + dx + ux * pattern.launchOffset;
+    const y = center.y + dy + uy * pattern.launchOffset;
+    const origin = { x, y };
+    if (
+      blocked(
+        origin,
+        shot.radius,
+        config.width,
+        config.height,
+        config.collision,
+      ) ||
+      config.collision.some(
+        (wall) => segmentRect(center, origin, wall, shot.radius) !== undefined,
+      )
+    )
+      continue;
+    const variant = (index + row) % pattern.bends.length;
+    world.shots.push({
+      tick: world.tick,
+      ownerId: action.ownerId,
+      ability: { ...action.ability!, effect: shot },
+      x,
+      y,
+      dx: ux,
+      dy: uy,
+      rawDamage,
+      critChance: action.critChance,
+      critMultiplier: action.critMultiplier,
+      stage: `dao_crescent_${variant}`,
+      curve: {
+        origin,
+        dx: ux,
+        dy: uy,
+        bend: pattern.bends[variant]!,
+        crossing: (radius - pattern.launchOffset) / shot.range,
+      },
+    });
+  }
+}
 function cue(
   world: World,
   hero: Hero,
@@ -228,8 +293,7 @@ function strikeArc(
   let hit = false;
   targets.forEach((enemy, i) => {
     if (effect.damage > 0) {
-      hit =
-        hurt(
+      const landed = hurt(
           world,
           enemy,
           hero.id,
@@ -248,7 +312,10 @@ function strikeArc(
             lifesteal: ability.equipmentAttack?.lifesteal,
             slowedBonus: effect.slowedBonus,
           },
-        ) || hit;
+        );
+      if (landed && !hit && ability.id === tamLienTram.basicId)
+        recordTamLienHit(world, hero, enemy.id, config);
+      hit ||= landed;
     }
     if (enemy.hp <= 0) return;
     const before = { x: enemy.x, y: enemy.y };
@@ -401,7 +468,9 @@ export function perform(
     hero.fy = aim.y;
   }
   hero.pose = kind === 'cast' ? 'cast' : 'basic_attack';
-  hero.actionUntil = kind === 'attack' ? hero.cooldown : world.tick + 12;
+  hero.actionUntil = kind === 'attack'
+    ? ability.id === tamLienTram.basicId ? world.tick + 8 : hero.cooldown
+    : world.tick + 12;
   hero.castAbilityId = ability.id;
   hero.actionStartedAt = world.tick;
   if (kind === 'attack') hero.basicStage = stage;
@@ -699,6 +768,9 @@ export function perform(
       world.tick,
     );
     hero.actionUntil = world.tick + Math.max(12, duration);
+    const inward = effect.mode === 'multi_hit' ? effect.inwardBurst : undefined;
+    const damageEffect =
+      effect.mode === 'multi_hit' && inward ? effect.projectileBurst! : effect;
     world.actions.push({
       startedAt: world.tick,
       id: `action_${world.nextId++}`,
@@ -706,7 +778,8 @@ export function perform(
       abilityId: ability.id,
       kind: effect.mode,
       until: world.tick + duration,
-      nextTick: world.tick,
+      nextTick: world.tick + (inward?.windupTicks ?? 0),
+      ...(inward ? { origin: { x: hero.x, y: hero.y } } : {}),
       remaining: effect.mode === 'dash' ? effect.distance : effect.hits,
       fx: effect.mode === 'dash' && effect.backward ? -hero.fx : hero.fx,
       fy: effect.mode === 'dash' && effect.backward ? -hero.fy : hero.fy,
@@ -716,10 +789,12 @@ export function perform(
       comboTargets: {},
       rawDamage: damageFor(
         hero,
-        effect.damage,
+        damageEffect.damage,
         config,
         world.tick,
-        effect.mode === 'multi_hit' ? (effect.attackPowerScale ?? 1) : 1,
+        'attackPowerScale' in damageEffect
+          ? (damageEffect.attackPowerScale ?? 1)
+          : 1,
       ),
       finisherDamage:
         effect.mode === 'multi_hit'
@@ -904,6 +979,8 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
         if (action.effect.durationTicks === undefined)
           action.until = world.tick;
       }
+    } else if (action.tamLien) {
+      stepTamLienTram(world, hero, action, config);
     } else if (action.effect.mode === 'dash') {
       const e = action.effect,
         old = { x: hero.x, y: hero.y },
@@ -933,7 +1010,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
         )
           continue;
         action.hitIds.push(enemy.id);
-        hurt(
+        const landed = hurt(
           world,
           enemy,
           hero.id,
@@ -942,6 +1019,10 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           config,
           action,
         );
+        if (landed && action.abilityId === 'phi_anh_tram' && !action.tamLienCharged) {
+          recordTamLienHit(world, hero, enemy.id, config);
+          action.tamLienCharged = true;
+        }
         if (enemy.hp > 0 && e.stunTicks > 0)
           applyStatus(
             enemy,
@@ -960,6 +1041,14 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
       const e = action.effect,
         finish = action.remaining === 0,
         radius = finish ? e.finisherRange : e.range;
+      if (e.inwardBurst) {
+        if (action.remaining > 0) {
+          queueInwardVolley(world, action, e, config);
+          action.remaining--;
+          action.nextTick += e.inwardBurst.intervalTicks;
+        }
+        continue;
+      }
       cue(world, hero, action.abilityId, finish ? 'finisher' : 'sweep', radius);
       if (
         !finish &&

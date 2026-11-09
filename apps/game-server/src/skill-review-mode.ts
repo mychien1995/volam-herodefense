@@ -1,6 +1,7 @@
 import {
   initializeProgression,
   refreshCharacter,
+  tamLienTram,
   type Hero,
   type SimulationConfig,
   type World,
@@ -25,10 +26,23 @@ export function prepareSkillReviewHero(h: Hero, c: SimulationConfig): void {
   h.hp = h.maxHp;
   resetSkillReviewResources(h);
 }
-export function resetSkillReviewResources(h: Hero): void {
-  h.skillCooldowns = [0, 0, 0, 0];
-  h.abilityCooldowns = {};
-  if (h.hp > 0) h.mana = h.maxMana;
+export function resetSkillReviewResources(h: Hero, world?: World): void {
+  const fan = 'luu_phong_bo';
+  const saved = h.abilityCooldowns ?? {};
+  const tick = world?.tick ?? 0;
+  const cooldowns: Record<string, number> = {};
+  for (const id of [fan, tamLienTram.id]) {
+    const ready = saved[id] ?? 0;
+    if (ready > tick) cooldowns[id] = ready;
+  }
+  h.abilityCooldowns = cooldowns;
+  h.skillCooldowns = Array.from({ length: 4 }, (_, slot) =>
+    cooldowns[h.skillIds?.[slot] ?? ''] ?? 0,
+  );
+  if (h.hp > 0 && (!world || (
+    !cooldowns[fan] &&
+    ![...world.projectiles.values()].some((p) => p.ownerId === h.id && p.abilityId === fan)
+  ))) h.mana = h.maxMana;
 }
 /** Preserve four slots and normal server casts. Test loadouts bypass point allocation only. */
 export function applySkillReviewLoadout(
@@ -45,6 +59,7 @@ export function applySkillReviewLoadout(
   if (command.kind === 'select-basic') {
     if (c.progression?.schools[h.schoolId]?.basicIds.includes(command.id)) {
       h.basicId = command.id;
+      delete h.tamLien;
       h.basicChains = {};
       h.progression!.branchId = command.id;
       h.progression!.revision++;
@@ -76,6 +91,6 @@ export function applySkillReviewLoadout(
     h.pose = 'idle';
     h.progression!.revision++;
   }
-  resetSkillReviewResources(h);
+  resetSkillReviewResources(h, w);
   return true;
 }

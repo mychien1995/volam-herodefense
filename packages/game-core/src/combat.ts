@@ -16,6 +16,7 @@ import { CHU_BOSS_ID } from './chu-types.js';
 import { waveBossTestArchetypes } from './wave-boss-test.js';
 import type { StatusEffect } from './types.js';
 import type { ComboSpec } from './types.js';
+import { recordTamLienHit } from './tam-lien-tram.js';
 export function emit(world: World, event: Omit<CombatEvent, 'id'>): void {
   world.events.push({ id: world.nextEvent++, tick: world.tick, ...event });
 }
@@ -150,7 +151,7 @@ export function hurt(
       damage: 0,
       critical: false,
     });
-    hurt(
+    const landed = hurt(
       world,
       attacker,
       target.id,
@@ -164,6 +165,9 @@ export function hurt(
         fy: heading.y,
       },
     );
+    const hero = world.heroes.get(target.id);
+    if (landed && hero && counter.abilityId === 'phong_anh_hoan_vi')
+      recordTamLienHit(world, hero, attacker.id, config);
   };
   if (counter && attacker && attacker.hp > 0) {
     target.statuses = target.statuses!.filter((s) => s !== counter);

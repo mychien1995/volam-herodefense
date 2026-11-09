@@ -20,6 +20,8 @@ import { expireCombos } from './combos.js';
 import { bufferComboFinisher, takeComboFinisher } from './combo-finisher.js';
 import { stepBossEncounter } from './boss-encounter.js';
 import { nextBasic, expireBasicChain } from './basic-attacks.js';
+import { startTamLienTram, tamLienTram } from './tam-lien-tram.js';
+import { recallSpinningProjectile, stepSpinningProjectile } from './spinning-projectile.js';
 import { separateDungeonCreeps } from './creep-spacing.js';
 import {
   captureConfinement,
@@ -235,6 +237,10 @@ function runCommand(
     return;
   }
   if (hero.namDeLocked || world.vuong?.locked(hero.id)) return;
+  if (command.kind === 'tam-lien-tram') {
+    startTamLienTram(world, hero, config);
+    return;
+  }
   if (command.kind === 'gear-skill') {
     useEquipmentSkill(world, hero, config);
     return;
@@ -289,8 +295,8 @@ function runCommand(
       return;
     const ability = config.basics[hero.basicId];
     if (ability && world.tick >= hero.cooldown) {
-      hero.cooldown =
-        world.tick + abilityCooldown(hero, ability, config, world.tick, true);
+      const dao = ability.id === tamLienTram.basicId;
+      hero.cooldown = world.tick + abilityCooldown(hero, ability, config, world.tick, true);
       const next = nextBasic(hero, ability);
       if (ability.manualChain) {
         if (hero.basicChains?.[ability.id] === 0) {
@@ -308,7 +314,7 @@ function runCommand(
         withBasicEquipment(next.ability, hero, config),
         config,
         'attack',
-        next.stage,
+        dao ? `dao_swing_${Math.floor(world.random() * 3)}` : next.stage,
       );
       if (next.stage && hero.basicChains?.[ability.id] === 0)
         hero.cooldown += ability.basicComboEndRecoveryTicks ?? 0;
@@ -326,6 +332,20 @@ function runCommand(
     const ability = equippedAbility(hero, command.slot, config);
     if (ability?.effect.mode === 'dash' && hasStatus(hero, 'root', world.tick))
       return;
+    if (
+      ability?.effect.mode === 'projectile' &&
+      ability.effect.recallDrain
+    ) {
+      const shot = [...world.projectiles.values()].find(
+        (p) => p.ownerId === hero.id && p.abilityId === ability.id,
+      );
+      if (shot) {
+        if (shot.leg !== 'return') recallSpinningProjectile(shot);
+        return;
+      }
+      if (world.shots.some((s) => s.ownerId === hero.id && s.ability.id === ability.id))
+        return;
+    }
     if (ability && blink(world, hero, ability.id, config)) return;
     const togglingOff =
       ability?.effect.mode === 'mana_shield' &&
@@ -351,8 +371,9 @@ function runCommand(
     )
       return;
     if (!togglingOff) hero.mana -= ability.manaCost;
-    hero.skillCooldowns[command.slot] =
-      world.tick + abilityCooldown(hero, ability, config, world.tick);
+    hero.skillCooldowns[command.slot] = world.tick +
+      (ability.effect.mode === 'projectile' && ability.effect.recallDrain
+        ? 0 : abilityCooldown(hero, ability, config, world.tick));
     hero.abilityCooldowns ??= {};
     hero.abilityCooldowns[ability.id] = hero.skillCooldowns[command.slot]!;
     perform(
@@ -370,6 +391,10 @@ function advanceProjectile(
   shot: Projectile,
   config: SimulationConfig,
 ): void {
+  if (shot.effect.recallDrain) {
+    stepSpinningProjectile(world, shot, config);
+    return;
+  }
   if (shot.effect.dragonDive) {
     advanceDragonDive(world, shot, config);
     return;
@@ -380,10 +405,24 @@ function advanceProjectile(
   }
   const length = Math.min(
     shot.remaining,
-    Math.hypot(shot.vx, shot.vy) / config.tickRate,
+    (shot.curve ? shot.effect.speed : Math.hypot(shot.vx, shot.vy)) /
+      config.tickRate,
   );
-  const dir = direction(shot.vx, shot.vy);
-  const end = { x: shot.x + dir.x * length, y: shot.y + dir.y * length };
+  let dir = direction(shot.vx, shot.vy);
+  let end = { x: shot.x + dir.x * length, y: shot.y + dir.y * length };
+  if (shot.curve) {
+    const { origin, dx, dy, bend, crossing } = shot.curve;
+    const advance = shot.effect.range - shot.remaining + length;
+    const progress = advance / shot.effect.range;
+    const lateral = bend * Math.sin(Math.PI * progress) * (progress - crossing);
+    end = {
+      x: origin.x + dx * advance - dy * lateral,
+      y: origin.y + dy * advance + dx * lateral,
+    };
+    dir = direction(end.x - shot.x, end.y - shot.y);
+    shot.vx = dir.x * shot.effect.speed;
+    shot.vy = dir.y * shot.effect.speed;
+  }
   let wallT = blocked(end, shot.effect.radius, config.width, config.height, [])
     ? 1
     : Infinity;
@@ -606,6 +645,8 @@ export function stepWorld(world: World, config: SimulationConfig): void {
         ?.cooldownTicks ?? 0,
     );
     rechargeDash(hero, world.tick, config);
+    if (hero.tamLien?.readyUntil && hero.tamLien.readyUntil <= world.tick)
+      delete hero.tamLien;
     if (hero.hp <= 0) {
       hero.pose = 'death';
       cancelOwnedEffects(world, hero.id);
@@ -702,6 +743,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       id,
       ownerId: scheduled.ownerId,
       spawnedAt: world.tick,
+      ...(scheduled.curve ? { curve: scheduled.curve } : {}),
       ...(scheduled.dragonTarget
         ? {
             dragonFlight: {
@@ -731,11 +773,14 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       ...(scheduled.comboTargets
         ? { comboTargets: scheduled.comboTargets }
         : {}),
-      ...(scheduled.ability.effect.boomerang
+      ...(scheduled.ability.effect.boomerang ||
+      scheduled.ability.effect.recallDrain
         ? { leg: 'outbound' as const }
         : {}),
       ...(scheduled.refund ? { refund: scheduled.refund } : {}),
-      ...(scheduled.stage ? { stage: scheduled.stage } : {}),
+      ...(scheduled.stage || scheduled.ability.effect.recallDrain
+        ? { stage: scheduled.stage ?? 'fan_outbound' }
+        : {}),
     });
   }
   world.shots = world.shots.filter((item) => item.tick > world.tick);

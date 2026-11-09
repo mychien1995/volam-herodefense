@@ -66,6 +66,11 @@ const projectile = z.strictObject({
   radial: z.boolean().optional(),
   attackPowerScale: z.number().finite().min(0).max(1).optional(),
   blinkWindowTicks: count.min(1).optional(),
+  recallDrain: z.strictObject({
+    intervalTicks: count.min(1),
+    mana: positive,
+    cooldownSeconds: count.min(1),
+  }).optional(),
   boomerang: z.boolean().optional(),
   manaRefund: z.number().finite().nonnegative().optional(),
   slowedBonus: z.number().finite().nonnegative().optional(),
@@ -118,12 +123,12 @@ export const abilitySchema = z
   .strictObject({
     id: z.string().regex(/^[a-z_]+$/),
     nameVi: z.string().min(1),
-    cooldownTicks: count.min(1),
+    cooldownTicks: count,
     manaCost: z.number().nonnegative(),
     manualChain: z
       .strictObject({
         idleTicks: count.min(1),
-        cooldownTicks: count.min(1),
+    cooldownTicks: count,
         finisherProjectile: projectile,
       })
       .optional(),
@@ -220,7 +225,7 @@ export const abilitySchema = z
       }),
       z.strictObject({
         mode: z.literal('multi_hit'),
-        attackPowerScale:z.number().min(0).max(1).optional(),
+        attackPowerScale: z.number().min(0).max(1).optional(),
         range: positive,
         damage: z.number().finite().nonnegative(),
         hits: count.min(1).max(16),
@@ -231,6 +236,16 @@ export const abilitySchema = z
         slowedBonus: z.number().nonnegative().optional(),
         projectileBurst: projectile.optional(),
         projectileBurstEvery: count.min(1).max(12).optional(),
+        inwardBurst: z
+          .strictObject({
+            offsetX: positive,
+            offsetY: positive,
+            launchOffset: z.number().nonnegative(),
+            bends: z.array(z.number().finite()).length(4),
+            windupTicks: count,
+            intervalTicks: positive,
+          })
+          .optional(),
         comboBurstOnly: z.boolean().optional(),
         guard: z.number().finite().min(0).max(0.85).optional(),
         durationTicks: count.min(1).optional(),
@@ -238,6 +253,31 @@ export const abilitySchema = z
     ]),
   })
   .superRefine((a, c) => {
+    if (
+      a.effect.mode === 'projectile' &&
+      a.effect.recallDrain &&
+      (!a.effect.piercing ||
+        a.effect.count !== 1 ||
+        a.effect.boomerang ||
+        a.effect.blinkWindowTicks)
+    )
+      c.addIssue({
+        code: 'custom',
+        message: 'Recall requires one independent piercing projectile',
+      });
+    if (a.effect.mode === 'multi_hit' && a.effect.inwardBurst) {
+      const { offsetX, offsetY, launchOffset } = a.effect.inwardBurst;
+      const crossing = Math.hypot(offsetX, offsetY) - launchOffset;
+      if (
+        !a.effect.projectileBurst ||
+        crossing <= 0 ||
+        a.effect.projectileBurst.range <= crossing
+      )
+        c.addIssue({
+          code: 'custom',
+          message: 'Inward projectiles must travel through the center',
+        });
+    }
     if (
       a.effect.mode === 'arc' &&
       a.effect.durationTicks !== undefined &&

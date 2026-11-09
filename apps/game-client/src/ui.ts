@@ -899,6 +899,12 @@ export class GameUI {
       }),
     ];
     const activeStatuses = JSON.parse(hero.statuses) as Array<{ kind: string }>;
+    const recallReady = [...(this.state?.projectiles.values() ?? [])].some(
+      (shot) =>
+        shot.ownerId === this.sessionId &&
+        shot.zoneId === hero.zoneId &&
+        (shot.stage === 'fan_outbound' || shot.stage === 'fan_hold'),
+    );
     for (const { key, remaining, ability } of slots) {
       const rank =
         key === 'a'
@@ -906,10 +912,15 @@ export class GameUI {
           : hero.build.enabled
             ? (hero.build.ranks.get(ability?.id ?? '') ?? 0)
             : 1;
-      const recast =
+      const recall =
         ability?.effect.mode === 'projectile' &&
-        ability.effect.blinkWindowTicks !== undefined &&
-        hero.blinkTicks > 0;
+        !!ability.effect.recallDrain &&
+        recallReady;
+      const recast =
+        recall ||
+        (ability?.effect.mode === 'projectile' &&
+          ability.effect.blinkWindowTicks !== undefined &&
+          hero.blinkTicks > 0);
       const slot = element(`#slot-${key}`),
         cooling = remaining > 0 && !recast,
         cost = recast ? 0 : (ability?.manaCost ?? 0);
@@ -988,7 +999,9 @@ export class GameUI {
       } else if (key === 'a')
         slot.querySelector<HTMLElement>('.pixel-icon')!.style.background = '';
       element(`#timer-${key}`).textContent = recast
-        ? (hero.blinkTicks / m1Config.tickRate).toFixed(1)
+        ? recall
+          ? ''
+          : (hero.blinkTicks / m1Config.tickRate).toFixed(1)
         : cooling
           ? (remaining / m1Config.tickRate).toFixed(1)
           : '';
@@ -1012,7 +1025,9 @@ export class GameUI {
                   ? 'Bổng'
                   : 'Chưởng'
           : recast
-            ? 'Hiện thân'
+            ? recall
+              ? 'Thu quạt'
+              : 'Hiện thân'
             : ability
               ? fixed && !rank
                 ? 'Cấp ' +

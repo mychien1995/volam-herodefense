@@ -6,6 +6,7 @@ export * from './boss-types.js';
 export * from './boss-encounter.js';
 export * from './geometry.js';
 export * from './simulation.js';
+export { tamLienTram } from './tam-lien-tram.js';
 export * from './dungeons.js';
 export * from './boss-party.js';
 export * from './invasions.js';

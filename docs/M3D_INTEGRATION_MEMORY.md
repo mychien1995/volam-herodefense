@@ -1,3 +1,9 @@
+## Thiên Sơn đã duyệt — 2026-11-09
+
+Protocol 36 thêm lệnh S và thời gian hiện HUD Tam Liên Trảm do server đồng bộ. Thiên Sơn Đao có ba nhát A, một cửa sổ QTE hai giây khi đủ sáu điểm và hồi 10 giây trước khi tích lại. HUD 200 × 46 px nằm trên thanh kỹ năng. Bạo Vũ Cuồng Phong duy trì một vòng quạt gây sát thương và trừ mana cho đến khi thu, rồi hồi hai giây. Bách Liệt Thiên Kích giữ bốn bóng chữ X và tám đợt đao khí xuyên tâm. Hàn Nguyệt dùng mẫu A, với tỉ lệ lưỡi mới ở các khung đứng và đi. Xem [quyết định duyệt](../DECISIONS.md#thiên-sơn--tam-liên-trảm-và-bạo-vũ-cuồng-phong--bản-duyệt-m3d) và [ảnh trong Phaser](evidence/sessions/thien-son-tam-lien-hud-layout/).
+
+`pnpm check:final --config playwright.skills.config.ts --grep 'Tam Liên Trảm opens above'` đã qua với 946 test Vitest, 18 kiểm tra workflow, build production, các validator asset và một ca Playwright A/S. Lượt kiểm tra bổ sung trong phòng sáu client dùng một trình duyệt Phaser và năm client SDK. Phaser nhận đủ sáu nhân vật, quan sát vòng Bạo Vũ hao mana và bắt đầu hồi khi thu về, và ghi nhận sát thương Bách Liệt đồng bộ tới một client khác. [Ảnh phòng thử](evidence/sessions/thien-son-m3d-approved/).
+
 ## Commit toàn bộ M3D — 2026-11-07
 
 Director yêu cầu commit tất cả thay đổi hiện có, bao gồm cân bằng chiến dịch, ba lượt hồi sinh/vote và toàn bộ code/artwork/tài liệu Vương Trùng Dương. Đây là ủy quyền commit trên checkout hiện tại, không tự xác nhận duyệt art runtime hoặc triển khai mạng. [Phạm vi và kiểm chứng](CAMPAIGN_BALANCE_2026_11_06.md).

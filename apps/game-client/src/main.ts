@@ -1,4 +1,5 @@
 import { NamDeHud } from './nam-de-hud.js';
+import { TamLienHud } from './tam-lien-hud.js';
 import { ChuHud } from './chu-hud.js';
 import './chu-hud.css';
 import Phaser from 'phaser';
@@ -62,6 +63,7 @@ ui.onBossRetry = (action) => {
     });
 };
 const namDeHud = new NamDeHud();
+const tamLienHud = new TamLienHud();
 const chuHud = new ChuHud((action, id, itemId) => {
   if (itemId && (action === 'sell' || action === 'drop'))
     room?.send('boss-item-action', {
@@ -351,6 +353,7 @@ async function connect(existing: boolean): Promise<void> {
         syncMatchMusic(state.phase === 'IN_GAME');
         chuHud.sync(state, joined.sessionId);
         namDeHud.sync(state, joined.sessionId);
+        tamLienHud.sync(state, joined.sessionId);
         const zone = state.players.get(joined.sessionId)?.zoneId ?? 'arena';
         if (zone !== previousZone) {
           previousZone = zone;
@@ -420,6 +423,7 @@ async function connect(existing: boolean): Promise<void> {
       if (room !== joined) return;
       creepPreview.hide();
       namDeHud.sync(undefined, '');
+      tamLienHud.sync(undefined, '');
       ui.reconnecting = true;
       window.dispatchEvent(new Event('volam:controls-blocked'));
       arenaScene.setSnapshot(undefined);
@@ -435,6 +439,7 @@ async function connect(existing: boolean): Promise<void> {
       syncMatchMusic(false);
       chuHud.sync(undefined, '');
       namDeHud.sync(undefined, '');
+      tamLienHud.sync(undefined, '');
       room = undefined;
       pregame.disconnected(
         `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`,

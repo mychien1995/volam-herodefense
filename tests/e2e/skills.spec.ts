@@ -2,6 +2,58 @@ import { expect, test, type Page } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { m1Config, skillArt } from '@volam/game-data';
 import { joinWaiting, startTogether } from './pregame-helper.js';
+import { moveTo } from './m3c1-helpers.js';
+
+test('Thiên Sơn Đao · Tam Liên Trảm opens above the hotbar and resolves three cuts', async ({ page }) => {
+  const errors = monitor(page);
+  const preview = '/?debug=1&skillPreview=1';
+  await joinWaiting(page, 'Tam Lien', undefined, preview, 30000);
+  await startTogether([page], ['thien_son_dao'], 30000);
+  await expect(async () => {
+    if ((await hero(page)).basicId === 'thien_son_dao') return;
+    await page.locator('#preview-basic').selectOption('thien_son_dao');
+    await expect.poll(async () => (await hero(page)).basicId, { timeout: 1500 }).toBe('thien_son_dao');
+  }).toPass({ timeout: 10000 });
+  await moveTo(page, 800, 980);
+  const menu = page.locator('#modal-layer');
+  if (await menu.isVisible()) await page.keyboard.press('Escape');
+  await expect(menu).toBeHidden();
+  await walk(page, 'ArrowRight', 50);
+  await page.getByRole('button', { name: 'Target line' }).click();
+  const session = (await read(page)).sessionId;
+  await expect.poll(async () => Object.keys((await read(page)).state.creeps)
+    .some(id => id.startsWith('preview_' + session + '_'))).toBe(true);
+  const qte = page.locator('#tam-lien-qte');
+  const hitCount = async () => (await read(page)).events.filter(e =>
+    e.sourceId === session && e.abilityId === 'thien_son_dao' &&
+    e.kind === 'hit' && e.targetId === 'preview_' + session + '_0').length;
+  await page.locator('#game canvas').focus();
+  for (let i = 1; i <= 6; i++) {
+    await page.keyboard.press('KeyA');
+    await expect.poll(hitCount).toBe(i);
+    if (i < 6) await expect(qte).toBeHidden();
+  }
+  await expect(qte).toBeVisible();
+  const hud = await qte.boundingBox();
+  const hotbar = await page.locator('#hud .hotbar').boundingBox();
+  expect(hud).toMatchObject({ width: 200, height: 46 });
+  expect(hotbar!.y - (hud!.y + hud!.height)).toBeGreaterThanOrEqual(8);
+  const out = 'docs/evidence/sessions/thien-son-tam-lien-hud-layout';
+  await mkdir(out, { recursive: true });
+  await page.screenshot({ path: out + '/qte.png' });
+  await page.keyboard.press('KeyS');
+  await expect(qte).toBeHidden();
+  const pulse = async () => (await read(page)).events.filter(e =>
+    e.sourceId === session && e.abilityId === 'tam_lien_tram' && e.kind === 'pulse').map(e => e.stage);
+  await expect.poll(pulse).toEqual(['cross_0', 'cross_1', 'cross_2']);
+  await expect.poll(async () => (await read(page)).events.filter(e => e.sourceId === session &&
+    e.abilityId === 'tam_lien_tram' && e.kind === 'hit').length).toBe(3);
+  await page.screenshot({ path: out + '/three-cuts.png' });
+  await page.keyboard.press('KeyS');
+  await expect(qte).toBeHidden();
+  expect(await pulse()).toHaveLength(3);
+  expect(errors).toEqual([]);
+});
 interface Actor {
   x: number;
   y: number;

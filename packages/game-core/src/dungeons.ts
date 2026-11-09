@@ -1434,7 +1434,13 @@ export class DungeonMatch {
     hero.statuses = [];
     source.world.bacCai?.participantLeft(id);
     refreshCharacter(hero, destination.config);
+    const pooledCharge = hero.tamLien?.group === 'creeps' ? hero.tamLien : undefined;
     removeHero(source.world, id);
+    if (pooledCharge)
+      hero.tamLien = {
+        ...pooledCharge, targetId: '',
+        readyUntil: pooledCharge.readyUntil ? convert(pooledCharge.readyUntil) : 0,
+      };
     if (source.kim && !source.world.heroes.size) source.kim.clear(source.world);
     if (source.encounter && !source.world.heroes.size)
       source.encounter.clear(source.world); // cancels queued inputs, future shots and owned missiles

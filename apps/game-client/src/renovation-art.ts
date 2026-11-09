@@ -13,6 +13,7 @@ import {
   presentRenovationAction,
   renovationActionSources,
 } from './renovation-actions.js';
+import { hanNguyetKey, hanNguyetPath } from './thien-son-rework.js';
 
 type BodyImage = Phaser.GameObjects.Image | Phaser.GameObjects.Sprite;
 import { renovatedActors } from './renovation-model.js';
@@ -23,6 +24,11 @@ export const renovationEnabled = (scene: Phaser.Scene) =>
 export function preloadRenovation(scene: Phaser.Scene): void {
   if (scene.sys.settings.key !== 'Arena') return;
   preloadRenovationActions(scene);
+  scene.load.atlas(
+    hanNguyetKey,
+    hanNguyetPath + '.png',
+    hanNguyetPath + '.json',
+  );
   scene.load.image(
     'renovated-arena-layout',
     '/assets/renovation-v2/arena-ground.png',
@@ -79,7 +85,54 @@ export function presentRenovatedBody(
         ? 'up'
         : 'down';
   const locomotion = pose === 'idle' || pose === 'walk';
-  if (locomotion) {
+  let hanNguyetFrame: string | undefined;
+  if (id === 'hero_thien_son_dao' && scene.textures.exists(hanNguyetKey)) {
+    const walk = `walk_${direction}_${Math.floor(scene.time.now / 105) % 3}`;
+    if (
+      pose === 'idle' ||
+      (ability === 'bach_liet_thien_kich' && pose === 'cast')
+    )
+      hanNguyetFrame = `idle_${direction}`;
+    else if (
+      pose === 'walk' ||
+      (ability === 'phi_anh_tram' && (pose === 'cast' || pose === 'action'))
+    )
+      hanNguyetFrame = walk;
+    else if (pose === 'cast' || pose === 'action' || pose === 'basic_attack') {
+      const phase = clock?.phase;
+      const progress =
+        clock?.progress ??
+        ('anims' in image ? image.anims.currentFrame?.progress : undefined) ??
+        0.5;
+      const cel =
+        ability === 'liet_phong_dao' && phase
+          ? phase === 'liet_phong_gather'
+            ? 0
+            : phase === 'liet_phong_gather_hold'
+              ? 1
+              : phase === 'liet_phong_slash'
+                ? 2
+                : 3
+          : Math.min(
+              3,
+              Math.max(
+                0,
+                Math.floor((Number.isFinite(progress) ? progress : 0.5) * 4),
+              ),
+            );
+      hanNguyetFrame = `attack_${direction}_${cel}`;
+    }
+  }
+  if (hanNguyetFrame) {
+    if (locomotion && 'anims' in image) image.anims.stop();
+    image
+      .setTexture(hanNguyetKey, hanNguyetFrame)
+      .setOrigin(0.5, 112 / 144)
+      .setScale(0.5)
+      .setFlip(false, false)
+      .setRotation(0);
+    image.setData('renovation-action', undefined);
+  } else if (locomotion) {
     if ('anims' in image) image.anims.stop();
     const frame = `${pose}_${direction}_${pose === 'walk' ? Math.floor(scene.time.now / 110) % 4 : 0}`;
     image

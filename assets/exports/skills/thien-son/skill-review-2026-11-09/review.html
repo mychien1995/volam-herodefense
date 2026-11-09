@@ -22,8 +22,9 @@
   </section>
   <section>
     <h2>Bách Liệt Thiên Kích</h2>
-    <canvas id="shadows" width="384" height="256" aria-label="Bốn bóng chém về giữa"></canvas>
+    <canvas id="shadows" width="384" height="272" aria-label="Bốn bóng tách hình chữ X và phóng đao khí xanh về tâm"></canvas>
     <button id="split" disabled>Tách bóng và chém</button>
+    <p>Đao khí trúng mục tiêu ở tâm: <strong id="center-hits">0</strong></p>
   </section>
 </main>
 <p id="load-error" role="alert"></p>
@@ -36,10 +37,31 @@
     return img;
   };
   try {
-    const [fan, shadows] = await Promise.all([
-      image('bao-vu-cuong-phong'), image('bach-liet-thien-kich'),
+    const [fan, shadows, crescent, dummy] = await Promise.all([
+      image('bao-vu-cuong-phong'), image('bach-liet-x-bodies'),
+      image('bach-liet-x-flurry'),
+      image('../../../visual-improvement-approved/environment__chu__training_dummy'),
     ]);
     const [fanCtx, shadowCtx] = [$('fan'), $('shadows')].map((c) => c.getContext('2d'));
+    shadowCtx.imageSmoothingEnabled = false;
+    const center = { x: 192, y: 159 };
+    const diagonals = [
+      [-112, -66], [112, -66], [-112, 66], [112, 66],
+    ];
+    const target = { x: center.x, y: center.y - 26, radius: 11 };
+    const splitMs = 200;
+    const slashMs = 108;
+    const cycleMs = 210;
+    const cycles = 8;
+    const flightMs = 300;
+    const flightPx = 160;
+    const launchOffset = 25;
+    const bends = [0, -92, 92, -55];
+    const activeMs = splitMs + cycleMs * cycles;
+    const endMs = splitMs + (cycles - 1) * cycleMs + slashMs + flightMs;
+    const hitIds = new Set();
+    let previousAge = 0;
+    let lastHitAge = -Infinity;
     let x = 56, fanActive = false, recall = false, splitAt = -Infinity, before;
     $('throw').disabled = $('split').disabled = false;
     $('throw').onclick = () => {
@@ -47,10 +69,107 @@
       $('throw').disabled = true; $('recall').disabled = false;
     };
     $('recall').onclick = () => { recall = true; $('recall').disabled = true; };
-    $('split').onclick = () => { splitAt = performance.now(); };
+    $('split').onclick = () => {
+      splitAt = performance.now();
+      previousAge = 0;
+      lastHitAge = -Infinity;
+      hitIds.clear();
+      $('center-hits').textContent = '0';
+    };
     const draw = (ctx, img, size, index, x, y) => {
-      ctx.clearRect(0, 0, 384, 256);
+      ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       ctx.drawImage(img, size * index, 0, size, size, Math.round(x - size / 2), y - size / 2, size, size);
+    };
+    const shadow = (row, pose, x, y, alpha = 1) => {
+      shadowCtx.globalAlpha = alpha;
+      shadowCtx.drawImage(shadows, pose * 80, row * 80, 80, 80,
+        Math.round(x - 40), Math.round(y - 64), 80, 80);
+      shadowCtx.globalAlpha = 1;
+    };
+    const splitEase = (progress) => {
+      const t = Math.min(1, Math.max(0, progress));
+      return 1 - (1 - t) ** 2;
+    };
+    const shotAt = (dx, dy, bend, progress) => {
+      const distance = Math.hypot(dx, dy);
+      const ux = -dx / distance;
+      const uy = -dy / distance;
+      const advance = launchOffset + progress * flightPx;
+      const crossing = (distance - launchOffset) / flightPx;
+      const wave = Math.sin(Math.PI * progress);
+      // Sideways bend vanishes at launch, at the target and at expiry.
+      const lateral = bend * wave * (progress - crossing);
+      const tangent = bend * (wave + Math.PI * Math.cos(Math.PI * progress) *
+        (progress - crossing));
+      return {
+        x: target.x + dx + ux * advance - uy * lateral,
+        y: target.y + dy + uy * advance + ux * lateral,
+        angle: Math.atan2(uy * flightPx + ux * tangent, ux * flightPx - uy * tangent),
+      };
+    };
+    const crossesTarget = (a, b) => {
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const lengthSquared = dx * dx + dy * dy;
+      const along = lengthSquared > 0
+        ? Math.max(0, Math.min(1, ((target.x - a.x) * dx + (target.y - a.y) * dy) / lengthSquared))
+        : 0;
+      return Math.hypot(target.x - a.x - dx * along, target.y - a.y - dy * along) <= target.radius;
+    };
+    const drawVolleys = (age) => {
+      for (let volley = 0; volley < cycles; volley++) {
+        const launch = splitMs + volley * cycleMs + slashMs;
+        const progress = (age - launch) / flightMs;
+        const previous = (previousAge - launch) / flightMs;
+        if (progress < 0 || previous >= 1) continue;
+        for (const [row, [dx, dy]] of diagonals.entries()) {
+          const variant = (volley + row) % bends.length;
+          const position = shotAt(dx, dy, bends[variant], Math.min(progress, 1));
+          const id = volley * diagonals.length + row;
+          if (!hitIds.has(id) && crossesTarget(
+            shotAt(dx, dy, bends[variant], Math.max(previous, 0)), position,
+          )) {
+            hitIds.add(id);
+            lastHitAge = age;
+            $('center-hits').textContent = String(hitIds.size);
+          }
+          if (progress >= 1) continue;
+          shadowCtx.save();
+          shadowCtx.globalAlpha = Math.min(1, (1 - progress) * 5);
+          shadowCtx.translate(Math.round(position.x), Math.round(position.y));
+          shadowCtx.rotate(position.angle);
+          shadowCtx.drawImage(crescent, variant * 80, 0, 80, 80, -54, -40, 80, 80);
+          shadowCtx.restore();
+        }
+      }
+    };
+    const drawShadows = (age) => {
+      shadowCtx.clearRect(0, 0, shadowCtx.canvas.width, shadowCtx.canvas.height);
+      if (age < 0 || age >= endMs + 120) {
+        shadow(0, 0, center.x, center.y);
+        if (previousAge < endMs && age >= endMs) drawVolleys(age);
+        previousAge = age;
+        return;
+      }
+      const hitAge = age - lastHitAge;
+      const wobble = hitAge < 85 ? Math.round(Math.sin(hitAge * 0.16) * 3) : 0;
+      shadowCtx.drawImage(dummy, target.x - 13 + wobble, center.y - 42, 26, 44);
+      const spread = splitEase(age / splitMs);
+      const fade = 1 - Math.max(0, age - endMs) / 120;
+      const cycle = (age - splitMs) % cycleMs;
+      const pose = age < splitMs || age >= activeMs || cycle < 36 ? 0
+        : cycle < slashMs ? 1 : cycle < 158 ? 2 : 3;
+      for (const [row, [dx, dy]] of diagonals.entries()) {
+        const x = center.x + dx * spread;
+        const y = center.y + dy * spread;
+        if (age > 32 && age < splitMs) {
+          const echo = splitEase((age - 40) / splitMs);
+          shadow(row, 0, center.x + dx * echo, center.y + dy * echo, 0.22);
+        }
+        shadow(row, pose, x, y, 0.9 * fade);
+      }
+      drawVolleys(age);
+      previousAge = age;
     };
     const tick = (now) => {
       const elapsed = Math.min(50, now - (before ?? now));
@@ -60,9 +179,7 @@
         if (x === 56 && recall) { fanActive = false; $('throw').disabled = false; }
       }
       draw(fanCtx, fan, 88, fanActive ? Math.floor(now / 55) % 4 : 0, x, 128);
-      const age = now - splitAt, cycle = (age - 140) % 200;
-      const frame = age >= 1340 || age < 140 ? 0 : cycle < 70 ? 1 : cycle < 140 ? 2 : 3;
-      draw(shadowCtx, shadows, 256, frame, 192, 128);
+      drawShadows(now - splitAt);
       requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);

@@ -106,6 +106,11 @@ export function bindGameplayInput(
       event.preventDefault();
       send({ kind: 'basic' });
     }
+    if (event.code === 'KeyS' && !event.ctrlKey && !event.altKey && !event.metaKey) {
+      event.preventDefault();
+      send({ kind: 'tam-lien-tram' });
+      return;
+    }
     const slot = inputBindings.activeSkills.findIndex(
       (key) => key === event.code,
     );

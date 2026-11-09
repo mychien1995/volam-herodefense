@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thiên Sơn Đao · Tam Liên Trảm</title>
+<link rel="stylesheet" href="review.css">
+<main class="stage" aria-label="Bản xem Thiên Sơn Đao">
+  <canvas width="960" height="540" aria-label="Sân tập Thiên Sơn Đao"></canvas>
+  <header class="toolbar">
+    <div class="brand"><small>BẢN XEM ARTWORK</small><h1>Sân tập Thiên Sơn Đao</h1></div>
+    <button id="compare" aria-pressed="false">So sánh Hàn Nguyệt</button>
+  </header>
+
+  <section class="weapon" id="weapon" hidden aria-label="So sánh lưỡi Hàn Nguyệt">
+    <figure><img id="old-blade" alt="Hàn Nguyệt option A"><figcaption>Option A đã duyệt</figcaption></figure>
+    <figure><img id="new-blade" alt="Hàn Nguyệt lưỡi dài và bóng"><figcaption>Hàn Nguyệt mới <small>Dài ×1,50 · Rộng ×1,20</small></figcaption></figure>
+  </section>
+
+  <section id="controls" class="controls" aria-label="Điều khiển bản xem">
+    <div class="skills">
+      <button data-swing="0">Trái → phải</button>
+      <button data-swing="1">Phải → trái</button>
+      <button data-swing="2">Trên ↓ dưới</button>
+      <button data-hit>Phi Ảnh Trảm</button>
+      <button data-hit>Phong Ảnh Hoán Vị</button>
+    </div>
+    <div class="status">
+      <span><kbd>A</kbd> Chém ngẫu nhiên</span>
+      <label>Mục tiêu
+        <select id="target">
+          <option value="boss-a">Hình nhân A</option>
+          <option value="boss-b">Hình nhân B</option>
+          <option value="wave">Quái đợt</option>
+          <option value="dungeon">Quái phụ bản</option>
+        </select>
+      </label>
+      <span id="charge" aria-live="polite">0 / 6 tích điểm</span>
+    </div>
+  </section>
+
+  <button id="qte" class="qte" hidden aria-keyshortcuts="S">
+    <span class="emblem"><img id="icon" alt=""><kbd>S</kbd></span>
+    <span class="qte-label"><small>TUYỆT KỸ</small><strong>Tam Liên Trảm</strong><span class="timer"><span></span></span></span>
+  </button>
+  <div id="action" class="action" role="status" hidden></div>
+</main>
+<script src="review.js"></script>
+</html>

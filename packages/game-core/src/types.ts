@@ -58,6 +58,8 @@ export interface ProjectileEffect {
   radial?: boolean | undefined;
   attackPowerScale?: number | undefined;
   blinkWindowTicks?: number | undefined;
+  /** Persistent, mana-draining spin with same-slot recall. */
+  recallDrain?: { intervalTicks: number; mana: number; cooldownSeconds: number } | undefined;
 }
 export interface ArcEffect {
   lineWidth?: number | undefined;
@@ -214,6 +216,16 @@ export interface MultiHitEffect {
   slowedBonus?: number | undefined;
   projectileBurst?: ProjectileEffect | undefined;
   projectileBurstEvery?: number | undefined;
+  inwardBurst?:
+    | {
+        offsetX: number;
+        offsetY: number;
+        launchOffset: number;
+        bends: number[];
+        windupTicks: number;
+        intervalTicks: number;
+      }
+    | undefined;
   guard?: number | undefined;
   durationTicks?: number | undefined;
 }
@@ -329,6 +341,7 @@ export interface SimulationConfig {
   };
 }
 export type Command =
+  | { kind: 'tam-lien-tram' }
   | { kind: 'nam-de-key'; castId: string; index: number; key: NamDeKey }
   | { kind: 'move'; x: number; y: number }
   | { kind: 'basic' }
@@ -357,6 +370,7 @@ export interface Actor extends Point {
   crowdControlScale?: number;
 }
 export interface Hero extends Actor {
+  tamLien?: { group: string; targetId: string; charges: number; readyUntil: number };
   campaignClears?: string[];
   dragonBonus?: number;
   farmXpRemainder?: number;
@@ -442,13 +456,22 @@ export interface Creep extends Actor {
   burnNext: number;
   burnDamage: number;
 }
+export interface ProjectileCurve {
+  origin: Point;
+  dx: number;
+  dy: number;
+  bend: number;
+  crossing: number;
+}
 export interface Projectile extends Point {
+  nextDrainTick?: number;
   equipmentAttack?: EquipmentAttack | undefined;
   dragonFlight?: { origin: Point; target: Point; fx: number; fy: number };
   spawnedAt?: number;
   combo?: ComboSpec;
   comboTargets?: Record<string, boolean>;
   lingerUntil?: number;
+  curve?: ProjectileCurve;
   hostile?: boolean;
   targetId?: string;
   id: string;
@@ -481,6 +504,9 @@ export interface CombatEvent extends Point {
   stage?: string | undefined;
 }
 export interface SkillAction {
+  tamLien?: { center: Point; targetId: string };
+  tamLienCharged?: boolean;
+  origin?: Point;
   startedAt?: number;
   id: string;
   ownerId: string;
@@ -552,6 +578,7 @@ export interface World {
   random: () => number;
   pending: Array<{ heroId: string; command: Command }>;
   shots: Array<{
+    curve?: ProjectileCurve;
     dragonTarget?: Point | undefined;
     comboTargets?: Record<string, boolean>;
     tick: number;

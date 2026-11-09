@@ -446,20 +446,6 @@ export class RenovationRevision {
       }[];
       if (
         statuses.some(
-          (s) => s.kind === 'channel' && s.abilityId === 'bach_liet_thien_kich',
-        )
-      )
-        field(
-          'wind:' + id,
-          'foot_wind',
-          'bach_liet_thien_kich',
-          p.x,
-          p.y,
-          0.5,
-          p.y - 0.3,
-        ).setFrame(String(Math.floor(this.scene.time.now / 80) % 4));
-      if (
-        statuses.some(
           (s) =>
             s.kind === 'damage_reduction' && s.abilityId === 'la_han_quyen',
         )

@@ -65,6 +65,8 @@ const caiBangIcons = new Set([
   'tieu_dieu_cong',
 ]);
 export function skillIcon(id: string): string {
+  if (id === 'luu_phong_bo')
+    return '/assets/skills/thien-son/skill-review-2026-11-09/bao-vu-cuong-phong-icon.png';
   if (caiBangIcons.has(id))
     return '/assets/skills/cai-bang-icons-v2/' + id + '.png';
   if (id === 'tam_gioi_quy_thien')

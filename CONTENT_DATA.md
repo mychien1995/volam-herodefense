@@ -70,14 +70,14 @@ Canonical IDs/names remain unchanged. Thiếu Lâm Quyền A now cycles left fis
 |---|---|---|---|
 | `lien_hoa_phien` | **Liên Hoa Phiến** | Phiến | Fixed owner-only protective lotus: immunity and increased HP regeneration while inside; leaving removes both and reentry restores them until expiry. No damage. |
 | `luc_duong_chuong` | **Lục Dương Chưởng** | Phiến | Moving spinning attack dealing repeated nearby damage; PvE wave farm. |
-| `luu_phong_bo` | **Lưu Phong Bộ** | Phiến | Short directional dash; pursuit/escape and spacing. |
+| `luu_phong_bo` | **Bạo Vũ Cuồng Phong** | Phiến | Một vòng quạt gây sát thương, làm chậm và tiêu hao mana theo nhịp. Bấm lại để thu, hồi hai giây kể từ lúc thu xong. |
 | `chiet_mai_thu` | **Chiết Mai Thủ** | Phiến | Temporary Attack Speed + Movement Speed buff; fast-attack identity. |
 | `bach_phien_phong_bao` | **Bách Phiến Phong Bạo** | Phiến U | Large moving fan whirlwind; high AoE output. |
 | `phi_anh_tram` | **Phi Ảnh Trảm** | Đao | Forward dash with hard slash; melee engage. |
 | `truy_hon_dao` | **Truy Hồn Đao** | Đao | Two quick hits, bonus vs slowed targets; follow-up pressure. |
 | `phong_anh_hoan_vi` | **Phong Ảnh Hoán Vị** | Đao | Retreat opposite the facing captured at cast without turning, matching Phi Ảnh Trảm's distance at the same rank; movement-only evasion and counter remain. |
 | `liet_phong_dao` | **Liệt Phong Đao** | Đao | Hard strike with partial defense penetration; anti-tank. |
-| `bach_liet_thien_kich` | **Bách Liệt Thiên Kích** | Đao U | Extremely fast multi-hit forward melee combo; PvP finisher. |
+| `bach_liet_thien_kich` | **Bách Liệt Thiên Kích** | Đao U | Bốn bóng hình chữ X phóng tám đợt đao khí xuyên tâm. |
 
 ## Võ Đang — Yin–Yang / Âm Dương
 

@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 35;
+export const PROTOCOL_VERSION = 36;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -87,6 +87,11 @@ export const connectionAckSchema = z.strictObject({
   checks: z.number().int().positive(),
 });
 export const inputSchema = z.discriminatedUnion('kind', [
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    kind: z.literal('tam-lien-tram'),
+  }),
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
@@ -383,6 +388,7 @@ export const BuildState = schema(
 );
 export const MerchantInventoryState = schema(
   {
+    tamLienReadyTicks: t.number().default(0),
     campaign: t.string().default(''),
     levels: t.map('number'),
     potions: t.map('number'),

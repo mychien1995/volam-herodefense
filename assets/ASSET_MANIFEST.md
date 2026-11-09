@@ -1,6 +1,12 @@
 ## Thiên Sơn · Bạo Vũ Cuồng Phong và Bách Liệt Thiên Kích — 2026-11-09
 
-Hai bộ FX **ứng viên chờ duyệt** từ OpenAI ImageGen, tạo riêng theo concept Thiên Sơn và sprite Đao hiện có. Bạo Vũ: bốn frame 88×88, tâm (44,44), vòng xoáy ba cánh quạt dùng chung cho lượt đi và về. Bách Liệt: bốn frame 256×256, tâm (128,128), một frame tách bóng và ba frame vòng lặp chém vào tâm. Nguồn PNG alpha 1254×1254, prompt và exporter giữ tại [source](source/skills/thien-son/skill-review-2026-11-09/); kích thước, nhịp, hash và tham chiếu trong [manifest](exports/skills/thien-son/skill-review-2026-11-09/manifest.json). [Xem chuyển động](exports/skills/thien-son/skill-review-2026-11-09/review.html). Đây là artwork độc lập để duyệt; chưa thay kỹ năng đang chạy.
+Bạo Vũ Cuồng Phong **đã duyệt artwork phóng quạt** ngày 2026-11-09. Bốn frame 88×88, tâm (44,44), cùng vòng quạt cho lượt đi và thu về. Exporter kiểm hash của bộ được duyệt.
+
+Bách Liệt Thiên Kích **đã duyệt artwork bản chữ X** ngày 2026-11-09. OpenAI ImageGen tạo 16 pose hướng chéo, frame 80×80 với điểm đặt chân (40,64), và bốn dáng đao khí xanh 80×80 với tâm đặt trên lưỡi. Bốn bóng cách nhau 224 px ngang và 132 px dọc ở tỷ lệ 1×. Bản xem phát 8 đợt, mỗi đợt cách 210 ms và có bốn đao khí bay thẳng hoặc lượn qua tâm. Tầm bay thử là 160 px trong 300 ms. Chromium ghi nhận 32 lần đao khí chạm mục tiêu đứng giữa. Manifest khóa hash của hai atlas và trang xem đã duyệt. [Nguồn PNG và prompt](source/skills/thien-son/skill-review-2026-11-09/) · [Manifest](exports/skills/thien-son/skill-review-2026-11-09/manifest.json) · [Xem chuyển động](exports/skills/thien-son/skill-review-2026-11-09/review.html) · [Ảnh và số đo](../docs/evidence/sessions/thien-son-skill-review-flurry/).
+
+Thiên Sơn Đao có ba **phương án concept** tạo bằng OpenAI ImageGen, gồm Hàn Nguyệt cong tròn, Trường Phong lưỡi dài và Tuyết Nha bản dày mũi vát. Cả ba là PNG alpha 1536×1024. Bảng so sánh đặt chúng cạnh frame đứng hướng phải đang dùng trong game, cùng chiều cao nhân vật 88 px. [Bảng so sánh](reviews/thien-son-dao-weapon-options-2026-11-09/review.html) · [Nguồn, prompt và hash](source/characters/thien-son-dao-weapon-options-2026-11-09/provenance.json).
+
+Director chọn **Hàn Nguyệt** cho Thiên Sơn Đao. Atlas tích hợp gồm 32 cel alpha, canvas 160×144, điểm đặt chân (80,112), hiển thị ở scale 0,5 với camera trận. Các nhịp nâng và hạ đao của Liệt Phong dùng pha server để chọn cel. Bách Liệt dùng nguyên hai atlas được duyệt. Bạo Vũ dùng sprite xoay được duyệt và icon trích từ frame đầu. [Nguồn và hash Hàn Nguyệt](exports/characters/thien-son-han-nguyet/provenance.json).
 
 ## Renovation v8 · long Phá Giáp footprint — 2026-11-06
 
@@ -138,3 +144,7 @@ The full-viewport interactive `/renovation-preview.html` reviews body idle/walk 
 ## Renovation v3 — all school and boss cast artwork, 2026-11-06
 
 The v2 pilot style was accepted with three requested corrections and explicit authorization for bulk extension. New v3 artwork is integrated for review, without modifying v1/v2 approved sources. [Prompts and production contract](source/renovation-v3/README.md), [source hashes/provenance](source/renovation-v3/provenance.json), [runtime coverage and limits](../docs/RENOVATION_ALL_SKILLS.md). There are 464 new body keyposes, 64 retained pilot body keyposes and 372 new effect source cels, exported through Aseprite. 174 VFX replacement atlases preserve existing frame identities/virtual registrations. These are shared authored poses and effect phases; 4,396 replaced runtime frame references are not 4,396 independent drawings. New final-art approval remains pending.
+
+## Thiên Sơn Đao · Tam Liên Trảm — đã duyệt trong Phaser
+
+Atlas Tam Liên Trảm dùng 16 cel PNG 160×144 với chân tại (80,112), ba đao ảnh, dải gió hoa đào và icon QTE. Phaser chọn cel theo nhịp server, lật riêng đao ảnh trái → phải và hạ đao ảnh phải → trái. Hàn Nguyệt dùng lưỡi bóng với chiều dài ×1,5 và bề rộng ×1,2 trong các cel đứng/đi. Các cel tấn công dùng lưỡi trong bản artwork đã duyệt. HUD phím S có kích thước 200 × 46 px và neo phía trên thanh kỹ năng. [Nguồn và prompt](source/skills/thien-son/tam-lien-tram-2026-11-09/prompts.md) · [Xuất atlas Hàn Nguyệt](exports/characters/thien-son-han-nguyet/provenance.json) · [Kiểm tra trong Phaser](../docs/evidence/sessions/thien-son-tam-lien-hud-layout/).

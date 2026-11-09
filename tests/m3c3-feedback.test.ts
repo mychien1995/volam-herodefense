@@ -161,7 +161,7 @@ describe('M3C3 feedback authoritative trial', () => {
       expect(f.events.filter((e) => e.stage === 'refund')).toHaveLength(0);
     }
   });
-  it('spin reduces damage only while active and Lưu Phong damages each crossed enemy once', () => {
+  it('Lục Dương spin reduces damage only while active', () => {
     const f = fixture('luc_duong_chuong');
     f.cast();
     const hp = f.hero.hp;
@@ -171,10 +171,6 @@ describe('M3C3 feedback authoritative trial', () => {
     const after = f.hero.hp;
     hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 10, f.config);
     expect(f.hero.hp).toBeCloseTo(after - 10);
-    const g = fixture('luu_phong_bo');
-    g.cast();
-    g.steps(10);
-    expect(g.hits()).toHaveLength(1);
   });
   it.each(['phi_anh_tram', 'phong_anh_hoan_vi'])(
     '%s blocks direct hits on moving dash ticks, permits DOT and no post-dash immunity',
@@ -217,7 +213,7 @@ describe('M3C3 feedback authoritative trial', () => {
     ).toHaveLength(12);
     expect(f.hits().length).toBeGreaterThanOrEqual(12);
   });
-  it('Chiết Mai gives bounded active CDR, attack speed floor, expiry and persistent cooldown debt', () => {
+  it('Chiết Mai gives bounded active CDR and preserves cooldown debt; Đao A has no cooldown', () => {
     const f = fixture('chiet_mai_thu');
     f.hero.schoolId = 'thien_son';
     initializeProgression(f.hero, f.config);
@@ -232,7 +228,7 @@ describe('M3C3 feedback authoritative trial', () => {
     expect(after.attackSpeed).toBeGreaterThan(before.attackSpeed);
     const a = f.config.basics['thien_son_dao']!;
     f.config.progression!.schools['thien_son']!.base.attackSpeed = 1000;
-    expect(abilityCooldown(f.hero, a, f.config, f.world.tick, true)).toBe(5);
+    expect(abilityCooldown(f.hero, a, f.config, f.world.tick, true)).toBe(0);
     const debt = f.hero.skillCooldowns[0];
     change({ action: 'reset' });
     expect(f.hero.skillCooldowns[0]).toBe(debt);

@@ -47,6 +47,7 @@ import {
 } from './forest-creeps.js';
 import type { LobbyState } from '@volam/game-protocol';
 import type { CombatEvent } from '@volam/game-core';
+import { presentTamLienBody } from './thien-son-rework.js';
 import { createRenovationWorld } from './renovation-world.js';
 import {
   registerRenovation,
@@ -494,6 +495,8 @@ export class ArenaScene extends Phaser.Scene {
         maxHp: number;
         pose: string;
         basicId?: string;
+        basicStage?: string;
+        actionStartedAt?: number;
         schoolId?: string;
         invasionWave?: number;
         archetypeId?: string;
@@ -667,6 +670,9 @@ export class ArenaScene extends Phaser.Scene {
         cast?.abilityId ?? actor.castAbilityId ?? '',
         cast,
       );
+      if (!enemy)
+        presentTamLienBody(view.sprite, actor, this.zoneId === 'arena'
+          ? state?.tick : state?.dungeons.get(this.zoneId)?.tick);
       if (cast)
         this.vfx?.observeCharacter(
           texture,

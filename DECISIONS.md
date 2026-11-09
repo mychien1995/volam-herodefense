@@ -498,4 +498,16 @@ Sơn Tặc Đao has normal Chém đao only; Hoành trảm is removed. Remove the
 
 Phong Ảnh Hoán Vị giữ hướng nhìn và lướt lùi bằng đúng tầm tiến của Phi Ảnh Trảm cùng bậc (150/158/166/174 px khi không vướng địa hình). Liệt Phong Đao dùng các pose nâng/chạm/thu đao theo hướng trái của bộ M3D đã duyệt; hiệu ứng đao tụ phản chiếu theo hướng ngang, không đổi nhịp đánh của server.
 
-Hướng art yêu cầu cho lượt duyệt: Lưu Phong Bộ sẽ thành **Bạo Vũ Cuồng Phong**, phóng vòng quạt gió xoay, gây sát thương và làm chậm, tiêu mana và có thể bấm lần nữa để thu; **Bách Liệt Thiên Kích** tách bốn bóng ra bốn hướng rồi cùng chém liên tục vào giữa. Phạm vi lượt này ở hai mục đó là tạo artwork ứng viên; chưa đổi tên/hiệu ứng chiến đấu trong trận hay duyệt art mới.
+Hướng art yêu cầu cho lượt duyệt: Lưu Phong Bộ sẽ thành **Bạo Vũ Cuồng Phong**, phóng vòng quạt gió xoay, gây sát thương và làm chậm, tiêu mana và có thể bấm lần nữa để thu; **Bách Liệt Thiên Kích** tách bốn bóng ra bốn hướng rồi cùng chém liên tục vào giữa. Phạm vi lượt này ở hai mục đó là tạo artwork ứng viên.
+
+Director đã duyệt bản phóng quạt Bạo Vũ Cuồng Phong. Với Bách Liệt Thiên Kích, bốn bóng tách xa nhau theo hai đường chéo thành chữ X rồi chém dồn dập. Các đao khí bán nguyệt màu xanh có nhiều dáng, bay xa hơn và đi xuyên qua vị trí mục tiêu ở tâm. Director duyệt artwork bản chữ X với 8 đợt cách nhau 210 ms và tầm bay thử 160 px. Bước tích hợp Phaser được để lại theo yêu cầu.
+
+Director chọn mẫu A **Hàn Nguyệt** và yêu cầu tích hợp bộ đã duyệt vào Phaser. Đao dùng bộ đứng, đi và vung đao ở bốn hướng. Bạo Vũ Cuồng Phong thay Lưu Phong Bộ, giữ ID ô kỹ năng và tốn nội lực ở lượt phóng. Bấm cùng phím để thu quạt theo hướng chốt tại lúc bấm. Bách Liệt Thiên Kích phóng tám đợt đao khí xuyên tâm theo đường bay server tính, mỗi cung có thể trúng một mục tiêu một lần. Số sát thương, làm chậm và thời gian giữ quạt là thông số thử. Director yêu cầu bỏ qua chạy test.
+
+## Thiên Sơn · Tam Liên Trảm và Bạo Vũ Cuồng Phong — bản duyệt M3D
+
+Thiên Sơn Đao đánh thường bằng từng lần bấm A, bỏ hồi chiêu đòn A, chọn một trong ba nhát ngẫu nhiên và hiện đao ảnh. Một đòn A hoặc Phi Ảnh Trảm gây sát thương cộng tối đa một điểm. Phản kích trúng từ Phong Ảnh Hoán Vị cũng cộng một điểm. Đổi mục tiêu riêng xóa chuỗi cũ. Quái đợt và quái phụ bản dùng chung chuỗi. Đủ sáu điểm mở HUD phím S trong hai giây. Tam Liên Trảm thực hiện hai đường lướt chữ X và một đường từ trên xuống qua tâm, có gió và hoa đào. Kể từ lúc dùng chiêu, 10 giây hồi chiêu phải kết thúc trước khi đòn trúng bắt đầu tích lại. Hết cửa sổ QTE xóa điểm.
+
+Bạo Vũ Cuồng Phong duy trì một vòng quạt xoay cho đến lúc thu xong. Vòng gây sát thương, làm chậm và hao mana định kỳ. Tái kích hoạt để thu vòng, sau khi về tay bắt đầu hồi đúng hai giây. Thông số thử gồm 2 mana mỗi 5 tick và tự thu khi không đủ mana trả nhịp kế tiếp.
+
+Director duyệt bản Phaser sau khi chỉnh chiều đao ảnh, hạ vệt phải → trái khỏi mặt nhân vật và đặt HUD Tam Liên Trảm 200 × 46 px phía trên thanh kỹ năng. Đưa bộ Thiên Sơn đã duyệt vào `milestone/m3d` và chạy kiểm tra.

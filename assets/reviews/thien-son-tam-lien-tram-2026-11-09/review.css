@@ -1,0 +1,110 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  background: #101711;
+  color: #e8ede3;
+}
+
+* { box-sizing: border-box; }
+body { display: grid; margin: 0; min-height: 100svh; place-items: center; }
+button, select { font: inherit; }
+button, select, kbd {
+  border: 1px solid #6d7258;
+  border-radius: 5px;
+  background: #232b23;
+  color: #f1ecd8;
+}
+button, select { padding: .4em .65em; }
+button { cursor: pointer; }
+button:hover, button[aria-pressed=true] { background: #3b4639; }
+button:focus-visible, select:focus-visible { outline: 2px solid #e2c17c; outline-offset: 2px; }
+kbd { display: inline-block; padding: .05em .38em; font: 700 1em ui-monospace, monospace; }
+small { display: block; }
+[hidden] { display: none !important; }
+
+.stage {
+  position: relative;
+  width: min(100%, 1280px, calc(100svh * 16 / 9));
+  aspect-ratio: 16 / 9;
+  isolation: isolate;
+  overflow: hidden;
+  container-type: inline-size;
+}
+canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; }
+.toolbar, .controls, .weapon, .qte, .action { position: absolute; }
+.toolbar {
+  inset: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.7cqw 2.2cqw;
+  background: linear-gradient(#101810f2, transparent);
+  font-size: max(11px, 1.4cqw);
+  z-index: 1;
+}
+.brand small { letter-spacing: .16em; font-size: .68em; color: #e1c891; }
+h1 { margin: .13em 0 0; font: 700 2em Georgia, serif; text-shadow: 0 2px 4px #111810; }
+.controls {
+  inset: auto 0 0;
+  padding: 1.8cqw 1.4cqw 1.1cqw;
+  background: linear-gradient(transparent, #131b14f5 30%);
+  text-align: center;
+  font-size: max(11px, 1.37cqw);
+}
+.skills, .status { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .35em .6em; }
+.status { margin-top: .4em; color: #d7dbcc; font-size: .9em; }
+.status label { display: flex; align-items: center; gap: .45em; }
+.status select { padding-block: .1em; }
+#charge { min-width: 8.6em; color: #e1c891; font-variant-numeric: tabular-nums; }
+
+.qte {
+  left: 50%;
+  bottom: 16.5%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: .65em;
+  align-items: center;
+  padding: .45em .95em .45em .5em;
+  border-color: #c7a463;
+  background: linear-gradient(112deg, #182c29, #17201a);
+  box-shadow: 0 2px 8px #0009, 0 0 15px #83ded465, inset 0 0 0 1px #eed08c33;
+  font-size: max(12px, 1.75cqw);
+  white-space: nowrap;
+}
+.emblem { position: relative; display: block; width: 2.65em; height: 2.65em; }
+.emblem img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.emblem kbd { position: absolute; inset: auto auto -.15em -.17em; border-color: #dbb96c; background: #1d302a; }
+.qte-label { display: grid; gap: .18em; min-width: 7em; text-align: left; }
+.qte-label small { font-size: .55em; letter-spacing: .19em; color: #c2d9cd; }
+.qte-label strong { font: 700 1.15em Georgia, serif; color: #ffe3a8; }
+.timer { height: .24em; border-radius: .2em; background: #465147; overflow: hidden; }
+.timer span { display: block; width: 100%; height: 100%; background: linear-gradient(90deg, #75d3c6, #f9d282); transform-origin: left; }
+.action {
+  left: 50%;
+  top: 17%;
+  transform: translateX(-50%);
+  color: #ffedd1;
+  font: 700 max(17px, 2.6cqw) Georgia, serif;
+  text-align: center;
+  text-shadow: 0 2px 2px #22362e, 0 0 12px #17251e;
+}
+.weapon {
+  inset: 12% 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2cqw;
+  align-items: center;
+  padding: 2.5cqw;
+  background: #18221bfa;
+}
+figure { display: grid; justify-items: center; gap: .6em; margin: 0; }
+figure img { display: block; width: 100%; image-rendering: pixelated; }
+figcaption { min-height: 2.4em; font: 700 max(13px, 2cqw) Georgia, serif; text-align: center; color: #ffe5ad; }
+figcaption small { margin-top: .25em; color: #b8ccbc; font: .65em system-ui, sans-serif; }
+
+@media (max-width: 600px) {
+  .stage { min-height: min(500px, 100svh); aspect-ratio: auto; }
+  canvas { position: absolute; inset: 0; object-fit: cover; }
+  .controls { padding-block: 10px 7px; }
+  .qte { bottom: 25%; }
+}

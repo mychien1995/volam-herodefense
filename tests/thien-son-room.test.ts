@@ -88,12 +88,12 @@ it('synchronizes mixed-school shared combat, independent builds/rewards, dash po
   await build(a, { action: 'upgrade', skillId: 'hoa_van_chuong' });
   await build(b, {
     action: 'loadout',
-    ids: ['luc_duong_chuong', 'luu_phong_bo', '', ''],
+    ids: ['luc_duong_chuong', 'phi_anh_tram', '', ''],
   });
   await build(b, { action: 'upgrade', skillId: 'luc_duong_chuong' });
   gainExperience(h, 60, m1Config);
   await expect.poll(() => b.state.players.get(b.sessionId)!.level).toBe(2);
-  await build(b, { action: 'upgrade', skillId: 'luu_phong_bo' });
+  await build(b, { action: 'upgrade', skillId: 'phi_anh_tram' });
   const errors: unknown[] = [];
   b.onMessage('command-rejected', (m) => errors.push(m));
   b.send('build-action', {

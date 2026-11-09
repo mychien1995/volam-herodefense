@@ -96,7 +96,8 @@ describe('M3C1 authoritative wind mechanics', () => {
       const f = fixture(id),
         a = m1Config.skillCatalogue![id]!;
       f.cast();
-      expect(f.hero.mana).toBe(100 - a.manaCost);
+      const firstPulse = a.effect.mode === 'projectile' ? a.effect.recallDrain?.mana ?? 0 : 0;
+      expect(f.hero.mana).toBe(100 - a.manaCost - firstPulse);
       expect(
         submitInput(f.world, 'a', f.hero.lastSequence, {
           kind: 'cast',
@@ -140,7 +141,7 @@ describe('M3C1 authoritative wind mechanics', () => {
     g.steps(1);
     expect(g.hits()[0]!.damage).toBe(30);
     expect(g.hits(g.enemies[1]!.id)[0]!.damage).toBe(9);
-    expect(g.config.basics['thien_son_dao']!.cooldownTicks).toBe(9);
+    expect(g.config.basics['thien_son_dao']!.cooldownTicks).toBe(0);
     g.enemies[0]!.x = 500;
     g.enemies[1]!.y = 370;
     g.steps(15);
@@ -184,29 +185,32 @@ describe('M3C1 authoritative wind mechanics', () => {
     expect(g.hits().length).toBeGreaterThan(0);
     expect(g.hits().length).toBeLessThan(6);
   });
-  it('Lưu Phong damages crossed targets once, stops at thin terrain and stays in zone bounds', () => {
+  it('Bạo Vũ pulses along the cast line and stops its outbound leg at walls and zone bounds', () => {
     const f = fixture('luu_phong_bo');
+    const fan = (s: typeof f) => [...s.world.projectiles.values()][0]!;
     f.cast();
     f.steps(10);
-    expect(f.hero.x).toBeCloseTo(440);
-    expect(f.hits().map((e) => e.damage)).toEqual([30]);
+    expect(f.hero.x).toBe(300);
+    expect(fan(f).x).toBeCloseTo(300 + 11 * 400 / 30);
+    expect(f.hits().map((e) => e.damage)).toEqual([7]);
     const g = fixture('luu_phong_bo');
-    g.config.collision = [{ x: 330, y: 250, width: 1, height: 100 }];
+    g.config.collision = [{ x: 350, y: 250, width: 1, height: 100 }];
     g.cast();
     g.steps(12);
-    expect(g.hero.x).toBeLessThanOrEqual(320);
+    expect(fan(g).x).toBeLessThanOrEqual(326);
+    expect(fan(g).stage).toBe('fan_hold');
     const h = fixture('luu_phong_bo');
-    h.hero.x = 980;
+    h.hero.x = 965;
     h.cast();
     h.steps(12);
-    expect(h.hero.x).toBeLessThanOrEqual(990);
+    expect(fan(h).x).toBeLessThanOrEqual(976);
     const v = fixture('luu_phong_bo');
     v.hero.fx = 0;
     v.hero.fy = -1;
     v.cast();
     v.steps(10);
-    expect(v.hero.y).toBeCloseTo(160);
-    expect(v.hero.x).toBe(300);
+    expect(fan(v).y).toBeCloseTo(300 - 11 * 400 / 30);
+    expect(fan(v).x).toBe(300);
   });
   it('Chiết Mai increases movement and A cadence only for its owner, does not stack, and expires exactly', () => {
     const f = fixture('chiet_mai_thu'),
@@ -305,15 +309,19 @@ describe('M3C1 authoritative wind mechanics', () => {
     f.steps(1);
     expect(f.hits().at(-1)!.damage).toBe(15);
   });
-  it('Bách Liệt is ten fast forward hits plus a finisher, with no rear damage or network-driven extra hits', () => {
+  it('Bách Liệt sends four inward blades in each of eight volleys and strikes the center', () => {
     const f = fixture('bach_liet_thien_kich');
+    f.enemies[0]!.x = f.hero.x;
+    f.enemies[0]!.y = f.hero.y;
+    const projectiles = new Set<string>();
     f.cast();
-    for (let i = 0; i < 45; i++) {
+    for (let i = 0; i < 70; i++) {
       f.input({ kind: 'cast', slot: 0 });
       f.steps(1);
+      for (const id of f.world.projectiles.keys()) projectiles.add(id);
     }
-    expect(f.hits().map((e) => e.damage)).toEqual([...Array(10).fill(13), 45]);
-    expect(f.enemies[2]!.hp).toBe(10000);
+    expect(projectiles.size).toBe(32);
+    expect(f.hits()).toHaveLength(32);
     expect(f.events.filter((e) => e.kind === 'cast')).toHaveLength(1);
   });
   it.each([

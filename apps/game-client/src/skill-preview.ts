@@ -33,7 +33,7 @@ export class SkillPreview {
       .map((a) => `<option value="${a.id}">${a.nameVi}</option>`)
       .join(
         '',
-      )}</select><div><button id="preview-equip">Equip Q</button><button id="preview-cast">Cast Q</button></div><select id="preview-basic" aria-label="Preview basic attack"></select><button id="preview-attack">Attack A</button><small id="preview-status"></small><div><button data-fixture="targets">Target line</button><button data-fixture="attacker">Attacking dummy</button><button data-fixture="clear">Clear dummies</button></div><small>Test skill · Cấp 30 · Tối đa mọi skill · Không hồi chiêu · Phím mũi tên đổi hướng. Chọn hệ phái trước trận.</small>`;
+      )}</select><div><button id="preview-equip">Equip Q</button><button id="preview-cast">Cast Q</button></div><select id="preview-basic" aria-label="Preview basic attack"></select><button id="preview-attack">Attack A</button><small id="preview-status"></small><div><button data-fixture="targets">Target line</button><button data-fixture="attacker">Attacking dummy</button><button data-fixture="clear">Clear dummies</button></div><small>Test skill · Cấp 30 · Tối đa mọi skill · Giữ hồi chiêu Bạo Vũ Cuồng Phong và Tam Liên Trảm · Phím mũi tên đổi hướng. Chọn hệ phái trước trận.</small>`;
     viewport.append(this.panel);
     this.panel
       .querySelectorAll<HTMLButtonElement>('[data-fixture]')

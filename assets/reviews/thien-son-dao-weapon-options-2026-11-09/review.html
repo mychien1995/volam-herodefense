@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thiên Sơn Đao · Chọn dáng lưỡi</title>
+<style>
+  :root { color-scheme: dark; font: 16px system-ui, sans-serif; }
+  body { margin: 32px auto; padding: 0 20px; max-width: 1050px; background: #131d24; color: #f3eee3; }
+  h1 { margin: 0; font-size: 30px; }
+  p { color: #c1cdd2; line-height: 1.45; }
+  main { display: grid; grid-template-columns: repeat(auto-fit, minmax(214px, 1fr)); gap: 14px; }
+  figure { margin: 0; padding: 14px; background: #1b2932; border: 1px solid #405461; border-radius: 10px; }
+  figure p { margin: 6px 0 0; font-size: 14px; }
+  canvas { display: block; width: min(100%, 208px); height: auto; margin: 0 auto 12px;
+    background: #283e46; border-radius: 6px; image-rendering: pixelated; }
+  a { color: #aee1ed; }
+  #error { color: #f4ad9a; }
+</style>
+<h1>Thiên Sơn Đao · Chọn dáng lưỡi</h1>
+<p>Nhân vật cao 88 px ở cả bốn ô. Ba mẫu mới dùng cùng dáng cầm ngang. Bấm vào tên để xem ảnh gốc.</p>
+<main>
+  <figure>
+    <canvas id="current" width="208" height="120" aria-label="Thiên Sơn Đao với lưỡi hiện tại"></canvas>
+    <figcaption><strong>Đao hiện tại</strong><p>Lưỡi ngắn, mũi cong nhẹ.</p></figcaption>
+  </figure>
+  <figure>
+    <canvas id="han-nguyet" width="208" height="120" aria-label="Thiên Sơn cầm Hàn Nguyệt"></canvas>
+    <figcaption><strong><a href="../../source/characters/thien-son-dao-weapon-options-2026-11-09/a-han-nguyet.png">A · Hàn Nguyệt</a></strong>
+      <p>Bụng đao cong tròn, bản rộng và vừa tầm.</p></figcaption>
+  </figure>
+  <figure>
+    <canvas id="truong-phong" width="208" height="120" aria-label="Thiên Sơn cầm Trường Phong"></canvas>
+    <figcaption><strong><a href="../../source/characters/thien-son-dao-weapon-options-2026-11-09/b-truong-phong.png">B · Trường Phong</a></strong>
+      <p>Lưỡi dài nhất, kéo thẳng rồi cong dần về mũi.</p></figcaption>
+  </figure>
+  <figure>
+    <canvas id="tuyet-nha" width="208" height="120" aria-label="Thiên Sơn cầm Tuyết Nha"></canvas>
+    <figcaption><strong><a href="../../source/characters/thien-son-dao-weapon-options-2026-11-09/c-tuyet-nha.png">C · Tuyết Nha</a></strong>
+      <p>Bản dày nhất, sống đậm và mũi vát.</p></figcaption>
+  </figure>
+</main>
+<p id="error" role="alert"></p>
+<script type="module">
+  const folder = '../../source/characters/thien-son-dao-weapon-options-2026-11-09/';
+  const sprites = [
+    { id: 'current', path: '../../exports/renovation-v1/runtime/hero_thien_son_dao.png',
+      rect: [2, 192, 58, 89], feet: [36, 89], bodyHeight: 87 },
+    { id: 'han-nguyet', path: folder + 'a-han-nguyet.png',
+      rect: [195, 89, 957, 843], feet: [620 - 195, 843], bodyHeight: 843 },
+    { id: 'truong-phong', path: folder + 'b-truong-phong.png',
+      rect: [95, 83, 1309, 860], feet: [504 - 95, 860], bodyHeight: 860 },
+    { id: 'tuyet-nha', path: folder + 'c-tuyet-nha.png',
+      rect: [182, 56, 1037, 871], feet: [612 - 182, 871], bodyHeight: 871 },
+  ];
+  try {
+    await Promise.all(sprites.map(async ({ id, path, rect, feet, bodyHeight }) => {
+      const image = new Image();
+      image.src = path;
+      await image.decode();
+      const canvas = document.getElementById(id);
+      const ctx = canvas.getContext('2d');
+      const scale = 88 / bodyHeight;
+      ctx.imageSmoothingEnabled = id !== 'current';
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(image, ...rect, 82 - feet[0] * scale, 107 - feet[1] * scale,
+        rect[2] * scale, rect[3] * scale);
+      canvas.dataset.ready = 'true';
+    }));
+  } catch (error) {
+    document.getElementById('error').textContent = 'Không tải được artwork. ' + error.message;
+  }
+</script>
+</html>

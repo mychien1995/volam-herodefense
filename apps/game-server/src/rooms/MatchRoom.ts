@@ -618,7 +618,7 @@ export class MatchRoom extends Room<{
           });
           return;
         }
-        resetSkillReviewResources(h);
+        resetSkillReviewResources(h, zone.world);
         if (
           zone.access === 'arena' &&
           applySkillReviewLoadout(
@@ -714,7 +714,7 @@ export class MatchRoom extends Room<{
       if (this.devSkillLoadout)
         for (const id of this.simulation.membership.keys()) {
           const h = this.simulation.hero(id);
-          if (h) resetSkillReviewResources(h);
+          if (h) resetSkillReviewResources(h, this.simulation.zoneOf(id)?.world);
         }
       if (this.simulation.invasion?.defeated || this.simulation.victory) {
         this.state.phase = this.simulation.victory ? 'VICTORY' : 'DEFEAT';
@@ -955,6 +955,9 @@ export class MatchRoom extends Room<{
       target.actionUntil = hero.actionUntil;
       target.actionStartedAt = hero.actionStartedAt ?? 0;
       target.basicStage = hero.basicStage ?? '';
+      target.inventory.tamLienReadyTicks = Math.max(
+        0, (hero.tamLien?.readyUntil ?? 0) - zone.world.tick,
+      );
       const action = zone.world.actions?.find((a) => a.ownerId === id);
       target.actionState = action
         ? JSON.stringify({

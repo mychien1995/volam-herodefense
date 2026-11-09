@@ -30,8 +30,7 @@ export const thienSonBasics: Record<string, Ability> = {
     id: 'thien_son_dao',
     nameVi: 'Thiên Sơn Đao',
     manaCost: 0,
-    cooldownTicks: 9,
-    minIntervalTicks: 5,
+    cooldownTicks: 0,
     effect: {
       mode: 'arc',
       damage: 30,
@@ -84,16 +83,25 @@ export const thienSonSkills: Ability[] = [
   },
   {
     id: 'luu_phong_bo',
-    nameVi: 'Lưu Phong Bộ',
+    nameVi: 'Bạo Vũ Cuồng Phong',
     manaCost: 12,
-    cooldownTicks: 120,
+    cooldownTicks: 60,
     effect: {
-      mode: 'dash',
-      distance: 140,
-      speed: 700,
-      radius: 18,
-      damage: 30,
-      stunTicks: 0,
+      mode: 'projectile',
+      range: 220,
+      speed: 400,
+      radius: 24,
+      damage: 7,
+      count: 1,
+      spacingTicks: 0,
+      splashRadius: 0,
+      burnDamage: 0,
+      burnTicks: 0,
+      piercing: true,
+      useFacing: true,
+      attackPowerScale: 0.2,
+      recallDrain: { intervalTicks: 5, mana: 2, cooldownSeconds: 2 },
+      statuses: [{ kind: 'slow', magnitude: 0.25, durationTicks: 45 }],
     },
   },
   {
@@ -213,23 +221,44 @@ export const thienSonSkills: Ability[] = [
     manaCost: 45,
     cooldownTicks: 540,
     effect: {
-      ...multi(145, 13, 10, 4, Math.PI / 4),
-      finisherDamage: 45,
-      finisherRange: 165,
+      ...multi(160, 0, 8, 6),
+      durationTicks: 64,
+      inwardBurst: {
+        offsetX: 112,
+        offsetY: 66,
+        launchOffset: 25,
+        bends: [0, -92, 92, -55],
+        windupTicks: 9,
+        intervalTicks: 6.3,
+      },
+      projectileBurst: {
+        mode: 'projectile',
+        damage: 5.5,
+        speed: 160 / 0.3,
+        range: 160,
+        radius: 12,
+        count: 1,
+        spacingTicks: 0,
+        splashRadius: 0,
+        burnDamage: 0,
+        burnTicks: 0,
+        piercing: true,
+        attackPowerScale: 0.33,
+      },
     } as Ability['effect'],
   },
 ];
 const descriptions = [
   'Hoa cố định tại chỗ thi triển: người tạo hoa đứng trong vùng được miễn sát thương và hồi sinh lực nhanh; ra ngoài mất bảo hộ.',
   'Xoay sáu nhịp quanh bản thân, giảm mạnh sát thương nhận trong lúc xoay.',
-  'Lướt theo hướng nhìn, gây sát thương một lần mỗi địch đi qua; dừng trước địa hình.',
+  'Một vòng quạt duy trì sát thương, làm chậm và tiêu hao nội lực theo nhịp. Bấm lại để thu vòng. Hồi 2 giây khi thu xong.',
   'Tạm tăng tốc di chuyển, tốc đánh và giảm hồi chiêu có giới hạn; không cộng dồn.',
   'Tuyệt kỹ: mười hai nhịp phong bạo theo người, bốn đợt quạt bay tám hướng.',
   'Lướt chém một lần mỗi địch; miễn sát thương trực tiếp trên các tick đang lướt, không chặn DOT.',
   'Hai luồng đao khí bay thẳng, làm chậm; tăng sát thương lên địch đang chậm.',
   'Lướt lùi, giữ hướng nhìn và để lại quang ảnh; tầm lướt bằng Phi Ảnh Trảm cùng bậc. Miễn sát thương trực tiếp khi lướt; cửa sổ phản kích không miễn thương.',
   'Tụ đại đao trên đầu rồi chém xuống phía trước, xuyên một phần phòng thủ riêng cho đòn này.',
-  'Tuyệt kỹ: mười nhát chém cực nhanh phía trước và một nhát kết thúc.',
+  'Tách bốn bóng hình chữ X và phóng tám đợt đao khí xuyên qua tâm.',
 ];
 export function addThienSonProgression(d: ProgressionDefinition): void {
   d.schools['thien_son'] = {
@@ -259,7 +288,8 @@ export function addThienSonProgression(d: ProgressionDefinition): void {
       const a = abilitySchema.parse(base),
         e = a.effect;
       a.manaCost += (ultimate ? 3 : 1) * r;
-      a.cooldownTicks -= (ultimate ? 15 : 3) * r;
+      if (e.mode !== 'projectile' || !e.recallDrain)
+        a.cooldownTicks -= (ultimate ? 15 : 3) * r;
       if (e.mode === 'multi_hit') {
         e.damage += (ultimate ? 4 : 3) * r;
         e.range += 4 * r;
@@ -286,7 +316,7 @@ export function addThienSonProgression(d: ProgressionDefinition): void {
           (e.cooldownReduction ?? 0) + 0.03 * r,
         );
       } else if (e.mode === 'projectile') {
-        e.damage += 5 * r;
+        e.damage += (e.recallDrain ? 1 : 5) * r;
         e.range += 10 * r;
         if (e.slowedBonus) e.slowedBonus += 0.05 * r;
       } else if (e.mode === 'arc') {
