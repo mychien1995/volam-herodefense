@@ -1,8 +1,19 @@
 import { defineConfig } from 'vite';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 let compiledServerUrl = 'http://localhost:2567';
+const runtimePublicDir = process.env['VOLAM_RUNTIME_PUBLIC_DIR'];
+const aliases = runtimePublicDir
+  ? JSON.parse(
+      readFileSync(resolve(runtimePublicDir, '../runtime-assets.json'), 'utf8'),
+    ).aliases
+  : {};
 
 export default defineConfig({
+  ...(runtimePublicDir ? { publicDir: runtimePublicDir } : {}),
+  define: { __VOLAM_RASTER_ALIASES__: JSON.stringify(aliases) },
+  json: { stringify: false },
   ...(process.env['VOLAM_QA_VITE_CACHE']
     ? { cacheDir: process.env['VOLAM_QA_VITE_CACHE'] }
     : {}),
@@ -33,11 +44,15 @@ export default defineConfig({
     rollupOptions: {
       input: {
         game: 'index.html',
-        bacCaiPreview: 'bac-cai-preview.html',
-        visualUpgrade: 'visual-upgrade-2.html',
-        renovationPreview: 'renovation-preview.html',
-        voDangQuyenPreview: 'vo-dang-quyen-preview.html',
-        shaolinDaoPreview: 'shaolin-dao-preview.html',
+        ...(!runtimePublicDir
+          ? {
+              bacCaiPreview: 'bac-cai-preview.html',
+              visualUpgrade: 'visual-upgrade-2.html',
+              renovationPreview: 'renovation-preview.html',
+              voDangQuyenPreview: 'vo-dang-quyen-preview.html',
+              shaolinDaoPreview: 'shaolin-dao-preview.html',
+            }
+          : {}),
       },
     },
   },

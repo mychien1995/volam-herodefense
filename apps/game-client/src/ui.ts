@@ -1,4 +1,4 @@
-import { heroTexture } from './art.js';
+import { heroTexture } from './hero-texture.js';
 import { heroIdleUrl } from './character-revision.js';
 import {
   arena,
@@ -9,6 +9,7 @@ import {
   dungeonForZone,
   lyMacSauEncounter,
   economyTrial,
+  type DungeonDestination,
 } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
 import { icon, menuContents, menuTitles, type Menu } from './menus.js';
@@ -61,6 +62,8 @@ export class GameUI {
   onCheck: () => void = () => {};
   onLeave: () => void = () => {};
   onLoiDai: (action: 'enter' | 'exit') => void = () => {};
+  onDestinationPreview: (destination: DungeonDestination | 'loi_dai') => void =
+    () => {};
   onStudy: (enabled: boolean) => void = () => {};
   onDungeonEnter: (
     access: 'private' | 'shared',
@@ -336,6 +339,7 @@ export class GameUI {
       const confirm = element<HTMLButtonElement>('#confirm-loi-dai');
       confirm.textContent = leavingDuel ? 'Về đấu trường' : 'Vào Lôi Đài';
       confirm.disabled = !eligible;
+      if (eligible && !leavingDuel) this.onDestinationPreview('loi_dai');
       confirm.addEventListener('click', () => {
         this.close();
         this.onLoiDai(leavingDuel ? 'exit' : 'enter');
@@ -497,6 +501,7 @@ export class GameUI {
             destination === 'co_mo')
         ) {
           this.dungeonDestination = destination;
+          this.onDestinationPreview(destination);
           for (const peer of document.querySelectorAll<HTMLButtonElement>(
             '[data-destination]',
           )) {
@@ -511,7 +516,6 @@ export class GameUI {
       const boss = isBossDestination(this.dungeonDestination);
       this.onDungeonEnter(boss ? 'shared' : 'private', this.dungeonDestination);
       this.close();
-      if (boss && (this.state?.players.size ?? 0) > 1) this.bossParty.help();
     });
     if (this.state) this.refresh(this.state);
   }

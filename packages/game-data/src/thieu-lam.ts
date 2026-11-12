@@ -7,6 +7,7 @@ import type {
   ProjectileEffect,
 } from '@volam/game-core';
 import { abilitySchema } from './ability-schema.js';
+import { caiBangChuongBasicTuning } from './cai-bang.js';
 import { skillRankGates } from './progression-data.js';
 import { m3dFeedbackTuning } from './m3d-feedback-tuning.js';
 const tuning = m3dFeedbackTuning.shaolin;
@@ -84,8 +85,17 @@ export const thieuLamBasics: Record<string, Ability> = {
     id: 'thieu_lam_dao',
     nameVi: 'Thiếu Lâm Đao',
     manaCost: 0,
-    cooldownTicks: 0,
-    effect: arc(38, 96, 0.55, Math.PI / 2.5),
+    cooldownTicks: caiBangChuongBasicTuning.cooldownTicks,
+    minIntervalTicks: caiBangChuongBasicTuning.minIntervalTicks,
+    effect: {
+      ...projectile({
+        damage: 38,
+        range: caiBangChuongBasicTuning.range,
+        radius: 10,
+        speed: 310,
+      }),
+      piercing: false,
+    },
   },
 };
 export const thieuLamSkills: Ability[] = [

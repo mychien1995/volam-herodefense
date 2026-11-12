@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { trackLegacyVfx } from './legacy-vfx-visibility.js';
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
 import raw from './m3d-feedback-art.generated.json' with { type: 'json' };
@@ -253,6 +254,7 @@ export class M3dFeedback {
       ...options,
       observed: new Set(),
     };
+    trackLegacyVfx(c.sprite);
     c.sprite.setVisible(false);
     this.clips.add(c);
     return c;
@@ -917,6 +919,7 @@ export class M3dFeedback {
       .setOrigin(...tag.origin)
       .setScale(1)
       .setDepth(y + 0.5);
+    trackLegacyVfx(sprite);
     sprite.on(Phaser.Animations.Events.ANIMATION_UPDATE, () =>
       this.observe(asset, String(sprite.frame.name)),
     );

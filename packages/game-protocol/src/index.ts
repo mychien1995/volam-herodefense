@@ -340,11 +340,18 @@ export const rejectionSchema = z.strictObject({
   sequence: z.number().int().positive(),
   reason: z.string(),
 });
+export type InputTimingSample = {
+  sequence: number;
+  tick: number;
+  inputToStepMs: number;
+  stepToPatchMs: number;
+};
 export type ServerMessages = {
   'merchant-result': z.infer<typeof merchantResultSchema>;
   'connection-ack': z.infer<typeof connectionAckSchema>;
   'combat-event': z.infer<typeof combatEventSchema>;
   'command-rejected': z.infer<typeof rejectionSchema>;
+  'input-timing': InputTimingSample;
   'dungeon-menu': { protocolVersion: typeof PROTOCOL_VERSION };
 };
 

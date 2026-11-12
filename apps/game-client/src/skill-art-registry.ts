@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { setArtFilter } from './art-filter.js';
 
 /** Shared PNG/hash-atlas presentation contract; contains no combat state. */
 export interface RasterAnimation {
@@ -48,7 +49,10 @@ export function registerRasterAnimations(
   for (const asset of assets) {
     if (!scene.textures.exists(asset.id))
       throw new Error(`Required skill texture missing: ${asset.id}`);
-    scene.textures.get(asset.id).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    setArtFilter(
+      scene.textures.get(asset.id),
+      Phaser.Textures.FilterMode.NEAREST,
+    );
     for (const tag of asset.animations) {
       const key = rasterAnimationKey(asset.id, tag.name);
       if (keys.has(key)) throw new Error(`Duplicate skill animation: ${key}`);

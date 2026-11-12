@@ -4,8 +4,8 @@ import {
   actorSheets,
   facings,
   poses,
-  preloadArt,
-  registerArt,
+  preloadActorArt,
+  registerActorArt,
 } from './art.js';
 /** Presentation-only asset inspection route: ?artPreview=1. Never changes room state. */
 export class ArtPreviewScene extends Phaser.Scene {
@@ -15,10 +15,10 @@ export class ArtPreviewScene extends Phaser.Scene {
     super('ArtPreview');
   }
   preload(): void {
-    preloadArt(this);
+    preloadActorArt(this);
   }
   create(): void {
-    registerArt(this);
+    registerActorArt(this);
     this.cameras.main.setBackgroundColor('#4b6453');
     const thienSonReview = new URLSearchParams(location.search).has(
       'thienSonReview',

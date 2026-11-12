@@ -4,7 +4,11 @@ import {
   clipBeat,
   presentApprovedBossAction,
 } from './m3d-approved-boss-body.js';
-import { caiBangBongBeatTicks } from '@volam/game-data';
+import {
+  caiBangBongBeatTicks,
+  type DungeonDestination,
+} from '@volam/game-data';
+import { setArtFilter } from './art-filter.js';
 import {
   bongReviewBody,
   caiBangBongArtEnabled,
@@ -13,9 +17,9 @@ import { basicFeedbackArt } from './feedback-bindings.js';
 import { feedbackTag } from './feedback-art.js';
 import raw from './renovation-art.generated.json';
 import skillOverrides from './renovation-skills.generated.json';
-import allOverrides from './renovation-actions.generated.json';
+import { assets as allOverrides } from './renovation-actions.generated.json';
 import feedbackV4 from './renovation-feedback.generated.json';
-import { renovationFeedbackEnabled } from './renovation-feedback.js';
+import { renovationFeedbackEnabled } from './renovation-policy.js';
 import {
   bongPhaGiapBody,
   bongPhaGiapEffects,
@@ -31,12 +35,14 @@ import {
   nativeBongBody,
   nativeBongOrigin,
   preloadM3dNativeArt,
+  preloadNativeForestArt,
 } from './m3d-native-art.js';
 
 type BodyImage = Phaser.GameObjects.Image | Phaser.GameObjects.Sprite;
 import { renovatedActors } from './renovation-model.js';
 export { renovationActorId, renovationHeight } from './renovation-model.js';
 const definitions = new Map(renovatedActors.map((actor) => [actor.id, actor]));
+const filteredTextures = new WeakSet<Phaser.Textures.Texture>();
 export const renovationEnabled = (scene: Phaser.Scene) =>
   scene.registry.get('renovation-enabled') === true;
 const isCreepGroup = (group: string | undefined) =>
@@ -54,47 +60,70 @@ export function usesRenovatedCreepPose(
   );
 }
 
-export function preloadRenovation(scene: Phaser.Scene): void {
+export function preloadRenovation(
+  scene: Phaser.Scene,
+  pack: DungeonDestination | 'arena' | 'wave-bosses' | 'all' = 'all',
+): void {
   if (scene.sys.settings.key !== 'Arena') return;
-  preloadRenovationActions(scene);
-  preloadM3dNativeArt(scene);
-  scene.load.atlas(
-    hanNguyetKey,
-    hanNguyetPath + '.png',
-    hanNguyetPath + '.json',
-  );
-  scene.load.image(
-    'renovated-arena-layout',
-    '/assets/renovation-v2/arena-ground.png',
-  );
+  const includes = (id: string) => {
+    if (pack === 'all') return true;
+    const actor = definitions.get(id);
+    if (!actor) return false;
+    if (actor.biome !== 'arena') return pack === actor.biome;
+    return actor.group === 'wave_bosses' || actor.group === 'minions'
+      ? pack === 'wave-bosses'
+      : pack === 'arena';
+  };
+  preloadRenovationActions(scene, includes);
+  if (pack === 'forest' || pack === 'all') preloadNativeForestArt(scene);
+  if (pack === 'arena' || pack === 'all') {
+    preloadM3dNativeArt(scene);
+    scene.load.atlas(
+      hanNguyetKey,
+      hanNguyetPath + '.png',
+      hanNguyetPath + '.json',
+    );
+    scene.load.image(
+      'renovated-arena-layout',
+      '/assets/renovation-v2/arena-ground.png',
+    );
+    for (const id of ['merchant', 'portal'])
+      scene.load.image(
+        'renovated-hub-' + id,
+        '/assets/visual-upgrade-2/' + id + '.png',
+      );
+  }
   for (const actor of renovatedActors) {
+    if (!includes(actor.id)) continue;
     const path = '/assets/renovation-v1/runtime/' + actor.id;
     scene.load.atlas('renovated-' + actor.id, path + '.png', path + '.json');
   }
   for (const place of raw.scenes) {
+    if (pack !== 'all' && place.id !== pack) continue;
     scene.load.image('renovated-ground-' + place.id, place.ground);
     place.props.forEach((prop, index) =>
       scene.load.image(`renovated-prop-${place.id}-${index}`, prop.image),
     );
   }
-  for (const id of ['merchant', 'portal'])
-    scene.load.image(
-      'renovated-hub-' + id,
-      '/assets/visual-upgrade-2/' + id + '.png',
-    );
 }
 export function registerRenovation(scene: Phaser.Scene): void {
   if (scene.sys.settings.key !== 'Arena') return;
-  scene.registry.set('renovation-enabled', true);
-  scene.registry.set('renovation-observed', new Map<string, Set<string>>());
-  if (scene.textures.exists(bongPhaGiapBody))
-    scene.textures
-      .get(bongPhaGiapBody)
-      .setFilter(Phaser.Textures.FilterMode.NEAREST);
-  for (const key of scene.textures
-    .getTextureKeys()
-    .filter((key) => key.startsWith('renovated-')))
-    scene.textures.get(key).setFilter(Phaser.Textures.FilterMode.LINEAR);
+  if (!renovationEnabled(scene)) {
+    scene.registry.set('renovation-enabled', true);
+    scene.registry.set('renovation-observed', new Map<string, Set<string>>());
+  }
+  for (const key of scene.textures.getTextureKeys()) {
+    if (key !== bongPhaGiapBody && !key.startsWith('renovated-')) continue;
+    const texture = scene.textures.get(key);
+    if (filteredTextures.has(texture)) continue;
+    setArtFilter(
+      texture,
+      key === bongPhaGiapBody
+        ? Phaser.Textures.FilterMode.NEAREST
+        : Phaser.Textures.FilterMode.LINEAR,
+    );
+    filteredTextures.add(texture);
+  }
 }
 /** Only presentation: retained action cels and server phase clocks remain authoritative. */
 export function presentRenovatedBody(
@@ -290,7 +319,7 @@ export function inspectRenovation(scene: Phaser.Scene) {
     Map<string, string> | undefined;
   const skillKeys = new Set(
     (
-      [...skillOverrides.assets, ...allOverrides.assets] as Array<{
+      [...skillOverrides.assets, ...allOverrides] as Array<{
         id: string;
         textureKeys?: string[];
       }>

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { queueArtPack } from './queue-art-pack.js';
 import type { ArenaCreepArt, ArenaCreepManifest } from './arena-creeps.js';
 
 export interface DesertManifest extends ArenaCreepManifest {
@@ -11,7 +12,7 @@ export interface DesertManifest extends ArenaCreepManifest {
   }>;
 }
 export function preloadDesertArt(scene: Phaser.Scene): void {
-  scene.load.pack('desert_pack', '/assets/desert/pack.json');
+  queueArtPack(scene, 'desert_pack', '/assets/desert/pack.json');
   scene.load.image('desert_terrain', '/assets/desert/terrain.png');
   scene.load.atlas(
     'desert_scenery',

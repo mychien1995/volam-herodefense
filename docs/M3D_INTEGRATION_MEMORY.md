@@ -4,11 +4,11 @@
 
 ## Bổng đỏ và nhịp A cận chiến · 2026-11-12
 
-Bản Bổng đã duyệt dùng chung atlas 84 cel cho đứng, đi và bốn thức A ở bốn hướng. Tầm server là 105 và vệt đòn đi theo tầm này. Võ Đang Quyền, Võ Đang Kiếm, Thiếu Lâm Quyền và Thiếu Lâm Đao xử lý A với hồi chiêu 0. [Kết quả trong phòng M3D sáu người](evidence/sessions/m3d-bong-reach-verified/README.md).
+Bản Bổng đã duyệt dùng chung atlas 84 cel cho đứng, đi và bốn thức A ở bốn hướng. Tầm server là 105 và vệt đòn đi theo tầm này. Võ Đang Quyền, Võ Đang Kiếm và Thiếu Lâm Quyền xử lý A với hồi chiêu 0. [Kết quả trong phòng M3D sáu người](evidence/sessions/m3d-bong-reach-verified/README.md).
 
 ## Thiếu Lâm Đao · 2026-11-09
 
-Bộ 1C/2A/3A/4A vào trận thường với nhánh Đao. Tru Tà tăng từ 180 lên 190 đơn vị ở bậc 1, bậc 4 đạt 202. Cung quét lấy bán kính theo sự kiện cast của server. [Chi tiết](SHAOLIN_DAO_REWORK.md).
+Bộ 1C/2A/3A/4A vào trận thường với nhánh Đao. Tru Tà tăng từ 180 lên 190 đơn vị ở bậc 1, bậc 4 đạt 202. Cung quét lấy bán kính theo sự kiện cast của server. Đao khí A dùng cùng tầm 320, hồi chiêu cơ bản 18 tick và sàn 5 tick theo tốc đánh như Cái Bang Chưởng. [Chi tiết](SHAOLIN_DAO_REWORK.md).
 
 ## Thiếu Lâm Quyền đã duyệt — 2026-11-09
 

@@ -4,7 +4,7 @@ Thiên Hạ Vô Cẩu giảm 80% sát thương nhận trong lúc xoay bổng. C�
 
 ## Tầm Bổng và hồi chiêu đánh thường M3D · 2026-11-12
 
-Cái Bang Bổng đánh trong tầm 105 đơn vị với bốn thức và nhịp 8 tick mỗi thức. Bổng sơn đỏ khắc rồng vàng dài hơn 50%, rộng hơn 10%, thể hiện ở tư thế đứng, đi và đánh theo bốn hướng. Vệt đòn theo tầm mới. Võ Đang Quyền, Võ Đang Kiếm, Thiếu Lâm Quyền và Thiếu Lâm Đao có hồi chiêu A bằng 0. Thiếu Lâm Quyền giữ chuỗi bốn thức và cửa sổ 60 tick. Nhịp hiện hành của Cái Bang Bổng, Thiên Sơn Phiến, Thiên Sơn Đao và Cái Bang Chưởng tiếp tục áp dụng. Mỗi lần nhấn A gửi một lệnh và server xử lý tối đa một đòn của mỗi người trong một tick.
+Cái Bang Bổng đánh trong tầm 105 đơn vị với bốn thức và nhịp 8 tick mỗi thức. Bổng sơn đỏ khắc rồng vàng dài hơn 50%, rộng hơn 10%, thể hiện ở tư thế đứng, đi và đánh theo bốn hướng. Vệt đòn theo tầm mới. Võ Đang Quyền, Võ Đang Kiếm và Thiếu Lâm Quyền có hồi chiêu A bằng 0. Thiếu Lâm Quyền giữ chuỗi bốn thức và cửa sổ 60 tick. Nhịp hiện hành của Cái Bang Bổng, Thiên Sơn Phiến, Thiên Sơn Đao và Cái Bang Chưởng tiếp tục áp dụng. Mỗi lần nhấn A gửi một lệnh và server xử lý tối đa một đòn của mỗi người trong một tick.
 
 ## Vô Ảnh Cước và artwork Thiếu Lâm Quyền · 2026-11-09
 
@@ -147,7 +147,7 @@ Canonical IDs/names remain unchanged. Thiếu Lâm Quyền A now cycles left fis
 
 **Normal attacks (A):**
 - `thieu_lam_quyen`: **Thiếu Lâm Quyền** — four manual punch/punch/kick/roundhouse stages; finisher emits a travelling crescent.
-- `thieu_lam_dao`: **Thiếu Lâm Đao** — broader, moderately fast melee slash.
+- `thieu_lam_dao`: **Thiếu Lâm Đao** — đao khí tầm 320, nhắm địch gần nhất khi nhấn A rồi bay thẳng và dừng ở địch đầu tiên chạm phải.
 
 **Phát Động A:** `la_han_quyen` → `vi_da_quyen` → `dai_luc_kim_cuong_chuong` on **same target** (cleaved hits count). Final skill empowered only if target has the two preceding hits in order. **Phát Động B:** `toan_phong_thoai` → `hoanh_tao_cuoc` → `vo_anh_cuoc`, same mechanics. Exact window/rank scaling adjustable.
 

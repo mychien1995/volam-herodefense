@@ -27,7 +27,7 @@ import {
 } from '@volam/game-data';
 import { hurt } from '../packages/game-core/src/combat.js';
 import { applyStatus, displace } from '../packages/game-core/src/status.js';
-function fixture() {
+function fixture(seed?: number) {
   const config = structuredClone(m1Config);
   Object.assign(config, {
     width: 1000,
@@ -48,7 +48,7 @@ function fixture() {
     speed: 0,
     detectionRange: 1,
   });
-  const world = createWorld(config),
+  const world = createWorld(config, seed),
     hero = addHero(world, 'a', 'Gold', config),
     enemies = [...world.creeps.values()],
     events: CombatEvent[] = [];
@@ -58,7 +58,7 @@ function fixture() {
     mana: 1000,
     maxMana: 1000,
   });
-  world.random = () => 0.99;
+  if (seed === undefined) world.random = () => 0.99;
   const steps = (n = 1) => {
     for (let i = 0; i < n; i++) {
       stepWorld(world, config);
@@ -136,39 +136,145 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
       expect(f.events.filter((e) => e.kind === 'cast')).toHaveLength(1);
     },
   );
-  it('Quyền has shorter reach and Đao has wider cleave; both accept consecutive A and preserve skill chains', () => {
-    for (const id of Object.keys(thieuLamBasics)) {
-      const f = fixture();
-      f.cast('la_han_quyen');
-      const before = structuredClone(f.world.combos);
-      f.hero.basicId = id;
-      f.input({ kind: 'basic' });
+  it('Quyền keeps frontal cleave, consecutive A and the existing skill chain', () => {
+    const f = fixture();
+    const basic = thieuLamBasics.thieu_lam_quyen!;
+    f.cast('la_han_quyen');
+    const before = structuredClone(f.world.combos);
+    for (let i = 0; i < 2; i++) {
+      expect(f.input({ kind: 'basic' })).toBe(true);
       f.steps();
-      const h = f.hits(id);
-      expect(h).toHaveLength(1);
-      expect(f.hits(id, f.enemies[1]!.id)[0]!.damage).toBeLessThan(
-        h[0]!.damage,
-      );
-      expect(f.hits(id, f.enemies[2]!.id)).toHaveLength(0);
-      expect(f.world.combos).toEqual(before);
-      f.input({ kind: 'basic' });
-      f.steps();
-      expect(f.hits(id)).toHaveLength(2);
-      expect(f.world.combos).toEqual(before);
+      expect(f.hits(basic.id)).toHaveLength(i + 1);
     }
-    const punch = thieuLamBasics.thieu_lam_quyen!,
-      dao = thieuLamBasics.thieu_lam_dao!;
-    expect(punch.manualChain).toMatchObject({
+    expect(f.hits(basic.id, f.enemies[1]!.id)[0]!.damage).toBeLessThan(
+      f.hits(basic.id)[0]!.damage,
+    );
+    expect(f.hits(basic.id, f.enemies[2]!.id)).toHaveLength(0);
+    expect(f.world.combos).toEqual(before);
+    expect(basic.cooldownTicks).toBe(0);
+    expect(basic.manualChain).toMatchObject({
       idleTicks: 60,
       cooldownTicks: 0,
     });
-    expect(punch.cooldownTicks).toBe(0);
-    expect(dao.cooldownTicks).toBe(0);
-    if (punch.effect.mode === 'arc' && dao.effect.mode === 'arc') {
-      expect(punch.effect.damage).toBeGreaterThanOrEqual(dao.effect.damage);
-      expect(punch.effect.range).toBeLessThan(dao.effect.range);
-      expect(punch.effect.halfAngle).toBeLessThan(dao.effect.halfAngle);
-    }
+  });
+  it('Đao A hits a diagonal enemy at the same range as Cái Bang Chưởng', () => {
+    const f = fixture();
+    const palm = f.config.basics.cai_bang_chuong!;
+    const dao = f.config.basics.thieu_lam_dao!;
+    expect(dao.effect).toMatchObject({ mode: 'projectile', range: 320 });
+    expect(palm.effect).toMatchObject({ mode: 'projectile', range: 320 });
+    f.hero.basicId = dao.id;
+    const [target, ...others] = f.enemies;
+    Object.assign(target!, { x: 44, y: 492 });
+    for (const enemy of others) Object.assign(enemy, { x: 750, y: 300 });
+    expect(f.input({ kind: 'basic' })).toBe(true);
+    f.steps(32);
+    expect(f.hits(dao.id)).toHaveLength(1);
+  });
+  it.each([
+    [1, 18],
+    [2, 9],
+    [3, 6],
+  ])(
+    'Đao and Chưởng both require %i× attack speed cadence of %i ticks without buffering A',
+    (attackSpeed, cooldown) => {
+      for (const [schoolId, basicId] of [
+        ['thieu_lam', 'thieu_lam_dao'],
+        ['cai_bang', 'cai_bang_chuong'],
+      ] as const) {
+        const f = fixture();
+        f.config.progression!.schools[schoolId]!.base.attackSpeed = attackSpeed;
+        f.hero.schoolId = schoolId;
+        initializeProgression(f.hero, f.config);
+        f.hero.basicId = basicId;
+        const attacks = () =>
+          f.events.filter(
+            (e) => e.kind === 'attack' && e.abilityId === basicId,
+          );
+        expect(f.input({ kind: 'basic' })).toBe(true);
+        f.steps();
+        expect(attacks()).toHaveLength(1);
+        expect(f.hero.cooldown - f.world.tick).toBe(cooldown);
+        for (let tick = 1; tick < cooldown; tick++) {
+          expect(f.input({ kind: 'basic' })).toBe(true);
+          f.steps();
+        }
+        f.steps();
+        expect(attacks()).toHaveLength(1);
+        expect(f.input({ kind: 'basic' })).toBe(true);
+        f.steps();
+        expect(attacks()).toHaveLength(2);
+      }
+    },
+  );
+  it.each([1, 17, 123])(
+    'Đao A aims at the nearest off-axis enemy and hits once at range (seed %i)',
+    (seed) => {
+      const f = fixture(seed);
+      const basic = thieuLamBasics.thieu_lam_dao!;
+      f.cast('la_han_quyen');
+      const before = structuredClone(f.world.combos);
+      f.hero.basicId = basic.id;
+      const [nearest, facingTarget, outside] = f.enemies;
+      Object.assign(nearest!, { x: 200, y: 380 });
+      Object.assign(facingTarget!, { x: 439, y: 300 });
+      Object.assign(outside!, { x: 140, y: 428 });
+      expect(f.input({ kind: 'basic' })).toBe(true);
+      f.steps();
+      const shot = [...f.world.projectiles.values()][0]!;
+      expect(shot?.abilityId).toBe(basic.id);
+      expect(shot.vx).toBeLessThan(0);
+      expect(shot.vy / shot.vx).toBeCloseTo(-0.8);
+      expect(f.hits(basic.id)).toHaveLength(0);
+      f.steps(20);
+      expect(
+        f.events.filter((e) => e.kind === 'attack' && e.abilityId === basic.id),
+      ).toHaveLength(1);
+      expect(f.hits(basic.id)).toHaveLength(1);
+      expect(f.hits(basic.id, facingTarget!.id)).toHaveLength(0);
+      expect(f.hits(basic.id, outside!.id)).toHaveLength(0);
+      expect(f.world.projectiles.size).toBe(0);
+      expect(f.world.combos).toEqual(before);
+    },
+  );
+  it('Đao A retains its launch angle when the target dodges, then falls back to facing without a target', () => {
+    const f = fixture();
+    f.hero.basicId = 'thieu_lam_dao';
+    const [target, ...others] = f.enemies;
+    Object.assign(target!, { x: 250, y: 400 });
+    for (const enemy of others) Object.assign(enemy, { x: 750, y: 300 });
+    f.input({ kind: 'basic' });
+    f.steps();
+    const shot = [...f.world.projectiles.values()][0]!;
+    expect(shot?.abilityId).toBe('thieu_lam_dao');
+    const { vx, vy } = shot;
+    Object.assign(target!, { x: 750, y: 400 });
+    f.steps(3);
+    expect(shot).toMatchObject({ vx, vy });
+    f.steps(32);
+    expect(f.hits('thieu_lam_dao')).toHaveLength(0);
+    expect(f.world.projectiles.size).toBe(0);
+    Object.assign(f.hero, { fx: 1, fy: 0 });
+    f.input({ kind: 'basic' });
+    f.steps();
+    const fallback = [...f.world.projectiles.values()][0]!;
+    expect(fallback.vx).toBeGreaterThan(0);
+    expect(fallback.vy).toBeCloseTo(0);
+    f.steps(32);
+    expect(f.hits('thieu_lam_dao')).toHaveLength(0);
+  });
+  it('Đao A skips a nearer enemy behind a wall', () => {
+    const f = fixture();
+    f.hero.basicId = 'thieu_lam_dao';
+    f.config.collision.push({ x: 250, y: 280, width: 10, height: 40 });
+    const [occluded, visible, outside] = f.enemies;
+    Object.assign(occluded!, { x: 215, y: 300 });
+    Object.assign(visible!, { x: 300, y: 424 });
+    Object.assign(outside!, { x: 750, y: 300 });
+    f.input({ kind: 'basic' });
+    f.steps(20);
+    expect(f.hits('thieu_lam_dao', occluded!.id)).toHaveLength(0);
+    expect(f.hits('thieu_lam_dao', visible!.id)).toHaveLength(1);
   });
   it.each([
     ['la_han_quyen', 'vi_da_quyen', 'dai_luc_kim_cuong_chuong'],

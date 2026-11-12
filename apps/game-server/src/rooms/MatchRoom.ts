@@ -139,6 +139,18 @@ export class MatchRoom extends Room<{
     process.env['NODE_ENV'] === 'development' &&
     process.env['VOLAM_DEV_LOI_DAI'] === '1';
   private readonly checkSequences = new Map<string, number>();
+  private readonly collectInputTiming =
+    process.env['NODE_ENV'] !== 'production' &&
+    process.env['VOLAM_INPUT_TIMING'] === '1';
+  private readonly inputTiming = new Map<
+    string,
+    Array<{
+      sequence: number;
+      receivedAt: number;
+      steppedAt?: number;
+      tick?: number;
+    }>
+  >();
   private readonly dungeonSequences = new Map<string, number>();
   private eventSequence = 0;
   readonly legacySkills =
@@ -571,6 +583,7 @@ export class MatchRoom extends Room<{
       },
     ),
     input: validate(inputSchema, (client: MatchClient, input) => {
+      const receivedAt = this.collectInputTiming ? performance.now() : 0;
       if (this.state.phase !== 'IN_GAME') {
         client.send('command-rejected', {
           protocolVersion: PROTOCOL_VERSION,
@@ -684,6 +697,16 @@ export class MatchRoom extends Room<{
         input.sequence,
         input,
       );
+      if (
+        !reason &&
+        this.collectInputTiming &&
+        (input.kind === 'move' || input.kind === 'basic')
+      ) {
+        const samples = this.inputTiming.get(client.sessionId) ?? [];
+        if (samples.length < 16)
+          samples.push({ sequence: input.sequence, receivedAt });
+        this.inputTiming.set(client.sessionId, samples);
+      }
       if (reason)
         client.send('command-rejected', {
           protocolVersion: PROTOCOL_VERSION,
@@ -759,6 +782,15 @@ export class MatchRoom extends Room<{
         this.simulation.tayDoc.spawn(this.world, this.simulation.arena.config);
       this.creepPreview?.beforeStep();
       this.simulation.step(Date.now());
+      if (this.inputTiming.size) {
+        const steppedAt = performance.now();
+        for (const samples of this.inputTiming.values())
+          for (const sample of samples)
+            if (sample.steppedAt === undefined) {
+              sample.steppedAt = steppedAt;
+              sample.tick = this.simulation.tick;
+            }
+      }
       if (this.devSkillLoadout)
         for (const id of this.simulation.membership.keys()) {
           const h = this.simulation.hero(id);
@@ -802,6 +834,33 @@ export class MatchRoom extends Room<{
       }
     }, m1Config.tickRate);
   }
+  override onBeforePatch(): void {
+    if (!this.inputTiming.size) return;
+    const patchAt = performance.now();
+    for (const client of this.clients) {
+      const samples = this.inputTiming.get(client.sessionId);
+      if (!samples) continue;
+      const pending = [];
+      for (const { sequence, receivedAt, steppedAt, tick } of samples) {
+        if (steppedAt === undefined || tick === undefined) {
+          pending.push({ sequence, receivedAt });
+          continue;
+        }
+        client.send(
+          'input-timing',
+          {
+            sequence,
+            tick,
+            inputToStepMs: steppedAt - receivedAt,
+            stepToPatchMs: patchAt - steppedAt,
+          },
+          { afterNextPatch: true },
+        );
+      }
+      if (pending.length) this.inputTiming.set(client.sessionId, pending);
+      else this.inputTiming.delete(client.sessionId);
+    }
+  }
   override onAuth(_client: MatchClient, options: unknown): JoinOptions {
     const parsed = joinOptionsSchema.safeParse(options);
     if (!parsed.success)
@@ -829,6 +888,7 @@ export class MatchRoom extends Room<{
     this.syncState();
   }
   override onDrop(client: MatchClient): void {
+    this.inputTiming.delete(client.sessionId);
     const player = this.state.players.get(client.sessionId);
     if (player) player.connected = false;
     this.simulation.disconnect(client.sessionId);
@@ -845,6 +905,7 @@ export class MatchRoom extends Room<{
     this.syncState();
   }
   override onLeave(client: MatchClient): void {
+    this.inputTiming.delete(client.sessionId);
     for (const zone of this.simulation.zones.values())
       for (const id of zone.world.creeps.keys())
         if (id.startsWith(`preview_${client.sessionId}_`))

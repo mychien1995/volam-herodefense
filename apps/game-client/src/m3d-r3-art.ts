@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { trackLegacyVfx } from './legacy-vfx-visibility.js';
 import raw from './m3d-r3-art.generated.json' with { type: 'json' };
 import shaolin from './shaolin-quyen-art.json' with { type: 'json' };
 import type { RasterComponent, RasterAnimation } from './skill-art-registry.js';
@@ -112,6 +113,7 @@ export class R3Painter {
     let view = this.views.get(id);
     if (!view) {
       view = this.scene.add.image(x, y, c.id, frame).setName('r3:' + id);
+      trackLegacyVfx(view);
       this.views.set(id, view);
     }
     const previous = String(view.frame.name),
@@ -140,6 +142,7 @@ export class R3Painter {
       .setRotation(o.rotation ?? 0)
       .setAlpha(o.alpha ?? 1)
       .setDepth(o.depth ?? y + 2);
+    if (previousTexture !== c.id) trackLegacyVfx(view);
     this.used.add(id);
     const set = this.observed.get(c.id + ':' + tag.name) ?? new Set<string>();
     set.add(frame);

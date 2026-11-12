@@ -20,9 +20,15 @@ interface Bundle {
   >;
 }
 const bundles = raw.bundles as unknown as Record<string, Bundle>;
+export function preloadLevelUpArt(scene: Phaser.Scene) {
+  scene.load.atlas(
+    bundles.nam_de_ring!.texture,
+    '/assets/wave-boss-feedback/nam_de_ring.png',
+    '/assets/wave-boss-feedback/nam_de_ring.json',
+  );
+}
 export function preloadWaveBossFeedback(scene: Phaser.Scene) {
   for (const id of [
-    'nam_de_ring',
     'tay_doc_cloud_v2',
     'tay_doc_impact',
     'snake_bolt',

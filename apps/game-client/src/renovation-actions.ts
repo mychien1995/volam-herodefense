@@ -1,12 +1,16 @@
 import Phaser from 'phaser';
-import raw from './renovation-actions.generated.json';
+import { bodies as rawBodies } from './renovation-actions.generated.json';
+import arenaFrames from './renovation-action-packs/arena.json';
 import revision from './renovation-revision.generated.json';
 import followup from './renovation-followup.generated.json';
 import reach from './renovation-reach.generated.json';
-import { renovationFollowupEnabled } from './renovation-policy.js';
+import {
+  renovationActionsEnabled,
+  renovationFollowupEnabled,
+  renovationRevisionEnabled,
+  retainM3dBody,
+} from './renovation-policy.js';
 import { staffSlamCel } from './renovation-followup-model.js';
-import { renovationRevisionEnabled } from './renovation-policy.js';
-import { retainM3dBody } from './renovation-policy.js';
 import { renovationActionCel } from './renovation-action-model.js';
 import {
   caiBangBongArtEnabled,
@@ -48,7 +52,42 @@ const bongReviewCasts: Record<string, string> = {
   truy_phong_bong: 'combo_thrust',
   thien_ha_vo_cau: 'combo_sweep',
 };
-const bodies = raw.bodies as Definition[],
+type ActionFrames = Record<
+  string,
+  Record<string, { clip: string; progress: number }>
+>;
+const actionFrames: ActionFrames = { ...arenaFrames };
+const actionPacks = import.meta.glob<ActionFrames>(
+  ['./renovation-action-packs/*.json', '!./renovation-action-packs/arena.json'],
+  { import: 'default' },
+);
+const loadingFrames = new Map<string, Promise<void>>();
+export async function loadRenovationActionFrames(pack: string): Promise<void> {
+  if (pack === 'all') {
+    await Promise.all(
+      Object.keys(actionPacks).map((path) =>
+        loadRenovationActionFrames(path.split('/').at(-1)!.slice(0, -5)),
+      ),
+    );
+    return;
+  }
+  const load = actionPacks[`./renovation-action-packs/${pack}.json`];
+  if (!load || pack === 'arena') return;
+  let pending = loadingFrames.get(pack);
+  if (!pending) {
+    pending = load()
+      .then((frames) => {
+        Object.assign(actionFrames, frames);
+      })
+      .catch((error) => {
+        loadingFrames.delete(pack);
+        throw error;
+      });
+    loadingFrames.set(pack, pending);
+  }
+  await pending;
+}
+const bodies = rawBodies as Definition[],
   extraBodies = revision.assets
     .filter((a) => a.type === 'body')
     .map((a) => ({
@@ -74,30 +113,28 @@ const bodies = raw.bodies as Definition[],
       b,
     ]),
   );
-export const renovationActionsEnabled = () => {
-  const q = new URLSearchParams(location.search);
-  return (
-    !['old', 'v2'].includes(q.get('renovationSkills') ?? '') &&
-    q.get('runtimeArtReview') !== '1'
-  );
-};
 export const renovationActionSources = new Map(
   [...bodies, ...extraBodies, ...followupBodies, ...reachBodies].map((b) => [
     b.key,
     b.url,
   ]),
 );
-export function preloadRenovationActions(scene: Phaser.Scene) {
+export function preloadRenovationActions(
+  scene: Phaser.Scene,
+  includes: (actor: string) => boolean,
+) {
   if (!renovationActionsEnabled()) return;
-  if (caiBangBongArtEnabled)
+  if (caiBangBongArtEnabled && includes('hero_cai_bang'))
     for (const asset of Object.values(bongReviewCastAssets))
       scene.load.atlas(asset.key, asset.path + '.png', asset.path + '.json');
-  for (const b of bodies) scene.load.atlas(b.key, b.url, b.atlas);
+  for (const b of bodies)
+    if (includes(b.actor)) scene.load.atlas(b.key, b.url, b.atlas);
   if (renovationRevisionEnabled())
-    for (const b of extraBodies) scene.load.atlas(b.key, b.url, b.atlas);
+    for (const b of extraBodies)
+      if (includes(b.actor)) scene.load.atlas(b.key, b.url, b.atlas);
   if (renovationFollowupEnabled())
     for (const b of [...followupBodies, ...reachBodies])
-      scene.load.atlas(b.key, b.url, b.atlas);
+      if (includes(b.actor)) scene.load.atlas(b.key, b.url, b.atlas);
 }
 /** Redraw only the sampled legacy action pose. The retained animator/server owns its clock. */
 export function presentRenovationAction(
@@ -154,18 +191,10 @@ export function presentRenovationAction(
     native && previous ? previous.sourceTexture : image.texture.key;
   const renderedFrame =
     native && previous ? previous.sourceFrame : String(image.frame.name);
-  const clips = (
-    raw as unknown as {
-      bodyFrames?: Record<
-        string,
-        Record<string, { clip: string; progress: number }>
-      >;
-    }
-  ).bodyFrames;
   const anim = 'anims' in image ? image.anims.currentFrame : undefined;
   const frame =
     anim?.textureKey === texture ? String(anim.textureFrame) : renderedFrame;
-  const route = clips?.[texture]?.[frame];
+  const route = actionFrames[texture]?.[frame];
   // Phaser single-cel animations may have NaN progress (index / (length - 1)).
   const sampledProgress =
     renovationRevisionEnabled() && Number.isFinite(clock?.progress)

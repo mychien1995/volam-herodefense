@@ -3,12 +3,10 @@ import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
 import { m1Config } from '@volam/game-data';
 import raw from './renovation-feedback.generated.json';
-import { renovationActionsEnabled } from './renovation-actions.js';
-import { renovationRevisionEnabled } from './renovation-policy.js';
-
-export const renovationFeedbackEnabled = () =>
-  renovationActionsEnabled() &&
-  new URLSearchParams(location.search).get('renovationSkills') !== 'v3';
+import {
+  renovationFeedbackEnabled,
+  renovationRevisionEnabled,
+} from './renovation-policy.js';
 export function preloadRenovationFeedback(scene: Phaser.Scene) {
   if (!renovationFeedbackEnabled()) return;
   for (const e of raw.effects) scene.load.atlas(e.key, e.url, e.atlas);
@@ -200,31 +198,6 @@ export class RenovationFeedback {
         image.destroy();
         this.shots.delete(id);
       }
-    // Keep existing native cast bodies and independent Buddha/buff fields. Suppress
-    // only the replaced legacy layers after all retained providers have positioned them.
-    for (const o of this.scene.children.list) {
-      const b = o as Phaser.GameObjects.Image;
-      if (!b.texture || b.texture.key.startsWith('renovated-v4-')) continue;
-      const k = b.texture.key,
-        n = String(b.frame.name),
-        label = b.name;
-      const hide =
-        [
-          'that_tinh_kiem_vfx',
-          'tru_ta_vfx',
-          'review3_tru_ta_vfx',
-          'vi_da_quyen_vfx',
-          'm3d_liet_phong_ground_vfx_r2',
-          'review3_ts_ground',
-        ].includes(k) ||
-        (['m3d_thien_son_dao_vfx', 'review3_ts_dao_fx'].includes(k) &&
-          /liet_phong|bach_liet/.test(n)) ||
-        (['m3d_thieu_lam_skill_vfx', 'review3_shaolin_skill_fx'].includes(k) &&
-          /vi_da/.test(n)) ||
-        (k === 'nhu_lai_thien_diep_vfx' && /^travel/.test(n)) ||
-        ['feedback-v2:vi_da_quyen', 'm3d-r2:vi_da_quyen'].includes(label);
-      if (hide) b.setVisible(false);
-    }
   }
   clear() {
     for (const f of this.flashes) f.sprite.destroy();

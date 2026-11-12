@@ -196,6 +196,44 @@ writeIfChanged(
   new URL('packages/game-data/src/skill-art.json', root),
   JSON.stringify(skills, null, 2) + '\n',
 );
+const iconSchools = {};
+for (const school of ['thien-son', 'vo-dang', 'thieu-lam'])
+  for (const asset of skills.assets)
+    if (asset.sheet.includes(`/${school}/`))
+      iconSchools[asset.skillId] = school;
+writeIfChanged(
+  new URL('packages/game-data/src/skill-icon-schools.json', root),
+  JSON.stringify(iconSchools) + '\n',
+);
+const actionFrames = JSON.parse(
+  readFileSync(
+    new URL('apps/game-client/src/renovation-actions.generated.json', root),
+    'utf8',
+  ),
+).bodyFrames;
+const actionPacks = {
+  'wave-bosses': /^(?:nd_|dt_|tay:|bac_cai_|boss_bac_cai$|vtd-|wave_feedback)/,
+  chu_ba_thong: /^(?:chu_|review3_cbt)/,
+  kim_luan:
+    /^(?:kl_|review3_(?:hoac_do|dat_nhi_ba|kim_luan|r3_round_wheel|r3_kim_hand_chop))/,
+  hong_liet: /^(?:hl_|review3_(?:hhl|r3_hhl))/,
+  co_mo:
+    /^(?:co_mo_|boss_ly_mac_sau$|summon_co_mo_am_binh$|review3_(?:lms|co_mo|r3_whisk_ring))/,
+};
+const actionRoutes = Object.fromEntries(
+  ['arena', ...Object.keys(actionPacks)].map((pack) => [pack, {}]),
+);
+for (const [texture, frames] of Object.entries(actionFrames)) {
+  const pack =
+    Object.keys(actionPacks).find((id) => actionPacks[id].test(texture)) ??
+    'arena';
+  actionRoutes[pack][texture] = frames;
+}
+for (const [pack, routes] of Object.entries(actionRoutes))
+  writeIfChanged(
+    new URL(`apps/game-client/src/renovation-action-packs/${pack}.json`, root),
+    JSON.stringify(routes) + '\n',
+  );
 mkdirSync(dest, { recursive: true });
 copyTreeIfChanged(new URL('assets/exports/', root), dest);
 copyIfChanged(

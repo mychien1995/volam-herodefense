@@ -19,9 +19,13 @@ export const forestCombatOrigin = [0.5, 224 / 256] as const;
 
 export function preloadM3dNativeArt(scene: Phaser.Scene): void {
   scene.load.atlas(nativeBongBody, bong, bongAtlas);
+  // Arena and sea poison cues also use these frames.
+  scene.load.atlas(nativeForestEffects, effects, effectsAtlas);
+}
+
+export function preloadNativeForestArt(scene: Phaser.Scene): void {
   scene.load.atlas(forestBodies.get('forest_truc_xa')!, snake, snakeAtlas);
   scene.load.atlas(forestBodies.get('forest_doc_chu')!, spider, spiderAtlas);
-  scene.load.atlas(nativeForestEffects, effects, effectsAtlas);
 }
 
 export function forestCombatBody(

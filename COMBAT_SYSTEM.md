@@ -4,7 +4,7 @@ Action Thiên Hạ Vô Cẩu cung cấp giảm sát thương 80% qua cùng luậ
 
 ## Tầm Bổng và hồi chiêu đánh thường M3D · 2026-11-12
 
-Cái Bang Bổng đánh trong tầm 105 đơn vị với bốn thức và nhịp 8 tick mỗi thức. Bổng sơn đỏ khắc rồng vàng dài hơn 50%, rộng hơn 10%, thể hiện ở tư thế đứng, đi và đánh theo bốn hướng. Vệt đòn theo tầm mới. Võ Đang Quyền, Võ Đang Kiếm, Thiếu Lâm Quyền và Thiếu Lâm Đao có hồi chiêu A bằng 0. Thiếu Lâm Quyền giữ chuỗi bốn thức và cửa sổ 60 tick. Nhịp hiện hành của Cái Bang Bổng, Thiên Sơn Phiến, Thiên Sơn Đao và Cái Bang Chưởng tiếp tục áp dụng. Mỗi lần nhấn A gửi một lệnh và server xử lý tối đa một đòn của mỗi người trong một tick.
+Cái Bang Bổng đánh trong tầm 105 đơn vị với bốn thức và nhịp 8 tick mỗi thức. Bổng sơn đỏ khắc rồng vàng dài hơn 50%, rộng hơn 10%, thể hiện ở tư thế đứng, đi và đánh theo bốn hướng. Vệt đòn theo tầm mới. Võ Đang Quyền, Võ Đang Kiếm và Thiếu Lâm Quyền có hồi chiêu A bằng 0. Thiếu Lâm Quyền giữ chuỗi bốn thức và cửa sổ 60 tick. Nhịp hiện hành của Cái Bang Bổng, Thiên Sơn Phiến, Thiên Sơn Đao và Cái Bang Chưởng tiếp tục áp dụng. Mỗi lần nhấn A gửi một lệnh và server xử lý tối đa một đòn của mỗi người trong một tick.
 
 ## Tầm Tru Tà · 2026-11-09
 
@@ -106,7 +106,7 @@ Default illustrative profiles (configurable, not confirmed numbers):
 | Võ Đang Quyền | 0.20 | precise |
 | Võ Đang Kiếm | 0.35 | sword + occasional non-homing kiếm khí |
 | Thiếu Lâm Quyền | 0.25 | slow heavy |
-| Thiếu Lâm Đao | 0.55 | broad defensive fighter |
+| Thiếu Lâm Đao | — | Đao khí tầm 320, hồi chiêu cơ bản 18 tick, sàn 5 tick theo tốc đánh. Nhắm địch hợp lệ gần nhất lúc ra đòn. Bay theo hướng mặt nếu tầm đánh trống. |
 
 Start with general base 0.50 for unspecified melee and tune. Example 200 pre-defense damage → primary 200 and secondary 100 at 0.5, prior to target mitigation.
 

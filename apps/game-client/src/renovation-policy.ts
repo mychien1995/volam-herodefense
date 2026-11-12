@@ -1,27 +1,47 @@
 /** Explicit director reversions. Retained M3D sources remain immutable. */
-export function renovationRevisionEnabled(
+let cachedSearch: string | undefined;
+let cachedPolicy: {
+  actions: boolean;
+  feedback: boolean;
+  revision: boolean;
+  followup: boolean;
+};
+
+function renovationPolicy(
   search = typeof location === 'undefined' ? '' : location.search,
 ) {
-  const q = new URLSearchParams(search);
-  return (
-    !['old', 'v2', 'v3', 'v4'].includes(q.get('renovationSkills') ?? '') &&
-    q.get('runtimeArtReview') !== '1'
-  );
+  if (cachedSearch !== search) {
+    const query = new URLSearchParams(search);
+    const mode = query.get('renovationSkills');
+    const actions =
+      query.get('runtimeArtReview') !== '1' && mode !== 'old' && mode !== 'v2';
+    const feedback = actions && mode !== 'v3';
+    const revision = feedback && mode !== 'v4';
+    cachedPolicy = {
+      actions,
+      feedback,
+      revision,
+      followup: revision && mode !== 'v5',
+    };
+    cachedSearch = search;
+  }
+  return cachedPolicy;
 }
+export const renovationActionsEnabled = (search?: string) =>
+  renovationPolicy(search).actions;
+export const renovationFeedbackEnabled = (search?: string) =>
+  renovationPolicy(search).feedback;
+export const renovationRevisionEnabled = (search?: string) =>
+  renovationPolicy(search).revision;
+/** V6 is a presentation-only follow-up; keep the V5 comparison available. */
+export const renovationFollowupEnabled = (search?: string) =>
+  renovationPolicy(search).followup;
+
 export const restoredSkillArt = new Set([
   'thien_ha_vo_cau',
   'luong_nghi_thu',
   'tam_gioi_quy_thien',
 ]);
-/** V6 is a presentation-only follow-up; keep the V5 comparison available. */
-export function renovationFollowupEnabled(
-  search = typeof location === 'undefined' ? '' : location.search,
-) {
-  return (
-    renovationRevisionEnabled(search) &&
-    new URLSearchParams(search).get('renovationSkills') !== 'v5'
-  );
-}
 export function followupRestoresBody(actor: string, ability: string) {
   return (
     [

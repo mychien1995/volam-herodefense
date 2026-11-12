@@ -1,9 +1,11 @@
 import Phaser from 'phaser';
+import { setArtFilter } from './art-filter.js';
+import { queueArtPack } from './queue-art-pack.js';
 import type { ForestCreepManifest } from './forest-creeps.js';
 import { forestCombatBody, forestCombatEffect } from './m3d-native-art.js';
 
 export function preloadForestCreepArt(scene: Phaser.Scene): void {
-  scene.load.pack('forest_creep_pack', '/assets/forest_creep_review/pack.json');
+  queueArtPack(scene, 'forest_creep_pack', '/assets/forest_creep_review/pack.json');
 }
 export function registerForestCreepArt(scene: Phaser.Scene): void {
   const manifest = scene.cache.json.get(
@@ -16,21 +18,24 @@ export function registerForestCreepArt(scene: Phaser.Scene): void {
     durations: number[],
     repeat: number,
   ) => {
-    scene.textures.get(texture).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    if (scene.anims.exists(key)) return;
+    setArtFilter(
+      scene.textures.get(texture),
+      Phaser.Textures.FilterMode.NEAREST,
+    );
     for (const frame of frames)
       if (!scene.textures.get(texture).has(frame))
         throw Error(`Missing forest frame ${texture}/${frame}`);
-    if (!scene.anims.exists(key))
-      scene.anims.create({
-        key,
-        frames: frames.map((frame, i) => ({
-          key: texture,
-          frame,
-          duration: durations[i]!,
-        })),
-        frameRate: 1000,
-        repeat,
-      });
+    scene.anims.create({
+      key,
+      frames: frames.map((frame, i) => ({
+        key: texture,
+        frame,
+        duration: durations[i]!,
+      })),
+      frameRate: 1000,
+      repeat,
+    });
   };
   for (const a of manifest.assets)
     for (const anim of a.animations) {

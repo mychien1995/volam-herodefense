@@ -8,7 +8,7 @@ Wave creep chiến dịch dùng hệ số thử 1,10 HP và 1,08 sát thương t
 
 ## Tầm Bổng và hồi chiêu đánh thường M3D · 2026-11-12
 
-Cái Bang Bổng đánh trong tầm 105 đơn vị với bốn thức và nhịp 8 tick mỗi thức. Bổng sơn đỏ khắc rồng vàng dài hơn 50%, rộng hơn 10%, thể hiện ở tư thế đứng, đi và đánh theo bốn hướng. Vệt đòn theo tầm mới. Võ Đang Quyền, Võ Đang Kiếm, Thiếu Lâm Quyền và Thiếu Lâm Đao có hồi chiêu A bằng 0. Thiếu Lâm Quyền giữ chuỗi bốn thức và cửa sổ 60 tick. Nhịp hiện hành của Cái Bang Bổng, Thiên Sơn Phiến, Thiên Sơn Đao và Cái Bang Chưởng tiếp tục áp dụng. Mỗi lần nhấn A gửi một lệnh và server xử lý tối đa một đòn của mỗi người trong một tick.
+Cái Bang Bổng đánh trong tầm 105 đơn vị với bốn thức và nhịp 8 tick mỗi thức. Bổng sơn đỏ khắc rồng vàng dài hơn 50%, rộng hơn 10%, thể hiện ở tư thế đứng, đi và đánh theo bốn hướng. Vệt đòn theo tầm mới. Võ Đang Quyền, Võ Đang Kiếm và Thiếu Lâm Quyền có hồi chiêu A bằng 0. Thiếu Lâm Quyền giữ chuỗi bốn thức và cửa sổ 60 tick. Nhịp hiện hành của Cái Bang Bổng, Thiên Sơn Phiến, Thiên Sơn Đao và Cái Bang Chưởng tiếp tục áp dụng. Mỗi lần nhấn A gửi một lệnh và server xử lý tối đa một đòn của mỗi người trong một tick.
 
 ## M3D · Sprite creep, báo chiêu và cát lún
 
@@ -20,7 +20,7 @@ Director duyệt preview visual M3D và yêu cầu tích hợp vào trận. Phò
 
 ## Thiếu Lâm Đao · bản tích hợp M3D · 2026-11-09
 
-Trận thường dùng trường đao Kim Cang (1C), đao khí lưỡi liềm (2A), La Hán quét Tru Tà (3A) và đao sen cùng vòng sen Như Lai Thiên Diệp (4A). Tru Tà có tầm cơ bản 190 đơn vị và tăng 4 đơn vị mỗi bậc. Phaser đặt mép lưỡi quét theo bán kính trong sự kiện thi triển từ server. Đao khí của A là phần trình diễn của đòn cận chiến. [Chi tiết](docs/SHAOLIN_DAO_REWORK.md).
+Trận thường dùng trường đao Kim Cang (1C), đao khí lưỡi liềm (2A), La Hán quét Tru Tà (3A) và đao sen cùng vòng sen Như Lai Thiên Diệp (4A). Tru Tà có tầm cơ bản 190 đơn vị và tăng 4 đơn vị mỗi bậc. Phaser đặt mép lưỡi quét theo bán kính trong sự kiện thi triển từ server. Đòn A nhắm vị trí địch hợp lệ gần nhất trong tầm 320 lúc ra đòn, rồi phóng đao khí theo đường thẳng. Tầm và nhịp A dùng cùng cấu hình với Cái Bang Chưởng, hồi chiêu cơ bản 18 tick và sàn 5 tick theo tốc đánh. [Chi tiết](docs/SHAOLIN_DAO_REWORK.md).
 
 ## Thiếu Lâm Quyền · bản duyệt M3D · 2026-11-09
 

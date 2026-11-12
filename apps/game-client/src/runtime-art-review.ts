@@ -1,16 +1,23 @@
 import Phaser from 'phaser';
+import { setArtFilter } from './art-filter.js';
 import manifest from './approved-art.generated.json';
 import renovatedSkills from './renovation-skills.generated.json';
-import allSkills from './renovation-actions.generated.json';
+import {
+  assets as allSkills,
+  atlases as actionAtlases,
+  inlineAtlases as actionInlineAtlases,
+} from './renovation-actions.generated.json';
 import {
   retainM3dRaster,
+  renovationActionsEnabled,
+  renovationFeedbackEnabled,
   renovationRevisionEnabled,
   renovationFollowupEnabled,
 } from './renovation-policy.js';
 import feedbackV4 from './renovation-feedback.generated.json';
-import { renovationFeedbackEnabled } from './renovation-feedback.js';
-import { renovationActionsEnabled } from './renovation-actions.js';
 import { createRuntimeArtGallery } from './runtime-art-gallery.js';
+
+declare const __VOLAM_RASTER_ALIASES__: Readonly<Record<string, string>>;
 
 type Mode = 'current' | 'candidate';
 type ReviewAsset = {
@@ -31,6 +38,7 @@ interface Binding {
 }
 const bindings = new WeakMap<Phaser.Scene, Binding[]>();
 const production = new WeakMap<Phaser.Scene, Map<string, ReviewAsset>>();
+const resampled = new WeakSet<Phaser.Textures.Texture>();
 const frozen = new WeakSet<Phaser.Scene>();
 export const runtimeArtReviewPaused = (scene: Phaser.Scene): boolean =>
   frozen.has(scene);
@@ -41,7 +49,7 @@ const enabled = () => {
 const byUrl = new Map(manifest.assets.map((a) => [a.url, a]));
 const renovatedByUrl = new Map(renovatedSkills.assets.map((a) => [a.url, a]));
 const allByUrl = new Map(
-  (allSkills.assets as ReviewAsset[])
+  (allSkills as ReviewAsset[])
     .filter((a) => !retainM3dRaster(a.id))
     .map((a) => [a.url, a]),
 );
@@ -50,13 +58,13 @@ const feedbackByUrl = new Map(
     .filter((a) => !retainM3dRaster(a.id))
     .map((a) => [a.url, a]),
 );
-const retainedNeedle = (allSkills.assets as ReviewAsset[]).find(
+const retainedNeedle = (allSkills as ReviewAsset[]).find(
   (a) => a.id === 'co_mo_fx',
 )!;
-const retainedNeedleV6 = (allSkills.assets as ReviewAsset[]).find(
+const retainedNeedleV6 = (allSkills as ReviewAsset[]).find(
   (a) => a.id === 'tay_fx1',
 )!;
-const retainedPhatV6 = (allSkills.assets as ReviewAsset[]).find(
+const retainedPhatV6 = (allSkills as ReviewAsset[]).find(
   (a) => a.id === 'nd_rework',
 )!;
 
@@ -94,8 +102,10 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
     !review &&
     new URLSearchParams(location.search).get('renovationSkills') !== 'old';
   const items: Binding[] = [];
-  const selected = new Map<string, ReviewAsset>();
-  const sourceUrls = new Map<string, string>();
+  const selected = production.get(scene) ?? new Map<string, ReviewAsset>();
+  const sourceUrls =
+    (scene.registry.get('runtime-art-urls') as
+      Map<string, string> | undefined) ?? new Map<string, string>();
   scene.registry.set('runtime-art-urls', sourceUrls);
   bindings.set(scene, items);
   production.set(scene, selected);
@@ -132,11 +142,9 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
                       ] ?? (feedbackV4.atlases as Record<string, string>)[path])
                     : undefined) ??
                   (complete
-                    ? ((allSkills.inlineAtlases as Record<string, string>)[
-                        key
-                      ] ??
+                    ? ((actionInlineAtlases as Record<string, string>)[key] ??
                       selected.get(key)?.atlasCandidateUrl ??
-                      (allSkills.atlases as Record<string, string>)[path])
+                      (actionAtlases as Record<string, string>)[path])
                     : undefined) ??
                   (renovatedSkills.atlases as Record<string, string>)[path])
                 : undefined;
@@ -184,9 +192,21 @@ export function preloadRuntimeArtReview(scene: Phaser.Scene): void {
     scene.load.image(candidateKey, entry.candidateUrl);
   };
   scene.load.on(Phaser.Loader.Events.ADD, select);
-  scene.load.once(Phaser.Loader.Events.COMPLETE, () =>
-    scene.load.off(Phaser.Loader.Events.ADD, select),
-  );
+  const canonicalize = (
+    _key: string,
+    type: string,
+    _loader: unknown,
+    file: Phaser.Loader.File,
+  ) => {
+    if (type !== 'image' || typeof file.url !== 'string') return;
+    const canonical = __VOLAM_RASTER_ALIASES__[file.url];
+    if (canonical) file.url = canonical;
+  };
+  scene.load.on(Phaser.Loader.Events.ADD, canonicalize);
+  scene.load.once(Phaser.Loader.Events.COMPLETE, () => {
+    scene.load.off(Phaser.Loader.Events.ADD, select);
+    scene.load.off(Phaser.Loader.Events.ADD, canonicalize);
+  });
 }
 
 export function createRuntimeArtReview(scene: Phaser.Scene): void {
@@ -200,16 +220,18 @@ export function createRuntimeArtReview(scene: Phaser.Scene): void {
       ),
     );
     for (const [key, { density }] of production.get(scene) ?? []) {
-      if (density === 1) continue;
+      if (density === 1 || !scene.textures.exists(key)) continue;
       const texture = scene.textures.get(key);
+      if (resampled.has(texture)) continue;
       if (production.get(scene)?.get(key)?.renovated)
-        texture.setFilter(Phaser.Textures.FilterMode.LINEAR);
+        setArtFilter(texture, Phaser.Textures.FilterMode.LINEAR);
       texture.source[0]!.resolution *= density;
       for (const frame of Object.values(texture.frames)) {
         if (frame.name === '__BASE') continue;
         resampleFrame(frame, density);
         frame.updateUVs();
       }
+      resampled.add(texture);
     }
     return;
   }

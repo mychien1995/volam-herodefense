@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { queueArtPack } from './queue-art-pack.js';
 import { renovationRevisionEnabled } from './renovation-policy.js';
 import { replaceR3ArenaProp } from './m3d-r3-arena.js';
 import { bossArenaScale as S } from '@volam/game-data';
@@ -37,7 +38,7 @@ export function preloadCoMo(scene: Phaser.Scene) {
     '/assets/co_mo/co_mo_fx.png',
     '/assets/co_mo/co_mo_fx.json',
   );
-  scene.load.pack('co_mo_pack', '/assets/co_mo/pack.json');
+  queueArtPack(scene, 'co_mo_pack', '/assets/co_mo/pack.json');
   scene.load.atlas(
     'co_mo_original_fx',
     '/assets/co_mo/co_mo_fx.png',

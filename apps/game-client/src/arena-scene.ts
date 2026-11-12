@@ -30,6 +30,7 @@ import { hellCreepArt, hellStrikeEffect, isHellZone } from './hell-art.js';
 import {
   arena,
   dungeonForZone,
+  type DungeonDestination,
   statueIntroduction,
   statueName,
 } from '@volam/game-data';
@@ -48,6 +49,9 @@ import {
 import type { LobbyState } from '@volam/game-protocol';
 import { loiDai, type CombatEvent } from '@volam/game-core';
 import { zoneTick } from './zone-tick.js';
+import { LocalMovement } from './local-movement.js';
+import { loadRenovationActionFrames } from './renovation-actions.js';
+export { loadRenovationActionFrames };
 import {
   preloadLoiDai,
   drawLoiDai,
@@ -93,8 +97,27 @@ import {
   facing,
   heroTexture,
   preloadArt,
+  preloadArtPack,
   registerArt,
+  registerArtPack,
+  type DeferredArtPack,
 } from './art.js';
+
+const isWaveBossActor = (id: string) =>
+  isDongArtActor(id) ||
+  isTayDocActor(id) ||
+  ['nam_de', 'bac_cai', 'bc_form', 'bc_dog', 'vuong_trung_duong'].includes(id);
+
+export function needsWaveArt(state: LobbyState): boolean {
+  const defense = state.defense;
+  if (defense.devWaveBosses || defense.devFinalBoss || defense.wave >= 1)
+    return true;
+  for (const actor of state.creeps.values())
+    if (actor.zoneId === 'arena' && isWaveBossActor(actor.archetypeId))
+      return true;
+  return false;
+}
+
 interface EntityView {
   smoothX: number;
   smoothY: number;
@@ -102,12 +125,25 @@ interface EntityView {
   label: Phaser.GameObjects.Text;
   shadow: Phaser.GameObjects.Ellipse;
   bar: Phaser.GameObjects.Graphics;
+  barWidth?: number;
   creepArt: ArenaCreepArt | undefined;
   playback: CreepPlayback;
   lastHp: number;
   lastLevel?: number;
 }
+
+const controlLabels: Record<string, string> = {
+  silence: 'Câm lặng',
+  disarm: 'Tước vũ khí',
+  slow: 'Chậm',
+  stun: 'Choáng',
+  root: 'Định thân',
+};
+
 export class ArenaScene extends Phaser.Scene {
+  private readonly localMovement = new LocalMovement();
+  private readonly predictMovement =
+    new URLSearchParams(location.search).get('movementPrediction') !== '0';
   private readonly shaolinDao = new ShaolinDaoMatchArt(this);
   private readonly hitArt = new M3dHitArt(this);
   private polished = true;
@@ -132,8 +168,20 @@ export class ArenaScene extends Phaser.Scene {
   private namDe: NamDePresentation | undefined;
   private chu: ChuPresentation | undefined;
   private ready = false;
+  private loadedPacks = new Set<DeferredArtPack>();
+  private loadingPacks = new Map<DeferredArtPack, Promise<void>>();
+  private artQueue = Promise.resolve();
+  private pendingZone = '';
+  private pendingCombat: Array<CombatEvent & { zoneId?: string }> = [];
+  private retryWaveArtAt = 0;
+  private bootArtFailed = false;
+  waveArtAtBoot = false;
+  onArtError = (error: unknown) => console.error(error);
   get presentationReady(): boolean {
     return this.ready;
+  }
+  get zoneReady(): boolean {
+    return this.ready && !this.pendingZone;
   }
   private followed = '';
   private lastEvent = 0;
@@ -255,7 +303,7 @@ export class ArenaScene extends Phaser.Scene {
     string,
     Array<{ id: string; frame: string; at: number }>
   >();
-  constructor() {
+  constructor(private readonly eagerArt = true) {
     super('Arena');
   }
   panSpectator(x: number, y: number): void {
@@ -265,13 +313,27 @@ export class ArenaScene extends Phaser.Scene {
     this.cameras.main.scrollY += y * 24;
   }
   preload(): void {
+    this.bootArtFailed = false;
+    this.load.once(
+      Phaser.Loader.Events.COMPLETE,
+      (
+        _loader: Phaser.Loader.LoaderPlugin,
+        _loaded: number,
+        failed: number,
+      ) => {
+        this.bootArtFailed = failed > 0;
+      },
+    );
     preloadRuntimeArtReview(this);
-    preloadLoiDai(this);
-    preloadArt(this);
+    if (this.eagerArt) preloadLoiDai(this);
+    preloadArt(this, this.eagerArt);
+    if (!this.eagerArt && this.waveArtAtBoot)
+      preloadArtPack(this, 'wave-bosses');
     preloadShaolinDaoArt(this);
     preloadM3dHitArt(this);
   }
   create(): void {
+    if (this.bootArtFailed) return;
     this.shaolinDao.register();
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.hitArt.clear());
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
@@ -284,7 +346,11 @@ export class ArenaScene extends Phaser.Scene {
     this.events.once(Phaser.Scenes.Events.DESTROY, () =>
       this.creepCombatArt?.clear(),
     );
-    registerArt(this);
+    registerArt(this, this.eagerArt);
+    if (!this.eagerArt && this.waveArtAtBoot) {
+      registerArtPack(this, 'wave-bosses');
+      this.loadedPacks.add('wave-bosses');
+    }
     registerRenovation(this);
     this.chu = new ChuPresentation(this);
     this.namDe = new NamDePresentation(this);
@@ -297,10 +363,7 @@ export class ArenaScene extends Phaser.Scene {
     this.tayDoc = new TayDocRenderer(this);
     this.kim = new KimLuanRenderer(this);
     this.dong = new DongTaRenderer(this);
-    this.bacCai = new BacCaiRenderer(this);
-    this.vuong = new VuongArt(this, () =>
-      applyArenaPalette(this, this.polished),
-    );
+    if (this.hasArt('wave-bosses')) this.createLateWaveBossRenderers();
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.vuong?.clear());
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.bacCai?.clear());
     this.events.once(Phaser.Scenes.Events.DESTROY, () => this.bacCai?.clear());
@@ -351,9 +414,65 @@ export class ArenaScene extends Phaser.Scene {
       this.scale.off('resize', this.fitCamera),
     );
     this.cameras.main.centerOn(arena.spawn.x, arena.spawn.y);
-    this.ready = true;
     createRuntimeArtReview(this);
+    this.ready = true;
     document.querySelector('#scene-status')?.setAttribute('data-ready', 'true');
+    this.syncZone();
+  }
+
+  hasArt(pack: DeferredArtPack): boolean {
+    return this.eagerArt || this.loadedPacks.has(pack);
+  }
+
+  private createLateWaveBossRenderers(): void {
+    this.bacCai = new BacCaiRenderer(this);
+    this.vuong = new VuongArt(this, () =>
+      applyArenaPalette(this, this.polished),
+    );
+  }
+
+  prepareArt(pack: DeferredArtPack): Promise<void> {
+    if (this.hasArt(pack)) return Promise.resolve();
+    const pending = this.loadingPacks.get(pack);
+    if (pending) return pending;
+    const load = this.artQueue
+      .then(() => loadRenovationActionFrames(pack))
+      .then(
+        () =>
+          new Promise<void>((resolve, reject) => {
+            preloadRuntimeArtReview(this);
+            preloadArtPack(this, pack);
+            this.load.once(
+              Phaser.Loader.Events.COMPLETE,
+              (
+                _loader: Phaser.Loader.LoaderPlugin,
+                _loaded: number,
+                failed: number,
+              ) => {
+                try {
+                  if (failed)
+                    throw Error(
+                      `Không tải được ${failed} file hình ảnh (${pack}).`,
+                    );
+                  registerArtPack(this, pack);
+                  registerRenovation(this);
+                  if (pack === 'wave-bosses')
+                    this.createLateWaveBossRenderers();
+                  createRuntimeArtReview(this);
+                  this.loadedPacks.add(pack);
+                  resolve();
+                } catch (error) {
+                  reject(error);
+                }
+              },
+            );
+            this.load.start();
+          }),
+      )
+      .finally(() => this.loadingPacks.delete(pack));
+    this.loadingPacks.set(pack, load);
+    this.artQueue = load.catch(() => {});
+    return load;
   }
   private fitCamera = (): void => {
     if (this.zoneId === loiDai.id) fitLoiDaiCamera(this);
@@ -365,7 +484,19 @@ export class ArenaScene extends Phaser.Scene {
 
   setSnapshot(snapshot: LobbyState | undefined, sessionId = ''): void {
     if (runtimeArtReviewPaused(this)) return;
+    const local = snapshot?.players.get(sessionId);
+    if (
+      this.sessionId !== sessionId ||
+      snapshot?.phase !== 'IN_GAME' ||
+      local?.zoneId !== 'arena' ||
+      !local.connected ||
+      local.hp <= 0
+    )
+      this.localMovement.reset();
+    this.localMovement.patch(performance.now());
     if (this.sessionId !== sessionId) {
+      this.pendingCombat.length = 0;
+      this.pendingZone = '';
       this.hitArt.clear();
       this.shaolinDao.clear();
       this.coMoEffects?.clear();
@@ -384,8 +515,73 @@ export class ArenaScene extends Phaser.Scene {
     }
     this.snapshot = snapshot;
     this.sessionId = sessionId;
-    const zoneId = snapshot?.players.get(sessionId)?.zoneId ?? 'arena';
-    if (this.ready && zoneId !== this.zoneId) this.drawZone(zoneId);
+    this.syncZone();
+    if (
+      this.ready &&
+      snapshot &&
+      !this.hasArt('wave-bosses') &&
+      !this.loadingPacks.has('wave-bosses') &&
+      performance.now() >= this.retryWaveArtAt &&
+      needsWaveArt(snapshot)
+    ) {
+      void this.prepareArt('wave-bosses').catch((error) => {
+        this.retryWaveArtAt = performance.now() + 3000;
+        this.onArtError(error);
+      });
+    }
+  }
+
+  moveLocal(x: number, y: number): void {
+    if (this.predictMovement) this.localMovement.move(x, y, performance.now());
+  }
+
+  localFrame(): { x: number; y: number; animation: string } | undefined {
+    const sprite = this.actors.get(this.sessionId)?.sprite;
+    if (sprite)
+      return {
+        x: sprite.x,
+        y: sprite.y,
+        animation: sprite.anims.currentAnim?.key ?? '',
+      };
+  }
+
+  private syncZone(): void {
+    if (!this.ready) return;
+    const zone = this.snapshot?.players.get(this.sessionId)?.zoneId ?? 'arena';
+    if (zone === this.pendingZone) return;
+    this.pendingZone = '';
+    this.pendingCombat.length = 0;
+    if (zone === this.zoneId) return;
+    if (zone === 'arena' || this.eagerArt) {
+      this.drawZone(zone);
+      return;
+    }
+    const pack =
+      zone === loiDai.id
+        ? 'loi_dai'
+        : (dungeonForZone(zone).id as DungeonDestination);
+    if (this.hasArt(pack)) {
+      this.drawZone(zone);
+      return;
+    }
+    this.pendingZone = zone;
+    const session = this.sessionId;
+    void this.prepareArt(pack)
+      .then(() => {
+        if (this.sessionId !== session || this.pendingZone !== zone) return;
+        this.drawZone(zone);
+        this.pendingZone = '';
+        for (const event of this.pendingCombat.splice(0)) this.combat(event);
+      })
+      .catch((error) => {
+        if (this.sessionId !== session || this.pendingZone !== zone) return;
+        this.onArtError(error);
+        this.time.delayedCall(3000, () => {
+          if (this.sessionId !== session || this.pendingZone !== zone) return;
+          this.pendingZone = '';
+          this.syncZone();
+        });
+      });
   }
   private drawZone(zoneId: string): void {
     this.hitArt.clear();
@@ -529,8 +725,9 @@ export class ArenaScene extends Phaser.Scene {
     return view;
   }
   override update(_time: number, delta: number): void {
-    if (!this.ready) return;
+    if (!this.zoneReady) return;
     const state = this.snapshot;
+    const waveArtReady = this.hasArt('wave-bosses');
     this.shaolinDao.sync(state, this.zoneId);
     const active = new Set<string>();
     const render = (
@@ -560,7 +757,8 @@ export class ArenaScene extends Phaser.Scene {
       if (
         enemy &&
         !state?.defense.creepPreview &&
-        (isTayDocActor(actor.archetypeId ?? '') ||
+        ((!waveArtReady && isWaveBossActor(actor.archetypeId ?? '')) ||
+          isTayDocActor(actor.archetypeId ?? '') ||
           actor.archetypeId === 'chu_wine_disciple' ||
           isHongLietActor(actor.archetypeId ?? '') ||
           isDongArtActor(actor.archetypeId ?? '') ||
@@ -662,17 +860,42 @@ export class ArenaScene extends Phaser.Scene {
       if (actor.hp > 0 && view.lastHp <= 0) view.playback = new CreepPlayback();
       view.lastHp = actor.hp;
       const blinkAlpha = !enemy ? (this.vfx?.actorAlpha(id) ?? 1) : 1;
+      const local = id === this.sessionId ? state?.players.get(id) : undefined;
+      const predicted =
+        local?.zoneId === 'arena' &&
+        local.connected &&
+        local.hp > 0 &&
+        state?.phase === 'IN_GAME' &&
+        blinkAlpha === 1 &&
+        !cast &&
+        !local.actionState &&
+        !state.namDeControls.has(id) &&
+        !state.defense.devWaveBosses &&
+        (actor.pose === 'idle' || actor.pose === 'walk')
+          ? this.localMovement.project(
+              actor,
+              local.build.stats.movementSpeed,
+              states,
+              performance.now(),
+            )
+          : undefined;
       // A confirmed blink snaps the rendered feet to replicated position before
       // fading in. It must not look like ordinary interpolated movement.
       const weight = blinkAlpha < 1 ? 1 : Math.min(1, delta / 45);
       // Preserve interpolation precision; feeding rounded pixels back into lerp
       // otherwise leaves a stationary actor permanently one pixel off its feet.
-      view.smoothX = Phaser.Math.Linear(view.smoothX, actor.x, weight);
-      view.smoothY = Phaser.Math.Linear(view.smoothY, actor.y, weight);
-      view.sprite
-        .setPosition(Math.round(view.smoothX), Math.round(view.smoothY))
-        .setDepth(view.sprite.y);
-      const direction = facing(actor.fx, actor.fy);
+      view.smoothX =
+        predicted?.x ?? Phaser.Math.Linear(view.smoothX, actor.x, weight);
+      view.smoothY =
+        predicted?.y ?? Phaser.Math.Linear(view.smoothY, actor.y, weight);
+      const x = Math.round(view.smoothX);
+      const y = Math.round(view.smoothY);
+      view.sprite.setPosition(x, y);
+      if (view.sprite.depth !== y) view.sprite.setDepth(y);
+      const renderFx = predicted?.fx ?? actor.fx;
+      const renderFy = predicted?.fy ?? actor.fy;
+      const direction = facing(renderFx, renderFy);
+      const actorPose = predicted ? 'walk' : actor.pose;
       // Keep this prototype's authored one-shots complete across a short/late
       // network pose. This never changes movement, combat or server clocks.
       const authoredMonk =
@@ -689,12 +912,12 @@ export class ArenaScene extends Phaser.Scene {
         ? { state: bossPose, direction }
         : art || authoredMonk
           ? view.playback.resolve(
-              actor.hp <= 0 ? 'death' : actor.pose,
+              actor.hp <= 0 ? 'death' : actorPose,
               direction,
               this.time.now,
               (state) => this.creepDuration(texture, state, direction),
             )
-          : { state: actor.pose, direction };
+          : { state: actorPose, direction };
       const renovatedId = enemy
         ? previewArt
           ? undefined
@@ -833,8 +1056,8 @@ export class ArenaScene extends Phaser.Scene {
           view.sprite,
           renovatedId,
           bodyPose,
-          actor.fx,
-          actor.fy,
+          renderFx,
+          renderFy,
           cast?.abilityId ?? actor.castAbilityId ?? '',
           actor.archetypeId === 'ly_mac_sau' && bossPose && activeAt > 0
             ? { beat: releaseBeat(tick, activeAt) }
@@ -867,21 +1090,16 @@ export class ArenaScene extends Phaser.Scene {
           view.sprite.getData('renovation-action')?.sourceFrame ??
             String(view.sprite.frame.name),
         );
-      const labels: Record<string, string> = {
-        silence: 'Câm lặng',
-        disarm: 'Tước vũ khí',
-        slow: 'Chậm',
-        stun: 'Choáng',
-        root: 'Định thân',
-      };
-      const controls = states
-        .map((s) => labels[s.kind])
-        .filter((s): s is string => !!s);
-      view.label
-        .setVisible(!enemy && actor.hp > 0)
-        .setText(enemy ? '' : [name, ...new Set(controls)].join('\n'))
-        .setPosition(view.sprite.x, view.sprite.y + 5)
-        .setDepth(view.sprite.y + 0.2);
+      view.label.setVisible(!enemy && actor.hp > 0);
+      if (!enemy) {
+        const controls = states
+          .map((s) => controlLabels[s.kind])
+          .filter((s): s is string => !!s);
+        view.label.setText([name, ...new Set(controls)].join('\n'));
+      }
+      view.label.setPosition(view.sprite.x, view.sprite.y + 5);
+      const labelDepth = view.sprite.y + 0.2;
+      if (view.label.depth !== labelDepth) view.label.setDepth(labelDepth);
       view.shadow.setPosition(view.sprite.x, view.sprite.y - 3);
       if (art)
         view.shadow.setDisplaySize(
@@ -893,18 +1111,17 @@ export class ArenaScene extends Phaser.Scene {
           renovatedId ?? '',
           art?.bodyHeight ?? (enemy ? 43 : 48),
         ) + 5;
-      view.bar.clear().setDepth(view.sprite.y + 0.1);
-      view.bar
-        .fillStyle(0x293c37)
-        .fillRect(view.sprite.x - 14, view.sprite.y - barOffset, 28, 3);
-      view.bar
-        .fillStyle(enemy ? 0xcc6e55 : 0x92c589)
-        .fillRect(
-          view.sprite.x - 14,
-          view.sprite.y - barOffset,
-          Math.round((28 * actor.hp) / actor.maxHp),
-          3,
-        );
+      view.bar.setPosition(view.sprite.x - 14, view.sprite.y - barOffset);
+      const barDepth = view.sprite.y + 0.1;
+      if (view.bar.depth !== barDepth) view.bar.setDepth(barDepth);
+      const barWidth = Math.round((28 * actor.hp) / actor.maxHp);
+      if (view.barWidth !== barWidth) {
+        view.barWidth = barWidth;
+        view.bar.clear().fillStyle(0x293c37).fillRect(0, 0, 28, 3);
+        view.bar
+          .fillStyle(enemy ? 0xcc6e55 : 0x92c589)
+          .fillRect(0, 0, barWidth, 3);
+      }
       if (id === this.sessionId && state?.players.get(id)?.bossSpectator) {
         if (this.followed) this.cameras.main.stopFollow();
         this.followed = '';
@@ -959,13 +1176,15 @@ export class ArenaScene extends Phaser.Scene {
       }
     const localBody = this.keepLocalHeroVisible(state);
     this.chu?.sync(state, this.zoneId);
-    this.namDe?.sync(state, this.zoneId);
     this.hongLiet?.sync(state, this.zoneId);
-    this.tayDoc?.sync(state, this.zoneId);
     this.kim?.sync(state, this.zoneId);
-    this.dong?.sync(state, this.zoneId);
-    this.bacCai?.sync(state, this.zoneId);
-    this.vuong?.sync(state, this.zoneId);
+    if (waveArtReady) {
+      this.namDe?.sync(state, this.zoneId);
+      this.tayDoc?.sync(state, this.zoneId);
+      this.dong?.sync(state, this.zoneId);
+      this.bacCai?.sync(state, this.zoneId);
+      this.vuong?.sync(state, this.zoneId);
+    }
     this.waveArena?.sync(state, this.zoneId);
     this.bossShouts?.sync(state, this.zoneId);
     this.presentStatueStory();
@@ -1134,6 +1353,13 @@ export class ArenaScene extends Phaser.Scene {
   combat(event: CombatEvent & { zoneId?: string }): void {
     if (runtimeArtReviewPaused(this)) return;
     if (!this.ready || event.id <= this.lastEvent) return;
+    if (this.pendingZone) {
+      if (event.zoneId === this.pendingZone) {
+        if (this.pendingCombat.length >= 60) this.pendingCombat.shift();
+        this.pendingCombat.push(event);
+      }
+      return;
+    }
     this.lastEvent = event.id;
     if (event.zoneId && event.zoneId !== this.zoneId) return;
     if (event.abilityId === 'loi_dai_victory') {
@@ -1142,7 +1368,8 @@ export class ArenaScene extends Phaser.Scene {
     }
     this.creepCombatArt?.event(event);
     if (this.bossShouts?.event(event)) return;
-    if (this.zoneId === 'arena') this.dong?.event(event);
+    if (this.zoneId === 'arena' && this.hasArt('wave-bosses'))
+      this.dong?.event(event);
     if (isCoMoZone(this.zoneId)) this.coMoEffects?.event(event);
     if (event.kind === 'attack')
       this.creepAction(event.sourceId, 'basic_attack');

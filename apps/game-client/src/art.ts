@@ -1,4 +1,7 @@
-import { preloadWaveBossFeedback } from './wave-boss-feedback-art.js';
+import {
+  preloadLevelUpArt,
+  preloadWaveBossFeedback,
+} from './wave-boss-feedback-art.js';
 import { preloadRenovation } from './renovation-art.js';
 import { preloadTayDocArt, registerTayDocArt } from './tay-doc-art.js';
 import { preloadNamDe, registerNamDe } from './nam-de-presentation.js';
@@ -7,6 +10,9 @@ import { preloadKimArt, registerKimArt } from './kim-luan-art.js';
 import { preloadDongArt, registerDongArt } from './dong-ta-art.js';
 import { preloadHongLietArt, registerHongLietArt } from './hong-liet-art.js';
 import Phaser from 'phaser';
+import { type DungeonDestination } from '@volam/game-data';
+import { setArtFilter } from './art-filter.js';
+import { queueArtPack } from './queue-art-pack.js';
 import { characterFolder } from './character-revision.js';
 import { preloadCoMo, registerCoMoEffects } from './co-mo-art.js';
 import { preloadHellArt, registerHellArt } from './hell-art.js';
@@ -50,62 +56,75 @@ export const poses = [
 ] as const;
 export const facings = ['down', 'left', 'right', 'up'] as const;
 // Explicit art-review variant only; never sends a weapon/loadout command.
-const artQuery = new URLSearchParams(location.search);
-const reviewDao =
-  artQuery.has('debug') && artQuery.get('thienSonWeapon') === 'dao';
-const reviewKiem =
-  artQuery.has('debug') && artQuery.get('voDangWeapon') === 'kiem';
-const reviewThieuLamDao =
-  artQuery.has('debug') && artQuery.get('thieuLamWeapon') === 'dao';
-export function heroTexture(
-  basicId?: string,
-  schoolId?: string,
-):
-  | 'hero_cai_bang'
-  | 'hero_cai_bang_chuong'
-  | 'hero_thien_son'
-  | 'hero_thien_son_dao'
-  | 'hero_vo_dang'
-  | 'hero_vo_dang_kiem'
-  | 'hero_thieu_lam'
-  | 'hero_thieu_lam_dao' {
-  if (schoolId === 'thieu_lam' || basicId?.startsWith('thieu_lam_'))
-    return basicId === 'thieu_lam_dao' || reviewThieuLamDao
-      ? 'hero_thieu_lam_dao'
-      : 'hero_thieu_lam';
-  if (schoolId === 'vo_dang' || basicId?.startsWith('vo_dang_'))
-    return basicId === 'vo_dang_kiem' || reviewKiem
-      ? 'hero_vo_dang_kiem'
-      : 'hero_vo_dang';
-  if (schoolId === 'thien_son' || basicId?.startsWith('thien_son_'))
-    return basicId === 'thien_son_dao' || reviewDao
-      ? 'hero_thien_son_dao'
-      : 'hero_thien_son';
-  return basicId === 'cai_bang_chuong'
-    ? 'hero_cai_bang_chuong'
-    : 'hero_cai_bang';
-}
+export { heroTexture } from './hero-texture.js';
 export { facing } from './facing.js';
-export function preloadArt(scene: Phaser.Scene): void {
-  preloadRenovation(scene);
+
+const waveBossArt = {
+  preload(scene: Phaser.Scene) {
+    preloadWaveBossFeedback(scene);
+    preloadBacCaiArt(scene);
+    preloadVuongArt(scene);
+    preloadNamDe(scene);
+    preloadTayDocArt(scene);
+    preloadDongArt(scene);
+  },
+  register(scene: Phaser.Scene) {
+    registerNamDe(scene);
+    registerTayDocArt(scene);
+    registerDongArt(scene);
+  },
+};
+
+export type DeferredArtPack = DungeonDestination | 'wave-bosses' | 'loi_dai';
+const zoneArt: Partial<
+  Record<
+    DeferredArtPack,
+    {
+      preload: (scene: Phaser.Scene) => void;
+      register?: (scene: Phaser.Scene) => void;
+    }
+  >
+> = {
+  'wave-bosses': waveBossArt,
+  loi_dai: { preload: preloadLoiDai },
+  desert: { preload: preloadDesertArt, register: registerDesertArt },
+  chu_ba_thong: { preload: preloadChu, register: registerChu },
+  hong_liet: { preload: preloadHongLietArt, register: registerHongLietArt },
+  kim_luan: { preload: preloadKimArt, register: registerKimArt },
+};
+
+export function preloadArtPack(
+  scene: Phaser.Scene,
+  pack: DeferredArtPack,
+): void {
+  if (pack !== 'loi_dai') preloadRenovation(scene, pack);
+  zoneArt[pack]?.preload(scene);
+}
+
+export function registerArtPack(
+  scene: Phaser.Scene,
+  pack: DeferredArtPack,
+): void {
+  zoneArt[pack]?.register?.(scene);
+  if (pack === 'forest') registerForestCreepArt(scene);
+}
+
+export function preloadArt(scene: Phaser.Scene, eager = true): void {
+  preloadRenovation(scene, eager ? 'all' : 'arena');
+  if (eager)
+    for (const pack of Object.values(zoneArt)) {
+      if (pack !== zoneArt.loi_dai) pack.preload(scene);
+    }
   preloadCreepCombat(scene);
-  preloadWaveBossFeedback(scene);
-  preloadBacCaiArt(scene);
-  preloadVuongArt(scene);
-  preloadChu(scene);
-  preloadNamDe(scene);
-  preloadHongLietArt(scene);
-  preloadTayDocArt(scene);
-  preloadKimArt(scene);
-  preloadDongArt(scene);
+  preloadLevelUpArt(scene);
+  // Some arena creeps reuse contact and projectile frames from these packs.
   preloadCoMo(scene);
   preloadBeachArt(scene);
   preloadHellArt(scene);
   preloadForestCreepArt(scene);
   preloadBambooForestArt(scene);
-  preloadDesertArt(scene);
   preloadSkillArt(scene);
-  scene.load.pack('arena_creep_pack', '/assets/arena_creeps/pack.json');
+  queueArtPack(scene, 'arena_creep_pack', '/assets/arena_creeps/pack.json');
   scene.load.image('arena_ground_art01', '/assets/arena_v2/ground.png');
   scene.load.atlas(
     'arena_world_art01',
@@ -132,12 +151,7 @@ export function preloadArt(scene: Phaser.Scene): void {
     'wall',
   ])
     scene.load.image(`art01_${id}`, `/assets/arena_art01/${id}.png`);
-  for (const asset of actorSheets)
-    scene.load.atlas(
-      asset.id,
-      `/assets/${asset.folder === 'characters' ? characterFolder(asset.id) : asset.folder}/${asset.id}.png`,
-      `/assets/${asset.folder === 'characters' ? characterFolder(asset.id) : asset.folder}/${asset.id}.json`,
-    );
+  preloadActorArt(scene);
   for (const id of [
     'blossom',
     'merchant_stall',
@@ -150,7 +164,6 @@ export function preloadArt(scene: Phaser.Scene): void {
     'bridge',
   ])
     scene.load.image(id, `/assets/presentation/${id}.png`);
-  scene.load.json('art_manifest', '/assets/manifest.json');
   scene.load.tilemapTiledJSON('arena', '/assets/arena.tmj');
   scene.load.tilemapTiledJSON('creep_forest', '/assets/creep_forest.tmj');
   scene.load.image('tree', '/assets/scenery/tree.png');
@@ -162,6 +175,16 @@ export function preloadArt(scene: Phaser.Scene): void {
     frameWidth: 32,
     frameHeight: 32,
   });
+}
+
+export function preloadActorArt(scene: Phaser.Scene): void {
+  for (const asset of actorSheets) {
+    const folder =
+      asset.folder === 'characters' ? characterFolder(asset.id) : asset.folder;
+    const path = `/assets/${folder}/${asset.id}`;
+    scene.load.atlas(asset.id, path + '.png', path + '.json');
+  }
+  scene.load.json('art_manifest', '/assets/manifest.json');
 }
 interface Manifest {
   assets: Array<{
@@ -206,19 +229,13 @@ export function actorFootPivot(
   if (!entry && !forest) throw new Error(`Missing actor pivot: ${id}`);
   return (entry ?? forest)!.footPivot;
 }
-export function registerArt(scene: Phaser.Scene): void {
-  registerChu(scene);
-  registerNamDe(scene);
-  registerHongLietArt(scene);
-  registerTayDocArt(scene);
-  registerKimArt(scene);
-  registerDongArt(scene);
+export function registerArt(scene: Phaser.Scene, eager = true): void {
+  if (eager) for (const pack of Object.values(zoneArt)) pack.register?.(scene);
   registerDesertArt(scene, 'co_mo_manifest');
   registerCoMoEffects(scene);
   registerBeachArt(scene);
   registerHellArt(scene);
   registerForestCreepArt(scene);
-  registerDesertArt(scene);
   registerSkillArt(scene);
   for (const id of [
     'arena_ground_art01',
@@ -246,27 +263,7 @@ export function registerArt(scene: Phaser.Scene): void {
         repeat: -1,
       });
   }
-  const manifest = scene.cache.json.get('art_manifest') as Manifest;
-  for (const asset of actorSheets) {
-    const entry = manifest.assets.find((item) => item.id === asset.id);
-    if (
-      !entry?.animations?.length ||
-      !['placeholder', 'prototype', 'approved'].includes(entry.status)
-    )
-      throw new Error(`Invalid art manifest for ${asset.id}`);
-    scene.textures.get(asset.id).setFilter(Phaser.Textures.FilterMode.NEAREST);
-    for (const anim of entry.animations) {
-      for (const frame of anim.frames)
-        if (!scene.textures.get(asset.id).has(frame))
-          throw new Error(`Missing ${asset.id}/${frame}`);
-      scene.anims.create({
-        key: `${asset.id}:${anim.state}:${anim.direction}`,
-        frames: anim.frames.map((frame) => ({ key: asset.id, frame })),
-        frameRate: anim.frameRate,
-        repeat: anim.repeat,
-      });
-    }
-  }
+  registerActorArt(scene);
   const creeps = scene.cache.json.get(
     'arena_creeps_manifest',
   ) as ArenaCreepManifest;
@@ -291,7 +288,10 @@ export function registerArt(scene: Phaser.Scene): void {
     .setFilter(Phaser.Textures.FilterMode.NEAREST);
   for (const effect of creeps.effects) {
     const texture = effect.texture ?? 'arena_creep_impacts';
-    scene.textures.get(texture).setFilter(Phaser.Textures.FilterMode.NEAREST);
+    setArtFilter(
+      scene.textures.get(texture),
+      Phaser.Textures.FilterMode.NEAREST,
+    );
     for (const frame of effect.frames)
       if (!scene.textures.get(texture).has(frame))
         throw new Error(`Missing ${texture}/${frame}`);
@@ -334,6 +334,31 @@ export function registerArt(scene: Phaser.Scene): void {
     repeat: 0,
   });
 }
+export function registerActorArt(scene: Phaser.Scene): void {
+  const manifest = scene.cache.json.get('art_manifest') as Manifest;
+  for (const asset of actorSheets) {
+    const entry = manifest.assets.find((item) => item.id === asset.id);
+    if (
+      !entry?.animations?.length ||
+      !['placeholder', 'prototype', 'approved'].includes(entry.status)
+    )
+      throw new Error(`Invalid art manifest for ${asset.id}`);
+    const texture = scene.textures.get(asset.id);
+    setArtFilter(texture, Phaser.Textures.FilterMode.NEAREST);
+    for (const anim of entry.animations) {
+      for (const frame of anim.frames)
+        if (!texture.has(frame))
+          throw new Error(`Missing ${asset.id}/${frame}`);
+      scene.anims.create({
+        key: `${asset.id}:${anim.state}:${anim.direction}`,
+        frames: anim.frames.map((frame) => ({ key: asset.id, frame })),
+        frameRate: anim.frameRate,
+        repeat: anim.repeat,
+      });
+    }
+  }
+}
 import { preloadVuongArt } from './vuong-art.js';
 import { preloadBacCaiArt } from './bac-cai-art.js';
 import { preloadCreepCombat } from './creep-combat-art.js';
+import { preloadLoiDai } from './loi-dai-art.js';

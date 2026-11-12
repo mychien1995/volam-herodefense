@@ -1,8 +1,9 @@
 import { NamDeHud } from './nam-de-hud.js';
 import { TamLienHud } from './tam-lien-hud.js';
 import { ChuHud } from './chu-hud.js';
+import { isBossDestination } from './boss-party-ui.js';
 import './chu-hud.css';
-import Phaser from 'phaser';
+import type Phaser from 'phaser';
 import { connectionReason } from './connection-copy.js';
 import { Client, type Room } from '@colyseus/sdk';
 import type { MatchRoom } from '../../game-server/src/rooms/MatchRoom.js';
@@ -19,14 +20,15 @@ import {
   type InputMessage,
   type DungeonAction,
 } from '@volam/game-protocol';
-import { ArenaScene } from './arena-scene.js';
-import { ArtPreviewScene } from './art-preview.js';
-import { ThienSonSkillPreviewScene } from './thien-son-skill-preview.js';
-import { AnimationReviewScene } from './animation-review.js';
+import type { ArenaScene } from './arena-scene.js';
+import type { DeferredArtPack } from './art.js';
+import type { ArtPreviewScene } from './art-preview.js';
+import type { ThienSonSkillPreviewScene } from './thien-son-skill-preview.js';
+import type { AnimationReviewScene } from './animation-review.js';
 import { bindGameplayInput } from './input.js';
+import { InputTiming } from './input-timing.js';
 import { GameUI, element } from './ui.js';
 import { SkillPreview } from './skill-preview.js';
-import { ForestStudyScene } from './forest-study.js';
 import './style.css';
 import './arena-hud.css';
 import './dungeon.css';
@@ -85,8 +87,10 @@ chuHud.onNotify = (message) => ui.notify(message);
 const endpoint = import.meta.env['VITE_SERVER_URL'] ?? 'http://localhost:2567';
 const pregame = new PreGame(endpoint);
 if (artPreview) pregame.node.hidden = true;
-const matchMusic = artPreview ? undefined : new Audio(gameOstUrl);
+const matchMusic = artPreview ? undefined : new Audio();
 if (matchMusic) {
+  matchMusic.preload = 'none';
+  matchMusic.src = gameOstUrl;
   matchMusic.id = 'match-music';
   matchMusic.loop = true;
   matchMusic.volume = 0.45;
@@ -113,39 +117,137 @@ function syncMatchMusic(active: boolean): void {
     matchMusic.currentTime = 0;
   }
 }
-const arenaScene = new ArenaScene();
-const gallery = new ArtPreviewScene();
-const thienSonSkillGallery = new ThienSonSkillPreviewScene();
-const animationReviewGallery = new AnimationReviewScene();
-const study = new ForestStudyScene();
-const game = new Phaser.Game({
-  type: Phaser.AUTO,
-  parent: 'game',
-  width: 640,
-  height: 360,
-  backgroundColor: '#304b37',
-  render: {
-    pixelArt: artPreview,
-    roundPixels: artPreview,
-    antialias: !artPreview,
-    antialiasGL: !artPreview,
-  },
-  scale: { mode: Phaser.Scale.NONE, zoom: 1 },
-  scene: animationReview
-    ? [animationReviewGallery]
-    : thienSonSkillReview
-      ? [thienSonSkillGallery]
-      : artPreview
-        ? [gallery]
-        : [arenaScene, study],
-  input: { keyboard: false, mouse: true, touch: false },
-  audio: { noAudio: true },
-});
+const reviewQuery = new URLSearchParams(location.search);
+const inputTiming =
+  reviewQuery.has('debug') && reviewQuery.get('inputTiming') === '1'
+    ? new InputTiming()
+    : undefined;
+const eagerArt =
+  artPreview ||
+  creepPreviewRequested ||
+  !!import.meta.env.VITE_KIM_FRAME_TEST ||
+  [
+    'runtimeArtReview',
+    'feedbackArtReview',
+    'visualReview',
+    'renovationSkills',
+  ].some((key) => reviewQuery.has(key));
+let arenaScene: ArenaScene | undefined;
+let needsWaveArt: typeof import('./arena-scene.js').needsWaveArt | undefined;
+let gallery: ArtPreviewScene | undefined;
+let thienSonSkillGallery: ThienSonSkillPreviewScene | undefined;
+let animationReviewGallery: AnimationReviewScene | undefined;
+let game: Phaser.Game | undefined;
+let rendererReady: Promise<boolean> | undefined;
+let disposed = false;
+
+async function bootRenderer(): Promise<boolean> {
+  if (game && arenaScene) {
+    const scene = arenaScene;
+    return new Promise((resolve) => {
+      scene.events.once('create', () => resolve(scene.presentationReady));
+      scene.scene.restart();
+    });
+  }
+  const scenes: Phaser.Scene[] = [];
+  if (animationReview) {
+    const { AnimationReviewScene } = await import('./animation-review.js');
+    animationReviewGallery = new AnimationReviewScene();
+    animationReviewGallery.onDisplayScale = (zoom) => {
+      reviewScaleOverride = zoom;
+      fit();
+    };
+    scenes.push(animationReviewGallery);
+  } else if (thienSonSkillReview) {
+    const { ThienSonSkillPreviewScene } =
+      await import('./thien-son-skill-preview.js');
+    thienSonSkillGallery = new ThienSonSkillPreviewScene();
+    scenes.push(thienSonSkillGallery);
+  } else if (artPreview) {
+    const { ArtPreviewScene } = await import('./art-preview.js');
+    gallery = new ArtPreviewScene();
+    scenes.push(gallery);
+  } else {
+    const [arena, { ForestStudyScene }] = await Promise.all([
+      import('./arena-scene.js'),
+      import('./forest-study.js'),
+    ]);
+    needsWaveArt = arena.needsWaveArt;
+    const scene = new arena.ArenaScene(eagerArt);
+    if (room?.state?.defense) scene.waveArtAtBoot = needsWaveArt(room.state);
+    if (eagerArt || scene.waveArtAtBoot)
+      await arena.loadRenovationActionFrames(eagerArt ? 'all' : 'wave-bosses');
+    scene.onNpc = (menu) => {
+      if (room && !ui.blocked) ui.open(menu);
+    };
+    scene.onArtError = reportArtError;
+    arenaScene = scene;
+    if (room) updateArenaSnapshot(room.state, room.sessionId);
+    scenes.push(scene, new ForestStudyScene());
+  }
+  const { default: Phaser } = await import('phaser');
+  if (disposed) return false;
+  return new Promise((resolve) => {
+    const renderer = new Phaser.Game({
+      type: Phaser.AUTO,
+      parent: 'game',
+      width: 640,
+      height: 360,
+      backgroundColor: '#304b37',
+      render: {
+        pixelArt: artPreview,
+        roundPixels: artPreview,
+        antialias: !artPreview,
+        antialiasGL: !artPreview,
+      },
+      scale: { mode: Phaser.Scale.NONE, zoom: 1 },
+      scene: scenes,
+      input: { keyboard: false, mouse: true, touch: false },
+      audio: { noAudio: true },
+    });
+    game = renderer;
+    if (inputTiming)
+      renderer.events.on(Phaser.Core.Events.POST_RENDER, () => {
+        inputTiming.render(
+          arenaScene?.localFrame(),
+          room?.state.players.get(room.sessionId)?.pose,
+        );
+      });
+    renderer.events.once(Phaser.Core.Events.READY, () => {
+      fit();
+      renderer.canvas.tabIndex = 0;
+      const scene = arenaScene;
+      if (!scene || scene.presentationReady) resolve(true);
+      else
+        scene.events.once(Phaser.Scenes.Events.CREATE, () => {
+          resolve(scene.presentationReady);
+        });
+    });
+  });
+}
+function startRenderer(): Promise<boolean> {
+  return (rendererReady ??= bootRenderer()
+    .catch((error: unknown) => {
+      console.error(error);
+      return false;
+    })
+    .then((ready) => {
+      if (ready) syncMatchRender();
+      else {
+        rendererReady = undefined;
+        if (room)
+          pregame.fail(
+            'Không tải được hình ảnh trận đấu. Hãy thử xác nhận lại.',
+          );
+      }
+      return ready;
+    }));
+}
 // Approved renovation art renders at native screen density in the normal match.
 // Resize the world viewport with its HUD overlays inside it.
 let reviewScaleOverride: number | undefined;
 const fit = (): void => {
-  if (!game.isBooted) return;
+  if (!game?.isBooted) return;
   const host = element('#game');
   const zoom =
     !artPreview || runtimeArtGallery
@@ -175,36 +277,20 @@ const fit = (): void => {
   // NONE-mode resize at zoom 1 retains the previous CSS dimensions in Phaser
   // 4.2.1. Apply zoom after the new base size so CSS size and input bounds agree.
   game.scale.setZoom(zoom);
-  if (animationReview) animationReviewGallery.setDisplayScale(zoom);
-};
-animationReviewGallery.onDisplayScale = (zoom) => {
-  reviewScaleOverride = zoom;
-  fit();
+  animationReviewGallery?.setDisplayScale(zoom);
 };
 const usePregameRenderPause =
   !artPreview &&
   new URLSearchParams(location.search).get('runtimeArtReview') !== '1';
 function syncMatchRender(): void {
-  if (!usePregameRenderPause || !arenaScene.presentationReady) return;
+  if (!game || !usePregameRenderPause || !arenaScene?.presentationReady) return;
   if (pregame.node.hidden || room?.state.phase === 'VICTORY') game.resume();
   else game.pause();
 }
-game.events.once(Phaser.Core.Events.READY, () => {
-  fit();
-  if (!usePregameRenderPause) return;
-  if (arenaScene.presentationReady) syncMatchRender();
-  else arenaScene.events.once(Phaser.Scenes.Events.CREATE, syncMatchRender);
-});
 const observer = new ResizeObserver(fit);
 observer.observe(element('#game'));
-fit();
-arenaScene.onNpc = (menu) => {
-  if (room && !ui.blocked) {
-    ui.open(menu);
-  }
-};
 ui.onStudy = (enabled) => {
-  if (artPreview || !game.isBooted) return;
+  if (artPreview || !game?.isBooted) return;
   if (enabled) {
     game.scene.sleep('Arena');
     game.scene.start('ForestStudy');
@@ -217,6 +303,15 @@ const client = new Client(
   import.meta.env['VITE_SERVER_URL'] ?? 'http://localhost:2567',
 );
 let room: Room<MatchRoom> | undefined;
+function updateArenaSnapshot(
+  state: NonNullable<typeof room>['state'],
+  id: string,
+): void {
+  arenaScene?.setSnapshot(
+    ['IN_GAME', 'DEFEAT', 'VICTORY'].includes(state.phase) ? state : undefined,
+    id,
+  );
+}
 let sequence = 0;
 const events: CombatEvent[] = [];
 const skillPreview = new SkillPreview(
@@ -283,7 +378,9 @@ function send(command: Command): void {
     sequence: ++sequence,
     protocolVersion: PROTOCOL_VERSION,
   } as InputMessage;
+  inputTiming?.input(command, payload.sequence, arenaScene?.localFrame());
   room.send('input', payload);
+  if (command.kind === 'move') arenaScene?.moveLocal(command.x, command.y);
 }
 const unbindInput = bindGameplayInput(
   send,
@@ -294,6 +391,7 @@ const unbindInput = bindGameplayInput(
     !artPreview,
   () =>
     ui.blocked ||
+    !arenaScene?.zoneReady ||
     ((room?.state?.players?.get(room.sessionId)?.hp ?? 0) <= 0 &&
       !room?.state?.players?.get(room.sessionId)?.bossSpectator),
   () => {
@@ -316,7 +414,7 @@ const unbindInput = bindGameplayInput(
   (resource) => ui.usePotion(resource),
   {
     active: () => !!room?.state?.players?.get(room.sessionId)?.bossSpectator,
-    pan: (x, y) => arenaScene.panSpectator(x, y),
+    pan: (x, y) => arenaScene?.panSpectator(x, y),
   },
   (key) => namDeHud.capture(key),
   () => {
@@ -371,13 +469,22 @@ async function connect(existing: boolean): Promise<void> {
     joined.reconnection.enabled = true;
     room = joined;
     sequence = 0;
+    inputTiming?.reset();
     events.length = 0;
     status.textContent = 'Connected';
     ui.connected(joined.roomId, joined.sessionId);
     controls(true);
     let previousZone = 'arena';
+    let rendererRequested = false;
     const syncJoinedState = (state: typeof joined.state) => {
       if (room === joined) {
+        inputTiming?.patch(
+          state.players.get(joined.sessionId)?.lastSequence ?? 0,
+        );
+        if (!rendererRequested) {
+          rendererRequested = true;
+          void startRenderer();
+        }
         syncMatchMusic(state.phase === 'IN_GAME');
         chuHud.sync(state, joined.sessionId);
         namDeHud.sync(state, joined.sessionId);
@@ -393,18 +500,17 @@ async function connect(existing: boolean): Promise<void> {
         syncMatchRender();
         if (wasChoosing && pregame.node.hidden && state.phase === 'IN_GAME')
           document.querySelector<HTMLCanvasElement>('#game canvas')?.focus();
-        arenaScene.setSnapshot(
-          ['IN_GAME', 'DEFEAT', 'VICTORY'].includes(state.phase)
-            ? state
-            : undefined,
-          joined.sessionId,
-        );
+        updateArenaSnapshot(state, joined.sessionId);
         ui.refresh(state);
         skillPreview.update(state, joined.sessionId);
         creepPreview.update(state, joined.sessionId);
       }
     };
     joined.onStateChange(syncJoinedState);
+    if (inputTiming)
+      joined.onMessage('input-timing', (sample) => {
+        if (room === joined) inputTiming.server(sample);
+      });
     joined.onMessage('dungeon-menu', () => {
       if (room === joined) ui.open('dungeons');
     });
@@ -426,7 +532,7 @@ async function connect(existing: boolean): Promise<void> {
         return;
       events.push(parsedEvent.data);
       if (events.length > 60) events.shift();
-      arenaScene.combat(parsedEvent.data);
+      arenaScene?.combat(parsedEvent.data);
     });
     joined.onMessage('command-rejected', (payload: unknown) => {
       const rejected = rejectionSchema.safeParse(payload);
@@ -451,12 +557,13 @@ async function connect(existing: boolean): Promise<void> {
     });
     joined.onDrop(() => {
       if (room !== joined) return;
+      pendingEntry = undefined;
       creepPreview.hide();
       namDeHud.sync(undefined, '');
       tamLienHud.sync(undefined, '');
       ui.reconnecting = true;
       window.dispatchEvent(new Event('volam:controls-blocked'));
-      arenaScene.setSnapshot(undefined);
+      arenaScene?.setSnapshot(undefined);
       ui.notify('Mất kết nối · Đang kết nối lại…');
     });
     joined.onReconnect(() => {
@@ -466,6 +573,7 @@ async function connect(existing: boolean): Promise<void> {
     });
     joined.onLeave((code) => {
       if (room !== joined) return;
+      pendingEntry = undefined;
       syncMatchMusic(false);
       chuHud.sync(undefined, '');
       namDeHud.sync(undefined, '');
@@ -475,7 +583,7 @@ async function connect(existing: boolean): Promise<void> {
         `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`,
       );
       syncMatchRender();
-      arenaScene.setSnapshot(undefined);
+      arenaScene?.setSnapshot(undefined);
       controls(false);
       ui.connected('', '');
       skillPreview.hide();
@@ -497,7 +605,47 @@ pregame.onConnect = (nickname, id) => {
   element<HTMLInputElement>('#room-id').value = id ?? '';
   void connect(!!id);
 };
-pregame.onAction = (action) => room?.send('lobby-action', action);
+let confirmingRoom: typeof room;
+pregame.onAction = (action) => {
+  const joined = room;
+  if (!joined) return;
+  if (
+    action.action !== 'confirm' ||
+    (arenaScene?.presentationReady &&
+      (!needsWaveArt?.(joined.state) || arenaScene.hasArt('wave-bosses')))
+  ) {
+    joined.send('lobby-action', action);
+    return;
+  }
+  if (confirmingRoom === joined) return;
+  const hero = joined.state.players.get(joined.sessionId);
+  const school = hero?.schoolId;
+  const branch = hero?.selectedBranch;
+  confirmingRoom = joined;
+  pregame.setArtLoading(true);
+  void startRenderer()
+    .then(async (ready) => {
+      if (!ready || room !== joined) return;
+      if (needsWaveArt?.(joined.state))
+        await arenaScene?.prepareArt('wave-bosses');
+      const current = joined.state.players.get(joined.sessionId);
+      if (
+        room === joined &&
+        current?.schoolId === school &&
+        current?.selectedBranch === branch &&
+        current?.connected &&
+        !current.confirmed
+      )
+        joined.send('lobby-action', action);
+    })
+    .catch((error) => {
+      if (room === joined) reportArtError(error);
+    })
+    .finally(() => {
+      if (confirmingRoom === joined) confirmingRoom = undefined;
+      if (room === joined) pregame.setArtLoading(false);
+    });
+};
 pregame.onLeave = () => void room?.leave();
 ui.onBuild = (change) => {
   const hero = room?.state.players.get(room.sessionId);
@@ -530,7 +678,48 @@ ui.onLeave = () => {
 ui.onBasic = (id) => send({ kind: 'select-basic', id });
 ui.onLoadout = (ids) => send({ kind: 'dev-loadout', ids });
 window.addEventListener('click', () => chuHud.inventory());
-ui.onLoiDai = (action) => {
+const enterWithArt = (pack: DeferredArtPack, enter: () => void) => {
+  const joined = room;
+  const origin = joined?.state.players.get(joined.sessionId)?.zoneId;
+  if (!joined || !origin || !arenaScene) return;
+  if (arenaScene.hasArt(pack)) {
+    pendingEntry = undefined;
+    enter();
+    return;
+  }
+  if (pendingEntry?.room === joined && pendingEntry.pack === pack) return;
+  const entry = { room: joined, pack };
+  pendingEntry = entry;
+  ui.notify('Đang tải hình ảnh khu vực…');
+  void arenaScene
+    .prepareArt(pack)
+    .then(() => {
+      if (
+        pendingEntry === entry &&
+        room === joined &&
+        joined.state.players.get(joined.sessionId)?.zoneId === origin
+      )
+        enter();
+    })
+    .catch((error) => {
+      if (room === joined) reportArtError(error);
+    })
+    .finally(() => {
+      if (pendingEntry === entry) pendingEntry = undefined;
+    });
+};
+let pendingEntry:
+  { room: NonNullable<typeof room>; pack: DeferredArtPack } | undefined;
+function reportArtError(error: unknown): void {
+  console.error(error);
+  ui.notify('Không tải được hình ảnh khu vực. Vui lòng thử lại.');
+}
+ui.onDestinationPreview = (pack) => {
+  void arenaScene?.prepareArt(pack).catch(() => {
+    // The enter action reports errors and can retry a failed prefetch.
+  });
+};
+const sendLoiDai = (action: 'enter' | 'exit') => {
   if (!room || ui.reconnecting || room.state.phase !== 'IN_GAME') return;
   room.send('loi-dai-action', {
     action,
@@ -538,11 +727,26 @@ ui.onLoiDai = (action) => {
     protocolVersion: PROTOCOL_VERSION,
   });
 };
-ui.onDungeonEnter = (access, destination) =>
-  dungeonAction({ action: 'enter', access, destination });
+ui.onLoiDai = (action) => {
+  if (action === 'enter') enterWithArt('loi_dai', () => sendLoiDai(action));
+  else sendLoiDai(action);
+};
+ui.onDungeonEnter = (access, destination) => {
+  enterWithArt(destination, () => {
+    dungeonAction({ action: 'enter', access, destination });
+    if (isBossDestination(destination) && (room?.state.players.size ?? 0) > 1)
+      ui.bossParty.help();
+  });
+};
 ui.bossParty.onSummon = () => dungeonAction({ action: 'summon-help' });
-ui.bossParty.onReply = (invitationId, accept) =>
-  dungeonAction({ action: 'reply-invitation', invitationId, accept });
+ui.bossParty.onInvitation = ui.onDestinationPreview;
+ui.bossParty.onReply = ({ id: invitationId, destination }, accept) => {
+  const reply = () =>
+    dungeonAction({ action: 'reply-invitation', invitationId, accept });
+  if (accept && isBossDestination(destination))
+    enterWithArt(destination, reply);
+  else reply();
+};
 // Explicit evidence and presentation review only; no authoritative mutation bridge.
 if (new URLSearchParams(location.search).has('debug') || artPreview) {
   Object.defineProperty(window, '__VOLAM__', {
@@ -551,13 +755,13 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
       ...(new URLSearchParams(location.search).get('visualReview') === '1'
         ? {
             reviewVisualStyle: (polished: boolean) =>
-              arenaScene.reviewVisualStyle(polished),
+              arenaScene?.reviewVisualStyle(polished),
           }
         : {}),
       ...(import.meta.env.VITE_KIM_FRAME_TEST
         ? {
             reviewKim: (bundle: string, clip: string) =>
-              arenaScene.reviewKim(bundle, clip),
+              arenaScene?.reviewKim(bundle, clip),
           }
         : {}),
       reviewChu: (
@@ -566,17 +770,18 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
         x: number,
         y: number,
         ms: number,
-      ) => arenaScene.reviewChu(bundle, tag, x, y, ms),
+      ) => arenaScene?.reviewChu(bundle, tag, x, y, ms),
       snapshot: () => ({
         sessionId: room?.sessionId,
         roomId: room?.roomId,
         state: room?.state?.toJSON(),
         events: events.map((event) => ({ ...event })),
       }),
+      ...(inputTiming ? { inputTiming: () => inputTiming.inspect() } : {}),
       // Read-only evidence hook: capture after the GPU has drawn the inspected
       // frame, rather than pairing a new pose with the previous canvas buffer.
       afterRender: (inspect: () => void) => {
-        game.events.once(Phaser.Core.Events.POST_RENDER, inspect);
+        game?.events.once('postrender', inspect);
       },
       ...(runtimeArtGallery
         ? {
@@ -622,18 +827,19 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
             },
             galleryCast: (active: boolean, slot = 0) =>
               send(active ? { kind: 'cast', slot } : { kind: 'basic' }),
-            galleryClearEffects: () => arenaScene.reviewClearTransientEffects(),
+            galleryClearEffects: () =>
+              arenaScene?.reviewClearTransientEffects(),
           }
         : {}),
-      progressionPresentation: () => arenaScene.inspectProgression(),
+      progressionPresentation: () => arenaScene?.inspectProgression(),
       presentation: () =>
         animationReview
-          ? animationReviewGallery.inspect()
+          ? animationReviewGallery?.inspect()
           : thienSonSkillReview
-            ? thienSonSkillGallery.inspect()
+            ? thienSonSkillGallery?.inspect()
             : artPreview
-              ? gallery.inspect()
-              : arenaScene.inspect(),
+              ? gallery?.inspect()
+              : arenaScene?.inspect(),
       ...(new URLSearchParams(location.search).get('feedbackArtReview') === '1'
         ? {
             // Explicit presentation-only renderer fixture: no command or state mutation.
@@ -642,14 +848,16 @@ if (new URLSearchParams(location.search).has('debug') || artPreview) {
               tag: string,
               x: number,
               y: number,
-            ) => arenaScene.reviewFeedback(asset, tag, x, y),
+            ) => arenaScene?.reviewFeedback(asset, tag, x, y),
           }
         : {}),
     }),
   });
 }
+if (eagerArt) void startRenderer();
 if (import.meta.hot)
   import.meta.hot.dispose(() => {
+    disposed = true;
     syncMatchMusic(false);
     matchMusic?.remove();
     void room?.leave();
@@ -659,5 +867,5 @@ if (import.meta.hot)
     ui.destroy();
     skillPreview.destroy();
     observer.disconnect();
-    game.destroy(true);
+    game?.destroy(true);
   });

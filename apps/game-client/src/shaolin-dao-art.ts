@@ -82,6 +82,7 @@ export class ShaolinDaoMatchArt {
   >();
   private readonly lotusOwners = new Set<string>();
   private readonly effects = new Map<Phaser.GameObjects.Image, string>();
+  private readonly crescents = new Map<string, Phaser.GameObjects.Image>();
 
   constructor(private readonly scene: Phaser.Scene) {}
 
@@ -113,6 +114,37 @@ export class ShaolinDaoMatchArt {
         player?.zoneId === zone && player.hp > 0 && player.basicId === basic
       );
     };
+    for (const [id, crescent] of this.crescents) {
+      const shot = state.projectiles.get(id);
+      if (shot?.zoneId === zone && visible(shot.ownerId)) continue;
+      this.crescents.delete(id);
+      this.remove(crescent);
+    }
+    for (const [id, shot] of state.projectiles) {
+      if (
+        shot.abilityId !== basic ||
+        shot.zoneId !== zone ||
+        !visible(shot.ownerId) ||
+        !usesShaolinDaoArt(this.scene, state, shot.ownerId)
+      )
+        continue;
+      const y = shot.y - 37 * shaolinDaoScale;
+      let crescent = this.crescents.get(id);
+      if (!crescent) {
+        crescent = this.add('crescent', shot.ownerId, shot.x, y, shot.y + 1);
+        this.crescents.set(id, crescent);
+      }
+      const mirror = shot.vx < 0;
+      crescent
+        .setPosition(shot.x, y)
+        .setFlipX(mirror)
+        .setRotation(
+          mirror
+            ? Math.atan2(-shot.vy, -shot.vx)
+            : Math.atan2(shot.vy, shot.vx),
+        );
+      if (crescent.depth !== shot.y + 1) crescent.setDepth(shot.y + 1);
+    }
     this.lotusOwners.clear();
     state.areas.forEach((area) => {
       if (
@@ -218,71 +250,53 @@ export class ShaolinDaoMatchArt {
       !(isTruTa && event.kind === 'cast')
     )
       return false;
-    const [dx, dy] = vectors[direction];
     this.strikes.set(event.sourceId, {
       end: this.scene.time.now + (isBasic ? 180 : 285),
       ability: event.abilityId,
       direction,
     });
+    if (isBasic) return true;
+    const [dx, dy] = vectors[direction];
     const { x, y } = point;
     const scale = shaolinDaoScale;
-    if (isBasic) {
-      const crescent = this.add(
-        'crescent',
+    const layout = shaolinDaoSweep;
+    const arhat = this.add(
+      'arhat',
+      event.sourceId,
+      x - dx * layout.arhatBackX * scale,
+      y - (layout.arhatLift + dy * layout.arhatBackY) * scale,
+      y - 1,
+    )
+      .setOrigin(0.5, 1)
+      .setFlipX(dx < 0);
+    const angle = Math.atan2(event.fy ?? 0, event.fx ?? 1);
+    const forwardX = Math.cos(angle);
+    const forwardY = Math.sin(angle);
+    const mirror = forwardX < -0.0001;
+    const radius = event.radius ?? 0;
+    if (radius > 0) {
+      // Fit the actual bright edge to the cast radius published by the server.
+      // Ground placement uses the accepted cast origin, not interpolated feet.
+      const sweepScale = radius / (layout.frontX + sweepTipFromCenter);
+      const sweep = this.add(
+        'sweep',
         event.sourceId,
-        x + dx * 55 * scale,
-        y + (dy * 55 - 37) * scale,
-        y + 1,
-      );
-      crescent.setFlipX(dx < 0).setRotation(dy * Math.PI * 0.5);
-      // The server still resolves the original A hit. This flight is presentation.
-      this.scene.tweens.add({
-        targets: crescent,
-        x: crescent.x + dx * 235 * scale,
-        y: crescent.y + dy * 235 * scale,
-        duration: 470,
-        onComplete: () => this.remove(crescent),
-      });
-    } else {
-      const layout = shaolinDaoSweep;
-      const arhat = this.add(
-        'arhat',
-        event.sourceId,
-        x - dx * layout.arhatBackX * scale,
-        y - (layout.arhatLift + dy * layout.arhatBackY) * scale,
-        y - 1,
+        event.x + forwardX * layout.frontX * sweepScale,
+        event.y + forwardY * layout.frontX * sweepScale - layout.lift * scale,
+        y + 2,
       )
-        .setOrigin(0.5, 1)
-        .setFlipX(dx < 0);
-      const angle = Math.atan2(event.fy ?? 0, event.fx ?? 1);
-      const forwardX = Math.cos(angle);
-      const forwardY = Math.sin(angle);
-      const mirror = forwardX < -0.0001;
-      const radius = event.radius ?? 0;
-      if (radius > 0) {
-        // Fit the actual bright edge to the cast radius published by the server.
-        // Ground placement uses the accepted cast origin, not interpolated feet.
-        const sweepScale = radius / (layout.frontX + sweepTipFromCenter);
-        const sweep = this.add(
-          'sweep',
-          event.sourceId,
-          event.x + forwardX * layout.frontX * sweepScale,
-          event.y + forwardY * layout.frontX * sweepScale - layout.lift * scale,
-          y + 2,
-        )
-          .setScale(sweepScale)
-          .setFlipX(mirror)
-          .setRotation(mirror ? Math.atan2(-forwardY, -forwardX) : angle);
-        this.fade(sweep, 120, 260);
-      }
-      this.scene.tweens.add({
-        targets: arhat,
-        x: arhat.x + dx * 12 * scale,
-        y: arhat.y + dy * 8 * scale,
-        duration: 140,
-      });
-      this.fade(arhat, 150, 330);
+        .setScale(sweepScale)
+        .setFlipX(mirror)
+        .setRotation(mirror ? Math.atan2(-forwardY, -forwardX) : angle);
+      this.fade(sweep, 120, 260);
     }
+    this.scene.tweens.add({
+      targets: arhat,
+      x: arhat.x + dx * 12 * scale,
+      y: arhat.y + dy * 8 * scale,
+      duration: 140,
+    });
+    this.fade(arhat, 150, 330);
     return true;
   }
 
@@ -323,6 +337,7 @@ export class ShaolinDaoMatchArt {
 
   clear(): void {
     for (const sprite of this.effects.keys()) this.remove(sprite);
+    this.crescents.clear();
     this.strikes.clear();
     this.casts.clear();
     this.lotusOwners.clear();
@@ -334,6 +349,7 @@ export class ShaolinDaoMatchArt {
       frame: sprite.frame.name,
       x: sprite.x,
       y: sprite.y,
+      rotation: sprite.rotation,
       depth: sprite.depth,
       scale: sprite.scaleX,
     }));

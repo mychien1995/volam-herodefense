@@ -1,50 +1,58 @@
 import { z } from 'zod';
 import raw from './skill-art.json' with { type: 'json' };
-const pair = z.tuple([z.number().finite(), z.number().finite()]);
-const animation = z
-  .object({
-    name: z.string().min(1),
-    frames: z.array(z.string()).min(1),
-    frameDimensions: pair,
-    frameCount: z.number().int().positive(),
-    frameRate: z.number().positive(),
-    repeat: z.number().int().min(-1),
-    direction: z.enum(['right', 'down', 'left', 'up', 'none']),
-    origin: pair,
-    stage: z.string(),
-    placement: z.string(),
-    effectPlacementOffset: pair,
-  })
-  .superRefine((a, c) => {
-    if (a.frames.length !== a.frameCount)
-      c.addIssue({ code: 'custom', message: 'Animation frame count mismatch' });
-  });
-export const skillArtSchema = z
-  .object({
-    assets: z
-      .array(
-        z.object({
-          id: z.string(),
-          skillId: z.string(),
-          kind: z.enum(['character', 'vfx']),
-          sheet: z.string().endsWith('.png'),
-          atlas: z.string().endsWith('.json'),
-          frameDimensions: pair,
-          origin: pair,
-          displayScale: z.number().int().min(1).max(4).default(1),
-          animations: z.array(animation).min(1),
-        }),
-      )
-      .min(21),
-  })
-  .superRefine((m, c) => {
-    const keys = m.assets.flatMap((a) =>
-      a.animations.map((t) => `${a.id}:${t.name}`),
-    );
-    if (new Set(keys).size !== keys.length)
-      c.addIssue({ code: 'custom', message: 'Duplicate animation key' });
-  });
-export const skillArt = skillArtSchema.parse(raw);
+import rawIconSchools from './skill-icon-schools.json' with { type: 'json' };
+
+// Keep schema and atlas metadata out of consumers that only render skill icons.
+export const skillArtSchema = /* @__PURE__ */ (() => {
+  const pair = z.tuple([z.number().finite(), z.number().finite()]);
+  const animation = z
+    .object({
+      name: z.string().min(1),
+      frames: z.array(z.string()).min(1),
+      frameDimensions: pair,
+      frameCount: z.number().int().positive(),
+      frameRate: z.number().positive(),
+      repeat: z.number().int().min(-1),
+      direction: z.enum(['right', 'down', 'left', 'up', 'none']),
+      origin: pair,
+      stage: z.string(),
+      placement: z.string(),
+      effectPlacementOffset: pair,
+    })
+    .superRefine((a, c) => {
+      if (a.frames.length !== a.frameCount)
+        c.addIssue({
+          code: 'custom',
+          message: 'Animation frame count mismatch',
+        });
+    });
+  return z
+    .object({
+      assets: z
+        .array(
+          z.object({
+            id: z.string(),
+            skillId: z.string(),
+            kind: z.enum(['character', 'vfx']),
+            sheet: z.string().endsWith('.png'),
+            atlas: z.string().endsWith('.json'),
+            frameDimensions: pair,
+            origin: pair,
+            displayScale: z.number().int().min(1).max(4).default(1),
+            animations: z.array(animation).min(1),
+          }),
+        )
+        .min(21),
+    })
+    .superRefine((m, c) => {
+      const keys = m.assets.flatMap((a) =>
+        a.animations.map((t) => `${a.id}:${t.name}`),
+      );
+      if (new Set(keys).size !== keys.length)
+        c.addIssue({ code: 'custom', message: 'Duplicate animation key' });
+    });
+})();
+export const skillArt = /* @__PURE__ */ skillArtSchema.parse(raw);
 export type SkillArtComponent = (typeof skillArt.assets)[number];
 export type SkillAnimation = SkillArtComponent['animations'][number];
 export const skillAnimationKey = (asset: string, tag: string) =>
@@ -65,6 +73,7 @@ const caiBangIcons = new Set([
   'tieu_dieu_cong',
 ]);
 export function skillIcon(id: string): string {
+  const iconSchools: Readonly<Record<string, string>> = rawIconSchools;
   if (id === 'luu_phong_bo')
     return '/assets/skills/thien-son/skill-review-2026-11-09/bao-vu-cuong-phong-icon.png';
   if (caiBangIcons.has(id))
@@ -77,23 +86,17 @@ export function skillIcon(id: string): string {
   if (
     id.startsWith('thieu_lam_') ||
     id === 'dich_can_kinh' ||
-    skillArt.assets.some(
-      (a) => a.skillId === id && a.sheet.includes('/thieu-lam/'),
-    )
+    iconSchools[id] === 'thieu-lam'
   )
     return `/assets/skills/thieu-lam/${id}/icon.png`;
   if (
     id.startsWith('vo_dang_') ||
     id === 'thai_cuc_tam_phap' ||
-    skillArt.assets.some(
-      (a) => a.skillId === id && a.sheet.includes('/vo-dang/'),
-    )
+    iconSchools[id] === 'vo-dang'
   )
     return `/assets/skills/vo-dang/${id}/icon.png`;
   const school =
-    skillArt.assets.some(
-      (a) => a.skillId === id && a.sheet.includes('/thien-son/'),
-    ) ||
+    iconSchools[id] === 'thien-son' ||
     id.startsWith('thien_son_') ||
     id === 'bac_minh_than_cong'
       ? 'thien-son'

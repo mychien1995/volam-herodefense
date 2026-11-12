@@ -2,6 +2,11 @@ import type { Ability } from '@volam/game-core';
 import { m3dFeedbackTuning } from './m3d-feedback-tuning.js';
 const feedback = m3dFeedbackTuning.caiBang;
 export const caiBangBongBeatTicks = 8;
+export const caiBangChuongBasicTuning = {
+  range: 320,
+  cooldownTicks: 18,
+  minIntervalTicks: 5,
+} as const;
 /** M3A rank-1 test tuning. Mechanics/names canonical; numeric balance remains provisional. */
 export const caiBangExtraSkills: Ability[] = [
   {

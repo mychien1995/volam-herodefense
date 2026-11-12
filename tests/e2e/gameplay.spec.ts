@@ -140,7 +140,7 @@ test('Cai Bang Bong keeps the renovated sprite on a replicated enemy hit', async
       );
     }, sessionId);
     expect(await reaction.jsonValue()).toMatchObject({
-      texture: 'renovated-hero_cai_bang',
+      texture: 'renovated-bong-combo-body',
       frame: 'idle_right_0',
       scale: [0.5, 0.5],
     });

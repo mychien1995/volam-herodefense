@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import { renovationActionsEnabled } from './renovation-actions.js';
+import { trackLegacyVfx } from './legacy-vfx-visibility.js';
+import { renovationActionsEnabled } from './renovation-policy.js';
 import { renovatedSevenStarCues } from './renovation-sword-layout.js';
 import {
   renovatedSkillComponents,
@@ -134,6 +135,7 @@ export class ApprovedSkillVfx {
       .setOrigin(...tag.origin)
       .setScale(cue.scale ?? 1)
       .setVisible(false);
+    trackLegacyVfx(sprite);
     return { cue, sprite, tag };
   }
   private start(

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { queueArtPack } from './queue-art-pack.js';
 import type { ArenaCreepArt } from './arena-creeps.js';
 import type { DesertManifest } from './desert-art.js';
 export interface BeachManifest extends DesertManifest {}
@@ -16,7 +17,7 @@ export function beachCreepArt(
   return art;
 }
 export function preloadBeachArt(scene: Phaser.Scene): void {
-  scene.load.pack('beach_pack', '/assets/beach/pack.json');
+  queueArtPack(scene, 'beach_pack', '/assets/beach/pack.json');
   scene.load.image('beach_terrain', '/assets/beach/terrain.png');
   scene.load.atlas(
     'beach_scenery',

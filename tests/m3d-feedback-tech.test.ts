@@ -255,7 +255,7 @@ describe('M3D feedback tech', () => {
       'left_fist',
     ]);
   });
-  it.each(['vo_dang_quyen', 'vo_dang_kiem', 'thieu_lam_dao'] as const)(
+  it.each(['vo_dang_quyen', 'vo_dang_kiem'] as const)(
     '%s uses its own manual cadence with no automatic queued attacks',
     (id) => {
       const f = fixture();

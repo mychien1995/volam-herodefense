@@ -306,19 +306,6 @@ export class RenovationFollowup {
             observed.set(key, values);
           }
         }
-    for (const o of this.scene.children.list) {
-      const im = o as Phaser.GameObjects.Image;
-      if (!im.texture) continue;
-      const key = im.texture.key;
-      if (
-        ['khang_long_huu_hoi_vfx', 'm3d_khang_long_huu_hoi_vfx'].includes(
-          key,
-        ) ||
-        /b3_pha_giap_vfx|m3d_pha_giap_bong_vfx/.test(key) ||
-        (key === 'bong_controls_v2_ground' && /pha_giap/.test(im.name))
-      )
-        im.setVisible(false);
-    }
   }
   clear() {
     for (const f of this.flashes) f.image.destroy();

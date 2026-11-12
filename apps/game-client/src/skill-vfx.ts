@@ -1,4 +1,8 @@
 import Phaser from 'phaser';
+import {
+  hideReplacedLegacyVfx,
+  trackLegacyVfx,
+} from './legacy-vfx-visibility.js';
 import { caiBangBongArtEnabled } from './bong-combo-review-art.js';
 import { bongNhamTrieu } from './bong-skill-review-art.js';
 import {
@@ -235,6 +239,7 @@ export class SkillVfx {
     });
     this.played.add(skillAnimationKey(asset, tag.name));
     const view = { sprite, tag, ownerId };
+    trackLegacyVfx(sprite);
     this.place(view, x, y);
     sprite.on(Phaser.Animations.Events.ANIMATION_UPDATE, () => {
       this.frameObservations.add(`${asset}:${String(sprite.frame.name)}`);
@@ -935,6 +940,7 @@ export class SkillVfx {
     this.renovated.sync(state, zoneId, renderPosition);
     this.revision.sync(state, zoneId, renderPosition);
     this.followup.sync(state, zoneId, renderPosition);
+    hideReplacedLegacyVfx(this.scene);
   }
   castPresentation(
     id: string,

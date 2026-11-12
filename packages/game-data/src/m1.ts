@@ -11,6 +11,7 @@ import type { SimulationConfig } from '@volam/game-core';
 import { arena } from './arena.js';
 import {
   caiBangBongBeatTicks,
+  caiBangChuongBasicTuning,
   caiBangExtraSkills,
   caiBangPassive,
 } from './cai-bang.js';
@@ -174,15 +175,15 @@ const initialConfig: SimulationConfig = simulationConfigSchema.parse({
     cai_bang_chuong: {
       id: 'cai_bang_chuong',
       nameVi: 'Cái Bang Chưởng',
-      cooldownTicks: 18,
+      cooldownTicks: caiBangChuongBasicTuning.cooldownTicks,
       manaCost: 0,
-      minIntervalTicks: 5,
+      minIntervalTicks: caiBangChuongBasicTuning.minIntervalTicks,
       basicCombo: Array.from({ length: 6 }, (_, i) => ({
         stage: i === 5 ? 'dragon' : 'palm',
         damageMultiplier: i === 5 ? 1.25 : 1,
         splashRadius: i === 5 ? 48 : 0,
       })),
-      effect: shot,
+      effect: { ...shot, range: caiBangChuongBasicTuning.range },
     },
   },
   skills: [

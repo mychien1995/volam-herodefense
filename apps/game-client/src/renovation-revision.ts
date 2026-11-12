@@ -469,29 +469,6 @@ export class RenovationRevision {
         im.destroy();
         this.fields.delete(id);
       }
-    for (const o of this.scene.children.list) {
-      const im = o as Phaser.GameObjects.Image;
-      if (!im.texture) continue;
-      const k = im.texture.key,
-        n = String(im.frame.name),
-        name = im.name;
-      const replacedProjectile =
-        [
-          'hoa_van_chuong',
-          'phi_long_tai_thien',
-          'hang_long_hoa_vu',
-          'truy_hon_dao',
-        ]
-          .filter((s) => !renovationFollowupEnabled() || s !== 'hoa_van_chuong')
-          .some((s) => name === 'feedback-v2:' + s) &&
-        k.endsWith('_projectile');
-      if (
-        replacedProjectile ||
-        /^review3_r3_crescent_/.test(k) ||
-        (k === 'la_han_quyen_vfx' && /^(guard|ending)/.test(n))
-      )
-        im.setVisible(false);
-    }
   }
   clear() {
     for (const f of this.flashes) f.image.destroy();

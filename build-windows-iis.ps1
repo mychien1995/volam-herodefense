@@ -21,7 +21,7 @@ function Invoke-Pnpm {
 
 $repo = (Resolve-Path -LiteralPath $PSScriptRoot).Path
 $gameHost = 'hero-defense.stackfolio.cloud'
-$gameUrl = "https://$gameHost"
+$gameUrl = "http://$gameHost"
 $packageManager = (Get-Content -LiteralPath (Join-Path $repo 'package.json') -Raw | ConvertFrom-Json).packageManager
 $node = Get-Command node.exe -ErrorAction Stop
 $python = Get-Command python.exe -ErrorAction Stop
@@ -37,6 +37,7 @@ $archive = Join-Path $artifactDir 'volam-hero-defense-windows-iis.zip'
 $client = Join-Path $stage 'client'
 $server = Join-Path $stage 'server'
 $previousEndpoint = [Environment]::GetEnvironmentVariable('VITE_SERVER_URL', 'Process')
+$previousPublicDir = [Environment]::GetEnvironmentVariable('VOLAM_RUNTIME_PUBLIC_DIR', 'Process')
 
 Push-Location -LiteralPath $repo
 try {
@@ -51,6 +52,8 @@ try {
     Write-Host "Building game for $gameUrl..."
     $env:VITE_SERVER_URL = "$gameUrl/game-api"
     Invoke-Pnpm @('assets:prepare')
+    Invoke-Checked $node.Source @('scripts/stage-runtime-assets.mjs', $stage)
+    $env:VOLAM_RUNTIME_PUBLIC_DIR = Join-Path $stage 'runtime-public'
     Invoke-Pnpm @('exec', 'tsc', '-b')
     Invoke-Pnpm @('--filter', '@volam/game-client', 'build', '--outDir', $client)
 
@@ -58,10 +61,13 @@ try {
     if ($builtEndpoint -cne $env:VITE_SERVER_URL) {
         throw "Unexpected endpoint in client build: $builtEndpoint"
     }
-    foreach ($previewPage in @('bac-cai-preview.html', 'renovation-preview.html', 'visual-upgrade-2.html')) {
-        $preview = Join-Path $client $previewPage
-        if (Test-Path -LiteralPath $preview -PathType Leaf) {
-            Remove-Item -LiteralPath $preview
+    $gameEntry = Join-Path $client 'index.html'
+    if (!(Test-Path -LiteralPath $gameEntry -PathType Leaf)) {
+        throw 'The client build is missing index.html.'
+    }
+    foreach ($page in Get-ChildItem -LiteralPath $client -Filter '*.html' -File -Recurse -Force) {
+        if ($page.FullName -ne $gameEntry) {
+            Remove-Item -LiteralPath $page.FullName
         }
     }
 
@@ -160,7 +166,7 @@ console.log(`Verified ${installed.size} runtime packages against the installed d
         throw "Server packaging failed with exit code $LASTEXITCODE."
     }
 
-    @'
+    $iisConfig = @'
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
   <system.webServer>
@@ -177,7 +183,15 @@ console.log(`Verified ${installed.size} runtime packages against the installed d
       <mimeMap fileExtension=".tmj" mimeType="application/json" />
     </staticContent>
     <rewrite>
+__VOLAM_RASTER_MAP__
       <rules>
+        <rule name="Volam canonical raster" stopProcessing="true">
+          <match url="^assets/.*\.png$" />
+          <conditions>
+            <add input="{VolamRasterAliases:{R:0}}" pattern="^(.+)$" />
+          </conditions>
+          <action type="Rewrite" url="{C:1}" />
+        </rule>
         <rule name="Volam game server" stopProcessing="true">
           <match url="^game-api/(.*)$" />
           <action type="Rewrite" url="http://127.0.0.1:2567/{R:1}" appendQueryString="true" />
@@ -186,7 +200,9 @@ console.log(`Verified ${installed.size} runtime packages against the installed d
     </rewrite>
   </system.webServer>
 </configuration>
-'@ | Set-Content -LiteralPath (Join-Path $client 'web.config') -Encoding Ascii
+'@
+    $iisConfig.Replace('__VOLAM_RASTER_MAP__', (Get-Content -LiteralPath (Join-Path $stage 'runtime-assets-iis.xml') -Raw)) |
+        Set-Content -LiteralPath (Join-Path $client 'web.config') -Encoding UTF8
 
     @'
 @echo off
@@ -205,9 +221,9 @@ Vo Lam Hero Defense on Windows IIS
 2. Extract the ZIP. Keep the server folder outside the IIS site root.
 3. Run server\start-server.cmd and check http://127.0.0.1:2567/health.
 4. Enable IIS Static Content, WebSocket Protocol, URL Rewrite and ARR proxy.
-5. Point the IIS site root to the client folder. Bind HTTPS to $gameHost.
+5. Point the IIS site root to the client folder. Bind HTTP on port 80 to $gameHost.
 6. Check $gameUrl/game-api/health and join the same room from two browsers.
-7. Allow public HTTPS and keep TCP 2567 private. Use a Windows startup task
+7. Allow public TCP 80 and keep TCP 2567 private. Use a Windows startup task
    to run server\start-server.cmd across reboots.
 "@ | Set-Content -LiteralPath (Join-Path $stage 'DEPLOY.txt') -Encoding Ascii
 
@@ -218,6 +234,7 @@ Vo Lam Hero Defense on Windows IIS
     Write-Host "Deployment ZIP: $archive"
 } finally {
     [Environment]::SetEnvironmentVariable('VITE_SERVER_URL', $previousEndpoint, 'Process')
+    [Environment]::SetEnvironmentVariable('VOLAM_RUNTIME_PUBLIC_DIR', $previousPublicDir, 'Process')
     Pop-Location
     if (Test-Path -LiteralPath $stage) {
         $resolvedStage = (Resolve-Path -LiteralPath $stage).Path

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { queueArtPack } from './queue-art-pack.js';
 import type { DesertManifest } from './desert-art.js';
 export const isHellZone = (zone: string) =>
   zone === 'hell_shared' || /^hell_private_.+/.test(zone);
@@ -15,7 +16,7 @@ export function hellCreepArt(
   return asset;
 }
 export function preloadHellArt(scene: Phaser.Scene) {
-  scene.load.pack('hell_pack', '/assets/hell/pack.json');
+  queueArtPack(scene, 'hell_pack', '/assets/hell/pack.json');
   scene.load.image('hell_terrain', '/assets/hell/terrain.png');
   scene.load.atlas(
     'hell_scenery',

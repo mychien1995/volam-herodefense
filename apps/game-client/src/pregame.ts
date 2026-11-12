@@ -28,6 +28,7 @@ export class PreGame {
   private state: LobbyState | undefined;
   private rows: RoomListing[] = [];
   private busy = false;
+  private artLoading = false;
   private notice = '';
   private controlsKey = '';
   private rosterKey = '';
@@ -114,6 +115,11 @@ export class PreGame {
     this.notice = message;
     this.render();
   }
+  setArtLoading(loading: boolean) {
+    if (this.artLoading === loading) return;
+    this.artLoading = loading;
+    this.render();
+  }
   update(state: LobbyState, id: string, session: string) {
     const self = state.players.get(session);
     const host = state.players.get(state.hostId);
@@ -192,6 +198,7 @@ export class PreGame {
   }
 
   disconnected(message: string) {
+    this.artLoading = false;
     this.state = undefined;
     this.roomId = '';
     this.screen = 'browser';
@@ -278,7 +285,12 @@ export class PreGame {
               .join('') +
             '</div>'
           : '';
-        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <strong data-testid="selection-ready"></strong></p><div class="school-grid">${schools.map((s) => `<button type="button" class="school-card ${self?.schoolId === s.id ? 'selected' : ''}" data-action="school" data-school="${s.id}" aria-pressed="${self?.schoolId === s.id}" ${self?.confirmed ? 'disabled' : ''}><h3>${s.name}</h3><div role="img" aria-label="${s.name} — chân dung" class="school-portrait ${s.portrait}"></div><span class="element">${s.element}</span><p>${s.description}</p><small>${s.basics}</small></button>`).join('')}</div>${branchButtons}<p class="pre-note">${state.requiresBranch ? 'Chọn một môn phái và một nhánh. Dùng dấu + trên thanh Q W E R T để học chiêu.' : 'Cấp 1 · Có thể chọn trùng phái.'}</p>${list}<div class="pre-actions">${button('Rời phòng', 'leave')}${button(self?.confirmed ? 'Đã xác nhận' : 'Xác nhận', 'confirm', !self?.schoolId || (state.requiresBranch && !self.selectedBranch) || !!self?.confirmed)}</div><p class="pre-warning" hidden>Đang chờ người chơi mất kết nối. Không tự chọn phái hoặc bắt đầu trận. Bạn có thể rời và tạo phòng mới.</p>`;
+        const confirmLabel = self?.confirmed
+          ? 'Đã xác nhận'
+          : this.artLoading
+            ? 'Đang tải hình ảnh…'
+            : 'Xác nhận';
+        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <strong data-testid="selection-ready"></strong></p><div class="school-grid">${schools.map((s) => `<button type="button" class="school-card ${self?.schoolId === s.id ? 'selected' : ''}" data-action="school" data-school="${s.id}" aria-pressed="${self?.schoolId === s.id}" ${self?.confirmed ? 'disabled' : ''}><h3>${s.name}</h3><div role="img" aria-label="${s.name} — chân dung" class="school-portrait ${s.portrait}"></div><span class="element">${s.element}</span><p>${s.description}</p><small>${s.basics}</small></button>`).join('')}</div>${branchButtons}<p class="pre-note">${state.requiresBranch ? 'Chọn một môn phái và một nhánh. Dùng dấu + trên thanh Q W E R T để học chiêu.' : 'Cấp 1 · Có thể chọn trùng phái.'}</p>${list}<div class="pre-actions">${button('Rời phòng', 'leave')}${button(confirmLabel, 'confirm', this.artLoading || !self?.schoolId || (state.requiresBranch && !self.selectedBranch) || !!self?.confirmed)}</div><p class="pre-warning" hidden>Đang chờ người chơi mất kết nối. Không tự chọn phái hoặc bắt đầu trận. Bạn có thể rời và tạo phòng mới.</p>`;
       }
     }
     if (this.state?.devSkillLoadout)

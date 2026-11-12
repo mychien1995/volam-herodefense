@@ -1,6 +1,11 @@
 import type { BossInvitation } from '@volam/game-core';
+import type { DungeonDestination } from '@volam/game-data';
 
-const mechanisms: Record<string, [string, string[]]> = {
+type BossDestination = Extract<
+  DungeonDestination,
+  'co_mo' | 'hong_liet' | 'chu_ba_thong' | 'kim_luan'
+>;
+const mechanisms: Record<BossDestination, [string, string[]]> = {
   co_mo: [
     'Lý Mạc Sầu',
     [
@@ -34,7 +39,8 @@ const mechanisms: Record<string, [string, string[]]> = {
     ],
   ],
 };
-export const isBossDestination = (id: string): boolean => !!mechanisms[id];
+export const isBossDestination = (id: string): id is BossDestination =>
+  Object.hasOwn(mechanisms, id);
 
 /** Temporary dialogs remain inside the match viewport and never pause simulation. */
 export class BossPartyUI {
@@ -43,7 +49,8 @@ export class BossPartyUI {
   private dismissedId = 0;
   private kind: 'help' | 'invitation' | 'info' | undefined;
   onSummon = (): void => {};
-  onReply = (_id: number, _accept: boolean): void => {};
+  onReply = (_invitation: BossInvitation, _accept: boolean): void => {};
+  onInvitation = (_destination: BossDestination): void => {};
   get blocked(): boolean {
     return !!this.kind;
   }
@@ -61,7 +68,7 @@ export class BossPartyUI {
       if (invitation) this.dismissedId = invitation.id;
       this.close();
       if (kind === 'invitation' && invitation)
-        this.onReply(invitation.id, action === 'yes');
+        this.onReply(invitation, action === 'yes');
       else if (kind === 'help' && action === 'yes') this.onSummon();
     });
     this.layer.addEventListener('keydown', (e) => {
@@ -88,8 +95,8 @@ export class BossPartyUI {
     );
   }
   information(id: string): void {
+    if (!isBossDestination(id)) return;
     const entry = mechanisms[id];
-    if (!entry) return;
     this.show(
       'info',
       entry[0],
@@ -112,7 +119,12 @@ export class BossPartyUI {
     if (invitation.id === this.dismissedId) return;
     if (invitation.id !== this.invitation?.id || this.kind !== 'invitation') {
       this.invitation = invitation;
-      const name = mechanisms[invitation.destination]?.[0] ?? 'boss';
+      const destination = invitation.destination;
+      let name = 'boss';
+      if (isBossDestination(destination)) {
+        this.onInvitation(destination);
+        name = mechanisms[destination][0];
+      }
       this.show(
         'invitation',
         'Đồng đội cần trợ giúp',
@@ -130,7 +142,7 @@ export class BossPartyUI {
     const invitation = this.kind === 'invitation' ? this.invitation : undefined;
     if (invitation) this.dismissedId = invitation.id;
     this.close();
-    if (invitation) this.onReply(invitation.id, false);
+    if (invitation) this.onReply(invitation, false);
   }
   close(): void {
     this.kind = undefined;

@@ -12,6 +12,8 @@ interface DaoPresentation {
       owner: string;
       frame: string;
       x: number;
+      y: number;
+      rotation: number;
       depth: number;
       scale: number;
     }[];
@@ -22,7 +24,7 @@ interface DaoPresentation {
 const inspect = (page: Page) =>
   page.evaluate<DaoPresentation>('window.__VOLAM__.presentation()');
 
-test('Tru Tà matches the rendered reach in a normal six-player M3D room', async ({
+test('Thiếu Lâm Đao aims A off-axis and renders the Tru Tà reach in a normal six-player M3D room', async ({
   page: a,
   browser,
 }, info) => {
@@ -143,14 +145,59 @@ test('Tru Tà matches the rendered reach in a normal six-player M3D room', async
       )
       .toBe(true);
 
+    await expect
+      .poll(async () => (await read(a)).state.creeps.tru_ta_edge?.x ?? 0)
+      .toBeGreaterThan(caster.x + 320);
     await Promise.all([
       verifyBoth((view) =>
         view.shaolinDao.effects.some(
-          (e) => e.owner === sessionId && e.frame === 'crescent',
+          (e) =>
+            e.owner === sessionId &&
+            e.frame === 'crescent' &&
+            e.x < caster.x &&
+            Math.abs(e.y + 18.5 - caster.y - ((e.x - caster.x) * 90) / 285) <
+              0.1 &&
+            Math.abs(e.rotation - Math.atan2(90, 285)) < 0.001,
         ),
       ),
+      expect
+        .poll(
+          async () =>
+            (await read(a)).state.players[sessionId]?.basicCooldown ?? 0,
+          { intervals: [25, 35] },
+        )
+        .toBeGreaterThan(6),
       cast('KeyA'),
     ]);
+    await expect
+      .poll(async () =>
+        (await read(b)).events
+          .filter(
+            (e) =>
+              e.kind === 'hit' &&
+              e.abilityId === 'thieu_lam_dao' &&
+              e.sourceId === sessionId,
+          )
+          .map((e) => e.targetId),
+      )
+      .toEqual(['dao_basic_off_axis']);
+    expect(
+      (await read(b)).events.filter(
+        (e) =>
+          e.kind === 'attack' &&
+          e.abilityId === 'thieu_lam_dao' &&
+          e.sourceId === sessionId,
+      ),
+    ).toHaveLength(1);
+    await expect
+      .poll(() =>
+        peers.every(
+          (peer) =>
+            (peer.state.creeps.get('dao_basic_off_axis')?.hp ?? 20_000) <
+            20_000,
+        ),
+      )
+      .toBe(true);
     await a.locator('#slot-t button').click();
     await expect
       .poll(() =>
@@ -164,7 +211,7 @@ test('Tru Tà matches the rendered reach in a normal six-player M3D room', async
       verifyBoth(
         (view) =>
           view.actors.some(
-            (h) => h.id === sessionId && h.frame === 'lotus_right',
+            (h) => h.id === sessionId && h.frame === 'lotus_left',
           ) && view.shaolinDao.lotusRings.length === 1,
       ),
       cast('KeyT'),

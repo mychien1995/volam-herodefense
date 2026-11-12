@@ -1,5 +1,7 @@
 import { zoneTick } from './zone-tick.js';
 import Phaser from 'phaser';
+import { setArtFilter } from './art-filter.js';
+import { trackLegacyVfx } from './legacy-vfx-visibility.js';
 import { voDangQuyenHandled } from './vo-dang-quyen-art.js';
 import { voDangKiemHandled } from './vo-dang-kiem-art.js';
 import {
@@ -220,7 +222,7 @@ export class FeedbackVfx {
         ? bongTrailPlacement(v.tag)
         : undefined;
     if (trail) {
-      v.sprite.texture.setFilter(Phaser.Textures.FilterMode.LINEAR);
+      setArtFilter(v.sprite.texture, Phaser.Textures.FilterMode.LINEAR);
       v.sprite.setScale(trail.scaleX, trail.scaleY);
     }
     v.sprite
@@ -263,6 +265,7 @@ export class FeedbackVfx {
       .setTexture(ref.asset, tag.frames[0]!)
       .setOrigin(...tag.origin)
       .setScale(feedbackComponents.get(ref.asset)?.displayScale ?? 1);
+    trackLegacyVfx(v.sprite);
     // Retained slam contact is at source pixel (128,160), below its old center pivot.
     if (v.skill === 'pha_giap_bong' && ref.asset === 'bong_controls_v2_ground')
       v.sprite.setOrigin(0.5, 160 / 256);
