@@ -1,3 +1,4 @@
+import { opponents, targetRadius } from './opponents.js';
 import { distance, segmentRect, direction } from './geometry.js';
 import { emit, hurt } from './combat.js';
 import { applyStatus } from './status.js';
@@ -118,10 +119,10 @@ function hitDragonArea(
   landing: boolean,
 ): void {
   const { fx, fy } = shot.dragonFlight!;
-  for (const enemy of [...world.creeps.values()]) {
+  for (const enemy of opponents(world, shot.ownerId)) {
     if (
       enemy.hp <= 0 ||
-      distance(enemy, center) > radius + (enemy.stats ?? config.creep).radius ||
+      distance(enemy, center) > radius + targetRadius(world, enemy, config) ||
       config.collision.some(
         (wall) => segmentRect(center, enemy, wall) !== undefined,
       )

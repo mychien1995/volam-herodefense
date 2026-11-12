@@ -16,7 +16,7 @@ import { DefenseHud } from './defense-hud.js';
 import { BossRetryUI, type RetryAction } from './boss-retry-ui.js';
 import { SkillMenu } from './skill-menu.js';
 import { BossPartyUI, isBossDestination } from './boss-party-ui.js';
-import type { BuildChange } from '@volam/game-core';
+import { loiDai, type BuildChange } from '@volam/game-core';
 import type { MerchantAction, PotionId } from '@volam/game-core';
 import { ItemMenu, auxiliarySlot, updateAuxiliarySlot } from './item-menu.js';
 export function element<T extends HTMLElement>(selector: string): T {
@@ -56,6 +56,7 @@ export class GameUI {
   onLoadout: (ids: string[]) => void = () => {};
   onCheck: () => void = () => {};
   onLeave: () => void = () => {};
+  onLoiDai: (action: 'enter' | 'exit') => void = () => {};
   onStudy: (enabled: boolean) => void = () => {};
   onDungeonEnter: (
     access: 'private' | 'shared',
@@ -104,7 +105,7 @@ export class GameUI {
         <section id="lobby" class="lobby-layer"><div class="lobby-window framed"><p class="eyebrow">VÕ LÂM · ANH HÙNG THỦ THÀNH</p><h1>Tịnh Phong Viện</h1><p>Sân viện thanh bình. Khởi đầu hành trình võ lâm.</p><form id="join-form"><label for="nickname">Biệt danh</label><input id="nickname" maxlength="${lobbyConfig.nicknameMaxLength}" autocomplete="off" required placeholder="Biệt danh của bạn"/><button type="submit" id="create" class="accent">Tạo phòng</button><div class="divider">hoặc tham gia cùng bạn</div><label for="room-id">Mã phòng</label><div class="join-row"><input id="room-id" autocomplete="off" maxlength="64" placeholder="Nhập mã phòng"/><button type="submit" id="join">Vào phòng</button></div></form><p id="status" data-testid="status" role="status" aria-live="polite">Mất kết nối</p><small>Chỉ cần biệt danh · 1–6 người chơi · Không lưu tiến trình<br>Bản thử nghiệm · Hình ảnh đang hoàn thiện</small></div></section>
         <div id="modal-layer" hidden><section id="game-dialog" class="game-window framed" role="dialog" aria-modal="true" aria-labelledby="dialog-title" tabindex="-1"><header class="window-title"><span class="title-flourish">❖</span><h2 id="dialog-title"></h2><button id="close-menu" aria-label="Đóng menu">×</button></header><div id="dialog-content" class="window-body"></div><small class="menu-safety">Trận đấu vẫn tiếp tục · Escape để đóng</small></section></div>
         <div id="study-banner" class="study-banner framed" hidden><strong>RỪNG TRÚC · BẢN MẪU KHUNG CẢNH</strong><span>Chỉ xem hình ảnh. Nhân vật của bạn vẫn ở trong đấu trường.</span><button id="return-study">Về đấu trường</button></div>
-        <section id="boss-hud" hidden aria-label="Lý Mạc Sầu"><strong>Lý Mạc Sầu</strong><progress id="boss-hp" max="1" value="1"></progress><span id="boss-cast"></span></section><p id="boss-loot-notice" role="status"></p><p id="dungeon-exit-hint" hidden>Space — Rời phó bản</p><div id="respawn-overlay" hidden role="status" aria-live="polite"><strong>Bạn đã gục ngã</strong><span id="respawn-countdown"></span></div>
+        <section id="boss-hud" hidden aria-label="Lý Mạc Sầu"><strong>Lý Mạc Sầu</strong><progress id="boss-hp" max="1" value="1"></progress><span id="boss-cast"></span></section><p id="boss-loot-notice" role="status"></p><p id="loi-dai-hint" hidden></p><p id="dungeon-exit-hint" hidden>Space — Rời phó bản</p><div id="respawn-overlay" hidden role="status" aria-live="polite"><strong>Bạn đã gục ngã</strong><span id="respawn-countdown"></span></div>
         <div id="announcements" aria-live="polite"><p id="feedback" role="status" hidden></p></div>
         <p id="hero-stats" data-testid="hero-stats" class="sr-only"></p>
       </main>`;
@@ -289,6 +290,11 @@ export class GameUI {
     if (!id) this.state = undefined;
   }
   open(menu: Menu): void {
+    const hero = this.state?.players.get(this.sessionId);
+    const leavingDuel = hero?.zoneId === loiDai.id;
+    if (leavingDuel && (menu === 'dungeons' || menu === 'merchant')) return;
+    if (menu === 'pvp' && (!hero || (!leavingDuel && hero.zoneId !== 'arena')))
+      return;
     if (menu === 'dungeons') this.dungeonDestination = 'forest';
     if (this.ended || (menu === 'skills' && this.state?.requiresBranch)) return;
     if (this.menu === menu) {
@@ -310,6 +316,28 @@ export class GameUI {
       menu === 'dungeons'
         ? 'Trận đấu vẫn tiếp tục · Escape để đóng'
         : 'Trận đấu vẫn tiếp tục · Escape để đóng';
+    if (menu === 'pvp' && hero) {
+      const eligible =
+        leavingDuel || (hero.level >= loiDai.minLevel && hero.hp > 0);
+      element('#dialog-title').textContent = leavingDuel
+        ? 'Về đấu trường'
+        : 'Vào Lôi Đài';
+      element('#loi-dai-confirm-copy').textContent = leavingDuel
+        ? 'Bạn có muốn rời Lôi Đài và trở về đấu trường?'
+        : hero.level < loiDai.minLevel
+          ? 'Cần cấp 6 để vào Lôi Đài.'
+          : hero.hp <= 0
+            ? 'Hãy hồi sinh trước khi vào Lôi Đài.'
+            : 'Vào Đài Hồng Mộc? Bước lên sàn để đấu hoặc đứng ở viền gạch trắng để xem.';
+      const confirm = element<HTMLButtonElement>('#confirm-loi-dai');
+      confirm.textContent = leavingDuel ? 'Về đấu trường' : 'Vào Lôi Đài';
+      confirm.disabled = !eligible;
+      confirm.addEventListener('click', () => {
+        this.close();
+        this.onLoiDai(leavingDuel ? 'exit' : 'enter');
+      });
+      element('#cancel-loi-dai').addEventListener('click', () => this.close());
+    }
     const footer =
       element('#dialog-content').querySelector<HTMLElement>('.window-footer');
     if (footer) {
@@ -521,6 +549,7 @@ export class GameUI {
     const id = this.quickPotion(resource);
     if (
       !hero ||
+      hero.zoneId === loiDai.id ||
       !id ||
       this.blocked ||
       hero.hp <= 0 ||
@@ -605,9 +634,37 @@ export class GameUI {
     this.bossRetry.sync(hero, state.phase === 'IN_GAME');
     if (!hero) return;
     this.bossParty.sync(hero.bossInvitation);
+    const inDuel = hero.zoneId === loiDai.id;
+    const canDuel =
+      !inDuel || (hero.loiDaiFighter && state.loiDaiFighters === 2);
+    const pvp = element<HTMLButtonElement>('.system-buttons [data-menu="pvp"]');
+    const duelLabel = inDuel ? 'Về đấu trường' : 'Lôi Đài';
+    pvp.title = duelLabel;
+    pvp.setAttribute('aria-label', duelLabel);
+    pvp.querySelector('span:last-child')!.textContent = duelLabel;
+    pvp.disabled = hero.zoneId !== 'arena' && !inDuel;
+    for (const menu of ['dungeons', 'merchant'])
+      element<HTMLButtonElement>(
+        `.system-buttons [data-menu="${menu}"]`,
+      ).disabled = inDuel;
+    const hint = element('#loi-dai-hint');
+    hint.hidden = !inDuel || hero.hp <= 0 || this.blocked;
+    hint.textContent = !inDuel
+      ? ''
+      : state.loiDaiGateTicks > 0
+        ? `Mở lối lên đài sau ${Math.ceil(state.loiDaiGateTicks / m1Config.tickRate)} giây`
+        : state.loiDaiFighters === 2
+          ? hero.loiDaiFighter
+            ? ''
+            : 'Đang quan chiến · Sàn đủ hai đấu thủ'
+          : hero.loiDaiFighter
+            ? 'Đang chờ đối thủ'
+            : 'Đi lên bậc thang để vào sàn đấu';
+    hint.hidden ||= !hint.textContent;
     const help = element<HTMLButtonElement>('#boss-help-button');
     help.hidden =
       hero.zoneId === 'arena' ||
+      inDuel ||
       !isBossDestination(dungeonForZone(hero.zoneId).id) ||
       state.players.size <= 1 ||
       hero.hp <= 0;
@@ -618,11 +675,15 @@ export class GameUI {
     this.dead = dead;
     element('#game').classList.toggle('hero-dead', dead);
     element('#respawn-overlay').hidden = !dead;
-    element('#respawn-countdown').textContent = hero.bossSpectator
-      ? 'Đã hết lượt hồi sinh · ↑ ↓ ← → để quan chiến'
-      : `Tự hồi sinh ${hero.zoneId === 'arena' ? 'tại đấu trường' : isBossDestination(dungeonForZone(hero.zoneId).id) ? 'tại cửa phó bản' : 'tại đấu trường'} sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`;
+    element('#respawn-countdown').textContent = inDuel
+      ? `Trở về sảnh chờ sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`
+      : hero.bossSpectator
+        ? 'Đã hết lượt hồi sinh · ↑ ↓ ← → để quan chiến'
+        : `Tự hồi sinh ${hero.zoneId === 'arena' ? 'tại đấu trường' : isBossDestination(dungeonForZone(hero.zoneId).id) ? 'tại cửa phó bản' : 'tại đấu trường'} sau ${Math.ceil(hero.respawnTicks / m1Config.tickRate)} giây`;
     const dungeon =
-      hero.zoneId === 'arena' ? undefined : dungeonForZone(hero.zoneId);
+      hero.zoneId === 'arena' || inDuel
+        ? undefined
+        : dungeonForZone(hero.zoneId);
     element('#dungeon-exit-hint').hidden =
       this.blocked ||
       dead ||
@@ -644,6 +705,7 @@ export class GameUI {
         hero.inventory.potionCooldownTicks / m1Config.tickRate,
       );
       button.disabled =
+        inDuel ||
         dead ||
         !id ||
         seconds > 0 ||
@@ -867,7 +929,7 @@ export class GameUI {
     );
     const fixed = hero.build.mode === 'fixed';
     const points = element('#fixed-skill-points');
-    points.hidden = !fixed || hero.build.available === 0;
+    points.hidden = inDuel || !fixed || hero.build.available === 0;
     points.textContent = hero.build.available + ' điểm';
     const stance = element('#shaolin-stance');
     stance.hidden = !fixed || hero.basicId !== 'thieu_lam_quyen';
@@ -946,7 +1008,8 @@ export class GameUI {
       );
       slot.classList.toggle(
         'unavailable',
-        !ability ||
+        !canDuel ||
+          !ability ||
           rank === 0 ||
           hero.hp <= 0 ||
           hero.mana < cost ||
@@ -967,6 +1030,7 @@ export class GameUI {
           ? m1Config.progression?.skills[ability.id]?.levelGates[rank]
           : undefined;
         upgrade.hidden =
+          inDuel ||
           !fixed ||
           !ability ||
           gate === undefined ||

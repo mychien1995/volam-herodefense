@@ -8,8 +8,6 @@ export type Menu =
   | 'quit';
 export const icon = (name: string, extra = ''): string =>
   `<span class="pixel-icon icon-${name} ${extra}" aria-hidden="true"></span>`;
-const unavailable =
-  '<p class="preview-note">Xem trước · Tính năng này chưa mở. Chưa thể giao dịch hoặc sử dụng vật phẩm.</p>';
 export const menuTitles: Record<Menu, string> = {
   inventory: 'Túi Đồ',
   dungeons: 'Chọn Phó Bản',
@@ -62,6 +60,6 @@ export function menuContents(
       <div class="ability-list"><article>${icon('flame')}<div><kbd>Q</kbd><h3>Hỏa Vân Chưởng</h3><p>Ba chưởng bay thẳng · 18 nội lực</p></div></article><article>${icon('dragon')}<div><kbd>W</kbd><h3>Cuồng Long Loạn Vũ</h3><p>Chưởng nổ và thiêu đốt · 25 nội lực</p></div></article></div>
       <p class="muted">Dùng chế độ Võ Học để học và thay đổi kỹ năng.</p><button disabled>Phân điểm · Chưa mở</button>`;
     case 'pvp':
-      return `${unavailable}<div class="pvp-sides"><section><h3>Đội A</h3><span>◇</span><button disabled>Vào đội A</button></section><section><h3>Đội B</h3><span>◇</span><button disabled>Vào đội B</button></section></div><p class="muted">Đấu đối kháng chưa mở. Đây là cửa sổ xem trước.</p><button disabled>Sẵn sàng · Chưa mở</button>`;
+      return '<p id="loi-dai-confirm-copy"></p><div class="window-footer"><button id="cancel-loi-dai">Hủy</button><button id="confirm-loi-dai" class="accent">Xác nhận</button></div>';
   }
 }

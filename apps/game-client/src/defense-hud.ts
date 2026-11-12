@@ -1,6 +1,6 @@
 import type { LobbyState } from '@volam/game-protocol';
 import { m1Config, invasionCreepName } from '@volam/game-data';
-import type { WaveArenaView } from '@volam/game-core';
+import { loiDai, type WaveArenaView } from '@volam/game-core';
 
 import { statueName } from '@volam/game-data';
 
@@ -103,6 +103,9 @@ export class DefenseHud {
       0,
       Math.ceil((d.nextWaveTick - state.tick) / m1Config.tickRate),
     );
+    const inLoiDai = [...state.players.values()].some(
+      (player) => player.connected && player.zoneId === loiDai.id,
+    );
     this.panel.querySelector('#invasion-countdown')!.textContent =
       d.defeated || won
         ? 'Trận đấu kết thúc'
@@ -111,7 +114,9 @@ export class DefenseHud {
           : d.paused
             ? campaignVote
               ? `Đợt ${d.wave} · Tạm dừng — biểu quyết đánh lại boss`
-              : `Đợt ${d.wave} · Tạm dừng — toàn đội đang trong phó bản boss`
+              : inLoiDai
+                ? `Đợt ${d.wave} · Tạm dừng — toàn đội đang ở Lôi Đài`
+                : `Đợt ${d.wave} · Tạm dừng — toàn đội đang trong phó bản boss`
             : `Đợt ${d.wave} · Đợt ${d.wave + 1} sau ${Math.floor(seconds / 60)
                 .toString()
                 .padStart(

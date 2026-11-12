@@ -5,6 +5,7 @@ import type {
   SimulationConfig,
   World,
 } from './types.js';
+import { opponent, opponents, targetRadius } from './opponents.js';
 import { cancelOwnedEffects, hasStatus, statusValue } from './status.js';
 import { characterStats, gainExperience } from './progression.js';
 import { awardCampaignBoss, grantFarmReward } from './campaign.js';
@@ -46,6 +47,8 @@ export function hurt(
     comboTargets?: Record<string, boolean> | undefined;
   },
 ): boolean {
+  if (world.duel && opponent(world, sourceId, target.id) !== target)
+    return false;
   if (world.waveBossTest && world.heroes.has(target.id)) return false;
   if (
     target.hp <= 0 ||
@@ -91,7 +94,7 @@ export function hurt(
   let empowered = false;
   if (
     snapshot?.combo &&
-    world.creeps.has(target.id) &&
+    (world.duel || world.creeps.has(target.id)) &&
     world.heroes.has(sourceId)
   ) {
     const spec = snapshot.combo;
@@ -126,7 +129,7 @@ export function hurt(
     !snapshot?.periodic &&
     world.heroes.has(target.id) &&
     target.statuses?.find((s) => s.kind === 'counter' && s.until > world.tick);
-  const attacker = world.creeps.get(sourceId);
+  const attacker = opponent(world, target.id, sourceId);
   const retaliate = () => {
     if (!counter || !attacker || attacker.hp <= 0 || target.hp <= 0) return;
     const heading = direction(attacker.x - target.x, attacker.y - target.y);
@@ -213,12 +216,12 @@ export function hurt(
     statusValue(target, 'slow', world.tick) > 0
       ? 1 + (snapshot?.slowedBonus ?? 0)
       : 1;
-  const reduction = world.creeps.has(sourceId)
+  const reducedAttacker =
+    world.creeps.get(sourceId) ??
+    (world.duel ? world.heroes.get(sourceId) : undefined);
+  const reduction = reducedAttacker
     ? 1 -
-      Math.min(
-        0.85,
-        statusValue(world.creeps.get(sourceId)!, 'attack_break', world.tick),
-      )
+      Math.min(0.85, statusValue(reducedAttacker, 'attack_break', world.tick))
     : 1;
   const heroSource = world.heroes.get(sourceId);
   const bonus = heroSource
@@ -441,7 +444,7 @@ export function hurt(
   const leech = snapshot?.lifesteal;
   const owner = leech ? world.heroes.get(sourceId) : undefined;
   if (
-    enemy &&
+    (enemy || world.duel) &&
     target.hp < beforeHp &&
     leech &&
     !leech.used &&
@@ -499,10 +502,10 @@ export function releaseGuardCounter(
     critical: false,
     stage: 'counter_release',
   });
-  for (const enemy of world.creeps.values()) {
+  for (const enemy of opponents(world, ownerId)) {
     if (
       enemy.hp <= 0 ||
-      distance(owner, enemy) > range + (enemy.stats ?? config.creep).radius ||
+      distance(owner, enemy) > range + targetRadius(world, enemy, config) ||
       config.collision.some((w) => segmentRect(owner, enemy, w) !== undefined)
     )
       continue;

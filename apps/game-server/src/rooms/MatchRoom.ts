@@ -44,6 +44,9 @@ import {
   equippedAbility,
   skillCharges,
   transactMerchant,
+  refreshCharacter,
+  loiDai,
+  experienceAtLevel,
   addCreep,
   blocked,
   type Actor,
@@ -77,6 +80,7 @@ import {
   portalCountSchema,
   creepPreviewActionSchema,
   bossRetryActionSchema,
+  loiDaiActionSchema,
 } from '@volam/game-protocol';
 
 type MatchClient = Client<{ auth: JoinOptions; messages: ServerMessages }>;
@@ -131,6 +135,9 @@ export class MatchRoom extends Room<{
   readonly devTayDoc =
     process.env['NODE_ENV'] !== 'production' &&
     process.env['VOLAM_DEV_TAY_DOC'] === '1';
+  private readonly devLoiDai =
+    process.env['NODE_ENV'] === 'development' &&
+    process.env['VOLAM_DEV_LOI_DAI'] === '1';
   private readonly checkSequences = new Map<string, number>();
   private readonly dungeonSequences = new Map<string, number>();
   private eventSequence = 0;
@@ -163,9 +170,42 @@ export class MatchRoom extends Room<{
       );
     }
     if (this.devSkillLoadout) prepareSkillReviewHero(hero, m1Config);
+    if (this.devLoiDai) {
+      hero.level = loiDai.minLevel;
+      hero.xp = experienceAtLevel(loiDai.minLevel, this.simulation.base);
+      hero.skillPoints = loiDai.minLevel;
+      refreshCharacter(hero, this.simulation.base);
+      hero.hp = hero.maxHp;
+      hero.mana = hero.maxMana;
+    }
   }
 
   override messages = {
+    'loi-dai-action': validate(
+      loiDaiActionSchema,
+      (client: MatchClient, input) => {
+        if (
+          this.state.phase !== 'IN_GAME' ||
+          this.creepPreview ||
+          !this.state.players.get(client.sessionId)?.confirmed
+        )
+          return;
+        const hero = this.simulation.hero(client.sessionId);
+        if (!hero || input.sequence <= hero.lastSequence) return;
+        hero.lastSequence = input.sequence;
+        const reason =
+          input.action === 'enter'
+            ? this.simulation.enterLoiDai(client.sessionId)
+            : this.simulation.exitLoiDai(client.sessionId);
+        if (reason)
+          client.send('command-rejected', {
+            protocolVersion: PROTOCOL_VERSION,
+            sequence: input.sequence,
+            reason,
+          });
+        this.syncState();
+      },
+    ),
     'boss-retry-action': validate(
       bossRetryActionSchema,
       (client: MatchClient, input) => {
@@ -232,21 +272,23 @@ export class MatchRoom extends Room<{
         hero.lastSequence = input.sequence;
         const beforePotions = { ...hero.inventory?.potions };
         const reason =
-          this.simulation.base.campaign &&
-          input.action !== 'use-potion' &&
-          this.simulation.waveBossLocked
-            ? 'Không thể mua hoặc chế tạo khi đang giao chiến boss.'
-            : transactMerchant(
-                hero,
-                m1Config,
-                {
-                  inArena: zone.access === 'arena',
-                  matchTick: this.simulation.tick,
-                  worldTick: zone.world.tick,
-                },
-                input.revision,
-                input,
-              );
+          zone.access === 'duel'
+            ? 'Không thể dùng vật phẩm hoặc mở Thương Gia trong Lôi Đài.'
+            : this.simulation.base.campaign &&
+                input.action !== 'use-potion' &&
+                this.simulation.waveBossLocked
+              ? 'Không thể mua hoặc chế tạo khi đang giao chiến boss.'
+              : transactMerchant(
+                  hero,
+                  m1Config,
+                  {
+                    inArena: zone.access === 'arena',
+                    matchTick: this.simulation.tick,
+                    worldTick: zone.world.tick,
+                  },
+                  input.revision,
+                  input,
+                );
         if (!reason && input.action === 'use-potion')
           for (const key of Object.keys(beforePotions) as PotionId[]) {
             const used =
@@ -488,6 +530,8 @@ export class MatchRoom extends Room<{
         )
           return;
         this.dungeonSequences.set(client.sessionId, input.sequence);
+        if (this.simulation.zoneOf(client.sessionId)?.access === 'duel')
+          return reject('Hãy rời Lôi Đài trước khi mở phó bản.');
         if (input.action === 'open') {
           if (!this.simulation.canEnterDungeon(client.sessionId))
             return reject('Chỉ vào phó bản khi còn sống tại đấu trường.');
@@ -620,7 +664,7 @@ export class MatchRoom extends Room<{
           });
           return;
         }
-        resetSkillReviewResources(h, zone.world);
+        if (zone.access !== 'duel') resetSkillReviewResources(h, zone.world);
         if (
           zone.access === 'arena' &&
           applySkillReviewLoadout(
@@ -672,6 +716,8 @@ export class MatchRoom extends Room<{
     this.simulation.invasion!.definition.portalCount = portals.data;
     this.state.defense.portalCount = portals.data;
     this.state.defense.devCreepTest = this.devCreepTest;
+    if (this.devLoiDai)
+      console.info('[DEV] Lôi Đài: người chơi bắt đầu ở cấp 6.');
     if (this.devCreepTest) {
       if (this.waveBossTestOptions)
         throw new ServerError(400, 'Chỉ bật một chế độ test creep hoặc boss.');
@@ -716,7 +762,8 @@ export class MatchRoom extends Room<{
       if (this.devSkillLoadout)
         for (const id of this.simulation.membership.keys()) {
           const h = this.simulation.hero(id);
-          if (h) resetSkillReviewResources(h, this.simulation.zoneOf(id)?.world);
+          if (h && this.simulation.zoneOf(id)?.access !== 'duel')
+            resetSkillReviewResources(h, this.simulation.zoneOf(id)?.world);
         }
       if (this.simulation.invasion?.defeated || this.simulation.victory) {
         this.state.phase = this.simulation.victory ? 'VICTORY' : 'DEFEAT';
@@ -899,6 +946,12 @@ export class MatchRoom extends Room<{
       this.state.vuong.delete('arena');
     }
     this.state.tick = this.world.tick;
+    this.state.loiDaiTick = this.simulation.duel.zone.world.tick;
+    this.state.loiDaiGateTicks = Math.max(
+      0,
+      this.simulation.duel.gateAt - this.simulation.tick,
+    );
+    this.state.loiDaiFighters = this.simulation.duel.fighters.size;
     this.state.matchElapsedMs = (this.world.tick * 1000) / m1Config.tickRate;
     this.state.defense.creepPreview = this.creepPreview
       ? JSON.stringify(this.creepPreview.view)
@@ -951,6 +1004,7 @@ export class MatchRoom extends Room<{
       );
       if (!hero) {
         target.zoneId = 'arena';
+        target.loiDaiFighter = false;
         continue;
       }
       target.bossSpectator = !!hero.bossSpectator;
@@ -958,7 +1012,8 @@ export class MatchRoom extends Room<{
       target.actionStartedAt = hero.actionStartedAt ?? 0;
       target.basicStage = hero.basicStage ?? '';
       target.inventory.tamLienReadyTicks = Math.max(
-        0, (hero.tamLien?.readyUntil ?? 0) - zone.world.tick,
+        0,
+        (hero.tamLien?.readyUntil ?? 0) - zone.world.tick,
       );
       const action = zone.world.actions?.find((a) => a.ownerId === id);
       target.actionState = action
@@ -990,13 +1045,17 @@ export class MatchRoom extends Room<{
       target.bossItems = JSON.stringify(hero.bossItems ?? []);
       target.bossLoot = JSON.stringify(hero.bossLoot ?? []);
       target.zoneId = zone.id;
+      target.loiDaiFighter = this.simulation.duel.fighters.has(id);
       target.combos = JSON.stringify(
         (zone.world.combos ?? [])
           .filter(
             (c) =>
               c.sourceId === id &&
               c.until > zone.world.tick &&
-              (zone.world.creeps.get(c.targetId)?.hp ?? 0) > 0,
+              ((
+                zone.world.creeps.get(c.targetId) ??
+                zone.world.heroes.get(c.targetId)
+              )?.hp ?? 0) > 0,
           )
           .map((c) => ({
             id: c.id,
@@ -1007,6 +1066,7 @@ export class MatchRoom extends Room<{
       );
       target.respawnTicks = Math.max(
         0,
+        (this.simulation.duel.respawns.get(id) ?? 0) - this.simulation.tick,
         (this.simulation.respawns.get(id) ?? 0) - this.simulation.tick,
         this.simulation.base.campaign
           ? (this.simulation.bossRetries.view(id).retry?.revivalTicks ?? 0)
@@ -1147,7 +1207,8 @@ export class MatchRoom extends Room<{
       areaKeys = new Set<string>(),
       bossEffectKeys = new Set<string>();
     for (const zone of this.simulation.zones.values()) {
-      if (zone.access !== 'arena') {
+      if (zone.access === 'arena' && this.simulation.duelPausesArena) continue;
+      if (zone.access === 'shared' || zone.access === 'private') {
         let dungeon = this.state.dungeons.get(zone.id);
         if (!dungeon) {
           dungeon = new DungeonState();

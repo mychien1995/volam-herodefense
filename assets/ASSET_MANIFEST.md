@@ -156,3 +156,12 @@ The v2 pilot style was accepted with three requested corrections and explicit au
 ## Thiên Sơn Đao · Tam Liên Trảm — đã duyệt trong Phaser
 
 Atlas Tam Liên Trảm dùng 16 cel PNG 160×144 với chân tại (80,112), ba đao ảnh, dải gió hoa đào và icon QTE. Phaser chọn cel theo nhịp server, lật riêng đao ảnh trái → phải và hạ đao ảnh phải → trái. Hàn Nguyệt dùng lưỡi bóng với chiều dài ×1,5 và bề rộng ×1,2 trong các cel đứng/đi. Các cel tấn công dùng lưỡi trong bản artwork đã duyệt. HUD phím S có kích thước 200 × 46 px và neo phía trên thanh kỹ năng. [Nguồn và prompt](source/skills/thien-son/tam-lien-tram-2026-11-09/prompts.md) · [Xuất atlas Hàn Nguyệt](exports/characters/thien-son-han-nguyet/provenance.json) · [Kiểm tra trong Phaser](../docs/evidence/sessions/thien-son-tam-lien-hud-layout/).
+
+## Đài Hồng Mộc · Lôi Đài
+
+- `source/loi-dai/hong-moc.png` and `victory-fireworks.png` are original ImageGen rasters derived from the director-selected rectangular concept and approved victory artwork.
+- `exports/loi-dai` contains the 836×470 court plate, two masked rail overlays and a 16-frame 132×132 alpha fireworks sheet at 14 FPS. The runtime preview uses the existing authored hero sprites. See [integration details](../docs/LOI_DAI.md).
+
+## Đài Hồng Mộc v2
+
+`source/loi-dai-v2` stores original ImageGen paving art and editable masks for the approved court source. `exports/loi-dai-v2` contains native-density ground and individually placed scenery PNGs with source hashes, depth and sizes in the manifest. Runtime art review is pending. [Integration](../docs/LOI_DAI.md)

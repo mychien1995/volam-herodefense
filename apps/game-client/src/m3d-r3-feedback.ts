@@ -1,3 +1,4 @@
+import { zoneTick } from './zone-tick.js';
 import Phaser from 'phaser';
 import { caiBangBongArtEnabled } from './bong-combo-review-art.js';
 import { spinFacing } from './hero-vfx-review.js';
@@ -398,8 +399,7 @@ export class M3dR3Feedback {
     this.zone = zone;
     this.renderPoint = renderPoint;
     if (!state || state.phase === 'DEFEAT') return;
-    this.tick =
-      zone === 'arena' ? state.tick : (state.dungeons.get(zone)?.tick ?? 0);
+    this.tick = zoneTick(state, zone) ?? 0;
     this.painter.begin();
     for (const [id, h] of state.players) {
       if (h.zoneId !== zone || h.hp <= 0) continue;

@@ -11,6 +11,7 @@ export default defineConfig({
     '**/invasion.spec.ts',
     '**/skills.spec.ts',
     '**/progression.spec.ts',
+    '**/loi-dai.spec.ts',
     '**/vo-dang-quyen-rework.spec.ts',
     '**/vo-dang-kiem-rework.spec.ts',
   ],

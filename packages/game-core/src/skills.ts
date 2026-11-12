@@ -1,3 +1,4 @@
+import { opponent, opponents, targetRadius } from './opponents.js';
 import {
   blocked,
   direction,
@@ -22,6 +23,7 @@ import type {
   AreaEffect,
   AllyEffect,
   ComboSpec,
+  Actor,
   Creep,
   Hero,
   MultiHitEffect,
@@ -47,7 +49,7 @@ export function equippedAbility(
 function clearLine(
   world: World,
   hero: Hero,
-  enemy: Creep,
+  enemy: Actor,
   config: SimulationConfig,
 ): boolean {
   return (
@@ -77,12 +79,12 @@ export function targetDirection(
             )
             .map((step) => step.targetId),
         );
-  const isPrimedAhead = (enemy: Creep) => {
+  const isPrimedAhead = (enemy: Actor) => {
     if (!primed?.has(enemy.id)) return false;
     const heading = direction(enemy.x - hero.x, enemy.y - hero.y);
     return heading.x * hero.fx + heading.y * hero.fy >= 0.5;
   };
-  const enemy = [...world.creeps.values()]
+  const enemy = [...opponents(world, hero.id)]
     .filter(
       (e) =>
         e.hp > 0 &&
@@ -323,11 +325,13 @@ function openSkyfall(
   crit: { critChance: number; critMultiplier: number },
 ): void {
   const sky = effect.skyfall!;
-  const boss = (enemy: Creep) =>
+  const boss = (
+    enemy: Pick<Creep, 'encounterBoss' | 'bossEncounter' | 'waveBossActor'>,
+  ) =>
     Number(
       !!(enemy.encounterBoss || enemy.bossEncounter || enemy.waveBossActor),
     );
-  const target = [...world.creeps.values()]
+  const target = [...opponents(world, hero.id)]
     .filter((enemy) => {
       const dx = enemy.x - hero.x;
       const dy = enemy.y - hero.y;
@@ -495,7 +499,7 @@ function strikeArc(
   if (effect.windupTicks)
     for (const spec of ability.selfStatuses ?? [])
       applyStatus(hero, spec, hero.id, ability.id, world.tick);
-  let targets = [...world.creeps.values()]
+  let targets = [...opponents(world, hero.id)]
     .filter((enemy) => {
       const d = direction(enemy.x - hero.x, enemy.y - hero.y);
       if (effect.lineWidth !== undefined) {
@@ -507,7 +511,7 @@ function strikeArc(
           clearLine(world, hero, enemy, config) &&
           along >= 0 &&
           along <= effect.range &&
-          across <= effect.lineWidth / 2 + (enemy.stats ?? config.creep).radius
+          across <= effect.lineWidth / 2 + targetRadius(world, enemy, config)
         );
       }
       return (
@@ -516,7 +520,7 @@ function strikeArc(
           start,
           origin,
           enemy,
-          effect.range + (enemy.stats ?? config.creep).radius,
+          effect.range + targetRadius(world, enemy, config),
         ) !== undefined &&
         d.x * heading.fx + d.y * heading.fy >= Math.cos(effect.halfAngle)
       );
@@ -572,7 +576,7 @@ function strikeArc(
         enemy,
         d.x * n,
         d.y * n,
-        (enemy.stats ?? config.creep).radius,
+        targetRadius(world, enemy, config),
         config,
         world.tick,
       );
@@ -586,13 +590,13 @@ function strikeArc(
         enemy,
         heading.fx * effect.knockback,
         heading.fy * effect.knockback,
-        (enemy.stats ?? config.creep).radius,
+        targetRadius(world, enemy, config),
         config,
         world.tick,
       );
     confineMovement(world, enemy, before, config);
     if (effect.statuses?.length || effect.pull) {
-      enemy.hits[hero.id] = world.tick;
+      if (enemy.hits) enemy.hits[hero.id] = world.tick;
       emit(world, {
         kind: 'effect',
         sourceId: hero.id,
@@ -672,7 +676,7 @@ export function perform(
         step.until <= world.tick
       )
         return false;
-      const target = world.creeps.get(step.targetId);
+      const target = opponent(world, hero.id, step.targetId);
       const end = {
         x: hero.x + hero.fx * dash.distance,
         y: hero.y + hero.fy * dash.distance,
@@ -1097,7 +1101,7 @@ export function stepAreas(world: World, config: SimulationConfig): void {
         burnDamage: 0,
         burnTicks: 0,
       };
-      for (const enemy of world.creeps.values()) {
+      for (const enemy of opponents(world, area.ownerId)) {
         if (
           enemy.hp <= 0 ||
           distance(area, enemy) > radius ||
@@ -1140,12 +1144,12 @@ export function stepAreas(world: World, config: SimulationConfig): void {
         damage: 0,
         critical: false,
       });
-    for (const enemy of world.creeps.values()) {
+    for (const enemy of opponents(world, area.ownerId)) {
       if (
         enemy.hp <= 0 ||
         (area.effect.oncePerTarget && area.hitIds?.includes(enemy.id)) ||
         distance(area, enemy) >
-          area.effect.radius + (enemy.stats ?? config.creep).radius ||
+          area.effect.radius + targetRadius(world, enemy, config) ||
         config.collision.some((w) => segmentRect(area, enemy, w) !== undefined)
       )
         continue;
@@ -1221,7 +1225,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
               step.until <= world.tick
             )
               return false;
-            const target = world.creeps.get(step.targetId);
+            const target = opponent(world, hero.id, step.targetId);
             return (
               target !== undefined &&
               clearLine(world, hero, target, config) &&
@@ -1313,7 +1317,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           world.tick,
         );
       action.remaining -= n;
-      for (const enemy of world.creeps.values()) {
+      for (const enemy of opponents(world, action.ownerId)) {
         if (
           e.damage <= 0 ||
           action.hitIds.includes(enemy.id) ||
@@ -1323,7 +1327,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
             old,
             hero,
             enemy,
-            e.radius + (enemy.stats ?? config.creep).radius,
+            e.radius + targetRadius(world, enemy, config),
           ) === undefined
         )
           continue;
@@ -1400,7 +1404,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           undefined,
           action.comboTargets,
         );
-      for (const enemy of world.creeps.values())
+      for (const enemy of opponents(world, action.ownerId))
         if (
           (!finish || e.finisherDamage > 0) &&
           (e.halfAngle === undefined ||
@@ -1409,7 +1413,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
               return d.x * action.fx + d.y * action.fy >= Math.cos(e.halfAngle);
             })()) &&
           clearLine(world, hero, enemy, config) &&
-          distance(hero, enemy) <= radius + (enemy.stats ?? config.creep).radius
+          distance(hero, enemy) <= radius + targetRadius(world, enemy, config)
         )
           hurt(
             world,
@@ -1458,6 +1462,7 @@ function supportAllies(
 ): void {
   for (const ally of world.heroes.values()) {
     if (
+      (world.duel && ally.id !== hero.id) ||
       ally.hp <= 0 ||
       distance(hero, ally) > effect.radius ||
       config.collision.some((w) => segmentRect(hero, ally, w) !== undefined)

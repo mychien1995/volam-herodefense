@@ -1,3 +1,4 @@
+import { opponents, targetRadius } from './opponents.js';
 import { emit, hurt, offensiveStats } from './combat.js';
 import { distance, segmentRect } from './geometry.js';
 import { applyStatus } from './status.js';
@@ -104,11 +105,11 @@ export function settleFortune(
       break;
     case 'doai': {
       const stats = offensiveStats(world, hero.id, config);
-      for (const enemy of world.creeps.values())
+      for (const enemy of opponents(world, hero.id))
         if (
           enemy.hp > 0 &&
           distance(hero, enemy) <=
-            effect.blastRadius + (enemy.stats ?? config.creep).radius &&
+            effect.blastRadius + targetRadius(world, enemy, config) &&
           !config.collision.some(
             (wall) => segmentRect(hero, enemy, wall) !== undefined,
           )

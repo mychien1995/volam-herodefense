@@ -46,7 +46,14 @@ import {
   type ForestCreepManifest,
 } from './forest-creeps.js';
 import type { LobbyState } from '@volam/game-protocol';
-import type { CombatEvent } from '@volam/game-core';
+import { loiDai, type CombatEvent } from '@volam/game-core';
+import { zoneTick } from './zone-tick.js';
+import {
+  preloadLoiDai,
+  drawLoiDai,
+  fitLoiDaiCamera,
+  celebrateLoiDai,
+} from './loi-dai-art.js';
 import { presentTamLienBody } from './thien-son-rework.js';
 import { presentVoDangQuyenBody } from './vo-dang-quyen-art.js';
 import { createRenovationWorld } from './renovation-world.js';
@@ -242,6 +249,7 @@ export class ArenaScene extends Phaser.Scene {
   }
   preload(): void {
     preloadRuntimeArtReview(this);
+    preloadLoiDai(this);
     preloadArt(this);
     preloadShaolinDaoArt(this);
   }
@@ -319,19 +327,23 @@ export class ArenaScene extends Phaser.Scene {
       .setZoom(this.scale.width >= 960 && this.scale.height >= 600 ? 2 : 1)
       .setRotation(0);
     this.cameras.main.roundPixels = false;
-    const fitCamera = () =>
-      this.cameras.main.setZoom(
-        this.scale.width >= 960 && this.scale.height >= 600 ? 2 : 1,
-      );
-    this.scale.on('resize', fitCamera);
+    this.scale.on('resize', this.fitCamera);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
-      this.scale.off('resize', fitCamera),
+      this.scale.off('resize', this.fitCamera),
     );
     this.cameras.main.centerOn(arena.spawn.x, arena.spawn.y);
     this.ready = true;
     createRuntimeArtReview(this);
     document.querySelector('#scene-status')?.setAttribute('data-ready', 'true');
   }
+  private fitCamera = (): void => {
+    if (this.zoneId === loiDai.id) fitLoiDaiCamera(this);
+    else
+      this.cameras.main.setZoom(
+        this.scale.width >= 960 && this.scale.height >= 600 ? 2 : 1,
+      );
+  };
+
   setSnapshot(snapshot: LobbyState | undefined, sessionId = ''): void {
     if (runtimeArtReviewPaused(this)) return;
     if (this.sessionId !== sessionId) {
@@ -386,12 +398,16 @@ export class ArenaScene extends Phaser.Scene {
     this.creepFrameTimes.clear();
     this.followed = '';
     this.zoneId = zoneId;
+    this.fitCamera();
     if (zoneId === 'arena') {
       this.trees = createRenovationWorld(this, zoneId);
       applyArenaPalette(this, this.polished);
       this.cameras.main
         .setBounds(0, 0, arena.width, arena.height)
         .centerOn(arena.spawn.x, arena.spawn.y);
+    } else if (zoneId === loiDai.id) {
+      this.trees = [];
+      drawLoiDai(this);
     } else {
       const dungeon = dungeonForZone(zoneId);
       this.trees = createRenovationWorld(this, zoneId);
@@ -678,7 +694,11 @@ export class ArenaScene extends Phaser.Scene {
       const renovatedId = enemy
         ? previewArt
           ? undefined
-          : renovationActorId(actor.archetypeId, actor.invasionWave, this.zoneId)
+          : renovationActorId(
+              actor.archetypeId,
+              actor.invasionWave,
+              this.zoneId,
+            )
         : heroTexture(actor.basicId, actor.schoolId);
       if (!daoPose)
         presentRenovatedBody(
@@ -692,8 +712,7 @@ export class ArenaScene extends Phaser.Scene {
           cast,
         );
       if (!enemy) {
-        const tick = this.zoneId === 'arena'
-          ? state?.tick : state?.dungeons.get(this.zoneId)?.tick;
+        const tick = zoneTick(state, this.zoneId);
         presentTamLienBody(view.sprite, actor, tick);
         const player = state?.players.get(id);
         if (player) {
@@ -749,7 +768,11 @@ export class ArenaScene extends Phaser.Scene {
       if (id === this.sessionId && state?.players.get(id)?.bossSpectator) {
         if (this.followed) this.cameras.main.stopFollow();
         this.followed = '';
-      } else if (id === this.sessionId && this.followed !== id) {
+      } else if (
+        this.zoneId !== loiDai.id &&
+        id === this.sessionId &&
+        this.followed !== id
+      ) {
         this.cameras.main.startFollow(view.sprite, true, 1, 1, 0, 48);
         this.followed = id;
       }
@@ -890,6 +913,10 @@ export class ArenaScene extends Phaser.Scene {
     if (!this.ready || event.id <= this.lastEvent) return;
     this.lastEvent = event.id;
     if (event.zoneId && event.zoneId !== this.zoneId) return;
+    if (event.abilityId === 'loi_dai_victory') {
+      celebrateLoiDai(this, event.x, event.y);
+      return;
+    }
     if (this.bossShouts?.event(event)) return;
     if (this.zoneId === 'arena') this.dong?.event(event);
     if (isCoMoZone(this.zoneId)) this.coMoEffects?.event(event);
@@ -1091,6 +1118,30 @@ export class ArenaScene extends Phaser.Scene {
           return { id: image.name, x: image.x, y: image.y };
         }),
       rotation: Math.atan2(unit.y - origin.y, unit.x - origin.x),
+      loiDaiView:
+        this.zoneId === loiDai.id
+          ? {
+              center: this.cameras.main.getWorldPoint(
+                this.cameras.main.width / 2,
+                this.cameras.main.height / 2,
+              ),
+              layers: this.children.list
+                .filter((node) => node.name.startsWith('loi-dai:'))
+                .map((node) => node.name),
+              skillArt: this.children.list.flatMap((node) => {
+                const image = node as Phaser.GameObjects.Image;
+                return image.visible &&
+                  image.alpha > 0 &&
+                  image.texture &&
+                  image.frame
+                  ? [image.texture.key + ':' + image.frame.name]
+                  : [];
+              }),
+            }
+          : undefined,
+      loiDaiFireworks: this.children.list
+        .filter((object) => object.name === 'loi-dai:victory')
+        .map((object) => (object as Phaser.GameObjects.Sprite).frame.name),
       zoom: this.cameras.main.zoom,
       roundPixels: this.cameras.main.roundPixels,
       camera: { x: this.cameras.main.scrollX, y: this.cameras.main.scrollY },

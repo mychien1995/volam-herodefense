@@ -1,0 +1,1482 @@
+{
+  "status": "passed",
+  "summary": {
+    "activeSkills": 43,
+    "activeBySchool": {
+      "cai_bang": 10,
+      "thien_son": 10,
+      "vo_dang": 10,
+      "thieu_lam": 13
+    },
+    "basicAttacks": 8,
+    "tamLienTram": 1,
+    "additionalRank4Sample": 1,
+    "browserErrors": 0
+  },
+  "environment": {
+    "browser": "Chromium",
+    "renderer": "Phaser",
+    "viewport": [
+      1280,
+      720
+    ],
+    "zone": "loi_dai",
+    "participants": 2
+  },
+  "method": "Real room and two fighters admitted through the stage gate. The fixture seeded learned ranks and a durable nearby opponent, then sent keyboard inputs in the browser. Each sample required the corresponding authoritative event and a visible Phaser actor or effect frame.",
+  "scope": "One activation per skill and basic at a starting right-facing setup. Active skills were sampled at rank 1, plus Kháng Long Hữu Hối at rank 4. Tam Liên Trảm started with its readiness seeded. The sample checks that visuals appear during the first 1550 ms (2200 ms for Tam Liên Trảm). Innate passives, every facing, every rank, and all effect phases are outside this sample.",
+  "results": [
+    {
+      "id": "cai_bang_bong",
+      "name": "Cái Bang Bổng",
+      "branch": "cai_bang_bong",
+      "rank": null,
+      "level": 6,
+      "serverEvent": {
+        "kind": "attack",
+        "id": 1
+      },
+      "actorFrames": [
+        "bong_review_body:combo_thrust_right_0",
+        "bong_review_body:combo_thrust_right_1"
+      ],
+      "effectFrames": [
+        "bong_review_trail:combo_thrust_right_1",
+        "bong_review_trail:combo_thrust_right_3"
+      ],
+      "phases": []
+    },
+    {
+      "id": "hoanh_tao_bong",
+      "name": "Hoành Tảo Bổng",
+      "branch": "cai_bang_bong",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 3
+      },
+      "actorFrames": [
+        "bong_review_body:combo_sweep_right_0",
+        "bong_review_body:combo_sweep_right_2"
+      ],
+      "effectFrames": [
+        "bong_controls_v2_ground:radial_sweep_1",
+        "bong_controls_v2_ground:radial_sweep_3",
+        "bong_controls_v2_ground:radial_sweep_4"
+      ],
+      "phases": [
+        "anticipation",
+        "strike"
+      ]
+    },
+    {
+      "id": "pha_giap_bong",
+      "name": "Phá Giáp Bổng",
+      "branch": "cai_bang_bong",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 6
+      },
+      "actorFrames": [
+        "bong_review_pha_lava_body:slam_right_0",
+        "bong_review_pha_lava_body:slam_right_2"
+      ],
+      "effectFrames": [
+        "bong_review_pha_lava_effects:impact_1",
+        "bong_review_pha_lava_effects:trail_3",
+        "bong_review_pha_lava_effects:impact_2",
+        "bong_review_pha_lava_effects:impact_3"
+      ],
+      "phases": [
+        "staff-slam"
+      ]
+    },
+    {
+      "id": "cam_long_cong",
+      "name": "Cầm Long Công",
+      "branch": "cai_bang_bong",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 10
+      },
+      "actorFrames": [
+        "bong_review_pull:pull_right_0",
+        "bong_review_pull:pull_right_1",
+        "bong_review_pull:pull_right_2"
+      ],
+      "effectFrames": [
+        "bong_controls_v2_projectile:claw_extend_right_1",
+        "bong_controls_v2_projectile:claw_extend_right_3",
+        "bong_controls_v2_projectile:claw_extend_right_5",
+        "bong_controls_v2_projectile:claw_retract_right_0",
+        "bong_controls_v2_projectile:claw_retract_right_1",
+        "bong_controls_v2_projectile:claw_retract_right_3",
+        "bong_controls_v2_projectile:claw_retract_right_5"
+      ],
+      "phases": [
+        "anticipation",
+        "strike"
+      ]
+    },
+    {
+      "id": "truy_phong_bong",
+      "name": "Truy Phong Bổng",
+      "branch": "cai_bang_bong",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 12
+      },
+      "actorFrames": [
+        "bong_review_body:combo_thrust_right_0",
+        "bong_review_body:combo_overhead_right_0",
+        "bong_review_contacts:stomp_right_0"
+      ],
+      "effectFrames": [
+        "bong_review_nham_chan_ground:impact_2",
+        "truy_phong_bong_vfx:stun_0",
+        "bong_review_nham_chan_ground:impact_3",
+        "bong_review_nham_chan_ground:impact_4",
+        "truy_phong_bong_vfx:stun_1",
+        "bong_review_nham_chan_ground:impact_5",
+        "truy_phong_bong_vfx:stun_2",
+        "bong_review_nham_chan_ground:impact_6",
+        "truy_phong_bong_vfx:stun_3",
+        "bong_review_nham_chan_ground:impact_7"
+      ],
+      "phases": [
+        "anticipation"
+      ]
+    },
+    {
+      "id": "thien_ha_vo_cau",
+      "name": "Thiên Hạ Vô Cẩu",
+      "branch": "cai_bang_bong",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 16
+      },
+      "actorFrames": [
+        "bong_review_body:combo_sweep_right_0",
+        "bong_review_body:combo_sweep_down_1",
+        "bong_review_body:combo_sweep_left_2",
+        "bong_review_body:combo_sweep_up_3",
+        "bong_review_contacts:stomp_right_0"
+      ],
+      "effectFrames": [
+        "review3_vo_cau_projectile:dog_run_right_3",
+        "review3_vo_cau_aura:whirlwind_0",
+        "review3_vo_cau_projectile:dog_run_up_2",
+        "review3_vo_cau_projectile:dog_run_down_0",
+        "review3_vo_cau_projectile:dog_run_left_1",
+        "review3_vo_cau_projectile:dog_run_right_5",
+        "review3_vo_cau_projectile:dog_run_up_4",
+        "review3_vo_cau_aura:whirlwind_2",
+        "review3_vo_cau_projectile:dog_run_down_2",
+        "review3_vo_cau_projectile:dog_run_left_3",
+        "review3_vo_cau_projectile:dog_run_right_0",
+        "review3_vo_cau_projectile:dog_run_right_1",
+        "review3_vo_cau_projectile:dog_run_up_5",
+        "review3_vo_cau_aura:whirlwind_3",
+        "review3_vo_cau_projectile:dog_run_down_4",
+        "review3_vo_cau_projectile:dog_run_left_5",
+        "review3_vo_cau_projectile:dog_run_left_4",
+        "review3_vo_cau_projectile:dog_run_right_2",
+        "review3_vo_cau_projectile:dog_run_down_3",
+        "review3_vo_cau_aura:whirlwind_1",
+        "review3_vo_cau_projectile:dog_run_up_1",
+        "review3_vo_cau_projectile:dog_run_left_0",
+        "review3_vo_cau_projectile:dog_run_right_4",
+        "review3_vo_cau_projectile:dog_run_left_2",
+        "review3_vo_cau_projectile:dog_run_up_0",
+        "bong_review_nham_trieu_ground:impact_2",
+        "bong_review_nham_trieu_ground:impact_4",
+        "bong_review_nham_trieu_ground:impact_5"
+      ],
+      "phases": [
+        "anticipation",
+        "strike",
+        "recover"
+      ]
+    },
+    {
+      "id": "cai_bang_chuong",
+      "name": "Cái Bang Chưởng",
+      "branch": "cai_bang_chuong",
+      "rank": null,
+      "level": 6,
+      "serverEvent": {
+        "kind": "attack",
+        "id": 27
+      },
+      "actorFrames": [
+        "renovated-action-hero_cai_bang_chuong_actions:right_0",
+        "renovated-action-hero_cai_bang_chuong_actions:right_1"
+      ],
+      "effectFrames": [
+        "retained_m3d_cai_bang_chuong_dragon_v2_aura:palm_release_right_1",
+        "cai_bang_palm_v1:bolt_hit_3",
+        "retained_m3d_cai_bang_chuong_dragon_v2_aura:palm_release_right_3",
+        "cai_bang_palm_v1:bolt_hit_5"
+      ],
+      "phases": [
+        "anticipation",
+        "strike",
+        "recover"
+      ]
+    },
+    {
+      "id": "hoa_van_chuong",
+      "name": "Hỏa Vân Chưởng",
+      "branch": "cai_bang_chuong",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 29
+      },
+      "actorFrames": [
+        "renovated-action-hero_cai_bang_chuong_actions:right_0",
+        "renovated-action-hero_cai_bang_chuong_actions:right_1"
+      ],
+      "effectFrames": [
+        "retained_m3d_cai_bang_chuong_dragon_v2_projectile:hoa_van_travel_right_0",
+        "retained_m3d_cai_bang_chuong_dragon_v2_aura:palm_release_right_1",
+        "retained_m3d_cai_bang_chuong_dragon_v2_projectile:hoa_van_travel_right_1",
+        "retained_m3d_cai_bang_chuong_dragon_v2_aura:palm_release_right_2",
+        "retained_m3d_cai_bang_chuong_dragon_v2_impact:small_impact_right_1",
+        "retained_m3d_cai_bang_chuong_dragon_v2_projectile:hoa_van_travel_right_2",
+        "retained_m3d_cai_bang_chuong_dragon_v2_impact:small_impact_right_2",
+        "retained_m3d_cai_bang_chuong_dragon_v2_projectile:hoa_van_travel_right_3",
+        "retained_m3d_cai_bang_chuong_dragon_v2_projectile:hoa_van_travel_right_5"
+      ],
+      "phases": [
+        "anticipation",
+        "strike"
+      ]
+    },
+    {
+      "id": "cuong_long_loan_vu",
+      "name": "Cuồng Long Loạn Vũ",
+      "branch": "cai_bang_chuong",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 31
+      },
+      "actorFrames": [
+        "renovated-action-hero_cai_bang_chuong_actions:right_0",
+        "renovated-action-hero_cai_bang_chuong_actions:right_1"
+      ],
+      "effectFrames": [
+        "cai_bang_cuong_long_v1:round_blast_2",
+        "shared_fire_vfx:palm_flash_right_1",
+        "cai_bang_cuong_long_v1:round_blast_3",
+        "shared_fire_vfx:palm_flash_right_2",
+        "cai_bang_cuong_long_v1:round_blast_4"
+      ],
+      "phases": [
+        "anticipation",
+        "strike",
+        "recover"
+      ]
+    },
+    {
+      "id": "phi_long_tai_thien",
+      "name": "Phi Long Tại Thiên",
+      "branch": "cai_bang_chuong",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 35
+      },
+      "actorFrames": [
+        "renovated-action-hero_cai_bang_chuong_actions:right_0",
+        "renovated-action-hero_cai_bang_chuong_actions:right_2"
+      ],
+      "effectFrames": [
+        "shared_fire_vfx:palm_flash_right_1",
+        "cai_bang_phi_long_v1:breaking_wave_0",
+        "shared_fire_vfx:palm_flash_right_3",
+        "cai_bang_phi_long_v1:breaking_wave_1",
+        "cai_bang_phi_long_trail_v2:ground_trail_0",
+        "cai_bang_phi_long_v1:breaking_wave_3",
+        "cai_bang_phi_long_v1:breaking_wave_5",
+        "cai_bang_phi_long_trail_v2:ground_trail_1",
+        "cai_bang_phi_long_trail_v2:ground_trail_2",
+        "cai_bang_phi_long_trail_v2:ground_trail_3",
+        "cai_bang_phi_long_ending_v1:wave_collapse_0",
+        "cai_bang_phi_long_trail_v2:ground_trail_4",
+        "cai_bang_phi_long_ending_v1:wave_collapse_1",
+        "cai_bang_phi_long_ending_v1:wave_collapse_3",
+        "cai_bang_phi_long_trail_v2:ground_trail_5",
+        "cai_bang_phi_long_ending_v1:wave_collapse_4",
+        "cai_bang_phi_long_ending_v1:wave_collapse_5"
+      ],
+      "phases": [
+        "anticipation",
+        "strike"
+      ]
+    },
+    {
+      "id": "khang_long_huu_hoi",
+      "name": "Kháng Long Hữu Hối",
+      "branch": "cai_bang_chuong",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 37
+      },
+      "actorFrames": [
+        "renovated-action-hero_cai_bang_chuong_actions:right_2",
+        "renovated-action-hero_cai_bang_chuong_actions:right_0"
+      ],
+      "effectFrames": [],
+      "phases": [
+        "strike",
+        "anticipation"
+      ]
+    },
+    {
+      "id": "hang_long_hoa_vu",
+      "name": "Hàng Long Hỏa Vũ",
+      "branch": "cai_bang_chuong",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 38
+      },
+      "actorFrames": [
+        "renovated-action-hero_cai_bang_chuong_actions:right_0",
+        "renovated-action-hero_cai_bang_chuong_actions:right_2"
+      ],
+      "effectFrames": [
+        "cai_bang_hang_long_v2:dragon_coil_1",
+        "cai_bang_hang_long_v2:dragon_coil_2",
+        "cai_bang_hang_long_v2:dragon_coil_5",
+        "cai_bang_hang_long_v2:dragon_coil_3",
+        "cai_bang_hang_long_v2:dragon_coil_4",
+        "cai_bang_hang_long_v2:dragon_coil_0"
+      ],
+      "phases": [
+        "anticipation",
+        "strike"
+      ]
+    },
+    {
+      "id": "thien_son_phien",
+      "name": "Thiên Sơn Phiến",
+      "branch": "thien_son_phien",
+      "rank": null,
+      "level": 6,
+      "serverEvent": {
+        "kind": "attack",
+        "id": 40
+      },
+      "actorFrames": [
+        "renovated-action-v2:thien_son_throw:right_0",
+        "renovated-action-v2:thien_son_throw:right_2",
+        "renovated-action-v2:thien_son_throw:right_1"
+      ],
+      "effectFrames": [
+        "renovated-action-v2:thien_son_throw:right_0",
+        "thien_son_fan_v2_impact:outbound_hit_right_2",
+        "thien_son_fan_v2_projectile:outbound_right_0",
+        "renovated-action-v2:thien_son_throw:right_2",
+        "thien_son_fan_v2_impact:outbound_hit_right_4",
+        "thien_son_fan_v2_projectile:outbound_right_1",
+        "thien_son_fan_v2_projectile:outbound_right_3",
+        "thien_son_fan_v2_projectile:outbound_right_5",
+        "thien_son_fan_v2_projectile:outbound_right_2",
+        "thien_son_fan_v2_projectile:return_left_0",
+        "thien_son_fan_v2_projectile:return_left_1",
+        "thien_son_fan_v2_projectile:return_left_3",
+        "thien_son_fan_v2_projectile:return_left_4",
+        "thien_son_fan_v2_impact:return_hit_left_2",
+        "thien_son_fan_v2_projectile:return_left_2",
+        "thien_son_fan_v2_impact:return_hit_left_4",
+        "renovated-action-v2:thien_son_throw:right_1"
+      ],
+      "phases": [
+        "throw-catch"
+      ]
+    },
+    {
+      "id": "lien_hoa_phien",
+      "name": "Liên Hoa Phiến",
+      "branch": "thien_son_phien",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 44
+      },
+      "actorFrames": [
+        "renovated-action-v2:thien_son_cast:right_0"
+      ],
+      "effectFrames": [
+        "review_lotus:opening_0",
+        "renovated-action-v2:thien_son_cast:right_0",
+        "thien_son_wind_actions_v2_aura:guard_loop_0",
+        "review_lotus:opening_1",
+        "thien_son_wind_actions_v2_aura:guard_loop_1",
+        "thien_son_wind_actions_v2_aura:guard_loop_2",
+        "review_lotus:loop_0",
+        "thien_son_wind_actions_v2_aura:guard_loop_4",
+        "thien_son_wind_actions_v2_aura:guard_loop_5",
+        "review_lotus:loop_1",
+        "review_lotus:loop_2",
+        "review_lotus:loop_3",
+        "thien_son_wind_actions_v2_aura:guard_loop_3"
+      ],
+      "phases": [
+        "fan-cast"
+      ]
+    },
+    {
+      "id": "luc_duong_chuong",
+      "name": "Lục Dương Chưởng",
+      "branch": "thien_son_phien",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 47
+      },
+      "actorFrames": [
+        "renovated-action-v2:thien_son_cast:right_3",
+        "renovated-action-v2:thien_son_cast:down_3",
+        "renovated-action-v2:thien_son_cast:left_3",
+        "renovated-action-v2:thien_son_cast:up_3"
+      ],
+      "effectFrames": [
+        "renovated-action-v2:thien_son_cast:right_3",
+        "thien_son_wind_actions_v2_aura:guard_opening_0",
+        "renovated-action-v2:thien_son_cast:down_3",
+        "thien_son_wind_actions_v2_aura:guard_opening_1",
+        "thien_son_wind_actions_v2_aura:guard_loop_0",
+        "thien_son_wind_actions_v2_aura:guard_loop_1",
+        "renovated-action-v2:thien_son_cast:left_3",
+        "thien_son_wind_actions_v2_aura:guard_loop_2",
+        "renovated-action-v2:thien_son_cast:up_3",
+        "thien_son_wind_actions_v2_aura:guard_loop_3",
+        "thien_son_wind_actions_v2_aura:guard_loop_5",
+        "thien_son_wind_actions_v2_aura:guard_loop_4"
+      ],
+      "phases": [
+        "fan-cast"
+      ]
+    },
+    {
+      "id": "luu_phong_bo",
+      "name": "Bạo Vũ Cuồng Phong",
+      "branch": "thien_son_phien",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 61
+      },
+      "actorFrames": [
+        "renovated-action-v2:thien_son_cast:right_1"
+      ],
+      "effectFrames": [
+        "renovated-action-v2:thien_son_cast:right_1",
+        "thien-son-wind-fan:spin_0",
+        "thien-son-wind-fan:spin_2",
+        "thien-son-wind-fan:spin_3",
+        "thien-son-wind-fan:spin_1"
+      ],
+      "phases": [
+        "fan-cast"
+      ]
+    },
+    {
+      "id": "chiet_mai_thu",
+      "name": "Chiết Mai Thủ",
+      "branch": "thien_son_phien",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 62
+      },
+      "actorFrames": [
+        "renovated-action-v2:thien_son_cast:right_2"
+      ],
+      "effectFrames": [
+        "thien_son_wind_actions_v2_aura:plum_opening_0",
+        "renovated-action-v2:thien_son_cast:right_2",
+        "thien_son_wind_actions_v2_aura:plum_opening_1",
+        "thien_son_wind_actions_v2_aura:plum_opening_2",
+        "thien_son_wind_actions_v2_aura:plum_opening_3",
+        "thien_son_wind_actions_v2_aura:plum_opening_4",
+        "thien_son_wind_actions_v2_aura:plum_loop_0",
+        "thien_son_wind_actions_v2_aura:plum_loop_1",
+        "thien_son_wind_actions_v2_aura:plum_loop_2",
+        "thien_son_wind_actions_v2_aura:plum_loop_3",
+        "thien_son_wind_actions_v2_aura:plum_loop_4",
+        "thien_son_wind_actions_v2_aura:plum_loop_5"
+      ],
+      "phases": [
+        "fan-cast"
+      ]
+    },
+    {
+      "id": "bach_phien_phong_bao",
+      "name": "Bách Phiến Phong Bạo",
+      "branch": "thien_son_phien",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 63
+      },
+      "actorFrames": [
+        "renovated-action-v2:thien_son_cast:right_3",
+        "renovated-action-v2:thien_son_cast:down_3",
+        "renovated-action-v2:thien_son_cast:left_3",
+        "renovated-action-v2:thien_son_cast:up_3"
+      ],
+      "effectFrames": [
+        "thien_son_fan_v2_projectile:storm_fan_up_0",
+        "thien_son_fan_v2_projectile:storm_fan_up_left_0",
+        "thien_son_fan_v2_projectile:storm_fan_up_right_0",
+        "renovated-action-v2:thien_son_cast:right_3",
+        "thien_son_fan_v2_aura:storm_opening_0",
+        "thien_son_fan_v2_projectile:storm_fan_right_0",
+        "thien_son_fan_v2_projectile:storm_fan_left_0",
+        "thien_son_fan_v2_projectile:storm_fan_down_right_0",
+        "thien_son_fan_v2_projectile:storm_fan_down_left_0",
+        "thien_son_fan_v2_projectile:storm_fan_down_0",
+        "thien_son_fan_v2_projectile:storm_fan_up_left_1",
+        "thien_son_fan_v2_projectile:storm_fan_up_right_1",
+        "renovated-action-v2:thien_son_cast:down_3",
+        "thien_son_fan_v2_aura:storm_opening_1",
+        "thien_son_fan_v2_projectile:storm_fan_right_1",
+        "thien_son_fan_v2_projectile:storm_fan_left_1",
+        "thien_son_fan_v2_projectile:storm_fan_down_right_1",
+        "thien_son_fan_v2_projectile:storm_fan_down_left_1",
+        "thien_son_fan_v2_projectile:storm_fan_down_1",
+        "renovated-action-v2:thien_son_cast:left_3",
+        "thien_son_fan_v2_aura:storm_loop_0",
+        "thien_son_fan_v2_projectile:storm_fan_right_3",
+        "thien_son_fan_v2_projectile:storm_fan_left_3",
+        "thien_son_fan_v2_projectile:storm_fan_down_right_3",
+        "thien_son_fan_v2_projectile:storm_fan_down_left_3",
+        "thien_son_fan_v2_aura:storm_loop_1",
+        "thien_son_fan_v2_projectile:storm_fan_right_4",
+        "thien_son_fan_v2_projectile:storm_fan_left_4",
+        "renovated-action-v2:thien_son_cast:up_3",
+        "thien_son_fan_v2_aura:storm_loop_2",
+        "thien_son_fan_v2_aura:storm_loop_3",
+        "thien_son_fan_v2_projectile:storm_fan_right_2",
+        "thien_son_fan_v2_projectile:storm_fan_left_2",
+        "thien_son_fan_v2_aura:storm_loop_5",
+        "thien_son_fan_v2_projectile:storm_fan_up_1",
+        "thien_son_fan_v2_aura:storm_loop_4",
+        "thien_son_fan_v2_projectile:storm_fan_up_left_3",
+        "thien_son_fan_v2_projectile:storm_fan_up_right_3",
+        "thien_son_fan_v2_projectile:storm_fan_right_5",
+        "thien_son_fan_v2_projectile:storm_fan_left_5"
+      ],
+      "phases": [
+        "fan-cast"
+      ]
+    },
+    {
+      "id": "thien_son_dao",
+      "name": "Thiên Sơn Đao",
+      "branch": "thien_son_dao",
+      "rank": null,
+      "level": 6,
+      "serverEvent": {
+        "kind": "attack",
+        "id": 83
+      },
+      "actorFrames": [
+        "tam-lien-poses:1",
+        "tam-lien-poses:3"
+      ],
+      "effectFrames": [
+        "sweep-right:__BASE"
+      ],
+      "phases": []
+    },
+    {
+      "id": "phi_anh_tram",
+      "name": "Phi Ảnh Trảm",
+      "branch": "thien_son_dao",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 85
+      },
+      "actorFrames": [
+        "renovated-thien-son-han-nguyet:walk_right_0",
+        "renovated-thien-son-han-nguyet:walk_right_1",
+        "renovated-thien-son-han-nguyet:walk_right_2"
+      ],
+      "effectFrames": [
+        "thien_son_dao_v2_impact:dash_slash_right_1",
+        "thien_son_dao_v2_aura:phi_anh_tram_motion_right_0",
+        "thien_son_dao_v2_afterimage:moving_ghost_right_0",
+        "thien_son_dao_v2_impact:dash_slash_right_3"
+      ],
+      "phases": []
+    },
+    {
+      "id": "truy_hon_dao",
+      "name": "Truy Hồn Đao",
+      "branch": "thien_son_dao",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 87
+      },
+      "actorFrames": [
+        "renovated-thien-son-han-nguyet:attack_right_0",
+        "renovated-thien-son-han-nguyet:attack_right_1",
+        "renovated-thien-son-han-nguyet:attack_right_2"
+      ],
+      "effectFrames": [
+        "thien_son_dao_v2_impact:slow_contact_right_1",
+        "renovated-v5-azure_crescent:1",
+        "thien_son_dao_v2_impact:slow_contact_right_2",
+        "renovated-v5-azure_crescent:2",
+        "thien_son_dao_v2_impact:slow_contact_right_4",
+        "renovated-v5-azure_crescent:3",
+        "thien_son_dao_v2_impact:slow_contact_right_5",
+        "renovated-v5-azure_crescent:0"
+      ],
+      "phases": []
+    },
+    {
+      "id": "phong_anh_hoan_vi",
+      "name": "Phong Ảnh Hoán Vị",
+      "branch": "thien_son_dao",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 90
+      },
+      "actorFrames": [
+        "renovated-thien-son-han-nguyet:attack_right_0",
+        "renovated-thien-son-han-nguyet:attack_right_1"
+      ],
+      "effectFrames": [
+        "thien_son_dao_v2_afterimage:moving_ghost_right_0",
+        "thien_son_dao_v2_afterimage:moving_ghost_right_1",
+        "thien_son_dao_v2_aura:phong_anh_hoan_vi_motion_right_2",
+        "thien_son_dao_v2_aura:phong_anh_hoan_vi_motion_right_1"
+      ],
+      "phases": []
+    },
+    {
+      "id": "liet_phong_dao",
+      "name": "Liệt Phong Đao",
+      "branch": "thien_son_dao",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 91
+      },
+      "actorFrames": [
+        "renovated-thien-son-han-nguyet:attack_right_0",
+        "renovated-thien-son-han-nguyet:attack_right_1",
+        "renovated-thien-son-han-nguyet:attack_right_2",
+        "renovated-thien-son-han-nguyet:attack_right_3"
+      ],
+      "effectFrames": [
+        "renovated-v4-liet_phong_overhead:0",
+        "renovated-v4-liet_phong_overhead:1",
+        "renovated-v4-liet_phong_overhead:2",
+        "renovated-v5-blue_fissure:0",
+        "renovated-v4-bach_liet_slashes:1",
+        "renovated-v4-bach_liet_slashes:2",
+        "renovated-v5-blue_fissure:1",
+        "renovated-v4-bach_liet_slashes:3",
+        "renovated-v5-blue_fissure:2",
+        "renovated-v5-blue_fissure:3"
+      ],
+      "phases": []
+    },
+    {
+      "id": "bach_liet_thien_kich",
+      "name": "Bách Liệt Thiên Kích",
+      "branch": "thien_son_dao",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 94
+      },
+      "actorFrames": [
+        "renovated-thien-son-han-nguyet:idle_right"
+      ],
+      "effectFrames": [
+        "thien-son-x-shadows:down_right_ready",
+        "thien-son-x-shadows:down_left_ready",
+        "thien-son-x-shadows:up_right_ready",
+        "thien-son-x-shadows:up_left_ready",
+        "thien-son-x-shadows:down_right_windup",
+        "thien-son-x-shadows:down_left_windup",
+        "thien-son-x-shadows:up_right_windup",
+        "thien-son-x-shadows:up_left_windup",
+        "thien-son-x-shadows:down_right_follow",
+        "thien-son-x-shadows:down_left_follow",
+        "thien-son-x-crescents:heavy",
+        "thien-son-x-crescents:slender",
+        "thien-son-x-crescents:double_edge",
+        "thien-son-x-crescents:hooked",
+        "thien-son-x-shadows:up_right_follow",
+        "thien-son-x-shadows:up_left_follow",
+        "thien-son-x-shadows:down_right_sweep",
+        "thien-son-x-shadows:down_left_sweep",
+        "thien-son-x-shadows:up_right_sweep",
+        "thien-son-x-shadows:up_left_sweep"
+      ],
+      "phases": []
+    },
+    {
+      "id": "vo_dang_quyen",
+      "name": "Võ Đang Quyền",
+      "branch": "vo_dang_quyen",
+      "rank": null,
+      "level": 6,
+      "serverEvent": {
+        "kind": "attack",
+        "id": 101
+      },
+      "actorFrames": [
+        "vdq-punch:right_1",
+        "vdq-punch:right_3"
+      ],
+      "effectFrames": [
+        "vdq-fist-wave:left_fist_wave_right_0",
+        "vdq-fist-wave:left_fist_wave_right_1",
+        "vdq-fist-wave:left_fist_wave_right_2",
+        "vdq-fist-wave:left_fist_wave_right_4",
+        "vdq-fist-wave:left_fist_wave_right_5"
+      ],
+      "phases": [
+        "anticipation"
+      ]
+    },
+    {
+      "id": "luong_nghi_thu",
+      "name": "Lưỡng Nghi Thủ",
+      "branch": "vo_dang_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 103
+      },
+      "actorFrames": [
+        "vdq-cast:palm_right_0",
+        "vdq-cast:palm_right_2",
+        "vdq-cast:palm_right_3"
+      ],
+      "effectFrames": [
+        "vdq-huyen-am:huyen_am_travel_right_0",
+        "vdq-huyen-am:huyen_am_travel_right_1",
+        "vdq-huyen-am:huyen_am_travel_right_2",
+        "vdq-huyen-am:huyen_am_travel_right_3"
+      ],
+      "phases": [
+        "anticipation"
+      ]
+    },
+    {
+      "id": "huyen_am_chuong",
+      "name": "Huyền Âm Chưởng",
+      "branch": "vo_dang_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 106
+      },
+      "actorFrames": [
+        "vdq-cast:palm_right_0",
+        "vdq-cast:palm_right_1",
+        "vdq-cast:palm_right_2"
+      ],
+      "effectFrames": [
+        "vdq-effects:sonic",
+        "vdq-effects:seal"
+      ],
+      "phases": [
+        "anticipation"
+      ]
+    },
+    {
+      "id": "duong_khi_kich",
+      "name": "Bói Toán Thiên Cơ",
+      "branch": "vo_dang_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 110
+      },
+      "actorFrames": [
+        "renovated-action-hero_vo_dang_actions:right_0",
+        "renovated-action-hero_vo_dang_actions:right_1"
+      ],
+      "effectFrames": [
+        "vdq-effects:doai",
+        "vdq-effects:ton",
+        "vdq-effects:kham",
+        "vdq-effects:can-nui",
+        "vdq-effects:chan",
+        "vdq-effects:ly",
+        "vdq-effects:can",
+        "vdq-effects:khon"
+      ],
+      "phases": [
+        "anticipation",
+        "strike",
+        "recover"
+      ]
+    },
+    {
+      "id": "thai_cuc_than_cong",
+      "name": "Thái Cực Thần Công",
+      "branch": "vo_dang_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 111
+      },
+      "actorFrames": [
+        "renovated-action-hero_vo_dang_actions:right_3"
+      ],
+      "effectFrames": [
+        "vdq-effects:shield"
+      ],
+      "phases": [
+        "channel"
+      ]
+    },
+    {
+      "id": "thai_cuc_tran",
+      "name": "Thái Cực Trận",
+      "branch": "vo_dang_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 112
+      },
+      "actorFrames": [
+        "vdq-cast:taichi_0",
+        "vdq-cast:taichi_1",
+        "vdq-cast:taichi_2",
+        "vdq-cast:taichi_3",
+        "vdq-cast:taichi_4",
+        "vdq-cast:taichi_5"
+      ],
+      "effectFrames": [
+        "vdq-effects:formation",
+        "vdq-rim:__BASE"
+      ],
+      "phases": [
+        "channel"
+      ]
+    },
+    {
+      "id": "vo_dang_kiem",
+      "name": "Võ Đang Kiếm",
+      "branch": "vo_dang_kiem",
+      "rank": null,
+      "level": 6,
+      "serverEvent": {
+        "kind": "attack",
+        "id": 115
+      },
+      "actorFrames": [
+        "vdk-body:right_cut_up"
+      ],
+      "effectFrames": [
+        "vdk-effects:cut_5"
+      ],
+      "phases": [
+        "sword-strike"
+      ]
+    },
+    {
+      "id": "that_tinh_kiem",
+      "name": "Thất Tinh Kiếm",
+      "branch": "vo_dang_kiem",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 117
+      },
+      "actorFrames": [
+        "vdk-body:right_cut_up",
+        "vdk-body:right_cut_down",
+        "vdk-body:right_cut_right",
+        "renovated-action-v2:vo_dang_attack:right_0",
+        "vdk-body:right_cut_left"
+      ],
+      "effectFrames": [
+        "vdk-effects:cut_0",
+        "vdk-effects:cut_1",
+        "vdk-effects:cut_2",
+        "vdk-effects:cut_3",
+        "renovated-action-v2:vo_dang_attack:right_0",
+        "vdk-effects:cut_4",
+        "vdk-effects:cut_5",
+        "vdk-effects:cut_6"
+      ],
+      "phases": [
+        "sword-strike"
+      ]
+    },
+    {
+      "id": "nhan_kiem_hop_nhat",
+      "name": "Nhân Kiếm Hợp Nhất",
+      "branch": "vo_dang_kiem",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 133
+      },
+      "actorFrames": [
+        "renovated-action-v2:vo_dang_cast:right_1"
+      ],
+      "effectFrames": [
+        "renovated-action-v2:vo_dang_cast:right_1",
+        "m3d_nhan_kiem_hop_nhat_vfx:launch_right_1",
+        "m3d_nhan_kiem_hop_nhat_vfx:flight_loop_right_0",
+        "m3d_nhan_kiem_hop_nhat_vfx:launch_right_2",
+        "m3d_nhan_kiem_hop_nhat_vfx:flight_loop_right_1",
+        "m3d_nhan_kiem_hop_nhat_vfx:flight_loop_right_2",
+        "m3d_nhan_kiem_hop_nhat_vfx:flight_loop_right_3",
+        "m3d_nhan_kiem_hop_nhat_vfx:flight_loop_right_4",
+        "m3d_nhan_kiem_hop_nhat_vfx:flight_loop_right_5"
+      ],
+      "phases": [
+        "empty-hand"
+      ]
+    },
+    {
+      "id": "bat_quai_kiem_tran",
+      "name": "Bát Quái Kiếm Trận",
+      "branch": "vo_dang_kiem",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 135
+      },
+      "actorFrames": [
+        "renovated-action-v2:vo_dang_cast:right_2"
+      ],
+      "effectFrames": [
+        "bat_quai_kiem_tran_vfx:activation_1",
+        "bat_quai_kiem_tran_vfx:pulse_1",
+        "bat_quai_kiem_tran_vfx:loop_0",
+        "renovated-action-v2:vo_dang_cast:right_2",
+        "bat_quai_kiem_tran_vfx:activation_2",
+        "bat_quai_kiem_tran_vfx:pulse_2",
+        "bat_quai_kiem_tran_vfx:activation_3",
+        "bat_quai_kiem_tran_vfx:pulse_3",
+        "bat_quai_kiem_tran_vfx:loop_1",
+        "bat_quai_kiem_tran_vfx:loop_2",
+        "bat_quai_kiem_tran_vfx:loop_3"
+      ],
+      "phases": [
+        "channel"
+      ]
+    },
+    {
+      "id": "toa_sat_bac_do",
+      "name": "Tọa Sát Bác Đồ",
+      "branch": "vo_dang_kiem",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 142
+      },
+      "actorFrames": [
+        "renovated-action-v2:vo_dang_cast:right_3"
+      ],
+      "effectFrames": [
+        "renovated-action-v2:vo_dang_cast:right_3",
+        "renovated_toa_guard:mana_loop_0",
+        "toa_sat_bac_do_vfx:readiness_right_0",
+        "renovated_toa_guard:mana_loop_1",
+        "renovated_toa_guard:mana_loop_2",
+        "toa_sat_bac_do_vfx:readiness_right_1",
+        "renovated_toa_guard:mana_loop_3",
+        "toa_sat_bac_do_vfx:readiness_right_2",
+        "renovated_toa_guard:mana_loop_4",
+        "renovated_toa_guard:mana_loop_5",
+        "toa_sat_bac_do_vfx:readiness_right_3"
+      ],
+      "phases": [
+        "guard"
+      ]
+    },
+    {
+      "id": "van_kiem_quy_tong",
+      "name": "Vạn Kiếm Quy Tông",
+      "branch": "vo_dang_kiem",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 143
+      },
+      "actorFrames": [
+        "vdk-body:right_aim"
+      ],
+      "effectFrames": [
+        "vdk-effects:marker",
+        "vdk-effects:blade"
+      ],
+      "phases": [
+        "channel"
+      ]
+    },
+    {
+      "id": "thieu_lam_quyen",
+      "name": "Thiếu Lâm Quyền",
+      "branch": "thieu_lam_quyen",
+      "rank": null,
+      "level": 6,
+      "serverEvent": {
+        "kind": "attack",
+        "id": 144
+      },
+      "actorFrames": [
+        "renovated-action-hero_thieu_lam_actions:right_0"
+      ],
+      "effectFrames": [
+        "shaolin_quyen_ki:left_fist_0"
+      ],
+      "phases": [
+        "anticipation",
+        "strike",
+        "recover"
+      ]
+    },
+    {
+      "id": "la_han_quyen",
+      "name": "La Hán Quyền",
+      "branch": "thieu_lam_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 146
+      },
+      "actorFrames": [
+        "shaolin_quyen_body:left_fist_right_0",
+        "shaolin_quyen_body:left_fist_right_1",
+        "shaolin_quyen_body:left_fist_right_2"
+      ],
+      "effectFrames": [
+        "shaolin_la_han:apparition_right_0",
+        "retained_m3d_lahan_guard:guard_3",
+        "shaolin_la_han:apparition_right_1",
+        "shaolin_la_han_ground:impact_0",
+        "retained_m3d_lahan_guard:guard_0",
+        "retained_m3d_lahan_guard:guard_1",
+        "shaolin_la_han:apparition_right_2",
+        "shaolin_la_han:apparition_right_3",
+        "retained_m3d_lahan_guard:guard_2",
+        "shaolin_la_han:apparition_right_4",
+        "shaolin_la_han:apparition_right_5",
+        "shaolin_la_han:apparition_right_6"
+      ],
+      "phases": []
+    },
+    {
+      "id": "vi_da_quyen",
+      "name": "Vi Đà Quyền",
+      "branch": "thieu_lam_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 149
+      },
+      "actorFrames": [
+        "renovated-v5-vi_da_body:right_0",
+        "renovated-v5-vi_da_body:right_1",
+        "renovated-v5-vi_da_body:right_2",
+        "renovated-v5-vi_da_body:right_3"
+      ],
+      "effectFrames": [
+        "renovated-v4-earth_eruption:0",
+        "renovated-v4-earth_eruption:1",
+        "renovated-v4-earth_eruption:2",
+        "renovated-v4-earth_eruption:3"
+      ],
+      "phases": [
+        "ground-punch"
+      ]
+    },
+    {
+      "id": "dai_luc_kim_cuong_chuong",
+      "name": "Đại Lực Kim Cương Chưởng",
+      "branch": "thieu_lam_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 153
+      },
+      "actorFrames": [
+        "renovated-action-hero_thieu_lam_special:right_1"
+      ],
+      "effectFrames": [
+        "diamond_palm_v05:travel_0",
+        "diamond_palm_v05:impact_1",
+        "diamond_palm_v05:impact_2"
+      ],
+      "phases": [
+        "palm"
+      ]
+    },
+    {
+      "id": "kim_cang_bat_hoai",
+      "name": "Kim Cang Bất Hoại",
+      "branch": "thieu_lam_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 160
+      },
+      "actorFrames": [
+        "renovated-action-hero_thieu_lam_special:right_2"
+      ],
+      "effectFrames": [
+        "kim_cang_bat_hoai_vfx:activation_1",
+        "kim_cang_bat_hoai_vfx:loop_0",
+        "kim_cang_bat_hoai_vfx:activation_2",
+        "kim_cang_bat_hoai_vfx:activation_3",
+        "kim_cang_bat_hoai_vfx:loop_1",
+        "kim_cang_bat_hoai_vfx:loop_2",
+        "kim_cang_bat_hoai_vfx:loop_3"
+      ],
+      "phases": [
+        "channel"
+      ]
+    },
+    {
+      "id": "nhu_lai_niet_ban",
+      "name": "Như Lai Niết Bàn",
+      "branch": "thieu_lam_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 161
+      },
+      "actorFrames": [
+        "renovated-action-hero_thieu_lam_special:right_2"
+      ],
+      "effectFrames": [
+        "review3_r3_buddha:loop_billboard_0",
+        "review3_r3_sky_palm:intro_billboard_0",
+        "review3_r3_buddha:loop_billboard_1",
+        "review3_r3_sanskrit:loop_billboard_0",
+        "review3_r3_palm_impact:loop_billboard_0",
+        "review3_r3_palm_impact:intro_billboard_0",
+        "review3_r3_sanskrit:loop_billboard_1",
+        "review3_r3_palm_impact:loop_billboard_1"
+      ],
+      "phases": [
+        "channel"
+      ]
+    },
+    {
+      "id": "khang_long_huu_hoi",
+      "name": "Kháng Long Hữu Hối",
+      "branch": "cai_bang_chuong",
+      "rank": 4,
+      "level": 7,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 1
+      },
+      "actorFrames": [
+        "renovated-action-hero_cai_bang_chuong_actions:right_2",
+        "renovated-action-hero_cai_bang_chuong_actions:right_0"
+      ],
+      "effectFrames": [
+        "m3d_khang_long_burn_vfx:burn_intro_0",
+        "m3d_khang_long_burn_vfx:burn_intro_1",
+        "m3d_khang_long_burn_vfx:burn_intro_2",
+        "m3d_khang_long_burn_vfx:burn_intro_3",
+        "m3d_khang_long_burn_vfx:burn_intro_5",
+        "m3d_khang_long_burn_vfx:burn_loop_0",
+        "m3d_khang_long_burn_vfx:burn_loop_1",
+        "m3d_khang_long_burn_vfx:burn_loop_2",
+        "m3d_khang_long_burn_vfx:burn_loop_3",
+        "m3d_khang_long_burn_vfx:burn_loop_4",
+        "m3d_khang_long_burn_vfx:burn_loop_5"
+      ],
+      "phases": [
+        "strike",
+        "recover",
+        "anticipation"
+      ]
+    },
+    {
+      "id": "toan_phong_thoai",
+      "name": "Toàn Phong Thoái",
+      "branch": "thieu_lam_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 6
+      },
+      "actorFrames": [
+        "renovated-action-hero_thieu_lam_actions:right_0",
+        "renovated-action-hero_thieu_lam_actions:right_3"
+      ],
+      "effectFrames": [
+        "review3_r3_tornado_right:birth_right_0",
+        "review3_r3_tornado_right:impact_right_0",
+        "review3_r3_tornado_right:travel_right_0",
+        "review3_r3_tornado_right:travel_right_1"
+      ],
+      "phases": [
+        "anticipation",
+        "strike"
+      ]
+    },
+    {
+      "id": "hoanh_tao_cuoc",
+      "name": "Ca Diệp Thoái",
+      "branch": "thieu_lam_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 9
+      },
+      "actorFrames": [
+        "renovated-action-hero_thieu_lam_special:right_0"
+      ],
+      "effectFrames": [
+        "review3_r3_ca_diep_ground_keyposes:birth_right_0",
+        "review3_r3_ca_diep_ground_keyposes:impact_right_0",
+        "review3_r3_ca_diep_ground_keyposes:travel_right_1",
+        "review3_r3_ca_diep_ground_keyposes:travel_right_0",
+        "review3_r3_ca_diep_ground_keyposes:outro_right_0"
+      ],
+      "phases": [
+        "anticipation",
+        "stationary-stomp",
+        "recover"
+      ]
+    },
+    {
+      "id": "vo_anh_cuoc",
+      "name": "Vô Ảnh Cước",
+      "branch": "thieu_lam_quyen",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 13
+      },
+      "actorFrames": [
+        "shaolin_vo_anh_body:cast_right_0"
+      ],
+      "effectFrames": [
+        "shaolin_quyen_ki:foot_0",
+        "shaolin_quyen_ki:heel_0"
+      ],
+      "phases": []
+    },
+    {
+      "id": "thieu_lam_dao",
+      "name": "Thiếu Lâm Đao",
+      "branch": "thieu_lam_dao",
+      "rank": null,
+      "level": 6,
+      "serverEvent": {
+        "kind": "attack",
+        "id": 15
+      },
+      "actorFrames": [
+        "renovated-action-hero_thieu_lam_dao_actions:right_0",
+        "renovated-action-hero_thieu_lam_dao_actions:right_1"
+      ],
+      "effectFrames": [],
+      "phases": [
+        "anticipation",
+        "strike",
+        "recover"
+      ]
+    },
+    {
+      "id": "tru_ta",
+      "name": "Tru Tà",
+      "branch": "thieu_lam_dao",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 17
+      },
+      "actorFrames": [
+        "renovated-action-hero_thieu_lam_dao_actions:right_1"
+      ],
+      "effectFrames": [],
+      "phases": [
+        "strike"
+      ]
+    },
+    {
+      "id": "kim_quang_ho_tran",
+      "name": "Kim Quang Hộ Trận",
+      "branch": "thieu_lam_dao",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 20
+      },
+      "actorFrames": [
+        "renovated-action-hero_thieu_lam_dao_actions:right_3"
+      ],
+      "effectFrames": [
+        "review3_kim_quang_ho_tran_vfx:loop_0",
+        "review3_kim_quang_ho_tran_vfx:loop_1",
+        "review3_kim_quang_ho_tran_vfx:loop_2",
+        "review3_kim_quang_ho_tran_vfx:loop_3"
+      ],
+      "phases": [
+        "channel"
+      ]
+    },
+    {
+      "id": "tam_gioi_quy_thien",
+      "name": "Sư Tử Hống",
+      "branch": "thieu_lam_dao",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 25
+      },
+      "actorFrames": [
+        "review3_tam_gioi_quy_thien_character:cast_right_0",
+        "review3_tam_gioi_quy_thien_character:cast_right_1",
+        "review3_tam_gioi_quy_thien_character:cast_right_2",
+        "review3_tam_gioi_quy_thien_character:cast_right_3"
+      ],
+      "effectFrames": [
+        "review3_r3_lion_head:intro_billboard_0",
+        "review3_r3_roar_wave:roar_billboard_0",
+        "review3_r3_lion_head:roar_billboard_0",
+        "tam_gioi_quy_thien_vfx:armor_break_0",
+        "review3_r3_roar_wave:roar_billboard_1",
+        "review3_r3_lion_head:roar_billboard_1",
+        "tam_gioi_quy_thien_vfx:armor_break_1",
+        "review3_r3_lion_head:outro_billboard_0",
+        "tam_gioi_quy_thien_vfx:armor_break_2",
+        "tam_gioi_quy_thien_vfx:armor_break_3"
+      ],
+      "phases": []
+    },
+    {
+      "id": "bat_dong_minh_vuong",
+      "name": "Bất Động Minh Vương",
+      "branch": "thieu_lam_dao",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 29
+      },
+      "actorFrames": [
+        "renovated-action-hero_thieu_lam_dao_actions:right_3"
+      ],
+      "effectFrames": [
+        "bat_dong_minh_vuong_vfx:activation_0",
+        "bat_dong_minh_vuong_vfx:activation_1",
+        "bat_dong_minh_vuong_vfx:activation_2",
+        "bat_dong_minh_vuong_vfx:activation_3",
+        "bat_dong_minh_vuong_vfx:loop_0",
+        "bat_dong_minh_vuong_vfx:loop_1",
+        "bat_dong_minh_vuong_vfx:loop_2",
+        "bat_dong_minh_vuong_vfx:loop_3"
+      ],
+      "phases": [
+        "channel"
+      ]
+    },
+    {
+      "id": "nhu_lai_thien_diep",
+      "name": "Như Lai Thiên Diệp",
+      "branch": "thieu_lam_dao",
+      "rank": 1,
+      "level": 6,
+      "serverEvent": {
+        "kind": "cast",
+        "id": 31
+      },
+      "actorFrames": [],
+      "effectFrames": [
+        "nhu_lai_thien_diep_vfx:ally_defense_0",
+        "renovated-v4-nhu_lai_blade:1",
+        "nhu_lai_thien_diep_vfx:ally_defense_1",
+        "nhu_lai_thien_diep_vfx:ally_defense_2",
+        "nhu_lai_thien_diep_vfx:ally_defense_3",
+        "renovated-v4-nhu_lai_blade:3"
+      ],
+      "phases": []
+    },
+    {
+      "id": "tam_lien_tram",
+      "name": "Tam Liên Trảm",
+      "branch": "thien_son_dao",
+      "rank": null,
+      "level": 6,
+      "serverEvent": {
+        "kind": "pulse",
+        "id": 1
+      },
+      "actorFrames": [
+        "tam-lien-poses:13",
+        "tam-lien-poses:14",
+        "tam-lien-poses:15"
+      ],
+      "effectFrames": [],
+      "phases": []
+    }
+  ]
+}

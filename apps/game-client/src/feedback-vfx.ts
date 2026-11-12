@@ -1,3 +1,4 @@
+import { zoneTick } from './zone-tick.js';
 import Phaser from 'phaser';
 import { voDangQuyenHandled } from './vo-dang-quyen-art.js';
 import { voDangKiemHandled } from './vo-dang-kiem-art.js';
@@ -430,7 +431,7 @@ export class FeedbackVfx {
       loopRef,
       endingRef,
       looping: false,
-      receivedTick: this.state?.tick ?? 0,
+      receivedTick: zoneTick(this.state, this.zone) ?? 0,
       cadenceSynced: false,
       waitingStrike,
     });
@@ -1019,7 +1020,7 @@ export class FeedbackVfx {
         a &&
         p.basic &&
         !p.cadenceSynced &&
-        state.tick > p.receivedTick &&
+        (zoneTick(state, zone) ?? 0) > p.receivedTick &&
         (a.basicCooldown ?? 0) > 0
       ) {
         p.duration =

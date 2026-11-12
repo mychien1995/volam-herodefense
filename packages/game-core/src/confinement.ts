@@ -1,3 +1,4 @@
+import { opponents, targetRadius } from './opponents.js';
 import { blocked, distance, segmentRect } from './geometry.js';
 import type { Actor, Point, SimulationConfig, World } from './types.js';
 
@@ -14,7 +15,7 @@ export function captureConfinement(
     )
       continue;
     area.trappedIds ??= [];
-    for (const enemy of world.creeps.values()) {
+    for (const enemy of opponents(world, area.ownerId)) {
       if (
         enemy.hp > 0 &&
         distance(area, enemy) <= area.effect.radius &&
@@ -65,8 +66,11 @@ export function confineMovement(
   }
   actor.x = from.x + dx * lo;
   actor.y = from.y + dy * lo;
-  const radius =
-    world.creeps.get(actor.id)?.stats?.radius ?? config.creep.radius;
+  const radius = targetRadius(
+    world,
+    world.creeps.get(actor.id) ?? actor,
+    config,
+  );
   if (blocked(actor, radius, config.width, config.height, config.collision)) {
     actor.x = from.x;
     actor.y = from.y;
@@ -80,7 +84,7 @@ export function enforceConfinement(
   starts: Map<string, Point>,
 ) {
   captureConfinement(world, config);
-  for (const [id, actor] of world.creeps)
+  for (const [id, actor] of world.duel ? world.heroes : world.creeps)
     if (actor.hp > 0) {
       const before = starts.get(id);
       if (before) confineMovement(world, actor, before, config);

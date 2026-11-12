@@ -1,3 +1,4 @@
+import { opponent } from './opponents.js';
 import { emit, hurt, offensiveStats } from './combat.js';
 import {
   blocked,
@@ -50,7 +51,8 @@ export function recordTamLienHit(
   targetId: string,
   config: SimulationConfig,
 ) {
-  const target = world.creeps.get(targetId);
+  const creep = world.creeps.get(targetId);
+  const target = opponent(world, hero.id, targetId);
   if (
     !target ||
     hero.hp <= 0 ||
@@ -58,7 +60,7 @@ export function recordTamLienHit(
     world.tick < (hero.abilityCooldowns?.[tamLienTram.id] ?? 0)
   )
     return;
-  const group = creepGroup(target, config);
+  const group = creep ? creepGroup(creep, config) : target.id;
   const old = hero.tamLien;
   const progress =
     old?.group === group && (!old.readyUntil || old.readyUntil > world.tick)
@@ -101,14 +103,16 @@ export function startTamLienTram(
     )
   )
     return;
-  const eligible = (enemy: Creep | undefined): enemy is Creep =>
+  const eligible = (
+    enemy: ReturnType<typeof opponent>,
+  ): enemy is NonNullable<ReturnType<typeof opponent>> =>
     !!enemy &&
     enemy.hp > 0 &&
     distance(hero, enemy) <= tamLienTram.range &&
     !config.collision.some(
       (wall) => segmentRect(hero, enemy, wall) !== undefined,
     );
-  let target = world.creeps.get(ready.targetId);
+  let target = opponent(world, hero.id, ready.targetId);
   if (!eligible(target) && ready.group === 'creeps')
     target = [...world.creeps.values()]
       .filter(
@@ -211,7 +215,7 @@ export function stepTamLienTram(
     config.radius,
     config,
   );
-  const target = world.creeps.get(combo.targetId);
+  const target = opponent(world, hero.id, combo.targetId);
   if (
     target &&
     target.hp > 0 &&

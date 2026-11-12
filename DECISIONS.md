@@ -1,3 +1,7 @@
+## Lôi Đài Hồng Mộc — 2026-11-12
+
+Đã duyệt Lôi Đài 1v1, viền gạch trắng để quan chiến, sàn gỗ đỏ chữ nhật nới diện tích và pháo hoa chiến thắng. Xem [quy tắc và artwork](docs/LOI_DAI.md) để biết các quy tắc thay thế đề xuất PvP cũ.
+
 ## Thiếu Lâm Đao · bản tích hợp M3D · 2026-11-09
 
 Trận thường dùng trường đao Kim Cang (1C), đao khí lưỡi liềm (2A), La Hán quét Tru Tà (3A) và đao sen cùng vòng sen Như Lai Thiên Diệp (4A). Tru Tà có tầm cơ bản 190 đơn vị và tăng 4 đơn vị mỗi bậc. Phaser đặt mép lưỡi quét theo bán kính trong sự kiện thi triển từ server. Đao khí của A là phần trình diễn của đòn cận chiến. [Chi tiết](docs/SHAOLIN_DAO_REWORK.md).

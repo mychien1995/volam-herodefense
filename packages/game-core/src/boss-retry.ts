@@ -191,7 +191,11 @@ export class BossRetries {
   advance(): void {
     for (const t of [...this.trials.values()]) {
       if (t.phase === 'vote' && this.match.nowMs >= t.deadline) this.resolve(t);
-      else if (t.phase === 'fighting') this.observe(t.zone, t.bossId);
+      else if (
+        t.phase === 'fighting' &&
+        !(t.zone === this.match.arena && this.match.duelPausesArena)
+      )
+        this.observe(t.zone, t.bossId);
     }
   }
   vote(id: string, trialId: number, accept: boolean): string | undefined {

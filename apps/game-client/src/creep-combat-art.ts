@@ -1,3 +1,4 @@
+import { zoneTick } from './zone-tick.js';
 import Phaser from 'phaser';
 import { creepProfiles } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
@@ -108,9 +109,7 @@ export class CreepCombatArt {
       return;
     }
     const tick =
-      zone === 'arena'
-        ? state.tick
-        : (state.dungeons.get(zone)?.tick ?? state.tick);
+      zoneTick(state, zone) ?? state.tick;
     const active = new Set<string>();
     const labels = new Set<string>();
     state.bossEffects.forEach((e, id) => {

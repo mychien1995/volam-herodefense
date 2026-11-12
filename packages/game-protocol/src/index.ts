@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 38;
+export const PROTOCOL_VERSION = 39;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -220,6 +220,11 @@ export const combatEventSchema = z.strictObject({
   radius: z.number().nonnegative().optional(),
   stage: z.string().optional(),
 });
+export const loiDaiActionSchema = z.strictObject({
+  protocolVersion: z.literal(PROTOCOL_VERSION),
+  sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+  action: z.enum(['enter', 'exit']),
+});
 export const dungeonActionSchema = z.discriminatedUnion('action', [
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),
@@ -427,6 +432,7 @@ export const LobbyPlayer = schema(
     combos: t.string().default('[]').view(),
     zoneId: t.string().default('arena'),
     respawnTicks: t.number().default(0),
+    loiDaiFighter: t.boolean().default(false),
     bossSpectator: t.boolean().default(false),
     bossRevivalUsed: t.boolean().default(false),
     bossAttempt: t.number().default(0),
@@ -629,6 +635,9 @@ export const LobbyState = schema(
     devSkillLoadout: t.boolean().default(false),
     requiresBranch: t.boolean().default(true),
     tick: t.number().default(0),
+    loiDaiTick: t.number().default(0),
+    loiDaiGateTicks: t.number().default(0),
+    loiDaiFighters: t.number().default(0),
     players: t.map(LobbyPlayer),
     creeps: t.map(CreepState).view(),
     projectiles: t.map(ProjectileState).view(),

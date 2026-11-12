@@ -1,3 +1,5 @@
+import { LoiDai, loiDai } from './loi-dai.js';
+import { canDuel } from './opponents.js';
 import { TayDocEncounter, TayDocGate } from './tay-doc.js';
 import { enforceConfinement } from './confinement.js';
 import {
@@ -98,7 +100,7 @@ export interface MatchZone {
   emptyBossResetAt?: number | undefined;
   bossRespawnAt?: number | undefined;
   id: string;
-  access: 'arena' | DungeonAccess;
+  access: 'arena' | 'duel' | DungeonAccess;
   ownerId: string;
   world: World;
   config: SimulationConfig;
@@ -128,6 +130,8 @@ export class DungeonMatch {
   readonly party = new BossPartyState();
   private readonly offline = new Map<string, Hero>();
   readonly arena: MatchZone;
+  readonly duel: LoiDai;
+  private readonly reconnectFromDuel = new Set<string>();
   readonly invasion: InvasionDirector | undefined;
   readonly dongTa: DongTaEncounter | undefined;
   readonly mainBosses: MainBossDirector | undefined;
@@ -176,7 +180,17 @@ export class DungeonMatch {
   tick = 0;
   arenaTick = 0;
   nowMs = 0;
+  get duelPausesArena(): boolean {
+    const players = [...this.membership.keys()].filter(
+      (id) => !this.party.disconnected.has(id),
+    );
+    return (
+      players.length > 0 &&
+      players.every((id) => this.zoneOf(id) === this.duel.zone)
+    );
+  }
   get arenaPaused(): boolean {
+    if (this.duelPausesArena) return true;
     if (this.base.campaign && this.bossRetries.voting) return true;
     if (
       this.waveArena ||
@@ -286,6 +300,7 @@ export class DungeonMatch {
       nextWaveAt: undefined,
     };
     this.zones.set('arena', this.arena);
+    this.duel = new LoiDai(base, seed);
     if (base.campaign)
       this.arena.world.campaign = {
         chapter: 0,
@@ -337,14 +352,21 @@ export class DungeonMatch {
   }
   /** Only encounter recovery/refunds may access a temporarily offline character. */
   campaignCharacter(id: string): Hero | undefined {
-    return this.hero(id) ?? this.offline.get(id);
+    return (
+      this.duel.saved.get(id)?.hero ?? this.hero(id) ?? this.offline.get(id)
+    );
   }
   remove(id: string): void {
     const zone = this.zoneOf(id);
     if (zone?.access === 'arena')
       this.tayDoc?.depart(zone.world, zone.config, id, false);
     zone?.world.bacCai?.participantLeft(id);
-    if (zone) removeHero(zone.world, id);
+    if (zone === this.duel.zone) {
+      this.duel.leave(id);
+      this.duel.saved.delete(id);
+      if (!zone.world.heroes.size) this.zones.delete(loiDai.id);
+    } else if (zone) removeHero(zone.world, id);
+    this.reconnectFromDuel.delete(id);
     if (zone?.kim && !zone.world.heroes.size) zone.kim.clear(zone.world);
     if (zone?.dungeon?.bossEncounter && !zone.world.heroes.size)
       zone.emptyBossResetAt =
@@ -363,19 +385,23 @@ export class DungeonMatch {
       this.party.disconnected.add(id);
       this.bossRetries.disconnect(id);
     }
+    if (this.zoneOf(id) === this.duel.zone) this.reconnectFromDuel.add(id);
     // Settle an observed lethal hit before leaving the instance.
     this.observeDeath(id);
     this.transfer(id, this.arena, this.base.spawn);
+    const returned = this.hero(id)!;
     removeHero(this.arena.world, id);
-    this.offline.set(id, hero);
+    this.offline.set(id, returned);
     this.party.disconnected.add(id);
     this.respawns.delete(id);
   }
   reconnect(id: string): void {
     const hero = this.offline.get(id);
     if (!hero) return;
-    hero.hp = hero.maxHp;
-    hero.mana = hero.maxMana;
+    if (!this.reconnectFromDuel.delete(id)) {
+      hero.hp = hero.maxHp;
+      hero.mana = hero.maxMana;
+    }
     hero.bossSpectator = false;
     hero.pose = 'idle';
     this.arena.world.heroes.set(id, hero);
@@ -415,6 +441,8 @@ export class DungeonMatch {
       return 'Lời mời đã hết hạn.';
     this.party.invitations.delete(id);
     if (!accept) return undefined;
+    if (this.zoneOf(id) === this.duel.zone)
+      return 'Hãy rời Lôi Đài trước khi vào phó bản.';
     const hero = this.hero(id),
       source = this.zoneOf(id);
     if (!hero || hero.hp <= 0 || !source || this.party.disconnected.has(id))
@@ -422,6 +450,111 @@ export class DungeonMatch {
     if (source.access !== 'arena')
       this.transfer(id, this.arena, this.base.spawn);
     return this.enter(id, 'shared', invitation.destination);
+  }
+  enterLoiDai(id: string): string | undefined {
+    const hero = this.hero(id);
+    if (
+      this.victory ||
+      this.invasion?.defeated ||
+      this.bossRetries.voting ||
+      !hero ||
+      hero.hp <= 0 ||
+      hero.bossSpectator ||
+      this.zoneOf(id) !== this.arena ||
+      this.party.disconnected.has(id)
+    )
+      return 'Chỉ vào Lôi Đài khi còn sống ở đấu trường.';
+    if (hero.level < loiDai.minLevel) return 'Cần cấp 6 để vào Lôi Đài.';
+    this.tayDoc?.depart(this.arena.world, this.arena.config, id, true);
+    if (hero.hp <= 0) return 'Hãy hồi sinh trước khi vào Lôi Đài.';
+    const tick = this.arena.world.tick;
+    const saved: Hero = {
+      ...hero,
+      skillCooldowns: [...hero.skillCooldowns],
+      ...(hero.abilityCooldowns
+        ? { abilityCooldowns: { ...hero.abilityCooldowns } }
+        : {}),
+      ...(hero.chargeCooldowns
+        ? { chargeCooldowns: { ...hero.chargeCooldowns } }
+        : {}),
+      ...(hero.inventory ? { inventory: { ...hero.inventory } } : {}),
+      ...(hero.basicChainDeadline
+        ? { basicChainDeadline: { ...hero.basicChainDeadline } }
+        : {}),
+    };
+    if (hero.progression)
+      hero.progression = {
+        ...hero.progression,
+        ranks: { ...hero.progression.ranks },
+        defaultSkills: [...hero.progression.defaultSkills],
+      };
+    this.duel.saved.set(id, { hero: saved, tick, matchTick: this.tick });
+    this.zones.set(loiDai.id, this.duel.zone);
+    this.transfer(id, this.duel.zone, loiDai.spawn);
+    this.duel.prepare(hero);
+    this.party.invitations.delete(id);
+    return undefined;
+  }
+  exitLoiDai(id: string): string | undefined {
+    const saved = this.duel.saved.get(id);
+    if (!saved || this.zoneOf(id) !== this.duel.zone)
+      return 'Bạn chưa ở Lôi Đài.';
+    let position = saved.hero;
+    if (
+      blocked(
+        position,
+        this.base.radius,
+        this.base.width,
+        this.base.height,
+        this.arena.config.collision,
+      )
+    )
+      position = { ...position, ...this.base.spawn };
+    this.restoreFromLoiDai(id, position);
+    return undefined;
+  }
+  private restoreFromLoiDai(id: string, position: Point): void {
+    const { hero, tick, matchTick } = this.duel.saved.get(id)!;
+    hero.lastSequence = this.hero(id)!.lastSequence;
+    this.duel.leave(id);
+    this.duel.saved.delete(id);
+    if (!this.duel.zone.world.heroes.size) this.zones.delete(loiDai.id);
+    const now = this.arena.world.tick;
+    const deadline = (until: number) => now + Math.max(0, until - tick);
+    hero.cooldown = deadline(hero.cooldown);
+    hero.skillCooldowns = hero.skillCooldowns.map(deadline);
+    for (const [id, until] of Object.entries(hero.abilityCooldowns ?? {}))
+      hero.abilityCooldowns![id] = deadline(until);
+    for (const [id, charges] of Object.entries(hero.chargeCooldowns ?? {}))
+      hero.chargeCooldowns![id] = charges
+        .filter((until) => until > tick)
+        .map(deadline);
+    if (hero.dashRechargeAt !== undefined)
+      hero.dashRechargeAt = deadline(hero.dashRechargeAt);
+    if (hero.basicChainDeadline)
+      hero.basicChainDeadline.until = deadline(hero.basicChainDeadline.until);
+    if (hero.inventory) {
+      if (hero.inventory.auxiliaryReadyAt !== undefined)
+        hero.inventory.auxiliaryReadyAt = deadline(
+          hero.inventory.auxiliaryReadyAt,
+        );
+      hero.inventory.potionReadyAt =
+        this.tick + Math.max(0, hero.inventory.potionReadyAt - matchTick);
+    }
+    hero.x = position.x;
+    hero.y = position.y;
+    hero.lastMoveTick = now;
+    hero.moveX = hero.moveY = 0;
+    hero.actionUntil = hero.hurtUntil = now;
+    hero.pose = 'idle';
+    hero.statuses = [];
+    delete hero.actionStartedAt;
+    delete hero.castAbilityId;
+    delete hero.fortune;
+    delete hero.comboFinisher;
+    delete hero.tamLien;
+    this.arena.world.heroes.set(id, hero);
+    this.membership.set(id, this.arena.id);
   }
   canEnterDungeon(id: string): boolean {
     const hero = this.hero(id);
@@ -583,6 +716,12 @@ export class DungeonMatch {
     if (this.invasion?.defeated) return 'Trận đấu đã kết thúc.';
     const zone = this.zoneOf(id);
     if (!zone) return 'Người chơi chưa ở trong khu vực hoạt động.';
+    if (
+      zone === this.duel.zone &&
+      command.kind !== 'move' &&
+      !canDuel(zone.world, id)
+    )
+      return 'Chỉ dùng võ công khi có hai đấu thủ trên sàn Lôi Đài.';
     if (this.party.disconnected.has(id) || this.hero(id)?.bossSpectator)
       return 'Đang quan chiến.';
     if (
@@ -613,6 +752,11 @@ export class DungeonMatch {
     if (this.invasion?.defeated) return 'Trận đấu đã kết thúc.';
     if (this.party.disconnected.has(id) || hero.bossSpectator)
       return 'Đang quan chiến.';
+    if (
+      zone === this.duel.zone &&
+      (change.action !== 'stance' || !canDuel(zone.world, id))
+    )
+      return 'Không thể đổi hoặc học võ công trong Lôi Đài.';
     if (
       hero.progression?.mode !== 'fixed' &&
       (zone.id !== 'arena' || zone.access !== 'arena')
@@ -677,6 +821,7 @@ export class DungeonMatch {
       );
     if (!paused) this.restartWaveArena();
     for (const zone of this.zones.values()) {
+      if (zone === this.duel.zone) continue;
       if (this.base.campaign && this.bossRetries.frozen(zone)) {
         zone.world.events = [];
         continue;
@@ -885,10 +1030,13 @@ export class DungeonMatch {
         }
       }
     }
+    this.duel.step(this.tick);
+    for (const event of this.duel.zone.world.events)
+      this.events.push({ zoneId: loiDai.id, event });
     // Existing design dependency: a short arena respawn, never a client recall.
     for (const id of this.membership.keys()) {
       const hero = this.hero(id);
-      if (!hero || hero.hp > 0) continue;
+      if (!hero || hero.hp > 0 || this.zoneOf(id) === this.duel.zone) continue;
       if (this.waveBossRetry) continue;
       if (this.party.disconnected.has(id) || hero.bossSpectator) continue;
       const zone = this.zoneOf(id)!;
@@ -1190,10 +1338,11 @@ export class DungeonMatch {
     }
   }
   private recallForBoss(id: string): void {
-    const hero = this.hero(id);
-    if (!hero) return;
-    const dead = hero.hp <= 0;
+    const previous = this.hero(id);
+    if (!previous) return;
+    const dead = previous.hp <= 0 && this.zoneOf(id) !== this.duel.zone;
     this.transfer(id, this.arena, this.bossFormation(id));
+    const hero = this.hero(id)!;
     hero.bossSpectator = false;
     if (dead) {
       hero.hp = hero.maxHp;
@@ -1414,6 +1563,10 @@ export class DungeonMatch {
     const source = this.zoneOf(id),
       hero = this.hero(id);
     if (!source || !hero) throw new Error('Cannot transfer an unknown hero.');
+    if (source === this.duel.zone && destination === this.arena) {
+      this.restoreFromLoiDai(id, position);
+      return;
+    }
     if (source.access === 'arena')
       this.tayDoc?.depart(source.world, source.config, id, true);
     const convert = (until: number) =>
@@ -1425,8 +1578,8 @@ export class DungeonMatch {
       hero.dashRechargeAt = convert(hero.dashRechargeAt);
     hero.skillCooldowns = hero.skillCooldowns.map(convert);
     for (const id of Object.keys(hero.chargeCooldowns ?? {}))
-      hero.chargeCooldowns![id] = hero.chargeCooldowns![id]!
-        .filter((ready) => ready > source.world.tick)
+      hero.chargeCooldowns![id] = hero
+        .chargeCooldowns![id]!.filter((ready) => ready > source.world.tick)
         .map(convert);
     if (hero.inventory?.auxiliaryReadyAt !== undefined)
       hero.inventory.auxiliaryReadyAt = convert(
@@ -1438,12 +1591,16 @@ export class DungeonMatch {
     hero.statuses = [];
     source.world.bacCai?.participantLeft(id);
     refreshCharacter(hero, destination.config);
-    const pooledCharge = hero.tamLien?.group === 'creeps' ? hero.tamLien : undefined;
+    const pooledCharge =
+      hero.tamLien?.group === 'creeps' ? hero.tamLien : undefined;
     removeHero(source.world, id);
     if (pooledCharge)
       hero.tamLien = {
-        ...pooledCharge, targetId: '',
-        readyUntil: pooledCharge.readyUntil ? convert(pooledCharge.readyUntil) : 0,
+        ...pooledCharge,
+        targetId: '',
+        readyUntil: pooledCharge.readyUntil
+          ? convert(pooledCharge.readyUntil)
+          : 0,
       };
     if (source.kim && !source.world.heroes.size) source.kim.clear(source.world);
     if (source.encounter && !source.world.heroes.size)

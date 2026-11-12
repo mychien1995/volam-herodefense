@@ -1,3 +1,4 @@
+import { zoneTick } from './zone-tick.js';
 import Phaser from 'phaser';
 import type { CombatEvent } from '@volam/game-core';
 import { m1Config } from '@volam/game-data';
@@ -205,8 +206,7 @@ export class VoDangKiemArt {
     point?: (id: string) => Point | undefined,
   ): void {
     this.point = point;
-    const tick =
-      zone === 'arena' ? state?.tick : state?.dungeons.get(zone)?.tick;
+    const tick = zoneTick(state, zone);
     if (tick !== undefined && tick !== this.lastTick) {
       this.lastTick = tick;
       this.sampledAt = this.scene.time.now;

@@ -1,3 +1,4 @@
+import { zoneTick } from './zone-tick.js';
 import Phaser from 'phaser';
 import type { CombatEvent } from '@volam/game-core';
 import { dragonDivePose } from '@volam/game-core';
@@ -273,10 +274,7 @@ export class RenovationRevision {
       active.add(id);
       let v = this.shots.get(id);
       const dragon = p.abilityId === hangLongId;
-      const age =
-        (zone === 'arena'
-          ? (state?.tick ?? 0)
-          : (state?.dungeons.get(zone)?.tick ?? 0)) - p.startedAt;
+      const age = (zoneTick(state, zone) ?? 0) - p.startedAt;
       if (dragon && showHangLong) {
         const effect = m1Config.skillCatalogue![hangLongId]!.effect;
         if (effect.mode !== 'projectile' || !effect.dragonDive) return;

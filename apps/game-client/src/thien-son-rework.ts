@@ -1,3 +1,4 @@
+import { zoneTick } from './zone-tick.js';
 import Phaser from 'phaser';
 import { tamLienTram, type CombatEvent } from '@volam/game-core';
 import { m1Config } from '@volam/game-data';
@@ -151,8 +152,7 @@ export class ThienSonRework {
     const casting = new Set<string>();
     this.opacities.clear();
     const effect = m1Config.skillCatalogue?.[flurryId]?.effect;
-    const tick =
-      zone === 'arena' ? state?.tick : state?.dungeons.get(zone)?.tick;
+    const tick = zoneTick(state, zone);
     if (
       effect?.mode === 'multi_hit' &&
       effect.inwardBurst &&

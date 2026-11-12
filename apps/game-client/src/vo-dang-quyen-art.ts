@@ -1,3 +1,4 @@
+import { zoneTick } from './zone-tick.js';
 import Phaser from 'phaser';
 import { fortuneReadings, type CombatEvent } from '@volam/game-core';
 import { m1Config } from '@volam/game-data';
@@ -258,8 +259,7 @@ export class VoDangQuyenArt {
   ): void {
     this.point = point;
     const wanted = new Set<string>();
-    const tick =
-      zone === 'arena' ? state?.tick : state?.dungeons.get(zone)?.tick;
+    const tick = zoneTick(state, zone);
     const get = (id: string, texture: string, frame?: string) => {
       wanted.add(id);
       return this.image(id, texture, frame);

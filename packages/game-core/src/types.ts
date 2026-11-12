@@ -429,6 +429,7 @@ export interface Actor extends Point {
   crowdControlScale?: number;
 }
 export interface Hero extends Actor {
+  duelBurn?: { sourceId: string; damage: number; next: number; until: number };
   fortune?: {
     id: string;
     start: number;
@@ -615,6 +616,9 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  /** Present only in the isolated Lôi Đài world. */
+  duel?: ReadonlySet<string>;
+  duelWalkWalls?: Rect[];
   pendingScatters?: Array<{
     tick: number;
     ownerId: string;

@@ -1,3 +1,4 @@
+import { canDuel, opponents, targetRadius } from './opponents.js';
 import {
   stepEquipmentCombat,
   useEquipmentSkill,
@@ -224,6 +225,7 @@ function runCommand(
   command: Command,
   config: SimulationConfig,
 ): void {
+  if (world.duel && !canDuel(world, hero.id)) return;
   if (hero.hp <= 0) return;
   if (command.kind === 'nam-de-key') {
     if (command.castId.startsWith('vtd:')) {
@@ -474,7 +476,7 @@ function advanceProjectile(
     );
   const targets: Actor[] = shot.hostile
     ? [...world.heroes.values()]
-    : [...world.creeps.values()];
+    : [...opponents(world, shot.ownerId)];
   const traveled = shot.effect.range - shot.remaining;
   const launch = { x: shot.x - dir.x * traveled, y: shot.y - dir.y * traveled };
   const collisions = targets
@@ -492,9 +494,7 @@ function advanceProjectile(
         shot,
         end,
         enemy,
-        (world.creeps.get(enemy.id)?.stats?.radius ??
-          (shot.hostile ? config.radius : config.creep.radius)) +
-          shot.effect.radius,
+        targetRadius(world, enemy, config) + shot.effect.radius,
       ),
     }))
     .filter(
@@ -630,11 +630,19 @@ function advanceProjectile(
           enemy,
           dir.x * shot.effect.knockback,
           dir.y * shot.effect.knockback,
-          (world.creeps.get(enemy.id)?.stats ?? config.creep).radius,
+          targetRadius(world, enemy, config),
           config,
           world.tick,
         );
       confineMovement(world, enemy, before, config);
+      const rival = world.duel && world.heroes.get(enemy.id);
+      if (rival && rival.hp > 0 && shot.effect.burnDamage > 0)
+        rival.duelBurn = {
+          sourceId: shot.ownerId,
+          damage: shot.effect.burnDamage,
+          next: world.tick + config.tickRate,
+          until: world.tick + shot.effect.burnTicks,
+        };
       const burned = world.creeps.get(enemy.id);
       if (burned && burned.hp > 0 && shot.effect.burnDamage > 0) {
         burned.burnSource = shot.ownerId;
@@ -695,7 +703,10 @@ function advanceProjectile(
 }
 export function stepWorld(world: World, config: SimulationConfig): void {
   const confinementStarts = new Map(
-    [...world.creeps].map(([id, e]) => [id, { x: e.x, y: e.y }]),
+    [...(world.duel ? world.heroes : world.creeps)].map(([id, e]) => [
+      id,
+      { x: e.x, y: e.y },
+    ]),
   );
   world.tick++;
   world.events = [];
@@ -719,6 +730,15 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       cancelOwnedEffects(world, hero.id);
       hero.statuses = [];
       continue;
+    }
+    const burn = hero.duelBurn;
+    if (burn && world.tick <= burn.until && world.tick >= burn.next) {
+      hurt(world, hero, burn.sourceId, 'burn', burn.damage, config, {
+        ...offensiveStats(world, burn.sourceId, config),
+        periodic: true,
+      });
+      burn.next += config.tickRate;
+      if (hero.hp <= 0) continue;
     }
     if (world.tick - hero.lastMoveTick > config.inputTimeoutTicks) {
       hero.moveX = 0;
@@ -758,7 +778,9 @@ export function stepWorld(world: World, config: SimulationConfig): void {
         config.radius,
         config.width,
         config.height,
-        config.collision,
+        world.duel && !world.duel.has(hero.id)
+          ? world.duelWalkWalls!
+          : config.collision,
       );
     }
     hero.mana = Math.min(

@@ -7,7 +7,7 @@ import { connectionReason } from './connection-copy.js';
 import { Client, type Room } from '@colyseus/sdk';
 import type { MatchRoom } from '../../game-server/src/rooms/MatchRoom.js';
 import { lobbyConfig, dungeonForZone } from '@volam/game-data';
-import type { Command, CombatEvent } from '@volam/game-core';
+import { loiDai, type Command, type CombatEvent } from '@volam/game-core';
 import {
   MATCH_ROOM,
   PROTOCOL_VERSION,
@@ -258,6 +258,13 @@ function send(command: Command): void {
     artPreview
   )
     return;
+  const hero = room.state.players.get(room.sessionId);
+  if (
+    hero?.zoneId === loiDai.id &&
+    command.kind !== 'move' &&
+    (!hero.loiDaiFighter || room.state.loiDaiFighters < 2)
+  )
+    return;
   const payload = {
     ...command,
     sequence: ++sequence,
@@ -281,6 +288,7 @@ const unbindInput = bindGameplayInput(
     if (
       !hero ||
       hero.zoneId === 'arena' ||
+      hero.zoneId === loiDai.id ||
       (hero.hp <= 0 && !hero.bossSpectator)
     )
       return;
@@ -511,6 +519,14 @@ ui.onLeave = () => {
 ui.onBasic = (id) => send({ kind: 'select-basic', id });
 ui.onLoadout = (ids) => send({ kind: 'dev-loadout', ids });
 window.addEventListener('click', () => chuHud.inventory());
+ui.onLoiDai = (action) => {
+  if (!room || ui.reconnecting || room.state.phase !== 'IN_GAME') return;
+  room.send('loi-dai-action', {
+    action,
+    sequence: ++sequence,
+    protocolVersion: PROTOCOL_VERSION,
+  });
+};
 ui.onDungeonEnter = (access, destination) =>
   dungeonAction({ action: 'enter', access, destination });
 ui.bossParty.onSummon = () => dungeonAction({ action: 'summon-help' });
