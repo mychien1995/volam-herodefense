@@ -1,3 +1,5 @@
+import { markImpactTarget } from './m3d-hit-art.js';
+import { releaseBeat } from './m3d-approved-boss-body.js';
 import { WaveBossFeedbackArt } from './wave-boss-feedback-art.js';
 import Phaser from 'phaser';
 import {
@@ -324,7 +326,20 @@ export class TayDocRenderer {
         boss.fx,
         boss.fy,
         c?.ability ?? boss.castAbilityId,
+        c
+          ? {
+              beat:
+                c.ability === 'van_doc_bao_phat' && this.tick >= c.activeAt
+                  ? releaseBeat(
+                      (this.tick - c.activeAt) %
+                        (tuning.jumpTicks + tuning.jumpRest),
+                      tuning.jumpTicks / 2,
+                    )
+                  : releaseBeat(this.tick, c.activeAt),
+            }
+          : undefined,
       );
+      markImpactTarget(actor.image, data.bossId);
       this.health(
         actor,
         boss.x,

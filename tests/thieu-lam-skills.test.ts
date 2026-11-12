@@ -136,7 +136,7 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
       expect(f.events.filter((e) => e.kind === 'cast')).toHaveLength(1);
     },
   );
-  it('Quyền is shorter/heavier/slower; Đao has a wider arc and reduced secondary cleave; A preserves chains', () => {
+  it('Quyền has shorter reach and Đao has wider cleave; both accept consecutive A and preserve skill chains', () => {
     for (const id of Object.keys(thieuLamBasics)) {
       const f = fixture();
       f.cast('la_han_quyen');
@@ -153,15 +153,17 @@ describe('M3C3 Thiếu Lâm shared combat', () => {
       expect(f.world.combos).toEqual(before);
       f.input({ kind: 'basic' });
       f.steps();
-      expect(f.hits(id)).toHaveLength(1);
+      expect(f.hits(id)).toHaveLength(2);
+      expect(f.world.combos).toEqual(before);
     }
     const punch = thieuLamBasics.thieu_lam_quyen!,
       dao = thieuLamBasics.thieu_lam_dao!;
     expect(punch.manualChain).toMatchObject({
       idleTicks: 60,
-      cooldownTicks: 30,
+      cooldownTicks: 0,
     });
-    expect(punch.cooldownTicks).toBe(1);
+    expect(punch.cooldownTicks).toBe(0);
+    expect(dao.cooldownTicks).toBe(0);
     if (punch.effect.mode === 'arc' && dao.effect.mode === 'arc') {
       expect(punch.effect.damage).toBeGreaterThanOrEqual(dao.effect.damage);
       expect(punch.effect.range).toBeLessThan(dao.effect.range);

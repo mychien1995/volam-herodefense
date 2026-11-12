@@ -159,6 +159,7 @@ const arc = z.strictObject({
   armorPenetration: z.number().min(0).max(1).optional(),
   slowedBonus: z.number().nonnegative().optional(),
   manaRefund: z.number().finite().nonnegative().optional(),
+  lifesteal: z.number().min(0).max(1).optional(),
   projectileProc: z
     .strictObject({ chance: z.number().min(0).max(1), effect: projectile })
     .optional(),
@@ -309,6 +310,7 @@ export const abilitySchema = z
           })
           .optional(),
         guard: z.number().finite().min(0).max(0.85).optional(),
+        finisherHealFraction: positive.max(1).optional(),
         durationTicks: count.min(1).optional(),
       }),
     ]),

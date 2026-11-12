@@ -164,4 +164,4 @@ Atlas Tam Liên Trảm dùng 16 cel PNG 160×144 với chân tại (80,112), ba 
 
 ## Đài Hồng Mộc v2
 
-`source/loi-dai-v2` stores original ImageGen paving art and editable masks for the approved court source. `exports/loi-dai-v2` contains native-density ground and individually placed scenery PNGs with source hashes, depth and sizes in the manifest. Runtime art review is pending. [Integration](../docs/LOI_DAI.md)
+`source/loi-dai-v2` stores original ImageGen paving art and editable masks for the approved court source. `exports/loi-dai-v2` contains native-density ground and individually placed scenery PNGs with source hashes, depth and sizes in the manifest. M3D uses the v2 court layers and the original victory fireworks atlas. [Integration](../docs/LOI_DAI.md)

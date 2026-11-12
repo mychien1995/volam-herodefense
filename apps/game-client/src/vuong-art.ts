@@ -1,7 +1,14 @@
+import { markImpactTarget } from './m3d-hit-art.js';
+import { clipBeat } from './m3d-approved-boss-body.js';
 import Phaser from 'phaser';
 import { presentRenovatedBody } from './renovation-art.js';
 import type { LobbyState } from '@volam/game-protocol';
-import { vuongElements, vuongNotes, type VuongView } from '@volam/game-core';
+import {
+  VUONG_ID,
+  vuongElements,
+  vuongNotes,
+  type VuongView,
+} from '@volam/game-core';
 import { WaveBossHealth } from './wave-boss-feedback-art.js';
 
 const body = 'vtd-body';
@@ -146,11 +153,13 @@ export class VuongArt {
         this.scene,
         retainedBody,
         'vuong_trung_duong_p' + phase,
-        'action',
+        dead ? 'death' : 'action',
         v.fx,
         v.fy,
         a?.skill,
+        { beat: clipBeat(index / 4) },
       );
+      markImpactTarget(retainedBody, VUONG_ID);
       return;
     } else if (v.pose === 'hurt') pose = 'hurt';
     else if (a?.skill === 'counter' && v.qteOutcome !== 'failed')
@@ -181,15 +190,26 @@ export class VuongArt {
       ?.setOrigin(0.5, 90 / 112)
       .setFlipX(side && v.fx < 0)
       .setScale(1);
+    const recent = renovatedBody?.data?.get('renovation-action') as
+      { ability?: string } | undefined;
+    const skill =
+      a?.skill ??
+      (pose === 'release' || pose === 'recover' ? recent?.ability : undefined);
     presentRenovatedBody(
       this.scene,
       renovatedBody,
       'vuong_trung_duong_p' + phase,
-      pose === 'idle' ? 'idle' : pose.startsWith('walk_') ? 'walk' : 'action',
+      pose === 'idle' || pose === 'hurt'
+        ? pose
+        : pose.startsWith('walk_')
+          ? 'walk'
+          : 'action',
       v.fx,
       v.fy,
-      a?.skill,
+      skill,
+      { beat: pose === 'release' ? 1 : pose === 'recover' ? 2 : 0 },
     );
+    markImpactTarget(renovatedBody, VUONG_ID);
   }
   private cue(v: VuongView, e: VuongView['cues'][number], now: number) {
     const id = String(e.id);

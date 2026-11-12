@@ -14,8 +14,10 @@ export function bindGameplayInput(
     | null
     | undefined = () => undefined,
   switchStance: () => void = () => {},
+  skillUpgrade?: { enabled: () => boolean; upgrade: (slot: number) => void },
 ): () => void {
   const held = new Set<string>();
+  let learning = false;
   const move = (): void =>
     spectator?.active()
       ? spectator.pan(
@@ -29,6 +31,7 @@ export function bindGameplayInput(
         });
   const stop = (): void => {
     held.clear();
+    learning = false;
     if (connected()) move();
   };
   const typing = (target: EventTarget | null): boolean =>
@@ -44,6 +47,25 @@ export function bindGameplayInput(
       return;
     }
     if (blocked() || typing(event.target)) return;
+    const slot = inputBindings.activeSkills.findIndex(
+      (key) => key === event.code,
+    );
+    if (
+      event.code === 'KeyO' &&
+      skillUpgrade?.enabled() &&
+      !event.ctrlKey &&
+      !event.altKey &&
+      !event.metaKey
+    ) {
+      event.preventDefault();
+      if (!event.repeat) learning = true;
+      return;
+    }
+    if (slot >= 0 && learning && skillUpgrade?.enabled()) {
+      event.preventDefault();
+      if (!event.repeat) skillUpgrade.upgrade(slot);
+      return;
+    }
     if (inputBindings.movement.some((key) => key === event.code)) {
       event.preventDefault();
       if (!held.has(event.code)) {
@@ -106,20 +128,23 @@ export function bindGameplayInput(
       event.preventDefault();
       send({ kind: 'basic' });
     }
-    if (event.code === 'KeyS' && !event.ctrlKey && !event.altKey && !event.metaKey) {
+    if (
+      event.code === 'KeyS' &&
+      !event.ctrlKey &&
+      !event.altKey &&
+      !event.metaKey
+    ) {
       event.preventDefault();
       send({ kind: 'tam-lien-tram' });
       return;
     }
-    const slot = inputBindings.activeSkills.findIndex(
-      (key) => key === event.code,
-    );
     if (slot >= 0) {
       event.preventDefault();
       send({ kind: 'cast', slot });
     }
   };
   const keyup = (event: KeyboardEvent): void => {
+    if (event.code === 'KeyO') learning = false;
     if (held.delete(event.code) && connected()) {
       event.preventDefault();
       move();

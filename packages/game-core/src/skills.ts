@@ -51,11 +51,16 @@ function clearLine(
   hero: Hero,
   enemy: Actor,
   config: SimulationConfig,
+  projectile = false,
 ): boolean {
   return (
     enemy.hp > 0 &&
     world.heroes.has(hero.id) &&
-    !config.collision.some((w) => segmentRect(hero, enemy, w) !== undefined)
+    !config.collision.some(
+      (w) =>
+        (!projectile || w !== world.statue?.collision) &&
+        segmentRect(hero, enemy, w) !== undefined,
+    )
   );
 }
 export function targetDirection(
@@ -89,7 +94,11 @@ export function targetDirection(
       (e) =>
         e.hp > 0 &&
         distance(e, hero) <= range &&
-        !config?.collision.some((w) => segmentRect(hero, e, w) !== undefined),
+        !config?.collision.some(
+          (w) =>
+            w !== world.statue?.collision &&
+            segmentRect(hero, e, w) !== undefined,
+        ),
     )
     .sort(
       (a, b) =>
@@ -340,7 +349,7 @@ function openSkyfall(
         range > 0 &&
         range <= sky.range &&
         dx * hero.fx + dy * hero.fy >= range * Math.cos(sky.halfAngle) &&
-        clearLine(world, hero, enemy, config)
+        clearLine(world, hero, enemy, config, true)
       );
     })
     .sort(
@@ -539,8 +548,10 @@ function strikeArc(
   if (effect.singleTarget) targets = targets.slice(0, 1);
   const rawDamage = raw ?? damageFor(hero, effect.damage, config, world.tick);
   let hit = false;
+  let damageDealt = 0;
   targets.forEach((enemy, i) => {
     if (effect.damage > 0) {
+      const hpBefore = enemy.hp;
       const landed = hurt(
         world,
         enemy,
@@ -553,6 +564,7 @@ function strikeArc(
           fx: heading.fx,
           fy: heading.fy,
           combo: ability.combo,
+          cleaveIndex: i,
           armorPenetration: Math.max(
             effect.armorPenetration ?? 0,
             ability.equipmentAttack?.penetration ?? 0,
@@ -563,6 +575,8 @@ function strikeArc(
       );
       if (landed && !hit && ability.id === tamLienTram.basicId)
         recordTamLienHit(world, hero, enemy.id, config);
+      if (landed && effect.lifesteal)
+        damageDealt += Math.max(0, hpBefore - enemy.hp);
       hit ||= landed;
     }
     if (enemy.hp <= 0) return;
@@ -612,6 +626,8 @@ function strikeArc(
       });
     }
   });
+  if (effect.lifesteal && damageDealt > 0 && hero.hp > 0)
+    hero.hp = Math.min(hero.maxHp, hero.hp + damageDealt * effect.lifesteal);
   if (effect.residualArea) {
     const field = effect.residualArea;
     world.areas ??= [];
@@ -1106,7 +1122,9 @@ export function stepAreas(world: World, config: SimulationConfig): void {
           enemy.hp <= 0 ||
           distance(area, enemy) > radius ||
           config.collision.some(
-            (w) => segmentRect(area, enemy, w) !== undefined,
+            (w) =>
+              w !== world.statue?.collision &&
+              segmentRect(area, enemy, w) !== undefined,
           )
         )
           continue;
@@ -1434,7 +1452,17 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
         e.durationTicks && e.finisherDamage > 0
           ? (e.durationTicks - 1) / e.hits
           : e.spacingTicks;
-      if (finish) action.until = world.tick;
+      if (finish) {
+        if (e.finisherHealFraction)
+          healHero(
+            world,
+            hero,
+            hero,
+            action.abilityId,
+            hero.maxHp * e.finisherHealFraction,
+          );
+        action.until = world.tick;
+      }
     }
   }
   const finished = (world.actions ?? []).filter((a) => a.until <= world.tick);
@@ -1450,6 +1478,29 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
       );
   }
   world.actions = (world.actions ?? []).filter((a) => a.until > world.tick);
+}
+
+function healHero(
+  world: World,
+  source: Hero,
+  target: Hero,
+  abilityId: string,
+  heal: number,
+): void {
+  const amount = Math.min(heal, target.maxHp - target.hp);
+  if (amount <= 0) return;
+  target.hp += amount;
+  emit(world, {
+    kind: 'pulse',
+    sourceId: source.id,
+    targetId: target.id,
+    abilityId,
+    x: target.x,
+    y: target.y,
+    damage: amount,
+    critical: false,
+    stage: 'heal',
+  });
 }
 
 /** Allies are living heroes in this authoritative zone; never creeps or the statue. */
@@ -1470,22 +1521,7 @@ function supportAllies(
       continue;
     for (const spec of effect.statuses ?? [])
       applyStatus(ally, spec, hero.id, abilityId, world.tick);
-    if (effect.heal) {
-      const amount = Math.min(effect.heal, ally.maxHp - ally.hp);
-      ally.hp += amount;
-      if (amount > 0)
-        emit(world, {
-          kind: 'pulse',
-          sourceId: hero.id,
-          targetId: ally.id,
-          abilityId,
-          x: ally.x,
-          y: ally.y,
-          damage: amount,
-          critical: false,
-          stage: 'heal',
-        });
-    }
+    if (effect.heal) healHero(world, hero, ally, abilityId, effect.heal);
   }
 }
 export function stepSupports(world: World, config: SimulationConfig): void {

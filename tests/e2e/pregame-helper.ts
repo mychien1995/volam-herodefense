@@ -1,5 +1,6 @@
 import { m1Config } from '@volam/game-data';
 import { expect, type Page } from '@playwright/test';
+import { waitForQa } from '../../tools/qa-wait.mjs';
 export async function joinWaiting(
   page: Page,
   nickname: string,
@@ -130,47 +131,52 @@ export async function startTogether(
 export async function startAuditTogether(
   roster: ReadonlyArray<readonly [Page, string, string]>,
   timeout = 20_000,
+  onSelection?: () => Promise<void>,
 ) {
   const host = roster[0]![0];
-  const snapshot = (page: Page) =>
-    page.evaluate<any>('window.__VOLAM__.snapshot()');
-  const button = (page: Page, name: string) =>
-    page.getByRole('button', { name, exact: true });
-  const click = (element: HTMLButtonElement) => element.click();
-  const phase = async () => (await snapshot(host)).state.phase;
-  await expect(async () => {
-    if ((await phase()) === 'WAITING_LOBBY')
-      await button(host, 'Bắt đầu').evaluate(click, undefined, {
-        timeout: 1500,
-      });
-    await expect.poll(phase, { timeout: 1500 }).toBe('SCHOOL_SELECTION');
-  }).toPass({ timeout, intervals: [150, 300] });
+  type Action = 'start' | 'school' | 'branch' | 'confirm';
+  const acknowledge = (page: Page, action: Action, id = '') =>
+    waitForQa(
+      () =>
+        page.evaluate(
+          ({ action, id }) => {
+            const state = (window as any).__VOLAM__.snapshot();
+            const phase = state.state?.phase;
+            const self = state.state?.players[state.sessionId];
+            if (action === 'start' && phase === 'SCHOOL_SELECTION') return true;
+            if (action === 'school' && self?.schoolId === id) return true;
+            if (action === 'branch' && self?.selectedBranch === id) return true;
+            if (action === 'confirm' && self?.confirmed) return true;
+            if (
+              phase !==
+              (action === 'start' ? 'WAITING_LOBBY' : 'SCHOOL_SELECTION')
+            )
+              return false;
+            const controls =
+              document.querySelectorAll<HTMLButtonElement>('#pregame button');
+            const button = Array.from(controls).find(
+              (node) =>
+                node.dataset['action'] === action &&
+                (action === 'school'
+                  ? node.dataset['school'] === id
+                  : action === 'branch'
+                    ? node.dataset['branch'] === id
+                    : true),
+            );
+            if (button && !button.disabled) button.click();
+            return false;
+          },
+          { action, id },
+        ),
+      'lobby ' + action + ' ' + id,
+      { timeout, interval: 300 },
+    );
+
+  await acknowledge(host, 'start');
+  await onSelection?.();
   for (const [page, school, branch] of roster) {
-    for (const choice of [
-      page.locator('#pregame button[data-school=' + school + ']'),
-      page.locator('#pregame button[data-branch=' + branch + ']'),
-    ]) {
-      await expect(async () => {
-        if (
-          (await choice.getAttribute('aria-pressed', { timeout: 1500 })) !==
-          'true'
-        )
-          await choice.evaluate(click, undefined, { timeout: 1500 });
-        await expect(choice).toHaveAttribute('aria-pressed', 'true', {
-          timeout: 1500,
-        });
-      }).toPass({ timeout, intervals: [150, 300] });
-    }
-    const confirmed = async () => {
-      const s = await snapshot(page);
-      return s.state.players[s.sessionId]?.confirmed;
-    };
-    await expect(async () => {
-      if (!(await confirmed()))
-        await button(page, 'Xác nhận').evaluate(click, undefined, {
-          timeout: 1500,
-        });
-      await expect.poll(confirmed, { timeout: 1500 }).toBe(true);
-    }).toPass({ timeout, intervals: [150, 300] });
+    await acknowledge(page, 'school', school);
+    await acknowledge(page, 'branch', branch);
+    await acknowledge(page, 'confirm');
   }
 }

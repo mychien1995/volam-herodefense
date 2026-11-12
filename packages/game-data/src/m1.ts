@@ -157,7 +157,6 @@ const initialConfig: SimulationConfig = simulationConfigSchema.parse({
       cooldownTicks: caiBangBongBeatTicks,
       manaCost: 0,
       minIntervalTicks: caiBangBongBeatTicks,
-      basicComboEndRecoveryTicks: 15,
       basicCombo: [
         { stage: 'thrust', damageMultiplier: 1, halfAngle: Math.PI / 5 },
         { stage: 'sweep', damageMultiplier: 1, halfAngle: Math.PI / 2 },
@@ -167,7 +166,7 @@ const initialConfig: SimulationConfig = simulationConfigSchema.parse({
       effect: {
         mode: 'arc',
         damage: 28,
-        range: 70,
+        range: 105,
         halfAngle: Math.PI / 3,
         cleave: 0.5,
       },

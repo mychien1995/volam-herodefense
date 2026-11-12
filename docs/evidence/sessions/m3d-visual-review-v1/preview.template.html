@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="vi">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>M3D · Duyệt visual</title>
+<style>
+  :root { font-family: "Segoe UI", sans-serif; background: #101612; color: #efe7d7; color-scheme: dark; --accent:#e2be79; --border:#77603d; --muted:#bdb5a5; }
+  * { box-sizing: border-box; }
+  body { margin: 0; padding: 32px 20px; background: radial-gradient(ellipse at 42% -25%, #384437, #141a15 58%, #0e1410); min-height: 100vh; }
+  main { width: min(100%, 940px); margin: auto; }
+  header { margin: 0 0 22px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  h1 { font: 700 clamp(32px,5vw,52px)/1.05 Georgia, serif; letter-spacing:-.05em; margin:0; }
+  .status { color: var(--accent); font-size: 12px; letter-spacing:.12em; text-transform:uppercase; border: 1px solid #88704d; padding: 7px 10px; }
+  nav, #cases, .controls { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+  nav { border-bottom: 1px solid #5a523e; margin-bottom:12px; gap:4px; }
+  button { color: #e9dfca; background:#242c23; border:1px solid #5f6351; border-radius:3px; font:inherit; font-size:14px; font-weight:600; padding:8px 12px; min-height:38px; cursor:pointer; }
+  button:hover { border-color:var(--accent); }
+  button:focus-visible, input:focus-visible { outline:2px solid #f6d690; outline-offset:3px; }
+  nav button { background:transparent; border:0; color:#c7c6b6; border-bottom:3px solid transparent; border-radius:0; }
+  nav button[aria-pressed="true"] { color:#f5d89c; border-color:#d5a95c; background:#2b3428; }
+  #cases { margin-bottom:16px; }
+  #cases button[aria-pressed="true"] { background:#e2be79; border-color:#e2be79; color:#21190e; }
+  .frame { border:1px solid #8b734e; border-radius:5px; overflow:hidden; box-shadow:0 18px 45px #050a0790; background:#171e18; }
+  #world { position:relative; aspect-ratio:824/448; overflow:hidden; background:#303b2e; }
+  #world canvas { position:absolute; inset:0; width:100% !important; height:100% !important; image-rendering:pixelated; }
+  #phase { position:absolute; top:14px; left:15px; z-index:1; padding:7px 11px; color:#f7e8c6; background:#172018ed; border:1px solid #917449; font-size:13px; }
+  .hud { position:absolute; bottom:9px; left:50%; transform:translateX(-50%); z-index:1; text-align:center; width:min(380px,94%); pointer-events:none; }
+  [hidden] { display:none !important; }
+  #hint { color:#fbecd1; background:#182017; border:1px solid #bf9857; margin:0 auto 6px; padding:5px 8px; width:max-content; max-width:100%; font-size:clamp(10px,2vw,13px); }
+  .slots { display:flex; justify-content:center; gap:5px; margin:0 auto; }
+  .slot { color:#fff1cd; background:linear-gradient(#303728,#171c14); border:1px solid #a7854a; padding:4px 8px; min-width:40px; }
+  .slot span { display:block; color:#ebc681; font-size:10px; }
+  .slot.active { background:#71531e; border-color:#ffeea8; }
+  .controls { padding:12px 14px; }
+  input[type=range] { accent-color:#d7af66; min-width:80px; flex:1; }
+  output { color:var(--muted); min-width:5ch; text-align:right; font:12px/1.25 monospace; }
+  .details { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:12px; margin-top:17px; align-items:start; }
+  h2 { margin:0 0 7px; font:700 26px/1.1 Georgia,serif; }
+  #summary { margin:0; max-width:70ch; color:#d8d2c0; line-height:1.55; }
+  #source { color:#d5c39f; font-size:12px; margin-top:4px; text-align:right; max-width:205px; }
+  @media(max-width:570px) { body{padding:20px 10px;} header{margin-bottom:14px;} .details{display:block;} #source{text-align:left; max-width:none;margin-top:10px;} #phase{top:6px;left:6px;font-size:11px;padding:4px 6px;} button{padding:7px 9px;} }
+</style>
+<main>
+  <header><h1>Duyệt visual M3D</h1><span class="status">Chờ duyệt</span></header>
+  <nav id="zones" aria-label="Khu vực"></nav>
+  <div id="cases" aria-label="Hiệu ứng"></div>
+  <section class="frame" aria-label="Phaser preview">
+    <div id="world">
+      <div id="phase">Đang tải atlas…</div>
+      <div id="hud" class="hud" hidden>
+        <div id="hint">Giữ O + Q/W/E/R/T để học chiêu</div>
+        <div class="slots" aria-label="Thanh chiêu">
+          <div class="slot"><kbd>Q</kbd><span id="rank">Bậc 1</span></div>
+          <div class="slot"><kbd>W</kbd><span>Bậc 1</span></div>
+          <div class="slot"><kbd>E</kbd><span>Bậc 1</span></div>
+          <div class="slot"><kbd>R</kbd><span>Bậc 1</span></div>
+          <div class="slot"><kbd>T</kbd><span>Bậc 1</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="play" type="button">Tạm dừng</button>
+      <button id="replay" type="button">Xem lại</button>
+      <button id="speed" type="button" aria-pressed="false">0,5×</button>
+      <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Vị trí trong hiệu ứng">
+      <output id="clock" for="seek">0,00 s</output>
+    </div>
+  </section>
+  <div class="details">
+    <div><h2 id="title"></h2><p id="summary"></p></div>
+    <p id="source"></p>
+  </div>
+</main>
+<script>/*__PHASER__*/</script>
+<script>const REVIEW_ASSETS = /*__ASSETS__*/;</script>
+<script>/*__PREVIEW__*/</script>
+</html>

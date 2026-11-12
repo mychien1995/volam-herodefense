@@ -168,7 +168,7 @@ describe('M3D Dong Ta -> Tay Doc -> Nam De reconciliation', () => {
     expect(answerNamDe(w, m.arena.config, h, q.id, 0, q.keys[0]!)).toBe(false);
   });
   it('the protocol retains dash/move and owner-key commands without trusting success/HP', () => {
-    expect(PROTOCOL_VERSION).toBe(39);
+    expect(PROTOCOL_VERSION).toBe(40);
     const s = new LobbyState();
     expect(s.tayDoc.size).toBe(0);
     expect(s.namDeControls.size).toBe(0);

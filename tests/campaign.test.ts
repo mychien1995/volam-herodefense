@@ -137,7 +137,7 @@ describe('approved campaign progression and economy', () => {
   });
   it('stocks new characters once and preserves the remaining potions through travel, respawn and reconnect', () => {
     const { m, h, c } = fixture();
-    expect(h.inventory?.potions).toEqual({ hp_small: 5, mp_small: 5 });
+    expect(h.inventory?.potions).toEqual({ hp_small: 10, mp_small: 10 });
     expect(h.gold).toBe(0);
     expect(m.enter(h.id, 'private', 'forest')).toBeUndefined();
     h.hp = 1;
@@ -162,11 +162,11 @@ describe('approved campaign progression and economy', () => {
     m.disconnect(h.id);
     m.reconnect(h.id);
     expect(m.hero(h.id)?.inventory?.potions).toEqual({
-      hp_small: 4,
-      mp_small: 5,
+      hp_small: 9,
+      mp_small: 10,
     });
     const late = m.add('late', 'Late');
-    expect(late.inventory?.potions).toEqual({ hp_small: 5, mp_small: 5 });
+    expect(late.inventory?.potions).toEqual({ hp_small: 10, mp_small: 10 });
   });
   it.each([1, 2, 6])(
     'budgets the same invasion per player at %i players with two/four gates',
@@ -192,7 +192,7 @@ describe('approved campaign progression and economy', () => {
           6,
         );
         expect(creeps[0]!.maxHp).toBeCloseTo(
-          120 * (1 + 0.2 * (players - 1)),
+          120 * 1.1 * (1 + 0.2 * (players - 1)),
           0,
         );
         expect(creeps.length).toBe(gates * 30 * (1 + 0.6 * (players - 1)));

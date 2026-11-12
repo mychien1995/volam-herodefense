@@ -1,3 +1,11 @@
+## Lôi Đài Hồng Mộc · 2026-11-12
+
+`milestone/m3d` dùng protocol 40. Người chơi cấp 6 vào viền gạch để quan chiến hoặc bước lên sàn đấu 1v1. Phaser dùng sân Hồng Mộc v2 và tick Lôi Đài cho hiệu ứng khi đấu trường chính tạm dừng. [Luật, artwork và kiểm chứng](LOI_DAI.md).
+
+## Bổng đỏ và nhịp A cận chiến · 2026-11-12
+
+Bản Bổng đã duyệt dùng chung atlas 84 cel cho đứng, đi và bốn thức A ở bốn hướng. Tầm server là 105 và vệt đòn đi theo tầm này. Võ Đang Quyền, Võ Đang Kiếm, Thiếu Lâm Quyền và Thiếu Lâm Đao xử lý A với hồi chiêu 0. [Kết quả trong phòng M3D sáu người](evidence/sessions/m3d-bong-reach-verified/README.md).
+
 ## Thiếu Lâm Đao · 2026-11-09
 
 Bộ 1C/2A/3A/4A vào trận thường với nhánh Đao. Tru Tà tăng từ 180 lên 190 đơn vị ở bậc 1, bậc 4 đạt 202. Cung quét lấy bán kính theo sự kiện cast của server. [Chi tiết](SHAOLIN_DAO_REWORK.md).
@@ -154,3 +162,13 @@ Creep preview feedback r3 —2026-11-06: targeted purple burst/drain/poison/wate
 Creep feedback r4 —2026-11-06: no generic purple windup circles/semicircles across all 49 profiles. Thi độc directly schedules its delayed poison field at server-captured target feet, replacing r3 lob delivery. Actual released purple burst/drain effects remain. Protocol 33 retained; current code, evidence and restarted review services: `docs/CREEP_FEEDBACK_R4.md`.
 
 Creep feedback r5 —2026-11-06: Sơn Tặc Đao (`wave_03`) has Chém đao normals only; r3 Hoành trảm is superseded. Remove generic caster contact explosions, including basic melee and self stomp/ring stamps. Actual target fields/projectiles and deliberate self-destruction/death explosions remain. Protocol 33 retained. Current implementation/review/verification: `docs/CREEP_FEEDBACK_R5.md`.
+
+## Va chạm và giữ sprite khi trúng đòn hoặc ra chiêu — 2026-11-12
+
+M3D dùng tia vàng kem 110 ms và viền mảnh theo alpha của sprite khi nhận sát thương. Chí mạng trên mục tiêu chính thêm vòng nứt 210 ms, neo vào tọa độ chạm. Các mục tiêu phụ của đòn cung nhận tia nhỏ hơn. Client nhận thứ tự mục tiêu qua trường hitIndex có sẵn trong sự kiện sát thương. Sát thương, chí mạng, thời gian cast và hiệu ứng riêng của chiêu tiếp tục do các hệ thống hiện hành xử lý.
+
+Thiếu Lâm Đao dùng cùng atlas đao vàng cho phản ứng trúng đòn, Kim Quang Hộ Trận, Bất Động Minh Vương và Sư Tử Hống. Chín boss dùng khung thân renovate bốn hướng theo mẫu duyệt khi trúng đòn và khi ra chiêu. Chính sách giữ thân M3D cũ còn phục vụ các màn đối chiếu phiên bản. Vạn Độc Phi Châm, Phật Quang, Băng Phách Ngân Châm và pose chưởng tay R3 của Kim Luân tiếp tục dùng các pose riêng đã duyệt. [Bản duyệt và provenance](evidence/sessions/m3d-hit-continuity-preview/README.md) · [Kiểm tra trận production](evidence/sessions/m3d-hit-continuity-matrix/m3d-hit-continuity/README.md)
+
+## Ổn định chọn phái trong phòng sáu client — 2026-11-12
+
+Các bản vá roster cập nhật danh sách và số người sẵn sàng mà giữ nút chọn phái của người chơi hiện tại. Phaser tạm dừng vòng render khi sảnh che đấu trường và tiếp tục khi người chơi vào trận. Giữ xác nhận và điều kiện bắt đầu do phòng Colyseus quyết định. [Kiểm tra sảnh và 44 lượt boss trong trận sáu client](evidence/sessions/m3d-six-lobby-verified/m3d-hit-continuity/README.md)

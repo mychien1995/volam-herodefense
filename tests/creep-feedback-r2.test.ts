@@ -75,20 +75,19 @@ it('north creep actually walks into the arena and damages the statue on the real
   expect(distance(e, w.statue!)).toBeLessThan(100);
   expect(w.statue!.hp).toBeLessThan(2000);
 });
-it('web root and ape stun are applied by real authoritative hits', () => {
-  for (const [id, kind] of [
-    ['doc_chu', 'root'],
-    ['son_vien', 'stun'],
-  ] as const) {
+it('the basic web roots a hero and the ape rock damages at its captured point', () => {
+  for (const id of ['doc_chu', 'son_vien']) {
     const { w, c, h, e } = setup(id);
-    h.x = 440;
-    w.random = () => 0;
+    h.x = 480;
+    const hp = h.hp;
     stepCreepActor(w, e, h, undefined, c);
-    for (let i = 0; i < 32; i++) {
+    for (let i = 0; i < 45; i++) {
       w.tick++;
       stepCreepHazards(w, c);
     }
-    expect(hasStatus(h, kind, w.tick)).toBe(true);
+    expect(h.hp).toBeLessThan(hp);
+    expect(hasStatus(h, 'root', w.tick)).toBe(id === 'doc_chu');
+    expect(hasStatus(h, 'stun', w.tick)).toBe(false);
   }
 });
 it('applies requested range and radius multipliers exactly once', () => {
@@ -103,9 +102,10 @@ it('ranged forest/desert/sea identities and their slow/control definitions are r
   expect(
     creepProfiles.truc_xa!.basic.statuses!.some((s) => s.kind === 'slow'),
   ).toBe(true);
-  expect(creepProfiles.doc_chu!.special!.statuses![0]!.kind).toBe('root');
+  expect(creepProfiles.doc_chu!.basic.statuses![0]!.kind).toBe('root');
+  expect(creepProfiles.doc_chu!.special).toBeUndefined();
   expect(creepProfiles.xac_uop!.basic.cooldown).toBe(36);
-  expect(creepProfiles.son_vien!.special!.statuses![0]!.kind).toBe('stun');
+  expect(creepProfiles.son_vien!.special!.groundTarget).toBe(true);
   expect(creepProfiles.cu_nhan_sa_thach!.basic.statuses![0]!.kind).toBe('stun');
 });
 it('root blocks walking and dash without silencing normal attacks, then expires', () => {

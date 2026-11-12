@@ -45,8 +45,7 @@ export const voDangBasics: Record<string, Ability> = {
     id: 'vo_dang_kiem',
     nameVi: 'Võ Đang Kiếm',
     manaCost: 0,
-    cooldownTicks: 1,
-    minIntervalTicks: 6,
+    cooldownTicks: 0,
     basicVariants: ['thrust', 'cut_left', 'cut_right', 'cut_down', 'cut_up'],
     basicPoseTicks: 6,
     effect: {

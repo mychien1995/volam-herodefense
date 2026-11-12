@@ -55,9 +55,41 @@ export interface CreepProfile {
   special?: CreepAttack | undefined;
   death?: CreepAttack | undefined;
 }
+export type DungeonHazard =
+  | {
+      kind: 'darts';
+      firstTick: number;
+      interval: number;
+      speed: number;
+      radius: number;
+      stunTicks: number;
+    }
+  | { kind: 'quicksand'; count: number; radius: number; slow: number }
+  | {
+      kind: 'geyser';
+      count: number;
+      firstTick: number;
+      interval: number;
+      warning: number;
+      radius: number;
+      stunTicks: number;
+    }
+  | {
+      kind: 'firetrap';
+      firstTick: number;
+      interval: number;
+      stagger: number;
+      warning: number;
+      points: Point[];
+      radius: number;
+      stunTicks: number;
+    };
+
 export interface CreepCombatDefinition {
+  dungeonHazards?: Record<string, DungeonHazard> | undefined;
   profiles: Record<string, CreepProfile>;
   waveIds: string[];
+  specialWindupScale: number;
   maxNearbyCasts: number;
   castGroupRadius: number;
   dotCapFraction: number;

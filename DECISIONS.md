@@ -2,6 +2,22 @@
 
 Đã duyệt Lôi Đài 1v1, viền gạch trắng để quan chiến, sàn gỗ đỏ chữ nhật nới diện tích và pháo hoa chiến thắng. Xem [quy tắc và artwork](docs/LOI_DAI.md) để biết các quy tắc thay thế đề xuất PvP cũ.
 
+## Áp lực wave, bẫy phó bản và Thiên Hạ Vô Cẩu · 2026-11-12
+
+Wave creep chiến dịch dùng hệ số thử 1,10 HP và 1,08 sát thương trước làm tròn. Biển lên hai tâm nổ nước mỗi đợt nếu có đủ mặt bằng, lặp mỗi 130 tick. Địa Ngục có bốn miệng lửa cách nhau 42 tick, mỗi miệng lặp sau 168 tick. Thiên Hạ Vô Cẩu giảm 80% sát thương nhận trong action và hồi 5% HP tối đa cho người thi triển khi đến cú đập cuối. Cú cuối bị ngắt thì phần hồi máu không phát.
+
+## Tầm Bổng và hồi chiêu đánh thường M3D · 2026-11-12
+
+Cái Bang Bổng đánh trong tầm 105 đơn vị với bốn thức và nhịp 8 tick mỗi thức. Bổng sơn đỏ khắc rồng vàng dài hơn 50%, rộng hơn 10%, thể hiện ở tư thế đứng, đi và đánh theo bốn hướng. Vệt đòn theo tầm mới. Võ Đang Quyền, Võ Đang Kiếm, Thiếu Lâm Quyền và Thiếu Lâm Đao có hồi chiêu A bằng 0. Thiếu Lâm Quyền giữ chuỗi bốn thức và cửa sổ 60 tick. Nhịp hiện hành của Cái Bang Bổng, Thiên Sơn Phiến, Thiên Sơn Đao và Cái Bang Chưởng tiếp tục áp dụng. Mỗi lần nhấn A gửi một lệnh và server xử lý tối đa một đòn của mỗi người trong một tick.
+
+## M3D · Sprite creep, báo chiêu và cát lún
+
+Khôi phục sprite Renovation v1 đã duyệt cho creep. Giữ cùng atlas lúc trúng đòn và dùng chiêu. Giảm thời gian báo chiêu creep còn khoảng hai phần ba. Sa Mạc bốc bốn vị trí hố cát mỗi lần vào phó bản.
+
+## M3D review · Cổng Phải, phím học chiêu và phó bản
+
+Director duyệt preview visual M3D và yêu cầu tích hợp vào trận. Phòng mặc định bốn cổng có thêm lựa chọn một cổng Phải. Giữ O rồi bấm Q/W/E/R/T để tăng bậc theo luật server. Đạn người chơi đi qua bệ Tượng Võ Thần, chân và lướt vẫn va chạm. Bổng bỏ hồi riêng sau thức thứ tư, giữ nhịp tối thiểu 8 tick. Bắc Minh Thần Công có né đòn trực tiếp. Vi Đà Quyền tăng sát thương cơ bản từ 44 lên 51 và gây choáng 2 giây. Sơn Viên dùng Ném đá. Độc Chu bắn tơ thường gây sát thương và định thân. Bốn phó bản có bẫy môi trường riêng. [Chi tiết và nguồn art](docs/M3D_REVIEW_INTEGRATION.md).
+
 ## Thiếu Lâm Đao · bản tích hợp M3D · 2026-11-09
 
 Trận thường dùng trường đao Kim Cang (1C), đao khí lưỡi liềm (2A), La Hán quét Tru Tà (3A) và đao sen cùng vòng sen Như Lai Thiên Diệp (4A). Tru Tà có tầm cơ bản 190 đơn vị và tăng 4 đơn vị mỗi bậc. Phaser đặt mép lưỡi quét theo bán kính trong sự kiện thi triển từ server. Đao khí của A là phần trình diễn của đòn cận chiến. [Chi tiết](docs/SHAOLIN_DAO_REWORK.md).
@@ -28,15 +44,17 @@ A dùng hai cú đấm luân phiên kèm quyền khí hình sóng Wi-Fi, không 
 
 Đánh thường có bốn thức chọc, quét, hất và vụt xuống, mỗi thức dài 8 tick. Hồi 15 tick sau khi thức cuối kết thúc. Các thức để lại vệt lửa, cú vụt cuối có vòng nổ tại điểm chạm đất. Phá Giáp Bổng vụt bằng gậy rồng cong, bổng khí chạy sau đầu gậy và nham thạch nổ tại điểm chạm. Tầm đánh ở cả bốn bậc là 144. Truy Phong Bổng giậm tại chỗ sau 6 tick lấy đà, gây sát thương và choáng trong bán kính cơ bản 110. Thiên Hạ Vô Cẩu có sáu chó lửa khi xoay và Nham Triều ở cú đập kết thúc. Bản này thay thế các quyết định M3D trước đó về tầm và hình ảnh của ba chiêu.
 
+Bản thử 2026-11-11 thêm choáng 0,6 giây cho Phá Giáp Bổng. Hoành Tảo Bổng và Phá Giáp Bổng hồi 10% lượng máu mà các mục tiêu thực mất do cú đánh. Choáng tuân theo kháng khống chế hiện có.
+
 ## Cái Bang Chưởng · rework VFX được duyệt
 
 Đòn thường dùng chưởng lửa và phượng hoàng ở thức thứ sáu. Cuồng Long Loạn Vũ dùng đầu rồng lửa, vòng nổ tròn và các đốm lửa báo thiêu đốt. Phi Long Tại Thiên dùng sóng mang hai rồng, để lại vệt lửa sát đất và đổ xuống hòa vào vệt khi hết tầm.
 
 Hàng Long Hỏa Vũ cuộn bảy vòng trong 57 tick (1,9 giây), sau đó vút lên rồi giáng xuống vị trí hiện tại của nhân vật. Bán kính cuộn và đáp lần lượt là 89,7 và 128,8 đơn vị. Pha cuộn gây một nhịp sát thương 25%, cú đáp gây sát thương lan và choáng cơ bản 30 tick theo quy tắc kháng khống chế hiện có.
 
-## Bình khởi đầu — 2026-11-08
+## Bình khởi đầu — 2026-11-11
 
-Mỗi nhân vật trong trận chiến dịch nhận 5 bình máu nhỏ và 5 bình mana nhỏ khi vào trận lần đầu, kể cả khi vào phòng muộn. [Cấu hình chiến dịch](docs/CAMPAIGN_BALANCE_2026_11_06.md#experience-and-money).
+Mỗi nhân vật trong trận chiến dịch nhận 10 bình máu nhỏ và 10 bình mana nhỏ khi vào trận lần đầu, kể cả khi vào phòng muộn. [Cấu hình chiến dịch](docs/CAMPAIGN_BALANCE_2026_11_06.md#experience-and-money).
 
 ## Nhịp lên cấp đầu trận — 2026-11-08
 

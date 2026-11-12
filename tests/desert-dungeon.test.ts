@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { blocked, DungeonMatch } from '@volam/game-core';
+import { blocked, distance, DungeonMatch } from '@volam/game-core';
 import {
   creepDungeon,
+  creepCombatDefinition,
   desertDungeon as d,
   desertRoster,
   m1Config,
@@ -11,6 +12,7 @@ import { dungeonActionSchema, PROTOCOL_VERSION } from '@volam/game-protocol';
 function setup() {
   const config = structuredClone(m1Config);
   config.creep.speed = 0;
+  config.creepCombat = creepCombatDefinition;
   return new DungeonMatch(config, creepDungeon, 42, undefined, [d]);
 }
 const step = (m: DungeonMatch, n: number) => {
@@ -105,6 +107,40 @@ describe('desert map and authoritative destination contract', () => {
     step(m, 1);
     expect(z.world.tick).toBe(t + 1);
     expect(m.hero('b')).toMatchObject(d.arenaReturn);
+  });
+  it('rolls four safe pits on every visit to the same private instance', () => {
+    const m = setup();
+    m.add('a', 'A');
+    expect(m.enter('a', 'private', 'desert')).toBeUndefined();
+    const zone = m.zoneOf('a')!;
+    const pits = () =>
+      [...zone.world.creepCombat!.effects.values()]
+        .filter((effect) => effect.abilityId === 'quicksand')
+        .map(({ x, y, radius }) => ({ x, y, radius }));
+    const roster = [...zone.world.creeps.keys()];
+    for (let visit = 0; visit < 16; visit++) {
+      const layout = pits();
+      expect(layout).toHaveLength(4);
+      for (const [i, pit] of layout.entries()) {
+        expect(blocked(pit, pit.radius, d.width, d.height, d.collision)).toBe(
+          false,
+        );
+        expect(distance(pit, d.spawn)).toBeGreaterThan(pit.radius);
+        expect(distance(pit, d.exit)).toBeGreaterThan(pit.radius);
+        for (const other of layout.slice(i + 1))
+          expect(distance(pit, other)).toBeGreaterThanOrEqual(
+            pit.radius + other.radius,
+          );
+      }
+      step(m, 1);
+      expect(pits()).toEqual(layout);
+      Object.assign(m.hero('a')!, d.exit);
+      expect(m.exit('a')).toBeUndefined();
+      expect(m.enter('a', 'private', 'desert')).toBeUndefined();
+      expect(m.zoneOf('a')).toBe(zone);
+      expect([...zone.world.creeps.keys()]).toEqual(roster);
+      expect(pits()).not.toEqual(layout);
+    }
   });
   it('rotates all six server identities through existing scaled waves without changing combat tuning', () => {
     const m = setup();

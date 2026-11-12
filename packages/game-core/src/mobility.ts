@@ -1,3 +1,4 @@
+import { inQuicksand } from './creep-abilities.js';
 import { blocked, direction, segmentRect, insideEllipse } from './geometry.js';
 import { emit } from './combat.js';
 import { hasStatus } from './status.js';
@@ -33,6 +34,7 @@ export function dash(world: World, hero: Hero, config: SimulationConfig): void {
     world.chu?.phase === 'reflect' ||
     !hero.dashCharges ||
     hasStatus(hero, 'dash_lock', world.tick) ||
+    inQuicksand(world, hero) ||
     hasStatus(hero, 'root', world.tick) ||
     hasStatus(hero, 'stun', world.tick) ||
     hasStatus(hero, 'root', world.tick) ||

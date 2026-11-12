@@ -2,6 +2,7 @@ import { LoiDai, loiDai } from './loi-dai.js';
 import { canDuel } from './opponents.js';
 import { TayDocEncounter, TayDocGate } from './tay-doc.js';
 import { enforceConfinement } from './confinement.js';
+import { resetQuicksand } from './creep-abilities.js';
 import {
   stepWaveBossTest,
   validateWaveBossTest,
@@ -657,6 +658,7 @@ export class DungeonMatch {
     if ((this.hero(id)?.hp ?? 0) <= 0)
       return 'Độc nổ đã hạ gục bạn trước khi rời đấu trường.';
     zone.emptyBossResetAt = undefined;
+    resetQuicksand(zone.world, zone.config, dungeon.exit);
     const occupant = zone.world.heroes.size;
     this.transfer(
       id,
@@ -1401,7 +1403,9 @@ export class DungeonMatch {
         }),
       ),
       creepRespawn: false,
+      dungeonId: d.id,
       dungeonAggro: !(d.boss || d.chuBoss || d.kimBoss || d.bossEncounter),
+      dungeonEnemyDamageMultiplier: campaign?.dungeonEnemyDamageMultiplier,
       creep: {
         ...this.base.creep,
         ...(creepSpeed === undefined ? {} : { speed: creepSpeed }),

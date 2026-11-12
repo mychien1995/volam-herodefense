@@ -1,3 +1,8 @@
+import { markImpactTarget } from './m3d-hit-art.js';
+import {
+  approvedM3dPresentation,
+  releaseBeat,
+} from './m3d-approved-boss-body.js';
 import Phaser from 'phaser';
 import {
   presentRenovatedBody,
@@ -330,15 +335,32 @@ export class KimLuanRenderer {
           { duration: (duration * 1000) / 30 },
         );
       } else sprite = this.cel(id, bundle, clip, a.x, a.y, age);
+      const locomotion = /^(idle|walk)_/.test(clip);
+      const moving = clip === 'sweep' && movingShot;
+      const action = locomotion ? undefined : moving || cast;
+      const pose = locomotion
+        ? a.pose === 'hurt'
+          ? 'hurt'
+          : clip.slice(0, 4)
+        : 'action';
       presentRenovatedBody(
         this.scene,
         sprite,
         who,
-        /^(idle|walk)_/.test(clip) && !cast && !movingShot ? a.pose : 'action',
-        a.fx,
-        a.fy,
-        cast?.abilityId ?? a.castAbilityId,
+        pose,
+        action?.fx ?? a.fx,
+        action?.fy ?? a.fy,
+        action?.abilityId ?? a.castAbilityId,
+        action
+          ? {
+              beat: releaseBeat(
+                this.tick,
+                moving ? moving.startedAt : cast!.activeAt,
+              ),
+            }
+          : undefined,
       );
+      markImpactTarget(sprite, id);
       if (bundle === 'kim_luan_actions' && clip === 'channel') {
         const pivots: Record<string, number[]> = {
           channel_0: [79.5, 133],
@@ -350,7 +372,10 @@ export class KimLuanRenderer {
           size = r3Tag('kim_luan_actions', 'channel').asset.frameDimensions;
         if (pivot) sprite.setOrigin(pivot[0]! / size[0], pivot[1]! / size[1]);
       }
-      if (this.scene.time.now - (this.flashes.get(id) ?? -1000) < 100)
+      if (
+        !approvedM3dPresentation() &&
+        this.scene.time.now - (this.flashes.get(id) ?? -1000) < 100
+      )
         sprite.setTint(0xffe8c3);
       else sprite.clearTint();
       this.label(

@@ -3,6 +3,12 @@ local root = assert(app.params.root)
 local subdir = '/skills/cai-bang/bong-combo-review/'
 local source = root .. '/assets/source' .. subdir
 local out = root .. '/assets/exports' .. subdir
+local nativeBody = app.params.pack == 'native-body'
+local editableOut
+if nativeBody then
+  editableOut = root .. '/assets/source/m3d-sprite-continuity/'
+  out = root .. '/artifacts/m3d-sprite-continuity-export/bong/'
+end
 local beats = {'thrust', 'sweep', 'rising', 'overhead'}
 local directions = {'right', 'left', 'down', 'up'}
 
@@ -63,7 +69,7 @@ local function pack(name, width, height, clips, clipsPerRow, render)
     local tag = sprite:newTag(firstFrame, frameIndex)
     tag.name = clip.name
   end
-  sprite:saveAs(source .. name .. '.aseprite')
+  sprite:saveAs((editableOut or source) .. name .. '.aseprite')
   atlas:saveAs(out .. name .. '.png')
   local f = assert(io.open(out .. name .. '.json', 'w'))
   f:write(json.encode({frames=frames, meta={size={w=atlas.width, h=atlas.height}, scale='1'}}))
@@ -111,7 +117,8 @@ for _, direction in ipairs(directions) do
     }
   end
 end
-pack('body', 128, 144, body, 4, function(target, clip, i)
+local density = nativeBody and 2 or 1
+pack('body', 128 * density, 144 * density, body, nativeBody and 2 or 4, function(target, clip, i)
   local direction = clip.direction == 'left' and 'right' or clip.direction
   local smashRear = direction == 'up' and clip.row == 4
   local image = smashRear and cell(bodySheets.upSmash, i, 1, 1)
@@ -122,10 +129,12 @@ pack('body', 128, 144, body, 4, function(target, clip, i)
       for x = 0, 11 do image:drawPixel(x, y, 0) end
     end
   end
-  local scale = smashRear and 0.128 or scales[direction]
-  place(target, image, scale, scale, feet[direction][clip.row][i], {64,104})
+  local scale = density * (smashRear and 0.128 or scales[direction])
+  place(target, image, scale, scale, feet[direction][clip.row][i], {64 * density,104 * density})
   if clip.direction == 'left' then target:flip(FlipType.HORIZONTAL) end
 end)
+
+if nativeBody then return end
 
 local trail = read('trail')
 local trailAnchors = {

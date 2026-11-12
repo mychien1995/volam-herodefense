@@ -7,6 +7,7 @@ import {
   bacCaiDefinition,
   vuongDefinition,
   namDeDefinition,
+  m1Config,
 } from '@volam/game-data';
 import {
   addCreep,
@@ -27,7 +28,10 @@ import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
 import { verifyRenovationSkills } from './verify-renovation-skills.mjs';
-import { startTogether } from '../tests/e2e/pregame-helper.ts';
+import {
+  startAuditTogether,
+  startTogether,
+} from '../tests/e2e/pregame-helper.ts';
 
 /** Normal entry point, real Colyseus room. Fixtures are server-side and labelled. */
 export async function verifyRenovationRuntime(
@@ -39,6 +43,7 @@ export async function verifyRenovationRuntime(
     onSelection,
     evidenceDir,
     clientQuery = '',
+    compareLegacy = true,
   } = {},
 ) {
   const session = qaSession({
@@ -61,6 +66,7 @@ export async function verifyRenovationRuntime(
     };
   const out = resolve(evidenceDir ?? 'docs/evidence/renovation-v2');
   mkdirSync(out, { recursive: true });
+  let match;
   let last = performance.now();
   const mark = (phase) => {
     const now = performance.now();
@@ -150,7 +156,10 @@ export async function verifyRenovationRuntime(
       contexts.push(context);
       const page = await context.newPage();
       pages.push(page);
-      page.on('pageerror', (e) => errors.push(e.message));
+      page.on('crash', () => errors.push('Client ' + (i + 1) + ' crashed'));
+      page.on('pageerror', (e) =>
+        errors.push('Client ' + (i + 1) + ': ' + e.message),
+      );
       page.on('console', (m) => {
         if (m.type() === 'error') errors.push(m.text());
       });
@@ -161,7 +170,7 @@ export async function verifyRenovationRuntime(
         session.clientUrl +
           '/?debug=1' +
           clientQuery +
-          (i === 1 ? '&renovationSkills=old' : ''),
+          (compareLegacy && i === 1 ? '&renovationSkills=old' : ''),
       );
       await page.locator('#pre-nickname').fill('Renovation ' + (i + 1));
       await page.getByRole('button', { name: 'Vào game', exact: true }).click();
@@ -180,9 +189,9 @@ export async function verifyRenovationRuntime(
       await wait(async () => (await read(page)).roomId, 'room join ' + i);
       roomId ??= (await read(page)).roomId;
     }
-    await pages[0]
-      .getByRole('button', { name: 'Bắt đầu', exact: true })
-      .click();
+    match = server.getRoomById(roomId);
+    assert.equal(match.state.players.size, players);
+    mark(players + ' joined room');
     const schools = [
       'vo_dang',
       'cai_bang',
@@ -191,14 +200,31 @@ export async function verifyRenovationRuntime(
       'vo_dang',
       'cai_bang',
     ];
-    if (onSelection) await onSelection({ page: pages[0], pages, out });
-    await startTogether(pages, schools, 30000, true);
+    const selectionHook = onSelection
+      ? () => onSelection({ page: pages[0], pages, out })
+      : undefined;
+    if ((await read(pages[0])).state.requiresBranch) {
+      const roster = pages.map((page, i) => [
+        page,
+        schools[i],
+        m1Config.progression.schools[schools[i]].basicIds[0],
+      ]);
+      await startAuditTogether(roster, 30000, selectionHook);
+    } else if (selectionHook) {
+      await pages[0]
+        .getByRole('button', { name: 'Bắt đầu', exact: true })
+        .click();
+      await selectionHook();
+      await startTogether(pages, schools, 30000, true);
+    } else await startTogether(pages, schools, 30000);
     for (const page of pages)
       await wait(
-        async () => (await inspect(page)).ready,
-        'normal Phaser ready',
+        async () =>
+          (await read(page)).state.phase === 'IN_GAME' &&
+          (await inspect(page)).ready,
+        'server match and normal Phaser ready',
       );
-    const room = server.getRoomById(roomId),
+    const room = match,
       heroes = [...room.world.heroes.values()],
       page = pages[0],
       peer = pages[1];
@@ -777,6 +803,55 @@ export async function verifyRenovationRuntime(
     report.status = 'FAIL';
     report.failure = String(error);
     report.errors = errors;
+    if (match) {
+      const roster = (players) =>
+        Object.entries(players).map(([id, p]) => ({
+          id,
+          nickname: p.nickname,
+          school: p.schoolId,
+          branch: p.selectedBranch,
+          confirmed: p.confirmed,
+          connected: p.connected,
+        }));
+      report.serverLobby = {
+        phase: match.state.phase,
+        host: match.state.hostId,
+        players: roster(match.state.toJSON().players),
+      };
+      report.clientLobby = await Promise.all(
+        contexts.map(async (context, i) => {
+          const page = context.pages()[0];
+          if (!page) return { client: i + 1, closed: true };
+          try {
+            const snapshot = await page.evaluate(() => {
+              const s = window.__VOLAM__?.snapshot();
+              return {
+                session: s?.sessionId,
+                phase: s?.state?.phase,
+                host: s?.state?.hostId,
+                players: s?.state?.players,
+                heading: document.querySelector('#pregame .pre-title')
+                  ?.textContent,
+                schoolControls: document.querySelectorAll(
+                  '#pregame [data-school]',
+                ).length,
+                hidden: document.querySelector('#pregame')?.hidden,
+                error: document.querySelector('#pregame .pre-error')
+                  ?.textContent,
+                focused: document.hasFocus(),
+              };
+            });
+            return {
+              client: i + 1,
+              ...snapshot,
+              players: roster(snapshot.players ?? {}),
+            };
+          } catch (error) {
+            return { client: i + 1, error: String(error) };
+          }
+        }),
+      );
+    }
     writeFileSync(
       resolve(out, 'last-failure.json'),
       JSON.stringify(report, null, 2) + '\n',

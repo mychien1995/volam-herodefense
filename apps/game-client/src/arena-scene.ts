@@ -57,9 +57,22 @@ import {
 import { presentTamLienBody } from './thien-son-rework.js';
 import { presentVoDangQuyenBody } from './vo-dang-quyen-art.js';
 import { createRenovationWorld } from './renovation-world.js';
+import { forestCombatBody, forestCombatOrigin } from './m3d-native-art.js';
+import {
+  M3dHitArt,
+  markImpactTarget,
+  preloadM3dHitArt,
+} from './m3d-hit-art.js';
+import {
+  approvedBossBody,
+  approvedM3dPresentation,
+  releaseBeat,
+} from './m3d-approved-boss-body.js';
 import {
   registerRenovation,
   presentRenovatedBody,
+  usesRenovatedCreepPose,
+  presentBongBasicBody,
   renovationActorId,
   renovationHeight,
   inspectRenovation,
@@ -96,6 +109,7 @@ interface EntityView {
 }
 export class ArenaScene extends Phaser.Scene {
   private readonly shaolinDao = new ShaolinDaoMatchArt(this);
+  private readonly hitArt = new M3dHitArt(this);
   private polished = true;
   onNpc: (menu: 'merchant' | 'pvp') => void = () => {};
   private zoneId = 'arena';
@@ -118,6 +132,9 @@ export class ArenaScene extends Phaser.Scene {
   private namDe: NamDePresentation | undefined;
   private chu: ChuPresentation | undefined;
   private ready = false;
+  get presentationReady(): boolean {
+    return this.ready;
+  }
   private followed = '';
   private lastEvent = 0;
   private introducedSession = '';
@@ -252,9 +269,11 @@ export class ArenaScene extends Phaser.Scene {
     preloadLoiDai(this);
     preloadArt(this);
     preloadShaolinDaoArt(this);
+    preloadM3dHitArt(this);
   }
   create(): void {
     this.shaolinDao.register();
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.hitArt.clear());
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
       this.shaolinDao.clear(),
     );
@@ -347,6 +366,7 @@ export class ArenaScene extends Phaser.Scene {
   setSnapshot(snapshot: LobbyState | undefined, sessionId = ''): void {
     if (runtimeArtReviewPaused(this)) return;
     if (this.sessionId !== sessionId) {
+      this.hitArt.clear();
       this.shaolinDao.clear();
       this.coMoEffects?.clear();
       this.lastEvent = 0;
@@ -354,6 +374,7 @@ export class ArenaScene extends Phaser.Scene {
       this.creepEffects?.clear();
     }
     if (!snapshot) {
+      this.hitArt.clear();
       this.story?.destroy();
       this.story = undefined;
       this.coMoEffects?.clear();
@@ -367,6 +388,7 @@ export class ArenaScene extends Phaser.Scene {
     if (this.ready && zoneId !== this.zoneId) this.drawZone(zoneId);
   }
   private drawZone(zoneId: string): void {
+    this.hitArt.clear();
     this.shaolinDao.clear();
     this.story?.destroy();
     this.story = undefined;
@@ -524,6 +546,8 @@ export class ArenaScene extends Phaser.Scene {
         basicId?: string;
         basicStage?: string;
         actionStartedAt?: number;
+        actionActiveAt?: number;
+        actionEndsAt?: number;
         schoolId?: string;
         invasionWave?: number;
         archetypeId?: string;
@@ -567,27 +591,55 @@ export class ArenaScene extends Phaser.Scene {
             this.zoneId,
           ))
         : undefined;
-      const daoPose = enemy ? undefined : this.shaolinDao.pose(state, id);
+      const states = JSON.parse(actor.statuses ?? '[]') as Array<{
+        kind: string;
+      }>;
+      const heroReaction =
+        !enemy && actor.hp > 0
+          ? states.some((status) => status.kind === 'stun')
+            ? 'stun'
+            : actor.pose === 'hurt'
+              ? 'hurt'
+              : undefined
+          : undefined;
+      const motionV08 =
+        !!art &&
+        !previewArt &&
+        (
+          this.registry.get('runtime-art-urls') as
+            Map<string, string> | undefined
+        )
+          ?.get(art.id)
+          ?.includes('/creep_motion_v08__');
+      const actorZoneTick = zoneTick(state, this.zoneId);
+      const tick = actorZoneTick ?? 0;
+      const daoPose = enemy
+        ? undefined
+        : this.shaolinDao.pose(state, id, !!heroReaction, tick);
       const cast: FeedbackPose | undefined =
         daoPose ??
         (!enemy
-          ? revisedBasicBody(
-              this,
-              this.vfx?.actorCast(
-                id,
-                actor.castAbilityId ?? '',
-                actor.pose,
+          ? heroReaction
+            ? undefined
+            : revisedBasicBody(
+                this,
+                this.vfx?.actorCast(
+                  id,
+                  actor.castAbilityId ?? '',
+                  actor.pose,
+                  actor.fx,
+                  actor.fy,
+                  actor.hp,
+                ),
+              )
+          : motionV08
+            ? undefined
+            : m3dBambooPose(
+                actor.archetypeId,
+                actor.hp <= 0 ? 'death' : actor.pose,
                 actor.fx,
                 actor.fy,
-                actor.hp,
-              ),
-            )
-          : m3dBambooPose(
-              actor.archetypeId,
-              actor.hp <= 0 ? 'death' : actor.pose,
-              actor.fx,
-              actor.fy,
-            ));
+              ));
       const texture =
         cast?.texture ??
         (enemy
@@ -606,6 +658,7 @@ export class ArenaScene extends Phaser.Scene {
           art,
         );
       view.creepArt = art;
+      markImpactTarget(view.sprite, id);
       if (actor.hp > 0 && view.lastHp <= 0) view.playback = new CreepPlayback();
       view.lastHp = actor.hp;
       const blinkAlpha = !enemy ? (this.vfx?.actorAlpha(id) ?? 1) : 1;
@@ -619,35 +672,17 @@ export class ArenaScene extends Phaser.Scene {
       view.sprite
         .setPosition(Math.round(view.smoothX), Math.round(view.smoothY))
         .setDepth(view.sprite.y);
-      if (view.sprite.texture.key !== texture) {
-        if (daoPose) {
-          view.sprite.setFlip(false, false).setRotation(0);
-          view.sprite.setData('renovation', undefined);
-          view.sprite.setData('renovation-action', undefined);
-        }
-        view.sprite
-          .setTexture(
-            texture,
-            cast
-              ? cast.firstFrame
-              : (art?.animations.find((a) => a.state === 'idle')?.frames[0] ??
-                  (texture.startsWith('desert_')
-                    ? 'idle_down_0.png'
-                    : 'idle_down_0')),
-          )
-          .setOrigin(
-            ...(cast?.origin ??
-              art?.footPivot ??
-              actorFootPivot(this, texture)),
-          );
-      }
       const direction = facing(actor.fx, actor.fy);
       // Keep this prototype's authored one-shots complete across a short/late
       // network pose. This never changes movement, combat or server clocks.
       const authoredMonk =
         !enemy && !cast && texture.startsWith('hero_thieu_lam');
       const bossPose =
-        actor.archetypeId === 'ly_mac_sau' && actor.hp > 0
+        actor.archetypeId === 'ly_mac_sau' &&
+        actor.hp > 0 &&
+        (!approvedBossBody('ly_mac_sau') ||
+          actor.pose !== 'hurt' ||
+          tick < (actor.actionEndsAt ?? 0))
           ? bossCastStates[actor.castAbilityId ?? '']
           : undefined;
       const pose = bossPose
@@ -660,6 +695,91 @@ export class ArenaScene extends Phaser.Scene {
               (state) => this.creepDuration(texture, state, direction),
             )
           : { state: actor.pose, direction };
+      const renovatedId = enemy
+        ? previewArt
+          ? undefined
+          : renovationActorId(
+              actor.archetypeId,
+              actor.invasionWave,
+              this.zoneId,
+            )
+        : heroTexture(actor.basicId, actor.schoolId);
+      const activeAt = actor.actionActiveAt ?? 0;
+      const specialInProgress =
+        tick < (actor.actionEndsAt ?? 0) &&
+        actor.castAbilityId?.endsWith('_special');
+      const heldHurt =
+        pose.state === 'hurt' &&
+        this.time.now < (view.playback.hold?.until ?? 0);
+      let bodyPose =
+        heroReaction ??
+        (actor.hp <= 0 ? 'death' : !enemy && cast ? 'action' : pose.state);
+      if (
+        enemy &&
+        actor.hp > 0 &&
+        usesRenovatedCreepPose(this, renovatedId, 'idle')
+      ) {
+        if (states.some((status) => status.kind === 'stun')) bodyPose = 'stun';
+        else if (heldHurt) bodyPose = 'hurt';
+        else if (actor.pose === 'cast' || specialInProgress) bodyPose = 'cast';
+      }
+      const nativeCreep =
+        enemy && usesRenovatedCreepPose(this, renovatedId, bodyPose);
+      const wasNativeCreep = view.sprite.getData('native-creep-pose') === true;
+      view.sprite.setData('native-creep-pose', nativeCreep);
+      let creepClock: { phase?: string; progress: number } | undefined;
+      if (nativeCreep && bodyPose === 'cast' && activeAt > 0) {
+        const secondStrike =
+          actor.castAbilityId === 'creep_cua_khong_lo_special' &&
+          tick >= activeAt + 12;
+        const releaseAt = activeAt + (secondStrike ? 12 : 0);
+        creepClock =
+          tick < activeAt
+            ? {
+                phase: 'windup',
+                progress:
+                  1 -
+                  (activeAt - tick) /
+                    Math.max(1, activeAt - (actor.actionStartedAt ?? tick)),
+              }
+            : { phase: 'release', progress: (tick - releaseAt) / 8 };
+      } else if (nativeCreep && bodyPose === 'hurt' && view.playback.hold) {
+        creepClock = {
+          progress:
+            1 -
+            (view.playback.hold.until - this.time.now) /
+              Math.max(1, this.creepDuration(texture, 'hurt', pose.direction)),
+        };
+      }
+      const forestBody =
+        !previewArt && forestCombatBody(this, texture, bodyPose);
+      const renderTexture = forestBody || texture;
+      if (!nativeCreep && view.sprite.texture.key !== renderTexture) {
+        if (daoPose) {
+          view.sprite.setFlip(false, false).setRotation(0);
+          view.sprite.setData('renovation', undefined);
+          view.sprite.setData('renovation-action', undefined);
+        }
+        view.sprite
+          .setTexture(
+            renderTexture,
+            cast
+              ? cast.firstFrame
+              : (art?.animations.find(
+                  (a) =>
+                    a.state === (forestBody ? bodyPose : 'idle') &&
+                    (!forestBody || a.direction === pose.direction),
+                )?.frames[0] ??
+                  (texture.startsWith('desert_')
+                    ? 'idle_down_0.png'
+                    : 'idle_down_0')),
+          )
+          .setOrigin(
+            ...(cast?.origin ??
+              art?.footPivot ??
+              actorFootPivot(this, texture)),
+          );
+      }
       const key =
         cast?.animation ??
         this.creepAnimationKey(
@@ -669,8 +789,10 @@ export class ArenaScene extends Phaser.Scene {
             : pose.state,
           pose.direction,
         );
-      view.sprite.setScale(cast?.scale ?? 1);
-      if (!enemy) view.sprite.setAlpha(blinkAlpha);
+      view.sprite.setScale(forestBody ? 0.5 : (cast?.scale ?? 1));
+      if (forestBody) view.sprite.setOrigin(...forestCombatOrigin);
+      if (enemy) view.sprite.setRotation(0);
+      else view.sprite.setAlpha(blinkAlpha);
       if (previewArt?.previewScale)
         view.sprite
           .setScale(previewArt.previewScale)
@@ -687,35 +809,54 @@ export class ArenaScene extends Phaser.Scene {
       const newFeedback =
         cast?.token.startsWith('feedback:') &&
         view.sprite.getData('feedbackToken') !== cast.token;
-      if (view.sprite.anims.currentAnim?.key !== key || newFeedback)
-        view.sprite.play({ key, startFrame: cast?.startFrame ?? 0 });
+      const actionToken =
+        motionV08 && ['basic_attack', 'cast'].includes(pose.state)
+          ? [actor.actionStartedAt, actor.castAbilityId, pose.state].join(':')
+          : '';
+      const newCreepAction =
+        !!actionToken &&
+        view.sprite.getData('creepActionToken') !== actionToken;
+      if (
+        !nativeCreep &&
+        (view.sprite.anims.currentAnim?.key !== key ||
+          newFeedback ||
+          newCreepAction ||
+          wasNativeCreep)
+      )
+        view.sprite.play({ key, startFrame: cast?.startFrame ?? 0 }, false);
+      view.sprite.setData('creepActionToken', actionToken);
       view.sprite.anims.timeScale = cast?.timeScale ?? 1;
       view.sprite.setData('feedbackToken', cast?.token ?? '');
-      const renovatedId = enemy
-        ? previewArt
-          ? undefined
-          : renovationActorId(
-              actor.archetypeId,
-              actor.invasionWave,
-              this.zoneId,
-            )
-        : heroTexture(actor.basicId, actor.schoolId);
       if (!daoPose)
         presentRenovatedBody(
           this,
           view.sprite,
           renovatedId,
-          actor.hp <= 0 ? 'death' : !enemy && cast ? 'action' : pose.state,
+          bodyPose,
           actor.fx,
           actor.fy,
           cast?.abilityId ?? actor.castAbilityId ?? '',
-          cast,
+          actor.archetypeId === 'ly_mac_sau' && bossPose && activeAt > 0
+            ? { beat: releaseBeat(tick, activeAt) }
+            : (creepClock ?? cast),
         );
-      if (!enemy) {
-        const tick = zoneTick(state, this.zoneId);
+      if (!enemy && !heroReaction) {
+        const tick = actorZoneTick;
         presentTamLienBody(view.sprite, actor, tick);
         const player = state?.players.get(id);
         if (player) {
+          if (
+            tick !== undefined &&
+            player.basicId === 'cai_bang_bong' &&
+            player.pose === 'basic_attack'
+          )
+            presentBongBasicBody(
+              view.sprite,
+              player.basicStage,
+              tick - player.actionStartedAt,
+              actor.fx,
+              actor.fy,
+            );
           presentVoDangQuyenBody(view.sprite, player, tick);
           this.vfx?.voDangKiem.body(view.sprite, player, id, tick);
         }
@@ -726,13 +867,12 @@ export class ArenaScene extends Phaser.Scene {
           view.sprite.getData('renovation-action')?.sourceFrame ??
             String(view.sprite.frame.name),
         );
-      const states = JSON.parse(actor.statuses ?? '[]') as Array<{
-        kind: string;
-      }>;
       const labels: Record<string, string> = {
         silence: 'Câm lặng',
         disarm: 'Tước vũ khí',
         slow: 'Chậm',
+        stun: 'Choáng',
+        root: 'Định thân',
       };
       const controls = states
         .map((s) => labels[s.kind])
@@ -817,6 +957,7 @@ export class ArenaScene extends Phaser.Scene {
           this.followed = '';
         }
       }
+    const localBody = this.keepLocalHeroVisible(state);
     this.chu?.sync(state, this.zoneId);
     this.namDe?.sync(state, this.zoneId);
     this.hongLiet?.sync(state, this.zoneId);
@@ -853,7 +994,80 @@ export class ArenaScene extends Phaser.Scene {
       this.zoneId,
       (id) => this.actors.get(id)?.sprite,
     );
-    this.creepCombatArt?.sync(state, this.zoneId);
+    this.creepCombatArt?.sync(state, this.zoneId, localBody);
+    this.hitArt.sync();
+  }
+
+  private keepLocalHeroVisible(
+    state: LobbyState | undefined,
+  ): Phaser.Geom.Rectangle | undefined {
+    const hero = state?.players.get(this.sessionId);
+    const view = this.actors.get(this.sessionId);
+    if (!hero || !view || hero.hp <= 0 || hero.bossSpectator) return;
+
+    const { sprite } = view;
+    const height = renovationHeight(
+      heroTexture(hero.basicId, hero.schoolId),
+      44,
+    );
+    // Only the core figure matters here. A long staff or loose sleeve by
+    // itself should not make the player jump to the front of the crowd.
+    const left = sprite.x - 12;
+    const right = sprite.x + 12;
+    const top = sprite.y - height;
+    let covered = false;
+    for (const [id, enemy] of this.actors) {
+      const body = enemy.sprite;
+      if (
+        body.y < sprite.y ||
+        body.y > sprite.y + 112 ||
+        !body.visible ||
+        body.alpha < 0.15 ||
+        !state?.creeps.has(id)
+      )
+        continue;
+
+      const frame = body.frame;
+      if (frame.trimmed && body.rotation === 0) {
+        const sx = Math.abs(body.scaleX);
+        const sy = Math.abs(body.scaleY);
+        const frameX = body.flipX
+          ? frame.realWidth - frame.x - frame.width
+          : frame.x;
+        const frameY = body.flipY
+          ? frame.realHeight - frame.y - frame.height
+          : frame.y;
+        const x = body.x + (frameX - body.displayOriginX) * sx;
+        const y = body.y + (frameY - body.displayOriginY) * sy;
+        if (
+          x >= right ||
+          x + frame.width * sx <= left ||
+          y >= sprite.y ||
+          y + frame.height * sy <= top
+        )
+          continue;
+      } else {
+        const size = renovationHeight(
+          body.getData('renovation')?.id ?? '',
+          enemy.creepArt?.bodyHeight ?? 43,
+        );
+        const halfWidth = size * 0.65;
+        if (
+          body.x - halfWidth >= right ||
+          body.x + halfWidth <= left ||
+          body.y - size >= sprite.y
+        )
+          continue;
+      }
+      // Keep the player at world depth so walls and trees still occlude
+      // normally. Reorder only the enemy sprites covering the player.
+      const order = ((body.y - sprite.y) / 112) * 0.15;
+      body.setDepth(sprite.y - 0.35 + order);
+      enemy.bar.setDepth(sprite.y - 0.18 + order);
+      covered = true;
+    }
+    if (covered)
+      return new Phaser.Geom.Rectangle(left, top, right - left, height);
   }
 
   private creepAnimationKey(
@@ -862,6 +1076,9 @@ export class ArenaScene extends Phaser.Scene {
     direction: string,
   ): string {
     const key = `${texture}:${state}:${direction}`;
+    const native = forestCombatBody(this, texture, state);
+    const nativeKey = `${native}:${state}:${direction}`;
+    if (native && this.anims.exists(nativeKey)) return nativeKey;
     const shared = `${texture}:${state}:shared`;
     if (
       state === 'cast' &&
@@ -902,6 +1119,12 @@ export class ArenaScene extends Phaser.Scene {
         direction,
         this.time.now,
         this.creepDuration(view.creepArt.id, state, direction),
+      ) &&
+      !(state === 'hurt' && approvedBossBody(actor?.archetypeId ?? '')) &&
+      !usesRenovatedCreepPose(
+        this,
+        renovationActorId(actor?.archetypeId, actor?.invasionWave, this.zoneId),
+        state,
       )
     )
       view.sprite.play(
@@ -917,14 +1140,16 @@ export class ArenaScene extends Phaser.Scene {
       celebrateLoiDai(this, event.x, event.y);
       return;
     }
+    this.creepCombatArt?.event(event);
     if (this.bossShouts?.event(event)) return;
     if (this.zoneId === 'arena') this.dong?.event(event);
     if (isCoMoZone(this.zoneId)) this.coMoEffects?.event(event);
     if (event.kind === 'attack')
       this.creepAction(event.sourceId, 'basic_attack');
+    const newImpact = this.hitArt.hit(event);
     if (event.kind === 'hit') {
       this.creepAction(event.targetId, 'hurt');
-      this.hongLiet?.flash(event.targetId);
+      if (!approvedM3dPresentation()) this.hongLiet?.flash(event.targetId);
       this.kim?.flash(event.targetId);
     }
     if (event.kind === 'death') this.creepAction(event.targetId, 'death');
@@ -990,7 +1215,7 @@ export class ArenaScene extends Phaser.Scene {
         this.actors.get(event.sourceId)?.sprite,
       )
     ) {
-      this.vfx?.event(event);
+      this.vfx?.event(event, !newImpact);
     }
     // A fast school can begin another valid A before the old server pose
     // returns to idle. Restart only on a new authoritative attack, never hits.
@@ -1017,6 +1242,7 @@ export class ArenaScene extends Phaser.Scene {
     }
   }
   reviewClearTransientEffects(): void {
+    this.hitArt.clear();
     this.shaolinDao.clear();
     this.vfx?.clear();
     this.coMoEffects?.clear();
@@ -1085,6 +1311,7 @@ export class ArenaScene extends Phaser.Scene {
       vuong: this.vuong?.inspect(),
       kimFrame: this.kim?.reviewState(),
       damage: this.damage?.inspect(),
+      hitArt: this.hitArt.inspect(),
       skills: this.vfx?.inspect(),
       shaolinDao: {
         effects: this.shaolinDao.inspect(),
@@ -1186,6 +1413,10 @@ export class ArenaScene extends Phaser.Scene {
         animation: view.sprite.anims.currentAnim?.key,
         frame: view.sprite.frame.name,
         texture: view.sprite.texture.key,
+        source: (
+          this.registry.get('runtime-art-urls') as
+            Map<string, string> | undefined
+        )?.get(view.sprite.texture.key),
         filterMode: view.sprite.texture.source[0]?.scaleMode,
         artStatus: isRevisedHero(view.sprite.texture.key)
           ? 'approved'
@@ -1198,6 +1429,7 @@ export class ArenaScene extends Phaser.Scene {
         playing: view.sprite.anims.isPlaying,
         wave: view.creepArt?.wave,
         hp: view.lastHp,
+        pose: view.sprite.getData('renovation')?.pose,
         label: {
           text: view.label.text,
           visible: view.label.visible,

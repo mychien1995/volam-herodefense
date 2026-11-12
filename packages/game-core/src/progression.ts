@@ -68,6 +68,17 @@ export function pointAccounting(
     surplus: maxed ? remaining : 0,
   };
 }
+export function directDodgeChance(
+  schoolId: string,
+  level: number,
+  config: SimulationConfig,
+): number {
+  const dodge = config.progression?.schools[schoolId]?.directDodge;
+  return dodge
+    ? Math.min(dodge.max, dodge.base + Math.max(0, level - 1) * dodge.perLevel)
+    : 0;
+}
+
 /** Pure derived layers; never accumulate previous totals into a new build. */
 export function characterStats(
   hero: Hero,
@@ -167,6 +178,23 @@ export function characterStats(
   const total = zero();
   for (const key of statKeys)
     total[key] = Object.values(sources).reduce((sum, s) => sum + s[key], 0);
+  const sustain = config.campaign?.meleeSustain;
+  const branchId = hero.progression?.branchId;
+  if (branchId && sustain?.branchIds.includes(branchId)) {
+    const naturalRegen =
+      sources.base.hpRegen +
+      sources.growth.hpRegen +
+      sources.innate.hpRegen +
+      sources.surplus.hpRegen;
+    const bonusHp = total.maxHp * sustain.maxHpBonus;
+    const bonusRegen =
+      Math.max(sustain.minHpRegen, naturalRegen * (1 + sustain.hpRegenBonus)) -
+      naturalRegen;
+    sources.base.maxHp += bonusHp;
+    sources.base.hpRegen += bonusRegen;
+    total.maxHp += bonusHp;
+    total.hpRegen += bonusRegen;
+  }
   const slow =
     -total.movementSpeed * Math.min(0.85, statusValue(hero, 'slow', tick));
   sources.temporary.movementSpeed += slow;

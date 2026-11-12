@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 39;
+export const PROTOCOL_VERSION = 40;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -21,6 +21,7 @@ export const nicknameSchema = z
   );
 
 export const portalCountSchema = z.union([
+  z.literal(1),
   z.literal(2),
   z.literal(3),
   z.literal(4),

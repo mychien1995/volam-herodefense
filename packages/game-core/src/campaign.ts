@@ -9,6 +9,8 @@ export interface CampaignDefinition {
   privateDamagePerPlayer: number;
   invasionBaseCount: number;
   invasionChapterCount: number;
+  invasionHpMultiplier: number;
+  invasionDamageMultiplier: number;
   chapterSeconds: number;
   xpThresholds: number[];
   startingPotions: { hp_small: number; mp_small: number };
@@ -20,6 +22,13 @@ export interface CampaignDefinition {
   dungeonGold: number[];
   dungeonHp: number[];
   dungeonDamage: number[];
+  dungeonEnemyDamageMultiplier: number;
+  meleeSustain: {
+    branchIds: string[];
+    maxHpBonus: number;
+    hpRegenBonus: number;
+    minHpRegen: number;
+  };
   bossHpPerPlayer: number;
   damagePerPlayer: number;
   wavePearl: number;

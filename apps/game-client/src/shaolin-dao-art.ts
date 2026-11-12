@@ -29,6 +29,11 @@ const activeIn = (state: LobbyState | undefined) =>
 const basic = 'thieu_lam_dao';
 const truTa = 'tru_ta';
 export const lotusSkill = 'nhu_lai_thien_diep';
+const reviewedCastFrames: Readonly<Record<string, 'lotus' | 'strike'>> = {
+  kim_quang_ho_tran: 'lotus',
+  bat_dong_minh_vuong: 'lotus',
+  tam_gioi_quy_thien: 'strike',
+};
 // The last opaque cutting contour is at x=171.5 in the 174px review frame.
 const sweepTipFromCenter = 84.5;
 const vectors = {
@@ -65,6 +70,15 @@ export class ShaolinDaoMatchArt {
   private readonly strikes = new Map<
     string,
     { end: number; ability: string; direction: Direction }
+  >();
+  private readonly casts = new Map<
+    string,
+    {
+      ability: string;
+      direction: Direction;
+      start?: number;
+      contactShown: boolean;
+    }
   >();
   private readonly lotusOwners = new Set<string>();
   private readonly effects = new Map<Phaser.GameObjects.Image, string>();
@@ -112,25 +126,50 @@ export class ShaolinDaoMatchArt {
     for (const [id, strike] of this.strikes)
       if (!visible(id) || strike.end <= this.scene.time.now)
         this.strikes.delete(id);
+    for (const [id, cast] of this.casts) {
+      const expired =
+        cast.start !== undefined && this.scene.time.now >= cast.start + 400;
+      if (!visible(id) || (expired && cast.contactShown)) this.casts.delete(id);
+    }
     for (const [sprite, id] of this.effects)
       if (!visible(id)) this.remove(sprite);
   }
 
-  pose(state: LobbyState | undefined, id: string): FeedbackPose | undefined {
+  pose(
+    state: LobbyState | undefined,
+    id: string,
+    reaction: boolean,
+    tick: number,
+  ): FeedbackPose | undefined {
     if (!usesShaolinDaoArt(this.scene, state, id)) return;
     const player = state?.players.get(id);
-    if (!player || player.hp <= 0 || player.pose === 'hurt') return;
+    if (!player || player.hp <= 0) return;
     const strike = this.strikes.get(id);
-    const direction = strike?.direction ?? facing(player.fx, player.fy);
-    const pose = strike
-      ? 'strike'
-      : player.pose === 'walk'
-        ? 'walk'
-        : this.lotusOwners.has(id)
-          ? 'lotus'
-          : player.pose === 'idle'
-            ? 'idle'
-            : undefined;
+    const cast = this.casts.get(id);
+    const direction = reaction
+      ? facing(player.fx, player.fy)
+      : ((strike ?? cast)?.direction ?? facing(player.fx, player.fy));
+    const ability = cast?.ability ?? player.castAbilityId;
+    const action = reviewedCastFrames[ability];
+    if (cast) cast.start ??= this.scene.time.now;
+    const age = cast
+      ? (this.scene.time.now - cast.start!) * 0.03
+      : tick - player.actionStartedAt;
+    const reviewed = !!action && (cast || player.pose === 'cast') && age >= 0;
+    let pose: string | undefined;
+    if (reaction) {
+      pose = 'idle';
+      if (cast && age >= 12) this.casts.delete(id);
+    } else if (strike) pose = 'strike';
+    else if (reviewed) {
+      const release = action === 'strike' ? 6 : 2;
+      const contact =
+        age >= release && (age < release + 5 || (cast && !cast.contactShown));
+      pose = contact ? action : 'idle';
+      if (contact && cast) cast.contactShown = true;
+    } else if (player.pose === 'walk') pose = 'walk';
+    else if (this.lotusOwners.has(id)) pose = 'lotus';
+    else if (player.pose === 'idle') pose = 'idle';
     if (!pose) return;
     return {
       texture: shaolinDaoAtlas,
@@ -139,7 +178,9 @@ export class ShaolinDaoMatchArt {
       animation: `${shaolinDaoAtlas}:${pose}:${direction}`,
       origin: shaolinDaoPivot,
       scale: shaolinDaoScale,
-      abilityId: strike?.ability ?? (pose === 'lotus' ? lotusSkill : basic),
+      abilityId: reviewed
+        ? ability
+        : (strike?.ability ?? (pose === 'lotus' ? lotusSkill : basic)),
       token: '',
       durationMs: 0,
       timeScale: 1,
@@ -158,12 +199,25 @@ export class ShaolinDaoMatchArt {
     if (event.kind !== 'attack' && event.kind !== 'cast')
       return isBasic || isTruTa;
     this.strikes.delete(event.sourceId);
+    this.casts.delete(event.sourceId);
+    const direction = facing(event.fx ?? 1, event.fy ?? 0) as Direction;
+    if (
+      event.kind === 'cast' &&
+      Object.hasOwn(reviewedCastFrames, event.abilityId)
+    ) {
+      this.casts.set(event.sourceId, {
+        ability: event.abilityId,
+        direction,
+        contactShown: false,
+      });
+      // The original effect renderer still owns this skill's VFX.
+      return false;
+    }
     if (
       !(isBasic && event.kind === 'attack') &&
       !(isTruTa && event.kind === 'cast')
     )
       return false;
-    const direction = facing(event.fx ?? 1, event.fy ?? 0) as Direction;
     const [dx, dy] = vectors[direction];
     this.strikes.set(event.sourceId, {
       end: this.scene.time.now + (isBasic ? 180 : 285),
@@ -270,6 +324,7 @@ export class ShaolinDaoMatchArt {
   clear(): void {
     for (const sprite of this.effects.keys()) this.remove(sprite);
     this.strikes.clear();
+    this.casts.clear();
     this.lotusOwners.clear();
   }
 

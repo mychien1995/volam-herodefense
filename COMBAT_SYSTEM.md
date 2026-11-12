@@ -1,3 +1,11 @@
+## Thiên Hạ Vô Cẩu · 2026-11-12
+
+Action Thiên Hạ Vô Cẩu cung cấp giảm sát thương 80% qua cùng luật giảm sát thương mạnh nhất với các chiêu phòng thủ khác. Cú đập cuối hồi 5% HP tối đa cho bản thân và phát sự kiện hồi máu theo lượng thực hồi, kể cả khi không có mục tiêu trong tầm. Stun, chết và rời map kết thúc action theo luật hiện hành.
+
+## Tầm Bổng và hồi chiêu đánh thường M3D · 2026-11-12
+
+Cái Bang Bổng đánh trong tầm 105 đơn vị với bốn thức và nhịp 8 tick mỗi thức. Bổng sơn đỏ khắc rồng vàng dài hơn 50%, rộng hơn 10%, thể hiện ở tư thế đứng, đi và đánh theo bốn hướng. Vệt đòn theo tầm mới. Võ Đang Quyền, Võ Đang Kiếm, Thiếu Lâm Quyền và Thiếu Lâm Đao có hồi chiêu A bằng 0. Thiếu Lâm Quyền giữ chuỗi bốn thức và cửa sổ 60 tick. Nhịp hiện hành của Cái Bang Bổng, Thiên Sơn Phiến, Thiên Sơn Đao và Cái Bang Chưởng tiếp tục áp dụng. Mỗi lần nhấn A gửi một lệnh và server xử lý tối đa một đòn của mỗi người trong một tick.
+
 ## Tầm Tru Tà · 2026-11-09
 
 Server dùng bán kính 190/194/198/202 ở bậc 1–4. Mục tiêu trúng khi tâm nằm trong góc đánh, mép thân chạm vùng quét và có đường nhìn. Sát thương lan và làm chậm dùng quy tắc Tru Tà hiện hành. Client căn mép vệt quét theo bán kính sự kiện cast.

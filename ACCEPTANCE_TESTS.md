@@ -1,3 +1,17 @@
+## Bổng đỏ và nhịp đánh thường M3D
+
+- Trong trận M3D, cả bốn hướng có một tư thế đứng, bốn khung bước đi và bốn thức A dùng atlas Bổng đỏ. Cả chủ nhân và người chơi khác nhận đúng hướng đứng. Soi chân, tay, hoa văn và vị trí vệt đòn ở zoom gameplay.
+- Mỗi thức đánh trúng mục tiêu phía trước ở 100 đơn vị và trượt ở 126. Hai client thấy cùng HP từ server.
+- Võ Đang Quyền, Võ Đang Kiếm, Thiếu Lâm Quyền và Thiếu Lâm Đao nhận A trên các tick liên tiếp. Hai lệnh cùng tick chỉ đánh một lần. Thiếu Lâm Quyền có thể mở chuỗi mới sau đòn kết thúc hoặc sau khi hết 60 tick chờ.
+
+## Hồi quy M3D review
+
+- Tạo phòng 1 cổng và quan sát chỉ cổng Đông sinh quái trên hai client. Cùng chương và số người, tổng EXP/vàng cả đợt bằng phòng 4 cổng.
+- Giữ O rồi bấm Q để tăng đúng một bậc. Thả O và bấm Q để thi triển. Đạn người chơi đánh trúng xuyên tượng qua cả hai chiều, còn địa hình thường vẫn cản.
+- Rà texture và cel ở tám nhánh khi đánh thường, trúng đòn, slow và stun. Bổng đủ bốn thức rồi nối lại ngay theo nhịp 8 tick. Rà 44 creep và năm creep hỗ trợ trong trận. Đối chiếu atlas Renovation v1 lúc đứng, đi, trúng đòn và tung chiêu. Đo thời gian báo chiêu từ tick bắt đầu đến tick thi triển. Vào lại Sa Mạc và kiểm tra bốn hố đổi tọa độ, gây chậm và chặn Shift.
+- Quan sát đường đá bay và điểm rơi thật, tơ bắn thường và định thân, cảnh báo bẫy ngắn, khớp thời điểm va chạm server và khung Phaser.
+- Ở camera 2×, bốn thức A của Bổng, Cắn/Phun độc/chết của Trúc Xà và bắn tơ/chết của Độc Chu hiển thị cel native với scale 0,5. Trong đám quái, client điều khiển đưa các creep che thân xuống dưới nhân vật và dời tên chiêu đè thân. Client khác vẫn vẽ creep theo chiều sâu riêng. Khi bỏ che khuất, sprite trở lại độ sâu theo Y.
+
 ## Thiếu Lâm Đao · 2026-11-09
 
 - Tru Tà bậc 1 trúng bia có mép ở 189 đơn vị, bỏ qua bia có mép ở 191 và địch ngay sau lưng. Đòn lan làm chậm và gây ít sát thương hơn mục tiêu chính. Tầm bậc 1–4 là 190/194/198/202.
@@ -60,7 +74,7 @@ Use `tests/renovation-navigation.test.ts`, `tests/bamboo-map.test.ts`, `scripts/
 
 Bản thử 2026-11-08 kiểm tra các mốc EXP 45/135/270/450/670 cho cấp 2–6, chi phí mỗi cấp tăng dần tới cấp 30 và HUD hiển thị đúng ngưỡng hiện tại.
 
-Nhân vật mới nhận 5 bình máu nhỏ và 5 bình mana nhỏ, kể cả khi vào phòng muộn. Kiểm tra dùng bình, đi phó bản, hồi sinh và kết nối lại để xác nhận số bình còn lại.
+Nhân vật mới nhận 10 bình máu nhỏ và 10 bình mana nhỏ, kể cả khi vào phòng muộn. Kiểm tra dùng bình, đi phó bản, hồi sinh và kết nối lại để xác nhận số bình còn lại.
 
 Bổ sung acceptance cho đường EXP, budget thưởng2/4 cửa và phòng1/2/6, pearl once/dead-present ownership, sáu sprite lặp, floor theo thời gian, gate Kim→Vương, ba hồi sinh của cả chín boss, voteN1..6, timeout/decline/reconnect/refund và failed-music override. Kết quả thực tế nằm ở verification, không suy diễn từ spec. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
 
@@ -319,6 +333,7 @@ Design source: [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md). These cases are r
 - Waiting lobby synchronizes connected players, room code and host; no school controls. Guests cannot start. Waiting host loss disables start without promoting a client.
 - Host start sends every connected client to SCHOOL_SELECTION in the same room. Four canonical schools only, distinct portraits, selected highlight, design-derived copy, confirm action and authoritative ready count.
 - Selection may change until confirmation; confirmed choice cannot change. Duplicates allowed. Empty/invalid school rejected by server; clients cannot advance themselves.
+- In a six-client room, peer selection and confirmation patches update the roster while preserving the local selection controls. A held school click completes across a peer update, and all six clients enter the same match after their server acknowledgements.
 - Tick/matchElapsedMs remain zero and no core hero/gameplay commands execute before every confirmation. Afterwards all level-1 heroes retain selected school IDs in the same IN_GAME room. Existing M1 arena/runtime art/combat remain the current prototype.
 - Selection disconnect leaves a visibly disconnected/unconfirmed roster slot and clock stopped; no timeout or auto-selection. Leave/recreate remains available.
 - Capture real browser screenshots at 1280×720 and 1920×1080; confirm no exterior dashboard or camera rescaling. Re-run movement/combat/modal/art regressions. See docs/UI_PHASE1_IMPLEMENTATION.md for measured results and limitations.

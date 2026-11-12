@@ -181,7 +181,20 @@ animationReviewGallery.onDisplayScale = (zoom) => {
   reviewScaleOverride = zoom;
   fit();
 };
-game.events.once(Phaser.Core.Events.READY, fit);
+const usePregameRenderPause =
+  !artPreview &&
+  new URLSearchParams(location.search).get('runtimeArtReview') !== '1';
+function syncMatchRender(): void {
+  if (!usePregameRenderPause || !arenaScene.presentationReady) return;
+  if (pregame.node.hidden || room?.state.phase === 'VICTORY') game.resume();
+  else game.pause();
+}
+game.events.once(Phaser.Core.Events.READY, () => {
+  fit();
+  if (!usePregameRenderPause) return;
+  if (arenaScene.presentationReady) syncMatchRender();
+  else arenaScene.events.once(Phaser.Scenes.Events.CREATE, syncMatchRender);
+});
 const observer = new ResizeObserver(fit);
 observer.observe(element('#game'));
 fit();
@@ -311,6 +324,13 @@ const unbindInput = bindGameplayInput(
     if (hero?.build.mode === 'fixed' && hero.basicId === 'thieu_lam_quyen')
       ui.onBuild({ action: 'stance' });
   },
+  {
+    enabled: () => {
+      const hero = room?.state.players.get(room.sessionId);
+      return !!hero && hero.hp > 0 && hero.build.mode === 'fixed';
+    },
+    upgrade: (slot) => ui.onBuild({ action: 'upgrade-slot', slot }),
+  },
 );
 function controls(connected: boolean, busy = false): void {
   for (const field of form.querySelectorAll<
@@ -368,7 +388,11 @@ async function connect(existing: boolean): Promise<void> {
           window.dispatchEvent(new Event('volam:controls-blocked'));
           ui.close();
         }
+        const wasChoosing = !pregame.node.hidden;
         pregame.update(state, joined.roomId, joined.sessionId);
+        syncMatchRender();
+        if (wasChoosing && pregame.node.hidden && state.phase === 'IN_GAME')
+          document.querySelector<HTMLCanvasElement>('#game canvas')?.focus();
         arenaScene.setSnapshot(
           ['IN_GAME', 'DEFEAT', 'VICTORY'].includes(state.phase)
             ? state
@@ -381,8 +405,6 @@ async function connect(existing: boolean): Promise<void> {
       }
     };
     joined.onStateChange(syncJoinedState);
-    // The SDK may already have decoded the initial snapshot before this callback is attached.
-    if (joined.state?.hostId) syncJoinedState(joined.state);
     joined.onMessage('dungeon-menu', () => {
       if (room === joined) ui.open('dungeons');
     });
@@ -452,6 +474,7 @@ async function connect(existing: boolean): Promise<void> {
       pregame.disconnected(
         `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`,
       );
+      syncMatchRender();
       arenaScene.setSnapshot(undefined);
       controls(false);
       ui.connected('', '');
@@ -459,22 +482,10 @@ async function connect(existing: boolean): Promise<void> {
       creepPreview.hide();
       status.textContent = `Mất kết nối (${code}). Hãy tạo hoặc vào phòng để trở lại.`;
     });
-    if (joined.state?.players && joined.state.phase) {
-      syncMatchMusic(joined.state.phase === 'IN_GAME');
-      pregame.update(joined.state, joined.roomId, joined.sessionId);
-      arenaScene.setSnapshot(
-        ['IN_GAME', 'DEFEAT', 'VICTORY'].includes(joined.state.phase)
-          ? joined.state
-          : undefined,
-        joined.sessionId,
-      );
-      ui.refresh(joined.state);
-      skillPreview.update(joined.state, joined.sessionId);
-      creepPreview.update(joined.state, joined.sessionId);
-    }
-    const canvas = element<HTMLCanvasElement>('#game canvas');
-    canvas.tabIndex = 0;
-    canvas.focus();
+    // The initial snapshot can arrive before this connection finishes wiring its UI.
+    const canvas = document.querySelector<HTMLCanvasElement>('#game canvas');
+    if (canvas) canvas.tabIndex = 0;
+    if (joined.state?.hostId) syncJoinedState(joined.state);
   } catch (error: unknown) {
     status.textContent = `Không thể kết nối: ${connectionReason(error instanceof Error ? error.message : '')}`;
     controls(false);

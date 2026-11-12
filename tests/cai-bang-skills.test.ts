@@ -9,6 +9,8 @@ import {
   type CombatEvent,
 } from '@volam/game-core';
 import { m1Config, creepDungeon } from '@volam/game-data';
+import { hurt } from '../packages/game-core/src/combat.js';
+import { applyStatus } from '../packages/game-core/src/status.js';
 function fixture(id: string) {
   const config = structuredClone(m1Config);
   config.width = 1000;
@@ -181,10 +183,14 @@ describe('M3A canonical Cái Bang skills', () => {
   });
   it('Hoành Tảo uses its wide frontal sweep and a nonstacking movement slow', () => {
     const f = fixture('hoanh_tao_bong');
+    f.hero.hp = 100;
+    f.config.creep.xp = 0;
+    f.enemies[1]!.hp = 5;
     f.cast();
     expect(f.enemies[0]!.hp).toBe(960);
     expect(f.enemies[2]!.hp).toBe(960);
     expect(f.enemies[3]!.hp).toBe(1000);
+    expect(f.hero.hp).toBeCloseTo(108.5);
     expect(f.enemies[0]!.statuses?.[0]).toMatchObject({
       kind: 'slow',
       magnitude: 0.4,
@@ -192,18 +198,27 @@ describe('M3A canonical Cái Bang skills', () => {
     f.steps(90);
     expect(hasStatus(f.enemies[0]!, 'slow', f.world.tick)).toBe(false);
   });
-  it('Phá Giáp hits within 144 along the frontal slam and reduces defense temporarily', () => {
+  it('Phá Giáp heals on impact within 144, briefly stuns and reduces defense', () => {
     const f = fixture('pha_giap_bong');
     f.config.creep.defense = 50;
+    f.hero.hp = 100;
     Object.assign(f.enemies[1]!, { x: 444, y: 300 });
     Object.assign(f.enemies[2]!, { x: 445, y: 300 });
     f.cast();
     expect(f.enemies[0]!.hp).toBe(1000);
+    expect(f.hero.hp).toBe(100);
     f.steps(6);
     expect(f.enemies[0]!.hp).toBe(963);
     expect(f.enemies[1]!.hp).toBe(963);
     expect(f.enemies[2]!.hp).toBe(1000);
-    f.steps(24);
+    expect(f.hero.hp).toBeCloseTo(107.4);
+    expect(hasStatus(f.enemies[0]!, 'stun', f.world.tick)).toBe(true);
+    expect(hasStatus(f.enemies[2]!, 'stun', f.world.tick)).toBe(false);
+    f.steps(17);
+    expect(hasStatus(f.enemies[0]!, 'stun', f.world.tick)).toBe(true);
+    f.steps(1);
+    expect(hasStatus(f.enemies[0]!, 'stun', f.world.tick)).toBe(false);
+    f.steps(6);
     submitInput(f.world, 'a', 2, { kind: 'basic' });
     f.steps(1);
     expect(
@@ -220,6 +235,26 @@ describe('M3A canonical Cái Bang skills', () => {
         .at(-1)?.damage,
     ).toBe(19);
   });
+  it.each(['hoanh_tao_bong', 'pha_giap_bong'])(
+    '%s heals only on damaging hits and caps recovery at max HP',
+    (id) => {
+      const miss = fixture(id);
+      miss.hero.hp = 100;
+      miss.world.creeps.clear();
+      miss.cast();
+      miss.steps(6);
+      expect(miss.hero.hp).toBe(100);
+
+      const hit = fixture(id);
+      hit.hero.hp = hit.hero.maxHp - 1;
+      hit.enemies[0]!.bossEncounter = true;
+      hit.cast();
+      hit.steps(6);
+      expect(hit.enemies[0]!.hp).toBeLessThan(1000);
+      expect(hit.hero.hp).toBe(hit.hero.maxHp);
+      expect(hasStatus(hit.enemies[0]!, 'stun', hit.world.tick)).toBe(false);
+    },
+  );
   it('Cầm Long pulls a limited frontal distance and disarms/silences without stun or movement lock', () => {
     const f = fixture('cam_long_cong'),
       enemy = f.enemies[0]!;
@@ -286,6 +321,48 @@ describe('M3A canonical Cái Bang skills', () => {
     expect(g.enemies[0]!.hp).toBe(982);
     expect(g.world.actions ?? []).toHaveLength(0);
     expect(g.hero.statuses).toEqual([]);
+  });
+  it('Thiên Hạ mitigates 80% only while spinning and heals 5% once on completion', () => {
+    const f = fixture('thien_ha_vo_cau');
+    f.world.creeps.clear();
+    const incoming = () => {
+      const before = f.hero.hp;
+      hurt(f.world, f.hero, 'attacker', 'strike', 30, f.config, {
+        critChance: 0,
+        critMultiplier: 1,
+      });
+      return before - f.hero.hp;
+    };
+    const normal = incoming();
+    f.cast();
+    expect(incoming()).toBeCloseTo(normal * 0.2);
+    const before = f.hero.hp;
+    f.steps(45);
+    expect(f.hero.hp - before).toBeCloseTo(f.hero.maxHp * 0.05);
+    const heal = f.events.filter(
+      (e) => e.stage === 'heal' && e.abilityId === 'thien_ha_vo_cau',
+    );
+    expect(heal).toHaveLength(1);
+    expect(heal[0]?.targetId).toBe(f.hero.id);
+    expect(incoming()).toBeCloseTo(normal);
+  });
+  it('an interrupted Thiên Hạ loses mitigation and does not heal', () => {
+    const f = fixture('thien_ha_vo_cau');
+    f.world.creeps.clear();
+    f.hero.hp = f.hero.maxHp / 2;
+    f.cast();
+    applyStatus(
+      f.hero,
+      { kind: 'stun', durationTicks: 10, magnitude: 1 },
+      'enemy',
+      'stun',
+      f.world.tick,
+    );
+    f.steps(1);
+    expect(f.world.actions).toHaveLength(0);
+    f.steps(45);
+    expect(f.hero.hp).toBe(f.hero.maxHp / 2);
+    expect(f.events.some((e) => e.stage === 'heal')).toBe(false);
   });
   it('rejects status-blocked casts and preserves cooldowns when moving a skill to another slot', () => {
     const f = fixture('hoa_van_chuong');

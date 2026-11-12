@@ -16,7 +16,7 @@ export const m3dFeedbackTuning = {
       empoweredRadius: 34,
     },
     chainIdleTicks: 60,
-    chainCooldownTicks: 30,
+    chainCooldownTicks: 0,
     finisher: { damage: 38, range: 300, radius: 28, speed: 480 },
     tornado: { damage: 34, range: 234, radius: 28, speed: 330 },
     earthSpike: {

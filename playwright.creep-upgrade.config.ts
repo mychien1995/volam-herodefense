@@ -9,6 +9,9 @@ export default defineConfig({
   testDir: './tests/e2e',
   testMatch: [
     'creep-upgrade.spec.ts',
+    ...(process.env['VOLAM_QA_CREEP_PRODUCTION'] === '1'
+      ? ['m3d-review.spec.ts']
+      : []),
     'creep-preview.spec.ts',
     'creep-feedback-r3.spec.ts',
     'creep-feedback-r4.spec.ts',
@@ -22,6 +25,13 @@ export default defineConfig({
     baseURL: session.clientUrl,
     viewport: { width: 1920, height: 1080 },
     video: 'off',
+    launchOptions: {
+      args: [
+        '--disable-background-timer-throttling',
+        '--disable-renderer-backgrounding',
+        '--disable-backgrounding-occluded-windows',
+      ],
+    },
     trace: {
       mode: 'retain-on-failure',
       screenshots: false,

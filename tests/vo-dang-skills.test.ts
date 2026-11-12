@@ -142,7 +142,6 @@ describe('M3C2 authoritative Yin–Yang', () => {
     expect(
       f.events.filter((e) => e.kind === 'attack').map((e) => e.stage),
     ).toEqual(['left_palm', 'right_palm']);
-    expect(voDangBasics['vo_dang_kiem']!.minIntervalTicks).toBe(6);
     const g = fixture();
     g.config.collision = [{ x: 320, y: 250, width: 2, height: 100 }];
     g.input({ kind: 'basic' });

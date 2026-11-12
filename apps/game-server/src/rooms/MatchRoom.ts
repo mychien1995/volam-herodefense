@@ -712,7 +712,7 @@ export class MatchRoom extends Room<{
       options.portalCount ?? (this.simulation.base.campaign ? 4 : 2),
     );
     if (!portals.success)
-      throw new ServerError(400, 'Số cổng phải là 2, 3 hoặc 4.');
+      throw new ServerError(400, 'Số cổng phải là 1, 2, 3 hoặc 4.');
     this.simulation.invasion!.definition.portalCount = portals.data;
     this.state.defense.portalCount = portals.data;
     this.state.defense.devCreepTest = this.devCreepTest;
@@ -833,7 +833,9 @@ export class MatchRoom extends Room<{
     if (player) player.connected = false;
     this.simulation.disconnect(client.sessionId);
     this.syncState();
-    this.allowReconnection(client, 30);
+    // A drop before the join handshake completes can reject before reserving a seat.
+    // Colyseus calls onLeave when a reconnection cannot be made.
+    void this.allowReconnection(client, 30).catch(() => undefined);
   }
   override onReconnect(client: MatchClient): void {
     const player = this.state.players.get(client.sessionId);

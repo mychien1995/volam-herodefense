@@ -95,6 +95,14 @@ describe('M1 manual attacks and the two data-driven abilities', () => {
     expect(behind.hp).toBe(120);
     expect(a.enemy.hits['a']).toBe(1);
     expect(secondary.hits['a']).toBe(1);
+    expect(
+      a.world.events
+        .filter((event) => event.kind === 'hit')
+        .map(({ targetId, hitIndex }) => [targetId, hitIndex ?? 0]),
+    ).toEqual([
+      [a.enemy.id, 0],
+      [secondary.id, 1],
+    ]);
   });
   it('enforces cadence across attack-style swaps and input spam', () => {
     const a = setup();

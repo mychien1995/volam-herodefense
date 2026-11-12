@@ -26,10 +26,20 @@ Renderer chiêu dùng tick của vùng phát sự kiện. Trong Lôi Đài, các
 
 Bản v2 lấy hình Hồng Mộc đã duyệt làm nguồn bố cục và màu. Chuẩn độ nét là cảnh Võ Đang visual-upgrade-2, còn ảnh chơi dùng để đối chiếu vị trí chân, mật độ hiển thị và khoảng trống cạnh HUD. `assets/source/loi-dai-v2/layout.json` lưu mặt nạ nguồn có thể chỉnh, vị trí, độ sâu và prompt tạo tấm gạch ImageGen. `python scripts/export-loi-dai-v2.py` xuất cảnh logic 836 × 470 ở mật độ 2×, với nền, mặt sàn, cầu thang, lan can chia theo độ sâu, mái, cờ, trống và cây tách riêng. Bản v2 giữ tỷ lệ hiển thị của nhân vật. Bản xuất v1 và atlas pháo hoa được giữ trong thư mục cũ.
 
-`python -X utf8 scripts/verify-loi-dai.py` kiểm tra kích thước, alpha, hash nguồn và ghép lại ảnh gốc đã xử lý độ nét theo từng pixel. Artwork v2 chờ duyệt trong game.
+`python -X utf8 scripts/verify-loi-dai.py` kiểm tra kích thước, alpha, hash nguồn và ghép lại ảnh gốc đã xử lý độ nét theo từng pixel. Phaser dùng bản v2 trong `milestone/m3d`.
 
 Bản dựng Aseprite `assets/source/loi-dai-v2/hong-moc.aseprite` có 24 lớp có thể chỉnh, được lắp bằng `assemble.lua`. Mở lại và xuất PNG bằng Aseprite cho ảnh 1672 × 940 khớp từng pixel với bản ghép đã kiểm tra. Hai dải ảnh ngoài biên được dựng bằng phản chiếu họa tiết ven sân, để camera phủ viewport rộng mà vẫn giữ nguyên bố cục trung tâm.
 
 Chromium ở 1896 × 919 và 1280 × 720 kiểm tra tâm camera, độ hiện diện của các lớp và các khung hình nối tiếp của Thiên Hạ Vô Cẩu, Hàng Long Hỏa Vũ, Bách Liệt Thiên Kích, Bách Phiến Phong Bạo. Phòng có một cửa sổ Phaser và năm client Colyseus. [Ảnh sân trong game](evidence/sessions/loi-dai-v2-verified/hong-moc-wide.png) · [Bách Liệt Thiên Kích](evidence/sessions/loi-dai-v2-verified/bach-liet-live.png).
 
 Kiểm tra cuối `pnpm check:final --config playwright.loi-dai.config.ts --trace off` đã qua typecheck, 18 kiểm tra workflow, 973 bài unit/integration, build, kiểm tra asset và 2 bài Chromium. [Kết quả](evidence/sessions/loi-dai-v2-verified/check-workflow/final-timings.json).
+
+## Tích hợp vào M3D
+
+Client và máy chủ dùng protocol 40. Phòng đã mở với bản cũ cần được tạo lại khi chuyển sang bản này.
+
+`pnpm check:final --config playwright.loi-dai.config.ts --trace off` qua TypeScript, 18 kiểm tra workflow, 990 test unit/tích hợp, build production, các validator asset và hai ca Chromium. [Kết quả pipeline](evidence/sessions/loi-dai-m3d-final/check-workflow/final-timings.json).
+
+`node tools/run-playwright.mjs test tests/e2e/gameplay.spec.ts --grep "six players keep a full arena viewport" --trace off` qua ca đấu trường chính sáu người, gồm đồng bộ học chiêu và đòn đánh thật.
+
+Kiểm tra trong Lôi Đài trên bản gộp ghi nhận khung thi triển hoặc hiệu ứng cho đủ 43 kỹ năng chủ động bậc 1, tám đòn A và Tam Liên Trảm (S). [Kết quả từng chiêu](evidence/sessions/loi-dai-m3d-final/skill-visuals.json).

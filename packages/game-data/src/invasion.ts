@@ -12,7 +12,9 @@ export const invasionDefinitionSchema = z
     intervalTicks: z.number().int().min(90),
     streamTicks: z.number().int().positive().optional(),
     spawnEveryTicks: z.number().int().positive().optional(),
-    portalCount: z.union([z.literal(2), z.literal(3), z.literal(4)]).optional(),
+    portalCount: z
+      .union([z.literal(1), z.literal(2), z.literal(3), z.literal(4)])
+      .optional(),
     maxWaves: z.number().int().min(1).max(20).optional(),
     warningTicks: z.array(z.number().int().positive()).length(2),
     noticeTicks: z.number().int().positive(),
@@ -91,7 +93,7 @@ export function createInvasionDefinition(
   intervalSeconds = 180,
   statueHp = 2000,
   stream?: {
-    portalCount: 2 | 3 | 4;
+    portalCount: 1 | 2 | 3 | 4;
     durationSeconds?: number;
     spawnEverySeconds?: number;
   },

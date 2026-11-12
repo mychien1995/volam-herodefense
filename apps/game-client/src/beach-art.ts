@@ -63,7 +63,15 @@ export function beachStrikeEffect(
   kind: string,
   abilityId: string,
 ): string | undefined {
-  if (kind !== 'hit' || abilityId !== 'creep_strike') return undefined;
+  if (
+    kind !== 'hit' ||
+    ![
+      'creep_strike',
+      'creep_cua_khong_lo_special',
+      'creep_hai_vu_special',
+    ].includes(abilityId)
+  )
+    return undefined;
   const contact: Record<string, string> = {
     cua_khong_lo: 'pincer_impact',
     hai_xa: 'serpent_bite',

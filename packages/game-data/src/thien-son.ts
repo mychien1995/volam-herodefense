@@ -263,6 +263,7 @@ const descriptions = [
 export function addThienSonProgression(d: ProgressionDefinition): void {
   d.schools['thien_son'] = {
     passiveId: 'bac_minh_than_cong',
+    directDodge: { base: 0.04, perLevel: 0.002, max: 0.1 },
     basicIds: ['thien_son_phien', 'thien_son_dao'],
     base: {
       maxHp: 135,

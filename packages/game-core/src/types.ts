@@ -111,6 +111,7 @@ export interface ArcEffect {
   armorPenetration?: number | undefined;
   slowedBonus?: number | undefined;
   manaRefund?: number | undefined;
+  lifesteal?: number | undefined;
   projectileProc?: { chance: number; effect: ProjectileEffect } | undefined;
   windupTicks?: number | undefined;
   durationTicks?: number | undefined;
@@ -282,6 +283,7 @@ export interface MultiHitEffect {
       }
     | undefined;
   guard?: number | undefined;
+  finisherHealFraction?: number | undefined;
   durationTicks?: number | undefined;
 }
 export interface Ability {
@@ -329,6 +331,7 @@ export interface Ability {
 export interface SimulationConfig {
   campaign?: CampaignDefinition;
   creepCombat?: CreepCombatDefinition;
+  dungeonId?: string;
   personalCraftLoot?: boolean;
   bossBanter?: BossBanterDefinition | undefined;
   /** Temporary server-owned arena confinement, independent of status immunity. */
@@ -351,6 +354,7 @@ export interface SimulationConfig {
       }
     | undefined;
   dungeonAggro?: boolean | undefined;
+  dungeonEnemyDamageMultiplier?: number | undefined;
   bossEncounter?: BossEncounterDefinition | undefined;
   economy?: EconomyDefinition | undefined;
   progression?: ProgressionDefinition | undefined;
@@ -564,6 +568,7 @@ export interface Projectile extends Point {
 }
 export interface CombatEvent extends Point {
   tick?: number | undefined;
+  /** Attack target index on arc hits. Pulse events can use it for strike order. */
   hitIndex?: number | undefined;
   id: number;
   kind: 'attack' | 'hit' | 'death' | 'cast' | 'effect' | 'pulse';

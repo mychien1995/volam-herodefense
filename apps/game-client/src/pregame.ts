@@ -21,7 +21,7 @@ const escape = (s: string) =>
 export class PreGame {
   readonly node = document.createElement('section');
   nickname = '';
-  portalCount: 2 | 3 | 4 = 4;
+  portalCount: 1 | 2 | 3 | 4 = 4;
   private screen = 'landing';
   private roomId = '';
   private session = '';
@@ -29,6 +29,7 @@ export class PreGame {
   private rows: RoomListing[] = [];
   private busy = false;
   private notice = '';
+  private controlsKey = '';
   private rosterKey = '';
   private refreshTimer: number;
   onConnect: (nickname: string, roomId?: string) => void = () => {};
@@ -40,7 +41,7 @@ export class PreGame {
     this.node.addEventListener('change', (e) => {
       const select = e.target as HTMLSelectElement;
       if (select.id === 'pre-portals')
-        this.portalCount = Number(select.value) as 2 | 3 | 4;
+        this.portalCount = Number(select.value) as 1 | 2 | 3 | 4;
     });
     this.node.setAttribute('aria-label', 'Trước trận');
     document.querySelector('#viewport')!.append(this.node);
@@ -114,35 +115,82 @@ export class PreGame {
     this.render();
   }
   update(state: LobbyState, id: string, session: string) {
-    // Live match ticks must not replace focused school controls every 33 ms.
-    const rosterKey = JSON.stringify([
-      state.phase,
-      state.requiresBranch,
+    const self = state.players.get(session);
+    const host = state.players.get(state.hostId);
+    const choosing = state.phase === 'IN_GAME' && !self?.confirmed;
+    const screen = choosing ? 'SCHOOL_SELECTION' : state.phase;
+    // Peer acknowledgements update the roster without replacing local controls.
+    // A patch between pointer-down and pointer-up must keep that button mounted.
+    const controlsKey = JSON.stringify([
       id,
       session,
+      screen,
+      state.requiresBranch,
+      self?.schoolId,
+      self?.selectedBranch,
+      self?.confirmed,
+      state.hostId,
+      host?.connected,
+    ]);
+    const rosterKey = JSON.stringify(
       [...state.players].map(([playerId, p]) => [
         playerId,
         p.nickname,
         p.schoolId,
-        p.selectedBranch,
         p.confirmed,
         p.connected,
       ]),
-    ]);
-    const changed = this.busy || rosterKey !== this.rosterKey;
+    );
+    const redraw =
+      this.busy || this.screen !== screen || controlsKey !== this.controlsKey;
+    const rosterChanged = rosterKey !== this.rosterKey;
+    if (this.busy || this.screen !== screen) this.notice = '';
+    this.controlsKey = controlsKey;
     this.rosterKey = rosterKey;
-    if (this.busy || this.state?.phase !== state.phase) this.notice = '';
     this.state = state;
     this.roomId = id;
     this.session = session;
     this.busy = false;
-    const choosing =
-      state.phase === 'IN_GAME' && !state.players.get(session)?.confirmed;
     this.node.hidden =
       (state.phase === 'IN_GAME' && !choosing) || state.phase === 'DEFEAT';
-    this.screen = choosing ? 'SCHOOL_SELECTION' : state.phase;
-    if (changed) this.render();
+    this.screen = screen;
+    if (redraw) this.render();
+    else if (rosterChanged) this.renderRoster();
   }
+  private renderRoster() {
+    if (this.node.hidden || !this.state) return;
+    const state = this.state;
+    const players = [...state.players];
+    const list = this.node.querySelector('.pre-players');
+    if (!list) return;
+    const selecting =
+      state.phase === 'SCHOOL_SELECTION' || state.phase === 'IN_GAME';
+    list.innerHTML = players
+      .map(([id, p]) => {
+        const school = schools.find((s) => s.id === p.schoolId);
+        const status = !p.connected
+          ? 'Mất kết nối'
+          : p.confirmed
+            ? 'Đã xác nhận'
+            : selecting
+              ? 'Đang chọn…'
+              : 'Connected';
+        return `<li><strong>${escape(p.nickname)}</strong><span>${id === state.hostId ? '♛ Host · ' : ''}${status}${school ? ' · ' + escape(school.name) : ''}</span></li>`;
+      })
+      .join('');
+    const seats = this.node.querySelector('.pre-seat-count');
+    if (seats) seats.textContent = String(players.length);
+    const ready = this.node.querySelector('[data-testid="selection-ready"]');
+    if (ready) {
+      const count = players.filter(
+        ([, p]) => p.connected && p.confirmed,
+      ).length;
+      ready.textContent = `${count}/${players.length} đã sẵn sàng`;
+    }
+    const warning = this.node.querySelector<HTMLElement>('.pre-warning');
+    if (warning) warning.hidden = players.every(([, p]) => p.connected);
+  }
+
   disconnected(message: string) {
     this.state = undefined;
     this.roomId = '';
@@ -195,18 +243,17 @@ export class PreGame {
       title = 'Danh sách phòng';
       content = `<div class="room-scroll"><table><thead><tr><th>Phòng / Mã</th><th>Người chơi</th><th>Trạng thái</th><th></th></tr></thead><tbody>${this.rows.map((r) => `<tr><td>${escape(r.roomId)}</td><td>${r.clients}/${r.maxClients}</td><td>${escape(({ WAITING_LOBBY: 'Đang chờ', SCHOOL_SELECTION: 'Chọn phái', IN_GAME: 'Trong trận', DEFEAT: 'Đã kết thúc' } as Record<string, string>)[r.phase] ?? 'Không khả dụng')}</td><td><button data-action="join" data-room="${escape(r.roomId)}" ${this.busy || r.locked || r.clients >= r.maxClients || !['WAITING_LOBBY', 'SCHOOL_SELECTION', 'IN_GAME'].includes(r.phase) ? 'disabled' : ''}>Vào phòng</button></td></tr>`).join('')}</tbody></table>${this.rows.length ? '' : '<p class="empty">Chưa có phòng. Hãy tạo phòng đầu tiên.</p>'}</div><div class="pre-actions">${button('Quay lại', 'back', this.busy)}${button('Làm mới', 'refresh', this.busy)}${button('Tạo phòng', 'create', this.busy)}</div><form id="code-form"><label class="sr-only" for="pre-code">Mã phòng</label><input id="pre-code" placeholder="MÃ PHÒNG" autocomplete="off"/><button ${this.busy ? 'disabled' : ''}>Vào bằng mã</button></form>`;
       content =
-        `<label class="pre-gates" for="pre-portals">Cổng xâm lăng khi tạo phòng <select id="pre-portals" ${this.busy ? 'disabled' : ''}>${[2, 3, 4].map((n) => `<option value="${n}" ${n === this.portalCount ? 'selected' : ''}>${n} cổng${n === 2 ? ' · Trái / Phải' : n === 3 ? ' · Thêm Bắc' : ' · Bốn hướng'}</option>`).join('')}</select></label><p class="pre-note">Quái tràn trong 60 giây mỗi đợt · Đợt mới mỗi 3 phút.</p>` +
+        `<label class="pre-gates" for="pre-portals">Cổng xâm lăng khi tạo phòng <select id="pre-portals" ${this.busy ? 'disabled' : ''}>${[1, 2, 3, 4].map((n) => `<option value="${n}" ${n === this.portalCount ? 'selected' : ''}>${n} cổng${n === 1 ? ' · Phải' : n === 2 ? ' · Trái / Phải' : n === 3 ? ' · Thêm Bắc' : ' · Bốn hướng'}</option>`).join('')}</select></label><p class="pre-note">Quái tràn trong 60 giây mỗi đợt · Đợt mới mỗi 3 phút.</p>` +
         content;
     } else if (this.state) {
       const state = this.state;
-      const players = [...state.players.entries()];
       const self = state.players.get(this.session);
       const host = state.players.get(state.hostId);
       const hostHere = !!host?.connected;
-      const list = `<ul class="pre-players">${players.map(([id, p]) => `<li><strong>${escape(p.nickname)}</strong><span>${id === state.hostId ? '♛ Host · ' : ''}${!p.connected ? 'Mất kết nối' : p.confirmed ? 'Đã xác nhận' : ['SCHOOL_SELECTION', 'IN_GAME'].includes(state.phase) ? 'Đang chọn…' : 'Connected'}${p.schoolId ? ' · ' + escape(schools.find((s) => s.id === p.schoolId)?.name ?? '') : ''}</span></li>`).join('')}</ul>`;
+      const list = '<ul class="pre-players"></ul>';
       if (state.phase === 'WAITING_LOBBY') {
         title = 'Phòng chờ';
-        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · ${players.length}/6 người chơi · ${state.defense.portalCount} cổng${state.defense.devCreepTest ? ' · TEST CREEP' : ''}</p><div class="parchment">${list}</div><p>${hostHere ? 'Host bắt đầu để mọi người chọn phái.' : 'Host đã mất kết nối. Hãy rời và tạo phòng mới.'}</p><div class="pre-actions">${button('Bắt đầu', 'start', this.session !== state.hostId || !hostHere)}${button('Rời phòng', 'leave')}</div>`;
+        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <span class="pre-seat-count"></span>/6 người chơi · ${state.defense.portalCount} cổng${state.defense.devCreepTest ? ' · TEST CREEP' : ''}</p><div class="parchment">${list}</div><p>${hostHere ? 'Host bắt đầu để mọi người chọn phái.' : 'Host đã mất kết nối. Hãy rời và tạo phòng mới.'}</p><div class="pre-actions">${button('Bắt đầu', 'start', this.session !== state.hostId || !hostHere)}${button('Rời phòng', 'leave')}</div>`;
       } else {
         title = 'Chọn môn phái';
         const branches =
@@ -231,7 +278,7 @@ export class PreGame {
               .join('') +
             '</div>'
           : '';
-        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <strong data-testid="selection-ready">${players.filter(([, p]) => p.connected && p.confirmed).length}/${players.length} đã sẵn sàng</strong></p><div class="school-grid">${schools.map((s) => `<button type="button" class="school-card ${self?.schoolId === s.id ? 'selected' : ''}" data-action="school" data-school="${s.id}" aria-pressed="${self?.schoolId === s.id}" ${self?.confirmed ? 'disabled' : ''}><h3>${s.name}</h3><div role="img" aria-label="${s.name} — chân dung" class="school-portrait ${s.portrait}"></div><span class="element">${s.element}</span><p>${s.description}</p><small>${s.basics}</small></button>`).join('')}</div>${branchButtons}<p class="pre-note">${state.requiresBranch ? 'Chọn một môn phái và một nhánh. Dùng dấu + trên thanh Q W E R T để học chiêu.' : 'Cấp 1 · Có thể chọn trùng phái.'}</p>${list}<div class="pre-actions">${button('Rời phòng', 'leave')}${button(self?.confirmed ? 'Đã xác nhận' : 'Xác nhận', 'confirm', !self?.schoolId || (state.requiresBranch && !self.selectedBranch) || !!self?.confirmed)}</div>${players.some(([, p]) => !p.connected) ? '<p class="pre-warning">Đang chờ người chơi mất kết nối. Không tự chọn phái hoặc bắt đầu trận. Bạn có thể rời và tạo phòng mới.</p>' : ''}`;
+        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <strong data-testid="selection-ready"></strong></p><div class="school-grid">${schools.map((s) => `<button type="button" class="school-card ${self?.schoolId === s.id ? 'selected' : ''}" data-action="school" data-school="${s.id}" aria-pressed="${self?.schoolId === s.id}" ${self?.confirmed ? 'disabled' : ''}><h3>${s.name}</h3><div role="img" aria-label="${s.name} — chân dung" class="school-portrait ${s.portrait}"></div><span class="element">${s.element}</span><p>${s.description}</p><small>${s.basics}</small></button>`).join('')}</div>${branchButtons}<p class="pre-note">${state.requiresBranch ? 'Chọn một môn phái và một nhánh. Dùng dấu + trên thanh Q W E R T để học chiêu.' : 'Cấp 1 · Có thể chọn trùng phái.'}</p>${list}<div class="pre-actions">${button('Rời phòng', 'leave')}${button(self?.confirmed ? 'Đã xác nhận' : 'Xác nhận', 'confirm', !self?.schoolId || (state.requiresBranch && !self.selectedBranch) || !!self?.confirmed)}</div><p class="pre-warning" hidden>Đang chờ người chơi mất kết nối. Không tự chọn phái hoặc bắt đầu trận. Bạn có thể rời và tạo phòng mới.</p>`;
       }
     }
     if (this.state?.devSkillLoadout)
@@ -240,6 +287,7 @@ export class PreGame {
         'Test · Cấp 30 · Tối đa kỹ năng · Không hồi chiêu',
       );
     this.node.innerHTML = `<section class="pre-window ${this.screen === 'SCHOOL_SELECTION' ? 'school-window' : ''}"><h1 class="pre-title">${title}</h1>${content}<p class="pre-error" role="status" aria-live="polite">${escape(this.notice)}</p></section>`;
+    this.renderRoster();
   }
   destroy() {
     window.clearInterval(this.refreshTimer);

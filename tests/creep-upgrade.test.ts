@@ -85,11 +85,17 @@ describe('49 authored creep combat profiles', () => {
       const s = fixture(p.id);
       special(s);
       expect(s.world.creepCombat!.effects.size).toBeGreaterThan(0);
-      expect(
-        [...s.world.creepCombat!.effects.values()].every(
-          (e) => e.activeAt > s.world.tick,
+      const window = Math.max(
+        1,
+        Math.round(
+          p.special!.windup * creepCombatDefinition.specialWindupScale,
         ),
-      ).toBe(true);
+      );
+      const cues = [...s.world.creepCombat!.effects.values()];
+      expect(Math.min(...cues.map((e) => e.activeAt - e.startedAt))).toBe(
+        window,
+      );
+      expect(s.enemy.encounterAction?.activeAt).toBe(s.world.tick + window);
       expect(s.world.creepCombat!.actors.get(s.enemy.id)!.nextSpecial).toBe(
         p.special!.cooldown,
       );
@@ -137,7 +143,10 @@ describe('49 authored creep combat profiles', () => {
     const s = fixture('cua_khong_lo');
     special(s);
     s.hero.x = 370;
-    advance(s, 25);
+    const lastStrike = Math.max(
+      ...[...s.world.creepCombat!.effects.values()].map((e) => e.activeAt),
+    );
+    advance(s, lastStrike - s.world.tick + 1);
     expect(s.hero.hp).toBe(10000);
     s.hero.x = 440;
     advance(s, 5);
@@ -406,7 +415,7 @@ describe('timed invasion streams and server-owned gates', () => {
     expect(main.encounter).toBeUndefined();
   });
   it('validates portal choices and ignores every creep-test override in production', () => {
-    for (const n of [0, 1, 5, 2.5, '4', null])
+    for (const n of [0, 5, 2.5, '4', null])
       expect(
         joinOptionsSchema.safeParse({
           nickname: 'Hero',

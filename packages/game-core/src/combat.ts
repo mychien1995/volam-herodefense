@@ -7,7 +7,11 @@ import type {
 } from './types.js';
 import { opponent, opponents, targetRadius } from './opponents.js';
 import { cancelOwnedEffects, hasStatus, statusValue } from './status.js';
-import { characterStats, gainExperience } from './progression.js';
+import {
+  directDodgeChance,
+  characterStats,
+  gainExperience,
+} from './progression.js';
 import { awardCampaignBoss, grantFarmReward } from './campaign.js';
 import { direction, distance, segmentRect } from './geometry.js';
 import { recordsCraftDamage } from './economy.js';
@@ -34,6 +38,7 @@ export function hurt(
     fx?: number;
     fy?: number;
     armorPenetration?: number | undefined;
+    cleaveIndex?: number | undefined;
     slowedBonus?: number | undefined;
     lifesteal?: { fraction: number; used: boolean } | undefined;
     reactive?: boolean | undefined;
@@ -57,6 +62,13 @@ export function hurt(
   )
     return false;
   if (target.namDeLocked) return false;
+  // Dungeon hazards and damage over time can outlive the monster that applied them.
+  if (
+    config.dungeonEnemyDamageMultiplier !== undefined &&
+    world.heroes.has(target.id) &&
+    !world.heroes.has(sourceId)
+  )
+    raw *= config.dungeonEnemyDamageMultiplier;
   const campaignAttacker = world.creeps.get(sourceId);
   if (
     config.campaign?.bosses[sourceId] &&
@@ -176,6 +188,34 @@ export function hurt(
     target.statuses = target.statuses!.filter((s) => s !== counter);
     if (counter.evade !== false) {
       retaliate();
+      return false;
+    }
+  }
+  const defender = world.heroes.get(target.id);
+  if (
+    defender &&
+    attacker &&
+    !counter &&
+    !snapshot?.unavoidableHpLoss &&
+    !snapshot?.directHp &&
+    !snapshot?.reactive &&
+    !snapshot?.periodic
+  ) {
+    const chance = directDodgeChance(defender.schoolId, defender.level, config);
+    if (chance > 0 && world.random() < chance) {
+      emit(world, {
+        kind: 'effect',
+        sourceId: defender.id,
+        targetId: defender.id,
+        abilityId: 'bac_minh_than_cong',
+        x: defender.x,
+        y: defender.y,
+        fx: defender.fx,
+        fy: defender.fy,
+        damage: 0,
+        critical: false,
+        stage: 'dodge',
+      });
       return false;
     }
   }
@@ -389,6 +429,7 @@ export function hurt(
     damage,
     critical,
     ...(empowered ? { stage: 'empowered' } : {}),
+    ...(snapshot?.cleaveIndex ? { hitIndex: snapshot.cleaveIndex } : {}),
     x: target.x,
     y: target.y,
     fx: snapshot?.fx ?? heading?.fx ?? 1,
