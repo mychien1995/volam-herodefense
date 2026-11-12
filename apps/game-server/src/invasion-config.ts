@@ -2,7 +2,7 @@ import { createInvasionDefinition } from '@volam/game-data';
 /** Read only server environment. Client join/message payloads cannot override match rules. */
 export function serverInvasionDefinition(
   env: NodeJS.ProcessEnv = process.env,
-  portalCount: 2 | 3 | 4 = 2,
+  portalCount: 1 | 2 | 3 | 4 = 2,
 ) {
   const development = env['NODE_ENV'] !== 'production';
   const test = development && env['VOLAM_DEV_CREEP_TEST'] === '1';

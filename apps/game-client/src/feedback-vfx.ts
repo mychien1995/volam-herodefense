@@ -13,7 +13,8 @@ import { spinFacing } from './hero-vfx-review.js';
 import { bongContacts, bongNhamChan } from './bong-skill-review-art.js';
 import {
   caiBangBongArtEnabled,
-  bongContactOffset,
+  bongGroundOffset,
+  bongTrailPlacement,
   bongReviewBody,
   bongReviewGround,
   bongReviewMs,
@@ -213,10 +214,18 @@ export class FeedbackVfx {
       atFeet || (v.skill === 'pha_giap_bong' && !v.impact)
         ? [0, 0]
         : v.tag.effectPlacementOffset;
+    const trail =
+      caiBangBongArtEnabled && v.skill === 'cai_bang_bong' && !v.impact
+        ? bongTrailPlacement(v.tag)
+        : undefined;
+    if (trail) {
+      v.sprite.texture.setFilter(Phaser.Textures.FilterMode.LINEAR);
+      v.sprite.setScale(trail.scaleX, trail.scaleY);
+    }
     v.sprite
       .setPosition(
-        Math.round(p.x + offset[0] + v.offset[0]),
-        Math.round(p.y + offset[1] + v.offset[1]),
+        Math.round(p.x + (trail?.x ?? offset[0]) + v.offset[0]),
+        Math.round(p.y + (trail?.y ?? offset[1]) + v.offset[1]),
       )
       .setDepth(
         atFeet
@@ -1008,7 +1017,7 @@ export class FeedbackVfx {
           point &&
           p.tag.frames.slice(1, 3).includes(String(point.frame?.name))
         ) {
-          const offset = bongContactOffset[p.tag.direction]!;
+          const offset = bongGroundOffset(p.tag.direction);
           this.sequence([bongReviewGround], p.bongImpact, point, true, offset);
           delete p.bongImpact;
         }
@@ -1155,7 +1164,8 @@ export class FeedbackVfx {
       }
     });
     state.areas.forEach((a, id) => {
-      if (voDangQuyenHandled(a.abilityId) || voDangKiemHandled(a.abilityId)) return;
+      if (voDangQuyenHandled(a.abilityId) || voDangKiemHandled(a.abilityId))
+        return;
       if (approvedSkillIds.has(a.abilityId)) return;
       const b = feedbackBindings[a.abilityId];
       if (a.zoneId !== zone || !b?.area) return;

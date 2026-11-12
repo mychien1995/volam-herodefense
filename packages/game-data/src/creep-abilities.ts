@@ -3,6 +3,7 @@ import type {
   CreepAttack,
   CreepProfile,
   CreepCombatDefinition,
+  DungeonHazard,
   StatusSpec,
 } from '@volam/game-core';
 
@@ -593,15 +594,31 @@ profile('truc_xa').basic = shot('Phun độc', {
   graphic: 'poison',
 });
 profile('truc_xa').special!.statuses = [...poison, ...slow(0.25)];
-profile('doc_chu').special!.statuses = rootStatus;
-profile('doc_chu').special!.statusChance = 0.25;
-profile('son_vien').special = pool('Dậm địa', 'stone', {
-  range: 0,
-  radius: 100,
-  windup: 24,
-  duration: 1,
-  damage: 1.5,
-  statuses: stunStatus,
+profile('doc_chu').basic = shot('Tơ nhện', {
+  windup: 14,
+  cooldown: 72,
+  damage: 0.75,
+  graphic: 'web',
+  statuses: rootStatus,
+});
+delete profile('doc_chu').special;
+profile('son_vien').special = shot('Ném đá', {
+  groundTarget: true,
+  range: 280,
+  radius: 9,
+  windup: 27,
+  speed: 330,
+  cooldown: 195,
+  damage: 0,
+  graphic: 'stone',
+  field: pool('Ném đá', 'stone', {
+    range: 0,
+    radius: 62,
+    windup: 0,
+    duration: 1,
+    damage: 1.5,
+    visualTicks: 18,
+  }),
 });
 profile('truc_lam_kiem_khach').reflectChance = 0.25;
 profile('truc_lam_kiem_khach').reflectFraction = 0.5;
@@ -620,6 +637,16 @@ profile('cu_nhan_sa_thach').basic = {
 };
 profile('hai_xa').basic = shot('Thủy đạn', { graphic: 'water' });
 profile('hai_xa').special!.statuses = [...poison, ...slow(0.25)];
+
+for (const id of [
+  'moc_linh',
+  'xac_uop',
+  'cu_nhan_sa_thach',
+  'cua_khong_lo',
+  'hai_tac_hoa_phao',
+  'hell_xich_quy',
+])
+  profile(id).special!.visualTicks = 18;
 
 // Director preview feedback r3. These replace the earlier generic warning strips.
 profile('wave_02').basic.presentation = { warning: 'none' };
@@ -765,12 +792,87 @@ export const creepProfiles: Record<string, CreepProfile> = Object.fromEntries(
 );
 if (rows.length !== 49 || Object.keys(creepProfiles).length !== 49)
   throw Error('Creep catalogue must contain exactly 49 distinct profiles');
+const positiveTick = z.number().int().positive();
+const positive = z.number().finite().positive();
+const relativePoint = z.strictObject({
+  x: z.number().min(0.15).max(0.85),
+  y: z.number().min(0.15).max(0.85),
+});
+const trapCadence = {
+  firstTick: positiveTick,
+  interval: positiveTick,
+  radius: positive,
+  stunTicks: positiveTick,
+};
+const hazardSchema: z.ZodType<DungeonHazard> = z.discriminatedUnion('kind', [
+  z.strictObject({ kind: z.literal('darts'), ...trapCadence, speed: positive }),
+  z.strictObject({
+    kind: z.literal('quicksand'),
+    count: positiveTick,
+    radius: positive,
+    slow: z.number().gt(0).lt(1),
+  }),
+  z.strictObject({
+    kind: z.literal('geyser'),
+    ...trapCadence,
+    count: positiveTick.max(4),
+    warning: positiveTick,
+  }),
+  z.strictObject({
+    kind: z.literal('firetrap'),
+    ...trapCadence,
+    warning: positiveTick,
+    stagger: positiveTick,
+    points: z.array(relativePoint).min(1),
+  }),
+]);
 export const creepCombatDefinition: CreepCombatDefinition = {
+  dungeonHazards: z.record(z.string(), hazardSchema).parse({
+    forest: {
+      kind: 'darts',
+      firstTick: 105,
+      interval: 47,
+      speed: 375,
+      radius: 7,
+      stunTicks: 21,
+    },
+    desert: {
+      kind: 'quicksand',
+      count: 4,
+      radius: 75,
+      slow: 0.38,
+    },
+    sea: {
+      kind: 'geyser',
+      firstTick: 135,
+      interval: 130,
+      count: 2,
+      warning: 19,
+      radius: 54,
+      stunTicks: 26,
+    },
+    hell: {
+      kind: 'firetrap',
+      firstTick: 115,
+      interval: 168,
+      stagger: 42,
+      warning: 18,
+      points: [
+        { x: 0.32, y: 0.56 },
+        { x: 0.49, y: 0.44 },
+        { x: 0.65, y: 0.6 },
+        { x: 0.57, y: 0.72 },
+      ],
+      radius: 53,
+      stunTicks: 26,
+    },
+  }),
   profiles: creepProfiles,
   waveIds: Array.from(
     { length: 20 },
     (_, i) => `wave_${String(i + 1).padStart(2, '0')}`,
   ),
+  specialWindupScale: 2 / 3,
   maxNearbyCasts: 3,
   castGroupRadius: 320,
   dotCapFraction: 0.025,

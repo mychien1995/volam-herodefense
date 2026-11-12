@@ -1,3 +1,5 @@
+import { markImpactTarget } from './m3d-hit-art.js';
+import { releaseBeat } from './m3d-approved-boss-body.js';
 import Phaser from 'phaser';
 import {
   presentRenovatedBody,
@@ -305,9 +307,7 @@ export class HongLietRenderer {
       a.archetypeId,
       a.hp <= 0
         ? 'death'
-        : boss &&
-            this.tick < a.actionEndsAt &&
-            ['hong_liet_a2', 'liet_diem_phong_toa'].includes(a.castAbilityId)
+        : boss && !!a.castAbilityId && this.tick < a.actionEndsAt
           ? 'action'
           : asset === 'boss_locomotion' || (!boss && a.pose !== 'basic_attack')
             ? a.pose
@@ -315,7 +315,11 @@ export class HongLietRenderer {
       a.fx,
       a.fy,
       a.castAbilityId,
+      a.actionActiveAt > 0
+        ? { beat: releaseBeat(this.tick, a.actionActiveAt) }
+        : undefined,
     );
+    markImpactTarget(v.image, id);
     if (!v.label) {
       v.label = this.scene.add
         .text(

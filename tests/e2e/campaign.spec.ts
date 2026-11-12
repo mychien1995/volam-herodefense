@@ -21,11 +21,11 @@ test('fresh campaign heroes see their starter potions and the new XP curve', asy
     await startTogether([page, b], ['cai_bang_chuong', 'vo_dang']);
     for (const p of [page, b]) {
       await expect(p.locator('#xp-text')).toHaveText('KN 0 / 45');
-      await expect(p.locator('[data-potion-resource="hp"] em')).toHaveText('5');
-      await expect(p.locator('[data-potion-resource="mp"] em')).toHaveText('5');
+      await expect(p.locator('[data-potion-resource="hp"] em')).toHaveText('10');
+      await expect(p.locator('[data-potion-resource="mp"] em')).toHaveText('10');
       expect((await hero(p)).inventory.potions).toMatchObject({
-        hp_small: 5,
-        mp_small: 5,
+        hp_small: 10,
+        mp_small: 10,
       });
     }
 

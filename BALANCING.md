@@ -1,3 +1,13 @@
+## Nhịp phòng thủ M3D · 2026-11-12
+
+Wave creep trong chiến dịch nhân 1,10 HP và 1,08 sát thương cơ bản trước làm tròn. Mô phỏng đòn A với ba seed và một mục tiêu mỗi lượt cho thấy Bổng cấp 1 ở wave đầu tăng trung bình từ 4 lên 4,67 đòn trong solo. Cùng thử nghiệm với hệ số phòng sáu người tăng từ 8 lên 9 đòn. Đây là phép đo một mục tiêu đứng yên ở 65 đơn vị, A mỗi 9 tick.
+
+Biển nổ tối đa hai cột nước mỗi 130 tick, cảnh báo 19 tick. Địa Ngục có bốn miệng lửa, cách 42 tick giữa hai lượt liên tiếp và cảnh báo 18 tick. Cả hai giữ mức choáng 26 tick. Hai vòng cảnh báo nước được đặt cách nhau, tránh vùng báo chồng lên nhau.
+
+## Cân bằng phó bản và cận chiến · bản thử 2026-11-11
+
+Quái và boss phó bản gây 85% sát thương lên người chơi. Cái Bang Bổng, Thiên Sơn Đao, Võ Đang Quyền, Võ Đang Kiếm và Thiếu Lâm Quyền được cộng 5% máu tối đa và 10% hồi máu tự nhiên, với mức sàn hồi tự nhiên 0,5 HP/giây. Hồi từ trang bị và hiệu ứng tạm thời cộng theo chỉ số riêng. Cấu hình nằm ở `packages/game-data/src/campaign.ts`.
+
 ## Campaign balance và thử lại boss — 2026-11-06
 
 Production dùng đường EXP80+40L, ngân sách thưởng theo đợt, scaling phòng, Long Châu cộng tuyến tính và hệ số phó bản theo thời gian. Các giá trị là tuning chiến dịch v1 đã được phép triển khai; mốc level/vàng là mục tiêu playtest, không phải kết quả một trận60 phút đã đo. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).

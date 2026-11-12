@@ -70,7 +70,7 @@ const clear = (
   );
 function cue(
   world: World,
-  enemy: Creep,
+  enemy: Pick<Creep, 'id' | 'stats'>,
   spec: CreepAttack,
   abilityId: string,
   origin: Point,
@@ -79,6 +79,7 @@ function cue(
   allowStatue = false,
   delay = 0,
   persistent = false,
+  cueId?: string,
 ): CreepCue {
   const activeAt = world.tick + spec.windup + delay;
   const duration =
@@ -87,7 +88,7 @@ function cue(
       : spec.mode === 'dash'
         ? Math.ceil((spec.range / (spec.speed ?? 360)) * 30) + 1
         : (spec.duration ?? 1);
-  const id = `creep_fx_${world.nextId++}`;
+  const id = cueId ?? `creep_fx_${world.nextId++}`;
   const e: CreepCue = {
     id,
     castId: id,
@@ -134,6 +135,15 @@ function attack(
   persistent = false,
 ) {
   const id = `creep_${profile.id}_${slot}`;
+  if (slot === 'special' && spec.windup > 0) {
+    spec = {
+      ...spec,
+      windup: Math.max(
+        1,
+        Math.round(spec.windup * (config.creepCombat?.specialWindupScale ?? 1)),
+      ),
+    };
+  }
   const aim = direction(target.x - enemy.x, target.y - enemy.y);
   if (!aim.x && !aim.y) {
     aim.x = enemy.fx;
@@ -254,6 +264,11 @@ function hit(
   config: SimulationConfig,
   periodic = false,
 ) {
+  if (
+    e.ownerId === trapOwner.id &&
+    (h.invulnerable || hasStatus(h, 'dash_guard', world.tick))
+  )
+    return;
   const hp = h.hp;
   const valid =
     e.damage <= 0 ||
@@ -264,6 +279,20 @@ function hit(
       fy: e.fy,
     });
   if (!valid || (e.damage > 0 && h.hp === hp)) return;
+  if (e.abilityId === 'darts')
+    emit(world, {
+      kind: 'effect',
+      sourceId: e.ownerId,
+      targetId: h.id,
+      abilityId: e.abilityId,
+      x: h.x,
+      y: h.y,
+      fx: e.fx,
+      fy: e.fy,
+      damage: 0,
+      critical: false,
+      stage: 'trap_impact',
+    });
   if (
     world.heroes.has(h.id) &&
     (e.spec.statusChance === undefined || world.random() < e.spec.statusChance)
@@ -343,10 +372,230 @@ function worldRadius(h: Actor, config: SimulationConfig) {
       : config.creep.radius;
 }
 
+const trapOwner = { id: 'dungeon_trap' };
+function dungeonHazard(config: SimulationConfig) {
+  return (
+    (config.dungeonId &&
+      config.creepCombat?.dungeonHazards?.[config.dungeonId]) ||
+    undefined
+  );
+}
+function scaledPoint(p: Point, config: SimulationConfig): Point {
+  return { x: p.x * config.width, y: p.y * config.height };
+}
+export function inQuicksand(world: World, actor: Point): boolean {
+  const effects = world.creepCombat?.effects;
+  if (!effects?.has('quicksand_0')) return false;
+  for (const e of effects.values())
+    if (e.abilityId === 'quicksand' && distance(actor, e) <= e.radius)
+      return true;
+  return false;
+}
+function environmentCue(
+  world: World,
+  name: string,
+  point: Point,
+  radius: number,
+  windup: number,
+  stunTicks: number,
+  id?: string,
+  missile?: { aim: Point; range: number; speed: number },
+) {
+  const e = cue(
+    world,
+    trapOwner,
+    {
+      mode: missile ? 'projectile' : 'area',
+      nameVi: name,
+      graphic: name,
+      radius,
+      range: missile?.range ?? 0,
+      speed: missile?.speed,
+      windup,
+      cooldown: 1,
+      damage: 0,
+      statuses: stunTicks
+        ? [{ kind: 'stun', magnitude: 1, durationTicks: stunTicks }]
+        : [],
+      visualTicks: 18,
+    },
+    name,
+    point,
+    missile?.aim ?? { x: 0, y: 1 },
+    false,
+    false,
+    0,
+    true,
+    id,
+  );
+  e.kind = 'creep_trap_' + name;
+  return e;
+}
+/** Roll a private visit's layout before the hero joins. Cues are also the hit areas. */
+export function resetQuicksand(
+  world: World,
+  config: SimulationConfig,
+  exit?: Point,
+): void {
+  const hazard = dungeonHazard(config);
+  if (hazard?.kind !== 'quicksand') return;
+  const { radius, count } = hazard;
+  const { spawn, width, height, collision } = config;
+  const jitter = 16;
+  const stride = radius * 2 + jitter * 2;
+  const margin = radius + config.radius;
+  const safe = (point: Point) =>
+    !blocked(point, radius, width, height, collision) &&
+    distance(point, spawn) > margin &&
+    (!exit || distance(point, exit) > margin);
+  const candidates: Point[] = [];
+  for (let y = radius; y <= height - radius; y += stride)
+    for (let x = radius; x <= width - radius; x += stride)
+      if (safe({ x, y })) candidates.push({ x, y });
+
+  const { effects } = runtime(world);
+  for (let i = 0; i < count; i++) effects.delete('quicksand_' + i);
+  for (let i = 0; i < count && candidates.length; i++) {
+    const [point] = candidates.splice(
+      Math.floor(world.random() * candidates.length),
+      1,
+    );
+    const offset = {
+      x: point!.x + (world.random() * 2 - 1) * jitter,
+      y: point!.y + (world.random() * 2 - 1) * jitter,
+    };
+    const e = environmentCue(
+      world,
+      'quicksand',
+      safe(offset) ? offset : point!,
+      radius,
+      0,
+      0,
+      'quicksand_' + i,
+    );
+    e.expiresAt = 2 ** 31 - 1;
+  }
+}
+function scheduleDungeonHazards(world: World, config: SimulationConfig): void {
+  const h = dungeonHazard(config);
+  if (!h) return;
+  const tick = world.tick,
+    state = runtime(world);
+  if (h.kind === 'quicksand') {
+    if (!state.effects.has('quicksand_0')) resetQuicksand(world, config);
+    for (const hero of world.heroes.values()) {
+      if (hero.hp <= 0 || !inQuicksand(world, hero)) continue;
+      applyStatus(
+        hero,
+        { kind: 'slow', magnitude: h.slow, durationTicks: 1 },
+        trapOwner.id,
+        'quicksand',
+        tick,
+      );
+      applyStatus(
+        hero,
+        { kind: 'dash_lock', magnitude: 1, durationTicks: 1 },
+        trapOwner.id,
+        'quicksand',
+        tick,
+      );
+    }
+    return;
+  }
+  if (h.kind === 'firetrap') {
+    for (const [i, relative] of h.points.entries()) {
+      const id = 'firetrap_' + i;
+      const existing = state.effects.get(id);
+      if (existing && existing.expiresAt > tick) continue;
+      const first = h.firstTick + i * h.stagger;
+      const cycle = Math.max(
+        0,
+        Math.floor((tick - first + h.warning) / h.interval),
+      );
+      const active = first + cycle * h.interval;
+      const e = environmentCue(
+        world,
+        'firetrap',
+        scaledPoint(relative, config),
+        h.radius,
+        h.warning,
+        h.stunTicks,
+        id,
+      );
+      e.startedAt = active - h.warning;
+      e.activeAt = active;
+      e.nextHit = active;
+      e.damageUntil = active + 1;
+      e.expiresAt = active + h.interval - h.warning;
+    }
+    return;
+  }
+  if (tick < h.firstTick || (tick - h.firstTick) % h.interval !== 0) return;
+  const index = (tick - h.firstTick) / h.interval;
+  if (h.kind === 'geyser') {
+    const living = [...world.heroes.values()].filter(
+      (hero) =>
+        hero.hp > 0 && distance(hero, config.spawn) > h.radius + config.radius,
+    );
+    const hero = living[index % living.length];
+    if (!hero) return;
+    const separation = 2 * (h.radius + config.radius);
+    const neighbors = Array.from({ length: 8 }, (_, i) => {
+      const angle = ((index + i) % 8) * (Math.PI / 4);
+      return {
+        x: hero.x + Math.cos(angle) * separation,
+        y: hero.y + Math.sin(angle) * separation,
+      };
+    });
+    const sites: Point[] = [hero];
+    for (const site of [...living, ...neighbors]) {
+      if (sites.length >= h.count) break;
+      if (
+        distance(site, config.spawn) > h.radius + config.radius &&
+        sites.every((other) => distance(other, site) >= separation - 0.001) &&
+        !blocked(site, h.radius, config.width, config.height, config.collision)
+      )
+        sites.push(site);
+    }
+    for (const site of sites)
+      environmentCue(world, 'geyser', site, h.radius, h.warning, h.stunTicks);
+    return;
+  }
+  const inset = h.radius + 2;
+  const horizontal = index % 2 === 0;
+  const backwards = index % 4 >= 2;
+  const axis = backwards ? -1 : 1;
+  const x = horizontal
+    ? backwards
+      ? config.width - inset
+      : inset
+    : config.width * 0.52;
+  const y = horizontal
+    ? config.height * 0.48
+    : backwards
+      ? config.height - inset
+      : inset;
+  environmentCue(
+    world,
+    'darts',
+    { x, y },
+    h.radius,
+    0,
+    h.stunTicks,
+    undefined,
+    {
+      aim: { x: horizontal ? axis : 0, y: horizontal ? 0 : axis },
+      range: (horizontal ? config.width : config.height) - inset * 2,
+      speed: h.speed,
+    },
+  );
+}
+
 /** Authoritative casts, swept missiles, collision-respecting dashes and persistent fields. */
 export function stepCreepHazards(world: World, config: SimulationConfig): void {
   if (!config.creepCombat) return;
   const state = runtime(world);
+  scheduleDungeonHazards(world, config);
   for (const enemy of world.creeps.values()) {
     const p = creepProfile(enemy, config);
     if (!p) continue;
@@ -411,7 +660,7 @@ export function stepCreepHazards(world: World, config: SimulationConfig): void {
       state.effects.delete(id);
       continue;
     }
-    if (world.tick < e.activeAt) continue;
+    if (e.abilityId === 'quicksand' || world.tick < e.activeAt) continue;
     if (!e.released) {
       e.released = true;
       emit(world, {

@@ -1,4 +1,4 @@
-import { joinWaiting, startTogether } from './pregame-helper.js';
+import { joinWaiting, startAuditTogether, startTogether } from './pregame-helper.js';
 import { expect, test, type Page } from '@playwright/test';
 import { Client } from '@colyseus/sdk';
 import { PROTOCOL_VERSION, type LobbyState } from '@volam/game-protocol';
@@ -108,6 +108,55 @@ function monitor(page: Page): string[] {
   });
   return errors;
 }
+
+test('Cai Bang Bong keeps the renovated sprite on a replicated enemy hit', async ({
+  page,
+  browser,
+}) => {
+  test.setTimeout(60000);
+  const peer = await browser.newContext();
+  const b = await peer.newPage();
+  const errors = monitor(page);
+  const peerErrors = monitor(b);
+  try {
+    await enter(page, 'Cái Bang Bổng', undefined, true);
+    const { roomId, sessionId } = await snapshot(page);
+    await enter(b, 'Đồng đội', roomId, true);
+    await startAuditTogether([
+      [page, 'cai_bang', 'cai_bang_bong'],
+      [b, 'cai_bang', 'cai_bang_chuong'],
+    ]);
+    await expect(page.locator('#pregame')).toBeHidden({ timeout: 15000 });
+    await page.bringToFront();
+    await expect(page.locator('[data-potion-resource="hp"] em')).toHaveText('10');
+    await expect(page.locator('[data-potion-resource="mp"] em')).toHaveText('10');
+    const reaction = await page.waitForFunction((id) => {
+      const game = (window as any).__VOLAM__;
+      const state = game.snapshot();
+      if (state.state.players[id]?.pose !== 'hurt') return;
+      return game.presentation().renovation.bodies.find(
+        (body: { name: string; pose: string }) =>
+          body.name === 'actor:' + id && body.pose === 'hurt',
+      );
+    }, sessionId);
+    expect(await reaction.jsonValue()).toMatchObject({
+      texture: 'renovated-hero_cai_bang',
+      frame: 'idle_right_0',
+      scale: [0.5, 0.5],
+    });
+    const hit = (await snapshot(page)).events.find(
+      (event) => event.kind === 'hit' && event.targetId === sessionId,
+    );
+    expect(hit).toBeDefined();
+    await expect
+      .poll(async () => (await snapshot(b)).events.some((e) => e.id === hit?.id))
+      .toBe(true);
+    await expect.poll(async () => (await hero(page)).pose).toBe('idle');
+    expect([...errors, ...peerErrors]).toEqual([]);
+  } finally {
+    await peer.close();
+  }
+});
 
 test('fixed follow camera, eight-way movement and foreground occlusion', async ({
   page,

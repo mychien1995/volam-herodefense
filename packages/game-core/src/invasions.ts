@@ -5,7 +5,7 @@ export interface InvasionDefinition {
   intervalTicks: number;
   streamTicks?: number | undefined;
   spawnEveryTicks?: number | undefined;
-  portalCount?: 2 | 3 | 4 | undefined;
+  portalCount?: 1 | 2 | 3 | 4 | undefined;
   maxWaves?: number | undefined;
   warningTicks: number[];
   noticeTicks: number;
@@ -124,10 +124,14 @@ export class InvasionDirector {
       if (config.campaign) {
         const chapter = Math.min(4, Math.floor((this.wave - 1) / 5));
         stats.hp = Math.round(
-          recipe.hp * (1 + config.campaign.creepHpPerPlayer * (players - 1)),
+          recipe.hp *
+            config.campaign.invasionHpMultiplier *
+            (1 + config.campaign.creepHpPerPlayer * (players - 1)),
         );
         stats.damage = Math.round(
-          recipe.damage * (1 + config.campaign.damagePerPlayer * (players - 1)),
+          recipe.damage *
+            config.campaign.invasionDamageMultiplier *
+            (1 + config.campaign.damagePerPlayer * (players - 1)),
         );
         const gates = this.definition.portalCount ?? 2;
         const every = Math.max(
@@ -171,7 +175,9 @@ export class InvasionDirector {
         });
         (world.invasionPending ??= new Set()).add(this.wave);
       } else
-        for (const lane of ['west', 'east'] as const)
+        for (const lane of this.definition.portalCount === 1
+          ? (['east'] as const)
+          : (['west', 'east'] as const))
           for (let i = 0; i < count; i++) {
             const start = this.definition.lanes[lane];
             const spawn = {
@@ -198,10 +204,11 @@ export class InvasionDirector {
       this.publish('wave', this.wave, 0, tick);
       this.nextWaveTick += this.definition.intervalTicks;
     }
-    const lanes = (['west', 'east', 'north', 'south'] as const).slice(
-      0,
-      this.definition.portalCount ?? 2,
-    );
+    const count = this.definition.portalCount ?? 2;
+    const lanes =
+      count === 1
+        ? (['east'] as const)
+        : (['west', 'east', 'north', 'south'] as const).slice(0, count);
     for (const stream of this.streams) {
       while (stream.next <= tick && stream.next < stream.until) {
         for (const lane of lanes) {

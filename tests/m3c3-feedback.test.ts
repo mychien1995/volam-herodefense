@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   addHero,
+  addCreep,
   createWorld,
   stepWorld,
   submitInput,
@@ -94,6 +95,9 @@ describe('M3C3 feedback authoritative trial', () => {
     const f = fixture();
     f.hero.basicId = 'cai_bang_bong';
     f.enemies[0]!.x = 365;
+    const atReach = addCreep(f.world, 'at_reach', { x: 405, y: 300 }, f.config);
+    const beyond = addCreep(f.world, 'beyond', { x: 426, y: 300 }, f.config);
+    const behind = addCreep(f.world, 'behind', { x: 210, y: 300 }, f.config);
     for (let i = 0; i < 4; i++) {
       f.input('basic');
       f.steps(i === 3 ? 1 : 8);
@@ -104,9 +108,12 @@ describe('M3C3 feedback authoritative trial', () => {
     expect(f.hits('cai_bang_bong').map((e) => e.damage)).toEqual([
       28, 28, 29, 34,
     ]);
-    f.steps(7);
+    expect(f.hits('cai_bang_bong', atReach.id)).toHaveLength(4);
+    expect(f.hits('cai_bang_bong', beyond.id)).toHaveLength(0);
+    expect(f.hits('cai_bang_bong', behind.id)).toHaveLength(0);
+    f.steps(6);
     f.input('basic');
-    f.steps(15);
+    f.steps(1);
     expect(f.events.filter((e) => e.kind === 'attack')).toHaveLength(4);
     f.input('basic');
     f.steps(1);
@@ -191,7 +198,14 @@ describe('M3C3 feedback authoritative trial', () => {
       hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 10, f.config);
       expect(f.hero.hp).toBe(before - 10);
       const g = fixture(id);
-      g.config.collision = [{ x: id === 'phong_anh_hoan_vi' ? 288 : 310, y: 200, width: 2, height: 200 }];
+      g.config.collision = [
+        {
+          x: id === 'phong_anh_hoan_vi' ? 288 : 310,
+          y: 200,
+          width: 2,
+          height: 200,
+        },
+      ];
       g.cast();
       expect(hasStatus(g.hero, 'dash_guard', g.world.tick)).toBe(false);
     },

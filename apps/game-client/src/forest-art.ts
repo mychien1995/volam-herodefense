@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import type { ForestCreepManifest } from './forest-creeps.js';
+import { forestCombatBody, forestCombatEffect } from './m3d-native-art.js';
 
 export function preloadForestCreepArt(scene: Phaser.Scene): void {
   scene.load.pack('forest_creep_pack', '/assets/forest_creep_review/pack.json');
@@ -32,14 +33,29 @@ export function registerForestCreepArt(scene: Phaser.Scene): void {
       });
   };
   for (const a of manifest.assets)
-    for (const anim of a.animations)
-      register(
-        `${a.id}:${anim.state}:${anim.direction}`,
-        a.id,
-        anim.frames,
-        anim.durations!,
-        anim.repeat,
-      );
-  for (const fx of manifest.effects)
+    for (const anim of a.animations) {
+      const key = `${a.id}:${anim.state}:${anim.direction}`;
+      register(key, a.id, anim.frames, anim.durations!, anim.repeat);
+      const native = forestCombatBody(scene, a.id, anim.state);
+      if (native)
+        register(
+          `${native}:${anim.state}:${anim.direction}`,
+          native,
+          anim.frames,
+          anim.durations!,
+          anim.repeat,
+        );
+    }
+  for (const fx of manifest.effects) {
     register(fx.id, fx.texture!, fx.frames, fx.durations!, fx.repeat ?? 0);
+    const native = forestCombatEffect(scene, fx.id);
+    if (native)
+      register(
+        'native:' + fx.id,
+        native,
+        fx.frames,
+        fx.durations!,
+        fx.repeat ?? 0,
+      );
+  }
 }

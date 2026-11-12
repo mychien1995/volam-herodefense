@@ -1,6 +1,6 @@
-import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
+import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import { boot, type ColyseusTestServer } from '@colyseus/testing';
-import { CloseCode } from '@colyseus/core';
+import { CloseCode, ServerError } from '@colyseus/core';
 import { Client, type Room } from '@colyseus/sdk';
 import {
   PROTOCOL_VERSION,
@@ -113,6 +113,34 @@ describe('real Colyseus room + SDK clients', () => {
     expect(a.roomId).not.toBe(b.roomId);
     expect(b.state.players.has(a.sessionId)).toBe(false);
     expect(b.state.players.get(b.sessionId)?.checks).toBe(0);
+  });
+  it('cleans up a drop when the reconnect reservation is rejected', async () => {
+    const host = await client.create(MATCH_ROOM, options('Host'));
+    const guest = await client.joinById<MatchRoom>(host.roomId, options('Guest'));
+    const room = server.getRoomById<MatchRoom>(host.roomId);
+    const rejected = Promise.reject(new ServerError(400, 'Join incomplete'));
+    // Keep the test runner alive while checking that the room observes the rejection.
+    void rejected.catch(() => undefined);
+    const handleRejection = vi.spyOn(rejected, 'catch');
+    // Colyseus returns a native rejected promise before a reservation exists.
+    const reserve = vi
+      .spyOn(room, 'allowReconnection')
+      .mockReturnValue(
+        rejected as unknown as ReturnType<MatchRoom['allowReconnection']>,
+      );
+    try {
+      guest.reconnection.enabled = false;
+      guest.connection.close();
+      await expect
+        .poll(() => room.state.players.has(guest.sessionId))
+        .toBe(false);
+      expect(reserve).toHaveBeenCalledOnce();
+      expect(handleRejection).toHaveBeenCalledOnce();
+      expect(room.state.players.has(host.sessionId)).toBe(true);
+    } finally {
+      reserve.mockRestore();
+      handleRejection.mockRestore();
+    }
   });
   it('rejects invalid joins before adding players', async () => {
     const a = await client.create(MATCH_ROOM, options('Hero'));

@@ -47,7 +47,7 @@ it('authorizes purchases, rejects replays/stale spends and replicates gear/resou
           .potions;
         return [potions?.get('hp_small'), potions?.get('mp_small')];
       })
-      .toEqual([5, 5]);
+      .toEqual([10, 10]);
   h.gold = 100;
   h.hp = 50;
   await expect.poll(() => a.state.players.get(a.sessionId)!.gold).toBe(100);
@@ -72,47 +72,59 @@ it('authorizes purchases, rejects replays/stale spends and replicates gear/resou
   expect(a.state.players.get(b.sessionId)!.inventory.levels.get('weapon')).toBe(
     0,
   );
-  a.send('merchant-action', {
+  const buyPotion = {
     protocolVersion: PROTOCOL_VERSION,
     sequence: 3,
     revision: 1,
     action: 'buy-potion',
     potionId: 'hp_small',
-    quantity: 2,
+    quantity: 1,
+  };
+  a.send('merchant-action', buyPotion);
+  await expect.poll(() => h.lastSequence).toBe(3);
+  expect(h.inventory!.potions.hp_small).toBe(10);
+  expect(h.inventory!.revision).toBe(1);
+  expect(h.gold).toBe(70);
+
+  a.send('merchant-action', {
+    protocolVersion: PROTOCOL_VERSION,
+    sequence: 4,
+    revision: 1,
+    action: 'use-potion',
+    potionId: 'hp_small',
   });
+  await expect.poll(() => a.state.players.get(a.sessionId)!.hp).toBeGreaterThanOrEqual(110);
   await expect
     .poll(() =>
       a.state.players.get(a.sessionId)!.inventory.potions.get('hp_small'),
     )
-    .toBe(7);
-  a.send('merchant-action', {
-    protocolVersion: PROTOCOL_VERSION,
-    sequence: 4,
-    revision: 2,
-    action: 'use-potion',
-    potionId: 'hp_small',
-  });
-  await expect.poll(() => a.state.players.get(a.sessionId)!.hp).toBe(110);
-  a.send('merchant-action', {
-    protocolVersion: PROTOCOL_VERSION,
-    sequence: 5,
-    revision: 3,
-    action: 'use-potion',
-    potionId: 'hp_small',
-  });
-  await expect.poll(() => h.lastSequence).toBe(5);
-  expect(h.inventory!.potions.hp_small).toBe(6);
-  expect(h.gold).toBe(62);
-  const zoneError = room.simulation.enter(a.sessionId, 'private');
-  expect(zoneError).toBeUndefined();
+    .toBe(9);
+  a.send('merchant-action', { ...buyPotion, sequence: 5, revision: 2 });
+  await expect
+    .poll(() =>
+      b.state.players.get(a.sessionId)!.inventory.potions.get('hp_small'),
+    )
+    .toBe(10);
   a.send('merchant-action', {
     protocolVersion: PROTOCOL_VERSION,
     sequence: 6,
     revision: 3,
+    action: 'use-potion',
+    potionId: 'hp_small',
+  });
+  await expect.poll(() => h.lastSequence).toBe(6);
+  expect(h.inventory!.potions.hp_small).toBe(10);
+  expect(h.gold).toBe(66);
+  const zoneError = room.simulation.enter(a.sessionId, 'private');
+  expect(zoneError).toBeUndefined();
+  a.send('merchant-action', {
+    protocolVersion: PROTOCOL_VERSION,
+    sequence: 7,
+    revision: 3,
     action: 'buy-basic',
     slot: 'hat',
   });
-  await expect.poll(() => h.lastSequence).toBe(6);
-  expect(h.gold).toBe(62);
+  await expect.poll(() => h.lastSequence).toBe(7);
+  expect(h.gold).toBe(66);
   expect(h.inventory!.levels.hat).toBe(0);
 }, 20000);

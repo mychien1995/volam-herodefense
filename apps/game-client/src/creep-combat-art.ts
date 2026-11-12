@@ -1,12 +1,22 @@
 import Phaser from 'phaser';
+import { forestCombatEffect, nativeForestEffects } from './m3d-native-art.js';
 import { creepProfiles } from '@volam/game-data';
-import type { LobbyState } from '@volam/game-protocol';
+import type { BossEffectState, LobbyState } from '@volam/game-protocol';
 import type { CreepAttack } from '@volam/game-core';
 import arrowUrl from '../../../assets/effects/dungeons/desert/arrow_right.png?url';
 import { creepBodyVisible } from './creep-combat-visual.js';
+import {
+  preloadM3dReviewEffects,
+  renderReviewedCreepCue,
+  renderTrapCue,
+  reviewFrame,
+} from './m3d-review-effects.js';
+import type { CombatEvent } from '@volam/game-core';
 
-export const preloadCreepCombat = (scene: Phaser.Scene) =>
+export function preloadCreepCombat(scene: Phaser.Scene): void {
   scene.load.image('creep_upgrade_arrow', arrowUrl);
+  preloadM3dReviewEffects(scene);
+}
 const graphics: Record<string, [string, string]> = {
   arrow: ['arrow', 'metal_contact'],
   ice: ['arrow', 'beach_fx:magic_splash'],
@@ -53,6 +63,8 @@ interface View {
 export class CreepCombatArt {
   private views = new Map<string, View>();
   private defs = new Map<string, Fx>();
+  private roots = new Map<string, Phaser.GameObjects.Sprite>();
+  private impacts = new Set<Phaser.GameObjects.Sprite>();
   private observed = new Set<string>();
   private releases = new Map<
     string,
@@ -97,12 +109,166 @@ export class CreepCombatArt {
       'co_mo:needle_poison_impact',
     ].includes(id)
       ? 'co_mo_original_fx'
-      : (def.texture ?? 'arena_creep_impacts');
+      : (forestCombatEffect(this.scene, id) ??
+        def.texture ??
+        'arena_creep_impacts');
     if (sprite.texture.key !== texture) sprite.setTexture(texture, f);
     else sprite.setFrame(f);
     this.observed.add(`${texture}:${f}`);
   }
-  sync(state: LobbyState | undefined, zone: string) {
+  event(e: CombatEvent): void {
+    if (e.abilityId !== 'darts' || e.stage !== 'trap_impact') return;
+    const sprite = this.scene.add.sprite(e.x, e.y, 'm3d_review_effects');
+    this.impacts.add(sprite);
+    reviewFrame(sprite, 'dart', 2, e.x, e.y - 12);
+    this.scene.time.delayedCall(90, () => {
+      if (this.impacts.has(sprite))
+        reviewFrame(sprite, 'dart', 3, e.x, e.y - 12);
+    });
+    this.scene.time.delayedCall(180, () => {
+      if (this.impacts.delete(sprite)) sprite.destroy();
+    });
+  }
+
+  private renderRetainedReview(
+    v: View,
+    e: BossEffectState,
+    tick: number,
+    state: LobbyState,
+  ): boolean {
+    const age = tick - e.activeAt;
+    if (e.abilityId === 'creep_hai_tac_hoa_phao_special' && age < 0) {
+      const key = e.zoneId === 'arena' ? e.ownerId : e.zoneId + ':' + e.ownerId;
+      const source = state.creeps.get(key);
+      if (!source) return false;
+      const ageFromStart = tick - e.startedAt;
+      const x = source.x + e.fx * 19,
+        y = source.y + e.fy * 19;
+      const windup = e.activeAt - e.startedAt;
+      const muzzleAt = Math.round(windup * 0.2);
+      const flightAt = Math.round(windup * 0.45);
+      if (ageFromStart < muzzleAt) return false;
+      const flying = ageFromStart >= flightAt;
+      const t = Math.max(
+        0,
+        (ageFromStart - flightAt) / Math.max(1, windup - flightAt),
+      );
+      this.frame(
+        v.body,
+        flying ? 'beach_fx:cannon_projectile' : 'beach_fx:muzzle_flash',
+        ageFromStart,
+        flying,
+      );
+      v.body
+        .setVisible(true)
+        .setOrigin(0.5)
+        .setScale(0.65)
+        .setPosition(
+          x + (e.x - x) * t,
+          y + (e.y - y) * t - 19 * (1 - t) - 100 * t * (1 - t),
+        )
+        .setDepth(y + 1);
+      return true;
+    }
+    const release =
+      e.kind === 'creep_projectile' &&
+      age < 0 &&
+      age >= -6 &&
+      ['creep_truc_xa_basic', 'creep_truc_xa_special'].includes(e.abilityId);
+    if (age < 0 && !release) return false;
+    const effect = release
+      ? 'forest_fx:truc_xa_venom_release'
+      : e.kind !== 'creep_area'
+        ? undefined
+        : (
+            {
+              creep_son_vien_special: 'forest_fx:son_vien_slam_impact',
+              creep_moc_linh_special: 'forest_fx:moc_linh_root_emerge',
+              creep_hai_tac_hoa_phao_special: 'beach_fx:cannon_impact',
+            } as Record<string, string>
+          )[e.abilityId];
+    if (!effect) return false;
+    this.frame(v.body, effect, release ? 6 + age : age, false);
+    v.body
+      .setVisible(true)
+      .setOrigin(0.5)
+      .setPosition(
+        e.x + (release ? e.fx * 17 : 0),
+        e.y + (release ? e.fy * 17 - 14 : 0),
+      )
+      .setDepth(e.y + 0.1)
+      .setDisplaySize(Math.max(32, e.radius * 2), Math.max(32, e.radius * 2));
+    return true;
+  }
+
+  private observeRelease(
+    id: string,
+    v: View,
+    e: BossEffectState,
+    visible: boolean,
+  ): void {
+    let record = this.releases.get(id);
+    if (!record) {
+      record = {
+        abilityId: e.abilityId,
+        frames: new Set(),
+        suppressed: !visible,
+      };
+      this.releases.set(id, record);
+      if (this.releases.size > 200)
+        this.releases.delete(this.releases.keys().next().value!);
+    }
+    if (!visible) return;
+    record.suppressed = false;
+    const frame = v.body.texture.key + ':' + v.body.frame.name;
+    record.frames.add(frame);
+    v.frames.add(frame);
+    this.observed.add(frame);
+  }
+
+  private syncWebRoots(state: LobbyState, zone: string): void {
+    const active = new Set<string>();
+    state.players.forEach((hero, id) => {
+      if (
+        hero.zoneId !== zone ||
+        hero.hp <= 0 ||
+        !hero.statuses.includes('"creep_doc_chu_basic"')
+      )
+        return;
+      const statuses = JSON.parse(hero.statuses) as Array<{
+        kind: string;
+        abilityId: string;
+      }>;
+      if (
+        !statuses.some(
+          (s) => s.kind === 'root' && s.abilityId === 'creep_doc_chu_basic',
+        )
+      )
+        return;
+      active.add(id);
+      const sprite =
+        this.roots.get(id) ??
+        this.scene.add.sprite(hero.x, hero.y, 'forest_fx');
+      this.roots.set(id, sprite);
+      this.frame(sprite, 'forest_fx:doc_chu_web_impact', 6, false);
+      sprite
+        .setPosition(hero.x, hero.y - 2)
+        .setScale(0.53 * (sprite.texture.key === nativeForestEffects ? 0.5 : 1))
+        .setDepth(hero.y + 0.3)
+        .setAlpha(0.85);
+    });
+    for (const [id, sprite] of this.roots) {
+      if (active.has(id)) continue;
+      sprite.destroy();
+      this.roots.delete(id);
+    }
+  }
+
+  sync(
+    state: LobbyState | undefined,
+    zone: string,
+    localBody?: Phaser.Geom.Rectangle,
+  ) {
     if (!state || state.phase === 'DEFEAT') {
       this.clear();
       return;
@@ -111,6 +277,7 @@ export class CreepCombatArt {
       zone === 'arena'
         ? state.tick
         : (state.dungeons.get(zone)?.tick ?? state.tick);
+    this.syncWebRoots(state, zone);
     const active = new Set<string>();
     const labels = new Set<string>();
     state.bossEffects.forEach((e, id) => {
@@ -127,7 +294,8 @@ export class CreepCombatArt {
         e.kind === 'creep_area'
           ? (parent?.field ?? parent?.trail ?? parent)
           : parent;
-      if (!spec) return;
+      const trap = e.kind.startsWith('creep_trap_');
+      if (!spec && !trap) return;
       active.add(id);
       let v = this.views.get(id);
       if (!v) {
@@ -140,7 +308,7 @@ export class CreepCombatArt {
             'metal_contact_0',
           ),
           label: this.scene.add
-            .text(e.x, e.y - 36, spec.nameVi, {
+            .text(e.x, e.y - 36, spec?.nameVi ?? '', {
               fontFamily: 'Arial',
               fontSize: '11px',
               color: '#ffe5a8',
@@ -152,6 +320,14 @@ export class CreepCombatArt {
         };
         this.views.set(id, v);
       }
+      if (trap) {
+        v.warning.setVisible(false);
+        v.label.setVisible(false);
+        renderTrapCue(v.body, e, tick);
+        this.observeRelease(id, v, e, v.body.visible);
+        return;
+      }
+      if (!spec) return;
       const pending = tick < e.activeAt;
       const visual = spec.presentation;
       const sector = visual?.style === 'sector';
@@ -177,26 +353,38 @@ export class CreepCombatArt {
           .setRotation(Math.atan2(e.fy, e.fx));
       }
       const labelKey = `${e.ownerId}:${e.abilityId}:${e.startedAt}`;
+      const labelY = e.y - 36;
+      const halfWidth = v.label.width / 2;
+      const halfHeight = v.label.height / 2;
+      const coversPlayer =
+        localBody &&
+        e.x + halfWidth > localBody.left &&
+        e.x - halfWidth < localBody.right &&
+        labelY + halfHeight > localBody.top &&
+        labelY - halfHeight < localBody.bottom;
       v.label
         .setVisible(pending && match?.[2] !== 'basic' && !labels.has(labelKey))
-        .setPosition(e.x, e.y - 36)
+        .setPosition(
+          e.x,
+          coversPlayer ? localBody.top - halfHeight - 10 : labelY,
+        )
         .setDepth(e.y + 100);
       labels.add(labelKey);
+      if (
+        renderReviewedCreepCue(v.body, e, tick) ||
+        this.renderRetainedReview(v, e, tick, state)
+      ) {
+        v.warning.setVisible(false);
+        this.observeRelease(id, v, e, v.body.visible);
+        return;
+      }
       const showBody = creepBodyVisible(e.kind, match?.[2] ?? '', spec);
       v.body.setVisible(!pending && showBody);
       if (pending) return;
-      let record = this.releases.get(id);
-      if (!record) {
-        record = {
-          abilityId: e.abilityId,
-          frames: new Set(),
-          suppressed: !showBody,
-        };
-        this.releases.set(id, record);
-        if (this.releases.size > 200)
-          this.releases.delete(this.releases.keys().next().value!);
+      if (!showBody) {
+        this.observeRelease(id, v, e, false);
+        return;
       }
-      if (!showBody) return;
       const [projectile, impact] = graphics[spec.graphic] ?? graphics['metal']!;
       const graphic =
         e.kind === 'creep_projectile'
@@ -236,7 +424,11 @@ export class CreepCombatArt {
           e.kind === 'creep_projectile' ? Math.atan2(e.fy, e.fx) : 0,
         );
       if (e.kind === 'creep_projectile')
-        v.body.setScale(graphic === 'arrow' ? 1 : 0.55);
+        v.body.setScale(
+          graphic === 'arrow'
+            ? 1
+            : 0.55 * (v.body.texture.key === nativeForestEffects ? 0.5 : 1),
+        );
       else if (sector) {
         // The retained C-shaped sweep opens to the right. Its curved edge is
         // left-facing in the source PNG, so rotate it into the captured front.
@@ -272,9 +464,7 @@ export class CreepCombatArt {
         );
       else
         v.body.setDisplaySize(Math.max(24, footprint), Math.max(24, footprint));
-      const key = `${v.body.texture.key}:${v.body.frame.name}`;
-      v.frames.add(key);
-      record.frames.add(key);
+      this.observeRelease(id, v, e, true);
     });
     for (const [id, v] of this.views)
       if (!active.has(id)) {
@@ -320,6 +510,10 @@ export class CreepCombatArt {
       v.label.destroy();
     }
     this.views.clear();
+    for (const sprite of this.roots.values()) sprite.destroy();
+    this.roots.clear();
+    for (const sprite of this.impacts) sprite.destroy();
+    this.impacts.clear();
     this.releases.clear();
     this.observed.clear();
   }

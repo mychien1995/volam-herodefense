@@ -1,3 +1,9 @@
+import { markImpactTarget } from './m3d-hit-art.js';
+import {
+  approvedM3dPresentation,
+  releaseBeat,
+} from './m3d-approved-boss-body.js';
+
 import Phaser from 'phaser';
 import { bossArenaScale as S, chuBaThongDungeon } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
@@ -37,6 +43,32 @@ const art = raw as unknown as {
   scenery: MapObject[];
 };
 art.bundles['wine'] = wine as Bundle;
+function chuBodyBeat(phase: string, seconds: number) {
+  // The server view owns phase elapsed time and all damage/geometry.
+  switch (phase) {
+    case 'hands':
+      return releaseBeat(seconds, 0.75, 2.6);
+    case 'fists':
+      return releaseBeat(
+        seconds < 0.45 ? seconds : 0.45 + ((seconds - 0.45) % 0.5),
+        0.45,
+        0.18,
+      );
+    case 'sweep':
+      return releaseBeat(
+        seconds < 0.45 ? seconds : 0.45 + ((seconds - 0.45) % 1.6),
+        0.45,
+        0.33,
+      );
+    case 'palm':
+      return releaseBeat(seconds % 2.2, 0, 0.23);
+    case 'drink':
+      return releaseBeat(seconds, 6.7, 0.65);
+    default:
+      return releaseBeat(seconds, 0.6, 0.35);
+  }
+}
+
 export function preloadChu(scene: Phaser.Scene): void {
   scene.load.image('chu_wine_bottle', '/assets/m3d_followup/wine_bottle.png');
   for (const [key, b] of Object.entries(art.bundles))
@@ -237,7 +269,8 @@ export class ChuPresentation {
       const t = v.elapsed,
         x = v.bossX,
         y = v.bossY,
-        enemy = state?.creeps.get(zoneId + ':' + v.bossId),
+        id = zoneId + ':' + v.bossId,
+        enemy = state?.creeps.get(id),
         dir = facing(enemy?.fx ?? v.fx, enemy?.fy ?? v.fy);
       let bundle = 'base',
         tag = 'idle_' + dir;
@@ -263,15 +296,29 @@ export class ChuPresentation {
         this.scene,
         body,
         'chu_ba_thong',
-        /^(idle|walk)_/.test(tag) ? tag.split('_')[0]! : 'action',
+        v.bossHp <= 0
+          ? 'death'
+          : /^idle_/.test(tag)
+            ? enemy?.pose === 'hurt'
+              ? 'hurt'
+              : 'idle'
+            : /^walk_/.test(tag)
+              ? 'walk'
+              : 'action',
         enemy?.fx ?? v.fx,
         enemy?.fy ?? v.fy,
         v.phase,
+        { beat: chuBodyBeat(v.phase, t) },
       );
+      markImpactTarget(body, id);
       if (v.bossHp < this.previousHp && v.bossHp > 0)
         this.hitFlashUntil = this.scene.time.now + 150;
       this.previousHp = v.bossHp;
-      if (this.scene.time.now < this.hitFlashUntil) body.setTint(0xffd0aa);
+      if (
+        !approvedM3dPresentation() &&
+        this.scene.time.now < this.hitFlashUntil
+      )
+        body.setTint(0xffd0aa);
       else body.clearTint();
       if (v.phase !== 'spin') this.spinHistory = [];
       this.text(

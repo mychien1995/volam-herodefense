@@ -160,6 +160,7 @@ describe('M3C1 authoritative wind mechanics', () => {
     hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 10, f.config);
     expect(f.hero.hp).toBe(hp);
     f.hero.x = 386;
+    f.world.random = () => 0.5;
     hurt(f.world, f.hero, f.enemies[0]!.id, 'strike', 10, f.config);
     expect(f.hero.hp).toBe(hp - 10);
     expect(f.world.areas![0]!.x).toBe(300);
@@ -277,6 +278,7 @@ describe('M3C1 authoritative wind mechanics', () => {
   });
   it('Phong Ảnh counters once after its dash without extending dash damage immunity', () => {
     const f = fixture('phong_anh_hoan_vi');
+    f.world.random = () => 0.5;
     f.cast();
     f.steps(8);
     const hp = f.hero.hp,
@@ -289,6 +291,7 @@ describe('M3C1 authoritative wind mechanics', () => {
     hurt(f.world, f.hero, enemy.id, 'enemy_basic', 10, f.config);
     expect(f.hero.hp).toBe(hp - 20);
     const g = fixture('phong_anh_hoan_vi');
+    g.world.random = () => 0.5;
     g.cast();
     g.steps(30);
     const hp2 = g.hero.hp;

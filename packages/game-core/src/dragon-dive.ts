@@ -37,7 +37,11 @@ export function dragonDiveTarget(
         t.hp > 0 &&
         distance(origin, t) <= e.range &&
         (t.x - origin.x) * fx + (t.y - origin.y) * fy >= 0 &&
-        !c.collision.some((r) => segmentRect(origin, t, r) !== undefined),
+        !c.collision.some(
+          (r) =>
+            r !== w.statue?.collision &&
+            segmentRect(origin, t, r) !== undefined,
+        ),
     )
     .sort(
       (a, b) =>
@@ -123,7 +127,9 @@ function hitDragonArea(
       enemy.hp <= 0 ||
       distance(enemy, center) > radius + (enemy.stats ?? config.creep).radius ||
       config.collision.some(
-        (wall) => segmentRect(center, enemy, wall) !== undefined,
+        (wall) =>
+          wall !== world.statue?.collision &&
+          segmentRect(center, enemy, wall) !== undefined,
       )
     )
       continue;

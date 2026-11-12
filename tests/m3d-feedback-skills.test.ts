@@ -142,37 +142,30 @@ describe('M3D school gameplay reworks', () => {
     s.step();
     expect(s.w.areas).toHaveLength(0);
   });
-  it('four fresh A presses produce four actions, one crescent and then exactly 1s cooldown', () => {
+  it('accepts the four manual stages on consecutive ticks and can restart after the crescent', () => {
     const s = setup();
-    for (let i = 0; i < 4; i++) {
-      s.attack();
-      if (i < 3) s.step(5);
-    }
+    for (let i = 0; i < 4; i++) s.attack();
     expect(
       s.events.filter((e) => e.kind === 'attack').map((e) => e.stage),
     ).toEqual(['left_fist', 'right_fist', 'front_kick', 'roundhouse_kick']);
     expect(s.w.projectiles.size).toBe(1);
-    expect(s.h.cooldown - s.w.tick).toBe(30);
+    expect(s.h.cooldown - s.w.tick).toBe(0);
     s.attack();
-    expect(s.events.filter((e) => e.kind === 'attack')).toHaveLength(4);
-    s.step(29);
-    s.attack();
-    expect(s.events.filter((e) => e.kind === 'attack')).toHaveLength(5);
+    expect(s.events.filter((e) => e.kind === 'attack').at(-1)?.stage).toBe(
+      'left_fist',
+    );
   });
-  it('idle >2s starts 1s recovery from the timeout instant, not the first A', () => {
+  it('resets the manual chain after 2s idle and accepts a fresh opener immediately', () => {
     const s = setup();
     s.attack();
     s.step(59);
     expect(s.h.basicChains?.thieu_lam_quyen).toBe(1);
     s.step();
-    expect(s.h.cooldown - s.w.tick).toBe(30);
+    expect(s.h.cooldown).toBeLessThanOrEqual(s.w.tick);
     s.attack();
-    expect(s.events.filter((e) => e.kind === 'attack')).toHaveLength(1);
-    s.step(29);
-    s.attack();
-    expect(s.events.filter((e) => e.kind === 'attack').at(-1)?.stage).toBe(
-      'left_fist',
-    );
+    expect(
+      s.events.filter((e) => e.kind === 'attack').map((e) => e.stage),
+    ).toEqual(['left_fist', 'left_fist']);
   });
   it('Vô Ảnh without Phát Động has three staggered parallel lanes', () => {
     const s = setup('vo_anh_cuoc');

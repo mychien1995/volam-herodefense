@@ -1,3 +1,11 @@
+## Thiên Hạ Vô Cẩu · 2026-11-12
+
+Thiên Hạ Vô Cẩu giảm 80% sát thương nhận trong lúc xoay bổng. Cú đập cuối hồi 5% HP tối đa cho bản thân khi thi triển trọn chiêu.
+
+## Tầm Bổng và hồi chiêu đánh thường M3D · 2026-11-12
+
+Cái Bang Bổng đánh trong tầm 105 đơn vị với bốn thức và nhịp 8 tick mỗi thức. Bổng sơn đỏ khắc rồng vàng dài hơn 50%, rộng hơn 10%, thể hiện ở tư thế đứng, đi và đánh theo bốn hướng. Vệt đòn theo tầm mới. Võ Đang Quyền, Võ Đang Kiếm, Thiếu Lâm Quyền và Thiếu Lâm Đao có hồi chiêu A bằng 0. Thiếu Lâm Quyền giữ chuỗi bốn thức và cửa sổ 60 tick. Nhịp hiện hành của Cái Bang Bổng, Thiên Sơn Phiến, Thiên Sơn Đao và Cái Bang Chưởng tiếp tục áp dụng. Mỗi lần nhấn A gửi một lệnh và server xử lý tối đa một đòn của mỗi người trong một tick.
+
 ## Vô Ảnh Cước và artwork Thiếu Lâm Quyền · 2026-11-09
 
 E ở thế Cước phóng ba bàn chân theo thứ tự trên, giữa, dưới. Toàn Phong Thoái → Ca Diệp Thoái trên cùng địch mở cú Vô Ảnh đá bay lướt. [Cấu hình](docs/SHAOLIN_QUYEN_REWORK.md).
@@ -56,7 +64,7 @@ Use catalogue order within each selected branch for Q/W/E/R, with its ultimate o
 
 This section and the revised rows below supersede earlier skill descriptions for the approved M3D integration. Stable IDs,43 actives,8 basics,4 passives,free school mixing and4 slots remain. `hoanh_tao_cuoc` now displays **Ca Diệp Thoái**; `tam_gioi_quy_thien` displays **Sư Tử Hống**. Exact data remain in `packages/game-data/src/thieu-lam.ts` and `m3d-feedback-tuning.ts`.
 
-Thiếu Lâm Quyền A requires four presses (punch/punch/kick/roundhouse+travelling crescent), then1s cooldown; after2s idle the1s cooldown starts. Vi Đà ground explosion offset189. Toàn Phong is a golden piercing travelling tornado, range234, one hit/target. Ca Diệp is a stationary foot slam launching a travelling earth mound, range273; damage+stun to every crossed target once/cast, no caster dash. Vô Ảnh alone/failure emits one centered foot; valid Toàn Phong→Ca Diệp hits on the same enemy enable three parallel upper/middle/lower feet twice. Early finisher input buffers one cast until the real predecessor resolves, never creates combo progress. Như Lai uses the doubled Buddha, sky palm and a stationary Sanskrit field damaging each target on first entry only. Tru Tà is one enlarged attached slash without a crescent projectile. Kim Quang remains centered with a readable interior. Sư Tử Hống is a wide lion-roar AoE with damage, defense reduction and slow; its new original icon replaces the previous skill icon.
+Thiếu Lâm Quyền A requires four presses (punch/punch/kick/roundhouse+travelling crescent), and resets after 2s idle. The next A can start immediately after the finisher or timeout. Vi Đà ground explosion offset189. Toàn Phong is a golden piercing travelling tornado, range234, one hit/target. Ca Diệp is a stationary foot slam launching a travelling earth mound, range273; damage+stun to every crossed target once/cast, no caster dash. Vô Ảnh alone/failure emits one centered foot; valid Toàn Phong→Ca Diệp hits on the same enemy enable three parallel upper/middle/lower feet twice. Early finisher input buffers one cast until the real predecessor resolves, never creates combo progress. Như Lai uses the doubled Buddha, sky palm and a stationary Sanskrit field damaging each target on first entry only. Tru Tà is one enlarged attached slash without a crescent projectile. Kim Quang remains centered with a readable interior. Sư Tử Hống is a wide lion-roar AoE with damage, defense reduction and slow; its new original icon replaces the previous skill icon.
 
 Cái Bang Phá Giáp raises/extends then slams the staff along the true facing vector, including diagonals; no spin. Thiên Hạ Vô Cẩu retains four fire dogs, larger whirl/final footprint, duration×1.3 and aligned ground impact. Thiên Sơn Liệt Phong retains the above-head hilt and correct blade-edge orientation when slashing left. Võ Đang Quyền and Kiếm basic knockback chances are10%. Shift8s/charge. Unlisted skills/effects and Phất Trần Công retain approved behavior. Numbers are current director-reviewed playtest tuning, not a claim of campaign/PvP balance.
 
@@ -76,7 +84,7 @@ Canonical IDs/names remain unchanged. Thiếu Lâm Quyền A now cycles left fis
 
 **Normal attacks (A):**
 - `cai_bang_chuong`: **Cái Bang Chưởng** — ranged non-homing fire projectile, auto-aim once at closest enemy's present position; dodgeable.
-- `cai_bang_bong`: **Cái Bang Bổng** — thrust, sweep, lift and overhead strike. Eight ticks per beat, followed by 15 recovery ticks after the fourth. Reduced cleave to secondary targets.
+- `cai_bang_bong`: **Cái Bang Bổng** — thrust, sweep, lift and overhead strike. Eight ticks per beat, 105 units of reach and reduced cleave to secondary targets.
 
 | ID | Vietnamese display name | Style | Proposed effect and reason |
 |---|---|---|---|
@@ -85,8 +93,8 @@ Canonical IDs/names remain unchanged. Thiếu Lâm Quyền A now cycles left fis
 | `phi_long_tai_thien` | **Phi Long Tại Thiên** | Chưởng | Frontal fire shockwave that knocks enemies back; spacing and melee disengage. |
 | `khang_long_huu_hoi` | **Kháng Long Hữu Hối** | Chưởng | Temporary Crit Chance + Crit Damage buff; timed burst. |
 | `hang_long_hoa_vu` | **Hàng Long Hỏa Vũ** | Chưởng U | Massive forward-traveling fire wave; late-game AoE burst. |
-| `hoanh_tao_bong` | **Hoành Tảo Bổng** | Bổng | Wide staff sweep causing damage and slow; melee wave control. |
-| `pha_giap_bong` | **Phá Giáp Bổng** | Bổng | Frontal staff slam, range 144 at every rank, with temporary defense reduction. |
+| `hoanh_tao_bong` | **Hoành Tảo Bổng** | Bổng | Quét bổng diện rộng, làm chậm và hồi 10% lượng máu các mục tiêu thực mất. |
+| `pha_giap_bong` | **Phá Giáp Bổng** | Bổng | Vụt bổng phía trước, tầm 144 ở mọi bậc. Giảm phòng thủ, choáng cơ bản 0,6 giây và hồi 10% lượng máu các mục tiêu thực mất. |
 | `cam_long_cong` | **Cầm Long Công** | Bổng | Pulls all enemies in front closer by a limited distance and prevents **both attacks and skill casting**, but not movement (`Disarm` + `Silence`); iconic PvP setup. Not stun. |
 | `truy_phong_bong` | **Truy Phong Bổng** | Bổng | Stationary two-handed stomp. After six ticks, the blast hits and stuns in a base radius of 110. |
 | `thien_ha_vo_cau` | **Thiên Hạ Vô Cẩu** | Bổng U | Six fire dogs orbit the staff whirlwind. A heavy staff smash ends the skill with a lava burst. |

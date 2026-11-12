@@ -1,3 +1,5 @@
+import { markImpactTarget } from './m3d-hit-art.js';
+import { releaseBeat } from './m3d-approved-boss-body.js';
 import {
   WaveBossFeedbackArt,
   WaveBossHealth,
@@ -203,7 +205,9 @@ export class NamDePresentation {
         b.fx,
         b.fy,
         c?.ability ?? b.castAbilityId,
+        c ? { beat: releaseBeat(tick, c.releaseAt) } : undefined,
       );
+      markImpactTarget(renovatedBody, 'boss_nam_de');
       if (
         c &&
         tick < c.releaseAt &&

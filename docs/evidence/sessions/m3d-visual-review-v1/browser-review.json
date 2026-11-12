@@ -1,0 +1,218 @@
+{
+  "scope": "Standalone scripted Phaser 4.2.1, offline",
+  "status": "passed",
+  "errors": [],
+  "networkRequests": [],
+  "cases": {
+    "venom": {
+      "observed": 19,
+      "phases": [
+        "Chuẩn bị",
+        "Tung chiêu",
+        "Va chạm",
+        "Thu chiêu"
+      ],
+      "expected": [
+        "truc_xa_venom_release",
+        "truc_xa_venom_projectile_right",
+        "truc_xa_venom_impact"
+      ]
+    },
+    "web": {
+      "observed": 15,
+      "phases": [
+        "Đánh thường",
+        "Tơ bay",
+        "Trúng · định thân",
+        "Thoát định thân"
+      ],
+      "expected": [
+        "doc_chu_web_projectile_right",
+        "doc_chu_web_impact"
+      ]
+    },
+    "rock": {
+      "observed": 20,
+      "phases": [
+        "Lấy đà",
+        "Nhấc đá",
+        "Đá bay",
+        "Đá vỡ tại điểm rơi",
+        "Thu chiêu"
+      ],
+      "expected": [
+        "rock/0",
+        "son_vien_slam_impact",
+        "son_vien_pebble_scatter"
+      ]
+    },
+    "roots": {
+      "observed": 11,
+      "phases": [
+        "Tụ lực",
+        "Rễ bật nối tiếp",
+        "Rễ rút"
+      ],
+      "expected": [
+        "moc_linh_root_emerge"
+      ]
+    },
+    "darts": {
+      "observed": 5,
+      "phases": [
+        "Đường trống",
+        "Phi tiêu từ mép rừng",
+        "Trúng · choáng",
+        "Phi tiêu lệch nhịp"
+      ],
+      "expected": [
+        "dart/0",
+        "dart/2"
+      ]
+    },
+    "curse": {
+      "observed": 11,
+      "phases": [
+        "Chuẩn bị",
+        "Tung chiêu",
+        "Va chạm",
+        "Thu chiêu"
+      ],
+      "expected": [
+        "curse/0",
+        "curse/2",
+        "curse/3"
+      ]
+    },
+    "sandstone": {
+      "observed": 11,
+      "phases": [
+        "Dồn lực",
+        "Nứt đất · đá bật lên",
+        "Đá vụn rơi"
+      ],
+      "expected": [
+        "sandstone/0",
+        "sandstone/2",
+        "sandstone/3"
+      ]
+    },
+    "quicksand": {
+      "observed": 9,
+      "phases": [
+        "Rìa cát thấy từ xa",
+        "Đi bộ trong cát lún",
+        "Ra khỏi vùng"
+      ],
+      "expected": [
+        "quicksand/0",
+        "quicksand/2",
+        "hero.walk.right"
+      ]
+    },
+    "pincers": {
+      "observed": 11,
+      "phases": [
+        "Giơ càng",
+        "Kẹp thứ nhất",
+        "Kẹp thứ hai",
+        "Thu càng"
+      ],
+      "expected": [
+        "pincer_impact"
+      ]
+    },
+    "cannon": {
+      "observed": 19,
+      "phases": [
+        "Lấy đà",
+        "Khai hỏa",
+        "Đạn bay",
+        "Nổ tại điểm rơi",
+        "Khói tan"
+      ],
+      "expected": [
+        "muzzle_flash",
+        "cannon_projectile",
+        "cannon_impact"
+      ]
+    },
+    "tide": {
+      "observed": 15,
+      "phases": [
+        "Tụ nước",
+        "Đầu sóng lan ngang",
+        "Sóng đánh qua mục tiêu",
+        "Sóng tan"
+      ],
+      "expected": [
+        "tide/0",
+        "tide/2",
+        "water_splash"
+      ]
+    },
+    "geyser": {
+      "observed": 5,
+      "phases": [
+        "Mặt đất",
+        "Gợn nước báo trước",
+        "Cột nước · choáng",
+        "Nước rút"
+      ],
+      "expected": [
+        "geyser/0",
+        "geyser/1",
+        "geyser/2",
+        "geyser/3"
+      ]
+    },
+    "claw": {
+      "observed": 11,
+      "phases": [
+        "Giương móng",
+        "Vung móng",
+        "Hỏa trảo chạm mục tiêu",
+        "Tàn lửa"
+      ],
+      "expected": [
+        "claw/1",
+        "claw/2",
+        "claw/3"
+      ]
+    },
+    "firetrap": {
+      "observed": 9,
+      "phases": [
+        "Khe cố định",
+        "Khe sáng · cột lửa phun lệch nhịp",
+        "Cột lửa · choáng",
+        "Khe nguội"
+      ],
+      "expected": [
+        "firetrap/0",
+        "firetrap/1",
+        "firetrap/2",
+        "firetrap/3"
+      ]
+    },
+    "hud": {
+      "observed": 1,
+      "phases": [
+        "Có điểm kỹ năng",
+        "Phản hồi nâng bậc"
+      ],
+      "expected": [
+        "hero.idle.down"
+      ]
+    }
+  },
+  "controls": {
+    "autoPlay": true,
+    "pause": true,
+    "slowMotion": true,
+    "replay": true,
+    "timeline": true,
+    "hudOQ": true,
+    "mobileNoOverflow": true
+  }
+}

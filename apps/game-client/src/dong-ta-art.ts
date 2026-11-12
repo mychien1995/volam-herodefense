@@ -1,3 +1,5 @@
+import { markImpactTarget } from './m3d-hit-art.js';
+import { releaseBeat } from './m3d-approved-boss-body.js';
 import { WaveBossHealth } from './wave-boss-feedback-art.js';
 import { presentRenovatedBody } from './renovation-art.js';
 import Phaser from 'phaser';
@@ -216,7 +218,7 @@ export class DongTaRenderer {
     this.health.begin();
     const tick =
       view.tick + Math.min(2, (this.scene.time.now - this.received) * 0.03);
-    for (const actor of state.creeps.values()) {
+    for (const [id, actor] of state.creeps) {
       const bundle = actors[actor.archetypeId];
       if (!bundle || actor.zoneId !== zone) continue;
       const cast = view.casts.find((c) => c.actorId === actor.archetypeId);
@@ -269,7 +271,9 @@ export class DongTaRenderer {
         actor.fx,
         actor.fy,
         cast?.abilityId ?? actor.castAbilityId,
+        cast ? { beat: releaseBeat(tick, cast.activeAt) } : undefined,
       );
+      markImpactTarget(renovatedBody, id);
       const name =
         bundle === 'dong'
           ? 'Đông Tà'

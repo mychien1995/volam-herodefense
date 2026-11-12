@@ -16,7 +16,7 @@ import { DefenseHud } from './defense-hud.js';
 import { BossRetryUI, type RetryAction } from './boss-retry-ui.js';
 import { SkillMenu } from './skill-menu.js';
 import { BossPartyUI, isBossDestination } from './boss-party-ui.js';
-import type { BuildChange } from '@volam/game-core';
+import { directDodgeChance, type BuildChange } from '@volam/game-core';
 import type { MerchantAction, PotionId } from '@volam/game-core';
 import { ItemMenu, auxiliarySlot, updateAuxiliarySlot } from './item-menu.js';
 export function element<T extends HTMLElement>(selector: string): T {
@@ -24,6 +24,10 @@ export function element<T extends HTMLElement>(selector: string): T {
   if (!found) throw new Error(`Missing element: ${selector}`);
   return found;
 }
+const dodgePercentage = new Intl.NumberFormat('vi-VN', {
+  style: 'percent',
+  maximumFractionDigits: 1,
+});
 export class GameUI {
   readonly bossRetry: BossRetryUI;
   onBossRetry: (action: RetryAction) => void = () => {};
@@ -95,7 +99,7 @@ export class GameUI {
               .join('')}
             <div id="dash-status" class="dash-status" role="status" aria-label="Lướt · Shift"><img src="/assets/m3d_feedback/dash_icon_frame.png" alt="" width="32" height="32"><b id="dash-charges">2</b><kbd>Shift</kbd><small id="dash-timer"></small><progress id="dash-progress" max="180" value="180" aria-label="Hồi lượt lướt"></progress></div>
             ${auxiliarySlot()}
-            <span id="fixed-skill-points" class="skill-points" hidden></span><span id="shaolin-stance" class="stance-indicator" hidden></span>
+            <span id="fixed-skill-points" class="skill-points" hidden></span><span id="shaolin-stance" class="stance-indicator" hidden></span><span id="innate-dodge" class="stance-indicator" hidden></span>
             <button hidden class="loadout-toggle" data-menu="skills" title="Võ Công · O" aria-label="Võ Công · O">◇<span id="available-points"></span></button>
           </section>
           <p id="scene-status" class="scene-ready" aria-hidden="true">${artPreview ? 'XEM TRƯỚC HÌNH ẢNH' : ''}</p>
@@ -868,12 +872,17 @@ export class GameUI {
     const fixed = hero.build.mode === 'fixed';
     const points = element('#fixed-skill-points');
     points.hidden = !fixed || hero.build.available === 0;
-    points.textContent = hero.build.available + ' điểm';
+    points.textContent = hero.build.available + ' điểm · Giữ O + QWERT';
     const stance = element('#shaolin-stance');
     stance.hidden = !fixed || hero.basicId !== 'thieu_lam_quyen';
     stance.textContent =
       (hero.build.slotSkills[0] === 'toan_phong_thoai' ? 'Cước' : 'Quyền') +
       ' · F';
+    const dodge = directDodgeChance(hero.schoolId, hero.level, m1Config);
+    const passive = element('#innate-dodge');
+    passive.hidden = dodge === 0;
+    passive.textContent =
+      'Bắc Minh Thần Công · Né đòn ' + dodgePercentage.format(dodge);
     element('.loadout-toggle').hidden = !!this.state?.requiresBranch;
     element('#slot-t').hidden = !fixed;
     updateAuxiliarySlot(hero);

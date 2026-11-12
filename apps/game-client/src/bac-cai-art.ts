@@ -1,3 +1,5 @@
+import { markImpactTarget } from './m3d-hit-art.js';
+import { releaseBeat } from './m3d-approved-boss-body.js';
 import {
   WaveBossHealth,
   WaveBossFeedbackArt,
@@ -123,7 +125,7 @@ export class BacCaiRenderer {
     const observed = this.observed.get(asset + ':' + tag) ?? new Set<string>();
     observed.add(frame);
     this.observed.set(asset + ':' + tag, observed);
-    if (key === 'boss' || asset === 'boss_bac_cai') {
+    if (key !== 'boss' && asset === 'boss_bac_cai') {
       const direction = tag.match(/_(down|up|left|right)$/)?.[1] ?? 'down';
       const vector = {
         down: [0, 1],
@@ -298,22 +300,39 @@ export class BacCaiRenderer {
         x = cast.origin.x + (cast.x - cast.origin.x) * p;
         y = cast.origin.y + (cast.y - cast.origin.y) * p;
       }
-      if (cast?.ability === 'vortex')
-        this.feedback.cel('spinner:0', 'bc_boss', tag, x, y, clock / 1000, {
-          depth: y,
-          loop: true,
-        });
-      else
-        this.cel('boss', asset, tag, x, y, clock, {
-          ...(frame === undefined ? {} : { frame }),
-          depth: y + (cast?.ability === 'field' ? 1 : 0),
-          loop:
-            cast?.ability === 'staff' ||
-            (!cast &&
-              b.pose !== 'death' &&
-              v.phase !== 'drink' &&
-              v.phase !== 'sleep'),
-        });
+      const renderedBody =
+        cast?.ability === 'vortex'
+          ? this.feedback.cel('spinner:0', 'bc_boss', tag, x, y, clock / 1000, {
+              depth: y,
+              loop: true,
+            })
+          : this.cel('boss', asset, tag, x, y, clock, {
+              ...(frame === undefined ? {} : { frame }),
+              depth: y + (cast?.ability === 'field' ? 1 : 0),
+              loop:
+                cast?.ability === 'staff' ||
+                (!cast &&
+                  b.pose !== 'death' &&
+                  v.phase !== 'drink' &&
+                  v.phase !== 'sleep'),
+            });
+      presentRenovatedBody(
+        this.scene,
+        renderedBody,
+        'bac_cai',
+        b.pose === 'death'
+          ? 'death'
+          : cast && !/^(idle|walk)_/.test(tag)
+            ? 'action'
+            : /^(idle|walk|hurt)_/.test(tag)
+              ? tag.split('_')[0]!
+              : 'action',
+        b.fx,
+        b.fy,
+        cast?.ability ?? tag,
+        cast ? { beat: releaseBeat(this.clock, cast.release) } : undefined,
+      );
+      markImpactTarget(renderedBody, 'bac_cai');
       if (v.phase !== 'defeated')
         this.health.draw('bac_cai', 'Bắc Cái', x, y - 65, v.hp, v.maxHp);
       if (v.dialogue && v.phase !== 'defeated')

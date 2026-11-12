@@ -31,7 +31,7 @@ Vòng chơi: farm vàng → mua/nâng đồ → hạ boss nhận thưởng cá n
 
 ## 2. Bình máu và bình mana
 
-Từ bản thử chiến dịch 2026-11-08, mỗi nhân vật nhận 5 bình máu nhỏ và 5 bình mana nhỏ khi vào trận lần đầu. Mười bình tính vào giới hạn mang theo. [Cấu hình chiến dịch](docs/CAMPAIGN_BALANCE_2026_11_06.md#experience-and-money).
+Từ bản thử chiến dịch 2026-11-11, mỗi nhân vật nhận 10 bình máu nhỏ và 10 bình mana nhỏ khi vào trận lần đầu. Số bình khởi đầu lấp đầy giới hạn 20 bình mang theo. [Cấu hình chiến dịch](docs/CAMPAIGN_BALANCE_2026_11_06.md#experience-and-money).
 
 **CONFIRMED:** merchant bán bình máu/mana; được mang vào và dùng trong dungeon, nhưng **không mua bình khi đang trong dungeon**. Giới hạn mang bình **20**. Cỡ bình và giá tăng theo lượng hồi. **Cooldown dùng bình: 5 giây**. Server quyết định số lượng/vàng/lượng hồi/cooldown; không dùng bình hồi tượng.
 

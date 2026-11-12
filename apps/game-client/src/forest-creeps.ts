@@ -62,6 +62,13 @@ export function forestStrikeEffects(
   abilityId: string,
   direction: string | undefined,
 ): Array<{ id: string; anchor: 'source' | 'contact' }> {
+  if (kind === 'hit' && abilityId === 'creep_doc_chu_basic')
+    return [{ id: 'forest_fx:doc_chu_web_impact', anchor: 'contact' }];
+  if (
+    kind === 'hit' &&
+    ['creep_truc_xa_basic', 'creep_truc_xa_special'].includes(abilityId)
+  )
+    return [{ id: 'forest_fx:truc_xa_venom_impact', anchor: 'contact' }];
   if (abilityId !== 'creep_strike') return [];
   if (kind === 'attack')
     return type === 'son_vien'

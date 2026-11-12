@@ -76,7 +76,10 @@ for (const entry of approvedArt.assets) {
 }
 for (const [name, label] of [
   ['approved_chu_ba_thong.lock.json', 'Chu Bá Thông'],
-  ['approved_renovation_v1.lock.json', 'Renovation v1 idle/walk and scene artwork'],
+  [
+    'approved_renovation_v1.lock.json',
+    'Renovation v1 idle/walk and scene artwork',
+  ],
   ['approved_bac_cai.lock.json', 'Bắc Cái visual v03'],
   ['approved_cai_bang.lock.json', 'Cai Bang'],
   ['approved_thien_son.lock.json', 'Thien Son'],
@@ -88,6 +91,7 @@ for (const [name, label] of [
   ['approved_diamond_palm_v05.lock.json', 'Đại Lực Kim Cương Chưởng v05'],
   ['approved_shaolin_quyen_rework.lock.json', 'Thiếu Lâm Quyền rework'],
   ['approved_shaolin_dao.lock.json', 'Thiếu Lâm Đao rework'],
+  ['approved_m3d_hit_continuity.lock.json', 'M3D hit continuity'],
   ['approved_arena_creeps_13_16.lock.json', 'arena creeps Waves 13–16'],
 ]) {
   // Thiếu Lâm remains a prototype until the separate final director approval.
@@ -106,6 +110,10 @@ for (const [name, label] of [
   }
 }
 const dest = new URL('apps/game-client/public/assets/', root);
+copyTreeIfChanged(
+  new URL('assets/exports/m3d-hit-continuity/', root),
+  new URL('m3d-hit-continuity/', dest),
+);
 prepareWaveBossFeedback();
 prepareKimAssets();
 prepareDongTa();

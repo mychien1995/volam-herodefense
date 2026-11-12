@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { campaignBossIds, type CampaignDefinition } from '@volam/game-core';
+import { fixedBranches } from './default-builds.js';
 import { economyTrial } from './economy.js';
 const positive = z.number().finite().positive();
 const count = z.number().int().nonnegative();
@@ -12,6 +13,8 @@ export const campaignSchema = z.strictObject({
   privateDamagePerPlayer: positive,
   invasionBaseCount: positive,
   invasionChapterCount: positive,
+  invasionHpMultiplier: positive,
+  invasionDamageMultiplier: positive,
   chapterSeconds: positive,
   xpThresholds: z
     .array(count)
@@ -39,6 +42,20 @@ export const campaignSchema = z.strictObject({
   dungeonGold: chapters,
   dungeonHp: chapters,
   dungeonDamage: chapters,
+  dungeonEnemyDamageMultiplier: positive.max(1),
+  meleeSustain: z.strictObject({
+    branchIds: z
+      .array(z.string())
+      .refine(
+        (ids) =>
+          new Set(ids).size === ids.length &&
+          ids.every((id) => Object.hasOwn(fixedBranches, id)),
+        'Melee sustain must reference distinct fixed branches.',
+      ),
+    maxHpBonus: positive,
+    hpRegenBonus: positive,
+    minHpRegen: positive,
+  }),
   bossHpPerPlayer: positive,
   damagePerPlayer: positive,
   wavePearl: positive.max(1),
@@ -66,6 +83,8 @@ export const campaignDefinition: CampaignDefinition = campaignSchema.parse({
   privateDamagePerPlayer: 0.04,
   invasionBaseCount: 120,
   invasionChapterCount: 20,
+  invasionHpMultiplier: 1.1,
+  invasionDamageMultiplier: 1.08,
   chapterSeconds: 900,
   // Cumulative thresholds for levels 1–30. The curve rejoins v1 at level 18.
   xpThresholds: [
@@ -73,7 +92,7 @@ export const campaignDefinition: CampaignDefinition = campaignSchema.parse({
     5230, 5950, 6700, 7480, 8280, 9120, 10000, 10920, 11880, 12880, 13920,
     15000, 16120, 17280, 18480, 19720,
   ],
-  startingPotions: { hp_small: 5, mp_small: 5 },
+  startingPotions: { hp_small: 10, mp_small: 10 },
   targets: [6, 12, 18, 24, 28],
   farmOverflowRatio: 0.25,
   invasionXp: [100, 300, 450, 650, 650],
@@ -82,6 +101,19 @@ export const campaignDefinition: CampaignDefinition = campaignSchema.parse({
   dungeonGold: [0.8, 1.5, 2, 2.5, 3],
   dungeonHp: [1, 1.5, 2.2, 3, 3.8],
   dungeonDamage: [1, 1.2, 1.45, 1.7, 2],
+  dungeonEnemyDamageMultiplier: 0.85,
+  meleeSustain: {
+    branchIds: [
+      'cai_bang_bong',
+      'thien_son_dao',
+      'vo_dang_quyen',
+      'vo_dang_kiem',
+      'thieu_lam_quyen',
+    ],
+    maxHpBonus: 0.05,
+    hpRegenBonus: 0.1,
+    minHpRegen: 0.5,
+  },
   bossHpPerPlayer: 1.1,
   damagePerPlayer: 0.06,
   wavePearl: 0.08,

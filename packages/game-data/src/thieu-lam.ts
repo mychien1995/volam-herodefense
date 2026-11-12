@@ -62,8 +62,7 @@ export const thieuLamBasics: Record<string, Ability> = {
     id: 'thieu_lam_quyen',
     nameVi: 'Thiếu Lâm Quyền',
     manaCost: 0,
-    cooldownTicks: 1,
-    minIntervalTicks: 6,
+    cooldownTicks: 0,
     manualChain: {
       idleTicks: tuning.chainIdleTicks,
       cooldownTicks: tuning.chainCooldownTicks,
@@ -85,7 +84,7 @@ export const thieuLamBasics: Record<string, Ability> = {
     id: 'thieu_lam_dao',
     nameVi: 'Thiếu Lâm Đao',
     manaCost: 0,
-    cooldownTicks: 23,
+    cooldownTicks: 0,
     effect: arc(38, 96, 0.55, Math.PI / 2.5),
   },
 };
@@ -105,10 +104,13 @@ export const thieuLamSkills: Ability[] = [
     manaCost: 12,
     cooldownTicks: 90,
     effect: {
-      ...arc(44, 68),
+      ...arc(51, 68),
       originStartOffset: tuning.viDaStartOffset,
       originOffset: 189,
-      statuses: [{ kind: 'defense_break', magnitude: 12, durationTicks: 120 }],
+      statuses: [
+        { kind: 'defense_break', magnitude: 12, durationTicks: 120 },
+        { kind: 'stun', magnitude: 1, durationTicks: 60 },
+      ],
     },
     combo: chain('phat_dong_a', 2),
   },
@@ -278,7 +280,7 @@ export const thieuLamSkills: Ability[] = [
 ];
 const descriptions = [
   'Đấm xa về phía trước, thủ thế ngắn. Phát Động A bước 1 trên từng địch trúng đòn, kể cả đòn lan.',
-  'Đấm phá thủ. Phát Động A bước 2 chỉ tiếp nối La Hán Quyền trên cùng địch.',
+  'Đấm phá thủ và gây choáng 2 giây. Phát Động A bước 2 chỉ tiếp nối La Hán Quyền trên cùng địch.',
   'Phóng ba bàn tay khí lần lượt trên, giữa, dưới. Phát Động A: La Hán → Vi Đà → Đại Lực trên cùng địch trong 6s để phóng một bàn tay lớn.',
   'Lốc vàng bay thẳng xuyên địch, mỗi địch một lần. Phát Động B bước 1.',
   'Dậm chân tại chỗ, ụ đất chạy thẳng gây sát thương và choáng mọi địch trên đường. Phát Động B bước 2.',
@@ -333,7 +335,8 @@ export function addThieuLamProgression(d: ProgressionDefinition): void {
       }
       if (e.mode === 'arc' || e.mode === 'projectile')
         for (const s of e.statuses ?? []) {
-          s.durationTicks += r * 15;
+          if (a.id !== 'vi_da_quyen' || s.kind !== 'stun')
+            s.durationTicks += r * 15;
           if (s.kind !== 'stun')
             s.magnitude += r * (s.kind === 'slow' ? 0.04 : 4);
         }

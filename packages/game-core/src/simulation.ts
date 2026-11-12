@@ -468,10 +468,11 @@ function advanceProjectile(
     ? 1
     : Infinity;
   for (const wall of config.collision)
-    wallT = Math.min(
-      wallT,
-      segmentRect(shot, end, wall, shot.effect.radius) ?? Infinity,
-    );
+    if (shot.hostile || wall !== world.statue?.collision)
+      wallT = Math.min(
+        wallT,
+        segmentRect(shot, end, wall, shot.effect.radius) ?? Infinity,
+      );
   const targets: Actor[] = shot.hostile
     ? [...world.heroes.values()]
     : [...world.creeps.values()];

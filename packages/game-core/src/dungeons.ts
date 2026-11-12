@@ -1,5 +1,6 @@
 import { TayDocEncounter, TayDocGate } from './tay-doc.js';
 import { enforceConfinement } from './confinement.js';
+import { resetQuicksand } from './creep-abilities.js';
 import {
   stepWaveBossTest,
   validateWaveBossTest,
@@ -524,6 +525,7 @@ export class DungeonMatch {
     if ((this.hero(id)?.hp ?? 0) <= 0)
       return 'Độc nổ đã hạ gục bạn trước khi rời đấu trường.';
     zone.emptyBossResetAt = undefined;
+    resetQuicksand(zone.world, zone.config, dungeon.exit);
     const occupant = zone.world.heroes.size;
     this.transfer(
       id,
@@ -1252,7 +1254,9 @@ export class DungeonMatch {
         }),
       ),
       creepRespawn: false,
+      dungeonId: d.id,
       dungeonAggro: !(d.boss || d.chuBoss || d.kimBoss || d.bossEncounter),
+      dungeonEnemyDamageMultiplier: campaign?.dungeonEnemyDamageMultiplier,
       creep: {
         ...this.base.creep,
         ...(creepSpeed === undefined ? {} : { speed: creepSpeed }),
@@ -1425,8 +1429,8 @@ export class DungeonMatch {
       hero.dashRechargeAt = convert(hero.dashRechargeAt);
     hero.skillCooldowns = hero.skillCooldowns.map(convert);
     for (const id of Object.keys(hero.chargeCooldowns ?? {}))
-      hero.chargeCooldowns![id] = hero.chargeCooldowns![id]!
-        .filter((ready) => ready > source.world.tick)
+      hero.chargeCooldowns![id] = hero
+        .chargeCooldowns![id]!.filter((ready) => ready > source.world.tick)
         .map(convert);
     if (hero.inventory?.auxiliaryReadyAt !== undefined)
       hero.inventory.auxiliaryReadyAt = convert(
@@ -1438,12 +1442,16 @@ export class DungeonMatch {
     hero.statuses = [];
     source.world.bacCai?.participantLeft(id);
     refreshCharacter(hero, destination.config);
-    const pooledCharge = hero.tamLien?.group === 'creeps' ? hero.tamLien : undefined;
+    const pooledCharge =
+      hero.tamLien?.group === 'creeps' ? hero.tamLien : undefined;
     removeHero(source.world, id);
     if (pooledCharge)
       hero.tamLien = {
-        ...pooledCharge, targetId: '',
-        readyUntil: pooledCharge.readyUntil ? convert(pooledCharge.readyUntil) : 0,
+        ...pooledCharge,
+        targetId: '',
+        readyUntil: pooledCharge.readyUntil
+          ? convert(pooledCharge.readyUntil)
+          : 0,
       };
     if (source.kim && !source.world.heroes.size) source.kim.clear(source.world);
     if (source.encounter && !source.world.heroes.size)

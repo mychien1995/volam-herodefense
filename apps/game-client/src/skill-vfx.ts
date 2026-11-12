@@ -424,7 +424,7 @@ export class SkillVfx {
       wave.ownerId,
     );
   }
-  event(e: CombatEvent): void {
+  event(e: CombatEvent, genericImpact = true): void {
     if (this.voDangKiem.event(e)) return;
     if (this.voDangQuyen.event(e)) return;
     if (this.thienSon.event(e)) return;
@@ -556,7 +556,8 @@ export class SkillVfx {
     if (e.kind === 'hit') {
       if (
         !visual?.impact &&
-        (e.abilityId.startsWith('thien_son_') ||
+        (!genericImpact ||
+          e.abilityId.startsWith('thien_son_') ||
           /\/(thien-son|vo-dang)\//.test(
             components.get(`${skill}_vfx`)?.sheet ?? '',
           ))

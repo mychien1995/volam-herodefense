@@ -16,6 +16,7 @@ export interface CharacterStats {
 export type StatBonuses = { [K in keyof CharacterStats]?: number | undefined };
 export interface SchoolStatProfile {
   passiveId: string;
+  directDodge?: { base: number; perLevel: number; max: number } | undefined;
   base: CharacterStats;
   growth: StatBonuses;
   innate: StatBonuses;

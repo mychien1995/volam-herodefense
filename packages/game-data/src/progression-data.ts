@@ -57,6 +57,10 @@ export const progressionSchema = z
       z.string(),
       z.strictObject({
         passiveId: z.string(),
+        directDodge: z
+          .strictObject({ base: n.max(1), perLevel: n.max(1), max: n.max(1) })
+          .refine((d) => d.base <= d.max)
+          .optional(),
         base: z.strictObject(statShape),
         growth: bonuses,
         innate: bonuses,
@@ -165,13 +169,16 @@ const descriptions: Record<string, string> = {
     'Tăng bạo kích trong thời gian dài hơn; cấp 4 có vùng lửa nhỏ theo người gây sát thương mỗi giây.',
   hang_long_hoa_vu:
     'Phóng hỏa long đến điểm địch đã khóa, bay một vòng, vút lên trời rồi lao xuống gây sát thương vùng. Điểm rơi không truy đuổi mục tiêu.',
-  hoanh_tao_bong: 'Quét bổng diện rộng, gây sát thương và làm chậm di chuyển.',
-  pha_giap_bong: 'Vụt bổng xuống phía trước, gây sát thương và giảm phòng thủ.',
+  hoanh_tao_bong:
+    'Quét bổng diện rộng, làm chậm và hút 10% máu thực mất của các mục tiêu.',
+  pha_giap_bong:
+    'Vụt bổng phía trước, giảm phòng thủ, choáng 0,6 giây và hút 10% máu thực mất của các mục tiêu.',
   cam_long_cong:
     'Kéo địch phía trước, câm lặng và tước vũ khí. Địch vẫn di chuyển; không choáng, không sát thương.',
   truy_phong_bong:
     'Hai tay giậm mạnh bổng xuống đất, dồn hỏa khí làm đất đá dưới chân nổ tung và gây choáng kẻ địch trúng đòn.',
-  thien_ha_vo_cau: 'Tuyệt kỹ: bốn nhịp xoay bổng, kết thúc bằng cú đập mạnh.',
+  thien_ha_vo_cau:
+    'Xoay bổng bốn nhịp, giảm 80% sát thương nhận vào trong lúc thi triển. Cú đập cuối hồi 5% máu tối đa cho bản thân.',
 };
 /** All numbers are M3B balance proposals. Rank1 preserves the exact M3A ability. */
 export function createProgression(

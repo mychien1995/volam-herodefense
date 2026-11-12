@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { isBeachZone } from './beach-art.js';
 import { isHellZone } from './hell-art.js';
 import type { LobbyState } from '@volam/game-protocol';
+import { forestCombatEffect } from './m3d-native-art.js';
 import { arenaCreepArt, type ArenaCreepManifest } from './arena-creeps.js';
 import {
   forestCreepArt,
@@ -35,7 +36,8 @@ export class ArenaCreepEffects {
   private make(id: string, x: number, y: number) {
     const effect = this.manifest.effects.find((v) => v.id === id);
     if (!effect) throw new Error('Missing creep effect: ' + id);
-    const texture = effect.texture ?? 'arena_creep_impacts';
+    const native = forestCombatEffect(this.scene, id);
+    const texture = native ?? effect.texture ?? 'arena_creep_impacts';
     const sprite = this.scene.add.sprite(
       Math.round(x),
       Math.round(y),
@@ -46,7 +48,8 @@ export class ArenaCreepEffects {
     const observe = () => this.observed.add(`${texture}:${sprite.frame.name}`);
     sprite.on(Phaser.Animations.Events.ANIMATION_START, observe);
     sprite.on(Phaser.Animations.Events.ANIMATION_UPDATE, observe);
-    sprite.play(id);
+    if (native) sprite.setScale(0.5);
+    sprite.play(native ? 'native:' + id : id);
     sprite.setName(id);
     this.spawned++;
     sprite.on(Phaser.Animations.Events.ANIMATION_REPEAT, () =>

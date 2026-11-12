@@ -27,6 +27,53 @@ export const bongContactOffset: Record<string, [number, number]> = {
   up: [18, -66],
 };
 
+// Opaque leading edge of each retained directional trail from its caster pivot.
+const trailReach: Record<string, number> = {
+  combo_thrust_right: 69,
+  combo_sweep_right: 52,
+  combo_rising_right: 60,
+  combo_overhead_right: 43,
+  combo_thrust_left: 70,
+  combo_sweep_left: 53,
+  combo_rising_left: 61,
+  combo_overhead_left: 45,
+  combo_thrust_down: 30,
+  combo_sweep_down: 18,
+  combo_rising_down: 11,
+  combo_overhead_down: 5,
+  combo_thrust_up: 84,
+  combo_sweep_up: 35,
+  combo_rising_up: 64,
+  combo_overhead_up: 115,
+};
+
+const basicEffect = m1Config.basics['cai_bang_bong']!.effect;
+const bongReach = basicEffect.mode === 'arc' ? basicEffect.range : 105;
+
+export function bongTrailPlacement(tag: FeedbackAnimation) {
+  const authored = trailReach[tag.name];
+  if (authored === undefined) return;
+  const [x, y] = tag.effectPlacementOffset;
+  const scale = Math.min(2.5, bongReach / authored);
+  const shift = bongReach - scale * authored;
+  if (tag.direction === 'right' || tag.direction === 'left')
+    return { x: x * scale, y, scaleX: scale, scaleY: 1 };
+  return {
+    x,
+    y: y * scale + (tag.direction === 'up' ? -shift : shift),
+    scaleX: 1,
+    scaleY: scale,
+  };
+}
+
+export function bongGroundOffset(direction: string): [number, number] {
+  const [x, y] = bongContactOffset[direction]!;
+  const distance = bongReach - 31;
+  if (direction === 'right' || direction === 'left')
+    return [direction === 'right' ? distance : -distance, y];
+  return [x, direction === 'up' ? -distance : distance];
+}
+
 function component(
   id: string,
   file: string,

@@ -1,4 +1,16 @@
 import Phaser from 'phaser';
+import {
+  approvedBossBody,
+  clipBeat,
+  presentApprovedBossAction,
+} from './m3d-approved-boss-body.js';
+import { caiBangBongBeatTicks } from '@volam/game-data';
+import {
+  bongReviewBody,
+  caiBangBongArtEnabled,
+} from './bong-combo-review-art.js';
+import { basicFeedbackArt } from './feedback-bindings.js';
+import { feedbackTag } from './feedback-art.js';
 import raw from './renovation-art.generated.json';
 import skillOverrides from './renovation-skills.generated.json';
 import allOverrides from './renovation-actions.generated.json';
@@ -14,6 +26,12 @@ import {
   renovationActionSources,
 } from './renovation-actions.js';
 import { hanNguyetKey, hanNguyetPath } from './thien-son-rework.js';
+import {
+  forestCombatBody,
+  nativeBongBody,
+  nativeBongOrigin,
+  preloadM3dNativeArt,
+} from './m3d-native-art.js';
 
 type BodyImage = Phaser.GameObjects.Image | Phaser.GameObjects.Sprite;
 import { renovatedActors } from './renovation-model.js';
@@ -21,9 +39,25 @@ export { renovationActorId, renovationHeight } from './renovation-model.js';
 const definitions = new Map(renovatedActors.map((actor) => [actor.id, actor]));
 export const renovationEnabled = (scene: Phaser.Scene) =>
   scene.registry.get('renovation-enabled') === true;
+const isCreepGroup = (group: string | undefined) =>
+  group === 'wave_creeps' || group === 'dungeon_creeps' || group === 'minions';
+
+export function usesRenovatedCreepPose(
+  scene: Phaser.Scene,
+  id: string | undefined,
+  pose: string,
+): boolean {
+  return (
+    renovationEnabled(scene) &&
+    isCreepGroup(id ? definitions.get(id)?.group : undefined) &&
+    ['idle', 'walk', 'hurt', 'stun', 'cast'].includes(pose)
+  );
+}
+
 export function preloadRenovation(scene: Phaser.Scene): void {
   if (scene.sys.settings.key !== 'Arena') return;
   preloadRenovationActions(scene);
+  preloadM3dNativeArt(scene);
   scene.load.atlas(
     hanNguyetKey,
     hanNguyetPath + '.png',
@@ -71,7 +105,7 @@ export function presentRenovatedBody(
   fx = 0,
   fy = 1,
   ability = '',
-  clock?: { phase?: string; progress?: number },
+  clock?: { phase?: string; progress?: number; beat?: 0 | 1 | 2 },
 ): void {
   if (!image || !id || !renovationEnabled(scene)) return;
   const definition = definitions.get(id);
@@ -85,11 +119,17 @@ export function presentRenovatedBody(
         ? 'up'
         : 'down';
   const locomotion = pose === 'idle' || pose === 'walk';
+  const creep = isCreepGroup(definition.group);
+  const reaction =
+    (creep || definition.group === 'heroes' || approvedBossBody(id)) &&
+    (pose === 'hurt' || pose === 'stun');
+  const creepCast = creep && pose === 'cast';
   let hanNguyetFrame: string | undefined;
   if (id === 'hero_thien_son_dao' && scene.textures.exists(hanNguyetKey)) {
     const walk = `walk_${direction}_${Math.floor(scene.time.now / 105) % 3}`;
     if (
       pose === 'idle' ||
+      reaction ||
       (ability === 'bach_liet_thien_kich' && pose === 'cast')
     )
       hanNguyetFrame = `idle_${direction}`;
@@ -124,7 +164,7 @@ export function presentRenovatedBody(
     }
   }
   if (hanNguyetFrame) {
-    if (locomotion && 'anims' in image) image.anims.stop();
+    if ((locomotion || reaction) && 'anims' in image) image.anims.stop();
     image
       .setTexture(hanNguyetKey, hanNguyetFrame)
       .setOrigin(0.5, 112 / 144)
@@ -132,20 +172,74 @@ export function presentRenovatedBody(
       .setFlip(false, false)
       .setRotation(0);
     image.setData('renovation-action', undefined);
-  } else if (locomotion) {
+  } else if (locomotion || reaction || creepCast) {
     if ('anims' in image) image.anims.stop();
-    const frame = `${pose}_${direction}_${pose === 'walk' ? Math.floor(scene.time.now / 110) % 4 : 0}`;
+    const progress = Phaser.Math.Clamp(clock?.progress ?? 0, 0, 1);
+    const release = clock?.phase === 'release';
+    // Creep cast and hurt poses reuse native cels. The ability's authored
+    // projectile/impact still plays on its own server clock.
+    let cel: number | undefined;
+    if (creepCast) {
+      if (release && progress < 0.5) cel = 2;
+      if (!release && progress >= 0.5) cel = 1;
+    }
+    // Trúc Xà raises its jaw before releasing venom. Use the original
+    // authored mouth poses on the server's separate Phun độc clock.
+    const jawTexture =
+      creepCast && id === 'forest_truc_xa'
+        ? forestCombatBody(scene, id, 'basic_attack')
+        : undefined;
+    const jawCel = release
+      ? progress < 0.5
+        ? 2
+        : 3
+      : progress >= 0.7
+        ? 1
+        : progress >= 0.35
+          ? 0
+          : undefined;
+    const frame =
+      pose === 'walk'
+        ? `walk_${direction}_${Math.floor(scene.time.now / 110) % 4}`
+        : cel === undefined
+          ? `idle_${direction}_0`
+          : `walk_${direction}_${cel}`;
+    const recoil = creep && pose === 'hurt' ? (1 - progress) * 0.025 : 0;
+    const bong = caiBangBongArtEnabled && id === 'hero_cai_bang';
     image
-      .setTexture('renovated-' + id, frame)
-      .setOrigin(
-        definition.pivot[0]! / definition.canvas[0]!,
-        definition.pivot[1]! / definition.canvas[1]!,
+      .setTexture(
+        bong
+          ? nativeBongBody
+          : jawTexture && jawCel !== undefined
+            ? jawTexture
+            : 'renovated-' + id,
+        jawTexture && jawCel !== undefined
+          ? `basic_attack_${direction}_${jawCel}`
+          : frame,
       )
-      .setScale(0.5)
+      .setOrigin(
+        bong
+          ? nativeBongOrigin[0]
+          : definition.pivot[0]! / definition.canvas[0]!,
+        bong
+          ? nativeBongOrigin[1]
+          : definition.pivot[1]! / definition.canvas[1]!,
+      )
+      .setScale(0.5, 0.5 - recoil)
       .setFlip(false, false)
       .setRotation(0);
     image.setData('renovation-action', undefined);
-  } else {
+  } else if (
+    pose === 'death' ||
+    !presentApprovedBossAction(
+      scene,
+      image,
+      id,
+      direction,
+      ability,
+      clock?.beat ?? clipBeat(clock?.progress ?? 0.5),
+    )
+  ) {
     presentRenovationAction(scene, image, id, pose, fx, fy, ability, clock);
   }
   image.setData('renovation', { id, pose, direction, locomotion });
@@ -157,6 +251,38 @@ export function presentRenovatedBody(
   frames.add(image.texture.key + ':' + image.frame.name);
   seen.set(id, frames);
 }
+/** Render all four approved Bổng beats from their accepted server tick. */
+export function presentBongBasicBody(
+  sprite: Phaser.GameObjects.Sprite,
+  stage: string | undefined,
+  age: number,
+  fx: number,
+  fy: number,
+): void {
+  if (
+    !caiBangBongArtEnabled ||
+    !stage ||
+    age < 0 ||
+    age >= caiBangBongBeatTicks
+  )
+    return;
+  const ref = basicFeedbackArt('cai_bang_bong', stage, 0)?.ref;
+  if (!ref) return;
+  const tag = feedbackTag({ ...ref, asset: bongReviewBody }, fx, fy);
+  if (!tag) return;
+  const index = Math.min(
+    tag.frames.length - 1,
+    Math.floor((age * tag.frames.length) / caiBangBongBeatTicks),
+  );
+  sprite.anims.stop();
+  sprite
+    .setTexture(nativeBongBody, tag.frames[index])
+    .setOrigin(...nativeBongOrigin)
+    .setScale(0.5)
+    .setFlip(false, false)
+    .setRotation(0);
+}
+
 export function inspectRenovation(scene: Phaser.Scene) {
   const actualSources = scene.registry.get('runtime-art-urls') as
     Map<string, string> | undefined;

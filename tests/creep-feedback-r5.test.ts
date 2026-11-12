@@ -15,7 +15,7 @@ it('melee hits, charges, defensive skills and stomps have no generic caster expl
     if (s && ['arc', 'dash', 'guard', 'counter', 'buff'].includes(s.mode))
       expect(creepBodyVisible(`creep_${s.mode}`, 'special', s)).toBe(false);
   }
-  for (const id of ['son_vien', 'wave_12', 'cu_nhan_sa_thach']) {
+  for (const id of ['wave_12', 'cu_nhan_sa_thach']) {
     const p = creepProfiles[id]!;
     const s = p.special!;
     expect(creepBodyVisible(`creep_${s.mode}`, 'special', s)).toBe(false);
@@ -29,6 +29,13 @@ it('real missiles, target fields and deliberate death/self-destruction explosion
   }
   const p = creepProfiles.truc_xa!;
   expect(creepBodyVisible('creep_projectile', 'basic', p.basic)).toBe(true);
+  expect(
+    creepBodyVisible(
+      'creep_projectile',
+      'special',
+      creepProfiles.son_vien!.special!,
+    ),
+  ).toBe(true);
   const death = creepProfiles.hell_dung_nham_linh!.death!;
   expect(creepBodyVisible('creep_area', 'death', death)).toBe(true);
 });
