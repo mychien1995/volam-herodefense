@@ -1,5 +1,5 @@
 import { m1Config, skillIcon, schools } from '@volam/game-data';
-import { automaticRanks } from '@volam/game-core';
+import { automaticRanks, duongMon } from '@volam/game-core';
 import type {
   Ability,
   BuildChange,
@@ -113,7 +113,7 @@ export class SkillMenu {
             .join('')}</section>`,
       )
       .join('')}</div>
-    <aside class="skill-character"><label for="skill-target-slot">Ô nhận kỹ năng</label><select id="skill-target-slot">${slots.map((s) => `<option>${s}</option>`).join('')}</select><h3>Chỉ số nhân vật</h3><dl id="character-stat-list"></dl><section class="skill-passive"><h4>${schoolId === 'thieu_lam' ? image('dich_can_kinh') : schoolId === 'vo_dang' ? image('thai_cuc_tam_phap') : schoolId === 'thien_son' ? image('bac_minh_than_cong') : ''}${school.passive}</h4><p id="innate-summary"></p></section><section class="skill-surplus"><h4>Điểm dư tự động</h4><p id="surplus-summary"></p></section><details><summary>Nguồn chỉ số</summary><div id="stat-sources"></div></details></aside></div><p class="skill-policy">Chọn ô → chọn kỹ năng → Áp dụng → Học hoặc tăng bậc. Bỏ kỹ năng hoàn điểm; hồi chiêu vẫn được giữ.</p></section>`;
+    <aside class="skill-character"><label for="skill-target-slot">Ô nhận kỹ năng</label><select id="skill-target-slot">${slots.map((s) => `<option>${s}</option>`).join('')}</select><h3>Chỉ số nhân vật</h3><dl id="character-stat-list"></dl><section class="skill-passive"><h4>${schoolId === 'thieu_lam' ? image('dich_can_kinh') : schoolId === 'vo_dang' ? image('thai_cuc_tam_phap') : schoolId === 'thien_son' ? image('bac_minh_than_cong') : schoolId === duongMon.school ? image(duongMon.passive) : ''}${school.passive}</h4><p id="innate-summary"></p></section><section class="skill-surplus"><h4>Điểm dư tự động</h4><p id="surplus-summary"></p></section><details><summary>Nguồn chỉ số</summary><div id="stat-sources"></div></details></aside></div><p class="skill-policy">Chọn ô → chọn kỹ năng → Áp dụng → Học hoặc tăng bậc. Bỏ kỹ năng hoàn điểm; hồi chiêu vẫn được giữ.</p></section>`;
     root
       .querySelector<HTMLSelectElement>('#skill-mode')!
       .addEventListener('change', (e) => {

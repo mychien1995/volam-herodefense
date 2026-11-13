@@ -1,3 +1,4 @@
+import { duongMon, duongMonFan } from './duong-mon-ids.js';
 import { opponent, opponents, targetRadius } from './opponents.js';
 import { conLuan, fiveSwordPoints } from './con-luan-ids.js';
 import { conLuanPlants, resetConLuanDashOnEntry } from './con-luan-combat.js';
@@ -16,7 +17,7 @@ import {
   hasStatus,
   movementSkillLocked,
 } from './status.js';
-import { rankedAbility, characterStats } from './progression.js';
+import { rankedAbility, characterStats, skillRank } from './progression.js';
 import { captureConfinement, confineMovement } from './confinement.js';
 import { dragonDiveTarget } from './dragon-dive.js';
 import { startFortune } from './fortune.js';
@@ -38,6 +39,7 @@ import type {
   ProjectileEffect,
   SimulationConfig,
   SkillAction,
+  StatusSpec,
   World,
 } from './types.js';
 
@@ -277,6 +279,9 @@ export function stepScatters(world: World, config: SimulationConfig): void {
         id: `area_${world.nextId++}`,
         ownerId: owner.id,
         abilityId: burst.abilityId,
+        ...(burst.abilityId === duongMon.flowers
+          ? { launch: { x: owner.x, y: owner.y, fx: owner.fx, fy: owner.fy } }
+          : {}),
         until: world.tick + duration,
         nextTick: world.tick + effect.delayTicks,
         effect: {
@@ -305,7 +310,11 @@ function openArea(
   center: Point = hero,
 ): void {
   world.areas ??= [];
-  if (!effect.passiveField && abilityId !== conLuan.detonate)
+  if (
+    !effect.passiveField &&
+    abilityId !== conLuan.detonate &&
+    abilityId !== duongMon.trap
+  )
     world.areas = world.areas.filter(
       (a) => a.ownerId !== hero.id || a.abilityId !== abilityId,
     );
@@ -316,7 +325,7 @@ function openArea(
     x: center.x,
     y: center.y,
     until: world.tick + effect.durationTicks,
-    nextTick: world.tick,
+    nextTick: world.tick + (abilityId === duongMon.trap ? 8 : 0),
     effect,
     rawDamage,
     critChance: crit.critChance,
@@ -719,6 +728,7 @@ export function perform(
   stage?: string,
 ): void {
   const original = ability.effect;
+  if (ability.id === duongMon.elements) return;
   if (original.mode === 'dash' && movementSkillLocked(hero, world.tick)) return;
   const dash = original.mode === 'projectile' ? original.comboDash : undefined;
   const empoweredDash =
@@ -789,13 +799,166 @@ export function perform(
     radius: 'range' in effect ? effect.range : 0,
     ...(stage ? { stage } : {}),
   });
+  if (ability.id === duongMon.flight) {
+    if (hasStatus(hero, 'duong_mon_flight', world.tick)) {
+      hero.statuses =
+        hero.statuses?.filter((status) => status.abilityId !== ability.id) ??
+        [];
+    } else {
+      hero.statuses =
+        hero.statuses?.filter((status) => status.kind !== 'slow') ?? [];
+      const durationTicks = Number.MAX_SAFE_INTEGER - world.tick;
+      applyStatus(
+        hero,
+        { kind: 'duong_mon_flight', durationTicks, magnitude: 1 },
+        hero.id,
+        ability.id,
+        world.tick,
+      );
+      if (effect.mode === 'buff') {
+        applyStatus(
+          hero,
+          {
+            kind: 'speed_buff',
+            durationTicks,
+            magnitude: effect.movementSpeed ?? 0,
+          },
+          hero.id,
+          ability.id,
+          world.tick,
+        );
+      }
+      for (const spec of ability.selfStatuses ?? [])
+        applyStatus(
+          hero,
+          { ...spec, durationTicks },
+          hero.id,
+          ability.id,
+          world.tick,
+        );
+    }
+    return;
+  }
   if (!(effect.mode === 'arc' && effect.windupTicks))
     for (const spec of ability.selfStatuses ?? [])
       applyStatus(hero, spec, hero.id, ability.id, world.tick);
   if (ability.allies)
     supportAllies(world, hero, ability.id, ability.allies, config);
   if (effect.mode === 'projectile') {
-    if (effect.windupTicks) {
+    if (ability.id === duongMon.amKhi) {
+      const rank = config.progression
+        ? skillRank(hero, duongMon.elements, config)
+        : 0;
+      for (const { stage: element, angle } of duongMonFan.slice(0, rank + 1)) {
+        const elemental: ProjectileEffect =
+          element === 'water'
+            ? effect
+            : {
+                ...effect,
+                damage: effect.damage * 0.55,
+                attackPowerScale: 0.3,
+                statuses:
+                  element === 'earth'
+                    ? [{ kind: 'stun', durationTicks: 15, magnitude: 1 }]
+                    : undefined,
+                burnDamage: element === 'wood' ? 5 : 0,
+                burnTicks: element === 'wood' ? 90 : 0,
+                splashRadius: element === 'fire' ? 39 : 0,
+              };
+        const fx = hero.fx * Math.cos(angle) - hero.fy * Math.sin(angle);
+        const fy = hero.fx * Math.sin(angle) + hero.fy * Math.cos(angle);
+        queueProjectiles(
+          world,
+          hero,
+          ability,
+          elemental,
+          config,
+          fx,
+          fy,
+          element,
+          {},
+          {
+            ...crit,
+            rawDamage: damageFor(
+              hero,
+              elemental.damage,
+              config,
+              world.tick,
+              elemental.attackPowerScale,
+            ),
+            critChance:
+              element === 'metal'
+                ? Math.min(1, crit.critChance + 0.25)
+                : crit.critChance,
+          },
+        );
+      }
+    } else if (ability.id === duongMon.storm) {
+      // Keep the original direction across all three authoritative volleys.
+      const batches = [
+        {
+          after: 9,
+          count: 9,
+          effect: {
+            ...effect,
+            statuses: [
+              { kind: 'slow', durationTicks: 36, magnitude: 0.3 },
+            ] as StatusSpec[],
+          },
+          stage: 'slow_knives',
+        },
+        ...Array.from({ length: 6 }, (_, i) => ({
+          after: 25 + 2 * i,
+          count: 15,
+          effect: {
+            ...effect,
+            damage: effect.damage * 0.12,
+            attackPowerScale: 0,
+            burnDamage: 4,
+            burnTicks: 90,
+          },
+          stage: 'poison_knives',
+        })),
+        {
+          after: 48,
+          count: 25,
+          effect: { ...effect, speed: 880, damage: effect.damage * 0.35 },
+          stage: 'water',
+        },
+      ];
+      for (const batch of batches) {
+        const from = world.shots.length;
+        queueProjectiles(
+          world,
+          hero,
+          ability,
+          { ...batch.effect, count: batch.count },
+          config,
+          hero.fx,
+          hero.fy,
+          batch.stage,
+        );
+        for (const shot of world.shots.slice(from)) shot.tick += batch.after;
+      }
+      hero.actionUntil = world.tick + 57;
+    } else if (ability.id === duongMon.flowers && effect.scatter) {
+      const scatter = effect.scatter;
+      (world.pendingScatters ??= []).push({
+        tick: world.tick + scatter.appearanceTicks,
+        ownerId: hero.id,
+        abilityId: ability.id,
+        effect: scatter,
+        rawDamage: damageFor(
+          hero,
+          scatter.damage,
+          config,
+          world.tick,
+          scatter.attackPowerScale,
+        ),
+        ...crit,
+      });
+      hero.actionUntil = world.tick + 20;
+    } else if (effect.windupTicks) {
       const duration = effect.windupTicks + (effect.recoveryTicks ?? 0) + 1;
       applyStatus(
         hero,
@@ -1130,6 +1293,18 @@ export function perform(
       ability.id,
       world.tick,
     );
+    if (ability.id === duongMon.evade)
+      applyStatus(
+        hero,
+        {
+          kind: 'duong_mon_evade',
+          durationTicks: duration + 2 * config.tickRate,
+          magnitude: 1,
+        },
+        hero.id,
+        ability.id,
+        world.tick,
+      );
     hero.actionUntil = world.tick + Math.max(12, duration);
     const inward = effect.mode === 'multi_hit' ? effect.inwardBurst : undefined;
     const damageEffect =
@@ -1174,6 +1349,20 @@ export function stepAreas(world: World, config: SimulationConfig): void {
   );
   for (const area of world.areas) {
     if (area.effect.passiveField) continue;
+    if (area.abilityId === duongMon.trap) {
+      if (world.tick < area.nextTick) continue;
+      const triggered = [...opponents(world, area.ownerId)].some(
+        (enemy) =>
+          enemy.hp > 0 &&
+          distance(area, enemy) <= 20 + targetRadius(world, enemy, config) &&
+          !config.collision.some(
+            (wall) => segmentRect(area, enemy, wall) !== undefined,
+          ),
+      );
+      if (!triggered) continue;
+      // Resolve once using the ordinary area pipeline, then remove the marker.
+      area.until = world.tick + 1;
+    }
     if (area.effect.followOwner) {
       const owner = world.heroes.get(area.ownerId)!;
       area.x = owner.x;
@@ -1412,6 +1601,20 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
               ) !== undefined
             );
           });
+        const beamRange =
+          ability.id === duongMon.laser
+            ? effect.range *
+              config.collision.reduce(
+                (fraction, wall) =>
+                  wall === world.statue?.collision
+                    ? fraction
+                    : Math.min(
+                        fraction,
+                        segmentRect(hero, end, wall, effect.radius) ?? 1,
+                      ),
+                1,
+              )
+            : effect.range;
         const released = empowered
           ? { ...effect, count: 1, laneOffsets: [0], radius }
           : effect;
@@ -1432,7 +1635,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           hero,
           action.abilityId,
           empowered ? 'empowered_release' : 'release',
-          action.effect.range,
+          beamRange,
           action,
         );
         action.remaining = 0;
@@ -1532,8 +1735,14 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
             world.tick,
           );
       }
-      if (action.remaining <= 0 || distance(old, hero) < 0.01)
+      if (action.remaining <= 0 || distance(old, hero) < 0.01) {
         action.until = world.tick;
+        const immunity = hero.statuses?.find(
+          (status) => status.kind === 'duong_mon_evade',
+        );
+        if (action.abilityId === duongMon.evade && immunity)
+          immunity.until = world.tick + 2 * config.tickRate;
+      }
     } else if (
       action.effect.mode === 'multi_hit' &&
       world.tick >= action.nextTick

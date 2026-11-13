@@ -60,4 +60,16 @@ export const schools = [
     starting: '1 điểm kỹ năng · Chọn và học võ công trong đấu trường.',
     portrait: 'con-luan',
   },
+  {
+    id: 'duong_mon',
+    name: 'Đường Môn',
+    element: 'Ngũ hành',
+    description: 'Môn phái sa mạc, sử dụng cơ quan và ám khí.',
+    style: 'Cơ Quan dùng cánh thép; Ám Khí dùng bẫy và phi tiêu.',
+    attributes: 'Thiên về hồi phục, cơ động và chí mạng.',
+    passive: 'Tứ tuyệt khí',
+    basics: 'Cơ Quan · Ám Khí',
+    starting: 'Chọn nhánh và học võ công trong đấu trường.',
+    portrait: 'duong-mon',
+  },
 ] as const;

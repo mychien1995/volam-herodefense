@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { duongMonHandles } from './duong-mon-art.js';
 import {
   hideReplacedLegacyVfx,
   trackLegacyVfx,
@@ -853,6 +854,7 @@ export class SkillVfx {
     const shots = new Set<string>();
     const showNewPalm = caiBangPalmEnabled();
     state?.projectiles.forEach((p, id) => {
+      if (duongMonHandles(p.abilityId)) return;
       if (voDangQuyenHandled(p.abilityId)) return;
       if (p.abilityId === fanId || p.abilityId === flurryId) return;
       if (p.abilityId === hangLongId && hangLongEnabled()) return;

@@ -24,6 +24,9 @@ const status = z.strictObject({
     'dash_guard',
     'channel',
     'con_luan_chaos',
+    'duong_mon_shell',
+    'duong_mon_evade',
+    'hp_regen_buff',
     'dash_lock',
   ]),
   blocksMovementSkills: z.boolean().optional(),
@@ -68,7 +71,7 @@ const projectile = z.strictObject({
   windupTicks: count.min(1).optional(),
   scatter: z
     .strictObject({
-      count: count.min(1).max(8),
+      count: count.min(1).max(20),
       appearanceTicks: count,
       delayTicks: count.min(1),
       innerRadius: positive,

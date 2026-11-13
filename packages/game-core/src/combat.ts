@@ -57,7 +57,10 @@ export function hurt(
   if (world.waveBossTest && world.heroes.has(target.id)) return false;
   if (
     target.hp <= 0 ||
-    (!snapshot?.unavoidableHpLoss && target.invulnerable) ||
+    (!snapshot?.unavoidableHpLoss &&
+      (target.invulnerable ||
+        hasStatus(target, 'duong_mon_shell', world.tick) ||
+        hasStatus(target, 'duong_mon_evade', world.tick))) ||
     raw <= 0
   )
     return false;

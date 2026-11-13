@@ -18,7 +18,11 @@ describe('renovated actions retain semantic phases and registrations', () => {
   it('keeps each caster identity through all 43 mixed-school skills and recovery', () => {
     const ids = new Set(raw.bodies.map((b) => b.id));
     const skillIds = Object.values(m1Config.progression!.skills)
-      .filter((skill) => skill.schoolId !== 'con_luan')
+      .filter((skill) =>
+        ['cai_bang', 'thien_son', 'vo_dang', 'thieu_lam'].includes(
+          skill.schoolId,
+        ),
+      )
       .map((skill) => skill.id);
     expect(skillIds).toHaveLength(43);
     for (const actor of Object.values(actors))

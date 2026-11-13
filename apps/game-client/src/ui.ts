@@ -18,6 +18,7 @@ import { SkillMenu } from './skill-menu.js';
 import { BossPartyUI, isBossDestination } from './boss-party-ui.js';
 import {
   conLuan,
+  duongMon,
   directDodgeChance,
   loiDai,
   type BuildChange,
@@ -86,7 +87,7 @@ export class GameUI {
       <main id="viewport" aria-label="Khung cảnh Võ Lâm">
         <div id="game" aria-label="Khung cảnh trò chơi"></div>
         <div id="hud" aria-label="Thông tin trong trận">
-          <section class="hero-hud framed"><div class="portrait" title="Chân dung Cái Bang"><span id="hero-level">1</span></div><div class="hero-bars"><div class="hero-name"><strong id="hero-name">Thiếu hiệp</strong><small id="school-name">Cái Bang</small></div>
+          <section class="hero-hud framed"><div class="portrait" title="Chân dung Cái Bang"><span id="hero-level">1</span></div><div class="hero-bars"><div class="hero-name"><strong id="hero-name">Thiếu hiệp</strong><span class="hero-school"><img id="duong-mon-innate-icon" hidden src="${skillIcon(duongMon.passive)}" width="16" height="16" alt="Tứ tuyệt khí" title="Tứ tuyệt khí · Tăng hồi nội lực, hồi máu và chí mạng theo cấp"><small id="school-name">Cái Bang</small></span></div>
             <div class="meter hp" role="meter" aria-label="Sinh lực" aria-valuemin="0"><i></i><span id="hp-text">—</span></div><div class="meter mp" role="meter" aria-label="Nội lực" aria-valuemin="0"><i></i><span id="mp-text">—</span></div><div class="meter xp" role="meter" aria-label="Kinh nghiệm" aria-valuemin="0"><i></i><span id="xp-text">—</span></div></div></section>
           <nav class="system-buttons" aria-label="Menu trò chơi"><button data-action="quit" title="Thoát" aria-label="Thoát">${icon('quit')}<span>Thoát</span></button><button data-menu="settings" title="Cài đặt" aria-label="Cài đặt">${icon('settings')}<span>Cài đặt</span></button><button data-menu="dungeons" title="Phó Bản" aria-label="Phó Bản">${icon('portal')}<span>Phó Bản</span></button><button data-menu="merchant" title="Thương Gia" aria-label="Thương Gia">${icon('shop')}<span>Thương Gia</span></button><button data-menu="pvp" title="Lôi Đài" aria-label="Lôi Đài">${icon('swords')}<span>Lôi Đài</span></button></nav>
           <span class="sr-only"><span id="hud-connection">Connected</span> · <span id="current-room" data-testid="room-id">—</span> · <span id="player-count" data-testid="player-count">0 / 6</span></span>
@@ -807,6 +808,8 @@ export class GameUI {
     element('#hero-name').textContent = hero.nickname;
     element('#school-name').textContent =
       schools.find((s) => s.id === hero.schoolId)?.name ?? 'Cái Bang';
+    element('#duong-mon-innate-icon').hidden =
+      hero.schoolId !== duongMon.school;
     element('#viewport').dataset['heroSchool'] = hero.schoolId;
     element('#viewport').style.setProperty(
       '--hero-idle',
@@ -820,13 +823,8 @@ export class GameUI {
         '")',
     );
     element('.portrait').title =
-      hero.schoolId === 'thieu_lam'
-        ? 'Chân dung Thiếu Lâm'
-        : hero.schoolId === 'vo_dang'
-          ? 'Chân dung Võ Đang'
-          : hero.schoolId === 'thien_son'
-            ? 'Chân dung Thiên Sơn'
-            : 'Chân dung Cái Bang';
+      'Chân dung ' +
+      (schools.find((s) => s.id === hero.schoolId)?.name ?? 'Cái Bang');
     const chuong = hero.basicId === 'cai_bang_chuong';
     element('#viewport').dataset['basicStyle'] = chuong ? 'chuong' : 'bong';
     element('#slot-a .pixel-icon').className =
@@ -1083,9 +1081,14 @@ export class GameUI {
       }
       if (
         key === 'a' &&
-        ['cai_bang', 'thien_son', 'vo_dang', 'thieu_lam', 'con_luan'].includes(
-          hero.schoolId,
-        )
+        [
+          'cai_bang',
+          'thien_son',
+          'vo_dang',
+          'thieu_lam',
+          'con_luan',
+          'duong_mon',
+        ].includes(hero.schoolId)
       ) {
         const art = slot.querySelector<HTMLElement>('.pixel-icon')!;
         art.className = 'pixel-icon skill-icon';
@@ -1103,25 +1106,29 @@ export class GameUI {
         `${recast ? 0 : Math.min(100, (remaining / (ability?.cooldownTicks || 1)) * 100)}%`;
       element(`#cooldown-${key}`).textContent =
         key === 'a'
-          ? hero.schoolId === 'con_luan'
-            ? hero.basicId === 'con_luan_kiem_ton'
-              ? 'Kiếm Tôn'
-              : 'Thiền Sư'
-            : hero.schoolId === 'thieu_lam'
-              ? hero.basicId === 'thieu_lam_quyen'
-                ? 'Quyền'
-                : 'Đao'
-              : hero.schoolId === 'vo_dang'
-                ? hero.basicId === 'vo_dang_quyen'
+          ? hero.schoolId === 'duong_mon'
+            ? hero.basicId === 'duong_mon_am_khi'
+              ? 'Băng Châm'
+              : 'Tụ Tiễn'
+            : hero.schoolId === 'con_luan'
+              ? hero.basicId === 'con_luan_kiem_ton'
+                ? 'Kiếm Tôn'
+                : 'Thiền Sư'
+              : hero.schoolId === 'thieu_lam'
+                ? hero.basicId === 'thieu_lam_quyen'
                   ? 'Quyền'
-                  : 'Kiếm'
-                : hero.schoolId === 'thien_son'
-                  ? hero.basicId === 'thien_son_phien'
-                    ? 'Phiến'
-                    : 'Đao'
-                  : hero.basicId === 'cai_bang_bong'
-                    ? 'Bổng'
-                    : 'Chưởng'
+                  : 'Đao'
+                : hero.schoolId === 'vo_dang'
+                  ? hero.basicId === 'vo_dang_quyen'
+                    ? 'Quyền'
+                    : 'Kiếm'
+                  : hero.schoolId === 'thien_son'
+                    ? hero.basicId === 'thien_son_phien'
+                      ? 'Phiến'
+                      : 'Đao'
+                    : hero.basicId === 'cai_bang_bong'
+                      ? 'Bổng'
+                      : 'Chưởng'
           : recast
             ? recall
               ? 'Thu quạt'

@@ -411,7 +411,8 @@
   background-image: var(--hero-idle);
 }
 
-#viewport[data-hero-school='con_luan'] :is(.portrait, .paper-hero) {
+#viewport[data-hero-school='con_luan'] :is(.portrait, .paper-hero),
+#viewport[data-hero-school='duong_mon'] :is(.portrait, .paper-hero) {
   background-image: var(--hero-idle);
   background-size: contain;
   background-position: center;
@@ -613,4 +614,13 @@
   border-radius: 3px;
   pointer-events: none;
   white-space: nowrap;
+}
+
+.hero-name .hero-school {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.hero-school img {
+  border-radius: 2px;
 }

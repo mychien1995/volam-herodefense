@@ -1,3 +1,9 @@
+## Đường Môn · Tuần sa và Dạ hành
+
+Đã duyệt Tuần sa 01, Dạ hành 06 và quạt R4 với băng châm Thủy ở giữa. Artwork VFX đã duyệt gồm laze trắng lam và 20 hoa đào thép nổ văng kim. Bản chơi thử dùng phòng M3D, bắt đầu Đường Môn ở cấp 6. [Bản tích hợp](docs/DUONG_MON_PLAYTEST.md).
+
+Mãn Thiên Hoa Vũ gây gấp đôi sát thương mỗi vụ nổ ở mọi bậc, tính cả phần tăng theo sức công.
+
 ## Côn Luân · Hắc Thiết
 
 Lượt chỉnh khống chế cho bản thử Hắc Thiết v04 tăng sát thương chiêu Q Kiếm Tôn 30%. Choáng bậc đầu của Q/E/R lần lượt là 2/1/2 giây, tăng 0,1 giây mỗi bậc. Trận Pháp Năm Kiếm kéo dài 7,5 giây, làm chậm 60% và khóa lướt trong vùng. Vòng E Thiền Sư giữ slow 35% trong 1,5 giây. W/R Thiền Sư choáng diện rộng 2 giây.

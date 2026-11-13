@@ -1,3 +1,9 @@
+## Đường Môn · Bản chơi thử
+
+Hai nhánh Cơ Quan (Tuần sa) và Ám Khí (Dạ hành) dùng năm ô Q/W/E/R/T. Tứ tuyệt khí tăng hồi nội lực, hồi máu và tỷ lệ chí mạng theo cấp. [Chiêu, trạng thái và thông số thử](docs/DUONG_MON_PLAYTEST.md).
+
+Mãn Thiên Hoa Vũ gây gấp đôi sát thương mỗi vụ nổ ở mọi bậc, tính cả phần tăng theo sức công.
+
 ## Côn Luân · Bản chơi thử
 
 Kiếm Tôn Q tăng 30% sát thương chiêu theo từng bậc, trước phần cộng từ chỉ số, và choáng 2 giây ở bậc 1. E choáng 1 giây ở lần trúng đầu trên mỗi mục tiêu, R choáng 2 giây ở bậc 1. Q/E/R thêm 0,1 giây choáng mỗi bậc. T làm chậm 60% và khóa lướt khi địch ở trong vùng. Thiền Sư E làm chậm 35% trong 1,5 giây, W và R choáng diện rộng 2 giây.

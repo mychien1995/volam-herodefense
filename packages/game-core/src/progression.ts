@@ -1,3 +1,5 @@
+import { dashCapacity } from './mobility.js';
+import { duongMon } from './duong-mon-ids.js';
 import type { Hero, SimulationConfig, World, Ability } from './types.js';
 import type {
   BuildChange,
@@ -333,6 +335,7 @@ export function initializeProgression(
   hero.skillIds = Array<string>(fixed ? 5 : 4).fill('');
   hero.skillCooldowns = hero.skillIds.map(() => 0);
   hero.basicId = branchId;
+  if (branchId === duongMon.amKhi) hero.dashCharges = dashCapacity(hero, config);
   if (mode === 'default') applyAutomaticProgression(hero, config);
   refreshCharacter(hero, config);
   hero.hp = hero.maxHp;

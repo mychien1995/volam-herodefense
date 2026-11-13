@@ -1,3 +1,4 @@
+import { duongMon } from './duong-mon-ids.js';
 import { canDuel, opponents, targetRadius } from './opponents.js';
 import {
   stepEquipmentCombat,
@@ -261,7 +262,8 @@ function runCommand(
   if (
     hero.namDeLocked ||
     world.vuong?.locked(hero.id) ||
-    hasStatus(hero, 'guard_counter', world.tick)
+    hasStatus(hero, 'guard_counter', world.tick) ||
+    hasStatus(hero, 'duong_mon_shell', world.tick)
   )
     return;
   if (command.kind === 'tam-lien-tram') {
@@ -357,7 +359,12 @@ function runCommand(
         withBasicEquipment(next.ability, hero, config),
         config,
         'attack',
-        dao ? `dao_swing_${Math.floor(world.random() * 3)}` : next.stage,
+        dao
+          ? `dao_swing_${Math.floor(world.random() * 3)}`
+          : ability.id === duongMon.coQuan &&
+              hasStatus(hero, 'duong_mon_flight', world.tick)
+            ? 'feather'
+            : next.stage,
       );
       if (next.stage && hero.basicChains?.[ability.id] === 0)
         hero.cooldown += ability.basicComboEndRecoveryTicks ?? 0;
@@ -372,6 +379,13 @@ function runCommand(
     )
       return;
     const ability = equippedAbility(hero, command.slot, config);
+    if (
+      ability?.id === duongMon.elements ||
+      (ability?.id === duongMon.flight &&
+        hero.mana < 1 &&
+        !hasStatus(hero, 'duong_mon_flight', world.tick))
+    )
+      return;
     if (
       ability?.effect.mode === 'fortune' &&
       hero.fortune?.id === ability.id &&
@@ -665,6 +679,25 @@ function advanceProjectile(
           world.tick,
         );
       confineMovement(world, enemy, before, config);
+      if (
+        shot.effect.burnDamage > 0 &&
+        (shot.abilityId === duongMon.amKhi || shot.abilityId === duongMon.storm)
+      ) {
+        if (hit && enemy.hp > 0) {
+          const existing = enemy.duongMonPoison;
+          enemy.duongMonPoison = {
+            sourceId: shot.ownerId,
+            abilityId: shot.abilityId,
+            damage: shot.effect.burnDamage,
+            next:
+              existing && existing.until > world.tick
+                ? existing.next
+                : world.tick + config.tickRate,
+            until: world.tick + shot.effect.burnTicks,
+          };
+        }
+        continue;
+      }
       const rival = world.duel && world.heroes.get(enemy.id);
       if (rival && rival.hp > 0 && shot.effect.burnDamage > 0)
         rival.duelBurn = {
@@ -827,7 +860,17 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       hero.moveY = 0;
     }
     const movement = namDeMovement(world, hero);
-    const guarding = hasStatus(hero, 'guard_counter', world.tick);
+    const guarding =
+      hasStatus(hero, 'guard_counter', world.tick) ||
+      hasStatus(hero, 'duong_mon_shell', world.tick);
+    if (hasStatus(hero, 'duong_mon_flight', world.tick)) {
+      hero.mana = Math.max(0, hero.mana - 15 / config.tickRate);
+      if (hero.mana === 0)
+        hero.statuses =
+          hero.statuses?.filter(
+            (status) => status.abilityId !== duongMon.flight,
+          ) ?? [];
+    }
     syncConLuanResources(hero, config, world.tick);
     const stats = characterStats(hero, config, world.tick).total;
     const runSpeedMultiplier = world.waveBossTest?.runSpeedMultiplier ?? 1;
@@ -888,6 +931,23 @@ export function stepWorld(world: World, config: SimulationConfig): void {
         (movement.x || movement.y)
           ? 'walk'
           : 'idle';
+  }
+  for (const actor of [...world.heroes.values(), ...world.creeps.values()]) {
+    const poison = actor.duongMonPoison;
+    if (!poison) continue;
+    if (actor.hp <= 0 || world.tick > poison.until) delete actor.duongMonPoison;
+    else if (world.tick >= poison.next) {
+      hurt(
+        world,
+        actor,
+        poison.sourceId,
+        poison.abilityId,
+        poison.damage,
+        config,
+        { critChance: 0, critMultiplier: 1, periodic: true },
+      );
+      poison.next += config.tickRate;
+    }
   }
   stepChu(world, config);
   stepNamDe(world, config);

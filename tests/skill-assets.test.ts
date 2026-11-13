@@ -10,7 +10,11 @@ describe('M3A skill asset contract', () => {
   it('maps all canonical skills to existing transparent atlas components and valid frames', () => {
     expect(Object.keys(skillVisualStages).sort()).toEqual(
       Object.values(m1Config.progression!.skills)
-        .filter((skill) => skill.schoolId !== 'con_luan')
+        .filter((skill) =>
+          ['cai_bang', 'thien_son', 'vo_dang', 'thieu_lam'].includes(
+            skill.schoolId,
+          ),
+        )
         .map((skill) => skill.id)
         .sort(),
     );

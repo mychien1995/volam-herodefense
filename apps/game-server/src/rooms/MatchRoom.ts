@@ -38,6 +38,8 @@ import {
 import {
   DungeonMatch,
   conLuan,
+  duongMon,
+  changeBuild,
   initializeProgression,
   skillRank,
   characterStats,
@@ -188,10 +190,32 @@ export class MatchRoom extends Room<{
       process.env['NODE_ENV'] !== 'production' &&
       process.env['VOLAM_DEV_CON_LUAN'] === '1' &&
       !this.legacySkills;
-    if (this.devLoiDai || conLuanTrial) {
+    const duongMonTrial =
+      hero.schoolId === duongMon.school &&
+      process.env['NODE_ENV'] !== 'production' &&
+      process.env['VOLAM_DEV_DUONG_MON'] === '1' &&
+      !this.legacySkills;
+    if (this.devLoiDai || conLuanTrial || duongMonTrial) {
       hero.level = this.devLoiDai ? loiDai.minLevel : 6;
       hero.xp = experienceAtLevel(hero.level, this.simulation.base);
       hero.skillPoints = hero.level;
+      if (duongMonTrial) {
+        for (const slot of [
+          0,
+          1,
+          2,
+          3,
+          4,
+          hero.basicId === duongMon.amKhi ? 3 : 2,
+        ])
+          changeBuild(
+            this.world,
+            hero,
+            this.simulation.base,
+            hero.progression!.revision,
+            { action: 'upgrade-slot', slot },
+          );
+      }
       refreshCharacter(hero, this.simulation.base);
       hero.hp = hero.maxHp;
       hero.mana = hero.maxMana;
@@ -765,6 +789,20 @@ export class MatchRoom extends Room<{
       process.env['VOLAM_DEV_PRACTICE_CREEPS'] === '1'
     ))
       this.world.creeps.clear();
+    else if (process.env['VOLAM_DEV_DUONG_MON'] === '1') {
+      for (const creep of this.world.creeps.values()) {
+        creep.archetypeId = 'duong_mon_practice_dummy';
+        creep.stats = {
+          ...this.simulation.base.creep,
+          damage: 0,
+          speed: 0,
+          xp: 0,
+          gold: 0,
+        };
+        creep.hp = creep.maxHp = 1200;
+        creep.neverRespawn = true;
+      }
+    }
     this.state.devSkillLoadout = this.devSkillLoadout;
     this.state.requiresBranch = !this.legacySkills && !this.legacyProgression;
     this.metadata = { phase: this.state.phase };
@@ -833,7 +871,10 @@ export class MatchRoom extends Room<{
             afterNextPatch: true,
             except: this.clients.filter(
               (client) =>
-                this.simulation.zoneOf(client.sessionId)?.id !== zoneId,
+                this.simulation.zoneOf(client.sessionId)?.id !== zoneId ||
+                (event.abilityId === duongMon.trap &&
+                  event.kind === 'cast' &&
+                  client.sessionId !== event.sourceId),
             ),
           },
         );
@@ -1554,9 +1595,14 @@ export class MatchRoom extends Room<{
         ...this.state.areas.values(),
         ...this.state.bossEffects.values(),
       ]) {
-        if (entity.zoneId === zoneId && !view.has(entity)) view.add(entity);
-        else if (entity.zoneId !== zoneId && view.has(entity))
-          view.remove(entity);
+        const visible =
+          entity.zoneId === zoneId &&
+          (!('abilityId' in entity) ||
+            entity.abilityId !== duongMon.trap ||
+            !('ownerId' in entity) ||
+            entity.ownerId === client.sessionId);
+        if (visible && !view.has(entity)) view.add(entity);
+        else if (!visible && view.has(entity)) view.remove(entity);
       }
       for (const dungeon of this.state.dungeons.values()) {
         const visible =

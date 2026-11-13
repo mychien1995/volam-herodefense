@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 41;
+export const PROTOCOL_VERSION = 42;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -153,6 +153,8 @@ export const inputSchema = z.discriminatedUnion('kind', [
       'thieu_lam_dao',
       'con_luan_thien_su',
       'con_luan_kiem_ton',
+      'duong_mon_co_quan',
+      'duong_mon_am_khi',
     ]),
   }),
 ]);
@@ -671,6 +673,7 @@ export const schoolIdSchema = z.enum([
   'vo_dang',
   'thieu_lam',
   'con_luan',
+  'duong_mon',
 ]);
 export const lobbyActionSchema = z.discriminatedUnion('action', [
   z.strictObject({ action: z.literal('start') }),

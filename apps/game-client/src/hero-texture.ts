@@ -18,7 +18,13 @@ export function heroTexture(
   | 'hero_thieu_lam'
   | 'hero_thieu_lam_dao'
   | 'hero_con_luan_thien_su'
-  | 'hero_con_luan_kiem_ton' {
+  | 'hero_con_luan_kiem_ton'
+  | 'duong-mon-tuan-sa-walk'
+  | 'duong-mon-da-hanh-walk' {
+  if (schoolId === 'duong_mon' || basicId?.startsWith('duong_mon_'))
+    return basicId === 'duong_mon_am_khi'
+      ? 'duong-mon-da-hanh-walk'
+      : 'duong-mon-tuan-sa-walk';
   if (schoolId === 'con_luan' || basicId?.startsWith('con_luan_'))
     return basicId === 'con_luan_kiem_ton'
       ? 'hero_con_luan_kiem_ton'

@@ -24,6 +24,13 @@ import {
   preloadConLuanArt,
 } from './con-luan-art.js';
 import Phaser from 'phaser';
+import {
+  DuongMonArt,
+  duongMonBody,
+  duongMonDummy,
+  duongMonPivot,
+  preloadDuongMon,
+} from './duong-mon-art.js';
 import { previewCreepArt } from './creep-preview-art.js';
 import { applyArenaPalette, applyNameLabel } from './visual-presentation.js';
 import { m3dBambooPose } from './m3d-feedback.js';
@@ -340,12 +347,18 @@ export class ArenaScene extends Phaser.Scene {
     preloadShaolinDaoArt(this);
     preloadM3dHitArt(this);
     preloadConLuanArt(this);
+    preloadDuongMon(this);
   }
   private conLuanArt?: ConLuanArt;
+  private duongMonArt?: DuongMonArt;
   create(): void {
     if (this.bootArtFailed) return;
     this.shaolinDao.register();
     this.conLuanArt = new ConLuanArt(this);
+    this.duongMonArt = new DuongMonArt(this);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
+      this.duongMonArt?.clear(),
+    );
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
       this.conLuanArt?.clear(),
     );
@@ -626,6 +639,7 @@ export class ArenaScene extends Phaser.Scene {
     this.creepEffects?.clear();
     this.time.removeAllEvents();
     this.conLuanArt?.clear();
+    this.duongMonArt?.clear();
     for (const object of [...this.children.list]) object.destroy();
     this.chu?.clear();
     this.namDe?.clear();
@@ -679,13 +693,23 @@ export class ArenaScene extends Phaser.Scene {
         y,
         texture,
         art?.animations.find((a) => a.state === 'idle')?.frames[0] ??
-          (texture.startsWith('desert_') ? 'idle_down_0.png' : 'idle_down_0'),
+          (texture === duongMonDummy
+            ? '__BASE'
+            : duongMonBody(texture)
+              ? 'idle-down'
+              : texture.startsWith('desert_')
+                ? 'idle_down_0.png'
+                : 'idle_down_0'),
       )
       .setOrigin(
         ...(art?.footPivot ??
-          (isConLuanBody(texture)
-            ? conLuanPivot
-            : actorFootPivot(this, texture))),
+          (texture === duongMonDummy
+            ? [0.5, 0.96]
+            : duongMonBody(texture)
+              ? duongMonPivot
+              : isConLuanBody(texture)
+                ? conLuanPivot
+                : actorFootPivot(this, texture))),
       )
       .setName('actor:' + id);
     const label = this.add
@@ -872,12 +896,17 @@ export class ArenaScene extends Phaser.Scene {
                 actor.fx,
                 actor.fy,
               ));
+      const trainingDummy =
+        enemy && actor.archetypeId === 'duong_mon_practice_dummy';
       const texture =
         cast?.texture ??
         (enemy
-          ? (art?.id ?? creepPlaceholderTexture)
+          ? (art?.id ??
+            (trainingDummy ? duongMonDummy : creepPlaceholderTexture))
           : heroTexture(actor.basicId, actor.schoolId));
       const conLuanBody = !enemy && isConLuanBody(texture);
+      const duongMonActor = !enemy && duongMonBody(texture);
+      const highResBody = conLuanBody || duongMonActor;
       const view =
         this.actors.get(id) ??
         this.createActor(
@@ -919,7 +948,7 @@ export class ArenaScene extends Phaser.Scene {
       const weight = blinkAlpha < 1 ? 1 : Math.min(1, delta / 45);
       // Preserve interpolation precision; feeding rounded pixels back into lerp
       // otherwise leaves a stationary actor permanently one pixel off its feet.
-      if (conLuanBody) {
+      if (highResBody) {
         const target = predicted ?? actor;
         const snap =
           Math.hypot(view.smoothX - target.x, view.smoothY - target.y) > 80;
@@ -932,8 +961,8 @@ export class ArenaScene extends Phaser.Scene {
         view.smoothY =
           predicted?.y ?? Phaser.Math.Linear(view.smoothY, actor.y, weight);
       }
-      const x = conLuanBody ? view.smoothX : Math.round(view.smoothX);
-      const y = conLuanBody ? view.smoothY : Math.round(view.smoothY);
+      const x = highResBody ? view.smoothX : Math.round(view.smoothX);
+      const y = highResBody ? view.smoothY : Math.round(view.smoothY);
       view.sprite.setPosition(x, y);
       if (view.sprite.depth !== y) view.sprite.setDepth(y);
       const renderFx = predicted?.fx ?? actor.fx;
@@ -1021,7 +1050,18 @@ export class ArenaScene extends Phaser.Scene {
       const forestBody =
         !previewArt && forestCombatBody(this, texture, bodyPose);
       const renderTexture = forestBody || texture;
-      if (conLuanBody) {
+      if (trainingDummy) {
+        view.sprite.setScale(0.62).setAlpha(actor.hp > 0 ? 1 : 0.3);
+      } else if (duongMonActor) {
+        this.duongMonArt?.body(
+          view.sprite,
+          actor,
+          states,
+          heroReaction ?? pose.state,
+          pose.direction,
+          tick,
+        );
+      } else if (conLuanBody) {
         this.conLuanArt?.body(
           id,
           view.sprite,
@@ -1157,7 +1197,7 @@ export class ArenaScene extends Phaser.Scene {
       view.label.setPosition(view.sprite.x, view.sprite.y + 5);
       const labelDepth = view.sprite.y + 0.2;
       if (view.label.depth !== labelDepth) view.label.setDepth(labelDepth);
-      view.shadow.setPosition(view.sprite.x, view.sprite.y - 3);
+      view.shadow.setPosition(view.sprite.x, y - 3);
       if (art)
         view.shadow.setDisplaySize(
           Math.max(18, Math.round(art.bodyHeight * 0.6)),
@@ -1195,7 +1235,7 @@ export class ArenaScene extends Phaser.Scene {
         id === this.sessionId &&
         this.followed !== id
       ) {
-        this.cameras.main.startFollow(view.sprite, !conLuanBody, 1, 1, 0, 48);
+        this.cameras.main.startFollow(view.sprite, !highResBody, 1, 1, 0, 48);
         this.followed = id;
       }
     };
@@ -1273,6 +1313,7 @@ export class ArenaScene extends Phaser.Scene {
     camera.setFollowOffset(0, this.followOffsetY);
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
     this.conLuanArt?.sync(state, this.zoneId);
+    this.duongMonArt?.sync(state, this.zoneId);
     this.coMoEffects?.sync(state, this.zoneId);
     this.creepEffects?.sync(
       state,
@@ -1502,6 +1543,7 @@ export class ArenaScene extends Phaser.Scene {
       });
       if (this.impacts.length > 60) this.impacts.shift();
     } else if (
+      !this.duongMonArt?.event(event) &&
       !this.conLuanArt?.event(event, this.actors.get(event.sourceId)?.sprite) &&
       !this.shaolinDao.event(
         event,
@@ -1537,6 +1579,7 @@ export class ArenaScene extends Phaser.Scene {
   }
   reviewClearTransientEffects(): void {
     this.conLuanArt?.clear();
+    this.duongMonArt?.clear();
     this.hitArt.clear();
     this.shaolinDao.clear();
     this.vfx?.clear();
@@ -1621,6 +1664,7 @@ export class ArenaScene extends Phaser.Scene {
       hitArt: this.hitArt.inspect(),
       skills: this.vfx?.inspect(),
       conLuan: this.conLuanArt?.inspect(),
+      duongMon: this.duongMonArt?.inspect(),
       shaolinDao: {
         effects: this.shaolinDao.inspect(),
         lotusRings: this.children.list

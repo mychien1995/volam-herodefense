@@ -344,7 +344,9 @@ describe('M3B deterministic progression and builds', () => {
     (id) => {
       const d = m1Config.progression!.skills[id]!;
       expect(d.ranks[0]).toEqual(m1Config.skillCatalogue![id]);
-      expect(d.ranks.at(-1)).not.toEqual(d.ranks[0]);
+      // This passive progresses the basic's projectile count through the equipped rank.
+      if (id !== 'ngu_hanh_cach_the_thuat')
+        expect(d.ranks.at(-1)).not.toEqual(d.ranks[0]);
       if (id === 'cam_long_cong')
         for (const a of d.ranks) {
           expect(a.effect.mode === 'arc' && a.effect.damage).toBe(0);

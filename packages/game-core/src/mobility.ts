@@ -1,3 +1,4 @@
+import { duongMon } from './duong-mon-ids.js';
 import { inQuicksand } from './creep-abilities.js';
 import { blocked, direction, segmentRect, insideEllipse } from './geometry.js';
 import { emit } from './combat.js';
@@ -5,6 +6,11 @@ import { hasStatus, movementSkillLocked } from './status.js';
 import { perform } from './skills.js';
 import { confineMovement } from './confinement.js';
 import type { Hero, SimulationConfig, World } from './types.js';
+
+export function dashCapacity(hero: Hero, config: SimulationConfig): number {
+  const capacity = config.mobility?.charges ?? 0;
+  return capacity && hero.basicId === duongMon.amKhi ? capacity + 2 : capacity;
+}
 
 /** Recharge debt is sequential and survives travel, death and build edits. */
 export function rechargeDash(
@@ -14,14 +20,15 @@ export function rechargeDash(
 ): void {
   const tuning = config.mobility;
   if (!tuning) return;
-  hero.dashCharges ??= tuning.charges;
+  const capacity = dashCapacity(hero, config);
+  hero.dashCharges ??= capacity;
   while (
-    hero.dashCharges < tuning.charges &&
+    hero.dashCharges < capacity &&
     hero.dashRechargeAt !== undefined &&
     tick >= hero.dashRechargeAt
   ) {
     hero.dashCharges++;
-    if (hero.dashCharges < tuning.charges)
+    if (hero.dashCharges < capacity)
       hero.dashRechargeAt += tuning.rechargeTicks;
     else delete hero.dashRechargeAt;
   }

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đường Môn · Sân tập hiệu ứng v2</title>
+  <link rel="stylesheet" href="preview.css">
+  <script src="frames.js" defer></script>
+  <script src="co-quan-effects.js" defer></script>
+  <script src="preview.js" defer></script>
+</head>
+<body>
+  <main id="stage" aria-label="Sân tập Đường Môn">
+    <canvas id="world" width="1280" height="720" aria-label="Sân tập sa mạc và sprite Đường Môn"></canvas>
+    <div class="top">
+      <div class="identity">
+        <p>Đường Môn</p>
+        <h1>Sân tập hiệu ứng</h1>
+      </div>
+      <div class="branches" role="group" aria-label="Chọn hệ phái">
+        <button type="button" data-branch="tuan" aria-pressed="true"><strong>Tuần sa</strong><small>Cơ Quan</small></button>
+        <button type="button" data-branch="da" aria-pressed="false"><strong>Dạ hành</strong><small>Ám Khí</small></button>
+      </div>
+      <div class="options">
+        <button type="button" id="speed" aria-label="Đổi tốc độ trình diễn" aria-pressed="false">1×</button>
+        <button type="button" id="reset">Về vị trí</button>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="readout">
+        <div id="rank" hidden role="group" aria-label="Cấp Ngũ hành cách thể thuật">
+          <span>Cấp R</span>
+          <button type="button" data-rank="0" aria-pressed="false">0</button>
+          <button type="button" data-rank="1" aria-pressed="false">1</button>
+          <button type="button" data-rank="2" aria-pressed="false">2</button>
+          <button type="button" data-rank="3" aria-pressed="false">3</button>
+          <button type="button" data-rank="4" aria-pressed="true">4</button>
+        </div>
+        <p id="phase" role="status">Đang tải hình ảnh…</p>
+      </div>
+      <div id="actions" role="group" aria-label="Kỹ năng"></div>
+      <p class="controls"><span>↑ ↓ ← → Di chuyển</span><span>Chọn chiêu bằng phím hoặc chuột</span></p>
+    </div>
+  </main>
+</body>
+</html>

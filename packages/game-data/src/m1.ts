@@ -1,3 +1,4 @@
+import { addDuongMonProgression, duongMonBasics, duongMonSkills } from './duong-mon.js';
 import { bossBanterDefinition } from './boss-banter.js';
 import {
   thieuLamBasics,
@@ -253,6 +254,7 @@ export const m1Config: SimulationConfig = simulationConfigSchema.parse({
     ...voDangBasics,
     ...thieuLamBasics,
     ...conLuanBasics,
+    ...duongMonBasics,
   },
   skillCatalogue: Object.fromEntries(
     [
@@ -262,6 +264,7 @@ export const m1Config: SimulationConfig = simulationConfigSchema.parse({
       ...voDangSkills,
       ...thieuLamSkills,
       ...conLuanSkills,
+      ...duongMonSkills,
       ...conLuanAuxiliary,
     ].map((s) => [s.id, s]),
   ),
@@ -278,6 +281,7 @@ addThienSonProgression(m1Config.progression);
 addVoDangProgression(m1Config.progression);
 addThieuLamProgression(m1Config.progression);
 addConLuanProgression(m1Config.progression);
+addDuongMonProgression(m1Config.progression);
 m1Config.progression.defaultBranches = defaultBranches;
 m1Config.progression.fixedBranches = fixedBranches;
 progressionSchema.parse(m1Config.progression);

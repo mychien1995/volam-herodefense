@@ -1,3 +1,4 @@
+import { dashCapacity } from './mobility.js';
 import { cancelOwnedEffects } from './status.js';
 import { createWorld, removeHero, stepWorld } from './simulation.js';
 import { refreshCharacter } from './progression.js';
@@ -67,11 +68,12 @@ function reset(hero: Hero, config: SimulationConfig, tick: number): void {
   hero.mana = hero.maxMana;
   hero.statuses = [];
   delete hero.duelBurn;
+  delete hero.duongMonPoison;
   hero.cooldown = tick;
   hero.skillCooldowns = hero.skillCooldowns.map(() => tick);
   hero.abilityCooldowns = {};
   hero.chargeCooldowns = {};
-  hero.dashCharges = config.mobility?.charges ?? 0;
+  hero.dashCharges = dashCapacity(hero, config);
   delete hero.dashRechargeAt;
   delete hero.basicChainDeadline;
   delete hero.lastBasicTick;
@@ -150,6 +152,7 @@ export class LoiDai {
       if (hero && hero.hp > 0) {
         hero.statuses = [];
         delete hero.duelBurn;
+        delete hero.duongMonPoison;
       }
     }
   }

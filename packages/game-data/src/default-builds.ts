@@ -1,9 +1,12 @@
+import { duongMon } from '@volam/game-core';
+import { duongMonBranches } from './duong-mon.js';
 import type { DefaultBranch, FixedBranch } from '@volam/game-core';
 import { conLuan } from '@volam/game-core';
 import { conLuanBranches } from './con-luan.js';
 /** Canonical catalogue order, four regular actives per branch. Thiếu Lâm Quyền starts with combo A. */
 export const defaultBranches: Record<string, DefaultBranch> = {
   ...conLuanBranches,
+  ...duongMonBranches,
   cai_bang_bong: {
     schoolId: 'cai_bang',
     style: 'Bổng',
@@ -87,6 +90,8 @@ export const defaultBranches: Record<string, DefaultBranch> = {
 };
 
 const ultimates: Record<string, string> = {
+  [duongMon.coQuan]: duongMon.flowers,
+  [duongMon.amKhi]: duongMon.storm,
   [conLuan.monk]: conLuan.chaos,
   [conLuan.sword]: conLuan.star,
   cai_bang_bong: 'thien_ha_vo_cau',

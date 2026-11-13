@@ -83,12 +83,14 @@ function fixture(seed?: number) {
 describe('M3C3 Thiếu Lâm shared combat', () => {
   it('retains the original 43 actives, eight basics and canonical 8/5 Thiếu Lâm styles', () => {
     expect(
-      Object.values(m1Config.progression!.skills).filter(
-        (s) => s.schoolId !== 'con_luan',
+      Object.values(m1Config.progression!.skills).filter((s) =>
+        ['cai_bang', 'thien_son', 'vo_dang', 'thieu_lam'].includes(s.schoolId),
       ),
     ).toHaveLength(43);
     expect(
-      Object.keys(m1Config.basics).filter((id) => !id.startsWith('con_luan_')),
+      Object.keys(m1Config.basics).filter((id) =>
+        /^(cai_bang|thien_son|vo_dang|thieu_lam)_/.test(id),
+      ),
     ).toHaveLength(8);
     expect(thieuLamSkills).toHaveLength(13);
     const d = Object.values(m1Config.progression!.skills).filter(

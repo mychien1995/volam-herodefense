@@ -45,7 +45,9 @@ export function applyStatus(
     ('bossEncounter' in actor &&
       actor.bossEncounter &&
       ['stun', 'silence', 'disarm'].includes(spec.kind)) ||
-    (spec.kind === 'stun' && hasStatus(actor, 'interrupt_resist', tick))
+    (spec.kind === 'stun' && hasStatus(actor, 'interrupt_resist', tick)) ||
+    ((spec.kind === 'stun' || spec.kind === 'slow') &&
+      hasStatus(actor, 'duong_mon_flight', tick))
   )
     return;
   if (

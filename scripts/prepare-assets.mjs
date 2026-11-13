@@ -236,6 +236,34 @@ for (const [pack, routes] of Object.entries(actionRoutes))
   );
 mkdirSync(dest, { recursive: true });
 copyTreeIfChanged(new URL('assets/exports/', root), dest);
+const duongMonReview = new URL('assets/reviews/duong-mon-vfx-v2/', root);
+const duongMonRuntime = new URL('duong-mon/', dest);
+for (const name of [
+  'tuan-sa-walk',
+  'da-hanh-walk',
+  'tuan-sa-action',
+  'da-hanh-action',
+  'tuan-sa-vertical',
+  'da-hanh-vertical',
+  'vfx',
+  'co-quan-effects',
+]) {
+  for (const suffix of ['png', 'json']) {
+    const filename = name + '.' + suffix;
+    copyIfChanged(
+      new URL('art/' + filename, duongMonReview),
+      new URL(filename, duongMonRuntime),
+    );
+  }
+}
+copyTreeIfChanged(
+  new URL('icons/', duongMonReview),
+  new URL('icons/', duongMonRuntime),
+);
+copyIfChanged(
+  new URL('art/dummy.png', duongMonReview),
+  new URL('dummy.png', duongMonRuntime),
+);
 copyIfChanged(
   new URL('assets/manifest.json', root),
   new URL('manifest.json', dest),

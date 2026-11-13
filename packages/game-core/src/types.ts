@@ -167,6 +167,9 @@ export type StatusKind =
   | 'dash_guard'
   | 'dash_lock'
   | 'con_luan_ranged'
+  | 'duong_mon_flight'
+  | 'duong_mon_shell'
+  | 'duong_mon_evade'
   | 'con_luan_chaos'
   | 'channel';
 export interface StatusSpec {
@@ -430,6 +433,13 @@ export type Command =
   | { kind: 'select-basic'; id: string };
 export interface Actor extends Point {
   invulnerable?: boolean;
+  duongMonPoison?: {
+    sourceId: string;
+    abilityId: string;
+    damage: number;
+    next: number;
+    until: number;
+  };
   namDeLocked?: boolean;
   controlResistance?: number;
   id: string;
