@@ -339,7 +339,7 @@ describe('M3B deterministic progression and builds', () => {
     ).toBe(8);
     expect(characterStats(f.hero, f.config).total.critChance).toBe(0.75);
   });
-  it.each(Object.keys(m1Config.skillCatalogue!))(
+  it.each(Object.keys(m1Config.progression!.skills))(
     'preserves M3A rank1 and provides mechanic-specific rank improvements for %s',
     (id) => {
       const d = m1Config.progression!.skills[id]!;

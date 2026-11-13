@@ -1,4 +1,6 @@
 import { opponent, opponents, targetRadius } from './opponents.js';
+import { conLuan, fiveSwordPoints } from './con-luan-ids.js';
+import { conLuanPlants, resetConLuanDashOnEntry } from './con-luan-combat.js';
 import {
   blocked,
   direction,
@@ -8,7 +10,12 @@ import {
   segmentRect,
 } from './geometry.js';
 import { emit, hurt, offensiveStats } from './combat.js';
-import { applyStatus, displace, hasStatus } from './status.js';
+import {
+  applyStatus,
+  displace,
+  hasStatus,
+  movementSkillLocked,
+} from './status.js';
 import { rankedAbility, characterStats } from './progression.js';
 import { captureConfinement, confineMovement } from './confinement.js';
 import { dragonDiveTarget } from './dragon-dive.js';
@@ -27,6 +34,7 @@ import type {
   Creep,
   Hero,
   MultiHitEffect,
+  Point,
   ProjectileEffect,
   SimulationConfig,
   SkillAction,
@@ -294,16 +302,19 @@ function openArea(
   config: SimulationConfig,
   rawDamage: number,
   crit: { critChance: number; critMultiplier: number },
+  center: Point = hero,
 ): void {
-  world.areas = (world.areas ?? []).filter(
-    (a) => a.ownerId !== hero.id || a.abilityId !== abilityId,
-  );
+  world.areas ??= [];
+  if (!effect.passiveField && abilityId !== conLuan.detonate)
+    world.areas = world.areas.filter(
+      (a) => a.ownerId !== hero.id || a.abilityId !== abilityId,
+    );
   world.areas.push({
     id: `area_${world.nextId++}`,
     ownerId: hero.id,
     abilityId,
-    x: hero.x,
-    y: hero.y,
+    x: center.x,
+    y: center.y,
     until: world.tick + effect.durationTicks,
     nextTick: world.tick,
     effect,
@@ -312,6 +323,35 @@ function openArea(
     critMultiplier: crit.critMultiplier,
   });
   captureConfinement(world, config);
+}
+
+function castAreaCenter(
+  world: World,
+  hero: Hero,
+  effect: AreaEffect,
+  config: SimulationConfig,
+): Point {
+  if (effect.nearestRange !== undefined) {
+    const target = [...opponents(world, hero.id)]
+      .filter(
+        (enemy) =>
+          distance(hero, enemy) <= effect.nearestRange! &&
+          clearLine(world, hero, enemy, config),
+      )
+      .sort(
+        (a, b) =>
+          distance(hero, a) - distance(hero, b) || a.id.localeCompare(b.id),
+      )[0];
+    if (target) return { x: target.x, y: target.y };
+    return {
+      x: hero.x + hero.fx * effect.nearestRange,
+      y: hero.y + hero.fy * effect.nearestRange,
+    };
+  }
+  return {
+    x: hero.x + hero.fx * (effect.forwardOffset ?? 0),
+    y: hero.y + hero.fy * (effect.forwardOffset ?? 0),
+  };
 }
 
 export function skyfallAiming(world: World, ownerId: string): boolean {
@@ -635,8 +675,8 @@ function strikeArc(
       id: `area_${world.nextId++}`,
       ownerId: hero.id,
       abilityId: ability.id,
-      x: hero.x,
-      y: hero.y,
+      x: hero.x + heading.fx * (field.forwardOffset ?? 0),
+      y: hero.y + heading.fy * (field.forwardOffset ?? 0),
       until: world.tick + field.durationTicks,
       nextTick: world.tick,
       effect: field,
@@ -679,11 +719,11 @@ export function perform(
   stage?: string,
 ): void {
   const original = ability.effect;
-  if (original.mode === 'dash' && hasStatus(hero, 'root', world.tick)) return;
+  if (original.mode === 'dash' && movementSkillLocked(hero, world.tick)) return;
   const dash = original.mode === 'projectile' ? original.comboDash : undefined;
   const empoweredDash =
     dash &&
-    !hasStatus(hero, 'root', world.tick) &&
+    !movementSkillLocked(hero, world.tick) &&
     (world.combos ?? []).some((step) => {
       if (
         step.sourceId !== hero.id ||
@@ -920,6 +960,29 @@ export function perform(
     startFortune(world, hero, ability.id, effect);
   } else if (effect.mode === 'area') {
     const rawDamage = damageFor(hero, effect.damage, config, world.tick);
+    const customCenter =
+      effect.nearestRange !== undefined ||
+      effect.forwardOffset !== undefined ||
+      effect.pentagon;
+    const center = customCenter
+      ? castAreaCenter(world, hero, effect, config)
+      : undefined;
+    if (ability.id === conLuan.detonate) {
+      const markers = conLuanPlants(world, hero.id);
+      world.areas = world.areas!.filter((marker) => !markers.includes(marker));
+      for (const marker of markers)
+        openArea(
+          world,
+          hero,
+          ability.id,
+          effect,
+          config,
+          rawDamage,
+          crit,
+          marker,
+        );
+      return;
+    }
     if (effect.skyfall) {
       openSkyfall(world, hero, ability.id, effect, config, rawDamage, crit);
     } else if (effect.windupTicks) {
@@ -938,6 +1001,7 @@ export function perform(
         abilityId: ability.id,
         startedAt: world.tick,
         kind: 'area',
+        ...(center ? { areaCenter: center } : {}),
         until: world.tick + duration,
         nextTick: world.tick + effect.windupTicks,
         remaining: 1,
@@ -949,7 +1013,17 @@ export function perform(
         finisherDamage: 0,
         ...crit,
       });
-    } else openArea(world, hero, ability.id, effect, config, rawDamage, crit);
+    } else
+      openArea(
+        world,
+        hero,
+        ability.id,
+        effect,
+        config,
+        rawDamage,
+        crit,
+        center,
+      );
   } else if (effect.mode === 'buff') {
     if (effect.burnAura) {
       world.areas ??= [];
@@ -1021,6 +1095,11 @@ export function perform(
         world.tick,
       );
   } else {
+    if (ability.id === conLuan.plant) {
+      const plant = config.skillCatalogue?.[ability.id]?.effect;
+      if (plant?.mode === 'area')
+        openArea(world, hero, ability.id, plant, config, 0, crit);
+    }
     if (effect.mode === 'dash' && effect.counter)
       applyStatus(
         hero,
@@ -1094,15 +1173,29 @@ export function stepAreas(world: World, config: SimulationConfig): void {
     (a) => a.until > world.tick && (world.heroes.get(a.ownerId)?.hp ?? 0) > 0,
   );
   for (const area of world.areas) {
+    if (area.effect.passiveField) continue;
     if (area.effect.followOwner) {
       const owner = world.heroes.get(area.ownerId)!;
       area.x = owner.x;
       area.y = owner.y;
     }
-    if (world.tick < area.nextTick) continue;
-    area.nextTick += area.effect.tickInterval;
+    const pulse = world.tick >= area.nextTick;
+    if (!pulse && !area.effect.occupantStatuses) continue;
+    if (pulse) area.nextTick += area.effect.tickInterval;
+    const elapsed = world.tick - (area.until - area.effect.durationTicks);
+    const progress = area.effect.expandTicks
+      ? Math.min(1, (elapsed + 1) / area.effect.expandTicks)
+      : 1;
+    const vertices = area.effect.pentagon
+      ? fiveSwordPoints(
+          area.x,
+          area.y,
+          area.effect.radius,
+          area.effect.radiusY!,
+        )
+      : undefined;
     const { volley } = area.effect;
-    if (volley) {
+    if (pulse && volley) {
       const { radius, durationTicks, tickInterval } = area.effect;
       const damage = area.rawDamage / Math.ceil(durationTicks / tickInterval);
       const effect: ProjectileEffect = {
@@ -1149,7 +1242,7 @@ export function stepAreas(world: World, config: SimulationConfig): void {
       }
       continue;
     }
-    if (!area.effect.oncePerTarget)
+    if (pulse && !area.effect.oncePerTarget)
       emit(world, {
         kind: 'pulse',
         sourceId: area.ownerId,
@@ -1158,21 +1251,57 @@ export function stepAreas(world: World, config: SimulationConfig): void {
         x: area.x,
         y: area.y,
         radius: area.effect.radius,
-        stage: 'area_tick',
+        stage:
+          area.abilityId === conLuan.slam
+            ? 'hammer_contact'
+            : area.effect.pentagon && elapsed === 0
+              ? 'area_open'
+              : 'area_tick',
         damage: 0,
         critical: false,
       });
     for (const enemy of opponents(world, area.ownerId)) {
       if (
         enemy.hp <= 0 ||
-        (area.effect.oncePerTarget && area.hitIds?.includes(enemy.id)) ||
-        distance(area, enemy) >
-          area.effect.radius + targetRadius(world, enemy, config) ||
+        (vertices
+          ? vertices.some((p, i) => {
+              const q = vertices[(i + 1) % vertices.length]!;
+              return (
+                (q.x - p.x) * (enemy.y - p.y) - (q.y - p.y) * (enemy.x - p.x) <
+                0
+              );
+            })
+          : area.effect.radiusY !== undefined
+            ? Math.hypot(
+                (enemy.x - area.x) / area.effect.radius,
+                (enemy.y - area.y) / area.effect.radiusY,
+              ) > progress
+            : distance(area, enemy) >
+              area.effect.radius + targetRadius(world, enemy, config)) ||
         config.collision.some((w) => segmentRect(area, enemy, w) !== undefined)
       )
         continue;
+      for (const status of area.effect.occupantStatuses ?? [])
+        applyStatus(
+          enemy,
+          {
+            ...status,
+            durationTicks: Math.min(
+              status.durationTicks,
+              area.until - world.tick,
+            ),
+          },
+          area.ownerId,
+          area.abilityId,
+          world.tick,
+        );
+      if (
+        !pulse ||
+        (area.effect.oncePerTarget && area.hitIds?.includes(enemy.id))
+      )
+        continue;
       if (area.effect.oncePerTarget) (area.hitIds ??= []).push(enemy.id);
-      hurt(
+      const landed = hurt(
         world,
         enemy,
         area.ownerId,
@@ -1184,6 +1313,23 @@ export function stepAreas(world: World, config: SimulationConfig): void {
       if (enemy.hp > 0)
         for (const status of area.effect.statuses ?? [])
           applyStatus(enemy, status, area.ownerId, area.abilityId, world.tick);
+      if (
+        landed &&
+        enemy.hp > 0 &&
+        elapsed === 0 &&
+        area.effect.stunOnOpenTicks
+      )
+        applyStatus(
+          enemy,
+          {
+            kind: 'stun',
+            durationTicks: area.effect.stunOnOpenTicks,
+            magnitude: 1,
+          },
+          area.ownerId,
+          area.abilityId,
+          world.tick,
+        );
     }
   }
 }
@@ -1195,14 +1341,15 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
       !hero ||
       hero.hp <= 0 ||
       hasStatus(hero, 'stun', world.tick) ||
+      ((action.effect.mode === 'dash' || action.tamLien) &&
+        movementSkillLocked(hero, world.tick)) ||
       (action.effect.mode === 'dash' &&
-        (hasStatus(hero, 'root', world.tick) ||
-          hero.statuses?.some(
-            (s) =>
-              s.kind === 'dash_lock' &&
-              s.abilityId === 'quicksand' &&
-              s.until > world.tick,
-          )))
+        hero.statuses?.some(
+          (status) =>
+            status.kind === 'dash_lock' &&
+            status.abilityId === 'quicksand' &&
+            status.until > world.tick,
+        ))
     ) {
       action.until = world.tick;
       world.shots = world.shots.filter(
@@ -1300,6 +1447,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           config,
           action.rawDamage,
           action,
+          action.areaCenter,
         );
         action.remaining = 0;
       }
@@ -1333,6 +1481,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
         old = { x: hero.x, y: hero.y },
         n = Math.min(action.remaining, e.speed / config.tickRate);
       displace(hero, action.fx * n, action.fy * n, config.radius, config);
+      resetConLuanDashOnEntry(world, hero, old);
       if (e.invulnerable && distance(old, hero) > 0.01)
         applyStatus(
           hero,
@@ -1401,7 +1550,9 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
         continue;
       }
       const index =
-        action.abilityId === 'that_tinh_kiem' && !finish
+        (action.abilityId === 'that_tinh_kiem' ||
+          action.abilityId === conLuan.fan) &&
+        !finish
           ? e.hits - action.remaining
           : undefined;
       cue(
@@ -1439,8 +1590,8 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
             })()) &&
           clearLine(world, hero, enemy, config) &&
           distance(hero, enemy) <= radius + targetRadius(world, enemy, config)
-        )
-          hurt(
+        ) {
+          const landed = hurt(
             world,
             enemy,
             hero.id,
@@ -1454,6 +1605,17 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
               comboTargets: action.comboTargets,
             },
           );
+          if (
+            landed &&
+            enemy.hp > 0 &&
+            e.statuses?.length &&
+            !action.hitIds.includes(enemy.id)
+          ) {
+            action.hitIds.push(enemy.id);
+            for (const status of e.statuses)
+              applyStatus(enemy, status, hero.id, action.abilityId, world.tick);
+          }
+        }
       action.remaining--;
       action.nextTick +=
         e.durationTicks && e.finisherDamage > 0

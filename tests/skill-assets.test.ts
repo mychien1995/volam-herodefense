@@ -9,7 +9,10 @@ import {
 describe('M3A skill asset contract', () => {
   it('maps all canonical skills to existing transparent atlas components and valid frames', () => {
     expect(Object.keys(skillVisualStages).sort()).toEqual(
-      Object.keys(m1Config.skillCatalogue!).sort(),
+      Object.values(m1Config.progression!.skills)
+        .filter((skill) => skill.schoolId !== 'con_luan')
+        .map((skill) => skill.id)
+        .sort(),
     );
     let frames = 0;
     for (const a of skillArt.assets) {

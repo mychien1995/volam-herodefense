@@ -8,7 +8,8 @@ import type {
   SkillMode,
   RankedSkill,
 } from './progression-types.js';
-import { cancelOwnedEffects, statusValue } from './status.js';
+import { cancelOwnedEffects, hasStatus, statusValue } from './status.js';
+import { conLuan } from './con-luan-ids.js';
 
 export const statKeys: Array<keyof CharacterStats> = [
   'maxHp',
@@ -178,6 +179,31 @@ export function characterStats(
   const total = zero();
   for (const key of statKeys)
     total[key] = Object.values(sources).reduce((sum, s) => sum + s[key], 0);
+  if (hero.basicId === conLuan.monk && profile) {
+    const add = (key: keyof CharacterStats, value: number) => {
+      sources.temporary[key] += value;
+      total[key] += value;
+    };
+    if (!hasStatus(hero, 'con_luan_ranged', tick)) {
+      add('maxHp', total.maxHp * 0.16);
+      add('hpRegen', 2.5);
+      add('attackPower', 5);
+    }
+    const chaos = statusValue(hero, 'con_luan_chaos', tick);
+    if (chaos) {
+      add('maxHp', total.maxHp * 0.36 * chaos);
+      add('maxMana', total.maxMana * 0.28 * chaos);
+      add('hpRegen', 7 * chaos);
+      add('manaRegen', 5 * chaos);
+      add('attackPower', total.attackPower * 0.34 * chaos);
+      add('defense', 12 * chaos);
+      add('critChance', 0.14 * chaos);
+      add('critMultiplier', 0.25 * chaos);
+      add('movementSpeed', total.movementSpeed * 0.1 * chaos);
+      add('attackSpeed', total.attackSpeed * 0.15 * chaos);
+      add('cooldownReduction', 0.08 * chaos);
+    }
+  }
   const sustain = config.campaign?.meleeSustain;
   const branchId = hero.progression?.branchId;
   if (branchId && sustain?.branchIds.includes(branchId)) {
@@ -230,9 +256,13 @@ export function characterStats(
   );
   return { sources, total };
 }
-export function refreshCharacter(hero: Hero, config: SimulationConfig): void {
+export function refreshCharacter(
+  hero: Hero,
+  config: SimulationConfig,
+  tick = 0,
+): void {
   if (!hero.progression) return;
-  const s = characterStats(hero, config).total;
+  const s = characterStats(hero, config, tick).total;
   hero.maxHp = s.maxHp;
   hero.maxMana = s.maxMana;
   hero.hp = Math.min(hero.hp, s.maxHp);
@@ -407,7 +437,7 @@ function changeFixedBuild(
   } else return 'Nhánh võ học đã được khóa khi vào trận.';
   updateFixedSlots(hero, config);
   p.revision++;
-  refreshCharacter(hero, config);
+  refreshCharacter(hero, config, world.tick);
   return undefined;
 }
 export function rankedAbility(

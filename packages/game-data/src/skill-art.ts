@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import raw from './skill-art.json' with { type: 'json' };
 import rawIconSchools from './skill-icon-schools.json' with { type: 'json' };
+import { conLuan } from '@volam/game-core';
 
 // Keep schema and atlas metadata out of consumers that only render skill icons.
 export const skillArtSchema = /* @__PURE__ */ (() => {
@@ -72,7 +73,12 @@ const caiBangIcons = new Set([
   'thien_ha_vo_cau',
   'tieu_dieu_cong',
 ]);
+const conLuanIcons = new Set<string>(
+  Object.values(conLuan).filter((id) => id !== conLuan.school),
+);
 export function skillIcon(id: string): string {
+  if (conLuanIcons.has(id))
+    return `/assets/characters/con_luan_hac_thiet_v04/icons/${id}.png`;
   const iconSchools: Readonly<Record<string, string>> = rawIconSchools;
   if (id === 'luu_phong_bo')
     return '/assets/skills/thien-son/skill-review-2026-11-09/bao-vu-cuong-phong-icon.png';

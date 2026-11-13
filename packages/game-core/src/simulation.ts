@@ -21,6 +21,15 @@ import { expireCombos } from './combos.js';
 import { bufferComboFinisher, takeComboFinisher } from './combo-finisher.js';
 import { stepBossEncounter } from './boss-encounter.js';
 import { nextBasic, expireBasicChain } from './basic-attacks.js';
+import { conLuan } from './con-luan-ids.js';
+import {
+  conLuanBasic,
+  conLuanPlants,
+  resetConLuanDashOnEntry,
+  syncConLuanResources,
+  toggleConLuanStance,
+  useConLuanPlant,
+} from './con-luan-combat.js';
 import { startTamLienTram, tamLienTram } from './tam-lien-tram.js';
 import {
   recallSpinningProjectile,
@@ -51,6 +60,7 @@ import {
   applyStatus,
   statusValue,
   displace,
+  movementSkillLocked,
 } from './status.js';
 import { createSeededRandom } from './random.js';
 import {
@@ -255,7 +265,9 @@ function runCommand(
   )
     return;
   if (command.kind === 'tam-lien-tram') {
-    startTamLienTram(world, hero, config);
+    if (hero.basicId === conLuan.sword)
+      useConLuanPlant(world, hero, config, perform);
+    else startTamLienTram(world, hero, config);
     return;
   }
   if (command.kind === 'gear-skill') {
@@ -313,16 +325,21 @@ function runCommand(
       (world.actions ?? []).some((a) => a.ownerId === hero.id)
     )
       return;
-    const ability = config.basics[hero.basicId];
+    const ability = conLuanBasic(hero, config, world.tick);
+    const conLuanMelee = ability?.id === conLuan.monk;
     if (
       ability &&
-      world.tick >= hero.cooldown &&
+      (conLuanMelee || world.tick >= hero.cooldown) &&
       (ability.cooldownTicks !== 0 || hero.lastBasicTick !== world.tick)
     ) {
       const dao = ability.id === tamLienTram.basicId;
       hero.lastBasicTick = world.tick;
-      hero.cooldown =
-        world.tick + abilityCooldown(hero, ability, config, world.tick, true);
+      if (!conLuanMelee)
+        hero.cooldown =
+          world.tick +
+          (ability.id === conLuan.bolt
+            ? config.tickRate
+            : abilityCooldown(hero, ability, config, world.tick, true));
       const next = nextBasic(hero, ability, world.random);
       if (ability.manualChain) {
         if (hero.basicChains?.[ability.id] === 0) {
@@ -368,7 +385,12 @@ function runCommand(
       return;
     if (
       ability?.effect.mode === 'dash' &&
-      (hasStatus(hero, 'root', world.tick) || inQuicksand(world, hero))
+      (movementSkillLocked(hero, world.tick) || inQuicksand(world, hero))
+    )
+      return;
+    if (
+      ability?.id === conLuan.detonate &&
+      !conLuanPlants(world, hero.id).length
     )
       return;
     if (ability?.effect.mode === 'projectile' && ability.effect.recallDrain) {
@@ -422,6 +444,8 @@ function runCommand(
         : cooldown);
     hero.abilityCooldowns ??= {};
     hero.abilityCooldowns[ability.id] = hero.skillCooldowns[command.slot]!;
+    if (ability.id === conLuan.stance)
+      toggleConLuanStance(hero, config, world.tick);
     perform(
       world,
       hero,
@@ -430,6 +454,8 @@ function runCommand(
       'cast',
       togglingOff ? 'toggle_off' : undefined,
     );
+    if (ability.id === conLuan.chaos)
+      syncConLuanResources(hero, config, world.tick);
   }
 }
 function advanceProjectile(
@@ -662,6 +688,55 @@ function advanceProjectile(
     (shot.remaining <= length &&
       (!shot.effect.boomerang || shot.leg === 'return'))
   ) {
+    if (!hits.length && shot.effect.explodeAtEnd && !shot.hostile) {
+      const contact = Math.min(1, wallT);
+      const center = {
+        x: shot.x + (end.x - shot.x) * contact,
+        y: shot.y + (end.y - shot.y) * contact,
+      };
+      emit(world, {
+        kind: 'pulse',
+        sourceId: shot.ownerId,
+        targetId: '',
+        abilityId: shot.abilityId,
+        ...center,
+        radius: shot.effect.splashRadius,
+        stage: 'explosion',
+        damage: 0,
+        critical: false,
+      });
+      for (const target of targets) {
+        if (
+          target.hp <= 0 ||
+          distance(center, target) > shot.effect.splashRadius ||
+          config.collision.some(
+            (wall) => segmentRect(center, target, wall) !== undefined,
+          )
+        )
+          continue;
+        const landed = hurt(
+          world,
+          target,
+          shot.ownerId,
+          shot.abilityId,
+          shot.rawDamage,
+          config,
+          {
+            critChance: shot.critChance ?? config.critChance,
+            critMultiplier: shot.critMultiplier ?? config.critMultiplier,
+          },
+        );
+        if (landed && target.hp > 0)
+          for (const status of shot.effect.statuses ?? [])
+            applyStatus(
+              target,
+              status,
+              shot.ownerId,
+              shot.abilityId,
+              world.tick,
+            );
+      }
+    }
     if (
       shot.effect.blinkWindowTicks &&
       wallT === Infinity &&
@@ -753,6 +828,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     }
     const movement = namDeMovement(world, hero);
     const guarding = hasStatus(hero, 'guard_counter', world.tick);
+    syncConLuanResources(hero, config, world.tick);
     const stats = characterStats(hero, config, world.tick).total;
     const runSpeedMultiplier = world.waveBossTest?.runSpeedMultiplier ?? 1;
     if (
@@ -770,6 +846,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
           (a.effect.mode === 'projectile' || a.effect.mode === 'area'),
       )
     ) {
+      const before = { x: hero.x, y: hero.y };
       hero.fx = movement.x;
       hero.fy = movement.y;
       moveCircle(
@@ -789,6 +866,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
           ? world.duelWalkWalls!
           : config.collision,
       );
+      resetConLuanDashOnEntry(world, hero, before);
     }
     hero.mana = Math.min(
       hero.maxMana,

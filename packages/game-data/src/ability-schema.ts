@@ -23,7 +23,10 @@ const status = z.strictObject({
     'dash',
     'dash_guard',
     'channel',
+    'con_luan_chaos',
+    'dash_lock',
   ]),
+  blocksMovementSkills: z.boolean().optional(),
   durationTicks: count.min(1),
   magnitude: z.number().finite().nonnegative(),
   secondary: z.number().finite().nonnegative().optional(),
@@ -48,6 +51,7 @@ const dash = z.strictObject({
     .optional(),
 });
 const projectile = z.strictObject({
+  explodeAtEnd: z.boolean().optional(),
   dragonDive: z
     .strictObject({
       forwardTicks: count,
@@ -115,6 +119,14 @@ const projectile = z.strictObject({
   slowedBonus: z.number().finite().nonnegative().optional(),
 });
 const area = z.strictObject({
+  radiusY: positive.optional(),
+  pentagon: z.boolean().optional(),
+  occupantStatuses: z.array(status).optional(),
+  passiveField: z.boolean().optional(),
+  expandTicks: count.min(1).optional(),
+  nearestRange: positive.optional(),
+  forwardOffset: positive.optional(),
+  stunOnOpenTicks: count.min(1).optional(),
   windupTicks: count.min(1).optional(),
   skyfall: z
     .strictObject({
@@ -190,6 +202,7 @@ export const abilitySchema = z
       .optional(),
     minIntervalTicks: count.min(1).optional(),
     basicPoseTicks: count.min(1).optional(),
+    basicDamageBonus: z.number().nonnegative().optional(),
     basicVariants: z
       .array(z.string().regex(/^[a-z_]+$/))
       .min(2)
@@ -288,6 +301,7 @@ export const abilitySchema = z
       dash,
       z.strictObject({
         mode: z.literal('multi_hit'),
+        statuses: z.array(status).optional(),
         attackPowerScale: z.number().min(0).max(1).optional(),
         range: positive,
         damage: z.number().finite().nonnegative(),
@@ -394,7 +408,8 @@ export const abilitySchema = z
     if (
       a.effect.mode === 'area' &&
       a.effect.damage === 0 &&
-      a.effect.ownerDamageReduction === undefined
+      a.effect.ownerDamageReduction === undefined &&
+      !a.effect.passiveField
     )
       c.addIssue({
         code: 'custom',

@@ -81,9 +81,15 @@ function fixture(seed?: number) {
   return { config, world, hero, enemies, events, steps, input, cast, hits };
 }
 describe('M3C3 Thiếu Lâm shared combat', () => {
-  it('has exactly 43 actives, eight basics and canonical 8/5 Thiếu Lâm styles with retained art', () => {
-    expect(Object.keys(m1Config.progression!.skills)).toHaveLength(43);
-    expect(Object.keys(m1Config.basics)).toHaveLength(8);
+  it('retains the original 43 actives, eight basics and canonical 8/5 Thiếu Lâm styles', () => {
+    expect(
+      Object.values(m1Config.progression!.skills).filter(
+        (s) => s.schoolId !== 'con_luan',
+      ),
+    ).toHaveLength(43);
+    expect(
+      Object.keys(m1Config.basics).filter((id) => !id.startsWith('con_luan_')),
+    ).toHaveLength(8);
     expect(thieuLamSkills).toHaveLength(13);
     const d = Object.values(m1Config.progression!.skills).filter(
       (s) => s.schoolId === 'thieu_lam',

@@ -411,6 +411,12 @@
   background-image: var(--hero-idle);
 }
 
+#viewport[data-hero-school='con_luan'] :is(.portrait, .paper-hero) {
+  background-image: var(--hero-idle);
+  background-size: contain;
+  background-position: center;
+}
+
 #phat-dong-progress {
   position: absolute;
   bottom: 100%;

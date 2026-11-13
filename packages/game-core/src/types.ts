@@ -32,6 +32,7 @@ export interface Rect extends Point {
 }
 export type Pose = 'idle' | 'walk' | 'basic_attack' | 'cast' | 'hurt' | 'death';
 export interface ProjectileEffect {
+  explodeAtEnd?: boolean | undefined;
   scatter?: ProjectileScatter | undefined;
   dragonDive?: DragonDiveDefinition | undefined;
   windupTicks?: number | undefined;
@@ -165,8 +166,11 @@ export type StatusKind =
   | 'dash'
   | 'dash_guard'
   | 'dash_lock'
+  | 'con_luan_ranged'
+  | 'con_luan_chaos'
   | 'channel';
 export interface StatusSpec {
+  blocksMovementSkills?: boolean | undefined;
   kind: StatusKind;
   durationTicks: number;
   magnitude: number;
@@ -220,6 +224,13 @@ export interface GuardCounterEffect {
   range: number;
 }
 export interface AreaEffect {
+  radiusY?: number | undefined;
+  pentagon?: boolean | undefined;
+  passiveField?: boolean | undefined;
+  expandTicks?: number | undefined;
+  nearestRange?: number | undefined;
+  forwardOffset?: number | undefined;
+  stunOnOpenTicks?: number | undefined;
   windupTicks?: number | undefined;
   skyfall?:
     | {
@@ -235,6 +246,7 @@ export interface AreaEffect {
       }
     | undefined;
   oncePerTarget?: boolean | undefined;
+  occupantStatuses?: StatusSpec[] | undefined;
   mode: 'area';
   durationTicks: number;
   tickInterval: number;
@@ -260,6 +272,7 @@ export interface DashEffect {
     { durationTicks: number; damage: number; range: number } | undefined;
 }
 export interface MultiHitEffect {
+  statuses?: StatusSpec[] | undefined;
   attackPowerScale?: number | undefined;
   mode: 'multi_hit';
   range: number;
@@ -302,6 +315,7 @@ export interface Ability {
   charges?: number | undefined;
   minIntervalTicks?: number | undefined;
   basicPoseTicks?: number | undefined;
+  basicDamageBonus?: number | undefined;
   basicVariants?: string[] | undefined;
   basicComboEndRecoveryTicks?: number | undefined;
   basicCombo?:
@@ -584,6 +598,7 @@ export interface CombatEvent extends Point {
   stage?: string | undefined;
 }
 export interface SkillAction {
+  areaCenter?: Point;
   tamLien?: { center: Point; targetId: string };
   tamLienCharged?: boolean;
   origin?: Point;

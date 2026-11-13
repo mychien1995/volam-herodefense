@@ -48,4 +48,16 @@ export const schools = [
     starting: '1 điểm kỹ năng · Chọn và học võ công trong đấu trường.',
     portrait: 'thieu',
   },
+  {
+    id: 'con_luan',
+    name: 'Côn Luân',
+    element: 'Lôi',
+    description: 'Dẫn sấm sét vào thân và vũ khí.',
+    style: 'Thiền Sư đổi thế búa; Kiếm Tôn bố trận và gọi sét.',
+    attributes: 'Thiên về sát thương và hồi nội lực.',
+    passive: 'Huyền Thiên Vô Cực Công',
+    basics: 'Thiền Sư · Kiếm Tôn',
+    starting: '1 điểm kỹ năng · Chọn và học võ công trong đấu trường.',
+    portrait: 'con-luan',
+  },
 ] as const;

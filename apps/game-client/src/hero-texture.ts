@@ -16,7 +16,13 @@ export function heroTexture(
   | 'hero_vo_dang'
   | 'hero_vo_dang_kiem'
   | 'hero_thieu_lam'
-  | 'hero_thieu_lam_dao' {
+  | 'hero_thieu_lam_dao'
+  | 'hero_con_luan_thien_su'
+  | 'hero_con_luan_kiem_ton' {
+  if (schoolId === 'con_luan' || basicId?.startsWith('con_luan_'))
+    return basicId === 'con_luan_kiem_ton'
+      ? 'hero_con_luan_kiem_ton'
+      : 'hero_con_luan_thien_su';
   if (schoolId === 'thieu_lam' || basicId?.startsWith('thieu_lam_'))
     return basicId === 'thieu_lam_dao' || reviewThieuLamDao
       ? 'hero_thieu_lam_dao'

@@ -1,7 +1,7 @@
 import { inQuicksand } from './creep-abilities.js';
 import { blocked, direction, segmentRect, insideEllipse } from './geometry.js';
 import { emit } from './combat.js';
-import { hasStatus } from './status.js';
+import { hasStatus, movementSkillLocked } from './status.js';
 import { perform } from './skills.js';
 import { confineMovement } from './confinement.js';
 import type { Hero, SimulationConfig, World } from './types.js';
@@ -37,7 +37,6 @@ export function dash(world: World, hero: Hero, config: SimulationConfig): void {
     inQuicksand(world, hero) ||
     hasStatus(hero, 'root', world.tick) ||
     hasStatus(hero, 'stun', world.tick) ||
-    hasStatus(hero, 'root', world.tick) ||
     (world.actions ?? []).some((a) => a.ownerId === hero.id)
   )
     return;
@@ -85,7 +84,7 @@ export function blink(
       (p.lingerUntil === undefined || world.tick < p.lingerUntil),
   );
   if (!shot) return false;
-  if (hasStatus(hero, 'root', world.tick)) return true;
+  if (movementSkillLocked(hero, world.tick)) return true;
   if (
     config.heroBounds &&
     !insideEllipse(shot, config.heroBounds, config.radius)

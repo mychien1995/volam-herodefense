@@ -1,3 +1,9 @@
+## Côn Luân · Hắc Thiết
+
+Lượt chỉnh khống chế cho bản thử Hắc Thiết v04 tăng sát thương chiêu Q Kiếm Tôn 30%. Choáng bậc đầu của Q/E/R lần lượt là 2/1/2 giây, tăng 0,1 giây mỗi bậc. Trận Pháp Năm Kiếm kéo dài 7,5 giây, làm chậm 60% và khóa lướt trong vùng. Vòng E Thiền Sư giữ slow 35% trong 1,5 giây. W/R Thiền Sư choáng diện rộng 2 giây.
+
+Đã duyệt sprite và chiêu Hắc Thiết, sau đó yêu cầu chơi thử với gameplay thật trong Phaser. Vòng E Thiền Sư rộng hơn 20%, sét Chaos bám theo thân. Kiếm Tôn phóng đầu rồng ở R. Trận pháp T có năm kiếm quanh tâm người chơi, diện tích tăng 20% và thời lượng ban đầu là 5 giây. [Bản tích hợp thử](docs/CON_LUAN_PLAYTEST.md).
+
 ## Sân Tương Dương và Bách Liệt Thiên Kích · 2026-11-13
 
 Director duyệt sân Tương Dương 1.190 × 680 cho phó bản Kim Luân trong trận thường. Phaser hiển thị toàn bộ ảnh với cùng tỷ lệ hai trục. Va chạm tường và lối ra phía nam dùng chung cấu hình phó bản với server. Bốn bóng Bách Liệt Thiên Kích tiếp tục hoạt họa khi đòn trúng chỉ đổi tư thế nhân vật. Chúng kết thúc theo trạng thái thi triển của server.

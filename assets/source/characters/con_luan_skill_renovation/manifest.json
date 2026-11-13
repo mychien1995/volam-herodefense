@@ -1,0 +1,46 @@
+{
+  "status": "Runtime renovation for director review",
+  "source": "OpenAI ImageGen, original raster art; retained Hắc Thiết identity and palette",
+  "requests": [
+    {
+      "output": "assets/source/characters/con_luan_skill_renovation/generated/chaos.png",
+      "references": [
+        "assets/source/characters/con_luan_skill_preview/generated/chaos.png",
+        "docs/evidence/sessions/con-luan-runtime/thien-su-chaos.png"
+      ],
+      "prompt": "Create original 2D pixel-art game animation sprite sheet: EXACTLY 4 columns by 3 rows, same size cells, 12 separate figures all full-body, with a perfectly flat vivid RGB(0,255,0) chroma-key background and clear generous gutters. No grid, words, shadows, lightning, or extraneous pixels. Identity matches reference 1, the bulky Chaos form of Hắc Thiết Thiền Sư, fur shoulders, blackened layered armor with copper cuffs, red sash and topknot, same hefty long-handled copper-cross iron hammer. Reference 2 gives orthographic 3/4 top down game camera and finished rendering style, do not draw scene. COLUMNS = south front, west looking LEFT, east looking RIGHT, north back showing rear with NO visible face. ROWS = first row NEUTRAL balanced standing; second row clear WALK STRIDE with LEFT FOOT forward and right foot back; third row WALK STRIDE with RIGHT FOOT forward and left foot back. Every pair of walking poses must unmistakably alternate leg silhouettes and weight on feet. For SOUTH and NORTH show alternate sides of the body with one foot clearly lower in the cell than the other, switching feet between rows; for WEST and EAST project each stride horizontally along facing and exchange which leg is near and forward. Keep solid torso, weapon size and costume stable, no separate objects. Do not confuse west with east, front with rear. Sharp pixel clusters, restrained shading and clear consistent silhouette. Use the same head height and consistent proportions at all angles. Fit full hammer and boots inside each cell, generous gutters all around."
+    },
+    {
+      "output": "assets/source/characters/con_luan_skill_renovation/generated/lightning.png",
+      "references": [
+        "assets/source/characters/con_luan_skill_preview/generated/hammer_fx.png",
+        "assets/concepts/heroes/con-luan/10-hac-thiet-thien-su-vfx-v02.png"
+      ],
+      "prompt": "Draw ONE production sprite source sheet for original wuxia pixel art lightning VFX. Exactly 4 columns x 2 rows, wide overall, equally sized cells. Solid flat #00ff00 background ONLY with generous clean gutters on all sides, no dividers, no labels. No characters or weapons, no terrain or scene. All eight effects centered. Color rich amber-gold, white-hot cores, light amber outlines with only tiny faint lilac tips. Fine but readable continuous lines, clean 2D RPG effects, carefully detailed and smooth outlines that retain their shape when reduced. Each cell is one separate effect. Top row is W ground impact animation: frame 1 sharp short upward fork from a very bright solid impact point with compact branching ground spark; frame 2 strongest broad explosive lightning burst from same center, strong bright horizontal branching along the ground plus vertical flash; frame 3 ring of residual low branching electricity across the ground with center dimming; frame 4 scattered short fading forks radiating outward with some empty center. Each of these has wide footprint and strong coherent shape. Bottom row is E shockwave animation: four ground perspective horizontal ellipses with exactly the same width and height, aspect ratio 1.8:1, clear center entirely empty, all flat on a top-down three-quarter game floor. First three ring frames have a fully connected clean perimeter with a continuous thin white-gold core all around, dynamic thin jagged sparks split off only at intervals. Fourth ring partially breaks into natural tiny traces with reduced brightness as dissipating. Every ring must be a complete ellipse fitting in its cell, no clipping. Keep enough green margin to extract each component individually."
+    },
+    {
+      "output": "assets/source/characters/con_luan_skill_renovation/generated/opposite.png",
+      "references": [
+        "assets/source/characters/con_luan_skill_renovation/generated/chaos.png"
+      ],
+      "prompt": "Draw exactly THREE full-body chibi wuxia sprites in ONE horizontal row on solid bright RGB #00ff00 with generous empty gutters, no letters, shadows or VFX. Use the supplied reference as the exact Chaos Thiền Sư identity: black armor, very broad beige fur, copper bracers, red sash and ponytail, long shaft large iron hammer. Reference walking image has a wrongly repeated stride. In first cell face directly toward camera in elevated top-down 3/4 view, hammer held to SCREEN LEFT and angled up out of the way of the boots. The BOOT ON THE LEFT SIDE OF THE IMAGE is distinctly extended DOWN toward the camera, its sole near the bottom edge. The boot on the RIGHT SIDE OF THE IMAGE is distinctly raised higher and behind. Second cell faces right, profiles nose pointing to right. The FAR foot (the foot on the other side of the body, behind the nearer leg in layer order) is on the RIGHT forward and placed flat. The NEAR leg trails well behind to SCREEN LEFT, the nearest knee pointing LEFT with its heel raised. This pose must reverse the two legs shown in the right profile of the reference's middle row. Third cell faces LEFT, nose to the left, leftward gait with a wide stance and screen-right foot trails. Costume, hammer and native pixel clusters intact, every boot and hammer fully visible with uniform scale across all three cells."
+    }
+  ],
+  "notes": "Chaos left mirrors the retained east pose sequence. The runtime W body uses the existing four-direction overhead hammer clip; contact and expanding ring are versioned effects.",
+  "sha256": {
+    "assets/source/characters/con_luan_skill_renovation/generated/chaos.png": "feefdb76ec96c0fa35e040c06e5016d17251fa83163fdb72ee1ba9c3f4066244",
+    "assets/source/characters/con_luan_skill_preview/generated/chaos.png": "85f12bbb099b80a9137864ff63e706a36f7e4f849efb2e6536fcfaa5c5adcbe6",
+    "docs/evidence/sessions/con-luan-runtime/thien-su-chaos.png": "0d387f167ef79bf090389803c1a4f5453b7108c85954fbb729e54bfa63acc720",
+    "assets/source/characters/con_luan_skill_renovation/generated/lightning.png": "c003bf8d528564713ff0abe4bb404dbb464580c31e30536ad0be14d2d63ebd94",
+    "assets/source/characters/con_luan_skill_preview/generated/hammer_fx.png": "4266ffa7f6f000e48e0229db0b1b3e0bf831e4766c5974d96899306f29013706",
+    "assets/concepts/heroes/con-luan/10-hac-thiet-thien-su-vfx-v02.png": "26d438ef3205088d9f3a7c70519eebede4677d8e6459f44c2d12da4976ba8eee",
+    "assets/source/characters/con_luan_skill_renovation/generated/opposite.png": "a9123450cbfa2c14d8a6ab75a1d9fb912a2f4e675a799359921c2be46bb7ddd4",
+    "assets/exports/characters/con_luan_skill_renovation/thien_su_chaos_walk.json": "ca448472f14da8a55250137d90cb68380662de8562cee17f3213d7bb7f89a440",
+    "assets/exports/characters/con_luan_skill_renovation/thien_su_chaos_walk.png": "7d32e89bd89582c05f9f7723ab40fdd9f96a3098662e025b02a12e180e809fde",
+    "assets/exports/characters/con_luan_skill_renovation/thien_su_lightning.json": "c00720ebc1bf3ef0a18d749928e81c6be6810d84d5d91d384d8d22e29eb78d6b",
+    "assets/exports/characters/con_luan_skill_renovation/thien_su_lightning.png": "c940d0755854031f07d2d8614f95277e4203ccc213e228a57c21e8da4af12ec3",
+    "assets/exports/characters/con_luan_skill_renovation/validation.json": "64470a460d5c21785c692505c82ce3992001a6a1e2c3dec3a23473be9d99c6b8",
+    "assets/source/characters/con_luan_skill_renovation/thien_su_chaos_walk.aseprite": "b77bf70429e23b4bc9c53d2a4b8438a53b5e460f9543f545438cd38fe1450836",
+    "assets/source/characters/con_luan_skill_renovation/thien_su_lightning.aseprite": "6128b4cb9a742f7cce3fa806d36c763efa5cff47c567dbf3bcd88028de2a83e0"
+  }
+}

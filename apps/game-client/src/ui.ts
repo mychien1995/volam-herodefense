@@ -16,7 +16,12 @@ import { DefenseHud } from './defense-hud.js';
 import { BossRetryUI, type RetryAction } from './boss-retry-ui.js';
 import { SkillMenu } from './skill-menu.js';
 import { BossPartyUI, isBossDestination } from './boss-party-ui.js';
-import { directDodgeChance, loiDai, type BuildChange } from '@volam/game-core';
+import {
+  conLuan,
+  directDodgeChance,
+  loiDai,
+  type BuildChange,
+} from '@volam/game-core';
 import type { MerchantAction, PotionId } from '@volam/game-core';
 import { ItemMenu, auxiliarySlot, updateAuxiliarySlot } from './item-menu.js';
 export function element<T extends HTMLElement>(selector: string): T {
@@ -101,8 +106,9 @@ export class GameUI {
               )
               .join('')}
             <div id="dash-status" class="dash-status" role="status" aria-label="Lướt · Shift"><img src="/assets/m3d_feedback/dash_icon_frame.png" alt="" width="32" height="32"><b id="dash-charges">2</b><kbd>Shift</kbd><small id="dash-timer"></small><progress id="dash-progress" max="180" value="180" aria-label="Hồi lượt lướt"></progress></div>
+            <div id="kinh-loi-status" class="dash-status" role="status" aria-label="Kinh Lôi · S" hidden><img src="${skillIcon(conLuan.plant)}" alt="" width="32" height="32"><b id="kinh-loi-charges"></b><kbd>S</kbd><small id="kinh-loi-timer"></small></div>
             ${auxiliarySlot()}
-            <span id="fixed-skill-points" class="skill-points" hidden></span><span id="shaolin-stance" class="stance-indicator" hidden></span><span id="innate-dodge" class="stance-indicator" hidden></span>
+            <span id="fixed-skill-points" class="skill-points" hidden></span><span id="shaolin-stance" class="stance-indicator" hidden></span><span id="con-luan-stance" class="stance-indicator" hidden></span><span id="innate-dodge" class="stance-indicator" hidden></span>
             <button hidden class="loadout-toggle" data-menu="skills" title="Võ Công · O" aria-label="Võ Công · O">◇<span id="available-points"></span></button>
           </section>
           <p id="scene-status" class="scene-ready" aria-hidden="true">${artPreview ? 'XEM TRƯỚC HÌNH ẢNH' : ''}</p>
@@ -957,6 +963,27 @@ export class GameUI {
       kind: string;
       ticks: number;
     }>;
+    const plant = hero.build.charges.get(conLuan.plant);
+    const placed = [...(this.state?.areas.values() ?? [])].filter(
+      (area) =>
+        area.abilityId === conLuan.plant &&
+        area.ownerId === this.sessionId &&
+        area.zoneId === hero.zoneId,
+    ).length;
+    element('#kinh-loi-status').hidden = !plant;
+    element('#kinh-loi-charges').textContent = plant
+      ? String(Math.min(plant.count, plant.capacity - placed))
+      : '';
+    element('#kinh-loi-timer').textContent = plant?.rechargeTicks
+      ? (plant.rechargeTicks / m1Config.tickRate).toFixed(1)
+      : '';
+    const conLuanStance = element('#con-luan-stance');
+    conLuanStance.hidden = hero.basicId !== conLuan.monk;
+    conLuanStance.textContent = activeStatuses.some(
+      (s) => s.kind === 'con_luan_ranged',
+    )
+      ? 'Đánh xa'
+      : 'Đánh gần';
     const recallReady = [...(this.state?.projectiles.values() ?? [])].some(
       (shot) =>
         shot.ownerId === this.sessionId &&
@@ -1056,7 +1083,7 @@ export class GameUI {
       }
       if (
         key === 'a' &&
-        ['cai_bang', 'thien_son', 'vo_dang', 'thieu_lam'].includes(
+        ['cai_bang', 'thien_son', 'vo_dang', 'thieu_lam', 'con_luan'].includes(
           hero.schoolId,
         )
       ) {
@@ -1076,21 +1103,25 @@ export class GameUI {
         `${recast ? 0 : Math.min(100, (remaining / (ability?.cooldownTicks || 1)) * 100)}%`;
       element(`#cooldown-${key}`).textContent =
         key === 'a'
-          ? hero.schoolId === 'thieu_lam'
-            ? hero.basicId === 'thieu_lam_quyen'
-              ? 'Quyền'
-              : 'Đao'
-            : hero.schoolId === 'vo_dang'
-              ? hero.basicId === 'vo_dang_quyen'
+          ? hero.schoolId === 'con_luan'
+            ? hero.basicId === 'con_luan_kiem_ton'
+              ? 'Kiếm Tôn'
+              : 'Thiền Sư'
+            : hero.schoolId === 'thieu_lam'
+              ? hero.basicId === 'thieu_lam_quyen'
                 ? 'Quyền'
-                : 'Kiếm'
-              : hero.schoolId === 'thien_son'
-                ? hero.basicId === 'thien_son_phien'
-                  ? 'Phiến'
-                  : 'Đao'
-                : hero.basicId === 'cai_bang_bong'
-                  ? 'Bổng'
-                  : 'Chưởng'
+                : 'Đao'
+              : hero.schoolId === 'vo_dang'
+                ? hero.basicId === 'vo_dang_quyen'
+                  ? 'Quyền'
+                  : 'Kiếm'
+                : hero.schoolId === 'thien_son'
+                  ? hero.basicId === 'thien_son_phien'
+                    ? 'Phiến'
+                    : 'Đao'
+                  : hero.basicId === 'cai_bang_bong'
+                    ? 'Bổng'
+                    : 'Chưởng'
           : recast
             ? recall
               ? 'Thu quạt'

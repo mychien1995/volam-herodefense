@@ -1,6 +1,9 @@
 import type { DefaultBranch, FixedBranch } from '@volam/game-core';
+import { conLuan } from '@volam/game-core';
+import { conLuanBranches } from './con-luan.js';
 /** Canonical catalogue order, four regular actives per branch. Thiếu Lâm Quyền starts with combo A. */
 export const defaultBranches: Record<string, DefaultBranch> = {
+  ...conLuanBranches,
   cai_bang_bong: {
     schoolId: 'cai_bang',
     style: 'Bổng',
@@ -84,6 +87,8 @@ export const defaultBranches: Record<string, DefaultBranch> = {
 };
 
 const ultimates: Record<string, string> = {
+  [conLuan.monk]: conLuan.chaos,
+  [conLuan.sword]: conLuan.star,
   cai_bang_bong: 'thien_ha_vo_cau',
   cai_bang_chuong: 'hang_long_hoa_vu',
   thien_son_phien: 'bach_phien_phong_bao',

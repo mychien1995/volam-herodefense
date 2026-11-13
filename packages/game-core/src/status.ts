@@ -26,6 +26,13 @@ export function hasStatus(
 ): boolean {
   return (actor.statuses ?? []).some((s) => s.kind === kind && s.until > tick);
 }
+export function movementSkillLocked(actor: Actor, tick: number): boolean {
+  return (actor.statuses ?? []).some(
+    (s) =>
+      s.until > tick &&
+      (s.kind === 'root' || (s.kind === 'dash_lock' && s.blocksMovementSkills)),
+  );
+}
 /** Strongest nonstacking magnitude; repeated same-source application refreshes, never adds. */
 export function applyStatus(
   actor: Actor,

@@ -1,0 +1,12 @@
+@import url("/shared-preview.css");
+.branches a { color: #f8d78d; }
+#controls { display: flex; flex-wrap: wrap; gap: .35rem; justify-content: center; }
+nav { max-width: calc(100% - 2rem); box-sizing: border-box; }
+#status {
+  position: absolute; z-index: 1; left: 50%; bottom: 5.5rem; transform: translateX(-50%);
+  padding: .35rem .7rem; background: #211914e8; text-align: center; pointer-events: none;
+}
+#status:empty { display: none; }
+
+#controls button { min-width: 2.15rem; }
+#status { bottom: 4.65rem; white-space: nowrap; }

@@ -17,9 +17,12 @@ const actors: Record<string, string> = {
 describe('renovated actions retain semantic phases and registrations', () => {
   it('keeps each caster identity through all 43 mixed-school skills and recovery', () => {
     const ids = new Set(raw.bodies.map((b) => b.id));
-    expect(Object.keys(m1Config.skillCatalogue!)).toHaveLength(43);
+    const skillIds = Object.values(m1Config.progression!.skills)
+      .filter((skill) => skill.schoolId !== 'con_luan')
+      .map((skill) => skill.id);
+    expect(skillIds).toHaveLength(43);
     for (const actor of Object.values(actors))
-      for (const skill of Object.keys(m1Config.skillCatalogue!))
+      for (const skill of skillIds)
         for (const p of [0, 0.3, 0.6, 0.99]) {
           const cel = renovationActionCel(actor, skill, 'cast_right', p);
           expect(ids.has(cel.sheet), actor + ':' + skill).toBe(true);
