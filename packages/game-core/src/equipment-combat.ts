@@ -1,7 +1,12 @@
 import { emit, hurt } from './combat.js';
 import { distance, segmentRect } from './geometry.js';
 import { perform } from './skills.js';
-import { applyStatus, displace, hasStatus } from './status.js';
+import {
+  applyStatus,
+  displace,
+  hasStatus,
+  movementSkillLocked,
+} from './status.js';
 import type { Ability, Hero, SimulationConfig, World } from './types.js';
 
 export function withBasicEquipment(
@@ -66,7 +71,7 @@ export function useEquipmentSkill(
     world.tick < (inventory.auxiliaryReadyAt ?? 0) ||
     hero.namDeLocked ||
     hasStatus(hero, 'stun', world.tick) ||
-    (branch === 'blink' && hasStatus(hero, 'root', world.tick)) ||
+    (branch === 'blink' && movementSkillLocked(hero, world.tick)) ||
     hasStatus(hero, 'silence', world.tick) ||
     hasStatus(hero, 'dash', world.tick) ||
     world.actions?.some((action) => action.ownerId === hero.id)

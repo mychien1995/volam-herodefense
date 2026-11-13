@@ -1,3 +1,11 @@
+## Côn Luân · Bản chơi thử
+
+Kiếm Tôn Q tăng 30% sát thương chiêu theo từng bậc, trước phần cộng từ chỉ số, và choáng 2 giây ở bậc 1. E choáng 1 giây ở lần trúng đầu trên mỗi mục tiêu, R choáng 2 giây ở bậc 1. Q/E/R thêm 0,1 giây choáng mỗi bậc. T làm chậm 60% và khóa lướt khi địch ở trong vùng. Thiền Sư E làm chậm 35% trong 1,5 giây, W và R choáng diện rộng 2 giây.
+
+Hắc Thiết v04 bỏ hồi chiêu A cận chiến Thiền Sư, T Chaos kéo dài 10/12/14/16 giây theo bậc. W Kiếm Tôn lướt 132 đơn vị và trận pháp T kéo dài 7,5 giây, diện tích tăng thêm 20% so với lượt trước.
+
+Huyền Thiên Vô Cực Công tăng nhẹ sát thương và hồi nội lực theo cấp. Hai nhánh Thiền Sư và Kiếm Tôn dùng năm ô Q/W/E/R/T. Kiếm Tôn dùng thêm S cho Kinh Lôi. [Danh mục chiêu và thông số chơi thử](docs/CON_LUAN_PLAYTEST.md).
+
 ## Thiên Hạ Vô Cẩu · 2026-11-12
 
 Thiên Hạ Vô Cẩu giảm 80% sát thương nhận trong lúc xoay bổng. Cú đập cuối hồi 5% HP tối đa cho bản thân khi thi triển trọn chiêu.

@@ -8,7 +8,12 @@ import {
   segmentCircle,
   segmentRect,
 } from './geometry.js';
-import { applyStatus, displace, hasStatus } from './status.js';
+import {
+  applyStatus,
+  displace,
+  hasStatus,
+  movementSkillLocked,
+} from './status.js';
 import type {
   Creep,
   Hero,
@@ -98,7 +103,8 @@ export function startTamLienTram(
     ready.readyUntil <= world.tick ||
     world.tick < (hero.abilityCooldowns?.[tamLienTram.id] ?? 0) ||
     (world.actions ?? []).some((a) => a.ownerId === hero.id) ||
-    (['stun', 'root', 'silence', 'disarm'] as const).some((kind) =>
+    movementSkillLocked(hero, world.tick) ||
+    (['stun', 'silence', 'disarm'] as const).some((kind) =>
       hasStatus(hero, kind, world.tick),
     )
   )

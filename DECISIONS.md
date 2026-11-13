@@ -1,3 +1,9 @@
+## Côn Luân · Hắc Thiết
+
+Lượt chỉnh khống chế cho bản thử Hắc Thiết v04 tăng sát thương chiêu Q Kiếm Tôn 30%. Choáng bậc đầu của Q/E/R lần lượt là 2/1/2 giây, tăng 0,1 giây mỗi bậc. Trận Pháp Năm Kiếm kéo dài 7,5 giây, làm chậm 60% và khóa lướt trong vùng. Vòng E Thiền Sư giữ slow 35% trong 1,5 giây. W/R Thiền Sư choáng diện rộng 2 giây.
+
+Đã duyệt sprite và chiêu Hắc Thiết, sau đó yêu cầu chơi thử với gameplay thật trong Phaser. Vòng E Thiền Sư rộng hơn 20%, sét Chaos bám theo thân. Kiếm Tôn phóng đầu rồng ở R. Trận pháp T có năm kiếm quanh tâm người chơi, diện tích tăng 20% và gây sát thương trong 5 giây. [Bản tích hợp thử](docs/CON_LUAN_PLAYTEST.md).
+
 ## Lôi Đài Hồng Mộc — 2026-11-12
 
 Đã duyệt Lôi Đài 1v1, viền gạch trắng để quan chiến, sàn gỗ đỏ chữ nhật nới diện tích và pháo hoa chiến thắng. Xem [quy tắc và artwork](docs/LOI_DAI.md) để biết các quy tắc thay thế đề xuất PvP cũ.

@@ -23,6 +23,12 @@ import {
 import { abilitySchema } from './ability-schema.js';
 import { voDangBasics, voDangSkills, addVoDangProgression } from './vo-dang.js';
 import { createProgression, progressionSchema } from './progression-data.js';
+import {
+  addConLuanProgression,
+  conLuanAuxiliary,
+  conLuanBasics,
+  conLuanSkills,
+} from './con-luan.js';
 export { abilitySchema } from './ability-schema.js';
 const positive = z.number().finite().positive();
 const count = z.number().int().nonnegative();
@@ -246,6 +252,7 @@ export const m1Config: SimulationConfig = simulationConfigSchema.parse({
     ...thienSonBasics,
     ...voDangBasics,
     ...thieuLamBasics,
+    ...conLuanBasics,
   },
   skillCatalogue: Object.fromEntries(
     [
@@ -254,6 +261,8 @@ export const m1Config: SimulationConfig = simulationConfigSchema.parse({
       ...thienSonSkills,
       ...voDangSkills,
       ...thieuLamSkills,
+      ...conLuanSkills,
+      ...conLuanAuxiliary,
     ].map((s) => [s.id, s]),
   ),
   caiBangPassive,
@@ -268,6 +277,7 @@ m1Config.progression = createProgression(
 addThienSonProgression(m1Config.progression);
 addVoDangProgression(m1Config.progression);
 addThieuLamProgression(m1Config.progression);
+addConLuanProgression(m1Config.progression);
 m1Config.progression.defaultBranches = defaultBranches;
 m1Config.progression.fixedBranches = fixedBranches;
 progressionSchema.parse(m1Config.progression);

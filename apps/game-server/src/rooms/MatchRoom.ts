@@ -37,6 +37,7 @@ import {
 } from '@volam/game-data';
 import {
   DungeonMatch,
+  conLuan,
   initializeProgression,
   skillRank,
   characterStats,
@@ -182,10 +183,15 @@ export class MatchRoom extends Room<{
       );
     }
     if (this.devSkillLoadout) prepareSkillReviewHero(hero, m1Config);
-    if (this.devLoiDai) {
-      hero.level = loiDai.minLevel;
-      hero.xp = experienceAtLevel(loiDai.minLevel, this.simulation.base);
-      hero.skillPoints = loiDai.minLevel;
+    const conLuanTrial =
+      hero.schoolId === conLuan.school &&
+      process.env['NODE_ENV'] !== 'production' &&
+      process.env['VOLAM_DEV_CON_LUAN'] === '1' &&
+      !this.legacySkills;
+    if (this.devLoiDai || conLuanTrial) {
+      hero.level = this.devLoiDai ? loiDai.minLevel : 6;
+      hero.xp = experienceAtLevel(hero.level, this.simulation.base);
+      hero.skillPoints = hero.level;
       refreshCharacter(hero, this.simulation.base);
       hero.hp = hero.maxHp;
       hero.mana = hero.maxMana;
@@ -1197,10 +1203,11 @@ export class MatchRoom extends Room<{
       }
       target.basicId = hero.basicId;
       const chargedSkills = new Set<string>();
-      for (let slot = 0; slot < 5; slot++) {
-        const ability = equippedAbility(hero, slot, zone.config);
-        const charges = ability && skillCharges(hero, ability, zone.world.tick);
-        if (!ability || !charges) continue;
+      const syncCharges = (
+        ability: NonNullable<ReturnType<typeof equippedAbility>>,
+      ) => {
+        const charges = skillCharges(hero, ability, zone.world.tick);
+        if (!charges) return;
         chargedSkills.add(ability.id);
         let view = target.build.charges.get(ability.id);
         if (!view) {
@@ -1210,7 +1217,13 @@ export class MatchRoom extends Room<{
         view.count = charges.count;
         view.capacity = charges.capacity;
         view.rechargeTicks = charges.rechargeTicks;
+      };
+      for (let slot = 0; slot < 5; slot++) {
+        const ability = equippedAbility(hero, slot, zone.config);
+        if (ability) syncCharges(ability);
       }
+      const plant = zone.config.skillCatalogue?.[conLuan.plant];
+      if (hero.basicId === conLuan.sword && plant) syncCharges(plant);
       for (const id of target.build.charges.keys())
         if (!chargedSkills.has(id)) target.build.charges.delete(id);
       target.lastSequence = hero.lastSequence;
@@ -1219,9 +1232,16 @@ export class MatchRoom extends Room<{
           undefined ||
         hero.pose !== 'basic_attack' ||
         zone.world.tick >= hero.actionUntil;
-      target.basicCooldown = showBasicRecovery
-        ? Math.max(0, hero.cooldown - zone.world.tick)
-        : 0;
+      const conLuanMelee =
+        hero.basicId === conLuan.monk &&
+        !(hero.statuses ?? []).some(
+          (status) =>
+            status.kind === 'con_luan_ranged' && status.until > zone.world.tick,
+        );
+      target.basicCooldown =
+        showBasicRecovery && !conLuanMelee
+          ? Math.max(0, hero.cooldown - zone.world.tick)
+          : 0;
       target.dashCharges = hero.dashCharges ?? 0;
       target.dashRechargeTicks = Math.max(
         0,
@@ -1420,6 +1440,7 @@ export class MatchRoom extends Room<{
           x: area.x,
           y: area.y,
           radius: area.effect.radius,
+          radiusY: area.effect.radiusY ?? area.effect.radius,
           ticks: area.until - zone.world.tick,
           ownerId: area.ownerId,
           abilityId: area.abilityId,

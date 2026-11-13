@@ -1,3 +1,9 @@
+## Côn Luân · Bản chơi thử
+
+Dùng Q/E/R Kiếm Tôn qua cả bốn bậc để xác nhận thời lượng choáng theo từng lần trúng. Q chỉ nổ kiếm của người dùng và sát thương chiêu tăng 30% theo bậc. E có năm nhịp sát thương, áp choáng ở lần trúng đầu mỗi mục tiêu. Đối thủ vào T sau nhịp mở vẫn bị làm chậm và không lướt được, có thể đi bộ ra ngoài rồi lướt. E Thiền Sư chỉ làm chậm mục tiêu vòng sét chạm tới, W/R choáng 2 giây trong vùng nổ.
+
+Kiểm tra chuỗi A và chỉ số hai thế Thiền Sư, khóa mục tiêu sét và nhịp một giây, năm ô học chiêu, ba kiếm Kinh Lôi và hồi W khi vào vùng, đầu rồng bay thẳng, tâm và thời lượng trận pháp. Trong cùng phòng sáu người, kiểm tra sprite Hắc Thiết theo bốn hướng, thanh S, đồng bộ hai nhánh và sprite/đòn đánh của các phái hiện có. [Bản chơi thử](docs/CON_LUAN_PLAYTEST.md).
+
 ## Bổng đỏ và nhịp đánh thường M3D
 
 - Trong trận M3D, cả bốn hướng có một tư thế đứng, bốn khung bước đi và bốn thức A dùng atlas Bổng đỏ. Cả chủ nhân và người chơi khác nhận đúng hướng đứng. Soi chân, tay, hoa văn và vị trí vệt đòn ở zoom gameplay.

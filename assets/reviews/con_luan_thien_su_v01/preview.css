@@ -1,0 +1,15 @@
+:root { color-scheme: dark; font: 15px/1.4 "Segoe UI", sans-serif; color: #fff1d3; }
+body { margin: 0; background: #211c1b; }
+#viewport, #canvas { position: absolute; inset: 0; overflow: hidden; }
+canvas { display: block; image-rendering: pixelated; }
+.overlay {
+  position: absolute; z-index: 1; display: flex; gap: .65rem; align-items: center;
+  background: #211914eb; border: 1px solid #a9774c; padding: .55rem .8rem;
+}
+header { top: 1rem; left: 1rem; flex-direction: column; align-items: start !important; gap: .1rem !important; }
+header span, nav span { color: #ebd0a6; }
+nav { bottom: 1rem; left: 50%; transform: translateX(-50%); white-space: nowrap; }
+button { font: inherit; color: inherit; background: #382620; border: 1px solid #99724b; padding: .35rem .55rem; cursor: pointer; }
+button[aria-pressed="true"] { border-color: #e7bbff; background: #5a3861; }
+kbd { margin-right: .3rem; }
+@media (max-width: 450px) { nav { gap: .35rem; padding: .4rem; font-size: 12px; } }

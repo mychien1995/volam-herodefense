@@ -192,7 +192,7 @@
 }
 .school-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
 }
 #pregame .school-card {
@@ -421,7 +421,7 @@
 }
 @media (max-width: 850px) and (min-width: 600px) {
   .school-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 7px;
   }
   #pregame .school-card {
@@ -514,6 +514,9 @@
 }
 .school-window .school-portrait.thieu {
   background-image: url('/assets/renovation-v5/portrait-hero_thieu_lam.png');
+}
+.school-window .school-portrait.con-luan {
+  background-image: url('/assets/characters/con_luan_skill_preview/icons/hero_con_luan_thien_su.png');
 }
 .school-window .school-portrait {
   background-size: 128px 128px;

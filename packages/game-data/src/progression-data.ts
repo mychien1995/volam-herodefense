@@ -139,6 +139,11 @@ export const progressionSchema = z
   });
 /** Combat availability is independent of the retained artwork inventory. */
 export const schoolProgressionMetadata = {
+  con_luan: {
+    passiveId: 'huyen_thien_vo_cuc_cong',
+    basicIds: ['con_luan_thien_su', 'con_luan_kiem_ton'],
+    implemented: true,
+  },
   cai_bang: {
     passiveId: 'tieu_dieu_cong',
     basicIds: ['cai_bang_bong', 'cai_bang_chuong'],

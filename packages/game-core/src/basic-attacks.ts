@@ -1,4 +1,5 @@
 import type { Ability, Hero } from './types.js';
+import { conLuan } from './con-luan-ids.js';
 
 /** Called only after the server accepts A; targets/cleaves never advance a chain. */
 export function nextBasic(
@@ -21,6 +22,19 @@ export function nextBasic(
   if ('damage' in effect) effect.damage *= step.damageMultiplier;
   if (effect.mode === 'arc' && step.halfAngle !== undefined)
     effect.halfAngle = step.halfAngle;
+  if (
+    effect.mode === 'arc' &&
+    base.id === conLuan.monk &&
+    step.stage === 'overhead'
+  )
+    effect.residualArea = {
+      mode: 'area',
+      radius: 37,
+      damage: 13,
+      forwardOffset: 42,
+      durationTicks: 1,
+      tickInterval: 1,
+    };
   if (
     effect.mode === 'arc' &&
     base.manualChain &&
