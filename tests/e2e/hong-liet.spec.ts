@@ -53,6 +53,7 @@ interface Presentation {
   hongLiet: {
     actions: string[];
     frames: Record<string, string[]>;
+    fireFrames: string[];
     entities: Array<{
       id: string;
       asset: string;
@@ -68,7 +69,8 @@ const read = (p: Page): Promise<Snapshot> =>
   p.evaluate('window.__VOLAM__.snapshot()');
 const view = (p: Page): Promise<Presentation> =>
   p.evaluate('window.__VOLAM__.presentation()');
-const out = 'docs/evidence/hong-liet-runtime';
+const out =
+  process.env['VOLAM_HONG_LIET_EVIDENCE'] ?? 'docs/evidence/hong-liet-runtime';
 async function enter(p: Page, access = 'shared') {
   await p.getByRole('button', { name: 'Phó Bản', exact: true }).click();
   await p.locator('[data-destination="hong_liet"]').click();
@@ -192,6 +194,9 @@ test('two clients: natural boss AI, authority, selected v04 frames and all nine 
     await joinWaiting(pages[1]!, 'Boss QA 2', room);
     await startTogether(pages, ['thien_son', 'vo_dang']);
     await Promise.all(pages.map((p) => enter(p)));
+    await expect(
+      pages[0]!.getByRole('meter', { name: 'Sinh lực Hoàn Nhan Hồng Liệt' }),
+    ).toBeVisible();
     await mkdir(out, { recursive: true });
     const first = await read(pages[0]!);
     expect(
@@ -289,8 +294,9 @@ test('two clients: natural boss AI, authority, selected v04 frames and all nine 
     expect(pres.hongLiet.frames.boss_thrust_vertical?.length).toBeGreaterThan(
       0,
     );
-    expect(pres.hongLiet.frames.vfx_meteor_safe?.length).toBeGreaterThan(0);
-    expect(pres.hongLiet.frames.vfx_lava_lane_v03?.length).toBeGreaterThan(0);
+    expect(pres.hongLiet.fireFrames).toEqual(
+      expect.arrayContaining(['meteor', 'crust', 'flame', 'crescent']),
+    );
     expect(pres.hongLiet.frames.cannon_clean?.length).toBeGreaterThan(0);
     await writeFile(
       `${out}/two-client-observations.json`,

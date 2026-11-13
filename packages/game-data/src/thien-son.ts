@@ -70,8 +70,8 @@ export const thienSonSkills: Ability[] = [
       tickInterval: 30,
       radius: 85,
       damage: 0,
-      protectOwner: true,
-      ownerRegenFraction: 0.08,
+      ownerDamageReduction: 0.4,
+      ownerRegenFraction: 0.03,
     },
   },
   {
@@ -249,7 +249,7 @@ export const thienSonSkills: Ability[] = [
   },
 ];
 const descriptions = [
-  'Hoa cố định tại chỗ thi triển: người tạo hoa đứng trong vùng được miễn sát thương và hồi sinh lực nhanh; ra ngoài mất bảo hộ.',
+  'Đặt hoa cố định trong 6 giây. Khi đứng trong vòng, người thi triển giảm 40% sát thương nhận và hồi 3–4% sinh lực tối đa mỗi giây tùy bậc.',
   'Xoay sáu nhịp quanh bản thân, giảm mạnh sát thương nhận trong lúc xoay.',
   'Một vòng quạt duy trì sát thương, làm chậm và tiêu hao nội lực theo nhịp. Bấm lại để thu vòng. Hồi 2 giây khi thu xong.',
   'Tạm tăng tốc di chuyển, tốc đánh và giảm hồi chiêu có giới hạn; không cộng dồn.',
@@ -298,9 +298,9 @@ export function addThienSonProgression(d: ProgressionDefinition): void {
         if (e.finisherDamage) e.finisherDamage += 12 * r;
         if (e.slowedBonus) e.slowedBonus += 0.05 * r;
         if (e.projectileBurst) e.projectileBurst.damage += r;
-      } else if (e.mode === 'area' && e.protectOwner) {
+      } else if (e.mode === 'area' && e.ownerDamageReduction !== undefined) {
         e.radius += 5 * r;
-        e.ownerRegenFraction = (e.ownerRegenFraction ?? 0) + 0.02 * r;
+        e.ownerRegenFraction = 0.03 + (0.01 * r) / 3;
       } else if (e.mode === 'dash') {
         e.distance += 8 * r;
         if (e.damage) e.damage += 9 * r;

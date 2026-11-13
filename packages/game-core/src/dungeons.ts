@@ -87,6 +87,8 @@ export interface CreepDungeonDefinition {
   restTicks: number;
   respawnTicks: number;
   baseCount: number;
+  /** Preserve the previous per-wave reward budget after increasing density. */
+  rewardBaseCount?: number;
   countPerAdditionalPlayer: number;
   hpPerWave: number;
   damagePerWave: number;
@@ -658,7 +660,7 @@ export class DungeonMatch {
     if ((this.hero(id)?.hp ?? 0) <= 0)
       return 'Độc nổ đã hạ gục bạn trước khi rời đấu trường.';
     zone.emptyBossResetAt = undefined;
-    resetQuicksand(zone.world, zone.config, dungeon.exit);
+    resetQuicksand(zone.world, zone.config);
     const occupant = zone.world.heroes.size;
     this.transfer(
       id,
@@ -1379,6 +1381,21 @@ export class DungeonMatch {
     const count = Math.ceil(
       d.baseCount * (1 + d.countPerAdditionalPlayer * (players - 1)),
     );
+    const populationScale = campaign
+      ? 1 + campaign.privateCountPerPlayer * (roomPlayers - 1)
+      : 1;
+    const spawnCount =
+      d.boss || d.chuBoss || d.kimBoss
+        ? 0
+        : campaign && d.rewardBaseCount === undefined
+          ? Math.ceil(d.baseCount * populationScale)
+          : count;
+    const rewardCount =
+      d.rewardBaseCount === undefined || isBossDungeon(d)
+        ? undefined
+        : Math.ceil(d.rewardBaseCount * populationScale);
+    const perCreepReward = (amount: number) =>
+      rewardCount === undefined ? amount : (amount * rewardCount) / spawnCount;
     return {
       ...this.base,
       bossEncounter: d.bossEncounter,
@@ -1386,22 +1403,10 @@ export class DungeonMatch {
       height: d.height,
       collision: d.collision,
       spawn: d.spawn,
-      creepSpawns: Array.from(
-        {
-          length:
-            d.boss || d.chuBoss || d.kimBoss
-              ? 0
-              : campaign
-                ? Math.ceil(
-                    d.baseCount *
-                      (1 + campaign.privateCountPerPlayer * (roomPlayers - 1)),
-                  )
-                : count,
-        },
-        (_, i) => ({
-          ...d.creepSpawns[i % d.creepSpawns.length]!,
-        }),
-      ),
+      dungeonExit: d.exit,
+      creepSpawns: Array.from({ length: spawnCount }, (_, i) => ({
+        ...d.creepSpawns[i % d.creepSpawns.length]!,
+      })),
       creepRespawn: false,
       dungeonId: d.id,
       dungeonAggro: !(d.boss || d.chuBoss || d.kimBoss || d.bossEncounter),
@@ -1425,12 +1430,10 @@ export class DungeonMatch {
                 (1 + campaign.privateDamagePerPlayer * (roomPlayers - 1))
               : 1 + d.damagePerAdditionalPlayer * (players - 1)),
         ),
-        ...(campaign
-          ? {
-              xp: campaign.dungeonXp[chapter]!,
-              gold: campaign.dungeonGold[chapter]!,
-            }
-          : {}),
+        xp: perCreepReward(campaign?.dungeonXp[chapter] ?? this.base.creep.xp),
+        gold: perCreepReward(
+          campaign?.dungeonGold[chapter] ?? this.base.creep.gold,
+        ),
       },
     };
   }

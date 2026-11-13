@@ -9,9 +9,15 @@ import raw from './boss-co-mo-map.json' with { type: 'json' };
 import { creepDungeon } from './dungeon.js';
 import { m1Config } from './m1.js';
 import { renovationCollision } from './renovation-navigation.js';
-import { enlargeBossArena } from './boss-arena-geometry.js';
+import { bossArenaScale, scaleBossArena } from './boss-arena-geometry.js';
 import { bossCadence, cadenceTicks } from './boss-cadence.js';
+import { coMoNeedleSlow } from './creep-abilities.js';
 const hz = m1Config.tickRate;
+const projectileSlow = z.strictObject({
+  kind: z.literal('slow'),
+  magnitude: z.number().gt(0).max(0.85),
+  durationTicks: z.number().int().positive(),
+});
 const markers = raw.layers.find((l) => l.name === 'markers')!
   .objects! as Array<{
   name: string;
@@ -72,9 +78,21 @@ export const lyMacSauEncounter: BossEncounterDefinition = {
     },
     attack('bang_phach_ngan_cham', 'Băng Phách Ngân Châm', 0.6, 14, 864, 480),
     attack('xich_luyen_chuong', 'Xích Luyện Chưởng', 0.9, 18, 620, 300),
-    attack('phat_tran_cong', 'Phất Trần Công', 0.4, 18, 120),
+    {
+      ...attack('phat_tran_cong', 'Phất Trần Công', 0.4, 18, 120),
+      stunTicks: cadenceTicks(0.6),
+    },
     attack('co_mo_kiem_phap', 'Cổ Mộ Kiếm Pháp', 0.75, 0, 0),
-    attack('ngu_doc_chuong', 'Ngũ Độc Chưởng', 1, 16, 1100, 250),
+    {
+      ...attack('ngu_doc_chuong', 'Ngũ Độc Chưởng', 1, 16, 1100, 250),
+      projectileStatuses: [
+        projectileSlow.parse({
+          kind: 'slow',
+          magnitude: 0.7,
+          durationTicks: cadenceTicks(2),
+        }),
+      ],
+    },
   ],
   rotation: [
     'bang_phach_ngan_cham',
@@ -97,11 +115,12 @@ export const lyMacSauEncounter: BossEncounterDefinition = {
     splashRadius: 0,
     burnDamage: 0,
     burnTicks: 0,
+    statuses: z.array(projectileSlow).parse(coMoNeedleSlow),
   },
   summonLifetimeTicks: hz * 16,
   summonStats: {
     ...m1Config.creep,
-    hp: 60,
+    hp: 240,
     damage: 5,
     speed: 70,
     attackRange: 360,
@@ -184,6 +203,7 @@ z.object({
         nameVi: z.string(),
         windupTicks: positive.int(),
         recoveryTicks: positive.int(),
+        stunTicks: positive.int().optional(),
         damage: nonnegative,
         range: nonnegative,
         speed: nonnegative,
@@ -202,31 +222,35 @@ if (
   lyMacSauEncounter.summonCount > lyMacSauEncounter.summonLimit
 )
   throw Error('Invalid Lý Mạc Sầu rotation/summon tuning');
-export const coMoDungeon: CreepDungeonDefinition = enlargeBossArena({
-  ...creepDungeon,
-  id: 'co_mo',
-  width: raw.width * 32,
-  height: raw.height * 32,
-  collision: renovationCollision(
-    'co_mo',
-    raw.width * 32,
-    raw.height * 32,
-    raw.layers
-      .find((l) => l.name === 'collision')!
-      .objects!.map(({ x, y, width, height }) => ({ x, y, width, height })),
-  ),
-  spawn: marker('hero_spawn'),
-  exit: marker('exit_portal'),
-  creepSpawns: [marker('boss_spawn')],
-  baseCount: 1,
-  countPerAdditionalPlayer: 0,
-  hpPerAdditionalPlayer: 0,
-  damagePerAdditionalPlayer: 0,
-  hpPerWave: 0,
-  damagePerWave: 0,
-  creepRoster: undefined,
-  bossEncounter: lyMacSauEncounter,
-});
+const coMoArenaScale = bossArenaScale * Math.sqrt(0.8 * 0.9);
+export const coMoDungeon: CreepDungeonDefinition = scaleBossArena(
+  {
+    ...creepDungeon,
+    id: 'co_mo',
+    width: raw.width * 32,
+    height: raw.height * 32,
+    collision: renovationCollision(
+      'co_mo',
+      raw.width * 32,
+      raw.height * 32,
+      raw.layers
+        .find((l) => l.name === 'collision')!
+        .objects!.map(({ x, y, width, height }) => ({ x, y, width, height })),
+    ),
+    spawn: marker('hero_spawn'),
+    exit: marker('exit_portal'),
+    creepSpawns: [marker('boss_spawn')],
+    baseCount: 1,
+    countPerAdditionalPlayer: 0,
+    hpPerAdditionalPlayer: 0,
+    damagePerAdditionalPlayer: 0,
+    hpPerWave: 0,
+    damagePerWave: 0,
+    creepRoster: undefined,
+    bossEncounter: lyMacSauEncounter,
+  },
+  coMoArenaScale,
+);
 for (const p of [
   ...Array.from({ length: 6 }, (_, i) => ({
     x: coMoDungeon.spawn.x,

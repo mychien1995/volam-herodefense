@@ -84,8 +84,15 @@ export class BossSkillAnnouncements {
     return true;
   }
   sync(state: LobbyState | undefined, zone: string) {
+    if (!this.labels.size) return;
     const raw = zone === 'arena' ? state?.bacCai.get('arena')?.snapshot : '';
     const bc = raw ? (JSON.parse(raw) as BacCaiView) : null;
+    const camera = this.scene.cameras.main;
+    const hud = document.getElementById('boss-hud');
+    const topInset =
+      hud && !hud.hidden
+        ? (hud.offsetTop + hud.offsetHeight + 10) / camera.zoom
+        : 12;
     for (const [key, v] of this.labels) {
       const id = v.sourceId;
       const lifetime = v.farewell ? 4.7 : v.banter ? 4 : 1.25;
@@ -113,13 +120,11 @@ export class BossSkillAnnouncements {
         position.y -
         (dialogue ? 116 : 85) -
         10 * Math.min(1, Math.max(0, age / 0.35));
-      if (dialogue) {
-        const camera = this.scene.cameras.main.worldView;
-        v.text.setVisible(camera.contains(position.x, position.y));
-        const inset = Math.min(v.text.width / 2 + 8, camera.width / 2);
-        x = Phaser.Math.Clamp(x, camera.left + inset, camera.right - inset);
-        y = Math.max(y, camera.top + v.text.height + 12);
-      }
+      const view = camera.worldView;
+      v.text.setVisible(view.contains(position.x, position.y));
+      const inset = Math.min(v.text.width / 2 + 8, view.width / 2);
+      x = Phaser.Math.Clamp(x, view.left + inset, view.right - inset);
+      y = Math.max(y, view.top + v.text.height + topInset);
       v.text
         .setPosition(Math.round(x), Math.round(y))
         .setDepth(position.y + 220)

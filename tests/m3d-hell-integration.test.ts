@@ -61,8 +61,10 @@ it('M3D combines Hell with every existing destination and keeps encounter worlds
   expect(hell.config.creep).toEqual({
     ...m1Config.creep,
     speed: m1Config.speed * 0.648,
+    xp: 36,
+    gold: 7.2,
   });
-  expect(hell.world.creeps.size).toBe(6);
+  expect(hell.world.creeps.size).toBe(10);
   expect([
     ...new Set([...hell.world.creeps.values()].map((c) => c.archetypeId)),
   ]).toEqual([hellRoster[0]]);

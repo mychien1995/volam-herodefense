@@ -80,6 +80,19 @@ const poses: Readonly<Record<string, Readonly<Record<string, Poses>>>> = {
     long_tuong_bat_nha_cong: [0, 3, 2],
     long_tuong_bat_nha_thap_tang: [0, 3, 2],
   },
+  hoac_do: {
+    thiet_phien_lien_hoan: thrust,
+    cuong_phong_tan_loi_cong: sweep,
+    phien_trung_doc_dinh: [0, 3, 0],
+    cuong_phong_van_nhan: [0, 2, 0],
+  },
+  dat_nhi_ba: {
+    dat_sweep: [0, 2, 0],
+    dai_luc_pha_son: raise,
+    bat_dong_kim_cang: [0, 3, 3],
+    dai_luc_pha_son_boulder: thrust,
+    hang_ma_tam_lien_chan: raise,
+  },
   ly_mac_sau: {
     xich_luyen_chuong: palm,
     co_mo_kiem_phap: [0, 2, 2],

@@ -1,8 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { DungeonMatch, type BossAbilityId } from '@volam/game-core';
+import {
+  characterStats,
+  DungeonMatch,
+  hasStatus,
+  type BossAbilityId,
+} from '@volam/game-core';
 import { applyStatus } from '../packages/game-core/src/status.js';
 import {
   m1Config,
+  creepCombatDefinition,
   creepDungeon,
   coMoDungeon,
   lyMacSauEncounter,
@@ -53,6 +59,27 @@ function exit(match: DungeonMatch, id: string) {
 }
 
 describe('Lý Mạc Sầu deterministic encounter', () => {
+  it('keeps the aspect ratio and uses 90% of the last reduced arena area', () => {
+    const previous = { width: 1408, height: 1056 };
+    expect(coMoDungeon.width / coMoDungeon.height).toBeCloseTo(
+      previous.width / previous.height,
+    );
+    expect(coMoDungeon.width * coMoDungeon.height).toBeCloseTo(
+      previous.width * previous.height * 0.8 * 0.9,
+    );
+  });
+  it('uses a ready ranged special when the next sweep is out of reach', () => {
+    const f = setup();
+    const runtime = f.zone.world.boss!;
+    Object.assign(f.match.hero('p0')!, { x: f.boss.x + 220, y: f.boss.y });
+    runtime.rotation = lyMacSauEncounter.rotation.indexOf('phat_tran_cong');
+    runtime.nextActionAt = 0;
+    runtime.cooldowns = { bang_phach_ngan_cham: 120 };
+    f.boss.cooldown = 120;
+    f.match.step();
+    expect(runtime.cast?.id).toBe('xich_luyen_chuong');
+    expect(f.zone.world.projectiles.size).toBe(0);
+  });
   it('settles a finishing burn in the same tick, without delaying or duplicating the item', () => {
     const f = setup();
     f.boss.hp = 1;
@@ -119,7 +146,7 @@ describe('Lý Mạc Sầu deterministic encounter', () => {
     step(f.match, 10);
     expect(f.boss.hp).toBe(hp);
   });
-  it('uses a frontal cone and shared mitigation, with no VFX-invented status', () => {
+  it('stuns only a landed frontal sweep for 0.6 seconds after its warning', () => {
     const f = setup(3);
     const a = f.match.hero('p0')!,
       b = f.match.hero('p1')!,
@@ -130,11 +157,21 @@ describe('Lý Mạc Sầu deterministic encounter', () => {
     const c = cast(f, 'phat_tran_cong');
     c.fx = 1;
     c.fy = 0;
-    step(f.match, c.releaseAt - f.zone.world.tick);
+    step(f.match, c.releaseAt - f.zone.world.tick - 1);
+    expect(hasStatus(a, 'stun', f.zone.world.tick)).toBe(false);
+    f.match.step();
     expect(a.hp).toBeLessThan(10000);
     expect(b.hp).toBe(10000);
     expect(outside.hp).toBe(10000);
-    expect(a.statuses).toEqual([]);
+    expect(a.statuses).toContainEqual(
+      expect.objectContaining({
+        kind: 'stun',
+        abilityId: 'phat_tran_cong',
+        until: c.releaseAt + 18,
+      }),
+    );
+    expect(b.statuses).toEqual([]);
+    expect(outside.statuses).toEqual([]);
   });
   it.each([
     [0, 4],
@@ -145,6 +182,9 @@ describe('Lý Mạc Sầu deterministic encounter', () => {
     (rng, count) => {
       const f = setup();
       f.zone.world.random = () => rng!;
+      const hero = f.match.hero('p0')!;
+      const spawn = lyMacSauEncounter.summonSpawns[0]!;
+      Object.assign(hero, { x: spawn.x + 60, y: spawn.y });
       const c = cast(f, 'co_mo_kiem_phap');
       step(f.match, c.releaseAt - f.zone.world.tick);
       const summons = () =>
@@ -154,17 +194,29 @@ describe('Lý Mạc Sầu deterministic encounter', () => {
         summons().every(
           (c) =>
             c.archetypeId === 'co_mo_am_binh' &&
+            c.maxHp === 240 &&
             c.stats!.xp === 0 &&
             !!c.rangedAttack,
         ),
       ).toBe(true);
-      const summon = summons()[0]!,
-        hero = f.match.hero('p0')!;
-      hero.x = summon.x + 10;
-      hero.y = summon.y;
-      f.match.step();
-      expect(hero.hp).toBeLessThan(10000);
+      const summon = summons()[0]!;
       expect(summon.pose).toBe('basic_attack');
+      expect([...f.zone.world.projectiles.values()]).toContainEqual(
+        expect.objectContaining({
+          ownerId: summon.id,
+          abilityId: 'co_mo_minion_needle',
+        }),
+      );
+      step(f.match, 9);
+      expect(hero.hp).toBeLessThan(10000);
+      expect(hero.statuses).toContainEqual(
+        expect.objectContaining({
+          abilityId: 'co_mo_minion_needle',
+          kind: 'slow',
+          magnitude: 0.6,
+          durationTicks: 45,
+        }),
+      );
       hero.x = 1000;
       hero.y = 700;
       const second = cast(f, 'co_mo_kiem_phap');
@@ -193,6 +245,69 @@ describe('Lý Mạc Sầu deterministic encounter', () => {
         ),
       ).toBe(true);
   });
+  it('slows on both Ngân châm and Tam châm hits with the production creep profile', () => {
+    const f = setup();
+    f.zone.config.creepCombat = creepCombatDefinition;
+    f.zone.world.random = () => 0;
+    const target = f.match.hero('p0')!;
+    const spawn = lyMacSauEncounter.summonSpawns[0]!;
+    Object.assign(target, { x: spawn.x + 60, y: spawn.y });
+    const c = cast(f, 'co_mo_kiem_phap');
+    step(f.match, c.releaseAt - f.zone.world.tick);
+    f.zone.world.boss!.nextActionAt = Infinity;
+    f.boss.cooldown = Infinity;
+    const observed = new Set<string>();
+    for (let i = 0; i < 180; i++) {
+      f.match.step();
+      for (const status of target.statuses ?? [])
+        if (
+          status.kind === 'slow' &&
+          status.magnitude === 0.6 &&
+          status.durationTicks === 45
+        )
+          observed.add(status.abilityId);
+    }
+    expect(observed).toEqual(
+      new Set(['creep_co_mo_am_binh_basic', 'creep_co_mo_am_binh_special']),
+    );
+  });
+  it.each([false, true])(
+    'applies Ngũ Độc Chưởng slow only on a damaging projectile hit (invulnerable: %s)',
+    (invulnerable) => {
+      const f = setup(2);
+      const target = f.match.hero('p0')!;
+      const outsideLane = f.match.hero('p1')!;
+      const west = lyMacSauEncounter.edgeEmitters.find((p) => p.fx === 1)!;
+      Object.assign(target, { x: west.x + 65, y: west.y, invulnerable });
+      Object.assign(outsideLane, { x: west.x + 65, y: west.y + 50 });
+      const speed = characterStats(target, f.zone.config).total.movementSpeed;
+      const c = cast(f, 'ngu_doc_chuong');
+      step(f.match, c.releaseAt - f.zone.world.tick);
+      expect(hasStatus(target, 'slow', f.zone.world.tick)).toBe(false);
+      step(f.match, 10);
+      expect(hasStatus(outsideLane, 'slow', f.zone.world.tick)).toBe(false);
+      if (invulnerable) {
+        expect(target.hp).toBe(10000);
+        expect(hasStatus(target, 'slow', f.zone.world.tick)).toBe(false);
+        return;
+      }
+      expect(target.hp).toBeLessThan(10000);
+      const slow = target.statuses!.find((s) => s.kind === 'slow')!;
+      expect(slow).toMatchObject({
+        abilityId: 'ngu_doc_chuong',
+        magnitude: 0.7,
+        durationTicks: 60,
+      });
+      expect(
+        characterStats(target, f.zone.config, f.zone.world.tick).total
+          .movementSpeed,
+      ).toBeCloseTo(speed * 0.3);
+      f.zone.world.boss!.nextActionAt = Infinity;
+      f.boss.cooldown = Infinity;
+      step(f.match, slow.until - f.zone.world.tick);
+      expect(hasStatus(target, 'slow', f.zone.world.tick)).toBe(false);
+    },
+  );
   it('resists control while preserving damage and cancels cast when its selected target leaves', () => {
     const f = setup();
     applyStatus(

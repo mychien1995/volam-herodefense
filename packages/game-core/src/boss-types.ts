@@ -1,4 +1,9 @@
-import type { Point, SimulationConfig, ProjectileEffect } from './types.js';
+import type {
+  Point,
+  SimulationConfig,
+  ProjectileEffect,
+  StatusSpec,
+} from './types.js';
 
 export type BossAbilityId =
   | 'ly_mac_sau_basic'
@@ -9,6 +14,8 @@ export type BossAbilityId =
   | 'ngu_doc_chuong';
 export interface BossAttackDefinition {
   cooldownTicks?: number;
+  stunTicks?: number;
+  projectileStatuses?: StatusSpec[] | undefined;
   id: BossAbilityId;
   nameVi: string;
   windupTicks: number;

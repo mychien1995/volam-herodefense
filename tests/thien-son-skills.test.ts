@@ -63,6 +63,19 @@ function fixture(id = 'lien_hoa_phien') {
   return { config, world, hero, enemies, events, steps, input, cast, hits };
 }
 describe('M3C1 authoritative wind mechanics', () => {
+  it('keeps Q at 40% mitigation while healing scales from 3% to 4% per second', () => {
+    const q = m1Config.progression!.skills['lien_hoa_phien']!;
+    expect(q.levelGates).toEqual([1, 3, 5, 7]);
+    for (const [i, rank] of q.ranks.entries()) {
+      expect(rank.effect).toMatchObject({
+        mode: 'area',
+        ownerDamageReduction: 0.4,
+        ownerRegenFraction: 0.03 + (0.01 * i) / 3,
+        durationTicks: 180,
+        damage: 0,
+      });
+    }
+  });
   it.each(['bach_phien_phong_bao', 'bach_liet_thien_kich'])(
     '%s uses ultimate rank gates/cap with no weapon requirement',
     (id) => {
@@ -96,7 +109,8 @@ describe('M3C1 authoritative wind mechanics', () => {
       const f = fixture(id),
         a = m1Config.skillCatalogue![id]!;
       f.cast();
-      const firstPulse = a.effect.mode === 'projectile' ? a.effect.recallDrain?.mana ?? 0 : 0;
+      const firstPulse =
+        a.effect.mode === 'projectile' ? (a.effect.recallDrain?.mana ?? 0) : 0;
       expect(f.hero.mana).toBe(100 - a.manaCost - firstPulse);
       expect(
         submitInput(f.world, 'a', f.hero.lastSequence, {
@@ -192,7 +206,7 @@ describe('M3C1 authoritative wind mechanics', () => {
     f.cast();
     f.steps(10);
     expect(f.hero.x).toBe(300);
-    expect(fan(f).x).toBeCloseTo(300 + 11 * 400 / 30);
+    expect(fan(f).x).toBeCloseTo(300 + (11 * 400) / 30);
     expect(f.hits().map((e) => e.damage)).toEqual([7]);
     const g = fixture('luu_phong_bo');
     g.config.collision = [{ x: 350, y: 250, width: 1, height: 100 }];
@@ -210,7 +224,7 @@ describe('M3C1 authoritative wind mechanics', () => {
     v.hero.fy = -1;
     v.cast();
     v.steps(10);
-    expect(fan(v).y).toBeCloseTo(300 - 11 * 400 / 30);
+    expect(fan(v).y).toBeCloseTo(300 - (11 * 400) / 30);
     expect(fan(v).x).toBe(300);
   });
   it('Chiết Mai increases movement and A cadence only for its owner, does not stack, and expires exactly', () => {

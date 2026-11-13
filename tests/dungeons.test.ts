@@ -6,6 +6,9 @@ import {
   creepDungeonSchema,
   forestRoster,
   desertDungeon,
+  beachDungeon,
+  hellDungeon,
+  campaignDefinition,
 } from '@volam/game-data';
 
 function setup() {
@@ -55,7 +58,7 @@ const steps = (match: DungeonMatch, n: number) => {
 };
 
 describe('M2A deterministic creep instances', () => {
-  it('uses the authorized Forest roster across six-creep private waves and keeps private cursors independent', () => {
+  it('uses the authorized Forest roster across ten-creep private waves and keeps private cursors independent', () => {
     expect(forestRoster).toEqual([
       'truc_xa',
       'doc_chu',
@@ -71,18 +74,49 @@ describe('M2A deterministic creep instances', () => {
       b = ready(match, 'b');
     const types = (z: MatchZone) =>
       [...z.world.creeps.values()].map((c) => c.archetypeId);
-    expect(types(a.zone)).toEqual(Array(6).fill(forestRoster[0]));
+    expect(types(a.zone)).toEqual(Array(10).fill(forestRoster[0]));
     clear(match, a.zone, a.hero);
     steps(match, creepDungeon.restTicks);
     expect(a.zone.wave).toBe(2);
-    expect(a.zone.world.creeps.size).toBe(6);
-    expect(types(a.zone)).toEqual(Array(6).fill(forestRoster[1]));
+    expect(a.zone.world.creeps.size).toBe(10);
+    expect(types(a.zone)).toEqual(Array(10).fill(forestRoster[1]));
     expect(b.zone.wave).toBe(1);
-    expect(types(b.zone)).toEqual(Array(6).fill(forestRoster[0]));
+    expect(types(b.zone)).toEqual(Array(10).fill(forestRoster[0]));
     clear(match, a.zone, a.hero);
     steps(match, creepDungeon.restTicks);
-    expect(types(a.zone)).toEqual(Array(6).fill(forestRoster[2]));
+    expect(types(a.zone)).toEqual(Array(10).fill(forestRoster[2]));
   });
+  it.each([1, 2, 6])(
+    'keeps ten unique spawns and the campaign clear budget with %i room players',
+    (players) => {
+      const config = {
+        ...structuredClone(m1Config),
+        campaign: campaignDefinition,
+        creepSpawns: [],
+      };
+      config.creep.damage = 0;
+      for (const dungeon of [
+        creepDungeon,
+        desertDungeon,
+        beachDungeon,
+        hellDungeon,
+      ]) {
+        const match = new DungeonMatch(config, dungeon, 42);
+        for (let i = 1; i < players; i++) match.add('peer' + i, 'Peer');
+        const { hero, zone } = ready(match, 'a');
+        const enemies = [...zone.world.creeps.values()];
+        expect(enemies).toHaveLength(10);
+        expect(new Set(enemies.map((c) => `${c.x},${c.y}`)).size).toBe(10);
+        for (const enemy of enemies) enemy.hp = 1;
+        clear(match, zone, hero);
+        const oldCount = Math.ceil(6 * (1 + 0.1 * (players - 1)));
+        expect(hero.xp).toBe(3 * oldCount);
+        expect(hero.gold + (hero.farmGoldRemainder ?? 0)).toBeCloseTo(
+          0.8 * oldCount,
+        );
+      }
+    },
+  );
   it.each([1, 2, 6])(
     'keeps private wave counts, RNG and rewards with %i independent players',
     (players) => {
@@ -144,7 +178,7 @@ describe('M2A deterministic creep instances', () => {
       expect(ready(match, id, 'shared').zone).not.toBe(first.zone);
     expect(first.zone.world.heroes.size).toBe(1);
     expect(first.zone.spawnPlayerCount).toBe(1);
-    expect(first.zone.world.creeps.size).toBe(6);
+    expect(first.zone.world.creeps.size).toBe(10);
     expect(first.zone.world.creeps.values().next().value!.maxHp).toBe(hp);
     expect(new Set(match.membership.values()).size).toBe(6);
   });
@@ -292,7 +326,7 @@ describe('M2A deterministic creep instances', () => {
     match.step();
     expect(zone.wave).toBe(2);
     expect(zone.spawnPlayerCount).toBe(1);
-    expect(zone.world.creeps.size).toBe(6);
+    expect(zone.world.creeps.size).toBe(10);
     expect(
       [...zone.world.creeps.values()].every((c) => c.maxHp > m1Config.creep.hp),
     ).toBe(true);
@@ -311,14 +345,14 @@ describe('M2A deterministic creep instances', () => {
     enemy.hp = 40;
     hit(match, a.zone, a.hero, enemy.id);
     hit(match, a.zone, a.hero, enemy.id);
-    expect(a.hero.xp).toBe(m1Config.creep.xp);
-    expect(a.hero.gold).toBe(m1Config.creep.gold);
+    expect(a.hero.xp).toBe(36);
+    expect(a.hero.gold).toBe(7);
     expect(b.hero.xp).toBe(0);
     const bEnemy = b.zone.world.creeps.get(enemy.id)!;
     bEnemy.hp = 40;
     hit(match, b.zone, b.hero, bEnemy.id);
     hit(match, b.zone, b.hero, bEnemy.id);
-    expect(b.hero.xp).toBe(m1Config.creep.xp);
+    expect(b.hero.xp).toBe(36);
     const next = enemies[1]!;
     Object.assign(next, { x: 600, y: 240, hp: 40 });
     hit(match, a.zone, a.hero, next.id);
@@ -327,7 +361,7 @@ describe('M2A deterministic creep instances', () => {
     b.zone.world.creeps.get(next.id)!.hp = 1;
     hit(match, b.zone, b.hero, next.id);
     expect(a.hero.xp).toBe(old);
-    expect(b.hero.xp).toBe(120);
+    expect(b.hero.xp).toBe(72);
   });
   it('returns a dead hero to the arena after the configured delay with no XP/gold penalty', () => {
     const match = setup(),

@@ -14,6 +14,9 @@ const poison: StatusSpec[] = [
   { kind: 'poison', magnitude: 2, durationTicks: 90 },
 ];
 const burn: StatusSpec[] = [{ kind: 'burn', magnitude: 2, durationTicks: 90 }];
+export const coMoNeedleSlow: StatusSpec[] = [
+  { kind: 'slow', magnitude: 0.6, durationTicks: 45 },
+];
 const arc = (
   nameVi: string,
   extra: Partial<CreepAttack> = {},
@@ -538,6 +541,7 @@ add(
     damage: 1,
     cooldown: 30,
     graphic: 'needle',
+    statuses: coMoNeedleSlow,
   }),
   shot('Tam châm', {
     windup: 24,
@@ -546,6 +550,7 @@ add(
     count: 3,
     spread: 0.4,
     graphic: 'needle',
+    statuses: coMoNeedleSlow,
   }),
 );
 add('chu_wine_disciple', 'Đệ tử đưa rượu', arc('Đưa rượu', { damage: 0 }));
@@ -794,10 +799,6 @@ if (rows.length !== 49 || Object.keys(creepProfiles).length !== 49)
   throw Error('Creep catalogue must contain exactly 49 distinct profiles');
 const positiveTick = z.number().int().positive();
 const positive = z.number().finite().positive();
-const relativePoint = z.strictObject({
-  x: z.number().min(0.15).max(0.85),
-  y: z.number().min(0.15).max(0.85),
-});
 const trapCadence = {
   firstTick: positiveTick,
   interval: positiveTick,
@@ -811,6 +812,7 @@ const hazardSchema: z.ZodType<DungeonHazard> = z.discriminatedUnion('kind', [
     count: positiveTick,
     radius: positive,
     slow: z.number().gt(0).lt(1),
+    durationTicks: positiveTick,
   }),
   z.strictObject({
     kind: z.literal('geyser'),
@@ -823,7 +825,7 @@ const hazardSchema: z.ZodType<DungeonHazard> = z.discriminatedUnion('kind', [
     ...trapCadence,
     warning: positiveTick,
     stagger: positiveTick,
-    points: z.array(relativePoint).min(1),
+    count: positiveTick,
   }),
 ]);
 export const creepCombatDefinition: CreepCombatDefinition = {
@@ -838,15 +840,16 @@ export const creepCombatDefinition: CreepCombatDefinition = {
     },
     desert: {
       kind: 'quicksand',
-      count: 4,
+      count: 8,
       radius: 75,
-      slow: 0.38,
+      slow: 0.9,
+      durationTicks: 150,
     },
     sea: {
       kind: 'geyser',
       firstTick: 135,
-      interval: 130,
-      count: 2,
+      interval: 90,
+      count: 4,
       warning: 19,
       radius: 54,
       stunTicks: 26,
@@ -857,12 +860,7 @@ export const creepCombatDefinition: CreepCombatDefinition = {
       interval: 168,
       stagger: 42,
       warning: 18,
-      points: [
-        { x: 0.32, y: 0.56 },
-        { x: 0.49, y: 0.44 },
-        { x: 0.65, y: 0.6 },
-        { x: 0.57, y: 0.72 },
-      ],
+      count: 4,
       radius: 53,
       stunTicks: 26,
     },

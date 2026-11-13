@@ -15,21 +15,22 @@ export default async function setup() {
   process.env['NODE_ENV'] = 'development';
   for (const k of names.slice(1)) delete process.env[k];
   const server = createGameServer();
-  await server.listen(2791);
+  const serverPort = Number(process.env['HONG_LIET_QA_SERVER_PORT'] ?? 2791);
+  const clientPort = Number(process.env['HONG_LIET_QA_CLIENT_PORT'] ?? 5391);
+  await server.listen(serverPort);
   const client = await createServer({
     root: fileURLToPath(new URL('../../apps/game-client', import.meta.url)),
-    configFile: false,
     cacheDir: '.cache/hong-liet-vite',
     server: {
       host: '127.0.0.1',
-      port: 5391,
+      port: clientPort,
       strictPort: true,
       hmr: false,
       watch: null,
     },
     define: {
       'import.meta.env.VITE_SERVER_URL': JSON.stringify(
-        'http://127.0.0.1:2791',
+        `http://127.0.0.1:${serverPort}`,
       ),
     },
   });

@@ -1,4 +1,4 @@
-import type { Point, Rect, SimulationConfig } from './types.js';
+import type { Point, Rect, SimulationConfig, StatusSpec } from './types.js';
 export const hongLietAbilities = [
   'hong_liet_a1',
   'hong_liet_a2',
@@ -21,6 +21,7 @@ export interface BossAbilityProfile {
   radius: number;
   durationTicks: number;
   intervalTicks: number;
+  statuses?: StatusSpec[] | undefined;
 }
 export interface HongLietDefinition {
   id: 'hoan_nhan_hong_liet';
@@ -79,7 +80,6 @@ export interface BossCue extends Point {
   damage: number;
   nextHit: number;
   hitIds: Set<string>;
-  stunTicks: number;
   speed: number;
   remaining: number;
   previous?: Point;

@@ -12,7 +12,12 @@ import { addCreep } from './simulation.js';
 import { hurt, emit } from './combat.js';
 import { direction, distance, moveCircle, segmentCircle } from './geometry.js';
 import { gainExperience } from './progression.js';
-import { cancelOwnedEffects, displace, hasStatus } from './status.js';
+import {
+  applyStatus,
+  cancelOwnedEffects,
+  displace,
+  hasStatus,
+} from './status.js';
 import type { World, SimulationConfig, Point, Hero } from './types.js';
 export function spawnChu(
   world: World,
@@ -84,7 +89,10 @@ function damage(
   amount: number,
   c: SimulationConfig,
 ) {
-  hurt(w, h, CHU_BOSS_ID, id, amount, c, { critChance: 0, critMultiplier: 1 });
+  return hurt(w, h, CHU_BOSS_ID, id, amount, c, {
+    critChance: 0,
+    critMultiplier: 1,
+  });
 }
 export function chuFields(
   elapsed: number,
@@ -180,14 +188,14 @@ function begin(
       e.controlled = true;
       e.bossEncounter = true;
       e.summonedBy = CHU_BOSS_ID;
-      e.hp = e.maxHp = 40;
+      e.hp = e.maxHp = d.wineDisciple.hp;
       e.stats = {
         ...c.creep,
-        hp: 40,
+        hp: d.wineDisciple.hp,
         speed: 80,
         damage: 0,
         radius: 12,
-        defense: 0,
+        defense: d.wineDisciple.defense,
         xp: 0,
         gold: 0,
       };
@@ -244,7 +252,7 @@ function death(w: World, c: SimulationConfig): void {
     .filter((h) => Object.hasOwn(b.hits, h.id))
     .sort((a, z) => a.id.localeCompare(z.id));
   eligible.forEach((h, i) => {
-      if (c.campaign) return;
+    if (c.campaign) return;
     gainExperience(
       h,
       Math.floor(d.xp / eligible.length) + (i < d.xp % eligible.length ? 1 : 0),
@@ -565,7 +573,18 @@ export function stepChu(w: World, c: SimulationConfig): void {
         segmentCircle(from, shot, h, shot.radius + c.radius) !== undefined
       ) {
         shot.hitIds.push(h.id);
-        damage(w, h, 'chu_chuong', d.damage.palm, c);
+        if (damage(w, h, 'chu_chuong', d.damage.palm, c) && h.hp > 0)
+          applyStatus(
+            h,
+            {
+              kind: 'slow',
+              magnitude: d.palmSlow.fraction,
+              durationTicks: d.palmSlow.ticks,
+            },
+            CHU_BOSS_ID,
+            'chu_chuong',
+            w.tick,
+          );
         shot.remaining = 0;
       }
   }
@@ -599,7 +618,18 @@ export function stepChu(w: World, c: SimulationConfig): void {
             )
           ) {
             hand.hitIds.push(h.id);
-            damage(w, h, 'song_thu_ho_bac', d.damage.hand, c);
+            if (damage(w, h, 'song_thu_ho_bac', d.damage.hand, c) && h.hp > 0)
+              applyStatus(
+                h,
+                {
+                  kind: 'slow',
+                  magnitude: d.palmSlow.fraction,
+                  durationTicks: d.palmSlow.ticks,
+                },
+                CHU_BOSS_ID,
+                'song_thu_ho_bac',
+                w.tick,
+              );
           }
     }
   constrainChuTrap(w, c);
@@ -636,6 +666,17 @@ export function stepChu(w: World, c: SimulationConfig): void {
   }
   if (s.phase === 'reflect')
     for (const h of alive(w)) {
+      applyStatus(
+        h,
+        {
+          kind: 'slow',
+          magnitude: d.pullSlowFraction,
+          durationTicks: Math.min(2, s.until - w.tick),
+        },
+        CHU_BOSS_ID,
+        'can_khon_phan_chan',
+        w.tick,
+      );
       const dist = distance(h, boss);
       if (dist > 35) {
         const v = direction(boss.x - h.x, boss.y - h.y);

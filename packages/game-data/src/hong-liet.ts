@@ -8,7 +8,7 @@ import {
 import map from './hong-liet-map.json' with { type: 'json' };
 import { creepDungeon } from './dungeon.js';
 import { m1Config } from './m1.js';
-import { enlargeBossArena } from './boss-arena-geometry.js';
+import { bossArenaScale, scaleBossArena } from './boss-arena-geometry.js';
 import { bossCadence, cadenceTicks } from './boss-cadence.js';
 const marker = (name: string) => {
   const p = map.layers
@@ -65,7 +65,7 @@ export const hongLietDefinition: HongLietDefinition = {
   summonLifetimeTicks: ticks(25),
   minion: {
     ...m1Config.creep,
-    hp: 95,
+    hp: 1140,
     defense: 5,
     speed: 100,
     radius: 12,
@@ -135,6 +135,33 @@ export const hongLietDefinition: HongLietDefinition = {
     ),
   },
 };
+const burningHit = [
+  { kind: 'slow', magnitude: 0.45, durationTicks: ticks(1.5) },
+  { kind: 'burn', magnitude: 8, durationTicks: ticks(3) },
+] as const;
+for (const id of [
+  'hong_liet_a1',
+  'hoa_son_bao_phat',
+  'liet_diem_phong_toa',
+  'hoa_tien_te_phat',
+  'van_ly_nham_hoa',
+  'hoa_phao_thien_la',
+] as const)
+  hongLietDefinition.abilities[id].statuses = burningHit.map((s) => ({ ...s }));
+hongLietDefinition.abilities.hong_liet_a2.statuses = [
+  { kind: 'stun', magnitude: 1, durationTicks: ticks(0.65) },
+];
+for (const id of [
+  'dung_nham_liet_dia',
+  'hoa_son_bao_phat',
+  'van_ly_nham_hoa',
+] as const) {
+  const ability = hongLietDefinition.abilities[id];
+  ability.statuses = [
+    ...(ability.statuses ?? []),
+    { kind: 'stun', magnitude: 1, durationTicks: ticks(2) },
+  ];
+}
 hongLietDefinition.restTicks = cadenceTicks(bossCadence.hong_liet.restSeconds);
 hongLietDefinition.initialRestTicks = cadenceTicks(
   bossCadence.hong_liet.initialRestSeconds,
@@ -159,6 +186,15 @@ const ability = z.object({
   recoveryTicks: positive.int(),
   cooldownTicks: positive.int(),
   intervalTicks: positive.int(),
+  statuses: z
+    .array(
+      z.object({
+        kind: z.enum(['slow', 'burn', 'stun']),
+        magnitude: positive,
+        durationTicks: positive.int(),
+      }),
+    )
+    .optional(),
 });
 export function validateHongLietDefinition(d: HongLietDefinition): void {
   const point = z.object({ x: nonnegative, y: nonnegative }),
@@ -230,23 +266,27 @@ export const hongLietMap = map;
 const collision = map.layers
   .find((l) => l.name === 'collision')!
   .objects!.map(({ x, y, width, height }) => ({ x, y, width, height }));
-export const hongLietDungeon: CreepDungeonDefinition = enlargeBossArena({
-  ...creepDungeon,
-  id: 'hong_liet',
-  width: map.width * 32,
-  height: map.height * 32,
-  collision,
-  boss: hongLietDefinition,
-  spawn: { x: marker('hero_spawn').x, y: marker('hero_spawn').y },
-  exit: { x: marker('exit_portal').x, y: marker('exit_portal').y },
-  creepSpawns: [],
-  baseCount: 1,
-  countPerAdditionalPlayer: 0,
-  hpPerWave: 0,
-  damagePerWave: 0,
-  hpPerAdditionalPlayer: 0,
-  damagePerAdditionalPlayer: 0,
-});
+export const hongLietArenaScale = bossArenaScale * Math.sqrt(0.7);
+export const hongLietDungeon: CreepDungeonDefinition = scaleBossArena(
+  {
+    ...creepDungeon,
+    id: 'hong_liet',
+    width: map.width * 32,
+    height: map.height * 32,
+    collision,
+    boss: hongLietDefinition,
+    spawn: { x: marker('hero_spawn').x, y: marker('hero_spawn').y },
+    exit: { x: marker('exit_portal').x, y: marker('exit_portal').y },
+    creepSpawns: [],
+    baseCount: 1,
+    countPerAdditionalPlayer: 0,
+    hpPerWave: 0,
+    damagePerWave: 0,
+    hpPerAdditionalPlayer: 0,
+    damagePerAdditionalPlayer: 0,
+  },
+  hongLietArenaScale,
+);
 for (const p of [
   hongLietDungeon.spawn,
   hongLietDungeon.exit,

@@ -1195,7 +1195,14 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
       !hero ||
       hero.hp <= 0 ||
       hasStatus(hero, 'stun', world.tick) ||
-      (action.effect.mode === 'dash' && hasStatus(hero, 'root', world.tick))
+      (action.effect.mode === 'dash' &&
+        (hasStatus(hero, 'root', world.tick) ||
+          hero.statuses?.some(
+            (s) =>
+              s.kind === 'dash_lock' &&
+              s.abilityId === 'quicksand' &&
+              s.until > world.tick,
+          )))
     ) {
       action.until = world.tick;
       world.shots = world.shots.filter(

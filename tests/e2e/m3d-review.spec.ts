@@ -8,7 +8,7 @@ import {
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { Client, type Room } from '@colyseus/sdk';
 import { type LobbyState, PROTOCOL_VERSION } from '@volam/game-protocol';
-import { caiBangBongBeatTicks, m1Config } from '@volam/game-data';
+import { caiBangBongBeatTicks, coMoDungeon, m1Config } from '@volam/game-data';
 import { joinWaiting, startAuditTogether } from './pregame-helper.js';
 import { qaEvidenceDirectory, qaSession } from '../../tools/qa-session.mjs';
 
@@ -361,18 +361,19 @@ test('two remaining branches, east-only invasion, O + Q and server-timed dungeon
             )
             .map(({ x, y }) => [x, y]);
         };
-        await expect.poll(async () => (await positions()).length).toBe(4);
+        await expect.poll(async () => (await positions()).length).toBe(8);
         const first = await positions();
-        await call('arena');
-        await call('enter', { zone });
         await expect
-          .poll(async () => {
-            const next = await positions();
-            return (
-              next.length === 4 &&
-              JSON.stringify(next) !== JSON.stringify(first)
-            );
-          })
+          .poll(
+            async () => {
+              const next = await positions();
+              return (
+                next.length === 8 &&
+                JSON.stringify(next) !== JSON.stringify(first)
+              );
+            },
+            { timeout: 8000 },
+          )
           .toBe(true);
       }
       await call('review-hazard');
@@ -823,7 +824,178 @@ test('Thiên Hạ Vô Cẩu giảm sát thương trong lúc xoay và hồi máu 
   }
 });
 
-test('Wave creep và nhịp bẫy Biển Địa Ngục trong trận M3D', async ({
+test('Co Mo tuning: arena, projectile slows and a real Q during the sweep', async ({
+  browser,
+  request,
+}, testInfo) => {
+  const match = await openMatch(
+    browser,
+    request,
+    ['thien_son_phien', 'cai_bang_bong'],
+    '4',
+  );
+  const { host, peer, call, sessionId } = match;
+  const hero = async () => (await snapshot(host)).state.players[sessionId];
+  const presentation = () =>
+    host.evaluate<any>('window.__VOLAM__.presentation()');
+  const boss = async () =>
+    Object.values((await snapshot(host)).state.creeps).find(
+      (c: any) => c.archetypeId === 'ly_mac_sau',
+    ) as { castAbilityId: string } | undefined;
+  const summons = async (page: Page) =>
+    Object.entries((await snapshot(page)).state.creeps)
+      .filter(([, c]: [string, any]) => c.archetypeId === 'co_mo_am_binh')
+      .map(([id, c]: [string, any]) => [id, c.maxHp])
+      .sort();
+  const readSlow = async (page: Page, abilityId: string) => {
+    const s = await snapshot(page);
+    const player = s.state.players[s.sessionId];
+    const statuses = JSON.parse(player.statuses) as Array<{
+      kind: string;
+      abilityId: string;
+      magnitude: number;
+      ticks: number;
+    }>;
+    return statuses.find((s) => s.kind === 'slow' && s.abilityId === abilityId);
+  };
+  try {
+    await call('review-isolate');
+    await host.locator('#game canvas').focus();
+    await host.keyboard.down('o');
+    await host.keyboard.press('q');
+    await host.keyboard.up('o');
+    await expect.poll(async () => (await hero()).qSkill).toBe('lien_hoa_phien');
+    for (const page of [host, peer]) {
+      await page.keyboard.press('p');
+      await page
+        .getByRole('button', { name: 'Lý Mạc Sầu', exact: true })
+        .click();
+      await page
+        .getByRole('button', { name: 'Vào phó bản', exact: true })
+        .click();
+      await expect
+        .poll(async () => {
+          const s = await snapshot(page);
+          return s.state.players[s.sessionId].zoneId;
+        })
+        .toBe('co_mo_shared');
+      const help = page.getByRole('dialog', { name: 'Triệu hồi đồng đội' });
+      await help.getByRole('button', { name: 'Không', exact: true }).click();
+      await expect(help).toBeHidden();
+    }
+    await host.bringToFront();
+    await expect
+      .poll(async () => (await presentation()).coMoArena)
+      .toMatchObject({
+        camera: {
+          width: expect.closeTo(coMoDungeon.width),
+          height: expect.closeTo(coMoDungeon.height),
+        },
+        ground: {
+          width: expect.closeTo(coMoDungeon.width),
+          height: expect.closeTo(coMoDungeon.height),
+        },
+      });
+    const arena = (await presentation()).coMoArena;
+    expect(arena.camera.width * arena.camera.height).toBeCloseTo(
+      1408 * 1056 * 0.8 * 0.9,
+    );
+
+    await call('review-co-mo', { phase: 'far' });
+    await expect
+      .poll(async () => (await boss())?.castAbilityId)
+      .toBe('bang_phach_ngan_cham');
+    await peer.bringToFront();
+    const recipient = (await snapshot(peer)).sessionId;
+    await call('review-co-mo', { phase: 'summon', hero: recipient });
+    await expect
+      .poll(
+        async () =>
+          (await readSlow(peer, 'creep_co_mo_am_binh_basic'))?.magnitude,
+        { message: 'Âm Binh slow on the player it hits', intervals: [40, 80] },
+      )
+      .toBe(0.6);
+    await expect
+      .poll(async () => (await summons(host)).length)
+      .toBeGreaterThanOrEqual(4);
+    const adds = await summons(host);
+    expect([4, 6, 8]).toContain(adds.length);
+    expect(adds.every(([, hp]) => hp === 240)).toBe(true);
+    await expect.poll(() => summons(peer)).toEqual(adds);
+    await call('review-co-mo', { phase: 'poison', hero: recipient });
+    await expect
+      .poll(async () => (await readSlow(peer, 'ngu_doc_chuong'))?.magnitude, {
+        message: 'Ngũ Độc Chưởng slow on the peer it hits',
+        intervals: [40, 80],
+      })
+      .toBe(0.7);
+
+    await host.bringToFront();
+    await call('review-co-mo', { phase: 'sweep' });
+    await host.locator('#game canvas').focus();
+    expect((await hero()).qCooldown).toBe(0);
+    await host.keyboard.press('q');
+    await expect.poll(async () => (await hero()).qCooldown).toBeGreaterThan(0);
+    const lotus = async (page: Page) =>
+      Object.values((await snapshot(page)).state.areas).find(
+        (a: any) => a.abilityId === 'lien_hoa_phien' && a.ownerId === sessionId,
+      );
+    await expect.poll(() => lotus(host)).toBeTruthy();
+    await expect.poll(() => lotus(peer)).toBeTruthy();
+    await expect
+      .poll(async () => (await presentation()).skills.approved.persistent)
+      .toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ skill: 'lien_hoa_phien' }),
+        ]),
+      );
+    await call('review-co-mo-sweep');
+    const sweepHit = async () =>
+      (await snapshot(host)).events.find(
+        (e: any) =>
+          e.kind === 'hit' &&
+          e.abilityId === 'phat_tran_cong' &&
+          e.targetId === sessionId &&
+          e.damage > 0,
+      );
+    await expect.poll(sweepHit).toBeTruthy();
+    mkdirSync(evidence, { recursive: true });
+    await host.screenshot({ path: evidence + '/co-mo-lien-hoa-phien.png' });
+    writeFileSync(
+      evidence + '/co-mo-tuning.json',
+      JSON.stringify(
+        {
+          arena,
+          adds,
+          observedSlows: [0.6, 0.7],
+          sweepHit: await sweepHit(),
+        },
+        null,
+        2,
+      ),
+    );
+    expect(match.errors).toEqual([]);
+  } catch (error) {
+    const captures = await Promise.all([host, peer].map(snapshot));
+    await testInfo.attach('Cổ Mộ combat state', {
+      body: JSON.stringify(
+        captures.map((s) => ({
+          sessionId: s.sessionId,
+          players: s.state.players,
+          events: s.events.slice(-50),
+        })),
+        null,
+        2,
+      ),
+      contentType: 'application/json',
+    });
+    throw error;
+  } finally {
+    await match.close();
+  }
+});
+
+test('Wave creep và nhịp bẫy Sa Mạc, Biển, Địa Ngục trong trận M3D', async ({
   browser,
   request,
 }) => {
@@ -851,7 +1023,8 @@ test('Wave creep và nhịp bẫy Biển Địa Ngục trong trận M3D', async 
     await call('review-isolate');
     await host.bringToFront();
     for (const [zone, ability, prefix, count] of [
-      ['sea', 'geyser', 'geyser/', 2],
+      ['desert', 'quicksand', 'quicksand/', 8],
+      ['sea', 'geyser', 'geyser/', 4],
       ['hell', 'firetrap', 'firetrap/', 4],
     ] as const) {
       await call('arena');
@@ -859,6 +1032,15 @@ test('Wave creep và nhịp bẫy Biển Địa Ngục trong trận M3D', async 
       const player = async () =>
         (await snapshot(host)).state.players[sessionId];
       await expect.poll(async () => (await player()).zoneId).toContain(zone);
+      await expect
+        .poll(async () => {
+          const s = await snapshot(host);
+          return Object.values(
+            s.state.creeps as Record<string, { zoneId: string }>,
+          ).filter((e) => e.zoneId === s.state.players[sessionId].zoneId)
+            .length;
+        })
+        .toBe(10);
       await call('review-hazard');
       const effects = async () => {
         const s = await snapshot(host);
@@ -868,6 +1050,8 @@ test('Wave creep và nhịp bẫy Biển Địa Ngục trong trận M3D', async 
             {
               zoneId: string;
               abilityId: string;
+              x: number;
+              y: number;
               startedAt: number;
               activeAt: number;
             }
@@ -890,10 +1074,13 @@ test('Wave creep và nhịp bẫy Biển Địa Ngục trong trận M3D', async 
         )
         .toBe(count);
       await expect
-        .poll(async () => (await player()).statuses.includes('"stun"'), {
-          timeout: 13000,
-          intervals: [40, 80],
-        })
+        .poll(
+          async () =>
+            (await player()).statuses.includes(
+              zone === 'desert' ? '"dash_lock"' : '"stun"',
+            ),
+          { timeout: 13000, intervals: [40, 80] },
+        )
         .toBe(true);
       const frames = () =>
         host.evaluate<string[]>(
@@ -908,6 +1095,39 @@ test('Wave creep và nhịp bẫy Biển Địa Ngục trong trận M3D', async 
           { timeout: 13000, intervals: [50, 100] },
         )
         .toBe(true);
+      if (zone === 'desert') {
+        const inSand = await player();
+        await host.locator('#game canvas').focus();
+        await host.keyboard.press('Shift');
+        await expect
+          .poll(async () => (await player()).lastSequence)
+          .toBeGreaterThan(inSand.lastSequence);
+        expect((await player()).dashCharges).toBe(inSand.dashCharges);
+        await expect
+          .poll(
+            async () =>
+              (await effects()).filter(
+                (e) => e.startedAt === hazardBatch[0]!.startedAt + 150,
+              ).length,
+            { timeout: 10000 },
+          )
+          .toBe(count);
+      } else if (zone === 'hell') {
+        const firstBlast = hazardBatch.reduce((first, e) =>
+          e.activeAt < first.activeAt ? e : first,
+        );
+        await expect
+          .poll(
+            async () =>
+              (await effects()).some(
+                (e) =>
+                  e.activeAt === firstBlast.activeAt + 168 &&
+                  Math.hypot(e.x - firstBlast.x, e.y - firstBlast.y) > 0,
+              ),
+            { timeout: 10000 },
+          )
+          .toBe(true);
+      }
       report[zone] = {
         hazards: hazardBatch,
         frames: (await frames()).filter((entry) => entry.includes(prefix)),

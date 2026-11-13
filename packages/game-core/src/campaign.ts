@@ -30,6 +30,7 @@ export interface CampaignDefinition {
     minHpRegen: number;
   };
   bossHpPerPlayer: number;
+  bossDamageMultiplier: number;
   damagePerPlayer: number;
   wavePearl: number;
   dungeonPearl: number;

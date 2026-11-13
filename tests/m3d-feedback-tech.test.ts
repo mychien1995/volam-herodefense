@@ -329,7 +329,7 @@ describe('M3D feedback tech', () => {
       match.enter('a', 'shared');
       match.enter('b', 'shared');
       const z = match.zoneOf('a')!;
-      expect(z.world.creeps.size).toBe(6);
+      expect(z.world.creeps.size).toBe(10);
       expect(z.config.dungeonAggro).toBe(true);
       z.config.collision = []; // Isolate aggro here; the next test covers solid scenery routing.
       const e = [...z.world.creeps.values()][0]!;

@@ -195,8 +195,13 @@ export function characterStats(
     total.maxHp += bonusHp;
     total.hpRegen += bonusRegen;
   }
+  const quicksandSlow =
+    hero.statuses?.find(
+      (s) => s.kind === 'slow' && s.abilityId === 'quicksand' && s.until > tick,
+    )?.magnitude ?? 0;
   const slow =
-    -total.movementSpeed * Math.min(0.85, statusValue(hero, 'slow', tick));
+    -total.movementSpeed *
+    Math.max(quicksandSlow, Math.min(0.85, statusValue(hero, 'slow', tick)));
   sources.temporary.movementSpeed += slow;
   total.movementSpeed += slow;
   const attackSlow =

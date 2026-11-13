@@ -108,9 +108,10 @@ describe('desert map and authoritative destination contract', () => {
     expect(z.world.tick).toBe(t + 1);
     expect(m.hero('b')).toMatchObject(d.arenaReturn);
   });
-  it('rolls four safe pits on every visit to the same private instance', () => {
+  it('rolls eight safe pits every five seconds and on re-entry', () => {
     const m = setup();
-    m.add('a', 'A');
+    const hero = m.add('a', 'A');
+    hero.invulnerable = true;
     expect(m.enter('a', 'private', 'desert')).toBeUndefined();
     const zone = m.zoneOf('a')!;
     const pits = () =>
@@ -118,9 +119,9 @@ describe('desert map and authoritative destination contract', () => {
         .filter((effect) => effect.abilityId === 'quicksand')
         .map(({ x, y, radius }) => ({ x, y, radius }));
     const roster = [...zone.world.creeps.keys()];
-    for (let visit = 0; visit < 16; visit++) {
+    for (let cycle = 0; cycle < 16; cycle++) {
       const layout = pits();
-      expect(layout).toHaveLength(4);
+      expect(layout).toHaveLength(8);
       for (const [i, pit] of layout.entries()) {
         expect(blocked(pit, pit.radius, d.width, d.height, d.collision)).toBe(
           false,
@@ -132,15 +133,22 @@ describe('desert map and authoritative destination contract', () => {
             pit.radius + other.radius,
           );
       }
-      step(m, 1);
+      step(m, m1Config.tickRate * 5 - 1);
       expect(pits()).toEqual(layout);
-      Object.assign(m.hero('a')!, d.exit);
-      expect(m.exit('a')).toBeUndefined();
-      expect(m.enter('a', 'private', 'desert')).toBeUndefined();
-      expect(m.zoneOf('a')).toBe(zone);
-      expect([...zone.world.creeps.keys()]).toEqual(roster);
-      expect(pits()).not.toEqual(layout);
+      step(m, 1);
+      for (const next of pits())
+        expect(layout.every((old) => distance(old, next) > old.radius)).toBe(
+          true,
+        );
     }
+    const layout = pits();
+    Object.assign(hero, d.exit);
+    expect(m.exit('a')).toBeUndefined();
+    expect(m.enter('a', 'private', 'desert')).toBeUndefined();
+    expect(m.zoneOf('a')).toBe(zone);
+    expect([...zone.world.creeps.keys()]).toEqual(roster);
+    expect(pits()).toHaveLength(8);
+    expect(pits()).not.toEqual(layout);
   });
   it('rotates all six server identities through existing scaled waves without changing combat tuning', () => {
     const m = setup();
@@ -154,6 +162,8 @@ describe('desert map and authoritative destination contract', () => {
     expect(z.config.creep).toEqual({
       ...m.base.creep,
       speed: m.base.speed * 0.648,
+      xp: 36,
+      gold: 7.2,
     });
     step(m, d.restTicks + 2);
     expect(z.wave).toBe(1);

@@ -60,28 +60,32 @@ function fixture(id = 'toa_sat_bac_do') {
 }
 
 describe('approved animation change authoritative mechanics', () => {
-  it('plants an owner-only flower with zero enemy damage; immunity includes DOT and exact edge/reentry', () => {
+  it('reduces incoming hits and DOT by 40% only for the owner inside the flower', () => {
     const f = fixture('lien_hoa_phien');
     f.cast();
     const field = f.world.areas![0]!;
     expect(field).toMatchObject({ x: 500, y: 500, rawDamage: 0 });
     expect(f.enemy.hp).toBe(10000);
     const hp = f.hero.hp;
-    expect(f.damage(100)).toBe(false);
-    expect(f.damage(100, { periodic: true })).toBe(false);
-    expect(f.hero.hp).toBe(hp);
+    expect(f.damage(100)).toBe(true);
+    expect(f.damage(100, { periodic: true })).toBe(true);
+    expect(f.hero.hp).toBe(hp - 120);
     f.hero.x = field.x + field.effect.radius;
-    expect(f.damage(100)).toBe(false);
+    expect(f.damage(100)).toBe(true);
+    expect(f.hero.hp).toBe(hp - 180);
     f.hero.x += 0.01;
     expect(f.damage(100)).toBe(true);
-    expect(f.hero.hp).toBe(hp - 100);
+    expect(f.hero.hp).toBe(hp - 280);
     f.hero.x = 500;
-    expect(f.damage(100)).toBe(false);
+    expect(f.damage(100)).toBe(true);
+    expect(f.hero.hp).toBe(hp - 340);
     const ally = addHero(f.world, 'ally', 'Ally', f.config);
     ally.x = ally.y = 500;
+    const allyHp = ally.hp;
     expect(hurt(f.world, ally, f.enemy.id, 'enemy_attack', 10, f.config)).toBe(
       true,
     );
+    expect(ally.hp).toBe(allyHp - 10);
     expect(field.x).toBe(500);
     expect(field.y).toBe(500);
   });
@@ -90,20 +94,20 @@ describe('approved animation change authoritative mechanics', () => {
     f.hero.hp = 500;
     f.cast();
     f.step(30);
-    expect(f.hero.hp).toBeCloseTo(620);
+    expect(f.hero.hp).toBeCloseTo(545);
     f.hero.x = 800;
     f.step(30);
-    expect(f.hero.hp).toBeCloseTo(620);
+    expect(f.hero.hp).toBeCloseTo(545);
     f.hero.x = 500;
     f.step(30);
-    expect(f.hero.hp).toBeCloseTo(740);
+    expect(f.hero.hp).toBeCloseTo(590);
     f.hero.abilityCooldowns = {};
     f.hero.skillCooldowns = [0, 0, 0, 0];
     f.cast();
     expect(f.world.areas).toHaveLength(1);
     const h = f.hero.hp;
     f.step(30);
-    expect(f.hero.hp).toBeCloseTo(h + 120);
+    expect(f.hero.hp).toBeCloseTo(h + 45);
     f.hero.hp = f.hero.maxHp - 1;
     f.step(1);
     expect(f.hero.hp).toBe(f.hero.maxHp);
@@ -402,7 +406,11 @@ describe('approved animation change authoritative mechanics', () => {
   it('validates zero-damage protection/channel definitions and rejects missing intent or invalid guard tuning', () => {
     const flower = structuredClone(m1Config.skillCatalogue!['lien_hoa_phien']!);
     expect(abilitySchema.safeParse(flower).success).toBe(true);
-    if (flower.effect.mode === 'area') flower.effect.protectOwner = false;
+    if (flower.effect.mode === 'area') {
+      flower.effect.ownerDamageReduction = 1;
+      expect(abilitySchema.safeParse(flower).success).toBe(false);
+      delete flower.effect.ownerDamageReduction;
+    }
     expect(abilitySchema.safeParse(flower).success).toBe(false);
     const stance = structuredClone(m1Config.skillCatalogue!['toa_sat_bac_do']!);
     if (stance.effect.mode === 'guard_counter') stance.effect.reduction = 1;

@@ -138,6 +138,17 @@ export class ThienSonRework {
     return this.opacities.get(id) ?? 1;
   }
 
+  inspect() {
+    return [...this.sprites].map(([id, image]) => ({
+      id,
+      texture: image.texture.key,
+      frame: image.frame.name,
+      alpha: image.alpha,
+      x: image.x,
+      y: image.y,
+    }));
+  }
+
   private image(id: string, texture: string, frame: string) {
     let image = this.sprites.get(id);
     if (!image) {
@@ -160,23 +171,25 @@ export class ThienSonRework {
     ) {
       const pattern = effect.inwardBurst;
       state?.players.forEach((player, id) => {
-        if (
-          player.zoneId !== zone ||
-          player.hp <= 0 ||
-          player.pose !== 'cast' ||
-          player.castAbilityId !== flurryId
-        )
+        if (player.zoneId !== zone || player.hp <= 0 || !player.actionState)
           return;
-        const age = tick - player.actionStartedAt;
-        if (age < 0 || age >= (effect.durationTicks ?? 64)) return;
+        // A hit can replace the body pose while the server action is still running.
+        const action = JSON.parse(player.actionState) as {
+          abilityId: string;
+          startedAt: number;
+          until: number;
+        };
+        if (action.abilityId !== flurryId || tick >= action.until) return;
+        const age = tick - action.startedAt;
+        if (age < 0) return;
         casting.add(id);
         let origin = this.origins.get(id);
-        if (!origin || origin.tick !== player.actionStartedAt) {
-          origin = { x: player.x, y: player.y, tick: player.actionStartedAt };
+        if (!origin || origin.tick !== action.startedAt) {
+          origin = { x: player.x, y: player.y, tick: action.startedAt };
           this.origins.set(id, origin);
         }
         const spread = 1 - (1 - Math.min(1, age / 6)) ** 2;
-        const fade = Math.min(1, ((effect.durationTicks ?? 64) - age) / 4);
+        const fade = Math.min(1, (action.until - tick) / 4);
         this.opacities.set(id, 1 - spread * fade);
         const interval = pattern.intervalTicks;
         const sinceRelease = age - pattern.windupTicks;
@@ -234,7 +247,7 @@ export class ThienSonRework {
         this.sprites.delete(id);
       }
     for (const id of this.origins.keys())
-      if (!casting.has(id) && !state?.players.get(id)?.hp)
+      if (!casting.has(id))
         this.origins.delete(id);
   }
 

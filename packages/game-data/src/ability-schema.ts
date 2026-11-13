@@ -136,7 +136,7 @@ const area = z.strictObject({
   damage: z.number().finite().nonnegative(),
   statuses: z.array(status).optional(),
   confines: z.boolean().optional(),
-  protectOwner: z.boolean().optional(),
+  ownerDamageReduction: z.number().finite().gt(0).max(0.85).optional(),
   followOwner: z.boolean().optional(),
   volley: z
     .strictObject({ speed: positive, projectileRadius: positive })
@@ -394,7 +394,7 @@ export const abilitySchema = z
     if (
       a.effect.mode === 'area' &&
       a.effect.damage === 0 &&
-      !a.effect.protectOwner
+      a.effect.ownerDamageReduction === undefined
     )
       c.addIssue({
         code: 'custom',

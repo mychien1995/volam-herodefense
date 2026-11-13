@@ -71,7 +71,7 @@ it('M3D retains both boss destinations, separate clocks, gates and state owners'
   match.remove('kim');
   for (let i = 0; i < 901; i++) match.step();
   expect(kim.kim?.phase).toBe('disciples');
-  expect(kim.world.creeps.get('hoac_do')!.hp).toBe(1100);
+  expect(kim.world.creeps.get('hoac_do')!.hp).toBe(3300);
   expect(co.world.boss?.actorId).toBeTruthy();
   expect(co.world.creeps.has('hoac_do')).toBe(false);
 });

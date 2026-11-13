@@ -456,37 +456,9 @@
 #dungeon-exit-hint {
   bottom: 115px;
 }
-#boss-hud {
-  position: absolute;
-  top: 118px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 260px;
-  padding: 8px 14px;
-  background: #1b2025ed;
-  border: 1px solid #b49a6d;
-  color: #f4e3c5;
-  display: grid;
-  gap: 4px;
-  text-align: center;
-  pointer-events: none;
-}
 #boss-hud[hidden],
 #boss-loot-notice:empty {
   display: none;
-}
-#boss-hud strong {
-  font:
-    600 14px 'Segoe UI',
-    sans-serif;
-}
-#boss-hp {
-  width: 100%;
-  height: 8px;
-  accent-color: #9b4f72;
-}
-#boss-cast {
-  font-size: 11px;
 }
 #boss-loot-notice {
   position: absolute;

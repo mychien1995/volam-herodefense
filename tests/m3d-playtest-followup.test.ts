@@ -230,7 +230,10 @@ describe('M3D next playtest feedback', () => {
     );
     expect(ds).toHaveLength(2);
     const d = ds[0]!;
-    hurt(s.w, d, 'h', 'test', 100, s.c, { critChance: 0, critMultiplier: 1 });
+    hurt(s.w, d, 'h', 'test', d.maxHp * 2, s.c, {
+      critChance: 0,
+      critMultiplier: 1,
+    });
     s.step();
     expect(k.wine).toHaveLength(1);
     s.step();

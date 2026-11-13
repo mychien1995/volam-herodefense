@@ -15,6 +15,9 @@ export interface ChuDefinition {
   wineArmorPenetration?: number;
   movementSpeed?: number;
   basicPalmIntervalTicks?: number;
+  palmSlow: { fraction: number; ticks: number };
+  pullSlowFraction: number;
+  wineDisciple: { hp: number; defense: number };
   spawn: Point;
   hp: number;
   defense: number;
@@ -175,10 +178,16 @@ export function validateChuDefinition(
     d.emptyResetTicks,
     d.bossRespawnTicks,
     d.rollTicks,
+    d.palmSlow.ticks,
+    d.wineDisciple.hp,
+    d.wineDisciple.defense,
     ...Object.values(d.damage),
   ])
     if (!Number.isFinite(n) || n <= 0)
       throw Error('Invalid Chu Bá Thông tuning');
+  for (const fraction of [d.palmSlow.fraction, d.pullSlowFraction])
+    if (!Number.isFinite(fraction) || fraction <= 0 || fraction > 0.85)
+      throw Error('Invalid Chu Bá Thông slow');
   if (
     d.phases.length !== 10 ||
     new Set(d.phases.map((p) => p.id)).size !== 10 ||

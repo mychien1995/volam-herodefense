@@ -1,5 +1,15 @@
 # Campaign balance, boss progression and retries — 2026-11-06
 
+## Boss tuning update — 2026-11-13
+
+Normal matches triple the nine campaign boss HP baselines and the two Kim Luân disciples. In campaign order, solo HP is 18,600 / 21,600 / 42,000 / 51,000 / 78,000 / 36,000 / 114,000 / 135,000 / 144,000. Hoắc Đô and Đạt Nhĩ Ba have 3,300 and 4,800 HP. The existing room population and reward rules still apply.
+
+Hồng Liệt’s arena uses 70% of its previous area and summoned troops have 1,140 HP. Dung Nham Liệt Địa, Vạn Lý Nham Hỏa and Hỏa Sơn Bạo Phát stun on hit for 2 s. The meteors and volcano retain slow and burn. The frontal sweep retains its existing stun.
+
+Chu Bá Thông’s arena-wide Càn Khôn pull slows by 85% and blocks Shift. Palm hits and Song Thủ Hỗ Bác slow by 45% for 1.5 s. Wine disciples have 160 HP and 20 defense, using a 10-defense reference because the old disciple had zero defense.
+
+The nine campaign bosses and both Kim Luân disciples deal double damage through the normal damage pipeline, before defense. Encounter rules that explicitly subtract a fraction of HP and reactive damage retain their own calculations. Hoắc Đô’s four attacks slow, including Phiến Trung Độc Đinh alongside its poison. Đạt Nhĩ Ba’s four damaging abilities stun for 0.65 s. Both elephant variants use 80 base damage per elephant before campaign scaling and stun for 2 s on hit. The shelter rocks stop movement and Shift while the herd is active.
+
 Director approved the entire chat proposal and requested implementation and related documentation. This supersedes historical constant-60 EXP, per-creep production rewards, one-revival dungeon life, automatic unlimited wave-boss retries, invasion no-Long-Châu, and immediate post-Bắc-Cái final entry. Other combat, school, crafting, ownership and PvP rules remain intact. Numeric values are the first configurable campaign tuning, not a claim of measured human victory rates.
 
 ## Production configuration
@@ -24,13 +34,13 @@ The solo trial targets level 3 around the first invasion and level 6 around Đô
 
 Farm EXP is multiplied by0.25 at two or more levels above the current defeated-master chapter target6/12/18/24/28. First-clear boss EXP bypasses this farm penalty. Fractional farm EXP/gold is retained in server-owned character remainders, so dense streams do not lose small rewards to integer rounding. EXP cap and HUD progress use the same thresholds.
 
-| Chapter | Invasion EXP pool/wave/solo | Gold pool/wave/solo | Dungeon EXP/creep | Dungeon gold/creep |
+| Chapter | Invasion EXP pool/wave/solo | Gold pool/wave/solo | Dungeon EXP pool/wave/solo | Dungeon gold pool/wave/solo |
 | --- | ---: | ---: | ---: | ---: |
-| Before Đông Tà |100|70|3|0.8|
-| After Đông Tà |300|100|5|1.5|
-| After Tây Độc |450|130|8|2|
-| After Nam Đế |650|160|11|2.5|
-| After Bắc Cái |650|160|14|3|
+| Before Đông Tà |100|70|18|4.8|
+| After Đông Tà |300|100|30|9|
+| After Tây Độc |450|130|48|12|
+| After Nam Đế |650|160|66|15|
+| After Bắc Cái |650|160|84|18|
 
 Invasions use wave1–5/6–10/11–15/16–20 chapter budgets, independently of delayed boss attempts. Their fixed pool is distributed across the actual scheduled creep count and scales by the room's snapshotted participating population. Each creep still splits its pool among eligible kills/assists. Two versus four gates change density, not total reward. Private dungeon pools remain personal. Their reward chapter follows the same elapsed-time floor as their threat; the over-level EXP penalty still follows actual defeated-master progression. Merely being connected never grants kill EXP.
 
@@ -64,7 +74,7 @@ Four invasion gates are the default; creator choices2/3/4 remain. Streams last60
 
 Population P is connected participating room population, not lobby occupants. Invasion count/cadence uses`1+0.60*(P-1)`, HP`1+0.20*(P-1)`, damage`1+0.06*(P-1)`. At P6 these are4× count,2× HP,1.3× normal damage. Boss HP uses`1+1.10*(P-1)` (6.5× at six); ordinary boss damage uses the damage coefficient. Explicit direct-HP/fractional boss mechanics and reflected damage do not receive that multiplier.
 
-HP population snapshots can rise on a later join while preserving the boss's remaining-health fraction; death/disconnect cannot lower the current attempt's established maximum. A new attempt resnapshots. Private creep dungeons use lighter room population coefficients: count+10%, HP+8%, damage+4% per extra player.
+HP population snapshots can rise on a later join while preserving the boss's remaining-health fraction; death/disconnect cannot lower the current attempt's established maximum. A new attempt resnapshots. Private creep dungeons use 10 enemies per wave. Per extra room player, HP still scales by +8% and damage by +4%. The reward pool follows the previous population schedule of 6/7/8/8/9/9 base reward shares for 1–6 players, distributed over the 10 enemies.
 
 Dungeon floor chapter is the greater of actual master progression and elapsed invasion-clock time/900 seconds, capped at four. HP floors1/1.5/2.2/3/3.8, damage floors1/1.2/1.45/1.7/2. Existing per-wave HP/damage growth continues. Existing instances retain wave progress across travel; each new wave snapshots the current floor. Six authored sprite identities cycle modulo six forever, independently of growing stats. No new sprite generation or animation-driven damage is introduced.
 

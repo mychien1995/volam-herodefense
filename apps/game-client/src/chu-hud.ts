@@ -1,5 +1,19 @@
 import type { LobbyState } from '@volam/game-protocol';
-import type { ChuView, KimView } from '@volam/game-core';
+import type { ChuView, KimView, WaveArenaView } from '@volam/game-core';
+import { hongLietDefinition, lyMacSauEncounter } from '@volam/game-data';
+const bosses: Record<string, string> = {
+  dong_ta: 'Đông Tà',
+  tay_doc: 'Tây Độc',
+  nam_de: 'Nam Đế',
+  bac_cai: 'Bắc Cái',
+  vuong_trung_duong: 'Vương Trùng Dương',
+  ly_mac_sau: 'Lý Mạc Sầu',
+  hoan_nhan_hong_liet: 'Hoàn Nhan Hồng Liệt',
+  chu_ba_thong: 'Chu Bá Thông',
+  kim_luan_phap_vuong: 'Kim Luân Pháp Vương',
+  hoac_do: 'Hoắc Đô',
+  dat_nhi_ba: 'Đạt Nhĩ Ba',
+};
 const names: Record<string, string> = {
   idle: 'Chuẩn bị',
   sweep: 'Phong kình',
@@ -26,7 +40,7 @@ export class ChuHud {
   onNotify: (message: string) => void = () => {};
   constructor(send: (action: string, id: number, itemId?: string) => void) {
     this.root = document.createElement('section');
-    this.root.id = 'chu-boss-hud';
+    this.root.id = 'boss-hud';
     this.root.className = 'framed';
     this.root.hidden = true;
     this.loot = document.createElement('section');
@@ -72,13 +86,59 @@ export class ChuHud {
     > | null = kim
       ? { ...kim, phase: 'idle', trap: null }
       : (decoded as ChuView | null);
-    this.root.hidden = !v;
-    document.querySelector<HTMLElement>('#viewport')!.dataset['chu'] =
-      String(!!v);
-    if (v) {
-      const percent = Math.max(0, (100 * v.bossHp) / v.bossMaxHp);
-      this.root.innerHTML = `<strong>${kim ? 'Kim Luân Pháp Vương · Tương Dương' : 'Chu Bá Thông'}</strong><div class="chu-health"><i style="width:${percent}%"></i><span>${Math.ceil(v.bossHp)} / ${v.bossMaxHp}</span></div><small>${h?.zoneId.includes('_private_') ? 'Riêng' : 'Chung'} · ${kim ? (kim.phase === 'disciples' ? 'Đánh bại cả hai học trò' : kim.phase === 'defeated' ? 'Đã đánh bại' : kim.enraged ? 'Long Tượng Bát Nhã Thập Tầng' : 'Pháp Vương xuất trận') : v.bossHp > 0 ? names[v.phase] : 'Đã đánh bại'}${v.phase === 'trap' && v.trap && !v.trap.released ? ' · ' + v.trap.inside + '/' + v.trap.required.length + ' vào trận' : ''}</small>`;
+    const wave =
+      h?.zoneId === 'arena' && state?.defense.waveArena
+        ? (JSON.parse(state.defense.waveArena) as WaveArenaView | null)
+        : null;
+    const entries: Array<{
+      name: string;
+      hp: number;
+      maxHp: number;
+      detail?: string | undefined;
+    }> = [];
+    if (wave?.locked && wave.bossHp > 0 && bosses[wave.bossId]) {
+      entries.push({
+        name: bosses[wave.bossId]!,
+        hp: wave.bossHp,
+        maxHp: wave.bossMaxHp,
+      });
+    } else if (h && state?.phase === 'IN_GAME') {
+      for (const a of state.creeps.values()) {
+        const name = bosses[a.archetypeId];
+        if (a.zoneId !== h.zoneId || !name || a.hp <= 0 || a.maxHp <= 0)
+          continue;
+        const cast =
+          a.castAbilityId as keyof typeof hongLietDefinition.abilities;
+        const detail =
+          a.archetypeId === 'chu_ba_thong' && v
+            ? names[v.phase] +
+              (v.phase === 'trap' && v.trap && !v.trap.released
+                ? ` · ${v.trap.inside}/${v.trap.required.length} vào trận`
+                : '')
+            : a.archetypeId === 'kim_luan_phap_vuong' && kim?.enraged
+              ? 'Long Tượng Bát Nhã Thập Tầng'
+              : a.archetypeId === 'hoan_nhan_hong_liet'
+                ? hongLietDefinition.abilities[cast]?.nameVi
+                : a.archetypeId === 'ly_mac_sau' && a.castTicks > 0
+                  ? lyMacSauEncounter.attacks.find(
+                      (attack) => attack.id === a.castAbilityId,
+                    )?.nameVi
+                  : undefined;
+        entries.push({ name, hp: a.hp, maxHp: a.maxHp, detail });
+      }
     }
+    this.root.hidden =
+      !entries.length || (h?.hp ?? 0) <= 0 || state?.phase !== 'IN_GAME';
+    document.querySelector<HTMLElement>('#viewport')!.dataset['bossHud'] =
+      String(!this.root.hidden);
+    const bars = entries
+      .map(({ name, hp, maxHp, detail }) => {
+        const current = Math.ceil(hp);
+        const max = Math.ceil(maxHp);
+        return `<div class="boss-health-row"><strong>${name}</strong><div class="boss-health" role="meter" aria-label="Sinh lực ${name}" aria-valuemin="0" aria-valuenow="${current}" aria-valuemax="${max}"><i style="width:${Math.min(100, Math.max(0, (100 * hp) / maxHp))}%"></i><span>${current} / ${max}</span></div>${detail ? `<small>${detail}</small>` : ''}</div>`;
+      })
+      .join('');
+    if (this.root.innerHTML !== bars) this.root.innerHTML = bars;
     for (const l of v?.loot ?? []) {
       const token = h!.zoneId + ':' + l.id;
       if (l.state === 'claimed' && !this.announced.has(token)) {

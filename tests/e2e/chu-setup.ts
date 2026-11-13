@@ -22,7 +22,6 @@ export default async function setup() {
   const vite = await createServer({
     root: fileURLToPath(new URL('../../apps/game-client', import.meta.url)),
     cacheDir: fileURLToPath(new URL('../../.cache/vite-chu', import.meta.url)),
-    configFile: false,
     server: {
       host: '127.0.0.1',
       port: 5399,

@@ -4,6 +4,7 @@ import { expect, it } from 'vitest';
 import {
   addCreep,
   addHero,
+  characterStats,
   changeBuild,
   createWorld,
   directDodgeChance,
@@ -195,7 +196,7 @@ it('rolls Thiên Sơn dodge only for direct enemy hits and reports the real leve
   );
 });
 
-it('cycles darts from four directions, locks geyser warning and staggers fixed fire vents', () => {
+it('cycles darts, warns four geysers every three seconds and relocates staggered fire blasts', () => {
   const forest = fixture('forest'),
     seen = new Set<string>();
   const forestData = creepCombatDefinition.dungeonHazards!['forest']!;
@@ -217,20 +218,21 @@ it('cycles darts from four directions, locks geyser warning and staggers fixed f
       (e) => e.abilityId === 'geyser',
     );
   const [water, second] = geysers();
-  expect(geysers()).toHaveLength(2);
+  expect(geysers()).toHaveLength(4);
   expect(second?.activeAt).toBe(water?.activeAt);
   expect(
     Math.hypot(water!.x - second!.x, water!.y - second!.y),
   ).toBeGreaterThan(108);
   expect(water!.activeAt - water!.startedAt).toBe(19);
   expect([water!.x, water!.y]).toEqual([450, 400]);
-  sea.h.y += 140;
+  Object.assign(sea.h, sea.c.spawn);
   sea.step(19);
   expect(hasStatus(sea.h, 'stun', sea.w.tick)).toBe(false);
-  sea.step(110);
+  Object.assign(sea.h, { x: 450, y: 400 });
+  sea.step(70);
   expect(geysers()).toHaveLength(0);
   sea.step(1);
-  expect(geysers()).toHaveLength(2);
+  expect(geysers()).toHaveLength(4);
 
   const hell = fixture('hell');
   hell.step(1);
@@ -241,8 +243,16 @@ it('cycles darts from four directions, locks geyser warning and staggers fixed f
   expect(hasStatus(hell.h, 'stun', hell.w.tick)).toBe(false);
   hell.step(1);
   expect(hasStatus(hell.h, 'stun', hell.w.tick)).toBe(true);
-  hell.step(168);
-  expect(hell.w.creepCombat!.effects.get('firetrap_0')?.activeAt).toBe(283);
+  hell.step(150);
+  const relocated = hell.w.creepCombat!.effects.get('firetrap_0')!;
+  expect(relocated.activeAt).toBe(283);
+  expect(relocated.activeAt - relocated.startedAt).toBe(18);
+  expect(
+    Math.hypot(relocated.x - fire[0]!.x, relocated.y - fire[0]!.y),
+  ).toBeGreaterThanOrEqual(relocated.radius * 2);
+  expect(hasStatus(hell.h, 'stun', hell.w.tick)).toBe(false);
+  Object.assign(hell.h, { x: relocated.x, y: relocated.y });
+  hell.step(18);
   expect(hasStatus(hell.h, 'stun', hell.w.tick)).toBe(true);
 });
 
@@ -251,11 +261,13 @@ it('slows walking, blocks a dash without spending a charge and restores both aft
   step(1);
   const pit = w.creepCombat!.effects.get('quicksand_0')!;
   Object.assign(h, { x: pit.x, y: pit.y });
-  const x = h.x;
+  const speed = characterStats(h, c, w.tick).total.movementSpeed;
   submitInput(w, h.id, 1, { kind: 'move', x: 1, y: 0 });
   submitInput(w, h.id, 2, { kind: 'dash' });
   step(1);
-  expect(h.x).toBeGreaterThan(x);
+  const x = h.x;
+  step(1);
+  expect(h.x - x).toBeCloseTo((speed * 0.1) / c.tickRate);
   expect(hasStatus(h, 'slow', w.tick)).toBe(true);
   expect(h.dashCharges).toBe(2);
   Object.assign(h, c.spawn);

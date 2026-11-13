@@ -1,3 +1,14 @@
+## Sân Tương Dương và tuyệt kỹ Thiên Sơn Đao
+
+- Vào Kim Luân từ menu Phó Bản của trận thường. Sân và camera hiển thị đủ 1.190 × 680, ảnh có cùng tỷ lệ X/Y. Đi qua lối nam rồi bấm Space để về đấu trường.
+- Trong sân Hoàn Nhan Hồng Liệt, bấm T khi đã học Bách Liệt Thiên Kích. Một đòn trúng làm nhân vật đổi sang tư thế chịu đòn trong khi thi triển vẫn còn. Phaser giữ bốn bóng hoạt họa và hiển thị đao khí server phát. Bóng biến mất khi thi triển kết thúc.
+
+## Sát thương boss và va chạm Long Tượng
+
+- So cùng một đòn trước và sau hệ số chiến dịch cho chín boss và hai mini boss Kim Luân. Đòn của quái thường giữ hệ số cũ.
+- Trong Phaser, dùng phím mũi tên và Shift vào đá Long Tượng đang hiện. Server giữ chân người chơi ở mép đá. Người chơi đi qua được vị trí đó sau khi đá biến mất. Voi dừng ở đá trên cùng làn, gây sát thương và choáng 2 giây khi trúng trên làn mở.
+- Đòn trúng của Hoắc Đô hiện Chậm, đòn trúng của Đạt Nhĩ Ba hiện Choáng. Ba chiêu Dung Nham Liệt Địa, Vạn Lý Nham Hỏa và Hỏa Sơn Bạo Phát của Hồng Liệt gây choáng 2 giây và lính được triệu hồi có 1.140 HP.
+
 ## Bổng đỏ và nhịp đánh thường M3D
 
 - Trong trận M3D, cả bốn hướng có một tư thế đứng, bốn khung bước đi và bốn thức A dùng atlas Bổng đỏ. Cả chủ nhân và người chơi khác nhận đúng hướng đứng. Soi chân, tay, hoa văn và vị trí vệt đòn ở zoom gameplay.
@@ -537,3 +548,19 @@ All 49 creep profiles must have no visible generic purple windup circle/semicirc
 ## Creep feedback r5 acceptance — 2026-11-06
 
 Sơn Tặc Đao must damage targets with its normal attack and never cast Hoành trảm; preview skill controls must be disabled for it. Observe all 49 profiles with no generic melee/line/dash/defensive caster contact bursts, and no instant self stomp/ring contact stamps. Real projectile/target/persistent/death effects remain. Preserve two-client state and six-peer dungeon/arena coverage. See `docs/CREEP_FEEDBACK_R5.md`.
+
+## Creep dungeon pressure · 2026-11-12
+
+- Rừng Trúc, Sa Mạc, Biển và Địa Ngục each spawn 10 enemies at unique markers. Clearing the wave pays the previous total EXP and gold at the same campaign chapter and room population, including fractional carry.
+- Sa Mạc has eight safe sand pits. An active instance replaces the layout after exactly 150 ticks at 30 Hz. While inside a pit, movement runs at 10% and a rejected Shift dash spends no charge.
+- Biển can warn up to four geysers in one batch every 90 ticks. Địa Ngục rolls a new walkable site for each staggered fire warning and resolves the blast at that warned position.
+
+## Cổ Mộ and Liên Hoa Phiến balance · updated 2026-11-13
+
+- Cổ Mộ retains its aspect ratio and occupies 90% of the previously reduced area, or 72% of the original. Server collision, spawns and exit align with the Phaser ground and camera bounds.
+- An out-of-range Phất Trần Công yields to an available ranged special. The sweep stuns a living target for 18 ticks after the frontal hit lands. Âm Binh spawn with 240 HP. A damaging Âm Binh projectile slows by 60% for 45 ticks and a damaging Ngũ Độc Chưởng projectile slows by 70% for 60 ticks.
+- Liên Hoa Phiến mitigates 40% of ordinary hits and DoT while the caster is inside. Its owner heals 3–4% max HP per second by rank and loses both effects outside the circle. Compare three fixed-seed wave-5 runs at level 7 with four level-2 basics and campaign revivals.
+
+## Boss balance update — 2026-11-13
+
+In a normal match, verify the nine solo boss HP values and the two separate Kim Luân disciple meters against the campaign tuning. The boss meter uses the same layout in the arena and in boss dungeons. Verify that boss dialogue stays clear of it. Observe Hồng Liệt’s frontal sweep frames and growing lava lane in Phaser, then compare the server hit direction and lane length. Verify Chu’s pull blocks Shift, his palms slow on contact and his wine disciples use 160 HP and 20 defense. Verify both Kim disciples switch from the renovated idle and walk sprites to the matching four-facing attack atlases.

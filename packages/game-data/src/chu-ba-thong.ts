@@ -2,7 +2,7 @@ import type { CreepDungeonDefinition, ChuDefinition } from '@volam/game-core';
 import { validateChuDefinition } from '@volam/game-core';
 import { m1Config } from './m1.js';
 import { creepDungeon } from './dungeon.js';
-import { enlargeBossArena } from './boss-arena-geometry.js';
+import { scaleBossArena } from './boss-arena-geometry.js';
 import { bossCadence, cadenceTicks } from './boss-cadence.js';
 import map from './chu-ba-thong-map.json' with { type: 'json' };
 const hz = m1Config.tickRate;
@@ -10,6 +10,9 @@ const hz = m1Config.tickRate;
 export const chuBaThongTuning: ChuDefinition = {
   movementSpeed: 110,
   basicPalmIntervalTicks: 33,
+  palmSlow: { fraction: 0.45, ticks: Math.round(1.5 * hz) },
+  pullSlowFraction: 0.85,
+  wineDisciple: { hp: 160, defense: 20 },
   spawn: { x: 640, y: 300 },
   hp: 6000,
   defense: 180,
@@ -63,7 +66,7 @@ for (const p of chuBaThongTuning.phases) {
   p.ticks = cadenceTicks(t);
 }
 validateChuDefinition(chuBaThongTuning, m1Config);
-export const chuBaThongDungeon: CreepDungeonDefinition = enlargeBossArena({
+export const chuBaThongDungeon: CreepDungeonDefinition = scaleBossArena({
   ...creepDungeon,
   id: 'chu_ba_thong',
   chuBoss: chuBaThongTuning,

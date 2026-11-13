@@ -242,7 +242,7 @@ export interface AreaEffect {
   damage: number;
   statuses?: StatusSpec[] | undefined;
   confines?: boolean | undefined;
-  protectOwner?: boolean | undefined;
+  ownerDamageReduction?: number | undefined;
   followOwner?: boolean | undefined;
   volley?: { speed: number; projectileRadius: number } | undefined;
   ownerRegenFraction?: number | undefined;
@@ -332,6 +332,7 @@ export interface SimulationConfig {
   campaign?: CampaignDefinition;
   creepCombat?: CreepCombatDefinition;
   dungeonId?: string;
+  dungeonExit?: Point;
   personalCraftLoot?: boolean;
   bossBanter?: BossBanterDefinition | undefined;
   /** Temporary server-owned arena confinement, independent of status immunity. */
@@ -643,7 +644,7 @@ export interface World {
   namDe?: NamDeRuntime;
   bacCai?: Pick<BacCaiEncounter, keyof BacCaiEncounter>;
   vuong?: Pick<VuongEncounter, keyof VuongEncounter>;
-  kim?: { rewards: KimLootContext };
+  kim?: { rewards: KimLootContext; rockCollision(tick: number): Rect[] };
   chu?: ChuEncounter;
   boss?: BossRuntime;
   combos?: Array<{

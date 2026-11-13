@@ -3,7 +3,12 @@ import { announceBossSkill } from './boss-skill-announcement.js';
 const compareId = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
 import { addCreep } from './simulation.js';
 import { emit, hurt } from './combat.js';
-import { cancelOwnedEffects, hasStatus, statusValue } from './status.js';
+import {
+  applyStatus,
+  cancelOwnedEffects,
+  hasStatus,
+  statusValue,
+} from './status.js';
 import {
   blocked,
   direction,
@@ -11,11 +16,7 @@ import {
   moveCircle,
   segmentRect,
 } from './geometry.js';
-import type {
-  BossAbilityId,
-  BossAttackDefinition,
-  CoMoBossCast,
-} from './boss-types.js';
+import type { BossAttackDefinition, CoMoBossCast } from './boss-types.js';
 import type { Creep, Hero, SimulationConfig, World } from './types.js';
 
 export function spawnBossEncounter(
@@ -141,6 +142,7 @@ function release(
         splashRadius: 0,
         burnDamage: 0,
         burnTicks: 0,
+        statuses: attack.projectileStatuses,
       },
     });
   };
@@ -219,8 +221,8 @@ function release(
         (a, b) =>
           distance(a, boss) - distance(b, boss) || compareId(a.id, b.id),
       );
-    for (const [i, target] of victims.entries())
-      hurt(
+    for (const [i, target] of victims.entries()) {
+      const landed = hurt(
         world,
         target,
         boss.id,
@@ -229,6 +231,15 @@ function release(
         config,
         { critChance: 0, critMultiplier: 1, fx: cast.fx, fy: cast.fy },
       );
+      if (landed && target.hp > 0 && attack.stunTicks)
+        applyStatus(
+          target,
+          { kind: 'stun', magnitude: 1, durationTicks: attack.stunTicks },
+          boss.id,
+          attack.id,
+          world.tick,
+        );
+    }
   }
 }
 
@@ -343,27 +354,39 @@ export function stepBossEncounter(
     boss.pose = 'idle';
     return;
   }
-  const next: BossAbilityId = d.rotation[runtime.rotation % d.rotation.length]!;
-  const attack = d.attacks.find((a) => a.id === next)!;
+  const range = distance(target, boss);
+  const next = d.rotation[runtime.rotation % d.rotation.length]!;
+  const preferred = d.attacks.find((a) => a.id === next)!;
+  const ready = (a: BossAttackDefinition) =>
+    world.tick >= (runtime.cooldowns?.[a.id] ?? 0);
   if (
     world.tick >= runtime.nextActionAt &&
-    world.tick >= (runtime.cooldowns?.[next] ?? 0) &&
-    !hasStatus(boss, 'silence', world.tick) &&
-    (next !== 'phat_tran_cong' || distance(target, boss) <= attack.range + 30)
+    !hasStatus(boss, 'silence', world.tick)
   ) {
-    runtime.rotation++;
-    begin(world, config, boss, attack, target);
-    return;
+    const attack =
+      next === 'phat_tran_cong' && range > preferred.range + config.radius
+        ? d.attacks.find(
+            (a) => a.speed > 0 && range <= a.range + config.radius && ready(a),
+          )
+        : ready(preferred)
+          ? preferred
+          : undefined;
+    if (attack) {
+      runtime.rotation =
+        (d.rotation.indexOf(attack.id) + 1) % d.rotation.length;
+      begin(world, config, boss, attack, target);
+      return;
+    }
   }
   const melee = d.attacks.find((a) => a.id === 'ly_mac_sau_basic')!;
   const basic =
-    distance(target, boss) <= melee.range + config.radius
+    range <= melee.range + config.radius
       ? melee
       : d.attacks.find((a) => a.id === 'bang_phach_ngan_cham')!;
   if (
-    distance(target, boss) <= basic.range + config.radius &&
+    range <= basic.range + config.radius &&
     world.tick >= boss.cooldown &&
-    world.tick >= (runtime.cooldowns?.[basic.id] ?? 0) &&
+    ready(basic) &&
     !hasStatus(boss, 'silence', world.tick) &&
     !hasStatus(boss, 'disarm', world.tick)
   ) {
@@ -373,7 +396,7 @@ export function stepBossEncounter(
     runtime.nextActionAt = Math.max(nextAt, runtime.cast!.until);
     return;
   }
-  if (distance(target, boss) > melee.range) {
+  if (range > melee.range) {
     const aim = direction(target.x - boss.x, target.y - boss.y);
     boss.fx = aim.x;
     boss.fy = aim.y;

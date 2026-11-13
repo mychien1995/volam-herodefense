@@ -2,7 +2,6 @@ import Phaser from 'phaser';
 import { queueArtPack } from './queue-art-pack.js';
 import { renovationRevisionEnabled } from './renovation-policy.js';
 import { replaceR3ArenaProp } from './m3d-r3-arena.js';
-import { bossArenaScale as S } from '@volam/game-data';
 import { coMoDungeon, lyMacSauEncounter } from '@volam/game-data';
 import type { CombatEvent } from '@volam/game-core';
 import type { LobbyState } from '@volam/game-protocol';
@@ -95,6 +94,7 @@ export function createCoMoArt(scene: Phaser.Scene): Phaser.GameObjects.Image[] {
   for (const key of ['co_mo_terrain', 'co_mo_scenery'])
     scene.textures.get(key).setFilter(Phaser.Textures.FilterMode.NEAREST);
   const map = scene.make.tilemap({ key: 'boss_co_mo' });
+  const S = coMoDungeon.width / map.widthInPixels;
   const tiles = map.addTilesetImage(
     'co_mo_terrain',
     'co_mo_terrain',

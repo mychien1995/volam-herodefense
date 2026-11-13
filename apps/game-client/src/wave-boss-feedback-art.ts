@@ -231,7 +231,7 @@ export class WaveBossFeedbackArt {
     };
   }
 }
-/** Same overhead label and green five-pixel HP bar as Tây Độc. */
+/** Overhead names and optional health for auxiliary actors. */
 export class WaveBossHealth {
   private views = new Map<
     string,
@@ -256,7 +256,7 @@ export class WaveBossHealth {
     y: number,
     hp: number,
     maxHp: number,
-    width = 96,
+    width = 0,
   ) {
     if (renovationEnabled(this.scene))
       y -= Math.max(
@@ -285,18 +285,19 @@ export class WaveBossHealth {
       .setText(name)
       .setPosition(x, y)
       .setDepth(y + 200);
-    v.bar
-      .clear()
-      .fillStyle(0x171419, 0.9)
-      .fillRect(x - width / 2, y + 2, width, 5)
-      .fillStyle(0x91c852)
-      .fillRect(
-        x - width / 2 + 1,
-        y + 3,
-        (width - 2) * Math.max(0, hp / Math.max(1, maxHp)),
-        3,
-      )
-      .setDepth(y + 200);
+    v.bar.clear().setVisible(width > 0);
+    if (width > 0)
+      v.bar
+        .fillStyle(0x171419, 0.9)
+        .fillRect(x - width / 2, y + 2, width, 5)
+        .fillStyle(0x91c852)
+        .fillRect(
+          x - width / 2 + 1,
+          y + 3,
+          (width - 2) * Math.max(0, hp / Math.max(1, maxHp)),
+          3,
+        )
+        .setDepth(y + 200);
     this.used.add(id);
   }
   end() {

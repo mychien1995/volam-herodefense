@@ -238,6 +238,58 @@ export default async function setup() {
                   const target = addCreep(w, 'statue_target', point, c);
                   target.stats = { ...c.creep, speed: 0, damage: 0 };
                   target.hp = target.maxHp = 300;
+                } else if (op === 'review-co-mo-sweep') {
+                  if (!w.boss) throw Error('Enter Cổ Mộ first');
+                  w.boss.nextActionAt = w.tick + 1;
+                } else if (op === 'review-co-mo') {
+                  const d = c.bossEncounter;
+                  const runtime = w.boss;
+                  if (!d || !runtime) throw Error('Enter Cổ Mộ first');
+                  const boss = w.creeps.get(runtime.actorId)!;
+                  const phase = q.get('phase');
+                  if (
+                    phase !== 'far' &&
+                    phase !== 'summon' &&
+                    phase !== 'poison' &&
+                    phase !== 'sweep'
+                  )
+                    throw Error('Invalid Cổ Mộ fixture phase');
+                  for (const id of w.creeps.keys())
+                    if (id !== boss.id) w.creeps.delete(id);
+                  w.projectiles.clear();
+                  Object.assign(boss, d.spawn, {
+                    cooldown: phase === 'sweep' ? Infinity : w.tick + 120,
+                    statuses: [],
+                  });
+                  runtime.cast = undefined;
+                  runtime.cooldowns = {};
+                  runtime.nextActionAt =
+                    phase === 'sweep' ? Infinity : w.tick + 1;
+                  runtime.rotation = d.rotation.indexOf(
+                    phase === 'summon'
+                      ? 'co_mo_kiem_phap'
+                      : phase === 'poison'
+                        ? 'ngu_doc_chuong'
+                        : 'phat_tran_cong',
+                  );
+                  for (const h of w.heroes.values())
+                    Object.assign(h, {
+                      x:
+                        d.spawn.x +
+                        (h === hero ? (phase === 'sweep' ? 80 : 220) : -320),
+                      y: d.spawn.y,
+                      moveX: 0,
+                      moveY: 0,
+                      hp: h.maxHp,
+                      statuses: [],
+                    });
+                  if (phase === 'poison') {
+                    const west = d.edgeEmitters.find((p) => p.fx === 1)!;
+                    Object.assign(hero, { x: west.x + 65, y: west.y });
+                  } else if (phase === 'summon') {
+                    const spawn = d.summonSpawns[0]!;
+                    Object.assign(hero, { x: spawn.x + 60, y: spawn.y });
+                  }
                 } else if (op === 'review-hazard') {
                   const d = c.creepCombat!.dungeonHazards![zone.dungeon!.id]!;
                   w.creeps.clear();
@@ -249,17 +301,12 @@ export default async function setup() {
                     if (!pit)
                       throw Error('Desert entry did not spawn quicksand');
                     Object.assign(hero, { x: pit.x, y: pit.y });
-                  } else if (d.kind === 'firetrap') {
-                    Object.assign(hero, {
-                      x: d.points[0]!.x * c.width,
-                      y: d.points[0]!.y * c.height,
-                    });
                   } else if (d.kind === 'geyser') {
                     Object.assign(hero, {
                       x: c.width * 0.46,
                       y: c.height * 0.5,
                     });
-                  } else {
+                  } else if (d.kind === 'darts') {
                     Object.assign(hero, {
                       x: c.width * 0.18,
                       y: c.height * 0.48,
@@ -268,6 +315,13 @@ export default async function setup() {
                   if (d.kind !== 'quicksand') {
                     w.creepCombat = { actors: new Map(), effects: new Map() };
                     w.tick = Math.min(w.tick, d.firstTick - 2);
+                    if (d.kind === 'firetrap') {
+                      stepCreepHazards(w, c);
+                      const fire = w.creepCombat.effects.get('firetrap_0');
+                      if (!fire)
+                        throw Error('Hell did not schedule a fire blast');
+                      Object.assign(hero, { x: fire.x, y: fire.y });
+                    }
                   }
                 } else if (op === 'review-support') {
                   hero.hp = hero.maxHp;

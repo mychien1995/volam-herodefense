@@ -10,9 +10,10 @@ import { replaceR3ArenaProp } from './m3d-r3-arena.js';
 import {
   hongLietDefinition,
   hongLietDungeon,
-  bossArenaScale as S,
+  hongLietArenaScale as S,
 } from '@volam/game-data';
 import { r3Tag, r3Frame, type R3Direction } from './m3d-r3-art.js';
+import { HongLietVfx, preloadHongLietVfx } from './hong-liet-vfx.js';
 import type {
   BossEffectState,
   CreepState,
@@ -47,6 +48,7 @@ const dir = (x: number, y: number) =>
 export const isHongLietActor = (id: string) =>
   ['hoan_nhan_hong_liet', 'mongol_archer', 'mongol_infantry'].includes(id);
 export function preloadHongLietArt(scene: Phaser.Scene): void {
+  preloadHongLietVfx(scene);
   for (const id of assets)
     scene.load.atlas(
       key(id),
@@ -143,6 +145,7 @@ type View = {
 };
 /** Pure projection of room state. No collision, hits, RNG or gameplay movement here. */
 export class HongLietRenderer {
+  private readonly fire: HongLietVfx;
   private flashes = new Map<string, number>();
   private views = new Map<string, View>();
   private tick = 0;
@@ -152,11 +155,14 @@ export class HongLietRenderer {
   private observed = new Map<string, Set<string>>();
   private actions = new Set<string>();
   private samples: Array<Record<string, unknown>> = [];
-  constructor(private scene: Phaser.Scene) {}
+  constructor(private scene: Phaser.Scene) {
+    this.fire = new HongLietVfx(scene);
+  }
   flash(id: string): void {
     this.flashes.set(id, this.scene.time.now);
   }
   clear(): void {
+    this.fire.clear();
     for (const v of this.views.values()) this.destroy(v);
     this.views.clear();
   }
@@ -229,6 +235,7 @@ export class HongLietRenderer {
         active.add(id);
         this.effect(id, e);
       }
+    this.fire.retain(active);
     for (const [id, v] of this.views)
       if (!active.has(id)) {
         this.destroy(v);
@@ -307,11 +314,14 @@ export class HongLietRenderer {
       a.archetypeId,
       a.hp <= 0
         ? 'death'
-        : boss && !!a.castAbilityId && this.tick < a.actionEndsAt
-          ? 'action'
-          : asset === 'boss_locomotion' || (!boss && a.pose !== 'basic_attack')
-            ? a.pose
-            : 'action',
+        : a.pose === 'hurt'
+          ? 'hurt'
+          : boss && !!a.castAbilityId && this.tick < a.actionEndsAt
+            ? 'action'
+            : asset === 'boss_locomotion' ||
+                (!boss && a.pose !== 'basic_attack')
+              ? a.pose
+              : 'action',
       a.fx,
       a.fy,
       a.castAbilityId,
@@ -341,15 +351,11 @@ export class HongLietRenderer {
         .setOrigin(0.5, 1);
       v.bar = this.scene.add.graphics();
     }
-    v.image
-      .setTint(
-        a.hp <= 0
-          ? 0x88766b
-          : this.scene.time.now - (this.flashes.get(id) ?? -1000) < 120
-            ? 0xffbb88
-            : 0xffffff,
-      )
-      .setAlpha(a.hp <= 0 ? 0.3 : 1);
+    v.image.setTint(
+      this.scene.time.now - (this.flashes.get(id) ?? -1000) < 120
+        ? 0xffbb88
+        : 0xffffff,
+    );
     v.label!.setPosition(
       a.x,
       a.y -
@@ -362,9 +368,9 @@ export class HongLietRenderer {
       .setDepth(a.y + 0.5)
       .setVisible(a.hp > 0);
     v.bar!.clear().setDepth(a.y + 0.4);
-    if (a.hp > 0) {
-      const w = boss ? 66 : 32,
-        y = a.y - (boss ? 74 : 48);
+    if (a.hp > 0 && !boss) {
+      const w = 32,
+        y = a.y - 48;
       v.bar!.fillStyle(0x24180f)
         .fillRect(a.x - w / 2, y, w, 4)
         .fillStyle(0xdf7137)
@@ -379,7 +385,16 @@ export class HongLietRenderer {
       frame = 'thrust_0',
       x = e.x,
       y = e.y;
-    if (e.abilityId === 'hong_liet_a1') {
+    const revised = this.fire.draw(id, e, this.tick);
+    if (revised) {
+      // The existing outline still draws the server's exact warning footprint.
+      if (!this.views.has(id))
+        this.views.set(id, {
+          image: this.scene.add
+            .image(x, y, key(asset), frame)
+            .setVisible(false),
+        });
+    } else if (e.abilityId === 'hong_liet_a1') {
       const d = dir(e.fx, e.fy) as R3Direction;
       if (warning) return; // Authoritative line telegraphs are drawn above; selected atlas has travel only.
       const { asset: c, tag } = r3Tag('r3_hhl_blade_' + d, 'travel', d);
@@ -398,7 +413,7 @@ export class HongLietRenderer {
         .setDepth(y + 2)
         .setAlpha(warning ? 0.3 : 1);
     } else if (e.kind === 'arc') {
-      const n = warning ? 0 : Math.min(3, 1 + Math.floor(age / 3.9));
+      const n = warning ? 0 : Math.min(3, 1 + Math.floor(age / 4));
       frame = 'sweep_' + n;
       const v = this.image(id, asset, frame, x, y);
       v.image
@@ -406,14 +421,19 @@ export class HongLietRenderer {
         .setOrigin(0.5, 140 / 320)
         .setScale(e.length / 112, (e.length / 82) * 0.6)
         .setRotation(angle - Math.PI / 2)
-        .setDepth(-25)
-        .setAlpha(warning ? 0.45 : 1)
-        .setCrop(0, 140, 320, 180);
+        .setDepth(warning ? -25 : y + 3)
+        .setAlpha(warning ? 0.45 : Math.min(1, (e.expiresAt - this.tick) / 6));
     } else if (e.kind === 'lava' || e.kind === 'line') {
       const lane = e.kind === 'lava';
       asset = lane ? 'vfx_lava_lane_v03' : 'vfx_lava_lane';
       const n = warning
-        ? 0
+        ? Math.min(
+            3,
+            Math.floor(
+              ((this.tick - e.startedAt) * 4) /
+                Math.max(1, e.activeAt - e.startedAt),
+            ),
+          )
         : lane && this.tick >= e.damageUntil
           ? 7
           : 4 + (Math.floor(age / 5.4) % 3);
@@ -455,9 +475,6 @@ export class HongLietRenderer {
                 )
               : 0.92,
         );
-      const width = lane ? 320 : 308,
-        half = (lane ? e.radius : 22) / v.image.scaleY;
-      v.image.setCrop(p[0]! - width / 2, p[1]! - half, width, half * 2);
     } else if (e.kind === 'projectile') {
       const arrow = e.abilityId === 'hoa_tien_te_phat';
       asset = arrow ? 'vfx_arrows' : 'vfx_basics';
@@ -523,8 +540,11 @@ export class HongLietRenderer {
     v.bar ??= this.scene.add.graphics();
     const g = v.bar;
     g.clear().setDepth(-20);
+    const inWarningWindow =
+      !revised || e.kind !== 'meteor' || e.activeAt - this.tick <= 23;
     if (
       warning &&
+      inWarningWindow &&
       e.kind !== 'cannon' &&
       (e.kind !== 'projectile' || e.abilityId === 'hong_liet_a1')
     ) {
@@ -580,6 +600,8 @@ export class HongLietRenderer {
         [...this.observed].map(([k, v]) => [k, [...v]]),
       ),
       samples: this.samples,
+      fire: this.fire.inspect(),
+      fireFrames: this.fire.frames(),
       entities: [...this.views].map(([id, v]) => ({
         id,
         asset: v.image.texture.key,
@@ -590,7 +612,6 @@ export class HongLietRenderer {
         origin: [v.image.originX, v.image.originY],
       })),
       fallbacks: [
-        'hurt: brief tint over current pose; death: dim idle, no new cel',
         'minion vertical attack: approved right-facing contact alias',
       ],
       cameraRotation: 0,

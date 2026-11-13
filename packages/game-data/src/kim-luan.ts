@@ -6,7 +6,6 @@ import {
 } from '@volam/game-core';
 import { creepDungeon } from './dungeon.js';
 import { m1Config } from './m1.js';
-import { enlargeBossArena } from './boss-arena-geometry.js';
 import { bossCadence } from './boss-cadence.js';
 import map from './kim-map.json' with { type: 'json' };
 const hz = m1Config.tickRate,
@@ -32,10 +31,10 @@ export const kimLuanDefinition: KimDefinition = {
   actionRestSeconds: 0.2,
   crescent: { speed: 760, radius: 30, lifetime: 2 },
   actors: {
-    hoac_do: { ...marker('hoac_do_spawn'), hp: 1100, defense: 10, speed: 180 },
+    hoac_do: { ...marker('hoac_do_spawn'), hp: 3300, defense: 10, speed: 108 },
     dat_nhi_ba: {
       ...marker('dat_nhi_ba_spawn'),
-      hp: 1600,
+      hp: 4800,
       defense: 16,
       speed: 105,
     },
@@ -83,10 +82,12 @@ export const kimLuanDefinition: KimDefinition = {
     wheelSpeed: 620,
   },
   elephants: {
+    stunSeconds: 2,
     rocks: 5,
     speed: 480,
     halfWidth: 31,
     rockHalfWidth: 51,
+    rockHalfDepth: 23,
     top: 160,
     bottom: 750,
     normal: { lanes: 12, rows: 3, rowGap: 0.45, volleyGap: 3.8, warning: 1.6 },
@@ -108,16 +109,35 @@ export const kimLuanDefinition: KimDefinition = {
     ngu_luan_ho_the: p('Ngũ Luân Hộ Thể', 18, 0.6, 3.1, 9),
     ngu_luan_phong_toa: p('Ngũ Luân Phong Tỏa', 32, 0.8, 4.1, 12),
     long_tuong_chan_thien: p('Long Tượng Chấn Thiên', 18, 0.45, 1, 6),
-    long_tuong_bat_nha_cong: p('Long Tượng Bát Nhã Công', 20, 0.8, 11.5, 18),
+    long_tuong_bat_nha_cong: p('Long Tượng Bát Nhã Công', 80, 0.8, 11.5, 18),
     long_tuong_bat_nha_thap_tang: p(
       'Long Tượng Bát Nhã Thập Tầng',
-      20,
+      80,
       0,
       11.5,
       12,
     ),
   },
 };
+kimLuanDefinition.abilities.thiet_phien_lien_hoan.statuses = [
+  { kind: 'slow', magnitude: 0.35, durationTicks: t(1.25) },
+];
+kimLuanDefinition.abilities.phien_trung_doc_dinh.statuses = [
+  { kind: 'poison', magnitude: 6, durationTicks: t(3) },
+  { kind: 'slow', magnitude: 0.35, durationTicks: t(1.25) },
+];
+kimLuanDefinition.abilities.cuong_phong_van_nhan.statuses = [
+  { kind: 'slow', magnitude: 0.45, durationTicks: t(1.5) },
+];
+for (const id of [
+  'dat_sweep',
+  'dai_luc_pha_son',
+  'dai_luc_pha_son_boulder',
+  'hang_ma_tam_lien_chan',
+] as const)
+  kimLuanDefinition.abilities[id].statuses = [
+    { kind: 'stun', magnitude: 1, durationTicks: t(0.65) },
+  ];
 kimLuanDefinition.actionRestSeconds = bossCadence.kim_luan.restSeconds;
 for (const [id, a] of Object.entries(kimLuanDefinition.abilities)) {
   const t = bossCadence.kim_luan.abilities[id];
@@ -125,28 +145,72 @@ for (const [id, a] of Object.entries(kimLuanDefinition.abilities)) {
   a.warning = t.warningSeconds;
   a.cooldown = t.cooldownSeconds;
 }
-export const kimLuanDungeon: CreepDungeonDefinition = enlargeBossArena({
-  ...creepDungeon,
-  id: 'kim_luan',
-  kimBoss: kimLuanDefinition,
-  width: 1280,
-  height: 736,
-  collision: map.layers
-    .find((l) => l.name === 'collision_proposals')!
-    .objects!.map((o) => ({
-      x: o.x,
-      y: o.y,
-      width: 'width' in o ? o.width : 0,
-      height: 'height' in o ? o.height : 0,
-    })),
-  spawn: marker('hero_spawn'),
-  exit: marker('exit'),
-  creepSpawns: [],
-  creepRoster: [],
-  hpPerAdditionalPlayer: 0,
-  damagePerAdditionalPlayer: 0,
-});
-export function validateKimDefinition(d = kimLuanDefinition) {
+/** Approved Xiangyang gate courtyard, measured from its 7:4 raster. */
+export const kimLuanXiangyangArena = {
+  width: 1190,
+  height: 680,
+  north: 220,
+  south: 598,
+  gateLeft: 530,
+  gateRight: 660,
+  exit: { x: 595, y: 631 },
+} as const;
+
+export const kimLuanDungeon: CreepDungeonDefinition = (() => {
+  const { width, height, north, south, gateLeft, gateRight } =
+    kimLuanXiangyangArena;
+  const kim: KimDefinition = {
+    ...kimLuanDefinition,
+    bounds: { x: 112, y: 233, width: 966, height: 344 },
+    actors: {
+      hoac_do: { ...kimLuanDefinition.actors.hoac_do, x: 480, y: 325 },
+      dat_nhi_ba: { ...kimLuanDefinition.actors.dat_nhi_ba, x: 708, y: 341 },
+      kim_luan_phap_vuong: {
+        ...kimLuanDefinition.actors.kim_luan_phap_vuong,
+        x: 595,
+        y: 342,
+      },
+    },
+    elephants: {
+      ...kimLuanDefinition.elephants,
+      top: north - 50,
+      bottom: south + 64,
+    },
+  };
+  return {
+    ...creepDungeon,
+    id: 'kim_luan',
+    kimBoss: kim,
+    creepSpawns: [],
+    creepRoster: [],
+    hpPerAdditionalPlayer: 0,
+    damagePerAdditionalPlayer: 0,
+    width,
+    height,
+    spawn: { x: 595, y: 497 },
+    exit: kimLuanXiangyangArena.exit,
+    collision: [
+      { x: 0, y: 0, width, height: north },
+      // The painted side-wall feet widen towards the south.
+      ...[
+        { y: north, depth: 120, inset: 102 },
+        { y: 340, depth: 125, inset: 91 },
+        { y: 465, depth: height - 465, inset: 78 },
+      ].flatMap(({ y, depth, inset }) => [
+        { x: 0, y, width: inset, height: depth },
+        { x: width - inset, y, width: inset, height: depth },
+      ]),
+      { x: 0, y: south, width: gateLeft, height: height - south },
+      {
+        x: gateRight,
+        y: south,
+        width: width - gateRight,
+        height: height - south,
+      },
+    ],
+  };
+})();
+export function validateKimDefinition(d = kimLuanDungeon.kimBoss!) {
   const visit = (value: unknown) => {
     if (typeof value === 'number' && (!Number.isFinite(value) || value < 0))
       throw Error('Invalid Kim tuning');
@@ -174,7 +238,14 @@ export function validateKimDefinition(d = kimLuanDefinition) {
         (n) => Number.isFinite(n) && n >= 0,
       ) ||
       a.duration <= 0 ||
-      a.cooldown <= 0
+      a.cooldown <= 0 ||
+      a.statuses?.some(
+        (s) =>
+          !['slow', 'poison', 'stun'].includes(s.kind) ||
+          s.magnitude <= 0 ||
+          !Number.isInteger(s.durationTicks) ||
+          s.durationTicks <= 0,
+      )
     )
       throw Error('Invalid Kim ability ' + id);
   }

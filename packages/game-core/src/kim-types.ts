@@ -1,4 +1,4 @@
-import type { Point, Rect } from './types.js';
+import type { Point, Rect, StatusSpec } from './types.js';
 import type { ChuLoot } from './chu-types.js';
 export const kimAbilities = [
   'thiet_phien_lien_hoan',
@@ -26,6 +26,7 @@ export interface KimProfile {
   warning: number;
   duration: number;
   cooldown: number;
+  statuses?: StatusSpec[] | undefined;
 }
 export interface KimDefinition {
   wheelCount: number;
@@ -82,10 +83,12 @@ export interface KimDefinition {
     wheelSpeed: number;
   };
   elephants: {
+    stunSeconds: number;
     rocks: number;
     speed: number;
     halfWidth: number;
     rockHalfWidth: number;
+    rockHalfDepth: number;
     top: number;
     bottom: number;
     normal: {

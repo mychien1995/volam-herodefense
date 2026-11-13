@@ -148,6 +148,13 @@ export function presentRenovatedBody(
         ? 'up'
         : 'down';
   const locomotion = pose === 'idle' || pose === 'walk';
+  const boss = approvedBossBody(id);
+  const defeat = boss && pose === 'death';
+  const defeatedAt = defeat
+    ? ((image.getData('renovation-defeat') as number | undefined) ??
+      scene.time.now)
+    : undefined;
+  if (boss) image.setData('renovation-defeat', defeatedAt);
   const creep = isCreepGroup(definition.group);
   const reaction =
     (creep || definition.group === 'heroes' || approvedBossBody(id)) &&
@@ -201,7 +208,7 @@ export function presentRenovatedBody(
       .setFlip(false, false)
       .setRotation(0);
     image.setData('renovation-action', undefined);
-  } else if (locomotion || reaction || creepCast) {
+  } else if (locomotion || reaction || creepCast || defeat) {
     if ('anims' in image) image.anims.stop();
     const progress = Phaser.Math.Clamp(clock?.progress ?? 0, 0, 1);
     const release = clock?.phase === 'release';
@@ -258,6 +265,12 @@ export function presentRenovatedBody(
       .setFlip(false, false)
       .setRotation(0);
     image.setData('renovation-action', undefined);
+    if (defeatedAt !== undefined) {
+      const progress = Math.min(1, (scene.time.now - defeatedAt) / 480);
+      image
+        .setRotation((direction === 'left' ? 1 : -1) * progress * 1.15)
+        .setAlpha(image.alpha * (1 - 0.7 * progress));
+    }
   } else if (
     pose === 'death' ||
     !presentApprovedBossAction(

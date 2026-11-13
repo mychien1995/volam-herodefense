@@ -70,16 +70,25 @@ export function hurt(
   )
     raw *= config.dungeonEnemyDamageMultiplier;
   const campaignAttacker = world.creeps.get(sourceId);
+  const campaign = config.campaign;
+  const boss = campaign && Object.hasOwn(campaign.bosses, sourceId);
   if (
-    config.campaign?.bosses[sourceId] &&
+    campaign &&
     world.heroes.has(target.id) &&
     !snapshot?.directHp &&
     !snapshot?.reactive
-  )
-    raw *=
-      1 +
-      config.campaign.damagePerPlayer *
-        ((campaignAttacker?.campaignPlayers ?? 1) - 1);
+  ) {
+    if (boss)
+      raw *=
+        1 +
+        campaign.damagePerPlayer *
+          ((campaignAttacker?.campaignPlayers ?? 1) - 1);
+    if (
+      !snapshot?.unavoidableHpLoss &&
+      (boss || sourceId === 'hoac_do' || sourceId === 'dat_nhi_ba')
+    )
+      raw *= campaign.bossDamageMultiplier;
+  }
   raw = creepGuardDamage(
     world,
     target,
@@ -89,8 +98,6 @@ export function hurt(
     snapshot?.periodic,
   );
   if (world.creeps.get(target.id)?.rescueTargetId === sourceId) return false;
-  if (!snapshot?.unavoidableHpLoss && ownerProtection(world, target))
-    return false;
   // DOT remains damage; immunity exists only on actual moving dash ticks.
   if (
     !snapshot?.unavoidableHpLoss &&
@@ -304,6 +311,7 @@ export function hurt(
         Math.max(
           statusValue(target, 'damage_reduction', world.tick),
           guardCounter?.magnitude ?? 0,
+          ownerProtection(world, target)?.effect.ownerDamageReduction ?? 0,
           ...(world.actions ?? [])
             .filter((a) => a.ownerId === target.id && a.until > world.tick)
             .map((a) =>
@@ -616,7 +624,7 @@ function reward(world: World, creep: Creep, config: SimulationConfig): void {
     )
     .sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));
   eligible.forEach((hero, i) => {
-    if (config.campaign) {
+    if (config.campaign || config.dungeonAggro) {
       grantFarmReward(
         hero,
         stats.xp / eligible.length,

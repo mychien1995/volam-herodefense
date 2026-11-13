@@ -23,7 +23,8 @@ import {
   hongLietDungeon,
 } from '@volam/game-data';
 import { hurt } from '../packages/game-core/src/combat.js';
-import { applyStatus } from '../packages/game-core/src/status.js';
+import { applyStatus, statusValue } from '../packages/game-core/src/status.js';
+import { dash } from '../packages/game-core/src/mobility.js';
 import {
   dungeonActionSchema,
   bossLootActionSchema,
@@ -328,7 +329,7 @@ describe('Chu Bá Thông authoritative encounter', () => {
     });
     expect(f.h.hp).toBe(before);
   });
-  it('preserves player mana shield absorption on reflected damage and lets movement outrun pull', () => {
+  it('preserves mana shield absorption while the pull slows movement and prevents dashing', () => {
     const f = setup();
     phase(f, 'reflect');
     applyStatus(
@@ -354,7 +355,26 @@ describe('Chu Bá Thông authoritative encounter', () => {
     f.h.lastMoveTick = f.w.tick;
     const x = f.h.x;
     steps(f, 5);
-    expect(f.h.x).toBeGreaterThan(x);
+    expect(f.h.x).toBeLessThan(x);
+    expect(statusValue(f.h, 'slow', f.w.tick)).toBe(0.85);
+    const charges = f.h.dashCharges;
+    dash(f.w, f.h, f.c);
+    expect(f.h.dashCharges).toBe(charges);
+  });
+  it('spawns stronger wine disciples and slows a hero struck by a palm', () => {
+    const f = setup();
+    phase(f, 'drink');
+    const disciple = [...f.w.creeps.values()].find(
+      (e) => e.archetypeId === 'chu_wine_disciple',
+    )!;
+    expect(disciple.maxHp).toBe(160);
+    expect(disciple.stats?.defense).toBe(20);
+    phase(f, 'palm');
+    f.h.x = f.b.x + 50;
+    f.h.y = f.b.y;
+    f.w.chu!.nextBasicAt = f.w.tick;
+    steps(f, 8);
+    expect(statusValue(f.h, 'slow', f.w.tick)).toBe(0.45);
   });
   it('moves every ultimate hazard and damages its server-owned field', () => {
     const a = chuFields(2),

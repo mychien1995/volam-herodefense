@@ -24,7 +24,6 @@ export default async function setup() {
   const authority = new ColyseusTestServer(server);
   const client = await createServer({
     root: fileURLToPath(new URL('../../apps/game-client', import.meta.url)),
-    configFile: false,
     cacheDir: '.cache/kim-luan-vite',
     server: {
       host: '127.0.0.1',

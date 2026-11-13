@@ -120,8 +120,10 @@ describe('Hell shared map and authoritative integration', () => {
     expect(z.config.creep).toEqual({
       ...m.base.creep,
       speed: m.base.speed * 0.648,
+      xp: 36,
+      gold: 7.2,
     });
-    expect(z.world.creeps.size).toBe(6);
+    expect(z.world.creeps.size).toBe(10);
     expect([
       ...new Set([...z.world.creeps.values()].map((c) => c.archetypeId)),
     ]).toEqual([hellRoster[0]]);
@@ -130,7 +132,7 @@ describe('Hell shared map and authoritative integration', () => {
     for (const c of z.world.creeps.values()) c.hp = 0;
     steps(m, d.restTicks + 1);
     expect(z.wave).toBe(2);
-    expect(z.world.creeps.size).toBe(6);
+    expect(z.world.creeps.size).toBe(10);
     expect([
       ...new Set([...z.world.creeps.values()].map((c) => c.archetypeId)),
     ]).toEqual([hellRoster[1]]);

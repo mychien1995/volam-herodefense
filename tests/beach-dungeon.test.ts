@@ -113,6 +113,8 @@ describe('Beach shared map and authoritative integration', () => {
     expect(z.config.creep).toEqual({
       ...m.base.creep,
       speed: m.base.speed * 0.648,
+      xp: 36,
+      gold: 7.2,
     });
     expect([...z.world.creeps.values()].map((c) => c.archetypeId)).toEqual(
       Array(d.baseCount).fill(beachRoster[0]),

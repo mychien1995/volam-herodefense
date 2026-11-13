@@ -90,6 +90,58 @@ function wipe(m: DungeonMatch) {
   }
 }
 describe('approved campaign progression and economy', () => {
+  it('doubles normal damage from all campaign bosses and both Kim disciples', () => {
+    const { m, c, h } = fixture();
+    const world = m.arena.world;
+    h.invulnerable = false;
+    h.hp = h.maxHp = 10000;
+    const baseline = {
+      ...c,
+      campaign: { ...c.campaign, bossDamageMultiplier: 1 },
+    };
+    const damage = (source: string, config: typeof c) => {
+      h.hp = h.maxHp;
+      hurt(world, h, source, 'boss_hit', 100, config, {
+        critChance: 0,
+        critMultiplier: 1,
+      });
+      return h.maxHp - h.hp;
+    };
+    for (const source of [
+      ...Object.keys(c.campaign.bosses),
+      'hoac_do',
+      'dat_nhi_ba',
+    ])
+      expect(damage(source, c)).toBeCloseTo(damage(source, baseline) * 2, -0.2);
+    expect(damage('ordinary_creep', c)).toBe(
+      damage('ordinary_creep', baseline),
+    );
+  });
+  it('uses triple solo HP for all nine bosses and the two Kim disciples', () => {
+    expect(
+      Object.fromEntries(
+        Object.entries(campaignDefinition.bosses).map(([id, boss]) => [
+          id,
+          boss.hp,
+        ]),
+      ),
+    ).toEqual({
+      dong_ta: 18600,
+      tay_doc_boss: 42000,
+      boss_nam_de: 78000,
+      bac_cai: 114000,
+      vuong_trung_duong: 144000,
+      boss_ly_mac_sau: 21600,
+      hong_liet_boss: 51000,
+      chu_ba_thong: 36000,
+      kim_luan_phap_vuong: 135000,
+    });
+    const { m, h } = fixture();
+    m.enter(h.id, 'shared', 'kim_luan');
+    const { world } = m.zoneOf(h.id)!;
+    expect(world.creeps.get('hoac_do')?.maxHp).toBe(3300);
+    expect(world.creeps.get('dat_nhi_ba')?.maxHp).toBe(4800);
+  });
   it('raises boss scaling on late joins without healing or lowering it after a disconnect', () => {
     const { m, h, c } = fixture();
     m.enter(h.id, 'shared', 'co_mo');
@@ -104,11 +156,11 @@ describe('approved campaign progression and economy', () => {
     initializeProgression(late, c, 'fixed', 'vo_dang_kiem');
     late.invulnerable = true;
     m.step();
-    expect(boss.maxHp).toBe(7200 * 2.1);
+    expect(boss.maxHp).toBe(21600 * 2.1);
     expect(boss.hp / boss.maxHp).toBeCloseTo(fraction, 3);
     m.disconnect(late.id);
     m.step();
-    expect(boss.maxHp).toBe(7200 * 2.1);
+    expect(boss.maxHp).toBe(21600 * 2.1);
   });
   it('validates config and increases the real level thresholds, with no free ultimate rank', () => {
     expect(campaignSchema.parse(campaignDefinition)).toEqual(
@@ -223,13 +275,13 @@ describe('approved campaign progression and economy', () => {
           critMultiplier: 1,
         });
     expect(h.xp - before).toBe(4);
-    expect(h.farmXpRemainder).toBe(0.5);
+    expect(h.farmXpRemainder).toBeCloseTo(0.5);
   });
   it('reuses all six identities while time and room count increase private-dungeon threat', () => {
     const { m, h } = fixture(6);
     m.enter(h.id, 'private', 'forest');
     const z = m.zoneOf(h.id)!;
-    expect(z.world.creeps.size).toBe(9);
+    expect(z.world.creeps.size).toBe(10);
     const initial = z.config.creep.hp;
     m.arenaTick = 900 * m.base.tickRate;
     for (let wave = 1; wave <= 6; wave++) {

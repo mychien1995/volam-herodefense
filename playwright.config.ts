@@ -8,6 +8,7 @@ export default defineConfig({
   testDir: './tests/e2e',
   // Accelerated invasion scenarios own separate server settings and ports.
   testIgnore: [
+    '**/boss-game.spec.ts',
     '**/invasion.spec.ts',
     '**/skills.spec.ts',
     '**/progression.spec.ts',

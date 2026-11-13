@@ -8,7 +8,7 @@ export default defineConfig({
   reporter: 'list',
   outputDir: './artifacts/hong-liet-browser',
   use: {
-    baseURL: 'http://127.0.0.1:5391',
+    baseURL: `http://127.0.0.1:${process.env['HONG_LIET_QA_CLIENT_PORT'] ?? 5391}`,
     viewport: { width: 1440, height: 1000 },
     video: 'off',
     trace: 'off',

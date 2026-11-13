@@ -8,6 +8,7 @@ import {
   chuLootAction,
   blocked,
   hasStatus,
+  stepWorld,
   type KimAbility,
   type SimulationConfig,
 } from '@volam/game-core';
@@ -19,6 +20,7 @@ import {
   kimLuanDefinition as definition,
   kimLuanDungeon as dungeon,
   validateKimDefinition,
+  campaignDefinition,
 } from '@volam/game-data';
 const setup = (seed = 42) => {
   const c: SimulationConfig = {
@@ -56,6 +58,73 @@ const shots = (s: ReturnType<typeof setup>, id: KimAbility) =>
     (e) => e.abilityId === id && e.kind === 'shot',
   );
 describe('Kim Luân authoritative feedback_02', () => {
+  it('the elephant hits hard and stuns for two seconds only when it reaches the hero', () => {
+    const s = setup();
+    s.c.campaign = campaignDefinition;
+    const b = s.boss();
+    s.e.clear(s.w);
+    const ability = 'long_tuong_bat_nha_cong';
+    s.e.begin(s.w, s.c, b.id, ability, s.h);
+    s.step(s.e.casts.get(b.id)!.activeAt - s.w.tick);
+    const elephant = [...s.e.effects.values()].find(
+      (e) =>
+        e.kind === 'elephant' &&
+        e.fy === 1 &&
+        e.length === s.e.definition.elephants.bottom,
+    )!;
+    for (const [id, e] of s.e.effects)
+      if (e !== elephant) s.e.effects.delete(id);
+    Object.assign(s.h, { x: elephant.x, y: elephant.y + 200 });
+    s.step(elephant.activeAt - s.w.tick - 1);
+    expect(s.h.hp).toBe(10000);
+    for (let i = 0; i < 25 && s.h.hp === 10000; i++) s.step(1);
+    expect(s.h.hp).toBe(9840);
+    expect(s.h.statuses?.find((effect) => effect.kind === 'stun')?.until).toBe(
+      s.w.tick + 2 * s.c.tickRate,
+    );
+  });
+
+  it('real herd rocks block walking and Shift until the rock expires', () => {
+    const s = setup(),
+      b = s.boss();
+    s.e.clear(s.w);
+    s.e.begin(s.w, s.c, b.id, 'long_tuong_bat_nha_cong', s.h);
+    s.step(s.e.casts.get(b.id)!.activeAt - s.w.tick);
+    const rock = [...s.e.effects.values()].find((e) => e.kind === 'rock')!;
+    const contact = rock.y - definition.elephants.rockHalfDepth - s.c.radius;
+    Object.assign(s.h, { x: rock.x, y: contact - 12, moveY: 1, fx: 0, fy: 1 });
+    const advance = (n: number) => {
+      for (let i = 0; i < n; i++) {
+        s.h.lastMoveTick = s.w.tick;
+        stepWorld(s.w, s.c);
+      }
+    };
+    advance(10);
+    expect(s.h.y).toBeLessThanOrEqual(contact);
+    s.w.pending.push({ heroId: s.h.id, command: { kind: 'dash' } });
+    advance(16);
+    expect(s.h.y).toBeLessThanOrEqual(contact);
+    expect(s.c.collision).toEqual([]);
+    s.w.tick = rock.expiresAt - 1;
+    advance(26);
+    expect(s.h.y).toBeGreaterThan(rock.y);
+  });
+  it('uses the approved compact Xiangyang court and keeps its south exit reachable', () => {
+    const { width, height, collision, spawn, exit } = dungeon;
+    const isBlocked = (x: number, y: number) =>
+      blocked({ x, y }, m1Config.radius, width, height, collision);
+    expect({ width, height }).toEqual({ width: 1190, height: 680 });
+    expect(width / height).toBe(7 / 4);
+    for (const { x, y } of Object.values(dungeon.kimBoss!.actors))
+      expect(isBlocked(x, y)).toBe(false);
+    for (let y = spawn.y; y <= exit.y; y += 2)
+      expect(isBlocked(spawn.x, y)).toBe(false);
+    expect(isBlocked(595, 190)).toBe(true);
+    expect(isBlocked(70, 410)).toBe(true);
+    expect(isBlocked(1120, 410)).toBe(true);
+    expect(isBlocked(420, 630)).toBe(true);
+    expect(isBlocked(exit.x, exit.y)).toBe(false);
+  });
   it.each([
     ['hoac_do', 'dat_nhi_ba'],
     ['dat_nhi_ba', 'hoac_do'],
@@ -156,6 +225,10 @@ describe('Kim Luân authoritative feedback_02', () => {
       s.step(1);
       const damage = hp - s.h.hp;
       expect(damage).toBeGreaterThan(previous);
+      if (i === 0) {
+        expect(hasStatus(s.h, 'poison', s.w.tick)).toBe(true);
+        expect(hasStatus(s.h, 'slow', s.w.tick)).toBe(true);
+      }
       previous = damage;
     }
     expect(s.h.hp).toBe(0);
@@ -389,7 +462,7 @@ describe('Kim Luân authoritative feedback_02', () => {
     m.remove('b');
     for (let i = 0; i <= 900; i++) m.step();
     expect(z.kim!.phase).toBe('disciples');
-    expect(z.world.creeps.get('hoac_do')!.hp).toBe(1100);
+    expect(z.world.creeps.get('hoac_do')!.hp).toBe(3300);
     expect(other.world.creeps.has('kim_luan_phap_vuong')).toBe(false);
   });
   it('map markers and shelter region are reachable; invalid config is rejected', () => {
@@ -442,6 +515,9 @@ describe('Kim Luân authoritative feedback_02', () => {
     const hp = s.h.hp;
     s.step(1);
     expect(s.h.hp).toBeLessThan(hp);
+    expect(s.h.statuses?.find((effect) => effect.kind === 'stun')?.until).toBe(
+      s.w.tick + Math.round(s.c.tickRate * 0.65),
+    );
     const once = s.h.hp;
     s.step(1);
     expect(s.h.hp).toBe(once);
@@ -510,7 +586,7 @@ describe('Kim Luân authoritative feedback_02', () => {
     }
     const z = m.zoneOf('p0')!,
       e = z.kim!;
-    expect(z.world.creeps.get('hoac_do')!.maxHp).toBe(1100);
+    expect(z.world.creeps.get('hoac_do')!.maxHp).toBe(3300);
     z.world.creeps.get('hoac_do')!.hp = z.world.creeps.get('dat_nhi_ba')!.hp =
       0;
     m.step();

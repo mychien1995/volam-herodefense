@@ -288,6 +288,7 @@ export class DongTaRenderer {
           actor.y - 65,
           actor.hp,
           actor.maxHp,
+          bundle === 'dong' ? 0 : 96,
         );
       if (
         cast?.abilityId === 'lac_anh_normal' &&

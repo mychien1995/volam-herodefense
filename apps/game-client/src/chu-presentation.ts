@@ -323,7 +323,7 @@ export class ChuPresentation {
       if (v.phase !== 'spin') this.spinHistory = [];
       this.text(
         'boss',
-        'Chu Bá Thông · ' + Math.ceil(v.bossHp) + ' / ' + v.bossMaxHp,
+        'Chu Bá Thông',
         x,
         y -
           (renovationEnabled(this.scene)

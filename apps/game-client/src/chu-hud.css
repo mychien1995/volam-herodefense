@@ -1,9 +1,9 @@
-#chu-boss-hud {
+#boss-hud {
   position: absolute;
   top: 12px;
   left: 50%;
   transform: translateX(-50%);
-  width: min(330px, 30vw);
+  width: min(330px, 52vw);
   padding: 6px 10px;
   z-index: 12;
   text-align: center;
@@ -12,27 +12,33 @@
   pointer-events: none;
   font-size: 13px;
 }
-#chu-boss-hud strong,
-#chu-boss-hud small {
+#boss-hud strong,
+#boss-hud small {
   display: block;
 }
-.chu-health {
+.boss-health-row + .boss-health-row {
+  margin-top: 6px;
+}
+.boss-health {
   position: relative;
   background: #332b25;
   height: 14px;
   margin: 4px 0;
 }
-.chu-health i {
+.boss-health i {
   display: block;
-  background: #a94e3d;
+  background: #91c852;
   height: 100%;
 }
-.chu-health span {
+.boss-health span {
   position: absolute;
   inset: 0;
   color: white;
   font-size: 10px;
   line-height: 14px;
+  text-shadow:
+    0 1px 2px #14150d,
+    0 0 2px #14150d;
 }
 #chu-loot {
   position: absolute;
@@ -74,28 +80,28 @@
   padding: 2px 4px;
 }
 
-#viewport[data-chu='true'] #defense-hud {
+#viewport[data-boss-hud='true'] #defense-hud {
   left: 16px;
   top: 112px;
   transform: none;
   width: 220px;
   font-size: 10px;
 }
-#viewport[data-chu='true'] #zone-status {
+#viewport[data-boss-hud='true'] #zone-status {
   display: none;
 }
-#chu-boss-hud {
+#boss-hud {
   border: 8px solid transparent;
   border-image: url('/assets/arena_art01/panel_frame.png') 22 fill / 8px;
   background: none;
   z-index: 21;
 }
 @media (max-width: 1000px) {
-  #chu-boss-hud {
+  #boss-hud {
     top: 112px;
     width: 240px;
   }
-  #viewport[data-chu='true'] #defense-hud {
+  #viewport[data-boss-hud='true'] #defense-hud {
     left: auto;
     right: 12px;
     top: auto;

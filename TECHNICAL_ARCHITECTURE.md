@@ -360,3 +360,7 @@ Validated game-data profiles feed an optional engine-independent `SimulationConf
 Protocol33 carries a strict creator preview flag, strict host-only action messages and `DefenseState.creepPreview` projection. `apps/game-server/src/creep-preview.ts` owns sandbox selection/cleanup/options; it uses the existing core stepping and effect handlers, with no client-authoritative hits or production balance changes. The in-viewport `creep-preview.ts` controller and preview-only retained-art adapter reuse the main Phaser scene. Development `VOLAM_DEV_CREEP_TEST=1` is required; production rejects preview creation. See `docs/CREEP_PREVIEW.md`.
 
 Creep feedback r3 adds validated sector/ground-lob/presentation fields to the independent combat catalogue. Core owns captured geometry, swept terrain landing and damage windows; Phaser owns raster selection/anchors and the debug-only read-only postrender capture hook. Network schema remains protocol33. See `docs/CREEP_FEEDBACK_R3.md`.
+
+## Boss balance update — 2026-11-13
+
+The campaign definition supplies the nine main boss HP baselines. The Kim Luân definition supplies disciple HP. Boss meters read zone-filtered replicated HP and the wave encounter view. Hồng Liệt’s sweep keeps the replicated cue alive for its visual recovery after the damage window closes. Burn and poison reuse the server’s strongest-per-element periodic damage rules. The existing protocol carries the statuses and cue clocks.

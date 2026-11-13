@@ -1087,6 +1087,7 @@ export class SkillVfx {
       m3d: this.m3d.inspect(),
       r3: this.r3.inspect(),
       approved: this.approved.inspect(),
+      thienSon: this.thienSon.inspect(),
       feedback: this.feedback.inspect(),
       loadedComponents: skillArt.assets.filter((a) =>
         this.scene.textures.exists(a.id),

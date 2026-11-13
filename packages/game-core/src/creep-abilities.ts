@@ -380,14 +380,28 @@ function dungeonHazard(config: SimulationConfig) {
     undefined
   );
 }
-function scaledPoint(p: Point, config: SimulationConfig): Point {
-  return { x: p.x * config.width, y: p.y * config.height };
+function safeHazardSite(
+  point: Point,
+  radius: number,
+  config: SimulationConfig,
+) {
+  const { spawn, dungeonExit, width, height, collision } = config;
+  const margin = radius + config.radius;
+  return (
+    !blocked(point, radius, width, height, collision) &&
+    distance(point, spawn) > margin &&
+    (!dungeonExit || distance(point, dungeonExit) > margin)
+  );
 }
 export function inQuicksand(world: World, actor: Point): boolean {
   const effects = world.creepCombat?.effects;
   if (!effects?.has('quicksand_0')) return false;
   for (const e of effects.values())
-    if (e.abilityId === 'quicksand' && distance(actor, e) <= e.radius)
+    if (
+      e.abilityId === 'quicksand' &&
+      world.tick < e.expiresAt &&
+      distance(actor, e) <= e.radius
+    )
       return true;
   return false;
 }
@@ -431,29 +445,26 @@ function environmentCue(
   e.kind = 'creep_trap_' + name;
   return e;
 }
-/** Roll a private visit's layout before the hero joins. Cues are also the hit areas. */
-export function resetQuicksand(
-  world: World,
-  config: SimulationConfig,
-  exit?: Point,
-): void {
+/** Authoritative cue positions also define the active slow and dash-lock areas. */
+export function resetQuicksand(world: World, config: SimulationConfig): void {
   const hazard = dungeonHazard(config);
   if (hazard?.kind !== 'quicksand') return;
-  const { radius, count } = hazard;
-  const { spawn, width, height, collision } = config;
+  const { radius, count, durationTicks } = hazard;
+  const { width, height } = config;
   const jitter = 16;
   const stride = radius * 2 + jitter * 2;
-  const margin = radius + config.radius;
+  const { effects } = runtime(world);
+  const previous = [...effects.values()].filter(
+    (e) => e.abilityId === 'quicksand',
+  );
   const safe = (point: Point) =>
-    !blocked(point, radius, width, height, collision) &&
-    distance(point, spawn) > margin &&
-    (!exit || distance(point, exit) > margin);
+    safeHazardSite(point, radius, config) &&
+    previous.every((pit) => distance(point, pit) > radius);
   const candidates: Point[] = [];
   for (let y = radius; y <= height - radius; y += stride)
     for (let x = radius; x <= width - radius; x += stride)
       if (safe({ x, y })) candidates.push({ x, y });
 
-  const { effects } = runtime(world);
   for (let i = 0; i < count; i++) effects.delete('quicksand_' + i);
   for (let i = 0; i < count && candidates.length; i++) {
     const [point] = candidates.splice(
@@ -473,7 +484,7 @@ export function resetQuicksand(
       0,
       'quicksand_' + i,
     );
-    e.expiresAt = 2 ** 31 - 1;
+    e.expiresAt = world.tick + durationTicks;
   }
 }
 function scheduleDungeonHazards(world: World, config: SimulationConfig): void {
@@ -482,7 +493,8 @@ function scheduleDungeonHazards(world: World, config: SimulationConfig): void {
   const tick = world.tick,
     state = runtime(world);
   if (h.kind === 'quicksand') {
-    if (!state.effects.has('quicksand_0')) resetQuicksand(world, config);
+    const pit = state.effects.get('quicksand_0');
+    if (!pit || pit.expiresAt <= tick) resetQuicksand(world, config);
     for (const hero of world.heroes.values()) {
       if (hero.hp <= 0 || !inQuicksand(world, hero)) continue;
       applyStatus(
@@ -503,7 +515,7 @@ function scheduleDungeonHazards(world: World, config: SimulationConfig): void {
     return;
   }
   if (h.kind === 'firetrap') {
-    for (const [i, relative] of h.points.entries()) {
+    for (let i = 0; i < h.count; i++) {
       const id = 'firetrap_' + i;
       const existing = state.effects.get(id);
       if (existing && existing.expiresAt > tick) continue;
@@ -513,10 +525,25 @@ function scheduleDungeonHazards(world: World, config: SimulationConfig): void {
         Math.floor((tick - first + h.warning) / h.interval),
       );
       const active = first + cycle * h.interval;
+      const sites: Point[] = [];
+      const occupied = [...state.effects.values()].filter(
+        (e) => e.abilityId === 'firetrap',
+      );
+      for (let y = h.radius; y <= config.height - h.radius; y += h.radius)
+        for (let x = h.radius; x <= config.width - h.radius; x += h.radius) {
+          const point = { x, y };
+          if (
+            safeHazardSite(point, h.radius, config) &&
+            occupied.every((e) => distance(e, point) >= h.radius * 2)
+          )
+            sites.push(point);
+        }
+      const site = sites[Math.floor(world.random() * sites.length)];
+      if (!site) continue;
       const e = environmentCue(
         world,
         'firetrap',
-        scaledPoint(relative, config),
+        site,
         h.radius,
         h.warning,
         h.stunTicks,
@@ -624,12 +651,7 @@ export function stepCreepHazards(world: World, config: SimulationConfig): void {
       if (h.hp <= 0) continue;
       for (const kind of ['poison', 'burn'] as const) {
         const s = h.statuses
-          ?.filter(
-            (s) =>
-              s.kind === kind &&
-              s.until > world.tick &&
-              s.abilityId.startsWith('creep_'),
-          )
+          ?.filter((s) => s.kind === kind && s.until > world.tick)
           .sort(
             (a, b) =>
               b.magnitude - a.magnitude || a.sourceId.localeCompare(b.sourceId),

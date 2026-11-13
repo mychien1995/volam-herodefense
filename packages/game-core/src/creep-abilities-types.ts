@@ -64,7 +64,13 @@ export type DungeonHazard =
       radius: number;
       stunTicks: number;
     }
-  | { kind: 'quicksand'; count: number; radius: number; slow: number }
+  | {
+      kind: 'quicksand';
+      count: number;
+      radius: number;
+      slow: number;
+      durationTicks: number;
+    }
   | {
       kind: 'geyser';
       count: number;
@@ -80,7 +86,7 @@ export type DungeonHazard =
       interval: number;
       stagger: number;
       warning: number;
-      points: Point[];
+      count: number;
       radius: number;
       stunTicks: number;
     };

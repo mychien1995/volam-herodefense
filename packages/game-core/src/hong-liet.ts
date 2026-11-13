@@ -350,13 +350,12 @@ export class HongLietEncounter {
             ) +
             1,
           a.damage,
-          0,
           shared,
         );
         blade.speed = this.definition.projectileSpeed;
       }
-    } else if (abilityId === 'hong_liet_a2')
-      this.cue(
+    } else if (abilityId === 'hong_liet_a2') {
+      const sweep = this.cue(
         world,
         cast,
         'arc',
@@ -369,7 +368,11 @@ export class HongLietEncounter {
         cast.activeAt + 1,
         a.damage,
       );
-    else if (abilityId === 'dung_nham_liet_dia')
+      sweep.expiresAt = Math.max(
+        sweep.expiresAt,
+        cast.activeAt + a.durationTicks + a.recoveryTicks,
+      );
+    } else if (abilityId === 'dung_nham_liet_dia')
       this.cue(
         world,
         cast,
@@ -382,7 +385,6 @@ export class HongLietEncounter {
         cast.activeAt,
         cast.activeAt + 1,
         a.damage,
-        Math.round(config.tickRate * 1.2),
       );
     else if (
       abilityId === 'hoa_son_bao_phat' ||
@@ -493,7 +495,6 @@ export class HongLietEncounter {
     activeAt: number,
     expiresAt: number,
     damage: number,
-    stunTicks = 0,
     groupHits?: Set<string>,
   ): BossCue {
     const e: BossCue = {
@@ -521,7 +522,6 @@ export class HongLietEncounter {
       damage,
       nextHit: activeAt,
       hitIds: new Set(),
-      stunTicks,
       speed: 0,
       remaining: length,
       ...(groupHits ? { groupHits } : {}),
@@ -713,14 +713,10 @@ export class HongLietEncounter {
         ) {
           e.hitIds.add(hero.id);
           e.groupHits?.add(hero.id);
-          if (e.stunTicks)
-            applyStatus(
-              hero,
-              { kind: 'stun', durationTicks: e.stunTicks, magnitude: 1 },
-              e.ownerId,
-              e.abilityId,
-              world.tick,
-            );
+          if (hero.hp > 0)
+            for (const status of this.definition.abilities[e.abilityId]
+              .statuses ?? [])
+              applyStatus(hero, status, e.ownerId, e.abilityId, world.tick);
         }
       }
       if (

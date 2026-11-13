@@ -1,10 +1,22 @@
+## Sân Tương Dương và Bách Liệt Thiên Kích · 2026-11-13
+
+Director duyệt sân Tương Dương 1.190 × 680 cho phó bản Kim Luân trong trận thường. Phaser hiển thị toàn bộ ảnh với cùng tỷ lệ hai trục. Va chạm tường và lối ra phía nam dùng chung cấu hình phó bản với server. Bốn bóng Bách Liệt Thiên Kích tiếp tục hoạt họa khi đòn trúng chỉ đổi tư thế nhân vật. Chúng kết thúc theo trạng thái thi triển của server.
+
+## Sát thương boss, Long Tượng và Hồng Liệt · 2026-11-13
+
+Chín boss chiến dịch và hai mini boss Hoắc Đô, Đạt Nhĩ Ba gây gấp đôi sát thương qua công thức đánh thường và kỹ năng. Các cơ chế trừ HP theo luật riêng giữ tỷ lệ đã duyệt. Đá Long Tượng cản đi và lướt đến khi biến mất. Hai cấp Long Tượng dùng 80 sát thương cơ sở mỗi lần voi trúng và gây choáng 2 giây. Đòn trúng của Hoắc Đô gây chậm và đòn trúng của Đạt Nhĩ Ba gây choáng 0,65 giây. Lính Hồng Liệt có 1.140 HP. Dung Nham Liệt Địa, Vạn Lý Nham Hỏa và Hỏa Sơn Bạo Phát đều gây choáng 2 giây.
+
+## Độ khó Cổ Mộ và Liên Hoa Phiến · cập nhật 2026-11-13
+
+Đã duyệt giảm 20% diện tích Cổ Mộ rồi thu thêm 10% trên diện tích đã giảm, còn 72% so với sân ban đầu và giữ tỷ lệ 4:3. Nếu Phất Trần Công ngoài tầm, Lý Mạc Sầu chọn chiêu tầm xa đang sẵn sàng và trong tầm. Phất Trần Công gây choáng 0,6 giây khi đòn hình quạt trúng sau báo chiêu. Âm Binh có 240 HP. Đạn Âm Binh làm chậm 60% trong 1,5 giây, đạn Ngũ Độc Chưởng làm chậm 70% trong 2 giây khi gây sát thương. Slow lấy mức mạnh nhất khi trùng thời gian. Vòng Liên Hoa Phiến tồn tại 6 giây, giảm 40% sát thương nhận và hồi 3–4% HP tối đa mỗi giây theo bậc cho người thi triển khi đứng trong vòng.
+
 ## Lôi Đài Hồng Mộc — 2026-11-12
 
 Đã duyệt Lôi Đài 1v1, viền gạch trắng để quan chiến, sàn gỗ đỏ chữ nhật nới diện tích và pháo hoa chiến thắng. Xem [quy tắc và artwork](docs/LOI_DAI.md) để biết các quy tắc thay thế đề xuất PvP cũ.
 
 ## Áp lực wave, bẫy phó bản và Thiên Hạ Vô Cẩu · 2026-11-12
 
-Wave creep chiến dịch dùng hệ số thử 1,10 HP và 1,08 sát thương trước làm tròn. Biển lên hai tâm nổ nước mỗi đợt nếu có đủ mặt bằng, lặp mỗi 130 tick. Địa Ngục có bốn miệng lửa cách nhau 42 tick, mỗi miệng lặp sau 168 tick. Thiên Hạ Vô Cẩu giảm 80% sát thương nhận trong action và hồi 5% HP tối đa cho người thi triển khi đến cú đập cuối. Cú cuối bị ngắt thì phần hồi máu không phát.
+Wave creep chiến dịch dùng hệ số thử 1,10 HP và 1,08 sát thương trước làm tròn. Rừng Trúc, Sa Mạc, Biển và Địa Ngục có 10 quái mỗi đợt. Tổng EXP và vàng của một đợt giữ theo ngân sách cũ, chia đều cho 10 quái. Biển lên bốn tâm nổ nước mỗi đợt nếu có đủ mặt bằng, lặp mỗi 90 tick. Địa Ngục giữ nhịp nổ cách nhau 42 tick và bốc lại vị trí mỗi lần. Thiên Hạ Vô Cẩu giảm 80% sát thương nhận trong action và hồi 5% HP tối đa cho người thi triển khi đến cú đập cuối. Cú cuối bị ngắt thì phần hồi máu không phát.
 
 ## Tầm Bổng và hồi chiêu đánh thường M3D · 2026-11-12
 
@@ -12,7 +24,7 @@ Cái Bang Bổng đánh trong tầm 105 đơn vị với bốn thức và nhịp
 
 ## M3D · Sprite creep, báo chiêu và cát lún
 
-Khôi phục sprite Renovation v1 đã duyệt cho creep. Giữ cùng atlas lúc trúng đòn và dùng chiêu. Giảm thời gian báo chiêu creep còn khoảng hai phần ba. Sa Mạc bốc bốn vị trí hố cát mỗi lần vào phó bản.
+Khôi phục sprite Renovation v1 đã duyệt cho creep. Giữ cùng atlas lúc trúng đòn và dùng chiêu. Giảm thời gian báo chiêu creep còn khoảng hai phần ba. Sa Mạc có tám hố cát ngẫu nhiên. Hố đổi chỗ sau mỗi 5 giây và khi vào lại. Nhân vật trong hố còn 10% tốc độ đi và bị khóa lướt.
 
 ## M3D review · Cổng Phải, phím học chiêu và phó bản
 
@@ -555,3 +567,7 @@ Thiên Sơn Đao đánh thường bằng từng lần bấm A, bỏ hồi chiêu
 Bạo Vũ Cuồng Phong duy trì một vòng quạt xoay cho đến lúc thu xong. Vòng gây sát thương, làm chậm và hao mana định kỳ. Tái kích hoạt để thu vòng, sau khi về tay bắt đầu hồi đúng hai giây. Thông số thử gồm 2 mana mỗi 5 tick và tự thu khi không đủ mana trả nhịp kế tiếp.
 
 Director duyệt bản Phaser sau khi chỉnh chiều đao ảnh, hạ vệt phải → trái khỏi mặt nhân vật và đặt HUD Tam Liên Trảm 200 × 46 px phía trên thanh kỹ năng. Đưa bộ Thiên Sơn đã duyệt vào `milestone/m3d` và chạy kiểm tra.
+
+## VFX Hoàn Nhan Hồng Liệt v05 · 2026-11-13
+
+Director approved the v05 preview of Dung Nham Liệt Địa, Vạn Lý Nham Hỏa, Hỏa Sơn Bạo Phát, Liệt Diễm Phong Tỏa and Hoành Tảo Đại Đao. The live match renderer loads v05 by default. Server cue geometry and combat rules continue to govern all five abilities. [Editable source, atlas and review notes](assets/source/bosses/hoan_nhan_hong_liet_vfx_v05/README.md).

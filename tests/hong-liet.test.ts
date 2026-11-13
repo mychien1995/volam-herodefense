@@ -2,6 +2,7 @@ import { applyStatus } from '../packages/game-core/src/status.js';
 import { describe, it, expect } from 'vitest';
 import {
   createWorld,
+  stepWorld,
   addHero,
   HongLietEncounter,
   DungeonMatch,
@@ -12,10 +13,13 @@ import {
 } from '@volam/game-core';
 import {
   m1Config,
+  creepCombatDefinition,
   creepDungeon,
   hongLietDungeon as dungeon,
   validateHongLietDefinition,
   hongLietDefinition as definition,
+  bossArenaScale,
+  hongLietArenaScale,
 } from '@volam/game-data';
 import { dungeonActionSchema, PROTOCOL_VERSION } from '@volam/game-protocol';
 function setup(seed = 42) {
@@ -59,6 +63,40 @@ function setup(seed = 42) {
   };
 }
 describe('Hong Liet authoritative v04', () => {
+  it('uses 70% of the previous arena area and gives both summons 1140 HP', () => {
+    expect((hongLietArenaScale / bossArenaScale) ** 2).toBeCloseTo(0.7);
+    for (const ability of [
+      'hoa_tien_te_phat',
+      'thiet_ky_trieu_binh',
+    ] as const) {
+      const s = setup();
+      const c = s.begin(ability);
+      s.advance(c.activeAt);
+      const minions = [...s.world.creeps.values()].filter((e) =>
+        e.id.startsWith('hl_minion_'),
+      );
+      expect(minions).toHaveLength(definition.summonCount);
+      expect(minions.every((e) => e.maxHp === 1140)).toBe(true);
+    }
+  });
+  it.each([
+    'dung_nham_liet_dia',
+    'hoa_son_bao_phat',
+    'van_ly_nham_hoa',
+  ] as const)(
+    '%s stuns for two seconds on contact, after the warning',
+    (ability) => {
+      const s = setup();
+      s.begin(ability);
+      const first = [...s.encounter.effects.values()][0]!;
+      Object.assign(s.hero, { x: first.x, y: first.y });
+      s.advance(first.activeAt - 1);
+      expect(hasStatus(s.hero, 'stun', s.world.tick)).toBe(false);
+      s.advance(1);
+      const stun = s.hero.statuses?.find((effect) => effect.kind === 'stun');
+      expect(stun?.until).toBe(s.world.tick + 2 * s.config.tickRate);
+    },
+  );
   it('A1 emits five simultaneous straight720-range blades from one centre; overlap dedups once per cast', () => {
     const s = setup(),
       c = s.begin('hong_liet_a1'),
@@ -87,6 +125,13 @@ describe('Hong Liet authoritative v04', () => {
         (e) => e.kind === 'hit' && e.targetId === s.hero.id,
       ),
     ).toHaveLength(1);
+    expect(hasStatus(s.hero, 'slow', s.world.tick)).toBe(true);
+    expect(hasStatus(s.hero, 'burn', s.world.tick)).toBe(true);
+    const hpAfterBlade = s.hero.hp;
+    s.config.creepCombat = creepCombatDefinition;
+    s.world.tick = s.config.tickRate - 1;
+    stepWorld(s.world, s.config);
+    expect(s.hero.hp).toBeLessThan(hpAfterBlade);
     expect(s.boss.fx).toBe(1);
     expect(s.boss.fy).toBe(0);
   });
@@ -125,6 +170,7 @@ describe('Hong Liet authoritative v04', () => {
     Object.assign(s.hero, { x: 640 + dx, y: 480 + dy });
     s.advance(21);
     expect(s.hero.hp < 10000).toBe(hit);
+    expect(hasStatus(s.hero, 'stun', s.world.tick)).toBe(hit);
   });
   it('telegraphs before stomp and applies server stun', () => {
     const s = setup();
@@ -224,7 +270,7 @@ describe('Hong Liet authoritative v04', () => {
     s.advance(39);
     expect(first.fx).toBe(fx);
     expect(first.fy).toBe(fy);
-    expect(first.x).toBeGreaterThan(1000);
+    expect(first.x).toBeCloseTo(definition.bounds.x + definition.bounds.width);
     const stop =
       c.activeAt + definition.abilities.hoa_phao_thien_la.durationTicks;
     s.advance(stop - s.world.tick);

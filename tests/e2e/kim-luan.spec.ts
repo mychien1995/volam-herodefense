@@ -9,10 +9,9 @@ const snapshot = (p: Page): Promise<any> =>
   p.evaluate('window.__VOLAM__.snapshot()');
 const presentation = (p: Page): Promise<any> =>
   p.evaluate('window.__VOLAM__.presentation()');
-async function enter(p: Page, access = 'shared') {
+async function enter(p: Page) {
   await p.getByRole('button', { name: 'Phó Bản', exact: true }).click();
   await p.locator('[data-destination="kim_luan"]').click();
-  await p.locator(`[data-access="${access}"]`).click();
   await p.locator('#enter-dungeon').click();
   await expect
     .poll(async () => {
@@ -196,7 +195,7 @@ test('all184 selected frames /53 clips play in the real Phaser client; actual bo
   );
   expect(errors).toEqual([]);
 });
-test('two real clients enter the layered map, server actors move, combat and zone isolation', async ({
+test('two real clients enter the shared layered map and observe the same encounter', async ({
   browser,
 }) => {
   await mkdir(out, { recursive: true });
@@ -209,18 +208,24 @@ test('two real clients enter the layered map, server actors move, combat and zon
     await joinWaiting(pages[1]!, 'Kim QA B', a.roomId);
     await startTogether(pages, ['vo_dang', 'thieu_lam']);
     await enter(pages[0]!);
-    await enter(pages[1]!, 'private');
+    await enter(pages[1]!);
+    await expect(
+      pages[0]!.getByRole('meter', { name: 'Sinh lực Hoắc Đô' }),
+    ).toHaveAttribute('aria-valuemax', '3300');
+    await expect(
+      pages[0]!.getByRole('meter', { name: 'Sinh lực Đạt Nhĩ Ba' }),
+    ).toHaveAttribute('aria-valuemax', '4800');
     const before = await snapshot(pages[0]!);
     expect(
       Object.values(before.state.creeps).some(
         (a: any) => a.archetypeId === 'kim_luan_phap_vuong',
       ),
     ).toBe(false);
-    expect(
-      Object.keys(before.state.dungeons).some((k) =>
-        k.startsWith('kim_luan_private_'),
-      ),
-    ).toBe(false);
+    const peer = await snapshot(pages[1]!);
+    expect(before.state.players[before.sessionId].zoneId).toBe('kim_luan_shared');
+    expect(peer.state.players[peer.sessionId].zoneId).toBe('kim_luan_shared');
+    expect(before.state.players[peer.sessionId].zoneId).toBe('kim_luan_shared');
+    expect(peer.state.dungeons.kim_luan_shared.encounter).toBeTruthy();
     const positions = Object.values(before.state.creeps).map((a: any) => ({
       id: a.archetypeId,
       x: a.x,
@@ -234,7 +239,7 @@ test('two real clients enter the layered map, server actors move, combat and zon
       view = await presentation(pages[0]!);
     expect(view.zoneId).toContain('kim_luan_');
     expect(view.rotation).toBe(0);
-    expect(view.zoom).toBe(1);
+    expect(view.zoom).toBeCloseTo(1440 / 1190, 3);
     expect(
       positions.some((p) =>
         Object.values(after.state.creeps).some(
@@ -245,6 +250,14 @@ test('two real clients enter the layered map, server actors move, combat and zon
     ).toBe(true);
     expect(view.kim.entities.length).toBeGreaterThan(1);
     expect(view.kim.frames.hoac_do_actions.length).toBeGreaterThan(1);
+    for (const actor of ['hoac_do', 'dat_nhi_ba'])
+      expect(view.kim.frames[actor + '_body']).toEqual(
+        expect.arrayContaining([
+          expect.stringMatching(
+            new RegExp('^renovated-action-' + actor + '_actions:'),
+          ),
+        ]),
+      );
     await pages[0]!
       .locator('#viewport')
       .screenshot({ path: out + '/two-clients.png' });

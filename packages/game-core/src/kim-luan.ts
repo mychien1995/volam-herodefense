@@ -6,7 +6,14 @@ import { applyStatus, displace, hasStatus } from './status.js';
 import { direction, distance, segmentCircle, segmentRect } from './geometry.js';
 import { gainExperience } from './progression.js';
 import { chuLootAction, settleBossLoot } from './chu-ba-thong.js';
-import type { Creep, Hero, Point, SimulationConfig, World } from './types.js';
+import type {
+  Creep,
+  Hero,
+  Point,
+  Rect,
+  SimulationConfig,
+  World,
+} from './types.js';
 import type {
   KimAbility,
   KimCast,
@@ -138,6 +145,24 @@ export class KimLuanEncounter {
         (s) => !actorIds.includes(s.sourceId as (typeof actorIds)[number]),
       );
   }
+
+  rockCollision(tick: number): Rect[] {
+    return [...this.effects.values()]
+      .filter(
+        (e) => e.kind === 'rock' && e.activeAt <= tick && tick < e.expiresAt,
+      )
+      .map((e) => this.rockFootprint(e));
+  }
+
+  private rockFootprint(p: Point): Rect {
+    const { rockHalfWidth, rockHalfDepth } = this.definition.elephants;
+    return {
+      x: p.x - rockHalfWidth,
+      y: p.y - rockHalfDepth,
+      width: rockHalfWidth * 2,
+      height: rockHalfDepth * 2,
+    };
+  }
   emptyStep(w: World, c: SimulationConfig, matchTick: number) {
     this.emptySince ??= matchTick;
     this.clear(w);
@@ -208,6 +233,10 @@ export class KimLuanEncounter {
       return;
     }
     if (this.phase === 'defeated') return;
+    const rocks = this.rockCollision(w.tick);
+    const movement = rocks.length
+      ? { ...c, collision: [...c.collision, ...rocks] }
+      : c;
     const heroes = [...w.heroes.values()]
       .filter((h) => h.hp > 0)
       .sort((a, b) => a.id.localeCompare(b.id));
@@ -240,7 +269,7 @@ export class KimLuanEncounter {
         )[0]!;
       const cast = this.casts.get(id);
       if (this.enraged && id === boss?.id) {
-        this.move(w, c, b, target, true);
+        this.move(w, movement, b, target, true);
         if (w.tick >= this.nextEnrageShot) {
           const aim = direction(target.x - b.x, target.y - b.y),
             cast = this.newCast(w, c, b, 'kim_sweep', target, 0, 0.55);
@@ -271,7 +300,7 @@ export class KimLuanEncounter {
             break;
           }
         }
-        if (!cast || id === 'hoac_do') this.move(w, c, b, target, false);
+        if (!cast || id === 'hoac_do') this.move(w, movement, b, target, false);
       }
     }
     for (const cast of [...this.casts.values()]) {
@@ -730,12 +759,44 @@ export class KimLuanEncounter {
       p = this.enraged ? d.enrage : d.normal,
       castIndex = this.elephantCast++;
     const bounds = this.definition.bounds;
-    const rocks = Array.from({ length: d.rocks }, (_, i) => ({
-      x:
-        bounds.x +
-        ((90 + i * 195 + (w.random() - 0.5) * 75) * bounds.width) / 980,
-      y: bounds.y + ((50 + w.random() * 225) * bounds.height) / 400,
-    }));
+    const rocks: Point[] = [];
+    const actors = [...w.heroes.values(), ...w.creeps.values()].filter(
+      (actor) => actor.hp > 0,
+    );
+    const walls = [...c.collision, ...this.rockCollision(w.tick)];
+    for (let i = 0; i < d.rocks; i++) {
+      const center = bounds.x + ((90 + i * 195) * bounds.width) / 980;
+      const roll = {
+        x: center + ((w.random() - 0.5) * 75 * bounds.width) / 980,
+        y: bounds.y + ((50 + w.random() * 225) * bounds.height) / 400,
+      };
+      const fallbacks = [0.16, 0.48, 0.77].map((ratio) => ({
+        x: center,
+        y: bounds.y + bounds.height * ratio,
+      }));
+      const rock = [roll, ...fallbacks].find((p) => {
+        const footprint = this.rockFootprint(p);
+        const { rockHalfWidth, rockHalfDepth } = d;
+        return (
+          !walls.some(
+            (r) =>
+              p.x + rockHalfWidth > r.x &&
+              p.x - rockHalfWidth < r.x + r.width &&
+              p.y + rockHalfDepth > r.y &&
+              p.y - rockHalfDepth < r.y + r.height,
+          ) &&
+          !actors.some(
+            (actor) =>
+              segmentRect(actor, actor, footprint, Math.max(c.radius, 20)) !==
+              undefined,
+          )
+        );
+      });
+      if (rock) {
+        rocks.push(rock);
+        walls.push(this.rockFootprint(rock));
+      }
+    }
     const duration =
       p.warning +
       2 * p.volleyGap +
@@ -776,7 +837,7 @@ export class KimLuanEncounter {
             .filter((r) => Math.abs(r.x - x) < d.rockHalfWidth)
             .sort((a, b) => (down ? a.y - b.y : b.y - a.y))[0];
           e.length = rock
-            ? rock.y - (down ? 26 : -26)
+            ? rock.y - (down ? d.rockHalfDepth : -d.rockHalfDepth)
             : down
               ? d.bottom
               : d.top;
@@ -913,6 +974,9 @@ export class KimLuanEncounter {
         // Only actual HP loss counts: immunity/evade/full shields never advance lethal stacks.
         if (e.poison && valid && h.hp < hp) this.poison.set(key, poisonCount);
         if (valid && h.hp > 0) {
+          if (h.hp < hp)
+            for (const status of d.abilities[e.abilityId].statuses ?? [])
+              applyStatus(h, status, e.ownerId, e.abilityId, w.tick);
           if (e.abilityId === 'cuong_phong_tan_loi_cong') {
             applyStatus(
               h,
@@ -927,13 +991,21 @@ export class KimLuanEncounter {
             );
             displace(h, e.fx * d.knockback, e.fy * d.knockback, c.radius, c);
           }
-          if (e.kind === 'ring')
+          if (
+            e.kind === 'elephant' ||
+            (e.kind === 'ring' && e.ownerId !== 'dat_nhi_ba')
+          )
             applyStatus(
               h,
               {
                 kind: 'stun',
                 magnitude: 1,
-                durationTicks: this.ticks(d.stunSeconds, c),
+                durationTicks: this.ticks(
+                  e.kind === 'elephant'
+                    ? d.elephants.stunSeconds
+                    : d.stunSeconds,
+                  c,
+                ),
               },
               e.ownerId,
               e.abilityId,

@@ -9,11 +9,11 @@ import {
   renovationEnabled,
   renovationHeight,
 } from './renovation-art.js';
-import { replaceR3ArenaProp } from './m3d-r3-arena.js';
 import type { LobbyState } from '@volam/game-protocol';
 import type { KimAbility, KimView } from '@volam/game-core';
 import playback from './kim-playback.json';
-import { bossArenaScale as S, kimLuanDungeon } from '@volam/game-data';
+import { kimLuanXiangyangArena } from '@volam/game-data';
+import { preloadKimXiangyang } from './kim-xiangyang-art.js';
 import {
   R3Painter,
   r3NailAxis,
@@ -36,16 +36,13 @@ const key = (id: string) => 'kl_' + id;
 export const isKimActor = (id: string) =>
   ['hoac_do', 'dat_nhi_ba', 'kim_luan_phap_vuong', 'kim_cage'].includes(id);
 export function preloadKimArt(scene: Phaser.Scene) {
+  preloadKimXiangyang(scene);
   for (const id of Object.keys(bundles))
     scene.load.atlas(
       key(id),
       `/assets/kim_luan/${id}.png`,
       `/assets/kim_luan/${id}.json`,
     );
-  for (const id of Object.keys(playback.props))
-    scene.load.image(key(id), `/assets/kim_luan/${id}.png`);
-  scene.load.image('kl_terrain', '/assets/kim_luan/terrain.png');
-  scene.load.tilemapTiledJSON('kl_map', '/assets/kim_luan/map.tmj');
 }
 export function registerKimArt(scene: Phaser.Scene) {
   for (const [id, b] of Object.entries(bundles)) {
@@ -60,54 +57,6 @@ export function registerKimArt(scene: Phaser.Scene) {
           skipMissedFrames: false,
         });
   }
-}
-export function createKimArena(
-  scene: Phaser.Scene,
-): Phaser.GameObjects.Image[] {
-  const map = scene.make.tilemap({ key: 'kl_map' }),
-    tiles = map.addTilesetImage(
-      map.tilesets[0]!.name,
-      'kl_terrain',
-      32,
-      32,
-      0,
-      0,
-    );
-  if (!tiles) throw Error('Kim tiles missing');
-  scene.textures
-    .get('kl_terrain')
-    .setFilter(Phaser.Textures.FilterMode.NEAREST);
-  map
-    .createLayer('ground', tiles)!
-    .setScale(S)
-    .setDepth(-10000)
-    .setName('kim_luan:ground');
-  const props = (map.getObjectLayer('scenery')?.objects ?? []).map((o) =>
-    scene.add
-      .image((o.x ?? 0) * S, (o.y ?? 0) * S, key(o.name))
-      .setScale(S)
-      .setOrigin(0.5, 1)
-      .setDepth((o.y ?? 0) * S)
-      .setName('kim_luan:prop:' + o.name),
-  );
-  props.forEach((image, i) =>
-    replaceR3ArenaProp(
-      image,
-      'kim_luan',
-      map.getObjectLayer('scenery')!.objects[i]!.name,
-      S,
-    ),
-  );
-  scene.add
-    .text(kimLuanDungeon.exit.x, kimLuanDungeon.exit.y + 12, 'Lối ra · Space', {
-      fontSize: '11px',
-      color: '#ffe4af',
-      backgroundColor: '#24180f',
-    })
-    .setOrigin(0.5)
-    .setDepth(2000)
-    .setName('dungeon-exit');
-  return props;
 }
 const facing = (x: number, y: number) =>
   Math.abs(x) > Math.abs(y)
@@ -266,8 +215,7 @@ export class KimLuanRenderer {
       if (
         a.zoneId !== zoneId ||
         !isKimActor(a.archetypeId) ||
-        a.archetypeId === 'kim_cage' ||
-        a.hp <= 0
+        a.archetypeId === 'kim_cage'
       )
         continue;
       const actor = a.archetypeId,
@@ -282,7 +230,9 @@ export class KimLuanRenderer {
               .filter((e) => e.abilityId === 'kim_sweep')
               .sort((a, b) => b.startedAt - a.startedAt)[0]
           : undefined;
-      if (movingShot && this.tick - movingShot.startedAt < 12) {
+      if (a.hp <= 0) {
+        clip = 'idle_' + facing(a.fx, a.fy);
+      } else if (movingShot && this.tick - movingShot.startedAt < 12) {
         bundle = who + '_actions';
         clip = 'sweep';
         age = (this.tick - movingShot.startedAt) / 30;
@@ -338,11 +288,14 @@ export class KimLuanRenderer {
       const locomotion = /^(idle|walk)_/.test(clip);
       const moving = clip === 'sweep' && movingShot;
       const action = locomotion ? undefined : moving || cast;
-      const pose = locomotion
-        ? a.pose === 'hurt'
-          ? 'hurt'
-          : clip.slice(0, 4)
-        : 'action';
+      const pose =
+        a.hp <= 0
+          ? 'death'
+          : a.pose === 'hurt'
+            ? 'hurt'
+            : locomotion
+              ? clip.slice(0, 4)
+              : 'action';
       presentRenovatedBody(
         this.scene,
         sprite,
@@ -360,8 +313,14 @@ export class KimLuanRenderer {
             }
           : undefined,
       );
+      const rendered = this.frames.get(who + '_body') ?? new Set<string>();
+      rendered.add(sprite.texture.key + ':' + sprite.frame.name);
+      this.frames.set(who + '_body', rendered);
       markImpactTarget(sprite, id);
-      if (bundle === 'kim_luan_actions' && clip === 'channel') {
+      if (
+        sprite.texture.key === key('kim_luan_actions') &&
+        clip === 'channel'
+      ) {
         const pivots: Record<string, number[]> = {
           channel_0: [79.5, 133],
           channel_1: [89.5, 128],
@@ -378,14 +337,21 @@ export class KimLuanRenderer {
       )
         sprite.setTint(0xffe8c3);
       else sprite.clearTint();
-      this.label(
-        id,
-        a.x,
-        a.y -
-          (renovationEnabled(this.scene) ? renovationHeight(who, 48) + 10 : 58),
-        `${actor === 'hoac_do' ? 'Hoắc Đô' : actor === 'dat_nhi_ba' ? 'Đạt Nhĩ Ba' : 'Kim Luân Pháp Vương'} · ${Math.ceil(a.hp)}/${a.maxHp}`,
-      );
-      if (v.wardId === actor)
+      if (a.hp > 0)
+        this.label(
+          id,
+          a.x,
+          a.y -
+            (renovationEnabled(this.scene)
+              ? renovationHeight(who, 48) + 10
+              : 58),
+          actor === 'hoac_do'
+            ? 'Hoắc Đô'
+            : actor === 'dat_nhi_ba'
+              ? 'Đạt Nhĩ Ba'
+              : 'Kim Luân Pháp Vương',
+        );
+      if (a.hp > 0 && v.wardId === actor)
         this.cel(
           id + ':ward',
           'dat_nhi_ba_fx',
@@ -395,7 +361,7 @@ export class KimLuanRenderer {
           seconds,
           0.65,
         );
-      if (v.enraged && actor === 'kim_luan_phap_vuong')
+      if (a.hp > 0 && v.enraged && actor === 'kim_luan_phap_vuong')
         this.cel(
           id + ':empower',
           'kim_luan_fx',
@@ -413,13 +379,9 @@ export class KimLuanRenderer {
       if (e.kind === 'elephant') {
         if (warning) {
           if (e.activeAt - this.tick < 24) {
+            const edge = e.fy > 0 ? kimLuanXiangyangArena.north : kimLuanXiangyangArena.south;
             this.warnings.lineStyle(2, 0xffc35a, 0.45);
-            this.warnings.lineBetween(
-              e.x,
-              (e.fy > 0 ? 270 : 690) * S,
-              e.x,
-              (e.fy > 0 ? 295 : 665) * S,
-            );
+            this.warnings.lineBetween(e.x, edge, e.x, edge + e.fy * 25);
           }
           continue;
         }
@@ -450,7 +412,8 @@ export class KimLuanRenderer {
           e.x,
           e.y,
           Math.min(0.25, (this.tick - e.startedAt) / 30),
-          0.7,
+          // The standing rock cel is about 130 opaque pixels wide.
+          (2 * e.radius) / 130,
         );
         continue;
       }

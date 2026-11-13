@@ -109,7 +109,7 @@ Canonical IDs/names remain unchanged. Thiếu Lâm Quyền A now cycles left fis
 
 | ID | Vietnamese display name | Style | Proposed effect and reason |
 |---|---|---|---|
-| `lien_hoa_phien` | **Liên Hoa Phiến** | Phiến | Fixed owner-only protective lotus: immunity and increased HP regeneration while inside; leaving removes both and reentry restores them until expiry. No damage. |
+| `lien_hoa_phien` | **Liên Hoa Phiến** | Phiến | Fixed six-second lotus. Inside, its caster takes 40% less damage and recovers 3–4% maximum HP per second by rank. Leaving ends both effects and reentry restores them. No damage dealt. |
 | `luc_duong_chuong` | **Lục Dương Chưởng** | Phiến | Moving spinning attack dealing repeated nearby damage; PvE wave farm. |
 | `luu_phong_bo` | **Bạo Vũ Cuồng Phong** | Phiến | Một vòng quạt gây sát thương, làm chậm và tiêu hao mana theo nhịp. Bấm lại để thu, hồi hai giây kể từ lúc thu xong. |
 | `chiet_mai_thu` | **Chiết Mai Thủ** | Phiến | Temporary Attack Speed + Movement Speed buff; fast-attack identity. |

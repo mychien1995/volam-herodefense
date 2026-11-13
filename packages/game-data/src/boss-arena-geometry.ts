@@ -1,45 +1,43 @@
 import type { CreepDungeonDefinition, Point, Rect } from '@volam/game-core';
 /** Latest director decision: +10% in each dimension from the pre-feedback arena. */
 export const bossArenaScale = 1.1;
-export const bossArenaPoint = (p: Point): Point => ({
-  x: p.x * bossArenaScale,
-  y: p.y * bossArenaScale,
-});
-export const bossArenaRect = (p: Rect): Rect => ({
-  ...bossArenaPoint(p),
-  width: p.width * bossArenaScale,
-  height: p.height * bossArenaScale,
-});
-export function enlargeBossArena(
+export function scaleBossArena(
   d: CreepDungeonDefinition,
+  scale = bossArenaScale,
 ): CreepDungeonDefinition {
-  d.width *= bossArenaScale;
-  d.height *= bossArenaScale;
-  d.spawn = bossArenaPoint(d.spawn);
-  d.exit = bossArenaPoint(d.exit);
-  d.collision = d.collision.map(bossArenaRect);
-  d.creepSpawns = d.creepSpawns.map(bossArenaPoint);
+  const point = (p: Point): Point => ({ x: p.x * scale, y: p.y * scale });
+  const rect = (p: Rect): Rect => ({
+    ...point(p),
+    width: p.width * scale,
+    height: p.height * scale,
+  });
+  d.width *= scale;
+  d.height *= scale;
+  d.spawn = point(d.spawn);
+  d.exit = point(d.exit);
+  d.collision = d.collision.map(rect);
+  d.creepSpawns = d.creepSpawns.map(point);
   if (d.boss) {
-    d.boss.spawn = bossArenaPoint(d.boss.spawn);
-    d.boss.bounds = bossArenaRect(d.boss.bounds);
-    d.boss.cannonRows = d.boss.cannonRows.map((y) => y * bossArenaScale);
-    d.boss.cannonColumns = d.boss.cannonColumns.map((x) => x * bossArenaScale);
+    d.boss.spawn = point(d.boss.spawn);
+    d.boss.bounds = rect(d.boss.bounds);
+    d.boss.cannonRows = d.boss.cannonRows.map((y) => y * scale);
+    d.boss.cannonColumns = d.boss.cannonColumns.map((x) => x * scale);
   }
   if (d.kimBoss) {
     for (const actor of Object.values(d.kimBoss.actors))
-      Object.assign(actor, bossArenaPoint(actor));
-    d.kimBoss.bounds = bossArenaRect(d.kimBoss.bounds);
-    d.kimBoss.elephants.top *= bossArenaScale;
-    d.kimBoss.elephants.bottom *= bossArenaScale;
+      Object.assign(actor, point(actor));
+    d.kimBoss.bounds = rect(d.kimBoss.bounds);
+    d.kimBoss.elephants.top *= scale;
+    d.kimBoss.elephants.bottom *= scale;
   }
-  if (d.chuBoss) d.chuBoss.spawn = bossArenaPoint(d.chuBoss.spawn);
+  if (d.chuBoss) d.chuBoss.spawn = point(d.chuBoss.spawn);
   if (d.bossEncounter) {
     const b = d.bossEncounter;
-    b.spawn = bossArenaPoint(b.spawn);
-    b.summonSpawns = b.summonSpawns.map(bossArenaPoint);
+    b.spawn = point(b.spawn);
+    b.summonSpawns = b.summonSpawns.map(point);
     b.edgeEmitters = b.edgeEmitters.map((p) => ({
       ...p,
-      ...bossArenaPoint(p),
+      ...point(p),
     }));
   }
   return d;

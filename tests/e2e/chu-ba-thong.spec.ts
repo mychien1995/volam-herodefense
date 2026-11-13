@@ -2,7 +2,8 @@ import { expect, test, type Page } from '@playwright/test';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { joinWaiting, startTogether } from './pregame-helper.js';
 import type { ChuView } from '@volam/game-core';
-const out = 'docs/evidence/chu-ba-thong';
+const out =
+  process.env['VOLAM_CHU_BA_THONG_EVIDENCE'] ?? 'docs/evidence/chu-ba-thong';
 interface Snap {
   roomId: string;
   sessionId: string;
@@ -141,7 +142,7 @@ test('Chu Bá Thông real Phaser encounter, party sync, frame coverage and one-d
         .poll(async () => (await view(p)).chu?.state?.bossHp)
         .toBe(6000);
     }
-    const hpBox = await first.locator('#chu-boss-hud').boundingBox(),
+    const hpBox = await first.locator('#boss-hud').boundingBox(),
       statueBox = await first.locator('#defense-hud').boundingBox();
     expect(hpBox).not.toBeNull();
     expect(statueBox).not.toBeNull();
@@ -416,7 +417,7 @@ test('Chu Bá Thông real Phaser encounter, party sync, frame coverage and one-d
     await first.locator('#game canvas').focus();
     await first.keyboard.press('Space');
     await expect.poll(async () => (await hero(first)).zoneId).toBe('arena');
-    await expect(first.locator('#chu-boss-hud')).toBeHidden();
+    await expect(first.locator('#boss-hud')).toBeHidden();
     await enter(first, 'private');
     const privateId = (await hero(first)).zoneId;
     expect(privateId).toBe('chu_ba_thong_private_' + sharedId);
@@ -436,7 +437,7 @@ test('Chu Bá Thông real Phaser encounter, party sync, frame coverage and one-d
       canvas = await first.locator('#game canvas').boundingBox();
     expect(canvas!.width).toBe(vp!.width);
     expect(canvas!.height).toBe(vp!.height);
-    const hud = await first.locator('#chu-boss-hud').boundingBox();
+    const hud = await first.locator('#boss-hud').boundingBox();
     expect(hud!.x).toBeGreaterThanOrEqual(vp!.x);
     expect(hud!.x + hud!.width).toBeLessThanOrEqual(vp!.x + vp!.width);
     await first.screenshot({ path: out + `/private-960-${count}-players.png` });

@@ -366,7 +366,10 @@ function runCommand(
       (world.actions ?? []).some((a) => a.ownerId === hero.id)
     )
       return;
-    if (ability?.effect.mode === 'dash' && hasStatus(hero, 'root', world.tick))
+    if (
+      ability?.effect.mode === 'dash' &&
+      (hasStatus(hero, 'root', world.tick) || inQuicksand(world, hero))
+    )
       return;
     if (ability?.effect.mode === 'projectile' && ability.effect.recallDrain) {
       const shot = [...world.projectiles.values()].find(
@@ -617,7 +620,7 @@ function advanceProjectile(
           });
         }
       }
-      if (enemy.hp > 0)
+      if (enemy.hp > 0 && (hit || !shot.hostile))
         for (const status of shot.effect.statuses ?? [])
           applyStatus(enemy, status, shot.ownerId, shot.abilityId, world.tick);
       const before = { x: enemy.x, y: enemy.y };
@@ -710,6 +713,9 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     ]),
   );
   world.tick++;
+  const rocks = world.kim?.rockCollision(world.tick);
+  if (rocks?.length)
+    config = { ...config, collision: [...config.collision, ...rocks] };
   world.events = [];
   stepCreepHazards(world, config);
   world.bacCai?.prepare(world, config);
@@ -1094,4 +1100,8 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   enforceConfinement(world, config, confinementStarts);
   stepBossBanter(world, config);
 }
-import { stepCreepActor, stepCreepHazards } from './creep-abilities.js';
+import {
+  inQuicksand,
+  stepCreepActor,
+  stepCreepHazards,
+} from './creep-abilities.js';

@@ -8,7 +8,7 @@ export function ownerProtection(world: World, actor: Actor) {
     .filter(
       (a) =>
         a.ownerId === actor.id &&
-        a.effect.protectOwner &&
+        a.effect.ownerDamageReduction !== undefined &&
         a.until > world.tick &&
         distance(a, actor) <= a.effect.radius,
     )

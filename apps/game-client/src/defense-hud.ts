@@ -84,15 +84,13 @@ export class DefenseHud {
     );
     const encounterStatus =
       this.panel.querySelector<HTMLElement>('#dong-ta-status')!;
-    encounterStatus.hidden = !boss?.locked;
+    encounterStatus.hidden = boss?.phase !== 'retry';
     encounterStatus.textContent =
       boss?.phase === 'retry'
         ? campaign
           ? 'Cả đội thất bại · Biểu quyết hoặc gọi đánh lại boss'
           : `Cả đội thất bại · Đánh lại sau ${Math.max(0, Math.ceil((boss.phaseUntil - boss.tick) / m1Config.tickRate))}s`
-        : boss?.locked
-          ? `Sinh lực ${bossName}: ${Math.ceil(boss.bossHp)} / ${boss.bossMaxHp}`
-          : '';
+        : '';
     meter.setAttribute('aria-valuenow', String(d.statueHp));
     meter.setAttribute('aria-valuemax', String(d.statueMaxHp));
     meter.querySelector<HTMLElement>('i')!.style.width =

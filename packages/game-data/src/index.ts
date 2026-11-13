@@ -33,6 +33,7 @@ export * from './m1.js';
 export * from './schools.js';
 export * from './dungeon.js';
 export { bossArenaScale } from './boss-arena-geometry.js';
+export { hongLietArenaScale } from './hong-liet.js';
 export * from './desert.js';
 export * from './beach.js';
 export * from './ly-mac-sau.js';

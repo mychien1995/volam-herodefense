@@ -196,6 +196,7 @@ export class TayDocRenderer {
       .setPosition(x, y)
       .setDepth(y + 200)
       .setVisible(true);
+    if (width <= 0) return;
     v.bar ??= this.scene.add.graphics();
     v.bar
       .clear()
@@ -350,8 +351,8 @@ export class TayDocRenderer {
           lift,
         boss.hp,
         boss.maxHp,
-        `Tây Độc · ${data.phase === 'phase2' ? 'Cáp Mô · ' : ''}${Math.ceil((100 * boss.hp) / boss.maxHp)}%`,
-        90,
+        data.phase === 'phase2' ? 'Tây Độc · Cáp Mô' : 'Tây Độc',
+        0,
       );
       if (c) this.cast(c, boss.x, boss.y);
     }

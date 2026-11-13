@@ -11,6 +11,7 @@ import { revisedBasicBody, isRevisedHero } from './character-revision.js';
 import type { FeedbackPose } from './feedback-vfx.js';
 import { NamDePresentation } from './nam-de-presentation.js';
 import { KimLuanRenderer, isKimActor } from './kim-luan-art.js';
+import { drawKimXiangyang, isKimLuanZone } from './kim-xiangyang-art.js';
 import { DongTaRenderer, isDongArtActor } from './dong-ta-art.js';
 import { VuongArt } from './vuong-art.js';
 import { BacCaiRenderer } from './bac-cai-art.js';
@@ -30,6 +31,7 @@ import { hellCreepArt, hellStrikeEffect, isHellZone } from './hell-art.js';
 import {
   arena,
   dungeonForZone,
+  kimLuanXiangyangArena,
   type DungeonDestination,
   statueIntroduction,
   statueName,
@@ -476,7 +478,14 @@ export class ArenaScene extends Phaser.Scene {
   }
   private fitCamera = (): void => {
     if (this.zoneId === loiDai.id) fitLoiDaiCamera(this);
-    else
+    else if (isKimLuanZone(this.zoneId)) {
+      const { width, height } = kimLuanXiangyangArena;
+      this.cameras.main
+        .setZoom(
+          Math.min(this.scale.width / width, this.scale.height / height, 1.35),
+        )
+        .centerOn(width / 2, height / 2);
+    } else
       this.cameras.main.setZoom(
         this.scale.width >= 960 && this.scale.height >= 600 ? 2 : 1,
       );
@@ -626,6 +635,12 @@ export class ArenaScene extends Phaser.Scene {
     } else if (zoneId === loiDai.id) {
       this.trees = [];
       drawLoiDai(this);
+    } else if (isKimLuanZone(zoneId)) {
+      const { width, height } = kimLuanXiangyangArena;
+      this.trees = drawKimXiangyang(this);
+      this.cameras.main
+        .setBounds(0, 0, width, height)
+        .centerOn(width / 2, height / 2);
     } else {
       const dungeon = dungeonForZone(zoneId);
       this.trees = createRenovationWorld(this, zoneId);
@@ -1115,6 +1130,8 @@ export class ArenaScene extends Phaser.Scene {
       const barDepth = view.sprite.y + 0.1;
       if (view.bar.depth !== barDepth) view.bar.setDepth(barDepth);
       const barWidth = Math.round((28 * actor.hp) / actor.maxHp);
+      if (enemy && actor.archetypeId === 'ly_mac_sau')
+        view.bar.setVisible(false);
       if (view.barWidth !== barWidth) {
         view.barWidth = barWidth;
         view.bar.clear().fillStyle(0x293c37).fillRect(0, 0, 28, 3);
@@ -1127,6 +1144,7 @@ export class ArenaScene extends Phaser.Scene {
         this.followed = '';
       } else if (
         this.zoneId !== loiDai.id &&
+        !isKimLuanZone(this.zoneId) &&
         id === this.sessionId &&
         this.followed !== id
       ) {
@@ -1499,6 +1517,9 @@ export class ArenaScene extends Phaser.Scene {
   inspect() {
     const origin = this.cameras.main.getWorldPoint(0, 0);
     const unit = this.cameras.main.getWorldPoint(1, 0);
+    const coMoGround = this.children.getByName(
+      'renovation:ground:co_mo',
+    ) as Phaser.GameObjects.Image | null;
     return {
       renovation: inspectRenovation(this),
       namDe: this.namDe?.inspect(),
@@ -1533,6 +1554,15 @@ export class ArenaScene extends Phaser.Scene {
       hongLiet: this.hongLiet?.inspect(),
       tayDoc: this.tayDoc?.inspect(),
       kim: this.kim?.inspect(),
+      kimArena: this.trees
+        .filter((image) => image.name === 'kim_luan:xiangyang-court')
+        .map((image) => ({
+          width: image.displayWidth,
+          height: image.displayHeight,
+          scaleX: image.scaleX,
+          scaleY: image.scaleY,
+          camera: this.cameras.main.getBounds(),
+        }))[0],
       dong: this.dong?.inspect(),
       bacCai: this.bacCai?.inspect(),
       vuong: this.vuong?.inspect(),
@@ -1551,6 +1581,15 @@ export class ArenaScene extends Phaser.Scene {
       creepEffects: this.creepEffects?.inspect(),
       creepCombat: this.creepCombatArt?.inspect(),
       coMoEffects: this.coMoEffects?.inspect(),
+      coMoArena: coMoGround
+        ? {
+            camera: this.cameras.main.getBounds(),
+            ground: {
+              width: coMoGround.displayWidth,
+              height: coMoGround.displayHeight,
+            },
+          }
+        : undefined,
       coMoScenery: this.children.list
         .filter(
           (o) => o.name.startsWith('co_mo:') && !o.name.includes(':layer:'),

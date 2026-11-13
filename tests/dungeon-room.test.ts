@@ -115,9 +115,9 @@ describe('M2A real Colyseus zone authority and views', () => {
     await expect
       .poll(() => b!.state.players.get(b!.sessionId)?.zoneId)
       .toBe(`desert_private_${b!.sessionId}`);
-    await expect.poll(() => [...a!.state.creeps.values()].length).toBe(6);
+    await expect.poll(() => [...a!.state.creeps.values()].length).toBe(10);
     expect([...a!.state.creeps.values()].map((c) => c.archetypeId)).toEqual(
-      Array(6).fill(desertRoster[0]),
+      Array(10).fill(desertRoster[0]),
     );
     expect(
       [...a!.state.creeps.values()].every(

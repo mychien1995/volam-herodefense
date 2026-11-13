@@ -404,9 +404,10 @@ const unbindInput = bindGameplayInput(
     )
       return;
     const d = dungeonForZone(hero.zoneId);
+    const { exit } = d;
     if (
       hero.bossSpectator ||
-      Math.hypot(hero.x - d.exit.x, hero.y - d.exit.y) <= d.exitRange
+      Math.hypot(hero.x - exit.x, hero.y - exit.y) <= d.exitRange
     )
       dungeonAction({ action: 'exit' });
     else if (d.id === 'chu_ba_thong') dungeonAction({ action: 'interact' });
