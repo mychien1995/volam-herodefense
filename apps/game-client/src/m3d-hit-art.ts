@@ -1,9 +1,16 @@
 import Phaser from 'phaser';
 import type { CombatEvent } from '@volam/game-core';
 import { approvedM3dPresentation } from './m3d-approved-boss-body.js';
+import { contactClip } from './contact-impacts.js';
 
 const atlas = 'm3d-hit-impact';
 const path = '/assets/m3d-hit-continuity/impact';
+const contactAtlas = 'contact-impacts-v01';
+const contactPath = '/assets/contact-impacts-v01/atlas';
+const breakMs = 34;
+const emberMs = 68;
+const contactMs = 106;
+const contactFrames = ['peak', 'break', 'embers'] as const;
 // The approved preview is in display pixels. The match draws these assets
 // at the same half-world-scale as its native character textures.
 const impactScale = 0.5;
@@ -15,14 +22,30 @@ type Body = Phaser.GameObjects.Image | Phaser.GameObjects.Sprite;
 type Hit = {
   event: CombatEvent;
   start?: number;
-  spark: Phaser.GameObjects.Image;
+  spark: Phaser.GameObjects.Image | undefined;
   ring: Phaser.GameObjects.Image | undefined;
   outline: Phaser.GameObjects.Image | undefined;
 };
 
+type Contact = {
+  event: CombatEvent;
+  clip: NonNullable<ReturnType<typeof contactClip>>;
+  sprite: Phaser.GameObjects.Image;
+  alpha: number;
+  frame: number;
+  start?: number;
+};
+
 export function preloadM3dHitArt(scene: Phaser.Scene): void {
-  if (approvedM3dPresentation())
-    scene.load.atlas(atlas, path + '.png', path + '.json');
+  if (!approvedM3dPresentation()) return;
+  scene.load.atlas(atlas, path + '.png', path + '.json');
+  scene.load.atlas(contactAtlas, contactPath + '.png', contactPath + '.json');
+  scene.load.once(Phaser.Loader.Events.COMPLETE, () => {
+    if (scene.textures.exists(contactAtlas))
+      scene.textures
+        .get(contactAtlas)
+        .setFilter(Phaser.Textures.FilterMode.NEAREST);
+  });
 }
 
 export function markImpactTarget(body: Body | undefined, id: string): void {
@@ -77,6 +100,7 @@ function drawContour(
 
 export class M3dHitArt {
   private readonly hits = new Map<string, Hit>();
+  private readonly contacts = new Map<number, Contact>();
   private readonly contours = new Map<string, Phaser.Textures.CanvasTexture>();
   private nextContour = 0;
 
@@ -94,11 +118,33 @@ export class M3dHitArt {
     const secondary = (event.hitIndex ?? 0) > 0;
     const previous = this.hits.get(event.targetId);
     if (previous) this.destroy(previous);
-    const spark = this.scene.add
-      .image(event.x, event.y, atlas, 'spark-0')
-      .setVisible(false)
-      .setScale(impactScale * (secondary ? 0.77 : event.critical ? 1.12 : 1))
-      .setAlpha(secondary ? 0.79 : 1);
+    const clip = contactClip(event);
+    const frame = clip && clip.id + '-peak';
+    const authored =
+      frame &&
+      this.scene.textures.exists(contactAtlas) &&
+      this.scene.textures.get(contactAtlas).has(frame);
+    const spark = authored
+      ? undefined
+      : this.scene.add
+          .image(event.x, event.y, atlas, 'spark-0')
+          .setVisible(false)
+          .setScale(
+            impactScale * (secondary ? 0.77 : event.critical ? 1.12 : 1),
+          )
+          .setAlpha(secondary ? 0.79 : 1);
+    if (authored && clip && frame) {
+      const alpha = (clip.soft ? 0.8 : 1) * (secondary ? 0.79 : 1);
+      const sprite = this.scene.add
+        .image(event.x, event.y, contactAtlas, frame)
+        .setOrigin(0.5)
+        .setRotation(
+          clip.upright ? 0 : Math.atan2(event.fy ?? 0, event.fx ?? 1),
+        )
+        .setScale((clip.soft ? 0.82 : 1) * (secondary ? 0.77 : 1))
+        .setVisible(false);
+      this.contacts.set(event.id, { event, clip, sprite, alpha, frame: -1 });
+    }
     const ring =
       event.critical && !secondary
         ? this.scene.add
@@ -116,7 +162,7 @@ export class M3dHitArt {
   }
 
   private destroy(hit: Hit) {
-    hit.spark.destroy();
+    hit.spark?.destroy();
     hit.ring?.destroy();
     hit.outline?.destroy();
   }
@@ -124,6 +170,8 @@ export class M3dHitArt {
   clear(): void {
     for (const hit of this.hits.values()) this.destroy(hit);
     this.hits.clear();
+    for (const { sprite } of this.contacts.values()) sprite.destroy();
+    this.contacts.clear();
     for (const texture of this.contours.values())
       this.scene.textures.remove(texture);
     this.contours.clear();
@@ -181,8 +229,23 @@ export class M3dHitArt {
       .setVisible(true);
   }
 
+  private anchor(event: CombatEvent, body?: Body, low = false) {
+    const { x, y, fx, fy } = event;
+    const height = body
+      ? Math.max(
+          18,
+          (body.displayOriginY - body.frame.y) * Math.abs(body.scaleY),
+        )
+      : 43;
+    return {
+      x: (body?.x ?? x) - 6 * (fx ?? 1),
+      y: (body?.y ?? y) - height * (low ? 0.3 : 0.46) - 2.5 * (fy ?? 0),
+      depth: (body?.depth ?? y) + 0.4,
+    };
+  }
+
   sync(): void {
-    if (!this.hits.size) return;
+    if (!this.hits.size && !this.contacts.size) return;
     const targets = new Map<string, Body>();
     for (const node of this.scene.children.list) {
       const id = node.data?.get(targetData) as string | undefined;
@@ -190,6 +253,32 @@ export class M3dHitArt {
       const body = node as Body;
       if (body.visible && body.alpha > 0 && body.scaleX && body.scaleY)
         targets.set(id, body);
+    }
+    for (const [id, contact] of this.contacts) {
+      contact.start ??= this.scene.time.now;
+      const age = Math.max(0, this.scene.time.now - contact.start);
+      const due =
+        age < breakMs ? 0 : age < emberMs ? 1 : age < contactMs ? 2 : 3;
+      // Keep the three drawn poses observable even when a render misses a time boundary.
+      contact.frame = Math.min(due, contact.frame + 1);
+      const phase = contactFrames[contact.frame];
+      if (phase === undefined) {
+        contact.sprite.destroy();
+        this.contacts.delete(id);
+        continue;
+      }
+      const { event, clip, sprite, alpha } = contact;
+      const anchor = this.anchor(event, targets.get(event.targetId), clip.low);
+      sprite
+        .setFrame(clip.id + '-' + phase)
+        .setPosition(anchor.x, anchor.y)
+        .setDepth(anchor.depth)
+        .setAlpha(
+          phase === 'embers'
+            ? alpha * Math.max(0.3, (contactMs - age) / (contactMs - emberMs))
+            : alpha,
+        )
+        .setVisible(true);
     }
     for (const [id, hit] of this.hits) {
       hit.start ??= this.scene.time.now;
@@ -200,21 +289,16 @@ export class M3dHitArt {
         continue;
       }
       const body = targets.get(id);
-      const { x, y, fx, fy } = hit.event;
-      const contactX = (body?.x ?? x) - 6 * (fx ?? 1);
-      const height = body
-        ? Math.max(
-            18,
-            (body.displayOriginY - body.frame.y) * Math.abs(body.scaleY),
-          )
-        : 43;
-      const contactY = (body?.y ?? y) - height * 0.46 - 2.5 * (fy ?? 0);
-      hit.spark.setVisible(age < sparkMs);
+      const { x, y } = hit.event;
+      hit.spark?.setVisible(age < sparkMs);
       if (age < sparkMs) {
-        hit.spark
-          .setFrame('spark-' + Math.floor(age / (sparkMs / 4)))
-          .setPosition(contactX, contactY)
-          .setDepth((body?.depth ?? y) + 0.4);
+        if (hit.spark) {
+          const anchor = this.anchor(hit.event, body);
+          hit.spark
+            .setFrame('spark-' + Math.floor(age / (sparkMs / 4)))
+            .setPosition(anchor.x, anchor.y)
+            .setDepth(anchor.depth);
+        }
         if (body) this.placeOutline(hit, body, age);
         else hit.outline?.setVisible(false);
       } else hit.outline?.setVisible(false);
@@ -246,7 +330,7 @@ export class M3dHitArt {
       id: event.id,
       target: event.targetId,
       critical: event.critical,
-      spark: spark.visible ? spark.frame.name : undefined,
+      spark: spark?.visible ? spark.frame.name : undefined,
       ring: ring?.visible ? ring.frame.name : undefined,
       outline: !!outline?.visible,
     }));

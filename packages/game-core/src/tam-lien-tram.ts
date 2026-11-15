@@ -237,14 +237,9 @@ export function stepTamLienTram(
     )
   ) {
     action.hitIds.push(target.id);
-    hurt(
-      world,
-      target,
-      hero.id,
-      tamLienTram.id,
-      action.rawDamage,
-      config,
-      action,
-    );
+    hurt(world, target, hero.id, tamLienTram.id, action.rawDamage, config, {
+      ...action,
+      hitPhase: `cross_${index}`,
+    });
   }
 }

@@ -146,6 +146,7 @@ function hitDragonArea(
         critMultiplier: shot.critMultiplier ?? config.critMultiplier,
         fx,
         fy,
+        hitPhase: landing ? 'dragon_impact' : 'dragon_coil',
       },
     );
     if (landing && hit && enemy.hp > 0)

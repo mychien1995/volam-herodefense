@@ -458,7 +458,13 @@ export interface Actor extends Point {
   crowdControlScale?: number;
 }
 export interface Hero extends Actor {
-  duelBurn?: { sourceId: string; damage: number; next: number; until: number };
+  duelBurn?: {
+    sourceId: string;
+    abilityId: string;
+    damage: number;
+    next: number;
+    until: number;
+  };
   fortune?: {
     id: string;
     start: number;
@@ -554,6 +560,7 @@ export interface Creep extends Actor {
   respawnAt: number;
   hits: Record<string, number>;
   burnSource: string;
+  burnAbilityId?: string;
   burnUntil: number;
   burnNext: number;
   burnDamage: number;
@@ -593,6 +600,8 @@ export interface Projectile extends Point {
 }
 export interface CombatEvent extends Point {
   tick?: number | undefined;
+  /** Server-resolved strike phase. Distinct from status cues such as empowered. */
+  hitPhase?: string | undefined;
   /** Attack target index on arc hits. Pulse events can use it for strike order. */
   hitIndex?: number | undefined;
   id: number;
@@ -608,6 +617,7 @@ export interface CombatEvent extends Point {
   stage?: string | undefined;
 }
 export interface SkillAction {
+  strikePhase?: string | undefined;
   areaCenter?: Point;
   tamLien?: { center: Point; targetId: string };
   tamLienCharged?: boolean;
