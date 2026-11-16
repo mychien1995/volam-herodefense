@@ -48,7 +48,7 @@ async function armFrame(page, kind, query, pngPath) {
       let shotScore = 0;
       window.__m3dFrame = new Promise((resolve) => {
         const deadline = performance.now() + 6500;
-        const sample = () => {
+        const sample = (renderer) => {
           const v = api.presentation();
           const s = api.snapshot();
           const actor = v.actors.find((b) => b.id === query.actorId);
@@ -81,13 +81,23 @@ async function armFrame(page, kind, query, pngPath) {
               if (boss.action.phase === 'release') result = boss;
             } else if (firstCast) result = firstCast;
           } else if (kind === 'cleave') {
-            const effects = v.hitArt.filter(
-              (h) =>
-                h.id > query.before &&
-                query.ids.includes(h.target) &&
-                h.spark &&
-                h.outline,
+            const scene = renderer.game.scene.scenes.find(
+              (candidate) => candidate.hitArt?.contacts,
             );
+            const contacts = scene?.hitArt.contacts;
+            const rendered = new Set(scene?.cameras.main.renderList);
+            const effects = [];
+            for (const hit of v.hitArt) {
+              if (
+                hit.id <= query.before ||
+                !query.ids.includes(hit.target) ||
+                !hit.outline
+              )
+                continue;
+              const sprite = contacts?.get(hit.id)?.sprite;
+              if (sprite?.visible && sprite.alpha > 0 && rendered.has(sprite))
+                effects.push({ ...hit, contact: sprite.frame.name });
+            }
             // Consecutive messages from one server tick can straddle a render.
             // Check every target's actual sprite plus the shared combat tick.
             for (const effect of effects) observedCleave.set(effect.id, effect);
@@ -482,6 +492,12 @@ export async function verifyM3dHitContinuity({ room, pages, out, report }) {
             assert.equal(data.events.length, 3);
             assert.equal(new Set(data.events.map((e) => e.tick)).size, 1);
             assert(data.events.every((e) => e.critical === critical));
+            assert(data.events.every((e) => e.hitPhase === 'thrust'));
+            assert(
+              data.effects.every((e) =>
+                /^staff-point-(peak|break|embers)$/.test(e.contact),
+              ),
+            );
             assert.equal(
               data.effects.filter((e) => e.ring).length,
               critical ? 1 : 0,

@@ -72,4 +72,16 @@ export const schools = [
     starting: 'Chọn nhánh và học võ công trong đấu trường.',
     portrait: 'duong-mon',
   },
+  {
+    id: 'ngu_doc',
+    name: 'Ngũ Độc',
+    element: 'Độc',
+    description: 'Chưởng độc và thuật triệu hồi.',
+    style: 'Tà Hiệp dùng chưởng độc. Cổ Sư dùng trượng đầu lâu và minion.',
+    attributes: 'Thiên về sinh lực, hồi máu và hồi nội lực.',
+    passive: 'Ngũ Độc Tâm Kinh',
+    basics: 'Tà Hiệp · Cổ Sư',
+    starting: 'Chọn nhánh và học võ công trong đấu trường.',
+    portrait: 'ngu-doc',
+  },
 ] as const;

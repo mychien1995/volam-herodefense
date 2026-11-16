@@ -20,7 +20,11 @@ export function heroTexture(
   | 'hero_con_luan_thien_su'
   | 'hero_con_luan_kiem_ton'
   | 'duong-mon-tuan-sa-walk'
-  | 'duong-mon-da-hanh-walk' {
+  | 'duong-mon-da-hanh-walk'
+  | 'ngu-doc-bich-co'
+  | 'ngu-doc-am-linh' {
+  if (schoolId === 'ngu_doc' || basicId?.startsWith('ngu_doc_'))
+    return basicId === 'ngu_doc_co_su' ? 'ngu-doc-am-linh' : 'ngu-doc-bich-co';
   if (schoolId === 'duong_mon' || basicId?.startsWith('duong_mon_'))
     return basicId === 'duong_mon_am_khi'
       ? 'duong-mon-da-hanh-walk'

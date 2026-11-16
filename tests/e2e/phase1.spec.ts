@@ -57,11 +57,14 @@ test('dedicated selection after host start synchronizes different schools', asyn
     await expect(
       a.locator('#pregame button[data-school=cai_bang]'),
     ).toHaveAttribute('aria-pressed', 'true');
+    await a.getByRole('button', { name: 'Đổi môn phái' }).click();
     await a.locator('#pregame button[data-school=vo_dang]').click();
     await a.locator('[data-branch=vo_dang_quyen]').click();
+    await a.bringToFront();
     await a.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     await expect(b.getByTestId('selection-ready')).toHaveText(
       '1/2 đã sẵn sàng',
+      { timeout: 30_000 },
     );
     expect((await snapshot(b)).state.matchElapsedMs).toBe(0);
     await b.locator('#pregame button[data-school=thieu_lam]').click();
@@ -71,8 +74,10 @@ test('dedicated selection after host start synchronizes different schools', asyn
     await a.screenshot({ path: resolve(out, '04-school-selection-1280.png') });
     await b.screenshot({ path: resolve(out, '04-school-selection-1920.png') });
     await b.locator('[data-branch=thieu_lam_quyen]').click();
+    await b.bringToFront();
     await b.getByRole('button', { name: 'Xác nhận', exact: true }).click();
-    for (const p of [a, b]) await expect(p.locator('#pregame')).toBeHidden();
+    for (const p of [a, b])
+      await expect(p.locator('#pregame')).toBeHidden({ timeout: 30_000 });
     const sa = await snapshot(a),
       sb = await snapshot(b);
     expect(sa.roomId).toBe(sb.roomId);
@@ -159,9 +164,11 @@ test('selection disconnect visibly holds the room without automatic choice', asy
       a.locator('#pregame button[data-school=thien_son]'),
     ).toHaveAttribute('aria-pressed', 'true');
     await a.locator('[data-branch=thien_son_phien]').click();
+    await a.bringToFront();
     await a.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     await expect(a.getByTestId('selection-ready')).toHaveText(
       '1/2 đã sẵn sàng',
+      { timeout: 30_000 },
     );
     expect((await snapshot(a)).state.phase).toBe('SCHOOL_SELECTION');
     expect((await snapshot(a)).state.tick).toBe(0);

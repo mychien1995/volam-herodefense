@@ -1,4 +1,5 @@
 import type { EquipmentAttack } from './economy-types.js';
+import type { NguDocSummonKind } from './ngu-doc-ids.js';
 import type { CampaignDefinition, CampaignRuntime } from './campaign.js';
 import type {
   CreepCombatDefinition,
@@ -167,6 +168,9 @@ export type StatusKind =
   | 'dash_guard'
   | 'dash_lock'
   | 'con_luan_ranged'
+  | 'ngu_doc_palm'
+  | 'ngu_doc_aura'
+  | 'ngu_doc_mark'
   | 'duong_mon_flight'
   | 'duong_mon_shell'
   | 'duong_mon_evade'
@@ -440,6 +444,7 @@ export type Command =
   | { kind: 'dev-loadout'; ids: string[] }
   | { kind: 'select-basic'; id: string };
 export interface Actor extends Point {
+  nguDocVenom?: NguDocVenom[];
   invulnerable?: boolean;
   duongMonPoison?: {
     sourceId: string;
@@ -465,7 +470,28 @@ export interface Actor extends Point {
   forcedMovementImmune?: boolean;
   crowdControlScale?: number;
 }
+export interface NguDocSummon extends Actor {
+  ownerId: string;
+  kind: NguDocSummonKind;
+  rank: number;
+  damage: number;
+  defense: number;
+  radius: number;
+  expiresAt: number;
+  waveAt: number;
+  slamAt: number;
+}
+export interface NguDocVenom {
+  ownerId: string;
+  abilityId: string;
+  next: number;
+  until: number;
+  damage: number;
+}
 export interface Hero extends Actor {
+  nguDocSummons?: NguDocSummon[];
+  nguDocSummonSerial?: number;
+  nguDocTargetId?: string;
   duelBurn?: {
     sourceId: string;
     abilityId: string;
@@ -667,6 +693,12 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
+  nguDocMarks?: (Point & {
+    ownerId: string;
+    targetId: string;
+    rank: number;
+    until: number;
+  })[];
   /** Present only in the isolated Lôi Đài world. */
   duel?: ReadonlySet<string>;
   duelWalkWalls?: Rect[];

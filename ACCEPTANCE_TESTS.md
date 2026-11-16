@@ -1,3 +1,13 @@
+## Ngũ Độc · Bản chơi thử M3D
+
+- Màn chọn phái có 4 thẻ trên, 3 thẻ dưới và popup hai nhánh có thể đóng bằng Escape. Đủ thẻ và nút ở 1280 × 720, 850 × 480 và 390 × 640.
+- Kiểm tra chưởng hướng trái giữ tay đúng chiều, ô A/Q/W/E/R/T có ảnh mới, trường T có tay mở, nắm đấm, tay bóp và khói nền, cùng hiệu ứng cổ trùng bay ngược về khi kết thúc.
+
+- Chọn cả hai nhánh trong phòng thật. Hai máy khách nhìn thấy đúng sprite, Q Bích Cổ có hai ngọn lửa đổi khung, W tạo một bãi khói và R không phát hiệu ứng.
+- W Cổ Sư gọi 1–4 cương thi theo bậc. R chỉ gọi zombie qua xác suất khi đánh thường. Minion hiện thanh máu theo HP từ server.
+- Giao dịch mua đồ cập nhật chỉ số cả minion đã gọi, giữ tỷ lệ HP hiện tại. Thần Chết còn sống giữ ID và lượng máu khi vào phó bản, về arena và qua chu kỳ gục ngã/hồi sinh.
+- Lưỡi hái làm chậm trên diện rộng, sóng độc bay thẳng và cú bổ gây choáng nhiều mục tiêu. E Cổ Sư nổ sau ba giây kể từ lúc trúng, choáng và hồi máu từ sát thương thực nhận.
+
 ## Menu chính và chế độ điều khiển · 2026-11-15
 
 Menu chính hiện ba lựa chọn trước ô biệt danh. Ba tab Hướng dẫn hiển thị tiến trình chiến dịch, võ học theo từng nhánh và danh sách boss. Âm lượng, tự đánh và kiểu điều khiển tồn tại qua tải lại trang. Chế độ chuột đi tới điểm hợp lệ và tránh vật cản với một lệnh; hai client cùng nhận vị trí từ server. Dấu X xuất hiện tại điểm bấm và mờ dần. Chuột phải lên mục tiêu trong tầm và A đều đánh thường. Bấm chuột phải tại xác quái, kể cả khi quái vừa chết trên server, vẫn đi đến điểm bấm. Khi bị làm chậm, nhân vật vẫn thực hiện lệnh đi với tốc độ hiệu dụng. Ba lựa chọn trong Cài đặt áp dụng ngay giữa trận. Auto đánh được boss trong tầm. Tắt Auto dừng các đòn tự động mới. Ngũ Độc Chưởng làm chậm nhưng đòn A hợp lệ vẫn gây sát thương và hiện animation dù còn trong nhịp chịu đòn.

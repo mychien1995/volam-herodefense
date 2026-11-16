@@ -1,4 +1,5 @@
 import { dashCapacity } from './mobility.js';
+import { nguDoc, nguDocDefense } from './ngu-doc-ids.js';
 import { duongMon } from './duong-mon-ids.js';
 import type { Hero, SimulationConfig, World, Ability } from './types.js';
 import type {
@@ -161,6 +162,8 @@ export function characterStats(
   sources.temporary.defense =
     statusValue(hero, 'defense_buff', tick) -
     statusValue(hero, 'defense_break', tick);
+  if (hero.basicId === nguDoc.taiHiep)
+    sources.temporary.defense += nguDocDefense[skillRank(hero, nguDoc.counter, config)] ?? 0;
   sources.temporary.cooldownReduction = statusValue(
     hero,
     'cooldown_buff',

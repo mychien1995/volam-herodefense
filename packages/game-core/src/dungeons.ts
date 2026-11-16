@@ -68,6 +68,8 @@ import type {
   World,
 } from './types.js';
 
+import { relocateNguDocSummons } from './ngu-doc-summons.js';
+
 export type DungeonAccess = 'private' | 'shared';
 export interface CreepDungeonDefinition {
   kimBoss?: KimDefinition;
@@ -556,6 +558,7 @@ export class DungeonMatch {
     delete hero.fortune;
     delete hero.comboFinisher;
     delete hero.tamLien;
+    relocateNguDocSummons(hero, this.arena.config, tick, now, true);
     this.arena.world.heroes.set(id, hero);
     this.membership.set(id, this.arena.id);
   }
@@ -1630,6 +1633,14 @@ export class DungeonMatch {
     hero.actionUntil = destination.world.tick;
     hero.hurtUntil = destination.world.tick;
     hero.pose = hero.hp > 0 ? 'idle' : 'death';
+    if (source !== destination)
+      relocateNguDocSummons(
+        hero,
+        destination.config,
+        source.world.tick,
+        destination.world.tick,
+        destination !== this.duel.zone,
+      );
     destination.world.heroes.set(id, hero);
     this.membership.set(id, destination.id);
   }

@@ -12,6 +12,8 @@ Tab Chế tạo của Thương Gia hiển thị cấp trang bị, số nguyên l
 
 ## Fixed branch HUD — 2026-11-04
 
+Màn chọn phái trước trận dùng hai hàng 4 và 3 thẻ. Chọn thẻ mở popup hai hệ phái, xác nhận trong popup; Escape hoặc Đổi môn phái quay lại lưới.
+
 The pre-match lobby presents school followed by branch. In a match, skill upgrades sit directly above Q/W/E/R/T in the single world viewport. Hold O and press Q/W/E/R/T to upgrade the corresponding skill. Hovering or focusing a skill icon shows its description and current rank or unlock level in an in-viewport tooltip. For learned skills the tooltip shows the rank’s base damage, mana cost, and cooldown. T and unlearned ranks show their level requirement. Thiếu Lâm Quyền shows the current stance and F next to the bar. The entry dialogue is anchored to Tượng Võ Thần. The level-up effect reuses the existing original, approved four-frame Nam Đế ring atlas under assets/reviews/wave_boss_feedback_v01/exports, with a smaller scale and a new upward motion for the hero.
 
 ## Approved M3D feedback composition — 2026-11-03

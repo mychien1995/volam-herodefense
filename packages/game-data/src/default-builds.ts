@@ -1,4 +1,5 @@
-import { duongMon } from '@volam/game-core';
+import { nguDoc, duongMon } from '@volam/game-core';
+import { nguDocBranches } from './ngu-doc.js';
 import { duongMonBranches } from './duong-mon.js';
 import type { DefaultBranch, FixedBranch } from '@volam/game-core';
 import { conLuan } from '@volam/game-core';
@@ -7,6 +8,7 @@ import { conLuanBranches } from './con-luan.js';
 export const defaultBranches: Record<string, DefaultBranch> = {
   ...conLuanBranches,
   ...duongMonBranches,
+  ...nguDocBranches,
   cai_bang_bong: {
     schoolId: 'cai_bang',
     style: 'Bổng',
@@ -90,6 +92,8 @@ export const defaultBranches: Record<string, DefaultBranch> = {
 };
 
 const ultimates: Record<string, string> = {
+  [nguDoc.taiHiep]: nguDoc.hands,
+  [nguDoc.coSu]: nguDoc.reaper,
   [duongMon.coQuan]: duongMon.flowers,
   [duongMon.amKhi]: duongMon.storm,
   [conLuan.monk]: conLuan.chaos,

@@ -1,3 +1,11 @@
+## Ngũ Độc đã duyệt
+
+Bích Cổ và Âm Linh vào trận thường của `milestone/m3d` với protocol 46. Màn chọn phái hai hàng hiển thị Bích Cổ toàn thân và mở popup nhánh có icon đánh thường. Triệu hồi do server quản lý, giữ ID và HP Thần Chết qua chuyển khu vực. Trình chọn mục tiêu bằng chuột nhận biết chủ của minion. [Kỹ năng, thông số, ảnh và kiểm chứng](NGU_DOC_PLAYTEST.md).
+
+Bản hợp nhất qua `pnpm check:final --config playwright.ngu-doc-game.config.ts` ở cổng QA 2802/5581 trong 452,98 giây. Báo cáo ghi 39 bước đạt, gồm TypeScript, unit/integration, build production, validator tài sản và 14 ca Chrome. Ca Ngũ Độc trong phòng sáu người xác minh VFX, thanh máu minion, trang bị và chuyển khu vực.
+
+Hồi quy production chạy `node tools/run-playwright.mjs test --config playwright.m3d-hit-continuity.config.ts` với `VOLAM_QA_HIT_TWO_CLIENTS=1`. Hai client thấy đúng clip va chạm Bổng cho cả đòn thường lẫn chí mạng. Test cũng qua 4 nhóm thao tác nhân vật và 44 trường hợp boss theo hướng.
+
 ## Contact Impact V01 · 2026-11-16
 
 Đã duyệt và tích hợp 35 clip điểm chạm, gồm 105 cel, vào `milestone/m3d`. Protocol 45 mang `hitPhase` trên sự kiện sát thương để Phaser chọn đúng clip cho từng đòn A, nhịp thiêu đốt, phản kích và các pha nhiều hit. [Atlas và nguồn](../assets/exports/contact-impacts-v01/manifest.json).

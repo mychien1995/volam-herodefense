@@ -60,6 +60,7 @@ export default defineConfig({
               bacCaiPreview: 'bac-cai-preview.html',
               visualUpgrade: 'visual-upgrade-2.html',
               duongMonPreview: 'duong-mon.html',
+              nguDocPreview: 'ngu-doc-preview.html',
               renovationPreview: 'renovation-preview.html',
               voDangQuyenPreview: 'vo-dang-quyen-preview.html',
               shaolinDaoPreview: 'shaolin-dao-preview.html',

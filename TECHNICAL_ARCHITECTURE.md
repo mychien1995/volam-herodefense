@@ -1,6 +1,10 @@
-## Điều khiển chuột và tự đánh thường · protocol 44
+## Ngũ Độc trong trận M3D
 
-Client gửi điểm đến và mã khu vực qua `move-to`. Server dựng đường đi từ vị trí hiện tại và áp cùng tốc độ, hình va chạm và trạng thái hạn chế di chuyển như bàn phím. Lệnh có thể kèm mã mục tiêu. Phòng đổi mã thực thể được chiếu cho client về mã nội bộ trong đúng khu vực của nhân vật. Server kiểm tra mục tiêu, tầm đánh và chướng ngại, rồi đánh thường nếu hợp lệ hoặc đi đến điểm bấm nếu mục tiêu đã chết hay rời khu vực. Với `auto-basic`, server chọn đối thủ PvE còn sống, gần nhất và trong tầm, gồm quái thường, quái do boss gọi và boss. Auto dùng hồi chiêu/nhịp đòn hiện tại, ưu tiên lệnh tay và không dùng trong PvP. Tư thế chịu đòn chỉ ghi đè đòn đánh thường của nhân vật khi bị choáng hoặc khi đòn đã kết thúc. Hai dịch vụ cần cùng protocol 44.
+`game-core` giữ minion theo người triệu hồi và xử lý AI, sát thương, trang bị và chuyển vùng. `DungeonMatch` đặt lại vị trí của Thần Chết ở vùng đích bằng cùng thực thể và giữ lượng máu. Protocol 46 thêm `CreepState.ownerId` cho minion, giữ ID qua các vùng và dùng bộ lọc instance hiện có. Phaser đọc trạng thái để vẽ chuyển động, thanh máu và hiệu ứng theo tick. [Dữ liệu và kiểm chứng](docs/NGU_DOC_PLAYTEST.md).
+
+## Điều khiển chuột và tự đánh thường · protocol 46
+
+Client gửi điểm đến và mã khu vực qua `move-to`. Server dựng đường đi từ vị trí hiện tại và áp cùng tốc độ, hình va chạm và trạng thái hạn chế di chuyển như bàn phím. Lệnh có thể kèm mã mục tiêu. Phòng đổi mã thực thể được chiếu cho client về mã nội bộ trong đúng khu vực của nhân vật. Server kiểm tra mục tiêu, tầm đánh và chướng ngại, rồi đánh thường nếu hợp lệ hoặc đi đến điểm bấm nếu mục tiêu đã chết hay rời khu vực. Với `auto-basic`, server chọn đối thủ PvE còn sống, gần nhất và trong tầm, gồm quái thường, quái do boss gọi và boss. Auto dùng hồi chiêu/nhịp đòn hiện tại, ưu tiên lệnh tay và không dùng trong PvP. Tư thế chịu đòn chỉ ghi đè đòn đánh thường của nhân vật khi bị choáng hoặc khi đòn đã kết thúc. Hai dịch vụ tích hợp dùng protocol 46.
 
 ## Võ Đang Kiếm — protocol 38
 

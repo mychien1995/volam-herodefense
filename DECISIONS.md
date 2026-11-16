@@ -1,3 +1,9 @@
+## Ngũ Độc · Bích Cổ và Âm Linh
+
+Màn chọn phái dùng lưới 4 trên, 3 dưới và mở popup chọn hệ phái. Lượt Ngũ Độc này sửa tay chưởng hướng trái, làm mượt Thần Chết khi theo chủ, mở rộng Âm Phong Thực Cốt và cho trùng của Tâm Hình Cổ tự bay về.
+
+Đã duyệt Bích Cổ và Âm Linh, bộ VFX, icon đánh thường và màn chọn phái để tích hợp vào milestone/m3d. Vô Hình Độc của Tà Hiệp phản độc thụ động và không có VFX riêng. Cổ Sư dùng W Yêu Cổ để gọi cương thi và R Vô Hình Ma Cổ tăng xác suất gọi zombie bằng đánh thường. Thần Chết còn sống theo chủ qua phó bản, về arena và khi chủ gục. Minion có thanh máu và nhận một phần chỉ số tăng từ trang bị của Cổ Sư. [Bản tích hợp](docs/NGU_DOC_PLAYTEST.md).
+
 ## Menu chính và điều khiển chuột · 2026-11-15
 
 Menu chính mở trước màn biệt danh và có Vào game, Hướng dẫn, Cài đặt. Hướng dẫn có ba mục cho cơ chế chiến dịch, võ học theo phái/nhánh và boss. Âm lượng, tự đánh thường và kiểu điều khiển chỉnh được từ menu chính hoặc ngay trong trận. Lưu các lựa chọn trong localStorage và nạp khi mở game. Mặc định dùng bàn phím, âm lượng 45% và tự đánh thường tắt.

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:," />
+    <title>Ngũ Độc · Duyệt VFX</title>
+  </head>
+  <body>
+    <main id="ngu-doc" aria-label="Sân duyệt hình ảnh Ngũ Độc">
+      <div id="arena"></div>
+      <section class="identity panel">
+        <strong>Ngũ Độc</strong>
+        <small>Duyệt sprite và hiệu ứng</small>
+        <nav aria-label="Tạo hình" id="branches">
+          <button type="button" data-branch="bich-co" aria-pressed="true">
+            Bích Cổ <small>Tà Hiệp</small>
+          </button>
+          <button type="button" data-branch="am-linh" aria-pressed="false">
+            Âm Linh <small>Cổ Sư</small>
+          </button>
+        </nav>
+      </section>
+      <section class="options panel" aria-label="Thiết lập phân cảnh">
+        <label
+          >Mục tiêu
+          <select id="target">
+            <option value="boss">Boss + creep</option>
+            <option value="creep">Creep</option>
+            <option value="none">Trống</option>
+          </select>
+        </label>
+        <label id="rank-option" hidden
+          >Yêu Cổ
+          <select id="rank">
+            <option value="1">1 cương thi</option>
+            <option value="2">2 cương thi</option>
+            <option value="3">3 cương thi</option>
+            <option value="4" selected>4 cương thi</option>
+          </select>
+        </label>
+        <button type="button" id="reset">Đặt lại</button>
+      </section>
+      <section class="hotbar panel" aria-label="Phím diễn chiêu">
+        <output id="cue" aria-live="polite"
+          >Chọn chiêu hoặc di chuyển bằng phím mũi tên</output
+        >
+        <div id="slots"></div>
+      </section>
+    </main>
+    <script type="module" src="/src/ngu-doc-preview.ts"></script>
+  </body>
+</html>

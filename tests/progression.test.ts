@@ -8,6 +8,7 @@ import {
   rankedAbility,
   submitInput,
   abilityCooldown,
+  nguDoc,
   type BuildChange,
 } from '@volam/game-core';
 import { m1Config, creepDungeon, progressionSchema } from '@volam/game-data';
@@ -344,9 +345,19 @@ describe('M3B deterministic progression and builds', () => {
     (id) => {
       const d = m1Config.progression!.skills[id]!;
       expect(d.ranks[0]).toEqual(m1Config.skillCatalogue![id]);
-      // This passive progresses the basic's projectile count through the equipped rank.
-      if (id !== 'ngu_hanh_cach_the_thuat')
-        expect(d.ranks.at(-1)).not.toEqual(d.ranks[0]);
+      // These mechanics use the equipped rank directly. Ngũ Độc rank behavior
+      // is verified in the live simulation in ngu-doc.test.ts.
+      const usesEquippedRank = [
+        'ngu_hanh_cach_the_thuat',
+        nguDoc.palm,
+        nguDoc.counter,
+        nguDoc.jiangshi,
+        nguDoc.mark,
+        nguDoc.zombie,
+        nguDoc.reaper,
+      ];
+      if (usesEquippedRank.includes(id)) expect(d.ranks).toHaveLength(4);
+      else expect(d.ranks.at(-1)).not.toEqual(d.ranks[0]);
       if (id === 'cam_long_cong')
         for (const a of d.ranks) {
           expect(a.effect.mode === 'arc' && a.effect.damage).toBe(0);

@@ -2,6 +2,7 @@ import { grantCraftMaterial } from './economy.js';
 import { announceBossSkill } from './boss-skill-announcement.js';
 const compareId = (a: string, b: string) => (a < b ? -1 : a > b ? 1 : 0);
 import { addCreep } from './simulation.js';
+import { nguDocSummons } from './ngu-doc-summons.js';
 import { emit, hurt } from './combat.js';
 import {
   applyStatus,
@@ -205,7 +206,7 @@ function release(
       });
     }
   } else {
-    const victims = [...world.heroes.values()]
+    const victims = [...world.heroes.values(), ...nguDocSummons(world)]
       .filter((h) => {
         if (h.hp <= 0 || distance(h, boss) > attack.range + config.radius)
           return false;

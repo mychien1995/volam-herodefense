@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 45;
+export const PROTOCOL_VERSION = 46;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -171,6 +171,8 @@ export const inputSchema = z.discriminatedUnion('kind', [
       'con_luan_kiem_ton',
       'duong_mon_co_quan',
       'duong_mon_am_khi',
+      'ngu_doc_ta_hiep',
+      'ngu_doc_co_su',
     ]),
   }),
 ]);
@@ -507,6 +509,7 @@ export type LobbyPlayer = SchemaType<typeof LobbyPlayer>;
 export const CreepState = schema(
   {
     ...actorFields,
+    ownerId: t.string().default(''),
     castTicks: t.number().default(0),
     castTargetId: t.string().default(''),
     archetypeId: t.string().default(''),
@@ -691,6 +694,7 @@ export const schoolIdSchema = z.enum([
   'thieu_lam',
   'con_luan',
   'duong_mon',
+  'ngu_doc',
 ]);
 export const lobbyActionSchema = z.discriminatedUnion('action', [
   z.strictObject({ action: z.literal('start') }),

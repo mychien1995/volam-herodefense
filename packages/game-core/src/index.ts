@@ -51,3 +51,6 @@ export * from './boss-retry.js';
 export { fortuneReadings } from './fortune.js';
 export * from './con-luan-ids.js';
 export * from './duong-mon-ids.js';
+
+export * from './ngu-doc-ids.js';
+export { nguDocSummons } from './ngu-doc-summons.js';

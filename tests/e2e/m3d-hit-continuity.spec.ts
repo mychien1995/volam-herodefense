@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { schools } from '@volam/game-data';
 import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { verifyRenovationRuntime } from '../../tools/verify-renovation-runtime.mjs';
@@ -32,15 +33,19 @@ async function verifySchoolControls({
   for (const [i, page] of pages.entries()) {
     await waitForQa(
       () =>
-        page.evaluate((players) => {
-          const state = (window as any).__VOLAM__.snapshot().state;
-          return (
-            state?.phase === 'SCHOOL_SELECTION' &&
-            document.querySelectorAll('#pregame [data-school]').length === 4 &&
-            document.querySelectorAll('#pregame .pre-players li').length ===
-              players
-          );
-        }, pages.length),
+        page.evaluate(
+          ({ players, schoolCount }) => {
+            const state = (window as any).__VOLAM__.snapshot().state;
+            return (
+              state?.phase === 'SCHOOL_SELECTION' &&
+              document.querySelectorAll('#pregame [data-school]').length ===
+                schoolCount &&
+              document.querySelectorAll('#pregame .pre-players li').length ===
+                players
+            );
+          },
+          { players: pages.length, schoolCount: schools.length },
+        ),
       'selection controls and roster for client ' + (i + 1),
     );
   }

@@ -1,3 +1,5 @@
+import { nguDoc } from './ngu-doc-ids.js';
+import { nguDocSummons } from './ngu-doc-summons.js';
 import { moveCircle, clampEllipse } from './geometry.js';
 import type {
   Actor,
@@ -98,7 +100,11 @@ export function applyStatus(
     });
 }
 export function expireStatuses(world: World): void {
-  for (const a of [...world.heroes.values(), ...world.creeps.values()])
+  for (const a of [
+    ...world.heroes.values(),
+    ...world.creeps.values(),
+    ...nguDocSummons(world),
+  ])
     a.statuses = (a.statuses ?? []).filter(
       (s) => a.hp > 0 && s.until > world.tick,
     );
@@ -115,6 +121,8 @@ export function cancelOwnedEffects(world: World, id: string): void {
   world.combos = (world.combos ?? []).filter(
     (c) => c.sourceId !== id && c.targetId !== id,
   );
+  if (world.nguDocMarks)
+    world.nguDocMarks = world.nguDocMarks.filter((mark) => mark.ownerId !== id);
   world.supports = (world.supports ?? []).filter((a) => a.ownerId !== id);
   world.actions = (world.actions ?? []).filter((a) => a.ownerId !== id);
   world.areas = (world.areas ?? []).filter((a) => a.ownerId !== id);
@@ -124,7 +132,8 @@ export function cancelOwnedEffects(world: World, id: string): void {
       (a) => a.ownerId !== id,
     );
   for (const [key, p] of world.projectiles)
-    if (p.ownerId === id) world.projectiles.delete(key);
+    if (p.ownerId === id && p.abilityId !== nguDoc.reaperWave)
+      world.projectiles.delete(key);
   for (const a of [...world.heroes.values(), ...world.creeps.values()]) {
     if (a.id === id) a.statuses = [];
     else
@@ -132,9 +141,12 @@ export function cancelOwnedEffects(world: World, id: string): void {
         (s) =>
           !(
             s.sourceId === id &&
-            ['defense_buff', 'damage_reduction', 'interrupt_resist'].includes(
-              s.kind,
-            )
+            [
+              'defense_buff',
+              'damage_reduction',
+              'interrupt_resist',
+              'ngu_doc_mark',
+            ].includes(s.kind)
           ),
       );
   }

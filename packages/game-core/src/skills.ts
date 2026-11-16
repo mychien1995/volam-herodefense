@@ -1,3 +1,5 @@
+import { nguDoc } from './ngu-doc-ids.js';
+import { executeNguDocAbility, aimNguDocWorms } from './ngu-doc-combat.js';
 import { duongMon, duongMonFan } from './duong-mon-ids.js';
 import { opponent, opponents, targetRadius } from './opponents.js';
 import { conLuan, fiveSwordPoints } from './con-luan-ids.js';
@@ -790,6 +792,11 @@ export function perform(
       );
     });
   const effect = empoweredDash ? dash : original;
+  if (
+    ability.id === nguDoc.taiHiep &&
+    hasStatus(hero, 'ngu_doc_palm', world.tick)
+  )
+    stage = 'ngu_doc_toxic';
   if (empoweredDash) stage = 'empowered_dash';
   const crit = offensiveStats(world, hero.id, config);
   if (basicTarget) {
@@ -799,13 +806,17 @@ export function perform(
       hero.fy = aim.y;
     }
   } else if (effect.mode === 'projectile' && !effect.useFacing) {
-    const aim = targetDirection(
-      world,
-      hero,
-      effect.range,
-      config,
-      effect.comboEmpoweredRadius === undefined ? undefined : ability.combo?.id,
-    );
+    const aim =
+      aimNguDocWorms(world, hero, ability, config) ??
+      targetDirection(
+        world,
+        hero,
+        effect.range,
+        config,
+        effect.comboEmpoweredRadius === undefined
+          ? undefined
+          : ability.combo?.id,
+      );
     hero.fx = aim.x;
     hero.fy = aim.y;
   }
@@ -835,6 +846,7 @@ export function perform(
     radius: 'range' in effect ? effect.range : 0,
     ...(stage ? { stage } : {}),
   });
+  if (executeNguDocAbility(world, hero, ability, config)) return;
   if (ability.id === duongMon.flight) {
     if (hasStatus(hero, 'duong_mon_flight', world.tick)) {
       hero.statuses =
@@ -1535,7 +1547,9 @@ export function stepAreas(world: World, config: SimulationConfig): void {
         area.abilityId,
         area.rawDamage,
         config,
-        area,
+        area.abilityId === nguDoc.pool || area.abilityId === nguDoc.aura
+          ? { ...area, periodic: true }
+          : area,
       );
       if (enemy.hp > 0)
         for (const status of area.effect.statuses ?? [])
