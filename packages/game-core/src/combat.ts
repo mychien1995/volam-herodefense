@@ -39,6 +39,7 @@ export function hurt(
     fy?: number;
     armorPenetration?: number | undefined;
     cleaveIndex?: number | undefined;
+    hitPhase?: string | undefined;
     slowedBonus?: number | undefined;
     lifesteal?: { fraction: number; used: boolean } | undefined;
     reactive?: boolean | undefined;
@@ -186,6 +187,7 @@ export function hurt(
       {
         ...offensiveStats(world, target.id, config),
         reactive: true,
+        hitPhase: 'counter',
         fx: heading.x,
         fy: heading.y,
       },
@@ -440,6 +442,7 @@ export function hurt(
     damage,
     critical,
     ...(empowered ? { stage: 'empowered' } : {}),
+    ...(snapshot?.hitPhase ? { hitPhase: snapshot.hitPhase } : {}),
     ...(snapshot?.cleaveIndex ? { hitIndex: snapshot.cleaveIndex } : {}),
     x: target.x,
     y: target.y,

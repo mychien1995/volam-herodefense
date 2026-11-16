@@ -251,7 +251,7 @@ describe('M3C2 authoritative Yin–Yang', () => {
     );
     f.steps(12);
     const seals = f.world.areas!;
-    expect(f.hits()).toHaveLength(2);
+    expect(f.hits().map((e) => e.hitPhase)).toEqual(['travel_0', 'travel_1']);
     expect(f.enemies[0]!.x).toBeCloseTo(384);
     expect(f.enemies[2]!.hp).toBe(10000);
     expect(seals).toHaveLength(5);
@@ -266,7 +266,11 @@ describe('M3C2 authoritative Yin–Yang', () => {
     f.steps(29);
     expect(f.hits()).toHaveLength(2);
     f.steps(1);
-    expect(f.hits()).toHaveLength(3);
+    expect(f.hits().map((e) => e.hitPhase)).toEqual([
+      'travel_0',
+      'travel_1',
+      undefined,
+    ]);
     expect(f.events.filter((e) => e.stage === 'area_tick')).toHaveLength(5);
     f.steps(1);
     expect(f.world.areas).toEqual([]);

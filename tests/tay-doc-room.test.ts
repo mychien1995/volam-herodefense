@@ -1,13 +1,11 @@
 import { afterAll, afterEach, beforeAll, expect, it } from 'vitest';
-import { ColyseusTestServer } from '@colyseus/testing';
-import { Client } from '@colyseus/sdk';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import type { TayDocView } from '@volam/game-core';
-let server: ColyseusTestServer;
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 const previous = process.env['VOLAM_DEV_TAY_DOC'];
-const client = new Client('http://localhost:2594');
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const options = (nickname: string) => ({
   nickname,
   protocolVersion: PROTOCOL_VERSION,
@@ -19,15 +17,14 @@ const projection = (r: SDKRoom) =>
   JSON.parse(r.state.tayDoc?.get('arena')?.json ?? 'null') as TayDocView | null;
 beforeAll(async () => {
   process.env['VOLAM_DEV_TAY_DOC'] = '1';
-  const game = createGameServer();
-  await game.listen(2594);
-  server = new ColyseusTestServer(game);
+  server = await startRoomTestServer();
+  client = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
 });
 afterAll(async () => {
-  await server.shutdown();
+  await server?.shutdown();
   if (previous === undefined) delete process.env['VOLAM_DEV_TAY_DOC'];
   else process.env['VOLAM_DEV_TAY_DOC'] = previous;
 });

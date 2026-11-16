@@ -1,3 +1,7 @@
+## Contact Impact V01 · 2026-11-16
+
+Đã duyệt và tích hợp 35 clip điểm chạm, gồm 105 cel, vào `milestone/m3d`. Protocol 45 mang `hitPhase` trên sự kiện sát thương để Phaser chọn đúng clip cho từng đòn A, nhịp thiêu đốt, phản kích và các pha nhiều hit. [Atlas và nguồn](../assets/exports/contact-impacts-v01/manifest.json).
+
 ## Lôi Đài Hồng Mộc · 2026-11-12
 
 `milestone/m3d` dùng protocol 40. Người chơi cấp 6 vào viền gạch để quan chiến hoặc bước lên sàn đấu 1v1. Phaser dùng sân Hồng Mộc v2 và tick Lôi Đài cho hiệu ứng khi đấu trường chính tạm dừng. [Luật, artwork và kiểm chứng](LOI_DAI.md).

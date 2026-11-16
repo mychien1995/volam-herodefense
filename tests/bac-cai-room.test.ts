@@ -1,23 +1,19 @@
 import { beforeAll, afterAll, it, expect } from 'vitest';
-import { ColyseusTestServer } from '@colyseus/testing';
-import { Client } from '@colyseus/sdk';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 import { BacCaiEncounter, type BacCaiView } from '@volam/game-core';
 import { bacCaiDefinition } from '@volam/game-data';
-let server: ColyseusTestServer;
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 beforeAll(async () => {
-  const game = createGameServer();
-  await game.listen(2807);
-  server = new ColyseusTestServer(game);
+  server = await startRoomTestServer();
 });
 afterAll(async () => {
-  await server.cleanup();
-  await server.shutdown();
+  await server?.cleanup();
+  await server?.shutdown();
 });
 it('real SDK: late snapshots, no real-form leak, zone filtering, authoritative HP and disconnect tether cleanup', async () => {
-  const client = new Client('http://127.0.0.1:2807'),
+  const client = server.sdk,
     opts = (nickname: string) =>
       ({ nickname, protocolVersion: PROTOCOL_VERSION }) as const;
   const a = await client.create<MatchRoom['state']>(MATCH_ROOM, opts('Bắc A')),

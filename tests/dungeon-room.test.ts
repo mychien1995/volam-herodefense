@@ -1,15 +1,14 @@
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest';
-import { boot, type ColyseusTestServer } from '@colyseus/testing';
-import { Client, type Room } from '@colyseus/sdk';
+import type { Room } from '@colyseus/sdk';
 import { CloseCode } from '@colyseus/core';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 import { creepDungeon, desertDungeon, desertRoster } from '@volam/game-data';
 
-let server: ColyseusTestServer;
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 const previousLegacy = process.env['VOLAM_DEV_LEGACY_SKILLS'];
-const client = new Client('http://localhost:2568');
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const sequences = new Map<string, number>();
 const next = (room: Room<MatchRoom>) => {
   const value = (sequences.get(room.sessionId) ?? 0) + 1;
@@ -18,17 +17,18 @@ const next = (room: Room<MatchRoom>) => {
 };
 beforeAll(async () => {
   process.env['VOLAM_DEV_LEGACY_SKILLS'] = '1';
-  server = await boot(createGameServer(), 2568);
+  server = await startRoomTestServer();
+  client = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
   sequences.clear();
 });
 afterAll(async () => {
   if (previousLegacy === undefined)
     delete process.env['VOLAM_DEV_LEGACY_SKILLS'];
   else process.env['VOLAM_DEV_LEGACY_SKILLS'] = previousLegacy;
-  await server.shutdown();
+  await server?.shutdown();
 });
 async function join(count = 2) {
   const a = await client.create<MatchRoom>(MATCH_ROOM, {

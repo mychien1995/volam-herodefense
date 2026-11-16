@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 44;
+export const PROTOCOL_VERSION = 45;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -225,6 +225,7 @@ export const skillPreviewActionSchema = z.strictObject({
 export const combatEventSchema = z.strictObject({
   tick: z.number().int().nonnegative().optional(),
   hitIndex: z.number().int().nonnegative().optional(),
+  hitPhase: z.string().min(1).max(64).optional(),
   protocolVersion: z.literal(PROTOCOL_VERSION),
   id: z.number().int().positive(),
   kind: z.enum(['attack', 'hit', 'death', 'cast', 'effect', 'pulse']),

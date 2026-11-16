@@ -86,11 +86,18 @@ export function stepSpinningProjectile(
       )
     )
       continue;
+    const heading =
+      shot.vx || shot.vy
+        ? direction(shot.vx, shot.vy)
+        : direction(target.x - shot.x, target.y - shot.y);
     if (
       hurt(world, target, owner.id, shot.abilityId, shot.rawDamage, config, {
         critChance: shot.critChance ?? 0,
         critMultiplier: shot.critMultiplier ?? config.critMultiplier,
         periodic: true,
+        hitPhase: shot.stage,
+        fx: heading.x,
+        fy: heading.y,
       }) &&
       target.hp > 0
     )

@@ -669,6 +669,12 @@ function advanceProjectile(
               }),
           fx: dir.x,
           fy: dir.y,
+          hitPhase:
+            shot.abilityId === 'huyen_am_chuong'
+              ? shot.stage
+              : shot.abilityId === 'thieu_lam_quyen'
+                ? 'roundhouse_kick'
+                : undefined,
           slowedBonus: shot.effect.slowedBonus,
           armorPenetration: shot.equipmentAttack?.penetration,
           lifesteal: shot.equipmentAttack?.lifesteal,
@@ -754,6 +760,7 @@ function advanceProjectile(
       if (rival && rival.hp > 0 && shot.effect.burnDamage > 0)
         rival.duelBurn = {
           sourceId: shot.ownerId,
+          abilityId: shot.abilityId,
           damage: shot.effect.burnDamage,
           next: world.tick + config.tickRate,
           until: world.tick + shot.effect.burnTicks,
@@ -761,6 +768,7 @@ function advanceProjectile(
       const burned = world.creeps.get(enemy.id);
       if (burned && burned.hp > 0 && shot.effect.burnDamage > 0) {
         burned.burnSource = shot.ownerId;
+        burned.burnAbilityId = shot.abilityId;
         burned.burnDamage = shot.effect.burnDamage;
         burned.burnUntil = world.tick + shot.effect.burnTicks;
         burned.burnNext = world.tick + config.tickRate;
@@ -946,6 +954,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     if (burn && world.tick <= burn.until && world.tick >= burn.next) {
       hurt(world, hero, burn.sourceId, 'burn', burn.damage, config, {
         ...offensiveStats(world, burn.sourceId, config),
+        hitPhase: burn.abilityId,
         periodic: true,
       });
       burn.next += config.tickRate;
@@ -1179,6 +1188,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     ) {
       hurt(world, enemy, enemy.burnSource, 'burn', enemy.burnDamage, config, {
         ...offensiveStats(world, enemy.burnSource, config),
+        hitPhase: enemy.burnAbilityId,
         periodic: true,
       });
       enemy.burnNext += config.tickRate;

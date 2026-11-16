@@ -40,6 +40,8 @@ test(`arena creeps: ${mode} profile with ${players} clients`, async () => {
   expect(statSync(reportPath).mtimeMs).toBeGreaterThanOrEqual(started);
   const report = JSON.parse(readFileSync(reportPath, 'utf8'));
   expect(report.status).toBe('PASS');
+  if (process.env.VOLAM_QA_ARENA_PRODUCTION === '1')
+    expect(report.production).toBe(true);
   expect(Object.keys(report.controlledPoseFrames)).toHaveLength(80);
   expect(Object.values(report.controlledPoseFrames).flat()).toHaveLength(256);
   expect(report.errors).toEqual([]);
@@ -51,5 +53,8 @@ test(`arena creeps: ${mode} profile with ${players} clients`, async () => {
   expect(report.naturalCombat).toBe(mode === 'full');
   expect(report.rewards).toBe(mode === 'full');
   expect(report.finalAcceptance).toBe(mode === 'full');
-  if (mode === 'full') expect(report.sixClients).toBe(true);
+  if (mode === 'full') {
+    expect(report.sixClients).toBe(true);
+    expect(report.productionContacts.matchedHits).toBeGreaterThan(0);
+  }
 });

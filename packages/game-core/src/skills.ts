@@ -558,6 +558,7 @@ function strikeArc(
   heading: { fx: number; fy: number },
   crit: { critChance: number; critMultiplier: number },
   raw?: number,
+  strikePhase?: string,
 ): void {
   const effect = ability.effect;
   if (effect.mode !== 'arc') return;
@@ -614,6 +615,8 @@ function strikeArc(
     });
   if (effect.singleTarget) targets = targets.slice(0, 1);
   const rawDamage = raw ?? damageFor(hero, effect.damage, config, world.tick);
+  // Vi Đà's hand contact ends before its 189-unit ground eruption.
+  const viDaContactReach = 120;
   let hit = false;
   let damageDealt = 0;
   targets.forEach((enemy, i) => {
@@ -632,6 +635,14 @@ function strikeArc(
           fy: heading.fy,
           combo: ability.combo,
           cleaveIndex: i,
+          hitPhase:
+            ability.id === 'vi_da_quyen'
+              ? (enemy.x - hero.x) * heading.fx +
+                  (enemy.y - hero.y) * heading.fy <=
+                viDaContactReach
+                ? 'near'
+                : 'far'
+              : strikePhase,
           armorPenetration: Math.max(
             effect.armorPenetration ?? 0,
             ability.equipmentAttack?.penetration ?? 0,
@@ -1047,6 +1058,7 @@ export function perform(
         ownerId: hero.id,
         abilityId: ability.id,
         kind: 'arc',
+        strikePhase: stage,
         until: world.tick + duration,
         nextTick: world.tick + effect.windupTicks,
         remaining: 1,
@@ -1059,7 +1071,8 @@ export function perform(
         finisherDamage: 0,
         ...crit,
       });
-    } else strikeArc(world, hero, ability, config, hero, crit);
+    } else
+      strikeArc(world, hero, ability, config, hero, crit, undefined, stage);
   } else if (effect.mode === 'support') {
     if (effect.durationTicks > 1)
       applyStatus(
@@ -1689,6 +1702,7 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
           action,
           action,
           action.rawDamage,
+          action.strikePhase,
         );
         cue(
           world,
@@ -1834,6 +1848,12 @@ export function stepSkillActions(world: World, config: SimulationConfig): void {
             config,
             {
               ...action,
+              hitPhase:
+                action.abilityId === 'thien_ha_vo_cau'
+                  ? finish
+                    ? 'finisher'
+                    : 'sweep'
+                  : undefined,
               slowedBonus: e.slowedBonus,
               combo: action.ability?.combo,
               comboTargets: action.comboTargets,

@@ -1,27 +1,24 @@
 import { beforeAll, afterAll, afterEach, it, expect, vi } from 'vitest';
-import { ColyseusTestServer } from '@colyseus/testing';
-import { Client } from '@colyseus/sdk';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import type { DongView } from '@volam/game-core';
-let server: ColyseusTestServer;
-const client = new Client('http://127.0.0.1:2723');
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const options = (nickname: string) => ({
   nickname,
   protocolVersion: PROTOCOL_VERSION,
 });
 beforeAll(async () => {
-  const game = createGameServer();
-  await game.listen(2723);
-  server = new ColyseusTestServer(game);
+  server = await startRoomTestServer();
+  client = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
   vi.unstubAllEnvs();
 });
 afterAll(async () => {
-  await server.shutdown();
+  await server?.shutdown();
 });
 it('two SDK clients observe authoritative recall, bounds, attacks, legacy auto-retry and clear; forged state is rejected', async () => {
   vi.stubEnv('VOLAM_TEST_LEGACY_PROGRESSION', '1');

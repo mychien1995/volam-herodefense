@@ -1,15 +1,13 @@
 import { afterAll, afterEach, beforeAll, expect, it } from 'vitest';
-import { boot, type ColyseusTestServer } from '@colyseus/testing';
 import { m1Config } from '@volam/game-data';
-import { Client } from '@colyseus/sdk';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 
-let server: ColyseusTestServer;
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 const previousLegacy = process.env['VOLAM_DEV_LEGACY_SKILLS'];
 const previous = process.env['VOLAM_INVASION_INTERVAL_SECONDS'];
-const client = new Client('http://localhost:2568');
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const options = (nickname: string) => ({
   nickname,
   protocolVersion: PROTOCOL_VERSION,
@@ -17,16 +15,17 @@ const options = (nickname: string) => ({
 beforeAll(async () => {
   process.env['VOLAM_DEV_LEGACY_SKILLS'] = '1';
   process.env['VOLAM_INVASION_INTERVAL_SECONDS'] = '3';
-  server = await boot(createGameServer(), 2568);
+  server = await startRoomTestServer();
+  client = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
 });
 afterAll(async () => {
   if (previousLegacy === undefined)
     delete process.env['VOLAM_DEV_LEGACY_SKILLS'];
   else process.env['VOLAM_DEV_LEGACY_SKILLS'] = previousLegacy;
-  await server.shutdown();
+  await server?.shutdown();
   if (previous === undefined)
     delete process.env['VOLAM_INVASION_INTERVAL_SECONDS'];
   else process.env['VOLAM_INVASION_INTERVAL_SECONDS'] = previous;

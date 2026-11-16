@@ -1,6 +1,7 @@
 import { ColyseusTestServer } from '@colyseus/testing';
-import { createServer } from 'vite';
+import { createServer, preview } from 'vite';
 import { PROTOCOL_VERSION } from '@volam/game-protocol';
+import { experienceAtLevel, gainExperience } from '@volam/game-core';
 import {
   qaSession,
   requireFreePorts,
@@ -19,6 +20,8 @@ import {
   shouldCaptureArenaCreepPng,
   arenaCreepSavedReport,
 } from './arena-creep-qa-options.mjs';
+const production = process.env.VOLAM_QA_ARENA_PRODUCTION === '1';
+if (production) process.env.NODE_ENV = 'production';
 const options = arenaCreepQaOptions(process.argv.slice(2));
 const session = qaSession({
   profile: 'arena-creeps',
@@ -52,12 +55,27 @@ let server, client, browser;
 const wait = (fn, label, timeout = 12000) =>
   waitForQa(fn, label, {
     timeout,
-    diagnostics: async () => ({
-      errors: errors.slice(-8),
-      ...(contexts[0]?.pages()[0]
-        ? { snapshot: await read(contexts[0].pages()[0]) }
-        : {}),
-    }),
+    diagnostics: async () => {
+      const page = contexts[0]?.pages()[0];
+      if (!page) return { errors: errors.slice(-8) };
+      const { state } = await read(page);
+      const view = await inspect(page);
+      return {
+        errors: errors.slice(-8),
+        phase: state?.phase,
+        tick: state?.tick,
+        creeps: view.actors
+          .filter((a) => a.wave)
+          .map(({ id, animation, pose, frame, hp }) => ({
+            id,
+            animation,
+            pose,
+            frame,
+            hp,
+          }))
+          .slice(0, 16),
+      };
+    },
   });
 const read = (p) => p.evaluate(() => window.__VOLAM__.snapshot()),
   inspect = (p) => p.evaluate(() => window.__VOLAM__.presentation());
@@ -77,24 +95,34 @@ try {
     runId: session.runId,
     protocolVersion: PROTOCOL_VERSION,
   });
-  client = await createServer({
+  const vite = {
     root: resolve(root, 'apps/game-client'),
     configFile: false,
     cacheDir: session.cacheDir,
     plugins: [qaIdentityPlugin(session)],
-    server: {
-      host: '127.0.0.1',
-      port: session.clientPort,
-      strictPort: true,
-      watch: null,
-      hmr: false,
-    },
-    define: {
-      'import.meta.env.VITE_SERVER_URL': JSON.stringify(session.serverUrl),
-    },
-  });
-  owned.add(() => client.close());
-  await client.listen();
+  };
+  const address = {
+    host: '127.0.0.1',
+    port: session.clientPort,
+    strictPort: true,
+  };
+  if (production) {
+    client = await preview({ ...vite, preview: address });
+    owned.add(() => client.close());
+    await verifyQaIdentity(`${session.clientUrl}/volam-build-endpoint.json`, {
+      serverUrl: session.serverUrl,
+    });
+  } else {
+    client = await createServer({
+      ...vite,
+      server: { ...address, watch: null, hmr: false },
+      define: {
+        'import.meta.env.VITE_SERVER_URL': JSON.stringify(session.serverUrl),
+      },
+    });
+    owned.add(() => client.close());
+    await client.listen();
+  }
   await verifyQaIdentity(`${session.clientUrl}/__volam_qa_identity`, {
     service: 'volam-qa-client',
     runId: session.runId,
@@ -107,7 +135,8 @@ try {
   let roomId;
   for (let n = 0; n < options.players; n++) {
     const context = await browser.newContext({
-      viewport: { width: n === 0 ? 1920 : 1280, height: n === 0 ? 1080 : 720 },
+      viewport:
+        n === 0 ? { width: 1920, height: 1080 } : { width: 960, height: 640 },
       deviceScaleFactor: 1,
     });
     contexts.push(context);
@@ -123,35 +152,36 @@ try {
     p.on('requestfailed', (r) =>
       errors.push(r.url() + ' ' + r.failure()?.errorText),
     );
-    await p.goto(session.clientUrl + '/?debug=1');
-    await p.locator('[data-action=play]').click(); await p.locator('#pre-nickname').fill('Creep QA ' + (n + 1));
+    // The original atlas assertions run against the retained renderer. Two
+    // peers in the full match also verify the default production contact art.
+    const modern = options.mode === 'full' && n >= options.players - 2;
+    await p.goto(
+      session.clientUrl +
+        (modern ? '/?debug=1' : '/?debug=1&renovationSkills=old'),
+      {
+        waitUntil: 'domcontentloaded',
+      },
+    );
+    await p.locator('#pregame [data-action=play]').click();
+    await p.locator('#pre-nickname').fill('Creep QA ' + (n + 1));
     await p.getByRole('button', { name: 'Vào game', exact: true }).click();
     if (roomId) {
-      // Wait for the authoritative room-list response before interacting. A list
-      // refresh may replace the code form between its fill and submit.
-      await p.locator(`[data-action=join][data-room="${roomId}"]`).click();
+      await p
+        .locator('#pregame')
+        .getByLabel('Mã phòng', { exact: true })
+        .fill(roomId);
+      await p.getByRole('button', { name: 'Vào bằng mã', exact: true }).click();
     } else
-      await p.getByRole('button', { name: 'Create room', exact: true }).click();
+      await p.getByRole('button', { name: 'Tạo phòng', exact: true }).click();
     await waitForQa(
       async () => {
         const state = await read(p);
-        const notice = await p.locator('.pre-error').textContent();
         if (state.roomId && roomId && state.roomId !== roomId)
           throw Error(
             `Client ${n + 1} joined wrong room ${state.roomId}, expected ${roomId}`,
           );
         if (state.roomId && state.state?.players?.[state.sessionId])
           return true;
-        // An older room-list fetch can finish after connect starts. Its notice is
-        // not a join rejection; check the owned service rather than trust that text.
-        if (notice?.startsWith('Room list unavailable'))
-          await verifyQaIdentity(`${session.serverUrl}/health`, {
-            runId: session.runId,
-          });
-        else if (notice && notice !== 'Connecting…')
-          throw Error(
-            `Client ${n + 1} join rejected: ${notice}; ${JSON.stringify(state)}`,
-          );
         return false;
       },
       `client ${n + 1} authoritative room join`,
@@ -165,23 +195,83 @@ try {
     );
     roomId ??= (await read(p)).roomId;
   }
-  await pages[0]
-    .getByRole('button', { name: 'Start Game', exact: true })
-    .click();
-  for (const p of pages) {
-    await p.locator('[data-school=cai_bang]').click();
-    await p
-      .getByRole('button', { name: 'Confirm Selection', exact: true })
-      .click();
-  }
-  await wait(
-    async () => (await read(pages.at(-1))).state.phase === 'IN_GAME',
-    `${options.players}-player game start`,
+  const room = server.getRoomById(roomId);
+  const acknowledge = (page, selector, ready) =>
+    waitForQa(
+      async () => {
+        if (ready()) return true;
+        await page.evaluate((selector) => {
+          const button = document.querySelector(selector);
+          if (button && !button.disabled) button.click();
+        }, selector);
+        return ready();
+      },
+      'server lobby ' + selector,
+      {
+        timeout: 45000,
+        interval: 250,
+        diagnostics: () =>
+          page.evaluate(() => ({
+            phase: window.__VOLAM__.snapshot().state?.phase,
+            error: document.querySelector('.pre-error')?.textContent,
+            confirm: document.querySelector('[data-action=confirm]')
+              ?.textContent,
+          })),
+      },
+    );
+  await acknowledge(
+    pages[0],
+    '#pregame [data-action=start]',
+    () => room.state.phase === 'SCHOOL_SELECTION',
   );
-  await wait(async () => (await inspect(pages[0])).ready, 'Phaser ready');
+  for (const [index, page] of pages.entries()) {
+    const { sessionId } = await read(page);
+    const player = room.state.players.get(sessionId);
+    assert(player);
+    const branch = index < 4 ? 'cai_bang_bong' : 'cai_bang_chuong';
+    await acknowledge(
+      page,
+      '#pregame [data-school=cai_bang]',
+      () => player.schoolId === 'cai_bang',
+    );
+    await acknowledge(
+      page,
+      `#pregame [data-branch=${branch}]`,
+      () => player.selectedBranch === branch,
+    );
+    await acknowledge(
+      page,
+      '#pregame [data-action=confirm]',
+      () => player.confirmed,
+    );
+  }
+  for (const page of pages) {
+    await wait(
+      async () =>
+        (await read(page)).state.phase === 'IN_GAME' &&
+        (await inspect(page)).ready,
+      'authoritative match and Phaser ready',
+      30000,
+    );
+  }
+  const retainedPeers = options.mode === 'full' ? pages.slice(0, -2) : pages;
+  // The legacy skill query alone still uses rotated/high-resolution creep bodies.
+  // Bind the original atlas audit to the retained Phaser renderer in these peers.
+  await Promise.all(
+    retainedPeers.map((page) =>
+      page.evaluate(
+        () =>
+          new Promise((ready) => {
+            window.__VOLAM__.afterRender((renderer) => {
+              renderer.game.registry.set('renovation-enabled', false);
+              ready();
+            });
+          }),
+      ),
+    ),
+  );
   mark(`${options.players} browser clients joined and ready`);
-  const room = server.getRoomById(roomId),
-    definition = JSON.stringify(room.simulation.invasion.definition),
+  const definition = JSON.stringify(room.simulation.invasion.definition),
     saved = new Map();
   let sameWavePeer;
   assert.equal(room.world.heroes.size, options.players);
@@ -203,6 +293,9 @@ try {
       );
     room.world.creeps.clear();
   }
+  // The director now streams each wave. The gallery owns the captured actors
+  // and should not keep spawning the rest of those sixteen streams behind them.
+  room.simulation.invasion.streams.length = 0;
   room.simulation.invasion.nextWaveTick =
     room.world.tick + room.simulation.invasion.definition.intervalTicks;
   const heroes = [...room.world.heroes.values()];
@@ -214,17 +307,9 @@ try {
     h.moveX = 0;
     h.moveY = 0;
   });
-  const stun = (e) => {
-    e.statuses = [
-      {
-        kind: 'stun',
-        sourceId: 'qa_server_fixture',
-        abilityId: 'qa_pose',
-        durationTicks: 3000,
-        magnitude: 1,
-        until: room.world.tick + 3000,
-      },
-    ];
+  const holdFixturePose = (e) => {
+    e.controlled = true;
+    e.statuses = [];
     e.cooldown = room.world.tick + 3000;
     e.actionUntil = room.world.tick + 3000;
     e.hurtUntil = 0;
@@ -245,7 +330,7 @@ try {
       e.hp = pose === 'death' ? 0 : e.maxHp;
       e.respawnAt = room.world.tick + 3000;
       e.pose = pose;
-      stun(e);
+      holdFixturePose(e);
       room.world.creeps.set(e.id, e);
     }
   };
@@ -285,6 +370,9 @@ try {
     await waitForWaves([9, 10, 11, 12]);
     await shot(pages[0], 'arena-waves-09-12.png');
   }
+  const manifests = JSON.parse(
+    readFileSync('assets/arena_creeps.manifest.json', 'utf8'),
+  );
   // Two genuine Wave13 spawns share a texture but retain independent animation state.
   assert(sameWavePeer);
   arrange([13]);
@@ -296,24 +384,31 @@ try {
     fy: 0,
     pose: 'walk',
   });
-  stun(sameWavePeer);
+  holdFixturePose(sameWavePeer);
   room.world.creeps.set(sameWavePeer.id, sameWavePeer);
   await wait(async () => {
     const a = (await inspect(pages[0])).actors;
     return (
       a.some(
-        (v) => v.id === saved.get(13).id && v.animation.endsWith(':idle:down'),
+        (v) => v.id === saved.get(13).id && v.animation?.endsWith(':idle:down'),
       ) &&
       a.some(
-        (v) => v.id === sameWavePeer.id && v.animation.endsWith(':walk:right'),
+        (v) => v.id === sameWavePeer.id && v.animation?.endsWith(':walk:right'),
       )
     );
   }, 'independent same-texture actors');
+  const ember = manifests.effects.find(
+    (effect) => effect.id === 'demon_hound_embers',
+  );
+  assert(ember);
+  await wait(async () => {
+    const { observedFrames } = (await inspect(pages[0])).creepEffects;
+    return ember.frames.every((frame) =>
+      observedFrames.includes(ember.texture + ':' + frame),
+    );
+  }, 'all walking ember cels before removing the walking actor');
   await shot(pages[0], 'arena-independent-instances.png');
   mark('director fixtures and existing-art regression gallery');
-  const manifests = JSON.parse(
-    readFileSync('assets/arena_creeps.manifest.json', 'utf8'),
-  );
   const frameCoverage = new Map();
   for (const state of options.combatOnly
     ? []
@@ -403,14 +498,14 @@ try {
           async () =>
             (await inspect(pages[0])).actors
               .filter((a) => a.wave >= 13 && a.wave <= 16)
-              .every((a) => a.animation.endsWith(':idle:down')),
+              .every((a) => a.animation?.endsWith(':idle:down')),
           'idle transition',
         );
       }
     }
   }
   mark('all authored directional frames and complete animation cycles');
-  // Inspect the same production actors at native pixels and across an existing foreground tree.
+  // Inspect the same production actors at native pixels and across the current arena statue.
   arrange([13, 14, 15, 16], 'idle', 'down');
   await pages[0].setViewportSize({ width: 900, height: 560 });
   await wait(
@@ -434,12 +529,13 @@ try {
   await shot(pages[0], 'arena-native-1x.png');
   await pages[0].setViewportSize({ width: 1920, height: 1080 });
   const home = { x: heroes[0].x, y: heroes[0].y };
-  heroes[0].x = 1100;
-  heroes[0].y = 880;
+  const { x: statueX, y: statueY } = room.world.statue;
+  heroes[0].x = statueX - 100;
+  heroes[0].y = statueY + 70;
   arrange([16]);
   const brute = saved.get(16);
-  brute.x = 1220;
-  brute.y = 842;
+  brute.x = statueX;
+  brute.y = statueY - 28;
   const waitForBruteY = (y) =>
     wait(async () => {
       const actor = (await inspect(pages[0])).actors.find(
@@ -447,19 +543,19 @@ try {
       );
       return !!actor && Math.abs(actor.y - y) < 1;
     }, 'authoritative brute Y=' + y);
-  await waitForBruteY(842);
-  const behind = await inspect(pages[0]),
-    tree = behind.trees.find((t) => t.x === 1220 && t.y === 870);
-  assert(tree);
-  assert(behind.actors.find((a) => a.id === brute.id).depth < tree.depth);
-  await shot(pages[0], 'arena-brute-behind-tree.png');
-  brute.y = 920;
-  await waitForBruteY(920);
+  await waitForBruteY(statueY - 28);
+  const behind = await inspect(pages[0]);
+  const statue = behind.trees.find((t) => t.x === statueX && t.y === statueY);
+  assert(statue);
+  assert(behind.actors.find((a) => a.id === brute.id).depth < statue.depth);
+  await shot(pages[0], 'arena-brute-behind-statue.png');
+  brute.y = statueY + 50;
+  await waitForBruteY(statueY + 50);
   const front = await inspect(pages[0]);
-  assert(front.actors.find((a) => a.id === brute.id).depth > tree.depth);
-  await shot(pages[0], 'arena-brute-in-front-of-tree.png');
+  assert(front.actors.find((a) => a.id === brute.id).depth > statue.depth);
+  await shot(pages[0], 'arena-brute-in-front-of-statue.png');
   const depthEvidence = {
-    tree,
+    statue,
     behind: behind.actors.find((a) => a.id === brute.id),
     front: front.actors.find((a) => a.id === brute.id),
   };
@@ -512,14 +608,27 @@ try {
     'server-owned projectile rendering',
   );
   const projectileTick = (await read(pages[0])).state.tick;
-  await wait(
-    async () => (await read(pages[0])).state.tick > projectileTick + 1,
-    'projectile authoritative advancement',
-  );
-  const projectileSample = await pages[0].evaluate(() => ({
-    presentation: window.__VOLAM__.presentation(),
-    snapshot: window.__VOLAM__.snapshot(),
-  }));
+  let projectileSample;
+  await wait(async () => {
+    // A network patch may arrive between game frames. Inspect the snapshot
+    // after Phaser has rendered that update, rather than in an arbitrary CDP turn.
+    projectileSample = await pages[0].evaluate(
+      () =>
+        new Promise((resolve) => {
+          const debug = window.__VOLAM__;
+          debug.afterRender(() =>
+            resolve({
+              presentation: debug.presentation(),
+              snapshot: debug.snapshot(),
+            }),
+          );
+        }),
+    );
+    return (
+      projectileSample.snapshot.state.tick > projectileTick + 1 &&
+      projectileSample.presentation.creepEffects.projectiles.length === 2
+    );
+  }, 'rendered authoritative projectile advancement');
   const projectileView = projectileSample.presentation;
   for (const sprite of projectileView.creepEffects.projectiles) {
     const state = projectileSample.snapshot.state.projectiles[sprite.id];
@@ -535,6 +644,19 @@ try {
     );
     projectileFixture.observations.push({ sprite, state });
   }
+  const projectileEffects = manifests.effects.filter(
+    (effect) =>
+      effect.texture === 'arena_creep_demon_fx' && effect.kind === 'projectile',
+  );
+  assert.equal(projectileEffects.length, 2);
+  await wait(async () => {
+    const { observedFrames } = (await inspect(pages[0])).creepEffects;
+    return projectileEffects.every((effect) =>
+      effect.frames.every((frame) =>
+        observedFrames.includes(effect.texture + ':' + frame),
+      ),
+    );
+  }, 'all projectile cels before removing the projectiles');
   await shot(pages[0], 'arena-projectile-renderer-fixture.png');
   for (const id of ['qa_demon_projectile_14', 'qa_demon_projectile_15'])
     room.world.projectiles.delete(id);
@@ -573,15 +695,22 @@ try {
   );
   mark('authoritative peer movement');
   let naturalCombat = false;
+  let productionContacts;
+  let startingXp;
   const ids = [...room.world.creeps.keys()];
   if (options.mode === 'full') {
     // Natural AI attacks/hits at unchanged stats. No fake combat messages or HP injection.
-    for (const p of pages.slice(4)) {
-      await p.locator('[data-menu=settings]').click();
-      await p.locator('#dialog-content [data-menu=skills]').click();
-      await p.getByLabel('Normal attack · A').selectOption('cai_bang_chuong');
-      await p.keyboard.press('Escape');
-    }
+    assert.deepEqual(
+      heroes.map((h) => h.basicId),
+      [
+        'cai_bang_bong',
+        'cai_bang_bong',
+        'cai_bang_bong',
+        'cai_bang_bong',
+        'cai_bang_chuong',
+        'cai_bang_chuong',
+      ],
+    );
     for (const h of heroes)
       requireQaActor(
         room.world.heroes.get(h.id),
@@ -589,8 +718,91 @@ try {
         'arena',
         room.simulation.zoneOf(h.id)?.id,
       );
-    const naturalStart = (await inspect(pages[0])).sceneTime;
+    const modernPeers = pages.slice(-2);
+    await Promise.all(
+      modernPeers.map((page) =>
+        page.evaluate(
+          () =>
+            new Promise((ready) => {
+              const debug = window.__VOLAM__;
+              debug.afterRender((renderer) => {
+                const scene = renderer.game.scene.scenes.find(
+                  (s) => typeof s.combat === 'function',
+                );
+                const pending = new Map();
+                const drawn = new Map();
+                const combat = scene.combat;
+                scene.combat = function (hit) {
+                  const candidate =
+                    hit.kind === 'hit' &&
+                    hit.abilityId === 'cai_bang_bong' &&
+                    hit.damage > 0;
+                  const before = candidate
+                    ? new Set(scene.children.list)
+                    : undefined;
+                  combat.call(this, hit);
+                  if (!before) return;
+                  const sprite = scene.children.list.find(
+                    (node) =>
+                      !before.has(node) &&
+                      node.texture?.key === 'contact-impacts-v01',
+                  );
+                  if (sprite) pending.set(sprite, hit);
+                };
+                const observe = () => {
+                  const rendered = new Set(scene.cameras.main.renderList);
+                  for (const [sprite, hit] of pending) {
+                    if (!sprite.scene) pending.delete(sprite);
+                    else if (
+                      rendered.has(sprite) &&
+                      sprite.visible &&
+                      sprite.alpha > 0
+                    ) {
+                      const sample = drawn.get(hit.id) ?? {
+                        ...hit,
+                        frames: [],
+                      };
+                      if (!sample.frames.includes(sprite.frame.name))
+                        sample.frames.push(sprite.frame.name);
+                      drawn.set(hit.id, sample);
+                    }
+                  }
+                  debug.afterRender(observe);
+                };
+                window.__arenaQaContacts = () => [...drawn.values()];
+                debug.afterRender(observe);
+                ready();
+              });
+            }),
+        ),
+      ),
+    );
+    // All six clients stay active. Use a regular-sized viewport for live
+    // animation observations so six software renderers can keep their cadence.
+    await pages[0].setViewportSize({ width: 960, height: 640 });
+    const naturalStart = await Promise.all(
+      retainedPeers.map(async (p) => (await inspect(p)).sceneTime),
+    );
+    const naturalAnimations = async () =>
+      (
+        await Promise.all(
+          retainedPeers.map((p) =>
+            p.evaluate(
+              () => window.__VOLAM__.presentation().completedAnimations,
+            ),
+          ),
+        )
+      ).flatMap((animations, i) =>
+        animations.filter((a) => a.at >= naturalStart[i]),
+      );
+    const phaseObserved = (animations, id, phase) =>
+      animations.some((a) => a.id === id && a.key.includes(':' + phase + ':'));
     arrange([13, 14, 15, 16]);
+    const config = room.simulation.zoneOf(heroes[0].id).config;
+    const partyLevel = config.campaign?.targets[2] ?? 18;
+    for (const h of heroes)
+      gainExperience(h, experienceAtLevel(partyLevel, config) - h.xp, config);
+    startingXp = new Map(heroes.map((h) => [h.id, h.xp]));
     heroes.forEach((h, i) => {
       h.x = i < 4 ? 700 + i * 130 : 830 + (i - 4) * 130;
       h.y = i < 4 ? 660 : 735;
@@ -600,6 +812,7 @@ try {
       h.moveY = 0;
     });
     for (const e of room.world.creeps.values()) {
+      e.controlled = false;
       e.statuses = [];
       e.actionUntil = room.world.tick;
       e.cooldown = room.world.tick;
@@ -607,6 +820,11 @@ try {
       e.invasion.targetId = '';
       e.invasion.reacquireAt = 0;
       e.invasion.chaseOrigin = { x: e.x, y: e.y };
+      const runtime = room.world.creepCombat?.actors.get(e.id);
+      assert(runtime);
+      // Exercise the ordinary attack route from all four creeps, including
+      // the imp whose self-destructing special otherwise preempts a player kill.
+      runtime.nextSpecial = room.world.tick + 90 * config.tickRate;
     }
     await wait(
       async () =>
@@ -618,19 +836,49 @@ try {
     const afterAttacks = await read(pages[0]);
     assert(
       afterAttacks.events.some(
-        (e) => e.abilityId === 'creep_strike' && e.kind === 'hit',
+        (e) =>
+          e.kind === 'hit' &&
+          /^creep_wave_(13|14|15|16)_basic$/.test(e.abilityId),
       ),
     );
     // Each real browser drives its own normal A key. A slow primary-page PNG must not
     // pause every player's input while authoritative enemy attacks keep advancing.
     await Promise.all(pages.map((p) => p.locator('#game canvas').focus()));
-    const end = Date.now() + 30000;
+    // Observe one complete hurt animation per target before the simultaneous
+    // attacks can legitimately interrupt it with death.
+    const injured = [...room.world.creeps.values()];
+    const previousCooldowns = injured.map((e) => e.cooldown);
+    for (const e of injured)
+      e.cooldown = room.world.tick + 15 * config.tickRate;
+    await wait(
+      () => injured.every((e) => e.pose === 'idle' || e.pose === 'walk'),
+      'ordinary enemy windups have finished',
+    );
+    for (const [index, e] of injured.entries()) {
+      const hp = e.hp;
+      await pages[index].keyboard.press('KeyA');
+      await wait(() => e.hp > 0 && e.hp < hp, 'real nonlethal A on ' + e.id);
+      await wait(
+        async () => phaseObserved(await naturalAnimations(), e.id, 'hurt'),
+        'natural hurt animation completes on ' + e.id,
+      );
+    }
+    for (const [index, e] of injured.entries())
+      e.cooldown = previousCooldowns[index];
+
+    const end = Date.now() + 70000;
+    const finalCombatTick = room.world.tick + 30 * config.tickRate;
     let driving = true;
     const alive = () =>
       ids.some((id) => (room.world.creeps.get(id)?.hp ?? 0) > 0);
     const drivers = pages.map(async (p, index) => {
       const h = heroes[index];
-      while (driving && Date.now() < end && alive()) {
+      while (
+        driving &&
+        Date.now() < end &&
+        room.world.tick < finalCombatTick &&
+        alive()
+      ) {
         requireQaActor(
           room.world.heroes.get(h.id),
           h.id,
@@ -683,6 +931,10 @@ try {
       await wait(
         () => {
           if (driverError) throw driverError;
+          assert(
+            !alive() || room.world.tick < finalCombatTick,
+            'four A kills within 30 simulation seconds',
+          );
           for (const h of heroes)
             requireQaActor(
               room.world.heroes.get(h.id),
@@ -703,41 +955,33 @@ try {
       ids.every((id) => (room.world.creeps.get(id)?.hp ?? 0) === 0),
       'all four enemies killed by real A commands',
     );
-    await wait(
-      async () => {
-        const view = await inspect(pages[0]);
-        return ids.every((id) =>
-          ['hurt', 'death'].every((state) =>
-            view.completedAnimations.some(
-              (a) =>
-                a.id === id &&
-                a.at >= naturalStart &&
-                a.key.includes(':' + state + ':'),
-            ),
-          ),
-        );
-      },
-      'natural hurt and death animation completion',
-      6000,
-    );
+    await wait(async () => {
+      const animations = await naturalAnimations();
+      return ids.every((id) =>
+        ['hurt', 'death'].every((phase) =>
+          phaseObserved(animations, id, phase),
+        ),
+      );
+    }, 'natural hurt and death animation completion');
     await shot(pages[0], 'arena-natural-deaths.png');
-    const completed = await inspect(pages[0]);
-    for (const id of ids) {
-      assert(
-        completed.completedAnimations.some(
-          (a) =>
-            a.id === id && a.at >= naturalStart && a.key.includes(':death:'),
-        ),
-        'natural death completes ' + id,
+    await wait(async () => {
+      const [first, second] = await Promise.all(
+        modernPeers.map((p) => p.evaluate(() => window.__arenaQaContacts())),
       );
-      assert(
-        completed.completedAnimations.some(
-          (a) =>
-            a.id === id && a.at >= naturalStart && a.key.includes(':hurt:'),
-        ),
-        'natural hurt completes ' + id,
+      const pairs = first.filter(
+        (hit) =>
+          ids.includes(hit.targetId) &&
+          second.some(
+            (peer) =>
+              peer.id === hit.id &&
+              peer.targetId === hit.targetId &&
+              peer.damage === hit.damage,
+          ),
       );
-    }
+      if (!pairs.length) return false;
+      productionContacts = { matchedHits: pairs.length, example: pairs[0] };
+      return true;
+    }, 'default renderer draws the same server-confirmed contact on two peers');
     naturalCombat = true;
     mark('six-player natural combat, hurt, death and rewards');
   }
@@ -774,7 +1018,11 @@ try {
       bState.state.creeps[id]?.hp ?? 0,
     );
   if (naturalCombat)
-    assert(Object.values(aState.state.players).some((h) => h.xp > 0));
+    assert(
+      Object.entries(aState.state.players).some(
+        ([id, h]) => h.xp > startingXp.get(id),
+      ),
+    );
   assert.equal(JSON.stringify(room.simulation.invasion.definition), definition);
   for (const [wave, e] of saved)
     assert.equal(JSON.stringify(e.stats), sourceStats.get(wave));
@@ -784,7 +1032,9 @@ try {
     status: 'PASS',
     runId: session.runId,
     services: { client: session.clientUrl, server: session.serverUrl },
-    fixture: `Actual ${options.players}-browser MatchRoom/ArenaScene. Director deadlines triggered in a server-owned fixture for Waves1–16; normal production180s cadence/stat recipes unmodified. Existing stun used only for deterministic pose coverage. ${naturalCombat ? 'Natural AI and real A inputs used for combat.' : 'FRAME ITERATION ONLY: no natural combat, contact-hit or reward verification; final six-player pass remains required.'}`,
+    production,
+    productionContacts,
+    fixture: `Actual ${options.players}-browser MatchRoom/ArenaScene. Director deadlines triggered in a server-owned fixture for Waves1–16; normal production180s cadence/stat recipes unmodified. Controlled enemies are used only to pose the gallery. ${naturalCombat ? 'A level-appropriate party uses real A inputs against live AI. Special cooldowns isolate the ordinary enemy attack route.' : 'FRAME ITERATION ONLY: no natural combat, contact-hit or reward verification; final six-player pass remains required.'}`,
     mode: options.mode,
     evidence: options.evidence,
     playerCount: options.players,

@@ -1,31 +1,28 @@
 import { beforeAll, afterAll, afterEach, it, expect } from 'vitest';
-import { ColyseusTestServer } from '@colyseus/testing';
-import { Client } from '@colyseus/sdk';
 import {
   MATCH_ROOM,
   PROTOCOL_VERSION,
   type LobbyState,
 } from '@volam/game-protocol';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { addCreep, stepCreepHazards } from '@volam/game-core';
-let server: ColyseusTestServer;
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 const saved = process.env['VOLAM_DEV_CREEP_TEST'];
 beforeAll(async () => {
   process.env['VOLAM_DEV_CREEP_TEST'] = '1';
-  const game = createGameServer();
-  await game.listen(2930);
-  server = new ColyseusTestServer(game);
+  server = await startRoomTestServer();
+  client = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
 });
 afterAll(async () => {
-  await server.shutdown();
+  await server?.shutdown();
   if (saved === undefined) delete process.env['VOLAM_DEV_CREEP_TEST'];
   else process.env['VOLAM_DEV_CREEP_TEST'] = saved;
 });
-const client = new Client('http://127.0.0.1:2930');
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const opts = (nickname: string, portalCount = 2) => ({
   nickname,
   protocolVersion: PROTOCOL_VERSION,

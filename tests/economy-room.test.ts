@@ -1,7 +1,5 @@
 import { afterAll, afterEach, beforeAll, expect, it } from 'vitest';
-import { ColyseusTestServer } from '@colyseus/testing';
-import { Client } from '@colyseus/sdk';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import {
   MATCH_ROOM,
@@ -9,22 +7,21 @@ import {
   type LobbyState,
 } from '@volam/game-protocol';
 
-let server: ColyseusTestServer;
-const sdk = new Client('http://localhost:2673');
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
+let sdk: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const opts = (nickname: string) => ({
   nickname,
   protocolVersion: PROTOCOL_VERSION,
 });
 beforeAll(async () => {
-  const app = createGameServer();
-  await app.listen(2673);
-  server = new ColyseusTestServer(app);
+  server = await startRoomTestServer();
+  sdk = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
 });
 afterAll(async () => {
-  await server.shutdown();
+  await server?.shutdown();
 });
 it('authorizes purchases, rejects replays/stale spends and replicates gear/resources to peers', async () => {
   const a = await sdk.create<LobbyState>(MATCH_ROOM, opts('Buyer'));
@@ -93,7 +90,9 @@ it('authorizes purchases, rejects replays/stale spends and replicates gear/resou
     action: 'use-potion',
     potionId: 'hp_small',
   });
-  await expect.poll(() => a.state.players.get(a.sessionId)!.hp).toBeGreaterThanOrEqual(110);
+  await expect
+    .poll(() => a.state.players.get(a.sessionId)!.hp)
+    .toBeGreaterThanOrEqual(110);
   await expect
     .poll(() =>
       a.state.players.get(a.sessionId)!.inventory.potions.get('hp_small'),
