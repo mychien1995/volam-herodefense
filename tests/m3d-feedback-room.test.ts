@@ -1,7 +1,14 @@
-import { beforeAll, afterAll, afterEach, describe, it, expect, vi } from 'vitest';
-import { ColyseusTestServer } from '@colyseus/testing';
-import { Client, type Room } from '@colyseus/sdk';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import {
+  beforeAll,
+  afterAll,
+  afterEach,
+  describe,
+  it,
+  expect,
+  vi,
+} from 'vitest';
+import type { Room } from '@colyseus/sdk';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import {
   MATCH_ROOM,
@@ -9,8 +16,8 @@ import {
   type DungeonAction,
 } from '@volam/game-protocol';
 import { creepDungeon, hongLietDungeon } from '@volam/game-data';
-let server: ColyseusTestServer;
-const client = new Client('http://127.0.0.1:2579');
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const sequence = new Map<string, number>();
 type Request<T = DungeonAction> = T extends DungeonAction
   ? Omit<T, 'protocolVersion' | 'sequence'>
@@ -25,17 +32,16 @@ const send = (r: Room<MatchRoom>, action: Request) => {
   });
 };
 beforeAll(async () => {
-  const game = createGameServer();
-  await game.listen(2579);
-  server = new ColyseusTestServer(game);
+  server = await startRoomTestServer();
+  client = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
   sequence.clear();
   vi.unstubAllEnvs();
 });
 afterAll(async () => {
-  await server.shutdown();
+  await server?.shutdown();
 });
 async function join() {
   const a = await client.create<MatchRoom>(MATCH_ROOM, {

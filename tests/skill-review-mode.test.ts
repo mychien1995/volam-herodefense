@@ -1,7 +1,5 @@
 import { beforeAll, afterAll, afterEach, it, expect } from 'vitest';
-import { ColyseusTestServer } from '@colyseus/testing';
-import { Client } from '@colyseus/sdk';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import {
   MATCH_ROOM,
@@ -16,23 +14,22 @@ const keys = [
   'VOLAM_DEV_PRACTICE_CREEPS',
 ] as const;
 const saved = Object.fromEntries(keys.map((k) => [k, process.env[k]]));
-let server: ColyseusTestServer;
-const client = new Client('http://localhost:2960');
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 beforeAll(async () => {
   process.env['VOLAM_DEV_PRACTICE_CREEPS'] = '1';
-  const app = createGameServer();
-  await app.listen(2960);
-  server = new ColyseusTestServer(app);
+  server = await startRoomTestServer();
+  client = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
   for (const k of keys) {
     if (saved[k] === undefined) delete process.env[k];
     else process.env[k] = saved[k];
   }
 });
 afterAll(async () => {
-  await server.shutdown();
+  await server?.shutdown();
 });
 const options = (nickname: string) => ({
   nickname,

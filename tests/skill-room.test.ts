@@ -1,17 +1,15 @@
 import { afterAll, afterEach, beforeAll, it, expect } from 'vitest';
-import { ColyseusTestServer } from '@colyseus/testing';
-import { Client } from '@colyseus/sdk';
 import {
   MATCH_ROOM,
   PROTOCOL_VERSION,
   type LobbyState,
 } from '@volam/game-protocol';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
-let server: ColyseusTestServer;
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 const previousLegacy = process.env['VOLAM_DEV_LEGACY_SKILLS'];
 const previous = process.env['VOLAM_DEV_SKILLS'];
-const client = new Client('http://localhost:2626');
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const opts = (nickname: string) => ({
   nickname,
   protocolVersion: PROTOCOL_VERSION,
@@ -24,12 +22,11 @@ beforeAll(async () => {
   process.env['VOLAM_DEV_PRACTICE_CREEPS'] = '1';
   process.env['VOLAM_DEV_LEGACY_SKILLS'] = '1';
   process.env['VOLAM_DEV_SKILLS'] = '1';
-  const gameServer = createGameServer();
-  await gameServer.listen(2626);
-  server = new ColyseusTestServer(gameServer);
+  server = await startRoomTestServer();
+  client = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
 });
 afterAll(async () => {
   if (previousPracticeCreeps === undefined)

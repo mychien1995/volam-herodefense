@@ -75,6 +75,10 @@ if (process.env.VOLAM_QA_SERVER_PORT) {
 }
 // Validate overrides before asset preparation; no cached stage success is consumed.
 const session = qaWorkflowSession(mode, args);
+if (mode === 'final' && session.profile === 'arena-creeps') {
+  process.env.VITE_SERVER_URL ??= session.serverUrl;
+  process.env.VOLAM_QA_ARENA_PRODUCTION = '1';
+}
 if (session.cacheDir) process.env.VOLAM_QA_VITE_CACHE ??= session.cacheDir;
 const elapsed = performance.now();
 const reportDirectory = resolve(

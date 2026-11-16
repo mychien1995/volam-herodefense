@@ -1,19 +1,16 @@
 import { beforeAll, afterAll, afterEach, it, expect } from 'vitest';
-import { ColyseusTestServer } from '@colyseus/testing';
-import { Client } from '@colyseus/sdk';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
 import { spawnNamDeIfReady, beginNamDeCast } from '@volam/game-core';
-let server: ColyseusTestServer;
-const client = new Client('http://127.0.0.1:2814');
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 beforeAll(async () => {
-  const game = createGameServer();
-  await game.listen(2814);
-  server = new ColyseusTestServer(game);
+  server = await startRoomTestServer();
+  client = server.sdk;
 });
-afterEach(async () => server.cleanup());
-afterAll(async () => server.shutdown());
+afterEach(async () => server?.cleanup());
+afterAll(async () => server?.shutdown());
 it('real SDK reveals only owner QTE; rejects forged owner/order/replay, closes after10 valid keys', async () => {
   const a = await client.create<MatchRoom>(MATCH_ROOM, {
       nickname: 'Nam A',

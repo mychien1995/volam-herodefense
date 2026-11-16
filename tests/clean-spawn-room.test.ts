@@ -1,15 +1,13 @@
 import { beforeAll, afterAll, afterEach, it, expect } from 'vitest';
-import { ColyseusTestServer } from '@colyseus/testing';
-import { Client } from '@colyseus/sdk';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import {
   MATCH_ROOM,
   PROTOCOL_VERSION,
   type LobbyState,
 } from '@volam/game-protocol';
-let server: ColyseusTestServer;
-const client = new Client('http://localhost:2654');
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const saved = {
   node: process.env['NODE_ENV'],
   practice: process.env['VOLAM_DEV_PRACTICE_CREEPS'],
@@ -17,12 +15,11 @@ const saved = {
 beforeAll(async () => {
   process.env['NODE_ENV'] = 'development';
   delete process.env['VOLAM_DEV_PRACTICE_CREEPS'];
-  const app = createGameServer();
-  await app.listen(2654);
-  server = new ColyseusTestServer(app);
+  server = await startRoomTestServer();
+  client = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
   process.env['NODE_ENV'] = 'development';
   delete process.env['VOLAM_DEV_PRACTICE_CREEPS'];
 });

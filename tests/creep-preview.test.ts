@@ -1,6 +1,4 @@
 import { afterAll, afterEach, beforeAll, expect, it } from 'vitest';
-import { boot, type ColyseusTestServer } from '@colyseus/testing';
-import { Client } from '@colyseus/sdk';
 import { DungeonMatch, blocked } from '@volam/game-core';
 import {
   m1Config,
@@ -14,7 +12,7 @@ import {
   creepPreviewActionSchema,
 } from '@volam/game-protocol';
 import { CreepPreviewSession } from '../apps/game-server/src/creep-preview.js';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 
 function sandbox() {
@@ -122,17 +120,17 @@ it('strictly validates preview messages', () => {
   ).toBe(true);
 });
 
-let server: ColyseusTestServer;
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 const previous = process.env['VOLAM_DEV_CREEP_TEST'];
 beforeAll(async () => {
   process.env['VOLAM_DEV_CREEP_TEST'] = '1';
-  server = await boot(createGameServer(), 2568);
+  server = await startRoomTestServer();
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
 });
 afterAll(async () => {
-  await server.shutdown();
+  await server?.shutdown();
   if (previous === undefined) delete process.env['VOLAM_DEV_CREEP_TEST'];
   else process.env['VOLAM_DEV_CREEP_TEST'] = previous;
 });
@@ -140,7 +138,7 @@ it('requires the server test flag and refuses preview creation in production', a
   const old = process.env['NODE_ENV'];
   try {
     process.env['NODE_ENV'] = 'production';
-    const client = new Client('http://127.0.0.1:2568');
+    const client = server.sdk;
     await expect(
       client.create('match', {
         nickname: 'Denied',
@@ -154,7 +152,7 @@ it('requires the server test flag and refuses preview creation in production', a
   }
 });
 it('only the confirmed host can select; peers share state and ordinary rooms are untouched', async () => {
-  const client = new Client('http://127.0.0.1:2568');
+  const client = server.sdk;
   const a = await client.create<MatchRoom['state']>('match', {
     nickname: 'Host',
     protocolVersion: PROTOCOL_VERSION,

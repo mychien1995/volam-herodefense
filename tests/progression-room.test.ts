@@ -1,8 +1,6 @@
 import { initializeProgression } from '@volam/game-core';
 import { afterAll, afterEach, beforeAll, it, expect } from 'vitest';
-import { ColyseusTestServer } from '@colyseus/testing';
-import { Client } from '@colyseus/sdk';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import {
   MATCH_ROOM,
@@ -12,8 +10,8 @@ import {
 } from '@volam/game-protocol';
 import { gainExperience, type BuildChange } from '@volam/game-core';
 import { m1Config, creepDungeon } from '@volam/game-data';
-let server: ColyseusTestServer;
-const client = new Client('http://localhost:2627');
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const saved = {
   legacy: process.env['VOLAM_DEV_LEGACY_SKILLS'],
   skills: process.env['VOLAM_DEV_SKILLS'],
@@ -25,12 +23,11 @@ beforeAll(async () => {
   process.env['VOLAM_DEV_PRACTICE_CREEPS'] = '1';
   delete process.env['VOLAM_DEV_LEGACY_SKILLS'];
   process.env['VOLAM_DEV_SKILLS'] = '1';
-  const app = createGameServer();
-  await app.listen(2627);
-  server = new ColyseusTestServer(app);
+  server = await startRoomTestServer();
+  client = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
 });
 afterAll(async () => {
   if (previousProgression === undefined)

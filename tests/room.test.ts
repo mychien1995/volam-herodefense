@@ -1,21 +1,26 @@
-import { afterAll, afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
-import { boot, type ColyseusTestServer } from '@colyseus/testing';
+import {
+  afterAll,
+  afterEach,
+  beforeAll,
+  describe,
+  expect,
+  it,
+  vi,
+} from 'vitest';
 import { CloseCode, ServerError } from '@colyseus/core';
-import { Client, type Room } from '@colyseus/sdk';
+import type { Room } from '@colyseus/sdk';
 import {
   PROTOCOL_VERSION,
   MATCH_ROOM,
   connectionAckSchema,
   type JoinOptions,
 } from '@volam/game-protocol';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 
-let server: ColyseusTestServer;
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
 const previousLegacy = process.env['VOLAM_DEV_LEGACY_SKILLS'];
-const client = new Client<ReturnType<typeof createGameServer>>(
-  'http://localhost:2568',
-);
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const options = (nickname: string): JoinOptions => ({
   nickname,
   protocolVersion: PROTOCOL_VERSION,
@@ -24,10 +29,11 @@ const previousPracticeCreeps = process.env['VOLAM_DEV_PRACTICE_CREEPS'];
 beforeAll(async () => {
   process.env['VOLAM_DEV_PRACTICE_CREEPS'] = '1';
   process.env['VOLAM_DEV_LEGACY_SKILLS'] = '1';
-  server = await boot(createGameServer(), 2568);
+  server = await startRoomTestServer();
+  client = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
 });
 afterAll(async () => {
   if (previousPracticeCreeps === undefined)
@@ -36,7 +42,7 @@ afterAll(async () => {
   if (previousLegacy === undefined)
     delete process.env['VOLAM_DEV_LEGACY_SKILLS'];
   else process.env['VOLAM_DEV_LEGACY_SKILLS'] = previousLegacy;
-  await server.shutdown();
+  await server?.shutdown();
 });
 
 describe('real Colyseus room + SDK clients', () => {
@@ -116,7 +122,10 @@ describe('real Colyseus room + SDK clients', () => {
   });
   it('cleans up a drop when the reconnect reservation is rejected', async () => {
     const host = await client.create(MATCH_ROOM, options('Host'));
-    const guest = await client.joinById<MatchRoom>(host.roomId, options('Guest'));
+    const guest = await client.joinById<MatchRoom>(
+      host.roomId,
+      options('Guest'),
+    );
     const room = server.getRoomById<MatchRoom>(host.roomId);
     const rejected = Promise.reject(new ServerError(400, 'Join incomplete'));
     // Keep the test runner alive while checking that the room observes the rejection.

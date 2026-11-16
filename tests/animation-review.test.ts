@@ -25,6 +25,7 @@ const assets = new Map(
 
 describe('animation review isolation and retained raster contracts', () => {
   it('resolves every storyboard and all four facings to real bounded atlas frames', () => {
+    const atlases = new Map<string, ReturnType<typeof json>>();
     for (const [id] of reviewSkills)
       for (const branch of ['threshold', 'expiry'] as const) {
         const plan = animationReviewPlan(id, branch);
@@ -37,7 +38,8 @@ describe('animation review isolation and retained raster contracts', () => {
           const path = asset.atlas.startsWith('assets/feedback_v2_runtime/')
             ? asset.atlas.replace('assets/', 'apps/game-client/public/assets/')
             : asset.atlas;
-          const atlas = json(path);
+          if (!atlases.has(path)) atlases.set(path, json(path));
+          const atlas = atlases.get(path)!;
           for (const d of ['right', 'down', 'left', 'up']) {
             const tag =
               asset.animations.find((t) => t.name === c.tag + '_' + d) ??

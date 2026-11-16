@@ -1,14 +1,13 @@
 import { beforeAll, afterAll, afterEach, it, expect } from 'vitest';
-import { ColyseusTestServer } from '@colyseus/testing';
-import { Client, type Room } from '@colyseus/sdk';
-import { createGameServer } from '../apps/game-server/src/app.config.js';
+import type { Room } from '@colyseus/sdk';
+import { startRoomTestServer } from './room-test-server.js';
 import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 import { MATCH_ROOM, PROTOCOL_VERSION } from '@volam/game-protocol';
-let server: ColyseusTestServer;
-const port = Number(process.env['VOLAM_QA_CHU_ROOM_PORT'] ?? 2798);
-if (!Number.isInteger(port) || port < 1 || port > 65535)
+let server: Awaited<ReturnType<typeof startRoomTestServer>>;
+const port = Number(process.env['VOLAM_QA_CHU_ROOM_PORT'] ?? 0);
+if (!Number.isInteger(port) || port < 0 || port > 65535)
   throw Error('Invalid isolated Chu room test port');
-const client = new Client(`http://127.0.0.1:${port}`);
+let client: Awaited<ReturnType<typeof startRoomTestServer>>['sdk'];
 const seq = new Map<string, number>();
 const next = (r: Room<MatchRoom>) => {
   const n = (seq.get(r.sessionId) ?? 0) + 1;
@@ -16,16 +15,15 @@ const next = (r: Room<MatchRoom>) => {
   return n;
 };
 beforeAll(async () => {
-  const game = createGameServer();
-  await game.listen(port);
-  server = new ColyseusTestServer(game);
+  server = await startRoomTestServer(port);
+  client = server.sdk;
 });
 afterEach(async () => {
-  await server.cleanup();
+  await server?.cleanup();
   seq.clear();
 });
 afterAll(async () => {
-  await server.shutdown();
+  await server?.shutdown();
 });
 it('real SDK filters encounters and awards only personal materials to eligible participants', async () => {
   const a = await client.create<MatchRoom>(MATCH_ROOM, {
