@@ -317,11 +317,20 @@ export function stepNguDocSummons(
       const useWave =
         reaper && line && distanceTo <= 250 && world.tick >= minion.waveAt;
       if ((!inReach || !line) && !useWave) {
-        if (!target && distanceTo <= rules.followDistance / 2) return;
+        const followingReaper = reaper && !target;
+        if (
+          !target &&
+          distanceTo <= (followingReaper ? 5 : rules.followDistance / 2)
+        )
+          return;
         const before = { x: minion.x, y: minion.y };
+        const followSpeed = followingReaper
+          ? Math.min(1, (distanceTo - 5) / 36)
+          : 1;
         const step = Math.min(
           distanceTo,
           (speed / config.tickRate) *
+            followSpeed *
             (1 - Math.min(0.85, statusValue(minion, 'slow', world.tick))),
         );
         moveCircle(

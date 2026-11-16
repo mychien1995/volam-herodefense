@@ -1,5 +1,7 @@
 ## Ngũ Độc · Bích Cổ và Âm Linh
 
+Màn chọn phái dùng lưới 4 trên, 3 dưới và mở popup chọn hệ phái. Lượt Ngũ Độc này sửa tay chưởng hướng trái, làm mượt Thần Chết khi theo chủ, mở rộng Âm Phong Thực Cốt và cho trùng của Tâm Hình Cổ tự bay về.
+
 Hai tạo hình đã chọn vào bản chơi thử M3D. Vô Hình Độc của Tà Hiệp phản độc thụ động và không có VFX riêng. Cổ Sư dùng W Yêu Cổ để gọi cương thi và R Vô Hình Ma Cổ tăng xác suất gọi zombie bằng đánh thường. Thần Chết còn sống theo chủ qua phó bản, về arena và khi chủ gục. Minion có thanh máu và nhận một phần chỉ số tăng từ trang bị của Cổ Sư. [Bản tích hợp](docs/NGU_DOC_PLAYTEST.md).
 
 ## Đường Môn · Tuần sa và Dạ hành

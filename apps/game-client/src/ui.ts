@@ -88,7 +88,7 @@ export class GameUI {
       <main id="viewport" aria-label="Khung cảnh Võ Lâm">
         <div id="game" aria-label="Khung cảnh trò chơi"></div>
         <div id="hud" aria-label="Thông tin trong trận">
-          <section class="hero-hud framed"><div class="portrait" title="Chân dung Cái Bang"><span id="hero-level">1</span></div><div class="hero-bars"><div class="hero-name"><strong id="hero-name">Thiếu hiệp</strong><span class="hero-school"><img id="duong-mon-innate-icon" hidden src="${skillIcon(duongMon.passive)}" width="16" height="16" alt="Tứ tuyệt khí" title="Tứ tuyệt khí · Tăng hồi nội lực, hồi máu và chí mạng theo cấp"><small id="school-name">Cái Bang</small></span></div>
+          <section class="hero-hud framed"><div class="portrait" title="Chân dung Cái Bang"><span id="hero-level">1</span></div><div class="hero-bars"><div class="hero-name"><strong id="hero-name">Thiếu hiệp</strong><span class="hero-school"><img id="duong-mon-innate-icon" hidden src="${skillIcon(duongMon.passive)}" width="16" height="16" alt="Tứ tuyệt khí" title="Tứ tuyệt khí · Tăng hồi nội lực, hồi máu và chí mạng theo cấp"><img id="ngu-doc-innate-icon" hidden src="${skillIcon(nguDoc.innate)}" width="16" height="16" alt="Ngũ Độc Tâm Kinh" title="Ngũ Độc Tâm Kinh · Tăng máu tối đa, hồi máu và hồi nội lực theo cấp"><small id="school-name">Cái Bang</small></span></div>
             <div class="meter hp" role="meter" aria-label="Sinh lực" aria-valuemin="0"><i></i><span id="hp-text">—</span></div><div class="meter mp" role="meter" aria-label="Nội lực" aria-valuemin="0"><i></i><span id="mp-text">—</span></div><div class="meter xp" role="meter" aria-label="Kinh nghiệm" aria-valuemin="0"><i></i><span id="xp-text">—</span></div></div></section>
           <nav class="system-buttons" aria-label="Menu trò chơi"><button data-action="quit" title="Thoát" aria-label="Thoát">${icon('quit')}<span>Thoát</span></button><button data-menu="settings" title="Cài đặt" aria-label="Cài đặt">${icon('settings')}<span>Cài đặt</span></button><button data-menu="dungeons" title="Phó Bản" aria-label="Phó Bản">${icon('portal')}<span>Phó Bản</span></button><button data-menu="merchant" title="Thương Gia" aria-label="Thương Gia">${icon('shop')}<span>Thương Gia</span></button><button data-menu="pvp" title="Lôi Đài" aria-label="Lôi Đài">${icon('swords')}<span>Lôi Đài</span></button></nav>
           <span class="sr-only"><span id="hud-connection">Connected</span> · <span id="current-room" data-testid="room-id">—</span> · <span id="player-count" data-testid="player-count">0 / 6</span></span>
@@ -811,6 +811,7 @@ export class GameUI {
       schools.find((s) => s.id === hero.schoolId)?.name ?? 'Cái Bang';
     element('#duong-mon-innate-icon').hidden =
       hero.schoolId !== duongMon.school;
+    element('#ngu-doc-innate-icon').hidden = hero.schoolId !== nguDoc.school;
     element('#viewport').dataset['heroSchool'] = hero.schoolId;
     element('#viewport').dataset['heroForm'] = heroTexture(
       hero.basicId,

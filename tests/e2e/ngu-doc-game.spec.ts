@@ -8,6 +8,7 @@ interface Player {
   basicId: string;
   level: number;
   zoneId: string;
+  x: number;
   inventory: { levels: { armor: number } };
 }
 interface Minion {
@@ -20,7 +21,12 @@ interface Minion {
 interface Snapshot {
   sessionId: string;
   roomId: string;
-  events: { sourceId: string; abilityId: string; kind: string }[];
+  events: {
+    sourceId: string;
+    abilityId: string;
+    kind: string;
+    stage?: string;
+  }[];
   state: { players: Record<string, Player>; creeps: Record<string, Minion> };
 }
 interface Presentation {
@@ -34,7 +40,15 @@ interface Presentation {
     healthBarY: number;
     healthBarFill: number;
   }[];
-  nguDoc: { frame: string; x: number; y: number }[];
+  nguDoc: {
+    frame: string;
+    x: number;
+    y: number;
+    alpha: number;
+    flipX: boolean;
+    rotation: number;
+    returning: boolean;
+  }[];
 }
 const snapshot = (page: Page) =>
   page.evaluate<Snapshot>('window.__VOLAM__.snapshot()');
@@ -54,6 +68,71 @@ const cast = async (page: Page, key: string) => {
   await page.locator('#game canvas').focus();
   await page.keyboard.press(key);
 };
+
+test('school selection fits in two rows and opens an accessible branch popup', async ({
+  page,
+}, info) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await joinWaiting(page, 'Chọn hệ phái');
+  await page.getByRole('button', { name: 'Bắt đầu', exact: true }).click();
+  await expect(page.locator('#pregame .pre-title')).toHaveText('Chọn môn phái');
+  const school = page.locator('[data-school=ngu_doc]');
+  await expect(school.locator('.school-portrait')).toHaveCSS(
+    'background-image',
+    /ngu_doc_school\.png/,
+  );
+  for (const size of [
+    { width: 1280, height: 720 },
+    { width: 850, height: 480 },
+    { width: 390, height: 640 },
+  ]) {
+    await page.setViewportSize(size);
+    const layout = await page.locator('#pregame').evaluate((node) => {
+      const rows = new Map<number, number>();
+      const cards = [...node.querySelectorAll('.school-card')];
+      for (const card of cards) {
+        const y = Math.round(card.getBoundingClientRect().top);
+        rows.set(y, (rows.get(y) ?? 0) + 1);
+      }
+      return {
+        rows: [...rows.values()],
+        scrollX: node.scrollWidth - node.clientWidth,
+        scrollY: node.scrollHeight - node.clientHeight,
+        bookends: [
+          cards[0]?.getBoundingClientRect().top,
+          node.querySelector('[data-action=leave]')?.getBoundingClientRect()
+            .bottom,
+        ],
+      };
+    });
+    expect(layout.rows).toEqual([4, 3]);
+    expect(layout.scrollX).toBeLessThanOrEqual(1);
+    expect(layout.scrollY).toBeLessThanOrEqual(1);
+    expect(layout.bookends[0]).toBeGreaterThanOrEqual(0);
+    expect(layout.bookends[1]).toBeLessThanOrEqual(size.height);
+  }
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.screenshot({
+    path: info.outputPath('ngu-doc-school-selection.png'),
+  });
+  await school.click();
+  const popup = page.getByRole('dialog', { name: 'Ngũ Độc · Chọn hệ phái' });
+  await expect(popup).toBeVisible();
+  await expect(popup.getByRole('button', { name: 'Xác nhận' })).toBeDisabled();
+  await expect(popup.locator('[data-branch]')).toHaveCount(2);
+  const modal = await popup.elementHandle();
+  await popup.getByRole('button', { name: 'Tà Hiệp' }).click();
+  await expect(popup.getByRole('button', { name: 'Tà Hiệp' })).toHaveAttribute(
+    'aria-pressed',
+    'true',
+  );
+  await expect(popup.getByRole('button', { name: 'Xác nhận' })).toBeEnabled();
+  expect(await modal?.evaluate((node) => node.isConnected)).toBe(true);
+  await page.screenshot({ path: info.outputPath('ngu-doc-branch-popup.png') });
+  await page.keyboard.press('Escape');
+  await expect(popup).toBeHidden();
+  await expect(school).toBeFocused();
+});
 
 test('Ngũ Độc plays in a six-player Phaser room with synced VFX, summon HP bars, gear and transfer', async ({
   browser,
@@ -162,6 +241,17 @@ test('Ngũ Độc plays in a six-player Phaser room with synced VFX, summon HP b
         );
     }
 
+    for (const page of [bich, am]) {
+      for (const key of ['a', 'q', 'w', 'e', 'r', 't'])
+        await expect(page.locator('#slot-' + key + ' .skill-icon')).toHaveCSS(
+          'background-image',
+          /ngu-doc-feedback-v1\/icons\/[^/]+\.png/,
+        );
+      const innate = page.locator('#ngu-doc-innate-icon');
+      await expect(innate).toBeVisible();
+      await expect(innate).toHaveJSProperty('naturalWidth', 96);
+    }
+
     for (const [page, id] of [
       [bich, first.sessionId],
       [am, second.sessionId],
@@ -263,6 +353,29 @@ test('Ngũ Độc plays in a six-player Phaser room with synced VFX, summon HP b
       .toBe(1);
     await bich.screenshot({ path: info.outputPath('ngu-doc-arena.png') });
 
+    await cast(bich, 'KeyT');
+    const field = (page: Page) =>
+      frames(page, 'hand_').then((list) =>
+        list.filter(
+          ({ frame, alpha }) =>
+            ['hand_open', 'hand_fist', 'hand_grasp'].includes(frame) &&
+            alpha > 0.6,
+        ),
+      );
+    for (const observer of [bich, am]) {
+      await expect
+        .poll(async () => (await field(observer)).length)
+        .toBeGreaterThanOrEqual(18);
+      expect(
+        new Set((await field(observer)).map(({ frame }) => frame)).size,
+      ).toBe(3);
+      await expect
+        .poll(async () => (await frames(observer, 'smoke_')).length)
+        .toBe(5);
+    }
+    await bich.screenshot({ path: info.outputPath('ngu-doc-ultimate.png') });
+
+    await am.bringToFront();
     await am.getByRole('button', { name: 'Thương Gia', exact: true }).click();
     await am.locator('[data-ui-action=gear][data-value=armor]').click();
     await am.locator('[data-ui-action=buy][data-value=armor]').click();
@@ -297,6 +410,49 @@ test('Ngũ Độc plays in a six-player Phaser room with synced VFX, summon HP b
       )
       .toBe(false);
     await am.screenshot({ path: info.outputPath('ngu-doc-forest.png') });
+    await cast(am, 'KeyE');
+    await expect
+      .poll(
+        async () =>
+          (await snapshot(am)).events.some(
+            (e) => e.abilityId === nguDoc.mark && e.stage === 'return',
+          ),
+        { timeout: 7000 },
+      )
+      .toBe(true);
+    await expect
+      .poll(
+        async () =>
+          (await presentation(am)).nguDoc.some(
+            (e) => e.frame === 'blood_grub' && e.returning,
+          ),
+        { intervals: [25, 35, 50] },
+      )
+      .toBe(true);
+
+    await bich.bringToFront();
+    await bich.locator('#game canvas').focus();
+    await bich.keyboard.down('ArrowRight');
+    try {
+      await expect
+        .poll(async () => (await self(bich)).x, { timeout: 6000 })
+        .toBeGreaterThan(1050);
+    } finally {
+      await bich.keyboard.up('ArrowRight');
+    }
+    await cast(bich, 'ArrowLeft');
+    await cast(bich, 'KeyA');
+    await expect
+      .poll(
+        async () =>
+          (await frames(bich, 'toxic_palm')).find(
+            (f) => f.flipX && Math.abs(f.rotation) < Math.PI / 2,
+          ),
+        { intervals: [20, 35, 50] },
+      )
+      .toMatchObject({ flipX: true, rotation: expect.any(Number) });
+    const [leftPalm] = await frames(bich, 'toxic_palm');
+    if (leftPalm) expect(Math.abs(leftPalm.rotation)).toBeLessThan(Math.PI / 2);
     expect(errors).toEqual([]);
   } catch (error) {
     throw new Error(errors.length ? errors.join('\n') : String(error), {

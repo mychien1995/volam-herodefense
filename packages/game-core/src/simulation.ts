@@ -2,6 +2,7 @@ import { nguDoc } from './ngu-doc-ids.js';
 import {
   attachNguDocMark,
   canCastNguDoc,
+  returnNguDocGrub,
   stepNguDocEffects,
 } from './ngu-doc-combat.js';
 import { nguDocSummons, stepNguDocSummons } from './ngu-doc-summons.js';
@@ -560,6 +561,7 @@ function advanceProjectile(
     );
   const hits = shot.effect.piercing ? collisions : collisions.slice(0, 1);
   shot.hitIds ??= [];
+  let grubAttached = false;
   for (const collision of hits) {
     if (shot.effect.comboEmpoweredRadius !== undefined)
       emit(world, {
@@ -642,7 +644,7 @@ function advanceProjectile(
       );
       if (hit) {
         if (shot.abilityId === nguDoc.mark)
-          attachNguDocMark(world, config, enemy, shot.ownerId);
+          grubAttached = attachNguDocMark(world, config, enemy, shot.ownerId);
         spread?.hitTargets.add(spreadKey);
         if (shot.effect.oncePerCast && shot.comboTargets)
           shot.comboTargets[enemy.id] ??= false;
@@ -741,6 +743,13 @@ function advanceProjectile(
     (shot.remaining <= length &&
       (!shot.effect.boomerang || shot.leg === 'return'))
   ) {
+    if (shot.abilityId === nguDoc.mark && !grubAttached) {
+      const contact = hits[0]?.t ?? Math.min(1, wallT);
+      returnNguDocGrub(world, shot.ownerId, {
+        x: shot.x + (end.x - shot.x) * contact,
+        y: shot.y + (end.y - shot.y) * contact,
+      });
+    }
     if (!hits.length && shot.effect.explodeAtEnd && !shot.hostile) {
       const contact = Math.min(1, wallT);
       const center = {

@@ -245,21 +245,43 @@ export function nguDocDamage(
     venom(world, config, attacker, counter, nguDoc.counter, rules.counter);
 }
 
+export function returnNguDocGrub(
+  world: World,
+  ownerId: string,
+  from: Point,
+): void {
+  const owner = world.heroes.get(ownerId);
+  if (!owner || owner.hp <= 0) return;
+  emit(world, {
+    kind: 'effect',
+    abilityId: nguDoc.mark,
+    stage: 'return',
+    sourceId: ownerId,
+    targetId: ownerId,
+    x: from.x,
+    y: from.y,
+    damage: 0,
+    critical: false,
+  });
+}
+
 export function attachNguDocMark(
   world: World,
   config: SimulationConfig,
   target: Actor,
   ownerId: string,
-): void {
+): boolean {
   const owner = world.heroes.get(ownerId);
-  if (!owner || target.hp <= 0) return;
+  if (!owner || owner.hp <= 0 || target.hp <= 0) return false;
   const rank = skillRank(owner, nguDoc.mark, config);
-  if (!rank) return;
+  if (!rank) return false;
   owner.nguDocTargetId = target.id;
   const durationTicks = rules.mark.delaySeconds * config.tickRate;
   (world.nguDocMarks ??= []).push({
     ownerId,
     targetId: target.id,
+    x: target.x,
+    y: target.y,
     rank,
     until: world.tick + durationTicks,
   });
@@ -270,6 +292,7 @@ export function attachNguDocMark(
     nguDoc.mark,
     world.tick,
   );
+  return true;
 }
 
 export function stepNguDocEffects(
@@ -281,7 +304,13 @@ export function stepNguDocEffects(
     for (const mark of world.nguDocMarks) {
       const owner = world.heroes.get(mark.ownerId);
       const target = opponent(world, mark.ownerId, mark.targetId);
-      if (!owner || !target) continue;
+      if (!owner || owner.hp <= 0) continue;
+      if (!target || target.hp <= 0) {
+        returnNguDocGrub(world, owner.id, target ?? mark);
+        continue;
+      }
+      mark.x = target.x;
+      mark.y = target.y;
       if (world.tick < mark.until) {
         active.push(mark);
         continue;
@@ -330,6 +359,7 @@ export function stepNguDocEffects(
       }
       if (owner.hp > 0 && healed > 0)
         owner.hp = Math.min(owner.maxHp, owner.hp + healed);
+      returnNguDocGrub(world, owner.id, target);
     }
     world.nguDocMarks = active;
   }

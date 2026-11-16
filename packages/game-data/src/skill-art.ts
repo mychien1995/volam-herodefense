@@ -80,12 +80,22 @@ const duongMonIcons = new Set<string>(
   Object.values(duongMon).filter((id) => id !== duongMon.school),
 );
 const nguDocIcons = new Set([
-  'ngu_doc_ta_hiep','ngu_doc_co_su','ngu_doc_tam_kinh','ngu_doc_chuong','doc_sa_chuong',
-  'am_ta_hap_hon_khi','vo_hinh_doc','am_phong_thuc_cot','van_co_thuc_thien','yeu_co',
-  'tam_hinh_co','vo_hinh_ma_co','thi_quy_phong_tan',
+  'ngu_doc_ta_hiep',
+  'ngu_doc_co_su',
+  'ngu_doc_tam_kinh',
+  'ngu_doc_chuong',
+  'doc_sa_chuong',
+  'am_ta_hap_hon_khi',
+  'vo_hinh_doc',
+  'am_phong_thuc_cot',
+  'van_co_thuc_thien',
+  'yeu_co',
+  'tam_hinh_co',
+  'vo_hinh_ma_co',
+  'thi_quy_phong_tan',
 ]);
 export function skillIcon(id: string): string {
-  if (nguDocIcons.has(id)) return `/assets/ngu-doc-runtime/icons/${id}.png`;
+  if (nguDocIcons.has(id)) return `/assets/ngu-doc-feedback-v1/icons/${id}.png`;
   if (duongMonIcons.has(id))
     return `/assets/skills/duong-mon-icons-v1/${id}.png`;
   if (conLuanIcons.has(id))

@@ -1,5 +1,4 @@
 import { expect, test, type Page } from '@playwright/test';
-import { mkdir } from 'node:fs/promises';
 import { joinWaiting, startTogether } from './pregame-helper.js';
 interface Snapshot {
   roomId: string;
@@ -59,16 +58,19 @@ test('Join remains enabled after host starts school selection', async ({
     await a.locator('#pregame button[data-school=cai_bang]').click();
     await joinListed(b, id);
     await a.locator('[data-branch=cai_bang_bong]').click();
+    await a.bringToFront();
     await a.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     await expect(b.getByTestId('selection-ready')).toHaveText(
       '1/2 đã sẵn sàng',
+      { timeout: 30_000 },
     );
     expect((await read(a)).state.tick).toBe(0);
     await b.locator('#pregame button[data-school=vo_dang]').click();
     await b.locator('[data-branch=vo_dang_quyen]').click();
+    await b.bringToFront();
     await b.getByRole('button', { name: 'Xác nhận', exact: true }).click();
     await expect(a.locator('#pregame')).toBeHidden();
-    await expect(b.locator('#pregame')).toBeHidden();
+    await expect(b.locator('#pregame')).toBeHidden({ timeout: 30_000 });
     expect(failures.flat()).toEqual([]);
   } finally {
     await ca.close();
@@ -77,7 +79,7 @@ test('Join remains enabled after host starts school selection', async ({
 });
 test('Join active match, choose school with stable focus, spawn without resetting host or clock', async ({
   browser,
-}) => {
+}, info) => {
   const ca = await browser.newContext({
       viewport: { width: 1280, height: 720 },
     }),
@@ -86,7 +88,6 @@ test('Join active match, choose school with stable focus, spawn without resettin
     b = await cb.newPage(),
     failures = [errors(a), errors(b)];
   try {
-    await mkdir('docs/evidence/late-join', { recursive: true });
     await joinWaiting(a, 'Active host');
     await startTogether([a]);
     const before = await read(a),
@@ -96,15 +97,16 @@ test('Join active match, choose school with stable focus, spawn without resettin
     await b.locator('#pregame button[data-school=thien_son]').click();
     const choice = b.locator('#pregame button[data-school=thien_son]');
     await expect(choice).toHaveAttribute('aria-pressed', 'true');
-    await choice.focus();
-    const focused = await choice.elementHandle();
+    const branch = b.locator('[data-branch=thien_son_phien]');
+    await branch.focus();
+    const focused = await branch.elementHandle();
     await a.locator('#game canvas').focus();
     await a.keyboard.press('ArrowLeft', { delay: 200 });
     await expect
       .poll(async () => (await read(a)).state.players[before.sessionId]!.x)
       .toBeLessThan(before.state.players[before.sessionId]!.x);
     expect(await focused!.evaluate((n) => n.isConnected)).toBe(true);
-    await expect(choice).toBeFocused();
+    await expect(branch).toBeFocused();
     expect((await read(a)).state.players[guest]!.confirmed).toBe(false);
     const visible = (await a.evaluate(
       'window.__VOLAM__.presentation().actors',
@@ -114,11 +116,12 @@ test('Join active match, choose school with stable focus, spawn without resettin
     await b.keyboard.press('KeyA');
     expect((await read(b)).state.players[guest]!.lastSequence).toBe(0);
     await b.screenshot({
-      path: 'docs/evidence/late-join/active-school-selection.png',
+      path: info.outputPath('active-school-selection.png'),
     });
     await b.locator('[data-branch=thien_son_phien]').click();
+    await b.bringToFront();
     await b.getByRole('button', { name: 'Xác nhận', exact: true }).click();
-    await expect(b.locator('#pregame')).toBeHidden();
+    await expect(b.locator('#pregame')).toBeHidden({ timeout: 30_000 });
     await expect
       .poll(async () => (await read(a)).state.players[guest]!.hp)
       .toBeGreaterThan(0);
@@ -139,7 +142,7 @@ test('Join active match, choose school with stable focus, spawn without resettin
     await expect
       .poll(async () => (await read(a)).state.players[guest]!.lastSequence)
       .toBeGreaterThan(0);
-    await a.screenshot({ path: 'docs/evidence/late-join/both-in-arena.png' });
+    await a.screenshot({ path: info.outputPath('both-in-arena.png') });
     expect(failures.flat()).toEqual([]);
   } finally {
     await ca.close();

@@ -17,12 +17,14 @@ export const nguDocHeroPivot = [0.5, 118 / 144] as const;
 export const nguDocMinionPivot = [0.5, 157 / 192] as const;
 const effects = 'ngu-doc-effects';
 const poison = 'ngu-doc-qw';
+const ultimate = 'ngu-doc-ultimate';
 const arts = [
   [nguDocBichCo, 'ngu-doc-preview-v01/bich-co'],
   [nguDocAmLinh, 'ngu-doc-preview-v01/am-linh'],
   [nguDocMinions, 'ngu-doc-preview-v01/minions'],
   [effects, 'ngu-doc-preview-v01/effects'],
   [poison, 'ngu-doc-qw-v02/tai-hiep-qw'],
+  [ultimate, 'ngu-doc-feedback-v1/ultimate'],
 ] as const;
 
 const scale = 0.5;
@@ -66,15 +68,17 @@ function walkFrame(tick: number): number {
 const walking = {
   jiangshi: ['jiangshi_hop', 'jiangshi_land'],
   zombie: ['zombie_step_l', 'zombie_step_r'],
-  reaper: ['reaper_idle', 'reaper_glide'],
+  reaper: ['reaper_glide'],
 };
 function summonFrame(
   kind: NguDocSummonKind,
   actor: Actor,
   tick: number,
 ): string {
-  if (actor.pose === 'walk')
-    return walking[kind][Math.floor(tick / (kind === 'reaper' ? 6 : 5)) % 2]!;
+  if (actor.pose === 'walk') {
+    const frames = walking[kind];
+    return frames[Math.floor(tick / 5) % frames.length]!;
+  }
   if (actor.pose === 'basic_attack' || actor.pose === 'cast') {
     const phase = tick - (actor.actionStartedAt ?? tick);
     if (kind !== 'reaper') return kind + (phase < 3 ? '_idle' : '_attack');
@@ -85,11 +89,47 @@ function summonFrame(
   return kind + '_idle';
 }
 
+const handPoses = ['hand_open', 'hand_fist', 'hand_grasp'] as const;
+const smokePoses = [
+  'smoke_rise',
+  'smoke_dense',
+  'smoke_drift',
+  'smoke_dense',
+] as const;
+const smokeCenters = [
+  [0, 0],
+  [-0.38, -0.31],
+  [0.38, -0.31],
+  [-0.34, 0.37],
+  [0.34, 0.37],
+] as const;
+const handCount = 21;
+function fieldSeed(id: string): number {
+  let hash = 2166136261;
+  for (const char of id) hash = Math.imul(hash ^ char.charCodeAt(0), 16777619);
+  return hash >>> 0;
+}
+function handVariation(seed: number, i: number): number {
+  let hash = Math.imul(seed ^ (i + 1), 0x45d9f3b);
+  hash = Math.imul(hash ^ (hash >>> 16), 0x45d9f3b);
+  return ((hash ^ (hash >>> 16)) >>> 0) / 4294967296;
+}
+
 export class NguDocArt {
   private readonly objects = new Map<string, Phaser.GameObjects.Image>();
   private readonly brief = new Set<Phaser.GameObjects.Image>();
   private readonly countdowns = new Map<string, Phaser.GameObjects.Text>();
   private readonly live = new Set<string>();
+  private readonly returns = new Map<
+    Phaser.GameObjects.Image,
+    {
+      owner: Sprite;
+      x: number;
+      y: number;
+      start: number;
+      duration: number;
+    }
+  >();
   constructor(private readonly scene: Phaser.Scene) {
     for (const [key] of arts)
       setArtFilter(scene.textures.get(key), Phaser.Textures.FilterMode.LINEAR);
@@ -181,6 +221,7 @@ export class NguDocArt {
 
   sync(state: LobbyState | undefined, zoneId: string): void {
     const tick = zoneTick(state, zoneId) ?? 0;
+    this.updateReturns();
     state?.projectiles.forEach((shot, id) => {
       if (shot.zoneId !== zoneId) return;
       const frame =
@@ -215,9 +256,15 @@ export class NguDocArt {
         frame === 'poison_wave'
           ? 9
           : 23 + leavingStaff * (heading === 'up' ? 21 : 16);
+      const palm = shot.abilityId === nguDoc.taiHiep;
+      const mirror = palm && shot.vx < 0;
+      const rotation = mirror
+        ? Math.atan2(-shot.vy, -shot.vx)
+        : Math.atan2(shot.vy, shot.vx);
       this.track('shot:' + id, effects, frame)
         .setPosition(shot.x + muzzle * leavingStaff, shot.y - height)
-        .setRotation(Math.atan2(shot.vy, shot.vx))
+        .setFlipX(mirror)
+        .setRotation(rotation)
         .setScale(frame === 'poison_wave' ? 0.72 : 0.58)
         .setDepth(shot.y + 0.1);
     });
@@ -239,6 +286,8 @@ export class NguDocArt {
           .setPosition(area.x, area.y)
           .setDepth(-2)
           .setScale((area.radius * 2) / 195);
+      } else if (area.abilityId === nguDoc.hands) {
+        this.handsField(id, area.x, area.y, area.radius, phase, area.ticks);
       }
     });
     for (const [key, image] of this.objects)
@@ -251,6 +300,70 @@ export class NguDocArt {
         text.destroy();
         this.countdowns.delete(key);
       }
+  }
+
+  private handsField(
+    id: string,
+    x: number,
+    y: number,
+    radius: number,
+    phase: number,
+    remaining: number,
+  ): void {
+    const power = Math.min(1, phase / 9, remaining / 16);
+    const seed = fieldSeed(id);
+    smokeCenters.forEach(([dx, dy], index) => {
+      const frame =
+        smokePoses[Math.floor((phase + index * 6) / 10) % smokePoses.length]!;
+      this.track('ultimate-smoke:' + id + ':' + index, ultimate, frame)
+        .setPosition(x + dx * radius, y + dy * radius)
+        .setScale(radius / 235, radius / 180)
+        .setAlpha((index === 0 ? 0.72 : 0.64) * power)
+        .setDepth(-2);
+    });
+    for (let i = 0; i < handCount; i++) {
+      const variation = handVariation(seed, i);
+      const angle =
+        i * 2.3999632297 + (seed / 4294967296) * Math.PI * 2 + variation * 0.45;
+      const distance =
+        Math.sqrt((i + 0.45) / handCount) * radius * (0.78 + variation * 0.17);
+      const age = phase - 9 - Math.floor(variation * 20);
+      if (age < 0) continue;
+      const pattern =
+        (Math.floor(age / 25) + i + Math.floor(variation * 3)) %
+        handPoses.length;
+      const rise = Math.min(1, age / 9, remaining / (13 + variation * 8));
+      const px = x + Math.cos(angle) * distance;
+      const py = y + Math.sin(angle) * distance;
+      this.track('ultimate-hand:' + id + ':' + i, ultimate, handPoses[pattern]!)
+        .setOrigin(0.5, 137 / 160)
+        .setPosition(px, py + (1 - rise) * 20)
+        .setDepth(py + 0.06)
+        .setAlpha(rise * (0.82 + variation * 0.18))
+        .setScale(0.34 + variation * 0.17)
+        .setFlipX(variation < 0.5);
+    }
+  }
+
+  private updateReturns(): void {
+    for (const [image, flight] of this.returns) {
+      const t = (this.scene.time.now - flight.start) / flight.duration;
+      if (!flight.owner.active || t >= 1) {
+        this.returns.delete(image);
+        this.brief.delete(image);
+        image.destroy();
+        continue;
+      }
+      const x = Phaser.Math.Linear(flight.x, flight.owner.x, t);
+      const y =
+        Phaser.Math.Linear(flight.y, flight.owner.y - 23, t) -
+        Math.sin(t * Math.PI) * 21;
+      image
+        .setFlipX(x < image.x)
+        .setPosition(x, y)
+        .setDepth(y + 35)
+        .setAlpha(Math.min(1, (1 - t) * 4));
+    }
   }
 
   event(e: CombatEvent, owner?: Sprite): boolean {
@@ -278,31 +391,27 @@ export class NguDocArt {
       e.stage === 'detonate'
     ) {
       this.flash('burst_open', e.x, e.y - 19, 390, 0.88);
-      const spark = this.flash('soul', e.x, e.y - 24, 440, 0.59);
-      if (owner && owner.alpha > 0.5)
-        this.scene.tweens.add({
-          targets: spark,
-          x: owner.x,
-          y: owner.y - 23,
-          duration: 390,
-        });
     } else if (
-      e.kind === 'pulse' &&
-      e.abilityId === nguDoc.hands &&
-      e.stage === 'area_tick'
+      e.kind === 'effect' &&
+      e.abilityId === nguDoc.mark &&
+      e.stage === 'return' &&
+      owner
     ) {
-      for (const [x, y] of [
-        [-60, -22],
-        [50, -18],
-        [-23, 23],
-        [63, 23],
-        [16, 4],
-      ] as const) {
-        const hand = this.flash('hand_open', e.x + x, e.y + y - 25, 530, 0.71);
-        this.scene.time.delayedCall(150, () => {
-          if (hand.active) hand.setFrame('hand_grasp');
-        });
-      }
+      const x = e.x,
+        y = e.y - 20;
+      const grub = this.scene.add
+        .image(x, y, effects, 'blood_grub')
+        .setScale(0.53)
+        .setDepth(y + 35);
+      this.brief.add(grub);
+      const distance = Math.hypot(owner.x - x, owner.y - 23 - y);
+      this.returns.set(grub, {
+        owner,
+        x,
+        y,
+        start: this.scene.time.now,
+        duration: Phaser.Math.Clamp(distance * 1.9, 340, 850),
+      });
     } else if (e.kind === 'effect' && e.abilityId === nguDoc.reaperSweep)
       this.flash(
         'scythe_arc',
@@ -324,10 +433,14 @@ export class NguDocArt {
   }
 
   inspect() {
-    return [...this.objects.values(), ...this.brief].map(({ frame, x, y }) => ({
-      frame: frame.name,
-      x,
-      y,
+    return [...this.objects.values(), ...this.brief].map((image) => ({
+      frame: image.frame.name,
+      x: image.x,
+      y: image.y,
+      alpha: image.alpha,
+      flipX: image.flipX,
+      rotation: image.rotation,
+      returning: this.returns.has(image),
     }));
   }
   clear(): void {
@@ -338,6 +451,7 @@ export class NguDocArt {
     for (const text of this.countdowns.values()) text.destroy();
     this.objects.clear();
     this.brief.clear();
+    this.returns.clear();
     this.countdowns.clear();
     this.live.clear();
   }

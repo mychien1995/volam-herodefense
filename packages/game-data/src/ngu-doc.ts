@@ -96,7 +96,8 @@ export const nguDocSkills = [
     'Âm Phong Thực Cốt',
     31,
     420,
-    field(122, 58, 25, 30, {
+    field(180, 58, 150, 18, {
+      oncePerTarget: true,
       nearestRange: 290,
       forwardOffset: 120,
       windupTicks: 9,
@@ -144,10 +145,10 @@ const descriptions = [
   'Đặt một bãi khói độc cố định vào địch trong tầm, ưu tiên boss. Khi trống, đặt về trước mặt.',
   'Bật hoặc tắt vòng độc đi theo bản thân, gây độc và làm chậm địch trong vùng.',
   'Nội tại. Tăng nhẹ phòng thủ. Đòn trực tiếp nhận từ địch khiến kẻ đánh bị độc và làm chậm.',
-  'Bàn tay độc trồi lên và bóp, gây sát thương diện rộng và để lại độc.',
+  'Bàn tay độc trồi lên trong vùng khói 5 giây, gây sát thương một lần mỗi mục tiêu rồi để lại độc.',
   'Bắn một loạt sâu cổ về trước, ưu tiên hướng boss. Sâu nổ lan khi chạm.',
   'Gọi 1–4 cương thi theo bậc. Máu và sát thương tăng theo bậc, ưu tiên địch chủ đang đánh.',
-  'Trùng huyết bám khi trúng. Sau 3 giây nổ lan, gây choáng và hồi máu cho chủ.',
+  'Trùng huyết bám khi trúng. Sau 3 giây nổ lan, gây choáng, hồi máu và bay về. Trùng cũng bay về khi mục tiêu chết hoặc đạn đi hết tầm.',
   'Nội tại của A. Có xác suất gọi zombie. Máu và sát thương zombie tăng theo bậc.',
   'Chạm đất gọi Thần Chết. Đòn quét làm chậm, có sóng độc và bổ hái gây choáng. Thần Chết còn sống theo chủ qua phó bản và về đấu trường.',
 ];

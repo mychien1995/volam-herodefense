@@ -683,12 +683,12 @@ export interface CombatArea extends Point {
   trappedIds?: string[];
 }
 export interface World {
-  nguDocMarks?: {
+  nguDocMarks?: (Point & {
     ownerId: string;
     targetId: string;
     rank: number;
     until: number;
-  }[];
+  })[];
   /** Present only in the isolated Lôi Đài world. */
   duel?: ReadonlySet<string>;
   duelWalkWalls?: Rect[];

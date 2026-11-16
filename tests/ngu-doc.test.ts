@@ -146,6 +146,31 @@ describe('Ngũ Độc trong mô phỏng có thẩm quyền', () => {
     expect(next.hp).toBe(expiredHp);
   });
 
+  it('Âm Phong Thực Cốt reaches 180 units for five seconds and hits late entrants once', () => {
+    const { world, step, cast, target } = trial(nguDoc.taiHiep);
+    const center = target('center', 35);
+    const edge = target('edge', 200);
+    const late = target('late', 260);
+    const outsideHp = late.hp;
+    cast(4);
+    const area = world.areas?.find((a) => a.abilityId === nguDoc.hands)!;
+    expect(area.effect.radius).toBe(180);
+    expect(area.until - world.tick).toBe(150);
+    step(9);
+    expect(center.hp).toBeLessThan(center.maxHp);
+    expect(edge.hp).toBeLessThan(edge.maxHp);
+    step(105);
+    expect(late.hp).toBe(outsideHp);
+    late.x = area.x + 166;
+    step(18);
+    expect(late.hp).toBeLessThan(outsideHp);
+    const struckHp = late.hp;
+    step(18);
+    expect(struckHp - late.hp).toBeLessThan(outsideHp - struckHp);
+    expect(area.hitIds?.filter((id) => id === late.id)).toHaveLength(1);
+    expect(world.areas?.includes(area)).toBe(false);
+  });
+
   it('Vô Hình Độc adds defense and responds silently to real incoming hits, not pressing R or periodics', () => {
     const { config, world, hero, cast, target } = trial(nguDoc.taiHiep);
     const before = characterStats(hero, config).total.defense;
@@ -193,6 +218,74 @@ describe('Ngũ Độc trong mô phỏng có thẩm quyền', () => {
     expect(near.hp).toBeLessThan(hp);
     expect(hasStatus(near, 'stun', world.tick)).toBe(true);
     expect(hero.hp).toBeGreaterThan(ownerHp + 5);
+    expect(world.events).toContainEqual(
+      expect.objectContaining({
+        abilityId: nguDoc.mark,
+        stage: 'return',
+        targetId: hero.id,
+      }),
+    );
+  });
+
+  it('returns Tâm Hình Cổ on early death or a missed shot without detonation', () => {
+    const marked = trial(nguDoc.coSu);
+    const victim = marked.target('victim', 102);
+    const neighbor = marked.target('neighbor', 138, 28);
+    marked.cast(2);
+    marked.step(10);
+    expect(marked.world.nguDocMarks).toHaveLength(1);
+    hurt(
+      marked.world,
+      victim,
+      marked.hero.id,
+      'test',
+      100_000,
+      marked.config,
+      nonCrit,
+    );
+    marked.step();
+    expect(marked.world.nguDocMarks).toEqual([]);
+    expect(marked.world.events).toContainEqual(
+      expect.objectContaining({
+        abilityId: nguDoc.mark,
+        stage: 'return',
+        targetId: marked.hero.id,
+        x: victim.x,
+        y: victim.y,
+      }),
+    );
+    expect(neighbor.hp).toBe(neighbor.maxHp);
+
+    const missed = trial(nguDoc.coSu);
+    missed.cast(2);
+    const stages: string[] = [];
+    for (let i = 0; i < 40; i++) {
+      missed.step();
+      stages.push(
+        ...missed.world.events
+          .filter((e) => e.abilityId === nguDoc.mark && e.stage)
+          .map((e) => e.stage!),
+      );
+    }
+    expect(stages).toEqual(['return']);
+    expect(missed.world.projectiles.size).toBe(0);
+  });
+
+  it('Thần Chết follows a walking owner with continuous positive steps', () => {
+    const { world, hero, step, cast, send } = trial(nguDoc.coSu);
+    cast(4);
+    const reaper = [...nguDocSummons(world)][0]!;
+    for (let i = 0; i < 75; i++) {
+      const x = reaper.x;
+      send({ kind: 'move', x: 1, y: 0 });
+      if (i < 35) continue;
+      expect(reaper.pose).toBe('walk');
+      expect(reaper.x - x).toBeGreaterThan(3);
+    }
+    send({ kind: 'move', x: 0, y: 0 });
+    step(75);
+    expect(reaper.pose).toBe('idle');
+    expect(Math.abs(reaper.x - hero.x - 48)).toBeLessThan(6);
   });
 
   it.each([1, 2, 3, 4])(

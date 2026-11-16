@@ -2,7 +2,12 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests/e2e',
-  testMatch: ['ngu-doc-game.spec.ts', 'ngu-doc-preview.spec.ts'],
+  testMatch: [
+    'ngu-doc-game.spec.ts',
+    'ngu-doc-preview.spec.ts',
+    'phase1.spec.ts',
+    'late-join.spec.ts',
+  ],
   outputDir: 'artifacts/ngu-doc-game',
   workers: 1,
   timeout: 130_000,
@@ -13,6 +18,7 @@ export default defineConfig({
     browserName: 'chromium',
     channel: 'chrome',
     viewport: { width: 1280, height: 720 },
+    actionTimeout: 10000,
     video: 'off',
     trace: 'off',
   },

@@ -122,9 +122,7 @@ export function cancelOwnedEffects(world: World, id: string): void {
     (c) => c.sourceId !== id && c.targetId !== id,
   );
   if (world.nguDocMarks)
-    world.nguDocMarks = world.nguDocMarks.filter(
-      (mark) => mark.ownerId !== id && mark.targetId !== id,
-    );
+    world.nguDocMarks = world.nguDocMarks.filter((mark) => mark.ownerId !== id);
   world.supports = (world.supports ?? []).filter((a) => a.ownerId !== id);
   world.actions = (world.actions ?? []).filter((a) => a.ownerId !== id);
   world.areas = (world.areas ?? []).filter((a) => a.ownerId !== id);

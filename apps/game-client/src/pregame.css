@@ -186,139 +186,16 @@
 #landing-form button {
   width: 170px;
 }
-.school-window {
-  width: min(1200px, 100%);
-  padding: 18px 24px;
-}
-.school-grid {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 12px;
-}
-#pregame .school-card {
-  padding: 12px;
-  background: linear-gradient(#373323, #1b261f);
-  text-transform: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  border: 2px solid #8f7548;
-  font-size: 14px;
-  box-shadow: none;
-}
-.school-card p {
-  font: 14px/1.35 system-ui;
-  margin: 7px 0;
-}
-.school-card small {
-  display: block;
-  font: 12px/1.35 system-ui;
-  margin: 5px 0;
-  color: #d7cfb6;
-}
-.school-card h3 {
-  font-size: 23px;
-  margin: 3px 0;
-}
-#pregame .school-card.selected {
-  border-color: #ffe39a;
-  background: linear-gradient(#445940, #243e30);
-  box-shadow:
-    0 0 0 2px #d4a753,
-    inset 0 0 20px #c8953a33;
-  opacity: 1;
-}
-.school-portrait {
-  width: 128px;
-  height: 145px;
-  background-repeat: no-repeat;
-  image-rendering: pixelated;
-  margin: 10px;
-}
-.school-portrait.cai {
-  background-image: url('/assets/characters/hero_cai_bang_idle.png');
-  background-size: 200px 200px;
-  background-position: center -25px;
-}
-.school-portrait.thien,
-.school-portrait.thieu {
-  background-image: url('/assets/pregame/thien_thieu_concept.png');
-  background-size: 768px 512px;
-  background-position: 0 -35px;
-}
-.school-portrait.thieu {
-  background-position: 0 -285px;
-}
-.school-portrait.vo {
-  background-image: url('/assets/pregame/vo_concept.png');
-  background-size: 768px 512px;
-  background-position: 0 -105px;
-}
-.element {
-  color: #f6cf78;
-}
-.school-window > .pre-players {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 10px;
-}
-.school-window > .pre-players li {
-  padding: 4px 10px;
-  font-size: 14px;
-  display: block;
-}
-.school-window > .pre-players span {
-  display: block;
-  font-size: 12px;
-}
+
 @media (min-width: 1700px) {
   .pre-window {
     width: 1050px;
     padding: 36px 48px;
   }
-  .school-window {
-    width: 1350px;
-  }
-  .school-portrait {
-    height: 170px;
-  }
-  .school-card p {
-    font-size: 16px !important;
-  }
 }
 @media (max-height: 800px) {
   #pregame {
     padding: 20px;
-  }
-  .school-window {
-    padding: 10px 18px;
-  }
-  .school-window .pre-title {
-    font-size: 24px;
-    margin-bottom: 8px;
-    padding: 7px 20px;
-  }
-  .school-window .pre-room {
-    margin: 5px;
-  }
-  .school-portrait {
-    height: 100px;
-    margin: 2px;
-  }
-  .school-card p {
-    font-size: 12px !important;
-    margin: 4px 0;
-  }
-  .school-card small {
-    font-size: 11px;
-  }
-  .school-window .pre-actions {
-    margin-top: 10px;
-  }
-  .school-window .pre-note {
-    margin: 7px;
   }
   .pre-error {
     margin: 6px 0;
@@ -326,9 +203,6 @@
   }
 }
 @media (max-width: 850px) {
-  .school-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
   .pre-window {
     padding: 15px;
   }
@@ -346,193 +220,168 @@
     font-size: 14px;
   }
 }
-
 #pregame[hidden] {
   display: none;
 }
-
+#pregame:has(.school-window) {
+  padding: clamp(6px, 2.4vh, 20px);
+}
+#pregame .school-window {
+  width: min(780px, 100%);
+  padding: clamp(7px, 1.9vh, 16px) clamp(8px, 2.2vw, 26px);
+  max-height: none;
+  overflow: visible;
+}
+.school-window .pre-title {
+  font-size: clamp(19px, 4.1vh, 28px);
+  margin-bottom: 6px;
+  padding: 5px 20px;
+}
+.school-window .pre-room {
+  font-size: 13px;
+  margin: 5px 0 9px;
+}
+.school-grid {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: clamp(4px, 1vh, 9px);
+}
+#pregame .school-card {
+  grid-column: span 2;
+  min-width: 0;
+  padding: clamp(3px, 1.1vh, 9px) 2px;
+  background: linear-gradient(#373323, #1b261f);
+  text-transform: none;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  border: 2px solid #8f7548;
+  box-shadow: none;
+}
+#pregame .school-card:nth-child(5) {
+  grid-column: 2 / span 2;
+}
+#pregame .school-card:is(:hover, .selected) {
+  border-color: #ffe39a;
+  background: linear-gradient(#445940, #243e30);
+}
+#pregame .school-card.selected {
+  box-shadow: inset 0 0 0 1px #d4a753;
+}
 #pregame .school-card:disabled {
   opacity: 1;
 }
-.school-portrait.vo {
-  background-size: 1536px 1024px;
-  background-position: -1136px -130px;
+.school-card h3 {
+  font-size: clamp(11px, 2.25vw, 17px);
+  margin: 1px 0 2px;
+  line-height: 1.13;
+  text-wrap: balance;
 }
-@media (max-height: 800px) {
-  .school-portrait.vo {
-    background-position: -1136px -150px;
-  }
-  .school-portrait.cai {
-    background-size: 160px 160px;
-    background-position: center -20px;
-  }
+.school-portrait {
+  display: block;
+  width: clamp(33px, 12vh, 78px);
+  aspect-ratio: 1;
+  background: center / contain no-repeat;
 }
-
-/* M3C1: reuse the approved runtime hero for the school avatar. */
+.school-portrait.cai {
+  background-image: url('/assets/renovation-v5/portrait-hero_cai_bang.png');
+}
 .school-portrait.thien {
-  background-image: url('/assets/characters/hero_thien_son_idle.png');
-  background-size: 160px 160px;
-  background-position: center;
+  background-image: url('/assets/renovation-v5/portrait-hero_thien_son.png');
 }
-
 .school-portrait.vo {
-  background-image: url('/assets/characters/hero_vo_dang_idle.png');
-  background-size: 160px 160px;
-  background-position: center;
+  background-image: url('/assets/renovation-v5/portrait-hero_vo_dang.png');
 }
-
-/* Reuse the approved monk avatar, consistent with the other playable schools. */
 .school-portrait.thieu {
-  background-image: url('/assets/characters/hero_thieu_lam_idle.png');
-  background-size: 160px 160px;
-  background-position: center;
+  background-image: url('/assets/renovation-v5/portrait-hero_thieu_lam.png');
 }
-
-/* Compact selection keeps its four portraits, roster and primary action visible. */
-.school-window {
-  padding: 12px 18px;
+.school-portrait.con-luan {
+  background-image: url('/assets/characters/con_luan_skill_preview/icons/hero_con_luan_thien_su.png');
 }
-.school-window .pre-title {
-  font-size: 25px;
-  margin-bottom: 8px;
-  padding: 6px 22px;
+.school-portrait.duong-mon {
+  background-image: url('/assets/duong-mon/icons/duong-mon-tuan-sa-walk.png');
 }
-.school-window .pre-room {
-  margin: 5px 0 10px;
+.school-portrait.ngu-doc {
+  background-image: url('/assets/ngu-doc-feedback-v1/icons/ngu_doc_school.png');
+  border: 1px solid #78653b;
+  border-radius: 4px;
+}
+.school-element {
+  color: #f6cf78;
+  font-size: clamp(10px, 1.7vw, 13px);
+  font-weight: 500;
+}
+.school-window > .pre-players {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 8px;
+}
+.school-window > .pre-players li {
+  padding: 3px 6px;
+  font-size: 12px;
+  display: block;
+}
+.school-window > .pre-players span {
+  display: block;
+  font-size: 10px;
 }
 .school-window .pre-actions {
-  margin-top: 10px;
-}
-.school-window .school-card p {
-  margin: 5px 0;
-}
-.school-window .school-card {
-  min-width: 0;
-}
-.school-window .school-portrait {
-  height: 100px;
-  margin: 2px;
+  margin-top: 8px;
 }
 .school-window .pre-error:empty {
   display: none;
 }
-.school-window .pre-note {
-  margin: 8px 0;
+#pregame .school-window .pre-actions button {
+  padding: 6px 14px;
+  font-size: 13px;
 }
-@media (max-width: 850px) and (min-width: 600px) {
-  .school-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 7px;
-  }
-  #pregame .school-card {
-    padding: 6px;
-  }
-  .school-card h3 {
-    font-size: 19px;
-  }
-  .school-portrait {
-    width: 100%;
-  }
+.branch-dialog {
+  width: min(480px, calc(100% - 32px));
+  max-height: calc(100dvh - 24px);
+  padding: clamp(10px, 3vh, 22px);
+  background: linear-gradient(#463022, #2a211a);
+  color: #ffe8bb;
+  border: 5px ridge #b49564;
+  box-shadow: 0 14px 45px #000b;
 }
-@media (max-height: 550px) and (min-width: 600px) {
-  #pregame {
-    padding: 10px;
-  }
-  .school-window .school-portrait {
-    height: 65px;
-    background-size: 120px 120px;
-    background-position: center;
-  }
-  .school-window .pre-players li {
-    padding: 2px 6px;
-  }
-  .school-window .pre-actions button {
-    padding: 7px 18px;
-    font-size: 15px;
-  }
-  .school-window .pre-note {
-    margin: 4px 0;
-  }
+.branch-dialog::backdrop {
+  background: #100e0bc9;
 }
-
-@media (max-height: 550px) and (min-width: 600px) {
-  .school-window {
-    padding: 6px 12px;
-  }
-  .school-window .pre-title {
-    font-size: 22px;
-    padding: 4px 18px;
-    margin-bottom: 4px;
-  }
-  #pregame .school-window .school-card {
-    padding: 6px;
-  }
-  .school-window .school-card h3 {
-    font-size: 20px;
-  }
-  .school-window .school-portrait {
-    height: 52px;
-    background-size: 100px 100px;
-  }
-  .school-window .pre-players {
-    margin-top: 4px;
-  }
-  .school-window .pre-players li {
-    font-size: 12px;
-  }
-  .school-window .pre-players span {
-    font-size: 10px;
-  }
-  .school-window .pre-note {
-    font-size: 11px;
-    line-height: 1.2;
-  }
-  .school-window .pre-actions {
-    margin-top: 6px;
-  }
-  #pregame .school-window .pre-actions button {
-    min-height: 32px;
-    padding: 6px 14px;
-    font-size: 14px;
-  }
+.branch-dialog h2 {
+  margin: 0;
+  font-size: clamp(17px, 4vh, 24px);
 }
-
-.pre-branches button[aria-pressed='true'] {
+.branch-dialog p {
+  font-size: 13px;
+  margin: 8px 0 13px;
+}
+.branch-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+#pregame .branch-list button {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  min-height: 60px;
+  padding: 5px;
+  text-transform: none;
+  font-size: 15px;
+}
+.branch-list img {
+  object-fit: contain;
+}
+.branch-list button[aria-pressed='true'] {
   outline: 2px solid #e6ca79;
-  outline-offset: 2px;
+  outline-offset: 1px;
 }
-
-/* Current approved gameplay sprites, matching the in-game school identity. */
-.school-window .school-portrait.cai {
-  background-image: url('/assets/renovation-v5/portrait-hero_cai_bang.png');
-}
-.school-window .school-portrait.thien {
-  background-image: url('/assets/renovation-v5/portrait-hero_thien_son.png');
-}
-.school-window .school-portrait.vo {
-  background-image: url('/assets/renovation-v5/portrait-hero_vo_dang.png');
-}
-.school-window .school-portrait.thieu {
-  background-image: url('/assets/renovation-v5/portrait-hero_thieu_lam.png');
-}
-.school-window .school-portrait.con-luan {
-  background-image: url('/assets/characters/con_luan_skill_preview/icons/hero_con_luan_thien_su.png');
-}
-.school-window .school-portrait {
-  background-size: 128px 128px;
-  background-position: center;
-  image-rendering: auto;
-}
-@media (max-height: 550px) {
-  .school-window .school-portrait {
-    background-size: 80px 80px;
+@media (max-height: 380px) {
+  .school-portrait {
+    width: 32px;
   }
-}
-
-.school-window .school-portrait.duong-mon {
-  background-image: url("/assets/duong-mon/icons/duong-mon-tuan-sa-walk.png");
-}
-
-.school-window .school-portrait.ngu-doc {
-  background-image: url('/assets/ngu-doc-runtime/portraits/bich-co.png');
+  .school-window > .pre-players span {
+    display: none;
+  }
 }

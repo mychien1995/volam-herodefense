@@ -7,15 +7,15 @@ Mở [bản chơi thử ở cổng 5582](http://127.0.0.1:5582/), tạo phòng, 
 | A | Phóng chưởng bàn tay xanh | Phóng đạn lục từ đầu trượng |
 | Q | Ngũ Độc Chưởng bật/tắt hai ngọn lửa. Khi bật, A đổi chưởng và gây độc, chậm qua đòn trúng | Vạn Cổ Thực Thiên phóng bốn sâu cổ gây sát thương lan. Ưu tiên hướng về boss |
 | W | Độc Sa Chưởng thả một bãi khói tròn, ưu tiên boss rồi tới quái trong tầm. Nếu trống, đặt trước mặt | Yêu Cổ gọi 1/2/3/4 cương thi theo bậc. Cương thi ưu tiên mục tiêu Cổ Sư đánh và tồn tại 20 giây |
-| E | Âm Tà Hấp Hồn Khí bật/tắt vòng khói theo chân, gây độc và chậm | Tâm Hình Cổ đánh dấu qua đòn trúng. Sau 3 giây, dấu nổ gây sát thương lan, choáng và hồi máu cho Cổ Sư |
+| E | Âm Tà Hấp Hồn Khí bật/tắt vòng khói theo chân, gây độc và chậm | Tâm Hình Cổ đánh dấu qua đòn trúng. Sau 3 giây, dấu nổ gây sát thương lan, choáng và hồi máu cho Cổ Sư. Trùng bay về sau vụ nổ, khi mục tiêu chết sớm hoặc khi hết tầm |
 | R | Vô Hình Độc tăng phòng thủ, phản độc và làm chậm kẻ đánh trúng. Kỹ năng thụ động và không có VFX riêng | Vô Hình Ma Cổ cho mỗi lần đánh thường hợp lệ 14/18/22/26% cơ hội gọi zombie. Tối đa bốn zombie tồn tại cùng lúc, mỗi con tồn tại 13 giây |
-| T | Âm Phong Thực Cốt gọi nhiều bàn tay độc trồi lên, gây sát thương lan và độc theo thời gian | Thi Quỷ Phong Tận kết ấn gọi Thần Chết. Quét hái làm chậm, sóng độc bay thẳng, bổ hái gây choáng và sát thương diện rộng |
+| T | Âm Phong Thực Cốt gọi 21 bàn tay mở, nắm đấm hoặc bóp vào không khí trên nền khói độc. Vùng có bán kính 180 đơn vị, tồn tại 5 giây và gây một đòn trực tiếp mỗi mục tiêu kèm độc | Thi Quỷ Phong Tận kết ấn gọi Thần Chết. Quét hái làm chậm, sóng độc bay thẳng, bổ hái gây choáng và sát thương diện rộng |
 
 Ngũ Độc Tâm Kinh tăng máu tối đa, hồi máu và hồi nội lực theo cấp. Cương thi, zombie và Thần Chết nhận 18% phần tăng từ trang bị của chủ đối với máu tối đa, sức công, phòng thủ, tốc độ di chuyển và tốc độ đánh. Mua hoặc nâng đồ tác động cả minion đang sống và giữ tỷ lệ máu hiện tại của chúng.
 
-Thần Chết tồn tại đến khi bị hạ. Một Cổ Sư có tối đa một Thần Chết đang sống. Thần Chết theo vị trí chủ khi chủ gục và giữ thực thể, HP qua các lần chuyển giữa arena và phó bản. Khi chủ rời khu vực, cương thi và zombie cũ biến mất. Lôi Đài áp dụng vòng đời triệu hồi theo lượt đấu và giữ Thần Chết PvE để trả lại sau trận.
+Thần Chết lướt theo chủ bằng tốc độ giảm dần khi đã tới gần vị trí đi theo. Thần Chết tồn tại đến khi bị hạ. Một Cổ Sư có tối đa một Thần Chết đang sống. Thần Chết theo vị trí chủ khi chủ gục và giữ thực thể, HP qua các lần chuyển giữa arena và phó bản. Khi chủ rời khu vực, cương thi và zombie cũ biến mất. Lôi Đài áp dụng vòng đời triệu hồi theo lượt đấu và giữ Thần Chết PvE để trả lại sau trận.
 
-Game dùng PNG/JSON từ [bộ sprite đã chọn](../assets/reviews/ngu-doc-preview-v01/README.md) và [Q/W v02](../assets/reviews/ngu-doc-qw-v02/README.md). Icon và chân dung được cắt từ atlas và lưu [hash nguồn/xuất](../assets/exports/ngu-doc-runtime/manifest.json). Hai nhân vật dùng khung đứng và đi bốn hướng; minion lật ngang atlas. Khung bị đánh/gục của nhân vật dùng biến thể màu/alpha trên khung hiện có. Chỉ số thử nằm trong [dữ liệu chiêu](../packages/game-data/src/ngu-doc.ts) và [thông số độc/triệu hồi](../packages/game-core/src/ngu-doc-ids.ts).
+Game dùng PNG/JSON từ [bộ sprite đã chọn](../assets/reviews/ngu-doc-preview-v01/README.md) và [Q/W v02](../assets/reviews/ngu-doc-qw-v02/README.md). Icon A/Q/W/E/R/T, biểu tượng môn phái và nội tại dùng bộ ImageGen mới. Atlas T có ba dáng tay và ba khung khói. [Nguồn, prompt và hash xuất](../assets/exports/ngu-doc-feedback-v1/manifest.json). Hai nhân vật dùng khung đứng và đi bốn hướng; minion lật ngang atlas. Khung bị đánh/gục của nhân vật dùng biến thể màu/alpha trên khung hiện có. Chỉ số thử nằm trong [dữ liệu chiêu](../packages/game-data/src/ngu-doc.ts) và [thông số độc/triệu hồi](../packages/game-core/src/ngu-doc-ids.ts).
 
 Để chạy lại, dùng pnpm build:shared rồi mở hai terminal ở workspace.
 
@@ -28,3 +28,13 @@ Game dùng PNG/JSON từ [bộ sprite đã chọn](../assets/reviews/ngu-doc-pre
 Mẫu cân sơ bộ ở cấp 1/6/15/30, mỗi cấp chạy seed 42/1207/7777 với bia đứng yên và kỹ năng bậc 1. Giáp và vũ khí cấp 1 tăng HP cương thi từ 86 lên 91, HP Thần Chết từ 290 lên 295 và thêm 0,72 sức công cho mỗi con. Ở cấp 6, tổng sát thương của một cương thi và một Thần Chết trong 10 giây là 573 trước khi mua, 584 sau khi mua. Số này đo riêng tác động của trang bị trong mẫu cố định.
 
 Kiểm chứng cuối trong 277,30 giây. TypeScript, 18 kiểm tra workflow, 1.097 bài unit/integration, build production, toàn bộ validator tài sản và 4 ca Chrome đều đạt. Một ca chạy trận thật với hai Chrome và bốn SDK. Ba ca còn lại kiểm tra các phân cảnh duyệt.
+
+## Lượt chỉnh màn chọn phái, VFX và triệu hồi
+
+Lưới 4 trên, 3 dưới vừa viewport 1280 × 720, 850 × 480 và 390 × 640. Popup nhánh giữ nút ổn định khi lựa chọn được server đồng bộ. Escape quay về thẻ vừa chọn.
+
+[Chọn phái](evidence/ngu-doc-feedback-v1/ngu-doc-school-selection.png) · [Popup hệ phái](evidence/ngu-doc-feedback-v1/ngu-doc-branch-popup.png) · [Âm Phong Thực Cốt và HUD ở zoom trận](evidence/ngu-doc-feedback-v1/ngu-doc-ultimate.png).
+
+Kiểm tra chuyển động trên bản đang phục vụ. Trong 500 ms khi Âm Linh đi ở Rừng Trúc, 27 mẫu Phaser liên tiếp dùng khung lướt, Thần Chết di chuyển 50,6 đơn vị theo trục dọc. Ca mô phỏng cũng kiểm tra các bước server liên tục khi chủ đi và giảm tốc khi chủ dừng.
+
+Lượt này qua lệnh `pnpm check:final --config playwright.ngu-doc-game.config.ts` ở cổng QA 2802/5581 trong 384,02 giây. TypeScript, 18 kiểm tra workflow, 1.100 bài unit/integration, build, kiểm tra tài sản và 10 ca Chrome đều đạt. Ca trận sáu người kiểm tra chưởng trái, HUD, tay/khói của T, trang bị, chuyển phó bản và trùng E bay về.

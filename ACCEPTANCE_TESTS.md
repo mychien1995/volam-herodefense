@@ -1,5 +1,8 @@
 ## Ngũ Độc · Bản chơi thử M3D
 
+- Màn chọn phái có 4 thẻ trên, 3 thẻ dưới và popup hai nhánh có thể đóng bằng Escape. Đủ thẻ và nút ở 1280 × 720, 850 × 480 và 390 × 640.
+- Kiểm tra chưởng hướng trái giữ tay đúng chiều, ô A/Q/W/E/R/T có ảnh mới, trường T có tay mở, nắm đấm, tay bóp và khói nền, cùng hiệu ứng cổ trùng bay ngược về khi kết thúc.
+
 - Chọn cả hai nhánh trong phòng thật. Hai máy khách nhìn thấy đúng sprite, Q Bích Cổ có hai ngọn lửa đổi khung, W tạo một bãi khói và R không phát hiệu ứng.
 - W Cổ Sư gọi 1–4 cương thi theo bậc. R chỉ gọi zombie qua xác suất khi đánh thường. Minion hiện thanh máu theo HP từ server.
 - Giao dịch mua đồ cập nhật chỉ số cả minion đã gọi, giữ tỷ lệ HP hiện tại. Thần Chết còn sống giữ ID và lượng máu khi vào phó bản, về arena và qua chu kỳ gục ngã/hồi sinh.
