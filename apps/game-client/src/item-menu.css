@@ -74,7 +74,8 @@
   border-radius: 0;
 }
 #item-menu button:focus-visible,
-.auxiliary-slot:focus-visible {
+.auxiliary-slot:focus-visible,
+.hotbar-skill > .pixel-icon:focus-visible {
   outline: 2px solid #fff0ad;
   outline-offset: 3px;
 }
@@ -559,11 +560,10 @@
   opacity: 0.35;
   filter: grayscale(1);
 }
-.auxiliary-tooltip {
+.auxiliary-tooltip,
+.skill-tooltip {
   position: absolute;
   bottom: calc(100% + 18px);
-  right: -10px;
-  width: 220px;
   padding: 13px;
   border: 10px solid transparent;
   border-image: url('/assets/arena_art01/panel_frame.png') 22 fill / 10px;
@@ -572,20 +572,52 @@
   color: #e9e2c8;
   pointer-events: none;
 }
-.auxiliary-tooltip strong,
-.auxiliary-tooltip span {
+.auxiliary-tooltip {
+  right: -10px;
+  width: 220px;
+}
+.skill-tooltip {
+  z-index: 8;
+  left: 50%;
+  width: min(280px, calc(100vw - 24px));
+  transform: translateX(-50%);
+}
+.hotbar-skill > .pixel-icon {
+  pointer-events: auto;
+}
+:is(.auxiliary-tooltip, .skill-tooltip) > :is(strong, span) {
   display: block;
   font:
     12px/1.6 'Segoe UI',
     sans-serif;
 }
-.auxiliary-tooltip strong {
+:is(.auxiliary-tooltip, .skill-tooltip) > strong {
   color: #e9d08e;
   margin-bottom: 5px;
 }
 .auxiliary-slot:hover .auxiliary-tooltip,
-.auxiliary-slot:focus-visible .auxiliary-tooltip {
+.auxiliary-slot:focus-visible .auxiliary-tooltip,
+.hotbar-skill > .pixel-icon:is(:hover, :focus-visible) ~ .skill-tooltip {
   display: block;
+}
+.skill-tooltip .skill-tip-stats {
+  margin: 6px 0;
+  padding: 4px 0;
+  border-block: 1px solid #9b81586b;
+  white-space: pre-line;
+}
+.skill-tooltip .skill-tip-stats:empty,
+.skill-tooltip .skill-tip-description:empty {
+  display: none;
+}
+.skill-tooltip .skill-tip-state {
+  color: #cbbd90;
+}
+@media (max-width: 620px) {
+  .skill-tooltip {
+    /* The transformed hotbar is the containing block for narrow viewports. */
+    position: fixed;
+  }
 }
 @media (max-width: 1000px) {
   .hotbar {

@@ -2,7 +2,7 @@ import { schema, t, type SchemaType } from '@colyseus/schema';
 import { lobbyConfig } from '@volam/game-data';
 import { z } from 'zod';
 
-export const PROTOCOL_VERSION = 42;
+export const PROTOCOL_VERSION = 44;
 export { StateView } from '@colyseus/schema';
 export const MATCH_ROOM = 'match';
 
@@ -121,6 +121,22 @@ export const inputSchema = z.discriminatedUnion('kind', [
     protocolVersion: z.literal(PROTOCOL_VERSION),
     sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
     kind: z.literal('basic'),
+    targetId: z.string().min(1).max(128).optional(),
+  }),
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    kind: z.literal('move-to'),
+    zoneId: z.string().min(1).max(128),
+    x: z.number().min(0).max(16384),
+    y: z.number().min(0).max(16384),
+    targetId: z.string().min(1).max(128).optional(),
+  }),
+  z.strictObject({
+    protocolVersion: z.literal(PROTOCOL_VERSION),
+    sequence: z.number().int().positive().max(Number.MAX_SAFE_INTEGER),
+    kind: z.literal('auto-basic'),
+    enabled: z.boolean(),
   }),
   z.strictObject({
     protocolVersion: z.literal(PROTOCOL_VERSION),

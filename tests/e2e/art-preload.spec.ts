@@ -13,7 +13,7 @@ test('arena art starts at room join and a failed dungeon pack can be retried', a
   );
   page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/?debug=1', { waitUntil: 'networkidle' });
-  await expect(page.locator('#pre-nickname')).toBeVisible();
+  await expect(page.locator('[data-action=play]')).toBeVisible();
   await expect(page.locator('#game canvas')).toHaveCount(0);
   expect(
     requests.some((path) => /\/(phaser\.esm|arena-scene)-/.test(path)),

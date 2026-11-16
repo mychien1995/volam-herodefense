@@ -36,6 +36,7 @@ test('M3C3 two-client live authored skills, both target combos, golden support/m
     for (let i = 0; i < 2; i++) {
       const p = pages[i]!;
       await p.goto('/?debug=1&skillPreview=1');
+      await p.locator('[data-action=play]').click();
       await p.locator('#pre-nickname').fill('Gold Preview ' + i);
       await p.getByRole('button', { name: 'Vào game', exact: true }).click();
       if (room) {

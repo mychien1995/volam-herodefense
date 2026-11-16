@@ -308,6 +308,41 @@ describe('Lý Mạc Sầu deterministic encounter', () => {
       expect(hasStatus(target, 'slow', f.zone.world.tick)).toBe(false);
     },
   );
+  it('shows a manual basic attack during the hurt window of a real Ngũ Độc Chưởng hit', () => {
+    const f = setup();
+    const hero = f.match.hero('p0')!;
+    const west = lyMacSauEncounter.edgeEmitters.find((p) => p.fx === 1)!;
+    Object.assign(hero, { x: west.x + 65, y: west.y, fx: 1, fy: 0 });
+    Object.assign(f.boss, { x: hero.x + 65, y: hero.y });
+    const palm = cast(f, 'ngu_doc_chuong');
+    step(f.match, palm.releaseAt - f.zone.world.tick);
+    for (let i = 0; i < 15 && !hasStatus(hero, 'slow', f.zone.world.tick); i++)
+      f.match.step();
+    expect(hasStatus(hero, 'slow', f.zone.world.tick)).toBe(true);
+    expect(hero.hurtUntil).toBeGreaterThan(f.zone.world.tick + 1);
+    const hp = f.boss.hp;
+    expect(f.match.input(hero.id, 1, { kind: 'basic' })).toBeUndefined();
+    f.match.step();
+    expect(f.match.events.map(({ event }) => event)).toContainEqual(
+      expect.objectContaining({ kind: 'attack', sourceId: hero.id }),
+    );
+    expect(f.boss.hp).toBeLessThan(hp);
+    expect(hero.pose).toBe('basic_attack');
+  });
+  it('automatically attacks a boss in range in the absence of regular creeps', () => {
+    const f = setup();
+    const hero = f.match.hero('p0')!;
+    Object.assign(hero, { x: f.boss.x + 65, y: f.boss.y, fx: 1, fy: 0 });
+    const hp = f.boss.hp;
+    expect(
+      f.match.input(hero.id, 1, { kind: 'auto-basic', enabled: true }),
+    ).toBeUndefined();
+    f.match.step();
+    expect(f.match.events.map(({ event }) => event)).toContainEqual(
+      expect.objectContaining({ kind: 'attack', sourceId: hero.id }),
+    );
+    expect(f.boss.hp).toBeLessThan(hp);
+  });
   it('resists control while preserving damage and cancels cast when its selected target leaves', () => {
     const f = setup();
     applyStatus(

@@ -18,6 +18,7 @@ test('M3C1 runtime preview: all ten wind skills, both melee basics and four dash
   await mkdir(out, { recursive: true });
   async function join(p: typeof a, name: string, room?: string) {
     await p.goto('/?debug=1&skillPreview=1');
+    await p.locator('[data-action=play]').click();
     await p.locator('#pre-nickname').fill(name);
     await p.getByRole('button', { name: 'Vào game', exact: true }).click();
     if (room) {
@@ -219,6 +220,7 @@ test('M3C1 six-player mixed-school effects keep caster ownership, scale and feet
     for (let i = 0; i < 6; i++) {
       const p = pages[i]!;
       await p.goto('/?debug=1&skillPreview=1');
+      await p.locator('[data-action=play]').click();
       await p.locator('#pre-nickname').fill('Party ' + (i + 1));
       await p.getByRole('button', { name: 'Vào game', exact: true }).click();
       if (room) {

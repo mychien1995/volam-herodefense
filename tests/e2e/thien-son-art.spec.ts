@@ -63,6 +63,7 @@ const gallery = (p: Page) =>
 async function waiting(p: Page, nickname: string, room?: string, dao = false) {
   await p.bringToFront();
   await p.goto('/?debug=1' + (dao ? '&thienSonWeapon=dao' : ''));
+  await p.locator('[data-action=play]').click();
   await p.locator('#pre-nickname').fill(nickname);
   await p.getByRole('button', { name: 'Vào game', exact: true }).click();
   if (room) {

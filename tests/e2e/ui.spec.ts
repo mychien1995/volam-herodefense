@@ -394,6 +394,7 @@ test('six-player inventory HUD preserves natural combat and peer synchronization
       pages.push(page);
       page.on('pageerror', (error) => errors.push(error.message));
       await page.goto('/?debug=1');
+      await page.locator('[data-action=play]').click();
       await page.locator('#pre-nickname').fill(`Đồng Đội ${i + 1}`);
       await page.getByRole('button', { name: 'Vào game', exact: true }).click();
       // The existing six-player art QA joins through the room list: a refresh

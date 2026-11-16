@@ -258,6 +258,7 @@ const hero = async (p: Page) => {
 const out = 'docs/evidence/m3a';
 async function join(p: Page, name: string, room?: string, loaded = false) {
   if (!loaded) await p.goto('/?debug=1&skillPreview=1');
+  await p.locator('[data-action=play]').click();
   await p.locator('#pre-nickname').fill(name);
   await p.getByRole('button', { name: 'Vào game', exact: true }).click();
   if (room) {

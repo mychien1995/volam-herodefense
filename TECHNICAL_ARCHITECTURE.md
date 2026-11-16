@@ -1,3 +1,7 @@
+## Điều khiển chuột và tự đánh thường · protocol 44
+
+Client gửi điểm đến và mã khu vực qua `move-to`. Server dựng đường đi từ vị trí hiện tại và áp cùng tốc độ, hình va chạm và trạng thái hạn chế di chuyển như bàn phím. Lệnh có thể kèm mã mục tiêu. Phòng đổi mã thực thể được chiếu cho client về mã nội bộ trong đúng khu vực của nhân vật. Server kiểm tra mục tiêu, tầm đánh và chướng ngại, rồi đánh thường nếu hợp lệ hoặc đi đến điểm bấm nếu mục tiêu đã chết hay rời khu vực. Với `auto-basic`, server chọn đối thủ PvE còn sống, gần nhất và trong tầm, gồm quái thường, quái do boss gọi và boss. Auto dùng hồi chiêu/nhịp đòn hiện tại, ưu tiên lệnh tay và không dùng trong PvP. Tư thế chịu đòn chỉ ghi đè đòn đánh thường của nhân vật khi bị choáng hoặc khi đòn đã kết thúc. Hai dịch vụ cần cùng protocol 44.
+
 ## Võ Đang Kiếm — protocol 38
 
 Server giữ số lượt Vạn Kiếm qua các mốc hồi tuần tự, chuyển mốc theo đồng hồ vùng khi chuyển bản đồ. BuildState đồng bộ số lượt, sức chứa và thời gian hồi lượt kế. Vùng chiến đấu giữ tick bắt đầu, tâm đáp, điểm phóng và hướng chỉ kiếm. Phaser dùng cùng bộ trình diễn 48 thanh trong trận và trang preview. Server lập lịch một lần sát thương ở mốc thanh đầu chạm tâm. Sự kiện Q chứa chỉ số nhát để ghép đúng bảy vệt chém với bảy nhịp server.

@@ -30,6 +30,7 @@ test('dedicated selection after host start synchronizes different schools', asyn
   try {
     await a.goto('/?debug=1');
     await a.screenshot({ path: resolve(out, '01-landing-1280.png') });
+    await a.locator('[data-action=play]').click();
     expect(await a.locator('#pregame input').count()).toBe(1);
     await a.locator('#pre-nickname').fill('Thanh Phong');
     await a.getByRole('button', { name: 'Vào game', exact: true }).click();

@@ -27,6 +27,7 @@ const read = (p: Page): Promise<Snapshot> =>
   p.evaluate('window.__VOLAM__.snapshot()');
 async function joinListed(p: Page, id: string) {
   await p.goto('/?debug=1');
+  await p.locator('[data-action=play]').click();
   await p.locator('#pre-nickname').fill('Late guest');
   await p.getByRole('button', { name: 'Vào game', exact: true }).click();
   const row = p.locator('#pregame tbody tr').filter({ hasText: id });

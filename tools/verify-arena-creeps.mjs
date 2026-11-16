@@ -27,8 +27,8 @@ try{
   p.on('pageerror',e=>errors.push(e.message));p.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
   p.on('response',r=>{if(r.status()>=400)errors.push(r.status()+' '+r.url());});
   p.on('requestfailed',r=>errors.push(r.url()+' '+r.failure()?.errorText));
-  await p.goto('http://127.0.0.1:5175/?debug=1');await p.locator('#pre-nickname').fill('Creep QA '+(n+1));
-  await p.getByRole('button',{name:'Enter Game',exact:true}).click();
+  await p.goto('http://127.0.0.1:5175/?debug=1');await p.locator('[data-action=play]').click(); await p.locator('#pre-nickname').fill('Creep QA '+(n+1));
+  await p.getByRole('button',{name:'Vào game',exact:true}).click();
   if(roomId){await p.getByLabel('Room code',{exact:true}).fill(roomId);await p.getByRole('button',{name:'Join by code',exact:true}).click();}
   else await p.getByRole('button',{name:'Create room',exact:true}).click();
   await wait(async()=>!!(await read(p))?.roomId,'join');

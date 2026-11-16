@@ -12,9 +12,12 @@ import {
 } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
 import { icon, menuContents, menuTitles, type Menu } from './menus.js';
+import type { Preferences } from './preferences.js';
+import { bindSettings } from './settings-controls.js';
 import { DefenseHud } from './defense-hud.js';
 import { BossRetryUI, type RetryAction } from './boss-retry-ui.js';
-import { SkillMenu } from './skill-menu.js';
+import { abilitySummary, SkillMenu } from './skill-menu.js';
+import { skillRankStats } from './skill-rank-stats.js';
 import { BossPartyUI, isBossDestination } from './boss-party-ui.js';
 import {
   conLuan,
@@ -59,6 +62,7 @@ export class GameUI {
   private skillMenu: SkillMenu | undefined;
   private itemMenu: ItemMenu | undefined;
   onBuild: (change: BuildChange) => void = () => {};
+  onSettings: (key: keyof Preferences) => void = () => {};
   onMerchant: (action: MerchantAction) => void = () => {};
   private ack = 'Chia sẻ mã phòng với bạn bè.';
   private toastTimer: number | undefined;
@@ -103,7 +107,7 @@ export class GameUI {
             ]
               .map(
                 ([key, art, title]) =>
-                  `<div id="slot-${key}" class="hotbar-slot ${key === 'e' || key === 'r' ? 'unequipped' : ''}" title="${title}">${icon(art!)}<kbd>${key!.toUpperCase()}</kbd><b id="timer-${key}" class="cooldown-number"></b><small id="cooldown-${key}">${key === 'q' ? '18 NL' : key === 'w' ? '25 NL' : key === 'a' ? 'Bổng' : 'Trống'}</small><div class="cooldown-shade"></div>${key !== 'a' ? `<button class="rank-up" type="button" data-rank-slot="${'qwert'.indexOf(key!)}" hidden>+</button>` : ''}</div>`,
+                  `<div id="slot-${key}" class="hotbar-slot hotbar-skill ${key === 'e' || key === 'r' ? 'unequipped' : ''}"><span class="pixel-icon icon-${art}" role="img" tabindex="0" aria-label="${title}" aria-describedby="skill-tip-${key}"></span><kbd>${key!.toUpperCase()}</kbd><b id="timer-${key}" class="cooldown-number"></b><small id="cooldown-${key}">${key === 'q' ? '18 NL' : key === 'w' ? '25 NL' : key === 'a' ? 'Bổng' : 'Trống'}</small><div class="cooldown-shade"></div>${key !== 'a' ? `<button class="rank-up" type="button" data-rank-slot="${'qwert'.indexOf(key!)}" hidden>+</button>` : ''}<span id="skill-tip-${key}" class="skill-tooltip" role="tooltip"><strong></strong><span class="skill-tip-description"></span><span class="skill-tip-stats"></span><span class="skill-tip-state"></span></span></div>`,
               )
               .join('')}
             <div id="dash-status" class="dash-status" role="status" aria-label="Lướt · Shift"><img src="/assets/m3d_feedback/dash_icon_frame.png" alt="" width="32" height="32"><b id="dash-charges">2</b><kbd>Shift</kbd><small id="dash-timer"></small><progress id="dash-progress" max="180" value="180" aria-label="Hồi lượt lướt"></progress></div>
@@ -324,6 +328,8 @@ export class GameUI {
       new URLSearchParams(location.search).has('debug'),
       this.state?.requiresBranch === false,
     );
+    if (menu === 'settings')
+      bindSettings(element('#dialog-content'), 'match', this.onSettings);
     element('#modal-layer').dataset['activeMenu'] = menu;
     element('.menu-safety').textContent =
       menu === 'dungeons'
@@ -1143,8 +1149,45 @@ export class GameUI {
                     m1Config.progression?.skills[ability.id]?.levelGates[0]
                   : `${cost} NL`
                 : 'Trống';
-      slot.title = `${ability?.nameVi ?? 'Chưa trang bị'}${key !== 'a' && hero.build.enabled ? ' · Bậc ' + rank : ''}${charge ? ` · ${charge.count}/${charge.capacity} lượt${charge.rechargeTicks ? ` · Hồi lượt sau ${(charge.rechargeTicks / m1Config.tickRate).toFixed(1)} giây` : ''}` : ''} · ${!ability ? 'Chưa mở' : rank === 0 ? 'Chưa học' : controlled ? 'Đang bị khống chế' : cooling ? 'Đang hồi chiêu' : hero.mana < cost ? 'Thiếu nội lực' : 'Sẵn sàng'}`;
-      slot.dataset['skillId'] = ability?.id ?? '';
+      const id = ability?.id ?? '';
+      const definition = m1Config.progression?.skills[id];
+      if (
+        slot.dataset['skillId'] !== id ||
+        slot.dataset['skillRank'] !== String(rank)
+      ) {
+        slot.dataset['skillId'] = id;
+        slot.dataset['skillRank'] = String(rank);
+        const name = ability?.nameVi ?? 'Chưa trang bị';
+        element(`#skill-tip-${key} strong`).textContent = name;
+        slot
+          .querySelector('.pixel-icon')!
+          .setAttribute('aria-label', `${name} · ${key.toUpperCase()}`);
+        element(`#skill-tip-${key} .skill-tip-description`).textContent =
+          definition?.descriptionVi ??
+          (ability ? abilitySummary(ability).replace(/^ · /, '') : '');
+        element(`#skill-tip-${key} .skill-tip-stats`).textContent =
+          ability && definition && rank > 0 ? skillRankStats(ability) : '';
+      }
+      const status = !ability
+        ? 'Chưa mở'
+        : rank === 0
+          ? `Chưa học${definition ? ' · Cấp ' + definition.levelGates[0] : ''}`
+          : controlled
+            ? 'Đang bị khống chế'
+            : cooling
+              ? 'Đang hồi chiêu'
+              : hero.mana < cost
+                ? 'Thiếu nội lực'
+                : 'Sẵn sàng';
+      const details = [
+        key !== 'a' && hero.build.enabled && rank > 0 ? `Bậc ${rank}` : '',
+        status,
+        charge ? `${charge.count}/${charge.capacity} lượt` : '',
+      ]
+        .filter(Boolean)
+        .join(' · ');
+      const tipState = element(`#skill-tip-${key} .skill-tip-state`);
+      if (tipState.textContent !== details) tipState.textContent = details;
     }
   }
 

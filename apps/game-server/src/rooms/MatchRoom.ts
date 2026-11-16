@@ -722,10 +722,20 @@ export class MatchRoom extends Room<{
           return;
         }
       }
+      let command = input;
+      if (
+        (input.kind === 'basic' || input.kind === 'move-to') &&
+        input.targetId
+      ) {
+        const zone = this.simulation.zoneOf(client.sessionId);
+        const prefix = zone ? this.entityKey(zone, '') : '';
+        if (prefix && input.targetId.startsWith(prefix))
+          command = { ...input, targetId: input.targetId.slice(prefix.length) };
+      }
       const reason = this.simulation.input(
         client.sessionId,
         input.sequence,
-        input,
+        command,
       );
       if (
         !reason &&

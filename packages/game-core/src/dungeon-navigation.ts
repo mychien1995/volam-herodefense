@@ -1,5 +1,5 @@
 import { blocked, distance, segmentRect } from './geometry.js';
-import type { Creep, Actor, Point, SimulationConfig } from './types.js';
+import type { Creep, Actor, Point, Rect, SimulationConfig } from './types.js';
 const cell = 32;
 /** Small deterministic grid search only for dungeon creeps blocked by scenery. */
 export function dungeonWaypoint(
@@ -25,74 +25,13 @@ export function dungeonWaypoint(
     nav.gy !== gy ||
     tick >= nav.repathAt
   ) {
-    const cols = Math.ceil(config.width / cell),
-      rows = Math.ceil(config.height / cell);
-    const point = (n: number) => ({
-      x: ((n % cols) + 0.5) * cell,
-      y: (Math.floor(n / cols) + 0.5) * cell,
-    });
-    const valid = (n: number) =>
-      n >= 0 &&
-      n < cols * rows &&
-      !blocked(point(n), radius, config.width, config.height, config.collision);
-    const near = (p: Point) => {
-      const choices: number[] = [];
-      for (
-        let y = Math.max(0, Math.floor(p.y / cell) - 2);
-        y <= Math.min(rows - 1, Math.floor(p.y / cell) + 2);
-        y++
-      )
-        for (
-          let x = Math.max(0, Math.floor(p.x / cell) - 2);
-          x <= Math.min(cols - 1, Math.floor(p.x / cell) + 2);
-          x++
-        ) {
-          const n = y * cols + x;
-          if (valid(n) && clear(p, point(n))) choices.push(n);
-        }
-      return choices.sort(
-        (a, b) => distance(point(a), p) - distance(point(b), p) || a - b,
-      )[0];
-    };
-    const start = near(enemy),
-      goal = near(hero),
-      waypoints: Point[] = [];
-    if (start !== undefined && goal !== undefined) {
-      const previous = new Int32Array(cols * rows).fill(-1),
-        queue = [start];
-      previous[start] = start;
-      for (let head = 0; head < queue.length && previous[goal] === -1; head++) {
-        const n = queue[head]!;
-        for (const [dx, dy] of [
-          [1, 0],
-          [0, 1],
-          [-1, 0],
-          [0, -1],
-        ]) {
-          const x = (n % cols) + dx!,
-            y = Math.floor(n / cols) + dy!,
-            next = y * cols + x;
-          if (
-            x < 0 ||
-            x >= cols ||
-            y < 0 ||
-            y >= rows ||
-            previous[next] !== -1 ||
-            !valid(next) ||
-            !clear(point(n), point(next))
-          )
-            continue;
-          previous[next] = n;
-          queue.push(next);
-        }
-      }
-      if (previous[goal] !== -1) {
-        for (let n = goal; n !== start; n = previous[n]!)
-          waypoints.unshift(point(n));
-        waypoints.unshift(point(start));
-        waypoints.push({ x: hero.x, y: hero.y });
-      }
-    }
+    const waypoints = findWalkPath(
+      enemy,
+      hero,
+      radius,
+      config,
+      config.collision,
+    );
     nav = {
       targetId: hero.id,
       gx,
@@ -105,4 +44,91 @@ export function dungeonWaypoint(
   while (nav.waypoints.length && distance(enemy, nav.waypoints[0]!) < 5)
     nav.waypoints.shift();
   return nav.waypoints[0] ?? hero;
+}
+
+export function findWalkPath(
+  from: Point,
+  to: Point,
+  radius: number,
+  { width, height }: Pick<SimulationConfig, 'width' | 'height'>,
+  walls: Rect[],
+  insideBounds: (position: Point) => boolean = () => true,
+): Point[] {
+  // Walking collision permits tangency. Do not trap an actor starting flush
+  // against a wall by treating the first endpoint as a swept collision.
+  const padding = Math.max(0, radius - 1e-7);
+  const clear = (a: Point, b: Point) =>
+    !walls.some((w) => segmentRect(a, b, w, padding) !== undefined);
+  if (!insideBounds(to) || blocked(to, radius, width, height, walls)) return [];
+  if (clear(from, to)) return [{ x: to.x, y: to.y }];
+  const cols = Math.ceil(width / cell),
+    rows = Math.ceil(height / cell);
+  const point = (n: number) => ({
+    x: ((n % cols) + 0.5) * cell,
+    y: (Math.floor(n / cols) + 0.5) * cell,
+  });
+  const valid = (n: number) =>
+    n >= 0 &&
+    n < cols * rows &&
+    !blocked(point(n), radius, width, height, walls) &&
+    insideBounds(point(n));
+  const near = (p: Point) => {
+    const choices: number[] = [];
+    for (
+      let y = Math.max(0, Math.floor(p.y / cell) - 2);
+      y <= Math.min(rows - 1, Math.floor(p.y / cell) + 2);
+      y++
+    )
+      for (
+        let x = Math.max(0, Math.floor(p.x / cell) - 2);
+        x <= Math.min(cols - 1, Math.floor(p.x / cell) + 2);
+        x++
+      ) {
+        const n = y * cols + x;
+        if (valid(n) && clear(p, point(n))) choices.push(n);
+      }
+    return choices.sort(
+      (a, b) => distance(point(a), p) - distance(point(b), p) || a - b,
+    )[0];
+  };
+  const start = near(from),
+    goal = near(to),
+    waypoints: Point[] = [];
+  if (start !== undefined && goal !== undefined) {
+    const previous = new Int32Array(cols * rows).fill(-1),
+      queue = [start];
+    previous[start] = start;
+    for (let head = 0; head < queue.length && previous[goal] === -1; head++) {
+      const n = queue[head]!;
+      for (const [dx, dy] of [
+        [1, 0],
+        [0, 1],
+        [-1, 0],
+        [0, -1],
+      ]) {
+        const x = (n % cols) + dx!,
+          y = Math.floor(n / cols) + dy!,
+          next = y * cols + x;
+        if (
+          x < 0 ||
+          x >= cols ||
+          y < 0 ||
+          y >= rows ||
+          previous[next] !== -1 ||
+          !valid(next) ||
+          !clear(point(n), point(next))
+        )
+          continue;
+        previous[next] = n;
+        queue.push(next);
+      }
+    }
+    if (previous[goal] !== -1) {
+      for (let n = goal; n !== start; n = previous[n]!)
+        waypoints.unshift(point(n));
+      waypoints.unshift(point(start));
+      waypoints.push({ x: to.x, y: to.y });
+    }
+  }
+  return waypoints;
 }

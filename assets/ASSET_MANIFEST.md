@@ -165,3 +165,25 @@ Atlas Tam Liên Trảm dùng 16 cel PNG 160×144 với chân tại (80,112), ba 
 ## Đài Hồng Mộc v2
 
 `source/loi-dai-v2` stores original ImageGen paving art and editable masks for the approved court source. `exports/loi-dai-v2` contains native-density ground and individually placed scenery PNGs with source hashes, depth and sizes in the manifest. M3D uses the v2 court layers and the original victory fireworks atlas. [Integration](../docs/LOI_DAI.md)
+
+## Menu chính và chỉ điểm di chuyển · 2026-11-15
+
+Ba asset nguyên gốc tạo bằng OpenAI ImageGen cho dự án, được duyệt để tích hợp M3D ngày 2026-11-16. Bản màu tham chiếu cho UI dùng mặt sơn xanh, viền đồng và nền giấy, lấy cảm hứng từ ảnh sân trung tâm và khung Túi Đồ.
+
+| Tệp trong `apps/game-client` | Kích thước | Mục đích |
+| --- | --- | --- |
+| `src/controls-art/statue-guide.webp` | 440 × 550 | Minh họa Tượng Võ Thần và các hiệp khách bảo vệ sân; bản xuất từ tranh pixel góc nhìn 3/4, không chữ. |
+| `src/controls-art/cursor.png` | 32 × 32 RGBA | Mũi giáo ngà, nạm ngọc và tua đỏ; khung trong suốt, điểm bấm (2, 2). |
+| `src/controls-art/move-marker.png` | 42 × 28 RGBA | Hai vết chém ánh vàng giao thành chữ X; tâm (21, 14). Phaser phóng từ 0.8 đến 1.18 và giảm alpha trong 420 ms. |
+
+### ImageGen prompts · menu và điều khiển
+
+Các ảnh dùng công cụ ImageGen tích hợp. Các prompt dưới đây lưu kèm bản xuất để có thể làm lại cùng hướng mỹ thuật.
+
+- `statue-guide.webp` — UI-free original illustration for a Vietnamese wuxia pixel art RPG guide page, portrait-ish 4:5 crop. Center a warm gray stone statue of the founder holding a sword vertically in a compact weathered cobble courtyard. Three tiny detailed chibi wuxia heroes in gold, deep blue, and ink-green intercept encroaching bandits entering through courtyard gates. Pink blossoms, bamboo, hanging vermilion lanterns, old dark tile roofs. Visually authentic detailed pixel art with deliberate hand-pixel clusters, viewing the ground in a Pokémon-like elevated orthographic three-quarter view. Borderless illustration with no UI, no lettering, no logo, no watermark. Use muted jade, amber and parchment hues, read clearly as a small in-game guide picture.
+- `cursor.png` — Create a production source PNG for a single cursor for a detailed 2D pixel-art wuxia RPG. True clean transparent canvas, no background, no text. One small original mouse cursor pointing toward the upper-left at a 45-degree angle. An ivory and burnished brass spearhead shaped like a classic arrow cursor, little jade inlay at the heel, and a tiny red tassel. Dark near-black contour, very chunky and legible at 28x28 px. Crisp intentional hand-pixeled edges, no soft shadow, no bloom. One sprite centered, presented large on the canvas with transparent margin.
+- `move-marker.png` — One small 2D pixel-art destination confirmation FX for on-the-ground right click in an orthographic three-quarter wuxia RPG. Transparent PNG, zero ground, zero text. At the center, depict a single compact oblique X (horizontal axis wider, roughly 1.5:1), struck from two tapered copper-red glowing blade marks with a clean bright golden core. A handful of small pixel embers around it. Crisp bold pixel clusters, limited palette, no gradient halo or soft shadows. Strong readable X silhouette at 34x24 px, center symmetrical and isolated, fill most of canvas with alpha margin. One icon only.
+
+## Nhạc nền trận đấu
+
+Ba bản nhạc do người dùng cung cấp gồm `assets/sounds/game-ost.mp3`, `assets/sounds/game-ost-2.mp3` và `assets/sounds/game-ost-3.mp3`. Client xáo thứ tự phát trong trận.

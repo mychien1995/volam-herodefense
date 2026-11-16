@@ -1,3 +1,4 @@
+import markerArt from './controls-art/move-marker.png?url';
 import { BossSkillAnnouncements } from './boss-skill-announcements.js';
 import {
   preloadRuntimeArtReview,
@@ -80,6 +81,7 @@ import { forestCombatBody, forestCombatOrigin } from './m3d-native-art.js';
 import {
   M3dHitArt,
   markImpactTarget,
+  impactTargetId,
   preloadM3dHitArt,
 } from './m3d-hit-art.js';
 import {
@@ -327,7 +329,60 @@ export class ArenaScene extends Phaser.Scene {
     this.cameras.main.scrollX += x * 24;
     this.cameras.main.scrollY += y * 24;
   }
+  worldClick(clientX: number, clientY: number) {
+    const canvas = this.game.canvas.getBoundingClientRect();
+    const camera = this.cameras.main;
+    const position = camera.getWorldPoint(
+      ((clientX - canvas.left) / canvas.width) * camera.width,
+      ((clientY - canvas.top) / canvas.height) * camera.height,
+    );
+    let targetId: string | undefined;
+    let front = -Infinity;
+    for (const view of this.children.list) {
+      const id = impactTargetId(view);
+      if (
+        !id ||
+        id === this.sessionId ||
+        !(
+          view instanceof Phaser.GameObjects.Sprite ||
+          view instanceof Phaser.GameObjects.Image
+        ) ||
+        !view.visible ||
+        view.alpha <= 0 ||
+        view.depth < front
+      )
+        continue;
+      const creep = this.snapshot?.creeps.get(id);
+      const player = this.snapshot?.players.get(id);
+      const duelOpponent =
+        this.snapshot?.players.get(this.sessionId)?.loiDaiFighter &&
+        player?.loiDaiFighter;
+      const enemy = creep ?? (duelOpponent ? player : undefined);
+      if (!enemy || enemy.hp <= 0 || enemy.zoneId !== this.zoneId) continue;
+      if (view.getBounds().contains(position.x, position.y)) {
+        targetId = id;
+        front = view.depth;
+      }
+    }
+    return { position, targetId };
+  }
+  private moveMarker?: Phaser.GameObjects.Image;
+  showMoveMarker({ x, y }: { x: number; y: number }): void {
+    if (this.moveMarker?.active) this.moveMarker.destroy();
+    const marker = this.add.image(x, y, 'click-move-marker').setDepth(y - 1);
+    marker.setScale(0.8);
+    this.moveMarker = marker;
+    this.tweens.add({
+      targets: marker,
+      scale: 1.18,
+      alpha: 0,
+      duration: 420,
+      ease: 'Quad.Out',
+      onComplete: () => marker.destroy(),
+    });
+  }
   preload(): void {
+    this.load.image('click-move-marker', markerArt);
     this.bootArtFailed = false;
     this.load.once(
       Phaser.Loader.Events.COMPLETE,
@@ -1733,6 +1788,18 @@ export class ArenaScene extends Phaser.Scene {
       zoom: this.cameras.main.zoom,
       roundPixels: this.cameras.main.roundPixels,
       camera: { x: this.cameras.main.scrollX, y: this.cameras.main.scrollY },
+      cameraMatrix: {
+        origin: { x: origin.x, y: origin.y },
+        step: unit.x - origin.x,
+      },
+      moveMarker: this.moveMarker?.active
+        ? {
+            x: this.moveMarker.x,
+            y: this.moveMarker.y,
+            scale: this.moveMarker.scaleX,
+            alpha: this.moveMarker.alpha,
+          }
+        : undefined,
       completedAnimations: this.completedAnimations.map((a) => ({ ...a })),
       observedHeroFrames: Object.fromEntries(
         [...this.observedHeroFrames].map(([key, frames]) => [key, [...frames]]),

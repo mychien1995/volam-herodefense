@@ -28,6 +28,7 @@ test('M3C2 real preview: all ten skills and two basics show authored frames, shi
     for (let i = 0; i < 3; i++) {
       const p = pages[i]!;
       await p.goto('/?debug=1&skillPreview=1');
+      await p.locator('[data-action=play]').click();
       await p.locator('#pre-nickname').fill('M3C2 ' + i);
       await p.getByRole('button', { name: 'Vào game', exact: true }).click();
       if (room) {

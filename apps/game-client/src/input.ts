@@ -15,6 +15,7 @@ export function bindGameplayInput(
     | undefined = () => undefined,
   switchStance: () => void = () => {},
   skillUpgrade?: { enabled: () => boolean; upgrade: (slot: number) => void },
+  mouseMode: () => boolean = () => false,
 ): () => void {
   const held = new Set<string>();
   let learning = false;
@@ -68,6 +69,7 @@ export function bindGameplayInput(
     }
     if (inputBindings.movement.some((key) => key === event.code)) {
       event.preventDefault();
+      if (mouseMode() && !spectator?.active()) return;
       if (!held.has(event.code)) {
         held.add(event.code);
         move();
@@ -145,7 +147,11 @@ export function bindGameplayInput(
   };
   const keyup = (event: KeyboardEvent): void => {
     if (event.code === 'KeyO') learning = false;
-    if (held.delete(event.code) && connected()) {
+    if (
+      held.delete(event.code) &&
+      connected() &&
+      (!mouseMode() || spectator?.active())
+    ) {
       event.preventDefault();
       move();
     }
@@ -164,6 +170,7 @@ export function bindGameplayInput(
   document.addEventListener('visibilitychange', visibility);
   const heartbeat = window.setInterval(() => {
     if (blocked() && held.size) stop();
+    else if (mouseMode() && !spectator?.active()) held.clear();
     else if (connected() && held.size) move();
   }, 100);
   return () => {

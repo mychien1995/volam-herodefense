@@ -29,6 +29,12 @@ export function markImpactTarget(body: Body | undefined, id: string): void {
   if (body && body.data?.get(targetData) !== id) body.setData(targetData, id);
 }
 
+export function impactTargetId(
+  body: Phaser.GameObjects.GameObject,
+): string | undefined {
+  return body.data?.get(targetData) as string | undefined;
+}
+
 function drawContour(
   frame: Phaser.Textures.Frame,
   canvas: HTMLCanvasElement,

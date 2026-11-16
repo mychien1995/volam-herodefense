@@ -1,3 +1,5 @@
+import { settingsControls } from './settings-controls.js';
+
 export type Menu =
   | 'inventory'
   | 'dungeons'
@@ -26,7 +28,7 @@ export function menuContents(
     case 'quit':
       return '<p>Bạn có muốn rời trận? Tiến trình trong trận sẽ không được lưu.</p><div class="window-footer"><button id="cancel-quit">Ở lại</button><button id="confirm-quit" class="danger">Rời trận</button></div>';
     case 'settings':
-      return `<div class="settings-controls"><p>↑ ↓ ← → · Di chuyển / camera khi quan chiến<br>A · Đánh thường<br>${legacySkills ? 'Q W E R · Kỹ năng<br>O · Võ Công' : 'Q W E R T · Kỹ năng<br>+ · Học hoặc tăng bậc kỹ năng<br>F · Đổi Quyền/Cước (Thiếu Lâm Quyền)<br>Z · Kỹ năng từ giày chế tạo'}<br>1 · Dùng bình máu<br>2 · Dùng bình mana<br>P · Phó Bản<br>Space · Rời phó bản khi gần cửa<br>Escape · Đóng cửa sổ / Thoát</p>${legacySkills ? '<button data-menu="skills">' + icon('scroll') + ' Võ Công <kbd>O</kbd></button>' : ''}<button id="fullscreen">Toàn màn hình</button>${debug ? '<button id="forest-study">Xem bản mẫu rừng</button>' : ''}</div>`;
+      return `<div class="settings-controls">${settingsControls('match')}${legacySkills ? '<button data-menu="skills">' + icon('scroll') + ' Võ Công <kbd>O</kbd></button>' : ''}<button id="fullscreen">Toàn màn hình</button>${debug ? '<button id="forest-study">Xem bản mẫu rừng</button>' : ''}</div>`;
     case 'inventory':
       return '<div id="item-menu"></div>';
     case 'dungeons':

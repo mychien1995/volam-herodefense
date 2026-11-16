@@ -74,6 +74,119 @@ describe('M1 deterministic movement and input', () => {
     expect(a.hero.x).toBeCloseTo(200 + 160 / 30);
   });
 });
+describe('Mouse movement and auto basics', () => {
+  it('routes around scenery at walking speed and stops at the clicked point', () => {
+    const a = setup();
+    a.config.collision = [{ x: 225, y: 171, width: 19, height: 60 }];
+    a.input({ kind: 'move-to', x: 282, y: 200, zoneId: 'arena' });
+    a.steps(1);
+    expect(distance(a.hero, { x: 200, y: 200 })).toBeLessThanOrEqual(
+      160 / 30 + 1e-8,
+    );
+    a.steps(70);
+    expect(a.hero.x).toBeCloseTo(282);
+    expect(a.hero.y).toBeCloseTo(200);
+    expect(a.hero.moveDestination).toBeUndefined();
+  });
+  it('walks away from the edge of a wall at the slowed speed', () => {
+    const a = setup();
+    a.config.collision = [
+      { x: a.hero.x + a.config.radius, y: 160, width: 20, height: 80 },
+    ];
+    a.hero.statuses!.push({
+      kind: 'slow',
+      sourceId: a.enemy.id,
+      abilityId: 'test_slow',
+      magnitude: 0.85,
+      durationTicks: 60,
+      until: 60,
+    });
+    a.input({ kind: 'move-to', x: 165, y: 200, zoneId: 'arena' });
+    a.steps(10);
+    expect(a.hero.x).toBeCloseTo(192);
+    a.steps(45);
+    expect(a.hero.x).toBeCloseTo(165);
+  });
+  it('cancels click movement on a stop and rejects a point inside a wall', () => {
+    const a = setup();
+    a.config.collision = [{ x: 300, y: 180, width: 30, height: 50 }];
+    a.input({ kind: 'move-to', x: 311, y: 205, zoneId: 'arena' });
+    a.steps(10);
+    expect(a.hero.x).toBe(200);
+    a.input({ kind: 'move-to', x: 280, y: 200, zoneId: 'arena' });
+    a.steps(3);
+    const x = a.hero.x;
+    a.input({ kind: 'move', x: 0, y: 0 });
+    a.steps(25);
+    expect(a.hero.x).toBe(x);
+  });
+  it('auto faces the nearest reachable creep, respects walls and can be turned off', () => {
+    const a = setup();
+    a.enemy.x = 170;
+    a.enemy.y = 200;
+    const wallCreep = { ...structuredClone(a.enemy), id: 'blocked', x: 221 };
+    a.world.creeps.set(wallCreep.id, wallCreep);
+    a.config.collision = [{ x: 208, y: 191, width: 5, height: 20 }];
+    a.steps(2);
+    expect(a.enemy.hp).toBe(a.enemy.maxHp);
+    a.input({ kind: 'auto-basic', enabled: true });
+    a.steps(15);
+    expect(a.enemy.hp).toBeLessThan(a.enemy.maxHp);
+    expect(wallCreep.hp).toBe(wallCreep.maxHp);
+    const hp = a.enemy.hp;
+    a.input({ kind: 'auto-basic', enabled: false });
+    a.steps(35);
+    expect(a.enemy.hp).toBe(hp);
+    expect(a.hero.mana).toBe(a.hero.maxMana);
+  });
+  it('walks to the clicked point if the selected creep dies before the click resolves', () => {
+    const a = setup();
+    Object.assign(a.enemy, { x: 170, y: 200, hp: 1 });
+    a.hero.fx = -1;
+    a.input({ kind: 'basic' });
+    a.input({
+      kind: 'move-to',
+      x: 170,
+      y: 200,
+      zoneId: 'arena',
+      targetId: a.enemy.id,
+    });
+    a.steps(30);
+    expect(a.enemy.hp).toBe(0);
+    expect(a.hero.x).toBeCloseTo(170);
+  });
+  it('attacks a living creep in range on a click and honors a newer movement command', () => {
+    const a = setup();
+    Object.assign(a.enemy, { x: 170, y: 200 });
+    const click = {
+      kind: 'move-to',
+      x: 170,
+      y: 200,
+      zoneId: 'arena',
+      targetId: a.enemy.id,
+    } as const;
+    a.input(click);
+    a.input({ kind: 'move', x: 0, y: 0 });
+    a.steps(1);
+    expect(a.enemy.hp).toBe(a.enemy.maxHp);
+    a.input(click);
+    a.steps(10);
+    expect(a.enemy.hp).toBeLessThan(a.enemy.maxHp);
+    expect(a.hero.x).toBe(200);
+  });
+  it('rejects a targeted basic outside attack range and hits a selected nearby enemy', () => {
+    const a = setup();
+    a.input({ kind: 'basic', targetId: a.enemy.id });
+    a.steps(1);
+    expect(a.hero.cooldown).toBe(0);
+    a.enemy.x = 169;
+    a.enemy.y = 200;
+    a.input({ kind: 'basic', targetId: a.enemy.id });
+    a.steps(15);
+    expect(a.enemy.hp).toBeLessThan(a.enemy.maxHp);
+    expect(a.hero.fx).toBe(-1);
+  });
+});
 describe('M1 manual attacks and the two data-driven abilities', () => {
   it('selects a frontal primary, reduces secondary cleave and excludes enemies behind', () => {
     const a = setup();

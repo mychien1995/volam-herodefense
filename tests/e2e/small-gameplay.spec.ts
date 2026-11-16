@@ -93,6 +93,7 @@ test('Vietnamese six-player school selection fits supported desktop sizes withou
   const errors = monitor(page),
     peers: Array<{ leave(): Promise<unknown> }> = [];
   await page.goto('/?debug=1');
+  await page.locator('[data-action=play]').click();
   await page.locator('#pre-nickname').fill('Phím P');
   await page.locator('#pre-nickname').press('p');
   await expect(page.locator('#modal-layer')).toBeHidden();

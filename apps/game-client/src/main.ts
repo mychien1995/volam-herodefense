@@ -38,8 +38,11 @@ import './boss-retry-ui.css';
 import './defense-hud.css';
 import './item-menu.css';
 import { PreGame } from './pregame.js';
+import { preferences, type Preferences } from './preferences.js';
 import { CreepPreview, creepPreviewRequested } from './creep-preview.js';
 import gameOstUrl from '../../../assets/sounds/game-ost.mp3?url';
+import gameOst2Url from '../../../assets/sounds/game-ost-2.mp3?url';
+import gameOst3Url from '../../../assets/sounds/game-ost-3.mp3?url';
 
 const artPreview = new URLSearchParams(location.search).has('artPreview');
 const runtimeArtGallery =
@@ -87,29 +90,56 @@ chuHud.onNotify = (message) => ui.notify(message);
 const endpoint = import.meta.env['VITE_SERVER_URL'] ?? 'http://localhost:2567';
 const pregame = new PreGame(endpoint);
 if (artPreview) pregame.node.hidden = true;
+const matchTracks = [gameOstUrl, gameOst2Url, gameOst3Url];
 const matchMusic = artPreview ? undefined : new Audio();
 if (matchMusic) {
   matchMusic.preload = 'none';
-  matchMusic.src = gameOstUrl;
   matchMusic.id = 'match-music';
-  matchMusic.loop = true;
-  matchMusic.volume = 0.45;
+  matchMusic.volume = preferences.volume / 100;
   document.body.append(matchMusic);
 }
+function applySettings(key?: keyof Preferences): void {
+  if (matchMusic) matchMusic.volume = preferences.volume / 100;
+  element('#viewport').toggleAttribute(
+    'data-mouse-controls',
+    preferences.controls === 'mouse',
+  );
+  if (key === 'controls')
+    window.dispatchEvent(new Event('volam:controls-blocked'));
+  if (key === 'autoBasic')
+    send({ kind: 'auto-basic', enabled: preferences.autoBasic });
+}
+pregame.onSettings = ui.onSettings = applySettings;
+applySettings();
 let matchMusicActive = false;
+let lastMatchTrack: string | undefined;
+let remainingMatchTracks: string[] = [];
 function playMatchMusic(): void {
   if (matchMusicActive && matchMusic?.paused)
     void matchMusic.play().catch(() => {
       // If autoplay is blocked, retry on the next in-game gesture.
     });
 }
+function playNextMatchTrack(): void {
+  if (!matchMusicActive || !matchMusic) return;
+  if (!remainingMatchTracks.length) remainingMatchTracks = [...matchTracks];
+  const choices = remainingMatchTracks.filter(
+    (track) => track !== lastMatchTrack,
+  );
+  const next = choices[Math.floor(Math.random() * choices.length)]!;
+  remainingMatchTracks.splice(remainingMatchTracks.indexOf(next), 1);
+  lastMatchTrack = next;
+  matchMusic.src = next;
+  playMatchMusic();
+}
+matchMusic?.addEventListener('ended', playNextMatchTrack);
 function syncMatchMusic(active: boolean): void {
   if (!matchMusic || active === matchMusicActive) return;
   matchMusicActive = active;
   if (active) {
     window.addEventListener('click', playMatchMusic, true);
     window.addEventListener('keydown', playMatchMusic, true);
-    playMatchMusic();
+    playNextMatchTrack();
   } else {
     window.removeEventListener('click', playMatchMusic, true);
     window.removeEventListener('keydown', playMatchMusic, true);
@@ -370,6 +400,8 @@ function send(command: Command): void {
   if (
     hero?.zoneId === loiDai.id &&
     command.kind !== 'move' &&
+    command.kind !== 'move-to' &&
+    command.kind !== 'auto-basic' &&
     (!hero.loiDaiFighter || room.state.loiDaiFighters < 2)
   )
     return;
@@ -382,18 +414,21 @@ function send(command: Command): void {
   room.send('input', payload);
   if (command.kind === 'move') arenaScene?.moveLocal(command.x, command.y);
 }
+const gameplayConnected = () =>
+  !!room &&
+  room.state.phase === 'IN_GAME' &&
+  !!room.state.players.get(room.sessionId)?.confirmed &&
+  !artPreview;
+const gameplayBlocked = () =>
+  ui.blocked ||
+  !arenaScene?.zoneReady ||
+  ((room?.state?.players?.get(room.sessionId)?.hp ?? 0) <= 0 &&
+    !room?.state?.players?.get(room.sessionId)?.bossSpectator);
+const mouseMode = () => preferences.controls === 'mouse';
 const unbindInput = bindGameplayInput(
   send,
-  () =>
-    !!room &&
-    room.state.phase === 'IN_GAME' &&
-    !!room.state.players.get(room.sessionId)?.confirmed &&
-    !artPreview,
-  () =>
-    ui.blocked ||
-    !arenaScene?.zoneReady ||
-    ((room?.state?.players?.get(room.sessionId)?.hp ?? 0) <= 0 &&
-      !room?.state?.players?.get(room.sessionId)?.bossSpectator),
+  gameplayConnected,
+  gameplayBlocked,
   () => {
     const hero = room?.state.players.get(room.sessionId);
     if (
@@ -430,7 +465,42 @@ const unbindInput = bindGameplayInput(
     },
     upgrade: (slot) => ui.onBuild({ action: 'upgrade-slot', slot }),
   },
+  mouseMode,
 );
+const worldCanvas = element('#game');
+const worldMouse = (event: MouseEvent) =>
+  event.target instanceof HTMLCanvasElement &&
+  mouseMode() &&
+  gameplayConnected();
+function worldContextMenu(event: MouseEvent): void {
+  if (worldMouse(event)) event.preventDefault();
+}
+function worldPointerDown(event: PointerEvent): void {
+  if (event.button !== 2 || !worldMouse(event) || !room || !arenaScene) return;
+  event.preventDefault();
+  if (gameplayBlocked() || ui.reconnecting) return;
+  const hero = room.state.players.get(room.sessionId);
+  if (
+    !hero ||
+    hero.hp <= 0 ||
+    hero.bossSpectator ||
+    namDeHud.capture('') !== undefined
+  )
+    return;
+  const click = arenaScene.worldClick(event.clientX, event.clientY);
+  const { x, y } = click.position;
+  if (x < 0 || y < 0 || x > 16384 || y > 16384) return;
+  send({
+    kind: 'move-to',
+    x,
+    y,
+    zoneId: hero.zoneId,
+    targetId: click.targetId,
+  });
+  if (!click.targetId) arenaScene.showMoveMarker(click.position);
+}
+worldCanvas.addEventListener('contextmenu', worldContextMenu);
+worldCanvas.addEventListener('pointerdown', worldPointerDown);
 function controls(connected: boolean, busy = false): void {
   for (const field of form.querySelectorAll<
     HTMLInputElement | HTMLButtonElement
@@ -477,6 +547,7 @@ async function connect(existing: boolean): Promise<void> {
     controls(true);
     let previousZone = 'arena';
     let rendererRequested = false;
+    let sentAutoBasic = false;
     const syncJoinedState = (state: typeof joined.state) => {
       if (room === joined) {
         inputTiming?.patch(
@@ -487,6 +558,15 @@ async function connect(existing: boolean): Promise<void> {
           void startRenderer();
         }
         syncMatchMusic(state.phase === 'IN_GAME');
+        if (
+          !sentAutoBasic &&
+          state.phase === 'IN_GAME' &&
+          state.players.get(joined.sessionId)?.confirmed
+        ) {
+          sentAutoBasic = true;
+          if (preferences.autoBasic)
+            send({ kind: 'auto-basic', enabled: true });
+        }
         chuHud.sync(state, joined.sessionId);
         namDeHud.sync(state, joined.sessionId);
         tamLienHud.sync(state, joined.sessionId);
@@ -570,6 +650,7 @@ async function connect(existing: boolean): Promise<void> {
     joined.onReconnect(() => {
       if (room !== joined) return;
       ui.reconnecting = false;
+      send({ kind: 'auto-basic', enabled: preferences.autoBasic });
       ui.notify('Đã kết nối lại · Trở về đấu trường chính.');
     });
     joined.onLeave((code) => {
@@ -860,9 +941,12 @@ if (import.meta.hot)
   import.meta.hot.dispose(() => {
     disposed = true;
     syncMatchMusic(false);
+    matchMusic?.removeEventListener('ended', playNextMatchTrack);
     matchMusic?.remove();
     void room?.leave();
     unbindInput();
+    worldCanvas.removeEventListener('contextmenu', worldContextMenu);
+    worldCanvas.removeEventListener('pointerdown', worldPointerDown);
     pregame.destroy();
     creepPreview.destroy();
     ui.destroy();

@@ -172,7 +172,7 @@ export async function verifyRenovationRuntime(
           clientQuery +
           (compareLegacy && i === 1 ? '&renovationSkills=old' : ''),
       );
-      await page.locator('#pre-nickname').fill('Renovation ' + (i + 1));
+      await page.locator('[data-action=play]').click(); await page.locator('#pre-nickname').fill('Renovation ' + (i + 1));
       await page.getByRole('button', { name: 'Vào game', exact: true }).click();
       if (roomId) {
         await page

@@ -1,6 +1,10 @@
 import { m1Config, schools } from '@volam/game-data';
 import type { LobbyState, LobbyAction } from '@volam/game-protocol';
 import './pregame.css';
+import { guide, guideTabs, type GuideTab } from './pregame-guide.js';
+import type { Preferences } from './preferences.js';
+import { bindSettings, settingsControls } from './settings-controls.js';
+import './pregame-guide.css';
 import { creepPreviewRequested } from './creep-preview.js';
 
 interface RoomListing {
@@ -22,7 +26,10 @@ export class PreGame {
   readonly node = document.createElement('section');
   nickname = '';
   portalCount: 1 | 2 | 3 | 4 = 4;
-  private screen = 'landing';
+  private screen = 'home';
+  private guideTab: GuideTab = 'campaign';
+  private guideSchool = schools[0].id as string;
+  private guideBoss = 'dong-ta';
   private roomId = '';
   private session = '';
   private state: LobbyState | undefined;
@@ -35,6 +42,7 @@ export class PreGame {
   private refreshTimer: number;
   onConnect: (nickname: string, roomId?: string) => void = () => {};
   onLeave: () => void = () => {};
+  onSettings: (key: keyof Preferences) => void = () => {};
   onAction: (action: LobbyAction) => void = () => {};
   constructor(private endpoint: string) {
     if (creepPreviewRequested) this.nickname = 'Preview Creep';
@@ -43,6 +51,41 @@ export class PreGame {
       const select = e.target as HTMLSelectElement;
       if (select.id === 'pre-portals')
         this.portalCount = Number(select.value) as 1 | 2 | 3 | 4;
+      if (select.id === 'guide-school') {
+        this.guideSchool = select.value;
+        this.render();
+        this.node.querySelector<HTMLElement>('#guide-school')?.focus();
+      }
+      if (select.id === 'guide-boss') {
+        this.guideBoss = select.value;
+        this.render();
+        this.node.querySelector<HTMLElement>('#guide-boss')?.focus();
+      }
+    });
+    this.node.addEventListener('keydown', (event) => {
+      if (
+        event.key === 'Escape' &&
+        ['guide', 'settings', 'landing'].includes(this.screen)
+      ) {
+        event.preventDefault();
+        this.showHome();
+        return;
+      }
+      if (
+        !(event.target instanceof HTMLElement) ||
+        event.target.getAttribute('role') !== 'tab'
+      )
+        return;
+      const current = guideTabs.findIndex(([id]) => id === this.guideTab);
+      const next = {
+        ArrowRight: (current + 1) % 3,
+        ArrowLeft: (current + 2) % 3,
+        Home: 0,
+        End: 2,
+      }[event.key];
+      if (next === undefined) return;
+      event.preventDefault();
+      this.showGuideTab(guideTabs[next]![0]);
     });
     this.node.setAttribute('aria-label', 'Trước trận');
     document.querySelector('#viewport')!.append(this.node);
@@ -51,6 +94,21 @@ export class PreGame {
       const button = (e.target as Element).closest<HTMLButtonElement>('button');
       if (!button || button.disabled) return;
       const action = button.dataset['action'];
+      if (action === 'home') this.showHome();
+      if (action === 'play') {
+        this.screen = 'landing';
+        this.render();
+        this.node.querySelector<HTMLElement>('#pre-nickname')?.focus();
+      }
+      if (action === 'guide' || action === 'settings') {
+        this.screen = action;
+        this.render();
+        this.node.querySelector<HTMLElement>('.pre-title')?.focus();
+      }
+      if (action === 'guide-tab') {
+        const tab = guideTabs.find(([id]) => id === button.dataset['tab']);
+        if (tab) this.showGuideTab(tab[0]);
+      }
       if (action === 'browser') {
         this.screen = 'browser';
         this.notice = '';
@@ -103,6 +161,18 @@ export class PreGame {
       if (this.screen === 'browser' && !this.node.hidden) void this.refresh();
     }, 3000);
     this.render();
+  }
+  private showHome(): void {
+    const previous = this.screen;
+    this.screen = 'home';
+    this.render();
+    const action = previous === 'landing' ? 'play' : previous;
+    this.node.querySelector<HTMLElement>(`[data-action="${action}"]`)?.focus();
+  }
+  private showGuideTab(tab: GuideTab): void {
+    this.guideTab = tab;
+    this.render();
+    this.node.querySelector<HTMLElement>('#guide-tab-' + tab)?.focus();
   }
   private connect(id?: string) {
     this.busy = true;
@@ -236,9 +306,27 @@ export class PreGame {
       `<button type="button" data-action="${action}" ${disabled ? 'disabled' : ''}>${text}</button>`;
     let content = '';
     let title = '';
+    const brand =
+      '<div class="brand"><h1>Võ Lâm</h1><h2>ANH HÙNG THỦ THÀNH</h2></div>';
+    if (this.screen === 'home') {
+      this.node.classList.add('landing');
+      this.node.innerHTML = `${brand}<nav class="pre-home" aria-label="Menu chính">${button('Vào game', 'play')}${button('Hướng dẫn', 'guide')}${button('Cài đặt', 'settings')}</nav>`;
+      return;
+    }
+    if (this.screen === 'guide' || this.screen === 'settings') {
+      this.node.classList.remove('landing');
+      const instructions = this.screen === 'guide';
+      this.node.innerHTML = `<section class="pre-window pre-book ${instructions ? 'guide-book' : 'settings-book'}">
+        <h1 class="pre-title" tabindex="-1">${instructions ? 'Hướng dẫn' : 'Cài đặt'}</h1>
+        ${instructions ? guide(this.guideTab, this.guideSchool, this.guideBoss) : settingsControls('pre', true)}
+        <div class="book-actions">${button('Quay lại', 'home')}</div>
+      </section>`;
+      if (!instructions) bindSettings(this.node, 'pre', this.onSettings);
+      return;
+    }
     if (this.screen === 'landing') {
       this.node.classList.add('landing');
-      this.node.innerHTML = `<div class="brand"><h1>Võ Lâm</h1><h2>ANH HÙNG THỦ THÀNH</h2></div><section class="pre-window landing-window"><form id="landing-form"><label class="sr-only" for="pre-nickname">Biệt danh</label><input id="pre-nickname" name="nickname" maxlength="20" autocomplete="off" required placeholder="BIỆT DANH" value="${escape(this.nickname)}"/><button>Vào game</button></form><p role="status">${escape(this.notice)}</p></section>`;
+      this.node.innerHTML = `${brand}<section class="pre-window landing-window"><form id="landing-form"><label class="sr-only" for="pre-nickname">Biệt danh</label><input id="pre-nickname" name="nickname" maxlength="20" autocomplete="off" required placeholder="BIỆT DANH" value="${escape(this.nickname)}"/><button>Vào game</button></form><p role="status">${escape(this.notice)}</p></section>`;
       if (creepPreviewRequested)
         this.node.querySelector('[role="status"]')!.textContent =
           this.notice ||

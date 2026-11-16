@@ -1,3 +1,7 @@
+## Menu chính và điều khiển chuột · 2026-11-15
+
+Menu chính mở trước màn biệt danh và có Vào game, Hướng dẫn, Cài đặt. Hướng dẫn có ba mục cho cơ chế chiến dịch, võ học theo phái/nhánh và boss. Âm lượng, tự đánh thường và kiểu điều khiển chỉnh được từ menu chính hoặc ngay trong trận. Lưu các lựa chọn trong localStorage và nạp khi mở game. Mặc định dùng bàn phím, âm lượng 45% và tự đánh thường tắt.
+
 ## Đường Môn · Tuần sa và Dạ hành
 
 Đã duyệt Tuần sa 01, Dạ hành 06 và quạt R4 với băng châm Thủy ở giữa. Artwork VFX đã duyệt gồm laze trắng lam và 20 hoa đào thép nổ văng kim. Bản chơi thử dùng phòng M3D, bắt đầu Đường Môn ở cấp 6. [Bản tích hợp](docs/DUONG_MON_PLAYTEST.md).
@@ -140,7 +144,7 @@ Director duyệt và yêu cầu triển khai toàn bộ cân bằng chiến dị
 
 ## Nhạc nền trận đấu — 2026-11-05
 
-File game-ost.mp3 của người dùng phát lặp từ lúc vào trận và dừng khi trận kết thúc hoặc người chơi rời phòng. Nhạc chạy cục bộ ở client.
+Ba bản nhạc do người dùng cung cấp phát cục bộ khi vào trận. Client xáo thứ tự mỗi lượt ba bài và tránh lặp liền khi sang lượt mới. Nhạc tự chuyển khi hết bài và dừng khi trận kết thúc hoặc người chơi rời phòng.
 
 ## Chế tạo và icon Cái Bang — 2026-11-05
 

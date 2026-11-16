@@ -1,3 +1,7 @@
+## Menu chính trước màn biệt danh · 2026-11-15
+
+Vào game mở ô biệt danh. Hướng dẫn có ba tab Cơ chế chung, Môn phái và Boss. Cài đặt có âm lượng, công tắc tự đánh thường, lựa chọn Bàn phím/Chuột và mẫu con trỏ, dấu X. Nút Cài đặt trong trận mở các điều khiển tương ứng trong viewport và áp dụng ngay. Màn nhập biệt danh dùng Escape để về menu chính. Trong trận, con trỏ tùy chỉnh áp trên vùng canvas ở chế độ chuột; dấu X nằm tại tọa độ thế giới đã bấm.
+
 ## Campaign balance và thử lại boss — 2026-11-06
 
 Popup đánh lại và số lượt hồi sinh nằm trong viewport, tái sử dụng khung UI hiện tại. Server xác nhận electorate/countdown/phiếu và giao dịch; modal chặn input gameplay. Ballot boss là ngoại lệ server pause được director duyệt; inventory/shop thông thường vẫn không pause. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
@@ -8,7 +12,7 @@ Tab Chế tạo của Thương Gia hiển thị cấp trang bị, số nguyên l
 
 ## Fixed branch HUD — 2026-11-04
 
-The pre-match lobby presents school followed by branch. In a match, skill upgrades sit directly above Q/W/E/R/T in the single world viewport. T and unlearned ranks show their level requirement. Thiếu Lâm Quyền shows the current stance and F next to the bar. The entry dialogue is anchored to Tượng Võ Thần. The level-up effect reuses the existing original, approved four-frame Nam Đế ring atlas under assets/reviews/wave_boss_feedback_v01/exports, with a smaller scale and a new upward motion for the hero.
+The pre-match lobby presents school followed by branch. In a match, skill upgrades sit directly above Q/W/E/R/T in the single world viewport. Hold O and press Q/W/E/R/T to upgrade the corresponding skill. Hovering or focusing a skill icon shows its description and current rank or unlock level in an in-viewport tooltip. For learned skills the tooltip shows the rank’s base damage, mana cost, and cooldown. T and unlearned ranks show their level requirement. Thiếu Lâm Quyền shows the current stance and F next to the bar. The entry dialogue is anchored to Tượng Võ Thần. The level-up effect reuses the existing original, approved four-frame Nam Đế ring atlas under assets/reviews/wave_boss_feedback_v01/exports, with a smaller scale and a new upward motion for the hero.
 
 ## Approved M3D feedback composition — 2026-11-03
 

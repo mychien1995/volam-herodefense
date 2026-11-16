@@ -1,3 +1,7 @@
+## Menu chính và chế độ điều khiển · 2026-11-15
+
+Menu chính hiện ba lựa chọn trước ô biệt danh. Ba tab Hướng dẫn hiển thị tiến trình chiến dịch, võ học theo từng nhánh và danh sách boss. Âm lượng, tự đánh và kiểu điều khiển tồn tại qua tải lại trang. Chế độ chuột đi tới điểm hợp lệ và tránh vật cản với một lệnh; hai client cùng nhận vị trí từ server. Dấu X xuất hiện tại điểm bấm và mờ dần. Chuột phải lên mục tiêu trong tầm và A đều đánh thường. Bấm chuột phải tại xác quái, kể cả khi quái vừa chết trên server, vẫn đi đến điểm bấm. Khi bị làm chậm, nhân vật vẫn thực hiện lệnh đi với tốc độ hiệu dụng. Ba lựa chọn trong Cài đặt áp dụng ngay giữa trận. Auto đánh được boss trong tầm. Tắt Auto dừng các đòn tự động mới. Ngũ Độc Chưởng làm chậm nhưng đòn A hợp lệ vẫn gây sát thương và hiện animation dù còn trong nhịp chịu đòn.
+
 ## Côn Luân · Bản chơi thử
 
 Dùng Q/E/R Kiếm Tôn qua cả bốn bậc để xác nhận thời lượng choáng theo từng lần trúng. Q chỉ nổ kiếm của người dùng và sát thương chiêu tăng 30% theo bậc. E có năm nhịp sát thương, áp choáng ở lần trúng đầu mỗi mục tiêu. Đối thủ vào T sau nhịp mở vẫn bị làm chậm và không lướt được, có thể đi bộ ra ngoài rồi lướt. E Thiền Sư chỉ làm chậm mục tiêu vòng sét chạm tới, W/R choáng 2 giây trong vùng nổ.
@@ -24,7 +28,7 @@ Kiểm tra chuỗi A và chỉ số hai thế Thiền Sư, khóa mục tiêu sé
 ## Hồi quy M3D review
 
 - Tạo phòng 1 cổng và quan sát chỉ cổng Đông sinh quái trên hai client. Cùng chương và số người, tổng EXP/vàng cả đợt bằng phòng 4 cổng.
-- Giữ O rồi bấm Q để tăng đúng một bậc. Thả O và bấm Q để thi triển. Đạn người chơi đánh trúng xuyên tượng qua cả hai chiều, còn địa hình thường vẫn cản.
+- Giữ O rồi bấm Q để tăng đúng một bậc. Thả O và bấm Q để thi triển. Rê chuột lên biểu tượng võ công đã học hoặc chưa học để xem tên, mô tả và trạng thái ngay trên thanh kỹ năng. Sau khi học hoặc tăng bậc, tooltip hiện sát thương cơ bản, nội lực tiêu hao và hồi chiêu cơ bản đúng theo bậc hiện tại. Đạn người chơi đánh trúng xuyên tượng qua cả hai chiều, còn địa hình thường vẫn cản.
 - Rà texture và cel ở tám nhánh khi đánh thường, trúng đòn, slow và stun. Bổng đủ bốn thức rồi nối lại ngay theo nhịp 8 tick. Rà 44 creep và năm creep hỗ trợ trong trận. Đối chiếu atlas Renovation v1 lúc đứng, đi, trúng đòn và tung chiêu. Đo thời gian báo chiêu từ tick bắt đầu đến tick thi triển. Vào lại Sa Mạc và kiểm tra bốn hố đổi tọa độ, gây chậm và chặn Shift.
 - Quan sát đường đá bay và điểm rơi thật, tơ bắn thường và định thân, cảnh báo bẫy ngắn, khớp thời điểm va chạm server và khung Phaser.
 - Ở camera 2×, bốn thức A của Bổng, Cắn/Phun độc/chết của Trúc Xà và bắn tơ/chết của Độc Chu hiển thị cel native với scale 0,5. Trong đám quái, client điều khiển đưa các creep che thân xuống dưới nhân vật và dời tên chiêu đè thân. Client khác vẫn vẽ creep theo chiều sâu riêng. Khi bỏ che khuất, sprite trở lại độ sâu theo Y.
@@ -97,7 +101,7 @@ Bổ sung acceptance cho đường EXP, budget thưởng2/4 cửa và phòng1/2/
 
 ## Nhạc nền trận đấu — 2026-11-05
 
-- Phòng chờ im lặng. Hai client vào trận phát nhạc, đến cuối bài tự lặp và khi rời phòng thì dừng, trở về đầu bài.
+- Phòng chờ im lặng. Khi vào trận, client phát và tự chuyển qua cả ba bài theo thứ tự ngẫu nhiên. Hai bài liên tiếp khác nhau, kể cả lúc sang lượt mới. Cài đặt âm lượng có hiệu lực xuyên suốt và nhạc dừng khi rời trận.
 
 ## Chế tạo — 2026-11-05
 

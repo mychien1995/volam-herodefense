@@ -42,6 +42,17 @@ export default defineConfig({
   build: {
     target: 'es2022',
     rollupOptions: {
+      output: {
+        // Keep bundler helpers in their own chunk so the menus don't preload Phaser.
+        codeSplitting: {
+          groups: [
+            {
+              name: 'phaser.esm',
+              test: /[\\/]phaser[\\/]dist[\\/]phaser\.esm\.js$/,
+            },
+          ],
+        },
+      },
       input: {
         game: 'index.html',
         ...(!runtimePublicDir

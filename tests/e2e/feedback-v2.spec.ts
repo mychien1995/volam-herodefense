@@ -47,6 +47,7 @@ async function pair(browser: Browser, schools: string[]) {
   let code = '';
   for (const [i, p] of pages.entries()) {
     await p.goto('/?debug=1&skillPreview=1&feedbackArtReview=1');
+    await p.locator('[data-action=play]').click();
     await p.locator('#pre-nickname').fill('Art v2 ' + i);
     await p.getByRole('button', { name: 'Vào game', exact: true }).click();
     if (code) {

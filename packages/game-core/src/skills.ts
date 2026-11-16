@@ -73,6 +73,24 @@ function clearLine(
     )
   );
 }
+export function basicTargetInRange(
+  world: World,
+  hero: Hero,
+  target: Actor,
+  ability: Ability,
+  config: SimulationConfig,
+): boolean {
+  const effect = ability.effect;
+  const projectile = effect.mode === 'projectile';
+  if (!projectile && effect.mode !== 'arc') return false;
+  const reach =
+    effect.range + (projectile ? 0 : targetRadius(world, target, config));
+  return (
+    distance(hero, target) <= reach &&
+    clearLine(world, hero, target, config, projectile)
+  );
+}
+
 export function targetDirection(
   world: World,
   hero: Hero,
@@ -726,6 +744,7 @@ export function perform(
   config: SimulationConfig,
   kind: 'attack' | 'cast',
   stage?: string,
+  basicTarget?: Point,
 ): void {
   const original = ability.effect;
   if (ability.id === duongMon.elements) return;
@@ -762,7 +781,13 @@ export function perform(
   const effect = empoweredDash ? dash : original;
   if (empoweredDash) stage = 'empowered_dash';
   const crit = offensiveStats(world, hero.id, config);
-  if (effect.mode === 'projectile' && !effect.useFacing) {
+  if (basicTarget) {
+    const aim = direction(basicTarget.x - hero.x, basicTarget.y - hero.y);
+    if (aim.x || aim.y) {
+      hero.fx = aim.x;
+      hero.fy = aim.y;
+    }
+  } else if (effect.mode === 'projectile' && !effect.useFacing) {
     const aim = targetDirection(
       world,
       hero,

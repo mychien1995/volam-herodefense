@@ -124,8 +124,8 @@ try {
       errors.push(r.url() + ' ' + r.failure()?.errorText),
     );
     await p.goto(session.clientUrl + '/?debug=1');
-    await p.locator('#pre-nickname').fill('Creep QA ' + (n + 1));
-    await p.getByRole('button', { name: 'Enter Game', exact: true }).click();
+    await p.locator('[data-action=play]').click(); await p.locator('#pre-nickname').fill('Creep QA ' + (n + 1));
+    await p.getByRole('button', { name: 'Vào game', exact: true }).click();
     if (roomId) {
       // Wait for the authoritative room-list response before interacting. A list
       // refresh may replace the code form between its fill and submit.

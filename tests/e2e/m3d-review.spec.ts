@@ -50,6 +50,7 @@ async function openMatch(
   };
   try {
     await host.goto('/?debug=1');
+    await host.locator('[data-action=play]').click();
     await host.locator('#pre-nickname').fill(nicknames[0] ?? 'M3D Host');
     await host.getByRole('button', { name: 'Vào game', exact: true }).click();
     await host.locator('#pre-portals').selectOption(gate);

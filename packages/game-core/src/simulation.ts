@@ -1,5 +1,5 @@
 import { duongMon } from './duong-mon-ids.js';
-import { canDuel, opponents, targetRadius } from './opponents.js';
+import { canDuel, opponent, opponents, targetRadius } from './opponents.js';
 import {
   stepEquipmentCombat,
   useEquipmentSkill,
@@ -7,7 +7,7 @@ import {
 } from './equipment-combat.js';
 import { stepBossBanter } from './boss-banter.js';
 import { advanceDragonDive } from './dragon-dive.js';
-import { dungeonWaypoint } from './dungeon-navigation.js';
+import { dungeonWaypoint, findWalkPath } from './dungeon-navigation.js';
 import { dash, blink, rechargeDash } from './mobility.js';
 import { stepChu, constrainChuTrap } from './chu-ba-thong.js';
 import {
@@ -44,6 +44,7 @@ import {
 } from './confinement.js';
 import {
   equippedAbility,
+  basicTargetInRange,
   perform,
   stepSkillActions,
   stepAreas,
@@ -72,6 +73,7 @@ import {
 import {
   blocked,
   clampEllipse,
+  insideEllipse,
   direction,
   distance,
   moveCircle,
@@ -201,6 +203,11 @@ export function removeHero(world: World, id: string): void {
   world.shots = world.shots.filter((shot) => shot.ownerId !== id);
   world.pending = world.pending.filter((item) => item.heroId !== id);
 }
+function setMoveDestination(hero: Hero, { x, y }: Point): void {
+  hero.moveX = hero.moveY = 0;
+  hero.moveDestination = { point: { x, y } };
+}
+
 /** Called only with runtime-validated inputs by the authoritative transport adapter. */
 export function submitInput(
   world: World,
@@ -218,8 +225,23 @@ export function submitInput(
     )
   )
     return false;
+  if (
+    command.kind === 'move-to' &&
+    ![command.x, command.y].every(Number.isFinite)
+  )
+    return false;
   hero.lastSequence = sequence;
-  if (command.kind === 'move') {
+  if (command.kind === 'move' || command.kind === 'move-to') {
+    world.pending = world.pending.filter(
+      (item) => item.heroId !== heroId || item.command.kind !== 'move-to',
+    );
+  }
+  if (command.kind === 'auto-basic') {
+    hero.autoBasic = command.enabled;
+  } else if (command.kind === 'move-to' && !command.targetId) {
+    if (hero.hp > 0) setMoveDestination(hero, command);
+  } else if (command.kind === 'move') {
+    delete hero.moveDestination;
     hero.moveX = command.x;
     hero.moveY = command.y;
     hero.lastMoveTick = world.tick;
@@ -235,9 +257,22 @@ function runCommand(
   hero: Hero,
   command: Command,
   config: SimulationConfig,
+  automatic = false,
 ): void {
-  if (world.duel && !canDuel(world, hero.id)) return;
   if (hero.hp <= 0) return;
+  if (command.kind === 'move-to') {
+    const target = command.targetId
+      ? opponent(world, hero.id, command.targetId)
+      : undefined;
+    if (!target || target.hp <= 0) {
+      setMoveDestination(hero, command);
+    } else {
+      delete hero.comboFinisher;
+      runCommand(world, hero, { kind: 'basic', targetId: target.id }, config);
+    }
+    return;
+  }
+  if (world.duel && !canDuel(world, hero.id)) return;
   if (command.kind === 'nam-de-key') {
     if (command.castId.startsWith('vtd:')) {
       world.vuong?.submitKey(
@@ -321,6 +356,7 @@ function runCommand(
   }
   if (command.kind === 'basic') {
     if (
+      (automatic && world.tick < hero.actionUntil) ||
       hasStatus(hero, 'stun', world.tick) ||
       hasStatus(hero, 'disarm', world.tick) ||
       raisingSwords ||
@@ -332,8 +368,23 @@ function runCommand(
     if (
       ability &&
       (conLuanMelee || world.tick >= hero.cooldown) &&
-      (ability.cooldownTicks !== 0 || hero.lastBasicTick !== world.tick)
+      ((!automatic && ability.cooldownTicks !== 0) ||
+        hero.lastBasicTick !== world.tick)
     ) {
+      const aimed =
+        command.targetId && opponent(world, hero.id, command.targetId);
+      const target = automatic
+        ? nearestBasicEnemy(world, hero, ability, config)
+        : aimed || undefined;
+      if (
+        (automatic || command.targetId !== undefined) &&
+        (!target || !basicTargetInRange(world, hero, target, ability, config))
+      )
+        return;
+      if (command.targetId) {
+        delete hero.moveDestination;
+        hero.moveX = hero.moveY = 0;
+      }
       const dao = ability.id === tamLienTram.basicId;
       hero.lastBasicTick = world.tick;
       if (!conLuanMelee)
@@ -365,6 +416,7 @@ function runCommand(
               hasStatus(hero, 'duong_mon_flight', world.tick)
             ? 'feather'
             : next.stage,
+        target,
       );
       if (next.stage && hero.basicChains?.[ability.id] === 0)
         hero.cooldown += ability.basicComboEndRecoveryTicks ?? 0;
@@ -813,6 +865,49 @@ function advanceProjectile(
     }
   }
 }
+function nearestBasicEnemy(
+  world: World,
+  hero: Hero,
+  ability: NonNullable<ReturnType<typeof conLuanBasic>>,
+  config: SimulationConfig,
+): Creep | undefined {
+  let nearest: Creep | undefined;
+  let nearestDistance = Infinity;
+  for (const creep of world.creeps.values()) {
+    const d = distance(hero, creep);
+    if (
+      (d < nearestDistance ||
+        (d === nearestDistance && creep.id < nearest!.id)) &&
+      basicTargetInRange(world, hero, creep, ability, config)
+    ) {
+      nearest = creep;
+      nearestDistance = d;
+    }
+  }
+  return nearest;
+}
+
+function clickWaypoint(
+  hero: Hero,
+  config: SimulationConfig,
+  walls: SimulationConfig['collision'],
+) {
+  const destination = hero.moveDestination;
+  if (!destination) return undefined;
+  const bounds = config.heroBounds;
+  const path = (destination.waypoints ??= findWalkPath(
+    hero,
+    destination.point,
+    config.radius,
+    config,
+    walls,
+    bounds ? (point) => insideEllipse(point, bounds, config.radius) : undefined,
+  ));
+  while (path.length && distance(hero, path[0]!) < 0.5) path.shift();
+  if (!path.length) delete hero.moveDestination;
+  return path[0];
+}
+
 export function stepWorld(world: World, config: SimulationConfig): void {
   const confinementStarts = new Map(
     [...(world.duel ? world.heroes : world.creeps)].map(([id, e]) => [
@@ -841,6 +936,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     if (hero.tamLien?.readyUntil && hero.tamLien.readyUntil <= world.tick)
       delete hero.tamLien;
     if (hero.hp <= 0) {
+      delete hero.moveDestination;
       hero.pose = 'death';
       cancelOwnedEffects(world, hero.id);
       hero.statuses = [];
@@ -855,7 +951,20 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       burn.next += config.tickRate;
       if (hero.hp <= 0) continue;
     }
-    if (world.tick - hero.lastMoveTick > config.inputTimeoutTicks) {
+    const walls =
+      world.duel && !world.duel.has(hero.id)
+        ? world.duelWalkWalls!
+        : config.collision;
+    const clickMoving = !!hero.moveDestination;
+    const waypoint = clickWaypoint(hero, config, walls);
+    if (clickMoving) {
+      const heading = waypoint
+        ? direction(waypoint.x - hero.x, waypoint.y - hero.y)
+        : { x: 0, y: 0 };
+      hero.moveX = heading.x;
+      hero.moveY = heading.y;
+      hero.lastMoveTick = world.tick;
+    } else if (world.tick - hero.lastMoveTick > config.inputTimeoutTicks) {
       hero.moveX = 0;
       hero.moveY = 0;
     }
@@ -892,23 +1001,20 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       const before = { x: hero.x, y: hero.y };
       hero.fx = movement.x;
       hero.fy = movement.y;
+      const step = (stats.movementSpeed * runSpeedMultiplier) / config.tickRate;
+      const stride = waypoint ? Math.min(step, distance(hero, waypoint)) : step;
       moveCircle(
         hero,
-        {
-          x:
-            (movement.x * stats.movementSpeed * runSpeedMultiplier) /
-            config.tickRate,
-          y:
-            (movement.y * stats.movementSpeed * runSpeedMultiplier) /
-            config.tickRate,
-        },
+        { x: movement.x * stride, y: movement.y * stride },
         config.radius,
         config.width,
         config.height,
-        world.duel && !world.duel.has(hero.id)
-          ? world.duelWalkWalls!
-          : config.collision,
+        walls,
       );
+      if (waypoint && distance(hero, before) < 1e-6) {
+        delete hero.moveDestination;
+        hero.moveX = hero.moveY = 0;
+      }
       resetConLuanDashOnEntry(world, hero, before);
     }
     hero.mana = Math.min(
@@ -955,7 +1061,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
     const hero = world.heroes.get(input.heroId);
     if (hero) {
       if (bufferComboFinisher(world, hero, input.command, config)) continue;
-      if (input.command.kind !== 'move') delete hero.comboFinisher;
+      if (input.command.kind !== 'move-to') delete hero.comboFinisher;
       runCommand(world, hero, input.command, config);
     }
   }
@@ -966,6 +1072,13 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   for (const hero of world.heroes.values()) {
     const command = takeComboFinisher(world, hero, config);
     if (command) runCommand(world, hero, command, config);
+    else if (
+      hero.autoBasic &&
+      !hero.comboFinisher &&
+      !world.duel &&
+      world.creeps.size
+    )
+      runCommand(world, hero, { kind: 'basic' }, config, true);
   }
   stepSkillActions(world, config);
   for (const hero of world.heroes.values()) stepFortune(world, hero, config);
@@ -1230,7 +1343,15 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   separateDungeonCreeps(world, config, creepStarts);
   for (const actor of [...world.heroes.values(), ...world.creeps.values()]) {
     if (actor.hp <= 0) actor.pose = 'death';
-    else if (world.tick < actor.hurtUntil) actor.pose = 'hurt';
+    else if (world.tick < actor.hurtUntil) {
+      // Damage flinch is visual. Keep an accepted basic visible unless a
+      // real stun interrupted it.
+      const basicInProgress =
+        world.heroes.get(actor.id) === actor &&
+        actor.pose === 'basic_attack' &&
+        !hasStatus(actor, 'stun', world.tick);
+      if (!basicInProgress) actor.pose = 'hurt';
+    }
   }
   finishNamDeTick(world, config);
   world.bacCai?.step(world, config);

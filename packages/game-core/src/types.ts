@@ -425,7 +425,15 @@ export type Command =
   | { kind: 'tam-lien-tram' }
   | { kind: 'nam-de-key'; castId: string; index: number; key: NamDeKey }
   | { kind: 'move'; x: number; y: number }
-  | { kind: 'basic' }
+  | {
+      kind: 'move-to';
+      x: number;
+      y: number;
+      zoneId: string;
+      targetId?: string | undefined;
+    }
+  | { kind: 'auto-basic'; enabled: boolean }
+  | { kind: 'basic'; targetId?: string | undefined }
   | { kind: 'dash' }
   | { kind: 'gear-skill' }
   | { kind: 'cast'; slot: number }
@@ -504,6 +512,8 @@ export interface Hero extends Actor {
   level: number;
   skillPoints: number;
   basicId: string;
+  moveDestination?: { point: Point; waypoints?: Point[] };
+  autoBasic?: boolean;
   moveX: number;
   moveY: number;
   lastMoveTick: number;

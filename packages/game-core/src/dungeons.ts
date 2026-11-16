@@ -720,13 +720,19 @@ export class DungeonMatch {
     if (this.invasion?.defeated) return 'Trận đấu đã kết thúc.';
     const zone = this.zoneOf(id);
     if (!zone) return 'Người chơi chưa ở trong khu vực hoạt động.';
+    if (command.kind === 'move-to' && command.zoneId !== zone.id) return;
     if (
       zone === this.duel.zone &&
       command.kind !== 'move' &&
+      command.kind !== 'move-to' &&
+      command.kind !== 'auto-basic' &&
       !canDuel(zone.world, id)
     )
       return 'Chỉ dùng võ công khi có hai đấu thủ trên sàn Lôi Đài.';
-    if (this.party.disconnected.has(id) || this.hero(id)?.bossSpectator)
+    if (
+      this.party.disconnected.has(id) ||
+      (this.hero(id)?.bossSpectator && command.kind !== 'auto-basic')
+    )
       return 'Đang quan chiến.';
     if (
       this.hero(id)?.progression &&
@@ -1617,6 +1623,7 @@ export class DungeonMatch {
         this.tick + source.dungeon.bossEncounter.emptyResetTicks;
     hero.x = position.x;
     hero.y = position.y;
+    delete hero.moveDestination;
     hero.moveX = 0;
     hero.moveY = 0;
     hero.lastMoveTick = destination.world.tick;

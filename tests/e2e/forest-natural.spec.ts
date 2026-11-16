@@ -594,6 +594,7 @@ for (const count of [2, 6])
       await expect(pages[pages.length - 1]!.locator('#pregame')).toBeVisible();
       const normal = pages[pages.length - 1]!;
       await normal.goto('/');
+      await normal.locator('[data-action=play]').click();
       await normal.locator('#pre-nickname').fill('Normal URL Forest');
       await normal
         .getByRole('button', { name: 'Vào game', exact: true })

@@ -63,7 +63,7 @@ async function enter(
   room: Room<MatchRoom>,
   authority: MatchRoom,
   access: 'private' | 'shared',
-  destination: 'forest' | 'hong_liet' = 'forest',
+  destination: 'forest' | 'hong_liet' | 'co_mo' = 'forest',
 ) {
   expect(authority.simulation.zoneOf(room.sessionId)?.access).toBe('arena');
   room.send('dungeon-action', {
@@ -90,6 +90,37 @@ async function exit(room: Room<MatchRoom>, authority: MatchRoom) {
 }
 
 describe('M2A real Colyseus zone authority and views', () => {
+  it('resolves a clicked dungeon boss from the client-visible entity ID', async () => {
+    const {
+      rooms: [room],
+      authority,
+    } = await join(1);
+    await enter(room!, authority, 'shared', 'co_mo');
+    const zone = authority.simulation.zoneOf(room!.sessionId)!;
+    const encounter = zone.world.boss!;
+    const boss = zone.world.creeps.get(encounter.actorId)!;
+    const self = authority.simulation.hero(room!.sessionId)!;
+    Object.assign(self, { x: boss.x - 65, y: boss.y, fx: -1, fy: 0 });
+    const x = self.x;
+    encounter.nextActionAt = Infinity;
+    boss.cooldown = Infinity;
+    const id = `${zone.id}:${boss.id}`;
+    await expect.poll(() => room!.state.creeps.has(id)).toBe(true);
+    const hp = boss.hp;
+    room!.send('input', {
+      protocolVersion: PROTOCOL_VERSION,
+      sequence: next(room!),
+      kind: 'move-to',
+      x: boss.x,
+      y: boss.y,
+      zoneId: zone.id,
+      targetId: id,
+    });
+    await expect
+      .poll(() => room!.state.creeps.get(id)?.hp ?? hp)
+      .toBeLessThan(hp);
+    expect(self.x).toBe(x);
+  });
   it('syncs desert server identities and isolates destination/private views with physical return', async () => {
     const {
       rooms: [a, b],

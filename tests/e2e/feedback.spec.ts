@@ -9,6 +9,7 @@ async function pair(pages: Page[], schools: string[]) {
   let code = '';
   for (const [i, p] of pages.entries()) {
     await p.goto('/?debug=1&skillPreview=1');
+    await p.locator('[data-action=play]').click();
     await p.locator('#pre-nickname').fill('Feedback ' + i);
     await p.getByRole('button', { name: 'Vào game', exact: true }).click();
     if (code) {

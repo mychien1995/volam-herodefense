@@ -48,6 +48,7 @@ test('4 gates stream naturally; 44 regular identities cast in live Phaser with s
   try {
     const host = pages[0]!;
     await host.goto('/?debug=1');
+    await host.locator('[data-action=play]').click();
     await host.locator('#pre-nickname').fill('Creep Host');
     await host.getByRole('button', { name: 'Vào game', exact: true }).click();
     await host.locator('#pre-portals').selectOption('4');

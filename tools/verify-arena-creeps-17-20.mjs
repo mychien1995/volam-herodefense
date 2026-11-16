@@ -79,8 +79,8 @@ try {
       errors.push(r.url() + ' ' + r.failure()?.errorText),
     );
     await p.goto('http://127.0.0.1:5198/?debug=1');
-    await p.locator('#pre-nickname').fill('Creep QA ' + (n + 1));
-    await p.getByRole('button', { name: 'Enter Game', exact: true }).click();
+    await p.locator('[data-action=play]').click(); await p.locator('#pre-nickname').fill('Creep QA ' + (n + 1));
+    await p.getByRole('button', { name: 'Vào game', exact: true }).click();
     if (roomId) {
       await p.getByLabel('Room code', { exact: true }).fill(roomId);
       await p

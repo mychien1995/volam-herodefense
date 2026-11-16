@@ -9,6 +9,7 @@ export async function joinWaiting(
   timeout = 15000,
 ) {
   await page.goto(query);
+  await page.locator('[data-action=play]').click();
   await page.locator('#pre-nickname').fill(nickname);
   await page.getByRole('button', { name: 'Vào game', exact: true }).click();
   if (room) {
