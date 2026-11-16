@@ -120,6 +120,22 @@ test('school selection fits in two rows and opens an accessible branch popup', a
   await expect(popup).toBeVisible();
   await expect(popup.getByRole('button', { name: 'Xác nhận' })).toBeDisabled();
   await expect(popup.locator('[data-branch]')).toHaveCount(2);
+  for (const [branch, basicId, attackName] of [
+    ['Tà Hiệp', nguDoc.taiHiep, 'Chưởng Ngũ Độc'],
+    ['Cổ Sư', nguDoc.coSu, 'Đạn đầu lâu'],
+  ]) {
+    const button = popup.getByRole('button', { name: branch, exact: true });
+    await expect(button).toHaveAccessibleDescription(
+      `Đánh thường (A) · ${attackName}`,
+    );
+    await expect(button.locator('.branch-basic-icon kbd')).toHaveText('A');
+    const icon = button.locator('img');
+    await expect(icon).toHaveAttribute(
+      'src',
+      `/assets/ngu-doc-feedback-v1/icons/${basicId}.png`,
+    );
+    await expect(icon).toHaveJSProperty('naturalWidth', 96);
+  }
   const modal = await popup.elementHandle();
   await popup.getByRole('button', { name: 'Tà Hiệp' }).click();
   await expect(popup.getByRole('button', { name: 'Tà Hiệp' })).toHaveAttribute(

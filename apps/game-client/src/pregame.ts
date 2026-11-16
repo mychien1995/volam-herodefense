@@ -1,4 +1,5 @@
 import { m1Config, schools, skillIcon } from '@volam/game-data';
+import { nguDoc } from '@volam/game-core';
 import type { LobbyState, LobbyAction } from '@volam/game-protocol';
 import './pregame.css';
 import { creepPreviewRequested } from './creep-preview.js';
@@ -364,8 +365,13 @@ export class PreGame {
                       m1Config.progression!.defaultBranches![id]!.style;
                     const selected =
                       confirmedSchool && self?.selectedBranch === id;
-                    return `<button type="button" data-action="branch" data-branch="${id}" aria-pressed="${selected}" ${confirmedSchool ? '' : 'disabled'}>
-                    <img src="${skillIcon(id)}" width="44" height="44" alt=""/><span>${style}</span>
+                    const basic =
+                      dialogSchool.id === nguDoc.school
+                        ? m1Config.basics[id]
+                        : undefined;
+                    const icon = `<img src="${skillIcon(basic?.id ?? id)}" width="44" height="44" alt=""/>`;
+                    return `<button type="button" data-action="branch" data-branch="${id}" aria-pressed="${selected}" ${confirmedSchool ? '' : 'disabled'}${basic ? ` aria-description="Đánh thường (A) · ${escape(basic.nameVi)}"` : ''}>
+                    ${basic ? `<span class="branch-basic-icon" aria-hidden="true" title="Đánh thường (A) · ${escape(basic.nameVi)}">${icon}<kbd>A</kbd></span>` : icon}<span>${style}</span>
                   </button>`;
                   })
                   .join('')}

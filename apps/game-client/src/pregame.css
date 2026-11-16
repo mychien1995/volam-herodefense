@@ -373,6 +373,20 @@
 .branch-list img {
   object-fit: contain;
 }
+.branch-basic-icon {
+  position: relative;
+  display: grid;
+  outline: 1px solid #a98b53;
+}
+.branch-basic-icon kbd {
+  position: absolute;
+  inset: auto auto 0 0;
+  min-width: 15px;
+  border: 1px solid #a98b53;
+  background: #211911;
+  color: #ffe5ad;
+  font: 700 10px/14px system-ui;
+}
 .branch-list button[aria-pressed='true'] {
   outline: 2px solid #e6ca79;
   outline-offset: 1px;
