@@ -1,5 +1,7 @@
 # Ngũ Độc · Preview VFX v01
 
+[Q Ngũ Độc Chưởng và W Độc Sa Chưởng đã có bản v02](../ngu-doc-qw-v02/README.md).
+
 **Tà Hiệp Bích Cổ** và **Cổ Sư Âm Linh** là hai tạo hình được chọn để dựng sprite. Mở `/ngu-doc-preview.html` trên Vite để duyệt trực tiếp trong sân Võ Đang visual-upgrade-2. Đổi tạo hình và mục tiêu bằng nút trong viewport, dùng mũi tên để di chuyển và P/A/Q/W/E/R/T để diễn chiêu. Nút **Đặt lại** đưa nhân vật về vị trí đầu và dọn hiệu ứng.
 
 Bản này dùng sân và các hình nhân kiểm tra Võ Đang có sẵn. Các phân cảnh chỉ chạy trong trang duyệt Phaser. Artwork chờ duyệt trước bước tích hợp vào trận.

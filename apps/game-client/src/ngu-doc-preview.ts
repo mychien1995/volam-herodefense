@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import {
+  bichCoPalms,
   directions,
   skills,
   type Branch,
@@ -160,9 +161,13 @@ class NguDocPreview extends NguDocStage {
         this.handFlames = [];
       } else {
         this.handFlames = [
-          this.fx('flame_low', this.actor, { clip: 'flame' }),
-          this.fx('flame_high', this.actor, { clip: 'flame' }),
+          this.fx('hand_flame_1', this.actor, { clip: 'flame' }).setFlipX(true),
+          this.fx('hand_flame_1', this.actor, { clip: 'flame' }).play({
+            key: 'flame',
+            startFrame: 1,
+          }),
         ];
+        this.positionHandFlames();
       }
       this.toggleLabel('Q', this.handFlames.length > 0);
       return;
@@ -209,13 +214,12 @@ class NguDocPreview extends NguDocStage {
       });
     } else if (skill === 'W') {
       this.later(135, () => {
-        this.fx('pool_seed', at(point, 0, -19), {
+        this.fx('poison_cloud_1', point, {
           clip: 'pool',
           under: true,
           duration: 3100,
-        });
+        }).setAlpha(0.84);
         this.track('W:' + (target?.type ?? 'front'));
-        if (target) this.poison(point, false, 6);
       });
     } else {
       const offsets = [
@@ -456,16 +460,19 @@ class NguDocPreview extends NguDocStage {
     });
   }
 
-  protected override onMovement(): void {
-    const direction = directions[this.facing];
-    const horizontal = direction.x !== 0;
+  private positionHandFlames(): void {
+    if (!this.handFlames.length) return;
+    const palms = bichCoPalms[this.actor.frame.name]!;
     for (const [index, flame] of this.handFlames.entries()) {
-      const side = index === 0 ? -1 : 1;
-      flame.setPosition(
-        this.actor.x + side * (horizontal ? 17 : 25) + direction.x * 3,
-        this.actor.y - 44 + (horizontal ? side * 6 * direction.x : 0),
-      );
+      const [x, y, behind] = palms[index]!;
+      flame
+        .setPosition(this.actor.x + x, this.actor.y + y)
+        .setDepth(this.actor.y + (behind ? -1 : 1));
     }
+  }
+
+  protected override onMovement(): void {
+    this.positionHandFlames();
     this.venomRing?.setPosition(this.actor.x, this.actor.y);
     if (this.venomRing) {
       const touching = this.target(false, 96);

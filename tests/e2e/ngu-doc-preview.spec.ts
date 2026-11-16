@@ -10,6 +10,7 @@ type Review = {
   q: boolean;
   e: boolean;
   effects: string[];
+  effectPositions: { name: string; frame: string; x: number; y: number }[];
   summons: { type: string; frame: string }[];
   stages: { name: string; time: number }[];
 };
@@ -210,5 +211,77 @@ test('Âm Linh previews cương thi on W, zombie on R, the three second mark and
     .poll(async () => (await state(page)).summons.length, { timeout: 7000 })
     .toBe(0);
   expect((await state(page)).effects).toEqual([]);
+  expect(errors).toEqual([]);
+});
+
+test('Tà Hiệp keeps one flame on each hand and one fixed poison cloud per W cast', async ({
+  page,
+}, info) => {
+  const errors = await boot(page);
+  const flames = async () =>
+    (await state(page)).effectPositions.filter(({ name }) => name === 'flame');
+  const pools = async () =>
+    (await state(page)).effectPositions.filter(({ name }) => name === 'pool');
+  const relativeFlames = async () => {
+    const hero = await state(page);
+    return hero.effectPositions
+      .filter(({ name }) => name === 'flame')
+      .map(({ x, y }) => [Math.round(x - hero.x), Math.round(y - hero.y)]);
+  };
+  await page.keyboard.press('q');
+  await expect.poll(relativeFlames).toEqual([
+    [-16, -37],
+    [17, -37],
+  ]);
+  const firstFlames = (await flames()).map(({ frame }) => frame);
+  await expect
+    .poll(async () => (await flames()).map(({ frame }) => frame), {
+      intervals: [35, 45],
+    })
+    .not.toEqual(firstFlames);
+  await page.screenshot({ path: info.outputPath('ngu-doc-chuong-1366.png') });
+
+  await page.keyboard.down('ArrowRight');
+  await expect
+    .poll(async () => (await state(page)).frame)
+    .toMatch(/^walk_right/);
+  await page.keyboard.up('ArrowRight');
+  await expect.poll(relativeFlames).toEqual([
+    [-11, -32],
+    [19, -31],
+  ]);
+  await page.locator('#target').selectOption('none');
+  await page.keyboard.press('a');
+  await expect.poll(relativeFlames, { intervals: [25, 35] }).toEqual([
+    [-10, -32],
+    [32, -45],
+  ]);
+  await page.keyboard.press('q');
+  await expect.poll(flames).toHaveLength(0);
+
+  await page.keyboard.press('w');
+  await expect.poll(pools).toHaveLength(1);
+  const [cloud] = await pools();
+  expect(cloud!.x).toBeCloseTo((await state(page)).x + 130, 3);
+  expect(cloud!.y).toBeCloseTo((await state(page)).y, 3);
+  await expect
+    .poll(async () => (await pools())[0]?.frame, { intervals: [35, 45] })
+    .not.toBe(cloud!.frame);
+  await page.screenshot({ path: info.outputPath('doc-sa-chuong-1366.png') });
+  await page.keyboard.down('ArrowUp');
+  await expect.poll(async () => (await state(page)).frame).toMatch(/^walk_up/);
+  await page.keyboard.up('ArrowUp');
+  expect((await pools()).map(({ x, y }) => [x, y])).toEqual([
+    [cloud!.x, cloud!.y],
+  ]);
+  expect((await state(page)).effects).not.toContain('motes');
+  await expect.poll(pools, { timeout: 4500 }).toHaveLength(0);
+
+  await page.locator('#target').selectOption('boss');
+  await page.keyboard.press('w');
+  await expect
+    .poll(async () => (await pools()).map(({ x, y }) => [x, y]))
+    .toEqual([[924, 625]]);
+  expect((await state(page)).effects).toEqual(['pool']);
   expect(errors).toEqual([]);
 });

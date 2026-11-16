@@ -1,6 +1,7 @@
 local root = app.params.root or "."
-local source = root .. "/assets/source/ngu-doc-preview-v01"
-local output = root .. "/assets/exports/ngu-doc-preview-v01"
+local bundle = app.params.bundle or "ngu-doc-preview-v01"
+local source = root .. "/assets/source/" .. bundle
+local output = root .. "/assets/exports/" .. bundle
 local pixel = app.pixelColor
 
 local function readJson(path)

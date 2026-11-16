@@ -1,6 +1,7 @@
 local root = app.params.root or "."
-local source = root .. "/assets/source/ngu-doc-preview-v01"
-local output = root .. "/assets/exports/ngu-doc-preview-v01"
+local bundle = app.params.bundle or "ngu-doc-preview-v01"
+local source = root .. "/assets/source/" .. bundle
+local output = root .. "/assets/exports/" .. bundle
 local function read(path)
   local file = assert(io.open(path))
   local value = json.decode(file:read("*a"))
@@ -8,6 +9,7 @@ local function read(path)
   return value
 end
 local count = 0
+local expected = tonumber(app.params.expected) or 95
 for _, atlas in ipairs(read(source .. "/layout.json")) do
   local sprite = app.open(source .. "/" .. atlas.id .. ".aseprite")
   local png = Image{fromFile=output .. "/" .. atlas.id .. ".png"}
@@ -32,5 +34,5 @@ for _, atlas in ipairs(read(source .. "/layout.json")) do
   print(atlas.id .. ": " .. #sprite.tags .. " cels verified")
   sprite:close()
 end
-assert(count == 95, "Unexpected frame count " .. count)
-print("95 editable cels match the four PNG/JSON atlases")
+assert(count == expected, "Unexpected frame count " .. count)
+print(count .. " editable cels match the PNG/JSON atlases")

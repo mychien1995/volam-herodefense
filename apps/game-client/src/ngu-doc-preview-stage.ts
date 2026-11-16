@@ -21,6 +21,14 @@ const assets = import.meta.glob<string>(
     import: 'default',
   },
 );
+const qwPng = new URL(
+  '../../../assets/exports/ngu-doc-qw-v02/tai-hiep-qw.png',
+  import.meta.url,
+).href;
+const qwJson = new URL(
+  '../../../assets/exports/ngu-doc-qw-v02/tai-hiep-qw.json',
+  import.meta.url,
+).href;
 const arenaRoot = '/assets/visual-upgrade-2/';
 const props = [
   ['statue', 740, 470, 1],
@@ -51,6 +59,10 @@ type FxOptions = {
   scale?: number;
 };
 
+function effectTexture(clip?: keyof typeof effectClips): string {
+  return clip === 'flame' || clip === 'pool' ? 'tai-hiep-qw' : 'effects';
+}
+
 export class NguDocStage extends Phaser.Scene {
   protected branch: Branch = 'bich-co';
   protected facing: Facing = 'down';
@@ -75,6 +87,7 @@ export class NguDocStage extends Phaser.Scene {
         assets[atlasRoot + id + '.json']!,
       );
     }
+    this.load.atlas('tai-hiep-qw', qwPng, qwJson);
     for (const name of new Set(['ground', ...props.map(([id]) => id)])) {
       this.load.image(name, arenaRoot + name + '.png');
     }
@@ -115,13 +128,13 @@ export class NguDocStage extends Phaser.Scene {
         );
       }
     }
-    for (const [id, frames] of Object.entries(effectClips)) {
+    for (const id of Object.keys(effectClips) as (keyof typeof effectClips)[]) {
       const looping = id === 'ring' || id === 'pool' || id === 'flame';
       this.sequence(
         id,
-        'effects',
-        frames,
-        id === 'flame' ? 105 : 150,
+        effectTexture(id),
+        effectClips[id],
+        id === 'flame' ? 105 : id === 'pool' ? 180 : 150,
         looping ? -1 : 0,
       );
     }
@@ -217,6 +230,19 @@ export class NguDocStage extends Phaser.Scene {
       frame: this.actor.frame.name,
       cameraZoom: this.cameras.main.zoom,
       effects: [...this.transient].map((sprite) => sprite.name),
+      effectPositions: [...this.transient].flatMap((sprite) =>
+        sprite instanceof Phaser.GameObjects.Sprite &&
+        (sprite.name === 'flame' || sprite.name === 'pool')
+          ? [
+              {
+                name: sprite.name,
+                frame: sprite.frame.name,
+                x: sprite.x,
+                y: sprite.y,
+              },
+            ]
+          : [],
+      ),
       summons: [...this.summons].map(([sprite, type]) => ({
         type,
         frame: sprite.frame.name,
@@ -314,7 +340,7 @@ export class NguDocStage extends Phaser.Scene {
   protected fx(frame: string, point: Point, options: FxOptions = {}): Sprite {
     const { under, duration, clip, scale = 1 } = options;
     const sprite = this.add
-      .sprite(point.x, point.y, 'effects', frame)
+      .sprite(point.x, point.y, effectTexture(clip), frame)
       .setName(clip ?? frame)
       .setDepth(under ? 1 : 1065)
       .setScale(scale);
