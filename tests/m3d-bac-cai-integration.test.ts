@@ -111,7 +111,7 @@ it('real ordered kills unlock wave20 clear/rest on arena clock without dropping 
   expect(h.bossItems ?? []).toHaveLength(0);
   expect(m.invasion!.definition.intervalTicks).toBe(5400);
   const s = new LobbyState();
-  expect(PROTOCOL_VERSION).toBe(43);
+  expect(PROTOCOL_VERSION).toBe(44);
   expect(s.bacCai.size).toBe(0);
   expect(s.tayDoc.size).toBe(0);
   expect(s.namDeControls.size).toBe(0);

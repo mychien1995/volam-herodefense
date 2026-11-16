@@ -1,3 +1,10 @@
+import { nguDoc } from './ngu-doc-ids.js';
+import {
+  attachNguDocMark,
+  canCastNguDoc,
+  stepNguDocEffects,
+} from './ngu-doc-combat.js';
+import { nguDocSummons, stepNguDocSummons } from './ngu-doc-summons.js';
 import { duongMon } from './duong-mon-ids.js';
 import { canDuel, opponents, targetRadius } from './opponents.js';
 import {
@@ -380,6 +387,7 @@ function runCommand(
       return;
     const ability = equippedAbility(hero, command.slot, config);
     if (
+      (ability && !canCastNguDoc(world, hero, ability.id)) ||
       ability?.id === duongMon.elements ||
       (ability?.id === duongMon.flight &&
         hero.mana < 1 &&
@@ -519,7 +527,7 @@ function advanceProjectile(
         segmentRect(shot, end, wall, shot.effect.radius) ?? Infinity,
       );
   const targets: Actor[] = shot.hostile
-    ? [...world.heroes.values()]
+    ? [...world.heroes.values(), ...nguDocSummons(world)]
     : [...opponents(world, shot.ownerId)];
   const traveled = shot.effect.range - shot.remaining;
   const launch = { x: shot.x - dir.x * traveled, y: shot.y - dir.y * traveled };
@@ -620,9 +628,11 @@ function advanceProjectile(
           hitPhase:
             shot.abilityId === 'huyen_am_chuong'
               ? shot.stage
-              : shot.abilityId === 'thieu_lam_quyen'
-                ? 'roundhouse_kick'
-                : undefined,
+              : shot.abilityId === nguDoc.taiHiep
+                ? shot.stage
+                : shot.abilityId === 'thieu_lam_quyen'
+                  ? 'roundhouse_kick'
+                  : undefined,
           slowedBonus: shot.effect.slowedBonus,
           armorPenetration: shot.equipmentAttack?.penetration,
           lifesteal: shot.equipmentAttack?.lifesteal,
@@ -631,6 +641,8 @@ function advanceProjectile(
         },
       );
       if (hit) {
+        if (shot.abilityId === nguDoc.mark)
+          attachNguDocMark(world, config, enemy, shot.ownerId);
         spread?.hitTargets.add(spreadKey);
         if (shot.effect.oncePerCast && shot.comboTargets)
           shot.comboTargets[enemy.id] ??= false;
@@ -1038,11 +1050,14 @@ export function stepWorld(world: World, config: SimulationConfig): void {
   for (const shot of world.projectiles.values())
     advanceProjectile(world, shot, config);
   stepEquipmentCombat(world, config);
+  stepNguDocEffects(world, config);
+  stepNguDocSummons(world, config);
   constrainChuTrap(world, config);
   stepBossEncounter(world, config);
   const creepStarts = config.dungeonAggro
     ? new Map([...world.creeps].map(([id, e]) => [id, { x: e.x, y: e.y }]))
     : undefined;
+  const minions = [...nguDocSummons(world)];
   for (const [id, enemy] of world.creeps) {
     if (
       enemy.summonedBy &&
@@ -1122,31 +1137,44 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       }
     }
     const objective = enemy.invasion ? world.statue : undefined;
-    if (stepCreepActor(world, enemy, hero, objective, config)) continue;
-    const target = hero ??
+    const summon = minions
+      .filter(
+        (minion) =>
+          minion.hp > 0 && distance(minion, enemy) < stats.detectionRange,
+      )
+      .sort(
+        (a, b) =>
+          distance(a, enemy) - distance(b, enemy) || a.id.localeCompare(b.id),
+      )[0];
+    const combatant =
+      summon && (!hero || distance(enemy, summon) < distance(enemy, hero))
+        ? summon
+        : hero;
+    if (stepCreepActor(world, enemy, combatant, objective, config)) continue;
+    const target = combatant ??
       objective ?? {
         x: enemy.spawn.x,
         y: enemy.spawn.y + (Math.floor(world.tick / 90) % 2 ? 32 : -32),
       };
-    if (config.dungeonAggro) enemy.aggroTargetId = hero?.id ?? '';
+    if (config.dungeonAggro) enemy.aggroTargetId = combatant?.id ?? '';
     const waypoint =
-      config.dungeonAggro && hero
-        ? dungeonWaypoint(enemy, hero, world.tick, config)
+      config.dungeonAggro && combatant
+        ? dungeonWaypoint(enemy, combatant, world.tick, config)
         : target;
     const delta = direction(waypoint.x - enemy.x, waypoint.y - enemy.y);
     const moving =
-      !(config.dungeonAggro && !hero && !objective) &&
+      !(config.dungeonAggro && !combatant && !objective) &&
       (distance(enemy, target) >
-        (hero
+        (combatant
           ? stats.attackRange
           : objective
             ? stats.attackRange + objective.radius
             : 2) ||
         !!(
           config.dungeonAggro &&
-          hero &&
+          combatant &&
           config.collision.some(
-            (w) => segmentRect(enemy, hero, w) !== undefined,
+            (w) => segmentRect(enemy, combatant, w) !== undefined,
           )
         ));
     if (moving && !hasStatus(enemy, 'stun', world.tick)) {
@@ -1174,7 +1202,7 @@ export function stepWorld(world: World, config: SimulationConfig): void {
       );
       confineMovement(world, enemy, before, config);
     }
-    const victim = hero ?? objective;
+    const victim = combatant ?? objective;
     if (
       victim &&
       !moving &&
@@ -1206,9 +1234,9 @@ export function stepWorld(world: World, config: SimulationConfig): void {
         x: enemy.x,
         y: enemy.y,
       });
-      if (enemy.rangedAttack && hero) {
+      if (enemy.rangedAttack && combatant) {
         const effect = enemy.rangedAttack,
-          aim = direction(hero.x - enemy.x, hero.y - enemy.y);
+          aim = direction(combatant.x - enemy.x, combatant.y - enemy.y);
         const id = `creep_projectile_${world.nextId++}`;
         world.projectiles.set(id, {
           id,

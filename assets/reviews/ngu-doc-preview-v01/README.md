@@ -4,7 +4,7 @@
 
 **Tà Hiệp Bích Cổ** và **Cổ Sư Âm Linh** là hai tạo hình được chọn để dựng sprite. Mở `/ngu-doc-preview.html` trên Vite để duyệt trực tiếp trong sân Võ Đang visual-upgrade-2. Đổi tạo hình và mục tiêu bằng nút trong viewport, dùng mũi tên để di chuyển và P/A/Q/W/E/R/T để diễn chiêu. Nút **Đặt lại** đưa nhân vật về vị trí đầu và dọn hiệu ứng.
 
-Bản này dùng sân và các hình nhân kiểm tra Võ Đang có sẵn. Các phân cảnh chỉ chạy trong trang duyệt Phaser. Artwork chờ duyệt trước bước tích hợp vào trận.
+Bản này dùng sân và các hình nhân kiểm tra Võ Đang có sẵn. Các phân cảnh chỉ chạy trong trang duyệt Phaser. Xem [bản trận chơi thử](../../../docs/NGU_DOC_PLAYTEST.md) để kiểm tra gameplay thật.
 
 ## Tà Hiệp · Bích Cổ
 
@@ -15,7 +15,7 @@ Bản này dùng sân và các hình nhân kiểm tra Võ Đang có sẵn. Các 
 | Q | Ngũ Độc Chưởng bật lửa cả hai tay. A đổi sang chưởng viền vàng lục, khi trúng có độc bám và khói thấp báo làm chậm. Bấm Q lần nữa để tắt. |
 | W | Độc Sa Chưởng đặt khói vào boss trong tầm, kế đến là creep gần nhất. Đổi mục tiêu sang **Trống** để xem bãi khói đặt trước mặt. |
 | E | Âm Tà Hấp Hồn Khí bật/tắt vòng khói theo chân. Đi sát hình nhân để xem dấu độc và làm chậm. |
-| R | Vô Hình Độc diễn một đòn đến, giáp lóe, tia độc bật ngược và bám đúng mục tiêu tấn công trong phân cảnh. |
+| R | Vô Hình Độc là nội tại phản độc và không có VFX riêng. |
 | T | Âm Phong Thực Cốt cho nhiều bàn tay trồi đất, mở rồi bóp vào khoảng không, kèm hạt độc sau đòn. |
 
 ## Cổ Sư · Âm Linh
@@ -40,7 +40,7 @@ Bản này dùng sân và các hình nhân kiểm tra Võ Đang có sẵn. Các 
 
 ## Ảnh kiểm tra trong Phaser
 
-- [Bích Cổ · giáp, vòng độc và bàn tay trồi đất](bich-co-1366.png)
+- [Ảnh lịch sử Bích Cổ · vòng độc và bàn tay trồi đất](bich-co-1366.png)
 - [Âm Linh · W Yêu Cổ với bốn cương thi](am-linh-yeu-co-1366.png)
 - [Âm Linh · R Vô Hình Ma Cổ với zombie](am-linh-vo-hinh-ma-co-1366.png)
 - [Âm Linh · T Thần Chết quét hái](am-linh-thi-quy-1366.png)

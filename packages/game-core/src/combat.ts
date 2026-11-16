@@ -21,6 +21,8 @@ import { CHU_BOSS_ID } from './chu-types.js';
 import { waveBossTestArchetypes } from './wave-boss-test.js';
 import type { StatusEffect } from './types.js';
 import type { ComboSpec } from './types.js';
+import { nguDocDamage } from './ngu-doc-combat.js';
+import { findNguDocSummon } from './ngu-doc-summons.js';
 import { recordTamLienHit } from './tam-lien-tram.js';
 export function emit(world: World, event: Omit<CombatEvent, 'id'>): void {
   world.events.push({ id: world.nextEvent++, tick: world.tick, ...event });
@@ -255,7 +257,9 @@ export function hurt(
       world.heroes.has(target.id)
         ? characterStats(world.heroes.get(target.id)!, config, world.tick).total
             .defense
-        : (enemy ? (enemy.stats ?? config.creep).defense : 0) +
+        : (enemy
+            ? (enemy.stats ?? config.creep).defense
+            : (findNguDocSummon(world, target.id)?.defense ?? 0)) +
             statusValue(target, 'defense_buff', world.tick) -
             statusValue(target, 'defense_break', world.tick),
     ) *
@@ -449,6 +453,20 @@ export function hurt(
     fx: snapshot?.fx ?? heading?.fx ?? 1,
     fy: snapshot?.fy ?? heading?.fy ?? 0,
   });
+  if (target.hp < beforeHp)
+    nguDocDamage(
+      world,
+      config,
+      target,
+      sourceId,
+      abilityId,
+      snapshot?.hitPhase,
+      !snapshot?.periodic &&
+        !snapshot?.reactive &&
+        !snapshot?.resolvedReflection &&
+        !snapshot?.directHp &&
+        !snapshot?.unavoidableHpLoss,
+    );
   if (
     enemy?.bossEncounter &&
     world.chu?.phase === 'reflect' &&

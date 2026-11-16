@@ -1,3 +1,10 @@
+## Ngũ Độc · Bản chơi thử M3D
+
+- Chọn cả hai nhánh trong phòng thật. Hai máy khách nhìn thấy đúng sprite, Q Bích Cổ có hai ngọn lửa đổi khung, W tạo một bãi khói và R không phát hiệu ứng.
+- W Cổ Sư gọi 1–4 cương thi theo bậc. R chỉ gọi zombie qua xác suất khi đánh thường. Minion hiện thanh máu theo HP từ server.
+- Giao dịch mua đồ cập nhật chỉ số cả minion đã gọi, giữ tỷ lệ HP hiện tại. Thần Chết còn sống giữ ID và lượng máu khi vào phó bản, về arena và qua chu kỳ gục ngã/hồi sinh.
+- Lưỡi hái làm chậm trên diện rộng, sóng độc bay thẳng và cú bổ gây choáng nhiều mục tiêu. E Cổ Sư nổ sau ba giây kể từ lúc trúng, choáng và hồi máu từ sát thương thực nhận.
+
 ## Côn Luân · Bản chơi thử
 
 Dùng Q/E/R Kiếm Tôn qua cả bốn bậc để xác nhận thời lượng choáng theo từng lần trúng. Q chỉ nổ kiếm của người dùng và sát thương chiêu tăng 30% theo bậc. E có năm nhịp sát thương, áp choáng ở lần trúng đầu mỗi mục tiêu. Đối thủ vào T sau nhịp mở vẫn bị làm chậm và không lướt được, có thể đi bộ ra ngoài rồi lướt. E Thiền Sư chỉ làm chậm mục tiêu vòng sét chạm tới, W/R choáng 2 giây trong vùng nổ.

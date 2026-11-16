@@ -19,6 +19,7 @@ import { BossPartyUI, isBossDestination } from './boss-party-ui.js';
 import {
   conLuan,
   duongMon,
+  nguDoc,
   directDodgeChance,
   loiDai,
   type BuildChange,
@@ -811,6 +812,10 @@ export class GameUI {
     element('#duong-mon-innate-icon').hidden =
       hero.schoolId !== duongMon.school;
     element('#viewport').dataset['heroSchool'] = hero.schoolId;
+    element('#viewport').dataset['heroForm'] = heroTexture(
+      hero.basicId,
+      hero.schoolId,
+    );
     element('#viewport').style.setProperty(
       '--hero-idle',
       'url("' +
@@ -988,6 +993,15 @@ export class GameUI {
         shot.zoneId === hero.zoneId &&
         (shot.stage === 'fan_outbound' || shot.stage === 'fan_hold'),
     );
+    const hasReaper =
+      hero.basicId === nguDoc.coSu &&
+      [...(this.state?.creeps.values() ?? [])].some(
+        (minion) =>
+          minion.ownerId === this.sessionId &&
+          minion.zoneId === hero.zoneId &&
+          minion.archetypeId === 'ngu_doc_reaper' &&
+          minion.hp > 0,
+      );
     for (const { key, remaining: cooldownRemaining, ability } of slots) {
       const charge = hero.build.charges.get(ability?.id ?? '');
       const remaining =
@@ -1012,10 +1026,12 @@ export class GameUI {
         (ability?.effect.mode === 'projectile' &&
           ability.effect.blinkWindowTicks !== undefined &&
           hero.blinkTicks > 0);
+      const reaperActive = ability?.id === nguDoc.reaper && hasReaper;
+      const passive =
+        ability?.id === nguDoc.counter || ability?.id === nguDoc.zombie;
       const slot = element(`#slot-${key}`),
         cooling = remaining > 0 && !recast,
         cost = recast ? 0 : (ability?.manaCost ?? 0);
-      slot.classList.toggle('recast-ready', recast);
       slot.dataset['recastReady'] = String(recast);
       slot.classList.toggle('cooling', cooling);
       const controlled = activeStatuses.some(
@@ -1032,9 +1048,19 @@ export class GameUI {
           hero.hp <= 0 ||
           hero.mana < cost ||
           charge?.count === 0 ||
+          reaperActive ||
           controlled,
       );
       slot.classList.toggle('unequipped', !ability);
+      slot.classList.toggle('passive-skill', passive);
+      slot.classList.toggle(
+        'recast-ready',
+        recast ||
+          (ability?.id === nguDoc.palm &&
+            activeStatuses.some((s) => s.kind === 'ngu_doc_palm')) ||
+          (ability?.id === nguDoc.aura &&
+            activeStatuses.some((s) => s.kind === 'ngu_doc_aura')),
+      );
       if (key !== 'a') {
         let badge = slot.querySelector<HTMLElement>('.skill-rank');
         if (!badge) {
@@ -1088,6 +1114,7 @@ export class GameUI {
           'thieu_lam',
           'con_luan',
           'duong_mon',
+          'ngu_doc',
         ].includes(hero.schoolId)
       ) {
         const art = slot.querySelector<HTMLElement>('.pixel-icon')!;
@@ -1095,40 +1122,48 @@ export class GameUI {
         art.style.background = `url("${skillIcon(hero.basicId)}") center / contain no-repeat`;
       } else if (key === 'a')
         slot.querySelector<HTMLElement>('.pixel-icon')!.style.background = '';
-      element(`#timer-${key}`).textContent = recast
-        ? recall
-          ? ''
-          : ((fortune?.ticks ?? hero.blinkTicks) / m1Config.tickRate).toFixed(1)
-        : cooling
-          ? (remaining / m1Config.tickRate).toFixed(1)
-          : '';
+      element(`#timer-${key}`).textContent = passive
+        ? ''
+        : recast
+          ? recall
+            ? ''
+            : ((fortune?.ticks ?? hero.blinkTicks) / m1Config.tickRate).toFixed(
+                1,
+              )
+          : cooling
+            ? (remaining / m1Config.tickRate).toFixed(1)
+            : '';
       slot.querySelector<HTMLElement>('.cooldown-shade')!.style.height =
         `${recast ? 0 : Math.min(100, (remaining / (ability?.cooldownTicks || 1)) * 100)}%`;
       element(`#cooldown-${key}`).textContent =
         key === 'a'
-          ? hero.schoolId === 'duong_mon'
-            ? hero.basicId === 'duong_mon_am_khi'
-              ? 'Băng Châm'
-              : 'Tụ Tiễn'
-            : hero.schoolId === 'con_luan'
-              ? hero.basicId === 'con_luan_kiem_ton'
-                ? 'Kiếm Tôn'
-                : 'Thiền Sư'
-              : hero.schoolId === 'thieu_lam'
-                ? hero.basicId === 'thieu_lam_quyen'
-                  ? 'Quyền'
-                  : 'Đao'
-                : hero.schoolId === 'vo_dang'
-                  ? hero.basicId === 'vo_dang_quyen'
+          ? hero.schoolId === nguDoc.school
+            ? hero.basicId === nguDoc.coSu
+              ? 'Đạn trượng'
+              : 'Chưởng'
+            : hero.schoolId === 'duong_mon'
+              ? hero.basicId === 'duong_mon_am_khi'
+                ? 'Băng Châm'
+                : 'Tụ Tiễn'
+              : hero.schoolId === 'con_luan'
+                ? hero.basicId === 'con_luan_kiem_ton'
+                  ? 'Kiếm Tôn'
+                  : 'Thiền Sư'
+                : hero.schoolId === 'thieu_lam'
+                  ? hero.basicId === 'thieu_lam_quyen'
                     ? 'Quyền'
-                    : 'Kiếm'
-                  : hero.schoolId === 'thien_son'
-                    ? hero.basicId === 'thien_son_phien'
-                      ? 'Phiến'
-                      : 'Đao'
-                    : hero.basicId === 'cai_bang_bong'
-                      ? 'Bổng'
-                      : 'Chưởng'
+                    : 'Đao'
+                  : hero.schoolId === 'vo_dang'
+                    ? hero.basicId === 'vo_dang_quyen'
+                      ? 'Quyền'
+                      : 'Kiếm'
+                    : hero.schoolId === 'thien_son'
+                      ? hero.basicId === 'thien_son_phien'
+                        ? 'Phiến'
+                        : 'Đao'
+                      : hero.basicId === 'cai_bang_bong'
+                        ? 'Bổng'
+                        : 'Chưởng'
           : recast
             ? recall
               ? 'Thu quạt'
@@ -1143,7 +1178,7 @@ export class GameUI {
                     m1Config.progression?.skills[ability.id]?.levelGates[0]
                   : `${cost} NL`
                 : 'Trống';
-      slot.title = `${ability?.nameVi ?? 'Chưa trang bị'}${key !== 'a' && hero.build.enabled ? ' · Bậc ' + rank : ''}${charge ? ` · ${charge.count}/${charge.capacity} lượt${charge.rechargeTicks ? ` · Hồi lượt sau ${(charge.rechargeTicks / m1Config.tickRate).toFixed(1)} giây` : ''}` : ''} · ${!ability ? 'Chưa mở' : rank === 0 ? 'Chưa học' : controlled ? 'Đang bị khống chế' : cooling ? 'Đang hồi chiêu' : hero.mana < cost ? 'Thiếu nội lực' : 'Sẵn sàng'}`;
+      slot.title = `${ability?.nameVi ?? 'Chưa trang bị'}${key !== 'a' && hero.build.enabled ? ' · Bậc ' + rank : ''}${charge ? ` · ${charge.count}/${charge.capacity} lượt${charge.rechargeTicks ? ` · Hồi lượt sau ${(charge.rechargeTicks / m1Config.tickRate).toFixed(1)} giây` : ''}` : ''} · ${!ability ? 'Chưa mở' : rank === 0 ? 'Chưa học' : passive ? 'Nội tại' : reaperActive ? 'Thần Chết đang chiến đấu' : controlled ? 'Đang bị khống chế' : cooling ? 'Đang hồi chiêu' : hero.mana < cost ? 'Thiếu nội lực' : 'Sẵn sàng'}`;
       slot.dataset['skillId'] = ability?.id ?? '';
     }
   }

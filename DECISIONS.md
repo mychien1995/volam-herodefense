@@ -1,3 +1,7 @@
+## Ngũ Độc · Bích Cổ và Âm Linh
+
+Hai tạo hình đã chọn vào bản chơi thử M3D. Vô Hình Độc của Tà Hiệp phản độc thụ động và không có VFX riêng. Cổ Sư dùng W Yêu Cổ để gọi cương thi và R Vô Hình Ma Cổ tăng xác suất gọi zombie bằng đánh thường. Thần Chết còn sống theo chủ qua phó bản, về arena và khi chủ gục. Minion có thanh máu và nhận một phần chỉ số tăng từ trang bị của Cổ Sư. [Bản tích hợp](docs/NGU_DOC_PLAYTEST.md).
+
 ## Đường Môn · Tuần sa và Dạ hành
 
 Đã duyệt Tuần sa 01, Dạ hành 06 và quạt R4 với băng châm Thủy ở giữa. Artwork VFX đã duyệt gồm laze trắng lam và 20 hoa đào thép nổ văng kim. Bản chơi thử dùng phòng M3D, bắt đầu Đường Môn ở cấp 6. [Bản tích hợp](docs/DUONG_MON_PLAYTEST.md).

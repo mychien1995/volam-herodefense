@@ -1,3 +1,7 @@
+## Ngũ Độc trong trận M3D
+
+`game-core` giữ minion theo người triệu hồi và xử lý AI, sát thương, trang bị và chuyển vùng. `DungeonMatch` đặt lại vị trí của Thần Chết ở vùng đích bằng cùng thực thể và giữ lượng máu. Protocol 44 thêm `CreepState.ownerId` cho minion, giữ ID qua các vùng và dùng bộ lọc instance hiện có. Phaser đọc trạng thái để vẽ chuyển động, thanh máu và hiệu ứng theo tick. [Dữ liệu và kiểm chứng](docs/NGU_DOC_PLAYTEST.md).
+
 ## Võ Đang Kiếm — protocol 38
 
 Server giữ số lượt Vạn Kiếm qua các mốc hồi tuần tự, chuyển mốc theo đồng hồ vùng khi chuyển bản đồ. BuildState đồng bộ số lượt, sức chứa và thời gian hồi lượt kế. Vùng chiến đấu giữ tick bắt đầu, tâm đáp, điểm phóng và hướng chỉ kiếm. Phaser dùng cùng bộ trình diễn 48 thanh trong trận và trang preview. Server lập lịch một lần sát thương ở mốc thanh đầu chạm tâm. Sự kiện Q chứa chỉ số nhát để ghép đúng bảy vệt chém với bảy nhịp server.

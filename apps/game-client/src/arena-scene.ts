@@ -31,6 +31,17 @@ import {
   duongMonPivot,
   preloadDuongMon,
 } from './duong-mon-art.js';
+import { nguDoc } from '@volam/game-core';
+import {
+  NguDocArt,
+  nguDocBody,
+  nguDocHeadHeight,
+  nguDocHeroPivot,
+  nguDocMinionKind,
+  nguDocMinionPivot,
+  nguDocMinions,
+  preloadNguDoc,
+} from './ngu-doc-art.js';
 import { previewCreepArt } from './creep-preview-art.js';
 import { applyArenaPalette, applyNameLabel } from './visual-presentation.js';
 import { m3dBambooPose } from './m3d-feedback.js';
@@ -348,14 +359,20 @@ export class ArenaScene extends Phaser.Scene {
     preloadM3dHitArt(this);
     preloadConLuanArt(this);
     preloadDuongMon(this);
+    preloadNguDoc(this);
   }
   private conLuanArt?: ConLuanArt;
   private duongMonArt?: DuongMonArt;
+  private nguDocArt?: NguDocArt;
   create(): void {
     if (this.bootArtFailed) return;
     this.shaolinDao.register();
     this.conLuanArt = new ConLuanArt(this);
     this.duongMonArt = new DuongMonArt(this);
+    this.nguDocArt = new NguDocArt(this);
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
+      this.nguDocArt?.clear(),
+    );
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () =>
       this.duongMonArt?.clear(),
     );
@@ -640,6 +657,7 @@ export class ArenaScene extends Phaser.Scene {
     this.time.removeAllEvents();
     this.conLuanArt?.clear();
     this.duongMonArt?.clear();
+    this.nguDocArt?.clear();
     for (const object of [...this.children.list]) object.destroy();
     this.chu?.clear();
     this.namDe?.clear();
@@ -695,11 +713,13 @@ export class ArenaScene extends Phaser.Scene {
         art?.animations.find((a) => a.state === 'idle')?.frames[0] ??
           (texture === duongMonDummy
             ? '__BASE'
-            : duongMonBody(texture)
-              ? 'idle-down'
-              : texture.startsWith('desert_')
-                ? 'idle_down_0.png'
-                : 'idle_down_0'),
+            : texture === nguDocMinions
+              ? 'jiangshi_idle'
+              : duongMonBody(texture)
+                ? 'idle-down'
+                : texture.startsWith('desert_')
+                  ? 'idle_down_0.png'
+                  : 'idle_down_0'),
       )
       .setOrigin(
         ...(art?.footPivot ??
@@ -709,7 +729,11 @@ export class ArenaScene extends Phaser.Scene {
               ? duongMonPivot
               : isConLuanBody(texture)
                 ? conLuanPivot
-                : actorFootPivot(this, texture))),
+                : nguDocBody(texture)
+                  ? nguDocHeroPivot
+                  : texture === nguDocMinions
+                    ? nguDocMinionPivot
+                    : actorFootPivot(this, texture))),
       )
       .setName('actor:' + id);
     const label = this.add
@@ -788,6 +812,7 @@ export class ArenaScene extends Phaser.Scene {
     this.shaolinDao.sync(state, this.zoneId);
     const active = new Set<string>();
     this.conLuanArt?.begin();
+    this.nguDocArt?.begin();
     const render = (
       id: string,
       actor: {
@@ -824,31 +849,36 @@ export class ArenaScene extends Phaser.Scene {
       )
         return;
       active.add(id);
+      const minion = enemy ? nguDocMinionKind(actor.archetypeId) : undefined;
       const previewArt =
         enemy && state?.defense.creepPreview
           ? previewCreepArt(this, actor.archetypeId)
           : undefined;
-      const art = enemy
-        ? (previewArt ??
-          coMoCreepArt(this, actor.archetypeId, this.zoneId) ??
-          forestCreepArt(
-            this.cache.json.get(
-              'forest_creeps_manifest',
-            ) as ForestCreepManifest,
-            actor.archetypeId,
-            this.zoneId,
-          ) ??
-          beachCreepArt(this, actor.archetypeId, this.zoneId) ??
-          hellCreepArt(this, actor.archetypeId, this.zoneId) ??
-          desertCreepArt(this, actor.archetypeId, this.zoneId) ??
-          arenaCreepArt(
-            this.cache.json.get('arena_creeps_manifest') as ArenaCreepManifest,
-            actor.invasionWave,
-            this.zoneId,
-          ))
-        : undefined;
+      const art =
+        enemy && !minion
+          ? (previewArt ??
+            coMoCreepArt(this, actor.archetypeId, this.zoneId) ??
+            forestCreepArt(
+              this.cache.json.get(
+                'forest_creeps_manifest',
+              ) as ForestCreepManifest,
+              actor.archetypeId,
+              this.zoneId,
+            ) ??
+            beachCreepArt(this, actor.archetypeId, this.zoneId) ??
+            hellCreepArt(this, actor.archetypeId, this.zoneId) ??
+            desertCreepArt(this, actor.archetypeId, this.zoneId) ??
+            arenaCreepArt(
+              this.cache.json.get(
+                'arena_creeps_manifest',
+              ) as ArenaCreepManifest,
+              actor.invasionWave,
+              this.zoneId,
+            ))
+          : undefined;
       const states = JSON.parse(actor.statuses ?? '[]') as Array<{
         kind: string;
+        ticks?: number;
       }>;
       const heroReaction =
         !enemy && actor.hp > 0
@@ -901,12 +931,15 @@ export class ArenaScene extends Phaser.Scene {
       const texture =
         cast?.texture ??
         (enemy
-          ? (art?.id ??
-            (trainingDummy ? duongMonDummy : creepPlaceholderTexture))
+          ? minion
+            ? nguDocMinions
+            : (art?.id ??
+              (trainingDummy ? duongMonDummy : creepPlaceholderTexture))
           : heroTexture(actor.basicId, actor.schoolId));
       const conLuanBody = !enemy && isConLuanBody(texture);
       const duongMonActor = !enemy && duongMonBody(texture);
-      const highResBody = conLuanBody || duongMonActor;
+      const nguDocActor = nguDocBody(texture) || !!minion;
+      const highResBody = conLuanBody || duongMonActor || nguDocActor;
       const view =
         this.actors.get(id) ??
         this.createActor(
@@ -1052,6 +1085,17 @@ export class ArenaScene extends Phaser.Scene {
       const renderTexture = forestBody || texture;
       if (trainingDummy) {
         view.sprite.setScale(0.62).setAlpha(actor.hp > 0 ? 1 : 0.3);
+      } else if (nguDocActor) {
+        this.nguDocArt?.body(
+          id,
+          view.sprite,
+          texture,
+          { ...actor, pose: heroReaction ?? pose.state },
+          states,
+          pose.direction,
+          tick,
+          minion,
+        );
       } else if (duongMonActor) {
         this.duongMonArt?.body(
           view.sprite,
@@ -1181,6 +1225,7 @@ export class ArenaScene extends Phaser.Scene {
           }
         }
       }
+      this.nguDocArt?.mark(id, view.sprite, states);
       if (cast)
         this.vfx?.observeCharacter(
           texture,
@@ -1204,26 +1249,32 @@ export class ArenaScene extends Phaser.Scene {
           8,
         );
       const barOffset =
-        renovationHeight(
-          renovatedId ?? '',
-          art?.bodyHeight ??
-            (conLuanBody && states.some((s) => s.kind === 'con_luan_chaos')
-              ? 60
-              : enemy
-                ? 43
-                : 48),
-        ) + 5;
-      view.bar.setPosition(view.sprite.x - 14, view.sprite.y - barOffset);
+        (nguDocActor
+          ? nguDocHeadHeight(minion)
+          : renovationHeight(
+              renovatedId ?? '',
+              art?.bodyHeight ??
+                (conLuanBody && states.some((s) => s.kind === 'con_luan_chaos')
+                  ? 60
+                  : enemy
+                    ? 43
+                    : 48),
+            )) + 5;
+      const barSize = minion === 'reaper' ? 32 : minion ? 22 : 28;
+      view.bar.setPosition(
+        view.sprite.x - barSize / 2,
+        view.sprite.y - barOffset,
+      );
       const barDepth = view.sprite.y + 0.1;
       if (view.bar.depth !== barDepth) view.bar.setDepth(barDepth);
-      const barWidth = Math.round((28 * actor.hp) / actor.maxHp);
+      const barWidth = Math.round((barSize * actor.hp) / actor.maxHp);
       if (enemy && actor.archetypeId === 'ly_mac_sau')
         view.bar.setVisible(false);
       if (view.barWidth !== barWidth) {
         view.barWidth = barWidth;
-        view.bar.clear().fillStyle(0x293c37).fillRect(0, 0, 28, 3);
+        view.bar.clear().fillStyle(0x293c37).fillRect(0, 0, barSize, 3);
         view.bar
-          .fillStyle(enemy ? 0xcc6e55 : 0x92c589)
+          .fillStyle(minion ? 0x96db6e : enemy ? 0xcc6e55 : 0x92c589)
           .fillRect(0, 0, barWidth, 3);
       }
       if (id === this.sessionId && state?.players.get(id)?.bossSpectator) {
@@ -1314,6 +1365,7 @@ export class ArenaScene extends Phaser.Scene {
     this.vfx?.sync(state, this.zoneId, (id) => this.actors.get(id)?.sprite);
     this.conLuanArt?.sync(state, this.zoneId);
     this.duongMonArt?.sync(state, this.zoneId);
+    this.nguDocArt?.sync(state, this.zoneId);
     this.coMoEffects?.sync(state, this.zoneId);
     this.creepEffects?.sync(
       state,
@@ -1469,6 +1521,7 @@ export class ArenaScene extends Phaser.Scene {
     }
     this.lastEvent = event.id;
     if (event.zoneId && event.zoneId !== this.zoneId) return;
+    if (event.abilityId === nguDoc.counter) return;
     if (event.abilityId === 'loi_dai_victory') {
       celebrateLoiDai(this, event.x, event.y);
       return;
@@ -1543,6 +1596,7 @@ export class ArenaScene extends Phaser.Scene {
       });
       if (this.impacts.length > 60) this.impacts.shift();
     } else if (
+      !this.nguDocArt?.event(event, this.actors.get(event.sourceId)?.sprite) &&
       !this.duongMonArt?.event(event) &&
       !this.conLuanArt?.event(event, this.actors.get(event.sourceId)?.sprite) &&
       !this.shaolinDao.event(
@@ -1580,6 +1634,7 @@ export class ArenaScene extends Phaser.Scene {
   reviewClearTransientEffects(): void {
     this.conLuanArt?.clear();
     this.duongMonArt?.clear();
+    this.nguDocArt?.clear();
     this.hitArt.clear();
     this.shaolinDao.clear();
     this.vfx?.clear();
@@ -1665,6 +1720,7 @@ export class ArenaScene extends Phaser.Scene {
       skills: this.vfx?.inspect(),
       conLuan: this.conLuanArt?.inspect(),
       duongMon: this.duongMonArt?.inspect(),
+      nguDoc: this.nguDocArt?.inspect(),
       shaolinDao: {
         effects: this.shaolinDao.inspect(),
         lotusRings: this.children.list
@@ -1798,6 +1854,8 @@ export class ArenaScene extends Phaser.Scene {
           fontFamily: view.label.style.fontFamily,
         },
         healthBarVisible: view.bar.visible,
+        healthBarY: view.bar.y,
+        healthBarFill: view.barWidth,
       })),
       trees: this.trees.map((tree) => ({
         x: tree.x,

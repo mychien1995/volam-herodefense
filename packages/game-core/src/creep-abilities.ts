@@ -1,4 +1,5 @@
 import { emit, hurt } from './combat.js';
+import { nguDocSummons } from './ngu-doc-summons.js';
 import {
   direction,
   distance,
@@ -254,6 +255,7 @@ function attack(
 function victims(world: World, e: CreepCue): Actor[] {
   return [
     ...world.heroes.values(),
+    ...nguDocSummons(world),
     ...(e.allowStatue && world.statue ? [world.statue] : []),
   ].filter((h) => h.hp > 0);
 }
@@ -852,7 +854,7 @@ export function stepCreepHazards(world: World, config: SimulationConfig): void {
 export function stepCreepActor(
   world: World,
   enemy: Creep,
-  hero: Hero | undefined,
+  combatant: Actor | undefined,
   objective: Actor | undefined,
   config: SimulationConfig,
 ): boolean {
@@ -862,7 +864,7 @@ export function stepCreepActor(
   const a = actorState(world, enemy),
     stats = enemy.stats ?? config.creep;
   if (enemy.hp <= 0) return true;
-  const target = hero ?? objective;
+  const target = combatant ?? objective;
   if (!target || hasStatus(enemy, 'stun', world.tick)) {
     enemy.pose = 'idle';
     return true;
@@ -871,11 +873,11 @@ export function stepCreepActor(
   enemy.castAbilityId = '';
   delete enemy.encounterAction;
   const range =
-    hero || p.basic.mode === 'projectile'
+    combatant || p.basic.mode === 'projectile'
       ? p.basic.range
       : p.basic.range + ('radius' in target ? Number(target.radius) : 0);
   const inRange =
-    distance(enemy, target) <= range + (hero ? config.radius : 0) &&
+    distance(enemy, target) <= range + (combatant ? config.radius : 0) &&
     clear(
       enemy,
       target,
@@ -886,12 +888,13 @@ export function stepCreepActor(
   enemy.fx = dir.x;
   enemy.fy = dir.y;
   if (
-    hero &&
+    combatant &&
     p.special &&
     world.tick >= a.nextSpecial &&
     !hasStatus(enemy, 'silence', world.tick) &&
-    distance(enemy, hero) <= Math.max(p.special.range, 150) + config.radius &&
-    clear(enemy, hero, config)
+    distance(enemy, combatant) <=
+      Math.max(p.special.range, 150) + config.radius &&
+    clear(enemy, combatant, config)
   ) {
     const busy = [...runtime(world).effects.values()]
       .filter(
@@ -902,7 +905,7 @@ export function stepCreepActor(
       )
       .map((e) => e.ownerId);
     if (new Set(busy).size < config.creepCombat!.maxNearbyCasts) {
-      attack(world, enemy, p, p.special, hero, config, 'special');
+      attack(world, enemy, p, p.special, combatant, config, 'special');
       a.nextSpecial = world.tick + p.special.cooldown;
       enemy.cooldown = Math.max(enemy.cooldown, a.busyUntil + 12);
       return true;
@@ -935,9 +938,9 @@ export function stepCreepActor(
   }
   if (world.tick >= enemy.cooldown && !hasStatus(enemy, 'disarm', world.tick)) {
     if (
-      hero &&
+      combatant &&
       p.basic.mode === 'projectile' &&
-      distance(enemy, hero) < p.basic.range * 0.35
+      distance(enemy, combatant) < p.basic.range * 0.35
     )
       moveCircle(
         enemy,
@@ -958,7 +961,7 @@ export function stepCreepActor(
           (1 + statusValue(enemy, 'attack_slow', world.tick))) /
           (1 + buff),
       );
-    if (!hero && objective) {
+    if (!combatant && objective) {
       // Statue pressure is deliberately normal damage only. No DOT, self-heal, explosion or special.
       if (p.basic.mode === 'projectile') {
         attack(

@@ -107,7 +107,7 @@ test('both designs walk in four directions at native scale and Bích Cổ previe
   await page.locator('#target').selectOption('boss');
   await page.keyboard.press('e');
   await page.keyboard.press('r');
-  await expect.poll(async () => (await state(page)).effects).toContain('armor');
+  expect((await state(page)).effects).not.toContain('armor');
   await page.keyboard.press('t');
   await expect
     .poll(

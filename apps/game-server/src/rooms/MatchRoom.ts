@@ -39,6 +39,9 @@ import {
   DungeonMatch,
   conLuan,
   duongMon,
+  nguDoc,
+  nguDocSummons,
+  nguDocSummonPrefix,
   changeBuild,
   initializeProgression,
   skillRank,
@@ -195,10 +198,33 @@ export class MatchRoom extends Room<{
       process.env['NODE_ENV'] !== 'production' &&
       process.env['VOLAM_DEV_DUONG_MON'] === '1' &&
       !this.legacySkills;
-    if (this.devLoiDai || conLuanTrial || duongMonTrial) {
+    const nguDocTrial =
+      hero.schoolId === nguDoc.school &&
+      process.env['NODE_ENV'] !== 'production' &&
+      process.env['VOLAM_DEV_NGU_DOC'] === '1' &&
+      !this.legacySkills;
+    if (this.devLoiDai || conLuanTrial || duongMonTrial || nguDocTrial) {
       hero.level = this.devLoiDai ? loiDai.minLevel : 6;
       hero.xp = experienceAtLevel(hero.level, this.simulation.base);
       hero.skillPoints = hero.level;
+      if (nguDocTrial) {
+        hero.gold = Math.max(hero.gold, 250);
+        for (const slot of [
+          0,
+          1,
+          2,
+          3,
+          4,
+          hero.basicId === nguDoc.coSu ? 1 : 0,
+        ])
+          changeBuild(
+            this.world,
+            hero,
+            this.simulation.base,
+            hero.progression!.revision,
+            { action: 'upgrade-slot', slot },
+          );
+      }
       if (duongMonTrial) {
         for (const slot of [
           0,
@@ -857,12 +883,14 @@ export class MatchRoom extends Room<{
             zoneId,
             sourceId:
               zone.world.creeps.has(event.sourceId) ||
-              event.sourceId.startsWith('hl_minion_')
+              event.sourceId.startsWith('hl_minion_') ||
+              event.sourceId.startsWith(nguDocSummonPrefix)
                 ? this.entityKey(zone, event.sourceId)
                 : event.sourceId,
             targetId:
               zone.world.creeps.has(event.targetId) ||
-              event.targetId.startsWith('hl_minion_')
+              event.targetId.startsWith('hl_minion_') ||
+              event.targetId.startsWith(nguDocSummonPrefix)
                 ? this.entityKey(zone, event.targetId)
                 : event.targetId,
             protocolVersion: PROTOCOL_VERSION,
@@ -1409,8 +1437,27 @@ export class MatchRoom extends Room<{
           (bossCast?.releaseAt ?? zone.world.tick) - zone.world.tick,
         );
         target.castTargetId = bossCast?.targetId ?? '';
+        target.ownerId = '';
         target.lane = enemy.invasion?.lane ?? '';
         target.targetId = enemy.invasion?.targetId ?? enemy.aggroTargetId ?? '';
+      }
+      for (const minion of nguDocSummons(zone.world)) {
+        if (minion.hp <= 0) continue;
+        // A summon has a world-independent identity. Only the owner's zone sees it.
+        creepKeys.add(minion.id);
+        let target = this.state.creeps.get(minion.id);
+        if (!target) {
+          target = new CreepState();
+          this.state.creeps.set(minion.id, target);
+        }
+        this.syncActor(target, minion, zone.world.tick);
+        target.ownerId = minion.ownerId;
+        target.archetypeId = 'ngu_doc_' + minion.kind;
+        target.zoneId = zone.id;
+        target.actionEndsAt = minion.actionUntil;
+        target.actionStartedAt =
+          minion.actionUntil -
+          (minion.castAbilityId === nguDoc.reaperSlam ? 18 : 12);
       }
       for (const effect of [
         ...(zone.world.creepCombat?.effects.values() ?? []),
@@ -1617,6 +1664,8 @@ export class MatchRoom extends Room<{
     }
   }
   private entityKey(zone: MatchZone, id: string): string {
-    return zone.access === 'arena' ? id : `${zone.id}:${id}`;
+    return zone.access === 'arena' || id.startsWith(nguDocSummonPrefix)
+      ? id
+      : `${zone.id}:${id}`;
   }
 }

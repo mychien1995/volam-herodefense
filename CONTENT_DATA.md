@@ -1,3 +1,7 @@
+## Ngũ Độc · Bản chơi thử
+
+Tà Hiệp Bích Cổ dùng chưởng pháp. Cổ Sư Âm Linh dùng trượng đầu lâu và triệu hồi. Ngũ Độc Tâm Kinh tăng máu tối đa, hồi máu và hồi nội lực theo cấp. [Danh mục chiêu, minion và thông số thử](docs/NGU_DOC_PLAYTEST.md).
+
 ## Đường Môn · Bản chơi thử
 
 Hai nhánh Cơ Quan (Tuần sa) và Ám Khí (Dạ hành) dùng năm ô Q/W/E/R/T. Tứ tuyệt khí tăng hồi nội lực, hồi máu và tỷ lệ chí mạng theo cấp. [Chiêu, trạng thái và thông số thử](docs/DUONG_MON_PLAYTEST.md).

@@ -26,7 +26,6 @@ type Sprite = Phaser.GameObjects.Sprite;
 class NguDocPreview extends NguDocStage {
   private handFlames: Sprite[] = [];
   private venomRing: Sprite | undefined;
-  private armor: Sprite | undefined;
 
   override create(): void {
     super.create();
@@ -78,7 +77,6 @@ class NguDocPreview extends NguDocStage {
     this.clearStage();
     this.handFlames = [];
     this.venomRing = undefined;
-    this.armor = undefined;
     this.keys.clear();
     this.setTargets(targetSelect.value as TargetMode);
     for (const button of controls)
@@ -186,7 +184,7 @@ class NguDocPreview extends NguDocStage {
       return;
     }
     if (skill === 'R') {
-      this.demoCounter();
+      cue.value += ' · Nội tại';
       return;
     }
 
@@ -249,29 +247,6 @@ class NguDocPreview extends NguDocStage {
       .querySelector('[data-skill="' + skill + '"]')!
       .setAttribute('aria-pressed', String(on));
     cue.value += on ? ' · Bật' : ' · Tắt';
-  }
-
-  private demoCounter(): void {
-    if (this.armor) this.release(this.armor);
-    this.armor = this.fx('armor', at(this.actor, 0, -37)).setAlpha(0.43);
-    this.armor.setDepth(this.actor.y + 1);
-    const target = this.target(true);
-    const point = target ?? this.front(125);
-    const chest = at(this.actor, 0, -39);
-    this.face(point);
-    cue.value += ' · Diễn khi nhận đòn';
-    if (target) {
-      this.shot('impact', at(target, 0, -44), chest, 220).setScale(0.48);
-    }
-    this.later(220, () => {
-      if (!this.armor) return;
-      this.fx('impact', chest, { duration: 250, scale: 0.84 });
-      this.armor.setAlpha(0.9);
-      this.tweens.add({ targets: this.armor, alpha: 0.43, duration: 720 });
-      this.shot('toxic_palm', chest, at(point, 0, -37), 260, () => {
-        if (target) this.poison(point, true);
-      }).setScale(0.62);
-    });
   }
 
   private coSu(skill: Exclude<Skill, 'P'>): void {
@@ -484,9 +459,6 @@ class NguDocPreview extends NguDocStage {
         this.poison(touching, true, 1);
       }
     }
-    this.armor
-      ?.setPosition(this.actor.x, this.actor.y - 39)
-      .setDepth(this.actor.y + 1);
   }
 }
 
