@@ -21,7 +21,7 @@ function Invoke-Pnpm {
 
 $repo = (Resolve-Path -LiteralPath $PSScriptRoot).Path
 $gameHost = 'hero-defense.stackfolio.cloud'
-$gameUrl = "http://$gameHost"
+$gameUrl = "https://$gameHost"
 $packageManager = (Get-Content -LiteralPath (Join-Path $repo 'package.json') -Raw | ConvertFrom-Json).packageManager
 $node = Get-Command node.exe -ErrorAction Stop
 $python = Get-Command python.exe -ErrorAction Stop
@@ -221,9 +221,9 @@ Vo Lam Hero Defense on Windows IIS
 2. Extract the ZIP. Keep the server folder outside the IIS site root.
 3. Run server\start-server.cmd and check http://127.0.0.1:2567/health.
 4. Enable IIS Static Content, WebSocket Protocol, URL Rewrite and ARR proxy.
-5. Point the IIS site root to the client folder. Bind HTTP on port 80 to $gameHost.
+5. Point the IIS site root to the client folder. Bind HTTPS on port 443 to $gameHost with a valid TLS certificate.
 6. Check $gameUrl/game-api/health and join the same room from two browsers.
-7. Allow public TCP 80 and keep TCP 2567 private. Use a Windows startup task
+7. Allow public TCP 443 and keep TCP 2567 private. Use a Windows startup task
    to run server\start-server.cmd across reboots.
 "@ | Set-Content -LiteralPath (Join-Path $stage 'DEPLOY.txt') -Encoding Ascii
 
