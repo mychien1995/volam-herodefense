@@ -34,4 +34,7 @@ for _, id in ipairs({"bich-co","am-linh"}) do
   local sheet, frames = atlas(id)
   local frame = frames.idle_down_0.frame
   save(Image(sheet,Rectangle(frame.x+60,frame.y+27,56,53)), "portraits/" .. id, 64)
+  if id == "bich-co" then
+    save(cel(sheet, frames, "cast_down_0"), "portraits/bich-co-school", 57)
+  end
 end

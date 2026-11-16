@@ -370,8 +370,8 @@ export class PreGame {
                         ? m1Config.basics[id]
                         : undefined;
                     const icon = `<img src="${skillIcon(basic?.id ?? id)}" width="44" height="44" alt=""/>`;
-                    return `<button type="button" data-action="branch" data-branch="${id}" aria-pressed="${selected}" ${confirmedSchool ? '' : 'disabled'}${basic ? ` aria-description="Đánh thường (A) · ${escape(basic.nameVi)}"` : ''}>
-                    ${basic ? `<span class="branch-basic-icon" aria-hidden="true" title="Đánh thường (A) · ${escape(basic.nameVi)}">${icon}<kbd>A</kbd></span>` : icon}<span>${style}</span>
+                    return `<button type="button" data-action="branch" data-branch="${id}" aria-pressed="${selected}" ${confirmedSchool ? '' : 'disabled'}${basic ? ` aria-description="Đánh thường · ${escape(basic.nameVi)}"` : ''}>
+                    ${basic ? `<span class="branch-basic-icon" aria-hidden="true" title="Đánh thường · ${escape(basic.nameVi)}">${icon}</span>` : icon}<span>${style}</span>
                   </button>`;
                   })
                   .join('')}

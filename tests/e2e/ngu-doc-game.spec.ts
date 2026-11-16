@@ -79,8 +79,13 @@ test('school selection fits in two rows and opens an accessible branch popup', a
   const school = page.locator('[data-school=ngu_doc]');
   await expect(school.locator('.school-portrait')).toHaveCSS(
     'background-image',
-    /ngu_doc_school\.png/,
+    /bich-co-school\.png/,
   );
+  const portrait = await page.request.get(
+    '/assets/ngu-doc-runtime/portraits/bich-co-school.png',
+  );
+  expect(portrait.ok()).toBe(true);
+  expect(portrait.headers()['content-type']).toContain('image/png');
   for (const size of [
     { width: 1280, height: 720 },
     { width: 850, height: 480 },
@@ -126,9 +131,9 @@ test('school selection fits in two rows and opens an accessible branch popup', a
   ]) {
     const button = popup.getByRole('button', { name: branch, exact: true });
     await expect(button).toHaveAccessibleDescription(
-      `Đánh thường (A) · ${attackName}`,
+      `Đánh thường · ${attackName}`,
     );
-    await expect(button.locator('.branch-basic-icon kbd')).toHaveText('A');
+    await expect(button.locator('.branch-basic-icon')).toHaveText('');
     const icon = button.locator('img');
     await expect(icon).toHaveAttribute(
       'src',
