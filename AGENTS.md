@@ -27,6 +27,7 @@ Use [roadmap](ROADMAP.md) and [open questions](OPEN_QUESTIONS.md) for unresolved
 
 ## Execution and verification
 
+- Before manual QA run `pnpm qa:preflight --mode browser [--config <profile>]`; `check:quick/browser/final` already include it. Reuse `tools/qa-browser.mjs` for scene/server acknowledgement; see [QA tooling](docs/QA_TOOLING.md).
 - State the brief plan and context read. Reproduce defects first; use server-acknowledged inputs. Reuse existing helpers, exporters, menu components and scoped references. Keep data/tuning separate from mechanics.
 - Iterate with focused tests. After the final implementation change run `pnpm check:final [relevant Playwright arguments]` once. Retry failed stages with changed dependencies; do not repeat passing full suites for summaries or approval metadata. Documentation/reference-only changes need link/hash/metadata checks, not a gameplay rebuild.
 - Add meaningful regressions for new combat/status/progression/inventory/wave behavior. Report commands actually run and limits; never infer a PASS from an old report.

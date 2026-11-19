@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "D:\Projects\volam-hero-defense\scripts\verify-forest-creeps.py", line 132, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "D:\Projects\volam-hero-defense\scripts\verify-forest-creeps.py", line 82, in main
+    for path,h in job['referenceHashes'].items():assert sha(R/path)==h,path
+                                                        ~~~^^^^^^^^
+  File "D:\Projects\volam-hero-defense\scripts\verify-forest-creeps.py", line 7, in sha
+    def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+                                     ~~~~~~~~~~~~^^
+  File "F:\Programs\Python313\Lib\pathlib\_abc.py", line 625, in read_bytes
+    with self.open(mode='rb') as f:
+         ~~~~~~~~~^^^^^^^^^^^
+  File "F:\Programs\Python313\Lib\pathlib\_local.py", line 537, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\Projects\\volam-hero-defense\\assets\\references\\vo_dang_character_reference.png'

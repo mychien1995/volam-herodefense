@@ -1,10 +1,11 @@
 """Read-only validation of real forest PNG/atlas/source exports and protected inputs."""
 from pathlib import Path
 from PIL import Image
+from reference_paths import resolve_reference_path
 import argparse, hashlib, json, os, struct
 R=Path(__file__).resolve().parents[1]
 C=R/'assets/sprites/creeps/dungeons/forest'
-def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def sha(p):return hashlib.sha256(resolve_reference_path(R,p).read_bytes()).hexdigest()
 def verify_actor(m):
     # Immutable production-delivery metadata; current approval is in the separate lock.
     assert m['status']=='candidate' and not m['directorApproved'] and not m['runtimeIntegrated']

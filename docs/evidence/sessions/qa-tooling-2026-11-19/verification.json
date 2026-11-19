@@ -1,0 +1,47 @@
+{
+  "status": "PASS_WITH_SCOPED_RETRIES",
+  "initialFullPipelineStatus": "FAIL",
+  "originalFailuresPreserved": true,
+  "unitIntegrationTests": 1110,
+  "workflowRegressions": 27,
+  "uniqueAssetValidators": 32,
+  "browserCases": 4,
+  "runtimeSourcesUnchanged": true,
+  "originalWipFilesByteIdentical": 372,
+  "sourceHashes": {
+    "tools/qa-preflight.mjs": "e8ebbfd78c61763d93f527fa1e0304589b027ab8766dcddbe8cb818c8ac9a98f",
+    "tools/qa-browser.mjs": "a1a90a8f5f5cdf86ba90d25e4b1e0c507f951a461f8fc410ed77020a8a2be340",
+    "tools/qa-browser.d.mts": "476fd4acb36b080ffb1af20bad96dbaa37450cd60ead555f11ec247607a93617",
+    "tools/qa-session.mjs": "848102042e51795cf1a5f771c8bcfc3f4a9602250a34148fa4968ded975ed632",
+    "tools/qa-session.d.mts": "53e63a525902092166a0ddb6c19e3f71a4e4c748ad85430deb56fb264ee87082",
+    "tools/run-playwright.mjs": "07714769b229f6052d703ec1c228a05141a5a5917fffd91bc0bb1a78e03c959c",
+    "scripts/check-workflow.mjs": "72a8f42c5fd09b74b6f4f54247d8ddca43835e19055ed05d47253325ae9c45a0",
+    "scripts/reference_paths.py": "3ef78fe89f4c33d6c771c70bc669fff9e15974212a2c3f5e7d62a68a31e2e960",
+    "scripts/verify-forest-creeps.py": "ec03473c844aca7fca8a0aa21ffa25bc041e18dfafd2b1d37e7333c073aba517",
+    "scripts/verify-renovation-v2.py": "3ce49a01974ac9ca5580e4e8785506a416221254b1ae18d86fa393c8c64cbd0d",
+    "scripts/verify-renovation-v3.py": "6d26b15bf2395a9fbdeee023a7b86c064abe0bfdcae98c7c6932262cd29e902f",
+    "scripts/tests/qa-browser.test.mjs": "3d7b7032700eb1badded0aee5cc0d5c2fbe5477753d64fb1c7242638cd258b12",
+    "scripts/tests/qa-preflight.test.mjs": "482ad48a78258d501f9fd888152eb7fb99ed150bb71a1bdb5bf3c09d1a4b1c03",
+    "scripts/tests/reference-paths.test.mjs": "2727942e0eeedc8a92d35df269a31ad9ccea22d23a0a0b6aa7da1735f9bc5170",
+    "tests/e2e/pregame-helper.ts": "60f25ff18a280671989829ff477afd5fad1b26f7992607f6e75bd6e9a41c80f4",
+    "tests/e2e/gameplay.spec.ts": "caa4dfbdbd4cb50c17f591c6bcf9470af175d1776bc97bc9946c2a01251de0a5",
+    "tests/e2e/qa-helpers.spec.ts": "2a9b24a690fe2f41fcd4281f6f150e26f781ff8f80f5e0e673ae7a1b3e46edb5",
+    "tests/e2e/qa-helpers-setup.ts": "00691bf047603188a5a9bf5a8d1aac2feef00ec3919b17d6bdb05e6ea51b366a",
+    "playwright.qa-helpers.config.ts": "175193266574a918f06e679ee0e88caf5debf41ac6205af48ac59ec8a2030e56",
+    "package.json": "fa13019c35f4e760f1de1c11c38c11297175d0714f1ae74181d0d662a3388afe"
+  },
+  "commands": [
+    "pnpm check:final --config playwright.qa-helpers.config.ts --grep \"QA helper|ranged projectile\"",
+    "node --test scripts/tests/reference-paths.test.mjs",
+    "python -X utf8 scripts/verify-forest-creeps.py",
+    "node --test scripts/tests/*.test.mjs",
+    "outstanding python validators from package.json verify:assets; see continuation reports",
+    "node tools/run-playwright.mjs test --config playwright.qa-helpers.config.ts --grep \"QA helper|ranged projectile\""
+  ],
+  "limits": [
+    "The original full pipeline is retained as FAIL; later reports record completed scoped retries.",
+    "No app/core/protocol or approved artwork bytes were changed.",
+    "The harmless-target QA fixture is not natural-combat or six-player art acceptance.",
+    "Timing/output/driver metrics are not billed token counts."
+  ]
+}

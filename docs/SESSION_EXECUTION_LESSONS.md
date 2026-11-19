@@ -39,11 +39,11 @@ Durable repository knowledge from the M3D integration/review/playtest session. R
 
 Reports [r3 integration](evidence/sessions/m3d-r3-final-fixed/check-workflow/final-timings.json), [Vô Ảnh fix](evidence/sessions/m3d-vo-anh-final-fixed/check-workflow/final-timings.json) and [M3D visual integration](evidence/sessions/m3d-visual-integration-final/README.md). The visual integration also ran three campaign browser cases in a separate 2.4-minute pass. These runs cover different scopes. Asset preparation often cost 10–30s during focused iteration while focused tests themselves took a few seconds. Whole-session reasoning, reads and tool round trips are not fully timed. Prioritize short browser repros and targeted retries over repeatedly tuning subsecond TypeScript compilation.
 
-## Tooling backlog — not yet implemented
+## Remaining tooling backlog
 
 - A pure-core iteration path that reuses prepared outputs only when relevant input identity is proven unchanged; final must still run full lock/hash guards. No existing `--reuse-prepared` command is implied. Do not bypass current preparation manually by treating this proposal as authorization.
 - Split safe pure-core tests for parallel execution from room tests that share ports/environment. Current `vitest.config.ts` has `fileParallelism:false`; benchmark isolation/port correctness before changing it. Do not blindly disable isolation.
 - Reuse owned iteration services/compiler processes in profiles that explicitly support it; keep final production verification and cleanup/identity checks.
-- Compact timing/report aggregation and a small reference inventory with source identity, correct paths and last inspection context. Never cache automatic test success or director approval.
+- The reference index and preflight/shared browser helpers are now implemented; see [QA tooling](QA_TOOLING.md). Extend migration to legacy profiles only after verifying their actual port/browser/fixture contracts. Never cache automatic test success or director approval.
 
 Implement these only in a requested tooling task, with invalidation/isolation regressions and before/after measurements. Do not promise an unmeasured saving or weaken acceptance to obtain one.

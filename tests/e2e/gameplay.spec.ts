@@ -1,4 +1,9 @@
-import { joinWaiting, startAuditTogether, startTogether } from './pregame-helper.js';
+import { pressQaAndWait } from '../../tools/qa-browser.mjs';
+import {
+  joinWaiting,
+  startAuditTogether,
+  startTogether,
+} from './pregame-helper.js';
 import { expect, test, type Page } from '@playwright/test';
 import { Client } from '@colyseus/sdk';
 import { PROTOCOL_VERSION, type LobbyState } from '@volam/game-protocol';
@@ -128,16 +133,22 @@ test('Cai Bang Bong keeps the renovated sprite on a replicated enemy hit', async
     ]);
     await expect(page.locator('#pregame')).toBeHidden({ timeout: 15000 });
     await page.bringToFront();
-    await expect(page.locator('[data-potion-resource="hp"] em')).toHaveText('10');
-    await expect(page.locator('[data-potion-resource="mp"] em')).toHaveText('10');
+    await expect(page.locator('[data-potion-resource="hp"] em')).toHaveText(
+      '10',
+    );
+    await expect(page.locator('[data-potion-resource="mp"] em')).toHaveText(
+      '10',
+    );
     const reaction = await page.waitForFunction((id) => {
       const game = (window as any).__VOLAM__;
       const state = game.snapshot();
       if (state.state.players[id]?.pose !== 'hurt') return;
-      return game.presentation().renovation.bodies.find(
-        (body: { name: string; pose: string }) =>
-          body.name === 'actor:' + id && body.pose === 'hurt',
-      );
+      return game
+        .presentation()
+        .renovation.bodies.find(
+          (body: { name: string; pose: string }) =>
+            body.name === 'actor:' + id && body.pose === 'hurt',
+        );
     }, sessionId);
     expect(await reaction.jsonValue()).toMatchObject({
       texture: 'renovated-bong-combo-body',
@@ -149,7 +160,9 @@ test('Cai Bang Bong keeps the renovated sprite on a replicated enemy hit', async
     );
     expect(hit).toBeDefined();
     await expect
-      .poll(async () => (await snapshot(b)).events.some((e) => e.id === hit?.id))
+      .poll(async () =>
+        (await snapshot(b)).events.some((e) => e.id === hit?.id),
+      )
       .toBe(true);
     await expect.poll(async () => (await hero(page)).pose).toBe('idle');
     expect([...errors, ...peerErrors]).toEqual([]);
@@ -480,17 +493,23 @@ test('ranged projectile uses a fixed trajectory and original effect frames', asy
           ?.basicCooldown,
     )
     .toBe(0);
-  await page.keyboard.press('KeyA');
-  let observed: { vx: number; vy: number } | undefined;
-  await expect
-    .poll(
-      async () => {
-        observed = Object.values((await snapshot(page)).state.projectiles)[0];
-        return !!observed;
-      },
-      { intervals: [20, 20, 20] },
-    )
-    .toBe(true);
+  const existing = Object.keys((await snapshot(page)).state.projectiles);
+  const observed = await pressQaAndWait(
+    page,
+    'KeyA',
+    (oldIds) => {
+      const entries = Object.entries(
+        (window as any).__VOLAM__.snapshot().state.projectiles,
+      ) as Array<[string, { vx: number; vy: number }]>;
+      return entries.find(([id]) => !oldIds.includes(id))?.[1];
+    },
+    existing,
+    {
+      label: 'new straight projectile after one A',
+      timeout: 5000,
+      polling: 20,
+    },
+  );
   expect(Math.hypot(observed!.vx, observed!.vy)).toBeCloseTo(360, 2);
   await page.screenshot({
     path: info.outputPath('straight-projectile.png'),
