@@ -10,6 +10,8 @@ Yêu cầu người dùng: nhập tên, chọn hero, vào Rừng Trúc không hi
 
 Người dùng duyệt concept và yêu cầu triển khai trên `wip/m3d/pvp`: phòng riêng tối đa 8 người, Chính/Tà tối đa 4 mỗi phe, chọn phái/hệ mới ready, host chia phe, thắng 3 hiệp, mỗi hiệp 3 phút, hòa đánh lại; đấu thủ mất kết nối thua cả ván, host rời đóng phòng. Cấp 30/max kỹ năng, không đồ/bình, năm map và tùy chọn hiểm họa. Luật này chỉ áp dụng namespace mới, không sửa Defense. [Đặc tả](docs/LOI_DAI_STANDALONE_SPEC.md) · [Tích hợp/mặc định thử](docs/LOI_DAI_STANDALONE_IMPLEMENTATION.md).
 
+> Reference-path maintenance — 2026-11-19: image naming/location issues are resolved in [the current index](assets/references/README.md) and [old-to-new manifest](assets/references/manifest.json). Original paths in historical entries below remain as recorded; they are not open asset requests. The cleanup changes no gameplay or art approval.
+
 ## Ngũ Độc · Bích Cổ và Âm Linh
 
 Màn chọn phái dùng lưới 4 trên, 3 dưới và mở popup chọn hệ phái. Lượt Ngũ Độc này sửa tay chưởng hướng trái, làm mượt Thần Chết khi theo chủ, mở rộng Âm Phong Thực Cốt và cho trùng của Tâm Hình Cổ tự bay về.

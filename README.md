@@ -23,9 +23,9 @@ M2A adds a working Rừng Trúc creep dungeon. Click the top-right **Phó Bản*
 
 # v1.4: In-game HUD and UI layout update
 
-**New confirmed presentation requirement:** The game must fill the play viewport. Status, HP/MP, hotbar, inventory, skill loadout, shop, dungeon NPC menu, crafting and PvP appear **inside the game**; no persistent external dashboard columns during matches. Read [`UI_UX_SPEC.md`](UI_UX_SPEC.md). Existing Codex prototype should follow [`CODEX_UI_REFACTOR_TASK.md`](CODEX_UI_REFACTOR_TASK.md) instead of restarting milestones. New visual references in `assets/references/` include the user-provided Cái Bang, Thiên Sơn/Thiếu Lâm and in-game scene, plus an explicitly labeled current-dashboard anti-example.
+**New confirmed presentation requirement:** The game must fill the play viewport. Status, HP/MP, hotbar, inventory, skill loadout, shop, dungeon NPC menu, crafting and PvP appear **inside the game**; no persistent external dashboard columns during matches. Read [`UI_UX_SPEC.md`](UI_UX_SPEC.md). Existing Codex prototype should follow [`CODEX_UI_REFACTOR_TASK.md`](CODEX_UI_REFACTOR_TASK.md) instead of restarting milestones. The [reference index](assets/references/README.md) separates current approved source choices, mood concepts, historical originals and actual negative examples; earlier school/dashboard filenames were misleading and are mapped there.
 
-> **v1.3 art reference update:** Before generating artwork, read `ART_DIRECTION_REFERENCE.md` and inspect `assets/references/vo_dang_art_direction_reference.png`. Prototype and get approval on Võ Đang sprites before expanding the art catalogue.
+> **v1.3 art reference update:** Before generating artwork, read `ART_DIRECTION_REFERENCE.md` and inspect `assets/references/mood/characters/vo_dang_character_reference.png`. Prototype and get approval on Võ Đang sprites before expanding the art catalogue.
 
 # Võ Lâm Hero Defense — Codex Project Handoff v1.5
 
@@ -85,11 +85,11 @@ Start level 1 with a school and a manually controlled hero. Farm private or shar
 
 
 ## Additional v1.5 concept references
-This package now includes a larger approved reference set under `assets/references/`, covering the central arena/hub, arena combat, forest/desert/sea/hell dungeons, and in-game dungeon/shop/inventory overlays. These references should be read alongside the markdown documents before art/UI implementation or refactor work.
+This package retains the directionally approved concepts in [the organized reference set](assets/references/README.md), covering the central arena/hub, arena combat, forest/desert/sea/hell dungeons, and in-game dungeon/shop/inventory overlays. These references should be read alongside the markdown documents before art/UI implementation or refactor work.
 
 ## v1.6 correction: asset creation versus engine
 
-The existing game screenshot `assets/references/current_game_2026_10_29_placeholder_anti_reference.png` demonstrates that *correct HUD placement is not sufficient*. The visual bar is the detailed wuxia reference set. See `ART_PRODUCTION_STANDARD.md` and `CODEX_ART_QUALITY_RESCUE_TASK.md` for a mandatory real-art, one-screen approval milestone. Phaser 4 is the retained engine; quality depends on source art, animations, coherent tilemaps, and visual review. Do not quietly treat procedural placeholders as production art.
+The existing game screenshot `assets/references/anti-reference/placeholder_game_2026_10_29.png` demonstrates that *correct HUD placement is not sufficient*. The visual bar is the detailed wuxia reference set. See `ART_PRODUCTION_STANDARD.md` and `CODEX_ART_QUALITY_RESCUE_TASK.md` for a mandatory real-art, one-screen approval milestone. Phaser 4 is the retained engine; quality depends on source art, animations, coherent tilemaps, and visual review. Do not quietly treat procedural placeholders as production art.
 
 ## M3B — Cái Bang builds
 

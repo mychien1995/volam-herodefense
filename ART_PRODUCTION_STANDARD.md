@@ -1,20 +1,22 @@
 # Visual Production Standard and Art Approval Gate — v1.6
 
+Reference organization update (2026-11-19): [current index](assets/references/README.md) supplies corrected image roles/paths. Earlier first-character/ART-01 production steps remain historical review templates; preserve their quality and explicit approval gates for new work, but do not restart already approved milestones. No art style or gameplay change is approved by this file reorganization.
+
 **Confirmed evidence policy (2026-10-30):** Follow `AGENTS.md` visual verification and recording policy. Routine development, asset generation and tests use lightweight PNG screenshots and live Phaser assertions/frame observations. Do not create video/animated-image evidence or run recording, encoding or conversion tools. Recordings require an explicit user request for the current task; preserve all existing recordings. Animation, transition, positioning and gameplay validation remain required.
 
 ## 0. Status and purpose
 
 **Confirmed art-direction requirement, not a provisional suggestion.** The game must eventually match the *visual level and composition language* of the director's provided references (`assets/references/`). An attractive rendered reference is not equivalent to runtime art. A compiled or playable Phaser scene with primitive/generated placeholders is **not** an art milestone and cannot be described as visually complete.
 
-The latest screenshot `assets/references/current_game_2026_10_29_placeholder_anti_reference.png` is a **NEGATIVE visual-quality reference**: it has a better full-viewport HUD placement than the previous dashboard, but the world, characters, props, and visual effects are flat, sparse, repetitive placeholder art. Keep its working functionality and HUD structure while replacing its underlying asset presentation in a controlled art milestone. Do not copy its style.
+The historical 2026-10-29 screenshot `assets/references/anti-reference/placeholder_game_2026_10_29.png` is a **NEGATIVE visual-quality reference**: it has a better full-viewport HUD placement than the previous dashboard, but the world, characters, props, and visual effects are flat, sparse, repetitive placeholder art. Keep its working functionality and HUD structure while replacing its underlying asset presentation in a controlled art milestone. Do not copy its style.
 
 ### Positive references and priority
 
-1. `cai_bang_character_reference.png`, `vo_dang_character_reference.png`, `thien_son_thieu_lam_character_reference.png`: **gameplay character silhouettes, costumes, expressive pixel detail and animation-pose direction**. Character concept sheets are NOT valid frame atlases.
-2. `wuxia_town_world_reference.png`, `central_arena_hub_reference.png`: **detailed wuxia environment / art density / coherent perspective / building dressing / natural environment**.
-3. `arena_battle_reference.png`, `forest_dungeon_reference.png`, `desert_dungeon_reference.png`, `sea_dungeon_reference.png`, `hell_dungeon_reference.png`: **theme and scene composition**. These are visual targets, not functioning tile maps.
-4. `inventory_menu_reference.png`, `merchant_shop_menu_reference.png`, `dungeon_selection_menu_reference.png`: **ornate, readable, in-viewport HUD and modal UI**. Exact copy and exact UI item counts are NOT required.
-5. `current_game_2026_10_29_placeholder_anti_reference.png`, `current_codex_dashboard_anti_reference.png`: negative references; different issues (visual quality versus layout).
+1. `assets/references/mood/characters/cai_bang_character_reference.png`, `assets/references/mood/characters/vo_dang_character_reference.png`: **gameplay character silhouettes, costumes, expressive pixel detail and animation-pose direction**. Character concept sheets are NOT valid frame atlases.
+2. `assets/references/mood/world/wuxia_town_reference.png`, `assets/references/mood/world/central_arena_hub_reference.png`: **detailed wuxia environment / art density / coherent perspective / building dressing / natural environment**.
+3. `assets/references/mood/world/arena_battle_reference.png`, `assets/references/mood/world/forest_dungeon_reference.png`, `assets/references/mood/world/desert_dungeon_reference.png`, `assets/references/mood/world/sea_dungeon_reference.png`, `assets/references/mood/world/hell_dungeon_reference.png`: **theme and scene composition**. These are visual targets, not functioning tile maps.
+4. `assets/references/mood/ui/inventory_menu_reference.png`, `assets/references/mood/ui/merchant_shop_menu_reference.png`, `assets/references/mood/ui/dungeon_selection_menu_reference.png`: **ornate, readable, in-viewport HUD and modal UI**. Exact copy and exact UI item counts are NOT required.
+5. `assets/references/anti-reference/placeholder_game_2026_10_29.png`, `assets/references/anti-reference/dashboard_layout.png`: negative references; different issues (visual quality versus layout).
 
 ## 1. Hard artistic constraints
 

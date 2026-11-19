@@ -1,3 +1,4 @@
+import { pressQaAndWait } from '../../tools/qa-browser.mjs';
 import {
   joinWaiting,
   startAuditTogether,
@@ -496,17 +497,23 @@ test('ranged projectile uses a fixed trajectory and original effect frames', asy
           ?.basicCooldown,
     )
     .toBe(0);
-  await page.keyboard.press('KeyA');
-  let observed: { vx: number; vy: number } | undefined;
-  await expect
-    .poll(
-      async () => {
-        observed = Object.values((await snapshot(page)).state.projectiles)[0];
-        return !!observed;
-      },
-      { intervals: [20, 20, 20] },
-    )
-    .toBe(true);
+  const existing = Object.keys((await snapshot(page)).state.projectiles);
+  const observed = await pressQaAndWait(
+    page,
+    'KeyA',
+    (oldIds) => {
+      const entries = Object.entries(
+        (window as any).__VOLAM__.snapshot().state.projectiles,
+      ) as Array<[string, { vx: number; vy: number }]>;
+      return entries.find(([id]) => !oldIds.includes(id))?.[1];
+    },
+    existing,
+    {
+      label: 'new straight projectile after one A',
+      timeout: 5000,
+      polling: 20,
+    },
+  );
   expect(Math.hypot(observed!.vx, observed!.vy)).toBeCloseTo(360, 2);
   await page.screenshot({
     path: info.outputPath('straight-projectile.png'),

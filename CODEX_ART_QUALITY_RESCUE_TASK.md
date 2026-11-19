@@ -1,6 +1,8 @@
 # Codex task — stop placeholder art and fix the visual production pipeline (v1.6)
 
-I am **not approving the current runtime art**. The screenshot at `assets/references/current_game_2026_10_29_placeholder_anti_reference.png` is a negative quality reference. The in-game HUD layout is closer to the right structure, but sprites, trees, terrain, buildings, effects and UI art look like a low-detail prototype.
+> Historical task brief. Continue only the scope requested in the current chat; use root [AGENTS.md](AGENTS.md). Resolve original filenames and corrected roles through [the current reference index](assets/references/README.md). Do not restart M0 or completed art milestones from this brief.
+
+I am **not approving the current runtime art**. The screenshot at `assets/references/anti-reference/placeholder_game_2026_10_29.png` is a negative quality reference. The in-game HUD layout is closer to the right structure, but sprites, trees, terrain, buildings, effects and UI art look like a low-detail prototype.
 
 **Do not change game engines. Keep Phaser 4. Do not restart or rewrite the game.** Preserve multiplayer, combat, controls, dungeon logic and server authority.
 
@@ -17,7 +19,7 @@ Read `AGENTS.md`, `ART_PRODUCTION_STANDARD.md`, `ART_DIRECTION_REFERENCE.md`, `A
 - Produce (or import legitimately licensed) consistent gameplay sprites, transparent walk/idle/attack frames, PNG spritesheets/atlases + JSON, coherent tilesets, and UI image assets. Do not crop presentation/concept sheets as fake sprite atlases.
 - Use detailed wuxia chibi proportions, coherent lighting/palette, 3/4 elevated top-down view and correct layering/pivots. Match *the visual standard* of the references; not a pixel-for-pixel reproduction.
 - Integrate the art in the actual running Phaser scene while retaining keyboard controls and multiplayer, not as a static mockup.
-- Capture an actual game screenshot at 1280x720 and at intended normal gameplay scale, plus a static PNG animation contact sheet and live Phaser frame/transition observations. Follow the recording policy in `AGENTS.md`; recordings require an explicit user request. Compare against `central_arena_hub_reference.png`, `cai_bang_character_reference.png`, `wuxia_town_world_reference.png` and the current anti-reference.
+- Capture an actual game screenshot at 1280x720 and at intended normal gameplay scale, plus a static PNG animation contact sheet and live Phaser frame/transition observations. Follow the recording policy in `AGENTS.md`; recordings require an explicit user request. Compare against `assets/references/mood/world/central_arena_hub_reference.png`, `assets/references/mood/characters/cai_bang_character_reference.png`, `assets/references/mood/world/wuxia_town_reference.png` and the current anti-reference.
 - Record original file paths, source/license, asset dimensions, all placeholder statuses, remaining visual gaps and tests. Ask for **art approval** before producing the other schools or entire environment set.
 
 ## Do NOT

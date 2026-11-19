@@ -1,5 +1,7 @@
 # Codex prompt — apply v1.5 visual references
 
+> Historical task brief. Continue only the scope requested in the current chat; use root [AGENTS.md](AGENTS.md). Resolve original filenames and corrected roles through [the current reference index](assets/references/README.md). Do not restart M0 or completed art milestones from this brief.
+
 Please read `AGENTS.md`, `ART_DIRECTION_REFERENCE.md`, `ART_ASSET_GUIDE.md`, `UI_UX_SPEC.md`, and `CODEX_UI_REFACTOR_TASK.md`, then inspect all files in `assets/references/`.
 
 New approved references include:

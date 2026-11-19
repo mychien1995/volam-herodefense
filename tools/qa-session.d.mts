@@ -38,3 +38,8 @@ export function qaWorkflowSession(
   args?: string[],
   env?: NodeJS.ProcessEnv,
 ): QaSession;
+
+export function qaManagedProfile(
+  mode: 'quick' | 'browser' | 'final',
+  args?: string[],
+): { profile?: string; serverPort?: number; clientPort?: number } | null;

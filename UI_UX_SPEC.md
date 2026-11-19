@@ -68,9 +68,9 @@ The current director request supersedes the older HUD arrangement for the arena:
 
 The game must feel like a **complete 2D pixel-art RPG**. Once a player joins a match, the **world is the main screen**. Health, mana, EXP, hotbar, gold, inventory, dungeon/merchant/crafting/skill menus, PvP waiting room, and boss loot rolls are **drawn over, or anchored within, the same game viewport**. Never shrink the playfield to make space for persistent web-app sidebars, a page header, a status column, or a separate dashboard below the game.
 
-**The current Codex prototype screenshot is an anti-reference** (`assets/references/current_codex_dashboard_anti_reference.png`): title/description outside the game, map embedded on the left, persistent `Temporary practice room`, character stats, players, and training creeps on a right column, footer/tool text beneath. Replace this in-match presentation. It may survive only in an explicitly toggled developer debug overlay (off in regular gameplay).
+**The historical Codex dashboard screenshot is an anti-reference** (`assets/references/anti-reference/dashboard_layout.png`): title/description outside the game, map embedded on the left, persistent `Temporary practice room`, character stats, players, and training creeps on a right column, footer/tool text beneath. Replace this in-match presentation. It may survive only in an explicitly toggled developer debug overlay (off in regular gameplay).
 
-**Positive visual references:** `assets/references/in_game_world_reference.png` for wuxia pixel-art scene composition; `assets/references/cai_bang_character_reference.png`, `thien_son_thieu_lam_character_reference.png`, and `vo_dang_art_direction_reference.png` for chibi character styling. These **are reference/concept sheets, not ready-to-import animated spritesheets or a finished UI atlas**. The sample in-game scene is an art target, not a pixel-perfect UI layout requirement. No borrowed proprietary assets.
+**Positive visual references:** `assets/references/mood/world/wuxia_town_reference.png` for wuxia pixel-art scene composition; `assets/references/mood/characters/cai_bang_character_reference.png` and `assets/references/mood/characters/vo_dang_character_reference.png` for chibi character identity. Use actual approved school sources for Thiên Sơn/Thiếu Lâm, not the old town image with a school filename. These **are reference/concept sheets, not ready-to-import animated spritesheets or a finished UI atlas**. The sample in-game scene is an art target, not a pixel-perfect UI layout requirement. No borrowed proprietary assets.
 
 ## 2. Display hierarchy (CONFIRMED vs PROPOSED)
 
@@ -190,7 +190,7 @@ Engineering constraints:
 - [ ] Clicking UI does not unintentionally move/attack/activate skills; modal keyboard focus is safe.
 - [ ] Server keeps simulating and waves/alerts remain visible while inventory/shop is open; no artificial multiplayer pause.
 - [ ] UI stays usable with different desktop sizes; no off-screen modal/window or disappearing HUD.
-- [ ] Real screenshots of both normal gameplay and one menu-open state are reviewed against `in_game_world_reference.png` and `current_codex_dashboard_anti_reference.png`.
+- [ ] Real screenshots of both normal gameplay and one menu-open state are reviewed against `assets/references/mood/world/wuxia_town_reference.png` and `assets/references/anti-reference/dashboard_layout.png`.
 - [ ] No change to authoritative gameplay logic and no invented feature claims (e.g. fake item purchase / dungeon entry).
 
 ## 8. Unresolved details (do not silently declare approved)
@@ -205,18 +205,18 @@ The user has explicitly approved **in-world HUD and menus instead of external pa
 
 ## 9. v1.5 reference images to inspect before UI work
 
-Before making or refactoring any in-match UI, inspect these files:
+Before making or refactoring in-match UI, use [the reference index](assets/references/README.md), inspect current baseline evidence and the actual dashboard negative, then select relevant positive concepts from the list below. Unchanged references already inspected in the same task can be reused; do not load unrelated dungeon concepts for a small UI fix:
 
-- `assets/references/central_arena_hub_reference.png` — full in-game hub composition.
-- `assets/references/arena_battle_reference.png` — arena battle HUD composition.
-- `assets/references/forest_dungeon_reference.png`
-- `assets/references/desert_dungeon_reference.png`
-- `assets/references/sea_dungeon_reference.png`
-- `assets/references/hell_dungeon_reference.png`
-- `assets/references/dungeon_selection_menu_reference.png` — desired dungeon menu overlay.
-- `assets/references/merchant_shop_menu_reference.png` — desired merchant overlay.
-- `assets/references/inventory_menu_reference.png` — desired inventory/equipment overlay.
-- `assets/references/current_codex_dashboard_anti_reference.png` — anti-reference showing what not to do.
+- `assets/references/mood/world/central_arena_hub_reference.png` — full in-game hub composition.
+- `assets/references/mood/world/arena_battle_reference.png` — arena battle HUD composition.
+- `assets/references/mood/world/forest_dungeon_reference.png`
+- `assets/references/mood/world/desert_dungeon_reference.png`
+- `assets/references/mood/world/sea_dungeon_reference.png`
+- `assets/references/mood/world/hell_dungeon_reference.png`
+- `assets/references/mood/ui/dungeon_selection_menu_reference.png` — desired dungeon menu overlay.
+- `assets/references/mood/ui/merchant_shop_menu_reference.png` — desired merchant overlay.
+- `assets/references/mood/ui/inventory_menu_reference.png` — desired inventory/equipment overlay.
+- `assets/references/anti-reference/dashboard_layout.png` — anti-reference showing what not to do.
 
 These references lock in the intended pattern:
 - world fills the screen,

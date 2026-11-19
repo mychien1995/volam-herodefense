@@ -1,3 +1,4 @@
+import { qaPreflight, formatPreflight } from '../tools/qa-preflight.mjs';
 import { spawnSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
@@ -8,6 +9,9 @@ import {
   readdirSync,
   mkdirSync,
   writeFileSync,
+  openSync,
+  closeSync,
+  statSync,
 } from 'node:fs';
 import { randomUUID } from 'node:crypto';
 import {
@@ -73,13 +77,6 @@ process.env.VOLAM_QA_RUN_ID = randomUUID();
 if (process.env.VOLAM_QA_SERVER_PORT) {
   process.env.VITE_SERVER_URL ??= `http://127.0.0.1:${process.env.VOLAM_QA_SERVER_PORT}`;
 }
-// Validate overrides before asset preparation; no cached stage success is consumed.
-const session = qaWorkflowSession(mode, args);
-if (mode === 'final' && session.profile === 'arena-creeps') {
-  process.env.VITE_SERVER_URL ??= session.serverUrl;
-  process.env.VOLAM_QA_ARENA_PRODUCTION = '1';
-}
-if (session.cacheDir) process.env.VOLAM_QA_VITE_CACHE ??= session.cacheDir;
 const elapsed = performance.now();
 const reportDirectory = resolve(
   root,
@@ -108,14 +105,60 @@ const saveReport = () =>
     ) + '\n',
   );
 saveReport();
+const preflight = await qaPreflight({ mode, args, root });
+report.stages.push({
+  label: 'environment preflight',
+  seconds: preflight.milliseconds / 1000,
+  status: preflight.status,
+  checks: preflight.checks,
+});
+if (preflight.status !== 'PASS') report.status = 'FAIL';
+saveReport();
+console.info(formatPreflight(preflight));
+if (preflight.status !== 'PASS') {
+  console.error(`[check] failure timings: ${reportPath}`);
+  process.exit(1);
+}
+// Validate overrides before asset preparation; no cached stage success is consumed.
+const session = qaWorkflowSession(mode, args);
+if (mode === 'final' && session.profile === 'arena-creeps') {
+  process.env.VITE_SERVER_URL ??= session.serverUrl;
+  process.env.VOLAM_QA_ARENA_PRODUCTION = '1';
+}
+if (session.cacheDir) process.env.VOLAM_QA_VITE_CACHE ??= session.cacheDir;
 function run(label, command, commandArgs, cwd = root) {
   const start = performance.now();
   console.info(`\n[check] ${label}`);
-  const result = spawnSync(command, commandArgs, {
-    cwd,
-    stdio: 'inherit',
-    shell: false,
-  });
+  const logs = resolve(reportDirectory, report.runId);
+  mkdirSync(logs, { recursive: true });
+  const logPath = resolve(
+    logs,
+    `${report.stages.length}-${label.replace(/[^a-z0-9]+/gi, '-')}.log`,
+  );
+  // Stream both channels to an owned file. Long runs remain tail-able without
+  // filling a pipe buffer or sending successful compiler/test output to context.
+  const descriptor = openSync(logPath, 'wx');
+  let result;
+  try {
+    result = spawnSync(command, commandArgs, {
+      cwd,
+      stdio: ['ignore', descriptor, descriptor],
+      windowsHide: true,
+      shell: false,
+    });
+  } finally {
+    closeSync(descriptor);
+  }
+  const outputBytes = statSync(logPath).size;
+  const output =
+    process.env.VOLAM_QA_VERBOSE === '1' || result.error || result.status !== 0
+      ? readFileSync(logPath, 'utf8')
+      : '';
+  if (process.env.VOLAM_QA_VERBOSE === '1') console.info(output);
+  else if (result.error || result.status !== 0) {
+    console.error(output.slice(-2500));
+    console.error(`[check] full log: ${logPath}`);
+  }
   console.info(
     `[check] ${label}: ${((performance.now() - start) / 1000).toFixed(2)}s`,
   );
@@ -124,6 +167,8 @@ function run(label, command, commandArgs, cwd = root) {
     seconds: Number(((performance.now() - start) / 1000).toFixed(2)),
     status: result.error || result.status !== 0 ? 'FAIL' : 'PASS',
     exitCode: result.status,
+    logPath,
+    outputBytes,
     ...(result.error ? { error: String(result.error) } : {}),
   });
   if (result.error || result.status !== 0) report.status = 'FAIL';

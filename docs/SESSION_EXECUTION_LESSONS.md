@@ -27,7 +27,7 @@ Durable repository knowledge from the M3D integration/review/playtest session. R
 - **Vô Ảnh:** real Q→W→E exposed two failures that pre-seeded combo tests missed: E during Ca Diệp's action was discarded; E after recovery but before ground-projectile contact chose one foot prematurely. The fix buffers one finisher while the real preceding action/projectile resolves. Same-target hit eligibility remains authoritative. Regression: single centered foot on failure; ordered three lanes twice on success; duplicate input, lifecycle cancellation and one mana spend. See `tests/m3d-vo-anh-regression.test.ts` and `tests/e2e/m3d-vo-anh.spec.ts`.
 - **Short visual phases:** a page screenshot can miss a110ms impact. Poll presentation metadata and export one canvas PNG when the requested live phase is present. Do not record a frame stream or alter the gameplay clock to obtain evidence.
 - **Compiled server dependency:** `check:quick` compiles shared packages, not the server application. A dev-client browser profile importing `apps/game-server/dist` needs `tsc -b apps/game-server` after Room/server changes. Matching protocol alone does not prove the application output is fresh. Legacy practice-creep tests also need their explicit test-only prerequisite; final managed setup supplies it. Never enable QA prerequisites in the user's production service.
-- **Reference paths:** older instructions can contain missing/misnamed references. Inspect the actual content, document the correct equivalent when necessary, and do not repeatedly search the same stale path or silently treat a misleading filename as visual truth.
+- **Reference paths:** start with the [reference index](../assets/references/README.md) and [old-to-new manifest](../assets/references/manifest.json). Historical filenames remain in immutable provenance/evidence; resolve their original image by path/hash. Use the corrected role for new work; do not repeatedly search stale paths or treat a misleading filename as visual truth.
 
 ## Measured costs, not performance promises
 
@@ -39,11 +39,11 @@ Durable repository knowledge from the M3D integration/review/playtest session. R
 
 Reports [r3 integration](evidence/sessions/m3d-r3-final-fixed/check-workflow/final-timings.json), [Vô Ảnh fix](evidence/sessions/m3d-vo-anh-final-fixed/check-workflow/final-timings.json) and [M3D visual integration](evidence/sessions/m3d-visual-integration-final/README.md). The visual integration also ran three campaign browser cases in a separate 2.4-minute pass. These runs cover different scopes. Asset preparation often cost 10–30s during focused iteration while focused tests themselves took a few seconds. Whole-session reasoning, reads and tool round trips are not fully timed. Prioritize short browser repros and targeted retries over repeatedly tuning subsecond TypeScript compilation.
 
-## Tooling backlog — not yet implemented
+## Remaining tooling backlog
 
 - A pure-core iteration path that reuses prepared outputs only when relevant input identity is proven unchanged; final must still run full lock/hash guards. No existing `--reuse-prepared` command is implied. Do not bypass current preparation manually by treating this proposal as authorization.
 - Split safe pure-core tests for parallel execution from room tests that share ports/environment. Current `vitest.config.ts` has `fileParallelism:false`; benchmark isolation/port correctness before changing it. Do not blindly disable isolation.
 - Reuse owned iteration services/compiler processes in profiles that explicitly support it; keep final production verification and cleanup/identity checks.
-- Compact timing/report aggregation and a small reference inventory with source identity, correct paths and last inspection context. Never cache automatic test success or director approval.
+- The reference index and preflight/shared browser helpers are now implemented; see [QA tooling](QA_TOOLING.md). Extend migration to legacy profiles only after verifying their actual port/browser/fixture contracts. Never cache automatic test success or director approval.
 
 Implement these only in a requested tooling task, with invalidation/isolation regressions and before/after measurements. Do not promise an unmeasured saving or weaken acceptance to obtain one.
