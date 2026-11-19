@@ -1,0 +1,109 @@
+{
+  "basic": "vo_dang_quyen",
+  "texture": "hero-unified:vo_dang_quyen",
+  "folder": "vo-dang-quyen-unified-v1",
+  "sourceRows": 6,
+  "sourceColumns": 4,
+  "canvas": [
+    256,
+    224
+  ],
+  "foot": [
+    128,
+    192
+  ],
+  "bodyHeight": 89,
+  "scale": 0.5,
+  "bodyWidth": 58,
+  "rootMode": "monochrome",
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "palm_left",
+    "palm_right",
+    "recover",
+    "charge",
+    "palm_release",
+    "taichi_open",
+    "taichi_cross",
+    "taichi_sweep",
+    "taichi_hold",
+    "channel",
+    "guard",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "references": [
+    "assets/source/vo-dang-quyen-preview/punch-source.png",
+    "assets/exports/vo-dang-quyen-preview/punch.png",
+    "assets/exports/vo-dang-quyen-preview/punch.json",
+    "assets/exports/vo-dang-quyen-preview/casts.png",
+    "assets/exports/vo-dang-quyen-preview/casts.json"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "palm_left",
+        "palm_right",
+        "recover",
+        "charge",
+        "palm_release",
+        "taichi_open",
+        "taichi_cross",
+        "taichi_sweep",
+        "taichi_hold",
+        "channel",
+        "guard"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "registrationPolicy": "Common physical head density per coherent locomotion/action/reaction group, anchored to boots. No fitting by blade extent."
+}

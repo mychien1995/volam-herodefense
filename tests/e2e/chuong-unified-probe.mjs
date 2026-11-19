@@ -46,10 +46,18 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
   // not with live HP which continues regenerating while six browser contexts are sampled.
   const serverHP = new Map(),
     originalSyncState = room.syncState;
-  if (profile.staffChoreography)
+  const tickAuthority = profile.staffChoreography || profile.sameTickAuthority;
+  const cleanParty =
+    profile.staffChoreography || profile.stationaryPartyTargets;
+  if (tickAuthority)
     room.syncState = function (...args) {
       const result = originalSyncState.apply(this, args);
-      serverHP.set(this.state.tick, this.state.players.get(ids[0])?.hp);
+      serverHP.set(
+        this.state.tick,
+        Object.fromEntries(
+          ids.map((id) => [id, this.state.players.get(id)?.hp]),
+        ),
+      );
       if (serverHP.size > 900) serverHP.delete(serverHP.keys().next().value);
       return result;
     };
@@ -58,8 +66,9 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
     clients: pages.length,
     basic: BASIC,
     partial: !!profile.partial,
-    scope:
-      process.env.VOLAM_CHUONG_STAGE === 'party'
+    scope: ['extras', 'weapon'].includes(process.env.VOLAM_CHUONG_STAGE)
+      ? 'authored choreography / swordless lifecycle only'
+      : process.env.VOLAM_CHUONG_STAGE === 'party'
         ? 'party, F8, portrait only'
         : process.env.VOLAM_CHUONG_STAGE === 'reactions'
           ? 'reactions, natural arena respawn, F8, party'
@@ -98,6 +107,7 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
       h.cooldown = 0;
       h.hurtUntil = 0;
       h.abilityCooldowns = {};
+      if (profile.voDangChoreography) h.chargeCooldowns = {};
       h.skillCooldowns = [0, 0, 0, 0, 0];
       h.mana = h.maxMana;
       h.hp = h.maxHp;
@@ -346,7 +356,7 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
         save();
       }
     }
-    for (const d of ['reactions', 'party'].includes(
+    for (const d of ['reactions', 'party', 'extras', 'weapon'].includes(
       process.env.VOLAM_CHUONG_STAGE,
     )
       ? []
@@ -393,9 +403,10 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
       }, 'peer walk synchronization');
       report.walk.push({ direction: d[0], frames: gait });
       save();
-      for (const key of profile.partial
-        ? ['KeyA']
-        : ['KeyA', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT']) {
+      for (const key of profile.keys ??
+        (profile.partial
+          ? ['KeyA']
+          : ['KeyA', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT'])) {
         reset(d);
         const targets = heroes.map((h, i) =>
           target(h, d, 'coherent_target_' + i),
@@ -407,35 +418,37 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
         const cap = await observe(
           key === 'KeyT' ? 2100 : 1250,
           () => keys(key),
-          d[0] === 'down_right' && profile.staffChoreography
-            ? {
-                KeyA: ['thrust', 'sweep', 'rising', 'overhead'],
-                KeyQ: [{ name: 'Q-hoanh-tao', prefix: 'sweep_' }],
-                KeyW: [{ name: 'W-pha-giap', prefix: 'slam_contact_' }],
-                KeyE: [{ name: 'E-cam-long', prefix: 'pull_' }],
-                KeyR: [
-                  { name: 'R-truy-phong', prefix: 'thrust_' },
-                  { name: 'R-stomp', prefix: 'stomp_' },
-                ],
-                KeyT: [
-                  { name: 'T-whirl', prefix: 'sweep_' },
-                  { name: 'T-finisher-raise', prefix: 'finisher_raise_' },
-                  { name: 'T-ending', prefix: 'stomp_' },
-                ],
-              }[key]
-            : d[0] === 'down_right'
-              ? key === 'KeyA'
-                ? profile.basic === 'cai_bang_bong'
-                  ? ['thrust', 'sweep', 'rising', 'overhead']
-                  : ['strike', 'alternate']
-                : key === 'KeyQ'
-                  ? ['release']
-                  : key === 'KeyE'
-                    ? ['rise']
-                    : key === 'KeyR'
-                      ? ['channel']
-                      : []
-              : [],
+          d[0] === 'down_right' && profile.captureByKey
+            ? (profile.captureByKey[key] ?? [])
+            : d[0] === 'down_right' && profile.staffChoreography
+              ? {
+                  KeyA: ['thrust', 'sweep', 'rising', 'overhead'],
+                  KeyQ: [{ name: 'Q-hoanh-tao', prefix: 'sweep_' }],
+                  KeyW: [{ name: 'W-pha-giap', prefix: 'slam_contact_' }],
+                  KeyE: [{ name: 'E-cam-long', prefix: 'pull_' }],
+                  KeyR: [
+                    { name: 'R-truy-phong', prefix: 'thrust_' },
+                    { name: 'R-stomp', prefix: 'stomp_' },
+                  ],
+                  KeyT: [
+                    { name: 'T-whirl', prefix: 'sweep_' },
+                    { name: 'T-finisher-raise', prefix: 'finisher_raise_' },
+                    { name: 'T-ending', prefix: 'stomp_' },
+                  ],
+                }[key]
+              : d[0] === 'down_right'
+                ? key === 'KeyA'
+                  ? profile.basic === 'cai_bang_bong'
+                    ? ['thrust', 'sweep', 'rising', 'overhead']
+                    : ['strike', 'alternate']
+                  : key === 'KeyQ'
+                    ? ['release']
+                    : key === 'KeyE'
+                      ? ['rise']
+                      : key === 'KeyR'
+                        ? ['channel']
+                        : []
+                : [],
         );
         coherent(cap, key + ' ' + d[0]);
         if (d[0] === 'right' && key === 'KeyA')
@@ -456,7 +469,7 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
           assert.ok(
             f.some(
               (f) =>
-                /^(native|windup|strike|alternate|charge|release|rise|channel|recover|thrust|sweep|rising|overhead|pull|slam|stomp|finisher)_/.test(
+                /^(native|windup|strike|alternate|charge|release|rise|channel|recover|thrust|sweep|rising|overhead|pull|slam|stomp|finisher|palm|cut|taichi|aim|guard|sword)_/.test(
                   f,
                 ) &&
                 f.endsWith(
@@ -472,14 +485,39 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
             ),
             'action body ' + key + '/' + i,
           );
+          if (profile.voDangChoreography && key === 'KeyA') {
+            const contact =
+              BASIC === 'vo_dang_quyen'
+                ? event.stage === 'right_palm'
+                  ? 'palm_right'
+                  : 'palm_left'
+                : event.stage;
+            assert.ok(
+              f.includes(contact + '_' + d[0]),
+              'real accepted normal contact ' + contact + '/' + i,
+            );
+          }
           cases.push({ id: ids[i], event, frames: f, targetHp: targets[i].hp });
         }
-        const peer = (await read(pages[1])).state;
-        for (const h of heroes)
-          assert.ok(
-            Math.abs(peer.players[h.id].hp - h.hp) < 0.001,
-            'peer health (schema float precision)',
-          );
+        if (tickAuthority)
+          await wait(async () => {
+            const peer = (await read(pages[1])).state,
+              expected = serverHP.get(peer.tick);
+            return (
+              expected &&
+              heroes.every(
+                (h) => Math.abs(peer.players[h.id].hp - expected[h.id]) < 0.001,
+              )
+            );
+          }, 'peer health at same serialized tick');
+        else {
+          const peer = (await read(pages[1])).state;
+          for (const h of heroes)
+            assert.ok(
+              Math.abs(peer.players[h.id].hp - h.hp) < 0.001,
+              'peer health (schema float precision)',
+            );
+        }
         if (key === 'KeyA')
           assert.ok(
             targets.some((e) => e.hp < e.maxHp),
@@ -528,8 +566,9 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
           sim.events.push({ zoneId: 'arena', event });
       };
     };
-    for (const d of process.env.VOLAM_CHUONG_STAGE === 'party' ||
-    profile.partial
+    for (const d of ['party', 'extras', 'weapon'].includes(
+      process.env.VOLAM_CHUONG_STAGE,
+    ) || profile.partial
       ? []
       : testingDirs) {
       reset(d);
@@ -560,8 +599,8 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
       await wait(async () => {
         const state = (await read(pages[1])).state;
         const peerHp = state.players[h.id].hp;
-        const serverHp = profile.staffChoreography
-          ? serverHP.get(state.tick)
+        const serverHp = tickAuthority
+          ? serverHP.get(state.tick)?.[h.id]
           : h.hp;
         const matched =
           state.tick >= hitTick &&
@@ -666,6 +705,35 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
       });
       save();
     }
+    if (
+      profile.extraChecks &&
+      (!process.env.VOLAM_CHUONG_STAGE ||
+        ['extras', 'weapon'].includes(process.env.VOLAM_CHUONG_STAGE))
+    ) {
+      report.extraChecks = await profile.extraChecks({
+        observe,
+        reset,
+        settle,
+        target,
+        keys,
+        heroes,
+        ids,
+        read,
+        coherent,
+        wait,
+        dirs,
+        w,
+        sim,
+        c,
+        out,
+        page,
+        pages,
+        resolveHit,
+        basic: BASIC,
+        partial: profile.partial,
+      });
+      save();
+    }
     reset(dirs[1]);
     await settle();
     await page.locator('#game canvas').focus();
@@ -698,7 +766,7 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
         }),
       );
       await settle();
-      if (profile.staffChoreography)
+      if (cleanParty)
         await page
           .locator('#viewport')
           .screenshot({ path: resolve(out, 'party-ready.png') });
@@ -710,10 +778,10 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
           c,
         );
         e.archetypeId = 'creep_wild_dog';
-        const hp = profile.staffChoreography ? 100000 : 120;
+        const hp = cleanParty ? 100000 : 120;
         e.stats = { ...c.creep, hp, damage: 1 };
         e.hp = e.maxHp = hp;
-        if (profile.staffChoreography) e.controlled = true;
+        if (cleanParty) e.controlled = true;
       }
       const combat = await observe(
         2600,
@@ -738,7 +806,7 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
         .map((t, i) => t - combat.ticks[i])
         .sort((a, b) => a - b);
       report.party = {
-        targetFixture: profile.staffChoreography
+        targetFixture: cleanParty
           ? '96 stationary high-HP server targets; real keyboard hero attacks/hits, no creep AI combat/reward coverage'
           : '96 normal low-HP targets',
         creeps: 96,
@@ -834,6 +902,6 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
       .catch(() => {});
     throw error;
   } finally {
-    if (profile.staffChoreography) room.syncState = originalSyncState;
+    if (tickAuthority) room.syncState = originalSyncState;
   }
 }

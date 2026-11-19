@@ -5,8 +5,8 @@ Worktree/branch `wip/m3d/25d`. Director đã duyệt bản Cái Bang Chưởng t
 | Đợt | Nhánh | Trạng thái |
 |---|---|---|
 | Mẫu | Cái Bang Chưởng | Director approved, bytes locked |
-|1|Cái Bang Bổng|Candidate đã kiểm chứng, PNG/phòng chơi sẵn; chờ director trước đợt2|
-|2|Võ Đang Quyền/Kiếm|Chưa triển khai|
+|1|Cái Bang Bổng|Director approved, bytes locked|
+|2|Võ Đang Quyền/Kiếm|Candidate đã tích hợp; dừng PNG/director review trước đợt3|
 |3|Thiên Sơn Phiến/Đao|Chưa triển khai|
 |4|Thiếu Lâm Quyền/Đao|Chưa triển khai|
 |5|Côn Luân Thiên Sư/Kiếm Tôn|Chưa triển khai|
@@ -17,4 +17,4 @@ Mỗi đợt: kiểm kê texture thực → lấy sprite nét hiện tại làm 
 
 Bổng cần giữ thêm: gậy đỏ khắc vàng đã duyệt và tỷ lệ dài/rộng, bốn thức thrust/sweep/rising/overhead, pull/Phá Giáp/chân giậm và finisher riêng. Không thay choreography bằng một pose ra chiêu chung. Giữ nguyên VFX/ground contact/hit geometry; đo source và các socket ở actual gameplay zoom.
 
-Đợt1: [Cái Bang Bổng](CAI_BANG_BONG_COHERENCE.md), [PNG trước–sau](evidence/sessions/hero-coherence-batch1-delivery/sprite-before-after.png). Các phái còn lại chưa đổi.
+Đợt1: [Cái Bang Bổng](CAI_BANG_BONG_COHERENCE.md), [PNG trước–sau](evidence/sessions/hero-coherence-batch1-delivery/sprite-before-after.png). Đợt2: [Võ Đang Quyền/Kiếm](VO_DANG_COHERENCE.md), PNG [Quyền](evidence/sessions/hero-coherence-batch2-delivery/quyen-before-after.png) / [Kiếm](evidence/sessions/hero-coherence-batch2-delivery/kiem-before-after.png). Các phái từ đợt3 chưa đổi.

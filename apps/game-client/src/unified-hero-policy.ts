@@ -1,6 +1,10 @@
+import { voDangUnifiedSample } from './vo-dang-unified-policy.js';
 import type { HeroActionClock } from './hero-finish-policy.js';
 export interface UnifiedHeroClock extends HeroActionClock {
   phase?: string | undefined;
+  actorPose?: string | undefined;
+  weaponAway?: boolean | undefined;
+  nativeBodyCue?: string | undefined;
   progress?: number | undefined;
 }
 export interface UnifiedBodySample {
@@ -16,6 +20,8 @@ export function unifiedBodySample(
   now: number,
   clock?: UnifiedHeroClock,
 ): UnifiedBodySample | undefined {
+  const voDang = voDangUnifiedSample(basic, pose, elapsed, now, clock);
+  if (voDang) return voDang;
   if (basic !== 'cai_bang_bong') return undefined;
   const still = (name: string) => ({ pose: name, turns: 0 });
   if (pose === 'death') return still(elapsed < 220 ? 'death_0' : 'death_1');

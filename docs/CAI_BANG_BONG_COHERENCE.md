@@ -37,3 +37,7 @@ Lượt stress mục tiêu ít HP/AI trước lộ placeholder creep ở một s
 [http://127.0.0.1:5592/?debug=1](http://127.0.0.1:5592/?debug=1), room `a6xjizbt9` lúc bàn giao. Bổng cấp30, Q/W/E/R/T đều rank4, cooldown/mana/controls bình thường, F8 đã kiểm tra OFF/ON. Backend riêng2990; không đóng hay điều khiển phòng Chưởng5582. Launcher `node tools/presentation-hero-play.mjs` dùng production bundle `.cache/hero-coherence-batch1-dist` đã build cho2990; `node tools/open-hero-play.mjs` tạo/chọn branch qua lobby thật. Fixture mức/rank chỉ nằm trong tool review, không vào Room production. Các phòng mới tạo trên bản review này cũng nhận cấu hình Bổng30/rank4.
 
 Dừng đợt1 để director duyệt PNG/animation ở normal zoom trước khi sang đợt2 Võ Đang Quyền/Kiếm.
+
+## Director approval — 2026-11-19
+
+Director xác nhận trong chat: “Duyệt thay đổi cái bang bổng.” Sáu file canonical hiện được khóa tại `assets/approvals/hero-coherence/cai_bang_bong.json`; toàn bộ mô tả candidate ở trên là trạng thái lúc bàn giao lịch sử. Không xuất lại raster/JSON/portrait/Aseprite đã duyệt. Cho phép triển khai đợt2 Võ Đang theo cùng quy trình.

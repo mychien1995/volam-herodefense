@@ -25,15 +25,23 @@ const defaults: Record<string, string> = {
 };
 export const schoolHeroBasic = (school: string): string =>
   defaults[school] ?? defaults.cai_bang!;
-export const heroBodyUrl = (form: string): string =>
-  (forms[form] ?? form) === 'cai_bang_chuong'
-    ? '/assets/cai-bang-chuong-unified-v1/avatar-body.png'
-    : (forms[form] ?? form) === 'cai_bang_bong'
-      ? '/assets/cai-bang-bong-unified-v1/avatar-body.png'
-      : '/assets/player-portraits-v1/' + (forms[form] ?? form) + '-body.png';
-export const heroPortraitUrl = (form: string): string =>
-  (forms[form] ?? form) === 'cai_bang_chuong'
-    ? '/assets/cai-bang-chuong-unified-v1/avatar.png'
-    : (forms[form] ?? form) === 'cai_bang_bong'
-      ? '/assets/cai-bang-bong-unified-v1/avatar.png'
-      : '/assets/player-portraits-v1/' + (forms[form] ?? form) + '.png';
+const coherentFolders: Record<string, string> = {
+  cai_bang_chuong: 'cai-bang-chuong-unified-v1',
+  cai_bang_bong: 'cai-bang-bong-unified-v1',
+  vo_dang_quyen: 'vo-dang-quyen-unified-v1',
+  vo_dang_kiem: 'vo-dang-kiem-unified-v1',
+};
+export const heroBodyUrl = (form: string): string => {
+  const basic = forms[form] ?? form,
+    folder = coherentFolders[basic];
+  return folder
+    ? '/assets/' + folder + '/avatar-body.png'
+    : '/assets/player-portraits-v1/' + basic + '-body.png';
+};
+export const heroPortraitUrl = (form: string): string => {
+  const basic = forms[form] ?? form,
+    folder = coherentFolders[basic];
+  return folder
+    ? '/assets/' + folder + '/avatar.png'
+    : '/assets/player-portraits-v1/' + basic + '.png';
+};

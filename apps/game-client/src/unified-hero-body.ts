@@ -1,11 +1,13 @@
 import Phaser from 'phaser';
+import quyen from '../../../assets/exports/vo-dang-quyen-unified-v1/manifest.json';
+import kiem from '../../../assets/exports/vo-dang-kiem-unified-v1/manifest.json';
 import bong from '../../../assets/exports/cai-bang-bong-unified-v1/manifest.json';
 import { setArtFilter } from './art-filter.js';
 import {
   unifiedBodySample,
   type UnifiedHeroClock,
 } from './unified-hero-policy.js';
-const profiles = new Map([[bong.basic, bong]]);
+const profiles = new Map([bong, quyen, kiem].map((p) => [p.basic, p]));
 export const unifiedHeroBasics: ReadonlySet<string> = new Set(
   [...profiles.values()]
     .filter((p) => p.directions.length === 8)
@@ -45,12 +47,21 @@ export function presentUnifiedHero(
     previous?.basic === basic && previous.pose === pose
       ? previous.at
       : scene.time.now;
+  const nativeKey = sprite.texture.key;
+  const nativeFrame = String(sprite.frame.name);
+  const cue =
+    basic === 'vo_dang_quyen' && ['vdq-punch', 'vdq-cast'].includes(nativeKey)
+      ? nativeFrame
+      : basic === 'vo_dang_kiem' && nativeKey === 'vdk-body'
+        ? nativeFrame.replace(/^(down|up|left|right)_/, '')
+        : undefined;
+  const bodyClock = cue && clock ? { ...clock, nativeBodyCue: cue } : clock;
   const sample = unifiedBodySample(
     basic,
     pose,
     scene.time.now - at,
     scene.time.now,
-    clock,
+    bodyClock,
   );
   if (!sample) return false;
   const base = sample.cardinal
@@ -84,7 +95,12 @@ export function presentUnifiedHero(
     .setData('hero-motion-direction', facing)
     .setData('hero-motion-body-width', p.bodyWidth);
   sprite.setData('renovation', {
-    id: 'hero_cai_bang',
+    id:
+      basic === 'vo_dang_quyen'
+        ? 'hero_vo_dang'
+        : basic === 'vo_dang_kiem'
+          ? 'hero_vo_dang_kiem'
+          : 'hero_cai_bang',
     pose,
     direction: facing,
     locomotion: pose === 'idle' || pose === 'walk',

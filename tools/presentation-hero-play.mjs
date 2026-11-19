@@ -21,8 +21,18 @@ import {
 } from '../tools/qa-session.mjs';
 
 const basic = process.env.VOLAM_HERO_REVIEW_BASIC ?? 'cai_bang_bong';
-if (!['cai_bang_bong', 'cai_bang_chuong'].includes(basic))
+if (
+  ![
+    'cai_bang_bong',
+    'cai_bang_chuong',
+    'vo_dang_quyen',
+    'vo_dang_kiem',
+  ].includes(basic)
+)
   throw Error('Unsupported body review branch');
+const school = basic.startsWith('vo_dang') ? 'vo_dang' : 'cai_bang';
+const reviewBranches =
+  school === 'vo_dang' ? ['vo_dang_quyen', 'vo_dang_kiem'] : [basic];
 const session = qaSession({
   profile: 'presentation-hero-play',
   serverPort: 2990,
@@ -34,12 +44,13 @@ process.env.VOLAM_QA_RUN_ID = session.runId;
 const spawn = MatchRoom.prototype.spawnPlayer;
 MatchRoom.prototype.spawnPlayer = function (id, player) {
   spawn.call(this, id, player);
-  if (player.schoolId !== 'cai_bang' || player.selectedBranch !== basic) return;
+  const selected = player.selectedBranch;
+  if (player.schoolId !== school || !reviewBranches.includes(selected)) return;
   const h = this.simulation.hero(id);
   h.level = 30;
   h.xp = experienceAtLevel(30, m1Config);
-  initializeProgression(h, m1Config, 'fixed', basic);
-  const skills = [...m1Config.progression.fixedBranches[basic].skillIds];
+  initializeProgression(h, m1Config, 'fixed', selected);
+  const skills = [...m1Config.progression.fixedBranches[selected].skillIds];
   h.progression.ranks = Object.fromEntries(skills.map((skill) => [skill, 4]));
   h.progression.defaultSkills = skills;
   h.progression.revision++;

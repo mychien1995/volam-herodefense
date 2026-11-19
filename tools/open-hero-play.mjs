@@ -7,12 +7,13 @@ const session = JSON.parse(
   readFileSync('.cache/presentation-hero-play-session.json'),
 );
 const basic = process.env.VOLAM_HERO_REVIEW_BASIC ?? 'cai_bang_bong';
+const school = basic.startsWith('vo_dang') ? 'vo_dang' : 'cai_bang';
 const texture =
-  basic === 'cai_bang_bong'
-    ? 'hero-unified:cai_bang_bong'
-    : 'cai-bang-chuong-unified';
+  basic === 'cai_bang_chuong'
+    ? 'cai-bang-chuong-unified'
+    : 'hero-unified:' + basic;
 const browser = await chromium.launchPersistentContext(
-  resolve('.cache/presentation-hero-browser'),
+  resolve('.cache/presentation-hero-browser-' + basic),
   {
     headless: false,
     executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
@@ -28,7 +29,15 @@ const snapshot = () => page.evaluate(() => window.__VOLAM__?.snapshot());
 try {
   await page.goto(session.url);
   await page.locator('[data-action=play]').click();
-  await page.locator('#pre-nickname').fill('Bong Sprite Dong Nhat');
+  await page
+    .locator('#pre-nickname')
+    .fill(
+      basic === 'vo_dang_quyen'
+        ? 'Vo Dang Quyen'
+        : basic === 'vo_dang_kiem'
+          ? 'Vo Dang Kiem'
+          : 'Bong Sprite Dong Nhat',
+    );
   await page.getByRole('button', { name: 'Vào game', exact: true }).click();
   await page.getByRole('button', { name: 'Tạo phòng', exact: true }).click();
   await wait(async () => (await snapshot())?.roomId, 'room join');
@@ -37,10 +46,10 @@ try {
     async () => (await snapshot())?.state.phase === 'SCHOOL_SELECTION',
     'school phase',
   );
-  await page.locator('#pregame [data-school="cai_bang"]').click();
+  await page.locator('#pregame [data-school="' + school + '"]').click();
   await wait(async () => {
     const s = await snapshot();
-    return s.state.players[s.sessionId]?.schoolId === 'cai_bang';
+    return s.state.players[s.sessionId]?.schoolId === school;
   }, 'school ack');
   await page.locator('#pregame [data-branch="' + basic + '"]').click();
   await wait(async () => {
@@ -85,8 +94,12 @@ try {
     );
   }
   assert.deepEqual(errors, []);
+  await page.waitForTimeout(4200); // Let the normal level-up aura finish before the requested still PNG.
   await page.bringToFront();
-  const out = resolve('docs/evidence/sessions/hero-coherence-batch1-delivery');
+  const out = resolve(
+    process.env.VOLAM_HERO_REVIEW_EVIDENCE ??
+      'docs/evidence/sessions/hero-coherence-batch1-delivery',
+  );
   mkdirSync(out, { recursive: true });
   await page
     .locator('#viewport')
@@ -106,6 +119,22 @@ try {
   };
   writeFileSync(resolve(out, 'play-room.json'), JSON.stringify(info, null, 2));
   console.log('HERO_BROWSER_READY ' + JSON.stringify(info));
+  const heartbeat = setInterval(async () => {
+    try {
+      const s = await snapshot();
+      writeFileSync(
+        '.cache/hero-review-live-' + basic + '.json',
+        JSON.stringify({
+          phase: s?.state.phase,
+          roomId: s?.roomId,
+          basic,
+          level: s?.state.players[s.sessionId]?.level,
+          observedAt: new Date().toISOString(),
+        }),
+      );
+    } catch {}
+  }, 2000);
+  heartbeat.unref();
   page.on('close', () => {
     if (!browser.pages().length) process.exit(0);
   });

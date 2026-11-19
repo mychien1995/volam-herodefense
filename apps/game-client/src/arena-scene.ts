@@ -1329,6 +1329,12 @@ export class ArenaScene extends Phaser.Scene {
             ability: cast?.abilityId ?? actor.castAbilityId ?? '',
             basicStage: actor.basicStage ?? '',
             visualDurationTicks: ((cast?.durationMs ?? 0) * 30) / 1000,
+            actorPose,
+            weaponAway:
+              actor.basicId === 'vo_dang_kiem' &&
+              [...(state?.projectiles.values() ?? [])].some(
+                (p) => p.ownerId === id && p.abilityId === 'nhan_kiem_hop_nhat',
+              ),
             phase: cast?.phase,
             progress: cast?.progress,
           },

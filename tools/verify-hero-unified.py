@@ -10,8 +10,9 @@ assert len(frames)==count and max(im.size)<=4096 and im.width*im.height*4<=32*10
 for r in m['references']+m['groupsAuthored']:assert sha(ROOT/r['path'])==r['sha256'],r['path']
 tiles=[];idleMetrics=[];staffContacts=[]
 for g in m['groupsAuthored']:
+ for extra in g.get('extraSources',[]):assert sha(ROOT/extra['path'])==extra['sha256']
  for override in g.get('celGroupOverrides',[]):assert sha(src/override['path'])==override['sha256']
- hashes=[];heights=[];alpha=[]
+ hashes=[];heights=[];alpha=[];physicalIdle=[]
  for e in g['frames']:
   a=frames[e['frame']];f=a['frame'];s=a['spriteSourceSize'];assert a['trimmed'] and a['sourceSize']=={'w':w,'h':h};tile=Image.new('RGBA',(w,h));tile.paste(im.crop((f['x'],f['y'],f['x']+f['w'],f['y']+f['h'])),(s['x'],s['y']));v=np.array(tile)[:,:,3]
   assert not v[:2].any() and not v[-2:].any() and not v[:,:2].any() and not v[:,-2:].any(),e['frame']
@@ -23,11 +24,12 @@ for g in m['groupsAuthored']:
     staffContacts.append({'frame':e['frame'],'tipWorld':tip,'retainedVFXTip':override['expectedTipWorld'],'errorWorldPixels':error,'tolerance':override['tipTolerance']})
   digest=hashlib.sha256(tile.tobytes()).hexdigest();assert digest==e['sha256'];hashes.append(digest);tiles.append(tile)
   if e['frame'].startswith('idle_'):
-   box=tile.getbbox();heights.append(box[3]-box[1]);alpha.append(float(v[v>=24].mean()))
+   box=tile.getbbox();heights.append(box[3]-box[1]);alpha.append(float(v[v>=24].mean()));physicalIdle.append((e['sourceRoot'][1]-e['sourceHeadTop']+1)*e['groupRatio'])
  assert len(set(hashes))==len(poses),(g['direction'],'duplicate artwork')
- assert max(heights)-min(heights)<=3,(g['direction'],'idle height jump',heights)
- assert max(alpha)-min(alpha)<=5,(g['direction'],'idle opacity jump',alpha)
- idleMetrics.append({'direction':g['direction'],'visibleHeights':heights,'meanAlpha':alpha})
+ for start in range(0,len(heights),4):
+  hh=heights[start:start+4];aa=alpha[start:start+4];bb=physicalIdle[start:start+4];assert max(bb)-min(bb)<=3,(g['direction'],'idle physical body jump',bb);assert max(hh)-min(hh)<=cfg.get('idleVisibleExtentTolerance',3),(g['direction'],'idle height jump',hh);assert max(aa)-min(aa)<=5,(g['direction'],'idle opacity jump',aa)
+ if cfg.get('extraSources'):assert max(physicalIdle)-min(physicalIdle)<=3,(g['direction'],'armed/swordless physical body size jump',physicalIdle)
+ idleMetrics.append({'direction':g['direction'],'visibleHeights':heights,'meanAlpha':alpha,'physicalBodyHeights':physicalIdle})
 for p in out.iterdir():
  if p.is_file():assert p.read_bytes()==(ROOT/'apps/game-client/public/assets'/cfg['folder']/p.name).read_bytes()
 result={'status':'PASS','basic':cfg['basic'],'directions':len(dirs),'cels':count,'authoredCels':len(poses)*len(dirs),'packedSize':list(im.size),'textureMiB':im.width*im.height*4/1048576,'bodyPNG':sha(out/'body.png'),'idleCoherence':idleMetrics,'staffContacts':staffContacts,'approvedChuongLocks':'PASS','scope':'prototype pending director review'}
