@@ -1,0 +1,110 @@
+{
+  "status": "PASS",
+  "branch": "wip/m3d/pvp",
+  "feature": "Change school/branch inside the existing private practice room",
+  "protocolVersion": 48,
+  "finalCommand": "pnpm check:final --config playwright.practice.config.ts --grep 'practice switches|private practice:|two clients agree|ranged projectile'",
+  "finalTimings": "check-workflow/final-timings.json",
+  "seconds": 459.45,
+  "unitIntegration": {
+    "files": 109,
+    "tests": 1151,
+    "status": "PASS"
+  },
+  "workflow": {
+    "tests": 18,
+    "status": "PASS"
+  },
+  "browser": {
+    "tests": 4,
+    "status": "PASS",
+    "cases": [
+      "Defense two-client combat/manual cadence/progression",
+      "Fixed ranged trajectory",
+      "Practice school/branch switching, cancellation, modal input and summon cleanup",
+      "Existing private practice immortality/unlimited casts/movement/stance/exit"
+    ]
+  },
+  "focused": {
+    "tests": 13,
+    "allBranches": 14,
+    "status": "PASS"
+  },
+  "observations": {
+    "roomId": "3DBurcP8B",
+    "sessionId": "uOaMotB3A",
+    "changes": [
+      {
+        "school": "cai_bang",
+        "branch": "cai_bang_bong",
+        "level": 30,
+        "hp": 392,
+        "maxHp": 392,
+        "mana": 158,
+        "maxMana": 158
+      },
+      {
+        "school": "ngu_doc",
+        "branch": "ngu_doc_co_su",
+        "level": 30,
+        "hp": 454,
+        "maxHp": 454,
+        "mana": 195,
+        "maxMana": 195
+      },
+      {
+        "school": "vo_dang",
+        "branch": "vo_dang_kiem",
+        "level": 30,
+        "hp": 353,
+        "maxHp": 353,
+        "mana": 354,
+        "maxMana": 354
+      },
+      {
+        "school": "thieu_lam",
+        "branch": "thieu_lam_quyen",
+        "level": 30,
+        "hp": 626,
+        "maxHp": 626,
+        "mana": 168,
+        "maxMana": 168
+      }
+    ],
+    "consoleErrors": []
+  },
+  "visualEvidence": [
+    "practice/change-school-compact.png",
+    "practice/changed-hero.png"
+  ],
+  "preview": "normal-preview.json",
+  "iterationHistory": {
+    "repro": "Missing switchHero confirmed before implementation (after correcting invalid test branch)",
+    "fixtureCorrections": [
+      "Use existing cast input instead of nonexistent skill input",
+      "Current Bong actor uses renovated-bong-combo-body, not a key containing school name"
+    ],
+    "defect": "Escape was captured by GameUI quit handler before practice picker; fixed routing to the practice overlay first",
+    "retainedSessions": [
+      "practice-switch-repro",
+      "practice-switch-core",
+      "practice-switch-browser",
+      "practice-switch-browser-retry",
+      "practice-switch-escape"
+    ]
+  },
+  "artwork": "Reused Defense selector, existing approved map/hero assets; no new raster art",
+  "recordings": false,
+  "sha256": {
+    "packages/game-core/src/practice.ts": "a482cf4a3efed24da6a7ba6deec3c3da07b31243cd605bda9c6158c5f5131b9e",
+    "packages/game-protocol/src/index.ts": "5395417738d61d81614ce63935664e32b309a5b21fede6b7909c1db85532036b",
+    "apps/game-server/src/rooms/PracticeRoom.ts": "44f965805737ed9f35a07d5c522938b1f5f59c75fedaed1970636565bd31e8f5",
+    "apps/game-client/src/main.ts": "5f6d5c9c83bf768df9911360e4c224c4427e1b13c7495f3917c00e240d95c15e",
+    "apps/game-client/src/ui.ts": "7808cfdc7f20545621601b4c840e0f9f9e76c5d190231eb4de3a88bb7d22c255",
+    "apps/game-client/src/practice-ui.ts": "0251fb310257a71709a7694b3f2abadc565f90b10761ac810be5872d33113ee9",
+    "apps/game-client/src/practice-ui.css": "e8b90344dc9c39f63a4549acd413ffd7dacbf4e5f59303fea3f4b3f4177f506e",
+    "tests/practice.test.ts": "691ac35fa77a75ae36626457221396f4fdf584964ac49ff8fdb1327149b04ba2",
+    "tests/practice-room.test.ts": "bbf3509b0f31f868c8714b476b92e9caf763788bebe8f0c98c8b97d59680ff62",
+    "tests/e2e/practice.spec.ts": "526528efc24da09cbef73e160b34cbcfa641f257b72cf1687ae5b18aba38e76b"
+  }
+}

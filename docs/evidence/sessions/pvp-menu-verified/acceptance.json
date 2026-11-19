@@ -1,0 +1,128 @@
+{
+  "date": "2026-11-19",
+  "branch": "wip/m3d/pvp",
+  "status": "PASS across full checks plus focused browser retry",
+  "changes": [
+    "Defense wood window/green buttons/shared typography",
+    "Dedicated school/branch picker; drafts stay local until Confirm + server acknowledgement",
+    "18px checkbox, 8px label gap, per-map hazard explanation",
+    "Vietnamese Segoe UI result labels and stable text nodes"
+  ],
+  "fullPipeline": {
+    "status": "FAIL retained",
+    "unitFilesPassed": 107,
+    "unitTestsPassed": 1138,
+    "workflowTestsPassed": 18,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "assets": "PASS",
+    "browserPassed": 4,
+    "browserFailed": 1,
+    "failure": "Late node-identity sample crossed the legitimate transition into countdown",
+    "timings": "../pvp-menu-final/check-workflow/final-timings.json"
+  },
+  "browserRetry": {
+    "status": "PASS",
+    "passed": 1,
+    "scope": "entry/link/team selection/countdown/manual combat, school picker cancel/confirm/compact layout, checkbox/hazard description, actual round and series result fonts",
+    "phaseAssertion": "intermission (typed PvpSnapshot phase)",
+    "fontObservation": {
+      "text": "Chính thắng hiệp",
+      "font": "\"Segoe UI\", Tahoma, Arial, sans-serif",
+      "phaseBefore": "intermission",
+      "phaseAfter": "intermission",
+      "sameNode": true,
+      "afterText": "Chính thắng hiệp"
+    },
+    "evidence": "standalone-pvp/round-result-observation.json",
+    "runtimeRebuiltAfterFullRun": false,
+    "toolsTypecheckAfterTestEdit": "PASS"
+  },
+  "coveredBrowserCases": 5,
+  "eightMember": {
+    "phaserClients": 2,
+    "additionalSDKClients": 6,
+    "maps": [
+      {
+        "map": "hong_moc",
+        "members": 8,
+        "aliveAtLastSample": {
+          "chinh": 4,
+          "ta": 4
+        }
+      },
+      {
+        "map": "rung_truc",
+        "members": 8,
+        "aliveAtLastSample": {
+          "chinh": 4,
+          "ta": 4
+        }
+      },
+      {
+        "map": "dia_nguc",
+        "members": 8,
+        "aliveAtLastSample": {
+          "chinh": 4,
+          "ta": 4
+        }
+      },
+      {
+        "map": "tuong_duong",
+        "members": 8,
+        "aliveAtLastSample": {
+          "chinh": 4,
+          "ta": 4
+        }
+      },
+      {
+        "map": "kiem_ho",
+        "members": 8,
+        "aliveAtLastSample": {
+          "chinh": 3,
+          "ta": 3
+        }
+      }
+    ],
+    "initialTeams": "4v4 at each start (browser assertions passed)",
+    "npcFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "observedHazardTextures": [
+      "standalone-pvp:lightning-warning.png",
+      "standalone-pvp:lightning-1.png",
+      "standalone-pvp:sword-warning.png",
+      "standalone-pvp:sword-0.png",
+      "standalone-pvp:sword-2.png",
+      "standalone-pvp:lightning-0.png",
+      "standalone-pvp:lightning-2.png"
+    ],
+    "consoleErrors": 0,
+    "socketTerminate": 0,
+    "socketCloseCodes": {
+      "4000": 5,
+      "4011": 7
+    },
+    "evidence": "../pvp-menu-final/standalone-pvp/eight-player-frame-observations.json"
+  },
+  "recordingsCreated": false,
+  "artworkBytesChanged": false,
+  "inputSHA256": {
+    "apps/game-client/src/pvp-ui.ts": "6e65cfbf1325b447144c5df0b9e1a7f2f709ca9de8e74a4037b16f8a6bbecaec",
+    "apps/game-client/src/pvp-ui.css": "6da89048e0145bbe31ffc1ae7a684c8c6e5d96eb25b51c8290b7bd38f3b97c78",
+    "apps/game-client/src/school-selection.ts": "ecf87f9c8cb47b5bde7cb21adee38db60508b486065932f6ece1bf0027c85ca3",
+    "apps/game-client/src/pregame.ts": "9df09f762b74cfa8e560926e8f4c7c45e01873f251af9c00b1bb63e530a064b5",
+    "apps/game-client/src/pregame.css": "075baa7ab8d73acd50b0b6048c80c2f627838b94f814150be51542c5dcbfc852",
+    "tests/e2e/standalone-pvp.spec.ts": "7eb7e9fac3f050d62f74ebaefb7902bd1c5d7c4c61ea05c61b110db4290a2c7c",
+    "apps/game-server/src/socket-config.ts": "d7e2977fa92b8cda2e64cb8888ea2ab01a0c34709bc7ff410f6a9feace126443"
+  }
+}

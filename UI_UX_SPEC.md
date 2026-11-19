@@ -1,3 +1,15 @@
+## Tỉ lệ map và form PvP/Practice · 2026-11-19
+
+Dùng native gameplay zoom Defense, camera theo hero và clamped theo map; khán giả pan trong bounds. Không zoom out để chứa toàn sân, không thêm dải ảnh lặp ngoài map. Các nút utility giữ đúng cỡ từng nút Defense dù chỉ còn2/3nút. Form tên Practice dùng label/input/button một hàng khi đủ chỗ, không bẻ chữ label/nút; chỉ chuyển hàng có chủ đích ở viewport hẹp. Nhát chém raster giữ đúng tỉ lệ, quét theo tick, cảnh báo đúng nửa sân. [Kiểm chứng](docs/PVP_VISUAL_REPAIR.md).
+
+## Phòng test · 2026-11-19
+
+Thêm Phòng test vào menu chính, nhập tên rồi dùng chung lưới phái/popup hệ của Defense. Giữ màn tải trước khi map sẵn sàng. Gameplay một viewport Rừng Trúc, nhãn chế độ gọn, HUD/hotbar hiện tại và hai nút Thoát/Cài đặt; nhãn Phòng test có nút Đổi phái/hệ phái mở lưới phái/popup hệ Defense trên nền map trong viewport, Hủy/Escape và chặn hotkey. Không có panel bên ngoài. [Chi tiết](docs/PRACTICE_ROOM.md).
+
+## Menu Lôi Đài · 2026-11-19
+
+Menu Lôi Đài dùng cùng khung gỗ, tiêu đề, nút xanh và font tiếng Việt của Defense. Nút riêng mở lưới chọn phái rồi popup hai hệ; chỉ Xác nhận mới gửi lựa chọn, hủy không đánh dấu ready. Cài đặt có checkbox sát nhãn cùng mô tả hiểm họa của từng map. Thông báo thắng hiệp/ván dùng font hỗ trợ đầy đủ tiếng Việt. [Bản sửa và kiểm chứng](docs/PVP_MENU_REWORK.md).
+
 ## Menu chính trước màn biệt danh · 2026-11-15
 
 Vào game mở ô biệt danh. Hướng dẫn có ba tab Cơ chế chung, Môn phái và Boss. Cài đặt có âm lượng, công tắc tự đánh thường, lựa chọn Bàn phím/Chuột và mẫu con trỏ, dấu X. Nút Cài đặt trong trận mở các điều khiển tương ứng trong viewport và áp dụng ngay. Màn nhập biệt danh dùng Escape để về menu chính. Trong trận, con trỏ tùy chỉnh áp trên vùng canvas ở chế độ chuột; dấu X nằm tại tọa độ thế giới đã bấm.

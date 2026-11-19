@@ -1,3 +1,5 @@
+import {PvpArt, pvpView, drawPvpMap, fitPvpCamera} from './pvp-art.js';
+import type {PvpMapId} from '@volam/game-core';
 import markerArt from './controls-art/move-marker.png?url';
 import { BossSkillAnnouncements } from './boss-skill-announcements.js';
 import {
@@ -59,7 +61,6 @@ import {
   kimLuanXiangyangArena,
   type DungeonDestination,
   statueIntroduction,
-  statueName,
 } from '@volam/game-data';
 import { desertCreepArt } from './desert-art.js';
 import {
@@ -177,6 +178,10 @@ export class ArenaScene extends Phaser.Scene {
   private polished = true;
   onNpc: (menu: 'merchant' | 'pvp') => void = () => {};
   private zoneId = 'arena';
+  private pvpMap: PvpMapId|undefined;
+  private pvpArt: PvpArt|undefined;
+  private loadingPvp=false;
+  pvpPresentation(){return this.pvpArt?.inspect();}
   private snapshot: LobbyState | undefined;
   private sessionId = '';
   protected actors = new Map<string, EntityView>();
@@ -203,6 +208,7 @@ export class ArenaScene extends Phaser.Scene {
   private pendingCombat: Array<CombatEvent & { zoneId?: string }> = [];
   private retryWaveArtAt = 0;
   private bootArtFailed = false;
+  private pvpArtAtBoot = false;
   waveArtAtBoot = false;
   onArtError = (error: unknown) => console.error(error);
   get presentationReady(): boolean {
@@ -245,7 +251,7 @@ export class ArenaScene extends Phaser.Scene {
           backgroundColor: '#192117',
           align: 'center',
           padding: { x: 7, y: 4 },
-          wordWrap: { width: 290, useAdvancedWrap: true },
+          wordWrap: { width: 330, useAdvancedWrap: true },
         })
         .setOrigin(0.5, 1)
         .setDepth(statue.y + 240)
@@ -258,7 +264,7 @@ export class ArenaScene extends Phaser.Scene {
       ];
     if (line)
       this.story
-        .setText(statueName + '\n' + line)
+        .setText(line)
         .setVisible(
           statue.visible &&
             Math.hypot(player.x - arena.spawn.x, player.y - arena.spawn.y) <
@@ -278,6 +284,12 @@ export class ArenaScene extends Phaser.Scene {
         story?.visible && view.contains(story.x, story.y - story.height)
           ? story.text
           : '',
+      statueLayout: story ? {
+        text:story.text,visible:story.visible,age:this.time.now-this.storyStartedAt,
+        bounds:{x:story.x-story.width/2,y:story.y-story.height,width:story.width,height:story.height},
+        view:{x:view.x,y:view.y,width:view.width,height:view.height},
+        zoom:this.cameras.main.zoom,followOffset:this.followOffsetY,
+      }:null,
       levelUpRings: this.children.list
         .filter((child) => child.name.startsWith('level-up:'))
         .map((child) => {
@@ -376,6 +388,10 @@ export class ArenaScene extends Phaser.Scene {
       const enemy =
         creep ?? (fighter && player?.loiDaiFighter ? player : undefined);
       if (!enemy || enemy.hp <= 0 || enemy.zoneId !== this.zoneId) continue;
+      const pvp=pvpView(this.snapshot);
+      if(pvp){const owner=creep?.ownerId??id;const team=pvp.members.find(m=>m.id===owner)?.team;
+        if(team===pvp.members.find(m=>m.id===this.sessionId)?.team)continue;
+      }
       if (view.getBounds().contains(position.x, position.y)) {
         targetId = id;
         front = view.depth;
@@ -414,6 +430,10 @@ export class ArenaScene extends Phaser.Scene {
     preloadRuntimeArtReview(this);
     if (this.eagerArt) preloadLoiDai(this);
     preloadArt(this, this.eagerArt);
+    // A direct PvP join already needs its map in the waiting room. Queue it
+    // with boot assets instead of restarting this loader from Scene.create.
+    this.pvpArtAtBoot = !!(this.snapshot?.pvp.enabled || this.snapshot?.practice.enabled);
+    if (this.pvpArtAtBoot && !this.eagerArt) preloadArtPack(this, 'pvp');
     if (!this.eagerArt && this.waveArtAtBoot)
       preloadArtPack(this, 'wave-bosses');
     preloadShaolinDaoArt(this);
@@ -520,6 +540,10 @@ export class ArenaScene extends Phaser.Scene {
     );
     this.cameras.main.centerOn(arena.spawn.x, arena.spawn.y);
     createRuntimeArtReview(this);
+    if (this.pvpArtAtBoot) {
+      registerArtPack(this, 'pvp');
+      this.loadedPacks.add('pvp');
+    }
     this.ready = true;
     document.querySelector('#scene-status')?.setAttribute('data-ready', 'true');
     this.syncZone();
@@ -580,6 +604,8 @@ export class ArenaScene extends Phaser.Scene {
     return load;
   }
   private fitCamera = (): void => {
+    if(this.snapshot?.practice.enabled){fitPvpCamera(this,'rung_truc');return;}
+    const pvp=pvpView(this.snapshot);if(pvp){fitPvpCamera(this,pvp.mapId);return;}
     if (this.zoneId === loiDai.id) fitLoiDaiCamera(this);
     else if (isKimLuanZone(this.zoneId)) {
       const { width, height } = kimLuanXiangyangArena;
@@ -644,7 +670,7 @@ export class ArenaScene extends Phaser.Scene {
   }
 
   moveLocal(x: number, y: number): void {
-    if (this.predictMovement) this.localMovement.move(x, y, performance.now());
+    if (this.predictMovement && !this.snapshot?.pvp.enabled && !this.snapshot?.practice.enabled) this.localMovement.move(x, y, performance.now());
   }
 
   localFrame(): { x: number; y: number; animation: string } | undefined {
@@ -659,6 +685,23 @@ export class ArenaScene extends Phaser.Scene {
 
   private syncZone(): void {
     if (!this.ready) return;
+    const pvp=pvpView(this.snapshot);
+    const mapId=pvp?.mapId??(this.snapshot?.practice.enabled?'rung_truc':undefined);
+    if(mapId){
+      if(!this.hasArt('pvp')){
+        if(!this.loadingPvp){
+          this.loadingPvp=true;this.pendingZone='standalone-pvp';
+          void this.prepareArt('pvp').then(()=>{
+            this.pendingZone='';this.loadingPvp=false;
+            if(this.snapshot?.pvp.enabled||this.snapshot?.practice.enabled)this.syncZone();
+          }).catch(error=>{this.loadingPvp=false;this.pendingZone='';this.onArtError(error);});
+        }
+        return;
+      }
+      if(this.pvpMap!==mapId){this.pvpMap=mapId;this.pendingZone='';this.drawZone('arena');}
+      return;
+    }
+    if(this.pvpMap){this.pvpMap=undefined;this.drawZone('arena');}
     const zone = this.snapshot?.players.get(this.sessionId)?.zoneId ?? 'arena';
     if (zone === this.pendingZone) return;
     this.pendingZone = '';
@@ -696,6 +739,7 @@ export class ArenaScene extends Phaser.Scene {
       });
   }
   private drawZone(zoneId: string): void {
+    this.pvpArt?.clear();this.pvpArt=undefined;
     this.hitArt.clear();
     this.shaolinDao.clear();
     this.story?.destroy();
@@ -732,7 +776,10 @@ export class ArenaScene extends Phaser.Scene {
     this.followed = '';
     this.zoneId = zoneId;
     this.fitCamera();
-    if (zoneId === 'arena') {
+    const pvp=this.hasArt('pvp')?pvpView(this.snapshot):undefined;
+    if(this.snapshot?.practice.enabled && this.hasArt('pvp')){this.trees=[];drawPvpMap(this,'rung_truc');}
+    else if(pvp){this.trees=[];drawPvpMap(this,pvp.mapId);this.pvpArt=new PvpArt(this);}
+    else if (zoneId === 'arena') {
       this.trees = createRenovationWorld(this, zoneId);
       applyArenaPalette(this, this.polished);
       this.cameras.main
@@ -1020,6 +1067,7 @@ export class ArenaScene extends Phaser.Scene {
       const blinkAlpha = !enemy ? (this.vfx?.actorAlpha(id) ?? 1) : 1;
       const local = id === this.sessionId ? state?.players.get(id) : undefined;
       const predicted =
+        !state?.pvp.enabled && !state?.practice.enabled &&
         local?.zoneId === 'arena' &&
         local.connected &&
         local.hp > 0 &&
@@ -1351,11 +1399,16 @@ export class ArenaScene extends Phaser.Scene {
         this.followed = id;
       }
     };
+    const pvp=pvpView(state);
+    if(pvp)this.pvpArt?.sync(pvp,this.time.now,state!);
     state?.players?.forEach((hero, id) => {
+      if(pvp&&(pvp.phase==='lobby'||pvp.members.find(m=>m.id===id)?.team==='spectator'))return;
       if (!hero.confirmed || hero.zoneId !== this.zoneId) return;
       render(id, hero, false, hero.nickname);
       const view = this.actors.get(id);
       if (!view) return;
+      const member=pvp?.members.find(m=>m.id===id);
+      if(member)view.label.setColor(member.team==='chinh'?'#a4e1f3':'#ffbab0');
       if (
         view.lastLevel !== undefined &&
         hero.level > view.lastLevel &&
@@ -1414,8 +1467,9 @@ export class ArenaScene extends Phaser.Scene {
       this.story?.visible && self
         ? Phaser.Math.Clamp(
             self.y -
-              camera.height / 2 -
-              (this.story.y - this.story.height - 46),
+              camera.displayHeight / 2 -
+              // Screen-space HUD clearance converted to world coordinates.
+              (this.story.y - this.story.height - 112 / camera.zoomY),
             48,
             150,
           )
@@ -1736,6 +1790,18 @@ export class ArenaScene extends Phaser.Scene {
       waveArena: this.waveArena?.inspect(),
       chu: this.chu?.inspect(),
       ready: this.ready,
+      sceneSnapshot: {
+        session: this.sessionId,
+        phase: this.snapshot?.phase,
+        pvpEnabled: this.snapshot?.pvp.enabled,
+        pendingZone: this.pendingZone,
+        loadingPvp: this.loadingPvp,
+        loadedPacks: [...this.loadedPacks],
+        loadingPacks: [...this.loadingPacks.keys()],
+        active: this.scene.isActive(),
+        paused: this.scene.isPaused(),
+        gamePaused: this.game.isPaused,
+      },
       polished: this.polished,
       artwork: productionArtBindings(this),
       animationTimings: {
@@ -1760,6 +1826,9 @@ export class ArenaScene extends Phaser.Scene {
           };
         }),
       zoneId: this.zoneId,
+      pvp: this.pvpArt?.inspect(),
+      pvpMap: this.pvpMap,
+      pvpLayers: this.children.list.filter(o=>o.name.startsWith('pvp-map:')).map(o=>o.name),
       hongLiet: this.hongLiet?.inspect(),
       tayDoc: this.tayDoc?.inspect(),
       kim: this.kim?.inspect(),
@@ -1850,6 +1919,7 @@ export class ArenaScene extends Phaser.Scene {
       zoom: this.cameras.main.zoom,
       roundPixels: this.cameras.main.roundPixels,
       camera: { x: this.cameras.main.scrollX, y: this.cameras.main.scrollY },
+      worldView: {x: this.cameras.main.worldView.x, y: this.cameras.main.worldView.y, width: this.cameras.main.worldView.width, height: this.cameras.main.worldView.height},
       cameraMatrix: {
         origin: { x: origin.x, y: origin.y },
         step: unit.x - origin.x,

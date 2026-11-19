@@ -1,0 +1,160 @@
+{
+  "date": "2026-11-19",
+  "branch": "wip/m3d/pvp",
+  "status": "PASS across full checks plus rebuilt browser stage retry",
+  "resolved": [
+    {
+      "issue": "Defense statue opening offscreen",
+      "cause": "Viewport pixels mixed with world coordinates at zoom 2",
+      "fix": "displayHeight and HUD clearance / zoomY; both viewport sizes checked"
+    },
+    {
+      "issue": "Eight member room falls to seven",
+      "cause": "Transport watchdog terminated browser guest at pingCount=2 / pongAge=9045ms",
+      "fix": "Shared production/test heartbeat: 3000ms probes, 5 missed probes; explicit close/drop remains immediate"
+    }
+  ],
+  "fullPipeline": {
+    "status": "FAIL retained (browser stage at that time)",
+    "unitIntegrationFiles": 107,
+    "unitIntegrationPassed": 1138,
+    "workflowPassed": 18,
+    "typecheck": "PASS",
+    "assets": "PASS",
+    "build": "PASS",
+    "evidence": "../pvp-repair-final/check-workflow/final-timings.json"
+  },
+  "roomRegressions": {
+    "passed": 10,
+    "faults": [
+      "9.5s missing pongs then recovery",
+      "persistently missing pongs still terminates/forfeits"
+    ],
+    "seatMapCycles": 30
+  },
+  "browserRetry": {
+    "status": "PASS",
+    "passed": 5,
+    "browserSeconds": 321.16,
+    "totalSeconds": 350.29,
+    "tests": [
+      "Defense combat/manual cadence/skills/progression",
+      "Fixed-trajectory ranged projectile and original effect frames",
+      "Statue bounds/HUD clearance at 1280x720 and 850x480",
+      "PvP two client entry/team/countdown/manual combat",
+      "PvP eight members/five maps/hazards/NPC/host closure"
+    ],
+    "clients": {
+      "phaser": 2,
+      "additionalSDK": 6
+    },
+    "maps": [
+      {
+        "map": "hong_moc",
+        "members": 8,
+        "alive": {
+          "chinh": 4,
+          "ta": 4
+        }
+      },
+      {
+        "map": "rung_truc",
+        "members": 8,
+        "alive": {
+          "chinh": 4,
+          "ta": 4
+        }
+      },
+      {
+        "map": "dia_nguc",
+        "members": 8,
+        "alive": {
+          "chinh": 4,
+          "ta": 4
+        }
+      },
+      {
+        "map": "tuong_duong",
+        "members": 8,
+        "alive": {
+          "chinh": 4,
+          "ta": 4
+        }
+      },
+      {
+        "map": "kiem_ho",
+        "members": 8,
+        "alive": {
+          "chinh": 4,
+          "ta": 4
+        }
+      }
+    ],
+    "npcFrames": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "releaseCels": {
+      "sword": [
+        0,
+        1,
+        2
+      ],
+      "lightning": [
+        0,
+        1,
+        2
+      ]
+    },
+    "consoleErrors": 0,
+    "socketTerminate": 0,
+    "socketCloseCodes": {
+      "1001": 2,
+      "4000": 5,
+      "4011": 7
+    },
+    "guestMapReadyMs": {
+      "hong_moc": 165,
+      "rung_truc": 161,
+      "dia_nguc": 254,
+      "tuong_duong": 147,
+      "kiem_ho": 143
+    }
+  },
+  "dependencyNote": "Client preload and read-only diagnostics plus browser helpers changed after the full suite. Compilation/build/tools/browser were rerun; game-core/server/unit inputs did not change.",
+  "knownLimits": [
+    "No long-duration soak claim.",
+    "Hazard numerical tuning remains provisional; human PvP balance not approved.",
+    "Production cel/runtime artwork approval is not inferred from these regression tests."
+  ],
+  "recordingsCreated": false,
+  "evidence": {
+    "browserTimings": "check-workflow/browser-timings.json",
+    "maps": "standalone-pvp/eight-player-frame-observations.json",
+    "socketLifecycle": "pvp-repair/server-lifecycle.ndjson",
+    "statue": "pvp-repair/statue-camera.json",
+    "normalPNG": "pvp-repair/statue-normal.png",
+    "compactPNG": "pvp-repair/statue-camera.png"
+  },
+  "inputSHA256": {
+    "apps/game-client/src/arena-scene.ts": "64a5abd1c7b365145cf9781d87860945f2bf9fd08a1e4bf278291308e8a96d07",
+    "apps/game-server/src/socket-config.ts": "d7e2977fa92b8cda2e64cb8888ea2ab01a0c34709bc7ff410f6a9feace126443",
+    "apps/game-server/src/app.config.ts": "1f777491cf4599a13230b81ee5c5173b7ae41ae276cc59d051fab1dba52c1ede",
+    "tests/room-test-server.ts": "862c184968f54524fc4c2caf280d16e8950d620d1c59f292065cb243ec063854",
+    "tests/standalone-loi-dai-room.test.ts": "b768848b313b367f47e6910680efc55e14b6461a708fe6bc8104088d889e3d7a",
+    "tests/e2e/gameplay.spec.ts": "c1b707f86171bbb5660e49997c3fba9110b6b1c54064fbd70c5e43c675fbe3ac",
+    "tests/e2e/pregame-helper.ts": "a610a183db23839ece69deef4c128670103de0e93194f524b89988965592dac6",
+    "tests/e2e/standalone-pvp.spec.ts": "7e6d882abf256f36d5a7252c096674e6681056bcf9c46cfa7916ee18fec7b10f",
+    "tests/e2e/pvp-regressions.spec.ts": "12ad1342150171a75fee48d978fb7d6381c589abb3fdca0d575aeca4e4fccec2",
+    "tests/e2e/pvp-repair-setup.ts": "5b3ebfc0fd37d1a4fb90022eaab3e6f785a5e1797787ec901994528ca6b0aa6e",
+    "playwright.pvp-regressions.config.ts": "35e632f3e5262c941ccdb3938091b77acc12e7f4df15bc11efa6974ee06b2e04"
+  }
+}

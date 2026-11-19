@@ -1,5 +1,5 @@
-import { m1Config, schools, skillIcon } from '@volam/game-data';
-import { nguDoc } from '@volam/game-core';
+import { m1Config, schools } from '@volam/game-data';
+import { schoolCards, branchCards } from './school-selection.js';
 import type { LobbyState, LobbyAction } from '@volam/game-protocol';
 import './pregame.css';
 import { guide, guideTabs, type GuideTab } from './pregame-guide.js';
@@ -45,6 +45,12 @@ export class PreGame {
   private refreshTimer: number;
   onConnect: (nickname: string, roomId?: string) => void = () => {};
   onLeave: () => void = () => {};
+  onLoiDai: () => void = () => {};
+  onPractice: () => void = () => {};
+  openHome(): void {
+    this.node.hidden = false;
+    this.showHome();
+  }
   onSettings: (key: keyof Preferences) => void = () => {};
   onAction: (action: LobbyAction) => void = () => {};
   constructor(private endpoint: string) {
@@ -98,6 +104,8 @@ export class PreGame {
       if (!button || button.disabled) return;
       const action = button.dataset['action'];
       if (action === 'home') this.showHome();
+      if (action === 'standalone-loi-dai') this.onLoiDai();
+      if (action === 'practice') this.onPractice();
       if (action === 'play') {
         this.screen = 'landing';
         this.render();
@@ -387,7 +395,7 @@ export class PreGame {
       '<div class="brand"><h1>Võ Lâm</h1><h2>ANH HÙNG THỦ THÀNH</h2></div>';
     if (this.screen === 'home') {
       this.node.classList.add('landing');
-      this.node.innerHTML = `${brand}<nav class="pre-home" aria-label="Menu chính">${button('Vào game', 'play')}${button('Hướng dẫn', 'guide')}${button('Cài đặt', 'settings')}</nav>`;
+      this.node.innerHTML = `${brand}<nav class="pre-home" aria-label="Menu chính">${button('Vào game', 'play')}${button('Lôi Đài', 'standalone-loi-dai')}${button('Phòng test', 'practice')}${button('Hướng dẫn', 'guide')}${button('Cài đặt', 'settings')}</nav>`;
       return;
     }
     if (this.screen === 'guide' || this.screen === 'settings') {
@@ -447,33 +455,12 @@ export class PreGame {
               <h2 id="branch-title">${dialogSchool.name} · Chọn hệ phái</h2>
               <p>${dialogSchool.style}</p>
               <div class="branch-list" role="group" aria-label="Hệ phái">
-                ${branches
-                  .map((id) => {
-                    const style =
-                      m1Config.progression!.defaultBranches![id]!.style;
-                    const selected =
-                      confirmedSchool && self?.selectedBranch === id;
-                    const basic =
-                      dialogSchool.id === nguDoc.school
-                        ? m1Config.basics[id]
-                        : undefined;
-                    const icon = `<img src="${skillIcon(basic?.id ?? id)}" width="44" height="44" alt=""/>`;
-                    return `<button type="button" data-action="branch" data-branch="${id}" aria-pressed="${selected}" ${confirmedSchool ? '' : 'disabled'}${basic ? ` aria-description="Đánh thường · ${escape(basic.nameVi)}"` : ''}>
-                    ${basic ? `<span class="branch-basic-icon" aria-hidden="true" title="Đánh thường · ${escape(basic.nameVi)}">${icon}</span>` : icon}<span>${style}</span>
-                  </button>`;
-                  })
-                  .join('')}
+${branchCards(dialogSchool, confirmedSchool ? self?.selectedBranch : '', confirmedSchool)}
               </div>
               <div class="pre-actions">${button('Đổi môn phái', 'close-branches')}${button(confirmLabel, 'confirm', this.artLoading || !confirmedSchool || !self?.selectedBranch)}</div>
             </dialog>`
             : '';
-        const schoolCards = schools
-          .map(
-            (s) =>
-              `<button type="button" class="school-card ${self?.schoolId === s.id ? 'selected' : ''}" data-action="school" data-school="${s.id}" aria-pressed="${self?.schoolId === s.id}" ${state.requiresBranch ? 'aria-haspopup="dialog"' : ''} ${self?.confirmed ? 'disabled' : ''}><span class="school-portrait ${s.portrait}" aria-hidden="true"></span><h3>${s.name}</h3><span class="school-element">${s.element}</span></button>`,
-          )
-          .join('');
-        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <strong data-testid="selection-ready"></strong></p><div class="school-grid">${schoolCards}</div>${list}<div class="pre-actions">${button('Rời phòng', 'leave')}${state.requiresBranch ? '' : button(confirmLabel, 'confirm', this.artLoading || !self?.schoolId || !!self?.confirmed)}</div><p class="pre-warning" hidden>Đang chờ người chơi mất kết nối. Bạn có thể rời và tạo phòng mới.</p>${popup}`;
+        content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <strong data-testid="selection-ready"></strong></p><div class="school-grid">${schoolCards(self?.schoolId, !!self?.confirmed, state.requiresBranch)}</div>${list}<div class="pre-actions">${button('Rời phòng', 'leave')}${state.requiresBranch ? '' : button(confirmLabel, 'confirm', this.artLoading || !self?.schoolId || !!self?.confirmed)}</div><p class="pre-warning" hidden>Đang chờ người chơi mất kết nối. Bạn có thể rời và tạo phòng mới.</p>${popup}`;
       }
     }
     if (this.state?.devSkillLoadout)

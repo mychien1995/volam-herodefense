@@ -1,4 +1,8 @@
-import { joinWaiting, startAuditTogether, startTogether } from './pregame-helper.js';
+import {
+  joinWaiting,
+  startAuditTogether,
+  startTogether,
+} from './pregame-helper.js';
 import { expect, test, type Page } from '@playwright/test';
 import { Client } from '@colyseus/sdk';
 import { PROTOCOL_VERSION, type LobbyState } from '@volam/game-protocol';
@@ -128,16 +132,22 @@ test('Cai Bang Bong keeps the renovated sprite on a replicated enemy hit', async
     ]);
     await expect(page.locator('#pregame')).toBeHidden({ timeout: 15000 });
     await page.bringToFront();
-    await expect(page.locator('[data-potion-resource="hp"] em')).toHaveText('10');
-    await expect(page.locator('[data-potion-resource="mp"] em')).toHaveText('10');
+    await expect(page.locator('[data-potion-resource="hp"] em')).toHaveText(
+      '10',
+    );
+    await expect(page.locator('[data-potion-resource="mp"] em')).toHaveText(
+      '10',
+    );
     const reaction = await page.waitForFunction((id) => {
       const game = (window as any).__VOLAM__;
       const state = game.snapshot();
       if (state.state.players[id]?.pose !== 'hurt') return;
-      return game.presentation().renovation.bodies.find(
-        (body: { name: string; pose: string }) =>
-          body.name === 'actor:' + id && body.pose === 'hurt',
-      );
+      return game
+        .presentation()
+        .renovation.bodies.find(
+          (body: { name: string; pose: string }) =>
+            body.name === 'actor:' + id && body.pose === 'hurt',
+        );
     }, sessionId);
     expect(await reaction.jsonValue()).toMatchObject({
       texture: 'renovated-bong-combo-body',
@@ -149,7 +159,9 @@ test('Cai Bang Bong keeps the renovated sprite on a replicated enemy hit', async
     );
     expect(hit).toBeDefined();
     await expect
-      .poll(async () => (await snapshot(b)).events.some((e) => e.id === hit?.id))
+      .poll(async () =>
+        (await snapshot(b)).events.some((e) => e.id === hit?.id),
+      )
       .toBe(true);
     await expect.poll(async () => (await hero(page)).pose).toBe('idle');
     expect([...errors, ...peerErrors]).toEqual([]);
@@ -308,6 +320,10 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
       }
       return [...frames];
     }) as Promise<Array<[string, number]>>;
+    // Cleanup can close the page while this independent observer is pending.
+    // Keep that secondary rejection from masking an earlier assertion failure;
+    // the original promise is still awaited and asserted below on success.
+    void ringSamples.catch(() => undefined);
     const aId = (await snapshot(a)).sessionId;
     // Let the real AI approach. Do not walk toward an old target position:
     // movement/patch latency can carry the hero past it before the attack.
@@ -409,14 +425,14 @@ test('two clients agree on combat, manual cadence, skills and progression', asyn
           (await presentation(a)).actors.find((actor) => actor.id === aId)
             ?.texture,
       )
-      .toBe('hero_cai_bang_chuong');
+      .toBe('renovated-hero_cai_bang_chuong');
     await expect
       .poll(
         async () =>
           (await presentation(b)).actors.find((actor) => actor.id === aId)
             ?.texture,
       )
-      .toBe('hero_cai_bang_chuong');
+      .toBe('renovated-hero_cai_bang_chuong');
     const latestAttack = async (): Promise<number> =>
       (await snapshot(a)).events
         .filter((event) => event.kind === 'attack' && event.sourceId === aId)

@@ -27,6 +27,8 @@ export const inputBindings = Object.freeze({
 });
 
 export * from './arena.js';
+export * from './pvp.js';
+export * from './practice.js';
 export * from './renovation-navigation.js';
 export * from './economy.js';
 export * from './m1.js';

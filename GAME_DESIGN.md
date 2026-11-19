@@ -1,3 +1,11 @@
+## Phòng test · 2026-11-19
+
+Menu chính có Phòng test: nhập tên và chọn phái/hệ bằng menu hiện có, vào Rừng Trúc không hiểm họa. Nhân vật cấp30, max năm kỹ năng, bất tử, đầy nội lực và không CD; ba Chó Hoang không tự đi/đánh, nhận hit/CC nhưng không chết hoặc phát thưởng. Mỗi người một room riêng; nút Đổi phái/hệ phái mở menu Defense ngay trong room, đổi hero tại chỗ và giữ ba mục tiêu. [Chi tiết](docs/PRACTICE_ROOM.md).
+
+## Lôi Đài độc lập · 2026-11-19
+
+Menu Lôi Đài chạy phòng riêng bên cạnh Defense, với chia phe Chính/Khán giả/Tà, best-of-five và năm map. Luật đầy đủ ở [đặc tả](docs/LOI_DAI_STANDALONE_SPEC.md); các mặc định thử, giao diện và kiểm chứng ở [bản tích hợp](docs/LOI_DAI_STANDALONE_IMPLEMENTATION.md). Các đoạn PvP cũ dưới đây vẫn mô tả Lôi Đài bên trong Defense.
+
 ## Campaign balance và thử lại boss — 2026-11-06
 
 Tiến trình mới nhắm cấp6/12/18/24 ở tứ tuyệt; Long Châu dẫn sang Lý Mạc Sầu/Hồng Liệt/Chu Bá Thông/Kim Luân. Vương Trùng Dương chờ Kim Luân thực sự bị hạ rồi chuẩn bị60s. Cả hai loại boss có ba hồi sinh và biểu quyết đánh lại. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).

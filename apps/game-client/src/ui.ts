@@ -71,6 +71,10 @@ export class GameUI {
   onLoadout: (ids: string[]) => void = () => {};
   onCheck: () => void = () => {};
   onLeave: () => void = () => {};
+  onPracticeChange:()=>void=()=>{};
+  onPracticeEscape:()=>boolean=()=>false;
+  onPvpHistory:()=>void=()=>{};
+  onPvpEscape:()=>boolean=()=>false;
   onLoiDai: (action: 'enter' | 'exit') => void = () => {};
   onDestinationPreview: (destination: DungeonDestination | 'loi_dai') => void =
     () => {};
@@ -117,7 +121,7 @@ export class GameUI {
             <span id="fixed-skill-points" class="skill-points" hidden></span><span id="shaolin-stance" class="stance-indicator" hidden></span><span id="con-luan-stance" class="stance-indicator" hidden></span><span id="innate-dodge" class="stance-indicator" hidden></span>
             <button hidden class="loadout-toggle" data-menu="skills" title="Võ Công · O" aria-label="Võ Công · O">◇<span id="available-points"></span></button>
           </section>
-          <p id="scene-status" class="scene-ready" aria-hidden="true">${artPreview ? 'XEM TRƯỚC HÌNH ẢNH' : ''}</p>
+          <section id="practice-banner" class="game-window framed" hidden><strong>PHÒNG TEST · RỪNG TRÚC</strong><span>Bất tử · Nội lực vô hạn · Không hồi chiêu</span><button id="practice-change" type="button">Đổi phái/hệ phái</button></section><p id="scene-status" class="scene-ready" aria-hidden="true">${artPreview ? 'XEM TRƯỚC HÌNH ẢNH' : ''}</p>
           <p id="zone-status" hidden role="status"></p>
         </div>
         <section id="lobby" class="lobby-layer"><div class="lobby-window framed"><p class="eyebrow">VÕ LÂM · ANH HÙNG THỦ THÀNH</p><h1>Tịnh Phong Viện</h1><p>Sân viện thanh bình. Khởi đầu hành trình võ lâm.</p><form id="join-form"><label for="nickname">Biệt danh</label><input id="nickname" maxlength="${lobbyConfig.nicknameMaxLength}" autocomplete="off" required placeholder="Biệt danh của bạn"/><button type="submit" id="create" class="accent">Tạo phòng</button><div class="divider">hoặc tham gia cùng bạn</div><label for="room-id">Mã phòng</label><div class="join-row"><input id="room-id" autocomplete="off" maxlength="64" placeholder="Nhập mã phòng"/><button type="submit" id="join">Vào phòng</button></div></form><p id="status" data-testid="status" role="status" aria-live="polite">Mất kết nối</p><small>Chỉ cần biệt danh · 1–6 người chơi · Không lưu tiến trình<br>Bản thử nghiệm · Hình ảnh đang hoàn thiện</small></div></section>
@@ -127,6 +131,9 @@ export class GameUI {
         <div id="announcements" aria-live="polite"><p id="feedback" role="status" hidden></p></div>
         <p id="hero-stats" data-testid="hero-stats" class="sr-only"></p>
       </main>`;
+    element('#practice-change').addEventListener('click', () => {
+      if (this.state?.practice.enabled && !this.reconnecting) this.onPracticeChange();
+    });
     this.defense = new DefenseHud(element('#viewport'), () => this.onLeave());
     this.bossRetry = new BossRetryUI(element('#viewport'), (action) =>
       this.onBossRetry(action),
@@ -261,6 +268,8 @@ export class GameUI {
     ) {
       event.preventDefault();
       event.stopImmediatePropagation();
+      if (this.state?.practice.enabled && this.onPracticeEscape()) return;
+      if (this.state?.pvp.enabled && this.onPvpEscape()) return;
       if (this.study) this.setStudy(false);
       else if (this.menu) this.close();
       else this.open('quit');
@@ -308,6 +317,11 @@ export class GameUI {
     if (!id) this.state = undefined;
   }
   open(menu: Menu): void {
+    if(this.state?.practice.enabled && ['dungeons','merchant','inventory','skills','pvp'].includes(menu))return;
+    if(this.state?.pvp.enabled) {
+      if(menu==='pvp'){this.onPvpHistory();return;}
+      if(['dungeons','merchant','inventory','skills'].includes(menu))return;
+    }
     const hero = this.state?.players.get(this.sessionId);
     const leavingDuel = hero?.zoneId === loiDai.id;
     if (leavingDuel && (menu === 'dungeons' || menu === 'merchant')) return;
@@ -597,6 +611,8 @@ export class GameUI {
   }
   refresh(state: LobbyState): void {
     this.state = state;
+    element('#viewport').dataset['practice']=String(state.practice.enabled);
+    element('#practice-banner').hidden=!state.practice.enabled;
     if (['DEFEAT', 'VICTORY'].includes(state.phase) && !this.ended) {
       this.ended = true;
       window.dispatchEvent(new Event('volam:controls-blocked'));
@@ -605,7 +621,7 @@ export class GameUI {
     }
     this.defense.update(state);
     element('#player-count').textContent =
-      `${state.players.size} / ${lobbyConfig.maxPlayers}`;
+      `${state.players.size} / ${state.maxPlayers}`;
     const list = document.querySelector('#players');
     list?.replaceChildren(
       ...[...state.players.entries()].map(([id, hero]) => {
@@ -659,7 +675,7 @@ export class GameUI {
     const canDuel =
       !inDuel || (hero.loiDaiFighter && state.loiDaiFighters === 2);
     const pvp = element<HTMLButtonElement>('.system-buttons [data-menu="pvp"]');
-    const duelLabel = inDuel ? 'Về đấu trường' : 'Lôi Đài';
+    const duelLabel = state.pvp.enabled ? 'Lịch sử' : inDuel ? 'Về đấu trường' : 'Lôi Đài';
     pvp.title = duelLabel;
     pvp.setAttribute('aria-label', duelLabel);
     pvp.querySelector('span:last-child')!.textContent = duelLabel;
@@ -690,7 +706,7 @@ export class GameUI {
       state.players.size <= 1 ||
       hero.hp <= 0;
     help.disabled = this.blocked;
-    const dead = hero.hp <= 0 && state.phase === 'IN_GAME';
+    const dead = !state.pvp.enabled && hero.hp <= 0 && state.phase === 'IN_GAME';
     if (dead && !this.dead)
       window.dispatchEvent(new Event('volam:controls-blocked'));
     this.dead = dead;
@@ -1038,7 +1054,7 @@ export class GameUI {
         ability?.id === nguDoc.counter || ability?.id === nguDoc.zombie;
       const slot = element(`#slot-${key}`),
         cooling = remaining > 0 && !recast,
-        cost = recast ? 0 : (ability?.manaCost ?? 0);
+        cost = recast || state.practice.enabled ? 0 : (ability?.manaCost ?? 0);
       slot.dataset['recastReady'] = String(recast);
       slot.classList.toggle('cooling', cooling);
       const controlled = activeStatuses.some(
@@ -1189,10 +1205,11 @@ export class GameUI {
       const definition = m1Config.progression?.skills[id];
       if (
         slot.dataset['skillId'] !== id ||
-        slot.dataset['skillRank'] !== String(rank)
+        slot.dataset['skillRank'] !== String(rank) || slot.dataset['practice'] !== String(state.practice.enabled)
       ) {
         slot.dataset['skillId'] = id;
         slot.dataset['skillRank'] = String(rank);
+        slot.dataset['practice']=String(state.practice.enabled);
         const name = ability?.nameVi ?? 'Chưa trang bị';
         element(`#skill-tip-${key} strong`).textContent = name;
         slot
@@ -1202,7 +1219,7 @@ export class GameUI {
           definition?.descriptionVi ??
           (ability ? abilitySummary(ability).replace(/^ · /, '') : '');
         element(`#skill-tip-${key} .skill-tip-stats`).textContent =
-          ability && definition && rank > 0 ? skillRankStats(ability) : '';
+          ability && definition && rank > 0 ? skillRankStats(state.practice.enabled?{...ability,manaCost:0,cooldownTicks:0}:ability) : '';
       }
       const status = !ability
         ? 'Chưa mở'

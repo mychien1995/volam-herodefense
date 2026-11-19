@@ -1,0 +1,39 @@
+{
+  "runId": "f209bf68-3ce9-41db-9023-3b8e3bc9bcc1",
+  "mode": "browser",
+  "args": [
+    "--config",
+    "playwright.practice.config.ts",
+    "--grep",
+    "private practice:"
+  ],
+  "startedAt": "2026-11-19T02:02:12.874Z",
+  "status": "FAIL",
+  "stages": [
+    {
+      "label": "prepare assets (once)",
+      "seconds": 48.15,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.47,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "production client build",
+      "seconds": 16.4,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "label": "browser verification",
+      "seconds": 61.07,
+      "status": "FAIL",
+      "exitCode": 1
+    }
+  ],
+  "totalSeconds": 126.11
+}

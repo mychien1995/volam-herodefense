@@ -1,0 +1,147 @@
+{
+  "status": "PASS",
+  "scope": "Required static/unit/assets checks and staged frontend/browser retries; original FAIL reports preserved",
+  "branch": "wip/m3d/pvp",
+  "protocolVersion": 48,
+  "requests": {
+    "nameForm": "Explicit responsive grid; label/button nowrap; input44px",
+    "camera": "Defense native zoom; follow fighters/practice hero; cover minimum and map bounds",
+    "slash": "Three native-aspect cels; moving sweep; cropped half-floor warning; finish received one-shot without skipped cels under render load",
+    "npcCadence": {
+      "rateMultiplier": 1.2,
+      "sword": {
+        "beforeTicks": 360,
+        "afterTicks": 300
+      },
+      "lightning": {
+        "beforeTicks": 270,
+        "afterTicks": 225
+      },
+      "warningsAndDamage": "unchanged"
+    },
+    "hud": "Per-button Defense width independent of hidden buttons",
+    "hellEdges": "Removed outside-map material apron; clamped camera and exact map layer dimensions"
+  },
+  "fullPipeline": {
+    "report": "../pvp-visual-final/check-workflow/final-timings.json",
+    "status": "FAIL",
+    "unitIntegration": {
+      "files": 109,
+      "tests": 1152,
+      "status": "PASS"
+    },
+    "workflow": {
+      "tests": 18,
+      "status": "PASS"
+    },
+    "browser": {
+      "passed": 6,
+      "failed": 1,
+      "reason": "IPC polling lacked same-hazard motion samples for 400ms visual"
+    }
+  },
+  "rebuild": {
+    "report": "../pvp-visual-complete/check-workflow/browser-timings.json",
+    "compile": {
+      "label": "compile TypeScript",
+      "seconds": 1.54,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    "build": {
+      "label": "production client build",
+      "seconds": 12.37,
+      "status": "PASS",
+      "exitCode": 0
+    },
+    "toolsTypecheck": "PASS after final test-only collector change"
+  },
+  "stageRetries": {
+    "isolated": {
+      "session": "pvp-visual-complete",
+      "status": "PASS",
+      "frames": [
+        {
+          "texture": "standalone-pvp:sword-0.png",
+          "x": 560,
+          "y": 315,
+          "scale": [
+            1,
+            1
+          ]
+        },
+        {
+          "texture": "standalone-pvp:sword-1.png",
+          "x": 560,
+          "y": 209.99999999999994,
+          "scale": [
+            1,
+            1
+          ]
+        },
+        {
+          "texture": "standalone-pvp:sword-2.png",
+          "x": 560,
+          "y": 104.99999999999991,
+          "scale": [
+            1,
+            1
+          ]
+        }
+      ],
+      "image": "../pvp-visual-complete/standalone-pvp/doc-co-isolated.png"
+    },
+    "eight": {
+      "session": "pvp-eight-native-verified",
+      "status": "PASS",
+      "players": 8,
+      "browserClients": 2,
+      "sdkPeers": 6,
+      "maps": [
+        "hong_moc",
+        "rung_truc",
+        "dia_nguc",
+        "tuong_duong",
+        "kiem_ho"
+      ],
+      "npcFrames": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        9,
+        8
+      ],
+      "swordFrames": [
+        "standalone-pvp:sword-0.png",
+        "standalone-pvp:sword-1.png",
+        "standalone-pvp:sword-2.png"
+      ],
+      "errors": {
+        "host": [],
+        "guest": []
+      }
+    },
+    "uniqueBrowserCasesPassed": 8
+  },
+  "normalPreview": "normal-preview.json",
+  "artwork": "Existing authored PNGs/approval hashes retained; no new raster assets",
+  "recordings": false,
+  "sha256": {
+    "apps/game-client/src/pvp-art.ts": "19d0324f575c88303f6bbd25165a34fd11e771d8ce23fac6b26c425c142cfc7c",
+    "apps/game-client/src/pvp-sword-art.ts": "e117072e7cf994e46b96ce133ed4ee1d8c1da50da33636ae541107327e5c0f07",
+    "apps/game-client/src/arena-scene.ts": "f148daf7834f9239d9754e6cdfd5196759d8621e27f6f779661888f07bedd211",
+    "apps/game-client/src/practice-ui.css": "4d5225e6eddeacab2934815ea061b7ddc8443c78646676de10b150747d810ef0",
+    "apps/game-client/src/pvp-ui.css": "4163d855b78ec9db73750b0c58f89b606acfc90a4404e726043e4ca2791198ab",
+    "packages/game-data/src/pvp.ts": "44dabcbb35b5922805df1da29636fe98b26935d6d902bf077948ebbfdda13eb6",
+    "tests/e2e/practice.spec.ts": "71761162d84af4d80ed873e148ca73877d47a8ace37067bf99b5f2a8a2fc1fa1",
+    "tests/e2e/standalone-pvp.spec.ts": "4b6473d015b5935767687dcebac4662fdcfefdb76cc8ce7a9285e684a92c6b04",
+    "tests/standalone-loi-dai.test.ts": "754cfae1d9cd318dfb4d11dd54e2d72ecbb1abad1eabf7a3a99e3026bfc509ad",
+    "assets/exports/pvp/manifest.json": "eedd0a29f0eab3bbfe63ac6467e8aba796bec62dc7f91ea1a98aa2b6a43eafe0",
+    "assets/approved_pvp_concepts.lock.json": "ef2efab4bb7db7a97415afd07c006c121112c98e142f326b1f0c7b51ad80d6b0"
+  }
+}

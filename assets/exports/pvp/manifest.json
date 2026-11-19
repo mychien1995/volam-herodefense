@@ -1,0 +1,878 @@
+{
+  "version": 1,
+  "source": "approved concepts plus authored production NPC/FX cels",
+  "conceptApproval": "approved_pvp_concepts.lock.json",
+  "runtimeApproval": true,
+  "sources": {
+    "assets/source/pvp-v01/npc-cels.png": "529ebbc7ca74d11d6c09375b1b5a53a782522e2934cf259e03cc5301ce8655c6",
+    "assets/source/pvp-v01/vfx-cels.png": "b2263aa0d9c6ffdaa5268f3996a5b7e97efc27095e5fe37d5418d645d6bfae15",
+    "assets/source/pvp-v01/lava-material.png": "1177cb92311d2ea5a1059482821670d0a3c088a50a80ad17b522f16acfce5940"
+  },
+  "maps": {
+    "rung_truc": {
+      "source": "assets/concepts/loi-dai-standalone-v01/01-rung-truc.png",
+      "sourceSha256": "a5dc2d4035b4892d6f029740a3f7d27bc0e82e453e6b6b528e3603c342c72f1c",
+      "sourceCrop": [
+        0,
+        0,
+        1672,
+        940
+      ],
+      "sourceWidth": 1672,
+      "sourceHeight": 940,
+      "logicalWidth": 1280,
+      "logicalHeight": 720,
+      "layers": [
+        {
+          "id": "terrain",
+          "file": "rung_truc-terrain.png",
+          "depth": -120
+        },
+        {
+          "id": "backdrop",
+          "file": "rung_truc-backdrop.png",
+          "depth": -110
+        },
+        {
+          "id": "foreground",
+          "file": "rung_truc-foreground.png",
+          "depth": 691.1999999999999
+        }
+      ],
+      "recomposition": "pixel_exact_after_declared_crop"
+    },
+    "dia_nguc": {
+      "source": "assets/concepts/loi-dai-standalone-v01/02-dia-nguc.png",
+      "sourceSha256": "84eed405539b35ccf24d8586c2f96e1d4fb8bb5059e1ecbe8affaf27b61b022e",
+      "sourceCrop": [
+        0,
+        0,
+        1672,
+        941
+      ],
+      "sourceWidth": 1672,
+      "sourceHeight": 941,
+      "logicalWidth": 1120,
+      "logicalHeight": 630,
+      "layers": [
+        {
+          "id": "terrain",
+          "file": "dia_nguc-terrain.png",
+          "depth": -120
+        },
+        {
+          "id": "backdrop",
+          "file": "dia_nguc-backdrop.png",
+          "depth": -110
+        },
+        {
+          "id": "foreground",
+          "file": "dia_nguc-foreground.png",
+          "depth": 604.8
+        }
+      ],
+      "recomposition": "pixel_exact_after_declared_crop"
+    },
+    "tuong_duong": {
+      "source": "assets/concepts/loi-dai-standalone-v01/03-tuong-duong.png",
+      "sourceSha256": "5eb235f1c23c2c866b2d58b65ddbd34073f3f5b0d093b5282a0d265e0699752b",
+      "sourceCrop": [
+        0,
+        50,
+        1672,
+        941
+      ],
+      "sourceWidth": 1672,
+      "sourceHeight": 891,
+      "logicalWidth": 1120,
+      "logicalHeight": 630,
+      "layers": [
+        {
+          "id": "terrain",
+          "file": "tuong_duong-terrain.png",
+          "depth": -120
+        },
+        {
+          "id": "backdrop",
+          "file": "tuong_duong-backdrop.png",
+          "depth": -110
+        },
+        {
+          "id": "foreground",
+          "file": "tuong_duong-foreground.png",
+          "depth": 604.8
+        }
+      ],
+      "recomposition": "pixel_exact_after_declared_crop"
+    },
+    "kiem_ho": {
+      "source": "assets/concepts/loi-dai-standalone-v01/04-kiem-ho.png",
+      "sourceSha256": "730f8ca734376dbbdfa5de01b87aaa8853832137fff8c26dc52c6c5b96e54eb7",
+      "sourceCrop": [
+        0,
+        0,
+        1672,
+        940
+      ],
+      "sourceWidth": 1672,
+      "sourceHeight": 940,
+      "logicalWidth": 1120,
+      "logicalHeight": 630,
+      "layers": [
+        {
+          "id": "terrain",
+          "file": "kiem_ho-terrain.png",
+          "depth": -120
+        },
+        {
+          "id": "backdrop",
+          "file": "kiem_ho-backdrop.png",
+          "depth": -110
+        },
+        {
+          "id": "foreground",
+          "file": "kiem_ho-foreground.png",
+          "depth": 604.8
+        }
+      ],
+      "recomposition": "pixel_exact_after_declared_crop"
+    }
+  },
+  "hongMoc": "reuse assets/exports/loi-dai-v2 unchanged",
+  "npc": {
+    "width": 112,
+    "height": 96,
+    "pivot": [
+      56,
+      80
+    ],
+    "facing": "down",
+    "frames": [
+      {
+        "file": "doc-co-0.png",
+        "sourceBox": [
+          0,
+          0,
+          355,
+          444
+        ],
+        "contentBox": [
+          74,
+          19,
+          275,
+          395
+        ],
+        "pivot": [
+          56,
+          80
+        ]
+      },
+      {
+        "file": "doc-co-1.png",
+        "sourceBox": [
+          355,
+          0,
+          710,
+          444
+        ],
+        "contentBox": [
+          65,
+          19,
+          275,
+          393
+        ],
+        "pivot": [
+          56,
+          80
+        ]
+      },
+      {
+        "file": "doc-co-2.png",
+        "sourceBox": [
+          710,
+          0,
+          1064,
+          444
+        ],
+        "contentBox": [
+          59,
+          37,
+          354,
+          391
+        ],
+        "pivot": [
+          56,
+          80
+        ]
+      },
+      {
+        "file": "doc-co-3.png",
+        "sourceBox": [
+          1064,
+          0,
+          1419,
+          444
+        ],
+        "contentBox": [
+          0,
+          28,
+          340,
+          392
+        ],
+        "pivot": [
+          56,
+          80
+        ]
+      },
+      {
+        "file": "doc-co-4.png",
+        "sourceBox": [
+          1419,
+          0,
+          1774,
+          444
+        ],
+        "contentBox": [
+          32,
+          26,
+          297,
+          395
+        ],
+        "pivot": [
+          56,
+          80
+        ]
+      },
+      {
+        "file": "doc-co-5.png",
+        "sourceBox": [
+          0,
+          444,
+          355,
+          887
+        ],
+        "contentBox": [
+          48,
+          35,
+          295,
+          409
+        ],
+        "pivot": [
+          56,
+          80
+        ]
+      },
+      {
+        "file": "doc-co-6.png",
+        "sourceBox": [
+          355,
+          444,
+          710,
+          887
+        ],
+        "contentBox": [
+          42,
+          32,
+          299,
+          403
+        ],
+        "pivot": [
+          56,
+          80
+        ]
+      },
+      {
+        "file": "doc-co-7.png",
+        "sourceBox": [
+          710,
+          444,
+          1064,
+          887
+        ],
+        "contentBox": [
+          14,
+          31,
+          294,
+          404
+        ],
+        "pivot": [
+          56,
+          80
+        ]
+      },
+      {
+        "file": "doc-co-8.png",
+        "sourceBox": [
+          1064,
+          444,
+          1419,
+          887
+        ],
+        "contentBox": [
+          14,
+          31,
+          304,
+          403
+        ],
+        "pivot": [
+          56,
+          80
+        ]
+      },
+      {
+        "file": "doc-co-9.png",
+        "sourceBox": [
+          1419,
+          444,
+          1774,
+          887
+        ],
+        "contentBox": [
+          42,
+          32,
+          312,
+          407
+        ],
+        "pivot": [
+          56,
+          80
+        ]
+      }
+    ],
+    "clips": {
+      "idle": {
+        "frames": [
+          0,
+          1
+        ],
+        "fps": 3,
+        "repeat": -1
+      },
+      "sword": {
+        "frames": [
+          2,
+          3,
+          4
+        ],
+        "fps": 7,
+        "repeat": 0
+      },
+      "lightning": {
+        "frames": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "fps": 6,
+        "repeat": 0
+      }
+    }
+  },
+  "vfx": [
+    {
+      "id": "dart",
+      "file": "dart.png",
+      "sourceBox": [
+        0,
+        0,
+        444,
+        296
+      ],
+      "contentBox": [
+        90,
+        186,
+        323,
+        237
+      ]
+    },
+    {
+      "id": "arrow-0",
+      "file": "arrow-0.png",
+      "sourceBox": [
+        444,
+        0,
+        887,
+        296
+      ],
+      "contentBox": [
+        37,
+        109,
+        368,
+        229
+      ]
+    },
+    {
+      "id": "arrow-1",
+      "file": "arrow-1.png",
+      "sourceBox": [
+        887,
+        0,
+        1330,
+        296
+      ],
+      "contentBox": [
+        39,
+        90,
+        368,
+        228
+      ]
+    },
+    {
+      "id": "impact",
+      "file": "impact.png",
+      "sourceBox": [
+        1330,
+        0,
+        1774,
+        296
+      ],
+      "contentBox": [
+        141,
+        131,
+        303,
+        235
+      ]
+    },
+    {
+      "id": "sword-0",
+      "file": "sword-0.png",
+      "sourceBox": [
+        0,
+        296,
+        444,
+        591
+      ],
+      "contentBox": [
+        32,
+        107,
+        413,
+        219
+      ]
+    },
+    {
+      "id": "sword-1",
+      "file": "sword-1.png",
+      "sourceBox": [
+        444,
+        296,
+        887,
+        591
+      ],
+      "contentBox": [
+        24,
+        65,
+        421,
+        223
+      ]
+    },
+    {
+      "id": "sword-2",
+      "file": "sword-2.png",
+      "sourceBox": [
+        887,
+        296,
+        1330,
+        591
+      ],
+      "contentBox": [
+        26,
+        82,
+        418,
+        222
+      ]
+    },
+    {
+      "id": "sword-warning",
+      "file": "sword-warning.png",
+      "sourceBox": [
+        1330,
+        296,
+        1774,
+        591
+      ],
+      "contentBox": [
+        20,
+        76,
+        425,
+        222
+      ]
+    },
+    {
+      "id": "lightning-0",
+      "file": "lightning-0.png",
+      "sourceBox": [
+        0,
+        591,
+        444,
+        887
+      ],
+      "contentBox": [
+        199,
+        23,
+        273,
+        258
+      ]
+    },
+    {
+      "id": "lightning-1",
+      "file": "lightning-1.png",
+      "sourceBox": [
+        444,
+        591,
+        887,
+        887
+      ],
+      "contentBox": [
+        97,
+        14,
+        346,
+        259
+      ]
+    },
+    {
+      "id": "lightning-2",
+      "file": "lightning-2.png",
+      "sourceBox": [
+        887,
+        591,
+        1330,
+        887
+      ],
+      "contentBox": [
+        139,
+        41,
+        301,
+        254
+      ]
+    },
+    {
+      "id": "lightning-warning",
+      "file": "lightning-warning.png",
+      "sourceBox": [
+        1330,
+        591,
+        1774,
+        887
+      ],
+      "contentBox": [
+        42,
+        86,
+        399,
+        241
+      ]
+    }
+  ],
+  "files": [
+    {
+      "file": "rung_truc-terrain.png",
+      "sha256": "8c94ed277c925552ff56dde672ff0881c73bc490565799cb27c9ed5a532ba26c",
+      "width": 1672,
+      "height": 940,
+      "mode": "RGBA"
+    },
+    {
+      "file": "rung_truc-backdrop.png",
+      "sha256": "7f5805bb22de63fcb6837ff191803c6e11bc1cae06ec18c575ec5e803b94d5b8",
+      "width": 1672,
+      "height": 940,
+      "mode": "RGBA"
+    },
+    {
+      "file": "rung_truc-foreground.png",
+      "sha256": "14ce1cf5cb075d5785e2d0ce55d946a4f61d8be752c3af2321f3f5f5080fdc51",
+      "width": 1672,
+      "height": 940,
+      "mode": "RGBA"
+    },
+    {
+      "file": "rung_truc-thumb.png",
+      "sha256": "b3ee386b740903202fb3b3c767f0b2e4de627b5c7916e654360a1d17d4fb3479",
+      "width": 512,
+      "height": 288,
+      "mode": "RGBA"
+    },
+    {
+      "file": "rung_truc-material.png",
+      "sha256": "6a6ce2941c2c9fd6988cae7dbac6f067d69bad8c747e7b73cd85baf1faf51da8",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "file": "dia_nguc-terrain.png",
+      "sha256": "5cd8c24264224383c3a53f0e31841fce2d82ee8fb3a8dba017ab3dc4eb91427a",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGBA"
+    },
+    {
+      "file": "dia_nguc-backdrop.png",
+      "sha256": "6060f44d0dd87568a9daa9570faeccd86e1309b08e4799e772daf998ada9512b",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGBA"
+    },
+    {
+      "file": "dia_nguc-foreground.png",
+      "sha256": "78a5fbdcff28bf0548401d4bedfa1a37c2ff7648e990f5a73a8e2d65f8a85d88",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGBA"
+    },
+    {
+      "file": "dia_nguc-thumb.png",
+      "sha256": "e97d1893daa83703d61c8f7835a15936fc3493401ea6dc565c570a0cf7934d39",
+      "width": 512,
+      "height": 288,
+      "mode": "RGBA"
+    },
+    {
+      "file": "dia_nguc-material.png",
+      "sha256": "e4e638e081a05f093b2258ddf64bda8cb7e05f65ce48f11a5057576c0b2bb5b3",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "file": "lava-material.png",
+      "sha256": "57d81843afb3195a18facbfce7544c0978097dd8c4a8cc078c35d61c011153a7",
+      "width": 512,
+      "height": 512,
+      "mode": "RGBA"
+    },
+    {
+      "file": "tuong_duong-terrain.png",
+      "sha256": "38f0073a3dc64860324325732b485f09d5f816916e5b0d9ded0cb56c780bb9ba",
+      "width": 1672,
+      "height": 891,
+      "mode": "RGBA"
+    },
+    {
+      "file": "tuong_duong-backdrop.png",
+      "sha256": "2117fa4be029209e3140f8915f4f57e9ea266997f20b7d92da7e87ae88f64485",
+      "width": 1672,
+      "height": 891,
+      "mode": "RGBA"
+    },
+    {
+      "file": "tuong_duong-foreground.png",
+      "sha256": "df71addd35b334d3b02f96cf57eb3e9d8c5b3e196c62337dfbd166e882482032",
+      "width": 1672,
+      "height": 891,
+      "mode": "RGBA"
+    },
+    {
+      "file": "tuong_duong-thumb.png",
+      "sha256": "2ecd4f9a3e3618fb44c6f7ae191c5b6ca0e758e2ef937b0d3a034dee5242e985",
+      "width": 512,
+      "height": 273,
+      "mode": "RGBA"
+    },
+    {
+      "file": "tuong_duong-material.png",
+      "sha256": "e3fee778bbbeec9e2e6b4b28a73f4f6a535b0c1cac388d47a78be99f6ebce7ca",
+      "width": 192,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "file": "kiem_ho-terrain.png",
+      "sha256": "4fc16da3661dd9efa592f84f6a91fc46f0563f2aa48b267c6e9071a5a880c885",
+      "width": 1672,
+      "height": 940,
+      "mode": "RGBA"
+    },
+    {
+      "file": "kiem_ho-backdrop.png",
+      "sha256": "9016a747a673b395734ff8db69a1e30c3cc2827880b908a88f30f80a9700032a",
+      "width": 1672,
+      "height": 940,
+      "mode": "RGBA"
+    },
+    {
+      "file": "kiem_ho-foreground.png",
+      "sha256": "07f220dfe154fdecf21a5814959bf990c87a72ef08cf62f1eb8908bcd726f6dd",
+      "width": 1672,
+      "height": 940,
+      "mode": "RGBA"
+    },
+    {
+      "file": "kiem_ho-thumb.png",
+      "sha256": "fa2e5fe45e4c11c397e641f6c57d4691b9af7a19e18b1a8deb6c3fbef88cbf33",
+      "width": 512,
+      "height": 288,
+      "mode": "RGBA"
+    },
+    {
+      "file": "kiem_ho-material.png",
+      "sha256": "ca8641e2454676110dab67f4b0928729a5141c80e11e095572dcc0c9de6f2ee9",
+      "width": 96,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "file": "hong_moc-thumb.png",
+      "sha256": "4ffc639363a3e9af59f1593854aaa9ebbd6750db1fb30db44c338024583d3fd7",
+      "width": 512,
+      "height": 288,
+      "mode": "RGBA"
+    },
+    {
+      "file": "doc-co-0.png",
+      "sha256": "f03e2f4cff1024d86a24f3556197e381f2328f5239149bc9c984caddb7e6eb89",
+      "width": 112,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "file": "doc-co-1.png",
+      "sha256": "33c969caf68840dfff863678665d097b1042893b94c72c35516f92f5d71df59a",
+      "width": 112,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "file": "doc-co-2.png",
+      "sha256": "b7c8d61d03ea968dd1d872d71540348718ac8e70621987f4b2ef9e6067a11c64",
+      "width": 112,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "file": "doc-co-3.png",
+      "sha256": "dac02dc5e1973083418f0bad5e0fa20981a2628ffa44e2881fcc35744f69e837",
+      "width": 112,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "file": "doc-co-4.png",
+      "sha256": "91e0edbd03aa60510e5f4bc1cf89e93ae1651407abe5fd61c5c2a0e5d83e8499",
+      "width": 112,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "file": "doc-co-5.png",
+      "sha256": "42d42e0d5df549ec317f50315ae5ce6f0ec3780e049c928e6b37f904d30f42a5",
+      "width": 112,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "file": "doc-co-6.png",
+      "sha256": "624adebbf412a9fd4f27e71f8e2881446bd5f04f0b6c5be3b219d8f2e709781c",
+      "width": 112,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "file": "doc-co-7.png",
+      "sha256": "94e7ead071306bcaa5efcc60150a526333d4ff418da0c16d7e7f3c3d053c4d20",
+      "width": 112,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "file": "doc-co-8.png",
+      "sha256": "5735653782cea0903c6dc1f83af947dfbd6cc13926205a696ab25b7fa3a225c2",
+      "width": 112,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "file": "doc-co-9.png",
+      "sha256": "e773be51ebfa4d4a5b6149a49dc4b96065ec40c3269de58eb1046809c2931aba",
+      "width": 112,
+      "height": 96,
+      "mode": "RGBA"
+    },
+    {
+      "file": "dart.png",
+      "sha256": "55958e71853a8038f00769eed3700c1beace0d0a0cbda6b2ebb2ef86098746fa",
+      "width": 128,
+      "height": 80,
+      "mode": "RGBA"
+    },
+    {
+      "file": "arrow-0.png",
+      "sha256": "0045cd76b982a27763336544858b5eb7315cde8aced37abe2ce332a448954512",
+      "width": 128,
+      "height": 80,
+      "mode": "RGBA"
+    },
+    {
+      "file": "arrow-1.png",
+      "sha256": "dc2377655e014439e57a0b89cae2f2b724a4e9ad0147d1eecf9a38f9573177bf",
+      "width": 128,
+      "height": 80,
+      "mode": "RGBA"
+    },
+    {
+      "file": "impact.png",
+      "sha256": "b810df715ea8b1b4112f5e9cd4bf713d41a6a278083e25a57e669c43c2c0a4de",
+      "width": 128,
+      "height": 80,
+      "mode": "RGBA"
+    },
+    {
+      "file": "sword-0.png",
+      "sha256": "3ad0a5474ccb6bc7a500f41758acff507bb43d2cb3f18d237d4badfd21d41068",
+      "width": 512,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "file": "sword-1.png",
+      "sha256": "6f474a13c3f36f494127f2ad01b307be6b020bee851fb53f3bf779a6aca3b7ef",
+      "width": 512,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "file": "sword-2.png",
+      "sha256": "398cc4ddd75a5178174586b807ce07c3fccda83081bd305a5b2c9bc2ddf352b9",
+      "width": 512,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "file": "sword-warning.png",
+      "sha256": "906185b117e5cb53db62f65cf2cff3594b701903b26428be052d74e5bb48a947",
+      "width": 512,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "file": "lightning-0.png",
+      "sha256": "1824a0b81acfbc297f6cf2d44c2e2602203f9fc349d83d05a662b89589941bbb",
+      "width": 128,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "file": "lightning-1.png",
+      "sha256": "389f330fe7547e0a3830b20fa1d5ea9f21df65cd5ead36ac14b573b1a01d4dea",
+      "width": 128,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "file": "lightning-2.png",
+      "sha256": "b000e2c8321a3e9c8aba4a9ff22bee99b9d0f039387a884d17550f758f048f06",
+      "width": 128,
+      "height": 192,
+      "mode": "RGBA"
+    },
+    {
+      "file": "lightning-warning.png",
+      "sha256": "89262f38ef20e87e7b3ae5129e1af1b710dfcc1afbaaf6b23aca96fdeaab7f44",
+      "width": 128,
+      "height": 80,
+      "mode": "RGBA"
+    }
+  ],
+  "runtimeApprovalNote": "User approved all changes and milestone/m3d integration on 2026-11-19; see docs/PVP_M3D_INTEGRATION.md"
+}

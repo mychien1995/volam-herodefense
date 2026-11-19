@@ -226,7 +226,7 @@
 #pregame:has(.school-window) {
   padding: clamp(6px, 2.4vh, 20px);
 }
-#pregame .school-window {
+:is(#pregame, #pvp-ui, #practice-ui) .school-window {
   width: min(780px, 100%);
   padding: clamp(7px, 1.9vh, 16px) clamp(8px, 2.2vw, 26px);
   max-height: none;
@@ -246,7 +246,7 @@
   grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: clamp(4px, 1vh, 9px);
 }
-#pregame .school-card {
+:is(#pregame, #pvp-ui, #practice-ui) .school-card {
   grid-column: span 2;
   min-width: 0;
   padding: clamp(3px, 1.1vh, 9px) 2px;
@@ -258,17 +258,17 @@
   border: 2px solid #8f7548;
   box-shadow: none;
 }
-#pregame .school-card:nth-child(5) {
+:is(#pregame, #pvp-ui, #practice-ui) .school-card:nth-child(5) {
   grid-column: 2 / span 2;
 }
-#pregame .school-card:is(:hover, .selected) {
+:is(#pregame, #pvp-ui, #practice-ui) .school-card:is(:hover, .selected) {
   border-color: #ffe39a;
   background: linear-gradient(#445940, #243e30);
 }
-#pregame .school-card.selected {
+:is(#pregame, #pvp-ui, #practice-ui) .school-card.selected {
   box-shadow: inset 0 0 0 1px #d4a753;
 }
-#pregame .school-card:disabled {
+:is(#pregame, #pvp-ui, #practice-ui) .school-card:disabled {
   opacity: 1;
 }
 .school-card h3 {
@@ -330,7 +330,7 @@
 .school-window .pre-error:empty {
   display: none;
 }
-#pregame .school-window .pre-actions button {
+:is(#pregame, #pvp-ui, #practice-ui) .school-window .pre-actions button {
   padding: 6px 14px;
   font-size: 13px;
 }
@@ -359,7 +359,7 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 9px;
 }
-#pregame .branch-list button {
+:is(#pregame, #pvp-ui, #practice-ui) .branch-list button {
   display: grid;
   justify-items: center;
   gap: 4px;

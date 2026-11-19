@@ -2,11 +2,12 @@ import { createServer } from 'node:http';
 import { ColyseusTestServer } from '@colyseus/testing';
 import { WebSocketTransport } from '@colyseus/ws-transport';
 import { createGameServer } from '../apps/game-server/src/app.config.js';
+import { browserSocketOptions } from '../apps/game-server/src/socket-config.js';
 
 export async function startRoomTestServer(port = 0) {
   const http = createServer();
   const game = createGameServer(
-    new WebSocketTransport({ server: http, maxPayload: 2048 }),
+    new WebSocketTransport({ ...browserSocketOptions, server: http }),
   );
   let rejectBinding!: (cause: Error) => void;
   const bindingFailure = new Promise<never>((_, reject) => {

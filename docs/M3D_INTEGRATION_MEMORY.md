@@ -1,3 +1,7 @@
+## Lôi Đài độc lập và Phòng test — duyệt 2026-11-19
+
+Người dùng duyệt toàn bộ bản chơi và yêu cầu tích hợp/commit vào milestone/m3d. Protocol48, phòng8 người/Chính-Tà, năm map, Practice cấp30/full skill/đổi hero ngay trong room; camera/HUD/VFX đã sửa, nhịp Độc Cô +20%. [Phạm vi và kiểm chứng](PVP_M3D_INTEGRATION.md).
+
 ## Ngũ Độc đã duyệt
 
 Bích Cổ và Âm Linh vào trận thường của `milestone/m3d` với protocol 46. Màn chọn phái hai hàng hiển thị Bích Cổ toàn thân và mở popup nhánh có icon đánh thường. Triệu hồi do server quản lý, giữ ID và HP Thần Chết qua chuyển khu vực. Trình chọn mục tiêu bằng chuột nhận biết chủ của minion. [Kỹ năng, thông số, ảnh và kiểm chứng](NGU_DOC_PLAYTEST.md).

@@ -1,3 +1,15 @@
+## Phòng test · protocol 48
+
+Namespace `practice` dùng PracticeMatch + PracticeRoom, tối đa một người, join schema kiểm tra phái/nhánh. Tập world.practiceTargets chỉ tồn tại trong sandbox; hit thật vẫn chạy, mục tiêu không chết/thưởng. Input/stance dùng mô phỏng chuẩn, HP/mana/cooldown reset server-side; không bật flag developer toàn server. PracticeState thêm vào schema, các namespace khác mặc định tắt. Message practice-select chỉ đăng ký trong PracticeRoom, validate sequence/phái/hệ rồi PracticeMatch.switchHero thay hero sạch cùng ID/vị trí, dùng lifecycle remove để hủy hiệu ứng cũ; snapshot xác nhận đóng menu. [Cấu trúc và kiểm chứng](docs/PRACTICE_ROOM.md).
+
+## Liveness WebSocket và lời dẫn Tượng · 2026-11-19
+
+Transport dùng chung `socket-config.ts`: probe mỗi 3s, năm probe không pong trước khi ngắt socket im lặng (khoảng 15–18s). Sự kiện close/drop thực vẫn được xử lý ngay, không thêm reconnect cho Lôi Đài. Camera tính headroom lời dẫn theo `displayHeight` và đổi khoảng HUD từ pixel sang tọa độ thế giới. [Nguyên nhân, hồi quy và bằng chứng](docs/PVP_DEFENSE_REGRESSION_REPAIR.md).
+
+## Lôi Đài độc lập · protocol 47
+
+Namespace Colyseus `loi_dai` dùng `StandaloneLoiDaiRoom` và mô phỏng `StandaloneLoiDai` độc lập framework. Tái sử dụng combat/projection hiện tại, thêm team đối thủ/đồng đội; không chạy Defense director. Protocol thêm PvP schema, sequence và snapshot theo phòng; server quyết định toàn bộ state, hazard RNG và vòng đời. UI/Phaser hiển thị trong viewport, asset pack tải khi vào PvP. [Chi tiết và kiểm chứng](docs/LOI_DAI_STANDALONE_IMPLEMENTATION.md).
+
 ## Ngũ Độc trong trận M3D
 
 `game-core` giữ minion theo người triệu hồi và xử lý AI, sát thương, trang bị và chuyển vùng. `DungeonMatch` đặt lại vị trí của Thần Chết ở vùng đích bằng cùng thực thể và giữ lượng máu. Protocol 46 thêm `CreepState.ownerId` cho minion, giữ ID qua các vùng và dùng bộ lọc instance hiện có. Phaser đọc trạng thái để vẽ chuyển động, thanh máu và hiệu ứng theo tick. [Dữ liệu và kiểm chứng](docs/NGU_DOC_PLAYTEST.md).

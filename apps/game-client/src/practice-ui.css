@@ -1,0 +1,138 @@
+#practice-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 1020;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(8px, 2vw, 28px);
+  color: #f9e3af;
+  font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+  background:
+    linear-gradient(#09232155, #10201b99),
+    url('/assets/pregame/background.png') center/cover;
+}
+#practice-ui[hidden] {
+  display: none;
+}
+#practice-ui button,
+#practice-change {
+  background: linear-gradient(#276344, #12472f);
+  border: 3px solid #ac8e5c;
+  box-shadow:
+    inset 0 0 0 2px #092e26,
+    0 2px 0 #1c110d;
+  color: #ffe5ad;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+#practice-ui .practice-entry {
+  width: min(720px, 100%);
+}
+#practice-ui #practice-name-form {
+  display: grid;
+  grid-template-columns: max-content minmax(140px, 1fr) max-content;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  text-align: left;
+}
+#practice-name-form label {
+  margin: 0;
+  white-space: nowrap;
+}
+#practice-name-form button {
+  white-space: nowrap;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+#practice-ui #practice-nickname {
+  min-width: 0;
+  height: 44px;
+  padding: 8px 10px;
+  font-size: 18px;
+}
+@media (max-width: 580px) {
+  #practice-ui #practice-name-form {
+    grid-template-columns: max-content minmax(0, 1fr);
+  }
+  #practice-name-form button {
+    grid-column: 1 / -1;
+  }
+}
+#practice-ui input {
+  background: #241a18;
+  border: 2px solid #ad8b58;
+  color: #ffe8ba;
+}
+#practice-ui .pre-title {
+  font-size: clamp(20px, 3vh, 28px);
+}
+#practice-ui .school-window {
+  width: min(780px, 100%);
+  max-height: 100%;
+  overflow: auto;
+}
+#practice-ui .branch-dialog button {
+  font-size: 13px;
+  padding: 8px 12px;
+}
+#practice-banner {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 44%;
+  padding: 7px 12px;
+  text-align: center;
+  pointer-events: none;
+}
+#practice-ui[data-in-game='true'] {
+  background: #07120caa;
+}
+#practice-change {
+  pointer-events: auto;
+  margin-top: 5px;
+  padding: 5px 12px;
+  font-size: 12px;
+  cursor: pointer;
+}
+#practice-banner strong {
+  display: block;
+  font-size: 15px;
+  color: #ffe7a9;
+}
+#practice-banner span {
+  display: block;
+  font-size: 11px;
+  line-height: 1.4;
+}
+#viewport[data-practice='true']
+  :is(
+    .bag-cluster,
+    .meter.xp,
+    .rank-up,
+    .skill-points,
+    .loadout-toggle,
+    #fixed-skill-points,
+    #slot-z,
+    [data-menu='dungeons'],
+    [data-menu='merchant'],
+    [data-menu='pvp'],
+    #zone-status,
+    #boss-help-button,
+    #dungeon-exit-hint,
+    #loi-dai-hint
+  ) {
+  display: none !important;
+}
+@media (max-width: 900px) {
+  #practice-banner {
+    top: 105px;
+    max-width: 85%;
+  }
+  #practice-ui .pre-title {
+    margin-bottom: 12px;
+  }
+}

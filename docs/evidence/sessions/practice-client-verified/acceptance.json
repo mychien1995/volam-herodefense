@@ -1,0 +1,109 @@
+{
+  "status": "PASS",
+  "scope": "Full static/unit/integration/assets checks plus successful browser stage retries on rebuilt client; original failed full run preserved",
+  "branch": "wip/m3d/pvp",
+  "protocolVersion": 48,
+  "fullPipeline": {
+    "report": "../practice-final/check-workflow/final-timings.json",
+    "status": "FAIL",
+    "unitIntegration": {
+      "files": 109,
+      "tests": 1148,
+      "status": "PASS"
+    },
+    "workflowTests": {
+      "tests": 18,
+      "status": "PASS"
+    },
+    "browser": {
+      "passed": 5,
+      "failed": 1,
+      "failure": "Defense helper confirmation before scene ready; no combat reached"
+    }
+  },
+  "repair": {
+    "change": "Test helper waits for scene readiness before confirming school; diagnostics expanded",
+    "browserRetry": {
+      "session": "practice-defense-verified",
+      "passed": 2
+    },
+    "finalFrontend": {
+      "report": "check-workflow/browser-timings.json",
+      "status": "PASS",
+      "passed": 3,
+      "scope": [
+        "Defense two clients combat/progression",
+        "Ranged trajectory",
+        "Private practice"
+      ]
+    },
+    "uniqueBrowserCasesPassed": 6
+  },
+  "practice": {
+    "branchesChecked": 14,
+    "focusedTests": 10,
+    "rooms": [
+      "N9OkwEQCY",
+      "-PV-xJ1x3"
+    ],
+    "castTicks": [
+      1581,
+      1603
+    ],
+    "hero": {
+      "level": 30,
+      "hp": 392,
+      "maxHp": 392,
+      "mana": 158,
+      "maxMana": 158,
+      "cooldowns": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "dogs": [
+      {
+        "id": "practice_dog_1",
+        "hp": 10000,
+        "maxHp": 10000
+      },
+      {
+        "id": "practice_dog_2",
+        "hp": 10000,
+        "maxHp": 10000
+      },
+      {
+        "id": "practice_dog_3",
+        "hp": 10000,
+        "maxHp": 10000
+      }
+    ],
+    "consoleErrors": []
+  },
+  "preview": "normal-preview.json",
+  "artwork": "Existing approved Rung Truc and current wild dog; no new raster artwork",
+  "recordings": false,
+  "sha256": {
+    "packages/game-core/src/practice.ts": "03842f17a6c4a4370011b0f70ed26d4559a6f772ed8d1725bcc5098940b7948b",
+    "packages/game-core/src/combat.ts": "217e4a6aac21c013ee766a3ee9053448a6f514771320be7cf94a3968569fb8ba",
+    "packages/game-core/src/types.ts": "efdd69bcb6aca1c1c8127151a007a46a530079bd622a9196c767d81e13c8523b",
+    "packages/game-data/src/practice.ts": "dc474ccf750e2da0c377ff1a81985e9dd90dbc201f7a107b606f326291df9d4c",
+    "packages/game-protocol/src/index.ts": "37bbbaec632affb2febc85aa861cd74c826660f9b9be4cbc0916ec486adb752d",
+    "apps/game-server/src/rooms/PracticeRoom.ts": "8270ae7d251203bbe3eb944d786546ff7494a987b888be4bbf53c10f6c04dbc3",
+    "apps/game-server/src/rooms/MatchRoom.ts": "2c5dcc59ddc4087136411b22b4b972651464d01ae36626bf9cb409d07bd594c0",
+    "apps/game-server/src/app.config.ts": "4ab864a67d723d9d5d8527ec39a9212be45f874a1a38632fac44998b12f248b9",
+    "apps/game-client/src/practice-ui.ts": "f5cad8f9c15fd8ab24a5b9cb8c4970ebb87e72197942c403f8b11307d78cf7d1",
+    "apps/game-client/src/practice-ui.css": "f9f7c51031ea7ea885c92c01ffa34946dabd3b2bc40833df2b9b49737bd284ec",
+    "apps/game-client/src/main.ts": "4841ff6f7027870a545889e5ad18537d0d5bf1b425a6eaf419246672b2a78f9d",
+    "apps/game-client/src/arena-scene.ts": "b126f743850b7ccd478c2155c0374ebe48c5d780103800a6df4e8835387fb6d3",
+    "apps/game-client/src/ui.ts": "85ab853e5afaefc6a8cfa6b9acf61b3002193d3d7752eb799d7ff0262c17ccab",
+    "tests/practice.test.ts": "6ffacc02b7264e16235c0e00c1b27ebaea3e165e52db52452c50703a400966cc",
+    "tests/practice-room.test.ts": "182056978e3ebd2f0204916607b9813822ef277777735dee50ea6bbbbb1d9fb2",
+    "tests/e2e/practice.spec.ts": "30a84f2cc8176efbe1e7ba2b1edcdc16c7e17713c39f8fa15513ccc67fcc0b58",
+    "tests/e2e/pregame-helper.ts": "e346dd535326039034d85fd0f240b502774e721dd765edf20dbfdd38ae742739",
+    "playwright.practice.config.ts": "51c7e9915d2eaffebb70a33b4f9b5d28b81a1a4dbf8c692382d11669fc8b70c2"
+  }
+}

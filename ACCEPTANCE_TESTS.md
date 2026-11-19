@@ -1,3 +1,23 @@
+## Camera, form và NPC Lôi Đài · 2026-11-19
+
+Form672×419: label/nút không bẻ chữ, input44px, cùng hàng. Camera Phòng test và cả5map không thu hero nhỏ hơn native Defense, worldView trong map ở1280×720 và1872×800; theo hero và giữ pan khi xem. Không lộ apron hoặc đường ghép vuông ở Địa Ngục. Utility ≤73px mỗi nút. Chém dùng đủ3cel, scaleX=scaleY≤1 và có chuyển động; warning đúng nửa sân. Tần suất NPC tăng20%, warning/damage giữ nguyên. Phòng8 người/two-browser, đầy đủ luồng Practice và hồi quy Defense. [Kết quả](docs/PVP_VISUAL_REPAIR.md).
+
+## Phòng test · 2026-11-19
+
+Nhập tên/chọn đúng phái-hệ, room riêng một người, Rừng Trúc không hazard, ba Chó Hoang dùng sprite hiện hành và không tự đi/đánh. Cả 14 nhánh cấp30/max5slot; hero/target bất tử, không thưởng, cast lặp không chờ mana/CD, giữ cadence/CC, F đổi thế. Hai client kiểm tra cách ly room và input thật. Đổi phái/hệ từ nút trong room phải giữ room/session/tên/vị trí/map/ba mục tiêu, max build mới và dọn chiêu/triệu hồi cũ. Hủy/Escape không đổi hero; menu khóa phím và chờ server xác nhận. Thử đổi cùng phái/khác phái, đủ14 nhánh ở core, chiêu mới và F sau đổi. Defense/PvP không nhận đặc quyền sandbox; protocol48 và toàn bộ smoke liên quan phải qua. [Kết quả](docs/PRACTICE_ROOM.md).
+
+## Menu Lôi Đài · 2026-11-19
+
+Mở nút chọn phái: đủ 7 thẻ, 2 hệ mỗi popup, hủy/Escape không ready; Xác nhận phải nhận đúng branch từ server. Kiểm tra vừa 850×480, menu theo style Defense, checkbox 18px/nhãn sát/mô tả theo map. Thắng hiệp từ combat thật và thắng ván khi khách rời phải hiển thị tiếng Việt với font Segoe UI, node chữ ổn định giữa tick. [Kết quả](docs/PVP_MENU_REWORK.md).
+
+## Hồi quy camera và liveness · 2026-11-19
+
+Lời dẫn phải đọc được dưới HUD ở zoom gameplay và màn hình nhỏ; smoke Defense gốc giữ các assertion combat/progression. Phòng tám người phải giữ cùng session qua pong trễ 9,5s và 30 chu kỳ thay ghế/map; socket im lặng kéo dài và đóng thực vẫn xử lý theo luật. [Báo cáo kiểm chứng](docs/PVP_DEFENSE_REGRESSION_REPAIR.md).
+
+## Lôi Đài độc lập · 2026-11-19
+
+Kiểm tra menu/link namespace riêng, room 8 người/4 mỗi phe, host authority, ready theo phái/hệ, lệch quân số, khóa roster; cấp30/max năm kỹ năng/không đồ/bình; countdown khóa server, hiệp180s/hòa đánh lại/thắng3; chết quan chiến, rời/mất kết nối xử thua toàn ván và host đóng phòng; năm map/hazards/environment/history30. Hai client Phaser kiểm tra input thật/replication, sáu peer SDK bổ sung đủ tám người; kiểm tra PNG, frame NPC/VFX, viewport và console. [Bộ test và kết quả thực tế](docs/LOI_DAI_STANDALONE_IMPLEMENTATION.md).
+
 ## Ngũ Độc · Bản chơi thử M3D
 
 - Màn chọn phái có 4 thẻ trên, 3 thẻ dưới và popup hai nhánh có thể đóng bằng Escape. Đủ thẻ và nút ở 1280 × 720, 850 × 480 và 390 × 640.

@@ -57,6 +57,7 @@ export async function startTogether(
       .toBeGreaterThanOrEqual(pages.length);
   }
   if (!alreadyStarted) {
+    await pages[0]!.bringToFront();
     // Roster patches can replace the host button during pointer-down/click.
     // Retry only while the server still acknowledges WAITING_LOBBY.
     const phase = () =>
@@ -107,20 +108,58 @@ export async function startTogether(
         });
       }).toPass({ timeout, intervals: [100, 250] });
     }
+    // The client starts its Phaser scene on join. Confirmation depends on
+    // that scene's boot assets; a visible branch popup alone is not readiness.
+    await expect(page.locator('#scene-status')).toHaveAttribute(
+      'data-ready',
+      'true',
+      { timeout: 45000 },
+    );
     // A roster patch can replace the button between pointer-down and click.
     // Retry the UI action only while the server has not acknowledged this peer.
-    await expect(async () => {
-      const confirmed = () =>
-        page.evaluate(() => {
-          const s = (window as any).__VOLAM__.snapshot();
-          return s.state.players[s.sessionId]?.confirmed === true;
-        });
-      if (await confirmed()) return;
-      await page
-        .getByRole('button', { name: 'Xác nhận', exact: true })
-        .click({ timeout: 1000 });
-      await expect.poll(confirmed, { timeout: 1000 }).toBe(true);
-    }).toPass({ timeout, intervals: [100, 250] });
+    try {
+      // Same acknowledged DOM action used by startAuditTogether. Art loading
+      // may rename/disable the button after the initial confirm request.
+      await waitForQa(
+        () =>
+          page.evaluate(() => {
+            const s = (window as any).__VOLAM__.snapshot();
+            if (s.state.players[s.sessionId]?.confirmed) return true;
+            const button = document.querySelector<HTMLButtonElement>(
+              '#pregame [data-action="confirm"]',
+            );
+            if (button && !button.disabled) button.click();
+            return false;
+          }),
+        'lobby confirm',
+        { timeout, interval: 300 },
+      );
+    } catch (error) {
+      const diagnostic = await page.evaluate(() => {
+        const s = (window as any).__VOLAM__.snapshot();
+        return {
+          sessionId: s.sessionId,
+          phase: s.state.phase,
+          self: s.state.players[s.sessionId],
+          title: document.querySelector('#pregame .pre-title')?.textContent,
+          sceneStatus: document.querySelector('#scene-status')?.outerHTML,
+          notice: document.querySelector('#pregame .pre-error')?.textContent,
+          scene: (window as any).__VOLAM__.presentation()?.sceneSnapshot,
+          hidden: document.querySelector<HTMLElement>('#pregame')?.hidden,
+          buttons: Array.from(
+            document.querySelectorAll<HTMLButtonElement>('#pregame button'),
+          ).map((b) => ({
+            action: b.dataset['action'],
+            text: b.textContent,
+            disabled: b.disabled,
+          })),
+        };
+      });
+      throw new Error(
+        'Lobby confirm diagnostic: ' + JSON.stringify(diagnostic),
+        { cause: error },
+      );
+    }
   }
   for (const page of pages) {
     await page.bringToFront();
