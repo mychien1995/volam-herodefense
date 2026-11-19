@@ -7,11 +7,7 @@ const session = JSON.parse(
   readFileSync('.cache/presentation-hero-play-session.json'),
 );
 const basic = process.env.VOLAM_HERO_REVIEW_BASIC ?? 'cai_bang_bong';
-const school = basic.startsWith('vo_dang')
-  ? 'vo_dang'
-  : basic.startsWith('thien_son')
-    ? 'thien_son'
-    : 'cai_bang';
+const school = basic.split('_').slice(0, 2).join('_');
 const texture =
   basic === 'cai_bang_chuong'
     ? 'cai-bang-chuong-unified'
@@ -40,19 +36,7 @@ const snapshot = () => page.evaluate(() => window.__VOLAM__?.snapshot());
 try {
   await page.goto(session.url);
   await page.locator('[data-action=play]').click();
-  await page
-    .locator('#pre-nickname')
-    .fill(
-      basic === 'vo_dang_quyen'
-        ? 'Vo Dang Quyen'
-        : basic === 'vo_dang_kiem'
-          ? 'Vo Dang Kiem'
-          : basic.startsWith('thien_son')
-            ? basic.endsWith('phien')
-              ? 'Thien Son Phien'
-              : 'Thien Son Dao'
-            : 'Bong Sprite Dong Nhat',
-    );
+  await page.locator('#pre-nickname').fill(basic.replaceAll('_', ' '));
   await page.getByRole('button', { name: 'Vào game', exact: true }).click();
   await page.getByRole('button', { name: 'Tạo phòng', exact: true }).click();
   await wait(async () => (await snapshot())?.roomId, 'room join');

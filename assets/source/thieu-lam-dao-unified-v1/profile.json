@@ -1,0 +1,155 @@
+{
+  "basic": "thieu_lam_dao",
+  "texture": "hero-unified:thieu_lam_dao",
+  "folder": "thieu-lam-dao-unified-v1",
+  "sourceRows": 6,
+  "sourceColumns": 4,
+  "canvas": [
+    384,
+    320
+  ],
+  "foot": [
+    192,
+    248
+  ],
+  "bodyHeight": 89,
+  "scale": 0.5,
+  "bodyWidth": 58,
+  "rootMode": "bald",
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "sweep",
+    "overhead",
+    "recover",
+    "charge",
+    "palm",
+    "guard",
+    "channel",
+    "roar",
+    "buddha",
+    "blade_raise",
+    "release",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "references": [
+    "assets/source/skills/thieu-lam/dao-preview-v01/body.png"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "sweep",
+        "overhead",
+        "recover",
+        "charge",
+        "palm",
+        "guard",
+        "channel",
+        "roar",
+        "buddha",
+        "blade_raise",
+        "release"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "registrationPolicy": "One fixed physical density per group; boots anchored. Long weapon extent never changes body scale. Bald head skin silhouette is measured separately from brows, pole blade and prayer beads.",
+  "sourceComponentLinks": {
+    "down": [
+      [
+        311,
+        1126,
+        350,
+        1177
+      ]
+    ],
+    "right": [
+      [
+        304,
+        1125,
+        400,
+        1178
+      ]
+    ],
+    "up_left": [
+      [
+        413,
+        895,
+        475,
+        946
+      ]
+    ],
+    "left": [
+      [
+        319,
+        1126,
+        367,
+        1178
+      ]
+    ]
+  },
+  "celGroupOverrides": [
+    {
+      "direction": "left",
+      "path": "raw/repairs/actions-left.png",
+      "rows": 3,
+      "columns": 4,
+      "start": 8
+    },
+    {
+      "direction": "down_left",
+      "path": "raw/repairs/actions-down_left.png",
+      "rows": 3,
+      "columns": 4,
+      "start": 8
+    }
+  ]
+}

@@ -1,7 +1,12 @@
+import { nguDocUnifiedSample } from './ngu-doc-unified-policy.js';
+import { duongMonUnifiedSample } from './duong-mon-unified-policy.js';
+import { conLuanUnifiedSample } from './con-luan-unified-policy.js';
+import { shaolinUnifiedSample } from './shaolin-unified-policy.js';
 import { thienSonUnifiedSample } from './thien-son-unified-policy.js';
 import { voDangUnifiedSample } from './vo-dang-unified-policy.js';
 import type { HeroActionClock } from './hero-finish-policy.js';
 export interface UnifiedHeroClock extends HeroActionClock {
+  statuses?: readonly string[] | undefined;
   phase?: string | undefined;
   actorPose?: string | undefined;
   weaponAway?: boolean | undefined;
@@ -12,6 +17,7 @@ export interface UnifiedBodySample {
   pose: string;
   turns: number;
   cardinal?: boolean;
+  bodyWidthScale?: number;
 }
 /** Body-only sampling. Server commands, motion, damage and VFX stay in their existing owners. */
 export function unifiedBodySample(
@@ -21,6 +27,14 @@ export function unifiedBodySample(
   now: number,
   clock?: UnifiedHeroClock,
 ): UnifiedBodySample | undefined {
+  const nguDoc = nguDocUnifiedSample(basic, pose, elapsed, now, clock);
+  if (nguDoc) return nguDoc;
+  const duongMon = duongMonUnifiedSample(basic, pose, elapsed, now, clock);
+  if (duongMon) return duongMon;
+  const conLuan = conLuanUnifiedSample(basic, pose, elapsed, now, clock);
+  if (conLuan) return conLuan;
+  const shaolin = shaolinUnifiedSample(basic, pose, elapsed, now, clock);
+  if (shaolin) return shaolin;
   const thienSon = thienSonUnifiedSample(basic, pose, elapsed, now, clock);
   if (thienSon) return thienSon;
   const voDang = voDangUnifiedSample(basic, pose, elapsed, now, clock);

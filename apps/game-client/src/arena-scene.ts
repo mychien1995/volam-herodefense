@@ -1339,6 +1339,8 @@ export class ArenaScene extends Phaser.Scene {
             progress: cast?.progress,
           },
         );
+      if (!enemy)
+        this.nguDocArt?.canonicalHands(id, view.sprite, actor, states, tick);
       if (cast)
         this.vfx?.observeCharacter(
           texture,

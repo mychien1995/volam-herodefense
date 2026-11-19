@@ -1,3 +1,11 @@
+import ndt from '../../../assets/exports/ngu-doc-ta-hiep-unified-v1/manifest.json';
+import ndc from '../../../assets/exports/ngu-doc-co-su-unified-v1/manifest.json';
+import dmc from '../../../assets/exports/duong-mon-co-quan-unified-v1/manifest.json';
+import dma from '../../../assets/exports/duong-mon-am-khi-unified-v1/manifest.json';
+import clm from '../../../assets/exports/con-luan-thien-su-unified-v1/manifest.json';
+import cls from '../../../assets/exports/con-luan-kiem-ton-unified-v1/manifest.json';
+import slq from '../../../assets/exports/thieu-lam-quyen-unified-v1/manifest.json';
+import sld from '../../../assets/exports/thieu-lam-dao-unified-v1/manifest.json';
 import phien from '../../../assets/exports/thien-son-phien-unified-v1/manifest.json';
 import dao from '../../../assets/exports/thien-son-dao-unified-v1/manifest.json';
 import Phaser from 'phaser';
@@ -9,8 +17,25 @@ import {
   unifiedBodySample,
   type UnifiedHeroClock,
 } from './unified-hero-policy.js';
+const actorIds: Record<string, string> = {
+  cai_bang_bong: 'hero_cai_bang',
+  vo_dang_quyen: 'hero_vo_dang',
+  vo_dang_kiem: 'hero_vo_dang_kiem',
+  thien_son_phien: 'hero_thien_son',
+  thien_son_dao: 'hero_thien_son_dao',
+  thieu_lam_quyen: 'hero_thieu_lam',
+  thieu_lam_dao: 'hero_thieu_lam_dao',
+  con_luan_thien_su: 'hero_con_luan_thien_su',
+  con_luan_kiem_ton: 'hero_con_luan_kiem_ton',
+  duong_mon_co_quan: 'duong-mon-tuan-sa-walk',
+  duong_mon_am_khi: 'duong-mon-da-hanh-walk',
+  ngu_doc_ta_hiep: 'ngu-doc-bich-co',
+  ngu_doc_co_su: 'ngu-doc-am-linh',
+};
 const profiles = new Map(
-  [bong, quyen, kiem, phien, dao].map((p) => [p.basic, p]),
+  [bong, quyen, kiem, phien, dao, slq, sld, clm, cls, dmc, dma, ndt, ndc].map(
+    (p) => [p.basic, p],
+  ),
 );
 export const unifiedHeroBasics: ReadonlySet<string> = new Set(
   [...profiles.values()]
@@ -100,18 +125,12 @@ export function presentUnifiedHero(
   sprite
     .setData('hero-motion-active', true)
     .setData('hero-motion-direction', facing)
-    .setData('hero-motion-body-width', p.bodyWidth);
+    .setData(
+      'hero-motion-body-width',
+      p.bodyWidth * (sample.bodyWidthScale ?? 1),
+    );
   sprite.setData('renovation', {
-    id:
-      basic === 'vo_dang_quyen'
-        ? 'hero_vo_dang'
-        : basic === 'vo_dang_kiem'
-          ? 'hero_vo_dang_kiem'
-          : basic === 'thien_son_phien'
-            ? 'hero_thien_son'
-            : basic === 'thien_son_dao'
-              ? 'hero_thien_son_dao'
-              : 'hero_cai_bang',
+    id: actorIds[basic!] ?? 'hero_cai_bang',
     pose,
     direction: facing,
     locomotion: pose === 'idle' || pose === 'walk',

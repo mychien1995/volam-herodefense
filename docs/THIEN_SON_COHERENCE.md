@@ -41,3 +41,5 @@ PNG [Phiến trước–sau](evidence/sessions/hero-coherence-batch3-delivery/ph
 [http://127.0.0.1:5603/?debug=1](http://127.0.0.1:5603/?debug=1), room `00bQVpdpO` lúc bàn giao. Thiên Sơn Phiến30, QWERT rank4, F8 ON/OFF đã kiểm tra, không lỗi client. Review server cũng cấp30/rank4 khi chọn Thiên Sơn Đao qua lobby và tạo phòng mới; A/QWERT/S, mana và cooldown vẫn bình thường. Fixture chỉ trong `tools/presentation-hero-play.mjs`, không đổi Room production. Backend3002 dùng đúng production bundle của QA; không đóng/điều khiển các phòng Cái Bang/Võ Đang cũ. [PNG có HUD](evidence/sessions/hero-coherence-batch3-delivery/room-ready.png).
 
 Phòng đầu đã hết trận khi lưu evidence; launcher mở phòng mới qua lobby thật với profile riêng trước bàn giao. Chỉ sửa tool chọn browser profile, không đổi trận production hoặc chạy lại suite chỉ vì ảnh/report.
+
+Director approval 2026-11-19: user đã duyệt Thiên Sơn và cho phép hoàn thiện tất cả hệ phái còn lại mà không chờ duyệt từng đợt. Hai bộ Thiên Sơn được khóa sáu file/bộ trong assets/approvals/hero-coherence; các mốc dừng trong báo cáo trên là lịch sử.

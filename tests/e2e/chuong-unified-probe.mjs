@@ -66,13 +66,17 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
     clients: pages.length,
     basic: BASIC,
     partial: !!profile.partial,
-    scope: ['extras', 'weapon'].includes(process.env.VOLAM_CHUONG_STAGE)
-      ? 'authored choreography / swordless lifecycle only'
-      : process.env.VOLAM_CHUONG_STAGE === 'party'
-        ? 'party, F8, portrait only'
-        : process.env.VOLAM_CHUONG_STAGE === 'reactions'
-          ? 'reactions, natural arena respawn, F8, party'
-          : 'all',
+    scope: ['locomotion', 'idle-after-T'].includes(
+      process.env.VOLAM_CHUONG_STAGE,
+    )
+      ? 'diagnostic ' + process.env.VOLAM_CHUONG_STAGE
+      : ['extras', 'weapon'].includes(process.env.VOLAM_CHUONG_STAGE)
+        ? 'authored choreography / swordless lifecycle only'
+        : process.env.VOLAM_CHUONG_STAGE === 'party'
+          ? 'party, F8, portrait only'
+          : process.env.VOLAM_CHUONG_STAGE === 'reactions'
+            ? 'reactions, natural arena respawn, F8, party'
+            : 'all',
     idle: [],
     walk: [],
     actions: [],
@@ -107,7 +111,8 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
       h.cooldown = 0;
       h.hurtUntil = 0;
       h.abilityCooldowns = {};
-      if (profile.voDangChoreography) h.chargeCooldowns = {};
+      if (profile.voDangChoreography || profile.resetChargeCooldowns)
+        h.chargeCooldowns = {};
       h.skillCooldowns = [0, 0, 0, 0, 0];
       h.mana = h.maxMana;
       h.hp = h.maxHp;
@@ -160,9 +165,14 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
           ),
       );
     }, 'coherent body and server placement');
-  const observe = async (ms, input = async () => {}, captureLabels = []) => {
+  const observe = async (
+    ms,
+    input = async () => {},
+    captureLabels = [],
+    minSceneMs = 0,
+  ) => {
     await page.evaluate(
-      ({ ids, captureLabels, baseline }) => {
+      ({ ids, captureLabels, baseline, minSceneMs, durationMs }) => {
         const api = window.__VOLAM__;
         window.__chuongDeadline = Infinity;
         window.__chuongCapture = new Promise((resolve) => {
@@ -170,9 +180,12 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
             events = new Map(),
             pngs = {},
             ticks = [];
+          let firstSceneAt, firstWallAt;
           const sample = (renderer) => {
             const snap = api.snapshot(),
               scene = renderer.game.scene.getScene('Arena');
+            firstSceneAt ??= scene.time.now;
+            firstWallAt ??= performance.now();
             ticks.push(performance.now());
             for (const e of snap.events) events.set(e.id, e);
             for (const id of ids) {
@@ -198,6 +211,7 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
                 pose: h.pose,
                 ability: h.castAbilityId,
                 tick: snap.state.tick,
+                sceneNow: scene.time.now,
               });
               if (baseline && id === ids[0]) {
                 const name =
@@ -218,20 +232,34 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
                     pngs[label] = renderer.game.canvas.toDataURL('image/png');
                 }
             }
-            if (performance.now() >= window.__chuongDeadline)
-              resolve({ frames, events: [...events.values()], pngs, ticks });
+            if (
+              (performance.now() >= window.__chuongDeadline &&
+                scene.time.now - firstSceneAt >= minSceneMs) ||
+              performance.now() - firstWallAt > durationMs + 10000
+            )
+              resolve({
+                frames,
+                events: [...events.values()],
+                pngs,
+                ticks,
+                sceneElapsedMs: scene.time.now - firstSceneAt,
+              });
             else api.afterRender(sample);
           };
           api.afterRender(sample);
         });
       },
-      { ids, captureLabels, baseline },
+      { ids, captureLabels, baseline, minSceneMs, durationMs: ms },
     );
     await input();
     await page.evaluate((ms) => {
       window.__chuongDeadline = performance.now() + ms;
     }, ms);
     const capture = await page.evaluate(() => window.__chuongCapture);
+    assert.ok(
+      capture.sceneElapsedMs >= minSceneMs,
+      'observed a complete render-clock cycle',
+    );
     for (const [label, png] of Object.entries(capture.pngs))
       writeFileSync(
         resolve(out, label + '.png'),
@@ -249,7 +277,8 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
           continue;
         } // incomplete facings exist only in the one-direction production gate
         assert.equal(f.texture, KEY, label + ' source');
-        assert.deepEqual(f.scale, [0.5, 0.5], label + ' scale');
+        const scale = profile.expectedScale?.(f) ?? 0.5;
+        assert.deepEqual(f.scale, [scale, scale], label + ' scale');
         assert.deepEqual(f.origin, pivot, label + ' pivot');
       }
     }
@@ -375,9 +404,19 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
           : d[0] === 'right'
             ? [{ name: 'idle-right', prefix: 'idle_' }]
             : [],
+        2800,
       );
       coherent(idle, 'idle ' + d[0]);
       const fs = [...new Set(idle.frames[ids[0]].map((f) => f.frame))];
+      if (![0, 1, 2, 3].every((i) => fs.includes(`idle_${i}_${d[0]}`))) {
+        report.idleFailure = {
+          direction: d[0],
+          names: fs,
+          frames: idle.frames[ids[0]],
+          ticks: idle.ticks,
+        };
+        save();
+      }
       for (let i = 0; i < 4; i++)
         assert.ok(
           fs.includes(`idle_${i}_${d[0]}`),
@@ -385,7 +424,14 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
         );
       for (const f of idle.frames[ids[0]])
         assert.equal(f.alpha, 1, 'idle never fades');
-      report.idle.push({ direction: d[0], frames: fs, alpha: 1 });
+      report.idle.push({
+        direction: d[0],
+        frames: fs,
+        alpha: 1,
+        renderElapsedMs:
+          idle.frames[ids[0]].at(-1).sceneNow - idle.frames[ids[0]][0].sceneNow,
+        wallElapsedMs: idle.ticks.at(-1) - idle.ticks[0],
+      });
       const start = heroes[0].x + heroes[0].y;
       const walk = await observe(480, async () => {
         await page.locator('#game canvas').focus();
@@ -407,7 +453,11 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
       }, 'peer walk synchronization');
       report.walk.push({ direction: d[0], frames: gait });
       save();
-      for (const key of profile.keys ??
+      for (const key of (process.env.VOLAM_CHUONG_STAGE === 'locomotion'
+        ? []
+        : process.env.VOLAM_CHUONG_STAGE === 'idle-after-T'
+          ? ['KeyT']
+          : profile.keys) ??
         (profile.partial
           ? ['KeyA']
           : ['KeyA', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT'])) {
@@ -416,6 +466,10 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
           target(h, d, 'coherent_target_' + i),
         );
         await settle();
+        if (profile.prepareKey) {
+          await profile.prepareKey({ key, keys, wait, heroes, w });
+          await settle();
+        }
         const before = (await read()).events.at(-1)?.id ?? 0,
           slot = ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT'].indexOf(key),
           ability = slot < 0 ? BASIC : heroes[0].skillIds[slot];
@@ -578,9 +632,13 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
           sim.events.push({ zoneId: 'arena', event });
       };
     };
-    for (const d of ['party', 'extras', 'weapon'].includes(
-      process.env.VOLAM_CHUONG_STAGE,
-    ) || profile.partial
+    for (const d of [
+      'party',
+      'extras',
+      'weapon',
+      'locomotion',
+      'idle-after-T',
+    ].includes(process.env.VOLAM_CHUONG_STAGE) || profile.partial
       ? []
       : testingDirs) {
       reset(d);

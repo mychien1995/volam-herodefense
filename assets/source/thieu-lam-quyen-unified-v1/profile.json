@@ -1,0 +1,138 @@
+{
+  "basic": "thieu_lam_quyen",
+  "texture": "hero-unified:thieu_lam_quyen",
+  "folder": "thieu-lam-quyen-unified-v1",
+  "sourceRows": 8,
+  "sourceColumns": 4,
+  "canvas": [
+    320,
+    288
+  ],
+  "foot": [
+    160,
+    224
+  ],
+  "bodyHeight": 89,
+  "scale": 0.5,
+  "bodyWidth": 58,
+  "rootMode": "bald",
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "left_fist",
+    "right_fist",
+    "front_kick",
+    "roundhouse",
+    "recover",
+    "la_han",
+    "ground_punch",
+    "palm_charge",
+    "palm_release",
+    "palm_combo",
+    "guard",
+    "spin_kick",
+    "stomp",
+    "kick_release",
+    "flying_kick",
+    "channel",
+    "lotus_open",
+    "sky_raise",
+    "sky_release",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "references": [
+    "assets/source/renovation-v3/raw/hero_thieu_lam_actions.png",
+    "assets/source/skills/thieu-lam/generated/la_han_quyen_character_v01.png"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "left_fist",
+        "right_fist",
+        "front_kick",
+        "roundhouse",
+        "recover",
+        "la_han",
+        "ground_punch",
+        "palm_charge",
+        "palm_release",
+        "palm_combo",
+        "guard",
+        "spin_kick",
+        "stomp",
+        "kick_release",
+        "flying_kick",
+        "channel",
+        "lotus_open",
+        "sky_raise",
+        "sky_release"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "registrationPolicy": "One fixed physical density per group; boots anchored. Long weapon extent never changes body scale. Bald head skin silhouette is measured separately from brows, pole blade and prayer beads.",
+  "celGroupOverrides": [
+    {
+      "direction": "left",
+      "path": "raw/repairs/actions-left.png",
+      "rows": 5,
+      "columns": 4,
+      "start": 8
+    },
+    {
+      "direction": "down_left",
+      "path": "raw/repairs/actions-down_left.png",
+      "rows": 5,
+      "columns": 4,
+      "start": 8
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+import canonicalHands from '../../../assets/exports/ngu-doc-ta-hiep-unified-v1/hands.json';
 import Phaser from 'phaser';
 import {
   nguDoc,
@@ -27,6 +28,9 @@ const arts = [
   [ultimate, 'ngu-doc-feedback-v1/ultimate'],
 ] as const;
 
+const handSockets: Readonly<
+  Record<string, readonly { x: number; y: number; hidden?: boolean }[]>
+> = canonicalHands;
 const scale = 0.5;
 export const nguDocBody = (texture: string) =>
   texture === nguDocBichCo || texture === nguDocAmLinh;
@@ -186,6 +190,35 @@ export class NguDocArt {
         .setDepth(sprite.y + (behind ? -0.08 : 0.08))
         .setScale(scale)
         .setFlipX(index === 0);
+    });
+  }
+
+  /** Re-anchor the existing poison flame objects after the final canonical body has been sampled. */
+  canonicalHands(
+    id: string,
+    sprite: Sprite,
+    actor: { hp: number },
+    statuses: readonly { kind: string }[],
+    tick: number,
+  ): void {
+    if (
+      actor.hp <= 0 ||
+      sprite.texture.key !== 'hero-unified:ngu_doc_ta_hiep' ||
+      !statuses.some((s) => s.kind === 'ngu_doc_palm')
+    )
+      return;
+    const sockets = handSockets[String(sprite.frame.name)];
+    if (!sockets)
+      throw new Error('Missing canonical palm sockets ' + sprite.frame.name);
+    sockets.forEach((point, index) => {
+      const frames = effectClips.flame,
+        f = frames[(Math.floor(tick / 3.15) + index) % frames.length]!;
+      const image = this.track('hand:' + id + ':' + index, poison, f)
+        .setPosition(sprite.x + point.x * scale, sprite.y + point.y * scale)
+        .setScale(scale)
+        .setFlipX(index === 0);
+      if (point.hidden) image.setDepth(sprite.y - 0.08);
+      else if (image.depth === 0) image.setDepth(sprite.y + 0.08);
     });
   }
 
@@ -434,6 +467,7 @@ export class NguDocArt {
 
   inspect() {
     return [...this.objects.values(), ...this.brief].map((image) => ({
+      name: image.name,
       frame: image.frame.name,
       x: image.x,
       y: image.y,
@@ -460,6 +494,7 @@ export class NguDocArt {
     const image = this.objects.get(id);
     if (image) return image.setFrame(frame);
     const created = this.scene.add.image(0, 0, texture, frame);
+    created.name = 'ngu-doc:' + id;
     this.objects.set(id, created);
     return created;
   }

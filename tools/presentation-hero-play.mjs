@@ -21,28 +21,25 @@ import {
 } from '../tools/qa-session.mjs';
 
 const basic = process.env.VOLAM_HERO_REVIEW_BASIC ?? 'cai_bang_bong';
-if (
-  ![
-    'cai_bang_bong',
-    'cai_bang_chuong',
-    'vo_dang_quyen',
-    'vo_dang_kiem',
-    'thien_son_phien',
-    'thien_son_dao',
-  ].includes(basic)
-)
+const supportedBasics = [
+  'cai_bang_bong',
+  'cai_bang_chuong',
+  'vo_dang_quyen',
+  'vo_dang_kiem',
+  'thien_son_phien',
+  'thien_son_dao',
+  'thieu_lam_quyen',
+  'thieu_lam_dao',
+  'con_luan_thien_su',
+  'con_luan_kiem_ton',
+  'duong_mon_co_quan',
+  'duong_mon_am_khi',
+  'ngu_doc_ta_hiep',
+  'ngu_doc_co_su',
+];
+if (!supportedBasics.includes(basic))
   throw Error('Unsupported body review branch');
-const school = basic.startsWith('vo_dang')
-  ? 'vo_dang'
-  : basic.startsWith('thien_son')
-    ? 'thien_son'
-    : 'cai_bang';
-const reviewBranches =
-  school === 'vo_dang'
-    ? ['vo_dang_quyen', 'vo_dang_kiem']
-    : school === 'thien_son'
-      ? ['thien_son_phien', 'thien_son_dao']
-      : [basic];
+const school = basic.split('_').slice(0, 2).join('_');
 const session = qaSession({
   profile: 'presentation-hero-play',
   serverPort: 2990,
@@ -55,7 +52,11 @@ const spawn = MatchRoom.prototype.spawnPlayer;
 MatchRoom.prototype.spawnPlayer = function (id, player) {
   spawn.call(this, id, player);
   const selected = player.selectedBranch;
-  if (player.schoolId !== school || !reviewBranches.includes(selected)) return;
+  if (
+    !supportedBasics.includes(selected) ||
+    player.schoolId !== selected.split('_').slice(0, 2).join('_')
+  )
+    return;
   const h = this.simulation.hero(id);
   h.level = 30;
   h.xp = experienceAtLevel(30, m1Config);

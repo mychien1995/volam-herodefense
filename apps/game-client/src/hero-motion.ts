@@ -55,7 +55,14 @@ export function presentHeroMotion(
   clock?: UnifiedHeroClock,
 ): void {
   if (
-    presentUnifiedHero(scene, sprite, basic, pose, motionFacing(fx, fy), clock)
+    presentUnifiedHero(
+      scene,
+      sprite,
+      basic,
+      pose,
+      motionFacing(fx, fy),
+      clock ? { ...clock, statuses: statuses.map((s) => s.kind) } : undefined,
+    )
   )
     return;
   if (
