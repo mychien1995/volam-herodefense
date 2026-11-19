@@ -1,3 +1,5 @@
+> Reference-path maintenance — 2026-11-19: image naming/location issues are resolved in [the current index](assets/references/README.md) and [old-to-new manifest](assets/references/manifest.json). Original paths in historical entries below remain as recorded; they are not open asset requests. The cleanup changes no gameplay or art approval.
+
 ## Campaign balance và thử lại boss — 2026-11-06
 
 Đã chốt: Long Châu8%/4% bốn chỉ số nền, tự áp dụng; boss EXP/vàng first-clear; ba lần hồi sinh; ballot30s ngưỡng≥50%; hoàn bình khi thất bại; Kim clear +60s trước Vương. Mức độ khó/mốc kinh tế còn cần đánh giá người chơi; PvP vẫn là phạm vi riêng. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).

@@ -349,11 +349,11 @@ Design source: [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md). These cases are r
 - **Input safety:** Given an in-game menu is open, pressing keys used by menus must not cast spells/attack/move accidentally; when closed, Arrow, A and QWER recover. Clicking buttons should not trigger a world click.
 - **Clock:** Given the player browses an item/dungeon menu, the server match clock, waves, and other players continue normally and urgent raid warnings remain visible above the menu.
 - **Responsive:** Given 1280×720 and 1920×1080 desktop viewports (suggested test sizes), then all required HUD/modal content is reachable and not clipped.
-- **Visual regression:** When the implementation is reviewed, take real screenshots of game + inventory open + NPC menu open; compare positively to `in_game_world_reference.png` and negatively to `current_codex_dashboard_anti_reference.png`. Report placeholder imagery, real test commands, and any unimplemented systems.
+- **Visual regression:** When the implementation is reviewed, take real screenshots of game + inventory open + NPC menu open; compare positively to `assets/references/mood/world/wuxia_town_reference.png` and negatively to `assets/references/anti-reference/dashboard_layout.png`. Report placeholder imagery, real test commands, and any unimplemented systems.
 
 ## v1.6 Visual approval cases (ART-01)
 
-- GIVEN the actual running game screenshot, WHEN compared with the approved concept art and `current_game_2026_10_29_placeholder_anti_reference.png`, THEN the new hero/tree/tile/building/FX assets are demonstrably non-placeholder, cohesive and readable at target zoom.
+- GIVEN the actual running game screenshot, WHEN compared with the approved concept art and `assets/references/anti-reference/placeholder_game_2026_10_29.png`, THEN the new hero/tree/tile/building/FX assets are demonstrably non-placeholder, cohesive and readable at target zoom.
 - GIVEN a hero walking and attacking in four directions, WHEN captured from Phaser, THEN animation frames are real source asset frames, pivots are consistent and collision remains server-owned.
 - GIVEN the small demo scene is complete, WHEN reviewed, THEN art is marked `NEEDS REVISION` until the director explicitly approves it. Tech tests passing does not implicitly approve art.
 

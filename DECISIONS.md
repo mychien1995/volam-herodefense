@@ -1,3 +1,5 @@
+> Reference-path maintenance — 2026-11-19: image naming/location issues are resolved in [the current index](assets/references/README.md) and [old-to-new manifest](assets/references/manifest.json). Original paths in historical entries below remain as recorded; they are not open asset requests. The cleanup changes no gameplay or art approval.
+
 ## Ngũ Độc · Bích Cổ và Âm Linh
 
 Màn chọn phái dùng lưới 4 trên, 3 dưới và mở popup chọn hệ phái. Lượt Ngũ Độc này sửa tay chưởng hướng trái, làm mượt Thần Chết khi theo chủ, mở rộng Âm Phong Thực Cốt và cho trùng của Tâm Hình Cổ tự bay về.

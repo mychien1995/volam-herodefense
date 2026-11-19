@@ -1,5 +1,7 @@
 > **Already have an existing playable prototype?** Do **NOT** repeat M0 or recreate the repository. For the current rejected exterior dashboard layout, run the focused task in `CODEX_UI_REFACTOR_TASK.md` after reading `UI_UX_SPEC.md`. This v1.4 instruction supersedes any earlier language that suggested permanent page panels for in-match HUD.
 
+> Historical task brief. Continue only the scope requested in the current chat; use root [AGENTS.md](AGENTS.md). Resolve original filenames and corrected roles through [the current reference index](assets/references/README.md). Do not restart M0 or completed art milestones from this brief.
+
 # First Codex Task — COPY/PASTE
 
 ## How to use
@@ -39,4 +41,4 @@ Architecture should prioritize extensible data-driven content, headless determin
 
 
 ## v1.5 visual reference note
-Later milestones must inspect the additional files under `assets/references/`, especially `central_arena_hub_reference.png`, `arena_battle_reference.png`, the dungeon environment references, and the inventory/shop/dungeon-menu references. These lock in the target in-game HUD/menu pattern and environment quality for UI/art work.
+Later milestones must inspect the additional files under `assets/references/`, especially `assets/references/mood/world/central_arena_hub_reference.png`, `assets/references/mood/world/arena_battle_reference.png`, the dungeon environment references, and the inventory/shop/dungeon-menu references. These lock in the target in-game HUD/menu pattern and environment quality for UI/art work.

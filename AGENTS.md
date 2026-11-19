@@ -1,73 +1,39 @@
-## Campaign balance và thử lại boss — 2026-11-06
+# Võ Lâm Hero Defense — agent instructions
 
-Canonical override được người dùng duyệt2026-11-06: production EXP curve/budget/scaling mới, mặc định4 cửa, Long Châu từ tứ tuyệt và dungeon, ba hồi sinh + ballot≥50%, Kim clear +60s trước Vương. Các hard constraints lịch sử về hai cửa/không Long Châu invasion/một hồi sinh bị thay thế đúng phạm vi này. Các yêu cầu authority, art, controls và no-recording vẫn giữ. [Quy tắc, cấu hình và kiểm chứng](docs/CAMPAIGN_BALANCE_2026_11_06.md).
+## Scope and source of truth
 
-> **NEW mandatory v1.4 in-game UI rule:** Before any UI/UX work, read `UI_UX_SPEC.md` and visually inspect `assets/references/in_game_world_reference.png` (**positive**) and `assets/references/current_codex_dashboard_anti_reference.png` (**anti-reference**). After joining a match, render **one dominant game viewport** with all HUD, inventory, shop, skill tree/loadout, dungeon, crafting, PvP and loot-roll UI as in-viewport overlays. **Never** use persistent exterior right-side panels, page title, footer or dashboard status column. An HTML/React/DOM overlay absolutely positioned inside the game viewport is acceptable; game overlays do not have to be Phaser Graphics. Do not shrink the map to make room for UI. Keep a separate pre-match lobby if needed. Preserve server authority and keyboard/mouse controls. Details/acceptance: `UI_UX_SPEC.md` and `CODEX_UI_REFACTOR_TASK.md`.
+- Continue the existing M3D baseline; implement only the user's requested scope. `CODEX_START_HERE.md` and its M0 bootstrap are historical, not instructions to restart the game.
+- Preserve approved rules. Use the latest explicit user decisions and task-specific canonical overrides; distinguish implemented behavior, proposals and art approval. Read relevant sections, not the entire historical handoff on every turn.
+- Campaign override: [2026-11-06 rules](docs/CAMPAIGN_BALANCE_2026_11_06.md) supersede older two-gate/no-Long-Châu/one-revive restrictions. Keep inventory-v2 migration separate.
 
-# Repository instructions for Codex and other coding agents
+## Read only what the task needs
 
-## Visual verification and recording policy (confirmed 2026-10-30)
+| Task | Required context |
+| --- | --- |
+| Existing feature or bug | Relevant source/tests; applicable sections of [DECISIONS](DECISIONS.md), [M3D memory](docs/M3D_INTEGRATION_MEMORY.md) and [architecture](TECHNICAL_ARCHITECTURE.md) |
+| Combat, school, progression or balance | Above + [content](CONTENT_DATA.md), [combat](COMBAT_SYSTEM.md), [balancing](BALANCING.md), [game design](GAME_DESIGN.md); use the matching ability/balance skill |
+| Items, rewards or crafting | [Items and crafting](ITEMS_AND_CRAFTING.md), campaign override, current implementation; do not infer approval for future migration |
+| UI or artwork | [Reference index](assets/references/README.md), [UI spec](UI_UX_SPEC.md), [art direction](ART_DIRECTION_REFERENCE.md), [production gate](ART_PRODUCTION_STANDARD.md), [asset guide](ART_ASSET_GUIDE.md); inspect the relevant actual PNGs |
+| Validation | [Session lessons](docs/SESSION_EXECUTION_LESSONS.md), [development workflow](docs/DEVELOPMENT_WORKFLOW.md), relevant [acceptance criteria](ACCEPTANCE_TESTS.md) |
 
-- Routine development, asset generation and testing must not generate WebM, MP4, GIF, animated-image or other video recordings as evidence.
-- Use lightweight PNG screenshots when visual evidence is useful, plus frame-observation reports, assertions and logs.
-- Continue validating sprite animation frames/timing, transitions, facing, pivots/positioning, effects and gameplay behavior in the running Phaser client. A screenshot alone does not prove motion or server correctness.
-- Do not invoke recording, video encoding or conversion tools (including FFmpeg or Playwright video capture) during routine work. Keep browser video disabled; diagnostic traces must not capture screenshot playback streams.
-- Generate gameplay or animation recordings only when the user explicitly requests recordings for that task. A request to test, animate, preview or verify art is not a request to record it.
-- Preserve existing video assets, recordings and historical evidence. Do not delete or regenerate them as cleanup.
-- This policy applies to future Codex sessions, local skills, scripts and CI; older evidence or review notes do not create a recording requirement.
+Use [roadmap](ROADMAP.md) and [open questions](OPEN_QUESTIONS.md) for unresolved scope, not as permission to start another milestone. For Phaser/Colyseus changes, check installed versions and official docs; Colyseus 0.18 differs from older APIs.
 
-This repository is for **Võ Lâm Hero Defense**, a challenging browser-first 2D multiplayer martial-arts statue-defense RPG. **Do not start coding the full game until reading the design handoff.**
+## Invariants
 
-## Read before touching code
+- Server owns movement, collision, targeting, damage, RNG, skills, resources, inventory, rewards, clocks and match state. Never trust client-submitted results or positions. Keep `game-core` independent of Phaser, Colyseus, DOM and UI, with deterministic seeded tests.
+- Preserve existing keyboard/mouse controls (arrows, A, QWERT, F stance and current mouse/menu controls), targeting, straight non-homing projectiles and melee/cleave contracts. Vietnamese names are canonical; use stable ASCII IDs and separate localization.
+- After joining, show one dominant game viewport. HUD and every menu belong inside it, including DOM overlays. No persistent exterior dashboard column/title/footer; do not shrink the map for panels. A separate pre-match lobby is allowed.
+- Keep original/licensed art and provenance. Detailed chibi wuxia, elevated orthographic three-quarter view, fixed camera perspective and foot/Y-depth occlusion remain required. No proprietary Warcraft/Pokémon assets or procedural/geometric placeholders presented as final art.
 
-1. `DECISIONS.md` — authoritative confirmed user rules versus proposals.
-2. `GAME_DESIGN.md` — core loop, dungeons, waves, statue and PvP.
-3. `CONTENT_DATA.md` — exact Vietnamese names, 43 active skills, 8 normal attacks, 4 innate passives.
-4. `COMBAT_SYSTEM.md`, `BALANCING.md`, `ITEMS_AND_CRAFTING.md` — specifics.
-5. **`ART_DIRECTION_REFERENCE.md` and `assets/references/vo_dang_art_direction_reference.png`** (read/show actual reference; mandatory visual standard); then `ART_ASSET_GUIDE.md` for sprite sourcing, export formats, animation and artwork verification; `TECHNICAL_ARCHITECTURE.md`, `ROADMAP.md`, `ACCEPTANCE_TESTS.md`, `OPEN_QUESTIONS.md`.
-6. `CODEX_START_HERE.md` — first task; do **M0 only** initially.
+## Execution and verification
 
-## Hard constraints
+- State the brief plan and context read. Reproduce defects first; use server-acknowledged inputs. Reuse existing helpers, exporters, menu components and scoped references. Keep data/tuning separate from mechanics.
+- Iterate with focused tests. After the final implementation change run `pnpm check:final [relevant Playwright arguments]` once. Retry failed stages with changed dependencies; do not repeat passing full suites for summaries or approval metadata. Documentation/reference-only changes need link/hash/metadata checks, not a gameplay rebuild.
+- Add meaningful regressions for new combat/status/progression/inventory/wave behavior. Report commands actually run and limits; never infer a PASS from an old report.
+- New art: one representative slice at normal gameplay zoom before a batch. Validate PNG/JSON, pivots, facing, frames/timing, transitions, effects and multiplayer readability in live Phaser. PNG alone does not prove motion or authority. Required director concept/final-art approval remains explicit; a preview or passing test grants neither. Preserve approved bytes and historical evidence.
+- No routine WebM/MP4/GIF/animated-image evidence, recording/encoding/conversion tools or trace screenshot streams. Use lightweight PNGs and live frame/event observations. Record only when explicitly requested for this task; preserve existing recordings.
+- Respect other in-progress work. Update specs only for actual approved behavior changes; keep source modular and report remaining prototype/approval status honestly.
 
-- Server authoritative for movement, collision, targeting, hit/damage, RNG, skills, XP, gold, items, loot, wave clock, boss and match state. **Never trust client-submitted damage, location, inventory, XP or loot result.**
-- `game-core` independent of Phaser, Colyseus, DOM and UI; deterministic seeded simulation with tests.
-- Arrow keys movement, A basic manual attack, QWERT skills, F to switch Thiếu Lâm Quyền stance. Mouse for NPC/menu/inventory and hotbar rank upgrades. No targeted spells. Ranged shots aim once at nearest enemy's position, then fly straight; **no tracking**. Melee frontal arc with reduced cleave on secondary targets.
-- Confirm one school and branch before entering a match. Innate passive levels automatically. Max level 30. Five fixed active slots with four ranks each. Levels 1–20 grant skill points, levels 21–30 reserve future stat points. Standard rank gates 1/3/5/7, ultimate 6/12/18/24. No in-match respec.
-- Thiếu Lâm Phát Động same-target hits only; secondary cleave hits count. Cầm Long Công = pull+silence+disarm without stun and without preventing movement.
-- Match room 1–6 players, nicknames only, no saved progress. Private/shared dungeons, boss dungeon empty reset at 30s. Creep XP fixed pool divided among eligible kill/assists.
-- 20 statue creep invasions **every 180 seconds** from **2 sides**, regardless of previous wave status; no statue repair. Fifth-wave bosses only after corresponding fifth wave cleared + short rest, in order Đông Tà/Tây Độc/Nam Đế/Bắc Cái; final Vương Trùng Dương. Gold/XP only for invasion, **no item drops**.
-- Inventory design updated **2026-11-02**: dungeon boss materials go to **every player who damaged the boss and remains in its instance at death**, without rolls; Long Châu once per character/boss/match. No resale, trading or transferable ground drops. Four fixed slots: weapon/armor/hat/boots, no necklace; basics upgrade through duplicate purchases to level 5, then basic + boss material + gold crafts one of three branches. Potions have 5s use cooldown and cannot be bought inside dungeons. Read [ITEMS_AND_CRAFTING.md](ITEMS_AND_CRAFTING.md) for confirmed effects and open tuning; weapon stun is replaced by armor penetration, healing-Z boots by Thanh Tâm. This is design, not authorization to implement M4. PvP ignoring items remains a proposal.
-- Keep exact Vietnamese skill names as documented. Stable ASCII IDs; separate localization display names.
-- Do not copy proprietary Warcraft III / Pokémon map art, sound, or code. Use placeholders or original/licensed content.
-- **Confirmed art quality:** Reference-driven **detailed chibi wuxia pixel art**, as in `assets/references/vo_dang_art_direction_reference.png`. Do not substitute geometric / SVG placeholders when the task is to deliver finished character art. First deliver a single Võ Đang 4-facing idle/walk + Quyền/ Kiếm attack prototype, inspect it in the actual Phaser game, then request user art approval before bulk generating. A reference sheet is not an animation atlas. Read `ART_DIRECTION_REFERENCE.md` before any art work.
-- **Confirmed presentation:** orthographic 2D pixel art with an elevated/top-down **Pokémon-like three-quarter overworld view**, never isometric/side-scroll/3D chase camera. Keep one consistent non-rotating camera perspective across arena, dungeons and PvP; order object occlusion by character feet/Y-depth, with foreground tree/roof layering. Follow `ART_ASSET_GUIDE.md`. No real sprite/animation can be called complete until its file exists, animation frames load correctly in Phaser, and visual checks are recorded.
-- **Confirmed reference set (v1.5):** inspect `assets/references/central_arena_hub_reference.png`, `arena_battle_reference.png`, `forest_dungeon_reference.png`, `desert_dungeon_reference.png`, `sea_dungeon_reference.png`, `hell_dungeon_reference.png`, `dungeon_selection_menu_reference.png`, `merchant_shop_menu_reference.png`, `inventory_menu_reference.png`, plus the school character references. Use them as the primary art/UI benchmark. The world must occupy the full match viewport; inventory/shop/dungeon menus must appear as in-world overlays inside the viewport. Document source/license; no animation-driven authoritative damage. M0 placeholders are acceptable; avoid bulk artwork generation before playtesting.
+## History
 
-## Working method
-
-- Before planning validation, read `docs/SESSION_EXECUTION_LESSONS.md`. Apply its reproduce-first tests, focused iteration, server-acknowledged browser controls, scoped reference reuse and stage-retry rules. Tooling proposals in that document are not implemented commands or permission to skip required gates.
-- For the current M3D baseline and approved reworks, read `docs/M3D_INTEGRATION_MEMORY.md`; latest canonical overrides supersede historical handoff restrictions and tuning. Preserve the separate inventory-v2 future migration scope.
-
-- Follow `docs/DEVELOPMENT_WORKFLOW.md` for validation scope. During iteration use focused test/asset/browser checks. After the final implementation change, use `pnpm check:final [relevant Playwright arguments]` once instead of separately chaining preparation, typecheck, full tests and build. It retains all final typechecks, unit/integration tests, build, asset validators and relevant browser checks. Do not rerun a successful full suite solely for summary/report/approval metadata edits; validate affected metadata/guards and rerun checks whose inputs changed. All existing live Phaser, reference comparison, PNG evidence and explicit director art-approval requirements remain mandatory.
-
-- Implement **only the requested roadmap milestone**. Start with M0. Do not implement M1+ unasked.
-- At start of a task, state files read, brief plan and any blocking ambiguity; propose small configurable defaults for non-blocking open questions.
-- Before using Phaser/Colyseus APIs, consult installed versions and current official docs; Colyseus 0.18 APIs differ from earlier versions.
-- Keep game data and tuning values separate from mechanics; validate at load/startup. Add tests for each new skill/status/XP/inventory/wave behavior.
-- After code changes: run typecheck, unit/integration tests, relevant browser smoke tests and report actually run commands/results; if tests couldn't run, say so.
-- After changing visual assets, verify actual PNG/JSON frame assets and rendered animations; report placeholder/prototype/approved status and screenshots only if really captured.
-- Update spec documents, `DECISIONS.md`, acceptance tests and architecture only when behavior truly changes. Never quietly overwrite user-approved game rules with a shortcut.
-- Keep source modular, use concise commits and clear PR summary when Git is available. Prefer straightforward TypeScript to unnecessary abstractions.
-
-## Skills you may use
-
-- `.agents/skills/game-playtest/`: browser/visual and room smoke tests.
-- `.agents/skills/combat-balance-test/`: deterministic simulation and balance reports.
-- `.agents/skills/create-game-ability/`: data-first content addition and regression tests.
-- `.agents/skills/pixel-art-pipeline/`: original/licensed sprite and VFX asset workflow, atlas export, Phaser loading and browser visual checks.
-
-These instructions are executable **workflows** only after the relevant code/tooling exists. They are not a replacement for tests.
-
-## v1.6 Mandatory visual production gate
-
-Read `ART_PRODUCTION_STANDARD.md` and inspect `assets/references/current_game_2026_10_29_placeholder_anti_reference.png` before any more environment/character/UI art work. The current screenshot is **visually rejected** as placeholder-level art, despite improved HUD layout. **Never use procedural Phaser Graphics or crude programmatically pixelated rectangles/trees as final art.** Require real original/licensed spritesheet PNGs, tilesets, and UI art, actual-run screenshot comparisons, an asset provenance manifest and explicit director approval at normal gameplay zoom. Complete an `ART-01` one-screen hero + environment art quality vertical slice before expanding the world. Phaser 4 is retained; asset production is distinct from asset integration. See `CODEX_ART_QUALITY_RESCUE_TASK.md`.
+The [exact pre-cleanup instructions](docs/history/AGENTS-2026-11-19.md) preserve the original detailed constraints and milestone history. Consult them only when relevant; superseded historical rules do not override current decisions. Reference moves and misnamed originals are indexed in [the reference manifest](assets/references/manifest.json).

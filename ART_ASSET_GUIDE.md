@@ -49,7 +49,7 @@ The user approved the current Cái Bang Bổng/Chưởng authored idle/walk/norm
 
 Preserve approved source/export bytes in `assets/approved_cai_bang.lock.json`. For Gemini batches use `ASSET_INVENTORY.md`, `assets/intake/character_template.json`, `assets/intake/README.md` and `scripts/asset-intake.py`. A painted checkerboard is not alpha. Staging never installs unreviewed assets into runtime; first-batch scene approval remains separate from character approval.
 
-**PRIMARY ART REFERENCE:** `ART_DIRECTION_REFERENCE.md` and `assets/references/vo_dang_art_direction_reference.png` now define the required **detailed chibi wuxia pixel-art style**. The original image is a concept sheet, not a usable runtime spritesheet. The style and character silhouettes must be approved in a one-hero prototype before bulk asset creation.
+**PRIMARY ART REFERENCES:** start with `assets/references/current-approved/README.md` and the requested asset's approved source; `ART_DIRECTION_REFERENCE.md` and `assets/references/mood/characters/vo_dang_character_reference.png` retain the original **detailed chibi wuxia identity/style direction**. The original image is a concept sheet, not a usable runtime spritesheet. The style and character silhouettes must be approved in a one-hero prototype before bulk asset creation.
 
 **CONFIRMED art direction:** classic Pokémon-style **2D pixel art with an orthographic, elevated/top-down three-quarter overworld camera**. The player views the character and surrounding map from above at a slightly angled perspective; the character's body/face and the fronts of structures remain visible. This is sometimes informally called "third-person from above"; it is **not** a 3D third-person chase camera, not a directly overhead bird's-eye view showing only heads, not an isometric diamond-grid game, and not a side-view platformer.
 
@@ -154,13 +154,13 @@ The **2D top-down/three-quarter Pokémon-like overworld perspective is confirmed
 
 ## Art of the game interface — v1.4
 
-School art references: `assets/references/cai_bang_character_reference.png`, `thien_son_thieu_lam_character_reference.png`, `vo_dang_art_direction_reference.png`. World reference: `assets/references/in_game_world_reference.png`. **Bad layout example**: `assets/references/current_codex_dashboard_anti_reference.png` (map boxed into left and HTML dashboard to right). All images are style references, not validated sprite atlases.
+School identity references: `assets/references/mood/characters/cai_bang_character_reference.png` and `assets/references/mood/characters/vo_dang_character_reference.png`. Use the actual approved school sources for Thiên Sơn/Thiếu Lâm; the old school-named file was a town scene. World reference: `assets/references/mood/world/wuxia_town_reference.png`. **Bad layout example**: `assets/references/anti-reference/dashboard_layout.png` (map boxed into left and HTML dashboard to right). All images are style references, not validated sprite atlases.
 
 Create UI art suitable for a chibi wuxia pixel-art game: hero portraits, compact stat bars, icon hotbar, item icons/grids, readable framed NPC windows. Prefer original/licensed graphical borders and clear pixel-art icons. HUD must live above the world **within the game viewport**, with readable Vietnamese text and closeable in-game windows. No need for all UI to be authored as Phaser sprites; HTML/CSS modal views over the canvas are allowed as long as they stay within the viewport and match the game look. See `UI_UX_SPEC.md`.
 
 ## v1.6 Art quality approval rule
 
-The art pipeline's acceptance conditions are now defined in `ART_PRODUCTION_STANDARD.md`. A Phaser scene built from procedural placeholders is sufficient only for engineering smoke tests and **cannot count as production artwork**. Prove final quality first on one illustrated playable arena slice. The current screenshot is archived as `assets/references/current_game_2026_10_29_placeholder_anti_reference.png`. UI/HUD placement alone does not pass art review.
+The art pipeline's acceptance conditions are now defined in `ART_PRODUCTION_STANDARD.md`. A Phaser scene built from procedural placeholders is sufficient only for engineering smoke tests and **cannot count as production artwork**. Prove final quality first on one illustrated playable arena slice. The rejected 2026-10-29 screenshot is archived as `assets/references/anti-reference/placeholder_game_2026_10_29.png`; it is not a screenshot of the current build. UI/HUD placement alone does not pass art review.
 
 ## Implemented skill asset contract — M3A
 

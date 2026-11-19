@@ -1,6 +1,8 @@
 # Codex — Fix the game pixel-art style (copy/paste task)
 
-Read `AGENTS.md`, `ART_ASSET_GUIDE.md`, `ART_DIRECTION_REFERENCE.md`, and inspect the image `assets/references/vo_dang_art_direction_reference.png` **before changing artwork**.
+> Historical task brief. Continue only the scope requested in the current chat; use root [AGENTS.md](AGENTS.md). Resolve original filenames and corrected roles through [the current reference index](assets/references/README.md). Do not restart M0 or completed art milestones from this brief.
+
+Read `AGENTS.md`, `ART_ASSET_GUIDE.md`, `ART_DIRECTION_REFERENCE.md`, and inspect the image `assets/references/mood/characters/vo_dang_character_reference.png` **before changing artwork**.
 
 The game's visual style must match the attached reference's **detailed chibi wuxia pixel art**, with a Pokémon-like elevated top-down 2D camera. Preserve the 2D orthographic projection, square-grid tiles and four directional views. Do not create minimalist sprites, SVG/cartoon drawings or geometric Phaser `Graphics` characters and claim they are finished artwork.
 

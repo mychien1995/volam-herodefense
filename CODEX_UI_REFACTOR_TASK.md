@@ -1,5 +1,7 @@
 # Codex — UI/HUD Refactor Task (v1.4)
 
+> Historical task brief. Continue only the scope requested in the current chat; use root [AGENTS.md](AGENTS.md). Resolve original filenames and corrected roles through [the current reference index](assets/references/README.md). Do not restart M0 or completed art milestones from this brief.
+
 This is the **next task for the existing playable Codex prototype**, not a request to scaffold a second project or restart M0. Paste into Codex in the current repository, with its current game app open.
 
 ---
@@ -8,15 +10,15 @@ I want a **game-first in-game UI**, not a web dashboard with panels outside the 
 
 Please read `AGENTS.md`, `DECISIONS.md`, `UI_UX_SPEC.md`, `ART_ASSET_GUIDE.md`, `ART_DIRECTION_REFERENCE.md`, `TECHNICAL_ARCHITECTURE.md`, and `ACCEPTANCE_TESTS.md`. Inspect the provided actual images, especially:
 
-- `assets/references/current_codex_dashboard_anti_reference.png` — **BAD layout; avoid**.
-- `assets/references/central_arena_hub_reference.png` — **GOOD** full-screen hub composition reference.
-- `assets/references/arena_battle_reference.png` — **GOOD** combat + HUD composition reference.
-- `assets/references/forest_dungeon_reference.png`, `desert_dungeon_reference.png`, `sea_dungeon_reference.png`, `hell_dungeon_reference.png` — environment targets for dungeon scenes.
-- `assets/references/dungeon_selection_menu_reference.png` — desired dungeon selection overlay reference.
-- `assets/references/merchant_shop_menu_reference.png` — desired merchant/shop overlay reference.
-- `assets/references/inventory_menu_reference.png` — desired inventory/equipment overlay reference.
-- `assets/references/cai_bang_character_reference.png`, `thien_son_thieu_lam_character_reference.png`, `vo_dang_character_reference.png` — school art style references.
-- `assets/references/wuxia_town_world_reference.png` — additional overworld/environment quality reference.
+- `assets/references/anti-reference/dashboard_layout.png` — **BAD layout; avoid**.
+- `assets/references/mood/world/central_arena_hub_reference.png` — **GOOD** full-screen hub composition reference.
+- `assets/references/mood/world/arena_battle_reference.png` — **GOOD** combat + HUD composition reference.
+- `assets/references/mood/world/forest_dungeon_reference.png`, `assets/references/mood/world/desert_dungeon_reference.png`, `assets/references/mood/world/sea_dungeon_reference.png`, `assets/references/mood/world/hell_dungeon_reference.png` — environment targets for dungeon scenes.
+- `assets/references/mood/ui/dungeon_selection_menu_reference.png` — desired dungeon selection overlay reference.
+- `assets/references/mood/ui/merchant_shop_menu_reference.png` — desired merchant/shop overlay reference.
+- `assets/references/mood/ui/inventory_menu_reference.png` — desired inventory/equipment overlay reference.
+- `assets/references/mood/characters/cai_bang_character_reference.png`, `assets/references/mood/characters/vo_dang_character_reference.png` — school identity references; use actual approved school sources for Thiên Sơn/Thiếu Lâm.
+- `assets/references/mood/world/wuxia_town_reference.png` — additional overworld/environment quality reference.
 
 **Required redesign:**
 
