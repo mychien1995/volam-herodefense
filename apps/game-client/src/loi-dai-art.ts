@@ -51,6 +51,10 @@ export function drawLoiDai(scene: Phaser.Scene): void {
     scene.add
       .image(x, y, key(id))
       .setName(key(id))
+      .setData(
+        'world-depth-prop',
+        !['ground', 'deck', 'west-overscan', 'east-overscan'].includes(id),
+      )
       .setOrigin(0)
       .setDisplaySize(width / manifest.density, height / manifest.density)
       .setDepth(depth);

@@ -1,0 +1,15 @@
+import { test } from '@playwright/test';
+import { verifyRenovationRuntime } from '../../tools/verify-renovation-runtime.mjs';
+import { qaEvidenceDirectory } from '../../tools/qa-session.mjs';
+import { verifyWorldDepth } from './world-depth-probe.mjs';
+test('arena depth: exact ON/OFF frames, all Chưởng actions, peer authority and lifecycle', async ({
+  browser,
+}) => {
+  await verifyRenovationRuntime(browser, {
+    players: Number(process.env['VOLAM_DEPTH_PLAYERS'] ?? 2),
+    development: process.env['VOLAM_QA_DEV_CLIENT'] === '1',
+    compareLegacy: false,
+    evidenceDir: qaEvidenceDirectory('docs/evidence/world-depth'),
+    onReady: verifyWorldDepth,
+  });
+});

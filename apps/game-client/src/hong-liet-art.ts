@@ -122,7 +122,8 @@ export function createHongLietArena(
       .setScale(S)
       .setOrigin(0.5, 368 / 384)
       .setDepth(ground ? -9500 : (o.y ?? 0) * S)
-      .setName('hong_liet:' + o.name);
+      .setName('hong_liet:' + o.name)
+      .setData('world-depth-prop', !ground);
     props.push(image);
     replaceR3ArenaProp(image, 'hong_liet', o.name, S);
   }

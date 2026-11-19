@@ -184,3 +184,7 @@ Thiếu Lâm Đao dùng cùng atlas đao vàng cho phản ứng trúng đòn, Ki
 ## Ổn định chọn phái trong phòng sáu client — 2026-11-12
 
 Các bản vá roster cập nhật danh sách và số người sẵn sàng mà giữ nút chọn phái của người chơi hiện tại. Phaser tạm dừng vòng render khi sảnh che đấu trường và tiếp tục khi người chơi vào trận. Giữ xác nhận và điều kiện bắt đầu do phòng Colyseus quyết định. [Kiểm tra sảnh và 44 lượt boss trong trận sáu client](evidence/sessions/m3d-six-lobby-verified/m3d-hit-continuity/README.md)
+
+## Visual depth và motion R6 — 2026-11-19
+
+Worktree `wip/m3d/25d`: world depth cho arena/dungeon/PvP, avatar đúng14 nhánh, locomotion tám hướng và idle nhiều cel. R6 thêm pose A/kỹ năng chéo và tối ưu tài nguyên trình diễn. Giữ native cardinal choreography và các dạng biến thân riêng, gameplay/HUD/control/authority không đổi; F8 chỉ local visual depth. Đường bóng chó hoang đã dùng budget chung; đọc pixel viền bóng chỉ chạy ở QA. Nguồn editable/hash, phạm vi reuse, kiểm chứng thực và giới hạn art approval tại `PRESENTATION_FINISH_R6.md`. Artwork prototype chờ director review; không coi automation PASS là art approval. Chỉ commit trên nhánh này, không merge.

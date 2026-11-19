@@ -4,6 +4,8 @@ import type { MatchRoom } from '../apps/game-server/src/rooms/MatchRoom.js';
 interface Options {
   players?: number;
   development?: boolean;
+  clientDist?: string;
+  selectionTimeout?: number;
   evidenceDir?: string;
   clientQuery?: string;
   compareLegacy?: boolean;

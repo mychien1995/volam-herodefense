@@ -133,7 +133,8 @@ export function createChuArena(
     image
       .setOrigin(0.5, o.type === 'ground' ? 0.5 : 1)
       .setDepth(o.type === 'ground' ? -9000 : o.y * S)
-      .setName('chu:prop:' + o.name);
+      .setName('chu:prop:' + o.name)
+      .setData('world-depth-prop', o.type !== 'ground');
     if (o.name === 'bamboo_cluster') trees.push(image);
   }
   scene.add

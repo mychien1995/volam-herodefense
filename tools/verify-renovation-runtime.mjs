@@ -44,6 +44,8 @@ export async function verifyRenovationRuntime(
     evidenceDir,
     clientQuery = '',
     compareLegacy = true,
+    clientDist,
+    selectionTimeout = 30000,
   } = {},
 ) {
   const session = qaSession({
@@ -134,6 +136,7 @@ export async function verifyRenovationRuntime(
         })
       : await preview({
           ...options,
+          ...(clientDist ? { build: { outDir: resolve(clientDist) } } : {}),
           preview: {
             host: '127.0.0.1',
             port: session.clientPort,
@@ -172,7 +175,8 @@ export async function verifyRenovationRuntime(
           clientQuery +
           (compareLegacy && i === 1 ? '&renovationSkills=old' : ''),
       );
-      await page.locator('[data-action=play]').click(); await page.locator('#pre-nickname').fill('Renovation ' + (i + 1));
+      await page.locator('[data-action=play]').click();
+      await page.locator('#pre-nickname').fill('Renovation ' + (i + 1));
       await page.getByRole('button', { name: 'Vào game', exact: true }).click();
       if (roomId) {
         await page
@@ -209,7 +213,7 @@ export async function verifyRenovationRuntime(
         schools[i],
         m1Config.progression.schools[schools[i]].basicIds[0],
       ]);
-      await startAuditTogether(roster, 30000, selectionHook);
+      await startAuditTogether(roster, selectionTimeout, selectionHook);
     } else if (selectionHook) {
       await pages[0]
         .getByRole('button', { name: 'Bắt đầu', exact: true })

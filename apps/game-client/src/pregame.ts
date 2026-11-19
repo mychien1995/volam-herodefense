@@ -1,3 +1,4 @@
+import { heroBodyUrl, schoolHeroBasic } from './hero-portraits.js';
 import { m1Config, schools, skillIcon } from '@volam/game-data';
 import { nguDoc } from '@volam/game-core';
 import type { LobbyState, LobbyAction } from '@volam/game-protocol';
@@ -470,7 +471,7 @@ export class PreGame {
         const schoolCards = schools
           .map(
             (s) =>
-              `<button type="button" class="school-card ${self?.schoolId === s.id ? 'selected' : ''}" data-action="school" data-school="${s.id}" aria-pressed="${self?.schoolId === s.id}" ${state.requiresBranch ? 'aria-haspopup="dialog"' : ''} ${self?.confirmed ? 'disabled' : ''}><span class="school-portrait ${s.portrait}" aria-hidden="true"></span><h3>${s.name}</h3><span class="school-element">${s.element}</span></button>`,
+              `<button type="button" class="school-card ${self?.schoolId === s.id ? 'selected' : ''}" data-action="school" data-school="${s.id}" aria-pressed="${self?.schoolId === s.id}" ${state.requiresBranch ? 'aria-haspopup="dialog"' : ''} ${self?.confirmed ? 'disabled' : ''}><span class="school-portrait ${s.portrait}" style="background-image:url('${heroBodyUrl(schoolHeroBasic(s.id))}')" aria-hidden="true"></span><h3>${s.name}</h3><span class="school-element">${s.element}</span></button>`,
           )
           .join('');
         content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <strong data-testid="selection-ready"></strong></p><div class="school-grid">${schoolCards}</div>${list}<div class="pre-actions">${button('Rời phòng', 'leave')}${state.requiresBranch ? '' : button(confirmLabel, 'confirm', this.artLoading || !self?.schoolId || !!self?.confirmed)}</div><p class="pre-warning" hidden>Đang chờ người chơi mất kết nối. Bạn có thể rời và tạo phòng mới.</p>${popup}`;

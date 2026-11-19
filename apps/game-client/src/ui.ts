@@ -1,3 +1,4 @@
+import { heroPortraitUrl } from './hero-portraits.js';
 import { heroTexture } from './hero-texture.js';
 import { heroIdleUrl } from './character-revision.js';
 import {
@@ -823,17 +824,16 @@ export class GameUI {
       hero.basicId,
       hero.schoolId,
     );
-    element('#viewport').style.setProperty(
-      '--hero-idle',
-      'url("' +
-        heroIdleUrl(
-          // Both monk weapon presentations share one square portrait source.
-          hero.schoolId === 'thieu_lam'
-            ? 'hero_thieu_lam'
-            : heroTexture(hero.basicId, hero.schoolId),
-        ) +
-        '")',
-    );
+    const form = heroTexture(hero.basicId, hero.schoolId);
+    const viewport = element('#viewport');
+    for (const [name, url] of [
+      ['--hero-idle', heroIdleUrl(form)],
+      ['--hero-portrait', heroPortraitUrl(form)],
+    ]) {
+      const value = 'url("' + url + '")';
+      if (viewport.style.getPropertyValue(name!) !== value)
+        viewport.style.setProperty(name!, value);
+    }
     element('.portrait').title =
       'Chân dung ' +
       (schools.find((s) => s.id === hero.schoolId)?.name ?? 'Cái Bang');

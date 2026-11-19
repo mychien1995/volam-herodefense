@@ -1,3 +1,6 @@
+import { preloadHeroMotion, presentHeroMotion } from './hero-motion.js';
+import { preloadDepthTerrain } from './world-depth-terrain.js';
+import { WorldDepthEffects } from './world-depth-effects.js';
 import markerArt from './controls-art/move-marker.png?url';
 import { BossSkillAnnouncements } from './boss-skill-announcements.js';
 import {
@@ -175,6 +178,7 @@ export class ArenaScene extends Phaser.Scene {
   private readonly shaolinDao = new ShaolinDaoMatchArt(this);
   private readonly hitArt = new M3dHitArt(this);
   private polished = true;
+  private worldDepth?: WorldDepthEffects;
   onNpc: (menu: 'merchant' | 'pvp') => void = () => {};
   private zoneId = 'arena';
   private snapshot: LobbyState | undefined;
@@ -412,6 +416,8 @@ export class ArenaScene extends Phaser.Scene {
       },
     );
     preloadRuntimeArtReview(this);
+    preloadDepthTerrain(this);
+    preloadHeroMotion(this);
     if (this.eagerArt) preloadLoiDai(this);
     preloadArt(this, this.eagerArt);
     if (!this.eagerArt && this.waveArtAtBoot)
@@ -486,6 +492,7 @@ export class ArenaScene extends Phaser.Scene {
     });
     this.damage = new FloatingDamage(this);
     this.vfx = new SkillVfx(this);
+    this.worldDepth = new WorldDepthEffects(this);
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => this.vfx?.clear());
     this.events.once(Phaser.Scenes.Events.DESTROY, () => this.vfx?.clear());
     this.creepEffects = new ArenaCreepEffects(
@@ -546,6 +553,8 @@ export class ArenaScene extends Phaser.Scene {
         () =>
           new Promise<void>((resolve, reject) => {
             preloadRuntimeArtReview(this);
+            preloadDepthTerrain(this);
+            preloadHeroMotion(this);
             preloadArtPack(this, pack);
             this.load.once(
               Phaser.Loader.Events.COMPLETE,
@@ -695,7 +704,11 @@ export class ArenaScene extends Phaser.Scene {
         });
       });
   }
+  reviewWorldDepth(enabled: boolean): void {
+    this.worldDepth?.setEnabled(enabled);
+  }
   private drawZone(zoneId: string): void {
+    this.worldDepth?.clear();
     this.hitArt.clear();
     this.shaolinDao.clear();
     this.story?.destroy();
@@ -1042,7 +1055,10 @@ export class ArenaScene extends Phaser.Scene {
       const weight = blinkAlpha < 1 ? 1 : Math.min(1, delta / 45);
       // Preserve interpolation precision; feeding rounded pixels back into lerp
       // otherwise leaves a stationary actor permanently one pixel off its feet.
-      if (highResBody) {
+      // All player bodies share continuous reconciliation. Quantizing the older
+      // bodies here (and their following camera below) exposed each server patch
+      // as alternating short/long screen steps even at a steady render rate.
+      if (highResBody || !enemy) {
         const target = predicted ?? actor;
         const snap =
           Math.hypot(view.smoothX - target.x, view.smoothY - target.y) > 80;
@@ -1055,8 +1071,8 @@ export class ArenaScene extends Phaser.Scene {
         view.smoothY =
           predicted?.y ?? Phaser.Math.Linear(view.smoothY, actor.y, weight);
       }
-      const x = highResBody ? view.smoothX : Math.round(view.smoothX);
-      const y = highResBody ? view.smoothY : Math.round(view.smoothY);
+      const x = highResBody || !enemy ? view.smoothX : Math.round(view.smoothX);
+      const y = highResBody || !enemy ? view.smoothY : Math.round(view.smoothY);
       view.sprite.setPosition(x, y);
       if (view.sprite.depth !== y) view.sprite.setDepth(y);
       const renderFx = predicted?.fx ?? actor.fx;
@@ -1287,6 +1303,34 @@ export class ArenaScene extends Phaser.Scene {
         }
       }
       this.nguDocArt?.mark(id, view.sprite, states);
+      if (!enemy)
+        presentHeroMotion(
+          this,
+          view.sprite,
+          actor.basicId,
+          actor.hp <= 0
+            ? 'death'
+            : (heroReaction ??
+                (cast &&
+                !(
+                  daoPose &&
+                  /^(idle|walk)_/.test(daoPose.firstFrame) &&
+                  ['idle', 'walk'].includes(actorPose)
+                )
+                  ? 'action'
+                  : actorPose)),
+          renderFx,
+          renderFy,
+          states,
+          {
+            tick,
+            startedAt: actor.actionStartedAt ?? tick,
+            until: state?.players.get(id)?.actionUntil ?? tick,
+            ability: cast?.abilityId ?? actor.castAbilityId ?? '',
+            basicStage: actor.basicStage ?? '',
+            visualDurationTicks: ((cast?.durationMs ?? 0) * 30) / 1000,
+          },
+        );
       if (cast)
         this.vfx?.observeCharacter(
           texture,
@@ -1347,7 +1391,7 @@ export class ArenaScene extends Phaser.Scene {
         id === this.sessionId &&
         this.followed !== id
       ) {
-        this.cameras.main.startFollow(view.sprite, !highResBody, 1, 1, 0, 48);
+        this.cameras.main.startFollow(view.sprite, false, 1, 1, 0, 48);
         this.followed = id;
       }
     };
@@ -1435,6 +1479,7 @@ export class ArenaScene extends Phaser.Scene {
     );
     this.creepCombatArt?.sync(state, this.zoneId, localBody);
     this.hitArt.sync();
+    this.worldDepth?.sync(state, this.zoneId, this.actors);
   }
 
   private keepLocalHeroVisible(
@@ -1737,6 +1782,10 @@ export class ArenaScene extends Phaser.Scene {
       chu: this.chu?.inspect(),
       ready: this.ready,
       polished: this.polished,
+      worldDepth: this.worldDepth?.inspect(),
+      heroMotionObserved: [
+        ...(this.registry.get('hero-motion-observed') ?? []),
+      ],
       artwork: productionArtBindings(this),
       animationTimings: {
         tayDocIdle: this.anims

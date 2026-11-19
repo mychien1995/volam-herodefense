@@ -1,0 +1,503 @@
+import { cancelOwnedEffects } from '../../packages/game-core/dist/status.js';
+import assert from 'node:assert/strict';
+import { writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import {
+  addCreep,
+  initializeProgression,
+  refreshCharacter,
+} from '@volam/game-core';
+import { waitForQa } from '../../tools/qa-wait.mjs';
+
+export async function verifyWorldDepth({ room, pages, out }) {
+  const [page, peer] = pages,
+    w = room.world,
+    sim = room.simulation,
+    c = sim.arena.config;
+  const h = [...w.heroes.values()][0];
+  const read = (p = page) => p.evaluate(() => window.__VOLAM__.snapshot());
+  const inspect = () => page.evaluate(() => window.__VOLAM__.presentation());
+  const wait = (fn, label) =>
+    waitForQa(fn, label, { timeout: 12000, diagnostics: inspect });
+  const report = {
+    status: 'RUNNING',
+    clients: pages.length,
+    cases: [],
+    fixture:
+      'Real M3D room/Phaser. Server-only legal build, durable target and placement prerequisites; keyboard actions/hits. Client paused only for exact PNG comparisons.',
+  };
+  const save = () =>
+    writeFileSync(
+      resolve(out, 'verification.json'),
+      JSON.stringify(report, null, 2),
+    );
+  sim.invasion.nextWaveTick = w.tick + 100000;
+  const ids = [
+    'hoa_van_chuong',
+    'cuong_long_loan_vu',
+    'phi_long_tai_thien',
+    'khang_long_huu_hoi',
+    'hang_long_hoa_vu',
+  ];
+  h.schoolId = 'cai_bang';
+  h.basicId = 'cai_bang_chuong';
+  h.level = 30;
+  room.state.players.get(h.id).schoolId = 'cai_bang';
+  initializeProgression(h, c, 'custom', h.basicId);
+  for (const id of ids) h.progression.ranks[id] = 4;
+  h.progression.defaultSkills = [...ids];
+  h.progression.revision++;
+  const reset = (ability = ids[0]) => {
+    cancelOwnedEffects(w, h.id);
+    w.creeps.clear();
+    w.projectiles.clear();
+    w.areas = [];
+    w.shots = [];
+    w.actions = [];
+    w.combos = [];
+    Object.assign(h, {
+      x: 700,
+      y: 660,
+      fx: 1,
+      fy: 0,
+      moveX: 0,
+      moveY: 0,
+      pose: 'idle',
+      statuses: [],
+      actionUntil: 0,
+      hurtUntil: 0,
+      castAbilityId: '',
+      cooldown: 0,
+      skillIds:
+        ability === 'hang_long_hoa_vu'
+          ? ['', '', '', '', ability]
+          : [ability, '', '', '', ''],
+      skillCooldowns: [0, 0, 0, 0, 0],
+      abilityCooldowns: {},
+      basicChains: {},
+    });
+    refreshCharacter(h, c);
+    h.hp = h.maxHp;
+    h.mana = h.maxMana;
+    for (const other of w.heroes.values())
+      if (other.id !== h.id)
+        Object.assign(other, { x: 1050, y: 720, moveX: 0, moveY: 0 });
+    const target = addCreep(w, 'depth_target', { x: 810, y: 660 }, c);
+    Object.assign(target, {
+      archetypeId: 'creep_wild_dog',
+      hp: 100000,
+      maxHp: 100000,
+      controlled: true,
+      cooldown: w.tick + 100000,
+    });
+    target.stats = {
+      ...c.creep,
+      hp: 100000,
+      damage: 0,
+      defense: 0,
+      xp: 0,
+      gold: 0,
+    };
+    return target;
+  };
+  reset();
+  await wait(
+    async () => (await inspect()).worldDepth?.actors.some((a) => a.id === h.id),
+    'Chưởng shadow',
+  );
+  assert.equal((await inspect()).worldDepth.lanterns, 2);
+  assert.equal((await inspect()).worldDepth.props.length, 6);
+  assert.equal((await inspect()).worldDepth.terrain.length, 4);
+  assert.equal((await inspect()).worldDepth.heroShadowFacings, 4);
+  assert.equal((await inspect()).worldDepth.dogShadowFacings, 4);
+  await wait(
+    async () =>
+      (await inspect()).worldDepth.actors.some(
+        (a) => a.id === 'depth_target' && a.kind === 'dog' && a.visible,
+      ),
+    'dog shadow',
+  );
+  const joins = (await inspect()).worldDepth.groundJoins;
+  assert.ok(
+    joins.originalMaxRgbJump > 10,
+    'reproduced mismatched original material edges',
+  );
+  assert.ok(
+    joins.correctedMeanRgbJump < joins.originalMeanRgbJump * 0.6,
+    'material joins no longer have a sharp color cut',
+  );
+  assert.equal(joins.mirrored, false, 'no reflected wallpaper pattern');
+  report.groundJoins = joins;
+
+  assert.deepEqual(
+    (await inspect()).worldDepth.clippedShadowTextures,
+    [],
+    'long projected shadows stay clear of every texture edge',
+  );
+  for (const glow of (await inspect()).worldDepth.lanternGlows)
+    assert.ok(
+      glow.y > 520 && glow.y < 560,
+      'glow follows the actual lantern flame, not padded PNG bounds',
+    );
+  await page.locator('#game canvas').focus();
+  await page.keyboard.press('F8');
+  await wait(async () => !(await inspect()).worldDepth.enabled, 'F8 OFF');
+  assert.equal(
+    (await inspect()).worldDepth.actors.find((a) => a.id === h.id)
+      .originalVisible,
+    true,
+  );
+  assert.equal(
+    (await inspect()).worldDepth.actors.find((a) => a.kind === 'dog')
+      .originalVisible,
+    true,
+  );
+  assert.ok(
+    (await inspect()).worldDepth.terrain.every((p) => !p.visible),
+    'OFF removes sunlight and terrain masks',
+  );
+  await page.keyboard.press('F8');
+  await wait(async () => (await inspect()).worldDepth.enabled, 'F8 ON');
+  const startX = h.x;
+  await page.keyboard.down('ArrowRight');
+  await wait(async () => h.x > startX + 16, 'server movement');
+  await page.keyboard.up('ArrowRight');
+  await wait(async () => {
+    const a = (await read()).state.players[h.id],
+      b = (await read(peer)).state.players[h.id];
+    return Math.abs(a.x - b.x) < 1 && a.x > startX + 16;
+  }, 'peer movement agreement');
+  report.movementAgreement = true;
+  const dog = w.creeps.get('depth_target');
+  report.dogDirections = [];
+  for (const [direction, fx, fy] of [
+    ['down', 0, 1],
+    ['left', -1, 0],
+    ['up', 0, -1],
+    ['right', 1, 0],
+  ]) {
+    Object.assign(dog, { fx, fy });
+    await wait(async () => {
+      const a = (await inspect()).worldDepth.actors.find(
+        (a) => a.id === dog.id,
+      );
+      return (
+        a?.castTexture === 'world-depth:cast:dog:' + direction && a.visible
+      );
+    }, 'dog shadow facing ' + direction);
+    report.dogDirections.push(direction);
+  }
+  const dogStartX = dog.x;
+  dog.controlled = false;
+  await wait(
+    async () => dog.x < dogStartX - 6,
+    'dog moves through real server AI',
+  );
+  dog.controlled = true;
+  await wait(async () => {
+    const v = await inspect(),
+      body = v.actors.find((a) => a.id === dog.id),
+      shadow = v.worldDepth.actors.find((a) => a.id === dog.id);
+    return (
+      body &&
+      shadow &&
+      Math.abs(body.x - shadow.x) < 0.1 &&
+      Math.abs(body.y - 3 - shadow.y) < 1
+    );
+  }, 'moving dog feet and shadow align');
+  report.dogMovement = true;
+
+  report.walkDirections = [];
+  for (const key of ['ArrowDown', 'ArrowLeft', 'ArrowUp', 'ArrowRight']) {
+    const start = { x: h.x, y: h.y };
+    await page.keyboard.down(key);
+    await wait(
+      async () => Math.hypot(h.x - start.x, h.y - start.y) > 14,
+      'walk ' + key,
+    );
+    await page.keyboard.up(key);
+    await wait(async () => {
+      const v = await inspect(),
+        actor = v.actors.find((a) => a.id === h.id),
+        shadow = v.worldDepth.actors.find((a) => a.id === h.id);
+      return (
+        actor &&
+        shadow &&
+        Math.abs(actor.x - shadow.x) < 0.1 &&
+        Math.abs(actor.y - 3 - shadow.y) < 1
+      );
+    }, 'shadow feet ' + key);
+    report.walkDirections.push(key);
+  }
+  const pause = () =>
+    page.evaluate(
+      () =>
+        new Promise((resolve) => {
+          window.__VOLAM__.afterRender((renderer) => {
+            renderer.game.scene.getScene('Arena').scene.pause();
+            resolve();
+          });
+        }),
+    );
+  const resume = () =>
+    page.evaluate(
+      () =>
+        new Promise((resolve) => {
+          window.__VOLAM__.afterRender((renderer) => {
+            renderer.game.scene.getScene('Arena').scene.resume();
+            resolve();
+          });
+        }),
+    );
+  const pair = async (name) => {
+    const step = sim.step;
+    sim.step = () => {};
+    const frozenTick = w.tick;
+    const frame = await inspect();
+    for (const [enabled, suffix] of [
+      [false, 'before'],
+      [true, 'after'],
+    ]) {
+      await page.evaluate(
+        (enabled) =>
+          new Promise((resolve) => {
+            const api = window.__VOLAM__;
+            api.reviewWorldDepth(enabled);
+            api.afterRender(() => resolve());
+          }),
+        enabled,
+      );
+      await page
+        .locator('#viewport')
+        .screenshot({ path: resolve(out, name + '-' + suffix + '.png') });
+      if (name === 'arena')
+        await page.screenshot({
+          path: resolve(out, 'ground-join-' + suffix + '.png'),
+          clip: { x: 0, y: 160, width: 460, height: 480 },
+        });
+    }
+    report[name] = {
+      zoom: frame.zoom,
+      actor: frame.actors.find((a) => a.id === h.id),
+      exactRenderStatePaused: true,
+    };
+    const after = await inspect();
+    const actorBefore = frame.actors.find((a) => a.id === h.id),
+      actorAfter = after.actors.find((a) => a.id === h.id);
+    assert.deepEqual(
+      [actorAfter.x, actorAfter.y, actorAfter.frame, after.zoom],
+      [actorBefore.x, actorBefore.y, actorBefore.frame, frame.zoom],
+    );
+    assert.equal(w.tick, frozenTick);
+    sim.step = step;
+    await resume();
+    save();
+  };
+  reset();
+  await wait(
+    async () => Math.abs((await read()).state.players[h.id].x - 700) < 1,
+    'baseline acknowledged',
+  );
+  await page.locator('#feedback').waitFor({ state: 'hidden', timeout: 6000 });
+  await page.waitForTimeout(700);
+  await pause();
+  await pair('arena');
+  for (const ability of ['cai_bang_chuong', ...ids]) {
+    const target = reset(ability === 'cai_bang_chuong' ? ids[0] : ability);
+    await wait(
+      async () =>
+        (await read()).state.players[h.id][
+          ability === 'hang_long_hoa_vu' ? 'tSkill' : 'qSkill'
+        ] === (ability === 'cai_bang_chuong' ? ids[0] : ability),
+      'loadout ' + ability,
+    );
+    await page.locator('#game canvas').focus();
+    const before = (await read()).events.at(-1)?.id ?? 0;
+    await page.evaluate(
+      ({ ability, before }) => {
+        const api = window.__VOLAM__;
+        window.__depthCapture = new Promise((resolve, reject) => {
+          const deadline = performance.now() + 10000,
+            frames = new Set(),
+            textureFrames = new Map();
+          const sample = (renderer) => {
+            const v = api.presentation(),
+              s = api.snapshot();
+            const lights = v.worldDepth.lights.filter(
+              (l) => l.ability === ability,
+            );
+            for (const light of lights) {
+              frames.add(light.texture + ':' + light.frame);
+              const seen = textureFrames.get(light.texture) ?? new Set();
+              seen.add(light.frame);
+              textureFrames.set(light.texture, seen);
+            }
+            const event = s.events.find(
+              (e) =>
+                e.id > before &&
+                e.sourceId === s.sessionId &&
+                e.abilityId === ability &&
+                ['attack', 'cast'].includes(e.kind),
+            );
+            if (
+              event &&
+              lights.length &&
+              [...textureFrames.values()].some((seen) => seen.size >= 2)
+            ) {
+              if (
+                ability === 'cai_bang_chuong' ||
+                ability === 'hang_long_hoa_vu'
+              )
+                renderer.game.scene.getScene('Arena').scene.pause();
+              resolve({
+                event,
+                frames: [...frames],
+                lights,
+                actor: v.actors.find((a) => a.id === s.sessionId),
+              });
+            } else if (performance.now() > deadline)
+              reject(
+                Error(
+                  'No animated fire light: ' +
+                    ability +
+                    ', observed=' +
+                    JSON.stringify({
+                      depth: v.worldDepth,
+                      events: s.events
+                        .filter((e) => e.sourceId === s.sessionId)
+                        .slice(-5),
+                      hero: s.state.players[s.sessionId],
+                      textures: renderer.game.scene
+                        .getScene('Arena')
+                        .children.list.filter(
+                          (o) =>
+                            o.visible &&
+                            o.texture &&
+                            !o.name.startsWith('world-depth:'),
+                        )
+                        .map((o) => [o.texture.key, o.name, o.frame.name])
+                        .slice(-35),
+                    }),
+                ),
+              );
+            else api.afterRender(sample);
+          };
+          api.afterRender(sample);
+        });
+      },
+      { ability, before },
+    );
+    await page.keyboard.press(
+      ability === 'cai_bang_chuong'
+        ? 'KeyA'
+        : ability === 'hang_long_hoa_vu'
+          ? 'KeyT'
+          : 'KeyQ',
+      {
+        delay: 36,
+      },
+    );
+    const observed = await page.evaluate(() => window.__depthCapture);
+    assert.ok(
+      observed.lights.every(
+        (l) =>
+          l.core.visible &&
+          Number.isFinite(l.core.x) &&
+          Number.isFinite(l.core.y),
+      ),
+      'visible fire emission cores',
+    );
+    report.cases.push({ ability, ...observed });
+    save();
+    if (ability === 'cai_bang_chuong' || ability === 'hang_long_hoa_vu')
+      await pair(ability);
+    if (ability !== 'khang_long_huu_hoi') {
+      await wait(
+        async () => target.hp < 100000,
+        'authoritative hit ' + ability,
+      );
+      await wait(async () => {
+        const a = (await read()).state.creeps[target.id],
+          b = (await read(peer)).state.creeps[target.id];
+        return a && b && a.hp === b.hp && a.hp < 100000;
+      }, 'peer HP ' + ability);
+    }
+  }
+  await page.evaluate(() => window.__VOLAM__.reviewWorldDepth(false));
+  assert.equal((await inspect()).worldDepth.lights.length, 0);
+  reset();
+  await page.waitForTimeout(1500);
+  await page.evaluate(() => window.__VOLAM__.reviewWorldDepth(true));
+  await wait(
+    async () => !(await inspect()).worldDepth.lights.length,
+    'fire lifecycle cleanup',
+  );
+  report.cleanup = (await inspect()).worldDepth;
+  assert.ok(report.cleanup.pooledFireLights <= 16);
+  assert.equal(report.cleanup.textures, 17);
+  for (let i = 0; i < 6; i++) {
+    await page.keyboard.press('F8');
+    await page.keyboard.press('F8');
+  }
+  assert.equal((await inspect()).worldDepth.textures, 17);
+  report.frameTimings = [];
+  for (const enabled of [false, true]) {
+    await page.evaluate(
+      (value) => window.__VOLAM__.reviewWorldDepth(value),
+      enabled,
+    );
+    const result = await page.evaluate(
+      () =>
+        new Promise((resolve) => {
+          const deltas = [];
+          let last;
+          const sample = () => {
+            const now = performance.now();
+            if (last !== undefined) deltas.push(now - last);
+            last = now;
+            if (deltas.length < 90) window.__VOLAM__.afterRender(sample);
+            else {
+              const ordered = [...deltas].sort((a, b) => a - b);
+              resolve({
+                frames: deltas.length,
+                medianMs: ordered[45],
+                p95Ms: ordered[85],
+                averageMs: deltas.reduce((a, b) => a + b, 0) / deltas.length,
+              });
+            }
+          };
+          window.__VOLAM__.afterRender(sample);
+        }),
+    );
+    report.frameTimings.push({
+      enabled,
+      scene: 'idle arena; browser scheduling included',
+      ...result,
+    });
+  }
+  await page.evaluate(() => window.__VOLAM__.reviewWorldDepth(true));
+  assert.equal(sim.enter(h.id, 'private', 'forest'), undefined);
+  const zone = sim.zoneOf(h.id);
+  await wait(
+    async () => (await inspect()).zoneId === zone.id,
+    'forest transfer',
+  );
+  assert.equal((await inspect()).worldDepth.props.length, 0);
+  Object.assign(h, { x: zone.dungeon.exit.x, y: zone.dungeon.exit.y });
+  assert.equal(sim.exit(h.id), undefined);
+  await wait(
+    async () =>
+      (await inspect()).zoneId === 'arena' &&
+      (await inspect()).worldDepth.lanterns === 2,
+    'arena return',
+  );
+  assert.equal(
+    (await inspect()).worldDepth.textures,
+    17,
+    'zone return reuses cached masks',
+  );
+  report.zoneCleanup = true;
+  report.status = 'PASS';
+  save();
+  return report;
+}
