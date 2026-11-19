@@ -7,6 +7,7 @@ Read [session execution lessons](SESSION_EXECUTION_LESSONS.md) before choosing t
 | Work | Command |
 | --- | --- |
 | One unit/integration area | `pnpm check:quick tests/skill-assets.test.ts` (accepts more files and Vitest filters) |
+| Pure-core simulation iteration | `pnpm check:core tests/combat.test.ts tests/practice.test.ts` (explicit pure-core files; hash-verified artifacts) |
 | Environment preflight (no build/install) | `pnpm qa:preflight --mode browser [--config <profile>]` |
 | Preparation helper | `pnpm test:workflow` |
 | Affected art exports | `python -X utf8 scripts/verify-vo-dang.py` or the corresponding asset validator |
@@ -29,6 +30,8 @@ The pipe in the grep examples is a regular-expression alternative; quote it in t
 6. One Playwright invocation with the requested scope (the default configuration/suite if no arguments are supplied).
 
 The pipeline calls installed binaries directly; it does not invoke nested build/test scripts that prepare again. Existing standalone `pnpm typecheck`, `pnpm test`, `pnpm build` and `pnpm verify:assets` remain available and safe for independent use. Avoid chaining all of them when `check:final` already covers them. No check results are cached or inferred from previous success.
+
+`check:core` is a separate simulation-only iteration path: reuse prepared data and isolated compiled artifacts only when input/output SHA-256 match; execute tests fresh every time. It rejects IO/room/browser/asset graphs and keeps the final runner unchanged. [Cache boundaries, invalidation and commands](CORE_TEST_FAST_PATH.md).
 
 ## Environment and shared browser helpers — 2026-11-19
 

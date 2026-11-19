@@ -41,7 +41,7 @@ Reports [r3 integration](evidence/sessions/m3d-r3-final-fixed/check-workflow/fin
 
 ## Remaining tooling backlog
 
-- A pure-core iteration path that reuses prepared outputs only when relevant input identity is proven unchanged; final must still run full lock/hash guards. No existing `--reuse-prepared` command is implied. Do not bypass current preparation manually by treating this proposal as authorization.
+- Pure-core iteration is now implemented as `pnpm check:core <explicit test files>` with input/output SHA-256, isolated compiled artifacts and fresh tests. Final keeps all existing guards and never consumes this cache. [Boundary and invalidation rules](CORE_TEST_FAST_PATH.md). No generic `--reuse-prepared` bypass is implied.
 - Split safe pure-core tests for parallel execution from room tests that share ports/environment. Current `vitest.config.ts` has `fileParallelism:false`; benchmark isolation/port correctness before changing it. Do not blindly disable isolation.
 - Reuse owned iteration services/compiler processes in profiles that explicitly support it; keep final production verification and cleanup/identity checks.
 - The reference index and preflight/shared browser helpers are now implemented; see [QA tooling](QA_TOOLING.md). Extend migration to legacy profiles only after verifying their actual port/browser/fixture contracts. Never cache automatic test success or director approval.

@@ -1,0 +1,76 @@
+{
+  "runId": "0f9386d7-8de5-422e-843d-d259181f68a2",
+  "mode": "quick",
+  "args": [
+    "tests/combat.test.ts",
+    "tests/practice.test.ts"
+  ],
+  "startedAt": "2026-11-19T14:18:48.728Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.008,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "quick",
+            "stage": "before-build",
+            "managed": false
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": "No managed service ports for this profile"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 12.57,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-before-2\\check-workflow\\0f9386d7-8de5-422e-843d-d259181f68a2\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.12,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-before-2\\check-workflow\\0f9386d7-8de5-422e-843d-d259181f68a2\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "focused tests",
+      "seconds": 2.46,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-before-2\\check-workflow\\0f9386d7-8de5-422e-843d-d259181f68a2\\3-focused-tests.log",
+      "outputBytes": 193
+    }
+  ],
+  "totalSeconds": 15.17
+}

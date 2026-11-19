@@ -1,0 +1,84 @@
+{
+  "runId": "72e26664-eebd-4baa-8a51-6d59475aa106",
+  "mode": "core",
+  "args": [
+    "tests/combat.test.ts",
+    "tests/practice.test.ts"
+  ],
+  "startedAt": "2026-11-19T14:37:35.082Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "status": "PASS",
+      "seconds": 0.006,
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "quick",
+            "stage": "before-build",
+            "managed": false
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": "No managed service ports for this profile"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5"
+          }
+        }
+      ]
+    },
+    {
+      "label": "pure-core import boundary",
+      "status": "PASS",
+      "seconds": 0.7261920000000001,
+      "tests": [
+        "tests/combat.test.ts",
+        "tests/practice.test.ts"
+      ],
+      "modules": 125
+    },
+    {
+      "label": "prepared simulation data",
+      "status": "PASS",
+      "hit": true,
+      "input": "246ce972ec5f3d8eaaaa041c972837d8a5d4600e744aa6bab2cf469785f35840",
+      "output": "8eaf371483c4bdaec0ca3057e546d6b3792fc57298c312d3e375dc1261db4704"
+    },
+    {
+      "label": "compiled pure-core artifacts",
+      "status": "PASS",
+      "hit": true,
+      "input": "71d15ac97a364236d4b981ad391ff06b106548ba4d3c280178f1ba6a84ca5992",
+      "output": "cb97c4ecc163400f23861a5e0740f6922908d254fbedc84a664237a7601b827d"
+    },
+    {
+      "label": "fresh pure-core tests",
+      "seconds": 2.429,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-core-warm-3\\check-core\\72e26664-eebd-4baa-8a51-6d59475aa106\\4-fresh-pure-core-tests.log",
+      "outputBytes": 193
+    }
+  ],
+  "totalSeconds": 4.562
+}

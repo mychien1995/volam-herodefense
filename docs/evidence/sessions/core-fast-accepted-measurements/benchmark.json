@@ -1,0 +1,117 @@
+{
+  "scenario": "Final missing-JSON fix: warm baseline samples retained from balanced six-run comparison; final candidate warm measurements repeated; same 47 tests and toolchain. Cache-cold sample separate; OS caches/load uncontrolled.",
+  "tests": [
+    "tests/combat.test.ts",
+    "tests/practice.test.ts"
+  ],
+  "sourceSha256": {
+    "tools/core-test-cache.mjs": "862d67223447e2f01ed6d04ebf25d657eb82ad470f8330a04ab93bfef100b1d4",
+    "scripts/check-core.mjs": "476fb0e88ee9b437f13fd10fb9be5a506f465aac653e80e5dfe4ab820f90afb0",
+    "vitest.core.config.ts": "92a8c72e72635880f408680abe630f999819b64d8cb0bef556107cc5949cf7f8"
+  },
+  "cold": {
+    "mode": "core",
+    "trial": 0,
+    "session": "core-fast-accepted-cold",
+    "status": "PASS",
+    "wallSeconds": 18.944,
+    "reportedSeconds": 18.646,
+    "testsSeconds": 2.424,
+    "tests": 47,
+    "files": 2,
+    "hits": [
+      false,
+      false
+    ],
+    "reportPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-accepted-cold\\check-core\\core-timings.json"
+  },
+  "samples": [
+    {
+      "mode": "quick",
+      "trial": 1,
+      "session": "core-fast-quick-warm-1",
+      "status": "PASS",
+      "wallSeconds": 19.01,
+      "reportedSeconds": 18.9,
+      "testsSeconds": 2.44,
+      "tests": 47,
+      "files": 2,
+      "hits": [],
+      "reportPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-quick-warm-1\\check-workflow\\quick-timings.json"
+    },
+    {
+      "mode": "quick",
+      "trial": 2,
+      "session": "core-fast-quick-warm-2",
+      "status": "PASS",
+      "wallSeconds": 18.942,
+      "reportedSeconds": 18.84,
+      "testsSeconds": 2.51,
+      "tests": 47,
+      "files": 2,
+      "hits": [],
+      "reportPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-quick-warm-2\\check-workflow\\quick-timings.json"
+    },
+    {
+      "mode": "quick",
+      "trial": 3,
+      "session": "core-fast-quick-warm-3",
+      "status": "PASS",
+      "wallSeconds": 15.238,
+      "reportedSeconds": 15.13,
+      "testsSeconds": 2.39,
+      "tests": 47,
+      "files": 2,
+      "hits": [],
+      "reportPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-quick-warm-3\\check-workflow\\quick-timings.json"
+    },
+    {
+      "mode": "core",
+      "trial": 1,
+      "session": "core-fast-accepted-warm-1",
+      "status": "PASS",
+      "wallSeconds": 4.794,
+      "reportedSeconds": 4.486,
+      "testsSeconds": 2.4,
+      "tests": 47,
+      "files": 2,
+      "hits": [
+        true,
+        true
+      ],
+      "reportPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-accepted-warm-1\\check-core\\core-timings.json"
+    },
+    {
+      "mode": "core",
+      "trial": 2,
+      "session": "core-fast-accepted-warm-2",
+      "status": "PASS",
+      "wallSeconds": 4.844,
+      "reportedSeconds": 4.531,
+      "testsSeconds": 2.402,
+      "tests": 47,
+      "files": 2,
+      "hits": [
+        true,
+        true
+      ],
+      "reportPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-accepted-warm-2\\check-core\\core-timings.json"
+    },
+    {
+      "mode": "core",
+      "trial": 3,
+      "session": "core-fast-accepted-warm-3",
+      "status": "PASS",
+      "wallSeconds": 4.934,
+      "reportedSeconds": 4.627,
+      "testsSeconds": 2.482,
+      "tests": 47,
+      "files": 2,
+      "hits": [
+        true,
+        true
+      ],
+      "reportPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-accepted-warm-3\\check-core\\core-timings.json"
+    }
+  ]
+}

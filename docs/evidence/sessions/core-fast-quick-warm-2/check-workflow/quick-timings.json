@@ -1,0 +1,76 @@
+{
+  "runId": "17f26662-5f1e-4519-8e89-aad733f17a64",
+  "mode": "quick",
+  "args": [
+    "tests/combat.test.ts",
+    "tests/practice.test.ts"
+  ],
+  "startedAt": "2026-11-19T14:37:11.027Z",
+  "status": "PASS",
+  "stages": [
+    {
+      "label": "environment preflight",
+      "seconds": 0.008,
+      "status": "PASS",
+      "checks": [
+        {
+          "id": "workspace",
+          "status": "PASS",
+          "detail": {
+            "mode": "quick",
+            "stage": "before-build",
+            "managed": false
+          }
+        },
+        {
+          "id": "session",
+          "status": "PASS",
+          "detail": "No managed service ports for this profile"
+        },
+        {
+          "id": "node",
+          "status": "PASS",
+          "detail": "26.0.0"
+        },
+        {
+          "id": "installation",
+          "status": "PASS",
+          "detail": "pnpm@11.25.0"
+        },
+        {
+          "id": "tools",
+          "status": "PASS",
+          "detail": {
+            "typescript": "7.0.2",
+            "vitest": "5.0.5"
+          }
+        }
+      ]
+    },
+    {
+      "label": "prepare assets (once)",
+      "seconds": 16.19,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-quick-warm-2\\check-workflow\\17f26662-5f1e-4519-8e89-aad733f17a64\\1-prepare-assets-once-.log",
+      "outputBytes": 738
+    },
+    {
+      "label": "compile TypeScript",
+      "seconds": 0.12,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-quick-warm-2\\check-workflow\\17f26662-5f1e-4519-8e89-aad733f17a64\\2-compile-TypeScript.log",
+      "outputBytes": 0
+    },
+    {
+      "label": "focused tests",
+      "seconds": 2.51,
+      "status": "PASS",
+      "exitCode": 0,
+      "logPath": "D:\\Projects\\volam-hero-defense\\docs\\evidence\\sessions\\core-fast-quick-warm-2\\check-workflow\\17f26662-5f1e-4519-8e89-aad733f17a64\\3-focused-tests.log",
+      "outputBytes": 193
+    }
+  ],
+  "totalSeconds": 18.84
+}
