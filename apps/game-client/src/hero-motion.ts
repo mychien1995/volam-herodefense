@@ -1,4 +1,10 @@
 import {
+  preloadUnifiedHeroes,
+  presentUnifiedHero,
+  unifiedHeroBasics,
+} from './unified-hero-body.js';
+import type { UnifiedHeroClock } from './unified-hero-policy.js';
+import {
   preloadChuongBody,
   presentChuongBody,
 } from './cai-bang-chuong-body.js';
@@ -6,21 +12,22 @@ import {
   preloadHeroFinish,
   presentHeroFinish,
   actionBodyPose,
-  type HeroActionClock,
 } from './hero-finish.js';
 import Phaser from 'phaser';
 import raw from '../../../assets/exports/hero-motion-v1/manifest.json';
 type Body = Phaser.GameObjects.Sprite;
 const actors = new Map(raw.actors.map((a) => [a.basic, a]));
 export function preloadHeroMotion(scene: Phaser.Scene): void {
+  preloadUnifiedHeroes(scene);
   preloadChuongBody(scene);
-  preloadHeroFinish(scene);
+  preloadHeroFinish(scene, unifiedHeroBasics);
   for (const a of actors.values())
-    scene.load.atlas(
-      'hero-motion:' + a.basic,
-      '/assets/hero-motion-v1/' + a.basic + '.png',
-      '/assets/hero-motion-v1/' + a.basic + '.json',
-    );
+    if (!unifiedHeroBasics.has(a.basic))
+      scene.load.atlas(
+        'hero-motion:' + a.basic,
+        '/assets/hero-motion-v1/' + a.basic + '.png',
+        '/assets/hero-motion-v1/' + a.basic + '.json',
+      );
 }
 export function motionFacing(x: number, y: number): string {
   if (Math.abs(x) < 0.1 && Math.abs(y) < 0.1) return 'down';
@@ -45,8 +52,12 @@ export function presentHeroMotion(
   fx: number,
   fy: number,
   statuses: readonly { kind: string }[],
-  clock?: HeroActionClock,
+  clock?: UnifiedHeroClock,
 ): void {
+  if (
+    presentUnifiedHero(scene, sprite, basic, pose, motionFacing(fx, fy), clock)
+  )
+    return;
   if (
     presentChuongBody(scene, sprite, basic, pose, motionFacing(fx, fy), clock)
   )

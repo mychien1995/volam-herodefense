@@ -13,7 +13,6 @@ import {
   applyStatus,
 } from '../../packages/game-core/dist/status.js';
 import { waitForQa } from '../../tools/qa-wait.mjs';
-const KEY = 'cai-bang-chuong-unified';
 const dirs = [
   ['down', 0, 1, ['ArrowDown']],
   ['down_right', 1, 1, ['ArrowDown', 'ArrowRight']],
@@ -24,7 +23,12 @@ const dirs = [
   ['left', -1, 0, ['ArrowLeft']],
   ['down_left', -1, 1, ['ArrowDown', 'ArrowLeft']],
 ];
-export async function verifyCoherentChuong({ room, pages, out }) {
+export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
+  const KEY = profile.texture ?? 'cai-bang-chuong-unified';
+  const BASIC = profile.basic ?? 'cai_bang_chuong',
+    SCHOOL = profile.school ?? 'cai_bang';
+  const pivot = profile.pivot ?? [0.5, 132 / 144];
+  const baseline = process.env.VOLAM_CHUONG_STAGE === 'baseline';
   const w = room.world,
     sim = room.simulation,
     c = sim.arena.config,
@@ -38,9 +42,22 @@ export async function verifyCoherentChuong({ room, pages, out }) {
         process.env.VOLAM_CHUONG_DIRECTIONS.split(',').includes(d[0]),
       )
     : dirs;
+  // Read-only QA history of serialized server state: compare a peer patch with its own tick,
+  // not with live HP which continues regenerating while six browser contexts are sampled.
+  const serverHP = new Map(),
+    originalSyncState = room.syncState;
+  if (profile.staffChoreography)
+    room.syncState = function (...args) {
+      const result = originalSyncState.apply(this, args);
+      serverHP.set(this.state.tick, this.state.players.get(ids[0])?.hp);
+      if (serverHP.size > 900) serverHP.delete(serverHP.keys().next().value);
+      return result;
+    };
   const report = {
     status: 'RUNNING',
     clients: pages.length,
+    basic: BASIC,
+    partial: !!profile.partial,
     scope:
       process.env.VOLAM_CHUONG_STAGE === 'party'
         ? 'party, F8, portrait only'
@@ -53,7 +70,7 @@ export async function verifyCoherentChuong({ room, pages, out }) {
     reactions: [],
     authority: [],
     notes: [
-      'Only Cái Bang Chưởng changed. Status and hit fixtures are server-owned, body clocks never send combat commands.',
+      'Profile-scoped body art only. Status and hit fixtures are server-owned, body clocks never send combat commands.',
     ],
   };
   mkdirSync(out, { recursive: true });
@@ -98,11 +115,11 @@ export async function verifyCoherentChuong({ room, pages, out }) {
     });
   };
   heroes.forEach((h) => {
-    h.schoolId = 'cai_bang';
-    room.state.players.get(h.id).schoolId = 'cai_bang';
+    h.schoolId = SCHOOL;
+    room.state.players.get(h.id).schoolId = SCHOOL;
     h.level = 30;
     h.xp = experienceAtLevel(30, c);
-    initializeProgression(h, c, 'fixed', 'cai_bang_chuong');
+    initializeProgression(h, c, 'fixed', BASIC);
     h.progression.ranks = Object.fromEntries(
       h.progression.defaultSkills.map((id) => [id, 4]),
     );
@@ -119,7 +136,7 @@ export async function verifyCoherentChuong({ room, pages, out }) {
       );
       return heroes.every(
         (h) =>
-          s.state.players[h.id]?.basicId === 'cai_bang_chuong' &&
+          s.state.players[h.id]?.basicId === BASIC &&
           bodies.some(
             (b) =>
               b.id === h.id &&
@@ -131,7 +148,7 @@ export async function verifyCoherentChuong({ room, pages, out }) {
     }, 'coherent body and server placement');
   const observe = async (ms, input = async () => {}, captureLabels = []) => {
     await page.evaluate(
-      ({ ids, captureLabels }) => {
+      ({ ids, captureLabels, baseline }) => {
         const api = window.__VOLAM__;
         window.__chuongDeadline = Infinity;
         window.__chuongCapture = new Promise((resolve) => {
@@ -155,6 +172,11 @@ export async function verifyCoherentChuong({ room, pages, out }) {
                 scale: [b.scaleX, b.scaleY],
                 origin: [b.originX, b.originY],
                 tint: b.tintTopLeft,
+                facing:
+                  b.getData('hero-motion-direction') ??
+                  b.getData('renovation')?.direction,
+                phase: b.getData('unified-body-phase') ?? '',
+                basicStage: h.basicStage,
                 statuses: JSON.parse(h.statuses || '[]').map((s) => s.kind),
                 x: b.x,
                 y: b.y,
@@ -163,6 +185,12 @@ export async function verifyCoherentChuong({ room, pages, out }) {
                 ability: h.castAbilityId,
                 tick: snap.state.tick,
               });
+              if (baseline && id === ids[0]) {
+                const name =
+                  'before-' + b.texture.key.replace(/[^a-z0-9_-]/gi, '_');
+                if (!pngs[name])
+                  pngs[name] = renderer.game.canvas.toDataURL('image/png');
+              }
               if (id === ids[0])
                 for (const item of captureLabels) {
                   const label = typeof item === 'string' ? item : item.name,
@@ -183,7 +211,7 @@ export async function verifyCoherentChuong({ room, pages, out }) {
           api.afterRender(sample);
         });
       },
-      { ids, captureLabels },
+      { ids, captureLabels, baseline },
     );
     await input();
     await page.evaluate((ms) => {
@@ -201,9 +229,14 @@ export async function verifyCoherentChuong({ room, pages, out }) {
     for (const id of ids) {
       assert.ok(cap.frames[id].length > 2, label + ' samples');
       for (const f of cap.frames[id]) {
+        if (profile.partial && f.facing !== 'down_right') {
+          report.partialTransitionFrames =
+            (report.partialTransitionFrames ?? 0) + 1;
+          continue;
+        } // incomplete facings exist only in the one-direction production gate
         assert.equal(f.texture, KEY, label + ' source');
         assert.deepEqual(f.scale, [0.5, 0.5], label + ' scale');
-        assert.deepEqual(f.origin, [0.5, 132 / 144], label + ' pivot');
+        assert.deepEqual(f.origin, pivot, label + ' pivot');
       }
     }
   };
@@ -231,6 +264,88 @@ export async function verifyCoherentChuong({ room, pages, out }) {
     }
   };
   try {
+    if (baseline) {
+      reset(dirs[2]);
+      await wait(async () => {
+        const s = await read();
+        return heroes.every((h) => s.state.players[h.id]?.basicId === BASIC);
+      }, 'baseline build ack');
+      const idle = await observe(2850);
+      heroes.forEach((h, i) => target(h, dirs[2], 'baseline_target_' + i));
+      const action = await observe(1500, () => keys('KeyA'));
+      const textures = [
+        ...new Set(
+          [...idle.frames[ids[0]], ...action.frames[ids[0]]].map(
+            (f) => f.texture,
+          ),
+        ),
+      ];
+      report.sourceMix = {
+        textures,
+        idle: idle.frames[ids[0]],
+        action: action.frames[ids[0]],
+      };
+      save();
+      assert.deepEqual(
+        textures,
+        [KEY],
+        'one canonical body through idle and A',
+      );
+      return report;
+    }
+    if (
+      profile.staffChoreography &&
+      !profile.partial &&
+      !['reactions', 'party'].includes(process.env.VOLAM_CHUONG_STAGE)
+    ) {
+      reset(dirs[2]);
+      heroes.forEach((h) => (h.basicChains = {}));
+      heroes.forEach((h, i) => target(h, dirs[2], 'four_beat_target_' + i));
+      await settle();
+      report.staffCombo = [];
+      for (const [stage, pose] of [
+        ['thrust', 'thrust'],
+        ['sweep', 'sweep'],
+        ['lift', 'rising'],
+        ['smash', 'overhead'],
+      ]) {
+        await wait(
+          () => heroes.every((h) => w.tick >= h.cooldown),
+          'real A cadence',
+        );
+        const before = (await read()).events.at(-1)?.id ?? 0;
+        const cap = await observe(360, () => keys('KeyA'), [
+          { name: 'combo-' + pose, prefix: pose + '_' },
+        ]);
+        coherent(cap, 'four-beat ' + stage);
+        for (const id of ids) {
+          assert.ok(
+            cap.events.some(
+              (e) =>
+                e.id > before &&
+                e.sourceId === id &&
+                e.abilityId === BASIC &&
+                e.kind === 'attack' &&
+                e.stage === stage,
+            ),
+            'accepted A ' + stage,
+          );
+          assert.ok(
+            cap.frames[id].some((f) => f.frame === pose + '_right'),
+            'authored A contact ' + stage,
+          );
+        }
+        report.staffCombo.push({
+          stage,
+          pose,
+          events: cap.events.filter(
+            (e) => e.id > before && e.kind === 'attack',
+          ),
+          frames: [...new Set(cap.frames[ids[0]].map((f) => f.frame))],
+        });
+        save();
+      }
+    }
     for (const d of ['reactions', 'party'].includes(
       process.env.VOLAM_CHUONG_STAGE,
     )
@@ -278,7 +393,9 @@ export async function verifyCoherentChuong({ room, pages, out }) {
       }, 'peer walk synchronization');
       report.walk.push({ direction: d[0], frames: gait });
       save();
-      for (const key of ['KeyA', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT']) {
+      for (const key of profile.partial
+        ? ['KeyA']
+        : ['KeyA', 'KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT']) {
         reset(d);
         const targets = heroes.map((h, i) =>
           target(h, d, 'coherent_target_' + i),
@@ -286,21 +403,39 @@ export async function verifyCoherentChuong({ room, pages, out }) {
         await settle();
         const before = (await read()).events.at(-1)?.id ?? 0,
           slot = ['KeyQ', 'KeyW', 'KeyE', 'KeyR', 'KeyT'].indexOf(key),
-          ability = slot < 0 ? 'cai_bang_chuong' : heroes[0].skillIds[slot];
+          ability = slot < 0 ? BASIC : heroes[0].skillIds[slot];
         const cap = await observe(
           key === 'KeyT' ? 2100 : 1250,
           () => keys(key),
-          d[0] === 'down_right'
-            ? key === 'KeyA'
-              ? ['strike', 'alternate']
-              : key === 'KeyQ'
-                ? ['release']
-                : key === 'KeyE'
-                  ? ['rise']
-                  : key === 'KeyR'
-                    ? ['channel']
-                    : []
-            : [],
+          d[0] === 'down_right' && profile.staffChoreography
+            ? {
+                KeyA: ['thrust', 'sweep', 'rising', 'overhead'],
+                KeyQ: [{ name: 'Q-hoanh-tao', prefix: 'sweep_' }],
+                KeyW: [{ name: 'W-pha-giap', prefix: 'slam_contact_' }],
+                KeyE: [{ name: 'E-cam-long', prefix: 'pull_' }],
+                KeyR: [
+                  { name: 'R-truy-phong', prefix: 'thrust_' },
+                  { name: 'R-stomp', prefix: 'stomp_' },
+                ],
+                KeyT: [
+                  { name: 'T-whirl', prefix: 'sweep_' },
+                  { name: 'T-finisher-raise', prefix: 'finisher_raise_' },
+                  { name: 'T-ending', prefix: 'stomp_' },
+                ],
+              }[key]
+            : d[0] === 'down_right'
+              ? key === 'KeyA'
+                ? profile.basic === 'cai_bang_bong'
+                  ? ['thrust', 'sweep', 'rising', 'overhead']
+                  : ['strike', 'alternate']
+                : key === 'KeyQ'
+                  ? ['release']
+                  : key === 'KeyE'
+                    ? ['rise']
+                    : key === 'KeyR'
+                      ? ['channel']
+                      : []
+              : [],
         );
         coherent(cap, key + ' ' + d[0]);
         if (d[0] === 'right' && key === 'KeyA')
@@ -321,9 +456,19 @@ export async function verifyCoherentChuong({ room, pages, out }) {
           assert.ok(
             f.some(
               (f) =>
-                /^(windup|strike|alternate|charge|release|rise|channel|recover)_/.test(
+                /^(native|windup|strike|alternate|charge|release|rise|channel|recover|thrust|sweep|rising|overhead|pull|slam|stomp|finisher)_/.test(
                   f,
-                ) && f.endsWith('_' + d[0]),
+                ) &&
+                f.endsWith(
+                  '_' +
+                    ((profile.nativeFacingAbilities ?? []).includes(ability)
+                      ? d[0].includes('down')
+                        ? 'down'
+                        : d[0].includes('up')
+                          ? 'up'
+                          : d[0]
+                      : d[0]),
+                ),
             ),
             'action body ' + key + '/' + i,
           );
@@ -331,12 +476,37 @@ export async function verifyCoherentChuong({ room, pages, out }) {
         }
         const peer = (await read(pages[1])).state;
         for (const h of heroes)
-          assert.equal(peer.players[h.id].hp, h.hp, 'peer health');
+          assert.ok(
+            Math.abs(peer.players[h.id].hp - h.hp) < 0.001,
+            'peer health (schema float precision)',
+          );
         if (key === 'KeyA')
           assert.ok(
             targets.some((e) => e.hp < e.maxHp),
             'server projectile hit',
           );
+        if (profile.staffChoreography && ability === 'pha_giap_bong') {
+          const samples = cap.frames[ids[0]],
+            phases = [...new Set(samples.map((f) => f.phase))];
+          for (const [phase, pose] of [
+            ['raise', 'slam_raise'],
+            ['strike', 'slam_contact'],
+            ['recovery', 'recover'],
+          ])
+            assert.ok(
+              samples.some(
+                (f) =>
+                  f.phase.includes(phase) && f.frame.startsWith(pose + '_'),
+              ),
+              'Phá Giáp ' + phase + ' body matches live VFX clock',
+            );
+          report.staffSlam ??= [];
+          report.staffSlam.push({
+            direction: d[0],
+            phases,
+            frames: [...new Set(samples.map((f) => f.frame))],
+          });
+        }
         report.actions.push({ direction: d[0], key, ability, cases });
         save();
       }
@@ -358,7 +528,8 @@ export async function verifyCoherentChuong({ room, pages, out }) {
           sim.events.push({ zoneId: 'arena', event });
       };
     };
-    for (const d of process.env.VOLAM_CHUONG_STAGE === 'party'
+    for (const d of process.env.VOLAM_CHUONG_STAGE === 'party' ||
+    profile.partial
       ? []
       : testingDirs) {
       reset(d);
@@ -380,11 +551,32 @@ export async function verifyCoherentChuong({ room, pages, out }) {
         hit.frames[h.id].some((f) => f.frame.startsWith('hurt_')),
         'authored hurt',
       );
-      assert.equal(
-        (await read(pages[1])).state.players[h.id].hp,
-        h.hp,
-        'peer hit HP',
+      const hitTick = Math.max(
+        ...hit.events
+          .filter((e) => e.kind === 'hit' && e.targetId === h.id)
+          .map((e) => e.tick),
       );
+      let acknowledged;
+      await wait(async () => {
+        const state = (await read(pages[1])).state;
+        const peerHp = state.players[h.id].hp;
+        const serverHp = profile.staffChoreography
+          ? serverHP.get(state.tick)
+          : h.hp;
+        const matched =
+          state.tick >= hitTick &&
+          serverHp !== undefined &&
+          Math.abs(peerHp - serverHp) < 0.001;
+        if (matched) acknowledged = { tick: state.tick, serverHp, peerHp };
+        return matched;
+      }, 'peer hit HP at acknowledged server tick');
+      report.authority.push({
+        kind: 'resolved-hit',
+        direction: d[0],
+        hitTick,
+        acknowledged,
+      });
+      save();
       report.reactions.push({
         direction: d[0],
         kind: 'hurt',
@@ -491,16 +683,25 @@ export async function verifyCoherentChuong({ room, pages, out }) {
     const portrait = await page
       .locator('#viewport')
       .evaluate((el) => el.style.getPropertyValue('--hero-portrait'));
-    assert.ok(portrait.includes('/cai-bang-chuong-unified-v1/avatar.png'));
+    if (!profile.partial)
+      assert.ok(
+        portrait.includes(
+          profile.avatar ?? '/cai-bang-chuong-unified-v1/avatar.png',
+        ),
+      );
     report.portrait = portrait;
     if (pages.length === 6) {
       heroes.forEach((h, i) =>
         Object.assign(h, {
           x: 700 + (i % 3) * 110,
-          y: 600 + Math.floor(i / 3) * 85,
+          y: 600 + Math.floor(i / 3) * (profile.partySpacingY ?? 85),
         }),
       );
       await settle();
+      if (profile.staffChoreography)
+        await page
+          .locator('#viewport')
+          .screenshot({ path: resolve(out, 'party-ready.png') });
       for (let i = 0; i < 96; i++) {
         const e = addCreep(
           w,
@@ -509,8 +710,10 @@ export async function verifyCoherentChuong({ room, pages, out }) {
           c,
         );
         e.archetypeId = 'creep_wild_dog';
-        e.stats = { ...c.creep, hp: 120, damage: 1 };
-        e.hp = e.maxHp = 120;
+        const hp = profile.staffChoreography ? 100000 : 120;
+        e.stats = { ...c.creep, hp, damage: 1 };
+        e.hp = e.maxHp = hp;
+        if (profile.staffChoreography) e.controlled = true;
       }
       const combat = await observe(
         2600,
@@ -535,6 +738,9 @@ export async function verifyCoherentChuong({ room, pages, out }) {
         .map((t, i) => t - combat.ticks[i])
         .sort((a, b) => a - b);
       report.party = {
+        targetFixture: profile.staffChoreography
+          ? '96 stationary high-HP server targets; real keyboard hero attacks/hits, no creep AI combat/reward coverage'
+          : '96 normal low-HP targets',
         creeps: 96,
         clients: 6,
         hits: combat.events.filter((e) => e.kind === 'hit').length,
@@ -542,6 +748,16 @@ export async function verifyCoherentChuong({ room, pages, out }) {
         p95Ms: deltas[Math.floor(deltas.length * 0.95)],
         frames: deltas.length,
       };
+      if (profile.staffChoreography) {
+        report.party.creepTextures = await page.evaluate(() => {
+          const scene = window.__VOLAM__.presentation();
+          return (
+            scene.renovation?.bodies
+              ?.filter((b) => String(b.id).includes('coherent_crowd_'))
+              .map((b) => b.texture) ?? []
+          );
+        });
+      }
       const framing = await page.evaluate(
         (ids) =>
           new Promise((resolve) =>
@@ -552,6 +768,20 @@ export async function verifyCoherentChuong({ room, pages, out }) {
                 ids.map((id) => {
                   const b = scene.children.getByName('actor:' + id),
                     r = b.getBounds();
+                  // Atlas trim is the visible raster; logical staff-safe canvas includes deliberately empty margins.
+                  if (b.frame.trimmed) {
+                    const f = b.frame.data.spriteSourceSize;
+                    r.x =
+                      b.x -
+                      b.originX * b.frame.realWidth * b.scaleX +
+                      f.x * b.scaleX;
+                    r.y =
+                      b.y -
+                      b.originY * b.frame.realHeight * b.scaleY +
+                      f.y * b.scaleY;
+                    r.width = f.w * b.scaleX;
+                    r.height = f.h * b.scaleY;
+                  }
                   return {
                     id,
                     visible: b.visible,
@@ -603,5 +833,7 @@ export async function verifyCoherentChuong({ room, pages, out }) {
       .screenshot({ path: resolve(out, 'failure.png') })
       .catch(() => {});
     throw error;
+  } finally {
+    if (profile.staffChoreography) room.syncState = originalSyncState;
   }
 }

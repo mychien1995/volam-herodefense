@@ -2,13 +2,17 @@ import Phaser from 'phaser';
 import raw from '../../../assets/exports/hero-finish-v1/manifest.json';
 export { actionBodyPose, type HeroActionClock } from './hero-finish-policy.js';
 const actors = new Map(raw.actors.map((a) => [a.basic, a]));
-export function preloadHeroFinish(scene: Phaser.Scene): void {
+export function preloadHeroFinish(
+  scene: Phaser.Scene,
+  exclude: ReadonlySet<string> = new Set(),
+): void {
   for (const a of actors.values())
-    scene.load.atlas(
-      'hero-finish:' + a.basic,
-      '/assets/hero-finish-v1/' + a.basic + '.png',
-      '/assets/hero-finish-v1/' + a.basic + '.json',
-    );
+    if (!exclude.has(a.basic))
+      scene.load.atlas(
+        'hero-finish:' + a.basic,
+        '/assets/hero-finish-v1/' + a.basic + '.png',
+        '/assets/hero-finish-v1/' + a.basic + '.json',
+      );
 }
 export function presentHeroFinish(
   scene: Phaser.Scene,

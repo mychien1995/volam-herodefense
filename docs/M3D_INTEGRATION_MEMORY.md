@@ -192,3 +192,7 @@ Worktree `wip/m3d/25d`: world depth cho arena/dungeon/PvP, avatar đúng14 nhán
 ## Cái Bang Chưởng — body thống nhất, bản thử 2026-11-19
 
 `wip/m3d/25d`: chỉ Cái Bang Chưởng chuyển sang atlas chung tám hướng/160 cel cho idle, walk, A, skill, hurt/stun và death; portrait cùng neutral. Chuẩn identity/độ nét là raw R1/R3 nét đang có; không còn xen R5/R6 và cardinal action khác bộ ở phái này. Gameplay/HUD geometry/F8 giữ nguyên. Sáu client, source continuity/authority, status expiry và arena respawn tự nhiên đã kiểm chứng theo scoped stages. Chờ director chơi duyệt trước khi làm phái khác; xem `CAI_BANG_CHUONG_COHERENCE.md`.
+
+## Director duyệt Chưởng và rollout body đợt1 — 2026-11-19
+
+Director đã duyệt Cái Bang Chưởng trong chat; sáu file canonical khóa tại `assets/approvals/hero-coherence/cai_bang_chuong.json`. Chỉ Cái Bang Bổng được triển khai tiếp theo quy trình staged, một atlas224 cel/8 facing/40 native tags + portrait cùng neutral. Server/gameplay/HUD geometry/F8 giữ nguyên; Phá Giáp vẫn cardinal theo VFX cũ. Các phase A/QWERT và lifecycle được kiểm chứng sáu client qua scoped stages, không đổi báo cáo FAIL thành PASS. Bổng là candidate chờ director PNG/chơi; **dừng trước Võ Đang và các phái khác**. Chi tiết/giới hạn tip contact, fixture creep placeholder ngoài phạm vi, test scope và phòng review: `CAI_BANG_BONG_COHERENCE.md`; kế hoạch còn lại: `HERO_COHERENCE_ROLLOUT.md`.

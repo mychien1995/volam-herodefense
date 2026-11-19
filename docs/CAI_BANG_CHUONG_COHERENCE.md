@@ -42,3 +42,5 @@ Các stage đã hoàn tất được tổng hợp riêng; các pipeline lỗi v�
 Phòng **3P_YyPNqH**: `http://127.0.0.1:5582/?debug=1`, Cái Bang Chưởng30, năm kỹ năng bậc4, F8 ON và keyboard toggle đã xác minh, browser errors rỗng. Phòng R6 cũ được giữ nguyên.
 
 Guard idle cuối: từng hướng có chênh chiều cao silhouette tối đa1px giữa4 cel; mean alpha vùng thân chênh dưới1.4/255, không có cel idle bị fade. Đây là kiểm tra kích thước/opacity, không thay thế director review độ nét và animation.
+
+Director đã duyệt bản này trong chat ngày2026-11-19. Sáu file canonical được khóa byte; rollout Bổng tiếp theo được ghi riêng tại `CAI_BANG_BONG_COHERENCE.md`. Các ghi chú prototype phía trên mô tả trạng thái lúc bàn giao ban đầu.

@@ -1329,6 +1329,8 @@ export class ArenaScene extends Phaser.Scene {
             ability: cast?.abilityId ?? actor.castAbilityId ?? '',
             basicStage: actor.basicStage ?? '',
             visualDurationTicks: ((cast?.durationMs ?? 0) * 30) / 1000,
+            phase: cast?.phase,
+            progress: cast?.progress,
           },
         );
       if (cast)

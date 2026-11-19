@@ -28,8 +28,12 @@ export const schoolHeroBasic = (school: string): string =>
 export const heroBodyUrl = (form: string): string =>
   (forms[form] ?? form) === 'cai_bang_chuong'
     ? '/assets/cai-bang-chuong-unified-v1/avatar-body.png'
-    : '/assets/player-portraits-v1/' + (forms[form] ?? form) + '-body.png';
+    : (forms[form] ?? form) === 'cai_bang_bong'
+      ? '/assets/cai-bang-bong-unified-v1/avatar-body.png'
+      : '/assets/player-portraits-v1/' + (forms[form] ?? form) + '-body.png';
 export const heroPortraitUrl = (form: string): string =>
   (forms[form] ?? form) === 'cai_bang_chuong'
     ? '/assets/cai-bang-chuong-unified-v1/avatar.png'
-    : '/assets/player-portraits-v1/' + (forms[form] ?? form) + '.png';
+    : (forms[form] ?? form) === 'cai_bang_bong'
+      ? '/assets/cai-bang-bong-unified-v1/avatar.png'
+      : '/assets/player-portraits-v1/' + (forms[form] ?? form) + '.png';
