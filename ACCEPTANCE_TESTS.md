@@ -1,3 +1,7 @@
+## Component UI/camera dùng chung · 2026-11-19
+
+`playwright.ui-camera.config.ts` kiểm tra popup ba mode có cùng skin, group/label hợp lệ, nằm trong viewport; hủy Lôi Đài không ready; input và xác nhận giữ hành vi hiện hành. Camera cả ba mode ở1280×720,1872×800,850×480; cả5map PvP trong bounds, không thu hero dưới native Defense, utility cùng cỡ mỗi nút. Giữ kiểm tra Practice đổi phái/khóa input, PvP hai browser/combat thật và lời dẫn Defense. [Quy ước và cách chạy](docs/SHARED_UI_CAMERA.md).
+
 ## Camera, form và NPC Lôi Đài · 2026-11-19
 
 Form672×419: label/nút không bẻ chữ, input44px, cùng hàng. Camera Phòng test và cả5map không thu hero nhỏ hơn native Defense, worldView trong map ở1280×720 và1872×800; theo hero và giữ pan khi xem. Không lộ apron hoặc đường ghép vuông ở Địa Ngục. Utility ≤73px mỗi nút. Chém dùng đủ3cel, scaleX=scaleY≤1 và có chuyển động; warning đúng nửa sân. Tần suất NPC tăng20%, warning/damage giữ nguyên. Phòng8 người/two-browser, đầy đủ luồng Practice và hồi quy Defense. [Kết quả](docs/PVP_VISUAL_REPAIR.md).

@@ -1,14 +1,13 @@
+import './school-selection.css';
 import { m1Config, schools, skillIcon } from '@volam/game-data';
 import { nguDoc } from '@volam/game-core';
+import {
+  actionRow,
+  escapeHtml as escape,
+  type ActionAttribute,
+  type UiAction,
+} from './ui-components.js';
 
-const escape = (s: string) =>
-  s.replace(
-    /[&<>"']/g,
-    (c) =>
-      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[
-        c
-      ]!,
-  );
 type School = (typeof schools)[number];
 
 /** Identical school portraits/layout for Defense and Lôi Đài. */
@@ -16,7 +15,7 @@ export function schoolCards(
   selected = '',
   disabled = false,
   requiresBranch = true,
-  attribute = 'data-action',
+  attribute: ActionAttribute = 'data-action',
 ) {
   return schools
     .map(
@@ -30,7 +29,7 @@ export function branchCards(
   school: School,
   selected = '',
   enabled = true,
-  attribute = 'data-action',
+  attribute: ActionAttribute = 'data-action',
 ) {
   return (m1Config.progression?.schools[school.id]?.basicIds ?? [])
     .map((id) => {
@@ -43,4 +42,33 @@ export function branchCards(
     </button>`;
     })
     .join('');
+}
+
+/** Common markup; callers keep their existing cancel/focus and local/server choice semantics. */
+export function branchDialog(options: {
+  school: School;
+  titleId: string;
+  selected?: string;
+  enabled?: boolean;
+  attribute?: ActionAttribute;
+  actions: readonly UiAction[];
+  notice?: string;
+  noticeClass?: 'pre-error' | 'pvp-notice';
+}): string {
+  const {
+    school,
+    titleId,
+    selected = '',
+    enabled = true,
+    attribute = 'data-action',
+    actions,
+    notice,
+    noticeClass = 'pre-error',
+  } = options;
+  return `<dialog class="branch-dialog" aria-labelledby="${escape(titleId)}">
+    <h2 id="${escape(titleId)}">${escape(school.name)} · Chọn hệ phái</h2><p>${escape(school.style)}</p>
+    <div class="branch-list" role="group" aria-label="Hệ phái">${branchCards(school, selected, enabled, attribute)}</div>
+    ${actionRow(actions, attribute)}
+    ${notice === undefined ? '' : `<p class="${noticeClass}" role="status" aria-live="polite">${escape(notice)}</p>`}
+  </dialog>`;
 }

@@ -92,13 +92,14 @@
 .system-buttons {
   top: var(--edge);
   right: var(--edge);
-  width: clamp(236px, 20vw, 360px);
+  --utility-button-width: calc((clamp(236px, 20vw, 360px) - 16px) / 5);
+  width: auto;
   gap: 4px;
 }
 .system-buttons button {
-  flex: 1;
+  flex: 0 0 var(--utility-button-width);
   min-width: 0;
-  width: auto;
+  width: var(--utility-button-width);
   height: auto;
   padding: 0;
   border: 0;

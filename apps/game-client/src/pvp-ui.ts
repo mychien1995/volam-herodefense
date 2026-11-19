@@ -1,8 +1,9 @@
+import { escapeHtml as esc } from './ui-components.js';
 import { m1Config, pvpDefinition, pvpMaps, schools } from '@volam/game-data';
 import type { LobbyState, PvpAction } from '@volam/game-protocol';
 import type { PvpMapId, PvpSnapshot, PvpTeam } from '@volam/game-core';
 import './pvp-ui.css';
-import { schoolCards, branchCards } from './school-selection.js';
+import { schoolCards, branchDialog } from './school-selection.js';
 export type PvpRequest = PvpAction extends infer A
   ? A extends PvpAction
     ? Omit<A, 'protocolVersion' | 'sequence'>
@@ -18,14 +19,6 @@ export const readPvp = (
     return;
   }
 };
-const esc = (s: string) =>
-  s.replace(
-    /[&<>"']/g,
-    (c) =>
-      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[
-        c
-      ]!,
-  );
 const label = (team: PvpTeam) =>
   ({ chinh: 'Chính', ta: 'Tà', spectator: 'Khán giả' })[team];
 const branchName = (id: string) =>
@@ -424,13 +417,27 @@ export class PvpUI {
       <div class="pre-actions"><button data-pvp="close-character" ${this.choicePending ? 'disabled' : ''}>Quay lại</button></div>
       ${
         school
-          ? `<dialog class="branch-dialog" aria-labelledby="pvp-branch-title">
-        <h2 id="pvp-branch-title">${school.name} · Chọn hệ phái</h2><p>${school.style}</p>
-        <div class="branch-list" role="group" aria-label="Hệ phái">${branchCards(school, this.chosenBranch, !this.choicePending, 'data-pvp')}</div>
-        <div class="pre-actions"><button data-pvp="close-branches" ${this.choicePending ? 'disabled' : ''}>Đổi môn phái</button>
-        <button data-pvp="confirm-character" ${!this.chosenBranch || this.choicePending ? 'disabled' : ''}>${this.choicePending ? 'Đang xác nhận…' : 'Xác nhận'}</button></div>
-        <p class="pvp-notice" role="status">${esc(this.notice)}</p>
-      </dialog>`
+          ? branchDialog({
+              school,
+              titleId: 'pvp-branch-title',
+              selected: this.chosenBranch,
+              enabled: !this.choicePending,
+              attribute: 'data-pvp',
+              notice: this.notice,
+              noticeClass: 'pvp-notice',
+              actions: [
+                {
+                  label: 'Đổi môn phái',
+                  action: 'close-branches',
+                  disabled: this.choicePending,
+                },
+                {
+                  label: this.choicePending ? 'Đang xác nhận…' : 'Xác nhận',
+                  action: 'confirm-character',
+                  disabled: !this.chosenBranch || this.choicePending,
+                },
+              ],
+            })
           : ''
       }
     </section></div>`;

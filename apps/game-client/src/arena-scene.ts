@@ -1,5 +1,6 @@
-import {PvpArt, pvpView, drawPvpMap, fitPvpCamera} from './pvp-art.js';
-import type {PvpMapId} from '@volam/game-core';
+import { frameWorld, nativeGameplayZoom } from './camera-policy.js';
+import { PvpArt, pvpView, drawPvpMap, fitPvpCamera } from './pvp-art.js';
+import type { PvpMapId } from '@volam/game-core';
 import markerArt from './controls-art/move-marker.png?url';
 import { BossSkillAnnouncements } from './boss-skill-announcements.js';
 import {
@@ -531,7 +532,7 @@ export class ArenaScene extends Phaser.Scene {
     this.drawZone('arena');
     this.cameras.main
       .setBounds(0, 0, arena.width, arena.height)
-      .setZoom(this.scale.width >= 960 && this.scale.height >= 600 ? 2 : 1)
+      .setZoom(nativeGameplayZoom(this.scale))
       .setRotation(0);
     this.cameras.main.roundPixels = false;
     this.scale.on('resize', this.fitCamera);
@@ -604,20 +605,22 @@ export class ArenaScene extends Phaser.Scene {
     return load;
   }
   private fitCamera = (): void => {
-    if(this.snapshot?.practice.enabled){fitPvpCamera(this,'rung_truc');return;}
-    const pvp=pvpView(this.snapshot);if(pvp){fitPvpCamera(this,pvp.mapId);return;}
+    if (this.snapshot?.practice.enabled) {
+      fitPvpCamera(this, 'rung_truc');
+      return;
+    }
+    const pvp = pvpView(this.snapshot);
+    if (pvp) {
+      fitPvpCamera(this, pvp.mapId);
+      return;
+    }
     if (this.zoneId === loiDai.id) fitLoiDaiCamera(this);
     else if (isKimLuanZone(this.zoneId)) {
-      const { width, height } = kimLuanXiangyangArena;
-      this.cameras.main
-        .setZoom(
-          Math.min(this.scale.width / width, this.scale.height / height, 1.35),
-        )
-        .centerOn(width / 2, height / 2);
-    } else
-      this.cameras.main.setZoom(
-        this.scale.width >= 960 && this.scale.height >= 600 ? 2 : 1,
-      );
+      frameWorld(this, kimLuanXiangyangArena, 'overview', {
+        center: true,
+        maxZoom: 1.35,
+      });
+    } else frameWorld(this, arena, 'native');
   };
 
   setSnapshot(snapshot: LobbyState | undefined, sessionId = ''): void {

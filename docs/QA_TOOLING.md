@@ -18,7 +18,7 @@ Do not use example ports without checking that they are free. Preflight refuses 
 
 `pnpm qa:preflight --mode browser --ready` is a **before-launch** check of an already-built candidate: server output exists, source/dist protocol agree and client build endpoint matches. It does not prove that all compiled inputs are fresh. Keep compilation and real service run/protocol/endpoint checks. It still refuses occupied ports, including a previously running review service.
 
-Managed profiles: default gameplay, arena-creeps, Võ Đang Quyền/Kiếm, diamond-palm, shaolin-dao and qa-helpers. The list is shared with `qaWorkflowSession`; legacy/custom profiles receive dependency checks and an explicit limitation note. Their existing fixtures retain responsibility for ports/browser channel/build identity. Do not infer coverage from a generic PASS.
+Managed profiles: default gameplay, arena-creeps, Võ Đang Quyền/Kiếm, diamond-palm, shaolin-dao, qa-helpers and ui-camera. The list is shared with `qaWorkflowSession`; legacy/custom profiles receive dependency checks and an explicit limitation note. Their existing fixtures retain responsibility for ports/browser channel/build identity. Do not infer coverage from a generic PASS. See [shared UI/camera contracts and checks](SHARED_UI_CAMERA.md).
 
 ## Reuse browser controls
 

@@ -1,3 +1,4 @@
+import { frameWorld } from './camera-policy.js';
 import Phaser from 'phaser';
 import { loiDai } from '@volam/game-core';
 import sparks from '../../../assets/exports/loi-dai/fireworks.png?url';
@@ -24,14 +25,7 @@ export function preloadLoiDai(scene: Phaser.Scene): void {
 }
 
 export function fitLoiDaiCamera(scene: Phaser.Scene): void {
-  const camera = scene.cameras.main;
-  camera.setZoom(
-    Math.min(
-      scene.scale.width / loiDai.width,
-      scene.scale.height / loiDai.height,
-    ),
-  );
-  camera.centerOn(loiDai.width / 2, loiDai.height / 2);
+  frameWorld(scene, loiDai, 'overview', { center: true });
 }
 
 export function drawLoiDai(scene: Phaser.Scene): void {

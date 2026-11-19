@@ -38,6 +38,7 @@ import { GameUI, element } from './ui.js';
 import { SkillPreview } from './skill-preview.js';
 import './style.css';
 import './arena-hud.css';
+import './ui-components.css';
 import './dungeon.css';
 import './dungeon-selector.css';
 import './boss-party-ui.css';

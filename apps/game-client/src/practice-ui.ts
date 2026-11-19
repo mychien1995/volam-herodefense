@@ -1,3 +1,4 @@
+import { escapeHtml as esc } from './ui-components.js';
 import {
   nicknameSchema,
   type PracticeJoinOptions,
@@ -5,16 +6,8 @@ import {
   type LobbyPlayer,
 } from '@volam/game-protocol';
 import { schools } from '@volam/game-data';
-import { schoolCards, branchCards } from './school-selection.js';
+import { schoolCards, branchDialog } from './school-selection.js';
 import './practice-ui.css';
-const esc = (s: string) =>
-  s.replace(
-    /[&<>"']/g,
-    (c) =>
-      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[
-        c
-      ]!,
-  );
 export class PracticeUI {
   readonly node = document.createElement('section');
   onBack: () => void = () => {};
@@ -212,8 +205,32 @@ export class PracticeUI {
      <div class="school-grid">${schoolCards(this.school, this.busy, true, 'data-practice')}</div><div class="pre-actions"><button data-practice="back" ${this.busy ? 'disabled' : ''}>${this.changing ? 'Hủy' : 'Quay lại'}</button></div>
      ${
        school
-         ? `<dialog class="branch-dialog" aria-labelledby="practice-branch-title"><h2 id="practice-branch-title">${school.name} · Chọn hệ phái</h2><p>${school.style}</p>
-       <div class="branch-list">${branchCards(school, this.branch, !this.busy, 'data-practice')}</div><div class="pre-actions"><button data-practice="close-branches" ${this.busy ? 'disabled' : ''}>Đổi môn phái</button><button data-practice="confirm" ${!this.branch || this.busy ? 'disabled' : ''}>${this.changing ? (this.busy ? 'Đang đổi…' : 'Đổi nhân vật') : this.busy ? 'Đang vào phòng…' : 'Vào phòng test'}</button></div><p class="pre-error" role="status">${esc(this.notice)}</p></dialog>`
+         ? branchDialog({
+             school,
+             titleId: 'practice-branch-title',
+             selected: this.branch,
+             enabled: !this.busy,
+             attribute: 'data-practice',
+             notice: this.notice,
+             actions: [
+               {
+                 label: 'Đổi môn phái',
+                 action: 'close-branches',
+                 disabled: this.busy,
+               },
+               {
+                 label: this.changing
+                   ? this.busy
+                     ? 'Đang đổi…'
+                     : 'Đổi nhân vật'
+                   : this.busy
+                     ? 'Đang vào phòng…'
+                     : 'Vào phòng test',
+                 action: 'confirm',
+                 disabled: !this.branch || this.busy,
+               },
+             ],
+           })
          : ''
      }
    </section>`;

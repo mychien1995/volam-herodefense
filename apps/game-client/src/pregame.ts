@@ -1,5 +1,6 @@
+import { escapeHtml as escape, actionButton } from './ui-components.js';
 import { m1Config, schools } from '@volam/game-data';
-import { schoolCards, branchCards } from './school-selection.js';
+import { schoolCards, branchDialog } from './school-selection.js';
 import type { LobbyState, LobbyAction } from '@volam/game-protocol';
 import './pregame.css';
 import { guide, guideTabs, type GuideTab } from './pregame-guide.js';
@@ -15,14 +16,6 @@ interface RoomListing {
   locked: boolean;
   phase: string;
 }
-const escape = (s: string) =>
-  s.replace(
-    /[&<>"']/g,
-    (c) =>
-      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[
-        c
-      ]!,
-  );
 export class PreGame {
   readonly node = document.createElement('section');
   nickname = '';
@@ -388,7 +381,7 @@ export class PreGame {
         : undefined;
     this.closeDialog();
     const button = (text: string, action: string, disabled = false) =>
-      `<button type="button" data-action="${action}" ${disabled ? 'disabled' : ''}>${text}</button>`;
+      actionButton({ label: text, action, disabled });
     let content = '';
     let title = '';
     const brand =
@@ -451,14 +444,23 @@ export class PreGame {
         const confirmedSchool = dialogSchool?.id === self?.schoolId;
         const popup =
           dialogSchool && branches.length && !self?.confirmed
-            ? `<dialog class="branch-dialog" aria-labelledby="branch-title">
-              <h2 id="branch-title">${dialogSchool.name} · Chọn hệ phái</h2>
-              <p>${dialogSchool.style}</p>
-              <div class="branch-list" role="group" aria-label="Hệ phái">
-${branchCards(dialogSchool, confirmedSchool ? self?.selectedBranch : '', confirmedSchool)}
-              </div>
-              <div class="pre-actions">${button('Đổi môn phái', 'close-branches')}${button(confirmLabel, 'confirm', this.artLoading || !confirmedSchool || !self?.selectedBranch)}</div>
-            </dialog>`
+            ? branchDialog({
+                school: dialogSchool,
+                titleId: 'branch-title',
+                selected: confirmedSchool ? (self?.selectedBranch ?? '') : '',
+                enabled: confirmedSchool,
+                actions: [
+                  { label: 'Đổi môn phái', action: 'close-branches' },
+                  {
+                    label: confirmLabel,
+                    action: 'confirm',
+                    disabled:
+                      this.artLoading ||
+                      !confirmedSchool ||
+                      !self?.selectedBranch,
+                  },
+                ],
+              })
             : '';
         content = `<p class="pre-room">Phòng ${escape(this.roomId)} · <strong data-testid="selection-ready"></strong></p><div class="school-grid">${schoolCards(self?.schoolId, !!self?.confirmed, state.requiresBranch)}</div>${list}<div class="pre-actions">${button('Rời phòng', 'leave')}${state.requiresBranch ? '' : button(confirmLabel, 'confirm', this.artLoading || !self?.schoolId || !!self?.confirmed)}</div><p class="pre-warning" hidden>Đang chờ người chơi mất kết nối. Bạn có thể rời và tạo phòng mới.</p>${popup}`;
       }

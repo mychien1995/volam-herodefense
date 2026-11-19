@@ -45,5 +45,6 @@ Reports [r3 integration](evidence/sessions/m3d-r3-final-fixed/check-workflow/fin
 - Split safe pure-core tests for parallel execution from room tests that share ports/environment. Current `vitest.config.ts` has `fileParallelism:false`; benchmark isolation/port correctness before changing it. Do not blindly disable isolation.
 - Reuse owned iteration services/compiler processes in profiles that explicitly support it; keep final production verification and cleanup/identity checks.
 - The reference index and preflight/shared browser helpers are now implemented; see [QA tooling](QA_TOOLING.md). Extend migration to legacy profiles only after verifying their actual port/browser/fixture contracts. Never cache automatic test success or director approval.
+- Defense/PvP/Practice now share the school dialog, UI skin, utility-button sizing and camera policy; use [the component map and focused profile](SHARED_UI_CAMERA.md) instead of copying mode markup or zoom formulas.
 
 Implement these only in a requested tooling task, with invalidation/isolation regressions and before/after measurements. Do not promise an unmeasured saving or weaken acceptance to obtain one.

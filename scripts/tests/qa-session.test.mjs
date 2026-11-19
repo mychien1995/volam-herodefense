@@ -183,6 +183,28 @@ test('client middleware identifies the actual owned run and cleanup attempts all
 });
 
 test('workflow selects the managed profile rather than forcing every run to gameplay ports', () => {
+  const uiCamera = qaWorkflowSession(
+    'final',
+    ['--config', 'playwright.ui-camera.config.ts'],
+    {
+      VOLAM_QA_SERVER_PORT: '28771',
+      VOLAM_QA_CLIENT_PORT: '28772',
+      VITE_SERVER_URL: 'http://localhost:28771',
+    },
+  );
+  assert.equal(uiCamera.serverPort, 28771);
+  assert.equal(uiCamera.clientPort, 28772);
+  assert.throws(
+    () =>
+      qaWorkflowSession(
+        'browser',
+        ['--config=playwright.ui-camera.config.ts'],
+        {
+          VITE_SERVER_URL: 'https://independent.example:8443',
+        },
+      ),
+    /configured local server port/,
+  );
   const env = { VITE_SERVER_URL: 'http://localhost:2588' };
   for (const args of [
     ['--config', 'playwright.arena-creeps.config.ts'],

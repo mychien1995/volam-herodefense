@@ -1,3 +1,4 @@
+import { frameWorld } from './camera-policy.js';
 import Phaser from 'phaser';
 import { pvpDefinition } from '@volam/game-data';
 import type { LobbyState } from '@volam/game-protocol';
@@ -18,18 +19,7 @@ export function preloadPvpArt(scene: Phaser.Scene): void {
 }
 export function fitPvpCamera(scene: Phaser.Scene, id: PvpMapId): void {
   const m = pvpDefinition.maps[id];
-  // Same native gameplay scale as Defense; cover and clamp the map instead of shrinking it.
-  const nativeZoom =
-    scene.scale.width >= 960 && scene.scale.height >= 600 ? 2 : 1;
-  scene.cameras.main.setBounds(0, 0, m.width, m.height);
-  scene.cameras.main.setZoom(
-    Math.max(
-      nativeZoom,
-      scene.scale.width / m.width,
-      scene.scale.height / m.height,
-    ),
-  );
-  scene.cameras.main.centerOn(m.width / 2, m.height / 2);
+  frameWorld(scene, m, 'cover', { bounds: true, center: true });
 }
 export function drawPvpMap(scene: Phaser.Scene, id: PvpMapId): void {
   if (id === 'hong_moc') drawLoiDai(scene);

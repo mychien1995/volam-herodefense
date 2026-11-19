@@ -16,6 +16,7 @@ export default defineConfig({
     '**/standalone-pvp.spec.ts',
     '**/pvp-regressions.spec.ts',
     '**/practice.spec.ts',
+    '**/ui-camera.spec.ts',
     '**/vo-dang-quyen-rework.spec.ts',
     '**/vo-dang-kiem-rework.spec.ts',
   ],

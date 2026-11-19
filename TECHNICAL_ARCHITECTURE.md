@@ -1,3 +1,7 @@
+## UI/camera dùng chung · 2026-11-19
+
+`ui-components.ts/css` sở hữu nút, hàng action và skin panel; `school-selection.ts/css` sở hữu grid và branch dialog cho Defense/PvP/Practice. Handler từng mode giữ focus, input gating, draft/pending và server acknowledgement. `camera-policy.ts` gom native/cover/overview; toàn viewport, rotation0, giữ ngoại lệ Hồng Mộc trong Defense và Kim Luân. HUD utility dùng một công thức cỡ nút. Không đổi mô phỏng/protocol/artwork. [Quy ước và profile kiểm chứng](docs/SHARED_UI_CAMERA.md).
+
 ## Phòng test · protocol 48
 
 Namespace `practice` dùng PracticeMatch + PracticeRoom, tối đa một người, join schema kiểm tra phái/nhánh. Tập world.practiceTargets chỉ tồn tại trong sandbox; hit thật vẫn chạy, mục tiêu không chết/thưởng. Input/stance dùng mô phỏng chuẩn, HP/mana/cooldown reset server-side; không bật flag developer toàn server. PracticeState thêm vào schema, các namespace khác mặc định tắt. Message practice-select chỉ đăng ký trong PracticeRoom, validate sequence/phái/hệ rồi PracticeMatch.switchHero thay hero sạch cùng ID/vị trí, dùng lifecycle remove để hủy hiệu ứng cũ; snapshot xác nhận đóng menu. [Cấu trúc và kiểm chứng](docs/PRACTICE_ROOM.md).

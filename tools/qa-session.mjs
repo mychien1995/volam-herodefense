@@ -78,6 +78,7 @@ export function qaManagedProfile(mode, args = []) {
         'playwright.diamond-palm.config.ts',
         'playwright.shaolin-dao.config.ts',
         'playwright.qa-helpers.config.ts',
+        'playwright.ui-camera.config.ts',
       ].includes(name))
   ) {
     return null;
