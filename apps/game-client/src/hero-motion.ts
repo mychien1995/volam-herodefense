@@ -1,4 +1,8 @@
 import {
+  preloadChuongBody,
+  presentChuongBody,
+} from './cai-bang-chuong-body.js';
+import {
   preloadHeroFinish,
   presentHeroFinish,
   actionBodyPose,
@@ -9,6 +13,7 @@ import raw from '../../../assets/exports/hero-motion-v1/manifest.json';
 type Body = Phaser.GameObjects.Sprite;
 const actors = new Map(raw.actors.map((a) => [a.basic, a]));
 export function preloadHeroMotion(scene: Phaser.Scene): void {
+  preloadChuongBody(scene);
   preloadHeroFinish(scene);
   for (const a of actors.values())
     scene.load.atlas(
@@ -42,6 +47,10 @@ export function presentHeroMotion(
   statuses: readonly { kind: string }[],
   clock?: HeroActionClock,
 ): void {
+  if (
+    presentChuongBody(scene, sprite, basic, pose, motionFacing(fx, fy), clock)
+  )
+    return;
   const a = basic && actors.get(basic);
   sprite.setData('hero-motion-active', false);
   sprite.setData('hero-motion-direction', undefined);

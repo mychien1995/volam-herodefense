@@ -188,3 +188,7 @@ Các bản vá roster cập nhật danh sách và số người sẵn sàng mà 
 ## Visual depth và motion R6 — 2026-11-19
 
 Worktree `wip/m3d/25d`: world depth cho arena/dungeon/PvP, avatar đúng14 nhánh, locomotion tám hướng và idle nhiều cel. R6 thêm pose A/kỹ năng chéo và tối ưu tài nguyên trình diễn. Giữ native cardinal choreography và các dạng biến thân riêng, gameplay/HUD/control/authority không đổi; F8 chỉ local visual depth. Đường bóng chó hoang đã dùng budget chung; đọc pixel viền bóng chỉ chạy ở QA. Nguồn editable/hash, phạm vi reuse, kiểm chứng thực và giới hạn art approval tại `PRESENTATION_FINISH_R6.md`. Artwork prototype chờ director review; không coi automation PASS là art approval. Chỉ commit trên nhánh này, không merge.
+
+## Cái Bang Chưởng — body thống nhất, bản thử 2026-11-19
+
+`wip/m3d/25d`: chỉ Cái Bang Chưởng chuyển sang atlas chung tám hướng/160 cel cho idle, walk, A, skill, hurt/stun và death; portrait cùng neutral. Chuẩn identity/độ nét là raw R1/R3 nét đang có; không còn xen R5/R6 và cardinal action khác bộ ở phái này. Gameplay/HUD geometry/F8 giữ nguyên. Sáu client, source continuity/authority, status expiry và arena respawn tự nhiên đã kiểm chứng theo scoped stages. Chờ director chơi duyệt trước khi làm phái khác; xem `CAI_BANG_CHUONG_COHERENCE.md`.

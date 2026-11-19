@@ -26,6 +26,10 @@ const defaults: Record<string, string> = {
 export const schoolHeroBasic = (school: string): string =>
   defaults[school] ?? defaults.cai_bang!;
 export const heroBodyUrl = (form: string): string =>
-  '/assets/player-portraits-v1/' + (forms[form] ?? form) + '-body.png';
+  (forms[form] ?? form) === 'cai_bang_chuong'
+    ? '/assets/cai-bang-chuong-unified-v1/avatar-body.png'
+    : '/assets/player-portraits-v1/' + (forms[form] ?? form) + '-body.png';
 export const heroPortraitUrl = (form: string): string =>
-  '/assets/player-portraits-v1/' + (forms[form] ?? form) + '.png';
+  (forms[form] ?? form) === 'cai_bang_chuong'
+    ? '/assets/cai-bang-chuong-unified-v1/avatar.png'
+    : '/assets/player-portraits-v1/' + (forms[form] ?? form) + '.png';
