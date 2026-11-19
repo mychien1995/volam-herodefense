@@ -1,3 +1,4 @@
+import { thienSonUnifiedSample } from './thien-son-unified-policy.js';
 import { voDangUnifiedSample } from './vo-dang-unified-policy.js';
 import type { HeroActionClock } from './hero-finish-policy.js';
 export interface UnifiedHeroClock extends HeroActionClock {
@@ -20,6 +21,8 @@ export function unifiedBodySample(
   now: number,
   clock?: UnifiedHeroClock,
 ): UnifiedBodySample | undefined {
+  const thienSon = thienSonUnifiedSample(basic, pose, elapsed, now, clock);
+  if (thienSon) return thienSon;
   const voDang = voDangUnifiedSample(basic, pose, elapsed, now, clock);
   if (voDang) return voDang;
   if (basic !== 'cai_bang_bong') return undefined;

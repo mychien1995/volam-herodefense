@@ -1,0 +1,169 @@
+{
+  "basic": "thien_son_dao",
+  "texture": "hero-unified:thien_son_dao",
+  "folder": "thien-son-dao-unified-v1",
+  "sourceRows": 8,
+  "sourceColumns": 4,
+  "canvas": [
+    320,
+    288
+  ],
+  "foot": [
+    160,
+    224
+  ],
+  "bodyHeight": 89,
+  "scale": 0.5,
+  "bodyWidth": 58,
+  "rootMode": "monochrome",
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "sweep_right",
+    "sweep_left",
+    "overhead",
+    "recover",
+    "dash_slash",
+    "cut_first",
+    "cut_second",
+    "retreat",
+    "guard",
+    "charge",
+    "blade_raise",
+    "slam_contact",
+    "channel",
+    "ready",
+    "follow",
+    "cross_0",
+    "cross_1",
+    "cross_2",
+    "flurry_sweep",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "references": [
+    "assets/source/characters/thien-son-dao-weapon-options-2026-11-09/han-nguyet-attack.png",
+    "assets/source/characters/thien-son-dao-weapon-options-2026-11-09/han-nguyet-locomotion.png",
+    "assets/exports/characters/thien-son-han-nguyet/han-nguyet.png"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "sweep_right",
+        "sweep_left",
+        "overhead",
+        "recover",
+        "dash_slash",
+        "cut_first",
+        "cut_second",
+        "retreat",
+        "guard",
+        "charge",
+        "blade_raise",
+        "slam_contact",
+        "channel",
+        "ready",
+        "follow",
+        "cross_0",
+        "cross_1",
+        "cross_2",
+        "flurry_sweep"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "registrationPolicy": "Fixed physical body/head density per locomotion/action/reaction group; boots anchored; never fit by weapon or fan extent.",
+  "poseOverrides": [
+    {
+      "frame": "slam_contact_down",
+      "path": "raw/repairs/slam_contact_down.png",
+      "sourceRoot": [
+        186.79754633255024,
+        513.0
+      ],
+      "sourceBodyTop": 13.0,
+      "bodyHeight": 89
+    },
+    {
+      "frame": "cross_0_down",
+      "path": "raw/repairs/cross_0_down.png",
+      "sourceRoot": [
+        207.17672969488612,
+        510.0
+      ],
+      "sourceBodyTop": 14.0,
+      "bodyHeight": 89
+    },
+    {
+      "frame": "idle_3_up",
+      "path": "raw/repairs/idle-up.png",
+      "sourceRoot": [
+        446.11052448482616,
+        1347.7417582417581
+      ],
+      "sourceBodyTop": 63.032967032967036,
+      "bodyHeight": 89,
+      "registrationProxyHeight": 182,
+      "registrationNote": "Landmarks measured at retained neutral source density before mapping back to full-resolution replacement, avoiding resolution-dependent sole/head threshold shifts."
+    }
+  ],
+  "sourceSegmentationCuts": {
+    "down": [
+      [
+        60,
+        1126,
+        230,
+        1127
+      ]
+    ]
+  },
+  "idleVisibleExtentTolerance": 4,
+  "idleMeasurementNote": "Re-authored up idle3 retains physical body height89, replacing the original85.61. Sole/crown outline extent ranges91-95 atlas pixels; fixed group/pivot and default physical-height tolerance3 retained."
+}

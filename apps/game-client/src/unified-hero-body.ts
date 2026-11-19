@@ -1,3 +1,5 @@
+import phien from '../../../assets/exports/thien-son-phien-unified-v1/manifest.json';
+import dao from '../../../assets/exports/thien-son-dao-unified-v1/manifest.json';
 import Phaser from 'phaser';
 import quyen from '../../../assets/exports/vo-dang-quyen-unified-v1/manifest.json';
 import kiem from '../../../assets/exports/vo-dang-kiem-unified-v1/manifest.json';
@@ -7,7 +9,9 @@ import {
   unifiedBodySample,
   type UnifiedHeroClock,
 } from './unified-hero-policy.js';
-const profiles = new Map([bong, quyen, kiem].map((p) => [p.basic, p]));
+const profiles = new Map(
+  [bong, quyen, kiem, phien, dao].map((p) => [p.basic, p]),
+);
 export const unifiedHeroBasics: ReadonlySet<string> = new Set(
   [...profiles.values()]
     .filter((p) => p.directions.length === 8)
@@ -50,11 +54,14 @@ export function presentUnifiedHero(
   const nativeKey = sprite.texture.key;
   const nativeFrame = String(sprite.frame.name);
   const cue =
-    basic === 'vo_dang_quyen' && ['vdq-punch', 'vdq-cast'].includes(nativeKey)
-      ? nativeFrame
-      : basic === 'vo_dang_kiem' && nativeKey === 'vdk-body'
-        ? nativeFrame.replace(/^(down|up|left|right)_/, '')
-        : undefined;
+    basic === 'thien_son_dao' && nativeKey === 'tam-lien-poses'
+      ? 'dao:' + nativeFrame
+      : basic === 'vo_dang_quyen' &&
+          ['vdq-punch', 'vdq-cast'].includes(nativeKey)
+        ? nativeFrame
+        : basic === 'vo_dang_kiem' && nativeKey === 'vdk-body'
+          ? nativeFrame.replace(/^(down|up|left|right)_/, '')
+          : undefined;
   const bodyClock = cue && clock ? { ...clock, nativeBodyCue: cue } : clock;
   const sample = unifiedBodySample(
     basic,
@@ -100,7 +107,11 @@ export function presentUnifiedHero(
         ? 'hero_vo_dang'
         : basic === 'vo_dang_kiem'
           ? 'hero_vo_dang_kiem'
-          : 'hero_cai_bang',
+          : basic === 'thien_son_phien'
+            ? 'hero_thien_son'
+            : basic === 'thien_son_dao'
+              ? 'hero_thien_son_dao'
+              : 'hero_cai_bang',
     pose,
     direction: facing,
     locomotion: pose === 'idle' || pose === 'walk',
@@ -109,3 +120,9 @@ export function presentUnifiedHero(
   });
   return true;
 }
+
+/** Complete canonical body profile for independently positioned skill body doubles. */
+export const unifiedHeroProfile = (basic: string) => {
+  const p = profiles.get(basic);
+  return p?.directions.length === 8 ? p : undefined;
+};

@@ -13,8 +13,10 @@ def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 def locked():
  for p in (ROOT/'assets/approvals/hero-coherence').glob('*.json'):
   for f in json.loads(p.read_text(encoding='utf-8'))['files']:assert sha(ROOT/f['path'])==f['sha256'],f['path']
-def figures(path,rows,columns):
- pixels=np.array(Image.open(path).convert('RGBA'));labels,n=ndimage.label(pixels[:,:,3]>=24,np.ones((3,3)));areas=np.bincount(labels.ravel());bounds=ndimage.find_objects(labels)
+def figures(path,rows,columns,separators=()):
+ pixels=np.array(Image.open(path).convert('RGBA'));mask=pixels[:,:,3]>=24
+ for x0,y0,x1,y1 in separators:mask[y0:y1,x0:x1]=False
+ labels,n=ndimage.label(mask,np.ones((3,3)));areas=np.bincount(labels.ravel());bounds=ndimage.find_objects(labels)
  ids=[i for i in range(1,n+1) if areas[i]>1000]
  assert len(ids)==rows*columns,(path,'complete bodies',len(ids))
  ids.sort(key=lambda i:(bounds[i-1][0].start+bounds[i-1][0].stop)/2);ids=[i for row in range(rows) for i in sorted(ids[row*columns:row*columns+columns],key=lambda i:bounds[i-1][1].start)]
@@ -52,7 +54,7 @@ def avatar(tile,out):
 def export_profile(profile_path,direction=None):
  locked();cfg=json.loads(Path(profile_path).read_text());src=ROOT/'assets/source'/cfg['folder'];out=ROOT/'assets/exports'/cfg['folder'];out.mkdir(parents=True,exist_ok=True);mode=cfg.get('rootMode','brown');poses=cfg['poses'];baseCount=cfg['sourceRows']*cfg['sourceColumns'];reactionStart=baseCount-4;dirs=[direction] if direction else DIRECTIONS;w,h=cfg['canvas'];foot=cfg['foot'];tiles=[];records=[];guide=Image.new('RGBA',(len(poses)*256,len(dirs)*224),(34,40,34,255));draw=ImageDraw.Draw(guide)
  for row,d in enumerate(dirs):
-  raw=src/'raw'/(d+'.png');cels=figures(raw,cfg['sourceRows'],cfg['sourceColumns'])
+  raw=src/'raw'/(d+'.png');cels=figures(raw,cfg['sourceRows'],cfg['sourceColumns'],cfg.get('sourceSegmentationCuts',{}).get(d,[]))
   replacements=[o for o in cfg.get('celGroupOverrides',[]) if o['direction']==d]
   extraRecords=[]
   for extra in cfg.get('extraSources',[]):

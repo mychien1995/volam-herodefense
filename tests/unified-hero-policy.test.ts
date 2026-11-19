@@ -14,9 +14,7 @@ const c = {
 describe('coherent Bổng body preserves accepted choreography', () => {
   it('does not handle approved Chưởng or other schools', () => {
     expect(unifiedBodySample('cai_bang_chuong', 'idle', 0, 0)).toBeUndefined();
-    expect(
-      unifiedBodySample('thien_son_phien', 'cast', 0, 0, c),
-    ).toBeUndefined();
+    expect(unifiedBodySample('thieu_lam_dao', 'cast', 0, 0, c)).toBeUndefined();
   });
   it('keeps four authored A beats distinct on the server clock', () => {
     for (const [serverStage, stage] of [
@@ -93,8 +91,8 @@ it('uses the matching canonical portrait without changing another school', () =>
   expect(heroPortraitUrl('hero_cai_bang_chuong')).toBe(
     '/assets/cai-bang-chuong-unified-v1/avatar.png',
   );
-  expect(heroPortraitUrl('hero_thien_son')).toBe(
-    '/assets/player-portraits-v1/thien_son_phien.png',
+  expect(heroPortraitUrl('hero_thieu_lam_dao')).toBe(
+    '/assets/player-portraits-v1/thieu_lam_dao.png',
   );
 });
 it('samples the live spin phase beyond the short generic server pose clock', () => {

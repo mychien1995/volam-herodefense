@@ -27,7 +27,7 @@ for g in m['groupsAuthored']:
    box=tile.getbbox();heights.append(box[3]-box[1]);alpha.append(float(v[v>=24].mean()));physicalIdle.append((e['sourceRoot'][1]-e['sourceHeadTop']+1)*e['groupRatio'])
  assert len(set(hashes))==len(poses),(g['direction'],'duplicate artwork')
  for start in range(0,len(heights),4):
-  hh=heights[start:start+4];aa=alpha[start:start+4];bb=physicalIdle[start:start+4];assert max(bb)-min(bb)<=3,(g['direction'],'idle physical body jump',bb);assert max(hh)-min(hh)<=cfg.get('idleVisibleExtentTolerance',3),(g['direction'],'idle height jump',hh);assert max(aa)-min(aa)<=5,(g['direction'],'idle opacity jump',aa)
+  hh=heights[start:start+4];aa=alpha[start:start+4];bb=physicalIdle[start:start+4];assert max(bb)-min(bb)<=cfg.get('idlePhysicalHeightTolerance',3),(g['direction'],'idle physical body jump',bb);assert max(hh)-min(hh)<=cfg.get('idleVisibleExtentTolerance',3),(g['direction'],'idle height jump',hh);assert max(aa)-min(aa)<=5,(g['direction'],'idle opacity jump',aa)
  if cfg.get('extraSources'):assert max(physicalIdle)-min(physicalIdle)<=3,(g['direction'],'armed/swordless physical body size jump',physicalIdle)
  idleMetrics.append({'direction':g['direction'],'visibleHeights':heights,'meanAlpha':alpha,'physicalBodyHeights':physicalIdle})
 for p in out.iterdir():

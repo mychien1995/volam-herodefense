@@ -26,6 +26,8 @@ const defaults: Record<string, string> = {
 export const schoolHeroBasic = (school: string): string =>
   defaults[school] ?? defaults.cai_bang!;
 const coherentFolders: Record<string, string> = {
+  thien_son_phien: 'thien-son-phien-unified-v1',
+  thien_son_dao: 'thien-son-dao-unified-v1',
   cai_bang_chuong: 'cai-bang-chuong-unified-v1',
   cai_bang_bong: 'cai-bang-bong-unified-v1',
   vo_dang_quyen: 'vo-dang-quyen-unified-v1',

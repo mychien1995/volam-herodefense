@@ -1,0 +1,98 @@
+{
+  "status": "prototype pending director review",
+  "identity": "Existing sharp original Thien Son dao project hero; white/slate-blue wind palette; Fan keeps jade crest/beads and embroidered robes, Dao keeps Han Nguyet curved silver blade/jade guard and white bow",
+  "ownership": "Original project artwork and original built-in imagegen derivatives; no third-party proprietary game sprites imported",
+  "generator": "Built-in image_gen only. Exact prompts, UTC request intervals and selected raw paths retained. No video.",
+  "references": [
+    {
+      "path": "assets/source/characters/thien-son-dao-weapon-options-2026-11-09/han-nguyet-attack.png",
+      "sha256": "1d7b8ea0f73cd4e4e4e0c520ef4d1a3b9cbda74703af571e85b8584d56ebb402"
+    },
+    {
+      "path": "assets/source/characters/thien-son-dao-weapon-options-2026-11-09/han-nguyet-locomotion.png",
+      "sha256": "ec7f954039a5cf4a688d99356c6238743192794b2a60e2815f1dc64cd7afdddf"
+    },
+    {
+      "path": "assets/exports/characters/thien-son-han-nguyet/han-nguyet.png",
+      "sha256": "77783a324b19a728fc9d8c7fd52df6f9024973885687181efd63db707d64634b"
+    },
+    {
+      "path": "assets/references/thien_son_thieu_lam_character_reference.png",
+      "sha256": "34dcde54031a4e6fbe565ca3dcbf1c458337fefdb5cb8b06e5967897c51d70e6"
+    },
+    {
+      "path": "assets/references/current_game_2026_10_29_placeholder_anti_reference.png",
+      "sha256": "7650239f6117b3d92ed6e8b1efdafe7213680f258c979808a09a82d2d6c2cdc5"
+    },
+    {
+      "path": "assets/source/skills/thien-son/tam-lien-tram-2026-11-09/poses.png",
+      "sha256": "68d261ea115d0a59d0320f47ed575f00a8b4271e0d760dba6eef3e33034e22e6"
+    }
+  ],
+  "referenceReadout": "Inspected mandatory thien_son_thieu_lam_character_reference.png: actual content is a wuxia town, not a character sheet. Used retained sharp school-specific body sources for exact identity/costume/weapon, actual Phaser baseline for camera and scale, current placeholder anti-reference as negative. Reused unchanged arena/HUD standards from the approved rollout.",
+  "production": {
+    "directionalSheets": [
+      "raw/down.png",
+      "raw/down_right.png",
+      "raw/right.png",
+      "raw/up_right.png",
+      "raw/up.png",
+      "raw/up_left.png",
+      "raw/left.png",
+      "raw/down_left.png"
+    ],
+    "sourceSegmentationCuts": {
+      "down": [
+        [
+          60,
+          1126,
+          230,
+          1127
+        ]
+      ]
+    },
+    "poseOverrides": [
+      {
+        "frame": "slam_contact_down",
+        "path": "raw/repairs/slam_contact_down.png",
+        "sourceRoot": [
+          186.79754633255024,
+          513.0
+        ],
+        "sourceBodyTop": 13.0,
+        "bodyHeight": 89
+      },
+      {
+        "frame": "cross_0_down",
+        "path": "raw/repairs/cross_0_down.png",
+        "sourceRoot": [
+          207.17672969488612,
+          510.0
+        ],
+        "sourceBodyTop": 14.0,
+        "bodyHeight": 89
+      },
+      {
+        "frame": "idle_3_up",
+        "path": "raw/repairs/idle-up.png",
+        "sourceRoot": [
+          446.11052448482616,
+          1347.7417582417581
+        ],
+        "sourceBodyTop": 63.032967032967036,
+        "bodyHeight": 89,
+        "registrationProxyHeight": 182,
+        "registrationNote": "Landmarks measured at retained neutral source density before mapping back to full-resolution replacement, avoiding resolution-dependent sole/head threshold shifts."
+      }
+    ],
+    "native": "body.aseprite",
+    "cels": 256,
+    "tags": 40,
+    "nativeSha256": "87659408c3fbf9f7e8a7a4dc905ba94d9767b36a599c2c9af48d7ca8070b6b49",
+    "bodyPNG": "a1f87e73b613f8b179132ae1fb8777df3f6400f09adb82b333f80899f6d1f8ab",
+    "roundtrip": "exact alpha and visible RGB PASS"
+  },
+  "registration": "Fixed boots root, one density per normal pose group, scale0.5. Independent repair sources explicitly register physical body height89; one high-resolution idle uses reference-density landmark annotation. No alpha fade or whole-body scale animation in idle.",
+  "measurementNote": "Re-authored up idle3 retains physical body height89, replacing the original85.61. Sole/crown outline extent ranges91-95 atlas pixels; fixed group/pivot and default physical-height tolerance3 retained.",
+  "scope": "Body and portrait, including four Dao X body doubles; VFX, server/core/protocol, damage, movement, native hit timing, HUD geometry and F8 retained."
+}

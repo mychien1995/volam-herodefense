@@ -35,3 +35,7 @@ Dừng đợt2 để director duyệt trước khi mở đợt3 Thiên Sơn Phi�
 ## Phòng review
 
 [http://127.0.0.1:5597/?debug=1](http://127.0.0.1:5597/?debug=1), room `W71goH-UQ` lúc bàn giao: Võ Đang Quyền30, QWERT rank4, F8 ON/OFF đã thử, không lỗi client. Hai nhánh Quyền/Kiếm trên review server đều nhận level30/rank4 khi chọn qua lobby thật và tạo phòng mới. Cooldown/mana/controls giữ bình thường. Fixture chỉ nằm trong `tools/presentation-hero-play.mjs`, không sửa Room production. Bundle `.cache/hero-coherence-batch2-dist`, backend2995; giữ các phòng Cái Bang cũ. [PNG có HUD](evidence/sessions/hero-coherence-batch2-delivery/room-ready.png).
+
+## Director approval — 2026-11-19
+
+Director xác nhận trong chat: “Duyệt bản Võ Đang.” Hai nhánh Quyền/Kiếm đã được khóa12 file canonical tại `assets/approvals/hero-coherence/vo_dang_quyen.json` và `vo_dang_kiem.json`. Mô tả candidate ở trên là trạng thái lịch sử lúc bàn giao. Không re-export các byte đã duyệt; mở tiếp đợt3 Thiên Sơn theo cùng quy trình.

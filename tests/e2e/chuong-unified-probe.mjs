@@ -151,6 +151,10 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
             (b) =>
               b.id === h.id &&
               b.texture === KEY &&
+              (!profile.settleIdle ||
+                (s.state.players[h.id]?.pose === 'idle' &&
+                  b.alpha === 1 &&
+                  String(b.frame).startsWith('idle_'))) &&
               Math.abs(b.x - h.x) < 2 &&
               Math.abs(b.y - h.y) < 2,
           ),
@@ -469,9 +473,10 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
           assert.ok(
             f.some(
               (f) =>
-                /^(native|windup|strike|alternate|charge|release|rise|channel|recover|thrust|sweep|rising|overhead|pull|slam|stomp|finisher|palm|cut|taichi|aim|guard|sword)_/.test(
-                  f,
-                ) &&
+                new RegExp(
+                  profile.actionBodyPattern ??
+                    '^(native|windup|strike|alternate|charge|release|rise|channel|recover|thrust|sweep|rising|overhead|pull|slam|stomp|finisher|palm|cut|taichi|aim|guard|sword)_',
+                ).test(f) &&
                 f.endsWith(
                   '_' +
                     ((profile.nativeFacingAbilities ?? []).includes(ability)
@@ -485,6 +490,13 @@ export async function verifyCoherentChuong({ room, pages, out }, profile = {}) {
             ),
             'action body ' + key + '/' + i,
           );
+          if (profile.contactPose && key === 'KeyA') {
+            const contact = profile.contactPose(event);
+            assert.ok(
+              f.includes(contact + '_' + d[0]),
+              'actual authored basic contact ' + contact + '/' + i,
+            );
+          }
           if (profile.voDangChoreography && key === 'KeyA') {
             const contact =
               BASIC === 'vo_dang_quyen'

@@ -7,13 +7,24 @@ const session = JSON.parse(
   readFileSync('.cache/presentation-hero-play-session.json'),
 );
 const basic = process.env.VOLAM_HERO_REVIEW_BASIC ?? 'cai_bang_bong';
-const school = basic.startsWith('vo_dang') ? 'vo_dang' : 'cai_bang';
+const school = basic.startsWith('vo_dang')
+  ? 'vo_dang'
+  : basic.startsWith('thien_son')
+    ? 'thien_son'
+    : 'cai_bang';
 const texture =
   basic === 'cai_bang_chuong'
     ? 'cai-bang-chuong-unified'
     : 'hero-unified:' + basic;
+const reviewProfileSuffix = process.env.VOLAM_HERO_REVIEW_PROFILE_SUFFIX ?? '';
+if (reviewProfileSuffix && !/^[a-z0-9-]+$/.test(reviewProfileSuffix))
+  throw Error('Invalid review profile suffix');
 const browser = await chromium.launchPersistentContext(
-  resolve('.cache/presentation-hero-browser-' + basic),
+  resolve(
+    '.cache/presentation-hero-browser-' +
+      basic +
+      (reviewProfileSuffix ? '-' + reviewProfileSuffix : ''),
+  ),
   {
     headless: false,
     executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
@@ -36,7 +47,11 @@ try {
         ? 'Vo Dang Quyen'
         : basic === 'vo_dang_kiem'
           ? 'Vo Dang Kiem'
-          : 'Bong Sprite Dong Nhat',
+          : basic.startsWith('thien_son')
+            ? basic.endsWith('phien')
+              ? 'Thien Son Phien'
+              : 'Thien Son Dao'
+            : 'Bong Sprite Dong Nhat',
     );
   await page.getByRole('button', { name: 'Vào game', exact: true }).click();
   await page.getByRole('button', { name: 'Tạo phòng', exact: true }).click();
@@ -123,7 +138,10 @@ try {
     try {
       const s = await snapshot();
       writeFileSync(
-        '.cache/hero-review-live-' + basic + '.json',
+        '.cache/hero-review-live-' +
+          basic +
+          (reviewProfileSuffix ? '-' + reviewProfileSuffix : '') +
+          '.json',
         JSON.stringify({
           phase: s?.state.phase,
           roomId: s?.roomId,

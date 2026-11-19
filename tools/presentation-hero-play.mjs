@@ -27,12 +27,22 @@ if (
     'cai_bang_chuong',
     'vo_dang_quyen',
     'vo_dang_kiem',
+    'thien_son_phien',
+    'thien_son_dao',
   ].includes(basic)
 )
   throw Error('Unsupported body review branch');
-const school = basic.startsWith('vo_dang') ? 'vo_dang' : 'cai_bang';
+const school = basic.startsWith('vo_dang')
+  ? 'vo_dang'
+  : basic.startsWith('thien_son')
+    ? 'thien_son'
+    : 'cai_bang';
 const reviewBranches =
-  school === 'vo_dang' ? ['vo_dang_quyen', 'vo_dang_kiem'] : [basic];
+  school === 'vo_dang'
+    ? ['vo_dang_quyen', 'vo_dang_kiem']
+    : school === 'thien_son'
+      ? ['thien_son_phien', 'thien_son_dao']
+      : [basic];
 const session = qaSession({
   profile: 'presentation-hero-play',
   serverPort: 2990,

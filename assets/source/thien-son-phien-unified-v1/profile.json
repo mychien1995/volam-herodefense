@@ -1,0 +1,169 @@
+{
+  "basic": "thien_son_phien",
+  "texture": "hero-unified:thien_son_phien",
+  "folder": "thien-son-phien-unified-v1",
+  "sourceRows": 7,
+  "sourceColumns": 4,
+  "canvas": [
+    320,
+    288
+  ],
+  "foot": [
+    160,
+    224
+  ],
+  "bodyHeight": 89,
+  "scale": 0.5,
+  "bodyWidth": 58,
+  "rootMode": "monochrome",
+  "poses": [
+    "idle_0",
+    "idle_1",
+    "idle_2",
+    "idle_3",
+    "walk_0",
+    "walk_1",
+    "walk_2",
+    "walk_3",
+    "windup",
+    "fan_open",
+    "fan_throw",
+    "fan_catch",
+    "palm_charge",
+    "palm_release",
+    "fan_sweep_left",
+    "fan_sweep_right",
+    "lotus_open",
+    "lotus_hold",
+    "guard",
+    "channel",
+    "spin_front",
+    "spin_back",
+    "storm_raise",
+    "storm_release",
+    "hurt_0",
+    "hurt_1",
+    "death_0",
+    "death_1"
+  ],
+  "references": [
+    "assets/source/renovation-v2/raw/thien_son_throw.png",
+    "assets/exports/renovation-v2/thien_son_throw.png",
+    "assets/exports/renovation-v2/thien_son_throw.json"
+  ],
+  "groups": [
+    {
+      "name": "idle",
+      "poses": [
+        "idle_0",
+        "idle_1",
+        "idle_2",
+        "idle_3"
+      ],
+      "durationMs": 700
+    },
+    {
+      "name": "walk",
+      "poses": [
+        "walk_0",
+        "walk_1",
+        "walk_2",
+        "walk_3"
+      ],
+      "durationMs": 110
+    },
+    {
+      "name": "action_library",
+      "poses": [
+        "windup",
+        "fan_open",
+        "fan_throw",
+        "fan_catch",
+        "palm_charge",
+        "palm_release",
+        "fan_sweep_left",
+        "fan_sweep_right",
+        "lotus_open",
+        "lotus_hold",
+        "guard",
+        "channel",
+        "spin_front",
+        "spin_back",
+        "storm_raise",
+        "storm_release"
+      ],
+      "durationMs": 100
+    },
+    {
+      "name": "hurt",
+      "poses": [
+        "hurt_0",
+        "hurt_1"
+      ],
+      "durationMs": 90
+    },
+    {
+      "name": "death",
+      "poses": [
+        "death_0",
+        "death_1"
+      ],
+      "durationMs": 220
+    }
+  ],
+  "registrationPolicy": "Fixed physical body/head density per locomotion/action/reaction group; boots anchored; never fit by weapon or fan extent.",
+  "sourceSegmentationCuts": {
+    "down_right": [
+      [
+        280,
+        1095,
+        510,
+        1096
+      ]
+    ]
+  },
+  "poseOverrides": [
+    {
+      "frame": "lotus_hold_down_right",
+      "path": "raw/repairs/lotus_hold.png",
+      "sourceRoot": [
+        283.1619404906396,
+        689.0
+      ],
+      "sourceBodyTop": 15.0,
+      "bodyHeight": 89
+    },
+    {
+      "frame": "spin_back_down_right",
+      "path": "raw/repairs/spin_back.png",
+      "sourceRoot": [
+        274.7813540510544,
+        691.0
+      ],
+      "sourceBodyTop": 37.0,
+      "bodyHeight": 89
+    },
+    {
+      "frame": "lotus_hold_up",
+      "path": "raw/repairs/lotus_hold_up.png",
+      "sourceRoot": [
+        201.07515378443435,
+        596.0
+      ],
+      "sourceBodyTop": 12.0,
+      "bodyHeight": 89
+    },
+    {
+      "frame": "channel_up",
+      "path": "raw/repairs/channel_up.png",
+      "sourceRoot": [
+        197.33711879545746,
+        596.0
+      ],
+      "sourceBodyTop": 14.0,
+      "bodyHeight": 89
+    }
+  ],
+  "idlePhysicalHeightTolerance": 3.5,
+  "idleMeasurementNote": "Dense-alpha head-top estimate varies3.37 atlas pixels because ornate fan/ribbon width changes its threshold; actual visible idle extents vary at most2 pixels across any direction. Same group scale/foot anchor, visible extent tolerance3 and alpha checks retained."
+}
