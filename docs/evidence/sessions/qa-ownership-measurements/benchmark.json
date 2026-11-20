@@ -1,0 +1,116 @@
+{
+  "scenario": "same real Duong Mon trial, built endpoint2567; archived ac5baee6 setup vs current; alternating order; repeat cleanup and identity checks; OS/host load uncontrolled",
+  "samples": [
+    {
+      "trial": 0,
+      "variant": "before",
+      "seconds": 0.20310169999999994,
+      "identified": false,
+      "cleanup": [
+        {
+          "status": "fulfilled"
+        },
+        {
+          "status": "rejected",
+          "error": "Error [ERR_SERVER_NOT_RUNNING]: Server is not running."
+        }
+      ],
+      "portsReleased": true,
+      "environmentRestored": true,
+      "changed": [],
+      "cliSeconds": 1.6555205
+    },
+    {
+      "trial": 0,
+      "variant": "after",
+      "seconds": 0.19911709999999994,
+      "identified": true,
+      "cleanup": [
+        {
+          "status": "fulfilled"
+        },
+        {
+          "status": "fulfilled"
+        }
+      ],
+      "portsReleased": true,
+      "environmentRestored": true,
+      "changed": [],
+      "cliSeconds": 1.5771051999999999
+    },
+    {
+      "trial": 1,
+      "variant": "after",
+      "seconds": 0.19932140000000004,
+      "identified": true,
+      "cleanup": [
+        {
+          "status": "fulfilled"
+        },
+        {
+          "status": "fulfilled"
+        }
+      ],
+      "portsReleased": true,
+      "environmentRestored": true,
+      "changed": [],
+      "cliSeconds": 1.5609829
+    },
+    {
+      "trial": 1,
+      "variant": "before",
+      "seconds": 0.18789110000000006,
+      "identified": false,
+      "cleanup": [
+        {
+          "status": "fulfilled"
+        },
+        {
+          "status": "rejected",
+          "error": "Error [ERR_SERVER_NOT_RUNNING]: Server is not running."
+        }
+      ],
+      "portsReleased": true,
+      "environmentRestored": true,
+      "changed": [],
+      "cliSeconds": 1.5729693999999999
+    },
+    {
+      "trial": 2,
+      "variant": "before",
+      "seconds": 0.18534010000000034,
+      "identified": false,
+      "cleanup": [
+        {
+          "status": "fulfilled"
+        },
+        {
+          "status": "rejected",
+          "error": "Error [ERR_SERVER_NOT_RUNNING]: Server is not running."
+        }
+      ],
+      "portsReleased": true,
+      "environmentRestored": true,
+      "changed": [],
+      "cliSeconds": 5.3142394
+    },
+    {
+      "trial": 2,
+      "variant": "after",
+      "seconds": 0.21979940000000012,
+      "identified": true,
+      "cleanup": [
+        {
+          "status": "fulfilled"
+        },
+        {
+          "status": "fulfilled"
+        }
+      ],
+      "portsReleased": true,
+      "environmentRestored": true,
+      "changed": [],
+      "cliSeconds": 1.6246329000000006
+    }
+  ]
+}

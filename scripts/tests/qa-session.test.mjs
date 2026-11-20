@@ -178,7 +178,7 @@ test('client middleware identifies the actual owned run and cleanup attempts all
     throw Error('close failure');
   });
   await assert.rejects(owned.close(), /cleanup failed/);
-  await owned.close();
+  await assert.rejects(owned.close(), /cleanup failed/);
   assert.deepEqual(calls, ['client', 'server']);
 });
 

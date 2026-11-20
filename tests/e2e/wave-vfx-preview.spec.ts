@@ -1,38 +1,16 @@
 import { expect, test } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { spawn, type ChildProcess } from 'node:child_process';
-let ownedServer: ChildProcess;
+import { startQaStatic } from '../../tools/qa-static.mjs';
+let cleanup: (() => Promise<void>) | undefined;
 test.beforeAll(async () => {
-  ownedServer = spawn(
-    process.execPath,
-    ['assets/reviews/wave_boss_feedback_v01/server.mjs'],
-    {
-      env: { ...process.env, WAVE_VFX_REVIEW_PORT: '5458' },
-      stdio: 'ignore',
-      windowsHide: true,
-    },
-  );
-  let failure: Error | undefined;
-  ownedServer.on('error', (error) => {
-    failure = error;
+  cleanup = await startQaStatic({
+    script: 'assets/reviews/wave_boss_feedback_v01/server.mjs',
+    port: 5458,
+    environment: { WAVE_VFX_REVIEW_PORT: '5458' },
   });
-  await expect
-    .poll(
-      async () => {
-        if (failure) throw failure;
-        try {
-          return (await (await fetch('http://127.0.0.1:5458/health')).json())
-            .pid;
-        } catch {
-          return null;
-        }
-      },
-      { timeout: 15_000 },
-    )
-    .toBe(ownedServer.pid);
 });
-test.afterAll(() => {
-  ownedServer?.kill('SIGKILL');
+test.afterAll(async () => {
+  await cleanup?.();
 });
 const out = 'assets/reviews/wave_boss_feedback_v01/evidence';
 const inspect = (page: any) =>

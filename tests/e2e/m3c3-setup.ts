@@ -1,70 +1,26 @@
-import { fork, type ChildProcess } from 'node:child_process';
-import { openSync, closeSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { PROTOCOL_VERSION } from '@volam/game-protocol';
+import {
+  qaWorkflowSession,
+  qaEvidenceDirectory,
+} from '../../tools/qa-session.mjs';
+import { startQaChildren } from '../../tools/qa-children.mjs';
 export default async function setup() {
-  mkdirSync('docs/evidence/m3c3', { recursive: true });
-  const children = ['normal', 'preview'].map((mode) => {
-    const fd = openSync('docs/evidence/m3c3/server-' + mode + '.log', 'a');
-    const child = fork(
-      fileURLToPath(new URL('./m3c3-service.mjs', import.meta.url)),
-      [mode],
-      {
-        stdio: ['ignore', fd, fd, 'ipc'],
-        windowsHide: true,
-      },
-    );
-    closeSync(fd);
-    return child;
+  const session = qaWorkflowSession('browser', [
+    '--config',
+    'playwright.m3c3.config.ts',
+  ]);
+  const services = session.contract!.services.map((ports, index) => ({
+    name: index === 0 ? 'preview' : 'normal',
+    script: fileURLToPath(new URL('./m3c3-service.mjs', import.meta.url)),
+    args: [index === 0 ? 'preview' : 'normal'],
+    serverPort: ports.serverPort!,
+    clientPort: ports.clientPort,
+    environment: {},
+  }));
+  return startQaChildren({
+    services,
+    directory: qaEvidenceDirectory('docs/evidence/m3c3'),
+    protocolVersion: PROTOCOL_VERSION,
   });
-  const stop = (child: ChildProcess) =>
-    new Promise<void>((resolve) => {
-      if (child.exitCode !== null || child.signalCode) {
-        resolve();
-        return;
-      }
-      const timer = setTimeout(() => child.kill(), 15000);
-      child.once('exit', () => {
-        clearTimeout(timer);
-        resolve();
-      });
-      if (child.connected) child.send('stop');
-      else child.kill();
-    });
-  const cleanup = async () => {
-    await Promise.all(children.map(stop));
-  };
-  try {
-    await Promise.all(
-      children.map(
-        (child) =>
-          new Promise<void>((resolve, reject) => {
-            const timer = setTimeout(
-              () =>
-                reject(
-                  new Error(
-                    'Dedicated M3C3 service did not become ready; inspect server logs',
-                  ),
-                ),
-              30000,
-            );
-            child.once('error', (error) => {
-              clearTimeout(timer);
-              reject(error);
-            });
-            child.once('exit', (code) => {
-              clearTimeout(timer);
-              reject(new Error('Dedicated M3C3 service exited ' + code));
-            });
-            child.once('message', () => {
-              clearTimeout(timer);
-              resolve();
-            });
-          }),
-      ),
-    );
-    return cleanup;
-  } catch (error) {
-    await cleanup();
-    throw error;
-  }
 }

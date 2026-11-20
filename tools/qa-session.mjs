@@ -173,20 +173,28 @@ export function qaIdentityPlugin(session) {
 /** Cleanup is idempotent and attempts every owned closer, including after failure. */
 export function ownedQaServices() {
   const closers = [];
+  let closing;
   return {
-    add: (close) => closers.push(close),
-    async close() {
-      const results = await Promise.allSettled(
-        closers
-          .splice(0)
-          .reverse()
-          .map((close) => Promise.resolve().then(close)),
-      );
-      const errors = results
-        .filter((r) => r.status === 'rejected')
-        .map((r) => r.reason);
-      if (errors.length)
-        throw new AggregateError(errors, 'QA service cleanup failed');
+    add(close) {
+      if (closing)
+        throw Error(
+          'QA cleanup already started; cannot register another owner',
+        );
+      closers.push(close);
+    },
+    close() {
+      return (closing ??= Promise.resolve().then(async () => {
+        const errors = [];
+        for (const close of closers.splice(0).reverse()) {
+          try {
+            await close();
+          } catch (error) {
+            errors.push(error);
+          }
+        }
+        if (errors.length)
+          throw new AggregateError(errors, 'QA service cleanup failed');
+      }));
     },
   };
 }

@@ -1,32 +1,17 @@
 import { test, expect } from '@playwright/test';
-import { spawn, type ChildProcess } from 'node:child_process';
 import { mkdir, writeFile } from 'node:fs/promises';
-let owned: ChildProcess;
+import { startQaStatic } from '../../tools/qa-static.mjs';
+let cleanup: (() => Promise<void>) | undefined;
 test.beforeAll(async () => {
-  owned = spawn(
-    process.execPath,
-    ['assets/reviews/wave_boss_feedback_v02/server.mjs'],
-    {
-      env: { ...process.env, WAVE_VFX_REVIEW_PORT: '5462' },
-      stdio: 'ignore',
-      windowsHide: true,
-    },
-  );
-  await expect
-    .poll(
-      async () => {
-        try {
-          return (await (await fetch('http://127.0.0.1:5462/health')).json())
-            .pid;
-        } catch {
-          return null;
-        }
-      },
-      { timeout: 15000 },
-    )
-    .toBe(owned.pid);
+  cleanup = await startQaStatic({
+    script: 'assets/reviews/wave_boss_feedback_v02/server.mjs',
+    port: 5462,
+    environment: { WAVE_VFX_REVIEW_PORT: '5462' },
+  });
 });
-test.afterAll(() => owned?.kill('SIGKILL'));
+test.afterAll(async () => {
+  await cleanup?.();
+});
 const out = 'assets/reviews/wave_boss_feedback_v02/evidence';
 const inspect = (p: any) =>
   p.evaluate(() => (window as any).__waveReview.inspect());

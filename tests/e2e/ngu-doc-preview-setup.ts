@@ -1,14 +1,4 @@
-import { resolve } from 'node:path';
-import { preview } from 'vite';
-
+import { startOwnedGameQa } from './owned-game-setup.js';
 export default async function setup() {
-  const server = await preview({
-    configFile: false,
-    root: resolve('apps/game-client'),
-    preview: { host: '127.0.0.1', port: 5535, strictPort: true },
-  });
-  return () =>
-    new Promise<void>((done, reject) => {
-      server.httpServer.close((error) => (error ? reject(error) : done()));
-    });
+  return startOwnedGameQa({ config: 'playwright.ngu-doc-preview.config.ts' });
 }

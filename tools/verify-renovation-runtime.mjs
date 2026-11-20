@@ -1,6 +1,5 @@
+import { startOwnedGameQa } from './qa-game-services.mjs';
 import { ColyseusTestServer } from '@colyseus/testing';
-import { createServer, preview } from 'vite';
-import { createGameServer } from '../apps/game-server/dist/app.config.js';
 import { PROTOCOL_VERSION } from '@volam/game-protocol';
 import {
   creepDungeons,
@@ -16,13 +15,7 @@ import {
   initializeNamDe,
   spawnNamDeIfReady,
 } from '@volam/game-core';
-import {
-  qaSession,
-  requireFreePorts,
-  verifyQaIdentity,
-  qaIdentityPlugin,
-  ownedQaServices,
-} from './qa-session.mjs';
+import { qaSession, ownedQaServices } from './qa-session.mjs';
 import { waitForQa } from './qa-wait.mjs';
 import { mkdirSync, writeFileSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -97,55 +90,17 @@ export async function verifyRenovationRuntime(
         };
       },
     });
-  const previousRun = process.env.VOLAM_QA_RUN_ID,
-    previousEnv = process.env.NODE_ENV;
   try {
-    await requireFreePorts(session);
-    process.env.VOLAM_QA_RUN_ID = session.runId;
-    process.env.NODE_ENV = 'development';
-    const gameServer = createGameServer();
-    await gameServer.listen(session.serverPort);
-    const server = new ColyseusTestServer(gameServer);
-    owned.add(() => server.shutdown());
-    await verifyQaIdentity(session.serverUrl + '/health', {
-      runId: session.runId,
-      protocolVersion: PROTOCOL_VERSION,
+    let server;
+    const stopServices = await startOwnedGameQa({
+      session,
+      clientMode: development ? 'development' : 'preview',
+      environment: { NODE_ENV: 'development' },
+      configure(gameServer) {
+        server = new ColyseusTestServer(gameServer);
+      },
     });
-    const options = {
-      root: resolve('apps/game-client'),
-      configFile: false,
-      plugins: [qaIdentityPlugin(session)],
-    };
-    const client = development
-      ? await createServer({
-          ...options,
-          server: {
-            host: '127.0.0.1',
-            port: session.clientPort,
-            strictPort: true,
-            hmr: false,
-            watch: null,
-          },
-          define: {
-            'import.meta.env.VITE_SERVER_URL': JSON.stringify(
-              session.serverUrl,
-            ),
-          },
-        })
-      : await preview({
-          ...options,
-          preview: {
-            host: '127.0.0.1',
-            port: session.clientPort,
-            strictPort: true,
-          },
-        });
-    if (development) await client.listen();
-    owned.add(() => client.close());
-    if (!development)
-      await verifyQaIdentity(session.clientUrl + '/volam-build-endpoint.json', {
-        serverUrl: session.serverUrl,
-      });
+    owned.add(stopServices);
     const pages = [];
     let roomId;
     for (let i = 0; i < players; i++) {
@@ -154,6 +109,7 @@ export async function verifyRenovationRuntime(
         deviceScaleFactor: 1,
       });
       contexts.push(context);
+      owned.add(() => context.close());
       const page = await context.newPage();
       pages.push(page);
       page.on('crash', () => errors.push('Client ' + (i + 1) + ' crashed'));
@@ -172,7 +128,8 @@ export async function verifyRenovationRuntime(
           clientQuery +
           (compareLegacy && i === 1 ? '&renovationSkills=old' : ''),
       );
-      await page.locator('[data-action=play]').click(); await page.locator('#pre-nickname').fill('Renovation ' + (i + 1));
+      await page.locator('[data-action=play]').click();
+      await page.locator('#pre-nickname').fill('Renovation ' + (i + 1));
       await page.getByRole('button', { name: 'Vào game', exact: true }).click();
       if (roomId) {
         await page
@@ -858,22 +815,20 @@ export async function verifyRenovationRuntime(
     );
     throw error;
   } finally {
-    for (const context of contexts) {
-      for (const page of context.pages())
-        await page
-          .evaluate(() => {
-            document.querySelector('[data-action=quit]')?.click();
-            document.querySelector('#confirm-quit')?.click();
-          })
-          .catch(() => {});
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      await context.close();
+    try {
+      for (const context of contexts) {
+        for (const page of context.pages())
+          await page
+            .evaluate(() => {
+              document.querySelector('[data-action=quit]')?.click();
+              document.querySelector('#confirm-quit')?.click();
+            })
+            .catch(() => {});
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+    } finally {
+      await owned.close();
     }
-    await owned.close();
-    if (previousRun === undefined) delete process.env.VOLAM_QA_RUN_ID;
-    else process.env.VOLAM_QA_RUN_ID = previousRun;
-    if (previousEnv === undefined) delete process.env.NODE_ENV;
-    else process.env.NODE_ENV = previousEnv;
   }
 }
 

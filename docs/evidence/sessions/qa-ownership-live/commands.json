@@ -1,0 +1,37 @@
+{
+  "duongMon": {
+    "observed": "1 browser test passed; 2 Phaser + 4 SDK clients",
+    "workflowReport": "../qa-ownership-duong-mon/check-workflow/browser-timings.json",
+    "environment": {
+      "VOLAM_QA_SESSION": "qa-ownership-duong-mon",
+      "VOLAM_QA_SERVER_PORT": "2667",
+      "VOLAM_QA_CLIENT_PORT": "28932"
+    },
+    "commands": [
+      "pnpm check:browser --config playwright.duong-mon-game.config.ts --reporter=line --output artifacts/qa-ownership-duong-mon"
+    ]
+  },
+  "nguDoc": {
+    "observed": "1 passed (37.6s); 2 Phaser + 4 SDK clients",
+    "dependencyReuse": "DMon guarded preparation/compilation on identical game/data inputs; fresh Vite endpoint2802 build, fresh ready preflight; full final runs separately",
+    "environment": {
+      "VOLAM_QA_SESSION": "qa-ownership-ngu-doc",
+      "VITE_SERVER_URL": "http://127.0.0.1:2802"
+    },
+    "commands": [
+      "pnpm --filter @volam/game-client exec vite build",
+      "node tools/qa-preflight.mjs --mode browser --ready --config playwright.ngu-doc-game.config.ts",
+      "node tools/run-playwright.mjs test --config playwright.ngu-doc-game.config.ts --grep 'Ngũ Độc plays' --reporter=line --output artifacts/qa-ownership-ngu-doc"
+    ]
+  },
+  "children": {
+    "observed": "2 passed (34.7s); 4 Phaser clients across separate normal/legacy owned child services",
+    "environment": {
+      "VOLAM_QA_SESSION": "qa-ownership-children-live3"
+    },
+    "commands": [
+      "node tools/qa-preflight.mjs --mode browser --ready --config playwright.qa-owned-lifecycle.config.ts",
+      "node tools/run-playwright.mjs test --config playwright.qa-owned-lifecycle.config.ts --reporter=line"
+    ]
+  }
+}

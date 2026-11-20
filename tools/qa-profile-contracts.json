@@ -1153,6 +1153,23 @@
       ],
       "channels": [null],
       "setup": "./tests/e2e/qa-skill-prerequisites-setup.ts"
+    },
+    "playwright.qa-owned-lifecycle.config.ts": {
+      "profile": "qa-owned-lifecycle",
+      "ports": "fixed",
+      "clientMode": "development",
+      "services": [
+        {
+          "serverPort": 2576,
+          "clientPort": 5180
+        },
+        {
+          "serverPort": 2574,
+          "clientPort": 5178
+        }
+      ],
+      "channels": [null],
+      "setup": "./tests/e2e/m3c1-setup.ts"
     }
   }
 }
