@@ -2,11 +2,17 @@
 
 ## Diagnose at the normal entry point
 
-Distinguish defects visible in the source from defects introduced during export or display. Check alpha at thin outlines, blade widths, body pixel height, atlas trimming and the relationship between canvas dimensions and its CSS size. Compare still and moving frames at ordinary gameplay zoom.
+Distinguish defects visible in the source from defects introduced during export or display. Check alpha at thin outlines, blade widths, body pixel height, atlas trimming and the relationship between canvas dimensions and its CSS size. Compare still and moving frames at ordinary gameplay zoom. Check [coherence-and-vfx.md](coherence-and-vfx.md) when the defect changes with actor state or skill phase.
 
 A 44-pixel body displayed at 2× has 88 visible pixels of height. Drawing a new 88-pixel body and displaying it at 1× can preserve finer authored features at that same height. Changing only the frame canvas adds padding. Scaling an old drawing adds displayed size. Judge the new drawing and its display path together.
 
 Choose size by role and context. The 88-pixel body was a useful hero experiment. Keep small creeps, large bosses and environmental props proportionate to the scene the user selected.
+
+## Distinguish soft art from resampling
+
+Compare the raw source, a native-size exported cel and the live sprite against a sharper peer at equal body height. Inspect actual alpha, camera zoom, canvas/CSS dimensions, texture sampling and subpixel placement. Do not infer an opacity bug from a low-contrast drawing or assume that a larger canvas contains more character detail.
+
+If the source already has soft hair edges, fine gray noise and weak robe shadows, a different sampler does not restore missing design clarity. Author readable eye/hair contours and larger light/shadow groups while retaining identity and style. Judge the result after export at gameplay size, not only in the large generated sheet. The Thiên Sơn example improved contours and value separation without changing the renderer's filter or scale; this is evidence for that defect, not a universal rendering setting.
 
 ## References and generation
 
@@ -18,7 +24,7 @@ Use three distinct inputs when available.
 
 Prompt for the requested subject and action, the elevated fixed camera, a complete isolated silhouette, true transparent padding and continuous edge design. Prefer large readable light/shadow groups to micro-decoration. Adapt palette and material choices to that character.
 
-For an animation sheet, request an explicit grid with one complete figure per cell and identical body scale. Inspect every cell after generation. A requested grid size or output resolution is a target, so measure the actual delivered image.
+For an animation sheet, request an explicit grid with one complete figure per cell and identical body scale. Inspect every cell after generation. A requested grid size or output resolution is a target, so measure the actual delivered image. Reject joined silhouettes, clipped hair/weapons and painted backdrops even when the prompt requested transparency. Retry the defective take or pose group rather than weakening the completeness/alpha checks.
 
 Walking needs visibly different leg and foot positions with consistent clothes, head, hands and rigid weapon geometry. For attacks, author the necessary anticipation, contact and recovery. A deliberately shared cast pose is acceptable when its reuse fits the requested preview and is disclosed.
 
@@ -28,7 +34,7 @@ Keep raw generated PNGs. In the Võ Đang v01 experiment, forcing alpha to 0/255
 
 With the installed Aseprite 1.3.18.6 API, the relevant operation is `Image:resize{width=..., height=..., method="bilinear"}`. Read the installed version/current documentation before adapting APIs. Very low-alpha background noise can be removed when inspection justifies it. The example's source threshold 12 and final threshold 4 are measured local settings, so tune them for the new material.
 
-Select source bounds using visible pixels, with enough padding to retain the contour. Align the ground-contact point to a shared feet pivot. Use a consistent scale across a pose group. Recompute individual cel placement from the feet point so sword reach and cloth spread do not alter body scale.
+Select source bounds using visible pixels, with enough padding to retain the contour. Align the ground-contact point to a shared feet pivot. Use a consistent anatomical scale across a coherent source group; the density rules in [coherence-and-vfx.md](coherence-and-vfx.md) explain mixed-resolution replacements. Recompute individual cel placement from the feet point so sword reach and cloth spread do not alter body scale.
 
 Check exported rasters against the editable source. Validate frame names, dimensions, pivots, timings, unclipped edges and actual alpha. Preserve source hashes and record deliberate facing transforms. Left/right mirroring requires checking handedness, costume asymmetry and equipment.
 
@@ -46,3 +52,9 @@ In Võ Lâm Hero Defense, `docs/SESSION_EXECUTION_LESSONS.md`, `docs/DEVELOPMENT
 
 A scene with six sprites measures visual crowding. A six-client match test also needs real network peers and authoritative combat observations. Report the measured scope accurately. The requested review should be concrete before asking for director approval.
 
+
+## Version and sample boundaries
+
+When cloning a source profile, review inherited pose overrides, segmentation cuts and tolerances. They describe the old raster and can silently reinsert old art or cut the replacement. Retain only annotations still valid for the reused source.
+
+For a limited prototype, compare reconstructed cel hashes before/after so only the intended facing/states change. Atlas packing coordinates can differ while the logical cel remains identical. Check HUD portraits separately when they must stay unchanged. Byte-locked assets need Git attributes that preserve their approved metadata bytes; verify staged/checkout bytes as well as working-tree files. Do not normalize or re-export approved originals as cleanup.
